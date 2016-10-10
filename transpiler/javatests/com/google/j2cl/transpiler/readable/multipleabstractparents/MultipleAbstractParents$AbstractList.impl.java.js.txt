@@ -8,19 +8,18 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
 
 
-let MultipleAbstractParents$AbstractCollection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
-let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
+let AbstractCollection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
+let List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @abstract
  * @template C_AbstractList_T
- * @extends {MultipleAbstractParents$AbstractCollection<C_AbstractList_T>}
- * @implements {MultipleAbstractParents$List<C_AbstractList_T>}
+ * @extends {AbstractCollection<C_AbstractList_T>}
+ * @implements {List<C_AbstractList_T>}
  */
-class MultipleAbstractParents$AbstractList extends
-    MultipleAbstractParents$AbstractCollection {
+class AbstractList extends AbstractCollection {
   /**
    * Defines instance fields.
    * @public
@@ -46,7 +45,7 @@ class MultipleAbstractParents$AbstractList extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$AbstractList;
+    return instance instanceof AbstractList;
   }
 
   /**
@@ -56,8 +55,7 @@ class MultipleAbstractParents$AbstractList extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$AbstractList);
+    return $Util.$canCastClass(classConstructor, AbstractList);
   }
 
   /**
@@ -65,7 +63,7 @@ class MultipleAbstractParents$AbstractList extends
    * @public
    */
   static $clinit() {
-    MultipleAbstractParents$AbstractCollection.$clinit();
+    AbstractCollection.$clinit();
   }
 
   /**
@@ -77,17 +75,16 @@ class MultipleAbstractParents$AbstractList extends
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$AbstractList,
+    AbstractList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractList'));
 
 
-MultipleAbstractParents$List.$markImplementor(
-    MultipleAbstractParents$AbstractList);
+List.$markImplementor(AbstractList);
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$AbstractList;
+exports = AbstractList;
 //# sourceMappingURL=MultipleAbstractParents$AbstractList.js.map

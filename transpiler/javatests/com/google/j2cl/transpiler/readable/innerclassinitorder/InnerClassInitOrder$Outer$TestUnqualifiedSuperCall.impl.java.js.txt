@@ -8,35 +8,34 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
 
 
-let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+let OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
+let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 
 
-class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
-    InnerClassInitOrder$Outer$OuterIsNotSuper {
+class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {InnerClassInitOrder$Outer} */
+    /** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestUnqualifiedSuperCall =
         null;
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {InnerClassInitOrder$Outer} $outer_this
-   * @return {!InnerClassInitOrder$Outer$TestUnqualifiedSuperCall}
+   * @param {Outer} $outer_this
+   * @return {!TestUnqualifiedSuperCall}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
       $outer_this) {
-    InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.$clinit();
-    let $instance = new InnerClassInitOrder$Outer$TestUnqualifiedSuperCall();
+    TestUnqualifiedSuperCall.$clinit();
+    let $instance = new TestUnqualifiedSuperCall();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestUnqualifiedSuperCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
             $outer_this);
@@ -45,7 +44,7 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {InnerClassInitOrder$Outer} $outer_this
+   * @param {Outer} $outer_this
    * @return {void}
    * @public
    */
@@ -65,8 +64,7 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof
-        InnerClassInitOrder$Outer$TestUnqualifiedSuperCall;
+    return instance instanceof TestUnqualifiedSuperCall;
   }
 
   /**
@@ -76,8 +74,7 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, InnerClassInitOrder$Outer$TestUnqualifiedSuperCall);
+    return $Util.$canCastClass(classConstructor, TestUnqualifiedSuperCall);
   }
 
   /**
@@ -85,9 +82,9 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$Outer = goog.module.get(
+    Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-    InnerClassInitOrder$Outer$OuterIsNotSuper.$clinit();
+    OuterIsNotSuper.$clinit();
   }
 
   /**
@@ -99,7 +96,7 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$Outer$TestUnqualifiedSuperCall,
+    TestUnqualifiedSuperCall,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall'));
 
@@ -108,5 +105,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$Outer$TestUnqualifiedSuperCall;
+exports = TestUnqualifiedSuperCall;
 //# sourceMappingURL=InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.js.map

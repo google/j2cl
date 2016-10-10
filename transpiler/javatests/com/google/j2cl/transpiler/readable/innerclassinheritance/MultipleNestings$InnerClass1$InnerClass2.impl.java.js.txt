@@ -8,34 +8,34 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2$impl');
 
 
-let MultipleNestings$Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent$impl');
+let Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MultipleNestings$InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
+let InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
 
 
-class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
+class InnerClass2 extends Parent {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {MultipleNestings$InnerClass1} */
+    /** @public {InnerClass1} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1$InnerClass2 =
         null;
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {MultipleNestings$InnerClass1} $outer_this
-   * @return {!MultipleNestings$InnerClass1$InnerClass2}
+   * @param {InnerClass1} $outer_this
+   * @return {!InnerClass2}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1(
       $outer_this) {
-    MultipleNestings$InnerClass1$InnerClass2.$clinit();
-    let $instance = new MultipleNestings$InnerClass1$InnerClass2();
+    InnerClass2.$clinit();
+    let $instance = new InnerClass2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1$InnerClass2__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1(
             $outer_this);
@@ -44,7 +44,7 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {MultipleNestings$InnerClass1} $outer_this
+   * @param {InnerClass1} $outer_this
    * @return {void}
    * @public
    */
@@ -93,7 +93,7 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleNestings$InnerClass1$InnerClass2;
+    return instance instanceof InnerClass2;
   }
 
   /**
@@ -103,8 +103,7 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleNestings$InnerClass1$InnerClass2);
+    return $Util.$canCastClass(classConstructor, InnerClass2);
   }
 
   /**
@@ -112,9 +111,9 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
    * @public
    */
   static $clinit() {
-    MultipleNestings$InnerClass1 = goog.module.get(
+    InnerClass1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
-    MultipleNestings$Parent.$clinit();
+    Parent.$clinit();
   }
 
   /**
@@ -126,7 +125,7 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
 };
 
 $Util.$setClassMetadata(
-    MultipleNestings$InnerClass1$InnerClass2,
+    InnerClass2,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2'));
 
@@ -135,5 +134,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = MultipleNestings$InnerClass1$InnerClass2;
+exports = InnerClass2;
 //# sourceMappingURL=MultipleNestings$InnerClass1$InnerClass2.js.map

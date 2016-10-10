@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
 let Map = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.Map$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let TreeMap$InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
+let InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
 
 
 /**
@@ -54,12 +54,11 @@ class TreeMap extends Map {
   /**
    * @override
    * @param {C_K} key
-   * @return {TreeMap$InnerEntry<C_K>}
+   * @return {InnerEntry<C_K>}
    * @public
    */
   m_getCeilingEntry__java_lang_Object(key) {
-    return /**@type {!TreeMap$InnerEntry<C_K>} */ (
-        TreeMap$InnerEntry.$create__());
+    return /**@type {!InnerEntry<C_K>} */ (InnerEntry.$create__());
   }
 
   /**
@@ -87,7 +86,7 @@ class TreeMap extends Map {
    * @public
    */
   static $clinit() {
-    TreeMap$InnerEntry = goog.module.get(
+    InnerEntry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
     Map.$clinit();
   }

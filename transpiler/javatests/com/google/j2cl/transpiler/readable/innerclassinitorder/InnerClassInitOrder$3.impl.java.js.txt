@@ -8,14 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$3$impl');
 
 
-let InnerClassInitOrder$Outer$TestQualifiedSuperCall = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
+let TestQualifiedSuperCall = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
 
 
-class InnerClassInitOrder$3 extends
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall {
+class $3 extends TestQualifiedSuperCall {
   /**
    * Defines instance fields.
    * @public
@@ -30,13 +29,13 @@ class InnerClassInitOrder$3 extends
   /**
    * A particular Java constructor as a factory method.
    * @param {InnerClassInitOrder} $outer_this
-   * @return {!InnerClassInitOrder$3}
+   * @return {!$3}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
       $outer_this) {
-    InnerClassInitOrder$3.$clinit();
-    let $instance = new InnerClassInitOrder$3();
+    $3.$clinit();
+    let $instance = new $3();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$3__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             $outer_this);
@@ -64,7 +63,7 @@ class InnerClassInitOrder$3 extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$3;
+    return instance instanceof $3;
   }
 
   /**
@@ -74,7 +73,7 @@ class InnerClassInitOrder$3 extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$3);
+    return $Util.$canCastClass(classConstructor, $3);
   }
 
   /**
@@ -84,7 +83,7 @@ class InnerClassInitOrder$3 extends
   static $clinit() {
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall.$clinit();
+    TestQualifiedSuperCall.$clinit();
   }
 
   /**
@@ -96,7 +95,7 @@ class InnerClassInitOrder$3 extends
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$3,
+    $3,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$3'));
 
@@ -105,5 +104,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$3;
+exports = $3;
 //# sourceMappingURL=InnerClassInitOrder$3.js.map

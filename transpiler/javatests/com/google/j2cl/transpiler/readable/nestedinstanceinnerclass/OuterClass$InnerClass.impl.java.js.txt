@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let OuterClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
 
 
-class OuterClass$InnerClass extends java_lang_Object {
+class InnerClass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,13 +29,13 @@ class OuterClass$InnerClass extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {OuterClass} $outer_this
-   * @return {!OuterClass$InnerClass}
+   * @return {!InnerClass}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
       $outer_this) {
-    OuterClass$InnerClass.$clinit();
-    let $instance = new OuterClass$InnerClass();
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
             $outer_this);
@@ -63,7 +63,7 @@ class OuterClass$InnerClass extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof OuterClass$InnerClass;
+    return instance instanceof InnerClass;
   }
 
   /**
@@ -73,7 +73,7 @@ class OuterClass$InnerClass extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, OuterClass$InnerClass);
+    return $Util.$canCastClass(classConstructor, InnerClass);
   }
 
   /**
@@ -95,7 +95,7 @@ class OuterClass$InnerClass extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    OuterClass$InnerClass,
+    InnerClass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass'));
 
@@ -104,5 +104,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = OuterClass$InnerClass;
+exports = InnerClass;
 //# sourceMappingURL=OuterClass$InnerClass.js.map

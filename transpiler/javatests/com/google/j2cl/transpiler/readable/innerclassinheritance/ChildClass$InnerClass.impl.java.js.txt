@@ -15,7 +15,7 @@ let ChildClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerc
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class ChildClass$InnerClass extends ParentInner {
+class InnerClass extends ParentInner {
   /**
    * Defines instance fields.
    * @public
@@ -33,13 +33,13 @@ class ChildClass$InnerClass extends ParentInner {
   /**
    * A particular Java constructor as a factory method.
    * @param {ChildClass} $outer_this
-   * @return {!ChildClass$InnerClass}
+   * @return {!InnerClass}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
       $outer_this) {
-    ChildClass$InnerClass.$clinit();
-    let $instance = new ChildClass$InnerClass();
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
             $outer_this);
@@ -106,7 +106,7 @@ class ChildClass$InnerClass extends ParentInner {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof ChildClass$InnerClass;
+    return instance instanceof InnerClass;
   }
 
   /**
@@ -116,7 +116,7 @@ class ChildClass$InnerClass extends ParentInner {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ChildClass$InnerClass);
+    return $Util.$canCastClass(classConstructor, InnerClass);
   }
 
   /**
@@ -139,7 +139,7 @@ class ChildClass$InnerClass extends ParentInner {
 };
 
 $Util.$setClassMetadata(
-    ChildClass$InnerClass,
+    InnerClass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass'));
 
@@ -148,5 +148,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = ChildClass$InnerClass;
+exports = InnerClass;
 //# sourceMappingURL=ChildClass$InnerClass.js.map

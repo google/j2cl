@@ -11,11 +11,11 @@ goog.module('com.google.j2cl.transpiler.readable.localclassinstaticcontext.Local
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let LocalClassInStaticContext$C$1D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.$1D$impl');
+let $1D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.$1D$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class LocalClassInStaticContext$C extends java_lang_Object {
+class C extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +29,12 @@ class LocalClassInStaticContext$C extends java_lang_Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!LocalClassInStaticContext$C}
+   * @return {!C}
    * @public
    */
   static $create__() {
-    LocalClassInStaticContext$C.$clinit();
-    let $instance = new LocalClassInStaticContext$C();
+    C.$clinit();
+    let $instance = new C();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext$C__();
     return $instance;
@@ -55,9 +55,8 @@ class LocalClassInStaticContext$C extends java_lang_Object {
    * @public
    */
   m_test__() {
-    LocalClassInStaticContext$C$1D
-        .$create__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext$C(
-            this)
+    $1D.$create__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext$C(
+           this)
         .m_fun__();
   }
 
@@ -68,7 +67,7 @@ class LocalClassInStaticContext$C extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof LocalClassInStaticContext$C;
+    return instance instanceof C;
   }
 
   /**
@@ -78,7 +77,7 @@ class LocalClassInStaticContext$C extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LocalClassInStaticContext$C);
+    return $Util.$canCastClass(classConstructor, C);
   }
 
   /**
@@ -86,7 +85,7 @@ class LocalClassInStaticContext$C extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    LocalClassInStaticContext$C$1D = goog.module.get(
+    $1D = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.$1D$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
@@ -103,7 +102,7 @@ class LocalClassInStaticContext$C extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    LocalClassInStaticContext$C,
+    C,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext$C'));
 
@@ -112,5 +111,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = LocalClassInStaticContext$C;
+exports = C;
 //# sourceMappingURL=LocalClassInStaticContext$C.js.map

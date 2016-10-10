@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalCla
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let SimpleLocalClass$1InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClass$impl');
-let SimpleLocalClass$1InnerClassWithoutCaptures = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
+let $1InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClass$impl');
+let $1InnerClassWithoutCaptures = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -55,11 +55,11 @@ class SimpleLocalClass extends java_lang_Object {
    */
   m_test__int(p) {
     let localVar = 1;
-    SimpleLocalClass$1InnerClass
+    $1InnerClass
         .$create__int__int__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(
             localVar, p, this)
         .m_fun__();
-    SimpleLocalClass$1InnerClassWithoutCaptures
+    $1InnerClassWithoutCaptures
         .$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(
             this);
   }
@@ -103,9 +103,9 @@ class SimpleLocalClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    SimpleLocalClass$1InnerClass = goog.module.get(
+    $1InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClass$impl');
-    SimpleLocalClass$1InnerClassWithoutCaptures = goog.module.get(
+    $1InnerClassWithoutCaptures = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

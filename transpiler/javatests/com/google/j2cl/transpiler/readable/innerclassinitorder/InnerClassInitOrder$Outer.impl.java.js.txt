@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class InnerClassInitOrder$Outer extends java_lang_Object {
+class Outer extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +29,12 @@ class InnerClassInitOrder$Outer extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} i
-   * @return {!InnerClassInitOrder$Outer}
+   * @return {!Outer}
    * @public
    */
   static $create__int(i) {
-    InnerClassInitOrder$Outer.$clinit();
-    let $instance = new InnerClassInitOrder$Outer();
+    Outer.$clinit();
+    let $instance = new Outer();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__int(
             i);
@@ -70,7 +70,7 @@ class InnerClassInitOrder$Outer extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$Outer;
+    return instance instanceof Outer;
   }
 
   /**
@@ -80,7 +80,7 @@ class InnerClassInitOrder$Outer extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$Outer);
+    return $Util.$canCastClass(classConstructor, Outer);
   }
 
   /**
@@ -101,7 +101,7 @@ class InnerClassInitOrder$Outer extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$Outer,
+    Outer,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer'));
 
@@ -110,5 +110,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$Outer;
+exports = Outer;
 //# sourceMappingURL=InnerClassInitOrder$Outer.js.map

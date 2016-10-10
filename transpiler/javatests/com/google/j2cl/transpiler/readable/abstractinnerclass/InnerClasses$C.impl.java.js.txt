@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C$impl');
 
 
-let InnerClasses$A = goog.require('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A$impl');
+let A = goog.require('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -17,9 +17,9 @@ let InnerClasses = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abst
 
 /**
  * @abstract
- * @implements {InnerClasses$A}
+ * @implements {A}
  */
-class InnerClasses$C extends java_lang_Object {
+class C extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -68,7 +68,7 @@ class InnerClasses$C extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClasses$C;
+    return instance instanceof C;
   }
 
   /**
@@ -78,7 +78,7 @@ class InnerClasses$C extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClasses$C);
+    return $Util.$canCastClass(classConstructor, C);
   }
 
   /**
@@ -100,16 +100,16 @@ class InnerClasses$C extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    InnerClasses$C,
+    C,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$C'));
 
 
-InnerClasses$A.$markImplementor(InnerClasses$C);
+A.$markImplementor(C);
 
 
 /**
  * Export class.
  */
-exports = InnerClasses$C;
+exports = C;
 //# sourceMappingURL=InnerClasses$C.js.map

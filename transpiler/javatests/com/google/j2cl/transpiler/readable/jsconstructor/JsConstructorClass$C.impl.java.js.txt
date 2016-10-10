@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.C$impl');
 
 
-let JsConstructorClass$B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B$impl');
+let B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class JsConstructorClass$C extends JsConstructorClass$B {
+class C extends B {
   /**
    * Real constructor.
    * @param {number} x
@@ -32,12 +32,12 @@ class JsConstructorClass$C extends JsConstructorClass$B {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} x
-   * @return {!JsConstructorClass$C}
+   * @return {!C}
    * @public
    */
   static $create__int(x) {
-    JsConstructorClass$C.$clinit();
-    return new JsConstructorClass$C(x);
+    C.$clinit();
+    return new C(x);
   }
 
   /**
@@ -57,12 +57,12 @@ class JsConstructorClass$C extends JsConstructorClass$B {
    * A particular Java constructor as a factory method.
    * @param {number} x
    * @param {number} y
-   * @return {!JsConstructorClass$C}
+   * @return {!C}
    * @public
    */
   static $create__int__int(x, y) {
-    JsConstructorClass$C.$clinit();
-    let $instance = new JsConstructorClass$C(x + y);
+    C.$clinit();
+    let $instance = new C(x + y);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$C__int__int(
             x, y);
@@ -89,7 +89,7 @@ class JsConstructorClass$C extends JsConstructorClass$B {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$C;
+    return instance instanceof C;
   }
 
   /**
@@ -99,7 +99,7 @@ class JsConstructorClass$C extends JsConstructorClass$B {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$C);
+    return $Util.$canCastClass(classConstructor, C);
   }
 
   /**
@@ -108,7 +108,7 @@ class JsConstructorClass$C extends JsConstructorClass$B {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    JsConstructorClass$B.$clinit();
+    B.$clinit();
   }
 
   /**
@@ -122,7 +122,7 @@ class JsConstructorClass$C extends JsConstructorClass$B {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$C,
+    C,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C'));
 
@@ -131,5 +131,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$C;
+exports = C;
 //# sourceMappingURL=JsConstructorClass$C.js.map

@@ -83,9 +83,9 @@ public class ImportGatherer extends AbstractVisitor {
     // Add "$" prefix for bootstrap types and primitive types.
     if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
         || typeDescriptor.isPrimitive()) {
-      return "$" + typeDescriptor.getShortName();
+      return "$" + typeDescriptor.getSimpleName();
     }
-    return typeDescriptor.getShortName();
+    return typeDescriptor.getSimpleName();
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();

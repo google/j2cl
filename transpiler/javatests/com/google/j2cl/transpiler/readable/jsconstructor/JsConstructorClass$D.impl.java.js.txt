@@ -8,19 +8,19 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.D$impl');
 
 
-let JsConstructorClass$B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B$impl');
+let B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class JsConstructorClass$D extends JsConstructorClass$B {
+class D extends B {
   /**
    * Real constructor.
    * @public
    */
   constructor() {
-    JsConstructorClass$D.$clinit();
+    D.$clinit();
     super(9);
     /** @public {number} */
     this.f_fD__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$D =
@@ -42,12 +42,12 @@ class JsConstructorClass$D extends JsConstructorClass$B {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} x
-   * @return {!JsConstructorClass$D}
+   * @return {!D}
    * @public
    */
   static $create__int(x) {
-    JsConstructorClass$D.$clinit();
-    let $instance = new JsConstructorClass$D();
+    D.$clinit();
+    let $instance = new D();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$D__int(
             x);
@@ -73,7 +73,7 @@ class JsConstructorClass$D extends JsConstructorClass$B {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$D;
+    return instance instanceof D;
   }
 
   /**
@@ -83,7 +83,7 @@ class JsConstructorClass$D extends JsConstructorClass$B {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$D);
+    return $Util.$canCastClass(classConstructor, D);
   }
 
   /**
@@ -92,7 +92,7 @@ class JsConstructorClass$D extends JsConstructorClass$B {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    JsConstructorClass$B.$clinit();
+    B.$clinit();
   }
 
   /**
@@ -106,7 +106,7 @@ class JsConstructorClass$D extends JsConstructorClass$B {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$D,
+    D,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D'));
 
@@ -115,5 +115,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$D;
+exports = D;
 //# sourceMappingURL=JsConstructorClass$D.js.map

@@ -8,14 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
 
 
-let MultipleAbstractParents$AbstractStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList$impl');
+let AbstractStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class MultipleAbstractParents$StringList extends
-    MultipleAbstractParents$AbstractStringList {
+class StringList extends AbstractStringList {
   /**
    * Defines instance fields.
    * @public
@@ -26,12 +25,12 @@ class MultipleAbstractParents$StringList extends
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!MultipleAbstractParents$StringList}
+   * @return {!StringList}
    * @public
    */
   static $create__() {
-    MultipleAbstractParents$StringList.$clinit();
-    let $instance = new MultipleAbstractParents$StringList();
+    StringList.$clinit();
+    let $instance = new StringList();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$StringList__();
     return $instance;
@@ -65,7 +64,7 @@ class MultipleAbstractParents$StringList extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$StringList;
+    return instance instanceof StringList;
   }
 
   /**
@@ -75,8 +74,7 @@ class MultipleAbstractParents$StringList extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$StringList);
+    return $Util.$canCastClass(classConstructor, StringList);
   }
 
   /**
@@ -85,7 +83,7 @@ class MultipleAbstractParents$StringList extends
    */
   static $clinit() {
     java_lang_String = goog.module.get('java.lang.String$impl');
-    MultipleAbstractParents$AbstractStringList.$clinit();
+    AbstractStringList.$clinit();
   }
 
   /**
@@ -97,7 +95,7 @@ class MultipleAbstractParents$StringList extends
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$StringList,
+    StringList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringList'));
 
@@ -106,5 +104,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$StringList;
+exports = StringList;
 //# sourceMappingURL=MultipleAbstractParents$StringList.js.map

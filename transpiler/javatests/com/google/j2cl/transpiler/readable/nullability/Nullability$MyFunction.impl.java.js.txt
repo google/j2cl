@@ -16,7 +16,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 /**
  * @interface
  */
-class Nullability$MyFunction {
+class MyFunction {
   /**
    * @abstract
    * @param {string} a
@@ -72,17 +72,16 @@ class Nullability$MyFunction {
 };
 
 $Util.$setClassMetadataForInterface(
-    Nullability$MyFunction,
+    MyFunction,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nullability.Nullability$MyFunction'));
 
 
-Nullability$MyFunction.$markImplementor(
-    /** @type {Function} */ (Nullability$MyFunction));
+MyFunction.$markImplementor(/** @type {Function} */ (MyFunction));
 
 
 /**
  * Export class.
  */
-exports = Nullability$MyFunction;
+exports = MyFunction;
 //# sourceMappingURL=Nullability$MyFunction.js.map

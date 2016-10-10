@@ -12,9 +12,9 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
-let AnonymousInnerClass$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$1$impl');
-let AnonymousInnerClass$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$2$impl');
-let AnonymousInnerClass$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$3$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$1$impl');
+let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$2$impl');
+let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$3$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -57,18 +57,15 @@ class AnonymousInnerClass extends java_lang_Object {
    */
   m_test__int(arg) {
     let ic =
-        AnonymousInnerClass$1
-            .$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
-                this, this);
+        $1.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+            this, this);
     let a = A.$create__();
     let b =
-        AnonymousInnerClass$2
-            .$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
-                a, this);
+        $2.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+            a, this);
     let c =
-        AnonymousInnerClass$3
-            .$create__int__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
-                arg, this);
+        $3.$create__int__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+            arg, this);
   }
 
   /**
@@ -98,11 +95,11 @@ class AnonymousInnerClass extends java_lang_Object {
   static $clinit() {
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
-    AnonymousInnerClass$1 = goog.module.get(
+    $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$1$impl');
-    AnonymousInnerClass$2 = goog.module.get(
+    $2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$2$impl');
-    AnonymousInnerClass$3 = goog.module.get(
+    $3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$3$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

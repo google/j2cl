@@ -458,31 +458,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
   }
 
-  /** Returns a readable short name to be used in imports, jsdoc etc. */
-  public String getShortName() {
-    if (isTypeVariable) {
-      // skip the top level class component for better output readability.
-      List<String> nameComponents =
-          new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-      // move the prefix in the simple name to the class name to avoid collisions between method-
-      // level and class-level type variable and avoid variable name starts with a number.
-      // concat class components to avoid collisions between type variables in inner/outer class.
-      // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-      nameComponents.set(
-          nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-      String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-      return prefix + Joiner.on('_').join(nameComponents);
-    }
-
-    if (isArray) {
-      return leafTypeDescriptor.getShortName() + Strings.repeat("[]", dimensions);
-    }
-
-    return getBinaryClassName();
-  }
-
   /** Returns the unqualified binary name like "Outer$Inner". */
   public String getBinaryClassName() {
     // TODO rename to getBinarySimpleName

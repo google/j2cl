@@ -8,21 +8,21 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
 
 
-let JsConstructorClass$A = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A$impl');
+let A = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class JsConstructorClass$Varargs extends JsConstructorClass$A {
+class Varargs extends A {
   /**
    * Real constructor.
    * @param {...number} args
    * @public
    */
   constructor(args) {
-    JsConstructorClass$Varargs.$clinit();
+    Varargs.$clinit();
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length], $int));
     for (let $i = 0; $i < arguments.length; $i++) {
@@ -53,7 +53,7 @@ class JsConstructorClass$Varargs extends JsConstructorClass$A {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$Varargs;
+    return instance instanceof Varargs;
   }
 
   /**
@@ -63,7 +63,7 @@ class JsConstructorClass$Varargs extends JsConstructorClass$A {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$Varargs);
+    return $Util.$canCastClass(classConstructor, Varargs);
   }
 
   /**
@@ -73,7 +73,7 @@ class JsConstructorClass$Varargs extends JsConstructorClass$A {
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    JsConstructorClass$A.$clinit();
+    A.$clinit();
   }
 
   /**
@@ -85,7 +85,7 @@ class JsConstructorClass$Varargs extends JsConstructorClass$A {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$Varargs,
+    Varargs,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$Varargs'));
 
@@ -94,5 +94,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$Varargs;
+exports = Varargs;
 //# sourceMappingURL=JsConstructorClass$Varargs.js.map

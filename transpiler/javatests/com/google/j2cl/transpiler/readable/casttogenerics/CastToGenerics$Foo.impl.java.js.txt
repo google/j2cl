@@ -15,7 +15,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 /**
  * @template C_Foo_V
  */
-class CastToGenerics$Foo extends java_lang_Object {
+class Foo extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -27,12 +27,12 @@ class CastToGenerics$Foo extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_Foo_V
-   * @return {!CastToGenerics$Foo<C_Foo_V>}
+   * @return {!Foo<C_Foo_V>}
    * @public
    */
   static $create__() {
-    CastToGenerics$Foo.$clinit();
-    let $instance = new CastToGenerics$Foo();
+    Foo.$clinit();
+    let $instance = new Foo();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$Foo__();
     return $instance;
@@ -55,7 +55,7 @@ class CastToGenerics$Foo extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof CastToGenerics$Foo;
+    return instance instanceof Foo;
   }
 
   /**
@@ -65,7 +65,7 @@ class CastToGenerics$Foo extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, CastToGenerics$Foo);
+    return $Util.$canCastClass(classConstructor, Foo);
   }
 
   /**
@@ -85,7 +85,7 @@ class CastToGenerics$Foo extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    CastToGenerics$Foo,
+    Foo,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo'));
 
@@ -94,5 +94,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = CastToGenerics$Foo;
+exports = Foo;
 //# sourceMappingURL=CastToGenerics$Foo.js.map

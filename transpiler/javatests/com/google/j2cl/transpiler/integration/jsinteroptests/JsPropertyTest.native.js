@@ -3,7 +3,7 @@
  * @public
  */
 __class.createMyNativeJsType = function() {
-  return new JsPropertyTest$MyNativeJsType(0);
+  return new MyNativeJsType(0);
 };
 
 /**

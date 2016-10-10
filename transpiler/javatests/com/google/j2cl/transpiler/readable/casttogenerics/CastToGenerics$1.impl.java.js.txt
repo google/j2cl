@@ -8,15 +8,15 @@
 goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
 
 
-let CastToGenerics$Foo = goog.require('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
+let Foo = goog.require('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @template M_T
- * @extends {CastToGenerics$Foo<M_T>}
+ * @extends {Foo<M_T>}
  */
-class CastToGenerics$1 extends CastToGenerics$Foo {
+class $1 extends Foo {
   /**
    * Defines instance fields.
    * @public
@@ -28,12 +28,12 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
   /**
    * A particular Java constructor as a factory method.
    * @template M_T
-   * @return {!CastToGenerics$1<M_T>}
+   * @return {!$1<M_T>}
    * @public
    */
   static $create__() {
-    CastToGenerics$1.$clinit();
-    let $instance = new CastToGenerics$1();
+    $1.$clinit();
+    let $instance = new $1();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$1__();
     return $instance;
@@ -56,7 +56,7 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof CastToGenerics$1;
+    return instance instanceof $1;
   }
 
   /**
@@ -66,7 +66,7 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, CastToGenerics$1);
+    return $Util.$canCastClass(classConstructor, $1);
   }
 
   /**
@@ -74,7 +74,7 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
    * @public
    */
   static $clinit() {
-    CastToGenerics$Foo.$clinit();
+    Foo.$clinit();
   }
 
   /**
@@ -86,7 +86,7 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
 };
 
 $Util.$setClassMetadata(
-    CastToGenerics$1,
+    $1,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$1'));
 
@@ -95,5 +95,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = CastToGenerics$1;
+exports = $1;
 //# sourceMappingURL=CastToGenerics$1.js.map

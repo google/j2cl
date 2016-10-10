@@ -9,16 +9,16 @@ goog.module('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$imp
 
 
 let Interface = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface$impl');
-let Interface$ClassWithAbstractMethod = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface.ClassWithAbstractMethod$impl');
-let Interface$NestedInterface = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface.NestedInterface$impl');
+let ClassWithAbstractMethod = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface.ClassWithAbstractMethod$impl');
+let NestedInterface = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface.NestedInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @implements {Interface}
- * @implements {Interface$NestedInterface}
+ * @implements {NestedInterface}
  */
-class Implementor extends Interface$ClassWithAbstractMethod {
+class Implementor extends ClassWithAbstractMethod {
   /**
    * Defines instance fields.
    * @public
@@ -75,7 +75,7 @@ class Implementor extends Interface$ClassWithAbstractMethod {
    * @public
    */
   static $clinit() {
-    Interface$ClassWithAbstractMethod.$clinit();
+    ClassWithAbstractMethod.$clinit();
   }
 
   /**
@@ -92,7 +92,7 @@ $Util.$setClassMetadata(
 
 
 Interface.$markImplementor(Implementor);
-Interface$NestedInterface.$markImplementor(Implementor);
+NestedInterface.$markImplementor(Implementor);
 
 
 /**

@@ -1551,8 +1551,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Non static inner class 'EntryPoint$Buggy' cannot be a "
-            + "native JsType.",
+        "JsInterop error: Non static inner class 'Buggy' cannot be a native JsType.",
         "1 error(s).");
   }
 
@@ -1581,9 +1580,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "public class Buggy { void m() { @JsType class Local {} } }");
 
     assertCompileFails(
-        sourcePackage,
-        "JsInterop error: Local class 'Buggy$1Local' cannot be a JsType.",
-        "1 error(s).");
+        sourcePackage, "JsInterop error: Local class '$1Local' cannot be a JsType.", "1 error(s).");
   }
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {

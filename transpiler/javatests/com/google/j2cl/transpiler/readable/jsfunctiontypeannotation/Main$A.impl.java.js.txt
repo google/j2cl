@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A$impl');
 
 
-let Main$ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
+let ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -18,9 +18,9 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @implements {Main$ApplyFunction<?number, ?number>}
+ * @implements {ApplyFunction<?number, ?number>}
  */
-class Main$A extends java_lang_Object {
+class A extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -35,13 +35,13 @@ class Main$A extends java_lang_Object {
    * @public
    */
   static $create__() {
-    Main$A.$clinit();
-    let $instance = new Main$A();
+    A.$clinit();
+    let $instance = new A();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A__();
     return $Util.$makeLambdaFunction(
-        $Util.$getPrototype(Main$A).m_apply__java_lang_Object__java_lang_Number,
-        $instance, Main$A.$copy);
+        $Util.$getPrototype(A).m_apply__java_lang_Object__java_lang_Number,
+        $instance, A.$copy);
   }
 
   /**
@@ -72,7 +72,7 @@ class Main$A extends java_lang_Object {
    * @public
    */
   m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
-    return Main$A
+    return A
         .m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A__java_lang_Double__java_lang_Double(
             this, /**@type {?number} */ ($Casts.to(arg0, Double)),
             /**@type {?number} */ ($Casts.to(arg1, Double)));
@@ -87,7 +87,7 @@ class Main$A extends java_lang_Object {
    */
   static m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A__java_lang_Double__java_lang_Double(
       $thisArg, d, i) {
-    Main$A.$clinit();
+    A.$clinit();
     return d;
   }
 
@@ -110,12 +110,12 @@ class Main$A extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$A);
+    return $Util.$canCastClass(classConstructor, A);
   }
 
   /**
    * Copies the fields from {@code from} to {@code to}.
-   * @param {Main$A} from
+   * @param {A} from
    * @param {*} to
    * @public
    */
@@ -145,16 +145,16 @@ class Main$A extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$A,
+    A,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$A'));
 
 
-Main$ApplyFunction.$markImplementor(Main$A);
+ApplyFunction.$markImplementor(A);
 
 
 /**
  * Export class.
  */
-exports = Main$A;
+exports = A;
 //# sourceMappingURL=Main$A.js.map

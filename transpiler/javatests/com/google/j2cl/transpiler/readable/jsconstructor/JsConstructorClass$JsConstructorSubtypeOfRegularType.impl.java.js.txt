@@ -8,21 +8,20 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType$impl');
 
 
-let JsConstructorClass$RegularType = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType$impl');
+let RegularType = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
-class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
-    JsConstructorClass$RegularType {
+class JsConstructorSubtypeOfRegularType extends RegularType {
   /**
    * Real constructor.
    * @param {*} object
    * @public
    */
   constructor(object) {
-    JsConstructorClass$JsConstructorSubtypeOfRegularType.$clinit();
+    JsConstructorSubtypeOfRegularType.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$JsConstructorSubtypeOfRegularType__java_lang_Object(
         object);
@@ -43,13 +42,13 @@ class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!JsConstructorClass$JsConstructorSubtypeOfRegularType}
+   * @return {!JsConstructorSubtypeOfRegularType}
    * @public
    */
   static $create__() {
-    JsConstructorClass$JsConstructorSubtypeOfRegularType.$clinit();
-    let $instance = new JsConstructorClass$JsConstructorSubtypeOfRegularType(
-        java_lang_Object.$create__());
+    JsConstructorSubtypeOfRegularType.$clinit();
+    let $instance =
+        new JsConstructorSubtypeOfRegularType(java_lang_Object.$create__());
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$JsConstructorSubtypeOfRegularType__();
     return $instance;
@@ -73,8 +72,7 @@ class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof
-        JsConstructorClass$JsConstructorSubtypeOfRegularType;
+    return instance instanceof JsConstructorSubtypeOfRegularType;
   }
 
   /**
@@ -85,7 +83,7 @@ class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(
-        classConstructor, JsConstructorClass$JsConstructorSubtypeOfRegularType);
+        classConstructor, JsConstructorSubtypeOfRegularType);
   }
 
   /**
@@ -94,7 +92,7 @@ class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
    */
   static $clinit() {
     java_lang_Object = goog.module.get('java.lang.Object$impl');
-    JsConstructorClass$RegularType.$clinit();
+    RegularType.$clinit();
   }
 
   /**
@@ -106,7 +104,7 @@ class JsConstructorClass$JsConstructorSubtypeOfRegularType extends
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$JsConstructorSubtypeOfRegularType,
+    JsConstructorSubtypeOfRegularType,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$JsConstructorSubtypeOfRegularType'));
 
@@ -115,5 +113,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$JsConstructorSubtypeOfRegularType;
+exports = JsConstructorSubtypeOfRegularType;
 //# sourceMappingURL=JsConstructorClass$JsConstructorSubtypeOfRegularType.js.map

@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C$impl');
 
 
-let Main$A = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');
+let A = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -17,9 +17,9 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @extends {Main$A<Integer>}
+ * @extends {A<Integer>}
  */
-class Main$C extends Main$A {
+class C extends A {
   /**
    * Defines instance fields.
    * @public
@@ -30,12 +30,12 @@ class Main$C extends Main$A {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main$C}
+   * @return {!C}
    * @public
    */
   static $create__() {
-    Main$C.$clinit();
-    let $instance = new Main$C();
+    C.$clinit();
+    let $instance = new C();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$C__();
     return $instance;
@@ -79,7 +79,7 @@ class Main$C extends Main$A {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$C;
+    return instance instanceof C;
   }
 
   /**
@@ -89,7 +89,7 @@ class Main$C extends Main$A {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$C);
+    return $Util.$canCastClass(classConstructor, C);
   }
 
   /**
@@ -100,7 +100,7 @@ class Main$C extends Main$A {
     Integer = goog.module.get('java.lang.Integer$impl');
     java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Main$A.$clinit();
+    A.$clinit();
   }
 
   /**
@@ -111,13 +111,13 @@ class Main$C extends Main$A {
 };
 
 $Util.$setClassMetadata(
-    Main$C, $Util.$makeClassName(
-                'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$C'));
+    C, $Util.$makeClassName(
+           'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$C'));
 
 
 
 /**
  * Export class.
  */
-exports = Main$C;
+exports = C;
 //# sourceMappingURL=Main$C.js.map

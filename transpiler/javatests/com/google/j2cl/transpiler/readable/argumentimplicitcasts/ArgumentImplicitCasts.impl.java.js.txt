@@ -12,8 +12,8 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let ArgumentImplicitCasts$IntValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
-let ArgumentImplicitCasts$LongValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
+let IntValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
+let LongValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
@@ -216,7 +216,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                 .f_FLOAT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);
     $Asserts.$enabled() &&
         $Asserts.$assert(
-            ArgumentImplicitCasts$IntValueHolder
+            IntValueHolder
                 .$create__int(
                     ArgumentImplicitCasts
                         .f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)
@@ -225,7 +225,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                 .f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);
     $Asserts.$enabled() &&
         $Asserts.$assert(
-            ArgumentImplicitCasts$IntValueHolder
+            IntValueHolder
                 .$create__int(
                     ArgumentImplicitCasts
                         .f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)
@@ -234,7 +234,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                 .f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);
     $Asserts.$enabled() &&
         $Asserts.$assert(
-            ArgumentImplicitCasts$IntValueHolder
+            IntValueHolder
                 .$create__int(
                     ArgumentImplicitCasts
                         .f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)
@@ -243,7 +243,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                 .f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);
     $Asserts.$enabled() &&
         $Asserts.$assert($LongUtils.$equals(
-            ArgumentImplicitCasts$LongValueHolder
+            LongValueHolder
                 .$create__long($Primitives.$widenByteToLong(
                     ArgumentImplicitCasts
                         .f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts))
@@ -253,7 +253,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                     .f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));
     $Asserts.$enabled() &&
         $Asserts.$assert($LongUtils.$equals(
-            ArgumentImplicitCasts$LongValueHolder
+            LongValueHolder
                 .$create__long($Primitives.$widenCharToLong(
                     ArgumentImplicitCasts
                         .f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts))
@@ -263,7 +263,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
                     .f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));
     $Asserts.$enabled() &&
         $Asserts.$assert($LongUtils.$equals(
-            ArgumentImplicitCasts$LongValueHolder
+            LongValueHolder
                 .$create__long($Primitives.$widenShortToLong(
                     ArgumentImplicitCasts
                         .f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts))
@@ -298,9 +298,9 @@ class ArgumentImplicitCasts extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    ArgumentImplicitCasts$IntValueHolder = goog.module.get(
+    IntValueHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
-    ArgumentImplicitCasts$LongValueHolder = goog.module.get(
+    LongValueHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

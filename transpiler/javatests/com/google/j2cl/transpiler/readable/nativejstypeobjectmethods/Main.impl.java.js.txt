@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$NativeJsTypeWithToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
-let Main$NativeJsTypeWithoutToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
+let NativeJsTypeWithToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
+let NativeJsTypeWithoutToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
@@ -54,13 +54,13 @@ class Main extends java_lang_Object {
    */
   static m_test__() {
     Main.$clinit();
-    let n1 = new Main$NativeJsTypeWithToString();
+    let n1 = new NativeJsTypeWithToString();
     $Objects.m_toString__java_lang_Object(n1);
-    let n2 = new Main$NativeJsTypeWithToString();
+    let n2 = new NativeJsTypeWithToString();
     $Objects.m_toString__java_lang_Object(n2);
-    let n3 = new Main$NativeJsTypeWithoutToString();
+    let n3 = new NativeJsTypeWithoutToString();
     $Objects.m_toString__java_lang_Object(n3);
-    let n4 = new Main$NativeJsTypeWithoutToString();
+    let n4 = new NativeJsTypeWithoutToString();
     $Objects.m_toString__java_lang_Object(n4);
   }
 
@@ -89,9 +89,9 @@ class Main extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Main$NativeJsTypeWithToString = goog.module.get(
+    NativeJsTypeWithToString = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
-    Main$NativeJsTypeWithoutToString = goog.module.get(
+    NativeJsTypeWithoutToString = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();

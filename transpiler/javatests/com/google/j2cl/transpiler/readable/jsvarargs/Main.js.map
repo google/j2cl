@@ -94,7 +94,7 @@
 [m.f4(new int[] {});] => [m.f4();]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));]
-[AFunction a = new AFunction();] => [let a = Main$AFunction.$create__();]
+[AFunction a = new AFunction();] => [let a = AFunction.$create__();]
 [Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();]
 [Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();]
 [a.f1(0, o1, o2);] => [a(0, o1, o2);]

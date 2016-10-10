@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$imp
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MixedNestings$A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
+let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
 
 
 class MixedNestings extends java_lang_Object {
@@ -57,9 +57,8 @@ class MixedNestings extends java_lang_Object {
    * @public
    */
   m_test__() {
-    MixedNestings$A
-        .$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(
-            this)
+    A.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(
+         this)
         .m_a__();
   }
 
@@ -88,7 +87,7 @@ class MixedNestings extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    MixedNestings$A = goog.module.get(
+    A = goog.module.get(
         'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
     java_lang_Object.$clinit();
   }

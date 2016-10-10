@@ -21,7 +21,7 @@ let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
 /**
  * @extends {ArrayList<?string>}
  */
-class Nullability$StringList extends ArrayList {
+class StringList extends ArrayList {
   /**
    * Defines instance fields.
    * @public
@@ -32,12 +32,12 @@ class Nullability$StringList extends ArrayList {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Nullability$StringList}
+   * @return {!StringList}
    * @public
    */
   static $create__() {
-    Nullability$StringList.$clinit();
-    let $instance = new Nullability$StringList();
+    StringList.$clinit();
+    let $instance = new StringList();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability$StringList__();
     return $instance;
@@ -90,7 +90,7 @@ class Nullability$StringList extends ArrayList {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Nullability$StringList;
+    return instance instanceof StringList;
   }
 
   /**
@@ -100,7 +100,7 @@ class Nullability$StringList extends ArrayList {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Nullability$StringList);
+    return $Util.$canCastClass(classConstructor, StringList);
   }
 
   /**
@@ -125,7 +125,7 @@ class Nullability$StringList extends ArrayList {
 };
 
 $Util.$setClassMetadata(
-    Nullability$StringList,
+    StringList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nullability.Nullability$StringList'));
 
@@ -134,5 +134,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Nullability$StringList;
+exports = StringList;
 //# sourceMappingURL=Nullability$StringList.js.map

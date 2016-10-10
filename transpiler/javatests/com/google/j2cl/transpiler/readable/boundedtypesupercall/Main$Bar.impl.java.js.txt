@@ -11,14 +11,14 @@ goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$i
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$Bar$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
-let Main$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
 
 
 /**
  * @template C_Bar_T
  */
-class Main$Bar extends java_lang_Object {
+class Bar extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -30,12 +30,12 @@ class Main$Bar extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_Bar_T
-   * @return {!Main$Bar<C_Bar_T>}
+   * @return {!Bar<C_Bar_T>}
    * @public
    */
   static $create__() {
-    Main$Bar.$clinit();
-    let $instance = new Main$Bar();
+    Bar.$clinit();
+    let $instance = new Bar();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar__();
     return $instance;
@@ -60,14 +60,13 @@ class Main$Bar extends java_lang_Object {
   }
 
   /**
-   * @return {Main$Foo<C_Bar_T>}
+   * @return {Foo<C_Bar_T>}
    * @public
    */
   m_doSomething__() {
-    return /**@type {!Main$Bar$1<C_Bar_T>} */ (
-        Main$Bar$1
-            .$create__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
-                this.m_getSomething__(), this));
+    return /**@type {!$1<C_Bar_T>} */ (
+        $1.$create__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
+            this.m_getSomething__(), this));
   }
 
   /**
@@ -77,7 +76,7 @@ class Main$Bar extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$Bar;
+    return instance instanceof Bar;
   }
 
   /**
@@ -87,7 +86,7 @@ class Main$Bar extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$Bar);
+    return $Util.$canCastClass(classConstructor, Bar);
   }
 
   /**
@@ -95,9 +94,9 @@ class Main$Bar extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Main$Bar$1 = goog.module.get(
+    $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
-    Main$Foo = goog.module.get(
+    Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
     java_lang_Object.$clinit();
   }
@@ -110,7 +109,7 @@ class Main$Bar extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$Bar,
+    Bar,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar'));
 
@@ -119,5 +118,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Main$Bar;
+exports = Bar;
 //# sourceMappingURL=Main$Bar.js.map

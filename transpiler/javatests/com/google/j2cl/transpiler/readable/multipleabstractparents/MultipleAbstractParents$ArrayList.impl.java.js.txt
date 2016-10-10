@@ -8,16 +8,15 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
 
 
-let MultipleAbstractParents$AbstractList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
+let AbstractList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @template C_ArrayList_T
- * @extends {MultipleAbstractParents$AbstractList<C_ArrayList_T>}
+ * @extends {AbstractList<C_ArrayList_T>}
  */
-class MultipleAbstractParents$ArrayList extends
-    MultipleAbstractParents$AbstractList {
+class ArrayList extends AbstractList {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +28,12 @@ class MultipleAbstractParents$ArrayList extends
   /**
    * A particular Java constructor as a factory method.
    * @template C_ArrayList_T
-   * @return {!MultipleAbstractParents$ArrayList<C_ArrayList_T>}
+   * @return {!ArrayList<C_ArrayList_T>}
    * @public
    */
   static $create__() {
-    MultipleAbstractParents$ArrayList.$clinit();
-    let $instance = new MultipleAbstractParents$ArrayList();
+    ArrayList.$clinit();
+    let $instance = new ArrayList();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$ArrayList__();
     return $instance;
@@ -57,7 +56,7 @@ class MultipleAbstractParents$ArrayList extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$ArrayList;
+    return instance instanceof ArrayList;
   }
 
   /**
@@ -67,8 +66,7 @@ class MultipleAbstractParents$ArrayList extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$ArrayList);
+    return $Util.$canCastClass(classConstructor, ArrayList);
   }
 
   /**
@@ -76,7 +74,7 @@ class MultipleAbstractParents$ArrayList extends
    * @public
    */
   static $clinit() {
-    MultipleAbstractParents$AbstractList.$clinit();
+    AbstractList.$clinit();
   }
 
   /**
@@ -88,7 +86,7 @@ class MultipleAbstractParents$ArrayList extends
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$ArrayList,
+    ArrayList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList'));
 
@@ -97,5 +95,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$ArrayList;
+exports = ArrayList;
 //# sourceMappingURL=MultipleAbstractParents$ArrayList.js.map

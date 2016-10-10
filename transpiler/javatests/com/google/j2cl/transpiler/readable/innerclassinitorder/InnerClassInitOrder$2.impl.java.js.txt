@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$2$impl');
 
 
-let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+let OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
-let InnerClassInitOrder$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
+let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 
 
-class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
+class $2 extends OuterIsNotSuper {
   /**
    * Defines instance fields.
    * @public
@@ -29,15 +29,15 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {InnerClassInitOrder$Outer} $super_outer_this
+   * @param {Outer} $super_outer_this
    * @param {InnerClassInitOrder} $outer_this
-   * @return {!InnerClassInitOrder$2}
+   * @return {!$2}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
       $super_outer_this, $outer_this) {
-    InnerClassInitOrder$2.$clinit();
-    let $instance = new InnerClassInitOrder$2();
+    $2.$clinit();
+    let $instance = new $2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$2__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             $super_outer_this, $outer_this);
@@ -46,7 +46,7 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {InnerClassInitOrder$Outer} $super_outer_this
+   * @param {Outer} $super_outer_this
    * @param {InnerClassInitOrder} $outer_this
    * @return {void}
    * @public
@@ -67,7 +67,7 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$2;
+    return instance instanceof $2;
   }
 
   /**
@@ -77,7 +77,7 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$2);
+    return $Util.$canCastClass(classConstructor, $2);
   }
 
   /**
@@ -87,9 +87,9 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
   static $clinit() {
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
-    InnerClassInitOrder$Outer = goog.module.get(
+    Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-    InnerClassInitOrder$Outer$OuterIsNotSuper.$clinit();
+    OuterIsNotSuper.$clinit();
   }
 
   /**
@@ -101,7 +101,7 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$2,
+    $2,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$2'));
 
@@ -110,5 +110,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$2;
+exports = $2;
 //# sourceMappingURL=InnerClassInitOrder$2.js.map

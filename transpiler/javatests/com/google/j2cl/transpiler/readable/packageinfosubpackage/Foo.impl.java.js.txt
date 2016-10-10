@@ -11,7 +11,7 @@ goog.module('woo.Foo$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Foo$NativeBar = goog.forwardDeclare('woo.Foo.NativeBar$$Proxy');
+let NativeBar = goog.forwardDeclare('woo.Foo.NativeBar$$Proxy');
 
 
 class Foo extends java_lang_Object {
@@ -21,7 +21,7 @@ class Foo extends java_lang_Object {
    */
   constructor() {
     super();
-    /** @public {Foo$NativeBar} */
+    /** @public {NativeBar} */
     this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ =
         null;
   }
@@ -74,7 +74,7 @@ class Foo extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Foo$NativeBar = goog.module.get('woo.Foo.NativeBar$$Proxy');
+    NativeBar = goog.module.get('woo.Foo.NativeBar$$Proxy');
     java_lang_Object.$clinit();
   }
 
@@ -84,7 +84,7 @@ class Foo extends java_lang_Object {
    */
   $init__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo() {
     this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ =
-        new Foo$NativeBar();
+        new NativeBar();
   }
 };
 

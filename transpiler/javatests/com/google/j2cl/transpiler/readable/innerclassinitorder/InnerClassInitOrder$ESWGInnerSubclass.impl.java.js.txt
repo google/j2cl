@@ -8,19 +8,18 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
 
 
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
+let ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
+let ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
- * @extends {InnerClassInitOrder$ESWGOuter$ESWGInner<?string>}
+ * @extends {ESWGInner<?string>}
  */
-class InnerClassInitOrder$ESWGInnerSubclass extends
-    InnerClassInitOrder$ESWGOuter$ESWGInner {
+class ESWGInnerSubclass extends ESWGInner {
   /**
    * Defines instance fields.
    * @public
@@ -31,14 +30,14 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {InnerClassInitOrder$ESWGOuter<?string>} outer
-   * @return {!InnerClassInitOrder$ESWGInnerSubclass}
+   * @param {ESWGOuter<?string>} outer
+   * @return {!ESWGInnerSubclass}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
       outer) {
-    InnerClassInitOrder$ESWGInnerSubclass.$clinit();
-    let $instance = new InnerClassInitOrder$ESWGInnerSubclass();
+    ESWGInnerSubclass.$clinit();
+    let $instance = new ESWGInnerSubclass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGInnerSubclass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
             outer);
@@ -47,7 +46,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {InnerClassInitOrder$ESWGOuter<?string>} outer
+   * @param {ESWGOuter<?string>} outer
    * @return {void}
    * @public
    */
@@ -61,14 +60,14 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
   /**
    * A particular Java constructor as a factory method.
    * @param {number} value
-   * @param {InnerClassInitOrder$ESWGOuter<?string>} outer
-   * @return {!InnerClassInitOrder$ESWGInnerSubclass}
+   * @param {ESWGOuter<?string>} outer
+   * @return {!ESWGInnerSubclass}
    * @public
    */
   static $create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
       value, outer) {
-    InnerClassInitOrder$ESWGInnerSubclass.$clinit();
-    let $instance = new InnerClassInitOrder$ESWGInnerSubclass();
+    ESWGInnerSubclass.$clinit();
+    let $instance = new ESWGInnerSubclass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGInnerSubclass__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
             value, outer);
@@ -78,7 +77,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
   /**
    * Initializes instance fields for a particular Java constructor.
    * @param {number} value
-   * @param {InnerClassInitOrder$ESWGOuter<?string>} outer
+   * @param {ESWGOuter<?string>} outer
    * @return {void}
    * @public
    */
@@ -96,7 +95,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$ESWGInnerSubclass;
+    return instance instanceof ESWGInnerSubclass;
   }
 
   /**
@@ -106,8 +105,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, InnerClassInitOrder$ESWGInnerSubclass);
+    return $Util.$canCastClass(classConstructor, ESWGInnerSubclass);
   }
 
   /**
@@ -115,11 +113,11 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$ESWGOuter = goog.module.get(
+    ESWGOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    InnerClassInitOrder$ESWGOuter$ESWGInner.$clinit();
+    ESWGInner.$clinit();
   }
 
   /**
@@ -131,7 +129,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$ESWGInnerSubclass,
+    ESWGInnerSubclass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass'));
 
@@ -140,5 +138,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$ESWGInnerSubclass;
+exports = ESWGInnerSubclass;
 //# sourceMappingURL=InnerClassInitOrder$ESWGInnerSubclass.js.map

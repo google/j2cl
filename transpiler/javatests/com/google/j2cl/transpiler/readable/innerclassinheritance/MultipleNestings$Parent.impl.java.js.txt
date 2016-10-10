@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
 
 
-class MultipleNestings$Parent extends java_lang_Object {
+class Parent extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,13 +29,13 @@ class MultipleNestings$Parent extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {MultipleNestings} $outer_this
-   * @return {!MultipleNestings$Parent}
+   * @return {!Parent}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
       $outer_this) {
-    MultipleNestings$Parent.$clinit();
-    let $instance = new MultipleNestings$Parent();
+    Parent.$clinit();
+    let $instance = new Parent();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
             $outer_this);
@@ -69,7 +69,7 @@ class MultipleNestings$Parent extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleNestings$Parent;
+    return instance instanceof Parent;
   }
 
   /**
@@ -79,7 +79,7 @@ class MultipleNestings$Parent extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, MultipleNestings$Parent);
+    return $Util.$canCastClass(classConstructor, Parent);
   }
 
   /**
@@ -101,7 +101,7 @@ class MultipleNestings$Parent extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    MultipleNestings$Parent,
+    Parent,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$Parent'));
 
@@ -110,5 +110,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = MultipleNestings$Parent;
+exports = Parent;
 //# sourceMappingURL=MultipleNestings$Parent.js.map

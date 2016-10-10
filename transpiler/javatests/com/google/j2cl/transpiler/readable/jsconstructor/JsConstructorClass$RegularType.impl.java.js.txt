@@ -12,7 +12,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
-class JsConstructorClass$RegularType extends java_lang_Object {
+class RegularType extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -24,12 +24,12 @@ class JsConstructorClass$RegularType extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {*} b
-   * @return {!JsConstructorClass$RegularType}
+   * @return {!RegularType}
    * @public
    */
   static $create__java_lang_Object(b) {
-    JsConstructorClass$RegularType.$clinit();
-    let $instance = new JsConstructorClass$RegularType();
+    RegularType.$clinit();
+    let $instance = new RegularType();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$RegularType__java_lang_Object(
             b);
@@ -55,7 +55,7 @@ class JsConstructorClass$RegularType extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$RegularType;
+    return instance instanceof RegularType;
   }
 
   /**
@@ -65,8 +65,7 @@ class JsConstructorClass$RegularType extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, JsConstructorClass$RegularType);
+    return $Util.$canCastClass(classConstructor, RegularType);
   }
 
   /**
@@ -86,7 +85,7 @@ class JsConstructorClass$RegularType extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$RegularType,
+    RegularType,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$RegularType'));
 
@@ -95,5 +94,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$RegularType;
+exports = RegularType;
 //# sourceMappingURL=JsConstructorClass$RegularType.js.map

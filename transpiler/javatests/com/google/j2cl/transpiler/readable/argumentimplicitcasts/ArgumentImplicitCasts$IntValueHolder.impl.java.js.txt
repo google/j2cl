@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class ArgumentImplicitCasts$IntValueHolder extends java_lang_Object {
+class IntValueHolder extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +29,12 @@ class ArgumentImplicitCasts$IntValueHolder extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} value
-   * @return {!ArgumentImplicitCasts$IntValueHolder}
+   * @return {!IntValueHolder}
    * @public
    */
   static $create__int(value) {
-    ArgumentImplicitCasts$IntValueHolder.$clinit();
-    let $instance = new ArgumentImplicitCasts$IntValueHolder();
+    IntValueHolder.$clinit();
+    let $instance = new IntValueHolder();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder__int(
             value);
@@ -62,7 +62,7 @@ class ArgumentImplicitCasts$IntValueHolder extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof ArgumentImplicitCasts$IntValueHolder;
+    return instance instanceof IntValueHolder;
   }
 
   /**
@@ -72,8 +72,7 @@ class ArgumentImplicitCasts$IntValueHolder extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, ArgumentImplicitCasts$IntValueHolder);
+    return $Util.$canCastClass(classConstructor, IntValueHolder);
   }
 
   /**
@@ -94,7 +93,7 @@ class ArgumentImplicitCasts$IntValueHolder extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    ArgumentImplicitCasts$IntValueHolder,
+    IntValueHolder,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder'));
 
@@ -103,5 +102,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = ArgumentImplicitCasts$IntValueHolder;
+exports = IntValueHolder;
 //# sourceMappingURL=ArgumentImplicitCasts$IntValueHolder.js.map

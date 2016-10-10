@@ -11,23 +11,23 @@ goog.module('com.google.test.Inner$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
+let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main$Outer$Inner extends java_lang_Object {
+class Inner extends java_lang_Object {
   /**
    * Real constructor.
-   * @param {Main$Outer} $outer_this
+   * @param {Outer} $outer_this
    * @public
    */
   constructor($outer_this) {
-    Main$Outer$Inner.$clinit();
+    Inner.$clinit();
     super();
     /** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner_ =
         0;
-    /** @public {Main$Outer} */
+    /** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner =
         null;
     this.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer(
@@ -36,7 +36,7 @@ class Main$Outer$Inner extends java_lang_Object {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {Main$Outer} $outer_this
+   * @param {Outer} $outer_this
    * @return {void}
    * @public
    */
@@ -68,7 +68,7 @@ class Main$Outer$Inner extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$Outer$Inner;
+    return instance instanceof Inner;
   }
 
   /**
@@ -78,7 +78,7 @@ class Main$Outer$Inner extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$Outer$Inner);
+    return $Util.$canCastClass(classConstructor, Inner);
   }
 
   /**
@@ -86,7 +86,7 @@ class Main$Outer$Inner extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Main$Outer = goog.module.get(
+    Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
@@ -100,7 +100,7 @@ class Main$Outer$Inner extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$Outer$Inner,
+    Inner,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$Inner'));
 
@@ -109,5 +109,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Main$Outer$Inner;
+exports = Inner;
 //# sourceMappingURL=Main$Outer$Inner.js.map

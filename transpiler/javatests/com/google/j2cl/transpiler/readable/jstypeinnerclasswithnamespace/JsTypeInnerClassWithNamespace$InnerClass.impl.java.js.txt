@@ -12,7 +12,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
-class JsTypeInnerClassWithNamespace$InnerClass extends java_lang_Object {
+class InnerClass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -23,12 +23,12 @@ class JsTypeInnerClassWithNamespace$InnerClass extends java_lang_Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!JsTypeInnerClassWithNamespace$InnerClass}
+   * @return {!InnerClass}
    * @public
    */
   static $create__() {
-    JsTypeInnerClassWithNamespace$InnerClass.$clinit();
-    let $instance = new JsTypeInnerClassWithNamespace$InnerClass();
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass__();
     return $instance;
@@ -51,7 +51,7 @@ class JsTypeInnerClassWithNamespace$InnerClass extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsTypeInnerClassWithNamespace$InnerClass;
+    return instance instanceof InnerClass;
   }
 
   /**
@@ -61,8 +61,7 @@ class JsTypeInnerClassWithNamespace$InnerClass extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, JsTypeInnerClassWithNamespace$InnerClass);
+    return $Util.$canCastClass(classConstructor, InnerClass);
   }
 
   /**
@@ -82,7 +81,7 @@ class JsTypeInnerClassWithNamespace$InnerClass extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    JsTypeInnerClassWithNamespace$InnerClass,
+    InnerClass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass'));
 
@@ -91,5 +90,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsTypeInnerClassWithNamespace$InnerClass;
+exports = InnerClass;
 //# sourceMappingURL=JsTypeInnerClassWithNamespace$InnerClass.js.map

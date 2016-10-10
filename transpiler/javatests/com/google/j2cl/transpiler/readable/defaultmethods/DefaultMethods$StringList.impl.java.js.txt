@@ -8,18 +8,18 @@
 goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.StringList$impl');
 
 
-let DefaultMethods$List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$impl');
+let List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let DefaultMethods$List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
+let List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
- * @implements {DefaultMethods$List<?string>}
+ * @implements {List<?string>}
  */
-class DefaultMethods$StringList extends java_lang_Object {
+class StringList extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -30,12 +30,12 @@ class DefaultMethods$StringList extends java_lang_Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!DefaultMethods$StringList}
+   * @return {!StringList}
    * @public
    */
   static $create__() {
-    DefaultMethods$StringList.$clinit();
-    let $instance = new DefaultMethods$StringList();
+    StringList.$clinit();
+    let $instance = new StringList();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$StringList__();
     return $instance;
@@ -59,7 +59,7 @@ class DefaultMethods$StringList extends java_lang_Object {
    * @public
    */
   m_add__java_lang_Object(arg0) {
-    DefaultMethods$List$$Overlay
+    List$$Overlay
         .m_add__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$List__java_lang_Object(
             this, arg0);
   }
@@ -71,7 +71,7 @@ class DefaultMethods$StringList extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof DefaultMethods$StringList;
+    return instance instanceof StringList;
   }
 
   /**
@@ -81,7 +81,7 @@ class DefaultMethods$StringList extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, DefaultMethods$StringList);
+    return $Util.$canCastClass(classConstructor, StringList);
   }
 
   /**
@@ -89,7 +89,7 @@ class DefaultMethods$StringList extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    DefaultMethods$List$$Overlay = goog.module.get(
+    List$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     java_lang_Object.$clinit();
@@ -104,16 +104,16 @@ class DefaultMethods$StringList extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    DefaultMethods$StringList,
+    StringList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$StringList'));
 
 
-DefaultMethods$List.$markImplementor(DefaultMethods$StringList);
+List.$markImplementor(StringList);
 
 
 /**
  * Export class.
  */
-exports = DefaultMethods$StringList;
+exports = StringList;
 //# sourceMappingURL=DefaultMethods$StringList.js.map

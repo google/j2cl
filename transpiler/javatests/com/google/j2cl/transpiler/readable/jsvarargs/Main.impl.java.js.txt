@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$AFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
+let AFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -227,7 +227,7 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunction__() {
-    let a = Main$AFunction.$create__();
+    let a = AFunction.$create__();
     let o1 = java_lang_Object.$create__();
     let o2 = java_lang_Object.$create__();
     a(0, o1, o2);
@@ -272,7 +272,7 @@ class Main extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Main$AFunction = goog.module.get(
+    AFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     List = goog.module.get('java.util.List$impl');

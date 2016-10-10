@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$1$impl');
 
 
-let AnonymousInnerClass$InnerClass = goog.require('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.InnerClass$impl');
+let InnerClass = goog.require('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.InnerClass$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
 
 
-class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
+class $1 extends InnerClass {
   /**
    * Defines instance fields.
    * @public
@@ -30,13 +30,13 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
    * A particular Java constructor as a factory method.
    * @param {AnonymousInnerClass} $super_outer_this
    * @param {AnonymousInnerClass} $outer_this
-   * @return {!AnonymousInnerClass$1}
+   * @return {!$1}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
       $super_outer_this, $outer_this) {
-    AnonymousInnerClass$1.$clinit();
-    let $instance = new AnonymousInnerClass$1();
+    $1.$clinit();
+    let $instance = new $1();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$1__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
             $super_outer_this, $outer_this);
@@ -66,7 +66,7 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof AnonymousInnerClass$1;
+    return instance instanceof $1;
   }
 
   /**
@@ -76,7 +76,7 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AnonymousInnerClass$1);
+    return $Util.$canCastClass(classConstructor, $1);
   }
 
   /**
@@ -86,7 +86,7 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
   static $clinit() {
     AnonymousInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
-    AnonymousInnerClass$InnerClass.$clinit();
+    InnerClass.$clinit();
   }
 
   /**
@@ -98,7 +98,7 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
 };
 
 $Util.$setClassMetadata(
-    AnonymousInnerClass$1,
+    $1,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$1'));
 
@@ -107,5 +107,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = AnonymousInnerClass$1;
+exports = $1;
 //# sourceMappingURL=AnonymousInnerClass$1.js.map

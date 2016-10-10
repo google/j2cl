@@ -11,28 +11,28 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1$impl');
-let InnerClassInitOrder$1AddNumber = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1AddNumber$impl');
-let InnerClassInitOrder$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$2$impl');
-let InnerClassInitOrder$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$3$impl');
-let InnerClassInitOrder$4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$4$impl');
-let InnerClassInitOrder$ESInnerSubclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass$impl');
-let InnerClassInitOrder$ESOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
-let InnerClassInitOrder$ESOuter$ESInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
-let InnerClassInitOrder$ESWGInnerSubclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
-let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
-let InnerClassInitOrder$InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass$impl');
-let InnerClassInitOrder$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
-let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
-let InnerClassInitOrder$Outer$TestQualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
-let InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
-let InnerClassInitOrder$OuterRefFromSuperCtorCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall$impl');
-let InnerClassInitOrder$OuterRefFromThisCtorCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
-let InnerClassInitOrder$P1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1$impl');
-let InnerClassInitOrder$P1$P2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
-let InnerClassInitOrder$P1$P2$P3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1$impl');
+let $1AddNumber = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1AddNumber$impl');
+let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$2$impl');
+let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$3$impl');
+let $4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$4$impl');
+let ESInnerSubclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass$impl');
+let ESOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
+let ESInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
+let ESWGInnerSubclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
+let ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
+let ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
+let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass$impl');
+let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
+let OuterIsNotSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+let OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
+let TestQualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
+let TestUnqualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
+let OuterRefFromSuperCtorCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall$impl');
+let OuterRefFromThisCtorCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
+let P1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1$impl');
+let P2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
+let P3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
@@ -49,10 +49,10 @@ class InnerClassInitOrder extends java_lang_Object {
     /** @public {number} */
     this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder =
         0;
-    /** @public {InnerClassInitOrder$Outer} */
+    /** @public {Outer} */
     this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
         null;
-    /** @public {InnerClassInitOrder$Outer$OuterIsSuper} */
+    /** @public {OuterIsSuper} */
     this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
         null;
   }
@@ -85,7 +85,7 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testOuterThisFromSuperCall__() {
-    InnerClassInitOrder$OuterRefFromSuperCtorCall
+    OuterRefFromSuperCtorCall
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
     $Asserts.$enabled() &&
@@ -99,7 +99,7 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testOuterThisFromThisCall__() {
-    InnerClassInitOrder$OuterRefFromThisCtorCall
+    OuterRefFromThisCtorCall
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
     $Asserts.$enabled() &&
@@ -113,32 +113,32 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testExtendsNested__() {
-    let o = InnerClassInitOrder$ESOuter.$create__();
+    let o = ESOuter.$create__();
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
-            InnerClassInitOrder$ESOuter$ESInner
+            ESInner
                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
                     o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            InnerClassInitOrder$ESOuter$ESInner
+            ESInner
                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
                     2, o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
-            InnerClassInitOrder$ESInnerSubclass
+            ESInnerSubclass
                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
                     o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            InnerClassInitOrder$ESInnerSubclass
+            ESInnerSubclass
                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
                     2, o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
@@ -149,35 +149,34 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testExtendsNestedWithGenerics__() {
-    let o = /**@type {!InnerClassInitOrder$ESWGOuter<?string>} */ (
-        InnerClassInitOrder$ESWGOuter.$create__());
+    let o = /**@type {!ESWGOuter<?string>} */ (ESWGOuter.$create__());
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
-            /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */
-            (InnerClassInitOrder$ESWGOuter$ESWGInner
+            /**@type {!ESWGInner<?string>} */
+            (ESWGInner
                  .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                      o))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */
-            (InnerClassInitOrder$ESWGOuter$ESWGInner
+            /**@type {!ESWGInner<?string>} */
+            (ESWGInner
                  .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                      2, o))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
-            InnerClassInitOrder$ESWGInnerSubclass
+            ESWGInnerSubclass
                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                     o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            InnerClassInitOrder$ESWGInnerSubclass
+            ESWGInnerSubclass
                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                     2, o)
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
@@ -188,8 +187,7 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testInnerClassCtors__() {
-    let p1 = /**@type {!InnerClassInitOrder$P1<*>} */ (
-        InnerClassInitOrder$P1.$create__());
+    let p1 = /**@type {!P1<*>} */ (P1.$create__());
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
@@ -197,13 +195,11 @@ class InnerClassInitOrder extends java_lang_Object {
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            /**@type {!InnerClassInitOrder$P1<*>} */ (
-                InnerClassInitOrder$P1.$create__int(2))
+            /**@type {!P1<*>} */ (P1.$create__int(2))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
-    let p2 = /**@type {!InnerClassInitOrder$P1$P2<*>} */ (
-        InnerClassInitOrder$P1$P2
-            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1(
-                p1));
+    let p2 = /**@type {!P2<*>} */ (
+        P2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1(
+            p1));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
@@ -211,26 +207,23 @@ class InnerClassInitOrder extends java_lang_Object {
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            /**@type {!InnerClassInitOrder$P1$P2<*>} */
-            (InnerClassInitOrder$P1$P2
-                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1(
-                     2, p1))
+            /**@type {!P2<*>} */
+            (P2.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1(
+                 2, p1))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
-            /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */
-            (InnerClassInitOrder$P1$P2$P3
-                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
-                     p2))
+            /**@type {!P3<*>} */
+            (P3.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
+                 p2))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             2 ==
-            /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */
-            (InnerClassInitOrder$P1$P2$P3
-                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
-                     2, p2))
+            /**@type {!P3<*>} */
+            (P3.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
+                 2, p2))
                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
   }
 
@@ -239,7 +232,7 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testInnerClassInitialization__() {
-    InnerClassInitOrder$InnerClass
+    InnerClass
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
     $Asserts.$enabled() &&
@@ -253,13 +246,12 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testInnerClassLoop__() {
-    let results = /**@type {!Array<InnerClassInitOrder$1AddNumber>} */ (
-        $Arrays.$create([10], InnerClassInitOrder$1AddNumber));
+    let results =
+        /**@type {!Array<$1AddNumber>} */ ($Arrays.$create([10], $1AddNumber));
     for (let i = 0; i < 10; i++) {
       let ap =
-          InnerClassInitOrder$1
-              .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-                  i, this);
+          $1.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+              i, this);
       $Arrays.$set(results, i, ap);
     }
     for (let $array = results, $index = 0; $index < $array.length; $index++) {
@@ -278,7 +270,7 @@ class InnerClassInitOrder extends java_lang_Object {
    */
   m_testOuterIsNotSuper__() {
     let x =
-        InnerClassInitOrder$Outer$OuterIsNotSuper
+        OuterIsNotSuper
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
@@ -289,11 +281,9 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testOuterIsNotSuperAnon__() {
-    let x =
-        InnerClassInitOrder$2
-            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-                this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
-                this);
+    let x = $2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+        this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
+        this);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
@@ -302,7 +292,7 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testQualifiedSuperCall__() {
-    let x = InnerClassInitOrder$Outer$TestQualifiedSuperCall.$create__();
+    let x = TestQualifiedSuperCall.$create__();
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
@@ -312,9 +302,8 @@ class InnerClassInitOrder extends java_lang_Object {
    */
   m_testQualifiedSuperCallAnon__() {
     let x =
-        InnerClassInitOrder$3
-            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-                this);
+        $3.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+            this);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
@@ -352,7 +341,7 @@ class InnerClassInitOrder extends java_lang_Object {
    */
   m_testUnqualifiedSuperCall__() {
     let x =
-        InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
+        TestUnqualifiedSuperCall
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
@@ -363,11 +352,9 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   m_testUnqualifiedSuperCallAnon__() {
-    let x =
-        InnerClassInitOrder$4
-            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-                this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
-                this);
+    let x = $4.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+        this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
+        this);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
@@ -421,49 +408,49 @@ class InnerClassInitOrder extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$1 = goog.module.get(
+    $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1$impl');
-    InnerClassInitOrder$1AddNumber = goog.module.get(
+    $1AddNumber = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1AddNumber$impl');
-    InnerClassInitOrder$2 = goog.module.get(
+    $2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$2$impl');
-    InnerClassInitOrder$3 = goog.module.get(
+    $3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$3$impl');
-    InnerClassInitOrder$4 = goog.module.get(
+    $4 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$4$impl');
-    InnerClassInitOrder$ESInnerSubclass = goog.module.get(
+    ESInnerSubclass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass$impl');
-    InnerClassInitOrder$ESOuter = goog.module.get(
+    ESOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
-    InnerClassInitOrder$ESOuter$ESInner = goog.module.get(
+    ESInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
-    InnerClassInitOrder$ESWGInnerSubclass = goog.module.get(
+    ESWGInnerSubclass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
-    InnerClassInitOrder$ESWGOuter = goog.module.get(
+    ESWGOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
-    InnerClassInitOrder$ESWGOuter$ESWGInner = goog.module.get(
+    ESWGInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
-    InnerClassInitOrder$InnerClass = goog.module.get(
+    InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass$impl');
-    InnerClassInitOrder$Outer = goog.module.get(
+    Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-    InnerClassInitOrder$Outer$OuterIsNotSuper = goog.module.get(
+    OuterIsNotSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
-    InnerClassInitOrder$Outer$OuterIsSuper = goog.module.get(
+    OuterIsSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall = goog.module.get(
+    TestQualifiedSuperCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
-    InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.module.get(
+    TestUnqualifiedSuperCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
-    InnerClassInitOrder$OuterRefFromSuperCtorCall = goog.module.get(
+    OuterRefFromSuperCtorCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall$impl');
-    InnerClassInitOrder$OuterRefFromThisCtorCall = goog.module.get(
+    OuterRefFromThisCtorCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
-    InnerClassInitOrder$P1 = goog.module.get(
+    P1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1$impl');
-    InnerClassInitOrder$P1$P2 = goog.module.get(
+    P2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
-    InnerClassInitOrder$P1$P2$P3 = goog.module.get(
+    P3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
@@ -480,9 +467,9 @@ class InnerClassInitOrder extends java_lang_Object {
     this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder =
         0;
     this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
-        InnerClassInitOrder$Outer.$create__int(1);
+        Outer.$create__int(1);
     this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
-        InnerClassInitOrder$Outer$OuterIsSuper
+        OuterIsSuper
             .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
                 2,
                 this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);

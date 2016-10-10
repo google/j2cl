@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.E$impl');
 
 
-let JsConstructorClass$C = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.C$impl');
+let C = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.C$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class JsConstructorClass$E extends JsConstructorClass$C {
+class E extends C {
   /**
    * Real constructor.
    * @public
@@ -29,12 +29,12 @@ class JsConstructorClass$E extends JsConstructorClass$C {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!JsConstructorClass$E}
+   * @return {!E}
    * @public
    */
   static $create__() {
-    JsConstructorClass$E.$clinit();
-    return new JsConstructorClass$E();
+    E.$clinit();
+    return new E();
   }
 
   /**
@@ -55,7 +55,7 @@ class JsConstructorClass$E extends JsConstructorClass$C {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$E;
+    return instance instanceof E;
   }
 
   /**
@@ -65,7 +65,7 @@ class JsConstructorClass$E extends JsConstructorClass$C {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$E);
+    return $Util.$canCastClass(classConstructor, E);
   }
 
   /**
@@ -74,7 +74,7 @@ class JsConstructorClass$E extends JsConstructorClass$C {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    JsConstructorClass$C.$clinit();
+    C.$clinit();
   }
 
   /**
@@ -88,7 +88,7 @@ class JsConstructorClass$E extends JsConstructorClass$C {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$E,
+    E,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$E'));
 
@@ -97,5 +97,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$E;
+exports = E;
 //# sourceMappingURL=JsConstructorClass$E.js.map

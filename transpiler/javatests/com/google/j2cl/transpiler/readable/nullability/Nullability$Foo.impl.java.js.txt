@@ -17,7 +17,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 /**
  * @template C_Foo_T
  */
-class Nullability$Foo extends java_lang_Object {
+class Foo extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +29,12 @@ class Nullability$Foo extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_Foo_T
-   * @return {!Nullability$Foo<C_Foo_T>}
+   * @return {!Foo<C_Foo_T>}
    * @public
    */
   static $create__() {
-    Nullability$Foo.$clinit();
-    let $instance = new Nullability$Foo();
+    Foo.$clinit();
+    let $instance = new Foo();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability$Foo__();
     return $instance;
@@ -82,7 +82,7 @@ class Nullability$Foo extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Nullability$Foo;
+    return instance instanceof Foo;
   }
 
   /**
@@ -92,7 +92,7 @@ class Nullability$Foo extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Nullability$Foo);
+    return $Util.$canCastClass(classConstructor, Foo);
   }
 
   /**
@@ -112,7 +112,7 @@ class Nullability$Foo extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Nullability$Foo,
+    Foo,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nullability.Nullability$Foo'));
 
@@ -121,5 +121,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Nullability$Foo;
+exports = Foo;
 //# sourceMappingURL=Nullability$Foo.js.map

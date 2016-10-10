@@ -11,13 +11,13 @@ goog.module('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGeneri
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let NestedGenericClass$1E = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1E$impl');
-let NestedGenericClass$1F = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1F$impl');
-let NestedGenericClass$1G = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1G$impl');
-let NestedGenericClass$A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A$impl');
-let NestedGenericClass$A$B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.B$impl');
-let NestedGenericClass$C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
-let NestedGenericClass$C$D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C.D$impl');
+let $1E = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1E$impl');
+let $1F = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1F$impl');
+let $1G = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1G$impl');
+let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A$impl');
+let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.B$impl');
+let C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
+let D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C.D$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
@@ -66,14 +66,12 @@ class NestedGenericClass extends java_lang_Object {
    * @public
    */
   m_fun__java_lang_Object(t) {
-    /**@type {!NestedGenericClass$1E<(Number|?number)>} */
-    (NestedGenericClass$1E
-         .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-             this));
-    /**@type {!NestedGenericClass$1F<C_T>} */
-    (NestedGenericClass$1F
-         .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-             this));
+    /**@type {!$1E<(Number|?number)>} */
+    ($1E.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+        this));
+    /**@type {!$1F<C_T>} */
+    ($1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+        this));
   }
 
   /**
@@ -82,10 +80,9 @@ class NestedGenericClass extends java_lang_Object {
    * @public
    */
   m_bar__() {
-    /**@type {!NestedGenericClass$1G<Error>} */
-    (NestedGenericClass$1G
-         .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-             this))
+    /**@type {!$1G<Error>} */
+    ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+         this))
         .m_bar__();
   }
 
@@ -96,25 +93,20 @@ class NestedGenericClass extends java_lang_Object {
   m_test__() {
     let n = /**@type {!NestedGenericClass<(Number|?number)>} */ (
         NestedGenericClass.$create__());
-    let a = /**@type {!NestedGenericClass$A<Error>} */ (
-        NestedGenericClass$A
-            .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-                n));
-    let b = /**@type {!NestedGenericClass$A$B<Exception>} */ (
-        NestedGenericClass$A$B
-            .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A(
-                a));
-    /**@type {!NestedGenericClass$C<(Number|?number)>} */
-    (NestedGenericClass$C
-         .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-             n));
-    /**@type {!NestedGenericClass$C$D<(Number|?number)>} */
-    (NestedGenericClass$C$D
-         .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C(
-             /**@type {!NestedGenericClass$C<(Number|?number)>} */
-             (NestedGenericClass$C
-                  .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-                      n))));
+    let a = /**@type {!A<Error>} */ (
+        A.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+            n));
+    let b = /**@type {!B<Exception>} */ (
+        B.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A(
+            a));
+    /**@type {!C<(Number|?number)>} */
+    (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+        n));
+    /**@type {!D<(Number|?number)>} */
+    (D.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C(
+        /**@type {!C<(Number|?number)>} */
+        (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+            n))));
   }
 
   /**
@@ -142,19 +134,19 @@ class NestedGenericClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    NestedGenericClass$1E = goog.module.get(
+    $1E = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1E$impl');
-    NestedGenericClass$1F = goog.module.get(
+    $1F = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1F$impl');
-    NestedGenericClass$1G = goog.module.get(
+    $1G = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1G$impl');
-    NestedGenericClass$A = goog.module.get(
+    A = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A$impl');
-    NestedGenericClass$A$B = goog.module.get(
+    B = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.B$impl');
-    NestedGenericClass$C = goog.module.get(
+    C = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
-    NestedGenericClass$C$D = goog.module.get(
+    D = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C.D$impl');
     Error = goog.module.get('java.lang.Error$impl');
     Exception = goog.module.get('java.lang.Exception$impl');

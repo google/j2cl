@@ -8,8 +8,8 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractListCollection$impl');
 
 
-let MultipleAbstractParents$Collection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection$impl');
-let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
+let Collection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection$impl');
+let List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -19,10 +19,10 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 /**
  * @abstract
  * @template C_AbstractListCollection_T
- * @implements {MultipleAbstractParents$List<C_AbstractListCollection_T>}
- * @implements {MultipleAbstractParents$Collection<C_AbstractListCollection_T>}
+ * @implements {List<C_AbstractListCollection_T>}
+ * @implements {Collection<C_AbstractListCollection_T>}
  */
-class MultipleAbstractParents$AbstractListCollection extends java_lang_Object {
+class AbstractListCollection extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -57,7 +57,7 @@ class MultipleAbstractParents$AbstractListCollection extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$AbstractListCollection;
+    return instance instanceof AbstractListCollection;
   }
 
   /**
@@ -67,8 +67,7 @@ class MultipleAbstractParents$AbstractListCollection extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$AbstractListCollection);
+    return $Util.$canCastClass(classConstructor, AbstractListCollection);
   }
 
   /**
@@ -89,19 +88,17 @@ class MultipleAbstractParents$AbstractListCollection extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$AbstractListCollection,
+    AbstractListCollection,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractListCollection'));
 
 
-MultipleAbstractParents$List.$markImplementor(
-    MultipleAbstractParents$AbstractListCollection);
-MultipleAbstractParents$Collection.$markImplementor(
-    MultipleAbstractParents$AbstractListCollection);
+List.$markImplementor(AbstractListCollection);
+Collection.$markImplementor(AbstractListCollection);
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$AbstractListCollection;
+exports = AbstractListCollection;
 //# sourceMappingURL=MultipleAbstractParents$AbstractListCollection.js.map

@@ -8,15 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
 
 
-let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+let OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
+let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
+let OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
 
 
-class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
-    InnerClassInitOrder$Outer$OuterIsNotSuper {
+class TestQualifiedSuperCall extends OuterIsNotSuper {
   /**
    * Defines instance fields.
    * @public
@@ -27,12 +26,12 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!InnerClassInitOrder$Outer$TestQualifiedSuperCall}
+   * @return {!TestQualifiedSuperCall}
    * @public
    */
   static $create__() {
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall.$clinit();
-    let $instance = new InnerClassInitOrder$Outer$TestQualifiedSuperCall();
+    TestQualifiedSuperCall.$clinit();
+    let $instance = new TestQualifiedSuperCall();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestQualifiedSuperCall__();
     return $instance;
@@ -45,9 +44,9 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
    */
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestQualifiedSuperCall__() {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
-        InnerClassInitOrder$Outer$OuterIsSuper
+        OuterIsSuper
             .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
-                2, InnerClassInitOrder$Outer.$create__int(1)));
+                2, Outer.$create__int(1)));
     this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestQualifiedSuperCall();
   }
 
@@ -58,7 +57,7 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$Outer$TestQualifiedSuperCall;
+    return instance instanceof TestQualifiedSuperCall;
   }
 
   /**
@@ -68,8 +67,7 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, InnerClassInitOrder$Outer$TestQualifiedSuperCall);
+    return $Util.$canCastClass(classConstructor, TestQualifiedSuperCall);
   }
 
   /**
@@ -77,11 +75,11 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$Outer = goog.module.get(
+    Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-    InnerClassInitOrder$Outer$OuterIsSuper = goog.module.get(
+    OuterIsSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
-    InnerClassInitOrder$Outer$OuterIsNotSuper.$clinit();
+    OuterIsNotSuper.$clinit();
   }
 
   /**
@@ -93,7 +91,7 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall,
+    TestQualifiedSuperCall,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall'));
 
@@ -102,5 +100,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$Outer$TestQualifiedSuperCall;
+exports = TestQualifiedSuperCall;
 //# sourceMappingURL=InnerClassInitOrder$Outer$TestQualifiedSuperCall.js.map

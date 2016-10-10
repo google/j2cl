@@ -11,13 +11,13 @@ goog.module('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGeneri
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let NestedGenericClass$C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
+let C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
 
 
 /**
  * @template C_T
  */
-class NestedGenericClass$C$D extends java_lang_Object {
+class D extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -27,7 +27,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
     /** @public {C_T} */
     this.f_d__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D =
         null;
-    /** @public {NestedGenericClass$C<C_T>} */
+    /** @public {C<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D =
         null;
   }
@@ -35,14 +35,14 @@ class NestedGenericClass$C$D extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_T
-   * @param {NestedGenericClass$C<C_T>} $outer_this
-   * @return {!NestedGenericClass$C$D<C_T>}
+   * @param {C<C_T>} $outer_this
+   * @return {!D<C_T>}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C(
       $outer_this) {
-    NestedGenericClass$C$D.$clinit();
-    let $instance = new NestedGenericClass$C$D();
+    D.$clinit();
+    let $instance = new D();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C(
             $outer_this);
@@ -51,7 +51,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {NestedGenericClass$C<C_T>} $outer_this
+   * @param {C<C_T>} $outer_this
    * @return {void}
    * @public
    */
@@ -70,7 +70,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof NestedGenericClass$C$D;
+    return instance instanceof D;
   }
 
   /**
@@ -80,7 +80,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, NestedGenericClass$C$D);
+    return $Util.$canCastClass(classConstructor, D);
   }
 
   /**
@@ -88,7 +88,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    NestedGenericClass$C = goog.module.get(
+    C = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C$impl');
     java_lang_Object.$clinit();
   }
@@ -102,7 +102,7 @@ class NestedGenericClass$C$D extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    NestedGenericClass$C$D,
+    D,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D'));
 
@@ -111,5 +111,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = NestedGenericClass$C$D;
+exports = D;
 //# sourceMappingURL=NestedGenericClass$C$D.js.map

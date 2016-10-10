@@ -8,16 +8,16 @@
 goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
 
 
-let AbstractMethodOverrideDefault$I = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+let I = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @abstract
- * @implements {AbstractMethodOverrideDefault$I}
+ * @implements {I}
  */
-class AbstractMethodOverrideDefault$A extends java_lang_Object {
+class A extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -59,7 +59,7 @@ class AbstractMethodOverrideDefault$A extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof AbstractMethodOverrideDefault$A;
+    return instance instanceof A;
   }
 
   /**
@@ -69,8 +69,7 @@ class AbstractMethodOverrideDefault$A extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, AbstractMethodOverrideDefault$A);
+    return $Util.$canCastClass(classConstructor, A);
   }
 
   /**
@@ -90,17 +89,16 @@ class AbstractMethodOverrideDefault$A extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    AbstractMethodOverrideDefault$A,
+    A,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$A'));
 
 
-AbstractMethodOverrideDefault$I.$markImplementor(
-    AbstractMethodOverrideDefault$A);
+I.$markImplementor(A);
 
 
 /**
  * Export class.
  */
-exports = AbstractMethodOverrideDefault$A;
+exports = A;
 //# sourceMappingURL=AbstractMethodOverrideDefault$A.js.map

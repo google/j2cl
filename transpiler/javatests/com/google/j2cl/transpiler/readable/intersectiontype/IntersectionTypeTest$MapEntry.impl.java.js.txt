@@ -13,14 +13,14 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
 let IntersectionTypeTest = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$impl');
-let IntersectionTypeTest$MapEntry$07Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.$07Getable$impl');
+let $07Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.$07Getable$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
  * @template C_U
  */
-class IntersectionTypeTest$MapEntry extends java_lang_Object {
+class MapEntry extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -36,13 +36,13 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
    * A particular Java constructor as a factory method.
    * @template C_U
    * @param {IntersectionTypeTest<C_U>} $outer_this
-   * @return {!IntersectionTypeTest$MapEntry<C_U>}
+   * @return {!MapEntry<C_U>}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
       $outer_this) {
-    IntersectionTypeTest$MapEntry.$clinit();
-    let $instance = new IntersectionTypeTest$MapEntry();
+    MapEntry.$clinit();
+    let $instance = new MapEntry();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$MapEntry__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
             $outer_this);
@@ -70,8 +70,7 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
    * @public
    */
   m_method__java_lang_Object(o) {
-    return /**@type {IntersectionTypeTest$MapEntry$07Getable<*>} */ (
-        $Casts.to(o, IntersectionTypeTest$MapEntry$07Getable));
+    return /**@type {$07Getable<*>} */ ($Casts.to(o, $07Getable));
   }
 
   /**
@@ -81,7 +80,7 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof IntersectionTypeTest$MapEntry;
+    return instance instanceof MapEntry;
   }
 
   /**
@@ -91,7 +90,7 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, IntersectionTypeTest$MapEntry);
+    return $Util.$canCastClass(classConstructor, MapEntry);
   }
 
   /**
@@ -103,7 +102,7 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
     IntersectionTypeTest = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$impl');
-    IntersectionTypeTest$MapEntry$07Getable = goog.module.get(
+    $07Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.$07Getable$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
@@ -118,7 +117,7 @@ class IntersectionTypeTest$MapEntry extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    IntersectionTypeTest$MapEntry,
+    MapEntry,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$MapEntry'));
 
@@ -127,5 +126,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = IntersectionTypeTest$MapEntry;
+exports = MapEntry;
 //# sourceMappingURL=IntersectionTypeTest$MapEntry.js.map

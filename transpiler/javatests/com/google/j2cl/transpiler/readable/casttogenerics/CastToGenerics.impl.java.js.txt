@@ -11,9 +11,9 @@ goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$i
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let CastToGenerics$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
-let CastToGenerics$Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Empty1$impl');
-let CastToGenerics$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
+let Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Empty1$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -104,21 +104,20 @@ class CastToGenerics extends java_lang_Object {
    * @public
    */
   m_method__java_lang_Object(o) {
-    if (CastToGenerics$Empty1.$isInstance(o)) {
-      return /**@type {CastToGenerics$Empty1} */ (
-          $Casts.to(o, CastToGenerics$Empty1));
+    if (Empty1.$isInstance(o)) {
+      return /**@type {Empty1} */ ($Casts.to(o, Empty1));
     }
     return null;
   }
 
   /**
    * @template M_T
-   * @return {CastToGenerics$Foo<M_T>}
+   * @return {Foo<M_T>}
    * @public
    */
   static m_doSomething__() {
     CastToGenerics.$clinit();
-    return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create__());
+    return /**@type {!$1<*>} */ ($1.$create__());
   }
 
   /**
@@ -146,11 +145,11 @@ class CastToGenerics extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    CastToGenerics$1 = goog.module.get(
+    $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
-    CastToGenerics$Empty1 = goog.module.get(
+    Empty1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Empty1$impl');
-    CastToGenerics$Foo = goog.module.get(
+    Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Error = goog.module.get('java.lang.Error$impl');

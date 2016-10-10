@@ -8,11 +8,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.H$impl');
 
 
-let JsConstructorClass$G = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.G$impl');
+let G = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.G$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
-class JsConstructorClass$H extends JsConstructorClass$G {
+class H extends G {
   /**
    * Real constructor.
    * @public
@@ -24,12 +24,12 @@ class JsConstructorClass$H extends JsConstructorClass$G {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!JsConstructorClass$H}
+   * @return {!H}
    * @public
    */
   static $create__() {
-    JsConstructorClass$H.$clinit();
-    return new JsConstructorClass$H();
+    H.$clinit();
+    return new H();
   }
 
   /**
@@ -48,7 +48,7 @@ class JsConstructorClass$H extends JsConstructorClass$G {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$H;
+    return instance instanceof H;
   }
 
   /**
@@ -58,7 +58,7 @@ class JsConstructorClass$H extends JsConstructorClass$G {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$H);
+    return $Util.$canCastClass(classConstructor, H);
   }
 
   /**
@@ -66,7 +66,7 @@ class JsConstructorClass$H extends JsConstructorClass$G {
    * @public
    */
   static $clinit() {
-    JsConstructorClass$G.$clinit();
+    G.$clinit();
   }
 
   /**
@@ -78,7 +78,7 @@ class JsConstructorClass$H extends JsConstructorClass$G {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$H,
+    H,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$H'));
 
@@ -87,5 +87,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$H;
+exports = H;
 //# sourceMappingURL=JsConstructorClass$H.js.map

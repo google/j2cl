@@ -16,7 +16,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  * @template C_Foo_T
  */
-class Main$Foo extends java_lang_Object {
+class Foo extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -51,7 +51,7 @@ class Main$Foo extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$Foo;
+    return instance instanceof Foo;
   }
 
   /**
@@ -61,7 +61,7 @@ class Main$Foo extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$Foo);
+    return $Util.$canCastClass(classConstructor, Foo);
   }
 
   /**
@@ -80,7 +80,7 @@ class Main$Foo extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$Foo,
+    Foo,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo'));
 
@@ -89,5 +89,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Main$Foo;
+exports = Foo;
 //# sourceMappingURL=Main$Foo.js.map

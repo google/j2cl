@@ -20,10 +20,10 @@
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.to(o, Enum));]
 [if (o instanceof Empty1) {
       return (EE) o;
-    }] => [if (CastToGenerics$Empty1.$isInstance(o)) {
-      return /**@type {CastToGenerics$Empty1} */ ($Casts.to(o, CastToGenerics$Empty1));
+    }] => [if (Empty1.$isInstance(o)) {
+      return /**@type {Empty1} */ ($Casts.to(o, Empty1));
     }]
-[return (EE) o;] => [return /**@type {CastToGenerics$Empty1} */ ($Casts.to(o, CastToGenerics$Empty1));]
+[return (EE) o;] => [return /**@type {Empty1} */ ($Casts.to(o, Empty1));]
 [return null;] => [return null;]
 [UNKNOWN] => [CastToGenerics.$clinit();]
-[return new Foo<T>() { };] => [return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create__());]
+[return new Foo<T>() { };] => [return /**@type {!$1<*>} */ ($1.$create__());]

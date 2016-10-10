@@ -14,14 +14,14 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 
-class Outer$Inner extends java_lang_Object {
+class Inner extends java_lang_Object {
   /**
    * Real constructor.
    * @param {Outer} $outer_this
    * @public
    */
   constructor($outer_this) {
-    Outer$Inner.$clinit();
+    Inner.$clinit();
     super();
     /** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner =
@@ -51,7 +51,7 @@ class Outer$Inner extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Outer$Inner;
+    return instance instanceof Inner;
   }
 
   /**
@@ -61,7 +61,7 @@ class Outer$Inner extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Outer$Inner);
+    return $Util.$canCastClass(classConstructor, Inner);
   }
 
   /**
@@ -81,14 +81,13 @@ class Outer$Inner extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Outer$Inner,
-    $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.packageinfo.Outer$Inner'));
+    Inner, $Util.$makeClassName(
+               'com.google.j2cl.transpiler.readable.packageinfo.Outer$Inner'));
 
 
 
 /**
  * Export class.
  */
-exports = Outer$Inner;
+exports = Inner;
 //# sourceMappingURL=Outer$Inner.js.map

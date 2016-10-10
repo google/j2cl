@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class InnerClassInitOrder$OuterRefFromSuperCtorBase extends java_lang_Object {
+class OuterRefFromSuperCtorBase extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -26,12 +26,12 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {*} o
-   * @return {!InnerClassInitOrder$OuterRefFromSuperCtorBase}
+   * @return {!OuterRefFromSuperCtorBase}
    * @public
    */
   static $create__java_lang_Object(o) {
-    InnerClassInitOrder$OuterRefFromSuperCtorBase.$clinit();
-    let $instance = new InnerClassInitOrder$OuterRefFromSuperCtorBase();
+    OuterRefFromSuperCtorBase.$clinit();
+    let $instance = new OuterRefFromSuperCtorBase();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$OuterRefFromSuperCtorBase__java_lang_Object(
             o);
@@ -58,7 +58,7 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$OuterRefFromSuperCtorBase;
+    return instance instanceof OuterRefFromSuperCtorBase;
   }
 
   /**
@@ -68,8 +68,7 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, InnerClassInitOrder$OuterRefFromSuperCtorBase);
+    return $Util.$canCastClass(classConstructor, OuterRefFromSuperCtorBase);
   }
 
   /**
@@ -90,7 +89,7 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$OuterRefFromSuperCtorBase,
+    OuterRefFromSuperCtorBase,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase'));
 
@@ -99,5 +98,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$OuterRefFromSuperCtorBase;
+exports = OuterRefFromSuperCtorBase;
 //# sourceMappingURL=InnerClassInitOrder$OuterRefFromSuperCtorBase.js.map

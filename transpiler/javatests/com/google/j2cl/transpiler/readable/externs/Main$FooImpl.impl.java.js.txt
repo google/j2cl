@@ -14,7 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class Main$FooImpl extends java_lang_Object {
+class FooImpl extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -27,12 +27,12 @@ class Main$FooImpl extends java_lang_Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main$FooImpl}
+   * @return {!FooImpl}
    * @public
    */
   static $create__() {
-    Main$FooImpl.$clinit();
-    let $instance = new Main$FooImpl();
+    FooImpl.$clinit();
+    let $instance = new FooImpl();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_externs_Main$FooImpl__();
     return $instance;
@@ -55,7 +55,7 @@ class Main$FooImpl extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$FooImpl;
+    return instance instanceof FooImpl;
   }
 
   /**
@@ -65,7 +65,7 @@ class Main$FooImpl extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$FooImpl);
+    return $Util.$canCastClass(classConstructor, FooImpl);
   }
 
   /**
@@ -85,14 +85,13 @@ class Main$FooImpl extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$FooImpl,
-    $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.externs.Main$FooImpl'));
+    FooImpl, $Util.$makeClassName(
+                 'com.google.j2cl.transpiler.readable.externs.Main$FooImpl'));
 
 
 
 /**
  * Export class.
  */
-exports = Main$FooImpl;
+exports = FooImpl;
 //# sourceMappingURL=Main$FooImpl.js.map

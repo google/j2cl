@@ -15,7 +15,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class SomeInterface$1 extends SomeClass {
+class $1 extends SomeClass {
   /**
    * Defines instance fields.
    * @public
@@ -27,12 +27,12 @@ class SomeInterface$1 extends SomeClass {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} $_0
-   * @return {!SomeInterface$1}
+   * @return {!$1}
    * @public
    */
   static $create__int($_0) {
-    SomeInterface$1.$clinit();
-    let $instance = new SomeInterface$1();
+    $1.$clinit();
+    let $instance = new $1();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface$1__int(
             $_0);
@@ -68,7 +68,7 @@ class SomeInterface$1 extends SomeClass {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof SomeInterface$1;
+    return instance instanceof $1;
   }
 
   /**
@@ -78,7 +78,7 @@ class SomeInterface$1 extends SomeClass {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SomeInterface$1);
+    return $Util.$canCastClass(classConstructor, $1);
   }
 
   /**
@@ -99,7 +99,7 @@ class SomeInterface$1 extends SomeClass {
 };
 
 $Util.$setClassMetadata(
-    SomeInterface$1,
+    $1,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1'));
 
@@ -108,5 +108,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = SomeInterface$1;
+exports = $1;
 //# sourceMappingURL=SomeInterface$1.js.map

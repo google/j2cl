@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction$impl');
 
 
-let Main$Function = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.Function$impl');
+let com_google_j2cl_transpiler_readable_jsoptional_Main$Function = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.Function$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -17,9 +17,9 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
- * @implements {Main$Function}
+ * @implements {com_google_j2cl_transpiler_readable_jsoptional_Main$Function}
  */
-class Main$AFunction extends java_lang_Object {
+class AFunction extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -34,14 +34,14 @@ class Main$AFunction extends java_lang_Object {
    * @public
    */
   static $create__() {
-    Main$AFunction.$clinit();
-    let $instance = new Main$AFunction();
+    AFunction.$clinit();
+    let $instance = new AFunction();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main$AFunction__();
     return $Util.$makeLambdaFunction(
-        $Util.$getPrototype(Main$AFunction)
+        $Util.$getPrototype(AFunction)
             .m_f1__java_lang_String__arrayOf_java_lang_Object,
-        $instance, Main$AFunction.$copy);
+        $instance, AFunction.$copy);
   }
 
   /**
@@ -89,12 +89,12 @@ class Main$AFunction extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$AFunction);
+    return $Util.$canCastClass(classConstructor, AFunction);
   }
 
   /**
    * Copies the fields from {@code from} to {@code to}.
-   * @param {Main$AFunction} from
+   * @param {AFunction} from
    * @param {*} to
    * @public
    */
@@ -122,16 +122,17 @@ class Main$AFunction extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$AFunction,
+    AFunction,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsoptional.Main$AFunction'));
 
 
-Main$Function.$markImplementor(Main$AFunction);
+com_google_j2cl_transpiler_readable_jsoptional_Main$Function.$markImplementor(
+    AFunction);
 
 
 /**
  * Export class.
  */
-exports = Main$AFunction;
+exports = AFunction;
 //# sourceMappingURL=Main$AFunction.js.map

@@ -15,7 +15,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 /**
  * @template C_Foo_T
  */
-class CastOnArrayInit$Foo extends java_lang_Object {
+class Foo extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -27,12 +27,12 @@ class CastOnArrayInit$Foo extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_Foo_T
-   * @return {!CastOnArrayInit$Foo<C_Foo_T>}
+   * @return {!Foo<C_Foo_T>}
    * @public
    */
   static $create__() {
-    CastOnArrayInit$Foo.$clinit();
-    let $instance = new CastOnArrayInit$Foo();
+    Foo.$clinit();
+    let $instance = new Foo();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit$Foo__();
     return $instance;
@@ -55,7 +55,7 @@ class CastOnArrayInit$Foo extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof CastOnArrayInit$Foo;
+    return instance instanceof Foo;
   }
 
   /**
@@ -65,7 +65,7 @@ class CastOnArrayInit$Foo extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, CastOnArrayInit$Foo);
+    return $Util.$canCastClass(classConstructor, Foo);
   }
 
   /**
@@ -85,7 +85,7 @@ class CastOnArrayInit$Foo extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    CastOnArrayInit$Foo,
+    Foo,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$Foo'));
 
@@ -94,5 +94,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = CastOnArrayInit$Foo;
+exports = Foo;
 //# sourceMappingURL=CastOnArrayInit$Foo.js.map

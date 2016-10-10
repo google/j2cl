@@ -15,7 +15,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main$SubVarargsConstructorClass extends Object {
+class SubVarargsConstructorClass extends Object {
   /**
    * Real constructor.
    * @param {number} i
@@ -36,13 +36,12 @@ class Main$SubVarargsConstructorClass extends Object {
    * A particular Java constructor as a factory method.
    * @param {number} i
    * @param {Array<*>} args
-   * @return {!Main$SubVarargsConstructorClass}
+   * @return {!SubVarargsConstructorClass}
    * @public
    */
   static $create__int__arrayOf_java_lang_Object(i, args) {
-    Main$SubVarargsConstructorClass.$clinit();
-    return new Main$SubVarargsConstructorClass(
-        i, ...$Arrays.$checkNotNull(args));
+    SubVarargsConstructorClass.$clinit();
+    return new SubVarargsConstructorClass(i, ...$Arrays.$checkNotNull(args));
   }
 
   /**
@@ -64,7 +63,7 @@ class Main$SubVarargsConstructorClass extends Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$SubVarargsConstructorClass;
+    return instance instanceof SubVarargsConstructorClass;
   }
 
   /**
@@ -74,8 +73,7 @@ class Main$SubVarargsConstructorClass extends Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, Main$SubVarargsConstructorClass);
+    return $Util.$canCastClass(classConstructor, SubVarargsConstructorClass);
   }
 
   /**
@@ -97,7 +95,7 @@ class Main$SubVarargsConstructorClass extends Object {
 };
 
 $Util.$setClassMetadata(
-    Main$SubVarargsConstructorClass,
+    SubVarargsConstructorClass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main$SubVarargsConstructorClass'));
 
@@ -106,5 +104,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Main$SubVarargsConstructorClass;
+exports = SubVarargsConstructorClass;
 //# sourceMappingURL=Main$SubVarargsConstructorClass.js.map

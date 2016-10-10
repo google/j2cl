@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 
 
-let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
+let List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -16,9 +16,9 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 /**
  * @interface
- * @extends {MultipleAbstractParents$List<?string>}
+ * @extends {List<?string>}
  */
-class MultipleAbstractParents$IStringList {
+class IStringList {
   /**
    * @abstract
    * @param {?string} l_string
@@ -33,7 +33,7 @@ class MultipleAbstractParents$IStringList {
    * @public
    */
   static $markImplementor(classConstructor) {
-    MultipleAbstractParents$List.$markImplementor(classConstructor);
+    List.$markImplementor(classConstructor);
     /**
      * @public {boolean}
      */
@@ -77,17 +77,16 @@ class MultipleAbstractParents$IStringList {
 };
 
 $Util.$setClassMetadataForInterface(
-    MultipleAbstractParents$IStringList,
+    IStringList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList'));
 
 
-MultipleAbstractParents$IStringList.$markImplementor(
-    /** @type {Function} */ (MultipleAbstractParents$IStringList));
+IStringList.$markImplementor(/** @type {Function} */ (IStringList));
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$IStringList;
+exports = IStringList;
 //# sourceMappingURL=MultipleAbstractParents$IStringList.js.map

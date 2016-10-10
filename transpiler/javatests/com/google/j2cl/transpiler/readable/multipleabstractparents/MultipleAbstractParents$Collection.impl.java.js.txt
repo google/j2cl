@@ -17,7 +17,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
  * @interface
  * @template C_Collection_T
  */
-class MultipleAbstractParents$Collection {
+class Collection {
   /**
    * @abstract
    * @param {C_Collection_T} t
@@ -75,17 +75,16 @@ class MultipleAbstractParents$Collection {
 };
 
 $Util.$setClassMetadataForInterface(
-    MultipleAbstractParents$Collection,
+    Collection,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$Collection'));
 
 
-MultipleAbstractParents$Collection.$markImplementor(
-    /** @type {Function} */ (MultipleAbstractParents$Collection));
+Collection.$markImplementor(/** @type {Function} */ (Collection));
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$Collection;
+exports = Collection;
 //# sourceMappingURL=MultipleAbstractParents$Collection.js.map

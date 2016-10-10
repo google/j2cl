@@ -18,7 +18,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
  * @abstract
  * @template C_AbstractCollection_T
  */
-class MultipleAbstractParents$AbstractCollection extends java_lang_Object {
+class AbstractCollection extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -53,7 +53,7 @@ class MultipleAbstractParents$AbstractCollection extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$AbstractCollection;
+    return instance instanceof AbstractCollection;
   }
 
   /**
@@ -63,8 +63,7 @@ class MultipleAbstractParents$AbstractCollection extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$AbstractCollection);
+    return $Util.$canCastClass(classConstructor, AbstractCollection);
   }
 
   /**
@@ -85,7 +84,7 @@ class MultipleAbstractParents$AbstractCollection extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$AbstractCollection,
+    AbstractCollection,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection'));
 
@@ -94,5 +93,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$AbstractCollection;
+exports = AbstractCollection;
 //# sourceMappingURL=MultipleAbstractParents$AbstractCollection.js.map

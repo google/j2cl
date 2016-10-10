@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.$1$impl');
 
 
-let Main$ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunction$impl');
+let ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunction$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -17,9 +17,9 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @implements {Main$ApplyFunction<?string>}
+ * @implements {ApplyFunction<?string>}
  */
-class Main$1 extends java_lang_Object {
+class $1 extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -37,13 +37,12 @@ class Main$1 extends java_lang_Object {
    * @public
    */
   static $create__() {
-    Main$1.$clinit();
-    let $instance = new Main$1();
+    $1.$clinit();
+    let $instance = new $1();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1__();
     return $Util.$makeLambdaFunction(
-        $Util.$getPrototype(Main$1).m_apply__java_lang_Object, $instance,
-        Main$1.$copy);
+        $Util.$getPrototype($1).m_apply__java_lang_Object, $instance, $1.$copy);
   }
 
   /**
@@ -78,7 +77,7 @@ class Main$1 extends java_lang_Object {
    * @public
    */
   m_apply__java_lang_Object(arg0) {
-    return Main$1
+    return $1
         .m_apply__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1__java_lang_String(
             this, /**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
   }
@@ -91,7 +90,7 @@ class Main$1 extends java_lang_Object {
    */
   static m_apply__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1__java_lang_String(
       $thisArg, s) {
-    Main$1.$clinit();
+    $1.$clinit();
     return '' + s +
         $thisArg
             .f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1;
@@ -104,7 +103,7 @@ class Main$1 extends java_lang_Object {
    */
   static m_fun__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1(
       $thisArg) {
-    Main$1.$clinit();
+    $1.$clinit();
     return '' +
         $thisArg
             .f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1 +
@@ -130,12 +129,12 @@ class Main$1 extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$1);
+    return $Util.$canCastClass(classConstructor, $1);
   }
 
   /**
    * Copies the fields from {@code from} to {@code to}.
-   * @param {Main$1} from
+   * @param {$1} from
    * @param {*} to
    * @public
    */
@@ -167,15 +166,15 @@ class Main$1 extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Main$1, $Util.$makeClassName(
-                'com.google.j2cl.transpiler.readable.jsfunctionbridge.Main$1'));
+    $1, $Util.$makeClassName(
+            'com.google.j2cl.transpiler.readable.jsfunctionbridge.Main$1'));
 
 
-Main$ApplyFunction.$markImplementor(Main$1);
+ApplyFunction.$markImplementor($1);
 
 
 /**
  * Export class.
  */
-exports = Main$1;
+exports = $1;
 //# sourceMappingURL=Main$1.js.map

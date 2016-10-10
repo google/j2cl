@@ -11,13 +11,13 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
+let ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 
 
 /**
  * @template C_ESWGOuter_T
  */
-class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
+class ESWGOuter extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -29,12 +29,12 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_ESWGOuter_T
-   * @return {!InnerClassInitOrder$ESWGOuter<C_ESWGOuter_T>}
+   * @return {!ESWGOuter<C_ESWGOuter_T>}
    * @public
    */
   static $create__() {
-    InnerClassInitOrder$ESWGOuter.$clinit();
-    let $instance = new InnerClassInitOrder$ESWGOuter();
+    ESWGOuter.$clinit();
+    let $instance = new ESWGOuter();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter__();
     return $instance;
@@ -51,12 +51,12 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
   }
 
   /**
-   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
+   * @return {ESWGInner<C_ESWGOuter_T>}
    * @public
    */
   m_newESWGInner__() {
-    return /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
-        InnerClassInitOrder$ESWGOuter$ESWGInner
+    return /**@type {!ESWGInner<C_ESWGOuter_T>} */ (
+        ESWGInner
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                 this));
   }
@@ -68,7 +68,7 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$ESWGOuter;
+    return instance instanceof ESWGOuter;
   }
 
   /**
@@ -78,7 +78,7 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$ESWGOuter);
+    return $Util.$canCastClass(classConstructor, ESWGOuter);
   }
 
   /**
@@ -86,7 +86,7 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$ESWGOuter$ESWGInner = goog.module.get(
+    ESWGInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
     java_lang_Object.$clinit();
   }
@@ -100,7 +100,7 @@ class InnerClassInitOrder$ESWGOuter extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$ESWGOuter,
+    ESWGOuter,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter'));
 
@@ -109,5 +109,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$ESWGOuter;
+exports = ESWGOuter;
 //# sourceMappingURL=InnerClassInitOrder$ESWGOuter.js.map

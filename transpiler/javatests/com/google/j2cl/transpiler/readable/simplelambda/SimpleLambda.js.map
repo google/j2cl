@@ -8,16 +8,16 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();]
 [return this.field + intf.foo(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + intf.m_foo__int(n);]
-[int result = test(i -> i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$0foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+[int result = test(i -> i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($0foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [result =
         test(
             i -> {
               return i + 2;
             },
-            10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$1foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
-[int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$2foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+            10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($1foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+[int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($2foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [int x = 1;] => [let x = 1;]
-[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$3foo.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
+[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($3foo.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
 [int x = 1;] => [let x = 1;]
 [int result =
         test(
@@ -25,7 +25,7 @@
               int y = 1;
               return x + y + this.field + i + 1;
             },
-            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$4foo.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
+            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($4foo.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
 [int result =
         test(
             i -> {
@@ -34,7 +34,7 @@
               SimpleLambda.this.funOuter();
               return i + 2;
             },
-            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(SimpleLambda$5foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($5foo.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [UNKNOWN] => [SimpleLambda.$clinit();]
-[MyInterface f = (i) -> i;] => [let f = SimpleLambda$6foo.$create__();]
+[MyInterface f = (i) -> i;] => [let f = $6foo.$create__();]
 [public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda = 100;]

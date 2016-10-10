@@ -8,8 +8,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.D$impl');
 
 
-let Main$A = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');
-let Main$I = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I$impl');
+let A = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');
+let I = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -18,10 +18,10 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @extends {Main$A<Integer>}
- * @implements {Main$I<Integer>}
+ * @extends {A<Integer>}
+ * @implements {I<Integer>}
  */
-class Main$D extends Main$A {
+class D extends A {
   /**
    * Defines instance fields.
    * @public
@@ -32,12 +32,12 @@ class Main$D extends Main$A {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main$D}
+   * @return {!D}
    * @public
    */
   static $create__() {
-    Main$D.$clinit();
-    let $instance = new Main$D();
+    D.$clinit();
+    let $instance = new D();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$D__();
     return $instance;
@@ -81,7 +81,7 @@ class Main$D extends Main$A {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$D;
+    return instance instanceof D;
   }
 
   /**
@@ -91,7 +91,7 @@ class Main$D extends Main$A {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$D);
+    return $Util.$canCastClass(classConstructor, D);
   }
 
   /**
@@ -102,7 +102,7 @@ class Main$D extends Main$A {
     Integer = goog.module.get('java.lang.Integer$impl');
     java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Main$A.$clinit();
+    A.$clinit();
   }
 
   /**
@@ -113,15 +113,15 @@ class Main$D extends Main$A {
 };
 
 $Util.$setClassMetadata(
-    Main$D, $Util.$makeClassName(
-                'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$D'));
+    D, $Util.$makeClassName(
+           'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$D'));
 
 
-Main$I.$markImplementor(Main$D);
+I.$markImplementor(D);
 
 
 /**
  * Export class.
  */
-exports = Main$D;
+exports = D;
 //# sourceMappingURL=Main$D.js.map

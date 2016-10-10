@@ -8,8 +8,8 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList$impl');
 
 
-let MultipleAbstractParents$AbstractList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
-let MultipleAbstractParents$IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+let AbstractList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList$impl');
+let IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -17,11 +17,10 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 /**
  * @abstract
- * @extends {MultipleAbstractParents$AbstractList<?string>}
- * @implements {MultipleAbstractParents$IStringList}
+ * @extends {AbstractList<?string>}
+ * @implements {IStringList}
  */
-class MultipleAbstractParents$AbstractStringList extends
-    MultipleAbstractParents$AbstractList {
+class AbstractStringList extends AbstractList {
   /**
    * Defines instance fields.
    * @public
@@ -58,7 +57,7 @@ class MultipleAbstractParents$AbstractStringList extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$AbstractStringList;
+    return instance instanceof AbstractStringList;
   }
 
   /**
@@ -68,8 +67,7 @@ class MultipleAbstractParents$AbstractStringList extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$AbstractStringList);
+    return $Util.$canCastClass(classConstructor, AbstractStringList);
   }
 
   /**
@@ -78,7 +76,7 @@ class MultipleAbstractParents$AbstractStringList extends
    */
   static $clinit() {
     java_lang_String = goog.module.get('java.lang.String$impl');
-    MultipleAbstractParents$AbstractList.$clinit();
+    AbstractList.$clinit();
   }
 
   /**
@@ -90,17 +88,16 @@ class MultipleAbstractParents$AbstractStringList extends
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$AbstractStringList,
+    AbstractStringList,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList'));
 
 
-MultipleAbstractParents$IStringList.$markImplementor(
-    MultipleAbstractParents$AbstractStringList);
+IStringList.$markImplementor(AbstractStringList);
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$AbstractStringList;
+exports = AbstractStringList;
 //# sourceMappingURL=MultipleAbstractParents$AbstractStringList.js.map

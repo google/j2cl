@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList2$impl');
 
 
-let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
+let List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -18,9 +18,9 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 /**
  * @abstract
  * @template C_AbstractList2_T
- * @implements {MultipleAbstractParents$List<C_AbstractList2_T>}
+ * @implements {List<C_AbstractList2_T>}
  */
-class MultipleAbstractParents$AbstractList2 extends java_lang_Object {
+class AbstractList2 extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -55,7 +55,7 @@ class MultipleAbstractParents$AbstractList2 extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof MultipleAbstractParents$AbstractList2;
+    return instance instanceof AbstractList2;
   }
 
   /**
@@ -65,8 +65,7 @@ class MultipleAbstractParents$AbstractList2 extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, MultipleAbstractParents$AbstractList2);
+    return $Util.$canCastClass(classConstructor, AbstractList2);
   }
 
   /**
@@ -87,17 +86,16 @@ class MultipleAbstractParents$AbstractList2 extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    MultipleAbstractParents$AbstractList2,
+    AbstractList2,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractList2'));
 
 
-MultipleAbstractParents$List.$markImplementor(
-    MultipleAbstractParents$AbstractList2);
+List.$markImplementor(AbstractList2);
 
 
 /**
  * Export class.
  */
-exports = MultipleAbstractParents$AbstractList2;
+exports = AbstractList2;
 //# sourceMappingURL=MultipleAbstractParents$AbstractList2.js.map

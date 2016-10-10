@@ -12,11 +12,11 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let NewInnerClassWithSameOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
-let NewInnerClassWithSameOuter$B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
-let NewInnerClassWithSameOuter$C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
+let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
+let C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
 
 
-class NewInnerClassWithSameOuter$A extends java_lang_Object {
+class A extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -31,13 +31,13 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {NewInnerClassWithSameOuter} $outer_this
-   * @return {!NewInnerClassWithSameOuter$A}
+   * @return {!A}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
       $outer_this) {
-    NewInnerClassWithSameOuter$A.$clinit();
-    let $instance = new NewInnerClassWithSameOuter$A();
+    A.$clinit();
+    let $instance = new A();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter$A__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
             $outer_this);
@@ -63,12 +63,10 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
    * @public
    */
   m_test__() {
-    NewInnerClassWithSameOuter$B
-        .$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
-            this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter$A);
-    NewInnerClassWithSameOuter$C
-        .$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
-            this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter$A);
+    B.$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter$A);
+    C.$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter$A);
   }
 
   /**
@@ -78,7 +76,7 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof NewInnerClassWithSameOuter$A;
+    return instance instanceof A;
   }
 
   /**
@@ -88,7 +86,7 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, NewInnerClassWithSameOuter$A);
+    return $Util.$canCastClass(classConstructor, A);
   }
 
   /**
@@ -98,9 +96,9 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
   static $clinit() {
     NewInnerClassWithSameOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
-    NewInnerClassWithSameOuter$B = goog.module.get(
+    B = goog.module.get(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
-    NewInnerClassWithSameOuter$C = goog.module.get(
+    C = goog.module.get(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
     java_lang_Object.$clinit();
   }
@@ -114,7 +112,7 @@ class NewInnerClassWithSameOuter$A extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    NewInnerClassWithSameOuter$A,
+    A,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter$A'));
 
@@ -123,5 +121,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = NewInnerClassWithSameOuter$A;
+exports = A;
 //# sourceMappingURL=NewInnerClassWithSameOuter$A.js.map

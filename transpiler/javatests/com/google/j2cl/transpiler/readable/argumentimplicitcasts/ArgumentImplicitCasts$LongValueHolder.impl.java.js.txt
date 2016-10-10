@@ -15,7 +15,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
-class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
+class LongValueHolder extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -30,12 +30,12 @@ class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {!$Long} value
-   * @return {!ArgumentImplicitCasts$LongValueHolder}
+   * @return {!LongValueHolder}
    * @public
    */
   static $create__long(value) {
-    ArgumentImplicitCasts$LongValueHolder.$clinit();
-    let $instance = new ArgumentImplicitCasts$LongValueHolder();
+    LongValueHolder.$clinit();
+    let $instance = new LongValueHolder();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$LongValueHolder__long(
             value);
@@ -63,7 +63,7 @@ class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof ArgumentImplicitCasts$LongValueHolder;
+    return instance instanceof LongValueHolder;
   }
 
   /**
@@ -73,8 +73,7 @@ class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, ArgumentImplicitCasts$LongValueHolder);
+    return $Util.$canCastClass(classConstructor, LongValueHolder);
   }
 
   /**
@@ -95,7 +94,7 @@ class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    ArgumentImplicitCasts$LongValueHolder,
+    LongValueHolder,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$LongValueHolder'));
 
@@ -104,5 +103,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = ArgumentImplicitCasts$LongValueHolder;
+exports = LongValueHolder;
 //# sourceMappingURL=ArgumentImplicitCasts$LongValueHolder.js.map

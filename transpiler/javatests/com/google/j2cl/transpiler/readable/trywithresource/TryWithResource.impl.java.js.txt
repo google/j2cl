@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let TryWithResource$ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
+let ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
@@ -62,7 +62,7 @@ class TryWithResource extends java_lang_Object {
       let $primaryExc = null;
       let thing = null;
       try {
-        thing = TryWithResource$ClosableThing.$create__();
+        thing = ClosableThing.$create__();
         let i = 0;
       } catch (/** @type {*} */ __$exc) {
         __$exc = $Exceptions.toJava(__$exc);
@@ -94,8 +94,8 @@ class TryWithResource extends java_lang_Object {
       let thing = null;
       let thing2 = null;
       try {
-        thing = TryWithResource$ClosableThing.$create__();
-        thing2 = TryWithResource$ClosableThing.$create__();
+        thing = ClosableThing.$create__();
+        thing2 = ClosableThing.$create__();
         let i = 0;
         throw $Exceptions.toJs(Exception.$create__());
       } catch (/** @type {*} */ __$exc) {
@@ -150,7 +150,7 @@ class TryWithResource extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    TryWithResource$ClosableThing = goog.module.get(
+    ClosableThing = goog.module.get(
         'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');

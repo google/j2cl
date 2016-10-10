@@ -8,24 +8,24 @@
 goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
 
 
-let Main$Foo = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
+let Foo = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
+let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
 
 
 /**
  * @template C_Bar_T
- * @extends {Main$Foo<C_Bar_T>}
+ * @extends {Foo<C_Bar_T>}
  */
-class Main$Bar$1 extends Main$Foo {
+class $1 extends Foo {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {Main$Bar<C_Bar_T>} */
+    /** @public {Bar<C_Bar_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1 =
         null;
   }
@@ -34,14 +34,14 @@ class Main$Bar$1 extends Main$Foo {
    * A particular Java constructor as a factory method.
    * @template C_Bar_T
    * @param {C_Bar_T} $_0
-   * @param {Main$Bar<C_Bar_T>} $outer_this
-   * @return {!Main$Bar$1<C_Bar_T>}
+   * @param {Bar<C_Bar_T>} $outer_this
+   * @return {!$1<C_Bar_T>}
    * @public
    */
   static $create__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
       $_0, $outer_this) {
-    Main$Bar$1.$clinit();
-    let $instance = new Main$Bar$1();
+    $1.$clinit();
+    let $instance = new $1();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
             $_0, $outer_this);
@@ -51,7 +51,7 @@ class Main$Bar$1 extends Main$Foo {
   /**
    * Initializes instance fields for a particular Java constructor.
    * @param {C_Bar_T} $_0
-   * @param {Main$Bar<C_Bar_T>} $outer_this
+   * @param {Bar<C_Bar_T>} $outer_this
    * @return {void}
    * @public
    */
@@ -78,7 +78,7 @@ class Main$Bar$1 extends Main$Foo {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Main$Bar$1;
+    return instance instanceof $1;
   }
 
   /**
@@ -88,7 +88,7 @@ class Main$Bar$1 extends Main$Foo {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Main$Bar$1);
+    return $Util.$canCastClass(classConstructor, $1);
   }
 
   /**
@@ -96,9 +96,9 @@ class Main$Bar$1 extends Main$Foo {
    * @public
    */
   static $clinit() {
-    Main$Bar = goog.module.get(
+    Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
-    Main$Foo.$clinit();
+    Foo.$clinit();
   }
 
   /**
@@ -110,7 +110,7 @@ class Main$Bar$1 extends Main$Foo {
 };
 
 $Util.$setClassMetadata(
-    Main$Bar$1,
+    $1,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1'));
 
@@ -119,5 +119,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Main$Bar$1;
+exports = $1;
 //# sourceMappingURL=Main$Bar$1.js.map

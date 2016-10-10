@@ -232,7 +232,22 @@ public class JsDocNameUtils {
 
     if (typeDescriptor.isTypeVariable()) {
       // Template variable like "C_T".
-      return typeDescriptor.getShortName();
+
+      // skip the top level class component for better output readability.
+      List<String> classComponents = typeDescriptor.getClassComponents();
+      List<String> nameComponents =
+          new ArrayList<>(classComponents.subList(1, classComponents.size()));
+
+      // move the prefix in the simple name to the class name to avoid collisions between method-
+      // level and class-level type variable and avoid variable name starts with a number.
+      // concat class components to avoid collisions between type variables in inner/outer class.
+      // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
+      String simpleName = typeDescriptor.getSimpleName();
+      nameComponents.set(
+          nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
+      String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
+
+      return prefix + Joiner.on('_').join(nameComponents);
     }
 
     if (typeDescriptor.isWildCard()) {

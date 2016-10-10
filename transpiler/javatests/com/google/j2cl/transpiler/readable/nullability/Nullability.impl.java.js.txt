@@ -13,9 +13,9 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Preconditions = goog.forwardDeclare('com.google.common.base.Preconditions$impl');
 let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
-let Nullability$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
-let Nullability$MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
-let Nullability$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
+let MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
+let StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
 let ClassInSubpackage = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -158,7 +158,7 @@ class Nullability extends java_lang_Object {
 
   /**
    * @param {?string} a
-   * @param {Nullability$Foo<string>} foo
+   * @param {Foo<string>} foo
    * @param {string} b
    * @return {string}
    * @public
@@ -168,10 +168,9 @@ class Nullability extends java_lang_Object {
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
         Lists.m_newArrayList__();
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        Nullability$StringList.$create__();
+        StringList.$create__();
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {List} */ (
-            $Casts.to(Nullability$StringList.$create__(), List));
+        /**@type {List} */ ($Casts.to(StringList.$create__(), List));
     let x = this.m3('');
     Preconditions.m_checkNotNull__java_lang_Object(x);
     new Nullability(x);
@@ -229,11 +228,11 @@ class Nullability extends java_lang_Object {
     Preconditions =
         goog.module.get('com.google.common.base.Preconditions$impl');
     Lists = goog.module.get('com.google.common.collect.Lists$impl');
-    Nullability$Foo = goog.module.get(
+    Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
-    Nullability$MyFunction = goog.module.get(
+    MyFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
-    Nullability$StringList = goog.module.get(
+    StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
     ClassInSubpackage = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');

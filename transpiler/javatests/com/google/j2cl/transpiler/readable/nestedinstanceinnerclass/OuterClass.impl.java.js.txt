@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterC
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let OuterClass$InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
-let OuterClass$InnerClass$InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+let InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
 
 
 class OuterClass extends java_lang_Object {
@@ -52,9 +52,9 @@ class OuterClass extends java_lang_Object {
    * @public
    */
   m_test__() {
-    OuterClass$InnerClass$InnerInnerClass
+    InnerInnerClass
         .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass(
-            OuterClass$InnerClass
+            InnerClass
                 .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
                     OuterClass.$create__()));
   }
@@ -84,9 +84,9 @@ class OuterClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    OuterClass$InnerClass = goog.module.get(
+    InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
-    OuterClass$InnerClass$InnerInnerClass = goog.module.get(
+    InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
     java_lang_Object.$clinit();
   }

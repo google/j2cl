@@ -12,7 +12,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let EqualFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
-let EqualFunctions$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -94,7 +94,7 @@ class EqualFunctions extends java_lang_Object {
   /**
    * @template M_T
    * @param {?function(M_T, M_T):boolean} equalFn
-   * @return {?function(EqualFunctions$Foo<M_T>, EqualFunctions$Foo<M_T>):boolean}
+   * @return {?function(Foo<M_T>, Foo<M_T>):boolean}
    * @public
    */
   static m_createEqualFn__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
@@ -217,7 +217,7 @@ class EqualFunctions extends java_lang_Object {
     EqualFunctions.$clinit = function() {};
     EqualFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
-    EqualFunctions$Foo = goog.module.get(
+    Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

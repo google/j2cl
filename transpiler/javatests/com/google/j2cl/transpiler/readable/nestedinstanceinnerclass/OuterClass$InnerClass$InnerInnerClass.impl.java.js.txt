@@ -12,37 +12,37 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let OuterClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
-let OuterClass$InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
 
 
-class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
+class InnerInnerClass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {OuterClass$InnerClass} */
+    /** @public {InnerClass} */
     this.f_x__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass$InnerInnerClass =
         null;
     /** @public {OuterClass} */
     this.f_y__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass$InnerInnerClass =
         null;
-    /** @public {OuterClass$InnerClass} */
+    /** @public {InnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass$InnerInnerClass =
         null;
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {OuterClass$InnerClass} $outer_this
-   * @return {!OuterClass$InnerClass$InnerInnerClass}
+   * @param {InnerClass} $outer_this
+   * @return {!InnerInnerClass}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass(
       $outer_this) {
-    OuterClass$InnerClass$InnerInnerClass.$clinit();
-    let $instance = new OuterClass$InnerClass$InnerInnerClass();
+    InnerInnerClass.$clinit();
+    let $instance = new InnerInnerClass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass$InnerInnerClass__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass(
             $outer_this);
@@ -51,7 +51,7 @@ class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {OuterClass$InnerClass} $outer_this
+   * @param {InnerClass} $outer_this
    * @return {void}
    * @public
    */
@@ -70,7 +70,7 @@ class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof OuterClass$InnerClass$InnerInnerClass;
+    return instance instanceof InnerInnerClass;
   }
 
   /**
@@ -80,8 +80,7 @@ class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, OuterClass$InnerClass$InnerInnerClass);
+    return $Util.$canCastClass(classConstructor, InnerInnerClass);
   }
 
   /**
@@ -91,7 +90,7 @@ class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
   static $clinit() {
     OuterClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
-    OuterClass$InnerClass = goog.module.get(
+    InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
     java_lang_Object.$clinit();
   }
@@ -110,7 +109,7 @@ class OuterClass$InnerClass$InnerInnerClass extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    OuterClass$InnerClass$InnerInnerClass,
+    InnerInnerClass,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass'));
 
@@ -119,5 +118,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = OuterClass$InnerClass$InnerInnerClass;
+exports = InnerInnerClass;
 //# sourceMappingURL=OuterClass$InnerClass$InnerInnerClass.js.map

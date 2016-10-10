@@ -8,19 +8,18 @@
 goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$06IntersectionTypeTest$EmptyA$impl');
 
 
-let IntersectionTypeTest$A = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
-let IntersectionTypeTest$EmptyA = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
-let IntersectionTypeTest$EmptyB = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
+let A = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
+let EmptyA = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
+let EmptyB = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @abstract
- * @implements {IntersectionTypeTest$EmptyA}
- * @implements {IntersectionTypeTest$EmptyB}
+ * @implements {EmptyA}
+ * @implements {EmptyB}
  */
-class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
-    IntersectionTypeTest$A {
+class $06IntersectionTypeTest$EmptyA extends A {
   /**
    * Defines instance fields.
    * @public
@@ -36,9 +35,8 @@ class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
    * @public
    */
   static $isInstance(instance) {
-    return IntersectionTypeTest$EmptyA.$isInstance(instance) &&
-        IntersectionTypeTest$EmptyB.$isInstance(instance) &&
-        IntersectionTypeTest$A.$isInstance(instance);
+    return EmptyA.$isInstance(instance) && EmptyB.$isInstance(instance) &&
+        A.$isInstance(instance);
   }
 
   /**
@@ -49,7 +47,7 @@ class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(
-        classConstructor, IntersectionTypeTest$06IntersectionTypeTest$EmptyA);
+        classConstructor, $06IntersectionTypeTest$EmptyA);
   }
 
   /**
@@ -57,7 +55,7 @@ class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
    * @public
    */
   static $clinit() {
-    IntersectionTypeTest$A.$clinit();
+    A.$clinit();
   }
 
   /**
@@ -69,19 +67,17 @@ class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
 };
 
 $Util.$setClassMetadata(
-    IntersectionTypeTest$06IntersectionTypeTest$EmptyA,
+    $06IntersectionTypeTest$EmptyA,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$06IntersectionTypeTest$EmptyA'));
 
 
-IntersectionTypeTest$EmptyA.$markImplementor(
-    IntersectionTypeTest$06IntersectionTypeTest$EmptyA);
-IntersectionTypeTest$EmptyB.$markImplementor(
-    IntersectionTypeTest$06IntersectionTypeTest$EmptyA);
+EmptyA.$markImplementor($06IntersectionTypeTest$EmptyA);
+EmptyB.$markImplementor($06IntersectionTypeTest$EmptyA);
 
 
 /**
  * Export class.
  */
-exports = IntersectionTypeTest$06IntersectionTypeTest$EmptyA;
+exports = $06IntersectionTypeTest$EmptyA;
 //# sourceMappingURL=IntersectionTypeTest$06IntersectionTypeTest$EmptyA.js.map

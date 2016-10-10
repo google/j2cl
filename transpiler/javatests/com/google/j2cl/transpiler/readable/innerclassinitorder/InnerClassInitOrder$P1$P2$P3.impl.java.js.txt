@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
 
 
-let InnerClassInitOrder$P1$P2 = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
+let P2 = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -16,16 +16,16 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @template C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1
- * @extends {InnerClassInitOrder$P1$P2<C_P1_P2_T2>}
+ * @extends {P2<C_P1_P2_T2>}
  */
-class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
+class P3 extends P2 {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {InnerClassInitOrder$P1$P2<C_P1_P2_T2, C_P1_T1>} */
+    /** @public {P2<C_P1_P2_T2, C_P1_T1>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2$P3 =
         null;
   }
@@ -33,14 +33,14 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
   /**
    * A particular Java constructor as a factory method.
    * @template C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1
-   * @param {InnerClassInitOrder$P1$P2<C_P1_P2_T2, C_P1_T1>} $outer_this
-   * @return {!InnerClassInitOrder$P1$P2$P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
+   * @param {P2<C_P1_P2_T2, C_P1_T1>} $outer_this
+   * @return {!P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
       $outer_this) {
-    InnerClassInitOrder$P1$P2$P3.$clinit();
-    let $instance = new InnerClassInitOrder$P1$P2$P3();
+    P3.$clinit();
+    let $instance = new P3();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2$P3__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
             $outer_this);
@@ -49,7 +49,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {InnerClassInitOrder$P1$P2<C_P1_P2_T2, C_P1_T1>} $outer_this
+   * @param {P2<C_P1_P2_T2, C_P1_T1>} $outer_this
    * @return {void}
    * @public
    */
@@ -64,14 +64,14 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
    * A particular Java constructor as a factory method.
    * @template C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1
    * @param {number} i
-   * @param {InnerClassInitOrder$P1$P2<C_P1_P2_T2, C_P1_T1>} $outer_this
-   * @return {!InnerClassInitOrder$P1$P2$P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
+   * @param {P2<C_P1_P2_T2, C_P1_T1>} $outer_this
+   * @return {!P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
    * @public
    */
   static $create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
       i, $outer_this) {
-    InnerClassInitOrder$P1$P2$P3.$clinit();
-    let $instance = new InnerClassInitOrder$P1$P2$P3();
+    P3.$clinit();
+    let $instance = new P3();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2$P3__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
             i, $outer_this);
@@ -81,7 +81,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
   /**
    * Initializes instance fields for a particular Java constructor.
    * @param {number} i
-   * @param {InnerClassInitOrder$P1$P2<C_P1_P2_T2, C_P1_T1>} $outer_this
+   * @param {P2<C_P1_P2_T2, C_P1_T1>} $outer_this
    * @return {void}
    * @public
    */
@@ -101,7 +101,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InnerClassInitOrder$P1$P2$P3;
+    return instance instanceof P3;
   }
 
   /**
@@ -111,7 +111,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$P1$P2$P3);
+    return $Util.$canCastClass(classConstructor, P3);
   }
 
   /**
@@ -120,7 +120,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    InnerClassInitOrder$P1$P2.$clinit();
+    P2.$clinit();
   }
 
   /**
@@ -132,7 +132,7 @@ class InnerClassInitOrder$P1$P2$P3 extends InnerClassInitOrder$P1$P2 {
 };
 
 $Util.$setClassMetadata(
-    InnerClassInitOrder$P1$P2$P3,
+    P3,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$P3'));
 
@@ -141,5 +141,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = InnerClassInitOrder$P1$P2$P3;
+exports = P3;
 //# sourceMappingURL=InnerClassInitOrder$P1$P2$P3.js.map

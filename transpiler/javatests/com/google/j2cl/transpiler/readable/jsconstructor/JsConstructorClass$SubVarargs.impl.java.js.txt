@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs$impl');
 
 
-let JsConstructorClass$Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
+let Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
@@ -16,7 +16,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
+class SubVarargs extends Varargs {
   /**
    * Real constructor.
    * @param {*} i
@@ -38,12 +38,12 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * A particular Java constructor as a factory method.
    * @param {*} i
    * @param {Array<number>} args
-   * @return {!JsConstructorClass$SubVarargs}
+   * @return {!SubVarargs}
    * @public
    */
   static $create__java_lang_Object__arrayOf_int(i, args) {
-    JsConstructorClass$SubVarargs.$clinit();
-    return new JsConstructorClass$SubVarargs(i, ...$Arrays.$checkNotNull(args));
+    SubVarargs.$clinit();
+    return new SubVarargs(i, ...$Arrays.$checkNotNull(args));
   }
 
   /**
@@ -61,13 +61,12 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} j
-   * @return {!JsConstructorClass$SubVarargs}
+   * @return {!SubVarargs}
    * @public
    */
   static $create__int(j) {
-    JsConstructorClass$SubVarargs.$clinit();
-    let $instance =
-        new JsConstructorClass$SubVarargs(java_lang_Object.$create__(), j);
+    SubVarargs.$clinit();
+    let $instance = new SubVarargs(java_lang_Object.$create__(), j);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$SubVarargs__int(
             j);
@@ -88,12 +87,11 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * @public
    */
   static m_subNativeInvocation___$pp_com_google_j2cl_transpiler_readable_jsconstructor() {
-    JsConstructorClass$SubVarargs.$clinit();
-    let s1 = JsConstructorClass$SubVarargs.$create__int(2);
-    let s2 =
-        JsConstructorClass$SubVarargs.$create__java_lang_Object__arrayOf_int(
-            java_lang_Object.$create__(),
-            /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
+    SubVarargs.$clinit();
+    let s1 = SubVarargs.$create__int(2);
+    let s2 = SubVarargs.$create__java_lang_Object__arrayOf_int(
+        java_lang_Object.$create__(),
+        /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
   }
 
   /**
@@ -103,7 +101,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsConstructorClass$SubVarargs;
+    return instance instanceof SubVarargs;
   }
 
   /**
@@ -113,7 +111,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsConstructorClass$SubVarargs);
+    return $Util.$canCastClass(classConstructor, SubVarargs);
   }
 
   /**
@@ -124,7 +122,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
     java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    JsConstructorClass$Varargs.$clinit();
+    Varargs.$clinit();
   }
 
   /**
@@ -136,7 +134,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
 };
 
 $Util.$setClassMetadata(
-    JsConstructorClass$SubVarargs,
+    SubVarargs,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$SubVarargs'));
 
@@ -145,5 +143,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = JsConstructorClass$SubVarargs;
+exports = SubVarargs;
 //# sourceMappingURL=JsConstructorClass$SubVarargs.js.map
