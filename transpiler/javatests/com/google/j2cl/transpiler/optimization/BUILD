@@ -6,7 +6,7 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("j2cl_optimization_test", "j2cl_optimization_test")
+load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
 
 j2cl_optimization_test(
     name = "BooleansTest",

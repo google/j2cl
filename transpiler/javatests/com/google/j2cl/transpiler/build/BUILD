@@ -138,7 +138,7 @@ mss_js_compiled_module_set_flat_files(
     source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
 )
 
-load("/tools/build_rules/build_test", "build_test")
+load("//tools/build_rules:build_test.bzl", "build_test")
 
 build_test(
     name = "J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set_build_test",

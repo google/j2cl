@@ -8,8 +8,8 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
-load("/tools/build_rules/build_test", "build_test")
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_OPTIMIZED_DEFS")
+load("//tools/build_rules:build_test.bzl", "build_test")
+load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 
 # Google owns the copyright
 licenses(["unencumbered"])
