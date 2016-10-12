@@ -122,7 +122,28 @@ public class DefaultMethodsResolver {
                     .build(),
                 defaultForwardingMethod.getDescriptor(),
                 "Bridge to JsMethod.",
-                true));
+                // Depending on the class hierarchy these methods might or might not be an override
+                // e.g.
+                //   interface I {        interface J {
+                //     m();                 @JsMethod default m() {}
+                //    }                     @JsMethod default n() {}
+                //                         }
+                //   class A implements I, J { }
+                //
+                // class A in Js will be emitted as follows
+                //
+                //   class A {
+                //    ...
+                //       m()   { J.m(); }     // Overrides J.m
+                //       m_m() { this.m(); }  // Overrides I.m
+                //       n()   { J.n(); }     // Overrides J.n
+                //       m_n() { this.n(); }  // does not override anything
+                //
+                // The we could not omit generating m_n() due to accidental overrides in subclasses
+                // but we could skip the override flag in just this case.
+                //
+                // See b/31312257.
+                false));
       }
     }
   }

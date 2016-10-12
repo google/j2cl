@@ -117,7 +117,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " * @fileoverview Impl transpiled from " + transpiledFrom + ".",
         " *",
         " * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const,"
-            + " missingRequire}",
+            + " missingRequire, missingOverride}",
         " */");
     sourceBuilder.newLine();
   }

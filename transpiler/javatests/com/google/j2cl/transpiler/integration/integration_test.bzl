@@ -69,6 +69,11 @@ def integration_test(name,
       "--closure_entry_point=gen.opt.Harness",
   ]
 
+  test_strictness_defs = [
+    # strictness flags to jscomp that we would like our code not to fail.
+    "--jscomp_error=missingOverride",
+  ]
+
   # Since integration tests are used for optimized size tracking, set
   # behavior to the mode with the smallest output size which is what we expect
   # will also be used for customer application production releases. If some
@@ -86,7 +91,7 @@ def integration_test(name,
 
   define_flags = ["--define=%s=%s" % (k,v) for (k,v) in defines.items()]
 
-  defs = defs + define_flags
+  defs = test_strictness_defs + defs + define_flags
 
   srcs_lib_dep = []
   if srcs:
