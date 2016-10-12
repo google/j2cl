@@ -1,0 +1,89 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$Cmp$Serial$4.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Cmp$Serial$4$impl');
+
+
+let Cmp = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
+let Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @abstract
+ * @implements {Cmp}
+ * @implements {Serial}
+ */
+class $Intersect$Cmp$Serial$4 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @abstract
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_cmp__() {}
+
+  /**
+   * Returns whether the provided instance matches the intersection type.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return Cmp.$isInstance(instance) && Serial.$isInstance(instance);
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Intersect$Cmp$Serial$4);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$$Intersect$Cmp$Serial$4() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Intersect$Cmp$Serial$4,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$Cmp$Serial$4'));
+
+
+Cmp.$markImplementor($Intersect$Cmp$Serial$4);
+Serial.$markImplementor($Intersect$Cmp$Serial$4);
+
+
+/**
+ * Export class.
+ */
+exports = $Intersect$Cmp$Serial$4;
+//# sourceMappingURL=IntersectionTypeTest$$Intersect$Cmp$Serial$4.js.map

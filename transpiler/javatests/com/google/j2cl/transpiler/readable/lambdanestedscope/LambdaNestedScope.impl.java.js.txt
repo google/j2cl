@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedS
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $0run = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.$0run$impl');
+let $Lambda$Runner$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.$Lambda$Runner$0$impl');
 
 
 class LambdaNestedScope extends java_lang_Object {
@@ -52,7 +52,7 @@ class LambdaNestedScope extends java_lang_Object {
    */
   m_test__() {
     let runner =
-        $0run
+        $Lambda$Runner$0
             .$create__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope(
                 this);
   }
@@ -82,8 +82,8 @@ class LambdaNestedScope extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    $0run = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.$0run$impl');
+    $Lambda$Runner$0 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.$Lambda$Runner$0$impl');
     java_lang_Object.$clinit();
   }
 

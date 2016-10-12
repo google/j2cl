@@ -1192,7 +1192,7 @@ public class JdtUtils {
 
   public static TypeDescriptor createLambda(
       final TypeDescriptor enclosingClassTypeDescriptor,
-      String lambdaBinaryName,
+      String lambdaSimpleName,
       final ITypeBinding lambdaTypeBinding) {
     // About Intersection typed Lambdas:
     //
@@ -1289,7 +1289,7 @@ public class JdtUtils {
     List<String> classComponents =
         Stream.concat(
                 enclosingClassTypeDescriptor.getClassComponents().stream(),
-                Stream.of(lambdaBinaryName))
+                Stream.of(lambdaSimpleName))
             .collect(toImmutableList());
     List<String> packageComponents = enclosingClassTypeDescriptor.getPackageComponents();
     String simpleName = Iterables.getLast(classComponents);

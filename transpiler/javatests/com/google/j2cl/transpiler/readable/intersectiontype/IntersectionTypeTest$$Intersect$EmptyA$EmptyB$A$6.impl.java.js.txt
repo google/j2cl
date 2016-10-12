@@ -1,0 +1,82 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$EmptyA$EmptyB$A$6.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$EmptyA$EmptyB$A$6$impl');
+
+
+let A = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
+let EmptyA = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
+let EmptyB = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @abstract
+ * @implements {EmptyA}
+ * @implements {EmptyB}
+ */
+class $Intersect$EmptyA$EmptyB$A$6 extends A {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Returns whether the provided instance matches the intersection type.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return EmptyA.$isInstance(instance) && EmptyB.$isInstance(instance) &&
+        A.$isInstance(instance);
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Intersect$EmptyA$EmptyB$A$6);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    A.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$$Intersect$EmptyA$EmptyB$A$6() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Intersect$EmptyA$EmptyB$A$6,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$EmptyA$EmptyB$A$6'));
+
+
+EmptyA.$markImplementor($Intersect$EmptyA$EmptyB$A$6);
+EmptyB.$markImplementor($Intersect$EmptyA$EmptyB$A$6);
+
+
+/**
+ * Export class.
+ */
+exports = $Intersect$EmptyA$EmptyB$A$6;
+//# sourceMappingURL=IntersectionTypeTest$$Intersect$EmptyA$EmptyB$A$6.js.map

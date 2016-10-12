@@ -11,11 +11,11 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGe
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $0foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$0foo$impl');
-let $1foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$1foo$impl');
-let $2foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$2foo$impl');
-let $3apply = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$3apply$impl');
-let $4apply = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$4apply$impl');
+let $Lambda$Function$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$3$impl');
+let $Lambda$Function$4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$4$impl');
+let $Lambda$MyInterface$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$0$impl');
+let $Lambda$MyInterface$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$1$impl');
+let $Lambda$MyInterface$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$2$impl');
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -110,26 +110,26 @@ class LambdaWithGenerics extends java_lang_Object {
    */
   m_testLambdaNoCapture__() {
     this.m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(
-        /**@type {!$0foo<C_E>} */
-        ($0foo
+        /**@type {!$Lambda$MyInterface$0<C_E>} */
+        ($Lambda$MyInterface$0
              .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                  this)),
         Error.$create__());
     this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
-        /**@type {!$1foo<C_E>} */
-        ($1foo
+        /**@type {!$Lambda$MyInterface$1<C_E>} */
+        ($Lambda$MyInterface$1
              .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                  this)),
         Error.$create__());
     LambdaWithGenerics
         .m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
-            /**@type {!$2foo<Enum, C_E>} */
-            ($2foo
+            /**@type {!$Lambda$MyInterface$2<Enum, C_E>} */
+            ($Lambda$MyInterface$2
                  .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                      this)),
             /**@type {Enum<Enum>} */ ($Casts.to(null, Enum)));
-    let f = /**@type {!$3apply<Enum, C_E>} */ (
-        $3apply
+    let f = /**@type {!$Lambda$Function$3<Enum, C_E>} */ (
+        $Lambda$Function$3
             .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                 this));
   }
@@ -140,7 +140,7 @@ class LambdaWithGenerics extends java_lang_Object {
    */
   static m_testLabdaCallingStaticMethod__() {
     LambdaWithGenerics.$clinit();
-    let f = $4apply.$create__();
+    let f = $Lambda$Function$4.$create__();
   }
 
   /**
@@ -168,16 +168,16 @@ class LambdaWithGenerics extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    $0foo = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$0foo$impl');
-    $1foo = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$1foo$impl');
-    $2foo = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$2foo$impl');
-    $3apply = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$3apply$impl');
-    $4apply = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$4apply$impl');
+    $Lambda$Function$3 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$3$impl');
+    $Lambda$Function$4 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$4$impl');
+    $Lambda$MyInterface$0 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$0$impl');
+    $Lambda$MyInterface$1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$1$impl');
+    $Lambda$MyInterface$2 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$MyInterface$2$impl');
     MyInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
     Enum = goog.module.get('java.lang.Enum$impl');

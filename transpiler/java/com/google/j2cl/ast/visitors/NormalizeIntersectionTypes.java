@@ -18,6 +18,7 @@ import com.google.j2cl.ast.Visibility;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -62,12 +63,13 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
   private TypeDescriptor createIntersectionType(
       TypeDescriptor typeDescriptor, TypeDescriptor enclosingClassTypeDescriptor, int uniqueId) {
 
-    // Here we synthesize a class name of the form:
-    // 00<binaryClassname of first intersected type>
-    // The extra 0 removes the possibility of a name conflict with a lambda type with a
-    // potentially equal method name.  TODO: Centralize the anonymous class counter.
-    String simpleName =
-        "0" + uniqueId + typeDescriptor.getIntersectedTypeDescriptors().get(0).getBinaryClassName();
+    String simpleNamesOfIntersectedTypes =
+        typeDescriptor
+            .getIntersectedTypeDescriptors()
+            .stream()
+            .map(t -> t.getSimpleName())
+            .collect(Collectors.joining("$"));
+    String simpleName = "$Intersect$" + simpleNamesOfIntersectedTypes + "$" + uniqueId;
     List<String> classComponents =
         Lists.newArrayList(enclosingClassTypeDescriptor.getClassComponents());
     classComponents.add(simpleName);

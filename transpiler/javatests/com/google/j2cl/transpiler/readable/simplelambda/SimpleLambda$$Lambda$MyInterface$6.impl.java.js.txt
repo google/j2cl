@@ -1,0 +1,122 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$$Lambda$MyInterface$6.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$6$impl');
+
+
+let MyInterface = goog.require('com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class $Lambda$MyInterface$6 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!$Lambda$MyInterface$6}
+   * @public
+   */
+  static $create__() {
+    $Lambda$MyInterface$6.$clinit();
+    let $instance = new $Lambda$MyInterface$6();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$$Lambda$MyInterface$6__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$$Lambda$MyInterface$6__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$$Lambda$MyInterface$6();
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @public
+   */
+  lambda$Lambda$MyInterface$6(i) {
+    return i;
+  }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) {
+    return this.lambda$Lambda$MyInterface$6(arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $Lambda$MyInterface$6;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Lambda$MyInterface$6);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$$Lambda$MyInterface$6() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Lambda$MyInterface$6,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$$Lambda$MyInterface$6'));
+
+
+MyInterface.$markImplementor($Lambda$MyInterface$6);
+
+
+/**
+ * Export class.
+ */
+exports = $Lambda$MyInterface$6;
+//# sourceMappingURL=SimpleLambda$$Lambda$MyInterface$6.js.map

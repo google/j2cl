@@ -1,0 +1,105 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$Getable$Setable$2.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$2$impl');
+
+
+let Getable = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
+let Setable = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @abstract
+ * @implements {Getable<(Comparable<?string>|?boolean|?number|?string)>}
+ * @implements {Setable}
+ */
+class $Intersect$Getable$Setable$2 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @abstract
+   * @override
+   * @return {(Comparable<?string>|?boolean|?number|?string)}
+   * @public
+   */
+  m_get__() {}
+
+  /**
+   * @abstract
+   * @override
+   * @param {number} arg0
+   * @return {void}
+   * @public
+   */
+  m_set__int(arg0) {}
+
+  /**
+   * Returns whether the provided instance matches the intersection type.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return Getable.$isInstance(instance) && Setable.$isInstance(instance);
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Intersect$Getable$Setable$2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Comparable = goog.module.get('java.lang.Comparable$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$$Intersect$Getable$Setable$2() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Intersect$Getable$Setable$2,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$Intersect$Getable$Setable$2'));
+
+
+Getable.$markImplementor($Intersect$Getable$Setable$2);
+Setable.$markImplementor($Intersect$Getable$Setable$2);
+
+
+/**
+ * Export class.
+ */
+exports = $Intersect$Getable$Setable$2;
+//# sourceMappingURL=IntersectionTypeTest$$Intersect$Getable$Setable$2.js.map
