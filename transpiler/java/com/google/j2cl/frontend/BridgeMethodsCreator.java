@@ -91,7 +91,13 @@ public class BridgeMethodsCreator {
           @Override
           public Node rewriteMethod(Method method) {
             if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
-              return Method.Builder.from(method).setJsInfo(JsInfo.NONE).build();
+              // Now that the bridge method is created (and marked JsMethod), make this one
+              // a plain Java method.
+              Method.Builder methodBuilder = Method.Builder.from(method).setJsInfo(JsInfo.NONE);
+              for (int i = 0; i < method.getParameters().size(); i++) {
+                methodBuilder.setParameterOptional(i, false);
+              }
+              return methodBuilder.build();
             }
             return method;
           }
