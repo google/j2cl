@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
@@ -334,8 +335,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
    */
   private static Variable getParameterForCapturedField(
       FieldDescriptor fieldDescriptor, Method method) {
-    Preconditions.checkArgument(method.isConstructor());
-    Preconditions.checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
+    checkArgument(method.isConstructor());
+    checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
     for (Variable parameter : method.getParameters()) {
       if (parameter.getName().equals(fieldDescriptor.getName())
           && parameter

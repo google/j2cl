@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -56,7 +56,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
   /** We transform new Object[100][100]; to Arrays.$create([100, 100], Object); */
   private static Node rewriteArrayCreate(NewArray newArrayExpression) {
-    Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
+    checkArgument(newArrayExpression.getArrayLiteral() == null);
 
     if (shouldBeUntypedArray(newArrayExpression)) {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);
@@ -105,7 +105,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
    * object], [object, object]], Object, 2);
    */
   private static Node rewriteArrayInit(NewArray newArrayExpression) {
-    Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
+    checkArgument(newArrayExpression.getArrayLiteral() != null);
 
     if (shouldBeUntypedArray(newArrayExpression)) {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);

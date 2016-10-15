@@ -16,15 +16,12 @@
 package com.google.j2cl.frontend;
 
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
-
-import jsinterop.annotations.JsPackage;
-
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
-
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jsinterop.annotations.JsPackage;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
@@ -72,11 +71,11 @@ public class PackageInfoCache {
   }
 
   public static PackageInfoCache get() {
-    return Preconditions.checkNotNull(packageInfoCacheStorage.get());
+    return checkNotNull(packageInfoCacheStorage.get());
   }
 
   public static void init(List<String> classPathEntries, Errors errors) {
-    Preconditions.checkState(
+    checkState(
         packageInfoCacheStorage.get() == null,
         "PackageInfoCache should only be initialized once per thread.");
 
@@ -168,7 +167,7 @@ public class PackageInfoCache {
 
   @SuppressWarnings({"resource", "unused"})
   private Annotation[] findBytecodePackageAnnotations(String classPathEntry, String packagePath) {
-    Preconditions.checkNotNull(classPathEntry);
+    checkNotNull(classPathEntry);
     String packageInfoRelativeFilePath = packagePath.replace('.', '/') + "/package-info.class";
     String packageInfoSourceName = packagePath + ".package-info";
 

@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
@@ -122,7 +123,7 @@ public class NormalizeLongs extends NormalizationPass {
       case COMPLEMENT:
         return "$not"; // Bitwise not
       default:
-        Preconditions.checkArgument(
+        checkArgument(
             false, "The requested binary operator is invalid on Longs " + prefixOperator + ".");
         return null;
     }
@@ -165,7 +166,7 @@ public class NormalizeLongs extends NormalizationPass {
       case BIT_OR:
         return "$or";
       default:
-        Preconditions.checkArgument(
+        checkArgument(
             false,
             "The requested binary operator doesn't translate to a LongUtils call: "
                 + binaryOperator

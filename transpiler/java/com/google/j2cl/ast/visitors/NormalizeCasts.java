@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
@@ -46,7 +47,7 @@ public class NormalizeCasts extends NormalizationPass {
     @Override
     public Node rewriteCastExpression(CastExpression expression) {
       TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
-      Preconditions.checkArgument(
+      checkArgument(
           !castTypeDescriptor.isPrimitive(),
           "Narrowing and Widening conversions should have already converted all primitive casts.");
       if (castTypeDescriptor.isArray()) {
@@ -57,8 +58,8 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static Node createCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isArray());
-    Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
+    checkArgument(!castExpression.getCastTypeDescriptor().isArray());
+    checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
 
     Expression resultingExpression =
         AstUtils.canRemoveCast(
@@ -94,7 +95,7 @@ public class NormalizeCasts extends NormalizationPass {
         rawCastTypeDescriptor.isNative()
             ? TypeDescriptors.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
             : rawCastTypeDescriptor;
-    Preconditions.checkArgument(
+    checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
     arguments.add(new TypeReference(castTypeDescriptorArgument));
@@ -104,7 +105,7 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static Node createArrayCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isArray());
+    checkArgument(castExpression.getCastTypeDescriptor().isArray());
 
     if (castExpression
         .getCastTypeDescriptor()
@@ -135,7 +136,7 @@ public class NormalizeCasts extends NormalizationPass {
     arguments.add(castExpression.getExpression());
     TypeDescriptor castTypeDescriptorArgument =
         arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor();
-    Preconditions.checkArgument(
+    checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
     arguments.add(new TypeReference(castTypeDescriptorArgument));
@@ -153,8 +154,7 @@ public class NormalizeCasts extends NormalizationPass {
 
   private static Node createNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    Preconditions.checkArgument(
-        castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
+    checkArgument(castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .setJsInfo(JsInfo.RAW)

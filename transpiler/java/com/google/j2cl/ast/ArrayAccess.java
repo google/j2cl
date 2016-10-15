@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.annotations.Visitable;
 
 /**
@@ -29,7 +29,7 @@ public class ArrayAccess extends Expression {
   @Visitable Expression indexExpression;
 
   public ArrayAccess(Expression arrayExpression, Expression indexExpression) {
-    Preconditions.checkArgument(arrayExpression.getTypeDescriptor().isArray());
+    checkArgument(arrayExpression.getTypeDescriptor().isArray());
 
     this.arrayExpression = checkNotNull(arrayExpression);
     this.indexExpression = checkNotNull(indexExpression);

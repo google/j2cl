@@ -16,12 +16,12 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -202,7 +202,7 @@ public class JdtUtils {
       // our AST, but are considered enum classes by JDT.
       return Kind.CLASS;
     } else if (typeBinding.isEnum()) {
-      Preconditions.checkArgument(!typeBinding.isAnonymous());
+      checkArgument(!typeBinding.isAnonymous());
       return Kind.ENUM;
     }
 
@@ -456,7 +456,7 @@ public class JdtUtils {
 
   static boolean upgradesPackagePrivateVisibility(
       IMethodBinding overridingMethod, IMethodBinding overriddenMethod) {
-    Preconditions.checkArgument(overridingMethod.overrides(overriddenMethod));
+    checkArgument(overridingMethod.overrides(overriddenMethod));
     Visibility overriddenMethodVisibility = getVisibility(overriddenMethod);
     Visibility overridingMethodVisibility = getVisibility(overridingMethod);
     return overriddenMethodVisibility.isPackagePrivate()
@@ -477,7 +477,7 @@ public class JdtUtils {
     // TODO: there maybe an issue in which case it inherits a default method from an interface
     // and inherits an abstract method with the same signature from another interface. Add an
     // example to address the potential issue.
-    Preconditions.checkArgument(typeBinding.isInterface());
+    checkArgument(typeBinding.isInterface());
     for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
       if (isAbstract(method)) {
         return method;
@@ -494,8 +494,7 @@ public class JdtUtils {
 
   static Method createSamMethod(
       ITypeBinding lambdaInterfaceBinding, MethodDescriptor lambdaMethodDescriptor) {
-    IMethodBinding samMethodBinding = findSamMethodBinding(lambdaInterfaceBinding);
-    Preconditions.checkNotNull(samMethodBinding);
+    IMethodBinding samMethodBinding = checkNotNull(findSamMethodBinding(lambdaInterfaceBinding));
     MethodDescriptor samMethodDescriptor = createMethodDescriptor(samMethodBinding);
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
@@ -1128,7 +1127,7 @@ public class JdtUtils {
             .filter(JdtUtils::isAbstract)
             .collect(Collectors.toList());
 
-    Preconditions.checkArgument(
+    checkArgument(
         abstractMethods.size() == 1,
         "Type %s should have one and only one abstract method.",
         jsFunctionInterface.getName());

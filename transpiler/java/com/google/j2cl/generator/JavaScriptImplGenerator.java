@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Expression;
@@ -67,13 +67,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   public void setRelativeSourceMapLocation(String relativeSourceMapLocation) {
-    Preconditions.checkArgument(relativeSourceMapLocation != null);
-    this.relativeSourceMapLocation = relativeSourceMapLocation;
+    this.relativeSourceMapLocation = checkNotNull(relativeSourceMapLocation);
   }
 
   public void setNativeSource(String nativeSource) {
-    Preconditions.checkArgument(nativeSource != null);
-    this.nativeSource = nativeSource;
+    this.nativeSource = checkNotNull(nativeSource);
   }
 
   public String getJsDocName(TypeDescriptor typeDescriptor) {

@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Visitable;
 
 /**
@@ -26,8 +27,7 @@ public class TypeReference extends Expression {
   @Visitable TypeDescriptor typeDescriptor;
 
   public TypeReference(TypeDescriptor typeDescriptor) {
-    Preconditions.checkNotNull(typeDescriptor);
-    this.typeDescriptor = typeDescriptor;
+    this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
   @Override

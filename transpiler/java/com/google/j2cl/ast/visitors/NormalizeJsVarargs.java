@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
@@ -123,7 +124,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
     @Override
     public Node rewriteMethod(Method method) {
-      Preconditions.checkArgument(method.getDescriptor().isJsMethodVarargs());
+      checkArgument(method.getDescriptor().isJsMethodVarargs());
 
       // copy the varargs array.
       //   <Type>[] $var_args_copy = new <Type>[arguments.length - offset];
@@ -132,7 +133,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       //   }
 
       // (1) $var_args_copy = new VarArgsType[arguments.length - varargsIndex];
-      Preconditions.checkArgument(!method.getParameters().isEmpty());
+      checkArgument(!method.getParameters().isEmpty());
       int varargsIndex = method.getParameters().size() - 1;
       Expression newArray =
           new NewArray(

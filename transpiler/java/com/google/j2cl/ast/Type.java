@@ -15,9 +15,10 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
@@ -157,13 +158,11 @@ public class Type extends Node {
   }
 
   public void addFields(List<Field> fields) {
-    Preconditions.checkNotNull(fields);
-    this.members.addAll(fields);
+    this.members.addAll(checkNotNull(fields));
   }
 
   public void addFields(int position, List<Field> fields) {
-    Preconditions.checkNotNull(fields);
-    this.members.addAll(position, fields);
+    this.members.addAll(position, checkNotNull(fields));
   }
 
   /**
@@ -171,7 +170,7 @@ public class Type extends Node {
    * distinguish enum fields from static fields created in the enum body.
    */
   public List<Field> getEnumFields() {
-    Preconditions.checkArgument(this.kind == Kind.ENUM);
+    checkArgument(this.kind == Kind.ENUM);
     Iterable<Field> enumFields = Iterables.filter(getFields(), Field::isEnumField);
     return Lists.newArrayList(enumFields);
   }
@@ -185,7 +184,7 @@ public class Type extends Node {
   }
 
   public void addMethod(int index, Method method) {
-    Preconditions.checkArgument(index >= 0 && index <= members.size());
+    checkArgument(index >= 0 && index <= members.size());
     members.add(index, method);
   }
 

@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Visitable;
 
 /**
@@ -27,8 +28,7 @@ public class NumberLiteral extends Expression {
   private final Number value;
 
   public NumberLiteral(TypeDescriptor typeDescriptor, Number value) {
-    Preconditions.checkNotNull(typeDescriptor);
-    this.typeDescriptor = typeDescriptor;
+    this.typeDescriptor = checkNotNull(typeDescriptor);
     this.value = value;
   }
 

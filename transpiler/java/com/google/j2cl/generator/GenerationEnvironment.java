@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
@@ -49,11 +51,12 @@ public class GenerationEnvironment {
   }
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
-    Preconditions.checkState(
+    checkState(
         aliasByTypeBinaryName.containsKey(typeDescriptor.getBinaryName()),
-        "An alias was needed for " + typeDescriptor.getBinaryName() + " but no alias was found.");
-    Preconditions.checkArgument(!typeDescriptor.isTypeVariable());
-    Preconditions.checkArgument(!typeDescriptor.isWildCard());
+        "An alias was needed for %s but no alias was found.",
+        typeDescriptor.getBinaryName());
+    checkArgument(!typeDescriptor.isTypeVariable());
+    checkArgument(!typeDescriptor.isWildCard());
 
     return aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
   }

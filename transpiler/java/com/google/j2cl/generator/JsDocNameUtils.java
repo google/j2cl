@@ -15,11 +15,12 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
@@ -156,7 +157,7 @@ public class JsDocNameUtils {
     }
 
     // Everything below is nullable.
-    Preconditions.checkArgument(typeDescriptor.isNullable() || typeDescriptor.isPrimitive());
+    checkArgument(typeDescriptor.isNullable() || typeDescriptor.isPrimitive());
 
     switch (typeDescriptor.getSourceName()) {
       case TypeDescriptors.BYTE_TYPE_NAME:
@@ -284,15 +285,13 @@ public class JsDocNameUtils {
    * it returns the JsDoc name of the union of all its inheriting/implementing types.
    */
   private static String getJsDocNameOfUnionType(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(
-        unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor));
+    checkArgument(unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor));
     return unboxedTypeDescriptorsBySuperTypeDescriptor
         .get(typeDescriptor)
         .stream()
         .map(
             unboxedTypeDescriptor -> {
-              Preconditions.checkArgument(
-                  jsDocNamesByUnboxedTypeDescriptor.containsKey(unboxedTypeDescriptor));
+              checkArgument(jsDocNamesByUnboxedTypeDescriptor.containsKey(unboxedTypeDescriptor));
               return jsDocNamesByUnboxedTypeDescriptor.get(unboxedTypeDescriptor);
             })
         .collect(joining("|"));
@@ -300,14 +299,13 @@ public class JsDocNameUtils {
 
   public static String getJsDocNameForJsFunction(
       TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
-    Preconditions.checkState(
+    checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface(),
         "'%s' is not a JsFunction type.",
         typeDescriptor.getBinaryName());
 
     MethodDescriptor jsFunctionMethodDescriptor =
-        typeDescriptor.getConcreteJsFunctionMethodDescriptor();
-    Preconditions.checkNotNull(jsFunctionMethodDescriptor);
+        checkNotNull(typeDescriptor.getConcreteJsFunctionMethodDescriptor());
 
     int parameterIndex = 0;
     int parameterCount = jsFunctionMethodDescriptor.getParameterTypeDescriptors().size();
@@ -317,7 +315,7 @@ public class JsDocNameUtils {
       String parameterTypeAnnotation;
       if (jsFunctionMethodDescriptor.isJsMethodVarargs() && parameterIndex == parameterCount - 1) {
         // variable parameters
-        Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+        checkArgument(parameterTypeDescriptor.isArray());
         String typeName =
             JsDocNameUtils.getJsDocName(
                 parameterTypeDescriptor.getComponentTypeDescriptor(), environment);

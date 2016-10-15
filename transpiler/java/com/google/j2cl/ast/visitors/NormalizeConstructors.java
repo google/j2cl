@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
@@ -360,7 +359,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static MethodDescriptor factoryDescriptorForConstructor(MethodDescriptor constructor) {
-    Preconditions.checkArgument(constructor.isConstructor());
+    checkArgument(constructor.isConstructor());
     List<TypeDescriptor> allParameterTypes = new ArrayList<>();
     allParameterTypes.addAll(
         constructor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
@@ -401,9 +400,11 @@ public class NormalizeConstructors extends NormalizationPass {
       if (constructor == AstUtils.getPrimaryConstructor(type)) {
         return originalContructorBodyMethod(constructor);
       }
-      MethodCall constructorInvocation = AstUtils.getConstructorInvocation(constructor);
-      Preconditions.checkNotNull(
-          constructorInvocation, "this() call was null!" + constructor.toString());
+      MethodCall constructorInvocation =
+          checkNotNull(
+              AstUtils.getConstructorInvocation(constructor),
+              "Could not find constructor invocation in %s.",
+              constructor);
 
       arguments = AstUtils.clone(constructorInvocation.getArguments());
       MethodDescriptor javascriptConstructorDeclaration =

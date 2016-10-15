@@ -1,6 +1,7 @@
 package com.google.j2cl.generator;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -19,8 +20,7 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
 
   public NativeJsTypeProxyGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
     super(errors, declareLegacyNamespace, type);
-    Preconditions.checkArgument(
-        type.getDescriptor().isNative() && !type.getDescriptor().isExtern());
+    checkArgument(type.getDescriptor().isNative() && !type.getDescriptor().isExtern());
   }
 
   @Override

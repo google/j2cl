@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
@@ -102,7 +103,7 @@ public class JdtParser {
     final Map<String, String> preprocessedFilesByOriginal =
         preprocessor.preprocessFiles(filePaths, encoding, errors);
     if (preprocessedFilesByOriginal == null) {
-      Preconditions.checkState(
+      checkState(
           errors.errorCount() > 0, "Didn't get processed files map, but no errors generated.");
       return null;
     }
@@ -120,8 +121,7 @@ public class JdtParser {
           @Override
           public void acceptAST(String filePath, CompilationUnit compilationUnit) {
             String originalFilePath = preprocessedFilesByOriginal.get(filePath);
-            Preconditions.checkState(
-                originalFilePath != null, "Can't find original path for file %s", filePath);
+            checkState(originalFilePath != null, "Can't find original path for file %s", filePath);
             if (checkCompilationErrors(originalFilePath, compilationUnit)) {
               compilationUnitsByFilePath.put(originalFilePath, compilationUnit);
             }

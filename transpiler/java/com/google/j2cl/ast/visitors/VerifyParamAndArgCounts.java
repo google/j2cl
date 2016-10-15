@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
@@ -58,7 +59,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
     ImmutableList<TypeDescriptor> declaredParameterTypes =
         methodDescriptor.getParameterTypeDescriptors();
     if (methodDescriptor.isJsMethodVarargs()) {
-      Preconditions.checkState(
+      checkState(
           passedArguments.size() >= declaredParameterTypes.size() - 1,
           "Invalid method call argument count. Expected at lease %s arguments but received "
               + "%s in call to method '%s() from compilation unit %s",
@@ -67,7 +68,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
           methodDescriptor.getName(),
           getCurrentCompilationUnit().getName());
     } else {
-      Preconditions.checkState(
+      checkState(
           passedArguments.size() == declaredParameterTypes.size(),
           "Invalid method call argument count. Expected %s arguments but received "
               + "%s in call to method '%s() from compilation unit %s",
@@ -82,7 +83,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
       List<Variable> declaredParameters, MethodDescriptor methodDescriptor) {
     ImmutableList<TypeDescriptor> declaredParameterTypes =
         methodDescriptor.getParameterTypeDescriptors();
-    Preconditions.checkState(
+    checkState(
         declaredParameters.size() == declaredParameterTypes.size(),
         "Invalid method call argument count. Expected %s arguments but received "
             + "%s in call to method '%s() from compilation unit %s",

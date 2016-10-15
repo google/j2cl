@@ -15,8 +15,9 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.common.J2clUtils;
@@ -129,7 +130,7 @@ public class ManglingNameUtils {
     }
 
     String prefix = accessStaticsDirectly ? "$" : "";
-    Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
+    checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
     String name = fieldDescriptor.getName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";

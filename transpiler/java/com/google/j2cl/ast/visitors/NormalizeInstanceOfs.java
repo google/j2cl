@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
@@ -110,8 +111,8 @@ public class NormalizeInstanceOfs extends NormalizationPass {
    */
   private Node rewriteNativeJsArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    Preconditions.checkArgument(checkTypeDescriptor.isArray());
-    Preconditions.checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
+    checkArgument(checkTypeDescriptor.isArray());
+    checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()

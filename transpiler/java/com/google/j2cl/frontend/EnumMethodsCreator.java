@@ -1,6 +1,7 @@
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.BinaryExpression;
@@ -48,7 +49,7 @@ public class EnumMethodsCreator {
   private MethodDescriptor valueOfMethodDescriptor;
 
   public static void applyTo(Type enumType) {
-    Preconditions.checkArgument(enumType.isEnum());
+    checkArgument(enumType.isEnum());
     EnumMethodsCreator instance = new EnumMethodsCreator(enumType);
     instance.run();
   }

@@ -16,11 +16,11 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -84,13 +84,13 @@ public class TypeDescriptors {
   private static ThreadLocal<Boolean> isInitialized = new ThreadLocal<>();
 
   public static TypeDescriptors get() {
-    Preconditions.checkState(
+    checkState(
         typeDescriptorsStorage.get() != null, "TypeDescriptors must be initialized before access.");
     return typeDescriptorsStorage.get();
   }
 
   private static void set(TypeDescriptors typeDescriptors) {
-    Preconditions.checkState(
+    checkState(
         typeDescriptorsStorage.get() == null,
         "TypeDescriptors has already been initialized and cannot be reassigned.");
     isInitialized.set(true);

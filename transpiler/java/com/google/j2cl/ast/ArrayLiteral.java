@@ -16,8 +16,8 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class ArrayLiteral extends Expression {
   }
 
   public ArrayLiteral(TypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
-    Preconditions.checkState(typeDescriptor.isArray());
+    checkState(typeDescriptor.isArray());
 
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.valueExpressions.addAll(checkNotNull(valueExpressions));

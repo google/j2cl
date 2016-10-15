@@ -16,11 +16,12 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.Map.Entry.comparingByKey;
 import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -214,7 +215,7 @@ public class CompilationUnitBuilder {
       }
 
       // this is an Enum.
-      Preconditions.checkState(enumType.isEnum());
+      checkState(enumType.isEnum());
       enumType.addFields(
           0,
           JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())
@@ -513,7 +514,7 @@ public class CompilationUnitBuilder {
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
 
-      Preconditions.checkNotNull(expression.getAnonymousClassDeclaration());
+      checkNotNull(expression.getAnonymousClassDeclaration());
       AnonymousType anonymousClass =
           convertAnonymousClassDeclaration(
               expression.getAnonymousClassDeclaration(), constructorBinding);
@@ -1521,8 +1522,8 @@ public class CompilationUnitBuilder {
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
-      IMethodBinding currentMethodBinding = JdtUtils.findCurrentMethodBinding(statement);
-      Preconditions.checkNotNull(currentMethodBinding);
+      IMethodBinding currentMethodBinding =
+          checkNotNull(JdtUtils.findCurrentMethodBinding(statement));
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
@@ -1581,8 +1582,7 @@ public class CompilationUnitBuilder {
           }
         } else {
           // It refers to a local variable or parameter in a method or block.
-          Variable variable = variableByJdtBinding.get(variableBinding);
-          Preconditions.checkNotNull(variable);
+          Variable variable = checkNotNull(variableByJdtBinding.get(variableBinding));
           // The innermost type in which this variable is declared.
           TypeDescriptor enclosingTypeDescriptor = findEnclosingTypeDescriptor(variableBinding);
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
@@ -1794,7 +1794,7 @@ public class CompilationUnitBuilder {
 
     private Expression convertArrayTypeLiteral(
         TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
-      Preconditions.checkState(literalTypeDescriptor.isArray());
+      checkState(literalTypeDescriptor.isArray());
 
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.Builder.fromDefault()

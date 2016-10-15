@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
@@ -84,10 +85,9 @@ public class FixSuperCallQualifiers extends NormalizationPass {
     }
 
     private Expression findSuperCallQualifier(TypeDescriptor typeDescriptor) {
-      TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
-      Preconditions.checkNotNull(superTypeDescriptor);
-      TypeDescriptor outerTypeDescriptor = superTypeDescriptor.getEnclosingTypeDescriptor();
-      Preconditions.checkNotNull(outerTypeDescriptor);
+      TypeDescriptor superTypeDescriptor = checkNotNull(typeDescriptor.getSuperTypeDescriptor());
+      TypeDescriptor outerTypeDescriptor =
+          checkNotNull(superTypeDescriptor.getEnclosingTypeDescriptor());
 
       Expression qualifier = new ThisReference(typeDescriptor);
       TypeDescriptor currentTypeDescriptor = typeDescriptor;

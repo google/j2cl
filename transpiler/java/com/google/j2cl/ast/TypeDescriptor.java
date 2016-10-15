@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -631,7 +630,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   private String getQualifiedNameForExtern() {
-    Preconditions.checkState(isExtern());
+    checkState(isExtern());
 
     String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? "" : jsNamespace;
     String effectiveSimpleName = jsName == null ? simpleName : jsName;

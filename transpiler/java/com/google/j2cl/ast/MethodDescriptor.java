@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -289,7 +289,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (declarationMethodDescriptor != null) {
         ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
             declarationMethodDescriptor.getParameterTypeDescriptors();
-        Preconditions.checkArgument(
+        checkArgument(
             methodDeclarationParameterTypeDescriptors.size() == parameterTypeDescriptors.size(),
             "Method parameters (%s) don't match with method declaration (%s)",
             parameterTypeDescriptors,

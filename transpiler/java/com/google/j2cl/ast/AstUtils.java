@@ -17,9 +17,9 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
@@ -959,7 +959,7 @@ public class AstUtils {
         methodName = "$rshiftUSet";
         break;
       default:
-        Preconditions.checkState(
+        checkState(
             false, "Requested the array assignment function name for a non-assignment operator.");
         return null;
     }
@@ -988,7 +988,7 @@ public class AstUtils {
         methodName = "$postfixDecrement";
         break;
       default:
-        Preconditions.checkState(
+        checkState(
             false,
             "Requested the postfix array assignment function name for a non-postfix operator.");
         return null;

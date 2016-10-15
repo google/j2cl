@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
@@ -130,7 +131,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
 
   private boolean containsTypeVariableDeclaredByMethodInJsFunction(
       TypeDescriptor typeDescriptor, Method method) {
-    Preconditions.checkState(
+    checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface());
     MethodDescriptor jsFunctionMethodDescriptor =
         typeDescriptor.getConcreteJsFunctionMethodDescriptor();
