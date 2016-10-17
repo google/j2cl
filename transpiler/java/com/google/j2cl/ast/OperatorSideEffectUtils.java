@@ -22,18 +22,17 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 /**
  * Utility functions for splitting operators expressions that have a side effect.
  *
- * <p>
- * For example:
+ * <p>For example:
+ *
  * <ul>
- * <li>i++ becomes i = i + 1
- * <li>a = i++ becomes a = (v = i, i = i + 1, v)
- * <li>a = change().i++ becomes a = (q = change(), v = q.i, q.i = q.i + 1, v)
+ *   <li>i++ becomes i = i + 1
+ *   <li>a = i++ becomes a = (v = i, i = i + 1, v)
+ *   <li>a = change().i++ becomes a = (q = change(), v = q.i, q.i = q.i + 1, v)
  * </ul>
  *
- * <p>
- * This kind of rewrite is useful when the numeric type in question is represented by an immutable
- * emulation class or when a conversion operation (such as boxing or unboxing) needs to be inserted
- * between the numeric and assignment stages of an operation.
+ * <p>This kind of rewrite is useful when the numeric type in question is represented by an
+ * immutable emulation class or when a conversion operation (such as boxing or unboxing) needs to be
+ * inserted between the numeric and assignment stages of an operation.
  */
 public class OperatorSideEffectUtils {
 
@@ -164,9 +163,7 @@ public class OperatorSideEffectUtils {
     return new MultiExpression(assignQualifier, assignment);
   }
 
-  /**
-   * Returns number literal with value 1.
-   */
+  /** Returns number literal with value 1. */
   public static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
     TypeDescriptor primitiveTypeDescriptor =
         TypeDescriptors.isBoxedType(typeDescriptor)
@@ -176,9 +173,7 @@ public class OperatorSideEffectUtils {
     return new NumberLiteral(primitiveTypeDescriptor, 1);
   }
 
-  /**
-   * Returns Numbers.fieldName.
-   */
+  /** Returns Numbers.fieldName. */
   private static FieldAccess createNumbersFieldAccess(
       String fieldName, TypeDescriptor typeDescriptor) {
     return FieldAccess.Builder.from(
@@ -190,9 +185,7 @@ public class OperatorSideEffectUtils {
         .build();
   }
 
-  /**
-   * Returns assignment in the form of {leftOperand = leftOperand operator rightOperand}.
-   */
+  /** Returns assignment in the form of {leftOperand = leftOperand operator rightOperand}. */
   private static BinaryExpression expandExpressionNoQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
@@ -245,12 +238,8 @@ public class OperatorSideEffectUtils {
 
     if (expression instanceof FieldAccess) {
       FieldAccess fieldAccess = (FieldAccess) expression;
-      // TODO: This one could be relaxed by doing
-      //
-      //    return canBeEvaluatedTwice(fieldAccess.getQualifier());
-      //
-      // and adding a true return for a this reference.
-      return AstUtils.hasThisReferenceAsQualifier(fieldAccess);
+      return AstUtils.hasTypeReferenceAsQualifier(fieldAccess)
+          || AstUtils.hasThisReferenceAsQualifier(fieldAccess);
     }
 
     // For array access expressions.
@@ -279,9 +268,7 @@ public class OperatorSideEffectUtils {
     return FieldAccess.Builder.from(fieldAccess).setQualifier(newQualifier).build();
   }
 
-  /**
-   * Determines the binary operation type based on the types of the operands.
-   */
+  /** Determines the binary operation type based on the types of the operands. */
   private static TypeDescriptor binaryOperationResultType(
       BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightRightType) {
     TypeDescriptor unboxedLeftOperandType = unboxIfBoxedType(leftOperandType);
@@ -296,7 +283,6 @@ public class OperatorSideEffectUtils {
      * operands and makes the operation to be the same type as both operands. Since this method is
      * potentially called before or while numeric promotion is being performed there is no guarantee
      * operand promotion was already performed; so that fact is taken into account.
-     *
      */
     switch (operator) {
         /*
@@ -337,7 +323,7 @@ public class OperatorSideEffectUtils {
         /**
          * Shift operators: JLS 15.19.
          *
-         * Type type of the operation is the type of the promoted left hand operand.
+         * <p>Type type of the operation is the type of the promoted left hand operand.
          */
         return unboxedLeftOperandType;
       default:
@@ -347,9 +333,7 @@ public class OperatorSideEffectUtils {
     }
   }
 
-  /**
-   * Returns the type descriptor for the wider type.
-   */
+  /** Returns the type descriptor for the wider type. */
   private static TypeDescriptor widerType(
       TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
     return TypeDescriptors.getWidth(thatTypeDescriptor)
@@ -359,8 +343,8 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * Returns the corresponding unboxed type if the {@code setTypeDescriptor} is a boxed type;
-   * {@code setTypeDescriptor} otherwise
+   * Returns the corresponding unboxed type if the {@code setTypeDescriptor} is a boxed type; {@code
+   * setTypeDescriptor} otherwise
    */
   private static TypeDescriptor unboxIfBoxedType(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isBoxedType(typeDescriptor)) {

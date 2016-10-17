@@ -1,0 +1,147 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment$impl');
+
+
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+
+
+class StaticFieldCompoundAssignment extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticFieldCompoundAssignment}
+   * @public
+   */
+  static $create__() {
+    StaticFieldCompoundAssignment.$clinit();
+    let $instance = new StaticFieldCompoundAssignment();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticFieldCompoundAssignment;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticFieldCompoundAssignment);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!$Long}
+   * @public
+   */
+  static get
+  f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment() {
+    return (
+        StaticFieldCompoundAssignment.$clinit(),
+        StaticFieldCompoundAssignment
+            .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!$Long} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment(
+      value) {
+    (StaticFieldCompoundAssignment.$clinit(),
+     StaticFieldCompoundAssignment
+         .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+         value);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment() {
+    ($Numbers.$v =
+         StaticFieldCompoundAssignment
+             .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment,
+     StaticFieldCompoundAssignment
+         .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+         $LongUtils.$plus(
+             StaticFieldCompoundAssignment
+                 .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment,
+             $Long.fromBits(1, 0) /* 1 */));
+  }
+};
+
+$Util.$setClassMetadata(
+    StaticFieldCompoundAssignment,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment'));
+
+
+/**
+ * @private {!$Long}
+ */
+StaticFieldCompoundAssignment
+    .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+    $Long.fromBits(0, 0) /* 0 */;
+
+
+
+/**
+ * Export class.
+ */
+exports = StaticFieldCompoundAssignment;
+//# sourceMappingURL=StaticFieldCompoundAssignment.js.map

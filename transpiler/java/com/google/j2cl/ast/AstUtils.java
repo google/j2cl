@@ -636,6 +636,11 @@ public class AstUtils {
             == memberReference.getTarget().getEnclosingClassTypeDescriptor();
   }
 
+  /** Returns true if the qualifier of the given member reference is a Type reference. */
+  public static boolean hasTypeReferenceAsQualifier(MemberReference memberReference) {
+    return memberReference.getQualifier() instanceof TypeReference;
+  }
+
   public static Expression joinExpressionsWithBinaryOperator(
       TypeDescriptor outputType, BinaryOperator operator, List<Expression> expressions) {
     if (expressions.isEmpty()) {
