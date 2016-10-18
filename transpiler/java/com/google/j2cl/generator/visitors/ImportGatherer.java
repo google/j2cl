@@ -178,7 +178,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
       return;
     }
 

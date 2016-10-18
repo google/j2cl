@@ -92,11 +92,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
               return typeDescriptor.getEnclosingTypeDescriptor();
             }
           };
-      newTypeDescriptor.interfacesTypeDescriptorsFactory =
+      newTypeDescriptor.interfaceTypeDescriptorsFactory =
           new DescriptorFactory<List<TypeDescriptor>>() {
             @Override
             public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getInterfacesTypeDescriptors();
+              return typeDescriptor.getInterfaceTypeDescriptors();
             }
           };
       newTypeDescriptor.isArray = typeDescriptor.isArray();
@@ -115,7 +115,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isPrimitive = typeDescriptor.isPrimitive();
       newTypeDescriptor.isTypeVariable = typeDescriptor.isTypeVariable();
       newTypeDescriptor.isUnion = typeDescriptor.isUnion();
-      newTypeDescriptor.isWildCard = typeDescriptor.isWildCard();
+      newTypeDescriptor.isWildCardOrCapture = typeDescriptor.isWildCardOrCapture();
       newTypeDescriptor.jsFunctionMethodDescriptorFactory =
           new DescriptorFactory<MethodDescriptor>() {
             @Override
@@ -175,6 +175,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
+    public Builder setBoundTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory) {
+      newTypeDescriptor.boundTypeDescriptorFactory = boundTypeDescriptorFactory;
+      return this;
+    }
+
     public Builder setClassComponents(List<String> classComponents) {
       newTypeDescriptor.classComponents = classComponents;
       return this;
@@ -203,9 +209,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setInterfacesTypeDescriptorsFactory(
-        DescriptorFactory<List<TypeDescriptor>> interfacesTypeDescriptorsFactory) {
-      newTypeDescriptor.interfacesTypeDescriptorsFactory = interfacesTypeDescriptorsFactory;
+    public Builder setInterfaceTypeDescriptorsFactory(
+        DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
+      newTypeDescriptor.interfaceTypeDescriptorsFactory = interfaceTypeDescriptorsFactory;
       return this;
     }
 
@@ -289,8 +295,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setIsWildCard(boolean isWildCard) {
-      newTypeDescriptor.isWildCard = isWildCard;
+    public Builder setIsWildCardOrCapture(boolean isWildCardOrCapture) {
+      newTypeDescriptor.isWildCardOrCapture = isWildCardOrCapture;
       return this;
     }
 
@@ -397,7 +403,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory;
   private int dimensions;
   private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
-  private DescriptorFactory<List<TypeDescriptor>> interfacesTypeDescriptorsFactory;
+  private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isFinal;
@@ -414,7 +420,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isPrimitive;
   private boolean isTypeVariable;
   private boolean isUnion;
-  private boolean isWildCard;
+  private boolean isWildCardOrCapture;
   private DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory;
   private String jsName;
   private String jsNamespace;
@@ -432,6 +438,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private DescriptorFactory<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory;
   private Map<String, MethodDescriptor> declaredMethodDescriptorssBySignature;
   private Map<String, MethodDescriptor> methodDescriptorssBySignature;
+  private DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory;
 
   private TypeDescriptor() {}
 
@@ -525,21 +532,28 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
-  public ImmutableList<TypeDescriptor> getInterfacesTypeDescriptors() {
-    if (interfacesTypeDescriptorsFactory == null) {
+  public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
+    if (interfaceTypeDescriptorsFactory == null) {
       return ImmutableList.of();
     }
-    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.getOrCreate(this));
+    return ImmutableList.copyOf(interfaceTypeDescriptorsFactory.getOrCreate(this));
   }
 
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
     checkArgument(isIntersection());
     TypeDescriptor superType = getSuperTypeDescriptor();
+    // TODO(rluble): Reexamine this code after upgrading JDT to 4.7, where intersection types
+    // are surfaced. Technically if one explicitly includes j.l.Object in the intersection type
+    // then j.l.Object should be the first member of the intersection. In that case j2cl is not
+    // consistent with Java.
     if (superType == TypeDescriptors.get().javaLangObject || superType == null) {
-      return getInterfacesTypeDescriptors();
+      return getInterfaceTypeDescriptors();
     }
-    List<TypeDescriptor> types = new ArrayList<>(getInterfacesTypeDescriptors());
+    List<TypeDescriptor> types = new ArrayList<>();
+    // First add the supertype and then the interfaces to be consistent with type erasure (JLS 4.6,
+    // 13.1). Classes can only appear in leftmost position and the erasure is the leftmost bound.
     types.add(superType);
+    types.addAll(getInterfaceTypeDescriptors());
     return types;
   }
 
@@ -669,6 +683,15 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return null;
     }
     return rawTypeDescriptorFactory.getOrCreate(this);
+  }
+
+  /** Returns the bound for a type variable. */
+  public TypeDescriptor getBoundTypeDescriptor() {
+    checkState(isTypeVariable || isWildCardOrCapture);
+    if (boundTypeDescriptorFactory == null) {
+      return null;
+    }
+    return boundTypeDescriptorFactory.getOrCreate(this);
   }
 
   /** Returns the unqualified and unenclosed simple name like "Inner". */
@@ -824,8 +847,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return isUnion;
   }
 
-  public boolean isWildCard() {
-    return isWildCard;
+  public boolean isWildCardOrCapture() {
+    return isWildCardOrCapture;
   }
 
   public boolean isOrSubclassesJsConstructorClass() {
@@ -867,7 +890,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       }
 
       // Finally add the methods that appear in super interfaces.
-      for (TypeDescriptor implementedInterface : getInterfacesTypeDescriptors()) {
+      for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
         updateMethodsBySignature(
             methodDescriptorssBySignature, implementedInterface.getMethodDescriptors());
       }

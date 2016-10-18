@@ -361,7 +361,7 @@ public class TypeDescriptors {
         .setBinaryName(joinedBinaryName)
         .setVisibility(Visibility.PUBLIC)
         .setIsNullable(true)
-        .setInterfacesTypeDescriptorsFactory(
+        .setInterfaceTypeDescriptorsFactory(
             new DescriptorFactory<List<TypeDescriptor>>() {
               @Override
               public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
@@ -493,8 +493,7 @@ public class TypeDescriptors {
     }
 
     // Check implemented interfaces.
-    for (TypeDescriptor interfaceDescriptor :
-        subjectTypeDescriptor.getInterfacesTypeDescriptors()) {
+    for (TypeDescriptor interfaceDescriptor : subjectTypeDescriptor.getInterfaceTypeDescriptors()) {
       TypeDescriptor match = getMatchingTypeInHierarchy(interfaceDescriptor, toMatchTypeDescriptor);
       if (match != null) {
         return match;

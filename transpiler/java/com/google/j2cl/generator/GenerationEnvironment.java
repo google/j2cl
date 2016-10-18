@@ -56,7 +56,7 @@ public class GenerationEnvironment {
         "An alias was needed for %s but no alias was found.",
         typeDescriptor.getBinaryName());
     checkArgument(!typeDescriptor.isTypeVariable());
-    checkArgument(!typeDescriptor.isWildCard());
+    checkArgument(!typeDescriptor.isWildCardOrCapture());
 
     return aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
   }

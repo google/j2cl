@@ -712,6 +712,8 @@ public class JdtUtils {
   }
 
   private static boolean isIntersectionType(ITypeBinding binding) {
+    // TODO(rluble): Use isIntersectionType once JDT is upgraded to RELEASE_4_7 which correctly
+    // exposes intersection types through ITypeBinding.
     boolean isIntersectionType =
         !binding.isPrimitive()
             && !binding.isCapture()
@@ -1322,7 +1324,7 @@ public class JdtUtils {
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSimpleName(simpleName)
         .setSourceName(sourceName)
-        .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
+        .setInterfaceTypeDescriptorsFactory(interfacesDescriptorsFactory)
         .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PRIVATE)
@@ -1336,6 +1338,9 @@ public class JdtUtils {
    * and 1 or more super interfaces.
    */
   private static List<ITypeBinding> getTypeBindingsForIntersectionType(ITypeBinding binding) {
+    // NOTE: Per JDT documentation binding.getTypeBounds() should return the components  of
+    // the intersection type but it does not.
+    // TODO(rluble): revisit when JDT is upgraded to 4.7.
     checkArgument(isIntersectionType(binding));
     List<ITypeBinding> bindings = Lists.newArrayList(binding.getInterfaces());
     if (binding.getSuperclass() != null) {
@@ -1414,6 +1419,7 @@ public class JdtUtils {
     List<String> packageComponents = getPackageComponents(typeBinding);
     boolean isPrimitive = typeBinding.isPrimitive();
     boolean isTypeVariable = typeBinding.isTypeVariable();
+    boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
     IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
     String simpleName = Iterables.getLast(classComponents);
 
@@ -1472,13 +1478,30 @@ public class JdtUtils {
           }
         };
 
+    boolean hasTypeBounds =
+        (isTypeVariable || isWildCardOrCapture) && typeBinding.getTypeBounds().length != 0;
+    DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory =
+        !hasTypeBounds
+            ? null
+            : new DescriptorFactory<TypeDescriptor>() {
+              @Override
+              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+                ITypeBinding[] boundTypeBindings = typeBinding.getTypeBounds();
+                if (boundTypeBindings.length == 1) {
+                  return createTypeDescriptor(boundTypeBindings[0]);
+                }
+                return TypeDescriptors.createIntersection(createTypeDescriptors(boundTypeBindings));
+              }
+            };
+
     // Compute these even later
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
+        .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
-        .setInterfacesTypeDescriptorsFactory(
+        .setInterfaceTypeDescriptorsFactory(
             new DescriptorFactory<List<TypeDescriptor>>() {
 
               @Override
@@ -1503,7 +1526,7 @@ public class JdtUtils {
         .setIsNullable(isNullable)
         .setIsPrimitive(isPrimitive)
         .setIsTypeVariable(isTypeVariable)
-        .setIsWildCard(typeBinding.isWildcardType() || typeBinding.isCapture())
+        .setIsWildCardOrCapture(isWildCardOrCapture)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setJsName(jsName)
         .setJsNamespace(jsNamespace)

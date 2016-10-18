@@ -51,7 +51,7 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
                   Lists.transform(
                       annotationTypeDescriptor.getTypeArgumentDescriptors(),
                       typeArgument ->
-                          typeArgument.isWildCard()
+                          typeArgument.isWildCardOrCapture()
                               ? TypeDescriptors.get().javaLangObject
                               : typeArgument)))
           .build();

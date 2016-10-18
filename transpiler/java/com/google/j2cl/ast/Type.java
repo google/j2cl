@@ -225,7 +225,7 @@ public class Type extends Node {
   }
 
   public List<TypeDescriptor> getSuperInterfaceTypeDescriptors() {
-    return typeDescriptor.getInterfacesTypeDescriptors();
+    return typeDescriptor.getInterfaceTypeDescriptors();
   }
 
   public TypeDescriptor getDescriptor() {

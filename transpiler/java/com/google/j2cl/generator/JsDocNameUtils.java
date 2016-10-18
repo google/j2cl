@@ -251,7 +251,7 @@ public class JsDocNameUtils {
       return prefix + Joiner.on('_').join(nameComponents);
     }
 
-    if (typeDescriptor.isWildCard()) {
+    if (typeDescriptor.isWildCardOrCapture()) {
       return "?";
     }
 
