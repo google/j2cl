@@ -96,8 +96,7 @@ J2CL_UNOPTIMIZED_DEFS = [
 J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED +
                        ADVANCED_OPTIMIZATIONS_FLAGS)
 
-# TODO(28940369): convert to optimized defs.
-J2CL_TEST_DEFS = make_output_readable(J2CL_UNOPTIMIZED_DEFS + [
+J2CL_TEST_DEFS = make_output_readable(J2CL_OPTIMIZED_DEFS + [
     "--export_test_functions=true",
     # Disable some optimizations which slow things down.
     "--compute_function_side_effects=false",

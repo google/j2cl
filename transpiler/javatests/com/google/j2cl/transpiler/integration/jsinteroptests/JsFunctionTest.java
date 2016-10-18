@@ -6,6 +6,14 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class JsFunctionTest extends MyTestCase {
+
+  @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
+  private static class NativeRegExp {
+    public NativeRegExp(String regEx) {}
+
+    public native String[] exec(String s);
+  }
+
   @JsFunction
   public static interface MyJsFunctionInterface {
     int foo(int a);
@@ -297,7 +305,23 @@ public class JsFunctionTest extends MyTestCase {
     // The toString comparison is a bit misleading, because these are native functions
     // toString() returns the JS source code which in this case, same function, same
     // variable names, same JS source.
-    assertEquals(optimizableInner.toString(), lambda.toString());
+
+    // Regex to see that code looks like this compiled:
+    // "function b(a) { return a; }"
+    // or uncompiled:
+    // "(a) =>{ return a; }"
+    // We are not asserting the name of the function nor the parameter name to make sure this
+    // works with optimizations
+    NativeRegExp compiledRegExp = new NativeRegExp("function .\\(.\\) {\n[ ]*return .;\n[ ]*}");
+    NativeRegExp uncompiledRegExp = new NativeRegExp("\\(.\\) =>{\n[ ]*return .;\n[ ]*}");
+
+    assertTrue(
+        compiledRegExp.exec(optimizableInner.toString()) != null
+            || uncompiledRegExp.exec(optimizableInner.toString()) != null);
+    assertTrue(
+        compiledRegExp.exec(lambda.toString()) != null
+            || uncompiledRegExp.exec(lambda.toString()) != null);
+
     // inner class optimizable to lambda
     MyJsFunctionInterface unoptimizableInner =
         new MyJsFunctionInterface() {
