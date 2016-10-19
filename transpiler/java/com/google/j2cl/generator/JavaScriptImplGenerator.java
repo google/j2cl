@@ -17,7 +17,6 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AnonymousType;
@@ -329,10 +328,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       return;
     }
+    checkState(!type.getDescriptor().isIntersection());
     if (type.isInterface()) {
       renderIsInstanceForInterfaceType();
-    } else if (type.getDescriptor().isIntersection()) {
-      renderIsInstanceForIntersectionType();
     } else {
       checkState(type.isClass());
       renderIsInstanceForClassType();
@@ -384,31 +382,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.append(
           "return instance != null && instance.$implements__" + mangledTypeName + ";");
     }
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLines(2);
-  }
-
-  private final void renderIsInstanceForIntersectionType() {
-    sourceBuilder.appendLines(
-        "/**",
-        " * Returns whether the provided instance matches the intersection type.",
-        " * @param {*} instance",
-        " * @return {boolean}",
-        " * @public",
-        " */",
-        "static $isInstance(instance) ");
-    sourceBuilder.openBrace();
-    sourceBuilder.newLine();
-    String checks =
-        type.getDescriptor()
-            .getIntersectedTypeDescriptors()
-            .stream()
-            .filter(intersectedType -> intersectedType != TypeDescriptors.get().javaLangObject)
-            .map(
-                intersectedType ->
-                    environment.aliasForType(intersectedType) + ".$isInstance(instance)")
-            .collect(joining(" && "));
-    sourceBuilder.append("return " + checks + ";");
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }

@@ -66,13 +66,21 @@ public class IntersectionTypeTest<U> {
 
   private static class A {}
 
-  private static interface EmptyA {}
+  private interface EmptyA {}
 
-  private static interface EmptyB {}
+  private interface EmptyB {}
 
   public static void testClosureAssignment(Object o) {
     A e = (A & EmptyA & EmptyB) o;
     EmptyA g = (A & EmptyA & EmptyB) o;
     EmptyB s = (A & EmptyA & EmptyB) o;
+  }
+
+  private static <T> T get(T t) {
+    return t;
+  }
+
+  private static <T extends A & EmptyA> T m() {
+    return (T) get(new Object());
   }
 }

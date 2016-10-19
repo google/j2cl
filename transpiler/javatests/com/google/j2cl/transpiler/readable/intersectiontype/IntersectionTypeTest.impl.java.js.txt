@@ -14,15 +14,13 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Cmp = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
 let Cmp2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
 let Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
-let $Intersect$A$EmptyA$EmptyB$6 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$A$EmptyA$EmptyB$6$impl');
-let $Intersect$Cmp$Serial$4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Cmp$Serial$4$impl');
-let $Intersect$Cmp2$Serial$5 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Cmp2$Serial$5$impl');
-let $Intersect$Getable$Setable$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$1$impl');
-let $Intersect$Getable$Setable$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$2$impl');
-let $Intersect$Getable$Setable$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$3$impl');
-let $Intersect$Setable$Getable$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Setable$Getable$0$impl');
 let $Lambda$Cmp$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp$0$impl');
 let $Lambda$Cmp2$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp2$1$impl');
+let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
+let EmptyA = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
+let EmptyB = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
+let Serial = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
+let Setable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -74,7 +72,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_getAndSet__com_google_j2cl_transpiler_readable_intersectiontype_Getable(
       object) {
     IntersectionTypeTest.$clinit();
-    object.m_set__int(1);
+    /**@type {Setable} */ ($Casts.to(object, Setable)).m_set__int(1);
     object.m_get__();
   }
 
@@ -87,11 +85,13 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
     if ($Equality.$same(o, null)) {
-      return /**@type {$Intersect$Setable$Getable$0<*>} */ (
-          $Casts.to(o, $Intersect$Setable$Getable$0));
+      return /**@type {Getable<*>} */ ($Casts.to(
+          /**@type {Setable} */ ($Casts.to(
+              /**@type {Getable<*>} */ ($Casts.to(o, Getable)), Setable)),
+          Getable));
     }
-    return /**@type {$Intersect$Getable$Setable$1<*>} */ (
-        $Casts.to(o, $Intersect$Getable$Setable$1));
+    return /**@type {Getable<*>} */ (
+        $Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));
   }
 
   /**
@@ -102,8 +102,8 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_cast1__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
-    return /**@type {$Intersect$Getable$Setable$2} */ (
-        $Casts.to(s, $Intersect$Getable$Setable$2));
+    return /**@type {Getable<(Comparable<?string>|?boolean|?number|?string)>} */ (
+        $Casts.to(/**@type {Setable} */ ($Casts.to(s, Setable)), Getable));
   }
 
   /**
@@ -114,8 +114,8 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_cast2__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
-    return /**@type {$Intersect$Getable$Setable$3<*>} */ (
-        $Casts.to(s, $Intersect$Getable$Setable$3));
+    return /**@type {Getable<(Comparable<*>|?boolean|?number|?string)>} */ (
+        $Casts.to(/**@type {Setable} */ ($Casts.to(s, Setable)), Getable));
   }
 
   /**
@@ -133,8 +133,9 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {$Intersect$Cmp$Serial$4} */ (
-        $Casts.to($Lambda$Cmp$0.$create__(), $Intersect$Cmp$Serial$4));
+    return /**@type {Cmp} */ ($Casts.to(
+        /**@type {Serial} */ ($Casts.to($Lambda$Cmp$0.$create__(), Serial)),
+        Cmp));
   }
 
   /**
@@ -143,8 +144,9 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method2__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {$Intersect$Cmp2$Serial$5} */ (
-        $Casts.to($Lambda$Cmp2$1.$create__(), $Intersect$Cmp2$Serial$5));
+    return /**@type {Cmp2} */ ($Casts.to(
+        /**@type {Serial} */ ($Casts.to($Lambda$Cmp2$1.$create__(), Serial)),
+        Cmp2));
   }
 
   /**
@@ -154,12 +156,48 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_testClosureAssignment__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
-    let e = /**@type {$Intersect$A$EmptyA$EmptyB$6} */ (
-        $Casts.to(o, $Intersect$A$EmptyA$EmptyB$6));
-    let g = /**@type {$Intersect$A$EmptyA$EmptyB$6} */ (
-        $Casts.to(o, $Intersect$A$EmptyA$EmptyB$6));
-    let s = /**@type {$Intersect$A$EmptyA$EmptyB$6} */ (
-        $Casts.to(o, $Intersect$A$EmptyA$EmptyB$6));
+    let e = /**@type {A} */ ($Casts.to(
+        /**@type {EmptyA} */ (
+            $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
+        A));
+    let g = /**@type {EmptyA} */ ($Casts.to(
+        /**@type {A} */ ($Casts.to(
+            /**@type {EmptyA} */ (
+                $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
+            A)),
+        EmptyA));
+    let s = /**@type {EmptyB} */ ($Casts.to(
+        /**@type {A} */ ($Casts.to(
+            /**@type {EmptyA} */ (
+                $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
+            A)),
+        EmptyB));
+  }
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {M_T}
+   * @public
+   */
+  static m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
+      t) {
+    IntersectionTypeTest.$clinit();
+    return t;
+  }
+
+  /**
+   * @template M_T
+   * @return {M_T}
+   * @public
+   */
+  static m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest() {
+    IntersectionTypeTest.$clinit();
+    return /**@type {A} */ ($Casts.to(
+        IntersectionTypeTest
+            .m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
+                java_lang_Object.$create__()),
+        A));
   }
 
   /**
@@ -193,24 +231,20 @@ class IntersectionTypeTest extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
-    $Intersect$A$EmptyA$EmptyB$6 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$A$EmptyA$EmptyB$6$impl');
-    $Intersect$Cmp$Serial$4 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Cmp$Serial$4$impl');
-    $Intersect$Cmp2$Serial$5 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Cmp2$Serial$5$impl');
-    $Intersect$Getable$Setable$1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$1$impl');
-    $Intersect$Getable$Setable$2 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$2$impl');
-    $Intersect$Getable$Setable$3 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Getable$Setable$3$impl');
-    $Intersect$Setable$Getable$0 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Intersect$Setable$Getable$0$impl');
     $Lambda$Cmp$0 = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp$0$impl');
     $Lambda$Cmp2$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp2$1$impl');
+    A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
+    EmptyA = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
+    EmptyB = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
+    Serial = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
+    Setable = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

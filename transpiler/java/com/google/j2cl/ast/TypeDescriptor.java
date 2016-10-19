@@ -508,6 +508,30 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return enclosingTypeDescriptorFactory.getOrCreate(this);
   }
 
+  public boolean isSupertypeOf(TypeDescriptor that) {
+    return that.getRawSuperTypesIncludingSelf().contains(this.getRawTypeDescriptor());
+  }
+
+  public boolean isSubtypeOf(TypeDescriptor that) {
+    return getRawSuperTypesIncludingSelf().contains(that.getRawTypeDescriptor());
+  }
+
+  private Set<TypeDescriptor> allSupertypesIncludingSelf = null;
+
+  private Set<TypeDescriptor> getRawSuperTypesIncludingSelf() {
+    if (allSupertypesIncludingSelf == null) {
+      allSupertypesIncludingSelf = new LinkedHashSet<>();
+      allSupertypesIncludingSelf.add(getRawTypeDescriptor());
+      if (getSuperTypeDescriptor() != null) {
+        allSupertypesIncludingSelf.addAll(getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
+      }
+      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+        allSupertypesIncludingSelf.addAll(interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
+      }
+    }
+    return allSupertypesIncludingSelf;
+  }
+
   public Set<TypeDescriptor> getAllTypeVariables() {
     Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
     getAllTypeVariables(this, typeVariables);
@@ -533,7 +557,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
-    checkArgument(isIntersection());
+    checkState(isIntersection());
     TypeDescriptor superType = getSuperTypeDescriptor();
     // TODO(rluble): Reexamine this code after upgrading JDT to 4.7, where intersection types
     // are surfaced. Technically if one explicitly includes j.l.Object in the intersection type

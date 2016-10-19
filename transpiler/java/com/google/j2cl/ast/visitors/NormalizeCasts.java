@@ -60,6 +60,7 @@ public class NormalizeCasts extends NormalizationPass {
   private static Node createCastExpression(CastExpression castExpression) {
     checkArgument(!castExpression.getCastTypeDescriptor().isArray());
     checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
+    checkArgument(!castExpression.getCastTypeDescriptor().isIntersection());
 
     Expression resultingExpression =
         AstUtils.canRemoveCast(
@@ -72,7 +73,7 @@ public class NormalizeCasts extends NormalizationPass {
         resultingExpression, castExpression.getCastTypeDescriptor());
   }
 
-  private static MethodCall createCheckCastCall(CastExpression castExpression) {
+  private static Expression createCheckCastCall(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     TypeDescriptor rawCastTypeDescriptor =
         castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
