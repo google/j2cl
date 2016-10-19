@@ -17,49 +17,13 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.Interner;
+import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
 @AutoValue
 @Visitable
 public abstract class FieldDescriptor extends MemberDescriptor {
-  public static FieldDescriptor create(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String fieldName,
-      TypeDescriptor typeDescriptor,
-      boolean isJsOverlay,
-      JsInfo jsInfo,
-      boolean isCompileTimeConstant) {
-    return new AutoValue_FieldDescriptor(
-        isStatic,
-        visibility,
-        enclosingClassTypeDescriptor,
-        fieldName,
-        typeDescriptor,
-        isJsOverlay,
-        jsInfo,
-        isCompileTimeConstant);
-  }
-
-  /**
-   * Creates a raw field reference.
-   */
-  public static FieldDescriptor createRaw(
-      boolean isStatic,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String fieldName,
-      TypeDescriptor typeDescriptor) {
-    return new AutoValue_FieldDescriptor(
-        isStatic,
-        Visibility.PUBLIC,
-        enclosingClassTypeDescriptor,
-        fieldName,
-        typeDescriptor,
-        false,
-        JsInfo.RAW_FIELD,
-        false);
-  }
 
   @Override
   public abstract boolean isStatic();
@@ -80,6 +44,31 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   public abstract JsInfo getJsInfo();
 
   public abstract boolean isCompileTimeConstant();
+
+  @Nullable
+  abstract FieldDescriptor getDeclarationFieldDescriptorOrNull();
+
+  /**
+   * Returns the descriptor of the field declaration or this instance if this is already the field
+   * declaration or there is no field declaration. Field declarations descriptors describe the the
+   * field at the declaration place, which might be different to the descriptor at the usage place
+   * due to generic type variable instantiations. For example,
+   *
+   * <p>
+   *
+   * <pre>
+   *   class A<T> {
+   *     T f;  // field descriptor here has a type T
+   *   }
+   *
+   *   A<String> a =....
+   * </pre>
+   */
+  public FieldDescriptor getDeclarationFieldDescriptor() {
+    return getDeclarationFieldDescriptorOrNull() == null
+        ? this
+        : getDeclarationFieldDescriptorOrNull();
+  }
 
   @Override
   public boolean isNative() {
@@ -112,18 +101,17 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
 
-  /**
-   * A Builder for easily and correctly creating modified versions of FieldDescriptors.
-   */
+  /** A Builder for FieldDescriptors. */
   public static class Builder {
     private boolean isStatic;
-    private Visibility visibility;
+    private Visibility visibility = Visibility.PUBLIC;
     private TypeDescriptor enclosingClassTypeDescriptor;
     private String fieldName;
     private TypeDescriptor typeDescriptor;
-    private boolean isJsOverlay;
-    private JsInfo jsInfo;
-    private boolean isCompileTimeConstant;
+    private boolean isJsOverlay = false;
+    private JsInfo jsInfo = JsInfo.NONE;
+    private boolean isCompileTimeConstant = false;
+    private FieldDescriptor declarationFieldDescriptor;
 
     public static Builder from(FieldDescriptor fieldDescriptor) {
       Builder builder = new Builder();
@@ -135,21 +123,17 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       builder.isJsOverlay = fieldDescriptor.isJsOverlay();
       builder.jsInfo = fieldDescriptor.getJsInfo();
       builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
+      builder.declarationFieldDescriptor = fieldDescriptor.getDeclarationFieldDescriptorOrNull();
       return builder;
     }
 
-    public static Builder from(
-        TypeDescriptor enclosingClassTypeDescriptor,
-        String fieldName,
-        TypeDescriptor typeDescriptor) {
-      Builder builder = new Builder();
-      builder.visibility = Visibility.PUBLIC;
-      builder.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
-      builder.fieldName = fieldName;
-      builder.typeDescriptor = typeDescriptor;
-      builder.jsInfo = JsInfo.NONE;
-      builder.isCompileTimeConstant = false;
-      return builder;
+    public static Builder fromDefault() {
+      return new Builder();
+    }
+
+    public Builder setFieldName(String fieldName) {
+      this.fieldName = fieldName;
+      return this;
     }
 
     public Builder setEnclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
@@ -159,6 +143,16 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public Builder setIsStatic(boolean isStatic) {
       this.isStatic = isStatic;
+      return this;
+    }
+
+    public Builder setIsJsOverlay(boolean isJsOverlay) {
+      this.isJsOverlay = isJsOverlay;
+      return this;
+    }
+
+    public Builder setIsCompileTimeConstant(boolean isCompileTimeConstant) {
+      this.isCompileTimeConstant = isCompileTimeConstant;
       return this;
     }
 
@@ -177,16 +171,33 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       return this;
     }
 
+    public Builder setDeclarationFieldDescriptor(FieldDescriptor declarationFieldDescriptor) {
+      this.declarationFieldDescriptor = declarationFieldDescriptor;
+      return this;
+    }
+
+    private static final ThreadLocal<Interner<FieldDescriptor>> interner = new ThreadLocal<>();
+
+    private static Interner<FieldDescriptor> getInterner() {
+      if (interner.get() == null) {
+        interner.set(new Interner<>());
+      }
+      return interner.get();
+    }
+
     public FieldDescriptor build() {
-      return create(
-          isStatic,
-          visibility,
-          enclosingClassTypeDescriptor,
-          fieldName,
-          typeDescriptor,
-          isJsOverlay,
-          jsInfo,
-          isCompileTimeConstant);
+      return getInterner()
+          .intern(
+              new AutoValue_FieldDescriptor(
+                  isStatic,
+                  visibility,
+                  enclosingClassTypeDescriptor,
+                  fieldName,
+                  typeDescriptor,
+                  isJsOverlay,
+                  jsInfo,
+                  isCompileTimeConstant,
+                  declarationFieldDescriptor));
     }
   }
 }

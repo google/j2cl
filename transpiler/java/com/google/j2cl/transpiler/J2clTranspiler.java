@@ -26,7 +26,7 @@ import com.google.j2cl.ast.visitors.FixAnonymousClassConstructors;
 import com.google.j2cl.ast.visitors.FixBooleanOperators;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
-import com.google.j2cl.ast.visitors.InsertBoxingConversion;
+import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
@@ -183,7 +183,7 @@ public class J2clTranspiler {
             // Runs before unboxing conversion.
             new InsertNarrowingReferenceConversions(),
             new InsertUnboxingConversions(),
-            new InsertBoxingConversion(),
+            new InsertBoxingConversions(),
             new InsertNarrowingPrimitiveConversions(),
             new InsertWideningPrimitiveConversions(),
             // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);

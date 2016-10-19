@@ -119,18 +119,25 @@ public class JdtUtils {
         createTypeDescriptorWithNullability(
             variableBinding.getType(), variableBinding.getAnnotations());
 
+    FieldDescriptor declarationFieldDescriptor = null;
+    if (variableBinding.getVariableDeclaration() != variableBinding) {
+      declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
+    }
+
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
-    return FieldDescriptor.create(
-        isStatic,
-        visibility,
-        enclosingClassTypeDescriptor,
-        fieldName,
-        thisTypeDescriptor,
-        isJsOverlay,
-        jsInfo,
-        isCompileTimeConstant);
+    return FieldDescriptor.Builder.fromDefault()
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setFieldName(fieldName)
+        .setTypeDescriptor(thisTypeDescriptor)
+        .setIsStatic(isStatic)
+        .setVisibility(visibility)
+        .setIsJsOverlay(isJsOverlay)
+        .setJsInfo(jsInfo)
+        .setIsCompileTimeConstant(isCompileTimeConstant)
+        .setDeclarationFieldDescriptor(declarationFieldDescriptor)
+        .build();
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {

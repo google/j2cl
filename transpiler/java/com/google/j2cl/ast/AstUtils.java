@@ -42,8 +42,13 @@ public class AstUtils {
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
-      FieldDescriptor.createRaw(
-          false, TypeDescriptors.get().primitiveVoid, "length", TypeDescriptors.get().primitiveInt);
+      FieldDescriptor.Builder.fromDefault()
+          .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+          .setFieldName("length")
+          .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+          .setIsStatic(false)
+          .setJsInfo(JsInfo.RAW_FIELD)
+          .build();
 
   /** Return the String with first letter capitalized. */
   public static String toProperCase(String string) {
@@ -243,18 +248,22 @@ public class AstUtils {
   /** Returns the added field descriptor corresponding to the captured variable. */
   public static FieldDescriptor getFieldDescriptorForCapture(
       TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
-    return FieldDescriptor.createRaw(
-        false,
-        enclosingClassTypeDescriptor,
-        CAPTURES_PREFIX + capturedVariable.getName(),
-        capturedVariable.getTypeDescriptor());
+    return FieldDescriptor.Builder.fromDefault()
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setFieldName(CAPTURES_PREFIX + capturedVariable.getName())
+        .setTypeDescriptor(capturedVariable.getTypeDescriptor())
+        .setIsStatic(false)
+        .setJsInfo(JsInfo.RAW_FIELD)
+        .build();
   }
 
   /** Returns the added field corresponding to the enclosing instance. */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptor.Builder.from(
-            enclosingClassDescriptor, ENCLOSING_INSTANCE_NAME, fieldTypeDescriptor)
+    return FieldDescriptor.Builder.fromDefault()
+        .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
+        .setFieldName(ENCLOSING_INSTANCE_NAME)
+        .setTypeDescriptor(fieldTypeDescriptor)
         .build();
   }
 
@@ -765,8 +774,10 @@ public class AstUtils {
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
-                FieldDescriptor.Builder.from(
-                        lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
+                FieldDescriptor.Builder.fromDefault()
+                    .setEnclosingClassTypeDescriptor(lambdaType)
+                    .setFieldName(applyMethodName)
+                    .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(getPrototypeCall)
@@ -787,7 +798,10 @@ public class AstUtils {
 
     FieldAccess copyFunctionFieldAccess =
         FieldAccess.Builder.from(
-                FieldDescriptor.Builder.from(lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
+                FieldDescriptor.Builder.fromDefault()
+                    .setEnclosingClassTypeDescriptor(lambdaType)
+                    .setFieldName("$copy")
+                    .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(new TypeReference(lambdaType))

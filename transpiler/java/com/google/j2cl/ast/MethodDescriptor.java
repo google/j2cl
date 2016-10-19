@@ -82,7 +82,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /**
    * Returns the descriptor of the method declaration or this instance if this is already a method
-   * declaration or there is no method declaration.
+   * declaration or there is no method declaration. Method declarations descriptors describe the the
+   * method at the declaration place, which might be different to the descriptor at the usage place
+   * due to generic type variable instantiations. For example,
+   *
+   * <p>
+   *
+   * <pre>
+   *   class A<T> {
+   *     T m();  // method descriptor here has a return type T
+   *   }
+   *
+   *   A<String> a =....
+   *   a.m() // the method descriptor here has a return type String and its declaration is the
+   *         // one above.
+   * </pre>
    */
   public MethodDescriptor getDeclarationMethodDescriptor() {
     return getDeclarationMethodDescriptorOrNull() == null
@@ -143,9 +157,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return Visitor_MethodDescriptor.visit(processor, this);
   }
 
-  /**
-   * A Builder for easily and correctly creating modified versions of MethodDescriptors.
-   */
+  /** A Builder for MethodDescriptors. */
   public static class Builder {
     private boolean isStatic;
     private Visibility visibility;
@@ -161,8 +173,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors;
     private JsInfo jsInfo;
     private boolean isAbstract;
-
-    private static Interner<MethodDescriptor> interner = new Interner<MethodDescriptor>();
 
     public static Builder fromDefault() {
       Builder builder = new Builder();
@@ -279,6 +289,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this;
     }
 
+    private static final ThreadLocal<Interner<MethodDescriptor>> interner = new ThreadLocal<>();
+
+    private static Interner<MethodDescriptor> getInterner() {
+      if (interner.get() == null) {
+        interner.set(new Interner<>());
+      }
+      return interner.get();
+    }
+
     public MethodDescriptor build() {
       // TODO: We should compute the constructor name instead of allowing empty method name to
       // percolate into the MethodDescriptor.
@@ -296,22 +315,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             methodDeclarationParameterTypeDescriptors);
       }
 
-      return interner.intern(
-          new AutoValue_MethodDescriptor(
-              isStatic,
-              visibility,
-              enclosingClassTypeDescriptor,
-              methodName,
-              isConstructor,
-              isNative,
-              isVarargs,
-              isDefault,
-              declarationMethodDescriptor,
-              ImmutableList.copyOf(parameterTypeDescriptors),
-              returnTypeDescriptor,
-              ImmutableList.copyOf(typeParameterTypeDescriptors),
-              jsInfo,
-              isAbstract));
+      return getInterner()
+          .intern(
+              new AutoValue_MethodDescriptor(
+                  isStatic,
+                  visibility,
+                  enclosingClassTypeDescriptor,
+                  methodName,
+                  isConstructor,
+                  isNative,
+                  isVarargs,
+                  isDefault,
+                  declarationMethodDescriptor,
+                  ImmutableList.copyOf(parameterTypeDescriptors),
+                  returnTypeDescriptor,
+                  ImmutableList.copyOf(typeParameterTypeDescriptors),
+                  jsInfo,
+                  isAbstract));
     }
   }
 }

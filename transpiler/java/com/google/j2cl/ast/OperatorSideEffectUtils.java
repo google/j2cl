@@ -177,11 +177,13 @@ public class OperatorSideEffectUtils {
   private static FieldAccess createNumbersFieldAccess(
       String fieldName, TypeDescriptor typeDescriptor) {
     return FieldAccess.Builder.from(
-            FieldDescriptor.createRaw(
-                true, // isStatic
-                BootstrapType.NUMBERS.getDescriptor(),
-                fieldName,
-                typeDescriptor))
+            FieldDescriptor.Builder.fromDefault()
+                .setEnclosingClassTypeDescriptor(BootstrapType.NUMBERS.getDescriptor())
+                .setFieldName(fieldName)
+                .setTypeDescriptor(typeDescriptor)
+                .setIsStatic(true)
+                .setJsInfo(JsInfo.RAW_FIELD)
+                .build())
         .build();
   }
 

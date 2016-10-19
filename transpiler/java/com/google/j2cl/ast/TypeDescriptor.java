@@ -51,22 +51,6 @@ import java.util.Set;
 @Visitable
 public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsNameInfo {
 
-  public static Interner<TypeDescriptor> interner;
-
-  private static Interner<TypeDescriptor> getInterner() {
-    if (interner == null) {
-      interner = new Interner<TypeDescriptor>();
-    }
-    return interner;
-  }
-
-  private static TypeDescriptor intern(TypeDescriptor typeDescriptor) {
-    // Run interning through a central function so that debugging has an opportunity to inspect
-    // all of them.
-    TypeDescriptor internedTypeDescriptor = getInterner().intern(typeDescriptor);
-    return internedTypeDescriptor;
-  }
-
   /** Builder for a TypeDescriptor. */
   public static class Builder {
 
@@ -160,14 +144,23 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return builder;
     }
 
-    private TypeDescriptor newTypeDescriptor = new TypeDescriptor();
+    private final TypeDescriptor newTypeDescriptor = new TypeDescriptor();
+
+    private static final ThreadLocal<Interner<TypeDescriptor>> interner = new ThreadLocal<>();
+
+    private static Interner<TypeDescriptor> getInterner() {
+      if (interner.get() == null) {
+        interner.set(new Interner<>());
+      }
+      return interner.get();
+    }
 
     public TypeDescriptor build() {
       checkState(!newTypeDescriptor.isTypeVariable || newTypeDescriptor.isNullable);
       checkState(!newTypeDescriptor.isPrimitive || !newTypeDescriptor.isNullable);
       // TODO(tdeegan): Complete the precondition checks to make sure we are never buiding a
       // type descriptor that does not make sense.
-      return TypeDescriptor.intern(newTypeDescriptor);
+      return getInterner().intern(newTypeDescriptor);
     }
 
     public Builder setBinaryName(String binaryName) {

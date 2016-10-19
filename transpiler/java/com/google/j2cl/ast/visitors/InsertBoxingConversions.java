@@ -28,7 +28,7 @@ import com.google.j2cl.ast.TypeDescriptors;
  * Inserts a boxing operation when a primitive type is being put into a reference type slot in
  * assignment or method invocation conversion contexts.
  */
-public class InsertBoxingConversion extends NormalizationPass {
+public class InsertBoxingConversions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));

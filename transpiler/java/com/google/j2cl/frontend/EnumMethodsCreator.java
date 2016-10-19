@@ -59,9 +59,10 @@ public class EnumMethodsCreator {
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
-        FieldDescriptor.Builder.from(
-                enumType.getDescriptor(),
-                NAMES_TO_VALUES_MAP_FIELD_NAME,
+        FieldDescriptor.Builder.fromDefault()
+            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setFieldName(NAMES_TO_VALUES_MAP_FIELD_NAME)
+            .setTypeDescriptor(
                 TypeDescriptors.createNative(
                     // Browser global
                     JsUtils.JS_PACKAGE_GLOBAL,
