@@ -13,7 +13,7 @@ java_library(
         "//java/com/google/common/io",
         "//third_party/java/apache_commons_lang3",
         "//third_party/java/args4j",
-        "//third_party/java/eclipse:eclipse-jdt-core",
+        "//third_party/java/eclipse:eclipse-jdt-core-4.6",
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
