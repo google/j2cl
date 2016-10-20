@@ -23,7 +23,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -147,16 +146,18 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
           Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
           BinaryExpression initializer =
-              new BinaryExpression(
-                  capturedField.getDescriptor().getTypeDescriptor(),
-                  FieldAccess.Builder.from(capturedField.getDescriptor())
-                      .setQualifier(
-                          new ThisReference(
-                              method.getDescriptor().getEnclosingClassTypeDescriptor()))
-                      .build(),
-                  BinaryOperator.ASSIGN,
-                  parameter.getReference());
-          methodBuilder.addStatement(i++, new ExpressionStatement(initializer));
+              BinaryExpression.newBuilder()
+                  .setTypeDescriptor(capturedField.getDescriptor().getTypeDescriptor())
+                  .setLeftOperand(
+                      FieldAccess.Builder.from(capturedField.getDescriptor())
+                          .setQualifier(
+                              new ThisReference(
+                                  method.getDescriptor().getEnclosingClassTypeDescriptor()))
+                          .build())
+                  .setOperator(BinaryOperator.ASSIGN)
+                  .setRightOperand(parameter.getReference())
+                  .build();
+          methodBuilder.addStatement(i++, initializer.makeStatement());
         }
         return methodBuilder.build();
       }

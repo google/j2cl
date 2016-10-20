@@ -63,7 +63,11 @@ public class InsertUnboxingConversions extends NormalizationPass {
           // ...optionally followed by a widening primitive conversion.
           fromTypeDescriptor = resultExpression.getTypeDescriptor();
           if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
-            resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
+            resultExpression =
+                CastExpression.newBuilder()
+                    .setExpression(resultExpression)
+                    .setCastTypeDescriptor(toTypeDescriptor)
+                    .build();
           }
 
           return resultExpression;
@@ -99,7 +103,11 @@ public class InsertUnboxingConversions extends NormalizationPass {
       // ...optionally followed by a widening primitive conversion.
       fromTypeDescriptor = resultExpression.getTypeDescriptor();
       if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
-        resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
+        resultExpression =
+            CastExpression.newBuilder()
+                .setExpression(resultExpression)
+                .setCastTypeDescriptor(toTypeDescriptor)
+                .build();
       }
 
       return resultExpression;

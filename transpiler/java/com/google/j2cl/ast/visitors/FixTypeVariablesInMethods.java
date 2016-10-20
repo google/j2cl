@@ -50,8 +50,10 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
       TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
       TypeDescriptor boundType =
           replaceTypeVariableWithBound(castTypeDescriptor, (Method) getCurrentMember());
-      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-          annotation.getExpression(), boundType);
+      return JsDocAnnotatedExpression.newBuilder()
+          .setExpression(annotation.getExpression())
+          .setAnnotationType(boundType)
+          .build();
     }
 
   }

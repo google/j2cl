@@ -81,7 +81,7 @@ public class MethodCall extends Invocation {
   }
 
   @Override
-  Builder newBuilder() {
+  Builder createBuilder() {
     return new Builder(this);
   }
 

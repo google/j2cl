@@ -101,6 +101,10 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
 
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
   /** A Builder for FieldDescriptors. */
   public static class Builder {
     private boolean isStatic;
@@ -125,10 +129,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
       builder.declarationFieldDescriptor = fieldDescriptor.getDeclarationFieldDescriptorOrNull();
       return builder;
-    }
-
-    public static Builder fromDefault() {
-      return new Builder();
     }
 
     public Builder setFieldName(String fieldName) {

@@ -152,6 +152,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return MethodDescriptors.getSignature(name, parameterTypeDescriptors);
   }
 
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
@@ -160,39 +164,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** A Builder for MethodDescriptors. */
   public static class Builder {
     private boolean isStatic;
-    private Visibility visibility;
+    private Visibility visibility = Visibility.PUBLIC;
     private TypeDescriptor enclosingClassTypeDescriptor;
-    private String methodName;
+    private String name;
     private boolean isConstructor;
     private boolean isNative;
     private boolean isDefault;
     private boolean isVarargs;
     private MethodDescriptor declarationMethodDescriptor;
-    private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
-    private TypeDescriptor returnTypeDescriptor;
-    private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors;
-    private JsInfo jsInfo;
+    private ImmutableList<TypeDescriptor> parameterTypeDescriptors = ImmutableList.of();
+    private TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
+    private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors = ImmutableList.of();
+    private JsInfo jsInfo = JsInfo.NONE;
     private boolean isAbstract;
-
-    public static Builder fromDefault() {
-      Builder builder = new Builder();
-      builder.visibility = Visibility.PUBLIC;
-      builder.enclosingClassTypeDescriptor =
-          TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor();
-      builder.methodName = "";
-      builder.parameterTypeDescriptors = ImmutableList.of();
-      builder.returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
-      builder.typeParameterTypeDescriptors = ImmutableList.of();
-      builder.jsInfo = JsInfo.NONE;
-      return builder;
-    }
 
     public static Builder from(MethodDescriptor methodDescriptor) {
       Builder builder = new Builder();
       builder.isStatic = methodDescriptor.isStatic();
       builder.visibility = methodDescriptor.getVisibility();
       builder.enclosingClassTypeDescriptor = methodDescriptor.getEnclosingClassTypeDescriptor();
-      builder.methodName = methodDescriptor.getName();
+      builder.name = methodDescriptor.isConstructor() ? null : methodDescriptor.getName();
       builder.isConstructor = methodDescriptor.isConstructor();
       builder.isNative = methodDescriptor.isNative();
       builder.isDefault = methodDescriptor.isDefault();
@@ -212,8 +203,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this;
     }
 
-    public Builder setMethodName(String methodName) {
-      this.methodName = methodName;
+    public Builder setName(String name) {
+      this.name = name;
       return this;
     }
 
@@ -301,9 +292,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public MethodDescriptor build() {
       // TODO: We should compute the constructor name instead of allowing empty method name to
       // percolate into the MethodDescriptor.
-      checkState(
-          !methodName.isEmpty() || isConstructor,
-          "Empty method names are only allowed in constructors.");
+      checkState(!isConstructor || name == null, "Should not set names for constructors.");
+      checkState(isConstructor || name != null, "Method name should not be null.");
+
+      if (isConstructor) {
+        // Choose consistent naming for constructors.
+        name = enclosingClassTypeDescriptor.getSimpleName();
+      }
 
       if (declarationMethodDescriptor != null) {
         ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
@@ -321,7 +316,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   isStatic,
                   visibility,
                   enclosingClassTypeDescriptor,
-                  methodName,
+                  name,
                   isConstructor,
                   isNative,
                   isVarargs,

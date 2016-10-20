@@ -31,10 +31,6 @@ public class CastExpression extends Expression {
     this.expression = checkNotNull(expression);
     this.castTypeDescriptor = checkNotNull(castTypeDescriptor);
   }
-  
-  public static CastExpression create(Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor);
-  }
 
   public TypeDescriptor getCastTypeDescriptor() {
     return castTypeDescriptor;
@@ -54,12 +50,8 @@ public class CastExpression extends Expression {
     return new CastExpression(expression.clone(), castTypeDescriptor);
   }
 
-  public void setExpression(Expression expression) {
-    this.expression = expression;
-  }
-
-  public void setCastType(TypeDescriptor castTypeDescriptor) {
-    this.castTypeDescriptor = castTypeDescriptor;
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   @Override
@@ -73,12 +65,11 @@ public class CastExpression extends Expression {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
-    
+
     public static Builder from(CastExpression cast) {
-      Builder builder = new Builder();
-      builder.expression = cast.getExpression();
-      builder.castTypeDescriptor = cast.getCastTypeDescriptor();
-      return builder;
+      return new Builder()
+          .setExpression(cast.getExpression())
+          .setCastTypeDescriptor(cast.getCastTypeDescriptor());
     }
 
     public Builder setExpression(Expression expression) {

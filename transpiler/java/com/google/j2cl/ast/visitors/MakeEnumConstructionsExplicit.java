@@ -65,12 +65,12 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
             }
             return Method.Builder.from(method)
                 .addParameters(
-                    Variable.Builder.fromDefault()
+                    Variable.newBuilder()
                         .setName(VALUE_NAME_PARAMETER_NAME)
                         .setTypeDescriptor(TypeDescriptors.get().javaLangString)
                         .setIsParameter(true)
                         .build(),
-                    Variable.Builder.fromDefault()
+                    Variable.newBuilder()
                         .setName(ORDINAL_PARAMETER_NAME)
                         .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
                         .setIsParameter(true)
@@ -108,12 +108,12 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
 
           private MethodCall enumReplaceStringMethodCall(Expression nameVariable) {
             MethodDescriptor makeEnumNameMethodDescriptor =
-                MethodDescriptor.Builder.fromDefault()
+                MethodDescriptor.newBuilder()
                     .setIsStatic(true)
                     .setJsInfo(JsInfo.RAW)
                     .setEnclosingClassTypeDescriptor(
                         TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-                    .setMethodName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
+                    .setName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
                     .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
                     .setParameterTypeDescriptors(
                         Lists.newArrayList(TypeDescriptors.get().javaLangString))

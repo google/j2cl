@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -319,7 +318,7 @@ public class BridgeMethodsCreator {
                 .size();
         i++) {
       Variable parameter =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(bridgeMethodDescriptor.getParameterTypeDescriptors().get(i))
               .setIsParameter(true)
@@ -342,7 +341,10 @@ public class BridgeMethodsCreator {
                   .getRawTypeDescriptor()
                   .equalsIgnoreNullability(castToParameterTypeDescriptor)
               ? parameterReference
-              : CastExpression.create(parameterReference, castToParameterTypeDescriptor);
+              : CastExpression.newBuilder()
+                  .setExpression(parameterReference)
+                  .setCastTypeDescriptor(castToParameterTypeDescriptor)
+                  .build();
       arguments.add(argument);
     }
     TypeDescriptor targetEnclosingClassTypeDescriptor =
@@ -362,10 +364,10 @@ public class BridgeMethodsCreator {
         bridgeMethodDescriptor
                 .getReturnTypeDescriptor()
                 .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
-            ? new ExpressionStatement(dispatchMethodCall)
+            ? dispatchMethodCall.makeStatement()
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)

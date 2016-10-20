@@ -70,13 +70,13 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
     int index = 0;
     for (TypeDescriptor type : methodDescriptor.getParameterTypeDescriptors()) {
       parameters.add(
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("arg" + index++)
               .setTypeDescriptor(type)
               .setIsParameter(true)
               .build());
     }
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(methodDescriptor)
         .setParameters(parameters)
         .setIsAbstract(true)

@@ -96,7 +96,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       checkArgument(!clauses.isEmpty());
       // Create a temporary exception variable.
       Variable exceptionVariable =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("__$exc")
               .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
               .build();
@@ -108,7 +108,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       // Base case. If no more clauses left the last statement throws the exception.
       if (clauses.isEmpty()) {
         Statement noMatchThrowException = new ThrowStatement(exceptionVariable.getReference());
-        return new Block(Arrays.asList(noMatchThrowException));
+        return new Block(noMatchThrowException);
       }
 
       CatchClause clause = clauses.get(0);
@@ -126,17 +126,20 @@ public class NormalizeCatchClauses extends NormalizationPass {
               ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
               : catchVariable.getTypeDescriptor();
       ExpressionStatement assignment =
-          new ExpressionStatement(
-              new VariableDeclarationExpression(
+          new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       catchVariable,
-                      JsDocAnnotatedExpression.createCastAnnotatedExpression(
-                          exceptionVariable.getReference(), catchVariableTypeDescriptor))));
+                      JsDocAnnotatedExpression.newBuilder()
+                          .setExpression(exceptionVariable.getReference())
+                          .setAnnotationType(catchVariableTypeDescriptor)
+                          .build()))
+              .makeStatement();
       catchClauseBody.add(0, assignment);
 
-      Statement rest = bodyBuilder(clauses.subList(1, clauses.size()), exceptionVariable);
-      IfStatement ifStatment = new IfStatement(condition, new Block(catchClauseBody), rest);
-      return ifStatment;
+      return new IfStatement(
+          condition,
+          new Block(catchClauseBody),
+          bodyBuilder(clauses.subList(1, clauses.size()), exceptionVariable));
     }
 
     /**
@@ -163,13 +166,13 @@ public class NormalizeCatchClauses extends NormalizationPass {
     private MethodCall checkIsInstanceCall(
         TypeDescriptor descriptor, Expression exceptionVariable) {
       MethodDescriptor methodDescriptor =
-          MethodDescriptor.Builder.fromDefault()
-              .setMethodName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
+          MethodDescriptor.newBuilder()
+              .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
               .setIsStatic(true)
               .setJsInfo(JsInfo.RAW)
               .setEnclosingClassTypeDescriptor(descriptor)
               .setVisibility(Visibility.PUBLIC)
-              .setParameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))
+              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
               .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
               .build();
       return MethodCall.Builder.from(methodDescriptor).setArguments(exceptionVariable).build();

@@ -77,7 +77,7 @@ public class NewInstance extends Invocation {
   }
 
   @Override
-  Builder newBuilder() {
+  Builder createBuilder() {
     return new Builder(this);
   }
 

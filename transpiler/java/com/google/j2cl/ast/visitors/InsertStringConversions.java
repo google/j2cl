@@ -50,11 +50,12 @@ public class InsertStringConversions extends NormalizationPass {
           } else {
             // Otherwise, add an empty string at the front to make sure JS sees it as a
             // string operation.
-            return new BinaryExpression(
-                TypeDescriptors.get().javaLangString,
-                StringLiteral.fromPlainText(""),
-                BinaryOperator.PLUS,
-                operandExpression);
+            return BinaryExpression.newBuilder()
+                .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+                .setLeftOperand(StringLiteral.fromPlainText(""))
+                .setOperator(BinaryOperator.PLUS)
+                .setRightOperand(operandExpression)
+                .build();
           }
         }
         // Normally Java would box a primitive but we don't because JS already converts

@@ -127,7 +127,7 @@ public class Field extends Member implements HasSourcePosition {
       return builder;
     }
 
-    public static Builder fromDefault(FieldDescriptor fieldDescriptor) {
+    public static Builder from(FieldDescriptor fieldDescriptor) {
       Builder builder = new Builder();
       builder.fieldDescriptor = fieldDescriptor;
       return builder;

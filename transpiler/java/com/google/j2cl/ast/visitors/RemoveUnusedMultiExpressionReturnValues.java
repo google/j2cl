@@ -23,7 +23,6 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
-
 import java.util.List;
 
 /**
@@ -68,8 +67,7 @@ public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
       }
 
       // Return a replacement with the unused return value expression trimmed off.
-      return new ExpressionStatement(
-          new MultiExpression(expressions.subList(0, expressions.size() - 1)));
+      return new MultiExpression(expressions.subList(0, expressions.size() - 1)).makeStatement();
     }
   }
 }

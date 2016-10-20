@@ -29,7 +29,7 @@ public class BinaryExpression extends Expression {
   private BinaryOperator operator;
   @Visitable Expression rightOperand;
 
-  public BinaryExpression(
+  private BinaryExpression(
       TypeDescriptor typeDescriptor,
       Expression leftOperand,
       BinaryOperator operator,
@@ -52,18 +52,6 @@ public class BinaryExpression extends Expression {
     return rightOperand;
   }
 
-  public void setLeftOperand(Expression leftOperand) {
-    this.leftOperand = leftOperand;
-  }
-
-  public void setOperator(BinaryOperator operator) {
-    this.operator = operator;
-  }
-
-  public void setRightOperand(Expression rightOperand) {
-    this.rightOperand = rightOperand;
-  }
-
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
@@ -71,13 +59,21 @@ public class BinaryExpression extends Expression {
 
   @Override
   public BinaryExpression clone() {
-    return new BinaryExpression(
-        typeDescriptor, leftOperand.clone(), operator, rightOperand.clone());
+    return newBuilder()
+        .setTypeDescriptor(typeDescriptor)
+        .setLeftOperand(leftOperand.clone())
+        .setOperator(operator)
+        .setRightOperand(rightOperand.clone())
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_BinaryExpression.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   /**
@@ -90,31 +86,25 @@ public class BinaryExpression extends Expression {
     private Expression rightOperand;
 
     public static Builder from(BinaryExpression expression) {
-      Builder builder =
-          new Builder()
-              .setLeftOperand(expression.getLeftOperand())
-              .setOperator(expression.getOperator())
-              .setRightOperand(expression.getRightOperand())
-              .setTypeDescriptor(expression.getTypeDescriptor());
-      return builder;
+      return new Builder()
+          .setLeftOperand(expression.getLeftOperand())
+          .setOperator(expression.getOperator())
+          .setRightOperand(expression.getRightOperand())
+          .setTypeDescriptor(expression.getTypeDescriptor());
     }
 
     public static Builder asAssignmentTo(Variable variable) {
-      Builder builder =
-          new Builder()
-              .setLeftOperand(variable.getReference())
-              .setTypeDescriptor(variable.getTypeDescriptor())
-              .setOperator(BinaryOperator.ASSIGN);
-      return builder;
+      return new Builder()
+          .setLeftOperand(variable.getReference())
+          .setTypeDescriptor(variable.getTypeDescriptor())
+          .setOperator(BinaryOperator.ASSIGN);
     }
 
     public static Builder asAssignmentTo(Expression lvalue) {
-      Builder builder =
-          new Builder()
-              .setLeftOperand(lvalue)
-              .setTypeDescriptor(lvalue.getTypeDescriptor())
-              .setOperator(BinaryOperator.ASSIGN);
-      return builder;
+      return new Builder()
+          .setLeftOperand(lvalue)
+          .setTypeDescriptor(lvalue.getTypeDescriptor())
+          .setOperator(BinaryOperator.ASSIGN);
     }
 
     public Builder setLeftOperand(Expression operand) {

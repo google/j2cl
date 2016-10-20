@@ -117,6 +117,10 @@ public class MethodDescriptors {
     return methodBuilder.build();
   }
 
+  static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
+    return getSignature(name, Arrays.asList(parameterTypeDescriptors));
+  }
+
   static String getSignature(String name, Iterable<TypeDescriptor> parameterTypeDescriptors) {
     return name
         + "("

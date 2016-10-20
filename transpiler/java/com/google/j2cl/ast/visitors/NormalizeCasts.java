@@ -69,8 +69,10 @@ public class NormalizeCasts extends NormalizationPass {
             ? castExpression.getExpression()
             : createCheckCastCall(castExpression);
     // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-        resultingExpression, castExpression.getCastTypeDescriptor());
+    return JsDocAnnotatedExpression.newBuilder()
+        .setExpression(resultingExpression)
+        .setAnnotationType(castExpression.getCastTypeDescriptor())
+        .build();
   }
 
   private static Expression createCheckCastCall(CastExpression castExpression) {
@@ -80,11 +82,11 @@ public class NormalizeCasts extends NormalizationPass {
     Expression expression = castExpression.getExpression();
 
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
-            .setMethodName("to")
+            .setName("to")
             .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
@@ -121,11 +123,11 @@ public class NormalizeCasts extends NormalizationPass {
   private static Node createJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .setMethodName("$castTo")
+            .setName("$castTo")
             .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject,
@@ -149,19 +151,21 @@ public class NormalizeCasts extends NormalizationPass {
     MethodCall castMethodCall =
         MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-        castMethodCall, arrayCastTypeDescriptor);
+    return JsDocAnnotatedExpression.newBuilder()
+        .setExpression(castMethodCall)
+        .setAnnotationType(arrayCastTypeDescriptor)
+        .build();
   }
 
   private static Node createNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     checkArgument(castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .setMethodName("$castToNative")
+            .setName("$castToNative")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
@@ -172,7 +176,9 @@ public class NormalizeCasts extends NormalizationPass {
     MethodCall castMethodCall =
         MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-        castMethodCall, castTypeDescriptor);
+    return JsDocAnnotatedExpression.newBuilder()
+        .setExpression(castMethodCall)
+        .setAnnotationType(castTypeDescriptor)
+        .build();
   }
 }

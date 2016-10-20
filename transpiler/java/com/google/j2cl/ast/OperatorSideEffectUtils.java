@@ -60,11 +60,13 @@ public class OperatorSideEffectUtils {
     // q.a += b; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + b)
     Expression qualifier = ((FieldAccess) leftOperand).getQualifier().clone();
     BinaryExpression assignQualifier =
-        new BinaryExpression(
-            qualifier.getTypeDescriptor(),
-            createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
-            BinaryOperator.ASSIGN,
-            qualifier); // Numbers.$q = q
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(qualifier.getTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
     BinaryExpression assignment =
         expandExpressionWithQualifier(
             leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
@@ -81,11 +83,13 @@ public class OperatorSideEffectUtils {
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a++; => (Numbers.$v = a, a = a + 1, Numbers.$v)
       BinaryExpression assignVar =
-          new BinaryExpression(
-              operand.getTypeDescriptor(),
-              createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()),
-              BinaryOperator.ASSIGN,
-              operand); //Numbers.$v = boxA
+          BinaryExpression.newBuilder()
+              .setTypeDescriptor(operand.getTypeDescriptor())
+              .setLeftOperand(
+                  createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()))
+              .setOperator(BinaryOperator.ASSIGN)
+              .setRightOperand(operand)
+              .build(); //Numbers.$v = boxA
       BinaryExpression assignment =
           expandExpressionNoQualifier(
               operand.clone(),
@@ -107,20 +111,26 @@ public class OperatorSideEffectUtils {
     FieldDescriptor target = fieldAccess.getTarget();
 
     BinaryExpression assignQualifier =
-        new BinaryExpression(
-            qualifier.getTypeDescriptor(),
-            createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
-            BinaryOperator.ASSIGN,
-            qualifier); // Numbers.$q = q
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(qualifier.getTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
     BinaryExpression assignVar =
-        new BinaryExpression(
-            target.getEnclosingClassTypeDescriptor(),
-            createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()),
-            BinaryOperator.ASSIGN,
-            FieldAccess.Builder.from(target)
-                .setQualifier(
-                    createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
-                .build()); //Numbers.$v = Numbers.$q.a
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(target.getEnclosingClassTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(
+                FieldAccess.Builder.from(target)
+                    .setQualifier(
+                        createNumbersFieldAccess(
+                            NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+                    .build())
+            .build(); //Numbers.$v = Numbers.$q.a
     BinaryExpression assignment =
         expandExpressionWithQualifier(
             operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
@@ -152,11 +162,13 @@ public class OperatorSideEffectUtils {
     // ++q.a; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + 1)
     Expression qualifier = ((FieldAccess) operand).getQualifier();
     BinaryExpression assignQualifier =
-        new BinaryExpression(
-            qualifier.getTypeDescriptor(),
-            createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
-            BinaryOperator.ASSIGN,
-            qualifier); // Numbers.$q = q
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(qualifier.getTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
     Expression assignment =
         expandExpressionWithQualifier(
             operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
@@ -177,7 +189,7 @@ public class OperatorSideEffectUtils {
   private static FieldAccess createNumbersFieldAccess(
       String fieldName, TypeDescriptor typeDescriptor) {
     return FieldAccess.Builder.from(
-            FieldDescriptor.Builder.fromDefault()
+            FieldDescriptor.newBuilder()
                 .setEnclosingClassTypeDescriptor(BootstrapType.NUMBERS.getDescriptor())
                 .setFieldName(fieldName)
                 .setTypeDescriptor(typeDescriptor)
@@ -196,12 +208,16 @@ public class OperatorSideEffectUtils {
 
     return BinaryExpression.Builder.asAssignmentTo(leftOperand)
         .setRightOperand(
-            new BinaryExpression(
-                binaryOperationResultType(
-                    operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
-                leftOperand.clone(),
-                operator,
-                rightOperand))
+            BinaryExpression.newBuilder()
+                .setTypeDescriptor(
+                    binaryOperationResultType(
+                        operator,
+                        leftOperand.getTypeDescriptor(),
+                        rightOperand.getTypeDescriptor()))
+                .setLeftOperand(leftOperand.clone())
+                .setOperator(operator)
+                .setRightOperand(rightOperand)
+                .build())
         .build();
   }
 
@@ -214,18 +230,21 @@ public class OperatorSideEffectUtils {
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
     BinaryExpression binaryExpression =
-        new BinaryExpression(
-            binaryOperationResultType(
-                operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
-            replaceQualifier(leftOperand), // Numbers.$q.a
-            operator,
-            rightOperand);
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(
+                binaryOperationResultType(
+                    operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()))
+            .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
+            .setOperator(operator)
+            .setRightOperand(rightOperand)
+            .build();
     BinaryExpression assignment =
-        new BinaryExpression(
-            leftOperand.getTypeDescriptor(),
-            replaceQualifier(leftOperand), // Numbers.$q.a
-            BinaryOperator.ASSIGN,
-            binaryExpression);
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(leftOperand.getTypeDescriptor())
+            .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(binaryExpression)
+            .build();
     return assignment;
   }
 

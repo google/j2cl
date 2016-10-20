@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -76,7 +75,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
       List<Expression> arguments = new ArrayList<>();
       MethodCall superCall =
           MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-      method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
+      method.getBody().getStatements().add(0, superCall.makeStatement());
     }
   }
 }

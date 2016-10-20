@@ -61,29 +61,28 @@ public class FieldAccess extends Expression implements MemberReference {
     return Visitor_FieldAccess.visit(processor, this);
   }
 
-  /** Builder for Variable. */
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for FieldAccess. */
   public static class Builder {
 
     private FieldDescriptor targetFieldDescriptor;
     private Expression qualifier;
 
     public static Builder from(FieldDescriptor targetFieldDescriptor) {
-      Builder builder = new Builder();
-      builder.targetFieldDescriptor = targetFieldDescriptor;
-      return builder;
+      return newBuilder().setTargetFieldDescriptor(targetFieldDescriptor);
     }
 
     public static Builder from(Field targetField) {
-      Builder builder = new Builder();
-      builder.targetFieldDescriptor = targetField.getDescriptor();
-      return builder;
+      return from(targetField.getDescriptor());
     }
 
     public static Builder from(FieldAccess fieldAccess) {
-      Builder builder = new Builder();
-      builder.targetFieldDescriptor = fieldAccess.getTarget();
-      builder.qualifier = fieldAccess.getQualifier();
-      return builder;
+      return newBuilder()
+          .setTargetFieldDescriptor(fieldAccess.getTarget())
+          .setQualifier(fieldAccess.getQualifier());
     }
 
     public Builder setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {

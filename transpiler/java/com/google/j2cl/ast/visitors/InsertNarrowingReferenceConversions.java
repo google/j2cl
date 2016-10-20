@@ -44,9 +44,14 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
           TypeDescriptor boxedTypeDescriptor =
               TypeDescriptors.getBoxTypeFromPrimitiveType(toTypeDescriptor);
           // (int) new Object(); => (int) (Integer) new Object();
-          return CastExpression.create(
-              CastExpression.create(castExpression.getExpression(), boxedTypeDescriptor),
-              toTypeDescriptor);
+          return CastExpression.newBuilder()
+              .setExpression(
+                  CastExpression.newBuilder()
+                      .setExpression(castExpression.getExpression())
+                      .setCastTypeDescriptor(boxedTypeDescriptor)
+                      .build())
+              .setCastTypeDescriptor(toTypeDescriptor)
+              .build();
         }
         // In other casting context, narrowing reference conversion should have been
         // explicitlyapplied.

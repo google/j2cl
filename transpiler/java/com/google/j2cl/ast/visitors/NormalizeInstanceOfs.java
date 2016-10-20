@@ -59,11 +59,11 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     }
 
     MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(checkTypeDescriptor)
-            .setMethodName("$isInstance")
+            .setName("$isInstance")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
@@ -84,11 +84,11 @@ public class NormalizeInstanceOfs extends NormalizationPass {
   private Node rewriteJavaArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setMethodName("$instanceIsOfType")
+            .setName("$instanceIsOfType")
             .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject,
@@ -115,11 +115,11 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
 
     MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setMethodName("$instanceIsOfNative")
+            .setName("$instanceIsOfNative")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();

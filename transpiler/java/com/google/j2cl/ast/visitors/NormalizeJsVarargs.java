@@ -27,7 +27,6 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.Invocation;
@@ -83,7 +82,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
    */
   private static class NormalizeJsMethodsVarargs extends AbstractRewriter {
     private static final Variable ARGUMENTS_PARAMETER =
-        Variable.Builder.fromDefault()
+        Variable.newBuilder()
             .setName("arguments")
             .setTypeDescriptor(TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1))
             .setIsParameter(true)
@@ -107,7 +106,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       }
       varargsParameter = Iterables.getLast(method.getParameters());
       varargsLocalCopy =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$var_args_copy")
               .setTypeDescriptor(varargsParameter.getTypeDescriptor())
               .build();
@@ -141,46 +140,51 @@ public class NormalizeJsVarargs extends NormalizationPass {
               Arrays.<Expression>asList(createArraySizeExpression(varargsIndex)),
               null);
       Statement variableDeclaration =
-          new ExpressionStatement(
-              new VariableDeclarationExpression(
-                  new VariableDeclarationFragment(varargsLocalCopy, newArray)));
+          new VariableDeclarationExpression(
+                  new VariableDeclarationFragment(varargsLocalCopy, newArray))
+              .makeStatement();
 
       // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
       Variable loopVariable =
-          Variable.Builder.fromDefault().setName("$i").setTypeDescriptor(primitiveInt).build();
+          Variable.newBuilder().setName("$i").setTypeDescriptor(primitiveInt).build();
 
       Expression indexExpression =
           varargsIndex == 0
               ? loopVariable.getReference()
-              : new BinaryExpression(
-                  primitiveInt,
-                  loopVariable.getReference(),
-                  BinaryOperator.PLUS,
-                  new NumberLiteral(primitiveInt, varargsIndex));
+              : BinaryExpression.newBuilder()
+                  .setTypeDescriptor(primitiveInt)
+                  .setLeftOperand(loopVariable.getReference())
+                  .setOperator(BinaryOperator.PLUS)
+                  .setRightOperand(new NumberLiteral(primitiveInt, varargsIndex))
+                  .build();
       Statement body =
-          new ExpressionStatement(
-              AstUtils.createArraySetExpression(
+          AstUtils.createArraySetExpression(
                   varargsLocalCopy.getReference(),
                   loopVariable.getReference(),
                   BinaryOperator.ASSIGN,
-                  new ArrayAccess(ARGUMENTS_PARAMETER.getReference(), indexExpression)));
+                  new ArrayAccess(ARGUMENTS_PARAMETER.getReference(), indexExpression))
+              .makeStatement();
 
       // (3). (for statement) for ($i = 0; i < arguments.length - idx; i++) { ... }
       Statement forStatement =
           new ForStatement(
-              new BinaryExpression(
-                  primitiveBoolean,
-                  loopVariable.getReference(),
-                  BinaryOperator.LESS,
-                  createArraySizeExpression(varargsIndex)),
+              BinaryExpression.newBuilder()
+                  .setTypeDescriptor(primitiveBoolean)
+                  .setLeftOperand(loopVariable.getReference())
+                  .setOperator(BinaryOperator.LESS)
+                  .setRightOperand(createArraySizeExpression(varargsIndex))
+                  .build(),
               new Block(body),
-              Arrays.<Expression>asList(
+              Arrays.asList(
                   new VariableDeclarationExpression(
                       new VariableDeclarationFragment(
                           loopVariable, new NumberLiteral(primitiveInt, 0)))),
-              Arrays.<Expression>asList(
-                  new PostfixExpression(
-                      primitiveInt, loopVariable.getReference(), PostfixOperator.INCREMENT)));
+              Arrays.asList(
+                  PostfixExpression.newBuilder()
+                      .setTypeDescriptor(primitiveInt)
+                      .setOperand(loopVariable.getReference())
+                      .setOperator(PostfixOperator.INCREMENT)
+                      .build()));
 
       return Method.Builder.from(method)
           .addStatement(0, variableDeclaration)
@@ -196,11 +200,12 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
       return varargsIndex == 0
           ? argumentsLengthReference
-          : new BinaryExpression(
-              primitiveInt,
-              argumentsLengthReference,
-              BinaryOperator.MINUS,
-              new NumberLiteral(primitiveInt, varargsIndex));
+          : BinaryExpression.newBuilder()
+              .setTypeDescriptor(primitiveInt)
+              .setLeftOperand(argumentsLengthReference)
+              .setOperator(BinaryOperator.MINUS)
+              .setRightOperand(new NumberLiteral(primitiveInt, varargsIndex))
+              .build();
     }
   }
 
@@ -247,10 +252,10 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // TODO: For non-nullable types we can avoid this.
       TypeDescriptor returnType = TypeDescriptors.toNonNullable(lastArgument.getTypeDescriptor());
       MethodDescriptor nullToEmptyDescriptor =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setReturnTypeDescriptor(returnType)
               .setIsStatic(true)
-              .setMethodName("$checkNotNull")
+              .setName("$checkNotNull")
               .setJsInfo(JsInfo.RAW)
               .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
               .setReturnTypeDescriptor(returnType)
@@ -261,7 +266,11 @@ public class NormalizeJsVarargs extends NormalizationPass {
           MethodCall.Builder.from(nullToEmptyDescriptor).setArguments(lastArgument).build();
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
-              new PrefixExpression(returnType, nullToEmpty, PrefixOperator.SPREAD))
+              PrefixExpression.newBuilder()
+                  .setTypeDescriptor(returnType)
+                  .setOperand(nullToEmpty)
+                  .setOperator(PrefixOperator.SPREAD)
+                  .build())
           .build();
     }
   }

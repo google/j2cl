@@ -20,7 +20,6 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -62,11 +61,11 @@ public class InsertExceptionConversions extends NormalizationPass {
     public Node rewriteCatchClause(CatchClause catchClause) {
 
       MethodDescriptor toJava =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setIsStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setMethodName("toJava")
+              .setName("toJava")
               .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
               .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
@@ -81,7 +80,7 @@ public class InsertExceptionConversions extends NormalizationPass {
               .setRightOperand(toJavaCall)
               .build();
 
-      catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
+      catchClause.getBody().getStatements().add(0, assignment.makeStatement());
 
       return catchClause;
     }
@@ -89,11 +88,11 @@ public class InsertExceptionConversions extends NormalizationPass {
     @Override
     public Node rewriteThrowStatement(ThrowStatement originalStatement) {
       MethodDescriptor toJs =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setIsStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setMethodName("toJs")
+              .setName("toJs")
               .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
               .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
               .build();

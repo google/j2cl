@@ -32,7 +32,6 @@ import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
@@ -127,7 +126,7 @@ public class JdtUtils {
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
-    return FieldDescriptor.Builder.fromDefault()
+    return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setFieldName(fieldName)
         .setTypeDescriptor(thisTypeDescriptor)
@@ -149,7 +148,7 @@ public class JdtUtils {
             : createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
-    return Variable.Builder.fromDefault()
+    return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setIsFinal(isFinal)
@@ -509,7 +508,7 @@ public class JdtUtils {
         lambdaMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(parameterTypes.get(i).getRawTypeDescriptor())
               .setIsParameter(true)
@@ -523,10 +522,10 @@ public class JdtUtils {
         lambdaMethodDescriptor
                 .getReturnTypeDescriptor()
                 .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
-            ? new ExpressionStatement(callLambda)
+            ? callLambda.makeStatement()
             : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
 
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(samMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
@@ -901,9 +900,9 @@ public class JdtUtils {
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(JdtUtils::createTypeDescriptor);
 
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setMethodName(methodName)
+        .setName(isConstructor ? null : methodName)
         .setDeclarationMethodDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setParameterTypeDescriptors(parameterTypeDescriptors)

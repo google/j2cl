@@ -16,10 +16,14 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/** A node that represent a type annotation in the Javascript output. */
+/**
+ * A node that represent a closure type cast "@type {type}" or a closure field declaration "@public
+ * {type}".
+ */
 @Visitable
 public class JsDocAnnotatedExpression extends Expression {
   @Visitable Expression expression;
@@ -29,36 +33,18 @@ public class JsDocAnnotatedExpression extends Expression {
   private JsDocAnnotatedExpression(
       Expression expression, TypeDescriptor annotationType, boolean isDeclaration) {
     checkArgument(!(expression instanceof JsDocAnnotatedExpression));
-    this.expression = expression;
-    this.annotationType = annotationType;
+    this.expression = checkNotNull(expression);
+    this.annotationType = checkNotNull(annotationType);
     this.isDeclaration = isDeclaration;
-  }
-
-  /** Creates a "@type {type}" cast on an expression. */
-  public static JsDocAnnotatedExpression createCastAnnotatedExpression(
-      Expression expression, TypeDescriptor type) {
-    if (expression instanceof JsDocAnnotatedExpression) {
-      JsDocAnnotatedExpression annotation = (JsDocAnnotatedExpression) expression;
-      return new JsDocAnnotatedExpression(annotation.getExpression(), type, false);
-    }
-    return new JsDocAnnotatedExpression(expression, type, false);
-  }
-
-  /**
-   * Creates a "@public {type}" cast on an assignment.
-   *
-   * @param expression Must be an assignment expression.
-   */
-  public static JsDocAnnotatedExpression createDeclarationAnnotatedExpression(
-      Expression expression, TypeDescriptor type) {
-    String message = "Declaration annotations can only applied to assignments.";
-    checkArgument(expression instanceof BinaryExpression, message);
-    checkArgument(((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN, message);
-    return new JsDocAnnotatedExpression(expression, type, true);
   }
 
   public Expression getExpression() {
     return expression;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return annotationType;
   }
 
   public boolean isDeclaration() {
@@ -71,13 +57,12 @@ public class JsDocAnnotatedExpression extends Expression {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return annotationType;
-  }
-
-  @Override
   public JsDocAnnotatedExpression clone() {
     return new JsDocAnnotatedExpression(expression.clone(), annotationType, isDeclaration);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   /** A Builder for easily and correctly creating modified versions of CastExpressions. */
@@ -105,7 +90,21 @@ public class JsDocAnnotatedExpression extends Expression {
       return this;
     }
 
+    public Builder setIsDeclaration(boolean isDeclaration) {
+      this.isDeclaration = isDeclaration;
+      return this;
+    }
+
     public JsDocAnnotatedExpression build() {
+      checkArgument(
+          !isDeclaration
+              || (expression instanceof BinaryExpression
+                  && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN),
+          "Declaration annotations can only applied to assignments.");
+      if (expression instanceof JsDocAnnotatedExpression) {
+        // Don't chain JsDocAnnotatedExpressions, just replace.
+        expression = ((JsDocAnnotatedExpression) expression).getExpression();
+      }
       return new JsDocAnnotatedExpression(expression, annotationType, isDeclaration);
     }
   }

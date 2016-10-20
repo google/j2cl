@@ -42,7 +42,7 @@ public class AstUtils {
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
-      FieldDescriptor.Builder.fromDefault()
+      FieldDescriptor.newBuilder()
           .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
           .setFieldName("length")
           .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
@@ -61,20 +61,20 @@ public class AstUtils {
   /** Create "$init" MethodDescriptor. */
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setVisibility(Visibility.PRIVATE)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setMethodName(MethodDescriptor.INIT_METHOD_NAME)
+        .setName(MethodDescriptor.INIT_METHOD_NAME)
         .build();
   }
 
   /** Create "Equality.$same()" MethodDescriptor. */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setIsStatic(true)
         .setJsInfo(JsInfo.RAW)
         .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
-        .setMethodName(MethodDescriptor.SAME_METHOD_NAME)
+        .setName(MethodDescriptor.SAME_METHOD_NAME)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
         .setParameterTypeDescriptors(
             Lists.newArrayList(
@@ -84,11 +84,11 @@ public class AstUtils {
 
   /** Create "Equality.$notSame()" MethodDescriptor. */
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setIsStatic(true)
         .setJsInfo(JsInfo.RAW)
         .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
-        .setMethodName(MethodDescriptor.NOT_SAME_METHOD_NAME)
+        .setName(MethodDescriptor.NOT_SAME_METHOD_NAME)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
         .setParameterTypeDescriptors(
             Lists.newArrayList(
@@ -105,12 +105,11 @@ public class AstUtils {
         enclosingClassTypeDescriptor.isJsType() && visibility.isPublic()
             ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
             : JsInfo.NONE;
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setVisibility(visibility)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setMethodName("<init>")
         .setIsConstructor(true)
-        .setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
+        .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .build();
   }
@@ -248,7 +247,7 @@ public class AstUtils {
   /** Returns the added field descriptor corresponding to the captured variable. */
   public static FieldDescriptor getFieldDescriptorForCapture(
       TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
-    return FieldDescriptor.Builder.fromDefault()
+    return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setFieldName(CAPTURES_PREFIX + capturedVariable.getName())
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
@@ -260,7 +259,7 @@ public class AstUtils {
   /** Returns the added field corresponding to the enclosing instance. */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptor.Builder.fromDefault()
+    return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
         .setFieldName(ENCLOSING_INSTANCE_NAME)
         .setTypeDescriptor(fieldTypeDescriptor)
@@ -269,7 +268,7 @@ public class AstUtils {
 
   /** Returns the added outer parameter in constructor corresponding to the added field. */
   public static Variable createOuterParamByField(Field field) {
-    return Variable.Builder.fromDefault()
+    return Variable.newBuilder()
         .setName(field.getDescriptor().getName())
         .setTypeDescriptor(field.getDescriptor().getTypeDescriptor())
         .setIsParameter(true)
@@ -327,7 +326,7 @@ public class AstUtils {
     List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(parameterTypes.get(i))
               .setIsParameter(true)
@@ -349,10 +348,10 @@ public class AstUtils {
         fromMethodDescriptor
                 .getReturnTypeDescriptor()
                 .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
-            ? new ExpressionStatement(forwardingMethodCall)
+            ? forwardingMethodCall.makeStatement()
             : new ReturnStatement(
                 forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(fromMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
@@ -661,7 +660,12 @@ public class AstUtils {
     Expression joinedExpressions =
         joinExpressionsWithBinaryOperator(
             outputType, operator, expressions.subList(1, expressions.size()));
-    return new BinaryExpression(outputType, expressions.get(0), operator, joinedExpressions);
+    return BinaryExpression.newBuilder()
+        .setTypeDescriptor(outputType)
+        .setLeftOperand(expressions.get(0))
+        .setOperator(operator)
+        .setRightOperand(joinedExpressions)
+        .build();
   }
 
   public static Method createDevirtualizedMethod(Method method) {
@@ -674,7 +678,7 @@ public class AstUtils {
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 
     final Variable thisArg =
-        Variable.Builder.fromDefault()
+        Variable.newBuilder()
             .setName("$thisArg")
             .setTypeDescriptor(method.getDescriptor().getEnclosingClassTypeDescriptor())
             .setIsParameter(true)
@@ -700,7 +704,7 @@ public class AstUtils {
     newParameters.addAll(method.getParameters()); // original parameters in the instance method.
 
     // Add the static method to current type.
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(newMethodDescriptor)
         .setParameters(newParameters)
         .addStatements(method.getBody().getStatements())
@@ -759,10 +763,10 @@ public class AstUtils {
 
     // Util getPrototype
     MethodDescriptor getPrototype =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(
                 TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-            .setMethodName("$getPrototype")
+            .setName("$getPrototype")
             .setIsStatic(true)
             .setJsInfo(JsInfo.RAW)
             .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
@@ -774,7 +778,7 @@ public class AstUtils {
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
-                FieldDescriptor.Builder.fromDefault()
+                FieldDescriptor.newBuilder()
                     .setEnclosingClassTypeDescriptor(lambdaType)
                     .setFieldName(applyMethodName)
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
@@ -784,10 +788,10 @@ public class AstUtils {
             .build();
 
     MethodDescriptor makeLambdaCall =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(
                 TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-            .setMethodName("$makeLambdaFunction")
+            .setName("$makeLambdaFunction")
             .setIsStatic(true)
             .setJsInfo(JsInfo.RAW)
             .setParameterTypeDescriptors(
@@ -798,7 +802,7 @@ public class AstUtils {
 
     FieldAccess copyFunctionFieldAccess =
         FieldAccess.Builder.from(
-                FieldDescriptor.Builder.fromDefault()
+                FieldDescriptor.newBuilder()
                     .setEnclosingClassTypeDescriptor(lambdaType)
                     .setFieldName("$copy")
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
@@ -826,14 +830,18 @@ public class AstUtils {
         continue;
       }
       Statement declaration =
-          new ExpressionStatement(
-              JsDocAnnotatedExpression.createDeclarationAnnotatedExpression(
-                  new BinaryExpression(
-                      TypeDescriptors.get().primitiveVoid,
-                      FieldAccess.Builder.from(field.getDescriptor()).build(),
-                      BinaryOperator.ASSIGN,
-                      getInitialValue(field)),
-                  field.getDescriptor().getTypeDescriptor()));
+          JsDocAnnotatedExpression.newBuilder()
+              .setExpression(
+                  BinaryExpression.newBuilder()
+                      .setTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+                      .setLeftOperand(FieldAccess.Builder.from(field).build())
+                      .setOperator(BinaryOperator.ASSIGN)
+                      .setRightOperand(getInitialValue(field))
+                      .build())
+              .setAnnotationType(field.getDescriptor().getTypeDescriptor())
+              .setIsDeclaration(true)
+              .build()
+              .makeStatement();
       fieldInits.add(declaration);
     }
     return fieldInits;
@@ -920,11 +928,11 @@ public class AstUtils {
     }
 
     // Create and return the method descriptor.
-    return MethodDescriptor.Builder.fromDefault()
+    return MethodDescriptor.newBuilder()
         .setJsInfo(JsInfo.RAW)
         .setIsStatic(true)
         .setEnclosingClassTypeDescriptor(enclosingClassType)
-        .setMethodName(methodName)
+        .setName(methodName)
         .setParameterTypeDescriptors(methodParams)
         .setReturnTypeDescriptor(elementType)
         .build();

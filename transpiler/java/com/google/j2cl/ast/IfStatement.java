@@ -29,6 +29,10 @@ public class IfStatement extends Statement {
   @Visitable Statement thenStatement;
   @Visitable @Nullable Statement elseStatement;
 
+  public IfStatement(Expression conditionExpression, Statement thenStatement) {
+    this(conditionExpression, thenStatement, null);
+  }
+
   public IfStatement(
       Expression conditionExpression, Statement thenStatement, Statement elseStatement) {
     this.conditionExpression = checkNotNull(conditionExpression);

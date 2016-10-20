@@ -85,7 +85,11 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             // outermost cast.
             for (TypeDescriptor intersectedTypeDescriptor :
                 Lists.reverse(castTypeDescriptor.getIntersectedTypeDescriptors())) {
-              expression = CastExpression.create(expression, intersectedTypeDescriptor);
+              expression =
+                  CastExpression.newBuilder()
+                      .setExpression(expression)
+                      .setCastTypeDescriptor(intersectedTypeDescriptor)
+                      .build();
             }
             return expression;
           }
@@ -134,7 +138,10 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
       return expression;
     }
 
-    return CastExpression.create(expression, targetInstanceTypeDescriptor);
+    return CastExpression.newBuilder()
+        .setExpression(expression)
+        .setCastTypeDescriptor(targetInstanceTypeDescriptor)
+        .build();
   }
 
   private static List<TypeDescriptor> maybeGetIntersectedTypeDescriptors(

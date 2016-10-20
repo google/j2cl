@@ -54,14 +54,18 @@ public class FixBooleanOperators extends NormalizationPass {
         if (binaryExpression.getOperator() == BinaryOperator.BIT_AND
             || binaryExpression.getOperator() == BinaryOperator.BIT_OR
             || binaryExpression.getOperator() == BinaryOperator.BIT_XOR) {
-          return new PrefixExpression(
-              primitiveBoolean,
-              new PrefixExpression(
-                  primitiveBoolean, new MultiExpression(binaryExpression), PrefixOperator.NOT),
-              PrefixOperator.NOT);
+          return PrefixExpression.newBuilder()
+              .setTypeDescriptor(primitiveBoolean)
+              .setOperand(
+                  PrefixExpression.newBuilder()
+                      .setTypeDescriptor(primitiveBoolean)
+                      .setOperand(new MultiExpression(binaryExpression))
+                      .setOperator(PrefixOperator.NOT)
+                      .build())
+              .setOperator(PrefixOperator.NOT)
+              .build();
         }
       }
-
       return binaryExpression;
     }
   }

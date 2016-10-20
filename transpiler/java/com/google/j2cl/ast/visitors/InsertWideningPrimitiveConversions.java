@@ -126,11 +126,11 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
             AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
             AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor widenMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setMethodName(widenMethodName)
+            .setName(widenMethodName)
             .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();

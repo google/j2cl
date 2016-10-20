@@ -30,7 +30,6 @@ import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -952,7 +951,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public MethodDescriptor getDeclaredMethodDescriptorByName(
       String methodName, TypeDescriptor... parameters) {
     return getDeclaredMethodDescriptorsBySignature()
-        .get(MethodDescriptors.getSignature(methodName, Arrays.asList(parameters)));
+        .get(MethodDescriptors.getSignature(methodName, parameters));
   }
 
   /**
@@ -962,7 +961,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public MethodDescriptor getMethodDescriptorByName(
       String methodName, TypeDescriptor... parameters) {
     return getMethodDescriptorsBySignature()
-        .get(MethodDescriptors.getSignature(methodName, Arrays.asList(parameters)));
+        .get(MethodDescriptors.getSignature(methodName, parameters));
   }
 
   /** The list of all methods available on a given type. */

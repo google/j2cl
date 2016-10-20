@@ -62,7 +62,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);
 
       MethodDescriptor nativeArrayConstructor =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setIsConstructor(true)
               .setJsInfo(JsInfo.RAW_CTOR)
               .setEnclosingClassTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
@@ -73,15 +73,14 @@ public class NormalizeArrayCreations extends NormalizationPass {
     }
 
     MethodDescriptor arrayCreateMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
-            .setMethodName("$create")
+            .setName("$create")
             .setParameterTypeDescriptors(
-                Arrays.asList(
-                    TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
-                    TypeDescriptors.get().javaLangObject))
+                TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                TypeDescriptors.get().javaLangObject)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(
@@ -95,9 +94,10 @@ public class NormalizeArrayCreations extends NormalizationPass {
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
         MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
-    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-        arrayCreateMethodCall,
-        TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
+    return JsDocAnnotatedExpression.newBuilder()
+        .setExpression(arrayCreateMethodCall)
+        .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
+        .build();
   }
 
   /**
@@ -114,15 +114,14 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
-            .setMethodName("$init")
+            .setName("$init")
             .setParameterTypeDescriptors(
-                Arrays.asList(
-                    TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
-                    TypeDescriptors.get().javaLangObject))
+                TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                TypeDescriptors.get().javaLangObject)
             .build();
 
     if (dimensionCount == 1) {
@@ -137,9 +136,10 @@ public class NormalizeArrayCreations extends NormalizationPass {
       arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
           MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
-      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-          arrayInitMethodCall,
-          TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
+      return JsDocAnnotatedExpression.newBuilder()
+          .setExpression(arrayInitMethodCall)
+          .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
+          .build();
     } else {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
@@ -160,9 +160,10 @@ public class NormalizeArrayCreations extends NormalizationPass {
       MethodCall arrayInitMethodCall =
           MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
 
-      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-          arrayInitMethodCall,
-          TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
+      return JsDocAnnotatedExpression.newBuilder()
+          .setExpression(arrayInitMethodCall)
+          .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
+          .build();
     }
   }
 

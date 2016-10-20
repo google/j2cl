@@ -58,7 +58,6 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCall.Builder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
@@ -84,6 +83,7 @@ import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -271,9 +271,7 @@ public class CompilationUnitBuilder {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         type.addField(
-            Field.Builder.fromDefault(fieldDescriptor)
-                .setCapturedVariable(capturedVariable)
-                .build());
+            Field.Builder.from(fieldDescriptor).setCapturedVariable(capturedVariable).build());
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
@@ -316,7 +314,7 @@ public class CompilationUnitBuilder {
           FieldDescriptor.Builder.from(fieldDescriptor)
               .setTypeDescriptor(TypeDescriptors.toNonNullable(fieldDescriptor.getTypeDescriptor()))
               .build();
-      return Field.Builder.fromDefault(fieldDescriptor)
+      return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
           .setIsEnumField(true)
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
@@ -337,7 +335,7 @@ public class CompilationUnitBuilder {
           initializer = convertConstantToLiteral(variableBinding);
         }
         Field field =
-            Field.Builder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
+            Field.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
                 .setSourcePosition(getSourcePosition(fieldDeclaration))
                 .build();
@@ -383,7 +381,7 @@ public class CompilationUnitBuilder {
 
       IMethodBinding methodBinding = methodDeclaration.resolveBinding();
       Method.Builder methodBuilder =
-          Method.Builder.fromDefault()
+          Method.newBuilder()
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
               .setParameters(parameters)
               .addStatements(body.getStatements())
@@ -433,7 +431,10 @@ public class CompilationUnitBuilder {
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
           JdtUtils.createTypeDescriptor(expression.getType().resolveBinding());
-      return CastExpression.create(convert(expression.getExpression()), castTypeDescriptor);
+      return CastExpression.newBuilder()
+          .setExpression(convert(expression.getExpression()))
+          .setCastTypeDescriptor(castTypeDescriptor)
+          .build();
     }
 
     private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {
@@ -856,7 +857,7 @@ public class CompilationUnitBuilder {
 
       // T[] array = exp.
       Variable arrayVariable =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$array")
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(expressionTypeBinding))
               .setIsFinal(true)
@@ -866,7 +867,7 @@ public class CompilationUnitBuilder {
 
       // int index = 0;
       Variable indexVariable =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$index")
               .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
               .build();
@@ -876,21 +877,22 @@ public class CompilationUnitBuilder {
 
       // $index < $array.length
       Expression condition =
-          new BinaryExpression(
-              TypeDescriptors.get().primitiveBoolean,
-              indexVariable.getReference(),
-              BinaryOperator.LESS,
-              FieldAccess.Builder.from(AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION)
-                  .setQualifier(arrayVariable.getReference())
-                  .build());
+          BinaryExpression.newBuilder()
+              .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+              .setLeftOperand(indexVariable.getReference())
+              .setOperator(BinaryOperator.LESS)
+              .setRightOperand(
+                  FieldAccess.Builder.from(AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION)
+                      .setQualifier(arrayVariable.getReference())
+                      .build())
+              .build();
 
       ExpressionStatement forVariableDeclarationStatement =
-          new ExpressionStatement(
-              new VariableDeclarationExpression(
+          new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
-                      new ArrayAccess(
-                          arrayVariable.getReference(), indexVariable.getReference()))));
+                      new ArrayAccess(arrayVariable.getReference(), indexVariable.getReference())))
+              .makeStatement();
 
       //  {   T t = $array[$index]; S; }
       Statement bodyStatement = convert(statement.getBody());
@@ -905,10 +907,11 @@ public class CompilationUnitBuilder {
               new VariableDeclarationExpression(
                   arrayVariableDeclarationFragment, indexVariableDeclarationFragment)),
           Collections.<Expression>singletonList(
-              new PostfixExpression(
-                  TypeDescriptors.get().primitiveInt,
-                  indexVariable.getReference(),
-                  PostfixOperator.INCREMENT)));
+              PostfixExpression.newBuilder()
+                  .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+                  .setOperand(indexVariable.getReference())
+                  .setOperator(PostfixOperator.INCREMENT)
+                  .build()));
     }
 
     private ForStatement convertForEachInstance(
@@ -931,7 +934,7 @@ public class CompilationUnitBuilder {
 
       // Iterator<T> $iterator = (exp).iterator();
       Variable iteratorVariable =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$iterator")
               .setTypeDescriptor(
                   JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()))
@@ -941,7 +944,7 @@ public class CompilationUnitBuilder {
       VariableDeclarationFragment iteratorDeclaration =
           new VariableDeclarationFragment(
               iteratorVariable,
-              Builder.from(JdtUtils.createMethodDescriptor(iteratorMethodBinding))
+              MethodCall.Builder.from(JdtUtils.createMethodDescriptor(iteratorMethodBinding))
                   .setQualifier(convert(statement.getExpression()))
                   .build());
 
@@ -957,13 +960,13 @@ public class CompilationUnitBuilder {
       IMethodBinding nextMethodBinding =
           JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "next");
       ExpressionStatement forVariableDeclarationStatement =
-          new ExpressionStatement(
-              new VariableDeclarationExpression(
+          new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
                       MethodCall.Builder.from(JdtUtils.createMethodDescriptor(nextMethodBinding))
                           .setQualifier(iteratorVariable.getReference())
-                          .build())));
+                          .build()))
+              .makeStatement();
 
       Statement bodyStatement = convert(statement.getBody());
       Block body =
@@ -1034,7 +1037,7 @@ public class CompilationUnitBuilder {
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
             returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
-                ? new ExpressionStatement(lambdaMethodBody)
+                ? lambdaMethodBody.makeStatement()
                 : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
         statement.setSourcePosition(getSourcePosition(lambdaBody));
         body = new Block(statement);
@@ -1088,7 +1091,7 @@ public class CompilationUnitBuilder {
       // Add fields for captured local variables.
       for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
         lambdaType.addField(
-            Field.Builder.fromDefault(
+            Field.Builder.from(
                     AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
                 .setCapturedVariable(capturedVariable)
                 .build());
@@ -1220,15 +1223,15 @@ public class CompilationUnitBuilder {
               Arrays.asList(methodBinding.getParameterTypes()), JdtUtils::createTypeDescriptor);
 
       MethodDescriptor methodDescriptor =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setVisibility(Visibility.PRIVATE)
               .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-              .setMethodName(methodName)
+              .setName(methodName)
               .setParameterTypeDescriptors(parameterTypeDescriptors)
               .setReturnTypeDescriptor(returnTypeDescriptor)
               .build();
-      return Method.Builder.fromDefault()
+      return Method.newBuilder()
           .setMethodDescriptor(methodDescriptor)
           .setParameters(parameters)
           .addStatements(body.getStatements())
@@ -1245,11 +1248,12 @@ public class CompilationUnitBuilder {
       Expression leftHandSide = convert(expression.getLeftHandSide());
       Expression rightHandSide = convert(expression.getRightHandSide());
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
-      return new BinaryExpression(
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          leftHandSide,
-          operator,
-          rightHandSide);
+      return BinaryExpression.newBuilder()
+          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setLeftOperand(leftHandSide)
+          .setOperator(operator)
+          .setRightOperand(rightHandSide)
+          .build();
     }
 
     private Block convert(org.eclipse.jdt.core.dom.Block block) {
@@ -1279,12 +1283,14 @@ public class CompilationUnitBuilder {
           constructorBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(statement.arguments()),
           arguments);
-      return new ExpressionStatement(
-          MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build());
+      return MethodCall.Builder.from(methodDescriptor)
+          .setArguments(arguments)
+          .build()
+          .makeStatement();
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement statement) {
-      return new ExpressionStatement(convert(statement.getExpression()));
+      return convert(statement.getExpression()).makeStatement();
     }
 
     private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
@@ -1313,20 +1319,22 @@ public class CompilationUnitBuilder {
       Expression rightOperand = convert(expression.getRightOperand());
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
       BinaryExpression binaryExpression =
-          new BinaryExpression(
-              JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-              leftOperand,
-              operator,
-              rightOperand);
+          BinaryExpression.newBuilder()
+              .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+              .setLeftOperand(leftOperand)
+              .setOperator(operator)
+              .setRightOperand(rightOperand)
+              .build();
       for (Object object : expression.extendedOperands()) {
         org.eclipse.jdt.core.dom.Expression extendedOperand =
             (org.eclipse.jdt.core.dom.Expression) object;
         binaryExpression =
-            new BinaryExpression(
-                JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-                binaryExpression,
-                operator,
-                convert(extendedOperand));
+            BinaryExpression.newBuilder()
+                .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+                .setLeftOperand(binaryExpression)
+                .setOperator(operator)
+                .setRightOperand(convert(extendedOperand))
+                .build();
       }
       return binaryExpression;
     }
@@ -1487,18 +1495,20 @@ public class CompilationUnitBuilder {
       return new MultiExpression(convert(expression.getExpression()));
     }
 
-    private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
-      return new PostfixExpression(
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          convert(expression.getOperand()),
-          JdtUtils.getPostfixOperator(expression.getOperator()));
+    private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
+      return PostfixExpression.newBuilder()
+          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setOperand(convert(expression.getOperand()))
+          .setOperator(JdtUtils.getPostfixOperator(expression.getOperator()))
+          .build();
     }
 
-    private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
-      return new PrefixExpression(
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          convert(expression.getOperand()),
-          JdtUtils.getPrefixOperator(expression.getOperator()));
+    private UnaryExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
+      return PrefixExpression.newBuilder()
+          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setOperand(convert(expression.getOperand()))
+          .setOperator(JdtUtils.getPrefixOperator(expression.getOperator()))
+          .build();
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.QualifiedName expression) {
@@ -1684,7 +1694,7 @@ public class CompilationUnitBuilder {
               ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
               : JdtUtils.createTypeDescriptor(node.getType().resolveBinding());
       Variable variable =
-          Variable.Builder.fromDefault().setName(name).setTypeDescriptor(typeDescriptor).build();
+          Variable.newBuilder().setName(name).setTypeDescriptor(typeDescriptor).build();
       variableByJdtBinding.put(node.resolveBinding(), variable);
       recordEnclosingType(variable, currentType);
       return variable;
@@ -1740,7 +1750,7 @@ public class CompilationUnitBuilder {
               .setQualifier(qualifier)
               .setArguments(arguments)
               .build();
-      return new ExpressionStatement(superCall);
+      return superCall.makeStatement();
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
@@ -1779,11 +1789,11 @@ public class CompilationUnitBuilder {
         TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       // <ClassLiteralClass>.$getClass()
       MethodDescriptor classMethodDescriptor =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setIsStatic(true)
               .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
-              .setMethodName("$get")
+              .setName("$get")
               .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
               .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
@@ -1797,11 +1807,11 @@ public class CompilationUnitBuilder {
       checkState(literalTypeDescriptor.isArray());
 
       MethodDescriptor classMethodDescriptor =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setIsStatic(true)
               .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
-              .setMethodName("$get")
+              .setName("$get")
               .setParameterTypeDescriptors(
                   Lists.newArrayList(
                       TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt))
@@ -1891,7 +1901,7 @@ public class CompilationUnitBuilder {
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         variableDeclarations.add(convert(fragment));
       }
-      return new ExpressionStatement(new VariableDeclarationExpression(variableDeclarations));
+      return new VariableDeclarationExpression(variableDeclarations).makeStatement();
     }
 
     private Type createType(ITypeBinding typeBinding) {

@@ -27,7 +27,7 @@ public abstract class UnaryExpression extends Expression {
   private TypeDescriptor typeDescriptor;
   @Visitable Expression operand;
 
-  public UnaryExpression(TypeDescriptor typeDescriptor, Expression operand) {
+  UnaryExpression(TypeDescriptor typeDescriptor, Expression operand) {
     this.operand = checkNotNull(operand);
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
@@ -48,7 +48,7 @@ public abstract class UnaryExpression extends Expression {
     return Visitor_UnaryExpression.visit(processor, this);
   }
 
-  abstract Builder newBuilder();
+  abstract Builder createBuilder();
 
   /**
    * A Builder for unary expressions.
@@ -59,7 +59,7 @@ public abstract class UnaryExpression extends Expression {
     private TypeDescriptor typeDescriptor;
 
     public static Builder from(UnaryExpression expression) {
-      Builder builder = expression.newBuilder();
+      Builder builder = expression.createBuilder();
       builder.operand = expression.getOperand();
       builder.typeDescriptor = expression.getTypeDescriptor();
       builder.operator = expression.getOperator();
@@ -72,7 +72,7 @@ public abstract class UnaryExpression extends Expression {
     }
 
     public Builder setOperator(Operator operator) {
-      this.operator = (PrefixOperator) operator;
+      this.operator = operator;
       return this;
     }
 
@@ -81,11 +81,11 @@ public abstract class UnaryExpression extends Expression {
       return this;
     }
 
-    public final Expression build() {
+    public final UnaryExpression build() {
       return doBuild(typeDescriptor, operand, operator);
     }
 
-    abstract Expression doBuild(
+    abstract UnaryExpression doBuild(
         TypeDescriptor typeDescriptor, Expression operand, Operator operator);
   }
 }

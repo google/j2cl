@@ -85,6 +85,10 @@ public class Variable extends Node implements Cloneable<Variable> {
     return Variable.Builder.from(this).build();
   }
 
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
   /** Builder for Variable. */
   public static class Builder {
 
@@ -93,11 +97,6 @@ public class Variable extends Node implements Cloneable<Variable> {
     private boolean isFinal;
     private boolean isParameter;
     private boolean isRaw;
-
-    public static Builder fromDefault() {
-      Builder builder = new Builder();
-      return builder;
-    }
 
     public static Builder from(Variable variable) {
       Builder builder = new Builder();

@@ -8,7 +8,6 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -21,14 +20,12 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,7 +56,7 @@ public class EnumMethodsCreator {
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
-        FieldDescriptor.Builder.fromDefault()
+        FieldDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
             .setFieldName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
@@ -76,19 +73,19 @@ public class EnumMethodsCreator {
             .setVisibility(Visibility.PRIVATE)
             .build();
     this.valuesMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
-            .setMethodName(VALUES_METHOD_NAME)
+            .setName(VALUES_METHOD_NAME)
             .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
-            .setParameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
+            .setParameterTypeDescriptors()
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
     this.valueOfMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
-            .setMethodName(VALUE_OF_METHOD_NAME)
+            .setName(VALUE_OF_METHOD_NAME)
             .setReturnTypeDescriptor(enumType.getDescriptor())
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
@@ -97,7 +94,7 @@ public class EnumMethodsCreator {
 
   private void run() {
     enumType.addField(
-        Field.Builder.fromDefault(this.namesToValuesMapFieldDescriptor)
+        Field.Builder.from(this.namesToValuesMapFieldDescriptor)
             .setInitializer(NullLiteral.NULL)
             .build());
     enumType.addMethod(createValueOfMethod());
@@ -119,53 +116,54 @@ public class EnumMethodsCreator {
    */
   private Method createValueOfMethod() {
     Variable nameParameter =
-        Variable.Builder.fromDefault()
+        Variable.newBuilder()
             .setName("name")
             .setTypeDescriptor(TypeDescriptors.get().javaLangString)
             .setIsParameter(true)
             .build();
 
     MethodDescriptor createMapMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .setMethodName(CREATE_MAP_METHOD_NAME)
+            .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
-            .setParameterTypeDescriptors(Arrays.asList(enumType.getDescriptor()))
+            .setParameterTypeDescriptors(enumType.getDescriptor())
             .build();
     MethodDescriptor getMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .setMethodName(GET_VALUE_METHOD_NAME)
+            .setName(GET_VALUE_METHOD_NAME)
             .setReturnTypeDescriptor(enumType.getDescriptor())
             .setParameterTypeDescriptors(
-                Arrays.asList(
-                    nameParameter.getTypeDescriptor(),
-                    namesToValuesMapFieldDescriptor.getTypeDescriptor()))
+                nameParameter.getTypeDescriptor(),
+                namesToValuesMapFieldDescriptor.getTypeDescriptor())
             .build();
 
     // If statement
     Expression namesToValuesMapIsNullComparison =
-        new BinaryExpression(
-            TypeDescriptors.get().primitiveBoolean,
-            FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build(),
-            BinaryOperator.EQUALS,
-            NullLiteral.NULL);
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setLeftOperand(FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
+            .setOperator(BinaryOperator.EQUALS)
+            .setRightOperand(NullLiteral.NULL)
+            .build();
     Expression valuesCall = MethodCall.Builder.from(valuesMethodDescriptor).build();
 
     Expression createMapCall =
         MethodCall.Builder.from(createMapMethodDescriptor).setArguments(valuesCall).build();
-    Expression assignMapCallToField =
+    Statement assignMapCallToFieldStatement =
         BinaryExpression.Builder.asAssignmentTo(
                 FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .setRightOperand(createMapCall)
-            .build();
-    Statement thenStatement = new ExpressionStatement(assignMapCallToField);
-    Block thenBlock = new Block(thenStatement);
-    Statement ifStatement = new IfStatement(namesToValuesMapIsNullComparison, thenBlock, null);
+            .build()
+            .makeStatement();
+    Statement ifStatement =
+        new IfStatement(
+            namesToValuesMapIsNullComparison, new Block(assignMapCallToFieldStatement), null);
 
     // Return statement
     Expression getMethodCall =
@@ -178,7 +176,7 @@ public class EnumMethodsCreator {
         new ReturnStatement(
             getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
 
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(valueOfMethodDescriptor)
         .setParameters(nameParameter)
         .addStatements(ifStatement, returnStatement)
@@ -211,7 +209,7 @@ public class EnumMethodsCreator {
     List<Statement> blockStatements = new ArrayList<>();
     blockStatements.add(returnStatement);
 
-    return Method.Builder.fromDefault()
+    return Method.newBuilder()
         .setMethodDescriptor(valuesMethodDescriptor)
         .addStatements(blockStatements)
         .build();

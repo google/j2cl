@@ -147,11 +147,11 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
                 AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
                 AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
         MethodDescriptor narrowMethodDescriptor =
-            MethodDescriptor.Builder.fromDefault()
+            MethodDescriptor.newBuilder()
                 .setJsInfo(JsInfo.RAW)
                 .setIsStatic(true)
                 .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-                .setMethodName(narrowMethodName)
+                .setName(narrowMethodName)
                 .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
                 .setReturnTypeDescriptor(toTypeDescriptor)
                 .build();

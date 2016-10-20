@@ -35,7 +35,7 @@ public abstract class Invocation extends Expression implements MemberReference {
 
   public abstract List<Expression> getArguments();
 
-  abstract Builder newBuilder();
+  abstract Builder createBuilder();
 
   @Override
   public abstract Node accept(Processor processor);
@@ -52,7 +52,7 @@ public abstract class Invocation extends Expression implements MemberReference {
     private List<Expression> arguments = new ArrayList<>();
 
     public static Builder from(Invocation invocation) {
-      return invocation.newBuilder();
+      return invocation.createBuilder();
     }
 
     public Builder setArguments(List<Expression> arguments) {

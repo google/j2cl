@@ -26,7 +26,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 public class ExpressionStatement extends Statement {
   @Visitable Expression expression;
 
-  public ExpressionStatement(Expression expression) {
+  ExpressionStatement(Expression expression) {
     this.expression = checkNotNull(expression);
   }
 

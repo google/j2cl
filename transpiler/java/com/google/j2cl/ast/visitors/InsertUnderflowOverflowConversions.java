@@ -142,11 +142,11 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
     String overflowMethodName =
         String.format("$to%s", AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor overflowMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
+        MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setIsStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setMethodName(overflowMethodName)
+            .setName(overflowMethodName)
             .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();

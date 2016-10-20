@@ -106,21 +106,19 @@ public class NormalizeTryWithResources extends NormalizationPass {
      */
     private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
       MethodDescriptor safeClose =
-          MethodDescriptor.Builder.fromDefault()
+          MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setIsStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setMethodName("safeClose")
+              .setName("safeClose")
               .setParameterTypeDescriptors(
-                  Arrays.asList(
-                      TypeDescriptors.get().javaLangObject,
-                      TypeDescriptors.get().javaLangThrowable))
+                  TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable)
               .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
       List<Statement> outputStatements = new ArrayList<>();
 
       Variable primaryException =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$primaryExc")
               .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
@@ -128,7 +126,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
       VariableDeclarationFragment fragment =
           new VariableDeclarationFragment(primaryException, NullLiteral.NULL);
       ExpressionStatement declarePrimaryException =
-          new ExpressionStatement(new VariableDeclarationExpression(fragment));
+          new VariableDeclarationExpression(fragment).makeStatement();
       outputStatements.add(declarePrimaryException);
 
       List<Statement> tryBlockBodyStatements = new ArrayList<>();
@@ -140,21 +138,20 @@ public class NormalizeTryWithResources extends NormalizationPass {
         VariableDeclarationFragment declareResourceNull =
             new VariableDeclarationFragment(
                 originalResourceDeclaration.getVariable(), NullLiteral.NULL);
-        VariableDeclarationExpression nullDeclaration =
-            new VariableDeclarationExpression(declareResourceNull);
-        Statement openResource = new ExpressionStatement(nullDeclaration);
+        Statement openResource =
+            new VariableDeclarationExpression(declareResourceNull).makeStatement();
         outputStatements.add(openResource);
 
         Expression assignResourceInitializer =
             BinaryExpression.Builder.asAssignmentTo(originalResourceDeclaration.getVariable())
                 .setRightOperand(originalResourceDeclaration.getInitializer())
                 .build();
-        tryBlockBodyStatements.add(new ExpressionStatement(assignResourceInitializer));
+        tryBlockBodyStatements.add(assignResourceInitializer.makeStatement());
       }
       tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
 
       Variable exceptionFromTry =
-          Variable.Builder.fromDefault()
+          Variable.newBuilder()
               .setName("$exceptionFromTry")
               .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
@@ -164,7 +161,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
           BinaryExpression.Builder.asAssignmentTo(primaryException)
               .setRightOperand(exceptionFromTry.getReference())
               .build();
-      catchBlockStatments.add(new ExpressionStatement(assignPrimaryExceptionToExceptionFromTry));
+      catchBlockStatments.add(assignPrimaryExceptionToExceptionFromTry.makeStatement());
       catchBlockStatments.add(new ThrowStatement(exceptionFromTry.getReference()));
 
       List<Statement> finallyBlockStatments = new ArrayList<>();
@@ -172,26 +169,26 @@ public class NormalizeTryWithResources extends NormalizationPass {
         MethodCall safeCloseCall =
             MethodCall.Builder.from(safeClose)
                 .setArguments(
-                    Arrays.asList(
-                        declaration.getFragments().get(0).getVariable().getReference(),
-                        primaryException.getReference()))
+                    declaration.getFragments().get(0).getVariable().getReference(),
+                    primaryException.getReference())
                 .build();
         Expression assignExceptionFromSafeCloseCall =
             BinaryExpression.Builder.asAssignmentTo(primaryException)
                 .setRightOperand(safeCloseCall)
                 .build();
-        finallyBlockStatments.add(new ExpressionStatement(assignExceptionFromSafeCloseCall));
+        finallyBlockStatments.add(assignExceptionFromSafeCloseCall.makeStatement());
       }
 
       ThrowStatement throwPrimaryException = new ThrowStatement(primaryException.getReference());
       Expression primaryExceptionNotEqualsNull =
-          new BinaryExpression(
-              TypeDescriptors.get().primitiveBoolean,
-              primaryException.getReference(),
-              BinaryOperator.NOT_EQUALS,
-              NullLiteral.NULL);
+          BinaryExpression.newBuilder()
+              .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+              .setLeftOperand(primaryException.getReference())
+              .setOperator(BinaryOperator.NOT_EQUALS)
+              .setRightOperand(NullLiteral.NULL)
+              .build();
       IfStatement primaryExceptionNullStatement =
-          new IfStatement(primaryExceptionNotEqualsNull, throwPrimaryException, null);
+          new IfStatement(primaryExceptionNotEqualsNull, throwPrimaryException);
       finallyBlockStatments.add(primaryExceptionNullStatement);
 
       CatchClause catchTryException =

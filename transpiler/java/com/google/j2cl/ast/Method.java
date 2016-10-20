@@ -141,6 +141,10 @@ public class Method extends Member {
     return false;
   }
 
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_Method.visit(processor, this);
@@ -165,10 +169,6 @@ public class Method extends Member {
     private String jsDocDescription;
     private SourcePosition bodyJavaSourcePosition = SourcePosition.UNKNOWN;
     private BitSet parameterOptionality = new BitSet();
-
-    public static Builder fromDefault() {
-      return new Builder();
-    }
 
     public static Builder from(Method method) {
       Builder builder = new Builder();

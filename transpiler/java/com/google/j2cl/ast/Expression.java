@@ -34,4 +34,8 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public Node accept(Processor processor) {
     return Visitor_Expression.visit(processor, this);
   }
+
+  public ExpressionStatement makeStatement() {
+    return new ExpressionStatement(this);
+  }
 }

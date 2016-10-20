@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -55,7 +54,7 @@ public class InsertInstanceInitCalls extends NormalizationPass {
       // If the constructor has a super() call, insert $init call after it. Otherwise, insert
       // to the top of the method body.
       int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
-      method.getBody().getStatements().add(insertIndex, new ExpressionStatement(initCall));
+      method.getBody().getStatements().add(insertIndex, initCall.makeStatement());
     }
   }
 }

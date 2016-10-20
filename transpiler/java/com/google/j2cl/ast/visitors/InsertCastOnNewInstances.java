@@ -32,8 +32,10 @@ public class InsertCastOnNewInstances extends NormalizationPass {
     public Node rewriteNewInstance(NewInstance newInstance) {
       if (newInstance.getTypeDescriptor().isParameterizedType()) {
         // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-        return JsDocAnnotatedExpression.createCastAnnotatedExpression(
-            newInstance, TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()));
+        return JsDocAnnotatedExpression.newBuilder()
+            .setExpression(newInstance)
+            .setAnnotationType(TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()))
+            .build();
       } else {
         return newInstance;
       }
