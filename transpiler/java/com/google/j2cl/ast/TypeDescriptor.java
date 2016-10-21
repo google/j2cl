@@ -675,6 +675,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * <p>This name is needed when generating a proxy forwarding output file.
    */
   public String getProxiedQualifiedName() {
+    if (isJsFunction) {
+      return "Function";
+    }
+
     String effectiveSimpleName = jsName == null ? simpleName : jsName;
     String effectivePrefix = jsNamespace;
     if (JsUtils.isGlobal(jsNamespace)) {

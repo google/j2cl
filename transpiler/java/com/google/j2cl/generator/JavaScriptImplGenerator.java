@@ -448,13 +448,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (type.isJsOverlayImplementation()) {
-      // Don't render $getClass for overlay types.
-      // implementations.
-      return;
-    }
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-    String name = type.getDescriptor().getBinaryName();
+
+    String name = null;
+    if (type.isJsOverlayImplementation()) {
+      name = type.getNativeTypeDescriptor().getQualifiedName();
+    } else if (type.getDescriptor().isJsFunctionInterface()) {
+      name = type.getDescriptor().getProxiedQualifiedName();
+    } else {
+      name = type.getDescriptor().getBinaryName();
+    }
+
     String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
     if (type.isInterface()) {
       sourceBuilder.appendln(

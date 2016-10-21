@@ -9,6 +9,7 @@ goog.module('vmbootstrap.Arrays$impl');
 let Hashing = goog.require('nativebootstrap.Hashing$impl');
 
 let ArrayIndexOutOfBoundsException = goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
+let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Object = goog.forwardDeclare('java.lang.Object');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -315,11 +316,14 @@ class Arrays {
       instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
       requiredDimensionCount) {
     Arrays.$clinit();
-    InternalPreconditions.m_checkType__boolean(
-        instance == null ||
+    var castSucceeds = instance == null ||
         Arrays.$instanceIsOfTypeInternal(
             instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
-            requiredDimensionCount));
+            requiredDimensionCount);
+    if (!castSucceeds) {
+      Casts.throwClassCastException(
+          instance, requiredLeafType, requiredDimensionCount);
+    }
     return instance;
   }
 
@@ -564,6 +568,7 @@ class Arrays {
     Arrays.$clinit = function() {};
     ArrayIndexOutOfBoundsException =
         goog.module.get('java.lang.ArrayIndexOutOfBoundsException$impl');
+    Casts = goog.module.get('vmbootstrap.Casts$impl');
     Class = goog.module.get('java.lang.Class');
     Object = goog.module.get('java.lang.Object');
     Integer = goog.module.get('java.lang.Integer$impl');
