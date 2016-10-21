@@ -15,5 +15,6 @@ integration_test(
     name = "classcastexception",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.checks.type": "'ENABLED'"},
+    js_deps = ["//javascript/closure/math:long"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

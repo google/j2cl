@@ -11,6 +11,9 @@ class Bar {}
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
 class Baz {}
 
+@JsType(isNative = true, namespace = "goog.math", name = "Long")
+class Zoo {}
+
 @JsFunction
 interface Qux {
   String m(String s);
@@ -29,10 +32,11 @@ public class Main {
       assert false : "An expected failure did not occur.";
     } catch (ClassCastException e) {
       assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.classcastexception.Foo"
-                  + " cannot be cast to"
-                  + " com.google.j2cl.transpiler.integration.classcastexception.Bar");
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to"
+                      + " com.google.j2cl.transpiler.integration.classcastexception.Bar")
+          : "Got unexpected message " + e.getMessage();
     }
 
     // Failed cast to array type.
@@ -42,10 +46,11 @@ public class Main {
     } catch (ClassCastException e) {
       // expected
       assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.classcastexception.Foo"
-                  + " cannot be cast to"
-                  + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Bar;");
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to"
+                      + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Bar;")
+          : "Got unexpected message " + e.getMessage();
     }
 
     // Failed cast to Java String.
@@ -55,21 +60,36 @@ public class Main {
     } catch (ClassCastException e) {
       // expected
       assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.classcastexception.Foo"
-                  + " cannot be cast to java.lang.String");
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to java.lang.String")
+          : "Got unexpected message " + e.getMessage();
     }
 
-    // Failed cast to native String.
+    // Failed cast to native extern String.
     try {
       Baz baz = (Baz) object;
       assert false : "An expected failure did not occur.";
     } catch (ClassCastException e) {
       // expected
       assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.classcastexception.Foo"
-                  + " cannot be cast to String");
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to String")
+          : "Got unexpected message " + e.getMessage();
+    }
+
+    // Failed cast to native non-extern goog.math.Long.
+    try {
+      Zoo baz = (Zoo) object;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected
+      assert e.getMessage()
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to goog.math.Long")
+          : "Got unexpected message " + e.getMessage();
     }
 
     // Failed cast to native JsFunction.
@@ -79,9 +99,10 @@ public class Main {
     } catch (ClassCastException e) {
       // expected
       assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.classcastexception.Foo"
-                  + " cannot be cast to Function");
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                      + " cannot be cast to Function")
+          : "Got unexpected message " + e.getMessage();
     }
   }
 }

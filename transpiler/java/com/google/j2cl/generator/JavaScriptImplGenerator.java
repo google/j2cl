@@ -452,7 +452,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     String name = null;
     if (type.isJsOverlayImplementation()) {
-      name = type.getNativeTypeDescriptor().getQualifiedName();
+      name = type.getNativeTypeDescriptor().getProxiedQualifiedName();
     } else if (type.getDescriptor().isJsFunctionInterface()) {
       name = type.getDescriptor().getProxiedQualifiedName();
     } else {

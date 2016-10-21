@@ -607,7 +607,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public String getQualifiedName() {
     // Externs have a simple and explicit name by which they are imported.
     if (isExtern()) {
-      return getQualifiedNameForExtern();
+      return getProxiedQualifiedName();
     }
     TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
 
@@ -659,16 +659,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
         .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
   }
 
-  private String getQualifiedNameForExtern() {
-    checkState(isExtern());
-
-    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? "" : jsNamespace;
-    String effectiveSimpleName = jsName == null ? simpleName : jsName;
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
-  }
-
   /**
    * Returns the qualified name of the native JS class being proxied.
    *
@@ -691,7 +681,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       effectivePrefix = packageName;
     }
 
-    return effectivePrefix + "." + effectiveSimpleName;
+    return Joiner.on(".")
+        .skipNulls()
+        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
   }
 
   /**
