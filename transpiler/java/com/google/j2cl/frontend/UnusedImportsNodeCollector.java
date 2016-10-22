@@ -15,17 +15,16 @@
  */
 package com.google.j2cl.frontend;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.SimpleName;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Collects unused imports, so they can be commented out, {@see JavaPreprocessor}.
@@ -58,6 +57,7 @@ public class UnusedImportsNodeCollector extends ASTVisitor {
     return false;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public void endVisit(CompilationUnit compilationUnit) {
     List<ImportDeclaration> imports = compilationUnit.imports();

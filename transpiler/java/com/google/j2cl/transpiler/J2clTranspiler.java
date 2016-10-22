@@ -151,7 +151,7 @@ public class J2clTranspiler {
     timingCollector.startSubSample("Create Pass List");
 
     List<NormalizationPass> passes =
-        ImmutableList.<NormalizationPass>of(
+        ImmutableList.of(
             // Class structure normalizations.
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
             // Default constructors and explicit super calls should be synthesized first.

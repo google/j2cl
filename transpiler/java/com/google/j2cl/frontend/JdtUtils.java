@@ -88,15 +88,6 @@ import org.eclipse.jdt.core.dom.PrefixExpression;
 public class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
-
-  /**
-   * The nullability of a package, type, class, etc.
-   */
-  public enum Nullability {
-    NULL,
-    NOT_NULL
-  }
-
   static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
     return compilationUnit.getPackage() == null
         ? ""
@@ -761,7 +752,7 @@ public class JdtUtils {
   public static List<String> getClassComponents(ITypeBinding typeBinding) {
     List<String> classComponents = new LinkedList<>();
     if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
-      return Arrays.asList("?");
+      return Collections.singletonList("?");
     }
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
@@ -1144,11 +1135,7 @@ public class JdtUtils {
   }
 
   static List<TypeDescriptor> createTypeDescriptors(List<ITypeBinding> typeBindings) {
-    List<TypeDescriptor> typeDescriptors = new ArrayList<>();
-    for (ITypeBinding typeBinding : typeBindings) {
-      typeDescriptors.add(createTypeDescriptor(typeBinding));
-    }
-    return typeDescriptors;
+    return typeBindings.stream().map(JdtUtils::createTypeDescriptor).collect(Collectors.toList());
   }
 
   static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
@@ -1219,7 +1206,7 @@ public class JdtUtils {
     final List<ITypeBinding> lambdaInterfaceBindings =
         isIntersectionType(lambdaTypeBinding)
             ? Arrays.asList(lambdaTypeBinding.getInterfaces())
-            : Arrays.asList(lambdaTypeBinding);
+            : Collections.singletonList(lambdaTypeBinding);
 
     if (isIntersectionType(lambdaTypeBinding)) {
       checkArgument(lambdaTypeBinding.getSuperclass() == null);
@@ -1262,7 +1249,7 @@ public class JdtUtils {
           @Override
           public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
             return TypeDescriptors.replaceTypeArgumentDescriptors(
-                selfTypeDescriptor, Collections.<TypeDescriptor>emptyList());
+                selfTypeDescriptor, Collections.emptyList());
           }
         };
     DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory =
@@ -1361,7 +1348,7 @@ public class JdtUtils {
    * computed here. Instead we have an early normalization pass that traverses the intersection
    * types and sets the correct package and binaryName etc.
    */
-  private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
+  private static TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
     checkArgument(isIntersectionType(typeBinding));
     List<ITypeBinding> intersectedTypeBindings = getTypeBindingsForIntersectionType(typeBinding);
     List<TypeDescriptor> intersectedTypeDescriptors =
@@ -1414,7 +1401,7 @@ public class JdtUtils {
             TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
             if (rawTypeDescriptor.isParameterizedType()) {
               return TypeDescriptors.replaceTypeArgumentDescriptors(
-                  rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+                  rawTypeDescriptor, ImmutableList.of());
             }
             return rawTypeDescriptor;
           }

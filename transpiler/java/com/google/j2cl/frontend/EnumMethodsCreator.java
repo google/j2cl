@@ -10,6 +10,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
@@ -27,6 +28,7 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class generates the AST structure for the synthesized static methods values and valueOf on
@@ -197,10 +199,12 @@ public class EnumMethodsCreator {
    */
   private Method createValuesMethod() {
     // Create method body.
-    List<Expression> values = new ArrayList<>();
-    for (Field enumField : enumType.getEnumFields()) {
-      values.add(FieldAccess.Builder.from(enumField.getDescriptor()).build());
-    }
+    List<Expression> values =
+        enumType
+            .getEnumFields()
+            .stream()
+            .map(enumField -> Builder.from(enumField.getDescriptor()).build())
+            .collect(Collectors.toList());
     Expression arrayOfValues =
         new ArrayLiteral(TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);
     Statement returnStatement =

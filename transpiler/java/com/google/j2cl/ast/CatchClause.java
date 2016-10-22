@@ -42,10 +42,6 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
     return exceptionVar;
   }
 
-  public void setBody(Block body) {
-    this.body = body;
-  }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_CatchClause.visit(processor, this);

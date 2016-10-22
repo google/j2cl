@@ -41,8 +41,9 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Since JavaScript doesn't support multiple catch clauses, we convert multiple catch clauses to a
@@ -88,7 +89,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       return new TryStatement(
           originalStatement.getResourceDeclarations(),
           originalStatement.getBody(),
-          Arrays.asList(mergeClauses(originalStatement.getCatchClauses())),
+          Collections.singletonList(mergeClauses(originalStatement.getCatchClauses())),
           originalStatement.getFinallyBlock());
     }
 
@@ -118,7 +119,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       List<TypeDescriptor> typesToCheck =
           exceptionTypeDescriptor.isUnion()
               ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
-              : Arrays.asList(exceptionTypeDescriptor);
+              : Collections.singletonList(exceptionTypeDescriptor);
       Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
       List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
       TypeDescriptor catchVariableTypeDescriptor =
@@ -150,10 +151,13 @@ public class NormalizeCatchClauses extends NormalizationPass {
      */
     private Expression checkTypeExpression(
         Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
-      List<Expression> methodCalls = new ArrayList<>();
-      for (TypeDescriptor typeDescriptor : typeDescriptors) {
-        methodCalls.add(checkIsInstanceCall(typeDescriptor, exceptionVariable.getReference()));
-      }
+      List<Expression> methodCalls =
+          typeDescriptors
+              .stream()
+              .map(
+                  typeDescriptor ->
+                      checkIsInstanceCall(typeDescriptor, exceptionVariable.getReference()))
+              .collect(Collectors.toList());
       return AstUtils.joinExpressionsWithBinaryOperator(
           TypeDescriptors.get().primitiveBoolean, BinaryOperator.CONDITIONAL_OR, methodCalls);
     }

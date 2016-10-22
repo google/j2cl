@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Optional;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
@@ -70,19 +69,6 @@ public class CompilationUnit extends Node {
 
   public List<Type> getTypes() {
     return types;
-  }
-
-  public Type getType(final TypeDescriptor typeDescriptor) {
-    return Optional.fromJavaUtil(
-            types
-                .stream()
-                .filter(
-                    type ->
-                        type.getDescriptor()
-                            .getRawTypeDescriptor()
-                            .equalsIgnoreNullability(typeDescriptor.getRawTypeDescriptor()))
-                .findFirst())
-        .orNull();
   }
 
   public String getName() {

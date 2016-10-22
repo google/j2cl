@@ -128,7 +128,7 @@ class ToStringRenderer {
         }
         accept(annotation.getExpression());
         return false;
-      };
+      }
 
       @Override
       public boolean enterCharacterLiteral(CharacterLiteral characterLiteral) {

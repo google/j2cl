@@ -18,11 +18,12 @@ package com.google.j2cl.frontend;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.Builder;
 import com.google.j2cl.ast.Type;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -34,19 +35,22 @@ import org.eclipse.jdt.core.dom.Modifier;
 public class PackagePrivateMethodsDispatcher {
   /** Creates dispatch methods for package private methods and adds them to the java type. */
   public static void create(ITypeBinding typeBinding, Type type) {
-    List<Method> dispatchMethods = new ArrayList<>();
-    for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
-        findExposedOverriddenMethods(typeBinding).entrySet()) {
-      dispatchMethods.add(
-          AstUtils.createForwardingMethod(
-              null,
-              MethodDescriptor.Builder.from(entry.getValue())
-                  .setEnclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
-                  .build(),
-              entry.getKey(),
-              "Forwarding method for package private method.",
-              true));
-    }
+    List<Method> dispatchMethods =
+        findExposedOverriddenMethods(typeBinding)
+            .entrySet()
+            .stream()
+            .map(
+                entry ->
+                    AstUtils.createForwardingMethod(
+                        null,
+                        Builder.from(entry.getValue())
+                            .setEnclosingClassTypeDescriptor(
+                                JdtUtils.createTypeDescriptor(typeBinding))
+                            .build(),
+                        entry.getKey(),
+                        "Forwarding method for package private method.",
+                        true))
+            .collect(Collectors.toList());
     type.addMethods(dispatchMethods);
   }
 

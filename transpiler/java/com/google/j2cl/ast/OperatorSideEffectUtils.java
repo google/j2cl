@@ -238,14 +238,12 @@ public class OperatorSideEffectUtils {
             .setOperator(operator)
             .setRightOperand(rightOperand)
             .build();
-    BinaryExpression assignment =
-        BinaryExpression.newBuilder()
-            .setTypeDescriptor(leftOperand.getTypeDescriptor())
-            .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
-            .setOperator(BinaryOperator.ASSIGN)
-            .setRightOperand(binaryExpression)
-            .build();
-    return assignment;
+    return BinaryExpression.newBuilder()
+        .setTypeDescriptor(leftOperand.getTypeDescriptor())
+        .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
+        .setOperator(BinaryOperator.ASSIGN)
+        .setRightOperand(binaryExpression)
+        .build();
   }
 
   /**

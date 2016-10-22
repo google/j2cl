@@ -141,7 +141,7 @@ public class JavaPreprocessor {
 
     // Wrap all the not needed nodes inside comments in the original source
     // (so we can preserve line numbers and have accurate source maps).
-    List<ASTNode> nodesToWrap = Lists.<ASTNode>newArrayList(unusedImportsNodes);
+    List<ASTNode> nodesToWrap = Lists.newArrayList(unusedImportsNodes);
     nodesToWrap.addAll(gwtIncompatibleNodes);
     if (nodesToWrap.isEmpty()) {
       // Nothing was changed.

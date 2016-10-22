@@ -44,10 +44,6 @@ public class ReturnStatement extends Statement {
     return expression;
   }
 
-  public void setExpression(Expression expression) {
-    this.expression = expression;
-  }
-
   @Override
   public ReturnStatement clone() {
     ReturnStatement returnStatement =

@@ -163,9 +163,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
 
     TypeDescriptor typeDescriptor = null;
     if (isExtern) {
-      typeDescriptor =
-          TypeDescriptors.createNative(
-              jsNamespace, jsName, Collections.<TypeDescriptor>emptyList());
+      typeDescriptor = TypeDescriptors.createNative(jsNamespace, jsName, Collections.emptyList());
     } else {
       List<String> packageComponents = new ArrayList<>();
       TypeDescriptor enclosingClassTypeDescriptor =
@@ -179,11 +177,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
 
       typeDescriptor =
           TypeDescriptors.createNative(
-              packageComponents,
-              classComponents,
-              jsNamespace,
-              jsName,
-              Collections.<TypeDescriptor>emptyList());
+              packageComponents, classComponents, jsNamespace, jsName, Collections.emptyList());
     }
 
     return typeDescriptor;

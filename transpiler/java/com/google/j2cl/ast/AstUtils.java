@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -75,20 +75,6 @@ public class AstUtils {
         .setJsInfo(JsInfo.RAW)
         .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
         .setName(MethodDescriptor.SAME_METHOD_NAME)
-        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-        .setParameterTypeDescriptors(
-            Lists.newArrayList(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
-        .build();
-  }
-
-  /** Create "Equality.$notSame()" MethodDescriptor. */
-  public static MethodDescriptor createUtilNotSameMethodDescriptor() {
-    return MethodDescriptor.newBuilder()
-        .setIsStatic(true)
-        .setJsInfo(JsInfo.RAW)
-        .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
-        .setName(MethodDescriptor.NOT_SAME_METHOD_NAME)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
         .setParameterTypeDescriptors(
             Lists.newArrayList(
@@ -149,19 +135,6 @@ public class AstUtils {
     MethodCall methodCall = (MethodCall) statement.getExpression();
     checkArgument(methodCall.getTarget().isConstructor());
     return methodCall;
-  }
-
-  /**
-   * When requested on an inner type, returns the field that references the enclosing instance,
-   * otherwise null.
-   */
-  public static Field getEnclosingInstanceField(Type type) {
-    for (Field field : type.getFields()) {
-      if (field.getDescriptor().getName().equals(ENCLOSING_INSTANCE_NAME)) {
-        return field;
-      }
-    }
-    return null;
   }
 
   /** Returns whether the specified constructor has a this() call. */
@@ -378,11 +351,11 @@ public class AstUtils {
 
     Iterable<TypeDescriptor> parameterTypes =
         Iterables.concat(
-            Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+            Collections.singletonList(sourceTypeDescriptor), // add the first parameter type.
             targetMethodDescriptor.getParameterTypeDescriptors());
     Iterable<TypeDescriptor> methodDeclarationParameterTypes =
         Iterables.concat(
-            Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+            Collections.singletonList(sourceTypeDescriptor), // add the first parameter type.
             targetMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors());
 
     MethodDescriptor declarationMethodDescriptor =
@@ -1178,20 +1151,6 @@ public class AstUtils {
     }
 
     return (T) node.accept(new VariableReplacer(fromVariables, toVariable));
-  }
-
-  /** Collects all variables (including parameters) declared in this method. */
-  public static List<Variable> collectVariables(Method method) {
-    final List<Variable> variables = new ArrayList<>(method.getParameters());
-    method.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitVariableDeclarationFragment(
-              VariableDeclarationFragment variableDeclarationFragment) {
-            variables.add(variableDeclarationFragment.getVariable());
-          }
-        });
-    return variables;
   }
 
   /** Get a list of references for {@code variables}. */

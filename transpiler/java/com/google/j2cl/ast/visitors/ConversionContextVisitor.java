@@ -42,6 +42,7 @@ import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Driver for rewriting conversions in different contexts.
@@ -125,12 +126,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
     // assignment context
     TypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
-    List<Expression> valueExpressions = new ArrayList<>();
-    for (Expression valueExpression : arrayLiteral.getValueExpressions()) {
-      valueExpressions.add(
-          contextRewriter.rewriteAssignmentContext(
-              typeDescriptor.getComponentTypeDescriptor(), valueExpression));
-    }
+    List<Expression> valueExpressions =
+        arrayLiteral
+            .getValueExpressions()
+            .stream()
+            .map(
+                valueExpression ->
+                    contextRewriter.rewriteAssignmentContext(
+                        typeDescriptor.getComponentTypeDescriptor(), valueExpression))
+            .collect(Collectors.toList());
     return new ArrayLiteral(typeDescriptor, valueExpressions);
   }
 
@@ -178,13 +182,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     // assignment context
-    Field newField =
-        Field.Builder.from(field)
-            .setInitializer(
-                contextRewriter.rewriteAssignmentContext(
-                    field.getDescriptor().getTypeDescriptor(), field.getInitializer()))
-            .build();
-    return newField;
+    return Field.Builder.from(field)
+        .setInitializer(
+            contextRewriter.rewriteAssignmentContext(
+                field.getDescriptor().getTypeDescriptor(), field.getInitializer()))
+        .build();
   }
 
   @Override
@@ -198,11 +200,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteNewArray(NewArray newArray) {
     // unary numeric promotion context
-    List<Expression> dimensionExpressions = new ArrayList<>();
-    for (Expression dimensionExpression : newArray.getDimensionExpressions()) {
-      dimensionExpressions.add(
-          contextRewriter.rewriteUnaryNumericPromotionContext(dimensionExpression));
-    }
+    List<Expression> dimensionExpressions =
+        newArray
+            .getDimensionExpressions()
+            .stream()
+            .map(contextRewriter::rewriteUnaryNumericPromotionContext)
+            .collect(Collectors.toList());
     return new NewArray(
         newArray.getTypeDescriptor(), dimensionExpressions, newArray.getArrayLiteral());
   }

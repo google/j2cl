@@ -41,14 +41,6 @@ public class AssertStatement extends Statement {
     return message;
   }
 
-  public void setExpression(Expression expression) {
-    this.expression = expression;
-  }
-
-  public void setMessage(Expression message) {
-    this.message = message;
-  }
-
   @Override
   public AssertStatement clone() {
     AssertStatement assertStatement =

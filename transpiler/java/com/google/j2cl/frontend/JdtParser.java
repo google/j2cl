@@ -135,10 +135,7 @@ public class JdtParser {
     parser.createASTs(
         preprocessedFilesByOriginal.keySet().stream().toArray(String[]::new),
         getEncodings(filePaths.size()),
-        wellKnownClassNames
-            .stream()
-            .map(name -> BindingKey.createTypeBindingKey(name))
-            .toArray(String[]::new),
+        wellKnownClassNames.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
         astRequestor,
         null);
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);

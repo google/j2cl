@@ -59,10 +59,6 @@ public class Type extends Node {
     return kind;
   }
 
-  public void setKind(Kind kind) {
-    this.kind = kind;
-  }
-
   public boolean isStatic() {
     return isStatic;
   }
@@ -196,10 +192,6 @@ public class Type extends Node {
     return visibility;
   }
 
-  public void setVisibility(Visibility visibility) {
-    this.visibility = visibility;
-  }
-
   public boolean hasInstanceInitializerBlocks() {
     return !Iterables.isEmpty(AstUtils.filterInitializerBlocks(getInstanceMembers()));
   }
@@ -230,10 +222,6 @@ public class Type extends Node {
 
   public TypeDescriptor getDescriptor() {
     return typeDescriptor;
-  }
-
-  public void setDescriptor(TypeDescriptor typeDescriptor) {
-    this.typeDescriptor = typeDescriptor;
   }
 
   public Iterable<Field> getInstanceFields() {

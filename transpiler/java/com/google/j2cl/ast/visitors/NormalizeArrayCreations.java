@@ -34,7 +34,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /** Normalizes array creations. */
@@ -147,7 +147,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
               .setParameterTypeDescriptors(
                   Iterables.concat(
                       arrayInitMethodDescriptor.getParameterTypeDescriptors(),
-                      Arrays.asList(TypeDescriptors.get().primitiveInt)))
+                      Collections.singletonList(TypeDescriptors.get().primitiveInt)))
               .build();
       List<Expression> arguments = new ArrayList<>();
       arguments.add(newArrayExpression.getArrayLiteral());

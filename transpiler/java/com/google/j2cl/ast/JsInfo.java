@@ -62,7 +62,7 @@ public abstract class JsInfo {
 
   private static Interner<JsInfo> getInterner() {
     if (interner == null) {
-      interner = new Interner<JsInfo>();
+      interner = new Interner<>();
     }
     return interner;
   }

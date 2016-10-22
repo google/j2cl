@@ -38,7 +38,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -197,7 +196,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
           new TryStatement(
               Collections.emptyList(),
               new Block(tryBlockBodyStatements),
-              Arrays.asList(catchTryException),
+              Collections.singletonList(catchTryException),
               new Block(finallyBlockStatments));
 
       outputStatements.add(innerTryStatement);

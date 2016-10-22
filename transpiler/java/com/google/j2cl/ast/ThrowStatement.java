@@ -34,10 +34,6 @@ public class ThrowStatement extends Statement {
     return expression;
   }
 
-  public void setExpression(Expression expression) {
-    this.expression = expression;
-  }
-
   @Override
   public ThrowStatement clone() {
     ThrowStatement throwStatement = new ThrowStatement(expression.clone());

@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
-import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
@@ -135,16 +134,6 @@ public class GeneratorUtils {
       // other members are not involved in class initialization, hence they are skipped here.
     }
     return false;
-  }
-
-  /**
-   * If possible, returns the qualifier of the provided expression, otherwise null.
-   */
-  public static Expression getQualifier(Expression expression) {
-    if (!(expression instanceof MemberReference)) {
-      return null;
-    }
-    return ((MemberReference) expression).getQualifier();
   }
 
   public static Expression getInitialValue(Field field) {

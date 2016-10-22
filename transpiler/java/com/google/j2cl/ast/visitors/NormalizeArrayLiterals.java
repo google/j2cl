@@ -19,11 +19,9 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -74,8 +72,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
       // Rewrite ArrayLiteral as NewArray(ArrayLiteral).
       return new NewArray(
           arrayLiteral.getTypeDescriptor(),
-          Collections.<Expression>nCopies(
-              arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL),
+          Collections.nCopies(arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL),
           arrayLiteral);
     }
   }

@@ -233,7 +233,7 @@ public class TypeDescriptors {
         superTypeDescriptor,
         typeDescriptor.getPackageComponents(),
         classComponents,
-        Collections.<TypeDescriptor>emptyList(),
+        Collections.emptyList(),
         Joiner.on(".").join(typeDescriptor.getPackageComponents()),
         Joiner.on(".").join(classComponents),
         false,
@@ -242,28 +242,28 @@ public class TypeDescriptors {
 
   /** Holds the bootstrap types. */
   public enum BootstrapType {
-    OBJECTS(Arrays.asList("vmbootstrap"), "Objects"),
-    COMPARABLES(Arrays.asList("vmbootstrap"), "Comparables"),
-    CHAR_SEQUENCES(Arrays.asList("vmbootstrap"), "CharSequences"),
-    NUMBERS(Arrays.asList("vmbootstrap"), "Numbers"),
-    ASSERTS(Arrays.asList("vmbootstrap"), "Asserts"),
-    ARRAYS(Arrays.asList("vmbootstrap"), "Arrays"),
-    CASTS(Arrays.asList("vmbootstrap"), "Casts"),
+    OBJECTS(Collections.singletonList("vmbootstrap"), "Objects"),
+    COMPARABLES(Collections.singletonList("vmbootstrap"), "Comparables"),
+    CHAR_SEQUENCES(Collections.singletonList("vmbootstrap"), "CharSequences"),
+    NUMBERS(Collections.singletonList("vmbootstrap"), "Numbers"),
+    ASSERTS(Collections.singletonList("vmbootstrap"), "Asserts"),
+    ARRAYS(Collections.singletonList("vmbootstrap"), "Arrays"),
+    CASTS(Collections.singletonList("vmbootstrap"), "Casts"),
     PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
-    ENUMS(Arrays.asList("vmbootstrap"), "Enums"),
-    LONG_UTILS(Arrays.asList("vmbootstrap"), "LongUtils"),
-    JAVA_SCRIPT_OBJECT(Arrays.asList("vmbootstrap"), "JavaScriptObject"),
-    JAVA_SCRIPT_FUNCTION(Arrays.asList("vmbootstrap"), "JavaScriptFunction"),
-    NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
-    NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
-    NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long"),
-    EXCEPTIONS(Arrays.asList("vmbootstrap"), "Exceptions");
+    ENUMS(Collections.singletonList("vmbootstrap"), "Enums"),
+    LONG_UTILS(Collections.singletonList("vmbootstrap"), "LongUtils"),
+    JAVA_SCRIPT_OBJECT(Collections.singletonList("vmbootstrap"), "JavaScriptObject"),
+    JAVA_SCRIPT_FUNCTION(Collections.singletonList("vmbootstrap"), "JavaScriptFunction"),
+    NATIVE_EQUALITY(Collections.singletonList("nativebootstrap"), "Equality"),
+    NATIVE_UTIL(Collections.singletonList("nativebootstrap"), "Util"),
+    NATIVE_LONG(Collections.singletonList("nativebootstrap"), "Long"),
+    EXCEPTIONS(Collections.singletonList("vmbootstrap"), "Exceptions");
 
     private TypeDescriptor typeDescriptor;
 
     BootstrapType(List<String> pathComponents, String name) {
       this.typeDescriptor =
-          createExactly(pathComponents, Arrays.asList(name), Collections.emptyList());
+          createExactly(pathComponents, Collections.singletonList(name), Collections.emptyList());
     }
 
     public TypeDescriptor getDescriptor() {
@@ -468,39 +468,6 @@ public class TypeDescriptors {
     return TypeDescriptor.Builder.from(originalTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .build();
-  }
-
-  /**
-   * Returns the type in the hierarchy of {@code type} that matches (excluding nullability and
-   * generics) with {@code typeToMatch}. If there is no match, returns null.
-   */
-  public static TypeDescriptor getMatchingTypeInHierarchy(
-      TypeDescriptor subjectTypeDescriptor, TypeDescriptor toMatchTypeDescriptor) {
-    if (subjectTypeDescriptor
-        .getRawTypeDescriptor()
-        .equalsIgnoreNullability(toMatchTypeDescriptor.getRawTypeDescriptor())) {
-      return subjectTypeDescriptor;
-    }
-
-    // Check superclasses.
-    if (subjectTypeDescriptor.getSuperTypeDescriptor() != null) {
-      TypeDescriptor match =
-          getMatchingTypeInHierarchy(
-              subjectTypeDescriptor.getSuperTypeDescriptor(), toMatchTypeDescriptor);
-      if (match != null) {
-        return match;
-      }
-    }
-
-    // Check implemented interfaces.
-    for (TypeDescriptor interfaceDescriptor : subjectTypeDescriptor.getInterfaceTypeDescriptors()) {
-      TypeDescriptor match = getMatchingTypeInHierarchy(interfaceDescriptor, toMatchTypeDescriptor);
-      if (match != null) {
-        return match;
-      }
-    }
-
-    return null;
   }
 
   public static TypeDescriptor toGivenNullability(
