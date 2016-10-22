@@ -4,6 +4,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
+import jsinterop.annotations.JsType;
 
 public class Main {
   @JsMethod
@@ -26,4 +27,26 @@ public class Main {
       return args[0];
     }
   }
+}
+
+@JsType
+interface I<T> {
+  void m(T t, @JsOptional Object o);
+}
+
+@JsType
+class TemplatedSubtype<T extends String> implements I<T> {
+  @Override
+  public void m(T t, @JsOptional Object o) {}
+}
+
+@JsType
+class SpecializedSubtype implements I<String> {
+  @Override
+  public void m(String t, @JsOptional Object o) {}
+}
+
+class NonJsTypeSubtype implements I<String> {
+  @Override
+  public void m(String t, @JsOptional Object o) {}
 }
