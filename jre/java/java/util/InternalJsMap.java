@@ -29,12 +29,6 @@ class InternalJsMap<V> {
     public native IteratorEntry<V> next();
   }
 
-  // IteratorEntry<V> is the modeling for IIterableResult<Array<String|V>> as IteratorEntry<V> but
-  // java and jsinterop lack expressibility to represent this abstraction (Java does not have
-  // union types and JsInterop does not allow to map type variables). So IteratorEntry<V> ends up
-  // mapping to IIterableResult<V> which is not an accurate mapping.
-  // It is convenient to model in this way so that users of this internal class don't have to deal
-  // with the internal implementation and the mismatch is handled here with overlay methods.
   @JsType(isNative = true, name = "IIterableResult", namespace = JsPackage.GLOBAL)
   static class IteratorEntry<V> {
     private Object[] value;
@@ -69,7 +63,9 @@ class InternalJsMap<V> {
     JsHelper.delete(this, key);
   }
 
-  public native Iterator<V> entries();
+  // JS's Map.entries() returns an IteratorIterable of Arrays where index 0 is a K and index 1 is a
+  // V. Array of Object is the closest description that can be made in Java.
+  public native Iterator<Object[]> entries();
 
   // Calls to delete are via brackets to be compatible with old browsers where delete is keyword.
   private static class JsHelper {

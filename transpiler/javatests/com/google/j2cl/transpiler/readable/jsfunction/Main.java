@@ -1,9 +1,5 @@
 package com.google.j2cl.transpiler.readable.jsfunction;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.IntFunction;
-import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -51,21 +47,4 @@ public class Main {
   public static native MyJsFunctionInterface createMyJsFunction();
 
   private void handleReceiveCommands() {}
-
-  @JsFunction
-  interface Function<T, U> {
-    T apply(U u);
-  }
-
-  public static void f(Function<String, String> f) {}
-
-  public void test2() {
-    List<Function<String, String>> list = new ArrayList<>();
-    f(list.get(0));
-  }
-
-  public static <A, T> A[] toArray(IntFunction<A[]> generator) {
-    List<T> collected = null;
-    return collected.toArray(generator.apply(collected.size()));
-  }
 }

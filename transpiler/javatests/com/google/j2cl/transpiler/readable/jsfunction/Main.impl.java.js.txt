@@ -11,14 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_jsfunction_Main$Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let MyJsFunctionInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
-let IntFunction = goog.forwardDeclare('java.util.function.IntFunction$impl');
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -119,42 +113,6 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {?function(?string):?string} f
-   * @return {void}
-   * @public
-   */
-  static m_f__com_google_j2cl_transpiler_readable_jsfunction_Main$Function(f) {
-    Main.$clinit();
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test2__() {
-    let list = /**@type {!ArrayList<?function(?string):?string>} */ (
-        ArrayList.$create__());
-    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main$Function(
-        /**@type {?function(?string):?string} */ ($Casts.to(
-            list.getAtIndex(0),
-            com_google_j2cl_transpiler_readable_jsfunction_Main$Function)));
-  }
-
-  /**
-   * @template M_A, M_T
-   * @param {IntFunction<Array<M_A>>} generator
-   * @return {Array<M_A>}
-   * @public
-   */
-  static m_toArray__java_util_function_IntFunction(generator) {
-    Main.$clinit();
-    let collected = null;
-    return collected.m_toArray__arrayOf_java_lang_Object(
-        /**@type {Array<*>} */ ($Arrays.$castTo(
-            generator.m_apply__int(collected.size()), java_lang_Object, 1)));
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -179,18 +137,10 @@ class Main extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_jsfunction_Main$Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
     MyJsFunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
     MyJsFunctionInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    ArrayList = goog.module.get('java.util.ArrayList$impl');
-    IntFunction = goog.module.get('java.util.function.IntFunction$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }

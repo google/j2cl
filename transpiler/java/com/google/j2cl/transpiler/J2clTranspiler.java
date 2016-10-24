@@ -28,7 +28,6 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
-import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
@@ -158,7 +157,6 @@ public class J2clTranspiler {
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
-            new InsertErasureTypeSafetyCasts(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),

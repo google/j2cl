@@ -14,7 +14,6 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.$1$impl');
 let ApplyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunction$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class Main extends java_lang_Object {
@@ -84,7 +83,7 @@ class Main extends java_lang_Object {
   static m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_String(
       af, s) {
     Main.$clinit();
-    return /**@type {?string} */ ($Casts.to(af(s), java_lang_String));
+    return af(s);
   }
 
   /**
@@ -117,7 +116,6 @@ class Main extends java_lang_Object {
     ApplyFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunction$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

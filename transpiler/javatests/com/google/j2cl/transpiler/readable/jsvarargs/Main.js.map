@@ -47,7 +47,7 @@
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
-[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.to($var_args_copy[0].getAtIndex(0), Main));]
+[return elements[0].get(0);] => [return $var_args_copy[0].getAtIndex(0);]
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
 [f1(1);] => [Main.f1(1);]

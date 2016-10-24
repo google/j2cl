@@ -18,7 +18,6 @@
 [Object c = (CastToGenerics<S, Number>) o;] => [let c = /**@type {CastToGenerics<*, (Number|?number)>} */ ($Casts.to(o, CastToGenerics));]
 [c = (S[]) o;] => [c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));]
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.to(o, Enum));]
-[String s1 = new ClassWithGenericField<String>().field;] => [let s1 = /**@type {?string} */ ($Casts.to(/**@type {!ClassWithGenericField<?string>} */ (ClassWithGenericField.$create__()).f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$ClassWithGenericField, java_lang_String));]
 [if (o instanceof Empty1) {
       return (EE) o;
     }] => [if (Empty1.$isInstance(o)) {

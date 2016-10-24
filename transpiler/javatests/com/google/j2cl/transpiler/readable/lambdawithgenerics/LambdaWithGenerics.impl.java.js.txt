@@ -78,8 +78,7 @@ class LambdaWithGenerics extends java_lang_Object {
    */
   m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
       intf, e) {
-    return /**@type {Error} */ (
-        $Casts.to(intf.m_foo__java_lang_Object(e), Error));
+    return intf.m_foo__java_lang_Object(e);
   }
 
   /**
@@ -92,8 +91,7 @@ class LambdaWithGenerics extends java_lang_Object {
   static m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
       intf, e) {
     LambdaWithGenerics.$clinit();
-    return /**@type {Enum<Enum>} */ (
-        $Casts.to(intf.m_foo__java_lang_Object(e), Enum));
+    return intf.m_foo__java_lang_Object(e);
   }
 
   /**

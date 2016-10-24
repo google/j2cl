@@ -8,10 +8,10 @@
 [for (Throwable t : iterable) {
       t.toString();
     }] => [for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__(); ) {
-      let t = /**@type {Throwable} */ ($Casts.to($iterator.m_next__(), Throwable));
+      let t = $iterator.m_next__();
       $Objects.m_toString__java_lang_Object(t);
     }]
-[UNKNOWN] => [let t = /**@type {Throwable} */ ($Casts.to($iterator.m_next__(), Throwable));]
+[UNKNOWN] => [let t = $iterator.m_next__();]
 [t.toString();] => [$Objects.m_toString__java_lang_Object(t);]
 [for (Throwable t : new Throwable[10]) {
       t.toString();
