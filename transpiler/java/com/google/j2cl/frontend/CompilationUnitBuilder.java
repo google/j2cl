@@ -54,6 +54,7 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
@@ -1356,10 +1357,20 @@ public class CompilationUnitBuilder {
           convertExpressions(JdtUtils.asTypedList(methodInvocation.arguments()));
       maybePackageVarargs(
           methodBinding, JdtUtils.asTypedList(methodInvocation.arguments()), arguments);
-      return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(qualifier)
-          .setArguments(arguments)
-          .build();
+      MethodCall methodCall =
+          MethodCall.Builder.from(methodDescriptor)
+              .setQualifier(qualifier)
+              .setArguments(arguments)
+              .build();
+      if (JdtUtils.hasUncheckedCastAnnotation(methodBinding)) {
+        // Annotate the invocation with the expected type. When InsertErasureSureTypeSafetyCasts
+        // runs, this invocation will be skipped as it will no longer be an assignment context.
+        return JsDocAnnotatedExpression.newBuilder()
+            .setExpression(methodCall)
+            .setAnnotationType(methodDescriptor.getReturnTypeDescriptor())
+            .build();
+      }
+      return methodCall;
     }
 
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {

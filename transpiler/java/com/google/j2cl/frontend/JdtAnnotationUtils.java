@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
 
 /**
@@ -75,4 +76,12 @@ public class JdtAnnotationUtils {
     }
     return defaultValue;
   }
+
+  /** Returns true if the binding is annotated with {@code annotationSourceName}. */
+  public static boolean hasAnnotation(IBinding binding, String annotationSourceName) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+            binding.getAnnotations(), annotationSourceName)
+        != null;
+  }
+
 }

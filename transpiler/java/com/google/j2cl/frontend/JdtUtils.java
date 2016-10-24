@@ -460,6 +460,11 @@ public class JdtUtils {
         && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
   }
 
+  /** Returns true if the binding is annotated with @UncheckedCast. */
+  static boolean hasUncheckedCastAnnotation(IBinding binding) {
+    return JdtAnnotationUtils.hasAnnotation(binding, "javaemul.internal.annotations.UncheckedCast");
+  }
+
   /**
    * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
    * Parameter erasure equal means that they are overriding signature equal, which means that they
