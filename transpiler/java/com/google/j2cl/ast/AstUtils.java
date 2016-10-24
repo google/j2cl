@@ -199,9 +199,10 @@ public class AstUtils {
    */
   public static boolean canRemoveCast(
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
-    if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+    if (fromTypeDescriptor.isSubtypeOf(toTypeDescriptor)) {
       return true;
     }
+
     if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
         || toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
       return false;
@@ -317,10 +318,24 @@ public class AstUtils {
             .setIsStaticDispatch(isStaticDispatch)
             .build();
 
-    Statement statement =
+    TypeDescriptor bridgeReturnType = fromMethodDescriptor.getReturnTypeDescriptor();
+    TypeDescriptor forwardedReturnType =
+        toMethodDescriptor.getDeclarationMethodDescriptor().getReturnTypeDescriptor();
+    boolean isVoidReturn =
         fromMethodDescriptor
-                .getReturnTypeDescriptor()
-                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
+            .getReturnTypeDescriptor()
+            .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid);
+    boolean needsAnnotation =
+        !isVoidReturn && !AstUtils.canRemoveCast(forwardedReturnType, bridgeReturnType);
+    forwardingMethodCall =
+        needsAnnotation
+            ? JsDocAnnotatedExpression.newBuilder()
+                .setExpression(forwardingMethodCall)
+                .setAnnotationType(bridgeReturnType)
+                .build()
+            : forwardingMethodCall;
+    Statement statement =
+        isVoidReturn
             ? forwardingMethodCall.makeStatement()
             : new ReturnStatement(
                 forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());

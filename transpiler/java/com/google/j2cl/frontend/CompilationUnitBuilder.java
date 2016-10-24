@@ -1279,7 +1279,7 @@ public class CompilationUnitBuilder {
       return convert(statement.getExpression()).makeStatement();
     }
 
-    private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
+    private Expression convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
       Expression qualifier = convert(expression.getExpression());
       IVariableBinding variableBinding = expression.resolveFieldBinding();
       FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
@@ -1289,13 +1289,11 @@ public class CompilationUnitBuilder {
           && !fieldDescriptor
               .getEnclosingClassTypeDescriptor()
               .equalsIgnoreNullability(currentType.getDescriptor())) {
-        return FieldAccess.Builder.from(fieldDescriptor)
-            .setQualifier(
-                convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    variableBinding.getDeclaringClass(),
-                    false))
-            .build();
+        qualifier =
+            convertOuterClassReference(
+                JdtUtils.findCurrentTypeBinding(expression),
+                variableBinding.getDeclaringClass(),
+                false);
       }
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
@@ -1348,7 +1346,7 @@ public class CompilationUnitBuilder {
       return convert(methodInvocation.getExpression());
     }
 
-    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
+    private Expression convert(org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
 
       Expression qualifier = getExplicitQualifier(methodInvocation);
 

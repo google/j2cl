@@ -61,7 +61,8 @@ class F extends A {
    * @public
    */
   fun(arg0) {
-    return super.fun(/**@type {Integer} */ ($Casts.to(arg0, Integer)));
+    return /**@type {Integer} */ ($Casts.to(
+        super.fun(/**@type {Integer} */ ($Casts.to(arg0, Integer))), Integer));
   }
 
   /**

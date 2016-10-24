@@ -1423,8 +1423,8 @@ public class JdtUtils {
                 Collections.singleton(Joiner.on("$").join(classComponents)).stream())
             .collect(joining("."));
 
-    if (isTypeVariable) {
-      binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
+    if (isTypeVariable || isWildCardOrCapture) {
+      binaryName = binaryName + ":" + typeBinding.getKey();
     }
 
     boolean isFinal = isFinal(typeBinding);

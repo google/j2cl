@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -62,12 +61,7 @@ public class NormalizeCasts extends NormalizationPass {
     checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
     checkArgument(!castExpression.getCastTypeDescriptor().isIntersection());
 
-    Expression resultingExpression =
-        AstUtils.canRemoveCast(
-                castExpression.getExpression().getTypeDescriptor(),
-                castExpression.getTypeDescriptor())
-            ? castExpression.getExpression()
-            : createCheckCastCall(castExpression);
+    Expression resultingExpression = createCheckCastCall(castExpression);
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(resultingExpression)
