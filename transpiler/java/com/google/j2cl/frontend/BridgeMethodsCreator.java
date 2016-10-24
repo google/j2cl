@@ -19,6 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
@@ -46,6 +48,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -56,9 +59,9 @@ public class BridgeMethodsCreator {
   /** Creates and adds bridge methods to the java type and fixes the delegated JS methods. */
   public static void create(ITypeBinding typeBinding, Type type) {
     // create bridge methods.
-    List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
-    Set<MethodDescriptor> toBeFixedMethodDescriptors = new HashSet<>();
+    Multimap<MethodDescriptor, Method> bridgeMethodsByTargetMethodDescriptor =
+        LinkedHashMultimap.create();
 
     for (Map.Entry<IMethodBinding, IMethodBinding> entry :
         findBridgeMethods(typeBinding).entrySet()) {
@@ -69,44 +72,54 @@ public class BridgeMethodsCreator {
         // do not generate duplicate bridge methods in one class.
         continue;
       }
-      if (bridgeMethod.getDescriptor().isJsMethod()
-          && entry.getValue().getDeclaringClass() == typeBinding) {
-        toBeFixedMethodDescriptors.add(JdtUtils.createMethodDescriptor(entry.getValue()));
-      }
-      generatedBridgeMethods.add(bridgeMethod);
+      bridgeMethodsByTargetMethodDescriptor.put(
+          JdtUtils.createMethodDescriptor(entry.getValue()), bridgeMethod);
       generatedBridgeMethodMangledNames.add(manglingName);
     }
 
-    // fix delegating JsMethods.
-    fixJsDelegatedMethods(type, toBeFixedMethodDescriptors);
+    fixJsInfoInBridgesAndDelegatedMethods(type, bridgeMethodsByTargetMethodDescriptor);
     // add bridge methods.
-    type.addMethods(generatedBridgeMethods);
+    type.addMethods(bridgeMethodsByTargetMethodDescriptor.values());
   }
 
-  private static void fixJsDelegatedMethods(
-      Type type, final Set<MethodDescriptor> toBeFixedMethodDescriptors) {
+  private static void fixJsInfoInBridgesAndDelegatedMethods(
+      Type type, final Multimap<MethodDescriptor, Method> bridgeMethodsByTargetMethodDescriptor) {
     type.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {
-            if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
-              // Now that the bridge method is created (and marked JsMethod), make this one
-              // a plain Java method.
-              Method.Builder methodBuilder = Method.Builder.from(method).setJsInfo(JsInfo.NONE);
-              for (int i = 0; i < method.getParameters().size(); i++) {
-                methodBuilder.setParameterOptional(i, false);
-              }
-              return methodBuilder.build();
+            Collection<Method> bridgeJsMethods =
+                bridgeMethodsByTargetMethodDescriptor
+                    .get(method.getDescriptor())
+                    .stream()
+                    .filter(bridgeMethod -> bridgeMethod.getDescriptor().isJsMethod())
+                    .collect(Collectors.toList());
+            if (bridgeJsMethods.isEmpty()) {
+              return method;
             }
-            return method;
+            for (Method bridgeJsMethod : bridgeJsMethods) {
+              // Transfer parameter optionality from the target methods which will be "demoted"
+              // to non JsMethod.
+              // TODO(rluble): parameter optionality might better be moved to MethodDescriptor
+              // from method and all this business of moving optionality would have been
+              // handled in a simpler manner.
+              for (int i = 0; i < method.getParameters().size(); i++) {
+                bridgeJsMethod.setParameterOptionality(i, method.isParameterOptional(i));
+              }
+            }
+            // Now that the bridge method is created (and marked JsMethod), "demote" to a plain
+            // Java method by setting JsInfo to NONE and resetting parameter optionality.
+            Method.Builder methodBuilder = Method.Builder.from(method).setJsInfo(JsInfo.NONE);
+            for (int i = 0; i < method.getParameters().size(); i++) {
+              methodBuilder.setParameterOptional(i, false);
+            }
+            return methodBuilder.build();
           }
         });
   }
 
-  /**
-   * Returns the mappings from the needed bridge method to the delegated method.
-   */
-  public static Map<IMethodBinding, IMethodBinding> findBridgeMethods(ITypeBinding typeBinding) {
+  /** Returns the mappings from the needed bridge method to the delegated method. */
+  private static Map<IMethodBinding, IMethodBinding> findBridgeMethods(ITypeBinding typeBinding) {
     if (typeBinding.isInterface()) {
       // Do not create bridge methods in interfaces.
       return ImmutableMap.of();

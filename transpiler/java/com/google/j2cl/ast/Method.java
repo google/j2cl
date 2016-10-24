@@ -103,6 +103,10 @@ public class Method extends Member {
     this.isAbstract = isAbstract;
   }
 
+  public void setParameterOptionality(int parameter, boolean isParameterOptional) {
+    this.parameterOptionality.set(parameter, isParameterOptional);
+  }
+
   public boolean isOverride() {
     return this.isOverride;
   }

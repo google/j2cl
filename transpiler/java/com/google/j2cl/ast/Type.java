@@ -184,8 +184,8 @@ public class Type extends Node {
     members.add(index, method);
   }
 
-  public void addMethods(List<Method> methods) {
-    this.members.addAll(methods);
+  public void addMethods(Iterable<Method> methods) {
+    Iterables.addAll(members, methods);
   }
 
   public Visibility getVisibility() {
