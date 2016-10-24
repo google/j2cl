@@ -48,6 +48,8 @@ public abstract class JsInfo {
   public static final JsInfo RAW_CTOR = create(JsMemberType.CONSTRUCTOR, null, null, false);
   public static final JsInfo RAW_FIELD = create(JsMemberType.PROPERTY, null, null, false);
 
+  // There is no need for this interner to be ThreadLocal as it interns JsInfo instances which
+  // are actually value types (constructed by AutoValue).
   private static Interner<JsInfo> interner;
 
   /**
