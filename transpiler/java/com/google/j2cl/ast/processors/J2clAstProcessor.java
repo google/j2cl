@@ -63,7 +63,7 @@ import org.apache.velocity.app.VelocityEngine;
  * The J2clAstProcessor emits a single AbstractVisitor class and a Visitor helper class for each
  * {@code @Visitable} type.
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
 public class J2clAstProcessor extends AbstractProcessor {
 
@@ -154,9 +154,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     return false; // never claim annotation, because who knows what other processors want?
   }
 
-  /**
-   * Field represents a visitable field in a visitable class.
-   */
+  /** Field represents a visitable field in a visitable class. */
   public static class Field {
     enum Type {
       SCALAR,

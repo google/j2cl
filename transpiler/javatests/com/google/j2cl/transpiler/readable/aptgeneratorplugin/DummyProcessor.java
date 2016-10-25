@@ -13,10 +13,10 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.JavaFileObject;
 
 /**
- * A trivially small annotation processor existing only to verify that annotation processors can
- * and will be correctly run and translated to JS inside of j2cl_library() rules.
+ * A trivially small annotation processor existing only to verify that annotation processors can and
+ * will be correctly run and translated to JS inside of j2cl_library() rules.
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class DummyProcessor extends AbstractProcessor {
 
   private boolean createdDummy;
