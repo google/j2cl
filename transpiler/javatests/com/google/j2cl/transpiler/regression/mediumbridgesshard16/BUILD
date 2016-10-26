@@ -12,7 +12,7 @@ j2cl_test(
         "TestShard.java",
     ],
     deps = [
-        "//third_party/java/junit",
+        "//third_party/java/junit:junit-j2cl",
         "//jre/java:gwt-jsinterop-annotations",
     ],
 )

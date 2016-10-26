@@ -17,7 +17,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_TEST_DEFS")
 
 
 def j2cl_multi_test(name, test_class, **kwargs):
-  deps = [":emul_tests_lib", "//third_party/java/junit"]
+  deps = [":emul_tests_lib", "//third_party/java/junit:junit-j2cl"]
   srcs = [test_class.replace(".", "/") + ".java"]
   j2cl_test(name=name,
             test_class=test_class,
