@@ -47,6 +47,6 @@ def jsni_converter_test():
       deps = [
           ":test_library",
           "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-          "//third_party/java/junit",
+          "//third_party/java/junit:junit-j2cl",
       ],
   )
