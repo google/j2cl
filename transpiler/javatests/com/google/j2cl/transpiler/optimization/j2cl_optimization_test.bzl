@@ -39,7 +39,7 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
     jvm_flags = ["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
     deps = [
         ":shared",
-        "//third_party/java/junit",
+        "//third_party/java/junit:junit-j2cl",
         "//jre/java:gwt-jsinterop-annotations",
     ],
 )
