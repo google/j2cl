@@ -2,7 +2,6 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -122,15 +121,11 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     }
 
     TypeDescriptor targetInstanceTypeDescriptor =
-        checkNotNull(
-            intersectedTypeDescriptors
-                .stream()
-                .filter(toTypeDescriptor::isSupertypeOf)
-                .findFirst()
-                .orElse(null),
-            "Inconsistent types: cannot cast %s to %s.",
-            expressionTypeDescriptor,
-            toTypeDescriptor);
+        intersectedTypeDescriptors
+            .stream()
+            .filter(toTypeDescriptor::isSupertypeOf)
+            .findFirst()
+            .get();
 
     if (targetInstanceTypeDescriptor == intersectedTypeDescriptors.get(0)) {
       // No need to cast to the first member of the intersection type as this will be the type
