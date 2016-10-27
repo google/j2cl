@@ -28,7 +28,7 @@ class InternalJsMapFactory {
   private static class NativeMap<V> extends InternalJsMap<V> { }
 
   public static  <V> InternalJsMap<V> newJsMap() {
-    return new NativeMap();
+    return new NativeMap<V>();
   }
 }
 

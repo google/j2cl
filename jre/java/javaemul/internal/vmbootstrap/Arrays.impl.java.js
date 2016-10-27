@@ -12,6 +12,7 @@ let ArrayIndexOutOfBoundsException = goog.forwardDeclare('java.lang.ArrayIndexOu
 let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Object = goog.forwardDeclare('java.lang.Object');
+let Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -316,13 +317,23 @@ class Arrays {
       instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
       requiredDimensionCount) {
     Arrays.$clinit();
-    var castSucceeds = instance == null ||
-        Arrays.$instanceIsOfTypeInternal(
-            instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
-            requiredDimensionCount);
-    if (!castSucceeds) {
-      Casts.throwClassCastException(
-          instance, requiredLeafType, requiredDimensionCount);
+    if (InternalPreconditions.m_isTypeChecked__()) {
+      const castSucceeds = instance == null ||
+          Arrays.$instanceIsOfTypeInternal(
+              instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+              requiredDimensionCount);
+      if (!castSucceeds) {
+        // We don't delegate to a common throw function because it confuses
+        // JSCompiler's inliner and costs 1% code size.
+        const castTypeClass =
+            Class.$get(requiredLeafType, requiredDimensionCount);
+        const instanceTypeClass =
+            Objects.m_getClass__java_lang_Object(instance);
+        const message = instanceTypeClass.m_getName__() +
+            ' cannot be cast to ' + castTypeClass.m_getName__();
+        InternalPreconditions.m_checkType__boolean__java_lang_String(
+            false, message);
+      }
     }
     return instance;
   }
@@ -571,6 +582,7 @@ class Arrays {
     Casts = goog.module.get('vmbootstrap.Casts$impl');
     Class = goog.module.get('java.lang.Class');
     Object = goog.module.get('java.lang.Object');
+    Objects = goog.module.get('vmbootstrap.Objects$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     NullPointerException =
         goog.module.get('java.lang.NullPointerException$impl');

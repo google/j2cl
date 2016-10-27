@@ -515,20 +515,22 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return getRawSuperTypesIncludingSelf().contains(that.getRawTypeDescriptor());
   }
 
-  private Set<TypeDescriptor> allSupertypesIncludingSelf = null;
+  private Set<TypeDescriptor> allRawSupertypesIncludingSelf = null;
 
   private Set<TypeDescriptor> getRawSuperTypesIncludingSelf() {
-    if (allSupertypesIncludingSelf == null) {
-      allSupertypesIncludingSelf = new LinkedHashSet<>();
-      allSupertypesIncludingSelf.add(getRawTypeDescriptor());
+    if (allRawSupertypesIncludingSelf == null) {
+      allRawSupertypesIncludingSelf = new LinkedHashSet<>();
+      allRawSupertypesIncludingSelf.add(getRawTypeDescriptor());
       if (getSuperTypeDescriptor() != null) {
-        allSupertypesIncludingSelf.addAll(getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
+        allRawSupertypesIncludingSelf.addAll(
+            getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
       }
       for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-        allSupertypesIncludingSelf.addAll(interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
+        allRawSupertypesIncludingSelf.addAll(
+            interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
       }
     }
-    return allSupertypesIncludingSelf;
+    return allRawSupertypesIncludingSelf;
   }
 
   public Set<TypeDescriptor> getAllTypeVariables() {

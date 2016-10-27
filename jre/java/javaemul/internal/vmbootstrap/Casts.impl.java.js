@@ -32,29 +32,20 @@ class Casts {
     // TODO(goktug) remove isTypeCheck after JsCompiler can remove calls to
     // castTypeIsInstance when the return is unused.
     if (InternalPreconditions.m_isTypeChecked__()) {
-      var castSucceeds = instance == null || castTypeIsInstance(instance);
+      const castSucceeds = instance == null || castTypeIsInstance(instance);
       if (!castSucceeds) {
-        Casts.throwClassCastException(instance, castType);
+        // We don't delegate to a common throw function because it confuses
+        // JSCompiler's inliner and costs 1% code size.
+        const castTypeClass = Class.$get(castType);
+        const instanceTypeClass =
+            Objects.m_getClass__java_lang_Object(instance);
+        const message = instanceTypeClass.m_getName__() +
+            ' cannot be cast to ' + castTypeClass.m_getName__();
+        InternalPreconditions.m_checkType__boolean__java_lang_String(
+            false, message);
       }
     }
-
     return instance;
-  }
-
-  /**
-   * @param {*} instance
-   * @param {*} castType
-   * @param {number=} opt_dimensionCount
-   */
-  static throwClassCastException(instance, castType, opt_dimensionCount) {
-    Casts.$clinit();
-
-    var castTypeClass = Class.$get(castType, opt_dimensionCount);
-    var instanceTypeClass = Objects.m_getClass__java_lang_Object(instance);
-    var message = instanceTypeClass.m_getName__() + ' cannot be cast to ' +
-        castTypeClass.m_getName__();
-    InternalPreconditions.m_checkType__boolean__java_lang_String(
-        false, message);
   }
 
   /**

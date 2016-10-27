@@ -14,6 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
@@ -56,7 +57,8 @@ class ForEachStatement extends java_lang_Object {
    */
   m_test__java_lang_Iterable(iterable) {
     for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__();) {
-      let t = $iterator.m_next__();
+      let t =
+          /**@type {Throwable} */ ($Casts.to($iterator.m_next__(), Throwable));
       $Objects.m_toString__java_lang_Object(t);
     }
     for (let $array = /**@type {!Array<Throwable>} */ (
@@ -96,6 +98,7 @@ class ForEachStatement extends java_lang_Object {
     Iterable = goog.module.get('java.lang.Iterable$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();
   }
