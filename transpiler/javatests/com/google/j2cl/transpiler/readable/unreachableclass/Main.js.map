@@ -1,0 +1,41 @@
+[UNKNOWN] => [super();]
+[UNKNOWN] => [Main.$clinit();]
+[UNKNOWN] => [let $instance = new Main();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_unreachableclass_Main__();]
+[UNKNOWN] => [return $instance;]
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_unreachableclass_Main();]
+[try {
+    } catch (RuntimeException e) {
+      class A {
+        void m() {
+          class B {
+            private void n() {}
+          }
+        }
+      }
+      new A().m();
+      new Object() {};
+    }] => [try {
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (RuntimeException.$isInstance(__$exc)) {
+        let e = /**@type {RuntimeException} */ (__$exc);
+        $Unreachable$144$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();
+        $Unreachable$278.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);
+      } else {
+        throw $Exceptions.toJs(__$exc);
+      }
+    }]
+[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
+[UNKNOWN] => [if (RuntimeException.$isInstance(__$exc)) {
+        let e = /**@type {RuntimeException} */ (__$exc);
+        $Unreachable$144$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();
+        $Unreachable$278.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);
+      } else {
+        throw $Exceptions.toJs(__$exc);
+      }]
+[UNKNOWN] => [let e = /**@type {RuntimeException} */ (__$exc);]
+[new A().m();] => [$Unreachable$144$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();]
+[new Object() {};] => [$Unreachable$278.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);]
+[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]

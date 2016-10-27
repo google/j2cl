@@ -766,8 +766,8 @@ public class JdtUtils {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the generated name by taking the part after the binary name of the declaring
         // class.
-        String binaryName = currentType.getBinaryName();
-        String declaringClassPrefix = currentType.getDeclaringClass().getBinaryName() + "$";
+        String binaryName = getBinaryName(currentType);
+        String declaringClassPrefix = getBinaryName(currentType.getDeclaringClass()) + "$";
         checkState(binaryName.startsWith(declaringClassPrefix));
         simpleName = binaryName.substring(declaringClassPrefix.length());
       } else if (currentType.isTypeVariable()) {
@@ -793,6 +793,34 @@ public class JdtUtils {
       currentType = currentType.getDeclaringClass();
     }
     return classComponents;
+  }
+
+  /**
+   * Returns the binary name for a type binding.
+   *
+   * <p>NOTE: This accounts for the cases that JDT does not assign binary names, which are those of
+   * unreachable local or anonymous classes.
+   */
+  private static String getBinaryName(ITypeBinding typeBinding) {
+    String binaryName = typeBinding.getBinaryName();
+    if (binaryName == null && (typeBinding.isLocal() || typeBinding.isAnonymous())) {
+      // Local and anonymous classes in unreachable code have null binary name.
+
+      // The code here is a HACK that relies on the way that JDT synthesizes keys. Keys for
+      // unreachable classes have the closest enclosing reachable class key as a prefix (minus the
+      // ending semicolon)
+      ITypeBinding closestReachableExclosingClass = typeBinding.getDeclaringClass();
+      while (closestReachableExclosingClass.getBinaryName() == null) {
+        closestReachableExclosingClass = closestReachableExclosingClass.getDeclaringClass();
+      }
+      String parentKey = closestReachableExclosingClass.getKey();
+      String key = typeBinding.getKey();
+      return getBinaryName(typeBinding.getDeclaringClass())
+          + "$$Unreachable"
+          // remove the parent prefix and the ending semicolon
+          + key.substring(parentKey.length() - 1, key.length() - 1);
+    }
+    return binaryName;
   }
 
   public static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
@@ -966,7 +994,6 @@ public class JdtUtils {
    */
   public static String getMethodSignature(IMethodBinding methodBinding) {
     StringBuilder signatureBuilder = new StringBuilder("");
-
     Visibility methodVisibility = getVisibility(methodBinding);
     if (methodVisibility.isPackagePrivate()) {
       signatureBuilder.append(":pp:");
@@ -974,7 +1001,7 @@ public class JdtUtils {
       signatureBuilder.append(":");
     } else if (methodVisibility.isPrivate()) {
       signatureBuilder.append(":p:");
-      signatureBuilder.append(methodBinding.getDeclaringClass().getBinaryName());
+      signatureBuilder.append(getBinaryName(methodBinding.getDeclaringClass()));
       signatureBuilder.append(":");
     }
 
@@ -984,7 +1011,7 @@ public class JdtUtils {
     String separator = "";
     for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
       signatureBuilder.append(separator);
-      signatureBuilder.append(parameterType.getErasure().getBinaryName());
+      signatureBuilder.append(getBinaryName(parameterType.getErasure()));
       separator = ";";
     }
     signatureBuilder.append(")");
@@ -1375,7 +1402,7 @@ public class JdtUtils {
       // around in the class path to figure it out and it might even come up with the wrong answer
       // for example if this class has also been globbed into some other library that is a
       // dependency of this one.
-      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
+      PackageInfoCache.get().markAsSource(getBinaryName(topLevelTypeBinding));
     }
 
     DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
@@ -1429,7 +1456,7 @@ public class JdtUtils {
             .collect(joining("."));
 
     if (isTypeVariable) {
-      binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
+      binaryName = binaryName + ":" + getBinaryName(typeBinding.getErasure());
     }
 
     boolean isFinal = isFinal(typeBinding);
@@ -1443,7 +1470,7 @@ public class JdtUtils {
     boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
     if (isTopLevelType) {
       String jsPackageNamespace =
-          packageInfoCache.getJsNamespace(toTopLevelTypeBinding(typeBinding).getBinaryName());
+          packageInfoCache.getJsNamespace(getBinaryName(toTopLevelTypeBinding(typeBinding)));
       if (jsPackageNamespace != null) {
         jsNamespace = jsPackageNamespace;
       }

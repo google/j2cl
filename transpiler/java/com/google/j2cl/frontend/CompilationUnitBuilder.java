@@ -453,10 +453,8 @@ public class CompilationUnitBuilder {
       maybePackageVarargs(
           constructorBinding, JdtUtils.asTypedList(expression.arguments()), arguments);
 
-      // anonymous creation.
-      AnonymousClassDeclaration anonymousClassDeclaration =
-          expression.getAnonymousClassDeclaration();
-      if (anonymousClassDeclaration != null) {
+      boolean isAnonymousClassCreation = expression.getAnonymousClassDeclaration() != null;
+      if (isAnonymousClassCreation) {
         return convertAnonymousClassCreation(expression, constructorMethodDescriptor, arguments);
       } else {
         return convertRegularClassCreation(expression, constructorMethodDescriptor, arguments);
@@ -511,10 +509,9 @@ public class CompilationUnitBuilder {
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
 
-      checkNotNull(expression.getAnonymousClassDeclaration());
       AnonymousType anonymousClass =
           convertAnonymousClassDeclaration(
-              expression.getAnonymousClassDeclaration(), constructorBinding);
+              checkNotNull(expression.getAnonymousClassDeclaration()), constructorBinding);
 
       Expression superCallQualifier = null;
       if (JdtUtils.isInstanceMemberClass(newInstanceTypeBinding.getSuperclass())) {
