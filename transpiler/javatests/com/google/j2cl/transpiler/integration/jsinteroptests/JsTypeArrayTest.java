@@ -23,8 +23,22 @@ import jsinterop.annotations.JsType;
 
 /** Tests JsType with array functionality. */
 public class JsTypeArrayTest extends MyTestCase {
-  /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
+  public static void testAll() {
+    JsTypeArrayTest test = new JsTypeArrayTest();
+    test.testJsTypeArray();
+    test.testJsType3DimArray_castFromNativeWithACall();
+    test.testJsTypeArray_asAField();
+    test.testJsTypeArray_asAParam();
+    test.testJsTypeArray_instanceOf();
+    test.testJsTypeArray_objectArrayInterchangeability();
+    test.testJsTypeArray_returnFromNative();
+    test.testJsTypeArray_returnFromNativeWithACall();
+    test.testObjectArray_castFromNative();
+    test.testObjectArray_instanceOf();
+    test.testJsFunctionArray();
+  }
 
+  /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   private static class SomeJsType {}
 

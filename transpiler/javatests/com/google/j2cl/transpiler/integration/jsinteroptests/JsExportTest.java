@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import com.google.j2cl.transpiler.integration.jsinteroptests.MyExportedClass.InnerClass;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -25,6 +24,42 @@ import jsinterop.annotations.JsType;
  * Tests presence and naming of exported classes, fields, and methods.
  */
 public class JsExportTest extends MyTestCase {
+  public static void testAll() {
+    JsExportTest test = new JsExportTest();
+    test.testClinit_staticField();
+    test.testClinit_staticMethod();
+    test.testClinit_virtualMethod();
+    test.testClinit();
+    test.testEnum_enumerations();
+    test.testEnum_exportedFields();
+    test.testEnum_exportedMethods();
+    test.testEnum_notExported();
+    test.testEnum_subclassEnumerations();
+    test.testEnum_subclassMethodCallFromExportedEnumerations();
+    test.testExportClass_correctNamespace();
+    test.testExportClass_implicitConstructor();
+    test.testExportConstructors();
+    test.testExportedField();
+    test.testExportedFieldRefInExportedMethod();
+    test.testExportedMethod();
+    test.testInheritClassNamespace();
+    // Not supported in J2CL since the Closure import/export system does not allow exporting types
+    // onto the global scope and if we emitted a normal "var $NativeFoo = window.Foo;" style global
+    // type alias there would be nothing causing the file that provides Foo to be loaded.
+    // test.testInheritClassNamespace_empty();
+    test.testInheritClassNamespace_nested();
+    test.testInheritClassNamespace_nestedNoExport();
+    test.testInheritClassNamespace_noExport();
+    test.testInheritClassNamespace_withName();
+    test.testInheritPackageNamespace_nestedClass();
+    test.testInheritPackageNamespace_nestedEnum();
+    test.testInheritPackageNamespace_subpackage();
+    test.testInheritPackageNamespace();
+    test.testMethodExport_notReferencedFromJava();
+    test.testMethodExport();
+    test.testMethodExportWithLong();
+    test.testNoExport();
+  }
 
   public void testMethodExport() {
     // Deprecated in J2CL, these methods attempt to be a calling interface in front of methods in

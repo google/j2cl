@@ -7,6 +7,16 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 public class JsTypeVarargsTest extends MyTestCase {
+  public static void testAll() {
+    JsTypeVarargsTest test = new JsTypeVarargsTest();
+    test.testVarargsCall_constructors();
+    test.testVarargsCall_fromJavaScript();
+    test.testVarargsCall_jsFunction();
+    test.testVarargsCall_regularMethods();
+    test.testVarargsCall_edgeCases();
+    test.testVarargsCall_superCalls();
+    test.testVarargsCall_sideEffectingInstance();
+  }
 
   @JsMethod
   private static native int varargsLengthThruArguments(Object... varargs);

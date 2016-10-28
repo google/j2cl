@@ -6,6 +6,29 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class JsFunctionTest extends MyTestCase {
+  public static void testAll() {
+    JsFunctionTest test = new JsFunctionTest();
+    test.testCast_crossCastJavaInstance();
+    test.testCast_fromJsFunction();
+    test.testCast_fromJsObject();
+    test.testCast_inJava();
+    test.testInstanceOf_javaInstance();
+    test.testInstanceOf_jsFunction();
+    test.testInstanceOf_jsObject();
+    test.testJsFunctionAccess();
+    test.testJsFunctionBasic_java();
+    test.testJsFunctionBasic_javaAndJs();
+    test.testJsFunctionBasic_js();
+    test.testJsFunctionCallbackPattern();
+    test.testJsFunctionCallFromAMember();
+    test.testJsFunctionIdentity_java();
+    test.testJsFunctionIdentity_js();
+    test.testJsFunctionJs2Java();
+    test.testJsFunctionReferentialIntegrity();
+    test.testJsFunctionSuccessiveCalls();
+    test.testJsFunctionViaFunctionMethods();
+    test.testGetClass_jsFunction();
+  }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   private static class NativeRegExp {

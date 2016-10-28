@@ -11,6 +11,18 @@ import jsinterop.annotations.JsType;
 
 /** Tests native JsType functionality. */
 public class NativeJsTypeTest extends MyTestCase {
+  public static void testAll() {
+    NativeJsTypeTest test = new NativeJsTypeTest();
+    test.testClassLiterals();
+    test.testGetClass();
+    test.testEqualityOptimization();
+    test.testClassLiterals();
+    test.testNativeJsTypeWithOverlay();
+    test.testNativeJsTypeWithStaticIntializer();
+    test.testSpecialNativeInstanceOf();
+    test.testForwaringMethodsOnNativeClasses();
+  }
+
   @JsType(isNative = true)
   static class MyNativeJsType {
     @Override

@@ -15,15 +15,41 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import java.util.Iterator;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-import java.util.Iterator;
-
 public class JsTypeTest extends MyTestCase {
+  public static void testAll() {
+    JsTypeTest test = new JsTypeTest();
+    test.testAbstractJsTypeAccess();
+    test.testCasts();
+    test.testConcreteJsTypeAccess();
+    test.testConcreteJsTypeNoTypeTightenField();
+    test.testConcreteJsTypeSubclassAccess();
+    test.testEnumeration();
+    test.testEnumJsTypeAccess();
+    test.testEnumSubclassEnumeration();
+    test.testInstanceOf_concreteJsType();
+    test.testInstanceOf_extendsJsTypeWithProto();
+    test.testInstanceOf_implementsJsType();
+    test.testInstanceOf_implementsJsTypeWithPrototype();
+    test.testInstanceOf_jsoWithNativeButtonProto();
+    test.testInstanceOf_jsoWithoutProto();
+    test.testInstanceOf_jsoWithProto();
+    test.testInstanceOf_withNameSpace();
+    test.testJsMethodWithDifferentVisiblities();
+    test.testJsTypeField();
+    test.testNamedBridge();
+    test.testNativeMethodOverrideNoTypeTightenParam();
+    test.testRevealedOverrideJsType();
+    test.testSingleJavaConcreteInterface();
+    test.testSingleJavaConcreteJsFunction();
+  }
+
   @JsType(isNative = true, namespace = "test.foo")
   static interface MyNativeJsTypeInterface {}
 

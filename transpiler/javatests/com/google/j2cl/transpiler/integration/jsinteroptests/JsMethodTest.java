@@ -24,6 +24,15 @@ import jsinterop.annotations.JsProperty;
  * Tests JsMethod functionality.
  */
 public class JsMethodTest extends MyTestCase {
+  public static void testAll() {
+    JsMethodTest test = new JsMethodTest();
+    test.testNativeJsMethod();
+    test.testStaticNativeJsMethod();
+    test.testStaticNativeJsPropertyGetter();
+    test.testStaticNativeJsPropertySetter();
+    test.testLambdaImplementingJsMethod();
+  }
+
   class MyObject {
     @JsProperty public int mine;
 
@@ -81,13 +90,5 @@ public class JsMethodTest extends MyTestCase {
   public void testLambdaImplementingJsMethod() {
     FunctionalInterfaceWithJsMethod f = () -> "Hello";
     assertEquals("Hello", f.greet());
-  }
-
-  public void testAll() {
-    testNativeJsMethod();
-    testStaticNativeJsMethod();
-    testStaticNativeJsPropertyGetter();
-    testStaticNativeJsPropertySetter();
-    testLambdaImplementingJsMethod();
   }
 }

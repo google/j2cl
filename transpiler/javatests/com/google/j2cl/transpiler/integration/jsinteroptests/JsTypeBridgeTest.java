@@ -3,6 +3,11 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import jsinterop.annotations.JsType;
 
 public class JsTypeBridgeTest {
+  public static void testAll() {
+    JsTypeBridgeTest test = new JsTypeBridgeTest();
+    test.testBridges();
+  }
+
   @JsType
   private interface JsListInterface {
     void add(Object o);

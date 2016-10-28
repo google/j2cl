@@ -6,6 +6,12 @@ import jsinterop.annotations.JsType;
 
 /** Tests JsType object method devirtualization functionality. */
 public class JsTypeObjectMethodsTest extends MyTestCase {
+  public static void testAl() {
+    JsTypeObjectMethodsTest test = new JsTypeObjectMethodsTest();
+    test.testEquals();
+    test.testHashCode();
+    test.testJavaLangObjectMethodsOrNativeSubtypes();
+  }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface NativeObject {}

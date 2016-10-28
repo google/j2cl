@@ -8,6 +8,24 @@ import jsinterop.annotations.JsType;
  * Tests JsProperty functionality.
  */
 public class JsPropertyTest extends MyTestCase {
+  public static void testAll() {
+    JsPropertyTest test = new JsPropertyTest();
+    test.testConcreteJsType();
+    test.testJavaClassImplementingMyJsTypeInterfaceWithProperty();
+    test.testJsPropertyAccidentalOverrideSuperCall();
+    test.testJsPropertyBridges();
+    test.testJsPropertyBridgesSubclass();
+    test.testJsPropertyGetX();
+    test.testJsPropertyIsX();
+    test.testJsPropertyRemovedAccidentalOverrideSuperCall();
+    test.testNativeJsType();
+    test.testNativeJsTypeSubclass();
+    test.testNativeJsTypeSubclassNoOverride();
+    test.testNativeJsTypeWithConstructor();
+    test.testNativeJsTypeWithConstructorSubclass();
+    test.testProtectedNames();
+  }
+
   private static final int SET_PARENT_X = 500;
   private static final int GET_PARENT_X = 1000;
   private static final int GET_X = 100;
