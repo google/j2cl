@@ -24,6 +24,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
@@ -57,7 +58,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       Builder builder = new Builder();
       TypeDescriptor newTypeDescriptor = builder.newTypeDescriptor;
 
-      newTypeDescriptor.binaryName = typeDescriptor.getBinaryName();
+      newTypeDescriptor.uniqueKey = typeDescriptor.uniqueKey;
       newTypeDescriptor.classComponents = typeDescriptor.getClassComponents();
       newTypeDescriptor.componentTypeDescriptor = typeDescriptor.getComponentTypeDescriptor();
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
@@ -109,7 +110,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.jsName = typeDescriptor.getJsName();
       newTypeDescriptor.jsNamespace = typeDescriptor.getJsNamespace();
       newTypeDescriptor.leafTypeDescriptor = typeDescriptor.getLeafTypeDescriptor();
-      newTypeDescriptor.packageComponents = typeDescriptor.getPackageComponents();
       newTypeDescriptor.packageName = typeDescriptor.getPackageName();
       newTypeDescriptor.rawTypeDescriptorFactory =
           new DescriptorFactory<TypeDescriptor>() {
@@ -118,8 +118,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
               return typeDescriptor.getRawTypeDescriptor();
             }
           };
-      newTypeDescriptor.simpleName = typeDescriptor.getSimpleName();
-      newTypeDescriptor.sourceName = typeDescriptor.getSourceName();
       newTypeDescriptor.isOrSubclassesJsConstructorClass =
           typeDescriptor.isOrSubclassesJsConstructorClass();
       newTypeDescriptor.superTypeDescriptorFactory =
@@ -157,13 +155,19 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     public TypeDescriptor build() {
       checkState(!newTypeDescriptor.isTypeVariable || newTypeDescriptor.isNullable);
       checkState(!newTypeDescriptor.isPrimitive || !newTypeDescriptor.isNullable);
+      
+      // Default to binary name as the unique key.
+      if (newTypeDescriptor.uniqueKey == null) {
+        newTypeDescriptor.uniqueKey = newTypeDescriptor.getBinaryName();
+      }
+
       // TODO(tdeegan): Complete the precondition checks to make sure we are never buiding a
       // type descriptor that does not make sense.
       return getInterner().intern(newTypeDescriptor);
     }
 
-    public Builder setBinaryName(String binaryName) {
-      newTypeDescriptor.binaryName = binaryName;
+    public Builder setUniqueKey(String key) {
+      newTypeDescriptor.uniqueKey = key;
       return this;
     }
 
@@ -313,11 +317,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setPackageComponents(List<String> packageComponents) {
-      newTypeDescriptor.packageComponents = packageComponents;
-      return this;
-    }
-
     public Builder setPackageName(String packageName) {
       newTypeDescriptor.packageName = packageName;
       return this;
@@ -326,16 +325,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     public Builder setRawTypeDescriptorFactory(
         DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory) {
       newTypeDescriptor.rawTypeDescriptorFactory = rawTypeDescriptorFactory;
-      return this;
-    }
-
-    public Builder setSimpleName(String simpleName) {
-      newTypeDescriptor.simpleName = simpleName;
-      return this;
-    }
-
-    public Builder setSourceName(String sourceName) {
-      newTypeDescriptor.sourceName = sourceName;
       return this;
     }
 
@@ -389,7 +378,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     protected abstract T create(TypeDescriptor selfTypeDescriptor);
   }
 
-  private String binaryName;
+  private String uniqueKey;
   private List<String> classComponents = Collections.emptyList();
   private TypeDescriptor componentTypeDescriptor;
   private DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory;
@@ -417,11 +406,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private String jsName;
   private String jsNamespace;
   private TypeDescriptor leafTypeDescriptor;
-  private List<String> packageComponents = Collections.emptyList();
   private String packageName;
   private DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory;
-  private String simpleName;
-  private String sourceName;
   private boolean isOrSubclassesJsConstructorClass;
   private DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory;
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
@@ -459,12 +445,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   /** Returns the unqualified binary name like "Outer$Inner". */
   public String getBinaryClassName() {
     // TODO rename to getBinarySimpleName
-    return binaryName.substring(binaryName.lastIndexOf(".") + 1);
+    return Joiner.on('$').join(classComponents);
   }
 
   /** Returns the fully package qualified binary name like "com.google.common.Outer$Inner". */
   public String getBinaryName() {
-    return binaryName;
+    return Joiner.on(".").skipNulls().join(packageName, getBinaryClassName());
   }
 
   public String getModuleName() {
@@ -596,10 +582,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return leafTypeDescriptor;
   }
 
-  public List<String> getPackageComponents() {
-    return packageComponents;
-  }
-
   /** Returns the fully package qualified name like "com.google.common". */
   public String getPackageName() {
     return packageName;
@@ -671,7 +653,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return "Function";
     }
 
-    String effectiveSimpleName = jsName == null ? simpleName : jsName;
+    String effectiveSimpleName = jsName == null ? getSimpleName() : jsName;
     String effectivePrefix = jsNamespace;
     if (JsUtils.isGlobal(jsNamespace)) {
       effectivePrefix = "";
@@ -710,6 +692,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   /** Returns the unqualified and unenclosed simple name like "Inner". */
   public String getSimpleName() {
+    String simpleName = Iterables.getLast(classComponents);
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
     // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
     // JSCompiler happy.
@@ -723,7 +706,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   /** Returns the fully package qualified source name like "com.google.common.Outer.Inner". */
   public String getSourceName() {
-    return sourceName;
+    return Joiner.on(".").skipNulls().join(packageName, Joiner.on(".").join(classComponents));
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
@@ -744,13 +727,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   /** A unique string for a give type. Used for interning. */
   public String getUniqueId() {
     String prefix = isNullable ? "?" : "!";
-    if (isArray) {
-      String leaf = leafTypeDescriptor.getUniqueId();
-      return prefix + "(" + leaf + ")" + Strings.repeat("[]", dimensions);
-    }
-    return prefix
-        + binaryName
-        + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
+    return prefix + uniqueKey + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
   }
 
   private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {

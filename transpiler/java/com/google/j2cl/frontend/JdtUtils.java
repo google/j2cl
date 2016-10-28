@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -746,14 +744,6 @@ public class JdtUtils {
     return createForType(typeBinding, typeArgumentDescriptors);
   }
 
-  public static List<String> getPackageComponents(ITypeBinding typeBinding) {
-    List<String> packageComponents = new ArrayList<>();
-    if (typeBinding.getPackage() != null) {
-      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
-    }
-    return packageComponents;
-  }
-
   public static List<String> getClassComponents(ITypeBinding typeBinding) {
     List<String> classComponents = new LinkedList<>();
     if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
@@ -766,8 +756,9 @@ public class JdtUtils {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the generated name by taking the part after the binary name of the declaring
         // class.
-        String binaryName = getBinaryName(currentType);
-        String declaringClassPrefix = getBinaryName(currentType.getDeclaringClass()) + "$";
+        String binaryName = getBinaryNameFromTypeBinding(currentType);
+        String declaringClassPrefix =
+            getBinaryNameFromTypeBinding(currentType.getDeclaringClass()) + "$";
         checkState(binaryName.startsWith(declaringClassPrefix));
         simpleName = binaryName.substring(declaringClassPrefix.length());
       } else if (currentType.isTypeVariable()) {
@@ -801,7 +792,7 @@ public class JdtUtils {
    * <p>NOTE: This accounts for the cases that JDT does not assign binary names, which are those of
    * unreachable local or anonymous classes.
    */
-  private static String getBinaryName(ITypeBinding typeBinding) {
+  private static String getBinaryNameFromTypeBinding(ITypeBinding typeBinding) {
     String binaryName = typeBinding.getBinaryName();
     if (binaryName == null && (typeBinding.isLocal() || typeBinding.isAnonymous())) {
       // Local and anonymous classes in unreachable code have null binary name.
@@ -815,7 +806,7 @@ public class JdtUtils {
       }
       String parentKey = closestReachableExclosingClass.getKey();
       String key = typeBinding.getKey();
-      return getBinaryName(typeBinding.getDeclaringClass())
+      return getBinaryNameFromTypeBinding(typeBinding.getDeclaringClass())
           + "$$Unreachable"
           // remove the parent prefix and the ending semicolon
           + key.substring(parentKey.length() - 1, key.length() - 1);
@@ -1001,7 +992,7 @@ public class JdtUtils {
       signatureBuilder.append(":");
     } else if (methodVisibility.isPrivate()) {
       signatureBuilder.append(":p:");
-      signatureBuilder.append(getBinaryName(methodBinding.getDeclaringClass()));
+      signatureBuilder.append(getBinaryNameFromTypeBinding(methodBinding.getDeclaringClass()));
       signatureBuilder.append(":");
     }
 
@@ -1011,7 +1002,7 @@ public class JdtUtils {
     String separator = "";
     for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
       signatureBuilder.append(separator);
-      signatureBuilder.append(getBinaryName(parameterType.getErasure()));
+      signatureBuilder.append(getBinaryNameFromTypeBinding(parameterType.getErasure()));
       separator = ";";
     }
     signatureBuilder.append(")");
@@ -1218,7 +1209,7 @@ public class JdtUtils {
 
   public static TypeDescriptor createLambda(
       final TypeDescriptor enclosingClassTypeDescriptor,
-      String lambdaSimpleName,
+      List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
     // About Intersection typed Lambdas:
     //
@@ -1311,31 +1302,11 @@ public class JdtUtils {
           }
         };
 
-    // Compute these first since they're reused in other calculations.
-    List<String> classComponents =
-        Stream.concat(
-                enclosingClassTypeDescriptor.getClassComponents().stream(),
-                Stream.of(lambdaSimpleName))
-            .collect(toImmutableList());
-    List<String> packageComponents = enclosingClassTypeDescriptor.getPackageComponents();
-    String simpleName = Iterables.getLast(classComponents);
-
-    // Compute everything else.
-    String binaryName =
-        Stream.concat(
-                packageComponents.stream(),
-                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
-            .collect(joining("."));
-    String packageName = Joiner.on(".").join(packageComponents);
-    String sourceName =
-        Stream.concat(packageComponents.stream(), classComponents.stream()).collect(joining("."));
-
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList();
     for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
       typeArgumentDescriptors.addAll(interfaceTypeDescriptor.getAllTypeVariables());
     }
     return new TypeDescriptor.Builder()
-        .setBinaryName(binaryName)
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
@@ -1344,11 +1315,8 @@ public class JdtUtils {
         .setIsLocal(true)
         .setIsNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-        .setPackageComponents(packageComponents)
-        .setPackageName(packageName)
+        .setPackageName(enclosingClassTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSimpleName(simpleName)
-        .setSourceName(sourceName)
         .setInterfaceTypeDescriptorsFactory(interfacesDescriptorsFactory)
         .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
@@ -1380,7 +1348,7 @@ public class JdtUtils {
    * computed here. Instead we have an early normalization pass that traverses the intersection
    * types and sets the correct package and binaryName etc.
    */
-  private static TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
+  private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
     checkArgument(isIntersectionType(typeBinding));
     List<ITypeBinding> intersectedTypeBindings = getTypeBindingsForIntersectionType(typeBinding);
     List<TypeDescriptor> intersectedTypeDescriptors =
@@ -1402,7 +1370,7 @@ public class JdtUtils {
       // around in the class path to figure it out and it might even come up with the wrong answer
       // for example if this class has also been globbed into some other library that is a
       // dependency of this one.
-      PackageInfoCache.get().markAsSource(getBinaryName(topLevelTypeBinding));
+      PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
 
     DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
@@ -1440,24 +1408,14 @@ public class JdtUtils {
         };
 
     // Compute these first since they're reused in other calculations.
-    List<String> classComponents = getClassComponents(typeBinding);
-    List<String> packageComponents = getPackageComponents(typeBinding);
+    String packageName =
+        typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
     boolean isPrimitive = typeBinding.isPrimitive();
     boolean isTypeVariable = typeBinding.isTypeVariable();
     boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
     IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
-    String simpleName = Iterables.getLast(classComponents);
 
-    // Compute everything else.
-    String binaryName =
-        Stream.concat(
-                packageComponents.stream(),
-                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
-            .collect(joining("."));
-
-    if (isTypeVariable || isWildCardOrCapture) {
-      binaryName = binaryName + ":" + typeBinding.getKey();
-    }
+    String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
     boolean isFinal = isFinal(typeBinding);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
@@ -1470,7 +1428,8 @@ public class JdtUtils {
     boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
     if (isTopLevelType) {
       String jsPackageNamespace =
-          packageInfoCache.getJsNamespace(getBinaryName(toTopLevelTypeBinding(typeBinding)));
+          packageInfoCache.getJsNamespace(
+              getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
       if (jsPackageNamespace != null) {
         jsNamespace = jsPackageNamespace;
       }
@@ -1481,9 +1440,6 @@ public class JdtUtils {
       jsNamespace = jsTypeNamespace;
     }
 
-    String packageName = Joiner.on(".").join(packageComponents);
-    String sourceName =
-        Stream.concat(packageComponents.stream(), classComponents.stream()).collect(joining("."));
     List<TypeDescriptor> typeArgumentDescriptors =
         overrideTypeArgumentDescriptors != null
             ? overrideTypeArgumentDescriptors
@@ -1521,9 +1477,8 @@ public class JdtUtils {
 
     // Compute these even later
     return new TypeDescriptor.Builder()
-        .setBinaryName(binaryName)
         .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
-        .setClassComponents(classComponents)
+        .setClassComponents(getClassComponents(typeBinding))
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
         .setInterfaceTypeDescriptorsFactory(
@@ -1555,11 +1510,8 @@ public class JdtUtils {
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setJsName(jsName)
         .setJsNamespace(jsNamespace)
-        .setPackageComponents(packageComponents)
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSimpleName(simpleName)
-        .setSourceName(sourceName)
         .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
         .setSuperTypeDescriptorFactory(
             new DescriptorFactory<TypeDescriptor>() {
@@ -1571,6 +1523,7 @@ public class JdtUtils {
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
+        .setUniqueKey(uniqueKey)
         .build();
   }
 }

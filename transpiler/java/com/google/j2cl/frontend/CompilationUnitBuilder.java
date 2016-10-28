@@ -1045,28 +1045,32 @@ public class CompilationUnitBuilder {
      */
     private Expression convert(org.eclipse.jdt.core.dom.LambdaExpression expression) {
       ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
-
+      ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
+      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
       TypeDescriptor functionalInterfaceTypeDescriptor =
           JdtUtils.createTypeDescriptor(
               functionalInterfaceTypeBinding.getFunctionalInterfaceMethod().getDeclaringClass());
-      // TODO(goktug): use intersection type simple name instead of functional interface type.
-      String lambdaSimpleName =
-          "$Lambda$" + functionalInterfaceTypeDescriptor.getSimpleName() + "$" + lambdaCounter++;
+
+      // TODO(goktug): use type simple name instead of functional interface type.
+      List<String> classComponents =
+          AstUtils.synthesizeInnerClassComponents(
+              enclosingType,
+              "Lambda",
+              functionalInterfaceTypeDescriptor.getSimpleName(),
+              lambdaCounter++);
 
       // Here we convert JsFunctions to function expressions
       if (functionalInterfaceTypeDescriptor.isJsFunctionInterface()) {
         return convertLambdaToFunctionExpression(expression);
       }
 
-      ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
-      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
       TypeDescriptor lambdaTypeDescriptor =
-          JdtUtils.createLambda(enclosingType, lambdaSimpleName, functionalInterfaceTypeBinding);
+          JdtUtils.createLambda(enclosingType, classComponents, functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       pushType(lambdaType);
 
       // Construct lambda method and add it to lambda inner class.
-      String lambdaMethodBinaryName = "lambda" + lambdaSimpleName;
+      String lambdaMethodBinaryName = "lambda" + lambdaTypeDescriptor.getSimpleName();
       Method lambdaMethod =
           createLambdaMethod(lambdaMethodBinaryName, expression, lambdaType.getDescriptor());
       lambdaType.addMethod(lambdaMethod);

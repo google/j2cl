@@ -68,7 +68,7 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getBinaryName().replaceAll("_", "__").replaceAll("\\" + ".", "_");
+    return typeDescriptor.getBinaryName().replaceAll("_", "__").replaceAll("\\.", "_");
   }
 
   public static Map<ImportCategory, Set<Import>> gatherImports(Type type) {

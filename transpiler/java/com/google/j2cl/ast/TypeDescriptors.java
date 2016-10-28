@@ -30,11 +30,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
@@ -223,18 +221,17 @@ public class TypeDescriptors {
             : createOverlayImplementationClassTypeDescriptor(
                 typeDescriptor.getSuperTypeDescriptor());
 
-    List<String> classComponents = Lists.newArrayList(typeDescriptor.getClassComponents());
-    int simpleNameIndex = classComponents.size() - 1;
-    classComponents.set(
-        simpleNameIndex,
-        classComponents.get(simpleNameIndex) + AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
+    List<String> classComponents =
+        AstUtils.synthesizeClassComponents(
+            typeDescriptor,
+            simpleName -> simpleName + AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
 
     return createExactly(
         superTypeDescriptor,
-        typeDescriptor.getPackageComponents(),
+        typeDescriptor.getPackageName(),
         classComponents,
         Collections.emptyList(),
-        Joiner.on(".").join(typeDescriptor.getPackageComponents()),
+        typeDescriptor.getPackageName(),
         Joiner.on(".").join(classComponents),
         false,
         false);
@@ -242,28 +239,28 @@ public class TypeDescriptors {
 
   /** Holds the bootstrap types. */
   public enum BootstrapType {
-    OBJECTS(Collections.singletonList("vmbootstrap"), "Objects"),
-    COMPARABLES(Collections.singletonList("vmbootstrap"), "Comparables"),
-    CHAR_SEQUENCES(Collections.singletonList("vmbootstrap"), "CharSequences"),
-    NUMBERS(Collections.singletonList("vmbootstrap"), "Numbers"),
-    ASSERTS(Collections.singletonList("vmbootstrap"), "Asserts"),
-    ARRAYS(Collections.singletonList("vmbootstrap"), "Arrays"),
-    CASTS(Collections.singletonList("vmbootstrap"), "Casts"),
-    PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
-    ENUMS(Collections.singletonList("vmbootstrap"), "Enums"),
-    LONG_UTILS(Collections.singletonList("vmbootstrap"), "LongUtils"),
-    JAVA_SCRIPT_OBJECT(Collections.singletonList("vmbootstrap"), "JavaScriptObject"),
-    JAVA_SCRIPT_FUNCTION(Collections.singletonList("vmbootstrap"), "JavaScriptFunction"),
-    NATIVE_EQUALITY(Collections.singletonList("nativebootstrap"), "Equality"),
-    NATIVE_UTIL(Collections.singletonList("nativebootstrap"), "Util"),
-    NATIVE_LONG(Collections.singletonList("nativebootstrap"), "Long"),
-    EXCEPTIONS(Collections.singletonList("vmbootstrap"), "Exceptions");
+    OBJECTS("vmbootstrap", "Objects"),
+    COMPARABLES("vmbootstrap", "Comparables"),
+    CHAR_SEQUENCES("vmbootstrap", "CharSequences"),
+    NUMBERS("vmbootstrap", "Numbers"),
+    ASSERTS("vmbootstrap", "Asserts"),
+    ARRAYS("vmbootstrap", "Arrays"),
+    CASTS("vmbootstrap", "Casts"),
+    PRIMITIVES("vmbootstrap.primitives", "Primitives"),
+    ENUMS("vmbootstrap", "Enums"),
+    LONG_UTILS("vmbootstrap", "LongUtils"),
+    JAVA_SCRIPT_OBJECT("vmbootstrap", "JavaScriptObject"),
+    JAVA_SCRIPT_FUNCTION("vmbootstrap", "JavaScriptFunction"),
+    NATIVE_EQUALITY("nativebootstrap", "Equality"),
+    NATIVE_UTIL("nativebootstrap", "Util"),
+    NATIVE_LONG("nativebootstrap", "Long"),
+    EXCEPTIONS("vmbootstrap", "Exceptions");
 
     private TypeDescriptor typeDescriptor;
 
-    BootstrapType(List<String> pathComponents, String name) {
+    BootstrapType(String packageName, String name) {
       this.typeDescriptor =
-          createExactly(pathComponents, Collections.singletonList(name), Collections.emptyList());
+          createExactly(packageName, Collections.singletonList(name), Collections.emptyList());
     }
 
     public TypeDescriptor getDescriptor() {
@@ -287,7 +284,7 @@ public class TypeDescriptors {
   public static TypeDescriptor createNative(
       String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
     return createNative(
-        Collections.singletonList(jsNamespace),
+        jsNamespace,
         Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
         jsNamespace,
         jsName,
@@ -295,14 +292,14 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor createNative(
-      List<String> packageComponents,
+      String packageName,
       List<String> classComponents,
       String jsNamespace,
       String jsName,
       List<TypeDescriptor> typeArgumentDescriptors) {
     return createExactly(
         null,
-        packageComponents,
+        packageName,
         classComponents,
         typeArgumentDescriptors,
         jsNamespace,
@@ -313,9 +310,8 @@ public class TypeDescriptors {
 
   public static TypeDescriptor createUnion(
       List<TypeDescriptor> unionedTypeDescriptors, final TypeDescriptor superTypeDescriptor) {
-    String joinedBinaryName = createJoinedBinaryName(unionedTypeDescriptors, " | ");
     return new TypeDescriptor.Builder()
-        .setBinaryName(joinedBinaryName)
+        .setUniqueKey(createUniqueName(unionedTypeDescriptors, "|"))
         .setIsNullable(true)
         .setIsUnion(true)
         .setRawTypeDescriptorFactory(
@@ -348,17 +344,13 @@ public class TypeDescriptors {
             .stream()
             .filter(TypeDescriptor::isInterface)
             .collect(toImmutableList());
-    String joinedBinaryName =
-        TypeDescriptors.createJoinedBinaryName(intersectedTypeDescriptors, " & ");
     Set<TypeDescriptor> typeVars = Sets.newLinkedHashSet();
     for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
       typeVars.addAll(intersectedType.getAllTypeVariables());
     }
     return new TypeDescriptor.Builder()
         .setIsIntersection(true)
-        .setSimpleName(joinedBinaryName)
         .setTypeArgumentDescriptors(typeVars)
-        .setBinaryName(joinedBinaryName)
         .setVisibility(Visibility.PUBLIC)
         .setIsNullable(true)
         .setInterfaceTypeDescriptorsFactory(
@@ -375,28 +367,22 @@ public class TypeDescriptors {
                 return superTypeDescriptor;
               }
             })
+        .setUniqueKey(TypeDescriptors.createUniqueName(intersectedTypeDescriptors, "&"))
         .build();
   }
 
   public static TypeDescriptor createExactly(
-      List<String> packageComponents,
+      String packageName,
       List<String> classComponents,
       List<TypeDescriptor> typeArgumentDescriptors) {
     checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return createExactly(
-        null,
-        packageComponents,
-        classComponents,
-        typeArgumentDescriptors,
-        null,
-        null,
-        false,
-        false);
+        null, packageName, classComponents, typeArgumentDescriptors, null, null, false, false);
   }
 
   private static TypeDescriptor createExactly(
       final TypeDescriptor superTypeDescriptor,
-      final List<String> packageComponents,
+      final String packageName,
       final List<String> classComponents,
       final List<TypeDescriptor> typeArgumentDescriptors,
       final String jsNamespace,
@@ -412,7 +398,7 @@ public class TypeDescriptors {
             List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
             return createExactly(
                 rawSuperTypeDescriptor,
-                packageComponents,
+                packageName,
                 classComponents,
                 emptyTypeArgumentDescriptors,
                 jsNamespace,
@@ -429,28 +415,15 @@ public class TypeDescriptors {
           }
         };
 
-    String simpleName = Iterables.getLast(classComponents);
-    String binaryName =
-        Stream.concat(
-                packageComponents.stream(),
-                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
-            .collect(joining("."));
-    String packageName = Joiner.on(".").join(packageComponents);
     return new TypeDescriptor.Builder()
-        .setBinaryName(binaryName)
         .setClassComponents(classComponents)
         .setIsJsType(isJsType)
         .setIsNative(isNative)
         .setIsNullable(true)
         .setJsName(jsName)
         .setJsNamespace(jsNamespace)
-        .setPackageComponents(packageComponents)
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSimpleName(simpleName)
-        .setSourceName(
-            Stream.concat(packageComponents.stream(), classComponents.stream())
-                .collect(joining(".")))
         .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PUBLIC)
@@ -525,31 +498,27 @@ public class TypeDescriptors {
           }
         };
 
-    // Compute these first since they're reused in other calculations.
-    String arrayPrefix = Strings.repeat("[", dimensions);
-    String arraySuffix = Strings.repeat("[]", dimensions);
-    String simpleName = leafTypeDescriptor.getSimpleName() + arraySuffix;
-
     // Compute everything else.
-    String binaryName = arrayPrefix + leafTypeDescriptor.getBinaryName();
     TypeDescriptor componentTypeDescriptor =
         getForArray(leafTypeDescriptor, dimensions - 1, isNullable);
-    String packageName = leafTypeDescriptor.getPackageName();
-    String sourceName = leafTypeDescriptor.getSourceName() + arraySuffix;
-    List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
+
+    List<String> classComponents =
+        AstUtils.synthesizeClassComponents(
+            componentTypeDescriptor, simpleName -> simpleName + "[]");
+
+    String uniqueKey = leafTypeDescriptor.getUniqueId() + Strings.repeat("[]", dimensions);
 
     return new TypeDescriptor.Builder()
-        .setBinaryName(binaryName)
         .setComponentTypeDescriptor(componentTypeDescriptor)
         .setDimensions(dimensions)
         .setIsArray(true)
         .setIsNullable(isNullable)
         .setLeafTypeDescriptor(leafTypeDescriptor)
-        .setPackageName(packageName)
+        .setClassComponents(classComponents)
+        .setPackageName(leafTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSimpleName(simpleName)
-        .setSourceName(sourceName)
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setTypeArgumentDescriptors(Collections.emptyList())
+        .setUniqueKey(uniqueKey)
         .build();
   }
 
@@ -574,7 +543,7 @@ public class TypeDescriptors {
     return NullLiteral.NULL;
   }
 
-  public static String createJoinedBinaryName(
+  public static String createUniqueName(
       final List<TypeDescriptor> typeDescriptors, String separator) {
     return typeDescriptors
         .stream()
@@ -583,8 +552,7 @@ public class TypeDescriptors {
               String binaryName = typeDescriptor.getBinaryName();
               if (typeDescriptor.isParameterizedType()) {
                 binaryName += "_";
-                binaryName +=
-                    createJoinedBinaryName(typeDescriptor.getTypeArgumentDescriptors(), "_");
+                binaryName += createUniqueName(typeDescriptor.getTypeArgumentDescriptors(), "_");
               }
               return binaryName.replace('.', '_');
             })

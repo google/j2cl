@@ -26,6 +26,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
+import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
@@ -56,6 +58,24 @@ public class AstUtils {
       return string;
     }
     return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
+  }
+
+  /** Returns new synthesized class components based on provided {@code simpleNameSynthesizer}. */
+  public static List<String> synthesizeClassComponents(
+      TypeDescriptor originalType, Function<String, String> simpleNameSynthesizer) {
+    List<String> classComponents = Lists.newArrayList(originalType.getClassComponents());
+    int simpleNameIndex = classComponents.size() - 1;
+    classComponents.set(
+        simpleNameIndex, simpleNameSynthesizer.apply(classComponents.get(simpleNameIndex)));
+    return classComponents;
+  }
+
+  /** Returns new synthesized inner class components. */
+  public static List<String> synthesizeInnerClassComponents(
+      TypeDescriptor enclosingType, String prefix, String descriptiveName, int uniqueId) {
+    List<String> classComponents = Lists.newArrayList(enclosingType.getClassComponents());
+    classComponents.add(J2clUtils.format("$%s$%s$%s", prefix, descriptiveName, uniqueId));
+    return classComponents;
   }
 
   /** Create "$init" MethodDescriptor. */
