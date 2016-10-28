@@ -496,21 +496,22 @@ public class JdtUtils {
       TypeDescriptor lambdaTypeDescriptor,
       ITypeBinding lambdaInterfaceBinding,
       MethodDescriptor lambdaMethodDescriptor) {
-    IMethodBinding samMethodBinding = checkNotNull(findSamMethodBinding(lambdaInterfaceBinding));
+
     MethodDescriptor samMethodDescriptor =
-        MethodDescriptor.Builder.from(createMethodDescriptor(samMethodBinding))
+        createMethodDescriptor(checkNotNull(findSamMethodBinding(lambdaInterfaceBinding)));
+    MethodDescriptor samImplementationMethodDescriptor =
+        MethodDescriptor.Builder.from(samMethodDescriptor)
             .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
             .setIsNative(false)
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
-    List<TypeDescriptor> parameterTypes =
-        lambdaMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    List<TypeDescriptor> parameterTypes = lambdaMethodDescriptor.getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter =
           Variable.newBuilder()
               .setName("arg" + i)
-              .setTypeDescriptor(parameterTypes.get(i).getRawTypeDescriptor())
+              .setTypeDescriptor(parameterTypes.get(i))
               .setIsParameter(true)
               .build();
       parameters.add(parameter);
@@ -523,10 +524,11 @@ public class JdtUtils {
                 .getReturnTypeDescriptor()
                 .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? callLambda.makeStatement()
-            : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
+            : new ReturnStatement(
+                callLambda, samImplementationMethodDescriptor.getReturnTypeDescriptor());
 
     return Method.newBuilder()
-        .setMethodDescriptor(samMethodDescriptor)
+        .setMethodDescriptor(samImplementationMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(true)
