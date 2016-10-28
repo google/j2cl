@@ -493,9 +493,15 @@ public class JdtUtils {
   }
 
   static Method createSamMethod(
-      ITypeBinding lambdaInterfaceBinding, MethodDescriptor lambdaMethodDescriptor) {
+      TypeDescriptor lambdaTypeDescriptor,
+      ITypeBinding lambdaInterfaceBinding,
+      MethodDescriptor lambdaMethodDescriptor) {
     IMethodBinding samMethodBinding = checkNotNull(findSamMethodBinding(lambdaInterfaceBinding));
-    MethodDescriptor samMethodDescriptor = createMethodDescriptor(samMethodBinding);
+    MethodDescriptor samMethodDescriptor =
+        MethodDescriptor.Builder.from(createMethodDescriptor(samMethodBinding))
+            .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
+            .setIsNative(false)
+            .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     List<TypeDescriptor> parameterTypes =

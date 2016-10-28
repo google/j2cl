@@ -1,0 +1,105 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdajsinterop.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main$impl');
+
+
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Lambda$Thenable$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
+
+
+class Main extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdajsinterop_Main__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdajsinterop_Main__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_main__() {
+    Main.$clinit();
+    let rv = $Lambda$Thenable$0.$create__();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Lambda$Thenable$0 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main() {}
+};
+
+$Util.$setClassMetadata(
+    Main, $Util.$makeClassName(
+              'com.google.j2cl.transpiler.readable.lambdajsinterop.Main'));
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;
+//# sourceMappingURL=Main.js.map

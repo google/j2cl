@@ -72,4 +72,22 @@ public class JsMethodTest extends MyTestCase {
     // setJsInteropSecret("very secret!");
     // assertEquals("very secret!", getJsInteropSecret());
   }
+
+  interface FunctionalInterfaceWithJsMethod {
+    @JsMethod
+    String greet();
+  }
+
+  public void testLambdaImplementingJsMethod() {
+    FunctionalInterfaceWithJsMethod f = () -> "Hello";
+    assertEquals("Hello", f.greet());
+  }
+
+  public void testAll() {
+    testNativeJsMethod();
+    testStaticNativeJsMethod();
+    testStaticNativeJsPropertyGetter();
+    testStaticNativeJsPropertySetter();
+    testLambdaImplementingJsMethod();
+  }
 }

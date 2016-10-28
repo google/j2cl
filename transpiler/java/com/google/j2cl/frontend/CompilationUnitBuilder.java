@@ -1077,7 +1077,8 @@ public class CompilationUnitBuilder {
 
       // Construct and add SAM method that delegates to the lambda method.
       Method samMethod =
-          JdtUtils.createSamMethod(functionalInterfaceTypeBinding, lambdaMethod.getDescriptor());
+          JdtUtils.createSamMethod(
+              lambdaTypeDescriptor, functionalInterfaceTypeBinding, lambdaMethod.getDescriptor());
       lambdaType.addMethod(samMethod);
 
       // Add fields for captured local variables.

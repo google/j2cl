@@ -1,0 +1,81 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdajsinterop.Main$JsFunc.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsFunc$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @interface
+ * @template C_JsFunc_R, C_JsFunc_T
+ */
+class JsFunc {
+  /**
+   * @abstract
+   * @param {C_JsFunc_T} t
+   * @return {C_JsFunc_R}
+   * @public
+   */
+  m_execute__java_lang_Object(t) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main$JsFunc =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main$JsFunc;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {}
+};
+
+$Util.$setClassMetadataForInterface(JsFunc, $Util.$makeClassName('Function'));
+
+
+JsFunc.$markImplementor(/** @type {Function} */ (JsFunc));
+
+
+/**
+ * Export class.
+ */
+exports = JsFunc;
+//# sourceMappingURL=Main$JsFunc.js.map

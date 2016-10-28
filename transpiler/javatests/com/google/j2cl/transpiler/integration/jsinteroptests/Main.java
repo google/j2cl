@@ -76,11 +76,7 @@ public class Main {
   }
 
   public static void runJsMethodTest() {
-    JsMethodTest test = new JsMethodTest();
-    test.testNativeJsMethod();
-    test.testStaticNativeJsMethod();
-    test.testStaticNativeJsPropertyGetter();
-    test.testStaticNativeJsPropertySetter();
+    new JsMethodTest().testAll();
   }
 
   public static void runJsPropertyTest() {

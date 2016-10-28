@@ -2148,6 +2148,15 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "  public abstract void o();",
         "  protected abstract void o(Object o);",
         "  abstract void o(String o);",
+        "}",
+        "@JsType(isNative = true)",
+        "interface NativeFunctionalInterface {",
+        "  void f();",
+        " }",
+        "class Main {",
+        "  static void main() {",
+        "    NativeFunctionalInterface i = () -> {};",
+        "  }",
         "}");
 
     assertCompileSucceeds(sourcePackage);
