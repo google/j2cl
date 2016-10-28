@@ -22,7 +22,7 @@ import com.google.common.flags.Flag;
 import com.google.common.flags.FlagSpec;
 import com.google.common.flags.Flags;
 import com.google.common.flags.InvalidFlagValueException;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
@@ -52,16 +52,19 @@ public class JsniConverter {
   @FlagSpec(name = "excludes", help = "The paths of files whose JSNI to exclude.")
   private static final Flag<List<String>> excludesFlag = Flag.stringCollector();
 
-  private final Errors errors = new Errors();
+  private final Problems problems = new Problems();
 
   public static void main(String[] args) throws InvalidFlagValueException {
     String[] fileNames = Flags.parseAndReturnLeftovers(args);
 
     validateFlags(fileNames);
-
-    new JsniConverter(outputFileFlag.get())
-        .convert(
-            Arrays.asList(fileNames), classPathFlag.get(), new HashSet<String>(excludesFlag.get()));
+    JsniConverter jsniConverter = new JsniConverter(outputFileFlag.get());
+    try {
+      jsniConverter.convert(
+          Arrays.asList(fileNames), classPathFlag.get(), new HashSet<String>(excludesFlag.get()));
+    } catch (Problems.Exit e) {
+      jsniConverter.problems.report(System.out, System.err);
+    }
   }
 
   static void log(String message, Object... args) {
@@ -97,20 +100,19 @@ public class JsniConverter {
     }
   }
 
-  private static CompilationUnitsAndTypeBindings getCompilationUnitsAndTypeBindings(
+  private CompilationUnitsAndTypeBindings getCompilationUnitsAndTypeBindings(
       List<String> javaFileNames, List<String> classPathEntries) {
     // Since this tool is currently for a one-time extraction of GWT's standard library JSNI there
     // is no special care being taken to ensure that the classpath is being properly constructed.
     // This may result in some JDT parse errors, but since we are not checking the resulting Error
     // object they are effectively being ignored.
-    Errors errors = new Errors();
     JdtParser jdtParser =
         new JdtParser(
-            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", errors);
+            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", problems);
     jdtParser.setIncludeRunningVMBootclasspath(true);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         jdtParser.parseFiles(javaFileNames);
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
     return compilationUnitsAndTypeBindings;
   }
 
@@ -124,8 +126,8 @@ public class JsniConverter {
       List<String> javaFileNames, List<String> classPathEntries, Set<String> excludeFileNames) {
     Multimap<String, JsniMethod> jsniMethodsByType = ArrayListMultimap.create();
 
-    PackageInfoCache.init(classPathEntries, errors);
-    errors.maybeReportAndExit();
+    PackageInfoCache.init(classPathEntries, problems);
+    problems.abortIfRequested();
 
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         getCompilationUnitsAndTypeBindings(javaFileNames, classPathEntries);

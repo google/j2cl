@@ -35,7 +35,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.sourcemap.FilePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import java.util.HashMap;
@@ -53,8 +53,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".impl.java.js";
 
-  public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
-    super(errors, declareLegacyNamespace, type);
+  public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
+    super(problems, declareLegacyNamespace, type);
     this.className = environment.aliasForType(type.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(type.getDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);

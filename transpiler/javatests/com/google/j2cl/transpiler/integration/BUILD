@@ -119,6 +119,8 @@ java_library(
         "//java/com/google/common/io",
         "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
+        "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
+        "//transpiler/javatests/com/google/j2cl/transpiler:transpiler_driver",
     ],
 )
 

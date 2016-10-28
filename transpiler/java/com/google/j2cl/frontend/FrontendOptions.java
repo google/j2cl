@@ -18,8 +18,8 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.ZipFiles;
-import com.google.j2cl.errors.Errors;
-
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -45,7 +45,7 @@ import java.util.Set;
  * Frontend options, which can be initialized by a Flag instance that is already parsed.
  */
 public class FrontendOptions {
-  private final Errors errors;
+  private final Problems problems;
 
   private List<String> classpathEntries;
   private List<String> sourcepathEntries;
@@ -68,8 +68,8 @@ public class FrontendOptions {
   private static final String SRCJAR_EXTENSION = ".srcjar";
   private static final String ZIP_EXTENSION = ".zip";
 
-  public FrontendOptions(Errors errors, FrontendFlags flags) {
-    this.errors = errors;
+  public FrontendOptions(Problems problems, FrontendFlags flags) {
+    this.problems = problems;
     initOptions(flags);
   }
 
@@ -131,7 +131,7 @@ public class FrontendOptions {
     for (String path : zipFilePaths) {
       File file = new File(path);
       if (!file.exists()) {
-        errors.error(Errors.Error.ERR_FILE_NOT_FOUND, path);
+        problems.error(Messages.ERR_FILE_NOT_FOUND, path);
         return false;
       }
     }
@@ -152,7 +152,7 @@ public class FrontendOptions {
     if (Files.exists(outputPath)
         && !Files.isDirectory(outputPath)
         && !output.endsWith(ZIP_EXTENSION)) {
-      errors.error(Errors.Error.ERR_OUTPUT_LOCATION);
+      problems.error(Messages.ERR_OUTPUT_LOCATION);
     }
 
     if (output.endsWith(ZIP_EXTENSION)) {
@@ -183,7 +183,7 @@ public class FrontendOptions {
       // Verify encoding has a supported charset.
       Charset.forName(encoding);
     } catch (UnsupportedCharsetException e) {
-      errors.error(Errors.Error.ERR_UNSUPPORTED_ENCODING, encoding);
+      problems.error(Messages.ERR_UNSUPPORTED_ENCODING, encoding);
       return false;
     }
     return true;
@@ -209,7 +209,7 @@ public class FrontendOptions {
 
   public boolean checkSourceVersion(String sourceVersion) {
     if (!VALID_JAVA_VERSIONS.contains(sourceVersion)) {
-      errors.error(Errors.Error.ERR_INVALID_SOURCE_VERSION, sourceVersion);
+      problems.error(Messages.ERR_INVALID_SOURCE_VERSION, sourceVersion);
       return false;
     }
     return true;
@@ -245,7 +245,7 @@ public class FrontendOptions {
     try {
       srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_CANNOT_CREATE_TEMP_DIR);
+      problems.error(Messages.ERR_CANNOT_CREATE_TEMP_DIR);
       return;
     }
 
@@ -271,7 +271,7 @@ public class FrontendOptions {
               }
             });
       } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+        problems.error(Messages.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
       }
     }
 
@@ -313,16 +313,16 @@ public class FrontendOptions {
       if (sourceFile.endsWith(JAVA_EXTENSION) || sourceFile.endsWith(SRCJAR_EXTENSION)) {
         File file = new File(sourceFile);
         if (!file.exists()) {
-          errors.error(Errors.Error.ERR_FILE_NOT_FOUND, sourceFile);
+          problems.error(Messages.ERR_FILE_NOT_FOUND, sourceFile);
           return false;
         }
         if (!file.isFile()) {
-          errors.error(Errors.Error.ERR_INVALID_SOURCE_FILE, sourceFile);
+          problems.error(Messages.ERR_INVALID_SOURCE_FILE, sourceFile);
           return false;
         }
       } else {
         // does not support non-java files.
-        errors.error(Errors.Error.ERR_INVALID_SOURCE_FILE, sourceFile);
+        problems.error(Messages.ERR_INVALID_SOURCE_FILE, sourceFile);
         return false;
       }
     }
@@ -349,7 +349,7 @@ public class FrontendOptions {
           FileSystems.newFileSystem(
               URI.create("jar:file:" + outputPath.toUri().getPath()), env, null);
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_CANNOT_OPEN_ZIP, outputPath.toString());
+      problems.error(Messages.ERR_CANNOT_OPEN_ZIP, outputPath.toString());
     }
     this.output = null;
   }

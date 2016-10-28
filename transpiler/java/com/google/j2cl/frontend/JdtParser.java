@@ -19,7 +19,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,36 +46,32 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
  * parsing source files into compilation unit.
  */
 public class JdtParser {
-  private final Errors errors;
+  private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
   private final List<String> classpathEntries = new ArrayList<>();
   private final List<String> sourcepathEntries = new ArrayList<>();
   private final String encoding;
   private boolean includeRunningVMBootclasspath;
 
-  /**
-   * Create and initialize a JdtParser based on an options object.
-   */
-  public JdtParser(FrontendOptions options, Errors errors) {
+  /** Create and initialize a JdtParser based on an options object. */
+  public JdtParser(FrontendOptions options, Problems problems) {
     this(
         options.getSourceVersion(),
         options.getClasspathEntries(),
         options.getBootclassPathEntries(),
         options.getSourcepathEntries(),
         options.getEncoding(),
-        errors);
+        problems);
   }
 
-  /**
-   * Create and initialize a JdtParser based on passed parameters.
-   */
+  /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(
       String sourceVersion,
       List<String> classpathEntries,
       List<String> bootclassPathEntries,
       List<String> sourcepathEntries,
       String encoding,
-      Errors errors) {
+      Problems problems) {
     compilerOptions.put(JavaCore.COMPILER_SOURCE, sourceVersion);
     compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, sourceVersion);
     compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, sourceVersion);
@@ -83,7 +80,7 @@ public class JdtParser {
     this.classpathEntries.addAll(bootclassPathEntries);
     this.sourcepathEntries.addAll(sourcepathEntries);
     this.encoding = encoding;
-    this.errors = errors;
+    this.problems = problems;
   }
 
   private static final List<String> wellKnownClassNames =
@@ -101,10 +98,10 @@ public class JdtParser {
     // Preprocess every file and writes the preprocessed content to a temporary file.
     JavaPreprocessor preprocessor = new JavaPreprocessor(compilerOptions);
     final Map<String, String> preprocessedFilesByOriginal =
-        preprocessor.preprocessFiles(filePaths, encoding, errors);
+        preprocessor.preprocessFiles(filePaths, encoding, problems);
     if (preprocessedFilesByOriginal == null) {
       checkState(
-          errors.errorCount() > 0, "Didn't get processed files map, but no errors generated.");
+          problems.errorCount() > 0, "Didn't get processed files map, but no errors generated.");
       return null;
     }
 
@@ -178,8 +175,8 @@ public class JdtParser {
           // to the jdt error reporting.
           continue;
         }
-        errors.error(
-            Errors.Error.ERR_ERROR,
+        problems.error(
+            Messages.ERR_ERROR,
             String.format(
                 "%s:%s: %s", filename, problem.getSourceLineNumber(), problem.getMessage()));
         hasErrors = true;

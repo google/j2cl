@@ -1,8 +1,12 @@
 package com.google.j2cl.common;
 
 import java.beans.Introspector;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.function.Consumer;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -41,5 +45,12 @@ public class J2clUtils {
   /** Convert a string to normal Java variable name capitalization. */
   public static String decapitalize(String substring) {
     return Introspector.decapitalize(substring);
+  }
+
+  /** Adapts a method that outputs to a stream to directly return the output as a String. */
+  public static String streamToString(Consumer<OutputStream> streamOutputer) {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    streamOutputer.accept(new PrintStream(outputStream));
+    return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
   }
 }

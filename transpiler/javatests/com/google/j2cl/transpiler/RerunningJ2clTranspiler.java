@@ -19,8 +19,9 @@ import com.google.common.collect.Sets.SetView;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 import com.google.j2cl.frontend.FrontendFlags;
+import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,14 +58,12 @@ public class RerunningJ2clTranspiler {
 
     @Override
     public void run() {
-      J2clTranspiler transpiler = new J2clTranspiler(args);
+      J2clTranspiler transpiler = new J2clTranspiler();
 
       try {
-        transpiler.run();
-        success = true;
-      } catch (Errors.Exit e) {
-        // Compiler signaled that the compiler was not successful
-        success = false;
+        Result result = transpiler.transpile(args);
+        success = result.getExitCode() == 0;
+        result.getProblems().report(System.out, System.err);
       } catch (RuntimeException r) {
         // Compiler correctness preconditions were violated. Log a stacktrace and quit the test
         r.printStackTrace();
@@ -74,7 +73,7 @@ public class RerunningJ2clTranspiler {
   }
 
   public static void main(final String[] args) throws ZipException, IOException {
-    FrontendFlags frontendFlags = new FrontendFlags(new Errors());
+    FrontendFlags frontendFlags = new FrontendFlags(new Problems());
     frontendFlags.parse(args);
     File outputZip = new File(frontendFlags.output);
 

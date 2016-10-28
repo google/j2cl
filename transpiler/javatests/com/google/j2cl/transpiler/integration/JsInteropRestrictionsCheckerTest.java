@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -1050,8 +1051,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: 'void Buggy.m()' has invalid name '34s'.",
         "JsInterop error: 'int Buggy.m' has invalid name 's^'.",
         "JsInterop error: 'int Buggy.n' cannot have an empty name.",
-        "JsInterop error: 'int Buggy.o' has invalid name 'a.b.c.d'.",
-        "5 error(s).");
+        "JsInterop error: 'int Buggy.o' has invalid name 'a.b.c.d'.");
   }
 
   public void testJsNameInvalidNamespacesFails() throws Exception {
@@ -1079,8 +1079,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: 'int Buggy.n' has invalid namespace 's^'.",
         "JsInterop error: 'void Buggy.o()' cannot have an empty namespace.",
         "JsInterop error: Instance member 'int Buggy.p' cannot declare a namespace.",
-        "JsInterop error: Instance member 'void Buggy.q()' cannot declare a " + "namespace.",
-        "6 error(s).");
+        "JsInterop error: Instance member 'void Buggy.q()' cannot declare a " + "namespace.");
   }
 
   public void testJsNameGlobalNamespacesSucceeds() throws Exception {
@@ -1180,9 +1179,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "}");
 
     assertCompileFails(
-        sourcePackage,
-        "JsInterop error: JsFunction 'Buggy' cannot extend other interfaces.",
-        "1 error(s).");
+        sourcePackage, "JsInterop error: JsFunction 'Buggy' cannot extend other interfaces.");
   }
 
   public void testJsFunctionExtendedByInterfaceFails() throws Exception {
@@ -1197,8 +1194,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: 'Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.",
-        "1 error(s).");
+        "JsInterop error: 'Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.");
   }
 
   public void testJsFunctionMarkedAsJsTypeFails() throws Exception {
@@ -1217,8 +1213,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: 'Buggy' cannot be both a JsFunction and a JsType at the same" + " time.",
-        "1 error(s).");
+        "JsInterop error: 'Buggy' cannot be both a JsFunction and a JsType at the same" + " time.");
   }
 
   public void testJsFunctionImplementationWithSingleInterfaceSucceeds() throws Exception {
@@ -1260,8 +1255,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsFunction implementation 'Buggy' cannot implement more than"
-            + " one interface.",
-        "1 error(s).");
+            + " one interface.");
   }
 
   public void testJsFunctionImplementationWithSuperClassFails() throws Exception {
@@ -1283,9 +1277,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "}");
 
     assertCompileFails(
-        sourcePackage,
-        "JsInterop error: JsFunction implementation 'Buggy' cannot extend a class.",
-        "1 error(s).");
+        sourcePackage, "JsInterop error: JsFunction implementation 'Buggy' cannot extend a class.");
   }
 
   public void testJsFunctionImplementationWithSubclassesFails() throws Exception {
@@ -1309,8 +1301,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: 'Buggy' cannot extend JsFunction implementation " + "'BaseClass'.",
-        "1 error(s).");
+        "JsInterop error: 'Buggy' cannot extend JsFunction implementation " + "'BaseClass'.");
   }
 
   public void testJsFunctionImplementationMarkedAsJsTypeFails() throws Exception {
@@ -1330,8 +1321,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: 'Buggy' cannot be both a JsFunction implementation and a "
-            + "JsType at the same time.",
-        "1 error(s).");
+            + "JsType at the same time.");
   }
 
   private void createJsFunctionInterfaceInPackage(File sourcePackage, String packageName)
@@ -1404,8 +1394,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: Native JsType 'Buggy' cannot have initializer.",
-        "JsInterop error: Native JsType 'Buggy2' cannot have initializer.",
-        "2 error(s).");
+        "JsInterop error: Native JsType 'Buggy2' cannot have initializer.");
   }
 
   public void testNativeJsTypeNonEmptyConstructorFails() throws Exception {
@@ -1425,8 +1414,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: Native JsType constructor 'Buggy.Buggy(int)' cannot have "
-            + "non-empty method body.",
-        "1 error(s).");
+            + "non-empty method body.");
   }
 
   public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
@@ -1533,8 +1521,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "  B",
         "}");
 
-    assertCompileFails(
-        sourcePackage, "JsInterop error: Enum 'Buggy' cannot be a native JsType.", "1 error(s).");
+    assertCompileFails(sourcePackage, "JsInterop error: Enum 'Buggy' cannot be a native JsType.");
   }
 
   public void testInnerNativeJsTypeFails() throws Exception {
@@ -1551,8 +1538,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Non static inner class 'Buggy' cannot be a native JsType.",
-        "1 error(s).");
+        "JsInterop error: Non static inner class 'Buggy' cannot be a native JsType.");
   }
 
   public void testInnerJsTypeSucceeds() throws Exception {
@@ -1579,8 +1565,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "import jsinterop.annotations.JsType;",
         "public class Buggy { void m() { @JsType class Local {} } }");
 
-    assertCompileFails(
-        sourcePackage, "JsInterop error: Local class '$1Local' cannot be a JsType.", "1 error(s).");
+    assertCompileFails(sourcePackage, "JsInterop error: Local class '$1Local' cannot be a JsType.");
   }
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -1666,8 +1651,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "classes.",
-        "1 error(s).");
+        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "classes.");
   }
 
   public void testNativeJsTypeImplementsJsTypeInterfaceFails() throws Exception {
@@ -1690,8 +1674,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' can only implement native " + "JsType interfaces.",
-        "1 error(s).");
+        "JsInterop error: Native JsType 'Buggy' can only implement native " + "JsType interfaces.");
   }
 
   public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() throws Exception {
@@ -1714,8 +1697,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "interfaces.",
-        "1 error(s).");
+        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "interfaces.");
   }
 
   public void testNativeJsTypeImplementsNonJsTypeFails() throws Exception {
@@ -1736,8 +1718,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' can only implement native JsType " + "interfaces.",
-        "1 error(s).");
+        "JsInterop error: Native JsType 'Buggy' can only implement native JsType " + "interfaces.");
   }
 
   public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
@@ -1758,8 +1739,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "interfaces.",
-        "1 error(s).");
+        "JsInterop error: Native JsType 'Buggy' can only extend native JsType " + "interfaces.");
   }
 
   //  public void testNativeJsTypeInterfaceDefenderMethodsFails() {
@@ -1863,8 +1843,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsOverlay method 'void Buggy.m()' cannot override a "
-            + "supertype method.",
-        "1 error(s)");
+            + "supertype method.");
   }
 
   public void testJsOverlayOverridingSuperclassMethodFails() throws Exception {
@@ -1894,8 +1873,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsOverlay method 'void Buggy.m()' cannot override a "
-            + "supertype method.",
-        "1 error(s)");
+            + "supertype method.");
   }
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() throws Exception {
@@ -1916,8 +1894,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsOverlay field 'int Buggy.f2' can only be static.",
-        "JsInterop error: JsOverlay method 'void Buggy.m()' cannot be non-final nor " + "native.",
-        "2 error(s).");
+        "JsInterop error: JsOverlay method 'void Buggy.m()' cannot be non-final nor " + "native.");
   }
 
   public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
@@ -1956,8 +1933,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsOverlay method 'void Buggy.m1()' cannot be non-final nor native.",
-        "JsInterop error: JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.",
-        "2 error(s).");
+        "JsInterop error: JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.");
   }
 
   //      // Not applicable to J2cl
@@ -2006,8 +1982,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: JsOverlay 'int Buggy.F' can only be declared in a native type "
             + "or @JsFunction interface.",
         "JsInterop error: JsOverlay 'void Buggy.m()' can only be declared in a native type "
-            + "or @JsFunction interface.",
-        "2 error(s).");
+            + "or @JsFunction interface.");
   }
 
   //  public void testJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -2106,8 +2081,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
         "JsInterop error: Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
         "JsInterop error: Native JsType member 'void Buggy.n()' cannot have " + "@JsIgnore.",
-        "JsInterop error: Native JsType method 'void Buggy.o()' should be native or " + "abstract.",
-        "6 error(s).");
+        "JsInterop error: Native JsType method 'void Buggy.o()' should be native or abstract.");
   }
 
   public void testNativeMethodOnJsTypeSucceeds() throws Exception {
@@ -2540,8 +2514,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             + "JsOptional.",
         "JsInterop error: JsOptional parameter 'b' in method "
             + "'void Buggy.baz(Object, String, Object[])' cannot precede parameters that are not "
-            + "JsOptional.",
-        "3 error(s).");
+            + "JsOptional.");
   }
 
   public void testJsOptionalOnInvalidParametersFails() throws Exception {
@@ -2563,8 +2536,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: JsOptional parameter 'a' in method '"
             + "Buggy.Buggy(int)' cannot be of a primitive type.",
         "JsInterop error: JsOptional parameter 'c' in method "
-            + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.",
-        "2 error(s).");
+            + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.");
   }
 
   public void testJsOptionalOnNonJsExposedMethodsFails() throws Exception {
@@ -2592,8 +2564,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: JsOptional parameter in 'void Buggy.bar(Object)' can only "
             + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
         "JsInterop error: JsOptional parameter in 'void Native.fun(Object)' can only "
-            + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
-        "3 error(s).");
+            + "be declared in a JsMethod, a JsConstructor or a JsFunction.");
   }
 
   private void assertCompileSucceeds(File sourcePackage) throws Exception {
@@ -2607,19 +2578,26 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   private static void assertBuggySucceeds(List<String> errorLines) {
-    assert errorLines.isEmpty();
+    assert errorLines.isEmpty() : "Expected no errors but got " + errorLines;
   }
 
   private static void assertBuggyFails(List<String> errorLines, String... expectedErrors) {
-    assert errorLines.size() == expectedErrors.length
+    assert errorLines.size() - 1 == expectedErrors.length
         : "Expected "
             + expectedErrors.length
-            + " errors but actually "
+            + " error(s) but there were actually "
             + errorLines.size()
-            + " errors.";
+            + " error(s)  "
+            + "expected:<"
+            + Arrays.toString(expectedErrors)
+            + "> "
+            + "actual:<"
+            + errorLines
+            + ">.";
     for (String expectedError : expectedErrors) {
       assertLogContainsSnippet(errorLines, expectedError);
     }
+    Iterables.getLast(errorLines).matches("\\d+ error(s), \\d+ warning(s).");
   }
 
   private File createPackage(String packageName) {
@@ -2638,8 +2616,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   private String[] getTranspilerArgs(File inputDirectory) {
     List<String> argList = new ArrayList<>();
-
-    argList.add(TRANSPILER_BINARY);
 
     // Output dir
     argList.add("-d");

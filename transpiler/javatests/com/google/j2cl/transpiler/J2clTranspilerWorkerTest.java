@@ -19,7 +19,6 @@ import static org.mockito.Mockito.when;
 
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
-import com.google.j2cl.errors.Errors;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,35 +43,33 @@ public class J2clTranspilerWorkerTest {
 
   private static class StubCompiler extends J2clTranspiler {
     Long threadId;
-    final String[] args;
     private CompilerResponse compilerResponse;
+    private String[] args;
 
-    StubCompiler(String[] args, CompilerResponse compilerResponse) {
-      super(args);
-      this.args = args;
+    StubCompiler(CompilerResponse compilerResponse) {
       this.compilerResponse = compilerResponse;
     }
 
     @Override
-    void run() {
+    J2clTranspiler.Result transpile(String... args) {
       // Make sure we do not do an actual compile.
       Assert.assertNull(threadId);
       threadId = Thread.currentThread().getId();
+      this.args = args;
 
       switch (compilerResponse) {
         case COMPILE_SUCCEEDED:
-          System.out.println("compiler_success");
-          break;
+          return Result.fromOutputMessage(0, "compiler_success");
         case COMPILE_FAILED:
-          System.err.println("compiler_failed");
-          throw new Errors.Exit(-3);
+          return Result.fromErrorMessage(1, "compiler_failed");
         case COMPILER_CRASHES:
+        default:
           throw new RuntimeException();
       }
     }
   }
 
-  private class WorkerForTest extends J2clTranspilerWorker {
+  private static class WorkerForTest extends J2clTranspilerWorker {
 
     private List<InputStream> inputStreams;
     private int currentStream = 0;
@@ -88,8 +85,8 @@ public class J2clTranspilerWorkerTest {
     List<StubCompiler> compilers = new ArrayList<>();
 
     @Override
-    J2clTranspiler createTranspiler(String[] args) {
-      StubCompiler stubCompiler = new StubCompiler(args, compilerResponses[currentResponse++]);
+    J2clTranspiler createTranspiler() {
+      StubCompiler stubCompiler = new StubCompiler(compilerResponses[currentResponse++]);
       compilers.add(stubCompiler);
       return stubCompiler;
     }
@@ -150,7 +147,8 @@ public class J2clTranspilerWorkerTest {
     assertThat(firstResponse.getExitCode()).isEqualTo(0);
 
     WorkResponse secondResponse = WorkResponse.parseDelimitedFrom(outasInputStream);
-    assertThat(secondResponse.getOutput()).isEqualTo("compiler_failed\n");
+    assertThat(secondResponse.getOutput())
+        .isEqualTo("Error: compiler_failed\n1 error(s), 0 warning(s).\n");
     assertThat(secondResponse.getExitCode()).isEqualTo(1);
   }
 

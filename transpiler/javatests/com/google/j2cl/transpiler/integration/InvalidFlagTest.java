@@ -22,11 +22,11 @@ import java.io.IOException;
  */
 public class InvalidFlagTest extends IntegrationTestCase {
   public void testInvalidFlag() throws IOException, InterruptedException {
-    String[] args = new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-unknown", "abc"};
+    String[] args = new String[] {"-unknown", "abc"};
     TranspileResult transpileResult = transpile(args);
     assertLogContainsSnippet(
         transpileResult.errorLines, "Invalid flag: \"-unknown\" is not a valid option");
     assertLogContainsSnippet(transpileResult.errorLines, "Valid options:");
-    assertLogContainsSnippet(transpileResult.errorLines, "1 error(s).");
+    assertLogContainsSnippet(transpileResult.errorLines, "1 error(s), 0 warning(s).");
   }
 }

@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 
 /**
  * Generates files that are dependency forwarding proxies for native JsTypes.
@@ -18,8 +18,8 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
 
-  public NativeJsTypeProxyGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
-    super(errors, declareLegacyNamespace, type);
+  public NativeJsTypeProxyGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
+    super(problems, declareLegacyNamespace, type);
     checkArgument(type.getDescriptor().isNative() && !type.getDescriptor().isExtern());
   }
 

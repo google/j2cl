@@ -2,8 +2,8 @@ package com.google.j2cl.generator;
 
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
-import com.google.j2cl.errors.Errors;
-
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -56,16 +56,16 @@ public class NativeJavaScriptFile {
   }
 
   /**
-   * Given a list of zip file paths, this method will extract files with the extension
-   * @NATIVE_EXTENSION and return the a map of file paths to NativeJavaScriptFile objects of the
-   * form:
+   * Given a list of zip file paths, this method will extract files with the
+   * extension @NATIVE_EXTENSION and return the a map of file paths to NativeJavaScriptFile objects
+   * of the form:
    *
    * <p>/com/google/example/nativejsfile1 => NativeJavaScriptFile
    *
    * <p>/com/google/example/nativejsfile2 => NativeJavaScriptFile
    */
   public static Map<String, NativeJavaScriptFile> getFilesByPathFromZip(
-      List<String> zipPaths, String charSet, Errors errors) {
+      List<String> zipPaths, String charSet, Problems problems) {
     Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
     for (String zipPath : zipPaths) {
       try (ZipFile zipFile = new ZipFile(zipPath)) {
@@ -81,7 +81,7 @@ public class NativeJavaScriptFile {
           loadedFilesByPath.put(file.getPathWithoutExtension(), file);
         }
       } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_OPEN_ZIP, zipPath);
+        problems.error(Messages.ERR_CANNOT_OPEN_ZIP, zipPath);
       }
     }
     return loadedFilesByPath;

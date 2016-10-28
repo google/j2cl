@@ -6,7 +6,8 @@ import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
@@ -22,7 +23,7 @@ public class SourceMapGeneratorStage {
   public static final String SOURCE_MAP_SUFFIX = ".js.map";
 
   private final Charset charset;
-  private final Errors errors;
+  private final Problems problems;
   private final FileSystem outputFileSystem;
   private final String outputLocationPath;
   private final String javaSourceFile;
@@ -37,13 +38,13 @@ public class SourceMapGeneratorStage {
       String outputLocationPath,
       String javaSourceFile,
       String javaScriptImplementationFileContents,
-      Errors errors,
+      Problems problems,
       boolean generateReadableSourceMaps) {
     this.charset = charset;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
     this.javaSourceFile = javaSourceFile;
-    this.errors = errors;
+    this.problems = problems;
     this.generateReadableSourceMaps = generateReadableSourceMaps;
     this.compilationUnitSourceFileName = compilationUnitSourceFileName;
     this.javaScriptImplementationFileContents = javaScriptImplementationFileContents;
@@ -68,11 +69,11 @@ public class SourceMapGeneratorStage {
               SOURCE_MAP_SUFFIX);
       if (!output.isEmpty() || !generateReadableSourceMaps) {
         // Do not generate empty readable sourcemaps.
-        GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, errors);
+        GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
       }
     } catch (IOException e) {
-      errors.error(
-          Errors.Error.ERR_ERROR,
+      problems.error(
+          Messages.ERR_ERROR,
           "Could not generate source maps for: " + javaSourceFile + ":" + e.getMessage());
     }
   }

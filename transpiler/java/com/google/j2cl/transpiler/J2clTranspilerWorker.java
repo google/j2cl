@@ -16,14 +16,16 @@ package com.google.j2cl.transpiler;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Runs J2clTranspiler as a blaze worker.
@@ -45,15 +47,8 @@ public class J2clTranspilerWorker {
     new J2clTranspilerWorker().run();
   }
 
-  private ByteArrayOutputStream stdoutStream;
-  private ByteArrayOutputStream stdErrStream;
-  private PrintStream originalStdout;
-  private PrintStream originalStdErr;
-
   @VisibleForTesting
   void run() {
-    trapOutputs();
-
     try {
       dispatchWorkRequestsForever();
     } catch (IOException e) {
@@ -71,44 +66,24 @@ public class J2clTranspilerWorker {
     return System.in;
   }
 
-  private void trapOutputs() {
-    originalStdout = System.out;
-    originalStdErr = System.err;
-    stdoutStream = new ByteArrayOutputStream();
-    stdErrStream = new ByteArrayOutputStream();
-    System.setErr(new PrintStream(stdErrStream, true));
-    System.setOut(new PrintStream(stdoutStream, true));
-  }
-
   private void dispatchWorkRequestsForever() throws IOException {
     while (true) {
       WorkRequest workRequest = getWorkRequest();
 
-      String[] args = extractArgs(workRequest);
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      int exitCode = runCompiler(extractArgs(workRequest), new PrintStream(outputStream));
 
-      boolean success = runCompiler(args);
-
-      outputResult(success);
+      WorkResponse.newBuilder()
+          .setExitCode(exitCode)
+          .setOutput(outputStream.toString())
+          .build()
+          .writeDelimitedTo(System.out);
     }
   }
 
-  private void outputResult(boolean success) throws IOException {
-    int exitCode = success ? 0 : 1;
-    String output = success ? asString(stdoutStream) : asString(stdErrStream);
-
-    WorkResponse.newBuilder()
-        .setExitCode(exitCode)
-        .setOutput(output)
-        .build()
-        .writeDelimitedTo(originalStdout);
-
-    stdoutStream.reset();
-    stdErrStream.reset();
-  }
-
   @VisibleForTesting
-  J2clTranspiler createTranspiler(String[] args) {
-    return new J2clTranspiler(args);
+  J2clTranspiler createTranspiler() {
+    return new J2clTranspiler();
   }
 
   @VisibleForTesting
@@ -116,37 +91,32 @@ public class J2clTranspilerWorker {
     System.exit(code);
   }
 
-  private boolean runCompiler(final String[] args) {
-    final AtomicBoolean successful = new AtomicBoolean(false);
-
+  private int runCompiler(final String[] args, PrintStream outputStream) {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this we invoke the compiler on a different thread each time.
-    Runnable runnable =
-        () -> {
-          J2clTranspiler transpiler = createTranspiler(args);
-          try {
-            transpiler.run();
-            successful.set(true);
-          } catch (Errors.Exit e) {
-            // Compiler is signaling a compile failure for the given code.
-            successful.set(false);
-          } catch (RuntimeException e) {
-            // Compiler had a bug, report this and quit the process.
-            e.printStackTrace(originalStdErr);
-            exit(-2);
-          }
-        };
-
-    Thread thread = new Thread(runnable);
-    thread.start();
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    Future<Result> futureResult =
+        executorService.submit(
+            () -> {
+              J2clTranspiler transpiler = createTranspiler();
+              return transpiler.transpile(args);
+            });
 
     try {
-      thread.join();
+      Result result = futureResult.get();
+      result.getProblems().report(outputStream, outputStream);
+      return result.getExitCode();
+    } catch (RuntimeException | ExecutionException e) {
+      // Compiler had a bug, report this and quit the process.
+      e.printStackTrace(System.err);
+      exit(-2);
+      return -3;
     } catch (InterruptedException e) {
-      // we are not triggering interupts
+      // Compilation has been interrupted, set the interrupt flag in the current thread.
+      System.err.println("Transpilation interrupted.");
+      Thread.currentThread().interrupt();
     }
-
-    return successful.get();
+    return 0;
   }
 
   private String[] extractArgs(WorkRequest workRequest) {
@@ -155,9 +125,5 @@ public class J2clTranspilerWorker {
 
   private static boolean shouldRunAsWorker(String[] args) {
     return Arrays.asList(args).contains("--persistent_worker");
-  }
-
-  private static String asString(ByteArrayOutputStream s) {
-    return new String(s.toByteArray(), StandardCharsets.UTF_8);
   }
 }

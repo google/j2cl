@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class HelpFlagTest extends IntegrationTestCase {
   public void testHelpFlag() throws IOException, InterruptedException {
-    String[] args = new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-help"};
+    String[] args = new String[] {"-help"};
     TranspileResult transpileResult = transpile(args);
     assertEquals(0, transpileResult.exitCode);
     assertLogContainsSnippet(transpileResult.outputLines, "<source files .java|.srcjar>");

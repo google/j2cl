@@ -19,7 +19,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
@@ -40,11 +40,11 @@ public abstract class JavaScriptGenerator {
   protected GenerationEnvironment environment;
   protected Map<ImportCategory, Set<Import>> importsByCategory;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
-  protected final Errors errors;
+  protected final Problems problems;
   protected final boolean declareLegacyNamespace;
 
-  public JavaScriptGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
-    this.errors = errors;
+  public JavaScriptGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
+    this.problems = problems;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.type = type;
     importsByCategory = ImportGatherer.gatherImports(type);

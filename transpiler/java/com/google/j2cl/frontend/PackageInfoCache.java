@@ -21,7 +21,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,7 +75,7 @@ public class PackageInfoCache {
     return checkNotNull(packageInfoCacheStorage.get());
   }
 
-  public static void init(List<String> classPathEntries, Errors errors) {
+  public static void init(List<String> classPathEntries, Problems problems) {
     checkState(
         packageInfoCacheStorage.get() == null,
         "PackageInfoCache should only be initialized once per thread.");
@@ -86,14 +87,14 @@ public class PackageInfoCache {
       try {
         classPathUrls.add(new URL("file:" + classPathEntry));
       } catch (MalformedURLException e) {
-        errors.error(Errors.Error.ERR_CANNOT_OPEN_FILE, classPathEntry);
+        problems.error(Messages.ERR_CANNOT_OPEN_FILE, classPathEntry);
       }
     }
     URLClassLoader resourcesClassLoader =
         new URLClassLoader(
             Iterables.toArray(classPathUrls, URL.class), PackageInfoCache.class.getClassLoader());
 
-    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, errors));
+    packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
   }
 
   private static PackageReport toPackageReport(Annotation[] packageAnnotations) {
@@ -126,14 +127,14 @@ public class PackageInfoCache {
     return classPathEntry + ":" + packagePath;
   }
 
-  private final Errors errors;
+  private final Problems problems;
   private final Map<String, PackageReport> packageReportBySpecificPackagePath = new HashMap<>();
   private final Map<String, PackageReport> packageReportByTypeName = new HashMap<>();
   private final ClassLoader resourcesClassLoader;
 
-  private PackageInfoCache(ClassLoader resourcesClassLoader, Errors errors) {
+  private PackageInfoCache(ClassLoader resourcesClassLoader, Problems problems) {
     this.resourcesClassLoader = resourcesClassLoader;
-    this.errors = errors;
+    this.problems = problems;
   }
 
   /**
@@ -189,9 +190,9 @@ public class PackageInfoCache {
       Class<?> packageInfoClass = entryClassLoader.loadClass(packageInfoSourceName);
       annotations = packageInfoClass.getAnnotations();
     } catch (ClassNotFoundException e) {
-      errors.error(Errors.Error.ERR_PACKAGE_INFO_PARSE, packageInfoRelativeFilePath);
+      problems.error(Messages.ERR_PACKAGE_INFO_PARSE, packageInfoRelativeFilePath);
     } catch (MalformedURLException e) {
-      errors.error(Errors.Error.ERR_CLASS_PATH_URL, classPathEntry);
+      problems.error(Messages.ERR_CLASS_PATH_URL, classPathEntry);
     }
     return annotations;
   }

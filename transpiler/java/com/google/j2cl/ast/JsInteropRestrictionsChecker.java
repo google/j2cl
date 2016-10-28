@@ -20,21 +20,22 @@ import static java.util.stream.Collectors.joining;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.util.List;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
  */
 public class JsInteropRestrictionsChecker {
-  private final Errors errors;
+  private final Problems problems;
 
-  public JsInteropRestrictionsChecker(Errors errors) {
-    this.errors = errors;
+  public JsInteropRestrictionsChecker(Problems problems) {
+    this.problems = problems;
   }
 
-  public static void check(CompilationUnit compilationUnit, Errors errors) {
-    new JsInteropRestrictionsChecker(errors).checkCompilationUnit(compilationUnit);
+  public static void check(CompilationUnit compilationUnit, Problems problems) {
+    new JsInteropRestrictionsChecker(problems).checkCompilationUnit(compilationUnit);
   }
 
   private void checkCompilationUnit(CompilationUnit compilationUnit) {
@@ -80,8 +81,8 @@ public class JsInteropRestrictionsChecker {
 
   private boolean checkJsType(Type type) {
     if (type.getDescriptor().isLocal()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Local class '%s' cannot be a JsType.",
           getReadableDescription(type.getDescriptor()));
       return false;
@@ -135,8 +136,8 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (memberDescriptor.isPolymorphic()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Instance member '%s' cannot declare a namespace.",
           getReadableDescription(memberDescriptor));
       return;
@@ -150,14 +151,14 @@ public class JsInteropRestrictionsChecker {
     String readableDescription = getReadableDescription(fieldDescriptor);
     if (!fieldDescriptor.getEnclosingClassTypeDescriptor().isNative()
         && !fieldDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
     }
     if (!fieldDescriptor.isStatic()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay field '%s' can only be static.",
           readableDescription);
     }
@@ -168,14 +169,14 @@ public class JsInteropRestrictionsChecker {
     String readableDescription = getReadableDescription(methodDescriptor);
     if (!methodDescriptor.getEnclosingClassTypeDescriptor().isNative()
         && !methodDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
     }
     if (method.isOverride()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay method '%s' cannot override a supertype method.",
           readableDescription);
       return;
@@ -186,8 +187,8 @@ public class JsInteropRestrictionsChecker {
             && !method.getDescriptor().isStatic()
             && !method.getDescriptor().getVisibility().isPrivate()
             && !method.getDescriptor().isDefault())) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay method '%s' cannot be non-final nor native.",
           readableDescription);
     }
@@ -198,15 +199,15 @@ public class JsInteropRestrictionsChecker {
     String readableDescription = getReadableDescription(typeDescriptor);
 
     if (typeDescriptor.isEnumOrSubclass()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Enum '%s' cannot be a native JsType.",
           readableDescription);
       return false;
     }
     if (typeDescriptor.isInstanceNestedClass()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Non static inner class '%s' cannot be a native JsType.",
           readableDescription);
       return false;
@@ -216,15 +217,15 @@ public class JsInteropRestrictionsChecker {
     if (superTypeDescriptor != null
         && !superTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)
         && !superTypeDescriptor.isNative()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' can only extend native JsType classes.",
           readableDescription);
     }
     for (TypeDescriptor interfaceType : type.getSuperInterfaceTypeDescriptors()) {
       if (!interfaceType.isNative()) {
-        errors.error(
-            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "Native JsType '%s' can only %s native JsType interfaces.",
             readableDescription,
             type.isInterface() ? "extend" : "implement");
@@ -232,8 +233,8 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (type.hasInstanceInitializerBlocks()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' cannot have initializer.",
           readableDescription);
     }
@@ -250,8 +251,8 @@ public class JsInteropRestrictionsChecker {
     switch (jsMemberType) {
       case CONSTRUCTOR:
         if (!isConstructorEmpty(method)) {
-          errors.error(
-              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          problems.error(
+              Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
               "Native JsType constructor '%s' cannot have non-empty method body.",
               readableDescription);
         }
@@ -261,15 +262,15 @@ public class JsInteropRestrictionsChecker {
       case SETTER:
       case PROPERTY:
         if (!method.isAbstract() && !method.isNative()) {
-          errors.error(
-              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          problems.error(
+              Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
               "Native JsType method '%s' should be native or abstract.",
               readableDescription);
         }
         break;
       case NONE:
-        errors.error(
-            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
         break;
@@ -285,14 +286,14 @@ public class JsInteropRestrictionsChecker {
     String readableDescription = getReadableDescription(field.getDescriptor());
     if (field.getDescriptor().isJsProperty()) {
       if (field.hasInitializer()) {
-        errors.error(
-            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "Native JsType field '%s' cannot have initializer.",
             readableDescription);
       }
     } else {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType member '%s' cannot have @JsIgnore.",
           readableDescription);
     }
@@ -301,15 +302,15 @@ public class JsInteropRestrictionsChecker {
   private void checkJsFunctionInterface(Type type) {
     String readableDescription = getReadableDescription(type.getDescriptor());
     if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction '%s' cannot extend other interfaces.",
           readableDescription);
     }
 
     if (type.getDescriptor().isJsType()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot be both a JsFunction and a JsType at the same time.",
           readableDescription);
     }
@@ -318,23 +319,23 @@ public class JsInteropRestrictionsChecker {
   private void checkJsFunctionImplementation(Type type) {
     String readableDescription = getReadableDescription(type.getDescriptor());
     if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction implementation '%s' cannot implement more than one interface.",
           readableDescription);
     }
 
     if (type.getDescriptor().isJsType()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot be both a JsFunction implementation and a JsType at the same time.",
           readableDescription);
     }
 
     if (!type.getSuperTypeDescriptor()
         .equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction implementation '%s' cannot extend a class.",
           readableDescription);
     }
@@ -343,16 +344,16 @@ public class JsInteropRestrictionsChecker {
   private void checkJsFunctionSubtype(Type type) {
     TypeDescriptor superClassTypeDescriptor = type.getSuperTypeDescriptor();
     if (superClassTypeDescriptor != null && superClassTypeDescriptor.isJsFunctionImplementation()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot extend JsFunction implementation '%s'.",
           getReadableDescription(type.getDescriptor()),
           getReadableDescription(superClassTypeDescriptor));
     }
     for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
       if (superInterface.isJsFunctionInterface()) {
-        errors.error(
-            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "'%s' cannot extend JsFunction '%s'.",
             getReadableDescription(type.getDescriptor()),
             getReadableDescription(superInterface));
@@ -366,14 +367,14 @@ public class JsInteropRestrictionsChecker {
       return;
     }
     if (jsName.isEmpty()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot have an empty name.",
           getReadableDescription(item));
     } else if ((item.isNative() && !JsUtils.isValidJsQualifiedName(jsName))
         || (!item.isNative() && !JsUtils.isValidJsIdentifier(jsName))) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' has invalid name '%s'.",
           getReadableDescription(item),
           jsName);
@@ -386,13 +387,13 @@ public class JsInteropRestrictionsChecker {
       return;
     }
     if (jsNamespace.isEmpty()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot have an empty namespace.",
           getReadableDescription(item));
     } else if (!JsUtils.isValidJsQualifiedName(item.getJsNamespace())) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' has invalid namespace '%s'.",
           getReadableDescription(item),
           item.getJsNamespace());
@@ -412,15 +413,15 @@ public class JsInteropRestrictionsChecker {
 
       if (method.isParameterOptional(i)) {
         if (methodDescriptor.getParameterTypeDescriptors().get(i).isPrimitive()) {
-          errors.error(
-              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          problems.error(
+              Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
               "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
               method.getParameters().get(i).getName(),
               getReadableDescription(methodDescriptor));
         }
         if (isVarargsParameter) {
-          errors.error(
-              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          problems.error(
+              Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
               "JsOptional parameter '%s' in method '%s' cannot be a varargs parameter.",
               method.getParameters().get(i).getName(),
               getReadableDescription(methodDescriptor));
@@ -429,8 +430,8 @@ public class JsInteropRestrictionsChecker {
         continue;
       }
       if (hasOptionalParameters && !isVarargsParameter) {
-        errors.error(
-            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "JsOptional parameter '%s' in method '%s' cannot precede parameters that are not "
                 + "JsOptional.",
             method.getParameters().get(i - 1).getName(),
@@ -442,8 +443,8 @@ public class JsInteropRestrictionsChecker {
         && !methodDescriptor.isJsMethod()
         && !methodDescriptor.isJsConstructor()
         && !methodDescriptor.isJsFunction()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+      problems.error(
+          Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOptional parameter in '%s' can only be declared in a JsMethod, a JsConstructor or a "
               + "JsFunction.",
           getReadableDescription(methodDescriptor));

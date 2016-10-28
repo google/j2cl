@@ -14,28 +14,22 @@
 package com.google.j2cl.transpiler.integration;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.devtools.build.runtime.Runfiles;
-
-import junit.framework.TestCase;
-
-import java.io.BufferedReader;
+import com.google.j2cl.transpiler.J2clTranspiler.Result;
+import com.google.j2cl.transpiler.J2clTranspilerDriver;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import junit.framework.TestCase;
 
 /**
  * Base class for integration tests.
@@ -67,8 +61,6 @@ public class IntegrationTestCase extends TestCase {
     public File outputLocation;
   }
 
-  protected static final String TRANSPILER_BINARY = "third_party/java/j2cl/J2clTranspiler";
-
   protected static void assertLogContainsSnippet(List<String> logLines, String snippet) {
     boolean foundSnippet = false;
     for (String logLine : logLines) {
@@ -89,8 +81,6 @@ public class IntegrationTestCase extends TestCase {
   protected static String[] getTranspileArgs(
       File outputLocation, Class<?> testClass, String inputDirectoryName, String... extraArgs) {
     List<String> argList = new ArrayList<>();
-
-    argList.add(TRANSPILER_BINARY);
 
     // Output dir
     argList.add("-d");
@@ -151,51 +141,18 @@ public class IntegrationTestCase extends TestCase {
   protected TranspileResult transpile(String[] args, File outputLocation)
       throws IOException, InterruptedException, UnsupportedEncodingException {
 
-    class OutputProcessor implements Runnable {
-
-      private final InputStream inputStream;
-      private final OutputStream outputStream;
-      private final List<String> logLines;
-
-      OutputProcessor(InputStream inputStream, OutputStream outputStream, List<String> logLines) {
-        this.inputStream = inputStream;
-        this.outputStream = outputStream;
-        this.logLines = logLines;
-      }
-
-      @Override
-      public void run() {
-        String line;
-        try (BufferedReader reader =
-                new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            PrintStream formattedOutput = new PrintStream(outputStream)) {
-          while ((line = reader.readLine()) != null) {
-            logLines.add(line);
-            formattedOutput.println(line);
-            formattedOutput.flush();
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-
-    ProcessBuilder processBuilder = new ProcessBuilder(args);
-    Process transpileProcess = processBuilder.start();
     TranspileResult transpileResult = new TranspileResult();
     transpileResult.outputLocation = outputLocation;
-    ExecutorService executorService = Executors.newFixedThreadPool(2);
-    executorService.execute(
-        new OutputProcessor(
-            transpileProcess.getInputStream(), System.out, transpileResult.outputLines));
-    executorService.execute(
-        new OutputProcessor(
-            transpileProcess.getErrorStream(), System.err, transpileResult.errorLines));
-    executorService.shutdown();
+    Result result = J2clTranspilerDriver.transpile(args);
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+    result.getProblems().report(new PrintStream(outputStream), new PrintStream(errorStream));
 
-    // Wait for transpilation to finish, gather the results and return them.
-    transpileResult.exitCode = transpileProcess.waitFor();
-    executorService.awaitTermination(1, TimeUnit.MINUTES);
+    transpileResult.exitCode = result.getExitCode();
+    transpileResult.errorLines =
+        Splitter.on('\n').omitEmptyStrings().splitToList(errorStream.toString());
+    transpileResult.outputLines =
+        Splitter.on('\n').omitEmptyStrings().splitToList(outputStream.toString());
 
     return transpileResult;
   }

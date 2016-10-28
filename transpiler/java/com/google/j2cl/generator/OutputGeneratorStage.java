@@ -21,7 +21,8 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
@@ -49,7 +50,7 @@ import java.util.TreeSet;
 public class OutputGeneratorStage {
   private final Charset charset;
   private final List<String> nativeJavaScriptFileZipPaths;
-  private final Errors errors;
+  private final Problems problems;
   private final FileSystem outputFileSystem;
   private final String outputLocationPath;
   private final boolean declareLegacyNamespace;
@@ -65,7 +66,7 @@ public class OutputGeneratorStage {
       boolean declareLegacyNamespace,
       String depinfoPath,
       boolean shouldGenerateReadableSourceMaps,
-      Errors errors) {
+      Problems problems) {
     this.charset = charset;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputFileSystem = outputFileSystem;
@@ -73,7 +74,7 @@ public class OutputGeneratorStage {
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.depinfoPath = depinfoPath;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
-    this.errors = errors;
+    this.problems = problems;
   }
 
   public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
@@ -85,7 +86,7 @@ public class OutputGeneratorStage {
 
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getFilesByPathFromZip(
-            nativeJavaScriptFileZipPaths, charset.name(), errors);
+            nativeJavaScriptFileZipPaths, charset.name(), problems);
 
     SortedSet<String> importModulePaths = new TreeSet<>();
     SortedSet<String> exportModulePaths = new TreeSet<>();
@@ -98,7 +99,7 @@ public class OutputGeneratorStage {
             // Forward that transitive dependency via a proxy file.
             timingReport.startSample("Render native JsType proxy");
             NativeJsTypeProxyGenerator nativeJsTypeProxyGenerator =
-                new NativeJsTypeProxyGenerator(errors, declareLegacyNamespace, type);
+                new NativeJsTypeProxyGenerator(problems, declareLegacyNamespace, type);
             Path absolutePathForImpl =
                 GeneratorUtils.getAbsolutePath(
                     outputFileSystem,
@@ -108,7 +109,7 @@ public class OutputGeneratorStage {
             String nativeJsTypeProxySource = nativeJsTypeProxyGenerator.renderOutput();
             timingReport.startSample("Write native JsType proxy");
             GeneratorUtils.writeToFile(
-                absolutePathForImpl, nativeJsTypeProxySource, charset, errors);
+                absolutePathForImpl, nativeJsTypeProxySource, charset, problems);
 
             gatherNativeJsTypeProxyDepInfo(type, importModulePaths, exportModulePaths);
           }
@@ -119,7 +120,7 @@ public class OutputGeneratorStage {
 
         timingReport.startSample("Create impl generator (gather variable aliases)");
         JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, declareLegacyNamespace, type);
+            new JavaScriptImplGenerator(problems, declareLegacyNamespace, type);
 
         // If the java type contains any native methods, search for matching native file.
         timingReport.startSample("Native files read");
@@ -143,8 +144,8 @@ public class OutputGeneratorStage {
         // If not matching native file is found, and the java type contains non-JsMethod native
         // method, reports an error.
         if (matchingNativeFile == null && type.containsNonJsNativeMethods()) {
-          errors.error(
-              Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
+          problems.error(
+              Messages.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
               typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
           return;
         }
@@ -162,11 +163,11 @@ public class OutputGeneratorStage {
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
         timingReport.startSample("Write impl");
         GeneratorUtils.writeToFile(
-            absolutePathForImpl, javaScriptImplementationSource, charset, errors);
+            absolutePathForImpl, javaScriptImplementationSource, charset, problems);
 
         timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, type);
+            new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
         Path absolutePathForHeader =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,
@@ -175,7 +176,7 @@ public class OutputGeneratorStage {
                 jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
         timingReport.startSample("Write header");
-        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, errors);
+        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, problems);
 
         timingReport.startSample("Render source maps");
         generateSourceMaps(
@@ -203,8 +204,8 @@ public class OutputGeneratorStage {
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
-        errors.error(
-            Errors.Error.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
+        problems.error(
+            Messages.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
             fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
       }
     }
@@ -266,7 +267,7 @@ public class OutputGeneratorStage {
     try {
       com.google.common.io.Files.write(depinfoContent, new File(depinfoPath), charset);
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_CANNOT_GENERATE_OUTPUT, depinfoPath);
+      problems.error(Messages.ERR_CANNOT_GENERATE_OUTPUT, depinfoPath);
     }
   }
 
@@ -285,7 +286,7 @@ public class OutputGeneratorStage {
             outputLocationPath,
             compilationUnitFilePath,
             javaScriptImplementationFileContents,
-            errors,
+            problems,
             shouldGenerateReadableSourceMaps)
         .generateSourceMaps(type, javaSourcePositionByOutputSourcePosition);
   }

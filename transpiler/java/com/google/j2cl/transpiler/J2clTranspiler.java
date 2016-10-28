@@ -65,7 +65,8 @@ import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.TimingCollector;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -81,37 +82,72 @@ import java.util.List;
  * Translation tool for generating JavaScript source files from Java sources.
  */
 public class J2clTranspiler {
-  private final String[] args;
-  private final Errors errors = new Errors();
+  private final Problems problems = new Problems();
   private FrontendOptions options;
   private final TimingCollector timingCollector = TimingCollector.get();
 
-  J2clTranspiler(String[] args) {
-    this.args = args;
+  /** Represents the result of a transpilation. */
+  public static class Result {
+    private final int exitCode;
+    private final Problems problems;
+
+    private Result(int exitCode, Problems problems) {
+      this.exitCode = exitCode;
+      this.problems = problems;
+    }
+
+    public int getExitCode() {
+      return exitCode;
+    }
+
+    public Problems getProblems() {
+      return problems;
+    }
+
+    static Result fromException(int exitCode, Throwable throwable) {
+      return fromErrorMessage(exitCode, throwable.toString());
+    }
+
+    static Result fromErrorMessage(int exitCode, String errorMessage) {
+      Problems problems = new Problems();
+      problems.error(Messages.ERR_ERROR, errorMessage);
+      return new Result(exitCode, problems);
+    }
+
+    static Result fromOutputMessage(int exitCode, String outputMessage) {
+      Problems problems = new Problems();
+      problems.info(outputMessage);
+      return new Result(exitCode, problems);
+    }
   }
 
   /** Runs the entire J2CL pipeline. */
-  void run() {
-    loadOptions();
-    CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
-        createJdtUnitsAndResolveBindings();
-    List<CompilationUnit> j2clUnits = convertUnits(jdtUnitsAndResolvedBindings);
-    checkUnits(j2clUnits);
-    normalizeUnits(j2clUnits);
-    generateOutputs(j2clUnits);
-    maybeCloseFileSystem();
-    maybeOutputTimeReport();
+  Result transpile(String... args) {
+    try {
+      loadOptions(args);
+      CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
+          createJdtUnitsAndResolveBindings();
+      List<CompilationUnit> j2clUnits = convertUnits(jdtUnitsAndResolvedBindings);
+      checkUnits(j2clUnits);
+      normalizeUnits(j2clUnits);
+      generateOutputs(j2clUnits);
+      maybeCloseFileSystem();
+      maybeOutputTimeReport();
+    } catch (Problems.Exit e) {
+      return new Result(e.getExitCode(), problems);
+    }
+    return new Result(0, problems);
   }
 
-  private void loadOptions() {
+  private void loadOptions(String[] args) {
     timingCollector.startSubSample("Parse flags");
 
-    FrontendFlags flags = new FrontendFlags(errors);
+    FrontendFlags flags = new FrontendFlags(problems);
     flags.parse(args);
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
 
-    options = new FrontendOptions(errors, flags);
-    errors.maybeReportAndExit();
+    options = new FrontendOptions(problems, flags);
+    problems.abortIfRequested();
   }
 
   private List<CompilationUnit> convertUnits(
@@ -119,22 +155,22 @@ public class J2clTranspiler {
     timingCollector.startSample("AST Conversion");
 
     // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(options.getClasspathEntries(), errors);
-    errors.maybeReportAndExit();
+    PackageInfoCache.init(options.getClasspathEntries(), problems);
+    problems.abortIfRequested();
 
     List<CompilationUnit> compilationUnits =
         CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
     return compilationUnits;
   }
 
   private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings() {
     timingCollector.startSample("JDT Parse");
 
-    JdtParser parser = new JdtParser(options, errors);
+    JdtParser parser = new JdtParser(options, problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         parser.parseFiles(options.getSourceFiles());
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
     return compilationUnitsAndTypeBindings;
   }
 
@@ -142,9 +178,9 @@ public class J2clTranspiler {
     timingCollector.startSample("Check Units");
 
     for (CompilationUnit compilationUnit : j2clUnits) {
-      JsInteropRestrictionsChecker.check(compilationUnit, errors);
+      JsInteropRestrictionsChecker.check(compilationUnit, problems);
     }
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
@@ -243,10 +279,10 @@ public class J2clTranspiler {
             options.getDeclareLegacyNamespace(),
             options.getDepinfoPath(),
             options.getShouldPrintReadableSourceMap(),
-            errors)
+            problems)
         .generateOutputs(j2clCompilationUnits);
     timingCollector.endSubSample();
-    errors.maybeReportAndExit();
+    problems.abortIfRequested();
   }
 
   private void maybeCloseFileSystem() {
@@ -256,7 +292,7 @@ public class J2clTranspiler {
       try {
         options.getOutputFileSystem().close();
       } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_CLOSE_ZIP);
+        problems.error(Messages.ERR_CANNOT_CLOSE_ZIP);
       }
     }
   }
@@ -272,12 +308,9 @@ public class J2clTranspiler {
    * Entry point for the tool, which runs the entire J2CL pipeline.
    */
   public static void main(String[] args) {
-    J2clTranspiler transpiler = new J2clTranspiler(args);
-    try {
-      transpiler.run();
-    } catch (Errors.Exit e) {
-      // Error already reported. End execution now and with an exit code that indicates failure.
-      System.exit(e.getExitCode());
-    }
+    J2clTranspiler transpiler = new J2clTranspiler();
+    Result result = transpiler.transpile(args);
+    result.getProblems().report(System.out, System.err);
+    System.exit(result.getExitCode());
   }
 }

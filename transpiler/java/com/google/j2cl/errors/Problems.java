@@ -15,15 +15,16 @@
  */
 package com.google.j2cl.errors;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.common.J2clUtils;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 /** An error logger class that records the number of errors and provides error print methods. */
-public class Errors {
-  /** Represents compiler errors. */
-  public enum Error {
+public class Problems {
+  /** Represents compiler problem categories. */
+  public enum Messages {
     ERR_INVALID_FLAG("Invalid flag"),
     ERR_FLAG_FILE("Cannot load flag file"),
     ERR_FILE_NOT_FOUND("File not found"),
@@ -47,66 +48,81 @@ public class Errors {
     ERR_ERROR("Error"),
     ;
 
-    // used for customized error message.
-    private String errorMessage;
+    // used for customized message.
+    private final String message;
 
-    Error(String errorMessage) {
-      this.errorMessage = errorMessage;
+    Messages(String message) {
+      this.message = message;
     }
 
-    public String getErrorMessage() {
-      return errorMessage;
+    public String getMessage() {
+      return message;
     }
   }
 
-  private int errorCount = 0;
-  private List<String> errorMessages = new ArrayList<>();
-  private PrintStream errorStream;
-
-  public Errors() {
-    this.errorStream = System.err;
+  /** Represents the severity of the problem */
+  public enum Severity {
+    ERROR,
+    WARNING,
+    INFO
   }
 
-  public Errors(PrintStream errorStream) {
-    this.errorStream = errorStream;
+  private boolean abortRequested = false;
+  private final Multimap<Severity, String> problemsBySeverity = LinkedHashMultimap.create();
+
+  public Multimap<Severity, String> getProblemsBySeverity() {
+    return problemsBySeverity;
   }
 
   public int errorCount() {
-    return errorCount;
+    return problemsBySeverity.size();
   }
 
-  public PrintStream getErrorStream() {
-    return errorStream;
+  public void error(Messages messages) {
+    abortWhenPossible();
+    problemsBySeverity.put(Severity.ERROR, messages.getMessage());
   }
 
-  public void reset() {
-    this.errorCount = 0;
-    this.errorMessages.clear();
+  public void error(Messages messages, String detailMessage, Object... args) {
+    abortWhenPossible();
+    problemsBySeverity.put(
+        Severity.ERROR, messages.getMessage() + ": " + J2clUtils.format(detailMessage, args));
   }
 
-  public void error(Error error) {
-    errorCount++;
-    errorMessages.add(error.getErrorMessage());
+  public void warning(String detailMessage, Object... args) {
+    problemsBySeverity.put(Severity.WARNING, J2clUtils.format(detailMessage, args));
   }
 
-  public void error(Error error, String detailMessage, Object... args) {
-    errorCount++;
-    errorMessages.add(error.getErrorMessage() + ": " + J2clUtils.format(detailMessage, args));
+  public void info(String detailMessage, Object... args) {
+    problemsBySeverity.put(Severity.INFO, J2clUtils.format(detailMessage, args));
   }
 
+  public void abortWhenPossible() {
+    abortRequested = true;
+  }
   /** Prints all error messages and a summary. */
-  public void report() {
-    for (String message : errorMessages) {
-      errorStream.println(message);
+  public void report(PrintStream outputStream, PrintStream errorStream) {
+    for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
+      if (severityMessagePair.getKey() == Severity.INFO) {
+        outputStream.println(severityMessagePair.getValue());
+      } else {
+        errorStream.println(severityMessagePair.getValue());
+      }
     }
-    J2clUtils.printf(errorStream, "%d error(s).%n", errorCount);
+    if (!problemsBySeverity.get(Severity.ERROR).isEmpty()
+        || !problemsBySeverity.get(Severity.WARNING).isEmpty()) {
+      J2clUtils.printf(
+          errorStream,
+          "%d error(s), %d warning(s).\n",
+          problemsBySeverity.get(Severity.ERROR).size(),
+          problemsBySeverity.get(Severity.WARNING).size());
+    }
   }
 
-  /** If there were errors, prints a summary and exits. */
-  public void maybeReportAndExit() {
-    if (errorCount > 0) {
-      report();
-      throw new Exit(errorCount);
+  /** If there were errors abort. */
+  public void abortIfRequested() {
+    if (abortRequested) {
+      throw new Exit(problemsBySeverity.get(Severity.ERROR).size());
     }
   }
 
@@ -116,7 +132,7 @@ public class Errors {
    * <p>Note: It should never be caught except on the top level.
    */
   public static class Exit extends java.lang.Error {
-    private int exitCode;
+    private final int exitCode;
 
     public Exit(int exitCode) {
       this.exitCode = exitCode;

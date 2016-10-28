@@ -31,7 +31,8 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -160,7 +161,8 @@ public class GeneratorUtils {
     return method.getDescriptor().getVisibility().jsText;
   }
 
-  public static void writeToFile(Path outputPath, String content, Charset charset, Errors errors) {
+  public static void writeToFile(
+      Path outputPath, String content, Charset charset, Problems problems) {
     try {
       // Write using the provided fileSystem (which might be the regular file system or might be a
       // zip file.)
@@ -170,8 +172,8 @@ public class GeneratorUtils {
       // regardless of the time of day.
       Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
-      errors.maybeReportAndExit();
+      problems.error(Messages.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
+      problems.abortIfRequested();
     }
   }
 }

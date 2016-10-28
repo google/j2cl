@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration;
 
 import com.google.common.io.Files;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -25,8 +24,7 @@ import java.io.IOException;
  */
 public class InvalidOptionTest extends IntegrationTestCase {
   public void testInvalidOption() throws IOException, InterruptedException {
-    String[] args =
-        new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-source", "2.0", "-encoding", "abc"};
+    String[] args = new String[] {"-source", "2.0", "-encoding", "abc"};
     TranspileResult transpileResult = transpile(args);
     assertLogContainsSnippet(transpileResult.errorLines, "Invalid source version: 2.0");
     assertLogContainsSnippet(transpileResult.errorLines, "Unsupported encoding: abc");

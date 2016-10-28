@@ -18,7 +18,7 @@ package com.google.j2cl.generator;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import java.util.HashSet;
@@ -30,8 +30,8 @@ import java.util.Set;
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
-  public JavaScriptHeaderGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
-    super(errors, declareLegacyNamespace, type);
+  public JavaScriptHeaderGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
+    super(problems, declareLegacyNamespace, type);
   }
 
   @Override

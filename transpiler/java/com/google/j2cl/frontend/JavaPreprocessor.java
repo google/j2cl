@@ -20,8 +20,10 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -56,14 +58,14 @@ public class JavaPreprocessor {
    * preprocessing, the key of the map will be the original location of the file.
    */
   public Map<String, String> preprocessFiles(
-      List<String> filePaths, String encoding, Errors errors) {
+      List<String> filePaths, String encoding, Problems problems) {
     // Create a temporary directory to put all the files. We can't just create temporary files,
     // because the name of the file must match the class declared in the file (JLS 7.6).
     String temporaryDirectory;
     try {
       temporaryDirectory = Files.createTempDirectory("j2cl").toString();
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_CANNOT_CREATE_TEMP_DIR);
+      problems.error(Messages.ERR_CANNOT_CREATE_TEMP_DIR);
       return null;
     }
 
@@ -78,14 +80,14 @@ public class JavaPreprocessor {
           // Write the preprocessed file to a temporary file.
           Path tempFilePath =
               Paths.get(temporaryDirectory, Paths.get(filePath).getFileName().toString());
-          Files.write(tempFilePath, preprocessedFileContent.getBytes());
+          Files.write(tempFilePath, preprocessedFileContent.getBytes(StandardCharsets.UTF_8));
           tempToOriginalFileMap.put(tempFilePath.toString(), filePath);
         } else {
           // The file didn't need preprocessing, just point to the original file.
           tempToOriginalFileMap.put(filePath, filePath);
         }
       } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_OPEN_FILE, filePath);
+        problems.error(Messages.ERR_CANNOT_OPEN_FILE, filePath);
         return null;
       }
     }
@@ -99,7 +101,8 @@ public class JavaPreprocessor {
    */
   public String preprocessFile(Path filePath, @Nullable String encoding) throws IOException {
     byte[] bytes = Files.readAllBytes(filePath);
-    String fileContent = encoding == null ? new String(bytes) : new String(bytes, encoding);
+    String fileContent =
+        encoding == null ? new String(bytes, StandardCharsets.UTF_8) : new String(bytes, encoding);
     String preprocessedFileContent = preprocessFile(fileContent);
     return fileContent.equals(preprocessedFileContent) ? null : preprocessedFileContent;
   }

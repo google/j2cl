@@ -18,7 +18,9 @@ package com.google.j2cl.frontend;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.io.Files;
-import com.google.j2cl.errors.Errors;
+import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.errors.Problems;
+import com.google.j2cl.errors.Problems.Messages;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -123,10 +125,10 @@ public class FrontendFlags {
   )
   protected boolean generateTimeReport = false;
 
-  private final Errors errors;
+  private final Problems problems;
 
-  public FrontendFlags(Errors errors) {
-    this.errors = errors;
+  public FrontendFlags(Problems problems) {
+    this.problems = problems;
   }
 
   /** Parses the given args list and updates values. */
@@ -136,20 +138,21 @@ public class FrontendFlags {
     try {
       args = maybeLoadFlagFile(args);
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_FLAG_FILE, e.getMessage());
+      problems.error(Messages.ERR_FLAG_FILE, e.getMessage());
       return;
     }
 
     try {
       parser.parseArgument(args);
       if (help) {
-        parser.printUsage(System.out);
+        problems.info(J2clUtils.streamToString(parser::printUsage));
+        problems.abortWhenPossible();
       }
     } catch (CmdLineException e) {
       String message = e.getMessage() + "\n";
       message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
       message += "\nuse -help for a list of possible options in more details";
-      errors.error(Errors.Error.ERR_INVALID_FLAG, message);
+      problems.error(Messages.ERR_INVALID_FLAG, message);
     }
   }
 
