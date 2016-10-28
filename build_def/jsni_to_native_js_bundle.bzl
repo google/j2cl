@@ -89,22 +89,25 @@ _jsni_to_j2cl_converter = rule(
     implementation=_impl,
 )
 
-def jsni_to_native_js_bundle(name, srcs, native_srcs=[], **kwargs):
+def jsni_to_native_js_bundle(name, srcs, native_srcs=[], testonly = 0, **kwargs):
 
   _jsni_to_j2cl_converter(
      name = name + "_autogen",
      srcs = srcs,
      excludes = [n.replace(".native.js", ".java") for n in native_srcs],
-     **kwargs
+     testonly = testonly,
+      **kwargs
   )
 
   generate_zip(
       name = name + "_handrolled",
       srcs = native_srcs,
       pkg = "RELATIVE",
+      testonly = testonly,
   )
 
   native.filegroup(
       name = name,
       srcs = [":" + name + "_autogen", ":" + name + "_handrolled"],
+      testonly = testonly,
   )

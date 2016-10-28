@@ -11,6 +11,7 @@ load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
+    testonly = 1,
     generate_build_test = False,
     javacopts = [
         "-Xep:SelfComparison:OFF",
@@ -20,7 +21,7 @@ j2cl_mirror_from_gwt(
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
         "//jre/java:gwt-jsinterop-annotations",
-        "//third_party/java/junit",
+        "//third_party/java/junit:junit-j2cl",
     ],
 )
 

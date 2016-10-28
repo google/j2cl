@@ -55,6 +55,5 @@ def j2cl_mirror_from_gwt(name,
       native_srcs_zips = [":" + name + "_native_zips"],
       deps = deps,
       _js_deps = js_deps,
-      testonly = kwargs.get("testonly", 0),
       **kwargs
   )
