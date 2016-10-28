@@ -16,6 +16,6 @@
 package com.google.j2cl.ast.common;
 
 /** Interface for cloneable subnodes */
-public interface Cloneable<T> {
+public interface Cloneable<T extends Cloneable<T>> {
   T clone();
 }
