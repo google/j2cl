@@ -19,14 +19,14 @@ import java.io.IOException;
 
 /** Tests srcjar IO errors. */
 public class SrcjarTest extends IntegrationTestCase {
-  public void testMissingSrcjar() throws IOException, InterruptedException {
+  public void testMissingSrcjar() throws IOException {
     TranspileResult transpileResult =
         transpileDirectory("missingsrcjar", OutputType.DIR, "/foo/bar/Missing.srcjar");
-    assertLogContainsSnippet(transpileResult.errorLines, "File not found");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "File not found");
   }
 
-  public void testCorruptSrcjar() throws IOException, InterruptedException {
+  public void testCorruptSrcjar() throws IOException {
     TranspileResult transpileResult = transpileDirectory("corruptsrcjar", OutputType.DIR);
-    assertLogContainsSnippet(transpileResult.errorLines, "Cannot extract zip");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Cannot extract zip");
   }
 }

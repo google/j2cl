@@ -35,31 +35,19 @@ public class OutputTest extends IntegrationTestCase {
             "-cp",
             JRE_PATH);
 
-    assertEquals(0, transpileResult.exitCode);
-    assertTrue(transpileResult.errorLines.isEmpty());
-    assertTrue(transpileResult.outputLocation.exists());
+    assertEquals(0, transpileResult.getExitCode());
+    assertFalse(transpileResult.getProblems().hasProblems());
+    File outputLocation = transpileResult.getOutputLocation();
 
-    assertTrue(
-        new File(
-                transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Foo.java.js")
-            .exists());
-    assertTrue(
-        new File(
-                transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Foo.impl.java.js")
-            .exists());
-    assertTrue(
-        new File(
-                transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Bar.java.js")
-            .exists());
-    assertTrue(
-        new File(
-                transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Bar.impl.java.js")
-            .exists());
-    assertFalse(new File(transpileResult.outputLocation, "some/thing/Bogus.js").exists());
+    assertTrue(outputLocation.exists());
+
+    assertFileExists(outputLocation, "com/google/j2cl/transpiler/integration/output/Foo.java.js");
+    assertFileExists(
+        outputLocation, "com/google/j2cl/transpiler/integration/output/Foo.impl.java.js");
+    assertFileExists(outputLocation, "com/google/j2cl/transpiler/integration/output/Bar.java.js");
+    assertFileExists(
+        outputLocation, "com/google/j2cl/transpiler/integration/output/Bar.impl.java.js");
+    assertFileDoesNotExist(outputLocation, "some/thing/Bogus.js");
   }
 
   public void testOutputZip() throws IOException, InterruptedException {
@@ -74,11 +62,11 @@ public class OutputTest extends IntegrationTestCase {
             "-cp",
             JRE_PATH);
 
-    assertEquals(0, transpileResult.exitCode);
-    assertTrue(transpileResult.errorLines.isEmpty());
-    assertTrue(transpileResult.outputLocation.exists());
+    assertEquals(0, transpileResult.getExitCode());
+    assertFalse(transpileResult.getProblems().hasErrors());
+    assertTrue(transpileResult.getOutputLocation().exists());
 
-    try (ZipFile zipFile = new ZipFile(transpileResult.outputLocation)) {
+    try (ZipFile zipFile = new ZipFile(transpileResult.getOutputLocation())) {
       assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.java.js"));
       assertNotNull(
           zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.impl.java.js"));
@@ -87,5 +75,13 @@ public class OutputTest extends IntegrationTestCase {
           zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.impl.java.js"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
+  }
+
+  private static void assertFileExists(File outputPath, String fileName) {
+    assertTrue(new File(outputPath, fileName).exists());
+  }
+
+  private static void assertFileDoesNotExist(File outputPath, String fileName) {
+    assertFalse(new File(outputPath, fileName).exists());
   }
 }

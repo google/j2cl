@@ -21,10 +21,10 @@ import java.io.IOException;
  * Tests that valid options do not trigger an error.
  */
 public class ValidOptionsTest extends IntegrationTestCase {
-  public void testValidOptions() throws IOException, InterruptedException {
+  public void testValidOptions() throws IOException {
     TranspileResult transpileResult =
         transpileDirectory("validoptions", OutputType.DIR, "-source", "1.8", "-encoding", "UTF-8");
-    assertEquals(0, transpileResult.exitCode);
-    assertTrue(transpileResult.errorLines.isEmpty());
+    assertEquals(0, transpileResult.getExitCode());
+    assertFalse(transpileResult.getProblems().hasErrors());
   }
 }

@@ -23,6 +23,6 @@ import java.io.IOException;
 public class SyntaxErrorTest extends IntegrationTestCase {
   public void testSyntaxError() throws IOException, InterruptedException {
     TranspileResult transpileResult = transpileDirectory("syntaxerror", OutputType.DIR);
-    assertLogContainsSnippet(transpileResult.errorLines, "SyntaxError.java:20: Syntax error");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "SyntaxError.java:20: Syntax error");
   }
 }

@@ -15,18 +15,15 @@
  */
 package com.google.j2cl.transpiler.integration;
 
-import java.io.IOException;
-
 /**
  * Tests that unknown flags are reported.
  */
 public class InvalidFlagTest extends IntegrationTestCase {
-  public void testInvalidFlag() throws IOException, InterruptedException {
+  public void testInvalidFlag() {
     String[] args = new String[] {"-unknown", "abc"};
     TranspileResult transpileResult = transpile(args);
-    assertLogContainsSnippet(
-        transpileResult.errorLines, "Invalid flag: \"-unknown\" is not a valid option");
-    assertLogContainsSnippet(transpileResult.errorLines, "Valid options:");
-    assertLogContainsSnippet(transpileResult.errorLines, "1 error(s), 0 warning(s).");
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(), "Invalid flag: \"-unknown\" is not a valid option");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Valid options:");
   }
 }

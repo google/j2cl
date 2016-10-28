@@ -3,7 +3,6 @@ package com.google.j2cl.common;
 import java.beans.Introspector;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
@@ -48,7 +47,7 @@ public class J2clUtils {
   }
 
   /** Adapts a method that outputs to a stream to directly return the output as a String. */
-  public static String streamToString(Consumer<OutputStream> streamOutputer) {
+  public static String streamToString(Consumer<? super PrintStream> streamOutputer) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     streamOutputer.accept(new PrintStream(outputStream));
     return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);

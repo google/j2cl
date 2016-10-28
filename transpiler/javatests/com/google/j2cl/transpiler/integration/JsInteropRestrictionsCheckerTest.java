@@ -2569,35 +2569,28 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   private void assertCompileSucceeds(File sourcePackage) throws Exception {
     TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
-    assertBuggySucceeds(transpileResult.errorLines);
+    assert !transpileResult.getProblems().hasErrors()
+        : "Expected no errors but got " + transpileResult.getProblems().getErrors();
   }
 
   private void assertCompileFails(File sourcePackage, String... expectedErrors) throws Exception {
     TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
-    assertBuggyFails(transpileResult.errorLines, expectedErrors);
-  }
-
-  private static void assertBuggySucceeds(List<String> errorLines) {
-    assert errorLines.isEmpty() : "Expected no errors but got " + errorLines;
-  }
-
-  private static void assertBuggyFails(List<String> errorLines, String... expectedErrors) {
-    assert errorLines.size() - 1 == expectedErrors.length
+    List<String> errors = transpileResult.getProblems().getErrors();
+    assert errors.size() == expectedErrors.length
         : "Expected "
             + expectedErrors.length
             + " error(s) but there were actually "
-            + errorLines.size()
+            + errors.size()
             + " error(s)  "
             + "expected:<"
             + Arrays.toString(expectedErrors)
             + "> "
             + "actual:<"
-            + errorLines
+            + errors
             + ">.";
     for (String expectedError : expectedErrors) {
-      assertLogContainsSnippet(errorLines, expectedError);
+      assertErrorsContainsSnippet(transpileResult.getProblems(), expectedError);
     }
-    Iterables.getLast(errorLines).matches("\\d+ error(s), \\d+ warning(s).");
   }
 
   private File createPackage(String packageName) {

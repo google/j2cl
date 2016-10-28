@@ -39,8 +39,8 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             JRE_PATH,
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
-    assertLogContainsSnippet(
-        transpileResult.errorLines,
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(),
         "File not found: " + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
   }
 
@@ -63,8 +63,8 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             JRE_PATH,
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
-    assertLogContainsSnippet(
-        transpileResult.errorLines,
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(),
         "Cannot find matching native file: "
             + PACKAGE_NAME
             + "NativeClass"
@@ -92,8 +92,8 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             JRE_PATH,
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "too_many_native_sources.zip");
-    assertLogContainsSnippet(
-        transpileResult.errorLines,
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(),
         "Native JavaScript file not used: "
             + NATIVE_SOURCES_ERROR_PATH
             + "too_many_native_sources.zip!/"

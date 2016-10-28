@@ -101,7 +101,7 @@ public class JdtParser {
         preprocessor.preprocessFiles(filePaths, encoding, problems);
     if (preprocessedFilesByOriginal == null) {
       checkState(
-          problems.errorCount() > 0, "Didn't get processed files map, but no errors generated.");
+          problems.problemCount() > 0, "Didn't get processed files map, but no errors generated.");
       return null;
     }
 

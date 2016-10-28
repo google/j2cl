@@ -19,7 +19,11 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.common.J2clUtils;
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /** An error logger class that records the number of errors and provides error print methods. */
 public class Problems {
@@ -70,11 +74,7 @@ public class Problems {
   private boolean abortRequested = false;
   private final Multimap<Severity, String> problemsBySeverity = LinkedHashMultimap.create();
 
-  public Multimap<Severity, String> getProblemsBySeverity() {
-    return problemsBySeverity;
-  }
-
-  public int errorCount() {
+  public int problemCount() {
     return problemsBySeverity.size();
   }
 
@@ -109,8 +109,7 @@ public class Problems {
         errorStream.println(severityMessagePair.getValue());
       }
     }
-    if (!problemsBySeverity.get(Severity.ERROR).isEmpty()
-        || !problemsBySeverity.get(Severity.WARNING).isEmpty()) {
+    if (hasErrors() || hasWarnings()) {
       J2clUtils.printf(
           errorStream,
           "%d error(s), %d warning(s).\n",
@@ -119,12 +118,46 @@ public class Problems {
     }
   }
 
+  public boolean hasWarnings() {
+    return problemsBySeverity.containsKey(Severity.WARNING);
+  }
+
+  public boolean hasErrors() {
+    return problemsBySeverity.containsKey(Severity.ERROR);
+  }
+
+  public boolean hasProblems() {
+    return !problemsBySeverity.isEmpty();
+  }
+
   /** If there were errors abort. */
   public void abortIfRequested() {
     if (abortRequested) {
       throw new Exit(problemsBySeverity.get(Severity.ERROR).size());
     }
   }
+
+  public List<String> getErrors() {
+    return getProblems(Collections.singleton(Severity.ERROR));
+  }
+
+  public List<String> getWarnings() {
+    return getProblems(Collections.singleton(Severity.WARNING));
+  }
+
+  public List<String> getInfoMessages() {
+    return getProblems(Collections.singleton(Severity.INFO));
+  }
+
+  public List<String> getProblems(Collection<Severity> severities) {
+    return problemsBySeverity
+        .entries()
+        .stream()
+        .filter(e -> severities.contains(e.getKey()))
+        .map(Map.Entry::getValue)
+        .collect(Collectors.toList());
+  }
+
 
   /**
    * J2clExit is thrown to signal that a System.exit should be performed at a higher level.

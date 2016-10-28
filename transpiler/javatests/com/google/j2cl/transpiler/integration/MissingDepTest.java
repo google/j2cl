@@ -21,9 +21,9 @@ import java.io.IOException;
  * Tests that references to missing classes throw an error.
  */
 public class MissingDepTest extends IntegrationTestCase {
-  public void testMissingDep() throws IOException, InterruptedException {
+  public void testMissingDep() throws IOException {
     TranspileResult transpileResult = transpileDirectory("missingdep", OutputType.DIR);
-    assertLogContainsSnippet(
-        transpileResult.errorLines, "The type java.lang.Object cannot be resolved.");
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(), "The type java.lang.Object cannot be resolved.");
   }
 }

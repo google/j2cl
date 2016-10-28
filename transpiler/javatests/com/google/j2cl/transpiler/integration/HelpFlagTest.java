@@ -24,15 +24,15 @@ public class HelpFlagTest extends IntegrationTestCase {
   public void testHelpFlag() throws IOException, InterruptedException {
     String[] args = new String[] {"-help"};
     TranspileResult transpileResult = transpile(args);
-    assertEquals(0, transpileResult.exitCode);
-    assertLogContainsSnippet(transpileResult.outputLines, "<source files .java|.srcjar>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-bootclasspath <path>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-classpath (-cp) <path>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-d <file>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-encoding <encoding>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-h (-help)");
-    assertLogContainsSnippet(transpileResult.outputLines, "-source <release>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-sourcepath <file>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-nativesourcezip <file>");
+    assertEquals(0, transpileResult.getExitCode());
+    assertOutputContainsSnippet(transpileResult.getProblems(), "<source files .java|.srcjar>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-bootclasspath <path>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-classpath (-cp) <path>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-d <file>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-encoding <encoding>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-h (-help)");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-source <release>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-sourcepath <file>");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-nativesourcezip <file>");
   }
 }

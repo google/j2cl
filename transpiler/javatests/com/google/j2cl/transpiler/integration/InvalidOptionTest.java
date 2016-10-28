@@ -23,14 +23,14 @@ import java.io.IOException;
  * Tests that invalid flag options are reported.
  */
 public class InvalidOptionTest extends IntegrationTestCase {
-  public void testInvalidOption() throws IOException, InterruptedException {
+  public void testInvalidOption() {
     String[] args = new String[] {"-source", "2.0", "-encoding", "abc"};
     TranspileResult transpileResult = transpile(args);
-    assertLogContainsSnippet(transpileResult.errorLines, "Invalid source version: 2.0");
-    assertLogContainsSnippet(transpileResult.errorLines, "Unsupported encoding: abc");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Invalid source version: 2.0");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Unsupported encoding: abc");
   }
 
-  public void testInvalidOutputOption() throws IOException, InterruptedException {
+  public void testInvalidOutputOption() throws IOException {
     String[] extraArgs = {"-source", "1.8", "-encoding", "UTF-8"};
 
     // Output to a location that is not a directory and is not a zip file.
@@ -45,7 +45,7 @@ public class InvalidOptionTest extends IntegrationTestCase {
     TranspileResult transpileResult = transpile(transpileArgs, outputLocation);
 
     // Verify that the output location was rejected.
-    assertLogContainsSnippet(
-        transpileResult.errorLines, "-output location must be a directory or .zip file");
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(), "-output location must be a directory or .zip file");
   }
 }
