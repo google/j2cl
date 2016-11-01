@@ -1663,8 +1663,7 @@ public class CompilationUnitBuilder {
         if (typeStack.get(i).getDescriptor().equalsIgnoreNullability(enclosingClassDescriptor)) {
           break;
         }
-        capturesByTypeDescriptor.put(
-            TypeDescriptors.toNullable(typeStack.get(i).getDescriptor()), variable);
+        capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);
       }
       // for reference to a captured variable, if it is in a constructor, translate to
       // reference to outer parameter, otherwise, translate to reference to corresponding
@@ -1841,12 +1840,6 @@ public class CompilationUnitBuilder {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
       Variable variable = JdtUtils.createVariable(variableBinding);
-      if (!variable.getTypeDescriptor().isTypeVariable()
-          && !variable.getTypeDescriptor().isPrimitive()) {
-        // Local variables default to nullable. A flow analysis pass will later tighten their type
-        // based on the values that are assigned to them.
-        variable.setTypeDescriptor(TypeDescriptors.toNullable(variable.getTypeDescriptor()));
-      }
 
       recordEnclosingType(variable, currentType);
       Expression initializer =
