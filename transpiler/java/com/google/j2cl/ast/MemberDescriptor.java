@@ -44,7 +44,9 @@ public abstract class MemberDescriptor extends Node implements HasJsNameInfo {
   @Override
   public String getJsNamespace() {
     String jsNamespace = getJsInfo().getJsNamespace();
-    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getQualifiedName() : jsNamespace;
+    return jsNamespace == null
+        ? getEnclosingClassTypeDescriptor().getProxiedQualifiedName()
+        : jsNamespace;
   }
 
   public boolean hasJsNamespace() {

@@ -236,7 +236,7 @@ public class OutputGeneratorStage {
   private void gatherNativeJsTypeProxyDepInfo(
       Type type, SortedSet<String> importModulePaths, SortedSet<String> exportModulePaths) {
     // Import the native JS class being proxied.
-    importModulePaths.add(type.getDescriptor().getQualifiedName());
+    importModulePaths.add(type.getDescriptor().getProxiedQualifiedName());
 
     // Export the name by which the native JS class is being forwarded.
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();

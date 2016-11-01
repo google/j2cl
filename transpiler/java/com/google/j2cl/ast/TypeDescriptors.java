@@ -284,7 +284,7 @@ public class TypeDescriptors {
   public static TypeDescriptor createNative(
       String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
     return createNative(
-        null,
+        jsNamespace,
         Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
         jsNamespace,
         jsName,
