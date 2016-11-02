@@ -9,7 +9,20 @@ public class GenericMethod<T> {
 
   public <T extends Exception> void fun(T t) {} // type parameter with bounds.
 
-  public <T extends Error> void fun(T t) {} // type parameter with different bounds.
+  public <T extends Error> void fun(T t) { // type parameter with different bounds.
+    new GenericMethod<T>() { // inherit method T
+      public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    };
+
+    class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+
+      public <T extends Number> void fun2(T t) {}
+    }
+    new LocalClass<T>();
+  }
 
   public <T> GenericMethod<T> bar() {
     return null;
