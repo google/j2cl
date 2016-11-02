@@ -83,6 +83,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
               return typeDescriptor.getInterfaceTypeDescriptors();
             }
           };
+      newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
       newTypeDescriptor.isArray = typeDescriptor.isArray();
       newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
@@ -208,6 +209,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     public Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
       newTypeDescriptor.interfaceTypeDescriptorsFactory = interfaceTypeDescriptorsFactory;
+      return this;
+    }
+
+    public Builder setIsAbstract(boolean isAbstract) {
+      newTypeDescriptor.isAbstract = isAbstract;
       return this;
     }
 
@@ -385,6 +391,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private int dimensions;
   private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
   private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
+  private boolean isAbstract;
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isFinal;
@@ -746,6 +753,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   @Override
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
+  }
+
+  public boolean isAbstract() {
+    return isAbstract;
   }
 
   /** Returns whether the described type is an array. */

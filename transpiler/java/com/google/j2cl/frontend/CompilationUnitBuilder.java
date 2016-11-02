@@ -1896,7 +1896,6 @@ public class CompilationUnitBuilder {
               : new Type(kind, visibility, typeDescriptor);
 
       type.setStatic(JdtUtils.isStatic(typeBinding));
-      type.setAbstract(JdtUtils.isAbstract(typeBinding));
       type.setAnonymous(typeBinding.isAnonymous());
       return type;
     }

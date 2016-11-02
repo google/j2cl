@@ -41,7 +41,6 @@ public class Type extends Node {
   private Kind kind;
   private Visibility visibility;
   private boolean isStatic;
-  private boolean isAbstract;
   private boolean isAnonymous;
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Member> members = new ArrayList<>();
@@ -102,11 +101,7 @@ public class Type extends Node {
   }
 
   public boolean isAbstract() {
-    return isAbstract;
-  }
-
-  public void setAbstract(boolean isAbstract) {
-    this.isAbstract = isAbstract;
+    return typeDescriptor.isAbstract();
   }
 
   public void setAnonymous(boolean isAnonymous) {

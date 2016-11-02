@@ -1425,6 +1425,7 @@ public class JdtUtils {
 
     String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
+    boolean isAbstract = isAbstract(typeBinding);
     boolean isFinal = isFinal(typeBinding);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
@@ -1501,6 +1502,7 @@ public class JdtUtils {
                 return typeDescriptors.build();
               }
             })
+        .setIsAbstract(isAbstract)
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
         .setIsFinal(isFinal)
         .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
