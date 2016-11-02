@@ -206,8 +206,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
             .stream()
             .map(contextRewriter::rewriteUnaryNumericPromotionContext)
             .collect(Collectors.toList());
-    return new NewArray(
-        newArray.getTypeDescriptor(), dimensionExpressions, newArray.getArrayLiteral());
+    return NewArray.newBuilder()
+        .setTypeDescriptor(newArray.getTypeDescriptor())
+        .setDimensionExpressions(dimensionExpressions)
+        .setArrayLiteral(newArray.getArrayLiteral())
+        .build();
   }
 
   @Override

@@ -135,10 +135,12 @@ public class NormalizeJsVarargs extends NormalizationPass {
       checkArgument(!method.getParameters().isEmpty());
       int varargsIndex = method.getParameters().size() - 1;
       Expression newArray =
-          new NewArray(
-              varargsParameter.getTypeDescriptor(),
-              Collections.singletonList(createArraySizeExpression(varargsIndex)),
-              null);
+          NewArray.newBuilder()
+              .setTypeDescriptor(varargsParameter.getTypeDescriptor())
+              .setDimensionExpressions(
+                  Collections.singletonList(createArraySizeExpression(varargsIndex)))
+              .setArrayLiteral(null)
+              .build();
       Statement variableDeclaration =
           new VariableDeclarationExpression(
                   new VariableDeclarationFragment(varargsLocalCopy, newArray))

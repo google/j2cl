@@ -7,15 +7,14 @@ public class Visitor_${className} {
   public static Node visit(Processor processor, ${className} node) {
     Node result = node;
 
-    pushContext(processor, node);
-
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
     if (processorImpl.shouldProcess${className}(node)) {
       node = processorImpl.preProcess${className}(node);
+      pushContext(processor, node);
       visitMembers(processorImpl, node);
+      popContext(processor, node);
       result = processorImpl.postProcess${className}(node);
     }
-    popContext(processor, node);
     return result;
   }
 

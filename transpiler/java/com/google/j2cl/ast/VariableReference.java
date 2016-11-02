@@ -24,7 +24,9 @@ import com.google.j2cl.ast.annotations.Visitable;
  */
 @Visitable
 public class VariableReference extends Expression {
-  @Visitable Variable target;
+  // Do not mark the target as @Visitable, VariableReference acts as an opaque reference from
+  // the visitor perspective.
+  private Variable target;
 
   public VariableReference(Variable target) {
     setTarget(target);

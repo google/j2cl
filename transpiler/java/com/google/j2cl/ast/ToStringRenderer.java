@@ -603,7 +603,7 @@ class ToStringRenderer {
       }
 
       private void print(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.toString());
+        print(typeDescriptor.getSourceName());
       }
 
       private void printSeparated(String separator, List<? extends Node> expressions) {

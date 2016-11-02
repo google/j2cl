@@ -70,10 +70,13 @@ public class NormalizeArrayLiterals extends NormalizationPass {
       }
 
       // Rewrite ArrayLiteral as NewArray(ArrayLiteral).
-      return new NewArray(
-          arrayLiteral.getTypeDescriptor(),
-          Collections.nCopies(arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL),
-          arrayLiteral);
+      return NewArray.newBuilder()
+          .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
+          .setDimensionExpressions(
+              Collections.nCopies(
+                  arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL))
+          .setArrayLiteral(arrayLiteral)
+          .build();
     }
   }
 }

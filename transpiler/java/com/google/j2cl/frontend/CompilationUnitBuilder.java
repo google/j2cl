@@ -412,7 +412,11 @@ public class CompilationUnitBuilder {
 
       TypeDescriptor typeDescriptor =
           JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
-      return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
+      return NewArray.newBuilder()
+          .setTypeDescriptor(typeDescriptor)
+          .setDimensionExpressions(dimensionExpressions)
+          .setArrayLiteral(arrayLiteral)
+          .build();
     }
 
     @SuppressWarnings("unchecked")
@@ -536,7 +540,6 @@ public class CompilationUnitBuilder {
       return NewInstance.Builder.from(constructorMethodDescriptor)
           .setQualifier(newInstanceQualifier)
           .setArguments(arguments)
-          .setIsAnonymousClassCreation(true)
           .build();
     }
 

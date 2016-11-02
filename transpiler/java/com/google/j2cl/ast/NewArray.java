@@ -32,7 +32,7 @@ public class NewArray extends Expression {
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 
-  public NewArray(
+  private NewArray(
       TypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
       ArrayLiteral arrayLiteral) {
@@ -64,14 +64,47 @@ public class NewArray extends Expression {
 
   @Override
   public NewArray clone() {
-    return new NewArray(
-        typeDescriptor,
-        AstUtils.clone(dimensionExpressions),
-        arrayLiteral == null ? null : arrayLiteral.clone());
+    return NewArray.newBuilder()
+        .setTypeDescriptor(typeDescriptor)
+        .setDimensionExpressions(AstUtils.clone(dimensionExpressions))
+        .setArrayLiteral(AstUtils.clone(arrayLiteral))
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_NewArray.visit(processor, this);
   }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for NewArray. */
+  public static class Builder {
+
+    private TypeDescriptor typeDescriptor;
+    private ArrayLiteral arrayLiteral;
+    private List<Expression> dimensionExpressions;
+
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public Builder setArrayLiteral(ArrayLiteral arrayLiteral) {
+      this.arrayLiteral = arrayLiteral;
+      return this;
+    }
+
+    public Builder setDimensionExpressions(List<Expression> dimensionExpressions) {
+      this.dimensionExpressions = dimensionExpressions;
+      return this;
+    }
+
+    public NewArray build() {
+      return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
+    }
+  }
+
 }
