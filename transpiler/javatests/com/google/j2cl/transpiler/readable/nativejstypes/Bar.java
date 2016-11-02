@@ -14,4 +14,7 @@ public class Bar {
   public Bar(int x, int y) {};
 
   public native int product();
+
+  @JsType(isNative = true)
+  interface Inner {}
 }

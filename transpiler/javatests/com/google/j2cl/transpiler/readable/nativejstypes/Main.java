@@ -16,6 +16,10 @@ public class Main {
     return bar.product();
   }
 
+  public static void testInnerNativeJsType() {
+    Bar.Inner foo = new Bar.Inner() {};
+  }
+
   public static void testGlobalNativeJsType() {
     Headers header = new Headers();
     header.append("Content-Type", "text/xml");
