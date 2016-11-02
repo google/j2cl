@@ -67,17 +67,15 @@ public class VerifySingleAstReference {
                     ? statementStack.peek()
                     : getCurrentMember() != null ? getCurrentMember() : getCurrentType();
             final Node oldContext = contextByNode.get(node);
+            // Context might be null (e.g. for Type nodes), so an explicit check for containsKey
+            // is needed here.
             checkState(
-                // Context might be null (e.g. for Type nodes), so an explicit check for containsKey
-                // is needed here.
                 !contextByNode.containsKey(node),
-                node.getClass().getSimpleName()
-                    + " "
-                    + node
-                    + " in "
-                    + context
-                    + " was already seen in "
-                    + oldContext);
+                "%s %s in %s was already seen in %s",
+                node.getClass().getSimpleName(),
+                node,
+                context,
+                oldContext);
             contextByNode.put(node, context);
             return true;
           }
