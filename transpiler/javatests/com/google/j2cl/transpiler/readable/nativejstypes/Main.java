@@ -18,6 +18,7 @@ public class Main {
 
   public static void testInnerNativeJsType() {
     Bar.Inner foo = new Bar.Inner() {};
+    Another.Inner zoo = new Another.Inner() {};
   }
 
   public static void testGlobalNativeJsType() {

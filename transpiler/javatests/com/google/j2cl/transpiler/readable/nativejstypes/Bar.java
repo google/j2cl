@@ -18,3 +18,10 @@ public class Bar {
   @JsType(isNative = true)
   interface Inner {}
 }
+
+/** Native JsType with "name". */
+@JsType(name = "Zoo", isNative = true)
+class Another {
+  @JsType(isNative = true)
+  interface Inner {}
+}

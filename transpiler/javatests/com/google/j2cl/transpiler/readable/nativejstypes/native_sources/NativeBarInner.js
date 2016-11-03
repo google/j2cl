@@ -3,7 +3,6 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Bar.Inner');
 /**
  * @interface
  */
-class Inner {
-};
+class Inner {}
 
 exports = Inner;

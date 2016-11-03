@@ -1,0 +1,96 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nativejstypes.Main$2.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
+
+
+let Inner = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Another.Inner$$Proxy');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @implements {Inner}
+ */
+class $2 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!$2}
+   * @public
+   */
+  static $create__() {
+    $2.$clinit();
+    let $instance = new $2();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main$2__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main$2__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_nativejstypes_Main$2();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nativejstypes_Main$2() {}
+};
+
+$Util.$setClassMetadata(
+    $2, $Util.$makeClassName(
+            'com.google.j2cl.transpiler.readable.nativejstypes.Main$2'));
+
+
+
+/**
+ * Export class.
+ */
+exports = $2;
+//# sourceMappingURL=Main$2.js.map
