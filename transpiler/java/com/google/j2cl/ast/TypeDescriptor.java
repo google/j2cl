@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
@@ -460,9 +461,18 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return Joiner.on(".").skipNulls().join(packageName, getBinaryClassName());
   }
 
+  /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
     // TODO(goktug): fix the qualified name for primitives at construction phase.
-    return isPrimitive() ? "vmbootstrap.primitives.$" + getQualifiedName() : getQualifiedName();
+    if (isPrimitive()) {
+      return "vmbootstrap.primitives.$" + getSourceName();
+    }
+
+    if (isProxy()) {
+      return getSourceName() + "$$Proxy";
+    }
+
+    return getQualifiedName();
   }
 
   public String getImplModuleName() {
@@ -594,42 +604,16 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return packageName;
   }
 
-  /** Returns the globally unique qualified name by which this type should be imported. */
+  /** Returns the qualified name of the type. */
   public String getQualifiedName() {
-    // Externs have a simple and explicit name by which they are imported.
-    if (isExtern()) {
-      return getProxiedQualifiedName();
-    }
-    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+    String effectiveSimpleName = MoreObjects.firstNonNull(jsName, getSimpleName());
 
-    String effectiveSimpleName = null;
-    {
-      // A proxy type must be imported with a modified name, otherwise it might collide with the
-      // proxied type if it had the same name.
-      if (isProxy()) {
-        effectiveSimpleName = getSimpleName() + "$$Proxy";
-      }
-      if (effectiveSimpleName == null) {
-        effectiveSimpleName = jsName;
-      }
-      if (effectiveSimpleName == null) {
-        effectiveSimpleName = getSimpleName();
-      }
-    }
+    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? "" : jsNamespace;
 
-    String effectivePrefix = null;
-    {
-      // In non-native JsTypes the jsNamespace value customizes the namespace of the type being
-      // translated, but in native JsTypes the jsNamespace stores the namespace of the native JS
-      // class being proxied.
-      if (!isProxy()) {
-        effectivePrefix = jsNamespace;
-      }
-      if (JsUtils.isGlobal(jsNamespace)) {
-        effectivePrefix = "";
-      }
-      if (effectivePrefix == null && enclosingTypeDescriptor != null) {
-        if (enclosingTypeDescriptor.isNative) {
+    if (effectivePrefix == null) {
+      TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+      if (enclosingTypeDescriptor != null) {
+        if (!isNative && enclosingTypeDescriptor.isNative) {
           // When there is a type nested within a native type, it's important not to generate a name
           // like "Array.1" (like would happen if the outer native type was claiming to be native
           // Array and the nested type was anonymous) since this is almost guaranteed to collide
@@ -637,39 +621,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
           // native Array.
           effectivePrefix = enclosingTypeDescriptor.getSourceName();
         } else {
+          // Use the parent namespace.
           effectivePrefix = enclosingTypeDescriptor.getQualifiedName();
         }
-      }
-      if (effectivePrefix == null) {
+      } else {
+        // Use the package namespace.
         effectivePrefix = packageName;
       }
-    }
-
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
-  }
-
-  /**
-   * Returns the qualified name of the native JS class being proxied.
-   *
-   * <p>This name is needed when generating a proxy forwarding output file.
-   */
-  public String getProxiedQualifiedName() {
-    if (isJsFunction) {
-      return "Function";
-    }
-
-    String effectiveSimpleName = jsName == null ? getSimpleName() : jsName;
-    String effectivePrefix = jsNamespace;
-    if (JsUtils.isGlobal(jsNamespace)) {
-      effectivePrefix = "";
-    }
-    if (effectivePrefix == null && getEnclosingTypeDescriptor() != null) {
-      effectivePrefix = getEnclosingTypeDescriptor().getProxiedQualifiedName();
-    }
-    if (effectivePrefix == null) {
-      effectivePrefix = packageName;
     }
 
     return Joiner.on(".")
@@ -825,7 +783,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   private boolean isProxy() {
-    return isNative;
+    return isNative && !isExtern();
   }
 
   public boolean isNullable() {

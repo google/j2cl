@@ -130,7 +130,7 @@ public class JsInteropRestrictionsChecker {
 
     if (memberDescriptor
         .getJsNamespace()
-        .equals(memberDescriptor.getEnclosingClassTypeDescriptor().getProxiedQualifiedName())) {
+        .equals(memberDescriptor.getEnclosingClassTypeDescriptor().getQualifiedName())) {
       // Namespace set by the enclosing type has already been checked.
       return;
     }

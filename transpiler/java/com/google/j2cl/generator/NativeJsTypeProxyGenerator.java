@@ -53,7 +53,7 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     sourceBuilder.appendln("// Imports the real native type.");
     sourceBuilder.appendln(
-        "let _nativeType = goog.require('" + selfTypeDescriptor.getProxiedQualifiedName() + "');");
+        "let _nativeType = goog.require('" + selfTypeDescriptor.getQualifiedName() + "');");
     sourceBuilder.newLine();
     sourceBuilder.newLine();
 
