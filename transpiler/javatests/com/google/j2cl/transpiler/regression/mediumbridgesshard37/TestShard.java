@@ -11,7 +11,7 @@ public class TestShard extends TestCase {
     TestCase9882.test();
     TestCase10165.test();
     //TestCase10531.test();
-    //TestCase1054.test();
+    //TestCase1054.test();  // illegal JsInterop
     TestCase10741.test();
     TestCase11792.test();
     TestCase11826.test();
@@ -21,7 +21,7 @@ public class TestShard extends TestCase {
     //TestCase65.test();
     TestCase6607.test();
     //TestCase7510.test();
-    //TestCase9785.test();
+    //TestCase9785.test();  // illegal JsInterop
     //TestCase9797.test();
     //TestCase11069.test();
     //TestCase11369.test();
@@ -31,7 +31,7 @@ public class TestShard extends TestCase {
     TestCase7452.test();
     TestCase8442.test();
     TestCase9202.test();
-    //TestCase9245.test();
+    //TestCase9245.test();  // illegal JsInterop
     TestCase9338.test();
     TestCase10832.test();
     //TestCase1285.test();
@@ -65,7 +65,7 @@ public class TestShard extends TestCase {
     TestCase346.test();
     TestCase384.test();
     //TestCase395.test();
-    TestCase6194.test();
+    // TestCase6194.test();  // illegal JsInterop
     TestCase11523.test();
     TestCase1421.test();
     TestCase1624.test();
@@ -81,8 +81,8 @@ public class TestShard extends TestCase {
     TestCase3428.test();
     TestCase3744.test();
     TestCase4446.test();
-    TestCase4523.test();
-    TestCase4540.test();
+    // TestCase4523.test();  // illegal JsInterop
+    // TestCase4540.test();  // illegal JsInterop
     TestCase458.test();
     TestCase4722.test();
     //TestCase4790.test();
@@ -211,7 +211,7 @@ public class TestShard extends TestCase {
     //TestCase11189.test();
     //TestCase118.test();
     TestCase11820.test();
-    //TestCase12058.test();
+    //TestCase12058.test();  // illegal JsInterop
     //TestCase12192.test();
     TestCase12277.test();
     TestCase124.test();
@@ -243,7 +243,7 @@ public class TestShard extends TestCase {
     TestCase6731.test();
     TestCase6975.test();
     //TestCase7268.test();
-    TestCase7320.test();
+    // TestCase7320.test();  // illegal JsInterop
     TestCase7393.test();
     TestCase7472.test();
     TestCase7616.test();

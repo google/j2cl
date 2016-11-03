@@ -70,30 +70,35 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + "(exposed by 'EntryPoint.Buggy') "
   //            + "cannot both use the same JavaScript name 'doIt'.");
   //  }
-  //
-  //  public void testCollidingAccidentalOverrideAbstractMethodFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static interface Foo {",
-  //        "  void doIt(Foo foo);",
-  //        "}",
-  //        "@JsType",
-  //        "public static interface Bar {",
-  //        "  void doIt(Bar bar);",
-  //        "}",
-  //        "public static abstract class Baz implements Foo, Bar {",
-  //        "  public abstract void doIt(Foo foo);",
-  //        "  public abstract void doIt(Bar bar);",
-  //        "}",
-  //        "public static class Buggy {}  // Unrelated class");
-  //
-  //    assertBuggyFails(
-  //        "Line 14: 'void EntryPoint.Baz.doIt(EntryPoint.Bar)' and "
-  //            + "'void EntryPoint.Baz.doIt(EntryPoint.Foo)' cannot both use the same "
-  //            + "JavaScript name 'doIt'.");
-  //  }
-  //
+
+  public void testCollidingAccidentalOverrideAbstractMethodFails() throws Exception {
+    File sourcePackage = createPackage("collidingaccidentaloverrideabstractmethodfails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingaccidentaloverrideabstractmethodfails;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "interface Foo {",
+        "  void doIt(Foo foo);",
+        "}",
+        "@JsType",
+        "interface Bar {",
+        "  void doIt(Bar bar);",
+        "}",
+        "abstract class Baz implements Foo, Bar {",
+        "  public abstract void doIt(Foo foo);",
+        "  public abstract void doIt(Bar bar);",
+        "}",
+        "public class Buggy {}  // Unrelated class");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'void Baz.doIt(Bar)' and "
+            + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
+  }
+
   //  public void testCollidingAccidentalOverrideHalfAndHalfFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -135,37 +140,47 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + "name 'test.EntryPoint.Buggy.show' is already taken by "
   //            + "'int EntryPoint.Buggy.show'.");
   //  }
-  //
-  //  public void testJsPropertyNonGetterStyleSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public interface Buggy {",
-  //        "  @JsProperty(name = \"x\") int x();",
-  //        "  @JsProperty(name = \"x\") void x(int x);",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsPropertyGetterStyleSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public abstract static class Buggy {",
-  //        "  @JsProperty static native int getStaticX();",
-  //        "  @JsProperty static native void setStaticX(int x);",
-  //        "  @JsProperty abstract int getX();",
-  //        "  @JsProperty abstract void setX(int x);",
-  //        "  @JsProperty abstract boolean isY();",
-  //        "  @JsProperty abstract void setY(boolean y);",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testJsPropertyNonGetterStyleSucceeds() throws Exception {
+    File sourcePackage = createPackage("jspropertynongetterstylesucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jspropertynongetterstylesucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType",
+        "public interface Buggy {",
+        "  @JsProperty(name = \"x\") int x();",
+        "  @JsProperty(name = \"x\") void x(int x);",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testJsPropertyGetterStyleSucceeds() throws Exception {
+    File sourcePackage = createPackage("jspropertygetterstylesucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jspropertygetterstylesucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType",
+        "public abstract class Buggy {",
+        "  @JsProperty static native int getStaticX();",
+        "  @JsProperty static native void setStaticX(int x);",
+        "  @JsProperty abstract int getX();",
+        "  @JsProperty abstract void setX(int x);",
+        "  @JsProperty abstract boolean isY();",
+        "  @JsProperty abstract void setY(boolean y);",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testJsPropertyIncorrectGetterStyleFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetImport("jsinterop.annotations.JsProperty");
@@ -218,85 +233,109 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 9: JsProperty 'void EntryPoint.Buggy.x(int)' should either follow Java Bean "
   //        + "naming conventions or provide a name.");
   //  }
-  //
-  //  public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static interface Buggy {",
-  //        "  @JsProperty",
-  //        "  boolean isX();",
-  //        "  @JsProperty",
-  //        "  boolean getX();",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 10: 'boolean EntryPoint.Buggy.getX()' and 'boolean EntryPoint.Buggy.isX()' "
-  //            + "cannot both use the same JavaScript name 'x'.");
-  //  }
-  //
-  //  public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static interface Buggy {",
-  //        "  @JsProperty",
-  //        "  void setX(boolean x);",
-  //        "  @JsProperty",
-  //        "  void setX(int x);",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 10: 'void EntryPoint.Buggy.setX(int)' and 'void EntryPoint.Buggy.setX(boolean)' "
-  //            + "cannot both use the same JavaScript name 'x'.");
-  //  }
-  //
-  //  public void testCollidingJsMethodAndJsPropertyGetterFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "public static interface IBuggy {",
-  //        "  @JsMethod",
-  //        "  boolean x(boolean foo);",
-  //        "  @JsProperty",
-  //        "  int getX();",
-  //        "}",
-  //        "public static class Buggy implements IBuggy {",
-  //        "  public boolean x(boolean foo) {return false;}",
-  //        "  public int getX() {return 0;}",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 9: 'int EntryPoint.IBuggy.getX()' and 'boolean EntryPoint.IBuggy.x(boolean)' "
-  //            + "cannot both use the same JavaScript name 'x'.",
-  //        "Line 13: 'int EntryPoint.Buggy.getX()' and 'boolean EntryPoint.Buggy.x(boolean)' "
-  //            + "cannot both use the same JavaScript name 'x'.");
-  //  }
-  //
-  //  public void testCollidingJsMethodAndJsPropertySetterFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "public static interface IBuggy {",
-  //        "  @JsMethod",
-  //        "  boolean x(boolean foo);",
-  //        "  @JsProperty",
-  //        "  void setX(int a);",
-  //        "}",
-  //        "public static class Buggy implements IBuggy {",
-  //        "  public boolean x(boolean foo) {return false;}",
-  //        "  public void setX(int a) {}",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 9: 'void EntryPoint.IBuggy.setX(int)' and 'boolean EntryPoint.IBuggy.x(boolean)' "
-  //            + "cannot both use the same JavaScript name 'x'.",
-  //        "Line 13: 'void EntryPoint.Buggy.setX(int)' and 'boolean EntryPoint.Buggy.x(boolean)' "
-  //            + "cannot both use the same JavaScript name 'x'.");
-  //  }
-  //
+
+  public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
+    File sourcePackage = createPackage("collidingjspropertiestwogettersfails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingjspropertiestwogettersfails;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType",
+        "public interface Buggy {",
+        "  @JsProperty",
+        "  boolean isX();",
+        "  @JsProperty",
+        "  boolean getX();",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
+            + "cannot both use the same JavaScript name 'x'.");
+  }
+
+  public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
+    File sourcePackage = createPackage("collidingjspropertiestwosettersfails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingjspropertiestwosettersfails;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType",
+        "public interface Buggy {",
+        "  @JsProperty",
+        "  void setX(boolean x);",
+        "  @JsProperty",
+        "  void setX(int x);",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'void Buggy.setX(int)' and "
+            + "'void Buggy.setX(boolean)' cannot both use the same JavaScript name 'x'.");
+  }
+
+  public void testCollidingJsMethodAndJsPropertyGetterFails() throws Exception {
+    File sourcePackage = createPackage("collidingjsmethodandjspropertygetterfails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingjsmethodandjspropertygetterfails;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsProperty;",
+        "interface IBuggy {",
+        "  @JsMethod",
+        "  boolean x(boolean foo);",
+        "  @JsProperty",
+        "  int getX();",
+        "}",
+        "public class Buggy implements IBuggy {",
+        "  public boolean x(boolean foo) {return false;}",
+        "  public int getX() {return 0;}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'int IBuggy.getX()' and 'boolean IBuggy.x(boolean)' "
+            + "cannot both use the same JavaScript name 'x'.",
+        "JsInterop error: 'int Buggy.getX()' and 'boolean Buggy.x(boolean)' "
+            + "cannot both use the same JavaScript name 'x'.");
+  }
+
+  public void testCollidingJsMethodAndJsPropertySetterFails() throws Exception {
+    File sourcePackage = createPackage("collidingjsmethodandjspropertysetterfails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingjsmethodandjspropertysetterfails;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsProperty;",
+        "interface IBuggy {",
+        "  @JsMethod",
+        "  boolean x(boolean foo);",
+        "  @JsProperty",
+        "  void setX(int a);",
+        "}",
+        "public class Buggy implements IBuggy {",
+        "  public boolean x(boolean foo) {return false;}",
+        "  public void setX(int a) {}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'void IBuggy.setX(int)' and 'boolean IBuggy.x(boolean)' "
+            + "cannot both use the same JavaScript name 'x'.",
+        "JsInterop error: 'void Buggy.setX(int)' and 'boolean Buggy.x(boolean)' "
+            + "cannot both use the same JavaScript name 'x'.");
+  }
+
   //  // TODO(rluble): enable when static property definitions are implemented.
   //  public void __disabled__testCollidingPropertyAccessorExportsFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsProperty");
@@ -364,35 +403,47 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + "'test.EntryPoint.Buggy.show' is already taken by "
   //            + "'int EntryPoint.Buggy.show'.");
   //  }
-  //
-  //  public void testCollidingMethodToFieldJsTypeFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy {",
-  //        "  public void show() {}",
-  //        "  public final int show = 0;",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: 'void EntryPoint.Buggy.show()' and 'int EntryPoint.Buggy.show' cannot both "
-  //            + "use the same JavaScript name 'show'.");
-  //  }
-  //
-  //  public void testCollidingMethodToMethodJsTypeFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy {",
-  //        "  public void show(int x) {}",
-  //        "  public void show() {}",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 7: 'void EntryPoint.Buggy.show()' and 'void EntryPoint.Buggy.show(int)' cannot "
-  //            + "both use the same JavaScript name 'show'.");
-  //  }
-  //
+
+  public void testCollidingMethodToFieldJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("collidingmethodtofieldjstypefails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingmethodtofieldjstypefails;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  public void show() {}",
+        "  public final int show = 0;",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'int Buggy.show' and 'void Buggy.show()' "
+            + "cannot both use the same JavaScript name 'show'.");
+  }
+
+  public void testCollidingMethodToMethodJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("collidingmethodtomethodjstypefails");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingmethodtomethodjstypefails;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  public void show(int x) {}",
+        "  public void show() {}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop error: 'void Buggy.show()' and 'void Buggy.show(int)' "
+            + "cannot both use the same JavaScript name 'show'.");
+  }
+
   //  public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -578,69 +629,89 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 20: 'void EntryPoint.Buggy2.show(boolean)' and 'void EntryPoint.Buggy.show()' "
   //            + "cannot both use the same JavaScript name 'show'.");
   //  }
-  //
-  //  public void testNonCollidingSyntheticBridgeMethodSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "public static interface Comparable<T> {",
-  //        "  int compareTo(T other);",
-  //        "}",
-  //        "@JsType",
-  //        "public static class Enum<E extends Enum<E>> implements Comparable<E> {",
-  //        "  public int compareTo(E other) {return 0;}",
-  //        "}",
-  //        "public static class Buggy {}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static interface Comparable<T> {",
-  //        "  int compareTo(T other);",
-  //        "}",
-  //        "@JsType",
-  //        "public static class Enum<E extends Enum<E>> implements Comparable<E> {",
-  //        "  public int compareTo(E other) {return 0;}",
-  //        "}",
-  //        "public static class Buggy {}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testSpecializeReturnTypeInImplementorSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "interface I {",
-  //        "  I m();",
-  //        "}",
-  //        "@JsType",
-  //        "public static class Buggy implements I {",
-  //        "  public Buggy m() { return null; } ",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testSpecializeReturnTypeInSubclassSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class S {",
-  //        "  public S m() { return null; }",
-  //        "}",
-  //        "@JsType",
-  //        "public static class Buggy extends S {",
-  //        "  public Buggy m() { return null; } ",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testNonCollidingSyntheticBridgeMethodSucceeds() throws Exception {
+    File sourcePackage = createPackage("noncollidingsyntheticbridgemethodsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package noncollidingsyntheticbridgemethodsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "interface Comparable<T> {",
+        "  int compareTo(T other);",
+        "}",
+        "@JsType",
+        "class Enum<E extends Enum<E>> implements Comparable<E> {",
+        "  public int compareTo(E other) {return 0;}",
+        "}",
+        "public class Buggy {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
+    File sourcePackage = createPackage("collidingsyntheticbridgemethodsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package collidingsyntheticbridgemethodsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "interface Comparable<T> {",
+        "  int compareTo(T other);",
+        "}",
+        "@JsType",
+        "class Enum<E extends Enum<E>> implements Comparable<E> {",
+        "  public int compareTo(E other) {return 0;}",
+        "}",
+        "public class Buggy {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testSpecializeReturnTypeInImplementorSucceeds() throws Exception {
+    File sourcePackage = createPackage("specializereturntypeinimplementorsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package specializereturntypeinimplementorsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "interface I {",
+        "  I m();",
+        "}",
+        "@JsType",
+        "class Buggy implements I {",
+        "  public Buggy m() { return null; } ",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testSpecializeReturnTypeInSubclassSucceeds() throws Exception {
+    File sourcePackage = createPackage("specializereturntypeinsubclasssucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package specializereturntypeinsubclasssucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "class S {",
+        "  public S m() { return null; }",
+        "}",
+        "@JsType",
+        "public class Buggy extends S {",
+        "  public Buggy m() { return null; } ",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -698,7 +769,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //    addSnippetClassDecl(
   //        "@JsType",
   //        "public interface ParentBuggy {",
-  //        "  void foo();;",
+  //        "  void foo();",
   //        "}",
   //        "public interface Buggy extends ParentBuggy {",
   //        "  @JsMethod(name = \"bar\") void foo();",
@@ -758,26 +829,31 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 10: 'boolean EntryPoint.Buggy.getFoo()' and 'boolean EntryPoint.ParentBuggy"
   //            + ".isFoo()' cannot both use the same JavaScript name 'foo'.");
   //  }
-  //
-  //  public void testConsistentPropertyTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static interface IBuggy {",
-  //        "  @JsProperty",
-  //        "  public int getFoo();",
-  //        "  @JsProperty",
-  //        "  public void setFoo(int value);",
-  //        "}",
-  //        "public static class Buggy implements IBuggy {",
-  //        "  public int getFoo() {return 0;}",
-  //        "  public void setFoo(int value) {}",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testConsistentPropertyTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("consistentpropertytypesucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package consistentpropertytypesucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType",
+        "interface IBuggy {",
+        "  @JsProperty",
+        "  public int getFoo();",
+        "  @JsProperty",
+        "  public void setFoo(int value);",
+        "}",
+        "public class Buggy implements IBuggy {",
+        "  public int getFoo() {return 0;}",
+        "  public void setFoo(int value) {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testInconsistentGetSetPropertyTypeFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetImport("jsinterop.annotations.JsProperty");
@@ -944,36 +1020,46 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 5: Cannot access vararg parameter 'z' from JSNI in JsMethod "
   //            + "'void EntryPoint.Buggy.m(int, int[])'. Use 'arguments' instead.");
   //  }
-  //
-  //  public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy {",
-  //        "  private Buggy() {}",
-  //        "  private Buggy(int a) {}",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testMultiplePublicConstructorsAllDelegatesToJsConstructorSucceeds()
-  //        throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsIgnore");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy {",
-  //        "  public Buggy() {}",
-  //        "  @JsIgnore",
-  //        "  public Buggy(int a) {",
-  //        "    this();",
-  //        "  }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
+    File sourcePackage = createPackage("multipleprivateconstructorsexportsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package multipleprivateconstructorsexportsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  private Buggy() {}",
+        "  private Buggy(int a) {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testMultiplePublicConstructorsAllDelegatesToJsConstructorSucceeds() throws Exception {
+    File sourcePackage =
+        createPackage("multiplepublicconstructorsalldelegatestojsconstructorsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package multiplepublicconstructorsalldelegatestojsconstructorsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsIgnore;",
+        "@JsType",
+        "public class Buggy {",
+        "  public Buggy() {}",
+        "  @JsIgnore",
+        "  public Buggy(int a) {",
+        "    this();",
+        "  }",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails()
   //      throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
@@ -1008,24 +1094,29 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + "global name 'test.EntryPoint.Buggy' is already taken by "
   //            + "'EntryPoint.Buggy.EntryPoint$Buggy()'.");
   //  }
-  //
-  //  public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "public interface Foo {",
-  //        "  void doIt(Object foo);",
-  //        "}",
-  //        "public static class ParentParent {",
-  //        "  public void doIt(String x) {}",
-  //        "}",
-  //        "@JsType",
-  //        "public static class Parent extends ParentParent {",
-  //        "  public void doIt(Object x) {}",
-  //        "}",
-  //        "public static class Buggy extends Parent implements Foo {}");
-  //
-  //    assertBuggySucceeds();
-  //  }
+
+  public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
+    File sourcePackage = createPackage("noncollidingaccidentaloverridesucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package noncollidingaccidentaloverridesucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "interface Foo {",
+        "  void doIt(Object foo);",
+        "}",
+        "class ParentParent {",
+        "  public void doIt(String x) {}",
+        "}",
+        "@JsType",
+        "class Parent extends ParentParent {",
+        "  public void doIt(Object x) {}",
+        "}",
+        "public class Buggy extends Parent implements Foo {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
 
   public void testJsNameInvalidNamesFails() throws Exception {
     File sourcePackage = createPackage("jsnameinvalidnames");
@@ -2170,21 +2261,25 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileSucceeds(sourcePackage);
   }
 
-  //  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@SuppressWarnings(\"unusable-by-js\")",
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "  public native void m(Object o);",
-  //        "  public native void m(Object[] o);",
-  //        "}",
-  //        "@JsType public static class Buggy extends Super {",
-  //        "  public void n(Object o) { }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() throws Exception {
+    File sourcePackage = createPackage("nonjssypeextendingnativejstypewithinstancemethodsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nonjssypeextendingnativejstypewithinstancemethodsucceeds;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative=true) class Super {",
+        "  public native void m(Object o);",
+        "  public native void m(Object[] o);",
+        "}",
+        "@JsType public class Buggy extends Super {",
+        "  public void n(Object o) { }",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails() {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -2200,18 +2295,23 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 9: 'void EntryPoint.Buggy.m(Object)' and 'void EntryPoint.Super.m(int)' "
   //            + "cannot both use the same JavaScript name 'm'.");
   //  }
-  //
-  //  public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetClassDecl(
-  //        "public static class Buggy {",
-  //        "  @JsMethod public static native void m(Object o);",
-  //        "  @JsMethod public static native void m(int o);",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() throws Exception {
+    File sourcePackage = createPackage("nonjstypewithnativestaticmethodoverloadssucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nonjstypewithnativestaticmethodoverloadssucceeds;",
+        "import jsinterop.annotations.JsMethod;",
+        "public class Buggy {",
+        "  @JsMethod public static native void m(Object o);",
+        "  @JsMethod public static native void m(int o);",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsMethod");
   //    addSnippetClassDecl(
@@ -2451,7 +2551,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //      code.append("package test;\n");
   //      code.append("import jsinterop.annotations.JsFunction;\n");
   //      code.append("@JsFunction public interface MyJsFunctionInterface {\n");
-  //      code.append("int foo(int x);\n");
+  //      code.append("  int foo(int x);\n");
   //      code.append("}\n");
   //      return code;
   //    }
@@ -2469,11 +2569,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "import jsinterop.annotations.JsOptional;",
         "public class Buggy<T> {",
         "  @JsConstructor public Buggy(@JsOptional Object a) {}",
-        "  @JsMethod public void fun(int a, Object b, @JsOptional String c) {}",
+        "  @JsMethod public void foo(int a, Object b, @JsOptional String c) {}",
         "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
         "  @JsMethod public void baz(@JsOptional String a, @JsOptional Object b) {}",
-        "  @JsMethod public void fun(@JsOptional String c, Object... os) {}",
-        "  @JsMethod public void bar(int a, @JsOptional T b, String... c) {}",
+        "  @JsMethod public void qux(@JsOptional String c, Object... os) {}",
+        "  @JsMethod public void corge(int a, @JsOptional T b, String... c) {}",
         "}",
         "class SubBuggy extends Buggy<String> {",
         "  public SubBuggy() { super(null); } ",

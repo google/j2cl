@@ -16,7 +16,7 @@ public class TestShard extends TestCase {
     //TestCase1238.test();
     TestCase1364.test();
     TestCase2150.test();
-    TestCase2364.test();
+    // TestCase2364.test();  // illegal JsInterop
     TestCase2490.test();
     TestCase4246.test();
     TestCase5709.test();
@@ -82,7 +82,7 @@ public class TestShard extends TestCase {
     TestCase104.test();
     TestCase10730.test();
     TestCase10764.test();
-    TestCase11385.test();
+    // TestCase11385.test();  // illegal JsInterop
     TestCase11560.test();
     //TestCase12382.test();
     TestCase1884.test();
@@ -165,7 +165,7 @@ public class TestShard extends TestCase {
     //TestCase7638.test();
     TestCase820.test();
     TestCase8627.test();
-    TestCase907.test();
+    // TestCase907.test();  // illegal JsInterop
     TestCase9241.test();
     TestCase10103.test();
     TestCase10803.test();
@@ -177,7 +177,7 @@ public class TestShard extends TestCase {
     TestCase2892.test();
     TestCase2951.test();
     TestCase3593.test();
-    TestCase4244.test();
+    // TestCase4244.test();  // illegal JsInterop
     TestCase4614.test();
     //TestCase5223.test();
     TestCase5232.test();
@@ -185,17 +185,17 @@ public class TestShard extends TestCase {
     TestCase5841.test();
     //TestCase5891.test();
     TestCase6340.test();
-    TestCase7051.test();
+    // TestCase7051.test();  // illegal JsInterop
     TestCase7066.test();
     TestCase7083.test();
-    TestCase7224.test();
+    // TestCase7224.test();  // illegal JsInterop
     TestCase8277.test();
     TestCase8458.test();
     TestCase8869.test();
     //TestCase9350.test();
-    TestCase10582.test();
+    // TestCase10582.test();  // illegal JsInterop
     TestCase10761.test();
-    TestCase11000.test();
+    // TestCase11000.test();  // illegal JsInterop
     TestCase11077.test();
     TestCase11309.test();
     TestCase11313.test();
@@ -246,9 +246,9 @@ public class TestShard extends TestCase {
     TestCase1194.test();
     TestCase12185.test();
     TestCase2165.test();
-    TestCase3030.test();
+    // TestCase3030.test();  // illegal JsInterop
     TestCase3833.test();
-    TestCase4075.test();
+    // TestCase4075.test();  // illegal JsInterop
     TestCase4091.test();
     TestCase4442.test();
     TestCase5017.test();

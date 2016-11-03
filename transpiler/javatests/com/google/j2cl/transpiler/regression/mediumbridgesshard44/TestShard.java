@@ -236,7 +236,7 @@ public class TestShard extends TestCase {
     //TestCase9053.test();
     //TestCase9123.test();
     //TestCase9444.test();
-    //TestCase9515.test();
+    //TestCase9515.test();  // illegal JsInterop
     //TestCase9532.test();
     //TestCase9590.test();
     //TestCase973.test();

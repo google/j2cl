@@ -28,7 +28,7 @@ public class TestShard extends TestCase {
     //TestCase11737.test();
     //TestCase11948.test();
     //TestCase11728.test();
-    //TestCase2091.test();
+    //TestCase2091.test();  // illegal JsInterop
     //TestCase599.test();
     //TestCase1107.test();
     //TestCase552.test();
@@ -102,7 +102,7 @@ public class TestShard extends TestCase {
     //TestCase2327.test();
     //TestCase3269.test();
     //TestCase5252.test();
-    //TestCase5926.test();
+    //TestCase5926.test();  // illegal JsInterop
     //TestCase8771.test();
     //TestCase9060.test();
     //TestCase9301.test();

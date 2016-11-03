@@ -100,12 +100,12 @@ public class TestShard extends TestCase {
     TestCase11232.test();
     TestCase11255.test();
     //TestCase1127.test();
-    TestCase1185.test();
+    // TestCase1185.test();  // illegal JsInterop
     //TestCase11998.test();
     TestCase12491.test();
     TestCase1317.test();
     TestCase1474.test();
-    TestCase1544.test();
+    // TestCase1544.test();  // illegal JsInterop
     TestCase1945.test();
     TestCase1975.test();
     TestCase2045.test();
@@ -138,7 +138,7 @@ public class TestShard extends TestCase {
     TestCase8333.test();
     TestCase8517.test();
     TestCase8527.test();
-    //TestCase8541.test();
+    //TestCase8541.test();  // illegal JsInterop
     //TestCase9141.test();
     TestCase9153.test();
     //TestCase9287.test();
@@ -182,7 +182,7 @@ public class TestShard extends TestCase {
     TestCase8948.test();
     TestCase10660.test();
     TestCase1092.test();
-    //TestCase1989.test();
+    //TestCase1989.test();  // illegal JsInterop
     TestCase242.test();
     TestCase2572.test();
     TestCase4308.test();
@@ -194,7 +194,7 @@ public class TestShard extends TestCase {
     TestCase8612.test();
     //TestCase8696.test();
     TestCase11601.test();
-    //TestCase11960.test();
+    //TestCase11960.test();  // illegal JsInterop
     TestCase1805.test();
     TestCase2321.test();
     TestCase2891.test();

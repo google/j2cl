@@ -22,11 +22,13 @@ import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.errors.Problems;
 import com.google.j2cl.errors.Problems.Messages;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-/**
- * Checks and throws errors for invalid JsInterop constructs.
- */
+/** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
   private final Problems problems;
 
@@ -76,7 +78,71 @@ public class JsInteropRestrictionsChecker {
       }
       checkMethod(method);
     }
+    checkTypeMemberCollisions(type);
     // TODO: do other checks.
+  }
+
+  private void checkTypeMemberCollisions(Type type) {
+    // Native JS members are allowed to collide.
+    if (type.getDescriptor().isNative()) {
+      return;
+    }
+
+    Map<String, MemberDescriptor> memberDescriptorsByKey = new HashMap<>();
+    List<Member> members = type.getMembers();
+    for (Member member : members) {
+      if (!(member instanceof Field) && !(member instanceof Method)) {
+        continue;
+      }
+      MemberDescriptor memberDescriptor =
+          member instanceof Field
+              ? ((Field) member).getDescriptor()
+              : ((Method) member).getDescriptor();
+
+      // TODO(b/27597597): analyze static exports as well.
+      if (memberDescriptor.isStatic()) {
+        continue;
+      }
+      // Constructors are subject to a separate check and should not be duplicatively examined here.
+      if (memberDescriptor instanceof MethodDescriptor
+          && ((MethodDescriptor) memberDescriptor).isConstructor()) {
+        continue;
+      }
+      // Only look at unobfuscated JsInterop things.
+      if (memberDescriptor.getJsInfo().equals(JsInfo.NONE)
+          || memberDescriptor.getJsInfo().getJsMemberType().equals(JsMemberType.JS_FUNCTION)
+          || memberDescriptor.getJsInfo().isJsOverlay()) {
+        continue;
+      }
+      // Native JS members are allowed to collide.
+      if (memberDescriptor.isNative()) {
+        continue;
+      }
+
+      // If a collision has occurred examine it more closely.
+      if (memberDescriptorsByKey.containsKey(getMemberKey(memberDescriptor))) {
+        MemberDescriptor collidingMemberDescriptor =
+            memberDescriptorsByKey.get(getMemberKey(memberDescriptor));
+        Set<JsMemberType> jsMemberTypes = EnumSet.noneOf(JsMemberType.class);
+        jsMemberTypes.add(collidingMemberDescriptor.getJsInfo().getJsMemberType());
+        jsMemberTypes.add(memberDescriptor.getJsInfo().getJsMemberType());
+
+        // A getter/setter pair can both use the same name.
+        if (jsMemberTypes.contains(JsMemberType.GETTER)
+            && jsMemberTypes.contains(JsMemberType.SETTER)) {
+          continue;
+        }
+
+        problems.error(
+            Messages.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
+            getReadableDescription(memberDescriptor),
+            getReadableDescription(collidingMemberDescriptor),
+            getMemberKey(memberDescriptor));
+      }
+
+      memberDescriptorsByKey.put(getMemberKey(memberDescriptor), memberDescriptor);
+    }
   }
 
   private boolean checkJsType(Type type) {
@@ -473,6 +539,10 @@ public class JsInteropRestrictionsChecker {
       }
     }
     return true;
+  }
+
+  private String getMemberKey(MemberDescriptor memberDescriptor) {
+    return (memberDescriptor.isStatic() ? "static " : "") + memberDescriptor.getJsName();
   }
 
   private String getReadableDescription(HasJsNameInfo hasJsNameInfo) {

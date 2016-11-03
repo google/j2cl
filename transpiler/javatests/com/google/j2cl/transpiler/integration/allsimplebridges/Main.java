@@ -56,33 +56,33 @@ public class Main {
     }
     Tester119.test();
     Tester120.test();
-    Tester129.test();
+    // Tester129.test();  // illegal JsInterop
     Tester130.test();
-    Tester131.test();
+    // Tester131.test();  // illegal JsInterop
     Tester132.test();
     Tester133.test();
     Tester134.test();
     Tester135.test();
     Tester136.test();
-    Tester137.test();
+    // Tester137.test();  // illegal JsInterop
     Tester138.test();
-    Tester139.test();
+    // Tester139.test();  // illegal JsInterop
     Tester140.test();
     Tester141.test();
     Tester142.test();
     Tester143.test();
     Tester144.test();
-    Tester145.test();
+    // Tester145.test();  // illegal JsInterop
     Tester146.test();
-    Tester147.test();
+    // Tester147.test();  // illegal JsInterop
     Tester148.test();
     Tester149.test();
     Tester150.test();
     Tester151.test();
     Tester152.test();
-    Tester153.test();
+    // Tester153.test();  // illegal JsInterop
     Tester154.test();
-    Tester155.test();
+    // Tester155.test();  // illegal JsInterop
     Tester156.test();
     Tester157.test();
     Tester158.test();
