@@ -13,11 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.errors;
+package com.google.j2cl.problems;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.SourcePosition;
 import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,39 +31,41 @@ import java.util.stream.Collectors;
 /** An error logger class that records the number of errors and provides error print methods. */
 public class Problems {
   /** Represents compiler problem categories. */
-  public enum Messages {
-    ERR_INVALID_FLAG("Invalid flag"),
-    ERR_FLAG_FILE("Cannot load flag file"),
-    ERR_FILE_NOT_FOUND("File not found"),
-    ERR_INVALID_SOURCE_FILE("Invalid source file"),
-    ERR_INVALID_SOURCE_VERSION("Invalid source version"),
-    ERR_UNSUPPORTED_ENCODING("Unsupported encoding"),
-    ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output, please see Velocity runtime log"),
-    ERR_CANNOT_FIND_UNIT("Cannot find CompilationUnit for type "),
-    ERR_OUTPUT_LOCATION("-output location must be a directory or .zip file"),
-    ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip"),
-    ERR_CANNOT_OPEN_ZIP("Cannot open zip"),
-    ERR_CANNOT_CLOSE_ZIP("Cannot close zip"),
-    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("Cannot find matching native file"),
-    ERR_NATIVE_UNUSED_NATIVE_SOURCE("Native JavaScript file not used"),
-    ERR_CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory"),
-    ERR_CANNOT_OPEN_FILE("Cannot open file"),
-    ERR_JSINTEROP_RESTRICTIONS_ERROR("JsInterop error"),
-    ERR_AMBIGUOUS_NATIVE_FILE_MATCH("Native JavaScript file matched multiple srcs"),
-    ERR_PACKAGE_INFO_PARSE("Resource was found but it failed to parse"),
-    ERR_CLASS_PATH_URL("Class path entry is not a valid url"),
-    ERR_ERROR("Error"),
+  public enum Message {
+    ERR_FLAG_FILE("Cannot load flag file: %s.", 1),
+    ERR_FILE_NOT_FOUND("File '%s' not found.", 1),
+    ERR_INVALID_SOURCE_FILE("Invalid source file '%s'.", 1),
+    ERR_INVALID_SOURCE_VERSION("Invalid source version '%s'.", 1),
+    ERR_UNSUPPORTED_ENCODING("Unsupported encoding '%s'.", 1),
+    ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output '%s': %s.", 2),
+    ERR_OUTPUT_LOCATION("-output location '%s' must be a directory or .zip file.", 1),
+    ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
+    ERR_CANNOT_OPEN_ZIP("Cannot open zip '%s': %s.", 2),
+    ERR_CANNOT_CLOSE_ZIP("Cannot close zip: %s.", 1),
+    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("Cannot find matching native file '%s'.", 1),
+    ERR_NATIVE_UNUSED_NATIVE_SOURCE("Native JavaScript file '%s' not used.", 1),
+    ERR_CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory: %s.", 1),
+    ERR_CANNOT_OPEN_FILE("Cannot open file '%s': %s.", 2),
+    ERR_PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
+    ERR_CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
     ;
 
     // used for customized message.
     private final String message;
+    // number of arguments the message takes.
+    private final int numberOfArguments;
 
-    Messages(String message) {
+    Message(String message, int numberOfArguments) {
       this.message = message;
+      this.numberOfArguments = numberOfArguments;
     }
 
     public String getMessage() {
       return message;
+    }
+
+    public int getNumberOfArguments() {
+      return numberOfArguments;
     }
   }
 
@@ -78,15 +83,44 @@ public class Problems {
     return problemsBySeverity.size();
   }
 
-  public void error(Messages messages) {
+  public void error(Message message) {
     abortWhenPossible();
-    problemsBySeverity.put(Severity.ERROR, messages.getMessage());
+    problemsBySeverity.put(Severity.ERROR, message.getMessage());
   }
 
-  public void error(Messages messages, String detailMessage, Object... args) {
+  public void error(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    error(
+        sourcePosition.getStartFilePosition().getLine(),
+        sourcePosition.getFilePath(),
+        detailMessage,
+        args);
+  }
+
+  public void error(int lineNumber, String filePath, String detailMessage, Object... args) {
+    abortWhenPossible();
+    String message = args.length == 0 ? detailMessage : J2clUtils.format(detailMessage, args);
+    problemsBySeverity.put(
+        Severity.ERROR,
+        "Error: "
+            +
+            // Only report the file name portion to be consistent with JDT reported problems.
+            filePath.substring(filePath.lastIndexOf('/') + 1)
+            + ":"
+            + lineNumber
+            + ": "
+            + message);
+  }
+
+  public void error(String detailMessage, Object... args) {
+    abortWhenPossible();
+    problemsBySeverity.put(Severity.ERROR, "Error: " + J2clUtils.format(detailMessage, args));
+  }
+
+  public void error(Message message, Object... args) {
+    checkArgument(message.getNumberOfArguments() == args.length);
     abortWhenPossible();
     problemsBySeverity.put(
-        Severity.ERROR, messages.getMessage() + ": " + J2clUtils.format(detailMessage, args));
+        Severity.ERROR, "Error: " + J2clUtils.format(message.getMessage(), args));
   }
 
   public void warning(String detailMessage, Object... args) {
@@ -157,7 +191,6 @@ public class Problems {
         .map(Map.Entry::getValue)
         .collect(Collectors.toList());
   }
-
 
   /**
    * J2clExit is thrown to signal that a System.exit should be performed at a higher level.

@@ -41,7 +41,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
-        "File not found: " + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
+        "File '" + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip' not found");
   }
 
   /**
@@ -65,10 +65,11 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
-        "Cannot find matching native file: "
+        "Cannot find matching native file '"
             + PACKAGE_NAME
             + "NativeClass"
-            + NativeJavaScriptFile.NATIVE_EXTENSION);
+            + NativeJavaScriptFile.NATIVE_EXTENSION
+            + "'.");
   }
 
   /**
@@ -94,10 +95,11 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "too_many_native_sources.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
-        "Native JavaScript file not used: "
+        "Native JavaScript file '"
             + NATIVE_SOURCES_ERROR_PATH
             + "too_many_native_sources.zip!/"
             + PACKAGE_NAME
-            + "ExtraClass");
+            + "ExtraClass"
+            + "' not used.");
   }
 }

@@ -19,13 +19,13 @@ import com.google.common.base.Joiner;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -145,7 +145,7 @@ public class OutputGeneratorStage {
         // method, reports an error.
         if (matchingNativeFile == null && type.containsNonJsNativeMethods()) {
           problems.error(
-              Messages.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
+              Message.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
               typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
           return;
         }
@@ -205,7 +205,7 @@ public class OutputGeneratorStage {
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
         problems.error(
-            Messages.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
+            Message.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
             fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
       }
     }
@@ -267,7 +267,7 @@ public class OutputGeneratorStage {
     try {
       com.google.common.io.Files.write(depinfoContent, new File(depinfoPath), charset);
     } catch (IOException e) {
-      problems.error(Messages.ERR_CANNOT_GENERATE_OUTPUT, depinfoPath);
+      problems.error(Message.ERR_CANNOT_GENERATE_OUTPUT, depinfoPath, e.getMessage());
     }
   }
 

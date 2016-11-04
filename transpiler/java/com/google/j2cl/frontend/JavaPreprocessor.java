@@ -20,8 +20,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -65,7 +65,7 @@ public class JavaPreprocessor {
     try {
       temporaryDirectory = Files.createTempDirectory("j2cl").toString();
     } catch (IOException e) {
-      problems.error(Messages.ERR_CANNOT_CREATE_TEMP_DIR);
+      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return null;
     }
 
@@ -87,7 +87,7 @@ public class JavaPreprocessor {
           tempToOriginalFileMap.put(filePath, filePath);
         }
       } catch (IOException e) {
-        problems.error(Messages.ERR_CANNOT_OPEN_FILE, filePath);
+        problems.error(Message.ERR_CANNOT_OPEN_FILE, filePath, e.getMessage());
         return null;
       }
     }

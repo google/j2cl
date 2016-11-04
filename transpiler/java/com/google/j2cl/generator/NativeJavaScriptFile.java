@@ -2,8 +2,8 @@ package com.google.j2cl.generator;
 
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -81,7 +81,7 @@ public class NativeJavaScriptFile {
           loadedFilesByPath.put(file.getPathWithoutExtension(), file);
         }
       } catch (IOException e) {
-        problems.error(Messages.ERR_CANNOT_OPEN_ZIP, zipPath);
+        problems.error(Message.ERR_CANNOT_OPEN_ZIP, zipPath);
       }
     }
     return loadedFilesByPath;

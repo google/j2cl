@@ -5,9 +5,8 @@ import com.google.debugging.sourcemap.SourceMapFormat;
 import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.problems.Problems;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
@@ -72,9 +71,7 @@ public class SourceMapGeneratorStage {
         GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
       }
     } catch (IOException e) {
-      problems.error(
-          Messages.ERR_ERROR,
-          "Could not generate source maps for: " + javaSourceFile + ":" + e.getMessage());
+      problems.error("Could not generate source maps for %s: %s", javaSourceFile, e.getMessage());
     }
   }
 
@@ -110,7 +107,7 @@ public class SourceMapGeneratorStage {
    * @param j2clFilePosition
    * @return JsCompiler sourcemap File Position
    */
-  private FilePosition toFilePosition(com.google.j2cl.ast.sourcemap.FilePosition j2clFilePosition) {
+  private FilePosition toFilePosition(com.google.j2cl.common.FilePosition j2clFilePosition) {
     return new FilePosition(j2clFilePosition.getLine(), j2clFilePosition.getColumn());
   }
 }

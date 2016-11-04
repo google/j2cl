@@ -17,11 +17,17 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.HasMetadata;
+import com.google.j2cl.ast.common.HasReadableDescription;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.SourcePosition;
 
 /** Abstract base class for class members. */
 @Visitable
 @Context
-public abstract class Member extends Node {
+public abstract class Member extends Node implements HasSourcePosition, HasReadableDescription {
+  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+
   public abstract boolean isStatic();
 
   public boolean isConstructor() {
@@ -38,6 +44,36 @@ public abstract class Member extends Node {
 
   public boolean isInitializerBlock() {
     return false;
+  }
+
+  public MemberDescriptor getDescriptor() {
+    // Subclasses should provide a real value, when applicable.
+    return null;
+  }
+
+  @Override
+  public String getReadableDescription() {
+    return getDescriptor().getReadableDescription();
+  }
+
+  @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
+  }
+
+  @Override
+  public HasSourcePosition getMetadata() {
+    return this;
+  }
+
+  @Override
+  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
+    setSourcePosition(store.getMetadata().getSourcePosition());
   }
 
   @Override

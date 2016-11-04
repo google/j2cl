@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.devtools.build.runtime.Runfiles;
 import com.google.j2cl.common.J2clUtils;
-import com.google.j2cl.errors.Problems;
+import com.google.j2cl.problems.Problems;
 import com.google.j2cl.transpiler.J2clTranspiler;
 import com.google.j2cl.transpiler.J2clTranspilerDriver;
 import java.io.File;

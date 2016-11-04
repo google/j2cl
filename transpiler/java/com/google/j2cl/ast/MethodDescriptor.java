@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -24,6 +25,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
+import com.google.j2cl.common.J2clUtils;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
@@ -159,6 +161,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
+  }
+
+  /** Returns a description that is useful for error messages. */
+  @Override
+  public String getReadableDescription() {
+    return J2clUtils.format(
+        "%s%s.%s(%s)",
+        isConstructor() ? "" : getReturnTypeDescriptor().getReadableDescription() + " ",
+        getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getName(),
+        getDeclarationMethodDescriptor()
+            .getParameterTypeDescriptors()
+            .stream()
+            .map(type -> type.getRawTypeDescriptor().getReadableDescription())
+            .collect(joining(", ")));
   }
 
   /** A Builder for MethodDescriptors. */

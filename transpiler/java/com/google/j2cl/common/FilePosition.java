@@ -1,4 +1,4 @@
-package com.google.j2cl.ast.sourcemap;
+package com.google.j2cl.common;
 
 /** J2cl's implementation of sourcemap file position. */
 public final class FilePosition {

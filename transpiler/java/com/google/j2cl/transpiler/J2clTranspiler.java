@@ -65,8 +65,6 @@ import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.TimingCollector;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -74,6 +72,8 @@ import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.generator.OutputGeneratorStage;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -110,7 +110,7 @@ public class J2clTranspiler {
 
     static Result fromErrorMessage(int exitCode, String errorMessage) {
       Problems problems = new Problems();
-      problems.error(Messages.ERR_ERROR, errorMessage);
+      problems.error(errorMessage);
       return new Result(exitCode, problems);
     }
 
@@ -292,7 +292,7 @@ public class J2clTranspiler {
       try {
         options.getOutputFileSystem().close();
       } catch (IOException e) {
-        problems.error(Messages.ERR_CANNOT_CLOSE_ZIP);
+        problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
       }
     }
   }

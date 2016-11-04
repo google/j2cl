@@ -259,7 +259,8 @@ public class NormalizeConstructors extends NormalizationPass {
             .setMethodDescriptor(constructorDescriptor)
             .setParameters(jsConstructorParameters)
             .addStatements(body)
-            .setJsDocDescription("Real constructor.");
+            .setJsDocDescription("Real constructor.")
+            .setSourcePosition(primaryConstructor.getSourcePosition());
     for (int i = 0; i < jsConstructorParameters.size(); i++) {
       constructorBuilder.setParameterOptional(i, primaryConstructor.isParameterOptional(i));
     }
@@ -289,6 +290,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(constructorDescriptor)
         .addStatements(body)
         .setJsDocDescription("Defines instance fields.")
+        .setSourcePosition(type.getSourcePosition())
         .build();
   }
 
@@ -464,6 +466,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
         .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")
+        .setSourcePosition(constructor.getSourcePosition())
         .build();
   }
 
@@ -515,6 +518,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .addStatements(returnStatement)
         .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")
+        .setSourcePosition(primaryConstructor.getSourcePosition())
         .build();
   }
 }

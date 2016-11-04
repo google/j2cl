@@ -21,8 +21,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -87,7 +87,7 @@ public class PackageInfoCache {
       try {
         classPathUrls.add(new URL("file:" + classPathEntry));
       } catch (MalformedURLException e) {
-        problems.error(Messages.ERR_CANNOT_OPEN_FILE, classPathEntry);
+        problems.error(Message.ERR_CANNOT_OPEN_FILE, classPathEntry, e.getMessage());
       }
     }
     URLClassLoader resourcesClassLoader =
@@ -190,9 +190,9 @@ public class PackageInfoCache {
       Class<?> packageInfoClass = entryClassLoader.loadClass(packageInfoSourceName);
       annotations = packageInfoClass.getAnnotations();
     } catch (ClassNotFoundException e) {
-      problems.error(Messages.ERR_PACKAGE_INFO_PARSE, packageInfoRelativeFilePath);
+      problems.error(Message.ERR_PACKAGE_INFO_PARSE, packageInfoRelativeFilePath);
     } catch (MalformedURLException e) {
-      problems.error(Messages.ERR_CLASS_PATH_URL, classPathEntry);
+      problems.error(Message.ERR_CLASS_PATH_URL, classPathEntry);
     }
     return annotations;
   }

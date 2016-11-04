@@ -33,11 +33,11 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.ast.sourcemap.FilePosition;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
-import com.google.j2cl.errors.Problems;
+import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
+import com.google.j2cl.problems.Problems;
 import java.util.HashMap;
 import java.util.Map;
 

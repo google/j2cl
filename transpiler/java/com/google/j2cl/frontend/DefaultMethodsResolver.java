@@ -112,6 +112,7 @@ public class DefaultMethodsResolver {
       Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
               targetMethod, type.getDescriptor(), "Default method forwarding stub.");
+      defaultForwardingMethod.setSourcePosition(type.getSourcePosition());
       type.addMethod(defaultForwardingMethod);
       if (JdtUtils.isOrOverridesJsMember(method)) {
         type.addMethod(

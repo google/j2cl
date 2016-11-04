@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,17 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.sourcemap;
-
-import com.google.j2cl.ast.common.HasMetadata;
-import com.google.j2cl.common.SourcePosition;
+package com.google.j2cl.ast.common;
 
 /**
- * An interface for source nodes that know their position in the original source.
+ * Implemented by nodes that provide a readable description.
+ *
+ * <p>Mainly used for error reporting.
  */
-public interface HasSourcePosition extends HasMetadata<HasSourcePosition> {
-  // The location in the original Java source file.
-  SourcePosition getSourcePosition();
-
-  void setSourcePosition(SourcePosition sourcePosition);
+public interface HasReadableDescription {
+  /** Returns a readable description */
+  String getReadableDescription();
 }

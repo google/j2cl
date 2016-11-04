@@ -16,13 +16,11 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Strings;
-import com.google.j2cl.ast.sourcemap.FilePosition;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
-
-import org.apache.commons.lang.StringUtils;
-
+import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.SourcePosition;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Builds source and tracks line numbers using a StringBuilder.

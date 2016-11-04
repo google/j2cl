@@ -23,7 +23,7 @@ public class InvalidFlagTest extends IntegrationTestCase {
     String[] args = new String[] {"-unknown", "abc"};
     TranspileResult transpileResult = transpile(args);
     assertErrorsContainsSnippet(
-        transpileResult.getProblems(), "Invalid flag: \"-unknown\" is not a valid option");
+        transpileResult.getProblems(), "\"-unknown\" is not a valid option");
     assertErrorsContainsSnippet(transpileResult.getProblems(), "Valid options:");
   }
 }

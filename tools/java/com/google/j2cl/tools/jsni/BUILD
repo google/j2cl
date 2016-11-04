@@ -23,8 +23,8 @@ java_library(
         "//:jdt-core-stable",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/frontend",
         "//transpiler/java/com/google/j2cl/generator",
+        "//transpiler/java/com/google/j2cl/problems",
     ],
 )

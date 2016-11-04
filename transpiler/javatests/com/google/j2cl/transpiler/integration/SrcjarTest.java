@@ -22,7 +22,8 @@ public class SrcjarTest extends IntegrationTestCase {
   public void testMissingSrcjar() throws IOException {
     TranspileResult transpileResult =
         transpileDirectory("missingsrcjar", OutputType.DIR, "/foo/bar/Missing.srcjar");
-    assertErrorsContainsSnippet(transpileResult.getProblems(), "File not found");
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(), "File '/foo/bar/Missing.srcjar' not found.");
   }
 
   public void testCorruptSrcjar() throws IOException {

@@ -20,7 +20,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.ast.common.HasJsNameInfo;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -29,7 +30,7 @@ import java.util.List;
 
 /** Method declaration. */
 @Visitable
-public class Method extends Member {
+public class Method extends Member implements HasJsNameInfo {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
@@ -62,6 +63,7 @@ public class Method extends Member {
     this.isSynthetic = isSynthetic;
   }
 
+  @Override
   public MethodDescriptor getDescriptor() {
     return methodDescriptor;
   }
@@ -81,10 +83,6 @@ public class Method extends Member {
   @Override
   public boolean isMethod() {
     return true;
-  }
-
-  public boolean isNative() {
-    return methodDescriptor.isNative();
   }
 
   public boolean isBridge() {
@@ -137,12 +135,24 @@ public class Method extends Member {
   }
 
   public boolean isPrimaryConstructor() {
-    if (isConstructor()) {
-      if (getDescriptor().getEnclosingClassTypeDescriptor().isOrSubclassesJsConstructorClass()) {
-        return !AstUtils.hasThisCall(this);
-      }
-    }
-    return false;
+    return isConstructor()
+        && getDescriptor().getEnclosingClassTypeDescriptor().isOrSubclassesJsConstructorClass()
+        && !AstUtils.hasThisCall(this);
+  }
+
+  @Override
+  public String getJsName() {
+    return methodDescriptor.getJsName();
+  }
+
+  @Override
+  public String getJsNamespace() {
+    return methodDescriptor.getJsNamespace();
+  }
+
+  @Override
+  public boolean isNative() {
+    return methodDescriptor.isNative();
   }
 
   public static Builder newBuilder() {
@@ -171,7 +181,8 @@ public class Method extends Member {
     private boolean isOverride;
     private boolean isSynthetic;
     private String jsDocDescription;
-    private SourcePosition bodyJavaSourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
     private BitSet parameterOptionality = new BitSet();
 
     public static Builder from(Method method) {
@@ -183,10 +194,11 @@ public class Method extends Member {
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.isFinal = method.isFinal();
-      builder.bodyJavaSourcePosition = method.getBody().getSourcePosition();
+      builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
       builder.isBridge = method.isBridge;
       builder.isSynthetic = method.isSynthetic;
+      builder.sourcePosition = method.getSourcePosition();
       return builder;
     }
 
@@ -288,9 +300,14 @@ public class Method extends Member {
       return this;
     }
 
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
     public Method build() {
       Block body = new Block(statements);
-      body.setSourcePosition(bodyJavaSourcePosition);
+      body.setSourcePosition(bodySourcePosition);
       Method method =
           new Method(
               // Update method descriptor parameter types from actual parameter types.
@@ -307,6 +324,7 @@ public class Method extends Member {
               isSynthetic,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;
+      method.setSourcePosition(sourcePosition);
       return method;
     }
   }

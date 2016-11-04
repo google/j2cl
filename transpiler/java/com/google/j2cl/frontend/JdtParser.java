@@ -19,8 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -175,10 +174,7 @@ public class JdtParser {
           // to the jdt error reporting.
           continue;
         }
-        problems.error(
-            Messages.ERR_ERROR,
-            String.format(
-                "%s:%s: %s", filename, problem.getSourceLineNumber(), problem.getMessage()));
+        problems.error(problem.getSourceLineNumber(), filename, problem.getMessage());
         hasErrors = true;
       }
     }

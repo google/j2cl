@@ -28,6 +28,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
+import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
@@ -50,7 +51,8 @@ import java.util.Set;
  * of TypeDescriptor creation.
  */
 @Visitable
-public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsNameInfo {
+public class TypeDescriptor extends Node
+    implements Comparable<TypeDescriptor>, HasJsNameInfo, HasReadableDescription {
 
   /** Builder for a TypeDescriptor. */
   public static class Builder {
@@ -916,5 +918,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   @Override
   public String toString() {
     return getUniqueId();
+  }
+
+  /** Returns a description that is useful for error messages. */
+  @Override
+  public String getReadableDescription() {
+    // TODO: Actually provide a real readable description.
+    return getSimpleName();
   }
 }

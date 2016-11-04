@@ -26,8 +26,8 @@ public class InvalidOptionTest extends IntegrationTestCase {
   public void testInvalidOption() {
     String[] args = new String[] {"-source", "2.0", "-encoding", "abc"};
     TranspileResult transpileResult = transpile(args);
-    assertErrorsContainsSnippet(transpileResult.getProblems(), "Invalid source version: 2.0");
-    assertErrorsContainsSnippet(transpileResult.getProblems(), "Unsupported encoding: abc");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Invalid source version '2.0'.");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "Unsupported encoding 'abc'.");
   }
 
   public void testInvalidOutputOption() throws IOException {
@@ -46,6 +46,7 @@ public class InvalidOptionTest extends IntegrationTestCase {
 
     // Verify that the output location was rejected.
     assertErrorsContainsSnippet(
-        transpileResult.getProblems(), "-output location must be a directory or .zip file");
+        transpileResult.getProblems(),
+        "-output location '" + outputLocation + "' must be a directory or .zip file");
   }
 }

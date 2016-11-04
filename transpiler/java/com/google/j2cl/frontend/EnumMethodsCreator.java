@@ -99,8 +99,12 @@ public class EnumMethodsCreator {
         Field.Builder.from(this.namesToValuesMapFieldDescriptor)
             .setInitializer(NullLiteral.NULL)
             .build());
-    enumType.addMethod(createValueOfMethod());
-    enumType.addMethod(createValuesMethod());
+    Method valueOfMethod = createValueOfMethod();
+    valueOfMethod.setSourcePosition(enumType.getSourcePosition());
+    enumType.addMethod(valueOfMethod);
+    Method valuesMethod = createValuesMethod();
+    valuesMethod.setSourcePosition(enumType.getSourcePosition());
+    enumType.addMethod(valuesMethod);
   }
 
   /**

@@ -99,7 +99,6 @@ java_test(
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
-    shard_count = 10,
     deps = [
         ":IntegrationTestCase",
         "//java/com/google/common/base",
@@ -120,7 +119,7 @@ java_library(
         "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/errors",
+        "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
         "//transpiler/javatests/com/google/j2cl/transpiler:transpiler_driver",
     ],

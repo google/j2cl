@@ -5,11 +5,7 @@ licenses(["unencumbered"])
 
 java_library(
     name = "common",
-    srcs = [
-        "Interner.java",
-        "J2clUtils.java",
-        "TimingCollector.java",
-    ],
+    srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",

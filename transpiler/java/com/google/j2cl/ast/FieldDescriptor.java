@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
+import com.google.j2cl.common.J2clUtils;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
@@ -103,6 +104,16 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public static Builder newBuilder() {
     return new Builder();
+  }
+
+  /** Returns a description that is useful for error messages. */
+  @Override
+  public String getReadableDescription() {
+    return J2clUtils.format(
+        "%s %s.%s",
+        getTypeDescriptor().getReadableDescription(),
+        getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getName());
   }
 
   /** A Builder for FieldDescriptors. */

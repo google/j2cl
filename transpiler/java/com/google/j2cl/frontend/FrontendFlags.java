@@ -19,8 +19,8 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.io.Files;
 import com.google.j2cl.common.J2clUtils;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -138,7 +138,7 @@ public class FrontendFlags {
     try {
       args = maybeLoadFlagFile(args);
     } catch (IOException e) {
-      problems.error(Messages.ERR_FLAG_FILE, e.getMessage());
+      problems.error(Message.ERR_FLAG_FILE, e.getMessage());
       return;
     }
 
@@ -152,7 +152,7 @@ public class FrontendFlags {
       String message = e.getMessage() + "\n";
       message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
       message += "\nuse -help for a list of possible options in more details";
-      problems.error(Messages.ERR_INVALID_FLAG, message);
+      problems.error(message);
     }
   }
 

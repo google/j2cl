@@ -31,8 +31,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -172,7 +171,7 @@ public class GeneratorUtils {
       // regardless of the time of day.
       Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
     } catch (IOException e) {
-      problems.error(Messages.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
+      problems.error("Could not write to file %s: %s", outputPath, e.getMessage());
       problems.abortIfRequested();
     }
   }

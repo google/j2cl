@@ -18,37 +18,30 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.common.HasMetadata;
-import com.google.j2cl.ast.sourcemap.HasSourcePosition;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.ast.common.HasJsNameInfo;
+import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
 /** Field declaration node. */
 @Visitable
-public class Field extends Member implements HasSourcePosition {
+public class Field extends Member implements HasJsNameInfo {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private boolean isEnumField;
   private Variable capturedVariable;
-  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
   private Field(
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       boolean isEnumField,
-      Variable capturedVariable,
-      SourcePosition sourcePosition) {
-    this(fieldDescriptor);
+      Variable capturedVariable) {
+    this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
     this.isEnumField = isEnumField;
     this.capturedVariable = capturedVariable;
-    this.sourcePosition = sourcePosition;
   }
 
-  public Field(FieldDescriptor fieldDescriptor) {
-    this.fieldDescriptor = checkNotNull(fieldDescriptor);
-  }
-
+  @Override
   public FieldDescriptor getDescriptor() {
     return fieldDescriptor;
   }
@@ -84,33 +77,26 @@ public class Field extends Member implements HasSourcePosition {
   }
 
   @Override
-  public SourcePosition getSourcePosition() {
-    return sourcePosition;
-  }
-
-  @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
-  }
-
-  @Override
-  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
-    setSourcePosition(store.getMetadata().getSourcePosition());
-  }
-
-  @Override
-  public HasSourcePosition getMetadata() {
-    return this;
-  }
-
-  @Override
   public Node accept(Processor processor) {
     return Visitor_Field.visit(processor, this);
   }
 
-  /**
-   * A Builder for easily and correctly creating modified versions of fields.
-   */
+  @Override
+  public String getJsName() {
+    return fieldDescriptor.getJsName();
+  }
+
+  @Override
+  public String getJsNamespace() {
+    return fieldDescriptor.getJsNamespace();
+  }
+
+  @Override
+  public boolean isNative() {
+    return fieldDescriptor.isNative();
+  }
+
+  /** A Builder for Field. */
   public static class Builder {
     private FieldDescriptor fieldDescriptor;
     private Expression initializer;
@@ -162,7 +148,9 @@ public class Field extends Member implements HasSourcePosition {
     }
 
     public Field build() {
-      return new Field(fieldDescriptor, initializer, isEnumField, capturedVariable, sourcePosition);
+      Field field = new Field(fieldDescriptor, initializer, isEnumField, capturedVariable);
+      field.setSourcePosition(sourcePosition);
+      return field;
     }
   }
 }

@@ -16,8 +16,10 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /** A node that represents an initializer block. */
 @Visitable
@@ -47,5 +49,46 @@ public class InitializerBlock extends Member {
   @Override
   public Node accept(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for InitializerBlock. */
+  public static class Builder {
+    private Block block;
+    private boolean isStatic;
+    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+
+    public static Builder from(InitializerBlock initializerBlock) {
+      return newBuilder()
+          .setBlock(initializerBlock.getBlock())
+          .setIsStatic(initializerBlock.isStatic())
+          .setSourcePosition(initializerBlock.getSourcePosition());
+    }
+
+    public Builder setBlock(Block block) {
+      this.block = block;
+      return this;
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setIsStatic(boolean isStatic) {
+      this.isStatic = isStatic;
+      return this;
+    }
+
+    public InitializerBlock build() {
+      checkState(block != null);
+      checkState(sourcePosition != null);
+      InitializerBlock initializerBlock = new InitializerBlock(block, isStatic);
+      initializerBlock.setSourcePosition(sourcePosition);
+      return initializerBlock;
+    }
   }
 }

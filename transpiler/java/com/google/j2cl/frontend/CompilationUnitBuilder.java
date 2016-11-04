@@ -90,7 +90,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -183,10 +183,12 @@ public class CompilationUnitBuilder {
           // We currently do not produce any output for annotations.
           break;
         case ASTNode.TYPE_DECLARATION:
-          convertAndAddType(
-              JdtUtils.isInStaticContext(typeDeclaration),
-              typeDeclaration.resolveBinding(),
-              JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
+          Type type =
+              convertAndAddType(
+                  JdtUtils.isInStaticContext(typeDeclaration),
+                  typeDeclaration.resolveBinding(),
+                  JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
+          type.setSourcePosition(getSourcePosition(typeDeclaration));
           break;
         case ASTNode.ENUM_DECLARATION:
           convert((EnumDeclaration) typeDeclaration);
@@ -206,7 +208,7 @@ public class CompilationUnitBuilder {
               JdtUtils.isInStaticContext(enumDeclaration),
               enumDeclaration.resolveBinding(),
               JdtUtils.asTypedList(enumDeclaration.bodyDeclarations()));
-
+      enumType.setSourcePosition(getSourcePosition(enumDeclaration));
       for (EnumConstantDeclaration enumConstantDeclaration :
           JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
         if (enumConstantDeclaration.getAnonymousClassDeclaration() != null) {
@@ -277,9 +279,10 @@ public class CompilationUnitBuilder {
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
-            new Field(
-                AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, type.getEnclosingTypeDescriptor())));
+            Field.Builder.from(
+                    AstUtils.getFieldDescriptorForEnclosingInstance(
+                        currentTypeDescriptor, type.getEnclosingTypeDescriptor()))
+                .build());
       }
 
       // Resolve default methods
@@ -386,7 +389,8 @@ public class CompilationUnitBuilder {
               .addStatements(body.getStatements())
               .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setIsFinal(JdtUtils.isFinal(methodBinding));
+              .setIsFinal(JdtUtils.isFinal(methodBinding))
+              .setSourcePosition(getSourcePosition(methodDeclaration));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
@@ -481,6 +485,7 @@ public class CompilationUnitBuilder {
                   JdtUtils.isInStaticContext(typeDeclaration),
                   typeBinding,
                   JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
+      anonymousType.setSourcePosition(getSourcePosition(typeDeclaration));
       anonymousType.addConstructorParameterTypeDescriptors(
           Arrays.asList(constructorImplicitParameterTypeDescriptors));
 
@@ -782,7 +787,9 @@ public class CompilationUnitBuilder {
       int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
       int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
       int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
-      return new SourcePosition(startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
+
+      return new SourcePosition(
+          currentSourceFile, startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
@@ -1072,6 +1079,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor lambdaTypeDescriptor =
           JdtUtils.createLambda(enclosingType, classComponents, functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
+      lambdaType.setSourcePosition(getSourcePosition(expression));
       pushType(lambdaType);
 
       // Construct lambda method and add it to lambda inner class.
@@ -1084,6 +1092,7 @@ public class CompilationUnitBuilder {
       Method samMethod =
           JdtUtils.createSamMethod(
               lambdaTypeDescriptor, functionalInterfaceTypeBinding, lambdaMethod.getDescriptor());
+      samMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(samMethod);
 
       // Add fields for captured local variables.
@@ -1098,9 +1107,10 @@ public class CompilationUnitBuilder {
       if (!JdtUtils.isInStaticContext(expression)) {
         // Add field for enclosing instance.
         lambdaType.addField(
-            new Field(
-                AstUtils.getFieldDescriptorForEnclosingInstance(
-                    lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor())));
+            Field.Builder.from(
+                    AstUtils.getFieldDescriptorForEnclosingInstance(
+                        lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()))
+                .build());
       }
 
       // Collect all type variables that are in context. Those might come from the functional
@@ -1233,6 +1243,7 @@ public class CompilationUnitBuilder {
           .setMethodDescriptor(methodDescriptor)
           .setParameters(parameters)
           .addStatements(body.getStatements())
+          .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 

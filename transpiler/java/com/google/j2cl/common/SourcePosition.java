@@ -13,7 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.sourcemap;
+package com.google.j2cl.common;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Describes the location of a node in the original source in the form of a range
@@ -22,22 +24,34 @@ package com.google.j2cl.ast.sourcemap;
 public class SourcePosition implements Comparable<SourcePosition> {
 
   // For mappings that should not be displayed in readable output.
-  public static final SourcePosition DUMMY = new SourcePosition(0, 0, 0, 0);
+  public static final SourcePosition DUMMY = new SourcePosition("UNKNOWN", 0, 0, 0, 0);
 
-  public static final SourcePosition UNKNOWN = new SourcePosition(-1, -1, -1, -1);
+  public static final SourcePosition UNKNOWN = new SourcePosition("UNKNOWN", -1, -1, -1, -1);
 
-  private FilePosition startPosition;
-  private FilePosition endPosition;
+  private final String filePath;
+  private final FilePosition startPosition;
+  private final FilePosition endPosition;
 
   public SourcePosition(FilePosition startPosition, FilePosition endPosition) {
-    this.startPosition = startPosition;
-    this.endPosition = endPosition;
+    this(null, startPosition, endPosition);
+  }
+
+  public SourcePosition(String filePath, FilePosition startPosition, FilePosition endPosition) {
+    this.startPosition = checkNotNull(startPosition);
+    this.endPosition = checkNotNull(endPosition);
+    this.filePath = filePath;
   }
 
   public SourcePosition(
-      int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber) {
-    startPosition = new FilePosition(startLineNumber, startColumnNumber);
-    endPosition = new FilePosition(endLineNumber, endColumnNumber);
+      String filePath,
+      int startLineNumber,
+      int startColumnNumber,
+      int endLineNumber,
+      int endColumnNumber) {
+    this(
+        filePath,
+        new FilePosition(startLineNumber, startColumnNumber),
+        new FilePosition(endLineNumber, endColumnNumber));
   }
 
   public FilePosition getStartFilePosition() {
@@ -48,8 +62,18 @@ public class SourcePosition implements Comparable<SourcePosition> {
     return endPosition;
   }
 
+  public String getFilePath() {
+    return filePath;
+  }
+
   @Override
   public int compareTo(SourcePosition o) {
+    if (filePath != null) {
+      int nameComparison = filePath.compareTo(o.getFilePath());
+      if (nameComparison != 0) {
+        return nameComparison;
+      }
+    }
     if (startPosition.getLine() == o.startPosition.getLine()) {
       return startPosition.getColumn() - o.startPosition.getColumn();
     }

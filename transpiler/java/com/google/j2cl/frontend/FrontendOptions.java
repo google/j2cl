@@ -18,8 +18,8 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.ZipFiles;
-import com.google.j2cl.errors.Problems;
-import com.google.j2cl.errors.Problems.Messages;
+import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -131,7 +131,7 @@ public class FrontendOptions {
     for (String path : zipFilePaths) {
       File file = new File(path);
       if (!file.exists()) {
-        problems.error(Messages.ERR_FILE_NOT_FOUND, path);
+        problems.error(Message.ERR_FILE_NOT_FOUND, path);
         return false;
       }
     }
@@ -152,7 +152,7 @@ public class FrontendOptions {
     if (Files.exists(outputPath)
         && !Files.isDirectory(outputPath)
         && !output.endsWith(ZIP_EXTENSION)) {
-      problems.error(Messages.ERR_OUTPUT_LOCATION);
+      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
     }
 
     if (output.endsWith(ZIP_EXTENSION)) {
@@ -183,7 +183,7 @@ public class FrontendOptions {
       // Verify encoding has a supported charset.
       Charset.forName(encoding);
     } catch (UnsupportedCharsetException e) {
-      problems.error(Messages.ERR_UNSUPPORTED_ENCODING, encoding);
+      problems.error(Message.ERR_UNSUPPORTED_ENCODING, encoding);
       return false;
     }
     return true;
@@ -209,7 +209,7 @@ public class FrontendOptions {
 
   public boolean checkSourceVersion(String sourceVersion) {
     if (!VALID_JAVA_VERSIONS.contains(sourceVersion)) {
-      problems.error(Messages.ERR_INVALID_SOURCE_VERSION, sourceVersion);
+      problems.error(Message.ERR_INVALID_SOURCE_VERSION, sourceVersion);
       return false;
     }
     return true;
@@ -245,7 +245,7 @@ public class FrontendOptions {
     try {
       srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
     } catch (IOException e) {
-      problems.error(Messages.ERR_CANNOT_CREATE_TEMP_DIR);
+      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return;
     }
 
@@ -271,7 +271,7 @@ public class FrontendOptions {
               }
             });
       } catch (IOException e) {
-        problems.error(Messages.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+        problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
       }
     }
 
@@ -313,16 +313,16 @@ public class FrontendOptions {
       if (sourceFile.endsWith(JAVA_EXTENSION) || sourceFile.endsWith(SRCJAR_EXTENSION)) {
         File file = new File(sourceFile);
         if (!file.exists()) {
-          problems.error(Messages.ERR_FILE_NOT_FOUND, sourceFile);
+          problems.error(Message.ERR_FILE_NOT_FOUND, sourceFile);
           return false;
         }
         if (!file.isFile()) {
-          problems.error(Messages.ERR_INVALID_SOURCE_FILE, sourceFile);
+          problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
           return false;
         }
       } else {
         // does not support non-java files.
-        problems.error(Messages.ERR_INVALID_SOURCE_FILE, sourceFile);
+        problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
         return false;
       }
     }
@@ -349,7 +349,7 @@ public class FrontendOptions {
           FileSystems.newFileSystem(
               URI.create("jar:file:" + outputPath.toUri().getPath()), env, null);
     } catch (IOException e) {
-      problems.error(Messages.ERR_CANNOT_OPEN_ZIP, outputPath.toString());
+      problems.error(Message.ERR_CANNOT_OPEN_ZIP, outputPath.toString(), e.getMessage());
     }
     this.output = null;
   }

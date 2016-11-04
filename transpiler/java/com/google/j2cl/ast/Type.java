@@ -24,13 +24,18 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.HasJsNameInfo;
+import com.google.j2cl.ast.common.HasMetadata;
+import com.google.j2cl.ast.common.HasReadableDescription;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 
 /** A node that represents a Java Type declaration in the compilation unit. */
 @Visitable
 @Context
-public class Type extends Node {
+public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
   /** Describes the kind of the Java type. */
   public enum Kind {
     CLASS,
@@ -44,6 +49,7 @@ public class Type extends Node {
   private boolean isAnonymous;
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Member> members = new ArrayList<>();
+  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
@@ -192,7 +198,11 @@ public class Type extends Node {
   }
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
-    members.add(new InitializerBlock(instanceInitializer, false));
+    members.add(
+        InitializerBlock.newBuilder()
+            .setBlock(instanceInitializer)
+            .setSourcePosition(instanceInitializer.getSourcePosition())
+            .build());
   }
 
   public boolean hasStaticInitializerBlocks() {
@@ -200,7 +210,12 @@ public class Type extends Node {
   }
 
   public void addStaticInitializerBlock(Block staticInitializer) {
-    members.add(new InitializerBlock(staticInitializer, true));
+    members.add(
+        InitializerBlock.newBuilder()
+            .setBlock(staticInitializer)
+            .setIsStatic(true)
+            .setSourcePosition(staticInitializer.getSourcePosition())
+            .build());
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {
@@ -239,6 +254,46 @@ public class Type extends Node {
     return Streams.stream(getMethods())
         .filter(Method::isConstructor)
         .collect(toCollection(ArrayList::new));
+  }
+
+  @Override
+  public String getJsName() {
+    return typeDescriptor.getJsName();
+  }
+
+  @Override
+  public String getJsNamespace() {
+    return typeDescriptor.getJsNamespace();
+  }
+
+  @Override
+  public boolean isNative() {
+    return typeDescriptor.isNative();
+  }
+
+  @Override
+  public HasSourcePosition getMetadata() {
+    return this;
+  }
+
+  @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
+  }
+
+  @Override
+  public String getReadableDescription() {
+    return getDescriptor().getReadableDescription();
+  }
+
+  @Override
+  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
+    setSourcePosition(store.getMetadata().getSourcePosition());
   }
 
   @Override

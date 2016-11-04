@@ -17,7 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.io.Files;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;

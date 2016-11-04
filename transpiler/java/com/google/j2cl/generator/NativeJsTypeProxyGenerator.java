@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.errors.Problems;
+import com.google.j2cl.problems.Problems;
 
 /**
  * Generates files that are dependency forwarding proxies for native JsTypes.

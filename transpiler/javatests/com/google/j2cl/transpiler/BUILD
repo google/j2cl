@@ -14,7 +14,7 @@ java_test(
         "//third_party/java/junit",
         "//third_party/java/mockito",
         "//third_party/java/truth",
-        "//transpiler/java/com/google/j2cl/errors",
+        "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_worker_lib",
     ],
@@ -29,7 +29,7 @@ java_library(
         "//java/com/google/common/collect",
         "//java/com/google/common/hash",
         "//java/com/google/common/io",
-        "//transpiler/java/com/google/j2cl/errors",
+        "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
     ],
 )
@@ -46,8 +46,8 @@ java_library(
         "//java/com/google/common/collect",
         "//java/com/google/common/hash",
         "//java/com/google/common/io",
-        "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/frontend",
+        "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
     ],
 )
