@@ -20,9 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -589,12 +587,37 @@ public class TypeDescriptor extends Node
 
   @Override
   public String getJsName() {
+    if (jsName == null) {
+      jsName = getSimpleName();
+    }
     return jsName;
   }
 
   @Override
   public String getJsNamespace() {
+    if (jsNamespace == null) {
+      // TODO(goktug): move to Builder when enclosing type is no longer lazy.
+      jsNamespace = calculateJsNamespace();
+    }
     return jsNamespace;
+  }
+
+  private String calculateJsNamespace() {
+    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+    if (enclosingTypeDescriptor != null) {
+      if (!isNative && enclosingTypeDescriptor.isNative) {
+        // When there is a type nested within a native type, it's important not to generate a name
+        // like "Array.1" (like would happen if the outer native type was claiming to be native
+        // Array and the nested type was anonymous) since this is almost guaranteed to collide
+        // with other people also creating nested classes within a native type that claims to be
+        // native Array.
+        return enclosingTypeDescriptor.getSourceName();
+      }
+      // Use the parent namespace.
+      return enclosingTypeDescriptor.getQualifiedName();
+    }
+    // Use the java package namespace.
+    return packageName;
   }
 
   public TypeDescriptor getLeafTypeDescriptor() {
@@ -608,33 +631,10 @@ public class TypeDescriptor extends Node
 
   /** Returns the qualified name of the type. */
   public String getQualifiedName() {
-    String effectiveSimpleName = MoreObjects.firstNonNull(jsName, getSimpleName());
-
-    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? "" : jsNamespace;
-
-    if (effectivePrefix == null) {
-      TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-      if (enclosingTypeDescriptor != null) {
-        if (!isNative && enclosingTypeDescriptor.isNative) {
-          // When there is a type nested within a native type, it's important not to generate a name
-          // like "Array.1" (like would happen if the outer native type was claiming to be native
-          // Array and the nested type was anonymous) since this is almost guaranteed to collide
-          // with other people also creating nested classes within a native type that claims to be
-          // native Array.
-          effectivePrefix = enclosingTypeDescriptor.getSourceName();
-        } else {
-          // Use the parent namespace.
-          effectivePrefix = enclosingTypeDescriptor.getQualifiedName();
-        }
-      } else {
-        // Use the package namespace.
-        effectivePrefix = packageName;
-      }
+    if (JsUtils.isGlobal(getJsNamespace())) {
+      return getJsName();
     }
-
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
+    return getJsNamespace() + "." + getJsName();
   }
 
   /**

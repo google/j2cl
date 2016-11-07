@@ -1421,33 +1421,10 @@ public class JdtUtils {
     boolean isPrimitive = typeBinding.isPrimitive();
     boolean isTypeVariable = typeBinding.isTypeVariable();
     boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
-    IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
-
-    String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
-
     boolean isAbstract = isAbstract(typeBinding);
     boolean isFinal = isFinal(typeBinding);
-    boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
-    String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
-    String jsNamespace = null;
-
-    // If a package-info file has specified a JsPackage namespace then it is sugar for setting the
-    // jsNamespace of all top level types in that package.
-    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
-    if (isTopLevelType) {
-      String jsPackageNamespace =
-          packageInfoCache.getJsNamespace(
-              getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
-      if (jsPackageNamespace != null) {
-        jsNamespace = jsPackageNamespace;
-      }
-    }
-
-    String jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
-    if (jsTypeNamespace != null) {
-      jsNamespace = jsTypeNamespace;
-    }
+    String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
     List<TypeDescriptor> typeArgumentDescriptors =
         overrideTypeArgumentDescriptors != null
@@ -1510,16 +1487,16 @@ public class JdtUtils {
         .setIsInterface(typeBinding.isInterface())
         .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
         .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
-        .setIsJsType(jsTypeAnnotation != null)
+        .setIsJsType(JsInteropUtils.isJsType(typeBinding))
+        .setIsNative(JsInteropUtils.isNativeType(typeBinding))
         .setIsLocal(isLocal(typeBinding))
-        .setIsNative(isNative)
         .setIsNullable(isNullable)
         .setIsPrimitive(isPrimitive)
         .setIsTypeVariable(isTypeVariable)
         .setIsWildCardOrCapture(isWildCardOrCapture)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-        .setJsName(jsName)
-        .setJsNamespace(jsNamespace)
+        .setJsName(getJsName(typeBinding))
+        .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
@@ -1535,5 +1512,29 @@ public class JdtUtils {
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setUniqueKey(uniqueKey)
         .build();
+  }
+
+  private static String getJsName(final ITypeBinding typeBinding) {
+    return JsInteropAnnotationUtils.getJsName(
+        JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
+  }
+
+  private static String getJsNamespace(
+      ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+    String jsNamespace =
+        JsInteropAnnotationUtils.getJsNamespace(
+            JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
+    if (jsNamespace != null) {
+      return jsNamespace;
+    }
+
+    // Maybe namespace is set via package-info file?
+    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
+    if (isTopLevelType) {
+      return packageInfoCache.getJsNamespace(
+          getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
+    }
+
+    return null;
   }
 }
