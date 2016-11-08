@@ -36,6 +36,8 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview native JsType proxy from " + binaryName,
+        " *",
+        " * @suppress {lateProvide}",
         " */",
         "goog.module('" + selfTypeDescriptor.getModuleName() + "');");
     sourceBuilder.newLine();
