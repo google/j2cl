@@ -48,7 +48,7 @@ public class GeneratorUtils {
   /** Returns the relative output path for a given type. */
   public static String getRelativePath(Type type) {
     TypeDescriptor typeDescriptor = type.getDescriptor();
-    String typeName = typeDescriptor.getBinaryClassName();
+    String typeName = typeDescriptor.getSimpleBinaryName();
     String packageName = typeDescriptor.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
   }
@@ -56,7 +56,7 @@ public class GeneratorUtils {
   /** Returns the absolute binary path for a given type. */
   public static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
     TypeDescriptor typeDescriptor = type.getDescriptor();
-    String typeName = typeDescriptor.getBinaryClassName();
+    String typeName = typeDescriptor.getSimpleBinaryName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 

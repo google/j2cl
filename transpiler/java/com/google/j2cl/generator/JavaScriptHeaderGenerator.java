@@ -37,7 +37,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   @Override
   public String renderOutput() {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    String binaryName = type.getDescriptor().getRawTypeDescriptor().getBinaryName();
+    String binaryName = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview Header transpiled from " + binaryName,

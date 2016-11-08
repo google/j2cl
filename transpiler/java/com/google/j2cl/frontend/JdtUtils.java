@@ -1495,7 +1495,7 @@ public class JdtUtils {
         .setIsTypeVariable(isTypeVariable)
         .setIsWildCardOrCapture(isWildCardOrCapture)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-        .setJsName(getJsName(typeBinding))
+        .setSimpleJsName(getJsName(typeBinding))
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)

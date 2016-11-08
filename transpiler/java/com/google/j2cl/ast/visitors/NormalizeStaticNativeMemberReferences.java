@@ -168,7 +168,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
       TypeDescriptor enclosingClassTypeDescriptor =
           getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
       String packageName =
-          Joiner.on(".").join(enclosingClassTypeDescriptor.getSourceName(), jsNamespace);
+          Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
 
       List<String> classComponents = new ArrayList<>();
       classComponents.add(jsName);

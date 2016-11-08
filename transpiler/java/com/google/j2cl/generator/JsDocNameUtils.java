@@ -160,7 +160,7 @@ public class JsDocNameUtils {
     // Everything below is nullable.
     checkArgument(typeDescriptor.isNullable() || typeDescriptor.isPrimitive());
 
-    switch (typeDescriptor.getSourceName()) {
+    switch (typeDescriptor.getQualifiedSourceName()) {
       case TypeDescriptors.BYTE_TYPE_NAME:
       case TypeDescriptors.SHORT_TYPE_NAME:
       case TypeDescriptors.INT_TYPE_NAME:
@@ -170,7 +170,7 @@ public class JsDocNameUtils {
         return JS_NUMBER_TYPE_NAME;
       case TypeDescriptors.VOID_TYPE_NAME:
       case TypeDescriptors.BOOLEAN_TYPE_NAME:
-        return typeDescriptor.getSourceName();
+        return typeDescriptor.getQualifiedSourceName();
       case TypeDescriptors.LONG_TYPE_NAME:
         return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
@@ -200,8 +200,8 @@ public class JsDocNameUtils {
       // (the implicit key type parameter) is a 'string'. This special case exists to replicate the
       // same special case that already exists in the JSCompiler optimizing backend, and to
       // generalize it to work everywhere (including when types are referenced via an alias).
-      String typeQualifiedName = rawTypeDescriptor.getQualifiedName();
-      if (typeQualifiedName.equals(TypeDescriptors.NATIVE_OBJECT.getQualifiedName())
+      String typeQualifiedName = rawTypeDescriptor.getQualifiedJsName();
+      if (typeQualifiedName.equals(TypeDescriptors.NATIVE_OBJECT.getQualifiedJsName())
           && rawTypeDescriptor.isJsType()
           && typeArgumentDescriptors.size() == 1) {
         typeParametersJsDoc = "string, " + typeParametersJsDoc;
@@ -244,7 +244,7 @@ public class JsDocNameUtils {
       // level and class-level type variable and avoid variable name starts with a number.
       // concat class components to avoid collisions between type variables in inner/outer class.
       // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-      String simpleName = typeDescriptor.getSimpleName();
+      String simpleName = typeDescriptor.getSimpleSourceName();
       nameComponents.set(
           nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
       String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
@@ -303,7 +303,7 @@ public class JsDocNameUtils {
     checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface(),
         "'%s' is not a JsFunction type.",
-        typeDescriptor.getBinaryName());
+        typeDescriptor.getQualifiedBinaryName());
 
     MethodDescriptor jsFunctionMethodDescriptor =
         checkNotNull(typeDescriptor.getConcreteJsFunctionMethodDescriptor());

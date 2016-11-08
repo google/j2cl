@@ -450,7 +450,7 @@ public class AstUtils {
 
     MethodDescriptor valueMethodDescriptor =
         boxType.getMethodDescriptorByName(
-            primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
+            primitiveType.getSimpleSourceName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     expression =

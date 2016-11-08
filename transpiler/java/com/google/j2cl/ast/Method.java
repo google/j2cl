@@ -141,8 +141,8 @@ public class Method extends Member implements HasJsNameInfo {
   }
 
   @Override
-  public String getJsName() {
-    return methodDescriptor.getJsName();
+  public String getSimpleJsName() {
+    return methodDescriptor.getSimpleJsName();
   }
 
   @Override

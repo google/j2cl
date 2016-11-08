@@ -37,7 +37,7 @@ public class ManglingNameUtils {
       return Strings.repeat("arrayOf_", rawTypeDescriptor.getDimensions())
           + getMangledName(rawTypeDescriptor.getLeafTypeDescriptor());
     }
-    return rawTypeDescriptor.getBinaryName().replace('.', '_');
+    return rawTypeDescriptor.getQualifiedBinaryName().replace('.', '_');
   }
 
   /**
@@ -48,13 +48,13 @@ public class ManglingNameUtils {
       return "constructor";
     }
     if (methodDescriptor.isJsPropertyGetter()) {
-      return "get" + " " + methodDescriptor.getJsName();
+      return "get" + " " + methodDescriptor.getSimpleJsName();
     }
     if (methodDescriptor.isJsPropertySetter()) {
-      return "set" + " " + methodDescriptor.getJsName();
+      return "set" + " " + methodDescriptor.getSimpleJsName();
     }
     if (methodDescriptor.isJsMethod()) {
-      return methodDescriptor.getJsName();
+      return methodDescriptor.getSimpleJsName();
     }
     String suffix;
     switch (methodDescriptor.getVisibility()) {
@@ -126,7 +126,7 @@ public class ManglingNameUtils {
   public static String getMangledName(
       FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
     if (fieldDescriptor.isJsProperty() && !accessStaticsDirectly) {
-      return fieldDescriptor.getJsName();
+      return fieldDescriptor.getSimpleJsName();
     }
 
     String prefix = accessStaticsDirectly ? "$" : "";

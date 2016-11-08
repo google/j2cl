@@ -1068,7 +1068,7 @@ public class CompilationUnitBuilder {
           AstUtils.synthesizeInnerClassComponents(
               enclosingType,
               "Lambda",
-              functionalInterfaceTypeDescriptor.getSimpleName(),
+              functionalInterfaceTypeDescriptor.getSimpleSourceName(),
               lambdaCounter++);
 
       // Here we convert JsFunctions to function expressions
@@ -1083,7 +1083,7 @@ public class CompilationUnitBuilder {
       pushType(lambdaType);
 
       // Construct lambda method and add it to lambda inner class.
-      String lambdaMethodBinaryName = "lambda" + lambdaTypeDescriptor.getSimpleName();
+      String lambdaMethodBinaryName = "lambda" + lambdaTypeDescriptor.getSimpleSourceName();
       Method lambdaMethod =
           createLambdaMethod(lambdaMethodBinaryName, expression, lambdaType.getDescriptor());
       lambdaType.addMethod(lambdaMethod);

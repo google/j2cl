@@ -257,8 +257,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   @Override
-  public String getJsName() {
-    return typeDescriptor.getJsName();
+  public String getSimpleJsName() {
+    return typeDescriptor.getSimpleJsName();
   }
 
   @Override

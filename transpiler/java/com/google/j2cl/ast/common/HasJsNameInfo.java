@@ -18,7 +18,7 @@ package com.google.j2cl.ast.common;
 /** Abstracts JsInterop name related information for the AST nodes. */
 public interface HasJsNameInfo {
   /** The name specified directly on a type, method or field. */
-  String getJsName();
+  String getSimpleJsName();
 
   /** The namespace specified on a package, type, method or field. */
   String getJsNamespace();

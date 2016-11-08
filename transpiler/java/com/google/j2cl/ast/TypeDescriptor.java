@@ -109,7 +109,7 @@ public class TypeDescriptor extends Node
               return typeDescriptor.getJsFunctionMethodDescriptor();
             }
           };
-      newTypeDescriptor.jsName = typeDescriptor.getJsName();
+      newTypeDescriptor.simpleJsName = typeDescriptor.getSimpleJsName();
       newTypeDescriptor.jsNamespace = typeDescriptor.getJsNamespace();
       newTypeDescriptor.leafTypeDescriptor = typeDescriptor.getLeafTypeDescriptor();
       newTypeDescriptor.packageName = typeDescriptor.getPackageName();
@@ -160,7 +160,7 @@ public class TypeDescriptor extends Node
       
       // Default to binary name as the unique key.
       if (newTypeDescriptor.uniqueKey == null) {
-        newTypeDescriptor.uniqueKey = newTypeDescriptor.getBinaryName();
+        newTypeDescriptor.uniqueKey = newTypeDescriptor.getQualifiedBinaryName();
       }
 
       // TODO(tdeegan): Complete the precondition checks to make sure we are never buiding a
@@ -309,8 +309,8 @@ public class TypeDescriptor extends Node
       return this;
     }
 
-    public Builder setJsName(String jsName) {
-      newTypeDescriptor.jsName = jsName;
+    public Builder setSimpleJsName(String simpleJsName) {
+      newTypeDescriptor.simpleJsName = simpleJsName;
       return this;
     }
 
@@ -411,7 +411,7 @@ public class TypeDescriptor extends Node
   private boolean isUnion;
   private boolean isWildCardOrCapture;
   private DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory;
-  private String jsName;
+  private String simpleJsName;
   private String jsNamespace;
   private TypeDescriptor leafTypeDescriptor;
   private String packageName;
@@ -450,29 +450,35 @@ public class TypeDescriptor extends Node
     return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
   }
 
-  /** Returns the unqualified binary name like "Outer$Inner". */
-  public String getBinaryClassName() {
+  /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
+  public String getSimpleBinaryName() {
     // TODO rename to getBinarySimpleName
     return Joiner.on('$').join(classComponents);
   }
 
-  /** Returns the fully package qualified binary name like "com.google.common.Outer$Inner". */
-  public String getBinaryName() {
-    return Joiner.on(".").skipNulls().join(packageName, getBinaryClassName());
+  /**
+   * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
+   *
+   * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
+   * and other similar scenarios.
+   */
+  // TODO(goktug): Incorrectly used for long alias name, and few other places.
+  public String getQualifiedBinaryName() {
+    return Joiner.on(".").skipNulls().join(packageName, getSimpleBinaryName());
   }
 
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
     // TODO(goktug): fix the qualified name for primitives at construction phase.
     if (isPrimitive()) {
-      return "vmbootstrap.primitives.$" + getSourceName();
+      return "vmbootstrap.primitives.$" + getQualifiedSourceName();
     }
 
     if (isProxy()) {
-      return getSourceName() + "$$Proxy";
+      return getQualifiedSourceName() + "$$Proxy";
     }
 
-    return getQualifiedName();
+    return getQualifiedJsName();
   }
 
   public String getImplModuleName() {
@@ -585,12 +591,17 @@ public class TypeDescriptor extends Node
     return jsFunctionMethodDescriptorFactory.getOrCreate(this);
   }
 
+  /**
+   * Returns the JavaScript name for this class. This is same as simple source name unless modified
+   * by JsType. Used for short alias name.
+   */
+  // TODO(goktug): Use for short alias name.
   @Override
-  public String getJsName() {
-    if (jsName == null) {
-      jsName = getSimpleName();
+  public String getSimpleJsName() {
+    if (simpleJsName == null) {
+      simpleJsName = getSimpleSourceName();
     }
-    return jsName;
+    return simpleJsName;
   }
 
   @Override
@@ -611,13 +622,27 @@ public class TypeDescriptor extends Node
         // Array and the nested type was anonymous) since this is almost guaranteed to collide
         // with other people also creating nested classes within a native type that claims to be
         // native Array.
-        return enclosingTypeDescriptor.getSourceName();
+        return enclosingTypeDescriptor.getQualifiedSourceName();
       }
       // Use the parent namespace.
-      return enclosingTypeDescriptor.getQualifiedName();
+      return enclosingTypeDescriptor.getQualifiedJsName();
     }
     // Use the java package namespace.
     return packageName;
+  }
+
+  /**
+   * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
+   * unless it is modified by JsType/JsPacakge.
+   *
+   * <p>This is used for driving module name (hence importing etc.), long alias name, mangled name
+   * generation and other similar scenarios.
+   */
+  public String getQualifiedJsName() {
+    if (JsUtils.isGlobal(getJsNamespace())) {
+      return getSimpleJsName();
+    }
+    return getJsNamespace() + "." + getSimpleJsName();
   }
 
   public TypeDescriptor getLeafTypeDescriptor() {
@@ -627,14 +652,6 @@ public class TypeDescriptor extends Node
   /** Returns the fully package qualified name like "com.google.common". */
   public String getPackageName() {
     return packageName;
-  }
-
-  /** Returns the qualified name of the type. */
-  public String getQualifiedName() {
-    if (JsUtils.isGlobal(getJsNamespace())) {
-      return getJsName();
-    }
-    return getJsNamespace() + "." + getJsName();
   }
 
   /**
@@ -657,8 +674,12 @@ public class TypeDescriptor extends Node
     return boundTypeDescriptorFactory.getOrCreate(this);
   }
 
-  /** Returns the unqualified and unenclosed simple name like "Inner". */
-  public String getSimpleName() {
+  /**
+   * Returns the unqualified and unenclosed simple name like "Inner". Used for readable Debug/Error
+   * output.
+   */
+  // TODO(goktug): Incorrectly used for short alias name, and few other places.
+  public String getSimpleSourceName() {
     String simpleName = Iterables.getLast(classComponents);
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
     // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
@@ -671,8 +692,12 @@ public class TypeDescriptor extends Node
     return firstChar >= '0' && firstChar <= '9';
   }
 
-  /** Returns the fully package qualified source name like "com.google.common.Outer.Inner". */
-  public String getSourceName() {
+  /**
+   * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
+   * places where original name is needed (like identifying which TypeDescriptor corresponds to
+   * java.lang.String), Debug/Error output, etc.
+   */
+  public String getQualifiedSourceName() {
     return Joiner.on(".").skipNulls().join(packageName, Joiner.on(".").join(classComponents));
   }
 
@@ -924,6 +949,6 @@ public class TypeDescriptor extends Node
   @Override
   public String getReadableDescription() {
     // TODO: Actually provide a real readable description.
-    return getSimpleName();
+    return getSimpleSourceName();
   }
 }

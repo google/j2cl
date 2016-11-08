@@ -144,8 +144,8 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         String narrowMethodName =
             String.format(
                 "$narrow%sTo%s",
-                AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
-                AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
+                AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
+                AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
         MethodDescriptor narrowMethodDescriptor =
             MethodDescriptor.newBuilder()
                 .setJsInfo(JsInfo.RAW)

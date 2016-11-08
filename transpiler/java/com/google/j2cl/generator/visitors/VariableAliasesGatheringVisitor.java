@@ -48,7 +48,7 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
                     return anImport.getAlias();
                   }
                   // Collect the top level name for the extern.
-                  return anImport.getElement().getQualifiedName().split("\\\\.")[0];
+                  return anImport.getElement().getQualifiedJsName().split("\\\\.")[0];
                 })
             .collect(toImmutableSet());
     final Multimap<Member, String> variableNamesByMember = HashMultimap.create();

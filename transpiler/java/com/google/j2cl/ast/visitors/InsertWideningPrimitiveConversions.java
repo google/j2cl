@@ -123,8 +123,8 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
     String widenMethodName =
         String.format(
             "$widen%sTo%s",
-            AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
-            AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
+            AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
+            AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor widenMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)

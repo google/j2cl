@@ -140,7 +140,7 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
     // short<->short binary expressions and also for division with int<->int.
 
     String overflowMethodName =
-        String.format("$to%s", AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
+        String.format("$to%s", AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor overflowMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)

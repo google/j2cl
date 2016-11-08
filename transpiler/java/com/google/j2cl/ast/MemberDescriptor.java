@@ -38,7 +38,7 @@ public abstract class MemberDescriptor extends Node
   public abstract boolean isPolymorphic();
 
   @Override
-  public String getJsName() {
+  public String getSimpleJsName() {
     String jsName = getJsInfo().getJsName();
     return jsName != null ? jsName : getJsInfo().getJsMemberType().computeJsName(this);
   }
@@ -46,7 +46,9 @@ public abstract class MemberDescriptor extends Node
   @Override
   public String getJsNamespace() {
     String jsNamespace = getJsInfo().getJsNamespace();
-    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getQualifiedName() : jsNamespace;
+    return jsNamespace == null
+        ? getEnclosingClassTypeDescriptor().getQualifiedJsName()
+        : jsNamespace;
   }
 
   public boolean hasJsNamespace() {

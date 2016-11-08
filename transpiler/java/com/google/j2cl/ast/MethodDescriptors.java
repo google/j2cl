@@ -125,7 +125,11 @@ public class MethodDescriptors {
     return name
         + "("
         + Streams.stream(parameterTypeDescriptors)
-            .map(type -> TypeDescriptors.toNonNullable(type).getRawTypeDescriptor().getBinaryName())
+            .map(
+                type ->
+                    TypeDescriptors.toNonNullable(type)
+                        .getRawTypeDescriptor()
+                        .getQualifiedBinaryName())
             .collect(joining(", "))
         + ")";
   }

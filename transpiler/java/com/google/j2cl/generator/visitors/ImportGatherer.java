@@ -68,7 +68,7 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getBinaryName().replaceAll("_", "__").replaceAll("\\.", "_");
+    return typeDescriptor.getQualifiedBinaryName().replaceAll("_", "__").replaceAll("\\.", "_");
   }
 
   public static Map<ImportCategory, Set<Import>> gatherImports(Type type) {
@@ -83,9 +83,9 @@ public class ImportGatherer extends AbstractVisitor {
     // Add "$" prefix for bootstrap types and primitive types.
     if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
         || typeDescriptor.isPrimitive()) {
-      return "$" + typeDescriptor.getSimpleName();
+      return "$" + typeDescriptor.getSimpleSourceName();
     }
-    return typeDescriptor.getSimpleName();
+    return typeDescriptor.getSimpleSourceName();
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();
@@ -303,7 +303,7 @@ public class ImportGatherer extends AbstractVisitor {
         // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such
         // as window.String, for that scenario only the top level qualifier "window" needs to be
         // avoided.
-        String topLevelExtern = typeDescriptor.getQualifiedName().split("\\.")[0];
+        String topLevelExtern = typeDescriptor.getQualifiedJsName().split("\\.")[0];
         localNameUses.add(topLevelExtern);
       } else {
         localNameUses.add(getShortAliasName(typeDescriptor));
@@ -323,7 +323,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   private String computeAlias(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isExtern()) {
-      return typeDescriptor.getQualifiedName();
+      return typeDescriptor.getQualifiedJsName();
     }
 
     String shortAliasName = getShortAliasName(typeDescriptor);

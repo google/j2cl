@@ -305,7 +305,8 @@ class ToStringRenderer {
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         if (methodCall.isStaticDispatch()) {
-          print(methodCall.getTarget().getEnclosingClassTypeDescriptor().getSimpleName() + ".");
+          print(
+              methodCall.getTarget().getEnclosingClassTypeDescriptor().getSimpleSourceName() + ".");
         }
         accept(methodCall.qualifier);
         printInvocation(methodCall, "." + methodCall.getTarget().getName());
@@ -529,13 +530,13 @@ class ToStringRenderer {
 
       @Override
       public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.getSourceName());
+        print(typeDescriptor.getQualifiedSourceName());
         return false;
       }
 
       @Override
       public boolean enterTypeReference(TypeReference typeReference) {
-        print(typeReference.getReferencedTypeDescriptor().getSourceName());
+        print(typeReference.getReferencedTypeDescriptor().getQualifiedSourceName());
         return false;
       }
 
@@ -603,7 +604,7 @@ class ToStringRenderer {
       }
 
       private void print(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.getSourceName());
+        print(typeDescriptor.getQualifiedSourceName());
       }
 
       private void printSeparated(String separator, List<? extends Node> expressions) {

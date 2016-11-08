@@ -32,7 +32,7 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
   String renderOutput() {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
 
-    String binaryName = selfTypeDescriptor.getBinaryName();
+    String binaryName = selfTypeDescriptor.getQualifiedBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview native JsType proxy from " + binaryName,
@@ -53,7 +53,7 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     sourceBuilder.appendln("// Imports the real native type.");
     sourceBuilder.appendln(
-        "let _nativeType = goog.require('" + selfTypeDescriptor.getQualifiedName() + "');");
+        "let _nativeType = goog.require('" + selfTypeDescriptor.getQualifiedJsName() + "');");
     sourceBuilder.newLine();
     sourceBuilder.newLine();
 

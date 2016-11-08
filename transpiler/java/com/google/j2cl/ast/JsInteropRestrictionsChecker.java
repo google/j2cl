@@ -136,7 +136,7 @@ public class JsInteropRestrictionsChecker {
             "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
             memberDescriptor.getReadableDescription(),
             collidingMemberDescriptor.getReadableDescription(),
-            memberDescriptor.getJsName());
+            memberDescriptor.getSimpleJsName());
       }
 
       memberDescriptorsByKey.put(getMemberKey(memberDescriptor), memberDescriptor);
@@ -192,7 +192,7 @@ public class JsInteropRestrictionsChecker {
 
     if (member
         .getJsNamespace()
-        .equals(member.getDescriptor().getEnclosingClassTypeDescriptor().getQualifiedName())) {
+        .equals(member.getDescriptor().getEnclosingClassTypeDescriptor().getQualifiedJsName())) {
       // Namespace set by the enclosing type has already been checked.
       return;
     }
@@ -423,7 +423,7 @@ public class JsInteropRestrictionsChecker {
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription> void checkJsName(
       T item) {
-    String jsName = item.getJsName();
+    String jsName = item.getSimpleJsName();
     if (jsName == null) {
       return;
     }
@@ -539,6 +539,6 @@ public class JsInteropRestrictionsChecker {
   }
 
   private String getMemberKey(MemberDescriptor memberDescriptor) {
-    return (memberDescriptor.isStatic() ? "static " : "") + memberDescriptor.getJsName();
+    return (memberDescriptor.isStatic() ? "static " : "") + memberDescriptor.getSimpleJsName();
   }
 }

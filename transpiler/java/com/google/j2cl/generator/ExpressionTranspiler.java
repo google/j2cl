@@ -258,7 +258,7 @@ public class ExpressionTranspiler {
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
       private void renderJsPropertyAccess(MethodCall expression) {
-        renderQualifiedName(expression.getQualifier(), expression.getTarget().getJsName());
+        renderQualifiedName(expression.getQualifier(), expression.getTarget().getSimpleJsName());
       }
 
       /** JsProperty setter is emitted as property set: qualifier.property = argument. */

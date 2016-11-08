@@ -314,7 +314,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       if (isConstructor) {
         // Choose consistent naming for constructors.
-        name = enclosingClassTypeDescriptor.getSimpleName();
+        name = enclosingClassTypeDescriptor.getSimpleSourceName();
       }
 
       if (declarationMethodDescriptor != null) {

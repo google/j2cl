@@ -103,12 +103,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
       // Yes this is really being done on purpose.
       throw new RuntimeException(
-          "Error generating source for type " + type.getDescriptor().getBinaryName(), e);
+          "Error generating source for type " + type.getDescriptor().getQualifiedBinaryName(), e);
     }
   }
 
   private void renderFileOverview() {
-    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getBinaryName();
+    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview Impl transpiled from " + transpiledFrom + ".",
@@ -298,7 +298,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Marks the provided class as implementing this interface.",
-        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName() + "} classConstructor",
+        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName() + "} classConstructor",
         " * @public",
         " */",
         "static $markImplementor(classConstructor) ");
@@ -395,7 +395,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Returns whether the provided class is or extends this class.",
-        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName() + "} classConstructor",
+        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName() + "} classConstructor",
         " * @return {boolean}",
         " * @public",
         " */",
@@ -452,11 +452,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     String name = null;
     if (type.isJsOverlayImplementation()) {
-      name = type.getNativeTypeDescriptor().getQualifiedName();
+      name = type.getNativeTypeDescriptor().getQualifiedJsName();
     } else if (type.getDescriptor().isJsFunctionInterface()) {
       name = "Function";
     } else {
-      name = type.getDescriptor().getBinaryName();
+      name = type.getDescriptor().getQualifiedBinaryName();
     }
 
     String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
@@ -664,7 +664,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(
           className
               + ".$markImplementor(/** @type {"
-              + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName()
+              + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName()
               + "} */ ("
               + className
               + "));");

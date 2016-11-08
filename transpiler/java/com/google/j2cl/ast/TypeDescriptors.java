@@ -420,7 +420,7 @@ public class TypeDescriptors {
         .setIsJsType(isJsType)
         .setIsNative(isNative)
         .setIsNullable(true)
-        .setJsName(jsName)
+        .setSimpleJsName(jsName)
         .setJsNamespace(jsNamespace)
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
@@ -526,7 +526,7 @@ public class TypeDescriptors {
     checkArgument(!typeDescriptor.isUnion());
 
     // Primitives.
-    switch (typeDescriptor.getSourceName()) {
+    switch (typeDescriptor.getQualifiedSourceName()) {
       case BOOLEAN_TYPE_NAME:
         return BooleanLiteral.FALSE;
       case BYTE_TYPE_NAME:
@@ -549,7 +549,7 @@ public class TypeDescriptors {
         .stream()
         .map(
             typeDescriptor -> {
-              String binaryName = typeDescriptor.getBinaryName();
+              String binaryName = typeDescriptor.getQualifiedBinaryName();
               if (typeDescriptor.isParameterizedType()) {
                 binaryName += "_";
                 binaryName += createUniqueName(typeDescriptor.getTypeArgumentDescriptors(), "_");
@@ -578,8 +578,10 @@ public class TypeDescriptors {
 
     public SingletonInitializer addPrimitiveType(TypeDescriptor primitiveType) {
       checkArgument(
-          primitiveType.isPrimitive(), "%s is not a primitive type", primitiveType.getSourceName());
-      String name = primitiveType.getSourceName();
+          primitiveType.isPrimitive(),
+          "%s is not a primitive type",
+          primitiveType.getQualifiedSourceName());
+      String name = primitiveType.getQualifiedSourceName();
       switch (name) {
         case TypeDescriptors.BOOLEAN_TYPE_NAME:
           typeDescriptors.primitiveBoolean = primitiveType;
@@ -618,8 +620,8 @@ public class TypeDescriptors {
       checkArgument(
           !referenceType.isPrimitive(),
           "%s is not a reference type",
-          referenceType.getSourceName());
-      String name = referenceType.getSourceName();
+          referenceType.getQualifiedSourceName());
+      String name = referenceType.getQualifiedSourceName();
       switch (name) {
         case "java.lang.Boolean":
           typeDescriptors.javaLangBoolean = referenceType;

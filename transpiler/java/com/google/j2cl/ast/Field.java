@@ -82,8 +82,8 @@ public class Field extends Member implements HasJsNameInfo {
   }
 
   @Override
-  public String getJsName() {
-    return fieldDescriptor.getJsName();
+  public String getSimpleJsName() {
+    return fieldDescriptor.getSimpleJsName();
   }
 
   @Override
