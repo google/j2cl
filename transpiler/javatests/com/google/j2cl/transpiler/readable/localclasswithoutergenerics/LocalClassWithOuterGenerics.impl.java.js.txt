@@ -12,6 +12,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Bar$impl');
+let $1Baz = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Baz$impl');
 
 
 /**
@@ -57,7 +58,8 @@ class LocalClassWithOuterGenerics extends java_lang_Object {
    */
   static m_foo__() {
     LocalClassWithOuterGenerics.$clinit();
-    let bar = /**@type {!$1Bar<C_A>} */ ($1Bar.$create__());
+    let bar = /**@type {!$1Bar<*>} */ ($1Bar.$create__());
+    let baz = /**@type {!$1Baz<*, *>} */ ($1Baz.$create__());
   }
 
   /**
@@ -87,6 +89,8 @@ class LocalClassWithOuterGenerics extends java_lang_Object {
   static $clinit() {
     $1Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Bar$impl');
+    $1Baz = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Baz$impl');
     java_lang_Object.$clinit();
   }
 

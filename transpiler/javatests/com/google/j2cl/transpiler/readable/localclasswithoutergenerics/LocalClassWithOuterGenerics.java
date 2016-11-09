@@ -7,5 +7,10 @@ public class LocalClassWithOuterGenerics<A> {
       void baz(Bar other) {}
     }
     Bar bar = new Bar();
+
+    class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }
+    Baz<Object> baz = new Baz<>();
   }
 }

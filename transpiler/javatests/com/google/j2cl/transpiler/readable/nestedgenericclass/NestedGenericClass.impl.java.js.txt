@@ -66,10 +66,10 @@ class NestedGenericClass extends java_lang_Object {
    * @public
    */
   m_fun__java_lang_Object(t) {
-    /**@type {!$1E<(Number|?number)>} */
+    /**@type {!$1E<(Number|?number), *, C_T>} */
     ($1E.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this));
-    /**@type {!$1F<C_T>} */
+    /**@type {!$1F<*, C_T>} */
     ($1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this));
   }
@@ -80,7 +80,7 @@ class NestedGenericClass extends java_lang_Object {
    * @public
    */
   m_bar__() {
-    /**@type {!$1G<Error>} */
+    /**@type {!$1G<Error, *, C_T>} */
     ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
          this))
         .m_bar__();
@@ -93,10 +93,10 @@ class NestedGenericClass extends java_lang_Object {
   m_test__() {
     let n = /**@type {!NestedGenericClass<(Number|?number)>} */ (
         NestedGenericClass.$create__());
-    let a = /**@type {!A<Error>} */ (
+    let a = /**@type {!A<Error, (Number|?number)>} */ (
         A.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
             n));
-    let b = /**@type {!B<Exception>} */ (
+    let b = /**@type {!B<Exception, Error, (Number|?number)>} */ (
         B.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A(
             a));
     /**@type {!C<(Number|?number)>} */

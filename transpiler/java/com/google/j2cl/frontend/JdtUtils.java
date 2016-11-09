@@ -657,12 +657,6 @@ public class JdtUtils {
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
       descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
-    } else if (typeBinding.isParameterizedType()) {
-      List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
-      for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
-        typeArgumentsDescriptors.add(createTypeDescriptor(typeArgumentBinding));
-      }
-      descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
       descriptor = createTypeDescriptor(typeBinding, null);
     }
@@ -828,20 +822,31 @@ public class JdtUtils {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
     } else {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
-      boolean isInstanceNestedClass =
-          typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
-      if (isInstanceNestedClass) {
-        if (typeBinding.getDeclaringMethod() != null) {
-          typeArgumentDescriptors.addAll(
-              createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
-        }
-        if (typeBinding.getDeclaringMember() == null
-            || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
-          typeArgumentDescriptors.addAll(
-              createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
-        }
+    }
+
+    // Find type parameters in the enclosing scope and copy them over as well.
+    boolean isInstanceNestedClass =
+        typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+    if (isInstanceNestedClass) {
+      // Occasionally JDT's type bindings are specialized in a way that accidentally loses track of
+      // it's type's method declaration scope. If so then backtrack the specialization to restore
+      // access.
+      if (typeBinding.getDeclaringMethod() == null
+          && typeBinding.getTypeDeclaration().getDeclaringMethod() != null) {
+        typeBinding = typeBinding.getTypeDeclaration();
+      }
+
+      if (typeBinding.getDeclaringMethod() != null) {
+        typeArgumentDescriptors.addAll(
+            createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
+      }
+      if (typeBinding.getDeclaringMember() == null
+          || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
+        typeArgumentDescriptors.addAll(
+            createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
       }
     }
+
     return typeArgumentDescriptors;
   }
 
