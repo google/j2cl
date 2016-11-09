@@ -99,7 +99,6 @@ def j2cl_generate_jsunit_suite(base_name, test_class, **kwargs):
       name=base_name + "_transpile_gen",
       outs=[base_name + ".js.zip"],
       cmd="\n".join([
-          "set -e",
           "unzip -q $(location %s) *.js *.json -d zip_out/" % out_jar,
           "cd zip_out/",
           "zip -q -r ../$@ .",
