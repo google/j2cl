@@ -103,6 +103,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
@@ -180,8 +181,6 @@ public class CompilationUnitBuilder {
     private void convert(AbstractTypeDeclaration typeDeclaration) {
       switch (typeDeclaration.getNodeType()) {
         case ASTNode.ANNOTATION_TYPE_DECLARATION:
-          // We currently do not produce any output for annotations.
-          break;
         case ASTNode.TYPE_DECLARATION:
           Type type =
               convertAndAddType(
@@ -249,6 +248,10 @@ public class CompilationUnitBuilder {
         } else if (bodyDeclaration instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) bodyDeclaration;
           type.addMethod(convert(methodDeclaration));
+        } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration) {
+          AnnotationTypeMemberDeclaration memberDeclaration =
+              (AnnotationTypeMemberDeclaration) bodyDeclaration;
+          type.addMethod(convert(memberDeclaration));
         } else if (bodyDeclaration instanceof Initializer) {
           Initializer initializer = (Initializer) bodyDeclaration;
           Block block = convert(initializer.getBody());
@@ -381,20 +384,29 @@ public class CompilationUnitBuilder {
       Block body =
           methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
 
-      IMethodBinding methodBinding = methodDeclaration.resolveBinding();
+      Method.Builder methodBuilder =
+          newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
+              .setParameters(parameters)
+              .addStatements(body.getStatements());
+      return methodBuilder.build();
+    }
+
+    private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {
+      return newMethodBuilder(memberDeclaration.resolveBinding(), memberDeclaration).build();
+    }
+
+    private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
       Method.Builder methodBuilder =
           Method.newBuilder()
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
-              .setParameters(parameters)
-              .addStatements(body.getStatements())
               .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
               .setIsFinal(JdtUtils.isFinal(methodBinding))
-              .setSourcePosition(getSourcePosition(methodDeclaration));
+              .setSourcePosition(getSourcePosition(node));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
-      return methodBuilder.build();
+      return methodBuilder;
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
