@@ -36,16 +36,10 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   @Override
   public String renderOutput() {
+    renderFileOverview("lateProvide");
+
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    String binaryName = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
-    sourceBuilder.appendLines(
-        "/**",
-        " * @fileoverview Header transpiled from " + binaryName,
-        " *",
-        " * @suppress {lateProvide}",
-        " */",
-        "goog.module('" + selfTypeDescriptor.getModuleName() + "');");
-    sourceBuilder.newLine();
+    sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getModuleName() + "');");
 
     if (declareLegacyNamespace
         && type.getDescriptor().isJsType()

@@ -88,7 +88,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   @Override
   public String renderOutput() {
     try {
-      renderFileOverview();
+      renderFileOverview(
+          "suspiciousCode",
+          "transitionalSuspiciousCodeWarnings",
+          "uselessCode",
+          "const",
+          "missingRequire",
+          "missingOverride");
       renderImports();
       renderTypeAnnotation();
       renderTypeBody();
@@ -105,18 +111,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       throw new RuntimeException(
           "Error generating source for type " + type.getDescriptor().getQualifiedBinaryName(), e);
     }
-  }
-
-  private void renderFileOverview() {
-    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
-    sourceBuilder.appendLines(
-        "/**",
-        " * @fileoverview Impl transpiled from " + transpiledFrom + ".",
-        " *",
-        " * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const,"
-            + " missingRequire, missingOverride}",
-        " */");
-    sourceBuilder.newLine();
   }
 
   private void renderImports() {

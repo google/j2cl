@@ -30,17 +30,10 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
 
   @Override
   String renderOutput() {
-    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
+    renderFileOverview("lateProvide");
 
-    String binaryName = selfTypeDescriptor.getQualifiedBinaryName();
-    sourceBuilder.appendLines(
-        "/**",
-        " * @fileoverview native JsType proxy from " + binaryName,
-        " *",
-        " * @suppress {lateProvide}",
-        " */",
-        "goog.module('" + selfTypeDescriptor.getModuleName() + "');");
-    sourceBuilder.newLine();
+    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
+    sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getModuleName() + "');");
 
     if (declareLegacyNamespace
         && selfTypeDescriptor.isJsType()

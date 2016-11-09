@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
@@ -62,6 +63,17 @@ public abstract class JavaScriptGenerator {
   abstract String renderOutput();
 
   abstract String getSuffix();
+
+  void renderFileOverview(String... suppressions) {
+    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
+    sourceBuilder.appendLines(
+        "/**",
+        " * @fileoverview transpiled from " + transpiledFrom + ".",
+        " *",
+        " * @suppress {" + Joiner.on(", ").join(suppressions) + "}",
+        " */");
+    sourceBuilder.newLine();
+  }
 
   static Iterable<Import> sortImports(Iterable<Import> iterable) {
     List<Import> sortedList = new ArrayList<>();
