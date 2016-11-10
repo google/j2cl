@@ -38,8 +38,7 @@ public class GenerationEnvironment {
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     JsDocNameUtils.init();
     for (Import anImport : imports) {
-      aliasByTypeBinaryName.put(
-          anImport.getElement().getQualifiedBinaryName(), anImport.getAlias());
+      aliasByTypeBinaryName.put(anImport.getElement().getQualifiedJsName(), anImport.getAlias());
     }
     this.aliasByVariable = aliasByVariable;
   }
@@ -53,13 +52,13 @@ public class GenerationEnvironment {
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
     checkState(
-        aliasByTypeBinaryName.containsKey(typeDescriptor.getQualifiedBinaryName()),
+        aliasByTypeBinaryName.containsKey(typeDescriptor.getQualifiedJsName()),
         "An alias was needed for %s but no alias was found.",
-        typeDescriptor.getQualifiedBinaryName());
+        typeDescriptor);
     checkArgument(!typeDescriptor.isTypeVariable());
     checkArgument(!typeDescriptor.isWildCardOrCapture());
 
-    return aliasByTypeBinaryName.get(typeDescriptor.getQualifiedBinaryName());
+    return aliasByTypeBinaryName.get(typeDescriptor.getQualifiedJsName());
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {

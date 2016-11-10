@@ -37,7 +37,7 @@ public class ManglingNameUtils {
       return Strings.repeat("arrayOf_", rawTypeDescriptor.getDimensions())
           + getMangledName(rawTypeDescriptor.getLeafTypeDescriptor());
     }
-    return rawTypeDescriptor.getQualifiedBinaryName().replace('.', '_');
+    return rawTypeDescriptor.getQualifiedSourceName().replace('.', '_');
   }
 
   /**

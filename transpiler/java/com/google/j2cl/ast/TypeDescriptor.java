@@ -452,7 +452,6 @@ public class TypeDescriptor extends Node
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
   public String getSimpleBinaryName() {
-    // TODO rename to getBinarySimpleName
     return Joiner.on('$').join(classComponents);
   }
 
@@ -462,7 +461,6 @@ public class TypeDescriptor extends Node
    * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
    * and other similar scenarios.
    */
-  // TODO(goktug): Incorrectly used for long alias name, and few other places.
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(packageName, getSimpleBinaryName());
   }
@@ -593,9 +591,8 @@ public class TypeDescriptor extends Node
 
   /**
    * Returns the JavaScript name for this class. This is same as simple source name unless modified
-   * by JsType. Used for short alias name.
+   * by JsType.
    */
-  // TODO(goktug): Use for short alias name.
   @Override
   public String getSimpleJsName() {
     if (simpleJsName == null) {
@@ -675,10 +672,9 @@ public class TypeDescriptor extends Node
   }
 
   /**
-   * Returns the unqualified and unenclosed simple name like "Inner". Used for readable Debug/Error
-   * output.
+   * Returns the unqualified simple source name like "Inner". Used when a readable name is required
+   * to refer to the type like a short alias, Debug/Error output, etc.
    */
-  // TODO(goktug): Incorrectly used for short alias name, and few other places.
   public String getSimpleSourceName() {
     String simpleName = Iterables.getLast(classComponents);
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
@@ -694,8 +690,8 @@ public class TypeDescriptor extends Node
 
   /**
    * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
-   * places where original name is needed (like identifying which TypeDescriptor corresponds to
-   * java.lang.String), Debug/Error output, etc.
+   * places where original name is useful (like aliasing, identifying the corressponding java type,
+   * Debug/Error output, etc.
    */
   public String getQualifiedSourceName() {
     return Joiner.on(".").skipNulls().join(packageName, Joiner.on(".").join(classComponents));

@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_jsfunction_Main$Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
+let com_google_j2cl_transpiler_readable_jsfunction_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let MyJsFunctionInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -123,7 +123,7 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  static m_f__com_google_j2cl_transpiler_readable_jsfunction_Main$Function(f) {
+  static m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(f) {
     Main.$clinit();
   }
 
@@ -134,10 +134,10 @@ class Main extends java_lang_Object {
   m_test2__() {
     let list = /**@type {!ArrayList<?function(?string):?string>} */ (
         ArrayList.$create__());
-    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main$Function(
+    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(
         /**@type {?function(?string):?string} */ ($Casts.to(
             list.getAtIndex(0),
-            com_google_j2cl_transpiler_readable_jsfunction_Main$Function)));
+            com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));
   }
 
   /**
@@ -179,7 +179,7 @@ class Main extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_jsfunction_Main$Function =
+    com_google_j2cl_transpiler_readable_jsfunction_Main_Function =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
     MyJsFunctionImpl = goog.module.get(

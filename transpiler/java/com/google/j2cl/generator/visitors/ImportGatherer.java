@@ -67,25 +67,12 @@ public class ImportGatherer extends AbstractVisitor {
     SELF
   }
 
-  private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getQualifiedBinaryName().replaceAll("_", "__").replaceAll("\\.", "_");
-  }
-
   public static Map<ImportCategory, Set<Import>> gatherImports(Type type) {
     TimingCollector.get().startSubSample("Import Gathering Visitor");
 
     Map<ImportCategory, Set<Import>> map = new ImportGatherer().doGatherImports(type);
     TimingCollector.get().endSubSample();
     return map;
-  }
-
-  private static String getShortAliasName(TypeDescriptor typeDescriptor) {
-    // Add "$" prefix for bootstrap types and primitive types.
-    if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
-        || typeDescriptor.isPrimitive()) {
-      return "$" + typeDescriptor.getSimpleSourceName();
-    }
-    return typeDescriptor.getSimpleSourceName();
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();
@@ -306,7 +293,7 @@ public class ImportGatherer extends AbstractVisitor {
         String topLevelExtern = typeDescriptor.getQualifiedJsName().split("\\.")[0];
         localNameUses.add(topLevelExtern);
       } else {
-        localNameUses.add(getShortAliasName(typeDescriptor));
+        localNameUses.add(computeShortAliasName(typeDescriptor));
       }
     }
   }
@@ -326,10 +313,23 @@ public class ImportGatherer extends AbstractVisitor {
       return typeDescriptor.getQualifiedJsName();
     }
 
-    String shortAliasName = getShortAliasName(typeDescriptor);
-    int usageCount = localNameUses.count(shortAliasName);
-    return usageCount == 1 && JsProtectedNames.isLegalName(shortAliasName)
+    String shortAliasName = computeShortAliasName(typeDescriptor);
+    boolean unique = localNameUses.count(shortAliasName) == 1;
+    return unique && JsProtectedNames.isLegalName(shortAliasName)
         ? shortAliasName
         : computeLongAliasName(typeDescriptor);
+  }
+
+  private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.getQualifiedSourceName().replaceAll("_", "__").replaceAll("\\.", "_");
+  }
+
+  private static String computeShortAliasName(TypeDescriptor typeDescriptor) {
+    // Add "$" prefix for bootstrap types and primitive types.
+    if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
+        || typeDescriptor.isPrimitive()) {
+      return "$" + typeDescriptor.getSimpleSourceName();
+    }
+    return typeDescriptor.getSimpleSourceName();
   }
 }
