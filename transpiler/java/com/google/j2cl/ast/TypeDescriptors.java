@@ -256,7 +256,7 @@ public class TypeDescriptors {
     NATIVE_LONG("nativebootstrap", "Long"),
     EXCEPTIONS("vmbootstrap", "Exceptions");
 
-    private TypeDescriptor typeDescriptor;
+    private final TypeDescriptor typeDescriptor;
 
     BootstrapType(String packageName, String name) {
       this.typeDescriptor =
@@ -443,12 +443,8 @@ public class TypeDescriptors {
         .build();
   }
 
-  public static TypeDescriptor toGivenNullability(
-      TypeDescriptor originalTypeDescriptor, boolean nullable) {
-    if (nullable) {
-      return toNullable(originalTypeDescriptor);
-    }
-    return toNonNullable(originalTypeDescriptor);
+  public static TypeDescriptor toGivenNullability(TypeDescriptor typeDescriptor, boolean nullable) {
+    return nullable ? toNullable(typeDescriptor) : toNonNullable(typeDescriptor);
   }
 
   public static TypeDescriptor toNonNullable(TypeDescriptor originalTypeDescriptor) {

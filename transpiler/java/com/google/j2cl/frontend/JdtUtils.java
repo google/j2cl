@@ -630,11 +630,7 @@ public class JdtUtils {
     return false;
   }
 
-  /**
-   * Creates a TypeDescriptor from a JDT TypeBinding.
-   */
-  // TODO(simionato): Delete this method and make all the callers use
-  // createTypeDescriptorWithNullability.
+  /** Creates a TypeDescriptor from a JDT TypeBinding. */
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
   }
@@ -650,21 +646,26 @@ public class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
-    TypeDescriptor descriptor;
+    TypeDescriptor descriptor = internalCreateTypeDescriptor(typeBinding);
+    return TypeDescriptors.toGivenNullability(
+        descriptor, isNullable(typeBinding, elementAnnotations));
+  }
+
+  private static TypeDescriptor internalCreateTypeDescriptor(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return null;
+    }
+
     if (isIntersectionType(typeBinding)) {
       return createIntersectionType(typeBinding);
     }
+
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
-      descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
-    } else {
-      descriptor = createTypeDescriptor(typeBinding, null);
+      return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     }
 
-    if (!isNullable(typeBinding, elementAnnotations)) {
-      return TypeDescriptors.toNonNullable(descriptor);
-    }
-    return TypeDescriptors.toNullable(descriptor);
+    return createForType(typeBinding);
   }
 
   /**
@@ -729,21 +730,6 @@ public class JdtUtils {
               || (binding.getSuperclass() == null && binding.getInterfaces().length >= 2));
     }
     return isIntersectionType;
-  }
-
-  /**
-   * Creates a TypeDescriptor from a JDT TypeBinding.
-   */
-  public static TypeDescriptor createTypeDescriptor(
-      ITypeBinding typeBinding, List<TypeDescriptor> typeArgumentDescriptors) {
-    if (typeBinding == null) {
-      return null;
-    }
-    if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
-      return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
-    }
-    return createForType(typeBinding, typeArgumentDescriptors);
   }
 
   public static List<String> getClassComponents(ITypeBinding typeBinding) {
@@ -1371,8 +1357,7 @@ public class JdtUtils {
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  public static TypeDescriptor createForType(
-      final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
+  private static TypeDescriptor createForType(final ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isArray());
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
@@ -1430,11 +1415,6 @@ public class JdtUtils {
     boolean isFinal = isFinal(typeBinding);
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
     String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
-
-    List<TypeDescriptor> typeArgumentDescriptors =
-        overrideTypeArgumentDescriptors != null
-            ? overrideTypeArgumentDescriptors
-            : getTypeArgumentTypeDescriptors(typeBinding);
 
     DescriptorFactory<Map<String, MethodDescriptor>> declaredMethods =
         new DescriptorFactory<Map<String, MethodDescriptor>>() {
@@ -1512,7 +1492,7 @@ public class JdtUtils {
                 return createTypeDescriptor(typeBinding.getSuperclass());
               }
             })
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setUniqueKey(uniqueKey)
