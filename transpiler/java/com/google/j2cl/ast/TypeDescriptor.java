@@ -37,6 +37,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * A reference to a type.
@@ -63,27 +65,12 @@ public class TypeDescriptor extends Node
       newTypeDescriptor.classComponents = typeDescriptor.getClassComponents();
       newTypeDescriptor.componentTypeDescriptor = typeDescriptor.getComponentTypeDescriptor();
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          new DescriptorFactory<MethodDescriptor>() {
-            @Override
-            public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getConcreteJsFunctionMethodDescriptor();
-            }
-          };
+          createFactory(typeDescriptor::getConcreteJsFunctionMethodDescriptor);
       newTypeDescriptor.dimensions = typeDescriptor.getDimensions();
       newTypeDescriptor.enclosingTypeDescriptorFactory =
-          new DescriptorFactory<TypeDescriptor>() {
-            @Override
-            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getEnclosingTypeDescriptor();
-            }
-          };
+          createFactory(typeDescriptor::getEnclosingTypeDescriptor);
       newTypeDescriptor.interfaceTypeDescriptorsFactory =
-          new DescriptorFactory<List<TypeDescriptor>>() {
-            @Override
-            public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getInterfaceTypeDescriptors();
-            }
-          };
+          createFactory(typeDescriptor::getInterfaceTypeDescriptors);
       newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
       newTypeDescriptor.isArray = typeDescriptor.isArray();
       newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
@@ -103,43 +90,22 @@ public class TypeDescriptor extends Node
       newTypeDescriptor.isUnion = typeDescriptor.isUnion();
       newTypeDescriptor.isWildCardOrCapture = typeDescriptor.isWildCardOrCapture();
       newTypeDescriptor.jsFunctionMethodDescriptorFactory =
-          new DescriptorFactory<MethodDescriptor>() {
-            @Override
-            public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getJsFunctionMethodDescriptor();
-            }
-          };
+          createFactory(typeDescriptor::getJsFunctionMethodDescriptor);
       newTypeDescriptor.simpleJsName = typeDescriptor.getSimpleJsName();
       newTypeDescriptor.jsNamespace = typeDescriptor.getJsNamespace();
       newTypeDescriptor.leafTypeDescriptor = typeDescriptor.getLeafTypeDescriptor();
       newTypeDescriptor.packageName = typeDescriptor.getPackageName();
       newTypeDescriptor.rawTypeDescriptorFactory =
-          new DescriptorFactory<TypeDescriptor>() {
-            @Override
-            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getRawTypeDescriptor();
-            }
-          };
+          createFactory(typeDescriptor::getRawTypeDescriptor);
       newTypeDescriptor.isOrSubclassesJsConstructorClass =
           typeDescriptor.isOrSubclassesJsConstructorClass();
       newTypeDescriptor.superTypeDescriptorFactory =
-          new DescriptorFactory<TypeDescriptor>() {
-            @Override
-            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getSuperTypeDescriptor();
-            }
-          };
+          createFactory(typeDescriptor::getSuperTypeDescriptor);
       newTypeDescriptor.unionedTypeDescriptors = typeDescriptor.getUnionedTypeDescriptors();
       newTypeDescriptor.typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
       newTypeDescriptor.visibility = typeDescriptor.getVisibility();
       newTypeDescriptor.declaredMethodDescriptorsFactory =
-          new DescriptorFactory<Map<String, MethodDescriptor>>() {
-            @Override
-            public Map<String, MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-              return typeDescriptor.getDeclaredMethodDescriptorsBySignature();
-            }
-          };
-
+          createFactory(typeDescriptor::getMethodDescriptorsBySignature);
       return builder;
     }
 
@@ -174,8 +140,14 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setBoundTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory) {
-      newTypeDescriptor.boundTypeDescriptorFactory = boundTypeDescriptorFactory;
+        Function<TypeDescriptor, TypeDescriptor> boundTypeDescriptorFactory) {
+      newTypeDescriptor.boundTypeDescriptorFactory = createFactory(boundTypeDescriptorFactory);
+      return this;
+    }
+
+    public Builder setBoundTypeDescriptorFactory(
+        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
+      newTypeDescriptor.boundTypeDescriptorFactory = createFactory(boundTypeDescriptorFactory);
       return this;
     }
 
@@ -190,9 +162,16 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setConcreteJsFunctionMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
+        Function<TypeDescriptor, MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          concreteJsFunctionMethodDescriptorFactory;
+          createFactory(concreteJsFunctionMethodDescriptorFactory);
+      return this;
+    }
+
+    public Builder setConcreteJsFunctionMethodDescriptorFactory(
+        Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
+      newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
+          createFactory(concreteJsFunctionMethodDescriptorFactory);
       return this;
     }
 
@@ -202,14 +181,30 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setEnclosingTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory) {
-      newTypeDescriptor.enclosingTypeDescriptorFactory = enclosingTypeDescriptorFactory;
+        Function<TypeDescriptor, TypeDescriptor> enclosingTypeDescriptorFactory) {
+      newTypeDescriptor.enclosingTypeDescriptorFactory =
+          createFactory(enclosingTypeDescriptorFactory);
+      return this;
+    }
+
+    public Builder setEnclosingTypeDescriptorFactory(
+        Supplier<TypeDescriptor> enclosingTypeDescriptorFactory) {
+      newTypeDescriptor.enclosingTypeDescriptorFactory =
+          createFactory(enclosingTypeDescriptorFactory);
       return this;
     }
 
     public Builder setInterfaceTypeDescriptorsFactory(
-        DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
-      newTypeDescriptor.interfaceTypeDescriptorsFactory = interfaceTypeDescriptorsFactory;
+        Supplier<List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
+      newTypeDescriptor.interfaceTypeDescriptorsFactory =
+          createFactory(interfaceTypeDescriptorsFactory);
+      return this;
+    }
+
+    public Builder setInterfaceTypeDescriptorsFactory(
+        Function<TypeDescriptor, List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
+      newTypeDescriptor.interfaceTypeDescriptorsFactory =
+          createFactory(interfaceTypeDescriptorsFactory);
       return this;
     }
 
@@ -304,8 +299,16 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setJsFunctionMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
-      newTypeDescriptor.jsFunctionMethodDescriptorFactory = jsFunctionMethodDescriptorFactory;
+        Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
+      newTypeDescriptor.jsFunctionMethodDescriptorFactory =
+          createFactory(jsFunctionMethodDescriptorFactory);
+      return this;
+    }
+
+    public Builder setJsFunctionMethodDescriptorFactory(
+        Function<TypeDescriptor, MethodDescriptor> jsFunctionMethodDescriptorFactory) {
+      newTypeDescriptor.jsFunctionMethodDescriptorFactory =
+          createFactory(jsFunctionMethodDescriptorFactory);
       return this;
     }
 
@@ -329,9 +332,14 @@ public class TypeDescriptor extends Node
       return this;
     }
 
+    public Builder setRawTypeDescriptorFactory(Supplier<TypeDescriptor> rawTypeDescriptorFactory) {
+      newTypeDescriptor.rawTypeDescriptorFactory = createFactory(rawTypeDescriptorFactory);
+      return this;
+    }
+
     public Builder setRawTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory) {
-      newTypeDescriptor.rawTypeDescriptorFactory = rawTypeDescriptorFactory;
+        Function<TypeDescriptor, TypeDescriptor> rawTypeDescriptorFactory) {
+      newTypeDescriptor.rawTypeDescriptorFactory = createFactory(rawTypeDescriptorFactory);
       return this;
     }
 
@@ -341,8 +349,14 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setSuperTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory) {
-      newTypeDescriptor.superTypeDescriptorFactory = superTypeDescriptorFactory;
+        Supplier<TypeDescriptor> superTypeDescriptorFactory) {
+      newTypeDescriptor.superTypeDescriptorFactory = createFactory(superTypeDescriptorFactory);
+      return this;
+    }
+
+    public Builder setSuperTypeDescriptorFactory(
+        Function<TypeDescriptor, TypeDescriptor> superTypeDescriptorFactory) {
+      newTypeDescriptor.superTypeDescriptorFactory = createFactory(superTypeDescriptorFactory);
       return this;
     }
 
@@ -362,8 +376,16 @@ public class TypeDescriptor extends Node
     }
 
     public Builder setDeclaredMethodDescriptorsFactory(
-        DescriptorFactory<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
-      newTypeDescriptor.declaredMethodDescriptorsFactory = declaredMethodDescriptorsFactory;
+        Supplier<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
+      newTypeDescriptor.declaredMethodDescriptorsFactory =
+          createFactory(declaredMethodDescriptorsFactory);
+      return this;
+    }
+
+    public Builder setDeclaredMethodDescriptorsFactory(
+        Function<TypeDescriptor, Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
+      newTypeDescriptor.declaredMethodDescriptorsFactory =
+          createFactory(declaredMethodDescriptorsFactory);
       return this;
     }
   }
@@ -372,17 +394,26 @@ public class TypeDescriptor extends Node
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
    */
-  public abstract static class DescriptorFactory<T> {
-    private T cachedDescriptor;
+  private interface DescriptorFactory<T> {
+    T getOrCreate(TypeDescriptor selfTypeDescriptor);
+  }
 
-    public T getOrCreate(TypeDescriptor selfTypeDescriptor) {
-      if (cachedDescriptor == null) {
-        cachedDescriptor = create(selfTypeDescriptor);
+  private static <T> DescriptorFactory<T> createFactory(Function<TypeDescriptor, T> function) {
+    return new DescriptorFactory<T>() {
+      private T cachedDescriptor;
+
+      @Override
+      public T getOrCreate(TypeDescriptor selfTypeDescriptor) {
+        if (cachedDescriptor == null) {
+          cachedDescriptor = function.apply(selfTypeDescriptor);
+        }
+        return cachedDescriptor;
       }
-      return cachedDescriptor;
-    }
+    };
+  }
 
-    protected abstract T create(TypeDescriptor selfTypeDescriptor);
+  private static <T> DescriptorFactory<T> createFactory(Supplier<T> function) {
+    return createFactory(selfTypeDescriptor -> function.get());
   }
 
   private String uniqueKey;

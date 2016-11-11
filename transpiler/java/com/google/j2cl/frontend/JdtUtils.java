@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -42,7 +43,6 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
@@ -59,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.AST;
@@ -1156,11 +1157,11 @@ public class JdtUtils {
     return abstractMethods.get(0);
   }
 
-  static List<TypeDescriptor> createTypeDescriptors(List<ITypeBinding> typeBindings) {
-    return typeBindings.stream().map(JdtUtils::createTypeDescriptor).collect(Collectors.toList());
+  static ImmutableList<TypeDescriptor> createTypeDescriptors(List<ITypeBinding> typeBindings) {
+    return typeBindings.stream().map(JdtUtils::createTypeDescriptor).collect(toImmutableList());
   }
 
-  static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
+  static ImmutableList<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
     return createTypeDescriptors(Arrays.asList(typeBindings));
   }
 
@@ -1235,71 +1236,28 @@ public class JdtUtils {
       checkState(lambdaInterfaceBindings.size() >= 2);
     }
 
-    boolean isJsFunctionImplementation = false;
-    for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
-      isJsFunctionImplementation |= JsInteropUtils.isJsFunction(interfaceBinding);
-    }
+    Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
+        () ->
+            lambdaInterfaceBindings
+                .stream()
+                .map(JdtUtils::getConcreteJsFunctionMethodDescriptor)
+                .filter(Predicates.notNull())
+                .findFirst()
+                .orElse(null);
+    Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory =
+        () ->
+            lambdaInterfaceBindings
+                .stream()
+                .map(JdtUtils::getJsFunctionMethodDescriptor)
+                .filter(Predicates.notNull())
+                .findFirst()
+                .orElse(null);
 
-    DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
-        new DescriptorFactory<MethodDescriptor>() {
-          @Override
-          public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
-              MethodDescriptor descriptor = getConcreteJsFunctionMethodDescriptor(interfaceBinding);
-              if (descriptor != null) {
-                return descriptor;
-              }
-            }
-            return null;
-          }
-        };
-    DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory =
-        new DescriptorFactory<MethodDescriptor>() {
-          @Override
-          public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
-              MethodDescriptor descriptor = getJsFunctionMethodDescriptor(interfaceBinding);
-              if (descriptor != null) {
-                return descriptor;
-              }
-            }
-            return null;
-          }
-        };
-    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return TypeDescriptors.replaceTypeArgumentDescriptors(
-                selfTypeDescriptor, Collections.emptyList());
-          }
-        };
-    DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return TypeDescriptors.get().javaLangObject;
-          }
-        };
-    DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return enclosingClassTypeDescriptor;
-          }
-        };
     final ImmutableList<TypeDescriptor> lambdaInterfaceTypeDescriptors =
-        ImmutableList.copyOf(createTypeDescriptors(lambdaInterfaceBindings));
-    for (TypeDescriptor lambdaInterface : lambdaInterfaceTypeDescriptors) {
-      checkArgument(lambdaInterface.isInterface());
-    }
-    DescriptorFactory<List<TypeDescriptor>> interfacesDescriptorsFactory =
-        new DescriptorFactory<List<TypeDescriptor>>() {
-          @Override
-          public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-            return lambdaInterfaceTypeDescriptors;
-          }
-        };
+        createTypeDescriptors(lambdaInterfaceBindings);
+    checkArgument(lambdaInterfaceTypeDescriptors.stream().allMatch(TypeDescriptor::isInterface));
+    boolean isJsFunctionImplementation =
+        lambdaInterfaceTypeDescriptors.stream().anyMatch(TypeDescriptor::isJsFunctionInterface);
 
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList();
     for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
@@ -1308,16 +1266,19 @@ public class JdtUtils {
     return new TypeDescriptor.Builder()
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
-        .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
+        .setEnclosingTypeDescriptorFactory(() -> enclosingClassTypeDescriptor)
         .setIsInstanceNestedClass(true)
         .setIsJsFunctionImplementation(isJsFunctionImplementation)
         .setIsLocal(true)
         .setIsNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setPackageName(enclosingClassTypeDescriptor.getPackageName())
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setInterfaceTypeDescriptorsFactory(interfacesDescriptorsFactory)
-        .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+        .setRawTypeDescriptorFactory(
+            selfTypeDescriptor ->
+                TypeDescriptors.replaceTypeArgumentDescriptors(
+                    selfTypeDescriptor, Collections.emptyList()))
+        .setInterfaceTypeDescriptorsFactory(() -> lambdaInterfaceTypeDescriptors)
+        .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PRIVATE)
         .build();
@@ -1371,38 +1332,14 @@ public class JdtUtils {
       PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
 
-    DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
-        new DescriptorFactory<MethodDescriptor>() {
-          @Override
-          public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return getConcreteJsFunctionMethodDescriptor(typeBinding);
+    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
+        () -> {
+          TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
+          if (rawTypeDescriptor.isParameterizedType()) {
+            return TypeDescriptors.replaceTypeArgumentDescriptors(
+                rawTypeDescriptor, ImmutableList.of());
           }
-        };
-    DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return createTypeDescriptor(typeBinding.getDeclaringClass());
-          }
-        };
-    DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory =
-        new DescriptorFactory<MethodDescriptor>() {
-          @Override
-          public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return getJsFunctionMethodDescriptor(typeBinding);
-          }
-        };
-    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
-            if (rawTypeDescriptor.isParameterizedType()) {
-              return TypeDescriptors.replaceTypeArgumentDescriptors(
-                  rawTypeDescriptor, ImmutableList.of());
-            }
-            return rawTypeDescriptor;
-          }
+          return rawTypeDescriptor;
         };
 
     // Compute these first since they're reused in other calculations.
@@ -1416,54 +1353,41 @@ public class JdtUtils {
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
     String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
-    DescriptorFactory<Map<String, MethodDescriptor>> declaredMethods =
-        new DescriptorFactory<Map<String, MethodDescriptor>>() {
-          @Override
-          public Map<String, MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-            Map<String, MethodDescriptor> declaredMethodsBySignature = new LinkedHashMap<>();
-            for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-              MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
-              declaredMethodsBySignature.put(
-                  methodDescriptor.getMethodSignature(), methodDescriptor);
-            }
-            return declaredMethodsBySignature;
+    Supplier<Map<String, MethodDescriptor>> declaredMethods =
+        () -> {
+          Map<String, MethodDescriptor> declaredMethodsBySignature = new LinkedHashMap<>();
+          for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+            MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+            declaredMethodsBySignature.put(methodDescriptor.getMethodSignature(), methodDescriptor);
           }
+          return declaredMethodsBySignature;
         };
 
     boolean hasTypeBounds =
         (isTypeVariable || isWildCardOrCapture) && typeBinding.getTypeBounds().length != 0;
-    DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory =
-        !hasTypeBounds
-            ? null
-            : new DescriptorFactory<TypeDescriptor>() {
-              @Override
-              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                ITypeBinding[] boundTypeBindings = typeBinding.getTypeBounds();
-                if (boundTypeBindings.length == 1) {
-                  return createTypeDescriptor(boundTypeBindings[0]);
-                }
-                return TypeDescriptors.createIntersection(createTypeDescriptors(boundTypeBindings));
-              }
-            };
+
+    Supplier<TypeDescriptor> boundTypeDescriptorFactory =
+        () -> {
+          if (!hasTypeBounds) {
+            return null;
+          }
+          ITypeBinding[] boundTypeBindings = typeBinding.getTypeBounds();
+          if (boundTypeBindings.length == 1) {
+            return createTypeDescriptor(boundTypeBindings[0]);
+          }
+          return TypeDescriptors.createIntersection(createTypeDescriptors(boundTypeBindings));
+        };
 
     // Compute these even later
     return new TypeDescriptor.Builder()
         .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setClassComponents(getClassComponents(typeBinding))
-        .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
-        .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
+        .setConcreteJsFunctionMethodDescriptorFactory(
+            () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
+        .setEnclosingTypeDescriptorFactory(
+            () -> createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
-            new DescriptorFactory<List<TypeDescriptor>>() {
-
-              @Override
-              public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-                ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
-                for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
-                  typeDescriptors.add(createTypeDescriptor(interfaceBinding));
-                }
-                return typeDescriptors.build();
-              }
-            })
+            () -> createTypeDescriptors(typeBinding.getInterfaces()))
         .setIsAbstract(isAbstract)
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
         .setIsFinal(isFinal)
@@ -1479,19 +1403,13 @@ public class JdtUtils {
         .setIsPrimitive(isPrimitive)
         .setIsTypeVariable(isTypeVariable)
         .setIsWildCardOrCapture(isWildCardOrCapture)
-        .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
+        .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
-        .setSuperTypeDescriptorFactory(
-            new DescriptorFactory<TypeDescriptor>() {
-              @Override
-              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                return createTypeDescriptor(typeBinding.getSuperclass());
-              }
-            })
+        .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)

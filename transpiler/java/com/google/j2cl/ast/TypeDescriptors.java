@@ -28,11 +28,12 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
@@ -314,20 +315,8 @@ public class TypeDescriptors {
         .setUniqueKey(createUniqueName(unionedTypeDescriptors, "|"))
         .setIsNullable(true)
         .setIsUnion(true)
-        .setRawTypeDescriptorFactory(
-            new DescriptorFactory<TypeDescriptor>() {
-              @Override
-              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                return selfTypeDescriptor;
-              }
-            })
-        .setSuperTypeDescriptorFactory(
-            new DescriptorFactory<TypeDescriptor>() {
-              @Override
-              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                return superTypeDescriptor;
-              }
-            })
+        .setRawTypeDescriptorFactory(Function.identity())
+        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setUnionedTypeDescriptors(unionedTypeDescriptors)
         .build();
   }
@@ -353,20 +342,8 @@ public class TypeDescriptors {
         .setTypeArgumentDescriptors(typeVars)
         .setVisibility(Visibility.PUBLIC)
         .setIsNullable(true)
-        .setInterfaceTypeDescriptorsFactory(
-            new DescriptorFactory<List<TypeDescriptor>>() {
-              @Override
-              public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-                return interfaceTypeDescriptors;
-              }
-            })
-        .setSuperTypeDescriptorFactory(
-            new DescriptorFactory<TypeDescriptor>() {
-              @Override
-              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                return superTypeDescriptor;
-              }
-            })
+        .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
+        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setUniqueKey(TypeDescriptors.createUniqueName(intersectedTypeDescriptors, "&"))
         .build();
   }
@@ -389,30 +366,17 @@ public class TypeDescriptors {
       final String jsName,
       final boolean isNative,
       final boolean isJsType) {
-    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            TypeDescriptor rawSuperTypeDescriptor =
-                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null;
-            List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
-            return createExactly(
-                rawSuperTypeDescriptor,
-                packageName,
-                classComponents,
-                emptyTypeArgumentDescriptors,
-                jsNamespace,
-                jsName,
-                isNative,
-                isJsType);
-          }
-        };
-    DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          protected TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return superTypeDescriptor;
-          }
+    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
+        () -> {
+          return createExactly(
+              superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
+              packageName,
+              classComponents,
+              Collections.emptyList(),
+              jsNamespace,
+              jsName,
+              isNative,
+              isJsType);
         };
 
     return new TypeDescriptor.Builder()
@@ -424,7 +388,7 @@ public class TypeDescriptors {
         .setJsNamespace(jsNamespace)
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PUBLIC)
         .build();
@@ -483,16 +447,12 @@ public class TypeDescriptors {
     if (dimensions == 0) {
       return leafTypeDescriptor;
     }
-    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return getForArray(
+    Function<TypeDescriptor, TypeDescriptor> rawTypeDescriptorFactory =
+        selfTypeDescriptor ->
+            getForArray(
                 selfTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor(),
                 selfTypeDescriptor.getDimensions(),
                 selfTypeDescriptor.isNullable());
-          }
-        };
 
     // Compute everything else.
     TypeDescriptor componentTypeDescriptor =
