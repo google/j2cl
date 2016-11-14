@@ -1202,7 +1202,7 @@ public class CompilationUnitBuilder {
 
             @Override
             public Node rewriteFieldDescriptor(FieldDescriptor node) {
-              if (node.getEnclosingClassTypeDescriptor() == original) {
+              if (node.isMemberOf(original)) {
                 return FieldDescriptor.Builder.from(node)
                     .setEnclosingClassTypeDescriptor(replacement)
                     .build();
@@ -1212,7 +1212,7 @@ public class CompilationUnitBuilder {
 
             @Override
             public Node rewriteMethodDescriptor(MethodDescriptor node) {
-              if (node.getEnclosingClassTypeDescriptor() == original) {
+              if (node.isMemberOf(original)) {
                 return MethodDescriptor.Builder.from(node)
                     .setEnclosingClassTypeDescriptor(replacement)
                     .build();
@@ -1317,9 +1317,7 @@ public class CompilationUnitBuilder {
       // If the field is referenced like a current type field with explicit 'this' but is part of
       // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
       if (qualifier instanceof ThisReference
-          && !fieldDescriptor
-              .getEnclosingClassTypeDescriptor()
-              .equalsIgnoreNullability(currentType.getDescriptor())) {
+          && !fieldDescriptor.isMemberOf(currentType.getDescriptor())) {
         qualifier =
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
@@ -1593,9 +1591,7 @@ public class CompilationUnitBuilder {
           // It refers to a field.
           FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
           if (!fieldDescriptor.isStatic()
-              && !fieldDescriptor
-                  .getEnclosingClassTypeDescriptor()
-                  .equalsIgnoreNullability(currentType.getDescriptor())) {
+              && !fieldDescriptor.isMemberOf(currentType.getDescriptor())) {
             return FieldAccess.Builder.from(fieldDescriptor)
                 .setQualifier(
                     convertOuterClassReference(

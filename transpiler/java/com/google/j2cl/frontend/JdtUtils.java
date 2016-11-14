@@ -1437,7 +1437,6 @@ public class JdtUtils {
       return packageInfoCache.getJsNamespace(
           getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
     }
-
     return null;
   }
 }

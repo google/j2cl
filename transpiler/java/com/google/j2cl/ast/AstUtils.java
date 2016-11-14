@@ -161,20 +161,14 @@ public class AstUtils {
   public static boolean hasThisCall(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null
-        && constructorInvocation
-            .getTarget()
-            .getEnclosingClassTypeDescriptor()
-            .equals(method.getDescriptor().getEnclosingClassTypeDescriptor());
+        && constructorInvocation.getTarget().inSameTypeAs(method.getDescriptor());
   }
 
   /** Returns whether the specified constructor has a super() call. */
   public static boolean hasSuperCall(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null
-        && !constructorInvocation
-            .getTarget()
-            .getEnclosingClassTypeDescriptor()
-            .equals(method.getDescriptor().getEnclosingClassTypeDescriptor());
+        && !constructorInvocation.getTarget().inSameTypeAs(method.getDescriptor());
   }
 
   /** Returns whether the specified constructor has a this() or a super() call. */
@@ -477,11 +471,7 @@ public class AstUtils {
     if (methodCall == null || !methodCall.getTarget().isConstructor()) {
       return false;
     }
-    return methodCall
-        .getTarget()
-        .getEnclosingClassTypeDescriptor()
-        .getRawTypeDescriptor()
-        .equals(targetTypeDescriptor.getRawTypeDescriptor());
+    return methodCall.getTarget().isMemberOf(targetTypeDescriptor);
   }
 
   /**
@@ -648,8 +638,7 @@ public class AstUtils {
   public static boolean hasThisReferenceAsQualifier(MemberReference memberReference) {
     Expression qualifier = memberReference.getQualifier();
     return qualifier instanceof ThisReference
-        && qualifier.getTypeDescriptor()
-            == memberReference.getTarget().getEnclosingClassTypeDescriptor();
+        && memberReference.getTarget().isMemberOf(qualifier.getTypeDescriptor());
   }
 
   /** Returns true if the qualifier of the given member reference is a Type reference. */

@@ -26,7 +26,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
@@ -399,11 +398,8 @@ public class TypeDescriptors {
     checkArgument(!originalTypeDescriptor.isArray());
     checkArgument(!originalTypeDescriptor.isTypeVariable());
     checkArgument(!originalTypeDescriptor.isUnion());
-
-    List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList(typeArgumentTypeDescriptors);
-
     return TypeDescriptor.Builder.from(originalTypeDescriptor)
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
         .build();
   }
 

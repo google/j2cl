@@ -158,8 +158,9 @@ public class NormalizeConstructors extends NormalizationPass {
       // Here we remove the "this" call since this is already taken care of by the
       // $create method.
       final MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
-      if (constructorInvocation.getTarget().getEnclosingClassTypeDescriptor()
-          == getCurrentType().getDescriptor().getSuperTypeDescriptor()) {
+      if (constructorInvocation
+          .getTarget()
+          .isMemberOf(getCurrentType().getDescriptor().getSuperTypeDescriptor())) {
         // super() call should be called with the es6 "super(args)" in the es6 constructor
         // if the super class is a @JsConstructor or subclass of @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
@@ -214,11 +215,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
     checkArgument(
         superConstructorInvocation == null
-            || superConstructorInvocation
-                .getTarget()
-                .getEnclosingClassTypeDescriptor()
-                .getRawTypeDescriptor()
-                .equalsIgnoreNullability(type.getSuperTypeDescriptor().getRawTypeDescriptor()));
+            || superConstructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor()));
 
     List<Variable> jsConstructorParameters = AstUtils.clone(primaryConstructor.getParameters());
     List<Expression> arguments = AstUtils.getReferences(jsConstructorParameters);

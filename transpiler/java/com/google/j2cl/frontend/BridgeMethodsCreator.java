@@ -312,10 +312,7 @@ public class BridgeMethodsCreator {
     // and it delegates to the *real* implementation, which should be emit as non-JsMethod.
     if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION
         || (bridgeMethodDescriptor.isJsMethod()
-            && targetMethodDescriptor
-                .getEnclosingClassTypeDescriptor()
-                .equalsIgnoreNullability(
-                    bridgeMethodDescriptor.getEnclosingClassTypeDescriptor()))) {
+            && targetMethodDescriptor.inSameTypeAs(bridgeMethodDescriptor))) {
       targetMethodJsInfo = JsInfo.NONE;
     }
     targetMethodDescriptor =
@@ -363,8 +360,7 @@ public class BridgeMethodsCreator {
     TypeDescriptor targetEnclosingClassTypeDescriptor =
         targetMethodDescriptor.getEnclosingClassTypeDescriptor();
     Expression qualifier =
-        targetEnclosingClassTypeDescriptor.equalsIgnoreNullability(
-                    bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())
+        bridgeMethodDescriptor.isMemberOf(targetEnclosingClassTypeDescriptor)
                 || targetEnclosingClassTypeDescriptor.isInterface()
             ? new ThisReference(targetEnclosingClassTypeDescriptor)
             : new SuperReference(targetEnclosingClassTypeDescriptor);

@@ -28,6 +28,18 @@ public abstract class MemberDescriptor extends Node
 
   public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
 
+  /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
+  public boolean isMemberOf(TypeDescriptor typeDescriptor) {
+    return getEnclosingClassTypeDescriptor()
+        .getQualifiedSourceName()
+        .equals(typeDescriptor.getQualifiedSourceName());
+  }
+
+  /** Returns true if {@code thatMemberDescriptor} is in the same type as this member. */
+  public boolean inSameTypeAs(MemberDescriptor thatMemberDescriptor) {
+    return thatMemberDescriptor.isMemberOf(getEnclosingClassTypeDescriptor());
+  }
+
   public abstract String getName();
 
   @Override

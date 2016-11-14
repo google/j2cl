@@ -143,10 +143,7 @@ public class ExpressionTranspiler {
         // When inside the same class, access static fields directly.
         boolean insideSameEnclosingClass =
             fieldAccess.getTarget().isStatic()
-                && fieldAccess
-                    .getTarget()
-                    .getEnclosingClassTypeDescriptor()
-                    .equals(environment.getEnclosingTypeDescriptor());
+                && fieldAccess.getTarget().isMemberOf(environment.getEnclosingTypeDescriptor());
         // No private backing field for compile time constants.
         boolean accessBackingPrivateField =
             !fieldAccess.getTarget().isCompileTimeConstant() && insideSameEnclosingClass;
