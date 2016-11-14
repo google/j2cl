@@ -39,8 +39,6 @@ import java.util.function.Function;
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$$Overlay";
-  public static final String CAPTURES_PREFIX = "$c_";
-  public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
@@ -51,6 +49,9 @@ public class AstUtils {
           .setIsStatic(false)
           .setJsInfo(JsInfo.RAW_FIELD)
           .build();
+
+  private static final String CAPTURES_PREFIX = "$c_";
+  private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
 
   /** Return the String with first letter capitalized. */
   public static String toProperCase(String string) {
@@ -238,6 +239,7 @@ public class AstUtils {
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setFieldName(CAPTURES_PREFIX + capturedVariable.getName())
+        .setIsVariableCapture(true)
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setIsStatic(false)
         .setJsInfo(JsInfo.RAW_FIELD)
@@ -250,6 +252,7 @@ public class AstUtils {
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
         .setFieldName(ENCLOSING_INSTANCE_NAME)
+        .setIsEnclosingInstanceCapture(true)
         .setTypeDescriptor(fieldTypeDescriptor)
         .build();
   }

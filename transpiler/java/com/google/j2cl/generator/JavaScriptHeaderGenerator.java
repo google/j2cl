@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.generator.visitors.Import;
@@ -41,9 +40,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
     sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getModuleName() + "');");
 
-    if (declareLegacyNamespace
-        && type.getDescriptor().isJsType()
-        && !(type instanceof AnonymousType)) {
+    if (declareLegacyNamespace && type.getDescriptor().isJsType() && !(type.isAnonymous())) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.

@@ -58,7 +58,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
           @Override
           public Node rewriteMethod(Method method) {
             /*
-             * Only add parameters to constructor methods in Enum classes..
+             * Only add parameters to constructor methods in Enum classes.
              */
             if (!method.isConstructor()) {
               return method;

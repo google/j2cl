@@ -208,6 +208,7 @@ public class CompilationUnitBuilder {
               enumDeclaration.resolveBinding(),
               JdtUtils.asTypedList(enumDeclaration.bodyDeclarations()));
       enumType.setSourcePosition(getSourcePosition(enumDeclaration));
+      checkState(enumType.isEnum());
       for (EnumConstantDeclaration enumConstantDeclaration :
           JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
         if (enumConstantDeclaration.getAnonymousClassDeclaration() != null) {
@@ -218,7 +219,6 @@ public class CompilationUnitBuilder {
       }
 
       // this is an Enum.
-      checkState(enumType.isEnum());
       enumType.addFields(
           0,
           JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())
@@ -1201,23 +1201,23 @@ public class CompilationUnitBuilder {
             }
 
             @Override
-            public Node rewriteFieldDescriptor(FieldDescriptor node) {
-              if (node.isMemberOf(original)) {
-                return FieldDescriptor.Builder.from(node)
+            public Node rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
+              if (fieldDescriptor.isMemberOf(original)) {
+                return FieldDescriptor.Builder.from(fieldDescriptor)
                     .setEnclosingClassTypeDescriptor(replacement)
                     .build();
               }
-              return node;
+              return fieldDescriptor;
             }
 
             @Override
-            public Node rewriteMethodDescriptor(MethodDescriptor node) {
-              if (node.isMemberOf(original)) {
-                return MethodDescriptor.Builder.from(node)
+            public Node rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
+              if (methodDescriptor.isMemberOf(original)) {
+                return MethodDescriptor.Builder.from(methodDescriptor)
                     .setEnclosingClassTypeDescriptor(replacement)
                     .build();
               }
-              return node;
+              return methodDescriptor;
             }
           });
     }

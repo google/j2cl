@@ -16,8 +16,12 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
@@ -58,8 +62,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       typeByTypeDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
     }
 
-    // Replace new InnerClass() with the wrapper function call OuterClass.m_$create__InnerClass();
-    compilationUnit.accept(new FixNewInstanceOfInnerClasses());
+    // Makes the qualifier of nested class instantiation an argument to its constructors.
+    compilationUnit.accept(new MakeNewInstanceQualifierIntoParameter());
 
     // Add parameters to constructors so they can receive captured values.
     compilationUnit.accept(new AddConstructorParameters());
@@ -96,15 +100,13 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       return Method.Builder.from(method)
           .addParameters(
               Iterables.transform(
-                  getFieldsForAllCaptures(getCurrentType()), AstUtils::createOuterParamByField))
+                  getFieldsForCaptures(getCurrentType()), AstUtils::createOuterParamByField))
           .build();
     }
   }
 
-  /**
-   * Replaces NewInstance of an inner class with wrapper function calls.
-   */
-  private static class FixNewInstanceOfInnerClasses extends AbstractRewriter {
+  /** Makes the qualifier in a nested class instantiation an argument to its constructors. */
+  private static class MakeNewInstanceQualifierIntoParameter extends AbstractRewriter {
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
@@ -143,7 +145,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           AstUtils.getConstructorInvocation(method), getCurrentType().getDescriptor())) {
         Method.Builder methodBuilder = Method.Builder.from(method);
         int i = 0;
-        for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
+        for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
           Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
           BinaryExpression initializer =
               BinaryExpression.newBuilder()
@@ -197,12 +199,11 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       Member currentMember = getCurrentMember();
       // replace references to added field in the constructor with the reference to parameter.
       if (currentMember.isConstructor()
-          && fieldAccess.getTarget().isFieldDescriptorForAllCaptures()) {
-        Variable parameter =
-            getParameterForCapturedField(fieldAccess.getTarget(), (Method) currentMember);
-        if (parameter != null) {
-          return parameter.getReference();
-        }
+          && fieldAccess.getTarget().isCapture()
+          && fieldAccess.getTarget().inSameTypeAs(currentMember.getDescriptor())) {
+
+        return getParameterForCapturedField(fieldAccess.getTarget(), (Method) currentMember)
+            .getReference();
       }
       return fieldAccess;
     }
@@ -253,7 +254,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
-        for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
+        for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
           Variable parameter =
               getParameterForCapturedField(
                   capturedField.getDescriptor(), (Method) getCurrentMember());
@@ -261,7 +262,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
               parameter.getReference(), parameter.getTypeDescriptor());
         }
       } else {
-        // super() call
+        // thread captures to super call if necessary.
         TypeDescriptor superTypeDescriptor = target.getEnclosingClassTypeDescriptor();
         addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
@@ -287,11 +288,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         return;
       }
 
-      for (Field field : type.getFields()) {
-        Variable capturedVariable = field.getCapturedVariable();
-        if (capturedVariable == null) {
-          continue;
-        }
+      for (Variable capturedVariable : getVariableCaptures(type)) {
         Field capturingField = getCapturingFieldInType(capturedVariable, getCurrentType());
         if (capturingField != null) {
           // If the capturedVariable is also a captured variable in current type, pass the
@@ -315,19 +312,30 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     }
   }
 
-  /** Returns all the added fields corresponding to captured variables or enclosing instance. */
-  private static Iterable<Field> getFieldsForAllCaptures(Type type) {
-    return Iterables.filter(
-        type.getInstanceFields(), field -> field.getDescriptor().isFieldDescriptorForAllCaptures());
+  /** Returns all the fields corresponding to captured variables or enclosing instance. */
+  private static Iterable<Field> getFieldsForCaptures(Type type) {
+    return Iterables.filter(type.getInstanceFields(), field -> field.getDescriptor().isCapture());
   }
 
+  /** Returns the variables captures by {@code type}. */
+  private static Iterable<Variable> getVariableCaptures(Type type) {
+    return FluentIterable.from(type.getInstanceFields())
+        .transform(Field::getCapturedVariable)
+        .filter(Predicates.notNull());
+  }
+
+  /**
+   * Returns the field that captures {@code variable} in {@code type}.
+   *
+   * <p>Note: the same variable might be captured by many types, each type will have a corresponding
+   * field.
+   */
   private static Field getCapturingFieldInType(Variable variable, Type type) {
-    for (Field field : type.getFields()) {
-      if (field.getCapturedVariable() == variable) {
-        return field;
-      }
-    }
-    return null;
+    checkArgument(variable != null);
+    return Streams.stream(type.getFields())
+        .filter(field -> field.getCapturedVariable() == variable)
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -336,17 +344,27 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
    */
   private static Variable getParameterForCapturedField(
       FieldDescriptor fieldDescriptor, Method method) {
-    checkArgument(method.isConstructor());
-    checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
-    for (Variable parameter : method.getParameters()) {
-      if (parameter.getName().equals(fieldDescriptor.getName())
-          && method.getDescriptor().inSameTypeAs(fieldDescriptor)
-          && parameter
-              .getTypeDescriptor()
-              .equalsIgnoreNullability(fieldDescriptor.getTypeDescriptor())) {
-        return parameter;
-      }
-    }
-    return null;
+    checkArgument(
+        method.isConstructor()
+            && fieldDescriptor.isCapture()
+            && method.getDescriptor().inSameTypeAs(fieldDescriptor));
+
+    // Parameters in constructors corresponding to captures share the same name as the backing
+    // field.
+    Variable parameter =
+        method
+            .getParameters()
+            .stream()
+            .filter(variable -> variable.getName().equals(fieldDescriptor.getName()))
+            .findFirst()
+            .orElse(null);
+
+    checkState(
+        parameter == null
+            || parameter
+                .getTypeDescriptor()
+                .equalsIgnoreNullability(fieldDescriptor.getTypeDescriptor()));
+
+    return parameter;
   }
 }

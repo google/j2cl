@@ -34,7 +34,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -167,7 +166,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               Variable capturedVariable = capturesByFieldDescriptor.get(fieldAccess.getTarget());
               if (capturedVariable != null && !enclosingCaptures.contains(capturedVariable)) {
                 return capturedVariable.getReference();
-              } else if (fieldAccess.getTarget().isFieldDescriptorForEnclosingInstance()) {
+              } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
                 return new ThisReference(type.getEnclosingTypeDescriptor());
               }
             }
@@ -197,14 +196,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
       return false;
     }
 
-    for (Field field : type.getFields()) {
-      if (field.getCapturedVariable() == null
-          && !field.getDescriptor().isFieldDescriptorForEnclosingInstance()) {
-        // if there are any fields other than captured variables, bail out.
-        return false;
-      }
+    // Do not optimize if there are fields that are not captures.
+    if (!Streams.stream(type.getFields())
+        .map(Field::getDescriptor)
+        .allMatch(FieldDescriptor::isCapture)) {
+      return false;
     }
-
     if (getSingleDeclaredMethod(type) == null) {
       // Can only override a single method.
       return false;
@@ -233,21 +230,16 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
 
   public static boolean hasThisOrSuperReference(final Type type) {
 
-    final Set<FieldDescriptor> captures = new HashSet<>();
-    for (Field field : type.getFields()) {
-      captures.add(field.getDescriptor());
-    }
-
     final boolean[] hasThisOrSuperReference = new boolean[] {false};
 
     getSingleDeclaredMethod(type)
         .accept(
             new AbstractVisitor() {
-
               @Override
               public boolean enterFieldAccess(FieldAccess fieldAccess) {
-                if (captures.contains(fieldAccess.getTarget())
+                if (fieldAccess.getTarget().isMemberOf(type.getDescriptor())
                     && fieldAccess.getQualifier() instanceof ThisReference) {
+                  // Skip "this" references when accessing captures.
                   return false;
                 }
                 return true;

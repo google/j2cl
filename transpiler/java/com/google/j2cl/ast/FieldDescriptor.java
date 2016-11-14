@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
@@ -49,6 +51,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Nullable
   abstract FieldDescriptor getDeclarationFieldDescriptorOrNull();
 
+  public abstract boolean isVariableCapture();
+
+  public abstract boolean isEnclosingInstanceCapture();
+
+
   /**
    * Returns the descriptor of the field declaration or this instance if this is already the field
    * declaration or there is no field declaration. Field declarations descriptors describe the the
@@ -76,16 +83,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return getEnclosingClassTypeDescriptor().isNative() && !isJsOverlay();
   }
 
-  public boolean isFieldDescriptorForCapturedVariables() {
-    return getName().startsWith(AstUtils.CAPTURES_PREFIX);
-  }
-
-  public boolean isFieldDescriptorForEnclosingInstance() {
-    return getName().startsWith(AstUtils.ENCLOSING_INSTANCE_NAME);
-  }
-
-  public boolean isFieldDescriptorForAllCaptures() {
-    return isFieldDescriptorForCapturedVariables() || isFieldDescriptorForEnclosingInstance();
+  public boolean isCapture() {
+    return isVariableCapture() || isEnclosingInstanceCapture();
   }
 
   public boolean isJsProperty() {
@@ -127,6 +126,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     private JsInfo jsInfo = JsInfo.NONE;
     private boolean isCompileTimeConstant = false;
     private FieldDescriptor declarationFieldDescriptor;
+    private boolean isVariableCapture = false;
+    private boolean isEnclosingInstanceCapture = false;
 
     public static Builder from(FieldDescriptor fieldDescriptor) {
       Builder builder = new Builder();
@@ -139,6 +140,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       builder.jsInfo = fieldDescriptor.getJsInfo();
       builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
       builder.declarationFieldDescriptor = fieldDescriptor.getDeclarationFieldDescriptorOrNull();
+      builder.isVariableCapture = fieldDescriptor.isVariableCapture();
+      builder.isEnclosingInstanceCapture = fieldDescriptor.isEnclosingInstanceCapture();
       return builder;
     }
 
@@ -159,6 +162,16 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public Builder setIsJsOverlay(boolean isJsOverlay) {
       this.isJsOverlay = isJsOverlay;
+      return this;
+    }
+
+    public Builder setIsVariableCapture(boolean isVariableCapture) {
+      this.isVariableCapture = isVariableCapture;
+      return this;
+    }
+
+    public Builder setIsEnclosingInstanceCapture(boolean isEnclosingInstanceCapture) {
+      this.isEnclosingInstanceCapture = isEnclosingInstanceCapture;
       return this;
     }
 
@@ -197,6 +210,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     }
 
     public FieldDescriptor build() {
+      checkState(!isVariableCapture || !isEnclosingInstanceCapture);
       return getInterner()
           .intern(
               new AutoValue_FieldDescriptor(
@@ -208,7 +222,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
                   isJsOverlay,
                   jsInfo,
                   isCompileTimeConstant,
-                  declarationFieldDescriptor));
+                  declarationFieldDescriptor,
+                  isVariableCapture,
+                  isEnclosingInstanceCapture));
     }
   }
 }
