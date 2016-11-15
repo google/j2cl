@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
@@ -1183,5 +1184,52 @@ public class AstUtils {
   /** Get a list of references for {@code variables}. */
   public static List<Expression> getReferences(List<Variable> variables) {
     return variables.stream().map(Variable::getReference).collect(toImmutableList());
+  }
+
+  /** Creates an implicit constructor that forwards to a specific super constructor. */
+  public static Method createImplicitConstructor(
+      MethodDescriptor constructorDescriptor, MethodDescriptor superConstructorDescriptor) {
+
+    // If the super qualifier is explicit then it is passed as the first parameter and the super
+    // constructor has 1 parameter less than the constructor being build.
+    boolean firstParameterIsSuperQualifier =
+        constructorDescriptor.getParameterTypeDescriptors().size()
+            != superConstructorDescriptor.getParameterTypeDescriptors().size();
+
+    List<Variable> constructorParameters = new ArrayList<>();
+    int index = 0;
+    for (TypeDescriptor parameterTypeDescriptor :
+        constructorDescriptor.getParameterTypeDescriptors()) {
+      String parameterName =
+          firstParameterIsSuperQualifier && index == 0 ? "$super_outer_this" : "$_" + index;
+      constructorParameters.add(
+          Variable.newBuilder()
+              .setName(parameterName)
+              .setTypeDescriptor(parameterTypeDescriptor)
+              .build());
+      index++;
+    }
+
+    Expression qualifier =
+        firstParameterIsSuperQualifier ? constructorParameters.get(0).getReference() : null;
+
+    List<Expression> superConstructorArguments =
+        (firstParameterIsSuperQualifier
+                ? constructorParameters.subList(1, constructorParameters.size())
+                : constructorParameters)
+            .stream()
+            .map(Variable::getReference)
+            .collect(toList());
+
+    return Method.newBuilder()
+        .setMethodDescriptor(constructorDescriptor)
+        .setParameters(constructorParameters)
+        .addStatements(
+            MethodCall.Builder.from(superConstructorDescriptor)
+                .setQualifier(qualifier)
+                .setArguments(superConstructorArguments)
+                .build()
+                .makeStatement())
+        .build();
   }
 }

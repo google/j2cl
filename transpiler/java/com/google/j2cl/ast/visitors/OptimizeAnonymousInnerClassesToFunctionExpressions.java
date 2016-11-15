@@ -217,7 +217,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
   private static Method getSingleDeclaredMethod(Type type) {
     Method singleDeclaredMethod = null;
     for (Method method : type.getMethods()) {
-      if (method.isBridge()) {
+      if (method.isBridge() || method.isConstructor()) {
         continue;
       }
       if (singleDeclaredMethod != null) {

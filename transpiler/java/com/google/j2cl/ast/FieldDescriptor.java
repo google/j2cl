@@ -55,7 +55,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isEnclosingInstanceCapture();
 
-
   /**
    * Returns the descriptor of the field declaration or this instance if this is already the field
    * declaration or there is no field declaration. Field declarations descriptors describe the the

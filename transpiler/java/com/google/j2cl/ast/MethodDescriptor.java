@@ -26,6 +26,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
+import java.util.List;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
@@ -284,6 +285,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public Builder setJsInfo(JsInfo jsInfo) {
       this.jsInfo = jsInfo;
       return this;
+    }
+
+    public Builder addParameter(int index, TypeDescriptor parameterTypeDescriptor) {
+      List<TypeDescriptor> parameters = Lists.newArrayList(this.parameterTypeDescriptors);
+      parameters.add(index, parameterTypeDescriptor);
+      return setParameterTypeDescriptors(parameters);
     }
 
     public Builder addParameter(TypeDescriptor parameterTypeDescriptor) {

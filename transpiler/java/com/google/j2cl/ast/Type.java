@@ -154,12 +154,12 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     members.add(field);
   }
 
-  public void addFields(List<Field> fields) {
-    this.members.addAll(checkNotNull(fields));
+  public void addField(int position, Field field) {
+    this.members.add(position, checkNotNull(field));
   }
 
-  public void addFields(int position, List<Field> fields) {
-    this.members.addAll(position, checkNotNull(fields));
+  public void addFields(List<Field> fields) {
+    this.members.addAll(checkNotNull(fields));
   }
 
   /**

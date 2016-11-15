@@ -22,7 +22,6 @@ import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
 import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
-import com.google.j2cl.ast.visitors.FixAnonymousClassConstructors;
 import com.google.j2cl.ast.visitors.FixBooleanOperators;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
@@ -201,7 +200,6 @@ public class J2clTranspiler {
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
             new InsertCastOnNewInstances(),
-            new FixAnonymousClassConstructors(),
             new MakeEnumConstructionsExplicit(),
             new FixSuperCallQualifiers(),
             new InsertInstanceInitCalls(),
