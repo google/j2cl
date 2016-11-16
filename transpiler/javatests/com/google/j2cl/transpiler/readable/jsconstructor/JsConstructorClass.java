@@ -152,6 +152,14 @@ public class JsConstructorClass {
     }
   }
 
+  // TODO(rluble): uncomment once the compiler handles this case correctly.
+  //  public class InstanceVarargs extends A {
+  //    @JsConstructor
+  //    public InstanceVarargs(int... args) {
+  //      super(args[1]);
+  //    }
+  //  }
+
   public static class RegularType {
     public RegularType(Object b) {}
   }
