@@ -25,6 +25,7 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -202,12 +203,12 @@ public class Method extends Member implements HasJsNameInfo {
       return builder;
     }
 
-    public Builder addParameters(Variable... parameters) {
-      return addParameters(Arrays.asList(parameters));
+    public Builder addParameters(int index, Variable... parameters) {
+      return addParameters(index, Arrays.asList(parameters));
     }
 
-    public Builder addParameters(Iterable<Variable> newParameters) {
-      Iterables.addAll(parameters, newParameters);
+    public Builder addParameters(int index, Collection<Variable> newParameters) {
+      parameters.addAll(index, newParameters);
       return this;
     }
 

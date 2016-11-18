@@ -1,0 +1,108 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs$impl');
+
+
+let A = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let JsConstructorClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InstanceVarargs extends A {
+  /**
+   * Real constructor.
+   * @param {JsConstructorClass} $outer_this
+   * @param {...number} args
+   * @public
+   */
+  constructor($outer_this, args) {
+    InstanceVarargs.$clinit();
+    let $var_args_copy = /**@type {!Array<number>} */ (
+        $Arrays.$create([arguments.length - 1], $int));
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
+    super();
+    /** @public {JsConstructorClass} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int(
+        $outer_this, $var_args_copy);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {JsConstructorClass} $outer_this
+   * @param {Array<number>} args
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int(
+      $outer_this, args) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(
+        args[1]);
+    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceVarargs;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InstanceVarargs);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JsConstructorClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    A.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs() {
+  }
+};
+
+$Util.$setClassMetadata(
+    InstanceVarargs,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs'));
+
+
+
+/**
+ * Export class.
+ */
+exports = InstanceVarargs;
+//# sourceMappingURL=JsConstructorClass$InstanceVarargs.js.map

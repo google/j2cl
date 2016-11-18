@@ -38,31 +38,31 @@ class SimpleEnum2 extends Enum {
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {number} foo
    * @param {?string} $name
    * @param {number} $ordinal
+   * @param {number} foo
    * @return {!SimpleEnum2}
    * @public
    */
-  static $create__int__java_lang_String__int(foo, $name, $ordinal) {
+  static $create__java_lang_String__int__int($name, $ordinal, foo) {
     SimpleEnum2.$clinit();
     let $instance = new SimpleEnum2();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
-            foo, $name, $ordinal);
+        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int(
+            $name, $ordinal, foo);
     return $instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {number} foo
    * @param {?string} $name
    * @param {number} $ordinal
+   * @param {number} foo
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
-      foo, $name, $ordinal) {
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int(
+      $name, $ordinal, foo) {
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
     this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2();
     this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
@@ -71,34 +71,34 @@ class SimpleEnum2 extends Enum {
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {SimpleEnum} foo
    * @param {?string} $name
    * @param {number} $ordinal
+   * @param {SimpleEnum} foo
    * @return {!SimpleEnum2}
    * @public
    */
-  static $create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
-      foo, $name, $ordinal) {
+  static $create__java_lang_String__int__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum(
+      $name, $ordinal, foo) {
     SimpleEnum2.$clinit();
     let $instance = new SimpleEnum2();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
-            foo, $name, $ordinal);
+        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum(
+            $name, $ordinal, foo);
     return $instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {SimpleEnum} foo
    * @param {?string} $name
    * @param {number} $ordinal
+   * @param {SimpleEnum} foo
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
-      foo, $name, $ordinal) {
-    this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
-        foo.ordinal(), $name, $ordinal);
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum(
+      $name, $ordinal, foo) {
+    this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int(
+        $name, $ordinal, foo.ordinal());
   }
 
   /**
@@ -301,19 +301,19 @@ class SimpleEnum2 extends Enum {
     Enum.$clinit();
     SimpleEnum2
         .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
-        SimpleEnum2.$create__int__java_lang_String__int(
-            2, $Util.$makeEnumName('VALUE1'), 0);
+        SimpleEnum2.$create__java_lang_String__int__int(
+            $Util.$makeEnumName('VALUE1'), 0, 2);
     SimpleEnum2
         .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
         SimpleEnum2
-            .$create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+            .$create__java_lang_String__int__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum(
+                $Util.$makeEnumName('VALUE2'), 1,
                 SimpleEnum
-                    .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
-                $Util.$makeEnumName('VALUE2'), 1);
+                    .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum);
     SimpleEnum2
         .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
-        $1.$create__int__java_lang_String__int(
-            5, $Util.$makeEnumName('VALUE3'), 2);
+        $1.$create__java_lang_String__int__int(
+            $Util.$makeEnumName('VALUE3'), 2, 5);
     SimpleEnum2
         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =
         null;

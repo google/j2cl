@@ -869,10 +869,7 @@ public class JdtUtils {
     return Modifier.isStatic(binding.getModifiers());
   }
 
-  public static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
-    return typeBinding.isMember() && !Modifier.isStatic(typeBinding.getModifiers());
-  }
-
+  /** Returns true if the type is an instance (non static) inner class */
   public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
     return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
   }
@@ -1391,7 +1388,6 @@ public class JdtUtils {
         .setIsAbstract(isAbstract)
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
         .setIsFinal(isFinal)
-        .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
         .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
         .setIsInterface(typeBinding.isInterface())
         .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))

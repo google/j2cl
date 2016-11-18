@@ -17,10 +17,10 @@ package com.google.j2cl.ast;
 
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ import java.util.List;
 public class MethodDescriptors {
 
   public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.getName().equals("toString")
+    return methodDescriptor.getName().equals(MethodDescriptor.TO_STRING_METHOD_NAME)
         && methodDescriptor.getParameterTypeDescriptors().isEmpty();
   }
 
@@ -39,8 +39,8 @@ public class MethodDescriptors {
    * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
    */
   public static MethodDescriptor createWithExtraParameters(
-      MethodDescriptor methodDescriptor, TypeDescriptor... extraParameters) {
-    return createWithExtraParameters(methodDescriptor, Arrays.asList(extraParameters));
+      MethodDescriptor methodDescriptor, int index, TypeDescriptor... extraParameters) {
+    return createWithExtraParameters(methodDescriptor, index, Arrays.asList(extraParameters));
   }
 
   /**
@@ -48,24 +48,21 @@ public class MethodDescriptors {
    *
    * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
    */
-  // TODO(simionato): Verify that it is always correct to add the same parameters to the method
-  // descriptor and its declaration.
   public static MethodDescriptor createWithExtraParameters(
-      MethodDescriptor methodDescriptor, Iterable<TypeDescriptor> extraParameters) {
+      MethodDescriptor methodDescriptor, int index, Collection<TypeDescriptor> extraParameters) {
     // Add the provided parameters to the end of the existing parameters list.
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
-    Iterables.addAll(parameters, extraParameters);
+    parameters.addAll(index, extraParameters);
 
-    MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
-        .setParameterTypeDescriptors(parameters);
+    MethodDescriptor.Builder methodBuilder =
+        MethodDescriptor.Builder.from(methodDescriptor).setParameterTypeDescriptors(parameters);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
       methodBuilder.setDeclarationMethodDescriptor(
           createWithExtraParameters(
-              methodDescriptor.getDeclarationMethodDescriptor(), extraParameters));
+              methodDescriptor.getDeclarationMethodDescriptor(), index, extraParameters));
     }
-
     return methodBuilder.build();
   }
 

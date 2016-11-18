@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -103,6 +104,10 @@ public class NewInstance extends Invocation {
     public Builder setQualifier(Expression qualifier) {
       super.setQualifier(qualifier);
       return this;
+    }
+
+    public Builder setArguments(Expression... arguments) {
+      return setArguments(Arrays.asList(arguments));
     }
 
     @Override

@@ -17,7 +17,7 @@
             10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$2.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [int x = 1;] => [let x = 1;]
-[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$3.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
+[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$3.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);]
 [int x = 1;] => [let x = 1;]
 [int result =
         test(
@@ -25,7 +25,7 @@
               int y = 1;
               return x + y + this.field + i + 1;
             },
-            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$4.$create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(x, this), 10);]
+            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$4.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);]
 [int result =
         test(
             i -> {

@@ -17,12 +17,13 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Abstracts invocations, i.e. method calls and new instances.
@@ -61,40 +62,30 @@ public abstract class Invocation extends Expression implements MemberReference {
       return this;
     }
 
-    public Builder appendArgumentsAndUpdateDescriptor(Expression... argumentExpressions) {
-      return appendArgumentsAndUpdateDescriptor(Arrays.asList(argumentExpressions));
+    public Builder addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
+      return addArgumentsAndUpdateDescriptor(index, Arrays.asList(argumentExpressions));
     }
 
-    public Builder appendArgumentsAndUpdateDescriptor(Iterable<Expression> argumentExpressions) {
-      Iterables.addAll(arguments, argumentExpressions);
+    public Builder addArgumentsAndUpdateDescriptor(
+        int index, Collection<Expression> argumentExpressions) {
+      arguments.addAll(index, argumentExpressions);
       methodDescriptor =
           MethodDescriptors.createWithExtraParameters(
               methodDescriptor,
-              Iterables.transform(argumentExpressions, Expression::getTypeDescriptor));
+              index,
+              argumentExpressions
+                  .stream()
+                  .map(Expression::getTypeDescriptor)
+                  .collect(Collectors.toList()));
       return this;
     }
 
-    public Builder appendArgumentAndUpdateDescriptor(Expression argumentExpression) {
-      arguments.add(argumentExpression);
+    public Builder addArgumentAndUpdateDescriptor(
+        int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
+      arguments.add(index, argumentExpression);
       methodDescriptor =
           MethodDescriptors.createWithExtraParameters(
-              methodDescriptor, argumentExpression.getTypeDescriptor());
-      return this;
-    }
-
-    public Builder appendArgumentAndUpdateDescriptor(
-        Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
-      arguments.add(argumentExpression);
-      methodDescriptor =
-          MethodDescriptors.createWithExtraParameters(methodDescriptor, parameterTypeDescriptor);
-      return this;
-    }
-
-    public Builder appendArgumentsAndUpdateDescriptors(
-        Iterable<Expression> extraArguments, Iterable<TypeDescriptor> parameterTypeDescriptors) {
-      Iterables.addAll(arguments, extraArguments);
-      methodDescriptor =
-          MethodDescriptors.createWithExtraParameters(methodDescriptor, parameterTypeDescriptors);
+              methodDescriptor, index, parameterTypeDescriptor);
       return this;
     }
 

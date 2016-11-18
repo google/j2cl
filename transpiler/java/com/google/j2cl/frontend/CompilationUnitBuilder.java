@@ -282,6 +282,7 @@ public class CompilationUnitBuilder {
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
+            0,
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         currentTypeDescriptor, type.getEnclosingTypeDescriptor()))
@@ -568,20 +569,22 @@ public class CompilationUnitBuilder {
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
-      boolean hasQualifier =
-          JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)
-              || (newInstanceTypeBinding.isAnonymous() && !JdtUtils.isInStaticContext(expression))
-              || (newInstanceTypeBinding.isLocal()
-                  && !JdtUtils.isStatic(
+      checkArgument(!newInstanceTypeBinding.isAnonymous());
+      boolean needsQualifier =
+          JdtUtils.isInstanceNestedClass(newInstanceTypeBinding)
+              // All instance nested classes need qualifier except local classes defined in static
+              // members.
+              && !(newInstanceTypeBinding.isLocal()
+                  && JdtUtils.isStatic(
                       newInstanceTypeBinding.getTypeDeclaration().getDeclaringMember()));
       checkArgument(
-          qualifier == null || hasQualifier,
+          qualifier == null || needsQualifier,
           "NewInstance of non nested class should have no qualifier.");
 
       // Resolve the qualifier of NewInstance that creates an instance of a nested class.
       // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
       qualifier =
-          hasQualifier && qualifier == null
+          needsQualifier && qualifier == null
               // find the enclosing instance in non-strict mode, which means
               // for example,
               // class A {
@@ -1119,6 +1122,7 @@ public class CompilationUnitBuilder {
       if (!JdtUtils.isInStaticContext(expression)) {
         // Add field for enclosing instance.
         lambdaType.addField(
+            0,
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()))

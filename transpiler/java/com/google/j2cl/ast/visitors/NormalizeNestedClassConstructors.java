@@ -19,16 +19,19 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Member;
@@ -41,8 +44,8 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Add outer parameters to constructors of nested class that has capture variables and/or enclosing
@@ -57,19 +60,14 @@ import java.util.Map;
 public class NormalizeNestedClassConstructors extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Map<TypeDescriptor, Type> typeByTypeDescriptor = new HashMap<>();
-    for (Type type : compilationUnit.getTypes()) {
-      typeByTypeDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
-    }
-
-    // Makes the qualifier of nested class instantiation an argument to its constructors.
-    compilationUnit.accept(new MakeNewInstanceQualifierIntoParameter());
-
     // Add parameters to constructors so they can receive captured values.
     compilationUnit.accept(new AddConstructorParameters());
 
     // Normalize method calls to constructors.
-    compilationUnit.accept(new RewriteNestedClassInvocations(typeByTypeDescriptor));
+    compilationUnit.accept(new RewriteNestedClassInvocations(compilationUnit));
+
+    // Makes the qualifier of nested class instantiation an argument to its constructors.
+    compilationUnit.accept(new MakeNewInstanceQualifierIntoParameter());
 
     // Replace field accesses to capturing fields that hold references to the captured variables in
     // constructors with references to corresponding captured variable passing parameters.
@@ -99,24 +97,25 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // Add parameters through which to pass captured variables for the current type.
       return Method.Builder.from(method)
           .addParameters(
-              Iterables.transform(
-                  getFieldsForCaptures(getCurrentType()), AstUtils::createOuterParamByField))
+              0,
+              Streams.stream(getFieldsForCaptures(getCurrentType()))
+                  .map(AstUtils::createOuterParamByField)
+                  .collect(Collectors.toList()))
           .build();
     }
   }
 
   /** Makes the qualifier in a nested class instantiation an argument to its constructors. */
   private static class MakeNewInstanceQualifierIntoParameter extends AbstractRewriter {
-
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
-      MethodDescriptor targetMethod = newInstance.getTarget();
-      TypeDescriptor targetTypeDescriptor = targetMethod.getEnclosingClassTypeDescriptor();
-      if (targetTypeDescriptor.isInstanceMemberClass()) {
-        // outerClassInstance.new InnerClass() => new InnerClass(outerClassInstance)
+      if (newInstance.getQualifier() != null) {
+        // outerClassInstance.new InnerClass(....) => new InnerClass(outerClassInstance, ....)
+        TypeDescriptor targetTypeDescriptor =
+            newInstance.getTarget().getEnclosingClassTypeDescriptor();
         return NewInstance.Builder.from(newInstance)
-            .appendArgumentAndUpdateDescriptor(
-                newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
+            .addArgumentAndUpdateDescriptor(
+                0, newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
             .setQualifier(null)
             .build();
       }
@@ -213,33 +212,32 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
    * Adds outer class parameter to NewInstance and ctor invocations.
    */
   public static class RewriteNestedClassInvocations extends AbstractRewriter {
-    private final Map<TypeDescriptor, Type> typeByTypeDescriptor;
+    Multimap<String, Variable> capturedVariablesByCapturingTypeName = LinkedHashMultimap.create();
 
-    private RewriteNestedClassInvocations(Map<TypeDescriptor, Type> typeByTypeDescriptor) {
-      this.typeByTypeDescriptor = typeByTypeDescriptor;
+    public RewriteNestedClassInvocations(CompilationUnit compilationUnit) {
+      for (Type type : compilationUnit.getTypes()) {
+        capturedVariablesByCapturingTypeName.putAll(
+            type.getDescriptor().getQualifiedSourceName(),
+            Streams.stream(type.getInstanceFields())
+                .map(Field::getCapturedVariable)
+                .filter(Predicates.notNull())
+                .collect(Collectors.toList()));
+      }
     }
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
       TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingClassTypeDescriptor();
-      Type type = getType(typeDescriptor);
-      if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
+      if (!capturedVariablesByCapturingTypeName.containsKey(
+          typeDescriptor.getQualifiedSourceName())) {
+        // No captures.
         return newInstance;
       }
 
       NewInstance.Builder newInstanceBuilder = NewInstance.Builder.from(newInstance);
+
       // Add arguments that reference the variables captured by the given type.
       addCapturedVariableArguments(newInstanceBuilder, typeDescriptor);
-
-      // Maybe add the qualifier of the NewInstance as the last argument to the constructor of a
-      // local class. The qualifier may be null if the local class is in a static context.
-      if (type.getDescriptor().isLocal() && newInstance.getQualifier() != null) {
-        newInstanceBuilder
-            .appendArgumentAndUpdateDescriptor(
-                newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor())
-            .setQualifier(null);
-      }
-
       return newInstanceBuilder.build();
     }
 
@@ -254,13 +252,16 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
-        for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
-          Variable parameter =
-              getParameterForCapturedField(
-                  capturedField.getDescriptor(), (Method) getCurrentMember());
-          methodCallBuilder.appendArgumentAndUpdateDescriptor(
-              parameter.getReference(), parameter.getTypeDescriptor());
-        }
+
+        methodCallBuilder.addArgumentsAndUpdateDescriptor(
+            0,
+            Streams.stream(getFieldsForCaptures(getCurrentType()))
+                .map(
+                    capturedField ->
+                        getParameterForCapturedField(
+                                capturedField.getDescriptor(), (Method) getCurrentMember())
+                            .getReference())
+                .collect(Collectors.toList()));
       } else {
         // thread captures to super call if necessary.
         TypeDescriptor superTypeDescriptor = target.getEnclosingClassTypeDescriptor();
@@ -269,12 +270,11 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         // a.super() => super(a)
         if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
           methodCallBuilder
-              .appendArgumentAndUpdateDescriptor(
-                  methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
+              .addArgumentAndUpdateDescriptor(
+                  0, methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
               .setQualifier(null);
         }
       }
-
       return methodCallBuilder.build();
     }
 
@@ -283,45 +283,37 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
      */
     private void addCapturedVariableArguments(
         Invocation.Builder invocationBuilder, TypeDescriptor typeDescriptor) {
-      Type type = getType(typeDescriptor);
-      if (type == null) {
+      Collection<Variable> capturedVariables =
+          capturedVariablesByCapturingTypeName.get(typeDescriptor.getQualifiedSourceName());
+      if (capturedVariables.isEmpty()) {
         return;
       }
-
-      for (Variable capturedVariable : getVariableCaptures(type)) {
-        Field capturingField = getCapturingFieldInType(capturedVariable, getCurrentType());
-        if (capturingField != null) {
-          // If the capturedVariable is also a captured variable in current type, pass the
-          // corresponding field in current type as an argument.
-          invocationBuilder.appendArgumentAndUpdateDescriptor(
-              FieldAccess.Builder.from(capturingField.getDescriptor())
-                  .setQualifier(new ThisReference(typeDescriptor))
-                  .build(),
-              capturingField.getDescriptor().getTypeDescriptor());
-        } else {
-          // otherwise, the captured variable is in the scope of the current type, so pass the
-          // variable directly as an argument.
-          invocationBuilder.appendArgumentAndUpdateDescriptor(
-              capturedVariable.getReference(), capturedVariable.getTypeDescriptor());
-        }
-      }
+      invocationBuilder.addArgumentsAndUpdateDescriptor(
+          0,
+          capturedVariables
+              .stream()
+              .map(capturedVariable -> getCaptureReference(getCurrentType(), capturedVariable))
+              .collect(Collectors.toList()));
     }
 
-    private Type getType(TypeDescriptor typeDescriptor) {
-      return typeByTypeDescriptor.get(typeDescriptor.getRawTypeDescriptor());
+    private Expression getCaptureReference(Type type, Variable capturedVariable) {
+      Field capturingField = getCapturingFieldInType(capturedVariable, type);
+      return capturingField != null
+          ?
+          // If the capturedVariable is also a captured variable in current type,
+          // pass the corresponding field in current type as an argument.
+          Builder.from(capturingField.getDescriptor())
+              .setQualifier(new ThisReference(type.getDescriptor()))
+              .build()
+          // otherwise, the captured variable is in the scope of the current type,
+          // so pass the variable directly as an argument.
+          : capturedVariable.getReference();
     }
   }
 
   /** Returns all the fields corresponding to captured variables or enclosing instance. */
   private static Iterable<Field> getFieldsForCaptures(Type type) {
     return Iterables.filter(type.getInstanceFields(), field -> field.getDescriptor().isCapture());
-  }
-
-  /** Returns the variables captures by {@code type}. */
-  private static Iterable<Variable> getVariableCaptures(Type type) {
-    return FluentIterable.from(type.getInstanceFields())
-        .transform(Field::getCapturedVariable)
-        .filter(Predicates.notNull());
   }
 
   /**

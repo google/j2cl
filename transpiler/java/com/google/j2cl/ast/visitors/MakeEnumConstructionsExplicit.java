@@ -65,6 +65,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
             }
             return Method.Builder.from(method)
                 .addParameters(
+                    0,
                     Variable.newBuilder()
                         .setName(VALUE_NAME_PARAMETER_NAME)
                         .setTypeDescriptor(TypeDescriptors.get().javaLangString)
@@ -98,11 +99,11 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
 
             List<Variable> methodParameters = ((Method) getCurrentMember()).getParameters();
             // Retrieve ordinal and name parameters from the method definition.
-            Variable nameVariable = methodParameters.get(methodParameters.size() - 2);
-            Variable ordinalVariable = methodParameters.get(methodParameters.size() - 1);
+            Variable nameVariable = methodParameters.get(0);
+            Variable ordinalVariable = methodParameters.get(1);
             return MethodCall.Builder.from(methodCall)
-                .appendArgumentsAndUpdateDescriptor(
-                    nameVariable.getReference(), ordinalVariable.getReference())
+                .addArgumentsAndUpdateDescriptor(
+                    0, nameVariable.getReference(), ordinalVariable.getReference())
                 .build();
           }
 
@@ -149,7 +150,8 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                     enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
             return NewInstance.Builder.from(newInstance)
-                .appendArgumentsAndUpdateDescriptor(
+                .addArgumentsAndUpdateDescriptor(
+                    0,
                     enumReplaceStringMethodCall(
                         StringLiteral.fromPlainText(enumField.getDescriptor().getName())),
                     new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))

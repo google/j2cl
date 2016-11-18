@@ -293,6 +293,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformNewInstance(NewInstance expression) {
+        checkArgument(expression.getQualifier() == null);
         TypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
 

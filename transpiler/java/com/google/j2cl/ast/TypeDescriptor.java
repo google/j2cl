@@ -75,7 +75,6 @@ public class TypeDescriptor extends Node
       newTypeDescriptor.isArray = typeDescriptor.isArray();
       newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
-      newTypeDescriptor.isInstanceMemberClass = typeDescriptor.isInstanceMemberClass();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
       newTypeDescriptor.isInterface = typeDescriptor.isInterface();
       newTypeDescriptor.isIntersection = typeDescriptor.isIntersection();
@@ -225,11 +224,6 @@ public class TypeDescriptor extends Node
 
     public Builder setIsFinal(boolean isFinal) {
       newTypeDescriptor.isFinal = isFinal;
-      return this;
-    }
-
-    public Builder setIsInstanceMemberClass(boolean isInstanceMemberClass) {
-      newTypeDescriptor.isInstanceMemberClass = isInstanceMemberClass;
       return this;
     }
 
@@ -427,7 +421,6 @@ public class TypeDescriptor extends Node
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isFinal;
-  private boolean isInstanceMemberClass;
   private boolean isInstanceNestedClass;
   private boolean isInterface;
   private boolean isIntersection;
@@ -786,10 +779,6 @@ public class TypeDescriptor extends Node
 
   public boolean isFinal() {
     return isFinal;
-  }
-
-  public boolean isInstanceMemberClass() {
-    return isInstanceMemberClass;
   }
 
   public boolean isInstanceNestedClass() {

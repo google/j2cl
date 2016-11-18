@@ -60,15 +60,19 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     if (shouldBeUntypedArray(newArrayExpression)) {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);
+      Expression dimensionExpression =
+          Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
 
       MethodDescriptor nativeArrayConstructor =
           MethodDescriptor.newBuilder()
               .setIsConstructor(true)
               .setJsInfo(JsInfo.RAW_CTOR)
               .setEnclosingClassTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
+              .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
               .build();
+
       return NewInstance.Builder.from(nativeArrayConstructor)
-          .appendArgumentAndUpdateDescriptor(newArrayExpression.getDimensionExpressions().get(0))
+          .setArguments(dimensionExpression)
           .build();
     }
 
