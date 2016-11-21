@@ -348,8 +348,7 @@ public class BridgeMethodsCreator {
                   .getDeclarationMethodDescriptor()
                   .getParameterTypeDescriptors()
                   .get(i)
-                  .getRawTypeDescriptor()
-                  .equalsIgnoreNullability(castToParameterTypeDescriptor)
+                  .hasSameRawType(castToParameterTypeDescriptor)
               ? parameterReference
               : CastExpression.newBuilder()
                   .setExpression(parameterReference)
@@ -370,9 +369,7 @@ public class BridgeMethodsCreator {
             .setArguments(arguments)
             .build();
     Statement statement =
-        bridgeMethodDescriptor
-                .getReturnTypeDescriptor()
-                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
+        TypeDescriptors.isPrimitiveVoid(bridgeMethodDescriptor.getReturnTypeDescriptor())
             ? dispatchMethodCall.makeStatement()
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());

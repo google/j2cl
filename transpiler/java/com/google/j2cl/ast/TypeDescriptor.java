@@ -122,7 +122,7 @@ public class TypeDescriptor extends Node
     public TypeDescriptor build() {
       checkState(!newTypeDescriptor.isTypeVariable || newTypeDescriptor.isNullable);
       checkState(!newTypeDescriptor.isPrimitive || !newTypeDescriptor.isNullable);
-      
+
       // Default to binary name as the unique key.
       if (newTypeDescriptor.uniqueKey == null) {
         newTypeDescriptor.uniqueKey = newTypeDescriptor.getQualifiedBinaryName();
@@ -470,8 +470,16 @@ public class TypeDescriptor extends Node
     return false;
   }
 
-  public boolean equalsIgnoreNullability(TypeDescriptor other) {
-    return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
+  public boolean hasSameRawType(TypeDescriptor other) {
+    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
+    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
+    // ITypeBinding and 2) from a TypeDescriptor by removing type variables. These two ways are not
+    // consistent, in particular the second form does not propagate the removal of type variables
+    // inward. These two construction end up with different data but with the same unique id, so
+    // the first one that is constructed will be interned and used everywhere.
+    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
+    // the wrong information be used in some cases.
+    return getQualifiedSourceName().equals(other.getQualifiedSourceName());
   }
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */

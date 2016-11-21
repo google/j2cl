@@ -182,7 +182,7 @@ public class AstUtils {
   /** Returns whether other is a subtype of one. */
   public static boolean isSubType(TypeDescriptor one, TypeDescriptor other) {
     return one != null
-        && (one.equalsIgnoreNullability(other) || isSubType(one.getSuperTypeDescriptor(), other));
+        && (one.hasSameRawType(other) || isSubType(one.getSuperTypeDescriptor(), other));
   }
 
   /**
@@ -219,19 +219,17 @@ public class AstUtils {
       return true;
     }
 
-    if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
-        || toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
+    if (TypeDescriptors.isPrimitiveLong(fromTypeDescriptor)
+        || TypeDescriptors.isPrimitiveLong(toTypeDescriptor)) {
       return false;
     }
-    return toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveFloat)
-        || toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveDouble)
-        || (toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveInt)
-            && (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveByte)
-                || fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)
-                || fromTypeDescriptor.equalsIgnoreNullability(
-                    TypeDescriptors.get().primitiveShort)))
-        || (toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveShort)
-            && fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveByte));
+    return TypeDescriptors.isPrimitiveFloatOrDouble(toTypeDescriptor)
+        || (TypeDescriptors.isPrimitiveInt(toTypeDescriptor)
+            && (TypeDescriptors.isPrimitiveByte(fromTypeDescriptor)
+                || TypeDescriptors.isPrimitiveChar(fromTypeDescriptor)
+                || TypeDescriptors.isPrimitiveShort(fromTypeDescriptor)))
+        || (TypeDescriptors.isPrimitiveShort(toTypeDescriptor)
+            && TypeDescriptors.isPrimitiveByte(fromTypeDescriptor));
   }
 
   /** Returns the added field descriptor corresponding to the captured variable. */
@@ -340,11 +338,10 @@ public class AstUtils {
     TypeDescriptor forwardedReturnType =
         toMethodDescriptor.getDeclarationMethodDescriptor().getReturnTypeDescriptor();
     boolean isVoidReturn =
-        fromMethodDescriptor
-            .getReturnTypeDescriptor()
-            .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid);
+        TypeDescriptors.isPrimitiveVoid(fromMethodDescriptor.getReturnTypeDescriptor());
     boolean needsAnnotation =
         !isVoidReturn && !AstUtils.canRemoveCast(forwardedReturnType, bridgeReturnType);
+    // TODO(rluble): it seems to me this needs an actual cast not just a type annotation.
     forwardingMethodCall =
         needsAnnotation
             ? JsDocAnnotatedExpression.newBuilder()
@@ -492,9 +489,7 @@ public class AstUtils {
   public static boolean matchesStringContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
     return (operator == BinaryOperator.PLUS_ASSIGN || operator == BinaryOperator.PLUS)
-        && binaryExpression
-            .getTypeDescriptor()
-            .equalsIgnoreNullability(TypeDescriptors.get().javaLangString);
+        && TypeDescriptors.isJavaLangString(binaryExpression.getTypeDescriptor());
   }
 
   /** See JLS 5.6.1. */
@@ -742,8 +737,7 @@ public class AstUtils {
     for (int i = 0; i < leftParameterTypeDescriptors.size(); i++) {
       if (!leftParameterTypeDescriptors
           .get(i)
-          .getRawTypeDescriptor()
-          .equalsIgnoreNullability(rightParameterTypeDescriptors.get(i).getRawTypeDescriptor())) {
+          .hasSameRawType(rightParameterTypeDescriptors.get(i))) {
         return false;
       }
     }

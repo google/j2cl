@@ -175,8 +175,6 @@ public class NormalizeArrayCreations extends NormalizationPass {
   private static boolean shouldBeUntypedArray(NewArray newArrayExpression) {
     return newArrayExpression.getDimensionExpressions().size() == 1
         && (newArrayExpression.getLeafTypeDescriptor().isNative()
-            || TypeDescriptors.get()
-                .javaLangObject
-                .equalsIgnoreNullability(newArrayExpression.getLeafTypeDescriptor()));
+            || TypeDescriptors.isJavaLangObject(newArrayExpression.getLeafTypeDescriptor()));
   }
 }
