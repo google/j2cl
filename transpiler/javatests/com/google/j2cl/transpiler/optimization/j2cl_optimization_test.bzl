@@ -4,15 +4,8 @@ See BooleansTest for an example usage.
 
 """
 
-load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java/j2cl/j2cl_test", "j2cl_test")
-
-_CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
-    flag
-    for flag in CLOSURE_COMPILER_FLAGS_FULL_TYPED
-    if flag != "--variable_renaming=ALL"
-]
 
 def j2cl_optimization_test(name, defs=[], javacopts=[]):
   j2cl_test(
@@ -22,13 +15,12 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
     compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
     data = ["//testing/matrix/nativebrowsers/chrome:stable_data"],
-    defs = _CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-        "--j2cl_pass=true",
-        "--export_test_functions=true",
-        "--language_in=ECMASCRIPT6_STRICT",
-        "--language_out=ECMASCRIPT5",
-        "--property_renaming=OFF",
-        "--pretty_print",
+    extra_defs = [
+        # Need to repeat compute_function_side_effects here, otherwise tests
+        # fail even though the flag is part of our default test flags
+        # for j2cl_test.
+        # b/33067506
+        "--compute_function_side_effects=true",
         "--rewrite_polyfills=false",
         "--strict",
         "--variable_renaming=OFF",

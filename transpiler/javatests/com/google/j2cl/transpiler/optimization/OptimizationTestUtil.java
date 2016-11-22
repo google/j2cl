@@ -25,7 +25,7 @@ public final class OptimizationTestUtil {
     for (char toBeEscaped : ".[](){}+=?".toCharArray()) {
       pattern = pattern.replace("" + toBeEscaped, "\\" + toBeEscaped);
     }
-    pattern = "function\\(.*\\){" + pattern + "}";
+    pattern = "function[\\w$_]*\\(.*\\){" + pattern + "}";
     pattern = pattern.replace("<obf>", "[\\w$_]+");
     return pattern;
   }

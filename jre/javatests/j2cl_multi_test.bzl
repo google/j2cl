@@ -13,7 +13,6 @@ j2cl_multi_test(
 """
 
 load("/third_party/java/j2cl/j2cl_test", "j2cl_test")
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_TEST_DEFS")
 
 
 def j2cl_multi_test(name, test_class, **kwargs):
@@ -31,8 +30,9 @@ def j2cl_multi_test(name, test_class, **kwargs):
             generate_build_test=False,
             srcs=srcs,
             deps=deps,
-            defs=J2CL_TEST_DEFS + [
+            extra_defs= [
                 # JRE tests use $doc and do other illegal things on purpose.
+                # b/33055288
                 "--jscomp_off=undefinedVars",
                 "--jscomp_off=checkTypes",
             ],
