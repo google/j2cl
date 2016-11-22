@@ -1051,7 +1051,7 @@ public class CompilationUnitBuilder {
         checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
-            TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)
+            returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
                 ? lambdaMethodBody.makeStatement()
                 : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
         statement.setSourcePosition(getSourcePosition(lambdaBody));
@@ -1618,7 +1618,7 @@ public class CompilationUnitBuilder {
           // The innermost type in which this variable is declared.
           TypeDescriptor enclosingTypeDescriptor = findEnclosingTypeDescriptor(variableBinding);
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
-          if (!enclosingTypeDescriptor.hasSameRawType(currentTypeDescriptor)) {
+          if (!enclosingTypeDescriptor.equalsIgnoreNullability(currentTypeDescriptor)) {
             return convertCapturedVariableReference(variable, enclosingTypeDescriptor);
           } else {
             return variable.getReference();
@@ -1655,7 +1655,7 @@ public class CompilationUnitBuilder {
       Expression qualifier = new ThisReference(currentType.getDescriptor());
       ITypeBinding innerTypeBinding = currentTypeBinding;
       if (!JdtUtils.createTypeDescriptor(innerTypeBinding)
-          .hasSameRawType(currentType.getDescriptor())) {
+          .equalsIgnoreNullability(currentType.getDescriptor())) {
         // currentType is a lambda type.
         qualifier =
             FieldAccess.Builder.from(
@@ -1694,7 +1694,7 @@ public class CompilationUnitBuilder {
       // type, and also a captured variable to the outer class in the type stack that is
       // inside {@code enclosingClassRef}.
       for (int i = typeStack.size() - 1; i >= 0; i--) {
-        if (typeStack.get(i).getDescriptor().hasSameRawType(enclosingClassDescriptor)) {
+        if (typeStack.get(i).getDescriptor().equalsIgnoreNullability(enclosingClassDescriptor)) {
           break;
         }
         capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);

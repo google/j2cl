@@ -521,7 +521,9 @@ public class JdtUtils {
     Expression callLambda =
         MethodCall.Builder.from(lambdaMethodDescriptor).setArguments(arguments).build();
     Statement statement =
-        TypeDescriptors.isPrimitiveVoid(lambdaMethodDescriptor.getReturnTypeDescriptor())
+        lambdaMethodDescriptor
+                .getReturnTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? callLambda.makeStatement()
             : new ReturnStatement(
                 callLambda, samImplementationMethodDescriptor.getReturnTypeDescriptor());

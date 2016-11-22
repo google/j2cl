@@ -24,6 +24,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.OperatorSideEffectUtils;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
 /**
@@ -43,19 +44,21 @@ public class FixBooleanOperators extends NormalizationPass {
   }
 
   private static class FixBadBooleanOperatorsVisitor extends AbstractRewriter {
+    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
+
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:
       // "bool ^ bool" -> "!!(bool ^ bool)"
-      if (TypeDescriptors.isPrimitiveBoolean(binaryExpression.getTypeDescriptor())) {
+      if (binaryExpression.getTypeDescriptor().equalsIgnoreNullability(primitiveBoolean)) {
         if (binaryExpression.getOperator() == BinaryOperator.BIT_AND
             || binaryExpression.getOperator() == BinaryOperator.BIT_OR
             || binaryExpression.getOperator() == BinaryOperator.BIT_XOR) {
           return PrefixExpression.newBuilder()
-              .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+              .setTypeDescriptor(primitiveBoolean)
               .setOperand(
                   PrefixExpression.newBuilder()
-                      .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+                      .setTypeDescriptor(primitiveBoolean)
                       .setOperand(new MultiExpression(binaryExpression))
                       .setOperator(PrefixOperator.NOT)
                       .build())
@@ -68,11 +71,13 @@ public class FixBooleanOperators extends NormalizationPass {
   }
 
   private static class SplitBadBooleanCompoundAssignmentsVisitor extends AbstractRewriter {
+    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
+
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:
       // "bool ^= bool" -> "bool = bool ^ bool"
-      if (TypeDescriptors.isPrimitiveBoolean(binaryExpression.getTypeDescriptor())) {
+      if (binaryExpression.getTypeDescriptor().equalsIgnoreNullability(primitiveBoolean)) {
         if (binaryExpression.getOperator() == BinaryOperator.BIT_AND_ASSIGN
             || binaryExpression.getOperator() == BinaryOperator.BIT_OR_ASSIGN
             || binaryExpression.getOperator() == BinaryOperator.BIT_XOR_ASSIGN) {

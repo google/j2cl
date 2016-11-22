@@ -275,7 +275,7 @@ public class JsInteropRestrictionsChecker {
 
     TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null
-        && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)
+        && !superTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)
         && !superTypeDescriptor.isNative()) {
       problems.error(
           type.getSourcePosition(),
@@ -392,7 +392,8 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (!TypeDescriptors.isJavaLangObject(type.getSuperTypeDescriptor())) {
+    if (!type.getSuperTypeDescriptor()
+        .equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)) {
       problems.error(
           type.getSourcePosition(),
           "JsFunction implementation '%s' cannot extend a class.",

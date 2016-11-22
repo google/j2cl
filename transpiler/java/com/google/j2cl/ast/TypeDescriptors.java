@@ -120,66 +120,19 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangBoolean)
-        || typeDescriptor.hasSameRawType(get().javaLangDouble);
-  }
-
-  public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveBoolean);
-  }
-
-  public static boolean isPrimitiveByte(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveByte);
-  }
-
-  public static boolean isPrimitiveChar(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveChar);
-  }
-
-  public static boolean isPrimitiveDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveDouble);
-  }
-
-  public static boolean isPrimitiveFloat(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveFloat);
-  }
-
-  public static boolean isPrimitiveFloatOrDouble(TypeDescriptor typeDescriptor) {
-    return isPrimitiveFloat(typeDescriptor) || isPrimitiveDouble(typeDescriptor);
-  }
-
-  public static boolean isPrimitiveInt(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveInt);
-  }
-
-  public static boolean isPrimitiveLong(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveLong);
-  }
-
-  public static boolean isPrimitiveShort(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveShort);
-  }
-
-  public static boolean isPrimitiveVoid(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveVoid);
+    return typeDescriptor.equalsIgnoreNullability(get().javaLangBoolean)
+        || typeDescriptor.equalsIgnoreNullability(get().javaLangDouble);
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return isPrimitiveBoolean(typeDescriptor) || isPrimitiveDouble(typeDescriptor);
-  }
-
-  public static boolean isJavaLangObject(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangObject);
-  }
-
-  public static boolean isJavaLangString(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangString);
+    return typeDescriptor.equalsIgnoreNullability(get().primitiveBoolean)
+        || typeDescriptor.equalsIgnoreNullability(get().primitiveDouble);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
-        && !isPrimitiveBoolean(typeDescriptor)
-        && !isPrimitiveVoid(typeDescriptor);
+        && !typeDescriptor.equalsIgnoreNullability(get().primitiveBoolean)
+        && !typeDescriptor.equalsIgnoreNullability(get().primitiveVoid);
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {
@@ -187,7 +140,8 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
-    return isBoxedBooleanOrDouble(typeDescriptor) || isJavaLangString(typeDescriptor);
+    return isBoxedBooleanOrDouble(typeDescriptor)
+        || typeDescriptor.equalsIgnoreNullability(get().javaLangString);
   }
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
@@ -204,18 +158,21 @@ public class TypeDescriptors {
   public static int getWidth(TypeDescriptor typeDescriptor) {
     checkArgument(isNumericPrimitive(typeDescriptor));
 
-    if (isPrimitiveByte(typeDescriptor)) {
+    TypeDescriptors typeDescriptors = get();
+    if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveByte)) {
       return 1;
-    } else if (isPrimitiveShort(typeDescriptor) || isPrimitiveChar(typeDescriptor)) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveShort)) {
       return 2;
-    } else if (isPrimitiveInt(typeDescriptor)) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveChar)) {
+      return 2;
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveInt)) {
       return 4;
-    } else if (isPrimitiveLong(typeDescriptor)) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveLong)) {
       return 8;
-    } else if (isPrimitiveFloat(typeDescriptor)) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveFloat)) {
       return 4 + 100;
     } else {
-      checkArgument(isPrimitiveDouble(typeDescriptor));
+      checkArgument(typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveDouble));
       return 8 + 100;
     }
   }

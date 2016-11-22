@@ -41,7 +41,8 @@ public class NewArray extends Expression {
     this.arrayLiteral = arrayLiteral;
     checkArgument(typeDescriptor.getDimensions() == dimensionExpressions.size());
     checkArgument(
-        arrayLiteral == null || arrayLiteral.getTypeDescriptor().hasSameRawType(typeDescriptor));
+        arrayLiteral == null
+            || arrayLiteral.getTypeDescriptor().equalsIgnoreNullability(typeDescriptor));
   }
 
   public ArrayLiteral getArrayLiteral() {

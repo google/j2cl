@@ -310,7 +310,8 @@ public class OperatorSideEffectUtils {
       case BIT_AND:
       case BIT_OR:
       case BIT_XOR:
-        if (TypeDescriptors.isPrimitiveBoolean(unboxedLeftOperandType)) {
+        if (unboxedLeftOperandType.equalsIgnoreNullability(
+            TypeDescriptors.get().primitiveBoolean)) {
           // Handle logical operations (on type boolean).
           return unboxedLeftOperandType;
         }

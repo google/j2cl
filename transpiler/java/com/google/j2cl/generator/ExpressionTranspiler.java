@@ -310,7 +310,9 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformNumberLiteral(NumberLiteral expression) {
-        if (TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor())) {
+        if (TypeDescriptors.get()
+            .primitiveLong
+            .equalsIgnoreNullability(expression.getTypeDescriptor())) {
           renderLongNumberLiteral(expression);
         } else {
           sourceBuilder.append(expression.getValue().toString());
@@ -320,7 +322,10 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformPostfixExpression(PostfixExpression expression) {
-        checkArgument(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
+        checkArgument(
+            !TypeDescriptors.get()
+                .primitiveLong
+                .equalsIgnoreNullability(expression.getTypeDescriptor()));
         process(expression.getOperand());
         sourceBuilder.append(expression.getOperator().toString());
         return null;

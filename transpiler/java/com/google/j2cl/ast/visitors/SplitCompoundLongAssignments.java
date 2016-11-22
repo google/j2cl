@@ -42,7 +42,9 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       if (binaryExpression.getOperator().isCompoundAssignment()
-          && TypeDescriptors.isPrimitiveLong(binaryExpression.getLeftOperand().getTypeDescriptor())
+          && TypeDescriptors.get()
+              .primitiveLong
+              .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())
           && !(binaryExpression.getLeftOperand() instanceof ArrayAccess)) {
         return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
       }
@@ -52,7 +54,9 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
     @Override
     public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
       if (prefixExpression.getOperator().hasSideEffect()
-          && TypeDescriptors.isPrimitiveLong(prefixExpression.getOperand().getTypeDescriptor())
+          && TypeDescriptors.get()
+              .primitiveLong
+              .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())
           && !(prefixExpression.getOperand() instanceof ArrayAccess)) {
         return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
       }
@@ -61,7 +65,7 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
 
     @Override
     public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
-      if (TypeDescriptors.isPrimitiveLong(postfixExpression.getOperand().getTypeDescriptor())
+      if (TypeDescriptors.get().primitiveLong == postfixExpression.getOperand().getTypeDescriptor()
           && !(postfixExpression.getOperand() instanceof ArrayAccess)) {
         return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
       }
