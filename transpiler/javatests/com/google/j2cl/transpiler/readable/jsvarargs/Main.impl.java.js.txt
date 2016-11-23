@@ -125,8 +125,7 @@ class Main extends java_lang_Object {
    */
   static generics(elements) {
     Main.$clinit();
-    let $var_args_copy = /**@type {!Array<*>} */ (
-        $Arrays.$create([arguments.length], java_lang_Object));
+    let $var_args_copy = new Array(arguments.length);
     for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }

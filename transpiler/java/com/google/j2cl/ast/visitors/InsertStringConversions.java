@@ -41,7 +41,7 @@ public class InsertStringConversions extends NormalizationPass {
       public Expression rewriteStringContext(
           Expression operandExpression, Expression otherOperandExpression) {
         TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-        if (typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangString)) {
+        if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
           // If it's a string, and it is not null or the otherOperandExpression is not null,
           // leave it alone.
           if (AstUtils.isNonNullString(operandExpression)
@@ -63,13 +63,13 @@ public class InsertStringConversions extends NormalizationPass {
         // since Java converts char to the matching String glyph and JS converts it into a
         // number String.
         if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
-            && !typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)) {
+            && !TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
           return operandExpression;
         }
 
         // Convert char to Character so that Character.toString() will be called and thus Java's
         // semantic around char String conversion will be honored.
-        if (typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)) {
+        if (TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
           operandExpression = AstUtils.box(operandExpression);
         }
 

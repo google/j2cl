@@ -353,9 +353,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
     checkState(
         parameter == null
-            || parameter
-                .getTypeDescriptor()
-                .equalsIgnoreNullability(fieldDescriptor.getTypeDescriptor()));
+            || parameter.getTypeDescriptor().hasSameRawType(fieldDescriptor.getTypeDescriptor()));
 
     return parameter;
   }

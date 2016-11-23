@@ -62,7 +62,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
           // ...optionally followed by a widening primitive conversion.
           fromTypeDescriptor = resultExpression.getTypeDescriptor();
-          if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+          if (!fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
             resultExpression =
                 CastExpression.newBuilder()
                     .setExpression(resultExpression)
@@ -102,7 +102,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
       // ...optionally followed by a widening primitive conversion.
       fromTypeDescriptor = resultExpression.getTypeDescriptor();
-      if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+      if (!fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
         resultExpression =
             CastExpression.newBuilder()
                 .setExpression(resultExpression)

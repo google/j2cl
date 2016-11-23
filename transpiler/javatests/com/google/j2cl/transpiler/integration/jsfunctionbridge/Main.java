@@ -30,6 +30,7 @@ public class Main {
     }
     assert ("eaad".equals(callParametric(foo, "e")));
     assert ("eaad".equals(foo.apply("e")));
+    assert "hello".equals(new Identity().apply("hello"));
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -44,5 +45,12 @@ public class Main {
   @JsFunction
   interface ApplyFunction<T> {
     T apply(T element);
+  }
+
+  private static class Identity implements ApplyFunction<Object> {
+    @Override
+    public Object apply(Object element) {
+      return element;
+    }
   }
 }

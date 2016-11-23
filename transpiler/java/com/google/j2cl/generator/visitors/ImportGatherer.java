@@ -115,7 +115,7 @@ public class ImportGatherer extends AbstractVisitor {
   public void exitMethod(Method method) {
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
-        || returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
+        || TypeDescriptors.isPrimitiveLong(returnTypeDescriptor)) {
       addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
     }
 
@@ -140,9 +140,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitNumberLiteral(NumberLiteral numberLiteral) {
-    if (TypeDescriptors.get()
-        .primitiveLong
-        .equalsIgnoreNullability(numberLiteral.getTypeDescriptor())) {
+    if (TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
       addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.EAGER);
     }
   }

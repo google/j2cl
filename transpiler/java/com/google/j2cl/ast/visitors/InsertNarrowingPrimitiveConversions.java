@@ -78,7 +78,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
       private boolean shouldNarrow(
           TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
 
-        if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+        if (fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
           return false;
         }
 
@@ -108,19 +108,19 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         if (literalValue instanceof Number) {
           Number numberLiteral = (Number) literalValue;
           // Narrow at compile time.
-          if (toTypeDescriptor == TypeDescriptors.get().primitiveByte) {
+          if (TypeDescriptors.isPrimitiveByte(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.byteValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveChar) {
+          } else if (TypeDescriptors.isPrimitiveChar(toTypeDescriptor)) {
             return new CharacterLiteral((char) numberLiteral.intValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveShort) {
+          } else if (TypeDescriptors.isPrimitiveShort(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.shortValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveInt) {
+          } else if (TypeDescriptors.isPrimitiveInt(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.intValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+          } else if (TypeDescriptors.isPrimitiveLong(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.longValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+          } else if (TypeDescriptors.isPrimitiveFloat(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.floatValue());
-          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+          } else if (TypeDescriptors.isPrimitiveDouble(toTypeDescriptor)) {
             return new NumberLiteral(toTypeDescriptor, numberLiteral.doubleValue());
           }
         } else if (literalValue instanceof Character) {

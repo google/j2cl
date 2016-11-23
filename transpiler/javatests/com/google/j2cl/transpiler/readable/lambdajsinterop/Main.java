@@ -19,3 +19,34 @@ public class Main {
     Thenable<String> rv = (f1, f2) -> f1.execute(null);
   }
 }
+
+class Functions {
+
+  @JsFunction
+  interface Function<F, T> {
+
+    /** Returns the result of applying this function to {@code input}. */
+    T apply(F input);
+  }
+  // @Nullable
+  private static IdentityFunction identityFunction = null;
+
+  private Functions() {}
+
+  /** Returns the identity function. */
+  @SuppressWarnings("unchecked")
+  public static <E> Function<E, E> identity() {
+    if (identityFunction == null) {
+      // Lazy initialize the field.
+      identityFunction = new IdentityFunction();
+    }
+    return (Function<E, E>) Functions.identityFunction;
+  }
+
+  private static class IdentityFunction implements Function<Object, Object> {
+    @Override
+    public Object apply(Object o) {
+      return o;
+    }
+  }
+}
