@@ -27,7 +27,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
 import java.util.List;
@@ -277,7 +276,6 @@ public class TypeDescriptors {
         Collections.emptyList(),
         typeDescriptor.getPackageName(),
         Joiner.on(".").join(classComponents),
-        typeDescriptor.getKind(),
         false,
         false);
   }
@@ -305,8 +303,7 @@ public class TypeDescriptors {
 
     BootstrapType(String packageName, String name) {
       this.typeDescriptor =
-          createExactly(
-              Kind.CLASS, packageName, Collections.singletonList(name), Collections.emptyList());
+          createExactly(packageName, Collections.singletonList(name), Collections.emptyList());
     }
 
     public TypeDescriptor getDescriptor() {
@@ -350,7 +347,6 @@ public class TypeDescriptors {
         typeArgumentDescriptors,
         jsNamespace,
         jsName,
-        Kind.INTERFACE,
         true,
         true);
   }
@@ -360,7 +356,7 @@ public class TypeDescriptors {
     return new TypeDescriptor.Builder()
         .setUniqueKey(createUniqueName(unionedTypeDescriptors, "|"))
         .setIsNullable(true)
-        .setKind(Kind.UNION)
+        .setIsUnion(true)
         .setRawTypeDescriptorFactory(Function.identity())
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setUnionedTypeDescriptors(unionedTypeDescriptors)
@@ -384,7 +380,7 @@ public class TypeDescriptors {
       typeVars.addAll(intersectedType.getAllTypeVariables());
     }
     return new TypeDescriptor.Builder()
-        .setKind(Kind.INTERSECTION)
+        .setIsIntersection(true)
         .setTypeArgumentDescriptors(typeVars)
         .setVisibility(Visibility.PUBLIC)
         .setIsNullable(true)
@@ -395,21 +391,12 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor createExactly(
-      Kind kind,
       String packageName,
       List<String> classComponents,
       List<TypeDescriptor> typeArgumentDescriptors) {
     checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return createExactly(
-        null,
-        packageName,
-        classComponents,
-        typeArgumentDescriptors,
-        null,
-        null,
-        kind,
-        false,
-        false);
+        null, packageName, classComponents, typeArgumentDescriptors, null, null, false, false);
   }
 
   private static TypeDescriptor createExactly(
@@ -419,7 +406,6 @@ public class TypeDescriptors {
       final List<TypeDescriptor> typeArgumentDescriptors,
       final String jsNamespace,
       final String jsName,
-      final Kind kind,
       final boolean isNative,
       final boolean isJsType) {
     Supplier<TypeDescriptor> rawTypeDescriptorFactory =
@@ -431,7 +417,6 @@ public class TypeDescriptors {
               Collections.emptyList(),
               jsNamespace,
               jsName,
-              kind,
               isNative,
               isJsType);
         };
@@ -448,7 +433,6 @@ public class TypeDescriptors {
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PUBLIC)
-        .setKind(kind)
         .build();
   }
 
@@ -522,7 +506,7 @@ public class TypeDescriptors {
     return new TypeDescriptor.Builder()
         .setComponentTypeDescriptor(componentTypeDescriptor)
         .setDimensions(dimensions)
-        .setKind(Kind.ARRAY)
+        .setIsArray(true)
         .setIsNullable(isNullable)
         .setLeafTypeDescriptor(leafTypeDescriptor)
         .setClassComponents(classComponents)

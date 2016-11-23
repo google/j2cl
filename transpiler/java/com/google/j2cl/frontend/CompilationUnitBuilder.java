@@ -80,6 +80,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
@@ -1091,9 +1092,8 @@ public class CompilationUnitBuilder {
       }
 
       TypeDescriptor lambdaTypeDescriptor =
-          JdtUtils.createLambdaTypeDescriptor(
-              enclosingType, classComponents, functionalInterfaceTypeBinding);
-      Type lambdaType = new Type(Visibility.PRIVATE, lambdaTypeDescriptor);
+          JdtUtils.createLambda(enclosingType, classComponents, functionalInterfaceTypeBinding);
+      Type lambdaType = new Type(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       lambdaType.setSourcePosition(getSourcePosition(expression));
       pushType(lambdaType);
 
@@ -1917,10 +1917,11 @@ public class CompilationUnitBuilder {
       if (typeBinding == null) {
         return null;
       }
+      Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
       Visibility visibility = JdtUtils.getVisibility(typeBinding);
       TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
 
-      Type type = new Type(visibility, typeDescriptor);
+      Type type = new Type(kind, visibility, typeDescriptor);
       type.setStatic(JdtUtils.isStatic(typeBinding));
       type.setAnonymous(typeBinding.isAnonymous());
       return type;

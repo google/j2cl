@@ -31,6 +31,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
@@ -80,7 +81,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
       // For each collected proxy type descriptor with a missing proxy class...
       for (TypeDescriptor proxyTypeDescriptor : proxyTypeDescriptors) {
         // create the missing proxy class.
-        compilationUnit.addType(new Type(Visibility.PUBLIC, proxyTypeDescriptor));
+        compilationUnit.addType(new Type(Kind.CLASS, Visibility.PUBLIC, proxyTypeDescriptor));
       }
     }
 

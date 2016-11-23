@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.toCollection;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
-import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
@@ -37,6 +36,14 @@ import java.util.List;
 @Visitable
 @Context
 public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
+  /** Describes the kind of the Java type. */
+  public enum Kind {
+    CLASS,
+    INTERFACE,
+    ENUM
+  }
+
+  private Kind kind;
   private Visibility visibility;
   private boolean isStatic;
   private boolean isAnonymous;
@@ -47,13 +54,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
 
-  public Type(Visibility visibility, TypeDescriptor typeDescriptor) {
+  public Type(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
+    this.kind = kind;
     this.visibility = visibility;
     this.typeDescriptor = typeDescriptor;
   }
 
   public Kind getKind() {
-    return typeDescriptor.getKind();
+    return kind;
   }
 
   public boolean isStatic() {
@@ -111,15 +119,15 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isEnum() {
-    return typeDescriptor.isEnum();
+    return this.kind == Kind.ENUM;
   }
 
   public boolean isInterface() {
-    return typeDescriptor.isInterface();
+    return this.kind == Kind.INTERFACE;
   }
 
   public boolean isClass() {
-    return typeDescriptor.isEnumOrSubclass() || typeDescriptor.isClass();
+    return this.kind == Kind.ENUM || this.kind == Kind.CLASS;
   }
 
   public TypeDescriptor getNativeTypeDescriptor() {
@@ -159,7 +167,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * distinguish enum fields from static fields created in the enum body.
    */
   public List<Field> getEnumFields() {
-    checkArgument(typeDescriptor.isEnum());
+    checkArgument(this.kind == Kind.ENUM);
     Iterable<Field> enumFields = Iterables.filter(getFields(), Field::isEnumField);
     return Lists.newArrayList(enumFields);
   }
