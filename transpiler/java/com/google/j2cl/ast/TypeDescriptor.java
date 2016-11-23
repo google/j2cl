@@ -54,6 +54,20 @@ import java.util.function.Supplier;
 public class TypeDescriptor extends Node
     implements Comparable<TypeDescriptor>, HasJsNameInfo, HasReadableDescription {
 
+  /** Kind of type descriptor. */
+  public enum Kind {
+    PRIMITIVE,
+    CLASS,
+    ENUM,
+    ENUM_SUBCLASS,
+    INTERFACE,
+    TYPE_VARIABLE,
+    WILDCARD_OR_CAPTURE,
+    ARRAY,
+    UNION,
+    INTERSECTION
+  }
+
   /** Builder for a TypeDescriptor. */
   public static class Builder {
 
@@ -72,22 +86,15 @@ public class TypeDescriptor extends Node
       newTypeDescriptor.interfaceTypeDescriptorsFactory =
           createFactory(typeDescriptor::getInterfaceTypeDescriptors);
       newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
-      newTypeDescriptor.isArray = typeDescriptor.isArray();
-      newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
+      newTypeDescriptor.kind = typeDescriptor.getKind();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
-      newTypeDescriptor.isInterface = typeDescriptor.isInterface();
-      newTypeDescriptor.isIntersection = typeDescriptor.isIntersection();
       newTypeDescriptor.isJsFunction = typeDescriptor.isJsFunctionInterface();
       newTypeDescriptor.isJsFunctionImplementation = typeDescriptor.isJsFunctionImplementation();
       newTypeDescriptor.isJsType = typeDescriptor.isJsType();
       newTypeDescriptor.isLocal = typeDescriptor.isLocal();
       newTypeDescriptor.isNative = typeDescriptor.isNative();
       newTypeDescriptor.isNullable = typeDescriptor.isNullable();
-      newTypeDescriptor.isPrimitive = typeDescriptor.isPrimitive();
-      newTypeDescriptor.isTypeVariable = typeDescriptor.isTypeVariable();
-      newTypeDescriptor.isUnion = typeDescriptor.isUnion();
-      newTypeDescriptor.isWildCardOrCapture = typeDescriptor.isWildCardOrCapture();
       newTypeDescriptor.jsFunctionMethodDescriptorFactory =
           createFactory(typeDescriptor::getJsFunctionMethodDescriptor);
       newTypeDescriptor.simpleJsName = typeDescriptor.getSimpleJsName();
@@ -120,9 +127,9 @@ public class TypeDescriptor extends Node
     }
 
     public TypeDescriptor build() {
-      checkState(!newTypeDescriptor.isTypeVariable || newTypeDescriptor.isNullable);
-      checkState(!newTypeDescriptor.isPrimitive || !newTypeDescriptor.isNullable);
-
+      checkState(newTypeDescriptor.getKind() != null);
+      checkState(!newTypeDescriptor.isTypeVariable() || newTypeDescriptor.isNullable);
+      checkState(!newTypeDescriptor.isPrimitive() || !newTypeDescriptor.isNullable);
       // Default to binary name as the unique key.
       if (newTypeDescriptor.uniqueKey == null) {
         newTypeDescriptor.uniqueKey = newTypeDescriptor.getQualifiedBinaryName();
@@ -212,15 +219,12 @@ public class TypeDescriptor extends Node
       return this;
     }
 
-    public Builder setIsArray(boolean isArray) {
-      newTypeDescriptor.isArray = isArray;
+
+    public Builder setKind(Kind kind) {
+      newTypeDescriptor.kind = kind;
       return this;
     }
 
-    public Builder setIsEnumOrSubclass(boolean isEnumOrSubclass) {
-      newTypeDescriptor.isEnumOrSubclass = isEnumOrSubclass;
-      return this;
-    }
 
     public Builder setIsFinal(boolean isFinal) {
       newTypeDescriptor.isFinal = isFinal;
@@ -229,16 +233,6 @@ public class TypeDescriptor extends Node
 
     public Builder setIsInstanceNestedClass(boolean isInstanceNestedClass) {
       newTypeDescriptor.isInstanceNestedClass = isInstanceNestedClass;
-      return this;
-    }
-
-    public Builder setIsInterface(boolean isInterface) {
-      newTypeDescriptor.isInterface = isInterface;
-      return this;
-    }
-
-    public Builder setIsIntersection(boolean isIntersection) {
-      newTypeDescriptor.isIntersection = isIntersection;
       return this;
     }
 
@@ -269,26 +263,6 @@ public class TypeDescriptor extends Node
 
     public Builder setIsNullable(boolean isNullable) {
       newTypeDescriptor.isNullable = isNullable;
-      return this;
-    }
-
-    public Builder setIsPrimitive(boolean isPrimitive) {
-      newTypeDescriptor.isPrimitive = isPrimitive;
-      return this;
-    }
-
-    public Builder setIsTypeVariable(boolean isTypeVariable) {
-      newTypeDescriptor.isTypeVariable = isTypeVariable;
-      return this;
-    }
-
-    public Builder setIsUnion(boolean isUnion) {
-      newTypeDescriptor.isUnion = isUnion;
-      return this;
-    }
-
-    public Builder setIsWildCardOrCapture(boolean isWildCardOrCapture) {
-      newTypeDescriptor.isWildCardOrCapture = isWildCardOrCapture;
       return this;
     }
 
@@ -418,22 +392,15 @@ public class TypeDescriptor extends Node
   private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
   private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
   private boolean isAbstract;
-  private boolean isArray;
-  private boolean isEnumOrSubclass;
   private boolean isFinal;
   private boolean isInstanceNestedClass;
-  private boolean isInterface;
-  private boolean isIntersection;
   private boolean isJsFunction;
   private boolean isJsFunctionImplementation;
   private boolean isJsType;
   private boolean isLocal;
   private boolean isNative;
   private boolean isNullable;
-  private boolean isPrimitive;
-  private boolean isTypeVariable;
-  private boolean isUnion;
-  private boolean isWildCardOrCapture;
+  private Kind kind;
   private DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory;
   private String simpleJsName;
   private String jsNamespace;
@@ -705,7 +672,7 @@ public class TypeDescriptor extends Node
 
   /** Returns the bound for a type variable. */
   public TypeDescriptor getBoundTypeDescriptor() {
-    checkState(isTypeVariable || isWildCardOrCapture);
+    checkState(isTypeVariable() || isWildCardOrCapture());
     if (boundTypeDescriptorFactory == null) {
       return null;
     }
@@ -772,6 +739,10 @@ public class TypeDescriptor extends Node
     return visibility;
   }
 
+  public Kind getKind() {
+    return kind;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
@@ -783,11 +754,30 @@ public class TypeDescriptor extends Node
 
   /** Returns whether the described type is an array. */
   public boolean isArray() {
-    return isArray;
+    return kind == Kind.ARRAY;
+  }
+
+  /** Returns whether the described type is a class. */
+  public boolean isClass() {
+    return kind == Kind.CLASS;
+  }
+
+  /** Returns whether the described type is an interface. */
+  public boolean isInterface() {
+    return kind == Kind.INTERFACE;
+  }
+
+  /** Returns whether the described type is an interface. */
+  public boolean isIntersection() {
+    return kind == Kind.INTERSECTION;
   }
 
   public boolean isEnumOrSubclass() {
-    return isEnumOrSubclass;
+    return kind == Kind.ENUM || kind == Kind.ENUM_SUBCLASS;
+  }
+
+  public boolean isEnum() {
+    return kind == Kind.ENUM;
   }
 
   public boolean isExtern() {
@@ -800,14 +790,6 @@ public class TypeDescriptor extends Node
 
   public boolean isInstanceNestedClass() {
     return isInstanceNestedClass;
-  }
-
-  public boolean isInterface() {
-    return isInterface;
-  }
-
-  public boolean isIntersection() {
-    return isIntersection;
   }
 
   public boolean isJsFunctionImplementation() {
@@ -855,20 +837,20 @@ public class TypeDescriptor extends Node
   }
 
   public boolean isPrimitive() {
-    return isPrimitive;
+    return kind == Kind.PRIMITIVE;
   }
 
   public boolean isTypeVariable() {
-    return isTypeVariable;
+    return kind == Kind.TYPE_VARIABLE;
   }
 
   /** Returns whether the described type is a union. */
   public boolean isUnion() {
-    return isUnion;
+    return kind == Kind.UNION;
   }
 
   public boolean isWildCardOrCapture() {
-    return isWildCardOrCapture;
+    return kind == Kind.WILDCARD_OR_CAPTURE;
   }
 
   public boolean isOrSubclassesJsConstructorClass() {

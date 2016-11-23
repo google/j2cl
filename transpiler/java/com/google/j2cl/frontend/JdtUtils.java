@@ -41,8 +41,8 @@ import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
@@ -188,21 +188,6 @@ public class JdtUtils {
         return BinaryOperator.CONDITIONAL_OR;
     }
     return null;
-  }
-
-  public static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
-    if (typeBinding.isInterface()) {
-      return Kind.INTERFACE;
-    } else if (typeBinding.isClass() || (typeBinding.isEnum() && typeBinding.isAnonymous())) {
-      // Enum values that are anonymous inner classes, are not consider enums classes in
-      // our AST, but are considered enum classes by JDT.
-      return Kind.CLASS;
-    } else if (typeBinding.isEnum()) {
-      checkArgument(!typeBinding.isAnonymous());
-      return Kind.ENUM;
-    }
-
-    throw new RuntimeException("Type binding " + typeBinding + " not handled");
   }
 
   public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
@@ -1202,7 +1187,7 @@ public class JdtUtils {
   }
 
 
-  public static TypeDescriptor createLambda(
+  public static TypeDescriptor createLambdaTypeDescriptor(
       final TypeDescriptor enclosingClassTypeDescriptor,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
@@ -1276,6 +1261,7 @@ public class JdtUtils {
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PRIVATE)
+        .setKind(Kind.CLASS)
         .build();
   }
 
@@ -1340,7 +1326,6 @@ public class JdtUtils {
     // Compute these first since they're reused in other calculations.
     String packageName =
         typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
-    boolean isPrimitive = typeBinding.isPrimitive();
     boolean isTypeVariable = typeBinding.isTypeVariable();
     boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
     boolean isAbstract = isAbstract(typeBinding);
@@ -1384,19 +1369,15 @@ public class JdtUtils {
         .setInterfaceTypeDescriptorsFactory(
             () -> createTypeDescriptors(typeBinding.getInterfaces()))
         .setIsAbstract(isAbstract)
-        .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
+        .setKind(getKindFromTypeBinding(typeBinding))
         .setIsFinal(isFinal)
         .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
-        .setIsInterface(typeBinding.isInterface())
         .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
         .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
         .setIsJsType(JsInteropUtils.isJsType(typeBinding))
         .setIsNative(JsInteropUtils.isNativeType(typeBinding))
         .setIsLocal(isLocal(typeBinding))
         .setIsNullable(isNullable)
-        .setIsPrimitive(isPrimitive)
-        .setIsTypeVariable(isTypeVariable)
-        .setIsWildCardOrCapture(isWildCardOrCapture)
         .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
@@ -1409,6 +1390,29 @@ public class JdtUtils {
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setUniqueKey(uniqueKey)
         .build();
+  }
+
+  private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
+    if (typeBinding.isInterface()) {
+      return Kind.INTERFACE;
+    } else if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
+      return Kind.ENUM;
+    } else if (isEnumOrSubclass(typeBinding)) {
+      return Kind.ENUM_SUBCLASS;
+    } else if (typeBinding.isPrimitive()) {
+      return Kind.PRIMITIVE;
+    } else if (typeBinding.isClass()) {
+      return Kind.CLASS;
+    } else if (typeBinding.isArray()) {
+      return Kind.ARRAY;
+    } else if (typeBinding.isTypeVariable()) {
+      return Kind.TYPE_VARIABLE;
+    } else if (typeBinding.isWildcardType()) {
+      return Kind.WILDCARD_OR_CAPTURE;
+    } else if (typeBinding.isCapture()) {
+      return Kind.WILDCARD_OR_CAPTURE;
+    }
+    throw new RuntimeException("Type binding " + typeBinding + " not handled");
   }
 
   private static String getJsName(final ITypeBinding typeBinding) {
