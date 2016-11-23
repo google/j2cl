@@ -1,13 +1,11 @@
 #!/usr/bin/python2.7
 #
 # Copyright 2015 Google Inc. All Rights Reserved.
-
 """Reports optimized size changes caused by the current CL."""
 
-
+from multiprocessing import Pool
 import os
 import zlib
-
 
 import repo_util
 
@@ -21,6 +19,12 @@ def get_gzip_size(content):
 def print_table_header(size_report_file):
   header_format = "  %7s%7s\n"
   size_report_file.write(header_format % ("old", "new"))
+
+
+def console_log(message):
+  """Prints a string to the console."""
+  # Necessary because lambda methods can not invoke print statements.
+  print message
 
 
 def make_size_report():
@@ -37,12 +41,25 @@ def make_size_report():
   size_report_file.write("Integration tests optimized size report:\n")
   size_report_file.write("**************************************\n")
 
-  print "  Collecting original optimized sizes."
-  repo_util.build_optimized_tests(repo_util.get_managed_path())
+  print "  Building original amd modified targets."
+  pool = Pool(processes=2)
+  original_result = pool.apply_async(
+      repo_util.build_optimized_tests, [repo_util.get_managed_path()],
+      callback=lambda x: console_log("    Original done buliding."))
+  modified_result = pool.apply_async(
+      repo_util.build_optimized_tests,
+      callback=lambda x: console_log("    Modified done building."))
+  pool.close()
+  pool.join()
+
+  # Invoke get() on async results to "propagate" the exceptions that
+  # were raised if any.
+  original_result.get()
+  modified_result.get()
+
+  print "  Collecting original amd modified optimized sizes."
   original_js_files_by_test_name = (
       repo_util.get_js_files_by_test_name(repo_util.get_managed_path()))
-  print "  Collecting modified optimized sizes."
-  repo_util.build_optimized_tests()
   modified_js_files_by_test_name = repo_util.get_js_files_by_test_name()
 
   print "  Comparing results."
@@ -93,14 +110,12 @@ def make_size_report():
       if modified_size >= 0:
         # Both files exist, so compare their sizes.
         size_percent = (modified_size / float(original_size)) * 100
-        size_percent_gzip = (
-            modified_size_gzip / float(original_size_gzip)) * 100
-        note = ("unchanged" if
-                original_size_gzip == modified_size_gzip else
+        size_percent_gzip = (modified_size_gzip /
+                             float(original_size_gzip)) * 100
+        note = ("unchanged" if original_size_gzip == modified_size_gzip else
                 "%.2f%%" % (size_percent_gzip - 100))
-        message = (
-            row_format %
-            (original_size_gzip, modified_size_gzip, test_name, note))
+        message = (row_format %
+                   (original_size_gzip, modified_size_gzip, test_name, note))
         all_reports.append((size_percent_gzip, message))
 
         if (modified_size != original_size or
@@ -114,33 +129,30 @@ def make_size_report():
         size_percent = 100
         size_percent_gzip = 100
         note = "new"
-        message = (
-            row_format %
-            (original_size_gzip, modified_size_gzip, test_name, note))
+        message = (row_format %
+                   (original_size_gzip, modified_size_gzip, test_name, note))
         all_reports.append((size_percent, message))
         new_reports.append(message)
 
   # Keep a maximum of 4 of the largest shrinkages.
   shrinkage_reports = (
-      sorted(all_reports, key=lambda report: report[0], reverse=False)
-      [0: 4])
-  shrinkage_reports = [report for report in shrinkage_reports
-                       if report[0] < 100]
+      sorted(all_reports, key=lambda report: report[0], reverse=False)[0:4])
+  shrinkage_reports = [
+      report for report in shrinkage_reports if report[0] < 100
+  ]
   # Keep a maximum of 4 of the largest expansions.
   expansion_reports = (
-      sorted(all_reports, key=lambda report: report[0], reverse=True)
-      [0: 4])
-  expansion_reports = [report for report in expansion_reports
-                       if report[0] > 100]
+      sorted(all_reports, key=lambda report: report[0], reverse=True)[0:4])
+  expansion_reports = [
+      report for report in expansion_reports if report[0] > 100
+  ]
 
-  size_report_file.write(
-      "There are %s size changes.\n" % size_change_count)
+  size_report_file.write("There are %s size changes.\n" % size_change_count)
 
   if modified_total_size != original_total_size:
-    total_percent = (
-        modified_total_size / float(original_total_size)) * 100
-    total_percent_gzip = (
-        modified_total_size_gzip / float(original_total_size_gzip)) * 100
+    total_percent = (modified_total_size / float(original_total_size)) * 100
+    total_percent_gzip = (modified_total_size_gzip /
+                          float(original_total_size_gzip)) * 100
     size_report_file.write(
         "Total size (of already existing tests) "
         "changed from\n  %s to %s bytes (100%%->%2.2f%%) and from\n  "
