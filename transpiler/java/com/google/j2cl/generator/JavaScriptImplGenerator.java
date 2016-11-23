@@ -319,11 +319,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       return;
     }
-    checkState(!type.getDescriptor().isIntersection());
     if (type.isInterface()) {
       renderIsInstanceForInterfaceType();
     } else {
-      checkState(type.isClass());
+      checkState(type.isClass() || type.isEnum());
       renderIsInstanceForClassType();
     }
   }

@@ -260,7 +260,7 @@ public class JsInteropRestrictionsChecker {
     TypeDescriptor typeDescriptor = type.getDescriptor();
     String readableDescription = typeDescriptor.getReadableDescription();
 
-    if (typeDescriptor.isEnumOrSubclass()) {
+    if (type.isEnumOrSubclass()) {
       problems.error(
           type.getSourcePosition(), "Enum '%s' cannot be a native JsType.", readableDescription);
       return false;

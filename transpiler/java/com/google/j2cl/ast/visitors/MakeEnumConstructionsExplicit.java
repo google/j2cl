@@ -52,7 +52,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public boolean shouldProcessType(Type type) {
-            return type.getDescriptor().isEnumOrSubclass();
+            return type.isEnumOrSubclass();
           }
 
           @Override
@@ -85,15 +85,13 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public boolean shouldProcessType(Type type) {
-            return type.getDescriptor().isEnumOrSubclass();
+            return type.isEnumOrSubclass();
           }
 
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             // Only add arguments to super() calls inside of constructor methods in Enum classes.
-            if (!getCurrentMember().isConstructor()
-                || !getCurrentType().getDescriptor().isEnumOrSubclass()
-                || !methodCall.getTarget().isConstructor()) {
+            if (!getCurrentMember().isConstructor() || !methodCall.getTarget().isConstructor()) {
               return methodCall;
             }
 
