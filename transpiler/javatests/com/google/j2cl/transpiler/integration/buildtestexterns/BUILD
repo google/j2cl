@@ -20,6 +20,7 @@ js_library(
         "//javascript/externs/api/client",
         ":foo_externs",
     ],
+    deps_mgmt = "legacy",
 )
 
 integration_test(

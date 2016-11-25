@@ -28,5 +28,6 @@ integration_test(
 js_library(
     name = "native_types",
     srcs = ["NativeFoo.js"],
+    deps_mgmt = "legacy",
     deps = ["//javascript/closure:base"],
 )

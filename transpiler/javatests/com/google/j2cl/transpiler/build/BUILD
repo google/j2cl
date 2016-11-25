@@ -47,6 +47,7 @@ java_library(
 js_library(
     name = "launcher",
     srcs = ["Launcher.js"],
+    deps_mgmt = "legacy",
     deps = [
         ":example_j2cl_lib",
         "//javascript/closure:base",
@@ -57,6 +58,7 @@ js_library(
 js_library(
     name = "dupe_launcher",
     srcs = ["Launcher.js"],
+    deps_mgmt = "legacy",
     deps = [
         ":example_j2cl_lib",
         ":dupe_j2cl_lib",
@@ -124,6 +126,7 @@ js_binary(
 
 pinto_module(
     name = "J2clPintoPmfEnhancerMss_pinto_module",
+    deps_mgmt = "legacy",
     module_id = "J2clPintoPmfEnhancerMss_pinto_module",
     deps = [":launcher"],
 )

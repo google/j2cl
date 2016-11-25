@@ -11,6 +11,7 @@ java_library(
 
 js_library(
     name = "forwarder",
+    deps_mgmt = "legacy",
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo",
     ],

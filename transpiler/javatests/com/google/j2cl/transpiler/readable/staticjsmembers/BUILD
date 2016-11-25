@@ -19,5 +19,6 @@ readable_example(
 js_library(
     name = "native_sources",
     srcs = glob(["native_sources/*.js"]),
+    deps_mgmt = "legacy",
     deps = ["//javascript/closure:base"],
 )

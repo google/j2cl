@@ -19,6 +19,7 @@ js_library(
         "//javascript/externs:common",
         ":foo_externs",
     ],
+    deps_mgmt = "legacy",
 )
 
 # Creates verification target

@@ -11,6 +11,7 @@ load(
 js_library(
     name = "Bar",
     srcs = ["foo.Bar.js"],
+    deps_mgmt = "legacy",
     deps = ["//javascript/closure:base"],
 )
 
