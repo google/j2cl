@@ -473,11 +473,6 @@ public class TypeDescriptor extends Node
 
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
-    // TODO(goktug): fix the qualified name for primitives at construction phase.
-    if (isPrimitive()) {
-      return "vmbootstrap.primitives.$" + getQualifiedSourceName();
-    }
-
     if (isProxy()) {
       return getQualifiedSourceName() + "$$Proxy";
     }

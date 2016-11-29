@@ -1409,12 +1409,18 @@ public class JdtUtils {
   }
 
   private static String getJsName(final ITypeBinding typeBinding) {
+    if (typeBinding.isPrimitive()) {
+      return "$" + typeBinding.getName();
+    }
     return JsInteropAnnotationUtils.getJsName(
         JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
   }
 
   private static String getJsNamespace(
       ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+    if (typeBinding.isPrimitive()) {
+      return "vmbootstrap.primitives";
+    }
     String jsNamespace =
         JsInteropAnnotationUtils.getJsNamespace(
             JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
