@@ -849,12 +849,35 @@ public class JdtUtils {
   }
 
   public static boolean isStatic(IBinding binding) {
+    if (binding instanceof IVariableBinding) {
+      IVariableBinding variableBinding = (IVariableBinding) binding;
+      if (!variableBinding.isField() || variableBinding.getDeclaringClass().isInterface()) {
+        // Interface fields and variables are implicitly static.
+        return true;
+      }
+    }
     return Modifier.isStatic(binding.getModifiers());
   }
 
-  /** Returns true if the type is an instance (non static) inner class */
-  public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
-    return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+  /**
+   * Returns true if instances of this type capture its outer instances; i.e. if it is an non static
+   * member class, or an anonymous or local class defined in an instance context.
+   */
+  public static boolean capturesEnclosingInstance(ITypeBinding typeBinding) {
+    if (!typeBinding.isClass() || !typeBinding.isNested()) {
+      // Only non-top level classes (excludes Enums, Interfaces etc.) can capture outer instances.
+      return false;
+    }
+
+    if (typeBinding.isLocal()) {
+      // Local types (which include anonymous classes in JDT) are static only if they are declared
+      // in a static context; i.e. if the member where they are declared is static.
+      return !isStatic(typeBinding.getTypeDeclaration().getDeclaringMember());
+    } else {
+      checkArgument(typeBinding.isMember());
+      // Member classes must be marked explicitly static.
+      return !isStatic(typeBinding);
+    }
   }
 
   /**
@@ -1181,6 +1204,7 @@ public class JdtUtils {
 
 
   public static TypeDescriptor createLambdaTypeDescriptor(
+      boolean inStaticContext,
       final TypeDescriptor enclosingClassTypeDescriptor,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
@@ -1240,7 +1264,7 @@ public class JdtUtils {
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(() -> enclosingClassTypeDescriptor)
-        .setIsInstanceNestedClass(true)
+        .setCapturesEnclosingInstance(!inStaticContext)
         .setIsJsFunctionImplementation(isJsFunctionImplementation)
         .setIsLocal(true)
         .setIsNullable(true)
@@ -1363,8 +1387,8 @@ public class JdtUtils {
             () -> createTypeDescriptors(typeBinding.getInterfaces()))
         .setIsAbstract(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
+        .setCapturesEnclosingInstance(capturesEnclosingInstance(typeBinding))
         .setIsFinal(isFinal)
-        .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
         .setIsFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
         .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))

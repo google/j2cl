@@ -265,7 +265,7 @@ public class JsInteropRestrictionsChecker {
           type.getSourcePosition(), "Enum '%s' cannot be a native JsType.", readableDescription);
       return false;
     }
-    if (typeDescriptor.isInstanceNestedClass()) {
+    if (typeDescriptor.capturesEnclosingInstance()) {
       problems.error(
           type.getSourcePosition(),
           "Non static inner class '%s' cannot be a native JsType.",

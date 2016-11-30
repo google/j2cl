@@ -59,7 +59,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
     public boolean shouldProcessType(Type type) {
       // super class of {@code type} is an instance nested class.
       return type.getSuperTypeDescriptor() != null
-          && type.getSuperTypeDescriptor().isInstanceNestedClass();
+          && type.getSuperTypeDescriptor().capturesEnclosingInstance();
     }
 
     @Override

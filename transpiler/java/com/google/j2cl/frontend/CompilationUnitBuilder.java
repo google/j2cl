@@ -182,7 +182,6 @@ public class CompilationUnitBuilder {
         case ASTNode.TYPE_DECLARATION:
           Type type =
               convertAndAddType(
-                  JdtUtils.isInStaticContext(typeDeclaration),
                   typeDeclaration.resolveBinding(),
                   JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
           type.setSourcePosition(getSourcePosition(typeDeclaration));
@@ -202,7 +201,6 @@ public class CompilationUnitBuilder {
     private void convert(EnumDeclaration enumDeclaration) {
       Type enumType =
           convertAndAddType(
-              true, // enums are always in static contexts
               enumDeclaration.resolveBinding(),
               JdtUtils.asTypedList(enumDeclaration.bodyDeclarations()));
       enumType.setSourcePosition(getSourcePosition(enumDeclaration));
@@ -218,18 +216,17 @@ public class CompilationUnitBuilder {
     }
 
     private Type convertAndAddType(
-        boolean inStaticContext, ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
+        ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
       Type type = createType(typeBinding);
       pushType(type);
       j2clCompilationUnit.addType(type);
-      convertTypeBody(type, inStaticContext, typeBinding, bodyDeclarations);
+      convertTypeBody(type, typeBinding, bodyDeclarations);
       popType();
       return type;
     }
 
     private void convertTypeBody(
         Type type,
-        boolean inStaticContext,
         ITypeBinding typeBinding,
         List<BodyDeclaration> bodyDeclarations) {
       TypeDescriptor currentTypeDescriptor = TypeDescriptors.toNullable(type.getDescriptor());
@@ -278,7 +275,7 @@ public class CompilationUnitBuilder {
         type.addField(
             Field.Builder.from(fieldDescriptor).setCapturedVariable(capturedVariable).build());
       }
-      if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
+      if (JdtUtils.capturesEnclosingInstance(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
             0,
@@ -484,7 +481,6 @@ public class CompilationUnitBuilder {
       pushType(type);
       convertTypeBody(
           type,
-          JdtUtils.isInStaticContext(typeDeclaration),
           typeBinding,
           JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
 
@@ -544,7 +540,7 @@ public class CompilationUnitBuilder {
 
       // the qualifier for the NewInstance.
       Expression newInstanceQualifier =
-          !JdtUtils.isInStaticContext(expression)
+          constructorDescriptor.getEnclosingClassTypeDescriptor().capturesEnclosingInstance()
               ? convertOuterClassReference(
                   JdtUtils.findCurrentTypeBinding(expression),
                   newInstanceTypeBinding.getDeclaringClass(),
@@ -569,13 +565,7 @@ public class CompilationUnitBuilder {
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       checkArgument(!newInstanceTypeBinding.isAnonymous());
-      boolean needsQualifier =
-          JdtUtils.isInstanceNestedClass(newInstanceTypeBinding)
-              // All instance nested classes need qualifier except local classes defined in static
-              // members.
-              && !(newInstanceTypeBinding.isLocal()
-                  && JdtUtils.isStatic(
-                      newInstanceTypeBinding.getTypeDeclaration().getDeclaringMember()));
+      boolean needsQualifier = JdtUtils.capturesEnclosingInstance(newInstanceTypeBinding);
       checkArgument(
           qualifier == null || needsQualifier,
           "NewInstance of non nested class should have no qualifier.");
@@ -1090,9 +1080,10 @@ public class CompilationUnitBuilder {
         return convertLambdaToFunctionExpression(expression);
       }
 
+      boolean inStaticContext = JdtUtils.isInStaticContext(expression);
       TypeDescriptor lambdaTypeDescriptor =
           JdtUtils.createLambdaTypeDescriptor(
-              enclosingType, classComponents, functionalInterfaceTypeBinding);
+              inStaticContext, enclosingType, classComponents, functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Visibility.PRIVATE, lambdaTypeDescriptor);
       lambdaType.setSourcePosition(getSourcePosition(expression));
       pushType(lambdaType);
@@ -1119,7 +1110,7 @@ public class CompilationUnitBuilder {
                 .build());
       }
 
-      if (!JdtUtils.isInStaticContext(expression)) {
+      if (lambdaTypeDescriptor.capturesEnclosingInstance()) {
         // Add field for enclosing instance.
         lambdaType.addField(
             0,
@@ -1179,7 +1170,7 @@ public class CompilationUnitBuilder {
           AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor, Visibility.PUBLIC);
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
-          !JdtUtils.isInStaticContext(expression)
+          lambdaTypeDescriptor.capturesEnclosingInstance()
               ? convertOuterClassReference(
                   enclosingClassTypeBinding, enclosingClassTypeBinding, true)
               : null;
@@ -1753,7 +1744,7 @@ public class CompilationUnitBuilder {
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       // super() call to an inner class without explicit qualifier, find the enclosing instance.
-      if (qualifier == null && JdtUtils.isInstanceNestedClass(superclassBinding)) {
+      if (qualifier == null && JdtUtils.capturesEnclosingInstance(superclassBinding)) {
         qualifier =
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),

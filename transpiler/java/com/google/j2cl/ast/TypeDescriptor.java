@@ -86,9 +86,9 @@ public class TypeDescriptor extends Node
           createFactory(typeDescriptor::getInterfaceTypeDescriptors);
       newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
       newTypeDescriptor.kind = typeDescriptor.getKind();
+      newTypeDescriptor.capturesEnclosingInstance = typeDescriptor.capturesEnclosingInstance();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
       newTypeDescriptor.isFunctionalInterface = typeDescriptor.isFunctionalInterface();
-      newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
       newTypeDescriptor.isJsFunction = typeDescriptor.isJsFunctionInterface();
       newTypeDescriptor.isJsFunctionImplementation = typeDescriptor.isJsFunctionImplementation();
       newTypeDescriptor.isJsType = typeDescriptor.isJsType();
@@ -242,6 +242,11 @@ public class TypeDescriptor extends Node
       return this;
     }
 
+    public Builder setCapturesEnclosingInstance(boolean capturesEnclosingInstance) {
+      newTypeDescriptor.capturesEnclosingInstance = capturesEnclosingInstance;
+      return this;
+    }
+
     public Builder setIsFinal(boolean isFinal) {
       newTypeDescriptor.isFinal = isFinal;
       return this;
@@ -249,11 +254,6 @@ public class TypeDescriptor extends Node
 
     public Builder setIsFunctionalInterface(boolean isFunctionalInterface) {
       newTypeDescriptor.isFunctionalInterface = isFunctionalInterface;
-      return this;
-    }
-
-    public Builder setIsInstanceNestedClass(boolean isInstanceNestedClass) {
-      newTypeDescriptor.isInstanceNestedClass = isInstanceNestedClass;
       return this;
     }
 
@@ -412,10 +412,10 @@ public class TypeDescriptor extends Node
   private int dimensions;
   private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
   private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
+  private boolean capturesEnclosingInstance;
   private boolean isAbstract;
   private boolean isFinal;
   private boolean isFunctionalInterface;
-  private boolean isInstanceNestedClass;
   private boolean isJsFunction;
   private boolean isJsFunctionImplementation;
   private boolean isJsType;
@@ -765,6 +765,11 @@ public class TypeDescriptor extends Node
     return Objects.hashCode(getUniqueId());
   }
 
+  /** Returns true if the class captures its enclosing instance */
+  public boolean capturesEnclosingInstance() {
+    return capturesEnclosingInstance;
+  }
+
   public boolean isAbstract() {
     return isAbstract;
   }
@@ -804,10 +809,6 @@ public class TypeDescriptor extends Node
 
   public boolean isFunctionalInterface() {
     return isFunctionalInterface;
-  }
-
-  public boolean isInstanceNestedClass() {
-    return isInstanceNestedClass;
   }
 
   public boolean isJsFunctionImplementation() {
