@@ -1365,6 +1365,7 @@ public class JdtUtils {
         .setKind(getKindFromTypeBinding(typeBinding))
         .setIsFinal(isFinal)
         .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
+        .setIsFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
         .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
         .setIsJsType(JsInteropUtils.isJsType(typeBinding))

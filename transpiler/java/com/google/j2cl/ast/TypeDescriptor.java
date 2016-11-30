@@ -87,6 +87,7 @@ public class TypeDescriptor extends Node
       newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
       newTypeDescriptor.kind = typeDescriptor.getKind();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
+      newTypeDescriptor.isFunctionalInterface = typeDescriptor.isFunctionalInterface();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
       newTypeDescriptor.isJsFunction = typeDescriptor.isJsFunctionInterface();
       newTypeDescriptor.isJsFunctionImplementation = typeDescriptor.isJsFunctionImplementation();
@@ -134,7 +135,24 @@ public class TypeDescriptor extends Node
         newTypeDescriptor.uniqueKey = newTypeDescriptor.getQualifiedBinaryName();
       }
 
-      // TODO(tdeegan): Complete the precondition checks to make sure we are never buiding a
+      // Can not be both a JsFunction implementation and js function interface
+      checkState(
+          !newTypeDescriptor.isJsFunctionImplementation()
+              || !newTypeDescriptor.isJsFunctionInterface());
+
+      // Can not be both a JsFunction implementation and a functional interface
+      checkState(
+          !newTypeDescriptor.isJsFunctionImplementation()
+              || !newTypeDescriptor.isFunctionalInterface());
+
+      // JsFunction interfaces are functional interfaces.
+      checkState(
+          !newTypeDescriptor.isJsFunctionInterface() || newTypeDescriptor.isFunctionalInterface());
+
+      // Only interfaces are functional.
+      checkState(!newTypeDescriptor.isFunctionalInterface() || newTypeDescriptor.isInterface());
+
+      // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
       // type descriptor that does not make sense.
       return getInterner().intern(newTypeDescriptor);
     }
@@ -226,6 +244,11 @@ public class TypeDescriptor extends Node
 
     public Builder setIsFinal(boolean isFinal) {
       newTypeDescriptor.isFinal = isFinal;
+      return this;
+    }
+
+    public Builder setIsFunctionalInterface(boolean isFunctionalInterface) {
+      newTypeDescriptor.isFunctionalInterface = isFunctionalInterface;
       return this;
     }
 
@@ -391,6 +414,7 @@ public class TypeDescriptor extends Node
   private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
   private boolean isAbstract;
   private boolean isFinal;
+  private boolean isFunctionalInterface;
   private boolean isInstanceNestedClass;
   private boolean isJsFunction;
   private boolean isJsFunctionImplementation;
@@ -776,6 +800,10 @@ public class TypeDescriptor extends Node
 
   public boolean isFinal() {
     return isFinal;
+  }
+
+  public boolean isFunctionalInterface() {
+    return isFunctionalInterface;
   }
 
   public boolean isInstanceNestedClass() {
