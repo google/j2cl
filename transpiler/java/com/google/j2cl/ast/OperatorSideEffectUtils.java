@@ -191,9 +191,9 @@ public class OperatorSideEffectUtils {
     return FieldAccess.Builder.from(
             FieldDescriptor.newBuilder()
                 .setEnclosingClassTypeDescriptor(BootstrapType.NUMBERS.getDescriptor())
-                .setFieldName(fieldName)
+                .setName(fieldName)
                 .setTypeDescriptor(typeDescriptor)
-                .setIsStatic(true)
+                .setStatic(true)
                 .setJsInfo(JsInfo.RAW_FIELD)
                 .build())
         .build();

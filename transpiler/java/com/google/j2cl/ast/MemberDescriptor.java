@@ -49,6 +49,10 @@ public abstract class MemberDescriptor extends Node
 
   public abstract boolean isPolymorphic();
 
+  public boolean isJsOverlay() {
+    return getJsInfo().isJsOverlay();
+  }
+
   @Override
   public String getSimpleJsName() {
     String jsName = getJsInfo().getJsName();

@@ -256,12 +256,12 @@ public class NormalizeJsVarargs extends NormalizationPass {
       MethodDescriptor nullToEmptyDescriptor =
           MethodDescriptor.newBuilder()
               .setReturnTypeDescriptor(returnType)
-              .setIsStatic(true)
+              .setStatic(true)
               .setName("$checkNotNull")
               .setJsInfo(JsInfo.RAW)
               .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
               .setReturnTypeDescriptor(returnType)
-              .addParameter(lastArgument.getTypeDescriptor())
+              .addParameterTypeDescriptors(lastArgument.getTypeDescriptor())
               .build();
 
       MethodCall nullToEmpty =

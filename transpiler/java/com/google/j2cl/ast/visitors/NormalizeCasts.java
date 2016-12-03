@@ -78,7 +78,7 @@ public class NormalizeCasts extends NormalizationPass {
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
             .setName("to")
             .setParameterTypeDescriptors(
@@ -119,7 +119,7 @@ public class NormalizeCasts extends NormalizationPass {
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .setName("$castTo")
             .setParameterTypeDescriptors(
@@ -157,7 +157,7 @@ public class NormalizeCasts extends NormalizationPass {
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .setName("$castToNative")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))

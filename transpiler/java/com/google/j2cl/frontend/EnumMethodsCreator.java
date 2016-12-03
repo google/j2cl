@@ -60,7 +60,7 @@ public class EnumMethodsCreator {
     this.namesToValuesMapFieldDescriptor =
         FieldDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
-            .setFieldName(NAMES_TO_VALUES_MAP_FIELD_NAME)
+            .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
                 TypeDescriptors.createNative(
                     // Browser global
@@ -71,12 +71,12 @@ public class EnumMethodsCreator {
                     Lists.newArrayList(
                         TypeDescriptors.get().javaLangString,
                         TypeDescriptors.toNonNullable(enumType.getDescriptor()))))
-            .setIsStatic(true)
+            .setStatic(true)
             .setVisibility(Visibility.PRIVATE)
             .build();
     this.valuesMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
             .setName(VALUES_METHOD_NAME)
             .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
@@ -85,7 +85,7 @@ public class EnumMethodsCreator {
             .build();
     this.valueOfMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
             .setName(VALUE_OF_METHOD_NAME)
             .setReturnTypeDescriptor(enumType.getDescriptor())
@@ -131,7 +131,7 @@ public class EnumMethodsCreator {
     MethodDescriptor createMapMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
@@ -140,7 +140,7 @@ public class EnumMethodsCreator {
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(GET_VALUE_METHOD_NAME)
             .setReturnTypeDescriptor(enumType.getDescriptor())

@@ -19,8 +19,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.ThreadLocalInterner;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
@@ -41,41 +41,46 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getTypeDescriptor();
 
-  public abstract boolean isJsOverlay();
-
   @Override
   public abstract JsInfo getJsInfo();
 
   public abstract boolean isCompileTimeConstant();
-
-  @Nullable
-  abstract FieldDescriptor getDeclarationFieldDescriptorOrNull();
 
   public abstract boolean isVariableCapture();
 
   public abstract boolean isEnclosingInstanceCapture();
 
   /**
-   * Returns the descriptor of the field declaration or this instance if this is already the field
-   * declaration or there is no field declaration. Field declarations descriptors describe the the
-   * field at the declaration place, which might be different to the descriptor at the usage place
-   * due to generic type variable instantiations. For example,
+   * Returns the descriptor of the field declaration. A field descriptor might describe a
+   * specialized version of a field, e.g.
    *
    * <p>
    *
    * <pre>
    *   class A<T> {
-   *     T f;  // field descriptor here has a type T
+   *     T f;  // Field declaration described as a field "A.f" with type "T".
    *   }
    *
-   *   A<String> a =....
+   *   // Field access with field descriptor for field "A.f" with type "String" that has a
+   *   // declaration descriptor for field "A.f" but with type "T". Note that both descriptors refer
+   *   // to the same field "A.f".
+   *   new A<String>().f;
+   * <p>
    * </pre>
    */
   public FieldDescriptor getDeclarationFieldDescriptor() {
-    return getDeclarationFieldDescriptorOrNull() == null
+    return getDeclarationFieldDescriptorOrNullIfSelf() == null
         ? this
-        : getDeclarationFieldDescriptorOrNull();
+        : getDeclarationFieldDescriptorOrNullIfSelf();
   }
+
+  @Nullable
+  // A field declaration can be itself but AutoValue does not allow for a property to be a
+  // reference to the value object being created, so we use a backing nullable property where null
+  // encodes a self reference for AutoValue purposes and provide the accessor above to hide
+  // the details.
+  abstract FieldDescriptor getDeclarationFieldDescriptorOrNullIfSelf();
+
 
   @Override
   public boolean isNative() {
@@ -100,9 +105,19 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
 
+  abstract Builder toBuilder();
+
   public static Builder newBuilder() {
-    return new Builder();
+    return new AutoValue_FieldDescriptor.Builder()
+        // Default values.
+        .setVisibility(Visibility.PUBLIC)
+        .setJsInfo(JsInfo.NONE)
+        .setCompileTimeConstant(false)
+        .setStatic(false)
+        .setVariableCapture(false)
+        .setEnclosingInstanceCapture(false);
   }
+
 
   /** Returns a description that is useful for error messages. */
   @Override
@@ -115,115 +130,49 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   /** A Builder for FieldDescriptors. */
-  public static class Builder {
-    private boolean isStatic;
-    private Visibility visibility = Visibility.PUBLIC;
-    private TypeDescriptor enclosingClassTypeDescriptor;
-    private String fieldName;
-    private TypeDescriptor typeDescriptor;
-    private boolean isJsOverlay = false;
-    private JsInfo jsInfo = JsInfo.NONE;
-    private boolean isCompileTimeConstant = false;
-    private FieldDescriptor declarationFieldDescriptor;
-    private boolean isVariableCapture = false;
-    private boolean isEnclosingInstanceCapture = false;
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setCompileTimeConstant(boolean compileTimeConstant);
 
-    public static Builder from(FieldDescriptor fieldDescriptor) {
-      Builder builder = new Builder();
-      builder.isStatic = fieldDescriptor.isStatic();
-      builder.visibility = fieldDescriptor.getVisibility();
-      builder.enclosingClassTypeDescriptor = fieldDescriptor.getEnclosingClassTypeDescriptor();
-      builder.fieldName = fieldDescriptor.getName();
-      builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
-      builder.isJsOverlay = fieldDescriptor.isJsOverlay();
-      builder.jsInfo = fieldDescriptor.getJsInfo();
-      builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
-      builder.declarationFieldDescriptor = fieldDescriptor.getDeclarationFieldDescriptorOrNull();
-      builder.isVariableCapture = fieldDescriptor.isVariableCapture();
-      builder.isEnclosingInstanceCapture = fieldDescriptor.isEnclosingInstanceCapture();
-      return builder;
-    }
+    public abstract Builder setStatic(boolean isStatic);
 
-    public Builder setFieldName(String fieldName) {
-      this.fieldName = fieldName;
-      return this;
-    }
+    public abstract Builder setVariableCapture(boolean isVariableCapture);
 
-    public Builder setEnclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
-      this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
-      return this;
-    }
+    public abstract Builder setEnclosingInstanceCapture(boolean isEnclosingInstanceCapture);
 
-    public Builder setIsStatic(boolean isStatic) {
-      this.isStatic = isStatic;
-      return this;
-    }
+    public abstract Builder setEnclosingClassTypeDescriptor(
+        TypeDescriptor enclosingClassTypeDescriptor);
 
-    public Builder setIsJsOverlay(boolean isJsOverlay) {
-      this.isJsOverlay = isJsOverlay;
-      return this;
-    }
+    public abstract Builder setName(String name);
 
-    public Builder setIsVariableCapture(boolean isVariableCapture) {
-      this.isVariableCapture = isVariableCapture;
-      return this;
-    }
+    public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
 
-    public Builder setIsEnclosingInstanceCapture(boolean isEnclosingInstanceCapture) {
-      this.isEnclosingInstanceCapture = isEnclosingInstanceCapture;
-      return this;
-    }
+    public abstract Builder setVisibility(Visibility visibility);
 
-    public Builder setIsCompileTimeConstant(boolean isCompileTimeConstant) {
-      this.isCompileTimeConstant = isCompileTimeConstant;
-      return this;
-    }
-
-    public Builder setVisibility(Visibility visibility) {
-      this.visibility = visibility;
-      return this;
-    }
-
-    public Builder setJsInfo(JsInfo jsInfo) {
-      this.jsInfo = jsInfo;
-      return this;
-    }
-
-    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
-      this.typeDescriptor = typeDescriptor;
-      return this;
-    }
+    public abstract Builder setJsInfo(JsInfo jsInfo);
 
     public Builder setDeclarationFieldDescriptor(FieldDescriptor declarationFieldDescriptor) {
-      this.declarationFieldDescriptor = declarationFieldDescriptor;
-      return this;
+      return setDeclarationFieldDescriptorOrNullIfSelf(declarationFieldDescriptor);
     }
 
-    private static final ThreadLocal<Interner<FieldDescriptor>> interner = new ThreadLocal<>();
+    // Accessors to support validation, default construction and custom setters.
+    abstract Builder setDeclarationFieldDescriptorOrNullIfSelf(
+        FieldDescriptor declarationFieldDescriptor);
 
-    private static Interner<FieldDescriptor> getInterner() {
-      if (interner.get() == null) {
-        interner.set(new Interner<>());
-      }
-      return interner.get();
-    }
+    abstract FieldDescriptor autoBuild();
 
     public FieldDescriptor build() {
-      checkState(!isVariableCapture || !isEnclosingInstanceCapture);
-      return getInterner()
-          .intern(
-              new AutoValue_FieldDescriptor(
-                  isStatic,
-                  visibility,
-                  enclosingClassTypeDescriptor,
-                  fieldName,
-                  typeDescriptor,
-                  isJsOverlay,
-                  jsInfo,
-                  isCompileTimeConstant,
-                  declarationFieldDescriptor,
-                  isVariableCapture,
-                  isEnclosingInstanceCapture));
+      FieldDescriptor fieldDescriptor = autoBuild();
+      checkState(
+          !fieldDescriptor.isVariableCapture() || !fieldDescriptor.isEnclosingInstanceCapture());
+      return interner.intern(fieldDescriptor);
     }
+
+    public static Builder from(FieldDescriptor fieldDescriptor) {
+      return fieldDescriptor.toBuilder();
+    }
+
+    private static final ThreadLocalInterner<FieldDescriptor> interner =
+        new ThreadLocalInterner<>();
   }
 }

@@ -167,12 +167,12 @@ public class NormalizeCatchClauses extends NormalizationPass {
      *
      * <p>Class.$isInstance(exceptionVariable).
      */
-    private MethodCall checkIsInstanceCall(
+    private static MethodCall checkIsInstanceCall(
         TypeDescriptor descriptor, Expression exceptionVariable) {
       MethodDescriptor methodDescriptor =
           MethodDescriptor.newBuilder()
               .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
-              .setIsStatic(true)
+              .setStatic(true)
               .setJsInfo(JsInfo.RAW)
               .setEnclosingClassTypeDescriptor(descriptor)
               .setVisibility(Visibility.PUBLIC)

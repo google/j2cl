@@ -21,12 +21,14 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
@@ -64,9 +66,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isDefault();
 
-  @Nullable
-  abstract MethodDescriptor getDeclarationMethodDescriptorOrNull();
-
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
@@ -84,28 +83,34 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns the descriptor of the method declaration or this instance if this is already a method
-   * declaration or there is no method declaration. Method declarations descriptors describe the the
-   * method at the declaration place, which might be different to the descriptor at the usage place
-   * due to generic type variable instantiations. For example,
+   * Returns the descriptor of the method declaration. A method descriptor might describe a
+   * specialized version of a method, e.g.
    *
    * <p>
    *
    * <pre>
    *   class A<T> {
-   *     T m();  // method descriptor here has a return type T
+   *     void m(T t);  // Method declaration described as m(T).
    *   }
    *
-   *   A<String> a =....
-   *   a.m() // the method descriptor here has a return type String and its declaration is the
-   *         // one above.
+   *   // Method call with a method descriptor for m(String) that has the method descriptor
+   *   // for m(T) as its declaration.
+   *   new A<String>().m("Hi");
+   * <p>
    * </pre>
    */
   public MethodDescriptor getDeclarationMethodDescriptor() {
-    return getDeclarationMethodDescriptorOrNull() == null
+    return getDeclarationMethodDescriptorOrNullIfSelf() == null
         ? this
-        : getDeclarationMethodDescriptorOrNull();
+        : getDeclarationMethodDescriptorOrNullIfSelf();
   }
+
+  @Nullable
+  // A method declaration can be itself but AutoValue does not allow for a property to be a
+  // reference to the value object being created, so we use a backing nullable property where null
+  // encodes a self reference for AutoValue purposes and provide the accessor above to hide
+  // the details.
+  abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
 
   public boolean isJsPropertyGetter() {
     return getJsInfo().getJsMemberType() == JsMemberType.GETTER;
@@ -117,10 +122,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public boolean isJsMethod() {
     return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
-  }
-
-  public boolean isJsOverlay() {
-    return getJsInfo().isJsOverlay();
   }
 
   public boolean isJsFunction() {
@@ -155,8 +156,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return MethodDescriptors.getSignature(name, parameterTypeDescriptors);
   }
 
+  abstract Builder toBuilder();
+
   public static Builder newBuilder() {
-    return new Builder();
+    return new AutoValue_MethodDescriptor.Builder()
+        // Default values.
+        .setVisibility(Visibility.PUBLIC)
+        .setJsInfo(JsInfo.NONE)
+        .setAbstract(false)
+        .setConstructor(false)
+        .setDefault(false)
+        .setNative(false)
+        .setStatic(false)
+        .setVarargs(false)
+        .setParameterTypeDescriptors(Collections.emptyList())
+        .setTypeParameterTypeDescriptors(Collections.emptyList())
+        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
   }
 
   @Override
@@ -171,7 +186,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         "%s%s.%s(%s)",
         isConstructor() ? "" : getReturnTypeDescriptor().getReadableDescription() + " ",
         getEnclosingClassTypeDescriptor().getReadableDescription(),
-        getName(),
+        isConstructor() ? getEnclosingClassTypeDescriptor().getReadableDescription() : getName(),
         getDeclarationMethodDescriptor()
             .getParameterTypeDescriptors()
             .stream()
@@ -180,177 +195,114 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** A Builder for MethodDescriptors. */
-  public static class Builder {
-    private boolean isStatic;
-    private Visibility visibility = Visibility.PUBLIC;
-    private TypeDescriptor enclosingClassTypeDescriptor;
-    private String name;
-    private boolean isConstructor;
-    private boolean isNative;
-    private boolean isDefault;
-    private boolean isVarargs;
-    private MethodDescriptor declarationMethodDescriptor;
-    private ImmutableList<TypeDescriptor> parameterTypeDescriptors = ImmutableList.of();
-    private TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
-    private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors = ImmutableList.of();
-    private JsInfo jsInfo = JsInfo.NONE;
-    private boolean isAbstract;
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setDefault(boolean isDefault);
 
-    public static Builder from(MethodDescriptor methodDescriptor) {
-      Builder builder = new Builder();
-      builder.isStatic = methodDescriptor.isStatic();
-      builder.visibility = methodDescriptor.getVisibility();
-      builder.enclosingClassTypeDescriptor = methodDescriptor.getEnclosingClassTypeDescriptor();
-      builder.name = methodDescriptor.isConstructor() ? null : methodDescriptor.getName();
-      builder.isConstructor = methodDescriptor.isConstructor();
-      builder.isNative = methodDescriptor.isNative();
-      builder.isDefault = methodDescriptor.isDefault();
-      builder.isVarargs = methodDescriptor.isVarargs();
-      if (methodDescriptor.getDeclarationMethodDescriptor() != methodDescriptor) {
-        builder.declarationMethodDescriptor = methodDescriptor.getDeclarationMethodDescriptor();
-      }
-      builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
-      builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-      builder.typeParameterTypeDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
-      builder.jsInfo = methodDescriptor.getJsInfo();
-      return builder;
+    public abstract Builder setNative(boolean isNative);
+
+    public abstract Builder setStatic(boolean isStatic);
+
+    public abstract Builder setVarargs(boolean isVarargs);
+
+    public abstract Builder setConstructor(boolean isConstructor);
+
+    public abstract Builder setAbstract(boolean isAbstract);
+
+    public abstract Builder setEnclosingClassTypeDescriptor(
+        TypeDescriptor enclosingClassTypeDescriptor);
+
+    public abstract Builder setName(String name);
+
+    public abstract Builder setReturnTypeDescriptor(TypeDescriptor returnTypeDescriptor);
+
+    public abstract Builder setVisibility(Visibility visibility);
+
+    public abstract Builder setJsInfo(JsInfo jsInfo);
+
+    public abstract Builder setTypeParameterTypeDescriptors(
+        Iterable<TypeDescriptor> typeParameterTypeDescriptors);
+
+    public abstract Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors);
+
+    public abstract Builder setParameterTypeDescriptors(
+        List<TypeDescriptor> parameterTypeDescriptors);
+
+    public Builder addParameterTypeDescriptors(
+        int index, TypeDescriptor... parameterTypeDescriptors) {
+      return addParameterTypeDescriptors(index, Arrays.asList(parameterTypeDescriptors));
     }
 
-    public Builder setEnclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
-      this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
-      return this;
+    public Builder addParameterTypeDescriptors(
+        int index, List<TypeDescriptor> parameterTypeDescriptors) {
+      List<TypeDescriptor> newParameterTypeDescriptors =
+          new ArrayList<>(getParameterTypeDescriptors());
+      newParameterTypeDescriptors.addAll(index, parameterTypeDescriptors);
+      return setParameterTypeDescriptors(newParameterTypeDescriptors);
     }
 
-    public Builder setName(String name) {
-      this.name = name;
-      return this;
+    public Builder addParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
+      return addParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
+    }
+
+    public Builder addParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
+      List<TypeDescriptor> newParameterTypeDescriptors =
+          new ArrayList<>(getParameterTypeDescriptors());
+      newParameterTypeDescriptors.addAll(parameterTypeDescriptors);
+      return setParameterTypeDescriptors(newParameterTypeDescriptors);
     }
 
     public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
-      this.declarationMethodDescriptor = declarationMethodDescriptor;
-      return this;
+      return setDeclarationMethodDescriptorOrNullIfSelf(declarationMethodDescriptor);
     }
 
-    public Builder setReturnTypeDescriptor(TypeDescriptor returnTypeDescriptor) {
-      this.returnTypeDescriptor = returnTypeDescriptor;
-      return this;
-    }
+    // Accessors to support validation, default construction and custom setters.
+    abstract Builder setDeclarationMethodDescriptorOrNullIfSelf(
+        MethodDescriptor declarationMethodDescriptor);
 
-    public Builder setParameterTypeDescriptors(TypeDescriptor... typeDescriptors) {
-      this.parameterTypeDescriptors = ImmutableList.copyOf(typeDescriptors);
-      return this;
-    }
+    abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
-    public Builder setParameterTypeDescriptors(Iterable<TypeDescriptor> parameterTypeDescriptors) {
-      this.parameterTypeDescriptors = ImmutableList.copyOf(parameterTypeDescriptors);
-      return this;
-    }
+    abstract boolean isConstructor();
 
-    public Builder setIsConstructor(boolean isConstructor) {
-      this.isConstructor = isConstructor;
-      return this;
-    }
+    abstract Optional<String> getName();
 
-    public Builder setIsDefault(boolean isDefault) {
-      this.isDefault = isDefault;
-      return this;
-    }
-
-    public Builder setIsNative(boolean isNative) {
-      this.isNative = isNative;
-      return this;
-    }
-
-    public Builder setIsStatic(boolean isStatic) {
-      this.isStatic = isStatic;
-      return this;
-    }
-
-    public Builder setIsVarargs(boolean isVarargs) {
-      this.isVarargs = isVarargs;
-      return this;
-    }
-
-    public Builder setTypeParameterTypeDescriptors(
-        Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
-      this.typeParameterTypeDescriptors = ImmutableList.copyOf(typeParameterTypeDescriptors);
-      return this;
-    }
-
-    public Builder setVisibility(Visibility visibility) {
-      this.visibility = visibility;
-      return this;
-    }
-
-    public Builder setJsInfo(JsInfo jsInfo) {
-      this.jsInfo = jsInfo;
-      return this;
-    }
-
-    public Builder addParameter(int index, TypeDescriptor parameterTypeDescriptor) {
-      List<TypeDescriptor> parameters = Lists.newArrayList(this.parameterTypeDescriptors);
-      parameters.add(index, parameterTypeDescriptor);
-      return setParameterTypeDescriptors(parameters);
-    }
-
-    public Builder addParameter(TypeDescriptor parameterTypeDescriptor) {
-      return setParameterTypeDescriptors(
-          Iterables.concat(
-              this.parameterTypeDescriptors, Lists.newArrayList(parameterTypeDescriptor)));
-    }
-
-    public Builder setIsAbstract(boolean isAbstract) {
-      this.isAbstract = isAbstract;
-      return this;
-    }
-
-    private static final ThreadLocal<Interner<MethodDescriptor>> interner = new ThreadLocal<>();
-
-    private static Interner<MethodDescriptor> getInterner() {
-      if (interner.get() == null) {
-        interner.set(new Interner<>());
-      }
-      return interner.get();
-    }
+    abstract MethodDescriptor autoBuild();
 
     public MethodDescriptor build() {
-      // TODO: We should compute the constructor name instead of allowing empty method name to
-      // percolate into the MethodDescriptor.
-      checkState(!isConstructor || name == null, "Should not set names for constructors.");
-      checkState(isConstructor || name != null, "Method name should not be null.");
-
-      if (isConstructor) {
+      if (isConstructor()) {
+        checkState(!getName().isPresent(), "Should not set names for constructors.");
         // Choose consistent naming for constructors.
-        name = enclosingClassTypeDescriptor.getSimpleSourceName();
+        setName("<ctor>");
       }
 
-      if (declarationMethodDescriptor != null) {
-        ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
-            declarationMethodDescriptor.getParameterTypeDescriptors();
+      MethodDescriptor methodDescriptor = autoBuild();
+
+      if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+        List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
+            methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
         checkArgument(
-            methodDeclarationParameterTypeDescriptors.size() == parameterTypeDescriptors.size(),
-            "Method parameters (%s) don't match with method declaration (%s)",
-            parameterTypeDescriptors,
+            methodDeclarationParameterTypeDescriptors.size()
+                == methodDescriptor.getParameterTypeDescriptors().size(),
+            "Method parameters (%s) for method %s don't match method declaration (%s)",
+            methodDescriptor.getParameterTypeDescriptors(),
+            methodDescriptor.getEnclosingClassTypeDescriptor().getSimpleSourceName()
+                + "."
+                + methodDescriptor.getName(),
             methodDeclarationParameterTypeDescriptors);
       }
-
-      return getInterner()
-          .intern(
-              new AutoValue_MethodDescriptor(
-                  isStatic,
-                  visibility,
-                  enclosingClassTypeDescriptor,
-                  name,
-                  isConstructor,
-                  isNative,
-                  isVarargs,
-                  isDefault,
-                  declarationMethodDescriptor,
-                  ImmutableList.copyOf(parameterTypeDescriptors),
-                  returnTypeDescriptor,
-                  ImmutableList.copyOf(typeParameterTypeDescriptors),
-                  jsInfo,
-                  isAbstract));
+      return interner.intern(methodDescriptor);
     }
+
+    public static Builder from(MethodDescriptor methodDescriptor) {
+      Builder builder = methodDescriptor.toBuilder();
+      if (builder.isConstructor()) {
+        // clear the name.
+        builder.setName(null);
+      }
+      return builder;
+    }
+
+    private static final ThreadLocalInterner<MethodDescriptor> interner =
+        new ThreadLocalInterner<>();
   }
 }

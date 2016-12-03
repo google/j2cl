@@ -38,7 +38,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
       if (isStaticMethod || isJsConstructor) {
         MethodDescriptor clinitDescriptor =
             MethodDescriptor.newBuilder()
-                .setIsStatic(true)
+                .setStatic(true)
                 .setEnclosingClassTypeDescriptor(
                     method.getDescriptor().getEnclosingClassTypeDescriptor())
                 .setName("$clinit")

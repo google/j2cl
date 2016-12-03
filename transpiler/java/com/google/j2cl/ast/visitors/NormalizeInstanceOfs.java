@@ -37,21 +37,25 @@ import java.util.List;
 public class NormalizeInstanceOfs extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteInstanceOfExpression(InstanceOfExpression expression) {
+            TypeDescriptor testTypeDescriptor = expression.getTestTypeDescriptor();
+            if (testTypeDescriptor.isArray()
+                && testTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+              return rewriteNativeJsArrayInstanceOfExpression(expression);
+            } else if (testTypeDescriptor.isArray()) {
+              return rewriteJavaArrayInstanceOfExpression(expression);
+            } else {
+              return rewriteRegularInstanceOfExpression(expression);
+            }
+          }
+        });
   }
 
-  private class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteInstanceOfExpression(InstanceOfExpression expression) {
-      TypeDescriptor checkTypeDescriptor = expression.getTestTypeDescriptor();
-      if (checkTypeDescriptor.isArray()) {
-        return rewriteArrayInstanceOfExpression(expression);
-      }
-      return rewriteRegularInstanceOfExpression(expression);
-    }
-  }
-
-  private Node rewriteRegularInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+  private static Node rewriteRegularInstanceOfExpression(
+      InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     if (checkTypeDescriptor.isNative()) {
       checkTypeDescriptor =
@@ -61,7 +65,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(checkTypeDescriptor)
             .setName("$isInstance")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
@@ -74,19 +78,13 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
   }
 
-  private Node rewriteArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-    if (instanceOfExpression.getTestTypeDescriptor().getLeafTypeDescriptor().isNative()) {
-      return rewriteNativeJsArrayInstanceOfExpression(instanceOfExpression);
-    }
-    return rewriteJavaArrayInstanceOfExpression(instanceOfExpression);
-  }
-
-  private Node rewriteJavaArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+  private static Node rewriteJavaArrayInstanceOfExpression(
+      InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfType")
             .setParameterTypeDescriptors(
@@ -109,7 +107,8 @@ public class NormalizeInstanceOfs extends NormalizationPass {
    * Instanceof check on array with leaf type that is a native JsType is equivalent to check if the
    * instance is a raw JS array (i.e. Array.isArray(instance)).
    */
-  private Node rewriteNativeJsArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+  private static Node rewriteNativeJsArrayInstanceOfExpression(
+      InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     checkArgument(checkTypeDescriptor.isArray());
     checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
@@ -117,7 +116,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfNative")
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))

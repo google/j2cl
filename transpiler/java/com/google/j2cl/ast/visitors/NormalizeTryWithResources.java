@@ -77,13 +77,17 @@ public class NormalizeTryWithResources extends NormalizationPass {
     }
 
     /**
-     * We transform: <pre>{@code
+     * We transform:
+     *
+     * <pre>{@code
      * try (ClosableThing thing = new ClosableThing(), ClosableThing thing2 = new ClosableThing()) {
      *   ....
      * }
      * }</pre>
      *
-     * to: <pre>{@code
+     * to:
+     *
+     * <pre>{@code
      * let $primaryExc = null;
      * let thing = null;
      * let thing2 = null;
@@ -103,11 +107,11 @@ public class NormalizeTryWithResources extends NormalizationPass {
      * }
      * }</pre>
      */
-    private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
+    private static List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
       MethodDescriptor safeClose =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
               .setName("safeClose")
               .setParameterTypeDescriptors(

@@ -114,17 +114,15 @@ public class JdtUtils {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
-    boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setFieldName(fieldName)
+        .setName(fieldName)
         .setTypeDescriptor(thisTypeDescriptor)
-        .setIsStatic(isStatic)
+        .setStatic(isStatic)
         .setVisibility(visibility)
-        .setIsJsOverlay(isJsOverlay)
         .setJsInfo(jsInfo)
-        .setIsCompileTimeConstant(isCompileTimeConstant)
+        .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationFieldDescriptor(declarationFieldDescriptor)
         .build();
   }
@@ -488,7 +486,7 @@ public class JdtUtils {
     MethodDescriptor samImplementationMethodDescriptor =
         MethodDescriptor.Builder.from(samMethodDescriptor)
             .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
-            .setIsNative(false)
+            .setNative(false)
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
@@ -927,12 +925,12 @@ public class JdtUtils {
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .setVisibility(visibility)
-        .setIsStatic(isStatic)
-        .setIsConstructor(isConstructor)
-        .setIsNative(isNative)
-        .setIsDefault(Modifier.isDefault(methodBinding.getModifiers()))
-        .setIsVarargs(methodBinding.isVarargs())
-        .setIsAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
+        .setStatic(isStatic)
+        .setConstructor(isConstructor)
+        .setNative(isNative)
+        .setDefault(Modifier.isDefault(methodBinding.getModifiers()))
+        .setVarargs(methodBinding.isVarargs())
+        .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .build();
   }
 

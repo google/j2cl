@@ -108,7 +108,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
           private MethodCall enumReplaceStringMethodCall(Expression nameVariable) {
             MethodDescriptor makeEnumNameMethodDescriptor =
                 MethodDescriptor.newBuilder()
-                    .setIsStatic(true)
+                    .setStatic(true)
                     .setJsInfo(JsInfo.RAW)
                     .setEnclosingClassTypeDescriptor(
                         TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())

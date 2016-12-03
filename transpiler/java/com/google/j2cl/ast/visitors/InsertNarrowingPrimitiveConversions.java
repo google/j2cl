@@ -149,7 +149,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         MethodDescriptor narrowMethodDescriptor =
             MethodDescriptor.newBuilder()
                 .setJsInfo(JsInfo.RAW)
-                .setIsStatic(true)
+                .setStatic(true)
                 .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
                 .setName(narrowMethodName)
                 .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))

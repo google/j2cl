@@ -16,8 +16,8 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
@@ -314,7 +314,10 @@ public class Method extends Member implements HasJsNameInfo {
               // Update method descriptor parameter types from actual parameter types.
               MethodDescriptor.Builder.from(methodDescriptor)
                   .setParameterTypeDescriptors(
-                      Iterables.transform(parameters, Variable::getTypeDescriptor))
+                      parameters
+                          .stream()
+                          .map(Variable::getTypeDescriptor)
+                          .collect(toImmutableList()))
                   .build(),
               parameters,
               body,

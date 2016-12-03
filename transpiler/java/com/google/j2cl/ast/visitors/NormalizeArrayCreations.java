@@ -34,7 +34,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /** Normalizes array creations. */
@@ -65,7 +64,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
       MethodDescriptor nativeArrayConstructor =
           MethodDescriptor.newBuilder()
-              .setIsConstructor(true)
+              .setConstructor(true)
               .setJsInfo(JsInfo.RAW_CTOR)
               .setEnclosingClassTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
               .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
@@ -80,7 +79,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setName("$create")
             .setParameterTypeDescriptors(
                 TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
@@ -121,7 +120,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
+            .setStatic(true)
             .setName("$init")
             .setParameterTypeDescriptors(
                 TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
@@ -148,10 +147,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
           MethodDescriptor.Builder.from(arrayInitMethodDescriptor)
-              .setParameterTypeDescriptors(
-                  Iterables.concat(
-                      arrayInitMethodDescriptor.getParameterTypeDescriptors(),
-                      Collections.singletonList(TypeDescriptors.get().primitiveInt)))
+              .addParameterTypeDescriptors(TypeDescriptors.get().primitiveInt)
               .build();
       List<Expression> arguments = new ArrayList<>();
       arguments.add(newArrayExpression.getArrayLiteral());

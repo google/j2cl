@@ -508,7 +508,7 @@ public class CompilationUnitBuilder {
         // constructor.
         constructorDescriptor =
             Builder.from(constructorDescriptor)
-                .addParameter(0, superQualifierTypeDescriptor)
+                .addParameterTypeDescriptors(0, superQualifierTypeDescriptor)
                 .build();
       }
 
@@ -1797,7 +1797,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
               .setName("$get")
               .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
@@ -1815,7 +1815,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
               .setName("$get")
               .setParameterTypeDescriptors(

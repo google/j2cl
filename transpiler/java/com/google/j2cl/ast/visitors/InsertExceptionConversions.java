@@ -63,7 +63,7 @@ public class InsertExceptionConversions extends NormalizationPass {
       MethodDescriptor toJava =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
               .setName("toJava")
               .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
@@ -90,7 +90,7 @@ public class InsertExceptionConversions extends NormalizationPass {
       MethodDescriptor toJs =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
               .setName("toJs")
               .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)

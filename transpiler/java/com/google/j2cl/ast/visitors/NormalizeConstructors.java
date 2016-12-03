@@ -136,8 +136,8 @@ public class NormalizeConstructors extends NormalizationPass {
     checkArgument(constructor.isConstructor());
     return MethodDescriptor.Builder.from(constructor)
         .setName(ManglingNameUtils.getCtorMangledName(constructor))
-        .setIsConstructor(false)
-        .setIsStatic(false)
+        .setConstructor(false)
+        .setStatic(false)
         .setJsInfo(JsInfo.NONE)
         .setVisibility(Visibility.PUBLIC)
         .build();
@@ -247,7 +247,7 @@ public class NormalizeConstructors extends NormalizationPass {
         MethodDescriptor.Builder.from(primaryConstructor.getDescriptor())
             .setVisibility(Visibility.PUBLIC);
     for (Variable typeParameter : primaryConstructor.getParameters()) {
-      builder.addParameter(typeParameter.getTypeDescriptor());
+      builder.addParameterTypeDescriptors(typeParameter.getTypeDescriptor());
     }
     MethodDescriptor constructorDescriptor = builder.build();
 
@@ -278,7 +278,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.newBuilder()
-            .setIsConstructor(true)
+            .setConstructor(true)
             .setEnclosingClassTypeDescriptor(type.getDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .build();
@@ -298,7 +298,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor superDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(superType)
-            .setIsConstructor(true)
+            .setConstructor(true)
             .build();
     return MethodCall.Builder.from(superDescriptor).build();
   }
@@ -362,10 +362,10 @@ public class NormalizeConstructors extends NormalizationPass {
         constructor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
     allParameterTypes.addAll(constructor.getTypeParameterTypeDescriptors());
     return MethodDescriptor.Builder.from(constructor)
-        .setIsStatic(true)
+        .setStatic(true)
         .setName(MethodDescriptor.CREATE_METHOD_NAME)
         .setVisibility(Visibility.PUBLIC)
-        .setIsConstructor(false)
+        .setConstructor(false)
         .setReturnTypeDescriptor(
             TypeDescriptors.toNonNullable(constructor.getEnclosingClassTypeDescriptor()))
         .setTypeParameterTypeDescriptors(allParameterTypes)
@@ -387,7 +387,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enclosingType)
-            .setIsConstructor(true)
+            .setConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .build();
 
@@ -417,7 +417,7 @@ public class NormalizeConstructors extends NormalizationPass {
               .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
               .setParameterTypeDescriptors(
                   constructorInvocation.getTarget().getParameterTypeDescriptors())
-              .setIsVarargs(constructorInvocation.getTarget().isVarargs())
+              .setVarargs(constructorInvocation.getTarget().isVarargs())
               .build();
     }
 
@@ -477,10 +477,10 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enclosingType)
-            .setIsConstructor(true)
+            .setConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .setVisibility(Visibility.PRIVATE)
-            .setIsVarargs(primaryConstructor.getDescriptor().isVarargs())
+            .setVarargs(primaryConstructor.getDescriptor().isVarargs())
             .build();
 
     List<Variable> factoryMethodParameters = AstUtils.clone(primaryConstructor.getParameters());

@@ -28,8 +28,8 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
-import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -117,14 +117,7 @@ public class TypeDescriptor extends Node
 
     private final TypeDescriptor newTypeDescriptor = new TypeDescriptor();
 
-    private static final ThreadLocal<Interner<TypeDescriptor>> interner = new ThreadLocal<>();
-
-    private static Interner<TypeDescriptor> getInterner() {
-      if (interner.get() == null) {
-        interner.set(new Interner<>());
-      }
-      return interner.get();
-    }
+    private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
 
     public TypeDescriptor build() {
       checkState(newTypeDescriptor.getKind() != null);
@@ -154,7 +147,7 @@ public class TypeDescriptor extends Node
 
       // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
       // type descriptor that does not make sense.
-      return getInterner().intern(newTypeDescriptor);
+      return interner.intern(newTypeDescriptor);
     }
 
     public Builder setUniqueKey(String key) {

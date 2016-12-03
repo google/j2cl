@@ -66,7 +66,7 @@ public class NormalizeLongs extends NormalizationPass {
       MethodDescriptor longUtilsMethodDescriptor =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
               .setName(getLongOperationFunctionName(operator))
               .setParameterTypeDescriptors(
@@ -98,7 +98,7 @@ public class NormalizeLongs extends NormalizationPass {
       MethodDescriptor longUtilsMethodDescriptor =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
-              .setIsStatic(true)
+              .setStatic(true)
               .setEnclosingClassTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
               .setName(getLongOperationFunctionName(operator))
               .setParameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))

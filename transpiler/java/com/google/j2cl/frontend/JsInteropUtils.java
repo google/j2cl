@@ -40,7 +40,7 @@ public class JsInteropUtils {
     Set<String> objectMethods =
         ImmutableSet.of("toString()", "hashCode()", "equals(java.lang.Object)");
     if (objectMethods.contains(JdtUtils.getMethodSignature(methodBinding))) {
-      return JsInfo.create(JsMemberType.METHOD, null, null, false);
+      return JsInfo.newBuilder().setJsMemberType(JsMemberType.METHOD).build();
     }
 
     IAnnotationBinding annotation = JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding);
@@ -71,24 +71,32 @@ public class JsInteropUtils {
     boolean jsOverlay = isJsOverlay(member);
 
     if (isJsFunction(declaringType)) {
-      return JsInfo.create(JsMemberType.JS_FUNCTION, null, null, jsOverlay);
+      return JsInfo.newBuilder()
+          .setJsMemberType(JsMemberType.JS_FUNCTION)
+          .setJsOverlay(jsOverlay)
+          .build();
     }
 
     if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) != null) {
-      return JsInfo.create(JsMemberType.NONE, null, null, jsOverlay);
+      return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
     }
 
     boolean publicMemberOfJsType =
         isJsType(declaringType) && Modifier.isPublic(member.getModifiers());
     boolean memberOfNativeType = isNativeType(declaringType);
-    if (memberAnnotation == null && (!publicMemberOfJsType && !memberOfNativeType || jsOverlay)) {
-      return JsInfo.create(JsMemberType.NONE, null, null, jsOverlay);
+    if (memberAnnotation == null && ((!publicMemberOfJsType && !memberOfNativeType) || jsOverlay)) {
+      return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
     }
 
     String namespace = JsInteropAnnotationUtils.getJsNamespace(memberAnnotation);
     String name = JsInteropAnnotationUtils.getJsName(memberAnnotation);
     JsMemberType memberType = getJsMemberType(member, isAccessor);
-    return JsInfo.create(memberType, name, namespace, jsOverlay);
+    return JsInfo.newBuilder()
+        .setJsMemberType(memberType)
+        .setJsName(name)
+        .setJsNamespace(namespace)
+        .setJsOverlay(jsOverlay)
+        .build();
   }
 
   private static JsMemberType getJsMemberType(IBinding member, boolean isPropertyAccessor) {

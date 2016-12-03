@@ -131,7 +131,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           MethodDescriptor.Builder.from(targetMethodDescriptor)
               .setEnclosingClassTypeDescriptor(typeDescriptor)
               .setJsInfo(JsInfo.NONE)
-              .setIsNative(false)
+              .setNative(false)
               .build();
 
       return AstUtils.createForwardingMethod(

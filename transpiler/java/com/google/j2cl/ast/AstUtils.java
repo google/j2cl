@@ -23,13 +23,11 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -45,9 +43,9 @@ public class AstUtils {
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
       FieldDescriptor.newBuilder()
           .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-          .setFieldName("length")
+          .setName("length")
           .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-          .setIsStatic(false)
+          .setStatic(false)
           .setJsInfo(JsInfo.RAW_FIELD)
           .build();
 
@@ -93,7 +91,7 @@ public class AstUtils {
   /** Create "Equality.$same()" MethodDescriptor. */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
     return MethodDescriptor.newBuilder()
-        .setIsStatic(true)
+        .setStatic(true)
         .setJsInfo(JsInfo.RAW)
         .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
         .setName(MethodDescriptor.SAME_METHOD_NAME)
@@ -111,12 +109,12 @@ public class AstUtils {
       TypeDescriptor... parameterTypeDescriptors) {
     JsInfo jsInfo =
         enclosingClassTypeDescriptor.isJsType() && visibility.isPublic()
-            ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
+            ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
     return MethodDescriptor.newBuilder()
         .setVisibility(visibility)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setIsConstructor(true)
+        .setConstructor(true)
         .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .build();
@@ -237,10 +235,10 @@ public class AstUtils {
       TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setFieldName(CAPTURES_PREFIX + capturedVariable.getName())
-        .setIsVariableCapture(true)
+        .setName(CAPTURES_PREFIX + capturedVariable.getName())
+        .setVariableCapture(true)
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
-        .setIsStatic(false)
+        .setStatic(false)
         .setJsInfo(JsInfo.RAW_FIELD)
         .build();
   }
@@ -250,8 +248,8 @@ public class AstUtils {
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
-        .setFieldName(ENCLOSING_INSTANCE_NAME)
-        .setIsEnclosingInstanceCapture(true)
+        .setName(ENCLOSING_INSTANCE_NAME)
+        .setEnclosingInstanceCapture(true)
         .setTypeDescriptor(fieldTypeDescriptor)
         .build();
   }
@@ -379,20 +377,11 @@ public class AstUtils {
     checkArgument(!targetMethodDescriptor.isConstructor());
     checkArgument(!targetMethodDescriptor.isStatic());
 
-    Iterable<TypeDescriptor> parameterTypes =
-        Iterables.concat(
-            Collections.singletonList(sourceTypeDescriptor), // add the first parameter type.
-            targetMethodDescriptor.getParameterTypeDescriptors());
-    Iterable<TypeDescriptor> methodDeclarationParameterTypes =
-        Iterables.concat(
-            Collections.singletonList(sourceTypeDescriptor), // add the first parameter type.
-            targetMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors());
-
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
             .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
-            .setParameterTypeDescriptors(methodDeclarationParameterTypes)
-            .setIsStatic(true)
+            .addParameterTypeDescriptors(0, sourceTypeDescriptor)
+            .setStatic(true)
             .setJsInfo(JsInfo.NONE)
             .build();
 
@@ -400,8 +389,8 @@ public class AstUtils {
         MethodDescriptor.Builder.from(targetMethodDescriptor)
             .setDeclarationMethodDescriptor(declarationMethodDescriptor)
             .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
-            .setParameterTypeDescriptors(parameterTypes)
-            .setIsStatic(true)
+            .addParameterTypeDescriptors(0, sourceTypeDescriptor)
+            .setStatic(true)
             .setJsInfo(JsInfo.NONE)
             .build();
 
@@ -759,10 +748,9 @@ public class AstUtils {
     // Util getPrototype
     MethodDescriptor getPrototype =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(
-                TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
             .setName("$getPrototype")
-            .setIsStatic(true)
+            .setStatic(true)
             .setJsInfo(JsInfo.RAW)
             .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
@@ -775,7 +763,7 @@ public class AstUtils {
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
                     .setEnclosingClassTypeDescriptor(lambdaType)
-                    .setFieldName(applyMethodName)
+                    .setName(applyMethodName)
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
@@ -784,10 +772,9 @@ public class AstUtils {
 
     MethodDescriptor makeLambdaCall =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(
-                TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
             .setName("$makeLambdaFunction")
-            .setIsStatic(true)
+            .setStatic(true)
             .setJsInfo(JsInfo.RAW)
             .setParameterTypeDescriptors(
                 TypeDescriptors.NATIVE_FUNCTION,
@@ -799,7 +786,7 @@ public class AstUtils {
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
                     .setEnclosingClassTypeDescriptor(lambdaType)
-                    .setFieldName("$copy")
+                    .setName("$copy")
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
@@ -925,7 +912,7 @@ public class AstUtils {
     // Create and return the method descriptor.
     return MethodDescriptor.newBuilder()
         .setJsInfo(JsInfo.RAW)
-        .setIsStatic(true)
+        .setStatic(true)
         .setEnclosingClassTypeDescriptor(enclosingClassType)
         .setName(methodName)
         .setParameterTypeDescriptors(methodParams)

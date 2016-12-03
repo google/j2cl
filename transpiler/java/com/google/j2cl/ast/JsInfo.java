@@ -16,7 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
-import com.google.j2cl.common.Interner;
+import com.google.j2cl.common.ThreadLocalInterner;
 import javax.annotation.Nullable;
 
 /**
@@ -40,32 +40,39 @@ public abstract class JsInfo {
 
   public abstract boolean isJsOverlay();
 
-  /**
-   * Not a JS member.
-   */
-  public static final JsInfo NONE = create(JsMemberType.NONE, null, null, false);
-  public static final JsInfo RAW = create(JsMemberType.METHOD, null, null, false);
-  public static final JsInfo RAW_CTOR = create(JsMemberType.CONSTRUCTOR, null, null, false);
-  public static final JsInfo RAW_FIELD = create(JsMemberType.PROPERTY, null, null, false);
+  /** Not a JS member. */
+  public static final JsInfo NONE = newBuilder().setJsMemberType(JsMemberType.NONE).build();
 
-  // There is no need for this interner to be ThreadLocal as it interns JsInfo instances which
-  // are actually value types (constructed by AutoValue).
-  private static Interner<JsInfo> interner;
+  public static final JsInfo RAW = newBuilder().setJsMemberType(JsMemberType.METHOD).build();
+  public static final JsInfo RAW_CTOR =
+      newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build();
+  public static final JsInfo RAW_FIELD =
+      newBuilder().setJsMemberType(JsMemberType.PROPERTY).build();
 
-  /**
-   * Creates an instance of an AutoValue generated JsInfo which uses Interners to share identical
-   * instances of JsInfos.
-   */
-  public static JsInfo create(
-      JsMemberType jsMemberType, String jsName, String jsNamespace, boolean isJsOverlay) {
-    return getInterner()
-        .intern(new AutoValue_JsInfo(jsMemberType, jsName, jsNamespace, isJsOverlay));
+  public static Builder newBuilder() {
+    return new AutoValue_JsInfo.Builder()
+        // Default values.
+        .setJsOverlay(false);
   }
 
-  private static Interner<JsInfo> getInterner() {
-    if (interner == null) {
-      interner = new Interner<>();
+  /** A Builder for JsInfo. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+
+    public abstract Builder setJsMemberType(JsMemberType jsMemberType);
+
+    public abstract Builder setJsName(String jsName);
+
+    public abstract Builder setJsNamespace(String jsNamespace);
+
+    public abstract Builder setJsOverlay(boolean isJsOverlay);
+
+    abstract JsInfo autoBuild();
+
+    public JsInfo build() {
+      return interner.intern(autoBuild());
     }
-    return interner;
+
+    private static final ThreadLocalInterner<JsInfo> interner = new ThreadLocalInterner<>();
   }
 }
