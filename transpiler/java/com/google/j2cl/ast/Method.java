@@ -137,7 +137,7 @@ public class Method extends Member implements HasJsNameInfo {
 
   public boolean isPrimaryConstructor() {
     return isConstructor()
-        && getDescriptor().getEnclosingClassTypeDescriptor().isOrSubclassesJsConstructorClass()
+        && getDescriptor().getEnclosingClassTypeDescriptor().isJsConstructorClassOrSubclass()
         && !AstUtils.hasThisCall(this);
   }
 

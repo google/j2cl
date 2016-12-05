@@ -25,6 +25,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -52,11 +53,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -1258,20 +1257,22 @@ public class JdtUtils {
     for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
       typeArgumentDescriptors.addAll(interfaceTypeDescriptor.getAllTypeVariables());
     }
-    return new TypeDescriptor.Builder()
+    return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(() -> enclosingClassTypeDescriptor)
-        .setCapturesEnclosingInstance(!inStaticContext)
-        .setIsJsFunctionImplementation(isJsFunctionImplementation)
-        .setIsLocal(true)
-        .setIsNullable(true)
+        .setCapturingEnclosingInstance(!inStaticContext)
+        .setJsFunctionImplementation(isJsFunctionImplementation)
+        .setLocal(true)
+        .setNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setPackageName(enclosingClassTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->
-                TypeDescriptors.replaceTypeArgumentDescriptors(
-                    selfTypeDescriptor, Collections.emptyList()))
+                TypeDescriptor.Builder.from(selfTypeDescriptor)
+                    .setNullable(true)
+                    .setTypeArgumentDescriptors(Collections.emptyList())
+                    .build())
         .setInterfaceTypeDescriptorsFactory(() -> lambdaInterfaceTypeDescriptors)
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
@@ -1348,14 +1349,14 @@ public class JdtUtils {
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
     String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
-    Supplier<Map<String, MethodDescriptor>> declaredMethods =
+    Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
         () -> {
-          Map<String, MethodDescriptor> declaredMethodsBySignature = new LinkedHashMap<>();
+          ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
           for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
             MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
-            declaredMethodsBySignature.put(methodDescriptor.getMethodSignature(), methodDescriptor);
+            mapBuilder.put(methodDescriptor.getMethodSignature(), methodDescriptor);
           }
-          return declaredMethodsBySignature;
+          return mapBuilder.build();
         };
 
     boolean hasTypeBounds =
@@ -1374,7 +1375,7 @@ public class JdtUtils {
         };
 
     // Compute these even later
-    return new TypeDescriptor.Builder()
+    return TypeDescriptor.newBuilder()
         .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
         .setClassComponents(getClassComponents(typeBinding))
         .setConcreteJsFunctionMethodDescriptorFactory(
@@ -1383,23 +1384,23 @@ public class JdtUtils {
             () -> createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
             () -> createTypeDescriptors(typeBinding.getInterfaces()))
-        .setIsAbstract(isAbstract)
+        .setAbstract(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
-        .setCapturesEnclosingInstance(capturesEnclosingInstance(typeBinding))
-        .setIsFinal(isFinal)
-        .setIsFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
-        .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
-        .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
-        .setIsJsType(JsInteropUtils.isJsType(typeBinding))
-        .setIsNative(JsInteropUtils.isNativeType(typeBinding))
-        .setIsLocal(isLocal(typeBinding))
-        .setIsNullable(isNullable)
+        .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
+        .setFinal(isFinal)
+        .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
+        .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
+        .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
+        .setJsType(JsInteropUtils.isJsType(typeBinding))
+        .setNative(JsInteropUtils.isNativeType(typeBinding))
+        .setLocal(isLocal(typeBinding))
+        .setNullable(isNullable)
         .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
+        .setJsConstructorClassOrSubclass(isOrSubclassesJsConstructorClass(typeBinding))
         .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))

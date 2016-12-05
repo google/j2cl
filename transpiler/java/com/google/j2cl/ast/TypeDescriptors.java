@@ -24,15 +24,16 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
@@ -357,13 +358,13 @@ public class TypeDescriptors {
 
   public static TypeDescriptor createUnion(
       List<TypeDescriptor> unionedTypeDescriptors, final TypeDescriptor superTypeDescriptor) {
-    return new TypeDescriptor.Builder()
-        .setUniqueKey(createUniqueName(unionedTypeDescriptors, "|"))
-        .setIsNullable(true)
+    return TypeDescriptor.newBuilder()
+        .setNullable(true)
         .setKind(Kind.UNION)
-        .setRawTypeDescriptorFactory(Function.identity())
+        .setRawTypeDescriptorFactory(typeDescriptor -> typeDescriptor)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setUnionedTypeDescriptors(unionedTypeDescriptors)
+        .setClassComponents(createUniqueName(unionedTypeDescriptors, "|"))
         .build();
   }
 
@@ -374,7 +375,7 @@ public class TypeDescriptors {
             intersectedTypeDescriptors,
             typeDescriptor -> !typeDescriptor.isInterface(),
             defaultSuperType);
-    final List<TypeDescriptor> interfaceTypeDescriptors =
+    final ImmutableList<TypeDescriptor> interfaceTypeDescriptors =
         intersectedTypeDescriptors
             .stream()
             .filter(TypeDescriptor::isInterface)
@@ -383,14 +384,14 @@ public class TypeDescriptors {
     for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
       typeVars.addAll(intersectedType.getAllTypeVariables());
     }
-    return new TypeDescriptor.Builder()
+    return TypeDescriptor.newBuilder()
         .setKind(Kind.INTERSECTION)
         .setTypeArgumentDescriptors(typeVars)
         .setVisibility(Visibility.PUBLIC)
-        .setIsNullable(true)
+        .setNullable(true)
         .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
-        .setUniqueKey(TypeDescriptors.createUniqueName(intersectedTypeDescriptors, "&"))
+        .setClassComponents(createUniqueName(intersectedTypeDescriptors, "&"))
         .build();
   }
 
@@ -436,11 +437,11 @@ public class TypeDescriptors {
               isJsType);
         };
 
-    return new TypeDescriptor.Builder()
+    return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
-        .setIsJsType(isJsType)
-        .setIsNative(isNative)
-        .setIsNullable(true)
+        .setJsType(isJsType)
+        .setNative(isNative)
+        .setNullable(true)
         .setSimpleJsName(jsName)
         .setJsNamespace(jsNamespace)
         .setPackageName(packageName)
@@ -475,7 +476,7 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    return TypeDescriptor.Builder.from(originalTypeDescriptor).setIsNullable(false).build();
+    return TypeDescriptor.Builder.from(originalTypeDescriptor).setNullable(false).build();
   }
 
   public static TypeDescriptor toNullable(TypeDescriptor originalTypeDescriptor) {
@@ -487,7 +488,7 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    return TypeDescriptor.Builder.from(originalTypeDescriptor).setIsNullable(true).build();
+    return TypeDescriptor.Builder.from(originalTypeDescriptor).setNullable(true).build();
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor leafTypeDescriptor, int dimensions) {
@@ -502,7 +503,7 @@ public class TypeDescriptors {
     if (dimensions == 0) {
       return leafTypeDescriptor;
     }
-    Function<TypeDescriptor, TypeDescriptor> rawTypeDescriptorFactory =
+    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
         selfTypeDescriptor ->
             getForArray(
                 selfTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor(),
@@ -519,11 +520,11 @@ public class TypeDescriptors {
 
     String uniqueKey = leafTypeDescriptor.getUniqueId() + Strings.repeat("[]", dimensions);
 
-    return new TypeDescriptor.Builder()
+    return TypeDescriptor.newBuilder()
         .setComponentTypeDescriptor(componentTypeDescriptor)
         .setDimensions(dimensions)
         .setKind(Kind.ARRAY)
-        .setIsNullable(isNullable)
+        .setNullable(isNullable)
         .setLeafTypeDescriptor(leafTypeDescriptor)
         .setClassComponents(classComponents)
         .setPackageName(leafTypeDescriptor.getPackageName())

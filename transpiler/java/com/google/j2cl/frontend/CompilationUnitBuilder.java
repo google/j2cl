@@ -540,7 +540,7 @@ public class CompilationUnitBuilder {
 
       // the qualifier for the NewInstance.
       Expression newInstanceQualifier =
-          constructorDescriptor.getEnclosingClassTypeDescriptor().capturesEnclosingInstance()
+          constructorDescriptor.getEnclosingClassTypeDescriptor().isCapturingEnclosingInstance()
               ? convertOuterClassReference(
                   JdtUtils.findCurrentTypeBinding(expression),
                   newInstanceTypeBinding.getDeclaringClass(),
@@ -1110,7 +1110,7 @@ public class CompilationUnitBuilder {
                 .build());
       }
 
-      if (lambdaTypeDescriptor.capturesEnclosingInstance()) {
+      if (lambdaTypeDescriptor.isCapturingEnclosingInstance()) {
         // Add field for enclosing instance.
         lambdaType.addField(
             0,
@@ -1170,7 +1170,7 @@ public class CompilationUnitBuilder {
           AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor, Visibility.PUBLIC);
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
-          lambdaTypeDescriptor.capturesEnclosingInstance()
+          lambdaTypeDescriptor.isCapturingEnclosingInstance()
               ? convertOuterClassReference(
                   enclosingClassTypeBinding, enclosingClassTypeBinding, true)
               : null;

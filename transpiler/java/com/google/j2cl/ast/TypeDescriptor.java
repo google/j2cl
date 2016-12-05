@@ -19,7 +19,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -32,13 +34,15 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
 
 /**
  * A reference to a type.
@@ -50,8 +54,9 @@ import java.util.function.Supplier;
  * MethodDescriptorFactory interfaces, since eagerly calculating them would lead to infinite loops
  * of TypeDescriptor creation.
  */
+@AutoValue
 @Visitable
-public class TypeDescriptor extends Node
+public abstract class TypeDescriptor extends Node
     implements Comparable<TypeDescriptor>, HasJsNameInfo, HasReadableDescription {
 
   /** Kind of type descriptor. */
@@ -67,372 +72,13 @@ public class TypeDescriptor extends Node
     INTERSECTION
   }
 
-  /** Builder for a TypeDescriptor. */
-  public static class Builder {
-
-    public static Builder from(final TypeDescriptor typeDescriptor) {
-      Builder builder = new Builder();
-      TypeDescriptor newTypeDescriptor = builder.newTypeDescriptor;
-
-      newTypeDescriptor.uniqueKey = typeDescriptor.uniqueKey;
-      newTypeDescriptor.classComponents = typeDescriptor.getClassComponents();
-      newTypeDescriptor.componentTypeDescriptor = typeDescriptor.getComponentTypeDescriptor();
-      newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          createFactory(typeDescriptor::getConcreteJsFunctionMethodDescriptor);
-      newTypeDescriptor.dimensions = typeDescriptor.getDimensions();
-      newTypeDescriptor.enclosingTypeDescriptorFactory =
-          createFactory(typeDescriptor::getEnclosingTypeDescriptor);
-      newTypeDescriptor.interfaceTypeDescriptorsFactory =
-          createFactory(typeDescriptor::getInterfaceTypeDescriptors);
-      newTypeDescriptor.isAbstract = typeDescriptor.isAbstract();
-      newTypeDescriptor.kind = typeDescriptor.getKind();
-      newTypeDescriptor.capturesEnclosingInstance = typeDescriptor.capturesEnclosingInstance();
-      newTypeDescriptor.isFinal = typeDescriptor.isFinal();
-      newTypeDescriptor.isFunctionalInterface = typeDescriptor.isFunctionalInterface();
-      newTypeDescriptor.isJsFunction = typeDescriptor.isJsFunctionInterface();
-      newTypeDescriptor.isJsFunctionImplementation = typeDescriptor.isJsFunctionImplementation();
-      newTypeDescriptor.isJsType = typeDescriptor.isJsType();
-      newTypeDescriptor.isLocal = typeDescriptor.isLocal();
-      newTypeDescriptor.isNative = typeDescriptor.isNative();
-      newTypeDescriptor.isNullable = typeDescriptor.isNullable();
-      newTypeDescriptor.jsFunctionMethodDescriptorFactory =
-          createFactory(typeDescriptor::getJsFunctionMethodDescriptor);
-      newTypeDescriptor.simpleJsName = typeDescriptor.getSimpleJsName();
-      newTypeDescriptor.jsNamespace = typeDescriptor.getJsNamespace();
-      newTypeDescriptor.leafTypeDescriptor = typeDescriptor.getLeafTypeDescriptor();
-      newTypeDescriptor.packageName = typeDescriptor.getPackageName();
-      newTypeDescriptor.rawTypeDescriptorFactory =
-          createFactory(typeDescriptor::getRawTypeDescriptor);
-      newTypeDescriptor.isOrSubclassesJsConstructorClass =
-          typeDescriptor.isOrSubclassesJsConstructorClass();
-      newTypeDescriptor.superTypeDescriptorFactory =
-          createFactory(typeDescriptor::getSuperTypeDescriptor);
-      newTypeDescriptor.unionedTypeDescriptors = typeDescriptor.getUnionedTypeDescriptors();
-      newTypeDescriptor.typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
-      newTypeDescriptor.visibility = typeDescriptor.getVisibility();
-      newTypeDescriptor.declaredMethodDescriptorsFactory =
-          createFactory(typeDescriptor::getMethodDescriptorsBySignature);
-      return builder;
-    }
-
-    private final TypeDescriptor newTypeDescriptor = new TypeDescriptor();
-
-    private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
-
-    public TypeDescriptor build() {
-      checkState(newTypeDescriptor.getKind() != null);
-      checkState(!newTypeDescriptor.isTypeVariable() || newTypeDescriptor.isNullable);
-      checkState(!newTypeDescriptor.isPrimitive() || !newTypeDescriptor.isNullable);
-      // Default to binary name as the unique key.
-      if (newTypeDescriptor.uniqueKey == null) {
-        newTypeDescriptor.uniqueKey = newTypeDescriptor.getQualifiedBinaryName();
-      }
-
-      // Can not be both a JsFunction implementation and js function interface
-      checkState(
-          !newTypeDescriptor.isJsFunctionImplementation()
-              || !newTypeDescriptor.isJsFunctionInterface());
-
-      // Can not be both a JsFunction implementation and a functional interface
-      checkState(
-          !newTypeDescriptor.isJsFunctionImplementation()
-              || !newTypeDescriptor.isFunctionalInterface());
-
-      // JsFunction interfaces are functional interfaces.
-      checkState(
-          !newTypeDescriptor.isJsFunctionInterface() || newTypeDescriptor.isFunctionalInterface());
-
-      // Only interfaces are functional.
-      checkState(!newTypeDescriptor.isFunctionalInterface() || newTypeDescriptor.isInterface());
-
-      // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
-      // type descriptor that does not make sense.
-      return interner.intern(newTypeDescriptor);
-    }
-
-    public Builder setUniqueKey(String key) {
-      newTypeDescriptor.uniqueKey = key;
-      return this;
-    }
-
-    public Builder setBoundTypeDescriptorFactory(
-        Function<TypeDescriptor, TypeDescriptor> boundTypeDescriptorFactory) {
-      newTypeDescriptor.boundTypeDescriptorFactory = createFactory(boundTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setBoundTypeDescriptorFactory(
-        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
-      newTypeDescriptor.boundTypeDescriptorFactory = createFactory(boundTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setClassComponents(List<String> classComponents) {
-      newTypeDescriptor.classComponents = classComponents;
-      return this;
-    }
-
-    public Builder setComponentTypeDescriptor(TypeDescriptor componentTypeDescriptor) {
-      newTypeDescriptor.componentTypeDescriptor = componentTypeDescriptor;
-      return this;
-    }
-
-    public Builder setConcreteJsFunctionMethodDescriptorFactory(
-        Function<TypeDescriptor, MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
-      newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          createFactory(concreteJsFunctionMethodDescriptorFactory);
-      return this;
-    }
-
-    public Builder setConcreteJsFunctionMethodDescriptorFactory(
-        Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
-      newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          createFactory(concreteJsFunctionMethodDescriptorFactory);
-      return this;
-    }
-
-    public Builder setDimensions(int dimensions) {
-      newTypeDescriptor.dimensions = dimensions;
-      return this;
-    }
-
-    public Builder setEnclosingTypeDescriptorFactory(
-        Function<TypeDescriptor, TypeDescriptor> enclosingTypeDescriptorFactory) {
-      newTypeDescriptor.enclosingTypeDescriptorFactory =
-          createFactory(enclosingTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setEnclosingTypeDescriptorFactory(
-        Supplier<TypeDescriptor> enclosingTypeDescriptorFactory) {
-      newTypeDescriptor.enclosingTypeDescriptorFactory =
-          createFactory(enclosingTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setInterfaceTypeDescriptorsFactory(
-        Supplier<List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
-      newTypeDescriptor.interfaceTypeDescriptorsFactory =
-          createFactory(interfaceTypeDescriptorsFactory);
-      return this;
-    }
-
-    public Builder setInterfaceTypeDescriptorsFactory(
-        Function<TypeDescriptor, List<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
-      newTypeDescriptor.interfaceTypeDescriptorsFactory =
-          createFactory(interfaceTypeDescriptorsFactory);
-      return this;
-    }
-
-    public Builder setIsAbstract(boolean isAbstract) {
-      newTypeDescriptor.isAbstract = isAbstract;
-      return this;
-    }
-
-
-    public Builder setKind(Kind kind) {
-      newTypeDescriptor.kind = kind;
-      return this;
-    }
-
-    public Builder setCapturesEnclosingInstance(boolean capturesEnclosingInstance) {
-      newTypeDescriptor.capturesEnclosingInstance = capturesEnclosingInstance;
-      return this;
-    }
-
-    public Builder setIsFinal(boolean isFinal) {
-      newTypeDescriptor.isFinal = isFinal;
-      return this;
-    }
-
-    public Builder setIsFunctionalInterface(boolean isFunctionalInterface) {
-      newTypeDescriptor.isFunctionalInterface = isFunctionalInterface;
-      return this;
-    }
-
-    public Builder setIsJsFunction(boolean isJsFunction) {
-      newTypeDescriptor.isJsFunction = isJsFunction;
-      return this;
-    }
-
-    public Builder setIsJsFunctionImplementation(boolean isJsFunctionImplementation) {
-      newTypeDescriptor.isJsFunctionImplementation = isJsFunctionImplementation;
-      return this;
-    }
-
-    public Builder setIsJsType(boolean isJsType) {
-      newTypeDescriptor.isJsType = isJsType;
-      return this;
-    }
-
-    public Builder setIsLocal(boolean isLocal) {
-      newTypeDescriptor.isLocal = isLocal;
-      return this;
-    }
-
-    public Builder setIsNative(boolean isNative) {
-      newTypeDescriptor.isNative = isNative;
-      return this;
-    }
-
-    public Builder setIsNullable(boolean isNullable) {
-      newTypeDescriptor.isNullable = isNullable;
-      return this;
-    }
-
-    public Builder setJsFunctionMethodDescriptorFactory(
-        Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
-      newTypeDescriptor.jsFunctionMethodDescriptorFactory =
-          createFactory(jsFunctionMethodDescriptorFactory);
-      return this;
-    }
-
-    public Builder setJsFunctionMethodDescriptorFactory(
-        Function<TypeDescriptor, MethodDescriptor> jsFunctionMethodDescriptorFactory) {
-      newTypeDescriptor.jsFunctionMethodDescriptorFactory =
-          createFactory(jsFunctionMethodDescriptorFactory);
-      return this;
-    }
-
-    public Builder setSimpleJsName(String simpleJsName) {
-      newTypeDescriptor.simpleJsName = simpleJsName;
-      return this;
-    }
-
-    public Builder setJsNamespace(String jsNamespace) {
-      newTypeDescriptor.jsNamespace = jsNamespace;
-      return this;
-    }
-
-    public Builder setLeafTypeDescriptor(TypeDescriptor leafTypeDescriptor) {
-      newTypeDescriptor.leafTypeDescriptor = leafTypeDescriptor;
-      return this;
-    }
-
-    public Builder setPackageName(String packageName) {
-      newTypeDescriptor.packageName = packageName;
-      return this;
-    }
-
-    public Builder setRawTypeDescriptorFactory(Supplier<TypeDescriptor> rawTypeDescriptorFactory) {
-      newTypeDescriptor.rawTypeDescriptorFactory = createFactory(rawTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setRawTypeDescriptorFactory(
-        Function<TypeDescriptor, TypeDescriptor> rawTypeDescriptorFactory) {
-      newTypeDescriptor.rawTypeDescriptorFactory = createFactory(rawTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setIsOrSubclassesJsConstructorClass(boolean isOrSubclassesJsConstructorClass) {
-      newTypeDescriptor.isOrSubclassesJsConstructorClass = isOrSubclassesJsConstructorClass;
-      return this;
-    }
-
-    public Builder setSuperTypeDescriptorFactory(
-        Supplier<TypeDescriptor> superTypeDescriptorFactory) {
-      newTypeDescriptor.superTypeDescriptorFactory = createFactory(superTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setSuperTypeDescriptorFactory(
-        Function<TypeDescriptor, TypeDescriptor> superTypeDescriptorFactory) {
-      newTypeDescriptor.superTypeDescriptorFactory = createFactory(superTypeDescriptorFactory);
-      return this;
-    }
-
-    public Builder setTypeArgumentDescriptors(Iterable<TypeDescriptor> typeArgumentDescriptors) {
-      newTypeDescriptor.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
-      return this;
-    }
-
-    public Builder setUnionedTypeDescriptors(List<TypeDescriptor> unionedTypeDescriptors) {
-      newTypeDescriptor.unionedTypeDescriptors = unionedTypeDescriptors;
-      return this;
-    }
-
-    public Builder setVisibility(Visibility visibility) {
-      newTypeDescriptor.visibility = visibility;
-      return this;
-    }
-
-    public Builder setDeclaredMethodDescriptorsFactory(
-        Supplier<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
-      newTypeDescriptor.declaredMethodDescriptorsFactory =
-          createFactory(declaredMethodDescriptorsFactory);
-      return this;
-    }
-
-    public Builder setDeclaredMethodDescriptorsFactory(
-        Function<TypeDescriptor, Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
-      newTypeDescriptor.declaredMethodDescriptorsFactory =
-          createFactory(declaredMethodDescriptorsFactory);
-      return this;
-    }
-  }
-
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
    */
-  private interface DescriptorFactory<T> {
-    T getOrCreate(TypeDescriptor selfTypeDescriptor);
+  public interface DescriptorFactory<T> {
+    T get(TypeDescriptor typeDescriptor);
   }
-
-  private static <T> DescriptorFactory<T> createFactory(Function<TypeDescriptor, T> function) {
-    return new DescriptorFactory<T>() {
-      private T cachedDescriptor;
-
-      @Override
-      public T getOrCreate(TypeDescriptor selfTypeDescriptor) {
-        if (cachedDescriptor == null) {
-          cachedDescriptor = function.apply(selfTypeDescriptor);
-        }
-        return cachedDescriptor;
-      }
-    };
-  }
-
-  private static <T> DescriptorFactory<T> createFactory(Supplier<T> function) {
-    return createFactory(selfTypeDescriptor -> function.get());
-  }
-
-  private String uniqueKey;
-  private List<String> classComponents = Collections.emptyList();
-  private TypeDescriptor componentTypeDescriptor;
-  private DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory;
-  private int dimensions;
-  private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
-  private DescriptorFactory<List<TypeDescriptor>> interfaceTypeDescriptorsFactory;
-  private boolean capturesEnclosingInstance;
-  private boolean isAbstract;
-  private boolean isFinal;
-  private boolean isFunctionalInterface;
-  private boolean isJsFunction;
-  private boolean isJsFunctionImplementation;
-  private boolean isJsType;
-  private boolean isLocal;
-  private boolean isNative;
-  private boolean isNullable;
-  private Kind kind;
-  private DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory;
-  private String simpleJsName;
-  private String jsNamespace;
-  private TypeDescriptor leafTypeDescriptor;
-  private String packageName;
-  private DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory;
-  private boolean isOrSubclassesJsConstructorClass;
-  private DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory;
-  private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
-  private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
-  private Visibility visibility;
-  private DescriptorFactory<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory;
-  private Map<String, MethodDescriptor> declaredMethodDescriptorssBySignature;
-  private Map<String, MethodDescriptor> methodDescriptorssBySignature;
-  private DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory;
-
-  private TypeDescriptor() {}
 
   @Override
   public Node accept(Processor processor) {
@@ -475,7 +121,7 @@ public class TypeDescriptor extends Node
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
   public String getSimpleBinaryName() {
-    return Joiner.on('$').join(classComponents);
+    return Joiner.on('$').join(getClassComponents());
   }
 
   /**
@@ -484,8 +130,10 @@ public class TypeDescriptor extends Node
    * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
    * and other similar scenarios.
    */
+  // TODO(rluble): add memoization to improve performance and remove the manual memoization in
+  // DescriptorFactory.
   public String getQualifiedBinaryName() {
-    return Joiner.on(".").skipNulls().join(packageName, getSimpleBinaryName());
+    return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
   }
 
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
@@ -501,35 +149,187 @@ public class TypeDescriptor extends Node
     return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
   }
 
+  /** Returns the fully package qualified name like "com.google.common". */
+  @Nullable
+  public abstract String getPackageName();
+
   /**
    * Returns a list of Strings representing the current type's simple name and enclosing type simple
    * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
    * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
    */
-  public List<String> getClassComponents() {
-    return classComponents;
+  public abstract ImmutableList<String> getClassComponents();
+
+  @Nullable
+  public abstract TypeDescriptor getComponentTypeDescriptor();
+
+  @Nullable
+  public abstract TypeDescriptor getLeafTypeDescriptor();
+
+  public abstract int getDimensions();
+
+  public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
+
+  public abstract ImmutableList<TypeDescriptor> getUnionedTypeDescriptors();
+
+  public abstract Visibility getVisibility();
+
+  public abstract Kind getKind();
+
+  public abstract boolean isAbstract();
+
+  public abstract boolean isFinal();
+
+  public abstract boolean isFunctionalInterface();
+
+  public abstract boolean isJsFunctionImplementation();
+
+  public abstract boolean isJsFunctionInterface();
+
+  public abstract boolean isJsType();
+
+  /**
+   * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
+   * enclosing type) but is not a member type because it's location in the body is not in the
+   * declaration scope of the enclosing type. For example:
+   *
+   * <p><code> class Foo { void bar() { class Baz {} } } </code>
+   *
+   * <p>or
+   *
+   * <p><code> class Foo { void bar() { Comparable comparable = new Comparable() { ... } } } </code>
+   */
+  public abstract boolean isLocal();
+
+  @Override
+  public abstract boolean isNative();
+
+  public abstract boolean isNullable();
+
+  public abstract boolean isJsConstructorClassOrSubclass();
+
+  /* PRIVATE AUTO_VALUE PROPERTIES */
+
+  @Nullable
+  abstract String getUniqueKey();
+
+  @Nullable
+  abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<TypeDescriptor> getEnclosingTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
+
+  @Nullable
+  abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
+      getDeclaredMethodDescriptorsFactory();
+
+  /**
+   * Returns the JavaScript name for this class. This is same as simple source name unless modified
+   * by JsType.
+   */
+  @Override
+  public abstract String getSimpleJsName();
+
+  /** Returns true if the class captures its enclosing instance */
+  public abstract boolean isCapturingEnclosingInstance();
+
+  private boolean isProxy() {
+    return isNative() && !isExtern();
   }
 
-  public TypeDescriptor getComponentTypeDescriptor() {
-    return componentTypeDescriptor;
+  public boolean isParameterizedType() {
+    return !getTypeArgumentDescriptors().isEmpty();
+  }
+
+  public boolean isPrimitive() {
+    return getKind() == Kind.PRIMITIVE;
+  }
+
+  public boolean isTypeVariable() {
+    return getKind() == Kind.TYPE_VARIABLE;
+  }
+
+  /** Returns whether the described type is a union. */
+  public boolean isUnion() {
+    return getKind() == Kind.UNION;
+  }
+
+  public boolean isWildCardOrCapture() {
+    return getKind() == Kind.WILDCARD_OR_CAPTURE;
+  }
+
+  /** Returns whether the described type is an array. */
+  public boolean isArray() {
+    return getKind() == Kind.ARRAY;
+  }
+
+  /** Returns whether the described type is a class. */
+  public boolean isClass() {
+    return getKind() == Kind.CLASS;
+  }
+
+  /** Returns whether the described type is an interface. */
+  public boolean isInterface() {
+    return getKind() == Kind.INTERFACE;
+  }
+
+  /** Returns whether the described type is an interface. */
+  public boolean isIntersection() {
+    return getKind() == Kind.INTERSECTION;
+  }
+
+  /** Returns whether the described type is an enum. */
+  public boolean isEnum() {
+    return getKind() == Kind.ENUM;
+  }
+
+  public boolean isExtern() {
+    return JsUtils.isGlobal(getJsNamespace()) && isNative();
   }
 
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    if (concreteJsFunctionMethodDescriptorFactory == null) {
-      return null;
-    }
-    return concreteJsFunctionMethodDescriptorFactory.getOrCreate(this);
-  }
-
-  public int getDimensions() {
-    return dimensions;
+    return getConcreteJsFunctionMethodDescriptorFactory().get(this);
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    if (enclosingTypeDescriptorFactory == null) {
-      return null;
-    }
-    return enclosingTypeDescriptorFactory.getOrCreate(this);
+    return getEnclosingTypeDescriptorFactory().get(this);
+  }
+
+  public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
+    return getInterfaceTypeDescriptorsFactory().get(this);
+  }
+
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    return getJsFunctionMethodDescriptorFactory().get(this);
+  }
+
+  /**
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
+   */
+  public TypeDescriptor getRawTypeDescriptor() {
+    return getRawTypeDescriptorFactory().get(this);
+  }
+
+  /** Returns the bound for a type variable. */
+  public TypeDescriptor getBoundTypeDescriptor() {
+    checkState(isTypeVariable() || isWildCardOrCapture());
+    return getBoundTypeDescriptorFactory().get(this);
   }
 
   public boolean isSupertypeOf(TypeDescriptor that) {
@@ -575,12 +375,6 @@ public class TypeDescriptor extends Node
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
-  public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
-    if (interfaceTypeDescriptorsFactory == null) {
-      return ImmutableList.of();
-    }
-    return ImmutableList.copyOf(interfaceTypeDescriptorsFactory.getOrCreate(this));
-  }
 
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
     checkState(isIntersection());
@@ -600,38 +394,19 @@ public class TypeDescriptor extends Node
     return types;
   }
 
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
-    if (jsFunctionMethodDescriptorFactory == null) {
-      return null;
-    }
-    return jsFunctionMethodDescriptorFactory.getOrCreate(this);
-  }
-
-  /**
-   * Returns the JavaScript name for this class. This is same as simple source name unless modified
-   * by JsType.
-   */
-  @Override
-  public String getSimpleJsName() {
-    if (simpleJsName == null) {
-      simpleJsName = getSimpleSourceName();
-    }
-    return simpleJsName;
-  }
+  /** The JsNamespace set by the user */
+  abstract Optional<String> getUserSetJsNamespace();
 
   @Override
   public String getJsNamespace() {
-    if (jsNamespace == null) {
-      // TODO(goktug): move to Builder when enclosing type is no longer lazy.
-      jsNamespace = calculateJsNamespace();
-    }
-    return jsNamespace;
+    // TODO(goktug): move to Builder when enclosing type is no longer lazy.
+    return getUserSetJsNamespace().orElse(calculateJsNamespace());
   }
 
   private String calculateJsNamespace() {
     TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
     if (enclosingTypeDescriptor != null) {
-      if (!isNative && enclosingTypeDescriptor.isNative) {
+      if (!isNative() && enclosingTypeDescriptor.isNative()) {
         // When there is a type nested within a native type, it's important not to generate a name
         // like "Array.1" (like would happen if the outer native type was claiming to be native
         // Array and the nested type was anonymous) since this is almost guaranteed to collide
@@ -643,7 +418,7 @@ public class TypeDescriptor extends Node
       return enclosingTypeDescriptor.getQualifiedJsName();
     }
     // Use the java package namespace.
-    return packageName;
+    return getPackageName();
   }
 
   /**
@@ -660,40 +435,15 @@ public class TypeDescriptor extends Node
     return getJsNamespace() + "." + getSimpleJsName();
   }
 
-  public TypeDescriptor getLeafTypeDescriptor() {
-    return leafTypeDescriptor;
-  }
-
-  /** Returns the fully package qualified name like "com.google.common". */
-  public String getPackageName() {
-    return packageName;
-  }
-
-  /**
-   * Returns the erasure type (see definition of erasure type at
-   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
-   */
-  public TypeDescriptor getRawTypeDescriptor() {
-    if (rawTypeDescriptorFactory == null) {
-      return null;
-    }
-    return rawTypeDescriptorFactory.getOrCreate(this);
-  }
-
-  /** Returns the bound for a type variable. */
-  public TypeDescriptor getBoundTypeDescriptor() {
-    checkState(isTypeVariable() || isWildCardOrCapture());
-    if (boundTypeDescriptorFactory == null) {
-      return null;
-    }
-    return boundTypeDescriptorFactory.getOrCreate(this);
-  }
-
   /**
    * Returns the unqualified simple source name like "Inner". Used when a readable name is required
    * to refer to the type like a short alias, Debug/Error output, etc.
    */
   public String getSimpleSourceName() {
+    return getSimpleSourceName(getClassComponents());
+  }
+
+  private static String getSimpleSourceName(List<String> classComponents) {
     String simpleName = Iterables.getLast(classComponents);
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
     // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
@@ -712,28 +462,22 @@ public class TypeDescriptor extends Node
    * Debug/Error output, etc.
    */
   public String getQualifiedSourceName() {
-    return Joiner.on(".").skipNulls().join(packageName, Joiner.on(".").join(classComponents));
+    return Joiner.on(".")
+        .skipNulls()
+        .join(getPackageName(), Joiner.on(".").join(getClassComponents()));
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
-    if (superTypeDescriptorFactory == null) {
-      return null;
-    }
-    return superTypeDescriptorFactory.getOrCreate(this);
-  }
-
-  public List<TypeDescriptor> getTypeArgumentDescriptors() {
-    return typeArgumentDescriptors;
-  }
-
-  public List<TypeDescriptor> getUnionedTypeDescriptors() {
-    return unionedTypeDescriptors;
+    return getSuperTypeDescriptorFactory().get(this);
   }
 
   /** A unique string for a give type. Used for interning. */
   public String getUniqueId() {
-    String prefix = isNullable ? "?" : "!";
-    return prefix + uniqueKey + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
+    String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
+    String prefix = isNullable() ? "?" : "!";
+    return prefix
+        + uniqueKey
+        + TypeDescriptor.createTypeArgumentsUniqueId(getTypeArgumentDescriptors());
   }
 
   private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
@@ -745,143 +489,18 @@ public class TypeDescriptor extends Node
         typeArgumentDescriptors.stream().map(TypeDescriptor::getUniqueId).collect(joining(", ")));
   }
 
-  public Visibility getVisibility() {
-    return visibility;
-  }
-
-  public Kind getKind() {
-    return kind;
-  }
-
   @Override
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
   }
 
-  /** Returns true if the class captures its enclosing instance */
-  public boolean capturesEnclosingInstance() {
-    return capturesEnclosingInstance;
-  }
-
-  public boolean isAbstract() {
-    return isAbstract;
-  }
-
-  /** Returns whether the described type is an array. */
-  public boolean isArray() {
-    return kind == Kind.ARRAY;
-  }
-
-  /** Returns whether the described type is a class. */
-  public boolean isClass() {
-    return kind == Kind.CLASS;
-  }
-
-  /** Returns whether the described type is an interface. */
-  public boolean isInterface() {
-    return kind == Kind.INTERFACE;
-  }
-
-  /** Returns whether the described type is an interface. */
-  public boolean isIntersection() {
-    return kind == Kind.INTERSECTION;
-  }
-
-  /** Returns whether the described type is an enum. */
-  public boolean isEnum() {
-    return kind == Kind.ENUM;
-  }
-
-  public boolean isExtern() {
-    return JsUtils.isGlobal(getJsNamespace()) && isNative();
-  }
-
-  public boolean isFinal() {
-    return isFinal;
-  }
-
-  public boolean isFunctionalInterface() {
-    return isFunctionalInterface;
-  }
-
-  public boolean isJsFunctionImplementation() {
-    return isJsFunctionImplementation;
-  }
-
-  public boolean isJsFunctionInterface() {
-    return isJsFunction;
-  }
-
-  public boolean isJsType() {
-    return isJsType;
-  }
-
-  /**
-   * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
-   * enclosing type) but is not a member type because it's location in the body is not in the
-   * declaration scope of the enclosing type. For example:
-   *
-   * <p><code> class Foo { void bar() { class Baz {} } } </code>
-   *
-   * <p>or
-   *
-   * <p><code> class Foo { void bar() { Comparable comparable = new Comparable() { ... } } } </code>
-   */
-  public boolean isLocal() {
-    return isLocal;
-  }
-
-  @Override
-  public boolean isNative() {
-    return isNative;
-  }
-
-  private boolean isProxy() {
-    return isNative && !isExtern();
-  }
-
-  public boolean isNullable() {
-    return isNullable;
-  }
-
-  public boolean isParameterizedType() {
-    return !getTypeArgumentDescriptors().isEmpty();
-  }
-
-  public boolean isPrimitive() {
-    return kind == Kind.PRIMITIVE;
-  }
-
-  public boolean isTypeVariable() {
-    return kind == Kind.TYPE_VARIABLE;
-  }
-
-  /** Returns whether the described type is a union. */
-  public boolean isUnion() {
-    return kind == Kind.UNION;
-  }
-
-  public boolean isWildCardOrCapture() {
-    return kind == Kind.WILDCARD_OR_CAPTURE;
-  }
-
-  public boolean isOrSubclassesJsConstructorClass() {
-    return isOrSubclassesJsConstructorClass;
-  }
-
+  private Map<String, MethodDescriptor> methodDescriptorsBySignature;
   /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
   private Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
-    if (declaredMethodDescriptorssBySignature == null) {
-      if (declaredMethodDescriptorsFactory == null) {
-        declaredMethodDescriptorssBySignature = ImmutableMap.of();
-      } else {
-        declaredMethodDescriptorssBySignature = declaredMethodDescriptorsFactory.getOrCreate(this);
-      }
-    }
-    return declaredMethodDescriptorssBySignature;
+    return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
   /**
@@ -891,25 +510,25 @@ public class TypeDescriptor extends Node
   private Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
     // TODO(rluble): update this code to handle package private methods, bridges and verify that it
     // correctly handles default methods.
-    if (methodDescriptorssBySignature == null) {
-      methodDescriptorssBySignature = new LinkedHashMap<>();
+    if (methodDescriptorsBySignature == null) {
+      methodDescriptorsBySignature = new LinkedHashMap<>();
 
       // Add all methods declared in the current type itself
-      methodDescriptorssBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
+      methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
 
       // Add all the methods from the super class.
       if (getSuperTypeDescriptor() != null) {
         updateMethodsBySignature(
-            methodDescriptorssBySignature, getSuperTypeDescriptor().getMethodDescriptors());
+            methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
       }
 
       // Finally add the methods that appear in super interfaces.
       for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
         updateMethodsBySignature(
-            methodDescriptorssBySignature, implementedInterface.getMethodDescriptors());
+            methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
       }
     }
-    return methodDescriptorssBySignature;
+    return methodDescriptorsBySignature;
   }
 
   private static void updateMethodsBySignature(
@@ -977,5 +596,251 @@ public class TypeDescriptor extends Node
   public String getReadableDescription() {
     // TODO: Actually provide a real readable description.
     return getSimpleSourceName();
+  }
+
+  abstract Builder toBuilder();
+
+  public static Builder newBuilder() {
+    return new AutoValue_TypeDescriptor.Builder()
+        // Default values.
+        .setVisibility(Visibility.PUBLIC)
+        .setAbstract(false)
+        .setNative(false)
+        .setCapturingEnclosingInstance(false)
+        .setFinal(false)
+        .setFunctionalInterface(false)
+        .setJsFunctionInterface(false)
+        .setJsFunctionImplementation(false)
+        .setJsType(false)
+        .setLocal(false)
+        .setNullable(true)
+        .setDimensions(0)
+        .setUnionedTypeDescriptors(Collections.emptyList())
+        .setJsConstructorClassOrSubclass(false)
+        .setTypeArgumentDescriptors(Collections.emptyList())
+        .setBoundTypeDescriptorFactory(() -> null)
+        .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
+        .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
+        .setEnclosingTypeDescriptorFactory(() -> null)
+        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
+        .setJsFunctionMethodDescriptorFactory(() -> null)
+        .setRawTypeDescriptorFactory(() -> null)
+        .setSuperTypeDescriptorFactory(() -> null);
+  }
+
+  /** Builder for a TypeDescriptor. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setUniqueKey(String key);
+
+    public abstract Builder setClassComponents(String... classComponents);
+
+    public abstract Builder setClassComponents(List<String> classComponents);
+
+    public abstract Builder setComponentTypeDescriptor(TypeDescriptor componentTypeDescriptor);
+
+    public abstract Builder setDimensions(int dimensions);
+
+    public abstract Builder setAbstract(boolean isAbstract);
+
+    public abstract Builder setKind(Kind kind);
+
+    public abstract Builder setCapturingEnclosingInstance(boolean isCapturingEnclosingInstance);
+
+    public abstract Builder setFinal(boolean isFinal);
+
+    public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
+
+    public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
+
+    public abstract Builder setJsFunctionImplementation(boolean isJsFunctionImplementation);
+
+    public abstract Builder setJsType(boolean isJsType);
+
+    public abstract Builder setLocal(boolean isLocal);
+
+    public abstract Builder setNative(boolean isNative);
+
+    public abstract Builder setNullable(boolean isNullable);
+
+    public abstract Builder setTypeArgumentDescriptors(
+        Iterable<TypeDescriptor> typeArgumentDescriptors);
+
+    public abstract Builder setUnionedTypeDescriptors(List<TypeDescriptor> unionedTypeDescriptors);
+
+    public abstract Builder setVisibility(Visibility visibility);
+
+    public abstract Builder setLeafTypeDescriptor(TypeDescriptor leafTypeDescriptor);
+
+    public abstract Builder setPackageName(String packageName);
+
+    public abstract Builder setJsConstructorClassOrSubclass(boolean isJsConstructorClassOrSubclass);
+
+    public abstract Builder setSimpleJsName(String simpleJsName);
+
+    public Builder setJsNamespace(String jsNamespace) {
+      return setUserSetJsNamespace(Optional.ofNullable(jsNamespace));
+    }
+
+    public abstract Builder setBoundTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
+
+    public Builder setBoundTypeDescriptorFactory(
+        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
+      return setBoundTypeDescriptorFactory(typeDescriptor -> boundTypeDescriptorFactory.get());
+    }
+
+    public abstract Builder setConcreteJsFunctionMethodDescriptorFactory(
+        DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory);
+
+    public Builder setConcreteJsFunctionMethodDescriptorFactory(
+        Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
+      return setConcreteJsFunctionMethodDescriptorFactory(
+          typeDescriptor -> concreteJsFunctionMethodDescriptorFactory.get());
+    }
+
+    public abstract Builder setEnclosingTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory);
+
+    public Builder setEnclosingTypeDescriptorFactory(
+        Supplier<TypeDescriptor> enclosingTypeDescriptorFactory) {
+      return setEnclosingTypeDescriptorFactory(
+          typeDescriptor -> enclosingTypeDescriptorFactory.get());
+    }
+
+    public abstract Builder setInterfaceTypeDescriptorsFactory(
+        DescriptorFactory<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory);
+
+    public Builder setInterfaceTypeDescriptorsFactory(
+        Supplier<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
+      return setInterfaceTypeDescriptorsFactory(
+          typeDescriptor -> interfaceTypeDescriptorsFactory.get());
+    }
+
+    public abstract Builder setJsFunctionMethodDescriptorFactory(
+        DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory);
+
+    public Builder setJsFunctionMethodDescriptorFactory(
+        Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
+      return setJsFunctionMethodDescriptorFactory(
+          typeDescriptor -> jsFunctionMethodDescriptorFactory.get());
+    }
+
+    public abstract Builder setRawTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory);
+
+    public Builder setRawTypeDescriptorFactory(Supplier<TypeDescriptor> rawTypeDescriptorFactory) {
+      return setRawTypeDescriptorFactory(typeDescriptor -> rawTypeDescriptorFactory.get());
+    }
+
+    public abstract Builder setSuperTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory);
+
+    public Builder setSuperTypeDescriptorFactory(
+        Supplier<TypeDescriptor> superTypeDescriptorFactory) {
+      return setSuperTypeDescriptorFactory(typeDescriptor -> superTypeDescriptorFactory.get());
+    }
+
+    public abstract Builder setDeclaredMethodDescriptorsFactory(
+        DescriptorFactory<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory);
+
+    public Builder setDeclaredMethodDescriptorsFactory(
+        Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
+      return setDeclaredMethodDescriptorsFactory(
+          typeDescriptor -> declaredMethodDescriptorsFactory.get());
+    }
+
+    // Builder accessors to aid construction.
+    abstract String getPackageName();
+
+    abstract ImmutableList<String> getClassComponents();
+
+    abstract Optional<String> getSimpleJsName();
+
+    abstract Builder setUserSetJsNamespace(Optional<String> jsNamespace);
+
+    abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
+
+    abstract DescriptorFactory<TypeDescriptor> getEnclosingTypeDescriptorFactory();
+
+    abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
+
+    abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
+
+    abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
+
+    abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
+
+    abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
+
+    abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
+        getDeclaredMethodDescriptorsFactory();
+
+    private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
+
+    private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
+      // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
+      return new DescriptorFactory<T>() {
+        Map<TypeDescriptor, T> cachedValues = new HashMap<>();
+
+        @Override
+        public T get(TypeDescriptor selfTypeDescriptor) {
+          if (!cachedValues.containsKey(selfTypeDescriptor)) {
+            cachedValues.put(selfTypeDescriptor, factory.get(selfTypeDescriptor));
+          }
+          return cachedValues.get(selfTypeDescriptor);
+        }
+      };
+    }
+
+    abstract TypeDescriptor autoBuild();
+
+    public TypeDescriptor build() {
+      if (!getSimpleJsName().isPresent()) {
+        setSimpleJsName(getSimpleSourceName(getClassComponents()));
+      }
+
+      // Make all descriptor factories memoizing.
+      setBoundTypeDescriptorFactory(createMemoizingFactory(getBoundTypeDescriptorFactory()));
+      setConcreteJsFunctionMethodDescriptorFactory(
+          createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
+      setDeclaredMethodDescriptorsFactory(
+          createMemoizingFactory(getDeclaredMethodDescriptorsFactory()));
+      setEnclosingTypeDescriptorFactory(
+          createMemoizingFactory(getEnclosingTypeDescriptorFactory()));
+      setInterfaceTypeDescriptorsFactory(
+          createMemoizingFactory(getInterfaceTypeDescriptorsFactory()));
+      setJsFunctionMethodDescriptorFactory(
+          createMemoizingFactory(getJsFunctionMethodDescriptorFactory()));
+      setSuperTypeDescriptorFactory(createMemoizingFactory(getSuperTypeDescriptorFactory()));
+      setRawTypeDescriptorFactory(createMemoizingFactory(getRawTypeDescriptorFactory()));
+
+      TypeDescriptor typeDescriptor = autoBuild();
+
+      checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
+      checkState(!typeDescriptor.isPrimitive() || !typeDescriptor.isNullable());
+
+      // Can not be both a JsFunction implementation and js function interface
+      checkState(
+          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isJsFunctionInterface());
+
+      // Can not be both a JsFunction implementation and a functional interface
+      checkState(
+          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isFunctionalInterface());
+
+      // JsFunction interfaces are functional interfaces.
+      checkState(!typeDescriptor.isJsFunctionInterface() || typeDescriptor.isFunctionalInterface());
+
+      // Only interfaces are functional.
+      checkState(!typeDescriptor.isFunctionalInterface() || typeDescriptor.isInterface());
+
+      // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
+      // type descriptor that does not make sense.
+      return interner.intern(typeDescriptor);
+    }
+
+    public static Builder from(final TypeDescriptor typeDescriptor) {
+      return typeDescriptor.toBuilder();
+    }
   }
 }

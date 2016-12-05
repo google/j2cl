@@ -116,7 +116,7 @@ public class NormalizeConstructors extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
       Method resultingConstructor =
-          type.getDescriptor().isOrSubclassesJsConstructorClass()
+          type.getDescriptor().isJsConstructorClassOrSubclass()
               ? synthesizeJsConstructor(type)
               : maybeSynthesizePrivateConstructor(type);
 
@@ -150,7 +150,7 @@ public class NormalizeConstructors extends NormalizationPass {
         return false;
       }
       TypeDescriptor currentType = getCurrentType().getDescriptor();
-      if (!currentType.isOrSubclassesJsConstructorClass()
+      if (!currentType.isJsConstructorClassOrSubclass()
           || !AstUtils.hasConstructorInvocation(method)) {
         return false;
       }
@@ -165,7 +165,7 @@ public class NormalizeConstructors extends NormalizationPass {
         // if the super class is a @JsConstructor or subclass of @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
         // $ctor method to call the super constructor (which is $ctor_superclass).
-        if (!currentType.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
+        if (!currentType.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
           return false; // Don't remove the super call from $ctor below.
         }
       }
@@ -233,7 +233,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // note that the super call may be null if the super constructor was native.
     // TODO: We should verify that these nodes are not being referenced multiple times in the AST.
     if (superConstructorInvocation == null
-        || !type.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
+        || !type.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
       superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
     body.add(
@@ -392,7 +392,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .build();
 
     List<Expression> arguments = Lists.newArrayList();
-    if (enclosingType.isOrSubclassesJsConstructorClass()) {
+    if (enclosingType.isJsConstructorClassOrSubclass()) {
       // No need for a factory method if we are calling a @JsConstructor
       if (constructor == AstUtils.getPrimaryConstructor(type)) {
         return originalContructorBodyMethod(constructor);
