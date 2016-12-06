@@ -1260,7 +1260,7 @@ public class JdtUtils {
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
-        .setEnclosingTypeDescriptorFactory(() -> enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingClassTypeDescriptor)
         .setCapturingEnclosingInstance(!inStaticContext)
         .setJsFunctionImplementation(isJsFunctionImplementation)
         .setLocal(true)
@@ -1380,8 +1380,10 @@ public class JdtUtils {
         .setClassComponents(getClassComponents(typeBinding))
         .setConcreteJsFunctionMethodDescriptorFactory(
             () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
-        .setEnclosingTypeDescriptorFactory(
-            () -> createTypeDescriptor(typeBinding.getDeclaringClass()))
+        .setEnclosingTypeDescriptor(
+            isTypeVariable || isWildCardOrCapture
+                ? null
+                : createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
             () -> createTypeDescriptors(typeBinding.getInterfaces()))
         .setAbstract(isAbstract)

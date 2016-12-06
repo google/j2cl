@@ -161,6 +161,9 @@ public abstract class TypeDescriptor extends Node
   public abstract ImmutableList<String> getClassComponents();
 
   @Nullable
+  public abstract TypeDescriptor getEnclosingTypeDescriptor();
+
+  @Nullable
   public abstract TypeDescriptor getComponentTypeDescriptor();
 
   @Nullable
@@ -217,9 +220,6 @@ public abstract class TypeDescriptor extends Node
   abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<TypeDescriptor> getEnclosingTypeDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
 
   @Nullable
@@ -244,6 +244,10 @@ public abstract class TypeDescriptor extends Node
    */
   @Override
   public abstract String getSimpleJsName();
+
+  @Override
+  @Nullable
+  public abstract String getJsNamespace();
 
   /** Returns true if the class captures its enclosing instance */
   public abstract boolean isCapturingEnclosingInstance();
@@ -304,10 +308,6 @@ public abstract class TypeDescriptor extends Node
 
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     return getConcreteJsFunctionMethodDescriptorFactory().get(this);
-  }
-
-  public TypeDescriptor getEnclosingTypeDescriptor() {
-    return getEnclosingTypeDescriptorFactory().get(this);
   }
 
   public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
@@ -392,33 +392,6 @@ public abstract class TypeDescriptor extends Node
     types.add(superType);
     types.addAll(getInterfaceTypeDescriptors());
     return types;
-  }
-
-  /** The JsNamespace set by the user */
-  abstract Optional<String> getUserSetJsNamespace();
-
-  @Override
-  public String getJsNamespace() {
-    // TODO(goktug): move to Builder when enclosing type is no longer lazy.
-    return getUserSetJsNamespace().orElse(calculateJsNamespace());
-  }
-
-  private String calculateJsNamespace() {
-    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-    if (enclosingTypeDescriptor != null) {
-      if (!isNative() && enclosingTypeDescriptor.isNative()) {
-        // When there is a type nested within a native type, it's important not to generate a name
-        // like "Array.1" (like would happen if the outer native type was claiming to be native
-        // Array and the nested type was anonymous) since this is almost guaranteed to collide
-        // with other people also creating nested classes within a native type that claims to be
-        // native Array.
-        return enclosingTypeDescriptor.getQualifiedSourceName();
-      }
-      // Use the parent namespace.
-      return enclosingTypeDescriptor.getQualifiedJsName();
-    }
-    // Use the java package namespace.
-    return getPackageName();
   }
 
   /**
@@ -621,7 +594,6 @@ public abstract class TypeDescriptor extends Node
         .setBoundTypeDescriptorFactory(() -> null)
         .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
-        .setEnclosingTypeDescriptorFactory(() -> null)
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
         .setRawTypeDescriptorFactory(() -> null)
@@ -637,7 +609,11 @@ public abstract class TypeDescriptor extends Node
 
     public abstract Builder setClassComponents(List<String> classComponents);
 
+    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
+
     public abstract Builder setComponentTypeDescriptor(TypeDescriptor componentTypeDescriptor);
+
+    public abstract Builder setLeafTypeDescriptor(TypeDescriptor leafTypeDescriptor);
 
     public abstract Builder setDimensions(int dimensions);
 
@@ -670,17 +646,13 @@ public abstract class TypeDescriptor extends Node
 
     public abstract Builder setVisibility(Visibility visibility);
 
-    public abstract Builder setLeafTypeDescriptor(TypeDescriptor leafTypeDescriptor);
-
     public abstract Builder setPackageName(String packageName);
 
     public abstract Builder setJsConstructorClassOrSubclass(boolean isJsConstructorClassOrSubclass);
 
     public abstract Builder setSimpleJsName(String simpleJsName);
 
-    public Builder setJsNamespace(String jsNamespace) {
-      return setUserSetJsNamespace(Optional.ofNullable(jsNamespace));
-    }
+    public abstract Builder setJsNamespace(String jsNamespace);
 
     public abstract Builder setBoundTypeDescriptorFactory(
         DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
@@ -697,15 +669,6 @@ public abstract class TypeDescriptor extends Node
         Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
       return setConcreteJsFunctionMethodDescriptorFactory(
           typeDescriptor -> concreteJsFunctionMethodDescriptorFactory.get());
-    }
-
-    public abstract Builder setEnclosingTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory);
-
-    public Builder setEnclosingTypeDescriptorFactory(
-        Supplier<TypeDescriptor> enclosingTypeDescriptorFactory) {
-      return setEnclosingTypeDescriptorFactory(
-          typeDescriptor -> enclosingTypeDescriptorFactory.get());
     }
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
@@ -757,11 +720,9 @@ public abstract class TypeDescriptor extends Node
 
     abstract Optional<String> getSimpleJsName();
 
-    abstract Builder setUserSetJsNamespace(Optional<String> jsNamespace);
+    abstract Optional<String> getJsNamespace();
 
     abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getEnclosingTypeDescriptorFactory();
 
     abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
 
@@ -775,6 +736,28 @@ public abstract class TypeDescriptor extends Node
 
     abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
         getDeclaredMethodDescriptorsFactory();
+
+    abstract TypeDescriptor getEnclosingTypeDescriptor();
+
+    abstract boolean isNative();
+
+    private String calculateJsNamespace() {
+      TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+      if (enclosingTypeDescriptor != null) {
+        if (!isNative() && enclosingTypeDescriptor.isNative()) {
+          // When there is a type nested within a native type, it's important not to generate a name
+          // like "Array.1" (like would happen if the outer native type was claiming to be native
+          // Array and the nested type was anonymous) since this is almost guaranteed to collide
+          // with other people also creating nested classes within a native type that claims to be
+          // native Array.
+          return enclosingTypeDescriptor.getQualifiedSourceName();
+        }
+        // Use the parent namespace.
+        return enclosingTypeDescriptor.getQualifiedJsName();
+      }
+      // Use the java package namespace.
+      return getPackageName();
+    }
 
     private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
 
@@ -800,14 +783,15 @@ public abstract class TypeDescriptor extends Node
         setSimpleJsName(getSimpleSourceName(getClassComponents()));
       }
 
+      if (!getJsNamespace().isPresent()) {
+        setJsNamespace(calculateJsNamespace());
+      }
       // Make all descriptor factories memoizing.
       setBoundTypeDescriptorFactory(createMemoizingFactory(getBoundTypeDescriptorFactory()));
       setConcreteJsFunctionMethodDescriptorFactory(
           createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
       setDeclaredMethodDescriptorsFactory(
           createMemoizingFactory(getDeclaredMethodDescriptorsFactory()));
-      setEnclosingTypeDescriptorFactory(
-          createMemoizingFactory(getEnclosingTypeDescriptorFactory()));
       setInterfaceTypeDescriptorsFactory(
           createMemoizingFactory(getInterfaceTypeDescriptorsFactory()));
       setJsFunctionMethodDescriptorFactory(
