@@ -5,6 +5,7 @@
 
 from multiprocessing import Pool
 import os
+import signal
 import zlib
 
 import repo_util
@@ -27,6 +28,14 @@ def console_log(message):
   print message
 
 
+def create_pool():
+  """Create a pool that does not capture ctrl-c."""
+  original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+  pool = Pool(processes=2)
+  signal.signal(signal.SIGINT, original_sigint_handler)
+  return pool
+
+
 def make_size_report():
   """Compare current test sizes and generate a report."""
   row_format = "  %7s%7s %s (%s)\n"
@@ -42,7 +51,9 @@ def make_size_report():
   size_report_file.write("**************************************\n")
 
   print "  Building original amd modified targets."
-  pool = Pool(processes=2)
+
+  pool = create_pool()
+
   original_result = pool.apply_async(
       repo_util.build_optimized_tests, [repo_util.get_managed_path()],
       callback=lambda x: console_log("    Original done buliding."))
