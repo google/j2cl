@@ -70,5 +70,22 @@ public class BooleanOperations {
     if (ls || rs) {
       r = true;
     }
+
+    // Compound assignment with enclosing instance.
+    class Outer {
+      boolean b;
+
+      class Inner {
+        {
+          b |= true;
+        }
+      }
+    }
+    final Outer finalOuter = new Outer();
+    finalOuter.b |= true;
+
+    Outer outer = new Outer();
+    outer.b |= (outer = null) == null;
+
   }
 }

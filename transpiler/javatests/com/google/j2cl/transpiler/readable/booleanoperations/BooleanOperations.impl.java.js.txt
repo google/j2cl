@@ -11,8 +11,11 @@ goog.module('com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperat
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
@@ -131,6 +134,26 @@ class BooleanOperations extends java_lang_Object {
     if (ls || rs) {
       r = true;
     }
+    let finalOuter =
+        $1Outer
+            .$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(
+                this);
+    ($Numbers.$q = finalOuter,
+     $Numbers.$q
+         .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer =
+         !!($Numbers.$q
+                .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer |
+            true));
+    let outer =
+        $1Outer
+            .$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(
+                this);
+    ($Numbers.$q = outer,
+     $Numbers.$q
+         .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer =
+         !!($Numbers.$q
+                .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer |
+            $Equality.$same((outer = null), null)));
   }
 
   /**
@@ -158,8 +181,12 @@ class BooleanOperations extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    $1Outer = goog.module.get(
+        'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     java_lang_Object.$clinit();
   }

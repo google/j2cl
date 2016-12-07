@@ -56,5 +56,29 @@ public class Main {
     d = -1;
     d >>>= 16;
     assert d == 65535;
+
+    // Compound assignment with enclosing instance.
+    class Outer {
+      boolean b;
+
+      class Inner {
+        {
+          b |= true;
+        }
+      }
+    }
+
+    final Outer finalOuter = new Outer();
+    finalOuter.b |= true;
+    assert finalOuter.b;
+
+    Outer outer = new Outer();
+    Outer copy = outer;
+    outer.b |= (outer = null) == null;
+    assert copy.b;
+
+    outer = new Outer();
+    outer.new Inner();
+    assert outer.b;
   }
 }
