@@ -81,7 +81,6 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
         .setParameters(parameters)
         .setIsAbstract(true)
         .setIsOverride(true)
-        .setIsFinal(false)
         .build();
   }
 }

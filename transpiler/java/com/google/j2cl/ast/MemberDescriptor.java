@@ -42,10 +42,14 @@ public abstract class MemberDescriptor extends Node
 
   public abstract String getName();
 
+  public abstract Visibility getVisibility();
+
   @Override
   public abstract boolean isNative();
 
   public abstract boolean isStatic();
+
+  public abstract boolean isFinal();
 
   public abstract boolean isPolymorphic();
 

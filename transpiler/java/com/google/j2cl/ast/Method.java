@@ -38,7 +38,6 @@ public class Method extends Member implements HasJsNameInfo {
   private boolean isAbstract;
   private boolean isOverride;
   private String jsDocDescription;
-  private boolean isFinal;
   private boolean isBridge;
   private final boolean isSynthetic;
   private BitSet parameterOptionality;
@@ -49,7 +48,6 @@ public class Method extends Member implements HasJsNameInfo {
       Block body,
       boolean isAbstract,
       boolean isOverride,
-      boolean isFinal,
       boolean isBridge,
       boolean isSynthetic,
       String jsDocDescription) {
@@ -57,7 +55,6 @@ public class Method extends Member implements HasJsNameInfo {
     this.parameters.addAll(checkNotNull(parameters));
     this.isAbstract = isAbstract;
     this.isOverride = isOverride;
-    this.isFinal = isFinal;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
     this.isBridge = isBridge;
@@ -119,11 +116,7 @@ public class Method extends Member implements HasJsNameInfo {
   }
 
   public boolean isFinal() {
-    return this.isFinal;
-  }
-
-  public void setFinal(boolean isFinal) {
-    this.isFinal = isFinal;
+    return getDescriptor().isFinal();
   }
 
   @Override
@@ -178,7 +171,6 @@ public class Method extends Member implements HasJsNameInfo {
     private List<Statement> statements = new ArrayList<>();
     private boolean isAbstract;
     private boolean isBridge;
-    private boolean isFinal;
     private boolean isOverride;
     private boolean isSynthetic;
     private String jsDocDescription;
@@ -194,7 +186,6 @@ public class Method extends Member implements HasJsNameInfo {
       builder.isAbstract = method.isAbstract();
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
-      builder.isFinal = method.isFinal();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
       builder.isBridge = method.isBridge;
@@ -270,11 +261,6 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsFinal(boolean isFinal) {
-      this.isFinal = isFinal;
-      return this;
-    }
-
     public Builder setIsAbstract(boolean isAbstract) {
       this.isAbstract = isAbstract;
       return this;
@@ -323,7 +309,6 @@ public class Method extends Member implements HasJsNameInfo {
               body,
               isAbstract,
               isOverride,
-              isFinal,
               isBridge,
               isSynthetic,
               jsDocDescription);

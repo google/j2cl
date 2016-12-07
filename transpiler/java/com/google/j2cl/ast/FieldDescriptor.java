@@ -28,21 +28,7 @@ import javax.annotation.Nullable;
 @Visitable
 public abstract class FieldDescriptor extends MemberDescriptor {
 
-  @Override
-  public abstract boolean isStatic();
-
-  public abstract Visibility getVisibility();
-
-  @Override
-  public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
-
-  @Override
-  public abstract String getName();
-
   public abstract TypeDescriptor getTypeDescriptor();
-
-  @Override
-  public abstract JsInfo getJsInfo();
 
   public abstract boolean isCompileTimeConstant();
 
@@ -114,6 +100,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setJsInfo(JsInfo.NONE)
         .setCompileTimeConstant(false)
         .setStatic(false)
+        .setFinal(false)
         .setVariableCapture(false)
         .setEnclosingInstanceCapture(false);
   }
@@ -135,6 +122,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setCompileTimeConstant(boolean compileTimeConstant);
 
     public abstract Builder setStatic(boolean isStatic);
+
+    public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setVariableCapture(boolean isVariableCapture);
 

@@ -403,7 +403,6 @@ public class CompilationUnitBuilder {
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
               .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setIsFinal(JdtUtils.isFinal(methodBinding))
               .setSourcePosition(getSourcePosition(node));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));

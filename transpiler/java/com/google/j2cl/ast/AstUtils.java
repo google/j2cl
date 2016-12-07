@@ -239,6 +239,7 @@ public class AstUtils {
         .setVariableCapture(true)
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setStatic(false)
+        .setFinal(true)
         .setJsInfo(JsInfo.RAW_FIELD)
         .build();
   }
@@ -249,6 +250,7 @@ public class AstUtils {
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
         .setName(ENCLOSING_INSTANCE_NAME)
+        .setFinal(true)
         .setEnclosingInstanceCapture(true)
         .setTypeDescriptor(fieldTypeDescriptor)
         .build();
@@ -627,11 +629,6 @@ public class AstUtils {
     Expression qualifier = memberReference.getQualifier();
     return qualifier instanceof ThisReference
         && memberReference.getTarget().isMemberOf(qualifier.getTypeDescriptor());
-  }
-
-  /** Returns true if the qualifier of the given member reference is a Type reference. */
-  public static boolean hasTypeReferenceAsQualifier(MemberReference memberReference) {
-    return memberReference.getQualifier() instanceof TypeReference;
   }
 
   public static Expression joinExpressionsWithBinaryOperator(

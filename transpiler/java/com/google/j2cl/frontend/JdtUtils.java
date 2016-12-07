@@ -114,6 +114,7 @@ public class JdtUtils {
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
+    boolean isFinal = JdtUtils.isFinal(variableBinding);
     return FieldDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setName(fieldName)
@@ -121,6 +122,7 @@ public class JdtUtils {
         .setStatic(isStatic)
         .setVisibility(visibility)
         .setJsInfo(jsInfo)
+        .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationFieldDescriptor(declarationFieldDescriptor)
         .build();
@@ -513,7 +515,6 @@ public class JdtUtils {
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(true)
-        .setIsFinal(true)
         .build();
   }
 
@@ -927,6 +928,7 @@ public class JdtUtils {
         .setStatic(isStatic)
         .setConstructor(isConstructor)
         .setNative(isNative)
+        .setFinal(JdtUtils.isFinal(methodBinding))
         .setDefault(Modifier.isDefault(methodBinding.getModifiers()))
         .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))

@@ -247,18 +247,22 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * If the expression is a field access with a non-this qualifier, it needs to be split to avoid
-   * double side-effect. Otherwise, it is a simple case.
+   * Returns true if the expression can be evaluated more than once in succession, assuming no
+   * operations with side effects happen in between.
+   *
+   * <p>This is used to determine if it is safe to expand code like q.a += b into q.a = q.a + b
+   * without needing to introduce a new variable to hold for the qualifier or the expression q.a.
    */
   private static boolean canExpressionBeEvaluatedTwice(Expression expression) {
-    if (expression instanceof VariableReference) {
+    if (expression instanceof ThisReference
+        || expression instanceof TypeReference
+        || expression instanceof VariableReference) {
       return true;
     }
 
     if (expression instanceof FieldAccess) {
       FieldAccess fieldAccess = (FieldAccess) expression;
-      return AstUtils.hasTypeReferenceAsQualifier(fieldAccess)
-          || AstUtils.hasThisReferenceAsQualifier(fieldAccess);
+      return canExpressionBeEvaluatedTwice(fieldAccess.getQualifier());
     }
 
     // For array access expressions.

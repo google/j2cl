@@ -395,7 +395,7 @@ public class NormalizeConstructors extends NormalizationPass {
     if (enclosingType.isJsConstructorClassOrSubclass()) {
       // No need for a factory method if we are calling a @JsConstructor
       if (constructor == AstUtils.getPrimaryConstructor(type)) {
-        return originalContructorBodyMethod(constructor);
+        return originalConstructorBodyMethod(constructor);
       }
       MethodCall constructorInvocation =
           checkNotNull(
@@ -461,16 +461,13 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
-        .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")
         .setSourcePosition(constructor.getSourcePosition())
         .build();
   }
 
-  /**
-   * We can assume here that method is the primary constructor.
-   */
-  private static Method originalContructorBodyMethod(Method primaryConstructor) {
+  /** We can assume here that method is the primary constructor. */
+  private static Method originalConstructorBodyMethod(Method primaryConstructor) {
     TypeDescriptor enclosingType =
         primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor();
 
@@ -513,7 +510,6 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(returnStatement)
-        .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")
         .setSourcePosition(primaryConstructor.getSourcePosition())
         .build();

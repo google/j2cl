@@ -46,21 +46,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
 
-  @Override
-  public abstract boolean isStatic();
-
-  public abstract Visibility getVisibility();
-
-  @Override
-  public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
-
-  @Override
-  public abstract String getName();
-
   public abstract boolean isConstructor();
-
-  @Override
-  public abstract boolean isNative();
 
   public abstract boolean isVarargs();
 
@@ -74,9 +60,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * Type parameters declared in the method.
    */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
-
-  @Override
-  public abstract JsInfo getJsInfo();
 
   public boolean isInit() {
     return getName().equals(INIT_METHOD_NAME) && !isStatic();
@@ -169,6 +152,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setNative(false)
         .setStatic(false)
         .setVarargs(false)
+        .setFinal(false)
         .setParameterTypeDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -208,6 +192,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setConstructor(boolean isConstructor);
 
     public abstract Builder setAbstract(boolean isAbstract);
+
+    public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setEnclosingClassTypeDescriptor(
         TypeDescriptor enclosingClassTypeDescriptor);
