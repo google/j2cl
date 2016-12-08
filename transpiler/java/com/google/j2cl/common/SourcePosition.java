@@ -79,4 +79,9 @@ public class SourcePosition implements Comparable<SourcePosition> {
     }
     return startPosition.getLine() - o.startPosition.getLine();
   }
+
+  @Override
+  public String toString() {
+    return "(" + startPosition.getLine() + "," + startPosition.getColumn() + ")";
+  }
 }

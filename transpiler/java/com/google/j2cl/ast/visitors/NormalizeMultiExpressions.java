@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
@@ -23,9 +24,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.UnaryExpression;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           flattenedExpressions.add(expression);
         }
       }
-      return new MultiExpression(flattenedExpressions);
+      return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
     }
   }
 
@@ -64,10 +63,13 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         Expression rightMostLhsExpression = Iterables.getLast(lhsExpressions);
         Expression innerExpression =
             BinaryExpression.Builder.from(expression).setLeftOperand(rightMostLhsExpression).build();
-        return new MultiExpression(
-            Iterables.concat(
-                lhsExpressions.subList(0, lhsExpressions.size() - 1),
-                Collections.singletonList(innerExpression)));
+        return MultiExpression.newBuilder()
+            .setExpressions(
+                ImmutableList.<Expression>builder()
+                    .addAll(lhsExpressions.subList(0, lhsExpressions.size() - 1))
+                    .add(innerExpression)
+                    .build())
+            .build();
       }
       return expression;
     }
@@ -80,10 +82,13 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         Expression rightMostExpression = Iterables.getLast(expressions);
         Expression innerExpression =
             UnaryExpression.Builder.from(expression).setOperand(rightMostExpression).build();
-        return new MultiExpression(
-            Iterables.concat(
-                expressions.subList(0, expressions.size() - 1),
-                Collections.singletonList(innerExpression)));
+        return MultiExpression.newBuilder()
+            .setExpressions(
+                ImmutableList.<Expression>builder()
+                    .addAll(expressions.subList(0, expressions.size() - 1))
+                    .add(innerExpression)
+                    .build())
+            .build();
       }
       return expression;
     }

@@ -588,7 +588,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         Field field = (Field) member;
         if (field.hasInitializer() && !field.isCompileTimeConstant()) {
           sourceBuilder.newLine();
-          FilePosition startPostion = sourceBuilder.getCurrentPosition();
+          FilePosition startPosition = sourceBuilder.getCurrentPosition();
           boolean isInstanceField = !field.getDescriptor().isStatic();
           String fieldName =
               ManglingNameUtils.getMangledName(field.getDescriptor(), !isInstanceField);
@@ -597,7 +597,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           sourceBuilder.append(";");
           sourceBuilder.addMapping(
               field.getSourcePosition(),
-              new SourcePosition(startPostion, sourceBuilder.getCurrentPosition()));
+              new SourcePosition(startPosition, sourceBuilder.getCurrentPosition()));
         }
       } else if (member instanceof InitializerBlock) {
         InitializerBlock block = (InitializerBlock) member;

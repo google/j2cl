@@ -20,9 +20,9 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.OperatorSideEffectUtils;
 import java.util.List;
 
 /**
@@ -61,13 +61,16 @@ public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
       }
       // Only target return values that are FieldAccesses since we know they are side effect free
       // and we know that we generate this case.
-      // TODO: This is not technically correct as field accesses could trigger getters.
-      if (!(Iterables.getLast(expressions) instanceof FieldAccess)) {
+      // TODO: This is not technically correct as field accesses could trigger clinits.
+      if (!OperatorSideEffectUtils.canExpressionBeEvaluatedTwice(Iterables.getLast(expressions))) {
         return expressionStatement;
       }
 
       // Return a replacement with the unused return value expression trimmed off.
-      return new MultiExpression(expressions.subList(0, expressions.size() - 1)).makeStatement();
+      return MultiExpression.newBuilder()
+          .setExpressions(expressions.subList(0, expressions.size() - 1))
+          .build()
+          .makeStatement();
     }
   }
 }

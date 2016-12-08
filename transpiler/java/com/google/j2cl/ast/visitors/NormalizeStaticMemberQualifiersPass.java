@@ -19,6 +19,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MultiExpression;
@@ -60,11 +61,13 @@ public class NormalizeStaticMemberQualifiersPass extends NormalizationPass {
       // If the access is of the very strange form "instance.staticField" then remove the qualifier
       // so that it is logically a "SomeClass.staticField".
       if (isStaticMemberReferenceWithInstanceQualifier(fieldAccess)) {
-        return new MultiExpression(
-            fieldAccess.getQualifier(), // Preserve side effects.
-            FieldAccess.Builder.from(fieldAccess.getTarget())
-                .setQualifier(null) // Static dispatch.
-                .build());
+        return MultiExpression.newBuilder()
+            .setExpressions(
+                fieldAccess.getQualifier(), // Preserve side effects.
+                Builder.from(fieldAccess.getTarget())
+                    .setQualifier(null) // Static dispatch.
+                    .build())
+            .build();
       }
       return fieldAccess;
     }
@@ -74,10 +77,13 @@ public class NormalizeStaticMemberQualifiersPass extends NormalizationPass {
       // If the access is of the very strange form "instance.staticMethod()" then remove the
       // qualifier so that it is logically a "SomeClass.staticMethod()".
       if (isStaticMemberReferenceWithInstanceQualifier(methodCall)) {
-        return new MultiExpression(
-            methodCall.getQualifier(), // Preserve side effects.
-            MethodCall.Builder.from(methodCall).setQualifier(null).build() // Static dispatch
-            );
+        return MultiExpression.newBuilder()
+            .setExpressions(
+                methodCall.getQualifier(), // Preserve side effects.
+                MethodCall.Builder.from(methodCall)
+                    .setQualifier(null) // Static dispatch.
+                    .build())
+            .build();
       }
       return methodCall;
     }

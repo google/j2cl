@@ -304,12 +304,11 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
-        if (methodCall.isStaticDispatch()) {
-          print(
-              methodCall.getTarget().getEnclosingClassTypeDescriptor().getSimpleSourceName() + ".");
+        if (methodCall.getQualifier() != null) {
+          accept(methodCall.qualifier);
+          print(".");
         }
-        accept(methodCall.qualifier);
-        printInvocation(methodCall, "." + methodCall.getTarget().getName());
+        printInvocation(methodCall);
         return false;
       }
 
@@ -351,8 +350,12 @@ class ToStringRenderer {
 
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
+        if (newInstance.getQualifier() != null) {
+          accept(newInstance.qualifier);
+          print(".");
+        }
         print("new ");
-        printInvocation(newInstance, newInstance.getTarget().getName());
+        printInvocation(newInstance);
         return false;
       }
 
@@ -465,7 +468,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterThisReference(ThisReference thisReference) {
-        print("this");
+        print(thisReference.getTypeDescriptor().getSimpleSourceName() + ".this");
         return false;
       }
 
@@ -616,8 +619,12 @@ class ToStringRenderer {
         }
       }
 
-      private void printInvocation(Invocation invocation, String methodName) {
-        print(methodName);
+      private void printInvocation(Invocation invocation) {
+        MethodDescriptor target = invocation.getTarget();
+        if (target.isConstructor()) {
+          print(target.getEnclosingClassTypeDescriptor().getSimpleSourceName() + ".");
+        }
+        print(target.getName());
         print("(");
         printSeparated(",", invocation.getArguments());
         print(")");

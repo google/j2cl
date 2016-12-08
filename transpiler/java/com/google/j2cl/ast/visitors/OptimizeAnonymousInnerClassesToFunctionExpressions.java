@@ -146,10 +146,11 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
       final Type type, final Set<Variable> enclosingCaptures) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     FunctionExpression lambdaMethodImplementaion =
-        new FunctionExpression(
-            type.getSuperInterfaceTypeDescriptors().get(0),
-            jsFunctionMethodImplementation.getParameters(),
-            jsFunctionMethodImplementation.getBody().getStatements());
+        FunctionExpression.newBuilder()
+            .setTypeDescriptor(type.getSuperInterfaceTypeDescriptors().get(0))
+            .setParameters(jsFunctionMethodImplementation.getParameters())
+            .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
+            .build();
 
     final Map<FieldDescriptor, Variable> capturesByFieldDescriptor = new HashMap<>();
     for (Field field : type.getFields()) {

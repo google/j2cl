@@ -70,7 +70,7 @@ public class OperatorSideEffectUtils {
     BinaryExpression assignment =
         expandExpressionWithQualifier(
             leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
-    return new MultiExpression(assignQualifier, assignment);
+    return MultiExpression.newBuilder().setExpressions(assignQualifier, assignment).build();
   }
 
   public static Expression splitPostfixExpression(PostfixExpression postfixExpression) {
@@ -95,10 +95,12 @@ public class OperatorSideEffectUtils {
               operand.clone(),
               operator.getUnderlyingBinaryOperator(),
               createLiteralOne(typeDescriptor));
-      return new MultiExpression(
-          assignVar,
-          assignment,
-          createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()));
+      return MultiExpression.newBuilder()
+          .setExpressions(
+              assignVar,
+              assignment,
+              createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()))
+          .build();
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
@@ -134,11 +136,13 @@ public class OperatorSideEffectUtils {
     BinaryExpression assignment =
         expandExpressionWithQualifier(
             operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
-    return new MultiExpression(
-        assignQualifier,
-        assignVar,
-        assignment,
-        createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()));
+    return MultiExpression.newBuilder()
+        .setExpressions(
+            assignQualifier,
+            assignVar,
+            assignment,
+            createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()))
+        .build();
   }
 
   public static Expression splitPrefixExpression(PrefixExpression prefixExpression) {
@@ -172,7 +176,7 @@ public class OperatorSideEffectUtils {
     Expression assignment =
         expandExpressionWithQualifier(
             operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
-    return new MultiExpression(assignQualifier, assignment);
+    return MultiExpression.newBuilder().setExpressions(assignQualifier, assignment).build();
   }
 
   /** Returns number literal with value 1. */
@@ -253,7 +257,7 @@ public class OperatorSideEffectUtils {
    * <p>This is used to determine if it is safe to expand code like q.a += b into q.a = q.a + b
    * without needing to introduce a new variable to hold for the qualifier or the expression q.a.
    */
-  private static boolean canExpressionBeEvaluatedTwice(Expression expression) {
+  public static boolean canExpressionBeEvaluatedTwice(Expression expression) {
     if (expression instanceof ThisReference
         || expression instanceof TypeReference
         || expression instanceof VariableReference) {

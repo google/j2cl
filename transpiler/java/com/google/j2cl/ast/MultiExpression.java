@@ -16,9 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,15 +29,11 @@ import java.util.List;
  */
 @Visitable
 public class MultiExpression extends Expression {
-  @Visitable List<Expression> expressions = new ArrayList<>();
+  @Visitable List<Expression> expressions;
 
-  public MultiExpression(Expression... expressions) {
-    this(Arrays.asList(expressions));
-  }
-
-  public MultiExpression(Iterable<Expression> expressions) {
-    Iterables.addAll(this.expressions, checkNotNull(expressions));
-    checkArgument(!Iterables.isEmpty(expressions));
+  private MultiExpression(List<Expression> expressions) {
+    checkArgument(!expressions.isEmpty());
+    this.expressions = expressions;
   }
 
   public List<Expression> getExpressions() {
@@ -53,11 +47,39 @@ public class MultiExpression extends Expression {
 
   @Override
   public MultiExpression clone() {
-    return new MultiExpression(AstUtils.clone(expressions));
+    return MultiExpression.newBuilder().setExpressions(AstUtils.clone(expressions)).build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_MultiExpression.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for MultiExpression. */
+  public static class Builder {
+    private List<Expression> expressions = new ArrayList<>();
+
+    public static Builder from(MultiExpression multiExpression) {
+      Builder builder = new Builder();
+      builder.expressions = new ArrayList<>(multiExpression.getExpressions());
+      return builder;
+    }
+
+    public Builder setExpressions(Expression... expressions) {
+      return setExpressions(Arrays.asList(expressions));
+    }
+
+    public Builder setExpressions(List<Expression> expressions) {
+      this.expressions = new ArrayList<>(expressions);
+      return this;
+    }
+
+    public MultiExpression build() {
+      return new MultiExpression(expressions);
+    }
   }
 }

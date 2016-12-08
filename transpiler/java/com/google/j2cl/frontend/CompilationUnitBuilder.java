@@ -595,94 +595,65 @@ public class CompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
-      Expression j2clExpression;
       switch (expression.getNodeType()) {
         case ASTNode.ARRAY_ACCESS:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ArrayAccess) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ArrayAccess) expression);
         case ASTNode.ARRAY_CREATION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ArrayCreation) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ArrayCreation) expression);
         case ASTNode.ARRAY_INITIALIZER:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ArrayInitializer) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ArrayInitializer) expression);
         case ASTNode.ASSIGNMENT:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.Assignment) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.Assignment) expression);
         case ASTNode.BOOLEAN_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.BooleanLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.BooleanLiteral) expression);
         case ASTNode.CAST_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.CastExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.CastExpression) expression);
         case ASTNode.CHARACTER_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.CharacterLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.CharacterLiteral) expression);
         case ASTNode.CLASS_INSTANCE_CREATION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) expression);
         case ASTNode.CONDITIONAL_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
         case ASTNode.EXPRESSION_METHOD_REFERENCE:
         case ASTNode.TYPE_METHOD_REFERENCE:
         case ASTNode.SUPER_METHOD_REFERENCE:
         case ASTNode.CREATION_REFERENCE:
           // TODO(stalcup): Implement method references properly
-          j2clExpression = NullLiteral.NULL;
-          break;
+          return NullLiteral.NULL;
         case ASTNode.FIELD_ACCESS:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
         case ASTNode.INFIX_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
         case ASTNode.INSTANCEOF_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
         case ASTNode.LAMBDA_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.LambdaExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.LambdaExpression) expression);
         case ASTNode.METHOD_INVOCATION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.NullLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.NullLiteral) expression);
         case ASTNode.NUMBER_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
         case ASTNode.PARENTHESIZED_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) expression);
         case ASTNode.POSTFIX_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.PostfixExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.PostfixExpression) expression);
         case ASTNode.PREFIX_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.PrefixExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.PrefixExpression) expression);
         case ASTNode.QUALIFIED_NAME:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.QualifiedName) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.QualifiedName) expression);
         case ASTNode.SIMPLE_NAME:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.SimpleName) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.SimpleName) expression);
         case ASTNode.STRING_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
         case ASTNode.SUPER_METHOD_INVOCATION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
         case ASTNode.THIS_EXPRESSION:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
         case ASTNode.TYPE_LITERAL:
-          j2clExpression = convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
-          j2clExpression =
-              convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
-          break;
+          return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: "
@@ -690,7 +661,6 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
-      return j2clExpression;
     }
 
     private VariableDeclarationExpression convert(
@@ -1026,8 +996,11 @@ public class CompilationUnitBuilder {
       TypeDescriptor returnTypeDescriptor =
           JdtUtils.createTypeDescriptor(expression.resolveMethodBinding().getReturnType());
       Block body = convertLambdaBody(expression.getBody(), returnTypeDescriptor);
-      return new FunctionExpression(
-          JdtUtils.createTypeDescriptor(lambdaTypeBinding), parameters, body.getStatements());
+      return FunctionExpression.newBuilder()
+          .setTypeDescriptor(JdtUtils.createTypeDescriptor(lambdaTypeBinding))
+          .setParameters(parameters)
+          .setStatements(body.getStatements())
+          .build();
     }
 
     // Lambda expression bodies can be either an Expression or a Statement
@@ -1233,8 +1206,7 @@ public class CompilationUnitBuilder {
 
       // generate parameters type descriptors.
       List<TypeDescriptor> parameterTypeDescriptors =
-          Lists.transform(
-              Arrays.asList(methodBinding.getParameterTypes()), JdtUtils::createTypeDescriptor);
+          JdtUtils.createTypeDescriptors(methodBinding.getParameterTypes());
 
       MethodDescriptor methodDescriptor =
           MethodDescriptor.newBuilder()
@@ -1506,7 +1478,9 @@ public class CompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
       // Preserve the parenthesis. J2CL does not yet handle properly parenthesizing the output
       // according to operator precedence.
-      return new MultiExpression(convert(expression.getExpression()));
+      return MultiExpression.newBuilder()
+          .setExpressions(convert(expression.getExpression()))
+          .build();
     }
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {

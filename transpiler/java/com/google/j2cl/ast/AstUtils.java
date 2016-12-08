@@ -440,7 +440,9 @@ public class AstUtils {
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     expression =
-        isValidMethodCallQualifier(expression) ? expression : new MultiExpression(expression);
+        isValidMethodCallQualifier(expression)
+            ? expression
+            : MultiExpression.newBuilder().setExpressions(expression).build();
 
     MethodCall methodCall =
         MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();

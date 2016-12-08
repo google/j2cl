@@ -56,7 +56,8 @@ public class FixBooleanOperators extends NormalizationPass {
               .setOperand(
                   PrefixExpression.newBuilder()
                       .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-                      .setOperand(new MultiExpression(binaryExpression))
+                      .setOperand(
+                          MultiExpression.newBuilder().setExpressions(binaryExpression).build())
                       .setOperator(PrefixOperator.NOT)
                       .build())
               .setOperator(PrefixOperator.NOT)

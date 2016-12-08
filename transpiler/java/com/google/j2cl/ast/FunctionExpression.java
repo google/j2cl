@@ -15,8 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,32 +31,6 @@ public class FunctionExpression extends Expression {
   @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
 
-  @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
-  }
-
-  @Override
-  public FunctionExpression clone() {
-    List<Variable> clonedParameters = AstUtils.clone(parameters);
-    Block clonedBody = AstUtils.replaceVariables(parameters, clonedParameters, body.clone());
-
-    return new FunctionExpression(typeDescriptor, clonedParameters, clonedBody);
-  }
-
-  public List<Variable> getParameters() {
-    return parameters;
-  }
-
-  public Statement getBody() {
-    return body;
-  }
-
-  public FunctionExpression(
-      TypeDescriptor typeDescriptor, List<Variable> parameters, List<Statement> statements) {
-    this(typeDescriptor, Lists.newArrayList(parameters), new Block(statements));
-  }
-
   private FunctionExpression(TypeDescriptor typeDescriptor, List<Variable> parameters, Block body) {
     this.parameters = parameters;
     this.body = body;
@@ -63,7 +38,78 @@ public class FunctionExpression extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
+  }
+
+  public List<Variable> getParameters() {
+    return parameters;
+  }
+
+  public Block getBody() {
+    return body;
+  }
+
+  @Override
+  public FunctionExpression clone() {
+    List<Variable> clonedParameters = AstUtils.clone(parameters);
+    Block clonedBody = AstUtils.replaceVariables(parameters, clonedParameters, body.clone());
+
+    return FunctionExpression.newBuilder()
+        .setTypeDescriptor(typeDescriptor)
+        .setParameters(clonedParameters)
+        .setStatements(clonedBody.getStatements())
+        .build();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_FunctionExpression.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for FunctionExpression. */
+  public static class Builder {
+    private List<Variable> parameters = new ArrayList<>();
+    private List<Statement> statements;
+    private TypeDescriptor typeDescriptor;
+
+    public static Builder from(FunctionExpression expression) {
+      return new Builder()
+          .setTypeDescriptor(expression.getTypeDescriptor())
+          .setParameters(expression.getParameters())
+          .setStatements(expression.getBody().getStatements());
+    }
+
+    public Builder setStatements(List<Statement> statements) {
+      this.statements = new ArrayList<>(statements);
+      return this;
+    }
+
+    public Builder setStatements(Statement... statements) {
+      this.statements = Arrays.asList(statements);
+      return this;
+    }
+
+    public Builder setParameters(Variable... parameters) {
+      return setParameters(Arrays.asList(parameters));
+    }
+
+    public Builder setParameters(List<Variable> parameters) {
+      this.parameters = parameters;
+      return this;
+    }
+
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public FunctionExpression build() {
+      return new FunctionExpression(typeDescriptor, parameters, new Block(statements));
+    }
   }
 }
