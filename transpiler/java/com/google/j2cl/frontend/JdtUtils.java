@@ -16,7 +16,6 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
@@ -31,17 +30,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -458,7 +452,7 @@ public class JdtUtils {
     return getMethodSignature(leftMethod).equals(getMethodSignature(rightMethod));
   }
 
-  static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
+  static IMethodBinding findFunctionalMethodBinding(ITypeBinding typeBinding) {
     // TODO: there maybe an issue in which case it inherits a default method from an interface
     // and inherits an abstract method with the same signature from another interface. Add an
     // example to address the potential issue.
@@ -469,53 +463,12 @@ public class JdtUtils {
       }
     }
     for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-      IMethodBinding samMethodFromSuperInterface = findSamMethodBinding(superInterface);
-      if (samMethodFromSuperInterface != null) {
-        return samMethodFromSuperInterface;
+      IMethodBinding functionalMethodBinding = findFunctionalMethodBinding(superInterface);
+      if (functionalMethodBinding != null) {
+        return functionalMethodBinding;
       }
     }
     return null;
-  }
-
-  static Method createSamMethod(
-      TypeDescriptor lambdaTypeDescriptor,
-      ITypeBinding lambdaInterfaceBinding,
-      MethodDescriptor lambdaMethodDescriptor) {
-
-    MethodDescriptor samMethodDescriptor =
-        createMethodDescriptor(checkNotNull(findSamMethodBinding(lambdaInterfaceBinding)));
-    MethodDescriptor samImplementationMethodDescriptor =
-        MethodDescriptor.Builder.from(samMethodDescriptor)
-            .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
-            .setNative(false)
-            .build();
-    List<Variable> parameters = new ArrayList<>();
-    List<Expression> arguments = new ArrayList<>();
-    List<TypeDescriptor> parameterTypes = lambdaMethodDescriptor.getParameterTypeDescriptors();
-    for (int i = 0; i < parameterTypes.size(); i++) {
-      Variable parameter =
-          Variable.newBuilder()
-              .setName("arg" + i)
-              .setTypeDescriptor(parameterTypes.get(i))
-              .setIsParameter(true)
-              .build();
-      parameters.add(parameter);
-      arguments.add(parameter.getReference());
-    }
-    Expression callLambda =
-        MethodCall.Builder.from(lambdaMethodDescriptor).setArguments(arguments).build();
-    Statement statement =
-        TypeDescriptors.isPrimitiveVoid(lambdaMethodDescriptor.getReturnTypeDescriptor())
-            ? callLambda.makeStatement()
-            : new ReturnStatement(
-                callLambda, samImplementationMethodDescriptor.getReturnTypeDescriptor());
-
-    return Method.newBuilder()
-        .setMethodDescriptor(samImplementationMethodDescriptor)
-        .setParameters(parameters)
-        .addStatements(statement)
-        .setIsOverride(true)
-        .build();
   }
 
   /**

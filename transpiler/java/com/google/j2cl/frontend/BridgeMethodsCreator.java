@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -31,13 +32,11 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -368,11 +367,9 @@ public class BridgeMethodsCreator {
             .setQualifier(qualifier)
             .setArguments(arguments)
             .build();
+    TypeDescriptor returnTypeDescriptor = bridgeMethodDescriptor.getReturnTypeDescriptor();
     Statement statement =
-        TypeDescriptors.isPrimitiveVoid(bridgeMethodDescriptor.getReturnTypeDescriptor())
-            ? dispatchMethodCall.makeStatement()
-            : new ReturnStatement(
-                dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
+        AstUtils.createReturnOrExpressionStatement(dispatchMethodCall, returnTypeDescriptor);
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
@@ -383,4 +380,5 @@ public class BridgeMethodsCreator {
         .setJsDocDescription("Bridge method.")
         .build();
   }
+
 }

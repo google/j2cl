@@ -311,19 +311,49 @@ public class AstUtils {
       boolean isStaticDispatch,
       boolean isOverride) {
     checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
+
+    List<Variable> parameters =
+        createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());
+
+    Statement statement =
+        createForwardingStatement(
+            qualifier,
+            toMethodDescriptor,
+            isStaticDispatch,
+            parameters,
+            fromMethodDescriptor.getReturnTypeDescriptor());
+    return Method.newBuilder()
+        .setMethodDescriptor(fromMethodDescriptor)
+        .setParameters(parameters)
+        .addStatements(statement)
+        .setIsOverride(isOverride)
+        .setIsSynthetic(true)
+        .setJsDocDescription(jsDocDescription)
+        .build();
+  }
+
+  private static List<Variable> createParameterVariables(List<TypeDescriptor> parameterTypes) {
     List<Variable> parameters = new ArrayList<>();
-    List<Expression> arguments = new ArrayList<>();
-    List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
-      Variable parameter =
+      parameters.add(
           Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(parameterTypes.get(i))
               .setIsParameter(true)
-              .build();
-      parameters.add(parameter);
-      arguments.add(parameter.getReference());
+              .build());
     }
+    return parameters;
+  }
+
+  private static Statement createForwardingStatement(
+      Expression qualifier,
+      MethodDescriptor toMethodDescriptor,
+      boolean isStaticDispatch,
+      List<Variable> parameters,
+      TypeDescriptor returnTypeDescriptor) {
+
+    List<Expression> arguments =
+        parameters.stream().map(Variable::getReference).collect(toImmutableList());
 
     // TODO: Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
@@ -334,34 +364,7 @@ public class AstUtils {
             .setIsStaticDispatch(isStaticDispatch)
             .build();
 
-    TypeDescriptor bridgeReturnType = fromMethodDescriptor.getReturnTypeDescriptor();
-    TypeDescriptor forwardedReturnType =
-        toMethodDescriptor.getDeclarationMethodDescriptor().getReturnTypeDescriptor();
-    boolean isVoidReturn =
-        TypeDescriptors.isPrimitiveVoid(fromMethodDescriptor.getReturnTypeDescriptor());
-    boolean needsAnnotation =
-        !isVoidReturn && !AstUtils.canRemoveCast(forwardedReturnType, bridgeReturnType);
-    // TODO(rluble): it seems to me this needs an actual cast not just a type annotation.
-    forwardingMethodCall =
-        needsAnnotation
-            ? JsDocAnnotatedExpression.newBuilder()
-                .setExpression(forwardingMethodCall)
-                .setAnnotationType(bridgeReturnType)
-                .build()
-            : forwardingMethodCall;
-    Statement statement =
-        isVoidReturn
-            ? forwardingMethodCall.makeStatement()
-            : new ReturnStatement(
-                forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
-    return Method.newBuilder()
-        .setMethodDescriptor(fromMethodDescriptor)
-        .setParameters(parameters)
-        .addStatements(statement)
-        .setIsOverride(isOverride)
-        .setIsSynthetic(true)
-        .setJsDocDescription(jsDocDescription)
-        .build();
+    return createReturnOrExpressionStatement(forwardingMethodCall, returnTypeDescriptor);
   }
 
   /**
@@ -1211,5 +1214,16 @@ public class AstUtils {
                 .build()
                 .makeStatement())
         .build();
+  }
+
+  /**
+   * Create a return statement if the return type is not void; otherwise create an expression
+   * statement
+   */
+  public static Statement createReturnOrExpressionStatement(
+      Expression expression, TypeDescriptor methodReturnTypeDescriptor) {
+    return TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)
+        ? expression.makeStatement()
+        : new ReturnStatement(expression, methodReturnTypeDescriptor);
   }
 }

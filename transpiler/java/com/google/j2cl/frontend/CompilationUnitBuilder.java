@@ -1012,9 +1012,7 @@ public class CompilationUnitBuilder {
         checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
-            TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)
-                ? lambdaMethodBody.makeStatement()
-                : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
+            AstUtils.createReturnOrExpressionStatement(lambdaMethodBody, returnTypeDescriptor);
         statement.setSourcePosition(getSourcePosition(lambdaBody));
         body = new Block(statement);
       }
@@ -1060,18 +1058,21 @@ public class CompilationUnitBuilder {
       lambdaType.setSourcePosition(getSourcePosition(expression));
       pushType(lambdaType);
 
-      // Construct lambda method and add it to lambda inner class.
-      String lambdaMethodBinaryName = "lambda" + lambdaTypeDescriptor.getSimpleSourceName();
-      Method lambdaMethod =
-          createLambdaMethod(lambdaMethodBinaryName, expression, lambdaType.getDescriptor());
-      lambdaType.addMethod(lambdaMethod);
+      // Construct and add the lambda dynamic dispatch method that delegates to the lambda
+      // implementation method.
+      MethodDescriptor lambdaDispatchMethodDescriptor =
+          Builder.from(
+                  JdtUtils.createMethodDescriptor(
+                      checkNotNull(
+                          JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding))))
+              .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
+              .build();
 
-      // Construct and add SAM method that delegates to the lambda method.
-      Method samMethod =
-          JdtUtils.createSamMethod(
-              lambdaTypeDescriptor, functionalInterfaceTypeBinding, lambdaMethod.getDescriptor());
-      samMethod.setSourcePosition(getSourcePosition(expression));
-      lambdaType.addMethod(samMethod);
+      // Construct lambda method and add it to lambda inner class.
+      Method lambdaMethod =
+          createLambdaImplementationMethod(lambdaDispatchMethodDescriptor, expression);
+      lambdaMethod.setSourcePosition(getSourcePosition(expression));
+      lambdaType.addMethod(lambdaMethod);
 
       // Add fields for captured local variables.
       for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
@@ -1189,39 +1190,28 @@ public class CompilationUnitBuilder {
           });
     }
 
-    private Method createLambdaMethod(
-        String methodName,
-        org.eclipse.jdt.core.dom.LambdaExpression expression,
-        TypeDescriptor enclosingClassTypeDescriptor) {
-      List<Variable> parameters = new ArrayList<>();
-      for (Object parameter : expression.parameters()) {
-        parameters.add(convert((VariableDeclaration) parameter));
-      }
+    private Method createLambdaImplementationMethod(
+        MethodDescriptor lambdaDispatchMethodDescriptor,
+        org.eclipse.jdt.core.dom.LambdaExpression expression) {
+
+      List<Variable> parameters =
+          JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())
+              .stream()
+              .map(this::convert)
+              .collect(toList());
 
       IMethodBinding methodBinding = expression.resolveMethodBinding();
       TypeDescriptor returnTypeDescriptor =
           JdtUtils.createTypeDescriptor(methodBinding.getReturnType());
 
       Block body = convertLambdaBody(expression.getBody(), returnTypeDescriptor);
-
-      // generate parameters type descriptors.
-      List<TypeDescriptor> parameterTypeDescriptors =
-          JdtUtils.createTypeDescriptors(methodBinding.getParameterTypes());
-
-      MethodDescriptor methodDescriptor =
-          MethodDescriptor.newBuilder()
-              .setJsInfo(JsInfo.RAW)
-              .setVisibility(Visibility.PRIVATE)
-              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-              .setName(methodName)
-              .setParameterTypeDescriptors(parameterTypeDescriptors)
-              .setReturnTypeDescriptor(returnTypeDescriptor)
-              .build();
       return Method.newBuilder()
-          .setMethodDescriptor(methodDescriptor)
+          .setMethodDescriptor(lambdaDispatchMethodDescriptor)
           .setParameters(parameters)
+          .setIsOverride(true)
           .addStatements(body.getStatements())
           .setSourcePosition(getSourcePosition(expression))
+          .setJsDocDescription("Lambda implementation method.")
           .build();
     }
 
@@ -1520,13 +1510,13 @@ public class CompilationUnitBuilder {
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
-      IMethodBinding currentMethodBinding =
-          checkNotNull(JdtUtils.findCurrentMethodBinding(statement));
+      // Grab the type of the return statement from the method declaration, not from the expression.
+      TypeDescriptor returnTypeDescriptor =
+          JdtUtils.createTypeDescriptor(
+              checkNotNull(JdtUtils.findCurrentMethodBinding(statement)).getReturnType());
+
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
-      TypeDescriptor returnTypeDescriptor =
-          JdtUtils.createTypeDescriptorWithNullability(
-              currentMethodBinding.getReturnType(), currentMethodBinding.getAnnotations());
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
