@@ -68,4 +68,10 @@ public class Main {
     List<T> collected = null;
     return collected.toArray(generator.apply(collected.size()));
   }
+
+  class SomeClass<T> {
+    public void testJsFunctionWithClassCapture() {
+      Function<Object, Object> f = object -> new ArrayList<T>();
+    }
+  }
 }

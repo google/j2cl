@@ -111,6 +111,23 @@ public class Main {
     return new SubMain().test(9);
   }
 
+  public void testIndirectCapture() {
+    int local = 3;
+    class ClassCapturingLocal {
+      int returnLocal() {
+        return local;
+      }
+    }
+
+    // TODO(b/33438153): uncomment the code that follows when captures are implemented properly.
+    // class ClassIndirectlyCapturingLocal {
+    //  int returnInderctCapture() {
+    //    return new ClassCapturingLocal().returnLocal();
+    //  }
+    // }
+    // assert new ClassIndirectlyCapturingLocal().returnInderctCapture() == 3;
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     assert m.testSimple(100) == 201;
@@ -118,5 +135,6 @@ public class Main {
     assert m.testClassWithSameName() == 30;
     assert m.testClassWithParent() == 140;
     assert m.testFunctionCallWithOverriding() == 99;
+    m.testIndirectCapture();
   }
 }
