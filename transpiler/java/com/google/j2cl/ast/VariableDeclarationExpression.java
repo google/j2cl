@@ -16,11 +16,9 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,15 +26,11 @@ import java.util.List;
  */
 @Visitable
 public class VariableDeclarationExpression extends Expression {
-  @Visitable List<VariableDeclarationFragment> fragments = new ArrayList<>();
+  @Visitable List<VariableDeclarationFragment> fragments;
 
-  public VariableDeclarationExpression(VariableDeclarationFragment... fragments) {
-    this(Arrays.asList(fragments));
-  }
-
-  public VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
-    this.fragments.addAll(checkNotNull(fragments));
+  private VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
     checkArgument(!fragments.isEmpty());
+    this.fragments = new ArrayList<>(fragments);
   }
 
   public List<VariableDeclarationFragment> getFragments() {
@@ -50,11 +44,41 @@ public class VariableDeclarationExpression extends Expression {
 
   @Override
   public VariableDeclarationExpression clone() {
-    return new VariableDeclarationExpression(AstUtils.clone(fragments));
+    return VariableDeclarationExpression.newBuilder()
+        .setVariableDeclarationFragments(AstUtils.clone(fragments))
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_VariableDeclarationExpression.visit(processor, this);
+  }
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for VariableDeclarationExpression. */
+  public static class Builder {
+    private List<VariableDeclarationFragment> fragments = new ArrayList<>();
+
+    public static Builder from(VariableDeclarationExpression variableDeclarationExpression) {
+      return newBuilder()
+          .setVariableDeclarationFragments(variableDeclarationExpression.getFragments());
+    }
+
+    public Builder setVariableDeclarationFragments(
+        List<VariableDeclarationFragment> variableDeclarationFragments) {
+      this.fragments = new ArrayList<>(variableDeclarationFragments);
+      return this;
+    }
+
+    public Builder addVariableDeclaration(Variable variable, Expression initializer) {
+      fragments.add(new VariableDeclarationFragment(variable, initializer));
+      return this;
+    }
+
+    public VariableDeclarationExpression build() {
+      return new VariableDeclarationExpression(fragments);
+    }
   }
 }

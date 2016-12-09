@@ -1224,6 +1224,9 @@ public class AstUtils {
       Expression expression, TypeDescriptor methodReturnTypeDescriptor) {
     return TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)
         ? expression.makeStatement()
-        : new ReturnStatement(expression, methodReturnTypeDescriptor);
+        : ReturnStatement.newBuilder()
+            .setExpression(expression)
+            .setTypeDescriptor(methodReturnTypeDescriptor)
+            .build();
   }
 }

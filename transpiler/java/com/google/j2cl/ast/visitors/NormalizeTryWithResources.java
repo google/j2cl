@@ -23,7 +23,6 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
@@ -38,6 +37,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -118,7 +118,6 @@ public class NormalizeTryWithResources extends NormalizationPass {
                   TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable)
               .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
-      List<Statement> outputStatements = new ArrayList<>();
 
       Variable primaryException =
           Variable.newBuilder()
@@ -126,11 +125,12 @@ public class NormalizeTryWithResources extends NormalizationPass {
               .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
 
-      VariableDeclarationFragment fragment =
-          new VariableDeclarationFragment(primaryException, NullLiteral.NULL);
-      ExpressionStatement declarePrimaryException =
-          new VariableDeclarationExpression(fragment).makeStatement();
-      outputStatements.add(declarePrimaryException);
+      List<Statement> transformedStatements = new ArrayList<>();
+      transformedStatements.add(
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(primaryException, NullLiteral.NULL)
+              .build()
+              .makeStatement());
 
       List<Statement> tryBlockBodyStatements = new ArrayList<>();
 
@@ -138,12 +138,11 @@ public class NormalizeTryWithResources extends NormalizationPass {
           tryStatement.getResourceDeclarations();
       for (VariableDeclarationExpression declaration : resourceDeclarations) {
         VariableDeclarationFragment originalResourceDeclaration = declaration.getFragments().get(0);
-        VariableDeclarationFragment declareResourceNull =
-            new VariableDeclarationFragment(
-                originalResourceDeclaration.getVariable(), NullLiteral.NULL);
-        Statement openResource =
-            new VariableDeclarationExpression(declareResourceNull).makeStatement();
-        outputStatements.add(openResource);
+        transformedStatements.add(
+            VariableDeclarationExpression.newBuilder()
+                .addVariableDeclaration(originalResourceDeclaration.getVariable(), NullLiteral.NULL)
+                .build()
+                .makeStatement());
 
         Expression assignResourceInitializer =
             BinaryExpression.Builder.asAssignmentTo(originalResourceDeclaration.getVariable())
@@ -159,15 +158,15 @@ public class NormalizeTryWithResources extends NormalizationPass {
               .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
               .build();
 
-      List<Statement> catchBlockStatments = new ArrayList<>();
-      Expression assignPrimaryExceptionToExceptionFromTry =
-          BinaryExpression.Builder.asAssignmentTo(primaryException)
-              .setRightOperand(exceptionFromTry.getReference())
-              .build();
-      catchBlockStatments.add(assignPrimaryExceptionToExceptionFromTry.makeStatement());
-      catchBlockStatments.add(new ThrowStatement(exceptionFromTry.getReference()));
+      List<Statement> catchBlockStatements =
+          Arrays.asList(
+              BinaryExpression.Builder.asAssignmentTo(primaryException)
+                  .setRightOperand(exceptionFromTry.getReference())
+                  .build()
+                  .makeStatement(),
+              new ThrowStatement(exceptionFromTry.getReference()));
 
-      List<Statement> finallyBlockStatments = new ArrayList<>();
+      List<Statement> finallyBlockStatements = new ArrayList<>();
       for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
         MethodCall safeCloseCall =
             MethodCall.Builder.from(safeClose)
@@ -179,7 +178,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
             BinaryExpression.Builder.asAssignmentTo(primaryException)
                 .setRightOperand(safeCloseCall)
                 .build();
-        finallyBlockStatments.add(assignExceptionFromSafeCloseCall.makeStatement());
+        finallyBlockStatements.add(assignExceptionFromSafeCloseCall.makeStatement());
       }
 
       ThrowStatement throwPrimaryException = new ThrowStatement(primaryException.getReference());
@@ -192,19 +191,18 @@ public class NormalizeTryWithResources extends NormalizationPass {
               .build();
       IfStatement primaryExceptionNullStatement =
           new IfStatement(primaryExceptionNotEqualsNull, throwPrimaryException);
-      finallyBlockStatments.add(primaryExceptionNullStatement);
+      finallyBlockStatements.add(primaryExceptionNullStatement);
 
       CatchClause catchTryException =
-          new CatchClause(new Block(catchBlockStatments), exceptionFromTry);
-      TryStatement innerTryStatement =
+          new CatchClause(exceptionFromTry, new Block(catchBlockStatements));
+
+      transformedStatements.add(
           new TryStatement(
               Collections.emptyList(),
               new Block(tryBlockBodyStatements),
               Collections.singletonList(catchTryException),
-              new Block(finallyBlockStatments));
-
-      outputStatements.add(innerTryStatement);
-      return outputStatements;
+              new Block(finallyBlockStatements)));
+      return transformedStatements;
     }
   }
 }

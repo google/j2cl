@@ -24,7 +24,6 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
@@ -46,7 +45,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 import java.util.Collections;
 
@@ -142,8 +140,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
               .setArrayLiteral(null)
               .build();
       Statement variableDeclaration =
-          new VariableDeclarationExpression(
-                  new VariableDeclarationFragment(varargsLocalCopy, newArray))
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(varargsLocalCopy, newArray)
+              .build()
               .makeStatement();
 
       // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
@@ -169,24 +168,26 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
       // (3). (for statement) for ($i = 0; i < arguments.length - idx; i++) { ... }
       Statement forStatement =
-          new ForStatement(
-              BinaryExpression.newBuilder()
-                  .setTypeDescriptor(primitiveBoolean)
-                  .setLeftOperand(loopVariable.getReference())
-                  .setOperator(BinaryOperator.LESS)
-                  .setRightOperand(createArraySizeExpression(varargsIndex))
-                  .build(),
-              new Block(body),
-              Collections.singletonList(
-                  new VariableDeclarationExpression(
-                      new VariableDeclarationFragment(
-                          loopVariable, new NumberLiteral(primitiveInt, 0)))),
-              Collections.singletonList(
+          ForStatement.newBuilder()
+              .setConditionExpression(
+                  BinaryExpression.newBuilder()
+                      .setTypeDescriptor(primitiveBoolean)
+                      .setLeftOperand(loopVariable.getReference())
+                      .setOperator(BinaryOperator.LESS)
+                      .setRightOperand(createArraySizeExpression(varargsIndex))
+                      .build())
+              .setBody(body)
+              .setInitializers(
+                  VariableDeclarationExpression.newBuilder()
+                      .addVariableDeclaration(loopVariable, new NumberLiteral(primitiveInt, 0))
+                      .build())
+              .setUpdates(
                   PostfixExpression.newBuilder()
                       .setTypeDescriptor(primitiveInt)
                       .setOperand(loopVariable.getReference())
                       .setOperator(PostfixOperator.INCREMENT)
-                      .build()));
+                      .build())
+              .build();
 
       return Method.Builder.from(method)
           .addStatement(0, variableDeclaration)

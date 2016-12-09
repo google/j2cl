@@ -59,6 +59,6 @@ public class VariableDeclarationFragment extends Node
         // DO NOT clone the variable here as it would make all the references be out of sync
         // pointing to a different variable instance. Variables are replaced explicitly by using
         // AstUtils.replaceVariables.
-        variable, initializer != null ? initializer.clone() : null);
+        variable, AstUtils.clone(initializer));
   }
 }

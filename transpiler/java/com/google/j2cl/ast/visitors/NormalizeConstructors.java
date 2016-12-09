@@ -39,7 +39,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
@@ -428,15 +427,18 @@ public class NormalizeConstructors extends NormalizationPass {
     // let $instance = new Class;
     Variable newInstance =
         Variable.newBuilder().setName("$instance").setTypeDescriptor(enclosingType).build();
-    VariableDeclarationFragment variableDeclarationFragment =
-        AstUtils.replaceVariables(
-            constructor.getParameters(),
-            factoryMethodParameters,
-            new VariableDeclarationFragment(
-                newInstance,
-                NewInstance.Builder.from(javascriptConstructor).setArguments(arguments).build()));
     Statement newInstanceStatement =
-        new VariableDeclarationExpression(variableDeclarationFragment).makeStatement();
+        AstUtils.replaceVariables(
+                constructor.getParameters(),
+                factoryMethodParameters,
+                VariableDeclarationExpression.newBuilder()
+                    .addVariableDeclaration(
+                        newInstance,
+                        NewInstance.Builder.from(javascriptConstructor)
+                            .setArguments(arguments)
+                            .build())
+                    .build())
+            .makeStatement();
 
     // $instance.$ctor...();
     Statement ctorCallStatement =
@@ -446,16 +448,15 @@ public class NormalizeConstructors extends NormalizationPass {
             .build()
             .makeStatement();
 
-    Expression newInstanceReference = newInstance.getReference();
-    if (enclosingType.isJsFunctionImplementation()) {
-      newInstanceReference =
-          AstUtils.createLambdaInstance(enclosingType, newInstance.getReference());
-    }
-
     // return $instance
     Statement returnStatement =
-        new ReturnStatement(
-            newInstanceReference, constructor.getDescriptor().getEnclosingClassTypeDescriptor());
+        ReturnStatement.newBuilder()
+            .setExpression(
+                enclosingType.isJsFunctionImplementation()
+                    ? AstUtils.createLambdaInstance(enclosingType, newInstance.getReference())
+                    : newInstance.getReference())
+            .setTypeDescriptor(constructor.getDescriptor().getEnclosingClassTypeDescriptor())
+            .build();
 
     return Method.newBuilder()
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
@@ -500,16 +501,20 @@ public class NormalizeConstructors extends NormalizationPass {
                 primaryConstructor.getDescriptor().getParameterTypeDescriptors())
             .build();
 
-    // return new Class();
-    Statement returnStatement =
-        new ReturnStatement(
-            NewInstance.Builder.from(javascriptConstructor).setArguments(relayArguments).build(),
-            primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
     return Method.newBuilder()
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
-        .addStatements(returnStatement)
+        .addStatements(
+            // return new Class();
+            ReturnStatement.newBuilder()
+                .setExpression(
+                    NewInstance.Builder.from(javascriptConstructor)
+                        .setArguments(relayArguments)
+                        .build())
+                .setTypeDescriptor(
+                    primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor())
+                .build())
         .setJsDocDescription("A particular Java constructor as a factory method.")
         .setSourcePosition(primaryConstructor.getSourcePosition())
         .build();

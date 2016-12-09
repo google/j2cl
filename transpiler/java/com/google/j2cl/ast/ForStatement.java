@@ -18,7 +18,9 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -35,7 +37,7 @@ public class ForStatement extends Statement {
   @Visitable List<Expression> updates = new ArrayList<>();
   @Visitable Statement body;
 
-  public ForStatement(
+  private ForStatement(
       Expression conditionExpression,
       Statement body,
       List<Expression> initializers,
@@ -64,18 +66,89 @@ public class ForStatement extends Statement {
 
   @Override
   public ForStatement clone() {
-    ForStatement forStatement =
-        new ForStatement(
-            AstUtils.clone(conditionExpression),
-            body.clone(),
-            AstUtils.clone(initializers),
-            AstUtils.clone(updates));
-    forStatement.setSourcePosition(this.getSourcePosition());
-    return forStatement;
+    return ForStatement.newBuilder()
+        .setConditionExpression(AstUtils.clone(conditionExpression))
+        .setBody(body.clone())
+        .setInitializers(AstUtils.clone(initializers))
+        .setUpdates(AstUtils.clone(updates))
+        .setSourcePosition(getSourcePosition())
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_ForStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for ForStatement. */
+  public static class Builder {
+    private List<Expression> initializers = new ArrayList<>();
+    private Expression conditionExpression;
+    private List<Expression> updates = new ArrayList<>();
+    private Block body;
+    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+
+    public static Builder from(ForStatement forStatement) {
+      return newBuilder()
+          .setInitializers(forStatement.getInitializers())
+          .setConditionExpression(forStatement.getConditionExpression())
+          .setUpdates(forStatement.getUpdates())
+          .setBody(forStatement.getBody())
+          .setSourcePosition(forStatement.getSourcePosition());
+    }
+
+    public Builder setConditionExpression(Expression conditionExpression) {
+      this.conditionExpression = conditionExpression;
+      return this;
+    }
+
+    public Builder setInitializers(List<Expression> initializers) {
+      this.initializers = new ArrayList<>(initializers);
+      return this;
+    }
+
+    public Builder setInitializers(Expression... initializers) {
+      return setInitializers(Arrays.asList(initializers));
+    }
+
+    public Builder setUpdates(List<Expression> updates) {
+      this.updates = new ArrayList<>(updates);
+      return this;
+    }
+
+    public Builder setUpdates(Expression... updates) {
+      return setUpdates(Arrays.asList(updates));
+    }
+
+    public Builder setBody(Statement body) {
+      this.body = (body instanceof Block) ? (Block) body : new Block(body);
+      return this;
+    }
+
+    public Builder setBody(List<Statement> statements) {
+      this.body = new Block(statements);
+      return this;
+    }
+
+    public Builder addStatement(int index, Statement statement) {
+      this.body.getStatements().add(index, statement);
+      return this;
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public ForStatement build() {
+      ForStatement forStatement =
+          new ForStatement(conditionExpression, body, initializers, updates);
+      forStatement.setSourcePosition(sourcePosition);
+      return forStatement;
+    }
   }
 }

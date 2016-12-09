@@ -21,12 +21,12 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.common.JsUtils;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -179,8 +179,10 @@ public class EnumMethodsCreator {
                 FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .build();
     Statement returnStatement =
-        new ReturnStatement(
-            getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
+        ReturnStatement.newBuilder()
+            .setExpression(getMethodCall)
+            .setTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
+            .build();
 
     return Method.newBuilder()
         .setMethodDescriptor(valueOfMethodDescriptor)
@@ -209,17 +211,16 @@ public class EnumMethodsCreator {
             .stream()
             .map(enumField -> Builder.from(enumField.getDescriptor()).build())
             .collect(Collectors.toList());
-    Expression arrayOfValues =
-        new ArrayLiteral(TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);
-    Statement returnStatement =
-        new ReturnStatement(
-            arrayOfValues, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
-    List<Statement> blockStatements = new ArrayList<>();
-    blockStatements.add(returnStatement);
+
+    TypeDescriptor arrayTypeDescriptor = TypeDescriptors.getForArray(enumType.getDescriptor(), 1);
 
     return Method.newBuilder()
         .setMethodDescriptor(valuesMethodDescriptor)
-        .addStatements(blockStatements)
+        .addStatements(
+            ReturnStatement.newBuilder()
+                .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))
+                .setTypeDescriptor(arrayTypeDescriptor)
+                .build())
         .build();
   }
 }

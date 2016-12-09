@@ -63,12 +63,6 @@ public class MultiExpression extends Expression {
   public static class Builder {
     private List<Expression> expressions = new ArrayList<>();
 
-    public static Builder from(MultiExpression multiExpression) {
-      Builder builder = new Builder();
-      builder.expressions = new ArrayList<>(multiExpression.getExpressions());
-      return builder;
-    }
-
     public Builder setExpressions(Expression... expressions) {
       return setExpressions(Arrays.asList(expressions));
     }

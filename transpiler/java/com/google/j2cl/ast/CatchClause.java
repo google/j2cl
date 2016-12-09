@@ -29,7 +29,7 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
   @Visitable Variable exceptionVar;
   @Visitable Block body;
 
-  public CatchClause(Block body, Variable exceptionVar) {
+  public CatchClause(Variable exceptionVar, Block body) {
     this.body = checkNotNull(body);
     this.exceptionVar = checkNotNull(exceptionVar);
   }
@@ -56,6 +56,6 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
             Collections.singletonList(clonedExceptionVariable),
             body.clone());
 
-    return new CatchClause(clonedBody, clonedExceptionVariable);
+    return new CatchClause(clonedExceptionVariable, clonedBody);
   }
 }

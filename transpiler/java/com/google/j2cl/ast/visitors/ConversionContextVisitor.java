@@ -265,10 +265,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     // assignment context
-    return new ReturnStatement(
-        contextRewriter.rewriteAssignmentContext(
-            returnStatement.getTypeDescriptor(), returnStatement.getExpression()),
-        returnStatement.getTypeDescriptor());
+    return ReturnStatement.newBuilder()
+        .setExpression(
+            contextRewriter.rewriteAssignmentContext(
+                returnStatement.getTypeDescriptor(), returnStatement.getExpression()))
+        .setTypeDescriptor(returnStatement.getTypeDescriptor())
+        .build();
   }
 
   @Override

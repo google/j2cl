@@ -38,7 +38,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,7 +101,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
               .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
               .build();
       Statement body = bodyBuilder(clauses, exceptionVariable);
-      return new CatchClause(new Block(body), exceptionVariable);
+      return new CatchClause(exceptionVariable, new Block(body));
     }
 
     private Statement bodyBuilder(List<CatchClause> clauses, Variable exceptionVariable) {
@@ -127,13 +126,14 @@ public class NormalizeCatchClauses extends NormalizationPass {
               ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
               : catchVariable.getTypeDescriptor();
       ExpressionStatement assignment =
-          new VariableDeclarationExpression(
-                  new VariableDeclarationFragment(
-                      catchVariable,
-                      JsDocAnnotatedExpression.newBuilder()
-                          .setExpression(exceptionVariable.getReference())
-                          .setAnnotationType(catchVariableTypeDescriptor)
-                          .build()))
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(
+                  catchVariable,
+                  JsDocAnnotatedExpression.newBuilder()
+                      .setExpression(exceptionVariable.getReference())
+                      .setAnnotationType(catchVariableTypeDescriptor)
+                      .build())
+              .build()
               .makeStatement();
       catchClauseBody.add(0, assignment);
 

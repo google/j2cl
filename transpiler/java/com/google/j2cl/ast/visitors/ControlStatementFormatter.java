@@ -24,8 +24,6 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.WhileStatement;
 
-import java.util.Collections;
-
 /** Makes sure that body of conditional are always blocks (except in the else if case). */
 public class ControlStatementFormatter extends NormalizationPass {
   @Override
@@ -62,11 +60,13 @@ public class ControlStatementFormatter extends NormalizationPass {
         return forStatement;
       }
 
-      return new ForStatement(
-          forStatement.getConditionExpression(),
-          new Block(Collections.singletonList(body)),
-          forStatement.getInitializers(),
-          forStatement.getUpdates());
+      return ForStatement.newBuilder()
+          .setConditionExpression(forStatement.getConditionExpression())
+          .setBody(body)
+          .setInitializers(forStatement.getInitializers())
+          .setUpdates(forStatement.getUpdates())
+          .build();
+
     }
 
     @Override
