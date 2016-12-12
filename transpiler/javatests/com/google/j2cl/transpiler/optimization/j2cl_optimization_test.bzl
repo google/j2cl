@@ -16,9 +16,6 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
       compiler="//javascript/tools/jscompiler:head",
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
       extra_defs=[
-          # TODO(b/33067506): Need to repeat compute_function_side_effects here, otherwise tests
-          # fail even though the flag is part of our default test flags for j2cl_test.
-          "--compute_function_side_effects=true",
           "--rewrite_polyfills=false",
           "--strict",
           "--variable_renaming=OFF",
