@@ -1,11 +1,11 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Function.
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$BiFunction.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire, missingOverride}
  */
-goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction$impl');
 
 
 let $Util = goog.require('nativebootstrap.Util$impl');
@@ -13,17 +13,17 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * @interface
- * @template C_Function_T, C_Function_U
+ * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_V
  */
-class
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function {
+class BiFunction {
   /**
    * @abstract
-   * @param {C_Function_T} t
-   * @return {C_Function_U}
+   * @param {C_BiFunction_T} t
+   * @param {C_BiFunction_U} u
+   * @return {C_BiFunction_V}
    * @public
    */
-  m_apply__java_lang_Object(t) {}
+  m_apply__java_lang_Object__java_lang_Object(t, u) {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -35,7 +35,7 @@ class
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function =
+        .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction =
         true;
   }
 
@@ -49,7 +49,7 @@ class
   static $isInstance(instance) {
     return instance != null &&
         instance
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction;
   }
 
   /**
@@ -61,7 +61,7 @@ class
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
         classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction;
   }
 
   /**
@@ -72,19 +72,16 @@ class
 };
 
 $Util.$setClassMetadataForInterface(
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function,
+    BiFunction,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Function'));
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$BiFunction'));
 
 
-com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-    .$markImplementor(/** @type {Function} */ (
-        com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function));
+BiFunction.$markImplementor(/** @type {Function} */ (BiFunction));
 
 
 /**
  * Export class.
  */
-exports =
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
-//# sourceMappingURL=MethodReferences$Function.js.map
+exports = BiFunction;
+//# sourceMappingURL=MethodReferences$BiFunction.js.map

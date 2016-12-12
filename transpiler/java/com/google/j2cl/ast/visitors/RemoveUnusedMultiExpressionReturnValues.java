@@ -61,7 +61,10 @@ public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
       }
       // Only target return values that are FieldAccesses since we know they are side effect free
       // and we know that we generate this case.
-      // TODO: This is not technically correct as field accesses could trigger clinits.
+      // TODO(rluble): This is not technically correct as field accesses could trigger clinits, but
+      // multiexpressions only come about from our normalization and in those transformations clinit
+      // would have been already triggered. Add a verifier pass to make sure the semantics do
+      // not change.
       if (!OperatorSideEffectUtils.canExpressionBeEvaluatedTwice(Iterables.getLast(expressions))) {
         return expressionStatement;
       }

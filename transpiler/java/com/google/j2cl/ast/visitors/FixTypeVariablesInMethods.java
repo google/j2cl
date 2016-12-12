@@ -28,9 +28,11 @@ import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.VariableDeclarationExpression;
 import java.util.function.Predicate;
 
 /**
@@ -70,12 +72,24 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           }
         });
 
-    // Rewrite method bodies of anonymous functions to avoid references to template variables (2).
+    // Rewrite method bodies of anonymous functions to avoid references to template variables (2);
+    // anonymous functions in the compiled output are a result of @JsFunction lambdas and
+    // multiexpressions that declared variables.
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
             removeAllTypeVariables(functionExpression);
+          }
+
+          @Override
+          public void exitMultiExpression(MultiExpression multiExpression) {
+            if (multiExpression
+                .getExpressions()
+                .stream()
+                .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
+              removeAllTypeVariables(multiExpression);
+            }
           }
         });
   }

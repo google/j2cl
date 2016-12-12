@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,9 +34,9 @@ public class FunctionExpression extends Expression {
   private final TypeDescriptor typeDescriptor;
 
   private FunctionExpression(TypeDescriptor typeDescriptor, List<Variable> parameters, Block body) {
-    this.parameters = parameters;
-    this.body = body;
-    this.typeDescriptor = typeDescriptor;
+    this.parameters = checkNotNull(parameters);
+    this.body = checkNotNull(body);
+    this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
   @Override
@@ -99,7 +101,7 @@ public class FunctionExpression extends Expression {
     }
 
     public Builder setParameters(List<Variable> parameters) {
-      this.parameters = parameters;
+      this.parameters = new ArrayList<>(parameters);
       return this;
     }
 

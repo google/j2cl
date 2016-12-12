@@ -1,0 +1,92 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$ArrayProducer.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @interface
+ * @template C_ArrayProducer_T
+ */
+class ArrayProducer {
+  /**
+   * @abstract
+   * @param {number} size
+   * @return {Array<C_ArrayProducer_T>}
+   * @public
+   */
+  m_produce__int(size) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    ArrayProducer,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$ArrayProducer'));
+
+
+ArrayProducer.$markImplementor(/** @type {Function} */ (ArrayProducer));
+
+
+/**
+ * Export class.
+ */
+exports = ArrayProducer;
+//# sourceMappingURL=MethodReferences$ArrayProducer.js.map

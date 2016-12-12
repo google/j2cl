@@ -1,0 +1,127 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$$Lambda$Producer$2.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.$Lambda$Producer$2$impl');
+
+
+let Producer = goog.require('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
+
+
+/**
+ * @template C_T
+ * @implements {Producer<*>}
+ */
+class $Lambda$Producer$2 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {MethodReferences<C_T>} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2 =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @param {MethodReferences<C_T>} $outer_this
+   * @return {!$Lambda$Producer$2<C_T>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
+      $outer_this) {
+    $Lambda$Producer$2.$clinit();
+    let $instance = new $Lambda$Producer$2();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MethodReferences<C_T>} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2 =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2();
+  }
+
+  /**
+   * Lambda implementation method.
+   * @override
+   * @return {*}
+   * @public
+   */
+  m_produce__() {
+    return MethodReferences
+        .m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $Lambda$Producer$2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Lambda$Producer$2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    MethodReferences = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Producer$2() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Lambda$Producer$2,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$$Lambda$Producer$2'));
+
+
+Producer.$markImplementor($Lambda$Producer$2);
+
+
+/**
+ * Export class.
+ */
+exports = $Lambda$Producer$2;
+//# sourceMappingURL=MethodReferences$$Lambda$Producer$2.js.map

@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -56,6 +57,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Transforms Expression to JavaScript source strings.
@@ -280,8 +282,24 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformMultiExpression(MultiExpression multipleExpression) {
-        renderDelimitedAndSeparated("(", ", ", ")", multipleExpression.getExpressions());
+      public Void transformMultiExpression(MultiExpression multiExpression) {
+        List<Expression> expressions = multiExpression.getExpressions();
+        if (expressions
+            .stream()
+            .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
+          // If the multiexpression declares variables enclosing in an anonymous function context.
+          sourceBuilder.append("( () => {");
+          for (Expression expression : expressions.subList(0, expressions.size() - 1)) {
+            process(expression);
+            sourceBuilder.append(";");
+          }
+          Expression returnValue = Iterables.getLast(expressions);
+          sourceBuilder.append(" return ");
+          process(returnValue);
+          sourceBuilder.append(";})()");
+        } else {
+          renderDelimitedAndSeparated("(", ", ", ")", expressions);
+        }
         return null;
       }
 

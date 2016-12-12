@@ -332,7 +332,7 @@ public class AstUtils {
         .build();
   }
 
-  private static List<Variable> createParameterVariables(List<TypeDescriptor> parameterTypes) {
+  public static List<Variable> createParameterVariables(List<TypeDescriptor> parameterTypes) {
     List<Variable> parameters = new ArrayList<>();
     for (int i = 0; i < parameterTypes.size(); i++) {
       parameters.add(
@@ -345,7 +345,7 @@ public class AstUtils {
     return parameters;
   }
 
-  private static Statement createForwardingStatement(
+  public static Statement createForwardingStatement(
       Expression qualifier,
       MethodDescriptor toMethodDescriptor,
       boolean isStaticDispatch,
@@ -1229,4 +1229,5 @@ public class AstUtils {
             .setTypeDescriptor(methodReturnTypeDescriptor)
             .build();
   }
+
 }

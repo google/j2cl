@@ -1,0 +1,81 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$JsProducer.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.JsProducer$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @interface
+ * @template C_JsProducer_T
+ */
+class JsProducer {
+  /**
+   * @abstract
+   * @return {C_JsProducer_T}
+   * @public
+   */
+  m_produce__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_JsProducer =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_JsProducer;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {}
+};
+
+$Util.$setClassMetadataForInterface(
+    JsProducer, $Util.$makeClassName('Function'));
+
+
+JsProducer.$markImplementor(/** @type {Function} */ (JsProducer));
+
+
+/**
+ * Export class.
+ */
+exports = JsProducer;
+//# sourceMappingURL=MethodReferences$JsProducer.js.map

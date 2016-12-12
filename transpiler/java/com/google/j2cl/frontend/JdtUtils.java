@@ -71,6 +71,8 @@ import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.ParenthesizedExpression;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
@@ -1416,5 +1418,35 @@ public class JdtUtils {
           getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
     }
     return null;
+  }
+
+  /**
+   * Returns true for the cases where the qualifier an expression that has always the same value and
+   * will not trigger class initializers.
+   */
+  public static boolean isEffectivelyConstant(org.eclipse.jdt.core.dom.Expression expression) {
+    switch (expression.getNodeType()) {
+      case ASTNode.PARENTHESIZED_EXPRESSION:
+        return isEffectivelyConstant(((ParenthesizedExpression) expression).getExpression());
+      case ASTNode.SIMPLE_NAME:
+      case ASTNode.QUALIFIED_NAME:
+        IBinding binding = ((Name) expression).resolveBinding();
+        if (binding instanceof IVariableBinding) {
+          IVariableBinding variableBinding = (IVariableBinding) binding;
+          return !variableBinding.isField() && variableBinding.isEffectivelyFinal();
+        }
+        // Type expressions are always effectively constant.
+        return binding instanceof ITypeBinding;
+      case ASTNode.THIS_EXPRESSION:
+      case ASTNode.BOOLEAN_LITERAL:
+      case ASTNode.CHARACTER_LITERAL:
+      case ASTNode.NULL_LITERAL:
+      case ASTNode.NUMBER_LITERAL:
+      case ASTNode.STRING_LITERAL:
+      case ASTNode.TYPE_LITERAL:
+        return true;
+      default:
+        return false;
+    }
   }
 }
