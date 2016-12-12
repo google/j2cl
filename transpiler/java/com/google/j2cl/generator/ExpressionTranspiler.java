@@ -160,7 +160,7 @@ public class ExpressionTranspiler {
         String separator = "";
         for (Variable parameter : expression.getParameters()) {
           sourceBuilder.append(separator);
-          sourceBuilder.append(parameter.getName());
+          sourceBuilder.append(environment.aliasForVariable(parameter));
           separator = ", ";
         }
         sourceBuilder.append(") =>");

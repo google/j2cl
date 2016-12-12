@@ -14,10 +14,10 @@
 [int a = func.field;] => [let a = func.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;]
 [func.bar();] => [MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(func);]
 [final int n = 4;] => [let n = 4;]
-[fun((x) -> x + n, n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((x) =>{
-      return x + n;
+[fun((number) -> number + n, n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((l_number) =>{
+      return l_number + n;
     }), n);]
-[x + n] => [return x + n;]
+[number + n] => [return l_number + n;]
 [fun(
         new MyJsFunctionInterface() {
           @Override

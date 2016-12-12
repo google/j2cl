@@ -25,7 +25,8 @@ public class Main {
     func.bar();
 
     final int n = 4;
-    fun((x) -> x + n, n);
+    // Use number as a variable to make sure it is aliased properly.
+    fun((number) -> number + n, n);
     fun(
         new MyJsFunctionInterface() {
           @Override
