@@ -47,3 +47,32 @@
 [UNKNOWN] => [Main.$clinit();]
 [List<T> collected = null;] => [let collected = null;]
 [return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));]
+[JsFunctionVarags f =
+        (i, numbers) -> {
+          int sum = i;
+          for (int number : numbers) {
+            sum += number;
+          }
+          return sum;
+        };] => [let f = ((i, numbers) =>{
+      let sum = i;
+      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let l_number = $array[$index];
+        sum += l_number;
+      }
+      return sum;
+    });]
+[int sum = i;] => [let sum = i;]
+[for (int number : numbers) {
+            sum += number;
+          }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let l_number = $array[$index];
+        sum += l_number;
+      }]
+[UNKNOWN] => [let l_number = $array[$index];]
+[sum += number;] => [sum += l_number;]
+[return sum;] => [return sum;]
+[JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((i, n) =>{
+      return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
+    });]
+[(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));]

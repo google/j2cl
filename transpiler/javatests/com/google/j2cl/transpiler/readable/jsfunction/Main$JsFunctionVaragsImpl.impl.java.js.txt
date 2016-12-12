@@ -1,0 +1,144 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionVaragsImpl.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVaragsImpl$impl');
+
+
+let JsFunctionVarags = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarags$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {JsFunctionVarags}
+ */
+class JsFunctionVaragsImpl extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {function(number, ...number):number}
+   * @public
+   */
+  static $create__() {
+    JsFunctionVaragsImpl.$clinit();
+    let $instance = new JsFunctionVaragsImpl();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl__();
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(JsFunctionVaragsImpl).m_m__int__arrayOf_int,
+        $instance, JsFunctionVaragsImpl.$copy);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl();
+  }
+
+  /**
+   * @override
+   * @this {?function(number, ...number):number}
+   * @param {number} i
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  m_m__int__arrayOf_int(i, numbers) {
+    let $var_args_copy = /**@type {!Array<number>} */ (
+        $Arrays.$create([arguments.length - 1], $int));
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
+    let sum = i;
+    for (let $array = $var_args_copy, $index = 0; $index < $array.length;
+         $index++) {
+      let l_number = $array[$index];
+      sum += l_number;
+    }
+    return sum;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsFunctionVaragsImpl);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {JsFunctionVaragsImpl} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl =
+        true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl() {
+  }
+};
+
+$Util.$setClassMetadata(
+    JsFunctionVaragsImpl,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionVaragsImpl'));
+
+
+JsFunctionVarags.$markImplementor(JsFunctionVaragsImpl);
+
+
+/**
+ * Export class.
+ */
+exports = JsFunctionVaragsImpl;
+//# sourceMappingURL=Main$JsFunctionVaragsImpl.js.map

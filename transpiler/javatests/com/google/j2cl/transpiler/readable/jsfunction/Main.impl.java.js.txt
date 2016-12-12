@@ -14,12 +14,14 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let com_google_j2cl_transpiler_readable_jsfunction_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let MyJsFunctionInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let IntFunction = goog.forwardDeclare('java.util.function.IntFunction$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 class Main extends java_lang_Object {
@@ -155,6 +157,32 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionVarargs___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
+    let f = ((i, numbers) => {
+      let sum = i;
+      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let l_number = $array[$index];
+        sum += l_number;
+      }
+      return sum;
+    });
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionOptional___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
+    let f = ((i, n) => {
+      return $Primitives.$narrowDoubleToInt(
+          (i + Double.m_doubleValue__java_lang_Double(n)));
+    });
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -186,12 +214,14 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
     MyJsFunctionInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
+    Double = goog.module.get('java.lang.Double$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     IntFunction = goog.module.get('java.util.function.IntFunction$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     java_lang_Object.$clinit();
   }
 

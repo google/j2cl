@@ -1,0 +1,89 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionOptional.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptional$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @interface
+ */
+class JsFunctionOptional {
+  /**
+   * @abstract
+   * @param {number} i
+   * @param {?number=} l_number
+   * @return {number}
+   * @public
+   */
+  m_m__int__java_lang_Double(i, l_number) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptional =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptional;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Double = goog.module.get('java.lang.Double$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    JsFunctionOptional, $Util.$makeClassName('Function'));
+
+
+JsFunctionOptional.$markImplementor(
+    /** @type {Function} */ (JsFunctionOptional));
+
+
+/**
+ * Export class.
+ */
+exports = JsFunctionOptional;
+//# sourceMappingURL=Main$JsFunctionOptional.js.map

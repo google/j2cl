@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.IntFunction;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOptional;
 
 public class Main {
   public static int fun(MyJsFunctionInterface fn, int a) {
@@ -73,5 +74,48 @@ public class Main {
     public void testJsFunctionWithClassCapture() {
       Function<Object, Object> f = object -> new ArrayList<T>();
     }
+  }
+
+  @JsFunction
+  interface JsFunctionVarags {
+    int m(int i, int... numbers);
+  }
+
+  static class JsFunctionVaragsImpl implements JsFunctionVarags {
+    @Override
+    public int m(int i, int... numbers) {
+      int sum = i;
+      for (int number : numbers) {
+        sum += number;
+      }
+      return sum;
+    }
+  }
+
+  void testJsFunctionVarargs() {
+    JsFunctionVarags f =
+        (i, numbers) -> {
+          int sum = i;
+          for (int number : numbers) {
+            sum += number;
+          }
+          return sum;
+        };
+  }
+
+  @JsFunction
+  interface JsFunctionOptional {
+    int m(int i, @JsOptional Double number);
+  }
+
+  static class JsFunctionOptionalImpl implements JsFunctionOptional {
+    @Override
+    public int m(int i, @JsOptional Double number) {
+      return (int) (i + number);
+    }
+  }
+
+  void testJsFunctionOptional() {
+    JsFunctionOptional f = (i, n) -> (int) (i + n);
   }
 }

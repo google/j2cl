@@ -1,0 +1,88 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionVarags.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarags$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @interface
+ */
+class JsFunctionVarags {
+  /**
+   * @abstract
+   * @param {number} i
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  m_m__int__arrayOf_int(i, numbers) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarags =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarags;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    JsFunctionVarags, $Util.$makeClassName('Function'));
+
+
+JsFunctionVarags.$markImplementor(/** @type {Function} */ (JsFunctionVarags));
+
+
+/**
+ * Export class.
+ */
+exports = JsFunctionVarags;
+//# sourceMappingURL=Main$JsFunctionVarags.js.map

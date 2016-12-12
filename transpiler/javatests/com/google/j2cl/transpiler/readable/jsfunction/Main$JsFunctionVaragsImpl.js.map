@@ -1,0 +1,22 @@
+[UNKNOWN] => [super();]
+[UNKNOWN] => [JsFunctionVaragsImpl.$clinit();]
+[UNKNOWN] => [let $instance = new JsFunctionVaragsImpl();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl__();]
+[UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(JsFunctionVaragsImpl).m_m__int__arrayOf_int, $instance, JsFunctionVaragsImpl.$copy);]
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVaragsImpl();]
+[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
+[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }]
+[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
+[int sum = i;] => [let sum = i;]
+[for (int number : numbers) {
+        sum += number;
+      }] => [for (let $array = $var_args_copy, $index = 0; $index < $array.length; $index++) {
+      let l_number = $array[$index];
+      sum += l_number;
+    }]
+[UNKNOWN] => [let l_number = $array[$index];]
+[sum += number;] => [sum += l_number;]
+[return sum;] => [return sum;]

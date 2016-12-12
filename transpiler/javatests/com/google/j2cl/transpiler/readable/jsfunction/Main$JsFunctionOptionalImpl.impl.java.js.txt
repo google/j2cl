@@ -1,0 +1,136 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionOptionalImpl.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptionalImpl$impl');
+
+
+let JsFunctionOptional = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptional$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
+
+
+/**
+ * @implements {JsFunctionOptional}
+ */
+class JsFunctionOptionalImpl extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {function(number, ?number):number}
+   * @public
+   */
+  static $create__() {
+    JsFunctionOptionalImpl.$clinit();
+    let $instance = new JsFunctionOptionalImpl();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl__();
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(JsFunctionOptionalImpl).m_m__int__java_lang_Double,
+        $instance, JsFunctionOptionalImpl.$copy);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl();
+  }
+
+  /**
+   * @override
+   * @this {?function(number, ?number):number}
+   * @param {number} i
+   * @param {?number=} l_number
+   * @return {number}
+   * @public
+   */
+  m_m__int__java_lang_Double(i, l_number) {
+    return $Primitives.$narrowDoubleToInt(
+        (i + Double.m_doubleValue__java_lang_Double(l_number)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsFunctionOptionalImpl);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {JsFunctionOptionalImpl} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl =
+        true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Double = goog.module.get('java.lang.Double$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptionalImpl() {
+  }
+};
+
+$Util.$setClassMetadata(
+    JsFunctionOptionalImpl,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionOptionalImpl'));
+
+
+JsFunctionOptional.$markImplementor(JsFunctionOptionalImpl);
+
+
+/**
+ * Export class.
+ */
+exports = JsFunctionOptionalImpl;
+//# sourceMappingURL=Main$JsFunctionOptionalImpl.js.map
