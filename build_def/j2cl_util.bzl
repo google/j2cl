@@ -94,11 +94,8 @@ J2CL_UNOPTIMIZED_DEFS = [
 ]
 
 J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED +
-                       ADVANCED_OPTIMIZATIONS_FLAGS)
+                       ADVANCED_OPTIMIZATIONS_FLAGS + ["--extra_smart_name_removal=true"])
 
 J2CL_TEST_DEFS = make_output_readable(J2CL_OPTIMIZED_DEFS + [
     "--export_test_functions=true",
-    # Enable some optimizations which speed things up.
-    "--smart_name_removal",
-    "--extra_smart_name_removal=true",
 ])
