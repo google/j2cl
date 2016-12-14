@@ -559,6 +559,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       sourceBuilder.append(superTypeName + ".$clinit();");
     }
+    for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+      if (interfaceTypeDescriptor.isNative()
+          || interfaceTypeDescriptor.isJsFunctionInterface()
+          || !interfaceTypeDescriptor.hasDefaultMethods()) {
+        continue;
+      }
+      String superTypeName = environment.aliasForType(interfaceTypeDescriptor);
+      sourceBuilder.newLine();
+      sourceBuilder.append(superTypeName + ".$clinit();");
+    }
     // Static field and static initializer blocks.
     renderInitializerElements(type.getStaticMembers());
     sourceBuilder.closeBrace();

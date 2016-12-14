@@ -33,6 +33,7 @@ import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -96,6 +97,10 @@ public abstract class TypeDescriptor extends Node
       return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
     }
     return false;
+  }
+
+  public boolean hasDefaultMethods() {
+    return isInterface() && getMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefault);
   }
 
   public boolean hasSameRawType(TypeDescriptor other) {
@@ -555,7 +560,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   /** The list of all methods available on a given type. */
-  public Iterable<MethodDescriptor> getMethodDescriptors() {
+  public Collection<MethodDescriptor> getMethodDescriptors() {
     return getMethodDescriptorsBySignature().values();
   }
 

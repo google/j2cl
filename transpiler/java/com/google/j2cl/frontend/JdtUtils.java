@@ -1311,7 +1311,20 @@ public class JdtUtils {
           ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
           for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
             MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
-            mapBuilder.put(methodDescriptor.getMethodSignature(), methodDescriptor);
+            mapBuilder.put(
+                // TODO(b/33595109): Using the method declaration signature here does is not
+                // completely correct; but it is done because parameterized types might
+                // might make multiple superinterface methods collide yet JDT represent these
+                // methods with different method descriptor. e.g.
+                //   interface I<U, V extends Serializable> {
+                //     void foo(U u);
+                //     void foo(V v);
+                //   }
+                // When considering the type I<A,A>, there are two different method bindings
+                // that describe the single method 'void foo(A a)' each with the respective
+                // method declaration.
+                methodDescriptor.getDeclarationMethodDescriptor().getMethodSignature(),
+                methodDescriptor);
           }
           return mapBuilder.build();
         };

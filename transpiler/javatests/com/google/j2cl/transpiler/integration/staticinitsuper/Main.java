@@ -38,8 +38,7 @@ public class Main {
   public static void main(String... args) {
     new A(); // start clinit chain
 
-    // TODO(b/33558074): Uncomment below
-    // assert 2 == loadOrder.size() : "classes are not loaded";
+    assert 2 == loadOrder.size() : "classes are not loaded";
 
     // TODO(b/28909166): Uncomment below
     // assert loadOrder.get(0).equals("D1") : "expected D1";
