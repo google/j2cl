@@ -29,6 +29,7 @@ public class AllTests {
       suite.addTest(BigIntegerSuite.suite());
       suite.addTest(CollectionsSuite.suite());
       suite.addTest(EmulSuite.suite());
+    suite.addTest(EmulJava8Suite.suite());
       suite.addTest(TreeMapSuiteSub.suite());
       suite.addTest(TreeSetSuiteSub.suite());
       return suite;

@@ -18,7 +18,10 @@ j2cl_mirror_from_gwt(
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
     ],
-    mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
+    mirrored_files = [
+        "//third_party/java_src/gwt/svn/trunk/user:java_emul_test",
+        "//third_party/java_src/gwt/svn/trunk/user:java8_emul_test",
+    ],
     deps = [
         "//jre/java:gwt-jsinterop-annotations",
         "//third_party/java/junit:junit-j2cl",
@@ -57,41 +60,6 @@ java_test(
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/junit",
-    ],
-)
-
-j2cl_source_copy(
-    name = "emul_tests_java8_lib",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java8_emul_test"],
-)
-
-java_library(
-    name = "jre_tests",
-    testonly = 1,
-    srcs = [
-        ":emul_tests_java8_lib",
-        ":emul_tests_lib_java_files",
-        ":java_emul_internal",
-    ],
-    javacopts = [
-        "-Xep:SelfEquals:OFF",
-    ],
-    deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/junit",
-    ],
-)
-
-java_test(
-    name = "AllEmulTest_Java8",
-    size = "small",
-    javacopts = [
-        "-Xep:SelfEquals:OFF",
-    ],
-    test_class = "com.google.gwt.emultest.EmulJava8Suite",
-    runtime_deps = [
-        ":jre_tests",
         "//third_party/java/junit",
     ],
 )
