@@ -239,13 +239,11 @@ public class CompilationUnitBuilder {
         Type type,
         ITypeBinding typeBinding,
         List<BodyDeclaration> bodyDeclarations) {
-      TypeDescriptor currentTypeDescriptor = TypeDescriptors.toNullable(type.getDescriptor());
+      TypeDescriptor currentTypeDescriptor = type.getDescriptor();
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       if (superclassBinding != null) {
         capturesByTypeDescriptor.putAll(
-            currentTypeDescriptor,
-            capturesByTypeDescriptor.get(
-                TypeDescriptors.toNullable(type.getSuperTypeDescriptor())));
+            currentTypeDescriptor, capturesByTypeDescriptor.get(type.getSuperTypeDescriptor()));
       }
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
         if (bodyDeclaration instanceof FieldDeclaration) {

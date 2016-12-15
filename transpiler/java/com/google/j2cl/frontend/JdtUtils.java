@@ -578,7 +578,7 @@ public class JdtUtils {
    * @param typeBinding the type binding, used to create the type descriptor.
    * @param elementAnnotations the annotations on the element
    */
-  public static TypeDescriptor createTypeDescriptorWithNullability(
+  private static TypeDescriptor createTypeDescriptorWithNullability(
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     if (typeBinding == null) {
       return null;
