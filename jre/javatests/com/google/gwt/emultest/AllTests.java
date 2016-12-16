@@ -18,20 +18,18 @@ package com.google.gwt.emultest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * TestSuite for all of GWT's emul suites.
- */
+/** TestSuite for all of GWT's emul suites. */
 public class AllTests {
 
-    public static Test suite() {
-      TestSuite suite = new TestSuite("All Emul tests");
-      suite.addTest(BigDecimalSuite.suite());
-      suite.addTest(BigIntegerSuite.suite());
-      suite.addTest(CollectionsSuite.suite());
-      suite.addTest(EmulSuite.suite());
+  public static Test suite() {
+    TestSuite suite = new TestSuite("All Emul tests");
+    suite.addTest(BigDecimalSuite.suite());
+    suite.addTest(BigIntegerSuite.suite());
+    suite.addTest(CollectionsSuite.suite());
+    suite.addTest(EmulSuite.suite());
     suite.addTest(EmulJava8Suite.suite());
-      suite.addTest(TreeMapSuiteSub.suite());
-      suite.addTest(TreeSetSuiteSub.suite());
-      return suite;
-    }
- }
+    suite.addTest(TreeMapSuiteSub.suite());
+    suite.addTest(TreeSetSuiteSub.suite());
+    return suite;
+  }
+}
