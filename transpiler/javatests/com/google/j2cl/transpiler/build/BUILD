@@ -135,6 +135,8 @@ pinto_processed_module_set(
     name = "J2clPintoPmfEnhancerMss_processed_module_set",
     externs_list = ["//javascript/externs:common"],
     prevalent_modules = "J2clPintoPmfEnhancerMss_pinto_module",
+    verify_mod_names = "None",
+    verify_mod_names_as_error = False,
     deps = [":J2clPintoPmfEnhancerMss_pinto_module"],
 )
 
@@ -189,6 +191,8 @@ pinto_processed_module_set(
     name = "J2clAjdPintoPmfEnhancerMss_processed_module_set",
     externs_list = ["//javascript/externs:common"],
     prevalent_modules = "J2clAjdPintoPmfEnhancerMss_pinto_module",
+    verify_mod_names = "None",
+    verify_mod_names_as_error = False,
     deps = [":J2clAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
@@ -232,6 +236,8 @@ pinto_processed_module_set(
     name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
     externs_list = ["//javascript/externs:common"],
     prevalent_modules = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+    verify_mod_names = "None",
+    verify_mod_names_as_error = False,
     deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
