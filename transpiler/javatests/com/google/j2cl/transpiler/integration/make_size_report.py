@@ -50,7 +50,7 @@ def make_size_report():
   size_report_file.write("Integration tests optimized size report:\n")
   size_report_file.write("**************************************\n")
 
-  print "  Building original amd modified targets."
+  print "  Building original and modified targets."
 
   pool = create_pool()
 
