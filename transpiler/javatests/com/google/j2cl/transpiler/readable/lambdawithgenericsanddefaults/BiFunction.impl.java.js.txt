@@ -80,6 +80,7 @@ class BiFunction {
    * @public
    */
   static $clinit() {
+    BiFunction.$clinit = function() {};
     com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');

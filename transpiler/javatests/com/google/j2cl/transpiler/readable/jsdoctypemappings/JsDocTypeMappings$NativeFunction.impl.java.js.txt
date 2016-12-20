@@ -66,6 +66,7 @@ class NativeFunction {
    * @public
    */
   static $clinit() {
+    NativeFunction.$clinit = function() {};
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');
   }
 };

@@ -67,7 +67,9 @@ class Callable {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Callable.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

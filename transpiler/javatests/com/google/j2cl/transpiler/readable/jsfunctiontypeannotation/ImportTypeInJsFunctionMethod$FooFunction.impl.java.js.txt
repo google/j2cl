@@ -69,6 +69,7 @@ class FooFunction {
    * @public
    */
   static $clinit() {
+    FooFunction.$clinit = function() {};
     Main = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');

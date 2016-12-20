@@ -40,7 +40,9 @@ class List$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    List$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

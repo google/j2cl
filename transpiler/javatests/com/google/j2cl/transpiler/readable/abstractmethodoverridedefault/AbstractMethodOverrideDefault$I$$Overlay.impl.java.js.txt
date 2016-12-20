@@ -38,7 +38,9 @@ class I$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    I$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -59,7 +59,9 @@ class Entry {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Entry.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

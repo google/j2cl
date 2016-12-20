@@ -72,6 +72,7 @@ class SubclassGenericClass extends GenericClass {
    * @public
    */
   static $clinit() {
+    SubclassGenericClass.$clinit = function() {};
     GenericClass.$clinit();
   }
 

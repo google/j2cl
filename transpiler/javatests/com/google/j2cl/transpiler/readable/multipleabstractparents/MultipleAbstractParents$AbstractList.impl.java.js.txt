@@ -63,6 +63,7 @@ class AbstractList extends AbstractCollection {
    * @public
    */
   static $clinit() {
+    AbstractList.$clinit = function() {};
     AbstractCollection.$clinit();
   }
 

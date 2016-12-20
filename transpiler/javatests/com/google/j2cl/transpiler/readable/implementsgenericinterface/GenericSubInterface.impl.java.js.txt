@@ -62,7 +62,9 @@ class GenericSubInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    GenericSubInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -69,6 +69,7 @@ class MultipleTopClasses extends AnotherClass {
    * @public
    */
   static $clinit() {
+    MultipleTopClasses.$clinit = function() {};
     AnotherClass.$clinit();
   }
 

@@ -27,7 +27,9 @@ class MyNativeJsType$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    MyNativeJsType$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadata(

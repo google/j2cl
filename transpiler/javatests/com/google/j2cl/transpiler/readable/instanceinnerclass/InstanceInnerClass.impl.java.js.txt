@@ -91,6 +91,7 @@ class InstanceInnerClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    InstanceInnerClass.$clinit = function() {};
     InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

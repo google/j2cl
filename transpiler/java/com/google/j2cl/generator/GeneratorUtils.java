@@ -22,9 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.ManglingNameUtils;
-import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
@@ -118,22 +116,6 @@ public class GeneratorUtils {
   /** Returns true if the type has a superclass that is not a native js type. */
   public static boolean hasNonNativeSuperClass(Type type) {
     return type.getSuperTypeDescriptor() != null && !type.getSuperTypeDescriptor().isNative();
-  }
-
-  /** Returns whether the $clinit function should be rewritten as NOP. */
-  public static boolean needRewriteClinit(Type type) {
-    for (Member member : type.getStaticMembers()) {
-      if (member instanceof Field) {
-        Field field = (Field) member;
-        if (field.hasInitializer() && !field.isCompileTimeConstant()) {
-          return true;
-        }
-      } else if (member instanceof InitializerBlock) {
-        return true;
-      }
-      // other members are not involved in class initialization, hence they are skipped here.
-    }
-    return false;
   }
 
   public static Expression getInitialValue(Field field) {

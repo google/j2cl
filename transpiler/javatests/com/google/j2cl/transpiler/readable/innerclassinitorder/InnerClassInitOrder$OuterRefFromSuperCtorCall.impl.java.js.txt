@@ -84,6 +84,7 @@ class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
    * @public
    */
   static $clinit() {
+    OuterRefFromSuperCtorCall.$clinit = function() {};
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     $1 = goog.module.get(

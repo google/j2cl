@@ -70,6 +70,7 @@ class SomeClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    SomeClass.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

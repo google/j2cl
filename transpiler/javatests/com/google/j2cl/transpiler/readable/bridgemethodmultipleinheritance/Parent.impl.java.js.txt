@@ -117,6 +117,7 @@ class Parent extends SuperParent {
    * @public
    */
   static $clinit() {
+    Parent.$clinit = function() {};
     Error = goog.module.get('java.lang.Error$impl');
     Number = goog.module.get('java.lang.Number$impl');
     java_lang_Object = goog.module.get('java.lang.Object$impl');

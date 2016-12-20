@@ -109,6 +109,7 @@ class ESInnerSubclass extends ESInner {
    * @public
    */
   static $clinit() {
+    ESInnerSubclass.$clinit = function() {};
     ESOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

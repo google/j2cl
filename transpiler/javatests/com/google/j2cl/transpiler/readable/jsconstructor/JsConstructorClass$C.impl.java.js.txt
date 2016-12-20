@@ -107,6 +107,7 @@ class C extends B {
    * @public
    */
   static $clinit() {
+    C.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     B.$clinit();
   }

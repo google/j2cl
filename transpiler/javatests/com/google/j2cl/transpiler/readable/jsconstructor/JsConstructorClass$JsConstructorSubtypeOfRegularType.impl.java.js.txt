@@ -91,6 +91,7 @@ class JsConstructorSubtypeOfRegularType extends RegularType {
    * @public
    */
   static $clinit() {
+    JsConstructorSubtypeOfRegularType.$clinit = function() {};
     java_lang_Object = goog.module.get('java.lang.Object$impl');
     RegularType.$clinit();
   }

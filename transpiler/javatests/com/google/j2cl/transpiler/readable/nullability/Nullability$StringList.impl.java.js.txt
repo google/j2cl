@@ -108,6 +108,7 @@ class StringList extends ArrayList {
    * @public
    */
   static $clinit() {
+    StringList.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     Collection$$Overlay = goog.module.get('java.util.Collection$$Overlay$impl');
     List$$Overlay = goog.module.get('java.util.List$$Overlay$impl');

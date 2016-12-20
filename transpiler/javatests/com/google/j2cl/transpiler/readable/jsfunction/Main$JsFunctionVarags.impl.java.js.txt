@@ -69,6 +69,7 @@ class JsFunctionVarags {
    * @public
    */
   static $clinit() {
+    JsFunctionVarags.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }

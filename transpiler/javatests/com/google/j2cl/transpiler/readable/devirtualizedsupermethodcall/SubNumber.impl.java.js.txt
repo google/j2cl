@@ -109,6 +109,7 @@ class SubNumber extends Number {
    * @public
    */
   static $clinit() {
+    SubNumber.$clinit = function() {};
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     Number.$clinit();

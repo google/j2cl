@@ -64,7 +64,9 @@ class Interface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Interface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

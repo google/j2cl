@@ -58,7 +58,9 @@ class Serial {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Serial.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

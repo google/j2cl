@@ -63,7 +63,9 @@ class SubNativeInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    SubNativeInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

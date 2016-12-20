@@ -82,6 +82,7 @@ class Foo extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    Foo.$clinit = function() {};
     Dummy = goog.module.get(
         'com.google.j2cl.transpiler.readable.aptgeneratordep.Dummy$impl');
     Class = goog.module.get('java.lang.Class$impl');

@@ -111,6 +111,7 @@ class Main extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    Main.$clinit = function() {};
     FooImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
     FooOverlay$$Overlay = goog.module.get(

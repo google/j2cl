@@ -65,7 +65,10 @@ class com_google_j2cl_transpiler_readable_jsfunction_Main_Function {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    com_google_j2cl_transpiler_readable_jsfunction_Main_Function.$clinit =
+        function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -73,6 +73,7 @@ class NonNativeLower extends NonNativeUpper {
    * @public
    */
   static $clinit() {
+    NonNativeLower.$clinit = function() {};
     NonNativeUpper.$clinit();
   }
 

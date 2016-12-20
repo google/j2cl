@@ -69,6 +69,7 @@ class MyInterface {
    * @public
    */
   static $clinit() {
+    MyInterface.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

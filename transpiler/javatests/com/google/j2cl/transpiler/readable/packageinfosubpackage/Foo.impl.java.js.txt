@@ -74,6 +74,7 @@ class Foo extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    Foo.$clinit = function() {};
     NativeBar = goog.module.get(
         'com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo.NativeBar$$Proxy');
     java_lang_Object.$clinit();

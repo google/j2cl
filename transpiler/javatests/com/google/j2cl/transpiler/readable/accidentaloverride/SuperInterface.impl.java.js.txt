@@ -67,7 +67,9 @@ class SuperInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    SuperInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

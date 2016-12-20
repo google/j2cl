@@ -83,6 +83,7 @@ class Outer extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    Outer.$clinit = function() {};
     Inner = goog.module.get('com.google.test.Inner$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

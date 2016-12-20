@@ -58,7 +58,9 @@ class EmptyInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    EmptyInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

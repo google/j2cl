@@ -71,6 +71,7 @@ class Foo {
    * @public
    */
   static $clinit() {
+    Foo.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

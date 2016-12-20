@@ -28,7 +28,9 @@ class MyNativeInterface$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    MyNativeInterface$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

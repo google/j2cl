@@ -75,6 +75,7 @@ class Implementor extends ClassWithAbstractMethod {
    * @public
    */
   static $clinit() {
+    Implementor.$clinit = function() {};
     ClassWithAbstractMethod.$clinit();
   }
 

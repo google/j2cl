@@ -68,7 +68,9 @@ class Map {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Map.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

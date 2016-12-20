@@ -82,6 +82,7 @@ class LambdaInSubClass extends Parent {
    * @public
    */
   static $clinit() {
+    LambdaInSubClass.$clinit = function() {};
     $Lambda$LambdaInterface$0 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.$Lambda$LambdaInterface$0$impl');
     Parent.$clinit();

@@ -95,6 +95,7 @@ class InnerClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    InnerClass.$clinit = function() {};
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     $1ReallyInnerClass = goog.module.get(

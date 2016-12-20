@@ -69,6 +69,7 @@ class QualifiedSuperCall extends Parent {
    * @public
    */
   static $clinit() {
+    QualifiedSuperCall.$clinit = function() {};
     Parent.$clinit();
   }
 

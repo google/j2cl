@@ -64,7 +64,9 @@ class JsProducer {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    JsProducer.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -68,7 +68,10 @@ class
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
+        .$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

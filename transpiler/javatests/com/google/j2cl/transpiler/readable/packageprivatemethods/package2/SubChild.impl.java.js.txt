@@ -81,6 +81,7 @@ class SubChild extends Child {
    * @public
    */
   static $clinit() {
+    SubChild.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Child.$clinit();
   }

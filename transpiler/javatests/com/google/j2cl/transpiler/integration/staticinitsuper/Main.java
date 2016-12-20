@@ -40,8 +40,7 @@ public class Main {
 
     assert 2 == loadOrder.size() : "classes are not loaded";
 
-    // TODO(b/28909166): Uncomment below
-    // assert loadOrder.get(0).equals("D1") : "expected D1";
-    // assert loadOrder.get(1).equals("D2") : "expected D2";
+    assert loadOrder.get(0).equals("D1") : "expected D1";
+    assert loadOrder.get(1).equals("D2") : "expected D2";
   }
 }

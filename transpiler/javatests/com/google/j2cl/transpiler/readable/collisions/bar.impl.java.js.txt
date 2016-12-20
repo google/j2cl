@@ -71,6 +71,7 @@ class bar extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    bar.$clinit = function() {};
     foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.collisions.foo$impl');
     com_google_j2cl_transpiler_readable_collisions_goog = goog.module.get(

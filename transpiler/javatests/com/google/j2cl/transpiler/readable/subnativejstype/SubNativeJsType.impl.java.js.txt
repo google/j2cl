@@ -94,6 +94,7 @@ class SubNativeJsType extends MyNativeJsType {
    * @public
    */
   static $clinit() {
+    SubNativeJsType.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 

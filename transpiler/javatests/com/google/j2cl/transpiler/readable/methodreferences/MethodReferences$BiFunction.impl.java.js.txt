@@ -68,7 +68,9 @@ class BiFunction {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    BiFunction.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -113,6 +113,7 @@ class ESWGInnerSubclass extends ESWGInner {
    * @public
    */
   static $clinit() {
+    ESWGInnerSubclass.$clinit = function() {};
     ESWGOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');

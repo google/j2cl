@@ -85,6 +85,7 @@ class A extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    A.$clinit = function() {};
     NestedGenericClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$impl');
     java_lang_Object.$clinit();

@@ -69,6 +69,7 @@ class Cmp2 {
    * @public
    */
   static $clinit() {
+    Cmp2.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

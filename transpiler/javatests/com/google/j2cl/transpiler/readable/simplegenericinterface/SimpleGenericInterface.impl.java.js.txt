@@ -67,7 +67,9 @@ class SimpleGenericInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    SimpleGenericInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

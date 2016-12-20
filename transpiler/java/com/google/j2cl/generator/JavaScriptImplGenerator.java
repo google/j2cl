@@ -531,11 +531,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "static $clinit() ");
     sourceBuilder.openBrace();
-    if (GeneratorUtils.needRewriteClinit(type)) {
-      // Set this method to reference an empty function so that it cannot be called again.
-      sourceBuilder.newLine();
-      sourceBuilder.append(className + ".$clinit = function() {};");
-    }
+
+    // Set this method to reference an empty function so that it will not be executed again.
+    sourceBuilder.newLine();
+    sourceBuilder.append(className + ".$clinit = function() {};");
+
     // goog.module.get(...) for lazy imports.
     Map<String, String> aliasesByPath = new HashMap<>();
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
@@ -552,13 +552,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append(alias + " = " + previousAlias + ";");
       }
     }
+
+    // call the super class $clinit.
     if (GeneratorUtils.hasNonNativeSuperClass(type)) {
-      // call the super class $clinit.
       TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
       String superTypeName = environment.aliasForType(superTypeDescriptor);
       sourceBuilder.newLine();
       sourceBuilder.append(superTypeName + ".$clinit();");
     }
+
+    // call the super interface $clinits.
     for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
       if (interfaceTypeDescriptor.isNative()
           || interfaceTypeDescriptor.isJsFunctionInterface()
@@ -569,8 +572,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       sourceBuilder.append(superTypeName + ".$clinit();");
     }
+
     // Static field and static initializer blocks.
     renderInitializerElements(type.getStaticMembers());
+
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }

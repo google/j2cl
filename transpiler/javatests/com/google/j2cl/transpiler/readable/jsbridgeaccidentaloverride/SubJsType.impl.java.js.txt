@@ -104,6 +104,7 @@ class SubJsType extends MyJsType {
    * @public
    */
   static $clinit() {
+    SubJsType.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     MyJsType.$clinit();
   }

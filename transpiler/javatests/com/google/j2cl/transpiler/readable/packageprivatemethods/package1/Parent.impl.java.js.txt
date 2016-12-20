@@ -107,6 +107,7 @@ class Parent extends SuperParent {
    * @public
    */
   static $clinit() {
+    Parent.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     SuperParent.$clinit();
   }

@@ -84,6 +84,7 @@ class AbstractStringList2 extends AbstractList2 {
    * @public
    */
   static $clinit() {
+    AbstractStringList2.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     AbstractList2.$clinit();
   }

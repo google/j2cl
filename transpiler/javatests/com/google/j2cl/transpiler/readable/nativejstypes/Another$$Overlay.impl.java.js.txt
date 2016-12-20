@@ -27,7 +27,9 @@ class Another$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Another$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadata(

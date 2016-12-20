@@ -86,6 +86,7 @@ class InterfaceImpl extends A {
    * @public
    */
   static $clinit() {
+    InterfaceImpl.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     A.$clinit();
   }

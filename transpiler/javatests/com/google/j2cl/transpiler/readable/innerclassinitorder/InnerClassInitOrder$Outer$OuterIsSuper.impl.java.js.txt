@@ -124,6 +124,7 @@ class OuterIsSuper extends Outer {
    * @public
    */
   static $clinit() {
+    OuterIsSuper.$clinit = function() {};
     OuterIsNotSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
     $1 = goog.module.get(

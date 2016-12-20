@@ -69,6 +69,7 @@ class I {
    * @public
    */
   static $clinit() {
+    I.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
   }
 };

@@ -124,6 +124,7 @@ class InnerClass extends ParentInner {
    * @public
    */
   static $clinit() {
+    InnerClass.$clinit = function() {};
     ChildClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

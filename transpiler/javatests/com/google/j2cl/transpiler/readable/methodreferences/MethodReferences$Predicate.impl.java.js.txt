@@ -67,7 +67,9 @@ class Predicate {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Predicate.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

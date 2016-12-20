@@ -72,6 +72,7 @@ class Child extends Varargs {
    * @public
    */
   static $clinit() {
+    Child.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Varargs.$clinit();

@@ -74,6 +74,7 @@ class Foo extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    Foo.$clinit = function() {};
     Outer = goog.module.get('readable.packageinfo.Outer$impl');
     java_lang_Object.$clinit();
   }

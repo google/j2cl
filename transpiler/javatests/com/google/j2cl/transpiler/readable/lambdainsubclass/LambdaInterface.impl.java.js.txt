@@ -69,6 +69,7 @@ class LambdaInterface {
    * @public
    */
   static $clinit() {
+    LambdaInterface.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

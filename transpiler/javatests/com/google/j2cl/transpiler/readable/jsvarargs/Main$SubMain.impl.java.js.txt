@@ -94,6 +94,7 @@ class SubMain extends Main {
    * @public
    */
   static $clinit() {
+    SubMain.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Main.$clinit();

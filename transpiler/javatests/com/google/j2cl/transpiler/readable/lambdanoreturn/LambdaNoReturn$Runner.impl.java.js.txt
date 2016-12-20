@@ -65,7 +65,9 @@ class Runner {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Runner.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

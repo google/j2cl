@@ -93,6 +93,7 @@ class Parent extends GrandParent {
    * @public
    */
   static $clinit() {
+    Parent.$clinit = function() {};
     java_lang_Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     GrandParent.$clinit();

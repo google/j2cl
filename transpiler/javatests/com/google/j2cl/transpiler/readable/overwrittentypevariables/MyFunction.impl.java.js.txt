@@ -67,7 +67,9 @@ class MyFunction {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    MyFunction.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

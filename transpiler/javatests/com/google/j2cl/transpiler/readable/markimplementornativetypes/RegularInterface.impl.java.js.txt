@@ -58,7 +58,9 @@ class RegularInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    RegularInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

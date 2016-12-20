@@ -69,6 +69,7 @@ class EqualFunction {
    * @public
    */
   static $clinit() {
+    EqualFunction.$clinit = function() {};
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
   }
 };

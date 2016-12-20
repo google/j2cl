@@ -65,7 +65,9 @@ class JsFunctionInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    JsFunctionInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

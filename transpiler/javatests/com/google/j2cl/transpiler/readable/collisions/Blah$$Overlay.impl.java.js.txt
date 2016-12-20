@@ -26,7 +26,9 @@ class Blah$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    Blah$$Overlay.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadata(Blah$$Overlay, $Util.$makeClassName('String'));

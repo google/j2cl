@@ -58,7 +58,9 @@ class NeitherInInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    NeitherInInterface.$clinit = function() {};
+  }
 };
 
 $Util.$setClassMetadataForInterface(

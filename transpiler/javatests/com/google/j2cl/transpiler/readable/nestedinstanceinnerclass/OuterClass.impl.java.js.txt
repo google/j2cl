@@ -84,6 +84,7 @@ class OuterClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    OuterClass.$clinit = function() {};
     InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
     InnerInnerClass = goog.module.get(

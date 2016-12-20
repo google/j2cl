@@ -102,6 +102,7 @@ class BackwardBridgeMethod extends C {
    * @public
    */
   static $clinit() {
+    BackwardBridgeMethod.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     C.$clinit();
