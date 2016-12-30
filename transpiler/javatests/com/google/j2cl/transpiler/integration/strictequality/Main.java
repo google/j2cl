@@ -3,6 +3,7 @@ package com.google.j2cl.transpiler.integration.strictequality;
 public class Main {
   public static void main(String... args) {
     testEqualityIsStrict();
+    testEqualityIsStrict_regression();
     testBoxedAndDevirtualizedTypes();
   }
 
@@ -60,5 +61,22 @@ public class Main {
     assert emptyArray != emptyString;
 
     assert emptyString != nullObject;
+  }
+
+  // Make sure String does not end up compared via '==' (b/33850935).
+  private static void testEqualityIsStrict_regression() {
+    // java.lang.Object.equals should not optimize to '=='
+    assert !new StringBuilder("data").equals("data");
+
+    // CharSequence comparision should not optimize to '=='
+    assert charSeq1() != charSeq2();
+  }
+
+  private static CharSequence charSeq1() {
+    return Math.random() > 0 ? "data" : null;
+  }
+
+  private static CharSequence charSeq2() {
+    return Math.random() > 0 ? new StringBuilder("data") : null;
   }
 }
