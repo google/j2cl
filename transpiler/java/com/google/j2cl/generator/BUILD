@@ -11,7 +11,7 @@ java_library(
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//java/com/google/common/io",
-        "//third_party/java/jakarta_commons_lang/v2_6",
+        "//third_party/java/jakarta_commons_lang",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/sourcemap",
