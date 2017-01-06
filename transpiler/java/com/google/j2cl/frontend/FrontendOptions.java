@@ -17,7 +17,6 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.io.ZipFiles;
 import com.google.j2cl.problems.Problems;
 import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
