@@ -18,10 +18,7 @@ j2cl_mirror_from_gwt(
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
     ],
-    mirrored_files = [
-        "//third_party/java_src/gwt/svn/trunk/user:java_emul_test",
-        "//third_party/java_src/gwt/svn/trunk/user:java8_emul_test",
-    ],
+    mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
         "//jre/java:gwt-jsinterop-annotations",
         "//third_party/java/junit:junit-j2cl",
