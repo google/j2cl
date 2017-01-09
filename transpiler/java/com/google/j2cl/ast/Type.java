@@ -204,6 +204,16 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .build());
   }
 
+  public void addStaticInitializerBlock(int index, Block staticInitializer) {
+    members.add(
+        index,
+        InitializerBlock.newBuilder()
+            .setBlock(staticInitializer)
+            .setIsStatic(true)
+            .setSourcePosition(staticInitializer.getSourcePosition())
+            .build());
+  }
+
   public TypeDescriptor getEnclosingTypeDescriptor() {
     return typeDescriptor.getEnclosingTypeDescriptor();
   }

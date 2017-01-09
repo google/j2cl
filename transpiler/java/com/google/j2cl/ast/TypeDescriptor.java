@@ -99,8 +99,9 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
-  public boolean hasDefaultMethods() {
-    return isInterface() && getMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefault);
+  public boolean declaresDefaultMethods() {
+    return isInterface()
+        && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefault);
   }
 
   public boolean hasSameRawType(TypeDescriptor other) {
@@ -527,7 +528,7 @@ public abstract class TypeDescriptor extends Node
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
-  public Iterable<MethodDescriptor> getDeclaredMethodDescriptors() {
+  public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsBySignature().values();
   }
 

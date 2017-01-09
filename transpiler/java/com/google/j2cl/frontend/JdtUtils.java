@@ -1312,10 +1312,10 @@ public class JdtUtils {
           for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
             MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
             mapBuilder.put(
-                // TODO(b/33595109): Using the method declaration signature here does is not
-                // completely correct; but it is done because parameterized types might
-                // might make multiple superinterface methods collide yet JDT represent these
-                // methods with different method descriptor. e.g.
+                // TODO(b/33595109): Using the method declaration signature here is kind of iffy;
+                // but needs to be done because parameterized types might make multiple
+                // superinterface methods collide which are represented by JDT as different method
+                // bindings but with the same signature, e.g.
                 //   interface I<U, V extends Serializable> {
                 //     void foo(U u);
                 //     void foo(V v);

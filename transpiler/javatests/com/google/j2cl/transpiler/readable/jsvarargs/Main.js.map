@@ -105,3 +105,4 @@
 [a.f1(0, os);] => [a(0, ...$Arrays.$checkNotNull(os));]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));]
+[UNKNOWN] => [java_lang_Object.$clinit();]

@@ -12,3 +12,4 @@
 [Object[][] unbalanced = new Object[][] {{object, object}, null};] => [let unbalanced = /**@type {!Array<Array<*>>} */ ($Arrays.$init([[object, object], null], java_lang_Object, 2));]
 [NativeType nativeObject = new NativeType();] => [let nativeObject = new String();]
 [NativeType[][] array = new NativeType[][] {new NativeType[] {nativeObject, nativeObject}};] => [let array = /**@type {!Array<Array<String>>} */ ($Arrays.$init([[nativeObject, nativeObject]], String, 2));]
+[UNKNOWN] => [java_lang_Object.$clinit();]

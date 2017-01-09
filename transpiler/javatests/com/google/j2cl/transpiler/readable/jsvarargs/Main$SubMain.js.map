@@ -17,3 +17,4 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [a += super.f3(1, ints);] => [a += super.f3(1, ...$Arrays.$checkNotNull(ints));]
 [return a;] => [return a;]
+[UNKNOWN] => [Main.$clinit();]

@@ -16,38 +16,96 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodCall.Builder;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDescriptor;
+import java.util.ArrayList;
+import java.util.List;
 
 /** The first line of a static method should be a call to the Class's clinit. */
 public class InsertStaticClassInitializerMethods extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    // Add clinit calls to static methods and (real js) constructors.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Method rewriteMethod(Method method) {
+            boolean isStaticMethod = method.getDescriptor().isStatic();
+            boolean isJsConstructor = method.getDescriptor().isJsConstructor();
+            if (isStaticMethod || isJsConstructor) {
+              return Method.Builder.from(method)
+                  .addStatement(
+                      0,
+                      newClinitCallStatement(
+                          method.getDescriptor().getEnclosingClassTypeDescriptor()))
+                  .build();
+            }
+            return method;
+          }
+        });
+
+    // Synthesize a static initializer block that calls the necessary super type clinits.
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            List<Statement> superClinitCallStatements = new ArrayList<>();
+
+            if (needsClinitCall(type.getSuperTypeDescriptor())) {
+              superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
+            }
+            addRequiredSuperInterfacesClinitCalls(type.getDescriptor(), superClinitCallStatements);
+            // Insert the static initializer block even if it is empty. For now
+            // JavaScriptImplGenerator will rely on its presence to decide whether it needs to
+            // noop its clinit.
+            type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteMethod(Method method) {
-      boolean isStaticMethod = method.getDescriptor().isStatic();
-      boolean isJsConstructor = method.getDescriptor().isJsConstructor();
-      if (isStaticMethod || isJsConstructor) {
-        MethodDescriptor clinitDescriptor =
-            MethodDescriptor.newBuilder()
-                .setStatic(true)
-                .setEnclosingClassTypeDescriptor(
-                    method.getDescriptor().getEnclosingClassTypeDescriptor())
-                .setName("$clinit")
-                .setJsInfo(JsInfo.RAW)
-                .build();
-        MethodCall call = MethodCall.Builder.from(clinitDescriptor).build();
-        return Method.Builder.from(method).addStatement(0, call.makeStatement()).build();
+  private static Statement newClinitCallStatement(TypeDescriptor typeDescriptor) {
+    MethodDescriptor clinitMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setStatic(true)
+            .setEnclosingClassTypeDescriptor(typeDescriptor)
+            .setName("$clinit")
+            .setJsInfo(JsInfo.RAW)
+            .build();
+    return Builder.from(clinitMethodDescriptor).build().makeStatement();
+  }
+
+  private void addRequiredSuperInterfacesClinitCalls(
+      TypeDescriptor typeDescriptor, List<Statement> superClinitCallStatements) {
+    for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
+      if (!needsClinitCall(interfaceTypeDescriptor)) {
+        continue;
       }
-      return method;
+
+      if (interfaceTypeDescriptor.declaresDefaultMethods()) {
+        // The interface declares a default method; invoke its clinit which will initialize
+        // the interface and all it superinterfaces that declare default methods.
+        superClinitCallStatements.add(newClinitCallStatement(interfaceTypeDescriptor));
+        continue;
+      }
+
+      // The interface does not declare a default method so don't call its clinit; instead recurse
+      // into its super interface hierarchy to invoke clinits of super interfaces that declare
+      // default methods.
+      addRequiredSuperInterfacesClinitCalls(interfaceTypeDescriptor, superClinitCallStatements);
     }
+  }
+
+  private static boolean needsClinitCall(TypeDescriptor typeDescriptor) {
+    return typeDescriptor != null
+        && !typeDescriptor.isNative()
+        && !typeDescriptor.isJsFunctionInterface();
   }
 }

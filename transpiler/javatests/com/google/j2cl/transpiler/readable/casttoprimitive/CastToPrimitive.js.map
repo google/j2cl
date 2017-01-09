@@ -76,3 +76,4 @@
 [long l = (long) boxedByte;] => [let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());]
 [float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__();]
 [double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();]
+[UNKNOWN] => [java_lang_Object.$clinit();]

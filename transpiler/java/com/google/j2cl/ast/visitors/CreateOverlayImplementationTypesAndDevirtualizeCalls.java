@@ -158,7 +158,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       for (Type type : compilationUnit.getTypes()) {
         replacementTypeList.add(type);
 
-        if (type.getDescriptor().isNative() || type.getDescriptor().hasDefaultMethods()) {
+        if (type.getDescriptor().isNative() || type.getDescriptor().declaresDefaultMethods()) {
           replacementTypeList.add(createOverlayImplementationType(type));
         }
       }

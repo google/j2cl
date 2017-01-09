@@ -15,3 +15,4 @@
 [Number n = (Number) o;] => [let n = /**@type {(Number|?number)} */ ($Casts.to(o, Number));]
 [Character c = (Character) o;] => [let c = /**@type {Character} */ ($Casts.to(o, Character));]
 [Boolean bool = (Boolean) o;] => [let bool = /**@type {?boolean} */ ($Casts.to(o, Boolean));]
+[UNKNOWN] => [java_lang_Object.$clinit();]

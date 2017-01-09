@@ -9,3 +9,4 @@
 [A a = new A();] => [let a = A.$create__();]
 [A.B b = a.new B(){};] => [let b = $2.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(this, a);]
 [C c = new C() {};] => [let c = $3.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int(this, arg);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

@@ -9,3 +9,4 @@
 [assert object instanceof InstanceofClass;] => [$Asserts.$enabled() && $Asserts.$assert(InstanceofClass.$isInstance(object));]
 [assert object instanceof Object;] => [$Asserts.$enabled() && $Asserts.$assert(java_lang_Object.$isInstance(object));]
 [assert !(object instanceof String);] => [$Asserts.$enabled() && $Asserts.$assert(!(java_lang_String.$isInstance(object)));]
+[UNKNOWN] => [java_lang_Object.$clinit();]

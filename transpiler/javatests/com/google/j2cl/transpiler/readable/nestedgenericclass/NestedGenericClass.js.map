@@ -13,3 +13,4 @@
 [NestedGenericClass<Number>.A<Error>.B<Exception> b = a.new B<>();] => [let b = /**@type {!B<Exception, Error, (Number|?number)>} */ (B.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A(a));]
 [n.new C();] => [/**@type {!C<(Number|?number)>} */ (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n));]
 [n.new C().new D();] => [/**@type {!D<(Number|?number)>} */ (D.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|?number)>} */ (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n))));]
+[UNKNOWN] => [java_lang_Object.$clinit();]

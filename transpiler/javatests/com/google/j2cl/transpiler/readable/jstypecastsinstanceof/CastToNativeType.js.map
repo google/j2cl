@@ -16,3 +16,4 @@
 [NativeObject[] g = (NativeObject[]) a;] => [let g = /**@type {Array<Object>} */ ($Arrays.$castToNative(a));]
 [NativeObject<String, Object>[] h = (NativeObject<String, Object>[]) a;] => [let h = /**@type {Array<Object<?string, *>>} */ ($Arrays.$castToNative(a));]
 [c = a instanceof NativeObject[];] => [c = $Arrays.$instanceIsOfNative(a);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

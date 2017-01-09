@@ -8,3 +8,4 @@
 [int a = MyInterface.a + MyInterface.b;] => [let a = MyInterface.f_a__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface + MyInterface.f_b__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface;]
 [MyInterface intf = new MyInterface() {};] => [let intf = $1.$create__com_google_j2cl_transpiler_readable_interfacewithfields_Main(this);]
 [a = intf.a + intf.b;] => [a = (intf, MyInterface.f_a__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface) + (intf, MyInterface.f_b__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

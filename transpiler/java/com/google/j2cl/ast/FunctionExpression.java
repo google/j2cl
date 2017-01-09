@@ -76,7 +76,7 @@ public class FunctionExpression extends Expression {
   /** A Builder for FunctionExpression. */
   public static class Builder {
     private List<Variable> parameters = new ArrayList<>();
-    private List<Statement> statements;
+    private List<Statement> statements = new ArrayList<>();
     private TypeDescriptor typeDescriptor;
 
     public static Builder from(FunctionExpression expression) {
