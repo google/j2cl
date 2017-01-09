@@ -63,10 +63,10 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
               superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(type.getDescriptor(), superClinitCallStatements);
-            // Insert the static initializer block even if it is empty. For now
-            // JavaScriptImplGenerator will rely on its presence to decide whether it needs to
-            // noop its clinit.
-            type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));
+
+            if (!superClinitCallStatements.isEmpty()) {
+              type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));
+            }
           }
         });
   }
