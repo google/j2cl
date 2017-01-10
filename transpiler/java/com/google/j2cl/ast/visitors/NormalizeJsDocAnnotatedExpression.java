@@ -18,8 +18,8 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -32,29 +32,29 @@ import com.google.j2cl.ast.TypeDescriptors;
 public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
-  }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteJsDocAnnotatedExpression(
+              JsDocAnnotatedExpression jsDocAnnotatedExpression) {
+            if (jsDocAnnotatedExpression.isDeclaration()
+                || !jsDocAnnotatedExpression.getTypeDescriptor().isParameterizedType()) {
+              return jsDocAnnotatedExpression;
+            }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteJsDocAnnotatedExpression(JsDocAnnotatedExpression jsDocAnnotatedExpression) {
-      if (jsDocAnnotatedExpression.isDeclaration()
-          || jsDocAnnotatedExpression.getTypeDescriptor().getTypeArgumentDescriptors().isEmpty()) {
-        return jsDocAnnotatedExpression;
-      }
-
-      TypeDescriptor annotationTypeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
-      return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
-          .setAnnotationType(
-              TypeDescriptors.replaceTypeArgumentDescriptors(
-                  annotationTypeDescriptor,
-                  Lists.transform(
-                      annotationTypeDescriptor.getTypeArgumentDescriptors(),
-                      typeArgument ->
-                          typeArgument.isWildCardOrCapture()
-                              ? TypeDescriptors.get().javaLangObject
-                              : typeArgument)))
-          .build();
-    }
+            TypeDescriptor annotationTypeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
+            return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
+                .setAnnotationType(
+                    TypeDescriptors.replaceTypeArgumentDescriptors(
+                        annotationTypeDescriptor,
+                        Lists.transform(
+                            annotationTypeDescriptor.getTypeArgumentDescriptors(),
+                            typeArgument ->
+                                typeArgument.isWildCardOrCapture()
+                                    ? TypeDescriptors.get().javaLangObject
+                                    : typeArgument)))
+                .build();
+          }
+        });
   }
 }

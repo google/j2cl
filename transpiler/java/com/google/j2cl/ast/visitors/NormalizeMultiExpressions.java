@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.UnaryExpression;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +38,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
 
   private static class FlattenMultiExpressions extends AbstractRewriter {
     @Override
-    public Node rewriteMultiExpression(MultiExpression multiExpression) {
+    public Expression rewriteMultiExpression(MultiExpression multiExpression) {
       List<Expression> flattenedExpressions = new ArrayList<>();
       for (Expression expression : multiExpression.getExpressions()) {
         if (expression instanceof MultiExpression) {
@@ -55,7 +53,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
 
   private static class SwitchMultiExpressionsAndSideEffectingExpressions extends AbstractRewriter {
     @Override
-    public Node rewriteBinaryExpression(BinaryExpression expression) {
+    public Expression rewriteBinaryExpression(BinaryExpression expression) {
       if (expression.getOperator().hasSideEffect()
           && expression.getLeftOperand() instanceof MultiExpression) {
         List<Expression> lhsExpressions =
@@ -64,18 +62,15 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         Expression innerExpression =
             BinaryExpression.Builder.from(expression).setLeftOperand(rightMostLhsExpression).build();
         return MultiExpression.newBuilder()
-            .setExpressions(
-                ImmutableList.<Expression>builder()
-                    .addAll(lhsExpressions.subList(0, lhsExpressions.size() - 1))
-                    .add(innerExpression)
-                    .build())
+            .addExpressions(lhsExpressions.subList(0, lhsExpressions.size() - 1))
+            .addExpressions(innerExpression)
             .build();
       }
       return expression;
     }
 
     @Override
-    public Node rewriteUnaryExpression(UnaryExpression expression) {
+    public Expression rewriteUnaryExpression(UnaryExpression expression) {
       if (expression.getOperator().hasSideEffect()
           && expression.getOperand() instanceof MultiExpression) {
         List<Expression> expressions = ((MultiExpression) expression.getOperand()).getExpressions();
@@ -83,11 +78,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         Expression innerExpression =
             UnaryExpression.Builder.from(expression).setOperand(rightMostExpression).build();
         return MultiExpression.newBuilder()
-            .setExpressions(
-                ImmutableList.<Expression>builder()
-                    .addAll(expressions.subList(0, expressions.size() - 1))
-                    .add(innerExpression)
-                    .build())
+            .addExpressions(expressions.subList(0, expressions.size() - 1))
+            .addExpressions(innerExpression)
             .build();
       }
       return expression;

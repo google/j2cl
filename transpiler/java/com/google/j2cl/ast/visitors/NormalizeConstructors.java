@@ -31,7 +31,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
@@ -178,7 +177,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   private static class RewriteCtorsAsMethods extends AbstractRewriter {
     @Override
-    public Node rewriteMethod(Method method) {
+    public Method rewriteMethod(Method method) {
       if (!method.isConstructor()) {
         return method;
       }
@@ -196,7 +195,7 @@ public class NormalizeConstructors extends NormalizationPass {
     }
 
     @Override
-    public Node rewriteMethodCall(MethodCall methodCall) {
+    public Expression rewriteMethodCall(MethodCall methodCall) {
       if (!methodCall.getTarget().isConstructor()) {
         return methodCall;
       }
@@ -307,7 +306,7 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static class RewriteNewInstance extends AbstractRewriter {
     @Override
-    public Node rewriteNewInstance(NewInstance constructorInvocation) {
+    public Expression rewriteNewInstance(NewInstance constructorInvocation) {
       MethodDescriptor originalConstructor = constructorInvocation.getTarget();
       if (originalConstructor.isJsConstructor()) {
         return constructorInvocation;

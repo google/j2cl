@@ -29,32 +29,30 @@ import java.util.List;
 public class InsertInstanceInitCalls extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Visitor());
-  }
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethod(Method method) {
+            if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
+              // A constructor with this() call does not need $init call.
+              return;
+            }
+            synthesizeInstanceInitCall(method);
+          }
 
-  private static class Visitor extends AbstractVisitor {
-    @Override
-    public boolean enterMethod(Method method) {
-      if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
-        // A constructor with this() call does not need $init call.
-        return false;
-      }
-      synthesizeInstanceInitCall(method);
-      return false;
-    }
+          private void synthesizeInstanceInitCall(Method method) {
+            MethodDescriptor initMethodDescriptor =
+                AstUtils.createInitMethodDescriptor(
+                    method.getDescriptor().getEnclosingClassTypeDescriptor());
 
-    private void synthesizeInstanceInitCall(Method method) {
-      MethodDescriptor initMethodDescriptor =
-          AstUtils.createInitMethodDescriptor(
-              method.getDescriptor().getEnclosingClassTypeDescriptor());
-
-      List<Expression> arguments = new ArrayList<>();
-      MethodCall initCall =
-          MethodCall.Builder.from(initMethodDescriptor).setArguments(arguments).build();
-      // If the constructor has a super() call, insert $init call after it. Otherwise, insert
-      // to the top of the method body.
-      int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
-      method.getBody().getStatements().add(insertIndex, initCall.makeStatement());
-    }
+            List<Expression> arguments = new ArrayList<>();
+            MethodCall initCall =
+                MethodCall.Builder.from(initMethodDescriptor).setArguments(arguments).build();
+            // If the constructor has a super() call, insert $init call after it. Otherwise, insert
+            // to the top of the method body.
+            int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
+            method.getBody().getStatements().add(insertIndex, initCall.makeStatement());
+          }
+        });
   }
 }

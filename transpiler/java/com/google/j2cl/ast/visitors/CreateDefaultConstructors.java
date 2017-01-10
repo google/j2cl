@@ -32,37 +32,31 @@ import com.google.j2cl.ast.Visibility;
 public class CreateDefaultConstructors extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Visitor());
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            if (type.isInterface() || type.getMethods().stream().anyMatch(Method::isConstructor)) {
+              // It is an interface or already has a constructor.
+              return;
+            }
+
+            synthesizeDefaultConstructor(type);
+          }
+
+          private void synthesizeDefaultConstructor(Type type) {
+            Visibility visibility =
+                type.isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility();
+            MethodDescriptor methodDescriptor =
+                AstUtils.createDefaultConstructorDescriptor(type.getDescriptor(), visibility);
+            type.addMethod(
+                0,
+                Method.newBuilder()
+                    .setMethodDescriptor(methodDescriptor)
+                    .setSourcePosition(type.getSourcePosition())
+                    .build());
+          }
+        });
   }
 
-  private static class Visitor extends AbstractVisitor {
-    @Override
-    public boolean enterType(Type type) {
-      if (type.isInterface()) {
-        return false;
-      }
-
-      for (Method method : type.getMethods()) {
-        if (method.isConstructor()) {
-          // If there is any explicit constructor, then don't synthesize a default one.
-          return false;
-        }
-      }
-
-      synthesizeDefaultConstructor(type);
-      return false;
-    }
-
-    private void synthesizeDefaultConstructor(Type type) {
-      Visibility visibility = type.isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility();
-      MethodDescriptor methodDescriptor =
-          AstUtils.createDefaultConstructorDescriptor(type.getDescriptor(), visibility);
-      type.addMethod(
-          0,
-          Method.newBuilder()
-              .setMethodDescriptor(methodDescriptor)
-              .setSourcePosition(type.getSourcePosition())
-              .build());
-    }
-  }
 }

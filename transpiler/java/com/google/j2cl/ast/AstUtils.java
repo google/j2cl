@@ -21,8 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
@@ -871,7 +869,7 @@ public class AstUtils {
    * @param operator
    * @return The method call.
    */
-  public static Node createArraySetPostfixExpression(
+  public static Expression createArraySetPostfixExpression(
       Expression array, Expression index, PostfixOperator operator) {
 
     // Get the type of the elements in the array.
@@ -1063,45 +1061,6 @@ public class AstUtils {
     return lambdaTypeParameterTypeDescriptors;
   }
 
-  /** Returns an iterable containing only the fields in {@code members}. */
-  public static FluentIterable<Field> filterFields(Iterable<Member> members) {
-    return FluentIterable.from(members)
-        .transform(
-            member -> {
-              if (member instanceof Field) {
-                return (Field) member;
-              }
-              return null;
-            })
-        .filter(Predicates.notNull());
-  }
-
-  /** Returns an iterable containing only the methods in {@code members}. */
-  public static FluentIterable<Method> filterMethods(Iterable<Member> members) {
-    return FluentIterable.from(members)
-        .transform(
-            member -> {
-              if (member instanceof Method) {
-                return (Method) member;
-              }
-              return null;
-            })
-        .filter(Predicates.notNull());
-  }
-
-  /** Returns an iterable containing only the initializer blocks in {@code members}. */
-  public static FluentIterable<InitializerBlock> filterInitializerBlocks(Iterable<Member> members) {
-    return FluentIterable.from(members)
-        .transform(
-            member -> {
-              if (member instanceof InitializerBlock) {
-                return (InitializerBlock) member;
-              }
-              return null;
-            })
-        .filter(Predicates.notNull());
-  }
-
   @SuppressWarnings("unchecked")
   /** Clones a list of expressions */
   public static <T extends Cloneable<?>> List<T> clone(List<T> nodes) {
@@ -1146,13 +1105,13 @@ public class AstUtils {
       }
 
       @Override
-      public Node rewriteVariable(Variable variable) {
+      public Variable rewriteVariable(Variable variable) {
         Variable toVariable = toVariableByFromVariable.get(variable);
         return toVariable == null ? variable : toVariable;
       }
 
       @Override
-      public Node rewriteVariableReference(VariableReference variableReference) {
+      public Expression rewriteVariableReference(VariableReference variableReference) {
         Variable toVariable = toVariableByFromVariable.get(variableReference.getTarget());
         if (toVariable != null) {
           return toVariable.getReference();

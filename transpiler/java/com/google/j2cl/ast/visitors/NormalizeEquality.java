@@ -20,8 +20,8 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 
@@ -29,38 +29,38 @@ import com.google.j2cl.ast.PrefixOperator;
 public class NormalizeEquality extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
-  }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteBinaryExpression(BinaryExpression binaryExpression) {
+            // Don't rewrite non-equality expressions.
+            if (binaryExpression.getOperator() != BinaryOperator.EQUALS
+                && binaryExpression.getOperator() != BinaryOperator.NOT_EQUALS) {
+              return binaryExpression;
+            }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-      // Don't rewrite non-equality expressions.
-      if (binaryExpression.getOperator() != BinaryOperator.EQUALS
-          && binaryExpression.getOperator() != BinaryOperator.NOT_EQUALS) {
-        return binaryExpression;
-      }
+            // Don't rewrite primitive comparisons since '==' and '!=' are already good enough.
+            if (binaryExpression.getLeftOperand().getTypeDescriptor().isPrimitive()
+                || binaryExpression.getRightOperand().getTypeDescriptor().isPrimitive()) {
+              return binaryExpression;
+            }
 
-      // Don't rewrite primitive comparisons since '==' and '!=' are already good enough.
-      if (binaryExpression.getLeftOperand().getTypeDescriptor().isPrimitive()
-          || binaryExpression.getRightOperand().getTypeDescriptor().isPrimitive()) {
-        return binaryExpression;
-      }
-
-      // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null
-      // and undefined as equivalent.
-      MethodCall sameCall =
-          MethodCall.Builder.from(AstUtils.createUtilSameMethodDescriptor())
-              .setArguments(binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
-              .build();
-      if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
-        return PrefixExpression.newBuilder()
-            .setTypeDescriptor(sameCall.getTypeDescriptor())
-            .setOperand(sameCall)
-            .setOperator(PrefixOperator.NOT)
-            .build();
-      }
-      return sameCall;
-    }
+            // Rewrite object - object comparisons to avoid JS implicit conversions and still treat
+            // null and undefined as equivalent.
+            MethodCall sameCall =
+                MethodCall.Builder.from(AstUtils.createUtilSameMethodDescriptor())
+                    .setArguments(
+                        binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
+                    .build();
+            if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
+              return PrefixExpression.newBuilder()
+                  .setTypeDescriptor(sameCall.getTypeDescriptor())
+                  .setOperand(sameCall)
+                  .setOperator(PrefixOperator.NOT)
+                  .build();
+            }
+            return sameCall;
+          }
+        });
   }
 }

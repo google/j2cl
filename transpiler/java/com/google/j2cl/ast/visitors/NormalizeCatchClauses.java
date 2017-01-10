@@ -30,7 +30,6 @@ import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
@@ -76,23 +75,23 @@ import java.util.stream.Collectors;
 public class NormalizeCatchClauses extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Statement rewriteTryStatement(TryStatement statement) {
+            if (statement.getCatchClauses().isEmpty()) {
+              return statement;
+            }
+            return new TryStatement(
+                statement.getResourceDeclarations(),
+                statement.getBody(),
+                Collections.singletonList(mergeClauses(statement.getCatchClauses())),
+                statement.getFinallyBlock());
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteTryStatement(TryStatement originalStatement) {
-      if (originalStatement.getCatchClauses().isEmpty()) {
-        return originalStatement;
-      }
-      return new TryStatement(
-          originalStatement.getResourceDeclarations(),
-          originalStatement.getBody(),
-          Collections.singletonList(mergeClauses(originalStatement.getCatchClauses())),
-          originalStatement.getFinallyBlock());
-    }
-
-    private CatchClause mergeClauses(List<CatchClause> clauses) {
+  private static CatchClause mergeClauses(List<CatchClause> clauses) {
       checkArgument(!clauses.isEmpty());
       // Create a temporary exception variable.
       Variable exceptionVariable =
@@ -104,7 +103,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
       return new CatchClause(exceptionVariable, new Block(body));
     }
 
-    private Statement bodyBuilder(List<CatchClause> clauses, Variable exceptionVariable) {
+  private static Statement bodyBuilder(List<CatchClause> clauses, Variable exceptionVariable) {
       // Base case. If no more clauses left the last statement throws the exception.
       if (clauses.isEmpty()) {
         Statement noMatchThrowException = new ThrowStatement(exceptionVariable.getReference());
@@ -143,14 +142,14 @@ public class NormalizeCatchClauses extends NormalizationPass {
           bodyBuilder(clauses.subList(1, clauses.size()), exceptionVariable));
     }
 
-    /**
-     * Given a list of types t1, t2, t3.. and an exceptionVariable e, this method generates an
-     * expression that checks if e is of type t1 or t2, or t3...
-     *
-     * <p>t1.$isInstance(e) || t2.$isInstance(e) || t3.$isInstance(e) ...
-     */
-    private Expression checkTypeExpression(
-        Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
+  /**
+   * Given a list of types t1, t2, t3.. and an exceptionVariable e, this method generates an
+   * expression that checks if e is of type t1 or t2, or t3...
+   *
+   * <p>t1.$isInstance(e) || t2.$isInstance(e) || t3.$isInstance(e) ...
+   */
+  private static Expression checkTypeExpression(
+      Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
       List<Expression> methodCalls =
           typeDescriptors
               .stream()
@@ -181,5 +180,4 @@ public class NormalizeCatchClauses extends NormalizationPass {
               .build();
       return MethodCall.Builder.from(methodDescriptor).setArguments(exceptionVariable).build();
     }
-  }
 }

@@ -53,7 +53,7 @@ import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
-import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
+import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
@@ -210,7 +210,7 @@ public class J2clTranspiler {
 
             // Statement/Expression normalizations
             new NormalizeArrayLiterals(),
-            new NormalizeStaticMemberQualifiersPass(),
+            new NormalizeStaticMemberQualifiers(),
             // Runs after NormalizeStaticMemberQualifiersPass.
             new DevirtualizeMethodCalls(),
             new ControlStatementFormatter(),

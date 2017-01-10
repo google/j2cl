@@ -29,32 +29,28 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Normalizes array creations. */
 public class NormalizeArrayCreations extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
-  }
-
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteNewArray(NewArray newArray) {
-      if (newArray.getArrayLiteral() != null) {
-        return rewriteArrayInit(newArray);
-      }
-      return rewriteArrayCreate(newArray);
-    }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteNewArray(NewArray newArray) {
+            if (newArray.getArrayLiteral() != null) {
+              return rewriteArrayInit(newArray);
+            }
+            return rewriteArrayCreate(newArray);
+          }
+        });
   }
 
   /** We transform new Object[100][100]; to Arrays.$create([100, 100], Object); */
-  private static Node rewriteArrayCreate(NewArray newArrayExpression) {
+  private static Expression rewriteArrayCreate(NewArray newArrayExpression) {
     checkArgument(newArrayExpression.getArrayLiteral() == null);
 
     if (shouldBeUntypedArray(newArrayExpression)) {
@@ -85,18 +81,17 @@ public class NormalizeArrayCreations extends NormalizationPass {
                 TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                 TypeDescriptors.get().javaLangObject)
             .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(
-        new ArrayLiteral(
-            TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
-            newArrayExpression.getDimensionExpressions()));
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
-    TypeReference leafTypeReference =
-        new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
-    arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
-        MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
+        MethodCall.Builder.from(arrayCreateMethodDescriptor)
+            .setArguments(
+                new ArrayLiteral(
+                    TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                    newArrayExpression.getDimensionExpressions()),
+                new TypeReference(
+                    newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
+            .build();
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(arrayCreateMethodCall)
         .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
@@ -107,7 +102,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
    * We transform new Object[][] {{object, object}, {object, object}} to Arrays.$init([[object,
    * object], [object, object]], Object, 2);
    */
-  private static Node rewriteArrayInit(NewArray newArrayExpression) {
+  private static Expression rewriteArrayInit(NewArray newArrayExpression) {
     checkArgument(newArrayExpression.getArrayLiteral() != null);
 
     if (shouldBeUntypedArray(newArrayExpression)) {
@@ -130,15 +125,15 @@ public class NormalizeArrayCreations extends NormalizationPass {
     if (dimensionCount == 1) {
       // Number of dimensions defaults to 1 so we can leave that parameter out.
 
-      List<Expression> arguments = new ArrayList<>();
-      arguments.add(newArrayExpression.getArrayLiteral());
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
-      TypeReference leafTypeReference =
-          new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
-      arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
-          MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
+          MethodCall.Builder.from(arrayInitMethodDescriptor)
+              .setArguments(
+                  newArrayExpression.getArrayLiteral(),
+                  new TypeReference(
+                      newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
+              .build();
       return JsDocAnnotatedExpression.newBuilder()
           .setExpression(arrayInitMethodCall)
           .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
@@ -149,16 +144,17 @@ public class NormalizeArrayCreations extends NormalizationPass {
           MethodDescriptor.Builder.from(arrayInitMethodDescriptor)
               .addParameterTypeDescriptors(TypeDescriptors.get().primitiveInt)
               .build();
-      List<Expression> arguments = new ArrayList<>();
-      arguments.add(newArrayExpression.getArrayLiteral());
+
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
-      TypeReference leafTypeReference =
-          new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
-      arguments.add(leafTypeReference);
-      arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
-          MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
+          MethodCall.Builder.from(arrayInitMethodDescriptor)
+              .setArguments(
+                  newArrayExpression.getArrayLiteral(),
+                  new TypeReference(
+                      newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()),
+                  new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount))
+              .build();
 
       return JsDocAnnotatedExpression.newBuilder()
           .setExpression(arrayInitMethodCall)

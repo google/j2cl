@@ -21,8 +21,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.OperatorSideEffectUtils;
+import com.google.j2cl.ast.Statement;
 import java.util.List;
 
 /**
@@ -38,42 +38,42 @@ import java.util.List;
 public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
-  }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          /**
+           * Examines the case when a MultiExpression is directly contained in an
+           * ExpressionStatement since we know for certain that in this situation the
+           * MultiExpression's returned value must be unused.
+           */
+          @Override
+          public Statement rewriteExpressionStatement(ExpressionStatement expressionStatement) {
+            // Ignore non multi expressions.
+            if (!(expressionStatement.getExpression() instanceof MultiExpression)) {
+              return expressionStatement;
+            }
+            MultiExpression multiExpression = (MultiExpression) expressionStatement.getExpression();
+            List<Expression> expressions = multiExpression.getExpressions();
+            // Can't do anything if the multi expression contains no expressions.
+            if (expressions.isEmpty()) {
+              return expressionStatement;
+            }
+            // Only target return values that are FieldAccesses since we know they are side effect
+            // free and we know that we generate this case.
+            // TODO(rluble): This is not technically correct as field accesses could trigger
+            // clinits, but multiexpressions only come about from our normalization and in those
+            // transformations clinit would have been already triggered. Add a verifier pass to make
+            // sure the semantics do not change.
+            if (!OperatorSideEffectUtils.canExpressionBeEvaluatedTwice(
+                Iterables.getLast(expressions))) {
+              return expressionStatement;
+            }
 
-  private static class Rewriter extends AbstractRewriter {
-    /**
-     * Examines the case when a MultiExpression is directly contained in an ExpressionStatement
-     * since we know for certain that in this situation the MultiExpression's returned value must be
-     * unused.
-     */
-    @Override
-    public Node rewriteExpressionStatement(ExpressionStatement expressionStatement) {
-      // Ignore non multi expressions.
-      if (!(expressionStatement.getExpression() instanceof MultiExpression)) {
-        return expressionStatement;
-      }
-      MultiExpression multiExpression = (MultiExpression) expressionStatement.getExpression();
-      List<Expression> expressions = multiExpression.getExpressions();
-      // Can't do anything if the multi expression contains no expressions.
-      if (expressions.isEmpty()) {
-        return expressionStatement;
-      }
-      // Only target return values that are FieldAccesses since we know they are side effect free
-      // and we know that we generate this case.
-      // TODO(rluble): This is not technically correct as field accesses could trigger clinits, but
-      // multiexpressions only come about from our normalization and in those transformations clinit
-      // would have been already triggered. Add a verifier pass to make sure the semantics do
-      // not change.
-      if (!OperatorSideEffectUtils.canExpressionBeEvaluatedTwice(Iterables.getLast(expressions))) {
-        return expressionStatement;
-      }
-
-      // Return a replacement with the unused return value expression trimmed off.
-      return MultiExpression.newBuilder()
-          .setExpressions(expressions.subList(0, expressions.size() - 1))
-          .build()
-          .makeStatement();
-    }
+            // Return a replacement with the unused return value expression trimmed off.
+            return MultiExpression.newBuilder()
+                .setExpressions(expressions.subList(0, expressions.size() - 1))
+                .build()
+                .makeStatement();
+          }
+        });
   }
 }

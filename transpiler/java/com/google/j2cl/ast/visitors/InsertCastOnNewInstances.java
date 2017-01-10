@@ -24,21 +24,20 @@ import com.google.j2cl.ast.TypeDescriptors;
 public class InsertCastOnNewInstances extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteNewInstance(NewInstance newInstance) {
+            if (!newInstance.getTypeDescriptor().isParameterizedType()) {
+              return newInstance;
+            }
+            // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
+            return JsDocAnnotatedExpression.newBuilder()
+                .setExpression(newInstance)
+                .setAnnotationType(TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()))
+                .build();
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteNewInstance(NewInstance newInstance) {
-      if (newInstance.getTypeDescriptor().isParameterizedType()) {
-        // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-        return JsDocAnnotatedExpression.newBuilder()
-            .setExpression(newInstance)
-            .setAnnotationType(TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()))
-            .build();
-      } else {
-        return newInstance;
-      }
-    }
-  }
 }

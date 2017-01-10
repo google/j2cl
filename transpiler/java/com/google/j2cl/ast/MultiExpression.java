@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -67,8 +68,18 @@ public class MultiExpression extends Expression {
       return setExpressions(Arrays.asList(expressions));
     }
 
-    public Builder setExpressions(List<Expression> expressions) {
+    public Builder setExpressions(Collection<Expression> expressions) {
       this.expressions = new ArrayList<>(expressions);
+      return this;
+    }
+
+    public Builder addExpressions(Expression... expressions) {
+      this.expressions.addAll(Arrays.asList(expressions));
+      return this;
+    }
+
+    public Builder addExpressions(Collection<Expression> expressions) {
+      this.expressions.addAll(expressions);
       return this;
     }
 

@@ -45,69 +45,70 @@ import java.util.List;
 public class NormalizeTryWithResources extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Pass());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          /**
+           * We want to rewrite the try with resource statement to use vanilla try catch statements
+           * as described by the JLS 14.20.3.1.
+           */
+          @Override
+          public Statement rewriteTryStatement(TryStatement tryStatement) {
+            if (tryStatement.getResourceDeclarations().isEmpty()) {
+              return tryStatement;
+            }
+            if (tryStatement.getFinallyBlock() != null
+                || !tryStatement.getCatchClauses().isEmpty()) {
+              // See JLS 14.20.3.2
+              TryStatement tryBlock =
+                  new TryStatement(
+                      tryStatement.getResourceDeclarations(),
+                      tryStatement.getBody(),
+                      Collections.emptyList(),
+                      null);
+              Block refactoredTryBlock = new Block(removeResourceDeclarations(tryBlock));
+              return new TryStatement(
+                  Collections.emptyList(),
+                  refactoredTryBlock,
+                  tryStatement.getCatchClauses(),
+                  tryStatement.getFinallyBlock());
+            }
+            return new Block(removeResourceDeclarations(tryStatement));
+          }
+        });
   }
 
-  private static class Pass extends AbstractRewriter {
-    /**
-     * We want to rewrite the try with resource statement to use vanilla try catch statements as
-     * described by the JLS 14.20.3.1.
-     */
-    @Override
-    public Statement rewriteTryStatement(TryStatement tryStatement) {
-      if (tryStatement.getResourceDeclarations().isEmpty()) {
-        return tryStatement;
-      }
-      if (tryStatement.getFinallyBlock() != null || !tryStatement.getCatchClauses().isEmpty()) {
-        // See JLS 14.20.3.2
-        TryStatement tryBlock =
-            new TryStatement(
-                tryStatement.getResourceDeclarations(),
-                tryStatement.getBody(),
-                Collections.emptyList(),
-                null);
-        Block refactoredTryBlock = new Block(removeResourceDeclarations(tryBlock));
-        return new TryStatement(
-            Collections.emptyList(),
-            refactoredTryBlock,
-            tryStatement.getCatchClauses(),
-            tryStatement.getFinallyBlock());
-      }
-      return new Block(removeResourceDeclarations(tryStatement));
-    }
-
-    /**
-     * We transform:
-     *
-     * <pre>{@code
-     * try (ClosableThing thing = new ClosableThing(), ClosableThing thing2 = new ClosableThing()) {
-     *   ....
-     * }
-     * }</pre>
-     *
-     * to:
-     *
-     * <pre>{@code
-     * let $primaryExc = null;
-     * let thing = null;
-     * let thing2 = null;
-     * try {
-     *   let thing = ClosableThing.$create();
-     *   let thing2 = ClosableThing.$create();
-     *   ...
-     * } catch ($exceptionFromTry) {
-     *   $primaryExc = $exceptionFromTry;
-     *   throw $exceptionFromTry;
-     * } finally {
-     *   $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
-     *   $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-     *   if ($primaryExc != null) {
-     *     throw $primaryExc;
-     *   }
-     * }
-     * }</pre>
-     */
-    private static List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
+  /**
+   * We transform:
+   *
+   * <pre>{@code
+   * try (ClosableThing thing = new ClosableThing(), ClosableThing thing2 = new ClosableThing()) {
+   *   ....
+   * }
+   * }</pre>
+   *
+   * to:
+   *
+   * <pre>{@code
+   * let $primaryExc = null;
+   * let thing = null;
+   * let thing2 = null;
+   * try {
+   *   let thing = ClosableThing.$create();
+   *   let thing2 = ClosableThing.$create();
+   *   ...
+   * } catch ($exceptionFromTry) {
+   *   $primaryExc = $exceptionFromTry;
+   *   throw $exceptionFromTry;
+   * } finally {
+   *   $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+   *   $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+   *   if ($primaryExc != null) {
+   *     throw $primaryExc;
+   *   }
+   * }
+   * }</pre>
+   */
+  private static List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
       MethodDescriptor safeClose =
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
@@ -204,5 +205,4 @@ public class NormalizeTryWithResources extends NormalizationPass {
               new Block(finallyBlockStatements)));
       return transformedStatements;
     }
-  }
 }

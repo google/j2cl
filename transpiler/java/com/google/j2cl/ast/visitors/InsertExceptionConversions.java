@@ -53,54 +53,56 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 public class InsertExceptionConversions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteCatchClause(CatchClause catchClause) {
+
+            MethodDescriptor toJava =
+                MethodDescriptor.newBuilder()
+                    .setJsInfo(JsInfo.RAW)
+                    .setStatic(true)
+                    .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+                    .setName("toJava")
+                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+                    .build();
+
+            MethodCall toJavaCall =
+                MethodCall.Builder.from(toJava)
+                    .setArguments(catchClause.getExceptionVar().getReference())
+                    .build();
+
+            Expression assignment =
+                BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVar())
+                    .setRightOperand(toJavaCall)
+                    .build();
+
+            catchClause.getBody().getStatements().add(0, assignment.makeStatement());
+
+            return catchClause;
+          }
+
+          @Override
+          public Node rewriteThrowStatement(ThrowStatement originalStatement) {
+            MethodDescriptor toJs =
+                MethodDescriptor.newBuilder()
+                    .setJsInfo(JsInfo.RAW)
+                    .setStatic(true)
+                    .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+                    .setName("toJs")
+                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
+                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+                    .build();
+
+            MethodCall toJsCall =
+                MethodCall.Builder.from(toJs)
+                    .setArguments(originalStatement.getExpression())
+                    .build();
+
+            return new ThrowStatement(toJsCall);
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteCatchClause(CatchClause catchClause) {
-
-      MethodDescriptor toJava =
-          MethodDescriptor.newBuilder()
-              .setJsInfo(JsInfo.RAW)
-              .setStatic(true)
-              .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setName("toJava")
-              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-              .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
-              .build();
-
-      MethodCall toJavaCall =
-          MethodCall.Builder.from(toJava)
-              .setArguments(catchClause.getExceptionVar().getReference())
-              .build();
-
-      Expression assignment =
-          BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVar())
-              .setRightOperand(toJavaCall)
-              .build();
-
-      catchClause.getBody().getStatements().add(0, assignment.makeStatement());
-
-      return catchClause;
-    }
-
-    @Override
-    public Node rewriteThrowStatement(ThrowStatement originalStatement) {
-      MethodDescriptor toJs =
-          MethodDescriptor.newBuilder()
-              .setJsInfo(JsInfo.RAW)
-              .setStatic(true)
-              .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setName("toJs")
-              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
-              .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
-              .build();
-
-      MethodCall toJsCall =
-          MethodCall.Builder.from(toJs).setArguments(originalStatement.getExpression()).build();
-
-      return new ThrowStatement(toJsCall);
-    }
-  }
 }

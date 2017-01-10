@@ -35,47 +35,46 @@ import java.util.List;
 public class InsertExplicitSuperCalls extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Pass());
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public boolean enterType(Type type) {
+            return !type.isInterface();
+          }
+
+          @Override
+          public void exitMethod(Method method) {
+            /*
+             * Only inserts explicit super() call to a constructor that does not have
+             * a super() or this() call, and the corresponding type does have a super class.
+             */
+            if (!method.isConstructor()
+                || AstUtils.hasConstructorInvocation(method)
+                || getCurrentType().getSuperTypeDescriptor() == null) {
+              return;
+            }
+            /*
+             * Do not insert super() call to a native JS type. Otherwise it will lead to error
+             * because a native JS type is not expected to have a $ctor method.
+             * TODO: super() call to native type should be inserted somewhere otherwise it will lead
+             * to an error if the native type has a non-empty constructor.
+             */
+            if (getCurrentType().getSuperTypeDescriptor().isNative()) {
+              return;
+            }
+            synthesizeSuperCall(method, getCurrentType().getSuperTypeDescriptor());
+          }
+
+          private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
+            MethodDescriptor methodDescriptor =
+                AstUtils.createDefaultConstructorDescriptor(
+                    superTypeDescriptor, superTypeDescriptor.getVisibility());
+            List<Expression> arguments = new ArrayList<>();
+            MethodCall superCall =
+                MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
+            method.getBody().getStatements().add(0, superCall.makeStatement());
+          }
+        });
   }
 
-  private static class Pass extends AbstractVisitor {
-    @Override
-    public boolean enterType(Type type) {
-      return !type.isInterface();
-    }
-
-    @Override
-    public boolean enterMethod(Method method) {
-      /*
-       * Only inserts explicit super() call to a constructor that does not have
-       * a super() or this() call, and the corresponding type does have a super class.
-       */
-      if (!method.isConstructor()
-          || AstUtils.hasConstructorInvocation(method)
-          || getCurrentType().getSuperTypeDescriptor() == null) {
-        return false;
-      }
-      /*
-       * Do not insert super() call to a native JS type. Otherwise it will lead to error because a
-       * native JS type is not expected to have a $ctor method.
-       * TODO: super() call to native type should be inserted somewhere otherwise it will lead to
-       * an error if the native type has a non-empty constructor.
-       */
-      if (getCurrentType().getSuperTypeDescriptor().isNative()) {
-        return false;
-      }
-      synthesizeSuperCall(method, getCurrentType().getSuperTypeDescriptor());
-      return false;
-    }
-
-    private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
-      MethodDescriptor methodDescriptor =
-          AstUtils.createDefaultConstructorDescriptor(
-              superTypeDescriptor, superTypeDescriptor.getVisibility());
-      List<Expression> arguments = new ArrayList<>();
-      MethodCall superCall =
-          MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-      method.getBody().getStatements().add(0, superCall.makeStatement());
-    }
-  }
 }

@@ -15,15 +15,12 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.Variable;
-import java.util.List;
 
 /**
  * Creates unimplemented methods in abstract class.
@@ -36,51 +33,34 @@ import java.util.List;
 public class UnimplementedMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new UnimplementedMethodsCreatorVisitor());
-  }
-
-  private static class UnimplementedMethodsCreatorVisitor extends AbstractVisitor {
-    @Override
-    public boolean enterType(Type type) {
-      // Only stub methods on abstract classes.
-      if (!type.isAbstract()) {
-        return true;
-      }
-      for (MethodDescriptor methodToStub : type.getDescriptor().getMethodDescriptors()) {
-        if (methodToStub.getEnclosingClassTypeDescriptor().isInterface()
-            && !methodToStub.isConstructor()
-            && !methodToStub.isStatic()) {
-          type.addMethod(
-              createEmptyMethod(
-                  MethodDescriptor.Builder.from(methodToStub)
-                      .setEnclosingClassTypeDescriptor(type.getDescriptor())
-                      .build()));
-        }
-      }
-      return true; // Need to visit inner classes.
-    }
-  }
-
-  /**
-   * Returns an empty method in type {@code typeBinding} that has the same signature of {@code
-   * methodBinding}.
-   */
-  private static Method createEmptyMethod(MethodDescriptor methodDescriptor) {
-    List<Variable> parameters = Lists.newArrayList();
-    int index = 0;
-    for (TypeDescriptor type : methodDescriptor.getParameterTypeDescriptors()) {
-      parameters.add(
-          Variable.newBuilder()
-              .setName("arg" + index++)
-              .setTypeDescriptor(type)
-              .setIsParameter(true)
-              .build());
-    }
-    return Method.newBuilder()
-        .setMethodDescriptor(methodDescriptor)
-        .setParameters(parameters)
-        .setIsAbstract(true)
-        .setIsOverride(true)
-        .build();
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            // Only stub methods on abstract classes.
+            if (!type.isAbstract()) {
+              return;
+            }
+            for (MethodDescriptor methodDescriptor : type.getDescriptor().getMethodDescriptors()) {
+              if (methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()
+                  && !methodDescriptor.isConstructor()
+                  && !methodDescriptor.isStatic()) {
+                MethodDescriptor stubMethodDescriptor =
+                    MethodDescriptor.Builder.from(methodDescriptor)
+                        .setEnclosingClassTypeDescriptor(type.getDescriptor())
+                        .build();
+                type.addMethod(
+                    Method.newBuilder()
+                        .setMethodDescriptor(stubMethodDescriptor)
+                        .setParameters(
+                            AstUtils.createParameterVariables(
+                                stubMethodDescriptor.getParameterTypeDescriptors()))
+                        .setIsAbstract(true)
+                        .setIsOverride(true)
+                        .build());
+              }
+            }
+          }
+        });
   }
 }

@@ -17,11 +17,9 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Streams;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -31,6 +29,7 @@ import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /** A node that represents a Java Type declaration in the compilation unit. */
@@ -63,25 +62,21 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean containsMethod(String mangledName) {
-    for (Method method : getMethods()) {
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (ManglingNameUtils.getMangledName(methodDescriptor).equals(mangledName)) {
-        return true;
-      }
-    }
-    return false;
+    return getMethods()
+        .stream()
+        .anyMatch(
+            method -> ManglingNameUtils.getMangledName(method.getDescriptor()).equals(mangledName));
   }
 
   public boolean containsNonJsNativeMethods() {
-    for (Method method : getMethods()) {
-      if (method.isNative()
-          && !method.getDescriptor().isJsPropertyGetter()
-          && !method.getDescriptor().isJsPropertySetter()
-          && !method.getDescriptor().isJsMethod()) {
-        return true;
-      }
-    }
-    return false;
+    return getMethods()
+        .stream()
+        .anyMatch(
+            method ->
+                method.isNative()
+                    && !method.getDescriptor().isJsPropertyGetter()
+                    && !method.getDescriptor().isJsPropertySetter()
+                    && !method.getDescriptor().isJsMethod());
   }
 
   public void setStatic(boolean isStatic) {
@@ -132,8 +127,15 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return members;
   }
 
-  public Iterable<Field> getFields() {
-    return AstUtils.filterFields(members);
+  public ImmutableList<Field> getFields() {
+    return members
+        .stream()
+        .filter(Member::isField)
+        // This could be expressed as Field.class::cast but J2CL version of java.lang.Class does
+        // not implement cast() nor isInstance().
+        // TODO(b/33676747): implement Class.isInstance and() Class.cast()
+        .map(member -> (Field) member)
+        .collect(ImmutableList.toImmutableList());
   }
 
   public void addField(Field field) {
@@ -141,25 +143,29 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public void addField(int position, Field field) {
-    this.members.add(position, checkNotNull(field));
+    members.add(position, checkNotNull(field));
   }
 
   public void addFields(List<Field> fields) {
-    this.members.addAll(checkNotNull(fields));
+    members.addAll(checkNotNull(fields));
   }
 
   /**
    * Since enum fields are just tracked as static final fields in Type we want to be able to
    * distinguish enum fields from static fields created in the enum body.
    */
-  public List<Field> getEnumFields() {
+  public ImmutableList<Field> getEnumFields() {
     checkArgument(typeDescriptor.isEnum());
-    Iterable<Field> enumFields = Iterables.filter(getFields(), Field::isEnumField);
-    return Lists.newArrayList(enumFields);
+    return getFields().stream().filter(Field::isEnumField).collect(ImmutableList.toImmutableList());
+
   }
 
-  public Iterable<Method> getMethods() {
-    return AstUtils.filterMethods(members);
+  public ImmutableList<Method> getMethods() {
+    return members
+        .stream()
+        .filter(Member::isMethod)
+        .map(member -> (Method) member)
+        .collect(ImmutableList.toImmutableList());
   }
 
   public void addMethod(Method method) {
@@ -171,8 +177,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     members.add(index, method);
   }
 
-  public void addMethods(Iterable<Method> methods) {
-    Iterables.addAll(members, methods);
+  public void addMethods(Collection<Method> methods) {
+    members.addAll(methods);
   }
 
   public Visibility getVisibility() {
@@ -180,7 +186,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean hasInstanceInitializerBlocks() {
-    return !Iterables.isEmpty(AstUtils.filterInitializerBlocks(getInstanceMembers()));
+    return members
+        .stream()
+        .filter(Predicates.not(Member::isStatic))
+        .anyMatch(member -> member instanceof InitializerBlock);
   }
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
@@ -192,7 +201,13 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean hasStaticInitializerBlocks() {
-    return !Iterables.isEmpty(AstUtils.filterInitializerBlocks(getStaticMembers()));
+    return members
+        .stream()
+        .filter(Member::isStatic)
+        // This could be expressed as InitializerBlock.class::isInstance but J2CL's version of
+        // java.lang.Class does not implement cast() nor isInstance().
+        // TODO(b/33676747): implement Class.isInstance and() Class.cast()
+        .anyMatch(member -> member instanceof InitializerBlock);
   }
 
   public void addStaticInitializerBlock(Block staticInitializer) {
@@ -230,26 +245,41 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDescriptor;
   }
 
-  public Iterable<Field> getInstanceFields() {
-    return AstUtils.filterFields(getInstanceMembers());
+  public ImmutableList<Field> getInstanceFields() {
+    return members
+        .stream()
+        .filter(Member::isField)
+        .filter(Predicates.not(Member::isStatic))
+        .map(member -> (Field) member)
+        .collect(ImmutableList.toImmutableList());
   }
 
-  public Iterable<Member> getInstanceMembers() {
-    return Iterables.filter(members, member -> !member.isStatic());
+  public ImmutableList<Member> getInstanceMembers() {
+    return members
+        .stream()
+        .filter(Predicates.not(Member::isStatic))
+        .collect(ImmutableList.toImmutableList());
   }
 
-  public Iterable<Field> getStaticFields() {
-    return AstUtils.filterFields(getStaticMembers());
+  public ImmutableList<Field> getStaticFields() {
+    return members
+        .stream()
+        .filter(Member::isField)
+        .filter(Member::isStatic)
+        .map(member -> (Field) member)
+        .collect(ImmutableList.toImmutableList());
   }
 
-  public Iterable<Member> getStaticMembers() {
-    return Iterables.filter(members, Member::isStatic);
+  public ImmutableList<Member> getStaticMembers() {
+    return members.stream().filter(Member::isStatic).collect(ImmutableList.toImmutableList());
   }
 
-  public List<Method> getConstructors() {
-    return Streams.stream(getMethods())
-        .filter(Method::isConstructor)
-        .collect(toCollection(ArrayList::new));
+  public ImmutableList<Method> getConstructors() {
+    return getMethods()
+        .stream()
+        .filter(Member::isConstructor)
+        .map(member -> (Method) member)
+        .collect(ImmutableList.toImmutableList());
   }
 
   @Override

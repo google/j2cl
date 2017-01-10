@@ -26,37 +26,34 @@ import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeReference;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Replaces cast expression with corresponding cast method call. */
 public class NormalizeCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteCastExpression(CastExpression expression) {
+            TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
+            checkArgument(
+                !castTypeDescriptor.isPrimitive(),
+                "Narrowing and Widening conversions should have already converted"
+                    + " all primitive casts.");
+            if (castTypeDescriptor.isArray()) {
+              return createArrayCastExpression(expression);
+            }
+            return createCastExpression(expression);
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public Node rewriteCastExpression(CastExpression expression) {
-      TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
-      checkArgument(
-          !castTypeDescriptor.isPrimitive(),
-          "Narrowing and Widening conversions should have already converted all primitive casts.");
-      if (castTypeDescriptor.isArray()) {
-        return createArrayCastExpression(expression);
-      }
-      return createCastExpression(expression);
-    }
-  }
-
-  private static Node createCastExpression(CastExpression castExpression) {
+  private static Expression createCastExpression(CastExpression castExpression) {
     checkArgument(!castExpression.getCastTypeDescriptor().isArray());
     checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
     checkArgument(!castExpression.getCastTypeDescriptor().isIntersection());
@@ -86,8 +83,6 @@ public class NormalizeCasts extends NormalizationPass {
                     TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
             .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(expression);
     TypeDescriptor castTypeDescriptorArgument =
         rawCastTypeDescriptor.isNative()
             ? TypeDescriptors.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
@@ -95,13 +90,14 @@ public class NormalizeCasts extends NormalizationPass {
     checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
-    arguments.add(new TypeReference(castTypeDescriptorArgument));
 
     // Casts.to(expr, TypeName);
-    return MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
+    return MethodCall.Builder.from(castToMethodDescriptor)
+        .setArguments(expression, new TypeReference(castTypeDescriptorArgument))
+        .build();
   }
 
-  private static Node createArrayCastExpression(CastExpression castExpression) {
+  private static Expression createArrayCastExpression(CastExpression castExpression) {
     checkArgument(castExpression.getCastTypeDescriptor().isArray());
 
     if (castExpression
@@ -114,7 +110,7 @@ public class NormalizeCasts extends NormalizationPass {
     return createJavaArrayCastExpression(castExpression);
   }
 
-  private static Node createJavaArrayCastExpression(CastExpression castExpression) {
+  private static Expression createJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -129,21 +125,22 @@ public class NormalizeCasts extends NormalizationPass {
                     TypeDescriptors.get().primitiveInt))
             .setReturnTypeDescriptor(arrayCastTypeDescriptor)
             .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(castExpression.getExpression());
+
     TypeDescriptor castTypeDescriptorArgument =
         arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor();
     checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
-    arguments.add(new TypeReference(castTypeDescriptorArgument));
-    arguments.add(
-        new NumberLiteral(
-            TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
 
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall =
-        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
+        MethodCall.Builder.from(castToMethodDescriptor)
+            .setArguments(
+                castExpression.getExpression(),
+                new TypeReference(castTypeDescriptorArgument),
+                new NumberLiteral(
+                    TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()))
+            .build();
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(castMethodCall)
@@ -151,7 +148,7 @@ public class NormalizeCasts extends NormalizationPass {
         .build();
   }
 
-  private static Node createNativeJsArrayCastExpression(CastExpression castExpression) {
+  private static Expression createNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     checkArgument(castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
@@ -163,12 +160,12 @@ public class NormalizeCasts extends NormalizationPass {
             .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(castExpression.getExpression());
 
     // Arrays.$castToNative(expr);
     MethodCall castMethodCall =
-        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
+        MethodCall.Builder.from(castToMethodDescriptor)
+            .setArguments(castExpression.getExpression())
+            .build();
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(castMethodCall)

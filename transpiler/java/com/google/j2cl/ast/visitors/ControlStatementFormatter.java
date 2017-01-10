@@ -28,65 +28,66 @@ import com.google.j2cl.ast.WhileStatement;
 public class ControlStatementFormatter extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public IfStatement rewriteIfStatement(IfStatement ifStatement) {
+            Statement thenStatement = ifStatement.getThenStatement();
+            Statement elseStatement = ifStatement.getElseStatement();
+            if (thenStatement instanceof Block
+                && (elseStatement == null
+                    || elseStatement instanceof Block
+                    || elseStatement instanceof IfStatement)) {
+              return ifStatement;
+            }
+
+            thenStatement =
+                thenStatement instanceof Block ? thenStatement : new Block(thenStatement);
+            elseStatement =
+                elseStatement == null
+                        || elseStatement instanceof Block
+                        || elseStatement instanceof IfStatement
+                    ? elseStatement
+                    : new Block(elseStatement);
+            return new IfStatement(
+                ifStatement.getConditionExpression(), thenStatement, elseStatement);
+          }
+
+          @Override
+          public ForStatement rewriteForStatement(ForStatement forStatement) {
+            Statement body = forStatement.getBody();
+            if (body instanceof Block) {
+              return forStatement;
+            }
+
+            return ForStatement.newBuilder()
+                .setConditionExpression(forStatement.getConditionExpression())
+                .setBody(body)
+                .setInitializers(forStatement.getInitializers())
+                .setUpdates(forStatement.getUpdates())
+                .build();
+          }
+
+          @Override
+          public DoWhileStatement rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
+            Statement body = doWhileStatement.getBody();
+            if (body instanceof Block) {
+              return doWhileStatement;
+            }
+
+            return new DoWhileStatement(doWhileStatement.getConditionExpression(), new Block(body));
+          }
+
+          @Override
+          public WhileStatement rewriteWhileStatement(WhileStatement whileStatement) {
+            Statement body = whileStatement.getBody();
+            if (body instanceof Block) {
+              return whileStatement;
+            }
+
+            return new WhileStatement(whileStatement.getConditionExpression(), new Block(body));
+          }
+        });
   }
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public IfStatement rewriteIfStatement(IfStatement ifStatement) {
-      Statement thenStatement = ifStatement.getThenStatement();
-      Statement elseStatement = ifStatement.getElseStatement();
-      if (thenStatement instanceof Block
-          && (elseStatement == null
-              || elseStatement instanceof Block
-              || elseStatement instanceof IfStatement)) {
-        return ifStatement;
-      }
-
-      thenStatement = thenStatement instanceof Block ? thenStatement : new Block(thenStatement);
-      elseStatement =
-          elseStatement == null
-                  || elseStatement instanceof Block
-                  || elseStatement instanceof IfStatement
-              ? elseStatement
-              : new Block(elseStatement);
-      return new IfStatement(ifStatement.getConditionExpression(), thenStatement, elseStatement);
-    }
-
-    @Override
-    public ForStatement rewriteForStatement(ForStatement forStatement) {
-      Statement body = forStatement.getBody();
-      if (body instanceof Block) {
-        return forStatement;
-      }
-
-      return ForStatement.newBuilder()
-          .setConditionExpression(forStatement.getConditionExpression())
-          .setBody(body)
-          .setInitializers(forStatement.getInitializers())
-          .setUpdates(forStatement.getUpdates())
-          .build();
-
-    }
-
-    @Override
-    public DoWhileStatement rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
-      Statement body = doWhileStatement.getBody();
-      if (body instanceof Block) {
-        return doWhileStatement;
-      }
-
-      return new DoWhileStatement(doWhileStatement.getConditionExpression(), new Block(body));
-    }
-
-    @Override
-    public WhileStatement rewriteWhileStatement(WhileStatement whileStatement) {
-      Statement body = whileStatement.getBody();
-      if (body instanceof Block) {
-        return whileStatement;
-      }
-
-      return new WhileStatement(whileStatement.getConditionExpression(), new Block(body));
-    }
-  }
 }
