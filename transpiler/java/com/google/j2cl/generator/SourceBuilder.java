@@ -20,7 +20,7 @@ import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Builds source and tracks line numbers using a StringBuilder.
@@ -42,9 +42,6 @@ class SourceBuilder {
     return javaSourceInfoByOutputSourceInfo;
   }
 
-  /**
-   * Appends some source and returns its resulting location.
-   */
   public void append(String source) {
     String indentedSource =
         source.replace(
