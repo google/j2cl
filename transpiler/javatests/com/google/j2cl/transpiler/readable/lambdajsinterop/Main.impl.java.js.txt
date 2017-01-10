@@ -12,6 +12,10 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Lambda$Thenable$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
+let com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
+let IdentityFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class Main extends java_lang_Object {
@@ -56,6 +60,24 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @template M_E
+   * @return {?function(M_E):M_E}
+   * @public
+   */
+  static m_identity__() {
+    Main.$clinit();
+    if ($Equality.$same(
+            Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_,
+            null)) {
+      Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ =
+          IdentityFunction.$create__();
+    }
+    return /**@type {Function} */ ($Casts.to(
+        Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_,
+        com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function));
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -76,6 +98,32 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * A static field getter.
+   * @return {?function(*):*}
+   * @public
+   */
+  static get
+  f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_() {
+    return (
+        Main.$clinit(),
+        Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_);
+  }
+
+  /**
+   * A static field setter.
+   * @param {?function(*):*} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_(
+      value) {
+    (Main.$clinit(),
+     Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ =
+         value);
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -83,7 +131,16 @@ class Main extends java_lang_Object {
     Main.$clinit = function() {};
     $Lambda$Thenable$0 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
+    com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function =
+        goog.module.get(
+            'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
+    IdentityFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
+    Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ =
+        null;
   }
 
   /**
@@ -97,6 +154,13 @@ $Util.$setClassMetadata(
     Main,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main'));
+
+
+/**
+ * @private {?function(*):*}
+ */
+Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ =
+    null;
 
 
 

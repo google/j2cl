@@ -18,9 +18,6 @@ public class Main {
   public static void main() {
     Thenable<String> rv = (f1, f2) -> f1.execute(null);
   }
-}
-
-class Functions {
 
   @JsFunction
   interface Function<F, T> {
@@ -31,8 +28,6 @@ class Functions {
   // @Nullable
   private static IdentityFunction identityFunction = null;
 
-  private Functions() {}
-
   /** Returns the identity function. */
   @SuppressWarnings("unchecked")
   public static <E> Function<E, E> identity() {
@@ -40,7 +35,7 @@ class Functions {
       // Lazy initialize the field.
       identityFunction = new IdentityFunction();
     }
-    return (Function<E, E>) Functions.identityFunction;
+    return (Function<E, E>) identityFunction;
   }
 
   private static class IdentityFunction implements Function<Object, Object> {
