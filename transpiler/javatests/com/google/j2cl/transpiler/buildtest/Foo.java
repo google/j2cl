@@ -1,4 +1,4 @@
-package com.google.j2cl.transpiler.build;
+package com.google.j2cl.transpiler.buildtest;
 
 import jsinterop.annotations.JsType;
 
