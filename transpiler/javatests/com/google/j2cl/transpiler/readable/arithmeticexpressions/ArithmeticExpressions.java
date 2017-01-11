@@ -16,6 +16,7 @@ public class ArithmeticExpressions {
     boolean l = (1 + 2 != 4);
     boolean m = Long.MAX_VALUE != 9223372036854776833d;
     getLongArray()[0]++;
+    double o = (5 / 2) - 0.0;
   }
 
   static long[] getLongArray() {

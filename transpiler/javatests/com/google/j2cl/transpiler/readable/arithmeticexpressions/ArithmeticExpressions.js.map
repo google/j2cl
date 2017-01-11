@@ -19,6 +19,7 @@
 [boolean l = (1 + 2 != 4);] => [let l = (1 + 2 != 4);]
 [boolean m = Long.MAX_VALUE != 9223372036854776833d;] => [let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) != 9.223372036854778E18;]
 [getLongArray()[0]++;] => [$LongUtils.$postfixIncrementArray(ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions(), 0);]
+[double o = (5 / 2) - 0.0;] => [let o = (5 / 2) - 0.0;]
 [UNKNOWN] => [ArithmeticExpressions.$clinit();]
 [return new long[10];] => [return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -57,6 +57,9 @@ public class Main {
     d >>>= 16;
     assert d == 65535;
 
+    // Uncomment when b/28875322 is fixed.
+    // assert ((5/2) - 0.0) == 2.0;
+
     // Compound assignment with enclosing instance.
     class Outer {
       boolean b;
