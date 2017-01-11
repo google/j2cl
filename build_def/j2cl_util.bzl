@@ -81,10 +81,10 @@ def make_output_readable(flags):
       "--pretty_print",
   ]
 
-load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load(
     "/javascript/tools/jscompiler/builddefs/flags",
     "ADVANCED_OPTIMIZATIONS_FLAGS",
+    "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS"
 )
 
 J2CL_UNOPTIMIZED_DEFS = [
@@ -93,10 +93,11 @@ J2CL_UNOPTIMIZED_DEFS = [
     "--language_out=ECMASCRIPT5",
 ]
 
+# TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
 J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
-                       CLOSURE_COMPILER_FLAGS_FULL_TYPED +
                        ADVANCED_OPTIMIZATIONS_FLAGS +
-                       ["--extra_smart_name_removal=true", "--use_types_for_optimization"])
+                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS +
+                       ["--extra_smart_name_removal=true"])
 
 J2CL_TEST_DEFS = make_output_readable(J2CL_OPTIMIZED_DEFS + [
     "--export_test_functions=true",
