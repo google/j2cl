@@ -1,0 +1,34 @@
+package com.google.j2cl.transpiler.integration.morebridgemethods;
+
+public class MultipleAbstractParentsMain {
+  public interface List<T> {
+    String getFoo(T t);
+  }
+
+  public abstract static class AbstractCollection<T> {
+    @SuppressWarnings("unused")
+    public String getFoo(T t) {
+      return "AbstractCollection";
+    }
+  }
+
+  public abstract static class AbstractList<T> extends AbstractCollection<T> implements List<T> {}
+
+  public static class ArrayList<T> extends AbstractList<T> {}
+
+  public interface IStringList extends List<String> {
+    @Override
+    public String getFoo(String string);
+  }
+
+  public abstract static class AbstractStringList extends AbstractList<String>
+      implements IStringList {}
+
+  public static class StringList extends AbstractStringList {}
+
+  public static void test() {
+    assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
+    assert new StringList().getFoo(null).equals("AbstractCollection");
+    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
+  }
+}
