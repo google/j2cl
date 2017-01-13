@@ -1,0 +1,107 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.array.Array$SomeObject.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
+
+
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let com_google_j2cl_transpiler_readable_array_Array = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array$impl');
+
+
+class SomeObject extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {com_google_j2cl_transpiler_readable_array_Array} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_array_Array_SomeObject =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {com_google_j2cl_transpiler_readable_array_Array} $outer_this
+   * @return {!SomeObject}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_array_Array($outer_this) {
+    SomeObject.$clinit();
+    let $instance = new SomeObject();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_array_Array_SomeObject__com_google_j2cl_transpiler_readable_array_Array(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {com_google_j2cl_transpiler_readable_array_Array} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_array_Array_SomeObject__com_google_j2cl_transpiler_readable_array_Array(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_array_Array_SomeObject =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_array_Array_SomeObject();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SomeObject;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SomeObject);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SomeObject.$clinit = function() {};
+    com_google_j2cl_transpiler_readable_array_Array =
+        goog.module.get('com.google.j2cl.transpiler.readable.array.Array$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_array_Array_SomeObject() {}
+};
+
+$Util.$setClassMetadata(
+    SomeObject,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.array.Array$SomeObject'));
+
+
+
+/**
+ * Export class.
+ */
+exports = SomeObject;
+//# sourceMappingURL=Array$SomeObject.js.map

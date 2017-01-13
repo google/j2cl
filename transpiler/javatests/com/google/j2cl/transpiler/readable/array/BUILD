@@ -10,6 +10,7 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "arrayofboxedtype",
+    name = "array",
     srcs = glob(["*.java"]),
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
