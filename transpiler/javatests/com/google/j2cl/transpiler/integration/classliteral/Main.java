@@ -218,6 +218,7 @@ public class Main {
     testGeneric();
     testEnumSubclass();
     testClinit();
+    testNative();
   }
 
   private static void assertEquals(Object expected, Object actual) {
