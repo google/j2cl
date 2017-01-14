@@ -537,20 +537,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append(className + ".$clinit = function() {};");
 
     // goog.module.get(...) for lazy imports.
-    Map<String, String> aliasesByPath = new HashMap<>();
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
-      String previousAlias = aliasesByPath.get(path);
-      if (previousAlias == null) {
         sourceBuilder.newLine();
         sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
-        aliasesByPath.put(path, alias);
-      } else {
-        // Do not goog.require second time to avoid JsCompiler warnings.
-        sourceBuilder.newLine();
-        sourceBuilder.append(alias + " = " + previousAlias + ";");
-      }
     }
 
     // Static field and static initializer blocks.
