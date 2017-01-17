@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,16 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.ast.visitors;
 
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDescriptor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -30,16 +32,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
 
-/**
- * Creates bridge methods for instance JsMembers.
- */
-public class JsBridgeMethodsCreator {
-  /** Creates bridge methods and adds them to the java type. */
-  public static void create(ITypeBinding typeBinding, Type type) {
-    type.addMethods(createBridgeMethods(typeBinding, type.getMethods()));
+/** Creates bridge methods for instance JsMembers. */
+public class JsBridgeMethodsCreator extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    for (Type type : compilationUnit.getTypes()) {
+      type.addMethods(createBridgeMethods(type.getDescriptor(), type.getMethods()));
+    }
   }
 
   /**
@@ -58,16 +58,16 @@ public class JsBridgeMethodsCreator {
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private static List<Method> createBridgeMethods(
-      ITypeBinding typeBinding, Iterable<Method> existingMethods) {
+      TypeDescriptor typeDescriptor, Iterable<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
         Streams.stream(existingMethods)
             .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
             .collect(toImmutableSet());
-    for (Entry<IMethodBinding, IMethodBinding> entry :
-        delegatedMethodBindingsByBridgeMethodBinding(typeBinding).entrySet()) {
-      Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());
+    for (Entry<MethodDescriptor, MethodDescriptor> entry :
+        delegatedMethodDescriptorsByBridgeMethodDescriptor(typeDescriptor).entrySet()) {
+      Method bridgeMethod = createBridgeMethod(typeDescriptor, entry.getKey(), entry.getValue());
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
       if (generatedBridgeMethodMangledNames.contains(manglingName)
           || existingMethodMangledNames.contains(manglingName)) {
@@ -81,61 +81,60 @@ public class JsBridgeMethodsCreator {
     return generatedBridgeMethods;
   }
 
-  /**
-   * Returns the mapping from the bridge method to the delegating method.
-   */
-  private static Map<IMethodBinding, IMethodBinding> delegatedMethodBindingsByBridgeMethodBinding(
-      ITypeBinding typeBinding) {
-    Map<IMethodBinding, IMethodBinding> delegateMethodBindingsByBridgeMethodBinding =
+  /** Returns the mapping from the bridge method to the delegating method. */
+  private static Map<MethodDescriptor, MethodDescriptor>
+      delegatedMethodDescriptorsByBridgeMethodDescriptor(TypeDescriptor typeDescriptor) {
+    Map<MethodDescriptor, MethodDescriptor> delegateMethodDescriptorsByBridgeMethodDescriptor =
         new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
-    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
-      IMethodBinding exposedNonJsMember = getExposedNonJsMember(declaredMethod);
+    for (MethodDescriptor declaredMethod : typeDescriptor.getDeclaredMethodDescriptors()) {
+      MethodDescriptor exposedNonJsMember = getExposedNonJsMember(declaredMethod);
       if (exposedNonJsMember != null) {
-        delegateMethodBindingsByBridgeMethodBinding.put(exposedNonJsMember, declaredMethod);
+        delegateMethodDescriptorsByBridgeMethodDescriptor.put(exposedNonJsMember, declaredMethod);
       }
     }
 
     // case 2. accidental overridden methods.
-    for (IMethodBinding accidentalOverriddenMethod :
-        JdtUtils.getAccidentalOverriddenMethodBindings(typeBinding)) {
-      IMethodBinding overridingMethod =
-          JdtUtils.getOverridingMethodInSuperclasses(accidentalOverriddenMethod, typeBinding);
+    for (MethodDescriptor accidentalOverriddenMethod :
+        typeDescriptor.getAccidentallyOverriddenMethodDescriptors()) {
+      MethodDescriptor overridingMethod =
+          typeDescriptor.getOverridingMethodDescriptorInSuperclasses(accidentalOverriddenMethod);
       if (overridingMethod == null) {
         continue;
       }
       // if for the overridden and overriding methods, one is JsMember, and the other is not,
       // generate a bridge method from the overridden method to the overriding method.
-      boolean isJsMemberOne = JdtUtils.isOrOverridesJsMember(overridingMethod);
-      boolean isJsMemberOther = JdtUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
+      boolean isJsMemberOne = overridingMethod.isOrOverridesJsMember();
+      boolean isJsMemberOther = accidentalOverriddenMethod.isOrOverridesJsMember();
       if (isJsMemberOne != isJsMemberOther) {
-        delegateMethodBindingsByBridgeMethodBinding.put(
+        delegateMethodDescriptorsByBridgeMethodDescriptor.put(
             accidentalOverriddenMethod, overridingMethod);
       }
     }
 
-    return delegateMethodBindingsByBridgeMethodBinding;
+    return delegateMethodDescriptorsByBridgeMethodDescriptor;
   }
 
   /**
    * If this method is the first JsMember in the method hierarchy that exposes an existing
    * non-JsMember, returns the non-JsMember it exposes, otherwise, returns null.
    */
-  private static IMethodBinding getExposedNonJsMember(IMethodBinding methodBinding) {
-    if (!JdtUtils.isOrOverridesJsMember(methodBinding)
-        || methodBinding.getDeclaringClass().isInterface()
-        || JdtUtils.isStatic(methodBinding)
-        || methodBinding.isConstructor()) {
+  private static MethodDescriptor getExposedNonJsMember(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.isOrOverridesJsMember()
+        || methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()
+        || methodDescriptor.isStatic()
+        || methodDescriptor.isConstructor()) {
       return null;
     }
     // native js type is not generated, thus it does not expose any non-js methods.
-    if (JsInteropUtils.isNativeType(methodBinding.getDeclaringClass())) {
+    if (methodDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
       return null;
     }
-    IMethodBinding overriddenNonJsMember = null;
-    for (IMethodBinding overriddenMethod : JdtUtils.getOverriddenMethods(methodBinding)) {
-      if (!JdtUtils.isOrOverridesJsMember(overriddenMethod)) {
+
+    MethodDescriptor overriddenNonJsMember = null;
+    for (MethodDescriptor overriddenMethod : methodDescriptor.getOverriddenMethodDescriptors()) {
+      if (!overriddenMethod.isOrOverridesJsMember()) {
         overriddenNonJsMember = overriddenMethod;
       }
       if (getExposedNonJsMember(overriddenMethod) != null) {
@@ -146,16 +145,13 @@ public class JsBridgeMethodsCreator {
   }
 
   private static Method createBridgeMethod(
-      ITypeBinding targetTypeBinding,
-      IMethodBinding bridgeMethodBinding,
-      IMethodBinding forwardToMethodBinding) {
-    MethodDescriptor forwardToMethodDescriptor =
-        JdtUtils.createMethodDescriptor(forwardToMethodBinding);
-    MethodDescriptor bridgeMethodDescriptor = JdtUtils.createMethodDescriptor(bridgeMethodBinding);
+      TypeDescriptor targetTypeDescriptor,
+      MethodDescriptor bridgeMethodDescriptor,
+      MethodDescriptor forwardToMethodDescriptor) {
     return AstUtils.createForwardingMethod(
         null,
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
-            .setEnclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(targetTypeBinding))
+            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
             .build(),
         forwardToMethodDescriptor,
         "Bridge method for exposing non-JsMethod.",

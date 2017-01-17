@@ -301,9 +301,6 @@ public class CompilationUnitBuilder {
 
       // Add bridge methods.
       BridgeMethodsCreator.create(typeBinding, type);
-
-      // Add bridge methods for JsMethods
-      JsBridgeMethodsCreator.create(typeBinding, type);
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {

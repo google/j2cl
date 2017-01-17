@@ -38,6 +38,7 @@ import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
+import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
 import com.google.j2cl.ast.visitors.NormalizationPass;
 import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
@@ -194,6 +195,7 @@ public class J2clTranspiler {
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
             new InsertErasureTypeSafetyCasts(),
+            new JsBridgeMethodsCreator(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),

@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -25,7 +26,9 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -107,10 +111,10 @@ public abstract class TypeDescriptor extends Node
   public boolean hasSameRawType(TypeDescriptor other) {
     // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
     // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
-    // ITypeBinding and 2) from a TypeDescriptor by removing type variables. These two ways are not
-    // consistent, in particular the second form does not propagate the removal of type variables
-    // inward. These two construction end up with different data but with the same unique id, so
-    // the first one that is constructed will be interned and used everywhere.
+    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
+    // not consistent, in particular the second form does not propagate the removal of type
+    // variables inward. These two construction end up with different data but with the same unique
+    // id, so the first one that is constructed will be interned and used everywhere.
     // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
     // the wrong information be used in some cases.
 
@@ -316,8 +320,34 @@ public abstract class TypeDescriptor extends Node
     return getConcreteJsFunctionMethodDescriptorFactory().get(this);
   }
 
+  /**
+   * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
+   * on this type.
+   */
   public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
     return getInterfaceTypeDescriptorsFactory().get(this);
+  }
+
+  /**
+   * Returns a set of the type descriptors of interfaces that are explicitly implemented either
+   * directly on this type or on some super type or super interface.
+   */
+  public Set<TypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
+    Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
+
+    // Recursively gather from super interfaces.
+    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+      typeDescriptors.add(interfaceTypeDescriptor);
+      typeDescriptors.addAll(interfaceTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
+    }
+
+    // Recursively gather from super type.
+    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    if (superTypeDescriptor != null) {
+      typeDescriptors.addAll(superTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
+    }
+
+    return typeDescriptors;
   }
 
   public MethodDescriptor getJsFunctionMethodDescriptor() {
@@ -380,7 +410,6 @@ public abstract class TypeDescriptor extends Node
     }
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
-
 
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
     checkState(isIntersection());
@@ -474,6 +503,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   private Map<String, MethodDescriptor> methodDescriptorsBySignature;
+
   /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
@@ -510,18 +540,17 @@ public abstract class TypeDescriptor extends Node
     return methodDescriptorsBySignature;
   }
 
-  private static void updateMethodsBySignature(
-      Map<String, MethodDescriptor> methodsBySignature,
-      Iterable<MethodDescriptor> methodDescriptors) {
-    for (MethodDescriptor declaredMethod : methodDescriptors) {
-      MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
-      // TODO(rluble) implement correct default replacement when existing method != null.
-      // Only replace the method if we found a default definition that implements the method at
-      // that type; be sure to have all relevant examples, the semantics are quite particular.
-      if (existingMethod == null) {
-        methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
+  /**
+   * Returns true if {@code TypeDescriptor} declares a method with the same signature as {@code
+   * methodDescriptor} in its body.
+   */
+  private boolean isOverriddenHere(MethodDescriptor methodDescriptor) {
+    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
+      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)) {
+        return true;
       }
     }
+    return false;
   }
 
   /**
@@ -563,6 +592,89 @@ public abstract class TypeDescriptor extends Node
   /** The list of all methods available on a given type. */
   public Collection<MethodDescriptor> getMethodDescriptors() {
     return getMethodDescriptorsBySignature().values();
+  }
+
+  /**
+   * Returns the method descriptors in this type's interfaces that are accidentally overridden.
+   *
+   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
+   * method and the method it inherits does not really override, but just has the same signature as
+   * the overridden method.
+   */
+  public List<MethodDescriptor> getAccidentallyOverriddenMethodDescriptors() {
+    List<MethodDescriptor> accidentalOverriddenMethods = new ArrayList<>();
+
+    Set<TypeDescriptor> transitiveSuperTypeInterfaceTypeDescriptors =
+        getSuperTypeDescriptor() != null
+            ? getSuperTypeDescriptor().getTransitiveInterfaceTypeDescriptors()
+            : ImmutableSet.of();
+    for (TypeDescriptor superInterfaceTypeDescriptor :
+        Sets.difference(
+            getTransitiveInterfaceTypeDescriptors(), transitiveSuperTypeInterfaceTypeDescriptors)) {
+      accidentalOverriddenMethods.addAll(
+          getNotOverriddenMethodDescriptors(superInterfaceTypeDescriptor));
+    }
+
+    return accidentalOverriddenMethods;
+  }
+
+  /** Returns the method descriptors that are declared in a particular super type but not here. */
+  private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
+      TypeDescriptor superTypeDescriptor) {
+    return superTypeDescriptor
+        .getDeclaredMethodDescriptors()
+        .stream()
+        .filter(methodDescriptor -> !isOverriddenHere(methodDescriptor))
+        .collect(toImmutableList());
+  }
+
+  /**
+   * Returns the method descriptor of the nearest method in this type's super classes that overrides
+   * (regularly or accidentally) {@code methodDescriptor}.
+   */
+  public MethodDescriptor getOverridingMethodDescriptorInSuperclasses(
+      MethodDescriptor methodDescriptor) {
+    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    while (superTypeDescriptor != null) {
+      for (MethodDescriptor superMethodDescriptor :
+          superTypeDescriptor.getDeclaredMethodDescriptors()) {
+        // TODO: exclude package private method, and add a test for it.
+        if (superMethodDescriptor.overridesSignature(methodDescriptor)) {
+          return superMethodDescriptor;
+        }
+      }
+      superTypeDescriptor = superTypeDescriptor.getSuperTypeDescriptor();
+    }
+    return null;
+  }
+
+  /**
+   * Returns a set of the method descriptors of methods in this type's super hierarchy that are
+   * overridden by {@code methodDescriptor}.
+   */
+  public Set<MethodDescriptor> getOverriddenMethodDescriptors(MethodDescriptor methodDescriptor) {
+    Set<MethodDescriptor> overriddenMethodDescriptors = new HashSet<>();
+
+    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
+      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)
+          && !methodDescriptor.isConstructor()) {
+        checkArgument(!methodDescriptor.isStatic());
+        overriddenMethodDescriptors.add(declaredMethodDescriptor);
+      }
+    }
+
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (getSuperTypeDescriptor() != null) {
+      overriddenMethodDescriptors.addAll(
+          getSuperTypeDescriptor().getOverriddenMethodDescriptors(methodDescriptor));
+    }
+
+    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+      overriddenMethodDescriptors.addAll(
+          interfaceTypeDescriptor.getOverriddenMethodDescriptors(methodDescriptor));
+    }
+
+    return overriddenMethodDescriptors;
   }
 
   @Override
@@ -831,6 +943,20 @@ public abstract class TypeDescriptor extends Node
 
     public static Builder from(final TypeDescriptor typeDescriptor) {
       return typeDescriptor.toBuilder();
+    }
+  }
+
+  private static void updateMethodsBySignature(
+      Map<String, MethodDescriptor> methodsBySignature,
+      Iterable<MethodDescriptor> methodDescriptors) {
+    for (MethodDescriptor declaredMethod : methodDescriptors) {
+      MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
+      // TODO(rluble) implement correct default replacement when existing method != null.
+      // Only replace the method if we found a default definition that implements the method at
+      // that type; be sure to have all relevant examples, the semantics are quite particular.
+      if (existingMethod == null) {
+        methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
+      }
     }
   }
 }

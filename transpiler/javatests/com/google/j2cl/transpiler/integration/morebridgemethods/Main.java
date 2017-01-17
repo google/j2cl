@@ -28,27 +28,27 @@ public class Main {
     TestCase6104.test();
     TestCase9366.test();
     TestCase5814.test();
-    // TestCase6674.test();  // fails right now
+    // TestCase6674.test(); // fails right now from spooky instability
     TestCase9226.test();
-    // TestCase55.test();  // fails right now
+    // TestCase55.test(); // fails right now from spooky instability
     TestCase3352.test();
     TestCase4787.test();
-    // TestCase1596.test();  // fails right now
+    // TestCase1596.test(); // fails right now from spooky instability
     TestCase2123.test();
     TestCase4182.test();
     TestCase5828.test();
-    TestCase6.test();
-    // TestCase8435.test();  // fails right now
+    // TestCase6.test(); // fails right now from spooky instability
+    // TestCase8435.test(); // fails right now from spooky instability
 
     // From allsimplebridges.
     Tester5.test();
 
     // Hand rolled.
     TestCaseHand1.test();
-    // TestCaseHand2.test();  // fails right now
+    // TestCaseHand2.test(); // fails right now from spooky instability
 
     // Minimal versions of existing tests.
-    // BridgeJsMethodMain.test();  // fails right now
+    // BridgeJsMethodMain.test(); // fails right now from spooky instability
     BridgeMethodsMain.test();
     MultipleAbstractParentsMain.test();
     DefaultMethodsMain.test();

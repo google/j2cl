@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -29,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
@@ -56,9 +58,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
-  /**
-   * Type parameters declared in the method.
-   */
+  /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
 
   public boolean isInit() {
@@ -111,12 +111,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getJsInfo().getJsMemberType() == JsMemberType.JS_FUNCTION;
   }
 
+  public boolean isJsMember() {
+    return getJsInfo().getJsMemberType() != JsMemberType.NONE;
+  }
+
   /**
    * Returns true if it is a vararg method that can be referenced by JavaScript side. A
    * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
    *
-   * TODO: In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We may want
-   * to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the AST.
+   * <p>TODO: In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We may
+   * want to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the
+   * AST.
    */
   public boolean isJsMethodVarargs() {
     return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isConstructor());
@@ -132,6 +137,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public abstract boolean isAbstract();
+
+  public boolean isOrOverridesJsMember() {
+    return isJsMember() || !getOverriddenJsMembers().isEmpty();
+  }
+
+  /**
+   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
+   * Parameter erasure equal means that they are overriding signature equal, which means that they
+   * are real overriding/overridden or accidental overriding/overridden.
+   */
+  public boolean overridesSignature(MethodDescriptor that) {
+    if (this.isStatic() || that.isStatic()) {
+      return false;
+    }
+
+    return this != that && this.getOverrideSignature().equals(that.getOverrideSignature());
+  }
 
   public String getMethodSignature() {
     String name = getName();
@@ -176,6 +198,42 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .stream()
             .map(type -> type.getRawTypeDescriptor().getReadableDescription())
             .collect(joining(", ")));
+  }
+
+  /** Returns a signature suitable for override checking. */
+  private String getOverrideSignature() {
+    StringBuilder signatureBuilder = new StringBuilder("");
+    Visibility methodVisibility = getVisibility();
+    if (methodVisibility.isPackagePrivate()) {
+      signatureBuilder.append(":pp:");
+      signatureBuilder.append(getEnclosingClassTypeDescriptor().getPackageName());
+      signatureBuilder.append(":");
+    } else if (methodVisibility.isPrivate()) {
+      signatureBuilder.append(":p:");
+      signatureBuilder.append(getEnclosingClassTypeDescriptor().getQualifiedBinaryName());
+      signatureBuilder.append(":");
+    }
+
+    signatureBuilder.append(getName());
+    signatureBuilder.append("(");
+
+    String separator = "";
+    for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
+      signatureBuilder.append(separator);
+      signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
+      separator = ";";
+    }
+    signatureBuilder.append(")");
+    return signatureBuilder.toString();
+  }
+
+  private Set<MethodDescriptor> getOverriddenJsMembers() {
+    return Sets.filter(getOverriddenMethodDescriptors(), MethodDescriptor::isJsMember);
+  }
+
+  /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
+  public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
+    return getEnclosingClassTypeDescriptor().getOverriddenMethodDescriptors(this);
   }
 
   /** A Builder for MethodDescriptors. */

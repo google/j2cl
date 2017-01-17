@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -54,7 +53,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -76,9 +74,7 @@ import org.eclipse.jdt.core.dom.ParenthesizedExpression;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
-/**
- * Utility functions to manipulate JDT internal representations.
- */
+/** Utility functions to manipulate JDT internal representations. */
 public class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
@@ -244,65 +240,7 @@ public class JdtUtils {
     return null;
   }
 
-  /**
-   * Returns the methods in {@code typeBinding}'s interfaces that are accidentally overridden.
-   *
-   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
-   * method, and the method it inherits does not really override, but just has the same signature
-   * of the overridden method.
-   */
-  static List<IMethodBinding> getAccidentalOverriddenMethodBindings(ITypeBinding typeBinding) {
-    List<IMethodBinding> accidentalOverriddenMethods = new ArrayList<>();
-    for (ITypeBinding superInterface :
-        Sets.difference(
-            getAllInterfaces(typeBinding), getAllInterfaces(typeBinding.getSuperclass()))) {
-      accidentalOverriddenMethods.addAll(getUndeclaredMethodBindings(superInterface, typeBinding));
-    }
-    return accidentalOverriddenMethods;
-  }
-
-  /**
-   * Returns the methods that are declared by {@code superTypeBinding} but are not declared by
-   * {@code typeBinding}.
-   */
-  private static List<IMethodBinding> getUndeclaredMethodBindings(
-      ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
-    return filterMethodBindings(
-        superTypeBinding.getDeclaredMethods(),
-        methodBinding -> !isDeclaredBy(methodBinding, typeBinding));
-  }
-
-  /**
-   * Returns true if {@code typeBinding} declares a method with the same signature of
-   * {@code methodBinding} in its body.
-   */
-  private static boolean isDeclaredBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    return hasOverrideEquivalentMethod(
-        methodBinding, Arrays.asList(typeBinding.getDeclaredMethods()));
-  }
-
-  /**
-   * Returns true if the given list of method bindings contains a method with the same signature of
-   * {@code methodBinding}.
-   */
-  public static boolean hasOverrideEquivalentMethod(
-      IMethodBinding method, List<IMethodBinding> methodBindings) {
-    for (IMethodBinding methodBinding : methodBindings) {
-      if (areMethodsOverrideEquivalent(method, methodBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private static List<IMethodBinding> filterMethodBindings(
-      IMethodBinding[] methodBindings, Predicate<IMethodBinding> predicate) {
-    return Stream.of(methodBindings).filter(predicate).collect(toImmutableList());
-  }
-
-  /**
-   * Returns all the interfaces {@code typeBinding} implements.
-   */
+  /** Returns all the interfaces {@code typeBinding} implements. */
   static Set<ITypeBinding> getAllInterfaces(ITypeBinding typeBinding) {
     Set<ITypeBinding> interfaces = new LinkedHashSet<>();
     if (typeBinding == null) {
@@ -317,25 +255,6 @@ public class JdtUtils {
       interfaces.addAll(getAllInterfaces(superclassTypeBinding));
     }
     return interfaces;
-  }
-
-  /**
-   * Returns the nearest method in the super classes of {code typeBinding} that overrides
-   * (regularly or accidentally) {@code methodBinding}.
-   */
-  static IMethodBinding getOverridingMethodInSuperclasses(
-      IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    ITypeBinding superclass = typeBinding.getSuperclass();
-    while (superclass != null) {
-      for (IMethodBinding methodInSuperclass : superclass.getDeclaredMethods()) {
-        // TODO: excludes package private method, and add a test for it.
-        if (areMethodsOverrideEquivalent(methodInSuperclass, methodBinding)) {
-          return methodInSuperclass;
-        }
-      }
-      superclass = superclass.getSuperclass();
-    }
-    return null;
   }
 
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
@@ -394,11 +313,12 @@ public class JdtUtils {
     ITypeBinding type = overridingMethod.getDeclaringClass();
 
     // Check immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null && isOveriddenInType(overridingMethod, type.getSuperclass())) {
+    if (type.getSuperclass() != null
+        && isOverriddenInType(overridingMethod, type.getSuperclass())) {
       return true;
     }
     for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (isOveriddenInType(overridingMethod, interfaceBinding)) {
+      if (isOverriddenInType(overridingMethod, interfaceBinding)) {
         return true;
       }
     }
@@ -406,7 +326,7 @@ public class JdtUtils {
     return false;
   }
 
-  private static boolean isOveriddenInType(IMethodBinding overridingMethod, ITypeBinding type) {
+  private static boolean isOverriddenInType(IMethodBinding overridingMethod, ITypeBinding type) {
     for (IMethodBinding method : type.getDeclaredMethods()) {
       // exposed overriding is not real overriding in JavaScript because the two methods
       // have different method names and they are connected by dispatch method,
@@ -418,11 +338,12 @@ public class JdtUtils {
     }
 
     // Recurse into immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null && isOveriddenInType(overridingMethod, type.getSuperclass())) {
+    if (type.getSuperclass() != null
+        && isOverriddenInType(overridingMethod, type.getSuperclass())) {
       return true;
     }
     for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (isOveriddenInType(overridingMethod, interfaceBinding)) {
+      if (isOverriddenInType(overridingMethod, interfaceBinding)) {
         return true;
       }
     }
@@ -501,9 +422,7 @@ public class JdtUtils {
     return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
   }
 
-  /**
-   * Helper method to work around JDT habit of returning raw collections.
-   */
+  /** Helper method to work around JDT habit of returning raw collections. */
   @SuppressWarnings("rawtypes")
   public static <T> List<T> asTypedList(List jdtRawCollection) {
     @SuppressWarnings("unchecked")
@@ -528,9 +447,7 @@ public class JdtUtils {
     }
   }
 
-  /**
-   * Returns the type binding of the immediately enclosing type.
-   */
+  /** Returns the type binding of the immediately enclosing type. */
   public static ITypeBinding findCurrentTypeBinding(org.eclipse.jdt.core.dom.ASTNode node) {
     while (true) {
       if (node == null) {
@@ -544,9 +461,7 @@ public class JdtUtils {
     }
   }
 
-  /**
-   * Returns whether the ASTNode is in a static context.
-   */
+  /** Returns whether the ASTNode is in a static context. */
   public static boolean isInStaticContext(org.eclipse.jdt.core.dom.ASTNode node) {
     org.eclipse.jdt.core.dom.ASTNode currentNode = node.getParent();
     while (currentNode != null) {
@@ -833,9 +748,7 @@ public class JdtUtils {
     }
   }
 
-  /**
-   * Creates a MethodDescriptor directly based on the given JDT method binding.
-   */
+  /** Creates a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = Modifier.isStatic(modifiers);
@@ -895,9 +808,7 @@ public class JdtUtils {
         || !getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
-  /**
-   * Checks overriding chain to compute JsInfo.
-   */
+  /** Checks overriding chain to compute JsInfo. */
   static JsInfo computeJsInfo(IMethodBinding methodBinding) {
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
     if (jsInfo.isJsOverlay()) {
@@ -937,9 +848,7 @@ public class JdtUtils {
     return Sets.filter(getOverriddenMethods(methodBinding), JsInteropUtils::isJsMember);
   }
 
-  /**
-   * Returns the method signature, which identifies a method up to overriding.
-   */
+  /** Returns the method signature, which identifies a method up to overriding. */
   public static String getMethodSignature(IMethodBinding methodBinding) {
     StringBuilder signatureBuilder = new StringBuilder("");
     Visibility methodVisibility = getVisibility(methodBinding);
@@ -994,9 +903,7 @@ public class JdtUtils {
     return typeBinding.isLocal();
   }
 
-  /**
-   * Returns true if {@code typeBinding} is a class that implements a JsFunction interface.
-   */
+  /** Returns true if {@code typeBinding} is a class that implements a JsFunction interface. */
   public static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
     if (typeBinding == null || !typeBinding.isClass()) {
       return false;
@@ -1009,9 +916,7 @@ public class JdtUtils {
     return false;
   }
 
-  /**
-   * Returns true if the given type has a JsConstructor.
-   */
+  /** Returns true if the given type has a JsConstructor. */
   public static boolean isJsConstructorClass(ITypeBinding typeBinding) {
     if (typeBinding == null || !typeBinding.isClass()) {
       return false;
@@ -1045,9 +950,7 @@ public class JdtUtils {
         || isOrSubclassesJsConstructorClass(typeBinding.getSuperclass());
   }
 
-  /**
-   * Returns the MethodDescriptor for the SAM method in JsFunction interface.
-   */
+  /** Returns the MethodDescriptor for the SAM method in JsFunction interface. */
   public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     return samInJsFunctionInterface == null
@@ -1055,9 +958,7 @@ public class JdtUtils {
         : createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
   }
 
-  /**
-   * Returns the MethodDescriptor for the concrete JsFunction method implementation.
-   */
+  /** Returns the MethodDescriptor for the concrete JsFunction method implementation. */
   public static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     if (samInJsFunctionInterface == null) {
@@ -1078,9 +979,7 @@ public class JdtUtils {
     return null;
   }
 
-  /**
-   * Returns JsFunction method in JsFunction interface.
-   */
+  /** Returns JsFunction method in JsFunction interface. */
   private static IMethodBinding getSAMInJsFunctionInterface(ITypeBinding typeBinding) {
     if (!isJsFunctionImplementation(typeBinding) && !JsInteropUtils.isJsFunction(typeBinding)) {
       return null;
@@ -1155,7 +1054,6 @@ public class JdtUtils {
     }
     singletonInitializer.init();
   }
-
 
   public static TypeDescriptor createLambdaTypeDescriptor(
       boolean inStaticContext,
