@@ -800,6 +800,7 @@ public class JdtUtils {
         .setDefault(Modifier.isDefault(methodBinding.getModifiers()))
         .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
+        .setSynthetic(methodBinding.isSynthetic())
         .build();
   }
 

@@ -278,6 +278,7 @@ public class AstUtils {
         null,
         MethodDescriptor.Builder.from(targetMethodDescriptor)
             .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
+            .setSynthetic(true)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,
@@ -309,6 +310,7 @@ public class AstUtils {
       boolean isStaticDispatch,
       boolean isOverride) {
     checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
+    checkArgument(fromMethodDescriptor.isSynthetic());
 
     List<Variable> parameters =
         createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());
@@ -325,7 +327,6 @@ public class AstUtils {
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(isOverride)
-        .setIsSynthetic(true)
         .setJsDocDescription(jsDocDescription)
         .build();
   }

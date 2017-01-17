@@ -39,7 +39,6 @@ public class Method extends Member implements HasJsNameInfo {
   private boolean isOverride;
   private String jsDocDescription;
   private boolean isBridge;
-  private final boolean isSynthetic;
   private BitSet parameterOptionality;
 
   private Method(
@@ -49,7 +48,6 @@ public class Method extends Member implements HasJsNameInfo {
       boolean isAbstract,
       boolean isOverride,
       boolean isBridge,
-      boolean isSynthetic,
       String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
@@ -58,7 +56,6 @@ public class Method extends Member implements HasJsNameInfo {
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
     this.isBridge = isBridge;
-    this.isSynthetic = isSynthetic;
   }
 
   @Override
@@ -88,7 +85,7 @@ public class Method extends Member implements HasJsNameInfo {
   }
 
   public boolean isSynthetic() {
-    return isSynthetic;
+    return methodDescriptor.isSynthetic();
   }
 
   public boolean isAbstract() {
@@ -172,7 +169,6 @@ public class Method extends Member implements HasJsNameInfo {
     private boolean isAbstract;
     private boolean isBridge;
     private boolean isOverride;
-    private boolean isSynthetic;
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
@@ -189,7 +185,6 @@ public class Method extends Member implements HasJsNameInfo {
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
       builder.isBridge = method.isBridge;
-      builder.isSynthetic = method.isSynthetic;
       builder.sourcePosition = method.getSourcePosition();
       return builder;
     }
@@ -256,11 +251,6 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsSynthetic(boolean isSynthetic) {
-      this.isSynthetic = isSynthetic;
-      return this;
-    }
-
     public Builder setIsAbstract(boolean isAbstract) {
       this.isAbstract = isAbstract;
       return this;
@@ -310,7 +300,6 @@ public class Method extends Member implements HasJsNameInfo {
               isAbstract,
               isOverride,
               isBridge,
-              isSynthetic,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;
       method.setSourcePosition(sourcePosition);
