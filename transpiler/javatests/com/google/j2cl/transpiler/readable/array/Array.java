@@ -100,7 +100,6 @@ public class Array {
 
   void devirtualizedTypeArraysSample() {
     // Creation
-
     Boolean[] booleans = new Boolean[100];
     booleans = new Boolean[0];
     booleans = new Boolean[] {true, false};
@@ -118,6 +117,27 @@ public class Array {
 
     // Compound assignment.
     booleans[0] |= true;
+  }
+
+  void stringArraysSample() {
+    // Creation
+    String[] strings = new String[100];
+    strings = new String[0];
+    strings = new String[] {null, null};
+    String[][] strings2d = new String[5][10];
+    strings2d = new String[][] {{null, null}, null};
+    strings2d = new String[20][];
+
+    // Access
+    String b = strings[0];
+    b = strings2d[0][1];
+
+    // Assignment
+    strings[0] = null;
+    strings2d[0][1] = null;
+
+    // Compound assignment.
+    strings[0] += null;
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")

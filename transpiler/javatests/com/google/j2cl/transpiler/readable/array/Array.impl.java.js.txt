@@ -14,6 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let SomeObject = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -197,6 +198,35 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
+  m_stringArraysSample___$pp_com_google_j2cl_transpiler_readable_array() {
+    let strings = /**@type {!Array<?string>} */ (
+        $Arrays.$create([100], java_lang_String));
+    strings =
+        /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));
+    strings = /**@type {!Array<?string>} */ (
+        $Arrays.$init([null, null], java_lang_String));
+    let strings2d = /**@type {!Array<Array<?string>>} */ (
+        $Arrays.$create([5, 10], java_lang_String));
+    strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$init(
+        [
+          /**@type {!Array<?string>} */ (
+              $Arrays.$init([null, null], java_lang_String)),
+          null
+        ],
+        java_lang_String, 2));
+    strings2d = /**@type {!Array<Array<?string>>} */ (
+        $Arrays.$create([20, null], java_lang_String));
+    let b = strings[0];
+    b = strings2d[0][1];
+    $Arrays.$set(strings, 0, null);
+    $Arrays.$set(strings2d[0], 1, null);
+    $Arrays.$addSet(strings, 0, null);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
   m_nativeArraySample__() {
     let nativeObjects = new Array(100);
     nativeObjects = new Array(0);
@@ -243,6 +273,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     SomeObject = goog.module.get(
         'com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

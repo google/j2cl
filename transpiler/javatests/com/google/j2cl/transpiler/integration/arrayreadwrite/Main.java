@@ -7,6 +7,7 @@ public class Main {
     testInts();
     testLongs();
     testMains();
+    testCompoundArrayOperations();
   }
 
   private static void testLongs() {
@@ -250,6 +251,26 @@ public class Main {
     // Assignment.
     objects[0] = expectedObject;
     assert objects[0] == expectedObject;
+  }
+
+  private static void testCompoundArrayOperations() {
+    int[] intArray = new int[1];
+    intArray[0] += 2;
+    assert intArray[0] == 2;
+
+    // Uncomment the following code after b/34341877 has been fixed
+    // String[] stringArray = new String[1];
+    // stringArray[0] += null;
+    // assert stringArray[0].equals("nullnull");
+
+    // boolean[] booleanArray = new boolean[1];
+    // booleanArray[0] |= true;
+    // Object o = booleanArray[0];
+    // assert o instanceof Boolean;
+
+    long[] longArray = new long[1];
+    longArray[0] += 1;
+    assert longArray[0] == 1;
   }
 
   private static void testMains() {
