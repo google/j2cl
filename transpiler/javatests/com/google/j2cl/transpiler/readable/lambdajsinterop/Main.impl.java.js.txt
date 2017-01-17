@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Lambda$JsSupplier$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1$impl');
 let $Lambda$Thenable$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
 let com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
 let IdentityFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
@@ -51,15 +52,6 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  static m_main__() {
-    Main.$clinit();
-    let rv = $Lambda$Thenable$0.$create__();
-  }
-
-  /**
    * @template M_E
    * @return {?function(M_E):M_E}
    * @public
@@ -75,6 +67,20 @@ class Main extends java_lang_Object {
     return /**@type {Function} */ ($Casts.to(
         Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_,
         com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_main__() {
+    Main.$clinit();
+    let rv = $Lambda$Thenable$0.$create__();
+    let stringJsSupplier = $Lambda$JsSupplier$1.$create__();
+    stringJsSupplier.get();
+    let equals = stringJsSupplier;
+    equals.equals(null);
+    equals.m_get__();
   }
 
   /**
@@ -129,6 +135,8 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
+    $Lambda$JsSupplier$1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1$impl');
     $Lambda$Thenable$0 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
     com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function =

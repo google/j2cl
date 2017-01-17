@@ -1,0 +1,137 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.lambdajsinterop.Main$$Lambda$JsSupplier$1.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1$impl');
+
+
+let JsSupplier = goog.require('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Equals$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$$Overlay$impl');
+let Equals = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {JsSupplier<Integer>}
+ */
+class $Lambda$JsSupplier$1 extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!$Lambda$JsSupplier$1}
+   * @public
+   */
+  static $create__() {
+    $Lambda$JsSupplier$1.$clinit();
+    let $instance = new $Lambda$JsSupplier$1();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_$Lambda$JsSupplier$1__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_$Lambda$JsSupplier$1__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_$Lambda$JsSupplier$1();
+  }
+
+  /**
+   * Lambda implementation method.
+   * @override
+   * @return {Integer}
+   * @public
+   */
+  get() {
+    return Integer.m_valueOf__int(1);
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @return {Integer}
+   * @public
+   */
+  m_get__() {
+    return /**@type {Integer} */ ($Casts.to(
+        Equals$$Overlay
+            .m_get__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals(
+                this),
+        Integer));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $Lambda$JsSupplier$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $Lambda$JsSupplier$1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Lambda$JsSupplier$1.$clinit = function() {};
+    Equals$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$$Overlay$impl');
+    Equals = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+    Equals.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_$Lambda$JsSupplier$1() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $Lambda$JsSupplier$1,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main$$Lambda$JsSupplier$1'));
+
+
+JsSupplier.$markImplementor($Lambda$JsSupplier$1);
+
+
+/**
+ * Export class.
+ */
+exports = $Lambda$JsSupplier$1;
+//# sourceMappingURL=Main$$Lambda$JsSupplier$1.js.map

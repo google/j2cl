@@ -31,6 +31,7 @@ public class JsMethodTest extends MyTestCase {
     test.testStaticNativeJsPropertyGetter();
     test.testStaticNativeJsPropertySetter();
     test.testLambdaImplementingJsMethod();
+    test.testLambdaRequiringJsMethodBridge();
   }
 
   class MyObject {
@@ -90,5 +91,24 @@ public class JsMethodTest extends MyTestCase {
   public void testLambdaImplementingJsMethod() {
     FunctionalInterfaceWithJsMethod f = () -> "Hello";
     assertEquals("Hello", f.greet());
+  }
+
+  interface NullSupplier {
+    default Object get() {
+      return null;
+    }
+  }
+
+  interface JsSupplier extends NullSupplier {
+    @JsMethod
+    Object get();
+  }
+
+  public void testLambdaRequiringJsMethodBridge() {
+    JsSupplier aSupplier = () -> "Hello";
+    NullSupplier aliasToSupplier = aSupplier;
+    assertEquals("Hello", aSupplier.get());
+    // b/30711216. Bridge methods are not synthesized for lambdas.
+    // assertEquals("Hello", aliasToSupplier.get());
   }
 }
