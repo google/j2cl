@@ -279,6 +279,7 @@ public class AstUtils {
         MethodDescriptor.Builder.from(targetMethodDescriptor)
             .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
             .setSynthetic(true)
+            .setBridge(true)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,
@@ -311,6 +312,7 @@ public class AstUtils {
       boolean isOverride) {
     checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
     checkArgument(fromMethodDescriptor.isSynthetic());
+    checkArgument(fromMethodDescriptor.isBridge());
 
     List<Variable> parameters =
         createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());

@@ -56,6 +56,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isSynthetic();
 
+  public abstract boolean isBridge();
+
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
@@ -178,6 +180,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setVarargs(false)
         .setFinal(false)
         .setSynthetic(false)
+        .setBridge(false)
         .setParameterTypeDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -257,6 +260,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setSynthetic(boolean isSynthetic);
+
+    public abstract Builder setBridge(boolean isBridge);
 
     public abstract Builder setEnclosingClassTypeDescriptor(
         TypeDescriptor enclosingClassTypeDescriptor);

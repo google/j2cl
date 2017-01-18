@@ -121,6 +121,7 @@ public class DefaultMethodsResolver {
                 MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())
                     .setJsInfo(JsInfo.NONE)
                     .setSynthetic(true)
+                    .setBridge(true)
                     .build(),
                 defaultForwardingMethod.getDescriptor(),
                 "Bridge to JsMethod.",

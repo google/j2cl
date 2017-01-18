@@ -133,6 +133,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               .setJsInfo(JsInfo.NONE)
               .setNative(false)
               .setSynthetic(true)
+              .setBridge(true)
               .build();
 
       return AstUtils.createForwardingMethod(

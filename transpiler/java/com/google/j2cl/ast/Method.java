@@ -38,7 +38,6 @@ public class Method extends Member implements HasJsNameInfo {
   private boolean isAbstract;
   private boolean isOverride;
   private String jsDocDescription;
-  private boolean isBridge;
   private BitSet parameterOptionality;
 
   private Method(
@@ -47,7 +46,6 @@ public class Method extends Member implements HasJsNameInfo {
       Block body,
       boolean isAbstract,
       boolean isOverride,
-      boolean isBridge,
       String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
@@ -55,7 +53,6 @@ public class Method extends Member implements HasJsNameInfo {
     this.isOverride = isOverride;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
-    this.isBridge = isBridge;
   }
 
   @Override
@@ -81,7 +78,7 @@ public class Method extends Member implements HasJsNameInfo {
   }
 
   public boolean isBridge() {
-    return isBridge;
+    return methodDescriptor.isBridge();
   }
 
   public boolean isSynthetic() {
@@ -167,7 +164,6 @@ public class Method extends Member implements HasJsNameInfo {
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private boolean isAbstract;
-    private boolean isBridge;
     private boolean isOverride;
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
@@ -184,7 +180,6 @@ public class Method extends Member implements HasJsNameInfo {
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
-      builder.isBridge = method.isBridge;
       builder.sourcePosition = method.getSourcePosition();
       return builder;
     }
@@ -256,11 +251,6 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsBridge(boolean isBridge) {
-      this.isBridge = isBridge;
-      return this;
-    }
-
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
@@ -299,7 +289,6 @@ public class Method extends Member implements HasJsNameInfo {
               body,
               isAbstract,
               isOverride,
-              isBridge,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;
       method.setSourcePosition(sourcePosition);

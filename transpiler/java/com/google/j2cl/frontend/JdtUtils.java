@@ -784,6 +784,12 @@ public class JdtUtils {
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(JdtUtils::createTypeDescriptor);
 
+    /**
+     * JDT does not provide method bindings for any bridge methods so the current one must not be a
+     * bridge.
+     */
+    boolean isBridge = false;
+
     return MethodDescriptor.newBuilder()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -801,6 +807,7 @@ public class JdtUtils {
         .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
+        .setBridge(isBridge)
         .build();
   }
 

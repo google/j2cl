@@ -47,6 +47,7 @@ public class PackagePrivateMethodsDispatcher {
                             .setEnclosingClassTypeDescriptor(
                                 JdtUtils.createTypeDescriptor(typeBinding))
                             .setSynthetic(true)
+                            .setBridge(true)
                             .build(),
                         entry.getKey(),
                         "Forwarding method for package private method.",

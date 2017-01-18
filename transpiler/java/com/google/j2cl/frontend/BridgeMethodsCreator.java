@@ -301,6 +301,7 @@ public class BridgeMethodsCreator {
                     .map(m -> JdtUtils.createTypeDescriptor(m.getErasure()).getRawTypeDescriptor())
                     .toArray(TypeDescriptor[]::new))
             .setSynthetic(true)
+            .setBridge(true)
             .build();
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor = JdtUtils.createMethodDescriptor(targetMethod);
@@ -371,15 +372,12 @@ public class BridgeMethodsCreator {
     TypeDescriptor returnTypeDescriptor = bridgeMethodDescriptor.getReturnTypeDescriptor();
     Statement statement =
         AstUtils.createReturnOrExpressionStatement(dispatchMethodCall, returnTypeDescriptor);
-    checkArgument(bridgeMethodDescriptor.isSynthetic());
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(true)
-        .setIsBridge(true)
         .setJsDocDescription("Bridge method.")
         .build();
   }
-
 }
