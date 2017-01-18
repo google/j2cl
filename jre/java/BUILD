@@ -5,7 +5,7 @@
 
 package(default_visibility = [
     "//:__subpackages__",
-    "//third_party/java/j2cl:__pkg__",
+    "//third_party/java/j2cl:__subpackages__",
 ])
 
 # Google owns the copyright

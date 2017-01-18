@@ -149,7 +149,7 @@ j2cl_transpile = rule(
             cfg="host",
             executable=True,
             allow_files=True,
-            default=Label("//third_party/java/j2cl:J2clTranspiler"),
+            default=Label("//third_party/java/j2cl/internal_do_not_use:J2clTranspiler"),
         ),
     },
     implementation=_impl,

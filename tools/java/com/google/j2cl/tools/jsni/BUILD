@@ -2,7 +2,7 @@
 #   Jsni to native js file converter tool code.
 
 package(default_visibility = [
-    "//third_party/java/j2cl:__pkg__",
+    "//third_party/java/j2cl:__subpackages__",
     "//:__subpackages__",
 ])
 
