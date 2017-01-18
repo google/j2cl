@@ -60,16 +60,16 @@ public class SourceMapGeneratorStage {
                   javaScriptImplementationFileContents)
               : renderSourceMapToString(type, javaSourcePositionByOutputSourcePosition);
 
+      if (output.isEmpty() && generateReadableSourceMaps) {
+        return;
+      }
       Path absolutePathForSourceMap =
           GeneratorUtils.getAbsolutePath(
               outputFileSystem,
               outputLocationPath,
               GeneratorUtils.getRelativePath(type),
               SOURCE_MAP_SUFFIX);
-      if (!output.isEmpty() || !generateReadableSourceMaps) {
-        // Do not generate empty readable sourcemaps.
-        GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
-      }
+      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
     } catch (IOException e) {
       problems.error("Could not generate source maps for %s: %s", javaSourceFile, e.getMessage());
     }
