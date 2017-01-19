@@ -148,10 +148,6 @@ public abstract class TypeDescriptor extends Node
 
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
-    if (isProxy()) {
-      return getQualifiedSourceName() + "$$Proxy";
-    }
-
     return getQualifiedJsName();
   }
 
@@ -261,10 +257,6 @@ public abstract class TypeDescriptor extends Node
 
   /** Returns true if the class captures its enclosing instance */
   public abstract boolean isCapturingEnclosingInstance();
-
-  private boolean isProxy() {
-    return isNative() && !isExtern();
-  }
 
   public boolean isParameterizedType() {
     return !getTypeArgumentDescriptors().isEmpty();

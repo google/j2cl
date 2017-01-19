@@ -12,9 +12,9 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let NativeJsType$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType$$Overlay$impl');
-let NativeJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType$$Proxy');
 let NativeObject$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject$$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let NativeJsType = goog.forwardDeclare('test.foo.NativeJsType');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -98,11 +98,10 @@ class CastToNativeType extends java_lang_Object {
     CastToNativeType.$clinit = function() {};
     NativeJsType$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType$$Overlay$impl');
-    NativeJsType = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType$$Proxy');
     NativeObject$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject$$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
+    NativeJsType = goog.module.get('test.foo.NativeJsType');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();

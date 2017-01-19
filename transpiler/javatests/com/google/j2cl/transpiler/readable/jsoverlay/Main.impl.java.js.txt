@@ -12,7 +12,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let NativeJsTypeWithOverlay$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay$impl');
-let NativeJsTypeWithOverlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Proxy');
+let NativeJsTypeWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -106,8 +106,8 @@ class Main extends java_lang_Object {
     Main.$clinit = function() {};
     NativeJsTypeWithOverlay$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay$impl');
-    NativeJsTypeWithOverlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Proxy');
+    NativeJsTypeWithOverlay =
+        goog.module.get('test.foo.NativeJsTypeWithOverlay');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

@@ -21,26 +21,21 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.FieldDescriptor.Builder;
 import com.google.j2cl.ast.MemberDescriptor;
-import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Normalizes the static native js members accesses.
@@ -56,90 +51,47 @@ import java.util.Set;
  * to A.abs() with Math.abs().
  */
 public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+            FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
+            if (!fieldDescriptor.isStatic()
+                || !fieldDescriptor.isNative()
+                || !fieldDescriptor.hasJsNamespace()) {
+              return fieldAccess;
+            }
 
-  /**
-   * When there are references in the code like:
-   *
-   * <pre>
-   *   {@literal @}JsMethod(namespace="Math")
-   *   static native double abs(double x);
-   * </pre>
-   *
-   * ...there must be a matching proxy file output for "Math". But since there is
-   * no @JsType(name="Math") class in the compile, there will be no proxy class. So we synthesize a
-   * proxy class.
-   *
-   * <p>Care must be taken to name the synthesized proxy class in a way that will not collide with
-   * the proxied type or any other proxy implementation.
-   */
-  private static class CreateNativeJsTypeProxies extends AbstractVisitor {
-    private final Set<TypeDescriptor> proxyTypeDescriptors = new LinkedHashSet<>();
+            // A.abs -> Math.abs.
+            FieldDescriptor newFieldescriptor =
+                Builder.from(fieldDescriptor)
+                    .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(fieldDescriptor))
+                    .build();
+            checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
+            return FieldAccess.Builder.from(newFieldescriptor).build();
+          }
 
-    @Override
-    public void exitCompilationUnit(CompilationUnit compilationUnit) {
-      // For each collected proxy type descriptor with a missing proxy class...
-      for (TypeDescriptor proxyTypeDescriptor : proxyTypeDescriptors) {
-        // create the missing proxy class.
-        compilationUnit.addType(new Type(Visibility.PUBLIC, proxyTypeDescriptor));
-      }
-    }
-
-    @Override
-    public void exitMethod(Method method) {
-      if (!method.getDescriptor().isStatic()
-          || !method.getDescriptor().isNative()
-          || !method.getDescriptor().hasJsNamespace()) {
-        return;
-      }
-
-      // Collect the type descriptors that need a proxy class but don't already have one (because
-      // they derive from an inline @JsMethod declaration inside a regular class).
-      TypeDescriptor typeDescriptor = getNamespaceAsTypeDescriptor(method.getDescriptor());
-      if (typeDescriptor.isExtern()) {
-        return;
-      }
-
-      proxyTypeDescriptors.add(typeDescriptor);
-    }
-  }
-
-  private static class RewriteStaticNativeJsMemberAccesses extends AbstractRewriter {
-    @Override
-    public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-      FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-      if (!fieldDescriptor.isStatic()
-          || !fieldDescriptor.isNative()
-          || !fieldDescriptor.hasJsNamespace()) {
-        return fieldAccess;
-      }
-
-      // A.abs -> Math.abs.
-      FieldDescriptor newFieldescriptor =
-          FieldDescriptor.Builder.from(fieldDescriptor)
-              .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(fieldDescriptor))
-              .build();
-      checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
-      return FieldAccess.Builder.from(newFieldescriptor).build();
-    }
-
-    @Override
-    public Node rewriteMethodCall(MethodCall methodCall) {
-      MethodDescriptor methodDescriptor = methodCall.getTarget();
-      if (!methodDescriptor.isStatic()
-          || !methodDescriptor.isNative()
-          || !methodDescriptor.hasJsNamespace()) {
-        return methodCall;
-      }
-      // A.abs() -> Math.abs().
-      MethodDescriptor newMethodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(methodDescriptor))
-              .build();
-      checkArgument(methodCall.getQualifier() instanceof TypeReference);
-      return MethodCall.Builder.from(newMethodDescriptor)
-          .setArguments(methodCall.getArguments())
-          .build();
-    }
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor methodDescriptor = methodCall.getTarget();
+            if (!methodDescriptor.isStatic()
+                || !methodDescriptor.isNative()
+                || !methodDescriptor.hasJsNamespace()) {
+              return methodCall;
+            }
+            // A.abs() -> Math.abs().
+            MethodDescriptor newMethodDescriptor =
+                MethodDescriptor.Builder.from(methodDescriptor)
+                    .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(methodDescriptor))
+                    .build();
+            checkArgument(methodCall.getQualifier() instanceof TypeReference);
+            return MethodCall.Builder.from(newMethodDescriptor)
+                .setArguments(methodCall.getArguments())
+                .build();
+          }
+        });
   }
 
   /**
@@ -185,11 +137,5 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
       return typeDescriptor;
     }
     return getOutermostEnclosingType(typeDescriptor.getEnclosingTypeDescriptor());
-  }
-
-  @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new RewriteStaticNativeJsMemberAccesses());
-    compilationUnit.accept(new CreateNativeJsTypeProxies());
   }
 }

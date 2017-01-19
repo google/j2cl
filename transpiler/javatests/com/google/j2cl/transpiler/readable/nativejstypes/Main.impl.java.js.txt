@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Proxy');
-let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Proxy');
+let Foo = goog.forwardDeclare('com.acme.MyFoo');
+let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$1$impl');
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
@@ -145,10 +145,9 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
+    Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Proxy');
-    Foo = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Proxy');
+        'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Main.$1$impl');
     $2 = goog.module.get(

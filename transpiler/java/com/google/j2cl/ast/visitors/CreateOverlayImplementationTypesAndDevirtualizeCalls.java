@@ -158,7 +158,9 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       // TODO(goktug): we should actually do proper rewrite of the nodes. Current code leaves
       // traces of overlay members in the original class that requires us cloning here.
       for (Type type : compilationUnit.getTypes()) {
-        replacementTypeList.add(type);
+        if (!type.isNative()) {
+          replacementTypeList.add(type);
+        }
 
         if (type.getDescriptor().isNative() || type.getDescriptor().declaresDefaultMethods()) {
           replacementTypeList.add(createOverlayImplementationType(type));

@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.foo.Bar$$Proxy');
+let Bar = goog.forwardDeclare('foo.Bar');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -170,8 +170,7 @@ class StaticJsMembers extends java_lang_Object {
    */
   static $clinit() {
     StaticJsMembers.$clinit = function() {};
-    Bar = goog.module.get(
-        'com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.foo.Bar$$Proxy');
+    Bar = goog.module.get('foo.Bar');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

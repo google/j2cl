@@ -94,27 +94,7 @@ public class OutputGeneratorStage {
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
         if (type.getDescriptor().isNative()) {
-          // If the type is a proxy for some transitive dependency JS.
-          if (type.getDescriptor().isJsType() && !type.getDescriptor().isExtern()) {
-            // Forward that transitive dependency via a proxy file.
-            timingReport.startSample("Render native JsType proxy");
-            NativeJsTypeProxyGenerator nativeJsTypeProxyGenerator =
-                new NativeJsTypeProxyGenerator(problems, declareLegacyNamespace, type);
-            Path absolutePathForImpl =
-                GeneratorUtils.getAbsolutePath(
-                    outputFileSystem,
-                    outputLocationPath,
-                    GeneratorUtils.getRelativePath(type),
-                    nativeJsTypeProxyGenerator.getSuffix());
-            String nativeJsTypeProxySource = nativeJsTypeProxyGenerator.renderOutput();
-            timingReport.startSample("Write native JsType proxy");
-            GeneratorUtils.writeToFile(
-                absolutePathForImpl, nativeJsTypeProxySource, charset, problems);
-
-            gatherNativeJsTypeProxyDepInfo(type, importModulePaths, exportModulePaths);
-          }
-
-          // Otherwise don't generate anything.
+          // Don't generate JS for native JsTypes.
           continue;
         }
 
@@ -231,16 +211,6 @@ public class OutputGeneratorStage {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
     exportModulePaths.add(selfTypeDescriptor.getModuleName());
     exportModulePaths.add(selfTypeDescriptor.getImplModuleName());
-  }
-
-  private void gatherNativeJsTypeProxyDepInfo(
-      Type type, SortedSet<String> importModulePaths, SortedSet<String> exportModulePaths) {
-    // Import the native JS class being proxied.
-    importModulePaths.add(type.getDescriptor().getQualifiedJsName());
-
-    // Export the name by which the native JS class is being forwarded.
-    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    exportModulePaths.add(selfTypeDescriptor.getModuleName());
   }
 
   private void writeDepinfo(
