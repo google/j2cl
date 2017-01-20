@@ -1,0 +1,103 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
+
+
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+class StringHolder extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {?string} */
+    this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StringHolder}
+   * @public
+   */
+  static $create__() {
+    StringHolder.$clinit();
+    let $instance = new StringHolder();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StringHolder;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StringHolder);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    StringHolder.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder() {
+    this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+        'A';
+  }
+};
+
+$Util.$setClassMetadata(
+    StringHolder,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.strings.Strings$StringHolder'));
+
+
+
+/**
+ * Export class.
+ */
+exports = StringHolder;
+//# sourceMappingURL=Strings$StringHolder.js.map

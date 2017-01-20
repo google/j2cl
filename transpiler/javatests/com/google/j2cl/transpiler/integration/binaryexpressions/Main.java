@@ -57,6 +57,14 @@ public class Main {
     d >>>= 16;
     assert d == 65535;
 
+    String s = null;
+    assert s + s == "nullnull";
+
+    // Use an array to allow uninitialized string references.
+    String[] stringArray = new String[1];
+    // Uncomment when b/34460222 is fixed
+    // assert stringArray[0] + stringArray[0] == "nullnull";
+
     // Uncomment when b/28875322 is fixed.
     // assert ((5/2) - 0.0) == 2.0;
 

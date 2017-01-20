@@ -1,0 +1,178 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.strings.Strings.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.strings.Strings$impl');
+
+
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let StringHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+
+
+class Strings extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {?string} */
+    this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        null;
+    /** @public {?string} */
+    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        null;
+    /** @public {?string} */
+    this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Strings}
+   * @public
+   */
+  static $create__() {
+    Strings.$clinit();
+    let $instance = new Strings();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_strings_Strings__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_strings_Strings();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test__() {
+    let s1 = null;
+    let s2 = null;
+    let s3 = '' + s1 + s2;
+    s2 = '' + s2 + s2;
+    s1 += 'a';
+    s3 = '' + s1 + s1 + s2 +
+        java_lang_String.m_valueOf__java_lang_Object(null) + 'a';
+    s3 =
+        'a' + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);
+    let s4;
+    let c1 = 70 /* 'F' */;
+    let c2 = 111 /* 'o' */;
+    s4 = java_lang_String.m_valueOf__java_lang_Object(
+             Character.m_valueOf__char(c1)) +
+        java_lang_String.m_valueOf__java_lang_Object(
+            Character.m_valueOf__char(c2)) +
+        'o';
+    ($Numbers.$q = (StringHolder.$create__()),
+     $Numbers.$q
+         .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+         '' +
+         $Numbers.$q
+             .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +
+         s4);
+    ($Numbers.$q = (StringHolder.$create__()),
+     $Numbers.$q
+         .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+         '' +
+         $Numbers.$q
+             .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +
+         java_lang_String.m_valueOf__java_lang_Object(
+             Character.m_valueOf__char(c1)));
+    (StringHolder.$create__())
+        .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +=
+        'o';
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Strings;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Strings);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Strings.$clinit = function() {};
+    StringHolder = goog.module.get(
+        'com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
+    Character = goog.module.get('java.lang.Character$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_strings_Strings() {
+    this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        'This is a string literal';
+    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        '𐍆';
+    this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        '：';
+  }
+};
+
+$Util.$setClassMetadata(
+    Strings,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.strings.Strings'));
+
+
+/**
+ * @public {?string}
+ * @const
+ */
+Strings.f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_strings_Strings_ =
+    '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
+
+
+/**
+ * @public {?string}
+ * @const
+ */
+Strings
+    .f_ESCAPE_CODES_COPY__com_google_j2cl_transpiler_readable_strings_Strings_ =
+    '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
+
+
+
+/**
+ * Export class.
+ */
+exports = Strings;
+//# sourceMappingURL=Strings.js.map

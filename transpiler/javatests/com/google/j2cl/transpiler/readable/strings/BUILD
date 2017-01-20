@@ -10,6 +10,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "stringconversion",
+    name = "strings",
     srcs = glob(["*.java"]),
 )
