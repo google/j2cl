@@ -45,7 +45,6 @@ def readable_example(
     j2cl_library(
         name="supporting_" + name,
         srcs=supporting_srcs,
-        generate_build_test=False,
         javacopts=[
             "-source 8",
             "-target 8",
@@ -64,7 +63,6 @@ def readable_example(
   j2cl_library(
       name=name,
       srcs=srcs,
-      generate_build_test=False,
       javacopts=[
           "-source 8",
           "-target 8"

@@ -19,7 +19,6 @@ j2cl_mirror_from_gwt(
     extra_js_srcs = [
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
     ],
-    generate_build_test = False,
     js_deps = [
         "//javascript/closure/reflect",
         "//javascript/closure/log",
