@@ -922,12 +922,6 @@ public abstract class TypeDescriptor extends Node
       checkState(
           !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isFunctionalInterface());
 
-      // JsFunction interfaces are functional interfaces.
-      checkState(!typeDescriptor.isJsFunctionInterface() || typeDescriptor.isFunctionalInterface());
-
-      // Only interfaces are functional.
-      checkState(!typeDescriptor.isFunctionalInterface() || typeDescriptor.isInterface());
-
       // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
       // type descriptor that does not make sense.
       return interner.intern(typeDescriptor);

@@ -361,6 +361,14 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsFunctionInterface(Type type) {
     String readableDescription = type.getDescriptor().getReadableDescription();
+    if (!type.getDescriptor().isFunctionalInterface()) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsFunction '%s' has to be a functional interface.",
+          readableDescription);
+      return;
+    }
+
     if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
       problems.error(
           type.getSourcePosition(),

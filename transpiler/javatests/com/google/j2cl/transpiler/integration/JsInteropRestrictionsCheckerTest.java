@@ -1251,6 +1251,21 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileSucceeds(sourcePackage);
   }
 
+  public void testJsFunctionOnClassFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctiononclass");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctiononclass;",
+        "import jsinterop.annotations.JsFunction;",
+        "@JsFunction",
+        "public class Buggy {",
+        "}");
+
+    assertCompileFails(sourcePackage, "JsFunction 'Buggy' has to be a functional interface.");
+  }
+
   public void testJsFunctionExtendsInterfaceFails() throws Exception {
     File sourcePackage = createPackage("jsfunctionextendsinterface");
 
