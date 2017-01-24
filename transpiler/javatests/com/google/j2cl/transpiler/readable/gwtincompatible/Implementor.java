@@ -15,4 +15,8 @@ public class Implementor extends Interface.ClassWithAbstractMethod
   @GwtIncompatible
   @Override
   public void incompatibleFromClass() {}
+
+  public void compatibleMethod() {
+    int a = 4; // Show that the source map line numbers are preserved correctly.
+  }
 }
