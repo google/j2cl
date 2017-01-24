@@ -4,13 +4,85 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-class GenericClass<T> {}
-
-interface GenericInterface<T> {}
-
 public class Main {
 
-  static class Foo {}
+  class Foo {}
+
+  public static void testClass() {
+    Object o = new Main();
+    assertSame(Main.class, o.getClass());
+    assertSame(Object.class, o.getClass().getSuperclass());
+    assertSame(null, Object.class.getSuperclass());
+
+    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Foo", Foo.class.getName());
+
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getCanonicalName());
+    // J2CL doesn't follow JLS here:
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Foo",
+        Foo.class.getCanonicalName());
+
+    assertEquals("Main", Main.class.getSimpleName());
+    // J2CL doesn't follow JLS here:
+    assertEquals("Main$Foo", Foo.class.getSimpleName());
+
+    assertEquals(
+        "class com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.toString());
+    assertEquals(
+        "class com.google.j2cl.transpiler.integration.classliteral.Main$Foo", Foo.class.toString());
+
+    assert !Foo.class.isArray() : "Foo.class.isArray() returned true";
+    assert !Foo.class.isEnum() : "Foo.class.isEnum() returned true";
+    assert !Foo.class.isPrimitive() : "Foo.class.isPrimitive() returned true";
+    assert !Foo.class.isInterface() : "Foo.class.isArray() returned true";
+  }
+
+  interface IFoo {}
+
+  public static void testInterface() {
+    assertSame(null, IFoo.class.getSuperclass());
+
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$IFoo", IFoo.class.getName());
+    // J2CL doesn't follow JLS here:
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$IFoo",
+        IFoo.class.getCanonicalName());
+    assertEquals("Main$IFoo", IFoo.class.getSimpleName());
+    // J2CL doesn't follow JLS here:
+    assertEquals(
+        "interface com.google.j2cl.transpiler.integration.classliteral.Main$IFoo",
+        IFoo.class.toString());
+
+    assert !IFoo.class.isArray() : "IFoo.class.isArray() returned true";
+    assert !IFoo.class.isEnum() : "IFoo.class.isEnum() returned true";
+    assert !IFoo.class.isPrimitive() : "IFoo.class.isPrimitive() returned true";
+    assert IFoo.class.isInterface() : "IFoo.class.isInterface() returned false";
+  }
+
+  public static void testPrimitive() {
+    assertSame(null, int.class.getSuperclass());
+
+    assertEquals("int", int.class.getName());
+    assertEquals("int", int.class.getCanonicalName());
+    assertEquals("int", int.class.getSimpleName());
+    assertEquals("int", int.class.toString());
+
+    assert !int.class.isArray() : "int.class.isArray() returned true";
+    assert !int.class.isEnum() : "int.class.isEnum() returned true";
+    assert int.class.isPrimitive() : "int.class.isPrimitive() returned false";
+    assert !int.class.isInterface() : "int.class.isInterface() returned true";
+  }
+
+  public static void testPrimitivesUnboxed() {
+    Object b = true;
+    Object d = 0.1;
+    assertEquals(Boolean.class, b.getClass());
+    assertEquals(Double.class, d.getClass());
+  }
 
   static enum Bar {
     BAR,
@@ -81,81 +153,6 @@ public class Main {
     assertSame(Foo[].class, f[0].getClass());
   }
 
-  public static void testInterface() {
-    assertSame(null, IFoo.class.getSuperclass());
-
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getCanonicalName());
-    assertEquals("IFoo", IFoo.class.getSimpleName());
-    assertEquals(
-        "interface com.google.j2cl.transpiler.integration.classliteral.IFoo",
-        IFoo.class.toString());
-
-    assert !IFoo.class.isArray() : "IFoo.class.isArray() returned true";
-    assert !IFoo.class.isEnum() : "IFoo.class.isEnum() returned true";
-    assert !IFoo.class.isPrimitive() : "IFoo.class.isPrimitive() returned true";
-    assert IFoo.class.isInterface() : "IFoo.class.isInterface() returned false";
-  }
-
-  public static void testClass() {
-    Object o = new Main();
-    assertSame(Main.class, o.getClass());
-    assertSame(Object.class, o.getClass().getSuperclass());
-    assertSame(null, Object.class.getSuperclass());
-
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.Main$Foo", Foo.class.getName());
-
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getCanonicalName());
-    // J2CL doesn't follow JLS here:
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.Main$Foo",
-        Foo.class.getCanonicalName());
-
-    assertEquals("Main", Main.class.getSimpleName());
-    // J2CL doesn't follow JLS here:
-    assertEquals("Main$Foo", Foo.class.getSimpleName());
-
-    assertEquals(
-        "class com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.toString());
-    assertEquals(
-        "class com.google.j2cl.transpiler.integration.classliteral.Main$Foo", Foo.class.toString());
-
-    assert !Foo.class.isArray() : "Foo.class.isArray() returned true";
-    assert !Foo.class.isEnum() : "Foo.class.isEnum() returned true";
-    assert !Foo.class.isPrimitive() : "Foo.class.isPrimitive() returned true";
-    assert !Foo.class.isInterface() : "Foo.class.isArray() returned true";
-  }
-
-  public static void testPrimitive() {
-    assertSame(null, int.class.getSuperclass());
-
-    assertEquals("int", int.class.getName());
-    assertEquals("int", int.class.getCanonicalName());
-    assertEquals("int", int.class.getSimpleName());
-    assertEquals("int", int.class.toString());
-
-    assert !int.class.isArray() : "int.class.isArray() returned true";
-    assert !int.class.isEnum() : "int.class.isEnum() returned true";
-    assert int.class.isPrimitive() : "int.class.isPrimitive() returned false";
-    assert !int.class.isInterface() : "int.class.isInterface() returned true";
-  }
-
-  public static void testPrimitivesUnboxed() {
-    Object b = true;
-    Object d = 0.1;
-    assertEquals(Boolean.class, b.getClass());
-    assertEquals(Double.class, d.getClass());
-  }
-
-  @SuppressWarnings("GetClassOnClass")
-  public static void testMisc() {
-    assertSame(Class.class, int.class.getClass());
-  }
-
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface NativeType {}
 
@@ -169,29 +166,15 @@ public class Main {
     assertEquals("JavaScriptFunction", NativeFunction.class.getName());
   }
 
+  static class GenericClass<T> {}
+
+  interface GenericInterface<T> {}
+
   public static void testGeneric() {
     GenericClass<Number> g = new GenericClass<>();
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
-        GenericClass.class.getName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
-        GenericClass.class.getCanonicalName());
-    assertEquals("GenericClass", GenericClass.class.getSimpleName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericClass", g.getClass().getName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
-        g.getClass().getCanonicalName());
-    assertEquals("GenericClass", g.getClass().getSimpleName());
-
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericInterface",
-        GenericInterface.class.getName());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.GenericInterface",
-        GenericInterface.class.getCanonicalName());
-    assertEquals("GenericInterface", GenericInterface.class.getSimpleName());
+    assertSame(GenericClass.class, g.getClass());
+    assertEquals("Main$GenericClass", GenericClass.class.getSimpleName());
+    assertEquals("Main$GenericInterface", GenericInterface.class.getSimpleName());
   }
 
   private static boolean clinitCalled = false;
@@ -208,51 +191,43 @@ public class Main {
     assert clinitCalled == false;
   }
 
+  @SuppressWarnings("GetClassOnClass")
+  public static void testMisc() {
+    assertSame(Class.class, Object.class.getClass());
+    assertSame(Class.class, int.class.getClass());
+    assertSame(Class.class, Object[].class.getClass());
+  }
+
   public static void main(String[] args) {
     testClass();
     testInterface();
-    testArray();
     testPrimitive();
-    testMisc();
+    testPrimitivesUnboxed();
     testEnum();
-    testGeneric();
     testEnumSubclass();
-    testClinit();
+    testArray();
     testNative();
+    testGeneric();
+    testClinit();
+    testMisc();
   }
 
   private static void assertEquals(Object expected, Object actual) {
-    assertEquals(getFailureMessage(expected, actual), expected, actual);
-  }
-
-  private static void assertEquals(String message, Object expected, Object actual) {
-    assert expected == null ? actual == null : expected.equals(actual) : message;
+    assert expected == null ? actual == null : expected.equals(actual)
+        : getFailureMessage(expected, actual, "should be equal");
   }
 
   private static void assertSame(Object expected, Object actual) {
-    assertSame(getFailureMessage(expected, actual), expected, actual);
+    assert expected == actual : getFailureMessage(expected, actual, "should be same");
   }
 
   private static void assertNotSame(Object expected, Object actual) {
+    assert expected != actual : getFailureMessage(expected, actual, "should not be same");
+  }
+
+  private static String getFailureMessage(Object expected, Object actual, String msg) {
     String expectedString = expected == null ? null : expected.toString();
     String actualString = actual == null ? null : actual.toString();
-    assertNotSame(
-        "<" + actualString + "> should not be equal to <" + expectedString + ">", expected, actual);
-  }
-
-  private static String getFailureMessage(Object expected, Object actual) {
-    String expectedString = expected == null ? null : expected.toString();
-    String actualString = actual == null ? null : actual.toString();
-    return "Assertion failed: expected<" + expectedString + ">  actual:<" + actualString + ">";
-  }
-
-  private static void assertSame(String message, Object expected, Object actual) {
-    assert expected == actual : message;
-  }
-
-  private static void assertNotSame(String message, Object expected, Object actual) {
-    assert expected != actual : message;
+    return "<" + actualString + "> " + msg + " to <" + expectedString + ">";
   }
 }
-
-interface IFoo {}
