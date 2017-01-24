@@ -19,4 +19,18 @@ public class Implementor extends Interface.ClassWithAbstractMethod
   public void compatibleMethod() {
     int a = 4; // Show that the source map line numbers are preserved correctly.
   }
+
+  enum SomeEnum {
+    COMPATIBLE {
+      @Override
+      void method() {}
+    },
+    @GwtIncompatible
+    INCOMPATIBLE {
+      @Override
+      void method() {}
+    };
+
+    abstract void method();
+  }
 }

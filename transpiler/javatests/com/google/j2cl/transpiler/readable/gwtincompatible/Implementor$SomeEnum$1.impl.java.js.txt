@@ -1,0 +1,129 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum$1.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
+
+
+let SomeEnum = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class $1 extends SomeEnum {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!$1}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int(
+            $name, $ordinal);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
+        $name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $1.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    SomeEnum.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $1,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum$1'));
+
+
+
+/**
+ * Export class.
+ */
+exports = $1;
+//# sourceMappingURL=Implementor$SomeEnum$1.js.map

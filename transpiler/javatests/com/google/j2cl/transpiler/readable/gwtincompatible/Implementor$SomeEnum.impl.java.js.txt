@@ -1,0 +1,283 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum$impl');
+
+
+let Enum = goog.require('java.lang.Enum$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
+let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$2$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @abstract
+ * @extends {Enum<SomeEnum>}
+ */
+class SomeEnum extends Enum {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum();
+  }
+
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));
+  }
+
+  /**
+   * @param {?string} name
+   * @return {SomeEnum}
+   * @public
+   */
+  static m_valueOf__java_lang_String(name) {
+    SomeEnum.$clinit();
+    if ($Equality.$same(
+            SomeEnum
+                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_,
+            null)) {
+      SomeEnum
+          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
+          $Enums.createMapFromValues(SomeEnum.m_values__());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        SomeEnum
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_);
+  }
+
+  /**
+   * @return {Array<SomeEnum>}
+   * @public
+   */
+  static m_values__() {
+    SomeEnum.$clinit();
+    return /**@type {!Array<SomeEnum>} */ ($Arrays.$init(
+        [
+          SomeEnum
+              .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum,
+          SomeEnum
+              .$f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum
+        ],
+        SomeEnum));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SomeEnum;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SomeEnum);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!SomeEnum}
+   * @public
+   */
+  static get
+  f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum() {
+    return (
+        SomeEnum.$clinit(),
+        SomeEnum
+            .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!SomeEnum} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum(
+      value) {
+    (SomeEnum.$clinit(),
+     SomeEnum
+         .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+         value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!SomeEnum}
+   * @public
+   */
+  static get
+  f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum() {
+    return (
+        SomeEnum.$clinit(),
+        SomeEnum
+            .$f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!SomeEnum} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum(
+      value) {
+    (SomeEnum.$clinit(),
+     SomeEnum
+         .$f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+         value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {Object<?string, !SomeEnum>}
+   * @public
+   */
+  static get
+  f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_() {
+    return (
+        SomeEnum.$clinit(),
+        SomeEnum
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_);
+  }
+
+  /**
+   * A static field setter.
+   * @param {Object<?string, !SomeEnum>} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_(
+      value) {
+    (SomeEnum.$clinit(),
+     SomeEnum
+         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
+         value);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SomeEnum.$clinit = function() {};
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
+    $2 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$2$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Enum.$clinit();
+    SomeEnum
+        .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+        $1.$create__java_lang_String__int($Util.$makeEnumName('COMPATIBLE'), 0);
+    SomeEnum
+        .$f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+        $2.$create__java_lang_String__int(
+            $Util.$makeEnumName('INCOMPATIBLE'), 1);
+    SomeEnum
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum() {
+  }
+};
+
+$Util.$setClassMetadataForEnum(
+    SomeEnum,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum'));
+
+
+/**
+ * @private {!SomeEnum}
+ */
+SomeEnum
+    .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+    null;
+
+
+/**
+ * @private {!SomeEnum}
+ */
+SomeEnum
+    .$f_INCOMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+    null;
+
+
+/**
+ * @private {Object<?string, !SomeEnum>}
+ */
+SomeEnum
+    .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
+    null;
+
+
+
+/**
+ * Export class.
+ */
+exports = SomeEnum;
+//# sourceMappingURL=Implementor$SomeEnum.js.map
