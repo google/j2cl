@@ -45,6 +45,7 @@ public class JsProtectedNames {
             // Javascript keywords.
             "abstract",
             "arguments",
+            "await",
             "boolean",
             "break",
             "byte",
