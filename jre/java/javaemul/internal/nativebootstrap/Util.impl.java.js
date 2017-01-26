@@ -4,6 +4,7 @@
 goog.module('nativebootstrap.Util$impl');
 
 
+const Reflect = goog.require('goog.reflect');
 const jre = goog.require('jre');
 
 
@@ -74,11 +75,26 @@ class Util {
     if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[0];
     } else if (jre.classMetadata == 'STRIPPED') {
-      // TODO(goktug): use uniq ID
-      return 'Class$obf';
+      return Util.$getGeneratedClassName_(ctor);
     } else {
       throw new Error('Incorrect value: ' + jre.classMetadata);
     }
+  }
+
+  /**
+   * @param {*} ctor
+   * @return {string}
+   * @private
+   */
+  static $getGeneratedClassName_(ctor) {
+    return Reflect.cache(ctor.prototype, '$$generatedClassName', function() {
+      // valueOf hack makes JsCompiler think that this is side effect free.
+      return 'Class$obf_' + {
+        valueOf() {
+          return ++Util.$nextUniqId_;
+        }
+      };
+    });
   }
 
   /**
@@ -191,6 +207,11 @@ class Util {
  * @public {*}
  */
 Util.$q = null;
+
+/**
+ * @private {number}
+ */
+Util.$nextUniqId_ = 1000;
 
 /**
  * @type {number}
