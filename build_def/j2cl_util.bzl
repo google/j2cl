@@ -82,9 +82,10 @@ def make_output_readable(flags):
   ]
 
 load(
-    "/javascript/tools/jscompiler/builddefs/flags",
+    "//javascript/tools/jscompiler/builddefs:flags.bzl",
     "ADVANCED_OPTIMIZATIONS_FLAGS",
-    "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS"
+    "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS",
+    "JS_TEST_FLAGS",
 )
 
 J2CL_UNOPTIMIZED_DEFS = [
@@ -99,6 +100,8 @@ J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
                        USE_TYPES_FOR_OPTIMIZATIONS_FLAGS +
                        ["--extra_smart_name_removal=true"])
 
-J2CL_TEST_DEFS = make_output_readable(J2CL_OPTIMIZED_DEFS + [
-    "--export_test_functions=true",
-])
+J2CL_TEST_DEFS = JS_TEST_FLAGS + [
+    # Manage closure deps will strip our outputs in some tests
+    "--manage_closure_dependencies=false",
+    "--j2cl_pass=true",
+]

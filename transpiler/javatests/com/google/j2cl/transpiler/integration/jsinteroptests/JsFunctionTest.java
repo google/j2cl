@@ -335,7 +335,8 @@ public class JsFunctionTest extends MyTestCase {
     // "(a) =>{ return a; }"
     // We are not asserting the name of the function nor the parameter name to make sure this
     // works with optimizations
-    NativeRegExp compiledRegExp = new NativeRegExp("function .\\(.\\) {\n[ ]*return .;\n[ ]*}");
+    NativeRegExp compiledRegExp =
+        new NativeRegExp("function [\\w$_]*\\([\\w$_]+\\)" + " {\n[ ]*return [\\w$_]+;\n[ ]*}");
     NativeRegExp uncompiledRegExp = new NativeRegExp("\\(.\\) =>{\n[ ]*return .;\n[ ]*}");
 
     assertTrue(
