@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.readable.jstype;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType
@@ -24,5 +25,18 @@ public class SomeJsType<T> {
     privateMethod();
     packageMethod();
     protectedMethod();
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
+  interface Star {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface Wildcard {}
+
+  public Wildcard testStarAndWildCard(Star s, Wildcard w) {
+    Object object = new Object();
+
+    Star star = (Star) (Object) 3.0;
+    return (Wildcard) star;
   }
 }

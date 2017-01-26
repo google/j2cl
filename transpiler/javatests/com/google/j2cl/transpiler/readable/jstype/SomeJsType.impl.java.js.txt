@@ -11,6 +11,9 @@ goog.module('com.google.j2cl.transpiler.readable.jstype.SomeJsType$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Star$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star$$Overlay$impl');
+let Wildcard$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard$$Overlay$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -90,6 +93,19 @@ class SomeJsType extends java_lang_Object {
   }
 
   /**
+   * @param {*} s
+   * @param {?} w
+   * @return {?}
+   * @public
+   */
+  testStarAndWildCard(s, w) {
+    let object = java_lang_Object.$create__();
+    let star = /**@type {*} */ ($Casts.to(
+        /**@type {*} */ ($Casts.to(3.0, java_lang_Object)), Star$$Overlay));
+    return /**@type {?} */ ($Casts.to(star, Wildcard$$Overlay));
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -115,6 +131,11 @@ class SomeJsType extends java_lang_Object {
    */
   static $clinit() {
     SomeJsType.$clinit = function() {};
+    Star$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star$$Overlay$impl');
+    Wildcard$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard$$Overlay$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }

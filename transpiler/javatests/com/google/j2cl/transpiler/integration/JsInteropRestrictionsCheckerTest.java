@@ -1134,6 +1134,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "   @JsProperty(name = \"s^\") public int  m;",
         "   @JsProperty(name = \"\") public int n;",
         "   @JsProperty(namespace = JsPackage.GLOBAL, name = \"a.b.c.d\") public static int o;",
+        "}",
+        "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"*\")",
+        "class BadGlobalStar {",
+        "}",
+        "@JsType(namespace = JsPackage.GLOBAL, name = \"?\") interface BadGlobalWildcard {",
+        "}",
+        "@JsType(isNative = true, namespace = \"a.b\", name = \"*\") interface BadStar {",
         "}");
 
     assertCompileFails(
@@ -1142,7 +1149,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "'void Buggy.m()' has invalid name '34s'.",
         "'int Buggy.m' has invalid name 's^'.",
         "'int Buggy.n' cannot have an empty name.",
-        "'int Buggy.o' has invalid name 'a.b.c.d'.");
+        "'int Buggy.o' has invalid name 'a.b.c.d'.",
+        "Only native interfaces in the global namespace can be named '*'.",
+        "Only native interfaces in the global namespace can be named '?'.",
+        "Only native interfaces in the global namespace can be named '*'.");
   }
 
   public void testJsNameInvalidNamespacesFails() throws Exception {

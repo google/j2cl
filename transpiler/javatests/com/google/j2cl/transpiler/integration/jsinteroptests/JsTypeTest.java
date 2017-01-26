@@ -48,6 +48,8 @@ public class JsTypeTest extends MyTestCase {
     test.testRevealedOverrideJsType();
     test.testSingleJavaConcreteInterface();
     test.testSingleJavaConcreteJsFunction();
+    test.testStar();
+    test.testWildcard();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -649,4 +651,29 @@ public class JsTypeTest extends MyTestCase {
 
   @JsMethod
   public static native Object callBar(Object obj, Object param);
+
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
+  interface Star {}
+
+  public void testStar() {
+    Object object = new Object();
+
+    assertNotNull((Star) object);
+
+    object = Double.valueOf(3.0);
+    assertNotNull((Star) object);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface Wildcard {}
+
+  public void testWildcard() {
+    Object object = new Object();
+
+    assertNotNull((Wildcard) object);
+
+    object = Double.valueOf(3.0);
+    assertNotNull((Wildcard) object);
+  }
 }

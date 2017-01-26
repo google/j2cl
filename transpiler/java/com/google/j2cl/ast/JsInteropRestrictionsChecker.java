@@ -44,12 +44,26 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  private void checkJsNameOnType(Type type) {
+    if (!type.getSimpleJsName().equals("*") && !type.getSimpleJsName().equals("?")) {
+      checkJsName(type);
+      return;
+    }
+
+    if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
+      problems.error(
+          type.getSourcePosition(),
+          "Only native interfaces in the global namespace can be named '%s'.",
+          type.getSimpleJsName());
+    }
+  }
+
   private void checkType(Type type) {
     if (type.getDescriptor().isJsType()) {
       if (!checkJsType(type)) {
         return;
       }
-      checkJsName(type);
+      checkJsNameOnType(type);
       checkJsNamespace(type);
     }
 
