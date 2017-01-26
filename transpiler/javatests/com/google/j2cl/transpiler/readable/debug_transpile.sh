@@ -20,7 +20,7 @@
 
 java_dir="third_party/java_src/j2cl/transpiler/javatests"
 examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
-transpiler_bin="blaze-bin/third_party/java/j2cl/J2clTranspiler"
+transpiler_bin="blaze-bin/third_party/java/j2cl/internal_do_not_use/J2clTranspiler"
 jre_jar="blaze-bin/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar"
 jsinterop_jar="blaze-bin/third_party/java_src/gwt/svn/trunk/user/libgwt-jsinterop-annotations.jar"
 java_annotations_jar="/google/src/head/depot/google3/third_party/java/jsr305_annotations/v0_r47/jsr305.jar"
@@ -38,7 +38,7 @@ blaze build third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/trans
         &> /dev/null
 
 # Build the transpiler
-blaze build third_party/java/j2cl:J2clTranspiler
+blaze build third_party/java/j2cl/internal_do_not_use:J2clTranspiler
 
 
 # Figure out where the referenced example lives
