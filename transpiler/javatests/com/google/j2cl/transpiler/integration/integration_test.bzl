@@ -20,7 +20,7 @@ integration_test(
 """
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_UNOPTIMIZED_DEFS",
-     "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "make_output_readable")
+     "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
@@ -137,10 +137,11 @@ def integration_test(name,
       deps=srcs_lib_dep,
   )
   # For constructing readable optimized diffs.
+  readable_out_defs = [ "--variable_renaming=ALL" , "--property_renaming=OFF" , "--pretty_print"]
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=make_output_readable(J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs),
+      defs= J2CL_OPTIMIZED_DEFS + readable_out_defs + optimized_extra_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=srcs_lib_dep,
@@ -149,7 +150,7 @@ def integration_test(name,
   native.js_binary(
       name="readable_unoptimized_js",
       srcs=["OptHarness.js"],
-      defs=make_output_readable(J2CL_UNOPTIMIZED_DEFS + defs),
+      defs=J2CL_UNOPTIMIZED_DEFS + readable_out_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=srcs_lib_dep,

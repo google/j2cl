@@ -72,15 +72,6 @@ def generate_zip(name, srcs, pkg, testonly = None):
       testonly = testonly,
   )
 
-# Can't disable property renaming with a simple override because of
-# Blaze bug b/28770521.
-def make_output_readable(flags):
-  new_flags = [flag for flag in flags if flag != "--variable_renaming=ALL"]
-  return new_flags + [
-      "--property_renaming=OFF",
-      "--pretty_print",
-  ]
-
 load(
     "//javascript/tools/jscompiler/builddefs:flags.bzl",
     "ADVANCED_OPTIMIZATIONS_FLAGS",
