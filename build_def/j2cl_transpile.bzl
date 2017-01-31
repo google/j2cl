@@ -44,10 +44,6 @@ def _impl(ctx):
   dep_files = set()
   deps_paths = []
   java_files_paths = []
-  js_files = []
-
-  # base package for the build
-  package_name = ctx.label.package
 
   # gather transitive files and exported files in deps
   for dep in deps:
