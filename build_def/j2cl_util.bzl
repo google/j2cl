@@ -95,4 +95,5 @@ J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     # Manage closure deps will strip our outputs in some tests
     "--manage_closure_dependencies=false",
     "--j2cl_pass=true",
+    "--extra_smart_name_removal=true",
 ]
