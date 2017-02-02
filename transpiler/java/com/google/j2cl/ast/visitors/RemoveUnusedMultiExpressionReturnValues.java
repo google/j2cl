@@ -18,10 +18,10 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.CompoundOperationsUtils;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.OperatorSideEffectUtils;
 import com.google.j2cl.ast.Statement;
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
             // clinits, but multiexpressions only come about from our normalization and in those
             // transformations clinit would have been already triggered. Add a verifier pass to make
             // sure the semantics do not change.
-            if (!OperatorSideEffectUtils.canExpressionBeEvaluatedTwice(
+            if (!CompoundOperationsUtils.canExpressionBeEvaluatedTwice(
                 Iterables.getLast(expressions))) {
               return expressionStatement;
             }

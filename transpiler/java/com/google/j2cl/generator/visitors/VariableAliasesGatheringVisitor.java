@@ -33,7 +33,6 @@ import java.util.Set;
  * aliases for variables that collide with import module names or collide with JavaScript keywords.
  */
 public class VariableAliasesGatheringVisitor extends AbstractVisitor {
-  private static final String VARIABLE_PREFIX = "l_";
 
   /**
    * Returns the aliases of the variables whose names collide with import aliases or Javascript
@@ -51,43 +50,40 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
                   return anImport.getElement().getQualifiedJsName().split("\\\\.")[0];
                 })
             .collect(toImmutableSet());
-    final Multimap<Member, String> variableNamesByMember = HashMultimap.create();
+
+    final Multimap<Member, String> variableAliasesByMember = HashMultimap.create();
     final Map<Variable, String> aliasByVariable = new HashMap<>();
 
-    class VariableGatherer extends AbstractVisitor {
-      @Override
-      public void exitVariable(Variable variable) {
-        variableNamesByMember.put(getCurrentMember(), variable.getName());
-      }
-    }
-
-    class VariableRenamingVisitor extends AbstractVisitor {
-      @Override
-      public void exitVariable(Variable variable) {
-        if (aliasByVariable.containsKey(variable) || variable.isRaw()) {
-          return;
-        }
-        String variableName = variable.getName();
-        if (isNameForbidden(variableName)) {
-          // add prefix "l_" to the local variable whose name collides with an import alias
-          // or collides with a JavaScript keyword.
-          variableName = VARIABLE_PREFIX + variableName;
-          int suffix = 0;
-          while (isNameForbidden(variableName)
-              || variableNamesByMember.containsEntry(getCurrentMember(), variableName)) {
-            // add more prefix to ensure the alias does not collide with other local variables.
-            variableName = VARIABLE_PREFIX + variableName + suffix++;
+    // Create aliases for variables, making sure that variables declared in the same member do not
+    // collide with reserved words, aliases or other variables in the same member.
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitVariable(Variable variable) {
+            if (aliasByVariable.containsKey(variable) || variable.isRaw()) {
+              return;
+            }
+            String variableName = variable.getName();
+            if (isNameUnavailable(variableName)) {
+              // add suffix "$" to the local variable whose name collides with an import alias,
+              // a JavaScript keyword or another variable in the same member.
+              variableName = variableName + "$";
+              int suffix = 0;
+              while (isNameUnavailable(variableName + (++suffix) + "$")) {
+                // ensure the alias does not collide with other local variables.
+              }
+              variableName += suffix + "$";
+            }
+            aliasByVariable.put(variable, variableName);
+            variableAliasesByMember.put(getCurrentMember(), variableName);
           }
-          aliasByVariable.put(variable, variableName);
-        }
-      }
 
-      private boolean isNameForbidden(String variableName) {
-        return forbiddenNames.contains(variableName) || !JsProtectedNames.isLegalName(variableName);
-      }
-    }
-    type.accept(new VariableGatherer());
-    type.accept(new VariableRenamingVisitor());
+          private boolean isNameUnavailable(String variableName) {
+            return forbiddenNames.contains(variableName)
+                || !JsProtectedNames.isLegalName(variableName)
+                || variableAliasesByMember.containsEntry(getCurrentMember(), variableName);
+          }
+        });
     return aliasByVariable;
   }
 }

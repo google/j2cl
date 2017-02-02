@@ -551,7 +551,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO: Move this to the ast in a normalization pass.
+  // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderInitMethod() {
     if (type.isJsOverlayImplementation() || type.isInterface()) {
       return;
