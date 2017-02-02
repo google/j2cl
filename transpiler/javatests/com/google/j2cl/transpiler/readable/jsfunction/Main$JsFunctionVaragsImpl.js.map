@@ -14,10 +14,10 @@
 [for (int number : numbers) {
         sum += number;
       }] => [for (let $array = $var_args_copy, $index = 0; $index < $array.length; $index++) {
-      let l_number = $array[$index];
-      sum += l_number;
+      let number$1 = $array[$index];
+      sum += number$1;
     }]
-[UNKNOWN] => [let l_number = $array[$index];]
-[sum += number;] => [sum += l_number;]
+[UNKNOWN] => [let number$1 = $array[$index];]
+[sum += number;] => [sum += number$1;]
 [return sum;] => [return sum;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

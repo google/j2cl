@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 2 size changes.
+There are 10 size changes.
 Total size (of already existing tests) changed from
-  811263 to 811534 bytes (100%->100.03%) and from
-  294740 to 294867 bytes (100%->100.04%) gzipped.
+  1024818 to 1025085 bytes (100%->100.03%) and from
+  306106 to 306597 bytes (100%->100.16%) gzipped.
 
 
 New reports:
@@ -13,21 +13,25 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+     1194   1190 implicitparenthesis (-0.34%)
+    23754  23750 jsinteroptests (-0.02%)
 
 
 Expansion report highlights:
 **************************************
       old    new
-     1782   1835 classliteralstripped (2.97%)
-    34417  34491 box2d (0.22%)
+     3080   3358 boxingsideeffect (9.03%)
+     2338   2509 longoperationsinglesideeffect (7.31%)
+     1310   1326 foreachstatement (1.22%)
+     1669   1685 enumobfuscation (0.96%)
 
 
 All reports:
 **************************************
       old    new
       918    918 abstractinnerclass (unchanged)
-     2627   2627 alllongoperations (unchanged)
+     2627   2631 alllongoperations (0.15%)
      4699   4699 allsimplebridges (unchanged)
       953    953 anonymousclasswithcaptures (unchanged)
      2224   2224 argumentimplicitcasts (unchanged)
@@ -46,8 +50,8 @@ All reports:
       894    894 backwardbridgemethod (unchanged)
      1000   1000 binaryexpressions (unchanged)
       829    829 blockscoping (unchanged)
-    34417  34491 box2d (0.22%)
-     3080   3080 boxingsideeffect (unchanged)
+    34491  34491 box2d (unchanged)
+     3080   3358 boxingsideeffect (9.03%)
       871    871 breakstatement (unchanged)
      2499   2499 bridgejsmethod (unchanged)
      1518   1518 bridgemethodaccidentaloverride (unchanged)
@@ -73,7 +77,7 @@ All reports:
      2912   2912 classcastexception (unchanged)
      2364   2364 classliteral (unchanged)
       833    833 classliteralobfuscated (unchanged)
-     1782   1835 classliteralstripped (2.97%)
+     1835   1835 classliteralstripped (unchanged)
       868    868 compiletimeconstant (unchanged)
       911    911 complexcascadingconstructor (unchanged)
       875    875 continuestatement (unchanged)
@@ -89,7 +93,7 @@ All reports:
        62     62 emptyclasswithfields (unchanged)
        62     62 emptyclasswithparent (unchanged)
      1010   1010 enummethods (unchanged)
-     1669   1669 enumobfuscation (unchanged)
+     1669   1685 enumobfuscation (0.96%)
      1365   1365 enums (unchanged)
      1725   1725 enumspecialfunctions (unchanged)
      1093   1093 exceptionnotcaught (unchanged)
@@ -98,8 +102,8 @@ All reports:
       866    866 fieldmethodclasscollision (unchanged)
      1052   1052 fieldshadowing (unchanged)
       842    842 finallyblock (unchanged)
-     1310   1310 foreachstatement (unchanged)
-      878    878 forstatement (unchanged)
+     1310   1326 foreachstatement (1.22%)
+      878    879 forstatement (0.11%)
       925    925 genericinterfaceabstractimpl (unchanged)
      1074   1074 genericmethod (unchanged)
        62     62 genericnativetype (unchanged)
@@ -109,7 +113,7 @@ All reports:
       899    899 implementsgenericinterface (unchanged)
       730    730 implementsinterface (unchanged)
       868    868 implementsinterfacesamename (unchanged)
-     1194   1194 implicitparenthesis (unchanged)
+     1194   1190 implicitparenthesis (-0.34%)
       950    950 importglobaljstypes (unchanged)
        62     62 importinnerclass (unchanged)
        62     62 importsfullyqualified (unchanged)
@@ -142,7 +146,7 @@ All reports:
      1593   1593 jsfunctionbridge (unchanged)
      2224   2224 jsfunctiontypeannotation (unchanged)
       887    887 jsinnerclass (unchanged)
-    12515  12515 jsinteroptests (unchanged)
+    23754  23750 jsinteroptests (-0.02%)
       902    902 jsmethodoverride (unchanged)
       825    825 jsoverlay (unchanged)
       829    829 jsoverlaystaticrefs (unchanged)
@@ -157,8 +161,8 @@ All reports:
      1192   1192 localclasswithcaptures (unchanged)
       906    906 localgenericclassinitjustonce (unchanged)
      2712   2712 longimplicitcasts (unchanged)
-     2338   2338 longoperationsinglesideeffect (unchanged)
-     1473   1473 methodreferences (unchanged)
+     2338   2509 longoperationsinglesideeffect (7.31%)
+     1473   1475 methodreferences (0.14%)
      1986   1986 morebridgemethods (unchanged)
       935    935 multipleabstractparents (unchanged)
      1142   1142 multipleanonymousclass (unchanged)
@@ -227,7 +231,7 @@ All reports:
      3757   3757 trywithresource (unchanged)
       952    952 typewildcards (unchanged)
       856    856 unaryexpressions (unchanged)
-     2931   2931 underflowoverflowconversion (unchanged)
+     2931   2942 underflowoverflowconversion (0.38%)
       225    225 unusedmultiexpressionreturn (unchanged)
      1648   1648 varargs (unchanged)
       927    927 variablecollisions (unchanged)

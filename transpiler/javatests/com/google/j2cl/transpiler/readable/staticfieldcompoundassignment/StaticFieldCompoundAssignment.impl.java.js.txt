@@ -13,8 +13,8 @@ let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 class StaticFieldCompoundAssignment extends java_lang_Object {
@@ -24,6 +24,9 @@ class StaticFieldCompoundAssignment extends java_lang_Object {
    */
   constructor() {
     super();
+    /** @public {!$Long} */
+    this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+        $Long.fromBits(0, 0) /* 0 */;
   }
 
   /**
@@ -75,6 +78,34 @@ class StaticFieldCompoundAssignment extends java_lang_Object {
    * @public
    */
   static get
+  f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment() {
+    return (
+        StaticFieldCompoundAssignment.$clinit(),
+        StaticFieldCompoundAssignment
+            .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!$Long} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment(
+      value) {
+    (StaticFieldCompoundAssignment.$clinit(),
+     StaticFieldCompoundAssignment
+         .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+         value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!$Long}
+   * @public
+   */
+  static get
   f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment() {
     return (
         StaticFieldCompoundAssignment.$clinit(),
@@ -104,9 +135,26 @@ class StaticFieldCompoundAssignment extends java_lang_Object {
   static $clinit() {
     StaticFieldCompoundAssignment.$clinit = function() {};
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     java_lang_Object.$clinit();
+    StaticFieldCompoundAssignment
+        .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+        $Primitives.$widenIntToLong(1);
+    StaticFieldCompoundAssignment
+        .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+        (() => {
+          let $value =
+              StaticFieldCompoundAssignment
+                  .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment;
+          StaticFieldCompoundAssignment
+              .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+              $LongUtils.$plus(
+                  StaticFieldCompoundAssignment
+                      .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment,
+                  $Long.fromBits(1, 0) /* 1 */);
+          return $value;
+        })();
   }
 
   /**
@@ -114,7 +162,21 @@ class StaticFieldCompoundAssignment extends java_lang_Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment() {
-    ($Numbers.$v =
+    this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+        (() => {
+          let $value =
+              StaticFieldCompoundAssignment
+                  .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment;
+          StaticFieldCompoundAssignment
+              .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+              $LongUtils.$plus(
+                  StaticFieldCompoundAssignment
+                      .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment,
+                  $Long.fromBits(1, 0) /* 1 */);
+          return $value;
+        })();
+    let $value;
+    ($value =
          StaticFieldCompoundAssignment
              .$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment,
      StaticFieldCompoundAssignment
@@ -130,6 +192,14 @@ $Util.$setClassMetadata(
     StaticFieldCompoundAssignment,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment'));
+
+
+/**
+ * @private {!$Long}
+ */
+StaticFieldCompoundAssignment
+    .$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment =
+    $Long.fromBits(0, 0) /* 0 */;
 
 
 /**
