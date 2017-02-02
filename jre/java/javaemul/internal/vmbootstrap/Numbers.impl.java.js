@@ -111,6 +111,19 @@ class Numbers {
 };
 
 
+/**
+ * Used to store qualifier of a boxed object to avoid double side effects.
+ * @public {*}
+ */
+Numbers.$q = null;
+
+
+/**
+ * Used to store pre-modified value of a boxed object in a postfix expression.
+ * @public {number | Number | Character | $Long}
+ */
+Numbers.$v = null;
+
 
 /**
  * Exported class.

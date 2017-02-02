@@ -325,25 +325,26 @@ public class JsFunctionTest extends MyTestCase {
           }
         };
     assertEquals(MyJsFunctionInterface.class, optimizableInner.getClass());
+    // The toString comparison is a bit misleading, because these are native functions
+    // toString() returns the JS source code which in this case, same function, same
+    // variable names, same JS source.
 
-    // Look at the structure of the two functions to make sure they are plain functions. They should
-    // look something like
-    //
-    //     "function <fn>(<par>) { return <par>; }"
-    //
-    NativeRegExp functionRegExp =
-        new NativeRegExp("function [\\w$]*\\(([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}");
-    //
-    //  or "(<par>)=>{ return <par>;}
-    //
-    NativeRegExp arrowRegExp = new NativeRegExp("\\(([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}");
+    // Regex to see that code looks like this compiled:
+    // "function b(a) { return a; }"
+    // or uncompiled:
+    // "(a) =>{ return a; }"
+    // We are not asserting the name of the function nor the parameter name to make sure this
+    // works with optimizations
+    NativeRegExp compiledRegExp =
+        new NativeRegExp("function [\\w$_]*\\([\\w$_]+\\)" + " {\n[ ]*return [\\w$_]+;\n[ ]*}");
+    NativeRegExp uncompiledRegExp = new NativeRegExp("\\(.\\) =>{\n[ ]*return .;\n[ ]*}");
 
     assertTrue(
-        functionRegExp.exec(optimizableInner.toString()) != null
-            || arrowRegExp.exec(optimizableInner.toString()) != null);
+        compiledRegExp.exec(optimizableInner.toString()) != null
+            || uncompiledRegExp.exec(optimizableInner.toString()) != null);
     assertTrue(
-        functionRegExp.exec(lambda.toString()) != null
-            || arrowRegExp.exec(lambda.toString()) != null);
+        compiledRegExp.exec(lambda.toString()) != null
+            || uncompiledRegExp.exec(lambda.toString()) != null);
 
     // inner class optimizable to lambda
     MyJsFunctionInterface unoptimizableInner =

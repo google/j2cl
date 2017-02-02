@@ -16,9 +16,9 @@
 [for (Throwable t : new Throwable[10]) {
       t.toString();
     }] => [for (let $array = /**@type {!Array<Throwable>} */ ($Arrays.$create([10], Throwable)), $index = 0; $index < $array.length; $index++) {
-      let t$1 = $array[$index];
-      $Objects.m_toString__java_lang_Object(t$1);
+      let t = $array[$index];
+      $Objects.m_toString__java_lang_Object(t);
     }]
-[UNKNOWN] => [let t$1 = $array[$index];]
-[t.toString();] => [$Objects.m_toString__java_lang_Object(t$1);]
+[UNKNOWN] => [let t = $array[$index];]
+[t.toString();] => [$Objects.m_toString__java_lang_Object(t);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

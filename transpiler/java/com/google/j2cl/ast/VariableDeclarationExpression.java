@@ -20,8 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -77,17 +75,6 @@ public class VariableDeclarationExpression extends Expression {
 
     public Builder addVariableDeclaration(Variable variable, Expression initializer) {
       fragments.add(new VariableDeclarationFragment(variable, checkNotNull(initializer)));
-      return this;
-    }
-
-    public Builder addVariableDeclarations(Variable... variables) {
-      return addVariableDeclarations(Arrays.asList(variables));
-    }
-
-    public Builder addVariableDeclarations(Collection<Variable> variables) {
-      for (Variable variable : variables) {
-        fragments.add(new VariableDeclarationFragment(variable, null));
-      }
       return this;
     }
 

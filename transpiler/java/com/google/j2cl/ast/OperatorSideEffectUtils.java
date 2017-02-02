@@ -17,8 +17,10 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+
 /**
- * Utility functions for expanding compound, increment and decrement expressions.
+ * Utility functions for splitting operators expressions that have a side effect.
  *
  * <p>For example:
  *
@@ -32,8 +34,12 @@ import static com.google.common.base.Preconditions.checkArgument;
  * immutable emulation class or when a conversion operation (such as boxing or unboxing) needs to be
  * inserted between the numeric and assignment stages of an operation.
  */
-public class CompoundOperationsUtils {
-  public static Expression expandCompoundExpression(BinaryExpression binaryExpression) {
+public class OperatorSideEffectUtils {
+
+  public static final String NUMBERS_QUALIFIER_TEMP = "$q";
+  public static final String NUMBERS_VALUE_TEMP = "$v";
+
+  public static Expression splitBinaryExpression(BinaryExpression binaryExpression) {
     checkArgument(binaryExpression.getOperator().isCompoundAssignment());
 
     BinaryOperator operator = binaryExpression.getOperator();
@@ -44,62 +50,56 @@ public class CompoundOperationsUtils {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a += x => a = a + x
-      return assignToLeftOperand(leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
+      return expandExpressionNoQualifier(
+          leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
-    // q.a += b; => (let $qualifier = q, $qualifier.a = $qualifier.a + b)
-    FieldAccess targetFieldAccess = (FieldAccess) leftOperand;
-    Expression qualifier = targetFieldAccess.getQualifier().clone();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setIsFinal(true)
-            .setName("$qualifier")
+    // q.a += b; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + b)
+    Expression qualifier = ((FieldAccess) leftOperand).getQualifier().clone();
+    BinaryExpression assignQualifier =
+        BinaryExpression.newBuilder()
             .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
-    return MultiExpression.newBuilder()
-        .setExpressions(
-            // Declare the temporary variable and initialize to the evaluated qualifier.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .build(),
-            assignToLeftOperand(
-                FieldAccess.Builder.from(targetFieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
-                    .build(),
-                operator.getUnderlyingBinaryOperator(),
-                rightOperand))
-        .build();
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
+    BinaryExpression assignment =
+        expandExpressionWithQualifier(
+            leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
+    return MultiExpression.newBuilder().setExpressions(assignQualifier, assignment).build();
   }
 
-  public static Expression expandExpression(PostfixExpression postfixExpression) {
+  public static Expression splitPostfixExpression(PostfixExpression postfixExpression) {
     Expression operand = postfixExpression.getOperand();
     PostfixOperator operator = postfixExpression.getOperator();
-    Variable valueVariable =
-        Variable.newBuilder()
-            .setIsFinal(true)
-            .setName("$value")
-            .setTypeDescriptor(operand.getTypeDescriptor())
-            .build();
+    TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
 
     if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
-      // a++; => (let $value = a, a = a + 1, $value)
-
+      // a++; => (Numbers.$v = a, a = a + 1, Numbers.$v)
+      BinaryExpression assignVar =
+          BinaryExpression.newBuilder()
+              .setTypeDescriptor(operand.getTypeDescriptor())
+              .setLeftOperand(
+                  createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()))
+              .setOperator(BinaryOperator.ASSIGN)
+              .setRightOperand(operand)
+              .build(); //Numbers.$v = boxA
+      BinaryExpression assignment =
+          expandExpressionNoQualifier(
+              operand.clone(),
+              operator.getUnderlyingBinaryOperator(),
+              createLiteralOne(typeDescriptor));
       return MultiExpression.newBuilder()
           .setExpressions(
-              // Declare the temporary variable to hold the initial value.
-              VariableDeclarationExpression.newBuilder()
-                  .addVariableDeclaration(valueVariable, operand)
-                  .build(),
-              assignToLeftOperand(
-                  operand.clone(),
-                  operator.getUnderlyingBinaryOperator(),
-                  createLiteralOne(operand.getTypeDescriptor())),
-              valueVariable.getReference())
+              assignVar,
+              assignment,
+              createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()))
           .build();
     }
 
@@ -107,80 +107,76 @@ public class CompoundOperationsUtils {
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a++; =>
-    // (let $qualifier = q, let $value = $qualifier.a, $qualifier.a = $qualifier.a + 1, $value)
+    // (Numbers.$q = q, Numbers.$v = Numbers.$q.a, Numbers.$q.a = Numbers.$q.a + 1, Numbers.$v)
     FieldAccess fieldAccess = (FieldAccess) operand;
     Expression qualifier = fieldAccess.getQualifier().clone();
     FieldDescriptor target = fieldAccess.getTarget();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setIsFinal(true)
-            .setName("$qualifier")
-            .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
 
+    BinaryExpression assignQualifier =
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(qualifier.getTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
+    BinaryExpression assignVar =
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(target.getEnclosingClassTypeDescriptor())
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(
+                FieldAccess.Builder.from(target)
+                    .setQualifier(
+                        createNumbersFieldAccess(
+                            NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+                    .build())
+            .build(); //Numbers.$v = Numbers.$q.a
+    BinaryExpression assignment =
+        expandExpressionWithQualifier(
+            operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
     return MultiExpression.newBuilder()
         .setExpressions(
-            // Declare the temporary variables to hold the qualifier and the initial value.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .addVariableDeclaration(
-                    valueVariable,
-                    FieldAccess.newBuilder()
-                        .setQualifier(qualifierVariable.getReference())
-                        .setTargetFieldDescriptor(target)
-                        .build())
-                .build(),
-            assignToLeftOperand(
-                FieldAccess.Builder.from(fieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
-                    .build(),
-                operator.getUnderlyingBinaryOperator(),
-                createLiteralOne(operand.getTypeDescriptor())),
-            valueVariable.getReference())
+            assignQualifier,
+            assignVar,
+            assignment,
+            createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()))
         .build();
   }
 
-  public static Expression expandExpression(PrefixExpression prefixExpression) {
+  public static Expression splitPrefixExpression(PrefixExpression prefixExpression) {
     checkArgument(prefixExpression.getOperator().hasSideEffect());
 
     Expression operand = prefixExpression.getOperand();
     PrefixOperator operator = prefixExpression.getOperator();
+    TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
 
     if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // ++a => a = a + 1
-      return assignToLeftOperand(
-          operand,
-          operator.getUnderlyingBinaryOperator(),
-          createLiteralOne(operand.getTypeDescriptor()));
+      return expandExpressionNoQualifier(
+          operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
-    // ++q.a; => ($qualifier = q, $qualifier.a = $qualifier.a + 1)
-    FieldAccess fieldAccess = (FieldAccess) operand;
-    Expression qualifier = fieldAccess.getQualifier().clone();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setIsFinal(true)
-            .setName("$qualifier")
+    // ++q.a; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + 1)
+    Expression qualifier = ((FieldAccess) operand).getQualifier();
+    BinaryExpression assignQualifier =
+        BinaryExpression.newBuilder()
             .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
-    return MultiExpression.newBuilder()
-        .setExpressions(
-            // Declare the temporary variable and initialize to the evaluated qualifier.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .build(),
-            assignToLeftOperand(
-                FieldAccess.Builder.from(fieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
-                    .build(),
-                operator.getUnderlyingBinaryOperator(),
-                createLiteralOne(operand.getTypeDescriptor())))
-        .build();
+            .setLeftOperand(
+                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(qualifier)
+            .build(); // Numbers.$q = q
+    Expression assignment =
+        expandExpressionWithQualifier(
+            operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
+    return MultiExpression.newBuilder().setExpressions(assignQualifier, assignment).build();
   }
 
   /** Returns number literal with value 1. */
@@ -193,9 +189,26 @@ public class CompoundOperationsUtils {
     return new NumberLiteral(primitiveTypeDescriptor, 1);
   }
 
+  /** Returns Numbers.fieldName. */
+  private static FieldAccess createNumbersFieldAccess(
+      String fieldName, TypeDescriptor typeDescriptor) {
+    return FieldAccess.Builder.from(
+            FieldDescriptor.newBuilder()
+                .setEnclosingClassTypeDescriptor(BootstrapType.NUMBERS.getDescriptor())
+                .setName(fieldName)
+                .setTypeDescriptor(typeDescriptor)
+                .setStatic(true)
+                .setJsInfo(JsInfo.RAW_FIELD)
+                .build())
+        .build();
+  }
+
   /** Returns assignment in the form of {leftOperand = leftOperand operator rightOperand}. */
-  private static BinaryExpression assignToLeftOperand(
+  private static BinaryExpression expandExpressionNoQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
+
+    // TODO: leftOperand is not being cloned and is duplicated in the AST. This
+    // violates the invariant that the AST is a proper tree (not a DAG). Fix.
 
     return BinaryExpression.Builder.asAssignmentTo(leftOperand)
         .setRightOperand(
@@ -209,6 +222,31 @@ public class CompoundOperationsUtils {
                 .setOperator(operator)
                 .setRightOperand(rightOperand)
                 .build())
+        .build();
+  }
+
+  /**
+   * For {@code leftOperand} in the form of qualifier.a, returns Numbers.$q.a = Numbers.$q.a
+   * operator rightOperand. If a is in the form of boxA.intValue(), fix it with Numbers.$q.boxA =
+   * box(Numbers.$q.a operator rightOperand)
+   */
+  private static BinaryExpression expandExpressionWithQualifier(
+      Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
+
+    BinaryExpression binaryExpression =
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(
+                binaryOperationResultType(
+                    operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()))
+            .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
+            .setOperator(operator)
+            .setRightOperand(rightOperand)
+            .build();
+    return BinaryExpression.newBuilder()
+        .setTypeDescriptor(leftOperand.getTypeDescriptor())
+        .setLeftOperand(replaceQualifier(leftOperand)) // Numbers.$q.a
+        .setOperator(BinaryOperator.ASSIGN)
+        .setRightOperand(binaryExpression)
         .build();
   }
 
@@ -241,15 +279,31 @@ public class CompoundOperationsUtils {
     return false;
   }
 
+  /**
+   * If {@code expression} is in the form of q.boxA.intValue(), returns Numbers.$q.boxA.intValue().
+   * Else if {@code expression} is in the form of q.a, returns Numbers.$q.a. Otherwise returns
+   * {@code expression} itself.
+   */
+  private static Expression replaceQualifier(Expression expression) {
+    if (!(expression instanceof FieldAccess)) {
+      return expression;
+    }
+    FieldAccess fieldAccess = (FieldAccess) expression;
+    Expression newQualifier =
+        createNumbersFieldAccess(
+            NUMBERS_QUALIFIER_TEMP, fieldAccess.getQualifier().getTypeDescriptor());
+    return FieldAccess.Builder.from(fieldAccess).setQualifier(newQualifier).build();
+  }
+
   /** Determines the binary operation type based on the types of the operands. */
   private static TypeDescriptor binaryOperationResultType(
-      BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightOperandType) {
+      BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightRightType) {
+    TypeDescriptor unboxedLeftOperandType = unboxIfBoxedType(leftOperandType);
 
-    if (TypeDescriptors.get().isJavaLangString(leftOperandType)) {
-      return leftOperandType;
+    if (!unboxedLeftOperandType.isPrimitive()) {
+      // This is a string operation.
+      return unboxedLeftOperandType;
     }
-
-    leftOperandType = getCorrespondingPrimitiveType(leftOperandType);
 
     /**
      * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
@@ -264,9 +318,9 @@ public class CompoundOperationsUtils {
       case BIT_AND:
       case BIT_OR:
       case BIT_XOR:
-        if (TypeDescriptors.isPrimitiveBoolean(leftOperandType)) {
+        if (TypeDescriptors.isPrimitiveBoolean(unboxedLeftOperandType)) {
           // Handle logical operations (on type boolean).
-          return leftOperandType;
+          return unboxedLeftOperandType;
         }
         // fallthrough for bitwise operations on numbers.
         /*
@@ -286,8 +340,9 @@ public class CompoundOperationsUtils {
          */
         // TODO: Return primitiveInt if wider. Due to order in which promotion operations are
         // applied doing so here breaks code.
-        checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
-        return widerType(leftOperandType, getCorrespondingPrimitiveType(rightOperandType));
+        checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightRightType));
+        TypeDescriptor unboxedRightOperandType = unboxIfBoxedType(rightRightType);
+        return widerType(unboxedLeftOperandType, unboxedRightOperandType);
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
@@ -296,7 +351,7 @@ public class CompoundOperationsUtils {
          *
          * <p>Type type of the operation is the type of the promoted left hand operand.
          */
-        return leftOperandType;
+        return unboxedLeftOperandType;
       default:
         // This method only handles operations resulting from unfolding compound assignment
         // expressions.
@@ -314,14 +369,13 @@ public class CompoundOperationsUtils {
   }
 
   /**
-   * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
-   * {@code typeDescriptor} otherwise
+   * Returns the corresponding unboxed type if the {@code setTypeDescriptor} is a boxed type; {@code
+   * setTypeDescriptor} otherwise
    */
-  private static TypeDescriptor getCorrespondingPrimitiveType(TypeDescriptor typeDescriptor) {
+  private static TypeDescriptor unboxIfBoxedType(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isBoxedType(typeDescriptor)) {
       return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
     }
-    checkArgument(typeDescriptor.isPrimitive());
     return typeDescriptor;
   }
 }

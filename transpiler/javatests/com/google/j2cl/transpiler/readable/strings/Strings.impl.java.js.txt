@@ -14,6 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let StringHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 
 class Strings extends java_lang_Object {
@@ -61,7 +62,6 @@ class Strings extends java_lang_Object {
    * @public
    */
   m_test__() {
-    let $qualifier, $qualifier$1;
     let s1 = null;
     let s2 = null;
     let s3 = '' + s1 + s2;
@@ -79,18 +79,18 @@ class Strings extends java_lang_Object {
         java_lang_String.m_valueOf__java_lang_Object(
             Character.m_valueOf__char(c2)) +
         'o';
-    ($qualifier = (StringHolder.$create__()),
-     $qualifier
+    ($Numbers.$q = (StringHolder.$create__()),
+     $Numbers.$q
          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
          '' +
-         $qualifier
+         $Numbers.$q
              .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +
          s4);
-    ($qualifier$1 = (StringHolder.$create__()),
-     $qualifier$1
+    ($Numbers.$q = (StringHolder.$create__()),
+     $Numbers.$q
          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
          '' +
-         $qualifier$1
+         $Numbers.$q
              .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +
          java_lang_String.m_valueOf__java_lang_Object(
              Character.m_valueOf__char(c1)));
@@ -129,6 +129,7 @@ class Strings extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
     Character = goog.module.get('java.lang.Character$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     java_lang_Object.$clinit();
   }
 

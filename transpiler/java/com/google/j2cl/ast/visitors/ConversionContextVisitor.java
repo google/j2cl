@@ -24,7 +24,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompoundOperationsUtils;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -33,6 +32,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.OperatorSideEffectUtils;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.ReturnStatement;
@@ -149,7 +149,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
     if (splitEnablesMoreConversions(binaryExpression)) {
-      return CompoundOperationsUtils.expandCompoundExpression(binaryExpression).accept(this);
+      return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression).accept(this);
     }
 
     return rewriteRegularBinaryExpression(binaryExpression);
@@ -224,7 +224,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
     if (splitEnablesMoreConversions(postfixExpression)) {
-      return CompoundOperationsUtils.expandExpression(postfixExpression).accept(this);
+      return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression).accept(this);
     }
 
     // unary numeric promotion context
@@ -242,7 +242,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
     if (splitEnablesMoreConversions(prefixExpression)) {
-      return CompoundOperationsUtils.expandExpression(prefixExpression).accept(this);
+      return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression).accept(this);
     }
 
     // unary numeric promotion context
@@ -386,7 +386,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
             .setTypeDescriptor(unaryExpression.getTypeDescriptor())
             .setLeftOperand(operand)
             .setOperator(unaryExpression.getOperator().getUnderlyingBinaryOperator())
-            .setRightOperand(CompoundOperationsUtils.createLiteralOne(operand.getTypeDescriptor()))
+            .setRightOperand(OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()))
             .build();
     // The assignment operation retains the type of the original compound operation, which
     // in turn must be equal to the type of the lvalue.

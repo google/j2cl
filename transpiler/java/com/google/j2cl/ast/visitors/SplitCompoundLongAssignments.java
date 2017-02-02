@@ -19,8 +19,8 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.CompoundOperationsUtils;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.OperatorSideEffectUtils;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -43,7 +43,7 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
                 && TypeDescriptors.isPrimitiveLong(
                     binaryExpression.getLeftOperand().getTypeDescriptor())
                 && !(binaryExpression.getLeftOperand() instanceof ArrayAccess)) {
-              return CompoundOperationsUtils.expandCompoundExpression(binaryExpression);
+              return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
             }
             return binaryExpression;
           }
@@ -54,7 +54,7 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
                 && TypeDescriptors.isPrimitiveLong(
                     prefixExpression.getOperand().getTypeDescriptor())
                 && !(prefixExpression.getOperand() instanceof ArrayAccess)) {
-              return CompoundOperationsUtils.expandExpression(prefixExpression);
+              return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
             }
             return prefixExpression;
           }
@@ -63,7 +63,7 @@ public class SplitCompoundLongAssignments extends NormalizationPass {
           public Expression rewritePostfixExpression(PostfixExpression postfixExpression) {
             if (TypeDescriptors.isPrimitiveLong(postfixExpression.getOperand().getTypeDescriptor())
                 && !(postfixExpression.getOperand() instanceof ArrayAccess)) {
-              return CompoundOperationsUtils.expandExpression(postfixExpression);
+              return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
             }
             return postfixExpression;
           }

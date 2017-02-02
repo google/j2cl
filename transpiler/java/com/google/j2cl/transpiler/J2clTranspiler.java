@@ -40,7 +40,6 @@ import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
-import com.google.j2cl.ast.visitors.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.ast.visitors.NormalizationPass;
 import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
@@ -246,8 +245,7 @@ public class J2clTranspiler {
             // TODO: remove the temporary fix once we switch to JSCompiler's new type checker.
             new FixTypeVariablesInMethods(),
             new RemoveUnusedMultiExpressionReturnValues(),
-            new InsertStaticClassInitializerMethods(),
-            new MoveVariableDeclarationsToEnclosingBlock());
+            new InsertStaticClassInitializerMethods());
 
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);

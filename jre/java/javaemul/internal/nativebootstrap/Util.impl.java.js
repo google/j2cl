@@ -203,6 +203,12 @@ class Util {
 
 
 /**
+ * Used to store qualifier that is potentially side effecting.
+ * @public {*}
+ */
+Util.$q = null;
+
+/**
  * @private {number}
  */
 Util.$nextUniqId_ = 1000;
@@ -226,7 +232,6 @@ Util.TYPE_ENUM = 2;
  * @type {number}
  */
 Util.TYPE_PRIMITIVE = 3;
-
 
 
 /**
