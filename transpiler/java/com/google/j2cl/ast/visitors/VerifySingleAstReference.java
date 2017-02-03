@@ -27,6 +27,7 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayDeque;
@@ -107,6 +108,12 @@ public class VerifySingleAstReference {
           // BooleanLiterals true and false are singleton and does not need to be unique in the ast.
           @Override
           public boolean enterBooleanLiteral(BooleanLiteral booleanLiteral) {
+            return false;
+          }
+
+          // TypeDeclarations are references and can appear multiple times in the ast.
+          @Override
+          public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
             return false;
           }
 

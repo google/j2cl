@@ -28,6 +28,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -55,7 +56,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
     super(problems, declareLegacyNamespace, type);
     this.className = environment.aliasForType(type.getDescriptor());
-    this.mangledTypeName = ManglingNameUtils.getMangledName(type.getDescriptor());
+    this.mangledTypeName =
+        ManglingNameUtils.getMangledName(type.getDescriptor().getUnsafeTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
@@ -113,10 +115,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderImports() {
-    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
+    TypeDeclaration selfTypeDeclaration = type.getDescriptor();
 
     // goog.module(...) declaration.
-    sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getImplModuleName() + "');");
+    sourceBuilder.appendln("goog.module('" + selfTypeDeclaration.getImplModuleName() + "');");
     if (declareLegacyNamespace && type.getDescriptor().isJsType() && !(type.isAnonymous())) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
@@ -164,8 +166,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else if (type.isInterface()) {
       sourceBuilder.appendLines("/**", " * @interface");
       sourceBuilder.newLine();
-      if (type.getDescriptor().isParameterizedType()) {
-        String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
+      if (type.getDescriptor().hasTypeParameters()) {
+        String templates = getJsDocNames(type.getDescriptor().getTypeParameterDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
@@ -177,12 +179,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       if (type.isAbstract()) {
         buffer.appendln(" * @abstract");
       }
-      if (type.getDescriptor().isParameterizedType()) {
-        String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
+      if (type.getDescriptor().hasTypeParameters()) {
+        String templates = getJsDocNames(type.getDescriptor().getTypeParameterDescriptors());
         buffer.appendln(" * @template " + templates);
       }
       if (type.getSuperTypeDescriptor() != null
-          && type.getSuperTypeDescriptor().isParameterizedType()) {
+          && type.getSuperTypeDescriptor().hasTypeArguments()) {
         String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
         buffer.appendln(" * @extends {" + supertype + "}");
       }
@@ -204,7 +206,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append("class " + className + " " + extendsClause);
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    environment.setEnclosingTypeDescriptor(type.getDescriptor());
+    environment.setEnclosingTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor());
     renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
@@ -268,7 +270,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && method.getDescriptor().isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
         && !method.getDescriptor().getName().startsWith("$ctor")) {
-      sourceBuilder.appendln(" * @this {" + getJsDocName(type.getDescriptor()) + "}");
+      sourceBuilder.appendln(
+          " * @this {" + getJsDocName(type.getDescriptor().getUnsafeTypeDescriptor()) + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
       sourceBuilder.appendln(
@@ -345,7 +348,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           environment.aliasForType(
               type.isJsOverlayImplementation()
                   ? type.getNativeTypeDescriptor().getRawTypeDescriptor()
-                  : type.getDescriptor());
+                  : type.getDescriptor().getUnsafeTypeDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
     }
     sourceBuilder.closeBrace();
@@ -540,8 +543,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
-        sourceBuilder.newLine();
-        sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
+      sourceBuilder.newLine();
+      sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
     }
 
     // Static field and static initializer blocks.

@@ -48,7 +48,8 @@ public class CreateDefaultConstructors extends NormalizationPass {
             Visibility visibility =
                 type.isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility();
             MethodDescriptor methodDescriptor =
-                AstUtils.createDefaultConstructorDescriptor(type.getDescriptor(), visibility);
+                AstUtils.createDefaultConstructorDescriptor(
+                    type.getDescriptor().getUnsafeTypeDescriptor(), visibility);
             type.addMethod(
                 0,
                 Method.newBuilder()

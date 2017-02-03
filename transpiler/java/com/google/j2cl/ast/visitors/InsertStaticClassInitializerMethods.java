@@ -62,7 +62,8 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
             if (needsClinitCall(type.getSuperTypeDescriptor())) {
               superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
             }
-            addRequiredSuperInterfacesClinitCalls(type.getDescriptor(), superClinitCallStatements);
+            addRequiredSuperInterfacesClinitCalls(
+                type.getDescriptor().getUnsafeTypeDescriptor(), superClinitCallStatements);
 
             if (!superClinitCallStatements.isEmpty()) {
               type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));
@@ -89,7 +90,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
         continue;
       }
 
-      if (interfaceTypeDescriptor.declaresDefaultMethods()) {
+      if (interfaceTypeDescriptor.getTypeDeclaration().declaresDefaultMethods()) {
         // The interface declares a default method; invoke its clinit which will initialize
         // the interface and all it superinterfaces that declare default methods.
         superClinitCallStatements.add(newClinitCallStatement(interfaceTypeDescriptor));

@@ -65,7 +65,11 @@ public abstract class JavaScriptGenerator {
   abstract String getSuffix();
 
   void renderFileOverview(String... suppressions) {
-    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getQualifiedBinaryName();
+    String transpiledFrom =
+        type.getDescriptor()
+            .getUnsafeTypeDescriptor()
+            .getRawTypeDescriptor()
+            .getQualifiedBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview transpiled from " + transpiledFrom + ".",

@@ -47,7 +47,8 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
                   && !methodDescriptor.isStatic()) {
                 MethodDescriptor stubMethodDescriptor =
                     MethodDescriptor.Builder.from(methodDescriptor)
-                        .setEnclosingClassTypeDescriptor(type.getDescriptor())
+                        .setEnclosingClassTypeDescriptor(
+                            type.getDescriptor().getUnsafeTypeDescriptor())
                         .build();
                 type.addMethod(
                     Method.newBuilder()

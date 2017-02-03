@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
@@ -35,18 +36,6 @@ import java.util.function.Function;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
-  public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$$Overlay";
-  public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
-  public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
-  public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
-      FieldDescriptor.newBuilder()
-          .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-          .setName("length")
-          .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-          .setStatic(false)
-          .setJsInfo(JsInfo.RAW_FIELD)
-          .build();
-
   private static final String CAPTURES_PREFIX = "$c_";
   private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
 
@@ -1030,38 +1019,51 @@ public class AstUtils {
     }
   }
 
-  /** Returns all type variables that appear in the subtree. */
+  /**
+   * Returns all type variables that appear in the subtree, e.g. the parameters of a
+   * TypeDeclaration, the arguments of a TypeDescriptor, etc.
+   */
   public static Set<TypeDescriptor> getAllTypeVariables(Node node) {
-    final Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
+    final Set<TypeDescriptor> typeArguments = new LinkedHashSet<>();
     node.accept(
         new AbstractVisitor() {
           @Override
+          public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
+            typeArguments.addAll(typeDeclaration.getUnsafeTypeDescriptor().getAllTypeVariables());
+            return false;
+          }
+
+          @Override
           public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-            lambdaTypeParameterTypeDescriptors.addAll(typeDescriptor.getAllTypeVariables());
+            typeArguments.addAll(typeDescriptor.getAllTypeVariables());
             return false;
           }
 
           @Override
           public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
-            lambdaTypeParameterTypeDescriptors.addAll(
-                fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
+            typeArguments.addAll(fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
             return false;
           }
 
           @Override
           public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
-
-            lambdaTypeParameterTypeDescriptors.addAll(
-                methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
+            typeArguments.addAll(methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
             for (TypeDescriptor parameterTypeDescriptor :
                 methodDescriptor.getParameterTypeDescriptors()) {
-              lambdaTypeParameterTypeDescriptors.addAll(
-                  parameterTypeDescriptor.getAllTypeVariables());
+              typeArguments.addAll(parameterTypeDescriptor.getAllTypeVariables());
             }
             return false;
           }
         });
-    return lambdaTypeParameterTypeDescriptors;
+    return typeArguments;
+  }
+
+  public static String getSimpleSourceName(List<String> classComponents) {
+    String simpleName = Iterables.getLast(classComponents);
+    // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
+    // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
+    // JSCompiler happy.
+    return startsWithNumber(simpleName) ? "$" + simpleName : simpleName;
   }
 
   @SuppressWarnings("unchecked")
@@ -1192,4 +1194,22 @@ public class AstUtils {
             .build();
   }
 
+  public static void updateMethodsBySignature(
+      Map<String, MethodDescriptor> methodsBySignature,
+      Iterable<MethodDescriptor> methodDescriptors) {
+    for (MethodDescriptor declaredMethod : methodDescriptors) {
+      MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
+      // TODO(rluble) implement correct default replacement when existing method != null.
+      // Only replace the method if we found a default definition that implements the method at
+      // that type; be sure to have all relevant examples, the semantics are quite particular.
+      if (existingMethod == null) {
+        methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
+      }
+    }
+  }
+
+  public static boolean startsWithNumber(String string) {
+    char firstChar = string.charAt(0);
+    return firstChar >= '0' && firstChar <= '9';
+  }
 }

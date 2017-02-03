@@ -79,14 +79,12 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     compilationUnit.accept(new AddFieldInitializers());
   }
 
-  /**
-   * Adds parameters to constructors so they can receive captured values.
-   */
+  /** Adds parameters to constructors so they can receive captured values. */
   private static class AddConstructorParameters extends AbstractRewriter {
 
     @Override
     public boolean shouldProcessType(Type type) {
-      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
+      return !type.isStatic() && type.getEnclosingTypeDeclaration() != null;
     }
 
     @Override
@@ -123,14 +121,12 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     }
   }
 
-  /**
-   * Adds capturing field initialization statements in constructors.
-   */
+  /** Adds capturing field initialization statements in constructors. */
   private static class AddFieldInitializers extends AbstractRewriter {
 
     @Override
     public boolean shouldProcessType(Type type) {
-      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
+      return !type.isStatic() && type.getEnclosingTypeDeclaration() != null;
     }
 
     @Override
@@ -141,7 +137,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // Maybe add capturing field initialization statements if the current constructor method does
       // not delegate to any other constructor method in the current class.
       if (!AstUtils.isDelegatedConstructorCall(
-          AstUtils.getConstructorInvocation(method), getCurrentType().getDescriptor())) {
+          AstUtils.getConstructorInvocation(method),
+          getCurrentType().getDescriptor().getUnsafeTypeDescriptor())) {
         Method.Builder methodBuilder = Method.Builder.from(method);
         int i = 0;
         for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
@@ -169,13 +166,11 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
   /**
    * Fixes field accesses to capturing fields in a constructor.
    *
-   * <p>
-   * All field accesses to capturing fields in a constructor are replaced with references to the
+   * <p>All field accesses to capturing fields in a constructor are replaced with references to the
    * corresponding parameters. Otherwise, the arguments to cascaded constructor call are evaluated
    * before the capturing fields are initialized, which may lead to wrong result.
    *
-   * <p>For example,
-   * <code>
+   * <p>For example, <code>
    * class A {
    *   class B{
    *     final int a = 10;
@@ -190,7 +185,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
     @Override
     public boolean shouldProcessType(Type type) {
-      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
+      return !type.isStatic() && type.getEnclosingTypeDeclaration() != null;
     }
 
     @Override
@@ -208,9 +203,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     }
   }
 
-  /**
-   * Adds outer class parameter to NewInstance and ctor invocations.
-   */
+  /** Adds outer class parameter to NewInstance and ctor invocations. */
   public static class RewriteNestedClassInvocations extends AbstractRewriter {
     Multimap<String, Variable> capturedVariablesByCapturingTypeName = LinkedHashMultimap.create();
 
@@ -249,7 +242,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       }
 
       MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
-      if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getDescriptor())) {
+      if (AstUtils.isDelegatedConstructorCall(
+          methodCall, getCurrentType().getDescriptor().getUnsafeTypeDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
 
@@ -303,7 +297,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           // If the capturedVariable is also a captured variable in current type,
           // pass the corresponding field in current type as an argument.
           Builder.from(capturingField.getDescriptor())
-              .setQualifier(new ThisReference(type.getDescriptor()))
+              .setQualifier(new ThisReference(type.getDescriptor().getUnsafeTypeDescriptor()))
               .build()
           // otherwise, the captured variable is in the scope of the current type,
           // so pass the variable directly as an argument.

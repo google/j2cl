@@ -34,7 +34,8 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
           @Override
           public boolean shouldProcessType(Type type) {
             // Creates devirtualized static methods for the boxed types (Boolean, Double, String).
-            return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor())
+            return TypeDescriptors.isBoxedTypeAsJsPrimitives(
+                    type.getDescriptor().getUnsafeTypeDescriptor())
                 || type.getDescriptor().isJsFunctionImplementation();
           }
 

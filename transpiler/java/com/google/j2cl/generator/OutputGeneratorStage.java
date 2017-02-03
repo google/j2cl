@@ -18,7 +18,7 @@ package com.google.j2cl.generator;
 import com.google.common.base.Joiner;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.generator.visitors.Import;
@@ -208,9 +208,9 @@ public class OutputGeneratorStage {
     }
 
     // Gather exports.
-    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    exportModulePaths.add(selfTypeDescriptor.getModuleName());
-    exportModulePaths.add(selfTypeDescriptor.getImplModuleName());
+    TypeDeclaration selfTypeDeclaration = type.getDescriptor();
+    exportModulePaths.add(selfTypeDeclaration.getModuleName());
+    exportModulePaths.add(selfTypeDeclaration.getImplModuleName());
   }
 
   private void writeDepinfo(

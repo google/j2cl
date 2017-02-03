@@ -20,9 +20,11 @@ import com.google.j2cl.ast.TypeDescriptor;
 /**
  * A Node class that represents the goog.require statement:
  *
- * <pre>{@code
- * var ClassNameAlias = goog.require('gen.class.File.Name').
- * }</pre>
+ * <pre>
+ * {
+ *   var ClassNameAlias = goog.require('gen.class.File.Name').
+ * }
+ * </pre>
  */
 public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
 
@@ -62,9 +64,7 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
     return typeDescriptor;
   }
 
-  /**
-   * Imported items should be sorted by module name first, and then class name.
-   */
+  /** Imported items should be sorted by module name first, and then class name. */
   @Override
   public int compareTo(Import that) {
     return this.getImplModulePath().compareTo(that.getImplModulePath());

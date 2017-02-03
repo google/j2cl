@@ -24,6 +24,7 @@ import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,7 +59,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private static List<Method> createBridgeMethods(
-      TypeDescriptor typeDescriptor, Iterable<Method> existingMethods) {
+      TypeDeclaration typeDeclaration, Iterable<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
@@ -66,8 +67,10 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
             .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
             .collect(toImmutableSet());
     for (Entry<MethodDescriptor, MethodDescriptor> entry :
-        delegatedMethodDescriptorsByBridgeMethodDescriptor(typeDescriptor).entrySet()) {
-      Method bridgeMethod = createBridgeMethod(typeDescriptor, entry.getKey(), entry.getValue());
+        delegatedMethodDescriptorsByBridgeMethodDescriptor(typeDeclaration).entrySet()) {
+      Method bridgeMethod =
+          createBridgeMethod(
+              typeDeclaration.getUnsafeTypeDescriptor(), entry.getKey(), entry.getValue());
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
       if (generatedBridgeMethodMangledNames.contains(manglingName)
           || existingMethodMangledNames.contains(manglingName)) {
@@ -83,12 +86,12 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
 
   /** Returns the mapping from the bridge method to the delegating method. */
   private static Map<MethodDescriptor, MethodDescriptor>
-      delegatedMethodDescriptorsByBridgeMethodDescriptor(TypeDescriptor typeDescriptor) {
+      delegatedMethodDescriptorsByBridgeMethodDescriptor(TypeDeclaration typeDeclaration) {
     Map<MethodDescriptor, MethodDescriptor> delegateMethodDescriptorsByBridgeMethodDescriptor =
         new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
-    for (MethodDescriptor declaredMethod : typeDescriptor.getDeclaredMethodDescriptors()) {
+    for (MethodDescriptor declaredMethod : typeDeclaration.getDeclaredMethodDescriptors()) {
       MethodDescriptor exposedNonJsMember = getExposedNonJsMember(declaredMethod);
       if (exposedNonJsMember != null) {
         delegateMethodDescriptorsByBridgeMethodDescriptor.put(exposedNonJsMember, declaredMethod);
@@ -97,9 +100,9 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
 
     // case 2. accidental overridden methods.
     for (MethodDescriptor accidentalOverriddenMethod :
-        typeDescriptor.getAccidentallyOverriddenMethodDescriptors()) {
+        typeDeclaration.getAccidentallyOverriddenMethodDescriptors()) {
       MethodDescriptor overridingMethod =
-          typeDescriptor.getOverridingMethodDescriptorInSuperclasses(accidentalOverriddenMethod);
+          typeDeclaration.getOverridingMethodDescriptorInSuperclasses(accidentalOverriddenMethod);
       if (overridingMethod == null) {
         continue;
       }

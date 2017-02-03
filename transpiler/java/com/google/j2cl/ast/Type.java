@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
@@ -39,22 +38,22 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private Visibility visibility;
   private boolean isStatic;
   private boolean isAnonymous;
-  @Visitable TypeDescriptor typeDescriptor;
+  @Visitable TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
   private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
 
-  public Type(Visibility visibility, TypeDescriptor typeDescriptor) {
+  public Type(Visibility visibility, TypeDeclaration typeDeclaration) {
     checkArgument(
-        typeDescriptor.isInterface() || typeDescriptor.isClass() || typeDescriptor.isEnum());
+        typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
     this.visibility = visibility;
-    this.typeDescriptor = typeDescriptor;
+    this.typeDeclaration = typeDeclaration;
   }
 
   public Kind getKind() {
-    return typeDescriptor.getKind();
+    return typeDeclaration.getKind();
   }
 
   public boolean isStatic() {
@@ -84,7 +83,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isAbstract() {
-    return typeDescriptor.isAbstract();
+    return typeDeclaration.isAbstract();
   }
 
   public void setAnonymous(boolean isAnonymous) {
@@ -96,7 +95,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isEnum() {
-    return typeDescriptor.isEnum();
+    return typeDeclaration.isEnum();
   }
 
   public boolean isEnumOrSubclass() {
@@ -104,11 +103,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isInterface() {
-    return typeDescriptor.isInterface();
+    return typeDeclaration.isInterface();
   }
 
   public boolean isClass() {
-    return typeDescriptor.isClass();
+    return typeDeclaration.isClass();
   }
 
   public TypeDescriptor getNativeTypeDescriptor() {
@@ -155,7 +154,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * distinguish enum fields from static fields created in the enum body.
    */
   public ImmutableList<Field> getEnumFields() {
-    checkArgument(typeDescriptor.isEnum());
+    checkArgument(typeDeclaration.isEnum());
     return getFields().stream().filter(Field::isEnumField).collect(ImmutableList.toImmutableList());
 
   }
@@ -229,20 +228,20 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .build());
   }
 
-  public TypeDescriptor getEnclosingTypeDescriptor() {
-    return typeDescriptor.getEnclosingTypeDescriptor();
+  public TypeDeclaration getEnclosingTypeDeclaration() {
+    return typeDeclaration.getEnclosingTypeDeclaration();
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
-    return typeDescriptor.getSuperTypeDescriptor();
+    return typeDeclaration.getSuperTypeDescriptor();
   }
 
   public List<TypeDescriptor> getSuperInterfaceTypeDescriptors() {
-    return typeDescriptor.getInterfaceTypeDescriptors();
+    return typeDeclaration.getInterfaceTypeDescriptors();
   }
 
-  public TypeDescriptor getDescriptor() {
-    return typeDescriptor;
+  public TypeDeclaration getDescriptor() {
+    return typeDeclaration;
   }
 
   public ImmutableList<Field> getInstanceFields() {
@@ -284,17 +283,17 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   @Override
   public String getSimpleJsName() {
-    return typeDescriptor.getSimpleJsName();
+    return typeDeclaration.getSimpleJsName();
   }
 
   @Override
   public String getJsNamespace() {
-    return typeDescriptor.getJsNamespace();
+    return typeDeclaration.getJsNamespace();
   }
 
   @Override
   public boolean isNative() {
-    return typeDescriptor.isNative();
+    return typeDeclaration.isNative();
   }
 
   @Override

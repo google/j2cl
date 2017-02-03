@@ -119,7 +119,8 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // the removed jsfunction class and need to point to the proper enclosing class.
               return FieldAccess.Builder.from(
                       FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                          .setEnclosingClassTypeDescriptor(getCurrentType().getDescriptor())
+                          .setEnclosingClassTypeDescriptor(
+                              getCurrentType().getDescriptor().getUnsafeTypeDescriptor())
                           .build())
                   .setQualifier(fieldAccess.getQualifier())
                   .build();
@@ -134,7 +135,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Due to the cascading construction for captures in inner class construction,
               // at the end some this references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
-              return new ThisReference(getCurrentType().getDescriptor());
+              return new ThisReference(getCurrentType().getDescriptor().getUnsafeTypeDescriptor());
             }
             return thisReference;
           }
@@ -168,7 +169,8 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               if (capturedVariable != null && !enclosingCaptures.contains(capturedVariable)) {
                 return capturedVariable.getReference();
               } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
-                return new ThisReference(type.getEnclosingTypeDescriptor());
+                return new ThisReference(
+                    type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor());
               }
             }
             return fieldAccess;
@@ -182,7 +184,8 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
     for (Type type : compilationUnit.getTypes()) {
       if (canBeOptimized(type)) {
-        optimizableJsFunctionsByTypeDescriptor.put(type.getDescriptor(), type);
+        optimizableJsFunctionsByTypeDescriptor.put(
+            type.getDescriptor().getUnsafeTypeDescriptor(), type);
       }
     }
     return optimizableJsFunctionsByTypeDescriptor;
@@ -238,7 +241,9 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
             new AbstractVisitor() {
               @Override
               public boolean enterFieldAccess(FieldAccess fieldAccess) {
-                if (fieldAccess.getTarget().isMemberOf(type.getDescriptor())
+                if (fieldAccess
+                        .getTarget()
+                        .isMemberOf(type.getDescriptor().getUnsafeTypeDescriptor())
                     && fieldAccess.getQualifier() instanceof ThisReference) {
                   // Skip "this" references when accessing captures.
                   return false;

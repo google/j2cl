@@ -532,6 +532,12 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
+        print(typeDeclaration.getQualifiedSourceName());
+        return false;
+      }
+
+      @Override
       public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
         print(typeDescriptor.getQualifiedSourceName());
         return false;

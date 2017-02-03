@@ -190,7 +190,7 @@ public class JsDocNameUtils {
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
-    if (typeDescriptor.isParameterizedType()) {
+    if (typeDescriptor.hasTypeArguments()) {
       TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       List<TypeDescriptor> typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
       String typeParametersJsDoc = getJsDocNames(typeArgumentDescriptors, environment);

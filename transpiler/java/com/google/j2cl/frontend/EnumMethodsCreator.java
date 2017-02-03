@@ -70,11 +70,12 @@ public class EnumMethodsCreator {
 
   private EnumMethodsCreator(Type enumType) {
     boolean jsType = enumType.getDescriptor().isJsType();
+    TypeDescriptor enumTypeDescriptor = enumType.getDescriptor().getUnsafeTypeDescriptor();
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
             .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
                 TypeDescriptors.createNative(
@@ -85,25 +86,25 @@ public class EnumMethodsCreator {
                     // Type parameters.
                     Lists.newArrayList(
                         TypeDescriptors.get().javaLangString,
-                        TypeDescriptors.toNonNullable(enumType.getDescriptor()))))
+                        TypeDescriptors.toNonNullable(enumTypeDescriptor))))
             .setStatic(true)
             .setVisibility(Visibility.PRIVATE)
             .build();
     this.valuesMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
             .setName(VALUES_METHOD_NAME)
-            .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
+            .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumTypeDescriptor, 1))
             .setParameterTypeDescriptors()
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
     this.valueOfMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
             .setName(VALUE_OF_METHOD_NAME)
-            .setReturnTypeDescriptor(enumType.getDescriptor())
+            .setReturnTypeDescriptor(enumTypeDescriptor)
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
@@ -123,9 +124,7 @@ public class EnumMethodsCreator {
   }
 
   /**
-   * Creates the ast needed for valueOf(String name) which is of the form:
-   *
-   * <code>
+   * Creates the ast needed for valueOf(String name) which is of the form: <code>
    * private Object namesToValuesMap = null;
    * public static EnumType valueOf(String name) {
    *   if(namesToValuesMap == null){
@@ -150,7 +149,7 @@ public class EnumMethodsCreator {
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
-            .setParameterTypeDescriptors(enumType.getDescriptor())
+            .setParameterTypeDescriptors(enumType.getDescriptor().getUnsafeTypeDescriptor())
             .build();
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -158,7 +157,7 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(GET_VALUE_METHOD_NAME)
-            .setReturnTypeDescriptor(enumType.getDescriptor())
+            .setReturnTypeDescriptor(enumType.getDescriptor().getUnsafeTypeDescriptor())
             .setParameterTypeDescriptors(
                 nameParameter.getTypeDescriptor(),
                 namesToValuesMapFieldDescriptor.getTypeDescriptor())
@@ -196,7 +195,8 @@ public class EnumMethodsCreator {
     Statement returnStatement =
         ReturnStatement.newBuilder()
             .setExpression(getMethodCall)
-            .setTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
+            .setTypeDescriptor(
+                TypeDescriptors.getForArray(enumType.getDescriptor().getUnsafeTypeDescriptor(), 1))
             .build();
 
     return Method.newBuilder()
@@ -207,9 +207,7 @@ public class EnumMethodsCreator {
   }
 
   /**
-   * Creates the ast needed for values() which is of the form:
-   *
-   * <code>
+   * Creates the ast needed for values() which is of the form: <code>
    * static EnumType[] values() {
    *   return [
    *     EnumType.VALUE1,
@@ -227,7 +225,8 @@ public class EnumMethodsCreator {
             .map(enumField -> Builder.from(enumField.getDescriptor()).build())
             .collect(Collectors.toList());
 
-    TypeDescriptor arrayTypeDescriptor = TypeDescriptors.getForArray(enumType.getDescriptor(), 1);
+    TypeDescriptor arrayTypeDescriptor =
+        TypeDescriptors.getForArray(enumType.getDescriptor().getUnsafeTypeDescriptor(), 1);
 
     return Method.newBuilder()
         .setMethodDescriptor(valuesMethodDescriptor)

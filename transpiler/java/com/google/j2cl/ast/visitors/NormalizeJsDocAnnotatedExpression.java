@@ -38,7 +38,7 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
           public Expression rewriteJsDocAnnotatedExpression(
               JsDocAnnotatedExpression jsDocAnnotatedExpression) {
             if (jsDocAnnotatedExpression.isDeclaration()
-                || !jsDocAnnotatedExpression.getTypeDescriptor().isParameterizedType()) {
+                || !jsDocAnnotatedExpression.getTypeDescriptor().hasTypeArguments()) {
               return jsDocAnnotatedExpression;
             }
 

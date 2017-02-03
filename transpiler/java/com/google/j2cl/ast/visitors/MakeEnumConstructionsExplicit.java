@@ -131,7 +131,8 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                 || !((Field) getCurrentMember())
                     .getDescriptor()
                     .getTypeDescriptor()
-                    .hasSameRawType(getCurrentType().getDescriptor())) {
+                    .getTypeDeclaration()
+                    .equals(getCurrentType().getDescriptor())) {
 
               // Enum constants creations are exactly those that are field initializers for fields
               // whose class is then enum class.

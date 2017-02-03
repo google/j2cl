@@ -29,7 +29,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
-import com.google.j2cl.ast.TypeDescriptor.Kind;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
 import java.util.List;
@@ -255,8 +254,6 @@ public class TypeDescriptors {
   public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
       TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
-    checkArgument(!typeDescriptor.isArray());
-    checkArgument(!typeDescriptor.isUnion());
 
     TypeDescriptor superTypeDescriptor =
         typeDescriptor.getSuperTypeDescriptor() == null
@@ -269,7 +266,7 @@ public class TypeDescriptors {
     List<String> classComponents =
         AstUtils.synthesizeClassComponents(
             typeDescriptor,
-            simpleName -> simpleName + AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
+            simpleName -> simpleName + AstUtilConstants.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
 
     return createExactly(
         superTypeDescriptor,
@@ -380,14 +377,13 @@ public class TypeDescriptors {
             .stream()
             .filter(TypeDescriptor::isInterface)
             .collect(toImmutableList());
-    Set<TypeDescriptor> typeVars = Sets.newLinkedHashSet();
+    Set<TypeDescriptor> typeArguments = Sets.newLinkedHashSet();
     for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
-      typeVars.addAll(intersectedType.getAllTypeVariables());
+      typeArguments.addAll(intersectedType.getAllTypeVariables());
     }
     return TypeDescriptor.newBuilder()
         .setKind(Kind.INTERSECTION)
-        .setTypeArgumentDescriptors(typeVars)
-        .setVisibility(Visibility.PUBLIC)
+        .setTypeArgumentDescriptors(typeArguments)
         .setNullable(true)
         .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
@@ -413,7 +409,7 @@ public class TypeDescriptors {
         false);
   }
 
-  private static TypeDescriptor createExactly(
+  static TypeDescriptor createExactly(
       final TypeDescriptor superTypeDescriptor,
       final String packageName,
       final List<String> classComponents,
@@ -436,10 +432,20 @@ public class TypeDescriptors {
               isNative,
               isJsType);
         };
+    TypeDeclaration typeDeclaration =
+        TypeDeclaration.createExactly(
+            superTypeDescriptor,
+            packageName,
+            classComponents,
+            typeArgumentDescriptors,
+            jsNamespace,
+            jsName,
+            kind,
+            isNative,
+            isJsType);
 
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
-        .setJsType(isJsType)
         .setNative(isNative)
         .setNullable(true)
         .setSimpleJsName(jsName)
@@ -447,8 +453,8 @@ public class TypeDescriptors {
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
+        .setTypeDeclaration(typeDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
-        .setVisibility(Visibility.PUBLIC)
         .setKind(kind)
         .build();
   }
@@ -458,8 +464,12 @@ public class TypeDescriptors {
     checkArgument(!originalTypeDescriptor.isArray());
     checkArgument(!originalTypeDescriptor.isTypeVariable());
     checkArgument(!originalTypeDescriptor.isUnion());
+    TypeDeclaration typeDeclaration =
+        TypeDeclaration.replaceTypeArgumentDescriptors(
+            originalTypeDescriptor.getTypeDeclaration(), typeArgumentTypeDescriptors);
     return TypeDescriptor.Builder.from(originalTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
+        .setTypeDeclaration(typeDeclaration)
         .build();
   }
 
@@ -562,7 +572,7 @@ public class TypeDescriptors {
         .map(
             typeDescriptor -> {
               String binaryName = typeDescriptor.getQualifiedBinaryName();
-              if (typeDescriptor.isParameterizedType()) {
+              if (typeDescriptor.hasTypeArguments()) {
                 binaryName += "_";
                 binaryName += createUniqueName(typeDescriptor.getTypeArgumentDescriptors(), "_");
               }

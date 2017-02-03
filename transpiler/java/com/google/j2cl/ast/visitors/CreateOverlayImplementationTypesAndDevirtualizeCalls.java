@@ -57,10 +57,10 @@ import java.util.List;
  * <p>Take the following scenario:
  *
  * <ul>
- * <li>@JsType(isNative=true) class A { @JsOverlay void fooMethod() {} }
- * <li>@JsType(isNative=true) class B extends A {}
- * <li>class C extends B {}
- * <li>class D extends C {}
+ *   <li>@JsType(isNative=true) class A { @JsOverlay void fooMethod() {} }
+ *   <li>@JsType(isNative=true) class B extends A {}
+ *   <li>class C extends B {}
+ *   <li>class D extends C {}
  * </ul>
  *
  * <p>A's "fooMethod" should be moved to A$Overlay and instance like "a.fooMethod()" should be
@@ -111,7 +111,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     static void applyTo(CompilationUnit compilationUnit) {
       for (Type type : compilationUnit.getTypes()) {
-        TypeDescriptor typeDescriptor = type.getDescriptor();
+        TypeDescriptor typeDescriptor = type.getDescriptor().getUnsafeTypeDescriptor();
         TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
         // The only classes that should have bridges added are regular classes that are the
         // immediate subclass a native JsType class.
@@ -172,9 +172,11 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     static Type createOverlayImplementationType(Type type) {
       TypeDescriptor overlayImplTypeDescriptor =
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(type.getDescriptor());
-      Type overlayClass = new Type(type.getVisibility(), overlayImplTypeDescriptor);
-      overlayClass.setNativeTypeDescriptor(type.getDescriptor());
+          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+              type.getDescriptor().getUnsafeTypeDescriptor());
+      Type overlayClass =
+          new Type(type.getVisibility(), overlayImplTypeDescriptor.getTypeDeclaration());
+      overlayClass.setNativeTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor());
 
       for (Member member : type.getMembers()) {
         if (member instanceof Method) {

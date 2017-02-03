@@ -34,6 +34,7 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -75,8 +76,9 @@ public class NormalizeConstructors extends NormalizationPass {
    * <p>2) @JsConstructor classes that subclass a regular constructor. This class exposes a 'real'
    * Javascript constructor that can be used to make an instance of the class. However, to call
    * super we cannot call the es6 super(args) since the super class is a regular Java class, it is
-   * expected that the $ctor_super(args) is called. Hence the constructors look like this: <pre>
-   *  {@code
+   * expected that the $ctor_super(args) is called. Hence the constructors look like this:
+   *
+   * <pre>{@code
    * class JsConstructorClass extends RegularClass
    *   constructor(args) {
    *     super();
@@ -88,14 +90,15 @@ public class NormalizeConstructors extends NormalizationPass {
    *     $ctorSuper(args);
    *     ...
    *   }
-   * }
-   * </pre>
+   * }</pre>
    *
    * <p>3) All subclasses of @JsConstructor (somewhere in the hierarchy). All @JsConstructor
    * subclasses must use the real Javascript constructor to create an instance since calling super
    * is only possible from the Javascript constructor. Think about a direct subclass then realize it
    * must apply recursively to all subclasses. Since super is called in the real Javascript
-   * constructor, it must be removed from the $ctor method. <pre> {@code
+   * constructor, it must be removed from the $ctor method.
+   *
+   * <pre>{@code
    * class JsConstructorClass extends JsConstructorClassOrSubclass
    *   constructor(args) {
    *     super(args);
@@ -107,8 +110,7 @@ public class NormalizeConstructors extends NormalizationPass {
    *     // no $ctorSuper call!
    *     ...
    *   }
-   * }
-   * </pre>
+   * }</pre>
    */
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -147,8 +149,8 @@ public class NormalizeConstructors extends NormalizationPass {
       if (!method.isConstructor()) {
         return false;
       }
-      TypeDescriptor currentType = getCurrentType().getDescriptor();
-      if (!currentType.isJsConstructorClassOrSubclass()
+      TypeDeclaration currentTypeDeclaration = getCurrentType().getDescriptor();
+      if (!currentTypeDeclaration.isJsConstructorClassOrSubclass()
           || !AstUtils.hasConstructorInvocation(method)) {
         return false;
       }
@@ -163,7 +165,7 @@ public class NormalizeConstructors extends NormalizationPass {
         // if the super class is a @JsConstructor or subclass of @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
         // $ctor method to call the super constructor (which is $ctor_superclass).
-        if (!currentType.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
+        if (!currentTypeDeclaration.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
           return false; // Don't remove the super call from $ctor below.
         }
       }
@@ -262,7 +264,6 @@ public class NormalizeConstructors extends NormalizationPass {
     return constructorBuilder.build();
   }
 
-
   private static Method maybeSynthesizePrivateConstructor(Type type) {
     if (type.isJsOverlayImplementation() || type.isInterface()) {
       return null;
@@ -277,7 +278,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.newBuilder()
             .setConstructor(true)
-            .setEnclosingClassTypeDescriptor(type.getDescriptor())
+            .setEnclosingClassTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .build();
 
@@ -289,9 +290,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .build();
   }
 
-  /**
-   * Synthesizes a method descriptor for a "super" call to the constructor.
-   */
+  /** Synthesizes a method descriptor for a "super" call to the constructor. */
   private static MethodCall synthesizeEmptySuperCall(TypeDescriptor superType) {
     MethodDescriptor superDescriptor =
         MethodDescriptor.newBuilder()
@@ -301,9 +300,7 @@ public class NormalizeConstructors extends NormalizationPass {
     return MethodCall.Builder.from(superDescriptor).build();
   }
 
-  /**
-   * Rewrite NewInstance nodes to MethodCall nodes to the $create factory method.
-   */
+  /** Rewrite NewInstance nodes to MethodCall nodes to the $create factory method. */
   private static class RewriteNewInstance extends AbstractRewriter {
     @Override
     public Expression rewriteNewInstance(NewInstance constructorInvocation) {
@@ -320,9 +317,7 @@ public class NormalizeConstructors extends NormalizationPass {
     }
   }
 
-  /**
-   * Inserts $create methods for each constructor.
-   */
+  /** Inserts $create methods for each constructor. */
   private static class InsertFactoryMethods extends AbstractVisitor {
     @Override
     public boolean enterType(Type type) {
@@ -381,7 +376,7 @@ public class NormalizeConstructors extends NormalizationPass {
    * }</pre>
    */
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
-    TypeDescriptor enclosingType = type.getDescriptor();
+    TypeDescriptor enclosingType = type.getDescriptor().getUnsafeTypeDescriptor();
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enclosingType)
@@ -499,7 +494,6 @@ public class NormalizeConstructors extends NormalizationPass {
             .setParameterTypeDescriptors(
                 primaryConstructor.getDescriptor().getParameterTypeDescriptors())
             .build();
-
 
     return Method.newBuilder()
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))

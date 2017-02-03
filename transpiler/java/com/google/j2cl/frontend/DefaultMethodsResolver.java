@@ -27,9 +27,7 @@ import java.util.TreeSet;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
-/**
- * Implements inherited default methods as concrete forwarding methods.
- */
+/** Implements inherited default methods as concrete forwarding methods. */
 public class DefaultMethodsResolver {
   /** Creates forwarding stubs in classes that 'inherit' a default method implementation. */
   public static void resolve(ITypeBinding typeBinding, Type type) {
@@ -111,7 +109,9 @@ public class DefaultMethodsResolver {
       MethodDescriptor targetMethod = JdtUtils.createMethodDescriptor(method);
       Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
-              targetMethod, type.getDescriptor(), "Default method forwarding stub.");
+              targetMethod,
+              type.getDescriptor().getUnsafeTypeDescriptor(),
+              "Default method forwarding stub.");
       defaultForwardingMethod.setSourcePosition(type.getSourcePosition());
       type.addMethod(defaultForwardingMethod);
       if (JdtUtils.isOrOverridesJsMember(method)) {

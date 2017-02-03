@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -197,7 +198,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
     private Expression createArraySizeExpression(int varargsIndex) {
       FieldAccess argumentsLengthReference =
-          FieldAccess.Builder.from(AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION)
+          FieldAccess.Builder.from(AstUtilConstants.ARRAY_LENGTH_FIELD_DESCRIPTION)
               .setQualifier(ARGUMENTS_PARAMETER.getReference())
               .build();
 

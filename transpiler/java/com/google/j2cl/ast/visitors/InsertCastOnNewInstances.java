@@ -28,7 +28,7 @@ public class InsertCastOnNewInstances extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
-            if (!newInstance.getTypeDescriptor().isParameterizedType()) {
+            if (!newInstance.getTypeDescriptor().hasTypeArguments()) {
               return newInstance;
             }
             // add type annotation to ClassInstanceCreation of generic type and JsFunction type.

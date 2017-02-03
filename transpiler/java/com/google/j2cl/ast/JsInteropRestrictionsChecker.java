@@ -271,15 +271,15 @@ public class JsInteropRestrictionsChecker {
   }
 
   private boolean checkNativeJsType(Type type) {
-    TypeDescriptor typeDescriptor = type.getDescriptor();
-    String readableDescription = typeDescriptor.getReadableDescription();
+    TypeDeclaration typeDeclaration = type.getDescriptor();
+    String readableDescription = typeDeclaration.getReadableDescription();
 
     if (type.isEnumOrSubclass()) {
       problems.error(
           type.getSourcePosition(), "Enum '%s' cannot be a native JsType.", readableDescription);
       return false;
     }
-    if (typeDescriptor.isCapturingEnclosingInstance()) {
+    if (typeDeclaration.isCapturingEnclosingInstance()) {
       problems.error(
           type.getSourcePosition(),
           "Non static inner class '%s' cannot be a native JsType.",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -25,6 +25,8 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
@@ -35,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -46,67 +47,46 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 /**
- * A usage-site reference to a type.
+ * A declaration-site reference to a type.
  *
  * <p>This class is mostly a bag of precomputed properties, and the details of how those properties
- * are created live in several creation functions in JdtUtils and TypeDescriptors.
+ * are created live in several creation functions in JdtUtils and TypeDeclarations.
  *
  * <p>A couple of properties are lazily calculated via the DescriptorFactory and interface, since
  * eagerly calculating them would lead to infinite loops of Descriptor creation.
  *
- * <p>Since these are all usage-site references, when there are type variables they are always
- * thought of as type arguments.
+ * <p>Since these are all declaration-site references, when there are type variables they are always
+ * thought of as type parameters.
  */
 @AutoValue
 @Visitable
-public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasJsNameInfo, HasReadableDescription {
+public abstract class TypeDeclaration extends Node
+    implements HasJsNameInfo, HasReadableDescription {
 
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
    */
   public interface DescriptorFactory<T> {
-    T get(TypeDescriptor typeDescriptor);
+    T get(TypeDeclaration typeDeclaration);
   }
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_TypeDescriptor.visit(processor, this);
-  }
-
-  @Override
-  public int compareTo(TypeDescriptor that) {
-    return getUniqueId().compareTo(that.getUniqueId());
+    return Visitor_TypeDeclaration.visit(processor, this);
   }
 
   @Override
   public boolean equals(Object o) {
-    if (o instanceof TypeDescriptor) {
-      return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
+    if (o instanceof TypeDeclaration) {
+      return getUniqueId().equals(((TypeDeclaration) o).getUniqueId());
     }
     return false;
   }
 
-  public boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
-    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
-    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
-    // not consistent, in particular the second form does not propagate the removal of type
-    // variables inward. These two construction end up with different data but with the same unique
-    // id, so the first one that is constructed will be interned and used everywhere.
-    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
-    // the wrong information be used in some cases.
-
-    // For type variables, wildcards and captures we still need to do getRawTypeDescriptor to get
-    // the bound.
-    TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? getRawTypeDescriptor() : this;
-    other =
-        other.isTypeVariable() || other.isWildCardOrCapture()
-            ? other.getRawTypeDescriptor()
-            : other;
-    return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
+  public boolean declaresDefaultMethods() {
+    return isInterface()
+        && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefault);
   }
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
@@ -147,45 +127,25 @@ public abstract class TypeDescriptor extends Node
   public abstract ImmutableList<String> getClassComponents();
 
   @Nullable
-  public abstract TypeDescriptor getEnclosingTypeDescriptor();
+  public abstract TypeDeclaration getEnclosingTypeDeclaration();
 
-  @Nullable
-  public abstract TypeDescriptor getComponentTypeDescriptor();
+  public abstract ImmutableList<TypeDescriptor> getTypeParameterDescriptors();
 
-  @Nullable
-  public abstract TypeDescriptor getLeafTypeDescriptor();
-
-  public abstract int getDimensions();
-
-  public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
-
-  public abstract ImmutableList<TypeDescriptor> getUnionedTypeDescriptors();
-
-  public Visibility getVisibility() {
-    return getTypeDeclaration().getVisibility();
-  }
+  public abstract Visibility getVisibility();
 
   public abstract Kind getKind();
 
-  public boolean isAbstract() {
-    return getTypeDeclaration().isAbstract();
-  }
+  public abstract boolean isAbstract();
 
-  public boolean isFinal() {
-    return getTypeDeclaration().isFinal();
-  }
+  public abstract boolean isFinal();
 
-  public boolean isFunctionalInterface() {
-    return getTypeDeclaration().isFunctionalInterface();
-  }
+  public abstract boolean isFunctionalInterface();
 
   public abstract boolean isJsFunctionImplementation();
 
   public abstract boolean isJsFunctionInterface();
 
-  public boolean isJsType() {
-    return getTypeDeclaration().isJsType();
-  }
+  public abstract boolean isJsType();
 
   /**
    * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
@@ -198,18 +158,12 @@ public abstract class TypeDescriptor extends Node
    *
    * <p><code> class Foo { void bar() { Comparable comparable = new Comparable() { ... } } } </code>
    */
-  public boolean isLocal() {
-    return getTypeDeclaration().isLocal();
-  }
+  public abstract boolean isLocal();
 
   @Override
   public abstract boolean isNative();
 
-  public abstract boolean isNullable();
-
-  public boolean isJsConstructorClassOrSubclass() {
-    return getTypeDeclaration().isJsConstructorClassOrSubclass();
-  }
+  public abstract boolean isJsConstructorClassOrSubclass();
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
 
@@ -220,10 +174,6 @@ public abstract class TypeDescriptor extends Node
   abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-      getDeclaredMethodDescriptorsFactory();
-
-  @Nullable
   abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
 
   @Nullable
@@ -232,11 +182,14 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
 
-  @Nullable
-  abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
+  abstract DescriptorFactory<TypeDescriptor> getUnsafeTypeDescriptorFactory();
 
   @Nullable
   abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
+      getDeclaredMethodDescriptorsFactory();
 
   /**
    * Returns the JavaScript name for this class. This is same as simple source name unless modified
@@ -250,34 +203,10 @@ public abstract class TypeDescriptor extends Node
   public abstract String getJsNamespace();
 
   /** Returns true if the class captures its enclosing instance */
-  public boolean isCapturingEnclosingInstance() {
-    return getTypeDeclaration().isCapturingEnclosingInstance();
-  }
+  public abstract boolean isCapturingEnclosingInstance();
 
-  public boolean hasTypeArguments() {
-    return !getTypeArgumentDescriptors().isEmpty();
-  }
-
-  public boolean isPrimitive() {
-    return getKind() == Kind.PRIMITIVE;
-  }
-
-  public boolean isTypeVariable() {
-    return getKind() == Kind.TYPE_VARIABLE;
-  }
-
-  /** Returns whether the described type is a union. */
-  public boolean isUnion() {
-    return getKind() == Kind.UNION;
-  }
-
-  public boolean isWildCardOrCapture() {
-    return getKind() == Kind.WILDCARD_OR_CAPTURE;
-  }
-
-  /** Returns whether the described type is an array. */
-  public boolean isArray() {
-    return getKind() == Kind.ARRAY;
+  public boolean hasTypeParameters() {
+    return !getTypeParameterDescriptors().isEmpty();
   }
 
   /** Returns whether the described type is a class. */
@@ -290,11 +219,6 @@ public abstract class TypeDescriptor extends Node
     return getKind() == Kind.INTERFACE;
   }
 
-  /** Returns whether the described type is an interface. */
-  public boolean isIntersection() {
-    return getKind() == Kind.INTERSECTION;
-  }
-
   /** Returns whether the described type is an enum. */
   public boolean isEnum() {
     return getKind() == Kind.ENUM;
@@ -302,10 +226,6 @@ public abstract class TypeDescriptor extends Node
 
   public boolean isExtern() {
     return JsUtils.isGlobal(getJsNamespace()) && isNative();
-  }
-
-  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    return getConcreteJsFunctionMethodDescriptorFactory().get(this);
   }
 
   /**
@@ -350,74 +270,6 @@ public abstract class TypeDescriptor extends Node
     return getRawTypeDescriptorFactory().get(this);
   }
 
-  /** Returns the bound for a type variable. */
-  public TypeDescriptor getBoundTypeDescriptor() {
-    checkState(isTypeVariable() || isWildCardOrCapture());
-    return getBoundTypeDescriptorFactory().get(this);
-  }
-
-  public boolean isSupertypeOf(TypeDescriptor that) {
-    return that.getRawSuperTypesIncludingSelf().contains(this.getRawTypeDescriptor());
-  }
-
-  public boolean isSubtypeOf(TypeDescriptor that) {
-    return getRawSuperTypesIncludingSelf().contains(that.getRawTypeDescriptor());
-  }
-
-  private Set<TypeDescriptor> allRawSupertypesIncludingSelf = null;
-
-  private Set<TypeDescriptor> getRawSuperTypesIncludingSelf() {
-    if (allRawSupertypesIncludingSelf == null) {
-      allRawSupertypesIncludingSelf = new LinkedHashSet<>();
-      allRawSupertypesIncludingSelf.add(getRawTypeDescriptor());
-      if (getSuperTypeDescriptor() != null) {
-        allRawSupertypesIncludingSelf.addAll(
-            getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
-      }
-      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-        allRawSupertypesIncludingSelf.addAll(
-            interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
-      }
-    }
-    return allRawSupertypesIncludingSelf;
-  }
-
-  /** Returns all type variables that appear in the type arguments slot(s). */
-  public Set<TypeDescriptor> getAllTypeVariables() {
-    Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
-    getAllTypeVariables(this, typeVariables);
-    return typeVariables;
-  }
-
-  private static void getAllTypeVariables(
-      TypeDescriptor typeDescriptor, Set<TypeDescriptor> typeVariables) {
-    if (typeDescriptor.isTypeVariable()) {
-      typeVariables.add(typeDescriptor);
-    }
-    for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
-      getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
-    }
-    checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
-  }
-
-  public List<TypeDescriptor> getIntersectedTypeDescriptors() {
-    checkState(isIntersection());
-    TypeDescriptor superType = getSuperTypeDescriptor();
-    // TODO(rluble): Reexamine this code after upgrading JDT to 4.7, where intersection types
-    // are surfaced. Technically if one explicitly includes j.l.Object in the intersection type
-    // then j.l.Object should be the first member of the intersection. In that case j2cl is not
-    // consistent with Java.
-    if (superType == TypeDescriptors.get().javaLangObject || superType == null) {
-      return getInterfaceTypeDescriptors();
-    }
-    List<TypeDescriptor> types = new ArrayList<>();
-    // First add the supertype and then the interfaces to be consistent with type erasure (JLS 4.6,
-    // 13.1). Classes can only appear in leftmost position and the erasure is the leftmost bound.
-    types.add(superType);
-    types.addAll(getInterfaceTypeDescriptors());
-    return types;
-  }
-
   /**
    * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
    * unless it is modified by JsType/JsPacakge.
@@ -455,25 +307,33 @@ public abstract class TypeDescriptor extends Node
     return getSuperTypeDescriptorFactory().get(this);
   }
 
-  @Nullable
-  public abstract TypeDeclaration getTypeDeclaration();
+  /**
+   * Returns the usage site TypeDescriptor corresponding to this declaration site TypeDeclaration.
+   *
+   * <p>A completely correct solution would specialize type parameters into type arguments and
+   * cascade those changes into declared methods and modifications to the method declaration site of
+   * declared methods. But our AST is not in a position to do all of that. Instead we trust that a
+   * real JDT usage site TypeBinding has already been processed somewhere and we attempt to retrieve
+   * the matching TypeDescriptor.
+   */
+  public TypeDescriptor getUnsafeTypeDescriptor() {
+    return getUnsafeTypeDescriptorFactory().get(this);
+  }
 
   /** A unique string for a give type. Used for interning. */
   public String getUniqueId() {
     String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
-    String prefix = isNullable() ? "?" : "!";
-    return prefix
-        + uniqueKey
-        + TypeDescriptor.createTypeArgumentsUniqueId(getTypeArgumentDescriptors());
+    return uniqueKey + TypeDeclaration.createTypeParametersUniqueId(getTypeParameterDescriptors());
   }
 
-  private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
-    if (typeArgumentDescriptors == null || typeArgumentDescriptors.isEmpty()) {
+  private static String createTypeParametersUniqueId(
+      List<TypeDescriptor> typeParameterDescriptors) {
+    if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
       return "";
     }
     return J2clUtils.format(
         "<%s>",
-        typeArgumentDescriptors.stream().map(TypeDescriptor::getUniqueId).collect(joining(", ")));
+        typeParameterDescriptors.stream().map(TypeDescriptor::getUniqueId).collect(joining(", ")));
   }
 
   @Override
@@ -520,21 +380,24 @@ public abstract class TypeDescriptor extends Node
   }
 
   /**
+   * Returns true if {@code TypeDescriptor} declares a method with the same signature as {@code
+   * methodDescriptor} in its body.
+   */
+  private boolean isOverriddenHere(MethodDescriptor methodDescriptor) {
+    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
+      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsBySignature().values();
-  }
-
-  /**
-   * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
-   * there is a method with that signature.
-   */
-  public MethodDescriptor getMethodDescriptorByName(
-      String methodName, TypeDescriptor... parameters) {
-    return getMethodDescriptorsBySignature()
-        .get(MethodDescriptors.getSignature(methodName, parameters));
   }
 
   /** The list of all methods available on a given type. */
@@ -543,32 +406,57 @@ public abstract class TypeDescriptor extends Node
   }
 
   /**
-   * Returns a set of the method descriptors of methods in this type's super hierarchy that are
-   * overridden by {@code methodDescriptor}.
+   * Returns the method descriptors in this type's interfaces that are accidentally overridden.
+   *
+   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
+   * method and the method it inherits does not really override, but just has the same signature as
+   * the overridden method.
    */
-  public Set<MethodDescriptor> getOverriddenMethodDescriptors(MethodDescriptor methodDescriptor) {
-    Set<MethodDescriptor> overriddenMethodDescriptors = new HashSet<>();
+  public List<MethodDescriptor> getAccidentallyOverriddenMethodDescriptors() {
+    List<MethodDescriptor> accidentalOverriddenMethods = new ArrayList<>();
 
-    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)
-          && !methodDescriptor.isConstructor()) {
-        checkArgument(!methodDescriptor.isStatic());
-        overriddenMethodDescriptors.add(declaredMethodDescriptor);
+    Set<TypeDescriptor> transitiveSuperTypeInterfaceTypeDescriptors =
+        getSuperTypeDescriptor() != null
+            ? getSuperTypeDescriptor().getTransitiveInterfaceTypeDescriptors()
+            : ImmutableSet.of();
+    for (TypeDescriptor superInterfaceTypeDescriptor :
+        Sets.difference(
+            getTransitiveInterfaceTypeDescriptors(), transitiveSuperTypeInterfaceTypeDescriptors)) {
+      accidentalOverriddenMethods.addAll(
+          getNotOverriddenMethodDescriptors(superInterfaceTypeDescriptor));
+    }
+
+    return accidentalOverriddenMethods;
+  }
+
+  /** Returns the method descriptors that are declared in a particular super type but not here. */
+  private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
+      TypeDescriptor superTypeDescriptor) {
+    return superTypeDescriptor
+        .getDeclaredMethodDescriptors()
+        .stream()
+        .filter(methodDescriptor -> !isOverriddenHere(methodDescriptor))
+        .collect(toImmutableList());
+  }
+
+  /**
+   * Returns the method descriptor of the nearest method in this type's super classes that overrides
+   * (regularly or accidentally) {@code methodDescriptor}.
+   */
+  public MethodDescriptor getOverridingMethodDescriptorInSuperclasses(
+      MethodDescriptor methodDescriptor) {
+    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    while (superTypeDescriptor != null) {
+      for (MethodDescriptor superMethodDescriptor :
+          superTypeDescriptor.getDeclaredMethodDescriptors()) {
+        // TODO: exclude package private method, and add a test for it.
+        if (superMethodDescriptor.overridesSignature(methodDescriptor)) {
+          return superMethodDescriptor;
+        }
       }
+      superTypeDescriptor = superTypeDescriptor.getSuperTypeDescriptor();
     }
-
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (getSuperTypeDescriptor() != null) {
-      overriddenMethodDescriptors.addAll(
-          getSuperTypeDescriptor().getOverriddenMethodDescriptors(methodDescriptor));
-    }
-
-    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      overriddenMethodDescriptors.addAll(
-          interfaceTypeDescriptor.getOverriddenMethodDescriptors(methodDescriptor));
-    }
-
-    return overriddenMethodDescriptors;
+    return null;
   }
 
   @Override
@@ -585,27 +473,94 @@ public abstract class TypeDescriptor extends Node
 
   abstract Builder toBuilder();
 
+  static TypeDeclaration replaceTypeArgumentDescriptors(
+      TypeDeclaration originalTypeDeclaration,
+      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
+    return Builder.from(originalTypeDeclaration)
+        .setTypeParameterDescriptors(typeParameterTypeDescriptors)
+        .setUnsafeTypeDescriptorFactory(
+            () ->
+                TypeDescriptors.replaceTypeArgumentDescriptors(
+                    originalTypeDeclaration.getUnsafeTypeDescriptor(),
+                    typeParameterTypeDescriptors))
+        .build();
+  }
+
+  static TypeDeclaration createExactly(
+      final TypeDescriptor superTypeDescriptor,
+      final String packageName,
+      final List<String> classComponents,
+      final List<TypeDescriptor> typeParameterDescriptors,
+      final String jsNamespace,
+      final String jsName,
+      final Kind kind,
+      final boolean isNative,
+      final boolean isJsType) {
+    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
+        () -> {
+          return TypeDescriptors.createExactly(
+              superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
+              packageName,
+              classComponents,
+              Collections.emptyList(),
+              jsNamespace,
+              jsName,
+              kind,
+              isNative,
+              isJsType);
+        };
+
+    return newBuilder()
+        .setClassComponents(classComponents)
+        .setJsType(isJsType)
+        .setNative(isNative)
+        .setSimpleJsName(jsName)
+        .setJsNamespace(jsNamespace)
+        .setPackageName(packageName)
+        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
+        .setUnsafeTypeDescriptorFactory(
+            () ->
+                TypeDescriptors.createExactly(
+                    superTypeDescriptor,
+                    packageName,
+                    classComponents,
+                    typeParameterDescriptors,
+                    jsNamespace,
+                    jsName,
+                    kind,
+                    isNative,
+                    isJsType))
+        .setTypeParameterDescriptors(typeParameterDescriptors)
+        .setVisibility(Visibility.PUBLIC)
+        .setKind(kind)
+        .build();
+  }
+
   public static Builder newBuilder() {
-    return new AutoValue_TypeDescriptor.Builder()
+    return new AutoValue_TypeDeclaration.Builder()
         // Default values.
+        .setVisibility(Visibility.PUBLIC)
+        .setAbstract(false)
         .setNative(false)
+        .setCapturingEnclosingInstance(false)
+        .setFinal(false)
+        .setFunctionalInterface(false)
         .setJsFunctionInterface(false)
         .setJsFunctionImplementation(false)
-        .setNullable(true)
-        .setDimensions(0)
-        .setUnionedTypeDescriptors(Collections.emptyList())
-        .setTypeArgumentDescriptors(Collections.emptyList())
-        .setBoundTypeDescriptorFactory(() -> null)
+        .setJsType(false)
+        .setLocal(false)
+        .setJsConstructorClassOrSubclass(false)
+        .setTypeParameterDescriptors(Collections.emptyList())
         .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
         .setRawTypeDescriptorFactory(() -> null)
-        .setSuperTypeDescriptorFactory(() -> null)
-        .setTypeDeclaration(null);
+        .setSuperTypeDescriptorFactory(() -> null);
   }
 
-  /** Builder for a TypeDescriptor. */
+  /** Builder for a TypeDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {
 
@@ -615,42 +570,40 @@ public abstract class TypeDescriptor extends Node
 
     public abstract Builder setClassComponents(List<String> classComponents);
 
-    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
+    public abstract Builder setEnclosingTypeDeclaration(TypeDeclaration enclosingTypeDeclaration);
 
-    public abstract Builder setComponentTypeDescriptor(TypeDescriptor componentTypeDescriptor);
-
-    public abstract Builder setLeafTypeDescriptor(TypeDescriptor leafTypeDescriptor);
-
-    public abstract Builder setDimensions(int dimensions);
+    public abstract Builder setAbstract(boolean isAbstract);
 
     public abstract Builder setKind(Kind kind);
 
+    public abstract Builder setCapturingEnclosingInstance(boolean capturingEnclosingInstance);
+
+    public abstract Builder setFinal(boolean isFinal);
+
+    public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
+
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
-    public abstract Builder setJsFunctionImplementation(boolean isJsFunctionImplementation);
+    public abstract Builder setJsFunctionImplementation(boolean jsFunctionImplementation);
+
+    public abstract Builder setJsType(boolean isJsType);
+
+    public abstract Builder setLocal(boolean local);
 
     public abstract Builder setNative(boolean isNative);
 
-    public abstract Builder setNullable(boolean isNullable);
+    public abstract Builder setTypeParameterDescriptors(
+        Iterable<TypeDescriptor> typeParameterDescriptors);
 
-    public abstract Builder setTypeArgumentDescriptors(
-        Iterable<TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setUnionedTypeDescriptors(List<TypeDescriptor> unionedTypeDescriptors);
+    public abstract Builder setVisibility(Visibility visibility);
 
     public abstract Builder setPackageName(String packageName);
+
+    public abstract Builder setJsConstructorClassOrSubclass(boolean isJsConstructorClassOrSubclass);
 
     public abstract Builder setSimpleJsName(String simpleJsName);
 
     public abstract Builder setJsNamespace(String jsNamespace);
-
-    public abstract Builder setBoundTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
-
-    public Builder setBoundTypeDescriptorFactory(
-        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
-      return setBoundTypeDescriptorFactory(typeDescriptor -> boundTypeDescriptorFactory.get());
-    }
 
     public abstract Builder setConcreteJsFunctionMethodDescriptorFactory(
         DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory);
@@ -694,6 +647,14 @@ public abstract class TypeDescriptor extends Node
       return setSuperTypeDescriptorFactory(typeDescriptor -> superTypeDescriptorFactory.get());
     }
 
+    public abstract Builder setUnsafeTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> unsafeTypeDescriptorFactory);
+
+    public Builder setUnsafeTypeDescriptorFactory(
+        Supplier<TypeDescriptor> unsafeTypeDescriptorFactory) {
+      return setUnsafeTypeDescriptorFactory(typeDescriptor -> unsafeTypeDescriptorFactory.get());
+    }
+
     public abstract Builder setDeclaredMethodDescriptorsFactory(
         DescriptorFactory<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory);
 
@@ -702,8 +663,6 @@ public abstract class TypeDescriptor extends Node
       return setDeclaredMethodDescriptorsFactory(
           typeDescriptor -> declaredMethodDescriptorsFactory.get());
     }
-
-    public abstract Builder setTypeDeclaration(TypeDeclaration typeDeclaration);
 
     // Builder accessors to aid construction.
     abstract String getPackageName();
@@ -722,53 +681,54 @@ public abstract class TypeDescriptor extends Node
 
     abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
 
-    abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
-
     abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
 
     abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
         getDeclaredMethodDescriptorsFactory();
 
-    abstract TypeDescriptor getEnclosingTypeDescriptor();
+    abstract TypeDeclaration getEnclosingTypeDeclaration();
 
     abstract boolean isNative();
 
     private String calculateJsNamespace() {
-      TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-      if (enclosingTypeDescriptor != null) {
-        if (!isNative() && enclosingTypeDescriptor.isNative()) {
+      TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
+      if (enclosingTypeDeclaration != null) {
+        if (!isNative() && enclosingTypeDeclaration.isNative()) {
           // When there is a type nested within a native type, it's important not to generate a name
           // like "Array.1" (like would happen if the outer native type was claiming to be native
           // Array and the nested type was anonymous) since this is almost guaranteed to collide
           // with other people also creating nested classes within a native type that claims to be
           // native Array.
-          return enclosingTypeDescriptor.getQualifiedSourceName();
+          return enclosingTypeDeclaration.getQualifiedSourceName();
         }
         // Use the parent namespace.
-        return enclosingTypeDescriptor.getQualifiedJsName();
+        return enclosingTypeDeclaration.getQualifiedJsName();
       }
       // Use the java package namespace.
       return getPackageName();
     }
 
-    private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
+    private static final ThreadLocalInterner<TypeDeclaration> interner =
+        new ThreadLocalInterner<>();
 
     private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
       // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
       return new DescriptorFactory<T>() {
-        Map<TypeDescriptor, T> cachedValues = new HashMap<>();
+        Map<TypeDeclaration, T> cachedValues = new HashMap<>();
 
         @Override
-        public T get(TypeDescriptor selfTypeDescriptor) {
-          return cachedValues.computeIfAbsent(
-              selfTypeDescriptor, (TypeDescriptor k) -> factory.get(k));
+        public T get(TypeDeclaration selfTypeDescriptor) {
+          if (!cachedValues.containsKey(selfTypeDescriptor)) {
+            cachedValues.put(selfTypeDescriptor, factory.get(selfTypeDescriptor));
+          }
+          return cachedValues.get(selfTypeDescriptor);
         }
       };
     }
 
-    abstract TypeDescriptor autoBuild();
+    abstract TypeDeclaration autoBuild();
 
-    public TypeDescriptor build() {
+    public TypeDeclaration build() {
       if (!getSimpleJsName().isPresent()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
       }
@@ -777,7 +737,6 @@ public abstract class TypeDescriptor extends Node
         setJsNamespace(calculateJsNamespace());
       }
       // Make all descriptor factories memoizing.
-      setBoundTypeDescriptorFactory(createMemoizingFactory(getBoundTypeDescriptorFactory()));
       setConcreteJsFunctionMethodDescriptorFactory(
           createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
       setDeclaredMethodDescriptorsFactory(
@@ -789,26 +748,23 @@ public abstract class TypeDescriptor extends Node
       setSuperTypeDescriptorFactory(createMemoizingFactory(getSuperTypeDescriptorFactory()));
       setRawTypeDescriptorFactory(createMemoizingFactory(getRawTypeDescriptorFactory()));
 
-      TypeDescriptor typeDescriptor = autoBuild();
-
-      checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
-      checkState(!typeDescriptor.isPrimitive() || !typeDescriptor.isNullable());
+      TypeDeclaration typeDeclaration = autoBuild();
 
       // Can not be both a JsFunction implementation and js function interface
       checkState(
-          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isJsFunctionInterface());
+          !typeDeclaration.isJsFunctionImplementation()
+              || !typeDeclaration.isJsFunctionInterface());
 
       // Can not be both a JsFunction implementation and a functional interface
       checkState(
-          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isFunctionalInterface());
+          !typeDeclaration.isJsFunctionImplementation()
+              || !typeDeclaration.isFunctionalInterface());
 
-      // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
-      // type descriptor that does not make sense.
-      return interner.intern(typeDescriptor);
+      return interner.intern(typeDeclaration);
     }
 
-    public static Builder from(final TypeDescriptor typeDescriptor) {
-      return typeDescriptor.toBuilder();
+    public static Builder from(TypeDeclaration typeDeclaration) {
+      return typeDeclaration.toBuilder();
     }
   }
 }

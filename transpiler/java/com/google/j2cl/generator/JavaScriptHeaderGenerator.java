@@ -16,7 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import com.google.j2cl.problems.Problems;
@@ -37,8 +37,8 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   public String renderOutput() {
     renderFileOverview("lateProvide");
 
-    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getModuleName() + "');");
+    TypeDeclaration selfTypeDeclaration = type.getDescriptor();
+    sourceBuilder.appendln("goog.module('" + selfTypeDeclaration.getModuleName() + "');");
 
     if (declareLegacyNamespace && type.getDescriptor().isJsType() && !(type.isAnonymous())) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
@@ -76,7 +76,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
 
     String className = environment.aliasForType(type.getDescriptor());
-    String implementationPath = selfTypeDescriptor.getImplModuleName();
+    String implementationPath = selfTypeDeclaration.getImplModuleName();
     sourceBuilder.appendLines(
         "// Re-exports the implementation.",
         "var " + className + " = goog.require('" + implementationPath + "');",

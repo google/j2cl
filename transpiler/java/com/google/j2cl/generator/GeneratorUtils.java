@@ -26,6 +26,7 @@ import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -45,16 +46,16 @@ import java.util.List;
 public class GeneratorUtils {
   /** Returns the relative output path for a given type. */
   public static String getRelativePath(Type type) {
-    TypeDescriptor typeDescriptor = type.getDescriptor();
-    String typeName = typeDescriptor.getSimpleBinaryName();
-    String packageName = typeDescriptor.getPackageName();
+    TypeDeclaration typeDeclaration = type.getDescriptor();
+    String typeName = typeDeclaration.getSimpleBinaryName();
+    String packageName = typeDeclaration.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
   }
 
   /** Returns the absolute binary path for a given type. */
   public static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
-    TypeDescriptor typeDescriptor = type.getDescriptor();
-    String typeName = typeDescriptor.getSimpleBinaryName();
+    TypeDeclaration typeDeclaration = type.getDescriptor();
+    String typeName = typeDeclaration.getSimpleBinaryName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 

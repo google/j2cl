@@ -115,7 +115,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
     // If it is a type variable that is declared by the method, replace with its bound.
     if (shouldBeReplaced.test(typeDescriptor)) {
       TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-      return boundTypeDescriptor.isParameterizedType()
+      return boundTypeDescriptor.hasTypeArguments()
           ? boundTypeDescriptor.getRawTypeDescriptor()
           : boundTypeDescriptor;
     }
@@ -127,7 +127,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
       }
       return typeDescriptor;
     }
-    if (typeDescriptor.isParameterizedType()) {
+    if (typeDescriptor.hasTypeArguments()) {
       return TypeDescriptors.replaceTypeArgumentDescriptors(
           typeDescriptor,
           Lists.transform(
@@ -167,7 +167,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
     if (shouldBeReplaced.test(typeDescriptor)) {
       return true;
     }
-    if (typeDescriptor.isParameterizedType()) {
+    if (typeDescriptor.hasTypeArguments()) {
       for (TypeDescriptor typeArgumentTypeDescriptor :
           typeDescriptor.getTypeArgumentDescriptors()) {
         if (containsTypeVariableDeclaredByMethod(typeArgumentTypeDescriptor, shouldBeReplaced)) {

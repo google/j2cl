@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunc
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @interface
@@ -69,7 +67,6 @@ class ApplyFunction {
    */
   static $clinit() {
     ApplyFunction.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

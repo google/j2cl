@@ -34,15 +34,17 @@ import com.google.j2cl.ast.TypeDescriptor;
  * Set the qualifier of super calls that should have a qualifier.
  *
  * <p>For a super call that invokes a constructor of an inner class, it should have an qualifier.
- * For example, <pre>{@code
- *   class A {
- *     class B {}
- *     class C extends B {
- *       public C() {
- *         super();
- *       }
+ * For example,
+ *
+ * <pre>{@code
+ * class A {
+ *   class B {}
+ *   class C extends B {
+ *     public C() {
+ *       super();
  *     }
  *   }
+ * }
  * }</pre>
  *
  * <p>The super call in C's constructor invokes B's constructor, and the explicit qualifier should
@@ -70,7 +72,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
             MethodDescriptor targetMethod = methodCall.getTarget();
             if (!targetMethod.isConstructor()
                 || AstUtils.isDelegatedConstructorCall(
-                    methodCall, getCurrentType().getDescriptor())) {
+                    methodCall, getCurrentType().getDescriptor().getUnsafeTypeDescriptor())) {
               return methodCall;
             }
             // super() call.
@@ -79,7 +81,9 @@ public class FixSuperCallQualifiers extends NormalizationPass {
               return methodCall;
             }
             return MethodCall.Builder.from(methodCall)
-                .setQualifier(findSuperCallQualifier(getCurrentType().getDescriptor()))
+                .setQualifier(
+                    findSuperCallQualifier(
+                        getCurrentType().getDescriptor().getUnsafeTypeDescriptor()))
                 .build();
           }
 
@@ -106,5 +110,4 @@ public class FixSuperCallQualifiers extends NormalizationPass {
           }
         });
   }
-
 }

@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
@@ -32,6 +33,7 @@ public class GenerationEnvironment {
    * generic and non-generic permutations of a class all map to the same type.
    */
   private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
+
   private final Map<Variable, String> aliasByVariable;
   private TypeDescriptor enclosingTypeDescriptor;
 
@@ -50,15 +52,20 @@ public class GenerationEnvironment {
     return variable.getName();
   }
 
-  public String aliasForType(TypeDescriptor typeDescriptor) {
+  public String aliasForType(TypeDeclaration typeDeclaration) {
     checkState(
-        aliasByTypeBinaryName.containsKey(typeDescriptor.getQualifiedJsName()),
+        aliasByTypeBinaryName.containsKey(typeDeclaration.getQualifiedJsName()),
         "An alias was needed for %s but no alias was found.",
-        typeDescriptor);
+        typeDeclaration);
+
+    return aliasByTypeBinaryName.get(typeDeclaration.getQualifiedJsName());
+  }
+
+  public String aliasForType(TypeDescriptor typeDescriptor) {
     checkArgument(!typeDescriptor.isTypeVariable());
     checkArgument(!typeDescriptor.isWildCardOrCapture());
 
-    return aliasByTypeBinaryName.get(typeDescriptor.getQualifiedJsName());
+    return aliasForType(typeDescriptor.getTypeDeclaration());
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {

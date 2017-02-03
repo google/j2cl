@@ -94,7 +94,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitType(Type type) {
-    addTypeDescriptor(type.getDescriptor().getRawTypeDescriptor(), ImportCategory.SELF);
+    addTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor(), ImportCategory.SELF);
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
@@ -195,7 +195,7 @@ public class ImportGatherer extends AbstractVisitor {
 
     // If there is a type signature like Map<Entry<K, V>> then the Entry type argument needs to be
     // imported.
-    if (typeDescriptor.isParameterizedType()) {
+    if (typeDescriptor.hasTypeArguments()) {
       for (TypeDescriptor typeArgumentDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
         // But the type argument imports do not need to be eager since they are not acting here as
         // super type or super interface.
@@ -300,7 +300,7 @@ public class ImportGatherer extends AbstractVisitor {
     Set<Import> imports = new LinkedHashSet<>();
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       Preconditions.checkState(!typeDescriptor.isTypeVariable());
-      Preconditions.checkState(typeDescriptor.isNative() || !typeDescriptor.isParameterizedType());
+      Preconditions.checkState(typeDescriptor.isNative() || !typeDescriptor.hasTypeArguments());
       imports.add(new Import(computeAlias(typeDescriptor), typeDescriptor));
     }
     return imports;
