@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Utility methods to replace calls to Java methods that J2cl does not support, so they can be
- * supersourced when compiling J2cl with J2cl.
+ * supersourced when compiling J2CL with J2CL.
  */
 public class J2clUtils {
 
@@ -34,7 +34,7 @@ public class J2clUtils {
   public static PrintStream printf(PrintStream stream, String format, Object... args) {
     return stream.printf(format, args);
   }
-  
+
   /** Escapes a string into a representation suitable for literals. */
   public static String escapeJavaString(String string) {
     // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
