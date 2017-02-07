@@ -94,31 +94,3 @@ genrule(
     outs = ["test_defines.js"],
     cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
 )
-
-load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
-
-# This target uses a special version of the transpiler that compiles code
-# twice within the transpiler.
-# This is intended to detect problems with static state in the transpiler.
-j2cl_transpile(
-    name = "jre_transpiled_twice",
-    srcs = ["//jre/java:jre_hidden_java_files"],
-    native_srcs_zips = ["//jre/java:jre_native_zips"],
-    transpiler = ":RerunningJ2clTranspiler",
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
-java_binary(
-    name = "RerunningJ2clTranspiler",
-    main_class = "com.google.j2cl.transpiler.RerunningJ2clTranspiler",
-    runtime_deps = ["//transpiler/javatests/com/google/j2cl/transpiler:rerunning_transpiler"],
-)
-
-load("//tools/build_rules:build_test.bzl", "build_test")
-
-build_test(
-    name = "jre_transpiling_twice_test",
-    targets = [
-        ":jre_transpiled_twice",
-    ],
-)
