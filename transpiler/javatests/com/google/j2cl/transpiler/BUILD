@@ -61,7 +61,7 @@ load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 # This is intended to detect problems with static state in the transpiler.
 j2cl_transpile(
     name = "jre_transpiled_twice",
-    srcs = ["//jre/java:jre_hidden_java_files"],
+    srcs = ["//jre/java:jre_java_files"],
     native_srcs_zips = ["//jre/java:jre_native_zips"],
     transpiler = ":RerunningJ2clTranspiler",
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
