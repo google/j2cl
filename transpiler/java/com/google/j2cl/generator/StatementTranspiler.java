@@ -37,8 +37,6 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.common.FilePosition;
-import com.google.j2cl.common.SourcePosition;
 import java.util.List;
 
 /**
@@ -61,22 +59,23 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-
-        String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
-        builder.append(assertAlias + ".$enabled() && ");
-        if (assertStatement.getMessage() == null) {
-          builder.append(assertAlias + ".$assert(");
-          renderExpression(assertStatement.getExpression());
-          builder.append(");");
-        } else {
-          builder.append(assertAlias + ".$assertWithMessage(");
-          renderExpression(assertStatement.getExpression());
-          builder.append(", ");
-          renderExpression(assertStatement.getMessage());
-          builder.append(");");
-        }
-        addSourceMapping(assertStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            assertStatement.getSourcePosition(),
+            () -> {
+              String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
+              builder.append(assertAlias + ".$enabled() && ");
+              if (assertStatement.getMessage() == null) {
+                builder.append(assertAlias + ".$assert(");
+                renderExpression(assertStatement.getExpression());
+                builder.append(");");
+              } else {
+                builder.append(assertAlias + ".$assertWithMessage(");
+                renderExpression(assertStatement.getExpression());
+                builder.append(", ");
+                renderExpression(assertStatement.getMessage());
+                builder.append(");");
+              }
+            });
         return false;
       }
 
@@ -93,15 +92,15 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-
-        builder.append("break");
-        if (breakStatement.getLabelName() != null) {
-          builder.append(" " + breakStatement.getLabelName());
-        }
-        builder.append(";");
-
-        addSourceMapping(breakStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            breakStatement.getSourcePosition(),
+            () -> {
+              builder.append("break");
+              if (breakStatement.getLabelName() != null) {
+                builder.append(" " + breakStatement.getLabelName());
+              }
+              builder.append(";");
+            });
         return false;
       }
 
@@ -113,177 +112,204 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("continue");
-        if (continueStatement.getLabelName() != null) {
-          builder.append(" " + continueStatement.getLabelName());
-        }
-        builder.append(";");
-        addSourceMapping(continueStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            continueStatement.getSourcePosition(),
+            () -> {
+              builder.append("continue");
+              if (continueStatement.getLabelName() != null) {
+                builder.append(" " + continueStatement.getLabelName());
+              }
+              builder.append(";");
+            });
         return false;
       }
 
       @Override
       public boolean enterDoWhileStatement(DoWhileStatement doWhileStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("do ");
-        render(doWhileStatement.getBody());
-        builder.append("while (");
-        renderExpression(doWhileStatement.getConditionExpression());
-        builder.append(");");
-        addSourceMapping(doWhileStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            doWhileStatement.getSourcePosition(),
+            () -> {
+              builder.append("do ");
+              render(doWhileStatement.getBody());
+              builder.append("while (");
+              renderExpression(doWhileStatement.getConditionExpression());
+              builder.append(");");
+            });
         return false;
       }
 
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        renderExpression(expressionStatement.getExpression());
-        builder.append(";");
-        addSourceMapping(expressionStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            expressionStatement.getSourcePosition(),
+            () -> {
+              renderExpression(expressionStatement.getExpression());
+              builder.append(";");
+            });
         return false;
       }
 
       @Override
       public boolean enterForStatement(ForStatement forStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("for (");
-        renderSeparated(", ", forStatement.getInitializers());
-        builder.append("; ");
-        renderExpression(forStatement.getConditionExpression());
-        builder.append("; ");
-        renderSeparated(", ", forStatement.getUpdates());
-        builder.append(") ");
-        render(forStatement.getBody());
-        addSourceMapping(forStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            forStatement.getSourcePosition(),
+            () -> {
+              builder.append("for (");
+              renderSeparated(", ", forStatement.getInitializers());
+              builder.append("; ");
+              renderExpression(forStatement.getConditionExpression());
+              builder.append("; ");
+              renderSeparated(", ", forStatement.getUpdates());
+              builder.append(") ");
+              render(forStatement.getBody());
+            });
         return false;
       }
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("if (");
-        renderExpression(ifStatement.getConditionExpression());
-        builder.append(") ");
-        render(ifStatement.getThenStatement());
-        if (ifStatement.getElseStatement() != null) {
-          builder.append(" else ");
-          render(ifStatement.getElseStatement());
-        }
-        addSourceMapping(ifStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            ifStatement.getSourcePosition(),
+            () -> {
+              builder.append("if (");
+              renderExpression(ifStatement.getConditionExpression());
+              builder.append(") ");
+              render(ifStatement.getThenStatement());
+              if (ifStatement.getElseStatement() != null) {
+                builder.append(" else ");
+                render(ifStatement.getElseStatement());
+              }
+            });
         return false;
       }
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labelStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append(labelStatement.getLabelName() + ": ");
-        render(labelStatement.getBody());
-        addSourceMapping(labelStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            labelStatement.getSourcePosition(),
+            () -> {
+              builder.append(labelStatement.getLabelName() + ": ");
+              render(labelStatement.getBody());
+            });
         return false;
       }
 
       @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        Expression expression = returnStatement.getExpression();
-        builder.append("return");
-        if (expression != null) {
-          builder.append(" ");
-          renderExpression(expression);
-        }
-        builder.append(";");
-        addSourceMapping(returnStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            returnStatement.getSourcePosition(),
+            () -> {
+              Expression expression = returnStatement.getExpression();
+              builder.append("return");
+              if (expression != null) {
+                builder.append(" ");
+                renderExpression(expression);
+              }
+              builder.append(";");
+            });
         return false;
       }
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        if (switchCase.isDefault()) {
-          builder.append("default: ");
-        } else {
-          builder.append("case ");
-          renderExpression(switchCase.getMatchExpression());
-          builder.append(": ");
-        }
-        addSourceMapping(switchCase, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            switchCase.getSourcePosition(),
+            () -> {
+              if (switchCase.isDefault()) {
+                builder.append("default: ");
+              } else {
+                builder.append("case ");
+                renderExpression(switchCase.getMatchExpression());
+                builder.append(": ");
+              }
+            });
         return false;
       }
 
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("switch (");
-        renderExpression(switchStatement.getSwitchExpression());
-        builder.append(") ");
-        builder.openBrace();
-        for (Statement statement : switchStatement.getBodyStatements()) {
-          if (statement instanceof SwitchCase) {
-            builder.newLine();
-            render(statement);
-          } else {
-            builder.indent();
-            builder.newLine();
-            render(statement);
-            builder.unindent();
-          }
-        }
-        builder.closeBrace();
-        addSourceMapping(switchStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            switchStatement.getSourcePosition(),
+            () -> {
+              builder.append("switch (");
+              renderExpression(switchStatement.getSwitchExpression());
+              builder.append(") ");
+              builder.openBrace();
+              for (Statement statement : switchStatement.getBodyStatements()) {
+                if (statement instanceof SwitchCase) {
+                  builder.newLine();
+                  render(statement);
+                } else {
+                  builder.indent();
+                  builder.newLine();
+                  render(statement);
+                  builder.unindent();
+                }
+              }
+              builder.closeBrace();
+            });
         return false;
       }
 
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-        builder.append(utilAlias + ".$synchronized(");
-        renderExpression(synchronizedStatement.getExpression());
-        builder.appendln(");");
-        render(synchronizedStatement.getBody());
-        addSourceMapping(synchronizedStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            synchronizedStatement.getSourcePosition(),
+            () -> {
+              String utilAlias =
+                  environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
+              builder.append(utilAlias + ".$synchronized(");
+              renderExpression(synchronizedStatement.getExpression());
+              builder.appendln(");");
+              render(synchronizedStatement.getBody());
+            });
         return false;
       }
 
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("throw ");
-        renderExpression(throwStatement.getExpression());
-        builder.append(";");
-        addSourceMapping(throwStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            throwStatement.getSourcePosition(),
+            () -> {
+              builder.append("throw ");
+              renderExpression(throwStatement.getExpression());
+              builder.append(";");
+            });
         return false;
       }
 
       @Override
       public boolean enterTryStatement(TryStatement tryStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("try ");
-        render(tryStatement.getBody());
-        for (CatchClause catchClause : tryStatement.getCatchClauses()) {
-          builder.append(
-              " catch (/** @type {*} */ "
-                  + environment.aliasForVariable(catchClause.getExceptionVar())
-                  + ") ");
-          render(catchClause.getBody());
-        }
-        if (tryStatement.getFinallyBlock() != null) {
-          builder.append(" finally ");
-          render(tryStatement.getFinallyBlock());
-        }
-        addSourceMapping(tryStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            tryStatement.getSourcePosition(),
+            () -> {
+              builder.append("try ");
+              render(tryStatement.getBody());
+              for (CatchClause catchClause : tryStatement.getCatchClauses()) {
+                builder.append(
+                    " catch (/** @type {*} */ "
+                        + environment.aliasForVariable(catchClause.getExceptionVar())
+                        + ") ");
+                render(catchClause.getBody());
+              }
+              if (tryStatement.getFinallyBlock() != null) {
+                builder.append(" finally ");
+                render(tryStatement.getFinallyBlock());
+              }
+            });
         return false;
       }
 
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
-        FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("while (");
-        renderExpression(whileStatement.getConditionExpression());
-        builder.append(") ");
-        render(whileStatement.getBody());
-        addSourceMapping(whileStatement, startPosition, builder.getCurrentPosition());
+        builder.emitWithMapping(
+            whileStatement.getSourcePosition(),
+            () -> {
+              builder.append("while (");
+              renderExpression(whileStatement.getConditionExpression());
+              builder.append(") ");
+              render(whileStatement.getBody());
+            });
         return false;
       }
 
@@ -308,11 +334,6 @@ public class StatementTranspiler {
         }
       }
 
-      private void addSourceMapping(
-          Statement statement, FilePosition startPosition, FilePosition endPosition) {
-        builder.addMapping(
-            statement.getSourcePosition(), new SourcePosition(startPosition, endPosition));
-      }
     }
     SourceTransformer transformer = new SourceTransformer();
     statement.accept(transformer);

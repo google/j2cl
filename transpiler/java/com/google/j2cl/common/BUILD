@@ -10,5 +10,7 @@ java_library(
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//third_party/java/apache_commons_lang3",
+        "//third_party/java/auto:auto_value",
+        "//third_party/java/jsr305_annotations",
     ],
 )

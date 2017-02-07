@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.Cloneable;
-import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 
@@ -38,17 +37,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   }
 
   @Override
-  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
-    setSourcePosition(store.getMetadata().getSourcePosition());
-  }
-
-  @Override
   public abstract Statement clone();
-
-  @Override
-  public HasSourcePosition getMetadata() {
-    return this;
-  }
 
   @Override
   public Node accept(Processor processor) {

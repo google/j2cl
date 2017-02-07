@@ -177,6 +177,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       Type overlayClass =
           new Type(type.getVisibility(), overlayImplTypeDescriptor.getTypeDeclaration());
       overlayClass.setNativeTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor());
+      overlayClass.setSourcePosition(type.getSourcePosition());
 
       for (Member member : type.getMembers()) {
         if (member instanceof Method) {
@@ -214,6 +215,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           Method.Builder.from(statifiedMethod)
               .setJsInfo(JsInfo.NONE)
               .setEnclosingClass(overlayImplTypeDescriptor)
+              .setSourcePosition(method.getSourcePosition())
               .build();
 
       // clear the method body from the original type and use a fresh list of parameters.

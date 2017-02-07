@@ -26,4 +26,14 @@ public interface HasSourcePosition extends HasMetadata<HasSourcePosition> {
   SourcePosition getSourcePosition();
 
   void setSourcePosition(SourcePosition sourcePosition);
+
+  @Override
+  default void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
+    setSourcePosition(store.getMetadata().getSourcePosition());
+  }
+
+  @Override
+  default HasSourcePosition getMetadata() {
+    return this;
+  }
 }

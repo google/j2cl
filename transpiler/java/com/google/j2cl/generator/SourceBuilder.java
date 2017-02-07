@@ -34,8 +34,15 @@ class SourceBuilder {
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
 
-  public void addMapping(SourcePosition inputSourcePosition, SourcePosition outputSourcePosition) {
-    javaSourceInfoByOutputSourceInfo.put(outputSourcePosition, inputSourcePosition);
+  public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
+    FilePosition startPosition = getCurrentPosition();
+    codeEmitter.run();
+    javaSourceInfoByOutputSourceInfo.put(
+        SourcePosition.newBuilder()
+            .setStartFilePosition(startPosition)
+            .setEndFilePosition(getCurrentPosition())
+            .build(),
+        javaSourcePosition);
   }
 
   public SortedMap<SourcePosition, SourcePosition> getMappings() {
@@ -51,10 +58,6 @@ class SourceBuilder {
     sb.append(indentedSource);
     currentLine += StringUtils.countMatches(indentedSource, System.lineSeparator());
     currentColumn = sb.length() - sb.lastIndexOf(System.lineSeparator()) - 1;
-  }
-
-  public FilePosition getCurrentPosition() {
-    return new FilePosition(currentLine, currentColumn);
   }
 
   public void appendLines(String... lines) {
@@ -104,5 +107,9 @@ class SourceBuilder {
     unindent();
     newLine();
     append("}");
+  }
+
+  private FilePosition getCurrentPosition() {
+    return new FilePosition(currentLine, currentColumn);
   }
 }

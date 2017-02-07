@@ -23,7 +23,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
-import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -297,11 +296,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   @Override
-  public HasSourcePosition getMetadata() {
-    return this;
-  }
-
-  @Override
   public SourcePosition getSourcePosition() {
     return sourcePosition;
   }
@@ -314,11 +308,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Override
   public String getReadableDescription() {
     return getDescriptor().getReadableDescription();
-  }
-
-  @Override
-  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
-    setSourcePosition(store.getMetadata().getSourcePosition());
   }
 
   @Override

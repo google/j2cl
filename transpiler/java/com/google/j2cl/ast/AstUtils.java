@@ -685,6 +685,7 @@ public class AstUtils {
         .setMethodDescriptor(newMethodDescriptor)
         .setParameters(newParameters)
         .addStatements(method.getBody().getStatements())
+        .setSourcePosition(method.getSourcePosition())
         .build();
   }
 

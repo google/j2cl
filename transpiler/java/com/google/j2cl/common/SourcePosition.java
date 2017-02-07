@@ -15,73 +15,78 @@
  */
 package com.google.j2cl.common;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
+
+import com.google.auto.value.AutoValue;
+import javax.annotation.Nullable;
 
 /**
  * Describes the location of a node in the original source in the form of a range
  * (line,column)-(line,column); where both line and column are zero-based.
  */
-public class SourcePosition implements Comparable<SourcePosition> {
+@AutoValue
+public abstract class SourcePosition implements Comparable<SourcePosition> {
+
+  public abstract FilePosition getStartFilePosition();
+
+  public abstract FilePosition getEndFilePosition();
+
+  public abstract @Nullable String getFilePath();
 
   // For mappings that should not be displayed in readable output.
-  public static final SourcePosition DUMMY = new SourcePosition("UNKNOWN", 0, 0, 0, 0);
+  public static final SourcePosition DUMMY =
+      newBuilder().setFilePath("UNKNOWN").setStartPosition(0, 0).setEndPosition(0, 0).build();
 
-  public static final SourcePosition UNKNOWN = new SourcePosition("UNKNOWN", -1, -1, -1, -1);
-
-  private final String filePath;
-  private final FilePosition startPosition;
-  private final FilePosition endPosition;
-
-  public SourcePosition(FilePosition startPosition, FilePosition endPosition) {
-    this(null, startPosition, endPosition);
-  }
-
-  public SourcePosition(String filePath, FilePosition startPosition, FilePosition endPosition) {
-    this.startPosition = checkNotNull(startPosition);
-    this.endPosition = checkNotNull(endPosition);
-    this.filePath = filePath;
-  }
-
-  public SourcePosition(
-      String filePath,
-      int startLineNumber,
-      int startColumnNumber,
-      int endLineNumber,
-      int endColumnNumber) {
-    this(
-        filePath,
-        new FilePosition(startLineNumber, startColumnNumber),
-        new FilePosition(endLineNumber, endColumnNumber));
-  }
-
-  public FilePosition getStartFilePosition() {
-    return startPosition;
-  }
-
-  public FilePosition getEndFilePosition() {
-    return endPosition;
-  }
-
-  public String getFilePath() {
-    return filePath;
-  }
+  public static final SourcePosition UNKNOWN =
+      newBuilder().setFilePath("UNKNOWN").setStartPosition(-1, -1).setEndPosition(-1, -1).build();
 
   @Override
   public int compareTo(SourcePosition o) {
-    if (filePath != null) {
-      int nameComparison = filePath.compareTo(o.getFilePath());
-      if (nameComparison != 0) {
-        return nameComparison;
+    if (getFilePath() != null) {
+      int pathComparisonResult = getFilePath().compareTo(o.getFilePath());
+      if (pathComparisonResult != 0) {
+        return pathComparisonResult;
       }
     }
-    if (startPosition.getLine() == o.startPosition.getLine()) {
-      return startPosition.getColumn() - o.startPosition.getColumn();
+    if (getStartFilePosition().getLine() == o.getStartFilePosition().getLine()) {
+      return getStartFilePosition().getColumn() - o.getStartFilePosition().getColumn();
     }
-    return startPosition.getLine() - o.startPosition.getLine();
+    return getStartFilePosition().getLine() - o.getStartFilePosition().getLine();
   }
 
-  @Override
-  public String toString() {
-    return "(" + startPosition.getLine() + "," + startPosition.getColumn() + ")";
+  abstract Builder toBuilder();
+
+  public static Builder newBuilder() {
+    return new AutoValue_SourcePosition.Builder();
+  }
+
+  /** A Builder for SourcePosition. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+
+    public abstract Builder setStartFilePosition(FilePosition filePosition);
+
+    public abstract Builder setEndFilePosition(FilePosition filePosition);
+
+    public abstract Builder setFilePath(String filePath);
+
+    public Builder setStartPosition(int line, int column) {
+      return setStartFilePosition(new FilePosition(line, column));
+    }
+
+    public Builder setEndPosition(int line, int column) {
+      return setEndFilePosition(new FilePosition(line, column));
+    }
+
+    public static Builder from(SourcePosition sourcePosition) {
+      checkArgument(sourcePosition != UNKNOWN && sourcePosition != DUMMY);
+      return sourcePosition.toBuilder();
+    }
+
+    abstract SourcePosition autoBuild();
+
+    public SourcePosition build() {
+      return autoBuild();
+    }
   }
 }

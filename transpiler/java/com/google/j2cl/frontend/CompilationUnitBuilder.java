@@ -758,8 +758,11 @@ public class CompilationUnitBuilder {
       int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
       int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
 
-      return new SourcePosition(
-          currentSourceFile, startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
+      return SourcePosition.newBuilder()
+          .setFilePath(currentSourceFile)
+          .setStartPosition(startLineNumber, startColumnNumber)
+          .setEndPosition(endLineNumber, endColumnNumber)
+          .build();
     }
 
     @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"})

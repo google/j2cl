@@ -33,7 +33,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
@@ -577,16 +576,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         Field field = (Field) member;
         if (field.hasInitializer() && !field.isCompileTimeConstant()) {
           sourceBuilder.newLine();
-          FilePosition startPosition = sourceBuilder.getCurrentPosition();
-          boolean isInstanceField = !field.getDescriptor().isStatic();
-          String fieldName =
-              ManglingNameUtils.getMangledName(field.getDescriptor(), !isInstanceField);
-          sourceBuilder.append((isInstanceField ? "this" : className) + "." + fieldName + " = ");
-          renderExpression(field.getInitializer());
-          sourceBuilder.append(";");
-          sourceBuilder.addMapping(
+          sourceBuilder.emitWithMapping(
               field.getSourcePosition(),
-              new SourcePosition(startPosition, sourceBuilder.getCurrentPosition()));
+              () -> {
+                boolean isInstanceField = !field.getDescriptor().isStatic();
+                String fieldName =
+                    ManglingNameUtils.getMangledName(field.getDescriptor(), !isInstanceField);
+                sourceBuilder.append(
+                    (isInstanceField ? "this" : className) + "." + fieldName + " = ");
+                renderExpression(field.getInitializer());
+                sourceBuilder.append(";");
+              });
         }
       } else if (member instanceof InitializerBlock) {
         InitializerBlock block = (InitializerBlock) member;
@@ -695,11 +695,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO(stalcup): switch to generator.setFileLength() when that becomes possible.
   private void recordFileLengthInSourceMap() {
     // The JS position must have non-zero size otherwise the mapping will be ignored.
-    FilePosition beforePosition = sourceBuilder.getCurrentPosition();
-    sourceBuilder.append(" ");
-    FilePosition afterPosition = sourceBuilder.getCurrentPosition();
-    SourcePosition jsPosition = new SourcePosition(beforePosition, afterPosition);
-
-    sourceBuilder.addMapping(SourcePosition.DUMMY, jsPosition);
+    sourceBuilder.emitWithMapping(SourcePosition.DUMMY, () -> sourceBuilder.append(" "));
   }
 }
