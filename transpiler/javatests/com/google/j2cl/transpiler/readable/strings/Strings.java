@@ -29,6 +29,14 @@ public class Strings {
     char c2 = 'o';
     s4 = c1 + c2 + "o";
 
+    // Compound operation and string conversions
+    s4 += 1L;
+    s4 += 'C';
+    s4 += 1;
+    s4 += 1d;
+    s4 += 1f;
+    s4 += (short) 1;
+
     (new StringHolder()).s += s4;
     (new StringHolder()).s += c1;
     (new StringHolder()).s += "o";

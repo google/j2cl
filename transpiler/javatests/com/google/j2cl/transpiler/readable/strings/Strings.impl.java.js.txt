@@ -9,10 +9,15 @@ goog.module('com.google.j2cl.transpiler.readable.strings.Strings$impl');
 
 
 let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let StringHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -79,6 +84,20 @@ class Strings extends java_lang_Object {
         java_lang_String.m_valueOf__java_lang_Object(
             Character.m_valueOf__char(c2)) +
         'o';
+    s4 = '' + s4 +
+        java_lang_String.m_valueOf__java_lang_Object(
+            Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */));
+    s4 = '' + s4 +
+        java_lang_String.m_valueOf__java_lang_Object(
+            Character.m_valueOf__char(67 /* 'C' */));
+    s4 = '' + s4 +
+        java_lang_String.m_valueOf__java_lang_Object(Integer.m_valueOf__int(1));
+    s4 = '' + s4 + 1.0;
+    s4 = '' + s4 +
+        java_lang_String.m_valueOf__java_lang_Object(
+            Float.m_valueOf__float(1.0));
+    s4 = '' + s4 +
+        java_lang_String.m_valueOf__java_lang_Object(Short.m_valueOf__short(1));
     ($qualifier = (StringHolder.$create__()),
      $qualifier
          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
@@ -128,6 +147,10 @@ class Strings extends java_lang_Object {
     StringHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
     Character = goog.module.get('java.lang.Character$impl');
+    Float = goog.module.get('java.lang.Float$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    Long = goog.module.get('java.lang.Long$impl');
+    Short = goog.module.get('java.lang.Short$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     java_lang_Object.$clinit();
   }

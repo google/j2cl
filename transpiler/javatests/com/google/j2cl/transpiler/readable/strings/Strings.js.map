@@ -64,6 +64,12 @@
 [char c2 = 'o';] => [let c2 = 111 /* 'o' */;]
 [c2] => [c2] "c2"
 [s4 = c1 + c2 + "o";] => [s4 = java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)) + java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c2)) + "o";]
+[s4 += 1L;] => [s4 = "" + s4 + java_lang_String.m_valueOf__java_lang_Object(Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */));]
+[s4 += 'C';] => [s4 = "" + s4 + java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(67 /* 'C' */));]
+[s4 += 1;] => [s4 = "" + s4 + java_lang_String.m_valueOf__java_lang_Object(Integer.m_valueOf__int(1));]
+[s4 += 1d;] => [s4 = "" + s4 + 1.0;]
+[s4 += 1f;] => [s4 = "" + s4 + java_lang_String.m_valueOf__java_lang_Object(Float.m_valueOf__float(1.0));]
+[s4 += (short) 1;] => [s4 = "" + s4 + java_lang_String.m_valueOf__java_lang_Object(Short.m_valueOf__short(1));]
 [(new StringHolder()).s += s4;] => [($qualifier = (StringHolder.$create__()), $qualifier.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = "" + $qualifier.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder + s4);]
 [(new StringHolder()).s += c1;] => [($qualifier$1$ = (StringHolder.$create__()), $qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = "" + $qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder + java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)));]
 [(new StringHolder()).s += "o";] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "o";]
