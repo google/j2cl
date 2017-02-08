@@ -100,7 +100,7 @@ def jsni_to_native_js_bundle(name, srcs, native_srcs=[], testonly = 0, **kwargs)
   )
 
   generate_zip(
-      name = name + "_handrolled",
+      name = name + "_handrolled.js.zip",
       srcs = native_srcs,
       pkg = "RELATIVE",
       testonly = testonly,
@@ -108,6 +108,6 @@ def jsni_to_native_js_bundle(name, srcs, native_srcs=[], testonly = 0, **kwargs)
 
   native.filegroup(
       name = name,
-      srcs = [":" + name + "_autogen", ":" + name + "_handrolled"],
+      srcs = [":" + name + "_autogen", ":" + name + "_handrolled.js.zip"],
       testonly = testonly,
   )
