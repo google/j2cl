@@ -20,12 +20,13 @@ import com.google.devtools.build.runtime.Runfiles;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.problems.Problems;
 import com.google.j2cl.transpiler.J2clTranspiler;
-import com.google.j2cl.transpiler.J2clTranspilerDriver;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executors;
 import junit.framework.TestCase;
 
 /**
@@ -151,8 +152,24 @@ public class IntegrationTestCase extends TestCase {
   }
 
   protected TranspileResult transpile(String[] args, File outputLocation) {
+    try {
+      // Run the transpiler in its own thread
+      J2clTranspiler.Result result =
+          Executors.newSingleThreadExecutor().submit(() -> invokeTranspile(args)).get();
+      return new TranspileResult(result.getExitCode(), result.getProblems(), outputLocation);
+    } catch (Exception e) {
+      e.printStackTrace();
+      Problems problems = new Problems();
+      problems.error(e.toString());
+      return new TranspileResult(-3, problems, outputLocation);
+    }
+  }
 
-    J2clTranspiler.Result result = J2clTranspilerDriver.transpile(args);
-    return new TranspileResult(result.getExitCode(), result.getProblems(), outputLocation);
+  private static J2clTranspiler.Result invokeTranspile(Object args) throws Exception {
+    // J2clTranspiler.transpile is hidden since we don't want it to be used as an entry point. As a
+    // result we use reflection here to invoke it.
+    Method transpileMethod = J2clTranspiler.class.getDeclaredMethod("transpile", String[].class);
+    transpileMethod.setAccessible(true);
+    return (J2clTranspiler.Result) transpileMethod.invoke(new J2clTranspiler(), args);
   }
 }

@@ -21,20 +21,6 @@ java_test(
 )
 
 java_library(
-    name = "transpiler_driver",
-    srcs = ["J2clTranspilerDriver.java"],
-    visibility = ["//:__subpackages__"],
-    deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/common/hash",
-        "//java/com/google/common/io",
-        "//transpiler/java/com/google/j2cl/problems",
-        "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
-    ],
-)
-
-java_library(
     name = "rerunning_transpiler",
     srcs = ["RerunningJ2clTranspiler.java"],
     deps = [

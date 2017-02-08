@@ -121,7 +121,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
-        "//transpiler/javatests/com/google/j2cl/transpiler:transpiler_driver",
     ],
 )
 
