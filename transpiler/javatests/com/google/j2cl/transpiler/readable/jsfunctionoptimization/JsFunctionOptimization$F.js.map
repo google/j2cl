@@ -1,1 +1,12 @@
+[@JsFunction
+  interface F {
+    String m(String s);
+  }] => [/**
+ * @interface
+...exports = F;
+] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.F"
+[String m(String s);] => [/**
+   * @abstract
+...  m_m__java_lang_String(s) {
+  }] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.F.m"
 [s] => [s] "s"

@@ -1,2 +1,14 @@
+[@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+class Transitive {
+...  final void doTransitiveInstanceMethod(String arg1) {}
+}] => [class Transitive$$Overlay {
+  /**
+...exports = Transitive$$Overlay;
+] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive"
+[@JsOverlay
+  final void doTransitiveInstanceMethod(String arg1) {}] => [/**
+   * @param {Object} $thisArg
+...    Transitive$$Overlay.$clinit();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.doTransitiveInstanceMethod"
 [arg1] => [arg1] "arg1"
 [UNKNOWN] => [Transitive$$Overlay.$clinit();]

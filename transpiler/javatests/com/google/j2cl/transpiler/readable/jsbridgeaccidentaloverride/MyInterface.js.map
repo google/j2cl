@@ -1,2 +1,17 @@
+[public interface MyInterface {
+  int foo(int a);
+...  int bar(int a);
+}] => [/**
+ * @interface
+...exports = MyInterface;
+] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface"
+[int foo(int a);] => [/**
+   * @abstract
+...  m_foo__int(a) {
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface.foo"
 [a] => [a] "a"
+[int bar(int a);] => [/**
+   * @abstract
+...  m_bar__int(a) {
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface.bar"
 [a] => [a] "a"

@@ -1,10 +1,45 @@
+[public class CharSet {
+  @SuppressWarnings("unused")
+...  }
+}] => [class CharSet extends java_lang_Object {
+  /**
+...exports = CharSet;
+] "com.google.j2cl.transpiler.readable.nobridgemethods.CharSet"
+[public class CharSet {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.CharSet"
 [UNKNOWN] => [super();]
+[public class CharSet {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.<ctor>"
 [UNKNOWN] => [CharSet.$clinit();]
 [UNKNOWN] => [let $instance = new CharSet();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet__();]
 [UNKNOWN] => [return $instance;]
+[public class CharSet {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet();
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet();]
+[@SuppressWarnings("unused")
+  public static void main(String... args) {
+    TreeMap<String> treeMap = new TreeMap<String>() {};
+  }] => [/**
+   * @param {Array<?string>} args
+...    let treeMap = $1.$create__();
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.main"
 [args] => [args] "args"
 [UNKNOWN] => [CharSet.$clinit();]
 [TreeMap<String> treeMap = new TreeMap<String>() {};] => [let treeMap = $1.$create__();]

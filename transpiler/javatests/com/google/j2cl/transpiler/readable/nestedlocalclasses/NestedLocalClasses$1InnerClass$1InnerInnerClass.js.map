@@ -1,3 +1,15 @@
+[class InnerInnerClass {
+          public int fieldInInnerInnerClass = localVar + localVarInInnerClass;
+        }] => [class $1InnerInnerClass extends java_lang_Object {
+  /**
+...exports = $1InnerInnerClass;
+] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass"
+[class InnerInnerClass {
+          public int fieldInInnerInnerClass = localVar + localVarInInnerClass;
+        }] => [/**
+   * Defines instance fields.
+...    this.$c_localVarInInnerClass = 0;
+  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {$1InnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass = null;]
@@ -7,10 +19,22 @@
     this.$c_localVar = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_localVarInInnerClass = 0;]
+[class InnerInnerClass {
+          public int fieldInInnerInnerClass = localVar + localVarInInnerClass;
+        }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.<ctor>"
 [UNKNOWN] => [$1InnerInnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1InnerInnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int($outer_this, $c_localVar, $c_localVarInInnerClass);]
 [UNKNOWN] => [return $instance;]
+[class InnerInnerClass {
+          public int fieldInInnerInnerClass = localVar + localVarInInnerClass;
+        }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass();
+  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass = $outer_this;]
 [UNKNOWN] => [this.$c_localVar = $c_localVar;]
 [UNKNOWN] => [this.$c_localVarInInnerClass = $c_localVarInInnerClass;]

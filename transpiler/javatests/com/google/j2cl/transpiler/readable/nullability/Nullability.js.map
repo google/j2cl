@@ -1,3 +1,15 @@
+[public class Nullability {
+  @Nonnull private String f1 = "Hello";
+...  }
+}] => [class Nullability extends java_lang_Object {
+  /**
+...exports = Nullability;
+] "com.google.j2cl.transpiler.readable.nullability.Nullability"
+[@JsConstructor
+  public Nullability(@Nonnull String a) {}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability__java_lang_String(a);
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [Nullability.$clinit();]
 [UNKNOWN] => [super();]
@@ -24,16 +36,41 @@
 [UNKNOWN] => [/** @public {List<?string>} */
     this.f_f12__com_google_j2cl_transpiler_readable_nullability_Nullability_ = null;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability__java_lang_String(a);]
+[@JsConstructor
+  public Nullability(@Nonnull String a) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability();
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability();]
+[@Nonnull
+  public String m1(@Nonnull String a, @Nonnull List<@NonNull Double> b, String c) {
+    return "";
+  }] => [/**
+   * @param {string} a
+...    return "";
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.m1"
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
 [return "";] => [return "";]
+[public String m2(String a, @Nonnull List<@NullableType Double> b) {
+    return "";
+  }] => [/**
+   * @param {?string} a
+...    return "";
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.m2"
 [a] => [a] "a"
 [b] => [b] "b"
 [return "";] => [return "";]
+[@JsMethod
+  public String m3(@Nonnull String a, @NonNull String... args) {
+    return null;
+  }] => [/**
+   * @param {string} a
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
 [a] => [a] "a"
 [args] => [args] "args"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<string>} */ ($Arrays.$create([arguments.length - 1], java_lang_String));]
@@ -42,10 +79,28 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return null;] => [return null;]
+[public void m4(@Nonnull MyFunction f) {}] => [/**
+   * @param {function(string):string} f
+...  m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability_MyFunction(f) {
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.m4"
 [f] => [f] "f"
+[@NonNull
+  public String ternary(boolean a, String s) {
+    return a ? s : s;
+  }] => [/**
+   * @param {boolean} a
+...    return a ? s : s;
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.ternary"
 [a] => [a] "a"
 [s] => [s] "s"
 [return a ? s : s;] => [return a ? s : s;]
+[@Nonnull
+  public String castingNotNeeded() {
+...    return a;
+  }] => [/**
+   * @return {string}
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.castingNotNeeded"
 [String a = "";] => [let a = "";]
 [a] => [a] "a"
 [List<@NonNull Double> b = new ArrayList<>();] => [let b = /**@type {!ArrayList<number>} */ (ArrayList.$create__());]
@@ -63,6 +118,13 @@
     }]
 [return ClassInSubpackage.getNonNullString();] => [return ClassInSubpackage.m_getNonNullString__();]
 [return a;] => [return a;]
+[@Nonnull
+  public String castingNeeded(@Nullable String a, Foo<@NonNull String> foo, @Nonnull String b) {
+...    return ClassInSubpackage.getString();
+  }] => [/**
+   * @param {?string} a
+...    return ClassInSubpackage.m_getString__();
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.castingNeeded"
 [a] => [a] "a"
 [foo] => [foo] "foo"
 [b] => [b] "b"
@@ -88,6 +150,13 @@
 [myArray] => [myArray] "myArray"
 [m3(myArray[0]);] => [this.m3(myArray[0]);]
 [return ClassInSubpackage.getString();] => [return ClassInSubpackage.m_getString__();]
+[public void functions(@Nullable MyFunction function) {
+    // Will have to generate a cast here.
+    m4(function);
+  }] => [/**
+   * @param {?function(string):string} function$1$
+...    this.m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability_MyFunction(function$1$);
+  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.functions"
 [function] => [function$1$] "function"
 [m4(function);] => [this.m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability_MyFunction(function$1$);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

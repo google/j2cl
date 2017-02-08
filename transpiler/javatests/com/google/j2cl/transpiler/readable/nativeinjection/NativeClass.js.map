@@ -1,8 +1,44 @@
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [class NativeClass extends java_lang_Object {
+  /**
+...exports = NativeClass;
+] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass"
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass"
 [UNKNOWN] => [super();]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<ctor>"
 [UNKNOWN] => [NativeClass.$clinit();]
 [UNKNOWN] => [let $instance = new NativeClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();]
 [UNKNOWN] => [return $instance;]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();
+  }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();]
+[public native String nativeInstanceMethod();] => [/**
+   * @return {?string}
+...   */
+  // native m_nativeInstanceMethod__() ] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.nativeInstanceMethod"
+[public static native NativeClass nativeStaticMethod();] => [/**
+   * @return {NativeClass}
+...   */
+  // native static m_nativeStaticMethod__() ] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.nativeStaticMethod"
 [UNKNOWN] => [java_lang_Object.$clinit();]

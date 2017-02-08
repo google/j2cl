@@ -116,12 +116,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           "missingRequire",
           "missingOverride");
       renderImports();
-      renderTypeAnnotation();
-      renderTypeBody();
-      renderStaticFieldDeclarations();
-      renderMarkImplementorCalls();
-      renderNativeSource();
-      renderExports();
+
+      sourceBuilder.emitWithMapping(
+          type.getSourcePosition(),
+          () -> {
+            renderTypeAnnotation();
+            renderTypeBody();
+            renderStaticFieldDeclarations();
+            renderMarkImplementorCalls();
+            renderNativeSource();
+            renderExports();
+          });
+
       renderSourceMapLocation();
       recordFileLengthInSourceMap();
       return sourceBuilder.build();
@@ -256,13 +262,21 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         if (method.getDescriptor().hasJsNamespace()) {
           continue;
         }
-        renderMethodJsDoc(method);
-        sourceBuilder.append("// native ");
-        emitMethodHeader(method);
+        sourceBuilder.emitWithMapping(
+            method.getSourcePosition(),
+            () -> {
+              renderMethodJsDoc(method);
+              sourceBuilder.append("// native ");
+              emitMethodHeader(method);
+            });
       } else {
-        renderMethodJsDoc(method);
-        emitMethodHeader(method);
-        statementTranspiler.renderStatement(method.getBody());
+        sourceBuilder.emitWithMapping(
+            method.getSourcePosition(),
+            () -> {
+              renderMethodJsDoc(method);
+              emitMethodHeader(method);
+              statementTranspiler.renderStatement(method.getBody());
+            });
       }
       sourceBuilder.newLines(2);
     }

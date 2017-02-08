@@ -1,9 +1,39 @@
+[@JsType
+public class JsIgnoreExample {
+...  public static final Object CONSTNAME = new Object();
+}] => [class JsIgnoreExample extends java_lang_Object {
+  /**
+...exports = JsIgnoreExample;
+] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample"
+[@JsType
+public class JsIgnoreExample {
+...  public static final Object CONSTNAME = new Object();
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample__();
+  }] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<ctor>"
 [UNKNOWN] => [JsIgnoreExample.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample__();]
+[@JsType
+public class JsIgnoreExample {
+...  public static final Object CONSTNAME = new Object();
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();
+  }] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();]
+[public static void exportedFunction() {}] => [/**
+   * @return {void}
+...    JsIgnoreExample.$clinit();
+  }] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.exportedFunction"
 [UNKNOWN] => [JsIgnoreExample.$clinit();]
+[@JsIgnore
+  public static void notExportedFunction() {}] => [/**
+   * @return {void}
+...    JsIgnoreExample.$clinit();
+  }] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.notExportedFunction"
 [UNKNOWN] => [JsIgnoreExample.$clinit();]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public static int exportedField = 10;] => [JsIgnoreExample.$f_exportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 10;]

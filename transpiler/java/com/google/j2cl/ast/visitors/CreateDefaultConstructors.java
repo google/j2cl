@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Creates a default constructor for class that does not have any explicit constructors.
@@ -54,7 +55,10 @@ public class CreateDefaultConstructors extends NormalizationPass {
                 0,
                 Method.newBuilder()
                     .setMethodDescriptor(methodDescriptor)
-                    .setSourcePosition(type.getSourcePosition())
+                    .setSourcePosition(
+                        SourcePosition.Builder.from(type.getSourcePosition())
+                            .setName(type.getDescriptor().getQualifiedSourceName() + ".<ctor>")
+                            .build())
                     .build());
           }
         });

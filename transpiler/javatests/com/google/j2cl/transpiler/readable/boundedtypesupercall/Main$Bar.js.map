@@ -1,11 +1,52 @@
+[public static class Bar<T extends Comparable> {
+
+...    }
+  }] => [/**
+ * @template C_Bar_T
+...exports = Bar;
+] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar"
+[public static class Bar<T extends Comparable> {
+
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar"
 [UNKNOWN] => [super();]
+[public static class Bar<T extends Comparable> {
+
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.<ctor>"
 [UNKNOWN] => [Bar.$clinit();]
 [UNKNOWN] => [let $instance = new Bar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__();]
 [UNKNOWN] => [return $instance;]
+[public static class Bar<T extends Comparable> {
+
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar();
+  }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar();]
+[public T getSomething() {
+      return null;
+    }] => [/**
+   * @return {C_Bar_T}
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.getSomething"
 [return null;] => [return null;]
+[public Foo<T> doSomething() {
+      return new Foo<T>(getSomething()) {
+...      };
+    }] => [/**
+   * @return {Foo<C_Bar_T>}
+...    return /**@type {!$1<C_Bar_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__java_lang_Comparable(this, this.m_getSomething__()));
+  }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.doSomething"
 [return new Foo<T>(getSomething()) {
         @Override
         public void foo() {}

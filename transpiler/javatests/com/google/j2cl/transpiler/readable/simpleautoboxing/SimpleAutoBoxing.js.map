@@ -1,44 +1,181 @@
+[public class SimpleAutoBoxing {
+  public Boolean box(boolean b) {
+...  }
+}] => [class SimpleAutoBoxing extends java_lang_Object {
+  /**
+...exports = SimpleAutoBoxing;
+] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing"
+[public class SimpleAutoBoxing {
+  public Boolean box(boolean b) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing"
 [UNKNOWN] => [super();]
+[public class SimpleAutoBoxing {
+  public Boolean box(boolean b) {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.<ctor>"
 [UNKNOWN] => [SimpleAutoBoxing.$clinit();]
 [UNKNOWN] => [let $instance = new SimpleAutoBoxing();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing__();]
 [UNKNOWN] => [return $instance;]
+[public class SimpleAutoBoxing {
+  public Boolean box(boolean b) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();]
+[public Boolean box(boolean b) {
+    return b; // auto-boxing by return
+  }] => [/**
+   * @param {boolean} b
+...    return b;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [b] => [b] "b"
 [return b;] => [return b;]
+[public Double box(double d) {
+    return d; // auto-boxing by return
+  }] => [/**
+   * @param {number} d
+...    return d;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [d] => [d] "d"
 [return d;] => [return d;]
+[public Byte box(byte b) {
+    return b; // auto-boxing by return
+  }] => [/**
+   * @param {number} b
+...    return Byte.m_valueOf__byte(b);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [b] => [b] "b"
 [return b;] => [return Byte.m_valueOf__byte(b);]
+[public Float box(float f) {
+    return f; // auto-boxing by return
+  }] => [/**
+   * @param {number} f
+...    return Float.m_valueOf__float(f);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [f] => [f] "f"
 [return f;] => [return Float.m_valueOf__float(f);]
+[public Integer box(int i) {
+    return i; // auto-boxing by return
+  }] => [/**
+   * @param {number} i
+...    return Integer.m_valueOf__int(i);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [i] => [i] "i"
 [return i;] => [return Integer.m_valueOf__int(i);]
+[public Long box(long l) {
+    return l; // auto-boxing by return
+  }] => [/**
+   * @param {!$Long} l
+...    return Long.m_valueOf__long(l);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [l] => [l] "l"
 [return l;] => [return Long.m_valueOf__long(l);]
+[public Short box(short s) {
+    return s; // auto-boxing by return
+  }] => [/**
+   * @param {number} s
+...    return Short.m_valueOf__short(s);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [s] => [s] "s"
 [return s;] => [return Short.m_valueOf__short(s);]
+[public Character box(char c) {
+    return c; // auto-boxing by return
+  }] => [/**
+   * @param {number} c
+...    return Character.m_valueOf__char(c);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.box"
 [c] => [c] "c"
 [return c;] => [return Character.m_valueOf__char(c);]
+[public boolean unbox(Boolean b) {
+    return b; // auto-unboxing by return
+  }] => [/**
+   * @param {?boolean} b
+...    return Boolean.m_booleanValue__java_lang_Boolean(b);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [b] => [b] "b"
 [return b;] => [return Boolean.m_booleanValue__java_lang_Boolean(b);]
+[public double unbox(Double d) {
+    return d; // auto-unboxing by return
+  }] => [/**
+   * @param {?number} d
+...    return Double.m_doubleValue__java_lang_Double(d);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [d] => [d] "d"
 [return d;] => [return Double.m_doubleValue__java_lang_Double(d);]
+[public byte unbox(Byte b) {
+    return b; // auto-unboxing by return
+  }] => [/**
+   * @param {Byte} b
+...    return b.m_byteValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [b] => [b] "b"
 [return b;] => [return b.m_byteValue__();]
+[public float unbox(Float f) {
+    return f; // auto-unboxing by return
+  }] => [/**
+   * @param {Float} f
+...    return f.m_floatValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [f] => [f] "f"
 [return f;] => [return f.m_floatValue__();]
+[public int unbox(Integer i) {
+    return i; // auto-unboxing by return
+  }] => [/**
+   * @param {Integer} i
+...    return i.m_intValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [i] => [i] "i"
 [return i;] => [return i.m_intValue__();]
+[public long unbox(Long l) {
+    return l; // auto-unboxing by return
+  }] => [/**
+   * @param {Long} l
+...    return l.m_longValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [l] => [l] "l"
 [return l;] => [return l.m_longValue__();]
+[public short unbox(Short s) {
+    return s; // auto-unboxing by return
+  }] => [/**
+   * @param {Short} s
+...    return s.m_shortValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [s] => [s] "s"
 [return s;] => [return s.m_shortValue__();]
+[public char unbox(Character c) {
+    return c; // auto-unboxing by return
+  }] => [/**
+   * @param {Character} c
+...    return c.m_charValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.unbox"
 [c] => [c] "c"
 [return c;] => [return c.m_charValue__();]
+[public double takesAndReturnsPrimitiveDouble(double d) {
+    return d;
+  }] => [/**
+   * @param {number} d
+...    return d;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.takesAndReturnsPrimitiveDouble"
 [d] => [d] "d"
 [return d;] => [return d;]
+[@SuppressWarnings("unused")
+  public void testNull() {
+...    Long l = null;
+  }] => [/**
+   * @return {void}
+...    let l = null;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testNull"
 [Boolean b = null;] => [let b = null;]
 [b] => [b] "b"
 [Double d = null;] => [let d = null;]
@@ -47,6 +184,13 @@
 [i] => [i] "i"
 [Long l = null;] => [let l = null;]
 [l] => [l] "l"
+[@SuppressWarnings("unused")
+  public void testBoxing() {
+...    boxI = ~boxI;
+  }] => [/**
+   * @return {void}
+...    boxI = Integer.m_valueOf__int(~boxI.m_intValue__());
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boolean bool = true;] => [let bool = true;]
 [bool] => [bool] "bool"
 [double d = 1111.0;] => [let d = 1111.0;]
@@ -107,6 +251,13 @@
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__());]
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());]
 [boxI = ~boxI;] => [boxI = Integer.m_valueOf__int(~boxI.m_intValue__());]
+[@SuppressWarnings("unused")
+  public void testUnboxing() {
+...    i = ~boxI;
+  }] => [/**
+   * @return {void}
+...    i = ~boxI.m_intValue__();
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [Boolean boxBool = new Boolean(true);] => [let boxBool = Boolean.$create__boolean(true);]
 [boxBool] => [boxBool] "boxBool"
 [Double boxD = new Double(1111.0);] => [let boxD = Double.$create__double(1111.0);]
@@ -168,6 +319,13 @@
 [i = +boxI;] => [i = boxI.m_intValue__();]
 [i = -boxI;] => [i = -boxI.m_intValue__();]
 [i = ~boxI;] => [i = ~boxI.m_intValue__();]
+[@SuppressWarnings("unused")
+  public void testUnboxingBoolean() {
+...    assert br;
+  }] => [/**
+   * @return {void}
+...    $Asserts.$enabled() && $Asserts.$assert(br);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingBoolean"
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);]
 [boxB1] => [boxB1] "boxB1"
 [Boolean boxB2 = new Boolean(false);] => [let boxB2 = Boolean.$create__boolean(false);]
@@ -220,6 +378,13 @@
 [br = boxB1 ^= boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^ Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
 [assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
 [assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[@SuppressWarnings("unused")
+  public void testUnboxingEquality() {
+...    assert i != boxI;
+  }] => [/**
+   * @return {void}
+...    $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingEquality"
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
 [boxB] => [boxB] "boxB"
 [boolean b = false;] => [let b = false;]
@@ -236,6 +401,13 @@
 [assert boxI == i;] => [$Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue__() == i);]
 [assert i != i;] => [$Asserts.$enabled() && $Asserts.$assert(i != i);]
 [assert i != boxI;] => [$Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());]
+[public void testAssertStatement() {
+    Boolean boxB = new Boolean(true);
+...    assert b;
+  }] => [/**
+   * @return {void}
+...    $Asserts.$enabled() && $Asserts.$assert(b);
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
 [boxB] => [boxB] "boxB"
 [boolean b = true;] => [let b = true;]

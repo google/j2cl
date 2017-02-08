@@ -1,21 +1,59 @@
+[class ESWGInner {
+      public int value;
+...      }
+    }] => [/**
+ * @template C_ESWGOuter_T
+...exports = ESWGInner;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner"
+[class ESWGInner {
+      public int value;
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 0;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {ESWGOuter<C_ESWGOuter_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 0;]
+[public ESWGInner() {
+        value = 1;
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.<ctor>"
 [UNKNOWN] => [ESWGInner.$clinit();]
 [UNKNOWN] => [let $instance = new ESWGInner();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public ESWGInner() {
+        value = 1;
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 1;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner();]
 [value = 1;] => [this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 1;]
+[public ESWGInner(int value) {
+        this.value = value;
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [ESWGInner.$clinit();]
 [UNKNOWN] => [let $instance = new ESWGInner();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter__int($outer_this, value);]
 [UNKNOWN] => [return $instance;]
+[public ESWGInner(int value) {
+        this.value = value;
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = value;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

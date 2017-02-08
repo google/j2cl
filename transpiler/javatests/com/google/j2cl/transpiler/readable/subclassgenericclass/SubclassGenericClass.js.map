@@ -1,8 +1,24 @@
+[public class SubclassGenericClass extends GenericClass<SubclassGenericClass> {}] => [/**
+ * @extends {GenericClass<SubclassGenericClass>}
+...exports = SubclassGenericClass;
+] "com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass"
+[public class SubclassGenericClass extends GenericClass<SubclassGenericClass> {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass"
 [UNKNOWN] => [super();]
+[public class SubclassGenericClass extends GenericClass<SubclassGenericClass> {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass.<ctor>"
 [UNKNOWN] => [SubclassGenericClass.$clinit();]
 [UNKNOWN] => [let $instance = new SubclassGenericClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass__();]
 [UNKNOWN] => [return $instance;]
+[public class SubclassGenericClass extends GenericClass<SubclassGenericClass> {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass();
+  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass();]
 [UNKNOWN] => [GenericClass.$clinit();]

@@ -1,8 +1,24 @@
+[class AnotherClass {}] => [class AnotherClass extends java_lang_Object {
+  /**
+...exports = AnotherClass;
+] "com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass"
+[class AnotherClass {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass"
 [UNKNOWN] => [super();]
+[class AnotherClass {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass.<ctor>"
 [UNKNOWN] => [AnotherClass.$clinit();]
 [UNKNOWN] => [let $instance = new AnotherClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__();]
 [UNKNOWN] => [return $instance;]
+[class AnotherClass {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();
+  }] "com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

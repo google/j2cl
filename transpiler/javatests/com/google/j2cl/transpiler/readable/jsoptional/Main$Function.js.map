@@ -1,2 +1,13 @@
+[@JsFunction
+  static interface Function {
+    Object f1(@JsOptional String i, Object... args);
+  }] => [/**
+ * @interface
+...exports = com_google_j2cl_transpiler_readable_jsoptional_Main_Function;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.Function"
+[Object f1(@JsOptional String i, Object... args);] => [/**
+   * @abstract
+...  m_f1__java_lang_String__arrayOf_java_lang_Object(i, args) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.Function.f1"
 [i] => [i] "i"
 [args] => [args] "args"

@@ -1,0 +1,10 @@
+[public interface MyInterface {
+  int foo();
+}] => [/**
+ * @interface
+...exports = MyInterface;
+] "com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface"
+[int foo();] => [/**
+   * @abstract
+...  m_foo__() {
+  }] "com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface.foo"

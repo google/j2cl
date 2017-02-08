@@ -1,9 +1,35 @@
+[public static class StringList extends AbstractStringList {}] => [class StringList extends AbstractStringList {
+  /**
+...exports = StringList;
+] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList"
+[public static class StringList extends AbstractStringList {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList"
 [UNKNOWN] => [super();]
+[public static class StringList extends AbstractStringList {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList.<ctor>"
 [UNKNOWN] => [StringList.$clinit();]
 [UNKNOWN] => [let $instance = new StringList();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList__();]
 [UNKNOWN] => [return $instance;]
+[public static class StringList extends AbstractStringList {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList();
+  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList();]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  m_getFoo__java_lang_String(arg0) {
+    return this.m_getFoo__java_lang_Object(arg0);
+  }]
 [UNKNOWN] => [return this.m_getFoo__java_lang_Object(arg0);]
 [UNKNOWN] => [AbstractStringList.$clinit();]

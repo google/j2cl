@@ -1,10 +1,26 @@
+[public class B {}] => [class B extends java_lang_Object {
+  /**
+...exports = B;
+] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B"
+[public class B {}] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B = null;
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NewInnerClassWithSameOuter} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B = null;]
+[public class B {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.<ctor>"
 [UNKNOWN] => [B.$clinit();]
 [UNKNOWN] => [let $instance = new B();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class B {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B();
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B();]

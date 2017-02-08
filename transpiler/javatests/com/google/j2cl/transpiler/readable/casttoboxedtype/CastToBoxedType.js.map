@@ -1,10 +1,45 @@
+[public class CastToBoxedType {
+  @SuppressWarnings("unused")
+...  }
+}] => [class CastToBoxedType extends java_lang_Object {
+  /**
+...exports = CastToBoxedType;
+] "com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType"
+[public class CastToBoxedType {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType"
 [UNKNOWN] => [super();]
+[public class CastToBoxedType {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType.<ctor>"
 [UNKNOWN] => [CastToBoxedType.$clinit();]
 [UNKNOWN] => [let $instance = new CastToBoxedType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType__();]
 [UNKNOWN] => [return $instance;]
+[public class CastToBoxedType {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType();
+  }] "com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType();]
+[@SuppressWarnings("unused")
+  public void test() {
+...    Boolean bool = (Boolean) o;
+  }] => [/**
+   * @return {void}
+...    let bool = /**@type {?boolean} */ ($Casts.to(o, Boolean));
+  }] "com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType.test"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);]
 [o] => [o] "o"
 [Byte b = (Byte) o;] => [let b = /**@type {Byte} */ ($Casts.to(o, Byte));]

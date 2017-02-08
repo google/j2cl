@@ -1,14 +1,49 @@
+[public class SynchronizedStatement {
+  private int a;
+...  }
+}] => [class SynchronizedStatement extends java_lang_Object {
+  /**
+...exports = SynchronizedStatement;
+] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement"
+[public class SynchronizedStatement {
+  private int a;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ = 0;
+  }] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ = 0;]
+[public class SynchronizedStatement {
+  private int a;
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.<ctor>"
 [UNKNOWN] => [SynchronizedStatement.$clinit();]
 [UNKNOWN] => [let $instance = new SynchronizedStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement__();]
 [UNKNOWN] => [return $instance;]
+[public class SynchronizedStatement {
+  private int a;
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement();
+  }] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement();]
+[public void main() {
+    synchronized (this) {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
 [synchronized (this) {
       a++;
       b--;

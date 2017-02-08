@@ -1,2 +1,13 @@
+[@JsFunction
+  interface JsBiFunction<T, U, V> {
+    V apply(T t, U u);
+  }] => [/**
+ * @interface
+...exports = JsBiFunction;
+] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.JsBiFunction"
+[V apply(T t, U u);] => [/**
+   * @abstract
+...  m_apply__java_lang_Object__java_lang_Object(t, u) {
+  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.JsBiFunction.apply"
 [t] => [t] "t"
 [u] => [u] "u"

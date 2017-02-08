@@ -1,10 +1,38 @@
+[public class Foo {
+
+  public Outer outer = new Outer();
+}] => [class Foo extends java_lang_Object {
+  /**
+...exports = Foo;
+] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo"
+[public class Foo {
+
+  public Outer outer = new Outer();
+}] => [/**
+   * Defines instance fields.
+...    this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo = null;
+  }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Outer} */
     this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo = null;]
+[public class Foo {
+
+  public Outer outer = new Outer();
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
 [UNKNOWN] => [let $instance = new Foo();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo__();]
 [UNKNOWN] => [return $instance;]
+[public class Foo {
+
+  public Outer outer = new Outer();
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo();
+  }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,18 +1,83 @@
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [/**
+ * @implements {MyInterface}
+...exports = Child;
+] "com.google.j2cl.transpiler.readable.instancejsmethods.Child"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child"
 [UNKNOWN] => [super();]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [let $instance = new Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__();]
 [UNKNOWN] => [return $instance;]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Child();
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Child();]
+[/**
+   * Non-JsMethod that overrides a JsMethod with renaming.
+...    return a + b + 1;
+  }] => [/**
+   * @override
+...    return a + b + 1;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b + 1;] => [return a + b + 1;]
+[/**
+   * Non-JsMethod that overrides a JsMethod without renaming.
+...    return a * b + 1;
+  }] => [/**
+   * @override
+...    return a * b + 1;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.bar"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a * b + 1;] => [return a * b + 1;]
+[/**
+   * JsMethod that overrides a JsMethod.
+...    return a;
+  }] => [/**
+   * @override
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.foo"
 [a] => [a] "a"
 [return a;] => [return a;]
+[/**
+   * JsMethod that overrides a non-JsMethod from its interface.
+...    return 1;
+  }] => [/**
+   * @return {number}
+...    return 1;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.intfFoo"
 [return 1;] => [return 1;]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_intfFoo__() {
+    return this.intfFoo();
+  }]
 [UNKNOWN] => [return this.intfFoo();]
 [UNKNOWN] => [Parent.$clinit();]

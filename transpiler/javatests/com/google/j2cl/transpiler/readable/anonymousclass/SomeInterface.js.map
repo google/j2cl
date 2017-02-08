@@ -1,3 +1,10 @@
+[interface SomeInterface {
+  SomeClass implicitlyStatic =
+...      };
+}] => [/**
+ * @interface
+...exports = SomeInterface;
+] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface"
 [SomeClass implicitlyStatic =
       new SomeClass(1) {
         public String foo() {

@@ -1,16 +1,58 @@
+[public class AutoBoxingSideEffect {
+  public Integer foo;
+...  }
+}] => [class AutoBoxingSideEffect extends java_lang_Object {
+  /**
+...exports = AutoBoxingSideEffect;
+] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect"
+[public class AutoBoxingSideEffect {
+  public Integer foo;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_ = 0;
+  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Integer} */
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_ = 0;]
+[public class AutoBoxingSideEffect {
+  public Integer foo;
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.<ctor>"
 [UNKNOWN] => [AutoBoxingSideEffect.$clinit();]
 [UNKNOWN] => [let $instance = new AutoBoxingSideEffect();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect__();]
 [UNKNOWN] => [return $instance;]
+[public class AutoBoxingSideEffect {
+  public Integer foo;
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
+  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();]
+[public AutoBoxingSideEffect getWithSideEffect() {
+    sideEffect++;
+    return this;
+  }] => [/**
+   * @return {AutoBoxingSideEffect}
+...    return this;
+  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.getWithSideEffect"
 [sideEffect++;] => [this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_++;]
 [return this;] => [return this;]
+[@SuppressWarnings("unused")
+  public void main() {
+...    b++;
+  }] => [/**
+   * @return {void}
+...    ($value$3$ = b, b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1)));
+  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [UNKNOWN] => [let $qualifier, $qualifier$1$, $value, $value$1$, $qualifier$2$, $value$2$, $value$3$;]
 [Integer i = 10000;] => [let i = Integer.m_valueOf__int(10000);]
 [i] => [i] "i"

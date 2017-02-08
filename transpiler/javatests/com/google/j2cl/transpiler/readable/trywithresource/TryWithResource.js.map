@@ -1,10 +1,45 @@
+[public class TryWithResource {
+  static class ClosableThing implements AutoCloseable {
+...  }
+}] => [class TryWithResource extends java_lang_Object {
+  /**
+...exports = TryWithResource;
+] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource"
+[public class TryWithResource {
+  static class ClosableThing implements AutoCloseable {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource"
 [UNKNOWN] => [super();]
+[public class TryWithResource {
+  static class ClosableThing implements AutoCloseable {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.<ctor>"
 [UNKNOWN] => [TryWithResource.$clinit();]
 [UNKNOWN] => [let $instance = new TryWithResource();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource__();]
 [UNKNOWN] => [return $instance;]
+[public class TryWithResource {
+  static class ClosableThing implements AutoCloseable {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource();
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource();]
+[public static void tryWithResource() {
+    try (ClosableThing thing = new ClosableThing()) {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
 [UNKNOWN] => [TryWithResource.$clinit();]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
@@ -47,6 +82,13 @@
           throw $Exceptions.toJs($primaryExc);
         }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
+[public static void tryWithResourceMultipleResources(String[] args) {
+    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+...    }
+  }] => [/**
+   * @param {Array<?string>} args
+...    }
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [args] => [args] "args"
 [UNKNOWN] => [TryWithResource.$clinit();]
 [try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {

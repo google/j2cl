@@ -1,10 +1,45 @@
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [class MultipleCatch extends java_lang_Object {
+  /**
+...exports = MultipleCatch;
+] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch"
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch"
 [UNKNOWN] => [super();]
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.<ctor>"
 [UNKNOWN] => [MultipleCatch.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleCatch();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch__();]
 [UNKNOWN] => [return $instance;]
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
+  }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();]
+[public void main() {
+    try {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [try {
       throw new ClassCastException();
     } catch (NullPointerException | ClassCastException e) {

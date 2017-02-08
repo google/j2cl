@@ -1,10 +1,45 @@
+[/**
+ * Test String devirtualization.
+...  }
+}] => [class StringCalls extends java_lang_Object {
+  /**
+...exports = StringCalls;
+] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls"
+[/**
+ * Test String devirtualization.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls"
 [UNKNOWN] => [super();]
+[/**
+ * Test String devirtualization.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<ctor>"
 [UNKNOWN] => [StringCalls.$clinit();]
 [UNKNOWN] => [let $instance = new StringCalls();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__();]
 [UNKNOWN] => [return $instance;]
+[/**
+ * Test String devirtualization.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls();]
+[public void main() {
+    String literal = "String";
+...    String newString = literal.toString();
+  }] => [/**
+   * @return {void}
+...    let newString = $Objects.m_toString__java_lang_Object(literal);
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [String literal = "String";] => [let literal = "String";]
 [literal] => [literal] "literal"
 [String sub = literal.substring(1);] => [let sub = java_lang_String.m_substring__java_lang_String__int(literal, 1);]

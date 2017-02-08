@@ -1,7 +1,28 @@
+[@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+public class BoundedJsArray<V> {
+...  }
+}] => [class BoundedJsArray$$Overlay {
+  /**
+...exports = BoundedJsArray$$Overlay;
+] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray"
+[/**
+   * Creates a new native JS array.
+...    return array;
+  }] => [/**
+   * @template M_V
+...    return array;
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.create"
 [UNKNOWN] => [BoundedJsArray$$Overlay.$clinit();]
 [BoundedJsArray<V> array = null;] => [let array = null;]
 [array] => [array] "array"
 [return array;] => [return array;]
+[/**
+   * Creates a new native JS array.
+...    return array;
+  }] => [/**
+   * @template M_V
+...    return array;
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.create"
 [size] => [size] "size"
 [UNKNOWN] => [BoundedJsArray$$Overlay.$clinit();]
 [BoundedJsArray<V> array = new BoundedJsArray<>(size);] => [let array = /**@type {!Array<*>} */ (new Array(size));]

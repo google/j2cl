@@ -1,9 +1,44 @@
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [/**
+ * @implements {SomeInterface}
+...exports = SomeClass;
+] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass"
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass"
 [UNKNOWN] => [super();]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<ctor>"
 [UNKNOWN] => [SomeClass.$clinit();]
 [UNKNOWN] => [let $instance = new SomeClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass__();]
 [UNKNOWN] => [return $instance;]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();
+  }] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();]
+[@Override
+  public int run() {
+    return 0;
+  }] => [/**
+   * @override
+...    return 0;
+  }] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.run"
 [return 0;] => [return 0;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

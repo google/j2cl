@@ -1,8 +1,36 @@
+[public class DefaultMethods {
+  interface List<T> {
+...  static class StringList implements List<String> {}
+}] => [class DefaultMethods extends java_lang_Object {
+  /**
+...exports = DefaultMethods;
+] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods"
+[public class DefaultMethods {
+  interface List<T> {
+...  static class StringList implements List<String> {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods"
 [UNKNOWN] => [super();]
+[public class DefaultMethods {
+  interface List<T> {
+...  static class StringList implements List<String> {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.<ctor>"
 [UNKNOWN] => [DefaultMethods.$clinit();]
 [UNKNOWN] => [let $instance = new DefaultMethods();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods__();]
 [UNKNOWN] => [return $instance;]
+[public class DefaultMethods {
+  interface List<T> {
+...  static class StringList implements List<String> {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods();
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

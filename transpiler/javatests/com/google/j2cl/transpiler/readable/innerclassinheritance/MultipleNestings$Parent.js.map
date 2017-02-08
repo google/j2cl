@@ -1,11 +1,39 @@
+[public class Parent {
+    public void fun() {}
+  }] => [class Parent extends java_lang_Object {
+  /**
+...exports = Parent;
+] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent"
+[public class Parent {
+    public void fun() {}
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent = null;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {MultipleNestings} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent = null;]
+[public class Parent {
+    public void fun() {}
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class Parent {
+    public void fun() {}
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent();]
+[public void fun() {}] => [/**
+   * @return {void}
+...  m_fun__() {
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent.fun"
 [UNKNOWN] => [java_lang_Object.$clinit();]

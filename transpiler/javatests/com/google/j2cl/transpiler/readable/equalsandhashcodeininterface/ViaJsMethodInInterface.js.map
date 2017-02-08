@@ -1,0 +1,17 @@
+[public interface ViaJsMethodInInterface {
+
+...  void notHashCode();
+}] => [/**
+ * @interface
+...exports = ViaJsMethodInInterface;
+] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface"
+[@JsMethod(name = "equals")
+  void notEquals();] => [/**
+   * @abstract
+...  equals() {
+  }] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface.notEquals"
+[@JsMethod(name = "hashCode")
+  void notHashCode();] => [/**
+   * @abstract
+...  hashCode() {
+  }] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface.notHashCode"

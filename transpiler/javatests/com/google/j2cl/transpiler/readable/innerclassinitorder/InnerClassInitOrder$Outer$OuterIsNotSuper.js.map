@@ -1,12 +1,46 @@
+[public class OuterIsNotSuper {
+      public int getValue() {
+...      }
+    }] => [class OuterIsNotSuper extends java_lang_Object {
+  /**
+...exports = OuterIsNotSuper;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper"
+[public class OuterIsNotSuper {
+      public int getValue() {
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper = null;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper = null;]
+[public class OuterIsNotSuper {
+      public int getValue() {
+...      }
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.<ctor>"
 [UNKNOWN] => [OuterIsNotSuper.$clinit();]
 [UNKNOWN] => [let $instance = new OuterIsNotSuper();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class OuterIsNotSuper {
+      public int getValue() {
+...      }
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper();]
+[public int getValue() {
+        return value;
+      }] => [/**
+   * @return {number}
+...    return this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.getValue"
 [return value;] => [return this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

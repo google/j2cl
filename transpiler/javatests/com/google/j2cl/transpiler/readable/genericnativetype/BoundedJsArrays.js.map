@@ -1,12 +1,46 @@
+[public class BoundedJsArrays {
+  private BoundedJsArrays() {}
+...  }
+}] => [class BoundedJsArrays extends java_lang_Object {
+  /**
+...exports = BoundedJsArrays;
+] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays"
+[public class BoundedJsArrays {
+  private BoundedJsArrays() {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays"
 [UNKNOWN] => [super();]
+[private BoundedJsArrays() {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.<ctor>"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [UNKNOWN] => [let $instance = new BoundedJsArrays();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays__();]
 [UNKNOWN] => [return $instance;]
+[private BoundedJsArrays() {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays();
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays();]
+[public static <V> BoundedJsArray<V> create() {
+    return BoundedJsArray.<V>create();
+  }] => [/**
+   * @template M_V
+...    return BoundedJsArray$$Overlay.m_create__();
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.create"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [return BoundedJsArray.<V>create();] => [return BoundedJsArray$$Overlay.m_create__();]
+[public static <V> BoundedJsArray<V> createWithSize(int size) {
+    return BoundedJsArray.<V>create(size);
+  }] => [/**
+   * @template M_V
+...    return BoundedJsArray$$Overlay.m_create__int(size);
+  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.createWithSize"
 [size] => [size] "size"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [return BoundedJsArray.<V>create(size);] => [return BoundedJsArray$$Overlay.m_create__int(size);]

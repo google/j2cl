@@ -1,6 +1,34 @@
+[abstract static class B extends A implements J {
+    @SuppressWarnings("unused")
+...    }
+  }] => [/**
+ * @abstract
+...exports = B;
+] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.B"
+[abstract static class B extends A implements J {
+    @SuppressWarnings("unused")
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.B"
 [UNKNOWN] => [super();]
+[abstract static class B extends A implements J {
+    @SuppressWarnings("unused")
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_B();
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_B();]
+[@SuppressWarnings("unused")
+    @Override
+...      }
+    }] => [/**
+   * @override
+...    }
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.bar"
 [if (false) {
         bar();
       }] => [if (false) {

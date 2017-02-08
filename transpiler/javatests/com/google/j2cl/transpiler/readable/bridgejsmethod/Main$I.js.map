@@ -1,1 +1,13 @@
+[/**
+   * Interface with JsMethod.
+...    T fun(T t);
+  }] => [/**
+ * @interface
+...exports = I;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I"
+[@JsMethod
+    T fun(T t);] => [/**
+   * @abstract
+...  fun(t) {
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I.fun"
 [t] => [t] "t"

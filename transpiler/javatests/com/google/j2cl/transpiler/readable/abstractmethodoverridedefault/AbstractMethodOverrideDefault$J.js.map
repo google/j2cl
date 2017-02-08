@@ -1,0 +1,15 @@
+[interface J {
+    default void foo() {}
+...    void bar();
+  }] => [/**
+ * @interface
+...exports = J;
+] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J"
+[default void foo() {}] => [/**
+   * @return {void}
+...  m_foo__() {
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.foo"
+[void bar();] => [/**
+   * @abstract
+...  m_bar__() {
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.bar"

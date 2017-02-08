@@ -1,10 +1,45 @@
+[public class ObjectCalls {
+  @SuppressWarnings({"ArrayEquals", "ArrayHashCode", "ArrayToString"})
+...  }
+}] => [class ObjectCalls extends java_lang_Object {
+  /**
+...exports = ObjectCalls;
+] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls"
+[public class ObjectCalls {
+  @SuppressWarnings({"ArrayEquals", "ArrayHashCode", "ArrayToString"})
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls"
 [UNKNOWN] => [super();]
+[public class ObjectCalls {
+  @SuppressWarnings({"ArrayEquals", "ArrayHashCode", "ArrayToString"})
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.<ctor>"
 [UNKNOWN] => [ObjectCalls.$clinit();]
 [UNKNOWN] => [let $instance = new ObjectCalls();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls__();]
 [UNKNOWN] => [return $instance;]
+[public class ObjectCalls {
+  @SuppressWarnings({"ArrayEquals", "ArrayHashCode", "ArrayToString"})
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();]
+[@SuppressWarnings({"ArrayEquals", "ArrayHashCode", "ArrayToString"})
+  public void main() {
+...    objectCalls.getClass();
+  }] => [/**
+   * @return {void}
+...    $Objects.m_getClass__java_lang_Object(objectCalls);
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.main"
 [Object object = new Object();] => [let object = java_lang_Object.$create__();]
 [object] => [object] "object"
 [object.equals(object);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(object, object);]
@@ -17,6 +52,13 @@
 [objectCalls.hashCode();] => [$Objects.m_hashCode__java_lang_Object(objectCalls);]
 [objectCalls.toString();] => [$Objects.m_toString__java_lang_Object(objectCalls);]
 [objectCalls.getClass();] => [$Objects.m_getClass__java_lang_Object(objectCalls);]
+[public void test() {
+    equals(new Object());
+...    this.getClass();
+  }] => [/**
+   * @return {void}
+...    this.m_getClass__();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.test"
 [equals(new Object());] => [this.equals(java_lang_Object.$create__());]
 [hashCode();] => [this.hashCode();]
 [toString();] => [this.toString();]

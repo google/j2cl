@@ -1,6 +1,21 @@
+[/**
+ * Currently this class is used to test that no bridge method is created for constructor.
+...  public JsTypesWithConstructor() {}
+}] => [class JsTypesWithConstructor extends java_lang_Object {
+  /**
+...exports = JsTypesWithConstructor;
+] "com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor"
+[public JsTypesWithConstructor() {}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor__();
+  }] "com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor.<ctor>"
 [UNKNOWN] => [JsTypesWithConstructor.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor__();]
+[public JsTypesWithConstructor() {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+  }] "com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,10 +1,26 @@
+[private class SomeObject {}] => [class SomeObject extends java_lang_Object {
+  /**
+...exports = SomeObject;
+] "com.google.j2cl.transpiler.readable.array.Array.SomeObject"
+[private class SomeObject {}] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_array_Array_SomeObject = null;
+  }] "com.google.j2cl.transpiler.readable.array.Array.SomeObject"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {com_google_j2cl_transpiler_readable_array_Array} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_array_Array_SomeObject = null;]
+[private class SomeObject {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.array.Array.SomeObject.<ctor>"
 [UNKNOWN] => [SomeObject.$clinit();]
 [UNKNOWN] => [let $instance = new SomeObject();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_array_Array_SomeObject__com_google_j2cl_transpiler_readable_array_Array($outer_this);]
 [UNKNOWN] => [return $instance;]
+[private class SomeObject {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_array_Array_SomeObject();
+  }] "com.google.j2cl.transpiler.readable.array.Array.SomeObject.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_array_Array_SomeObject = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_array_Array_SomeObject();]

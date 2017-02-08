@@ -1,8 +1,36 @@
+[public class InnerClasses {
+  interface A {
+...  }
+}] => [class InnerClasses extends java_lang_Object {
+  /**
+...exports = InnerClasses;
+] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses"
+[public class InnerClasses {
+  interface A {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses"
 [UNKNOWN] => [super();]
+[public class InnerClasses {
+  interface A {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.<ctor>"
 [UNKNOWN] => [InnerClasses.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClasses();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses__();]
 [UNKNOWN] => [return $instance;]
+[public class InnerClasses {
+  interface A {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses();
+  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

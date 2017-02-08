@@ -1,1 +1,12 @@
+[@JsFunction
+  public interface JsFunc<R, T> {
+    R execute(T t);
+  }] => [/**
+ * @interface
+...exports = JsFunc;
+] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsFunc"
+[R execute(T t);] => [/**
+   * @abstract
+...  m_execute__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsFunc.execute"
 [t] => [t] "t"

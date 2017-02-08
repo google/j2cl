@@ -1,13 +1,52 @@
+[/**
+     * Inner class that extends the same class as its enclosing class extends.
+...      }
+    }] => [class InnerClass2 extends Parent {
+  /**
+...exports = InnerClass2;
+] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2"
+[/**
+     * Inner class that extends the same class as its enclosing class extends.
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 = null;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClass1} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 = null;]
+[/**
+     * Inner class that extends the same class as its enclosing class extends.
+...      }
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.<ctor>"
 [UNKNOWN] => [InnerClass2.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass2();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1($outer_this);]
 [UNKNOWN] => [return $instance;]
+[/**
+     * Inner class that extends the same class as its enclosing class extends.
+...      }
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings($outer_this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2();]
+[public void funInI2() {}] => [/**
+   * @return {void}
+...  m_funInI2__() {
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.funInI2"
+[public void test() {
+        // call to inherited fun() with different qualifier
+...        funInI2(); // this.funInI2();
+      }] => [/**
+   * @return {void}
+...    this.m_funInI2__();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.test"
 [this.fun();] => [this.m_fun__();]
 [fun();] => [this.m_fun__();]
 [InnerClass1.this.fun();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2.m_fun__();]

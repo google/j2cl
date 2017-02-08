@@ -1,15 +1,64 @@
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [class SimpleLocalClass extends java_lang_Object {
+  /**
+...exports = SimpleLocalClass;
+] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass"
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass"
 [UNKNOWN] => [super();]
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<ctor>"
 [UNKNOWN] => [SimpleLocalClass.$clinit();]
 [UNKNOWN] => [let $instance = new SimpleLocalClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__();]
 [UNKNOWN] => [return $instance;]
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();]
+[public void test(final int p) {
+    final int localVar = 1;
+...    new InnerClassWithoutCaptures();
+  }] => [/**
+   * @param {number} p
+...    $1InnerClassWithoutCaptures.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(this);
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.test"
 [p] => [p] "p"
 [final int localVar = 1;] => [let localVar = 1;]
 [localVar] => [localVar] "localVar"
 [new InnerClass().fun();] => [$1InnerClass.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int(this, localVar, p).m_fun__();]
 [new InnerClassWithoutCaptures();] => [$1InnerClassWithoutCaptures.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(this);]
+[public void fun() {
+    final int localVar = 1;
+...    }
+  }] => [/**
+   * @return {void}
+...    let localVar = 1;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.fun"
 [final int localVar = 1;] => [let localVar = 1;]
 [localVar] => [localVar] "localVar"
+[public void foo() {
+    class Abc$InnerClass {}
+    class Klm$InnerClass {}
+  }] => [/**
+   * @return {void}
+...  m_foo__() {
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.foo"
 [UNKNOWN] => [java_lang_Object.$clinit();]

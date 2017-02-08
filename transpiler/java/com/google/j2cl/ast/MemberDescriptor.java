@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
+import com.google.j2cl.common.J2clUtils;
 
 /** Abstract base class for member descriptors. */
 @Visitable
@@ -73,6 +74,12 @@ public abstract class MemberDescriptor extends Node
 
   public boolean hasJsNamespace() {
     return getJsInfo().getJsNamespace() != null;
+  }
+
+  /** Returns a qualified source name for the member. */
+  public String getQualifiedSourceName() {
+    return J2clUtils.format(
+        "%s.%s", getEnclosingClassTypeDescriptor().getQualifiedSourceName(), getName());
   }
 
   @Override

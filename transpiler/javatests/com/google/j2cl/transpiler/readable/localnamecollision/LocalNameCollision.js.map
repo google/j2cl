@@ -1,4 +1,25 @@
+[public class LocalNameCollision {
+  @SuppressWarnings("unused")
+...  }
+}] => [class LocalNameCollision extends java_lang_Object {
+  /**
+...exports = LocalNameCollision;
+] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision"
+[public class LocalNameCollision {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision"
 [UNKNOWN] => [super();]
+[@SuppressWarnings("unused")
+  public void testClassLocalVarCollision() {
+...    assert new Asserts().n() == 5;
+  }] => [/**
+   * @return {void}
+...    $Asserts.$enabled() && $Asserts.$assert(Asserts.$create__().m_n___$pp_com_google_j2cl_transpiler_readable_localnamecollision() == 5);
+  }] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.testClassLocalVarCollision"
 [boolean LocalNameCollision = false;] => [let LocalNameCollision$1$ = false;]
 [LocalNameCollision] => [LocalNameCollision$1$] "LocalNameCollision"
 [Object RuntimeException = null;] => [let RuntimeException$1$ = null;]
@@ -26,6 +47,13 @@
                 instanceof com.google.j2cl.transpiler.readable.localnamecollision.package2.A
             || RuntimeException instanceof Class;] => [LocalNameCollision$1$ = LocalNameCollision.$isInstance(RuntimeException$1$) || RuntimeException.$isInstance(RuntimeException$1$) || com_google_j2cl_transpiler_readable_localnamecollision_package1_A.$isInstance(RuntimeException$1$) || com_google_j2cl_transpiler_readable_localnamecollision_package2_A.$isInstance(RuntimeException$1$) || Class.$isInstance(RuntimeException$1$);]
 [assert new Asserts().n() == 5;] => [$Asserts.$enabled() && $Asserts.$assert(Asserts.$create__().m_n___$pp_com_google_j2cl_transpiler_readable_localnamecollision() == 5);]
+[public boolean testClassParameterCollision(
+      boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A) {
+...        && (l_Asserts == A);
+  }] => [/**
+   * @param {boolean} LocalNameCollision$1$
+...    return LocalNameCollision$1$ && LocalNameCollision.$isInstance(Asserts$1$) && Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);
+  }] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.testClassParameterCollision"
 [LocalNameCollision] => [LocalNameCollision$1$] "LocalNameCollision"
 [Asserts] => [Asserts$1$] "Asserts"
 [$Asserts] => [$Asserts$1$] "$Asserts"
@@ -35,6 +63,13 @@
         && Asserts instanceof LocalNameCollision
         && $Asserts instanceof Asserts
         && (l_Asserts == A);] => [return LocalNameCollision$1$ && LocalNameCollision.$isInstance(Asserts$1$) && Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);]
+[@SuppressWarnings("unused")
+  // test class and parameters collision in constructor.
+...            && (l_Asserts == A);
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<ctor>"
 [LocalNameCollision] => [LocalNameCollision$1$] "LocalNameCollision"
 [Asserts] => [Asserts$1$] "Asserts"
 [$Asserts] => [$Asserts$1$] "$Asserts"
@@ -44,6 +79,13 @@
 [UNKNOWN] => [let $instance = new LocalNameCollision();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A);]
 [UNKNOWN] => [return $instance;]
+[@SuppressWarnings("unused")
+  // test class and parameters collision in constructor.
+...            && (l_Asserts == A);
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    let result = LocalNameCollision$1$ && LocalNameCollision.$isInstance(Asserts$1$) && Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);
+  }] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<ctor>"
 [LocalNameCollision] => [LocalNameCollision$1$] "LocalNameCollision"
 [Asserts] => [Asserts$1$] "Asserts"
 [$Asserts] => [$Asserts$1$] "$Asserts"

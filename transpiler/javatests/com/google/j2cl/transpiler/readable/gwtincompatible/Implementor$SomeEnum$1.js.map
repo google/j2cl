@@ -1,9 +1,62 @@
+[{
+      @Override
+      void method() {}
+    }] => [class $1 extends SomeEnum {
+  /**
+...exports = $1;
+] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.1"
+[{
+      @Override
+      void method() {}
+    }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.1"
 [UNKNOWN] => [super();]
+[UNKNOWN] => [/**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!$1}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int($name, $ordinal);
+    return $instance;
+  }]
 [UNKNOWN] => [$1.$clinit();]
 [UNKNOWN] => [let $instance = new $1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [return $instance;]
+[UNKNOWN] => [/**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int($name, $ordinal) {
+    this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1();
+  }]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1();]
+[@Override
+      void method() {}] => [/**
+   * @override
+...  m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.1.method"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));
+  }]
 [UNKNOWN] => [return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));]
 [UNKNOWN] => [SomeEnum.$clinit();]

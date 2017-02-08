@@ -1,15 +1,61 @@
+[public class SuperParent {
+  // This is not directly exposed by any sub class.
+...  }
+}] => [class SuperParent extends java_lang_Object {
+  /**
+...exports = SuperParent;
+] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent"
+[public class SuperParent {
+  // This is not directly exposed by any sub class.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent"
 [UNKNOWN] => [super();]
+[public class SuperParent {
+  // This is not directly exposed by any sub class.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.<ctor>"
 [UNKNOWN] => [SuperParent.$clinit();]
 [UNKNOWN] => [let $instance = new SuperParent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();]
 [UNKNOWN] => [return $instance;]
+[public class SuperParent {
+  // This is not directly exposed by any sub class.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();]
+[int foo(int a) {
+    return a - 1;
+  }] => [/**
+   * @param {number} a
+...    return a - 1;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.foo"
 [a] => [a] "a"
 [return a - 1;] => [return a - 1;]
+[int fun(int a, int b) {
+    return a + b;
+  }] => [/**
+   * @param {number} a
+...    return a + b;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.fun"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b;] => [return a + b;]
+[int bar(int a, int b, int c) {
+    return a + b + c;
+  }] => [/**
+   * @param {number} a
+...    return a + b + c;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.bar"
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"

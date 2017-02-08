@@ -1,2 +1,16 @@
+[@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+public final class NativeArray {
+...  }
+}] => [class NativeArray$$Overlay {
+  /**
+...exports = NativeArray$$Overlay;
+] "com.google.j2cl.transpiler.readable.nestednativetype.NativeArray"
+[@JsOverlay
+  public final Object a() {
+    return new Object() {};
+  }] => [/**
+   * @param {Array} $thisArg
+...    return $1.$create__com_google_j2cl_transpiler_readable_nestednativetype_NativeArray($thisArg);
+  }] "com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.a"
 [UNKNOWN] => [NativeArray$$Overlay.$clinit();]
 [return new Object() {};] => [return $1.$create__com_google_j2cl_transpiler_readable_nestednativetype_NativeArray($thisArg);]

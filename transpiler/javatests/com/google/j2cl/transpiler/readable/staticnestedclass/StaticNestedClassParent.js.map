@@ -1,8 +1,32 @@
+[public class StaticNestedClassParent {
+  public static class StaticNestedClass {}
+}] => [class StaticNestedClassParent extends java_lang_Object {
+  /**
+...exports = StaticNestedClassParent;
+] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent"
+[public class StaticNestedClassParent {
+  public static class StaticNestedClass {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent"
 [UNKNOWN] => [super();]
+[public class StaticNestedClassParent {
+  public static class StaticNestedClass {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.<ctor>"
 [UNKNOWN] => [StaticNestedClassParent.$clinit();]
 [UNKNOWN] => [let $instance = new StaticNestedClassParent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent__();]
 [UNKNOWN] => [return $instance;]
+[public class StaticNestedClassParent {
+  public static class StaticNestedClass {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent();
+  }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

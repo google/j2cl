@@ -1,3 +1,17 @@
+[public class PrimitiveFieldSignatures {
+  public byte a;
+...  public boolean h;
+}] => [class PrimitiveFieldSignatures extends java_lang_Object {
+  /**
+...exports = PrimitiveFieldSignatures;
+] "com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures"
+[public class PrimitiveFieldSignatures {
+  public byte a;
+...  public boolean h;
+}] => [/**
+   * Defines instance fields.
+...    this.f_h__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures = false;
+  }] "com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures = 0;]
@@ -15,10 +29,24 @@
     this.f_g__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures = 0;]
 [UNKNOWN] => [/** @public {boolean} */
     this.f_h__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures = false;]
+[public class PrimitiveFieldSignatures {
+  public byte a;
+...  public boolean h;
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures.<ctor>"
 [UNKNOWN] => [PrimitiveFieldSignatures.$clinit();]
 [UNKNOWN] => [let $instance = new PrimitiveFieldSignatures();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures__();]
 [UNKNOWN] => [return $instance;]
+[public class PrimitiveFieldSignatures {
+  public byte a;
+...  public boolean h;
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures();
+  }] "com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

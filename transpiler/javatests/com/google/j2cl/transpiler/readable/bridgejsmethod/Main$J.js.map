@@ -1,1 +1,12 @@
+[/**
+   * Interface with non-JsMethod.
+...    void bar(T t);
+  }] => [/**
+ * @interface
+...exports = J;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J"
+[void bar(T t);] => [/**
+   * @abstract
+...  m_bar__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J.bar"
 [t] => [t] "t"

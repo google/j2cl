@@ -1,10 +1,45 @@
+[public class CastToReference {
+
+...  }
+}] => [class CastToReference extends java_lang_Object {
+  /**
+...exports = CastToReference;
+] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference"
+[public class CastToReference {
+
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference"
 [UNKNOWN] => [super();]
+[public class CastToReference {
+
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference.<ctor>"
 [UNKNOWN] => [CastToReference.$clinit();]
 [UNKNOWN] => [let $instance = new CastToReference();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttoreference_CastToReference__();]
 [UNKNOWN] => [return $instance;]
+[public class CastToReference {
+
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_casttoreference_CastToReference();
+  }] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttoreference_CastToReference();]
+[public void testPrimitiveToReference() {
+    boolean bool = true;
+...    o = (Object) d;
+  }] => [/**
+   * @return {void}
+...    o = /**@type {*} */ ($Casts.to(d, java_lang_Object));
+  }] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference.testPrimitiveToReference"
 [boolean bool = true;] => [let bool = true;]
 [bool] => [bool] "bool"
 [byte b = 1;] => [let b = 1;]

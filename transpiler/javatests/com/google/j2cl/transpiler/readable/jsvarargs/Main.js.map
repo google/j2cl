@@ -1,15 +1,48 @@
+[public class Main {
+
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.jsvarargs.Main"
+[public class Main {
+
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;]
+[public Main(int f) {
+    this.field = f;
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<ctor>"
 [f] => [f] "f"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);]
 [UNKNOWN] => [return $instance;]
+[public Main(int f) {
+    this.field = f;
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<ctor>"
 [f] => [f] "f"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main();]
 [this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;]
+[@JsMethod
+  public static int f1(int multiplier, int... numbers) {
+    return numbers.length + numbers[0] + multiplier;
+  }] => [/**
+   * @param {number} multiplier
+...    return $var_args_copy.length + $var_args_copy[0] + multiplier;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [multiplier] => [multiplier] "multiplier"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
@@ -19,6 +52,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return numbers.length + numbers[0] + multiplier;] => [return $var_args_copy.length + $var_args_copy[0] + multiplier;]
+[@JsMethod
+  public static int f2(int... numbers) {
+    return numbers.length + numbers[0];
+  }] => [/**
+   * @param {...number} numbers
+...    return $var_args_copy.length + $var_args_copy[0];
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
@@ -27,6 +67,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return numbers.length + numbers[0];] => [return $var_args_copy.length + $var_args_copy[0];]
+[@JsMethod
+  public int f3(int m, int... numbers) {
+    return this.field + m + numbers[1];
+  }] => [/**
+   * @param {number} m
+...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + $var_args_copy[1];
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
@@ -35,6 +82,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + $var_args_copy[1];]
+[@JsMethod
+  public int f4(int... numbers) {
+    return this.field + numbers[1];
+  }] => [/**
+   * @param {...number} numbers
+...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
@@ -42,6 +96,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];]
+[@JsMethod
+  public static <T> T generics(T... elements) {
+    return elements[0];
+  }] => [/**
+   * @template M_T
+...    return $var_args_copy[0];
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = new Array(arguments.length);]
@@ -50,6 +111,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return elements[0];] => [return $var_args_copy[0];]
+[@JsMethod
+  public static Main parameterizedType(List<Main>... elements) {
+    return elements[0].get(0);
+  }] => [/**
+   * @param {...List<Main>} elements
+...    return /**@type {Main} */ ($Casts.to($var_args_copy[0].getAtIndex(0), Main));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<List<Main>>} */ ($Arrays.$create([arguments.length], List));]
@@ -58,6 +126,13 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.to($var_args_copy[0].getAtIndex(0), Main));]
+[public void testStaticMethodNotFirst() {
+    // multiple arguments.
+...    Main.f1(1, ints);
+  }] => [/**
+   * @return {void}
+...    Main.f1(1, ...$Arrays.$checkNotNull(ints));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
 [f1(1);] => [Main.f1(1);]
@@ -70,6 +145,13 @@
 [ints] => [ints] "ints"
 [f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
 [Main.f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
+[public void testStaticMethodFirst() {
+    // multiple arguments.
+...    Main.<Integer>generics(integers);
+  }] => [/**
+   * @return {void}
+...    Main.generics(...$Arrays.$checkNotNull(integers));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [f2(1, 2);] => [Main.f2(1, 2);]
 [generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));]
 [Main.f2(1, 2);] => [Main.f2(1, 2);]
@@ -93,6 +175,13 @@
 [f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
 [Main.f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
 [Main.<Integer>generics(integers);] => [Main.generics(...$Arrays.$checkNotNull(integers));]
+[public void testInstanceMethodNotFirst() {
+    Main m = new Main(1);
+...    m.f3(1, ints);
+  }] => [/**
+   * @return {void}
+...    m.f3(1, ...$Arrays.$checkNotNull(ints));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [Main m = new Main(1);] => [let m = Main.$create__int(1);]
 [m] => [m] "m"
 [m.f3(1, 1, 2);] => [m.f3(1, 1, 2);]
@@ -102,6 +191,13 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [ints] => [ints] "ints"
 [m.f3(1, ints);] => [m.f3(1, ...$Arrays.$checkNotNull(ints));]
+[public void testInstanceMethodFirst() {
+    Main m = new Main(1);
+...    m.f4(ints);
+  }] => [/**
+   * @return {void}
+...    m.f4(...$Arrays.$checkNotNull(ints));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [Main m = new Main(1);] => [let m = Main.$create__int(1);]
 [m] => [m] "m"
 [m.f4(1, 2);] => [m.f4(1, 2);]
@@ -111,6 +207,13 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [ints] => [ints] "ints"
 [m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));]
+[public void testJsFunction() {
+    AFunction a = new AFunction();
+...    a.f1(0, os);
+  }] => [/**
+   * @return {void}
+...    a(0, ...$Arrays.$checkNotNull(os));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [AFunction a = new AFunction();] => [let a = AFunction.$create__();]
 [a] => [a] "a"
 [Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();]
@@ -124,6 +227,13 @@
 [Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];]
 [os] => [os] "os"
 [a.f1(0, os);] => [a(0, ...$Arrays.$checkNotNull(os));]
+[public void testSideEffect() {
+    int[] ints = new int[] {1, 2};
+    new Main(1).f3(1, ints);
+  }] => [/**
+   * @return {void}
+...    Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [ints] => [ints] "ints"
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));]

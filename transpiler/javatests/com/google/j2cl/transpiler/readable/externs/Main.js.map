@@ -1,16 +1,61 @@
+[public class Main {
+  static class FooImpl {
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.externs.Main"
+[public class Main {
+  static class FooImpl {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_aFoo__com_google_j2cl_transpiler_readable_externs_Main = null;
+  }] "com.google.j2cl.transpiler.readable.externs.Main"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Foo} */
     this.f_aFoo__com_google_j2cl_transpiler_readable_externs_Main = null;]
+[public class Main {
+  static class FooImpl {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.externs.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_externs_Main__();]
 [UNKNOWN] => [return $instance;]
+[public class Main {
+  static class FooImpl {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_externs_Main();
+  }] "com.google.j2cl.transpiler.readable.externs.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_externs_Main();]
+[private static boolean testFooOverlay(FooOverlay fooOverlay) {
+    return fooOverlay.getFoo().equals("Hello");
+  }] => [/**
+   * @param {Foo} fooOverlay
+...    return java_lang_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");
+  }] "com.google.j2cl.transpiler.readable.externs.Main.testFooOverlay"
 [fooOverlay] => [fooOverlay] "fooOverlay"
 [UNKNOWN] => [Main.$clinit();]
 [return fooOverlay.getFoo().equals("Hello");] => [return java_lang_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");]
+[private static native void useDirectlyAsFoo(Object fooOverlay);] => [/**
+   * @param {*} fooOverlay
+...   */
+  // native static m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(fooOverlay) ] "com.google.j2cl.transpiler.readable.externs.Main.useDirectlyAsFoo"
 [fooOverlay] => [fooOverlay] "fooOverlay"
+[public static void main(String... args) {
+    testFooOverlay((FooOverlay) (Object) new FooImpl());
+    useDirectlyAsFoo(new FooImpl());
+  }] => [/**
+   * @param {Array<?string>} args
+...    Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(FooImpl.$create__());
+  }] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
 [testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(/**@type {Foo} */ ($Casts.to(/**@type {*} */ ($Casts.to(FooImpl.$create__(), java_lang_Object)), FooOverlay$$Overlay)));]

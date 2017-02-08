@@ -1,12 +1,51 @@
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [class CastOnArrayInit extends java_lang_Object {
+  /**
+...exports = CastOnArrayInit;
+] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit"
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit"
 [UNKNOWN] => [super();]
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<ctor>"
 [UNKNOWN] => [CastOnArrayInit.$clinit();]
 [UNKNOWN] => [let $instance = new CastOnArrayInit();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__();]
 [UNKNOWN] => [return $instance;]
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit();
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit();]
+[public static <E> void fun(Foo<E>... args) {}] => [/**
+   * @template M_E
+...    CastOnArrayInit.$clinit();
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
 [args] => [args] "args"
 [UNKNOWN] => [CastOnArrayInit.$clinit();]
+[public static <E> void test() {
+    Foo<E> f1 = new Foo<>();
+...    fun(f1, f2);
+  }] => [/**
+   * @template M_E
+...    CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(/**@type {!Array<Foo<*>>} */ ($Arrays.$init([f1, f2], Foo)));
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [UNKNOWN] => [CastOnArrayInit.$clinit();]
 [Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<*>} */ (Foo.$create__());]
 [f1] => [f1] "f1"

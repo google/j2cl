@@ -1,10 +1,45 @@
+[public class SubChild extends Child {
+  @Override
+...  }
+}] => [class SubChild extends Child {
+  /**
+...exports = SubChild;
+] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild"
+[public class SubChild extends Child {
+  @Override
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild"
 [UNKNOWN] => [super();]
+[public class SubChild extends Child {
+  @Override
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild.<ctor>"
 [UNKNOWN] => [SubChild.$clinit();]
 [UNKNOWN] => [let $instance = new SubChild();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild__();]
 [UNKNOWN] => [return $instance;]
+[public class SubChild extends Child {
+  @Override
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild();
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild();]
+[@Override
+  public int foo(int a) {
+    return a + 3;
+  }] => [/**
+   * @override
+...    return a + 3;
+  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild.foo"
 [a] => [a] "a"
 [return a + 3;] => [return a + 3;]
 [UNKNOWN] => [Child.$clinit();]

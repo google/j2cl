@@ -1,17 +1,88 @@
+[{
+          public String field = "abc";
+...          }
+        }] => [/**
+ * @implements {ApplyFunction<?string>}
+...exports = $1;
+] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1"
+[{
+          public String field = "abc";
+...          }
+        }] => [/**
+   * Defines instance fields.
+...    this.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 = null;
+  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 = null;]
+[UNKNOWN] => [/**
+   * A particular Java constructor as a factory method.
+   * @return {function(?string):?string}
+   * @public
+   */
+  static $create__() {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1__();
+    return $Util.$makeLambdaFunction($Util.$getPrototype($1).m_apply__java_lang_Object, $instance, $1.$copy);
+  }]
 [UNKNOWN] => [$1.$clinit();]
 [UNKNOWN] => [let $instance = new $1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype($1).m_apply__java_lang_Object, $instance, $1.$copy);]
+[UNKNOWN] => [/**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1();
+  }]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1();]
+[@Override
+          public String apply(String s) {
+            return s + field;
+          }] => [/**
+   * @param {?string} s
+...  m_apply__java_lang_String(s) {
+  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.apply"
 [s] => [s] "s"
+[public String fun() {
+            return field + apply("a");
+          }] => [/**
+   * @return {?string}
+...  m_fun__() {
+  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.fun"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @this {?function(?string):?string}
+   * @param {*} arg0
+   * @return {?string}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return $1.m_apply__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1__java_lang_String(this, /**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
+  }]
 [UNKNOWN] => [return $1.m_apply__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1__java_lang_String(this, /**@type {?string} */ ($Casts.to(arg0, java_lang_String)));]
+[@Override
+          public String apply(String s) {
+            return s + field;
+          }] => [/**
+   * @param {?function(?string):?string} $thisArg
+...    return "" + s + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1;
+  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.apply"
 [s] => [s] "s"
 [UNKNOWN] => [$1.$clinit();]
 [return s + field;] => [return "" + s + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1;]
+[public String fun() {
+            return field + apply("a");
+          }] => [/**
+   * @param {?function(?string):?string} $thisArg
+...    return "" + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 + $thisArg("a");
+  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.fun"
 [UNKNOWN] => [$1.$clinit();]
 [return field + apply("a");] => [return "" + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 + $thisArg("a");]
 [UNKNOWN] => [java_lang_Object.$clinit();]

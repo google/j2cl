@@ -1,10 +1,43 @@
+[static class SubMain extends Main {
+    public SubMain() {
+...    }
+  }] => [class SubMain extends Main {
+  /**
+...exports = SubMain;
+] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain"
+[static class SubMain extends Main {
+    public SubMain() {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain"
 [UNKNOWN] => [super();]
+[public SubMain() {
+      super(10);
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.<ctor>"
 [UNKNOWN] => [SubMain.$clinit();]
 [UNKNOWN] => [let $instance = new SubMain();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();]
 [UNKNOWN] => [return $instance;]
+[public SubMain() {
+      super(10);
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.<ctor>"
 [super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();]
+[@Override
+    public int f3(int m, int... numbers) {
+...      return a;
+    }] => [/**
+   * @override
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.f3"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]

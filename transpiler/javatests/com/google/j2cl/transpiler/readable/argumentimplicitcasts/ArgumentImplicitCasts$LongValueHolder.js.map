@@ -1,11 +1,37 @@
+[private static class LongValueHolder {
+    private long value;
+...    }
+  }] => [class LongValueHolder extends java_lang_Object {
+  /**
+...exports = LongValueHolder;
+] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder"
+[private static class LongValueHolder {
+    private long value;
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_ = $Long.fromBits(0, 0) /* 0 */;
+  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {!$Long} */
     this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_ = $Long.fromBits(0, 0) /* 0 */;]
+[public LongValueHolder(long value) {
+      this.value = value;
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [LongValueHolder.$clinit();]
 [UNKNOWN] => [let $instance = new LongValueHolder();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder__long(value);]
 [UNKNOWN] => [return $instance;]
+[public LongValueHolder(long value) {
+      this.value = value;
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_ = value;
+  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder();]

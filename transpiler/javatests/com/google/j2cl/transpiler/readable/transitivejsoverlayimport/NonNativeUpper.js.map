@@ -1,7 +1,56 @@
+[public class NonNativeUpper extends Immediate {
+
+  void doNonNativeUpperInstanceMethod() {}
+}] => [class NonNativeUpper extends Object {
+  /**
+...exports = NonNativeUpper;
+] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper"
+[public class NonNativeUpper extends Immediate {
+
+  void doNonNativeUpperInstanceMethod() {}
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper__();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper__();]
+[public class NonNativeUpper extends Immediate {
+
+  void doNonNativeUpperInstanceMethod() {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return new NonNativeUpper();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"
 [UNKNOWN] => [NonNativeUpper.$clinit();]
 [UNKNOWN] => [return new NonNativeUpper();]
+[public class NonNativeUpper extends Immediate {
+
+  void doNonNativeUpperInstanceMethod() {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper();]
+[void doNonNativeUpperInstanceMethod() {}] => [/**
+   * @return {void}
+...  m_doNonNativeUpperInstanceMethod___$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport() {
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.doNonNativeUpperInstanceMethod"
+[UNKNOWN] => [/**
+   * Instance bridge to super overlay method.
+   * @return {void}
+   * @public
+   */
+  m_doImmediateInstanceMethod___$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport() {
+    Immediate$$Overlay.m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(this);
+  }]
 [UNKNOWN] => [Immediate$$Overlay.m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(this);]
+[UNKNOWN] => [/**
+   * Instance bridge to super overlay method.
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_doTransitiveInstanceMethod__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(arg0) {
+    Immediate$$Overlay.m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(this, arg0);
+  }]
 [UNKNOWN] => [Immediate$$Overlay.m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(this, arg0);]

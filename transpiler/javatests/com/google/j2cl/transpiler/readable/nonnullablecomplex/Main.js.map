@@ -1,10 +1,45 @@
+[public class Main {
+
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.nonnullablecomplex.Main"
+[public class Main {
+
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nonnullablecomplex.Main"
 [UNKNOWN] => [super();]
+[public class Main {
+
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nonnullablecomplex.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main__();]
 [UNKNOWN] => [return $instance;]
+[public class Main {
+
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main();
+  }] "com.google.j2cl.transpiler.readable.nonnullablecomplex.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main();]
+[public static void main(String[] args) {
+    /**
+...    NonNullableExample.takeValue(NullableExample.NULLABLE_VALUE);
+  }] => [/**
+   * @param {Array<?string>} args
+...    NonNullableExample.m_takeValue__java_lang_String(NullableExample.f_NULLABLE_VALUE__com_google_j2cl_transpiler_integration_nonnullablecomplex_sub_NullableExample);
+  }] "com.google.j2cl.transpiler.readable.nonnullablecomplex.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
 [NonNullableExample.takeValue(NullableExample.NULLABLE_VALUE);] => [NonNullableExample.m_takeValue__java_lang_String(NullableExample.f_NULLABLE_VALUE__com_google_j2cl_transpiler_integration_nonnullablecomplex_sub_NullableExample);]

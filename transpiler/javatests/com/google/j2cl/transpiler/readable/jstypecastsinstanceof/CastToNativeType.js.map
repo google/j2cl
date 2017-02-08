@@ -1,10 +1,45 @@
+[public class CastToNativeType {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [class CastToNativeType extends java_lang_Object {
+  /**
+...exports = CastToNativeType;
+] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType"
+[public class CastToNativeType {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType"
 [UNKNOWN] => [super();]
+[public class CastToNativeType {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.<ctor>"
 [UNKNOWN] => [CastToNativeType.$clinit();]
 [UNKNOWN] => [let $instance = new CastToNativeType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType__();]
 [UNKNOWN] => [return $instance;]
+[public class CastToNativeType {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType();
+  }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType();]
+[@SuppressWarnings({"unused", "rawtypes", "unchecked"})
+  public void test() {
+...    c = a instanceof NativeObject[];
+  }] => [/**
+   * @return {void}
+...    c = $Arrays.$instanceIsOfNative(a);
+  }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.test"
 [Object a = new NativeJsType();] => [let a = new NativeJsType();]
 [a] => [a] "a"
 [NativeJsType b = (NativeJsType) a;] => [let b = /**@type {NativeJsType} */ ($Casts.to(a, NativeJsType$$Overlay));]

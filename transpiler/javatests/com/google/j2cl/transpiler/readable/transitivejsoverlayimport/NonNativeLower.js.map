@@ -1,6 +1,38 @@
+[public class NonNativeLower extends NonNativeUpper {
+
+  void doNonNativeLowerInstanceMethod() {}
+}] => [class NonNativeLower extends NonNativeUpper {
+  /**
+...exports = NonNativeLower;
+] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower"
+[public class NonNativeLower extends NonNativeUpper {
+
+  void doNonNativeLowerInstanceMethod() {}
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower__();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.<ctor>"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower__();]
+[public class NonNativeLower extends NonNativeUpper {
+
+  void doNonNativeLowerInstanceMethod() {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return new NonNativeLower();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.<ctor>"
 [UNKNOWN] => [NonNativeLower.$clinit();]
 [UNKNOWN] => [return new NonNativeLower();]
+[public class NonNativeLower extends NonNativeUpper {
+
+  void doNonNativeLowerInstanceMethod() {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.<ctor>"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower();]
+[void doNonNativeLowerInstanceMethod() {}] => [/**
+   * @return {void}
+...  m_doNonNativeLowerInstanceMethod___$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport() {
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.doNonNativeLowerInstanceMethod"
 [UNKNOWN] => [NonNativeUpper.$clinit();]

@@ -1,10 +1,38 @@
+[public class ImportTypeInJsFunctionMethod {
+  @JsFunction
+...  FooFunction fooFunction;
+}] => [class ImportTypeInJsFunctionMethod extends java_lang_Object {
+  /**
+...exports = ImportTypeInJsFunctionMethod;
+] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod"
+[public class ImportTypeInJsFunctionMethod {
+  @JsFunction
+...  FooFunction fooFunction;
+}] => [/**
+   * Defines instance fields.
+...    this.f_fooFunction__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod = null;
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?function(Main):void} */
     this.f_fooFunction__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod = null;]
+[public class ImportTypeInJsFunctionMethod {
+  @JsFunction
+...  FooFunction fooFunction;
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod.<ctor>"
 [UNKNOWN] => [ImportTypeInJsFunctionMethod.$clinit();]
 [UNKNOWN] => [let $instance = new ImportTypeInJsFunctionMethod();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod__();]
 [UNKNOWN] => [return $instance;]
+[public class ImportTypeInJsFunctionMethod {
+  @JsFunction
+...  FooFunction fooFunction;
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod();
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

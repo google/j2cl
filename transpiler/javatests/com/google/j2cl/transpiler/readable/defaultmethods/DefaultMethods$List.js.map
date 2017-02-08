@@ -1,1 +1,11 @@
+[interface List<T> {
+    default void add(T elem) {}
+  }] => [/**
+ * @interface
+...exports = List;
+] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List"
+[default void add(T elem) {}] => [/**
+   * @param {C_List_T} elem
+...  m_add__java_lang_Object(elem) {
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.add"
 [elem] => [elem] "elem"

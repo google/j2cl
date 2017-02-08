@@ -1,10 +1,38 @@
+[public class EmptyMethod {
+  public static void main(String[] args) {}
+}] => [class EmptyMethod extends java_lang_Object {
+  /**
+...exports = EmptyMethod;
+] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod"
+[public class EmptyMethod {
+  public static void main(String[] args) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod"
 [UNKNOWN] => [super();]
+[public class EmptyMethod {
+  public static void main(String[] args) {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.<ctor>"
 [UNKNOWN] => [EmptyMethod.$clinit();]
 [UNKNOWN] => [let $instance = new EmptyMethod();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod__();]
 [UNKNOWN] => [return $instance;]
+[public class EmptyMethod {
+  public static void main(String[] args) {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
+  }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();]
+[public static void main(String[] args) {}] => [/**
+   * @param {Array<?string>} args
+...    EmptyMethod.$clinit();
+  }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.main"
 [args] => [args] "args"
 [UNKNOWN] => [EmptyMethod.$clinit();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

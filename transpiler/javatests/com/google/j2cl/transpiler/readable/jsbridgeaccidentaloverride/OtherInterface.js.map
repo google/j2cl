@@ -1,1 +1,11 @@
+[public interface OtherInterface {
+  int fun(int a);
+}] => [/**
+ * @interface
+...exports = OtherInterface;
+] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface"
+[int fun(int a);] => [/**
+   * @abstract
+...  m_fun__int(a) {
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface.fun"
 [a] => [a] "a"

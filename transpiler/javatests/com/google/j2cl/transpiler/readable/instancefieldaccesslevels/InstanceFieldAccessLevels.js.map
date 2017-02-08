@@ -1,3 +1,17 @@
+[public class InstanceFieldAccessLevels {
+  public int a;
+...  int d;
+}] => [class InstanceFieldAccessLevels extends java_lang_Object {
+  /**
+...exports = InstanceFieldAccessLevels;
+] "com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels"
+[public class InstanceFieldAccessLevels {
+  public int a;
+...  int d;
+}] => [/**
+   * Defines instance fields.
+...    this.f_d__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels = 0;
+  }] "com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels = 0;]
@@ -7,10 +21,24 @@
     this.f_c__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_d__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels = 0;]
+[public class InstanceFieldAccessLevels {
+  public int a;
+...  int d;
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels.<ctor>"
 [UNKNOWN] => [InstanceFieldAccessLevels.$clinit();]
 [UNKNOWN] => [let $instance = new InstanceFieldAccessLevels();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels__();]
 [UNKNOWN] => [return $instance;]
+[public class InstanceFieldAccessLevels {
+  public int a;
+...  int d;
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels();
+  }] "com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

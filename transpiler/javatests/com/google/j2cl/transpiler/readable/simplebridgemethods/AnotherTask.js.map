@@ -1,10 +1,53 @@
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [/**
+ * @template C_T
+...exports = AnotherTask;
+] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask"
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask"
 [UNKNOWN] => [super();]
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<ctor>"
 [UNKNOWN] => [AnotherTask.$clinit();]
 [UNKNOWN] => [let $instance = new AnotherTask();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask__();]
 [UNKNOWN] => [return $instance;]
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();]
+[@Override
+  public void call(Superclass<T> t) {}] => [/**
+   * @param {Superclass<C_T>} t
+...  m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(t) {
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.call"
 [t] => [t] "t"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(arg0) {
+    this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(/**@type {Superclass<C_T>} */ ($Casts.to(arg0, Superclass)));
+  }]
 [UNKNOWN] => [this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(/**@type {Superclass<C_T>} */ ($Casts.to(arg0, Superclass)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

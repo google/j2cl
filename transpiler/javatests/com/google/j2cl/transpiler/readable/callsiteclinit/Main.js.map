@@ -1,14 +1,48 @@
+[public class Main {
+  public static class Yo {
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.callsiteclinit.Main"
+[public class Main {
+  public static class Yo {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_instanceWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = null;
+  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.f_instanceField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = null;]
 [UNKNOWN] => [/** @public {?string} */
     this.f_instanceWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = null;]
+[public class Main {
+  public static class Yo {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_callsiteclinit_Main__();]
 [UNKNOWN] => [return $instance;]
+[public class Main {
+  public static class Yo {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main();
+  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main();]
+[public void asdf() {
+    String insideMethod = Yo.a;
+  }] => [/**
+   * @return {void}
+...    let insideMethod = Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo;
+  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.asdf"
 [String insideMethod = Yo.a;] => [let insideMethod = Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo;]
 [insideMethod] => [insideMethod] "insideMethod"
 [UNKNOWN] => [java_lang_Object.$clinit();]

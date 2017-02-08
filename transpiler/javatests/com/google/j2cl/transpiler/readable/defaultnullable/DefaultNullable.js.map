@@ -1,3 +1,17 @@
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [class DefaultNullable extends java_lang_Object {
+  /**
+...exports = DefaultNullable;
+] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable"
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_f12__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.f_f1__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;]
@@ -23,18 +37,51 @@
     this.f_f11__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;]
 [UNKNOWN] => [/** @public {*} */
     this.f_f12__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;]
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.<ctor>"
 [UNKNOWN] => [DefaultNullable.$clinit();]
 [UNKNOWN] => [let $instance = new DefaultNullable();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable__();]
 [UNKNOWN] => [return $instance;]
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable();
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable();]
+[public String m1(String a, List<Double> b) {
+    return "";
+  }] => [/**
+   * @param {?string} a
+...    return "";
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.m1"
 [a] => [a] "a"
 [b] => [b] "b"
 [return "";] => [return "";]
+[@Nullable
+  public String m2(@Nullable String a, List<@NullableType Double> b) {
+    return null;
+  }] => [/**
+   * @param {?string} a
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.m2"
 [a] => [a] "a"
 [b] => [b] "b"
 [return null;] => [return null;]
+[@JsMethod
+  public void m3(String... args) {
+  }] => [/**
+   * @param {...?string} args
+...    }
+  }] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.m3"
 [args] => [args] "args"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<?string>} */ ($Arrays.$create([arguments.length], java_lang_String));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {

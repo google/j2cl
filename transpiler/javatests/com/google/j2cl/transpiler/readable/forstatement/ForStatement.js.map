@@ -1,10 +1,45 @@
+[public class ForStatement {
+  public void test() {
+...  }
+}] => [class ForStatement extends java_lang_Object {
+  /**
+...exports = ForStatement;
+] "com.google.j2cl.transpiler.readable.forstatement.ForStatement"
+[public class ForStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.forstatement.ForStatement"
 [UNKNOWN] => [super();]
+[public class ForStatement {
+  public void test() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<ctor>"
 [UNKNOWN] => [ForStatement.$clinit();]
 [UNKNOWN] => [let $instance = new ForStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__();]
 [UNKNOWN] => [return $instance;]
+[public class ForStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_forstatement_ForStatement();
+  }] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_forstatement_ForStatement();]
+[public void test() {
+    for (int i = 0, count = 0; i < 100; i++) {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.test"
 [for (int i = 0, count = 0; i < 100; i++) {
       count++;
     }] => [for (let i = 0, count = 0; i < 100; i++) {

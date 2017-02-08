@@ -1,25 +1,80 @@
+[public class Varargs {
+  public Varargs(int... args) {}
+...  }
+}] => [class Varargs extends java_lang_Object {
+  /**
+...exports = Varargs;
+] "com.google.j2cl.transpiler.readable.varargs.Varargs"
+[public class Varargs {
+  public Varargs(int... args) {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs"
 [UNKNOWN] => [super();]
+[public Varargs(int... args) {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [Varargs.$clinit();]
 [UNKNOWN] => [let $instance = new Varargs();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(args);]
 [UNKNOWN] => [return $instance;]
+[public Varargs(int... args) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_varargs_Varargs();
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_varargs_Varargs();]
+[public Varargs() {
+    this(1);
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [UNKNOWN] => [Varargs.$clinit();]
 [UNKNOWN] => [let $instance = new Varargs();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__();]
 [UNKNOWN] => [return $instance;]
+[public Varargs() {
+    this(1);
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));]
+[public void test(int a, Object... args) {}] => [/**
+   * @param {number} a
+...  m_test__int__arrayOf_java_lang_Object(a, args) {
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.test"
 [a] => [a] "a"
 [args] => [args] "args"
+[public static <T> void fun(T... elements) {}] => [/**
+   * @template M_T
+...    Varargs.$clinit();
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.fun"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Varargs.$clinit();]
+[public static <E> void bar(E a, E b) {
+    fun(a, b);
+  }] => [/**
+   * @template M_E
+...    Varargs.m_fun__arrayOf_java_lang_Object([a, b]);
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.bar"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [Varargs.$clinit();]
 [fun(a, b);] => [Varargs.m_fun__arrayOf_java_lang_Object([a, b]);]
+[public void main() {
+    Varargs v = new Varargs();
+...    v.test(1, new Object[] {});
+  }] => [/**
+   * @return {void}
+...    v.m_test__int__arrayOf_java_lang_Object(1, []);
+  }] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
 [Varargs v = new Varargs();] => [let v = Varargs.$create__();]
 [v] => [v] "v"
 [v.test(1);] => [v.m_test__int__arrayOf_java_lang_Object(1, []);]

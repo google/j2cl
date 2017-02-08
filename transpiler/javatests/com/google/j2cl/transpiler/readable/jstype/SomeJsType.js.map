@@ -1,3 +1,17 @@
+[@JsType
+public class SomeJsType<T> {
+...  }
+}] => [/**
+ * @template C_T
+...exports = SomeJsType;
+] "com.google.j2cl.transpiler.readable.jstype.SomeJsType"
+[@JsType
+public class SomeJsType<T> {
+...  }
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType__();
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<ctor>"
 [UNKNOWN] => [SomeJsType.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
@@ -9,8 +23,38 @@
 [UNKNOWN] => [/** @public {number} */
     this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType = 0;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType__();]
+[@JsType
+public class SomeJsType<T> {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jstype_SomeJsType();
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstype_SomeJsType();]
+[public void publicMethod() {}] => [/**
+   * @return {void}
+...  publicMethod() {
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.publicMethod"
+[private void privateMethod() {}] => [/**
+   * @return {void}
+...  m_privateMethod___$p_com_google_j2cl_transpiler_readable_jstype_SomeJsType() {
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.privateMethod"
+[void packageMethod() {}] => [/**
+   * @return {void}
+...  m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype() {
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.packageMethod"
+[protected void protectedMethod() {}] => [/**
+   * @return {void}
+...  m_protectedMethod__() {
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.protectedMethod"
+[public void useFieldsAndMethods() {
+    @SuppressWarnings("unused")
+...    protectedMethod();
+  }] => [/**
+   * @return {void}
+...    this.m_protectedMethod__();
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
 [@SuppressWarnings("unused")
     int value = publicField + privateField + packageField + protectedField;] => [let value = this.publicField + this.f_privateField__com_google_j2cl_transpiler_readable_jstype_SomeJsType_ + this.f_packageField__com_google_j2cl_transpiler_readable_jstype_SomeJsType + this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType;]
 [value] => [value] "value"
@@ -18,6 +62,13 @@
 [privateMethod();] => [this.m_privateMethod___$p_com_google_j2cl_transpiler_readable_jstype_SomeJsType();]
 [packageMethod();] => [this.m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype();]
 [protectedMethod();] => [this.m_protectedMethod__();]
+[public Wildcard testStarAndWildCard(Star s, Wildcard w) {
+    Object object = new Object();
+...    return (Wildcard) star;
+  }] => [/**
+   * @param {*} s
+...    return /**@type {?} */ ($Casts.to(star, Wildcard$$Overlay));
+  }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [s] => [s] "s"
 [w] => [w] "w"
 [Object object = new Object();] => [let object = java_lang_Object.$create__();]

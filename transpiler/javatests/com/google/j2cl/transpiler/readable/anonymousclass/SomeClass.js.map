@@ -1,4 +1,26 @@
+[abstract class SomeClass {
+  public abstract String foo();
+...  SomeClass(int i) {}
+}] => [/**
+ * @abstract
+...exports = SomeClass;
+] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass"
+[abstract class SomeClass {
+  public abstract String foo();
+...  SomeClass(int i) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass"
 [UNKNOWN] => [super();]
+[public abstract String foo();] => [/**
+   * @abstract
+...  m_foo__() {
+  }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.foo"
+[SomeClass(int i) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();
+  }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.<ctor>"
 [i] => [i] "i"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();]

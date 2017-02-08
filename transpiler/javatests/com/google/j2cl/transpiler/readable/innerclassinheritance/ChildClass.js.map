@@ -1,11 +1,50 @@
+[public class ChildClass extends ParentOuter {
+  public int fieldInOuter;
+...  }
+}] => [class ChildClass extends ParentOuter {
+  /**
+...exports = ChildClass;
+] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass"
+[public class ChildClass extends ParentOuter {
+  public int fieldInOuter;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass = 0;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass = 0;]
+[public class ChildClass extends ParentOuter {
+  public int fieldInOuter;
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.<ctor>"
 [UNKNOWN] => [ChildClass.$clinit();]
 [UNKNOWN] => [let $instance = new ChildClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__();]
 [UNKNOWN] => [return $instance;]
+[public class ChildClass extends ParentOuter {
+  public int fieldInOuter;
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();]
+[public void funInOuter() {}] => [/**
+   * @return {void}
+...  m_funInOuter__() {
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.funInOuter"
+[public void testLocalClass() {
+    class LocalClass extends ChildClass {
+...    new LocalClass().test();
+  }] => [/**
+   * @return {void}
+...    $1LocalClass.$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(this).m_test__();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.testLocalClass"
 [new LocalClass().test();] => [$1LocalClass.$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(this).m_test__();]
 [UNKNOWN] => [ParentOuter.$clinit();]

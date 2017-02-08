@@ -1,3 +1,17 @@
+[class LocalClass {
+      public int field;
+...      }
+    }] => [class $1LocalClass extends java_lang_Object {
+  /**
+...exports = $1LocalClass;
+] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass"
+[class LocalClass {
+      public int field;
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.$c_p = 0;
+  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {LocalClassWithConstructor} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = null;]
@@ -7,12 +21,24 @@
     this.$c_localVar = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_p = 0;]
+[public LocalClass(int a, int b) {
+        field = localVar + a + b;
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [$1LocalClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1LocalClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int($outer_this, $c_localVar, $c_p, a, b);]
 [UNKNOWN] => [return $instance;]
+[public LocalClass(int a, int b) {
+        field = localVar + a + b;
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar + a + b;
+  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $outer_this;]
@@ -21,11 +47,25 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass();]
 [field = localVar + a + b;] => [this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar + a + b;]
+[public LocalClass(int a) {
+        this(a, p);
+        field = localVar;
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [$1LocalClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1LocalClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int($outer_this, $c_localVar, $c_p, a);]
 [UNKNOWN] => [return $instance;]
+[public LocalClass(int a) {
+        this(a, p);
+        field = localVar;
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar;
+  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
 [this(a, p);] => [this.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int($outer_this, $c_localVar, $c_p, a, $c_p);]
 [field = localVar;] => [this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar;]

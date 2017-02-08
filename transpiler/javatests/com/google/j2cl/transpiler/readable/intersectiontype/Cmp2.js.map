@@ -1,1 +1,11 @@
+[interface Cmp2 {
+  int cmp(int a);
+}] => [/**
+ * @interface
+...exports = Cmp2;
+] "com.google.j2cl.transpiler.readable.intersectiontype.Cmp2"
+[int cmp(int a);] => [/**
+   * @abstract
+...  m_cmp__int(a) {
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.Cmp2.cmp"
 [a] => [a] "a"

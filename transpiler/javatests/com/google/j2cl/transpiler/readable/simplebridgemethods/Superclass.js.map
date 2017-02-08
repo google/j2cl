@@ -1,9 +1,37 @@
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [/**
+ * @template C_T
+...exports = Superclass;
+] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass"
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass"
 [UNKNOWN] => [super();]
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<ctor>"
 [UNKNOWN] => [Superclass.$clinit();]
 [UNKNOWN] => [let $instance = new Superclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();]
 [UNKNOWN] => [return $instance;]
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();]
+[public void m1(T t) {}] => [/**
+   * @param {C_T} t
+...  m_m1__java_lang_Error(t) {
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.m1"
 [t] => [t] "t"
 [UNKNOWN] => [java_lang_Object.$clinit();]

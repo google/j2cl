@@ -1,10 +1,45 @@
+[public class NestedTryCatch {
+  public void main() {
+...  }
+}] => [class NestedTryCatch extends java_lang_Object {
+  /**
+...exports = NestedTryCatch;
+] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch"
+[public class NestedTryCatch {
+  public void main() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch"
 [UNKNOWN] => [super();]
+[public class NestedTryCatch {
+  public void main() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.<ctor>"
 [UNKNOWN] => [NestedTryCatch.$clinit();]
 [UNKNOWN] => [let $instance = new NestedTryCatch();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch__();]
 [UNKNOWN] => [return $instance;]
+[public class NestedTryCatch {
+  public void main() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();
+  }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();]
+[public void main() {
+    try {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [try {
       throw new Exception();
     } catch (Exception ae) {

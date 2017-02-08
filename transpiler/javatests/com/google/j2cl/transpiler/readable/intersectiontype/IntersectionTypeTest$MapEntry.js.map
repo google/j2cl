@@ -1,13 +1,47 @@
+[class MapEntry {
+    public <T> Getable<T> method(Object o) {
+...    }
+  }] => [/**
+ * @template C_U
+...exports = MapEntry;
+] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry"
+[class MapEntry {
+    public <T> Getable<T> method(Object o) {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry = null;
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {IntersectionTypeTest<C_U>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry = null;]
+[class MapEntry {
+    public <T> Getable<T> method(Object o) {
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.<ctor>"
 [UNKNOWN] => [MapEntry.$clinit();]
 [UNKNOWN] => [let $instance = new MapEntry();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class MapEntry {
+    public <T> Getable<T> method(Object o) {
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry();
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry();]
+[public <T> Getable<T> method(Object o) {
+      return (Getable<T> & Setable) o;
+    }] => [/**
+   * @template M_MapEntry_method_T
+...    return /**@type {Getable<*>} */ ($Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.method"
 [o] => [o] "o"
 [return (Getable<T> & Setable) o;] => [return /**@type {Getable<*>} */ ($Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

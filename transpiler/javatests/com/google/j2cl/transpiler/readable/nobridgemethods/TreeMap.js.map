@@ -1,10 +1,45 @@
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [/**
+ * @template C_K
+...exports = TreeMap;
+] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap"
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap"
 [UNKNOWN] => [super();]
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<ctor>"
 [UNKNOWN] => [TreeMap.$clinit();]
 [UNKNOWN] => [let $instance = new TreeMap();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap__();]
 [UNKNOWN] => [return $instance;]
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap();
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap();]
+[@Override
+  public InnerEntry<K> getCeilingEntry(K key) {
+    return new InnerEntry<K>();
+  }] => [/**
+   * @override
+...    return /**@type {!InnerEntry<C_K>} */ (InnerEntry.$create__());
+  }] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.getCeilingEntry"
 [key] => [key] "key"
 [return new InnerEntry<K>();] => [return /**@type {!InnerEntry<C_K>} */ (InnerEntry.$create__());]
 [UNKNOWN] => [Map.$clinit();]

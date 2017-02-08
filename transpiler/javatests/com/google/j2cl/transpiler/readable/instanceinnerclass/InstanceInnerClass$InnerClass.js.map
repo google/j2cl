@@ -1,3 +1,17 @@
+[public class InnerClass {
+    public int field = instanceField + InstanceInnerClass.this.instanceField;
+...    }
+  }] => [class InnerClass extends java_lang_Object {
+  /**
+...exports = InnerClass;
+] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass"
+[public class InnerClass {
+    public int field = instanceField + InstanceInnerClass.this.instanceField;
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_enclosingInstance__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass = null;
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InstanceInnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass = null;]
@@ -5,13 +19,34 @@
     this.f_field__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass = 0;]
 [UNKNOWN] => [/** @public {InstanceInnerClass} */
     this.f_enclosingInstance__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass = null;]
+[public class InnerClass {
+    public int field = instanceField + InstanceInnerClass.this.instanceField;
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class InnerClass {
+    public int field = instanceField + InstanceInnerClass.this.instanceField;
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass();
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass();]
+[public void funInner() {
+      funOuter();
+      InstanceInnerClass.this.funOuter();
+    }] => [/**
+   * @return {void}
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass.m_funOuter__();
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass.funInner"
 [funOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass.m_funOuter__();]
 [InstanceInnerClass.this.funOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass_InnerClass.m_funOuter__();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

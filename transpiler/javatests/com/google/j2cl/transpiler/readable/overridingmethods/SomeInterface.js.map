@@ -1,0 +1,10 @@
+[public interface SomeInterface {
+  void bar();
+}] => [/**
+ * @interface
+...exports = SomeInterface;
+] "com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface"
+[void bar();] => [/**
+   * @abstract
+...  m_bar__() {
+  }] "com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface.bar"

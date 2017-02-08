@@ -1,6 +1,32 @@
+[@JsType
+public class Child extends Parent {
+...  public void foo() {}
+}] => [class Child extends Parent {
+  /**
+...exports = Child;
+] "com.google.j2cl.transpiler.readable.jsmethodoverride.Child"
+[@JsType
+public class Child extends Parent {
+...  public void foo() {}
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child__();
+  }] "com.google.j2cl.transpiler.readable.jsmethodoverride.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child__();]
+[@JsType
+public class Child extends Parent {
+...  public void foo() {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Child();
+  }] "com.google.j2cl.transpiler.readable.jsmethodoverride.Child.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Child();]
+[@Override
+  public void foo() {}] => [/**
+   * @override
+...  bar() {
+  }] "com.google.j2cl.transpiler.readable.jsmethodoverride.Child.foo"
 [UNKNOWN] => [Parent.$clinit();]

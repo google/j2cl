@@ -1,9 +1,53 @@
+[{}] => [class $1 extends SimpleEnum2 {
+  /**
+...exports = $1;
+] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.1"
+[{}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.1"
 [UNKNOWN] => [super();]
+[UNKNOWN] => [/**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @param {number} $_0
+   * @return {!$1}
+   * @public
+   */
+  static $create__java_lang_String__int__int($name, $ordinal, $_0) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_1__java_lang_String__int__int($name, $ordinal, $_0);
+    return $instance;
+  }]
 [UNKNOWN] => [$1.$clinit();]
 [UNKNOWN] => [let $instance = new $1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_1__java_lang_String__int__int($name, $ordinal, $_0);]
 [UNKNOWN] => [return $instance;]
+[UNKNOWN] => [/**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @param {number} $_0
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_1__java_lang_String__int__int($name, $ordinal, $_0) {
+    this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int($name, $ordinal, $_0);
+    this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_1();
+  }]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int($name, $ordinal, $_0);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_1();]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
+  }]
 [UNKNOWN] => [return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));]
 [UNKNOWN] => [SimpleEnum2.$clinit();]

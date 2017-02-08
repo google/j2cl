@@ -1,1 +1,11 @@
+[interface Predicate<T> {
+    boolean apply(T parameter);
+  }] => [/**
+ * @interface
+...exports = Predicate;
+] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Predicate"
+[boolean apply(T parameter);] => [/**
+   * @abstract
+...  m_apply__java_lang_Object(parameter) {
+  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Predicate.apply"
 [parameter] => [parameter] "parameter"

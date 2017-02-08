@@ -1,19 +1,59 @@
+[class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
+    public OuterRefFromThisCtorCall(Object object) {
+...    }
+  }] => [class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
+  /**
+...exports = OuterRefFromThisCtorCall;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall"
+[class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
+    public OuterRefFromThisCtorCall(Object object) {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall = null;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClassInitOrder} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall = null;]
+[public OuterRefFromThisCtorCall(Object object) {
+      super(object);
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.<ctor>"
 [object] => [object] "object"
 [UNKNOWN] => [OuterRefFromThisCtorCall.$clinit();]
 [UNKNOWN] => [let $instance = new OuterRefFromThisCtorCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__java_lang_Object($outer_this, object);]
 [UNKNOWN] => [return $instance;]
+[public OuterRefFromThisCtorCall(Object object) {
+      super(object);
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.<ctor>"
 [object] => [object] "object"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall = $outer_this;]
 [super(object);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(object);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall();]
+[public OuterRefFromThisCtorCall() {
+      this(new Object() {
+...      });
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.<ctor>"
 [UNKNOWN] => [OuterRefFromThisCtorCall.$clinit();]
 [UNKNOWN] => [let $instance = new OuterRefFromThisCtorCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public OuterRefFromThisCtorCall() {
+      this(new Object() {
+...      });
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__java_lang_Object($outer_this, $1.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall(this));
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.<ctor>"
 [this(new Object() {
         @Override
         public String toString() {

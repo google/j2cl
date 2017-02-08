@@ -1,3 +1,17 @@
+[public class ValueOfNullable {
+  String nullableString = "b";
+...  String result = someChar + nullableString;
+}] => [class ValueOfNullable extends java_lang_Object {
+  /**
+...exports = ValueOfNullable;
+] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable"
+[public class ValueOfNullable {
+  String nullableString = "b";
+...  String result = someChar + nullableString;
+}] => [/**
+   * Defines instance fields.
+...    this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = null;
+  }] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = null;]
@@ -5,10 +19,24 @@
     this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = 0;]
 [UNKNOWN] => [/** @public {?string} */
     this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = null;]
+[public class ValueOfNullable {
+  String nullableString = "b";
+...  String result = someChar + nullableString;
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<ctor>"
 [UNKNOWN] => [ValueOfNullable.$clinit();]
 [UNKNOWN] => [let $instance = new ValueOfNullable();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable__();]
 [UNKNOWN] => [return $instance;]
+[public class ValueOfNullable {
+  String nullableString = "b";
+...  String result = someChar + nullableString;
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable();
+  }] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

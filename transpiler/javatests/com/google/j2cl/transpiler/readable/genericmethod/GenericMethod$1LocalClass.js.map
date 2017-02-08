@@ -1,13 +1,49 @@
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [/**
+ * @template C_1LocalClass_T, M_T, C_T
+...exports = $1LocalClass;
+] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass"
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass = null;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {GenericMethod<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass = null;]
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass.<ctor>"
 [UNKNOWN] => [$1LocalClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1LocalClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass();
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass();]
+[public void fun2(T t) {}] => [/**
+   * @param {C_1LocalClass_T} t
+...  m_fun2__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass.fun2"
 [t] => [t] "t"
+[public <T extends Number> void fun2(T t) {}] => [/**
+   * @template M_LocalClass_fun2_T
+...  m_fun2__java_lang_Number(t) {
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1LocalClass.fun2"
 [t] => [t] "t"
 [UNKNOWN] => [GenericMethod.$clinit();]

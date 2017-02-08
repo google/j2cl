@@ -1,15 +1,54 @@
+[class InnerClass extends ParentInner {
+    public int fieldInInner;
+...    }
+  }] => [class InnerClass extends ParentInner {
+  /**
+...exports = InnerClass;
+] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass"
+[class InnerClass extends ParentInner {
+    public int fieldInInner;
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = 0;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {ChildClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = 0;]
+[class InnerClass extends ParentInner {
+    public int fieldInInner;
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class InnerClass extends ParentInner {
+    public int fieldInInner;
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass();]
+[public void funInInner() {}] => [/**
+   * @return {void}
+...  m_funInInner__() {
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass.funInInner"
+[public int testInnerClass() {
+      // call to outer class's function inherited from ParentOuter
+...      return a;
+    }] => [/**
+   * @return {number}
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass.testInnerClass"
 [funInParentOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();]
 [ChildClass.this.funInParentOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();]
 [funInOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInOuter__();]

@@ -1,13 +1,48 @@
+[public class A {
+    public void test() {
+...    }
+  }] => [class A extends java_lang_Object {
+  /**
+...exports = A;
+] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.A"
+[public class A {
+    public void test() {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A = null;
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.A"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NewInnerClassWithSameOuter} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A = null;]
+[public class A {
+    public void test() {
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class A {
+    public void test() {
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A();
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A();]
+[public void test() {
+      // New instance of other inner classes with the same outer class.
+...      new C();
+    }] => [/**
+   * @return {void}
+...    C.$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A);
+  }] "com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.test"
 [new B();] => [B.$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A);]
 [new C();] => [C.$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(this.f_$outer_this__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,10 +1,45 @@
+[public class ContinueStatement {
+  public void test() {
+...  }
+}] => [class ContinueStatement extends java_lang_Object {
+  /**
+...exports = ContinueStatement;
+] "com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement"
+[public class ContinueStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement"
 [UNKNOWN] => [super();]
+[public class ContinueStatement {
+  public void test() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement.<ctor>"
 [UNKNOWN] => [ContinueStatement.$clinit();]
 [UNKNOWN] => [let $instance = new ContinueStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement__();]
 [UNKNOWN] => [return $instance;]
+[public class ContinueStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement();
+  }] "com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement();]
+[public void test() {
+    for (; ; ) {
+...    }
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement.test"
 [for (; ; ) {
       continue;
     }] => [for (; ; ) {

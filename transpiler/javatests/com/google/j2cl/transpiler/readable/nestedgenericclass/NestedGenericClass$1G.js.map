@@ -1,12 +1,47 @@
+[class G<T> {
+      public <T> void bar() {
+...      }
+    }] => [/**
+ * @template C_1G_T, M_T, C_T
+...exports = $1G;
+] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1G"
+[class G<T> {
+      public <T> void bar() {
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G = null;
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1G"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NestedGenericClass<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G = null;]
+[class G<T> {
+      public <T> void bar() {
+...      }
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1G.<ctor>"
 [UNKNOWN] => [$1G.$clinit();]
 [UNKNOWN] => [let $instance = new $1G();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class G<T> {
+      public <T> void bar() {
+...      }
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G();
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1G.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G();]
+[public <T> void bar() {
+        class H<T> {}
+        new H<Number>();
+      }] => [/**
+   * @template M_G_bar_T
+...    /**@type {!$1H<(Number|?number), *, C_1G_T, M_T, C_T>} */ ($1H.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G(this));
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1G.bar"
 [new H<Number>();] => [/**@type {!$1H<(Number|?number), *, C_1G_T, M_T, C_T>} */ ($1H.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G(this));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

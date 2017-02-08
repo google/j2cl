@@ -1,10 +1,45 @@
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [class LambdaInSubClass extends Parent {
+  /**
+...exports = LambdaInSubClass;
+] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass"
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass"
 [UNKNOWN] => [super();]
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<ctor>"
 [UNKNOWN] => [LambdaInSubClass.$clinit();]
 [UNKNOWN] => [let $instance = new LambdaInSubClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass__();]
 [UNKNOWN] => [return $instance;]
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass();
+  }] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass();]
+[public void test() {
+    LambdaInterface l =
+...        });
+  }] => [/**
+   * @return {void}
+...    let l = ($Lambda$LambdaInterface$0.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));
+  }] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
 [LambdaInterface l =
         (i -> {
           // call to outer class's inherited function

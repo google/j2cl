@@ -1,9 +1,43 @@
+[public class ImportsReturnType {
+  public static class Entry {}
+...  }
+}] => [class ImportsReturnType extends java_lang_Object {
+  /**
+...exports = ImportsReturnType;
+] "com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType"
+[public class ImportsReturnType {
+  public static class Entry {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType"
 [UNKNOWN] => [super();]
+[public class ImportsReturnType {
+  public static class Entry {}
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.<ctor>"
 [UNKNOWN] => [ImportsReturnType.$clinit();]
 [UNKNOWN] => [let $instance = new ImportsReturnType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType__();]
 [UNKNOWN] => [return $instance;]
+[public class ImportsReturnType {
+  public static class Entry {}
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType();
+  }] "com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType();]
+[public Set<Entry> get() {
+    return null;
+  }] => [/**
+   * @return {Set<Entry>}
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.get"
 [return null;] => [return null;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

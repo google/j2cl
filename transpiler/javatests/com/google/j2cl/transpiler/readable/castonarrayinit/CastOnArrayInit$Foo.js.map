@@ -1,8 +1,24 @@
+[public static class Foo<T> {}] => [/**
+ * @template C_Foo_T
+...exports = Foo;
+] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo"
+[public static class Foo<T> {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo"
 [UNKNOWN] => [super();]
+[public static class Foo<T> {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
 [UNKNOWN] => [let $instance = new Foo();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo__();]
 [UNKNOWN] => [return $instance;]
+[public static class Foo<T> {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo();
+  }] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

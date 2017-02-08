@@ -1,9 +1,42 @@
+[@JsType(namespace = "woo")
+public class StaticJsMethodsWithClassNamespace {
+...  }
+}] => [class StaticJsMethodsWithClassNamespace extends java_lang_Object {
+  /**
+...exports = StaticJsMethodsWithClassNamespace;
+] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace"
+[@JsType(namespace = "woo")
+public class StaticJsMethodsWithClassNamespace {
+...  }
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.<ctor>"
 [UNKNOWN] => [StaticJsMethodsWithClassNamespace.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__();]
+[@JsType(namespace = "woo")
+public class StaticJsMethodsWithClassNamespace {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace();]
+[@JsMethod(name = "replacedName")
+  public static void originalName() {}] => [/**
+   * @return {void}
+...    StaticJsMethodsWithClassNamespace.$clinit();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName"
 [UNKNOWN] => [StaticJsMethodsWithClassNamespace.$clinit();]
+[public void test() {
+    StaticJsMethodsWithClassNamespace.originalName();
+    originalName();
+  }] => [/**
+   * @return {void}
+...    StaticJsMethodsWithClassNamespace.replacedName();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.test"
 [StaticJsMethodsWithClassNamespace.originalName();] => [StaticJsMethodsWithClassNamespace.replacedName();]
 [originalName();] => [StaticJsMethodsWithClassNamespace.replacedName();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

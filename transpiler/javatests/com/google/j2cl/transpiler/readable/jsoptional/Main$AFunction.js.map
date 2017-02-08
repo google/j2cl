@@ -1,10 +1,45 @@
+[static class AFunction implements Function {
+    @Override
+...    }
+  }] => [/**
+ * @implements {com_google_j2cl_transpiler_readable_jsoptional_Main_Function}
+...exports = AFunction;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction"
+[static class AFunction implements Function {
+    @Override
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction"
 [UNKNOWN] => [super();]
+[static class AFunction implements Function {
+    @Override
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $Util.$makeLambdaFunction($Util.$getPrototype(AFunction).m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.<ctor>"
 [UNKNOWN] => [AFunction.$clinit();]
 [UNKNOWN] => [let $instance = new AFunction();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(AFunction).m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);]
+[static class AFunction implements Function {
+    @Override
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction();]
+[@Override
+    public Object f1(@JsOptional String i, Object... args) {
+      return args[0];
+    }] => [/**
+   * @override
+...    return $var_args_copy[0];
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.f1"
 [i] => [i] "i"
 [args] => [args] "args"
 [UNKNOWN] => [let $var_args_copy = new Array(arguments.length - 1);]

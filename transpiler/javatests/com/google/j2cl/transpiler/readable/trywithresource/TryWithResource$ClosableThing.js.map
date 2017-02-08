@@ -1,8 +1,41 @@
+[static class ClosableThing implements AutoCloseable {
+    @Override
+    public void close() {}
+  }] => [/**
+ * @implements {AutoCloseable}
+...exports = ClosableThing;
+] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing"
+[static class ClosableThing implements AutoCloseable {
+    @Override
+    public void close() {}
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing"
 [UNKNOWN] => [super();]
+[static class ClosableThing implements AutoCloseable {
+    @Override
+    public void close() {}
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing.<ctor>"
 [UNKNOWN] => [ClosableThing.$clinit();]
 [UNKNOWN] => [let $instance = new ClosableThing();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource_ClosableThing__();]
 [UNKNOWN] => [return $instance;]
+[static class ClosableThing implements AutoCloseable {
+    @Override
+    public void close() {}
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource_ClosableThing();
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource_ClosableThing();]
+[@Override
+    public void close() {}] => [/**
+   * @override
+...  m_close__() {
+  }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing.close"
 [UNKNOWN] => [java_lang_Object.$clinit();]

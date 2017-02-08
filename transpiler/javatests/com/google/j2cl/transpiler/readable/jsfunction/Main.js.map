@@ -1,14 +1,55 @@
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main"
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main"
 [UNKNOWN] => [super();]
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main__();]
 [UNKNOWN] => [return $instance;]
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();]
+[public static int fun(MyJsFunctionInterface fn, int a) {
+    return fn.foo(a);
+  }] => [/**
+   * @param {?function(number):number} fn
+...    return fn(a);
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.fun"
 [fn] => [fn] "fn"
 [a] => [a] "a"
 [UNKNOWN] => [Main.$clinit();]
 [return fn.foo(a);] => [return fn(a);]
+[public void test() {
+    MyJsFunctionImpl func = new MyJsFunctionImpl();
+...
+  }] => [/**
+   * @return {void}
+...    })(3);
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
 [MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create__();]
 [func] => [func] "func"
 [func.foo(10);] => [func(10);]
@@ -49,18 +90,57 @@
 [a] => [a$2$] "a"
 [handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();]
 [return 0;] => [return 0;]
+[@JsMethod
+  public static native int callAsFunction(Object fn, int arg);] => [/**
+   * @param {*} fn
+...   */
+  // native static callAsFunction(fn, arg) ] "com.google.j2cl.transpiler.readable.jsfunction.Main.callAsFunction"
 [fn] => [fn] "fn"
 [arg] => [arg] "arg"
+[@JsMethod
+  public static native MyJsFunctionInterface createMyJsFunction();] => [/**
+   * @return {?function(number):number}
+...   */
+  // native static createMyJsFunction() ] "com.google.j2cl.transpiler.readable.jsfunction.Main.createMyJsFunction"
+[private void handleReceiveCommands() {}] => [/**
+   * @return {void}
+...  m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main() {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.handleReceiveCommands"
+[public static void f(Function<String, String> f) {}] => [/**
+   * @param {?function(?string):?string} f
+...    Main.$clinit();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.f"
 [f] => [f] "f"
 [UNKNOWN] => [Main.$clinit();]
+[public void test2() {
+    List<Function<String, String>> list = new ArrayList<>();
+    f(list.get(0));
+  }] => [/**
+   * @return {void}
+...    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());]
 [list] => [list] "list"
 [f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));]
+[public static <A, T> A[] toArray(IntFunction<A[]> generator) {
+    List<T> collected = null;
+    return collected.toArray(generator.apply(collected.size()));
+  }] => [/**
+   * @template M_A, M_T
+...    return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
 [generator] => [generator] "generator"
 [UNKNOWN] => [Main.$clinit();]
 [List<T> collected = null;] => [let collected = null;]
 [collected] => [collected] "collected"
 [return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));]
+[void testJsFunctionVarargs() {
+    JsFunctionVarags f =
+...        };
+  }] => [/**
+   * @return {void}
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [JsFunctionVarags f =
         (i, numbers) -> {
           int sum = i;
@@ -91,6 +171,12 @@
 [number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;]
 [return sum;] => [return sum;]
+[void testJsFunctionOptional() {
+    JsFunctionOptional f = (i, n) -> (int) (i + n);
+  }] => [/**
+   * @return {void}
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((i, n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });]

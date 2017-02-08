@@ -11,5 +11,6 @@ java_library(
         "//java/com/google/common/collect",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/common",
+        "//transpiler/java/com/google/j2cl/common",
     ],
 )

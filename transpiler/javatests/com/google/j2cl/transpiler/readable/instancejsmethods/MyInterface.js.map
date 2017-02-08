@@ -1,0 +1,10 @@
+[public interface MyInterface {
+  int intfFoo();
+}] => [/**
+ * @interface
+...exports = MyInterface;
+] "com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface"
+[int intfFoo();] => [/**
+   * @abstract
+...  m_intfFoo__() {
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface.intfFoo"

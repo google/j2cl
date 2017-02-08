@@ -1,8 +1,36 @@
+[/**
+ * Restrictions on JsConstructor:
+...  }
+}] => [class JsConstructorClass extends java_lang_Object {
+  /**
+...exports = JsConstructorClass;
+] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass"
+[/**
+ * Restrictions on JsConstructor:
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass"
 [UNKNOWN] => [super();]
+[/**
+ * Restrictions on JsConstructor:
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.<ctor>"
 [UNKNOWN] => [JsConstructorClass.$clinit();]
 [UNKNOWN] => [let $instance = new JsConstructorClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__();]
 [UNKNOWN] => [return $instance;]
+[/**
+ * Restrictions on JsConstructor:
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass();
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

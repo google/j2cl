@@ -1,10 +1,32 @@
+[public class Main {
+  @JsMethod
+...  }
+}] => [class Main extends java_lang_Object {
+  /**
+...exports = Main;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main"
+[@JsConstructor
+  public Main(@JsOptional String a) {}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(a);
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(a);]
+[@JsMethod
+  public void method1(int i1, @JsOptional Double d, @JsOptional Integer i) {}] => [/**
+   * @param {number} i1
+...  method1(i1, d, i) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.method1"
 [i1] => [i1] "i1"
 [d] => [d] "d"
 [i] => [i] "i"
+[@JsMethod
+  public void method2(String s1, @JsOptional Double d, Boolean... i) {}] => [/**
+   * @param {?string} s1
+...    }
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.method2"
 [s1] => [s1] "s1"
 [d] => [d] "d"
 [i] => [i] "i"
@@ -13,6 +35,11 @@
       $Arrays.$set($var_args_copy, $i, arguments[$i + 2]);
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 2]);]
+[@JsConstructor
+  public Main(@JsOptional String a) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();]

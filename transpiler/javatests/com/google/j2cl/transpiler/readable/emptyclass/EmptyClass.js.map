@@ -1,8 +1,24 @@
+[public class EmptyClass {}] => [class EmptyClass extends java_lang_Object {
+  /**
+...exports = EmptyClass;
+] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass"
+[public class EmptyClass {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass"
 [UNKNOWN] => [super();]
+[public class EmptyClass {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass.<ctor>"
 [UNKNOWN] => [EmptyClass.$clinit();]
 [UNKNOWN] => [let $instance = new EmptyClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass__();]
 [UNKNOWN] => [return $instance;]
+[public class EmptyClass {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass();
+  }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

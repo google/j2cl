@@ -1,10 +1,45 @@
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [class Timing extends java_lang_Object {
+  /**
+...exports = Timing;
+] "com.google.j2cl.transpiler.readable.timing.Timing"
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.timing.Timing"
 [UNKNOWN] => [super();]
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.timing.Timing.<ctor>"
 [UNKNOWN] => [Timing.$clinit();]
 [UNKNOWN] => [let $instance = new Timing();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_timing_Timing__();]
 [UNKNOWN] => [return $instance;]
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_timing_Timing();
+  }] "com.google.j2cl.transpiler.readable.timing.Timing.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_timing_Timing();]
+[public static boolean run() {
+    // Use both Guava collections and base libraries, just so the source and BUILD validators don't
+...    return Objects.equal(fooStrings, barStrings);
+  }] => [/**
+   * @return {boolean}
+...    return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);
+  }] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [UNKNOWN] => [Timing.$clinit();]
 [List<String> fooStrings = Lists.newArrayList("foo");] => [let fooStrings = Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["foo"], java_lang_String)));]
 [fooStrings] => [fooStrings] "fooStrings"

@@ -1,16 +1,72 @@
+[/**
+ * Tests for non native instance JsProperty.
+...  }
+}] => [class Bar extends java_lang_Object {
+  /**
+...exports = Bar;
+] "com.google.j2cl.transpiler.readable.jsproperties.Bar"
+[/**
+ * Tests for non native instance JsProperty.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = 0;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = 0;]
+[/**
+ * Tests for non native instance JsProperty.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.<ctor>"
 [UNKNOWN] => [Bar.$clinit();]
 [UNKNOWN] => [let $instance = new Bar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Bar__();]
 [UNKNOWN] => [return $instance;]
+[/**
+ * Tests for non native instance JsProperty.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsproperties_Bar();
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsproperties_Bar();]
+[@JsProperty
+  public int getA() {
+    return f + 1;
+  }] => [/**
+   * @return {number}
+...    return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 1;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.getA"
 [return f + 1;] => [return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 1;]
+[@JsProperty
+  public void setA(int x) {
+    f = x + 2;
+  }] => [/**
+   * @param {number} x
+...    this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 2;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.setA"
 [x] => [x] "x"
 [f = x + 2;] => [this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 2;]
+[@JsProperty(name = "abc")
+  public int getB() {
+    return f + 3;
+  }] => [/**
+   * @return {number}
+...    return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 3;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.getB"
 [return f + 3;] => [return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 3;]
+[@JsProperty(name = "abc")
+  public void setB(int x) {
+    f = x + 4;
+  }] => [/**
+   * @param {number} x
+...    this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 4;
+  }] "com.google.j2cl.transpiler.readable.jsproperties.Bar.setB"
 [x] => [x] "x"
 [f = x + 4;] => [this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 4;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

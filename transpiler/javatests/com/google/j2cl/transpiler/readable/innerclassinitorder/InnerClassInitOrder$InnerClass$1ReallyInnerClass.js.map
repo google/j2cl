@@ -1,13 +1,47 @@
+[class ReallyInnerClass {
+        {
+...        }
+      }] => [class $1ReallyInnerClass extends java_lang_Object {
+  /**
+...exports = $1ReallyInnerClass;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass"
+[class ReallyInnerClass {
+        {
+...        }
+      }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass = null;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass = null;]
+[class ReallyInnerClass {
+        {
+...        }
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.<ctor>"
 [UNKNOWN] => [$1ReallyInnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1ReallyInnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class ReallyInnerClass {
+        {
+...        }
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass();]
+[void callReallyInner() {
+          number += 10;
+        }] => [/**
+   * @return {void}
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder += 10;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.callReallyInner"
 [number += 10;] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_InnerClass.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder += 10;]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [callReallyInner();] => [this.m_callReallyInner___$pp_com_google_j2cl_transpiler_readable_innerclassinitorder();]

@@ -1,10 +1,53 @@
+[public class Parent extends GrandParent {
+  public void parentSimplest() {}
+...  }
+}] => [class Parent extends GrandParent {
+  /**
+...exports = Parent;
+] "com.google.j2cl.transpiler.readable.supermethodcall.Parent"
+[public class Parent extends GrandParent {
+  public void parentSimplest() {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent"
 [UNKNOWN] => [super();]
+[public class Parent extends GrandParent {
+  public void parentSimplest() {}
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent__();]
 [UNKNOWN] => [return $instance;]
+[public class Parent extends GrandParent {
+  public void parentSimplest() {}
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_supermethodcall_Parent();
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supermethodcall_Parent();]
+[public void parentSimplest() {}] => [/**
+   * @return {void}
+...  m_parentSimplest__() {
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent.parentSimplest"
+[@SuppressWarnings("unused")
+  public void parentWithParams(int foo) {}] => [/**
+   * @param {number} foo
+...  m_parentWithParams__int(foo) {
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent.parentWithParams"
 [foo] => [foo] "foo"
+[public Object parentWithChangingReturn() {
+    return null;
+  }] => [/**
+   * @return {*}
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.supermethodcall.Parent.parentWithChangingReturn"
 [return null;] => [return null;]
 [UNKNOWN] => [GrandParent.$clinit();]

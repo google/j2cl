@@ -1,8 +1,36 @@
+[class A {
+  class B {
+...  }
+}] => [class A extends java_lang_Object {
+  /**
+...exports = A;
+] "com.google.j2cl.transpiler.readable.anonymousinnerclass.A"
+[class A {
+  class B {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.A"
 [UNKNOWN] => [super();]
+[class A {
+  class B {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__();]
 [UNKNOWN] => [return $instance;]
+[class A {
+  class B {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_A();
+  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_A();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

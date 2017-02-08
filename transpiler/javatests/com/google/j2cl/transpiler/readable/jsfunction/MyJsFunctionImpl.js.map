@@ -1,16 +1,75 @@
+[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [/**
+ * @implements {MyJsFunctionInterface}
+...exports = MyJsFunctionImpl;
+] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl"
+[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl = 0;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl = 0;]
+[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $Util.$makeLambdaFunction($Util.$getPrototype(MyJsFunctionImpl).m_foo__int, $instance, MyJsFunctionImpl.$copy);
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<ctor>"
 [UNKNOWN] => [MyJsFunctionImpl.$clinit();]
 [UNKNOWN] => [let $instance = new MyJsFunctionImpl();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(MyJsFunctionImpl).m_foo__int, $instance, MyJsFunctionImpl.$copy);]
+[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();]
+[public int bar() {
+    return 0;
+  }] => [/**
+   * @return {number}
+...  m_bar__() {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
+[public int fun() {
+    return bar() + foo(1);
+  }] => [/**
+   * @return {number}
+...  m_fun__() {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
+[@Override
+  public int foo(int a) {
+    return a + this.bar() + this.field;
+  }] => [/**
+   * @override
+...    return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.foo"
 [a] => [a] "a"
 [return a + this.bar() + this.field;] => [return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;]
+[public int bar() {
+    return 0;
+  }] => [/**
+   * @param {?function(number):number} $thisArg
+...    return 0;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
 [UNKNOWN] => [MyJsFunctionImpl.$clinit();]
 [return 0;] => [return 0;]
+[public int fun() {
+    return bar() + foo(1);
+  }] => [/**
+   * @param {?function(number):number} $thisArg
+...    return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);
+  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
 [UNKNOWN] => [MyJsFunctionImpl.$clinit();]
 [return bar() + foo(1);] => [return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

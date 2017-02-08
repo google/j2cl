@@ -1,1 +1,11 @@
+[public interface Collection<T> {
+    String getFoo(T t);
+  }] => [/**
+ * @interface
+...exports = Collection;
+] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection"
+[String getFoo(T t);] => [/**
+   * @abstract
+...  m_getFoo__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.getFoo"
 [t] => [t] "t"

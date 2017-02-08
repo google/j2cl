@@ -1,8 +1,24 @@
+[public class BoundedTypeVariable<T extends BoundedTypeVariable<T>> {}] => [/**
+ * @template C_T
+...exports = BoundedTypeVariable;
+] "com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable"
+[public class BoundedTypeVariable<T extends BoundedTypeVariable<T>> {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable"
 [UNKNOWN] => [super();]
+[public class BoundedTypeVariable<T extends BoundedTypeVariable<T>> {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable.<ctor>"
 [UNKNOWN] => [BoundedTypeVariable.$clinit();]
 [UNKNOWN] => [let $instance = new BoundedTypeVariable();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable__();]
 [UNKNOWN] => [return $instance;]
+[public class BoundedTypeVariable<T extends BoundedTypeVariable<T>> {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable();
+  }] "com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

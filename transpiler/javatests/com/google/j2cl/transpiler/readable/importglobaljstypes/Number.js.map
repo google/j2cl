@@ -1,16 +1,62 @@
+[/**
+ * Tests explicit import by namespaced JsMethod.
+...  }
+}] => [class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends java_lang_Object {
+  /**
+...exports = com_google_j2cl_transpiler_readable_importglobaljstypes_Number;
+] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number"
+[/**
+ * Tests explicit import by namespaced JsMethod.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number"
 [UNKNOWN] => [super();]
+[/**
+ * Tests explicit import by namespaced JsMethod.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.<ctor>"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();]
 [UNKNOWN] => [let $instance = new com_google_j2cl_transpiler_readable_importglobaljstypes_Number();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number__();]
 [UNKNOWN] => [return $instance;]
+[/**
+ * Tests explicit import by namespaced JsMethod.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_importglobaljstypes_Number();
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_importglobaljstypes_Number();]
+[public static boolean test(double x) {
+    return Number.fun(x);
+  }] => [/**
+   * @param {number} x
+...    return Number.isInteger(x);
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.test"
 [x] => [x] "x"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();]
 [return Number.fun(x);] => [return Number.isInteger(x);]
+[public static String fromCharCode(int[] array) {
+    return getFromCharCodeFunction().apply(null, array);
+  }] => [/**
+   * @param {Array<number>} array
+...    return /**@type {?string} */ ($Casts.to(String.fromCharCode.apply(null, array), java_lang_String));
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.fromCharCode"
 [array] => [array] "array"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();]
 [return getFromCharCodeFunction().apply(null, array);] => [return /**@type {?string} */ ($Casts.to(String.fromCharCode.apply(null, array), java_lang_String));]
+[public MyLiteralType testJsDocForLiteralType(MyLiteralType a) {
+    return a;
+  }] => [/**
+   * @param {Object} a
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.testJsDocForLiteralType"
 [a] => [a] "a"
 [return a;] => [return a;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

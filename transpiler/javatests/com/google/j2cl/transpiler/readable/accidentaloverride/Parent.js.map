@@ -1,9 +1,42 @@
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [/**
+ * @template C_T
+...exports = Parent;
+] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent"
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent"
 [UNKNOWN] => [super();]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__();]
 [UNKNOWN] => [return $instance;]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+  }] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();]
+[@SuppressWarnings("unused")
+  public void foo(T e) {}] => [/**
+   * @param {C_T} e
+...  m_foo__java_lang_Error(e) {
+  }] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.foo"
 [e] => [e] "e"
 [UNKNOWN] => [java_lang_Object.$clinit();]

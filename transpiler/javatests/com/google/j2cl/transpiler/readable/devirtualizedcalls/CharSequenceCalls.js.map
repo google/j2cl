@@ -1,12 +1,53 @@
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [class CharSequenceCalls extends java_lang_Object {
+  /**
+...exports = CharSequenceCalls;
+] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls"
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls"
 [UNKNOWN] => [super();]
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.<ctor>"
 [UNKNOWN] => [CharSequenceCalls.$clinit();]
 [UNKNOWN] => [let $instance = new CharSequenceCalls();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls__();]
 [UNKNOWN] => [return $instance;]
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls();
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls();]
+[public void test(CharSequence cs) {
+    cs.charAt(0);
+  }] => [/**
+   * @param {(CharSequence|?string)} cs
+...    $CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.test"
 [cs] => [cs] "cs"
 [cs.charAt(0);] => [$CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);]
+[public void main() {
+    String s = "s";
+    test(s);
+  }] => [/**
+   * @return {void}
+...    this.m_test__java_lang_CharSequence(s);
+  }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
 [String s = "s";] => [let s = "s";]
 [s] => [s] "s"
 [test(s);] => [this.m_test__java_lang_CharSequence(s);]

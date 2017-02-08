@@ -1,12 +1,46 @@
+[class D {
+        public int fun() {
+...        }
+      }] => [class $1D extends java_lang_Object {
+  /**
+...exports = $1D;
+] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.1D"
+[class D {
+        public int fun() {
+...        }
+      }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D = null;
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.1D"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {C} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D = null;]
+[class D {
+        public int fun() {
+...        }
+      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.1D.<ctor>"
 [UNKNOWN] => [$1D.$clinit();]
 [UNKNOWN] => [let $instance = new $1D();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class D {
+        public int fun() {
+...        }
+      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D();
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.1D.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D();]
+[public int fun() {
+          return f;
+        }] => [/**
+   * @return {number}
+...    return this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D.f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C;
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.1D.fun"
 [return f;] => [return this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C_1D.f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,10 +1,45 @@
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [class LocalClassInStaticContext extends java_lang_Object {
+  /**
+...exports = LocalClassInStaticContext;
+] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext"
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext"
 [UNKNOWN] => [super();]
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<ctor>"
 [UNKNOWN] => [LocalClassInStaticContext.$clinit();]
 [UNKNOWN] => [let $instance = new LocalClassInStaticContext();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext__();]
 [UNKNOWN] => [return $instance;]
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext();
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext();]
+[public static void test() {
+    // In a static function.
+...        };
+  }] => [/**
+   * @return {void}
+...    let a = $3.$create__();
+  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [UNKNOWN] => [LocalClassInStaticContext.$clinit();]
 [new A();] => [$1A.$create__();]
 [Object a =

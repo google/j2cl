@@ -1,22 +1,59 @@
+[public class GenericConstructor<T> {
+  // constructor with both method level and class level type parameters.
+...  }
+}] => [/**
+ * @template C_T
+...exports = GenericConstructor;
+] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor"
+[public class GenericConstructor<T> {
+  // constructor with both method level and class level type parameters.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor"
 [UNKNOWN] => [super();]
+[public <S> GenericConstructor(S s, T t) {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [s] => [s] "s"
 [t] => [t] "t"
 [UNKNOWN] => [GenericConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new GenericConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(s, t);]
 [UNKNOWN] => [return $instance;]
+[public <S> GenericConstructor(S s, T t) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [s] => [s] "s"
 [t] => [t] "t"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();]
+[public <T> GenericConstructor(T t) {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [t] => [t] "t"
 [UNKNOWN] => [GenericConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new GenericConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(t);]
 [UNKNOWN] => [return $instance;]
+[public <T> GenericConstructor(T t) {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [t] => [t] "t"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();]
+[public void test() {
+    new GenericConstructor<Error>(new Exception(), new Error());
+    new GenericConstructor<Error>(new Exception());
+  }] => [/**
+   * @return {void}
+...    /**@type {!GenericConstructor<Error>} */ (GenericConstructor.$create__java_lang_Object(Exception.$create__()));
+  }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.test"
 [new GenericConstructor<Error>(new Exception(), new Error());] => [/**@type {!GenericConstructor<Error>} */ (GenericConstructor.$create__java_lang_Object__java_lang_Object(Exception.$create__(), Error.$create__()));]
 [new GenericConstructor<Error>(new Exception());] => [/**@type {!GenericConstructor<Error>} */ (GenericConstructor.$create__java_lang_Object(Exception.$create__()));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

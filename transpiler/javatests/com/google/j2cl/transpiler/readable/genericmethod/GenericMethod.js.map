@@ -1,14 +1,61 @@
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [/**
+ * @template C_T
+...exports = GenericMethod;
+] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod"
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod"
 [UNKNOWN] => [super();]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<ctor>"
 [UNKNOWN] => [GenericMethod.$clinit();]
 [UNKNOWN] => [let $instance = new GenericMethod();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();]
 [UNKNOWN] => [return $instance;]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();]
+[public <T, S> void foo(T f, S s) {}] => [/**
+   * @template M_T, M_S
+...  m_foo__java_lang_Object__java_lang_Object(f, s) {
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.foo"
 [f] => [f] "f"
 [s] => [s] "s"
+[public void fun(Object o) {}] => [/**
+   * @param {*} o
+...  m_fun__java_lang_Object(o) {
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [o] => [o] "o"
+[public <T extends Exception> void fun(T t) {}] => [/**
+   * @template M_T
+...  m_fun__java_lang_Exception(t) {
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [t] => [t] "t"
+[public <T extends Error> void fun(T t) { // type parameter with different bounds.
+    new GenericMethod<T>() { // inherit method T
+...    new LocalClass<T>();
+  }] => [/**
+   * @template M_T
+...    /**@type {!$1LocalClass<Error, Error, C_T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [t] => [t] "t"
 [new GenericMethod<T>() { // inherit method T
       public void fun2(T t) {} // inherit method T
@@ -16,11 +63,43 @@
       public <T> void fun2(T t) {} // redefine T
     };] => [/**@type {!$1<Error, C_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));]
 [new LocalClass<T>();] => [/**@type {!$1LocalClass<Error, Error, C_T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));]
+[public <T> GenericMethod<T> bar() {
+    return null;
+  }] => [/**
+   * @template M_T
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.bar"
 [return null;] => [return null;]
+[public <T> T[] fun(T[] array) { // generic array type
+    return array;
+  }] => [/**
+   * @template M_T
+...    return array;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [array] => [array] "array"
 [return array;] => [return array;]
+[public <T> T checked() {
+    return null;
+  }] => [/**
+   * @template M_T
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.checked"
 [return null;] => [return null;]
+[@UncheckedCast
+  public <T> T unchecked() {
+    return null;
+  }] => [/**
+   * @template M_T
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.unchecked"
 [return null;] => [return null;]
+[public void test() {
+    GenericMethod<Number> g = new GenericMethod<>();
+...    s = unchecked();
+  }] => [/**
+   * @return {void}
+...    s = /**@type {?string} */ (this.m_unchecked__());
+  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [GenericMethod<Number> g = new GenericMethod<>();] => [let g = /**@type {!GenericMethod<(Number|?number)>} */ (GenericMethod.$create__());]
 [g] => [g] "g"
 [g.foo(g, g);] => [g.m_foo__java_lang_Object__java_lang_Object(g, g);]

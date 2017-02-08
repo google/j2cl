@@ -1,13 +1,47 @@
+[class SomeClass<T> {
+    public void testJsFunctionWithClassCapture() {
+...    }
+  }] => [/**
+ * @template C_SomeClass_T
+...exports = SomeClass;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass"
+[class SomeClass<T> {
+    public void testJsFunctionWithClassCapture() {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass = null;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass = null;]
+[class SomeClass<T> {
+    public void testJsFunctionWithClassCapture() {
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass.<ctor>"
 [UNKNOWN] => [SomeClass.$clinit();]
 [UNKNOWN] => [let $instance = new SomeClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass__com_google_j2cl_transpiler_readable_jsfunction_Main($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class SomeClass<T> {
+    public void testJsFunctionWithClassCapture() {
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass();]
+[public void testJsFunctionWithClassCapture() {
+      Function<Object, Object> f = object -> new ArrayList<T>();
+    }] => [/**
+   * @return {void}
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass.testJsFunctionWithClassCapture"
 [Function<Object, Object> f = object -> new ArrayList<T>();] => [let f = ((object) =>{
       return /**@type {ArrayList} */ (ArrayList.$create__());
     });]

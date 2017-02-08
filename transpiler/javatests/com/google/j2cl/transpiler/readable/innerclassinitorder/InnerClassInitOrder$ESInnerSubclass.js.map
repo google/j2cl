@@ -1,18 +1,56 @@
+[private static class ESInnerSubclass extends ESOuter.ESInner {
+    ESInnerSubclass(ESOuter outer) {
+...    }
+  }] => [class ESInnerSubclass extends ESInner {
+  /**
+...exports = ESInnerSubclass;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass"
+[private static class ESInnerSubclass extends ESOuter.ESInner {
+    ESInnerSubclass(ESOuter outer) {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass"
 [UNKNOWN] => [super();]
+[ESInnerSubclass(ESOuter outer) {
+      outer.super();
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
 [UNKNOWN] => [ESInnerSubclass.$clinit();]
 [UNKNOWN] => [let $instance = new ESInnerSubclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(outer);]
 [UNKNOWN] => [return $instance;]
+[ESInnerSubclass(ESOuter outer) {
+      outer.super();
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
 [outer.super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(outer);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();]
+[ESInnerSubclass(int value, ESOuter outer) {
+      outer.super(value);
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"
 [outer] => [outer] "outer"
 [UNKNOWN] => [ESInnerSubclass.$clinit();]
 [UNKNOWN] => [let $instance = new ESInnerSubclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(value, outer);]
 [UNKNOWN] => [return $instance;]
+[ESInnerSubclass(int value, ESOuter outer) {
+      outer.super(value);
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"
 [outer] => [outer] "outer"
 [outer.super(value);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__int(outer, value);]

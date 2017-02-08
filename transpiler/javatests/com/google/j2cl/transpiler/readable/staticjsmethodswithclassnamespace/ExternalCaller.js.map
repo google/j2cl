@@ -1,9 +1,43 @@
+[public class ExternalCaller {
+
+...  }
+}] => [class ExternalCaller extends java_lang_Object {
+  /**
+...exports = ExternalCaller;
+] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller"
+[public class ExternalCaller {
+
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller"
 [UNKNOWN] => [super();]
+[public class ExternalCaller {
+
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller.<ctor>"
 [UNKNOWN] => [ExternalCaller.$clinit();]
 [UNKNOWN] => [let $instance = new ExternalCaller();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller__();]
 [UNKNOWN] => [return $instance;]
+[public class ExternalCaller {
+
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller();]
+[public void test() {
+    StaticJsMethodsWithClassNamespace.originalName();
+  }] => [/**
+   * @return {void}
+...    StaticJsMethodsWithClassNamespace.replacedName();
+  }] "com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller.test"
 [StaticJsMethodsWithClassNamespace.originalName();] => [StaticJsMethodsWithClassNamespace.replacedName();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

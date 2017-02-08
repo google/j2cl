@@ -1,9 +1,35 @@
+[public class Child extends Parent {
+  public Child(int a) {
+...  }
+}] => [class Child extends Parent {
+  /**
+...exports = Child;
+] "com.google.j2cl.transpiler.readable.supercallnondefault.Child"
+[public class Child extends Parent {
+  public Child(int a) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child"
 [UNKNOWN] => [super();]
+[public Child(int a) {
+    super(a);
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [let $instance = new Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a);]
 [UNKNOWN] => [return $instance;]
+[public Child(int a) {
+    super(a);
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();
+  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<ctor>"
 [a] => [a] "a"
 [super(a);] => [this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(a);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();]

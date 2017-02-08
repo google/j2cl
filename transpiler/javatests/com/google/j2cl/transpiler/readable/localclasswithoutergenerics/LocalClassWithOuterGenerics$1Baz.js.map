@@ -1,10 +1,38 @@
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [/**
+ * @template C_1Baz_S, M_T
+...exports = $1Baz;
+] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz"
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz"
 [UNKNOWN] => [super();]
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.<ctor>"
 [UNKNOWN] => [$1Baz.$clinit();]
 [UNKNOWN] => [let $instance = new $1Baz();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__();]
 [UNKNOWN] => [return $instance;]
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz();
+  }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz();]
+[void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}] => [/**
+   * @param {$1Baz<C_1Baz_S, M_T>} foo
+...  m_qux__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz_$pp_com_google_j2cl_transpiler_readable_localclasswithoutergenerics(foo, bar, baz) {
+  }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.qux"
 [foo] => [foo] "foo"
 [bar] => [bar] "bar"
 [baz] => [baz] "baz"

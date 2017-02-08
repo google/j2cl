@@ -1,9 +1,43 @@
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [class Right extends java_lang_Object {
+  /**
+...exports = Right;
+] "com.google.j2cl.transpiler.readable.circularimportuse.Right"
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.circularimportuse.Right"
 [UNKNOWN] => [super();]
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<ctor>"
 [UNKNOWN] => [Right.$clinit();]
 [UNKNOWN] => [let $instance = new Right();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_circularimportuse_Right__();]
 [UNKNOWN] => [return $instance;]
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Right();
+  }] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Right();]
+[Left createLeft() {
+    return new Left();
+  }] => [/**
+   * @return {Left}
+...    return Left.$create__();
+  }] "com.google.j2cl.transpiler.readable.circularimportuse.Right.createLeft"
 [return new Left();] => [return Left.$create__();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

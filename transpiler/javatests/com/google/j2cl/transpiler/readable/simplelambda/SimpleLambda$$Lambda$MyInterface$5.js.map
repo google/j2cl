@@ -1,13 +1,59 @@
+[i -> {
+              funOuter();
+...              return i + 2;
+            }] => [/**
+ * @implements {MyInterface}
+...exports = $Lambda$MyInterface$5;
+] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5"
+[i -> {
+              funOuter();
+...              return i + 2;
+            }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5 = null;
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {SimpleLambda} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5 = null;]
+[i -> {
+              funOuter();
+...              return i + 2;
+            }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5.<ctor>"
 [UNKNOWN] => [$Lambda$MyInterface$5.$clinit();]
 [UNKNOWN] => [let $instance = new $Lambda$MyInterface$5();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda($outer_this);]
 [UNKNOWN] => [return $instance;]
+[i -> {
+              funOuter();
+...              return i + 2;
+            }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5();
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5 = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5();]
+[i -> {
+              funOuter();
+              this.funOuter();
+              SimpleLambda.this.funOuter();
+              return i + 2;
+            }] => [/**
+   * Lambda implementation method.
+   * @override
+   * @param {number} i
+   * @return {number}
+   * @public
+   */
+  m_foo__int(i) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5.m_funOuter__();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5.m_funOuter__();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5.m_funOuter__();
+    return i + 2;
+  }]
 [i] => [i] "i"
 [funOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5.m_funOuter__();]
 [this.funOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$5.m_funOuter__();]

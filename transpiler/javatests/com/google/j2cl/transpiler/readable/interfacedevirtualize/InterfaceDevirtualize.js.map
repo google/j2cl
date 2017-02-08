@@ -1,31 +1,108 @@
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [class InterfaceDevirtualize extends java_lang_Object {
+  /**
+...exports = InterfaceDevirtualize;
+] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize"
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize"
 [UNKNOWN] => [super();]
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.<ctor>"
 [UNKNOWN] => [InterfaceDevirtualize.$clinit();]
 [UNKNOWN] => [let $instance = new InterfaceDevirtualize();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize__();]
 [UNKNOWN] => [return $instance;]
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();]
+[public <T> int compare0(Comparable<T> c, T t) {
+    return c.compareTo(t);
+  }] => [/**
+   * @template M_T
+...    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, t);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare0"
 [c] => [c] "c"
 [t] => [t] "t"
 [return c.compareTo(t);] => [return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, t);]
+[@SuppressWarnings({"rawtypes", "unchecked"})
+  public int compare1(Comparable c, Object o) {
+    return c.compareTo(o);
+  }] => [/**
+   * @param {(Comparable|?boolean|?number|?string)} c
+...    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, o);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare1"
 [c] => [c] "c"
 [o] => [o] "o"
 [return c.compareTo(o);] => [return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, o);]
+[public int compare2(Comparable<Double> c, Double d) {
+    return c.compareTo(d);
+  }] => [/**
+   * @param {(Comparable<?number>|?boolean|?number|?string)} c
+...    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare2"
 [c] => [c] "c"
 [d] => [d] "d"
 [return c.compareTo(d);] => [return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);]
+[public int compare3(Double d1, Double d2) {
+    return d1.compareTo(d2);
+  }] => [/**
+   * @param {?number} d1
+...    return Double.m_compareTo__java_lang_Double__java_lang_Double(d1, d2);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare3"
 [d1] => [d1] "d1"
 [d2] => [d2] "d2"
 [return d1.compareTo(d2);] => [return Double.m_compareTo__java_lang_Double__java_lang_Double(d1, d2);]
+[public int compare2(Comparable<Boolean> c, Boolean d) {
+    return c.compareTo(d);
+  }] => [/**
+   * @param {(Comparable<?boolean>|?boolean|?number|?string)} c
+...    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare2"
 [c] => [c] "c"
 [d] => [d] "d"
 [return c.compareTo(d);] => [return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);]
+[public int compare3(Boolean d1, Boolean d2) {
+    return d1.compareTo(d2);
+  }] => [/**
+   * @param {?boolean} d1
+...    return Boolean.m_compareTo__java_lang_Boolean__java_lang_Boolean(d1, d2);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare3"
 [d1] => [d1] "d1"
 [d2] => [d2] "d2"
 [return d1.compareTo(d2);] => [return Boolean.m_compareTo__java_lang_Boolean__java_lang_Boolean(d1, d2);]
+[public int compare2(Comparable<Integer> c, Integer d) {
+    return c.compareTo(d);
+  }] => [/**
+   * @param {(Comparable<Integer>|?boolean|?number|?string)} c
+...    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare2"
 [c] => [c] "c"
 [d] => [d] "d"
 [return c.compareTo(d);] => [return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c, d);]
+[public int compare3(Integer d1, Integer d2) {
+    return d1.compareTo(d2);
+  }] => [/**
+   * @param {Integer} d1
+...    return d1.m_compareTo__java_lang_Integer(d2);
+  }] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare3"
 [d1] => [d1] "d1"
 [d2] => [d2] "d2"
 [return d1.compareTo(d2);] => [return d1.m_compareTo__java_lang_Integer(d2);]

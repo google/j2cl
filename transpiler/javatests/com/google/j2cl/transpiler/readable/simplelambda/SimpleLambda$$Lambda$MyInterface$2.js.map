@@ -1,13 +1,39 @@
+[i -> field + i + 1] => [/**
+ * @implements {MyInterface}
+...exports = $Lambda$MyInterface$2;
+] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2"
+[i -> field + i + 1] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2 = null;
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {SimpleLambda} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2 = null;]
+[i -> field + i + 1] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2.<ctor>"
 [UNKNOWN] => [$Lambda$MyInterface$2.$clinit();]
 [UNKNOWN] => [let $instance = new $Lambda$MyInterface$2();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda($outer_this);]
 [UNKNOWN] => [return $instance;]
+[i -> field + i + 1] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2();
+  }] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2 = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2();]
+[i -> field + i + 1] => [/**
+   * Lambda implementation method.
+   * @override
+   * @param {number} i
+   * @return {number}
+   * @public
+   */
+  m_foo__int(i) {
+    return this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;
+  }]
 [i] => [i] "i"
 [field + i + 1] => [return this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_$Lambda$MyInterface$2.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

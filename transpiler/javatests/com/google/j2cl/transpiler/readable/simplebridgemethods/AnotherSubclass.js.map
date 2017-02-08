@@ -1,8 +1,32 @@
+[class AnotherSubclass extends Superclass<AssertionError> {
+  // there should be no bridge method.
+}] => [/**
+ * @extends {Superclass<AssertionError>}
+...exports = AnotherSubclass;
+] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass"
+[class AnotherSubclass extends Superclass<AssertionError> {
+  // there should be no bridge method.
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass"
 [UNKNOWN] => [super();]
+[class AnotherSubclass extends Superclass<AssertionError> {
+  // there should be no bridge method.
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass.<ctor>"
 [UNKNOWN] => [AnotherSubclass.$clinit();]
 [UNKNOWN] => [let $instance = new AnotherSubclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass__();]
 [UNKNOWN] => [return $instance;]
+[class AnotherSubclass extends Superclass<AssertionError> {
+  // there should be no bridge method.
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass();
+  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass();]
 [UNKNOWN] => [Superclass.$clinit();]

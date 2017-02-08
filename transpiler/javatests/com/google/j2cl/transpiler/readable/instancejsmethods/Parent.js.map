@@ -1,18 +1,89 @@
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [class Parent extends SuperParent {
+  /**
+...exports = Parent;
+] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent"
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent"
 [UNKNOWN] => [super();]
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();]
 [UNKNOWN] => [return $instance;]
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Parent();
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Parent();]
+[/**
+   * JsMethod that exposes non-JsMethod in parent, with renaming.
+...    return a + b;
+  }] => [/**
+   * @param {number} a
+...    return a + b;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b;] => [return a + b;]
+[/**
+   * JsMethod that exposes non-JsMethod in parent, without renaming.
+...    return a * b;
+  }] => [/**
+   * @param {number} a
+...    return a * b;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a * b;] => [return a * b;]
+[/**
+   * JsMethod that does not expose non-JsMethod in parent.
+...    return a;
+  }] => [/**
+   * @param {number} a
+...    return a;
+  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.foo"
 [a] => [a] "a"
 [return a;] => [return a;]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {number} arg0
+   * @param {number} arg1
+   * @return {number}
+   * @public
+   */
+  m_bar__int__int(arg0, arg1) {
+    return this.bar(arg0, arg1);
+  }]
 [UNKNOWN] => [return this.bar(arg0, arg1);]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {number} arg0
+   * @param {number} arg1
+   * @return {number}
+   * @public
+   */
+  m_fun__int__int(arg0, arg1) {
+    return this.sum(arg0, arg1);
+  }]
 [UNKNOWN] => [return this.sum(arg0, arg1);]
 [UNKNOWN] => [SuperParent.$clinit();]

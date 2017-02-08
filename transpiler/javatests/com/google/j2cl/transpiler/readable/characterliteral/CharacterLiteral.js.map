@@ -1,10 +1,45 @@
+[public class CharacterLiteral {
+  @SuppressWarnings("unused")
+...  }
+}] => [class CharacterLiteral extends java_lang_Object {
+  /**
+...exports = CharacterLiteral;
+] "com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral"
+[public class CharacterLiteral {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral"
 [UNKNOWN] => [super();]
+[public class CharacterLiteral {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral.<ctor>"
 [UNKNOWN] => [CharacterLiteral.$clinit();]
 [UNKNOWN] => [let $instance = new CharacterLiteral();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral__();]
 [UNKNOWN] => [return $instance;]
+[public class CharacterLiteral {
+  @SuppressWarnings("unused")
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
+  }] "com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();]
+[@SuppressWarnings("unused")
+  public void main() {
+...    a = '~'; // 126
+  }] => [/**
+   * @return {void}
+...    a = 126 /* '~' */;
+  }] "com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral.main"
 [char a = ' ';] => [let a = 32 /* ' ' */;]
 [a] => [a] "a"
 [a = 0;] => [a = 0 /* "\u0000" */;]

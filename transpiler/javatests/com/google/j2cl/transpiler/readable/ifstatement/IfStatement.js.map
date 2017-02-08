@@ -1,10 +1,45 @@
+[public class IfStatement {
+  public void test() {
+...  }
+}] => [class IfStatement extends java_lang_Object {
+  /**
+...exports = IfStatement;
+] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement"
+[public class IfStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement"
 [UNKNOWN] => [super();]
+[public class IfStatement {
+  public void test() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<ctor>"
 [UNKNOWN] => [IfStatement.$clinit();]
 [UNKNOWN] => [let $instance = new IfStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_ifstatement_IfStatement__();]
 [UNKNOWN] => [return $instance;]
+[public class IfStatement {
+  public void test() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_ifstatement_IfStatement();
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_ifstatement_IfStatement();]
+[public void test() {
+    boolean a = true;
+...    else number = 6;
+  }] => [/**
+   * @return {void}
+...    }
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [boolean a = true;] => [let a = true;]
 [a] => [a] "a"
 [boolean b = true;] => [let b = true;]

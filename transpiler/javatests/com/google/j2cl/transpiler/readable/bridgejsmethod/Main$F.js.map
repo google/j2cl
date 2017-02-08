@@ -1,9 +1,35 @@
+[public static class F extends A<Integer> implements I<Integer> {}] => [/**
+ * @extends {A<Integer>}
+...exports = F;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.F"
+[public static class F extends A<Integer> implements I<Integer> {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.F"
 [UNKNOWN] => [super();]
+[public static class F extends A<Integer> implements I<Integer> {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.F.<ctor>"
 [UNKNOWN] => [F.$clinit();]
 [UNKNOWN] => [let $instance = new F();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_F__();]
 [UNKNOWN] => [return $instance;]
+[public static class F extends A<Integer> implements I<Integer> {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_F();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.F.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_F();]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {(Number|?number)} arg0
+   * @return {Integer}
+   * @public
+   */
+  fun(arg0) {
+    return /**@type {Integer} */ ($Casts.to(super.fun(/**@type {Integer} */ ($Casts.to(arg0, Integer))), Integer));
+  }]
 [UNKNOWN] => [return /**@type {Integer} */ ($Casts.to(super.fun(/**@type {Integer} */ ($Casts.to(arg0, Integer))), Integer));]
 [UNKNOWN] => [A.$clinit();]

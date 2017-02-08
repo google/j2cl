@@ -1,2 +1,13 @@
+[@JsFunction
+  interface JsFunctionOptional {
+    int m(int i, @JsOptional Double number);
+  }] => [/**
+ * @interface
+...exports = JsFunctionOptional;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptional"
+[int m(int i, @JsOptional Double number);] => [/**
+   * @abstract
+...  m_m__int__java_lang_Double(i, number$1$) {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptional.m"
 [i] => [i] "i"
 [number] => [number$1$] "number"

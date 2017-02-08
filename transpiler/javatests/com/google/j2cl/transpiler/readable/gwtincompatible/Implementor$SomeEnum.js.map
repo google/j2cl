@@ -1,13 +1,62 @@
+[enum SomeEnum {
+    COMPATIBLE {
+...    abstract void method();
+  }] => [/**
+ * @abstract
+...exports = SomeEnum;
+] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum"
+[enum SomeEnum {
+    COMPATIBLE {
+...    abstract void method();
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum"
 [UNKNOWN] => [super();]
+[enum SomeEnum {
+    COMPATIBLE {
+...    abstract void method();
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum();
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum();]
+[abstract void method();] => [/**
+   * @abstract
+...  m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.method"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));
+  }]
 [UNKNOWN] => [return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));]
+[enum SomeEnum {
+    COMPATIBLE {
+...    abstract void method();
+  }] => [/**
+   * @param {?string} name
+...    return $Enums.getValueFromNameAndMap(name, SomeEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_);
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum"
 [UNKNOWN] => [SomeEnum.$clinit();]
 [UNKNOWN] => [if ($Equality.$same(SomeEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_, null)) {
       SomeEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ = $Enums.createMapFromValues(SomeEnum.m_values__());
     }]
 [UNKNOWN] => [SomeEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ = $Enums.createMapFromValues(SomeEnum.m_values__());]
 [UNKNOWN] => [return $Enums.getValueFromNameAndMap(name, SomeEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_);]
+[enum SomeEnum {
+    COMPATIBLE {
+...    abstract void method();
+  }] => [/**
+   * @return {Array<SomeEnum>}
+...    return /**@type {!Array<SomeEnum>} */ ($Arrays.$init([SomeEnum.$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum], SomeEnum));
+  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum"
 [UNKNOWN] => [SomeEnum.$clinit();]
 [UNKNOWN] => [return /**@type {!Array<SomeEnum>} */ ($Arrays.$init([SomeEnum.$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum], SomeEnum));]
 [UNKNOWN] => [Enum.$clinit();]

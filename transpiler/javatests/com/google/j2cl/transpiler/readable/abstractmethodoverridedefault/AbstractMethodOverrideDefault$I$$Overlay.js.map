@@ -1,1 +1,12 @@
+[interface I {
+    void foo();
+...    default void bar() {}
+  }] => [class I$$Overlay {
+  /**
+...exports = I$$Overlay;
+] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I"
+[default void bar() {}] => [/**
+   * @param {I} $thisArg
+...    I$$Overlay.$clinit();
+  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.bar"
 [UNKNOWN] => [I$$Overlay.$clinit();]

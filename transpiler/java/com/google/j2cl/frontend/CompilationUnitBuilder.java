@@ -186,11 +186,7 @@ public class CompilationUnitBuilder {
       switch (typeDeclaration.getNodeType()) {
         case ASTNode.ANNOTATION_TYPE_DECLARATION:
         case ASTNode.TYPE_DECLARATION:
-          Type type =
-              convertAndAddType(
-                  typeDeclaration.resolveBinding(),
-                  JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
-          type.setSourcePosition(getSourcePosition(typeDeclaration));
+          convertAndAddType(typeDeclaration);
           break;
         case ASTNode.ENUM_DECLARATION:
           convert((EnumDeclaration) typeDeclaration);
@@ -205,11 +201,7 @@ public class CompilationUnitBuilder {
     }
 
     private void convert(EnumDeclaration enumDeclaration) {
-      Type enumType =
-          convertAndAddType(
-              enumDeclaration.resolveBinding(),
-              JdtUtils.asTypedList(enumDeclaration.bodyDeclarations()));
-      enumType.setSourcePosition(getSourcePosition(enumDeclaration));
+      Type enumType = convertAndAddType(enumDeclaration);
       checkState(enumType.isEnum());
 
       int ordinal = 0;
@@ -221,12 +213,12 @@ public class CompilationUnitBuilder {
       EnumMethodsCreator.applyTo(enumType);
     }
 
-    private Type convertAndAddType(
-        ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
-      Type type = createType(typeBinding);
+    private Type convertAndAddType(AbstractTypeDeclaration typeDeclaration) {
+      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
+      Type type = createType(typeBinding, typeDeclaration);
       pushType(type);
       j2clCompilationUnit.addType(type);
-      convertTypeBody(type, typeBinding, bodyDeclarations);
+      convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
       popType();
       return type;
     }
@@ -397,12 +389,14 @@ public class CompilationUnitBuilder {
     }
 
     private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       Method.Builder methodBuilder =
           Method.newBuilder()
-              .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
+              .setMethodDescriptor(methodDescriptor)
               .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setSourcePosition(getSourcePosition(node));
+              .setSourcePosition(
+                  getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
@@ -473,12 +467,11 @@ public class CompilationUnitBuilder {
         TypeDescriptor superQualifierTypeDescriptor) {
 
       ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      Type type = createType(typeBinding);
+      Type type = createType(typeBinding, typeDeclaration);
       j2clCompilationUnit.addType(type);
       pushType(type);
       convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
 
-      type.setSourcePosition(getSourcePosition(typeDeclaration));
 
       // The initial constructor descriptor does not include the super call qualifier.
       MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
@@ -758,12 +751,12 @@ public class CompilationUnitBuilder {
       int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
       int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
       int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
-
       return SourcePosition.newBuilder()
           .setFilePath(currentSourceFile)
           .setName(name)
           .setStartPosition(startLineNumber, startColumnNumber)
           .setEndPosition(endLineNumber, endColumnNumber)
+          .setName(name)
           .build();
     }
 
@@ -1353,7 +1346,8 @@ public class CompilationUnitBuilder {
               classComponents,
               functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Visibility.PRIVATE, lambdaTypeDeclaration);
-      lambdaType.setSourcePosition(getSourcePosition(expression));
+      lambdaType.setSourcePosition(
+          getSourcePosition(lambdaTypeDeclaration.getQualifiedSourceName(), expression));
       pushType(lambdaType);
       FunctionExpression functionExpression = functionExpressionSupplier.get();
 
@@ -2168,7 +2162,7 @@ public class CompilationUnitBuilder {
           .makeStatement();
     }
 
-    private Type createType(ITypeBinding typeBinding) {
+    private Type createType(ITypeBinding typeBinding, ASTNode typeDeclarationNode) {
       if (typeBinding == null) {
         return null;
       }
@@ -2178,6 +2172,8 @@ public class CompilationUnitBuilder {
       Type type = new Type(visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
       type.setAnonymous(typeBinding.isAnonymous());
+      type.setSourcePosition(
+          getSourcePosition(typeDeclaration.getQualifiedSourceName(), typeDeclarationNode));
       return type;
     }
   }

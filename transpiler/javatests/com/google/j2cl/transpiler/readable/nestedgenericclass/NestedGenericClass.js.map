@@ -1,14 +1,63 @@
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [/**
+ * @template C_T
+...exports = NestedGenericClass;
+] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass"
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass"
 [UNKNOWN] => [super();]
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.<ctor>"
 [UNKNOWN] => [NestedGenericClass.$clinit();]
 [UNKNOWN] => [let $instance = new NestedGenericClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass__();]
 [UNKNOWN] => [return $instance;]
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();]
+[public <S> void fun(S t) {
+    class E<S> {} // generic class
+...    new F();
+  }] => [/**
+   * @template M_S
+...    /**@type {!$1F<*, C_T>} */ ($1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(this));
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.fun"
 [t] => [t] "t"
 [new E<Number>();] => [/**@type {!$1E<(Number|?number), *, C_T>} */ ($1E.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(this));]
 [new F();] => [/**@type {!$1F<*, C_T>} */ ($1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(this));]
+[public <T> void bar() {
+    class G<T> {
+...    new G<Error>().bar();
+  }] => [/**
+   * @template M_T
+...    /**@type {!$1G<Error, *, C_T>} */ ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(this)).m_bar__();
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.bar"
 [new G<Error>().bar();] => [/**@type {!$1G<Error, *, C_T>} */ ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(this)).m_bar__();]
+[public void test() {
+    NestedGenericClass<Number> n = new NestedGenericClass<>();
+...    n.new C().new D();
+  }] => [/**
+   * @return {void}
+...    /**@type {!D<(Number|?number)>} */ (D.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|?number)>} */ (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n))));
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.test"
 [NestedGenericClass<Number> n = new NestedGenericClass<>();] => [let n = /**@type {!NestedGenericClass<(Number|?number)>} */ (NestedGenericClass.$create__());]
 [n] => [n] "n"
 [NestedGenericClass<Number>.A<Error> a = n.new A<>();] => [let a = /**@type {!A<Error, (Number|?number)>} */ (A.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n));]

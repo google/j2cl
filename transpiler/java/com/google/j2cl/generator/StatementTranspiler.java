@@ -333,9 +333,8 @@ public class StatementTranspiler {
           renderExpression(expression);
         }
       }
-
     }
-    SourceTransformer transformer = new SourceTransformer();
-    statement.accept(transformer);
+
+    statement.accept(new SourceTransformer());
   }
 }

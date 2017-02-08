@@ -1,2 +1,13 @@
+[@JsFunction
+  interface JsFunctionVarags {
+    int m(int i, int... numbers);
+  }] => [/**
+ * @interface
+...exports = JsFunctionVarags;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarags"
+[int m(int i, int... numbers);] => [/**
+   * @abstract
+...  m_m__int__arrayOf_int(i, numbers) {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarags.m"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"

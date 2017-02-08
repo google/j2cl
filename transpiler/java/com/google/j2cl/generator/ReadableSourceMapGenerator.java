@@ -30,19 +30,17 @@ import java.util.Map.Entry;
  * Generates a readable version of the sourcemap.
  */
 public class ReadableSourceMapGenerator {
-  /**
-   * The source location of the ast node to print, input or output.
-   */
+  /** The source location of the ast node to print, input or output. */
   public static String generate(
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       Path javaSourceFile,
-      String javaScriptImplementationFilecontents) {
+      String javaScriptImplementationFileContents) {
     StringBuilder sb = new StringBuilder();
     try {
       List<String> javaSourceLines =
           Files.readLines(javaSourceFile.toFile(), Charset.defaultCharset());
       List<String> javaScriptSourceLines =
-          Arrays.asList(javaScriptImplementationFilecontents.split("\n"));
+          Arrays.asList(javaScriptImplementationFileContents.split("\n"));
       for (Entry<SourcePosition, SourcePosition> entry :
           javaSourcePositionByOutputSourcePosition.entrySet()) {
         SourcePosition javaSourcePosition = entry.getValue();
@@ -53,12 +51,13 @@ public class ReadableSourceMapGenerator {
           continue;
         }
 
+        boolean hasName = javaSourcePosition.getName() != null;
 
-        sb.append(extract(javaSourcePosition, javaSourceLines))
+        sb.append(extract(javaSourcePosition, javaSourceLines, hasName))
             .append(" => ")
-            .append(extract(javaScriptSourcePosition, javaScriptSourceLines).trim());
+            .append(extract(javaScriptSourcePosition, javaScriptSourceLines, hasName).trim());
 
-        if (javaSourcePosition.getName() != null) {
+        if (hasName) {
           sb.append(" \"").append(javaSourcePosition.getName()).append("\"");
         }
 
@@ -70,7 +69,8 @@ public class ReadableSourceMapGenerator {
     return sb.toString();
   }
 
-  private static String extract(SourcePosition sourcePosition, List<String> lines) {
+  private static String extract(
+      SourcePosition sourcePosition, List<String> lines, boolean condense) {
     int startLine = sourcePosition.getStartFilePosition().getLine();
     int endLine = sourcePosition.getEndFilePosition().getLine();
     if (sourcePosition == SourcePosition.UNKNOWN) {
@@ -82,8 +82,16 @@ public class ReadableSourceMapGenerator {
     if (endLine != startLine || endColumn == -1) {
       StringBuilder content =
           new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
-      for (int line = startLine + 1; line < endLine; line++) {
-        content.append("\n").append(trimTrailingWhitespace(lines.get(line)));
+      if (condense && startLine + 3 < endLine) {
+        content
+            .append("\n")
+            .append(lines.get(startLine + 1))
+            .append("\n...")
+            .append(lines.get(endLine - 1));
+      } else {
+        for (int line = startLine + 1; line < endLine; line++) {
+          content.append("\n").append(trimTrailingWhitespace(lines.get(line)));
+        }
       }
       content.append("\n").append(lines.get(endLine).substring(0, endColumn));
       return "[" + content.toString() + "]";

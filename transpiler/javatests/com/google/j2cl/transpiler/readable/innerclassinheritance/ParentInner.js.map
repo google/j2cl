@@ -1,10 +1,42 @@
+[public class ParentInner {
+  public int fieldInParentInner;
+...  public void funInParentInner() {}
+}] => [class ParentInner extends java_lang_Object {
+  /**
+...exports = ParentInner;
+] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner"
+[public class ParentInner {
+  public int fieldInParentInner;
+...  public void funInParentInner() {}
+}] => [/**
+   * Defines instance fields.
+...    this.f_fieldInParentInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner = 0;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_fieldInParentInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner = 0;]
+[public class ParentInner {
+  public int fieldInParentInner;
+...  public void funInParentInner() {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner.<ctor>"
 [UNKNOWN] => [ParentInner.$clinit();]
 [UNKNOWN] => [let $instance = new ParentInner();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner__();]
 [UNKNOWN] => [return $instance;]
+[public class ParentInner {
+  public int fieldInParentInner;
+...  public void funInParentInner() {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner();
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner();]
+[public void funInParentInner() {}] => [/**
+   * @return {void}
+...  m_funInParentInner__() {
+  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner.funInParentInner"
 [UNKNOWN] => [java_lang_Object.$clinit();]

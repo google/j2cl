@@ -1,3 +1,15 @@
+[class InnerClass {
+      int field = localVar;
+    }] => [class $2InnerClass extends java_lang_Object {
+  /**
+...exports = $2InnerClass;
+] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass"
+[class InnerClass {
+      int field = localVar;
+    }] => [/**
+   * Defines instance fields.
+...    this.$c_localVar = 0;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {SimpleLocalClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass = null;]
@@ -5,10 +17,22 @@
     this.f_field__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_localVar = 0;]
+[class InnerClass {
+      int field = localVar;
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass.<ctor>"
 [UNKNOWN] => [$2InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new $2InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int($outer_this, $c_localVar);]
 [UNKNOWN] => [return $instance;]
+[class InnerClass {
+      int field = localVar;
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass();
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass = $outer_this;]
 [UNKNOWN] => [this.$c_localVar = $c_localVar;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

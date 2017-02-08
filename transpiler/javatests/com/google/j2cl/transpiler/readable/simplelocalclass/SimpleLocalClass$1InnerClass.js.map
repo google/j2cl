@@ -1,3 +1,17 @@
+[class InnerClass {
+      public int fun() {
+...      }
+    }] => [class $1InnerClass extends java_lang_Object {
+  /**
+...exports = $1InnerClass;
+] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass"
+[class InnerClass {
+      public int fun() {
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.$c_p = 0;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {SimpleLocalClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass = null;]
@@ -5,14 +19,34 @@
     this.$c_localVar = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_p = 0;]
+[class InnerClass {
+      public int fun() {
+...      }
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass.<ctor>"
 [UNKNOWN] => [$1InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int($outer_this, $c_localVar, $c_p);]
 [UNKNOWN] => [return $instance;]
+[class InnerClass {
+      public int fun() {
+...      }
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass();
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass = $outer_this;]
 [UNKNOWN] => [this.$c_localVar = $c_localVar;]
 [UNKNOWN] => [this.$c_p = $c_p;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass();]
+[public int fun() {
+        return localVar + p; // captured local variable and parameter.
+      }] => [/**
+   * @return {number}
+...    return this.$c_localVar + this.$c_p;
+  }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass.fun"
 [return localVar + p;] => [return this.$c_localVar + this.$c_p;]
 [UNKNOWN] => [java_lang_Object.$clinit();]

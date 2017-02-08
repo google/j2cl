@@ -1,10 +1,58 @@
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [/**
+ * @implements {J<?string>}
+...exports = E;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E"
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E"
 [UNKNOWN] => [super();]
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E.<ctor>"
 [UNKNOWN] => [E.$clinit();]
 [UNKNOWN] => [let $instance = new E();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E__();]
 [UNKNOWN] => [return $instance;]
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E();]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Object(arg0) {
+    super.bar(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
+  }]
 [UNKNOWN] => [super.bar(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {?string}
+   * @public
+   */
+  fun(arg0) {
+    return super.fun(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
+  }]
 [UNKNOWN] => [return super.fun(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));]
 [UNKNOWN] => [B.$clinit();]

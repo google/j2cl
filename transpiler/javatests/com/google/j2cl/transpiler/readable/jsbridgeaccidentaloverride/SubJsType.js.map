@@ -1,10 +1,65 @@
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [/**
+ * @implements {MyInterface}
+...exports = SubJsType;
+] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType"
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();]
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return new SubJsType();
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
 [UNKNOWN] => [SubJsType.$clinit();]
 [UNKNOWN] => [return new SubJsType();]
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();]
+[/**
+   * There should be a bridge method for MyInterface.bar() because it is exposed by this bar().
+...    return a + 2;
+  }] => [/**
+   * @override
+...    return a + 2;
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.bar"
 [a] => [a] "a"
 [return a + 2;] => [return a + 2;]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_bar__int(arg0) {
+    return this.bar(arg0);
+  }]
 [UNKNOWN] => [return this.bar(arg0);]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) {
+    return this.foo(arg0);
+  }]
 [UNKNOWN] => [return this.foo(arg0);]
 [UNKNOWN] => [MyJsType.$clinit();]

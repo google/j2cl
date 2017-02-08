@@ -1,3 +1,17 @@
+[public static class Varargs extends A {
+    @JsConstructor
+...    }
+  }] => [class Varargs extends A {
+  /**
+...exports = Varargs;
+] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs"
+[@JsConstructor
+    public Varargs(int... args) {
+      super(args[1]);
+    }] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_Varargs__arrayOf_int($var_args_copy);
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [Varargs.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
@@ -7,6 +21,13 @@
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_Varargs__arrayOf_int($var_args_copy);]
+[@JsConstructor
+    public Varargs(int... args) {
+      super(args[1]);
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_Varargs();
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs.<ctor>"
 [args] => [args] "args"
 [super(args[1]);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(args[1]);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_Varargs();]

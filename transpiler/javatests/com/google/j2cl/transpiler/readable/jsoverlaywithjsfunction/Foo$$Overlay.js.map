@@ -1,3 +1,17 @@
+[@JsType(isNative = true, namespace = GLOBAL, name = "Object")
+public class Foo {
+...  }
+}] => [class Foo$$Overlay {
+  /**
+...exports = Foo$$Overlay;
+] "com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo"
+[@JsOverlay
+  public final void bar() {
+...    }.run();
+  }] => [/**
+   * @param {Object} $thisArg
+...    })();
+  }] "com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.bar"
 [UNKNOWN] => [Foo$$Overlay.$clinit();]
 [new Intf() {
       @Override

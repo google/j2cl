@@ -1,10 +1,45 @@
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [class ArithmeticExpressions extends java_lang_Object {
+  /**
+...exports = ArithmeticExpressions;
+] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions"
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions"
 [UNKNOWN] => [super();]
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<ctor>"
 [UNKNOWN] => [ArithmeticExpressions.$clinit();]
 [UNKNOWN] => [let $instance = new ArithmeticExpressions();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__();]
 [UNKNOWN] => [return $instance;]
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
+  }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();]
+[public void main() {
+    int a = 10;
+...    double o = (5 / 2) - 0.0;
+  }] => [/**
+   * @return {void}
+...    let o = (5 / 2) - 0.0;
+  }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [int a = 10;] => [let a = 10;]
 [a] => [a] "a"
 [int b = a++;] => [let b = a++;]
@@ -34,6 +69,12 @@
 [getLongArray()[0]++;] => [$LongUtils.$postfixIncrementArray(ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions(), 0);]
 [double o = (5 / 2) - 0.0;] => [let o = (5 / 2) - 0.0;]
 [o] => [o] "o"
+[static long[] getLongArray() {
+    return new long[10];
+  }] => [/**
+   * @return {Array<!$Long>}
+...    return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));
+  }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [UNKNOWN] => [ArithmeticExpressions.$clinit();]
 [return new long[10];] => [return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

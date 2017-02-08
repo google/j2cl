@@ -1,2 +1,13 @@
+[@JsFunction
+  interface ApplyFunction<T, S extends Number> {
+    T apply(T t, S s);
+  }] => [/**
+ * @interface
+...exports = ApplyFunction;
+] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction"
+[T apply(T t, S s);] => [/**
+   * @abstract
+...  m_apply__java_lang_Object__java_lang_Number(t, s) {
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction.apply"
 [t] => [t] "t"
 [s] => [s] "s"

@@ -1,11 +1,49 @@
+[public class InstanceInnerClass {
+  public int instanceField;
+...  }
+}] => [class InstanceInnerClass extends java_lang_Object {
+  /**
+...exports = InstanceInnerClass;
+] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass"
+[public class InstanceInnerClass {
+  public int instanceField;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_instanceField__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass = 0;
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_instanceField__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass = 0;]
+[public class InstanceInnerClass {
+  public int instanceField;
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.<ctor>"
 [UNKNOWN] => [InstanceInnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InstanceInnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass__();]
 [UNKNOWN] => [return $instance;]
+[public class InstanceInnerClass {
+  public int instanceField;
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();]
+[public void funOuter() {}] => [/**
+   * @return {void}
+...  m_funOuter__() {
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.funOuter"
+[public void test() {
+    new InstanceInnerClass().new InnerClass();
+  }] => [/**
+   * @return {void}
+...    InnerClass.$create__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass(InstanceInnerClass.$create__());
+  }] "com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.test"
 [new InstanceInnerClass().new InnerClass();] => [InnerClass.$create__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass(InstanceInnerClass.$create__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]

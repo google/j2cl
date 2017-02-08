@@ -1,12 +1,40 @@
+[class Outer {
+      boolean b;
+...      }
+    }] => [class $1Outer extends java_lang_Object {
+  /**
+...exports = $1Outer;
+] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.1Outer"
+[class Outer {
+      boolean b;
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    this.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = false;
+  }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.1Outer"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {BooleanOperations} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = null;]
 [UNKNOWN] => [/** @public {boolean} */
     this.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = false;]
+[class Outer {
+      boolean b;
+...      }
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.1Outer.<ctor>"
 [UNKNOWN] => [$1Outer.$clinit();]
 [UNKNOWN] => [let $instance = new $1Outer();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations($outer_this);]
 [UNKNOWN] => [return $instance;]
+[class Outer {
+      boolean b;
+...      }
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer();
+  }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.1Outer.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer();]

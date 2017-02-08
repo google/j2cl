@@ -1,13 +1,60 @@
+[public class TypeWildCards {
+  public void unbounded(GenericType<?> g) {}
+...  }
+}] => [class TypeWildCards extends java_lang_Object {
+  /**
+...exports = TypeWildCards;
+] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards"
+[public class TypeWildCards {
+  public void unbounded(GenericType<?> g) {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards"
 [UNKNOWN] => [super();]
+[public class TypeWildCards {
+  public void unbounded(GenericType<?> g) {}
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<ctor>"
 [UNKNOWN] => [TypeWildCards.$clinit();]
 [UNKNOWN] => [let $instance = new TypeWildCards();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards__();]
 [UNKNOWN] => [return $instance;]
+[public class TypeWildCards {
+  public void unbounded(GenericType<?> g) {}
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();]
+[public void unbounded(GenericType<?> g) {}] => [/**
+   * @param {GenericType<?>} g
+...  m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(g) {
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.unbounded"
 [g] => [g] "g"
+[public void upperBound(GenericType<? extends TypeWildCards> g) {}] => [/**
+   * @param {GenericType<?>} g
+...  m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(g) {
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.upperBound"
 [g] => [g] "g"
+[public void lowerBound(GenericType<? super TypeWildCards> g) {}] => [/**
+   * @param {GenericType<?>} g
+...  m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(g) {
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.lowerBound"
 [g] => [g] "g"
+[public void test() {
+    unbounded(new GenericType<TypeWildCards>());
+...    lowerBound(new GenericType<TypeWildCards>());
+  }] => [/**
+   * @return {void}
+...    this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));
+  }] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
 [unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));]
 [upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));]
 [lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));]

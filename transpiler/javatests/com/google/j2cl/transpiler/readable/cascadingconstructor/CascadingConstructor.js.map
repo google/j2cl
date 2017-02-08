@@ -1,25 +1,65 @@
+[public class CascadingConstructor {
+  private int a;
+...  }
+}] => [class CascadingConstructor extends java_lang_Object {
+  /**
+...exports = CascadingConstructor;
+] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor"
+[public class CascadingConstructor {
+  private int a;
+...  }
+}] => [/**
+   * Defines instance fields.
+...    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;
+  }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;]
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [CascadingConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new CascadingConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, b);]
 [UNKNOWN] => [return $instance;]
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = b;
+  }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor();]
 [this.a = a;] => [this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = a;]
 [this.b = b;] => [this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = b;]
+[public CascadingConstructor(int a) {
+    this(a, a * 2);
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [CascadingConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new CascadingConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(a);]
 [UNKNOWN] => [return $instance;]
+[public CascadingConstructor(int a) {
+    this(a, a * 2);
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, a * 2);
+  }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
 [this(a, a * 2);] => [this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, a * 2);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

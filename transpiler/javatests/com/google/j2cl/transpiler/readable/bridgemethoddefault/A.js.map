@@ -1,11 +1,41 @@
+[class A implements II {}] => [/**
+ * @implements {II}
+...exports = A;
+] "com.google.j2cl.transpiler.readable.bridgemethoddefault.A"
+[class A implements II {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.A"
 [UNKNOWN] => [super();]
+[class A implements II {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethoddefault_A__();]
 [UNKNOWN] => [return $instance;]
+[class A implements II {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgemethoddefault_A();
+  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethoddefault_A();]
+[class A implements II {}] => [/**
+   * Default method forwarding stub.
+...    II$$Overlay.m_m__com_google_j2cl_transpiler_readable_bridgemethoddefault_II__java_lang_String(this, arg0);
+  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.A"
 [UNKNOWN] => [II$$Overlay.m_m__com_google_j2cl_transpiler_readable_bridgemethoddefault_II__java_lang_String(this, arg0);]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_m__java_lang_Object(arg0) {
+    this.m_m__java_lang_String(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
+  }]
 [UNKNOWN] => [this.m_m__java_lang_String(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [II.$clinit();]

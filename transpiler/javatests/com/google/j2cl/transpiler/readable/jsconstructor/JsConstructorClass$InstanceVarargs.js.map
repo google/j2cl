@@ -1,3 +1,17 @@
+[public class InstanceVarargs extends A {
+    @JsConstructor
+...    }
+  }] => [class InstanceVarargs extends A {
+  /**
+...exports = InstanceVarargs;
+] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs"
+[@JsConstructor
+    public InstanceVarargs(int... args) {
+      super(args[1]);
+    }] => [/**
+   * Real constructor.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int($outer_this, $var_args_copy);
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [InstanceVarargs.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
@@ -9,6 +23,13 @@
 [UNKNOWN] => [/** @public {JsConstructorClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs = null;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int($outer_this, $var_args_copy);]
+[@JsConstructor
+    public InstanceVarargs(int... args) {
+      super(args[1]);
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs();
+  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs = $outer_this;]
 [super(args[1]);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(args[1]);]

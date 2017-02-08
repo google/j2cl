@@ -1,11 +1,41 @@
+[public class ConcreteClass implements InterfaceWithDefaultMethod {}] => [/**
+ * @implements {InterfaceWithDefaultMethod}
+...exports = ConcreteClass;
+] "com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass"
+[public class ConcreteClass implements InterfaceWithDefaultMethod {}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass"
 [UNKNOWN] => [super();]
+[public class ConcreteClass implements InterfaceWithDefaultMethod {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass.<ctor>"
 [UNKNOWN] => [ConcreteClass.$clinit();]
 [UNKNOWN] => [let $instance = new ConcreteClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_ConcreteClass__();]
 [UNKNOWN] => [return $instance;]
+[public class ConcreteClass implements InterfaceWithDefaultMethod {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_ConcreteClass();
+  }] "com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_ConcreteClass();]
+[public class ConcreteClass implements InterfaceWithDefaultMethod {}] => [/**
+   * Default method forwarding stub.
+...    InterfaceWithDefaultMethod$$Overlay.m_run__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_InterfaceWithDefaultMethod__java_lang_String(this, arg0);
+  }] "com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass"
 [UNKNOWN] => [InterfaceWithDefaultMethod$$Overlay.m_run__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_InterfaceWithDefaultMethod__java_lang_String(this, arg0);]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_run__java_lang_Object(arg0) {
+    this.m_run__java_lang_String(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
+  }]
 [UNKNOWN] => [this.m_run__java_lang_String(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [InterfaceWithDefaultMethod.$clinit();]

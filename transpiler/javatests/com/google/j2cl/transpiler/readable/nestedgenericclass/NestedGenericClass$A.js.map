@@ -1,10 +1,34 @@
+[public class A<T> {
+    public class B<T> {}
+  }] => [/**
+ * @template C_A_T, C_T
+...exports = A;
+] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A"
+[public class A<T> {
+    public class B<T> {}
+  }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A = null;
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NestedGenericClass<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A = null;]
+[public class A<T> {
+    public class B<T> {}
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass($outer_this);]
 [UNKNOWN] => [return $instance;]
+[public class A<T> {
+    public class B<T> {}
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A();
+  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A();]

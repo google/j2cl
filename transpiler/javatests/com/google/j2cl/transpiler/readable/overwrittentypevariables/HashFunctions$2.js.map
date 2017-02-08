@@ -1,11 +1,63 @@
+[{
+      @Override
+...      }
+    }] => [/**
+ * @template M_T
+...exports = $2;
+] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.2"
+[{
+      @Override
+...      }
+    }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.2"
 [UNKNOWN] => [super();]
+[UNKNOWN] => [/**
+   * A particular Java constructor as a factory method.
+   * @template M_T
+   * @return {!$2<M_T>}
+   * @public
+   */
+  static $create__() {
+    $2.$clinit();
+    let $instance = new $2();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__();
+    return $instance;
+  }]
 [UNKNOWN] => [$2.$clinit();]
 [UNKNOWN] => [let $instance = new $2();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__();]
 [UNKNOWN] => [return $instance;]
+[UNKNOWN] => [/**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2();
+  }]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2();]
+[@Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }] => [/**
+   * @param {M_T} input
+...    return "" + input.ordinal();
+  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.2.apply"
 [input] => [input] "input"
 [return "" + input.ordinal();] => [return "" + input.ordinal();]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {?string}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this.m_apply__java_lang_Enum(/**@type {M_T} */ ($Casts.to(arg0, Enum)));
+  }]
 [UNKNOWN] => [return this.m_apply__java_lang_Enum(/**@type {M_T} */ ($Casts.to(arg0, Enum)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

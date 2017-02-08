@@ -1,10 +1,45 @@
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [class InstanceofClass extends java_lang_Object {
+  /**
+...exports = InstanceofClass;
+] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass"
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass"
 [UNKNOWN] => [super();]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<ctor>"
 [UNKNOWN] => [InstanceofClass.$clinit();]
 [UNKNOWN] => [let $instance = new InstanceofClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass__();]
 [UNKNOWN] => [return $instance;]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
+  }] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();]
+[public void test() {
+    Object object = new InstanceofClass();
+...    assert !(object instanceof String);
+  }] => [/**
+   * @return {void}
+...    $Asserts.$enabled() && $Asserts.$assert(!(java_lang_String.$isInstance(object)));
+  }] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [Object object = new InstanceofClass();] => [let object = InstanceofClass.$create__();]
 [object] => [object] "object"
 [assert object instanceof InstanceofClass;] => [$Asserts.$enabled() && $Asserts.$assert(InstanceofClass.$isInstance(object));]

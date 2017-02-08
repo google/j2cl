@@ -1,1 +1,11 @@
+[interface I {
+  String get(String s);
+}] => [/**
+ * @interface
+...exports = I;
+] "com.google.j2cl.transpiler.readable.backwardbridgemethod.I"
+[String get(String s);] => [/**
+   * @abstract
+...  m_get__java_lang_String(s) {
+  }] "com.google.j2cl.transpiler.readable.backwardbridgemethod.I.get"
 [s] => [s] "s"

@@ -1,13 +1,72 @@
+[n -> {
+                        mm();
+...                        return iii.fun(200);
+                      }] => [/**
+ * @implements {MyInterface}
+...exports = $Lambda$MyInterface$0;
+] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.$Lambda$MyInterface$0"
+[n -> {
+                        mm();
+...                        return iii.fun(200);
+                      }] => [/**
+   * Defines instance fields.
+...    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0 = null;
+  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.$Lambda$MyInterface$0"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {$1} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0 = null;]
+[n -> {
+                        mm();
+...                        return iii.fun(200);
+                      }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.$Lambda$MyInterface$0.<ctor>"
 [UNKNOWN] => [$Lambda$MyInterface$0.$clinit();]
 [UNKNOWN] => [let $instance = new $Lambda$MyInterface$0();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1($outer_this);]
 [UNKNOWN] => [return $instance;]
+[n -> {
+                        mm();
+...                        return iii.fun(200);
+                      }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0();
+  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.$Lambda$MyInterface$0.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0 = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0();]
+[n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      }] => [/**
+   * Lambda implementation method.
+   * @override
+   * @param {number} n
+   * @return {number}
+   * @public
+   */
+  m_fun__int(n) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A.m_mm__();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B.m_aa__();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1.m_bb__();
+    let iii = $Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1(this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0);
+    return iii.m_fun__int(200);
+  }]
 [n] => [n] "n"
 [mm();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A.m_mm__();]
 [aa();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_$Lambda$MyInterface$0.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B.m_aa__();]

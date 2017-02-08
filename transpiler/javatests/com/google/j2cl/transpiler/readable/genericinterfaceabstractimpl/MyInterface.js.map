@@ -1,1 +1,11 @@
+[public interface MyInterface<T> {
+  T fun(T t);
+}] => [/**
+ * @interface
+...exports = MyInterface;
+] "com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.MyInterface"
+[T fun(T t);] => [/**
+   * @abstract
+...  m_fun__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.MyInterface.fun"
 [t] => [t] "t"

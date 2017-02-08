@@ -1,14 +1,57 @@
+[public class EqualFunctions {
+  private EqualFunctions() {}
+...  }
+}] => [class EqualFunctions extends java_lang_Object {
+  /**
+...exports = EqualFunctions;
+] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions"
+[public class EqualFunctions {
+  private EqualFunctions() {}
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions"
 [UNKNOWN] => [super();]
+[private EqualFunctions() {}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<ctor>"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [UNKNOWN] => [let $instance = new EqualFunctions();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions__();]
 [UNKNOWN] => [return $instance;]
+[private EqualFunctions() {}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions();
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions();]
+[@SuppressWarnings("unchecked")
+  public static final <T> EqualFunction<T> objectEqualFunction() {
+    return (EqualFunction<T>) forObject;
+  }] => [/**
+   * @template M_T
+...    return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.objectEqualFunction"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return (EqualFunction<T>) forObject;] => [return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));]
+[@SuppressWarnings("unchecked")
+  public static final <T> EqualFunction<T> collectionEqualFunction() {
+    return (EqualFunction<T>) forCollection;
+  }] => [/**
+   * @template M_T
+...    return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.collectionEqualFunction"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return (EqualFunction<T>) forCollection;] => [return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));]
+[/**
+   * Returns a equals function that can handle array equal logic in addition to the custom equal
+...    };
+  }] => [/**
+   * @template M_T
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.withCollection"
 [customFunction] => [customFunction] "customFunction"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return new EqualFunction<T>() {
@@ -22,6 +65,13 @@
 [objA] => [objA] "objA"
 [objB] => [objB] "objB"
 [return true;] => [return true;]
+[public static <T> EqualFunction<Foo<T>> createEqualFn(final EqualFunction<T> equalFn) {
+    return new EqualFunction<Foo<T>>() {
+...    };
+  }] => [/**
+   * @template M_T
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.createEqualFn"
 [equalFn] => [equalFn] "equalFn"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return new EqualFunction<Foo<T>>() {

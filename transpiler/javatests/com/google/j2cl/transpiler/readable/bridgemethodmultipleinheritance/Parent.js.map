@@ -1,13 +1,65 @@
+[class Parent<T extends Error> extends SuperParent<T, Number> {
+  // foo__Error__Number
+...  public <T> void fun(T t) {}
+}] => [/**
+ * @template C_T
+...exports = Parent;
+] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent"
+[class Parent<T extends Error> extends SuperParent<T, Number> {
+  // foo__Error__Number
+...  public <T> void fun(T t) {}
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent"
 [UNKNOWN] => [super();]
+[class Parent<T extends Error> extends SuperParent<T, Number> {
+  // foo__Error__Number
+...  public <T> void fun(T t) {}
+}] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent__();]
 [UNKNOWN] => [return $instance;]
+[class Parent<T extends Error> extends SuperParent<T, Number> {
+  // foo__Error__Number
+...  public <T> void fun(T t) {}
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();]
+[@Override
+  public void foo(T t, Number s) {}] => [/**
+   * @param {C_T} t
+...  m_foo__java_lang_Error__java_lang_Number(t, s) {
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent.foo"
 [t] => [t] "t"
 [s] => [s] "s"
+[public <T extends Number> void bar(T t) {}] => [/**
+   * @template M_T
+...  m_bar__java_lang_Number(t) {
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent.bar"
 [t] => [t] "t"
+[public <T> void fun(T t) {}] => [/**
+   * @template M_T
+...  m_fun__java_lang_Object(t) {
+  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent.fun"
 [t] => [t] "t"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+    this.m_foo__java_lang_Error__java_lang_Number(/**@type {C_T} */ ($Casts.to(arg0, Error)), /**@type {(Number|?number)} */ ($Casts.to(arg1, Number)));
+  }]
 [UNKNOWN] => [this.m_foo__java_lang_Error__java_lang_Number(/**@type {C_T} */ ($Casts.to(arg0, Error)), /**@type {(Number|?number)} */ ($Casts.to(arg1, Number)));]
 [UNKNOWN] => [SuperParent.$clinit();]

@@ -1,9 +1,35 @@
+[static class OuterRefFromSuperCtorBase {
+    OuterRefFromSuperCtorBase(Object o) {
+...    }
+  }] => [class OuterRefFromSuperCtorBase extends java_lang_Object {
+  /**
+...exports = OuterRefFromSuperCtorBase;
+] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase"
+[static class OuterRefFromSuperCtorBase {
+    OuterRefFromSuperCtorBase(Object o) {
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase"
 [UNKNOWN] => [super();]
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.<ctor>"
 [o] => [o] "o"
 [UNKNOWN] => [OuterRefFromSuperCtorBase.$clinit();]
 [UNKNOWN] => [let $instance = new OuterRefFromSuperCtorBase();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(o);]
 [UNKNOWN] => [return $instance;]
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    $Objects.m_toString__java_lang_Object(o);
+  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.<ctor>"
 [o] => [o] "o"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase();]

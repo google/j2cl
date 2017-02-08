@@ -1,2 +1,14 @@
+[@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+class Immediate extends Transitive {
+...  final void doImmediateInstanceMethod() {}
+}] => [class Immediate$$Overlay extends Transitive$$Overlay {
+  /**
+...exports = Immediate$$Overlay;
+] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate"
+[@JsOverlay
+  final void doImmediateInstanceMethod() {}] => [/**
+   * @param {Object} $thisArg
+...    Immediate$$Overlay.$clinit();
+  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.doImmediateInstanceMethod"
 [UNKNOWN] => [Immediate$$Overlay.$clinit();]
 [UNKNOWN] => [Transitive$$Overlay.$clinit();]
