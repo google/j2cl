@@ -6,11 +6,17 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();]
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();]
+[sp] => [sp] "sp"
 [SuperParent p = new Parent();] => [let p = Parent.$create__();]
+[p] => [p] "p"
 [SuperParent c = new Child();] => [let c = Child.$create__();]
+[c] => [c] "c"
 [Parent pp = new Parent();] => [let pp = Parent.$create__();]
+[pp] => [pp] "pp"
 [Parent cc = new Child();] => [let cc = Child.$create__();]
+[cc] => [cc] "cc"
 [MyInterface intf = new Child();] => [let intf = Child.$create__();]
+[intf] => [intf] "intf"
 [sp.fun(12, 35);] => [sp.m_fun__int__int(12, 35);]
 [sp.bar(6, 7);] => [sp.m_bar__int__int(6, 7);]
 [p.fun(12, 35);] => [p.m_fun__int__int(12, 35);]
@@ -22,8 +28,11 @@
 [intf.intfFoo();] => [intf.m_intfFoo__();]
 [UNKNOWN] => [Main.$clinit();]
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();]
+[sp] => [sp] "sp"
 [Parent p = new Parent();] => [let p = Parent.$create__();]
+[p] => [p] "p"
 [Child c = new Child();] => [let c = Child.$create__();]
+[c] => [c] "c"
 [sp.fun(12, 35);] => [sp.m_fun__int__int(12, 35);]
 [sp.bar(6, 7);] => [sp.m_bar__int__int(6, 7);]
 [p.fun(12, 35);] => [p.sum(12, 35);]

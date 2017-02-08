@@ -6,12 +6,19 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();]
 [byte b = 1;] => [let b = 1;]
+[b] => [b] "b"
 [char c = 1;] => [let c = 1 /* "\u0001" */;]
+[c] => [c] "c"
 [short s = 1;] => [let s = 1;]
+[s] => [s] "s"
 [int i = 1;] => [let i = 1;]
+[i] => [i] "i"
 [long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;]
+[l] => [l] "l"
 [float f = 1.1f;] => [let f = 1.100000023841858;]
+[f] => [f] "f"
 [double d = 1.1;] => [let d = 1.1;]
+[d] => [d] "d"
 [b = (byte) b;] => [b = b;]
 [c = (char) b;] => [c = $Primitives.$widenByteToChar(b);]
 [s = (short) b;] => [s = b;]
@@ -62,18 +69,33 @@
 [f = (float) d;] => [f = d;]
 [d = (double) d;] => [d = d;]
 [Object o = new Object();] => [let o = java_lang_Object.$create__();]
+[o] => [o] "o"
 [boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.to(o, Boolean)));]
+[bool] => [bool] "bool"
 [byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.to(o, Byte)).m_byteValue__();]
+[b] => [b] "b"
 [char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.to(o, Character)).m_charValue__();]
+[c] => [c] "c"
 [short s = (short) o;] => [let s = /**@type {Short} */ ($Casts.to(o, Short)).m_shortValue__();]
+[s] => [s] "s"
 [int i = (int) o;] => [let i = /**@type {Integer} */ ($Casts.to(o, Integer)).m_intValue__();]
+[i] => [i] "i"
 [long l = (long) o;] => [let l = /**@type {Long} */ ($Casts.to(o, Long)).m_longValue__();]
+[l] => [l] "l"
 [float f = (float) o;] => [let f = /**@type {Float} */ ($Casts.to(o, Float)).m_floatValue__();]
+[f] => [f] "f"
 [double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));]
+[d] => [d] "d"
 [Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);]
+[boxedByte] => [boxedByte] "boxedByte"
 [short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__();]
+[s] => [s] "s"
 [int i = (int) boxedByte;] => [let i = boxedByte.m_byteValue__();]
+[i] => [i] "i"
 [long l = (long) boxedByte;] => [let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());]
+[l] => [l] "l"
 [float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__();]
+[f] => [f] "f"
 [double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();]
+[d] => [d] "d"
 [UNKNOWN] => [java_lang_Object.$clinit();]

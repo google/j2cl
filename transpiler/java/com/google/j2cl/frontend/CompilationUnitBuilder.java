@@ -376,12 +376,9 @@ public class CompilationUnitBuilder {
 
     private Method convert(MethodDeclaration methodDeclaration) {
       List<Variable> parameters = new ArrayList<>();
-      for (Object element : methodDeclaration.parameters()) {
-        SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
-        IVariableBinding parameterBinding = parameter.resolveBinding();
-        Variable j2clParameter = JdtUtils.createVariable(parameterBinding);
-        parameters.add(j2clParameter);
-        variableByJdtBinding.put(parameterBinding, j2clParameter);
+      for (SingleVariableDeclaration parameter :
+          JdtUtils.<SingleVariableDeclaration>asTypedList(methodDeclaration.parameters())) {
+        parameters.add(createVariable(parameter));
       }
 
       // If a method has no body, initialize the body with an empty list of statements.
@@ -752,6 +749,10 @@ public class CompilationUnitBuilder {
     }
 
     public SourcePosition getSourcePosition(ASTNode node) {
+      return getSourcePosition(null, node);
+    }
+
+    public SourcePosition getSourcePosition(String name, ASTNode node) {
       int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
       int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
       int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
@@ -760,6 +761,7 @@ public class CompilationUnitBuilder {
 
       return SourcePosition.newBuilder()
           .setFilePath(currentSourceFile)
+          .setName(name)
           .setStartPosition(startLineNumber, startColumnNumber)
           .setEndPosition(endLineNumber, endColumnNumber)
           .build();
@@ -1964,19 +1966,23 @@ public class CompilationUnitBuilder {
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
-    private Variable convert(org.eclipse.jdt.core.dom.SingleVariableDeclaration node) {
-      String name = node.getName().getFullyQualifiedName();
-      TypeDescriptor typeDescriptor =
-          node.getType() instanceof org.eclipse.jdt.core.dom.UnionType
-              ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
-              : JdtUtils.createTypeDescriptor(node.getType().resolveBinding());
-      return createVariable(node.resolveBinding(), name, typeDescriptor);
+    private Variable convert(
+        org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
+      Variable variable = createVariable(variableDeclaration);
+      // Union types are only relevant in multi catch variable declarations, which appear in the AST
+      // as a SingleVariableDeclaration.
+      variable.setTypeDescriptor(
+          variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType
+              ? convert((org.eclipse.jdt.core.dom.UnionType) variableDeclaration.getType())
+              : JdtUtils.createTypeDescriptor(variableDeclaration.getType().resolveBinding()));
+      return variable;
     }
 
-    private Variable createVariable(
-        IVariableBinding variableBinding, String name, TypeDescriptor typeDescriptor) {
-      Variable variable =
-          Variable.newBuilder().setName(name).setTypeDescriptor(typeDescriptor).build();
+    private Variable createVariable(VariableDeclaration variableDeclaration) {
+      IVariableBinding variableBinding = variableDeclaration.resolveBinding();
+      Variable variable = JdtUtils.createVariable(variableBinding);
+      variable.setSourcePosition(
+          getSourcePosition(variable.getName(), variableDeclaration.getName()));
       variableByJdtBinding.put(variableBinding, variable);
       recordEnclosingType(variable, currentType);
       return variable;
@@ -2128,11 +2134,7 @@ public class CompilationUnitBuilder {
 
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
-      IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable = JdtUtils.createVariable(variableBinding);
-
-      recordEnclosingType(variable, currentType);
-      variableByJdtBinding.put(variableBinding, variable);
+      Variable variable = createVariable(variableDeclarationFragment);
       return new VariableDeclarationFragment(
           variable, convertOrNull(variableDeclarationFragment.getInitializer()));
     }

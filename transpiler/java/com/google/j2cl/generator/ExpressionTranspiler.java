@@ -162,7 +162,7 @@ public class ExpressionTranspiler {
         String separator = "";
         for (Variable parameter : expression.getParameters()) {
           sourceBuilder.append(separator);
-          sourceBuilder.append(environment.aliasForVariable(parameter));
+          process(parameter);
           separator = ", ";
         }
         sourceBuilder.append(") =>");
@@ -390,11 +390,19 @@ public class ExpressionTranspiler {
       @Override
       public Void transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         Variable variable = fragment.getVariable();
-        sourceBuilder.append(environment.aliasForVariable(variable));
+        process(variable);
         if (fragment.getInitializer() != null) {
           sourceBuilder.append(" = ");
           process(fragment.getInitializer());
         }
+        return null;
+      }
+
+      @Override
+      public Void transformVariable(Variable variable) {
+        sourceBuilder.emitWithOptionalNamedMapping(
+            variable.getSourcePosition(),
+            () -> sourceBuilder.append(environment.aliasForVariable(variable)));
         return null;
       }
 

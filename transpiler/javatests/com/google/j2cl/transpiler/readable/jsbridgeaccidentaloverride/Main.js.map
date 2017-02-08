@@ -6,9 +6,13 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main();]
 [MyJsType a = new MyJsType();] => [let a = new MyJsType();]
+[a] => [a] "a"
 [SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();]
+[b] => [b] "b"
 [MyInterface c = new SubJsType();] => [let c = SubJsType.$create__();]
+[c] => [c] "c"
 [OtherInterface d = new SubJsType();] => [let d = SubJsType.$create__();]
+[d] => [d] "d"
 [a.foo(1);] => [a.foo(1);]
 [b.foo(1);] => [b.foo(1);]
 [c.foo(1);] => [c.m_foo__int(1);]

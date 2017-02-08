@@ -12,6 +12,7 @@
 [Foo.getB();] => [Foo.abc;]
 [Foo.setB(10);] => [Foo.abc = 10;]
 [Bar bar = new Bar();] => [let bar = Bar.$create__();]
+[bar] => [bar] "bar"
 [bar.getA();] => [bar.a;]
 [bar.setA(10);] => [bar.a = 10;]
 [bar.getB();] => [bar.abc;]

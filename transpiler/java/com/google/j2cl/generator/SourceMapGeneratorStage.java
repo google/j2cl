@@ -90,7 +90,7 @@ public class SourceMapGeneratorStage {
       }
       sourceMapGenerator.addMapping(
           compilationUnitSourceFileName,
-          null,
+          javaSourcePosition.getName(),
           toFilePosition(javaSourcePosition.getStartFilePosition()),
           toFilePosition(javaScriptSourcePosition.getStartFilePosition()),
           toFilePosition(javaScriptSourcePosition.getEndFilePosition()));

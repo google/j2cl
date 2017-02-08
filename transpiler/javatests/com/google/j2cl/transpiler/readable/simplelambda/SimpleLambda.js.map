@@ -7,8 +7,11 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();]
+[intf] => [intf] "intf"
+[n] => [n] "n"
 [return this.field + intf.foo(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + intf.m_foo__int(n);]
 [int result = test(i -> i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$0.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+[result] => [result] "result"
 [result =
         test(
             i -> {
@@ -16,9 +19,13 @@
             },
             10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
 [int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$2.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+[result] => [result] "result"
 [int x = 1;] => [let x = 1;]
+[x] => [x] "x"
 [int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$3.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);]
+[result] => [result] "result"
 [int x = 1;] => [let x = 1;]
+[x] => [x] "x"
 [int result =
         test(
             i -> {
@@ -26,6 +33,7 @@
               return x + y + this.field + i + 1;
             },
             10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$4.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);]
+[result] => [result] "result"
 [int result =
         test(
             i -> {
@@ -35,7 +43,9 @@
               return i + 2;
             },
             10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$5.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);]
+[result] => [result] "result"
 [UNKNOWN] => [SimpleLambda.$clinit();]
 [MyInterface f = (i) -> i;] => [let f = $Lambda$MyInterface$6.$create__();]
+[f] => [f] "f"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda = 100;]

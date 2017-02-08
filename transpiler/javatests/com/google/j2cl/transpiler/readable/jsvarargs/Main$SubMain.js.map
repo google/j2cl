@@ -5,16 +5,20 @@
 [UNKNOWN] => [return $instance;]
 [super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();]
+[m] => [m] "m"
+[numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [int a = super.f3(1, 1, 2);] => [let a = super.f3(1, 1, 2);]
+[a] => [a] "a"
 [a += super.f3(1);] => [a += super.f3(1);]
 [a += super.f3(1, new int[] {1, 2});] => [a += super.f3(1, 1, 2);]
 [a += super.f3(1, new int[] {});] => [a += super.f3(1);]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [a += super.f3(1, ints);] => [a += super.f3(1, ...$Arrays.$checkNotNull(ints));]
 [return a;] => [return a;]
 [UNKNOWN] => [Main.$clinit();]

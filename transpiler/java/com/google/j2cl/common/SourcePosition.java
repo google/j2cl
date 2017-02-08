@@ -33,6 +33,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public abstract @Nullable String getFilePath();
 
+  public abstract @Nullable String getName();
+
   // For mappings that should not be displayed in readable output.
   public static final SourcePosition DUMMY =
       newBuilder().setFilePath("UNKNOWN").setStartPosition(0, 0).setEndPosition(0, 0).build();
@@ -69,6 +71,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     public abstract Builder setEndFilePosition(FilePosition filePosition);
 
     public abstract Builder setFilePath(String filePath);
+
+    public abstract Builder setName(String name);
 
     public Builder setStartPosition(int line, int column) {
       return setStartFilePosition(new FilePosition(line, column));

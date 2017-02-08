@@ -9,6 +9,7 @@
 [return (EqualFunction<T>) forObject;] => [return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));]
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return (EqualFunction<T>) forCollection;] => [return /**@type {Function} */ ($Casts.to(EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));]
+[customFunction] => [customFunction] "customFunction"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return new EqualFunction<T>() {
       @Override
@@ -18,7 +19,10 @@
     };] => [return ((objA, objB) =>{
       return true;
     });]
+[objA] => [objA] "objA"
+[objB] => [objB] "objB"
 [return true;] => [return true;]
+[equalFn] => [equalFn] "equalFn"
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return new EqualFunction<Foo<T>>() {
       @Override
@@ -28,6 +32,8 @@
     };] => [return ((first, second) =>{
       return $Equality.$same(first, second);
     });]
+[first] => [first] "first"
+[second] => [second] "second"
 [return first == second;] => [return $Equality.$same(first, second);]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public static EqualFunction<Object> forObject =
@@ -39,6 +45,8 @@
       };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = ((first, second) =>{
       return $Equality.$same(first, second);
     });]
+[first] => [first] "first"
+[second] => [second] "second"
 [return first == second;] => [return $Equality.$same(first, second);]
 [public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = EqualFunctions.m_objectEqualFunction__();]
 [/**

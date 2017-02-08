@@ -53,9 +53,15 @@ public class ReadableSourceMapGenerator {
           continue;
         }
 
-        sb.append(extract(javaSourcePosition, javaSourceLines));
-        sb.append(" => ");
-        sb.append(extract(javaScriptSourcePosition, javaScriptSourceLines).trim());
+
+        sb.append(extract(javaSourcePosition, javaSourceLines))
+            .append(" => ")
+            .append(extract(javaScriptSourcePosition, javaScriptSourceLines).trim());
+
+        if (javaSourcePosition.getName() != null) {
+          sb.append(" \"").append(javaSourcePosition.getName()).append("\"");
+        }
+
         sb.append("\n");
       }
     } catch (IOException e) {
@@ -77,11 +83,9 @@ public class ReadableSourceMapGenerator {
       StringBuilder content =
           new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
       for (int line = startLine + 1; line < endLine; line++) {
-        content.append("\n");
-        content.append(trimTrailingWhitespace(lines.get(line)));
+        content.append("\n").append(trimTrailingWhitespace(lines.get(line)));
       }
-      content.append("\n");
-      content.append(lines.get(endLine).substring(0, endColumn));
+      content.append("\n").append(lines.get(endLine).substring(0, endColumn));
       return "[" + content.toString() + "]";
     }
 

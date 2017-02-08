@@ -20,17 +20,21 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.Cloneable;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.SourcePosition;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node implements Cloneable<Variable> {
+public class Variable extends Node implements Cloneable<Variable>, HasSourcePosition {
   private final String name;
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
   private final boolean isRaw;
+  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
   private Variable(
+      SourcePosition sourcePosition,
       String name,
       TypeDescriptor typeDescriptor,
       boolean isFinal,
@@ -41,6 +45,7 @@ public class Variable extends Node implements Cloneable<Variable> {
     this.isFinal = isFinal;
     this.isParameter = isParameter;
     this.isRaw = isRaw;
+    this.sourcePosition = sourcePosition;
   }
 
   public String getName() {
@@ -89,6 +94,16 @@ public class Variable extends Node implements Cloneable<Variable> {
     return new Builder();
   }
 
+  @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
+  }
+
   /** Builder for Variable. */
   public static class Builder {
 
@@ -97,6 +112,7 @@ public class Variable extends Node implements Cloneable<Variable> {
     private boolean isFinal;
     private boolean isParameter;
     private boolean isRaw;
+    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
     public static Builder from(Variable variable) {
       Builder builder = new Builder();
@@ -105,6 +121,7 @@ public class Variable extends Node implements Cloneable<Variable> {
       builder.isRaw = variable.isRaw();
       builder.isFinal = variable.isFinal();
       builder.isParameter = variable.isParameter;
+      builder.sourcePosition = variable.sourcePosition;
       return builder;
     }
 
@@ -133,10 +150,15 @@ public class Variable extends Node implements Cloneable<Variable> {
       return this;
     }
 
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
     public Variable build() {
       checkState(name != null);
       checkState(typeDescriptor != null);
-      return new Variable(name, typeDescriptor, isFinal, isParameter, isRaw);
+      return new Variable(sourcePosition, name, typeDescriptor, isFinal, isParameter, isRaw);
     }
   }
 }

@@ -5,6 +5,7 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();]
+[iterable] => [iterable] "iterable"
 [for (Throwable t : iterable) {
       t.toString();
     }] => [for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__(); ) {
@@ -12,6 +13,7 @@
       $Objects.m_toString__java_lang_Object(t);
     }]
 [UNKNOWN] => [let t = /**@type {Throwable} */ ($Casts.to($iterator.m_next__(), Throwable));]
+[t] => [t] "t"
 [t.toString();] => [$Objects.m_toString__java_lang_Object(t);]
 [for (Throwable t : new Throwable[10]) {
       t.toString();
@@ -20,5 +22,6 @@
       $Objects.m_toString__java_lang_Object(t$1$);
     }]
 [UNKNOWN] => [let t$1$ = $array[$index];]
+[t] => [t$1$] "t"
 [t.toString();] => [$Objects.m_toString__java_lang_Object(t$1$);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

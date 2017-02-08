@@ -1,13 +1,17 @@
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;]
+[f] => [f] "f"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);]
 [UNKNOWN] => [return $instance;]
+[f] => [f] "f"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main();]
 [this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;]
+[multiplier] => [multiplier] "multiplier"
+[numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
@@ -15,6 +19,7 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return numbers.length + numbers[0] + multiplier;] => [return $var_args_copy.length + $var_args_copy[0] + multiplier;]
+[numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
@@ -22,18 +27,22 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return numbers.length + numbers[0];] => [return $var_args_copy.length + $var_args_copy[0];]
+[m] => [m] "m"
+[numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + $var_args_copy[1];]
+[numbers] => [numbers] "numbers"
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];]
+[elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = new Array(arguments.length);]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
@@ -41,6 +50,7 @@
     }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return elements[0];] => [return $var_args_copy[0];]
+[elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<List<Main>>} */ ($Arrays.$create([arguments.length], List));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
@@ -57,6 +67,7 @@
 [f1(1, new int[] {});] => [Main.f1(1);]
 [Main.f1(1, new int[] {});] => [Main.f1(1);]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
 [Main.f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
 [f2(1, 2);] => [Main.f2(1, 2);]
@@ -76,33 +87,44 @@
 [Main.f2(new int[] {});] => [Main.f2();]
 [Main.generics(new int[] {});] => [Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([], $int)));]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [Integer[] integers = new Integer[] {1, 2};] => [let integers = /**@type {!Array<Integer>} */ ($Arrays.$init([Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));]
+[integers] => [integers] "integers"
 [f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
 [Main.f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
 [Main.<Integer>generics(integers);] => [Main.generics(...$Arrays.$checkNotNull(integers));]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);]
+[m] => [m] "m"
 [m.f3(1, 1, 2);] => [m.f3(1, 1, 2);]
 [m.f3(1);] => [m.f3(1);]
 [m.f3(1, new int[] {1, 2});] => [m.f3(1, 1, 2);]
 [m.f3(1, new int[] {});] => [m.f3(1);]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [m.f3(1, ints);] => [m.f3(1, ...$Arrays.$checkNotNull(ints));]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);]
+[m] => [m] "m"
 [m.f4(1, 2);] => [m.f4(1, 2);]
 [m.f4();] => [m.f4();]
 [m.f4(new int[] {1, 2});] => [m.f4(1, 2);]
 [m.f4(new int[] {});] => [m.f4();]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));]
 [AFunction a = new AFunction();] => [let a = AFunction.$create__();]
+[a] => [a] "a"
 [Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();]
+[o1] => [o1] "o1"
 [Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();]
+[o2] => [o2] "o2"
 [a.f1(0, o1, o2);] => [a(0, o1, o2);]
 [a.f1(0);] => [a(0);]
 [a.f1(0, new Object[] {o1, o2});] => [a(0, o1, o2);]
 [a.f1(0, new Object[] {});] => [a(0);]
 [Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];]
+[os] => [os] "os"
 [a.f1(0, os);] => [a(0, ...$Arrays.$checkNotNull(os));]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[ints] => [ints] "ints"
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

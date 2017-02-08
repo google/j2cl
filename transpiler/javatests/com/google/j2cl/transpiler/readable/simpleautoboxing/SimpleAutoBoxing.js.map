@@ -5,44 +5,82 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();]
+[b] => [b] "b"
 [return b;] => [return b;]
+[d] => [d] "d"
 [return d;] => [return d;]
+[b] => [b] "b"
 [return b;] => [return Byte.m_valueOf__byte(b);]
+[f] => [f] "f"
 [return f;] => [return Float.m_valueOf__float(f);]
+[i] => [i] "i"
 [return i;] => [return Integer.m_valueOf__int(i);]
+[l] => [l] "l"
 [return l;] => [return Long.m_valueOf__long(l);]
+[s] => [s] "s"
 [return s;] => [return Short.m_valueOf__short(s);]
+[c] => [c] "c"
 [return c;] => [return Character.m_valueOf__char(c);]
+[b] => [b] "b"
 [return b;] => [return Boolean.m_booleanValue__java_lang_Boolean(b);]
+[d] => [d] "d"
 [return d;] => [return Double.m_doubleValue__java_lang_Double(d);]
+[b] => [b] "b"
 [return b;] => [return b.m_byteValue__();]
+[f] => [f] "f"
 [return f;] => [return f.m_floatValue__();]
+[i] => [i] "i"
 [return i;] => [return i.m_intValue__();]
+[l] => [l] "l"
 [return l;] => [return l.m_longValue__();]
+[s] => [s] "s"
 [return s;] => [return s.m_shortValue__();]
+[c] => [c] "c"
 [return c;] => [return c.m_charValue__();]
+[d] => [d] "d"
 [return d;] => [return d;]
 [Boolean b = null;] => [let b = null;]
+[b] => [b] "b"
 [Double d = null;] => [let d = null;]
+[d] => [d] "d"
 [Integer i = null;] => [let i = null;]
+[i] => [i] "i"
 [Long l = null;] => [let l = null;]
+[l] => [l] "l"
 [boolean bool = true;] => [let bool = true;]
+[bool] => [bool] "bool"
 [double d = 1111.0;] => [let d = 1111.0;]
+[d] => [d] "d"
 [byte b = (byte) 100;] => [let b = 100;]
+[b] => [b] "b"
 [float f = 1111.0f;] => [let f = 1111.0;]
+[f] => [f] "f"
 [int i = 1111;] => [let i = 1111;]
+[i] => [i] "i"
 [long l = 1111L;] => [let l = $Long.fromBits(1111, 0) /* 1111 */;]
+[l] => [l] "l"
 [short s = (short) 100;] => [let s = 100;]
+[s] => [s] "s"
 [char c = 'a';] => [let c = 97 /* 'a' */;]
+[c] => [c] "c"
 [Boolean boxBool = bool;] => [let boxBool = bool;]
+[boxBool] => [boxBool] "boxBool"
 [Double boxD = d;] => [let boxD = d;]
+[boxD] => [boxD] "boxD"
 [Byte boxB = b;] => [let boxB = Byte.m_valueOf__byte(b);]
+[boxB] => [boxB] "boxB"
 [Float boxF = f;] => [let boxF = Float.m_valueOf__float(f);]
+[boxF] => [boxF] "boxF"
 [Integer boxI = i;] => [let boxI = Integer.m_valueOf__int(i);]
+[boxI] => [boxI] "boxI"
 [Long boxL = l;] => [let boxL = Long.m_valueOf__long(l);]
+[boxL] => [boxL] "boxL"
 [Short boxS = s;] => [let boxS = Short.m_valueOf__short(s);]
+[boxS] => [boxS] "boxS"
 [Character boxC = c;] => [let boxC = Character.m_valueOf__char(c);]
+[boxC] => [boxC] "boxC"
 [Object o = 0;] => [let o = Integer.m_valueOf__int(0);]
+[o] => [o] "o"
 [boxBool = true;] => [boxBool = true;]
 [boxD = 100.0;] => [boxD = 100.0;]
 [boxB = 0;] => [boxB = Byte.m_valueOf__byte(0);]
@@ -70,21 +108,37 @@
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());]
 [boxI = ~boxI;] => [boxI = Integer.m_valueOf__int(~boxI.m_intValue__());]
 [Boolean boxBool = new Boolean(true);] => [let boxBool = Boolean.$create__boolean(true);]
+[boxBool] => [boxBool] "boxBool"
 [Double boxD = new Double(1111.0);] => [let boxD = Double.$create__double(1111.0);]
+[boxD] => [boxD] "boxD"
 [Byte boxB = new Byte((byte) 100);] => [let boxB = Byte.$create__byte(100);]
+[boxB] => [boxB] "boxB"
 [Float boxF = new Float(1111.0f);] => [let boxF = Float.$create__float(1111.0);]
+[boxF] => [boxF] "boxF"
 [Integer boxI = new Integer(1111);] => [let boxI = Integer.$create__int(1111);]
+[boxI] => [boxI] "boxI"
 [Long boxL = new Long(1111L);] => [let boxL = Long.$create__long($Long.fromBits(1111, 0) /* 1111 */);]
+[boxL] => [boxL] "boxL"
 [Short boxS = new Short((short) 100);] => [let boxS = Short.$create__short(100);]
+[boxS] => [boxS] "boxS"
 [Character boxC = new Character('a');] => [let boxC = Character.$create__char(97 /* 'a' */);]
+[boxC] => [boxC] "boxC"
 [boolean bool = boxBool;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);]
+[bool] => [bool] "bool"
 [double d = boxD;] => [let d = Double.m_doubleValue__java_lang_Double(boxD);]
+[d] => [d] "d"
 [byte b = boxB;] => [let b = boxB.m_byteValue__();]
+[b] => [b] "b"
 [float f = boxF;] => [let f = boxF.m_floatValue__();]
+[f] => [f] "f"
 [int i = boxI;] => [let i = boxI.m_intValue__();]
+[i] => [i] "i"
 [long l = boxL;] => [let l = boxL.m_longValue__();]
+[l] => [l] "l"
 [short s = boxS;] => [let s = boxS.m_shortValue__();]
+[s] => [s] "s"
 [char c = boxC;] => [let c = boxC.m_charValue__();]
+[c] => [c] "c"
 [boxBool = box(boxBool);] => [boxBool = this.m_box__boolean(Boolean.m_booleanValue__java_lang_Boolean(boxBool));]
 [boxD = box(boxD);] => [boxD = this.m_box__double(Double.m_doubleValue__java_lang_Double(boxD));]
 [boxB = box(boxB);] => [boxB = this.m_box__byte(boxB.m_byteValue__());]
@@ -115,9 +169,13 @@
 [i = -boxI;] => [i = -boxI.m_intValue__();]
 [i = ~boxI;] => [i = ~boxI.m_intValue__();]
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);]
+[boxB1] => [boxB1] "boxB1"
 [Boolean boxB2 = new Boolean(false);] => [let boxB2 = Boolean.$create__boolean(false);]
+[boxB2] => [boxB2] "boxB2"
 [boolean br;] => [let br;]
+[br] => [br] "br"
 [boolean boxr;] => [let boxr;]
+[boxr] => [boxr] "boxr"
 [boxr = boxB1 == boxB2;] => [boxr = $Equality.$same(boxB1, boxB2);]
 [br = boxB1 == boxB2;] => [br = $Equality.$same(boxB1, boxB2);]
 [assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
@@ -163,19 +221,25 @@
 [assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
 [assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
+[boxB] => [boxB] "boxB"
 [boolean b = false;] => [let b = false;]
+[b] => [b] "b"
 [assert boxB == boxB;] => [$Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxB, boxB));]
 [assert boxB == b;] => [$Asserts.$enabled() && $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);]
 [assert b != b;] => [$Asserts.$enabled() && $Asserts.$assert(b != b);]
 [assert b != boxB;] => [$Asserts.$enabled() && $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));]
 [Integer boxI = new Integer(100);] => [let boxI = Integer.$create__int(100);]
+[boxI] => [boxI] "boxI"
 [int i = 101;] => [let i = 101;]
+[i] => [i] "i"
 [assert boxI == boxI;] => [$Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxI, boxI));]
 [assert boxI == i;] => [$Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue__() == i);]
 [assert i != i;] => [$Asserts.$enabled() && $Asserts.$assert(i != i);]
 [assert i != boxI;] => [$Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());]
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
+[boxB] => [boxB] "boxB"
 [boolean b = true;] => [let b = true;]
+[b] => [b] "b"
 [assert boxB;] => [$Asserts.$enabled() && $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));]
 [assert b;] => [$Asserts.$enabled() && $Asserts.$assert(b);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

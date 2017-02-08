@@ -5,18 +5,24 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();]
+[fn] => [fn] "fn"
+[a] => [a] "a"
 [UNKNOWN] => [Main.$clinit();]
 [return fn.foo(a);] => [return fn(a);]
 [MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create__();]
+[func] => [func] "func"
 [func.foo(10);] => [func(10);]
 [callAsFunction(func, 10);] => [Main.callAsFunction(func, 10);]
 [fun(createMyJsFunction(), 10);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(Main.createMyJsFunction(), 10);]
 [int a = func.field;] => [let a = func.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;]
+[a] => [a] "a"
 [func.bar();] => [MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(func);]
 [final int n = 4;] => [let n = 4;]
+[n] => [n] "n"
 [fun((number) -> number + n, n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((number$1$) =>{
       return number$1$ + n;
     }), n);]
+[number] => [number$1$] "number"
 [number + n] => [return number$1$ + n;]
 [fun(
         new MyJsFunctionInterface() {
@@ -28,6 +34,7 @@
         n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((a$1$) =>{
       return a$1$ + n;
     }), n);]
+[a] => [a$1$] "a"
 [return a + n;] => [return a$1$ + n;]
 [new MyJsFunctionInterface() {
       @Override
@@ -39,13 +46,20 @@
       this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
       return 0;
     })(3);]
+[a] => [a$2$] "a"
 [handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();]
 [return 0;] => [return 0;]
+[fn] => [fn] "fn"
+[arg] => [arg] "arg"
+[f] => [f] "f"
 [UNKNOWN] => [Main.$clinit();]
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());]
+[list] => [list] "list"
 [f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));]
+[generator] => [generator] "generator"
 [UNKNOWN] => [Main.$clinit();]
 [List<T> collected = null;] => [let collected = null;]
+[collected] => [collected] "collected"
 [return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));]
 [JsFunctionVarags f =
         (i, numbers) -> {
@@ -62,7 +76,11 @@
       }
       return sum;
     });]
+[f] => [f] "f"
+[i] => [i] "i"
+[numbers] => [numbers] "numbers"
 [int sum = i;] => [let sum = i;]
+[sum] => [sum] "sum"
 [for (int number : numbers) {
             sum += number;
           }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
@@ -70,10 +88,14 @@
         sum += number$1$;
       }]
 [UNKNOWN] => [let number$1$ = $array[$index];]
+[number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;]
 [return sum;] => [return sum;]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((i, n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });]
+[f] => [f] "f"
+[i] => [i] "i"
+[n] => [n] "n"
 [(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

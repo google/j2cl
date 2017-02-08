@@ -11,5 +11,7 @@
 [Function<Object, Object> f = object -> new ArrayList<T>();] => [let f = ((object) =>{
       return /**@type {ArrayList} */ (ArrayList.$create__());
     });]
+[f] => [f] "f"
+[object] => [object] "object"
 [new ArrayList<T>()] => [return /**@type {ArrayList} */ (ArrayList.$create__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]

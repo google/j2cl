@@ -34,6 +34,15 @@ class SourceBuilder {
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
 
+  public void emitWithOptionalNamedMapping(
+      SourcePosition javaSourcePosition, Runnable codeEmitter) {
+    if (javaSourcePosition.getName() != null) {
+      emitWithMapping(javaSourcePosition, codeEmitter);
+    } else {
+      codeEmitter.run();
+    }
+  }
+
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
     FilePosition startPosition = getCurrentPosition();
     codeEmitter.run();

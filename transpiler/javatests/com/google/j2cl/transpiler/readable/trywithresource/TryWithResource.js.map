@@ -8,6 +8,7 @@
 [UNKNOWN] => [TryWithResource.$clinit();]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
+[thing] => [thing] "thing"
 [UNKNOWN] => [try {
         thing = ClosableThing.$create__();
         let i = 0;
@@ -28,6 +29,7 @@
       }]
 [UNKNOWN] => [thing = ClosableThing.$create__();]
 [int i = 0;] => [let i = 0;]
+[i] => [i] "i"
 [UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
 [UNKNOWN] => [if (Throwable.$isInstance(__$exc)) {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
@@ -45,6 +47,7 @@
           throw $Exceptions.toJs($primaryExc);
         }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
+[args] => [args] "args"
 [UNKNOWN] => [TryWithResource.$clinit();]
 [try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
       int i = 0;
@@ -87,7 +90,9 @@
     }]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
+[thing] => [thing] "thing"
 [UNKNOWN] => [let thing2 = null;]
+[thing2] => [thing2] "thing2"
 [UNKNOWN] => [try {
         thing = ClosableThing.$create__();
         thing2 = ClosableThing.$create__();
@@ -112,6 +117,7 @@
 [UNKNOWN] => [thing = ClosableThing.$create__();]
 [UNKNOWN] => [thing2 = ClosableThing.$create__();]
 [int i = 0;] => [let i = 0;]
+[i] => [i] "i"
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());]
 [UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
 [UNKNOWN] => [if (Throwable.$isInstance(__$exc)) {
@@ -139,6 +145,8 @@
         throw $Exceptions.toJs(__$exc$1$);
       }]
 [UNKNOWN] => [let e = /**@type {Exception} */ (__$exc$1$);]
+[e] => [e] "e"
 [int b = 10;] => [let b = 10;]
+[b] => [b] "b"
 [UNKNOWN] => [throw $Exceptions.toJs(__$exc$1$);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

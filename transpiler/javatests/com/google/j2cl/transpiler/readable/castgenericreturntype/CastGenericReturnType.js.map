@@ -5,8 +5,10 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_castgenericreturntype_CastGenericReturnType();]
+[foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [return new CastGenericReturnType<>();] => [return /**@type {!CastGenericReturnType<*>} */ (CastGenericReturnType.$create__());]
+[foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [if (foo != null) {
       // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
@@ -17,10 +19,13 @@
     }]
 [return inferGeneric(foo);] => [return CastGenericReturnType.m_inferGeneric__java_lang_Object(foo);]
 [return null;] => [return null;]
+[foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());]
+[foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [ArrayList<Object> list = newArrayList("foo");] => [let list = CastGenericReturnType.m_newArrayList__java_lang_Object("foo");]
+[list] => [list] "list"
 [acceptsArrayListOfSuper(list);] => [CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -13,15 +13,21 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_strings_Strings();]
 [UNKNOWN] => [let $qualifier, $qualifier$1$;]
 [String s1 = null;] => [let s1 = null;]
+[s1] => [s1] "s1"
 [String s2 = null;] => [let s2 = null;]
+[s2] => [s2] "s2"
 [String s3 = s1 + s2;] => [let s3 = "" + s1 + s2;]
+[s3] => [s3] "s3"
 [s2 += s2;] => [s2 = "" + s2 + s2;]
 [s1 += "a";] => [s1 += "a";]
 [s3 = s1 + s1 + s2 + null + "a";] => [s3 = "" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null) + "a";]
 [s3 = "a" + s1 + s1 + s2 + null;] => [s3 = "a" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);]
 [String s4;] => [let s4;]
+[s4] => [s4] "s4"
 [char c1 = 'F';] => [let c1 = 70 /* 'F' */;]
+[c1] => [c1] "c1"
 [char c2 = 'o';] => [let c2 = 111 /* 'o' */;]
+[c2] => [c2] "c2"
 [s4 = c1 + c2 + "o";] => [s4 = java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)) + java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c2)) + "o";]
 [(new StringHolder()).s += s4;] => [($qualifier = (StringHolder.$create__()), $qualifier.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = "" + $qualifier.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder + s4);]
 [(new StringHolder()).s += c1;] => [($qualifier$1$ = (StringHolder.$create__()), $qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = "" + $qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder + java_lang_String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)));]

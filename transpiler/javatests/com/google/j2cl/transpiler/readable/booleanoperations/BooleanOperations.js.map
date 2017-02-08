@@ -5,10 +5,14 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations();]
+[b] => [b] "b"
 [UNKNOWN] => [BooleanOperations.$clinit();]
 [boolean ls = true;] => [let ls = true;]
+[ls] => [ls] "ls"
 [boolean rs = true;] => [let rs = true;]
+[rs] => [rs] "rs"
 [boolean r = true;] => [let r = true;]
+[r] => [r] "r"
 [r = ls == rs;] => [r = ls == rs;]
 [r = ls != rs;] => [r = ls != rs;]
 [r = ls ^ rs;] => [r = !!(ls ^ rs);]
@@ -29,6 +33,7 @@
 [acceptBoolean(ls || rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls || rs);]
 [acceptBoolean(ls = rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls = rs);]
 [Boolean br;] => [let br;]
+[br] => [br] "br"
 [br = (Boolean) (ls == rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls == rs), Boolean));]
 [br = (Boolean) (ls != rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls != rs), Boolean));]
 [br = (Boolean) (ls ^ rs);] => [br = /**@type {?boolean} */ ($Casts.to((!!(ls ^ rs)), Boolean));]
@@ -80,7 +85,9 @@
     }]
 [r = true;] => [r = true;]
 [final Outer finalOuter = new Outer();] => [let finalOuter = $1Outer.$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(this);]
+[finalOuter] => [finalOuter] "finalOuter"
 [finalOuter.b |= true;] => [finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | true);]
 [Outer outer = new Outer();] => [let outer = $1Outer.$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(this);]
+[outer] => [outer] "outer"
 [outer.b |= (outer = null) == null;] => [outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | $Equality.$same((outer = null), null));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

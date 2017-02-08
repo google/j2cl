@@ -14,21 +14,27 @@
 [return this;] => [return this;]
 [UNKNOWN] => [let $qualifier, $value, $value$1$, $qualifier$1$, $value$2$;]
 [long a = 0L;] => [let a = $Long.fromBits(0, 0) /* 0 */;]
+[a] => [a] "a"
 [a = -100000L;] => [a = $LongUtils.$negate($Long.fromBits(100000, 0) /* 100000 */);]
 [a = 100000L;] => [a = $Long.fromBits(100000, 0) /* 100000 */;]
 [long b = -2147483648L;] => [let b = $LongUtils.$negate($Long.fromBits(-2147483648, 0) /* 2147483648 */);]
+[b] => [b] "b"
 [b = 2147483648L;] => [b = $Long.fromBits(-2147483648, 0) /* 2147483648 */;]
 [b = -9223372036854775808L;] => [b = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;]
 [b = 9223372036854775807L;] => [b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;]
 [long c = a + b;] => [let c = $LongUtils.$plus(a, b);]
+[c] => [c] "c"
 [c = a / b;] => [c = $LongUtils.$divide(a, b);]
 [long e = ++a;] => [let e = a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */);]
+[e] => [e] "e"
 [e = ++foo;] => [e = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $LongUtils.$plus(this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs, $Long.fromBits(1, 0) /* 1 */);]
 [e = ++getWithSideEffect().foo;] => [e = ($qualifier = this.m_getWithSideEffect__(), $qualifier.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $LongUtils.$plus($qualifier.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs, $Long.fromBits(1, 0) /* 1 */));]
 [long f = a++;] => [let f = ($value = a, a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */), $value);]
+[f] => [f] "f"
 [f = foo++;] => [f = ($value$1$ = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs, this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $LongUtils.$plus(this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs, $Long.fromBits(1, 0) /* 1 */), $value$1$);]
 [f = getWithSideEffect().foo++;] => [f = (($qualifier$1$ = this.m_getWithSideEffect__(), $value$2$ = $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs), $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $LongUtils.$plus($qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs, $Long.fromBits(1, 0) /* 1 */), $value$2$);]
 [long g = foo;] => [let g = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;]
+[g] => [g] "g"
 [g = getBar();] => [g = this.m_getBar__();]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public long foo = 0;] => [this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $Primitives.$widenIntToLong(0);]

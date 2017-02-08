@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -32,6 +33,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.visitors.Import;
@@ -58,6 +60,24 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     this.mangledTypeName =
         ManglingNameUtils.getMangledName(type.getDescriptor().getUnsafeTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
+  }
+
+  /** Emits the method header including (static) (getter/setter) methodName(parametersList). */
+  private void emitMethodHeader(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
+    String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
+    sourceBuilder.append(Joiner.on(" ").skipNulls().join(staticQualifier, methodName));
+    sourceBuilder.append("(");
+    String separator = "";
+    for (Variable parameter : method.getParameters()) {
+      sourceBuilder.append(separator);
+      sourceBuilder.emitWithOptionalNamedMapping(
+          parameter.getSourcePosition(),
+          () -> sourceBuilder.append(environment.aliasForVariable(parameter)));
+      separator = ", ";
+    }
+    sourceBuilder.append(") ");
   }
 
   @Override
@@ -237,10 +257,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           continue;
         }
         renderMethodJsDoc(method);
-        sourceBuilder.append("// native " + GeneratorUtils.getMethodHeader(method, environment));
+        sourceBuilder.append("// native ");
+        emitMethodHeader(method);
       } else {
         renderMethodJsDoc(method);
-        sourceBuilder.append(GeneratorUtils.getMethodHeader(method, environment) + " ");
+        emitMethodHeader(method);
         statementTranspiler.renderStatement(method.getBody());
       }
       sourceBuilder.newLines(2);

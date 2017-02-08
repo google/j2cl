@@ -17,14 +17,10 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -38,7 +34,6 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
-import java.util.List;
 
 /**
  * Utility functions related to source generation in the J2CL AST.
@@ -73,17 +68,6 @@ public class GeneratorUtils {
   }
 
   /**
-   * Returns the method header including (static) (getter/setter) methodName(parametersList).
-   */
-  public static String getMethodHeader(Method method, GenerationEnvironment environment) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
-    String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
-    String parameterList = getParameterList(method, environment);
-    return Joiner.on(" ").skipNulls().join(staticQualifier, methodName + "(" + parameterList + ")");
-  }
-
-  /**
    * Returns the js doc annotations for parameter at {@code index} in {@code method}. It is of
    * the form:
    */
@@ -106,17 +90,6 @@ public class GeneratorUtils {
           method.isParameterOptional(index) ? "=" : "",
           name);
     }
-  }
-
-  public static String getParameterList(Method method, final GenerationEnvironment environment) {
-    List<String> parameterNameList =
-        Lists.transform(method.getParameters(), environment::aliasForVariable);
-    return Joiner.on(", ").join(parameterNameList);
-  }
-
-  /** Returns true if the type has a superclass that is not a native js type. */
-  public static boolean hasNonNativeSuperClass(Type type) {
-    return type.getSuperTypeDescriptor() != null && !type.getSuperTypeDescriptor().isNative();
   }
 
   public static Expression getInitialValue(Field field) {

@@ -5,8 +5,14 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();]
+[intf] => [intf] "intf"
+[e] => [e] "e"
 [return intf.foo(e);] => [return intf.m_foo__java_lang_Object(e);]
+[intf] => [intf] "intf"
+[e] => [e] "e"
 [return intf.foo(e);] => [return /**@type {Error} */ ($Casts.to(intf.m_foo__java_lang_Object(e), Error));]
+[intf] => [intf] "intf"
+[e] => [e] "e"
 [UNKNOWN] => [LambdaWithGenerics.$clinit();]
 [return intf.foo(e);] => [return /**@type {Enum<Enum>} */ ($Casts.to(intf.m_foo__java_lang_Object(e), Enum));]
 [UNKNOWN] => [LambdaWithGenerics.$clinit();]
@@ -15,6 +21,8 @@
 [test2(i -> i, new Error());] => [this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(/**@type {!$Lambda$MyInterface$1<C_E>} */ ($Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this)), Error.$create__());]
 [test3(i -> i, (Enum<T>) null);] => [LambdaWithGenerics.m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(/**@type {!$Lambda$MyInterface$2<Enum, C_E>} */ ($Lambda$MyInterface$2.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this)), /**@type {Enum<Enum>} */ ($Casts.to(null, Enum)));]
 [Function<? super T, ?> f = item -> 1L;] => [let f = /**@type {!$Lambda$Function$3<C_E, Enum>} */ ($Lambda$Function$3.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this));]
+[f] => [f] "f"
 [UNKNOWN] => [LambdaWithGenerics.$clinit();]
 [Function<Object, ?> f = l -> m();] => [let f = $Lambda$Function$4.$create__();]
+[f] => [f] "f"
 [UNKNOWN] => [java_lang_Object.$clinit();]
