@@ -21,6 +21,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FunctionExpression;
@@ -32,8 +33,10 @@ import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Variable.Builder;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Temporary workaround for b/24476009.
@@ -45,8 +48,9 @@ import java.util.function.Predicate;
  * <p>2) Template variables do not resolve within the body of anonymous functions.
  *
  * <p>To avoid warnings by JsCompiler this pass replaces these "unreferenceable" template variables
- * by their bound. Note that the AST construct of interest is {@link JsDocAnnotatedExpression}
- * because this is the only one that can result in a template variable reference in the output.
+ * by their bound. Note that there are only two AST construct of interest: {@link
+ * JsDocAnnotatedExpression} and {@link FunctionExpression} because these are the only ones that
+ * emit JsDoc inline (and therefore can produce template references).
  */
 public class FixTypeVariablesInMethods extends NormalizationPass {
   @Override
@@ -62,13 +66,31 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
             TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
             TypeDescriptor boundType =
                 replaceTypeVariableWithBound(
-                    castTypeDescriptor,
-                    typeDescriptor ->
-                        isTypeVariableDeclaredByMember(typeDescriptor, getCurrentMember()));
+                    castTypeDescriptor, this::isTypeVariableDeclaredByCurrentMember);
             return JsDocAnnotatedExpression.newBuilder()
                 .setExpression(annotation.getExpression())
                 .setAnnotationType(boundType)
                 .build();
+          }
+
+          @Override
+          public Expression rewriteFunctionExpression(FunctionExpression functionExpression) {
+            return replaceTypeInFunctionExpressionParameters(
+                functionExpression, this::isTypeVariableDeclaredByCurrentMember);
+          }
+
+          private boolean isTypeVariableDeclaredByCurrentMember(TypeDescriptor typeDescriptor) {
+            Member member = getCurrentMember();
+            // A JsFunction method uses @this tag to specify the type of 'this', which makes
+            // templates unresolved inside the method.
+            // TODO: double check if this is the same issue with b/24476009.
+            return typeDescriptor.isTypeVariable()
+                && member.isMethod()
+                && (((Method) member)
+                        .getDescriptor()
+                        .getTypeParameterTypeDescriptors()
+                        .contains(TypeDescriptors.toNonNullable(typeDescriptor))
+                    || (((Method) member).getDescriptor().isJsFunction()));
           }
         });
 
@@ -79,7 +101,8 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
-            removeAllTypeVariables(functionExpression);
+            removeAllTypeVariables(functionExpression.getBody());
+            replaceTypeInFunctionExpressionParameters(functionExpression, Predicates.alwaysTrue());
           }
 
           @Override
@@ -94,8 +117,28 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
         });
   }
 
-  private void removeAllTypeVariables(Expression functionExpression) {
-    functionExpression.accept(
+  private FunctionExpression replaceTypeInFunctionExpressionParameters(
+      FunctionExpression functionExpression,
+      Predicate<TypeDescriptor> isTypeVariableDeclaredByCurrentMember) {
+    return AstUtils.replaceVariables(
+        functionExpression.getParameters(),
+        functionExpression
+            .getParameters()
+            .stream()
+            .map(
+                variable ->
+                    Builder.from(variable)
+                        .setTypeDescriptor(
+                            replaceTypeVariableWithBound(
+                                variable.getTypeDescriptor(),
+                                isTypeVariableDeclaredByCurrentMember))
+                        .build())
+            .collect(Collectors.toList()),
+        functionExpression);
+  }
+
+  private void removeAllTypeVariables(Node node) {
+    node.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
@@ -105,6 +148,15 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
             return JsDocAnnotatedExpression.newBuilder()
                 .setExpression(annotation.getExpression())
                 .setAnnotationType(boundType)
+                .build();
+          }
+
+          @Override
+          public Expression rewriteFunctionExpression(FunctionExpression functionExpression) {
+            return FunctionExpression.Builder.from(functionExpression)
+                .setTypeDescriptor(
+                    replaceTypeVariableWithBound(
+                        functionExpression.getTypeDescriptor(), Predicates.alwaysTrue()))
                 .build();
           }
         });
@@ -141,20 +193,6 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           boundTypeDescriptor, typeDescriptor.getDimensions(), typeDescriptor.isNullable());
     }
     return typeDescriptor;
-  }
-
-  private static boolean isTypeVariableDeclaredByMember(
-      TypeDescriptor typeDescriptor, Member member) {
-    // A JsFunction method uses @this tag to specify the type of 'this', which makes templates
-    // unresolved inside the method.
-    // TODO: double check if this is the same issue with b/24476009.
-    return typeDescriptor.isTypeVariable()
-        && member.isMethod()
-        && (((Method) member)
-                .getDescriptor()
-                .getTypeParameterTypeDescriptors()
-                .contains(TypeDescriptors.toNonNullable(typeDescriptor))
-            || (((Method) member).getDescriptor().isJsFunction()));
   }
 
   /**

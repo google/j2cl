@@ -162,6 +162,10 @@ public class ExpressionTranspiler {
         String separator = "";
         for (Variable parameter : expression.getParameters()) {
           sourceBuilder.append(separator);
+          sourceBuilder.append("/** ");
+          sourceBuilder.append(
+              JsDocNameUtils.getJsDocName(parameter.getTypeDescriptor(), environment));
+          sourceBuilder.append(" */ ");
           process(parameter);
           separator = ", ";
         }

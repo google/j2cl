@@ -59,7 +59,7 @@
       public boolean equal(T objA, T objB) {
         return true;
       }
-    };] => [return ((objA, objB) =>{
+    };] => [return ((/** * */ objA, /** * */ objB) =>{
       return true;
     });]
 [objA] => [objA] "objA"
@@ -79,7 +79,7 @@
       public boolean equal(Foo<T> first, Foo<T> second) {
         return first == second;
       }
-    };] => [return ((first, second) =>{
+    };] => [return ((/** Foo */ first, /** Foo */ second) =>{
       return $Equality.$same(first, second);
     });]
 [first] => [first] "first"
@@ -92,7 +92,7 @@
         public boolean equal(Object first, Object second) {
           return first == second;
         }
-      };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = ((first, second) =>{
+      };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = ((/** * */ first, /** * */ second) =>{
       return $Equality.$same(first, second);
     });]
 [first] => [first] "first"

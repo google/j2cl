@@ -329,14 +329,17 @@ public class JsFunctionTest extends MyTestCase {
     // Look at the structure of the two functions to make sure they are plain functions. They should
     // look something like
     //
-    //     "function <fn>(<par>) { return <par>; }"
+    //     "function <fn>( /** type */ <par>) { return <par>; }"
     //
     NativeRegExp functionRegExp =
-        new NativeRegExp("function [\\w$]*\\(([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}");
+        new NativeRegExp(
+            "function [\\w$]*\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}");
     //
-    //  or "(<par>)=>{ return <par>;}
+    //  or "(/** type */ <par>)=>{ return <par>;}
     //
-    NativeRegExp arrowRegExp = new NativeRegExp("\\(([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}");
+    NativeRegExp arrowRegExp =
+        new NativeRegExp(
+            "\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}");
 
     assertTrue(
         functionRegExp.exec(optimizableInner.toString()) != null
