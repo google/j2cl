@@ -22,6 +22,7 @@ import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
 import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
+import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
 import com.google.j2cl.ast.visitors.FixBooleanOperators;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
@@ -60,7 +61,6 @@ import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
-import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -217,9 +217,10 @@ public class J2clTranspiler {
             // Runs after NormalizeStaticMemberQualifiersPass.
             new DevirtualizeMethodCalls(),
             new ControlStatementFormatter(),
-            new SplitCompoundLongAssignments(),
+            new ExpandCompoundAssignments(),
             new ArrayAccessNormalizer(),
             // Runs before unboxing conversion.
+            new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),
             new InsertUnboxingConversions(),
             new InsertBoxingConversions(),
@@ -229,7 +230,6 @@ public class J2clTranspiler {
             new NormalizeLongs(),
             new InsertUnderflowOverflowConversions(),
             new FixBooleanOperators(),
-            new InsertStringConversions(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),

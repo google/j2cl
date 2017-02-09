@@ -464,11 +464,11 @@ public class AstUtils {
   /**
    * See JLS 5.2.
    *
-   * <p>Would normally also verify that the right operand type is being changed, but we're leaving
-   * that check up to our conversion implementation(s)
+   * <p>Note that compound assignments are excluded here. The assignment context arising from
+   * compound assignments requires the expression to be rewritten into a plain assignment.
    */
   public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
-    return binaryOperator.hasSideEffect();
+    return binaryOperator == BinaryOperator.ASSIGN;
   }
 
   /** See JLS 5.4. */
@@ -518,7 +518,7 @@ public class AstUtils {
     boolean leftIsPrimitive = leftOperand.getTypeDescriptor().isPrimitive();
     boolean rightIsPrimitive = rightOperand.getTypeDescriptor().isPrimitive();
 
-    switch (operator) {
+    switch (operator.isCompoundAssignment() ? operator.getUnderlyingBinaryOperator() : operator) {
       case TIMES:
       case DIVIDE:
       case REMAINDER:
@@ -574,11 +574,19 @@ public class AstUtils {
     return widenedTypeDescriptor;
   }
 
-  public static MethodDescriptor getStringValueOfMethodDescriptor() {
+  public static MethodDescriptor getStringValueOfMethodDescriptor(TypeDescriptor typeDescriptor) {
+
+    // Find the right overload.
+    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
+        || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
+      typeDescriptor = TypeDescriptors.get().primitiveInt;
+    } else if (!typeDescriptor.isPrimitive()) {
+      typeDescriptor = TypeDescriptors.get().javaLangObject;
+    }
+
     return TypeDescriptors.get()
         .javaLangString
-        .getMethodDescriptorByName(
-            MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangObject);
+        .getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
   }
 
   /**
@@ -593,12 +601,7 @@ public class AstUtils {
       return false;
     }
     BinaryExpression binaryExpression = (BinaryExpression) expression;
-    if (!matchesStringContext(binaryExpression)) {
-      return false;
-    }
-    Expression leftOperand = binaryExpression.getLeftOperand();
-    Expression rightOperand = binaryExpression.getRightOperand();
-    return isNonNullString(leftOperand) || isNonNullString(rightOperand);
+    return matchesStringContext(binaryExpression);
   }
 
   /**

@@ -61,6 +61,14 @@ public class PrefixExpression extends UnaryExpression {
    */
   public static class Builder extends UnaryExpression.Builder {
 
+    public static Builder from(UnaryExpression expression) {
+      return (Builder)
+          newBuilder()
+              .setOperand(expression.getOperand())
+              .setTypeDescriptor(expression.getTypeDescriptor())
+              .setOperator(expression.getOperator());
+    }
+
     @Override
     PrefixExpression doBuild(TypeDescriptor typeDescriptor, Expression operand, Operator operator) {
       return new PrefixExpression(typeDescriptor, operand, (PrefixOperator) operator);

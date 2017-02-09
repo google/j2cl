@@ -317,7 +317,7 @@ public class CompoundOperationsUtils {
    * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
    * {@code typeDescriptor} otherwise
    */
-  private static TypeDescriptor getCorrespondingPrimitiveType(TypeDescriptor typeDescriptor) {
+  public static TypeDescriptor getCorrespondingPrimitiveType(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isBoxedType(typeDescriptor)) {
       return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
     }

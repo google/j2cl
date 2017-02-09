@@ -35,10 +35,10 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();]
 [public void main() {
     int a = 10;
-...    double o = (5 / 2) - 0.0;
+...
   }] => [/**
    * @return {void}
-...    let o = (5 / 2) - 0.0;
+...    a += boxI.m_intValue__();
   }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [int a = 10;] => [let a = 10;]
 [a] => [a] "a"
@@ -69,6 +69,9 @@
 [getLongArray()[0]++;] => [$LongUtils.$postfixIncrementArray(ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions(), 0);]
 [double o = (5 / 2) - 0.0;] => [let o = (5 / 2) - 0.0;]
 [o] => [o] "o"
+[Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);]
+[boxI] => [boxI] "boxI"
+[a += boxI;] => [a += boxI.m_intValue__();]
 [static long[] getLongArray() {
     return new long[10];
   }] => [/**

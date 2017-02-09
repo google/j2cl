@@ -58,25 +58,19 @@ public class InsertStringConversions extends NormalizationPass {
                 .build();
           }
         }
-        // Normally Java would box a primitive but we don't because JS already converts
-        // primitives to String in the presence of a + operator. We make an exception for 'char'
-        // since Java converts char to the matching String glyph and JS converts it into a
-        // number String.
+        // Normally Java would call String.valueOf on a primitive but there is no need in J2CL
+        // because JS converts primitives to String in the presence of a + operator.
+        // We make an exception for Char which is represented as a JS number and hence needs to
+        // be explicitly converted.
+        // NOTE: Primitive longs are not represented as primitives in JS but are implemented as
+        // instances of a class where we can rely on toString().
         if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
             && !TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
           return operandExpression;
         }
 
-        // Convert char to Character so that Character.toString() will be called and thus Java's
-        // semantic around char String conversion will be honored.
-        if (TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
-          operandExpression = AstUtils.box(operandExpression);
-        }
-
-        // At this point we're guaranteed to have in hand a reference type (or
-        // at least a boolean or double primitive that we can treat as a reference type).
-        // So use a "String.valueOf()" method call on it.
-        return MethodCall.Builder.from(AstUtils.getStringValueOfMethodDescriptor())
+        // For the normal case we call String.valueOf which performs the right conversion.
+        return MethodCall.Builder.from(AstUtils.getStringValueOfMethodDescriptor(typeDescriptor))
             .setArguments(operandExpression)
             .build();
       }

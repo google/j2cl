@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.CompoundOperationsUtils;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.PrefixExpression;
@@ -38,23 +37,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 public class FixBooleanOperators extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-            // Maybe perform this transformation:
-            // "bool ^= bool" -> "bool = bool ^ bool"
-            if (TypeDescriptors.isPrimitiveBoolean(binaryExpression.getTypeDescriptor())) {
-              if (binaryExpression.getOperator() == BinaryOperator.BIT_AND_ASSIGN
-                  || binaryExpression.getOperator() == BinaryOperator.BIT_OR_ASSIGN
-                  || binaryExpression.getOperator() == BinaryOperator.BIT_XOR_ASSIGN) {
-                return CompoundOperationsUtils.expandCompoundExpression(binaryExpression);
-              }
-            }
-
-            return binaryExpression;
-          }
-        });
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override

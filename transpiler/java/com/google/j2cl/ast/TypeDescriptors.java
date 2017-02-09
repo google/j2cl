@@ -121,8 +121,8 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangBoolean)
-        || typeDescriptor.hasSameRawType(get().javaLangDouble);
+    return TypeDescriptors.isJavaLangBoolean(typeDescriptor)
+        || TypeDescriptors.isJavaLangDouble(typeDescriptor);
   }
 
   public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
@@ -177,10 +177,25 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangString);
   }
 
+  public static boolean isJavaLangDouble(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangDouble);
+  }
+
+  public static boolean isJavaLangBoolean(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangBoolean);
+  }
+
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         && !isPrimitiveBoolean(typeDescriptor)
         && !isPrimitiveVoid(typeDescriptor);
+  }
+
+  public static boolean isIntegralPrimitiveType(TypeDescriptor typeDescriptor) {
+    return isPrimitiveShort(typeDescriptor)
+        || isPrimitiveByte(typeDescriptor)
+        || isPrimitiveChar(typeDescriptor)
+        || isPrimitiveInt(typeDescriptor);
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {

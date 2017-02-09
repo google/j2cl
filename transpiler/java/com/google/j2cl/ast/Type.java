@@ -276,7 +276,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getMethods()
         .stream()
         .filter(Member::isConstructor)
-        .map(member -> (Method) member)
         .collect(ImmutableList.toImmutableList());
   }
 

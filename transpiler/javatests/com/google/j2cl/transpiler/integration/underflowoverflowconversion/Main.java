@@ -157,11 +157,23 @@ public class Main {
     assert rb == -128;
 
     rb = mb;
+    rb++;
+    assert rb == -128;
+
+    rb = mb;
     ++get().rb;
     assert rb == -128;
 
     rb = mb;
+    ++rb;
+    assert rb == -128;
+
+    rb = mb;
     get().rb += 1;
+    assert rb == -128;
+
+    rb = mb;
+    rb += 1;
     assert rb == -128;
   }
 

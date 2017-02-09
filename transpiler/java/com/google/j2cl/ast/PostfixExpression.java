@@ -60,6 +60,13 @@ public class PostfixExpression extends UnaryExpression {
    * A Builder for postfix unary expressions.
    */
   public static class Builder extends UnaryExpression.Builder {
+    public static Builder from(UnaryExpression expression) {
+      return (Builder)
+          newBuilder()
+              .setOperand(expression.getOperand())
+              .setTypeDescriptor(expression.getTypeDescriptor())
+              .setOperator(expression.getOperator());
+    }
 
     @Override
     PostfixExpression doBuild(
