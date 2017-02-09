@@ -99,7 +99,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             + NATIVE_SOURCES_ERROR_PATH
             + "too_many_native_sources.zip!/"
             + PACKAGE_NAME
-            + "ExtraClass"
+            + "ExtraClass.native.js"
             + "' not used.");
   }
 }

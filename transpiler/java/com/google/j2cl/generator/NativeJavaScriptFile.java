@@ -19,21 +19,21 @@ import java.util.zip.ZipFile;
  * native code during the javascript generation stage.
  */
 public class NativeJavaScriptFile {
-  private String path;
+  private String relativePath;
   private String content;
   private boolean used = false;
   private String zipPath;
 
   public static final String NATIVE_EXTENSION = ".native.js";
 
-  public NativeJavaScriptFile(String path, String content, String zipPath) {
-    this.path = path;
+  public NativeJavaScriptFile(String relativePath, String content, String zipPath) {
+    this.relativePath = relativePath;
     this.content = content;
     this.zipPath = zipPath;
   }
 
   public String getPathWithoutExtension() {
-    return path.substring(0, path.lastIndexOf(NATIVE_EXTENSION));
+    return relativePath.substring(0, relativePath.lastIndexOf(NATIVE_EXTENSION));
   }
 
   public String getContent() {
@@ -44,6 +44,10 @@ public class NativeJavaScriptFile {
     return zipPath;
   }
 
+  @Override
+  public String toString() {
+    return zipPath + "!/" + relativePath;
+  }
   /**
    * Can only set to used.
    */

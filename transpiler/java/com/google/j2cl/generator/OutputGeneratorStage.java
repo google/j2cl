@@ -184,9 +184,7 @@ public class OutputGeneratorStage {
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
-        problems.error(
-            Message.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
-            fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
+        problems.error(Message.ERR_NATIVE_UNUSED_NATIVE_SOURCE, fileEntry.getValue().toString());
       }
     }
   }
