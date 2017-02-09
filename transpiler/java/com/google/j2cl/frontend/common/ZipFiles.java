@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.j2cl.frontend;
+package com.google.j2cl.frontend.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;

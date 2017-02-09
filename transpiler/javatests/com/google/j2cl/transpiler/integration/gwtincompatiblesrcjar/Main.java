@@ -1,8 +1,8 @@
-package com.google.j2cl.transpiler.integration.gwtincompatible;
+package com.google.j2cl.transpiler.integration.gwtincompatiblesrcjar;
 
 import com.google.common.annotations.GwtIncompatible;
-import com.google.common.io.Files; // Non-emulated j/c/g/common/io class.
-import java.text.SimpleDateFormat; // Non-emulated jre class.
+import com.google.common.io.Files;
+import java.text.SimpleDateFormat;
 
 public class Main {
   public static void main(String... args) {
