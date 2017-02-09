@@ -47,9 +47,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -1184,9 +1186,21 @@ public class JdtUtils {
     return TypeDescriptors.createIntersection(intersectedTypeDescriptors);
   }
 
+  /**
+   * This cache is a Hashtable so is already synchronized and safe to use from multiple threads. We
+   * don't need a separate cache for each thread (like interners have) since JDT's ITypeBinding
+   * instances (which we are using as keys) are unique per JDT parse.
+   */
+  private static Map<ITypeBinding, TypeDescriptor> cachedTypeDescriptorByTypeBinding =
+      new Hashtable<>();
+
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
   private static TypeDescriptor createForType(final ITypeBinding typeBinding) {
+    if (cachedTypeDescriptorByTypeBinding.containsKey(typeBinding)) {
+      return cachedTypeDescriptorByTypeBinding.get(typeBinding);
+    }
+
     checkArgument(!typeBinding.isArray());
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
@@ -1266,33 +1280,36 @@ public class JdtUtils {
     }
 
     // Compute these even later
-    return TypeDescriptor.newBuilder()
-        .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
-        .setClassComponents(getClassComponents(typeBinding))
-        .setConcreteJsFunctionMethodDescriptorFactory(
-            () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
-        .setTypeDeclaration(lambdaTypeDeclaration)
-        .setEnclosingTypeDescriptor(
-            isTypeVariable || isWildCardOrCapture
-                ? null
-                : createTypeDescriptor(typeBinding.getDeclaringClass()))
-        .setInterfaceTypeDescriptorsFactory(
-            () -> createTypeDescriptors(typeBinding.getInterfaces()))
-        .setKind(getKindFromTypeBinding(typeBinding))
-        .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-        .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
-        .setNative(JsInteropUtils.isNativeType(typeBinding))
-        .setNullable(isNullable)
-        .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
-        .setSimpleJsName(getJsName(typeBinding))
-        .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
-        .setPackageName(packageName)
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
-        .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
-        .setDeclaredMethodDescriptorsFactory(declaredMethods)
-        .setUniqueKey(uniqueKey)
-        .build();
+    TypeDescriptor typeDescriptor =
+        TypeDescriptor.newBuilder()
+            .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
+            .setClassComponents(getClassComponents(typeBinding))
+            .setConcreteJsFunctionMethodDescriptorFactory(
+                () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
+            .setTypeDeclaration(lambdaTypeDeclaration)
+            .setEnclosingTypeDescriptor(
+                isTypeVariable || isWildCardOrCapture
+                    ? null
+                    : createTypeDescriptor(typeBinding.getDeclaringClass()))
+            .setInterfaceTypeDescriptorsFactory(
+                () -> createTypeDescriptors(typeBinding.getInterfaces()))
+            .setKind(getKindFromTypeBinding(typeBinding))
+            .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
+            .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
+            .setNative(JsInteropUtils.isNativeType(typeBinding))
+            .setNullable(isNullable)
+            .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
+            .setSimpleJsName(getJsName(typeBinding))
+            .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+            .setPackageName(packageName)
+            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+            .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
+            .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
+            .setDeclaredMethodDescriptorsFactory(declaredMethods)
+            .setUniqueKey(uniqueKey)
+            .build();
+    cachedTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
+    return typeDescriptor;
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
