@@ -35,10 +35,10 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();]
 [public void main() {
     int a = 10;
-...
+...    ((k)) |= true;
   }] => [/**
    * @return {void}
-...    a += boxI.m_intValue__();
+...    (k = !!(k | true));
   }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [int a = 10;] => [let a = 10;]
 [a] => [a] "a"
@@ -72,6 +72,7 @@
 [Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);]
 [boxI] => [boxI] "boxI"
 [a += boxI;] => [a += boxI.m_intValue__();]
+[((k)) |= true;] => [(k = !!(k | true));]
 [static long[] getLongArray() {
     return new long[10];
   }] => [/**

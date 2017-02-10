@@ -217,6 +217,8 @@ public class J2clTranspiler {
             // Runs after NormalizeStaticMemberQualifiersPass.
             new DevirtualizeMethodCalls(),
             new ControlStatementFormatter(),
+            new NormalizeMultiExpressions(),
+            // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
             new ExpandCompoundAssignments(),
             new ArrayAccessNormalizer(),
             // Runs before unboxing conversion.
@@ -238,7 +240,6 @@ public class J2clTranspiler {
             new NormalizeJsVarargs(),
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
-            new NormalizeMultiExpressions(),
             new NormalizeJsDocAnnotatedExpression(),
 
             // Dodge JSCompiler limitations.
@@ -247,6 +248,8 @@ public class J2clTranspiler {
             new FixTypeVariablesInMethods(),
             new RemoveUnusedMultiExpressionReturnValues(),
             new InsertStaticClassInitializerMethods(),
+            // Normalize multiexpressions again to remove unnecessary clutter.
+            new NormalizeMultiExpressions(),
             new MoveVariableDeclarationsToEnclosingBlock());
 
     for (CompilationUnit j2clUnit : j2clUnits) {
