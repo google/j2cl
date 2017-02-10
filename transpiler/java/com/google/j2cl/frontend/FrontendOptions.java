@@ -17,19 +17,27 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.frontend.common.FrontendUtils;
 import com.google.j2cl.problems.Problems;
 import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -55,6 +63,8 @@ public class FrontendOptions {
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
 
+  private static final String JAVA_EXTENSION = ".java";
+  private static final String SRCJAR_EXTENSION = ".srcjar";
   private static final String ZIP_EXTENSION = ".zip";
 
   public FrontendOptions(Problems problems, FrontendFlags flags) {
@@ -146,13 +156,11 @@ public class FrontendOptions {
 
     if (output.endsWith(ZIP_EXTENSION)) {
       // jar:file://output/Location/Path.zip!relative/File/Path.js
-      this.outputFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
-      this.output = null;
-    } else {
-      // file://output/Location/Path/relative/File/Path.js
-      this.outputFileSystem = FileSystems.getDefault();
-      this.output = output;
+      initZipOutput(outputPath);
+      return;
     }
+    // file://output/Location/Path/relative/File/Path.js
+    initDirOutput(output);
   }
 
   public FileSystem getOutputFileSystem() {
@@ -211,9 +219,68 @@ public class FrontendOptions {
   }
 
   public void setSourceFiles(List<String> sourceFiles) {
-    if (FrontendUtils.checkSourceFiles(sourceFiles, problems)) {
-      this.sourceFilePaths = FrontendUtils.expandSourcePathSourceJarEntries(sourceFiles, problems);
+    if (checkSourceFiles(sourceFiles)) {
+      this.sourceFilePaths = new ArrayList<>(sourceFiles);
+      accumulateSourceJarContents();
     }
+  }
+
+  private void accumulateSourceJarContents() {
+    // Remove and isolate sourceJarPaths from sourceFilePaths.
+    List<String> sourceJarPaths = new ArrayList<>();
+    Iterator<String> sourceFilePathsIterator = sourceFilePaths.iterator();
+    while (sourceFilePathsIterator.hasNext()) {
+      String sourceFilePath = sourceFilePathsIterator.next();
+      if (sourceFilePath.endsWith(SRCJAR_EXTENSION)) {
+        sourceJarPaths.add(sourceFilePath);
+        sourceFilePathsIterator.remove();
+      }
+    }
+
+    // Make sure to extract all of the Jars into a single temp dir so that when later sorting
+    // sourceFilePaths there is no instability introduced by differences in randomly generated
+    // temp dir prefixes.
+    Path srcjarContentDir;
+    try {
+      srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
+    } catch (IOException e) {
+      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
+      return;
+    }
+
+    final List<String> jarSourceFilePaths = new ArrayList<>();
+
+    // Extract sourceJars and accumulate their contained .java files back into sourceFilePaths.
+    for (String sourceJarPath : sourceJarPaths) {
+      try {
+        // Extract the sourceJar.
+        ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
+
+        // Accumulate the contained .java files back into sourceFilePaths.
+        Files.walkFileTree(
+            srcjarContentDir,
+            new SimpleFileVisitor<Path>() {
+              @Override
+              public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
+                  throws IOException {
+                if (path.toString().endsWith(JAVA_EXTENSION)) {
+                  jarSourceFilePaths.add(path.toAbsolutePath().toString());
+                }
+                return FileVisitResult.CONTINUE;
+              }
+            });
+      } catch (IOException e) {
+        problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+      }
+    }
+
+    // Sort source file paths so that our input is always in a stable order. If this is not done
+    // and you can't trust the input to have been provided already in a stable order then the result
+    // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
+    // cause unstable optimization in JSCompiler.
+    Collections.sort(sourceFilePaths);
+    Collections.sort(jarSourceFilePaths);
+    sourceFilePaths.addAll(jarSourceFilePaths);
   }
 
   public boolean getShouldPrintReadableSourceMap() {
@@ -238,6 +305,52 @@ public class FrontendOptions {
 
   private void setGenerateTimeReport(boolean generateTimeReport) {
     this.generateTimeReport = generateTimeReport;
+  }
+
+  private boolean checkSourceFiles(List<String> sourceFiles) {
+    for (String sourceFile : sourceFiles) {
+      if (sourceFile.endsWith(JAVA_EXTENSION) || sourceFile.endsWith(SRCJAR_EXTENSION)) {
+        File file = new File(sourceFile);
+        if (!file.exists()) {
+          problems.error(Message.ERR_FILE_NOT_FOUND, sourceFile);
+          return false;
+        }
+        if (!file.isFile()) {
+          problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
+          return false;
+        }
+      } else {
+        // does not support non-java files.
+        problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private void initDirOutput(String output) {
+    this.outputFileSystem = FileSystems.getDefault();
+    this.output = output;
+  }
+
+  private void initZipOutput(Path outputPath) {
+
+    // Ensures that we will not fail if the zip already exists.
+    File zipFile = outputPath.toFile();
+    if (zipFile.exists()) {
+      zipFile.delete();
+    }
+
+    try {
+      Map<String, String> env = new HashMap<>();
+      env.put("create", "true");
+      this.outputFileSystem =
+          FileSystems.newFileSystem(
+              URI.create("jar:file:" + outputPath.toUri().getPath()), env, null);
+    } catch (IOException e) {
+      problems.error(Message.ERR_CANNOT_OPEN_ZIP, outputPath.toString(), e.getMessage());
+    }
+    this.output = null;
   }
 
   private static List<String> getPathEntries(String path) {

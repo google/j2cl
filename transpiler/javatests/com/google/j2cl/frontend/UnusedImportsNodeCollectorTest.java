@@ -13,14 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.tools.gwtincompatible;
+package com.google.j2cl.frontend;
 
 import static org.junit.Assert.assertEquals;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -28,6 +27,9 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tests for {@link UnusedImportsNodeCollector}.

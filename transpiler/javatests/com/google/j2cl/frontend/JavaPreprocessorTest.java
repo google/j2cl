@@ -13,33 +13,36 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.tools.gwtincompatible;
+package com.google.j2cl.frontend;
 
 import static org.junit.Assert.assertEquals;
 
 import com.google.common.base.Joiner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.HashMap;
 
 /**
  * Tests for {@link JavaPreprocessor}.
+ * TODO(stalcup): Consider moving this test to an integration test.
  */
 @RunWith(JUnit4.class)
 public class JavaPreprocessorTest {
-  private static final String SOURCE_VERSION = "1.8";
+  private JavaPreprocessor javaPreprocessor = new JavaPreprocessor(new HashMap<>());
 
   @Test
   public void testNoProcess() {
     String content = "public class Foo {}";
-    assertEquals(content, JavaPreprocessor.preprocessFile(content, SOURCE_VERSION));
+    assertEquals(content, javaPreprocessor.commentGwtIncompatibleNodes(content));
   }
 
   @Test
   public void testNoProcessString() {
     String content = "public class Foo {String a = \"@GwtIncompatible\");}";
-    assertEquals(content, JavaPreprocessor.preprocessFile(content, SOURCE_VERSION));
+    assertEquals(content, javaPreprocessor.commentGwtIncompatibleNodes(content));
   }
 
   @Test
@@ -60,7 +63,7 @@ public class JavaPreprocessorTest {
                 "public class Foo {",
                 "  public X m() {return null;}",
                 "}*/");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, javaPreprocessor.commentGwtIncompatibleNodes(before));
   }
 
   @Test
@@ -87,7 +90,7 @@ public class JavaPreprocessorTest {
                 "  @GwtIncompatible",
                 "  public D n() {}*/",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, javaPreprocessor.commentGwtIncompatibleNodes(before));
   }
 
   @Test
@@ -110,7 +113,7 @@ public class JavaPreprocessorTest {
                 "  public String b;*/",
                 "  public String c;",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, javaPreprocessor.commentGwtIncompatibleNodes(before));
   }
 
   @Test
@@ -151,7 +154,7 @@ public class JavaPreprocessorTest {
                 "  }*/",
                 "  String s;",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, javaPreprocessor.commentGwtIncompatibleNodes(before));
   }
 
   @Test
@@ -172,6 +175,6 @@ public class JavaPreprocessorTest {
                 "  /*@GwtIncompatible",
                 "  public void n() {foo(x /* the value of x **);}*/",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, javaPreprocessor.commentGwtIncompatibleNodes(before));
   }
 }

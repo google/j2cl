@@ -17,6 +17,5 @@ integration_test(
     srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/annotations:annotations-j2cl",
-        "//java/com/google/common/io:io-j2cl",
     ],
 )

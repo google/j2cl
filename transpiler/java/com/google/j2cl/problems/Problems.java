@@ -48,10 +48,6 @@ public class Problems {
     ERR_CANNOT_OPEN_FILE("Cannot open file '%s': %s.", 2),
     ERR_PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
     ERR_CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
-    ERR_GWT_INCOMPATIBLE_FOUND_IN_COMPILE(
-        "@GwtIncompatible annotations found in %s "
-            + "Please run this library through the @GwtIncompatible stripper tool.",
-        1),
     ;
 
     // used for customized message.

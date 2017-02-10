@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.tools.gwtincompatible;
+package com.google.j2cl.frontend;
 
 import java.util.ArrayList;
 import java.util.HashSet;

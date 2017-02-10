@@ -13,10 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.common;
+package com.google.j2cl.frontend;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -28,11 +26,14 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A visitor that finds all the classes, methods and fields marked with a {@code GwtIncompatible}
  * annotation.
  */
-public class GwtIncompatibleNodeCollector extends ASTVisitor {
+class GwtIncompatibleNodeCollector extends ASTVisitor {
   private List<ASTNode> nodes = new ArrayList<>();
 
   @Override
