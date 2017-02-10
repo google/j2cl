@@ -21,6 +21,9 @@ public class ArithmeticExpressions {
     Integer boxI = 3;
     a += boxI;
 
+    // Uncomment once b/35219599 is fixed.
+    // (k) |= true;
+
   }
 
   static long[] getLongArray() {
