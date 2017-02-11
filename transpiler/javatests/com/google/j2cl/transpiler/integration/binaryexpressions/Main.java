@@ -31,6 +31,10 @@ public class Main {
     assert a + b + a - b == 12;
     assert (a + b) * (a - b) == 27;
 
+    int i = 1;
+    i += 1L;
+    assert i == 2;
+
     int d = 10;
     assert d == 10;
     d ^= d;

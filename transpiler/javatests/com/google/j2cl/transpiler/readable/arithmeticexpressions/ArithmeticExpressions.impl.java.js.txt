@@ -78,6 +78,8 @@ class ArithmeticExpressions extends java_lang_Object {
     let o = (5 / 2) - 0.0;
     let boxI = Integer.m_valueOf__int(3);
     a += boxI.m_intValue__();
+    a = $Primitives.$narrowLongToInt($LongUtils.$plus(
+        $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
     (k = !!(k | true));
   }
 

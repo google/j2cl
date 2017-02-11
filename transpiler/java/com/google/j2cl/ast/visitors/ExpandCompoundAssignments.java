@@ -80,7 +80,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression binaryExpression) {
-            if (needsExpansion(binaryExpression.getOperator(), binaryExpression.getLeftOperand())) {
+            if (needsExpansion(binaryExpression)) {
               return CompoundOperationsUtils.expandCompoundExpression(binaryExpression);
             }
             return binaryExpression;
@@ -102,6 +102,28 @@ public class ExpandCompoundAssignments extends NormalizationPass {
             return postfixExpression;
           }
         });
+  }
+
+  private static boolean needsExpansion(BinaryExpression expression) {
+    BinaryOperator operator = expression.getOperator();
+    Expression leftOperand = expression.getLeftOperand();
+
+    if (leftOperand instanceof ArrayAccess) {
+      return false;
+    }
+
+    TypeDescriptor lhsTypeDescriptor = expression.getLeftOperand().getTypeDescriptor();
+    TypeDescriptor rhsTypeDescriptor = expression.getRightOperand().getTypeDescriptor();
+    if (operator.hasSideEffect()
+        && operator != BinaryOperator.ASSIGN
+        && TypeDescriptors.isIntegralPrimitiveType(lhsTypeDescriptor)
+        && TypeDescriptors.getWidth(lhsTypeDescriptor)
+            < TypeDescriptors.getWidth(
+                CompoundOperationsUtils.getCorrespondingPrimitiveType(rhsTypeDescriptor))) {
+      // Compound assignment contexts perform implicit narrowing coercions.
+      return true;
+    }
+    return needsExpansion(operator, leftOperand);
   }
 
   private static boolean needsExpansion(Operator operator, Expression targetExpression) {

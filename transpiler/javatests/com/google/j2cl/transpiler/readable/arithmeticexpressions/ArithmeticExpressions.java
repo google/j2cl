@@ -21,6 +21,8 @@ public class ArithmeticExpressions {
     Integer boxI = 3;
     a += boxI;
 
+    a += 1L;
+
     ((k)) |= true;
   }
 

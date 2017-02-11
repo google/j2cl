@@ -72,6 +72,7 @@
 [Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);]
 [boxI] => [boxI] "boxI"
 [a += boxI;] => [a += boxI.m_intValue__();]
+[a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));]
 [((k)) |= true;] => [(k = !!(k | true));]
 [static long[] getLongArray() {
     return new long[10];
