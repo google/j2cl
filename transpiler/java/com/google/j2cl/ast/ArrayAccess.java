@@ -28,7 +28,7 @@ public class ArrayAccess extends Expression {
   @Visitable Expression arrayExpression;
   @Visitable Expression indexExpression;
 
-  public ArrayAccess(Expression arrayExpression, Expression indexExpression) {
+  private ArrayAccess(Expression arrayExpression, Expression indexExpression) {
     checkArgument(arrayExpression.getTypeDescriptor().isArray());
 
     this.arrayExpression = checkNotNull(arrayExpression);
@@ -50,11 +50,45 @@ public class ArrayAccess extends Expression {
 
   @Override
   public ArrayAccess clone() {
-    return new ArrayAccess(arrayExpression.clone(), indexExpression.clone());
+    return ArrayAccess.newBuilder()
+        .setArrayExpression(arrayExpression.clone())
+        .setIndexExpression(indexExpression.clone())
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_ArrayAccess.visit(processor, this);
   }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for ArrayAccess. */
+  public static class Builder {
+    private Expression arrayExpression;
+    private Expression indexExpression;
+
+    public static Builder from(ArrayAccess arrayAccess) {
+      return newBuilder()
+          .setArrayExpression(arrayAccess.getArrayExpression())
+          .setIndexExpression(arrayAccess.getIndexExpression());
+    }
+
+    public Builder setArrayExpression(Expression arrayExpression) {
+      this.arrayExpression = arrayExpression;
+      return this;
+    }
+
+    public Builder setIndexExpression(Expression indexExpression) {
+      this.indexExpression = indexExpression;
+      return this;
+    }
+
+    public ArrayAccess build() {
+      return new ArrayAccess(arrayExpression, indexExpression);
+    }
+  }
+
 }

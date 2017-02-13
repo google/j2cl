@@ -219,7 +219,6 @@ public class J2clTranspiler {
             new NormalizeMultiExpressions(),
             // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
             new ExpandCompoundAssignments(),
-            new ArrayAccessNormalizer(),
             // Runs before unboxing conversion.
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),
@@ -231,6 +230,7 @@ public class J2clTranspiler {
             new NormalizeLongs(),
             new InsertUnderflowOverflowConversions(),
             new FixBooleanOperators(),
+            new ArrayAccessNormalizer(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),

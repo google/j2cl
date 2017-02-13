@@ -28,6 +28,7 @@ public class Strings {
     char c1 = 'F';
     char c2 = 'o';
     s4 = c1 + c2 + "o";
+    s4 += 1L + "";
 
     // Compound operation and string conversions
     s4 += 1L;

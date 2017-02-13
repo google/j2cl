@@ -71,10 +71,13 @@ class ArithmeticExpressions extends java_lang_Object {
     let l = (1 + 2 != 4);
     let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
-    $LongUtils.$postfixIncrementArray(
-        ArithmeticExpressions
-            .m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions(),
-        0);
+    {
+      let $array =
+          ArithmeticExpressions
+              .m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions();
+      $Arrays.$set(
+          $array, 0, $LongUtils.$plus($array[0], $Long.fromBits(1, 0) /* 1 */));
+    }
     let o = (5 / 2) - 0.0;
     let boxI = Integer.m_valueOf__int(3);
     a += boxI.m_intValue__();

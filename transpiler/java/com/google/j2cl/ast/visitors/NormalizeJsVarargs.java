@@ -163,8 +163,10 @@ public class NormalizeJsVarargs extends NormalizationPass {
           AstUtils.createArraySetExpression(
                   varargsLocalCopy.getReference(),
                   loopVariable.getReference(),
-                  BinaryOperator.ASSIGN,
-                  new ArrayAccess(ARGUMENTS_PARAMETER.getReference(), indexExpression))
+                  ArrayAccess.newBuilder()
+                      .setArrayExpression(ARGUMENTS_PARAMETER.getReference())
+                      .setIndexExpression(indexExpression)
+                      .build())
               .makeStatement();
 
       // (3). (for statement) for ($i = 0; i < arguments.length - idx; i++) { ... }

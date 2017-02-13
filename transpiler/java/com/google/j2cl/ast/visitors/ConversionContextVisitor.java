@@ -114,9 +114,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
     // unary numeric promotion context
-    return new ArrayAccess(
-        arrayAccess.getArrayExpression(),
-        contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression()));
+    return ArrayAccess.newBuilder()
+        .setArrayExpression(arrayAccess.getArrayExpression())
+        .setIndexExpression(
+            contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression()))
+        .build();
   }
 
   @Override

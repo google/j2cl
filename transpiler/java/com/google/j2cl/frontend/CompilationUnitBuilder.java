@@ -404,7 +404,10 @@ public class CompilationUnitBuilder {
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
-      return new ArrayAccess(convert(expression.getArray()), convert(expression.getIndex()));
+      return ArrayAccess.newBuilder()
+          .setArrayExpression(convert(expression.getArray()))
+          .setIndexExpression(convert(expression.getIndex()))
+          .build();
     }
 
     private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation expression) {
@@ -856,7 +859,10 @@ public class CompilationUnitBuilder {
           VariableDeclarationExpression.newBuilder()
               .addVariableDeclaration(
                   convert(statement.getParameter()),
-                  new ArrayAccess(arrayVariable.getReference(), indexVariable.getReference()))
+                  ArrayAccess.newBuilder()
+                      .setArrayExpression(arrayVariable.getReference())
+                      .setIndexExpression(indexVariable.getReference())
+                      .build())
               .build()
               .makeStatement();
 

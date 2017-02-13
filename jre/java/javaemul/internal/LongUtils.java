@@ -125,66 +125,6 @@ class LongUtils {
     InternalPreconditions.checkArithmetic(!divisor.isZero());
   }
 
-  public static NativeLong $setArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = value;
-  }
-
-  public static NativeLong $addSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$plus(array[index], value);
-  }
-
-  public static NativeLong $subSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$minus(array[index], value);
-  }
-
-  public static NativeLong $mulSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$times(array[index], value);
-  }
-
-  public static NativeLong $divSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$divide(array[index], value);
-  }
-
-  public static NativeLong $andSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$and(array[index], value);
-  }
-
-  public static NativeLong $orSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$or(array[index], value);
-  }
-
-  public static NativeLong $xorSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$xor(array[index], value);
-  }
-
-  public static NativeLong $modSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$remainder(array[index], value);
-  }
-
-  public static NativeLong $lshiftSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$leftShift(array[index], value);
-  }
-
-  public static NativeLong $rshiftSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$rightShiftSigned(array[index], value);
-  }
-
-  public static NativeLong $rshiftUSetArray(NativeLong[] array, int index, NativeLong value) {
-    return array[index] = LongUtils.$rightShiftUnsigned(array[index], value);
-  }
-
-  public static NativeLong $postfixIncrementArray(NativeLong[] array, int index) {
-    NativeLong value = array[index];
-    LongUtils.$addSetArray(array, index, LongUtils.$fromInt(1));
-    return value;
-  }
-
-  public static NativeLong $postfixDecrementArray(NativeLong[] array, int index) {
-    NativeLong value = array[index];
-    LongUtils.$subSetArray(array, index, LongUtils.$fromInt(1));
-    return value;
-  }
-
   @JsType(isNative = true, name = "Long", namespace = "nativebootstrap")
   private static class NativeLong {
     public static native NativeLong fromBits(int lowBits, int highBits);

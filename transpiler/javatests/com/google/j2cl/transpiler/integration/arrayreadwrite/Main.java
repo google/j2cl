@@ -259,17 +259,17 @@ public class Main {
     assert intArray[0] == 3;
 
     intArray[0] /= 2;
-    // Uncomment the following code after b/34341877 has been fixed
-    // assert intArray[0] == 1;
+    assert intArray[0] == 1;
 
-    // String[] stringArray = new String[1];
-    // stringArray[0] += null;
-    // assert stringArray[0].equals("nullnull");
+    // Uncomment the following code after b/34460222 has been fixed
+    //    String[] stringArray = new String[1];
+    //    stringArray[0] += null;
+    //    assert stringArray[0].equals("nullnull");
 
-    // boolean[] booleanArray = new boolean[1];
-    // booleanArray[0] |= true;
-    // Object o = booleanArray[0];
-    // assert o instanceof Boolean;
+    boolean[] booleanArray = new boolean[1];
+    booleanArray[0] |= true;
+    Object o = booleanArray[0];
+    assert o instanceof Boolean;
 
     long[] longArray = new long[1];
     longArray[0] += 1;

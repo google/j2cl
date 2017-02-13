@@ -17,6 +17,9 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utility functions for expanding compound, increment and decrement expressions.
  *
@@ -47,11 +50,21 @@ public class CompoundOperationsUtils {
       return assignToLeftOperand(leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
     }
 
+    if (leftOperand instanceof ArrayAccess) {
+      return expandArrayAccess(
+          operator.getUnderlyingBinaryOperator(), (ArrayAccess) leftOperand, rightOperand);
+    }
+    return expandQualifiedFieldAccess(
+        operator.getUnderlyingBinaryOperator(), (FieldAccess) leftOperand, rightOperand);
+  }
+
+  private static Expression expandQualifiedFieldAccess(
+      BinaryOperator operator, FieldAccess leftOperand, Expression rightOperand) {
     // The referenced expression is being modified and it has a qualifier. Take special
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a += b; => (let $qualifier = q, $qualifier.a = $qualifier.a + b)
-    FieldAccess targetFieldAccess = (FieldAccess) leftOperand;
+    FieldAccess targetFieldAccess = leftOperand;
     Expression qualifier = targetFieldAccess.getQualifier().clone();
     Variable qualifierVariable =
         Variable.newBuilder()
@@ -69,9 +82,85 @@ public class CompoundOperationsUtils {
                 FieldAccess.Builder.from(targetFieldAccess)
                     .setQualifier(qualifierVariable.getReference())
                     .build(),
-                operator.getUnderlyingBinaryOperator(),
+                operator,
                 rightOperand))
         .build();
+  }
+
+
+  private static Expression expandArrayAccess(
+      BinaryOperator operator, ArrayAccess leftOperand, Expression rightOperand) {
+    return expandArrayAccessReturningPreValue(operator, leftOperand, rightOperand, null);
+  }
+
+  private static Expression expandArrayAccessReturningPreValue(
+      BinaryOperator operator,
+      ArrayAccess leftOperand,
+      Expression rightOperand,
+      Variable valueVariable) {
+    // The referenced expression is being modified and it has a qualifier. Take special
+    // care to only dereference the qualifier once (to avoid double side effects), store it in a
+    // temporary variable and use that temporary variable in the rest of the computation.
+    // q.a += b; => (let $qualifier = q, $qualifier.a = $qualifier.a + b)
+    List<Expression> expressions = new ArrayList<>();
+    List<VariableDeclarationFragment> variableDeclarationFragments = new ArrayList<>();
+
+    Expression arrayExpression = leftOperand.getArrayExpression();
+    Expression indexExpression = leftOperand.getIndexExpression();
+    if (!canExpressionBeEvaluatedTwice(arrayExpression)
+        || !canExpressionBeEvaluatedTwice(indexExpression)) {
+      // If index expression can not be evaluated twice it might have a side effect that affects
+      // the array expression. In that case, the value for the array expression is obtained and
+      // stored in $array.
+      Variable arrayExpressionVariable =
+          Variable.newBuilder()
+              .setIsFinal(true)
+              .setName("$array")
+              .setTypeDescriptor(arrayExpression.getTypeDescriptor())
+              .build();
+      variableDeclarationFragments.add(
+          new VariableDeclarationFragment(arrayExpressionVariable, arrayExpression));
+      arrayExpression = arrayExpressionVariable.getReference();
+    }
+
+    if (!canExpressionBeEvaluatedTwice(indexExpression)) {
+      Variable indexExpressionVariable =
+          Variable.newBuilder()
+              .setIsFinal(true)
+              .setName("$index")
+              .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+              .build();
+      variableDeclarationFragments.add(
+          new VariableDeclarationFragment(indexExpressionVariable, indexExpression));
+      indexExpression = indexExpressionVariable.getReference();
+    }
+
+    ArrayAccess arrayAccess =
+        ArrayAccess.newBuilder()
+            .setArrayExpression(arrayExpression)
+            .setIndexExpression(indexExpression)
+            .build();
+    if (valueVariable != null) {
+      variableDeclarationFragments.add(
+          new VariableDeclarationFragment(valueVariable, arrayAccess.clone()));
+    }
+
+    if (!variableDeclarationFragments.isEmpty()) {
+      // Declare the temporary variable and initialize to the evaluated qualifier.
+      expressions.add(
+          VariableDeclarationExpression.newBuilder()
+              .setVariableDeclarationFragments(variableDeclarationFragments)
+              .build());
+    }
+    expressions.add(assignToLeftOperand(arrayAccess, operator, rightOperand));
+    if (valueVariable != null) {
+      expressions.add(valueVariable.getReference());
+    }
+
+    if (expressions.size() == 1) {
+      return expressions.get(0);
+    }
+    return MultiExpression.newBuilder().addExpressions(expressions).build();
   }
 
   public static Expression expandExpression(PostfixExpression postfixExpression) {
@@ -103,37 +192,45 @@ public class CompoundOperationsUtils {
           .build();
     }
 
-    // The referenced expression is being modified and it has a qualifier. Take special
-    // care to only dereference the qualifier once (to avoid double side effects), store it in a
-    // temporary variable and use that temporary variable in the rest of the computation.
-    // q.a++; =>
-    // (let $qualifier = q, let $value = $qualifier.a, $qualifier.a = $qualifier.a + 1, $value)
+    VariableDeclarationExpression variableDeclaration;
+    Expression expandedOperand;
+    if (operand instanceof ArrayAccess) {
+      return expandArrayAccessReturningPreValue(
+          operator.getUnderlyingBinaryOperator(),
+          (ArrayAccess) operand,
+          createLiteralOne(operand.getTypeDescriptor()),
+          valueVariable);
+    }
+
     FieldAccess fieldAccess = (FieldAccess) operand;
     Expression qualifier = fieldAccess.getQualifier().clone();
-    FieldDescriptor target = fieldAccess.getTarget();
     Variable qualifierVariable =
         Variable.newBuilder()
             .setIsFinal(true)
             .setName("$qualifier")
             .setTypeDescriptor(qualifier.getTypeDescriptor())
             .build();
+    expandedOperand =
+        FieldAccess.Builder.from(fieldAccess)
+            .setQualifier(qualifierVariable.getReference())
+            .build();
+    variableDeclaration =
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(qualifierVariable, qualifier)
+            .addVariableDeclaration(valueVariable, expandedOperand.clone())
+            .build();
+    // The referenced expression is being modified and it has a qualifier. Take special
+    // care to only dereference the qualifier once (to avoid double side effects), store it in a
+    // temporary variable and use that temporary variable in the rest of the computation.
+    // q.a++; =>
+    // (let $qualifier = q, let $value = $qualifier.a, $qualifier.a = $qualifier.a + 1, $value)
 
     return MultiExpression.newBuilder()
         .setExpressions(
             // Declare the temporary variables to hold the qualifier and the initial value.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .addVariableDeclaration(
-                    valueVariable,
-                    FieldAccess.newBuilder()
-                        .setQualifier(qualifierVariable.getReference())
-                        .setTargetFieldDescriptor(target)
-                        .build())
-                .build(),
+            variableDeclaration,
             assignToLeftOperand(
-                FieldAccess.Builder.from(fieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
-                    .build(),
+                expandedOperand,
                 operator.getUnderlyingBinaryOperator(),
                 createLiteralOne(operand.getTypeDescriptor())),
             valueVariable.getReference())
@@ -156,31 +253,19 @@ public class CompoundOperationsUtils {
           createLiteralOne(operand.getTypeDescriptor()));
     }
 
-    // The referenced expression is being modified and it has a qualifier. Take special
-    // care to only dereference the qualifier once (to avoid double side effects), store it in a
-    // temporary variable and use that temporary variable in the rest of the computation.
-    // ++q.a; => ($qualifier = q, $qualifier.a = $qualifier.a + 1)
-    FieldAccess fieldAccess = (FieldAccess) operand;
-    Expression qualifier = fieldAccess.getQualifier().clone();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setIsFinal(true)
-            .setName("$qualifier")
-            .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
-    return MultiExpression.newBuilder()
-        .setExpressions(
-            // Declare the temporary variable and initialize to the evaluated qualifier.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .build(),
-            assignToLeftOperand(
-                FieldAccess.Builder.from(fieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
-                    .build(),
-                operator.getUnderlyingBinaryOperator(),
-                createLiteralOne(operand.getTypeDescriptor())))
-        .build();
+    if (operand instanceof FieldAccess) {
+      // Treat as a++ as a += 1.
+      return expandQualifiedFieldAccess(
+          operator.getUnderlyingBinaryOperator(),
+          (FieldAccess) operand,
+          createLiteralOne(operand.getTypeDescriptor()));
+    }
+
+    // Treat as a[i]++ as a[i] += 1.
+    return expandArrayAccess(
+        operator.getUnderlyingBinaryOperator(),
+        (ArrayAccess) operand,
+        createLiteralOne(operand.getTypeDescriptor()));
   }
 
   /** Returns number literal with value 1. */
@@ -222,7 +307,8 @@ public class CompoundOperationsUtils {
   public static boolean canExpressionBeEvaluatedTwice(Expression expression) {
     if (expression instanceof ThisReference
         || expression instanceof TypeReference
-        || expression instanceof VariableReference) {
+        || expression instanceof VariableReference
+        || expression instanceof Literal) {
       return true;
     }
 

@@ -108,10 +108,6 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     BinaryOperator operator = expression.getOperator();
     Expression leftOperand = expression.getLeftOperand();
 
-    if (leftOperand instanceof ArrayAccess) {
-      return false;
-    }
-
     TypeDescriptor lhsTypeDescriptor = expression.getLeftOperand().getTypeDescriptor();
     TypeDescriptor rhsTypeDescriptor = expression.getRightOperand().getTypeDescriptor();
     if (operator.hasSideEffect()
@@ -127,15 +123,19 @@ public class ExpandCompoundAssignments extends NormalizationPass {
   }
 
   private static boolean needsExpansion(Operator operator, Expression targetExpression) {
-    if (!operator.hasSideEffect()
-        || operator == BinaryOperator.ASSIGN
-        || targetExpression instanceof ArrayAccess) {
+    if (!operator.hasSideEffect() || operator == BinaryOperator.ASSIGN) {
       return false;
     }
 
     TypeDescriptor targetTypeDescriptor = targetExpression.getTypeDescriptor();
     if (operator == BinaryOperator.DIVIDE_ASSIGN && needsIntegralCoersion(targetTypeDescriptor)) {
       // Integral division always needs expansion for truncation and DivByZero checks.
+      return true;
+    }
+
+    if (targetExpression instanceof ArrayAccess) {
+      // Compound assignment on arrays always need expansion (array stores are instrumented so
+      // that bound and type checking can occur).
       return true;
     }
 
