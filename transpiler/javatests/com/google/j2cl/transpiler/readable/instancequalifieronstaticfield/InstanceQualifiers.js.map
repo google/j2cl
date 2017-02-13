@@ -63,15 +63,21 @@
 [int i = 0;] => [let i = 0;]
 [i] => [i] "i"
 [staticField = 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 100;]
-[main.staticField = 100;] => [(main, InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 100);]
-[main.getStaticInstanceQualifiers().staticField = 300;] => [(main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 300);]
+[main.staticField = 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 100;]
+[main.getStaticInstanceQualifiers().staticField = 300;] => [InstanceQualifiers.m_getStaticInstanceQualifiers__();]
+[main.getStaticInstanceQualifiers().staticField = 300;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 300;]
 [i = main.staticField;] => [i = (main, InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers);]
 [i = main.getStaticValue();] => [i = (main, InstanceQualifiers.m_getStaticValue__());]
 [i = main.getStaticInstanceQualifiers().staticField;] => [i = (main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers);]
-[main.staticField += 100;] => [(main, InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += 100);]
-[main.getStaticInstanceQualifiers().staticField += 100;] => [(main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += 100);]
+[main.staticField += 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += 100;]
+[main.getStaticInstanceQualifiers().staticField += 100;] => [InstanceQualifiers.m_getStaticInstanceQualifiers__();]
+[main.getStaticInstanceQualifiers().staticField += 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += 100;]
 [main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField +=
-          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();] => [(main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += (main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.m_getStaticValue__()));]
+          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();] => [InstanceQualifiers.m_getStaticInstanceQualifiers__();]
+[main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField +=
+          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();] => [InstanceQualifiers.m_getStaticInstanceQualifiers__();]
+[main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField +=
+          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers += (main, InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.m_getStaticInstanceQualifiers__(), InstanceQualifiers.m_getStaticValue__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public static int staticField = 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 100;]
 [public static int sideEffectCount = 0;] => [InstanceQualifiers.$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 0;]

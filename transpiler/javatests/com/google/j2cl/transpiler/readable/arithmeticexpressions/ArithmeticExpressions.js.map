@@ -38,7 +38,7 @@
 ...    ((k)) |= true;
   }] => [/**
    * @return {void}
-...    (k = !!(k | true));
+...    k = !!(k | true);
   }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [int a = 10;] => [let a = 10;]
 [a] => [a] "a"
@@ -73,7 +73,7 @@
 [boxI] => [boxI] "boxI"
 [a += boxI;] => [a += boxI.m_intValue__();]
 [a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));]
-[((k)) |= true;] => [(k = !!(k | true));]
+[((k)) |= true;] => [k = !!(k | true);]
 [static long[] getLongArray() {
     return new long[10];
   }] => [/**

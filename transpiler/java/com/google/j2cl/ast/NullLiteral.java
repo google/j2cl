@@ -17,11 +17,9 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Null literal node.
- */
+/** Null literal node. */
 @Visitable
-public class NullLiteral extends Expression {
+public class NullLiteral extends Expression implements Literal {
 
   public static final NullLiteral NULL = new NullLiteral();
 

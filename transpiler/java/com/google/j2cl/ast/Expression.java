@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.Cloneable;
+import com.google.j2cl.common.SourcePosition;
 
 /** Base class for expressions. */
 @Visitable
@@ -37,5 +38,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   public ExpressionStatement makeStatement() {
     return new ExpressionStatement(this);
+  }
+
+  public ExpressionStatement makeStatement(SourcePosition sourcePosition) {
+    ExpressionStatement statement = makeStatement();
+    statement.setSourcePosition(sourcePosition);
+    return statement;
   }
 }

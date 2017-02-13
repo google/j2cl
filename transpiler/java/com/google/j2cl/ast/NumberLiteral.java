@@ -19,11 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Number literal node.
- */
+/** Number literal node. */
 @Visitable
-public class NumberLiteral extends Expression {
+public class NumberLiteral extends Expression implements Literal {
   private final TypeDescriptor typeDescriptor;
   private final Number value;
 

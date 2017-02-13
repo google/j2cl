@@ -60,7 +60,6 @@ import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
-import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -246,9 +245,9 @@ public class J2clTranspiler {
             new UnimplementedMethodsCreator(),
             // TODO: remove the temporary fix once we switch to JSCompiler's new type checker.
             new FixTypeVariablesInMethods(),
-            new RemoveUnusedMultiExpressionReturnValues(),
             new InsertStaticClassInitializerMethods(),
-            // Normalize multiexpressions again to remove unnecessary clutter.
+            // Normalize multiexpressions again to remove unnecessary clutter, but run before
+            // variable motion.
             new NormalizeMultiExpressions(),
             new MoveVariableDeclarationsToEnclosingBlock());
 

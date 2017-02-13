@@ -53,23 +53,24 @@
    * @return {void}
 ...    b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1));
   }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
-[UNKNOWN] => [let $qualifier, $qualifier$1$, $value, $value$1$, $qualifier$2$, $value$2$;]
+[UNKNOWN] => [let $qualifier, $value, $value$1$, $qualifier$1$, $value$2$;]
 [Integer i = 10000;] => [let i = Integer.m_valueOf__int(10000);]
 [i] => [i] "i"
 [Integer c = 1000;] => [let c = Integer.m_valueOf__int(1000);]
 [c] => [c] "c"
 [c += i;] => [c = Integer.m_valueOf__int(c.m_intValue__() + i.m_intValue__());]
 [foo += i;] => [this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int(this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + i.m_intValue__());]
-[getWithSideEffect().foo += i;] => [($qualifier = this.m_getWithSideEffect__(), $qualifier.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + i.m_intValue__()));]
+[getWithSideEffect().foo += i;] => [let $qualifier$2$ = this.m_getWithSideEffect__();]
+[getWithSideEffect().foo += i;] => [$qualifier$2$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier$2$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + i.m_intValue__());]
 [foo <<= i;] => [this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int(this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() << i.m_intValue__());]
 [Integer e = ++c;] => [let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);]
 [e] => [e] "e"
 [e = ++foo;] => [e = this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int(this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1);]
-[e = ++getWithSideEffect().foo;] => [e = ($qualifier$1$ = this.m_getWithSideEffect__(), $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1));]
+[e = ++getWithSideEffect().foo;] => [e = ($qualifier = this.m_getWithSideEffect__(), $qualifier.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1));]
 [Integer f = i++;] => [let f = ($value = i, i = Integer.m_valueOf__int(i.m_intValue__() + 1), $value);]
 [f] => [f] "f"
 [f = foo++;] => [f = ($value$1$ = this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect, this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int(this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1), $value$1$);]
-[f = getWithSideEffect().foo++;] => [f = (($qualifier$2$ = this.m_getWithSideEffect__(), $value$2$ = $qualifier$2$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect), $qualifier$2$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier$2$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1), $value$2$);]
+[f = getWithSideEffect().foo++;] => [f = (($qualifier$1$ = this.m_getWithSideEffect__(), $value$2$ = $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect), $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1), $value$2$);]
 [Byte b = 0;] => [let b = Byte.m_valueOf__byte(0);]
 [b] => [b] "b"
 [b++;] => [b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1));]

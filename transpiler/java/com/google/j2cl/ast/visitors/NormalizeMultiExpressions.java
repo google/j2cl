@@ -18,16 +18,24 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.MultiExpression;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.UnaryExpression;
+import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Rewrites the tree to make sure that multiexpressions are never on the lhs of a side effecting
- * operator.
+ * Simplifies multiexpressions to ensure that multiexpressions are never on the lhs of a side
+ * effecting operator and that they don't appear directly as statements and that they don't have
+ * dead side effect free expressions.
  */
 public class NormalizeMultiExpressions extends NormalizationPass {
   @Override
@@ -37,6 +45,41 @@ public class NormalizeMultiExpressions extends NormalizationPass {
   }
 
   private static class FlattenMultiExpressions extends AbstractRewriter {
+    @Override
+    public Statement rewriteExpressionStatement(ExpressionStatement statement) {
+      if (statement.getExpression() instanceof MultiExpression) {
+        // Since we're looking at MultiExpressions that are the primary expression of an
+        // ExpressionStatement, we know that the return value isn't used.
+        // That makes it safe to remove any subexpressions that don't have side effects.
+        List<Expression> expressions =
+            ((MultiExpression) statement.getExpression())
+                .getExpressions()
+                .stream()
+                .filter(NormalizeMultiExpressions::mayHaveSideEffects)
+                .collect(Collectors.toList());
+
+        if (expressions.isEmpty()) {
+          // Eliminate empty multi expressions.
+          return new EmptyStatement();
+        } else if (expressions.size() == 1) {
+          // If the multi expression contains only one expression, then unwrap it.
+          return expressions.get(0).makeStatement();
+        } else {
+          // If there are multiple expressions then turn it into a block so that any var creation
+          // appears immediately before its use rather than being hoisted to the top of the
+          // enclosing block.
+          return new Block(
+              expressions
+                  .stream()
+                  .map(
+                      innerExpression ->
+                          innerExpression.makeStatement(statement.getSourcePosition()))
+                  .collect(Collectors.toList()));
+        }
+      }
+      return statement;
+    }
+
     @Override
     public Expression rewriteMultiExpression(MultiExpression multiExpression) {
       List<Expression> flattenedExpressions = new ArrayList<>();
@@ -84,5 +127,9 @@ public class NormalizeMultiExpressions extends NormalizationPass {
       }
       return expression;
     }
+  }
+
+  private static boolean mayHaveSideEffects(Expression expression) {
+    return !(expression instanceof VariableReference || expression instanceof Literal);
   }
 }

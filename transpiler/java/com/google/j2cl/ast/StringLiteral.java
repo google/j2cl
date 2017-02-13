@@ -21,11 +21,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 
-/**
- * String literal node.
- */
+/** String literal node. */
 @Visitable
-public class StringLiteral extends Expression {
+public class StringLiteral extends Expression implements Literal {
   private final String escapedValue;
 
   public StringLiteral(String escapedValue) {

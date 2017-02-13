@@ -17,11 +17,9 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Boolean literal node.
- */
+/** Boolean literal node. */
 @Visitable
-public class BooleanLiteral extends Expression {
+public class BooleanLiteral extends Expression implements Literal {
   public static final BooleanLiteral FALSE = new BooleanLiteral(false);
   public static final BooleanLiteral TRUE = new BooleanLiteral(true);
   private final boolean value;
