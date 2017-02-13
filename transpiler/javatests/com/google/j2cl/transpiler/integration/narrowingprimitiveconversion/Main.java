@@ -90,5 +90,9 @@ public class Main {
     assert ((int) md == 2147483647);
     assert ((long) md == 9223372036854775807L);
     assert ((float) md == md); // we don't honor float-double precision differences
+
+    int n = 5;
+    // Uncomment when b/28875322 is fixed
+    // assert 2 * (n / 2) == 4;
   }
 }

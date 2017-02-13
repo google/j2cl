@@ -18,6 +18,26 @@ public class Main {
     }
 
     try {
+      @SuppressWarnings("unused")
+      int a = 10;
+      int b = 0;
+      a /= b;
+      assert false : "failed to throw ArithmeticException";
+    } catch (ArithmeticException e) {
+      // do nothing.
+    }
+
+    try {
+      @SuppressWarnings("unused")
+      int a = 10;
+      int b = 0;
+      int c = 1 + a / b;
+      assert false : "failed to throw ArithmeticException";
+    } catch (ArithmeticException e) {
+      // do nothing.
+    }
+
+    try {
       short a = 10;
       short b = 0;
       @SuppressWarnings("unused")
@@ -56,6 +76,27 @@ public class Main {
     } catch (ArithmeticException e) {
       // do nothing.
     }
+
+    // Uncomment once b/29912739 is fixed.
+    // try {
+    //   int a = 10;
+    //   int b = 0;
+    //   @SuppressWarnings("unused")
+    //   long c = 10L + (a / b);
+    //   assert false : "failed to throw ArithmeticException";
+    // } catch (ArithmeticException e) {
+    //  // do nothing.
+    // }
+    //
+    // try {
+    //   short a = 10;
+    //   short b = 0;
+    //   @SuppressWarnings("unused")
+    //   long c = 10L + (a / b);
+    //   assert false : "failed to throw ArithmeticException";
+    // } catch (ArithmeticException e) {
+    //   // do nothing.
+    // }
   }
 
   private static void testModByZero() {
@@ -68,6 +109,17 @@ public class Main {
     } catch (ArithmeticException e) {
       // do nothing.
     }
+
+    // Uncomment once b/28875322 is fixed.
+    // try {
+    //   @SuppressWarnings("unused")
+    //   int a = 10;
+    //   int b = 0;
+    //   a %= b;
+    //   assert false : "failed to throw ArithmeticException";
+    // } catch (ArithmeticException e) {
+    //  // do nothing.
+    // }
 
     try {
       short a = 10;
@@ -108,5 +160,26 @@ public class Main {
     } catch (ArithmeticException e) {
       // do nothing.
     }
+
+    // Uncomment once b/29912739 is fixed.
+    // try {
+    //   int a = 10;
+    //   int b = 0;
+    //   @SuppressWarnings("unused")
+    //   long c = 10L + (a % b);
+    //   assert false : "failed to throw ArithmeticException";
+    // } catch (ArithmeticException e) {
+    //  // do nothing.
+    // }
+    //
+    // try {
+    //   short a = 10;
+    //   short b = 0;
+    //   @SuppressWarnings("unused")
+    //   double c = 10d + (a % b);
+    //   assert false : "failed to throw ArithmeticException";
+    // } catch (ArithmeticException e) {
+    //   // do nothing.
+    // }
   }
 }
