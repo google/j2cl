@@ -23,9 +23,12 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
@@ -36,7 +39,7 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -429,6 +432,57 @@ public abstract class TypeDeclaration extends Node
     return accidentalOverriddenMethods;
   }
 
+  private Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature;
+
+  /**
+   * Builds and caches a mapping from method override signature to matching method descriptors from
+   * the entire super-type hierarchy. This map can *greatly* speed up method override checks.
+   */
+  private Multimap<String, MethodDescriptor> getMethodDescriptorsByOverrideSignature() {
+    if (methodDescriptorsByOverrideSignature == null) {
+      methodDescriptorsByOverrideSignature = HashMultimap.create();
+
+      for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
+        if (declaredMethodDescriptor.isConstructor() || declaredMethodDescriptor.isStatic()) {
+          continue;
+        }
+
+        methodDescriptorsByOverrideSignature.put(
+            declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
+      }
+
+      // Recurse into immediate super class and interfaces for overridden method.
+      if (getSuperTypeDescriptor() != null) {
+        methodDescriptorsByOverrideSignature.putAll(
+            getSuperTypeDescriptor()
+                .getTypeDeclaration()
+                .getMethodDescriptorsByOverrideSignature());
+      }
+
+      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+        methodDescriptorsByOverrideSignature.putAll(
+            interfaceTypeDescriptor.getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
+      }
+    }
+
+    return methodDescriptorsByOverrideSignature;
+  }
+
+  /**
+   * Returns a set of the method descriptors of methods in this type's super hierarchy that are
+   * overridden by {@code methodDescriptor}.
+   */
+  public Set<MethodDescriptor> getOverriddenMethodDescriptors(MethodDescriptor methodDescriptor) {
+    Set<MethodDescriptor> overriddenMethodDescriptors =
+        (Set<MethodDescriptor>)
+            getMethodDescriptorsByOverrideSignature().get(methodDescriptor.getOverrideSignature());
+
+    Set<MethodDescriptor> overriddenMethodDescriptorsExceptSelf = new HashSet<>();
+    overriddenMethodDescriptorsExceptSelf.addAll(overriddenMethodDescriptors);
+    overriddenMethodDescriptorsExceptSelf.remove(methodDescriptor);
+    return overriddenMethodDescriptorsExceptSelf;
+  }
+
   /** Returns the method descriptors that are declared in a particular super type but not here. */
   private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
       TypeDescriptor superTypeDescriptor) {
@@ -449,6 +503,10 @@ public abstract class TypeDeclaration extends Node
     while (superTypeDescriptor != null) {
       for (MethodDescriptor superMethodDescriptor :
           superTypeDescriptor.getDeclaredMethodDescriptors()) {
+        if (superMethodDescriptor.isConstructor() || superMethodDescriptor.isStatic()) {
+          continue;
+        }
+
         // TODO: exclude package private method, and add a test for it.
         if (superMethodDescriptor.overridesSignature(methodDescriptor)) {
           return superMethodDescriptor;
@@ -711,14 +769,17 @@ public abstract class TypeDeclaration extends Node
     private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
       // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
       return new DescriptorFactory<T>() {
-        Map<TypeDeclaration, T> cachedValues = new HashMap<>();
+        T cachedValue;
+        TypeDeclaration selfTypeDeclaration;
 
         @Override
-        public T get(TypeDeclaration selfTypeDescriptor) {
-          if (!cachedValues.containsKey(selfTypeDescriptor)) {
-            cachedValues.put(selfTypeDescriptor, factory.get(selfTypeDescriptor));
+        public T get(TypeDeclaration selfTypeDeclaration) {
+          Preconditions.checkArgument(
+              this.selfTypeDeclaration == null || this.selfTypeDeclaration == selfTypeDeclaration);
+          if (cachedValue == null) {
+            cachedValue = factory.get(selfTypeDeclaration);
           }
-          return cachedValues.get(selfTypeDescriptor);
+          return cachedValue;
         }
       };
     }

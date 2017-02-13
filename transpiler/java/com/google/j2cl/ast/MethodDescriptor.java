@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -206,31 +208,36 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .collect(joining(", ")));
   }
 
+  private String overrideSignature;
+
   /** Returns a signature suitable for override checking. */
-  private String getOverrideSignature() {
-    StringBuilder signatureBuilder = new StringBuilder("");
-    Visibility methodVisibility = getVisibility();
-    if (methodVisibility.isPackagePrivate()) {
-      signatureBuilder.append(":pp:");
-      signatureBuilder.append(getEnclosingClassTypeDescriptor().getPackageName());
-      signatureBuilder.append(":");
-    } else if (methodVisibility.isPrivate()) {
-      signatureBuilder.append(":p:");
-      signatureBuilder.append(getEnclosingClassTypeDescriptor().getQualifiedBinaryName());
-      signatureBuilder.append(":");
-    }
+  public String getOverrideSignature() {
+    if (overrideSignature == null) {
+      StringBuilder signatureBuilder = new StringBuilder("");
+      Visibility methodVisibility = getVisibility();
+      if (methodVisibility.isPackagePrivate()) {
+        signatureBuilder.append(":pp:");
+        signatureBuilder.append(getEnclosingClassTypeDescriptor().getPackageName());
+        signatureBuilder.append(":");
+      } else if (methodVisibility.isPrivate()) {
+        signatureBuilder.append(":p:");
+        signatureBuilder.append(getEnclosingClassTypeDescriptor().getQualifiedBinaryName());
+        signatureBuilder.append(":");
+      }
 
-    signatureBuilder.append(getName());
-    signatureBuilder.append("(");
+      signatureBuilder.append(getName());
+      signatureBuilder.append("(");
 
-    String separator = "";
-    for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
-      signatureBuilder.append(separator);
-      signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
-      separator = ";";
+      String separator = "";
+      for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
+        signatureBuilder.append(separator);
+        signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
+        separator = ";";
+      }
+      signatureBuilder.append(")");
+      overrideSignature = signatureBuilder.toString();
     }
-    signatureBuilder.append(")");
-    return signatureBuilder.toString();
+    return overrideSignature;
   }
 
   private Set<MethodDescriptor> getOverriddenJsMembers() {
@@ -239,7 +246,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
   public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
-    return getEnclosingClassTypeDescriptor().getOverriddenMethodDescriptors(this);
+    return getEnclosingClassTypeDescriptor()
+        .getTypeDeclaration()
+        .getOverriddenMethodDescriptors(this);
   }
 
   /** A Builder for MethodDescriptors. */
@@ -358,5 +367,37 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     private static final ThreadLocalInterner<MethodDescriptor> interner =
         new ThreadLocalInterner<>();
+  }
+
+  public MethodDescriptor specializeTypeVariables(
+      Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+    if (applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+      return this;
+    }
+
+    // Original type variables.
+    TypeDescriptor returnTypeDescriptor = getReturnTypeDescriptor();
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
+
+    // Specialized type variables (possibly recursively).
+    TypeDescriptor specializedReturnTypeDescriptor =
+        applySpecializedTypeArgumentByTypeParameters.containsKey(returnTypeDescriptor)
+            ? applySpecializedTypeArgumentByTypeParameters.get(returnTypeDescriptor)
+            : returnTypeDescriptor.specializeTypeVariables(
+                applySpecializedTypeArgumentByTypeParameters);
+    ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
+        parameterTypeDescriptors
+            .stream()
+            .map(
+                t ->
+                    applySpecializedTypeArgumentByTypeParameters.containsKey(t)
+                        ? applySpecializedTypeArgumentByTypeParameters.get(t)
+                        : t.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters))
+            .collect(toImmutableList());
+
+    return MethodDescriptor.Builder.from(this)
+        .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
+        .setParameterTypeDescriptors(specializedParameterTypeDescriptors)
+        .build();
   }
 }

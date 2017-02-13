@@ -1452,9 +1452,6 @@ public class JdtUtils {
           return mapBuilder.build();
         };
 
-    boolean hasTypeBounds =
-        (isTypeVariable || isWildCardOrCapture) && typeBinding.getTypeBounds().length != 0;
-
     // Compute these even later
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))

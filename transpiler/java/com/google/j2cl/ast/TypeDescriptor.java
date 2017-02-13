@@ -17,12 +17,14 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -35,11 +37,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -542,35 +544,6 @@ public abstract class TypeDescriptor extends Node
     return getMethodDescriptorsBySignature().values();
   }
 
-  /**
-   * Returns a set of the method descriptors of methods in this type's super hierarchy that are
-   * overridden by {@code methodDescriptor}.
-   */
-  public Set<MethodDescriptor> getOverriddenMethodDescriptors(MethodDescriptor methodDescriptor) {
-    Set<MethodDescriptor> overriddenMethodDescriptors = new HashSet<>();
-
-    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)
-          && !methodDescriptor.isConstructor()) {
-        checkArgument(!methodDescriptor.isStatic());
-        overriddenMethodDescriptors.add(declaredMethodDescriptor);
-      }
-    }
-
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (getSuperTypeDescriptor() != null) {
-      overriddenMethodDescriptors.addAll(
-          getSuperTypeDescriptor().getOverriddenMethodDescriptors(methodDescriptor));
-    }
-
-    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      overriddenMethodDescriptors.addAll(
-          interfaceTypeDescriptor.getOverriddenMethodDescriptors(methodDescriptor));
-    }
-
-    return overriddenMethodDescriptors;
-  }
-
   @Override
   public String toString() {
     return getUniqueId();
@@ -756,12 +729,17 @@ public abstract class TypeDescriptor extends Node
     private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
       // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
       return new DescriptorFactory<T>() {
-        Map<TypeDescriptor, T> cachedValues = new HashMap<>();
+        T cachedValue;
+        TypeDescriptor selfTypeDescriptor;
 
         @Override
         public T get(TypeDescriptor selfTypeDescriptor) {
-          return cachedValues.computeIfAbsent(
-              selfTypeDescriptor, (TypeDescriptor k) -> factory.get(k));
+          Preconditions.checkArgument(
+              this.selfTypeDescriptor == null || this.selfTypeDescriptor == selfTypeDescriptor);
+          if (cachedValue == null) {
+            cachedValue = factory.get(selfTypeDescriptor);
+          }
+          return cachedValue;
         }
       };
     }
@@ -821,5 +799,95 @@ public abstract class TypeDescriptor extends Node
     public static Builder from(final TypeDescriptor typeDescriptor) {
       return typeDescriptor.toBuilder();
     }
+  }
+
+  /**
+   * A mapping that fully describes the final specialized type argument value for every super type
+   * or interface of the current type.
+   *
+   * <p>For example given:
+   *
+   * <pre>
+   * class A<A1, A2> {}
+   * class B<B1> extends A<String, B1>
+   * class C<C1> extends B<C1>
+   * </pre>
+   *
+   * <p>If the current type is C then the resulting mappings are:
+   *
+   * <pre>
+   * - A1 -> String
+   * - A2 -> C1
+   * - B1 -> C1
+   * </pre>
+   */
+  private Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters;
+
+  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+    if (specializedTypeArgumentByTypeParameters == null) {
+      specializedTypeArgumentByTypeParameters = new HashMap<>();
+      TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
+
+      TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+      List<TypeDescriptor> superTypeOrInterfaceDescriptors = new ArrayList<>();
+      if (superTypeDescriptor != null) {
+        superTypeOrInterfaceDescriptors.add(superTypeDescriptor);
+      }
+      superTypeOrInterfaceDescriptors.addAll(getInterfaceTypeDescriptors());
+
+      for (TypeDescriptor superTypeOrInterfaceDescriptor : superTypeOrInterfaceDescriptors) {
+        TypeDeclaration superTypeOrInterfaceDeclaration =
+            superTypeOrInterfaceDescriptor.getTypeDeclaration();
+
+        ImmutableList<TypeDescriptor> typeParameterDescriptors =
+            superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
+        ImmutableList<TypeDescriptor> typeArgumentDescriptors =
+            superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
+
+        boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
+        for (int i = 0; i < typeParameterDescriptors.size(); i++) {
+          TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
+          TypeDescriptor typeArgumentDescriptor =
+              specializedTypeIsRaw ? javaLangObject : typeArgumentDescriptors.get(i);
+          specializedTypeArgumentByTypeParameters.put(
+              typeParameterDescriptor, typeArgumentDescriptor);
+        }
+
+        Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
+            superTypeOrInterfaceDeclaration
+                .getUnsafeTypeDescriptor()
+                .getSpecializedTypeArgumentByTypeParameters();
+
+        for (Entry<TypeDescriptor, TypeDescriptor> entry :
+            superSpecializedTypeArgumentByTypeParameters.entrySet()) {
+          if (specializedTypeArgumentByTypeParameters.containsKey(entry.getValue())) {
+            specializedTypeArgumentByTypeParameters.put(
+                entry.getKey(), specializedTypeArgumentByTypeParameters.get(entry.getValue()));
+          } else {
+            specializedTypeArgumentByTypeParameters.put(entry.getKey(), entry.getValue());
+          }
+        }
+      }
+    }
+
+    return specializedTypeArgumentByTypeParameters;
+  }
+
+  public TypeDescriptor specializeTypeVariables(
+      Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+    if (applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+      return this;
+    }
+
+    return TypeDescriptors.replaceTypeArgumentDescriptors(
+        this,
+        getTypeArgumentDescriptors()
+            .stream()
+            .map(
+                t ->
+                    applySpecializedTypeArgumentByTypeParameters.containsKey(t)
+                        ? applySpecializedTypeArgumentByTypeParameters.get(t)
+                        : t.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters))
+            .collect(toImmutableList()));
   }
 }

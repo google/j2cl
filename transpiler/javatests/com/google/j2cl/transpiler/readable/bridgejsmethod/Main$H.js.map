@@ -1,0 +1,56 @@
+[public static class H<V> implements G<V> {
+    /**
+...    }
+  }] => [/**
+ * @template C_H_V
+...exports = H;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H"
+[public static class H<V> implements G<V> {
+    /**
+...    }
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H"
+[UNKNOWN] => [super();]
+[public static class H<V> implements G<V> {
+    /**
+...    }
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H.<ctor>"
+[UNKNOWN] => [H.$clinit();]
+[UNKNOWN] => [let $instance = new H();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H__();]
+[UNKNOWN] => [return $instance;]
+[public static class H<V> implements G<V> {
+    /**
+...    }
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H();]
+[/**
+     * The implemented enclose() has now been marked @JsMethod but mangled H.enclose() is still
+...      return null;
+    }] => [/**
+   * @param {C_H_V} value
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H.enclose"
+[value] => [value] "value"
+[return null;] => [return null;]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {C_H_V} arg0
+   * @return {C_H_V}
+   * @public
+   */
+  m_enclose__java_lang_Object(arg0) {
+    return this.enclose(arg0);
+  }]
+[UNKNOWN] => [return this.enclose(arg0);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

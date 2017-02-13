@@ -16,6 +16,8 @@ let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.
 let C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C$impl');
 let D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.D$impl');
 let E = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E$impl');
+let H = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H$impl');
+let L = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 
@@ -72,6 +74,10 @@ class Main extends java_lang_Object {
     let e = E.$create__();
     e.fun('abc');
     e.bar('abc');
+    let h = /**@type {!H<Integer>} */ (H.$create__());
+    h.enclose(Integer.m_valueOf__int(1));
+    let l = /**@type {!L<Integer>} */ (L.$create__());
+    l.fun('foo', Integer.m_valueOf__int(1));
   }
 
   /**
@@ -110,6 +116,10 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.D$impl');
     E = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E$impl');
+    H = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H$impl');
+    L = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     java_lang_Object.$clinit();
   }

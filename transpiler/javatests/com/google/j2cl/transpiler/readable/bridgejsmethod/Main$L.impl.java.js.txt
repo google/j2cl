@@ -1,0 +1,127 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgejsmethod.Main$L.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L$impl');
+
+
+let K = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_L_L1
+ * @extends {K<?string, C_L_L1>}
+ */
+class L extends K {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_L_L1
+   * @return {!L<C_L_L1>}
+   * @public
+   */
+  static $create__() {
+    L.$clinit();
+    let $instance = new L();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K__();
+    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L();
+  }
+
+  /**
+   * @param {?string} string$1$
+   * @param {C_L_L1} l1
+   * @return {void}
+   * @public
+   */
+  fun(string$1$, l1) {}
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {void}
+   * @public
+   */
+  m_fun__java_lang_Object__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_bridgejsmethod(
+      arg0, arg1) {
+    this.fun(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof L;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, L);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    L.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    K.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L() {}
+};
+
+$Util.$setClassMetadata(
+    L,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$L'));
+
+
+
+/**
+ * Export class.
+ */
+exports = L;
+//# sourceMappingURL=Main$L.js.map

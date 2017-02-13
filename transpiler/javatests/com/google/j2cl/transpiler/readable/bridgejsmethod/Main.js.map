@@ -35,10 +35,10 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main();]
 [public static void test() {
     A a = new A<Integer>();
-...    e.bar("abc");
+...    l.fun("foo", 1);
   }] => [/**
    * @return {void}
-...    e.bar("abc");
+...    l.fun("foo", Integer.m_valueOf__int(1));
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [UNKNOWN] => [Main.$clinit();]
 [A a = new A<Integer>();] => [let a = /**@type {!A<Integer>} */ (A.$create__());]
@@ -61,4 +61,10 @@
 [e] => [e] "e"
 [e.fun("abc");] => [e.fun("abc");]
 [e.bar("abc");] => [e.bar("abc");]
+[H<Integer> h = new H<>();] => [let h = /**@type {!H<Integer>} */ (H.$create__());]
+[h] => [h] "h"
+[h.enclose(1);] => [h.enclose(Integer.m_valueOf__int(1));]
+[L<Integer> l = new L<>();] => [let l = /**@type {!L<Integer>} */ (L.$create__());]
+[l] => [l] "l"
+[l.fun("foo", 1);] => [l.fun("foo", Integer.m_valueOf__int(1));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

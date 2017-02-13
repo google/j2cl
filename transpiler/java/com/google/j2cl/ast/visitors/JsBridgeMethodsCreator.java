@@ -36,6 +36,7 @@ import java.util.Set;
 
 /** Creates bridge methods for instance JsMembers. */
 public class JsBridgeMethodsCreator extends NormalizationPass {
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
@@ -59,7 +60,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private static List<Method> createBridgeMethods(
-      TypeDeclaration typeDeclaration, Iterable<Method> existingMethods) {
+      TypeDeclaration enclosingTypeDeclaration, Iterable<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
@@ -67,17 +68,35 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
             .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
             .collect(toImmutableSet());
     for (Entry<MethodDescriptor, MethodDescriptor> entry :
-        delegatedMethodDescriptorsByBridgeMethodDescriptor(typeDeclaration).entrySet()) {
-      Method bridgeMethod =
-          createBridgeMethod(
-              typeDeclaration.getUnsafeTypeDescriptor(), entry.getKey(), entry.getValue());
-      String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
+        delegatedMethodDescriptorsByBridgeMethodDescriptor(enclosingTypeDeclaration).entrySet()) {
+      MethodDescriptor bridgeMethodDescriptor = entry.getKey();
+
+      String manglingName = ManglingNameUtils.getMangledName(bridgeMethodDescriptor);
       if (generatedBridgeMethodMangledNames.contains(manglingName)
           || existingMethodMangledNames.contains(manglingName)) {
         // Do not generate duplicate methods that have the same signature of the existing methods
         // in the type.
         continue;
       }
+
+      /**
+       * The bridge method search finds methods in their original declaration type (searching just
+       * declared types is a performance optimization). As a result it may refer to type parameters
+       * in its declaration type, those need to be specialized to the type arguments on the current
+       * type.
+       */
+      bridgeMethodDescriptor =
+          bridgeMethodDescriptor.specializeTypeVariables(
+              enclosingTypeDeclaration
+                  .getUnsafeTypeDescriptor()
+                  .getSpecializedTypeArgumentByTypeParameters());
+
+      Method bridgeMethod =
+          createBridgeMethod(
+              enclosingTypeDeclaration.getUnsafeTypeDescriptor(),
+              bridgeMethodDescriptor,
+              entry.getValue());
+
       generatedBridgeMethods.add(bridgeMethod);
       generatedBridgeMethodMangledNames.add(manglingName);
     }
@@ -91,10 +110,12 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
         new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
-    for (MethodDescriptor declaredMethod : typeDeclaration.getDeclaredMethodDescriptors()) {
-      MethodDescriptor exposedNonJsMember = getExposedNonJsMember(declaredMethod);
+    for (MethodDescriptor declaredMethodDescriptor :
+        typeDeclaration.getDeclaredMethodDescriptors()) {
+      MethodDescriptor exposedNonJsMember = getExposedNonJsMember(declaredMethodDescriptor);
       if (exposedNonJsMember != null) {
-        delegateMethodDescriptorsByBridgeMethodDescriptor.put(exposedNonJsMember, declaredMethod);
+        delegateMethodDescriptorsByBridgeMethodDescriptor.put(
+            exposedNonJsMember, declaredMethodDescriptor);
       }
     }
 
@@ -124,10 +145,10 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
    * non-JsMember, returns the non-JsMember it exposes, otherwise, returns null.
    */
   private static MethodDescriptor getExposedNonJsMember(MethodDescriptor methodDescriptor) {
-    if (!methodDescriptor.isOrOverridesJsMember()
+    if (methodDescriptor.isStatic()
+        || methodDescriptor.isConstructor()
         || methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()
-        || methodDescriptor.isStatic()
-        || methodDescriptor.isConstructor()) {
+        || !methodDescriptor.isOrOverridesJsMember()) {
       return null;
     }
     // native js type is not generated, thus it does not expose any non-js methods.

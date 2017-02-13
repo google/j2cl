@@ -1,0 +1,38 @@
+[public static class K<K1, K2> {
+    void fun(K1 k1, K2 k2) {}
+  }] => [/**
+ * @template C_K_K1, C_K_K2
+...exports = K;
+] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K"
+[public static class K<K1, K2> {
+    void fun(K1 k1, K2 k2) {}
+  }] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K"
+[UNKNOWN] => [super();]
+[public static class K<K1, K2> {
+    void fun(K1 k1, K2 k2) {}
+  }] => [/**
+   * A particular Java constructor as a factory method.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K.<ctor>"
+[UNKNOWN] => [K.$clinit();]
+[UNKNOWN] => [let $instance = new K();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K__();]
+[UNKNOWN] => [return $instance;]
+[public static class K<K1, K2> {
+    void fun(K1 k1, K2 k2) {}
+  }] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K();
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K();]
+[void fun(K1 k1, K2 k2) {}] => [/**
+   * @param {C_K_K1} k1
+...  m_fun__java_lang_Object__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_bridgejsmethod(k1, k2) {
+  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K.fun"
+[k1] => [k1] "k1"
+[k2] => [k2] "k2"
+[UNKNOWN] => [java_lang_Object.$clinit();]

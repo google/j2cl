@@ -13,17 +13,13 @@ public class Main {
     public void bar(T t) {}
   }
 
-  /**
-   * Interface with JsMethod.
-   */
+  /** Interface with JsMethod. */
   public interface I<T extends Number> {
     @JsMethod
     T fun(T t);
   }
 
-  /**
-   * Interface with non-JsMethod.
-   */
+  /** Interface with non-JsMethod. */
   public interface J<T> {
     void bar(T t);
   }
@@ -72,6 +68,38 @@ public class Main {
 
   public static class F extends A<Integer> implements I<Integer> {}
 
+  public interface G<V> {
+    V enclose(V value);
+  }
+
+  public static class H<V> implements G<V> {
+    /**
+     * The implemented enclose() has now been marked @JsMethod but mangled H.enclose() is still
+     * required to execute the behavior defined here. A bridge method is needed from the mangled to
+     * unmangled form. The version of the mangled form that is found in super types references type
+     * variable C_G_V and must be specialized to C_H_V before being added in type H.
+     */
+    @JsMethod
+    @Override
+    public V enclose(V value) {
+      return null;
+    }
+  }
+
+  public static class K<K1, K2> {
+    void fun(K1 k1, K2 k2) {}
+  }
+
+  public static class L<L1> extends K<String, L1> {
+    /**
+     * Like the G/H example but requires type specialization across classes instead of interfaces,
+     * with multiple type variables and some terminating in both concrete types and type variables.
+     */
+    @JsMethod
+    @Override
+    void fun(String string, L1 l1) {}
+  }
+
   public static void test() {
     A a = new A<Integer>();
     a.fun(1);
@@ -88,5 +116,9 @@ public class Main {
     E e = new E();
     e.fun("abc");
     e.bar("abc");
+    H<Integer> h = new H<>();
+    h.enclose(1);
+    L<Integer> l = new L<>();
+    l.fun("foo", 1);
   }
 }

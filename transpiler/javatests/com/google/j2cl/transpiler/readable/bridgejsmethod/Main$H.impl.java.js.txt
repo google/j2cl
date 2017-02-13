@@ -1,0 +1,122 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgejsmethod.Main$H.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.H$impl');
+
+
+let G = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template C_H_V
+ * @implements {G<C_H_V>}
+ */
+class H extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_H_V
+   * @return {!H<C_H_V>}
+   * @public
+   */
+  static $create__() {
+    H.$clinit();
+    let $instance = new H();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H();
+  }
+
+  /**
+   * @param {C_H_V} value
+   * @return {C_H_V}
+   * @public
+   */
+  enclose(value) {
+    return null;
+  }
+
+  /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {C_H_V} arg0
+   * @return {C_H_V}
+   * @public
+   */
+  m_enclose__java_lang_Object(arg0) {
+    return this.enclose(arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof H;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, H);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    H.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H() {}
+};
+
+$Util.$setClassMetadata(
+    H,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$H'));
+
+
+G.$markImplementor(H);
+
+
+/**
+ * Export class.
+ */
+exports = H;
+//# sourceMappingURL=Main$H.js.map
