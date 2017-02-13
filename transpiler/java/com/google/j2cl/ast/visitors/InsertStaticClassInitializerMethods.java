@@ -63,7 +63,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
               superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(
-                type.getDescriptor().getUnsafeTypeDescriptor(), superClinitCallStatements);
+                type.getDeclaration().getUnsafeTypeDescriptor(), superClinitCallStatements);
 
             if (!superClinitCallStatements.isEmpty()) {
               type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));

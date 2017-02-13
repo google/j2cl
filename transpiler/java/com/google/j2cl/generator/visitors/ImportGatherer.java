@@ -102,7 +102,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitType(Type type) {
-    addTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor(), ImportCategory.SELF);
+    addTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor(), ImportCategory.SELF);
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.

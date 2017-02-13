@@ -435,18 +435,18 @@ public class TypeDescriptors {
       final boolean isNative,
       final boolean isJsType) {
     Supplier<TypeDescriptor> rawTypeDescriptorFactory =
-        () -> {
-          return createExactly(
-              superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
-              packageName,
-              classComponents,
-              Collections.emptyList(),
-              jsNamespace,
-              jsName,
-              kind,
-              isNative,
-              isJsType);
-        };
+        () ->
+            createExactly(
+                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
+                packageName,
+                classComponents,
+                Collections.emptyList(),
+                jsNamespace,
+                jsName,
+                kind,
+                isNative,
+                isJsType);
+
     TypeDeclaration typeDeclaration =
         TypeDeclaration.createExactly(
             superTypeDescriptor,
@@ -480,7 +480,7 @@ public class TypeDescriptors {
     checkArgument(!originalTypeDescriptor.isTypeVariable());
     checkArgument(!originalTypeDescriptor.isUnion());
     TypeDeclaration typeDeclaration =
-        TypeDeclaration.replaceTypeArgumentDescriptors(
+        TypeDeclaration.replaceTypeParameterDescriptors(
             originalTypeDescriptor.getTypeDeclaration(), typeArgumentTypeDescriptors);
     return TypeDescriptor.Builder.from(originalTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)

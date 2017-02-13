@@ -39,7 +39,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
-      type.addMethods(createBridgeMethods(type.getDescriptor(), type.getMethods()));
+      type.addMethods(createBridgeMethods(type.getDeclaration(), type.getMethods()));
     }
   }
 

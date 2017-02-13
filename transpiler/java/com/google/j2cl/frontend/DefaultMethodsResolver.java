@@ -110,7 +110,7 @@ public class DefaultMethodsResolver {
       Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
               targetMethod,
-              type.getDescriptor().getUnsafeTypeDescriptor(),
+              type.getDeclaration().getUnsafeTypeDescriptor(),
               "Default method forwarding stub.");
       defaultForwardingMethod.setSourcePosition(type.getSourcePosition());
       type.addMethod(defaultForwardingMethod);

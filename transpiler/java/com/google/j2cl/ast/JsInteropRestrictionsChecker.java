@@ -59,7 +59,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkType(Type type) {
-    if (type.getDescriptor().isJsType()) {
+    if (type.getDeclaration().isJsType()) {
       if (!checkJsType(type)) {
         return;
       }
@@ -67,15 +67,15 @@ public class JsInteropRestrictionsChecker {
       checkJsNamespace(type);
     }
 
-    if (type.getDescriptor().isNative()) {
+    if (type.getDeclaration().isNative()) {
       if (!checkNativeJsType(type)) {
         return;
       }
     }
 
-    if (type.getDescriptor().isJsFunctionInterface()) {
+    if (type.getDeclaration().isJsFunctionInterface()) {
       checkJsFunctionInterface(type);
-    } else if (type.getDescriptor().isJsFunctionImplementation()) {
+    } else if (type.getDeclaration().isJsFunctionImplementation()) {
       checkJsFunctionImplementation(type);
     } else {
       checkJsFunctionSubtype(type);
@@ -96,7 +96,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkTypeMemberCollisions(Type type) {
     // Native JS members are allowed to collide.
-    if (type.getDescriptor().isNative()) {
+    if (type.getDeclaration().isNative()) {
       return;
     }
 
@@ -158,11 +158,11 @@ public class JsInteropRestrictionsChecker {
   }
 
   private boolean checkJsType(Type type) {
-    if (type.getDescriptor().isLocal()) {
+    if (type.getDeclaration().isLocal()) {
       problems.error(
           type.getSourcePosition(),
           "Local class '%s' cannot be a JsType.",
-          type.getDescriptor().getReadableDescription());
+          type.getDeclaration().getReadableDescription());
       return false;
     }
     return true;
@@ -271,7 +271,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private boolean checkNativeJsType(Type type) {
-    TypeDeclaration typeDeclaration = type.getDescriptor();
+    TypeDeclaration typeDeclaration = type.getDeclaration();
     String readableDescription = typeDeclaration.getReadableDescription();
 
     if (type.isEnumOrSubclass()) {
@@ -374,8 +374,8 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsFunctionInterface(Type type) {
-    String readableDescription = type.getDescriptor().getReadableDescription();
-    if (!type.getDescriptor().isFunctionalInterface()) {
+    String readableDescription = type.getDeclaration().getReadableDescription();
+    if (!type.getDeclaration().isFunctionalInterface()) {
       problems.error(
           type.getSourcePosition(),
           "JsFunction '%s' has to be a functional interface.",
@@ -390,7 +390,7 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (type.getDescriptor().isJsType()) {
+    if (type.getDeclaration().isJsType()) {
       problems.error(
           type.getSourcePosition(),
           "'%s' cannot be both a JsFunction and a JsType at the same time.",
@@ -399,7 +399,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsFunctionImplementation(Type type) {
-    String readableDescription = type.getDescriptor().getReadableDescription();
+    String readableDescription = type.getDeclaration().getReadableDescription();
     if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
       problems.error(
           type.getSourcePosition(),
@@ -407,7 +407,7 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (type.getDescriptor().isJsType()) {
+    if (type.getDeclaration().isJsType()) {
       problems.error(
           type.getSourcePosition(),
           "'%s' cannot be both a JsFunction implementation and a JsType at the same time.",
@@ -428,7 +428,7 @@ public class JsInteropRestrictionsChecker {
       problems.error(
           type.getSourcePosition(),
           "'%s' cannot extend JsFunction implementation '%s'.",
-          type.getDescriptor().getReadableDescription(),
+          type.getDeclaration().getReadableDescription(),
           superClassTypeDescriptor.getReadableDescription());
     }
     for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
@@ -436,7 +436,7 @@ public class JsInteropRestrictionsChecker {
         problems.error(
             type.getSourcePosition(),
             "'%s' cannot extend JsFunction '%s'.",
-            type.getDescriptor().getReadableDescription(),
+            type.getDeclaration().getReadableDescription(),
             superInterface.getReadableDescription());
       }
     }

@@ -116,7 +116,7 @@ public class NormalizeConstructors extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
       Method resultingConstructor =
-          type.getDescriptor().isJsConstructorClassOrSubclass()
+          type.getDeclaration().isJsConstructorClassOrSubclass()
               ? synthesizeJsConstructor(type)
               : maybeSynthesizePrivateConstructor(type);
 
@@ -149,7 +149,7 @@ public class NormalizeConstructors extends NormalizationPass {
       if (!method.isConstructor()) {
         return false;
       }
-      TypeDeclaration currentTypeDeclaration = getCurrentType().getDescriptor();
+      TypeDeclaration currentTypeDeclaration = getCurrentType().getDeclaration();
       if (!currentTypeDeclaration.isJsConstructorClassOrSubclass()
           || !AstUtils.hasConstructorInvocation(method)) {
         return false;
@@ -160,7 +160,7 @@ public class NormalizeConstructors extends NormalizationPass {
       final MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
       if (constructorInvocation
           .getTarget()
-          .isMemberOf(getCurrentType().getDescriptor().getSuperTypeDescriptor())) {
+          .isMemberOf(getCurrentType().getDeclaration().getSuperTypeDescriptor())) {
         // super() call should be called with the es6 "super(args)" in the es6 constructor
         // if the super class is a @JsConstructor or subclass of @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
@@ -271,14 +271,14 @@ public class NormalizeConstructors extends NormalizationPass {
 
     List<Statement> body = AstUtils.generateFieldDeclarations(type);
 
-    if (type.getDescriptor().getSuperTypeDescriptor() != null) {
+    if (type.getDeclaration().getSuperTypeDescriptor() != null) {
       body.add(0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement());
     }
 
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.newBuilder()
             .setConstructor(true)
-            .setEnclosingClassTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor())
+            .setEnclosingClassTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .build();
 
@@ -376,7 +376,7 @@ public class NormalizeConstructors extends NormalizationPass {
    * }</pre>
    */
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
-    TypeDescriptor enclosingType = type.getDescriptor().getUnsafeTypeDescriptor();
+    TypeDescriptor enclosingType = type.getDeclaration().getUnsafeTypeDescriptor();
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.newBuilder()
             .setEnclosingClassTypeDescriptor(enclosingType)

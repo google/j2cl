@@ -120,7 +120,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               return FieldAccess.Builder.from(
                       FieldDescriptor.Builder.from(fieldAccess.getTarget())
                           .setEnclosingClassTypeDescriptor(
-                              getCurrentType().getDescriptor().getUnsafeTypeDescriptor())
+                              getCurrentType().getDeclaration().getUnsafeTypeDescriptor())
                           .build())
                   .setQualifier(fieldAccess.getQualifier())
                   .build();
@@ -135,7 +135,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Due to the cascading construction for captures in inner class construction,
               // at the end some this references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
-              return new ThisReference(getCurrentType().getDescriptor().getUnsafeTypeDescriptor());
+              return new ThisReference(getCurrentType().getDeclaration().getUnsafeTypeDescriptor());
             }
             return thisReference;
           }
@@ -185,7 +185,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     for (Type type : compilationUnit.getTypes()) {
       if (canBeOptimized(type)) {
         optimizableJsFunctionsByTypeDescriptor.put(
-            type.getDescriptor().getUnsafeTypeDescriptor(), type);
+            type.getDeclaration().getUnsafeTypeDescriptor(), type);
       }
     }
     return optimizableJsFunctionsByTypeDescriptor;
@@ -196,7 +196,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
    * a function expression (lambda).
    */
   private static boolean canBeOptimized(Type type) {
-    if (!type.isAnonymous() || !type.getDescriptor().isJsFunctionImplementation()) {
+    if (!type.isAnonymous() || !type.getDeclaration().isJsFunctionImplementation()) {
       return false;
     }
 
@@ -243,7 +243,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               public boolean enterFieldAccess(FieldAccess fieldAccess) {
                 if (fieldAccess
                         .getTarget()
-                        .isMemberOf(type.getDescriptor().getUnsafeTypeDescriptor())
+                        .isMemberOf(type.getDeclaration().getUnsafeTypeDescriptor())
                     && fieldAccess.getQualifier() instanceof ThisReference) {
                   // Skip "this" references when accessing captures.
                   return false;

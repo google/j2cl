@@ -1214,15 +1214,7 @@ public class JdtUtils {
       PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
 
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
-        () -> {
-          TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
-          if (rawTypeDescriptor.hasTypeArguments()) {
-            return TypeDescriptors.replaceTypeArgumentDescriptors(
-                rawTypeDescriptor, ImmutableList.of());
-          }
-          return rawTypeDescriptor;
-        };
+    Supplier<TypeDescriptor> rawTypeDescriptorFactory = getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
     String packageName =
@@ -1310,6 +1302,17 @@ public class JdtUtils {
             .build();
     cachedTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
     return typeDescriptor;
+  }
+
+  private static Supplier<TypeDescriptor> getRawTypeDescriptorSupplier(ITypeBinding typeBinding) {
+    return () -> {
+      TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
+      if (rawTypeDescriptor.hasTypeArguments()) {
+        return TypeDescriptors.replaceTypeArgumentDescriptors(
+            rawTypeDescriptor, ImmutableList.of());
+      }
+      return rawTypeDescriptor;
+    };
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
@@ -1415,15 +1418,7 @@ public class JdtUtils {
       PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
 
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
-        () -> {
-          TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
-          if (rawTypeDescriptor.hasTypeArguments()) {
-            return TypeDescriptors.replaceTypeArgumentDescriptors(
-                rawTypeDescriptor, ImmutableList.of());
-          }
-          return rawTypeDescriptor;
-        };
+    Supplier<TypeDescriptor> rawTypeDescriptorFactory = getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
     String packageName =

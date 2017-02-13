@@ -93,7 +93,7 @@ public class OutputGeneratorStage {
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
-        if (type.getDescriptor().isNative()) {
+        if (type.getDeclaration().isNative()) {
           // Don't generate JS for native JsTypes.
           continue;
         }
@@ -132,7 +132,8 @@ public class OutputGeneratorStage {
 
         timingReport.startSample("Render impl");
         jsImplGenerator.setRelativeSourceMapLocation(
-            type.getDescriptor().getSimpleBinaryName() + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
+            type.getDeclaration().getSimpleBinaryName()
+                + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
             GeneratorUtils.getAbsolutePath(
@@ -206,7 +207,7 @@ public class OutputGeneratorStage {
     }
 
     // Gather exports.
-    TypeDeclaration selfTypeDeclaration = type.getDescriptor();
+    TypeDeclaration selfTypeDeclaration = type.getDeclaration();
     exportModulePaths.add(selfTypeDeclaration.getModuleName());
     exportModulePaths.add(selfTypeDeclaration.getImplModuleName());
   }

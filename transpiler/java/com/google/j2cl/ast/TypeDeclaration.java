@@ -473,7 +473,7 @@ public abstract class TypeDeclaration extends Node
 
   abstract Builder toBuilder();
 
-  static TypeDeclaration replaceTypeArgumentDescriptors(
+  public static TypeDeclaration replaceTypeParameterDescriptors(
       TypeDeclaration originalTypeDeclaration,
       Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
     return Builder.from(originalTypeDeclaration)
@@ -497,18 +497,17 @@ public abstract class TypeDeclaration extends Node
       final boolean isNative,
       final boolean isJsType) {
     Supplier<TypeDescriptor> rawTypeDescriptorFactory =
-        () -> {
-          return TypeDescriptors.createExactly(
-              superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
-              packageName,
-              classComponents,
-              Collections.emptyList(),
-              jsNamespace,
-              jsName,
-              kind,
-              isNative,
-              isJsType);
-        };
+        () ->
+            TypeDescriptors.createExactly(
+                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
+                packageName,
+                classComponents,
+                Collections.emptyList(),
+                jsNamespace,
+                jsName,
+                kind,
+                isNative,
+                isJsType);
 
     return newBuilder()
         .setClassComponents(classComponents)
@@ -565,8 +564,6 @@ public abstract class TypeDeclaration extends Node
   public abstract static class Builder {
 
     public abstract Builder setUniqueKey(String key);
-
-    public abstract Builder setClassComponents(String... classComponents);
 
     public abstract Builder setClassComponents(List<String> classComponents);
 

@@ -239,7 +239,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.getInterfaceTypeDescriptors();
   }
 
-  public TypeDeclaration getDescriptor() {
+  public TypeDeclaration getDeclaration() {
     return typeDeclaration;
   }
 
@@ -306,7 +306,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   @Override
   public String getReadableDescription() {
-    return getDescriptor().getReadableDescription();
+    return getDeclaration().getReadableDescription();
   }
 
   @Override

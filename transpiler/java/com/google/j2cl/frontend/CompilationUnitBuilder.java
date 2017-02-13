@@ -225,7 +225,7 @@ public class CompilationUnitBuilder {
 
     private void convertTypeBody(
         Type type, ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
-      TypeDeclaration currentTypeDeclaration = type.getDescriptor();
+      TypeDeclaration currentTypeDeclaration = type.getDeclaration();
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       if (superclassBinding != null) {
         capturesByTypeName.putAll(
@@ -1095,7 +1095,7 @@ public class CompilationUnitBuilder {
                           declaringType == currentType
                               ? variable.getReference()
                               : convertCapturedVariableReference(
-                                  variable, declaringType.getDescriptor()),
+                                  variable, declaringType.getDeclaration()),
                           // target method to forward to.
                           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
                           false)))
@@ -1405,7 +1405,7 @@ public class CompilationUnitBuilder {
       //
       // The lambda class here should be declared
       //
-      // class lambdaimplememntation<T> implements Func<String, T> {
+      // class LambdaImplementation<T> implements Func<String, T> {
       //   List<T> captured$var;
       //   ....
       //   public T apply(String t) {return captured$var.get(0); }
@@ -1419,13 +1419,10 @@ public class CompilationUnitBuilder {
           AstUtils.getAllTypeVariables(lambdaType);
 
       // Add the relevant type parameters to the anonymous inner class that implements the lambda.
-      {
-        lambdaTypeDeclaration =
-            TypeDescriptors.replaceTypeArgumentDescriptors(
-                    lambdaTypeDescriptor, new ArrayList<>(lambdaTypeVariableTypeDescriptors))
-                .getTypeDeclaration();
-        lambdaTypeDescriptor = lambdaTypeDeclaration.getUnsafeTypeDescriptor();
-      }
+      lambdaTypeDeclaration =
+          TypeDeclaration.replaceTypeParameterDescriptors(
+              lambdaTypeDescriptor.getTypeDeclaration(), lambdaTypeVariableTypeDescriptors);
+      lambdaTypeDescriptor = lambdaTypeDeclaration.getUnsafeTypeDescriptor();
 
       // Note that the original type descriptor for the lambda was computed above.  However, once
       // we traverse the lambda method we determine the captured variables and need to add their
@@ -1458,7 +1455,7 @@ public class CompilationUnitBuilder {
      * to be the case for the synthetic lambda class TypeDescriptor.
      */
     private void replaceLambdaDescriptor(Type type, final TypeDeclaration replacement) {
-      final TypeDeclaration original = type.getDescriptor();
+      final TypeDeclaration original = type.getDeclaration();
       type.accept(
           new AbstractRewriter() {
             @Override
@@ -1571,7 +1568,7 @@ public class CompilationUnitBuilder {
       // If the field is referenced like a current type field with explicit 'this' but is part of
       // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
       if (qualifier instanceof ThisReference
-          && !fieldDescriptor.isMemberOf(currentType.getDescriptor().getUnsafeTypeDescriptor())) {
+          && !fieldDescriptor.isMemberOf(currentType.getDeclaration().getUnsafeTypeDescriptor())) {
         qualifier =
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
@@ -1824,7 +1821,7 @@ public class CompilationUnitBuilder {
       // while processing the compilation unit.
       Type type = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
       if (type != null) {
-        return type.getDescriptor();
+        return type.getDeclaration();
       }
       // The binding is a simple field and JDT provides direct knowledge of the declaring class.
       if (variableBinding.getDeclaringClass() != null) {
@@ -1850,7 +1847,7 @@ public class CompilationUnitBuilder {
           FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
           if (!fieldDescriptor.isStatic()
               && !fieldDescriptor.isMemberOf(
-                  currentType.getDescriptor().getUnsafeTypeDescriptor())) {
+                  currentType.getDeclaration().getUnsafeTypeDescriptor())) {
             return FieldAccess.Builder.from(fieldDescriptor)
                 .setQualifier(
                     convertOuterClassReference(
@@ -1866,7 +1863,7 @@ public class CompilationUnitBuilder {
           Variable variable = checkNotNull(variableByJdtBinding.get(variableBinding));
           // The innermost type in which this variable is declared.
           TypeDeclaration enclosingTypeDeclaration = findEnclosingTypeDeclaration(variableBinding);
-          TypeDeclaration currentTypeDeclaration = currentType.getDescriptor();
+          TypeDeclaration currentTypeDeclaration = currentType.getDeclaration();
           if (!enclosingTypeDeclaration.equals(currentTypeDeclaration)) {
             return convertCapturedVariableReference(variable, enclosingTypeDeclaration);
           } else {
@@ -1902,7 +1899,7 @@ public class CompilationUnitBuilder {
      */
     private Expression convertOuterClassReference(
         ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
-      TypeDescriptor currentTypeDescriptor = currentType.getDescriptor().getUnsafeTypeDescriptor();
+      TypeDescriptor currentTypeDescriptor = currentType.getDeclaration().getUnsafeTypeDescriptor();
       Expression qualifier = new ThisReference(currentTypeDescriptor);
       ITypeBinding innerTypeBinding = currentTypeBinding;
       if (!JdtUtils.createTypeDescriptor(innerTypeBinding).hasSameRawType(currentTypeDescriptor)) {
@@ -1945,15 +1942,16 @@ public class CompilationUnitBuilder {
       // type, and also a captured variable to the outer class in the type stack that is
       // inside {@code enclosingClassRef}.
       for (int i = typeStack.size() - 1; i >= 0; i--) {
-        if (typeStack.get(i).getDescriptor().equals(enclosingClassDeclarationDescriptor)) {
+        if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclarationDescriptor)) {
           break;
         }
-        capturesByTypeName.put(typeStack.get(i).getDescriptor().getQualifiedSourceName(), variable);
+        capturesByTypeName.put(
+            typeStack.get(i).getDeclaration().getQualifiedSourceName(), variable);
       }
       // for reference to a captured variable, if it is in a constructor, translate to
       // reference to outer parameter, otherwise, translate to reference to corresponding
       // field created for the captured variable.
-      TypeDescriptor currentTypeDescriptor = currentType.getDescriptor().getUnsafeTypeDescriptor();
+      TypeDescriptor currentTypeDescriptor = currentType.getDeclaration().getUnsafeTypeDescriptor();
       FieldDescriptor fieldDescriptor =
           AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
       ThisReference qualifier = new ThisReference(currentTypeDescriptor);

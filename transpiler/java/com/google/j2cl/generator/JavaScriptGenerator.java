@@ -66,7 +66,7 @@ public abstract class JavaScriptGenerator {
 
   void renderFileOverview(String... suppressions) {
     String transpiledFrom =
-        type.getDescriptor()
+        type.getDeclaration()
             .getUnsafeTypeDescriptor()
             .getRawTypeDescriptor()
             .getQualifiedBinaryName();

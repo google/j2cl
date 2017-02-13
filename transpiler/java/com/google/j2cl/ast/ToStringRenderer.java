@@ -507,7 +507,7 @@ class ToStringRenderer {
       @Override
       public boolean enterType(Type type) {
         print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
-        print(type.getDescriptor().toString());
+        print(type.getDeclaration().toString());
         if (type.getSuperTypeDescriptor() != null) {
           print(" extends " + type.getSuperTypeDescriptor());
         }

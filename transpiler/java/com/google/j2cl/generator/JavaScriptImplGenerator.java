@@ -56,9 +56,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
     super(problems, declareLegacyNamespace, type);
-    this.className = environment.aliasForType(type.getDescriptor());
+    this.className = environment.aliasForType(type.getDeclaration());
     this.mangledTypeName =
-        ManglingNameUtils.getMangledName(type.getDescriptor().getUnsafeTypeDescriptor());
+        ManglingNameUtils.getMangledName(type.getDeclaration().getUnsafeTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
@@ -135,16 +135,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
       // Yes this is really being done on purpose.
       throw new RuntimeException(
-          "Error generating source for type " + type.getDescriptor().getQualifiedBinaryName(), e);
+          "Error generating source for type " + type.getDeclaration().getQualifiedBinaryName(), e);
     }
   }
 
   private void renderImports() {
-    TypeDeclaration selfTypeDeclaration = type.getDescriptor();
+    TypeDeclaration selfTypeDeclaration = type.getDeclaration();
 
     // goog.module(...) declaration.
     sourceBuilder.appendln("goog.module('" + selfTypeDeclaration.getImplModuleName() + "');");
-    if (declareLegacyNamespace && type.getDescriptor().isJsType() && !(type.isAnonymous())) {
+    if (declareLegacyNamespace && type.getDeclaration().isJsType() && !(type.isAnonymous())) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
@@ -191,8 +191,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else if (type.isInterface()) {
       sourceBuilder.appendLines("/**", " * @interface");
       sourceBuilder.newLine();
-      if (type.getDescriptor().hasTypeParameters()) {
-        String templates = getJsDocNames(type.getDescriptor().getTypeParameterDescriptors());
+      if (type.getDeclaration().hasTypeParameters()) {
+        String templates = getJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
@@ -204,8 +204,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       if (type.isAbstract()) {
         buffer.appendln(" * @abstract");
       }
-      if (type.getDescriptor().hasTypeParameters()) {
-        String templates = getJsDocNames(type.getDescriptor().getTypeParameterDescriptors());
+      if (type.getDeclaration().hasTypeParameters()) {
+        String templates = getJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
         buffer.appendln(" * @template " + templates);
       }
       if (type.getSuperTypeDescriptor() != null
@@ -231,7 +231,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append("class " + className + " " + extendsClause);
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    environment.setEnclosingTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor());
+    environment.setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor());
     renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
@@ -300,12 +300,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(" * @template " + templateParamNames);
     }
 
-    if (type.getDescriptor().isJsFunctionImplementation()
+    if (type.getDeclaration().isJsFunctionImplementation()
         && method.getDescriptor().isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
         && !method.getDescriptor().getName().startsWith("$ctor")) {
       sourceBuilder.appendln(
-          " * @this {" + getJsDocName(type.getDescriptor().getUnsafeTypeDescriptor()) + "}");
+          " * @this {" + getJsDocName(type.getDeclaration().getUnsafeTypeDescriptor()) + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
       sourceBuilder.appendln(
@@ -375,14 +375,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $isInstance(instance) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    if (type.getDescriptor().isJsFunctionImplementation()) {
+    if (type.getDeclaration().isJsFunctionImplementation()) {
       sourceBuilder.appendln("return instance != null && instance.$is__" + mangledTypeName + ";");
     } else {
       String className =
           environment.aliasForType(
               type.isJsOverlayImplementation()
                   ? type.getNativeTypeDescriptor().getRawTypeDescriptor()
-                  : type.getDescriptor().getUnsafeTypeDescriptor());
+                  : type.getDeclaration().getUnsafeTypeDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
     }
     sourceBuilder.closeBrace();
@@ -403,7 +403,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     if (type.isJsOverlayImplementation()) {
       sourceBuilder.append("return true;");
-    } else if (type.getDescriptor().isJsFunctionInterface()) {
+    } else if (type.getDeclaration().isJsFunctionInterface()) {
       sourceBuilder.append("return instance != null && typeof instance == \"function\";");
     } else {
       sourceBuilder.append(
@@ -448,7 +448,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO: Move this to the ast in a normalization pass.
   // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
   private void renderCopyMethod() {
-    if (!type.getDescriptor().isJsFunctionImplementation()) {
+    if (!type.getDeclaration().isJsFunctionImplementation()) {
       return; // Only render the $copy method for jsfunctions
     }
     sourceBuilder.appendLines(
@@ -480,10 +480,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String name = null;
     if (type.isJsOverlayImplementation()) {
       name = type.getNativeTypeDescriptor().getQualifiedJsName();
-    } else if (type.getDescriptor().isJsFunctionInterface()) {
+    } else if (type.getDeclaration().isJsFunctionInterface()) {
       name = "Function";
     } else {
-      name = type.getDescriptor().getQualifiedBinaryName();
+      name = type.getDeclaration().getQualifiedBinaryName();
     }
 
     String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";

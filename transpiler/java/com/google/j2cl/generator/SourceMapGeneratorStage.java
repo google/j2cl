@@ -96,7 +96,7 @@ public class SourceMapGeneratorStage {
           toFilePosition(javaScriptSourcePosition.getEndFilePosition()));
     }
     StringBuilder sb = new StringBuilder();
-    String typeName = type.getDescriptor().getSimpleBinaryName();
+    String typeName = type.getDeclaration().getSimpleBinaryName();
     sourceMapGenerator.appendTo(sb, typeName + JavaScriptImplGenerator.FILE_SUFFIX);
     return sb.toString();
   }

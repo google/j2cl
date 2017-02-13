@@ -1028,38 +1028,38 @@ public class AstUtils {
    * TypeDeclaration, the arguments of a TypeDescriptor, etc.
    */
   public static Set<TypeDescriptor> getAllTypeVariables(Node node) {
-    final Set<TypeDescriptor> typeArguments = new LinkedHashSet<>();
+    final Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
     node.accept(
         new AbstractVisitor() {
           @Override
           public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
-            typeArguments.addAll(typeDeclaration.getUnsafeTypeDescriptor().getAllTypeVariables());
+            typeVariables.addAll(typeDeclaration.getUnsafeTypeDescriptor().getAllTypeVariables());
             return false;
           }
 
           @Override
           public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-            typeArguments.addAll(typeDescriptor.getAllTypeVariables());
+            typeVariables.addAll(typeDescriptor.getAllTypeVariables());
             return false;
           }
 
           @Override
           public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
-            typeArguments.addAll(fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
+            typeVariables.addAll(fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
             return false;
           }
 
           @Override
           public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
-            typeArguments.addAll(methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
+            typeVariables.addAll(methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
             for (TypeDescriptor parameterTypeDescriptor :
                 methodDescriptor.getParameterTypeDescriptors()) {
-              typeArguments.addAll(parameterTypeDescriptor.getAllTypeVariables());
+              typeVariables.addAll(parameterTypeDescriptor.getAllTypeVariables());
             }
             return false;
           }
         });
-    return typeArguments;
+    return typeVariables;
   }
 
   public static String getSimpleSourceName(List<String> classComponents) {

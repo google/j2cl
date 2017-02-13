@@ -138,7 +138,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // not delegate to any other constructor method in the current class.
       if (!AstUtils.isDelegatedConstructorCall(
           AstUtils.getConstructorInvocation(method),
-          getCurrentType().getDescriptor().getUnsafeTypeDescriptor())) {
+          getCurrentType().getDeclaration().getUnsafeTypeDescriptor())) {
         Method.Builder methodBuilder = Method.Builder.from(method);
         int i = 0;
         for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
@@ -210,7 +210,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     public RewriteNestedClassInvocations(CompilationUnit compilationUnit) {
       for (Type type : compilationUnit.getTypes()) {
         capturedVariablesByCapturingTypeName.putAll(
-            type.getDescriptor().getQualifiedSourceName(),
+            type.getDeclaration().getQualifiedSourceName(),
             Streams.stream(type.getInstanceFields())
                 .map(Field::getCapturedVariable)
                 .filter(Predicates.notNull())
@@ -243,7 +243,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
       MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
       if (AstUtils.isDelegatedConstructorCall(
-          methodCall, getCurrentType().getDescriptor().getUnsafeTypeDescriptor())) {
+          methodCall, getCurrentType().getDeclaration().getUnsafeTypeDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
 
@@ -297,7 +297,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           // If the capturedVariable is also a captured variable in current type,
           // pass the corresponding field in current type as an argument.
           Builder.from(capturingField.getDescriptor())
-              .setQualifier(new ThisReference(type.getDescriptor().getUnsafeTypeDescriptor()))
+              .setQualifier(new ThisReference(type.getDeclaration().getUnsafeTypeDescriptor()))
               .build()
           // otherwise, the captured variable is in the scope of the current type,
           // so pass the variable directly as an argument.

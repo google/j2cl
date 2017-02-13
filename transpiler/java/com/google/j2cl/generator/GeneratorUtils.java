@@ -41,7 +41,7 @@ import java.nio.file.attribute.FileTime;
 public class GeneratorUtils {
   /** Returns the relative output path for a given type. */
   public static String getRelativePath(Type type) {
-    TypeDeclaration typeDeclaration = type.getDescriptor();
+    TypeDeclaration typeDeclaration = type.getDeclaration();
     String typeName = typeDeclaration.getSimpleBinaryName();
     String packageName = typeDeclaration.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
@@ -49,7 +49,7 @@ public class GeneratorUtils {
 
   /** Returns the absolute binary path for a given type. */
   public static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
-    TypeDeclaration typeDeclaration = type.getDescriptor();
+    TypeDeclaration typeDeclaration = type.getDeclaration();
     String typeName = typeDeclaration.getSimpleBinaryName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }

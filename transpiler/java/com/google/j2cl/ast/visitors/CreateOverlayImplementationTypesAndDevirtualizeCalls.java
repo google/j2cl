@@ -111,7 +111,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     static void applyTo(CompilationUnit compilationUnit) {
       for (Type type : compilationUnit.getTypes()) {
-        TypeDescriptor typeDescriptor = type.getDescriptor().getUnsafeTypeDescriptor();
+        TypeDescriptor typeDescriptor = type.getDeclaration().getUnsafeTypeDescriptor();
         TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
         // The only classes that should have bridges added are regular classes that are the
         // immediate subclass a native JsType class.
@@ -162,7 +162,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           replacementTypeList.add(type);
         }
 
-        if (type.getDescriptor().isNative() || type.getDescriptor().declaresDefaultMethods()) {
+        if (type.getDeclaration().isNative() || type.getDeclaration().declaresDefaultMethods()) {
           replacementTypeList.add(createOverlayImplementationType(type));
         }
       }
@@ -173,10 +173,10 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     static Type createOverlayImplementationType(Type type) {
       TypeDescriptor overlayImplTypeDescriptor =
           TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-              type.getDescriptor().getUnsafeTypeDescriptor());
+              type.getDeclaration().getUnsafeTypeDescriptor());
       Type overlayClass =
           new Type(type.getVisibility(), overlayImplTypeDescriptor.getTypeDeclaration());
-      overlayClass.setNativeTypeDescriptor(type.getDescriptor().getUnsafeTypeDescriptor());
+      overlayClass.setNativeTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor());
       overlayClass.setSourcePosition(type.getSourcePosition());
 
       for (Member member : type.getMembers()) {

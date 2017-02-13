@@ -69,8 +69,8 @@ public class EnumMethodsCreator {
   }
 
   private EnumMethodsCreator(Type enumType) {
-    boolean jsType = enumType.getDescriptor().isJsType();
-    TypeDescriptor enumTypeDescriptor = enumType.getDescriptor().getUnsafeTypeDescriptor();
+    boolean jsType = enumType.getDeclaration().isJsType();
+    TypeDescriptor enumTypeDescriptor = enumType.getDeclaration().getUnsafeTypeDescriptor();
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
@@ -149,7 +149,7 @@ public class EnumMethodsCreator {
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
-            .setParameterTypeDescriptors(enumType.getDescriptor().getUnsafeTypeDescriptor())
+            .setParameterTypeDescriptors(enumType.getDeclaration().getUnsafeTypeDescriptor())
             .build();
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -157,7 +157,7 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(GET_VALUE_METHOD_NAME)
-            .setReturnTypeDescriptor(enumType.getDescriptor().getUnsafeTypeDescriptor())
+            .setReturnTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
             .setParameterTypeDescriptors(
                 nameParameter.getTypeDescriptor(),
                 namesToValuesMapFieldDescriptor.getTypeDescriptor())
@@ -196,7 +196,7 @@ public class EnumMethodsCreator {
         ReturnStatement.newBuilder()
             .setExpression(getMethodCall)
             .setTypeDescriptor(
-                TypeDescriptors.getForArray(enumType.getDescriptor().getUnsafeTypeDescriptor(), 1))
+                TypeDescriptors.getForArray(enumType.getDeclaration().getUnsafeTypeDescriptor(), 1))
             .build();
 
     return Method.newBuilder()
@@ -226,7 +226,7 @@ public class EnumMethodsCreator {
             .collect(Collectors.toList());
 
     TypeDescriptor arrayTypeDescriptor =
-        TypeDescriptors.getForArray(enumType.getDescriptor().getUnsafeTypeDescriptor(), 1);
+        TypeDescriptors.getForArray(enumType.getDeclaration().getUnsafeTypeDescriptor(), 1);
 
     return Method.newBuilder()
         .setMethodDescriptor(valuesMethodDescriptor)
