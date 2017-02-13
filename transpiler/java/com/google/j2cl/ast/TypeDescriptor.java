@@ -804,7 +804,18 @@ public abstract class TypeDescriptor extends Node
 
       // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
       // type descriptor that does not make sense.
-      return interner.intern(typeDescriptor);
+      TypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
+
+      // Make sure there is only one global namespace TypeDescriptor (see b/32903150).
+      checkArgument(
+          internedTypeDescriptor.getQualifiedJsName() == null
+              || !internedTypeDescriptor.getQualifiedJsName().isEmpty()
+              || TypeDescriptors.GLOBAL_NAMESPACE == null
+              || internedTypeDescriptor == TypeDescriptors.GLOBAL_NAMESPACE,
+          "Attempt to build type descriptor %s for the global scope that is not %s.",
+          internedTypeDescriptor,
+          TypeDescriptors.GLOBAL_NAMESPACE);
+      return internedTypeDescriptor;
     }
 
     public static Builder from(final TypeDescriptor typeDescriptor) {

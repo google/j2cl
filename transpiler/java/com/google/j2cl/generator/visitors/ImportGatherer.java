@@ -179,8 +179,7 @@ public class ImportGatherer extends AbstractVisitor {
 
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
-    if (TypeDescriptors.toNonNullable(TypeDescriptors.get().primitiveLong)
-        .equals(TypeDescriptors.toNonNullable(typeDescriptor))) {
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
       addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
       addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
       return;
