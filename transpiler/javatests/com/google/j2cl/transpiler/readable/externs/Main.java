@@ -33,8 +33,7 @@ public class Main {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   public static class TopLevelExtern {
-    // Uncomment once b/35335115 is fixed.
-    //@JsType(isNative = true)
+    @JsType(isNative = true)
     public static class InnerExtern {}
 
     @JsType(

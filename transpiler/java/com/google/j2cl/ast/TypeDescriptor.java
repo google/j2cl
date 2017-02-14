@@ -303,7 +303,17 @@ public abstract class TypeDescriptor extends Node
   }
 
   public boolean isExtern() {
-    return JsUtils.isGlobal(getJsNamespace()) && isNative();
+    return isNative() && hasExternNamespace();
+  }
+
+  private boolean hasExternNamespace() {
+    checkArgument(isNative());
+    // A native type descriptor is an extern if its namespace is the global namespace or if
+    // it inherited the namespace from its (enclosing) extern type.
+    return JsUtils.isGlobal(getJsNamespace())
+        || (getEnclosingTypeDescriptor() != null
+            && getEnclosingTypeDescriptor().isExtern()
+            && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
