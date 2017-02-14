@@ -54,7 +54,7 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
               .build();
         }
         // In other casting context, narrowing reference conversion should have been
-        // explicitlyapplied.
+        // explicitly applied.
         return castExpression;
       }
     };

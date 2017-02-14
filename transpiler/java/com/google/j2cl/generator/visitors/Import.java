@@ -69,4 +69,9 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
   public int compareTo(Import that) {
     return this.getImplModulePath().compareTo(that.getImplModulePath());
   }
+
+  @Override
+  public String toString() {
+    return alias + " => " + typeDescriptor;
+  }
 }

@@ -220,7 +220,7 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Variable> jsConstructorParameters = AstUtils.clone(primaryConstructor.getParameters());
     List<Expression> arguments = AstUtils.getReferences(jsConstructorParameters);
 
-    List<Statement> body = AstUtils.generateFieldDeclarations(type);
+    List<Statement> body = AstUtils.generateInstanceFieldDeclarationStatements(type);
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(primaryConstructor.getDescriptor());
@@ -269,7 +269,7 @@ public class NormalizeConstructors extends NormalizationPass {
       return null;
     }
 
-    List<Statement> body = AstUtils.generateFieldDeclarations(type);
+    List<Statement> body = AstUtils.generateInstanceFieldDeclarationStatements(type);
 
     if (type.getDeclaration().getSuperTypeDescriptor() != null) {
       body.add(0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement());

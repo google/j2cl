@@ -800,28 +800,23 @@ public class AstUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static List<Statement> generateFieldDeclarations(Type type) {
-    List<Statement> fieldInits = new ArrayList<>();
-    for (Field field : type.getFields()) {
-      if (field.getDescriptor().isStatic()) {
-        continue;
-      }
-      Statement declaration =
-          JsDocAnnotatedExpression.newBuilder()
-              .setExpression(
-                  BinaryExpression.newBuilder()
-                      .setTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-                      .setLeftOperand(FieldAccess.Builder.from(field).build())
-                      .setOperator(BinaryOperator.ASSIGN)
-                      .setRightOperand(getInitialValue(field))
-                      .build())
-              .setAnnotationType(field.getDescriptor().getTypeDescriptor())
-              .setIsDeclaration(true)
-              .build()
-              .makeStatement();
-      fieldInits.add(declaration);
-    }
-    return fieldInits;
+  public static List<Statement> generateInstanceFieldDeclarationStatements(Type type) {
+    return type.getFields()
+        .stream()
+        .filter(field -> !field.getDescriptor().isStatic())
+        .map(
+            field ->
+                JsDocAnnotatedExpression.newBuilder()
+                    .setExpression(
+                        BinaryExpression.Builder.asAssignmentTo(
+                                FieldAccess.Builder.from(field).build())
+                            .setRightOperand(getInitialValue(field))
+                            .build())
+                    .setAnnotationType(field.getDescriptor().getTypeDescriptor())
+                    .setIsDeclaration(true)
+                    .build()
+                    .makeStatement())
+        .collect(toList());
   }
 
   /**
