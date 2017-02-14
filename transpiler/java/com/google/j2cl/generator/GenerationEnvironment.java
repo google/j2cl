@@ -40,7 +40,9 @@ public class GenerationEnvironment {
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     JsDocNameUtils.init();
     for (Import anImport : imports) {
-      aliasByTypeBinaryName.put(anImport.getElement().getQualifiedJsName(), anImport.getAlias());
+      String alias = anImport.getAlias();
+      checkArgument(alias != null && !alias.isEmpty(), "Bad alias for %s", anImport.getElement());
+      aliasByTypeBinaryName.put(anImport.getElement().getQualifiedJsName(), alias);
     }
     this.aliasByVariable = aliasByVariable;
   }

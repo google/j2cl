@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -193,7 +194,7 @@ public class OutputGeneratorStage {
   private void gatherDepinfo(
       Type type, Set<String> importModulePaths, Set<String> exportModulePaths) {
     // Gather imports.
-    Map<ImportCategory, Set<Import>> importsByCategory = ImportGatherer.gatherImports(type);
+    Multimap<ImportCategory, Import> importsByCategory = ImportGatherer.gatherImports(type);
     for (ImportCategory importCategory : ImportCategory.values()) {
       // Don't record use of the environment, it is not considered a dependency.
       if (importCategory == ImportCategory.EXTERN) {

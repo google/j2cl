@@ -41,14 +41,10 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
   public static Map<Variable, String> gatherVariableAliases(Iterable<Import> imports, Type type) {
     final Set<String> forbiddenNames =
         Streams.stream(imports)
-            .map(
-                anImport -> {
-                  if (!anImport.getElement().isExtern()) {
-                    return anImport.getAlias();
-                  }
-                  // Collect the top level name for the extern.
-                  return anImport.getElement().getQualifiedJsName().split("\\\\.")[0];
-                })
+            // Take the first component of the alias. Most aliases are not qualified names, but
+            // externs might be qualified names and only the first component needs to be considered
+            // to avoid top level name clashes.
+            .map(anImport -> anImport.getAlias().split("\\\\.")[0])
             .collect(toImmutableSet());
 
     final Multimap<Member, String> variableAliasesByMember = HashMultimap.create();

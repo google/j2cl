@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
@@ -26,11 +27,10 @@ import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
 import com.google.j2cl.problems.Problems;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * A base class for JavaScript source generators. We may have two subclasses, which are
@@ -38,8 +38,8 @@ import java.util.Set;
  */
 public abstract class JavaScriptGenerator {
   protected final Type type;
-  protected GenerationEnvironment environment;
-  protected Map<ImportCategory, Set<Import>> importsByCategory;
+  protected final GenerationEnvironment environment;
+  protected final Multimap<ImportCategory, Import> importsByCategory;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
   protected final Problems problems;
   protected final boolean declareLegacyNamespace;
@@ -49,8 +49,7 @@ public abstract class JavaScriptGenerator {
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.type = type;
     importsByCategory = ImportGatherer.gatherImports(type);
-    Set<Import> imports = new LinkedHashSet<>();
-    Iterables.addAll(imports, Iterables.concat(importsByCategory.values()));
+    Collection<Import> imports = importsByCategory.values();
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(imports, type);
     environment = new GenerationEnvironment(imports, aliasByVariable);
