@@ -1,0 +1,45 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.externs.Main$TopLevelExtern$Inner$$Overlay.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.Inner$$Overlay$impl');
+
+
+let Inner = goog.require('com.google.j2cl.transpiler.readable.externs.Main.FooImpl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class Inner$$Overlay {
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Inner;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Inner$$Overlay.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadata(
+    Inner$$Overlay,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.externs.Main.FooImpl'));
+
+
+/**
+ * Export class.
+ */
+exports = Inner$$Overlay;
+//# sourceMappingURL=Main$TopLevelExtern$Inner$$Overlay.js.map
