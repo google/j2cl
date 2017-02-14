@@ -42,7 +42,7 @@ public class GenerationEnvironment {
     for (Import anImport : imports) {
       String alias = anImport.getAlias();
       checkArgument(alias != null && !alias.isEmpty(), "Bad alias for %s", anImport.getElement());
-      aliasByTypeBinaryName.put(anImport.getElement().getQualifiedJsName(), alias);
+      aliasByTypeBinaryName.put(anImport.getElement().getQualifiedBinaryName(), alias);
     }
     this.aliasByVariable = aliasByVariable;
   }
@@ -56,11 +56,11 @@ public class GenerationEnvironment {
 
   public String aliasForType(TypeDeclaration typeDeclaration) {
     checkState(
-        aliasByTypeBinaryName.containsKey(typeDeclaration.getQualifiedJsName()),
+        aliasByTypeBinaryName.containsKey(typeDeclaration.getQualifiedBinaryName()),
         "An alias was needed for %s but no alias was found.",
         typeDeclaration);
 
-    return aliasByTypeBinaryName.get(typeDeclaration.getQualifiedJsName());
+    return aliasByTypeBinaryName.get(typeDeclaration.getQualifiedBinaryName());
   }
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
