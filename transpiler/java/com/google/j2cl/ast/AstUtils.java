@@ -878,7 +878,7 @@ public class AstUtils {
         new AbstractVisitor() {
           @Override
           public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
-            typeVariables.addAll(typeDeclaration.getUnsafeTypeDescriptor().getAllTypeVariables());
+            typeVariables.addAll(typeDeclaration.getTypeParameterDescriptors());
             return false;
           }
 

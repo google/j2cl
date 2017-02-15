@@ -818,6 +818,11 @@ public abstract class TypeDeclaration extends Node
           !typeDeclaration.isJsFunctionImplementation()
               || !typeDeclaration.isFunctionalInterface());
 
+      checkState(
+          typeDeclaration
+              .getTypeParameterDescriptors()
+              .stream()
+              .allMatch(TypeDescriptor::isTypeVariable));
       return interner.intern(typeDeclaration);
     }
 

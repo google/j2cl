@@ -452,7 +452,8 @@ public class TypeDescriptors {
             superTypeDescriptor,
             packageName,
             classComponents,
-            typeArgumentDescriptors,
+            // Type declaration for native descriptors do not introduce type variables.
+            Collections.emptyList(),
             jsNamespace,
             jsName,
             kind,
@@ -479,12 +480,8 @@ public class TypeDescriptors {
     checkArgument(!originalTypeDescriptor.isArray());
     checkArgument(!originalTypeDescriptor.isTypeVariable());
     checkArgument(!originalTypeDescriptor.isUnion());
-    TypeDeclaration typeDeclaration =
-        TypeDeclaration.replaceTypeParameterDescriptors(
-            originalTypeDescriptor.getTypeDeclaration(), typeArgumentTypeDescriptors);
     return TypeDescriptor.Builder.from(originalTypeDescriptor)
         .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
-        .setTypeDeclaration(typeDeclaration)
         .build();
   }
 
