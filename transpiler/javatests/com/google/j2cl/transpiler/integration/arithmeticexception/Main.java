@@ -110,16 +110,15 @@ public class Main {
       // do nothing.
     }
 
-    // Uncomment once b/28875322 is fixed.
-    // try {
-    //   @SuppressWarnings("unused")
-    //   int a = 10;
-    //   int b = 0;
-    //   a %= b;
-    //   assert false : "failed to throw ArithmeticException";
-    // } catch (ArithmeticException e) {
-    //  // do nothing.
-    // }
+    try {
+      @SuppressWarnings("unused")
+      int a = 10;
+      int b = 0;
+      a %= b;
+      assert false : "failed to throw ArithmeticException";
+    } catch (ArithmeticException e) {
+      // do nothing.
+    }
 
     try {
       short a = 10;

@@ -128,8 +128,10 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     }
 
     TypeDescriptor targetTypeDescriptor = targetExpression.getTypeDescriptor();
-    if (operator == BinaryOperator.DIVIDE_ASSIGN && needsIntegralCoersion(targetTypeDescriptor)) {
-      // Integral division always needs expansion for truncation and DivByZero checks.
+    if ((operator == BinaryOperator.DIVIDE_ASSIGN || operator == BinaryOperator.REMAINDER_ASSIGN)
+        && needsIntegralCoersion(targetTypeDescriptor)) {
+      // Integral division and remainder always need expansion for truncation and/or division by
+      // zero check insertion.
       return true;
     }
 
