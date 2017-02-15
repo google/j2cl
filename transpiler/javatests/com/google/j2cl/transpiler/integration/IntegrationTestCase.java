@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -73,6 +74,31 @@ public class IntegrationTestCase extends TestCase {
 
     public File getOutputLocation() {
       return outputLocation;
+    }
+
+    public void assertCompileFails(String... expectedErrors) throws Exception {
+      List<String> errors = getProblems().getErrors();
+      assertTrue(
+          "Expected "
+              + expectedErrors.length
+              + " error(s) but there were actually "
+              + errors.size()
+              + " error(s)  "
+              + "expected:<"
+              + Arrays.toString(expectedErrors)
+              + "> "
+              + "actual:<"
+              + errors
+              + ">.",
+          errors.size() == expectedErrors.length);
+      for (String expectedError : expectedErrors) {
+        assertErrorsContainsSnippet(getProblems(), expectedError);
+      }
+    }
+
+    public void assertCompileSucceeds() throws Exception {
+      assertTrue(
+          "Expected no errors but got " + getProblems().getErrors(), !getProblems().hasErrors());
     }
   }
 

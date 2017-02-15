@@ -15,34 +15,22 @@
  */
 package com.google.j2cl.transpiler.integration;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
-import com.google.common.io.Files;
+import com.google.common.collect.Lists;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Tests for JsInteropRestrictionsChecker.
  */
 public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
-  public static String[] extraArgs = {"-source", "1.8", "-encoding", "UTF-8", "-cp", JRE_PATH};
-
-  protected File inputDir;
-  protected File outputDir;
-
-  @Override
-  protected void setUp() throws IOException {
-    File tempDir = Files.createTempDir();
-    inputDir = new File(tempDir, "input");
-    inputDir.mkdir();
-    outputDir = new File(tempDir, "output");
-    outputDir.mkdir();
-  }
 
   //  // TODO: eventually test this for default methods in Java 8.
   //  public void testCollidingAccidentalOverrideConcreteMethodFails() throws Exception {
@@ -72,31 +60,25 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testCollidingAccidentalOverrideAbstractMethodFails() throws Exception {
-    File sourcePackage = createPackage("collidingaccidentaloverrideabstractmethodfails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingaccidentaloverrideabstractmethodfails;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "interface Foo {",
-        "  void doIt(Foo foo);",
-        "}",
-        "@JsType",
-        "interface Bar {",
-        "  void doIt(Bar bar);",
-        "}",
-        "abstract class Baz implements Foo, Bar {",
-        "  public abstract void doIt(Foo foo);",
-        "  public abstract void doIt(Bar bar);",
-        "}",
-        "public class Buggy {}  // Unrelated class");
-
-    assertCompileFails(
-        sourcePackage,
-        "'void Baz.doIt(Bar)' and "
-            + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "interface Foo {",
+            "  void doIt(Foo foo);",
+            "}",
+            "@JsType",
+            "interface Bar {",
+            "  void doIt(Bar bar);",
+            "}",
+            "abstract class Baz implements Foo, Bar {",
+            "  public abstract void doIt(Foo foo);",
+            "  public abstract void doIt(Bar bar);",
+            "}",
+            "public class Buggy {}  // Unrelated class")
+        .assertCompileFails(
+            "'void Baz.doIt(Bar)' and "
+                + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
   }
 
   //  public void testCollidingAccidentalOverrideHalfAndHalfFails() throws Exception {
@@ -142,43 +124,33 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testJsPropertyNonGetterStyleSucceeds() throws Exception {
-    File sourcePackage = createPackage("jspropertynongetterstylesucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jspropertynongetterstylesucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType",
-        "public interface Buggy {",
-        "  @JsProperty(name = \"x\") int x();",
-        "  @JsProperty(name = \"x\") void x(int x);",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType",
+            "public interface Buggy {",
+            "  @JsProperty(name = \"x\") int x();",
+            "  @JsProperty(name = \"x\") void x(int x);",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
-    File sourcePackage = createPackage("jspropertygetterstylesucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jspropertygetterstylesucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType",
-        "public abstract class Buggy {",
-        "  @JsProperty static native int getStaticX();",
-        "  @JsProperty static native void setStaticX(int x);",
-        "  @JsProperty abstract int getX();",
-        "  @JsProperty abstract void setX(int x);",
-        "  @JsProperty abstract boolean isY();",
-        "  @JsProperty abstract void setY(boolean y);",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType",
+            "public abstract class Buggy {",
+            "  @JsProperty static native int getStaticX();",
+            "  @JsProperty static native void setStaticX(int x);",
+            "  @JsProperty abstract int getX();",
+            "  @JsProperty abstract void setX(int x);",
+            "  @JsProperty abstract boolean isY();",
+            "  @JsProperty abstract void setY(boolean y);",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testJsPropertyIncorrectGetterStyleFails() throws Exception {
@@ -235,101 +207,79 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
-    File sourcePackage = createPackage("collidingjspropertiestwogettersfails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingjspropertiestwogettersfails;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType",
-        "public interface Buggy {",
-        "  @JsProperty",
-        "  boolean isX();",
-        "  @JsProperty",
-        "  boolean getX();",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
-            + "cannot both use the same JavaScript name 'x'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType",
+            "public interface Buggy {",
+            "  @JsProperty",
+            "  boolean isX();",
+            "  @JsProperty",
+            "  boolean getX();",
+            "}")
+        .assertCompileFails(
+            "'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
+                + "cannot both use the same JavaScript name 'x'.");
   }
 
   public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
-    File sourcePackage = createPackage("collidingjspropertiestwosettersfails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingjspropertiestwosettersfails;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType",
-        "public interface Buggy {",
-        "  @JsProperty",
-        "  void setX(boolean x);",
-        "  @JsProperty",
-        "  void setX(int x);",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'void Buggy.setX(int)' and "
-            + "'void Buggy.setX(boolean)' cannot both use the same JavaScript name 'x'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType",
+            "public interface Buggy {",
+            "  @JsProperty",
+            "  void setX(boolean x);",
+            "  @JsProperty",
+            "  void setX(int x);",
+            "}")
+        .assertCompileFails(
+            "'void Buggy.setX(int)' and "
+                + "'void Buggy.setX(boolean)' cannot both use the same JavaScript name 'x'.");
   }
 
   public void testCollidingJsMethodAndJsPropertyGetterFails() throws Exception {
-    File sourcePackage = createPackage("collidingjsmethodandjspropertygetterfails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingjsmethodandjspropertygetterfails;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsProperty;",
-        "interface IBuggy {",
-        "  @JsMethod",
-        "  boolean x(boolean foo);",
-        "  @JsProperty",
-        "  int getX();",
-        "}",
-        "public class Buggy implements IBuggy {",
-        "  public boolean x(boolean foo) {return false;}",
-        "  public int getX() {return 0;}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'int IBuggy.getX()' and 'boolean IBuggy.x(boolean)' "
-            + "cannot both use the same JavaScript name 'x'.",
-        "'int Buggy.getX()' and 'boolean Buggy.x(boolean)' "
-            + "cannot both use the same JavaScript name 'x'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "interface IBuggy {",
+            "  @JsMethod",
+            "  boolean x(boolean foo);",
+            "  @JsProperty",
+            "  int getX();",
+            "}",
+            "public class Buggy implements IBuggy {",
+            "  public boolean x(boolean foo) {return false;}",
+            "  public int getX() {return 0;}",
+            "}")
+        .assertCompileFails(
+            "'int IBuggy.getX()' and 'boolean IBuggy.x(boolean)' "
+                + "cannot both use the same JavaScript name 'x'.",
+            "'int Buggy.getX()' and 'boolean Buggy.x(boolean)' "
+                + "cannot both use the same JavaScript name 'x'.");
   }
 
   public void testCollidingJsMethodAndJsPropertySetterFails() throws Exception {
-    File sourcePackage = createPackage("collidingjsmethodandjspropertysetterfails");
+    TranspileResult result =
+        compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "interface IBuggy {",
+            "  @JsMethod",
+            "  boolean x(boolean foo);",
+            "  @JsProperty",
+            "  void setX(int a);",
+            "}",
+            "public class Buggy implements IBuggy {",
+            "  public boolean x(boolean foo) {return false;}",
+            "  public void setX(int a) {}",
+            "}");
 
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingjsmethodandjspropertysetterfails;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsProperty;",
-        "interface IBuggy {",
-        "  @JsMethod",
-        "  boolean x(boolean foo);",
-        "  @JsProperty",
-        "  void setX(int a);",
-        "}",
-        "public class Buggy implements IBuggy {",
-        "  public boolean x(boolean foo) {return false;}",
-        "  public void setX(int a) {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
+    result.assertCompileFails(
         "'void IBuggy.setX(int)' and 'boolean IBuggy.x(boolean)' "
             + "cannot both use the same JavaScript name 'x'.",
         "'void Buggy.setX(int)' and 'boolean Buggy.x(boolean)' "
@@ -405,43 +355,31 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testCollidingMethodToFieldJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("collidingmethodtofieldjstypefails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingmethodtofieldjstypefails;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  public void show() {}",
-        "  public final int show = 0;",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'int Buggy.show' and 'void Buggy.show()' "
-            + "cannot both use the same JavaScript name 'show'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  public void show() {}",
+            "  public final int show = 0;",
+            "}")
+        .assertCompileFails(
+            "'int Buggy.show' and 'void Buggy.show()' "
+                + "cannot both use the same JavaScript name 'show'.");
   }
 
   public void testCollidingMethodToMethodJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("collidingmethodtomethodjstypefails");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingmethodtomethodjstypefails;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  public void show(int x) {}",
-        "  public void show() {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'void Buggy.show()' and 'void Buggy.show(int)' "
-            + "cannot both use the same JavaScript name 'show'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  public void show(int x) {}",
+            "  public void show() {}",
+            "}")
+        .assertCompileFails(
+            "'void Buggy.show()' and 'void Buggy.show(int)' "
+                + "cannot both use the same JavaScript name 'show'.");
   }
 
   //  public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
@@ -631,85 +569,65 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testNonCollidingSyntheticBridgeMethodSucceeds() throws Exception {
-    File sourcePackage = createPackage("noncollidingsyntheticbridgemethodsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package noncollidingsyntheticbridgemethodsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "interface Comparable<T> {",
-        "  int compareTo(T other);",
-        "}",
-        "@JsType",
-        "class Enum<E extends Enum<E>> implements Comparable<E> {",
-        "  public int compareTo(E other) {return 0;}",
-        "}",
-        "public class Buggy {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "interface Comparable<T> {",
+            "  int compareTo(T other);",
+            "}",
+            "@JsType",
+            "class Enum<E extends Enum<E>> implements Comparable<E> {",
+            "  public int compareTo(E other) {return 0;}",
+            "}",
+            "public class Buggy {}")
+        .assertCompileSucceeds();
   }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
-    File sourcePackage = createPackage("collidingsyntheticbridgemethodsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package collidingsyntheticbridgemethodsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "interface Comparable<T> {",
-        "  int compareTo(T other);",
-        "}",
-        "@JsType",
-        "class Enum<E extends Enum<E>> implements Comparable<E> {",
-        "  public int compareTo(E other) {return 0;}",
-        "}",
-        "public class Buggy {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "interface Comparable<T> {",
+            "  int compareTo(T other);",
+            "}",
+            "@JsType",
+            "class Enum<E extends Enum<E>> implements Comparable<E> {",
+            "  public int compareTo(E other) {return 0;}",
+            "}",
+            "public class Buggy {}")
+        .assertCompileSucceeds();
   }
 
   public void testSpecializeReturnTypeInImplementorSucceeds() throws Exception {
-    File sourcePackage = createPackage("specializereturntypeinimplementorsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package specializereturntypeinimplementorsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "interface I {",
-        "  I m();",
-        "}",
-        "@JsType",
-        "class Buggy implements I {",
-        "  public Buggy m() { return null; } ",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "interface I {",
+            "  I m();",
+            "}",
+            "@JsType",
+            "class Buggy implements I {",
+            "  public Buggy m() { return null; } ",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testSpecializeReturnTypeInSubclassSucceeds() throws Exception {
-    File sourcePackage = createPackage("specializereturntypeinsubclasssucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package specializereturntypeinsubclasssucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "class S {",
-        "  public S m() { return null; }",
-        "}",
-        "@JsType",
-        "public class Buggy extends S {",
-        "  public Buggy m() { return null; } ",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "class S {",
+            "  public S m() { return null; }",
+            "}",
+            "@JsType",
+            "public class Buggy extends S {",
+            "  public Buggy m() { return null; } ",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
@@ -831,27 +749,22 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testConsistentPropertyTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("consistentpropertytypesucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package consistentpropertytypesucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType",
-        "interface IBuggy {",
-        "  @JsProperty",
-        "  public int getFoo();",
-        "  @JsProperty",
-        "  public void setFoo(int value);",
-        "}",
-        "public class Buggy implements IBuggy {",
-        "  public int getFoo() {return 0;}",
-        "  public void setFoo(int value) {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType",
+            "interface IBuggy {",
+            "  @JsProperty",
+            "  public int getFoo();",
+            "  @JsProperty",
+            "  public void setFoo(int value);",
+            "}",
+            "public class Buggy implements IBuggy {",
+            "  public int getFoo() {return 0;}",
+            "  public void setFoo(int value) {}",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testInconsistentGetSetPropertyTypeFails() throws Exception {
@@ -1022,42 +935,31 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
-    File sourcePackage = createPackage("multipleprivateconstructorsexportsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package multipleprivateconstructorsexportsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  private Buggy() {}",
-        "  private Buggy(int a) {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  private Buggy() {}",
+            "  private Buggy(int a) {}",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testMultiplePublicConstructorsAllDelegatesToJsConstructorSucceeds() throws Exception {
-    File sourcePackage =
-        createPackage("multiplepublicconstructorsalldelegatestojsconstructorsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package multiplepublicconstructorsalldelegatestojsconstructorsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsIgnore;",
-        "@JsType",
-        "public class Buggy {",
-        "  public Buggy() {}",
-        "  @JsIgnore",
-        "  public Buggy(int a) {",
-        "    this();",
-        "  }",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsIgnore;",
+            "@JsType",
+            "public class Buggy {",
+            "  public Buggy() {}",
+            "  @JsIgnore",
+            "  public Buggy(int a) {",
+            "    this();",
+            "  }",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails()
@@ -1096,511 +998,399 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
-    File sourcePackage = createPackage("noncollidingaccidentaloverridesucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package noncollidingaccidentaloverridesucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "interface Foo {",
-        "  void doIt(Object foo);",
-        "}",
-        "class ParentParent {",
-        "  public void doIt(String x) {}",
-        "}",
-        "@JsType",
-        "class Parent extends ParentParent {",
-        "  public void doIt(Object x) {}",
-        "}",
-        "public class Buggy extends Parent implements Foo {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "interface Foo {",
+            "  void doIt(Object foo);",
+            "}",
+            "class ParentParent {",
+            "  public void doIt(String x) {}",
+            "}",
+            "@JsType",
+            "class Parent extends ParentParent {",
+            "  public void doIt(Object x) {}",
+            "}",
+            "public class Buggy extends Parent implements Foo {}")
+        .assertCompileSucceeds();
   }
 
   public void testJsNameInvalidNamesFails() throws Exception {
-    File sourcePackage = createPackage("jsnameinvalidnames");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsnameinvalidnames;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsPackage;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType(name = \"a.b.c\") public class Buggy {",
-        "   @JsMethod(name = \"34s\") public void m() {}",
-        "   @JsProperty(name = \"s^\") public int  m;",
-        "   @JsProperty(name = \"\") public int n;",
-        "   @JsProperty(namespace = JsPackage.GLOBAL, name = \"a.b.c.d\") public static int o;",
-        "}",
-        "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"*\")",
-        "class BadGlobalStar {",
-        "}",
-        "@JsType(namespace = JsPackage.GLOBAL, name = \"?\") interface BadGlobalWildcard {",
-        "}",
-        "@JsType(isNative = true, namespace = \"a.b\", name = \"*\") interface BadStar {",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'Buggy' has invalid name 'a.b.c'.",
-        "'void Buggy.m()' has invalid name '34s'.",
-        "'int Buggy.m' has invalid name 's^'.",
-        "'int Buggy.n' cannot have an empty name.",
-        "'int Buggy.o' has invalid name 'a.b.c.d'.",
-        "Only native interfaces in the global namespace can be named '*'.",
-        "Only native interfaces in the global namespace can be named '?'.",
-        "Only native interfaces in the global namespace can be named '*'.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsPackage;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType(name = \"a.b.c\") public class Buggy {",
+            "   @JsMethod(name = \"34s\") public void m() {}",
+            "   @JsProperty(name = \"s^\") public int  m;",
+            "   @JsProperty(name = \"\") public int n;",
+            "   @JsProperty(namespace = JsPackage.GLOBAL, name = \"a.b.c.d\") public static int o;",
+            "}",
+            "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"*\")",
+            "class BadGlobalStar {",
+            "}",
+            "@JsType(namespace = JsPackage.GLOBAL, name = \"?\") interface BadGlobalWildcard {",
+            "}",
+            "@JsType(isNative = true, namespace = \"a.b\", name = \"*\") interface BadStar {",
+            "}")
+        .assertCompileFails(
+            "'Buggy' has invalid name 'a.b.c'.",
+            "'void Buggy.m()' has invalid name '34s'.",
+            "'int Buggy.m' has invalid name 's^'.",
+            "'int Buggy.n' cannot have an empty name.",
+            "'int Buggy.o' has invalid name 'a.b.c.d'.",
+            "Only native interfaces in the global namespace can be named '*'.",
+            "Only native interfaces in the global namespace can be named '?'.",
+            "Only native interfaces in the global namespace can be named '*'.");
   }
 
   public void testJsNameInvalidNamespacesFails() throws Exception {
-    File sourcePackage = createPackage("jsnameinvalidnamespace");
+    TranspileResult result =
+        compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "@JsType(namespace = \"a.b.\") public class Buggy {",
+            "   @JsMethod(namespace = \"34s\") public static void m() {}",
+            "   @JsProperty(namespace = \"s^\") public static int  n;",
+            "   @JsMethod(namespace = \"\") public static void o() {}",
+            "   @JsProperty(namespace = \"\") public int p;",
+            "   @JsMethod(namespace = \"a\") public void q() {}",
+            "}");
 
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsnameinvalidnamespace;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsProperty;",
-        "@JsType(namespace = \"a.b.\") public class Buggy {",
-        "   @JsMethod(namespace = \"34s\") public static void m() {}",
-        "   @JsProperty(namespace = \"s^\") public static int  n;",
-        "   @JsMethod(namespace = \"\") public static void o() {}",
-        "   @JsProperty(namespace = \"\") public int p;",
-        "   @JsMethod(namespace = \"a\") public void q() {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
+    result.assertCompileFails(
         "'Buggy' has invalid namespace 'a.b.'.",
         "'void Buggy.m()' has invalid namespace '34s'.",
         "'int Buggy.n' has invalid namespace 's^'.",
         "'void Buggy.o()' cannot have an empty namespace.",
         "Instance member 'int Buggy.p' cannot declare a namespace.",
-        "Instance member 'void Buggy.q()' cannot declare a " + "namespace.");
+        "Instance member 'void Buggy.q()' cannot declare a namespace.");
   }
 
   public void testJsNameGlobalNamespacesSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsnameglobalnamespace");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsnameglobalnamespace;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsProperty;",
-        "import jsinterop.annotations.JsPackage;",
-        "@JsType(namespace = JsPackage.GLOBAL) public class Buggy {",
-        "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
-        "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
-        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public native static int o();",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "import jsinterop.annotations.JsPackage;",
+            "@JsType(namespace = JsPackage.GLOBAL) public class Buggy {",
+            "   @JsMethod(namespace = JsPackage.GLOBAL)",
+            "   public static void m() {}",
+            "   @JsProperty(namespace = JsPackage.GLOBAL)",
+            "   public static int  n;",
+            "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\")",
+            "   public native static int o();",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testSingleJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("singlejstype");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package singlejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  public static void show1() {}",
-        "  public void show2() {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  public static void show1() {}",
+            "  public void show2() {}",
+            "}")
+        .assertCompileSucceeds();
   }
-  
+
   public void testJsFunctionSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsfunctionsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Function.java",
-        "package jsfunctionsucceeds;",
-        "import jsinterop.annotations.JsFunction;",
-        "import jsinterop.annotations.JsOverlay;",
-        "@JsFunction",
-        "public interface Function {",
-        "  int getFoo();",
-        "  @JsOverlay",
-        "  static String s = new String();",
-        "  @JsOverlay",
-        "  default void m() {}",
-        "  @JsOverlay",
-        "  static void n() {}",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionsucceeds;",
-        "public final class Buggy implements Function {",
-        "  public int getFoo() { return 0; }",
-        "  public final void blah() {}",
-        "  public void blat() {}",
-        "  private void bleh() {}",
-        "  static void blet() {",
-        "    new Function() {",
-        "       public int getFoo() { return 0; }",
-        "    }.getFoo();",
-        "  }",
-        "  String x = new String();",
-        "  static int y;",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Function",
+                "import jsinterop.annotations.JsFunction;",
+                "import jsinterop.annotations.JsOverlay;",
+                "@JsFunction",
+                "public interface Function {",
+                "  int getFoo();",
+                "  @JsOverlay",
+                "  static String s = new String();",
+                "  @JsOverlay",
+                "  default void m() {}",
+                "  @JsOverlay",
+                "  static void n() {}",
+                "}"),
+            source(
+                "Buggy",
+                "public final class Buggy implements Function {",
+                "  public int getFoo() { return 0; }",
+                "  public final void blah() {}",
+                "  public void blat() {}",
+                "  private void bleh() {}",
+                "  static void blet() {",
+                "    new Function() {",
+                "       public int getFoo() { return 0; }",
+                "    }.getFoo();",
+                "  }",
+                "  String x = new String();",
+                "  static int y;",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   public void testJsFunctionOnClassFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctiononclass");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctiononclass;",
-        "import jsinterop.annotations.JsFunction;",
-        "@JsFunction",
-        "public class Buggy {",
-        "}");
-
-    assertCompileFails(sourcePackage, "JsFunction 'Buggy' has to be a functional interface.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsFunction;",
+            "@JsFunction",
+            "public class Buggy {",
+            "}")
+        .assertCompileFails("JsFunction 'Buggy' has to be a functional interface.");
   }
 
   public void testJsFunctionExtendsInterfaceFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionextendsinterface");
-
-    createSourceFile(
-        sourcePackage,
-        "AnotherInterface.java",
-        "package jsfunctionextendsinterface;",
-        "public interface AnotherInterface {}");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionextendsinterface;",
-        "import jsinterop.annotations.JsFunction;",
-        "@JsFunction",
-        "public interface Buggy extends AnotherInterface {",
-        "  void foo();",
-        "}");
-
-    assertCompileFails(sourcePackage, "JsFunction 'Buggy' cannot extend other interfaces.");
+    compile(
+            source("AnotherInterface", "public interface AnotherInterface {}"),
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction",
+                "public interface Buggy extends AnotherInterface {",
+                "  void foo();",
+                "}"))
+        .assertCompileFails("JsFunction 'Buggy' cannot extend other interfaces.");
   }
 
   public void testJsFunctionExtendedByInterfaceFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionextendedbyinterface");
-    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionextendedbyinterface");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionextendedbyinterface;",
-        "public interface Buggy extends MyJsFunctionInterface {}");
-
-    assertCompileFails(sourcePackage, "'Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.");
+    compile(
+            source("Buggy", "public interface Buggy extends MyJsFunctionInterface {}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileFails("'Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.");
   }
 
   public void testJsFunctionMarkedAsJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionmarkedasjstype");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionmarkedasjstype;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsFunction;",
-        "@JsFunction @JsType",
-        "public interface Buggy {",
-        "  void foo();",
-        "}");
-
-    assertCompileFails(
-        sourcePackage, "'Buggy' cannot be both a JsFunction and a JsType at the same" + " time.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsFunction;",
+            "@JsFunction @JsType",
+            "public interface Buggy {",
+            "  void foo();",
+            "}")
+        .assertCompileFails("'Buggy' cannot be both a JsFunction and a JsType at the same time.");
   }
 
   public void testJsFunctionImplementationWithSingleInterfaceSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsfunctionimplementationwithsingleinterface");
-    createJsFunctionInterfaceInPackage(
-        sourcePackage, "jsfunctionimplementationwithsingleinterface");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionimplementationwithsingleinterface;",
-        "public class Buggy implements MyJsFunctionInterface {",
-        "  public int foo(int x) { return 0; }",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "public class Buggy implements MyJsFunctionInterface {",
+                "  public int foo(int x) { return 0; }",
+                "}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   public void testJsFunctionImplementationWithMultipleSuperInterfacesFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionimplementationwithmultiplesuperinterfaces");
-    createJsFunctionInterfaceInPackage(
-        sourcePackage, "jsfunctionimplementationwithmultiplesuperinterfaces");
-
-    createSourceFile(
-        sourcePackage,
-        "AnotherInterface.java",
-        "package jsfunctionimplementationwithmultiplesuperinterfaces;",
-        "public interface AnotherInterface {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionimplementationwithmultiplesuperinterfaces;",
-        "public class Buggy implements MyJsFunctionInterface, AnotherInterface {",
-        "  public int foo(int x) { return 0; }",
-        "  public int bar(int x) { return 0; }",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsFunction implementation 'Buggy' cannot implement more than" + " one interface.");
+    compile(
+            source("AnotherInterface", "public interface AnotherInterface {}"),
+            source(
+                "Buggy",
+                "public class Buggy implements MyJsFunctionInterface, AnotherInterface {",
+                "  public int foo(int x) { return 0; }",
+                "  public int bar(int x) { return 0; }",
+                "}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileFails(
+            "JsFunction implementation 'Buggy' cannot implement more than one interface.");
   }
 
   public void testJsFunctionImplementationWithSuperClassFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionimplementationwithsuperclass");
-    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationwithsuperclass");
-
-    createSourceFile(
-        sourcePackage,
-        "BaseClass.java",
-        "package jsfunctionimplementationwithsuperclass;",
-        "public class BaseClass {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionimplementationwithsuperclass;",
-        "public class Buggy extends BaseClass implements MyJsFunctionInterface {",
-        "  public int foo(int x) { return 0; }",
-        "}");
-
-    assertCompileFails(sourcePackage, "JsFunction implementation 'Buggy' cannot extend a class.");
+    compile(
+            source("BaseClass", "public class BaseClass {}"),
+            source(
+                "Buggy",
+                "public class Buggy extends BaseClass implements MyJsFunctionInterface {",
+                "  public int foo(int x) { return 0; }",
+                "}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileFails("JsFunction implementation 'Buggy' cannot extend a class.");
   }
 
   public void testJsFunctionImplementationWithSubclassesFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionimplementationwithsubclasses");
-    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationwithsubclasses");
-
-    createSourceFile(
-        sourcePackage,
-        "BaseClass.java",
-        "package jsfunctionimplementationwithsubclasses;",
-        "public class BaseClass implements MyJsFunctionInterface {",
-        "  public int foo(int x) { return 0; }",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionimplementationwithsubclasses;",
-        "public class Buggy extends BaseClass  {",
-        "}");
-
-    assertCompileFails(
-        sourcePackage, "'Buggy' cannot extend JsFunction implementation " + "'BaseClass'.");
+    compile(
+            source(
+                "BaseClass",
+                "public class BaseClass implements MyJsFunctionInterface {",
+                "  public int foo(int x) { return 0; }",
+                "}"),
+            source("Buggy", "public class Buggy extends BaseClass  {", "}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileFails("'Buggy' cannot extend JsFunction implementation 'BaseClass'.");
   }
 
   public void testJsFunctionImplementationMarkedAsJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionimplementationmarkedasjstype");
-    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationmarkedasjstype");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsfunctionimplementationmarkedasjstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy implements MyJsFunctionInterface {",
-        "  public int foo(int x) { return 0; }",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "'Buggy' cannot be both a JsFunction implementation and a " + "JsType at the same time.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class Buggy implements MyJsFunctionInterface {",
+                "  public int foo(int x) { return 0; }",
+                "}"),
+            source(
+                "MyJsFunctionInterface",
+                "import jsinterop.annotations.JsFunction;",
+                "@JsFunction public interface MyJsFunctionInterface {",
+                " int foo(int x);",
+                "}"))
+        .assertCompileFails(
+            "'Buggy' cannot be both a JsFunction implementation and a "
+                + "JsType at the same time.");
   }
 
-  private void createJsFunctionInterfaceInPackage(File sourcePackage, String packageName)
-      throws IOException {
-    createSourceFile(
-        sourcePackage,
-        "MyJsFunctionInterface.java",
-        "package " + packageName + ";",
-        "import jsinterop.annotations.JsFunction;",
-        "@JsFunction public interface MyJsFunctionInterface {",
-        " int foo(int x);",
-        "}");
-  }
-  
   public void testNativeJsTypeStaticInitializerSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypestaticinitializer");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypestaticinitializer;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  static {",
-        "    int x = 1;",
-        "  }",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy2.java",
-        "package nativejstypestaticinitializer;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy2 {",
-        "  static {",
-        "    Object.class.getName();",
-        "  }",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy {",
+                "  static {",
+                "    int x = 1;",
+                "  }",
+                "}"),
+            source(
+                "Buggy2",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy2 {",
+                "  static {",
+                "    Object.class.getName();",
+                "  }",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeInstanceInitializerFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeinstanceinitializer");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeinstanceinitializer;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  {",
-        "    Object.class.getName();",
-        "  }",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy2.java",
-        "package nativejstypeinstanceinitializer;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy2 {",
-        "  {",
-        "    int x = 1;",
-        "  }",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "Native JsType 'Buggy' cannot have initializer.",
-        "Native JsType 'Buggy2' cannot have initializer.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy {",
+                "  {",
+                "    Object.class.getName();",
+                "  }",
+                "}"),
+            source(
+                "Buggy2",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy2 {",
+                "  {",
+                "    int x = 1;",
+                "  }",
+                "}"))
+        .assertCompileFails(
+            "Native JsType 'Buggy' cannot have initializer.",
+            "Native JsType 'Buggy2' cannot have initializer.");
   }
 
   public void testNativeJsTypeNonEmptyConstructorFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypenonemptyconstructor");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypenonemptyconstructor;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  public Buggy(int n) {",
-        "    n++;",
-        "  }",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "Native JsType constructor 'Buggy.Buggy(int)' cannot have " + "non-empty method body.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  public Buggy(int n) {",
+            "    n++;",
+            "  }",
+            "}")
+        .assertCompileFails(
+            "Native JsType constructor 'Buggy.Buggy(int)' cannot have non-empty method body.");
   }
 
   public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeimplicitsuper");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeimplicitsuper;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {",
-        "  public Buggy(int n) {}",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeimplicitsuper;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Super {",
-        "  public Super() {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {",
+                "  public Buggy(int n) {}",
+                "}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Super {",
+                "  public Super() {}",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeExplicitSuperSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeexplicitsuper");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeexplicitsuper;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {",
-        "  public Buggy(int n) {",
-        "    super(n);",
-        "  }",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeexplicitsuper;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Super {",
-        "  public Super(int x) {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {",
+                "  public Buggy(int n) {",
+                "    super(n);",
+                "  }",
+                "}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Super {",
+                "  public Super(int x) {}",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeExplicitSuperWithEffectSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeexplicitsuperwitheffect");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeexplicitsuperwitheffect;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {",
-        "  public Buggy(int n) {",
-        "    super(n++);",
-        "  }",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeexplicitsuperwitheffect;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Super {",
-        "  public Super(int x) {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {",
+                "  public Buggy(int n) {",
+                "    super(n++);",
+                "  }",
+                "}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Super {",
+                "  public Super(int x) {}",
+                "}"))
+        .assertCompileSucceeds();
   }
 
   //  public void testJsTypeInterfaceInInstanceofFails() throws Exception {
@@ -1616,230 +1406,157 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
   //
   public void testNativeJsTypeEnumFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeenum");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeenum;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public enum Buggy {",
-        "  A,",
-        "  B",
-        "}");
-
-    assertCompileFails(sourcePackage, "Enum 'Buggy' cannot be a native JsType.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public enum Buggy {",
+            "  A,",
+            "  B",
+            "}")
+        .assertCompileFails("Enum 'Buggy' cannot be a native JsType.");
   }
 
   public void testInnerNativeJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("innernativejstype");
-    createSourceFile(
-        sourcePackage,
-        "EntryPoint.java",
-        "package innernativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "public class EntryPoint {",
-        "  @JsType(isNative = true)",
-        "  public class Buggy {}",
-        "}");
-
-    assertCompileFails(sourcePackage, "Non static inner class 'Buggy' cannot be a native JsType.");
+    compile(
+            "EntryPoint",
+            "import jsinterop.annotations.JsType;",
+            "public class EntryPoint {",
+            "  @JsType(isNative = true)",
+            "  public class Buggy {}",
+            "}")
+        .assertCompileFails("Non static inner class 'Buggy' cannot be a native JsType.");
   }
 
   public void testInnerJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("innerjstype");
-    createSourceFile(
-        sourcePackage,
-        "EntryPoint.java",
-        "package innerjstype;",
-        "import jsinterop.annotations.JsType;",
-        "public class EntryPoint {",
-        "  @JsType",
-        "  public static class Buggy {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "EntryPoint",
+            "import jsinterop.annotations.JsType;",
+            "public class EntryPoint {",
+            "  @JsType",
+            "  public static class Buggy {}",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testLocalJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("localjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package localjstype;",
-        "import jsinterop.annotations.JsType;",
-        "public class Buggy { void m() { @JsType class Local {} } }");
-
-    assertCompileFails(sourcePackage, "Local class '$1Local' cannot be a JsType.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "public class Buggy { void m() { @JsType class Local {} } }")
+        .assertCompileFails("Local class '$1Local' cannot be a JsType.");
   }
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeextendsjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeextendsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeextendsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Super {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Super {}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeimplementsnativejstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeimplementsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy implements Super {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeimplementsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Super {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy implements Super {}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Super {}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeInterfaceImplementsNativeJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypeinterfaceimplementsnativejstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeinterfaceimplementsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Buggy extends Super {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeinterfaceimplementsnativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Super {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Buggy extends Super {}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Super {}"))
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeExtendsJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeextendsjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeextendsjstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeextendsjstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Super {}");
-
-    assertCompileFails(
-        sourcePackage, "Native JsType 'Buggy' can only extend native JsType " + "classes.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class Super {}"))
+        .assertCompileFails("Native JsType 'Buggy' can only extend native JsType classes.");
   }
 
   public void testNativeJsTypeImplementsJsTypeInterfaceFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeimplementsjstypeinterface");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeimplementsjstypeinterface;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy implements Interface {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Interface.java",
-        "package nativejstypeimplementsjstypeinterface;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public interface Interface {}");
-
-    assertCompileFails(
-        sourcePackage, "Native JsType 'Buggy' can only implement native " + "JsType interfaces.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy implements Interface {}"),
+            source(
+                "Interface",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public interface Interface {}"))
+        .assertCompileFails("Native JsType 'Buggy' can only implement native JsType interfaces.");
   }
 
   public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeinterfaceextendsjstypeinterface");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeinterfaceextendsjstypeinterface;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Buggy extends Interface {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Interface.java",
-        "package nativejstypeinterfaceextendsjstypeinterface;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public interface Interface {}");
-
-    assertCompileFails(
-        sourcePackage, "Native JsType 'Buggy' can only extend native JsType " + "interfaces.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Buggy extends Interface {}"),
+            source(
+                "Interface",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public interface Interface {}"))
+        .assertCompileFails("Native JsType 'Buggy' can only extend native JsType interfaces.");
   }
 
   public void testNativeJsTypeImplementsNonJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeimplementsnonjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeimplementsnonjstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy implements Interface {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Interface.java",
-        "package nativejstypeimplementsnonjstype;",
-        "public interface Interface {}");
-
-    assertCompileFails(
-        sourcePackage, "Native JsType 'Buggy' can only implement native JsType " + "interfaces.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy implements Interface {}"),
+            source("Interface", "public interface Interface {}"))
+        .assertCompileFails("Native JsType 'Buggy' can only implement native JsType interfaces.");
   }
 
   public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypeinterfaceextendsnonjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypeinterfaceextendsnonjstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Buggy extends Super {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package nativejstypeinterfaceextendsnonjstype;",
-        "public interface Super {}");
-
-    assertCompileFails(
-        sourcePackage, "Native JsType 'Buggy' can only extend native JsType " + "interfaces.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Buggy extends Super {}"),
+            source("Super", "public interface Super {}"))
+        .assertCompileFails("Native JsType 'Buggy' can only extend native JsType interfaces.");
   }
 
   //  public void testNativeJsTypeInterfaceDefenderMethodsFails() {
@@ -1867,171 +1584,135 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
   //
   public void testJsOverlayOnNativeJsTypeInterfaceSucceds() throws Exception {
-    File sourcePackage = createPackage("jsoverlayonnativejstypeinterface");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayonnativejstypeinterface;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Buggy {",
-        "  @JsOverlay Object obj = new Object();",
-        "  // TODO: uncomment once default method is supported.",
-        "  // @JsOverlay default void someOverlayMethod(){};",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public interface Buggy {",
+            "  @JsOverlay Object obj = new Object();",
+            "  // TODO: uncomment once default method is supported.",
+            "  // @JsOverlay default void someOverlayMethod(){};",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testJsOverlayOnNativeJsTypeMemberSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsoverlayonnativejstypemember");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayonnativejstypemember;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  @JsOverlay public static Object object = new Object();",
-        "  @JsOverlay",
-        "  public static void m() {}",
-        "  @JsOverlay",
-        "  public static void m(int x) {}",
-        "  @JsOverlay",
-        "  private static void m(boolean x) {}",
-        "  @JsOverlay",
-        "  public final void n() {}",
-        "  @JsOverlay",
-        "  public final void n(int x) {}",
-        "  @JsOverlay",
-        "  private final void n(boolean x) {}",
-        "  @JsOverlay",
-        "  final void o() {}",
-        "  @JsOverlay",
-        "  protected final void p() {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  @JsOverlay public static Object object = new Object();",
+            "  @JsOverlay",
+            "  public static void m() {}",
+            "  @JsOverlay",
+            "  public static void m(int x) {}",
+            "  @JsOverlay",
+            "  private static void m(boolean x) {}",
+            "  @JsOverlay",
+            "  public final void n() {}",
+            "  @JsOverlay",
+            "  public final void n(int x) {}",
+            "  @JsOverlay",
+            "  private final void n(boolean x) {}",
+            "  @JsOverlay",
+            "  final void o() {}",
+            "  @JsOverlay",
+            "  protected final void p() {}",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testJsOverlayImplementingInterfaceMethodFails() throws Exception {
-    File sourcePackage = createPackage("jsoverlayimplementinginterfacemethod");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayimplementinginterfacemethod;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy implements IBuggy {",
-        "  @JsOverlay",
-        "  public void m() {}",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "IBuggy.java",
-        "package jsoverlayimplementinginterfacemethod;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface IBuggy {",
-        "  void m();",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOverlay method 'void Buggy.m()' cannot override a " + "supertype method.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsOverlay;",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy implements IBuggy {",
+                "  @JsOverlay",
+                "  public void m() {}",
+                "}"),
+            source(
+                "IBuggy",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface IBuggy {",
+                "  void m();",
+                "}"))
+        .assertCompileFails(
+            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.");
   }
 
   public void testJsOverlayOverridingSuperclassMethodFails() throws Exception {
-    File sourcePackage = createPackage("jsoverlayoverridingsuperclassmethod");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayoverridingsuperclassmethod;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy extends Super {",
-        "  @JsOverlay",
-        "  public void m() {}",
-        "}");
-
-    createSourceFile(
-        sourcePackage,
-        "Super.java",
-        "package jsoverlayoverridingsuperclassmethod;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Super {",
-        "  public native void m();",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOverlay method 'void Buggy.m()' cannot override a " + "supertype method.");
+    compile(
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsOverlay;",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Buggy extends Super {",
+                "  @JsOverlay",
+                "  public void m() {}",
+                "}"),
+            source(
+                "Super",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public class Super {",
+                "  public native void m();",
+                "}"))
+        .assertCompileFails(
+            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.");
   }
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() throws Exception {
-    File sourcePackage = createPackage("jsoverlayonnonfinalmethodandinstancefield");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayonnonfinalmethodandinstancefield;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  @JsOverlay public final int f2 = 2;",
-        "  @JsOverlay",
-        "  public void m() {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOverlay field 'int Buggy.f2' can only be static.",
-        "JsOverlay method 'void Buggy.m()' cannot be non-final nor " + "native.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  @JsOverlay public final int f2 = 2;",
+            "  @JsOverlay",
+            "  public void m() {}",
+            "}")
+        .assertCompileFails(
+            "JsOverlay field 'int Buggy.f2' can only be static.",
+            "JsOverlay method 'void Buggy.m()' cannot be non-final nor native.");
   }
 
   public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsoverlaywithstaticinitializer");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlaywithstaticinitializer;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  @JsOverlay public static final Object f1 = new Object();",
-        "  @JsOverlay public static int f2 = 2;",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  @JsOverlay public static final Object f1 = new Object();",
+            "  @JsOverlay public static int f2 = 2;",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testJsOverlayOnNativeMethodFails() throws Exception {
-    File sourcePackage = createPackage("jsoverlayonnativemethod");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayonnativemethod;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  @JsOverlay",
-        "  public static final native void m1();",
-        "  @JsOverlay",
-        "  public final native void m2();",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOverlay method 'void Buggy.m1()' cannot be non-final nor native.",
-        "JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  @JsOverlay",
+            "  public static final native void m1();",
+            "  @JsOverlay",
+            "  public final native void m2();",
+            "}")
+        .assertCompileFails(
+            "JsOverlay method 'void Buggy.m1()' cannot be non-final nor native.",
+            "JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.");
   }
 
   //      // Not applicable to J2cl
@@ -2061,26 +1742,21 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //      }
 
   public void testJsOverlayOnNonNativeJsTypeFails() throws Exception {
-    File sourcePackage = createPackage("jsoverlayonnonnativejstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoverlayonnonnativejstype;",
-        "import jsinterop.annotations.JsOverlay;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  @JsOverlay public static final int F = 2;",
-        "  @JsOverlay",
-        "  public final void m() {};",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOverlay 'int Buggy.F' can only be declared in a native type "
-            + "or @JsFunction interface.",
-        "JsOverlay 'void Buggy.m()' can only be declared in a native type "
-            + "or @JsFunction interface.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  @JsOverlay public static final int F = 2;",
+            "  @JsOverlay",
+            "  public final void m() {};",
+            "}")
+        .assertCompileFails(
+            "JsOverlay 'int Buggy.F' can only be declared in a native type "
+                + "or @JsFunction interface.",
+            "JsOverlay 'void Buggy.m()' can only be declared in a native type "
+                + "or @JsFunction interface.");
   }
 
   //  public void testJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -2152,139 +1828,113 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //
 
   public void testNativeJsTypeBadMembersFails() throws Exception {
-    File sourcePackage = createPackage("nativejstypebadmembers");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypebadmembers;",
-        "import jsinterop.annotations.JsIgnore;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  public static final int S = 42;",
-        "  public int f = 42;",
-        "  @JsIgnore",
-        "  public Buggy() {}",
-        "  @JsIgnore public int x;",
-        "  @JsIgnore",
-        "  public native void n();",
-        "  public void o() {}",
-        "  public native void p() /*-{}-*/;",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "Native JsType field 'int Buggy.S' cannot have initializer.",
-        "Native JsType field 'int Buggy.f' cannot have initializer.",
-        "Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
-        "Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
-        "Native JsType member 'void Buggy.n()' cannot have " + "@JsIgnore.",
-        "Native JsType method 'void Buggy.o()' should be native or abstract.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsIgnore;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  public static final int S = 42;",
+            "  public int f = 42;",
+            "  @JsIgnore",
+            "  public Buggy() {}",
+            "  @JsIgnore public int x;",
+            "  @JsIgnore",
+            "  public native void n();",
+            "  public void o() {}",
+            "  public native void p() /*-{}-*/;",
+            "}")
+        .assertCompileFails(
+            "Native JsType field 'int Buggy.S' cannot have initializer.",
+            "Native JsType field 'int Buggy.f' cannot have initializer.",
+            "Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
+            "Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
+            "Native JsType member 'void Buggy.n()' cannot have @JsIgnore.",
+            "Native JsType method 'void Buggy.o()' should be native or abstract.");
   }
 
   public void testNativeMethodOnJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativemethodonjstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativemethodonjstype;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType",
-        "public class Buggy {",
-        "  @JsMethod",
-        "  public native void m();",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType",
+            "public class Buggy {",
+            "  @JsMethod",
+            "  public native void m();",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstype");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstype;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public abstract class Buggy {",
-        "  public static native void m();",
-        "  protected static native void m(Object o);",
-        "  private static native void m(String o);",
-        "  public Buggy() {}",
-        "  protected Buggy(Object o) {}",
-        "  private Buggy(String o) {}",
-        "  public native void n();",
-        "  protected native void n(Object o);",
-        "  private native void n(String o);",
-        "  public abstract void o();",
-        "  protected abstract void o(Object o);",
-        "  abstract void o(String o);",
-        "}",
-        "@JsType(isNative = true)",
-        "interface NativeFunctionalInterface {",
-        "  void f();",
-        " }",
-        "class Main {",
-        "  static void main() {",
-        "    NativeFunctionalInterface i = () -> {};",
-        "  }",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public abstract class Buggy {",
+            "  public static native void m();",
+            "  protected static native void m(Object o);",
+            "  private static native void m(String o);",
+            "  public Buggy() {}",
+            "  protected Buggy(Object o) {}",
+            "  private Buggy(String o) {}",
+            "  public native void n();",
+            "  protected native void n(Object o);",
+            "  private native void n(String o);",
+            "  public abstract void o();",
+            "  protected abstract void o(Object o);",
+            "  abstract void o(String o);",
+            "}",
+            "@JsType(isNative = true)",
+            "interface NativeFunctionalInterface {",
+            "  void f();",
+            " }",
+            "class Main {",
+            "  static void main() {",
+            "    NativeFunctionalInterface i = () -> {};",
+            "  }",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeFieldsSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypefields");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypefields;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {",
-        "  public static int f1;",
-        "  protected static int f2;",
-        "  private static int f3;",
-        "  public int f4;",
-        "  protected int f5;",
-        "  private int f6;",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {",
+            "  public static int f1;",
+            "  protected static int f2;",
+            "  private static int f3;",
+            "  public int f4;",
+            "  protected int f5;",
+            "  private int f6;",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeDefaultConstructorSucceeds() throws Exception {
-    File sourcePackage = createPackage("nativejstypedefaultconstructor");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nativejstypedefaultconstructor;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public class Buggy {}",
-        "");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative = true)",
+            "public class Buggy {}",
+            "")
+        .assertCompileSucceeds();
   }
 
   public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() throws Exception {
-    File sourcePackage = createPackage("nonjssypeextendingnativejstypewithinstancemethodsucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nonjssypeextendingnativejstypewithinstancemethodsucceeds;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative=true) class Super {",
-        "  public native void m(Object o);",
-        "  public native void m(Object[] o);",
-        "}",
-        "@JsType public class Buggy extends Super {",
-        "  public void n(Object o) { }",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true) class Super {",
+            "  public native void m(Object o);",
+            "  public native void m(Object[] o);",
+            "}",
+            "@JsType public class Buggy extends Super {",
+            "  public void n(Object o) { }",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails() {
@@ -2304,19 +1954,14 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() throws Exception {
-    File sourcePackage = createPackage("nonjstypewithnativestaticmethodoverloadssucceeds");
-
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nonjstypewithnativestaticmethodoverloadssucceeds;",
-        "import jsinterop.annotations.JsMethod;",
-        "public class Buggy {",
-        "  @JsMethod public static native void m(Object o);",
-        "  @JsMethod public static native void m(int o);",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "public class Buggy {",
+            "  @JsMethod public static native void m(Object o);",
+            "  @JsMethod public static native void m(int o);",
+            "}")
+        .assertCompileSucceeds();
   }
 
   //  public void testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
@@ -2390,22 +2035,14 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testNonJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() throws Exception {
-    File sourcePackage = createPackage("nonJsTypeInterfaceExtendsNativeJsTypeInterface");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package nonJsTypeInterfaceExtendsNativeJsTypeInterface;",
-        "public interface Buggy extends Interface {}");
-
-    createSourceFile(
-        sourcePackage,
-        "Interface.java",
-        "package nonJsTypeInterfaceExtendsNativeJsTypeInterface;",
-        "import jsinterop.annotations.JsType;",
-        "@JsType(isNative = true)",
-        "public interface Interface {}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            source("Buggy", "public interface Buggy extends Interface {}"),
+            source(
+                "Interface",
+                "import jsinterop.annotations.JsType;",
+                "@JsType(isNative = true)",
+                "public interface Interface {}"))
+        .assertCompileSucceeds();
   }
 
   //  public void testUnusableByJsSuppressionSucceeds() throws Exception {
@@ -2565,179 +2202,168 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  };
 
   public void testJsOptionalSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsoptional");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoptional;",
-        "import jsinterop.annotations.JsConstructor;",
-        "import jsinterop.annotations.JsFunction;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsOptional;",
-        "public class Buggy<T> {",
-        "  @JsConstructor public Buggy(@JsOptional Object a) {}",
-        "  @JsMethod public void foo(int a, Object b, @JsOptional String c) {}",
-        "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
-        "  @JsMethod public void baz(@JsOptional String a, @JsOptional Object b) {}",
-        "  @JsMethod public void qux(@JsOptional String c, Object... os) {}",
-        "  @JsMethod public void corge(int a, @JsOptional T b, String... c) {}",
-        "}",
-        "class SubBuggy extends Buggy<String> {",
-        "  public SubBuggy() { super(null); } ",
-        "  @JsMethod public void bar(int a, @JsOptional String b, String... c) {}",
-        "}",
-        "@JsFunction interface Function {",
-        "  void m(String a, @JsOptional String b);",
-        "}",
-        "class FunctionImpl implements Function {",
-        "   public void m(String a, @JsOptional String b) {}",
-        "}");
-
-    assertCompileSucceeds(sourcePackage);
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsConstructor;",
+            "import jsinterop.annotations.JsFunction;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsOptional;",
+            "public class Buggy<T> {",
+            "  @JsConstructor public Buggy(@JsOptional Object a) {}",
+            "  @JsMethod public void foo(int a, Object b, @JsOptional String c) {}",
+            "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
+            "  @JsMethod public void baz(@JsOptional String a, @JsOptional Object b) {}",
+            "  @JsMethod public void qux(@JsOptional String c, Object... os) {}",
+            "  @JsMethod public void corge(int a, @JsOptional T b, String... c) {}",
+            "}",
+            "class SubBuggy extends Buggy<String> {",
+            "  public SubBuggy() { super(null); } ",
+            "  @JsMethod public void bar(int a, @JsOptional String b, String... c) {}",
+            "}",
+            "@JsFunction interface Function {",
+            "  void m(String a, @JsOptional String b);",
+            "}",
+            "class FunctionImpl implements Function {",
+            "   public void m(String a, @JsOptional String b) {}",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testJsOptionalNotAtEndFails() throws Exception {
-    File sourcePackage = createPackage("jsoptionalnotatend");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoptionalnotatend;",
-        "import jsinterop.annotations.JsConstructor;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsOptional;",
-        "public class Buggy {",
-        "   @JsConstructor public Buggy(@JsOptional String a, Object b, @JsOptional String c) {}",
-        "   @JsMethod public void bar(int a, @JsOptional Object b, String c) {}",
-        "   @JsMethod public void baz(@JsOptional Object b, String c, Object... os) {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOptional parameter 'a' in method "
-            + "'Buggy.Buggy(String, Object, String)' cannot precede parameters that are not "
-            + "JsOptional.",
-        "JsOptional parameter 'b' in method "
-            + "'void Buggy.bar(int, Object, String)' cannot precede parameters that are not "
-            + "JsOptional.",
-        "JsOptional parameter 'b' in method "
-            + "'void Buggy.baz(Object, String, Object[])' cannot precede parameters that are not "
-            + "JsOptional.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsConstructor;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsOptional;",
+            "public class Buggy {",
+            "   @JsConstructor",
+            "   public Buggy(@JsOptional String a, Object b, @JsOptional String c) {}",
+            "   @JsMethod",
+            "   public void bar(int a, @JsOptional Object b, String c) {}",
+            "   @JsMethod",
+            "   public void baz(@JsOptional Object b, String c, Object... os) {}",
+            "}")
+        .assertCompileFails(
+            "JsOptional parameter 'a' in method "
+                + "'Buggy.Buggy(String, Object, String)' cannot precede parameters that are not "
+                + "JsOptional.",
+            "JsOptional parameter 'b' in method "
+                + "'void Buggy.bar(int, Object, String)' cannot precede parameters that are not "
+                + "JsOptional.",
+            "JsOptional parameter 'b' in method "
+                + "'void Buggy.baz(Object, String, Object[])' cannot precede parameters that are"
+                + " not JsOptional.");
   }
 
   public void testJsOptionalOnInvalidParametersFails() throws Exception {
-    File sourcePackage = createPackage("jsoptionalnotatend");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoptionalnotatend;",
-        "import jsinterop.annotations.JsConstructor;",
-        "import jsinterop.annotations.JsMethod;",
-        "import jsinterop.annotations.JsOptional;",
-        "public class Buggy {",
-        "   @JsConstructor public Buggy(@JsOptional int a) {}",
-        "   @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOptional parameter 'a' in method '" + "Buggy.Buggy(int)' cannot be of a primitive type.",
-        "JsOptional parameter 'c' in method "
-            + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsConstructor;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsOptional;",
+            "public class Buggy {",
+            "   @JsConstructor public Buggy(@JsOptional int a) {}",
+            "   @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}",
+            "}")
+        .assertCompileFails(
+            "JsOptional parameter 'a' in method '"
+                + "Buggy.Buggy(int)' cannot be of a primitive type.",
+            "JsOptional parameter 'c' in method "
+                + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.");
   }
 
   public void testJsOptionalOnNonJsExposedMethodsFails() throws Exception {
-    File sourcePackage = createPackage("jsoptionalonnonjsexposedmethods");
-    createSourceFile(
-        sourcePackage,
-        "Buggy.java",
-        "package jsoptionalonnonjsexposedmethods;",
-        "import jsinterop.annotations.JsProperty;",
-        "import jsinterop.annotations.JsOptional;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsOverlay;",
-        "public class Buggy {",
-        "  public void fun(int a, @JsOptional Object b, @JsOptional String c) {}",
-        "  @JsProperty public void bar(@JsOptional Object o) {}",
-        "}",
-        "@JsType(isNative = true) class Native {",
-        "  @JsOverlay public final void fun( @JsOptional Object a) {}",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsOptional parameter in 'void Buggy.fun(int, Object, "
-            + "String)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
-        "JsOptional parameter in 'void Buggy.bar(Object)' can only "
-            + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
-        "JsOptional parameter in 'void Native.fun(Object)' can only "
-            + "be declared in a JsMethod, a JsConstructor or a JsFunction.");
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsProperty;",
+            "import jsinterop.annotations.JsOptional;",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsOverlay;",
+            "public class Buggy {",
+            "  public void fun(int a, @JsOptional Object b, @JsOptional String c) {}",
+            "  @JsProperty public void bar(@JsOptional Object o) {}",
+            "}",
+            "@JsType(isNative = true) class Native {",
+            "  @JsOverlay public final void fun( @JsOptional Object a) {}",
+            "}")
+        .assertCompileFails(
+            "JsOptional parameter in 'void Buggy.fun(int, Object, "
+                + "String)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
+            "JsOptional parameter in 'void Buggy.bar(Object)' can only "
+                + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
+            "JsOptional parameter in 'void Native.fun(Object)' can only "
+                + "be declared in a JsMethod, a JsConstructor or a JsFunction.");
   }
 
-  private void assertCompileSucceeds(File sourcePackage) throws Exception {
-    TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
-    assert !transpileResult.getProblems().hasErrors()
-        : "Expected no errors but got " + transpileResult.getProblems().getErrors();
+  private TranspileResult compile(String mainClass, String... source) throws IOException {
+    return compile(source(mainClass, source));
   }
 
-  private void assertCompileFails(File sourcePackage, String... expectedErrors) throws Exception {
-    TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
-    List<String> errors = transpileResult.getProblems().getErrors();
-    assert errors.size() == expectedErrors.length
-        : "Expected "
-            + expectedErrors.length
-            + " error(s) but there were actually "
-            + errors.size()
-            + " error(s)  "
-            + "expected:<"
-            + Arrays.toString(expectedErrors)
-            + "> "
-            + "actual:<"
-            + errors
-            + ">.";
-    for (String expectedError : expectedErrors) {
-      assertErrorsContainsSnippet(transpileResult.getProblems(), expectedError);
+  private TranspileResult compile(Source... sources) throws IOException {
+    File tempDir = Files.createTempDirectory("interop_checker").toFile();
+
+    File inputDir = new File(tempDir, "input");
+    inputDir.mkdir();
+    File outputDir = new File(tempDir, "output");
+    outputDir.mkdir();
+    File packageDir = new File(inputDir, "test");
+    packageDir.mkdir();
+
+    for (Source source : sources) {
+      Files.write(
+          new File(packageDir, source.mainClass + ".java").toPath(),
+          source.content,
+          Charset.forName("UTF-8"));
     }
+    return transpile(getTranspilerArgs(inputDir, outputDir), outputDir);
   }
 
-  private File createPackage(String packageName) {
-    File sourcePackage = new File(inputDir, packageName);
-    if (sourcePackage.mkdirs()) {
-      return sourcePackage;
-    }
-    return null;
-  }
-
-  private void createSourceFile(File sourcePackage, String fileName, String... source)
-      throws IOException {
-    File file = new File(sourcePackage, fileName);
-    Files.write(Joiner.on("\n").join(source), file, Charset.forName("UTF-8"));
-  }
-
-  private String[] getTranspilerArgs(File inputDirectory) {
+  private String[] getTranspilerArgs(File inputDir, File outputDir) {
     List<String> argList = new ArrayList<>();
+
+    argList.add("-sourcepath");
+    argList.add(inputDir.getAbsolutePath());
 
     // Output dir
     argList.add("-d");
     argList.add(outputDir.getAbsolutePath());
 
     // Input source
-    for (File sourceFile : listSourceFilesInDir(inputDirectory)) {
-      argList.add(sourceFile.getAbsolutePath());
+    List<File> sourceFiles = sourceFiles(inputDir);
+    assertFalse(sourceFiles.isEmpty());
+    for (File sourceFile : sourceFiles) {
+      argList.add(sourceFile.getPath());
     }
 
-    Collections.addAll(argList, extraArgs);
+    argList.addAll(Arrays.asList("-source", "1.8", "-encoding", "UTF-8", "-cp", JRE_PATH));
 
     return Iterables.toArray(argList, String.class);
   }
 
-  private static List<File> listSourceFilesInDir(File directory) {
-    List<File> extensionFilesInDir = new ArrayList<>();
-    for (File fileInDir : directory.listFiles()) {
-      String fileName = fileInDir.getName();
-      if (fileName.endsWith(".java") || fileName.endsWith(".srcjar")) {
-        extensionFilesInDir.add(fileInDir);
-      }
+  private static List<File> sourceFiles(File directory) {
+    try {
+      return Files.walk(directory.toPath())
+          .filter(Files::isRegularFile)
+          .filter(path -> path.toString().endsWith(".java") || path.toString().endsWith(".srcjar"))
+          .map(Path::toFile)
+          .collect(Collectors.toList());
+    } catch (IOException e) {
+      return null;
     }
-    return extensionFilesInDir;
+  }
+
+  private static class Source {
+    String mainClass;
+    List<String> content;
+
+    Source(String mainClass, String... code) {
+      this.mainClass = mainClass;
+      this.content = Lists.newArrayList(code);
+      this.content.add(0, "package test;");
+    }
+  }
+
+  private static Source source(String mainClass, String... code) {
+    return new Source(mainClass, code);
   }
 }
