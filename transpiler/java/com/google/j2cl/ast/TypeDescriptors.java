@@ -78,27 +78,22 @@ public class TypeDescriptors {
   /** Primitive type descriptors and boxed type descriptors mapping. */
   private BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType = HashBiMap.create();
 
-  private static ThreadLocal<TypeDescriptors> typeDescriptorsStorage = new ThreadLocal<>();
-
-  private static ThreadLocal<Boolean> isInitialized = new ThreadLocal<>();
-
-  public static TypeDescriptors get() {
-    checkState(
-        typeDescriptorsStorage.get() != null, "TypeDescriptors must be initialized before access.");
-    return typeDescriptorsStorage.get();
-  }
+  private static final ThreadLocal<TypeDescriptors> typeDescriptors = new ThreadLocal<>();
 
   private static void set(TypeDescriptors typeDescriptors) {
     checkState(
-        typeDescriptorsStorage.get() == null,
+        TypeDescriptors.typeDescriptors.get() == null,
         "TypeDescriptors has already been initialized and cannot be reassigned.");
-    isInitialized.set(true);
-    typeDescriptorsStorage.set(typeDescriptors);
+    TypeDescriptors.typeDescriptors.set(typeDescriptors);
+  }
+
+  public static TypeDescriptors get() {
+    checkState(isInitialized(), "TypeDescriptors must be initialized before access.");
+    return typeDescriptors.get();
   }
 
   public static boolean isInitialized() {
-    Boolean initialized = isInitialized.get();
-    return initialized == null ? false : initialized;
+    return typeDescriptors.get() != null;
   }
 
   public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {

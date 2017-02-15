@@ -20,12 +20,19 @@ public class AstUtilConstants {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$$Overlay";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
-  public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
-      FieldDescriptor.newBuilder()
-          .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-          .setName("length")
-          .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-          .setStatic(false)
-          .setJsInfo(JsInfo.RAW_FIELD)
-          .build();
+
+  private static final ThreadLocal<FieldDescriptor> ARRAY_LENGTH_FIELD_DESCRIPTION =
+      ThreadLocal.withInitial(
+          () ->
+              FieldDescriptor.newBuilder()
+                  .setEnclosingClassTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+                  .setName("length")
+                  .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+                  .setStatic(false)
+                  .setJsInfo(JsInfo.RAW_FIELD)
+                  .build());
+
+  public static FieldDescriptor getArrayLengthFieldDescriptor() {
+    return ARRAY_LENGTH_FIELD_DESCRIPTION.get();
+  }
 }

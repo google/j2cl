@@ -196,9 +196,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
           .build();
     }
 
-    private Expression createArraySizeExpression(int varargsIndex) {
+    private static Expression createArraySizeExpression(int varargsIndex) {
       FieldAccess argumentsLengthReference =
-          FieldAccess.Builder.from(AstUtilConstants.ARRAY_LENGTH_FIELD_DESCRIPTION)
+          FieldAccess.Builder.from(AstUtilConstants.getArrayLengthFieldDescriptor())
               .setQualifier(ARGUMENTS_PARAMETER.getReference())
               .build();
 

@@ -22,16 +22,11 @@ import com.google.common.collect.Interners;
 // TODO(rlubble): This class should extend com.google.common.collect.Interner<T> but that class
 // is marked @GwtIncompatible.
 public class ThreadLocalInterner<T> {
-  private final ThreadLocal<Interner<T>> interner = new ThreadLocal<>();
+  private final ThreadLocal<Interner<T>> interner =
+      ThreadLocal.withInitial(Interners::newStrongInterner);
 
   public T intern(T t) {
-    return get().intern(t);
+    return interner.get().intern(t);
   }
 
-  private Interner<T> get() {
-    if (interner.get() == null) {
-      interner.set(Interners.newStrongInterner());
-    }
-    return interner.get();
-  }
 }

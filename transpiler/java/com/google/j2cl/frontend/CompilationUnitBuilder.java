@@ -849,7 +849,7 @@ public class CompilationUnitBuilder {
               .setLeftOperand(indexVariable.getReference())
               .setOperator(BinaryOperator.LESS)
               .setRightOperand(
-                  FieldAccess.Builder.from(AstUtilConstants.ARRAY_LENGTH_FIELD_DESCRIPTION)
+                  FieldAccess.Builder.from(AstUtilConstants.getArrayLengthFieldDescriptor())
                       .setQualifier(arrayVariable.getReference())
                       .build())
               .build();

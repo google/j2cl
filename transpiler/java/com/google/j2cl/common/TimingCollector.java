@@ -58,33 +58,17 @@ import java.util.concurrent.TimeUnit;
  * <p></code>
  */
 public class TimingCollector {
-  private final Stack<Sample> sampleStack = new Stack<>();
-  private static final ThreadLocal<TimingCollector> sharedInstance = new ThreadLocal<>();
+  private static final ThreadLocal<TimingCollector> collector =
+      ThreadLocal.withInitial(TimingCollector::new);
 
-  private static class Sample {
-    final String name;
-    private final Stopwatch stopwatch;
-    private final List<Sample> subSamples = new ArrayList<>();
-
-    Sample(String name) {
-      this.stopwatch = Stopwatch.createStarted();
-      this.name = name;
-    }
+  public static TimingCollector get() {
+    return collector.get();
   }
+
+  private final Stack<Sample> sampleStack = new Stack<>();
 
   public TimingCollector() {
     sampleStack.push(new Sample("Compiler"));
-  }
-
-  public static TimingCollector get() {
-    if (sharedInstance.get() == null) {
-      sharedInstance.set(new TimingCollector());
-    }
-    return sharedInstance.get();
-  }
-
-  private Sample getCurrentSample() {
-    return sampleStack.peek();
   }
 
   /**
@@ -108,6 +92,10 @@ public class TimingCollector {
     sampleStack.pop();
   }
 
+  private Sample getCurrentSample() {
+    return sampleStack.peek();
+  }
+
   /** Ends the current sample and yields timing up to the outer layer. */
   public void endSubSample() {
     endCurrentSample();
@@ -123,6 +111,20 @@ public class TimingCollector {
     Sample newSample = new Sample(firstSampleName);
     getCurrentSample().subSamples.add(newSample);
     sampleStack.push(newSample);
+  }
+
+  /** Prints the timing report. */
+  public void printReport() {
+    Sample compilerSample = sampleStack.pop();
+    compilerSample.stopwatch.stop();
+    checkArgument(sampleStack.isEmpty(), "Sample was not finished ");
+
+    System.out.println("Timing Report\n");
+    printSamplesRecursive(
+        Lists.newArrayList(compilerSample),
+        compilerSample.stopwatch.elapsed(TimeUnit.MILLISECONDS),
+        0);
+    System.out.println();
   }
 
   private void printSamplesRecursive(List<Sample> samples, long parentTotalTimeMs, int depth) {
@@ -149,20 +151,18 @@ public class TimingCollector {
     }
   }
 
-  public void printReport() {
-    Sample compilerSample = sampleStack.pop();
-    compilerSample.stopwatch.stop();
-    checkArgument(sampleStack.isEmpty(), "Sample was not finished ");
-
-    System.out.println("Timing Report\n");
-    printSamplesRecursive(
-        Lists.newArrayList(compilerSample),
-        compilerSample.stopwatch.elapsed(TimeUnit.MILLISECONDS),
-        0);
-    System.out.println();
-  }
-
   private String formatPercent(double ratio) {
     return J2clUtils.format("%.2f", (ratio * 100.0)) + "%";
+  }
+
+  private static class Sample {
+    final String name;
+    private final Stopwatch stopwatch;
+    private final List<Sample> subSamples = new ArrayList<>();
+
+    Sample(String name) {
+      this.stopwatch = Stopwatch.createStarted();
+      this.name = name;
+    }
   }
 }

@@ -89,7 +89,7 @@ public class JdtUtils {
 
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
     if (isArrayLengthBinding(variableBinding)) {
-      return AstUtilConstants.ARRAY_LENGTH_FIELD_DESCRIPTION;
+      return AstUtilConstants.getArrayLengthFieldDescriptor();
     }
 
     boolean isStatic = isStatic(variableBinding);
