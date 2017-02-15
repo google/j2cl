@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 2 size changes.
+There are 7 size changes.
 Total size (of already existing tests) changed from
-  1026970 to 1027025 bytes (100%->100.01%) and from
-  307418 to 307421 bytes (100%->100.00%) gzipped.
+  1027025 to 1027743 bytes (100%->100.07%) and from
+  307421 to 307589 bytes (100%->100.05%) gzipped.
 
 
 New reports:
@@ -13,14 +13,17 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+     2332   2321 arithmeticexception (-0.47%)
 
 
 Expansion report highlights:
 **************************************
       old    new
-     2330   2332 arithmeticexception (0.09%)
-     2160   2161 binaryexpressions (0.05%)
+     2232   2380 narrowingprimitiveconversion (6.63%)
+     1975   1985 returnimplicitcasts (0.51%)
+      928    931 ternaryexpression (0.32%)
+     2574   2581 instanceofboxedtype (0.27%)
 
 
 All reports:
@@ -31,7 +34,7 @@ All reports:
      4697   4697 allsimplebridges (unchanged)
       952    952 anonymousclasswithcaptures (unchanged)
      2228   2228 argumentimplicitcasts (unchanged)
-     2330   2332 arithmeticexception (0.09%)
+     2332   2321 arithmeticexception (-0.47%)
        62     62 arithmeticexceptiondisabled (unchanged)
       806    806 arithmeticexceptiondisabledresultused (unchanged)
       955    955 arrayboundsgwtstyle (unchanged)
@@ -44,7 +47,7 @@ All reports:
      3529   3529 arrayreadwrite (unchanged)
      1064   1064 assertsimple (unchanged)
       894    894 backwardbridgemethod (unchanged)
-     2160   2161 binaryexpressions (0.05%)
+     2161   2161 binaryexpressions (unchanged)
       828    828 blockscoping (unchanged)
     34490  34490 box2d (unchanged)
      3353   3353 boxingsideeffect (unchanged)
@@ -121,7 +124,7 @@ All reports:
      1902   1902 instanceinnerclass (unchanged)
      1115   1115 instancejsmethods (unchanged)
      1198   1198 instanceofarray (unchanged)
-     2574   2574 instanceofboxedtype (unchanged)
+     2574   2581 instanceofboxedtype (0.27%)
       870    870 instanceofclass (unchanged)
       872    872 instanceofinterface (unchanged)
      1013   1013 instancequalifieronstaticfield (unchanged)
@@ -142,7 +145,7 @@ All reports:
      1592   1592 jsfunctionbridge (unchanged)
      2225   2225 jsfunctiontypeannotation (unchanged)
       886    886 jsinnerclass (unchanged)
-    23753  23753 jsinteroptests (unchanged)
+    23753  23764 jsinteroptests (0.05%)
       901    901 jsmethodoverride (unchanged)
       824    824 jsoverlay (unchanged)
       827    827 jsoverlaystaticrefs (unchanged)
@@ -165,7 +168,7 @@ All reports:
      1114   1114 multiplecatch (unchanged)
       908    908 multipleconstructors (unchanged)
        62     62 multipleroottypes (unchanged)
-     2232   2232 narrowingprimitiveconversion (unchanged)
+     2232   2380 narrowingprimitiveconversion (6.63%)
        62     62 nativeinjection (unchanged)
        62     62 nativeinjectionapt (unchanged)
       805    805 nativeinjectionwithoutmethods (unchanged)
@@ -195,7 +198,7 @@ All reports:
        62     62 protectedcrosscall (unchanged)
       809    809 removeunusedcontructorprops (unchanged)
       837    837 renamejsmethodsinnativejstype (unchanged)
-     1975   1975 returnimplicitcasts (unchanged)
+     1975   1985 returnimplicitcasts (0.51%)
       887    887 shadowedfield (unchanged)
      4009   4009 simpleautoboxing (unchanged)
       874    874 simplecascadingconstructor (unchanged)
@@ -223,7 +226,7 @@ All reports:
      1148   1148 switchstatement (unchanged)
       807    807 synchronizedblock (unchanged)
        62     62 systemgetproperty (unchanged)
-      928    928 ternaryexpression (unchanged)
+      928    931 ternaryexpression (0.32%)
      3756   3756 trywithresource (unchanged)
       950    950 typewildcards (unchanged)
       854    854 unaryexpressions (unchanged)

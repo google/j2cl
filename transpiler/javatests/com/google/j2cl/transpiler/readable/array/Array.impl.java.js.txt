@@ -123,11 +123,11 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     $Arrays.$set(ints, 0, ints[0] + 1);
     $Arrays.$set(ints, 0, ints[0] - 1);
     $Arrays.$set(ints, 0, ints[0] * 1);
-    $Arrays.$set(ints, 0, $Primitives.$toInt(ints[0] / 1));
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
     $Arrays.$set(ints, 0, ints[0] & 1);
     $Arrays.$set(ints, 0, ints[0] ^ 1);
     $Arrays.$set(ints, 0, ints[0] | 1);
-    $Arrays.$set(ints, 0, $Primitives.$toInt(ints[0] % 1));
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
     $Arrays.$set(ints, 0, ints[0] << 1);
     $Arrays.$set(ints, 0, ints[0] >> 1);
     $Arrays.$set(ints, 0, ints[0] >>> 1);

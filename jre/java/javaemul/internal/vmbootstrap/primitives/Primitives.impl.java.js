@@ -21,7 +21,6 @@ class Primitives {
    * @public
    */
   static $toByte(instance) {
-    Primitives.$checkArithmeticException(instance);
     return instance << 24 >> 24;
   }
 
@@ -33,7 +32,6 @@ class Primitives {
    * @public
    */
   static $toChar(instance) {
-    Primitives.$checkArithmeticException(instance);
     return instance & 0xFFFF;
   }
 
@@ -45,7 +43,6 @@ class Primitives {
    * @public
    */
   static $toShort(instance) {
-    Primitives.$checkArithmeticException(instance);
     return instance << 16 >> 16;
   }
 
@@ -57,7 +54,6 @@ class Primitives {
    * @public
    */
   static $toInt(instance) {
-    Primitives.$checkArithmeticException(instance);
     return instance | 0;
   }
 
@@ -305,7 +301,7 @@ class Primitives {
    * @public
    */
   static $narrowFloatToByte(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toByte(roundInt);
   }
 
@@ -317,7 +313,7 @@ class Primitives {
    * @public
    */
   static $narrowDoubleToByte(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toByte(roundInt);
   }
 
@@ -329,7 +325,7 @@ class Primitives {
    * @public
    */
   static $narrowFloatToChar(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toChar(roundInt);
   }
 
@@ -341,7 +337,7 @@ class Primitives {
    * @public
    */
   static $narrowDoubleToChar(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toChar(roundInt);
   }
 
@@ -353,7 +349,7 @@ class Primitives {
    * @public
    */
   static $narrowFloatToShort(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toShort(roundInt);
   }
 
@@ -365,7 +361,7 @@ class Primitives {
    * @public
    */
   static $narrowDoubleToShort(instance) {
-    let roundInt = Primitives.$roundToInt(instance);
+    let roundInt = Primitives.$roundToInt_(instance);
     return Primitives.$toShort(roundInt);
   }
 
@@ -377,7 +373,7 @@ class Primitives {
    * @public
    */
   static $narrowFloatToInt(instance) {
-    return Primitives.$roundToInt(instance);
+    return Primitives.$roundToInt_(instance);
   }
 
   /**
@@ -388,7 +384,21 @@ class Primitives {
    * @public
    */
   static $narrowDoubleToInt(instance) {
-    return Primitives.$roundToInt(instance);
+    return Primitives.$roundToInt_(instance);
+  }
+
+  /**
+   * Checks if result is Infinity or Nan to catch division by zero and
+   * coerces it to integer
+   *
+   * @param {number} value
+   * @return {number}
+   * @public
+   */
+  static $coerceDivision(value) {
+    Primitives.$clinit();
+    InternalPreconditions.m_checkArithmetic__boolean(isFinite(value));
+    return Primitives.$toInt(value);
   }
 
   /**
@@ -397,23 +407,10 @@ class Primitives {
    * @return {number}
    * @private
    */
-  static $roundToInt(value) {
+  static $roundToInt_(value) {
     Primitives.$clinit();
     return Math.max(Math.min(value, $int.MAX_VALUE), $int.MIN_VALUE) | 0;
   }
-
-  /**
-   * Checks if result is Infinity to catch division by zero.
-   *
-   * @param {number} result
-   * @return {void}
-   * @private
-   */
-  static $checkArithmeticException(result) {
-    Primitives.$clinit();
-    InternalPreconditions.m_checkArithmetic__boolean(isFinite(result));
-  }
-
 
   /**
    * Runs inline static field initializers.

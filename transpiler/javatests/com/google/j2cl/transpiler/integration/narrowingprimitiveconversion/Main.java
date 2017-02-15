@@ -92,7 +92,31 @@ public class Main {
     assert ((float) md == md); // we don't honor float-double precision differences
 
     int n = 5;
-    // Uncomment when b/28875322 is fixed
-    // assert 2 * (n / 2) == 4;
+    assert 2 * (n / 2) == 4;
+
+    // JLS 5.1.4
+    float fmin = Float.NEGATIVE_INFINITY;
+    float fmax = Float.POSITIVE_INFINITY;
+    float fnan = Float.NaN;
+
+    assert (long) fmin == Long.MIN_VALUE;
+    assert (long) fmax == Long.MAX_VALUE;
+    assert (long) fnan == 0L;
+
+    assert (int) fmin == Integer.MIN_VALUE;
+    assert (int) fmax == Integer.MAX_VALUE;
+    assert (int) fnan == 0;
+
+    assert (short) fmin == (short) Integer.MIN_VALUE;
+    assert (short) fmax == (short) Integer.MAX_VALUE;
+    assert (short) fnan == (short) 0;
+
+    assert (byte) fmin == (byte) Integer.MIN_VALUE;
+    assert (byte) fmax == (byte) Integer.MAX_VALUE;
+    assert (byte) fnan == (byte) 0;
+
+    assert (char) fmin == (char) Integer.MIN_VALUE;
+    assert (char) fmax == (char) Integer.MAX_VALUE;
+    assert (char) fnan == (char) 0;
   }
 }

@@ -69,8 +69,7 @@ public class Main {
     // Uncomment when b/34460222 is fixed
     // assert stringArray[0] + stringArray[0] == "nullnull";
 
-    // Uncomment when b/28875322 is fixed.
-    // assert ((5/2) - 0.0) == 2.0;
+    assert ((5 / 2) - 0.0) == 2.0;
 
     // Compound assignment with enclosing instance.
     class Outer {

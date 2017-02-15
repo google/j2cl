@@ -68,7 +68,7 @@
 [m] => [m] "m"
 [getLongArray()[0]++;] => [let $array = ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions();]
 [getLongArray()[0]++;] => [$Arrays.$set($array, 0, $LongUtils.$plus($array[0], $Long.fromBits(1, 0) /* 1 */));]
-[double o = (5 / 2) - 0.0;] => [let o = (5 / 2) - 0.0;]
+[double o = (5 / 2) - 0.0;] => [let o = ($Primitives.$coerceDivision(5 / 2)) - 0.0;]
 [o] => [o] "o"
 [Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);]
 [boxI] => [boxI] "boxI"

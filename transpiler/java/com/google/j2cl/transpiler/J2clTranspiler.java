@@ -28,6 +28,7 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
+import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
@@ -229,6 +230,7 @@ public class J2clTranspiler {
             // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
             new NormalizeLongs(),
             new InsertUnderflowOverflowConversions(),
+            new InsertDivisionCoercions(),
             new FixBooleanOperators(),
             new ArrayAccessNormalizer(),
             new NormalizeConstructors(),

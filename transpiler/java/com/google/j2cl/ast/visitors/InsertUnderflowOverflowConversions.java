@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -105,22 +104,15 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
       return expression;
     }
 
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
-
     // SPECIAL CASE FOR INT:
-    // Technically, we should be emitting underflow/overflow narrowing operations for int
-    // regardless of which binary operator is being used. If we did so our int operations would be
-    // spammed with underflow/overflow checks. As an optimization, we choose not to insert
-    // underflow/overflow checks for integer operations other than divide and mod because:
+    // Technically, we should be emitting underflow/overflow narrowing operations for int, but if we
+    // did so our int operations would be spammed with underflow/overflow checks. As an
+    // optimization, we choose not to insert underflow/overflow checks for integer operations
+    // because:
     //  1) ints are used a lot and will therefore create a lot of underflow/overflow checks.
     //  2) ints are larger than byte, char, and short and are therefore less likely to produce
     //     overflow behavior.
-    //
-    // The narrowing operations also produce ArithmeticExceptions that result from division by 0
-    // and modulus by 0 so we also keep the check for modulus operations.
-    if (TypeDescriptors.isPrimitiveInt(fromTypeDescriptor)
-        && binaryExpression.getOperator() != BinaryOperator.DIVIDE
-        && binaryExpression.getOperator() != BinaryOperator.REMAINDER) {
+    if (TypeDescriptors.isPrimitiveInt(fromTypeDescriptor)) {
       return expression;
     }
 
