@@ -26,7 +26,6 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
@@ -2072,7 +2071,7 @@ public class CompilationUnitBuilder {
                   .setStatic(true)
                   .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
                   .setName("$get")
-                  .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
+                  .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
                   .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
                   .build())
           .setArguments(new TypeReference(literalTypeDescriptor))
@@ -2090,8 +2089,7 @@ public class CompilationUnitBuilder {
               .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
               .setName("$get")
               .setParameterTypeDescriptors(
-                  Lists.newArrayList(
-                      TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt))
+                  TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt)
               .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
 

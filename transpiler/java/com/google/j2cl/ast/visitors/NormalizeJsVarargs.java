@@ -47,7 +47,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableReference;
-import java.util.Collections;
 
 /**
  * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a prolog
@@ -136,8 +135,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       Expression newArray =
           NewArray.newBuilder()
               .setTypeDescriptor(varargsParameter.getTypeDescriptor())
-              .setDimensionExpressions(
-                  Collections.singletonList(createArraySizeExpression(varargsIndex)))
+              .setDimensionExpressions(createArraySizeExpression(varargsIndex))
               .setArrayLiteral(null)
               .build();
       Statement variableDeclaration =

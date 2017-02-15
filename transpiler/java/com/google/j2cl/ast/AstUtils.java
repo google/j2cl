@@ -83,8 +83,7 @@ public class AstUtils {
         .setName(MethodDescriptor.SAME_METHOD_NAME)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
         .setParameterTypeDescriptors(
-            Lists.newArrayList(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
+            TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
         .build();
   }
 

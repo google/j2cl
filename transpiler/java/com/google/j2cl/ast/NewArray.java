@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -94,6 +95,10 @@ public class NewArray extends Expression {
     public Builder setArrayLiteral(ArrayLiteral arrayLiteral) {
       this.arrayLiteral = arrayLiteral;
       return this;
+    }
+
+    public Builder setDimensionExpressions(Expression... dimensionExpressions) {
+      return setDimensionExpressions(Arrays.asList(dimensionExpressions));
     }
 
     public Builder setDimensionExpressions(List<Expression> dimensionExpressions) {

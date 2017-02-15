@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -67,13 +66,12 @@ public class NormalizeLongs extends NormalizationPass {
                     .setEnclosingClassTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
                     .setName(getLongOperationFunctionName(operator))
                     .setParameterTypeDescriptors(
-                        Lists.newArrayList(
-                            leftParameterTypeDescriptor, rightParameterTypeDescriptor))
+                        leftParameterTypeDescriptor, rightParameterTypeDescriptor)
                     .setReturnTypeDescriptor(returnTypeDescriptor)
                     .build();
             // LongUtils.$someOperation(leftOperand, rightOperand);
             return MethodCall.Builder.from(longUtilsMethodDescriptor)
-                .setArguments(Lists.newArrayList(leftOperand, rightOperand))
+                .setArguments(leftOperand, rightOperand)
                 .build();
           }
 
@@ -99,7 +97,7 @@ public class NormalizeLongs extends NormalizationPass {
                     .setStatic(true)
                     .setEnclosingClassTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
                     .setName(getLongOperationFunctionName(operator))
-                    .setParameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
+                    .setParameterTypeDescriptors(parameterTypeDescriptor)
                     .setReturnTypeDescriptor(returnTypeDescriptor)
                     .build();
             // LongUtils.$someOperation(operand);

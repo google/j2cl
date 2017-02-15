@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -79,8 +78,7 @@ public class NormalizeCasts extends NormalizationPass {
             .setEnclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
             .setName("to")
             .setParameterTypeDescriptors(
-                Lists.newArrayList(
-                    TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
     TypeDescriptor castTypeDescriptorArgument =
@@ -119,10 +117,9 @@ public class NormalizeCasts extends NormalizationPass {
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .setName("$castTo")
             .setParameterTypeDescriptors(
-                Lists.newArrayList(
-                    TypeDescriptors.get().javaLangObject,
-                    TypeDescriptors.get().javaLangObject,
-                    TypeDescriptors.get().primitiveInt))
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().primitiveInt)
             .setReturnTypeDescriptor(arrayCastTypeDescriptor)
             .build();
 
@@ -157,7 +154,7 @@ public class NormalizeCasts extends NormalizationPass {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .setName("$castToNative")
-            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
 

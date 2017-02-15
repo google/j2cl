@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -138,7 +137,7 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
             .setName(overflowMethodName)
-            .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+            .setParameterTypeDescriptors(fromTypeDescriptor)
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$toA(expr);

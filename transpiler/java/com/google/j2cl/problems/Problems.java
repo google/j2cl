@@ -22,8 +22,8 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -172,15 +172,19 @@ public class Problems {
   }
 
   public List<String> getErrors() {
-    return getProblems(Collections.singleton(Severity.ERROR));
+    return getProblems(Severity.ERROR);
   }
 
   public List<String> getWarnings() {
-    return getProblems(Collections.singleton(Severity.WARNING));
+    return getProblems(Severity.WARNING);
   }
 
   public List<String> getInfoMessages() {
-    return getProblems(Collections.singleton(Severity.INFO));
+    return getProblems(Severity.INFO);
+  }
+
+  public List<String> getProblems(Severity... severities) {
+    return getProblems(Arrays.asList(severities));
   }
 
   public List<String> getProblems(Collection<Severity> severities) {

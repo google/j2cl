@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
@@ -114,8 +113,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                         TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
                     .setName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
                     .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
-                    .setParameterTypeDescriptors(
-                        Lists.newArrayList(TypeDescriptors.get().javaLangString))
+                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
                     .build();
             return MethodCall.Builder.from(makeEnumNameMethodDescriptor)
                 .setArguments(nameVariable)

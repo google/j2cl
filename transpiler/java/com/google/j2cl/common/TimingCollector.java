@@ -4,12 +4,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
+import com.google.common.collect.Multimap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
@@ -132,13 +131,9 @@ public class TimingCollector {
       tab += "   ";
     }
     // Aggregate all sample by name.
-    Map<String, List<Sample>> samplesByName = Maps.newLinkedHashMap();
+    Multimap<String, Sample> samplesByName = LinkedHashMultimap.create();
     for (Sample sample : samples) {
-      if (samplesByName.containsKey(sample.name)) {
-        samplesByName.get(sample.name).add(sample);
-      } else {
-        samplesByName.put(sample.name, Lists.newArrayList(sample));
-      }
+      samplesByName.put(sample.name, sample);
     }
     // Print the sample data by name and recurse to its sub-samples.
     for (String name : samplesByName.keySet()) {

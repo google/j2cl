@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -68,7 +67,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(checkTypeDescriptor)
             .setName("$isInstance")
-            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
@@ -88,10 +87,9 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfType")
             .setParameterTypeDescriptors(
-                Lists.newArrayList(
-                    TypeDescriptors.get().javaLangObject,
-                    TypeDescriptors.get().javaLangObject,
-                    TypeDescriptors.get().primitiveInt))
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().primitiveInt)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
@@ -119,7 +117,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             .setStatic(true)
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfNative")
-            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
