@@ -24,7 +24,6 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -739,17 +738,12 @@ public abstract class TypeDescriptor extends Node
     private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
       // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
       return new DescriptorFactory<T>() {
-        T cachedValue;
-        TypeDescriptor selfTypeDescriptor;
+        Map<TypeDescriptor, T> cachedValues = new HashMap<>();
 
         @Override
         public T get(TypeDescriptor selfTypeDescriptor) {
-          Preconditions.checkArgument(
-              this.selfTypeDescriptor == null || this.selfTypeDescriptor == selfTypeDescriptor);
-          if (cachedValue == null) {
-            cachedValue = factory.get(selfTypeDescriptor);
-          }
-          return cachedValue;
+          return cachedValues.computeIfAbsent(
+              selfTypeDescriptor, (TypeDescriptor k) -> factory.get(k));
         }
       };
     }

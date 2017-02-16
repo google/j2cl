@@ -62,17 +62,6 @@ class Numbers extends Enum {
   }
 
   /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));
-  }
-
-  /**
    * @param {?string} name
    * @return {Numbers}
    * @public
@@ -107,6 +96,17 @@ class Numbers extends Enum {
               .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers
         ],
         Numbers));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));
   }
 
   /**

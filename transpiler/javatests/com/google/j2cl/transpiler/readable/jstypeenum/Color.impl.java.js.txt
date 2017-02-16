@@ -62,17 +62,6 @@ class Color extends Enum {
   }
 
   /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));
-  }
-
-  /**
    * @param {?string} name
    * @return {Color}
    * @public
@@ -106,6 +95,17 @@ class Color extends Enum {
           Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color
         ],
         Color));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));
   }
 
   /**

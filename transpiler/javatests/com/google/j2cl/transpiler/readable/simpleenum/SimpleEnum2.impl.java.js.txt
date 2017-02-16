@@ -102,18 +102,6 @@ class SimpleEnum2 extends Enum {
   }
 
   /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(
-        /**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
-  }
-
-  /**
    * @param {?string} name
    * @return {SimpleEnum2}
    * @public
@@ -150,6 +138,18 @@ class SimpleEnum2 extends Enum {
               .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2
         ],
         SimpleEnum2));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(
+        /**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
   }
 
   /**

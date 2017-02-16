@@ -287,9 +287,6 @@ public class CompilationUnitBuilder {
 
       // Add dispatch methods for package private methods.
       PackagePrivateMethodsDispatcher.create(typeBinding, type);
-
-      // Add bridge methods.
-      BridgeMethodsCreator.create(typeBinding, type);
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {

@@ -23,7 +23,6 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -39,6 +38,7 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -769,17 +769,12 @@ public abstract class TypeDeclaration extends Node
     private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
       // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
       return new DescriptorFactory<T>() {
-        T cachedValue;
-        TypeDeclaration selfTypeDeclaration;
+        Map<TypeDeclaration, T> cachedValues = new HashMap<>();
 
         @Override
         public T get(TypeDeclaration selfTypeDeclaration) {
-          Preconditions.checkArgument(
-              this.selfTypeDeclaration == null || this.selfTypeDeclaration == selfTypeDeclaration);
-          if (cachedValue == null) {
-            cachedValue = factory.get(selfTypeDeclaration);
-          }
-          return cachedValue;
+          return cachedValues.computeIfAbsent(
+              selfTypeDeclaration, (TypeDeclaration k) -> factory.get(k));
         }
       };
     }

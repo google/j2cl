@@ -33,17 +33,6 @@
   }] "com.google.j2cl.transpiler.readable.switchstatement.Numbers.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_switchstatement_Numbers();]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));
-  }]
-[UNKNOWN] => [return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));]
 [public enum Numbers {
   ONE,
   TWO
@@ -66,6 +55,17 @@
   }] "com.google.j2cl.transpiler.readable.switchstatement.Numbers"
 [UNKNOWN] => [Numbers.$clinit();]
 [UNKNOWN] => [return /**@type {!Array<Numbers>} */ ($Arrays.$init([Numbers.$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers, Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers], Numbers));]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));
+  }]
+[UNKNOWN] => [return super.compareTo(/**@type {Numbers} */ ($Casts.to(arg0, Numbers)));]
 [UNKNOWN] => [Enum.$clinit();]
 [ONE] => [Numbers.$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName("ONE"), 0);]
 [TWO] => [Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName("TWO"), 1);]

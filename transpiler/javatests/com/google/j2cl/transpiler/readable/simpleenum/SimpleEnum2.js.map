@@ -55,17 +55,6 @@
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<ctor>"
 [foo] => [foo] "foo"
 [this(foo.ordinal());] => [this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int($name, $ordinal, foo.ordinal());]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
-  }]
-[UNKNOWN] => [return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));]
 [enum SimpleEnum2 {
   VALUE1(2),
 ...  }
@@ -88,6 +77,17 @@
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2"
 [UNKNOWN] => [SimpleEnum2.$clinit();]
 [UNKNOWN] => [return /**@type {!Array<SimpleEnum2>} */ ($Arrays.$init([SimpleEnum2.$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2, SimpleEnum2.$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2, SimpleEnum2.$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2], SimpleEnum2));]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
+  }]
+[UNKNOWN] => [return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));]
 [UNKNOWN] => [Enum.$clinit();]
 [VALUE1(2)] => [SimpleEnum2.$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum2.$create__java_lang_String__int__int($Util.$makeEnumName("VALUE1"), 0, 2);]
 [VALUE2(SimpleEnum.V1)] => [SimpleEnum2.$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum2.$create__java_lang_String__int__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum($Util.$makeEnumName("VALUE2"), 1, SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum);]

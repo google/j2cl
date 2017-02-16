@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
+import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
 import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
@@ -195,8 +196,9 @@ public class J2clTranspiler {
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
-            new InsertErasureTypeSafetyCasts(),
+            new BridgeMethodsCreator(),
             new JsBridgeMethodsCreator(),
+            new InsertErasureTypeSafetyCasts(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),

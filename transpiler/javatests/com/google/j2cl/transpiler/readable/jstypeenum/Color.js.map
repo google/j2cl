@@ -33,17 +33,6 @@ public enum Color {
   }] "com.google.j2cl.transpiler.readable.jstypeenum.Color.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstypeenum_Color();]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));
-  }]
-[UNKNOWN] => [return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));]
 [@JsType
 public enum Color {
 ...  BLUE
@@ -66,6 +55,17 @@ public enum Color {
   }] "com.google.j2cl.transpiler.readable.jstypeenum.Color"
 [UNKNOWN] => [Color.$clinit();]
 [UNKNOWN] => [return /**@type {!Array<Color>} */ ($Arrays.$init([Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color], Color));]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));
+  }]
+[UNKNOWN] => [return super.compareTo(/**@type {Color} */ ($Casts.to(arg0, Color)));]
 [UNKNOWN] => [Enum.$clinit();]
 [RED] => [Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("RED"), 0);]
 [GREEN] => [Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("GREEN"), 1);]
