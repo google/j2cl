@@ -38,20 +38,18 @@ public class JsFunctionTest extends MyTestCase {
   }
 
   @JsFunction
-  public static interface MyJsFunctionInterface {
+  public interface MyJsFunctionInterface {
     int foo(int a);
   }
 
   @JsFunction
-  public static interface MyJsFunctionIdentityInterface {
+  public interface MyJsFunctionIdentityInterface {
     Object identity();
   }
 
-  /**
-   * A JsFunction interface.
-   */
+  /** A JsFunction interface. */
   @JsFunction
-  public static interface MyOtherJsFunctionInterface {
+  public interface MyOtherJsFunctionInterface {
     int bar(int a);
   }
 
@@ -63,10 +61,8 @@ public class JsFunctionTest extends MyTestCase {
     int foo(int a);
   }
 
-  /**
-   * A concrete class that implements a JsFunction interface.
-   */
-  public static class MyJsFunctionInterfaceImpl implements MyJsFunctionInterface {
+  /** A concrete class that implements a JsFunction interface. */
+  public static final class MyJsFunctionInterfaceImpl implements MyJsFunctionInterface {
 
     public int publicField = 10;
 

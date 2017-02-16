@@ -9,7 +9,7 @@ public class Main {
     int f1(int i, Main... args);
   }
 
-  static class AFunction implements Function {
+  static final class AFunction implements Function {
 
     @Override
     public int f1(int i, Main... args) {

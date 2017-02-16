@@ -9,14 +9,14 @@ public class Main {
     T apply(T t, S s);
   }
 
-  public static class A implements ApplyFunction<Double, Double> {
+  public static final class A implements ApplyFunction<Double, Double> {
     @Override
     public Double apply(Double d, Double i) {
       return d;
     }
   }
 
-  public static class B<T> implements ApplyFunction<T, Integer> {
+  public static final class B<T> implements ApplyFunction<T, Integer> {
     @Override
     public T apply(T element, Integer i) {
       return null;

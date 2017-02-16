@@ -1,6 +1,6 @@
 package com.google.j2cl.transpiler.readable.jsfunction;
 
-public class MyJsFunctionImpl implements MyJsFunctionInterface {
+public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 
   public int bar() {

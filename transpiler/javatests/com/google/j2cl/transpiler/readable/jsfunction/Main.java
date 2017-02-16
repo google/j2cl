@@ -82,7 +82,7 @@ public class Main {
     int m(int i, int... numbers);
   }
 
-  static class JsFunctionVaragsImpl implements JsFunctionVarags {
+  static final class JsFunctionVaragsImpl implements JsFunctionVarags {
     @Override
     public int m(int i, int... numbers) {
       int sum = i;
@@ -109,7 +109,7 @@ public class Main {
     int m(int i, @JsOptional Double number);
   }
 
-  static class JsFunctionOptionalImpl implements JsFunctionOptional {
+  static final class JsFunctionOptionalImpl implements JsFunctionOptional {
     @Override
     public int m(int i, @JsOptional Double number) {
       return (int) (i + number);

@@ -35,7 +35,7 @@ public class Main {
     return (Function<E, E>) identityFunction;
   }
 
-  private static class IdentityFunction implements Function<Object, Object> {
+  private static final class IdentityFunction implements Function<Object, Object> {
     @Override
     public Object apply(Object o) {
       return o;

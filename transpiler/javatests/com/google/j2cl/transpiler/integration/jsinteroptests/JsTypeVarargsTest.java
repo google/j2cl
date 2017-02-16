@@ -203,7 +203,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     Object f(int i, Object... args);
   }
 
-  static class AFunction implements Function {
+  static final class AFunction implements Function {
 
     @Override
     public Object f(int i, Object... args) {

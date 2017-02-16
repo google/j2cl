@@ -14,14 +14,14 @@ public class Main {
   public void method2(String s1, @JsOptional Double d, Boolean... i) {}
 
   @JsFunction
-  static interface Function {
+  interface Function {
     Object f1(@JsOptional String i, Object... args);
   }
 
   @JsConstructor
   public Main(@JsOptional String a) {}
 
-  static class AFunction implements Function {
+  static final class AFunction implements Function {
     @Override
     public Object f1(@JsOptional String i, Object... args) {
       return args[0];

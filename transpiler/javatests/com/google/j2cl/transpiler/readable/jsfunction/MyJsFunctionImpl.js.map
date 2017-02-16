@@ -1,11 +1,11 @@
-[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 ...  }
 }] => [/**
  * @implements {MyJsFunctionInterface}
 ...exports = MyJsFunctionImpl;
 ] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl"
-[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 ...  }
 }] => [/**
@@ -15,7 +15,7 @@
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl = 0;]
-[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 ...  }
 }] => [/**
@@ -26,7 +26,7 @@
 [UNKNOWN] => [let $instance = new MyJsFunctionImpl();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(MyJsFunctionImpl).m_foo__int, $instance, MyJsFunctionImpl.$copy);]
-[public class MyJsFunctionImpl implements MyJsFunctionInterface {
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 ...  }
 }] => [/**

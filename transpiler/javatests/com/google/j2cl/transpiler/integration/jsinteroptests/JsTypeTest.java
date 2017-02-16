@@ -582,7 +582,7 @@ public class JsTypeTest extends MyTestCase {
     int m();
   }
 
-  static class JavaConcreteJsFunction implements JsFunctionInterface {
+  static final class JavaConcreteJsFunction implements JsFunctionInterface {
     public int m() {
       return 5;
     }

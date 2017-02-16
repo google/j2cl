@@ -47,7 +47,7 @@ public class Main {
     T apply(T element);
   }
 
-  private static class Identity implements ApplyFunction<Object> {
+  private static final class Identity implements ApplyFunction<Object> {
     @Override
     public Object apply(Object element) {
       return element;

@@ -20,11 +20,11 @@ public class Main {
   }
 
   @JsFunction
-  static interface Function {
+  interface Function {
     Object f1(int i, Object... args);
   }
 
-  static class AFunction implements Function {
+  static final class AFunction implements Function {
 
     @Override
     public Object f1(int i, Object... args) {

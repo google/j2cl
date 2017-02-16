@@ -1,11 +1,11 @@
-[public static class A implements ApplyFunction<Double, Double> {
+[public static final class A implements ApplyFunction<Double, Double> {
     @Override
 ...    }
   }] => [/**
  * @implements {ApplyFunction<?number, ?number>}
 ...exports = A;
 ] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A"
-[public static class A implements ApplyFunction<Double, Double> {
+[public static final class A implements ApplyFunction<Double, Double> {
     @Override
 ...    }
   }] => [/**
@@ -13,7 +13,7 @@
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A"
 [UNKNOWN] => [super();]
-[public static class A implements ApplyFunction<Double, Double> {
+[public static final class A implements ApplyFunction<Double, Double> {
     @Override
 ...    }
   }] => [/**
@@ -24,7 +24,7 @@
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(A).m_apply__java_lang_Object__java_lang_Number, $instance, A.$copy);]
-[public static class A implements ApplyFunction<Double, Double> {
+[public static final class A implements ApplyFunction<Double, Double> {
     @Override
 ...    }
   }] => [/**
