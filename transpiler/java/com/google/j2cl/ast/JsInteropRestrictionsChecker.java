@@ -400,6 +400,13 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsFunctionImplementation(Type type) {
     String readableDescription = type.getDeclaration().getReadableDescription();
+    if (!type.getDeclaration().isFinal() && !type.isAnonymous()) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsFunction implementation '%s' must be final.",
+          readableDescription);
+    }
+
     if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
       problems.error(
           type.getSourcePosition(),
@@ -423,14 +430,6 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsFunctionSubtype(Type type) {
-    TypeDescriptor superClassTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superClassTypeDescriptor != null && superClassTypeDescriptor.isJsFunctionImplementation()) {
-      problems.error(
-          type.getSourcePosition(),
-          "'%s' cannot extend JsFunction implementation '%s'.",
-          type.getDeclaration().getReadableDescription(),
-          superClassTypeDescriptor.getReadableDescription());
-    }
     for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
       if (superInterface.isJsFunctionInterface()) {
         problems.error(

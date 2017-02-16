@@ -1337,23 +1337,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testJsFunctionImplementationWithSubclassesFails() throws Exception {
-    compile(
-            source(
-                "BaseClass",
-                "public class BaseClass implements MyJsFunctionInterface {",
-                "  public int foo(int x) { return 0; }",
-                "}"),
-            source("Buggy", "public class Buggy extends BaseClass  {", "}"),
-            source(
-                "MyJsFunctionInterface",
-                "import jsinterop.annotations.JsFunction;",
-                "@JsFunction public interface MyJsFunctionInterface {",
-                " int foo(int x);",
-                "}"))
-        .assertCompileFails("'Buggy' cannot extend JsFunction implementation 'BaseClass'.");
-  }
-
   public void testJsFunctionFails() throws Exception {
     compile(
             "Buggy",
@@ -1413,6 +1396,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
             "JsFunction 'InvalidJsFunctionClass' has to be a functional interface.",
+            " JsFunction implementation 'NonFinalJsFunction' must be final.",
             "'JsFunctionMarkedAsJsType' cannot be both a JsFunction implementation and "
                 + "a JsType at the same time.",
             "JsFunction 'JsFunctionExtendsInterface' cannot extend other interfaces.",
