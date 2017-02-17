@@ -146,8 +146,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingFieldExportsFails() throws Exception {
+  public void testCollidingFieldExportsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -158,9 +157,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int display = 0;",
             "}")
         .assertCompileFails(
-            "Line 8: 'int EntryPoint.Buggy.display' cannot be exported because the global "
-                + "name 'test.EntryPoint.Buggy.show' is already taken by "
-                + "'int EntryPoint.Buggy.show'.");
+            "'int Buggy.display' and 'int Buggy.show' cannot both use the same "
+                + "JavaScript name 'show'.");
   }
 
   public void testJsPropertyNonGetterStyleSucceeds() throws Exception {
@@ -368,8 +366,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "by 'void EntryPoint.Buggy.setDisplay(int)'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingMethodExportsFails() throws Exception {
+  public void testCollidingMethodExportsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -380,13 +377,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void display() {}",
             "}")
         .assertCompileFails(
-            "Line 8: 'void EntryPoint.Buggy.display()' cannot be exported because the global name "
-                + "'test.EntryPoint.Buggy.show' is already taken "
-                + "by 'void EntryPoint.Buggy.show()'.");
+            " 'void Buggy.display()' and 'void Buggy.show()' cannot both use the same "
+                + "JavaScript name 'show'");
   }
 
-  // TODO(rluble): enable when static property definitions are implemented.
-  public void disabled_testCollidingMethodToPropertyAccessorExportsFails() throws Exception {
+  public void testCollidingMethodToPropertyAccessorExportsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -398,13 +393,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void show() {}",
             "}")
         .assertCompileFails(
-            "Line 9: 'void EntryPoint.Buggy.show()' cannot be exported because the global name "
-                + "'test.EntryPoint.Buggy.show' is already taken by "
-                + "'void EntryPoint.Buggy.setShow(int)'.");
+            " 'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
+                + "JavaScript name 'show'");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingMethodToFieldExportsFails() throws Exception {
+  public void testCollidingMethodToFieldExportsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -416,9 +409,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int show = 0;",
             "}")
         .assertCompileFails(
-            "Line 7: 'void EntryPoint.Buggy.show()' cannot be exported because the global name "
-                + "'test.EntryPoint.Buggy.show' is already taken by "
-                + "'int EntryPoint.Buggy.show'.");
+            "'int Buggy.show' and 'void Buggy.show()' cannot both use the same "
+                + "JavaScript name 'show'.");
   }
 
   public void testCollidingMethodToFieldJsTypeFails() throws Exception {

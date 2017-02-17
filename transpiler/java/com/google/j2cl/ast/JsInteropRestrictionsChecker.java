@@ -111,10 +111,6 @@ public class JsInteropRestrictionsChecker {
               ? ((Field) member).getDescriptor()
               : ((Method) member).getDescriptor();
 
-      // TODO(b/27597597): analyze static exports as well.
-      if (memberDescriptor.isStatic()) {
-        continue;
-      }
       // Constructors are subject to a separate check and should not be duplicatively examined here.
       if (memberDescriptor instanceof MethodDescriptor
           && ((MethodDescriptor) memberDescriptor).isConstructor()) {
