@@ -91,7 +91,7 @@ public class JsInteropRestrictionsChecker {
       checkMethod(method);
     }
     checkTypeMemberCollisions(type);
-    // TODO: do other checks.
+    checkInstanceOfNativeJsTypesOrJsFunctionImplementations(type);
   }
 
   private void checkTypeMemberCollisions(Type type) {
@@ -155,6 +155,27 @@ public class JsInteropRestrictionsChecker {
 
       memberDescriptorsByKey.put(getMemberKey(memberDescriptor), memberDescriptor);
     }
+  }
+
+  private void checkInstanceOfNativeJsTypesOrJsFunctionImplementations(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+            TypeDescriptor type = instanceOfExpression.getTestTypeDescriptor();
+            if (type.isNative() && type.isInterface()) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against native JsType interface '%s'.",
+                  type.getReadableDescription());
+            } else if (type.isJsFunctionImplementation()) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against JsFunction implementation '%s'.",
+                  type.getReadableDescription());
+            }
+          }
+        });
   }
 
   private boolean checkJsType(Type type) {

@@ -967,6 +967,7 @@ public class CompilationUnitBuilder {
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
       return new InstanceOfExpression(
+          getSourcePosition(expression),
           convert(expression.getLeftOperand()),
           JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding()));
     }

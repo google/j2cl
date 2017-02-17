@@ -23,7 +23,6 @@ public class Main {
   }
 
   private static void testFooOverlay(FooOverlay fooOverlay) {
-    assert fooOverlay instanceof FooOverlay;
     assert fooOverlay.getFoo().equals("Hello");
   }
 

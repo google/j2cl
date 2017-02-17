@@ -1403,7 +1403,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "'InterfaceExtendsJsFunction' cannot extend JsFunction 'Function'.",
             "JsFunction implementation 'JsFunctionExtendingBaseClass' cannot extend a class.",
             "JsFunction implementation 'JsFunctionMultipleInterfaces' cannot implement more than"
-                + " one interface."
+                + " one interface.",
+            "Cannot do instanceof against JsFunction implementation 'Buggy'."
             // TODO(b/27597597): There should be the following errors also.
             // "Line 14: JsFunction implementation member 'int EntryPoint.Buggy.getFoo()' "
             //      + "cannot be JsMethod nor JsProperty.",
@@ -1425,8 +1426,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             //      + " non-JsOverlay member 'int EntryPoint.InvalidFunction.f'.",
             //  "Line 29: JsFunction interface 'EntryPoint.InvalidFunction' cannot declare"
             //      + " non-JsOverlay member 'void EntryPoint.InvalidFunction.n()'.",
-            //  "Line 43: Cannot do instanceof against JsFunction implementation "
-            //      + "'EntryPoint.Buggy'."
             );
   }
 
@@ -1545,8 +1544,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsTypeInterfaceInInstanceofFails() throws Exception {
+  public void testJsTypeInterfaceInInstanceofFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1554,9 +1552,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy {",
             "  public Buggy() { if (new Object() instanceof IBuggy) {} }",
             "}")
-        .assertCompileFails(
-            "Line 6: Cannot do instanceof against native JsType interface "
-                + "'EntryPoint.IBuggy'.");
+        .assertCompileFails("Cannot do instanceof against native JsType interface 'IBuggy'.");
   }
 
   public void testNativeJsTypeEnumFails() throws Exception {

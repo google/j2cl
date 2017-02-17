@@ -42,7 +42,7 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
   @Override
   final Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     Node newNode = rewrite${clazz.SimpleName}(node);
-    if (node instanceof HasMetadata) {
+    if (node instanceof HasMetadata && newNode instanceof HasMetadata) {
       ((HasMetadata)newNode).copyMetadataFrom((HasMetadata)node);
     }
     return newNode;

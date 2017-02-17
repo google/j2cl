@@ -286,7 +286,6 @@ public class JsFunctionTest extends MyTestCase {
     assertTrue(object instanceof MyJsFunctionInterface);
     assertTrue(object instanceof MyJsFunctionIdentityInterface);
     assertTrue(object instanceof MyJsFunctionWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsFunctionInterfaceImpl);
   }
 
   public void testInstanceOf_jsObject() {
@@ -294,13 +293,11 @@ public class JsFunctionTest extends MyTestCase {
     assertFalse(object instanceof MyJsFunctionInterface);
     assertFalse(object instanceof MyJsFunctionIdentityInterface);
     assertFalse(object instanceof MyJsFunctionWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsFunctionInterfaceImpl);
   }
 
   public void testInstanceOf_javaInstance() {
     Object object = new MyJsFunctionInterfaceImpl();
     assertTrue(object instanceof MyJsFunctionInterface);
-    assertTrue(object instanceof MyJsFunctionInterfaceImpl);
     assertTrue(object instanceof MyJsFunctionIdentityInterface);
     assertTrue(object instanceof MyJsFunctionWithOnlyInstanceofReference);
     assertFalse(object instanceof HTMLElementConcreteNativeJsType);

@@ -18,18 +18,21 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.SourcePosition;
 
-/**
- * Class for instanceof Expression.
- */
+/** Class for instanceof Expression. */
 @Visitable
-public class InstanceOfExpression extends Expression {
+public class InstanceOfExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
   @Visitable TypeDescriptor testTypeDescriptor;
+  SourcePosition sourcePosition;
 
-  public InstanceOfExpression(Expression expression, TypeDescriptor testTypeDescriptor) {
+  public InstanceOfExpression(
+      SourcePosition sourcePosition, Expression expression, TypeDescriptor testTypeDescriptor) {
     this.expression = checkNotNull(expression);
     this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
+    this.sourcePosition = sourcePosition;
   }
 
   public Expression getExpression() {
@@ -47,11 +50,21 @@ public class InstanceOfExpression extends Expression {
 
   @Override
   public InstanceOfExpression clone() {
-    return new InstanceOfExpression(expression.clone(), testTypeDescriptor);
+    return new InstanceOfExpression(sourcePosition, expression.clone(), testTypeDescriptor);
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_InstanceOfExpression.visit(processor, this);
+  }
+
+  @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
   }
 }
