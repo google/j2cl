@@ -209,7 +209,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 // is a parameterized method.
                 && methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()
                 // type erasure changes the signature
-                && !methodDescriptor.overridesSignature(
+                && !methodDescriptor.isJsOverride(
                     methodDescriptor.getDeclarationMethodDescriptor()));
   }
 
@@ -229,11 +229,11 @@ public class BridgeMethodsCreator extends NormalizationPass {
       if (!declaredMethodDescriptor.equals(bridgeMethodDescriptor) // should not target itself
           && !declaredMethodDescriptor.isAbstract() // should be a concrete implementation.
           // concrete methods have the same signature, thus an overriding.
-          && declaredMethodDescriptor.overridesSignature(bridgeMethodDescriptor)
+          && declaredMethodDescriptor.isJsOverride(bridgeMethodDescriptor)
           // original method declarations have different signatures
           && !declaredMethodDescriptor
               .getDeclarationMethodDescriptor()
-              .overridesSignature(bridgeMethodDescriptor.getDeclarationMethodDescriptor())) {
+              .isJsOverride(bridgeMethodDescriptor.getDeclarationMethodDescriptor())) {
         // find a overriding method (also possible accidental overriding), this is the method that
         // should be targeted.
         return declaredMethodDescriptor;
@@ -277,9 +277,9 @@ public class BridgeMethodsCreator extends NormalizationPass {
         if (methodDescriptor
                 == methodDescriptor.getDeclarationMethodDescriptor() // non-generic method,
             // generic method has been investigated by findForwardingMethod.
-            && methodDescriptor.overridesSignature(bridgeMethodDescriptor)
+            && methodDescriptor.isJsOverride(bridgeMethodDescriptor)
             // is overridden by a generic method with different erasure parameter types.
-            && !methodDescriptor.overridesSignature(
+            && !methodDescriptor.isJsOverride(
                 bridgeMethodDescriptor.getDeclarationMethodDescriptor())) {
           return methodDescriptor;
         }

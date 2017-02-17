@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
@@ -222,7 +221,7 @@ public class EnumMethodsCreator {
         enumType
             .getEnumFields()
             .stream()
-            .map(enumField -> Builder.from(enumField.getDescriptor()).build())
+            .map(enumField -> FieldAccess.Builder.from(enumField.getDescriptor()).build())
             .collect(Collectors.toList());
 
     TypeDescriptor arrayTypeDescriptor =

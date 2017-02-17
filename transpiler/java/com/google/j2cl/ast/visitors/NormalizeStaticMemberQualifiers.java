@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MultiExpression;
@@ -46,7 +45,7 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
               return MultiExpression.newBuilder()
                   .setExpressions(
                       fieldAccess.getQualifier(), // Preserve side effects.
-                      Builder.from(fieldAccess.getTarget())
+                      FieldAccess.Builder.from(fieldAccess.getTarget())
                           .setQualifier(null) // Static dispatch.
                           .build())
                   .build();

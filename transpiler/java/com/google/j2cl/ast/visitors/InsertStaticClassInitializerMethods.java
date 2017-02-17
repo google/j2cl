@@ -21,7 +21,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall.Builder;
+import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
@@ -80,7 +80,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
             .setName("$clinit")
             .setJsInfo(JsInfo.RAW)
             .build();
-    return Builder.from(clinitMethodDescriptor).build().makeStatement();
+    return MethodCall.Builder.from(clinitMethodDescriptor).build().makeStatement();
   }
 
   private void addRequiredSuperInterfacesClinitCalls(

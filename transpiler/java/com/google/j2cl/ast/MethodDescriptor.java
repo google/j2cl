@@ -149,16 +149,59 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
-   * Parameter erasure equal means that they are overriding signature equal, which means that they
-   * are real overriding/overridden or accidental overriding/overridden.
+   * Returns whether this method descriptor overrides the provided method descriptor from the Java
+   * source perspective.
+   *
+   * <p>This includes both real and accidental overrides.
    */
-  public boolean overridesSignature(MethodDescriptor that) {
+  public boolean isOverride(MethodDescriptor that) {
+    // A method can not override itself.
+    if (this == that) {
+      return false;
+    }
+    // Static methods do not participate in override chains.
     if (this.isStatic() || that.isStatic()) {
       return false;
     }
+    Visibility thisVisibility = this.getVisibility();
+    Visibility thatVisibility = that.getVisibility();
+    // Private methods can not override nor can they be overridden.
+    if (thisVisibility.isPrivate() || thatVisibility.isPrivate()) {
+      return false;
+    }
+    // An overriding method can not reduce visibility.
+    if (thisVisibility.level < thatVisibility.level) {
+      return false;
+    }
+    // To override a package private method one must reside in the same package.
+    if (thatVisibility.isPackagePrivate()
+        && !getEnclosingClassTypeDescriptor()
+            .getPackageName()
+            .equals(that.getEnclosingClassTypeDescriptor().getPackageName())) {
+      return false;
+    }
 
-    return this != that && this.getOverrideSignature().equals(that.getOverrideSignature());
+    return this.getOverrideSignature().equals(that.getOverrideSignature());
+  }
+
+  /**
+   * Returns whether this method descriptor overrides the provided method descriptor from the JS
+   * source perspective.
+   *
+   * <p>In JS, methods override if they have the exact same name. Since we output package private
+   * methods with a different name than public or protected methods the methods that override in our
+   * output JS is slightly more restrictive than it is in the Java source.
+   */
+  public boolean isJsOverride(MethodDescriptor that) {
+    if (!isOverride(that)) {
+      return false;
+    }
+
+    Visibility thisVisibility = this.getVisibility();
+    Visibility thatVisibility = that.getVisibility();
+
+    return (thisVisibility.isPublicOrProtected() && thatVisibility.isPublicOrProtected())
+        || thisVisibility == thatVisibility;
   }
 
   public String getMethodSignature() {
@@ -210,20 +253,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   private String overrideSignature;
 
-  /** Returns a signature suitable for override checking. */
+  /** Returns a signature suitable for override checking from the Java source perspective. */
   public String getOverrideSignature() {
     if (overrideSignature == null) {
       StringBuilder signatureBuilder = new StringBuilder("");
-      Visibility methodVisibility = getVisibility();
-      if (methodVisibility.isPackagePrivate()) {
-        signatureBuilder.append(":pp:");
-        signatureBuilder.append(getEnclosingClassTypeDescriptor().getPackageName());
-        signatureBuilder.append(":");
-      } else if (methodVisibility.isPrivate()) {
-        signatureBuilder.append(":p:");
-        signatureBuilder.append(getEnclosingClassTypeDescriptor().getQualifiedBinaryName());
-        signatureBuilder.append(":");
-      }
 
       signatureBuilder.append(getName());
       signatureBuilder.append("(");

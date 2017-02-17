@@ -33,7 +33,7 @@ import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Variable.Builder;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -127,7 +127,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
             .stream()
             .map(
                 variable ->
-                    Builder.from(variable)
+                    Variable.Builder.from(variable)
                         .setTypeDescriptor(
                             replaceTypeVariableWithBound(
                                 variable.getTypeDescriptor(),

@@ -24,7 +24,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.FieldDescriptor.Builder;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -40,7 +39,9 @@ import java.util.List;
 /**
  * Normalizes the static native js members accesses.
  *
- * <p>For example, <pre>
+ * <p>For example,
+ *
+ * <pre>
  * class A {
  *   {@literal @}JsMethod(namespace="Math")
  *   static native double abs(double x);
@@ -66,7 +67,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
 
             // A.abs -> Math.abs.
             FieldDescriptor newFieldescriptor =
-                Builder.from(fieldDescriptor)
+                FieldDescriptor.Builder.from(fieldDescriptor)
                     .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(fieldDescriptor))
                     .build();
             checkArgument(fieldAccess.getQualifier() instanceof TypeReference);

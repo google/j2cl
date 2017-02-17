@@ -31,7 +31,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldAccess.Builder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Member;
@@ -296,7 +295,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           ?
           // If the capturedVariable is also a captured variable in current type,
           // pass the corresponding field in current type as an argument.
-          Builder.from(capturingField.getDescriptor())
+          FieldAccess.Builder.from(capturingField.getDescriptor())
               .setQualifier(new ThisReference(type.getDeclaration().getUnsafeTypeDescriptor()))
               .build()
           // otherwise, the captured variable is in the scope of the current type,

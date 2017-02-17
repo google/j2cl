@@ -388,7 +388,7 @@ public abstract class TypeDeclaration extends Node
    */
   private boolean isOverriddenHere(MethodDescriptor methodDescriptor) {
     for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.overridesSignature(declaredMethodDescriptor)) {
+      if (methodDescriptor.isOverride(declaredMethodDescriptor)) {
         return true;
       }
     }
@@ -508,7 +508,7 @@ public abstract class TypeDeclaration extends Node
         }
 
         // TODO: exclude package private method, and add a test for it.
-        if (superMethodDescriptor.overridesSignature(methodDescriptor)) {
+        if (superMethodDescriptor.isOverride(methodDescriptor)) {
           return superMethodDescriptor;
         }
       }

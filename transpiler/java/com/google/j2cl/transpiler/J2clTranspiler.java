@@ -62,6 +62,7 @@ import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
+import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -196,6 +197,7 @@ public class J2clTranspiler {
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
+            new PackagePrivateMethodsDispatcher(),
             new BridgeMethodsCreator(),
             new JsBridgeMethodsCreator(),
             new InsertErasureTypeSafetyCasts(),

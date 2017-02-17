@@ -61,7 +61,6 @@ import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.Builder;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -284,9 +283,6 @@ public class CompilationUnitBuilder {
 
       // Resolve default methods
       DefaultMethodsResolver.resolve(typeBinding, type);
-
-      // Add dispatch methods for package private methods.
-      PackagePrivateMethodsDispatcher.create(typeBinding, type);
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
@@ -471,7 +467,6 @@ public class CompilationUnitBuilder {
       pushType(type);
       convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
 
-
       // The initial constructor descriptor does not include the super call qualifier.
       MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
 
@@ -485,7 +480,7 @@ public class CompilationUnitBuilder {
               .findFirst()
               .orElse(constructorBinding);
       MethodDescriptor superConstructorDescriptor =
-          Builder.from(JdtUtils.createMethodDescriptor(superConstructorBinding))
+          MethodDescriptor.Builder.from(JdtUtils.createMethodDescriptor(superConstructorBinding))
               .setEnclosingClassTypeDescriptor(type.getSuperTypeDescriptor())
               .build();
 
@@ -493,7 +488,7 @@ public class CompilationUnitBuilder {
         // If an explicit super qualifier was specified add it as the first parameter to the
         // constructor.
         constructorDescriptor =
-            Builder.from(constructorDescriptor)
+            MethodDescriptor.Builder.from(constructorDescriptor)
                 .addParameterTypeDescriptors(0, superQualifierTypeDescriptor)
                 .build();
       }
@@ -1359,7 +1354,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createLambdaTypeDescriptor(
               inStaticContext, enclosingType, classComponents, functionalInterfaceTypeBinding);
       MethodDescriptor lambdaDispatchMethodDescriptor =
-          Builder.from(
+          MethodDescriptor.Builder.from(
                   JdtUtils.createMethodDescriptor(
                       checkNotNull(
                           JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding))))
