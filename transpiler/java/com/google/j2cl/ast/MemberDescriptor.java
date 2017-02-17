@@ -19,6 +19,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.common.J2clUtils;
+import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
 @Visitable
@@ -41,6 +42,7 @@ public abstract class MemberDescriptor extends Node
     return thatMemberDescriptor.isMemberOf(getEnclosingClassTypeDescriptor());
   }
 
+  @Nullable
   public abstract String getName();
 
   public abstract Visibility getVisibility();

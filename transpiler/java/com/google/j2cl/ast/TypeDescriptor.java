@@ -244,6 +244,7 @@ public abstract class TypeDescriptor extends Node
    * by JsType.
    */
   @Override
+  @Nullable
   public abstract String getSimpleJsName();
 
   @Override

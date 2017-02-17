@@ -199,6 +199,7 @@ public abstract class TypeDeclaration extends Node
    * by JsType.
    */
   @Override
+  @Nullable
   public abstract String getSimpleJsName();
 
   @Override
