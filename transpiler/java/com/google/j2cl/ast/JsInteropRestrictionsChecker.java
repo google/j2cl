@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
@@ -79,6 +80,7 @@ public class JsInteropRestrictionsChecker {
       checkJsFunctionImplementation(type);
     } else {
       checkJsFunctionSubtype(type);
+      checkJsConstructors(type);
     }
 
     for (Field field : type.getFields()) {
@@ -549,6 +551,42 @@ public class JsInteropRestrictionsChecker {
               + "JsFunction.",
           methodDescriptor.getReadableDescription());
     }
+  }
+
+  private void checkJsConstructors(Type type) {
+    List<Method> jsConstructors = getJsConstructors(type);
+
+    if (type.isNative()) {
+      return;
+    }
+
+    if (jsConstructors.isEmpty()) {
+      return;
+    }
+
+    if (jsConstructors.size() > 1) {
+      problems.error(
+          type.getSourcePosition(),
+          "More than one JsConstructor exists for '%s'.",
+          type.getReadableDescription());
+    }
+
+    final Method jsConstructor = jsConstructors.get(0);
+
+    if (!jsConstructor.isPrimaryConstructor()) {
+      problems.error(
+          jsConstructor.getSourcePosition(),
+          "Constructor '%s' can be a JsConstructor only if all constructors in the class are "
+              + "delegating to it.",
+          jsConstructor.getReadableDescription());
+    }
+  }
+
+  private List<Method> getJsConstructors(Type type) {
+    return type.getConstructors()
+        .stream()
+        .filter(method -> method.getDescriptor().isJsConstructor())
+        .collect(Collectors.toList());
   }
 
   /**

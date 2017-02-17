@@ -1057,8 +1057,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testMultipleConstructorsNonJsSubtypeRestrictionFails() throws Exception {
+  public void testMultipleConstructorsNonJsSubtypeRestrictionFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1105,30 +1104,31 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public AnotherSubBuggyJsType(int a) { this(); }",
             "}")
         .assertCompileFails(
-            "Line 12: Class 'EntryPoint.Buggy' should have only one constructor delegating"
-                + " to the superclass since it is subclass of a a type with JsConstructor.",
-            "Line 22: Constructor 'EntryPoint.SubSubBuggyJsType.EntryPoint$SubSubBuggyJsType(int)' "
-                + "can only delegate to super constructor "
-                + "'EntryPoint.SubBuggyJsType.EntryPoint$SubBuggyJsType(int)' since it is a "
-                + "subclass of a type with JsConstructor.",
-            "Line 24: Class 'EntryPoint.JsConstructorSubBuggyJsType' should have only one "
-                + "constructor delegating to the superclass since it is subclass of a a type with "
-                + "JsConstructor.",
-            "Line 27: Constructor "
-                + "'EntryPoint.JsConstructorSubBuggyJsType.EntryPoint$JsConstructorSubBuggyJsType"
-                + "(int)'"
-                + " can be a JsConstructor only if all constructors in the class are delegating "
-                + "to it.",
-            "Line 32: Constructor 'EntryPoint.OtherSubBuggyJsType.EntryPoint$OtherSubBuggyJsType"
-                + "(int)' "
-                + "can be a JsConstructor only if all constructors in the class are delegating to "
-                + "it.",
-            "Line 34: More than one JsConstructor exists for 'EntryPoint.AnotherSubBuggyJsType'.",
-            "Line 38: 'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType(int)' "
-                + "cannot "
-                + "be exported because the global name 'test.EntryPoint.AnotherSubBuggyJsType' is "
-                + "already taken by "
-                + "'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType()'.");
+            "Constructor 'OtherSubBuggyJsType.OtherSubBuggyJsType(int)' can be a JsConstructor "
+                + "only if all constructors in the class are delegating to it.",
+            "More than one JsConstructor exists for 'AnotherSubBuggyJsType'."
+
+            // TODO(b/27597597): Finalize checker implementation and enable this test.
+            //  "Line 12: Class 'EntryPoint.Buggy' should have only one constructor delegating"
+            //      + " to the superclass since it is subclass of a a type with JsConstructor.",
+            //  "Line 22: Constructor 'EntryPoint.SubSubBuggyJsType.EntryPoint$SubSubBuggyJsType"
+            //      + "(int)' can only delegate to super constructor "
+            //      + "'EntryPoint.SubBuggyJsType.EntryPoint$SubBuggyJsType(int)' since it is a "
+            //      + "subclass of a type with JsConstructor.",
+            //  "Line 24: Class 'EntryPoint.JsConstructorSubBuggyJsType' should have only one "
+            //      + "constructor delegating to the superclass since it is subclass of a a type "
+            //      + "with JsConstructor.",
+            //  "Line 27: Constructor "
+            //      + "'EntryPoint.JsConstructorSubBuggyJsType.EntryPoint$"
+            //      + "JsConstructorSubBuggyJsType(int)'"
+            //      + " can be a JsConstructor only if all constructors in the class are "
+            //      + "delegating to it.",
+            //  "Line 38: 'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType(int)' "
+            //      + "cannot "
+            //      + "be exported because the global name 'test.EntryPoint.AnotherSubBuggyJsType'"
+            //      + " is already taken by "
+            //      + "'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType()'."
+            );
   }
 
   // TODO(b/27597597): Finalize checker implementation and enable this test.
@@ -1149,8 +1149,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "if all constructors in the class are delegating to it.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testMultiplePublicConstructorsExportFails() throws Exception {
+  public void testMultiplePublicConstructorsExportFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1161,11 +1160,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "    this();",
             "  }",
             "}")
-        .assertCompileFails(
-            "Line 5: More than one JsConstructor exists for EntryPoint.Buggy.",
-            "Line 7: 'EntryPoint.Buggy.EntryPoint$Buggy(int)' cannot be exported because the "
-                + "global name 'test.EntryPoint.Buggy' is already taken by "
-                + "'EntryPoint.Buggy.EntryPoint$Buggy()'.");
+        .assertCompileFails("More than one JsConstructor exists for 'Buggy'");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
