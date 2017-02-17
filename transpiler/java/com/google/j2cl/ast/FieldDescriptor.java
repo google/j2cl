@@ -21,6 +21,7 @@ import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
@@ -148,9 +149,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     abstract Builder setDeclarationFieldDescriptorOrNullIfSelf(
         FieldDescriptor declarationFieldDescriptor);
 
+    abstract Optional<String> getName();
+
     abstract FieldDescriptor autoBuild();
 
     public FieldDescriptor build() {
+      checkState(getName().isPresent());
       FieldDescriptor fieldDescriptor = autoBuild();
       checkState(
           !fieldDescriptor.isVariableCapture() || !fieldDescriptor.isEnclosingInstanceCapture());

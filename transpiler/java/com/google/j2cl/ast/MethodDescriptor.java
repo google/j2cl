@@ -371,6 +371,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         setName("<ctor>");
       }
 
+      checkState(getName().isPresent());
       MethodDescriptor methodDescriptor = autoBuild();
 
       if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
