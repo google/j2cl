@@ -24,6 +24,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_UNOPTIMIZED_DEFS",
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
+load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
 
 def integration_test(name,
@@ -248,7 +249,7 @@ try {
   if not test_externs_list:
     test_externs_list = ["//javascript/externs:common"]
 
-  native.jsunit_test(
+  jsunit_test(
       name="uncompiled_test",
       bootstrap_files=["TestBootstrap.js"],
       srcs=["TestHarness.js"],
@@ -266,7 +267,7 @@ try {
       tags=["manual", "notap"] if disable_uncompiled_test else []
   )
 
-  native.jsunit_test(
+  jsunit_test(
       name="compiled_test",
       srcs=["TestHarness.js"],
       compile=1,
