@@ -474,6 +474,7 @@ public class JdtUtils {
             // Field declarations in interface are implicitly static.
             return true;
           }
+          // fall through
         case ASTNode.METHOD_DECLARATION:
         case ASTNode.INITIALIZER:
           return isStatic((BodyDeclaration) currentNode);
