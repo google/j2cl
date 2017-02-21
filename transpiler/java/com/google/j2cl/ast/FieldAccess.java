@@ -52,6 +52,11 @@ public class FieldAccess extends Expression implements MemberReference {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return getQualifier() == null || getQualifier().isIdempotent();
+  }
+
+  @Override
   public FieldAccess clone() {
     return new FieldAccess(qualifier.clone(), targetFieldDescriptor);
   }

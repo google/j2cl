@@ -28,6 +28,18 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
    */
   public abstract TypeDescriptor getTypeDescriptor();
 
+  /**
+   * Returns true is the expression can be evaluated multiple times and always results in the same
+   * value.
+   *
+   * <p>Note: that the expression might have side effects (e.g. cause some class initializers to
+   * run). An expression is idempotent if when evaluated in the same state multiple times yields the
+   * same resulting state and value.
+   */
+  public boolean isIdempotent() {
+    return false;
+  }
+
   @Override
   public abstract Expression clone();
 

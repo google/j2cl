@@ -36,6 +36,11 @@ public class SuperReference extends Expression {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return true;
+  }
+
+  @Override
   public SuperReference clone() {
     return new SuperReference(typeDescriptor);
   }

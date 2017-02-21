@@ -49,6 +49,11 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return arrayExpression.isIdempotent() && indexExpression.isIdempotent();
+  }
+
+  @Override
   public ArrayAccess clone() {
     return ArrayAccess.newBuilder()
         .setArrayExpression(arrayExpression.clone())

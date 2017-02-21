@@ -46,6 +46,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return true;
+  }
+
+  @Override
   public VariableReference clone() {
     return new VariableReference(target);
   }

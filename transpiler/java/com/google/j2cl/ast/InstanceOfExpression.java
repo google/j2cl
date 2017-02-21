@@ -49,6 +49,11 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   }
 
   @Override
+  public boolean isIdempotent() {
+    return expression.isIdempotent();
+  }
+
+  @Override
   public InstanceOfExpression clone() {
     return new InstanceOfExpression(sourcePosition, expression.clone(), testTypeDescriptor);
   }

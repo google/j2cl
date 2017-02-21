@@ -43,7 +43,7 @@ public class CompoundOperationsUtils {
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
 
-    if (canExpressionBeEvaluatedTwice(leftOperand)) {
+    if (leftOperand.isIdempotent()) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a += x => a = a + x
@@ -107,8 +107,7 @@ public class CompoundOperationsUtils {
 
     Expression arrayExpression = leftOperand.getArrayExpression();
     Expression indexExpression = leftOperand.getIndexExpression();
-    if (!canExpressionBeEvaluatedTwice(arrayExpression)
-        || !canExpressionBeEvaluatedTwice(indexExpression)) {
+    if (!arrayExpression.isIdempotent() || !indexExpression.isIdempotent()) {
       // If index expression can not be evaluated twice it might have a side effect that affects
       // the array expression. In that case, the value for the array expression is obtained and
       // stored in $array.
@@ -123,7 +122,7 @@ public class CompoundOperationsUtils {
       arrayExpression = arrayExpressionVariable.getReference();
     }
 
-    if (!canExpressionBeEvaluatedTwice(indexExpression)) {
+    if (!indexExpression.isIdempotent()) {
       Variable indexExpressionVariable =
           Variable.newBuilder()
               .setIsFinal(true)
@@ -173,7 +172,7 @@ public class CompoundOperationsUtils {
             .setTypeDescriptor(operand.getTypeDescriptor())
             .build();
 
-    if (canExpressionBeEvaluatedTwice(operand)) {
+    if (operand.isIdempotent()) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a++; => (let $value = a, a = a + 1, $value)
@@ -243,7 +242,7 @@ public class CompoundOperationsUtils {
     Expression operand = prefixExpression.getOperand();
     PrefixOperator operator = prefixExpression.getOperator();
 
-    if (canExpressionBeEvaluatedTwice(operand)) {
+    if (operand.isIdempotent()) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // ++a => a = a + 1
@@ -295,36 +294,6 @@ public class CompoundOperationsUtils {
                 .setRightOperand(rightOperand)
                 .build())
         .build();
-  }
-
-  /**
-   * Returns true if the expression can be evaluated more than once in succession, assuming no
-   * operations with side effects happen in between.
-   *
-   * <p>This is used to determine if it is safe to expand code like q.a += b into q.a = q.a + b
-   * without needing to introduce a new variable to hold for the qualifier or the expression q.a.
-   */
-  public static boolean canExpressionBeEvaluatedTwice(Expression expression) {
-    if (expression instanceof ThisReference
-        || expression instanceof TypeReference
-        || expression instanceof VariableReference
-        || expression instanceof Literal) {
-      return true;
-    }
-
-    if (expression instanceof FieldAccess) {
-      FieldAccess fieldAccess = (FieldAccess) expression;
-      return canExpressionBeEvaluatedTwice(fieldAccess.getQualifier());
-    }
-
-    // For array access expressions.
-    if (expression instanceof ArrayAccess) {
-      ArrayAccess arrayAccess = (ArrayAccess) expression;
-      return canExpressionBeEvaluatedTwice(arrayAccess.getArrayExpression())
-          && canExpressionBeEvaluatedTwice(arrayAccess.getIndexExpression());
-    }
-
-    return false;
   }
 
   /** Determines the binary operation type based on the types of the operands. */

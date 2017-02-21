@@ -15,5 +15,18 @@
  */
 package com.google.j2cl.ast;
 
-/** Literal interface. */
-public interface Literal {}
+import com.google.j2cl.ast.annotations.Visitable;
+
+/** Abstract superclass for value literal expressions. */
+@Visitable
+public abstract class Literal extends Expression {
+  @Override
+  public boolean isIdempotent() {
+    return true;
+  }
+
+  @Override
+  public Node accept(Processor processor) {
+    return Visitor_Literal.visit(processor, this);
+  }
+}

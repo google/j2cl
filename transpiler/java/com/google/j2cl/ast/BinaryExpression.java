@@ -58,6 +58,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return !operator.hasSideEffect() && leftOperand.isIdempotent() && rightOperand.isIdempotent();
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setTypeDescriptor(typeDescriptor)

@@ -22,7 +22,7 @@ import com.google.j2cl.common.J2clUtils;
 
 /** Character literal node. */
 @Visitable
-public class CharacterLiteral extends Expression implements Literal {
+public class CharacterLiteral extends Literal {
   private final char value;
   private final String escapedValue;
 

@@ -21,7 +21,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 
 /** Number literal node. */
 @Visitable
-public class NumberLiteral extends Expression implements Literal {
+public class NumberLiteral extends Literal {
   private final TypeDescriptor typeDescriptor;
   private final Number value;
 

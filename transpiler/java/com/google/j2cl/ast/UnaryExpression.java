@@ -44,6 +44,11 @@ public abstract class UnaryExpression extends Expression {
   }
 
   @Override
+  public boolean isIdempotent() {
+    return !getOperator().hasSideEffect() && getOperand().isIdempotent();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_UnaryExpression.visit(processor, this);
   }
