@@ -134,4 +134,19 @@ public class IntersectionTypeTest<U> {
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
 [UNKNOWN] => [IntersectionTypeTest.$clinit();]
 [return (T) get(new Object());] => [return /**@type {A} */ ($Casts.to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(java_lang_Object.$create__()), A));]
+[private static <T extends A & EmptyA> void set(T t) { }] => [/**
+   * @template M_T
+...    IntersectionTypeTest.$clinit();
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.set"
+[t] => [t] "t"
+[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public void testMethodCall() {
+    Object o = m();
+...    //  set((A& EmptyA) o);
+  }] => [/**
+   * @return {void}
+...    let o = IntersectionTypeTest.m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testMethodCall"
+[Object o = m();] => [let o = IntersectionTypeTest.m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();]
+[o] => [o] "o"
 [UNKNOWN] => [java_lang_Object.$clinit();]

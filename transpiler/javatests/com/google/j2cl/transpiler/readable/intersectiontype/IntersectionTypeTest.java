@@ -83,4 +83,12 @@ public class IntersectionTypeTest<U> {
   private static <T extends A & EmptyA> T m() {
     return (T) get(new Object());
   }
+
+  private static <T extends A & EmptyA> void set(T t) {}
+
+  public void testMethodCall() {
+    Object o = m();
+    // TODO(b/35625063): Uncomment when the bug is fixed.
+    //  set((A& EmptyA) o);
+  }
 }
