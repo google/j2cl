@@ -63,6 +63,7 @@ import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
+import com.google.j2cl.ast.visitors.RemoveUnneededJsDocAnnotations;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -245,6 +246,7 @@ public class J2clTranspiler {
             new NormalizeJsVarargs(),
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
+            new RemoveUnneededJsDocAnnotations(),
             new NormalizeJsDocAnnotatedExpression(),
 
             // Dodge JSCompiler limitations.

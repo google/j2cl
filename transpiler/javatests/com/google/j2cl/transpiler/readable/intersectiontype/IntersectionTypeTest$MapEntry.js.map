@@ -40,8 +40,8 @@
       return (Getable<T> & Setable) o;
     }] => [/**
    * @template M_MapEntry_method_T
-...    return /**@type {Getable<*>} */ ($Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));
+...    return /**@type {Getable<*>} */ ($Casts.to($Casts.to(o, Setable), Getable));
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.MapEntry.method"
 [o] => [o] "o"
-[return (Getable<T> & Setable) o;] => [return /**@type {Getable<*>} */ ($Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));]
+[return (Getable<T> & Setable) o;] => [return /**@type {Getable<*>} */ ($Casts.to($Casts.to(o, Setable), Getable));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

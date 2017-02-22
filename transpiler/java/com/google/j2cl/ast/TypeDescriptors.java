@@ -378,10 +378,11 @@ public class TypeDescriptors {
   public static TypeDescriptor createIntersection(List<TypeDescriptor> intersectedTypeDescriptors) {
     TypeDescriptor defaultSuperType = get().javaLangObject;
     final TypeDescriptor superTypeDescriptor =
-        Iterables.find(
-            intersectedTypeDescriptors,
-            typeDescriptor -> !typeDescriptor.isInterface(),
-            defaultSuperType);
+        intersectedTypeDescriptors
+            .stream()
+            .filter(typeDescriptor -> !typeDescriptor.isInterface())
+            .findFirst()
+            .orElse(defaultSuperType);
     final ImmutableList<TypeDescriptor> interfaceTypeDescriptors =
         intersectedTypeDescriptors
             .stream()
@@ -567,9 +568,9 @@ public class TypeDescriptors {
         return new NumberLiteral(typeDescriptor, 0);
       case LONG_TYPE_NAME:
         return new NumberLiteral(typeDescriptor, 0L);
+      default:
+        return NullLiteral.NULL;
     }
-
-    return NullLiteral.NULL;
   }
 
   public static String createUniqueName(

@@ -65,7 +65,7 @@ public class JsDocAnnotatedExpression extends Expression {
     return new Builder();
   }
 
-  /** A Builder for easily and correctly creating modified versions of CastExpressions. */
+  /** Builder for JsDocAnnotatedExpressions */
   public static class Builder {
     private Expression expression;
     private TypeDescriptor annotationType;
@@ -73,7 +73,6 @@ public class JsDocAnnotatedExpression extends Expression {
 
     public static Builder from(JsDocAnnotatedExpression annotation) {
       Builder builder = new Builder();
-      checkArgument(!(annotation.getExpression() instanceof JsDocAnnotatedExpression));
       builder.expression = annotation.getExpression();
       builder.annotationType = annotation.getTypeDescriptor();
       builder.isDeclaration = annotation.isDeclaration();
@@ -101,11 +100,9 @@ public class JsDocAnnotatedExpression extends Expression {
               || (expression instanceof BinaryExpression
                   && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN),
           "Declaration annotations can only applied to assignments.");
-      if (expression instanceof JsDocAnnotatedExpression) {
-        // Don't chain JsDocAnnotatedExpressions, just replace.
-        expression = ((JsDocAnnotatedExpression) expression).getExpression();
-      }
-      return new JsDocAnnotatedExpression(expression, annotationType, isDeclaration);
+      return new JsDocAnnotatedExpression(
+          // Avoid pointlessly nesting type annotations.
+          AstUtils.removeTypeAnnotationIfPresent(expression), annotationType, isDeclaration);
     }
   }
 }

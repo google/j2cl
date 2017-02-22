@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -69,7 +70,8 @@ public class NormalizeCasts extends NormalizationPass {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     TypeDescriptor rawCastTypeDescriptor =
         castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
-    Expression expression = castExpression.getExpression();
+    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
+    Expression expression = AstUtils.removeTypeAnnotationIfPresent(castExpression.getExpression());
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()

@@ -85,13 +85,10 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
     if ($Equality.$same(o, null)) {
-      return /**@type {Getable<*>} */ ($Casts.to(
-          /**@type {Setable} */ ($Casts.to(
-              /**@type {Getable<*>} */ ($Casts.to(o, Getable)), Setable)),
-          Getable));
+      return /**@type {Getable<*>} */ (
+          $Casts.to($Casts.to(o, Getable), Setable));
     }
-    return /**@type {Getable<*>} */ (
-        $Casts.to(/**@type {Setable} */ ($Casts.to(o, Setable)), Getable));
+    return /**@type {Getable<*>} */ ($Casts.to($Casts.to(o, Setable), Getable));
   }
 
   /**
@@ -103,7 +100,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast1__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
     return /**@type {Getable<(Comparable<?string>|?boolean|?number|?string)>} */ (
-        $Casts.to(/**@type {Setable} */ ($Casts.to(s, Setable)), Getable));
+        $Casts.to($Casts.to(s, Setable), Getable));
   }
 
   /**
@@ -115,7 +112,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast2__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
     return /**@type {Getable<(Comparable<*>|?boolean|?number|?string)>} */ (
-        $Casts.to(/**@type {Setable} */ ($Casts.to(s, Setable)), Getable));
+        $Casts.to($Casts.to(s, Setable), Getable));
   }
 
   /**
@@ -133,9 +130,8 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp} */ ($Casts.to(
-        /**@type {Serial} */ ($Casts.to($Lambda$Cmp$0.$create__(), Serial)),
-        Cmp));
+    return /**@type {Cmp} */ (
+        $Casts.to($Casts.to($Lambda$Cmp$0.$create__(), Serial), Cmp));
   }
 
   /**
@@ -144,9 +140,8 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method2__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp2} */ ($Casts.to(
-        /**@type {Serial} */ ($Casts.to($Lambda$Cmp2$1.$create__(), Serial)),
-        Cmp2));
+    return /**@type {Cmp2} */ (
+        $Casts.to($Casts.to($Lambda$Cmp2$1.$create__(), Serial), Cmp2));
   }
 
   /**
@@ -156,22 +151,12 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_testClosureAssignment__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
-    let e = /**@type {A} */ ($Casts.to(
-        /**@type {EmptyA} */ (
-            $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
-        A));
-    let g = /**@type {EmptyA} */ ($Casts.to(
-        /**@type {A} */ ($Casts.to(
-            /**@type {EmptyA} */ (
-                $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
-            A)),
-        EmptyA));
-    let s = /**@type {EmptyB} */ ($Casts.to(
-        /**@type {A} */ ($Casts.to(
-            /**@type {EmptyA} */ (
-                $Casts.to(/**@type {EmptyB} */ ($Casts.to(o, EmptyB)), EmptyA)),
-            A)),
-        EmptyB));
+    let e =
+        /**@type {A} */ ($Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
+    let g = /**@type {EmptyA} */ (
+        $Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
+    let s = /**@type {EmptyB} */ (
+        $Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
   }
 
   /**
@@ -219,6 +204,17 @@ class IntersectionTypeTest extends java_lang_Object {
     let o =
         IntersectionTypeTest
             .m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();
+    IntersectionTypeTest
+        .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
+            /**@type {A} */ ($Casts.to($Casts.to(o, EmptyA), A)));
+    IntersectionTypeTest
+        .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
+            /**@type {A} */ ($Casts.to(
+                $Casts.to(
+                    IntersectionTypeTest
+                        .m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(),
+                    EmptyA),
+                A)));
   }
 
   /**

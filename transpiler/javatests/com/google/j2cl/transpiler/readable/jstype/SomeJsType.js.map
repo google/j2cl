@@ -73,7 +73,7 @@ public class SomeJsType<T> {
 [w] => [w] "w"
 [Object object = new Object();] => [let object = java_lang_Object.$create__();]
 [object] => [object] "object"
-[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.to(/**@type {*} */ ($Casts.to(3.0, java_lang_Object)), Star$$Overlay));]
+[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.to($Casts.to(3.0, java_lang_Object), Star$$Overlay));]
 [star] => [star] "star"
 [return (Wildcard) star;] => [return /**@type {?} */ ($Casts.to(star, Wildcard$$Overlay));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

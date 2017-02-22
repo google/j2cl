@@ -88,7 +88,7 @@ public class IntersectionTypeTest<U> {
 
   public void testMethodCall() {
     Object o = m();
-    // TODO(b/35625063): Uncomment when the bug is fixed.
-    //  set((A& EmptyA) o);
+    set((A & EmptyA) o);
+    set(m());
   }
 }

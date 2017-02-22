@@ -1028,6 +1028,13 @@ public class AstUtils {
         .build();
   }
 
+  public static Expression removeTypeAnnotationIfPresent(Expression expression) {
+    if (expression instanceof JsDocAnnotatedExpression) {
+      return ((JsDocAnnotatedExpression) expression).getExpression();
+    }
+    return expression;
+  }
+
   /**
    * Create a return statement if the return type is not void; otherwise create an expression
    * statement
