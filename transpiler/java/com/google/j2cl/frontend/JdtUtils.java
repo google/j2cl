@@ -803,6 +803,7 @@ public class JdtUtils {
         .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
+        .setJsFunction(JsInteropUtils.isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)
         .setStatic(isStatic)
         .setConstructor(isConstructor)

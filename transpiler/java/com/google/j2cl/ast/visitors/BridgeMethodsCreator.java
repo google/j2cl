@@ -27,7 +27,6 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -391,13 +390,13 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // targets to *real* implementation, which is not a JsFunction method.
     // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
     // and it targets the *real* implementation, which should be emit as non-JsMethod.
-    if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION
-        || (bridgeMethodDescriptor.isJsMethod()
-            && targetMethodDescriptor.inSameTypeAs(bridgeMethodDescriptor))) {
+    if (bridgeMethodDescriptor.isJsMethod()
+        && targetMethodDescriptor.inSameTypeAs(bridgeMethodDescriptor)) {
       targetMethodJsInfo = JsInfo.NONE;
     }
     return MethodDescriptor.Builder.from(targetMethodDescriptor)
         .setJsInfo(targetMethodJsInfo)
+        .setJsFunction(false)
         .build();
   }
 

@@ -29,8 +29,6 @@ public enum JsMemberType {
    * JsType annotation on the enclosing class).
    */
   CONSTRUCTOR,
-  /** A JsFunction method. */
-  JS_FUNCTION,
   /** A regular Js method. (not a JsProperty method). */
   METHOD,
   /** A JsProperty. */

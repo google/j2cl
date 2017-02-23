@@ -225,6 +225,7 @@ public class AstUtils {
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setStatic(false)
         .setFinal(true)
+        .setSynthetic(true)
         .setJsInfo(JsInfo.RAW_FIELD)
         .build();
   }
@@ -237,6 +238,7 @@ public class AstUtils {
         .setName(ENCLOSING_INSTANCE_NAME)
         .setFinal(true)
         .setEnclosingInstanceCapture(true)
+        .setSynthetic(true)
         .setTypeDescriptor(fieldTypeDescriptor)
         .build();
   }

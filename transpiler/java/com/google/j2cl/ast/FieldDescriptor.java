@@ -68,7 +68,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   // the details.
   abstract FieldDescriptor getDeclarationFieldDescriptorOrNullIfSelf();
 
-
   @Override
   public boolean isNative() {
     return getEnclosingClassTypeDescriptor().isNative() && !isJsOverlay();
@@ -88,6 +87,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public boolean isJsFunction() {
+    return false;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
@@ -103,9 +107,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setVariableCapture(false)
-        .setEnclosingInstanceCapture(false);
+        .setEnclosingInstanceCapture(false)
+        .setSynthetic(false);
   }
-
 
   /** Returns a description that is useful for error messages. */
   @Override
@@ -134,6 +138,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         TypeDescriptor enclosingClassTypeDescriptor);
 
     public abstract Builder setName(String name);
+
+    public abstract Builder setSynthetic(boolean isSynthetic);
 
     public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
 

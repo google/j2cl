@@ -56,6 +56,30 @@ public abstract class MemberDescriptor extends Node
 
   public abstract boolean isPolymorphic();
 
+  public abstract boolean isSynthetic();
+
+  public boolean isJsConstructor() {
+    return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
+  }
+
+  public boolean isJsPropertyGetter() {
+    return getJsInfo().getJsMemberType() == JsMemberType.GETTER;
+  }
+
+  public boolean isJsPropertySetter() {
+    return getJsInfo().getJsMemberType() == JsMemberType.SETTER;
+  }
+
+  public boolean isJsMethod() {
+    return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
+  }
+
+  public abstract boolean isJsFunction();
+
+  public boolean isJsMember() {
+    return getJsInfo().getJsMemberType() != JsMemberType.NONE;
+  }
+
   public boolean isJsOverlay() {
     return getJsInfo().isJsOverlay();
   }

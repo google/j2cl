@@ -70,33 +70,38 @@ public class JsInteropUtils {
 
     boolean jsOverlay = isJsOverlay(member);
 
-    if (isJsFunction(declaringType)) {
-      return JsInfo.newBuilder()
-          .setJsMemberType(JsMemberType.JS_FUNCTION)
-          .setJsOverlay(jsOverlay)
-          .build();
+    if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) == null) {
+      boolean publicMemberOfJsType =
+          isJsType(declaringType) && Modifier.isPublic(member.getModifiers());
+      boolean memberOfNativeType = isNativeType(declaringType);
+      if (memberAnnotation != null
+          || ((publicMemberOfJsType || memberOfNativeType) && !jsOverlay)) {
+        return JsInfo.newBuilder()
+            .setJsMemberType(getJsMemberType(member, isAccessor))
+            .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
+            .setJsNamespace(JsInteropAnnotationUtils.getJsNamespace(memberAnnotation))
+            .setJsOverlay(jsOverlay)
+            .build();
+      }
     }
 
-    if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) != null) {
-      return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
-    }
+    return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
+  }
 
-    boolean publicMemberOfJsType =
-        isJsType(declaringType) && Modifier.isPublic(member.getModifiers());
-    boolean memberOfNativeType = isNativeType(declaringType);
-    if (memberAnnotation == null && ((!publicMemberOfJsType && !memberOfNativeType) || jsOverlay)) {
-      return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
+  public static boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
+    ITypeBinding declaringType = methodBinding.getDeclaringClass();
+    if (isJsFunction(declaringType)
+        && declaringType.getFunctionalInterfaceMethod() != null
+        && methodBinding.getMethodDeclaration()
+            == declaringType.getFunctionalInterfaceMethod().getMethodDeclaration()) {
+      return true;
     }
-
-    String namespace = JsInteropAnnotationUtils.getJsNamespace(memberAnnotation);
-    String name = JsInteropAnnotationUtils.getJsName(memberAnnotation);
-    JsMemberType memberType = getJsMemberType(member, isAccessor);
-    return JsInfo.newBuilder()
-        .setJsMemberType(memberType)
-        .setJsName(name)
-        .setJsNamespace(namespace)
-        .setJsOverlay(jsOverlay)
-        .build();
+    for (IMethodBinding overriddenMethodBinding : JdtUtils.getOverriddenMethods(methodBinding)) {
+      if (isOrOverridesJsFunctionMethod(overriddenMethodBinding)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private static JsMemberType getJsMemberType(IBinding member, boolean isPropertyAccessor) {

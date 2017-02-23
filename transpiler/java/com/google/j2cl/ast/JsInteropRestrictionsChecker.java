@@ -119,9 +119,9 @@ public class JsInteropRestrictionsChecker {
         continue;
       }
       // Only look at unobfuscated JsInterop things.
-      if (memberDescriptor.getJsInfo().equals(JsInfo.NONE)
-          || memberDescriptor.getJsInfo().getJsMemberType().equals(JsMemberType.JS_FUNCTION)
-          || memberDescriptor.getJsInfo().isJsOverlay()) {
+      if (!memberDescriptor.isJsMember()
+          || memberDescriptor.isJsFunction()
+          || memberDescriptor.isJsOverlay()) {
         continue;
       }
       // Native JS members are allowed to collide.
@@ -366,8 +366,6 @@ public class JsInteropRestrictionsChecker {
             method.getSourcePosition(),
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
-        break;
-      default:
         break;
     }
   }

@@ -56,8 +56,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isDefault();
 
-  public abstract boolean isSynthetic();
-
   public abstract boolean isBridge();
 
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
@@ -101,26 +99,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // the details.
   abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
 
-  public boolean isJsPropertyGetter() {
-    return getJsInfo().getJsMemberType() == JsMemberType.GETTER;
-  }
-
-  public boolean isJsPropertySetter() {
-    return getJsInfo().getJsMemberType() == JsMemberType.SETTER;
-  }
-
-  public boolean isJsMethod() {
-    return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
-  }
-
-  public boolean isJsFunction() {
-    return getJsInfo().getJsMemberType() == JsMemberType.JS_FUNCTION;
-  }
-
-  public boolean isJsMember() {
-    return getJsInfo().getJsMemberType() != JsMemberType.NONE;
-  }
-
   /**
    * Returns true if it is a vararg method that can be referenced by JavaScript side. A
    * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
@@ -131,10 +109,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   public boolean isJsMethodVarargs() {
     return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isConstructor());
-  }
-
-  public boolean isJsConstructor() {
-    return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
   }
 
   @Override
@@ -226,6 +200,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setSynthetic(false)
         .setBridge(false)
+        .setJsFunction(false)
         .setParameterTypeDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -304,6 +279,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setSynthetic(boolean isSynthetic);
 
     public abstract Builder setBridge(boolean isBridge);
+
+    public abstract Builder setJsFunction(boolean isJsFunction);
 
     public abstract Builder setEnclosingClassTypeDescriptor(
         TypeDescriptor enclosingClassTypeDescriptor);
