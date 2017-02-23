@@ -89,7 +89,7 @@ public abstract class TypeDeclaration extends Node
 
   public boolean declaresDefaultMethods() {
     return isInterface()
-        && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefault);
+        && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefaultMethod);
   }
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */

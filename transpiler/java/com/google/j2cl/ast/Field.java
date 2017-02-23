@@ -91,11 +91,6 @@ public class Field extends Member implements HasJsNameInfo {
     return fieldDescriptor.getJsNamespace();
   }
 
-  @Override
-  public boolean isNative() {
-    return fieldDescriptor.isNative();
-  }
-
   /** A Builder for Field. */
   public static class Builder {
     private FieldDescriptor fieldDescriptor;

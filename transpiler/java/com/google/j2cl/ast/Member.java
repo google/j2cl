@@ -29,6 +29,10 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
 
   public abstract boolean isStatic();
 
+  public boolean isAbstract() {
+    return false;
+  }
+
   public boolean isConstructor() {
     return false;
   }
@@ -39,6 +43,10 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
 
   public boolean isMethod() {
     return false;
+  }
+
+  public boolean isNative() {
+    return getDescriptor() != null && getDescriptor().isNative();
   }
 
   public boolean isInitializerBlock() {

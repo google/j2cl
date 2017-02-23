@@ -83,14 +83,8 @@ public class JsInteropRestrictionsChecker {
       checkJsConstructors(type);
     }
 
-    for (Field field : type.getFields()) {
-      checkField(field);
-    }
-    for (Method method : type.getMethods()) {
-      if (method.isSynthetic()) {
-        continue;
-      }
-      checkMethod(method);
+    for (Member member : type.getMembers()) {
+      checkMember(member);
     }
     checkTypeMemberCollisions(type);
     checkInstanceOfNativeJsTypesOrJsFunctionImplementations(type);
@@ -187,26 +181,21 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
-  private void checkField(Field field) {
-    if (field.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
-      checkFieldOfNativeJsType(field);
+  private void checkMember(Member member) {
+    if (!member.isMethod() && !member.isField()) {
+      return;
     }
-    if (field.getDescriptor().isJsOverlay()) {
-      checkJsOverlay(field);
-    }
-    checkMemberQualifiedJsName(field);
-    // TODO: do other checks.
-  }
 
-  private void checkMethod(Method method) {
-    if (method.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
-      checkMethodOfNativeJsType(method);
+    if (member.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
+      checkMemberOfNativeJsType(member);
     }
-    if (method.getDescriptor().isJsOverlay()) {
-      checkJsOverlay(method);
+    if (member.getDescriptor().isJsOverlay()) {
+      checkJsOverlay(member);
     }
-    checkMemberQualifiedJsName(method);
-    checkMethodParameters(method);
+    checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
+    if (member.isMethod()) {
+      checkMethodParameters((Method) member);
+    }
     // TODO: do other checks.
   }
 
@@ -241,50 +230,45 @@ public class JsInteropRestrictionsChecker {
     checkJsNamespace(member);
   }
 
-  private void checkJsOverlay(Field field) {
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
-    String readableDescription = fieldDescriptor.getReadableDescription();
-    if (!fieldDescriptor.getEnclosingClassTypeDescriptor().isNative()
-        && !fieldDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
-      problems.error(
-          field.getSourcePosition(),
-          "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
-          readableDescription);
-    }
-    if (!fieldDescriptor.isStatic()) {
-      problems.error(
-          field.getSourcePosition(),
-          "JsOverlay field '%s' can only be static.",
-          readableDescription);
-    }
-  }
-
-  private void checkJsOverlay(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    String readableDescription = methodDescriptor.getReadableDescription();
-    if (!methodDescriptor.getEnclosingClassTypeDescriptor().isNative()
-        && !methodDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
-      problems.error(
-          method.getSourcePosition(),
-          "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
-          readableDescription);
-    }
-    if (method.isOverride()) {
-      problems.error(
-          method.getSourcePosition(),
-          "JsOverlay method '%s' cannot override a supertype method.",
-          readableDescription);
+  private void checkJsOverlay(Member member) {
+    if (member.getDescriptor().isSynthetic()) {
       return;
     }
-    if (method.isNative()
-        || (!methodDescriptor.getEnclosingClassTypeDescriptor().isFinal()
-            && !method.isFinal()
-            && !method.getDescriptor().isStatic()
-            && !method.getDescriptor().getVisibility().isPrivate()
-            && !method.getDescriptor().isDefault())) {
+
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    String readableDescription = memberDescriptor.getReadableDescription();
+    if (!memberDescriptor.getEnclosingClassTypeDescriptor().isNative()
+        && !memberDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
       problems.error(
-          method.getSourcePosition(),
-          "JsOverlay method '%s' cannot be non-final nor native.",
+          member.getSourcePosition(),
+          "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
+          readableDescription);
+    }
+    if (member.isMethod()) {
+      Method method = (Method) member;
+      if (method.isOverride()) {
+        problems.error(
+            method.getSourcePosition(),
+            "JsOverlay method '%s' cannot override a supertype method.",
+            readableDescription);
+        return;
+      }
+      if (member.isNative()
+          || (!memberDescriptor.getEnclosingClassTypeDescriptor().isFinal()
+              && !memberDescriptor.isFinal()
+              && !memberDescriptor.isStatic()
+              && !memberDescriptor.getVisibility().isPrivate()
+              && !memberDescriptor.isDefaultMethod())) {
+        problems.error(
+            member.getSourcePosition(),
+            "JsOverlay method '%s' cannot be non-final nor native.",
+            readableDescription);
+      }
+    }
+    if (member.isField() & !memberDescriptor.isStatic()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsOverlay field '%s' can only be static.",
           readableDescription);
     }
   }
@@ -335,17 +319,17 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
-  private void checkMethodOfNativeJsType(Method method) {
-    if (method.getDescriptor().isJsOverlay()) {
+  private void checkMemberOfNativeJsType(Member member) {
+    if (member.getDescriptor().isJsOverlay() || member.getDescriptor().isSynthetic()) {
       return;
     }
-    String readableDescription = method.getDescriptor().getReadableDescription();
-    JsMemberType jsMemberType = method.getDescriptor().getJsInfo().getJsMemberType();
+    String readableDescription = member.getDescriptor().getReadableDescription();
+    JsMemberType jsMemberType = member.getDescriptor().getJsInfo().getJsMemberType();
     switch (jsMemberType) {
       case CONSTRUCTOR:
-        if (!isConstructorEmpty(method)) {
+        if (!isConstructorEmpty((Method) member)) {
           problems.error(
-              method.getSourcePosition(),
+              member.getSourcePosition(),
               "Native JsType constructor '%s' cannot have non-empty method body.",
               readableDescription);
         }
@@ -353,40 +337,28 @@ public class JsInteropRestrictionsChecker {
       case METHOD:
       case GETTER:
       case SETTER:
-      case PROPERTY:
-        if (!method.isAbstract() && !method.isNative()) {
+        if (!member.isAbstract() && !member.isNative()) {
           problems.error(
-              method.getSourcePosition(),
+              member.getSourcePosition(),
               "Native JsType method '%s' should be native or abstract.",
+              readableDescription);
+        }
+        break;
+      case PROPERTY:
+        Field field = (Field) member;
+        if (field.hasInitializer()) {
+          problems.error(
+              field.getSourcePosition(),
+              "Native JsType field '%s' cannot have initializer.",
               readableDescription);
         }
         break;
       case NONE:
         problems.error(
-            method.getSourcePosition(),
+            member.getSourcePosition(),
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
         break;
-    }
-  }
-
-  private void checkFieldOfNativeJsType(Field field) {
-    if (field.getDescriptor().isJsOverlay()) {
-      return;
-    }
-    String readableDescription = field.getDescriptor().getReadableDescription();
-    if (field.getDescriptor().isJsProperty()) {
-      if (field.hasInitializer()) {
-        problems.error(
-            field.getSourcePosition(),
-            "Native JsType field '%s' cannot have initializer.",
-            readableDescription);
-      }
-    } else {
-      problems.error(
-          field.getSourcePosition(),
-          "Native JsType member '%s' cannot have @JsIgnore.",
-          readableDescription);
     }
   }
 

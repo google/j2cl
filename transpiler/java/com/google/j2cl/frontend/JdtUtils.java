@@ -180,8 +180,9 @@ public class JdtUtils {
         return BinaryOperator.CONDITIONAL_AND;
       case "||":
         return BinaryOperator.CONDITIONAL_OR;
+      default:
+        return null;
     }
-    return null;
   }
 
   public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
@@ -210,8 +211,9 @@ public class JdtUtils {
         return BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
       case ">>>=":
         return BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
+      default:
+        return null;
     }
-    return null;
   }
 
   static IMethodBinding getMethodBinding(
@@ -274,8 +276,9 @@ public class JdtUtils {
         return PrefixOperator.COMPLEMENT;
       case "!":
         return PrefixOperator.NOT;
+      default:
+        return null;
     }
-    return null;
   }
 
   public static PostfixOperator getPostfixOperator(PostfixExpression.Operator operator) {
@@ -284,8 +287,9 @@ public class JdtUtils {
         return PostfixOperator.INCREMENT;
       case "--":
         return PostfixOperator.DECREMENT;
+      default:
+        return null;
     }
-    return null;
   }
 
   static boolean isStatic(BodyDeclaration bodyDeclaration) {
@@ -480,6 +484,8 @@ public class JdtUtils {
           return isStatic((BodyDeclaration) currentNode);
         case ASTNode.ENUM_CONSTANT_DECLARATION: // enum constants are implicitly static.
           return true;
+        default:
+          break;
       }
       currentNode = currentNode.getParent();
     }
@@ -809,7 +815,7 @@ public class JdtUtils {
         .setConstructor(isConstructor)
         .setNative(isNative)
         .setFinal(JdtUtils.isFinal(methodBinding))
-        .setDefault(Modifier.isDefault(methodBinding.getModifiers()))
+        .setDefaultMethod(Modifier.isDefault(methodBinding.getModifiers()))
         .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())

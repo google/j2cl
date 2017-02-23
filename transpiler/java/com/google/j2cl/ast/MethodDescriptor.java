@@ -54,7 +54,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isVarargs();
 
-  public abstract boolean isDefault();
+  @Override
+  public abstract boolean isDefaultMethod();
 
   public abstract boolean isBridge();
 
@@ -193,7 +194,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setJsInfo(JsInfo.NONE)
         .setAbstract(false)
         .setConstructor(false)
-        .setDefault(false)
+        .setDefaultMethod(false)
         .setNative(false)
         .setStatic(false)
         .setVarargs(false)
@@ -262,7 +263,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** A Builder for MethodDescriptors. */
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder setDefault(boolean isDefault);
+    public abstract Builder setDefaultMethod(boolean isDefault);
 
     public abstract Builder setNative(boolean isNative);
 

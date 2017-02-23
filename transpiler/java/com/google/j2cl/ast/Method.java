@@ -85,6 +85,7 @@ public class Method extends Member implements HasJsNameInfo {
     return methodDescriptor.isSynthetic();
   }
 
+  @Override
   public boolean isAbstract() {
     return this.isAbstract;
   }
@@ -136,11 +137,6 @@ public class Method extends Member implements HasJsNameInfo {
   @Override
   public String getJsNamespace() {
     return methodDescriptor.getJsNamespace();
-  }
-
-  @Override
-  public boolean isNative() {
-    return methodDescriptor.isNative();
   }
 
   public static Builder newBuilder() {

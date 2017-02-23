@@ -182,7 +182,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       for (Member member : type.getMembers()) {
         if (member instanceof Method) {
           Method method = (Method) member;
-          if (!method.getDescriptor().isJsOverlay() && !method.getDescriptor().isDefault()) {
+          if (!method.getDescriptor().isJsOverlay() && !method.getDescriptor().isDefaultMethod()) {
             continue;
           }
           overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
@@ -276,7 +276,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
                   || enclosingClassTypeDescriptor.isJsFunctionInterface())
               && methodCall.getTarget().isJsOverlay();
       boolean targetIsDefaultMethodAccessedStatically =
-          methodCall.getTarget().isDefault() && methodCall.isStaticDispatch();
+          methodCall.getTarget().isDefaultMethod() && methodCall.isStaticDispatch();
 
       if (targetIsJsOverlayInNativeClass || targetIsDefaultMethodAccessedStatically) {
         TypeDescriptor targetOverlayTypeDescriptor =
@@ -286,7 +286,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         if (methodCall.getTarget().isStatic()) {
           // Call already-static method directly at their new overlay class location.
           return createRedirectedStaticMethodCall(methodCall, targetOverlayTypeDescriptor);
-        } else if (methodCall.getTarget().isDefault()) {
+        } else if (methodCall.getTarget().isDefaultMethod()) {
           // Call default methods statically at their new overlay class location.
           return AstUtils.createDevirtualizedMethodCall(methodCall, targetOverlayTypeDescriptor);
         } else if (methodCall.getQualifier().getTypeDescriptor().isNative()) {
