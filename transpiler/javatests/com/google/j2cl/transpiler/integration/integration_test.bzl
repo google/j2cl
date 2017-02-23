@@ -79,9 +79,9 @@ def integration_test(name,
   defines = {
       # Turn on assertions since the integration tests rely on them.
       "ASSERTIONS_ENABLED_" : "true",
-      "jre.checks.checkLevel" : "'MINIMAL'",
-      "jre.checkedMode" : "'DISABLED'",
-      "jre.logging.logLevel" : "'OFF'",
+      "jre.checks.checkLevel" : "MINIMAL",
+      "jre.checkedMode" : "DISABLED",
+      "jre.logging.logLevel" : "OFF",
   }
 
   defines.update(closure_defines)
@@ -220,18 +220,6 @@ def integration_test(name,
   # blaze test :uncompiled_test
   # blaze test :compiled_test
 
-  test_harness_defines = ["'%s':%s" % (k,v) for (k,v) in defines.items()]
-
-  test_bootstrap = """
-try {
-  var CLOSURE_UNCOMPILED_DEFINES = {%s};
-} catch (e) {
-  alert('Failure while setting up flags: ' + e);
-}
-  """ % (",".join(test_harness_defines))
-  _genfile("TestBootstrap.js", test_bootstrap)
-
-
   test_harness = """
       goog.module('gen.test.Harness');
       goog.setTestOnly();
@@ -251,7 +239,6 @@ try {
 
   jsunit_test(
       name="uncompiled_test",
-      bootstrap_files=["TestBootstrap.js"],
       srcs=["TestHarness.js"],
       deps=[
           ":" + name,
@@ -264,6 +251,7 @@ try {
           "-Djsrunner.net.useJsBundles=true"
       ],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
+      defs = defs,
       tags=["manual", "notap"] if disable_uncompiled_test else []
   )
 
