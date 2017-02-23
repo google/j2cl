@@ -58,6 +58,10 @@ public abstract class MemberDescriptor extends Node
 
   public abstract boolean isSynthetic();
 
+  public boolean isConstructor() {
+    return false;
+  }
+
   public boolean isDefaultMethod() {
     return false;
   }

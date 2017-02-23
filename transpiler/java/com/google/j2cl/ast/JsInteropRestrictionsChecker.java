@@ -103,14 +103,10 @@ public class JsInteropRestrictionsChecker {
       if (!(member instanceof Field) && !(member instanceof Method)) {
         continue;
       }
-      MemberDescriptor memberDescriptor =
-          member instanceof Field
-              ? ((Field) member).getDescriptor()
-              : ((Method) member).getDescriptor();
+      MemberDescriptor memberDescriptor = member.getDescriptor();
 
       // Constructors are subject to a separate check and should not be duplicatively examined here.
-      if (memberDescriptor instanceof MethodDescriptor
-          && ((MethodDescriptor) memberDescriptor).isConstructor()) {
+      if (memberDescriptor.isConstructor()) {
         continue;
       }
       // Only look at unobfuscated JsInterop things.
