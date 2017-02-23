@@ -13,9 +13,12 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.common.truth.Correspondence;
 import com.google.devtools.build.runtime.Runfiles;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.problems.Problems;
@@ -39,6 +42,19 @@ import junit.framework.TestCase;
 public class IntegrationTestCase extends TestCase {
 
   private static final String TEST_ROOT = "third_party/java_src/j2cl/transpiler/javatests";
+
+  private static final Correspondence<String, String> CONTAINS_STRING =
+      new Correspondence<String, String>() {
+        @Override
+        public boolean compare(String actual, String expected) {
+          return actual.contains(expected);
+        }
+
+        @Override
+        public String toString() {
+          return "contained within";
+        }
+      };
 
   // The bundle contains both the standard library and its deps so that tests don't have to know how
   // to dep on all.
@@ -77,46 +93,23 @@ public class IntegrationTestCase extends TestCase {
     }
 
     public void assertCompileFails(String... expectedErrors) throws Exception {
-      List<String> errors = getProblems().getErrors();
-      assertTrue(
-          "Expected "
-              + expectedErrors.length
-              + " error(s) but there were actually "
-              + errors.size()
-              + " error(s)  "
-              + "expected:<"
-              + Arrays.toString(expectedErrors)
-              + "> "
-              + "actual:<"
-              + errors
-              + ">.",
-          errors.size() == expectedErrors.length);
-      for (String expectedError : expectedErrors) {
-        assertErrorsContainsSnippet(getProblems(), expectedError);
-      }
+      assertThat(getProblems().getErrors())
+          .comparingElementsUsing(CONTAINS_STRING)
+          .containsExactlyElementsIn(Arrays.asList(expectedErrors));
     }
 
     public void assertCompileSucceeds() throws Exception {
-      assertTrue(
-          "Expected no errors but got " + getProblems().getErrors(), !getProblems().hasErrors());
+      assertThat(getProblems().getErrors()).isEmpty();
     }
   }
 
   protected static void assertErrorsContainsSnippet(Problems problems, String snippet) {
-    assertTrue(
-        "Expected to find snippet '"
-            + snippet
-            + "' but did not find it in:\n"
-            + problems.getErrors()
-            + "\n",
-        problems.getErrors().stream().anyMatch(error -> error.contains(snippet)));
+    assertThat(problems.getErrors()).comparingElementsUsing(CONTAINS_STRING).contains(snippet);
   }
 
   protected static void assertOutputContainsSnippet(Problems problems, String snippet) {
     String output = J2clUtils.streamToString(stream -> problems.report(stream, stream));
-    assertTrue(
-        "Expected to find snippet '" + snippet + "' but did not find it in:\n" + output + "\n",
-        output.contains(snippet));
+    assertThat(output).named("Output").contains(snippet);
   }
 
   protected static String[] getTranspileArgs(
