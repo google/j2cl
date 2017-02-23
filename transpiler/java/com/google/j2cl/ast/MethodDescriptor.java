@@ -352,6 +352,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(getName().isPresent());
       MethodDescriptor methodDescriptor = autoBuild();
 
+      // Bridge methods cannot be abstract
+      checkState(!methodDescriptor.isBridge() || !methodDescriptor.isAbstract());
+      // Static methods cannot be abstract
+      checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
       if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
         List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
             methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();

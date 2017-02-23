@@ -134,6 +134,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               .setNative(false)
               .setSynthetic(true)
               .setBridge(true)
+              .setAbstract(false)
               .build();
 
       return AstUtils.createForwardingMethod(

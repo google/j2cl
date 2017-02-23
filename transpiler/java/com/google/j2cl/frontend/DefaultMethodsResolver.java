@@ -122,6 +122,7 @@ public class DefaultMethodsResolver {
                     .setJsInfo(JsInfo.NONE)
                     .setSynthetic(true)
                     .setBridge(true)
+                    .setAbstract(false)
                     .build(),
                 defaultForwardingMethod.getDescriptor(),
                 "Bridge to JsMethod.",

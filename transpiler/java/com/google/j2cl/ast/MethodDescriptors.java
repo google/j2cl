@@ -93,6 +93,7 @@ public class MethodDescriptors {
             .setParameterTypeDescriptors(parameterTypeDescriptors)
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setStatic(true)
+            .setAbstract(false)
             .setJsInfo(JsInfo.NONE);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {

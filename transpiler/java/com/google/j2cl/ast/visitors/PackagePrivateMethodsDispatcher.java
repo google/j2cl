@@ -49,6 +49,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
                                 type.getDeclaration().getUnsafeTypeDescriptor())
                             .setSynthetic(true)
                             .setBridge(true)
+                            .setAbstract(false)
                             .build(),
                         entry.getKey(),
                         "Forwarding method for package private method.",

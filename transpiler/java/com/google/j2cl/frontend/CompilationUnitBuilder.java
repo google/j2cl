@@ -385,7 +385,6 @@ public class CompilationUnitBuilder {
       Method.Builder methodBuilder =
           Method.newBuilder()
               .setMethodDescriptor(methodDescriptor)
-              .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
               .setSourcePosition(
                   getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
@@ -1360,6 +1359,7 @@ public class CompilationUnitBuilder {
                       checkNotNull(
                           JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding))))
               .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
+              .setAbstract(false)
               .build();
 
       // Construct lambda method and add it to lambda inner class.

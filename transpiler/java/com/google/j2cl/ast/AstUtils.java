@@ -269,6 +269,7 @@ public class AstUtils {
             .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
             .setSynthetic(true)
             .setBridge(true)
+            .setAbstract(false)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,
@@ -377,6 +378,7 @@ public class AstUtils {
             .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
             .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
+            .setAbstract(false)
             .setJsInfo(JsInfo.NONE)
             .build();
 
@@ -386,6 +388,7 @@ public class AstUtils {
             .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
             .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
+            .setAbstract(false)
             .setJsInfo(JsInfo.NONE)
             .build();
 

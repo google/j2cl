@@ -49,6 +49,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
                     MethodDescriptor.Builder.from(methodDescriptor)
                         .setEnclosingClassTypeDescriptor(
                             type.getDeclaration().getUnsafeTypeDescriptor())
+                        .setAbstract(true)
                         .build();
                 type.addMethod(
                     Method.newBuilder()
@@ -56,7 +57,6 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
                         .setParameters(
                             AstUtils.createParameterVariables(
                                 stubMethodDescriptor.getParameterTypeDescriptors()))
-                        .setIsAbstract(true)
                         .setIsOverride(true)
                         .build());
               }

@@ -35,7 +35,6 @@ public class Method extends Member implements HasJsNameInfo {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
-  private boolean isAbstract;
   private boolean isOverride;
   private String jsDocDescription;
   private BitSet parameterOptionality;
@@ -44,12 +43,10 @@ public class Method extends Member implements HasJsNameInfo {
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
-      boolean isAbstract,
       boolean isOverride,
       String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
-    this.isAbstract = isAbstract;
     this.isOverride = isOverride;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
@@ -87,11 +84,7 @@ public class Method extends Member implements HasJsNameInfo {
 
   @Override
   public boolean isAbstract() {
-    return this.isAbstract;
-  }
-
-  public void setAbstract(boolean isAbstract) {
-    this.isAbstract = isAbstract;
+    return methodDescriptor.isAbstract();
   }
 
   public void setParameterOptionality(int parameter, boolean isParameterOptional) {
@@ -159,7 +152,6 @@ public class Method extends Member implements HasJsNameInfo {
     private MethodDescriptor methodDescriptor;
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
-    private boolean isAbstract;
     private boolean isOverride;
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
@@ -171,7 +163,6 @@ public class Method extends Member implements HasJsNameInfo {
       builder.methodDescriptor = method.getDescriptor();
       builder.parameters = Lists.newArrayList(method.getParameters());
       builder.statements = Lists.newArrayList(method.getBody().getStatements());
-      builder.isAbstract = method.isAbstract();
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
@@ -242,11 +233,6 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsAbstract(boolean isAbstract) {
-      this.isAbstract = isAbstract;
-      return this;
-    }
-
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
@@ -283,7 +269,6 @@ public class Method extends Member implements HasJsNameInfo {
                   .build(),
               parameters,
               body,
-              isAbstract,
               isOverride,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;

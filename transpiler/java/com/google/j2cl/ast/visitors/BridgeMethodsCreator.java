@@ -427,6 +427,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                     .toArray(TypeDescriptor[]::new))
             .setSynthetic(true)
             .setBridge(true)
+            .setAbstract(false)
             .build();
     return bridgeMethodDescriptor;
   }
