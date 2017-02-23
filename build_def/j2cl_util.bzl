@@ -81,7 +81,6 @@ load(
 
 J2CL_UNOPTIMIZED_DEFS = [
     "--j2cl_pass=true",
-    "--language_in=ECMASCRIPT6_STRICT",
     "--language_out=ECMASCRIPT5",
 ]
 
