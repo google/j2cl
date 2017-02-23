@@ -19,6 +19,7 @@ import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.problems.Problems;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -45,9 +46,9 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsNameOnType(Type type) {
+  private void checkJsName(Type type) {
     if (!type.getSimpleJsName().equals("*") && !type.getSimpleJsName().equals("?")) {
-      checkJsName(type);
+      checkJsName(type.getSourcePosition(), type.getReadableDescription(), type);
       return;
     }
 
@@ -64,7 +65,7 @@ public class JsInteropRestrictionsChecker {
       if (!checkJsType(type)) {
         return;
       }
-      checkJsNameOnType(type);
+      checkJsName(type);
       checkJsNamespace(type);
     }
 
@@ -219,10 +220,18 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (!member.isStatic() && !member.isConstructor()) {
+    if (!member.isStatic()) {
       problems.error(
           member.getSourcePosition(),
           "Instance member '%s' cannot declare a namespace.",
+          member.getReadableDescription());
+      return;
+    }
+
+    if (!member.isNative()) {
+      problems.error(
+          member.getSourcePosition(),
+          "Non-native member '%s' cannot declare a namespace.",
           member.getReadableDescription());
       return;
     }
@@ -430,24 +439,22 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription> void checkJsName(
-      T item) {
+  private void checkJsName(Member member) {
+    checkJsName(
+        member.getSourcePosition(), member.getReadableDescription(), (HasJsNameInfo) member);
+  }
+
+  private void checkJsName(
+      SourcePosition sourcePosition, String readableDescription, HasJsNameInfo item) {
     String jsName = item.getSimpleJsName();
     if (jsName == null) {
       return;
     }
     if (jsName.isEmpty()) {
-      problems.error(
-          item.getSourcePosition(),
-          "'%s' cannot have an empty name.",
-          item.getReadableDescription());
+      problems.error(sourcePosition, "'%s' cannot have an empty name.", readableDescription);
     } else if ((item.isNative() && !JsUtils.isValidJsQualifiedName(jsName))
         || (!item.isNative() && !JsUtils.isValidJsIdentifier(jsName))) {
-      problems.error(
-          item.getSourcePosition(),
-          "'%s' has invalid name '%s'.",
-          item.getReadableDescription(),
-          jsName);
+      problems.error(sourcePosition, "'%s' has invalid name '%s'.", readableDescription, jsName);
     }
   }
 
