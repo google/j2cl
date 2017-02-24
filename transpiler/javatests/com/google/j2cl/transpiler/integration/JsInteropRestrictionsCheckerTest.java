@@ -1981,6 +1981,16 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   public void testJsOverlayOnJsMemberFails() throws Exception {
+    // JsOverlay in constructors is checked by JDT.
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true) public class Buggy {",
+            "  @JsOverlay public Buggy() { }",
+            "}")
+        .assertCompileFails("The annotation @JsOverlay is disallowed for this location");
+
     compile(
             "Buggy",
             "import jsinterop.annotations.JsOverlay;",
@@ -1989,24 +1999,17 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsConstructor;",
             "import jsinterop.annotations.JsProperty;",
             "@JsType(isNative=true) public class Buggy {",
-            "  @JsOverlay public Buggy() { }",
             "  @JsMethod @JsOverlay public final void m() { }",
             "  @JsMethod @JsOverlay public static void n() { }",
             "  @JsProperty @JsOverlay public static void setA(String value) { }",
             "}")
         .assertCompileFails(
-            "The annotation @JsOverlay is disallowed for this location"
-            // TODO(b/27597597): Finalize checker implementation and enable this test.
-            //
-            //  "Line 10: JsOverlay method 'EntryPoint.Buggy.EntryPoint$Buggy(int)' cannot be a "
-            //      + "constructor.",
-            //  "Line 11: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be nor override"
-            //      + " a JsProperty or a JsMethod.",
-            //  "Line 12: JsOverlay method 'void EntryPoint.Buggy.n()' cannot be nor override"
-            //      + " a JsProperty or a JsMethod.",
-            //  "Line 13: JsOverlay method 'void EntryPoint.Buggy.setA(String)' cannot be nor "
-            //      + "override a JsProperty or a JsMethod."
-            );
+            "JsOverlay method 'void Buggy.m()' cannot be nor override "
+                + "a JsProperty or a JsMethod.",
+            "JsOverlay method 'void Buggy.n()' cannot be nor override "
+                + "a JsProperty or a JsMethod.",
+            "JsOverlay method 'void Buggy.setA(String)' cannot be nor override "
+                + "a JsProperty or a JsMethod.");
   }
 
   public void testJsOverlayOnNonNativeJsTypeFails() throws Exception {

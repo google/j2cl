@@ -249,6 +249,14 @@ public class JsInteropRestrictionsChecker {
           "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
     }
+
+    if (memberDescriptor.isJsMember()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsOverlay method '%s' cannot be nor override a JsProperty or a JsMethod.",
+          readableDescription);
+      return;
+    }
     if (member.isMethod()) {
       Method method = (Method) member;
       if (method.isOverride()) {
