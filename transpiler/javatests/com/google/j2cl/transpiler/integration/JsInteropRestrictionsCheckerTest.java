@@ -1402,29 +1402,28 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "JsFunction implementation 'JsFunctionExtendingBaseClass' cannot extend a class.",
             "JsFunction implementation 'JsFunctionMultipleInterfaces' cannot implement more than"
                 + " one interface.",
-            "Cannot do instanceof against JsFunction implementation 'Buggy'."
-            // TODO(b/27597597): There should be the following errors also.
-            // "Line 14: JsFunction implementation member 'int EntryPoint.Buggy.getFoo()' "
-            //      + "cannot be JsMethod nor JsProperty.",
-            //  "Line 16: JsFunction implementation member 'void EntryPoint.Buggy.bleh()' cannot "
-            //      + "be JsMethod nor JsProperty.",
-            //  "Line 18: JsFunction implementation member 'int EntryPoint.Buggy.prop' cannot "
-            //      + "be JsMethod nor JsProperty.",
-            //  "Line 19: JsFunction implementation 'EntryPoint.Buggy' cannot implement method "
-            //      + "'String EntryPoint.Buggy.toString()'.",
-            //  "Line 20: JsFunction implementation 'EntryPoint.Buggy' cannot implement method "
-            //      + "'boolean EntryPoint.Buggy.equals(Object)'.",
-            //  "Line 21: JsFunction implementation 'EntryPoint.Buggy' cannot implement method "
-            //      + "'int EntryPoint.Buggy.hashCode()'.",
-            //  "Line 26: JsFunction interface member 'int EntryPoint.InvalidFunction.getFoo()'"
-            //      + " cannot be JsMethod nor JsProperty.",
-            //  "Line 27: JsFunction interface 'EntryPoint.InvalidFunction' cannot declare"
-            //      + " non-JsOverlay member 'void EntryPoint.InvalidFunction.m()'.",
-            //  "Line 28: JsFunction interface 'EntryPoint.InvalidFunction' cannot declare"
-            //      + " non-JsOverlay member 'int EntryPoint.InvalidFunction.f'.",
-            //  "Line 29: JsFunction interface 'EntryPoint.InvalidFunction' cannot declare"
-            //      + " non-JsOverlay member 'void EntryPoint.InvalidFunction.n()'.",
-            );
+            "Cannot do instanceof against JsFunction implementation 'Buggy'.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'void InvalidFunction.m()'.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'int InvalidFunction.f'.",
+            "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
+                + " member 'void InvalidFunction.n()'.",
+            "JsFunction implementation member 'int Buggy.getFoo()' cannot be "
+                + "JsMethod nor JsProperty.",
+            "JsFunction implementation member 'void Buggy.bleh()' cannot be"
+                + " JsMethod nor JsProperty.",
+            "JsFunction implementation member 'int Buggy.prop' cannot be JsMethod nor JsProperty.",
+            "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
+                + "JsMethod nor JsProperty.",
+            "JsFunction implementation 'Buggy' cannot implement method 'String Buggy.toString()'.",
+            "JsFunction implementation 'Buggy' cannot implement method "
+                + "'boolean Buggy.equals(Object)'.",
+            "JsFunction implementation 'Buggy' cannot implement method 'int Buggy.hashCode()'.",
+            "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
+                + "nor JsProperty.",
+            "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
+                + "nor JsProperty.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() throws Exception {

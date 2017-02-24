@@ -76,7 +76,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (type.getDeclaration().isJsFunctionInterface()) {
-      checkJsFunctionInterface(type);
+      checkJsFunction(type);
     } else if (type.getDeclaration().isJsFunctionImplementation()) {
       checkJsFunctionImplementation(type);
     } else {
@@ -375,7 +375,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsFunctionInterface(Type type) {
+  private void checkJsFunction(Type type) {
     String readableDescription = type.getDeclaration().getReadableDescription();
     if (!type.getDeclaration().isFunctionalInterface()) {
       problems.error(
@@ -398,6 +398,35 @@ public class JsInteropRestrictionsChecker {
           "'%s' cannot be both a JsFunction and a JsType at the same time.",
           readableDescription);
     }
+
+    for (Member member : type.getMembers()) {
+      checkMemberOfJsFunction(member);
+    }
+  }
+
+  private void checkMemberOfJsFunction(Member member) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isSynthetic()) {
+      return;
+    }
+
+    if (memberDescriptor.isJsMember()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsFunction interface member '%s' cannot be JsMethod nor JsProperty.",
+          member.getReadableDescription());
+      return;
+    }
+
+    if (memberDescriptor.isJsFunction() || memberDescriptor.isJsOverlay()) {
+      return;
+    }
+
+    problems.error(
+        member.getSourcePosition(),
+        "JsFunction interface '%s' cannot declare non-JsOverlay member '%s'.",
+        memberDescriptor.getEnclosingClassTypeDescriptor().getReadableDescription(),
+        memberDescriptor.getReadableDescription());
   }
 
   private void checkJsFunctionImplementation(Type type) {
@@ -429,6 +458,44 @@ public class JsInteropRestrictionsChecker {
           "JsFunction implementation '%s' cannot extend a class.",
           readableDescription);
     }
+
+    for (Member member : type.getMembers()) {
+      checkMemberOfJsFunctionImplementation(member);
+    }
+  }
+
+  private void checkMemberOfJsFunctionImplementation(Member member) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isSynthetic()) {
+      return;
+    }
+
+    if (member instanceof Method) {
+      Method method = (Method) member;
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (!methodDescriptor
+          .getOverriddenMethodDescriptors()
+          .stream()
+          .allMatch(MethodDescriptor::isJsFunction)) {
+        // Methods that are not effectively static dispatch are disallowed. In this case these
+        // could only be overrideable methods of java.lang.Object, i.e. toString, hashCode
+        // and equals.
+        problems.error(
+            member.getSourcePosition(),
+            "JsFunction implementation '%s' cannot implement method '%s'.",
+            memberDescriptor.getEnclosingClassTypeDescriptor().getReadableDescription(),
+            member.getReadableDescription());
+        return;
+      }
+    }
+
+    if (memberDescriptor.isJsMember()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsFunction implementation member '%s' cannot be JsMethod nor JsProperty.",
+          member.getReadableDescription());
+    }
+
   }
 
   private void checkJsFunctionSubtype(Type type) {
