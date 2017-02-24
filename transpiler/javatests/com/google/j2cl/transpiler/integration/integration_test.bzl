@@ -105,6 +105,7 @@ def integration_test(name,
             "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
             "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
             "-Xep:SelfEquality:OFF",
+            "-Xep:LoopConditionChecker:OFF",
         ],
         _js_deps=js_deps,
         native_srcs=native_srcs,
