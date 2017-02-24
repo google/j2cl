@@ -225,6 +225,9 @@ public abstract class TypeDescriptor extends Node
       getDeclaredMethodDescriptorsFactory();
 
   @Nullable
+  abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
+
+  @Nullable
   abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
 
   @Nullable
@@ -532,11 +535,19 @@ public abstract class TypeDescriptor extends Node
   }
 
   /**
-   * The list of methods declared in the type from the JDT. Note: this does not include methods we
-   * synthesize and add to the type like bridge methods.
+   * The list of methods declared in the type. Note: this does not include methods synthetic methods
+   * (like bridge methods) nor supertype methods that are not overridden in the type.
    */
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsBySignature().values();
+  }
+
+  /**
+   * The list of fields declared in the type. Note: this does not include methods synthetic fields
+   * (like captures) nor supertype fields.
+   */
+  public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
+    return getDeclaredFieldDescriptorsFactory().get(this);
   }
 
   /**
@@ -581,6 +592,7 @@ public abstract class TypeDescriptor extends Node
         .setBoundTypeDescriptorFactory(() -> null)
         .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
+        .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
         .setRawTypeDescriptorFactory(() -> null)
@@ -686,6 +698,15 @@ public abstract class TypeDescriptor extends Node
           typeDescriptor -> declaredMethodDescriptorsFactory.get());
     }
 
+    public abstract Builder setDeclaredFieldDescriptorsFactory(
+        DescriptorFactory<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory);
+
+    public Builder setDeclaredFieldDescriptorsFactory(
+        Supplier<ImmutableList<FieldDescriptor>> declaredFieldDescriptorsFactory) {
+      return setDeclaredFieldDescriptorsFactory(
+          typeDescriptor -> declaredFieldDescriptorsFactory.get());
+    }
+
     public abstract Builder setTypeDeclaration(TypeDeclaration typeDeclaration);
 
     // Builder accessors to aid construction.
@@ -711,6 +732,8 @@ public abstract class TypeDescriptor extends Node
 
     abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
         getDeclaredMethodDescriptorsFactory();
+
+    abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
     abstract TypeDescriptor getEnclosingTypeDescriptor();
 
@@ -765,6 +788,8 @@ public abstract class TypeDescriptor extends Node
           createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
       setDeclaredMethodDescriptorsFactory(
           createMemoizingFactory(getDeclaredMethodDescriptorsFactory()));
+      setDeclaredFieldDescriptorsFactory(
+          createMemoizingFactory(getDeclaredFieldDescriptorsFactory()));
       setInterfaceTypeDescriptorsFactory(
           createMemoizingFactory(getInterfaceTypeDescriptorsFactory()));
       setJsFunctionMethodDescriptorFactory(

@@ -50,6 +50,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
 
+  public abstract boolean isAbstract();
+
   @Override
   public abstract boolean isConstructor();
 
@@ -118,7 +120,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return !isStatic() && !isConstructor();
   }
 
-  public abstract boolean isAbstract();
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
 
   public boolean isOrOverridesJsMember() {
     return isJsMember() || !getOverriddenJsMembers().isEmpty();

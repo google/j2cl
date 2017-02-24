@@ -1255,6 +1255,13 @@ public class JdtUtils {
           return mapBuilder.build();
         };
 
+    Supplier<ImmutableList<FieldDescriptor>> declaredFields =
+        () ->
+            Arrays.stream(typeBinding.getDeclaredFields())
+                .map(JdtUtils::createFieldDescriptor)
+                .collect(toImmutableList());
+    ;
+
     boolean hasTypeBounds =
         (isTypeVariable || isWildCardOrCapture) && typeBinding.getTypeBounds().length != 0;
 
@@ -1305,6 +1312,7 @@ public class JdtUtils {
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
+            .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .setUniqueKey(uniqueKey)
             .build();
@@ -1460,6 +1468,13 @@ public class JdtUtils {
           return mapBuilder.build();
         };
 
+    Supplier<ImmutableList<FieldDescriptor>> declaredFields =
+        () ->
+            Arrays.stream(typeBinding.getDeclaredFields())
+                .map(JdtUtils::createFieldDescriptor)
+                .collect(toImmutableList());
+    ;
+
     // Compute these even later
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))
@@ -1489,6 +1504,7 @@ public class JdtUtils {
         .setTypeParameterDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
+        .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUniqueKey(uniqueKey)
         .build();
   }

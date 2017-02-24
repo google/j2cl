@@ -92,6 +92,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public boolean isField() {
+    return true;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
