@@ -63,24 +63,28 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
   /** Returns the mapping from public/protected method to its package private overridden method. */
   private static Map<MethodDescriptor, MethodDescriptor> findExposedOverriddenMethods(
       TypeDeclaration typeDeclaration) {
-    Map<MethodDescriptor, MethodDescriptor> exposedOverriddenMethodsByOverridingMethod =
-        new LinkedHashMap<>();
-    for (MethodDescriptor method : typeDeclaration.getDeclaredMethodDescriptors()) {
-      if (!(method.getVisibility().isPublic() || method.getVisibility().isProtected())
-          || method.isStatic()
-          || method.isConstructor()
-          || method.isSynthetic()) {
+    Map<MethodDescriptor, MethodDescriptor>
+        exposedOverriddenMethodDescriptorsByOverridingMethodDescriptor = new LinkedHashMap<>();
+    for (MethodDescriptor declaredMethodDescriptor :
+        typeDeclaration.getDeclaredMethodDescriptors()) {
+      if (!(declaredMethodDescriptor.getVisibility().isPublic()
+              || declaredMethodDescriptor.getVisibility().isProtected())
+          || declaredMethodDescriptor.isStatic()
+          || declaredMethodDescriptor.isConstructor()
+          || declaredMethodDescriptor.isSynthetic()) {
         // ITypeBinding.getDeclaredMethods() may or may not include Synthetic methods and
         // constructors, and these methods are not what we care about.
         continue;
       }
-      MethodDescriptor overriddenMethod = findDirectExposedOverriddenMethod(method);
-      if (overriddenMethod == null) {
+      MethodDescriptor overriddenMethodDescriptor =
+          findDirectExposedOverriddenMethod(declaredMethodDescriptor);
+      if (overriddenMethodDescriptor == null) {
         continue;
       }
-      exposedOverriddenMethodsByOverridingMethod.put(method, overriddenMethod);
+      exposedOverriddenMethodDescriptorsByOverridingMethodDescriptor.put(
+          declaredMethodDescriptor, overriddenMethodDescriptor);
     }
-    return exposedOverriddenMethodsByOverridingMethod;
+    return exposedOverriddenMethodDescriptorsByOverridingMethodDescriptor;
   }
 
   /**
@@ -109,32 +113,35 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
    * exposes "SuperParent.f3()", but "Child.f3()" does not.
    */
   private static MethodDescriptor findDirectExposedOverriddenMethod(
-      MethodDescriptor overridingMethod) {
-    MethodDescriptor directOverriddenMethod = findDirectOverriddenMethod(overridingMethod);
-    if (directOverriddenMethod == null) {
+      MethodDescriptor overridingMethodDescriptor) {
+    MethodDescriptor directOverriddenMethodDescriptor =
+        findDirectOverriddenMethodDescriptor(overridingMethodDescriptor);
+    if (directOverriddenMethodDescriptor == null) {
       return null;
     }
     boolean upgradesPackagePrivateVisibility =
-        directOverriddenMethod.getVisibility().isPackagePrivate()
-            && (overridingMethod.getVisibility().isPublic()
-                || overridingMethod.getVisibility().isProtected());
-    return upgradesPackagePrivateVisibility ? directOverriddenMethod : null;
+        directOverriddenMethodDescriptor.getVisibility().isPackagePrivate()
+            && (overridingMethodDescriptor.getVisibility().isPublic()
+                || overridingMethodDescriptor.getVisibility().isProtected());
+    return upgradesPackagePrivateVisibility ? directOverriddenMethodDescriptor : null;
   }
 
   /**
    * Returns directly overridden method in the super classes chain. We don't care about its super
    * interfaces since interface methods are always public.
    */
-  private static MethodDescriptor findDirectOverriddenMethod(MethodDescriptor overridingMethod) {
-    TypeDescriptor superclass =
-        overridingMethod.getEnclosingClassTypeDescriptor().getSuperTypeDescriptor();
-    while (superclass != null) {
-      for (MethodDescriptor method : superclass.getDeclaredMethodDescriptors()) {
-        if (overridingMethod.isOverride(method)) {
-          return method;
+  private static MethodDescriptor findDirectOverriddenMethodDescriptor(
+      MethodDescriptor overridingMethodDescriptor) {
+    TypeDescriptor superClassTypeDescriptor =
+        overridingMethodDescriptor.getEnclosingClassTypeDescriptor().getSuperTypeDescriptor();
+    while (superClassTypeDescriptor != null) {
+      for (MethodDescriptor declaredMethodDescriptor :
+          superClassTypeDescriptor.getDeclaredMethodDescriptors()) {
+        if (overridingMethodDescriptor.isOverride(declaredMethodDescriptor)) {
+          return declaredMethodDescriptor;
         }
       }
-      superclass = superclass.getSuperTypeDescriptor();
+      superClassTypeDescriptor = superClassTypeDescriptor.getSuperTypeDescriptor();
     }
     return null;
   }
