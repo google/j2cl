@@ -263,10 +263,24 @@ public class AstUtils {
       MethodDescriptor targetMethodDescriptor,
       TypeDescriptor fromTypeDescriptor,
       String jsDocDescription) {
+
+    /**
+     * When synthesizing methods in a class it is never OK to be accidentally referencing type
+     * variables from some other class (since the output will reference template variables that are
+     * unknown in the current context). So make sure that the descriptor for this new method has
+     * been adequately specialized into the context of the class into which it is going to be
+     * placed.
+     */
+    MethodDescriptor specializedMethodDescriptor =
+        targetMethodDescriptor.specializeTypeVariables(
+            fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters());
+
     return createForwardingMethod(
         null,
-        MethodDescriptor.Builder.from(targetMethodDescriptor)
+        MethodDescriptor.Builder.from(specializedMethodDescriptor)
             .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
+            // TODO(b/35802406): don't synthesize methods with a separate declaration site.
+            .setDeclarationMethodDescriptor(targetMethodDescriptor)
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)

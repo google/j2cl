@@ -280,9 +280,6 @@ public class CompilationUnitBuilder {
                         type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
                 .build());
       }
-
-      // Resolve default methods
-      DefaultMethodsResolver.resolve(typeBinding, type);
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
@@ -1427,9 +1424,6 @@ public class CompilationUnitBuilder {
       // type variables to the lambda TypeDescriptor's type arguments.  This new TypeDescriptor
       // needs to replace the old one throughout the Lambda Type.
       replaceLambdaDescriptor(lambdaType, lambdaTypeDeclaration);
-
-      // Resolve default methods
-      DefaultMethodsResolver.resolve(functionalInterfaceTypeBinding, lambdaType);
 
       // Add lambda class to compilation unit.
       j2clCompilationUnit.addType(lambdaType);

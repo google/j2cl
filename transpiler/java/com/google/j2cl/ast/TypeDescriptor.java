@@ -35,6 +35,7 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -70,6 +71,15 @@ public abstract class TypeDescriptor extends Node
   public interface DescriptorFactory<T> {
     T get(TypeDescriptor typeDescriptor);
   }
+
+  public static final Comparator<TypeDescriptor> MORE_SPECIFIC_INTERFACES_FIRST =
+      new Comparator<TypeDescriptor>() {
+        @Override
+        public int compare(TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
+          return Integer.compare(
+              thatTypeDescriptor.getMaxInterfaceDepth(), thisTypeDescriptor.getMaxInterfaceDepth());
+        }
+      };
 
   @Override
   public Node accept(Processor processor) {
@@ -856,6 +866,9 @@ public abstract class TypeDescriptor extends Node
   public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
     if (specializedTypeArgumentByTypeParameters == null) {
       specializedTypeArgumentByTypeParameters = new HashMap<>();
+
+      Map<TypeDescriptor, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
+          new HashMap<>();
       TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
 
       TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
@@ -879,9 +892,11 @@ public abstract class TypeDescriptor extends Node
           TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
           TypeDescriptor typeArgumentDescriptor =
               specializedTypeIsRaw ? javaLangObject : typeArgumentDescriptors.get(i);
-          specializedTypeArgumentByTypeParameters.put(
+          immediateSpecializedTypeArgumentByTypeParameters.put(
               typeParameterDescriptor, typeArgumentDescriptor);
         }
+        specializedTypeArgumentByTypeParameters.putAll(
+            immediateSpecializedTypeArgumentByTypeParameters);
 
         Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
             superTypeOrInterfaceDeclaration
@@ -890,12 +905,24 @@ public abstract class TypeDescriptor extends Node
 
         for (Entry<TypeDescriptor, TypeDescriptor> entry :
             superSpecializedTypeArgumentByTypeParameters.entrySet()) {
-          if (specializedTypeArgumentByTypeParameters.containsKey(entry.getValue())) {
-            specializedTypeArgumentByTypeParameters.put(
-                entry.getKey(), specializedTypeArgumentByTypeParameters.get(entry.getValue()));
+          TypeDescriptor typeArgumentDescriptor = entry.getValue();
+
+          typeArgumentDescriptor =
+              typeArgumentDescriptor.specializeTypeVariables(
+                  immediateSpecializedTypeArgumentByTypeParameters);
+
+          // Apply the immediate specialization.
+          if (immediateSpecializedTypeArgumentByTypeParameters.containsKey(
+              typeArgumentDescriptor)) {
+            typeArgumentDescriptor =
+                immediateSpecializedTypeArgumentByTypeParameters.get(typeArgumentDescriptor);
           } else {
-            specializedTypeArgumentByTypeParameters.put(entry.getKey(), entry.getValue());
+            typeArgumentDescriptor =
+                typeArgumentDescriptor.specializeTypeVariables(
+                    immediateSpecializedTypeArgumentByTypeParameters);
           }
+
+          specializedTypeArgumentByTypeParameters.put(entry.getKey(), typeArgumentDescriptor);
         }
       }
     }
@@ -905,7 +932,8 @@ public abstract class TypeDescriptor extends Node
 
   public TypeDescriptor specializeTypeVariables(
       Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
-    if (applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+    if (getTypeArgumentDescriptors().isEmpty()
+        || applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
       return this;
     }
 
@@ -919,5 +947,25 @@ public abstract class TypeDescriptor extends Node
                         ? applySpecializedTypeArgumentByTypeParameters.get(t)
                         : t.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters))
             .collect(toImmutableList()));
+  }
+
+  private Integer maxInterfaceDepth;
+
+  /** Returns the height of the largest inheritance chain of any interface implemented here. */
+  public int getMaxInterfaceDepth() {
+    if (maxInterfaceDepth == null) {
+      maxInterfaceDepth = 0;
+      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+        maxInterfaceDepth =
+            Math.max(
+                maxInterfaceDepth,
+                interfaceTypeDescriptor
+                    .getTypeDeclaration()
+                    .getUnsafeTypeDescriptor()
+                    .getMaxInterfaceDepth());
+      }
+      maxInterfaceDepth++;
+    }
+    return maxInterfaceDepth;
   }
 }
