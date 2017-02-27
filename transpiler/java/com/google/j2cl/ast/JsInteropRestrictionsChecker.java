@@ -193,7 +193,39 @@ public class JsInteropRestrictionsChecker {
     if (member.isMethod()) {
       checkMethodParameters((Method) member);
     }
+
+    checkLocalName(member);
     // TODO: do other checks.
+  }
+
+  private void checkLocalName(Member member) {
+    checkNameConsistency(member);
+  }
+
+  private void checkNameConsistency(Member member) {
+    if (!member.isMethod() || !member.getDescriptor().isJsMember()) {
+      return;
+    }
+    Method method = (Method) member;
+    String jsName = method.getSimpleJsName();
+    for (MethodDescriptor overriddenMethodDescriptor :
+        method.getDescriptor().getOverriddenMethodDescriptors()) {
+      if (!overriddenMethodDescriptor.isJsMember()) {
+        continue;
+      }
+      String parentName = overriddenMethodDescriptor.getSimpleJsName();
+      if (!parentName.equals(jsName)) {
+        problems.error(
+            method.getSourcePosition(),
+            "'%s' cannot be assigned JavaScript name '%s' that is different from the"
+                + " JavaScript name of a method it overrides ('%s' with JavaScript name '%s').",
+            member.getReadableDescription(),
+            jsName,
+            overriddenMethodDescriptor.getReadableDescription(),
+            parentName);
+        break;
+      }
+    }
   }
 
   private <T extends Member & HasJsNameInfo> void checkMemberQualifiedJsName(T member) {

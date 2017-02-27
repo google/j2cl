@@ -731,8 +731,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "both use the same JavaScript name 'foo'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testRenamedSuperclassJsMethodFails() throws Exception {
+  public void testRenamedSuperclassJsMethodFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -745,12 +744,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod(name = \"bar\") public void foo() {}",
             "}")
         .assertCompileFails(
-            "Line 10: 'void EntryPoint.Buggy.foo()' cannot be assigned a different "
-                + "JavaScript name than the method it overrides.");
+            "'void Buggy.foo()' cannot be assigned JavaScript name 'bar' that is different"
+                + " from the JavaScript name of a method it overrides "
+                + "('void ParentBuggy.foo()' with JavaScript name 'foo').");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testRenamedSuperInterfaceJsMethodFails() throws Exception {
+  public void testRenamedSuperInterfaceJsMethodFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -763,8 +762,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod(name = \"bar\") void foo();",
             "}")
         .assertCompileFails(
-            "Line 10: 'void EntryPoint.Buggy.foo()' cannot be assigned a different "
-                + "JavaScript name than the method it overrides.");
+            "'void Buggy.foo()' cannot be assigned JavaScript name 'bar' that is different"
+                + " from the JavaScript name of a method it overrides "
+                + "('void ParentBuggy.foo()' with JavaScript name 'foo').");
   }
 
   // TODO(b/27597597): Finalize checker implementation and enable this test.
@@ -789,8 +789,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "cannot be assigned a different JavaScript name than the method it overrides.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testRenamedSuperclassJsPropertyFails() throws Exception {
+  public void testRenamedSuperclassJsPropertyFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -801,8 +800,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty(name = \"bar\") public int getFoo() { return 0; }",
             "}")
         .assertCompileFails(
-            "Line 8: 'int EntryPoint.Buggy.getFoo()' "
-                + "cannot be assigned a different JavaScript name than the method it overrides.");
+            " 'int Buggy.getFoo()' cannot be assigned JavaScript name 'bar' that is different"
+                + " from the JavaScript name of a method it overrides "
+                + "('int ParentBuggy.getFoo()' with JavaScript name 'foo').");
   }
 
   // TODO(b/27597597): Finalize checker implementation and enable this test.
