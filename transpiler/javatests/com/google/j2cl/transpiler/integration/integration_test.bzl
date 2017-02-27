@@ -28,7 +28,7 @@ load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
 
 def integration_test(name,
-                     srcs=[],
+                     srcs,
                      deps=[],
                      defs=[],
                      native_srcs=[],
@@ -54,6 +54,9 @@ def integration_test(name,
 
   if not main_class:
     main_class = java_package + ".Main"
+
+  if not test_externs_list:
+    test_externs_list = ["//javascript/externs:common"]
 
   deps = [absolute_label(dep) for dep in deps]
 
@@ -90,29 +93,25 @@ def integration_test(name,
 
   defs = defs + define_flags
 
-  srcs_lib_dep = []
-  if srcs:
-    srcs_lib_dep = [":" + name]
-    # translate Java to JS
-    j2cl_library(
-        name=name,
-        srcs=srcs,
-        generate_build_test=generate_build_test,
-        deps=deps,
-        javacopts=[
-            "-source 8",
-            "-target 8",
-            "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
-            "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
-            "-Xep:SelfEquality:OFF",
-            "-Xep:LoopConditionChecker:OFF",
-        ],
-        _js_deps=js_deps,
-        native_srcs=native_srcs,
-        native_srcs_pkg=native_srcs_pkg,
-        _test_externs_list=test_externs_list,
-        plugins = plugins,
-    )
+  j2cl_library(
+      name=name,
+      srcs=srcs,
+      generate_build_test=generate_build_test,
+      deps=deps,
+      javacopts=[
+          "-source 8",
+          "-target 8",
+          "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
+          "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
+          "-Xep:SelfEquality:OFF",
+          "-Xep:LoopConditionChecker:OFF",
+      ],
+      _js_deps=js_deps,
+      native_srcs=native_srcs,
+      native_srcs_pkg=native_srcs_pkg,
+      _test_externs_list=test_externs_list,
+      plugins = plugins,
+  )
 
   # blaze build :optimized_js
   opt_harness = """
@@ -122,16 +121,13 @@ def integration_test(name,
   """ % main_class
   _genfile("OptHarness.js", opt_harness)
 
-
-  if not test_externs_list:
-    test_externs_list = ["//javascript/externs:common"]
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
       defs=J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list= test_externs_list,
-      deps=srcs_lib_dep,
+      deps=[":" + name],
   )
   # For constructing readable optimized diffs.
   readable_out_defs = [ "--variable_renaming=ALL" , "--property_renaming=OFF" , "--pretty_print"]
@@ -141,7 +137,7 @@ def integration_test(name,
       defs= J2CL_OPTIMIZED_DEFS + readable_out_defs + optimized_extra_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
-      deps=srcs_lib_dep,
+      deps=[":" + name],
   )
   # For constructing readable unoptimized diffs.
   native.js_binary(
@@ -150,73 +146,12 @@ def integration_test(name,
       defs=J2CL_UNOPTIMIZED_DEFS + readable_out_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
-      deps=srcs_lib_dep,
+      deps=[":" + name],
   )
 
   # For constructing GWT transpiled output.
-  srcjars = [src for src in srcs if ".srcjar" in src]
-  if srcs and not srcjars and enable_gwt:
-    # Only provide a GWT target if there are no srcjars since gwt_module can't
-    # handle them directly.
-    gwt_harness = """
-        package %s;
-        import com.google.gwt.core.client.EntryPoint;
-        public class MainEntryPoint implements EntryPoint {
-          @Override
-          public void onModuleLoad() {
-            Main.main(new String[] {});
-          }
-        }
-    """ % java_package
-    _genfile("MainEntryPoint.java", gwt_harness)
-
-    java_library_deps = gwt_deps if gwt_deps else [dep + "_java_library" for dep in deps]
-    native.gwt_module(
-        name="gwt_module",
-        srcs=srcs + ["MainEntryPoint.java"],
-        deps=java_library_deps,
-        entry_points=[java_package + ".MainEntryPoint"],
-        javacopts=[
-            "-source 8",
-            "-target 8"
-        ]
-    )
-    native.gwt_application(
-        name="readable_gwt_application",
-        compiler_opts=[
-            "-optimize 0",
-            "-style PRETTY",
-            "-setProperty user.agent=safari",
-            "-generateJsInteropExports",
-            "-ea",
-        ],
-        shard_count=1,
-        module_target=":gwt_module",
-        tags=["manual"],
-    )
-
-    native.gwt_application(
-        name="optimized_gwt_application",
-        compiler_opts=[
-            "-optimize 9",
-            "-style OBFUSCATED",
-            # "-style DETAILED",
-            "-setProperty user.agent=safari",
-            "-setProperty compiler.stackMode=strip",
-            "-setProperty compiler.enum.obfuscate.names=true",
-            "-setProperty jre.logging.logLevel=OFF",
-            "-setProperty document.compatMode.severity=IGNORE",
-            "-setProperty user.agent.runtimeWarning=false",
-            "-setProperty jre.checks.checkLevel=MINIMAL",
-            "-XnoclassMetadata",
-            # "-XclosureCompiler",
-            "-setProperty compiler.useSourceMaps=true",
-        ],
-        shard_count=1,
-        module_target=":gwt_module",
-        tags=["manual"],
-    )
-
+  if enable_gwt:
+    _gwt_targets(java_package, srcs, deps, gwt_deps)
 
   # blaze test :uncompiled_test
   # blaze test :compiled_test
@@ -235,46 +170,101 @@ def integration_test(name,
   """ % (main_class)
   _genfile("TestHarness.js", test_harness)
 
-  if not test_externs_list:
-    test_externs_list = ["//javascript/externs:common"]
-
-  jsunit_test(
-      name="uncompiled_test",
+  jsunit_test_args = dict(
       srcs=["TestHarness.js"],
       deps=[
           ":" + name,
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",
+      defs=J2CL_TEST_DEFS + [
+          "--closure_entry_point=gen.test.Harness"
+      ] + defs,
       externs_list=test_externs_list,
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
       jvm_flags=[
           "-Dcom.google.testing.selenium.browser=CHROME_LINUX",
           "-Djsrunner.net.useJsBundles=true"
       ],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
-      defs = defs,
-      tags=["manual", "notap"] if disable_uncompiled_test else []
+  )
+
+  jsunit_test(
+      name="uncompiled_test",
+      tags=["manual", "notap"] if disable_uncompiled_test else [],
+      **jsunit_test_args
   )
 
   jsunit_test(
       name="compiled_test",
-      srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=J2CL_TEST_DEFS + [
-          "--closure_entry_point=gen.test.Harness"
-      ] + defs,
-      deps=[
-          ":" + name,
-          "//javascript/closure/testing:testsuite",
-      ],
-      deps_mgmt="closure",
-      externs_list=test_externs_list,
-      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
-      tags=["manual", "notap"] if disable_compiled_test else []
+      tags=["manual", "notap"] if disable_compiled_test else [],
+      **jsunit_test_args
   )
 
+
+def _gwt_targets(java_package, srcs, deps, gwt_deps):
+  if any([".srcjar" in src for src in srcs]):
+    fail("gwt_module cannot handle srcjar")
+
+  gwt_harness = """
+      package %s;
+      import com.google.gwt.core.client.EntryPoint;
+      public class MainEntryPoint implements EntryPoint {
+        @Override
+        public void onModuleLoad() {
+          Main.main(new String[] {});
+        }
+      }
+  """ % java_package
+  _genfile("MainEntryPoint.java", gwt_harness)
+
+  java_library_deps = gwt_deps if gwt_deps else [dep + "_java_library" for dep in deps]
+  native.gwt_module(
+      name="gwt_module",
+      srcs=srcs + ["MainEntryPoint.java"],
+      deps=java_library_deps,
+      entry_points=[java_package + ".MainEntryPoint"],
+      javacopts=[
+          "-source 8",
+          "-target 8"
+      ]
+  )
+  native.gwt_application(
+      name="readable_gwt_application",
+      compiler_opts=[
+          "-optimize 0",
+          "-style PRETTY",
+          "-setProperty user.agent=safari",
+          "-generateJsInteropExports",
+          "-ea",
+      ],
+      shard_count=1,
+      module_target=":gwt_module",
+      tags=["manual"],
+  )
+
+  native.gwt_application(
+      name="optimized_gwt_application",
+      compiler_opts=[
+          "-optimize 9",
+          "-style OBFUSCATED",
+          # "-style DETAILED",
+          "-setProperty user.agent=safari",
+          "-setProperty compiler.stackMode=strip",
+          "-setProperty compiler.enum.obfuscate.names=true",
+          "-setProperty jre.logging.logLevel=OFF",
+          "-setProperty document.compatMode.severity=IGNORE",
+          "-setProperty user.agent.runtimeWarning=false",
+          "-setProperty jre.checks.checkLevel=MINIMAL",
+          "-XnoclassMetadata",
+          # "-XclosureCompiler",
+          "-setProperty compiler.useSourceMaps=true",
+      ],
+      shard_count=1,
+      module_target=":gwt_module",
+      tags=["manual"],
+  )
 
 def _genfile(name, str):
   native.genrule(
