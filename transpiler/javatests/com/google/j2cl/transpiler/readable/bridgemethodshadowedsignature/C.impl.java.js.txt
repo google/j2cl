@@ -1,0 +1,107 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C$impl');
+
+
+let B = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B$impl');
+let I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+
+/**
+ * @template C_C1
+ * @extends {B<C_C1, Consumer<?>>}
+ * @implements {I<C_C1>}
+ */
+class C extends B {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_C1
+   * @return {!C<C_C1>}
+   * @public
+   */
+  static $create__() {
+    C.$clinit();
+    let $instance = new C();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B__();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof C;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, C);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    C.$clinit = function() {};
+    Consumer = goog.module.get('java.util.function.Consumer$impl');
+    B.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C() {
+  }
+};
+
+$Util.$setClassMetadata(
+    C,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C'));
+
+
+I.$markImplementor(C);
+
+
+/**
+ * Export class.
+ */
+exports = C;
+//# sourceMappingURL=C.js.map

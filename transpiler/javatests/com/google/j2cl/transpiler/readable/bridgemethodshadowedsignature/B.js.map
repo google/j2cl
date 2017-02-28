@@ -1,0 +1,42 @@
+[abstract class B<B1, B2> implements I<B1> {
+  public String get(B2 consumer) {
+...  }
+}] => [/**
+ * @abstract
+...exports = B;
+] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B"
+[abstract class B<B1, B2> implements I<B1> {
+  public String get(B2 consumer) {
+...  }
+}] => [/**
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B"
+[UNKNOWN] => [super();]
+[abstract class B<B1, B2> implements I<B1> {
+  public String get(B2 consumer) {
+...  }
+}] => [/**
+   * Initializes instance fields for a particular Java constructor.
+...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B();
+  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B();]
+[public String get(B2 consumer) {
+    return "B get B2";
+  }] => [/**
+   * @param {C_B2} consumer
+...    return "B get B2";
+  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B.get"
+[consumer] => [consumer] "consumer"
+[return "B get B2";] => [return "B get B2";]
+[UNKNOWN] => [/**
+   * @abstract
+   * @override
+   * @param {Consumer<?>} arg0
+   * @return {?string}
+   * @public
+   */
+  m_get__java_util_function_Consumer(arg0) {
+  }]
+[UNKNOWN] => [java_lang_Object.$clinit();]
