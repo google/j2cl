@@ -15,12 +15,16 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDescriptor;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Creates unimplemented methods in abstract class.
@@ -41,27 +45,78 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
             if (!type.isAbstract()) {
               return;
             }
+
+            Set<String> shadowedSignatures = new HashSet<>();
+
             for (MethodDescriptor methodDescriptor : type.getDeclaration().getMethodDescriptors()) {
-              if (methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()
-                  && !methodDescriptor.isConstructor()
-                  && !methodDescriptor.isStatic()) {
-                MethodDescriptor stubMethodDescriptor =
-                    MethodDescriptor.Builder.from(methodDescriptor)
-                        .setEnclosingClassTypeDescriptor(
-                            type.getDeclaration().getUnsafeTypeDescriptor())
-                        .setAbstract(true)
-                        .build();
-                type.addMethod(
-                    Method.newBuilder()
-                        .setMethodDescriptor(stubMethodDescriptor)
-                        .setParameters(
-                            AstUtils.createParameterVariables(
-                                stubMethodDescriptor.getParameterTypeDescriptors()))
-                        .setIsOverride(true)
-                        .build());
+              if (methodDescriptor.isConstructor() || methodDescriptor.isStatic()) {
+                continue;
+              }
+              if (!methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()) {
+                continue;
+              }
+
+              addStubMethod(type, methodDescriptor);
+
+              boolean isParameterized =
+                  methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor();
+              boolean hasASpecializedSignature =
+                  !methodDescriptor.isJsOverride(methodDescriptor.getDeclarationMethodDescriptor());
+              if (isParameterized && hasASpecializedSignature) {
+                String specializedSignature = methodDescriptor.getOverrideSignature();
+                shadowedSignatures.add(specializedSignature);
+              }
+            }
+
+            /**
+             * Shadowing specialized methods can occur for example in the following scenario.
+             *
+             * <pre>
+             * interface List<T> { String getFoo(T t); }
+             * abstract class AbsList<T> implements List<T> {}
+             * interface StringList extends List<String> { String getFoo(String string); }
+             * abstract class AbsStringList extends AbsList<String> implements StringList {}
+             * </pre>
+             *
+             * <p>In this case the declared methods on AbsStringList includes a "get(String)" that
+             * was specialized from "List.get(T)". So a stub method is created for "get(Object)" but
+             * the "get(String)" coming from StringList is not seen and so no stub is created.
+             *
+             * <p>The only reason this wasn't causing type check errors is because
+             * BridgeMethodsCreator was filling that slot with an improper bridge.
+             */
+            ImmutableList<TypeDescriptor> interfaceTypeDescriptors =
+                type.getDeclaration().getInterfaceTypeDescriptors();
+            for (TypeDescriptor interfaceTypeDescriptor : interfaceTypeDescriptors) {
+              for (MethodDescriptor methodDescriptor :
+                  interfaceTypeDescriptor.getMethodDescriptors()) {
+                if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+                  continue;
+                }
+                if (!shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
+                  continue;
+                }
+
+                addStubMethod(type, methodDescriptor);
               }
             }
           }
         });
+  }
+
+  private static void addStubMethod(Type type, MethodDescriptor methodDescriptor) {
+    MethodDescriptor stubMethodDescriptor =
+        MethodDescriptor.Builder.from(methodDescriptor)
+            .setEnclosingClassTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
+            .setAbstract(true)
+            .build();
+    type.addMethod(
+        Method.newBuilder()
+            .setMethodDescriptor(stubMethodDescriptor)
+            .setParameters(
+                AstUtils.createParameterVariables(
+                    stubMethodDescriptor.getParameterTypeDescriptors()))
+            .setIsOverride(true)
+            .build());
   }
 }

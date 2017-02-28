@@ -140,6 +140,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
     for (MethodDescriptor bridgeMethodDescriptor :
         getPotentialBridgeMethodDescriptors(typeDeclaration.getUnsafeTypeDescriptor())) {
+      // Attempt to target a concrete method.
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
               bridgeMethodDescriptor, typeDeclaration.getUnsafeTypeDescriptor());
@@ -149,14 +150,16 @@ public class BridgeMethodsCreator extends NormalizationPass {
         continue;
       }
 
-      // If no targeted method is found, it means that no overriding method exists, normally no
-      // bridge method is needed, except in the case when it overrides an interface method with
-      // more specific types, and in this case a bridge method for the interface method is needed.
-      MethodDescriptor backwardingMethodDescriptor =
-          findBackwardingMethodDescriptor(bridgeMethodDescriptor, typeDeclaration);
-      if (backwardingMethodDescriptor != null) {
-        targetMethodDescriptorByBridgeMethodDescriptor.put(
-            backwardingMethodDescriptor, bridgeMethodDescriptor.getDeclarationMethodDescriptor());
+      // Failing that, attempt to target an accidental override, but of course ensure that the
+      // target is concrete.
+      if (!bridgeMethodDescriptor.isAbstract()) {
+        MethodDescriptor backwardingMethodDescriptor =
+            findBackwardingMethodDescriptor(bridgeMethodDescriptor, typeDeclaration);
+        if (backwardingMethodDescriptor != null) {
+          targetMethodDescriptorByBridgeMethodDescriptor.put(
+              backwardingMethodDescriptor, bridgeMethodDescriptor);
+          continue;
+        }
       }
     }
     return targetMethodDescriptorByBridgeMethodDescriptor;

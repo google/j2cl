@@ -1,15 +1,14 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList2.
+ * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList3.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire, missingOverride}
  */
-goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList2$impl');
+goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList3$impl');
 
 
 let AbstractList2 = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractList2$impl');
-let IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -18,9 +17,8 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 /**
  * @abstract
  * @extends {AbstractList2<?string>}
- * @implements {IStringList}
  */
-class AbstractStringList2 extends AbstractList2 {
+class AbstractStringList3 extends AbstractList2 {
   /**
    * Defines instance fields.
    * @public
@@ -34,9 +32,9 @@ class AbstractStringList2 extends AbstractList2 {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList2__() {
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList3__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractList2__();
-    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList2();
+    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList3();
   }
 
   /**
@@ -49,22 +47,13 @@ class AbstractStringList2 extends AbstractList2 {
   m_getFoo__java_lang_Object(arg0) {}
 
   /**
-   * @abstract
-   * @override
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_String(arg0) {}
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof AbstractStringList2;
+    return instance instanceof AbstractStringList3;
   }
 
   /**
@@ -74,7 +63,7 @@ class AbstractStringList2 extends AbstractList2 {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AbstractStringList2);
+    return $Util.$canCastClass(classConstructor, AbstractStringList3);
   }
 
   /**
@@ -82,7 +71,7 @@ class AbstractStringList2 extends AbstractList2 {
    * @public
    */
   static $clinit() {
-    AbstractStringList2.$clinit = function() {};
+    AbstractStringList3.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     AbstractList2.$clinit();
   }
@@ -91,21 +80,19 @@ class AbstractStringList2 extends AbstractList2 {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList2() {
+  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList3() {
   }
 };
 
 $Util.$setClassMetadata(
-    AbstractStringList2,
+    AbstractStringList3,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList2'));
+        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList3'));
 
-
-IStringList.$markImplementor(AbstractStringList2);
 
 
 /**
  * Export class.
  */
-exports = AbstractStringList2;
-//# sourceMappingURL=MultipleAbstractParents$AbstractStringList2.js.map
+exports = AbstractStringList3;
+//# sourceMappingURL=MultipleAbstractParents$AbstractStringList3.js.map

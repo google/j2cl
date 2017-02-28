@@ -35,6 +35,8 @@ public class MultipleAbstractParents {
   public abstract static class AbstractStringList2 extends AbstractList2<String>
       implements IStringList {}
 
+  public abstract static class AbstractStringList3 extends AbstractList2<String> {}
+
   public static class StringList extends AbstractStringList {}
 
   public static void main(String... args) {
