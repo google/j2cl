@@ -88,31 +88,19 @@ public class Main {
     Tester158.test();
     Tester159.test();
     Tester160.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester161.test();
-    }
+    // Tester161.test();  // illegal jsinterop
     Tester162.test();
     Tester165.test();
     Tester166.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester169.test();
-    }
+    // Tester169.test();  // illegal jsinterop
     Tester170.test();
     Tester173.test();
     Tester174.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester177.test();
-    }
+    // Tester177.test();  // illegal jsinterop
     Tester178.test();
     Tester181.test();
     Tester182.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester185.test();
-    }
+    // Tester185.test();  // illegal jsinterop
     Tester186.test();
     Tester189.test();
     Tester190.test();
@@ -132,17 +120,11 @@ public class Main {
     Tester222.test();
     Tester223.test();
     Tester224.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester241.test();
-    }
+    // Tester241.test();  // illegal jsinterop
     Tester242.test();
     Tester245.test();
     Tester246.test();
-    {
-      // TODO: fix, assertion fails.
-      // Tester249.test();
-    }
+    // Tester249.test();  // illegal jsinterop
     Tester250.test();
     Tester253.test();
     Tester254.test();
