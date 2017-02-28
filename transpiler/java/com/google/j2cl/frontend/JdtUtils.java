@@ -761,16 +761,23 @@ public class JdtUtils {
 
   /** Creates a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+    TypeDescriptor enclosingClassTypeDescriptor =
+        createTypeDescriptor(methodBinding.getDeclaringClass());
+
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = Modifier.isStatic(modifiers);
     Visibility visibility = getVisibility(methodBinding);
-    boolean isNative = Modifier.isNative(modifiers);
-    TypeDescriptor enclosingClassTypeDescriptor =
-        createTypeDescriptor(methodBinding.getDeclaringClass());
+    boolean isDefault = Modifier.isDefault(methodBinding.getModifiers());
+    JsInfo jsInfo = computeJsInfo(methodBinding);
+
+    boolean isNative =
+        Modifier.isNative(modifiers)
+            || (!jsInfo.isJsOverlay()
+                && enclosingClassTypeDescriptor.isNative()
+                && isAbstract(methodBinding));
+
     boolean isConstructor = methodBinding.isConstructor();
     String methodName = methodBinding.getName();
-
-    JsInfo jsInfo = computeJsInfo(methodBinding);
 
     TypeDescriptor returnTypeDescriptor =
         createTypeDescriptorWithNullability(
@@ -815,7 +822,7 @@ public class JdtUtils {
         .setConstructor(isConstructor)
         .setNative(isNative)
         .setFinal(JdtUtils.isFinal(methodBinding))
-        .setDefaultMethod(Modifier.isDefault(methodBinding.getModifiers()))
+        .setDefaultMethod(isDefault)
         .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())

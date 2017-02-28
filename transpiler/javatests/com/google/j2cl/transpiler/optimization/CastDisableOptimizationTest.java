@@ -17,16 +17,14 @@ package com.google.j2cl.transpiler.optimization;
 
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
+import java.util.Random;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import java.util.Random;
 
 /**
  * Tests cast checks are optimized out when cast checking is disabled.
@@ -114,11 +112,14 @@ public class CastDisableOptimizationTest {
     castNativeObject();
   }
 
-  @JsProperty
-  private native Object getFailingCasts();
-
   @Test
   public void castsAreRemoved() throws Exception {
-    assertFunctionMatches(getFailingCasts(), "");
+    assertFunctionMatches(((MethodsAsProperties) this).getFailingCasts(), "");
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  private interface MethodsAsProperties {
+    @JsProperty
+    Object getFailingCasts();
   }
 }

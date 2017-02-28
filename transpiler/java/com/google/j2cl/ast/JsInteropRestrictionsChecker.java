@@ -15,17 +15,18 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Pair;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.problems.Problems;
-import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -84,66 +85,12 @@ public class JsInteropRestrictionsChecker {
       checkJsConstructors(type);
     }
 
+    Map<String, JsMember> localNames = collectLocalNames(type.getSuperTypeDescriptor());
+    Map<String, JsMember> staticNames = new HashMap<>();
     for (Member member : type.getMembers()) {
-      checkMember(member);
+      checkMember(member, localNames, staticNames);
     }
-    checkTypeMemberCollisions(type);
     checkInstanceOfNativeJsTypesOrJsFunctionImplementations(type);
-  }
-
-  private void checkTypeMemberCollisions(Type type) {
-    // Native JS members are allowed to collide.
-    if (type.getDeclaration().isNative()) {
-      return;
-    }
-
-    Map<String, MemberDescriptor> memberDescriptorsByKey = new HashMap<>();
-    List<Member> members = type.getMembers();
-    for (Member member : members) {
-      if (!(member instanceof Field) && !(member instanceof Method)) {
-        continue;
-      }
-      MemberDescriptor memberDescriptor = member.getDescriptor();
-
-      // Constructors are subject to a separate check and should not be duplicatively examined here.
-      if (memberDescriptor.isConstructor()) {
-        continue;
-      }
-      // Only look at unobfuscated JsInterop things.
-      if (!memberDescriptor.isJsMember()
-          || memberDescriptor.isJsFunction()
-          || memberDescriptor.isJsOverlay()) {
-        continue;
-      }
-      // Native JS members are allowed to collide.
-      if (memberDescriptor.isNative()) {
-        continue;
-      }
-
-      // If a collision has occurred examine it more closely.
-      if (memberDescriptorsByKey.containsKey(getMemberKey(memberDescriptor))) {
-        MemberDescriptor collidingMemberDescriptor =
-            memberDescriptorsByKey.get(getMemberKey(memberDescriptor));
-        Set<JsMemberType> jsMemberTypes = EnumSet.noneOf(JsMemberType.class);
-        jsMemberTypes.add(collidingMemberDescriptor.getJsInfo().getJsMemberType());
-        jsMemberTypes.add(memberDescriptor.getJsInfo().getJsMemberType());
-
-        // A getter/setter pair can both use the same name.
-        if (jsMemberTypes.contains(JsMemberType.GETTER)
-            && jsMemberTypes.contains(JsMemberType.SETTER)) {
-          continue;
-        }
-
-        problems.error(
-            member.getSourcePosition(),
-            "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
-            memberDescriptor.getReadableDescription(),
-            collidingMemberDescriptor.getReadableDescription(),
-            memberDescriptor.getSimpleJsName());
-      }
-
-      memberDescriptorsByKey.put(getMemberKey(memberDescriptor), memberDescriptor);
-    }
   }
 
   private void checkInstanceOfNativeJsTypesOrJsFunctionImplementations(Type type) {
@@ -178,7 +125,8 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
-  private void checkMember(Member member) {
+  private void checkMember(
+      Member member, Map<String, JsMember> localNames, Map<String, JsMember> staticNames) {
     if (!member.isMethod() && !member.isField()) {
       return;
     }
@@ -186,12 +134,22 @@ public class JsInteropRestrictionsChecker {
     if (member.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
       checkMemberOfNativeJsType(member);
     }
+
+    if (member.isMethod()) {
+      checkMethodParameters((Method) member);
+    }
+
     if (member.getDescriptor().isJsOverlay()) {
       checkJsOverlay(member);
     }
     checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
-    if (member.isMethod()) {
-      checkMethodParameters((Method) member);
+
+    if (isCheckedLocalName(member.getDescriptor())) {
+      checkNameCollisions(localNames, member);
+    }
+
+    if (isCheckedStaticName(member.getDescriptor())) {
+      checkNameCollisions(staticNames, member);
     }
 
     checkLocalName(member);
@@ -662,7 +620,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private List<Method> getJsConstructors(Type type) {
+  private static List<Method> getJsConstructors(Type type) {
     return type.getConstructors()
         .stream()
         .filter(method -> method.getDescriptor().isJsConstructor())
@@ -677,23 +635,135 @@ public class JsInteropRestrictionsChecker {
     return statements.isEmpty() || (statements.size() == 1 && AstUtils.hasSuperCall(constructor));
   }
 
-  /**
-   * Returns true if the type does not have any static initialization blocks and does not do any
-   * initializations on static fields except for compile time constants.
-   */
-  private static boolean isClinitEmpty(Type type) {
-    if (type.hasStaticInitializerBlocks()) {
-      return false;
+  private static class JsMember {
+    private MemberDescriptor member;
+    private MethodDescriptor setter;
+    private MethodDescriptor getter;
+
+    public JsMember(MemberDescriptor member) {
+      this.member = member;
     }
-    for (Field staticField : type.getStaticFields()) {
-      if (staticField.hasInitializer() && !staticField.isCompileTimeConstant()) {
-        return false;
-      }
+
+    public JsMember(MemberDescriptor member, MethodDescriptor setter, MethodDescriptor getter) {
+      this.member = member;
+      this.setter = setter;
+      this.getter = getter;
     }
-    return true;
+
+    public boolean isNative() {
+      return member.isNative();
+    }
+
+    public boolean isPropertyAccessor() {
+      return setter != null || getter != null;
+    }
   }
 
-  private String getMemberKey(MemberDescriptor memberDescriptor) {
-    return (memberDescriptor.isStatic() ? "static " : "") + memberDescriptor.getSimpleJsName();
+  private void checkNameCollisions(Map<String, JsMember> localNames, Member member) {
+    Pair<JsMember, JsMember> oldAndNewJsMember =
+        updateJsMembers(localNames, member.getDescriptor());
+    JsMember oldJsMember = oldAndNewJsMember.getFirst();
+    JsMember newJsMember = oldAndNewJsMember.getSecond();
+
+    checkNameConsistency(member);
+    // TODO(b/27597597): Implement.
+    // checkJsPropertyConsistency(member, newJsMember);
+
+    if (oldJsMember == null || oldJsMember == newJsMember) {
+      return;
+    }
+
+    if (oldJsMember.isNative() && newJsMember.isNative()) {
+      return;
+    }
+
+    problems.error(
+        member.getSourcePosition(),
+        "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
+        member.getReadableDescription(),
+        oldJsMember.member.getReadableDescription(),
+        member.getDescriptor().getSimpleJsName());
+  }
+
+  private static boolean isCheckedLocalName(MemberDescriptor memberDescriptor) {
+    return !(memberDescriptor.isStatic() || memberDescriptor.isConstructor())
+        && memberDescriptor.isJsMember()
+        && !memberDescriptor.isSynthetic();
+  }
+
+  private static boolean isCheckedStaticName(MemberDescriptor memberDescriptor) {
+    // Constructors are checked specifically to give a better error message.
+    return memberDescriptor.isStatic()
+        && memberDescriptor.isJsMember()
+        && !memberDescriptor.isSynthetic();
+  }
+
+  private static HashMap<String, JsMember> collectLocalNames(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor == null) {
+      return new LinkedHashMap<>();
+    }
+
+    HashMap<String, JsMember> memberByLocalMemberNames =
+        collectLocalNames(typeDescriptor.getSuperTypeDescriptor());
+    for (MemberDescriptor member :
+        Iterables.concat(
+            typeDescriptor.getDeclaredMethodDescriptors(),
+            typeDescriptor.getDeclaredFieldDescriptors())) {
+      if (isCheckedLocalName(member)) {
+        updateJsMembers(memberByLocalMemberNames, member);
+      }
+    }
+    return memberByLocalMemberNames;
+  }
+
+  private static Pair<JsMember, JsMember> updateJsMembers(
+      Map<String, JsMember> memberByNames, MemberDescriptor member) {
+    JsMember oldJsMember = memberByNames.get(member.getSimpleJsName());
+    JsMember newJsMember = createOrUpdateJsMember(oldJsMember, member);
+    memberByNames.put(member.getSimpleJsName(), newJsMember);
+    return Pair.of(oldJsMember, newJsMember);
+  }
+
+  private static JsMember createOrUpdateJsMember(JsMember jsMember, MemberDescriptor member) {
+    switch (member.getJsInfo().getJsMemberType()) {
+      case GETTER:
+        if (jsMember != null && jsMember.isPropertyAccessor()) {
+          if (jsMember.getter == null || overrides(member, jsMember.getter)) {
+            jsMember.getter = (MethodDescriptor) member;
+            jsMember.member = member;
+            return jsMember;
+          }
+        }
+        return new JsMember(
+            member, jsMember == null ? null : jsMember.setter, (MethodDescriptor) member);
+      case SETTER:
+        if (jsMember != null && jsMember.isPropertyAccessor()) {
+          if (jsMember.setter == null || overrides(member, jsMember.setter)) {
+            jsMember.setter = (MethodDescriptor) member;
+            jsMember.member = member;
+            return jsMember;
+          }
+        }
+        return new JsMember(
+            member, (MethodDescriptor) member, jsMember == null ? null : jsMember.getter);
+      default:
+        if (jsMember != null && !jsMember.isPropertyAccessor()) {
+          if (overrides(member, jsMember.member)) {
+            jsMember.member = member;
+            return jsMember;
+          }
+        }
+        return new JsMember(member);
+    }
+  }
+
+  private static boolean overrides(
+      MemberDescriptor member, MemberDescriptor potentiallyOverriddenMember) {
+    if (!member.isMethod() || !potentiallyOverriddenMember.isMethod()) {
+      return false;
+    }
+
+    MethodDescriptor method = (MethodDescriptor) member;
+    return method.isOverride((MethodDescriptor) potentiallyOverriddenMember);
   }
 }

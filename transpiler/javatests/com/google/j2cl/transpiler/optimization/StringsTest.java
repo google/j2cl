@@ -3,8 +3,9 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-
+import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -13,52 +14,56 @@ import org.junit.runners.JUnit4;
 class StringsTest {
 
   @JsMethod
-  public static boolean stringEqualsString() {
+  public boolean stringEqualsString() {
     return "".equals("");
   }
 
-  @JsProperty
-  private static native Object getStringEqualsString();
-
   @JsMethod
-  public static boolean stringNotEqualsString() {
+  public boolean stringNotEqualsString() {
     return "".equals("asd");
   }
 
-  @JsProperty
-  private static native Object getStringNotEqualsString();
-
   @Test
   public void simpleEqualsOptimizes() {
-    assertFunctionMatches(getStringEqualsString(), "return !0;");
-    assertFunctionMatches(getStringNotEqualsString(), "return !1;");
+    assertFunctionMatches(((MethodsAsProperties) this).getStringEqualsString(), "return !0;");
+    assertFunctionMatches(((MethodsAsProperties) this).getStringNotEqualsString(), "return !1;");
   }
 
   @JsMethod
-  public static boolean stringSameString() {
+  public boolean stringSameString() {
     return "" == "";
   }
 
-  @JsProperty
-  private static native Object getStringSameString();
-
   @Test
   public void simpleSameOptimizes() {
-    assertFunctionMatches(getStringSameString(), "return !0;");
+    assertFunctionMatches(((MethodsAsProperties) this).getStringSameString(), "return !0;");
   }
 
   private static boolean staticField = "asd".equals("asd");
 
   @JsMethod
-  public static boolean stringEqualsStringOnStatic() {
+  public boolean stringEqualsStringOnStatic() {
     return staticField;
   }
 
-  @JsProperty
-  private static native Object getStringEqualsStringOnStatic();
-
   @Test
   public void staticFieldEqualsOptimizes() {
-    assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0;");
+    assertFunctionMatches(
+        ((MethodsAsProperties) this).getStringEqualsStringOnStatic(), "return !0;");
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface MethodsAsProperties {
+    @JsProperty
+    Object getStringEqualsString();
+
+    @JsProperty
+    Object getStringNotEqualsString();
+
+    @JsProperty
+    Object getStringSameString();
+
+    @JsProperty
+    Object getStringEqualsStringOnStatic();
   }
 }

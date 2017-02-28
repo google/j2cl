@@ -3,8 +3,9 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-
+import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -13,28 +14,31 @@ import org.junit.runners.JUnit4;
 class BooleansTest {
 
   @JsMethod
-  public static boolean simpleComp() {
+  public boolean simpleComp() {
     return true == true;
   }
 
-  @JsProperty
-  private static native Object getSimpleComp();
-
   @Test
   public void simpleCompOptimizes() {
-    assertFunctionMatches(getSimpleComp(), "return !0;");
+    assertFunctionMatches(((MethodsAsProperties) this).getSimpleComp(), "return !0;");
   }
 
   @JsMethod
-  public static boolean boxedComp() {
+  public boolean boxedComp() {
     return Boolean.TRUE == Boolean.TRUE;
   }
 
-  @JsProperty
-  private static native Object getBoxedComp();
-
   @Test
   public void boxedCompOptimizes() {
-    assertFunctionMatches(getBoxedComp(), "return !0;");
+    assertFunctionMatches(((MethodsAsProperties) this).getBoxedComp(), "return !0;");
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  private interface MethodsAsProperties {
+    @JsProperty
+    Object getSimpleComp();
+
+    @JsProperty
+    Object getBoxedComp();
   }
 }

@@ -3,8 +3,9 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-
+import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -21,11 +22,14 @@ public class ArraysTest {
     arrayField[0] = "ABC";
   }
 
-  @JsProperty
-  private native Object getModifyArray();
-
   @Test
   public void arrayStoreChecksAreRemoved() {
-    assertFunctionMatches(getModifyArray(), "this.<obf>[0]='ABC';");
+    assertFunctionMatches(((MethodsAsProperties) this).getModifyArray(), "this.<obf>[0]='ABC';");
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface MethodsAsProperties {
+    @JsProperty
+    Object getModifyArray();
   }
 }

@@ -349,8 +349,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
-  // TODO(rluble): enable when static property definitions are implemented.
-  public void disabled_testCollidingPropertyAccessorExportsFails() throws Exception {
+  public void testCollidingPropertyAccessorExportsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -361,9 +360,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void setDisplay2(int x) {}",
             "}")
         .assertCompileFails(
-            "Line 8: 'void EntryPoint.Buggy.setDisplay2(int)' cannot be exported because the "
-                + "global name 'test.EntryPoint.Buggy.display' is already taken "
-                + "by 'void EntryPoint.Buggy.setDisplay(int)'.");
+            "'void Buggy.setDisplay2(int)' and 'void Buggy.setDisplay(int)' cannot both use the "
+                + "same JavaScript name 'display'.");
   }
 
   public void testCollidingMethodExportsFails() throws Exception {
@@ -437,8 +435,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void show() {}",
             "}")
         .assertCompileFails(
-            "'void Buggy.show()' and 'void Buggy.show(int)' "
-                + "cannot both use the same JavaScript name 'show'.");
+            "'void Buggy.show()' and "
+                + "'void Buggy.show(int)' cannot both use the same JavaScript name 'show'.");
   }
 
   public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
@@ -511,8 +509,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingSubclassFieldToFieldJsTypeFails() throws Exception {
+  public void testCollidingSubclassFieldToFieldJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -525,12 +522,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int foo = 110;",
             "}")
         .assertCompileFails(
-            "Line 10: 'int EntryPoint.Buggy.foo' and 'int EntryPoint.ParentBuggy.foo' cannot both "
-                + "use the same JavaScript name 'foo'.");
+            "'int Buggy.foo' and 'int ParentBuggy.foo' cannot both use the same "
+                + "JavaScript name 'foo'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
+  public void testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -543,8 +539,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void foo(int a) {}",
             "}")
         .assertCompileFails(
-            "Line 10: 'void EntryPoint.Buggy.foo(int)' and 'int EntryPoint.ParentBuggy.foo' cannot "
-                + "both use the same JavaScript name 'foo'.");
+            "'void Buggy.foo(int)' and 'int ParentBuggy.foo' cannot both use the same "
+                + "JavaScript name 'foo'");
   }
 
   public void testCollidingSubclassMethodToExportedMethodJsTypeSucceeds() throws Exception {
@@ -561,11 +557,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingSubclassMethodToMethodInterfaceJsTypeFails() throws Exception {
+  public void testCollidingSubclassMethodToMethodInterfaceJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
+            "@JsType",
             "interface IBuggy1 {",
             "  void show();",
             "}",
@@ -580,12 +576,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void show(boolean b) {}",
             "}")
         .assertCompileFails(
-            "Line 16: 'void EntryPoint.Buggy2.show(boolean)' and 'void EntryPoint.Buggy.show()' "
-                + "cannot both use the same JavaScript name 'show'.");
+            "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
+                + "JavaScript name 'show'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
+  public void testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -598,13 +593,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void foo(int a) {}",
             "}")
         .assertCompileFails(
-            "Line 10: 'void EntryPoint.Buggy.foo(int)' and 'void EntryPoint.ParentBuggy.foo()' "
-                + "cannot both use the same JavaScript name 'foo'.");
+            "'void Buggy.foo(int)' and 'void ParentBuggy.foo()' cannot both use the same "
+                + "JavaScript name 'foo'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails()
-      throws Exception {
+  public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -627,8 +620,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void show(boolean b) {}",
             "}")
         .assertCompileFails(
-            "Line 20: 'void EntryPoint.Buggy2.show(boolean)' and 'void EntryPoint.Buggy.show()' "
-                + "cannot both use the same JavaScript name 'show'.");
+            "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
+                + "JavaScript name 'show'.");
   }
 
   public void testNonCollidingSyntheticBridgeMethodSucceeds() throws Exception {
@@ -693,8 +686,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
+  public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -710,12 +702,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int foo = 110;",
             "}")
         .assertCompileFails(
-            "Line 13: 'int EntryPoint.Buggy.foo' and 'int EntryPoint.ParentParentBuggy.foo' cannot "
-                + "both use the same JavaScript name 'foo'.");
+            "'int Buggy.foo' and 'int ParentParentBuggy.foo' cannot both use the same "
+                + "JavaScript name 'foo'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testShadowedSuperclassJsMethodFails() throws Exception {
+  public void testShadowedSuperclassJsMethodFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -727,8 +718,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod private void foo() {}",
             "}")
         .assertCompileFails(
-            "Line 8: 'void EntryPoint.Buggy.foo()' and 'void EntryPoint.ParentBuggy.foo()' cannot "
-                + "both use the same JavaScript name 'foo'.");
+            "'void Buggy.foo()' and 'void ParentBuggy.foo()' cannot both use the same "
+                + "JavaScript name 'foo'.");
   }
 
   public void testRenamedSuperclassJsMethodFails() throws Exception {
@@ -964,8 +955,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testMixingJsMethodJsPropertyFails() throws Exception {
+  public void testMixingJsMethodJsPropertyFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -979,10 +969,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod(name = \"z\") public void setZ(int z) {}",
             "}")
         .assertCompileFails(
-            "Line 10: 'int EntryPoint.Buggy.getY()' and 'int EntryPoint.Super.getY()' cannot "
-                + "both use the same JavaScript name 'getY'.",
-            "Line 11: 'void EntryPoint.Buggy.setZ(int)' and 'void EntryPoint.Super.setZ(int)' "
-                + "cannot both use the same JavaScript name 'z'.");
+            "'int Buggy.getY()' and 'int Super.getY()' cannot both use the same "
+                + "JavaScript name 'getY'.",
+            "'void Buggy.setZ(int)' and 'void Super.setZ(int)' cannot both use the same "
+                + "JavaScript name 'z'.");
   }
 
   // GWT enforces some restriction on JSNI JsMethods. In J2CL,  JSNI is just a comment and no test
@@ -1011,7 +1001,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testMultiplePublicConstructorsAllDelegatesToJsConstructorSucceeds() throws Exception {
+  public void testJsConstructorSubclassSucceeds() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1057,7 +1047,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testMultipleConstructorsNonJsSubtypeRestrictionFails() throws Exception {
+  public void testBadConstructorsOnJsConstructorSubtypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1149,7 +1139,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "if all constructors in the class are delegating to it.");
   }
 
-  public void testMultiplePublicConstructorsExportFails() throws Exception {
+  public void testMultipleJsConstructorsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1749,7 +1739,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "class SubBuggy extends Buggy<String> {",
             "  public SubBuggy() { super(null); } ",
-            "  @JsMethod public void bar(int a, @JsOptional String b, String... c) {}",
+            "  @JsMethod public void corge(int a, @JsOptional String b, String... c) {}",
             "}",
             "@JsFunction interface Function {",
             "  void m(String a, @JsOptional String b);",
@@ -2135,7 +2125,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative=true) interface Interface {",
             "  @JsIgnore public void n();",
             "}",
-            "@JsType(isNative=true) class Buggy {",
+            "@JsType(isNative=true) abstract class Buggy {",
             "  public static final int s = 42;",
             "  public static int t = 42;",
             "  public final int f = 42;",
@@ -2246,6 +2236,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  protected abstract void o(Object o);",
             "  abstract void o(String o);",
             "}",
+            "@JsType(isNative=true) interface NativeInterface {",
+            "  void m();",
+            "  void m(Object o);",
+            "  void m(String o);",
+            "}",
             "@JsType(isNative=true) abstract class NativeClass {",
             "  public native String toString();",
             "  public abstract int hashCode();",
@@ -2317,8 +2312,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails()
+  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails()
       throws Exception {
     compile(
             "Buggy",
@@ -2331,8 +2325,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void m(Object o) { }",
             "}")
         .assertCompileFails(
-            "Line 9: 'void EntryPoint.Buggy.m(Object)' and 'void EntryPoint.Super.m(int)' "
-                + "cannot both use the same JavaScript name 'm'.");
+            "'void Buggy.m(Object)' and 'void Super.m(int)' cannot both use the same "
+                + "JavaScript name 'm'.");
   }
 
   public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() throws Exception {

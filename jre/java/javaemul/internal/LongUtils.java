@@ -181,6 +181,6 @@ class LongUtils {
 
     public native NativeLong xor(NativeLong rightLong);
 
-    public native boolean equals(NativeLong rightLong);
+    public native boolean equals(Object rightLong);
   }
 }
