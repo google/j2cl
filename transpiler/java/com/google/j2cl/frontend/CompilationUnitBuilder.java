@@ -1357,6 +1357,7 @@ public class CompilationUnitBuilder {
                           JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding))))
               .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
               .setAbstract(false)
+              .setNative(false)
               .build();
 
       // Construct lambda method and add it to lambda inner class.

@@ -29,7 +29,10 @@
    * @return {void}
    * @public
    */
-  // native then(f1, f2) ]
+  then(f1, f2) {
+    f1(null);
+  }]
 [f1] => [f1] "f1"
 [f2] => [f2] "f2"
+[f1.execute(null)] => [f1(null);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

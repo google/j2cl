@@ -50,8 +50,7 @@ public class JsTypeTest extends MyTestCase {
     test.testSingleJavaConcreteJsFunction();
     test.testStar();
     test.testWildcard();
-    // TODO(b/35848997): Enable the test when the bug is fixed.
-    //test.testNativeFunctionalInterface();
+    test.testNativeFunctionalInterface();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
