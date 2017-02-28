@@ -284,6 +284,7 @@ public class AstUtils {
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)
+            .setNative(false)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,

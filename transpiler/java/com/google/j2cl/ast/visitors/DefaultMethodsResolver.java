@@ -151,6 +151,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
                     .setSynthetic(true)
                     .setBridge(true)
                     .setAbstract(false)
+                    .setNative(false)
                     .build(),
                 defaultForwardingMethod.getDescriptor(),
                 "Bridge to JsMethod.",

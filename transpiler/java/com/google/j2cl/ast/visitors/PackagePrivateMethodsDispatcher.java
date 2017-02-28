@@ -49,6 +49,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
                                 type.getDeclaration().getUnsafeTypeDescriptor())
                             .setSynthetic(true)
                             .setBridge(true)
+                            .setNative(false)
                             .setAbstract(false)
                             .build(),
                         entry.getKey(),

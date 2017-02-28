@@ -428,6 +428,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)
+            .setNative(false)
             .build();
     return bridgeMethodDescriptor;
   }

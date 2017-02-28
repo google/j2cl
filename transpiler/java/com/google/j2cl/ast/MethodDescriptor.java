@@ -358,8 +358,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(getName().isPresent());
       MethodDescriptor methodDescriptor = autoBuild();
 
-      // Bridge methods cannot be abstract
-      checkState(!methodDescriptor.isBridge() || !methodDescriptor.isAbstract());
+      // Bridge methods cannot be abstract nor native,
+      checkState(
+          !methodDescriptor.isBridge()
+              || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
+      // Bridge methods have to be marked synthetic,
+      checkState(!methodDescriptor.isBridge() || methodDescriptor.isSynthetic());
+
       // Static methods cannot be abstract
       checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
       if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {

@@ -179,6 +179,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)
+            .setNative(false)
             .build(),
         forwardToMethodDescriptor,
         "Bridge method for exposing non-JsMethod.",
