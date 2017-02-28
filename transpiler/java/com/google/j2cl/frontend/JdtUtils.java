@@ -830,11 +830,6 @@ public class JdtUtils {
         .build();
   }
 
-  public static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {
-    return JsInteropUtils.isJsMember(methodBinding)
-        || !getOverriddenJsMembers(methodBinding).isEmpty();
-  }
-
   /** Checks overriding chain to compute JsInfo. */
   static JsInfo computeJsInfo(IMethodBinding methodBinding) {
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);

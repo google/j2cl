@@ -13,7 +13,7 @@ abstract class B<B1, B2> implements I<B1> {
 }
 
 class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
-  //Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
+  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }
 
 public class BridgeMethodShadowedSignature {}
