@@ -8,13 +8,6 @@ package com.google.j2cl.transpiler.integration.morebridgemethods;
 public class Main {
 
   public static void main(String... args) {
-    /**
-     * Be warned, the existing implementation of bridge method construction contains some spooky
-     * behavior. If you enable BridgeJsMethodMain.test() then TestCase6.test() will suddenly break.
-     * Do not be surprised when this happens. And right now BridgeJsMethodMain.test() is broken but
-     * the test from which it is extracted ('bridgejsmethod') currently passes when run by itself.
-     */
-
     // From regression/mediumbridgeshards.
     TestCase3371.test();
     TestCase718.test();
@@ -28,27 +21,27 @@ public class Main {
     TestCase6104.test();
     TestCase9366.test();
     TestCase5814.test();
-    // TestCase6674.test(); // fails right now from spooky instability
+    TestCase6674.test();
     TestCase9226.test();
-    // TestCase55.test(); // fails right now from spooky instability
+    TestCase55.test();
     TestCase3352.test();
     TestCase4787.test();
-    // TestCase1596.test(); // fails right now from spooky instability
+    TestCase1596.test();
     TestCase2123.test();
     TestCase4182.test();
     TestCase5828.test();
-    // TestCase6.test(); // fails right now from spooky instability
-    // TestCase8435.test(); // fails right now from spooky instability
+    TestCase6.test();
+    TestCase8435.test();
 
     // From allsimplebridges.
     Tester5.test();
 
     // Hand rolled.
     TestCaseHand1.test();
-    // TestCaseHand2.test(); // fails right now from spooky instability
+    // TestCaseHand2.test();
 
     // Minimal versions of existing tests.
-    // BridgeJsMethodMain.test(); // fails right now from spooky instability
+    // BridgeJsMethodMain.test();
     BridgeMethodsMain.test();
     MultipleAbstractParentsMain.test();
     DefaultMethodsMain.test();

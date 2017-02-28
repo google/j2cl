@@ -138,28 +138,42 @@ public class BridgeMethodsCreator extends NormalizationPass {
     Map<MethodDescriptor, MethodDescriptor> targetMethodDescriptorByBridgeMethodDescriptor =
         new LinkedHashMap<>();
 
-    for (MethodDescriptor bridgeMethodDescriptor :
+    for (MethodDescriptor potentialBridgeMethodDescriptor :
         getPotentialBridgeMethodDescriptors(typeDeclaration.getUnsafeTypeDescriptor())) {
-      // Attempt to target a concrete method.
+      // Attempt to target a concrete method on the prototype chain.
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
-              bridgeMethodDescriptor, typeDeclaration.getUnsafeTypeDescriptor());
+              potentialBridgeMethodDescriptor,
+              typeDeclaration.getUnsafeTypeDescriptor(),
+              false /* findDefaultMethods */);
       if (targetMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
-            bridgeMethodDescriptor, targetMethodDescriptor);
+            potentialBridgeMethodDescriptor, targetMethodDescriptor);
         continue;
       }
 
       // Failing that, attempt to target an accidental override, but of course ensure that the
       // target is concrete.
-      if (!bridgeMethodDescriptor.isAbstract()) {
+      if (!potentialBridgeMethodDescriptor.isAbstract()) {
         MethodDescriptor backwardingMethodDescriptor =
-            findBackwardingMethodDescriptor(bridgeMethodDescriptor, typeDeclaration);
+            findBackwardingMethodDescriptor(potentialBridgeMethodDescriptor, typeDeclaration);
         if (backwardingMethodDescriptor != null) {
           targetMethodDescriptorByBridgeMethodDescriptor.put(
-              backwardingMethodDescriptor, bridgeMethodDescriptor);
+              backwardingMethodDescriptor, potentialBridgeMethodDescriptor);
           continue;
         }
+      }
+
+      // Lastly, attempt to route to a default method.
+      MethodDescriptor targetDefaultMethodDescriptor =
+          findForwardingMethodDescriptor(
+              potentialBridgeMethodDescriptor,
+              typeDeclaration.getUnsafeTypeDescriptor(),
+              true /* findDefaultMethods */);
+      if (targetDefaultMethodDescriptor != null) {
+        targetMethodDescriptorByBridgeMethodDescriptor.put(
+            potentialBridgeMethodDescriptor, targetDefaultMethodDescriptor);
+        continue;
       }
     }
     return targetMethodDescriptorByBridgeMethodDescriptor;
@@ -225,10 +239,13 @@ public class BridgeMethodsCreator extends NormalizationPass {
    * method is needed to make overriding work.
    */
   private static MethodDescriptor findForwardingMethodDescriptor(
-      MethodDescriptor bridgeMethodDescriptor, TypeDescriptor typeDescriptor) {
+      MethodDescriptor bridgeMethodDescriptor,
+      TypeDescriptor typeDescriptor,
+      boolean findDefaultMethods) {
     for (MethodDescriptor declaredMethodDescriptor :
         typeDescriptor.getDeclaredMethodDescriptors()) {
-      if (!declaredMethodDescriptor.equals(bridgeMethodDescriptor) // should not target itself
+      if (declaredMethodDescriptor.isDefaultMethod() == findDefaultMethods
+          && !declaredMethodDescriptor.equals(bridgeMethodDescriptor) // should not target itself
           && !declaredMethodDescriptor.isAbstract() // should be a concrete implementation.
           // concrete methods have the same signature, thus an overriding.
           && declaredMethodDescriptor.isJsOverride(bridgeMethodDescriptor)
@@ -246,18 +263,21 @@ public class BridgeMethodsCreator extends NormalizationPass {
     if (typeDescriptor.getSuperTypeDescriptor() != null) {
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
-              bridgeMethodDescriptor, typeDescriptor.getSuperTypeDescriptor());
+              bridgeMethodDescriptor, typeDescriptor.getSuperTypeDescriptor(), findDefaultMethods);
       if (targetMethodDescriptor != null) {
         return targetMethodDescriptor;
       }
     }
 
-    // recurse to super interfaces.
-    for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
-      MethodDescriptor targetMethodDescriptor =
-          findForwardingMethodDescriptor(bridgeMethodDescriptor, interfaceTypeDescriptor);
-      if (targetMethodDescriptor != null) {
-        return targetMethodDescriptor;
+    if (findDefaultMethods) {
+      // recurse to super interfaces.
+      for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
+        MethodDescriptor targetMethodDescriptor =
+            findForwardingMethodDescriptor(
+                bridgeMethodDescriptor, interfaceTypeDescriptor, findDefaultMethods);
+        if (targetMethodDescriptor != null) {
+          return targetMethodDescriptor;
+        }
       }
     }
 
