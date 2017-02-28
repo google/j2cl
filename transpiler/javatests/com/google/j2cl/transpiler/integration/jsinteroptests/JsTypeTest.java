@@ -50,6 +50,8 @@ public class JsTypeTest extends MyTestCase {
     test.testSingleJavaConcreteJsFunction();
     test.testStar();
     test.testWildcard();
+    // TODO(b/35848997): Enable the test when the bug is fixed.
+    //test.testNativeFunctionalInterface();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -675,5 +677,15 @@ public class JsTypeTest extends MyTestCase {
 
     object = Double.valueOf(3.0);
     assertNotNull((Wildcard) object);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  interface NativeFunctionalInterface<T> {
+    int f(T t);
+  }
+
+  public void testNativeFunctionalInterface() {
+    NativeFunctionalInterface<String> nativeFunctionalInterface = (s) -> 10;
+    assertEquals(10, nativeFunctionalInterface.f(""));
   }
 }
