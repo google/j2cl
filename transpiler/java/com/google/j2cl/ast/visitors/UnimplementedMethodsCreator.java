@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
@@ -47,6 +46,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
             }
 
             Set<String> shadowedSignatures = new HashSet<>();
+            Set<String> shadowedNonJsMethodSignatures = new HashSet<>();
 
             for (MethodDescriptor methodDescriptor : type.getDeclaration().getMethodDescriptors()) {
               if (methodDescriptor.isConstructor() || methodDescriptor.isStatic()) {
@@ -65,6 +65,16 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
               if (isParameterized && hasASpecializedSignature) {
                 String specializedSignature = methodDescriptor.getOverrideSignature();
                 shadowedSignatures.add(specializedSignature);
+              }
+
+              /**
+               * If outputting a "get(Object)" stub there's a chance that there's also a need for
+               * "m_get__java_lang_Object(Object)" stub if some implemented interface requires it
+               * (and JDT's declared methods list isn't reflecting that fact it). Note the
+               * possibility and check for it later when traversing interfaces.
+               */
+              if (methodDescriptor.isJsMethod()) {
+                shadowedNonJsMethodSignatures.add(methodDescriptor.getOverrideSignature());
               }
             }
 
@@ -85,19 +95,18 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
              * <p>The only reason this wasn't causing type check errors is because
              * BridgeMethodsCreator was filling that slot with an improper bridge.
              */
-            ImmutableList<TypeDescriptor> interfaceTypeDescriptors =
-                type.getDeclaration().getInterfaceTypeDescriptors();
-            for (TypeDescriptor interfaceTypeDescriptor : interfaceTypeDescriptors) {
+            for (TypeDescriptor interfaceTypeDescriptor :
+                type.getDeclaration().getTransitiveInterfaceTypeDescriptors()) {
               for (MethodDescriptor methodDescriptor :
                   interfaceTypeDescriptor.getMethodDescriptors()) {
-                if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
-                  continue;
+                if (!methodDescriptor.isJsMethod()
+                    && shadowedNonJsMethodSignatures.contains(
+                        methodDescriptor.getOverrideSignature())) {
+                  addStubMethod(type, methodDescriptor);
+                } else if (methodDescriptor == methodDescriptor.getDeclarationMethodDescriptor()
+                    && shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
+                  addStubMethod(type, methodDescriptor);
                 }
-                if (!shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
-                  continue;
-                }
-
-                addStubMethod(type, methodDescriptor);
               }
             }
           }
