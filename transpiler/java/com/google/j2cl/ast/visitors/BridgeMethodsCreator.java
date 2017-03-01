@@ -31,7 +31,6 @@ import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
@@ -95,10 +94,11 @@ public class BridgeMethodsCreator extends NormalizationPass {
     type.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteMethod(Method method) {
+          public Method rewriteMethod(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
             Collection<Method> bridgeJsMethods =
                 bridgeMethodsByTargetMethodDescriptor
-                    .get(method.getDescriptor())
+                    .get(methodDescriptor)
                     .stream()
                     .filter(bridgeMethod -> bridgeMethod.getDescriptor().isJsMethod())
                     .collect(Collectors.toList());
@@ -106,23 +106,15 @@ public class BridgeMethodsCreator extends NormalizationPass {
               return method;
             }
 
-            for (Method bridgeJsMethod : bridgeJsMethods) {
-              // Transfer parameter optionality from the target methods which will be "demoted"
-              // to non JsMethod.
-              // TODO(rluble): parameter optionality might better be moved to MethodDescriptor
-              // from method and all this business of moving optionality would have been
-              // handled in a simpler manner.
-              for (int i = 0; i < method.getParameters().size(); i++) {
-                bridgeJsMethod.setParameterOptionality(i, method.isParameterOptional(i));
-              }
-            }
             // Now that the bridge method is created (and marked JsMethod), "demote" to a plain
             // Java method by setting JsInfo to NONE and resetting parameter optionality.
-            Method.Builder methodBuilder = Method.Builder.from(method).setJsInfo(JsInfo.NONE);
-            for (int i = 0; i < method.getParameters().size(); i++) {
-              methodBuilder.setParameterOptional(i, false);
-            }
-            return methodBuilder.build();
+            return Method.Builder.from(method)
+                .setMethodDescriptor(
+                    MethodDescriptor.Builder.from(methodDescriptor)
+                        .setJsInfo(JsInfo.NONE)
+                        .removeParameterOptionality()
+                        .build())
+                .build();
           }
         });
   }
@@ -444,6 +436,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
       MethodDescriptor bridgeMethodDescriptor, MethodDescriptor targetMethodDescriptor) {
     // The MethodDescriptor of the targeted method.
     JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
+    MethodDescriptor.Builder methodDescriptorBuilder =
+        MethodDescriptor.Builder.from(targetMethodDescriptor);
 
     // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
     // targets to *real* implementation, which is not a JsFunction method.
@@ -452,11 +446,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
     if (bridgeMethodDescriptor.isJsMethod()
         && targetMethodDescriptor.inSameTypeAs(bridgeMethodDescriptor)) {
       targetMethodJsInfo = JsInfo.NONE;
+      methodDescriptorBuilder.removeParameterOptionality();
     }
-    return MethodDescriptor.Builder.from(targetMethodDescriptor)
-        .setJsInfo(targetMethodJsInfo)
-        .setJsFunction(false)
-        .build();
+
+    return methodDescriptorBuilder.setJsInfo(targetMethodJsInfo).setJsFunction(false).build();
   }
 
   private static MethodDescriptor tweakBridgeSignature(
@@ -473,6 +466,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 .getReturnTypeDescriptor() // use its own return type if it is a concrete method
             : targetMethodDescriptor
                 .getReturnTypeDescriptor(); // otherwise use the return type of the target method.
+
     bridgeMethodDescriptor =
         MethodDescriptor.Builder.from(
                 createMethodDescriptor(

@@ -212,10 +212,16 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     static Method createOverlayMethod(Method method, TypeDescriptor overlayImplTypeDescriptor) {
       Method statifiedMethod =
           method.getDescriptor().isStatic() ? method : AstUtils.createDevirtualizedMethod(method);
+      MethodDescriptor statifiedMethodDescriptor = statifiedMethod.getDescriptor();
+
       Method movedMethod =
           Method.Builder.from(statifiedMethod)
-              .setJsInfo(JsInfo.NONE)
-              .setEnclosingClass(overlayImplTypeDescriptor)
+              .setMethodDescriptor(
+                  MethodDescriptor.Builder.from(statifiedMethodDescriptor)
+                      .setJsInfo(JsInfo.NONE)
+                      .setEnclosingClassTypeDescriptor(overlayImplTypeDescriptor)
+                      .removeParameterOptionality()
+                      .build())
               .setSourcePosition(method.getSourcePosition())
               .build();
 

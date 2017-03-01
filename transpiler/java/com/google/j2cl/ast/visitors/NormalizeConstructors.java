@@ -139,6 +139,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setConstructor(false)
         .setStatic(false)
         .setJsInfo(JsInfo.NONE)
+        .removeParameterOptionality()
         .setVisibility(Visibility.PUBLIC)
         .build();
   }
@@ -183,17 +184,12 @@ public class NormalizeConstructors extends NormalizationPass {
       if (!method.isConstructor()) {
         return method;
       }
-      Method.Builder methodBuilder =
-          Method.newBuilder()
-              .setMethodDescriptor(ctorMethodDescriptorFromJavaConstructor(method.getDescriptor()))
-              .setParameters(method.getParameters())
-              .addStatements(method.getBody().getStatements())
-              .setJsDocDescription(
-                  "Initializes instance fields for a particular Java constructor.");
-      for (int i = 0; i < method.getParameters().size(); i++) {
-        methodBuilder.setParameterOptional(i, method.isParameterOptional(i));
-      }
-      return methodBuilder.build();
+      return Method.newBuilder()
+          .setMethodDescriptor(ctorMethodDescriptorFromJavaConstructor(method.getDescriptor()))
+          .setParameters(method.getParameters())
+          .addStatements(method.getBody().getStatements())
+          .setJsDocDescription("Initializes instance fields for a particular Java constructor.")
+          .build();
     }
 
     @Override
@@ -251,17 +247,13 @@ public class NormalizeConstructors extends NormalizationPass {
     }
     MethodDescriptor constructorDescriptor = builder.build();
 
-    Method.Builder constructorBuilder =
-        Method.newBuilder()
-            .setMethodDescriptor(constructorDescriptor)
-            .setParameters(jsConstructorParameters)
-            .addStatements(body)
-            .setJsDocDescription("Real constructor.")
-            .setSourcePosition(primaryConstructor.getSourcePosition());
-    for (int i = 0; i < jsConstructorParameters.size(); i++) {
-      constructorBuilder.setParameterOptional(i, primaryConstructor.isParameterOptional(i));
-    }
-    return constructorBuilder.build();
+    return Method.newBuilder()
+        .setMethodDescriptor(constructorDescriptor)
+        .setParameters(jsConstructorParameters)
+        .addStatements(body)
+        .setJsDocDescription("Real constructor.")
+        .setSourcePosition(primaryConstructor.getSourcePosition())
+        .build();
   }
 
   private static Method maybeSynthesizePrivateConstructor(Type type) {

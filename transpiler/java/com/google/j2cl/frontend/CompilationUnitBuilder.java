@@ -366,11 +366,10 @@ public class CompilationUnitBuilder {
       Block body =
           methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
 
-      Method.Builder methodBuilder =
-          newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
-              .setParameters(parameters)
-              .addStatements(body.getStatements());
-      return methodBuilder.build();
+      return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
+          .setParameters(parameters)
+          .addStatements(body.getStatements())
+          .build();
     }
 
     private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {
@@ -379,16 +378,10 @@ public class CompilationUnitBuilder {
 
     private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
-      Method.Builder methodBuilder =
-          Method.newBuilder()
-              .setMethodDescriptor(methodDescriptor)
-              .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setSourcePosition(
-                  getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
-      for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
-        methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
-      }
-      return methodBuilder;
+      return Method.newBuilder()
+          .setMethodDescriptor(methodDescriptor)
+          .setIsOverride(JdtUtils.isJsOverride(methodBinding))
+          .setSourcePosition(getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {

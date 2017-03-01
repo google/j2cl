@@ -551,7 +551,7 @@ public class JsInteropRestrictionsChecker {
       int lastParameter = numberOfParameters - 1;
       boolean isVarargsParameter = (i == lastParameter) && methodDescriptor.isJsMethodVarargs();
 
-      if (method.isParameterOptional(i)) {
+      if (method.getDescriptor().isParameterOptional(i)) {
         if (methodDescriptor.getParameterTypeDescriptors().get(i).isPrimitive()) {
           problems.error(
               method.getSourcePosition(),

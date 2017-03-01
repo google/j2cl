@@ -28,6 +28,7 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
+
+  abstract BitSet getParameterOptionality();
+
+  public boolean isParameterOptional(int i) {
+    return getParameterOptionality().get(i);
+  }
 
   public boolean isInit() {
     return getName().equals(INIT_METHOD_NAME) && !isStatic();
@@ -208,6 +215,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setSynthetic(false)
         .setBridge(false)
         .setJsFunction(false)
+        .setParameterOptionality(new BitSet())
         .setParameterTypeDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -330,6 +338,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           new ArrayList<>(getParameterTypeDescriptors());
       newParameterTypeDescriptors.addAll(parameterTypeDescriptors);
       return setParameterTypeDescriptors(newParameterTypeDescriptors);
+    }
+
+    abstract Builder setParameterOptionality(BitSet parameterOptionality);
+
+    abstract BitSet getParameterOptionality();
+
+    public Builder setParameterOptionality(int i, boolean isOptional) {
+      BitSet parameterOptionality = getParameterOptionality();
+      parameterOptionality.set(i, isOptional);
+      return setParameterOptionality(parameterOptionality);
+    }
+
+    public Builder removeParameterOptionality() {
+      return setParameterOptionality(new BitSet());
     }
 
     public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {

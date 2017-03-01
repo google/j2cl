@@ -24,7 +24,6 @@ import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +36,6 @@ public class Method extends Member implements HasJsNameInfo {
   @Visitable Block body;
   private boolean isOverride;
   private String jsDocDescription;
-  private BitSet parameterOptionality;
 
   private Method(
       MethodDescriptor methodDescriptor,
@@ -87,20 +85,12 @@ public class Method extends Member implements HasJsNameInfo {
     return methodDescriptor.isAbstract();
   }
 
-  public void setParameterOptionality(int parameter, boolean isParameterOptional) {
-    this.parameterOptionality.set(parameter, isParameterOptional);
-  }
-
   public boolean isOverride() {
     return this.isOverride;
   }
 
   public void setOverride(boolean isOverride) {
     this.isOverride = isOverride;
-  }
-
-  public boolean isParameterOptional(int i) {
-    return parameterOptionality.get(i);
   }
 
   public boolean isFinal() {
@@ -156,7 +146,6 @@ public class Method extends Member implements HasJsNameInfo {
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
-    private BitSet parameterOptionality = new BitSet();
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -166,7 +155,6 @@ public class Method extends Member implements HasJsNameInfo {
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
-      builder.parameterOptionality = method.parameterOptionality;
       builder.sourcePosition = method.getSourcePosition();
       return builder;
     }
@@ -220,14 +208,6 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
-      this.methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-              .build();
-      return this;
-    }
-
     public Builder setIsOverride(boolean isOverride) {
       this.isOverride = isOverride;
       return this;
@@ -235,17 +215,6 @@ public class Method extends Member implements HasJsNameInfo {
 
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
-      return this;
-    }
-
-    public Builder setJsInfo(JsInfo jsInfo) {
-      this.methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor).setJsInfo(jsInfo).build();
-      return this;
-    }
-
-    public Builder setParameterOptional(int parameterIndex, boolean isOptional) {
-      parameterOptionality.set(parameterIndex, isOptional);
       return this;
     }
 
@@ -271,7 +240,6 @@ public class Method extends Member implements HasJsNameInfo {
               body,
               isOverride,
               jsDocDescription);
-      method.parameterOptionality = parameterOptionality;
       method.setSourcePosition(sourcePosition);
       return method;
     }

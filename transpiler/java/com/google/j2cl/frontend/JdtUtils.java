@@ -802,13 +802,19 @@ public class JdtUtils {
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(JdtUtils::createTypeDescriptor);
 
+
+    MethodDescriptor.Builder methodDescriptorBuilder = MethodDescriptor.newBuilder();
+    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+      methodDescriptorBuilder.setParameterOptionality(
+          i, JsInteropUtils.isJsOptional(methodBinding, i));
+    }
+
     /**
      * JDT does not provide method bindings for any bridge methods so the current one must not be a
      * bridge.
      */
     boolean isBridge = false;
-
-    return MethodDescriptor.newBuilder()
+    return methodDescriptorBuilder
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setName(isConstructor ? null : methodName)
         .setDeclarationMethodDescriptor(declarationMethodDescriptor)
