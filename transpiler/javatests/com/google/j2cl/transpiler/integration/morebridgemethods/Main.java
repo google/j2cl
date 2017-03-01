@@ -41,7 +41,7 @@ public class Main {
     TestCaseHand2.test();
 
     // Minimal versions of existing tests.
-    // BridgeJsMethodMain.test();
+    BridgeJsMethodMain.test();
     BridgeMethodsMain.test();
     MultipleAbstractParentsMain.test();
     DefaultMethodsMain.test();
