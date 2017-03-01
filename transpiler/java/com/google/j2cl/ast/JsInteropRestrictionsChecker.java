@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Pair;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.common.HasJsNameInfo;
@@ -125,30 +127,48 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
+  private void checkIllegalOverrides(Method method) {
+    for (MethodDescriptor overriddenMethodDescriptor :
+        method.getDescriptor().getOverriddenMethodDescriptors()) {
+      checkState(!overriddenMethodDescriptor.isSynthetic());
+
+      if (overriddenMethodDescriptor.isJsOverlay()) {
+        problems.error(
+            method.getSourcePosition(),
+            "Method '%s' cannot override a JsOverlay method '%s'.",
+            method.getReadableDescription(),
+            overriddenMethodDescriptor.getReadableDescription());
+        return;
+      }
+    }
+  }
   private void checkMember(
       Member member, Map<String, JsMember> localNames, Map<String, JsMember> staticNames) {
     if (!member.isMethod() && !member.isField()) {
       return;
     }
 
-    if (member.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
       checkMemberOfNativeJsType(member);
     }
 
     if (member.isMethod()) {
-      checkMethodParameters((Method) member);
+      Method method = (Method) member;
+      checkIllegalOverrides(method);
+      checkMethodParameters(method);
     }
 
-    if (member.getDescriptor().isJsOverlay()) {
+    if (memberDescriptor.isJsOverlay()) {
       checkJsOverlay(member);
     }
     checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
 
-    if (isCheckedLocalName(member.getDescriptor())) {
+    if (isCheckedLocalName(memberDescriptor)) {
       checkNameCollisions(localNames, member);
     }
 
-    if (isCheckedStaticName(member.getDescriptor())) {
+    if (isCheckedStaticName(memberDescriptor)) {
       checkNameCollisions(staticNames, member);
     }
 

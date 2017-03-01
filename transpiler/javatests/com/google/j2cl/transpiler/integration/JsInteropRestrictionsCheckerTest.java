@@ -1712,14 +1712,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  void someOtherMethod();",
             "}")
         .assertCompileFails(
-            "Native JsType method 'void Buggy.someMethod()' should be native or abstract."
-
-            // TODO(b/27597597): Finalize checker implementation and enable this test.
-            //  "Line 9: Method 'void EntryPoint.OtherClass.someOtherMethod()' cannot override a "
-            //      + "JsOverlay method 'void EntryPoint.Interface.someOtherMethod()'.",
-            //  "Line 13: Method 'void EntryPoint.Buggy.someOtherMethod()' cannot override a"
-            //      + " JsOverlay method 'void EntryPoint.Interface.someOtherMethod()'."
-            );
+            "Native JsType method 'void Buggy.someMethod()' should be native or abstract.",
+            "Method 'void OtherClass.someOtherMethod()' cannot override a JsOverlay method "
+                + "'void Interface.someOtherMethod()'.",
+            "Method 'void Buggy.someOtherMethod()' cannot override a JsOverlay method "
+                + "'void Interface.someOtherMethod()'.");
   }
 
   public void testJsOptionalSucceeds() throws Exception {
