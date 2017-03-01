@@ -38,7 +38,7 @@ public class Main {
 
     // Hand rolled.
     TestCaseHand1.test();
-    // TestCaseHand2.test();
+    TestCaseHand2.test();
 
     // Minimal versions of existing tests.
     // BridgeJsMethodMain.test();

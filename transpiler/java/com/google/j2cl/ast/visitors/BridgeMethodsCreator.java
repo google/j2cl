@@ -184,10 +184,45 @@ public class BridgeMethodsCreator extends NormalizationPass {
    * bridge method generating in {@code type}.
    *
    * <p>A bridge method is needed in a type when the type extends or implements a parameterized
-   * class or interface and type erasure changes the signature of any inherited method. This
-   * inherited method is a potential method that may need a bridge method.
+   * class or interface and type erasure changes the signature of any inherited method or when an
+   * implemented interface requires a simple method that happens to collide with the signature of an
+   * existing method being specialized in the current type. This inherited method is a potential
+   * method that may need a bridge method.
    */
   private static List<MethodDescriptor> getPotentialBridgeMethodDescriptors(
+      TypeDescriptor typeDescriptor) {
+    List<MethodDescriptor> declaredPotentialBridgeMethodDescriptors =
+        getDeclaredPotentialBridgeMethodDescriptors(typeDescriptor);
+
+    Set<String> shadowedSignatures = new HashSet<>();
+
+    // Add signatures that are shadowed by potential bridge method descriptors which are generic
+    // specializations.
+    for (MethodDescriptor methodDescriptor : declaredPotentialBridgeMethodDescriptors) {
+      shadowedSignatures.add(methodDescriptor.getOverrideSignature());
+    }
+
+    // Remove any that are concretely implemented in the current class.
+    for (MethodDescriptor declaredMethodDescriptor :
+        typeDescriptor.getDeclaredMethodDescriptors()) {
+      shadowedSignatures.remove(declaredMethodDescriptor.getOverrideSignature());
+    }
+
+    // Then add any bridge method descriptors which are required by implemented interfaces but
+    // which were shadowed by one of the generic specialization bridge method descriptors.
+    for (TypeDescriptor interfaceTypeDescriptor :
+        typeDescriptor.getTypeDeclaration().getInterfaceTypeDescriptors()) {
+      for (MethodDescriptor methodDescriptor : interfaceTypeDescriptor.getMethodDescriptors()) {
+        if (shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
+          declaredPotentialBridgeMethodDescriptors.add(methodDescriptor);
+        }
+      }
+    }
+
+    return declaredPotentialBridgeMethodDescriptors;
+  }
+
+  private static List<MethodDescriptor> getDeclaredPotentialBridgeMethodDescriptors(
       TypeDescriptor typeDescriptor) {
     List<MethodDescriptor> potentialBridgeMethodDescriptors = new ArrayList<>();
     TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
@@ -197,14 +232,15 @@ public class BridgeMethodsCreator extends NormalizationPass {
           getPotentialBridgeMethodDescriptorsInType(superTypeDescriptor));
       // recurse into super class.
       potentialBridgeMethodDescriptors.addAll(
-          getPotentialBridgeMethodDescriptors(superTypeDescriptor));
+          getDeclaredPotentialBridgeMethodDescriptors(superTypeDescriptor));
     }
     for (TypeDescriptor superInterface : typeDescriptor.getInterfaceTypeDescriptors()) {
       // add the potential bridge methods from direct super interfaces.
       potentialBridgeMethodDescriptors.addAll(
           getPotentialBridgeMethodDescriptorsInType(superInterface));
       // recurse into super interfaces.
-      potentialBridgeMethodDescriptors.addAll(getPotentialBridgeMethodDescriptors(superInterface));
+      potentialBridgeMethodDescriptors.addAll(
+          getDeclaredPotentialBridgeMethodDescriptors(superInterface));
     }
     return potentialBridgeMethodDescriptors;
   }
