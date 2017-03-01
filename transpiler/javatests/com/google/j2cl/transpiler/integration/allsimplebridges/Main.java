@@ -8,16 +8,16 @@ public class Main {
      * class, parent class, interface).
      *
      * <ul>
-     * <li>childExtendsParent
-     * <li>childImplementsInterface
-     * <li>childSpecializesGeneric
-     * <li>childOverridesParentMethod
-     * <li>childOverridesInterfaceMethod
-     * <li>parentIsAbstract
-     * <li>parentIsGeneric
-     * <li>parentIsJsType
-     * <li>interfaceHasDefaultMethod
-     * <li>interfaceIsJsType
+     *   <li>childExtendsParent
+     *   <li>childImplementsInterface
+     *   <li>childSpecializesGeneric
+     *   <li>childOverridesParentMethod
+     *   <li>childOverridesInterfaceMethod
+     *   <li>parentIsAbstract
+     *   <li>parentIsGeneric
+     *   <li>parentIsJsType
+     *   <li>interfaceHasDefaultMethod
+     *   <li>interfaceIsJsType
      * </ul>
      *
      * <p>Some combinations don't work yet in J2CL and are temporarily disabled. They are marked
@@ -42,18 +42,12 @@ public class Main {
     Tester22.test();
     Tester23.test();
     Tester24.test();
-    {
-      // TODO: fix infinite recursion.
-      // Tester113.test();
-      // Tester114.test();
-    }
+    Tester113.test();
+    Tester114.test();
     Tester115.test();
     Tester116.test();
-    {
-      // TODO: fix infinite recursion.
-      // Tester117.test();
-      // Tester118.test();
-    }
+    Tester117.test();
+    Tester118.test();
     Tester119.test();
     Tester120.test();
     // Tester129.test();  // illegal jsinterop
