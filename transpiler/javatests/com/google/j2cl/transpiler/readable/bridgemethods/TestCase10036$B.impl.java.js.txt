@@ -1,0 +1,116 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036$B.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.B$impl');
+
+
+let BI1 = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI1$impl');
+let BI2 = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI2$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let BI3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @abstract
+ * @template C_B_B1
+ * @implements {BI1}
+ * @implements {BI2}
+ */
+class B extends java_lang_Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_B__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_B();
+  }
+
+  /**
+   * @abstract
+   * @param {C_B_B1} value
+   * @return {?string}
+   * @public
+   */
+  m_get__java_lang_Comparable(value) {}
+
+  /**
+   * @abstract
+   * @override
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  get(arg0) {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof B;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, B);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    B.$clinit = function() {};
+    BI3 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    java_lang_Object.$clinit();
+    BI3.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_B() {}
+};
+
+$Util.$setClassMetadata(
+    B,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036$B'));
+
+
+BI1.$markImplementor(B);
+BI2.$markImplementor(B);
+
+
+/**
+ * Export class.
+ */
+exports = B;
+//# sourceMappingURL=TestCase10036$B.js.map

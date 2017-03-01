@@ -1,0 +1,90 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036$BI2.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI2$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @interface
+ */
+class BI2 {
+  /**
+   * @abstract
+   * @param {?string} value
+   * @return {?string}
+   * @public
+   */
+  m_get__java_lang_String(value) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI2 =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI2;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    BI2.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    BI2,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036$BI2'));
+
+
+BI2.$markImplementor(/** @type {Function} */ (BI2));
+
+
+/**
+ * Export class.
+ */
+exports = BI2;
+//# sourceMappingURL=TestCase10036$BI2.js.map
