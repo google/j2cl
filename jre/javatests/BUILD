@@ -89,6 +89,12 @@ j2cl_multi_test(
     test_class = "com.google.gwt.emultest.EmulTests",
 )
 
+j2cl_multi_test(
+    name = "EmulJava8",
+    shard_count = 8,
+    test_class = "com.google.gwt.emultest.EmulJava8Tests",
+)
+
 genrule(
     name = "test_defines",
     outs = ["test_defines.js"],
