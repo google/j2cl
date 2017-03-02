@@ -1228,35 +1228,39 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   public void testJsFunctionSucceeds() throws Exception {
     compile(
-            source(
-                "Function",
-                "import jsinterop.annotations.JsFunction;",
-                "import jsinterop.annotations.JsOverlay;",
-                "@JsFunction",
-                "public interface Function {",
-                "  int getFoo();",
-                "  @JsOverlay",
-                "  static String s = new String();",
-                "  @JsOverlay",
-                "  default void m() {}",
-                "  @JsOverlay",
-                "  static void n() {}",
-                "}"),
-            source(
-                "Buggy",
-                "public final class Buggy implements Function {",
-                "  public int getFoo() { return 0; }",
-                "  public final void blah() {}",
-                "  public void blat() {}",
-                "  private void bleh() {}",
-                "  static void blet() {",
-                "    new Function() {",
-                "       public int getFoo() { return 0; }",
-                "    }.getFoo();",
-                "  }",
-                "  String x = new String();",
-                "  static int y;",
-                "}"))
+            "Buggy",
+            "import jsinterop.annotations.JsFunction;",
+            "import jsinterop.annotations.JsOverlay;",
+            "@JsFunction",
+            "interface Function {",
+            "  int getFoo();",
+            "  @JsOverlay",
+            "  static String s = new String();",
+            "  @JsOverlay",
+            "  default void m() {}",
+            "  @JsOverlay",
+            "  static void n() {}",
+            "}",
+            "public final class Buggy implements Function {",
+            "  public int getFoo() { return 0; }",
+            "  public final void blah() {}",
+            "  public void blat() {}",
+            "  private void bleh() {}",
+            "  static void blet() {",
+            "    new Function() {",
+            "       public int getFoo() { return 0; }",
+            "    }.getFoo();",
+            "  }",
+            "  String x = new String();",
+            "  static int y;",
+            "}",
+            "@JsFunction",
+            "interface Function2 {",
+            "  Object getFoo();",
+            "}",
+            "final class Buggy2 implements Function2 {",
+            "  public String getFoo() { return null;}",
+            "}")
         .assertCompileSucceeds();
   }
 
@@ -1688,13 +1692,18 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsMethod;",
             "import jsinterop.annotations.JsOptional;",
             "interface Interface {",
-            "   @JsMethod void m(@JsOptional Object o);",
+            "  @JsMethod void foo(@JsOptional Object o);",
+            "  @JsMethod Object bar(@JsOptional Object o);",
             "}",
             "public class Buggy implements Interface {",
-            "   @JsMethod public void m(Object o) {}",
+            "  @Override",
+            "  @JsMethod public void foo(Object o) {}",
+            "  @Override",
+            "  @JsMethod public String bar(Object o) { return null; }",
             "}")
         .assertCompileFails(
-            " Method 'void Buggy.m(Object)' should declare parameter 'o' as JsOptional");
+            "Method 'void Buggy.foo(Object)' should declare parameter 'o' as JsOptional",
+            "Method 'String Buggy.bar(Object)' should declare parameter 'o' as JsOptional");
   }
 
   public void testJsOptionalNotAtEndFails() throws Exception {
@@ -1808,46 +1817,38 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   public void testJsOverlayImplementingInterfaceMethodFails() throws Exception {
     compile(
-            source(
-                "Buggy",
-                "import jsinterop.annotations.JsOverlay;",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public class Buggy implements IBuggy {",
-                "  @JsOverlay",
-                "  public void m() {}",
-                "}"),
-            source(
-                "IBuggy",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public interface IBuggy {",
-                "  void m();",
-                "}"))
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true) interface IBuggy {",
+            "  void m();",
+            "  Object n();",
+            "}",
+            "@JsType(isNative=true) public class Buggy implements IBuggy {",
+            "  @JsOverlay public final void m() { }",
+            "  @JsOverlay public final String n() { return null; }",
+            "}")
         .assertCompileFails(
-            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.");
+            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.",
+            "JsOverlay method 'String Buggy.n()' cannot override a supertype method.");
   }
 
   public void testJsOverlayOverridingSuperclassMethodFails() throws Exception {
     compile(
-            source(
-                "Buggy",
-                "import jsinterop.annotations.JsOverlay;",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public class Buggy extends Super {",
-                "  @JsOverlay",
-                "  public void m() {}",
-                "}"),
-            source(
-                "Super",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public class Super {",
-                "  public native void m();",
-                "}"))
+            "Buggy",
+            "import jsinterop.annotations.JsOverlay;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true) class Super {",
+            "  public native void m();",
+            "  public native Object n();",
+            "}",
+            "@JsType(isNative=true) public class Buggy extends Super {",
+            "  @JsOverlay public final void m() { }",
+            "  @JsOverlay public final String n() { return null; }",
+            "}")
         .assertCompileFails(
-            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.");
+            "JsOverlay method 'void Buggy.m()' cannot override a supertype method.",
+            "JsOverlay method 'String Buggy.n()' cannot override a supertype method.");
   }
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() throws Exception {
@@ -2076,7 +2077,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative=true) class NativeTypeWithHashCode {",
             "  public native int hashCode();",
             "}",
-            "class SomeClass3 extends NativeTypeWithHashCode implements A {}")
+            "class SomeClass3 extends NativeTypeWithHashCode implements A {}",
+            "@JsType(isNative=true) interface NativeInterface {",
+            "  public Object foo();",
+            "}",
+            "@JsType(isNative=true) class NativeTypeWithBridge implements NativeInterface {",
+            "  public String foo() { return null; }",
+            "}")
         .assertCompileFails(
             "Native JsType member 'void Interface.n()' cannot have @JsIgnore.",
             "Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
@@ -2089,7 +2096,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Native JsType field 'int Buggy.g' cannot have initializer.",
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
-                + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode')."
+                + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
+            "Native JsType method 'String NativeTypeWithBridge.foo()' should be native or abstract."
+
             // TODO(b/27597597): Finalize checker implementation and enable this test.
             //  "Line 9: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
             //  "Line 26: Native JsType subclass 'EntryPoint.SomeClass2' can not implement "
@@ -2118,6 +2127,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "class SubBuggy extends Buggy {",
             "  public boolean equals(Object obj) { return super.equals(obj); }",
+            "  public Object foo(Object obj) { return null; }",
+            "}",
+            "class SubBuggy2 extends SubBuggy {",
+            "  public String foo(Object obj) { return super.toString(); }",
             "}")
         .assertCompileFails(
             "'String NativeType.toString()' cannot be assigned JavaScript name 'string'"
@@ -2135,6 +2148,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             //"Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
             //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
             //"Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
+            //    + " methods in native JsTypes cannot be called using super."
+            //"Line 20: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
             //    + " methods in native JsTypes cannot be called using super."
             );
   }
