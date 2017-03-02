@@ -53,6 +53,11 @@ public class BridgeMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
+      // Don't bridge methods in abstract classes.
+      if (type.isAbstract()) {
+        continue;
+      }
+
       type.addMethods(createBridgeMethods(type));
     }
   }
