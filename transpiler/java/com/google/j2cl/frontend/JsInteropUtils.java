@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.ast.TypeDescriptors;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -103,9 +104,22 @@ public class JsInteropUtils {
       return JsMemberType.CONSTRUCTOR;
     }
     if (isPropertyAccessor) {
-      return method.getParameterTypes().length == 0 ? JsMemberType.GETTER : JsMemberType.SETTER;
+      return getJsPropertyAccessorType(method);
     }
     return JsMemberType.METHOD;
+  }
+
+  private static JsMemberType getJsPropertyAccessorType(IMethodBinding method) {
+    if (method.getParameterTypes().length == 1
+        && method.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME)) {
+      return JsMemberType.SETTER;
+    } else if (method.getParameterTypes().length == 0
+    // TODO(B/35881307): void should not be allowed as a return type for property getters.
+    // && !method.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME)
+    ) {
+      return JsMemberType.GETTER;
+    }
+    return JsMemberType.UNDEFINED_ACCESSOR;
   }
 
   /**

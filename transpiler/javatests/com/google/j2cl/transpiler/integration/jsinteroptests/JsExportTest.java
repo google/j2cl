@@ -277,7 +277,7 @@ public class JsExportTest extends MyTestCase {
   private static native int callExportedFieldByExportedMethod(int a, int b);
 
   @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2")
-  private static native void setExportedField2(InnerClass a);
+  private static native void setExportedField2(Object a);
 
   @JsMethod(namespace = "woo.MyExportedClass", name = "newInnerClass")
   private static native InnerClass myExportedClassNewInnerClass(int a);

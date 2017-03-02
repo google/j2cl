@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Pair;
@@ -154,15 +155,19 @@ public class JsInteropRestrictionsChecker {
       checkMemberOfNativeJsType(member);
     }
 
+    if (memberDescriptor.isJsOverlay()) {
+      checkJsOverlay(member);
+    }
+
     if (member.isMethod()) {
       Method method = (Method) member;
       checkIllegalOverrides(method);
       checkMethodParameters(method);
+      if (!checkJsPropertyAccessor(method)) {
+        return;
+      }
     }
 
-    if (memberDescriptor.isJsOverlay()) {
-      checkJsOverlay(member);
-    }
     checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
 
     if (isCheckedLocalName(memberDescriptor)) {
@@ -172,13 +177,6 @@ public class JsInteropRestrictionsChecker {
     if (isCheckedStaticName(memberDescriptor)) {
       checkNameCollisions(staticNames, member);
     }
-
-    checkLocalName(member);
-    // TODO: do other checks.
-  }
-
-  private void checkLocalName(Member member) {
-    checkNameConsistency(member);
   }
 
   private void checkNameConsistency(Member member) {
@@ -389,6 +387,9 @@ public class JsInteropRestrictionsChecker {
             member.getSourcePosition(),
             "Native JsType member '%s' cannot have @JsIgnore.",
             readableDescription);
+        break;
+      case UNDEFINED_ACCESSOR:
+        // Nothing to check here. An error will be emitted for UNDEFINED_ACCESSOR elsewhere.
         break;
     }
   }
@@ -705,6 +706,67 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  private boolean checkJsPropertyAccessor(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    JsMemberType memberType = methodDescriptor.getJsInfo().getJsMemberType();
+
+    if (methodDescriptor.getSimpleJsName() == null) {
+      checkArgument(memberType.isPropertyAccessor());
+      problems.error(
+          method.getSourcePosition(),
+          "JsProperty '%s' should either follow Java Bean naming conventions or provide a name.",
+          method.getReadableDescription());
+      return false;
+    }
+
+    switch (memberType) {
+      case UNDEFINED_ACCESSOR:
+        problems.error(
+            method.getSourcePosition(),
+            "JsProperty '%s' should have a correct setter or getter signature.",
+            method.getReadableDescription());
+        break;
+      case GETTER:
+        TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+        if (methodDescriptor.getName().startsWith("is")
+            && !(TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)
+                // TODO(b/35880539): boxed booleans should not be allowed as return of
+                // properties of the form isXXX();
+                || TypeDescriptors.isJavaLangBoolean(returnTypeDescriptor))) {
+          problems.error(
+              method.getSourcePosition(),
+              "JsProperty '%s' cannot have a non-boolean return.",
+              method.getReadableDescription());
+        }
+        break;
+      case SETTER:
+        if (methodDescriptor.isVarargs()) {
+          problems.error(
+              method.getSourcePosition(),
+              "JsProperty '%s' cannot have a vararg parameter.",
+              method.getReadableDescription());
+        }
+        break;
+      default:
+        break;
+    }
+
+    return true;
+  }
+
+  private void checkJsPropertyConsistency(Member member, JsMember newMember) {
+    if (newMember.setter != null && newMember.getter != null) {
+      List<TypeDescriptor> setterParams = newMember.setter.getParameterTypeDescriptors();
+      if (!newMember.getter.getReturnTypeDescriptor().hasSameRawType(setterParams.get(0))) {
+        problems.error(
+            member.getSourcePosition(),
+            "JsProperty setter '%s' and getter '%s' cannot have inconsistent types.",
+            newMember.setter.getReadableDescription(),
+            newMember.getter.getReadableDescription());
+      }
+    }
+  }
+
   private void checkNameCollisions(Map<String, JsMember> localNames, Member member) {
     Pair<JsMember, JsMember> oldAndNewJsMember =
         updateJsMembers(localNames, member.getDescriptor());
@@ -712,8 +774,7 @@ public class JsInteropRestrictionsChecker {
     JsMember newJsMember = oldAndNewJsMember.getSecond();
 
     checkNameConsistency(member);
-    // TODO(b/27597597): Implement.
-    // checkJsPropertyConsistency(member, newJsMember);
+    checkJsPropertyConsistency(member, newJsMember);
 
     if (oldJsMember == null || oldJsMember == newJsMember) {
       return;

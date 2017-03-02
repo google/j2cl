@@ -35,7 +35,7 @@ public enum JsMemberType {
   PROPERTY,
   /** A JsProperty getter method. Usually in the form of getX()/isX(). */
   GETTER {
-    /** Returns the property name from getter method that follows Java Bean naming conversions. */
+    /** Returns the property name from getter method that follows Java Bean naming conventions. */
     @Override
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
@@ -50,7 +50,7 @@ public enum JsMemberType {
   },
   /** A JsProperty setter method. Usually in the form of setX(x). */
   SETTER {
-    /** Returns the property name from setter method that follows Java Bean naming conversions. */
+    /** Returns the property name from setter method that follows Java Bean naming conventions. */
     @Override
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
@@ -59,7 +59,13 @@ public enum JsMemberType {
       }
       return null;
     }
-  };
+  },
+  /** An accessor with incorrect naming convention. */
+  UNDEFINED_ACCESSOR;
+
+  public boolean isPropertyAccessor() {
+    return this == SETTER || this == GETTER;
+  }
 
   public String computeJsName(MemberDescriptor memberDescriptor) {
     return memberDescriptor.getName();

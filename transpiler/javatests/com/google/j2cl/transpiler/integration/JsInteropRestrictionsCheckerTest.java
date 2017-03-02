@@ -191,8 +191,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsPropertyIncorrectGetterStyleFails() throws Exception {
+  public void testJsPropertyIncorrectGetterStyleFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -204,29 +203,30 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty void setX(int x, int y);",
             "  @JsProperty void setY();",
             "  @JsProperty int setZ(int z);",
-            "  @JsProperty static void setStatic(){}",
+            "  @JsProperty static void setStatic() {}",
             "  @JsProperty void setW(int... z);",
             "}")
         .assertCompileFails(
-            "Line 6: JsProperty 'int EntryPoint.Buggy.isX()' cannot have a non-boolean return.",
-            "Line 7: JsProperty 'int EntryPoint.Buggy.getY(int)' should have a correct setter "
-                + "or getter signature.",
-            "Line 8: JsProperty 'void EntryPoint.Buggy.getZ()' should have a correct setter "
-                + "or getter signature.",
-            "Line 9: JsProperty 'void EntryPoint.Buggy.setX(int, int)' should have a correct "
+            "JsProperty 'int Buggy.isX()' cannot have a non-boolean return.",
+            "JsProperty 'int Buggy.getY(int)' should have a correct setter or getter signature.",
+            // TODO(b/35881307): Restore the error messages when this bug is closed.
+            // "JsProperty 'void Buggy.getZ()' should have a correct setter or getter signature.",
+            "JsProperty 'void Buggy.setX(int, int)' should have a correct "
                 + "setter or getter signature.",
-            "Line 10: JsProperty 'void EntryPoint.Buggy.setY()' should have a correct setter "
-                + "or getter signature.",
-            "Line 11: JsProperty 'int EntryPoint.Buggy.setZ(int)' should have a correct setter "
-                + "or getter signature.",
-            "Line 12: JsProperty 'void EntryPoint.Buggy.setStatic()' should have a correct setter "
-                + "or getter signature.",
-            "Line 13: JsProperty 'void EntryPoint.Buggy.setW(int[])' cannot have a vararg "
-                + "parameter.");
+            // TODO(b/35881307): Restore the right error messages when this bug is closed.
+            // "JsProperty 'void Buggy.setY()' should have a correct setter or getter signature.",
+            "JsProperty 'void Buggy.setY()' should either follow Java Bean naming conventions or "
+                + "provide a name.",
+            "JsProperty 'int Buggy.setZ(int)' should have a correct setter or getter signature.",
+            // TODO(b/35881307): Restore the right error messages when this bug is closed.
+            // "JsProperty 'void Buggy.setStatic()' should have a correct setter or getter "
+            //     + "signature.",
+            "JsProperty 'void Buggy.setStatic()' should either follow Java Bean naming conventions "
+                + "or provide a name.",
+            "JsProperty 'void Buggy.setW(int[])' cannot have a vararg parameter");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsPropertyNonGetterStyleFails() throws Exception {
+  public void testJsPropertyNonGetterStyleFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -238,12 +238,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty void x(int x);",
             "}")
         .assertCompileFails(
-            "Line 7: JsProperty 'boolean EntryPoint.Buggy.hasX()' should either follow Java Bean "
-                + "naming conventions or provide a name.",
-            "Line 8: JsProperty 'int EntryPoint.Buggy.x()' should either follow Java Bean "
-                + "naming conventions or provide a name.",
-            "Line 9: JsProperty 'void EntryPoint.Buggy.x(int)' should either follow Java Bean "
-                + "naming conventions or provide a name.");
+            "JsProperty 'boolean Buggy.hasX()' should either follow Java Bean naming conventions"
+                + " or provide a name.",
+            "JsProperty 'int Buggy.x()' should either follow Java Bean naming conventions"
+                + " or provide a name.",
+            "JsProperty 'void Buggy.x(int)' should either follow Java Bean naming conventions"
+                + " or provide a name.");
   }
 
   public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
@@ -532,6 +532,38 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "JavaScript name 'foo'.");
   }
 
+  public void testCollidingJsMethodToJsPropertyFails() throws Exception {
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "class ParentBuggy {",
+            "  @JsMethod void foo() {}",
+            "  @JsProperty void getBar() {}",
+            // TODO(b/35901141): Implement missing restriction check.
+            "  @JsProperty @JsMethod void getBax() {}",
+            "  @JsProperty void getBlah() {}",
+            "  @JsMethod(name = \"bleh\") void getBleh() {}",
+            "}",
+            "public class Buggy extends ParentBuggy {",
+            "  @JsProperty void getFoo() {}",
+            "  @JsMethod void bar() {}",
+            "  @JsProperty void getBleh() {}",
+            "  @JsMethod(name = \"blah\") void getBlah() {}",
+            "}")
+        .assertCompileFails(
+            " 'void Buggy.getFoo()' and 'void ParentBuggy.foo()' cannot both use the same "
+                + "JavaScript name 'foo'.",
+            "'void Buggy.bar()' and 'void ParentBuggy.getBar()' cannot both use the same "
+                + "JavaScript name 'bar'.",
+            // TODO(b/35915124): Improve error messages for this situation where the type of
+            // js member is changed in the hierarchy.
+            "'void Buggy.getBleh()' and 'void ParentBuggy.getBleh()' cannot both use the same "
+                + "JavaScript name 'bleh'.",
+            "'void Buggy.getBlah()' and 'void ParentBuggy.getBlah()' cannot both use the same "
+                + "JavaScript name 'blah'.");
+  }
+
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
     compile(
             "Buggy",
@@ -731,8 +763,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "('int ParentBuggy.getFoo()' with JavaScript name 'foo').");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsPropertyDifferentFlavourInSubclassFails() throws Exception {
+  public void testJsPropertyDifferentFlavourInSubclassFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -745,8 +776,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty public boolean getFoo() { return false;}",
             "}")
         .assertCompileFails(
-            "Line 10: 'boolean EntryPoint.Buggy.getFoo()' and 'boolean EntryPoint.ParentBuggy"
-                + ".isFoo()' cannot both use the same JavaScript name 'foo'.");
+            " 'boolean Buggy.getFoo()' and 'boolean ParentBuggy.isFoo()' cannot both use the "
+                + "same JavaScript name 'foo'.");
   }
 
   public void testConsistentPropertyTypeSucceeds() throws Exception {
@@ -768,8 +799,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testInconsistentGetSetPropertyTypeFails() throws Exception {
+  public void testInconsistentGetSetPropertyTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -786,14 +816,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void setFoo(Integer value) {}",
             "}")
         .assertCompileFails(
-            "Line 10: JsProperty setter 'void EntryPoint.IBuggy.setFoo(Integer)' and "
-                + "getter 'int EntryPoint.IBuggy.getFoo()' cannot have inconsistent types.",
-            "Line 14: JsProperty setter 'void EntryPoint.Buggy.setFoo(Integer)' and "
-                + "getter 'int EntryPoint.Buggy.getFoo()' cannot have inconsistent types.");
+            "JsProperty setter 'void IBuggy.setFoo(Integer)' and getter 'int IBuggy.getFoo()'"
+                + " cannot have inconsistent types.",
+            "JsProperty setter 'void Buggy.setFoo(Integer)' and getter 'int Buggy.getFoo()'"
+                + " cannot have inconsistent types.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testInconsistentIsSetPropertyTypeFails() throws Exception {
+  public void testInconsistentIsSetPropertyTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -810,10 +839,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void setFoo(Object value) {}",
             "}")
         .assertCompileFails(
-            "Line 10: JsProperty setter 'void EntryPoint.IBuggy.setFoo(Object)' and "
-                + "getter 'boolean EntryPoint.IBuggy.isFoo()' cannot have inconsistent types.",
-            "Line 14: JsProperty setter 'void EntryPoint.Buggy.setFoo(Object)' and "
-                + "getter 'boolean EntryPoint.Buggy.isFoo()' cannot have inconsistent types.");
+            "JsProperty setter 'void IBuggy.setFoo(Object)' and getter 'boolean IBuggy.isFoo()'"
+                + " cannot have inconsistent types.",
+            "JsProperty setter 'void Buggy.setFoo(Object)' and getter 'boolean Buggy.isFoo()'"
+                + " cannot have inconsistent types.");
   }
 
   // TODO(b/27597597): Finalize checker implementation and enable this test.
@@ -1758,7 +1787,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsOverlay;",
             "public class Buggy {",
             "  public void fun(int a, @JsOptional Object b, @JsOptional String c) {}",
-            "  @JsProperty public void bar(@JsOptional Object o) {}",
+            "  @JsProperty public void setBar(@JsOptional Object o) {}",
             "}",
             "@JsType(isNative = true) class Native {",
             "  @JsOverlay public final void fun( @JsOptional Object a) {}",
@@ -1766,7 +1795,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "JsOptional parameter in 'void Buggy.fun(int, Object, "
                 + "String)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
-            "JsOptional parameter in 'void Buggy.bar(Object)' can only "
+            "JsOptional parameter in 'void Buggy.setBar(Object)' can only "
                 + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
             "JsOptional parameter in 'void Native.fun(Object)' can only "
                 + "be declared in a JsMethod, a JsConstructor or a JsFunction.");
