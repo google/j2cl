@@ -678,7 +678,7 @@ public class JsTypeTest extends MyTestCase {
     assertNotNull((Wildcard) object);
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface NativeFunctionalInterface<T> {
     int f(T t);
   }

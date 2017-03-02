@@ -333,7 +333,7 @@ public class AstUtils {
         .setMethodDescriptor(fromMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
-        .setIsOverride(isOverride)
+        .setOverride(isOverride)
         .setJsDocDescription(jsDocDescription)
         .build();
   }

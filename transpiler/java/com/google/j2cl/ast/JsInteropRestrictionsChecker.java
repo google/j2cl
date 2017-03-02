@@ -50,7 +50,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsName(Type type) {
-    if (!type.getSimpleJsName().equals("*") && !type.getSimpleJsName().equals("?")) {
+    if (!type.getDeclaration().isStarOrUnknown()) {
       checkJsName(type.getSourcePosition(), type.getReadableDescription(), type);
       return;
     }

@@ -427,7 +427,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
         .addStatements(
             AstUtils.createReturnOrExpressionStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor()))
-        .setIsOverride(true)
+        .setOverride(true)
         .setJsDocDescription("Bridge method.")
         .build();
   }

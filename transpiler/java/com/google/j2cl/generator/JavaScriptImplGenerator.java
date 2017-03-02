@@ -196,7 +196,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
+        if (!superInterfaceType.getTypeDeclaration().isStarOrUnknown()) {
+          sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
+        }
       }
       sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
@@ -209,12 +211,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         buffer.appendln(" * @template " + templates);
       }
       if (type.getSuperTypeDescriptor() != null
-          && type.getSuperTypeDescriptor().hasTypeArguments()) {
+          && type.getSuperTypeDescriptor().hasTypeArguments()
+          && !type.getSuperTypeDescriptor().getTypeDeclaration().isStarOrUnknown()) {
         String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
         buffer.appendln(" * @extends {" + supertype + "}");
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
+        if (!superInterfaceType.getTypeDeclaration().isStarOrUnknown()) {
+          buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
+        }
       }
 
       String annotation = buffer.build();

@@ -208,7 +208,7 @@ public class Method extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsOverride(boolean isOverride) {
+    public Builder setOverride(boolean isOverride) {
       this.isOverride = isOverride;
       return this;
     }

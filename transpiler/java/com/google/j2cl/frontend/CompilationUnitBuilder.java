@@ -378,9 +378,25 @@ public class CompilationUnitBuilder {
 
     private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      boolean isOverride =
+          methodDescriptor.isJsMember()
+              ? methodDescriptor
+                  .getOverriddenMethodDescriptors()
+                  .stream()
+                  .anyMatch(
+                      superMethodDescriptor ->
+                          superMethodDescriptor.isJsMember()
+                              && !superMethodDescriptor
+                                  .getEnclosingClassTypeDescriptor()
+                                  .getTypeDeclaration()
+                                  .isStarOrUnknown())
+              : methodDescriptor
+                  .getOverriddenMethodDescriptors()
+                  .stream()
+                  .anyMatch(methodDescriptor::isJsOverride);
       return Method.newBuilder()
           .setMethodDescriptor(methodDescriptor)
-          .setIsOverride(JdtUtils.isJsOverride(methodBinding))
+          .setOverride(isOverride)
           .setSourcePosition(getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
     }
 
@@ -1343,11 +1359,11 @@ public class CompilationUnitBuilder {
       TypeDescriptor lambdaTypeDescriptor =
           JdtUtils.createLambdaTypeDescriptor(
               inStaticContext, enclosingType, classComponents, functionalInterfaceTypeBinding);
+      MethodDescriptor functionalMethodDescriptor =
+          JdtUtils.createMethodDescriptor(
+              checkNotNull(JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding)));
       MethodDescriptor lambdaDispatchMethodDescriptor =
-          MethodDescriptor.Builder.from(
-                  JdtUtils.createMethodDescriptor(
-                      checkNotNull(
-                          JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding))))
+          MethodDescriptor.Builder.from(functionalMethodDescriptor)
               .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
               .setAbstract(false)
               .setNative(false)
@@ -1355,7 +1371,13 @@ public class CompilationUnitBuilder {
 
       // Construct lambda method and add it to lambda inner class.
       Method lambdaMethod =
-          createLambdaImplementationMethod(lambdaDispatchMethodDescriptor, functionExpression);
+          createLambdaImplementationMethod(
+              lambdaDispatchMethodDescriptor,
+              functionExpression,
+              !functionalMethodDescriptor
+                  .getEnclosingClassTypeDescriptor()
+                  .getTypeDeclaration()
+                  .isStarOrUnknown());
       lambdaMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(lambdaMethod);
 
@@ -1483,12 +1505,14 @@ public class CompilationUnitBuilder {
     }
 
     private Method createLambdaImplementationMethod(
-        MethodDescriptor lambdaDispatchMethodDescriptor, FunctionExpression functionExpression) {
+        MethodDescriptor lambdaDispatchMethodDescriptor,
+        FunctionExpression functionExpression,
+        boolean isOverride) {
 
       return Method.newBuilder()
           .setMethodDescriptor(lambdaDispatchMethodDescriptor)
           .setParameters(functionExpression.getParameters())
-          .setIsOverride(true)
+          .setOverride(isOverride)
           .addStatements(functionExpression.getBody().getStatements())
           .setJsDocDescription("Lambda implementation method.")
           .build();

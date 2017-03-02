@@ -26,7 +26,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -302,84 +301,9 @@ public class JdtUtils {
         && variableBinding.getDeclaringClass() == null;
   }
 
-  static boolean isJsOverride(IMethodBinding methodBinding) {
-    // If the JsMethod is the first in the override chain, it does not override any methods.
-    return isOverride(methodBinding) && !isFirstJsMember(methodBinding);
-  }
-
-  /**
-   * Returns true if the method is the first JsMember in the override chain (does not override any
-   * other JsMembers).
-   */
-  static boolean isFirstJsMember(IMethodBinding methodBinding) {
-    return JsInteropUtils.isJsMember(methodBinding)
-        && getOverriddenJsMembers(methodBinding).isEmpty();
-  }
-
-  static boolean isOverride(IMethodBinding overridingMethod) {
-    ITypeBinding type = overridingMethod.getDeclaringClass();
-
-    // Check immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null
-        && isOverriddenInType(overridingMethod, type.getSuperclass())) {
-      return true;
-    }
-    for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (isOverriddenInType(overridingMethod, interfaceBinding)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isOverriddenInType(IMethodBinding overridingMethod, ITypeBinding type) {
-    for (IMethodBinding method : type.getDeclaredMethods()) {
-      // exposed overriding is not real overriding in JavaScript because the two methods
-      // have different method names and they are connected by dispatch method,
-      if (overridingMethod.overrides(method.getMethodDeclaration())
-          && (!upgradesPackagePrivateVisibility(overridingMethod, method.getMethodDeclaration()))
-          && areMethodsOverrideEquivalent(overridingMethod, method.getMethodDeclaration())) {
-        return true;
-      }
-    }
-
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null
-        && isOverriddenInType(overridingMethod, type.getSuperclass())) {
-      return true;
-    }
-    for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (isOverriddenInType(overridingMethod, interfaceBinding)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  static boolean upgradesPackagePrivateVisibility(
-      IMethodBinding overridingMethod, IMethodBinding overriddenMethod) {
-    checkArgument(overridingMethod.overrides(overriddenMethod));
-    Visibility overriddenMethodVisibility = getVisibility(overriddenMethod);
-    Visibility overridingMethodVisibility = getVisibility(overridingMethod);
-    return overriddenMethodVisibility.isPackagePrivate()
-        && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
-  }
-
   /** Returns true if the binding is annotated with @UncheckedCast. */
   static boolean hasUncheckedCastAnnotation(IBinding binding) {
     return JdtAnnotationUtils.hasAnnotation(binding, "javaemul.internal.annotations.UncheckedCast");
-  }
-
-  /**
-   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
-   * Parameter erasure equal means that they are overriding signature equal, which means that they
-   * are real overriding/overridden or accidental overriding/overridden.
-   */
-  static boolean areMethodsOverrideEquivalent(
-      IMethodBinding leftMethod, IMethodBinding rightMethod) {
-    return getMethodSignature(leftMethod).equals(getMethodSignature(rightMethod));
   }
 
   static IMethodBinding findFunctionalMethodBinding(ITypeBinding typeBinding) {
@@ -764,14 +688,13 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(methodBinding.getDeclaringClass());
 
-    int modifiers = methodBinding.getModifiers();
-    boolean isStatic = Modifier.isStatic(modifiers);
+    boolean isStatic = isStatic(methodBinding);
     Visibility visibility = getVisibility(methodBinding);
-    boolean isDefault = Modifier.isDefault(methodBinding.getModifiers());
+    boolean isDefault = isDefaultMethod(methodBinding);
     JsInfo jsInfo = computeJsInfo(methodBinding);
 
     boolean isNative =
-        Modifier.isNative(modifiers)
+        Modifier.isNative(methodBinding.getModifiers())
             || (!jsInfo.isJsOverlay()
                 && enclosingClassTypeDescriptor.isNative()
                 && isAbstract(methodBinding));
@@ -870,10 +793,6 @@ public class JdtUtils {
       }
     }
     return jsInfoList.get(0);
-  }
-
-  public static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
-    return Sets.filter(getOverriddenMethods(methodBinding), JsInteropUtils::isJsMember);
   }
 
   /** Returns the method signature, which identifies a method up to overriding. */

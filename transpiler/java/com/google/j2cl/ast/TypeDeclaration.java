@@ -235,6 +235,10 @@ public abstract class TypeDeclaration extends Node
     return JsUtils.isGlobal(getJsNamespace()) && isNative();
   }
 
+  public boolean isStarOrUnknown() {
+    return getSimpleJsName().equals("*") || getSimpleJsName().equals("?");
+  }
+
   /**
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
    * on this type.

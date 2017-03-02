@@ -11,7 +11,7 @@ public class Main {
     R execute(T t);
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   public interface Thenable<T> {
     void then(JsFunc<Void, T> f1, JsFunc<Void, Throwable> f2);
   }
