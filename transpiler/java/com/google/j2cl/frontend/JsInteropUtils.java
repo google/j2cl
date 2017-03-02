@@ -15,10 +15,8 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import java.util.Set;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -35,14 +33,6 @@ public class JsInteropUtils {
    * there is no "name" is specified in the annotation, just returns null for JsName.
    */
   public static JsInfo getJsInfo(IMethodBinding methodBinding) {
-    // Make sure we preserve the JsMethod info for Object methods overridden by interfaces.
-    // This code could be removed when we model those methods as overrides internally.
-    Set<String> objectMethods =
-        ImmutableSet.of("toString()", "hashCode()", "equals(java.lang.Object)");
-    if (objectMethods.contains(JdtUtils.getMethodSignature(methodBinding))) {
-      return JsInfo.newBuilder().setJsMemberType(JsMemberType.METHOD).build();
-    }
-
     IAnnotationBinding annotation = JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding);
     if (annotation == null) {
       annotation = JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding);

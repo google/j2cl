@@ -344,11 +344,13 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkMemberOfNativeJsType(Member member) {
-    if (member.getDescriptor().isJsOverlay() || member.getDescriptor().isSynthetic()) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isJsOverlay() || memberDescriptor.isSynthetic()) {
       return;
     }
-    String readableDescription = member.getDescriptor().getReadableDescription();
-    JsMemberType jsMemberType = member.getDescriptor().getJsInfo().getJsMemberType();
+
+    String readableDescription = memberDescriptor.getReadableDescription();
+    JsMemberType jsMemberType = memberDescriptor.getJsInfo().getJsMemberType();
     switch (jsMemberType) {
       case CONSTRUCTOR:
         if (!isConstructorEmpty((Method) member)) {
@@ -370,7 +372,12 @@ public class JsInteropRestrictionsChecker {
         break;
       case PROPERTY:
         Field field = (Field) member;
-        if (field.hasInitializer()) {
+        if (field.getDescriptor().isFinal()) {
+          problems.error(
+              field.getSourcePosition(),
+              "Native JsType field '%s' cannot be final.",
+              member.getReadableDescription());
+        } else if (field.hasInitializer()) {
           problems.error(
               field.getSourcePosition(),
               "Native JsType field '%s' cannot have initializer.",

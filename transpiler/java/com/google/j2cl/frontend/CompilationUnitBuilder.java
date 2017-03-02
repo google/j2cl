@@ -158,7 +158,7 @@ public class CompilationUnitBuilder {
         String sourceFilePath,
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
         Iterable<ITypeBinding> wellKnownTypeBindings) {
-      JdtUtils.initTypeDescriptors(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
+      JdtUtils.initWellKnownTypes(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       currentSourceFile = sourceFilePath;

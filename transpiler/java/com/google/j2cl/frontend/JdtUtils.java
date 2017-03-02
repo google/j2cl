@@ -843,7 +843,27 @@ public class JdtUtils {
     for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
       overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
     }
+
+    ITypeBinding javaLangObjectTypeBinding = JdtUtils.javaLangObjectTypeBinding.get();
+    if (typeBinding != javaLangObjectTypeBinding) {
+      for (IMethodBinding objectMethodBinding : javaLangObjectTypeBinding.getDeclaredMethods()) {
+        if (!isPolymorphic(objectMethodBinding)) {
+          continue;
+        }
+        checkState(!getVisibility(objectMethodBinding).isPackagePrivate());
+        if (methodBinding.isSubsignature(objectMethodBinding)) {
+          overriddenMethods.add(objectMethodBinding);
+        }
+      }
+    }
+
     return overriddenMethods;
+  }
+
+  private static boolean isPolymorphic(IMethodBinding methodBinding) {
+    return !methodBinding.isConstructor()
+        && !isStatic(methodBinding)
+        && !Modifier.isPrivate(methodBinding.getModifiers());
   }
 
   public static boolean isLocal(ITypeBinding typeBinding) {
@@ -962,7 +982,11 @@ public class JdtUtils {
     return createTypeDescriptors(Arrays.asList(typeBindings));
   }
 
-  public static void initTypeDescriptors(AST ast, Iterable<ITypeBinding> typeBindings) {
+  private static ThreadLocal<ITypeBinding> javaLangObjectTypeBinding = new ThreadLocal<>();
+
+  public static void initWellKnownTypes(AST ast, Iterable<ITypeBinding> typeBindings) {
+    javaLangObjectTypeBinding.set(ast.resolveWellKnownType("java.lang.Object"));
+
     if (TypeDescriptors.isInitialized()) {
       return;
     }

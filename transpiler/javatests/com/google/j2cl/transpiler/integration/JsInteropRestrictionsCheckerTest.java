@@ -2041,8 +2041,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int hashCode() { return 0; }",
             "}",
             "@JsType(isNative=true) interface NativeInterface {}",
-            "class B { @JsMethod(name=\"something\") public int hashCode() { return 0; } }",
-            "class SomeClass3 extends B implements NativeInterface {}")
+            "class SomeClass3 implements NativeInterface {}")
         .assertCompileSucceeds();
   }
 
@@ -2080,19 +2079,19 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "class SomeClass3 extends NativeTypeWithHashCode implements A {}")
         .assertCompileFails(
             "Native JsType member 'void Interface.n()' cannot have @JsIgnore.",
-            "Native JsType field 'int Buggy.f' cannot have initializer.",
             "Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
+            "Native JsType field 'int Buggy.f' cannot be final.",
+            "Native JsType field 'int Buggy.s' cannot be final.",
             "Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
             "Native JsType member 'void Buggy.n()' cannot have @JsIgnore.",
             "Native JsType method 'void Buggy.o()' should be native or abstract.",
-            "Native JsType field 'int Buggy.s' cannot have initializer.",
             "Native JsType field 'int Buggy.t' cannot have initializer.",
-            "Native JsType field 'int Buggy.g' cannot have initializer."
-
+            "Native JsType field 'int Buggy.g' cannot have initializer.",
+            "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
+                + "different from the JavaScript name of a method it "
+                + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode')."
             // TODO(b/27597597): Finalize checker implementation and enable this test.
             //  "Line 9: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-            //  "Line 23: 'int EntryPoint.SomeClass.hashCode()' cannot be assigned a different "
-            //      + "JavaScript name than the method it overrides.",
             //  "Line 26: Native JsType subclass 'EntryPoint.SomeClass2' can not implement "
             //      + "interface 'EntryPoint.B' that declares method 'hashCode' inherited "
             //      + "from java.lang.Object.",
@@ -2102,8 +2101,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             );
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testSubclassOfNativeJsTypeBadMembersFails() throws Exception {
+  public void testSubclassOfNativeJsTypeBadMembersFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsIgnore;",
@@ -2122,16 +2120,23 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public boolean equals(Object obj) { return super.equals(obj); }",
             "}")
         .assertCompileFails(
-            "Line 8: Method 'String EntryPoint.NativeType.toString()' cannot override a method "
-                + "from 'java.lang.Object' and change its name.",
-            "Line 11: Cannot use super to call 'EntryPoint.NativeType.toString'. 'java.lang.Object'"
-                + " methods in native JsTypes cannot be called using super.",
-            "Line 13: 'int EntryPoint.Buggy.hashCode()' cannot be assigned a different JavaScript "
-                + "name than the method it overrides.",
-            "Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
-                + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
-            "Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object' "
-                + "methods in native JsTypes cannot be called using super.");
+            "'String NativeType.toString()' cannot be assigned JavaScript name 'string'"
+                + " that is different from the JavaScript name of a method it overrides "
+                + "('String Object.toString()' with JavaScript name 'toString').",
+            "'String Buggy.toString()' cannot be assigned JavaScript name 'string' that is "
+                + "different from the JavaScript name of a method it overrides "
+                + "('String Object.toString()' with JavaScript name 'toString').",
+            "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
+                + "that is different from the JavaScript name of a method it overrides "
+                + "('int Object.hashCode()' with JavaScript name 'hashCode')"
+            // TODO(b/27597597): Finalize checker implementation and enable this test.
+            //"Line 11: Cannot use super to call 'EntryPoint.NativeType.toString'. "
+            //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
+            //"Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
+            //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
+            //"Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
+            //    + " methods in native JsTypes cannot be called using super."
+            );
   }
 
   public void testNativeMethodOnJsTypeSucceeds() throws Exception {

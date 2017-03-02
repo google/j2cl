@@ -33,7 +33,7 @@ public class NativeMethodExtractor {
       String fileName,
       CompilationUnit compilationUnit,
       Iterable<ITypeBinding> wellKnownTypeBindings) {
-    JdtUtils.initTypeDescriptors(compilationUnit.getAST(), wellKnownTypeBindings);
+    JdtUtils.initWellKnownTypes(compilationUnit.getAST(), wellKnownTypeBindings);
     JsniMethodVisitor methodVisitor = new JsniMethodVisitor(readJavaCode(fileName));
     compilationUnit.accept(methodVisitor);
 
