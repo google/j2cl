@@ -146,7 +146,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testCollidingFieldExportsFails() throws Exception {
+  public void testCollidingFieldsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -349,7 +349,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
-  public void testCollidingPropertyAccessorExportsFails() throws Exception {
+  public void testCollidingPropertyAccessorsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsProperty;",
@@ -364,7 +364,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "same JavaScript name 'display'.");
   }
 
-  public void testCollidingMethodExportsFails() throws Exception {
+  public void testCollidingMethodsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -379,7 +379,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "JavaScript name 'show'");
   }
 
-  public void testCollidingMethodToPropertyAccessorExportsFails() throws Exception {
+  public void testCollidingMethodToPropertyAccessorFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -395,7 +395,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "JavaScript name 'show'");
   }
 
-  public void testCollidingMethodToFieldExportsFails() throws Exception {
+  public void testCollidingMethodToFieldFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -439,77 +439,37 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "'void Buggy.show(int)' cannot both use the same JavaScript name 'show'.");
   }
 
-  public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
+  public void testValidCollidingSubclassMembersSucceeds() throws Exception {
     compile(
-            "Buggy",
+            "NonJsTypeSubclass",
             "import jsinterop.annotations.JsType;",
             "@JsType",
-            "class ParentBuggy {",
+            "class JsTypeParent {",
             "  public int foo = 55;",
+            "  public void bar() {}",
             "}",
-            "public class Buggy extends ParentBuggy {",
+            "public class NonJsTypeSubclass extends JsTypeParent {",
             "  public int foo = 110;",
-            "}")
-        .assertCompileSucceeds();
-  }
-
-  public void testCollidingSubclassExportedFieldToMethodJsTypeSucceeds() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "@JsType",
-            "class ParentBuggy {",
-            "  public int foo = 55;",
-            "}",
-            "public class Buggy extends ParentBuggy {",
+            "  public int bar = 110;",
             "  public void foo(int a) {}",
-            "}")
-        .assertCompileSucceeds();
-  }
-
-  public void testCollidingSubclassExportedMethodToMethodJsTypeSucceeds() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "@JsType",
-            "class ParentBuggy {",
+            "  public void bar(int a) {}",
+            "}",
+            "class PlainJavaParent {",
+            "  public int foo = 55;",
             "  public void foo() {}",
             "}",
-            "public class Buggy extends ParentBuggy {",
-            "  public void foo(int a) {}",
-            "}")
-        .assertCompileSucceeds();
-  }
-
-  public void testCollidingSubclassFieldToExportedFieldJsTypeSucceeds() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "class ParentBuggy {",
-            "  public int foo = 55;",
-            "}",
             "@JsType",
-            "public class Buggy extends ParentBuggy {",
+            " class AJsTypeSubclass extends PlainJavaParent {",
             "  public int foo = 110;",
-            "}")
-        .assertCompileSucceeds();
-  }
-
-  public void testCollidingSubclassFieldToExportedMethodJsTypeSucceeds() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "class ParentBuggy {",
-            "  public int foo = 55;",
             "}",
             "@JsType",
-            "public class Buggy extends ParentBuggy {",
+            "class AnotherJsTypeSubclass extends PlainJavaParent {",
             "  public void foo(int a) {}",
             "}")
         .assertCompileSucceeds();
   }
 
-  public void testCollidingSubclassFieldToFieldJsTypeFails() throws Exception {
+  public void testCollidingSubclassMembersJsTypeFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -520,41 +480,16 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType",
             "public class Buggy extends ParentBuggy {",
             "  public int foo = 110;",
+            "}",
+            "@JsType",
+            "class OtherBuggy extends ParentBuggy {",
+            "  public void foo(int a) {}",
             "}")
         .assertCompileFails(
             "'int Buggy.foo' and 'int ParentBuggy.foo' cannot both use the same "
-                + "JavaScript name 'foo'.");
-  }
-
-  public void testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "@JsType",
-            "class ParentBuggy {",
-            "  public int foo = 55;",
-            "}",
-            "@JsType",
-            "public class Buggy extends ParentBuggy {",
-            "  public void foo(int a) {}",
-            "}")
-        .assertCompileFails(
-            "'void Buggy.foo(int)' and 'int ParentBuggy.foo' cannot both use the same "
+                + "JavaScript name 'foo'.",
+            "'void OtherBuggy.foo(int)' and 'int ParentBuggy.foo' cannot both use the same "
                 + "JavaScript name 'foo'");
-  }
-
-  public void testCollidingSubclassMethodToExportedMethodJsTypeSucceeds() throws Exception {
-    compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "class ParentBuggy {",
-            "  public void foo() {}",
-            "}",
-            "@JsType",
-            "public class Buggy extends ParentBuggy {",
-            "  public void foo(int a) {}",
-            "}")
-        .assertCompileSucceeds();
   }
 
   public void testCollidingSubclassMethodToMethodInterfaceJsTypeFails() throws Exception {
@@ -989,7 +924,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
+  public void testMultiplePrivateConstructorsSucceeds() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -2466,7 +2401,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testUnusableByJsNotExportedMembersSucceeds() throws Exception {
+  public void testUnusableByNonJsMembersSucceeds() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",

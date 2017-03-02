@@ -142,6 +142,7 @@ public class JsInteropRestrictionsChecker {
       }
     }
   }
+
   private void checkMember(
       Member member, Map<String, JsMember> localNames, Map<String, JsMember> staticNames) {
     if (!member.isMethod() && !member.isField()) {
