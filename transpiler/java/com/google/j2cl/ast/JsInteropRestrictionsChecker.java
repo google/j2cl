@@ -288,7 +288,7 @@ public class JsInteropRestrictionsChecker {
             readableDescription);
       }
     }
-    if (member.isField() & !memberDescriptor.isStatic()) {
+    if (member.isField() && !memberDescriptor.isStatic()) {
       problems.error(
           member.getSourcePosition(),
           "JsOverlay field '%s' can only be static.",
@@ -608,6 +608,24 @@ public class JsInteropRestrictionsChecker {
           "JsOptional parameter in '%s' can only be declared in a JsMethod, a JsConstructor or a "
               + "JsFunction.",
           methodDescriptor.getReadableDescription());
+    }
+
+    // Check that parameters that are declared JsOptional in overridden methods remain JsOptional.
+    for (MethodDescriptor overriddenMethodDescriptor :
+        methodDescriptor.getOverriddenMethodDescriptors()) {
+      for (int i = 0; i < overriddenMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+        if (!overriddenMethodDescriptor.isParameterOptional(i)) {
+          continue;
+        }
+        if (!methodDescriptor.isParameterOptional(i)) {
+          problems.error(
+              method.getSourcePosition(),
+              "Method '%s' should declare parameter '%s' as JsOptional",
+              method.getReadableDescription(),
+              method.getParameters().get(i).getName());
+          return;
+        }
+      }
     }
   }
 

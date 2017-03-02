@@ -1747,8 +1747,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsOptionalNotJsOptionalOverrideFails() throws Exception {
+  public void testJsOptionalNotJsOptionalOverrideFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -1760,8 +1759,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "   @JsMethod public void m(Object o) {}",
             "}")
         .assertCompileFails(
-            "Line 9: Method 'void EntryPoint.Buggy.m(Object)' should declare "
-                + "parameter 'o' as JsOptional");
+            " Method 'void Buggy.m(Object)' should declare parameter 'o' as JsOptional");
   }
 
   public void testJsOptionalNotAtEndFails() throws Exception {
