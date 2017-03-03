@@ -861,8 +861,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Line 9: Cannot call property accessor 'int EntryPoint.Super.getX()' via super.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsPropertyOnStaticMethodFails() throws Exception {
+  public void testJsPropertyOnStaticMethodFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -870,8 +869,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy {",
             "  @JsProperty public static int getX() { return 0; }",
             "}")
-        .assertCompileFails(
-            "Line 6: Static property accessor 'int EntryPoint.Buggy.getX()' can only be native.");
+        .assertCompileFails();
   }
 
   public void testJsPropertyCallSucceeds() throws Exception {
