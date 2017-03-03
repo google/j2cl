@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -121,6 +122,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
+  @Memoized
   public String getSimpleBinaryName() {
     return Joiner.on('$').join(getClassComponents());
   }
@@ -133,6 +135,7 @@ public abstract class TypeDescriptor extends Node
    */
   // TODO(rluble): add memoization to improve performance and remove the manual memoization in
   // DescriptorFactory.
+  @Memoized
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
   }
@@ -315,6 +318,7 @@ public abstract class TypeDescriptor extends Node
     return getKind() == Kind.ENUM;
   }
 
+  @Memoized
   public boolean isExtern() {
     return isNative() && hasExternNamespace();
   }
@@ -329,6 +333,7 @@ public abstract class TypeDescriptor extends Node
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
+  @Memoized
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     return getConcreteJsFunctionMethodDescriptorFactory().get(this);
   }
@@ -337,6 +342,7 @@ public abstract class TypeDescriptor extends Node
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
    * on this type.
    */
+  @Memoized
   public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
     return getInterfaceTypeDescriptorsFactory().get(this);
   }
@@ -345,6 +351,7 @@ public abstract class TypeDescriptor extends Node
    * Returns a set of the type descriptors of interfaces that are explicitly implemented either
    * directly on this type or on some super type or super interface.
    */
+  @Memoized
   public Set<TypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
     Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
 
@@ -363,7 +370,8 @@ public abstract class TypeDescriptor extends Node
     return typeDescriptors;
   }
 
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
+  @Memoized
+  public @Nullable MethodDescriptor getJsFunctionMethodDescriptor() {
     return getJsFunctionMethodDescriptorFactory().get(this);
   }
 
@@ -371,12 +379,14 @@ public abstract class TypeDescriptor extends Node
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
-  public TypeDescriptor getRawTypeDescriptor() {
+  @Memoized
+  public @Nullable TypeDescriptor getRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
   /** Returns the bound for a type variable. */
-  public TypeDescriptor getBoundTypeDescriptor() {
+  @Memoized
+  public @Nullable TypeDescriptor getBoundTypeDescriptor() {
     checkState(isTypeVariable() || isWildCardOrCapture());
     return getBoundTypeDescriptorFactory().get(this);
   }
@@ -389,25 +399,22 @@ public abstract class TypeDescriptor extends Node
     return getRawSuperTypesIncludingSelf().contains(that.getRawTypeDescriptor());
   }
 
-  private Set<TypeDescriptor> allRawSupertypesIncludingSelf = null;
-
-  private Set<TypeDescriptor> getRawSuperTypesIncludingSelf() {
-    if (allRawSupertypesIncludingSelf == null) {
-      allRawSupertypesIncludingSelf = new LinkedHashSet<>();
-      allRawSupertypesIncludingSelf.add(getRawTypeDescriptor());
-      if (getSuperTypeDescriptor() != null) {
-        allRawSupertypesIncludingSelf.addAll(
-            getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
-      }
-      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-        allRawSupertypesIncludingSelf.addAll(
-            interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
-      }
+  @Memoized
+  Set<TypeDescriptor> getRawSuperTypesIncludingSelf() {
+    Set<TypeDescriptor> allRawSupertypesIncludingSelf = new LinkedHashSet<>();
+    allRawSupertypesIncludingSelf.add(getRawTypeDescriptor());
+    if (getSuperTypeDescriptor() != null) {
+      allRawSupertypesIncludingSelf.addAll(
+          getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
+    }
+    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+      allRawSupertypesIncludingSelf.addAll(interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
     }
     return allRawSupertypesIncludingSelf;
   }
 
   /** Returns all type variables that appear in the type arguments slot(s). */
+  @Memoized
   public Set<TypeDescriptor> getAllTypeVariables() {
     Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
     getAllTypeVariables(this, typeVariables);
@@ -425,6 +432,7 @@ public abstract class TypeDescriptor extends Node
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
+  @Memoized
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
     checkState(isIntersection());
     TypeDescriptor superType = getSuperTypeDescriptor();
@@ -461,6 +469,7 @@ public abstract class TypeDescriptor extends Node
    * Returns the unqualified simple source name like "Inner". Used when a readable name is required
    * to refer to the type like a short alias, Debug/Error output, etc.
    */
+  @Memoized
   public String getSimpleSourceName() {
     return AstUtils.getSimpleSourceName(getClassComponents());
   }
@@ -470,13 +479,15 @@ public abstract class TypeDescriptor extends Node
    * places where original name is useful (like aliasing, identifying the corressponding java type,
    * Debug/Error output, etc.
    */
+  @Memoized
   public String getQualifiedSourceName() {
     return Joiner.on(".")
         .skipNulls()
         .join(getPackageName(), Joiner.on(".").join(getClassComponents()));
   }
 
-  public TypeDescriptor getSuperTypeDescriptor() {
+  @Memoized
+  public @Nullable TypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 
@@ -484,6 +495,7 @@ public abstract class TypeDescriptor extends Node
   public abstract TypeDeclaration getTypeDeclaration();
 
   /** A unique string for a give type. Used for interning. */
+  @Memoized
   public String getUniqueId() {
     String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
     String prefix = isNullable() ? "?" : "!";
@@ -502,17 +514,17 @@ public abstract class TypeDescriptor extends Node
   }
 
   @Override
+  @Memoized
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
   }
-
-  private Map<String, MethodDescriptor> methodDescriptorsBySignature;
 
   /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
-  private Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
+  @Memoized
+  Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
     return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
@@ -520,26 +532,25 @@ public abstract class TypeDescriptor extends Node
    * The list of methods in the type from the JDT. Note: this does not include methods we synthesize
    * and add to the type like bridge methods.
    */
-  private Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
+  @Memoized
+  Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
     // TODO(rluble): update this code to handle package private methods, bridges and verify that it
     // correctly handles default methods.
-    if (methodDescriptorsBySignature == null) {
-      methodDescriptorsBySignature = new LinkedHashMap<>();
+    Map<String, MethodDescriptor> methodDescriptorsBySignature = new LinkedHashMap<>();
 
-      // Add all methods declared in the current type itself
-      methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
+    // Add all methods declared in the current type itself
+    methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
 
-      // Add all the methods from the super class.
-      if (getSuperTypeDescriptor() != null) {
-        AstUtils.updateMethodsBySignature(
-            methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
-      }
+    // Add all the methods from the super class.
+    if (getSuperTypeDescriptor() != null) {
+      AstUtils.updateMethodsBySignature(
+          methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
+    }
 
-      // Finally add the methods that appear in super interfaces.
-      for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
-        AstUtils.updateMethodsBySignature(
-            methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
-      }
+    // Finally add the methods that appear in super interfaces.
+    for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
+      AstUtils.updateMethodsBySignature(
+          methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
     }
     return methodDescriptorsBySignature;
   }
@@ -548,6 +559,7 @@ public abstract class TypeDescriptor extends Node
    * The list of methods declared in the type. Note: this does not include methods synthetic methods
    * (like bridge methods) nor supertype methods that are not overridden in the type.
    */
+  @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsBySignature().values();
   }
@@ -556,6 +568,7 @@ public abstract class TypeDescriptor extends Node
    * The list of fields declared in the type. Note: this does not include methods synthetic fields
    * (like captures) nor supertype fields.
    */
+  @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
   }
@@ -769,19 +782,6 @@ public abstract class TypeDescriptor extends Node
 
     private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
 
-    private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
-      // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
-      return new DescriptorFactory<T>() {
-        Map<TypeDescriptor, T> cachedValues = new HashMap<>();
-
-        @Override
-        public T get(TypeDescriptor selfTypeDescriptor) {
-          return cachedValues.computeIfAbsent(
-              selfTypeDescriptor, (TypeDescriptor k) -> factory.get(k));
-        }
-      };
-    }
-
     abstract TypeDescriptor autoBuild();
 
     public TypeDescriptor build() {
@@ -792,20 +792,6 @@ public abstract class TypeDescriptor extends Node
       if (!getJsNamespace().isPresent()) {
         setJsNamespace(calculateJsNamespace());
       }
-      // Make all descriptor factories memoizing.
-      setBoundTypeDescriptorFactory(createMemoizingFactory(getBoundTypeDescriptorFactory()));
-      setConcreteJsFunctionMethodDescriptorFactory(
-          createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
-      setDeclaredMethodDescriptorsFactory(
-          createMemoizingFactory(getDeclaredMethodDescriptorsFactory()));
-      setDeclaredFieldDescriptorsFactory(
-          createMemoizingFactory(getDeclaredFieldDescriptorsFactory()));
-      setInterfaceTypeDescriptorsFactory(
-          createMemoizingFactory(getInterfaceTypeDescriptorsFactory()));
-      setJsFunctionMethodDescriptorFactory(
-          createMemoizingFactory(getJsFunctionMethodDescriptorFactory()));
-      setSuperTypeDescriptorFactory(createMemoizingFactory(getSuperTypeDescriptorFactory()));
-      setRawTypeDescriptorFactory(createMemoizingFactory(getRawTypeDescriptorFactory()));
 
       TypeDescriptor typeDescriptor = autoBuild();
 
@@ -861,69 +847,64 @@ public abstract class TypeDescriptor extends Node
    * - B1 -> C1
    * </pre>
    */
-  private Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters;
-
+  @Memoized
   public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    if (specializedTypeArgumentByTypeParameters == null) {
-      specializedTypeArgumentByTypeParameters = new HashMap<>();
+    Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters = new HashMap<>();
 
-      Map<TypeDescriptor, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
-          new HashMap<>();
-      TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
+    Map<TypeDescriptor, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
+        new HashMap<>();
+    TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
 
-      TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-      List<TypeDescriptor> superTypeOrInterfaceDescriptors = new ArrayList<>();
-      if (superTypeDescriptor != null) {
-        superTypeOrInterfaceDescriptors.add(superTypeDescriptor);
+    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    List<TypeDescriptor> superTypeOrInterfaceDescriptors = new ArrayList<>();
+    if (superTypeDescriptor != null) {
+      superTypeOrInterfaceDescriptors.add(superTypeDescriptor);
+    }
+    superTypeOrInterfaceDescriptors.addAll(getInterfaceTypeDescriptors());
+
+    for (TypeDescriptor superTypeOrInterfaceDescriptor : superTypeOrInterfaceDescriptors) {
+      TypeDeclaration superTypeOrInterfaceDeclaration =
+          superTypeOrInterfaceDescriptor.getTypeDeclaration();
+
+      ImmutableList<TypeDescriptor> typeParameterDescriptors =
+          superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
+      ImmutableList<TypeDescriptor> typeArgumentDescriptors =
+          superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
+
+      boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
+      for (int i = 0; i < typeParameterDescriptors.size(); i++) {
+        TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
+        TypeDescriptor typeArgumentDescriptor =
+            specializedTypeIsRaw ? javaLangObject : typeArgumentDescriptors.get(i);
+        immediateSpecializedTypeArgumentByTypeParameters.put(
+            typeParameterDescriptor, typeArgumentDescriptor);
       }
-      superTypeOrInterfaceDescriptors.addAll(getInterfaceTypeDescriptors());
+      specializedTypeArgumentByTypeParameters.putAll(
+          immediateSpecializedTypeArgumentByTypeParameters);
 
-      for (TypeDescriptor superTypeOrInterfaceDescriptor : superTypeOrInterfaceDescriptors) {
-        TypeDeclaration superTypeOrInterfaceDeclaration =
-            superTypeOrInterfaceDescriptor.getTypeDeclaration();
+      Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
+          superTypeOrInterfaceDeclaration
+              .getUnsafeTypeDescriptor()
+              .getSpecializedTypeArgumentByTypeParameters();
 
-        ImmutableList<TypeDescriptor> typeParameterDescriptors =
-            superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
-        ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-            superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
+      for (Entry<TypeDescriptor, TypeDescriptor> entry :
+          superSpecializedTypeArgumentByTypeParameters.entrySet()) {
+        TypeDescriptor typeArgumentDescriptor = entry.getValue();
 
-        boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
-        for (int i = 0; i < typeParameterDescriptors.size(); i++) {
-          TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
-          TypeDescriptor typeArgumentDescriptor =
-              specializedTypeIsRaw ? javaLangObject : typeArgumentDescriptors.get(i);
-          immediateSpecializedTypeArgumentByTypeParameters.put(
-              typeParameterDescriptor, typeArgumentDescriptor);
-        }
-        specializedTypeArgumentByTypeParameters.putAll(
-            immediateSpecializedTypeArgumentByTypeParameters);
+        typeArgumentDescriptor =
+            typeArgumentDescriptor.specializeTypeVariables(
+                immediateSpecializedTypeArgumentByTypeParameters);
 
-        Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
-            superTypeOrInterfaceDeclaration
-                .getUnsafeTypeDescriptor()
-                .getSpecializedTypeArgumentByTypeParameters();
-
-        for (Entry<TypeDescriptor, TypeDescriptor> entry :
-            superSpecializedTypeArgumentByTypeParameters.entrySet()) {
-          TypeDescriptor typeArgumentDescriptor = entry.getValue();
-
+        // Apply the immediate specialization.
+        if (immediateSpecializedTypeArgumentByTypeParameters.containsKey(typeArgumentDescriptor)) {
+          typeArgumentDescriptor =
+              immediateSpecializedTypeArgumentByTypeParameters.get(typeArgumentDescriptor);
+        } else {
           typeArgumentDescriptor =
               typeArgumentDescriptor.specializeTypeVariables(
                   immediateSpecializedTypeArgumentByTypeParameters);
-
-          // Apply the immediate specialization.
-          if (immediateSpecializedTypeArgumentByTypeParameters.containsKey(
-              typeArgumentDescriptor)) {
-            typeArgumentDescriptor =
-                immediateSpecializedTypeArgumentByTypeParameters.get(typeArgumentDescriptor);
-          } else {
-            typeArgumentDescriptor =
-                typeArgumentDescriptor.specializeTypeVariables(
-                    immediateSpecializedTypeArgumentByTypeParameters);
-          }
-
-          specializedTypeArgumentByTypeParameters.put(entry.getKey(), typeArgumentDescriptor);
         }
+        specializedTypeArgumentByTypeParameters.put(entry.getKey(), typeArgumentDescriptor);
       }
     }
 
@@ -949,23 +930,19 @@ public abstract class TypeDescriptor extends Node
             .collect(toImmutableList()));
   }
 
-  private Integer maxInterfaceDepth;
-
   /** Returns the height of the largest inheritance chain of any interface implemented here. */
+  @Memoized
   public int getMaxInterfaceDepth() {
-    if (maxInterfaceDepth == null) {
-      maxInterfaceDepth = 0;
-      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-        maxInterfaceDepth =
-            Math.max(
-                maxInterfaceDepth,
-                interfaceTypeDescriptor
-                    .getTypeDeclaration()
-                    .getUnsafeTypeDescriptor()
-                    .getMaxInterfaceDepth());
-      }
-      maxInterfaceDepth++;
-    }
-    return maxInterfaceDepth;
+    return 1
+        + getInterfaceTypeDescriptors()
+            .stream()
+            .mapToInt(
+                interfaceTypeDescriptor ->
+                    interfaceTypeDescriptor
+                        .getTypeDeclaration()
+                        .getUnsafeTypeDescriptor()
+                        .getMaxInterfaceDepth())
+            .max()
+            .orElse(0);
   }
 }

@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -241,26 +242,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .collect(joining(", ")));
   }
 
-  private String overrideSignature;
-
   /** Returns a signature suitable for override checking from the Java source perspective. */
+  @Memoized
   public String getOverrideSignature() {
-    if (overrideSignature == null) {
-      StringBuilder signatureBuilder = new StringBuilder("");
+    StringBuilder signatureBuilder = new StringBuilder("");
 
-      signatureBuilder.append(getName());
-      signatureBuilder.append("(");
+    signatureBuilder.append(getName());
+    signatureBuilder.append("(");
 
-      String separator = "";
-      for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
-        signatureBuilder.append(separator);
-        signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
-        separator = ";";
-      }
-      signatureBuilder.append(")");
-      overrideSignature = signatureBuilder.toString();
+    String separator = "";
+    for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
+      signatureBuilder.append(separator);
+      signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
+      separator = ";";
     }
-    return overrideSignature;
+    signatureBuilder.append(")");
+    return signatureBuilder.toString();
   }
 
   private Set<MethodDescriptor> getOverriddenJsMembers() {
@@ -268,6 +265,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
+  @Memoized
   public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
     return getEnclosingClassTypeDescriptor()
         .getTypeDeclaration()

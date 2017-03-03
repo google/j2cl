@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -38,7 +39,6 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -103,8 +103,7 @@ public abstract class TypeDeclaration extends Node
    * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
    * and other similar scenarios.
    */
-  // TODO(rluble): add memoization to improve performance and remove the manual memoization in
-  // DescriptorFactory.
+  @Memoized
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
   }
@@ -243,6 +242,7 @@ public abstract class TypeDeclaration extends Node
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly
    * on this type.
    */
+  @Memoized
   public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
     return getInterfaceTypeDescriptorsFactory().get(this);
   }
@@ -251,6 +251,7 @@ public abstract class TypeDeclaration extends Node
    * Returns a set of the type descriptors of interfaces that are explicitly implemented either
    * directly on this type or on some super type or super interface.
    */
+  @Memoized
   public Set<TypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
     Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
 
@@ -269,7 +270,8 @@ public abstract class TypeDeclaration extends Node
     return typeDescriptors;
   }
 
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
+  @Memoized
+  public @Nullable MethodDescriptor getJsFunctionMethodDescriptor() {
     return getJsFunctionMethodDescriptorFactory().get(this);
   }
 
@@ -277,7 +279,8 @@ public abstract class TypeDeclaration extends Node
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
-  public TypeDescriptor getRawTypeDescriptor() {
+  @Memoized
+  public @Nullable TypeDescriptor getRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
@@ -299,6 +302,7 @@ public abstract class TypeDeclaration extends Node
    * Returns the unqualified simple source name like "Inner". Used when a readable name is required
    * to refer to the type like a short alias, Debug/Error output, etc.
    */
+  @Memoized
   public String getSimpleSourceName() {
     return AstUtils.getSimpleSourceName(getClassComponents());
   }
@@ -308,13 +312,15 @@ public abstract class TypeDeclaration extends Node
    * places where original name is useful (like aliasing, identifying the corressponding java type,
    * Debug/Error output, etc.
    */
+  @Memoized
   public String getQualifiedSourceName() {
     return Joiner.on(".")
         .skipNulls()
         .join(getPackageName(), Joiner.on(".").join(getClassComponents()));
   }
 
-  public TypeDescriptor getSuperTypeDescriptor() {
+  @Memoized
+  public @Nullable TypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 
@@ -327,11 +333,13 @@ public abstract class TypeDeclaration extends Node
    * real JDT usage site TypeBinding has already been processed somewhere and we attempt to retrieve
    * the matching TypeDescriptor.
    */
+  @Memoized
   public TypeDescriptor getUnsafeTypeDescriptor() {
     return getUnsafeTypeDescriptorFactory().get(this);
   }
 
   /** A unique string for a give type. Used for interning. */
+  @Memoized
   public String getUniqueId() {
     String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
     return uniqueKey + TypeDeclaration.createTypeParametersUniqueId(getTypeParameterDescriptors());
@@ -348,17 +356,17 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Override
+  @Memoized
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
   }
-
-  private Map<String, MethodDescriptor> methodDescriptorsBySignature;
 
   /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
-  private Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
+  @Memoized
+  Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
     return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
@@ -366,26 +374,25 @@ public abstract class TypeDeclaration extends Node
    * The list of methods in the type from the JDT. Note: this does not include methods we synthesize
    * and add to the type like bridge methods.
    */
-  private Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
+  @Memoized
+  Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
     // TODO(rluble): update this code to handle package private methods, bridges and verify that it
     // correctly handles default methods.
-    if (methodDescriptorsBySignature == null) {
-      methodDescriptorsBySignature = new LinkedHashMap<>();
+    Map<String, MethodDescriptor> methodDescriptorsBySignature = new LinkedHashMap<>();
 
-      // Add all methods declared in the current type itself
-      methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
+    // Add all methods declared in the current type itself
+    methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
 
-      // Add all the methods from the super class.
-      if (getSuperTypeDescriptor() != null) {
-        AstUtils.updateMethodsBySignature(
-            methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
-      }
+    // Add all the methods from the super class.
+    if (getSuperTypeDescriptor() != null) {
+      AstUtils.updateMethodsBySignature(
+          methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
+    }
 
-      // Finally add the methods that appear in super interfaces.
-      for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
-        AstUtils.updateMethodsBySignature(
-            methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
-      }
+    // Finally add the methods that appear in super interfaces.
+    for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
+      AstUtils.updateMethodsBySignature(
+          methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
     }
     return methodDescriptorsBySignature;
   }
@@ -407,6 +414,7 @@ public abstract class TypeDeclaration extends Node
    * The list of methods declared in the type. Note: this does not include methods synthetic methods
    * (like bridge methods) nor supertype methods that are not overridden in the type.
    */
+  @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsBySignature().values();
   }
@@ -415,6 +423,7 @@ public abstract class TypeDeclaration extends Node
    * The list of fields declared in the type. Note: this does not include methods synthetic fields
    * (like captures) nor supertype fields.
    */
+  @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
   }
@@ -431,6 +440,7 @@ public abstract class TypeDeclaration extends Node
    * method and the method it inherits does not really override, but just has the same signature as
    * the overridden method.
    */
+  @Memoized
   public List<MethodDescriptor> getAccidentallyOverriddenMethodDescriptors() {
     List<MethodDescriptor> accidentalOverriddenMethods = new ArrayList<>();
 
@@ -448,37 +458,32 @@ public abstract class TypeDeclaration extends Node
     return accidentalOverriddenMethods;
   }
 
-  private Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature;
-
   /**
    * Builds and caches a mapping from method override signature to matching method descriptors from
    * the entire super-type hierarchy. This map can *greatly* speed up method override checks.
    */
-  private Multimap<String, MethodDescriptor> getMethodDescriptorsByOverrideSignature() {
-    if (methodDescriptorsByOverrideSignature == null) {
-      methodDescriptorsByOverrideSignature = HashMultimap.create();
+  @Memoized
+  Multimap<String, MethodDescriptor> getMethodDescriptorsByOverrideSignature() {
+    Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature = HashMultimap.create();
 
-      for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-        if (declaredMethodDescriptor.isConstructor() || declaredMethodDescriptor.isStatic()) {
-          continue;
-        }
-
-        methodDescriptorsByOverrideSignature.put(
-            declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
+    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
+      if (declaredMethodDescriptor.isConstructor() || declaredMethodDescriptor.isStatic()) {
+        continue;
       }
 
-      // Recurse into immediate super class and interfaces for overridden method.
-      if (getSuperTypeDescriptor() != null) {
-        methodDescriptorsByOverrideSignature.putAll(
-            getSuperTypeDescriptor()
-                .getTypeDeclaration()
-                .getMethodDescriptorsByOverrideSignature());
-      }
+      methodDescriptorsByOverrideSignature.put(
+          declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
+    }
 
-      for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-        methodDescriptorsByOverrideSignature.putAll(
-            interfaceTypeDescriptor.getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
-      }
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (getSuperTypeDescriptor() != null) {
+      methodDescriptorsByOverrideSignature.putAll(
+          getSuperTypeDescriptor().getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
+    }
+
+    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+      methodDescriptorsByOverrideSignature.putAll(
+          interfaceTypeDescriptor.getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
     }
 
     return methodDescriptorsByOverrideSignature;
@@ -794,19 +799,6 @@ public abstract class TypeDeclaration extends Node
     private static final ThreadLocalInterner<TypeDeclaration> interner =
         new ThreadLocalInterner<>();
 
-    private static <T> DescriptorFactory<T> createMemoizingFactory(DescriptorFactory<T> factory) {
-      // TODO(rluble): replace this by AutoValue @Memoize on the corresponding properties.
-      return new DescriptorFactory<T>() {
-        Map<TypeDeclaration, T> cachedValues = new HashMap<>();
-
-        @Override
-        public T get(TypeDeclaration selfTypeDeclaration) {
-          return cachedValues.computeIfAbsent(
-              selfTypeDeclaration, (TypeDeclaration k) -> factory.get(k));
-        }
-      };
-    }
-
     abstract TypeDeclaration autoBuild();
 
     public TypeDeclaration build() {
@@ -817,19 +809,6 @@ public abstract class TypeDeclaration extends Node
       if (!getJsNamespace().isPresent()) {
         setJsNamespace(calculateJsNamespace());
       }
-      // Make all descriptor factories memoizing.
-      setConcreteJsFunctionMethodDescriptorFactory(
-          createMemoizingFactory(getConcreteJsFunctionMethodDescriptorFactory()));
-      setDeclaredMethodDescriptorsFactory(
-          createMemoizingFactory(getDeclaredMethodDescriptorsFactory()));
-      setDeclaredFieldDescriptorsFactory(
-          createMemoizingFactory(getDeclaredFieldDescriptorsFactory()));
-      setInterfaceTypeDescriptorsFactory(
-          createMemoizingFactory(getInterfaceTypeDescriptorsFactory()));
-      setJsFunctionMethodDescriptorFactory(
-          createMemoizingFactory(getJsFunctionMethodDescriptorFactory()));
-      setSuperTypeDescriptorFactory(createMemoizingFactory(getSuperTypeDescriptorFactory()));
-      setRawTypeDescriptorFactory(createMemoizingFactory(getRawTypeDescriptorFactory()));
 
       TypeDeclaration typeDeclaration = autoBuild();
 
