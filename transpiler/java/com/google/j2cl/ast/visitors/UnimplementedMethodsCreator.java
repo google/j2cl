@@ -18,16 +18,12 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Creates unimplemented methods in abstract class.
@@ -36,13 +32,6 @@ import java.util.stream.Collectors;
  * interfaces. However, in JavaScript, it requires a class tagged with 'implements' to implement all
  * of the methods defined by the interface. This class synthesizes the unimplemented methods in an
  * abstract class.
- *
- * <p>The general idea is to assume that your parent class already has a complete set of methods
- * that fulfill all JS method signatures required by the interfaces it implements.
- *
- * <p>So to figure out what abstract stub methods need to be created here one only needs to figure
- * out what JS method signatures have become newly required on this type beyond what has already
- * been fulfilled in the super type.
  */
 public class UnimplementedMethodsCreator extends NormalizationPass {
   @Override
@@ -56,98 +45,72 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
               return;
             }
 
-            /**
-             * Record the complete set of JS method signatures that have already be fulfilled (must
-             * have, somehow) on the super type(s).
-             *
-             * <p>This is done by collecting the JS method signatures of all declared methods on the
-             * super type as well as all methods required by implemented interfaces (from both
-             * immediate interfaces and their super interfaces), and then repeating that process all
-             * the way up the super type chain.
-             *
-             * <p>Lastly the declared methods of the current type are recorded as well, since they
-             * are obviously already fulfilled.
-             */
-            Set<String> filledSignatures = new HashSet<>();
-            if (type.getDeclaration().getSuperTypeDescriptor() != null) {
-              TypeDeclaration superTypeDeclaration = type.getDeclaration();
-              do {
-                superTypeDeclaration =
-                    superTypeDeclaration.getSuperTypeDescriptor().getTypeDeclaration();
+            Set<String> shadowedSignatures = new HashSet<>();
+            Set<String> shadowedNonJsMethodSignatures = new HashSet<>();
 
-                filledSignatures.addAll(
-                    getJsSignaturesInImmediateInterfacesTransitive(superTypeDeclaration));
-                filledSignatures.addAll(getDeclaredMethodSignatures(superTypeDeclaration));
-              } while (superTypeDeclaration.getSuperTypeDescriptor() != null);
+            for (MethodDescriptor methodDescriptor : type.getDeclaration().getMethodDescriptors()) {
+              if (methodDescriptor.isConstructor() || methodDescriptor.isStatic()) {
+                continue;
+              }
+              if (!methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()) {
+                continue;
+              }
+
+              addStubMethod(type, methodDescriptor);
+
+              boolean isParameterized =
+                  methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor();
+              boolean hasASpecializedSignature =
+                  !methodDescriptor.isJsOverride(methodDescriptor.getDeclarationMethodDescriptor());
+              if (isParameterized && hasASpecializedSignature) {
+                String specializedSignature = methodDescriptor.getOverrideSignature();
+                shadowedSignatures.add(specializedSignature);
+              }
+
+              /**
+               * If outputting a "get(Object)" stub there's a chance that there's also a need for
+               * "m_get__java_lang_Object(Object)" stub if some implemented interface requires it
+               * (and JDT's declared methods list isn't reflecting that fact it). Note the
+               * possibility and check for it later when traversing interfaces.
+               */
+              if (methodDescriptor.isJsMethod()) {
+                shadowedNonJsMethodSignatures.add(methodDescriptor.getOverrideSignature());
+              }
             }
-            filledSignatures.addAll(getDeclaredMethodSignatures(type.getDeclaration()));
 
             /**
-             * Figure out what JS method signatures have become newly required on this type beyond
-             * what has already been fulfilled in the super type. And create an abstract stub for
-             * each one.
+             * Shadowing specialized methods can occur for example in the following scenario.
              *
-             * <p>This is done by examining the JS method signatures of all methods required by
-             * implemented interfaces (from both immediate interfaces and their super interfaces).
+             * <pre>
+             * interface List<T> { String getFoo(T t); }
+             * abstract class AbsList<T> implements List<T> {}
+             * interface StringList extends List<String> { String getFoo(String string); }
+             * abstract class AbsStringList extends AbsList<String> implements StringList {}
+             * </pre>
+             *
+             * <p>In this case the declared methods on AbsStringList includes a "get(String)" that
+             * was specialized from "List.get(T)". So a stub method is created for "get(Object)" but
+             * the "get(String)" coming from StringList is not seen and so no stub is created.
+             *
+             * <p>The only reason this wasn't causing type check errors is because
+             * BridgeMethodsCreator was filling that slot with an improper bridge.
              */
             for (TypeDescriptor interfaceTypeDescriptor :
-                getImmediateInterfacesAndTheirSupers(type.getDeclaration())) {
+                type.getDeclaration().getTransitiveInterfaceTypeDescriptors()) {
               for (MethodDescriptor methodDescriptor :
-                  interfaceTypeDescriptor.getDeclaredMethodDescriptors()) {
-                if (methodDescriptor.isStatic()) {
-                  continue;
+                  interfaceTypeDescriptor.getMethodDescriptors()) {
+                if (!methodDescriptor.isJsMethod()
+                    && shadowedNonJsMethodSignatures.contains(
+                        methodDescriptor.getOverrideSignature())) {
+                  addStubMethod(type, methodDescriptor);
+                } else if (methodDescriptor == methodDescriptor.getDeclarationMethodDescriptor()
+                    && shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
+                  addStubMethod(type, methodDescriptor);
                 }
-                if (!filledSignatures.add(ManglingNameUtils.getMangledName(methodDescriptor))) {
-                  continue;
-                }
-
-                addStubMethod(type, methodDescriptor);
               }
             }
           }
         });
-  }
-
-  private static Set<String> getDeclaredMethodSignatures(TypeDeclaration classTypeDeclaration) {
-    Set<String> signatures = new HashSet<>();
-    for (MethodDescriptor methodDescriptor : classTypeDeclaration.getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.isConstructor() || methodDescriptor.isStatic()) {
-        continue;
-      }
-
-      signatures.add(ManglingNameUtils.getMangledName(methodDescriptor));
-    }
-    return signatures;
-  }
-
-  private static Set<TypeDescriptor> getImmediateInterfacesAndTheirSupers(
-      TypeDeclaration classTypeDeclaration) {
-    Set<TypeDescriptor> interfaces = new HashSet<>();
-    for (TypeDescriptor interfaceTypeDescriptor :
-        classTypeDeclaration.getInterfaceTypeDescriptors()) {
-      interfaces.addAll(getAllSuperInterfaces(interfaceTypeDescriptor));
-    }
-    return interfaces;
-  }
-
-  private static Set<TypeDescriptor> getAllSuperInterfaces(TypeDescriptor interfaceTypeDescriptor) {
-    Set<TypeDescriptor> interfaces = new HashSet<>();
-    interfaces.add(interfaceTypeDescriptor);
-    for (TypeDescriptor superInterfaceTypeDescriptor :
-        interfaceTypeDescriptor.getInterfaceTypeDescriptors()) {
-      interfaces.addAll(getAllSuperInterfaces(superInterfaceTypeDescriptor));
-    }
-    return interfaces;
-  }
-
-  private static Set<String> getJsSignaturesInImmediateInterfacesTransitive(
-      TypeDeclaration classTypeDeclaration) {
-    return getImmediateInterfacesAndTheirSupers(classTypeDeclaration)
-        .stream()
-        .map(TypeDescriptor::getDeclaredMethodDescriptors)
-        .flatMap(Collection::stream)
-        .map(ManglingNameUtils::getMangledName)
-        .collect(Collectors.toSet());
   }
 
   private static void addStubMethod(Type type, MethodDescriptor methodDescriptor) {
@@ -155,7 +118,6 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
         MethodDescriptor.Builder.from(methodDescriptor)
             .setEnclosingClassTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
             .setAbstract(true)
-            .setNative(false)
             .build();
     type.addMethod(
         Method.newBuilder()
