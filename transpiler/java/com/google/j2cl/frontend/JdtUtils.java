@@ -47,7 +47,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -242,23 +241,6 @@ public class JdtUtils {
       }
     }
     return null;
-  }
-
-  /** Returns all the interfaces {@code typeBinding} implements. */
-  static Set<ITypeBinding> getAllInterfaces(ITypeBinding typeBinding) {
-    Set<ITypeBinding> interfaces = new LinkedHashSet<>();
-    if (typeBinding == null) {
-      return interfaces;
-    }
-    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-      interfaces.add(superInterface);
-      interfaces.addAll(getAllInterfaces(superInterface));
-    }
-    ITypeBinding superclassTypeBinding = typeBinding.getSuperclass();
-    if (superclassTypeBinding != null) {
-      interfaces.addAll(getAllInterfaces(superclassTypeBinding));
-    }
-    return interfaces;
   }
 
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
@@ -793,33 +775,6 @@ public class JdtUtils {
       }
     }
     return jsInfoList.get(0);
-  }
-
-  /** Returns the method signature, which identifies a method up to overriding. */
-  public static String getMethodSignature(IMethodBinding methodBinding) {
-    StringBuilder signatureBuilder = new StringBuilder("");
-    Visibility methodVisibility = getVisibility(methodBinding);
-    if (methodVisibility.isPackagePrivate()) {
-      signatureBuilder.append(":pp:");
-      signatureBuilder.append(methodBinding.getDeclaringClass().getPackage());
-      signatureBuilder.append(":");
-    } else if (methodVisibility.isPrivate()) {
-      signatureBuilder.append(":p:");
-      signatureBuilder.append(getBinaryNameFromTypeBinding(methodBinding.getDeclaringClass()));
-      signatureBuilder.append(":");
-    }
-
-    signatureBuilder.append(methodBinding.getName());
-    signatureBuilder.append("(");
-
-    String separator = "";
-    for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
-      signatureBuilder.append(separator);
-      signatureBuilder.append(getBinaryNameFromTypeBinding(parameterType.getErasure()));
-      separator = ";";
-    }
-    signatureBuilder.append(")");
-    return signatureBuilder.toString();
   }
 
   public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {

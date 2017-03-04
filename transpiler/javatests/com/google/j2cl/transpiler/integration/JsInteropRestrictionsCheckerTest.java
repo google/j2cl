@@ -2317,8 +2317,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  // TODO(b/27597597): This test is in GWT but I think we should be allowing this type of collision.
-  public void disabled_testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
+  public void testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
@@ -2327,8 +2326,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod public void m(int o) { }",
             "}")
         .assertCompileFails(
-            "Line 6: 'void EntryPoint.Buggy.m(int)' and 'void EntryPoint.Buggy.m(Object)' "
-                + "cannot both use the same JavaScript name 'm'.");
+            "'void Buggy.m(int)' and 'void Buggy.m(Object)' cannot both use the same "
+                + "JavaScript name 'm'.");
   }
 
   public void testNonJsTypeExtendsJsTypeSucceeds() throws Exception {

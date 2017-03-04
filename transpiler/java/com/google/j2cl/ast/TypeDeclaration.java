@@ -24,10 +24,10 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -464,7 +464,8 @@ public abstract class TypeDeclaration extends Node
    */
   @Memoized
   Multimap<String, MethodDescriptor> getMethodDescriptorsByOverrideSignature() {
-    Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature = HashMultimap.create();
+    Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature =
+        LinkedHashMultimap.create();
 
     for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
       if (declaredMethodDescriptor.isConstructor() || declaredMethodDescriptor.isStatic()) {
