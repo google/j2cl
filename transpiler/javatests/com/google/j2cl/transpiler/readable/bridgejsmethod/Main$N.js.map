@@ -31,11 +31,13 @@
 ...  getB() {
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.N.getB"
 [UNKNOWN] => [/**
-   * @abstract
+   * Bridge method for exposing non-JsMethod.
    * @override
    * @return {B}
    * @public
    */
   m_getB__() {
+    return this.getB();
   }]
+[UNKNOWN] => [return this.getB();]
 [UNKNOWN] => [java_lang_Object.$clinit();]
