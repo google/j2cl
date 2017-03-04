@@ -1,0 +1,90 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgejsmethod.Main$M.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.M$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
+
+
+/**
+ * @interface
+ */
+class M {
+  /**
+   * @abstract
+   * @return {B}
+   * @public
+   */
+  m_getB__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    M.$clinit = function() {};
+    B = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    M,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$M'));
+
+
+M.$markImplementor(/** @type {Function} */ (M));
+
+
+/**
+ * Export class.
+ */
+exports = M;
+//# sourceMappingURL=Main$M.js.map

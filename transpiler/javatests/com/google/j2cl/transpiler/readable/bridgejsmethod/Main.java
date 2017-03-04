@@ -1,6 +1,7 @@
 package com.google.j2cl.transpiler.readable.bridgejsmethod;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static class A<T> {
@@ -98,6 +99,25 @@ public class Main {
     @JsMethod
     @Override
     void fun(String string, L1 l1) {}
+  }
+
+  interface M {
+    public B getB();
+  }
+
+  @JsType
+  abstract class N implements M {
+    @Override
+    public abstract B getB();
+  }
+
+  class O extends N {
+    private B b;
+
+    @Override
+    public B getB() {
+      return b;
+    }
   }
 
   public static void test() {
