@@ -18,14 +18,11 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Makes the implicit super call in a constructor explicit.
@@ -66,15 +63,17 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
           }
 
           private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
-            MethodDescriptor methodDescriptor =
-                AstUtils.createDefaultConstructorDescriptor(
-                    superTypeDescriptor, superTypeDescriptor.getVisibility());
-            List<Expression> arguments = new ArrayList<>();
-            MethodCall superCall =
-                MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-            method.getBody().getStatements().add(0, superCall.makeStatement());
+            method
+                .getBody()
+                .getStatements()
+                .add(
+                    0,
+                    MethodCall.Builder.from(
+                            AstUtils.createDefaultConstructorDescriptor(superTypeDescriptor))
+                        .setArguments(Collections.emptyList())
+                        .build()
+                        .makeStatement());
           }
         });
   }
-
 }

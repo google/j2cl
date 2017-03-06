@@ -1447,7 +1447,7 @@ public class CompilationUnitBuilder {
 
       // Replace the lambda with new LambdaClass()
       MethodDescriptor constructorMethodDescriptor =
-          AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor, Visibility.PUBLIC);
+          AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor);
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
           lambdaTypeDeclaration.isCapturingEnclosingInstance()

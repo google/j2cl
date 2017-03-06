@@ -21,7 +21,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
 
 /**
@@ -46,11 +45,9 @@ public class CreateDefaultConstructors extends NormalizationPass {
           }
 
           private void synthesizeDefaultConstructor(Type type) {
-            Visibility visibility =
-                type.isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility();
             MethodDescriptor methodDescriptor =
                 AstUtils.createDefaultConstructorDescriptor(
-                    type.getDeclaration().getUnsafeTypeDescriptor(), visibility);
+                    type.getDeclaration().getUnsafeTypeDescriptor());
             type.addMethod(
                 0,
                 Method.newBuilder()

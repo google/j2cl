@@ -90,19 +90,29 @@ public class AstUtils {
   /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createDefaultConstructorDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor,
-      Visibility visibility,
       TypeDescriptor... parameterTypeDescriptors) {
     JsInfo jsInfo =
-        enclosingClassTypeDescriptor.isJsType() && visibility.isPublic()
+        isDefaultConstructorJsConstructior(enclosingClassTypeDescriptor)
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
     return MethodDescriptor.newBuilder()
-        .setVisibility(visibility)
+        .setVisibility(getDefaultConstructorVisibility(enclosingClassTypeDescriptor))
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setConstructor(true)
         .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .build();
+  }
+
+  private static Visibility getDefaultConstructorVisibility(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isEnum() ? Visibility.PRIVATE : typeDescriptor.getVisibility();
+  }
+
+  /** Return true if the default constructor is a JsConstructor. */
+  public static boolean isDefaultConstructorJsConstructior(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isJsType()
+        && (typeDescriptor.isNative()
+            || getDefaultConstructorVisibility(typeDescriptor).isPublic());
   }
 
   /**
