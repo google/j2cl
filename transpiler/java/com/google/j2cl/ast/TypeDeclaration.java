@@ -162,6 +162,8 @@ public abstract class TypeDeclaration extends Node
    */
   public abstract boolean isLocal();
 
+  public abstract boolean isAnonymous();
+
   @Override
   public abstract boolean isNative();
 
@@ -621,6 +623,7 @@ public abstract class TypeDeclaration extends Node
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setAbstract(false)
+        .setAnonymous(false)
         .setNative(false)
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
@@ -643,6 +646,7 @@ public abstract class TypeDeclaration extends Node
   /** Builder for a TypeDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {
+    public abstract Builder setAnonymous(boolean isAnonymous);
 
     public abstract Builder setUniqueKey(String key);
 

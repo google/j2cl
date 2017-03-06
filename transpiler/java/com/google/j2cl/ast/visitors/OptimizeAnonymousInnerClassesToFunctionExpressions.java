@@ -31,6 +31,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import java.util.HashMap;
@@ -196,7 +197,8 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
    * a function expression (lambda).
    */
   private static boolean canBeOptimized(Type type) {
-    if (!type.isAnonymous() || !type.getDeclaration().isJsFunctionImplementation()) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    if (!typeDeclaration.isAnonymous() || !typeDeclaration.isJsFunctionImplementation()) {
       return false;
     }
 

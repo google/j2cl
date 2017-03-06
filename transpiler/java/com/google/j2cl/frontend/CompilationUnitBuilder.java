@@ -2178,7 +2178,6 @@ public class CompilationUnitBuilder {
 
       Type type = new Type(visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
-      type.setAnonymous(typeBinding.isAnonymous());
       type.setSourcePosition(
           getSourcePosition(typeDeclaration.getQualifiedSourceName(), typeDeclarationNode));
       return type;

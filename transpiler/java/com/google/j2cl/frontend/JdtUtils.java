@@ -1399,6 +1399,7 @@ public class JdtUtils {
         .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
         .setNative(JsInteropUtils.isNativeType(typeBinding))
+        .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))
         .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
@@ -1481,6 +1482,7 @@ public class JdtUtils {
         .setCapturingEnclosingInstance(!inStaticContext)
         .setJsFunctionImplementation(isJsFunctionImplementation)
         .setLocal(true)
+        .setAnonymous(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setPackageName(enclosingClassTypeDeclaration.getPackageName())
         .setRawTypeDescriptorFactory(

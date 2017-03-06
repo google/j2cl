@@ -37,10 +37,10 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   public String renderOutput() {
     renderFileOverview("lateProvide");
 
-    TypeDeclaration selfTypeDeclaration = type.getDeclaration();
-    sourceBuilder.appendln("goog.module('" + selfTypeDeclaration.getModuleName() + "');");
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    sourceBuilder.appendln("goog.module('" + typeDeclaration.getModuleName() + "');");
 
-    if (declareLegacyNamespace && type.getDeclaration().isJsType() && !(type.isAnonymous())) {
+    if (declareLegacyNamespace && typeDeclaration.isJsType() && !typeDeclaration.isAnonymous()) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
@@ -76,7 +76,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
 
     String className = environment.aliasForType(type.getDeclaration());
-    String implementationPath = selfTypeDeclaration.getImplModuleName();
+    String implementationPath = typeDeclaration.getImplModuleName();
     sourceBuilder.appendLines(
         "// Re-exports the implementation.",
         "var " + className + " = goog.require('" + implementationPath + "');",

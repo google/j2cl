@@ -140,11 +140,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderImports() {
-    TypeDeclaration selfTypeDeclaration = type.getDeclaration();
+    TypeDeclaration typeDeclaration = type.getDeclaration();
 
     // goog.module(...) declaration.
-    sourceBuilder.appendln("goog.module('" + selfTypeDeclaration.getImplModuleName() + "');");
-    if (declareLegacyNamespace && type.getDeclaration().isJsType() && !(type.isAnonymous())) {
+    sourceBuilder.appendln("goog.module('" + typeDeclaration.getImplModuleName() + "');");
+    if (declareLegacyNamespace && typeDeclaration.isJsType() && !typeDeclaration.isAnonymous()) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.

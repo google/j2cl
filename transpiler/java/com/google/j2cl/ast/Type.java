@@ -36,7 +36,6 @@ import java.util.List;
 public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
   private Visibility visibility;
   private boolean isStatic;
-  private boolean isAnonymous;
   @Visitable TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
   private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
@@ -83,14 +82,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isAbstract() {
     return typeDeclaration.isAbstract();
-  }
-
-  public void setAnonymous(boolean isAnonymous) {
-    this.isAnonymous = isAnonymous;
-  }
-
-  public boolean isAnonymous() {
-    return isAnonymous;
   }
 
   public boolean isEnum() {

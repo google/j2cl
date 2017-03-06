@@ -449,8 +449,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsFunctionImplementation(Type type) {
-    String readableDescription = type.getDeclaration().getReadableDescription();
-    if (!type.getDeclaration().isFinal() && !type.isAnonymous()) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    String readableDescription = typeDeclaration.getReadableDescription();
+    if (!typeDeclaration.isFinal() && !typeDeclaration.isAnonymous()) {
       problems.error(
           type.getSourcePosition(),
           "JsFunction implementation '%s' must be final.",
@@ -464,7 +465,7 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (type.getDeclaration().isJsType()) {
+    if (typeDeclaration.isJsType()) {
       problems.error(
           type.getSourcePosition(),
           "'%s' cannot be both a JsFunction implementation and a JsType at the same time.",

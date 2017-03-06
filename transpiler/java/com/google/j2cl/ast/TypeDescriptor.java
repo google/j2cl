@@ -216,6 +216,10 @@ public abstract class TypeDescriptor extends Node
     return getTypeDeclaration().isLocal();
   }
 
+  public boolean isAnonymous() {
+    return getTypeDeclaration().isAnonymous();
+  }
+
   @Override
   public abstract boolean isNative();
 
