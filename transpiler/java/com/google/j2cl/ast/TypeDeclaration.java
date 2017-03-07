@@ -175,13 +175,7 @@ public abstract class TypeDeclaration extends Node
   abstract String getUniqueKey();
 
   @Nullable
-  abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
-
-  @Nullable
-  abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
 
   @Nullable
   abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
@@ -270,11 +264,6 @@ public abstract class TypeDeclaration extends Node
     }
 
     return typeDescriptors;
-  }
-
-  @Memoized
-  public @Nullable MethodDescriptor getJsFunctionMethodDescriptor() {
-    return getJsFunctionMethodDescriptorFactory().get(this);
   }
 
   /**
@@ -634,11 +623,9 @@ public abstract class TypeDeclaration extends Node
         .setLocal(false)
         .setJsConstructorClassOrSubclass(false)
         .setTypeParameterDescriptors(Collections.emptyList())
-        .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
-        .setJsFunctionMethodDescriptorFactory(() -> null)
         .setRawTypeDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null);
   }
@@ -687,15 +674,6 @@ public abstract class TypeDeclaration extends Node
 
     public abstract Builder setJsNamespace(String jsNamespace);
 
-    public abstract Builder setConcreteJsFunctionMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory);
-
-    public Builder setConcreteJsFunctionMethodDescriptorFactory(
-        Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
-      return setConcreteJsFunctionMethodDescriptorFactory(
-          typeDescriptor -> concreteJsFunctionMethodDescriptorFactory.get());
-    }
-
     public abstract Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory);
 
@@ -703,15 +681,6 @@ public abstract class TypeDeclaration extends Node
         Supplier<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
       return setInterfaceTypeDescriptorsFactory(
           typeDescriptor -> interfaceTypeDescriptorsFactory.get());
-    }
-
-    public abstract Builder setJsFunctionMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory);
-
-    public Builder setJsFunctionMethodDescriptorFactory(
-        Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
-      return setJsFunctionMethodDescriptorFactory(
-          typeDescriptor -> jsFunctionMethodDescriptorFactory.get());
     }
 
     public abstract Builder setRawTypeDescriptorFactory(
@@ -763,21 +732,6 @@ public abstract class TypeDeclaration extends Node
     abstract Optional<String> getSimpleJsName();
 
     abstract Optional<String> getJsNamespace();
-
-    abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
-
-    abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
-
-    abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
-
-    abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-        getDeclaredMethodDescriptorsFactory();
-
-    abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
     abstract TypeDeclaration getEnclosingTypeDeclaration();
 

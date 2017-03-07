@@ -291,6 +291,7 @@ public class TypeDescriptors {
   }
 
   /** Holds the bootstrap types. */
+  @SuppressWarnings("ImmutableEnumChecker")
   public enum BootstrapType {
     OBJECTS("vmbootstrap", "Objects"),
     COMPARABLES("vmbootstrap", "Comparables"),
@@ -458,7 +459,6 @@ public class TypeDescriptors {
 
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
-        .setNative(isNative)
         .setNullable(true)
         .setSimpleJsName(jsName)
         .setJsNamespace(jsNamespace)
@@ -547,7 +547,6 @@ public class TypeDescriptors {
         .setClassComponents(classComponents)
         .setPackageName(leafTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setTypeArgumentDescriptors(Collections.emptyList())
         .setUniqueKey(uniqueKey)
         .build();
   }

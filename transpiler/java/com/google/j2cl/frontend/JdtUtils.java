@@ -1032,8 +1032,6 @@ public class JdtUtils {
     final ImmutableList<TypeDescriptor> lambdaInterfaceTypeDescriptors =
         createTypeDescriptors(lambdaInterfaceBindings);
     checkArgument(lambdaInterfaceTypeDescriptors.stream().allMatch(TypeDescriptor::isInterface));
-    boolean isJsFunctionImplementation =
-        lambdaInterfaceTypeDescriptors.stream().anyMatch(TypeDescriptor::isJsFunctionInterface);
 
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList();
     for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
@@ -1050,7 +1048,6 @@ public class JdtUtils {
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptor(enclosingClassTypeDescriptor)
-        .setJsFunctionImplementation(isJsFunctionImplementation)
         .setNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setPackageName(enclosingClassTypeDescriptor.getPackageName())
@@ -1182,14 +1179,14 @@ public class JdtUtils {
           }
           return TypeDescriptors.createIntersection(createTypeDescriptors(boundTypeBindings));
         };
-    TypeDeclaration lambdaTypeDeclaration = null;
+    TypeDeclaration typeDeclaration = null;
     ITypeBinding declarationTypeBinding = typeBinding.getTypeDeclaration();
     if (declarationTypeBinding != null
-        && !declarationTypeBinding.isArray()
-        && !declarationTypeBinding.isParameterizedType()
         && !declarationTypeBinding.isTypeVariable()
         && !declarationTypeBinding.isWildcardType()) {
-      lambdaTypeDeclaration = JdtUtils.createDeclarationForType(declarationTypeBinding);
+      checkArgument(
+          !declarationTypeBinding.isArray() && !declarationTypeBinding.isParameterizedType());
+      typeDeclaration = JdtUtils.createDeclarationForType(declarationTypeBinding);
     }
 
     // Compute these even later
@@ -1199,7 +1196,7 @@ public class JdtUtils {
             .setClassComponents(getClassComponents(typeBinding))
             .setConcreteJsFunctionMethodDescriptorFactory(
                 () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
-            .setTypeDeclaration(lambdaTypeDeclaration)
+            .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 isTypeVariable || isWildCardOrCapture
                     ? null
@@ -1207,9 +1204,6 @@ public class JdtUtils {
             .setInterfaceTypeDescriptorsFactory(
                 () -> createTypeDescriptors(typeBinding.getInterfaces()))
             .setKind(getKindFromTypeBinding(typeBinding))
-            .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-            .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
-            .setNative(JsInteropUtils.isNativeType(typeBinding))
             .setNullable(isNullable)
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setSimpleJsName(getJsName(typeBinding))
@@ -1384,8 +1378,6 @@ public class JdtUtils {
     // Compute these even later
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))
-        .setConcreteJsFunctionMethodDescriptorFactory(
-            () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
             () -> createTypeDescriptors(typeBinding.getInterfaces()))
@@ -1401,7 +1393,6 @@ public class JdtUtils {
         .setNative(JsInteropUtils.isNativeType(typeBinding))
         .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))
-        .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
@@ -1446,23 +1437,6 @@ public class JdtUtils {
       checkState(lambdaInterfaceBindings.size() >= 2);
     }
 
-    Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
-        () ->
-            lambdaInterfaceBindings
-                .stream()
-                .map(JdtUtils::getConcreteJsFunctionMethodDescriptor)
-                .filter(Predicates.notNull())
-                .findFirst()
-                .orElse(null);
-    Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory =
-        () ->
-            lambdaInterfaceBindings
-                .stream()
-                .map(JdtUtils::getJsFunctionMethodDescriptor)
-                .filter(Predicates.notNull())
-                .findFirst()
-                .orElse(null);
-
     final ImmutableList<TypeDescriptor> lambdaInterfaceTypeDescriptors =
         createTypeDescriptors(lambdaInterfaceBindings);
     checkArgument(lambdaInterfaceTypeDescriptors.stream().allMatch(TypeDescriptor::isInterface));
@@ -1477,13 +1451,11 @@ public class JdtUtils {
     }
     return TypeDeclaration.newBuilder()
         .setClassComponents(classComponents)
-        .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDeclaration(enclosingClassTypeDeclaration)
         .setCapturingEnclosingInstance(!inStaticContext)
         .setJsFunctionImplementation(isJsFunctionImplementation)
         .setLocal(true)
         .setAnonymous(true)
-        .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
         .setPackageName(enclosingClassTypeDeclaration.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->

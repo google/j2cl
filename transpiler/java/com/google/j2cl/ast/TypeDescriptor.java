@@ -74,13 +74,9 @@ public abstract class TypeDescriptor extends Node
   }
 
   public static final Comparator<TypeDescriptor> MORE_SPECIFIC_INTERFACES_FIRST =
-      new Comparator<TypeDescriptor>() {
-        @Override
-        public int compare(TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
-          return Integer.compare(
+      (thisTypeDescriptor, thatTypeDescriptor) ->
+          Integer.compare(
               thatTypeDescriptor.getMaxInterfaceDepth(), thisTypeDescriptor.getMaxInterfaceDepth());
-        }
-      };
 
   @Override
   public Node accept(Processor processor) {
@@ -133,8 +129,6 @@ public abstract class TypeDescriptor extends Node
    * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
    * and other similar scenarios.
    */
-  // TODO(rluble): add memoization to improve performance and remove the manual memoization in
-  // DescriptorFactory.
   @Memoized
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
@@ -193,9 +187,13 @@ public abstract class TypeDescriptor extends Node
     return getTypeDeclaration().isFunctionalInterface();
   }
 
-  public abstract boolean isJsFunctionImplementation();
+  public boolean isJsFunctionImplementation() {
+    return hasTypeDeclaration() && getTypeDeclaration().isJsFunctionImplementation();
+  }
 
-  public abstract boolean isJsFunctionInterface();
+  public boolean isJsFunctionInterface() {
+    return hasTypeDeclaration() && getTypeDeclaration().isJsFunctionInterface();
+  }
 
   public boolean isJsType() {
     return getTypeDeclaration().isJsType();
@@ -221,7 +219,9 @@ public abstract class TypeDescriptor extends Node
   }
 
   @Override
-  public abstract boolean isNative();
+  public boolean isNative() {
+    return hasTypeDeclaration() && getTypeDeclaration().isNative();
+  }
 
   public abstract boolean isNullable();
 
@@ -375,7 +375,8 @@ public abstract class TypeDescriptor extends Node
   }
 
   @Memoized
-  public @Nullable MethodDescriptor getJsFunctionMethodDescriptor() {
+  @Nullable
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
     return getJsFunctionMethodDescriptorFactory().get(this);
   }
 
@@ -384,13 +385,15 @@ public abstract class TypeDescriptor extends Node
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Memoized
-  public @Nullable TypeDescriptor getRawTypeDescriptor() {
+  @Nullable
+  public TypeDescriptor getRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
   /** Returns the bound for a type variable. */
   @Memoized
-  public @Nullable TypeDescriptor getBoundTypeDescriptor() {
+  @Nullable
+  public TypeDescriptor getBoundTypeDescriptor() {
     checkState(isTypeVariable() || isWildCardOrCapture());
     return getBoundTypeDescriptorFactory().get(this);
   }
@@ -436,6 +439,7 @@ public abstract class TypeDescriptor extends Node
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
+  @SuppressWarnings("ReferenceEquality")
   @Memoized
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
     checkState(isIntersection());
@@ -491,12 +495,28 @@ public abstract class TypeDescriptor extends Node
   }
 
   @Memoized
-  public @Nullable TypeDescriptor getSuperTypeDescriptor() {
+  @Nullable
+  public TypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 
   @Nullable
   public abstract TypeDeclaration getTypeDeclaration();
+
+  public boolean hasTypeDeclaration() {
+    boolean hasClassDeclaration = getTypeDeclaration() != null;
+    // TODO: Clean up so that only Enum, Class, Interfaces and possibly primitive types have
+    // TypeDeclarations, all others should not have.
+    checkState(
+        hasClassDeclaration == isClass()
+            || isInterface()
+            || isEnum()
+            || isPrimitive()
+            || isIntersection()
+            || isWildCardOrCapture()
+            || isTypeVariable());
+    return hasClassDeclaration;
+  }
 
   /** A unique string for a give type. Used for interning. */
   @Memoized
@@ -609,9 +629,6 @@ public abstract class TypeDescriptor extends Node
   public static Builder newBuilder() {
     return new AutoValue_TypeDescriptor.Builder()
         // Default values.
-        .setNative(false)
-        .setJsFunctionInterface(false)
-        .setJsFunctionImplementation(false)
         .setNullable(true)
         .setDimensions(0)
         .setUnionedTypeDescriptors(Collections.emptyList())
@@ -646,12 +663,6 @@ public abstract class TypeDescriptor extends Node
     public abstract Builder setDimensions(int dimensions);
 
     public abstract Builder setKind(Kind kind);
-
-    public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
-
-    public abstract Builder setJsFunctionImplementation(boolean isJsFunctionImplementation);
-
-    public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setNullable(boolean isNullable);
 
@@ -745,31 +756,16 @@ public abstract class TypeDescriptor extends Node
 
     abstract Optional<String> getJsNamespace();
 
-    abstract DescriptorFactory<MethodDescriptor> getConcreteJsFunctionMethodDescriptorFactory();
-
-    abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
-
-    abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
-
-    abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
-
-    abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-        getDeclaredMethodDescriptorsFactory();
-
-    abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
+    abstract TypeDeclaration getTypeDeclaration();
 
     abstract TypeDescriptor getEnclosingTypeDescriptor();
-
-    abstract boolean isNative();
 
     private String calculateJsNamespace() {
       TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
       if (enclosingTypeDescriptor != null) {
-        if (!isNative() && enclosingTypeDescriptor.isNative()) {
+        TypeDeclaration typeDeclaration = getTypeDeclaration();
+        boolean isNative = typeDeclaration != null && typeDeclaration.isNative();
+        if (!isNative && enclosingTypeDescriptor.isNative()) {
           // When there is a type nested within a native type, it's important not to generate a name
           // like "Array.1" (like would happen if the outer native type was claiming to be native
           // Array and the nested type was anonymous) since this is almost guaranteed to collide
@@ -788,6 +784,7 @@ public abstract class TypeDescriptor extends Node
 
     abstract TypeDescriptor autoBuild();
 
+    @SuppressWarnings("ReferenceEquality")
     public TypeDescriptor build() {
       if (!getSimpleJsName().isPresent()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
