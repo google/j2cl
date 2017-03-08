@@ -7,6 +7,7 @@ public class Tester516 {
 
   @SuppressWarnings("unchecked")
   static class C1 implements I1 {
+    C1() {}
     @SuppressWarnings("MissingOverride")
     public String get(String value) {
       return "C1.get";

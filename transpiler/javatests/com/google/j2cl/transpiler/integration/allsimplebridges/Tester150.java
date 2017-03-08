@@ -8,6 +8,7 @@ public class Tester150 {
   }
 
   static class C1<T> {
+    C1() {}
     public String get(T value) {
       return "C1.get";
     }
@@ -15,6 +16,7 @@ public class Tester150 {
 
   @SuppressWarnings("unchecked")
   static class C2 extends C1 implements I1 {
+    C2() {}
     @SuppressWarnings("MissingOverride")
     public String get(Object value) {
       return "C2.get";

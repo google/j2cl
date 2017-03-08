@@ -3,6 +3,7 @@ package com.google.j2cl.transpiler.integration.allsimplebridges;
 public class Tester769 {
   @SuppressWarnings("unchecked")
   static class C1 {
+    C1() {}
     @SuppressWarnings("MissingOverride")
     public String get(String value) {
       return "C1.get";

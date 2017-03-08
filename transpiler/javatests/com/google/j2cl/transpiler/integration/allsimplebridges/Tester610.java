@@ -8,7 +8,9 @@ public class Tester610 {
   }
 
   @SuppressWarnings("unchecked")
-  static class C1 implements I1 {}
+  static class C1 implements I1 {
+    C1() {}
+  }
 
   @SuppressWarnings("unchecked")
   public static void test() {

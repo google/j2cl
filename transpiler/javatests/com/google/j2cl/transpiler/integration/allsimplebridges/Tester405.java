@@ -2,6 +2,7 @@ package com.google.j2cl.transpiler.integration.allsimplebridges;
 
 public class Tester405 {
   static class C1<T> {
+    C1() {}
     public String get(T value) {
       return "C1.get";
     }
@@ -9,6 +10,7 @@ public class Tester405 {
 
   @SuppressWarnings("unchecked")
   static class C2 extends C1 {
+    C2() {}
     @SuppressWarnings("MissingOverride")
     public String get(Object value) {
       return "C2.get";

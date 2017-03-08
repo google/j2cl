@@ -11,13 +11,16 @@ public class Tester253 {
   }
 
   static class C1 {
+    C1() {}
     public String get(Object value) {
       return "C1.get";
     }
   }
 
   @SuppressWarnings("unchecked")
-  static class C2 extends C1 implements I1 {}
+  static class C2 extends C1 implements I1 {
+    C2() {}
+  }
 
   @SuppressWarnings("unchecked")
   public static void test() {

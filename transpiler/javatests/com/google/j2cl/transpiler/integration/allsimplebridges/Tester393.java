@@ -5,11 +5,13 @@ import jsinterop.annotations.JsType;
 public class Tester393 {
   @JsType
   abstract static class C1 {
+    C1() {}
     public abstract String get(Object value);
   }
 
   @SuppressWarnings("unchecked")
   static class C2 extends C1 {
+    C2() {}
     @SuppressWarnings("MissingOverride")
     public String get(Object value) {
       return "C2.get";
