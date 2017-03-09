@@ -845,8 +845,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + " cannot have inconsistent types.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testJsPropertySuperCallFails() throws Exception {
+  public void testJsPropertySuperCallSucceeds() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -857,8 +856,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy extends Super {",
             "  public int m() { return super.getX(); }",
             "}")
-        .assertCompileFails(
-            "Line 9: Cannot call property accessor 'int EntryPoint.Super.getX()' via super.");
+        .assertCompileSucceeds();
   }
 
   public void testJsPropertyOnStaticMethodFails() throws Exception {
@@ -2093,13 +2091,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void o() {}",
             "  public native void p() /*-{}-*/;",
             "}",
+            "@JsType(isNative=true) class NativeClassWithInitializer {",
+            "  {}",
+            "}",
             "@JsType(isNative=true) class NativeType {}",
             "interface A { @JsMethod(name=\"something\") int hashCode(); }",
             "class SomeClass extends NativeType implements A {",
             "  public int hashCode() { return 0; }",
-            "}",
-            "interface B { int hashCode(); }",
-            "class SomeClass2 extends NativeType implements B {",
             "}",
             "@JsType(isNative=true) class NativeTypeWithHashCode {",
             "  public native int hashCode();",
@@ -2121,20 +2119,31 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Native JsType method 'void Buggy.o()' should be native or abstract.",
             "Native JsType field 'int Buggy.t' cannot have initializer.",
             "Native JsType field 'int Buggy.g' cannot have initializer.",
+            "Native JsType 'NativeClassWithInitializer' cannot have initializer",
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
             "Native JsType method 'String NativeTypeWithBridge.foo()' should be native or abstract."
-
             // TODO(b/27597597): Finalize checker implementation and enable this test.
-            //  "Line 9: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-            //  "Line 26: Native JsType subclass 'EntryPoint.SomeClass2' can not implement "
-            //      + "interface 'EntryPoint.B' that declares method 'hashCode' inherited "
-            //      + "from java.lang.Object.",
             //  "Line 29: 'int EntryPoint.NativeTypeWithHashCode.hashCode()' "
             //      + "(exposed by 'EntryPoint.SomeClass3') cannot be assigned a different "
-            //      + "JavaScript name than the method it overrides."
             );
+  }
+
+  public void testNativeJsTypeImplementingJavaLangObjectMethodsSucceeds() throws Exception {
+    compile(
+            "NativeType",
+            "import jsinterop.annotations.JsIgnore;",
+            "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsMethod;",
+            "@JsType(isNative=true) class NativeType {}",
+            "interface B { int hashCode(); }",
+            "class SomeClass2 extends NativeType implements B {",
+            "}",
+            "@JsType(isNative=true) class NativeTypeWithHashCode {",
+            "  public native int hashCode();",
+            "}")
+        .assertCompileSucceeds();
   }
 
   public void testSubclassOfNativeJsTypeBadMembersFails() throws Exception {
