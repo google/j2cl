@@ -101,6 +101,7 @@ def integration_test(name,
       javacopts=[
           "-source 8",
           "-target 8",
+          "-Xep:EqualsIncompatibleType:OFF",
           "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
           "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
           "-Xep:SelfEquality:OFF",
