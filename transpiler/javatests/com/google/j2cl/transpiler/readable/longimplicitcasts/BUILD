@@ -12,4 +12,5 @@ load(
 readable_example(
     name = "longimplicitcasts",
     srcs = glob(["*.java"]),
+    javacopts = ["-Xep:IdentityBinaryExpression:OFF"],
 )

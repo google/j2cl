@@ -49,6 +49,7 @@ def readable_example(
             "-source 8",
             "-target 8",
             "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
+            "-Xep:IdentityBinaryExpression:OFF",
         ] + javacopts,
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,

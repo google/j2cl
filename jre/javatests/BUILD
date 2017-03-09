@@ -14,6 +14,8 @@ j2cl_mirror_from_gwt(
     testonly = 1,
     generate_build_test = False,
     javacopts = [
+        "-Xep:CheckReturnValue:OFF",
+        "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
@@ -50,9 +52,11 @@ java_test(
         ":java_emul_internal",
     ],
     javacopts = [
+        "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
+        "-Xep:ReturnValueIgnored:OFF",
     ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
