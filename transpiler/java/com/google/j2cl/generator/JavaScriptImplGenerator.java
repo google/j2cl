@@ -160,11 +160,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String path = eagerImport.getImplModulePath();
       String previousAlias = aliasesByPath.get(path);
       if (previousAlias == null) {
-        sourceBuilder.appendln("let " + alias + " = goog.require('" + path + "');");
+        sourceBuilder.appendln("const " + alias + " = goog.require('" + path + "');");
         aliasesByPath.put(path, alias);
       } else {
         // Do not goog.require second time to avoid JsCompiler warnings.
-        sourceBuilder.appendln("let " + alias + " = " + previousAlias + ";");
+        sourceBuilder.appendln("const " + alias + " = " + previousAlias + ";");
       }
     }
     if (!Iterables.isEmpty(eagerImports)) {
