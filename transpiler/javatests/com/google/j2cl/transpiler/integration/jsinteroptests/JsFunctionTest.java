@@ -28,6 +28,7 @@ public class JsFunctionTest extends MyTestCase {
     test.testJsFunctionSuccessiveCalls();
     test.testJsFunctionViaFunctionMethods();
     test.testGetClass_jsFunction();
+    test.testJsFunctionWithVarArgs();
   }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
@@ -356,6 +357,36 @@ public class JsFunctionTest extends MyTestCase {
     assertEquals(MyJsFunctionInterface.class, unoptimizableInner.getClass());
   }
 
+  @JsFunction
+  interface JsFunctionWithVarargs {
+    int f(int n, int... numbers);
+  }
+
+  static final class JsFunctionWithVarargsOptimizable implements JsFunctionWithVarargs {
+    @Override
+    public int f(int n, int... numbers) {
+      return numbers[n];
+    }
+  }
+
+  static final class JsFunctionWithVarargsNonOptimizable implements JsFunctionWithVarargs {
+    @Override
+    public int f(int n, int... numbers) {
+      return accum = numbers[n];
+    }
+
+    int accum = 0;
+  }
+
+  public void testJsFunctionWithVarArgs() {
+    assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsOptimizable()).f(1, 1, 3));
+    assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsNonOptimizable()).f(1, 1, 3));
+    // TODO(b/36124094): uncomment tests when bug is fixed.
+    // assertEquals(3, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n]).f(1, 1, 3));
+    // assertEquals(3, ((JsFunctionWithVarargs) (int n, int... numbers) -> numbers[n]).f(1, 1, 3));
+    // assertEquals(3, ((JsFunctionWithVarargs) (int n, int[] numbers) -> numbers[n]).f(1, 1, 3));
+  }
+
   // uncomment when Java8 is supported.
   // public void testJsFunctionLambda_JS() {
   //   MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };
@@ -375,12 +406,6 @@ public class JsFunctionTest extends MyTestCase {
   //   assertEquals(10, impl.foo(10));
   //   assertEquals(10, callAsFunction(impl, 10));
   // }
-
-  public void assertJsTypeHasFields(Object obj, String... fields) {
-    for (String field : fields) {
-      assertTrue("Field '" + field + "' should be exported", hasField(obj, field));
-    }
-  }
 
   public void assertJsTypeDoesntHaveFields(Object obj, String... fields) {
     for (String field : fields) {

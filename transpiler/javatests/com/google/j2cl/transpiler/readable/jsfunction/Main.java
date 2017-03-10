@@ -71,6 +71,7 @@ public class Main {
     return collected.toArray(generator.apply(collected.size()));
   }
 
+  @SuppressWarnings("ClassCanBeStatic")
   class SomeClass<T> {
     public void testJsFunctionWithClassCapture() {
       Function<Object, Object> f = object -> new ArrayList<T>();
@@ -78,23 +79,12 @@ public class Main {
   }
 
   @JsFunction
-  interface JsFunctionVarags {
+  interface JsFunctionVarargs {
     int m(int i, int... numbers);
   }
 
-  static final class JsFunctionVaragsImpl implements JsFunctionVarags {
-    @Override
-    public int m(int i, int... numbers) {
-      int sum = i;
-      for (int number : numbers) {
-        sum += number;
-      }
-      return sum;
-    }
-  }
-
-  void testJsFunctionVarargs() {
-    JsFunctionVarags f =
+  JsFunctionVarargs testJsFunctionVarargs() {
+    JsFunctionVarargs f =
         (i, numbers) -> {
           int sum = i;
           for (int number : numbers) {
@@ -102,6 +92,20 @@ public class Main {
           }
           return sum;
         };
+    return f;
+  }
+
+  JsFunctionVarargs testJsFunctionVarargsInnerClass() {
+    return new JsFunctionVarargs() {
+      @Override
+      public int m(int i, int... numbers) {
+        int sum = i;
+        for (int number : numbers) {
+          sum += number;
+        }
+        return sum;
+      }
+    };
   }
 
   @JsFunction

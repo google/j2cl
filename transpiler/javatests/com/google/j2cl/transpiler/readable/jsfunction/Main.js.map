@@ -134,14 +134,14 @@
 [List<T> collected = null;] => [let collected = null;]
 [collected] => [collected] "collected"
 [return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));]
-[void testJsFunctionVarargs() {
-    JsFunctionVarags f =
-...        };
+[JsFunctionVarargs testJsFunctionVarargs() {
+    JsFunctionVarargs f =
+...    return f;
   }] => [/**
-   * @return {void}
-...    });
+   * @return {?function(number, ...number):number}
+...    return f;
   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
-[JsFunctionVarags f =
+[JsFunctionVarargs f =
         (i, numbers) -> {
           int sum = i;
           for (int number : numbers) {
@@ -164,6 +164,45 @@
 [for (int number : numbers) {
             sum += number;
           }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let number$1$ = $array[$index];
+        sum += number$1$;
+      }]
+[UNKNOWN] => [let number$1$ = $array[$index];]
+[number] => [number$1$] "number"
+[sum += number;] => [sum += number$1$;]
+[return sum;] => [return sum;]
+[return f;] => [return f;]
+[JsFunctionVarargs testJsFunctionVarargsInnerClass() {
+    return new JsFunctionVarargs() {
+...    };
+  }] => [/**
+   * @return {?function(number, ...number):number}
+...    });
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
+[return new JsFunctionVarargs() {
+      @Override
+      public int m(int i, int... numbers) {
+        int sum = i;
+        for (int number : numbers) {
+          sum += number;
+        }
+        return sum;
+      }
+    };] => [return ((/** number */ i, /** Array<number> */ numbers) =>{
+      let sum = i;
+      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let number$1$ = $array[$index];
+        sum += number$1$;
+      }
+      return sum;
+    });]
+[i] => [i] "i"
+[numbers] => [numbers] "numbers"
+[int sum = i;] => [let sum = i;]
+[sum] => [sum] "sum"
+[for (int number : numbers) {
+          sum += number;
+        }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];
         sum += number$1$;
       }]

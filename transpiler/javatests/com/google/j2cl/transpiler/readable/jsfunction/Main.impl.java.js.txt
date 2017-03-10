@@ -12,6 +12,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let com_google_j2cl_transpiler_readable_jsfunction_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
+let JsFunctionVarargs = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarargs$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let MyJsFunctionInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
@@ -157,11 +158,27 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @return {void}
+   * @return {?function(number, ...number):number}
    * @public
    */
   m_testJsFunctionVarargs___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
     let f = ((/** number */ i, /** Array<number> */ numbers) => {
+      let sum = i;
+      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+        let number$1$ = $array[$index];
+        sum += number$1$;
+      }
+      return sum;
+    });
+    return f;
+  }
+
+  /**
+   * @return {?function(number, ...number):number}
+   * @public
+   */
+  m_testJsFunctionVarargsInnerClass___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
+    return ((/** number */ i, /** Array<number> */ numbers) => {
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];
@@ -211,6 +228,8 @@ class Main extends java_lang_Object {
     com_google_j2cl_transpiler_readable_jsfunction_Main_Function =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.jsfunction.Main.Function$impl');
+    JsFunctionVarargs = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionVarargs$impl');
     MyJsFunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
     MyJsFunctionInterface = goog.module.get(

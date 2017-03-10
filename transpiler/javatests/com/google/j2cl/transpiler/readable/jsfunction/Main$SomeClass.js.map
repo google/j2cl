@@ -1,12 +1,12 @@
-[class SomeClass<T> {
-    public void testJsFunctionWithClassCapture() {
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
 ...    }
   }] => [/**
  * @template C_SomeClass_T
 ...exports = SomeClass;
 ] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass"
-[class SomeClass<T> {
-    public void testJsFunctionWithClassCapture() {
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
 ...    }
   }] => [/**
    * Defines instance fields.
@@ -15,8 +15,8 @@
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass = null;]
-[class SomeClass<T> {
-    public void testJsFunctionWithClassCapture() {
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
 ...    }
   }] => [/**
    * A particular Java constructor as a factory method.
@@ -26,8 +26,8 @@
 [UNKNOWN] => [let $instance = new SomeClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass__com_google_j2cl_transpiler_readable_jsfunction_Main($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class SomeClass<T> {
-    public void testJsFunctionWithClassCapture() {
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
 ...    }
   }] => [/**
    * Initializes instance fields for a particular Java constructor.
