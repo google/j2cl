@@ -29,6 +29,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -308,25 +309,31 @@ public class JsDocNameUtils {
     MethodDescriptor jsFunctionMethodDescriptor =
         checkNotNull(typeDescriptor.getConcreteJsFunctionMethodDescriptor());
 
-    int parameterIndex = 0;
-    int parameterCount = jsFunctionMethodDescriptor.getParameterTypeDescriptors().size();
     List<String> parameterTypesList = new ArrayList<>();
-    for (TypeDescriptor parameterTypeDescriptor :
-        jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {
-      String parameterTypeAnnotation;
-      if (jsFunctionMethodDescriptor.isJsMethodVarargs() && parameterIndex == parameterCount - 1) {
-        // variable parameters
+    int parameterCount = jsFunctionMethodDescriptor.getParameterTypeDescriptors().size();
+    for (int i = 0; i < parameterCount; i++) {
+      TypeDescriptor parameterTypeDescriptor =
+          jsFunctionMethodDescriptor.getParameterTypeDescriptors().get(i);
+
+      boolean isVarargsParameter =
+          jsFunctionMethodDescriptor.isJsMethodVarargs() && i == parameterCount - 1;
+      boolean isJsOptionalParameter = jsFunctionMethodDescriptor.isParameterOptional(i);
+
+      if (isVarargsParameter) {
         checkArgument(parameterTypeDescriptor.isArray());
-        String typeName =
-            JsDocNameUtils.getJsDocName(
-                parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
-        parameterTypeAnnotation = "..." + typeName;
+        parameterTypesList.add(
+            "..."
+                + JsDocNameUtils.getJsDocName(
+                    parameterTypeDescriptor.getComponentTypeDescriptor(), environment));
       } else {
-        parameterTypeAnnotation = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);
+        parameterTypesList.add(
+            J2clUtils.format(
+                "%s%s",
+                JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment),
+                isJsOptionalParameter ? "=" : ""));
       }
-      parameterIndex++;
-      parameterTypesList.add(parameterTypeAnnotation);
     }
+
     return String.format(
         "function(%s):%s",
         Joiner.on(", ").join(parameterTypesList),
