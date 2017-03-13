@@ -85,7 +85,7 @@ public class Main {
 
   JsFunctionVarargs testJsFunctionVarargs() {
     JsFunctionVarargs f =
-        (i, numbers) -> {
+        (int i, int... numbers) -> {
           int sum = i;
           for (int number : numbers) {
             sum += number;

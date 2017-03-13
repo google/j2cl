@@ -142,7 +142,7 @@
 ...    return f;
   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [JsFunctionVarargs f =
-        (i, numbers) -> {
+        (int i, int... numbers) -> {
           int sum = i;
           for (int number : numbers) {
             sum += number;

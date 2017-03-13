@@ -1466,6 +1466,7 @@ public class CompilationUnitBuilder {
       final TypeDeclaration original = type.getDeclaration();
       type.accept(
           new AbstractRewriter() {
+            @SuppressWarnings("ReferenceEquality")
             @Override
             public Node rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
               if (typeDeclaration == original) {
@@ -1474,6 +1475,7 @@ public class CompilationUnitBuilder {
               return typeDeclaration;
             }
 
+            @SuppressWarnings("ReferenceEquality")
             @Override
             public Node rewriteTypeDescriptor(TypeDescriptor typeDescriptor) {
               if (typeDescriptor == original.getUnsafeTypeDescriptor()) {
@@ -1971,12 +1973,12 @@ public class CompilationUnitBuilder {
     private Variable convert(
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
       Variable variable = createVariable(variableDeclaration);
-      // Union types are only relevant in multi catch variable declarations, which appear in the AST
-      // as a SingleVariableDeclaration.
-      variable.setTypeDescriptor(
-          variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType
-              ? convert((org.eclipse.jdt.core.dom.UnionType) variableDeclaration.getType())
-              : JdtUtils.createTypeDescriptor(variableDeclaration.getType().resolveBinding()));
+      if (variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType) {
+        // Union types are only relevant in multi catch variable declarations, which appear in the
+        // AST as a SingleVariableDeclaration.
+        variable.setTypeDescriptor(
+            convert((org.eclipse.jdt.core.dom.UnionType) variableDeclaration.getType()));
+      }
       return variable;
     }
 
