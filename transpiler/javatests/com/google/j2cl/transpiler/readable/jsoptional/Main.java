@@ -27,6 +27,8 @@ public class Main {
       return args[0];
     }
   }
+
+  public void testFunction(Function f) {}
 }
 
 @JsType
