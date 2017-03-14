@@ -147,11 +147,12 @@ public class JsConstructorClass {
     }
 
     static void subNativeInvocation() {
-      SubVarargs s1 = new SubVarargs(2);
-      SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);
+      SubVarargs unusedS1 = new SubVarargs(2);
+      SubVarargs unusedS2 = new SubVarargs(new Object(), 1, 2, 3);
     }
   }
 
+  @SuppressWarnings("ClassCanBeStatic")
   public class InstanceVarargs extends A {
     @JsConstructor
     public InstanceVarargs(int... args) {
@@ -170,7 +171,7 @@ public class JsConstructorClass {
     }
 
     public JsConstructorSubtypeOfRegularType() {
-      super(new Object());
+      this(new Object());
     }
   }
 }

@@ -58,15 +58,15 @@
   }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs.<ctor>"
 [j] => [j] "j"
 [static void subNativeInvocation() {
-      SubVarargs s1 = new SubVarargs(2);
-      SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);
+      SubVarargs unusedS1 = new SubVarargs(2);
+      SubVarargs unusedS2 = new SubVarargs(new Object(), 1, 2, 3);
     }] => [/**
    * @return {void}
-...    let s2 = SubVarargs.$create__java_lang_Object__arrayOf_int(java_lang_Object.$create__(), /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
+...    let unusedS2 = SubVarargs.$create__java_lang_Object__arrayOf_int(java_lang_Object.$create__(), /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
   }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs.subNativeInvocation"
 [UNKNOWN] => [SubVarargs.$clinit();]
-[SubVarargs s1 = new SubVarargs(2);] => [let s1 = SubVarargs.$create__int(2);]
-[s1] => [s1] "s1"
-[SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);] => [let s2 = SubVarargs.$create__java_lang_Object__arrayOf_int(java_lang_Object.$create__(), /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));]
-[s2] => [s2] "s2"
+[SubVarargs unusedS1 = new SubVarargs(2);] => [let unusedS1 = SubVarargs.$create__int(2);]
+[unusedS1] => [unusedS1] "unusedS1"
+[SubVarargs unusedS2 = new SubVarargs(new Object(), 1, 2, 3);] => [let unusedS2 = SubVarargs.$create__java_lang_Object__arrayOf_int(java_lang_Object.$create__(), /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));]
+[unusedS2] => [unusedS2] "unusedS2"
 [UNKNOWN] => [Varargs.$clinit();]

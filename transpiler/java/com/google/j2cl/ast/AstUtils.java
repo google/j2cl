@@ -92,7 +92,7 @@ public class AstUtils {
       TypeDescriptor enclosingClassTypeDescriptor,
       TypeDescriptor... parameterTypeDescriptors) {
     JsInfo jsInfo =
-        isDefaultConstructorJsConstructior(enclosingClassTypeDescriptor)
+        isDefaultConstructorJsConstructor(enclosingClassTypeDescriptor)
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
     return MethodDescriptor.newBuilder()
@@ -109,7 +109,7 @@ public class AstUtils {
   }
 
   /** Return true if the default constructor is a JsConstructor. */
-  public static boolean isDefaultConstructorJsConstructior(TypeDescriptor typeDescriptor) {
+  public static boolean isDefaultConstructorJsConstructor(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isJsType()
         && (typeDescriptor.isNative()
             || getDefaultConstructorVisibility(typeDescriptor).isPublic());
@@ -718,20 +718,6 @@ public class AstUtils {
         .addStatements(method.getBody().getStatements())
         .setSourcePosition(method.getSourcePosition())
         .build();
-  }
-
-  /**
-   * Returns the constructor that is being delegated to (the primary constructor) in a JsConstructor
-   * class or in a child class of a JsConstructor class. This constructor will be generated as the
-   * real ES6 constructor.
-   */
-  public static Method getPrimaryConstructor(Type type) {
-    for (Method method : type.getMethods()) {
-      if (method.isPrimaryConstructor()) {
-        return method;
-      }
-    }
-    return null;
   }
 
   /**
