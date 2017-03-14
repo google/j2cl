@@ -15,6 +15,7 @@ j2cl_mirror_from_gwt(
     generate_build_test = False,
     javacopts = [
         "-Xep:CheckReturnValue:OFF",
+        "-Xep:ReturnValueIgnored:OFF",
         "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
