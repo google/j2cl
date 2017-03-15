@@ -106,6 +106,7 @@ public class Main {
   }
 
   @JsType
+  @SuppressWarnings("ClassCanBeStatic")
   abstract class N implements M {
     @Override
     public abstract B getB();
@@ -119,6 +120,27 @@ public class Main {
       return b;
     }
   }
+
+  interface P {
+    String getKey();
+  }
+
+  @JsType
+  @SuppressWarnings("ClassCanBeStatic")
+  abstract class Q implements P {
+    @Override
+    public abstract String getKey();
+  }
+
+  @JsType
+  abstract class R extends Q {
+    @Override
+    public String getKey() {
+      return null;
+    }
+  }
+
+  class S extends R {}
 
   public static void test() {
     A a = new A<Integer>();
