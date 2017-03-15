@@ -48,12 +48,8 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  method2(s1, d, i) {
-    let $var_args_copy = /**@type {!Array<?boolean>} */ (
-        $Arrays.$create([arguments.length - 2], Boolean));
-    for (let $i = 0; $i < arguments.length - 2; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 2]);
-    }
+  method2(s1, d, ...i) {
+    $Arrays.$stampType(i, Boolean, 1);
   }
 
   /**

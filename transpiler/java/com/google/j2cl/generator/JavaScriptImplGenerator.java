@@ -70,8 +70,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append(Joiner.on(" ").skipNulls().join(staticQualifier, methodName));
     sourceBuilder.append("(");
     String separator = "";
+    Variable varargsParameter =
+        methodDescriptor.isJsMethodVarargs() ? Iterables.getLast(method.getParameters()) : null;
     for (Variable parameter : method.getParameters()) {
       sourceBuilder.append(separator);
+      if (parameter == varargsParameter) {
+        sourceBuilder.append("...");
+      }
       sourceBuilder.emitWithOptionalNamedMapping(
           parameter.getSourcePosition(),
           () -> sourceBuilder.append(environment.aliasForVariable(parameter)));

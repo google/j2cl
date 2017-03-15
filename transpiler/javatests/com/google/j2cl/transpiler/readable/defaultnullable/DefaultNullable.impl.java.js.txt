@@ -111,12 +111,8 @@ class DefaultNullable extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m3(args) {
-    let $var_args_copy = /**@type {!Array<?string>} */ (
-        $Arrays.$create([arguments.length], java_lang_String));
-    for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }
+  m3(...args) {
+    $Arrays.$stampType(args, java_lang_String, 1);
   }
 
   /**

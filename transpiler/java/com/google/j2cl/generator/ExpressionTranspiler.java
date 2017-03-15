@@ -158,14 +158,22 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
+        Variable varargsParameter =
+            expression.isJsVarargs() ? Iterables.getLast(expression.getParameters()) : null;
         sourceBuilder.append("((");
         String separator = "";
         for (Variable parameter : expression.getParameters()) {
           sourceBuilder.append(separator);
-          sourceBuilder.append("/** ");
-          sourceBuilder.append(
-              JsDocNameUtils.getJsDocName(parameter.getTypeDescriptor(), environment));
-          sourceBuilder.append(" */ ");
+          if (parameter != varargsParameter) {
+            sourceBuilder.append("/** ");
+            sourceBuilder.append(
+                JsDocNameUtils.getJsDocName(parameter.getTypeDescriptor(), environment));
+            sourceBuilder.append(" */ ");
+          } else {
+            // There is no JsDoc syntax for inline annotations on varargs parameters, so
+            // do not emit it here.
+            sourceBuilder.append("...");
+          }
           process(parameter);
           separator = ", ";
         }
@@ -244,6 +252,7 @@ public class ExpressionTranspiler {
         sourceBuilder.append(jsPropertyName);
       }
 
+      @SuppressWarnings("ReferenceEquality")
       private boolean shouldRenderQualifier(Expression qualifier) {
         if (qualifier == null) {
           return false;

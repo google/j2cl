@@ -25,16 +25,12 @@
 [@JsMethod
   public void method2(String s1, @JsOptional Double d, Boolean... i) {}] => [/**
    * @param {?string} s1
-...    }
+...    $Arrays.$stampType(i, Boolean, 1);
   }] "com.google.j2cl.transpiler.readable.jsoptional.Main.method2"
 [s1] => [s1] "s1"
 [d] => [d] "d"
 [i] => [i] "i"
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<?boolean>} */ ($Arrays.$create([arguments.length - 2], Boolean));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 2; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 2]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 2]);]
+[UNKNOWN] => [$Arrays.$stampType(i, Boolean, 1);]
 [@JsConstructor
   public Main(@JsOptional String a) {}] => [/**
    * Initializes instance fields for a particular Java constructor.

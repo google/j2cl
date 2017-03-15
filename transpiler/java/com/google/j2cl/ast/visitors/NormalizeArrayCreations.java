@@ -53,7 +53,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
   private static Expression rewriteArrayCreate(NewArray newArrayExpression) {
     checkArgument(newArrayExpression.getArrayLiteral() == null);
 
-    if (shouldBeUntypedArray(newArrayExpression)) {
+    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);
       Expression dimensionExpression =
           Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
@@ -105,7 +105,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
   private static Expression rewriteArrayInit(NewArray newArrayExpression) {
     checkArgument(newArrayExpression.getArrayLiteral() != null);
 
-    if (shouldBeUntypedArray(newArrayExpression)) {
+    if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
       checkState(newArrayExpression.getDimensionExpressions().size() == 1);
       return newArrayExpression.getArrayLiteral();
     }
@@ -163,10 +163,4 @@ public class NormalizeArrayCreations extends NormalizationPass {
     }
   }
 
-  /** Returns true for arrays where raw JavaScript array representation is enough. */
-  private static boolean shouldBeUntypedArray(NewArray newArrayExpression) {
-    return newArrayExpression.getDimensionExpressions().size() == 1
-        && (newArrayExpression.getLeafTypeDescriptor().isNative()
-            || TypeDescriptors.isJavaLangObject(newArrayExpression.getLeafTypeDescriptor()));
-  }
 }

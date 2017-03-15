@@ -22,19 +22,15 @@ class InstanceVarargs extends A {
    * @param {...number} args
    * @public
    */
-  constructor($outer_this, args) {
+  constructor($outer_this, ...args) {
     InstanceVarargs.$clinit();
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
+    $Arrays.$stampType(args, $int, 1);
     super();
     /** @public {JsConstructorClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs =
         null;
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int(
-        $outer_this, $var_args_copy);
+        $outer_this, args);
   }
 
   /**

@@ -111,12 +111,8 @@ class Nullability extends java_lang_Object {
    * @return {?string}
    * @public
    */
-  m3(a, args) {
-    let $var_args_copy = /**@type {!Array<string>} */ (
-        $Arrays.$create([arguments.length - 1], java_lang_String));
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
+  m3(a, ...args) {
+    $Arrays.$stampType(args, java_lang_String, 1);
     return null;
   }
 

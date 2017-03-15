@@ -21,14 +21,10 @@ class SubVarargsConstructorClass extends Object {
    * @param {...*} args
    * @public
    */
-  constructor(i, args) {
-    let $var_args_copy = new Array(arguments.length - 1);
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
-    super(...$Arrays.$checkNotNull($var_args_copy));
+  constructor(i, ...args) {
+    super(...$Arrays.$checkNotNull(args));
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
-        i, $var_args_copy);
+        i, args);
   }
 
   /**

@@ -60,14 +60,10 @@ class Main extends java_lang_Object {
    * @return {number}
    * @public
    */
-  static f1(multiplier, numbers) {
+  static f1(multiplier, ...numbers) {
     Main.$clinit();
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
-    return $var_args_copy.length + $var_args_copy[0] + multiplier;
+    $Arrays.$stampType(numbers, $int, 1);
+    return numbers.length + numbers[0] + multiplier;
   }
 
   /**
@@ -75,14 +71,10 @@ class Main extends java_lang_Object {
    * @return {number}
    * @public
    */
-  static f2(numbers) {
+  static f2(...numbers) {
     Main.$clinit();
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length], $int));
-    for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }
-    return $var_args_copy.length + $var_args_copy[0];
+    $Arrays.$stampType(numbers, $int, 1);
+    return numbers.length + numbers[0];
   }
 
   /**
@@ -91,14 +83,10 @@ class Main extends java_lang_Object {
    * @return {number}
    * @public
    */
-  f3(m, numbers) {
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
+  f3(m, ...numbers) {
+    $Arrays.$stampType(numbers, $int, 1);
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
-        m + $var_args_copy[1];
+        m + numbers[1];
   }
 
   /**
@@ -106,29 +94,21 @@ class Main extends java_lang_Object {
    * @return {number}
    * @public
    */
-  f4(numbers) {
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length], $int));
-    for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }
+  f4(...numbers) {
+    $Arrays.$stampType(numbers, $int, 1);
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
-        $var_args_copy[1];
+        numbers[1];
   }
 
   /**
    * @template M_T
-   * @param {...M_T} elements
+   * @param {...?} elements
    * @return {M_T}
    * @public
    */
-  static generics(elements) {
+  static generics(...elements) {
     Main.$clinit();
-    let $var_args_copy = new Array(arguments.length);
-    for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }
-    return $var_args_copy[0];
+    return elements[0];
   }
 
   /**
@@ -136,15 +116,10 @@ class Main extends java_lang_Object {
    * @return {Main}
    * @public
    */
-  static parameterizedType(elements) {
+  static parameterizedType(...elements) {
     Main.$clinit();
-    let $var_args_copy = /**@type {!Array<List<Main>>} */ (
-        $Arrays.$create([arguments.length], List));
-    for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }
-    return /**@type {Main} */ (
-        $Casts.to($var_args_copy[0].getAtIndex(0), Main));
+    $Arrays.$stampType(elements, List, 1);
+    return /**@type {Main} */ ($Casts.to(elements[0].getAtIndex(0), Main));
   }
 
   /**

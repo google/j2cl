@@ -53,12 +53,8 @@ class SubMain extends Main {
    * @return {number}
    * @public
    */
-  f3(m, numbers) {
-    let $var_args_copy = /**@type {!Array<number>} */ (
-        $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
+  f3(m, ...numbers) {
+    $Arrays.$stampType(numbers, $int, 1);
     let a = super.f3(1, 1, 2);
     a += super.f3(1);
     a += super.f3(1, 1, 2);

@@ -378,13 +378,37 @@ public class JsFunctionTest extends MyTestCase {
     int accum = 0;
   }
 
+  static class JsFunctionWithVarargsTestSuper {
+    int m() {
+      return 5;
+    }
+  }
+
+  static class JsFunctionWithVarargsTestSub extends JsFunctionWithVarargsTestSuper {
+    @Override
+    int m() {
+      return 3;
+    }
+
+    void test() {
+      // Access through super
+      assertEquals(8, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n] + super.m()).f(1, 1, 3));
+    }
+  }
+
+  int instanceField = 5;
   public void testJsFunctionWithVarArgs() {
     assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsOptimizable()).f(1, 1, 3));
     assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsNonOptimizable()).f(1, 1, 3));
-    // TODO(b/36124094): uncomment tests when bug is fixed.
-    // assertEquals(3, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n]).f(1, 1, 3));
-    // assertEquals(3, ((JsFunctionWithVarargs) (int n, int... numbers) -> numbers[n]).f(1, 1, 3));
-    // assertEquals(3, ((JsFunctionWithVarargs) (int n, int[] numbers) -> numbers[n]).f(1, 1, 3));
+    assertEquals(3, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n]).f(1, 1, 3));
+    assertEquals(3, ((JsFunctionWithVarargs) (int n, int... numbers) -> numbers[n]).f(1, 1, 3));
+    assertEquals(3, ((JsFunctionWithVarargs) (int n, int[] numbers) -> numbers[n]).f(1, 1, 3));
+    // Access through this (instanceField)
+    assertEquals(
+        8, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n] + instanceField).f(1, 1, 3));
+    // TODO(b/36129262): JsFunctionWithVarargsTestSub fails to load.
+    // Uncomment assertion when bug is fixed.
+    // new JsFunctionWithVarargsTestSub().test();
   }
 
   // uncomment when Java8 is supported.

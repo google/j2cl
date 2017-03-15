@@ -60,12 +60,8 @@ class AFunction extends java_lang_Object {
    * @return {*}
    * @public
    */
-  m_f1__int__arrayOf_java_lang_Object(i, args) {
-    let $var_args_copy = new Array(arguments.length - 1);
-    for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }
-    return $var_args_copy[i];
+  m_f1__int__arrayOf_java_lang_Object(i, ...args) {
+    return args[i];
   }
 
   /**

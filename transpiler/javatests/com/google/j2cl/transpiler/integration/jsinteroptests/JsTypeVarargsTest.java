@@ -16,6 +16,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     test.testVarargsCall_edgeCases();
     test.testVarargsCall_superCalls();
     test.testVarargsCall_sideEffectingInstance();
+    test.testVarargsCall_correctArrayType();
   }
 
   @JsMethod
@@ -257,5 +258,15 @@ public class JsTypeVarargsTest extends MyTestCase {
     Object[] params = new Object[] {object, null};
     assertSame(object, doSideEffect(object).varargsMethod(0, params));
     assertSame(1, sideEffectCount);
+  }
+
+  @JsFunction
+  interface JsStringConsumer {
+    void consume(String... strings);
+  }
+
+  public void testVarargsCall_correctArrayType() {
+    JsStringConsumer consumer = (strings) -> assertTrue(strings instanceof String[]);
+    consumer.consume("A", "B");
   }
 }

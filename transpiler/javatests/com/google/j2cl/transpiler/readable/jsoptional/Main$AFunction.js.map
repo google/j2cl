@@ -38,14 +38,9 @@
       return args[0];
     }] => [/**
    * @override
-...    return $var_args_copy[0];
+...    return args[0];
   }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.f1"
 [i] => [i] "i"
 [args] => [args] "args"
-[UNKNOWN] => [let $var_args_copy = new Array(arguments.length - 1);]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
-[return args[0];] => [return $var_args_copy[0];]
+[return args[0];] => [return args[0];]
 [UNKNOWN] => [java_lang_Object.$clinit();]

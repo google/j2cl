@@ -146,6 +146,20 @@ class Arrays {
   }
 
   /**
+   * @param {Array<*>} array
+   * @param {*} leafType
+   * @param {number} dimensionCount
+   * @return {void}
+   * @public
+   */
+  static $stampType(array, leafType, dimensionCount) {
+    array.leafType = leafType;
+    array.leafTypeIsInstance = leafType.$isInstance;
+    array.leafTypeIsAssignableFrom = leafType.$isAssignableFrom;
+    array.dimensionCount = dimensionCount;
+  }
+
+  /**
    * Sets the given value into the given index in the given array.
    *
    * @template T
@@ -213,7 +227,7 @@ class Arrays {
    * @param {Array<*>} otherArray
    * @public
    */
-  static $stampType(array, otherArray) {
+  static $copyType(array, otherArray) {
     var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
     var otherEnhancedArray = /** @type {Arrays.EnhancedArray_} */ (otherArray);
     enhancedArray.leafType = otherEnhancedArray.leafType;

@@ -41,91 +41,66 @@
     return numbers.length + numbers[0] + multiplier;
   }] => [/**
    * @param {number} multiplier
-...    return $var_args_copy.length + $var_args_copy[0] + multiplier;
+...    return numbers.length + numbers[0] + multiplier;
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [multiplier] => [multiplier] "multiplier"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
-[return numbers.length + numbers[0] + multiplier;] => [return $var_args_copy.length + $var_args_copy[0] + multiplier;]
+[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier;]
 [@JsMethod
   public static int f2(int... numbers) {
     return numbers.length + numbers[0];
   }] => [/**
    * @param {...number} numbers
-...    return $var_args_copy.length + $var_args_copy[0];
+...    return numbers.length + numbers[0];
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
-[return numbers.length + numbers[0];] => [return $var_args_copy.length + $var_args_copy[0];]
+[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[return numbers.length + numbers[0];] => [return numbers.length + numbers[0];]
 [@JsMethod
   public int f3(int m, int... numbers) {
     return this.field + m + numbers[1];
   }] => [/**
    * @param {number} m
-...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + $var_args_copy[1];
+...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
-[return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + $var_args_copy[1];]
+[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];]
 [@JsMethod
   public int f4(int... numbers) {
     return this.field + numbers[1];
   }] => [/**
    * @param {...number} numbers
-...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];
+...    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length], $int));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
-[return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];]
+[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];]
 [@JsMethod
   public static <T> T generics(T... elements) {
     return elements[0];
   }] => [/**
    * @template M_T
-...    return $var_args_copy[0];
+...    return elements[0];
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $var_args_copy = new Array(arguments.length);]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
-[return elements[0];] => [return $var_args_copy[0];]
+[return elements[0];] => [return elements[0];]
 [@JsMethod
   public static Main parameterizedType(List<Main>... elements) {
     return elements[0].get(0);
   }] => [/**
    * @param {...List<Main>} elements
-...    return /**@type {Main} */ ($Casts.to($var_args_copy[0].getAtIndex(0), Main));
+...    return /**@type {Main} */ ($Casts.to(elements[0].getAtIndex(0), Main));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<List<Main>>} */ ($Arrays.$create([arguments.length], List));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
-      $Arrays.$set($var_args_copy, $i, arguments[$i]);
-    }]
-[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
-[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.to($var_args_copy[0].getAtIndex(0), Main));]
+[UNKNOWN] => [$Arrays.$stampType(elements, List, 1);]
+[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.to(elements[0].getAtIndex(0), Main));]
 [public void testStaticMethodNotFirst() {
     // multiple arguments.
 ...    Main.f1(1, ints);

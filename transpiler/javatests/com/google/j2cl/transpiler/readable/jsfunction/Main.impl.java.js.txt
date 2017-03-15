@@ -161,7 +161,8 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunctionVarargs___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    let f = ((/** number */ i, /** Array<number> */ numbers) => {
+    let f = ((/** number */ i, ...numbers) => {
+      $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];
@@ -177,7 +178,8 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunctionVarargsInnerClass___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    return ((/** number */ i, /** Array<number> */ numbers) => {
+    return ((/** number */ i, ...numbers) => {
+      $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];

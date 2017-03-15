@@ -19,16 +19,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.AstUtilConstants;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.ForStatement;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
@@ -37,27 +32,23 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PostfixExpression;
-import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.VariableReference;
+import java.util.List;
 
 /**
- * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a prolog
+ * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a preamble
  * to varargs JsMethods.
  *
- * <p>At the method body, we copy the var arguments to a local array, and replaces reference to the
- * var parameter with reference to the local copy.
+ * <p>At the method body the array is stamped to have the correct Java runtime information.
  *
- * <p>At the call sites, array creation/literal is unwrapped as array literals, which are passed as
- * individual parameters. And array object is wrapped with other arguments and passed as a single
- * array of arguments, and invoked in the form of fn.apply().
+ * <p>At the call sites, array creation/literal the array is spread either statically (if it was an
+ * array literal) or at runtime using the ES6 spread (...) operator.
  *
  * <p>TODO: Optimize the copying away if only read access to vararg[i] and vararg.length happen in
  * the body.
@@ -65,162 +56,79 @@ import com.google.j2cl.ast.VariableReference;
 public class NormalizeJsVarargs extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeJsMethodsVarargs());
-    compilationUnit.accept(new NormalizeVarargsJsMethodCallsVisitor());
+    compilationUnit.accept(new AddJsVarargsPreambles());
+    compilationUnit.accept(new NormalizeJsVarargsCalls());
   }
 
   /**
-   * Normalizes varargs JsMethods, which includes
-   *
-   * <p>
-   * 1. Adding preamble to the method body to copy the var arguments to a local variable.
-   *
-   * <p>
-   * 2. Fixing references to the varargs parameter with references to the local variable.
+   * Adds the method preamble to stamp the varargs array with the correct type information if
+   * needed.
    */
-  private static class NormalizeJsMethodsVarargs extends AbstractRewriter {
-    private static final Variable ARGUMENTS_PARAMETER =
-        Variable.newBuilder()
-            .setName("arguments")
-            .setTypeDescriptor(TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1))
-            .setIsParameter(true)
-            .setIsRaw(true)
-            .build();
-    private static final TypeDescriptor primitiveInt = TypeDescriptors.get().primitiveInt;
-    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
-
-    private Variable varargsParameter = null;
-    /**
-     * Local variable that holds the elements of varargs array.
-     */
-    private Variable varargsLocalCopy = null;
-
+  private static class AddJsVarargsPreambles extends AbstractRewriter {
     @Override
-    public boolean shouldProcessMethod(Method method) {
-      varargsParameter = null;
-      varargsLocalCopy = null;
-      if (!method.getDescriptor().isJsMethodVarargs() || getCurrentType().isInterface()) {
-        return false;
+    public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
+      if (!functionExpression.isJsVarargs()) {
+        return functionExpression;
       }
-      varargsParameter = Iterables.getLast(method.getParameters());
-      varargsLocalCopy =
-          Variable.newBuilder()
-              .setName("$var_args_copy")
-              .setTypeDescriptor(varargsParameter.getTypeDescriptor())
-              .build();
-      return true;
-    }
-
-    @Override
-    public Node rewriteVariableReference(VariableReference variableReference) {
-      if (variableReference.getTarget() == varargsParameter) {
-        return varargsLocalCopy.getReference();
-      }
-      return variableReference;
+      maybeAddVarargsPreamble(functionExpression.getParameters(), functionExpression.getBody());
+      return functionExpression;
     }
 
     @Override
     public Node rewriteMethod(Method method) {
-      checkArgument(method.getDescriptor().isJsMethodVarargs());
+      if (!method.getDescriptor().isJsMethodVarargs() || getCurrentType().isInterface()) {
+        return method;
+      }
 
-      // copy the varargs array.
-      //   <Type>[] $var_args_copy = new <Type>[arguments.length - offset];
-      //   for (int $i = 0; $i < arguments.length - offset; i++) {
-      //     $var_args_copy[i] = arguments[i + offset];
-      //   }
-
-      // (1) $var_args_copy = new VarArgsType[arguments.length - varargsIndex];
-      checkArgument(!method.getParameters().isEmpty());
-      int varargsIndex = method.getParameters().size() - 1;
-      Expression newArray =
-          NewArray.newBuilder()
-              .setTypeDescriptor(varargsParameter.getTypeDescriptor())
-              .setDimensionExpressions(createArraySizeExpression(varargsIndex))
-              .setArrayLiteral(null)
-              .build();
-      Statement variableDeclaration =
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(varargsLocalCopy, newArray)
-              .build()
-              .makeStatement();
-
-      // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
-      Variable loopVariable =
-          Variable.newBuilder().setName("$i").setTypeDescriptor(primitiveInt).build();
-
-      Expression indexExpression =
-          varargsIndex == 0
-              ? loopVariable.getReference()
-              : BinaryExpression.newBuilder()
-                  .setTypeDescriptor(primitiveInt)
-                  .setLeftOperand(loopVariable.getReference())
-                  .setOperator(BinaryOperator.PLUS)
-                  .setRightOperand(new NumberLiteral(primitiveInt, varargsIndex))
-                  .build();
-      Statement body =
-          AstUtils.createArraySetExpression(
-                  varargsLocalCopy.getReference(),
-                  loopVariable.getReference(),
-                  ArrayAccess.newBuilder()
-                      .setArrayExpression(ARGUMENTS_PARAMETER.getReference())
-                      .setIndexExpression(indexExpression)
-                      .build())
-              .makeStatement();
-
-      // (3). (for statement) for ($i = 0; i < arguments.length - idx; i++) { ... }
-      Statement forStatement =
-          ForStatement.newBuilder()
-              .setConditionExpression(
-                  BinaryExpression.newBuilder()
-                      .setTypeDescriptor(primitiveBoolean)
-                      .setLeftOperand(loopVariable.getReference())
-                      .setOperator(BinaryOperator.LESS)
-                      .setRightOperand(createArraySizeExpression(varargsIndex))
-                      .build())
-              .setBody(body)
-              .setInitializers(
-                  VariableDeclarationExpression.newBuilder()
-                      .addVariableDeclaration(loopVariable, new NumberLiteral(primitiveInt, 0))
-                      .build())
-              .setUpdates(
-                  PostfixExpression.newBuilder()
-                      .setTypeDescriptor(primitiveInt)
-                      .setOperand(loopVariable.getReference())
-                      .setOperator(PostfixOperator.INCREMENT)
-                      .build())
-              .build();
-
-      return Method.Builder.from(method)
-          .addStatement(0, variableDeclaration)
-          .addStatement(1, forStatement)
-          .build();
+      maybeAddVarargsPreamble(method.getParameters(), method.getBody());
+      return method;
     }
 
-    private static Expression createArraySizeExpression(int varargsIndex) {
-      FieldAccess argumentsLengthReference =
-          FieldAccess.Builder.from(AstUtilConstants.getArrayLengthFieldDescriptor())
-              .setQualifier(ARGUMENTS_PARAMETER.getReference())
+    private static void maybeAddVarargsPreamble(List<Variable> parameters, Block body) {
+      checkArgument(!parameters.isEmpty());
+      Variable varargsParameter = Iterables.getLast(parameters);
+      if (varargsParameter.getTypeDescriptor().isUntypedArray()) {
+        return;
+      }
+
+      // TODO(b/36180242): avoid stamping if not needed.
+      // stamp the rest (varargs) parameter.
+      //   Arrays.stampType(varargsParameter, new arrayType[]...[]);
+      MethodDescriptor arrayStampTypeMethodDescriptor =
+          MethodDescriptor.newBuilder()
+              .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+              .setJsInfo(JsInfo.RAW)
+              .setStatic(true)
+              .setName("$stampType")
+              .setParameterTypeDescriptors(
+                  TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                  TypeDescriptors.get().javaLangObject,
+                  TypeDescriptors.get().primitiveDouble)
+              .build();
+      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
+      // parameter type instead of the type parameter itself.
+      MethodCall arrayStampTypeMethodCall =
+          MethodCall.Builder.from(arrayStampTypeMethodDescriptor)
+              .setArguments(
+                  varargsParameter.getReference(),
+                  new TypeReference(varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
+                  new NumberLiteral(
+                      TypeDescriptors.get().primitiveDouble,
+                      varargsParameter.getTypeDescriptor().getDimensions()))
               .build();
 
-      return varargsIndex == 0
-          ? argumentsLengthReference
-          : BinaryExpression.newBuilder()
-              .setTypeDescriptor(primitiveInt)
-              .setLeftOperand(argumentsLengthReference)
-              .setOperator(BinaryOperator.MINUS)
-              .setRightOperand(new NumberLiteral(primitiveInt, varargsIndex))
-              .build();
+      List<Statement> statements = body.getStatements();
+      statements.add(0, arrayStampTypeMethodCall.makeStatement());
     }
   }
 
   /**
    * Normalizes method calls to varargs JsMethods.
    *
-   * <p>
-   * If the var argument is in the form of array literal, unwrap it at call site. Otherwise, call
-   * the function in the form of function.apply(thisArg, [args]).
+   * <p>If the var argument is in the form of array literal, unwrap it at call site. Otherwise, call
+   * the function using the ES6 spread (...) operator.
    */
-  private static class NormalizeVarargsJsMethodCallsVisitor extends AbstractRewriter {
+  private static class NormalizeJsVarargsCalls extends AbstractRewriter {
     @Override
     public Node rewriteInvocation(Invocation invocation) {
       MethodDescriptor target = invocation.getTarget();

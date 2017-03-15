@@ -52,6 +52,10 @@ public class FunctionExpression extends Expression {
     return body;
   }
 
+  public boolean isJsVarargs() {
+    return typeDescriptor.getJsFunctionMethodDescriptor().isJsMethodVarargs();
+  }
+
   @Override
   public FunctionExpression clone() {
     List<Variable> clonedParameters = AstUtils.clone(parameters);
