@@ -9,7 +9,7 @@
   public int fieldInParentOuter;
 ...  public void funInParentOuter() {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_fieldInParentOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter = 0;
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter"
 [UNKNOWN] => [super();]
@@ -19,7 +19,7 @@
   public int fieldInParentOuter;
 ...  public void funInParentOuter() {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ParentOuter()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter.<ctor>"
 [UNKNOWN] => [ParentOuter.$clinit();]
@@ -30,7 +30,7 @@
   public int fieldInParentOuter;
 ...  public void funInParentOuter() {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ParentOuter()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

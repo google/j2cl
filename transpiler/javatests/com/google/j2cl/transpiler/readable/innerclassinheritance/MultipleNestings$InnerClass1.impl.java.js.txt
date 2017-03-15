@@ -15,7 +15,7 @@ let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.
 
 class InnerClass1 extends Parent {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -26,7 +26,8 @@ class InnerClass1 extends Parent {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor
+   * 'InnerClass1(MultipleNestings)'.
    * @param {MultipleNestings} $outer_this
    * @return {!InnerClass1}
    * @public
@@ -42,7 +43,7 @@ class InnerClass1 extends Parent {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InnerClass1(MultipleNestings)'.
    * @param {MultipleNestings} $outer_this
    * @return {void}
    * @public

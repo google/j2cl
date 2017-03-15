@@ -9,7 +9,7 @@
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'NativeClass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<ctor>"
 [UNKNOWN] => [NativeClass.$clinit();]
@@ -28,7 +28,7 @@
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'NativeClass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();
   }] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

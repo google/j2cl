@@ -9,7 +9,7 @@ public class Foo {}] => [class Foo extends java_lang_Object {
  * Exists just to be the file inside of a .srcjar
  */
 public class Foo {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.srcjar.Foo"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@ public class Foo {}] => [/**
  * Exists just to be the file inside of a .srcjar
  */
 public class Foo {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.srcjar.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
@@ -28,7 +28,7 @@ public class Foo {}] => [/**
  * Exists just to be the file inside of a .srcjar
  */
 public class Foo {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_srcjar_Foo();
   }] "com.google.j2cl.transpiler.readable.srcjar.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

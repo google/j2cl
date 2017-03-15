@@ -16,7 +16,7 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinit
 
 class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -27,7 +27,8 @@ class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor
+   * 'OuterRefFromSuperCtorCall(InnerClassInitOrder)'.
    * @param {InnerClassInitOrder} $outer_this
    * @return {!OuterRefFromSuperCtorCall}
    * @public
@@ -43,7 +44,8 @@ class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor
+   * 'OuterRefFromSuperCtorCall(InnerClassInitOrder)'.
    * @param {InnerClassInitOrder} $outer_this
    * @return {void}
    * @public

@@ -9,12 +9,12 @@ public class MyJsType implements OtherInterface {
 public class MyJsType implements OtherInterface {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType"
 [UNKNOWN] => [super();]
 [MyJsType() {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'MyJsType()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<ctor>"
 [UNKNOWN] => [MyJsType.$clinit();]
@@ -22,7 +22,7 @@ public class MyJsType implements OtherInterface {
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();]
 [UNKNOWN] => [return $instance;]
 [MyJsType() {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'MyJsType()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

@@ -7,7 +7,7 @@
 [private static class StringHolder {
     String s = "A";
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = null;
   }] "com.google.j2cl.transpiler.readable.strings.Strings.StringHolder"
 [UNKNOWN] => [super();]
@@ -16,7 +16,7 @@
 [private static class StringHolder {
     String s = "A";
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'StringHolder()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.strings.Strings.StringHolder.<ctor>"
 [UNKNOWN] => [StringHolder.$clinit();]
@@ -26,7 +26,7 @@
 [private static class StringHolder {
     String s = "A";
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'StringHolder()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder();
   }] "com.google.j2cl.transpiler.readable.strings.Strings.StringHolder.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

@@ -9,7 +9,7 @@
       public int field;
 ...      }
     }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.$c_p = 0;
   }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass"
 [UNKNOWN] => [super();]
@@ -24,7 +24,7 @@
 [public LocalClass(int a, int b) {
         field = localVar + a + b;
       }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'LocalClass(LocalClassWithConstructor, int, int, int, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
@@ -36,7 +36,7 @@
 [public LocalClass(int a, int b) {
         field = localVar + a + b;
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'LocalClass(LocalClassWithConstructor, int, int, int, int)'.
 ...    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar + a + b;
   }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
@@ -51,7 +51,7 @@
         this(a, p);
         field = localVar;
       }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'LocalClass(LocalClassWithConstructor, int, int, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"
@@ -63,7 +63,7 @@
         this(a, p);
         field = localVar;
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'LocalClass(LocalClassWithConstructor, int, int, int)'.
 ...    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar;
   }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass.<ctor>"
 [a] => [a] "a"

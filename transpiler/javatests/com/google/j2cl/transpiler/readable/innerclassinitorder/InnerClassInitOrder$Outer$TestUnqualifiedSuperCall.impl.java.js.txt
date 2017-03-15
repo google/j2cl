@@ -15,7 +15,7 @@ let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassi
 
 class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -26,7 +26,8 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor
+   * 'TestUnqualifiedSuperCall(Outer)'.
    * @param {Outer} $outer_this
    * @return {!TestUnqualifiedSuperCall}
    * @public
@@ -42,7 +43,7 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'TestUnqualifiedSuperCall(Outer)'.
    * @param {Outer} $outer_this
    * @return {void}
    * @public

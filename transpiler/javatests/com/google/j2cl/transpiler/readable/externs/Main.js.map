@@ -9,7 +9,7 @@
   static class FooImpl {
 ...  TopLevelExtern.Inner inner;
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_inner__com_google_j2cl_transpiler_readable_externs_Main = null;
   }] "com.google.j2cl.transpiler.readable.externs.Main"
 [UNKNOWN] => [super();]
@@ -23,7 +23,7 @@
   static class FooImpl {
 ...  TopLevelExtern.Inner inner;
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Main()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.externs.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
@@ -34,7 +34,7 @@
   static class FooImpl {
 ...  TopLevelExtern.Inner inner;
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Main()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_externs_Main();
   }] "com.google.j2cl.transpiler.readable.externs.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

@@ -9,7 +9,7 @@
   public int field;
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;
   }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent"
 [UNKNOWN] => [super();]
@@ -18,7 +18,7 @@
 [public Parent(int f) {
     this.field = f;
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Parent(int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<ctor>"
 [f] => [f] "f"
@@ -29,7 +29,7 @@
 [public Parent(int f) {
     this.field = f;
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Parent(int)'.
 ...    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = f;
   }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<ctor>"
 [f] => [f] "f"

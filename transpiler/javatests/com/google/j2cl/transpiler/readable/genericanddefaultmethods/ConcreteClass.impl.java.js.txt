@@ -20,7 +20,7 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
  */
 class ConcreteClass extends GenericClass {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -28,7 +28,7 @@ class ConcreteClass extends GenericClass {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ConcreteClass()'.
    * @return {!ConcreteClass}
    * @public
    */
@@ -41,7 +41,7 @@ class ConcreteClass extends GenericClass {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ConcreteClass()'.
    * @return {void}
    * @public
    */

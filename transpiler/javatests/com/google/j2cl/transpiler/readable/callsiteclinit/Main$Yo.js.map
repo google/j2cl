@@ -7,14 +7,14 @@
 [public static class Yo {
     public static String a = "asdf";
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yo"
 [UNKNOWN] => [super();]
 [public static class Yo {
     public static String a = "asdf";
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Yo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yo.<ctor>"
 [UNKNOWN] => [Yo.$clinit();]
@@ -24,7 +24,7 @@
 [public static class Yo {
     public static String a = "asdf";
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Yo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo();
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

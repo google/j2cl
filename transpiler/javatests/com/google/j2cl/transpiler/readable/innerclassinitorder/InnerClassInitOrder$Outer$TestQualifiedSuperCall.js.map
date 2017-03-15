@@ -9,14 +9,14 @@
       public TestQualifiedSuperCall() {
 ...      }
     }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall"
 [UNKNOWN] => [super();]
 [public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
       }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'TestQualifiedSuperCall()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.<ctor>"
 [UNKNOWN] => [TestQualifiedSuperCall.$clinit();]
@@ -26,7 +26,7 @@
 [public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'TestQualifiedSuperCall()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall();
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.<ctor>"
 [new Outer(1).new OuterIsSuper(2).super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(OuterIsSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(Outer.$create__int(1), 2));]

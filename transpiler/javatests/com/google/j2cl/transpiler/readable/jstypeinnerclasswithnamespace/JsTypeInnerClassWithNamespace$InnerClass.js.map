@@ -5,13 +5,13 @@
 ] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass"
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass"
 [UNKNOWN] => [super();]
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InnerClass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
@@ -20,7 +20,7 @@
 [UNKNOWN] => [return $instance;]
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InnerClass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass();
   }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

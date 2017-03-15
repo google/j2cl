@@ -7,14 +7,14 @@
 [public class InterfaceImpl extends A implements MyJsInterface {
   // A bridge method from MyJsInterface.foo to A.foo__int should be generated.
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsbridgebackward.InterfaceImpl"
 [UNKNOWN] => [super();]
 [public class InterfaceImpl extends A implements MyJsInterface {
   // A bridge method from MyJsInterface.foo to A.foo__int should be generated.
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InterfaceImpl()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsbridgebackward.InterfaceImpl.<ctor>"
 [UNKNOWN] => [InterfaceImpl.$clinit();]
@@ -24,7 +24,7 @@
 [public class InterfaceImpl extends A implements MyJsInterface {
   // A bridge method from MyJsInterface.foo to A.foo__int should be generated.
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InterfaceImpl()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsbridgebackward_InterfaceImpl();
   }] "com.google.j2cl.transpiler.readable.jsbridgebackward.InterfaceImpl.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgebackward_A__();]

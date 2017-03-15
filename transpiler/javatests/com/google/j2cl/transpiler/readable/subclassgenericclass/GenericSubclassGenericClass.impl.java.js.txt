@@ -17,7 +17,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class GenericSubclassGenericClass extends GenericClass {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -25,7 +25,8 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor
+   * 'GenericSubclassGenericClass()'.
    * @template C_T
    * @return {!GenericSubclassGenericClass<C_T>}
    * @public
@@ -39,7 +40,7 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericSubclassGenericClass()'.
    * @return {void}
    * @public
    */

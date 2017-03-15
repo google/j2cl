@@ -9,7 +9,7 @@
   int value;
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = 0;
   }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch"
 [UNKNOWN] => [super();]
@@ -19,7 +19,7 @@
     this(1);
 ...    // would be redundant (in light of the fact that it delegates to this()).
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InitMethodDispatch()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [UNKNOWN] => [InitMethodDispatch.$clinit();]
@@ -30,7 +30,7 @@
     this(1);
 ...    // would be redundant (in light of the fact that it delegates to this()).
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InitMethodDispatch()'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);
   }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);]
@@ -38,7 +38,7 @@
     value = i;
     // This will translate to a $ctor method that *does* dispatch to $init().
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InitMethodDispatch(int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [i] => [i] "i"
@@ -50,7 +50,7 @@
     value = i;
     // This will translate to a $ctor method that *does* dispatch to $init().
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InitMethodDispatch(int)'.
 ...    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = i;
   }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [i] => [i] "i"

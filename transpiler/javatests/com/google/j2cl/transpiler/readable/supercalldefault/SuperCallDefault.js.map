@@ -9,14 +9,14 @@
   public SuperCallDefault() {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault"
 [UNKNOWN] => [super();]
 [public SuperCallDefault() {
     super();
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SuperCallDefault()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<ctor>"
 [UNKNOWN] => [SuperCallDefault.$clinit();]
@@ -26,7 +26,7 @@
 [public SuperCallDefault() {
     super();
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SuperCallDefault()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();
   }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<ctor>"
 [super();] => [this.$ctor__java_lang_Object__();]

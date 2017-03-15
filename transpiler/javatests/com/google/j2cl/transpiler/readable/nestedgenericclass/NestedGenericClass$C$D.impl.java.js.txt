@@ -18,7 +18,7 @@ let C = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericcl
  */
 class D extends java_lang_Object {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -32,7 +32,7 @@ class D extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'D(C)'.
    * @template C_T
    * @param {C<C_T>} $outer_this
    * @return {!D<C_T>}
@@ -49,7 +49,7 @@ class D extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'D(C)'.
    * @param {C<C_T>} $outer_this
    * @return {void}
    * @public

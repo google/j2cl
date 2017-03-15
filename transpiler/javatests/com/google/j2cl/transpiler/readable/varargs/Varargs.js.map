@@ -9,12 +9,12 @@
   public Varargs(int... args) {}
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.varargs.Varargs"
 [UNKNOWN] => [super();]
 [public Varargs(int... args) {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Varargs(int[])'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [args] => [args] "args"
@@ -23,7 +23,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(args);]
 [UNKNOWN] => [return $instance;]
 [public Varargs(int... args) {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Varargs(int[])'.
 ...    this.$init__com_google_j2cl_transpiler_readable_varargs_Varargs();
   }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [args] => [args] "args"
@@ -32,7 +32,7 @@
 [public Varargs() {
     this(1);
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Varargs()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [UNKNOWN] => [Varargs.$clinit();]
@@ -42,7 +42,7 @@
 [public Varargs() {
     this(1);
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Varargs()'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));
   }] "com.google.j2cl.transpiler.readable.varargs.Varargs.<ctor>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));]

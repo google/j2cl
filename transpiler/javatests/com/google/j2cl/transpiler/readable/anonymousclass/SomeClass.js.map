@@ -9,7 +9,7 @@
   public abstract String foo();
 ...  SomeClass(int i) {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass"
 [UNKNOWN] => [super();]
@@ -18,7 +18,7 @@
 ...  m_foo__() {
   }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.foo"
 [SomeClass(int i) {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SomeClass(int)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();
   }] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.<ctor>"
 [i] => [i] "i"

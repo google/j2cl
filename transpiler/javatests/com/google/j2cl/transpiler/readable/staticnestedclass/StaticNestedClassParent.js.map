@@ -7,14 +7,14 @@
 [public class StaticNestedClassParent {
   public static class StaticNestedClass {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent"
 [UNKNOWN] => [super();]
 [public class StaticNestedClassParent {
   public static class StaticNestedClass {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'StaticNestedClassParent()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.<ctor>"
 [UNKNOWN] => [StaticNestedClassParent.$clinit();]
@@ -24,7 +24,7 @@
 [public class StaticNestedClassParent {
   public static class StaticNestedClass {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'StaticNestedClassParent()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent();
   }] "com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

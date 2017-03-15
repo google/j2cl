@@ -3,12 +3,12 @@
 ...exports = A;
 ] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A"
 [private static class A {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A"
 [UNKNOWN] => [super();]
 [private static class A {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'A()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A__();]
 [UNKNOWN] => [return $instance;]
 [private static class A {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'A()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A();
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

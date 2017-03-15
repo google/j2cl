@@ -19,7 +19,7 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
  */
 class GenericConstructor extends java_lang_Object {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -27,7 +27,8 @@ class GenericConstructor extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'GenericConstructor(Object,
+   * Object)'.
    * @template C_T, M_S
    * @param {M_S} s
    * @param {C_T} t
@@ -44,7 +45,7 @@ class GenericConstructor extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericConstructor(Object, Object)'.
    * @template M_S
    * @param {M_S} s
    * @param {C_T} t
@@ -58,7 +59,7 @@ class GenericConstructor extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'GenericConstructor(Object)'.
    * @template C_T, M_T
    * @param {M_T} t
    * @return {!GenericConstructor<C_T>}
@@ -74,7 +75,7 @@ class GenericConstructor extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericConstructor(Object)'.
    * @template M_T
    * @param {M_T} t
    * @return {void}

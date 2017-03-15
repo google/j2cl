@@ -9,7 +9,7 @@
     public class OuterIsNotSuper {
 ...    }
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer = 0;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer"
 [UNKNOWN] => [super();]
@@ -18,7 +18,7 @@
 [public Outer(int i) {
       value = i;
     }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Outer(int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.<ctor>"
 [i] => [i] "i"
@@ -29,7 +29,7 @@
 [public Outer(int i) {
       value = i;
     }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Outer(int)'.
 ...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer = i;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.<ctor>"
 [i] => [i] "i"

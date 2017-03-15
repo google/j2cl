@@ -9,7 +9,7 @@
     // It is a JsMethod itself and also overrides a JsMethod.
 ...    public void bar(String s) {}
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
     // It is a JsMethod itself and also overrides a JsMethod.
 ...    public void bar(String s) {}
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'B()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.<ctor>"
 [UNKNOWN] => [B.$clinit();]
@@ -28,7 +28,7 @@
     // It is a JsMethod itself and also overrides a JsMethod.
 ...    public void bar(String s) {}
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'B()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B();
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();]

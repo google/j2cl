@@ -9,7 +9,7 @@
   private int a;
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;
   }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor"
 [UNKNOWN] => [super();]
@@ -21,7 +21,7 @@
     this.a = a;
     this.b = b;
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'CascadingConstructor(int, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
@@ -34,7 +34,7 @@
     this.a = a;
     this.b = b;
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'CascadingConstructor(int, int)'.
 ...    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = b;
   }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
@@ -46,7 +46,7 @@
 [public CascadingConstructor(int a) {
     this(a, a * 2);
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'CascadingConstructor(int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"
@@ -57,7 +57,7 @@
 [public CascadingConstructor(int a) {
     this(a, a * 2);
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'CascadingConstructor(int)'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, a * 2);
   }] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<ctor>"
 [a] => [a] "a"

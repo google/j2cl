@@ -9,7 +9,7 @@
  * Tests for non native static JsProperty.
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
  * Tests for non native static JsProperty.
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
@@ -28,7 +28,7 @@
  * Tests for non native static JsProperty.
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsproperties_Foo();
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

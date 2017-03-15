@@ -9,7 +9,7 @@
 
   public Outer outer = new Outer();
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo = null;
   }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo"
 [UNKNOWN] => [super();]
@@ -19,7 +19,7 @@
 
   public Outer outer = new Outer();
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
@@ -30,7 +30,7 @@
 
   public Outer outer = new Outer();
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo();
   }] "com.google.j2cl.transpiler.readable.packageinfo.subpackage.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

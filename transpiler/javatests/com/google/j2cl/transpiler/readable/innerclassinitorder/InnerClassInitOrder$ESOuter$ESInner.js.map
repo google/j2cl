@@ -9,7 +9,7 @@
       public int value;
 ...      }
     }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 0;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner"
 [UNKNOWN] => [super();]
@@ -20,7 +20,7 @@
 [public ESInner() {
         value = 1;
       }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInner(ESOuter)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [UNKNOWN] => [ESInner.$clinit();]
@@ -30,7 +30,7 @@
 [public ESInner() {
         value = 1;
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInner(ESOuter)'.
 ...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 1;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = $outer_this;]
@@ -40,7 +40,7 @@
 [public ESInner(int value) {
         this.value = value;
       }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInner(ESOuter, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [value] => [value] "value"
@@ -51,7 +51,7 @@
 [public ESInner(int value) {
         this.value = value;
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInner(ESOuter, int)'.
 ...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = value;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [value] => [value] "value"

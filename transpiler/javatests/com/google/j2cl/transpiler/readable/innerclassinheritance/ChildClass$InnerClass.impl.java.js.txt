@@ -16,7 +16,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class InnerClass extends ParentInner {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -30,7 +30,7 @@ class InnerClass extends ParentInner {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InnerClass(ChildClass)'.
    * @param {ChildClass} $outer_this
    * @return {!InnerClass}
    * @public
@@ -46,7 +46,7 @@ class InnerClass extends ParentInner {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InnerClass(ChildClass)'.
    * @param {ChildClass} $outer_this
    * @return {void}
    * @public

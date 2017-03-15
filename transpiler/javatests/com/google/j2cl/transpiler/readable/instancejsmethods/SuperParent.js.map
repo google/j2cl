@@ -9,7 +9,7 @@
   public int fun(int a, int b) {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   public int fun(int a, int b) {
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SuperParent()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<ctor>"
 [UNKNOWN] => [SuperParent.$clinit();]
@@ -28,7 +28,7 @@
   public int fun(int a, int b) {
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SuperParent()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent();
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

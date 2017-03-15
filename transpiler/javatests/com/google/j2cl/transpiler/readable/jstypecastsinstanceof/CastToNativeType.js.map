@@ -9,7 +9,7 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'CastToNativeType()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.<ctor>"
 [UNKNOWN] => [CastToNativeType.$clinit();]
@@ -28,7 +28,7 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'CastToNativeType()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType();
   }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

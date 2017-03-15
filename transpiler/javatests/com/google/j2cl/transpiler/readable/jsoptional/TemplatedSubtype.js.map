@@ -9,7 +9,7 @@ class TemplatedSubtype<T extends String> implements I<T> {
 class TemplatedSubtype<T extends String> implements I<T> {
 ...  public void m(T t, @JsOptional Object o) {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@ class TemplatedSubtype<T extends String> implements I<T> {
 class TemplatedSubtype<T extends String> implements I<T> {
 ...  public void m(T t, @JsOptional Object o) {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'TemplatedSubtype()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype.<ctor>"
 [UNKNOWN] => [TemplatedSubtype.$clinit();]
@@ -28,7 +28,7 @@ class TemplatedSubtype<T extends String> implements I<T> {
 class TemplatedSubtype<T extends String> implements I<T> {
 ...  public void m(T t, @JsOptional Object o) {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'TemplatedSubtype()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_TemplatedSubtype();
   }] "com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

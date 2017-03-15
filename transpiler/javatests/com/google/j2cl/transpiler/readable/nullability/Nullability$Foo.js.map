@@ -9,7 +9,7 @@
     void bar(T t) {}
 ...    }
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.nullability.Nullability.Foo"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
     void bar(T t) {}
 ...    }
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.nullability.Nullability.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
@@ -28,7 +28,7 @@
     void bar(T t) {}
 ...    }
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability_Foo();
   }] "com.google.j2cl.transpiler.readable.nullability.Nullability.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

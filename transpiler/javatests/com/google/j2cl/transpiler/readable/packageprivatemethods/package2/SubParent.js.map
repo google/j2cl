@@ -9,7 +9,7 @@
   int foo(int a) {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   int foo(int a) {
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SubParent()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<ctor>"
 [UNKNOWN] => [SubParent.$clinit();]
@@ -28,7 +28,7 @@
   int foo(int a) {
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SubParent()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();]

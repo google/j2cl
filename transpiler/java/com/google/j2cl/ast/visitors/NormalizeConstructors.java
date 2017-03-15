@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
@@ -40,6 +41,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.J2clUtils;
 import java.util.Collections;
 import java.util.List;
 
@@ -182,7 +184,8 @@ public class NormalizeConstructors extends NormalizationPass {
                 .setParameters(method.getParameters())
                 .addStatements(method.getBody().getStatements())
                 .setJsDocDescription(
-                    "Initializes instance fields for a particular Java constructor.")
+                    J2clUtils.format(
+                        "Initialization from constructor '%s'.", method.getReadableDescription()))
                 .build();
           }
 
@@ -232,19 +235,12 @@ public class NormalizeConstructors extends NormalizationPass {
             jsConstructorParameters,
             superConstructorInvocation.makeStatement()));
 
-    MethodDescriptor.Builder builder =
-        MethodDescriptor.Builder.from(jsConstructor.getDescriptor())
-            .setVisibility(Visibility.PUBLIC);
-    for (Variable typeParameter : jsConstructor.getParameters()) {
-      builder.addParameterTypeDescriptors(typeParameter.getTypeDescriptor());
-    }
-    MethodDescriptor constructorDescriptor = builder.build();
-
     return Method.newBuilder()
-        .setMethodDescriptor(constructorDescriptor)
+        .setMethodDescriptor(jsConstructor.getDescriptor())
         .setParameters(jsConstructorParameters)
         .addStatements(body)
-        .setJsDocDescription("Real constructor.")
+        .setJsDocDescription(
+            J2clUtils.format("JsConstructor '%s'.", jsConstructor.getReadableDescription()))
         .setSourcePosition(jsConstructor.getSourcePosition())
         .build();
   }
@@ -266,7 +262,7 @@ public class NormalizeConstructors extends NormalizationPass {
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
         .addStatements(body)
-        .setJsDocDescription("Defines instance fields.")
+        .setJsDocDescription("Private implementation constructor.")
         .setSourcePosition(type.getSourcePosition())
         .build();
   }
@@ -333,10 +329,9 @@ public class NormalizeConstructors extends NormalizationPass {
     TypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingClassTypeDescriptor();
 
     if (enclosingType.hasJsConstructor()) {
-      // No need for a factory method if we are calling a @JsConstructor
-      if (constructor == getJsConstructor(type)) {
-        return originalConstructorBodyMethod(constructor);
-      }
+      // Verify that we are not emitting factory methods for JsConstructors.
+      checkState(constructor != getJsConstructor(type));
+
       MethodCall primaryConstructorInvocation =
           checkNotNull(
               AstUtils.getConstructorInvocation(constructor),
@@ -424,31 +419,11 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
-        .setJsDocDescription("A particular Java constructor as a factory method.")
+        .setJsDocDescription(
+            J2clUtils.format(
+                "Factory method corresponding to constructor '%s'.",
+                constructor.getReadableDescription()))
         .setSourcePosition(constructor.getSourcePosition())
-        .build();
-  }
-
-  private static Method originalConstructorBodyMethod(Method primaryConstructor) {
-    // We can assume here that method is the primary constructor.
-    List<Variable> factoryMethodParameters = AstUtils.clone(primaryConstructor.getParameters());
-    List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
-    return Method.newBuilder()
-        .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
-        .setParameters(factoryMethodParameters)
-        .addStatements(
-            // return new Class(<javascriptConstructorArguments>);
-            ReturnStatement.newBuilder()
-                .setExpression(
-                    NewInstance.Builder.from(
-                            primaryConstructorDescriptor(primaryConstructor.getDescriptor()))
-                        .setArguments(relayArguments)
-                        .build())
-                .setTypeDescriptor(
-                    primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor())
-                .build())
-        .setJsDocDescription("A particular Java constructor as a factory method.")
-        .setSourcePosition(primaryConstructor.getSourcePosition())
         .build();
   }
 

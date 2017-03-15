@@ -9,7 +9,7 @@
     COMPATIBLE {
 ...    abstract void method();
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
     COMPATIBLE {
 ...    abstract void method();
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SomeEnum(String, int)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum();
   }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);]

@@ -7,7 +7,7 @@
 [class InnerClass {
       int field = localVar;
     }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.$c_localVar = 0;
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass"
 [UNKNOWN] => [super();]
@@ -20,7 +20,7 @@
 [class InnerClass {
       int field = localVar;
     }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'InnerClass(SimpleLocalClass, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass.<ctor>"
 [UNKNOWN] => [$2InnerClass.$clinit();]
@@ -30,7 +30,7 @@
 [class InnerClass {
       int field = localVar;
     }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'InnerClass(SimpleLocalClass, int)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass();
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass = $outer_this;]

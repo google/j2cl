@@ -7,14 +7,14 @@
 [public class EmptyMethod {
   public static void main(String[] args) {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod"
 [UNKNOWN] => [super();]
 [public class EmptyMethod {
   public static void main(String[] args) {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'EmptyMethod()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.<ctor>"
 [UNKNOWN] => [EmptyMethod.$clinit();]
@@ -24,7 +24,7 @@
 [public class EmptyMethod {
   public static void main(String[] args) {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'EmptyMethod()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
   }] "com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

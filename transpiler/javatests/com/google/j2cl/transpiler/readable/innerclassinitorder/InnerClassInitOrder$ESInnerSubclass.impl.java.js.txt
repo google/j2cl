@@ -16,7 +16,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class ESInnerSubclass extends ESInner {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -24,7 +24,7 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
    * @param {ESOuter} outer
    * @return {!ESInnerSubclass}
    * @public
@@ -40,7 +40,7 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInnerSubclass(ESOuter)'.
    * @param {ESOuter} outer
    * @return {void}
    * @public
@@ -53,7 +53,8 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInnerSubclass(int,
+   * ESOuter)'.
    * @param {number} value
    * @param {ESOuter} outer
    * @return {!ESInnerSubclass}
@@ -70,7 +71,7 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
    * @param {number} value
    * @param {ESOuter} outer
    * @return {void}

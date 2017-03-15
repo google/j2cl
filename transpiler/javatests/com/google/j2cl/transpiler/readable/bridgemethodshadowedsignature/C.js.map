@@ -7,14 +7,14 @@
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C"
 [UNKNOWN] => [super();]
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'C()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<ctor>"
 [UNKNOWN] => [C.$clinit();]
@@ -24,7 +24,7 @@
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'C()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C();
   }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B__();]

@@ -7,14 +7,14 @@
 [class Baz<S> {
       void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
     }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz"
 [UNKNOWN] => [super();]
 [class Baz<S> {
       void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
     }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Baz()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.<ctor>"
 [UNKNOWN] => [$1Baz.$clinit();]
@@ -24,7 +24,7 @@
 [class Baz<S> {
       void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
     }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Baz()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz();
   }] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

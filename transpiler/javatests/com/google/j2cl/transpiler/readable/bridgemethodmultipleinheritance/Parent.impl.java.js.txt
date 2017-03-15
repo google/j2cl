@@ -22,7 +22,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  */
 class Parent extends SuperParent {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -30,7 +30,7 @@ class Parent extends SuperParent {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Parent()'.
    * @template C_T
    * @return {!Parent<C_T>}
    * @public
@@ -44,7 +44,7 @@ class Parent extends SuperParent {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Parent()'.
    * @return {void}
    * @public
    */

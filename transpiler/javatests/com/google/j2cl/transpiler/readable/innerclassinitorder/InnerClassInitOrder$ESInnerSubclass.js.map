@@ -9,14 +9,14 @@
     ESInnerSubclass(ESOuter outer) {
 ...    }
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass"
 [UNKNOWN] => [super();]
 [ESInnerSubclass(ESOuter outer) {
       outer.super();
     }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
@@ -27,7 +27,7 @@
 [ESInnerSubclass(ESOuter outer) {
       outer.super();
     }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInnerSubclass(ESOuter)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
@@ -36,7 +36,7 @@
 [ESInnerSubclass(int value, ESOuter outer) {
       outer.super(value);
     }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'ESInnerSubclass(int, ESOuter)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"
@@ -48,7 +48,7 @@
 [ESInnerSubclass(int value, ESOuter outer) {
       outer.super(value);
     }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
   }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"

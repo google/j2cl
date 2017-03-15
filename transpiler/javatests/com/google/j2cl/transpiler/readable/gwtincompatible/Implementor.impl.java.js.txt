@@ -19,7 +19,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class Implementor extends ClassWithAbstractMethod {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -27,7 +27,7 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Implementor()'.
    * @return {!Implementor}
    * @public
    */
@@ -40,7 +40,7 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Implementor()'.
    * @return {void}
    * @public
    */

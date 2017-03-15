@@ -16,7 +16,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class Foo extends java_lang_Object {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -24,7 +24,7 @@ class Foo extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
    * @template C_Foo_T
    * @return {!Foo<C_Foo_T>}
    * @public
@@ -38,7 +38,7 @@ class Foo extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
    * @return {void}
    * @public
    */

@@ -9,7 +9,7 @@
   public class Parent {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   public class Parent {
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'MultipleNestings()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.<ctor>"
 [UNKNOWN] => [MultipleNestings.$clinit();]
@@ -28,7 +28,7 @@
   public class Parent {
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'MultipleNestings()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
   }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

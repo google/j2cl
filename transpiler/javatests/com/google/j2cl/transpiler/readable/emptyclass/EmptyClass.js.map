@@ -3,12 +3,12 @@
 ...exports = EmptyClass;
 ] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass"
 [public class EmptyClass {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass"
 [UNKNOWN] => [super();]
 [public class EmptyClass {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'EmptyClass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass.<ctor>"
 [UNKNOWN] => [EmptyClass.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass__();]
 [UNKNOWN] => [return $instance;]
 [public class EmptyClass {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'EmptyClass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass();
   }] "com.google.j2cl.transpiler.readable.emptyclass.EmptyClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

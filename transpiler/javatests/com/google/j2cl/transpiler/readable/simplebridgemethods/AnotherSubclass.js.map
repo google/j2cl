@@ -7,14 +7,14 @@
 [class AnotherSubclass extends Superclass<AssertionError> {
   // there should be no bridge method.
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass"
 [UNKNOWN] => [super();]
 [class AnotherSubclass extends Superclass<AssertionError> {
   // there should be no bridge method.
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'AnotherSubclass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass.<ctor>"
 [UNKNOWN] => [AnotherSubclass.$clinit();]
@@ -24,7 +24,7 @@
 [class AnotherSubclass extends Superclass<AssertionError> {
   // there should be no bridge method.
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'AnotherSubclass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass();
   }] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();]

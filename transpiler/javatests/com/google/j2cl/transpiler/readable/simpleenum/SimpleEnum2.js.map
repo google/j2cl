@@ -9,7 +9,7 @@
   VALUE1(2),
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = 0;
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2"
 [UNKNOWN] => [super();]
@@ -18,7 +18,7 @@
 [SimpleEnum2(int foo) {
     this.foo = foo;
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SimpleEnum2(String, int, int)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<ctor>"
 [foo] => [foo] "foo"
@@ -29,7 +29,7 @@
 [SimpleEnum2(int foo) {
     this.foo = foo;
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SimpleEnum2(String, int, int)'.
 ...    this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = foo;
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<ctor>"
 [foo] => [foo] "foo"
@@ -39,7 +39,7 @@
 [SimpleEnum2(SimpleEnum foo) {
     this(foo.ordinal());
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SimpleEnum2(String, int, SimpleEnum)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<ctor>"
 [foo] => [foo] "foo"
@@ -50,7 +50,7 @@
 [SimpleEnum2(SimpleEnum foo) {
     this(foo.ordinal());
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SimpleEnum2(String, int, SimpleEnum)'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__java_lang_String__int__int($name, $ordinal, foo.ordinal());
   }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<ctor>"
 [foo] => [foo] "foo"

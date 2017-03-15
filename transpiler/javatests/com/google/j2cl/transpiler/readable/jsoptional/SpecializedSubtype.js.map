@@ -9,7 +9,7 @@ class SpecializedSubtype implements I<String> {
 class SpecializedSubtype implements I<String> {
 ...  public void m(String t, @JsOptional Object o) {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@ class SpecializedSubtype implements I<String> {
 class SpecializedSubtype implements I<String> {
 ...  public void m(String t, @JsOptional Object o) {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SpecializedSubtype()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype.<ctor>"
 [UNKNOWN] => [SpecializedSubtype.$clinit();]
@@ -28,7 +28,7 @@ class SpecializedSubtype implements I<String> {
 class SpecializedSubtype implements I<String> {
 ...  public void m(String t, @JsOptional Object o) {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SpecializedSubtype()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_SpecializedSubtype();
   }] "com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

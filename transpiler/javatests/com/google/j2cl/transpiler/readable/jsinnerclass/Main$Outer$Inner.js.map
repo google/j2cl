@@ -8,7 +8,7 @@
 [public Inner() {
         this.b = a + 1;
       }] => [/**
-   * Real constructor.
+   * JsConstructor 'Inner(Outer)'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer($outer_this);
   }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer.Inner.<ctor>"
 [UNKNOWN] => [Inner.$clinit();]
@@ -21,7 +21,7 @@
 [public Inner() {
         this.b = a + 1;
       }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Inner(Outer)'.
 ...    this.f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner_ = $outer_this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer + 1;
   }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer.Inner.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner = $outer_this;]

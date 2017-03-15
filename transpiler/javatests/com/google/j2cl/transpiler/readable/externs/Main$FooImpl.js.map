@@ -7,7 +7,7 @@
 [static class FooImpl {
     @JsProperty String foo;
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    this.foo = null;
   }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl"
 [UNKNOWN] => [super();]
@@ -16,7 +16,7 @@
 [static class FooImpl {
     @JsProperty String foo;
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'FooImpl()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl.<ctor>"
 [UNKNOWN] => [FooImpl.$clinit();]
@@ -26,7 +26,7 @@
 [static class FooImpl {
     @JsProperty String foo;
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'FooImpl()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_externs_Main_FooImpl();
   }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

@@ -7,14 +7,14 @@
 [public static class K<K1, K2> {
     void fun(K1 k1, K2 k2) {}
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K"
 [UNKNOWN] => [super();]
 [public static class K<K1, K2> {
     void fun(K1 k1, K2 k2) {}
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'K()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K.<ctor>"
 [UNKNOWN] => [K.$clinit();]
@@ -24,7 +24,7 @@
 [public static class K<K1, K2> {
     void fun(K1 k1, K2 k2) {}
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'K()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K();
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

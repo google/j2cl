@@ -9,7 +9,7 @@
   // This directly exposes Parent.foo, there should be one and only one dispatch method here.
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   // This directly exposes Parent.foo, there should be one and only one dispatch method here.
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Child()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
@@ -28,7 +28,7 @@
   // This directly exposes Parent.foo, there should be one and only one dispatch method here.
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Child()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child();
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();]

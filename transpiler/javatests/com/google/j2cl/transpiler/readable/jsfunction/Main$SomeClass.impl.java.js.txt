@@ -19,7 +19,7 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
  */
 class SomeClass extends java_lang_Object {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -30,7 +30,7 @@ class SomeClass extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SomeClass(Main)'.
    * @template C_SomeClass_T
    * @param {Main} $outer_this
    * @return {!SomeClass<C_SomeClass_T>}
@@ -47,7 +47,7 @@ class SomeClass extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SomeClass(Main)'.
    * @param {Main} $outer_this
    * @return {void}
    * @public

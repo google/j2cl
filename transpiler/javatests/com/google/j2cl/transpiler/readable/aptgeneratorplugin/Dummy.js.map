@@ -3,12 +3,12 @@
 ...exports = Dummy;
 ] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy"
 [public class Dummy {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy"
 [UNKNOWN] => [super();]
 [public class Dummy {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Dummy()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy.<ctor>"
 [UNKNOWN] => [Dummy.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Dummy__();]
 [UNKNOWN] => [return $instance;]
 [public class Dummy {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Dummy()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Dummy();
   }] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

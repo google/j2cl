@@ -16,7 +16,7 @@ let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.annotation.Ma
 
 class Bar extends java_lang_Object {
   /**
-   * Defines instance fields.
+   * Private implementation constructor.
    * @public
    */
   constructor() {
@@ -27,7 +27,7 @@ class Bar extends java_lang_Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Bar(Main)'.
    * @param {Main} $outer_this
    * @return {!Bar}
    * @public
@@ -43,7 +43,7 @@ class Bar extends java_lang_Object {
   }
 
   /**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Bar(Main)'.
    * @param {Main} $outer_this
    * @return {void}
    * @public

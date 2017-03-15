@@ -3,12 +3,12 @@
 ...exports = foo;
 ] "com.google.j2cl.transpiler.readable.collisions.foo"
 [class foo {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.collisions.foo"
 [UNKNOWN] => [super();]
 [class foo {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.collisions.foo.<ctor>"
 [UNKNOWN] => [foo.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_collisions_foo__();]
 [UNKNOWN] => [return $instance;]
 [class foo {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_collisions_foo();
   }] "com.google.j2cl.transpiler.readable.collisions.foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

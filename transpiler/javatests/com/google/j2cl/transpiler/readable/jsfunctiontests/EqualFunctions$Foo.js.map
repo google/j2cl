@@ -3,12 +3,12 @@
 ...exports = Foo;
 ] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo"
 [public static class Foo<T> {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo"
 [UNKNOWN] => [super();]
 [public static class Foo<T> {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Foo()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions_Foo__();]
 [UNKNOWN] => [return $instance;]
 [public static class Foo<T> {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions_Foo();
   }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

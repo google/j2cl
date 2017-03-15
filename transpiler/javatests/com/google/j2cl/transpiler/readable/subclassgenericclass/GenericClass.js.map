@@ -3,12 +3,12 @@
 ...exports = GenericClass;
 ] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass"
 [class GenericClass<T> {}] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass"
 [UNKNOWN] => [super();]
 [class GenericClass<T> {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'GenericClass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass.<ctor>"
 [UNKNOWN] => [GenericClass.$clinit();]
@@ -16,7 +16,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();]
 [UNKNOWN] => [return $instance;]
 [class GenericClass<T> {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericClass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
   }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

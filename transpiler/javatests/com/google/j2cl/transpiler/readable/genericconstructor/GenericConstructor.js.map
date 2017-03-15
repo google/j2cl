@@ -9,12 +9,12 @@
   // constructor with both method level and class level type parameters.
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor"
 [UNKNOWN] => [super();]
 [public <S> GenericConstructor(S s, T t) {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'GenericConstructor(Object, Object)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [s] => [s] "s"
@@ -24,7 +24,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(s, t);]
 [UNKNOWN] => [return $instance;]
 [public <S> GenericConstructor(S s, T t) {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericConstructor(Object, Object)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
   }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [s] => [s] "s"
@@ -32,7 +32,7 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();]
 [public <T> GenericConstructor(T t) {}] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'GenericConstructor(Object)'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [t] => [t] "t"
@@ -41,7 +41,7 @@
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(t);]
 [UNKNOWN] => [return $instance;]
 [public <T> GenericConstructor(T t) {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'GenericConstructor(Object)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
   }] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<ctor>"
 [t] => [t] "t"

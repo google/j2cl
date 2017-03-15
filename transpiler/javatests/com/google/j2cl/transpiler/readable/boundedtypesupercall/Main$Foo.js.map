@@ -9,12 +9,12 @@
     public Foo(T foo) {}
     public abstract void foo();
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo"
 [UNKNOWN] => [super();]
 [public Foo(T foo) {}] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Foo(Object)'.
 ...    this.$init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Foo();
   }] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo.<ctor>"
 [foo] => [foo] "foo"

@@ -9,14 +9,14 @@
   public Child() {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.varargs.Child"
 [UNKNOWN] => [super();]
 [public Child() {
     super(1);
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Child()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.varargs.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
@@ -26,7 +26,7 @@
 [public Child() {
     super(1);
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Child()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_varargs_Child();
   }] "com.google.j2cl.transpiler.readable.varargs.Child.<ctor>"
 [super(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));]

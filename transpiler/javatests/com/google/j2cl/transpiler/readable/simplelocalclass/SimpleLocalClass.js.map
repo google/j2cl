@@ -9,7 +9,7 @@
   public void test(final int p) {
 ...  }
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass"
 [UNKNOWN] => [super();]
@@ -17,7 +17,7 @@
   public void test(final int p) {
 ...  }
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SimpleLocalClass()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<ctor>"
 [UNKNOWN] => [SimpleLocalClass.$clinit();]
@@ -28,7 +28,7 @@
   public void test(final int p) {
 ...  }
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SimpleLocalClass()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
   }] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

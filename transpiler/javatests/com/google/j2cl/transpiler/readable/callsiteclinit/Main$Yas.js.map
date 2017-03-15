@@ -7,14 +7,14 @@
 [public static class Yas {
     public static String c = "string";
   }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yas"
 [UNKNOWN] => [super();]
 [public static class Yas {
     public static String c = "string";
   }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'Yas()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yas.<ctor>"
 [UNKNOWN] => [Yas.$clinit();]
@@ -24,7 +24,7 @@
 [public static class Yas {
     public static String c = "string";
   }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'Yas()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yas();
   }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yas.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

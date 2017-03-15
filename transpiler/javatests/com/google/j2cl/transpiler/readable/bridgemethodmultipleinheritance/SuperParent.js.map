@@ -7,14 +7,14 @@
 [class SuperParent<T, S> {
   public void foo(T t, S s) {}
 }] => [/**
-   * Defines instance fields.
+   * Private implementation constructor.
 ...    super();
   }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent"
 [UNKNOWN] => [super();]
 [class SuperParent<T, S> {
   public void foo(T t, S s) {}
 }] => [/**
-   * A particular Java constructor as a factory method.
+   * Factory method corresponding to constructor 'SuperParent()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<ctor>"
 [UNKNOWN] => [SuperParent.$clinit();]
@@ -24,7 +24,7 @@
 [class SuperParent<T, S> {
   public void foo(T t, S s) {}
 }] => [/**
-   * Initializes instance fields for a particular Java constructor.
+   * Initialization from constructor 'SuperParent()'.
 ...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
   }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
