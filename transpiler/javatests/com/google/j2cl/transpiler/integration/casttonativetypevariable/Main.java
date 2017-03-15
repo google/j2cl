@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.casttonativetypevariable;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -16,7 +17,10 @@ public class Main {
     }
   }
 
-  public static class SubFoo extends Foo<SubFoo> {}
+  public static class SubFoo extends Foo<SubFoo> {
+    @JsConstructor
+    public SubFoo() {}
+  }
 
   public static void main(String... args) {
     SubFoo sf = new SubFoo();

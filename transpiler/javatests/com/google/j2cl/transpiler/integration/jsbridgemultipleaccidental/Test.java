@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.jsbridgemultipleaccidental;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
 
 interface InterfaceOne {
@@ -7,6 +8,7 @@ interface InterfaceOne {
 }
 
 interface InterfaceTwo extends InterfaceOne {
+  @Override
   int fun(int i);
 }
 
@@ -22,5 +24,7 @@ class C {
 }
 
 public class Test extends C implements InterfaceTwo, InterfaceThree {
+  @JsConstructor
+  public Test() {}
   // there should be only one bridge method created for List.fun() and Collection.fun().
 }

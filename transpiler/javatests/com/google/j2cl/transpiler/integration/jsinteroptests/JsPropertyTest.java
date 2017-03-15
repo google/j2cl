@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -44,10 +45,12 @@ public class JsPropertyTest extends MyTestCase {
       implements MyJsTypeInterfaceWithProperty {
     private int x;
 
+    @Override
     public int getX() {
       return x + GET_X;
     }
 
+    @Override
     public void setX(int x) {
       this.x = x + SET_X;
     }
@@ -87,7 +90,7 @@ public class JsPropertyTest extends MyTestCase {
   }
 
   @JsType
-  static class MyConcreteJsType {
+  public static class MyConcreteJsType {
     private int x;
 
     @JsProperty
@@ -157,6 +160,7 @@ public class JsPropertyTest extends MyTestCase {
   
   static class MyNativeJsTypeSubclass extends MyNativeJsType {
 
+    @JsConstructor
     MyNativeJsTypeSubclass() {
       this.x = 42;
       setY(52);
@@ -179,7 +183,10 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(52, mc.getY());
   }
 
-  static class MyNativeJsTypeSubclassNoOverride extends MyNativeJsType {}
+  static class MyNativeJsTypeSubclassNoOverride extends MyNativeJsType {
+    @JsConstructor
+    public MyNativeJsTypeSubclassNoOverride() {}
+  }
 
   public void testNativeJsTypeSubclassNoOverride() {
     MyNativeJsTypeSubclassNoOverride myNativeJsType = new MyNativeJsTypeSubclassNoOverride();
@@ -202,6 +209,7 @@ public class JsPropertyTest extends MyTestCase {
   }
 
   static class MyNativeJsTypeWithConstructorSubclass extends MyNativeJsTypeWithConstructor {
+    @JsConstructor
     public MyNativeJsTypeWithConstructorSubclass(int x) {
       super(x);
     }
@@ -286,10 +294,12 @@ public class JsPropertyTest extends MyTestCase {
       extends MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed {
     private int y;
 
+    @Override
     public int getX() {
       return y + GET_X;
     }
 
+    @Override
     public void setX(int y) {
       this.y = y + SET_X;
     }
@@ -399,6 +409,7 @@ public class JsPropertyTest extends MyTestCase {
 
   @JsType
   static class RemovedAccidentalOverridePropertyBase {
+    private RemovedAccidentalOverridePropertyBase() {}
     @JsProperty
     public int getX() {
       return 55;

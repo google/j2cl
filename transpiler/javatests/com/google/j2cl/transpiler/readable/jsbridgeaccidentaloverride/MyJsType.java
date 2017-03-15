@@ -4,6 +4,7 @@ import jsinterop.annotations.JsType;
 
 @JsType
 public class MyJsType implements OtherInterface {
+  MyJsType() {}
   /**
    * Accidentally exposes non-JsMethod MyInterface.foo(). Thus there should be a bridge method in
    * SubJsType.

@@ -40,7 +40,7 @@
    * @return {void}
 ...    d.m_fun__int(1);
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
-[MyJsType a = new MyJsType();] => [let a = new MyJsType();]
+[MyJsType a = new MyJsType();] => [let a = MyJsType.$create__();]
 [a] => [a] "a"
 [SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();]
 [b] => [b] "b"

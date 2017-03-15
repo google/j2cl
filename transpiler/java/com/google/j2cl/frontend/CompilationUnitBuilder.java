@@ -499,7 +499,9 @@ public class CompilationUnitBuilder {
       }
 
       type.addMethod(
-          0, AstUtils.createImplicitConstructor(constructorDescriptor, superConstructorDescriptor));
+          0,
+          AstUtils.createImplicitAnonymousClassConstructor(
+              type.getSourcePosition(), constructorDescriptor, superConstructorDescriptor));
       popType();
       return constructorDescriptor;
     }
@@ -1447,7 +1449,7 @@ public class CompilationUnitBuilder {
 
       // Replace the lambda with new LambdaClass()
       MethodDescriptor constructorMethodDescriptor =
-          AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor);
+          AstUtils.createImplicitConstructorDescriptor(lambdaTypeDescriptor);
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
           lambdaTypeDeclaration.isCapturingEnclosingInstance()

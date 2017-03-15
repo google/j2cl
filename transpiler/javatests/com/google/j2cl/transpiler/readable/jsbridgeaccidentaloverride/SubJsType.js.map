@@ -9,20 +9,21 @@
   // There should be bridge method for MyInterface.foo() because it is accidentally overridden
 ...  // MyJsType.
 }] => [/**
-   * Real constructor.
-...    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
+   * Defines instance fields.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType"
 [UNKNOWN] => [super();]
-[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();]
 [public class SubJsType extends MyJsType implements MyInterface {
   // There should be bridge method for MyInterface.foo() because it is accidentally overridden
 ...  // MyJsType.
 }] => [/**
    * A particular Java constructor as a factory method.
-...    return new SubJsType();
+...    return $instance;
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
 [UNKNOWN] => [SubJsType.$clinit();]
-[UNKNOWN] => [return new SubJsType();]
+[UNKNOWN] => [let $instance = new SubJsType();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();]
+[UNKNOWN] => [return $instance;]
 [public class SubJsType extends MyJsType implements MyInterface {
   // There should be bridge method for MyInterface.foo() because it is accidentally overridden
 ...  // MyJsType.
@@ -30,6 +31,7 @@
    * Initializes instance fields for a particular Java constructor.
 ...    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<ctor>"
+[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();]
 [/**
    * There should be a bridge method for MyInterface.bar() because it is exposed by this bar().

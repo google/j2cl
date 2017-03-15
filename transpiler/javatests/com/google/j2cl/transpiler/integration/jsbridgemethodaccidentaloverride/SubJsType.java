@@ -1,6 +1,11 @@
 package com.google.j2cl.transpiler.integration.jsbridgemethodaccidentaloverride;
 
+import jsinterop.annotations.JsConstructor;
+
 public class SubJsType extends MyJsType implements MyInterface {
+  @JsConstructor
+  public SubJsType() {}
+
   // There should be bridge method for MyInterface.foo() because it is accidentally overridden
   // by MyJsType.foo().
 

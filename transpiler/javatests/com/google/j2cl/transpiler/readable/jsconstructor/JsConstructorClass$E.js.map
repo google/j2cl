@@ -5,29 +5,21 @@
   /**
 ...exports = E;
 ] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.E"
-[public E() {
-      super(10); // must call super(int), cannot call super(int, int).
-      this.fE = 12;
+[@JsConstructor
+    public E() {
+...      this.fE = 12;
     }] => [/**
    * Real constructor.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_E__();
   }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.E.<ctor>"
+[UNKNOWN] => [E.$clinit();]
 [UNKNOWN] => [super(10);]
 [UNKNOWN] => [/** @public {number} */
     this.f_fE__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_E = 0;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_E__();]
-[public E() {
-      super(10); // must call super(int), cannot call super(int, int).
-      this.fE = 12;
-    }] => [/**
-   * A particular Java constructor as a factory method.
-...    return new E();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.E.<ctor>"
-[UNKNOWN] => [E.$clinit();]
-[UNKNOWN] => [return new E();]
-[public E() {
-      super(10); // must call super(int), cannot call super(int, int).
-      this.fE = 12;
+[@JsConstructor
+    public E() {
+...      this.fE = 12;
     }] => [/**
    * Initializes instance fields for a particular Java constructor.
 ...    this.f_fE__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_E = 12;

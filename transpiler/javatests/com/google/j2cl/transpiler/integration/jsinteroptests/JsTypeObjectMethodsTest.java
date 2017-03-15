@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -24,16 +25,19 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   static class NativeClassWithHashCode {
+    @Override
     public native int hashCode();
   }
 
   static class SubclassNativeClassWithHashCode extends NativeClassWithHashCode {
     private int n;
 
+    @JsConstructor
     public SubclassNativeClassWithHashCode(int n) {
       this.n = n;
     }
 
+    @Override
     @JsMethod
     public int hashCode() {
       return n;
@@ -47,6 +51,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
       this.n = n;
     }
 
+    @Override
     @JsMethod
     public int hashCode() {
       return n;
@@ -90,16 +95,19 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
 
     MyNativeError(String error) {}
 
+    @Override
     public native int hashCode();
 
     public int myValue;
   }
 
   private static class MyNativeErrorSubtype extends MyNativeError {
+    @JsConstructor
     MyNativeErrorSubtype(int n) {
       myValue = n;
     }
 
+    @Override
     public String toString() {
       return "(Sub)myValue: " + myValue;
     }

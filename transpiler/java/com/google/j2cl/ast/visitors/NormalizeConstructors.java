@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
@@ -123,7 +124,7 @@ public class NormalizeConstructors extends NormalizationPass {
       // Synthesize the es6 constructor BEFORE altering any of the constructor's code, but do not
       // add it to the type yet, the code for the es6 constructor should not be transformed.
       Method es6Constructor =
-          type.getDeclaration().isJsConstructorClassOrSubclass()
+          type.getDeclaration().hasJsConstructor()
               ? synthesizeJsConstructor(type)
               : synthesizePrivateConstructor(type);
 
@@ -141,7 +142,7 @@ public class NormalizeConstructors extends NormalizationPass {
         continue;
       }
       TypeDeclaration currentTypeDeclaration = type.getDeclaration();
-      if (!currentTypeDeclaration.isJsConstructorClassOrSubclass()
+      if (!currentTypeDeclaration.hasJsConstructor()
           || !AstUtils.hasConstructorInvocation(method)) {
         continue;
       }
@@ -156,7 +157,7 @@ public class NormalizeConstructors extends NormalizationPass {
         // if the super class has a @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
         // $ctor method to call the super constructor (which is $ctor_superclass).
-        if (!currentTypeDeclaration.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
+        if (!currentTypeDeclaration.getSuperTypeDescriptor().hasJsConstructor()) {
           continue; // Don't remove the super call from $ctor below.
         }
       }
@@ -201,19 +202,19 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method synthesizeJsConstructor(Type type) {
-    Method primaryConstructor = checkNotNull(getPrimaryConstructor(type));
-    MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
+    Method jsConstructor = checkNotNull(getJsConstructor(type));
+    MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(jsConstructor);
     checkArgument(
         superConstructorInvocation == null
             || superConstructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor()));
 
-    List<Variable> jsConstructorParameters = AstUtils.clone(primaryConstructor.getParameters());
+    List<Variable> jsConstructorParameters = AstUtils.clone(jsConstructor.getParameters());
     List<Expression> arguments = AstUtils.getReferences(jsConstructorParameters);
 
     List<Statement> body = AstUtils.generateInstanceFieldDeclarationStatements(type);
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
-        ctorMethodDescriptorFromJavaConstructor(primaryConstructor.getDescriptor());
+        ctorMethodDescriptorFromJavaConstructor(jsConstructor.getDescriptor());
 
     MethodCall ctorCall = MethodCall.Builder.from(ctorDescriptor).setArguments(arguments).build();
     body.add(ctorCall.makeStatement());
@@ -221,21 +222,20 @@ public class NormalizeConstructors extends NormalizationPass {
     // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a
     // regular Java class.  Otherwise we get the arguments from the primary constructor.  Also
     // note that the super call may be null if the super constructor was native.
-    if (superConstructorInvocation == null
-        || !type.getSuperTypeDescriptor().isJsConstructorClassOrSubclass()) {
+    if (superConstructorInvocation == null || !type.getSuperTypeDescriptor().hasJsConstructor()) {
       superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
     body.add(
         0,
         AstUtils.replaceVariables(
-            primaryConstructor.getParameters(),
+            jsConstructor.getParameters(),
             jsConstructorParameters,
             superConstructorInvocation.makeStatement()));
 
     MethodDescriptor.Builder builder =
-        MethodDescriptor.Builder.from(primaryConstructor.getDescriptor())
+        MethodDescriptor.Builder.from(jsConstructor.getDescriptor())
             .setVisibility(Visibility.PUBLIC);
-    for (Variable typeParameter : primaryConstructor.getParameters()) {
+    for (Variable typeParameter : jsConstructor.getParameters()) {
       builder.addParameterTypeDescriptors(typeParameter.getTypeDescriptor());
     }
     MethodDescriptor constructorDescriptor = builder.build();
@@ -245,7 +245,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setParameters(jsConstructorParameters)
         .addStatements(body)
         .setJsDocDescription("Real constructor.")
-        .setSourcePosition(primaryConstructor.getSourcePosition())
+        .setSourcePosition(jsConstructor.getSourcePosition())
         .build();
   }
 
@@ -332,9 +332,9 @@ public class NormalizeConstructors extends NormalizationPass {
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
     TypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingClassTypeDescriptor();
 
-    if (enclosingType.isJsConstructorClassOrSubclass()) {
+    if (enclosingType.hasJsConstructor()) {
       // No need for a factory method if we are calling a @JsConstructor
-      if (constructor == getPrimaryConstructor(type)) {
+      if (constructor == getJsConstructor(type)) {
         return originalConstructorBodyMethod(constructor);
       }
       MethodCall primaryConstructorInvocation =
@@ -452,18 +452,11 @@ public class NormalizeConstructors extends NormalizationPass {
         .build();
   }
 
-  /**
-   * Returns the constructor that is being delegated to (the primary constructor) in a JsConstructor
-   * class or in a child class of a JsConstructor class. This constructor will be generated as the
-   * real ES6 constructor.
-   */
-  public static Method getPrimaryConstructor(Type type) {
-    for (Method method : type.getMethods()) {
-      if (method.isPrimaryConstructor()) {
-        return method;
-      }
-    }
-    return null;
+  public static Method getJsConstructor(Type type) {
+    return type.getMethods()
+        .stream()
+        .filter(method -> method.getDescriptor().isJsConstructor())
+        .collect(MoreCollectors.onlyElement());
   }
 
   /** Method descriptor for $ctor methods. */

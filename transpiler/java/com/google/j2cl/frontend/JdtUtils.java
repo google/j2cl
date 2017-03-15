@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -43,7 +42,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -714,6 +712,11 @@ public class JdtUtils {
           i, JsInteropUtils.isJsOptional(methodBinding, i));
     }
 
+    if (enclosingClassTypeDescriptor.isAnonymous()
+        && isConstructor
+        && enclosingClassTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
+      jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
+    }
     /**
      * JDT does not provide method bindings for any bridge methods so the current one must not be a
      * bridge.
@@ -836,40 +839,6 @@ public class JdtUtils {
       }
     }
     return false;
-  }
-
-  /** Returns true if the given type has a JsConstructor. */
-  public static boolean isJsConstructorClass(ITypeBinding typeBinding) {
-    if (typeBinding == null || !typeBinding.isClass()) {
-      return false;
-    }
-    Collection<IMethodBinding> constructors =
-        Collections2.filter(
-            Arrays.asList(typeBinding.getDeclaredMethods()), IMethodBinding::isConstructor);
-    if (constructors.isEmpty()
-        && Modifier.isPublic(typeBinding.getModifiers())
-        && !typeBinding.isEnum()) {
-      // A public JsType with default constructor is a JsConstructor class.
-      return JsInteropUtils.isJsType(typeBinding);
-    }
-    return constructors
-        .stream()
-        .anyMatch(
-            constructor ->
-                JsInteropUtils.getJsInfo(constructor).getJsMemberType()
-                    == JsMemberType.CONSTRUCTOR);
-  }
-
-  /**
-   * Returns true if the given type has a JsConstructor, or it is a successor of a class that has a
-   * JsConstructor.
-   */
-  public static boolean isOrSubclassesJsConstructorClass(ITypeBinding typeBinding) {
-    if (typeBinding == null) {
-      return false;
-    }
-    return isJsConstructorClass(typeBinding)
-        || isOrSubclassesJsConstructorClass(typeBinding.getSuperclass());
   }
 
   /** Returns the MethodDescriptor for the SAM method in JsFunction interface. */
@@ -1397,7 +1366,6 @@ public class JdtUtils {
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setJsConstructorClassOrSubclass(isOrSubclassesJsConstructorClass(typeBinding))
         .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeParameterDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))

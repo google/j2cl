@@ -19,7 +19,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Pair;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
@@ -30,7 +33,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
@@ -85,7 +87,9 @@ public class JsInteropRestrictionsChecker {
       checkJsFunctionImplementation(type);
     } else {
       checkJsFunctionSubtype(type);
-      checkJsConstructors(type);
+      if (checkJsConstructors(type)) {
+        checkJsConstructorSubtype(type);
+      }
     }
 
     Map<String, JsMember> localNames = collectLocalNames(type.getSuperTypeDescriptor());
@@ -351,7 +355,7 @@ public class JsInteropRestrictionsChecker {
     JsMemberType jsMemberType = memberDescriptor.getJsInfo().getJsMemberType();
     switch (jsMemberType) {
       case CONSTRUCTOR:
-        if (!isConstructorEmpty((Method) member)) {
+        if (!((Method) member).isEmpty()) {
           problems.error(
               member.getSourcePosition(),
               "Native JsType constructor '%s' cannot have non-empty method body.",
@@ -515,7 +519,6 @@ public class JsInteropRestrictionsChecker {
           "JsFunction implementation member '%s' cannot be JsMethod nor JsProperty.",
           member.getReadableDescription());
     }
-
   }
 
   private void checkJsFunctionSubtype(Type type) {
@@ -639,48 +642,113 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsConstructors(Type type) {
-    List<Method> jsConstructors = getJsConstructors(type);
-
+  private boolean checkJsConstructors(Type type) {
     if (type.isNative()) {
-      return;
+      return true;
     }
 
-    if (jsConstructors.isEmpty()) {
-      return;
+    if (!type.getDeclaration().hasJsConstructor()) {
+      return true;
     }
 
-    if (jsConstructors.size() > 1) {
+    List<MethodDescriptor> jsConstructorDescriptors =
+        type.getDeclaration().getJsConstructorMethodDescriptors();
+    if (jsConstructorDescriptors.size() > 1) {
       problems.error(
           type.getSourcePosition(),
           "More than one JsConstructor exists for '%s'.",
           type.getReadableDescription());
+      return false;
     }
 
-    final Method jsConstructor = jsConstructors.get(0);
+    MethodDescriptor jsConstructorDescriptor = jsConstructorDescriptors.get(0);
+    MethodDescriptor primaryConstructorDescriptor = getPrimaryConstructorDescriptor(type);
+    if (primaryConstructorDescriptor != jsConstructorDescriptor) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsConstructor '%s' can be a JsConstructor only if all other constructors in the class "
+              + "delegate to it.",
+          jsConstructorDescriptor.getReadableDescription());
+      return false;
+    }
 
-    if (!jsConstructor.isPrimaryConstructor()) {
+    return true;
+  }
+
+  private static MethodDescriptor getPrimaryConstructorDescriptor(final Type type) {
+    if (type.getConstructors().isEmpty()) {
+      return type.getDeclaration()
+          .getDeclaredMethodDescriptors()
+          .stream()
+          .filter(MethodDescriptor::isConstructor)
+          .collect(MoreCollectors.onlyElement());
+    }
+
+    ImmutableList<Method> superDelegatingConstructors =
+        type.getConstructors()
+            .stream()
+            .filter(Predicates.not(AstUtils::hasThisCall))
+            .collect(ImmutableList.toImmutableList());
+    return superDelegatingConstructors.size() != 1
+        ? null
+        : superDelegatingConstructors.get(0).getDescriptor();
+  }
+
+  private void checkJsConstructorSubtype(Type type) {
+    if (type.isNative()) {
+      return;
+    }
+
+    if (!type.getDeclaration().isJsConstructorSubtype()) {
+      return;
+    }
+
+    if (!type.getDeclaration().hasJsConstructor()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Class '%s' should have a JsConstructor.",
+          type.getReadableDescription());
+      return;
+    }
+
+    List<MethodDescriptor> superJsConstructorMethodDescriptors =
+        type.getSuperTypeDescriptor().getJsConstructorMethodDescriptors();
+
+    Method jsConstructor = getJsConstructor(type);
+    if (jsConstructor == null) {
+      // The JsConstructor is the implicit constructor and delegates to the default constructor
+      // for the super class.
+      MethodDescriptor implicitJsConstructorDescriptor =
+          type.getDeclaration().getJsConstructorMethodDescriptors().get(0);
+      if (!type.getSuperTypeDescriptor()
+          .getDefaultConstructorMethodDescriptor()
+          .isJsConstructor()) {
+        problems.error(
+            type.getSourcePosition(),
+            "Implicit JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
+            implicitJsConstructorDescriptor.getReadableDescription(),
+            superJsConstructorMethodDescriptors.get(0).getReadableDescription());
+      }
+      return;
+    }
+
+    MethodDescriptor delegatedSuperConstructor =
+        AstUtils.getDelegatedSuperConstructorDescriptor(jsConstructor);
+    if (!delegatedSuperConstructor.isJsConstructor()) {
       problems.error(
           jsConstructor.getSourcePosition(),
-          "Constructor '%s' can be a JsConstructor only if all constructors in the class are "
-              + "delegating to it.",
-          jsConstructor.getReadableDescription());
+          "JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
+          jsConstructor.getReadableDescription(),
+          superJsConstructorMethodDescriptors.get(0).getReadableDescription());
     }
   }
 
-  private static List<Method> getJsConstructors(Type type) {
+  private static Method getJsConstructor(Type type) {
     return type.getConstructors()
         .stream()
-        .filter(method -> method.getDescriptor().isJsConstructor())
-        .collect(Collectors.toList());
-  }
-
-  /**
-   * Returns true if the constructor method is locally empty (allows calls to super constructor).
-   */
-  private static boolean isConstructorEmpty(Method constructor) {
-    List<Statement> statements = constructor.getBody().getStatements();
-    return statements.isEmpty() || (statements.size() == 1 && AstUtils.hasSuperCall(constructor));
+        .filter(constructor -> constructor.getDescriptor().isJsConstructor())
+        .findFirst()
+        .orElse(null);
   }
 
   private static class JsMember {

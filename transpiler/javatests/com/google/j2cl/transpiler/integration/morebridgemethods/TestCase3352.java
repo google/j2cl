@@ -9,6 +9,7 @@ public class TestCase3352 {
 
   @JsType
   abstract static class B<B1> implements BI1 {
+    private B() {}
     public abstract String get(B1 value);
   }
 

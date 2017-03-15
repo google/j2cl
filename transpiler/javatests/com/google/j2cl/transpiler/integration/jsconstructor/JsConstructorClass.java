@@ -45,6 +45,7 @@ public class JsConstructorClass {
   public static class C extends B {
     public int fC = 1;
 
+    @JsConstructor
     public C(int x) {
       super(x * 2); // must call super(int), cannot call super().
       this.fC += 6;
@@ -80,6 +81,7 @@ public class JsConstructorClass {
   public static class E extends C {
     public int fE = 11;
 
+    @JsConstructor
     public E() {
       super(10); // must call super(int), cannot call super(int, int).
       this.fE += 12;
@@ -92,6 +94,7 @@ public class JsConstructorClass {
   public static class F extends C {
     public int fF = 13;
 
+    @JsConstructor
     public F(int x) {
       super(x + 2); // must call super(int), cannot call super(int, int).
       this.fF += x + 3;

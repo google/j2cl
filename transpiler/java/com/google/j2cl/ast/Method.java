@@ -106,12 +106,6 @@ public class Method extends Member implements HasJsNameInfo {
     return jsDocDescription;
   }
 
-  public boolean isPrimaryConstructor() {
-    return isConstructor()
-        && getDescriptor().getEnclosingClassTypeDescriptor().isJsConstructorClassOrSubclass()
-        && !AstUtils.hasThisCall(this);
-  }
-
   @Override
   public String getSimpleJsName() {
     return methodDescriptor.getSimpleJsName();
@@ -129,6 +123,15 @@ public class Method extends Member implements HasJsNameInfo {
   @Override
   public Node accept(Processor processor) {
     return Visitor_Method.visit(processor, this);
+  }
+
+  /** Returns true if the method is locally empty (allows calls to super constructor). */
+  public boolean isEmpty() {
+    // TODO(rluble): to be completely correct the parameters of the implicit supercall need to
+    // be examined.
+    List<Statement> statements = getBody().getStatements();
+    return statements.isEmpty()
+        || (statements.size() == 1 && isConstructor() && AstUtils.hasSuperCall(this));
   }
 
   /**

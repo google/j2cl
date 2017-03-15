@@ -445,6 +445,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsType;",
             "@JsType",
             "class JsTypeParent {",
+            "  JsTypeParent() {}",
             "  public int foo = 55;",
             "  public void bar() {}",
             "}",
@@ -659,6 +660,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsType;",
             "@JsType",
             "class ParentParentBuggy {",
+            "  protected ParentParentBuggy() {}",
             "  public int foo = 55;",
             "}",
             "class ParentBuggy extends ParentParentBuggy {",
@@ -696,6 +698,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsMethod;",
             "@JsType",
             "class ParentBuggy {",
+            "  ParentBuggy() {}",
             "  public void foo() {}",
             "}",
             "public class Buggy extends ParentBuggy {",
@@ -770,6 +773,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsType;",
             "@JsType",
             "class ParentBuggy {",
+            "  ParentBuggy() {}",
             "  @JsProperty public boolean isFoo() { return false; }",
             "}",
             "public class Buggy extends ParentBuggy {",
@@ -963,127 +967,194 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   public void testJsConstructorSubclassSucceeds() throws Exception {
     compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "import jsinterop.annotations.JsIgnore;",
-            "@JsType",
-            "public class Buggy {",
-            "  public Buggy() {}",
-            "  @JsIgnore",
-            "  public Buggy(int a) {",
-            "    this();",
-            "  }",
-            "}",
-            "class SubBuggy extends Buggy {",
-            "  public SubBuggy() { this(1);}",
-            "  public SubBuggy(int a) { super();}",
-            "}",
-            "@JsType",
-            "class JsSubBuggy extends Buggy {",
-            "  @JsIgnore",
-            "  public JsSubBuggy() { this(1);}",
-            "  public JsSubBuggy(int a) { super();}",
-            "}",
-            "@JsType (isNative = true)",
-            "class NativeBuggy {",
-            "  public NativeBuggy() {}",
-            "  public NativeBuggy(int a) {}",
-            "}",
-            "@JsType (isNative = true)",
-            "class NativeSubNativeBuggy extends NativeBuggy{",
-            "  public NativeSubNativeBuggy() { super(1); }",
-            "  public NativeSubNativeBuggy(int a) { super();}",
-            "}",
-            "class SubNativeBuggy extends NativeBuggy {",
-            "  public SubNativeBuggy() { this(1);}",
-            "  public SubNativeBuggy(int a) { super();}",
-            "}",
-            "class SubSubNativeBuggy extends NativeBuggy {",
-            "  public SubSubNativeBuggy() { super(1);}",
-            "  public SubSubNativeBuggy(int a) { this(); }",
-            "}",
-            "class SubNativeBuggyImplicitConstructor extends NativeBuggy {",
-            "}")
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "import jsinterop.annotations.JsIgnore;",
+                "import jsinterop.annotations.JsConstructor;",
+                "@JsType",
+                "public class Buggy {",
+                "  public Buggy() {}",
+                "  @JsIgnore",
+                "  public Buggy(int a) {",
+                "    this();",
+                "  }",
+                "  public void m() {",
+                "    new Buggy() {};",
+                "    class LocalBuggy extends Buggy {",
+                "      @JsConstructor",
+                "      public LocalBuggy() {}",
+                "    }",
+                "  }",
+                "}",
+                "class SubBuggy extends Buggy {",
+                "  public SubBuggy() { this(1);}",
+                "  @JsConstructor",
+                "  public SubBuggy(int a) { super();}",
+                "}",
+                "@JsType",
+                "class JsSubBuggy extends Buggy {",
+                "  @JsIgnore",
+                "  public JsSubBuggy() { this(1);}",
+                "  public JsSubBuggy(int a) { super();}",
+                "}",
+                "@JsType (isNative = true)",
+                "class NativeBuggy {",
+                "  public NativeBuggy() {}",
+                "  public NativeBuggy(int a) {}",
+                "}",
+                "@JsType (isNative = true)",
+                "class NativeSubNativeBuggy extends NativeBuggy{",
+                "  public NativeSubNativeBuggy() { super(1); }",
+                "  public NativeSubNativeBuggy(int a) { super();}",
+                "}",
+                "class SubNativeBuggy extends NativeBuggy {",
+                "  @JsConstructor",
+                "  public SubNativeBuggy() { super(1);}",
+                "  public SubNativeBuggy(int a) { this(); }",
+                "}",
+                "@JsType",
+                "class ExplicitSubImplicitSuper extends ImplicitSubNativeSuper {",
+                "  public ExplicitSubImplicitSuper() { super(); }",
+                "}"),
+            source(
+                "ImplicitConstructor",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitConstructor extends Buggy {",
+                "}"),
+            source(
+                "SubImplicitConstructor",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class SubImplicitConstructor extends ImplicitConstructor {",
+                "}"),
+            source(
+                "ImplicitSubImplicitSuper",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitSubImplicitSuper extends ImplicitSubNativeSuper {",
+                "}"),
+            source(
+                "ImplicitSubNativeSuper",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitSubNativeSuper extends NativeBuggy {",
+                "}"),
+            source(
+                "ImplicitSubExplicitSuper",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitSubExplicitSuper extends ExplicitSubImplicitSuper {",
+                "}"))
         .assertCompileSucceeds();
   }
 
-  public void testBadConstructorsOnJsConstructorSubtypeFails() throws Exception {
+  public void testJsConstructorBadSubclassFails() throws Exception {
     compile(
-            "Buggy",
-            "import jsinterop.annotations.JsType;",
-            "import jsinterop.annotations.JsIgnore;",
-            "import jsinterop.annotations.JsConstructor;",
-            "@JsType",
-            "class BuggyJsType {",
-            "  public BuggyJsType() {}",
-            "  @JsIgnore",
-            "  public BuggyJsType(int a) { this(); }",
-            "}",
-            "public class Buggy extends BuggyJsType {",
-            // Error: two non-delegation constructors"
-            "  public Buggy() {}",
-            "  public Buggy(int a) { super(a); }",
-            "}",
-            "class SubBuggyJsType extends BuggyJsType {",
-            // Correct: one non-delegating constructor targeting super primary constructor
-            "  public SubBuggyJsType() { this(1); }",
-            "  public SubBuggyJsType(int a) { super(); }",
-            "}",
-            "class SubSubBuggyJsType extends SubBuggyJsType {",
-            // Error: non-delegating constructor target the wrong super constructor.
-            "  public SubSubBuggyJsType() { this(1);}",
-            "  public SubSubBuggyJsType(int a) { super(); }",
-            "}",
-            "class JsConstructorSubBuggyJsType extends SubBuggyJsType {",
-            // Error: non-delegating constructor target the wrong super constructor.
-            "  public JsConstructorSubBuggyJsType() { super(1);}",
-            "  @JsConstructor",
-            "  public JsConstructorSubBuggyJsType(int a) { super(); }",
-            "}",
-            "class OtherSubBuggyJsType extends BuggyJsType {",
-            // Error: JsConstructor not delegating to super primary constructor.
-            "  public OtherSubBuggyJsType() { super();}",
-            "  @JsConstructor",
-            "  public OtherSubBuggyJsType(int a) { this(); }",
-            "}",
-            "class AnotherSubBuggyJsType extends BuggyJsType {",
-            // Error: Multiple JsConstructors in JsConstructor subclass.
-            "  @JsConstructor",
-            "  public AnotherSubBuggyJsType() { super();}",
-            "  @JsConstructor",
-            "  public AnotherSubBuggyJsType(int a) { this(); }",
-            "}")
+            source(
+                "Buggy",
+                "import jsinterop.annotations.JsType;",
+                "import jsinterop.annotations.JsIgnore;",
+                "import jsinterop.annotations.JsConstructor;",
+                "@JsType",
+                "class BuggyJsType {",
+                "  public BuggyJsType() {}",
+                "  @JsIgnore",
+                "  public BuggyJsType(int a) { this(); }",
+                "  public void m() {",
+                // Error: Anonymous subclass delegating to the wrong constructor.
+                "    new BuggyJsType(2) {};",
+                "    class LocalBuggy extends BuggyJsType {",
+                // Error: Local subclass delegating to the wrong constructor.
+                "      @JsConstructor",
+                "      public LocalBuggy() { super(3); }",
+                "    }",
+                "  }",
+                "}",
+                "public class Buggy extends BuggyJsType {",
+                // Error: no JsConstructor.
+                "  public Buggy() {}",
+                "  public Buggy(int a) { super(a); }",
+                "}",
+                "class SubBuggyJsType extends BuggyJsType {",
+                // Correct: one JsConstructor delegating to the super JsConstructor.
+                "  public SubBuggyJsType() { this(1); }",
+                "  @JsConstructor",
+                "  public SubBuggyJsType(int a) { super(); }",
+                "}",
+                "class BadImplicitConstructor extends SubBuggyJsType {",
+                // Error: Implicit constructor is not a JsConstructor.
+                "}",
+                "class DelegatingToImplicitConstructor extends ImplicitConstructor {",
+                // Error: Non JsConstructor delegating to implicit JsConstructor.
+                "  public DelegatingToImplicitConstructor(int a) { }",
+                "}",
+                "class SubSubBuggyJsType extends SubBuggyJsType {",
+                // Error: JsConstructor delegating to a non JsConstructor.
+                "  public SubSubBuggyJsType() { this(1);}",
+                "  @JsConstructor",
+                "  public SubSubBuggyJsType(int a) { super(); }",
+                "}",
+                "class OtherSubBuggyJsType extends BuggyJsType {",
+                // Error: JsConstructor not delegating to super primary constructor.
+                "  public OtherSubBuggyJsType() { super();}",
+                "  @JsConstructor",
+                "  public OtherSubBuggyJsType(int a) { this(); }",
+                "}",
+                "class AnotherSubBuggyJsType extends BuggyJsType {",
+                // Error: Multiple JsConstructors in JsConstructor subclass.
+                "  @JsConstructor",
+                "  public AnotherSubBuggyJsType() { super();}",
+                "  @JsConstructor",
+                "  public AnotherSubBuggyJsType(int a) { this(); }",
+                "}",
+                "@JsType(isNative=true) class NativeType {",
+                "  NativeType() { }",
+                "  NativeType(int i) { }",
+                "}",
+                "class SomeClass2 extends NativeType {",
+                "}"),
+            source(
+                "BadImplicitJsConstructor",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class BadImplicitJsConstructor extends SubBuggyJsType {",
+                // Error: Implicit constructor delegates to the wrong super constructor.
+                "}"),
+            source(
+                "ImplicitConstructor",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitConstructor extends BuggyJsType {",
+                // Correct: Implicit constructor delegating to the JsConstructor.
+                "}"),
+            source(
+                "ImplicitJsConstructor",
+                "import jsinterop.annotations.JsType;",
+                "@JsType",
+                "public class ImplicitJsConstructor extends BuggyJsType {",
+                // Error: implicit JsConstructor delegating implicitly to a non JsConstructor.
+                "}"))
         .assertCompileFails(
-            "Constructor 'OtherSubBuggyJsType.OtherSubBuggyJsType(int)' can be a JsConstructor "
-                + "only if all constructors in the class are delegating to it.",
-            "More than one JsConstructor exists for 'AnotherSubBuggyJsType'."
-
-            // TODO(b/27597597): Finalize checker implementation and enable this test.
-            //  "Line 12: Class 'EntryPoint.Buggy' should have only one constructor delegating"
-            //      + " to the superclass since it is subclass of a a type with JsConstructor.",
-            //  "Line 22: Constructor 'EntryPoint.SubSubBuggyJsType.EntryPoint$SubSubBuggyJsType"
-            //      + "(int)' can only delegate to super constructor "
-            //      + "'EntryPoint.SubBuggyJsType.EntryPoint$SubBuggyJsType(int)' since it is a "
-            //      + "subclass of a type with JsConstructor.",
-            //  "Line 24: Class 'EntryPoint.JsConstructorSubBuggyJsType' should have only one "
-            //      + "constructor delegating to the superclass since it is subclass of a a type "
-            //      + "with JsConstructor.",
-            //  "Line 27: Constructor "
-            //      + "'EntryPoint.JsConstructorSubBuggyJsType.EntryPoint$"
-            //      + "JsConstructorSubBuggyJsType(int)'"
-            //      + " can be a JsConstructor only if all constructors in the class are "
-            //      + "delegating to it.",
-            //  "Line 38: 'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType(int)' "
-            //      + "cannot "
-            //      + "be exported because the global name 'test.EntryPoint.AnotherSubBuggyJsType'"
-            //      + " is already taken by "
-            //      + "'EntryPoint.AnotherSubBuggyJsType.EntryPoint$AnotherSubBuggyJsType()'."
-            );
+            "JsConstructor 'new BuggyJsType(int)' can only delegate to super "
+                + "JsConstructor 'BuggyJsType()'.",
+            "JsConstructor 'LocalBuggy()' can only delegate to super JsConstructor "
+                + "'BuggyJsType()'.",
+            "Class 'Buggy' should have a JsConstructor.",
+            "Class 'BadImplicitConstructor' should have a JsConstructor.",
+            "Implicit JsConstructor 'BadImplicitJsConstructor()' can only delegate to "
+                + "super JsConstructor 'SubBuggyJsType(int)'.",
+            "Class 'DelegatingToImplicitConstructor' should have a JsConstructor.",
+            "JsConstructor 'SubSubBuggyJsType(int)' can only delegate to super "
+                + "JsConstructor 'SubBuggyJsType(int)'.",
+            "More than one JsConstructor exists for 'AnotherSubBuggyJsType'.",
+            "JsConstructor 'OtherSubBuggyJsType(int)' can be a JsConstructor only if all "
+                + "other constructors in the class delegate to it.",
+            "Class 'SomeClass2' should have a JsConstructor.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
-  public void disabled_testMultipleConstructorsNotAllDelegatedToJsConstructorFails()
-      throws Exception {
+  public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
@@ -1095,8 +1166,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  }",
             "}")
         .assertCompileFails(
-            "Line 6: Constructor 'EntryPoint.Buggy.EntryPoint$Buggy()' can be a JsConstructor only "
-                + "if all constructors in the class are delegating to it.");
+            "JsConstructor 'Buggy()' can be a JsConstructor only if all other constructors "
+                + "in the class delegate to it.");
   }
 
   public void testMultipleJsConstructorsFails() throws Exception {
@@ -1125,6 +1196,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType",
             "class Parent extends ParentParent {",
+            "  Parent() {}",
             "  public void doIt(Object x) {}",
             "}",
             "public class Buggy extends Parent implements Foo {}")
@@ -1431,7 +1503,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  }",
             "}")
         .assertCompileFails(
-            "Native JsType constructor 'Buggy.Buggy(int)' cannot have non-empty method body.");
+            "Native JsType constructor 'Buggy(int)' cannot have non-empty method body.");
   }
 
   public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
@@ -1546,21 +1618,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsType;",
             "public class Buggy { void m() { @JsType class Local {} } }")
         .assertCompileFails("Local class '$1Local' cannot be a JsType.");
-  }
-
-  public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
-    compile(
-            source(
-                "Buggy",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public class Buggy extends Super {}"),
-            source(
-                "Super",
-                "import jsinterop.annotations.JsType;",
-                "@JsType(isNative = true)",
-                "public class Super {}"))
-        .assertCompileSucceeds();
   }
 
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() throws Exception {
@@ -1699,6 +1756,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod public void corge(int a, @JsOptional T b, String... c) {}",
             "}",
             "class SubBuggy extends Buggy<String> {",
+            "  @JsConstructor",
             "  public SubBuggy() { super(null); } ",
             "  @JsMethod public void corge(int a, @JsOptional String b, String... c) {}",
             "}",
@@ -1747,7 +1805,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}")
         .assertCompileFails(
             "JsOptional parameter 'a' in method "
-                + "'Buggy.Buggy(String, Object, String)' cannot precede parameters that are not "
+                + "'Buggy(String, Object, String)' cannot precede parameters that are not "
                 + "JsOptional.",
             "JsOptional parameter 'b' in method "
                 + "'void Buggy.bar(int, Object, String)' cannot precede parameters that are not "
@@ -1768,8 +1826,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "   @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}",
             "}")
         .assertCompileFails(
-            "JsOptional parameter 'a' in method '"
-                + "Buggy.Buggy(int)' cannot be of a primitive type.",
+            "JsOptional parameter 'a' in method '" + "Buggy(int)' cannot be of a primitive type.",
             "JsOptional parameter 'c' in method "
                 + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.");
   }
@@ -2041,11 +2098,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds();
   }
 
-  public void testNativeJsTypeExtendsNaiveJsTypeSucceeds() throws Exception {
+  public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsConstructor;",
             "@JsType(isNative=true) class Super {",
             "  public native int hashCode();",
             "}",
@@ -2064,6 +2122,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative=true) class NativeType {}",
             "interface A { int hashCode(); }",
             "class SomeClass extends NativeType implements A {",
+            "  @JsConstructor public SomeClass () {}",
             "  public int hashCode() { return 0; }",
             "}",
             "@JsType(isNative=true) interface NativeInterface {}",
@@ -2075,6 +2134,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsIgnore;",
+            "import jsinterop.annotations.JsConstructor;",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsMethod;",
             "@JsType(isNative=true) interface Interface {",
@@ -2097,12 +2157,15 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative=true) class NativeType {}",
             "interface A { @JsMethod(name=\"something\") int hashCode(); }",
             "class SomeClass extends NativeType implements A {",
+            "  @JsConstructor public SomeClass() {}",
             "  public int hashCode() { return 0; }",
             "}",
             "@JsType(isNative=true) class NativeTypeWithHashCode {",
             "  public native int hashCode();",
             "}",
-            "class SomeClass3 extends NativeTypeWithHashCode implements A {}",
+            "class SomeClass3 extends NativeTypeWithHashCode implements A {",
+            "  @JsConstructor public SomeClass3() {}",
+            "}",
             "@JsType(isNative=true) interface NativeInterface {",
             "  public Object foo();",
             "}",
@@ -2111,7 +2174,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}")
         .assertCompileFails(
             "Native JsType member 'void Interface.n()' cannot have @JsIgnore.",
-            "Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
+            "Native JsType member 'Buggy()' cannot have @JsIgnore.",
             "Native JsType field 'int Buggy.f' cannot be final.",
             "Native JsType field 'int Buggy.s' cannot be final.",
             "Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
@@ -2138,8 +2201,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsMethod;",
             "@JsType(isNative=true) class NativeType {}",
             "interface B { int hashCode(); }",
-            "class SomeClass2 extends NativeType implements B {",
-            "}",
             "@JsType(isNative=true) class NativeTypeWithHashCode {",
             "  public native int hashCode();",
             "}")
@@ -2152,20 +2213,24 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsIgnore;",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsConstructor;",
             "@JsType(isNative=true) class NativeType {",
             "  @JsMethod(name =\"string\")",
             "  public native String toString();",
             "}",
             "class Buggy extends NativeType {",
+            "  @JsConstructor Buggy() {}",
             "  public String toString() { return super.toString(); }",
             "  @JsMethod(name = \"blah\")",
             "  public int hashCode() { return super.hashCode(); }",
             "}",
             "class SubBuggy extends Buggy {",
+            "  @JsConstructor SubBuggy() {}",
             "  public boolean equals(Object obj) { return super.equals(obj); }",
             "  public Object foo(Object obj) { return null; }",
             "}",
             "class SubBuggy2 extends SubBuggy {",
+            "  @JsConstructor SubBuggy2() {}",
             "  public String foo(Object obj) { return super.toString(); }",
             "}")
         .assertCompileFails(
@@ -2208,6 +2273,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Buggy",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsConstructor;",
             "@JsType(isNative=true) abstract class Buggy {",
             "  public static native void m();",
             "  protected static native void m(Object o);",
@@ -2232,12 +2298,14 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public abstract int hashCode();",
             "}",
             "class NativeSubclass extends NativeClass {",
+            "  @JsConstructor public NativeSubclass() {}",
             "  public String toString() { return null; }",
             "  @JsMethod",
             "  public boolean equals(Object obj) { return false; }",
             "  public int hashCode() { return 0; }",
             "}",
             "class SubNativeSubclass extends NativeSubclass {",
+            "  @JsConstructor public SubNativeSubclass() {}",
             "  public boolean equals(Object obj) { return super.equals(obj); }",
             "}")
         .assertCompileSucceeds();
@@ -2303,11 +2371,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsConstructor;",
             "@JsType(isNative=true) class Super {",
             "  public native void m(Object o);",
             "  public native void m(int o);",
             "}",
             "public class Buggy extends Super {",
+            "  @JsConstructor public Buggy() {}",
             "  public void m(Object o) { }",
             "}")
         .assertCompileFails(
@@ -2344,6 +2414,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Buggy",
             "import jsinterop.annotations.JsType;",
             "@JsType class Super {",
+            "  Super() {}",
             "}",
             "public class Buggy extends Super {",
             "}")
@@ -2375,11 +2446,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   public void testNonJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
     compile(
             "Buggy",
+            "import jsinterop.annotations.JsConstructor;",
             "import jsinterop.annotations.JsType;",
             "@JsType(isNative=true) class Super {",
             "  public native void m();",
             "}",
             "public class Buggy extends Super {",
+            "  @JsConstructor Buggy() { }",
             "  public void m() { }",
             "}")
         .assertCompileSucceeds();

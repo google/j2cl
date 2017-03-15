@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import java.util.Iterator;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -54,16 +55,22 @@ public class JsTypeTest extends MyTestCase {
   }
 
   @JsType(isNative = true, namespace = "test.foo")
-  static interface MyNativeJsTypeInterface {}
+  interface MyNativeJsTypeInterface {}
 
   static class MyNativeJsTypeInterfaceImpl implements MyNativeJsTypeInterface {}
 
   @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
   static class MyNativeJsType {}
 
-  static class MyNativeJsTypeSubclass extends MyNativeJsType {}
+  static class MyNativeJsTypeSubclass extends MyNativeJsType {
+    @JsConstructor
+    public MyNativeJsTypeSubclass() {}
+  }
 
   static class MyNativeJsTypeSubclassWithIterator extends MyNativeJsType implements Iterable {
+    @JsConstructor
+    public MyNativeJsTypeSubclassWithIterator() {}
+
     @Override
     public Iterator iterator() {
       return null;
@@ -144,20 +151,20 @@ public class JsTypeTest extends MyTestCase {
     void run();
   }
 
-  /**
-   * This test class exposes parent jsmethod as non-jsmethod.
-   */
-  static class ConcreteJsTypeJsSubclass extends ConcreteJsType implements SubclassInterface {}
+  /** This test class exposes parent jsmethod as non-jsmethod. */
+  static class ConcreteJsTypeJsSubclass extends ConcreteJsType implements SubclassInterface {
+    @JsConstructor
+    public ConcreteJsTypeJsSubclass() {}
+  }
 
   static interface SubclassInterface {
     int publicMethodAlsoExposedAsNonJsMethod();
   }
 
-  /**
-   * This enum is annotated as a @JsType.
-   */
+  /** This enum is annotated as a @JsType. */
+  @SuppressWarnings("ImmutableEnumChecker")
   @JsType
-  public static enum MyEnumWithJsType {
+  public enum MyEnumWithJsType {
     TEST1(1),
     TEST2(2);
 
@@ -194,11 +201,10 @@ public class JsTypeTest extends MyTestCase {
     int packageField = 10;
   }
 
-  /**
-   * This enum is annotated exported and has enumerations which cause subclass generation.
-   */
+  /** This enum is annotated exported and has enumerations which cause subclass generation. */
+  @SuppressWarnings("ImmutableEnumChecker")
   @JsType
-  public static enum MyEnumWithSubclassGen {
+  public enum MyEnumWithSubclassGen {
     A {
       @Override
       public int foo() {
@@ -562,6 +568,7 @@ public class JsTypeTest extends MyTestCase {
   }
 
   static class JavaConcrete implements InterfaceWithSingleJavaConcrete {
+    @Override
     public int m() {
       return 5;
     }
@@ -584,6 +591,7 @@ public class JsTypeTest extends MyTestCase {
   }
 
   static final class JavaConcreteJsFunction implements JsFunctionInterface {
+    @Override
     public int m() {
       return 5;
     }
@@ -608,11 +616,13 @@ public class JsTypeTest extends MyTestCase {
   // Do not rename this class.
   @JsType
   abstract static class SomeZAbstractSubclass extends SomeAbstractClass {
+    @Override
     public abstract SomeZAbstractSubclass m();
   }
 
   @JsType
   static class SomeConcreteSubclass extends SomeZAbstractSubclass {
+    @Override
     public SomeConcreteSubclass m() {
       return this;
     }

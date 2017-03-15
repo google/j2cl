@@ -211,11 +211,11 @@ public abstract class TypeDescriptor extends Node
    * <p><code> class Foo { void bar() { Comparable comparable = new Comparable() { ... } } } </code>
    */
   public boolean isLocal() {
-    return getTypeDeclaration().isLocal();
+    return hasTypeDeclaration() && getTypeDeclaration().isLocal();
   }
 
   public boolean isAnonymous() {
-    return getTypeDeclaration().isAnonymous();
+    return hasTypeDeclaration() && getTypeDeclaration().isAnonymous();
   }
 
   @Override
@@ -236,8 +236,8 @@ public abstract class TypeDescriptor extends Node
 
   public abstract boolean isNullable();
 
-  public boolean isJsConstructorClassOrSubclass() {
-    return getTypeDeclaration().isJsConstructorClassOrSubclass();
+  public boolean hasJsConstructor() {
+    return getTypeDeclaration().hasJsConstructor();
   }
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
@@ -623,6 +623,28 @@ public abstract class TypeDescriptor extends Node
     return getMethodDescriptorsBySignature().values();
   }
 
+  /** Returns the default (parameterless) constructor for the type.. */
+  @Memoized
+  public MethodDescriptor getDefaultConstructorMethodDescriptor() {
+    return getDeclaredMethodDescriptors()
+        .stream()
+        .filter(MethodDescriptor::isConstructor)
+        .filter(methodDescriptor -> methodDescriptor.getParameterTypeDescriptors().isEmpty())
+        .findFirst()
+        .orElse(null);
+  }
+
+  /** Returns the JsConstructors for this class. */
+  @Memoized
+  @Nullable
+  public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
+    return getDeclaredMethodDescriptors()
+        .stream()
+        .filter(MethodDescriptor::isJsConstructor)
+        .collect(toImmutableList());
+  }
+
+
   @Override
   public String toString() {
     return getUniqueId();
@@ -632,6 +654,15 @@ public abstract class TypeDescriptor extends Node
   @Override
   public String getReadableDescription() {
     // TODO: Actually provide a real readable description.
+    if (isAnonymous()) {
+      if (getInterfaceTypeDescriptors().isEmpty()) {
+        return "new " + getSuperTypeDescriptor().getReadableDescription();
+      } else {
+        return "new " + getInterfaceTypeDescriptors().get(0).getReadableDescription();
+      }
+    } else if (isLocal()) {
+      return getSimpleSourceName().replaceFirst("\\$\\d+", "");
+    }
     return getSimpleSourceName();
   }
 

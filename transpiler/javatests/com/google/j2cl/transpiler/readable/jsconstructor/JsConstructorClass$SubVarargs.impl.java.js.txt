@@ -23,22 +23,11 @@ class SubVarargs extends Varargs {
    * @public
    */
   constructor(i, ...args) {
+    SubVarargs.$clinit();
     $Arrays.$stampType(args, $int, 1);
     super(...$Arrays.$checkNotNull(args));
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_SubVarargs__java_lang_Object__arrayOf_int(
         i, args);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @param {*} i
-   * @param {Array<number>} args
-   * @return {!SubVarargs}
-   * @public
-   */
-  static $create__java_lang_Object__arrayOf_int(i, args) {
-    SubVarargs.$clinit();
-    return new SubVarargs(i, ...$Arrays.$checkNotNull(args));
   }
 
   /**
@@ -84,9 +73,7 @@ class SubVarargs extends Varargs {
   static m_subNativeInvocation___$pp_com_google_j2cl_transpiler_readable_jsconstructor() {
     SubVarargs.$clinit();
     let unusedS1 = SubVarargs.$create__int(2);
-    let unusedS2 = SubVarargs.$create__java_lang_Object__arrayOf_int(
-        java_lang_Object.$create__(),
-        /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
+    let unusedS2 = new SubVarargs(java_lang_Object.$create__(), 1, 2, 3);
   }
 
   /**

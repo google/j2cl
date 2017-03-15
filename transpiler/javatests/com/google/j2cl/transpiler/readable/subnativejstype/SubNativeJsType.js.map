@@ -1,29 +1,23 @@
 [public class SubNativeJsType extends MyNativeJsType {
-  public SubNativeJsType(int x) {
+  @JsConstructor
 ...  }
 }] => [class SubNativeJsType extends MyNativeJsType {
   /**
 ...exports = SubNativeJsType;
 ] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType"
-[public SubNativeJsType(int x) {
+[@JsConstructor
+  public SubNativeJsType(int x) {
     super(x + 1);
   }] => [/**
    * Real constructor.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(x);
   }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"
 [x] => [x] "x"
+[UNKNOWN] => [SubNativeJsType.$clinit();]
 [UNKNOWN] => [super(x + 1);]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(x);]
-[public SubNativeJsType(int x) {
-    super(x + 1);
-  }] => [/**
-   * A particular Java constructor as a factory method.
-...    return new SubNativeJsType(x);
-  }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"
-[x] => [x] "x"
-[UNKNOWN] => [SubNativeJsType.$clinit();]
-[UNKNOWN] => [return new SubNativeJsType(x);]
-[public SubNativeJsType(int x) {
+[@JsConstructor
+  public SubNativeJsType(int x) {
     super(x + 1);
   }] => [/**
    * Initializes instance fields for a particular Java constructor.

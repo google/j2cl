@@ -230,16 +230,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    return J2clUtils.format(
-        "%s%s.%s(%s)",
-        isConstructor() ? "" : getReturnTypeDescriptor().getReadableDescription() + " ",
-        getEnclosingClassTypeDescriptor().getReadableDescription(),
-        isConstructor() ? getEnclosingClassTypeDescriptor().getReadableDescription() : getName(),
+    String parameterString =
         getDeclarationMethodDescriptor()
             .getParameterTypeDescriptors()
             .stream()
             .map(type -> type.getRawTypeDescriptor().getReadableDescription())
-            .collect(joining(", ")));
+            .collect(joining(", "));
+
+    if (isConstructor()) {
+      return J2clUtils.format(
+          "%s(%s)", getEnclosingClassTypeDescriptor().getReadableDescription(), parameterString);
+    }
+    return J2clUtils.format(
+        "%s %s.%s(%s)",
+        getReturnTypeDescriptor().getReadableDescription(),
+        getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getName(),
+        parameterString);
   }
 
   /** Returns a signature suitable for override checking from the Java source perspective. */
@@ -387,6 +394,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       // Static methods cannot be abstract
       checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
+
+      // Only constructors can be JsConstructor
+      checkState(!methodDescriptor.isJsConstructor() || methodDescriptor.isConstructor());
+
+      // Constructors can not be JsMethods.
+      checkState(!methodDescriptor.isJsMethod() || !methodDescriptor.isConstructor());
       if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
         List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
             methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();

@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsType;
 
 public class TestCase1596 {
@@ -19,7 +20,10 @@ public class TestCase1596 {
     }
   }
 
-  static class C extends B<String> {}
+  static class C extends B<String> {
+    @JsConstructor
+    public C() {}
+  }
 
   @SuppressWarnings("unchecked")
   public static void test() {

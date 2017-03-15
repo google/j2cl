@@ -167,7 +167,16 @@ public abstract class TypeDeclaration extends Node
   @Override
   public abstract boolean isNative();
 
-  public abstract boolean isJsConstructorClassOrSubclass();
+  public boolean hasJsConstructor() {
+    return !getJsConstructorMethodDescriptors().isEmpty();
+  }
+
+  public boolean isJsConstructorSubtype() {
+    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    return superTypeDescriptor != null && superTypeDescriptor.hasJsConstructor();
+  }
+
+
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
 
@@ -410,6 +419,15 @@ public abstract class TypeDeclaration extends Node
     return getDeclaredMethodDescriptorsBySignature().values();
   }
 
+  /** Returns the JsConstructor for this class if any. */
+  @Memoized
+  @Nullable
+  public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
+    return getDeclaredMethodDescriptors()
+        .stream()
+        .filter(MethodDescriptor::isJsConstructor)
+        .collect(ImmutableList.toImmutableList());
+  }
   /**
    * The list of fields declared in the type. Note: this does not include methods synthetic fields
    * (like captures) nor supertype fields.
@@ -422,6 +440,17 @@ public abstract class TypeDeclaration extends Node
   /** The list of all methods available on a given type. */
   public Collection<MethodDescriptor> getMethodDescriptors() {
     return getMethodDescriptorsBySignature().values();
+  }
+
+  /** Returns the default (parameterless) constructor for the type.. */
+  @Memoized
+  public MethodDescriptor getDefaultConstructorMethodDescriptor() {
+    return getDeclaredMethodDescriptors()
+        .stream()
+        .filter(MethodDescriptor::isConstructor)
+        .filter(methodDescriptor -> methodDescriptor.getParameterTypeDescriptors().isEmpty())
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -621,7 +650,6 @@ public abstract class TypeDeclaration extends Node
         .setJsFunctionImplementation(false)
         .setJsType(false)
         .setLocal(false)
-        .setJsConstructorClassOrSubclass(false)
         .setTypeParameterDescriptors(Collections.emptyList())
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -667,8 +695,6 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setVisibility(Visibility visibility);
 
     public abstract Builder setPackageName(String packageName);
-
-    public abstract Builder setJsConstructorClassOrSubclass(boolean isJsConstructorClassOrSubclass);
 
     public abstract Builder setSimpleJsName(String simpleJsName);
 

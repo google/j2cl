@@ -1,6 +1,7 @@
 package com.google.j2cl.transpiler.readable.jsvarargs;
 
 import java.util.List;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -14,6 +15,7 @@ public class Main {
   }
 
   static class SubVarargsConstructorClass extends NativeObject {
+    @JsConstructor
     public SubVarargsConstructorClass(int i, Object... args) {
       super(args);
     }

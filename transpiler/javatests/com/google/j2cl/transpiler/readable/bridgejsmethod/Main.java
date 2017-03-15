@@ -102,12 +102,14 @@ public class Main {
   }
 
   interface M {
-    public B getB();
+    B getB();
   }
 
   @JsType
   @SuppressWarnings("ClassCanBeStatic")
   abstract class N implements M {
+    N() {}
+
     @Override
     public abstract B getB();
   }

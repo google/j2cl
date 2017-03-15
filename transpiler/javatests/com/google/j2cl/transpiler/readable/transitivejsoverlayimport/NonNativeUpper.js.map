@@ -1,32 +1,20 @@
 [public class NonNativeUpper extends Immediate {
-
-  void doNonNativeUpperInstanceMethod() {}
+  @JsConstructor
+...  void doNonNativeUpperInstanceMethod() {}
 }] => [class NonNativeUpper extends Object {
   /**
 ...exports = NonNativeUpper;
 ] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper"
-[public class NonNativeUpper extends Immediate {
-
-  void doNonNativeUpperInstanceMethod() {}
-}] => [/**
+[@JsConstructor
+  public NonNativeUpper() {}] => [/**
    * Real constructor.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper__();
   }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"
+[UNKNOWN] => [NonNativeUpper.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper__();]
-[public class NonNativeUpper extends Immediate {
-
-  void doNonNativeUpperInstanceMethod() {}
-}] => [/**
-   * A particular Java constructor as a factory method.
-...    return new NonNativeUpper();
-  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"
-[UNKNOWN] => [NonNativeUpper.$clinit();]
-[UNKNOWN] => [return new NonNativeUpper();]
-[public class NonNativeUpper extends Immediate {
-
-  void doNonNativeUpperInstanceMethod() {}
-}] => [/**
+[@JsConstructor
+  public NonNativeUpper() {}] => [/**
    * Initializes instance fields for a particular Java constructor.
 ...    this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeUpper();
   }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper.<ctor>"

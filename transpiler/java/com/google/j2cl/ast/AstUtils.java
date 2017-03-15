@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -88,31 +89,30 @@ public class AstUtils {
   }
 
   /** Create default constructor MethodDescriptor. */
-  public static MethodDescriptor createDefaultConstructorDescriptor(
-      TypeDescriptor enclosingClassTypeDescriptor,
-      TypeDescriptor... parameterTypeDescriptors) {
+  public static MethodDescriptor createImplicitConstructorDescriptor(
+      TypeDescriptor enclosingClassTypeDescriptor) {
     JsInfo jsInfo =
-        isDefaultConstructorJsConstructor(enclosingClassTypeDescriptor)
+        isImplicitJsConstructor(enclosingClassTypeDescriptor.getTypeDeclaration())
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
     return MethodDescriptor.newBuilder()
-        .setVisibility(getDefaultConstructorVisibility(enclosingClassTypeDescriptor))
+        .setVisibility(
+            getImplicitConstructorVisibility(enclosingClassTypeDescriptor.getTypeDeclaration()))
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .setConstructor(true)
-        .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .build();
   }
 
-  private static Visibility getDefaultConstructorVisibility(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isEnum() ? Visibility.PRIVATE : typeDescriptor.getVisibility();
+  private static Visibility getImplicitConstructorVisibility(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.isEnum() ? Visibility.PRIVATE : typeDeclaration.getVisibility();
   }
 
-  /** Return true if the default constructor is a JsConstructor. */
-  public static boolean isDefaultConstructorJsConstructor(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isJsType()
-        && (typeDescriptor.isNative()
-            || getDefaultConstructorVisibility(typeDescriptor).isPublic());
+  /** Return true if the synthetic implicit default constructor is a JsConstructor. */
+  private static boolean isImplicitJsConstructor(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.isJsType()
+        && (typeDeclaration.isNative()
+            || getImplicitConstructorVisibility(typeDeclaration).isPublic());
   }
 
   /**
@@ -170,6 +170,26 @@ public class AstUtils {
   public static boolean hasConstructorInvocation(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null;
+  }
+
+  /**
+   * Returns the superclass constructor method descriptor this constructor delegates to if any or
+   * {@code null} otherwise.
+   */
+  public static MethodDescriptor getDelegatedSuperConstructorDescriptor(Method method) {
+    checkArgument(method.isConstructor());
+    if (!hasConstructorInvocation(method)) {
+      return method
+          .getDescriptor()
+          .getEnclosingClassTypeDescriptor()
+          .getSuperTypeDescriptor()
+          .getDefaultConstructorMethodDescriptor();
+    }
+    MethodDescriptor delegatedMethodDescriptor = getConstructorInvocation(method).getTarget();
+
+    return delegatedMethodDescriptor.inSameTypeAs(method.getDescriptor())
+        ? null
+        : delegatedMethodDescriptor;
   }
 
   /** Returns whether other is a subtype of one. */
@@ -998,8 +1018,10 @@ public class AstUtils {
   }
 
   /** Creates an implicit constructor that forwards to a specific super constructor. */
-  public static Method createImplicitConstructor(
-      MethodDescriptor constructorDescriptor, MethodDescriptor superConstructorDescriptor) {
+  public static Method createImplicitAnonymousClassConstructor(
+      SourcePosition sourcePosition,
+      MethodDescriptor constructorDescriptor,
+      MethodDescriptor superConstructorDescriptor) {
 
     // If the super qualifier is explicit then it is passed as the first parameter and the super
     // constructor has 1 parameter less than the constructor being build.
@@ -1041,6 +1063,7 @@ public class AstUtils {
                 .setArguments(superConstructorArguments)
                 .build()
                 .makeStatement())
+        .setSourcePosition(sourcePosition)
         .build();
   }
 

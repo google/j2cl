@@ -40,6 +40,8 @@ public abstract class JsInfo {
 
   public abstract boolean isJsOverlay();
 
+  abstract Builder toBuilder();
+
   /** Not a JS member. */
   public static final JsInfo NONE = newBuilder().setJsMemberType(JsMemberType.NONE).build();
 
@@ -71,6 +73,10 @@ public abstract class JsInfo {
 
     public JsInfo build() {
       return interner.intern(autoBuild());
+    }
+
+    public static Builder from(JsInfo jsInfo) {
+      return jsInfo.toBuilder();
     }
 
     private static final ThreadLocalInterner<JsInfo> interner = new ThreadLocalInterner<>();

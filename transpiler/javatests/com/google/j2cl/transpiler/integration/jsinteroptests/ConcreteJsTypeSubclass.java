@@ -15,12 +15,16 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 
 /**
  * This concrete test class is not annotated as a @JsType but its parent is.
  */
 class ConcreteJsTypeSubclass extends ConcreteJsType {
+  @JsConstructor
+  public ConcreteJsTypeSubclass() {}
+
   /**
    * Overrides an exported method in the parent class and so will also itself be exported.
    */

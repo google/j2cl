@@ -2,6 +2,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -76,6 +77,7 @@ public class JsTypeVarargsTest extends MyTestCase {
       this(1, args[0], args[1], null);
     }
 
+    @JsConstructor
     SubNativeWithVarargsConstructor(int i, Object... args) {
       super(i, args);
     }
@@ -87,6 +89,7 @@ public class JsTypeVarargsTest extends MyTestCase {
   }
 
   static class SubSubNativeWithVarargsConstructor extends SubNativeWithVarargsConstructor {
+    @JsConstructor
     SubSubNativeWithVarargsConstructor() {
       super(0, new Object());
     }

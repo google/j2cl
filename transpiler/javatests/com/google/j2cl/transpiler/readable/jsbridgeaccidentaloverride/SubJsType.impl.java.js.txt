@@ -19,12 +19,11 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
  */
 class SubJsType extends MyJsType {
   /**
-   * Real constructor.
+   * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
   }
 
   /**
@@ -34,7 +33,10 @@ class SubJsType extends MyJsType {
    */
   static $create__() {
     SubJsType.$clinit();
-    return new SubJsType();
+    let $instance = new SubJsType();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
+    return $instance;
   }
 
   /**
@@ -43,6 +45,7 @@ class SubJsType extends MyJsType {
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();
     this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();
   }
 

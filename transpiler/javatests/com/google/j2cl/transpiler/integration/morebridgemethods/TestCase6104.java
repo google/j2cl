@@ -5,6 +5,7 @@ import jsinterop.annotations.JsType;
 public class TestCase6104 {
   @JsType
   static class B {
+    private B() {}
     @SuppressWarnings("unused")
     public String get(String value) {
       return "B get String";
