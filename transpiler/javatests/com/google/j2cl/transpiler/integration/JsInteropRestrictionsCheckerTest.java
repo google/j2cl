@@ -143,7 +143,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  Child3 c3;",
             "  Child4 c4;",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testCollidingFieldsFails() throws Exception {
@@ -171,7 +172,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty(name = \"x\") int x();",
             "  @JsProperty(name = \"x\") void x(int x);",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
@@ -188,7 +190,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty abstract boolean isY();",
             "  @JsProperty abstract void setY(boolean y);",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsPropertyIncorrectGetterStyleFails() throws Exception {
@@ -285,7 +288,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty",
             "  public static Object another;",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
@@ -391,7 +395,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void show() {}",
             "}")
         .assertCompileFails(
-            " 'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
+            "'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
                 + "JavaScript name 'show'");
   }
 
@@ -467,7 +471,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "class AnotherJsTypeSubclass extends PlainJavaParent {",
             "  public void foo(int a) {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testCollidingSubclassMembersJsTypeFails() throws Exception {
@@ -625,7 +630,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int compareTo(E other) {return 0;}",
             "}",
             "public class Buggy {}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
@@ -641,7 +647,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int compareTo(E other) {return 0;}",
             "}",
             "public class Buggy {}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testSpecializeReturnTypeInImplementorSucceeds() throws Exception {
@@ -656,7 +663,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "class Buggy implements I {",
             "  public Buggy m() { return null; } ",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testSpecializeReturnTypeInSubclassSucceeds() throws Exception {
@@ -671,7 +679,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "public class Buggy extends S {",
             "  public Buggy m() { return null; } ",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
@@ -781,7 +790,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty(name = \"bar\") public int getFoo() { return 0; }",
             "}")
         .assertCompileFails(
-            " 'int Buggy.getFoo()' cannot be assigned JavaScript name 'bar' that is different"
+            "'int Buggy.getFoo()' cannot be assigned JavaScript name 'bar' that is different"
                 + " from the JavaScript name of a method it overrides "
                 + "('int ParentBuggy.getFoo()' with JavaScript name 'foo').");
   }
@@ -800,7 +809,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsProperty public boolean getFoo() { return false;}",
             "}")
         .assertCompileFails(
-            " 'boolean Buggy.getFoo()' and 'boolean ParentBuggy.isFoo()' cannot both use the "
+            "'boolean Buggy.getFoo()' and 'boolean ParentBuggy.isFoo()' cannot both use the "
                 + "same JavaScript name 'foo'.");
   }
 
@@ -820,7 +829,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int getFoo() {return 0;}",
             "  public void setFoo(int value) {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testInconsistentGetSetPropertyTypeFails() throws Exception {
@@ -905,7 +915,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy extends Super {",
             "  public int m() { return getX(); }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsPropertyAccidentalSuperCallSucceeds() throws Exception {
@@ -921,7 +932,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public class Buggy extends Super implements Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsPropertyOverrideSucceeds() throws Exception {
@@ -936,7 +948,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy extends Super {",
             "  @JsProperty public void setX(int x) {  }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testMixingJsMethodJsPropertyFails() throws Exception {
@@ -970,7 +983,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             // The next method fails in GWT but should not fail in J2CL.
             "  @JsMethod public native void n(int i, int... z) /*-{ return z[0];}-*/;",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testMultiplePrivateConstructorsSucceeds() throws Exception {
@@ -982,7 +996,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  private Buggy() {}",
             "  private Buggy(int a) {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsConstructorSubclassSucceeds() throws Exception {
@@ -1220,7 +1235,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void doIt(Object x) {}",
             "}",
             "public class Buggy extends Parent implements Foo {}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsNameInvalidNamesFails() throws Exception {
@@ -1328,7 +1344,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"?\")",
             "interface Wildcard {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testSingleJsTypeSucceeds() throws Exception {
@@ -1340,7 +1357,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void show1() {}",
             "  public void show2() {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsFunctionSucceeds() throws Exception {
@@ -1378,7 +1396,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "final class Buggy2 implements Function2 {",
             "  public String getFoo() { return null;}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsFunctionFails() throws Exception {
@@ -1488,7 +1507,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "    Object.class.getName();",
             "  }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeInstanceInitializerFails() throws Exception {
@@ -1542,7 +1562,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "public class Super {",
                 "  public Super() {}",
                 "}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeExplicitSuperSucceeds() throws Exception {
@@ -1563,7 +1584,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "public class Super {",
                 "  public Super(int x) {}",
                 "}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeExplicitSuperWithEffectSucceeds() throws Exception {
@@ -1584,7 +1606,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "public class Super {",
                 "  public Super(int x) {}",
                 "}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeInterfaceInInstanceofFails() throws Exception {
@@ -1629,7 +1652,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsType",
             "  public static class Buggy {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testLocalJsTypeFails() throws Exception {
@@ -1652,7 +1676,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "import jsinterop.annotations.JsType;",
                 "@JsType(isNative = true)",
                 "public interface Super {}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeInterfaceImplementsNativeJsTypeSucceeds() throws Exception {
@@ -1667,7 +1692,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "import jsinterop.annotations.JsType;",
                 "@JsType(isNative = true)",
                 "public interface Super {}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeExtendsJsTypeFails() throws Exception {
@@ -1773,12 +1799,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
             "  @JsMethod public void baz(@JsOptional String a, @JsOptional Object b) {}",
             "  @JsMethod public void qux(@JsOptional String c, Object... os) {}",
-            "  @JsMethod public void corge(int a, @JsOptional T b, String... c) {}",
+            "  @JsMethod public void corge(int a, @JsOptional T b, Object... c) {}",
             "}",
             "class SubBuggy extends Buggy<String> {",
             "  @JsConstructor",
             "  public SubBuggy() { super(null); } ",
-            "  @JsMethod public void corge(int a, @JsOptional String b, String... c) {}",
+            "  @JsMethod public void corge(int a, @JsOptional String b, Object... c) {}",
             "}",
             "@JsFunction interface Function {",
             "  void m(String a, @JsOptional String b);",
@@ -1786,7 +1812,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "final class FunctionImpl implements Function {",
             "   public void m(String a, @JsOptional String b) {}",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsOptionalNotJsOptionalOverrideFails() throws Exception {
@@ -1884,7 +1911,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsOverlay Object obj = new Object();",
             "  @JsOverlay default void someOverlayMethod(){};",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsOverlayOnNativeJsTypeMemberSucceeds() throws Exception {
@@ -1914,7 +1942,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsOverlay final void o() { }",
             "  @JsOverlay protected final void p() { }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsOverlayImplementingInterfaceMethodFails() throws Exception {
@@ -1982,7 +2011,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsOverlay public static int f2 = 2;",
             "  static { f2 = 3; }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsOverlayOnNativeMethodFails() throws Exception {
@@ -2060,7 +2090,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public class Buggy extends Super {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeExtendsNonJsTypeSucceeds() throws Exception {
@@ -2071,7 +2102,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public class Buggy extends Super {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeImplementsNativeJsTypeInterfaceSucceeds() throws Exception {
@@ -2082,7 +2114,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public class Buggy implements Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeImplementsNonJsTypeInterfaceSucceeds() throws Exception {
@@ -2093,7 +2126,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public class Buggy implements Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() throws Exception {
@@ -2104,7 +2138,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public interface Buggy extends Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testJsTypeInterfaceExtendsNonJsTypeInterfaceSucceeds() throws Exception {
@@ -2115,7 +2150,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType public interface Buggy extends Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -2147,7 +2183,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "@JsType(isNative=true) interface NativeInterface {}",
             "class SomeClass3 implements NativeInterface {}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeBadMembersFails() throws Exception {
@@ -2285,7 +2322,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod",
             "  public native void m();",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeSucceeds() throws Exception {
@@ -2328,7 +2366,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsConstructor public SubNativeSubclass() {}",
             "  public boolean equals(Object obj) { return super.equals(obj); }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeFieldsSucceeds() throws Exception {
@@ -2344,7 +2383,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  protected int f5;",
             "  private int f6;",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNativeJsTypeDefaultConstructorSucceeds() throws Exception {
@@ -2354,7 +2394,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType(isNative = true)",
             "public class Buggy {}",
             "")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() throws Exception {
@@ -2368,7 +2409,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "@JsType public class Buggy extends Super {",
             "  public void n(Object o) { }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testClassesExtendingNativeJsTypeInterfaceWithOverlaySucceeds() throws Exception {
@@ -2383,7 +2425,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "class JavaSubclass implements Super {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails()
@@ -2413,7 +2456,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod public static native void m(Object o);",
             "  @JsMethod public static native void m(int o);",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
@@ -2438,7 +2482,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "public class Buggy extends Super {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeImplementsJsTypeInterfaceSucceeds() throws Exception {
@@ -2449,7 +2494,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "public class Buggy implements Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeInterfaceExtendsJsTypeInterfaceSucceeds() throws Exception {
@@ -2460,7 +2506,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "public interface Buggy extends Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -2475,7 +2522,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsConstructor Buggy() { }",
             "  public void m() { }",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeImplementsNativeJsTypeInterfaceSucceeds() throws Exception {
@@ -2486,7 +2534,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "public class Buggy implements Interface {",
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() throws Exception {
@@ -2497,7 +2546,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 "import jsinterop.annotations.JsType;",
                 "@JsType(isNative = true)",
                 "public interface Interface {}"))
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testUnusableByJsSuppressionSucceeds() throws Exception {
@@ -2521,7 +2571,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "    @SuppressWarnings(\"unusable-by-js\")A b",
             "  ) {}", // add SuppressWarnings to parameters.
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testUsableByJsTypesSucceeds() throws Exception {
@@ -2540,13 +2591,16 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void f5(FI a) {}", // JsFunction works fine.
             "  public void f7(Object a) {}", // Java Object works fine.
             "  public void f8(boolean[] a) {}", // array of primitive types work fine.
-            "  public void f9(Boolean[] a, Double[] b, String[] c) {}", // array of unboxed types.
             "  public void f10(A[] a) {}", // array of JsType works fine.
             "  public void f11(FI[] a) {}", // array of JsFunction works fine.
+            "  public void f12(Boolean[] a, Double[] b, String[] c) {}", // array of unboxed types.
             "  public void f13(Object[] a) {}", // Object[] works fine.
             "  public void f14(Object[][] a) {}", // Object[][] works fine.
+            "  public long f15(long a) { return 1l; }", // long works fine.
+            "  public long f16(long... a) { return 1l; }", // varargs of allowable types works fine.
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testUnusableByNonJsMembersSucceeds() throws Exception {
@@ -2558,7 +2612,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  private A field;", // private field.
             "  private A f1(A a) { return null; }", // private method.
             "}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   // TODO(b/27597597): Finalize checker implementation and enable this test.
@@ -2585,41 +2640,46 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public A f;", // exported field
             "  public A f1(A a) { return null; }", // regular class fails.
             "  public A[] f2(A[] a) { return null; }", // array of regular class fails.
-            "  public long f3(long a) { return 1l; }", // long fails.
+            "  public Short f3(Short a) { return (short) 1; }", // Short fails.
             // non-JsType class that implements a JsType interface fails.
             "  public B f4(B a) { return null; }",
+            "  public Long f5(Long a) { return 1l; }", // Long fails
+            "  public void f6(Long... a) { }", // varargs fails
             "}")
-        .assertCompileSucceeds();
-
-    // TODO(b/27597597): Finalize checker implementation and enable this test.
-    //  "Line 12: [unusable-by-js] Type of parameter 'a' in "
-    //    + "'void EntryPoint.C.fc1(EntryPoint.A)' is not usable by but exposed to JavaScript.",
-    //  "Line 16: [unusable-by-js] Type of 'EntryPoint.A EntryPoint.D.a' is not usable by but "
-    //      + "exposed to JavaScript.",
-    //  "Line 18: [unusable-by-js] Type of parameter 'a' in 'void "
-    //      + "EntryPoint.FI.f(EntryPoint.A)' is not usable by but exposed to JavaScript.",
-    //  "Line 20: [unusable-by-js] Type of 'EntryPoint.A EntryPoint.Buggy.f' is not usable by "
-    //      + "but exposed to JavaScript.",
-    //  "Line 21: [unusable-by-js] Return type of 'EntryPoint.A EntryPoint.Buggy.f1(EntryPoint"
-    //      + ".A)' is not usable by but exposed to JavaScript.",
-    //  "Line 21: [unusable-by-js] Type of parameter 'a' in "
-    //      + "'EntryPoint.A EntryPoint.Buggy.f1(EntryPoint.A)' is not usable by but "
-    //      + "exposed to JavaScript.",
-    //  "Line 22: [unusable-by-js] Return type of "
-    //      + "'EntryPoint.A[] EntryPoint.Buggy.f2(EntryPoint.A[])' is not usable by but "
-    //      + "exposed to JavaScript.",
-    //  "Line 22: [unusable-by-js] Type of parameter 'a' in "
-    //      + "'EntryPoint.A[] EntryPoint.Buggy.f2(EntryPoint.A[])' is not usable by but "
-    //      + "exposed to JavaScript.",
-    //  "Line 23: [unusable-by-js] Return type of 'long EntryPoint.Buggy.f3(long)' is not "
-    //      + "usable by but exposed to JavaScript.",
-    //  "Line 23: [unusable-by-js] Type of parameter 'a' in "
-    //      + "'long EntryPoint.Buggy.f3(long)' is not usable by but exposed to JavaScript.",
-    //  "Line 24: [unusable-by-js] Return type of 'EntryPoint.B EntryPoint.Buggy.f4(EntryPoint"
-    //      + ".B)' is not usable by but exposed to JavaScript.",
-    //  "Line 24: [unusable-by-js] Type of parameter 'a' in "
-    //      + "'EntryPoint.B EntryPoint.Buggy.f4(EntryPoint.B)' is not usable by but "
-    //      + "exposed to JavaScript.");
+        .assertCompileSucceeds()
+        .assertWarnings(
+            "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A)' is not usable by but "
+                + "exposed to JavaScript.",
+            "[unusable-by-js] Type of 'A D.a' is not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A)' is not usable by but exposed "
+                + "to JavaScript.",
+            "[unusable-by-js] Type of 'A Buggy.f' is not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'A Buggy.f1(A)' is not usable by but exposed to "
+                + "JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'A Buggy.f1(A)' is not usable by but exposed"
+                + " to JavaScript.",
+            "[unusable-by-js] Return type of 'A[] Buggy.f2(A[])' is not usable by but exposed to "
+                + "JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'A[] Buggy.f2(A[])' is not usable by but "
+                + "exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'Short Buggy.f3(Short)' is not usable by but exposed "
+                + "to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'Short Buggy.f3(Short)' is not usable by but"
+                + " exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'B Buggy.f4(B)' is not usable by but "
+                + "exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B)' is not usable by but exposed"
+                + " to JavaScript.",
+            "[unusable-by-js] Return type of 'Long Buggy.f5(Long)' is not usable by but exposed to"
+                + " JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'Long Buggy.f5(Long)' is not usable by "
+                + "but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long[])' is not usable by but"
+                + " exposed to JavaScript.")
+        .assertInfoMessages(
+            "Suppress \"[unusable-by-js]\" warnings by adding a "
+                + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "
+                + "corresponding member.");
   }
 
   public void testUnusableByJsAccidentalOverrideSuppressionWarns() throws Exception {
@@ -2635,7 +2695,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void doIt(Class x) {}",
             "}",
             "public class Buggy extends Parent implements Foo {}")
-        .assertCompileSucceeds();
+        .assertCompileSucceeds()
+        .assertNoWarnings();
     // TODO(b/27597597): Finalize checker implementation and enable this test.
     //  "Line 10: [unusable-by-js] Type of parameter 'x' in "
     //      + "'void EntryPoint.Parent.doIt(Class)' (exposed by 'EntryPoint.Buggy') is not "

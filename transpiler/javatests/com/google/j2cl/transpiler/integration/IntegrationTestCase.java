@@ -92,14 +92,34 @@ public class IntegrationTestCase extends TestCase {
       return outputLocation;
     }
 
-    public void assertCompileFails(String... expectedErrors) throws Exception {
+    public TranspileResult assertCompileFails(String... expectedErrors) throws Exception {
       assertThat(getProblems().getErrors())
           .comparingElementsUsing(CONTAINS_STRING)
           .containsExactlyElementsIn(Arrays.asList(expectedErrors));
+      return this;
     }
 
-    public void assertCompileSucceeds() throws Exception {
+    public TranspileResult assertCompileSucceeds() throws Exception {
       assertThat(getProblems().getErrors()).isEmpty();
+      return this;
+    }
+
+    public TranspileResult assertNoWarnings() throws Exception {
+      return assertWarnings();
+    }
+
+    public TranspileResult assertWarnings(String... expectedWarnings) throws Exception {
+      assertThat(getProblems().getWarnings())
+          .comparingElementsUsing(CONTAINS_STRING)
+          .containsExactlyElementsIn(Arrays.asList(expectedWarnings));
+      return this;
+    }
+
+    public TranspileResult assertInfoMessages(String... expectedInfoMessages) throws Exception {
+      assertThat(getProblems().getInfoMessages())
+          .comparingElementsUsing(CONTAINS_STRING)
+          .containsExactlyElementsIn(Arrays.asList(expectedInfoMessages));
+      return this;
     }
   }
 

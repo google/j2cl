@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 /** Abstract base class for member descriptors. */
 @Visitable
 public abstract class MemberDescriptor extends Node
-    implements HasJsNameInfo, HasReadableDescription {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
   public abstract JsInfo getJsInfo();
 

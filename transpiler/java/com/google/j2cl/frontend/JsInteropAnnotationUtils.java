@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import java.util.Arrays;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -34,6 +35,7 @@ public class JsInteropAnnotationUtils {
   private static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
+  private static final String SUPPRESS_WARNINGS_NAME = "java.lang.SuppressWarnings";
 
   private JsInteropAnnotationUtils() {}
 
@@ -84,6 +86,18 @@ public class JsInteropAnnotationUtils {
 
   public static boolean isNative(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getAnnotationParameterBoolean(annotationBinding, "isNative", false);
+  }
+
+  public static boolean isUnusableByJsSuppressed(IBinding binding) {
+    IAnnotationBinding suppressWarningsBinding =
+        JdtAnnotationUtils.findAnnotationBindingByName(
+            binding.getAnnotations(), SUPPRESS_WARNINGS_NAME);
+    if (suppressWarningsBinding == null) {
+      return false;
+    }
+    Object[] suppressions =
+        JdtAnnotationUtils.getAnnotationParameterArray(suppressWarningsBinding, "value");
+    return Arrays.stream(suppressions).anyMatch("unusable-by-js"::equals);
   }
 
   /**

@@ -217,6 +217,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setBridge(false)
         .setJsFunction(false)
         .setParameterOptionality(new BitSet())
+        .setUnusableByJsSuppressed(false)
         .setParameterTypeDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -301,6 +302,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setBridge(boolean isBridge);
 
     public abstract Builder setJsFunction(boolean isJsFunction);
+
+    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setEnclosingClassTypeDescriptor(
         TypeDescriptor enclosingClassTypeDescriptor);

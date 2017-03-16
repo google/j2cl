@@ -71,9 +71,19 @@ public class Problems {
 
   /** Represents the severity of the problem */
   public enum Severity {
-    ERROR,
-    WARNING,
-    INFO
+    ERROR("Error"),
+    WARNING("Warning"),
+    INFO("Info");
+
+    Severity(String messagePrefix) {
+      this.messagePrefix = messagePrefix;
+    }
+
+    private final String messagePrefix;
+
+    public String getMessagePrefix() {
+      return messagePrefix;
+    }
   }
 
   private boolean abortRequested = false;
@@ -89,7 +99,8 @@ public class Problems {
   }
 
   public void error(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    error(
+    problem(
+        Severity.ERROR,
         sourcePosition.getStartFilePosition().getLine(),
         sourcePosition.getFilePath(),
         detailMessage,
@@ -97,18 +108,33 @@ public class Problems {
   }
 
   public void error(int lineNumber, String filePath, String detailMessage, Object... args) {
-    abortWhenPossible();
+    problem(Severity.ERROR, lineNumber, filePath, detailMessage, args);
+  }
+
+  public void warning(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    problem(
+        Severity.WARNING,
+        sourcePosition.getStartFilePosition().getLine(),
+        sourcePosition.getFilePath(),
+        detailMessage,
+        args);
+  }
+
+  private void problem(
+      Severity severity, int lineNumber, String filePath, String detailMessage, Object... args) {
+    if (severity == Severity.ERROR) {
+      abortWhenPossible();
+    }
     String message = args.length == 0 ? detailMessage : J2clUtils.format(detailMessage, args);
     problemsBySeverity.put(
-        Severity.ERROR,
-        "Error: "
-            +
+        severity,
+        J2clUtils.format(
+            "%s:%s:%s: %s",
+            severity.getMessagePrefix(),
             // Only report the file name portion to be consistent with JDT reported problems.
-            filePath.substring(filePath.lastIndexOf('/') + 1)
-            + ":"
-            + lineNumber
-            + ": "
-            + message);
+            filePath.substring(filePath.lastIndexOf('/') + 1),
+            lineNumber,
+            message));
   }
 
   public void error(String detailMessage, Object... args) {

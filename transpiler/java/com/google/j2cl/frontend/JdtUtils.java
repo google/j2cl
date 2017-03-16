@@ -116,6 +116,8 @@ public class JdtUtils {
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationFieldDescriptor(declarationFieldDescriptor)
+        .setUnusableByJsSuppressed(
+            JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
         .build();
   }
 
@@ -128,11 +130,14 @@ public class JdtUtils {
             : createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
+    boolean isUnusableByJsSuppressed =
+        JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding);
     return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
         .setIsFinal(isFinal)
         .setIsParameter(isParameter)
+        .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
         .build();
   }
 
@@ -741,6 +746,7 @@ public class JdtUtils {
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
         .setBridge(isBridge)
+        .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
         .build();
   }
 
@@ -1372,6 +1378,7 @@ public class JdtUtils {
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUniqueKey(uniqueKey)
+        .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .build();
   }
 

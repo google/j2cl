@@ -181,10 +181,7 @@ public class J2clTranspiler {
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
     timingCollector.startSample("Check Units");
-
-    for (CompilationUnit compilationUnit : j2clUnits) {
-      JsInteropRestrictionsChecker.check(compilationUnit, problems);
-    }
+    JsInteropRestrictionsChecker.check(j2clUnits, problems);
     problems.abortIfRequested();
   }
 

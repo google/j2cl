@@ -25,13 +25,15 @@ import com.google.j2cl.common.SourcePosition;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node implements Cloneable<Variable>, HasSourcePosition {
+public class Variable extends Node
+    implements Cloneable<Variable>, HasSourcePosition, HasUnusableByJsSuppression {
   private final String name;
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
   private final boolean isRaw;
   private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+  private final boolean isUnusableByJsSuppressed;
 
   private Variable(
       SourcePosition sourcePosition,
@@ -39,13 +41,15 @@ public class Variable extends Node implements Cloneable<Variable>, HasSourcePosi
       TypeDescriptor typeDescriptor,
       boolean isFinal,
       boolean isParameter,
-      boolean isRaw) {
+      boolean isRaw,
+      boolean isUnusableByJsSuppressed) {
     this.name = checkNotNull(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
     this.isRaw = isRaw;
     this.sourcePosition = sourcePosition;
+    this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
   }
 
   public String getName() {
@@ -74,6 +78,11 @@ public class Variable extends Node implements Cloneable<Variable>, HasSourcePosi
 
   public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
+  }
+
+  @Override
+  public boolean isUnusableByJsSuppressed() {
+    return isUnusableByJsSuppressed;
   }
 
   @Override
@@ -113,6 +122,7 @@ public class Variable extends Node implements Cloneable<Variable>, HasSourcePosi
     private boolean isParameter;
     private boolean isRaw;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private boolean isUnusableByJsSuppressed = false;
 
     public static Builder from(Variable variable) {
       Builder builder = new Builder();
@@ -121,6 +131,7 @@ public class Variable extends Node implements Cloneable<Variable>, HasSourcePosi
       builder.isRaw = variable.isRaw();
       builder.isFinal = variable.isFinal();
       builder.isParameter = variable.isParameter;
+      builder.isUnusableByJsSuppressed = variable.isUnusableByJsSuppressed;
       builder.sourcePosition = variable.sourcePosition;
       return builder;
     }
@@ -155,10 +166,22 @@ public class Variable extends Node implements Cloneable<Variable>, HasSourcePosi
       return this;
     }
 
+    public Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed) {
+      this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
+      return this;
+    }
+
     public Variable build() {
       checkState(name != null);
       checkState(typeDescriptor != null);
-      return new Variable(sourcePosition, name, typeDescriptor, isFinal, isParameter, isRaw);
+      return new Variable(
+          sourcePosition,
+          name,
+          typeDescriptor,
+          isFinal,
+          isParameter,
+          isRaw,
+          isUnusableByJsSuppressed);
     }
   }
 }

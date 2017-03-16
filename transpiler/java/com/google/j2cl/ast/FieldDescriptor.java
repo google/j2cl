@@ -113,7 +113,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setVariableCapture(false)
         .setEnclosingInstanceCapture(false)
-        .setSynthetic(false);
+        .setSynthetic(false)
+        .setUnusableByJsSuppressed(false);
   }
 
   /** Returns a description that is useful for error messages. */
@@ -151,6 +152,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setVisibility(Visibility visibility);
 
     public abstract Builder setJsInfo(JsInfo jsInfo);
+
+    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public Builder setDeclarationFieldDescriptor(FieldDescriptor declarationFieldDescriptor) {
       return setDeclarationFieldDescriptorOrNullIfSelf(declarationFieldDescriptor);

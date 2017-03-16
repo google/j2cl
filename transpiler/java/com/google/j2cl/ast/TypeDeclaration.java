@@ -64,7 +64,7 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDeclaration extends Node
-    implements HasJsNameInfo, HasReadableDescription {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
@@ -650,6 +650,7 @@ public abstract class TypeDeclaration extends Node
         .setJsFunctionImplementation(false)
         .setJsType(false)
         .setLocal(false)
+        .setUnusableByJsSuppressed(false)
         .setTypeParameterDescriptors(Collections.emptyList())
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -684,6 +685,8 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setJsFunctionImplementation(boolean jsFunctionImplementation);
 
     public abstract Builder setJsType(boolean isJsType);
+
+    public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setLocal(boolean local);
 

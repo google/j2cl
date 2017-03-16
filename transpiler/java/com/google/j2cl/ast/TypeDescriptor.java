@@ -27,6 +27,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
@@ -63,7 +64,10 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasJsNameInfo, HasReadableDescription {
+    implements Comparable<TypeDescriptor>,
+        HasJsNameInfo,
+        HasReadableDescription,
+        HasUnusableByJsSuppression {
 
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
@@ -141,6 +145,11 @@ public abstract class TypeDescriptor extends Node
 
   public String getImplModuleName() {
     return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
+  }
+
+  @Override
+  public boolean isUnusableByJsSuppressed() {
+    return getTypeDeclaration().isUnusableByJsSuppressed();
   }
 
   /** Returns the fully package qualified name like "com.google.common". */
@@ -606,6 +615,14 @@ public abstract class TypeDescriptor extends Node
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
+  }
+
+  @Memoized
+  public Collection<MemberDescriptor> getDeclaredMemberDescriptors() {
+    return ImmutableSet.<MemberDescriptor>builder()
+        .addAll(getDeclaredMethodDescriptors())
+        .addAll(getDeclaredFieldDescriptors())
+        .build();
   }
 
   /**

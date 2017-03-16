@@ -27,6 +27,7 @@ import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.problems.Problems;
 import java.util.HashMap;
@@ -36,14 +37,27 @@ import java.util.Map;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
-  private final Problems problems;
 
-  public JsInteropRestrictionsChecker(Problems problems) {
+  public static void check(List<CompilationUnit> compilationUnits, Problems problems) {
+    new JsInteropRestrictionsChecker(problems).checkCompilationUnits(compilationUnits);
+  }
+
+  private final Problems problems;
+  private boolean wasUnusableByJsWarningReported = false;
+
+  private JsInteropRestrictionsChecker(Problems problems) {
     this.problems = problems;
   }
 
-  public static void check(CompilationUnit compilationUnit, Problems problems) {
-    new JsInteropRestrictionsChecker(problems).checkCompilationUnit(compilationUnit);
+  private void checkCompilationUnits(List<CompilationUnit> compilationUnits) {
+    for (CompilationUnit compilationUnit : compilationUnits) {
+      checkCompilationUnit(compilationUnit);
+    }
+    if (wasUnusableByJsWarningReported) {
+      problems.info(
+          "Suppress \"[unusable-by-js]\" warnings by adding a "
+              + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the corresponding member.");
+    }
   }
 
   private void checkCompilationUnit(CompilationUnit compilationUnit) {
@@ -170,6 +184,10 @@ public class JsInteropRestrictionsChecker {
       if (!checkJsPropertyAccessor(method)) {
         return;
       }
+    }
+
+    if (canBeReferencedExternally(member.getDescriptor())) {
+      checkUnusableByJs(member);
     }
 
     checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
@@ -941,5 +959,124 @@ public class JsInteropRestrictionsChecker {
 
     MethodDescriptor method = (MethodDescriptor) member;
     return method.isOverride((MethodDescriptor) potentiallyOverriddenMember);
+  }
+
+  private void checkUnusableByJs(Member member) {
+    if (isUnusableByJsSuppressed(member.getDescriptor())) {
+      return;
+    }
+
+    if (member.isField()) {
+      FieldDescriptor fieldDescriptor = (FieldDescriptor) member.getDescriptor();
+      warnIfUnusableByJs(fieldDescriptor.getTypeDescriptor(), "Type of", member);
+    }
+
+    if (member.isMethod()) {
+      Method method = (Method) member;
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      warnIfUnusableByJs(methodDescriptor.getReturnTypeDescriptor(), "Return type of", member);
+
+      Variable varargsParameter =
+          methodDescriptor.isJsMethodVarargs() ? Iterables.getLast(method.getParameters()) : null;
+      for (Variable parameter : method.getParameters()) {
+        String prefix = J2clUtils.format("Type of parameter '%s' in", parameter.getName());
+        if (!parameter.isUnusableByJsSuppressed()) {
+          TypeDescriptor parameterTypeDescriptor =
+              parameter == varargsParameter
+                  ? parameter.getTypeDescriptor().getComponentTypeDescriptor()
+                  : parameter.getTypeDescriptor();
+          warnIfUnusableByJs(parameterTypeDescriptor, prefix, member);
+        }
+      }
+    }
+  }
+
+  private static boolean isUnusableByJsSuppressed(MemberDescriptor memberDescriptor) {
+    // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
+    // enclosing elements.
+    return memberDescriptor.isUnusableByJsSuppressed()
+        || isUnusableByJsSuppressed(memberDescriptor.getEnclosingClassTypeDescriptor());
+  }
+
+  private static boolean isUnusableByJsSuppressed(TypeDescriptor typeDescriptor) {
+    // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
+    // enclosing elements.
+    if (typeDescriptor.isUnusableByJsSuppressed()) {
+      return true;
+    }
+
+    TypeDescriptor enclosingClassTypeDescriptor = typeDescriptor.getEnclosingTypeDescriptor();
+    return enclosingClassTypeDescriptor != null
+        && isUnusableByJsSuppressed(enclosingClassTypeDescriptor);
+  }
+
+  private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {
+    if (canBeReferencedExternally(typeDescriptor)) {
+      return;
+    }
+
+    // TODO(b/36362935): consider [unusable-by-js] (suppressible) errors instead of warnings.
+    problems.warning(
+        member.getSourcePosition(),
+        "[unusable-by-js] %s '%s' is not usable by but exposed to JavaScript.",
+        prefix,
+        member.getReadableDescription());
+    wasUnusableByJsWarningReported = true;
+  }
+
+  private static boolean canBeReferencedExternally(TypeDescriptor typeDescriptor) {
+    checkArgument(!typeDescriptor.isUnion());
+    if (typeDescriptor.isArray()) {
+      // TODO(b/36363419): Decide what to do with arrays like String[], int[], JsFunction[], etc
+      // which as of now do not give warnings.
+      return canBeReferencedExternally(typeDescriptor.getLeafTypeDescriptor());
+    }
+
+    if (typeDescriptor.isWildCardOrCapture() || typeDescriptor.isTypeVariable()) {
+      return canBeReferencedExternally(typeDescriptor.getRawTypeDescriptor());
+    }
+
+    if (typeDescriptor.isIntersection()) {
+      return typeDescriptor
+          .getIntersectedTypeDescriptors()
+          .stream()
+          .anyMatch(JsInteropRestrictionsChecker::canBeReferencedExternally);
+    }
+
+    if (typeDescriptor.isJsType()
+        || typeDescriptor.isJsFunctionInterface()
+        || typeDescriptor.isPrimitive()
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(typeDescriptor)) {
+      return true;
+    }
+
+    return typeDescriptor
+        .getDeclaredMemberDescriptors()
+        .stream()
+        .filter(Predicates.not(JsInteropRestrictionsChecker::isObjectMethodOverride))
+        .anyMatch(MemberDescriptor::isJsMember);
+  }
+
+  private static boolean isObjectMethodOverride(MemberDescriptor memberDescriptor) {
+    if (!memberDescriptor.isMethod()
+        || memberDescriptor.isStatic()
+        || memberDescriptor.isConstructor()) {
+      return false;
+    }
+
+    // Ignore the object method overrides.
+    MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+    return methodDescriptor
+        .getOverriddenMethodDescriptors()
+        .stream()
+        .map(MethodDescriptor::getEnclosingClassTypeDescriptor)
+        .anyMatch(TypeDescriptors::isJavaLangObject);
+  }
+
+  private static boolean canBeReferencedExternally(MemberDescriptor memberDescriptor) {
+    // TODO(b/36232076): There should be two method isJsMember and isOrOverridesJsMember to
+    // distinguish when a member is explicitly marked (to consider the member as
+    // canBeReferencedExternally) and when the member inherits through overriding a JsMember.
+    return memberDescriptor.isJsMember() || memberDescriptor.isJsFunction();
   }
 }
