@@ -375,7 +375,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void display() {}",
             "}")
         .assertCompileFails(
-            " 'void Buggy.display()' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.display()' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'");
   }
 
@@ -514,6 +514,26 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'.");
+  }
+
+  // TODO(b/36232268): enable once the bug is fixed.
+  public void disabled_testCollidingSubclassMethodToBridgeFails() throws Exception {
+    compile(
+            "Buggy",
+            "import jsinterop.annotations.JsMethod;",
+            "public class Buggy<T> {",
+            "  @JsMethod",
+            "  public void show(T t) {}",
+            "  @JsMethod(name = \"display\")",
+            "  public void show(String s) {}",
+            "}",
+            "class SubBuggy extends Buggy<String> {",
+            "  public void show(String s) {}",
+            "}")
+        .assertCompileFails(
+            "'void SubBuggy.show(String)' cannot be assigned JavaScript name 'display' that is "
+                + "different from the JavaScript name of a method it overrides "
+                + "('void Buggy.show(Object)' with JavaScript name 'show').");
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
