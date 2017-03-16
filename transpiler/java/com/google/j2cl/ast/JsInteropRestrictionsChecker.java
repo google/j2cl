@@ -598,29 +598,28 @@ public class JsInteropRestrictionsChecker {
     MethodDescriptor methodDescriptor = method.getDescriptor();
 
     int numberOfParameters = method.getParameters().size();
+    Variable varargsParameter = method.getJsVarargsParameter();
     for (int i = 0; i < numberOfParameters; i++) {
-      int lastParameter = numberOfParameters - 1;
-      boolean isVarargsParameter = (i == lastParameter) && methodDescriptor.isJsMethodVarargs();
-
+      Variable parameter = method.getParameters().get(i);
       if (method.getDescriptor().isParameterOptional(i)) {
         if (methodDescriptor.getParameterTypeDescriptors().get(i).isPrimitive()) {
           problems.error(
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
-              method.getParameters().get(i).getName(),
+              parameter.getName(),
               methodDescriptor.getReadableDescription());
         }
-        if (isVarargsParameter) {
+        if (parameter == varargsParameter) {
           problems.error(
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be a varargs parameter.",
-              method.getParameters().get(i).getName(),
+              parameter.getName(),
               methodDescriptor.getReadableDescription());
         }
         hasOptionalParameters = true;
         continue;
       }
-      if (hasOptionalParameters && !isVarargsParameter) {
+      if (hasOptionalParameters && parameter != varargsParameter) {
         problems.error(
             method.getSourcePosition(),
             "JsOptional parameter '%s' in method '%s' cannot precede parameters that are not "
@@ -976,8 +975,7 @@ public class JsInteropRestrictionsChecker {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       warnIfUnusableByJs(methodDescriptor.getReturnTypeDescriptor(), "Return type of", member);
 
-      Variable varargsParameter =
-          methodDescriptor.isJsMethodVarargs() ? Iterables.getLast(method.getParameters()) : null;
+      Variable varargsParameter = method.getJsVarargsParameter();
       for (Variable parameter : method.getParameters()) {
         String prefix = J2clUtils.format("Type of parameter '%s' in", parameter.getName());
         if (!parameter.isUnusableByJsSuppressed()) {

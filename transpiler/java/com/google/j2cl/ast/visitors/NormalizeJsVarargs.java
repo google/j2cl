@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -70,7 +69,8 @@ public class NormalizeJsVarargs extends NormalizationPass {
       if (!functionExpression.isJsVarargs()) {
         return functionExpression;
       }
-      maybeAddVarargsPreamble(functionExpression.getParameters(), functionExpression.getBody());
+      maybeAddVarargsPreamble(
+          functionExpression.getJsVarargsParameter(), functionExpression.getBody());
       return functionExpression;
     }
 
@@ -80,13 +80,11 @@ public class NormalizeJsVarargs extends NormalizationPass {
         return method;
       }
 
-      maybeAddVarargsPreamble(method.getParameters(), method.getBody());
+      maybeAddVarargsPreamble(method.getJsVarargsParameter(), method.getBody());
       return method;
     }
 
-    private static void maybeAddVarargsPreamble(List<Variable> parameters, Block body) {
-      checkArgument(!parameters.isEmpty());
-      Variable varargsParameter = Iterables.getLast(parameters);
+    private static void maybeAddVarargsPreamble(Variable varargsParameter, Block body) {
       if (varargsParameter.getTypeDescriptor().isUntypedArray()) {
         return;
       }

@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,13 @@ public class FunctionExpression extends Expression {
 
   public List<Variable> getParameters() {
     return parameters;
+  }
+
+  public Variable getJsVarargsParameter() {
+    if (isJsVarargs()) {
+      return Iterables.getLast(getParameters());
+    }
+    return null;
   }
 
   public Block getBody() {

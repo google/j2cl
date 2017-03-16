@@ -76,7 +76,7 @@ public class GeneratorUtils {
     Variable parameter = method.getParameters().get(index);
     TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
     String name = environment.aliasForVariable(parameter);
-    if (method.getDescriptor().isJsMethodVarargs() && index + 1 == method.getParameters().size()) {
+    if (parameter == method.getJsVarargsParameter()) {
       // The parameter is a js var arg so we convert the type to an array
       checkArgument(parameterTypeDescriptor.isArray());
       // TODO(b/36141178): remove varargs that are typed with a type variable until type checking in

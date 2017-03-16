@@ -158,8 +158,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
-        Variable varargsParameter =
-            expression.isJsVarargs() ? Iterables.getLast(expression.getParameters()) : null;
+        Variable varargsParameter = expression.getJsVarargsParameter();
         sourceBuilder.append("((");
         String separator = "";
         for (Variable parameter : expression.getParameters()) {
