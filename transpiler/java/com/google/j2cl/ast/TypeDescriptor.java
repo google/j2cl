@@ -1003,18 +1003,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   /** Returns the height of the largest inheritance chain of any interface implemented here. */
-  @Memoized
   public int getMaxInterfaceDepth() {
-    return 1
-        + getInterfaceTypeDescriptors()
-            .stream()
-            .mapToInt(
-                interfaceTypeDescriptor ->
-                    interfaceTypeDescriptor
-                        .getTypeDeclaration()
-                        .getUnsafeTypeDescriptor()
-                        .getMaxInterfaceDepth())
-            .max()
-            .orElse(0);
+    return hasTypeDeclaration() ? getTypeDeclaration().getMaxInterfaceDepth() : 1;
   }
 }

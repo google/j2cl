@@ -252,6 +252,22 @@ public abstract class TypeDeclaration extends Node
     return getInterfaceTypeDescriptorsFactory().get(this);
   }
 
+  /** Returns the height of the largest inheritance chain of any interface implemented here. */
+  @Memoized
+  public int getMaxInterfaceDepth() {
+    return 1
+        + getInterfaceTypeDescriptors()
+            .stream()
+            .mapToInt(
+                interfaceTypeDescriptor ->
+                    interfaceTypeDescriptor
+                        .getTypeDeclaration()
+                        .getUnsafeTypeDescriptor()
+                        .getMaxInterfaceDepth())
+            .max()
+            .orElse(0);
+  }
+
   /**
    * Returns a set of the type descriptors of interfaces that are explicitly implemented either
    * directly on this type or on some super type or super interface.
