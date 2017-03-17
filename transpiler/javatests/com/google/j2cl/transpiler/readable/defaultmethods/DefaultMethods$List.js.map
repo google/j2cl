@@ -1,5 +1,6 @@
 [interface List<T> {
     default void add(T elem) {}
+    default void remove(T[] elems) {}
   }] => [/**
  * @interface
 ...exports = List;
@@ -9,3 +10,8 @@
 ...  m_add__java_lang_Object(elem) {
   }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.add"
 [elem] => [elem] "elem"
+[default void remove(T[] elems) {}] => [/**
+   * @param {Array<C_List_T>} elems
+...  m_remove__arrayOf_java_lang_Object(elems) {
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.remove"
+[elems] => [elems] "elems"

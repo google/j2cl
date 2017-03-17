@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
 
 /**
  * @interface
@@ -21,6 +23,13 @@ class List {
    * @public
    */
   m_add__java_lang_Object(elem) {}
+
+  /**
+   * @param {Array<C_List_T>} elems
+   * @return {void}
+   * @public
+   */
+  m_remove__arrayOf_java_lang_Object(elems) {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +76,7 @@ class List {
    */
   static $clinit() {
     List.$clinit = function() {};
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
 };
 

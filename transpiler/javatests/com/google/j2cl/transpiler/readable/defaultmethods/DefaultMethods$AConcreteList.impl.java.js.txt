@@ -12,6 +12,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
@@ -65,6 +66,19 @@ class AConcreteList extends java_lang_Object {
   }
 
   /**
+   * Default method forwarding stub.
+   * @override
+   * @param {Array<C_List_T>} arg0
+   * @return {void}
+   * @public
+   */
+  m_remove__arrayOf_java_lang_Object(arg0) {
+    List$$Overlay
+        .m_remove__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__arrayOf_java_lang_Object(
+            this, arg0);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -92,6 +106,7 @@ class AConcreteList extends java_lang_Object {
     AConcreteList.$clinit = function() {};
     List$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     java_lang_Object.$clinit();
     List.$clinit();
   }

@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 const List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
 
 class List$$Overlay {
   /**
@@ -21,6 +23,18 @@ class List$$Overlay {
    */
   static m_add__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__java_lang_Object(
       $thisArg, elem) {
+    List$$Overlay.$clinit();
+  }
+
+  /**
+   * @template C_List_T
+   * @param {List<C_List_T>} $thisArg
+   * @param {Array<C_List_T>} elems
+   * @return {void}
+   * @public
+   */
+  static m_remove__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__arrayOf_java_lang_Object(
+      $thisArg, elems) {
     List$$Overlay.$clinit();
   }
 
@@ -41,6 +55,7 @@ class List$$Overlay {
    */
   static $clinit() {
     List$$Overlay.$clinit = function() {};
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
 };
 
