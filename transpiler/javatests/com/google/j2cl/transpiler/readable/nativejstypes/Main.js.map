@@ -107,4 +107,11 @@
 [bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);]
 [bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);]
 [bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());]
+[Wildcard<String> get() {
+    return null;
+  }] => [/**
+   * @return {?<?string>}
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.get"
+[return null;] => [return null;]
 [UNKNOWN] => [java_lang_Object.$clinit();]
