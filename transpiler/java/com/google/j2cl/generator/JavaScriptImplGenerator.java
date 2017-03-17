@@ -200,7 +200,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (!superInterfaceType.getTypeDeclaration().isStarOrUnknown()) {
+        if (!superInterfaceType.isStarOrUnknown()) {
           sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
         }
       }
@@ -216,12 +216,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       if (type.getSuperTypeDescriptor() != null
           && type.getSuperTypeDescriptor().hasTypeArguments()
-          && !type.getSuperTypeDescriptor().getTypeDeclaration().isStarOrUnknown()) {
+          && !type.getSuperTypeDescriptor().isStarOrUnknown()) {
         String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
         buffer.appendln(" * @extends {" + supertype + "}");
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (!superInterfaceType.getTypeDeclaration().isStarOrUnknown()) {
+        if (!superInterfaceType.isStarOrUnknown()) {
           buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
         }
       }

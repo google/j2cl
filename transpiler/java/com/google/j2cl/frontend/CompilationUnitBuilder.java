@@ -388,7 +388,6 @@ public class CompilationUnitBuilder {
                           superMethodDescriptor.isJsMember()
                               && !superMethodDescriptor
                                   .getEnclosingClassTypeDescriptor()
-                                  .getTypeDeclaration()
                                   .isStarOrUnknown())
               : methodDescriptor
                   .getOverriddenMethodDescriptors()
@@ -1378,7 +1377,6 @@ public class CompilationUnitBuilder {
               functionExpression,
               !functionalMethodDescriptor
                   .getEnclosingClassTypeDescriptor()
-                  .getTypeDeclaration()
                   .isStarOrUnknown());
       lambdaMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(lambdaMethod);

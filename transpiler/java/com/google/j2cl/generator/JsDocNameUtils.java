@@ -135,6 +135,10 @@ public class JsDocNameUtils {
       TypeDescriptor typeDescriptor,
       boolean shouldUseClassName,
       GenerationEnvironment environment) {
+    if (typeDescriptor.isStarOrUnknown()) {
+      return typeDescriptor.getSimpleJsName();
+    }
+
     checkArgument(!typeDescriptor.isIntersection());
     // TODO: this looks like a hack to me, really the TypeDescriptor for JsFunctions should be
     // created in the first place to know they themselves are nullable.

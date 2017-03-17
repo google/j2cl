@@ -347,6 +347,10 @@ public abstract class TypeDescriptor extends Node
     return isNative() && hasExternNamespace();
   }
 
+  public boolean isStarOrUnknown() {
+    return hasTypeDeclaration() && getTypeDeclaration().isStarOrUnknown();
+  }
+
   private boolean hasExternNamespace() {
     checkArgument(isNative());
     // A native type descriptor is an extern if its namespace is the global namespace or if

@@ -105,7 +105,7 @@ public class GeneratorUtils {
 
   public static String getExtendsClause(Type type, GenerationEnvironment environment) {
     TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.getTypeDeclaration().isStarOrUnknown()) {
+    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
       return "";
     }
     String superTypeName = environment.aliasForType(superTypeDescriptor);
