@@ -139,7 +139,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
         //     n()   { J.n(); }     // Overrides J.n
         //     m_n() { this.n(); }  // does not override anything
         //
-        // The we could not omit generating m_n() due to accidental overrides in subclasses
+        // We could not omit generating m_n() due to accidental overrides in subclasses
         // but we could skip the override flag in just this case.
         //
         // See b/31312257.

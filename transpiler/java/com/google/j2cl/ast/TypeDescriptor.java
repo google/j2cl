@@ -955,15 +955,6 @@ public abstract class TypeDescriptor extends Node
             typeArgumentDescriptor.specializeTypeVariables(
                 immediateSpecializedTypeArgumentByTypeParameters);
 
-        // Apply the immediate specialization.
-        if (immediateSpecializedTypeArgumentByTypeParameters.containsKey(typeArgumentDescriptor)) {
-          typeArgumentDescriptor =
-              immediateSpecializedTypeArgumentByTypeParameters.get(typeArgumentDescriptor);
-        } else {
-          typeArgumentDescriptor =
-              typeArgumentDescriptor.specializeTypeVariables(
-                  immediateSpecializedTypeArgumentByTypeParameters);
-        }
         specializedTypeArgumentByTypeParameters.put(entry.getKey(), typeArgumentDescriptor);
       }
     }
@@ -973,21 +964,38 @@ public abstract class TypeDescriptor extends Node
 
   public TypeDescriptor specializeTypeVariables(
       Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
-    if (getTypeArgumentDescriptors().isEmpty()
-        || applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
-      return this;
-    }
+    switch (getKind()) {
+      case PRIMITIVE:
+        return this;
+      case ARRAY:
+        return TypeDescriptors.getForArray(
+            getLeafTypeDescriptor()
+                .specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters),
+            getDimensions());
+      case CLASS:
+      case INTERFACE:
+      case ENUM:
+        if (getTypeArgumentDescriptors().isEmpty()
+            || applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+          return this;
+        }
 
-    return TypeDescriptors.replaceTypeArgumentDescriptors(
-        this,
-        getTypeArgumentDescriptors()
-            .stream()
-            .map(
-                t ->
-                    applySpecializedTypeArgumentByTypeParameters.containsKey(t)
-                        ? applySpecializedTypeArgumentByTypeParameters.get(t)
-                        : t.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters))
-            .collect(toImmutableList()));
+        return TypeDescriptors.replaceTypeArgumentDescriptors(
+            this,
+            getTypeArgumentDescriptors()
+                .stream()
+                .map(
+                    typeDescriptor ->
+                        typeDescriptor.specializeTypeVariables(
+                            applySpecializedTypeArgumentByTypeParameters))
+                .collect(toImmutableList()));
+      case TYPE_VARIABLE:
+      case WILDCARD_OR_CAPTURE:
+        return applySpecializedTypeArgumentByTypeParameters.getOrDefault(this, this);
+      default:
+        throw new IllegalStateException(
+            "Union and intersection types should not need to be specialized");
+    }
   }
 
   /** Returns the height of the largest inheritance chain of any interface implemented here. */

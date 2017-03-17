@@ -444,18 +444,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     // Specialized type variables (possibly recursively).
     TypeDescriptor specializedReturnTypeDescriptor =
-        applySpecializedTypeArgumentByTypeParameters.containsKey(returnTypeDescriptor)
-            ? applySpecializedTypeArgumentByTypeParameters.get(returnTypeDescriptor)
-            : returnTypeDescriptor.specializeTypeVariables(
-                applySpecializedTypeArgumentByTypeParameters);
+        returnTypeDescriptor.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters);
     ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
         parameterTypeDescriptors
             .stream()
             .map(
-                t ->
-                    applySpecializedTypeArgumentByTypeParameters.containsKey(t)
-                        ? applySpecializedTypeArgumentByTypeParameters.get(t)
-                        : t.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters))
+                typeDescriptor ->
+                    typeDescriptor.specializeTypeVariables(
+                        applySpecializedTypeArgumentByTypeParameters))
             .collect(toImmutableList());
 
     return MethodDescriptor.Builder.from(this)
