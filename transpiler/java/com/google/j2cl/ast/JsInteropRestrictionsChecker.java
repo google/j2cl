@@ -1072,6 +1072,10 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean canBeReferencedExternally(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.getEnclosingClassTypeDescriptor().isAnonymous()) {
+      // members of anonymous classes can not be referenced externally
+      return false;
+    }
     // TODO(b/36232076): There should be two method isJsMember and isOrOverridesJsMember to
     // distinguish when a member is explicitly marked (to consider the member as
     // canBeReferencedExternally) and when the member inherits through overriding a JsMember.

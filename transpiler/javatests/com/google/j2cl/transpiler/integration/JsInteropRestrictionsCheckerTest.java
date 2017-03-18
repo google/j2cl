@@ -2577,13 +2577,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   public void testUsableByJsTypesSucceeds() throws Exception {
     compile(
-            "Buggy",
+            "A",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsFunction;",
-            "@JsType class A {}",
+            "@JsType public class A {}",
             "@JsType interface I {}",
             "@JsFunction interface FI {void foo();}",
-            "@JsType public class Buggy {",
+            "@JsType class MyJsType {",
             "  public void f1(boolean a, int b, double c) {}", // primitive types work fine.
             "  public void f2(Boolean a, Double b, String c) {}", // unboxed types work fine.
             "  public void f3(A a) {}", // JsType works fine.
@@ -2598,6 +2598,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void f14(Object[][] a) {}", // Object[][] works fine.
             "  public long f15(long a) { return 1l; }", // long works fine.
             "  public long f16(long... a) { return 1l; }", // varargs of allowable types works fine.
+            // anonymous @JsConstructor class with unusable-by-js captures.
+            "  private void f17(Long a) { new A() { { f7(a); } }; }",
             "}")
         .assertCompileSucceeds()
         .assertNoWarnings();
