@@ -15,8 +15,10 @@ load(
 integration_test(
     name = "nativeinjectionapt",
     srcs = glob(["*.java"]),
+    js_depinfos = ["handrolled.depinfo"],
     plugins = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt/apt"],
     deps = [
+        "//jre/java:gwt-jsinterop-annotations",
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt/apt:annotation",
     ],
 )
