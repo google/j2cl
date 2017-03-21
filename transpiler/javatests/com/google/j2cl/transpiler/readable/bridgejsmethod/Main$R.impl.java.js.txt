@@ -54,6 +54,16 @@ class R extends Q {
   }
 
   /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {?string}
+   * @public
+   */
+  m_getKey__() {
+    return this.getKey();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}

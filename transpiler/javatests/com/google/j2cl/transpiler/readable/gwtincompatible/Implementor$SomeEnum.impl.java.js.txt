@@ -11,11 +11,9 @@ const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -86,17 +84,6 @@ class SomeEnum extends Enum {
               .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum
         ],
         SomeEnum));
-  }
-
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {SomeEnum} */ ($Casts.to(arg0, SomeEnum)));
   }
 
   /**
@@ -183,11 +170,9 @@ class SomeEnum extends Enum {
     SomeEnum.$clinit = function() {};
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();

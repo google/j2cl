@@ -69,6 +69,16 @@ class O extends N {
   }
 
   /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {B}
+   * @public
+   */
+  m_getB__() {
+    return this.getB();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}

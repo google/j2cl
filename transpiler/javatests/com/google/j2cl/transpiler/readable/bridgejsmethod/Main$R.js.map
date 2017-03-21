@@ -33,4 +33,14 @@
 ...    return null;
   }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.R.getKey"
 [return null;] => [return null;]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {?string}
+   * @public
+   */
+  m_getKey__() {
+    return this.getKey();
+  }]
+[UNKNOWN] => [return this.getKey();]
 [UNKNOWN] => [Q.$clinit();]
