@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjectionapt;
 
-import jsinterop.annotations.JsType;
+import com.google.j2cl.transpiler.integration.nativeinjectionapt.apt.RunApt;
 
-@JsType(isNative = true)
+@RunApt
 public class NativeClass {
   public static native String nativeStaticMethod();
 }
