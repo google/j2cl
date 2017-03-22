@@ -369,7 +369,7 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    String readableDescription = memberDescriptor.getReadableDescription();
+    String readableDescription = member.getReadableDescription();
     JsMemberType jsMemberType = memberDescriptor.getJsInfo().getJsMemberType();
     switch (jsMemberType) {
       case CONSTRUCTOR:
@@ -607,14 +607,14 @@ public class JsInteropRestrictionsChecker {
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
               parameter.getName(),
-              methodDescriptor.getReadableDescription());
+              method.getReadableDescription());
         }
         if (parameter == varargsParameter) {
           problems.error(
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be a varargs parameter.",
               parameter.getName(),
-              methodDescriptor.getReadableDescription());
+              method.getReadableDescription());
         }
         hasOptionalParameters = true;
         continue;
@@ -625,7 +625,7 @@ public class JsInteropRestrictionsChecker {
             "JsOptional parameter '%s' in method '%s' cannot precede parameters that are not "
                 + "JsOptional.",
             method.getParameters().get(i - 1).getName(),
-            methodDescriptor.getReadableDescription());
+            method.getReadableDescription());
         break;
       }
     }
@@ -637,7 +637,7 @@ public class JsInteropRestrictionsChecker {
           method.getSourcePosition(),
           "JsOptional parameter in '%s' can only be declared in a JsMethod, a JsConstructor or a "
               + "JsFunction.",
-          methodDescriptor.getReadableDescription());
+          method.getReadableDescription());
     }
 
     // Check that parameters that are declared JsOptional in overridden methods remain JsOptional.
@@ -755,7 +755,7 @@ public class JsInteropRestrictionsChecker {
       problems.error(
           jsConstructor.getSourcePosition(),
           "JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
-          jsConstructor.getReadableDescription(),
+          jsConstructor.getDescriptor().getReadableDescription(),
           superJsConstructorMethodDescriptors.get(0).getReadableDescription());
     }
   }
@@ -873,7 +873,7 @@ public class JsInteropRestrictionsChecker {
     problems.error(
         member.getSourcePosition(),
         "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
-        member.getReadableDescription(),
+        member.getDescriptor().getReadableDescription(),
         oldJsMember.member.getReadableDescription(),
         member.getDescriptor().getSimpleJsName());
   }
@@ -967,22 +967,27 @@ public class JsInteropRestrictionsChecker {
 
     if (member.isField()) {
       FieldDescriptor fieldDescriptor = (FieldDescriptor) member.getDescriptor();
-      warnIfUnusableByJs(fieldDescriptor.getTypeDescriptor(), "Type of", member);
+      TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
+      warnIfUnusableByJs(
+          fieldTypeDescriptor,
+          J2clUtils.format("Type '%s' of field", fieldTypeDescriptor.getReadableDescription()),
+          member);
     }
 
     if (member.isMethod()) {
       Method method = (Method) member;
       MethodDescriptor methodDescriptor = method.getDescriptor();
-      warnIfUnusableByJs(methodDescriptor.getReturnTypeDescriptor(), "Return type of", member);
+      TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+      warnIfUnusableByJs(returnTypeDescriptor, "Return type of", member);
 
       Variable varargsParameter = method.getJsVarargsParameter();
       for (Variable parameter : method.getParameters()) {
-        String prefix = J2clUtils.format("Type of parameter '%s' in", parameter.getName());
         if (!parameter.isUnusableByJsSuppressed()) {
           TypeDescriptor parameterTypeDescriptor =
               parameter == varargsParameter
                   ? parameter.getTypeDescriptor().getComponentTypeDescriptor()
                   : parameter.getTypeDescriptor();
+          String prefix = J2clUtils.format("Type of parameter '%s' in", parameter.getName());
           warnIfUnusableByJs(parameterTypeDescriptor, prefix, member);
         }
       }

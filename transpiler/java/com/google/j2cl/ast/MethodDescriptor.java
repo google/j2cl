@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -231,12 +230,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    String parameterString =
-        getDeclarationMethodDescriptor()
-            .getParameterTypeDescriptors()
-            .stream()
-            .map(type -> type.getRawTypeDescriptor().getReadableDescription())
-            .collect(joining(", "));
+    // TODO(b/36493405): Add a parameter abstraction and simplify this and all code that traverses
+    // parameters positionally.
+
+    String parameterString = "";
+    String separator = "";
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors =
+        getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    int varargsParameterIndex = parameterTypeDescriptors.size() - 1;
+    for (int i = 0; i < parameterTypeDescriptors.size(); i++) {
+      TypeDescriptor parameterTypeDescriptor =
+          parameterTypeDescriptors.get(i).getRawTypeDescriptor();
+      parameterString +=
+          separator
+              + (isJsMethodVarargs() && varargsParameterIndex == i
+                  ? parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription()
+                      + "..."
+                  : parameterTypeDescriptor.getReadableDescription());
+      separator = ", ";
+    }
+
 
     if (isConstructor()) {
       return J2clUtils.format(

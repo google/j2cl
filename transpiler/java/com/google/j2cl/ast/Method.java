@@ -17,11 +17,13 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +64,13 @@ public class Method extends Member implements HasJsNameInfo {
 
   public Variable getJsVarargsParameter() {
     if (methodDescriptor.isJsMethodVarargs()) {
+      return getVarargsParameter();
+    }
+    return null;
+  }
+
+  public Variable getVarargsParameter() {
+    if (methodDescriptor.isVarargs()) {
       return Iterables.getLast(getParameters());
     }
     return null;
@@ -126,6 +135,38 @@ public class Method extends Member implements HasJsNameInfo {
 
   public static Builder newBuilder() {
     return new Builder();
+  }
+
+  @Override
+  public String getReadableDescription() {
+    // TODO(b/36493405): once a parameter abstraction is implemented in MethodDescriptor that
+    // stores parameter names, this method should just delegate to it.
+    String parameterString =
+        getParameters().stream().map(this::getParameterReadableDescription).collect(joining(", "));
+
+    if (isConstructor()) {
+      return J2clUtils.format(
+          "%s(%s)",
+          getDescriptor().getEnclosingClassTypeDescriptor().getReadableDescription(),
+          parameterString);
+    }
+    return J2clUtils.format(
+        "%s %s.%s(%s)",
+        getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
+        getDescriptor().getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getDescriptor().getName(),
+        parameterString);
+  }
+
+  private String getParameterReadableDescription(Variable parameter) {
+    boolean isVarargs = parameter == getVarargsParameter();
+    return J2clUtils.format(
+        "%s%s %s",
+        isVarargs
+            ? parameter.getTypeDescriptor().getComponentTypeDescriptor().getReadableDescription()
+            : parameter.getTypeDescriptor().getReadableDescription(),
+        isVarargs ? "..." : "",
+        parameter.getName());
   }
 
   @Override

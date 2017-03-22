@@ -121,10 +121,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public String getReadableDescription() {
     return J2clUtils.format(
-        "%s %s.%s",
-        getTypeDescriptor().getReadableDescription(),
-        getEnclosingClassTypeDescriptor().getReadableDescription(),
-        getName());
+        "%s.%s", getEnclosingClassTypeDescriptor().getReadableDescription(), getName());
   }
 
   /** A Builder for FieldDescriptors. */

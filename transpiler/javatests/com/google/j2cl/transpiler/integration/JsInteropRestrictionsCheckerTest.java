@@ -158,7 +158,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int display = 0;",
             "}")
         .assertCompileFails(
-            "'int Buggy.display' and 'int Buggy.show' cannot both use the same "
+            "'Buggy.display' and 'Buggy.show' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -211,22 +211,22 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}")
         .assertCompileFails(
             "JsProperty 'int Buggy.isX()' cannot have a non-boolean return.",
-            "JsProperty 'int Buggy.getY(int)' should have a correct setter or getter signature.",
+            "JsProperty 'int Buggy.getY(int x)' should have a correct setter or getter signature.",
             // TODO(b/35881307): Restore the error messages when this bug is closed.
             // "JsProperty 'void Buggy.getZ()' should have a correct setter or getter signature.",
-            "JsProperty 'void Buggy.setX(int, int)' should have a correct "
+            "JsProperty 'void Buggy.setX(int x, int y)' should have a correct "
                 + "setter or getter signature.",
             // TODO(b/35881307): Restore the right error messages when this bug is closed.
             // "JsProperty 'void Buggy.setY()' should have a correct setter or getter signature.",
             "JsProperty 'void Buggy.setY()' should either follow Java Bean naming conventions or "
                 + "provide a name.",
-            "JsProperty 'int Buggy.setZ(int)' should have a correct setter or getter signature.",
+            "JsProperty 'int Buggy.setZ(int z)' should have a correct setter or getter signature.",
             // TODO(b/35881307): Restore the right error messages when this bug is closed.
             // "JsProperty 'void Buggy.setStatic()' should have a correct setter or getter "
             //     + "signature.",
             "JsProperty 'void Buggy.setStatic()' should either follow Java Bean naming conventions "
                 + "or provide a name.",
-            "JsProperty 'void Buggy.setW(int[])' cannot have a vararg parameter");
+            "JsProperty 'void Buggy.setW(int... z)' cannot have a vararg parameter");
   }
 
   public void testJsPropertyNonGetterStyleFails() throws Exception {
@@ -245,7 +245,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + " or provide a name.",
             "JsProperty 'int Buggy.x()' should either follow Java Bean naming conventions"
                 + " or provide a name.",
-            "JsProperty 'void Buggy.x(int)' should either follow Java Bean naming conventions"
+            "JsProperty 'void Buggy.x(int x)' should either follow Java Bean naming conventions"
                 + " or provide a name.");
   }
 
@@ -411,7 +411,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int show = 0;",
             "}")
         .assertCompileFails(
-            "'int Buggy.show' and 'void Buggy.show()' cannot both use the same "
+            "'Buggy.show' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -425,7 +425,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public final int show = 0;",
             "}")
         .assertCompileFails(
-            "'int Buggy.show' and 'void Buggy.show()' "
+            "'Buggy.show' and 'void Buggy.show()' "
                 + "cannot both use the same JavaScript name 'show'.");
   }
 
@@ -492,9 +492,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void foo(int a) {}",
             "}")
         .assertCompileFails(
-            "'int Buggy.foo' and 'int ParentBuggy.foo' cannot both use the same "
+            "'Buggy.foo' and 'ParentBuggy.foo' cannot both use the same "
                 + "JavaScript name 'foo'.",
-            "'void OtherBuggy.foo(int)' and 'int ParentBuggy.foo' cannot both use the same "
+            "'void OtherBuggy.foo(int)' and 'ParentBuggy.foo' cannot both use the same "
                 + "JavaScript name 'foo'");
   }
 
@@ -700,7 +700,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int foo = 110;",
             "}")
         .assertCompileFails(
-            "'int Buggy.foo' and 'int ParentParentBuggy.foo' cannot both use the same "
+            "'Buggy.foo' and 'ParentParentBuggy.foo' cannot both use the same "
                 + "JavaScript name 'foo'.");
   }
 
@@ -1266,10 +1266,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "'Buggy' has invalid name 'a.b.c'.",
             "'void Buggy.m()' has invalid name '34s'.",
-            "'int Buggy.m' has invalid name 's^'.",
-            "'int Buggy.n' cannot have an empty name.",
+            "'Buggy.m' has invalid name 's^'.",
+            "'Buggy.n' cannot have an empty name.",
             "'void Buggy.o()' has invalid name 'a.b'.",
-            "'int Buggy.q' has invalid name 'a.c'.",
+            "'Buggy.q' has invalid name 'a.c'.",
             "'OtherBuggy' has invalid name 'a.b.d'.",
             "Only native interfaces in the global namespace can be named '*'.",
             "Only native interfaces in the global namespace can be named '?'.",
@@ -1304,13 +1304,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "'Buggy' has invalid namespace 'a.b.'.",
             "'void Buggy.m()' has invalid namespace '34s'.",
             "'void Buggy.o()' cannot have an empty namespace.",
-            "Instance member 'int Buggy.p' cannot declare a namespace.",
+            "Instance member 'Buggy.p' cannot declare a namespace.",
             "Instance member 'void Buggy.q()' cannot declare a namespace.",
-            "'int NativeClass.n' has invalid namespace 's^'.",
-            "Non-native member 'int JsTypeOnWindow.r' cannot declare a namespace.",
+            "'NativeClass.n' has invalid namespace 's^'.",
+            "Non-native member 'JsTypeOnWindow.r' cannot declare a namespace.",
             "Non-native member 'void JsTypeOnWindow.s()' cannot declare a namespace.",
             "Non-native member 'void InvalidGlobal.m()' cannot declare a namespace.",
-            "Non-native member 'int InvalidGlobal.n' cannot declare a namespace.");
+            "Non-native member 'InvalidGlobal.n' cannot declare a namespace.");
   }
 
   public void testJsNameGlobalNamespacesSucceeds() throws Exception {
@@ -1471,19 +1471,19 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
                 + " member 'void InvalidFunction.m()'.",
             "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
-                + " member 'int InvalidFunction.f'.",
+                + " member 'InvalidFunction.f'.",
             "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
                 + " member 'void InvalidFunction.n()'.",
             "JsFunction implementation member 'int Buggy.getFoo()' cannot be "
                 + "JsMethod nor JsProperty.",
             "JsFunction implementation member 'void Buggy.bleh()' cannot be"
                 + " JsMethod nor JsProperty.",
-            "JsFunction implementation member 'int Buggy.prop' cannot be JsMethod nor JsProperty.",
+            "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty.",
             "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
                 + "JsMethod nor JsProperty.",
             "JsFunction implementation 'Buggy' cannot implement method 'String Buggy.toString()'.",
             "JsFunction implementation 'Buggy' cannot implement method "
-                + "'boolean Buggy.equals(Object)'.",
+                + "'boolean Buggy.equals(Object o)'.",
             "JsFunction implementation 'Buggy' cannot implement method 'int Buggy.hashCode()'.",
             "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
                 + "nor JsProperty.",
@@ -1543,7 +1543,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  }",
             "}")
         .assertCompileFails(
-            "Native JsType constructor 'Buggy(int)' cannot have non-empty method body.");
+            "Native JsType constructor 'Buggy(int n)' cannot have non-empty method body.");
   }
 
   public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
@@ -1832,8 +1832,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod public String bar(Object o) { return null; }",
             "}")
         .assertCompileFails(
-            "Method 'void Buggy.foo(Object)' should declare parameter 'o' as JsOptional",
-            "Method 'String Buggy.bar(Object)' should declare parameter 'o' as JsOptional");
+            "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional",
+            "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional");
   }
 
   public void testJsOptionalNotAtEndFails() throws Exception {
@@ -1848,18 +1848,18 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "   @JsMethod",
             "   public void bar(int a, @JsOptional Object b, String c) {}",
             "   @JsMethod",
-            "   public void baz(@JsOptional Object b, String c, Object... os) {}",
+            "   public void baz(@JsOptional Object a, String b, Object... c) {}",
             "}")
         .assertCompileFails(
             "JsOptional parameter 'a' in method "
-                + "'Buggy(String, Object, String)' cannot precede parameters that are not "
+                + "'Buggy(String a, Object b, String c)' cannot precede parameters that are not "
                 + "JsOptional.",
             "JsOptional parameter 'b' in method "
-                + "'void Buggy.bar(int, Object, String)' cannot precede parameters that are not "
-                + "JsOptional.",
-            "JsOptional parameter 'b' in method "
-                + "'void Buggy.baz(Object, String, Object[])' cannot precede parameters that are"
-                + " not JsOptional.");
+                + "'void Buggy.bar(int a, Object b, String c)' cannot precede parameters that are"
+                + " not JsOptional.",
+            "JsOptional parameter 'a' in method "
+                + "'void Buggy.baz(Object a, String b, Object... c)' cannot precede parameters that"
+                + " are not JsOptional.");
   }
 
   public void testJsOptionalOnInvalidParametersFails() throws Exception {
@@ -1873,9 +1873,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "   @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}",
             "}")
         .assertCompileFails(
-            "JsOptional parameter 'a' in method '" + "Buggy(int)' cannot be of a primitive type.",
+            "JsOptional parameter 'a' in method '" + "Buggy(int a)' cannot be of a primitive type.",
             "JsOptional parameter 'c' in method "
-                + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.");
+                + "'void Buggy.bar(int a, Object b, String... c)' cannot be a varargs parameter.");
   }
 
   public void testJsOptionalOnNonJsExposedMethodsFails() throws Exception {
@@ -1893,11 +1893,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsOverlay public final void fun( @JsOptional Object a) {}",
             "}")
         .assertCompileFails(
-            "JsOptional parameter in 'void Buggy.fun(int, Object, "
-                + "String)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
-            "JsOptional parameter in 'void Buggy.setBar(Object)' can only "
+            "JsOptional parameter in 'void Buggy.fun(int a, Object b, "
+                + "String c)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
+            "JsOptional parameter in 'void Buggy.setBar(Object o)' can only "
                 + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
-            "JsOptional parameter in 'void Native.fun(Object)' can only "
+            "JsOptional parameter in 'void Native.fun(Object a)' can only "
                 + "be declared in a JsMethod, a JsConstructor or a JsFunction.");
   }
 
@@ -1996,7 +1996,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}")
         .assertCompileFails(
             "Native JsType 'Buggy' cannot have initializer.",
-            "JsOverlay field 'int Buggy.f2' can only be static.",
+            "JsOverlay field 'Buggy.f2' can only be static.",
             "JsOverlay method 'void Buggy.m()' cannot be non-final nor native.");
   }
 
@@ -2076,7 +2076,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public final void m() {};",
             "}")
         .assertCompileFails(
-            "JsOverlay 'int Buggy.F' can only be declared in a native type "
+            "JsOverlay 'Buggy.F' can only be declared in a native type "
                 + "or @JsFunction interface.",
             "JsOverlay 'void Buggy.m()' can only be declared in a native type "
                 + "or @JsFunction interface.");
@@ -2232,13 +2232,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "Native JsType member 'void Interface.n()' cannot have @JsIgnore.",
             "Native JsType member 'Buggy()' cannot have @JsIgnore.",
-            "Native JsType field 'int Buggy.f' cannot be final.",
-            "Native JsType field 'int Buggy.s' cannot be final.",
-            "Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
+            "Native JsType field 'Buggy.f' cannot be final.",
+            "Native JsType field 'Buggy.s' cannot be final.",
+            "Native JsType member 'Buggy.x' cannot have @JsIgnore.",
             "Native JsType member 'void Buggy.n()' cannot have @JsIgnore.",
             "Native JsType method 'void Buggy.o()' should be native or abstract.",
-            "Native JsType field 'int Buggy.t' cannot have initializer.",
-            "Native JsType field 'int Buggy.g' cannot have initializer.",
+            "Native JsType field 'Buggy.t' cannot have initializer.",
+            "Native JsType field 'Buggy.g' cannot have initializer.",
             "Native JsType 'NativeClassWithInitializer' cannot have initializer",
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
@@ -2650,34 +2650,35 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}")
         .assertCompileSucceeds()
         .assertWarnings(
-            "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A)' is not usable by but "
+            "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
                 + "exposed to JavaScript.",
-            "[unusable-by-js] Type of 'A D.a' is not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A)' is not usable by but exposed "
-                + "to JavaScript.",
-            "[unusable-by-js] Type of 'A Buggy.f' is not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'A Buggy.f1(A)' is not usable by but exposed to "
-                + "JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'A Buggy.f1(A)' is not usable by but exposed"
-                + " to JavaScript.",
-            "[unusable-by-js] Return type of 'A[] Buggy.f2(A[])' is not usable by but exposed to "
-                + "JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'A[] Buggy.f2(A[])' is not usable by but "
-                + "exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'Short Buggy.f3(Short)' is not usable by but exposed "
-                + "to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'Short Buggy.f3(Short)' is not usable by but"
+            "[unusable-by-js] Type 'A' of field 'D.a' is not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A a)' is not usable by but"
                 + " exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'B Buggy.f4(B)' is not usable by but "
+            "[unusable-by-js] Type 'A' of field 'Buggy.f' is not usable by but exposed to "
+                + "JavaScript.",
+            "[unusable-by-js] Return type of 'A Buggy.f1(A a)' is not usable by but exposed to "
+                + "JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'A Buggy.f1(A a)' is not usable by but "
                 + "exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B)' is not usable by but exposed"
+            "[unusable-by-js] Return type of 'A[] Buggy.f2(A[] a)' is not usable by but exposed to "
+                + "JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'A[] Buggy.f2(A[] a)' is not usable"
+                + " by but exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'Short Buggy.f3(Short a)' is not usable by but"
+                + " exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'Short Buggy.f3(Short a)' is not"
+                + " usable by but exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'B Buggy.f4(B a)' is not usable by but "
+                + "exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B a)' is not usable by but"
+                + " exposed to JavaScript.",
+            "[unusable-by-js] Return type of 'Long Buggy.f5(Long a)' is not usable by but exposed"
                 + " to JavaScript.",
-            "[unusable-by-js] Return type of 'Long Buggy.f5(Long)' is not usable by but exposed to"
-                + " JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'Long Buggy.f5(Long)' is not usable by "
-                + "but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long[])' is not usable by but"
-                + " exposed to JavaScript.")
+            "[unusable-by-js] Type of parameter 'a' in 'Long Buggy.f5(Long a)' is not usable"
+                + " by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long... a)' is not"
+                + " usable by but exposed to JavaScript.")
         .assertInfoMessages(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "

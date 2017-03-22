@@ -185,7 +185,8 @@ public class NormalizeConstructors extends NormalizationPass {
                 .addStatements(method.getBody().getStatements())
                 .setJsDocDescription(
                     J2clUtils.format(
-                        "Initialization from constructor '%s'.", method.getReadableDescription()))
+                        "Initialization from constructor '%s'.",
+                        method.getDescriptor().getReadableDescription()))
                 .build();
           }
 
@@ -240,7 +241,8 @@ public class NormalizeConstructors extends NormalizationPass {
         .setParameters(jsConstructorParameters)
         .addStatements(body)
         .setJsDocDescription(
-            J2clUtils.format("JsConstructor '%s'.", jsConstructor.getReadableDescription()))
+            J2clUtils.format(
+                "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
         .setSourcePosition(jsConstructor.getSourcePosition())
         .build();
   }
@@ -422,7 +424,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setJsDocDescription(
             J2clUtils.format(
                 "Factory method corresponding to constructor '%s'.",
-                constructor.getReadableDescription()))
+                constructor.getDescriptor().getReadableDescription()))
         .setSourcePosition(constructor.getSourcePosition())
         .build();
   }
