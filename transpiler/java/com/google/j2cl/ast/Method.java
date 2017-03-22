@@ -159,14 +159,14 @@ public class Method extends Member implements HasJsNameInfo {
   }
 
   private String getParameterReadableDescription(Variable parameter) {
-    boolean isVarargs = parameter == getVarargsParameter();
+    if (parameter == getVarargsParameter()) {
+      return J2clUtils.format(
+          "%s... %s",
+          parameter.getTypeDescriptor().getComponentTypeDescriptor().getReadableDescription(),
+          parameter.getName());
+    }
     return J2clUtils.format(
-        "%s%s %s",
-        isVarargs
-            ? parameter.getTypeDescriptor().getComponentTypeDescriptor().getReadableDescription()
-            : parameter.getTypeDescriptor().getReadableDescription(),
-        isVarargs ? "..." : "",
-        parameter.getName());
+        "%s %s", parameter.getTypeDescriptor().getReadableDescription(), parameter.getName());
   }
 
   @Override
