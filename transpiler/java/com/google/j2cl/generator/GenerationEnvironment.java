@@ -38,7 +38,6 @@ public class GenerationEnvironment {
   private TypeDescriptor enclosingTypeDescriptor;
 
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
-    JsDocNameUtils.init();
     for (Import anImport : imports) {
       String alias = anImport.getAlias();
       checkArgument(alias != null && !alias.isEmpty(), "Bad alias for %s", anImport.getElement());

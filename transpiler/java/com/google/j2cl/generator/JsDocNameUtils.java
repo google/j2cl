@@ -32,6 +32,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -45,66 +46,44 @@ public class JsDocNameUtils {
   private static final String JS_VOID_TYPE_NAME = "void";
   private static final String JS_NULLABLE_PREFIX = "?";
 
+  /** Mapping from devirtualized type descriptor (Boolean, Double, String) to its JsDoc name. */
+  private static ThreadLocal<Map<TypeDescriptor, String>> jsDocNamesByDevirtualizedTypeDescriptor =
+      ThreadLocal.withInitial(
+          () ->
+              // Devirtualized types:
+              //     Boolean => boolean, Double => number, String => ?string, Void => ?void.
+              ImmutableMap.of(
+                  TypeDescriptors.get().javaLangBoolean, JS_NULLABLE_PREFIX + JS_BOOLEAN_TYPE_NAME,
+                  TypeDescriptors.get().javaLangDouble, JS_NULLABLE_PREFIX + JS_NUMBER_TYPE_NAME,
+                  TypeDescriptors.get().javaLangString, JS_NULLABLE_PREFIX + JS_STRING_TYPE_NAME,
+                  TypeDescriptors.get().javaLangVoid, JS_NULLABLE_PREFIX + JS_VOID_TYPE_NAME));
   /**
-   * Mapping from unboxed type descriptor (Boolean, Double, String) to its JsDoc name.
+   * Mapping from super type descriptor (super classes or super interfaces) to its sub classes or
+   * implementing classes that are unboxed types.
    */
-  private static Map<TypeDescriptor, String> jsDocNamesByUnboxedTypeDescriptor;
-  /**
-   * Mapping from super type descriptor (super classes or super interfaces) to its sub classes
-   * or implementing classes that are unboxed types.
-   */
-  private static Multimap<TypeDescriptor, TypeDescriptor>
-      unboxedTypeDescriptorsBySuperTypeDescriptor;
+  private static ThreadLocal<Multimap<TypeDescriptor, TypeDescriptor>>
+      devirtualizedTypeDescriptorsBySuperTypeDescriptor =
+          ThreadLocal.withInitial(
+              () -> {
+                TypeDescriptor rawJavaLangComparable =
+                    TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor();
+                TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
+                TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
+                TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
+                TypeDescriptor javaLangNumber = TypeDescriptors.get().javaLangNumber;
+                TypeDescriptor javaLangCharSequence = TypeDescriptors.get().javaLangCharSequence;
 
-  public static void init() {
-    initUnboxedTypeDescriptor();
-    initSuperTypesOfUnboxedTypeDescriptor();
-  }
+                return ImmutableMultimap.of(
+                    // Boolean implements Comparable
+                    rawJavaLangComparable, javaLangBoolean,
+                    // Double extends Number implements Comparable
+                    rawJavaLangComparable, javaLangDouble,
+                    javaLangNumber, javaLangDouble,
+                    // String implements Comparable, CharSequence
+                    rawJavaLangComparable, javaLangString,
+                    javaLangCharSequence, javaLangString);
+              });
 
-  /**
-   * Initialize special cases for unboxed type descriptors
-   */
-  private static void initUnboxedTypeDescriptor() {
-    if (jsDocNamesByUnboxedTypeDescriptor != null) {
-      // Already initialized.
-      return;
-    }
-    // unboxed types: Boolean => boolean, Double => number, String => ?string, Void => ?void.
-    jsDocNamesByUnboxedTypeDescriptor =
-        ImmutableMap.of(
-            TypeDescriptors.get().javaLangBoolean, JS_NULLABLE_PREFIX + JS_BOOLEAN_TYPE_NAME,
-            TypeDescriptors.get().javaLangDouble, JS_NULLABLE_PREFIX + JS_NUMBER_TYPE_NAME,
-            TypeDescriptors.get().javaLangString, JS_NULLABLE_PREFIX + JS_STRING_TYPE_NAME,
-            TypeDescriptors.get().javaLangVoid, JS_NULLABLE_PREFIX + JS_VOID_TYPE_NAME);
-  }
-
-  /**
-   * Initialize mapping from super types to its child unboxed types.
-   */
-  private static void initSuperTypesOfUnboxedTypeDescriptor() {
-    if (unboxedTypeDescriptorsBySuperTypeDescriptor != null) {
-      // Already initialized.
-      return;
-    }
-    TypeDescriptor rawJavaLangComparable =
-        TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor();
-    TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
-    TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
-    TypeDescriptor javaLangNumber = TypeDescriptors.get().javaLangNumber;
-    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
-    TypeDescriptor javaLangCharSequence = TypeDescriptors.get().javaLangCharSequence;
-
-    unboxedTypeDescriptorsBySuperTypeDescriptor =
-        ImmutableMultimap.of(
-            // Boolean implements Comparable
-            rawJavaLangComparable, javaLangBoolean,
-            // Double extends Number implements Comparable
-            rawJavaLangComparable, javaLangDouble,
-            javaLangNumber, javaLangDouble,
-            // String implements Comparable, CharSequence
-            rawJavaLangComparable, javaLangString,
-            javaLangCharSequence, javaLangString);
-  }
 
   /**
    * Returns the JsDoc type name.
@@ -212,27 +191,28 @@ public class JsDocNameUtils {
 
       String jsDocName =
           String.format("%s<%s>", environment.aliasForType(rawTypeDescriptor), typeParametersJsDoc);
-      if (!shouldUseClassName
-          && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(rawTypeDescriptor)) {
+      if (!shouldUseClassName && hasDevirtualizedSubtype(rawTypeDescriptor)) {
         // types that are extended or implemented by unboxed types
         // JsDoc type should be a union type.
-        jsDocName = String.format("(%s|%s)", jsDocName, getJsDocNameOfUnionType(rawTypeDescriptor));
+        jsDocName =
+            String.format(
+                "(%s|%s)",
+                jsDocName, getJsDocNameAsUnionOfDevirtualizedSubtypes(rawTypeDescriptor));
       }
       return jsDocName;
     }
 
     // Special cases for unboxed types.
-    if (!shouldUseClassName && jsDocNamesByUnboxedTypeDescriptor.containsKey(typeDescriptor)) {
-      return jsDocNamesByUnboxedTypeDescriptor.get(typeDescriptor);
+    if (!shouldUseClassName && needsJsDocNameMapping(typeDescriptor)) {
+      return mapDevirtualizedJsDocName(typeDescriptor);
     }
 
     // types that are extended or implemented by unboxed types.
-    if (!shouldUseClassName
-        && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor)) {
+    if (!shouldUseClassName && hasDevirtualizedSubtype(typeDescriptor)) {
       return String.format(
           "(%s|%s)",
           environment.aliasForType(typeDescriptor),
-          getJsDocNameOfUnionType(typeDescriptor));
+          getJsDocNameAsUnionOfDevirtualizedSubtypes(typeDescriptor));
     }
 
     if (typeDescriptor.isTypeVariable()) {
@@ -262,6 +242,18 @@ public class JsDocNameUtils {
     return environment.aliasForType(typeDescriptor);
   }
 
+  private static boolean needsJsDocNameMapping(TypeDescriptor typeDescriptor) {
+    return jsDocNamesByDevirtualizedTypeDescriptor.get().containsKey(typeDescriptor);
+  }
+
+  private static boolean hasDevirtualizedSubtype(TypeDescriptor rawTypeDescriptor) {
+    return devirtualizedTypeDescriptorsBySuperTypeDescriptor.get().containsKey(rawTypeDescriptor);
+  }
+
+  private static String mapDevirtualizedJsDocName(TypeDescriptor typeDescriptor) {
+    return jsDocNamesByDevirtualizedTypeDescriptor.get().get(typeDescriptor);
+  }
+
   private static String getJsDocNameWithNullability(String jsDocType, boolean nullable) {
     if (jsDocType.equals("?") || jsDocType.equals("*")) {
       return jsDocType;
@@ -285,20 +277,24 @@ public class JsDocNameUtils {
   }
 
   /**
-   * Assume {@code setTypeDescriptor} is extended or implemented by an unboxed type,
-   * it returns the JsDoc name of the union of all its inheriting/implementing types.
+   * Assume {@code setTypeDescriptor} is extended or implemented by devirtualized types, it returns
+   * the JsDoc name of the union of all its inheriting/implementing types.
    */
-  private static String getJsDocNameOfUnionType(TypeDescriptor typeDescriptor) {
-    checkArgument(unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor));
-    return unboxedTypeDescriptorsBySuperTypeDescriptor
-        .get(typeDescriptor)
+  private static String getJsDocNameAsUnionOfDevirtualizedSubtypes(TypeDescriptor typeDescriptor) {
+    checkArgument(hasDevirtualizedSubtype(typeDescriptor));
+    return getDevirtualziedSubtypes(typeDescriptor)
         .stream()
         .map(
             unboxedTypeDescriptor -> {
-              checkArgument(jsDocNamesByUnboxedTypeDescriptor.containsKey(unboxedTypeDescriptor));
-              return jsDocNamesByUnboxedTypeDescriptor.get(unboxedTypeDescriptor);
+              checkArgument(needsJsDocNameMapping(unboxedTypeDescriptor));
+              return mapDevirtualizedJsDocName(unboxedTypeDescriptor);
             })
         .collect(joining("|"));
+  }
+
+  private static Collection<TypeDescriptor> getDevirtualziedSubtypes(
+      TypeDescriptor typeDescriptor) {
+    return devirtualizedTypeDescriptorsBySuperTypeDescriptor.get().get(typeDescriptor);
   }
 
   public static String getJsDocNameForJsFunction(

@@ -20,12 +20,18 @@ import com.google.j2cl.ast.annotations.Visitable;
 /** Boolean literal node. */
 @Visitable
 public class BooleanLiteral extends Literal {
-  public static final BooleanLiteral FALSE = new BooleanLiteral(false);
-  public static final BooleanLiteral TRUE = new BooleanLiteral(true);
+  private static final ThreadLocal<BooleanLiteral> FALSE =
+      ThreadLocal.withInitial(() -> new BooleanLiteral(false));
+  private static final ThreadLocal<BooleanLiteral> TRUE =
+      ThreadLocal.withInitial(() -> new BooleanLiteral(true));
   private final boolean value;
 
   private BooleanLiteral(boolean value) {
     this.value = value;
+  }
+
+  public static BooleanLiteral get(boolean value) {
+    return value ? TRUE.get() : FALSE.get();
   }
 
   public boolean getValue() {

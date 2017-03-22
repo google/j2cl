@@ -127,11 +127,11 @@ public class NormalizeTryWithResources extends NormalizationPass {
               .build();
 
       List<Statement> transformedStatements = new ArrayList<>();
-      transformedStatements.add(
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(primaryException, NullLiteral.NULL)
-              .build()
-              .makeStatement());
+    transformedStatements.add(
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(primaryException, NullLiteral.get())
+            .build()
+            .makeStatement());
 
       List<Statement> tryBlockBodyStatements = new ArrayList<>();
 
@@ -139,11 +139,11 @@ public class NormalizeTryWithResources extends NormalizationPass {
           tryStatement.getResourceDeclarations();
       for (VariableDeclarationExpression declaration : resourceDeclarations) {
         VariableDeclarationFragment originalResourceDeclaration = declaration.getFragments().get(0);
-        transformedStatements.add(
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(originalResourceDeclaration.getVariable(), NullLiteral.NULL)
-                .build()
-                .makeStatement());
+      transformedStatements.add(
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(originalResourceDeclaration.getVariable(), NullLiteral.get())
+              .build()
+              .makeStatement());
 
         Expression assignResourceInitializer =
             BinaryExpression.Builder.asAssignmentTo(originalResourceDeclaration.getVariable())
@@ -183,13 +183,13 @@ public class NormalizeTryWithResources extends NormalizationPass {
       }
 
       ThrowStatement throwPrimaryException = new ThrowStatement(primaryException.getReference());
-      Expression primaryExceptionNotEqualsNull =
-          BinaryExpression.newBuilder()
-              .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-              .setLeftOperand(primaryException.getReference())
-              .setOperator(BinaryOperator.NOT_EQUALS)
-              .setRightOperand(NullLiteral.NULL)
-              .build();
+    Expression primaryExceptionNotEqualsNull =
+        BinaryExpression.newBuilder()
+            .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setLeftOperand(primaryException.getReference())
+            .setOperator(BinaryOperator.NOT_EQUALS)
+            .setRightOperand(NullLiteral.get())
+            .build();
       IfStatement primaryExceptionNullStatement =
           new IfStatement(primaryExceptionNotEqualsNull, throwPrimaryException);
       finallyBlockStatements.add(primaryExceptionNullStatement);

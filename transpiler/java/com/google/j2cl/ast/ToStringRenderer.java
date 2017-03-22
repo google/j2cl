@@ -335,7 +335,7 @@ class ToStringRenderer {
         List<Expression> dimensionExpressions = newArray.getDimensionExpressions();
         for (Expression expression : dimensionExpressions) {
           print("[");
-          if (expression != NullLiteral.NULL) {
+          if (expression != NullLiteral.get()) {
             accept(expression);
           }
           print("]");

@@ -74,7 +74,7 @@ public class NormalizeArrayLiterals extends NormalizationPass {
           .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
           .setDimensionExpressions(
               Collections.nCopies(
-                  arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL))
+                  arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.get()))
           .setArrayLiteral(arrayLiteral)
           .build();
     }

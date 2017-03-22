@@ -21,7 +21,12 @@ import com.google.j2cl.ast.annotations.Visitable;
 @Visitable
 public class NullLiteral extends Literal {
 
-  public static final NullLiteral NULL = new NullLiteral();
+  private static final ThreadLocal<NullLiteral> NULL =
+      ThreadLocal.withInitial(() -> new NullLiteral());
+
+  public static NullLiteral get() {
+    return NULL.get();
+  }
 
   @Override
   public TypeDescriptor getTypeDescriptor() {

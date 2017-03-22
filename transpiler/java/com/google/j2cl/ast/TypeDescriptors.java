@@ -564,7 +564,7 @@ public class TypeDescriptors {
     // Primitives.
     switch (typeDescriptor.getQualifiedSourceName()) {
       case BOOLEAN_TYPE_NAME:
-        return BooleanLiteral.FALSE;
+        return BooleanLiteral.get(false);
       case BYTE_TYPE_NAME:
       case SHORT_TYPE_NAME:
       case INT_TYPE_NAME:
@@ -575,7 +575,7 @@ public class TypeDescriptors {
       case LONG_TYPE_NAME:
         return new NumberLiteral(typeDescriptor, 0L);
       default:
-        return NullLiteral.NULL;
+        return NullLiteral.get();
     }
   }
 

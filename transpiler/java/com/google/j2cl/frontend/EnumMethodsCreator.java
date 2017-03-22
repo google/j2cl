@@ -112,7 +112,7 @@ public class EnumMethodsCreator {
   private void run() {
     enumType.addField(
         Field.Builder.from(this.namesToValuesMapFieldDescriptor)
-            .setInitializer(NullLiteral.NULL)
+            .setInitializer(NullLiteral.get())
             .build());
     Method valueOfMethod = createValueOfMethod();
     valueOfMethod.setSourcePosition(enumType.getSourcePosition());
@@ -168,7 +168,7 @@ public class EnumMethodsCreator {
             .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .setLeftOperand(FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .setOperator(BinaryOperator.EQUALS)
-            .setRightOperand(NullLiteral.NULL)
+            .setRightOperand(NullLiteral.get())
             .build();
     Expression valuesCall = MethodCall.Builder.from(valuesMethodDescriptor).build();
 

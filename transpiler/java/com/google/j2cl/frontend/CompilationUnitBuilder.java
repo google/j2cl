@@ -347,7 +347,7 @@ public class CompilationUnitBuilder {
         return new CharacterLiteral((char) constantValue);
       }
       if (constantValue instanceof Boolean) {
-        return (boolean) constantValue ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
+        return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
       }
       throw new RuntimeException(
           "Need to implement translation for compile time constants of type: "
@@ -413,7 +413,7 @@ public class CompilationUnitBuilder {
           convertExpressions(JdtUtils.asTypedList(expression.dimensions()));
       // If some dimensions are not initialized then make that explicit.
       while (dimensionExpressions.size() < arrayType.getDimensions()) {
-        dimensionExpressions.add(NullLiteral.NULL);
+        dimensionExpressions.add(NullLiteral.get());
       }
 
       ArrayLiteral arrayLiteral =
@@ -435,7 +435,7 @@ public class CompilationUnitBuilder {
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {
-      return literal.booleanValue() ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
+      return literal.booleanValue() ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
     }
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
@@ -624,7 +624,7 @@ public class CompilationUnitBuilder {
         case ASTNode.METHOD_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
-          return NullLiteral.NULL;
+          return NullLiteral.get();
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
         case ASTNode.PARENTHESIZED_EXPRESSION:
