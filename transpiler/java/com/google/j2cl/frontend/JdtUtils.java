@@ -949,7 +949,10 @@ public class JdtUtils {
                 createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
             .addPrimitiveBoxedTypeDescriptorPair(
                 createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")));
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Void")));
     // Add well-known, non-primitive types.
     for (ITypeBinding typeBinding : typeBindings) {
       singletonInitializer.addReferenceType(createTypeDescriptor(typeBinding));

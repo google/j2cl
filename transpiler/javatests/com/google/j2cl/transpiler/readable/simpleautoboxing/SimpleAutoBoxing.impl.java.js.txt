@@ -19,6 +19,7 @@ let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let Void = goog.forwardDeclare('java.lang.Void$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
@@ -219,6 +220,15 @@ class SimpleAutoBoxing extends java_lang_Object {
   }
 
   /**
+   * @param {?void} v
+   * @return {?void}
+   * @public
+   */
+  m_takesAndReturnsVoid__java_lang_Void(v) {
+    return null;
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -326,6 +336,8 @@ class SimpleAutoBoxing extends java_lang_Object {
         $Primitives.$widenLongToDouble(boxL.m_longValue__()));
     this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue__());
+    let v = this.m_takesAndReturnsVoid__java_lang_Void(
+        this.m_takesAndReturnsVoid__java_lang_Void(null));
     bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     d = Double.m_doubleValue__java_lang_Double(boxD) +
@@ -495,6 +507,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     Integer = goog.module.get('java.lang.Integer$impl');
     Long = goog.module.get('java.lang.Long$impl');
     Short = goog.module.get('java.lang.Short$impl');
+    Void = goog.module.get('java.lang.Void$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');

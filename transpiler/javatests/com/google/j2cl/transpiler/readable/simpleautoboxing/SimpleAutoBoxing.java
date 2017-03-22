@@ -1,5 +1,11 @@
 package com.google.j2cl.transpiler.readable.simpleautoboxing;
 
+@SuppressWarnings({
+  "IdentityBinaryExpression",
+  "BoxedPrimitiveConstructor",
+  "ReferenceEquality",
+  "ShortCircuitBoolean"
+})
 public class SimpleAutoBoxing {
   public Boolean box(boolean b) {
     return b; // auto-boxing by return
@@ -67,6 +73,10 @@ public class SimpleAutoBoxing {
 
   public double takesAndReturnsPrimitiveDouble(double d) {
     return d;
+  }
+
+  public Void takesAndReturnsVoid(Void v) {
+    return null;
   }
 
   @SuppressWarnings("unused")
@@ -178,6 +188,8 @@ public class SimpleAutoBoxing {
     takesAndReturnsPrimitiveDouble(boxL);
     takesAndReturnsPrimitiveDouble(boxS);
     takesAndReturnsPrimitiveDouble(boxC);
+
+    Void v = takesAndReturnsVoid(takesAndReturnsVoid(null));
 
     // auto-unboxing by operator
     bool = boxBool && boxBool;

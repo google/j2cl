@@ -22,8 +22,9 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -31,7 +32,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +42,7 @@ public class JsDocNameUtils {
   private static final String JS_STRING_TYPE_NAME = "string";
   private static final String JS_BOOLEAN_TYPE_NAME = "boolean";
   private static final String JS_NUMBER_TYPE_NAME = "number";
+  private static final String JS_VOID_TYPE_NAME = "void";
   private static final String JS_NULLABLE_PREFIX = "?";
 
   /**
@@ -68,15 +69,13 @@ public class JsDocNameUtils {
       // Already initialized.
       return;
     }
-    jsDocNamesByUnboxedTypeDescriptor = new HashMap<>();
-    // unboxed types: Boolean => boolean, Double => number, String => ?string.
-    TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
-    TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
-    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
-    jsDocNamesByUnboxedTypeDescriptor.put(
-        javaLangBoolean, JS_NULLABLE_PREFIX + JS_BOOLEAN_TYPE_NAME);
-    jsDocNamesByUnboxedTypeDescriptor.put(javaLangDouble, JS_NULLABLE_PREFIX + JS_NUMBER_TYPE_NAME);
-    jsDocNamesByUnboxedTypeDescriptor.put(javaLangString, JS_NULLABLE_PREFIX + JS_STRING_TYPE_NAME);
+    // unboxed types: Boolean => boolean, Double => number, String => ?string, Void => ?void.
+    jsDocNamesByUnboxedTypeDescriptor =
+        ImmutableMap.of(
+            TypeDescriptors.get().javaLangBoolean, JS_NULLABLE_PREFIX + JS_BOOLEAN_TYPE_NAME,
+            TypeDescriptors.get().javaLangDouble, JS_NULLABLE_PREFIX + JS_NUMBER_TYPE_NAME,
+            TypeDescriptors.get().javaLangString, JS_NULLABLE_PREFIX + JS_STRING_TYPE_NAME,
+            TypeDescriptors.get().javaLangVoid, JS_NULLABLE_PREFIX + JS_VOID_TYPE_NAME);
   }
 
   /**
@@ -87,25 +86,24 @@ public class JsDocNameUtils {
       // Already initialized.
       return;
     }
-    unboxedTypeDescriptorsBySuperTypeDescriptor = LinkedHashMultimap.create();
     TypeDescriptor rawJavaLangComparable =
         TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor();
     TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
     TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
-    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
     TypeDescriptor javaLangNumber = TypeDescriptors.get().javaLangNumber;
+    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
     TypeDescriptor javaLangCharSequence = TypeDescriptors.get().javaLangCharSequence;
 
-    // Boolean implements Comparable
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangBoolean);
-
-    // Double extends Number implements Comparable
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangDouble);
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangNumber, javaLangDouble);
-
-    // String implements Comparable, CharSequence
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangString);
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangCharSequence, javaLangString);
+    unboxedTypeDescriptorsBySuperTypeDescriptor =
+        ImmutableMultimap.of(
+            // Boolean implements Comparable
+            rawJavaLangComparable, javaLangBoolean,
+            // Double extends Number implements Comparable
+            rawJavaLangComparable, javaLangDouble,
+            javaLangNumber, javaLangDouble,
+            // String implements Comparable, CharSequence
+            rawJavaLangComparable, javaLangString,
+            javaLangCharSequence, javaLangString);
   }
 
   /**

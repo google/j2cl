@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.instanceofboxedtype;
 
+@SuppressWarnings("BoxedPrimitiveConstructor")
 public class Main {
   public static void main(String[] args) {
     Object b = new Byte((byte) 1);
@@ -94,5 +95,8 @@ public class Main {
 
     assert (sn instanceof SubNumber);
     assert (sn instanceof Number);
+
+    assert (!(new Object() instanceof Void));
+    assert (!(null instanceof Void));
   }
 }

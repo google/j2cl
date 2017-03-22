@@ -56,6 +56,7 @@ public class TypeDescriptors {
   public TypeDescriptor javaLangLong;
   public TypeDescriptor javaLangShort;
   public TypeDescriptor javaLangString;
+  public TypeDescriptor javaLangVoid;
 
   public TypeDescriptor javaLangClass;
   public TypeDescriptor javaLangObject;
@@ -180,6 +181,10 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangBoolean);
   }
 
+  public static boolean isJavaLangVoid(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangVoid);
+  }
+
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         && !isPrimitiveBoolean(typeDescriptor)
@@ -198,7 +203,9 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
-    return isBoxedBooleanOrDouble(typeDescriptor) || isJavaLangString(typeDescriptor);
+    return isBoxedBooleanOrDouble(typeDescriptor)
+        || isJavaLangString(typeDescriptor)
+        || isJavaLangVoid(typeDescriptor);
   }
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
@@ -678,6 +685,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.String":
           typeDescriptors.javaLangString = referenceType;
+          break;
+        case "java.lang.Void":
+          typeDescriptors.javaLangVoid = referenceType;
           break;
         case "java.lang.Class":
           typeDescriptors.javaLangClass = referenceType;

@@ -4,23 +4,23 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-class Foo {}
-
-class Bar {}
-
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
-class Baz {}
-
-@JsType(isNative = true, namespace = "goog.math", name = "Long")
-class Zoo {}
-
-@JsFunction
-interface Qux {
-  String m(String s);
-}
-
 /** Test cast to class type. */
 public class Main {
+
+  static class Foo {}
+
+  static class Bar {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
+  static class Baz {}
+
+  @JsType(isNative = true, namespace = "goog.math", name = "Long")
+  static class Zoo {}
+
+  @JsFunction
+  interface Qux {
+    String m(String s);
+  }
 
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -33,9 +33,9 @@ public class Main {
     } catch (ClassCastException e) {
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to"
-                      + " com.google.j2cl.transpiler.integration.classcastexception.Bar")
+                      + " com.google.j2cl.transpiler.integration.classcastexception.Main$Bar")
           : "Got unexpected message " + e.getMessage();
     }
 
@@ -47,9 +47,9 @@ public class Main {
       // expected
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to"
-                      + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Bar;")
+                      + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Main$Bar;")
           : "Got unexpected message " + e.getMessage();
     }
 
@@ -61,8 +61,21 @@ public class Main {
       // expected
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to java.lang.String")
+          : "Got unexpected message " + e.getMessage();
+    }
+
+    // Failed cast to Java Void.
+    try {
+      Void aVoid = (Void) object;
+      assert false;
+    } catch (ClassCastException e) {
+      // expected
+      assert e.getMessage()
+              .equals(
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
+                      + " cannot be cast to java.lang.Void")
           : "Got unexpected message " + e.getMessage();
     }
 
@@ -74,7 +87,7 @@ public class Main {
       // expected
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to String")
           : "Got unexpected message " + e.getMessage();
     }
@@ -87,7 +100,7 @@ public class Main {
       // expected
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to goog.math.Long")
           : "Got unexpected message " + e.getMessage();
     }
@@ -100,7 +113,7 @@ public class Main {
       // expected
       assert e.getMessage()
               .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Foo"
+                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to Function")
           : "Got unexpected message " + e.getMessage();
     }

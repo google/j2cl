@@ -1,43 +1,52 @@
 package com.google.j2cl.transpiler.integration.castdevirtualizedtypes;
 
+@SuppressWarnings("BoxedPrimitiveConstructor")
 public class Main {
-  @SuppressWarnings("unused")
   public static void main(String[] args) {
     testObject();
     testNumber();
     testComparable();
+    testCharSequence();
+    testVoid();
   }
 
   private static void testObject() {
-    Object object = null;
+    Object unusedObject = null;
 
     // All these casts should succeed.
-    object = (Object) "";
-    object = (Object) new Double(0);
-    object = (Object) new Boolean(false);
-    object = (Object) new Object[] {};
+    unusedObject = (Object) "";
+    unusedObject = (Object) new Double(0);
+    unusedObject = (Object) new Boolean(false);
+    unusedObject = (Object) new Object[] {};
   }
 
   private static void testNumber() {
-    Number number = null;
+    Number unusedNumber = null;
 
     // This casts should succeed.
-    number = (Number) new Double(0);
+    unusedNumber = (Number) new Double(0);
   }
 
   private static void testComparable() {
-    Comparable comparable = null;
+    Comparable<?> unusedComparable = null;
 
     // All these casts should succeed.
-    comparable = (Comparable) "";
-    comparable = (Comparable) new Double(0);
-    comparable = (Comparable) new Boolean(false);
+    unusedComparable = (Comparable) "";
+    unusedComparable = (Comparable) new Double(0);
+    unusedComparable = (Comparable) new Boolean(false);
   }
 
   private static void testCharSequence() {
-    CharSequence charSequence = null;
+    CharSequence unusedCharSequence = null;
 
     // This casts should succeed.
-    charSequence = (CharSequence) "";
+    unusedCharSequence = (CharSequence) "";
+  }
+
+  private static void testVoid() {
+    Void unusedVoid = null;
+
+    // This casts should succeed.
+    unusedVoid = (Void) null;
   }
 }
