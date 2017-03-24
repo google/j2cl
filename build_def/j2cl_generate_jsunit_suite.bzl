@@ -70,15 +70,18 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
   # plumbing between a jsunit_test and transpiled JUnit tests
   # It's outputs are:
   #  - test_summary.json that lists all jsunit test suites
-  #  - A JavaScript file for every JUnit test containing a jsunit tests suite
+  #  - A .testsuite file for every JUnit test containing a jsunit tests suite
   #  - A Java class (JsType) that contains the bridge between the jsunit test
-  #        suite and the JUnit test. This is being used from the JavaScript
+  #        suite and the JUnit test. This is being used from the .testsuite
   #        file.
   #
   # We separated this out into a separate target so we can have dependencies
   # here that users might not have in their tests (e.g. jsinterop annotations).
   # We need the extra dep here on user provided dependencies since our generated
   # code refers to user written code (test cases).
+  # Note that test suites are generated with .testsuite extension to avoid
+  # j2cl_library automically including them as source. These .testsuite files
+  # are javascript source files.
   j2cl_library(
       name = name,
       srcs = [test_input],
@@ -94,18 +97,22 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
   )
 
   # The Java annotation processor on the above target generates jsunit suites
-  # (JavaScript files), but the same jar file also contains unrelated things
+  # (.testsuite files), but the same jar file also contains unrelated things
   # (e.g. class files), this genrules takes the jar file as input and creates
-  # a new zip file that only contains the generated javascript (jsunit test
-  # suites) and the test_summary.json file.
+  # a new zip file that only contains the generated javascript (.testsuite
+  # renamed to .js) and the test_summary.json file.
   # This is the format that jsunit_test will later expect.
+  # TODO(goktug): use j2cl_library directly from jsunit_test instead of
+  # extracting files from jar (output js zip can include all the required
+  # files.)
   out_jar = ":lib" + name + "_java_library.jar"
   native.genrule(
       name=name + "_transpile_gen",
       outs=[name + ".js.zip"],
       cmd="\n".join([
-          "unzip -q $(location %s) *.js *.json -d zip_out/" % out_jar,
+          "unzip -q $(location %s) *.testsuite *.json -d zip_out/" % out_jar,
           "cd zip_out/",
+          "for f in $$(find -name *.testsuite); do mv $$f $${f/.testsuite/.js}; done",
           "zip -q -r ../$@ .",
       ]),
       testonly=1,
