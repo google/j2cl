@@ -17,24 +17,15 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.common.JsUtils;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Normalizes the static native js members accesses.
@@ -68,7 +59,8 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             // A.abs -> Math.abs.
             FieldDescriptor newFieldescriptor =
                 FieldDescriptor.Builder.from(fieldDescriptor)
-                    .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(fieldDescriptor))
+                    .setEnclosingClassTypeDescriptor(
+                        AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
                     .build();
             checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
             return FieldAccess.Builder.from(newFieldescriptor).build();
@@ -85,7 +77,8 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             // A.abs() -> Math.abs().
             MethodDescriptor newMethodDescriptor =
                 MethodDescriptor.Builder.from(methodDescriptor)
-                    .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(methodDescriptor))
+                    .setEnclosingClassTypeDescriptor(
+                        AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
                     .build();
             checkArgument(methodCall.getQualifier() instanceof TypeReference);
             return MethodCall.Builder.from(newMethodDescriptor)
@@ -95,48 +88,4 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
         });
   }
 
-  /**
-   * Returns a TypeDescriptor to refer to the enclosing name that represents the member namespace;
-   * this will transform a namespace=a.b.c on an JsMethod into a ficticious TypeDescriptor for
-   * namespace=a.b and name=c.
-   */
-  private static TypeDescriptor getNamespaceAsTypeDescriptor(MemberDescriptor memberDescriptor) {
-    String memberJsNamespace = memberDescriptor.getJsNamespace();
-    if (JsUtils.isGlobal(memberJsNamespace)) {
-      return TypeDescriptors.GLOBAL_NAMESPACE;
-    }
-
-    List<String> components = Splitter.on('.').omitEmptyStrings().splitToList(memberJsNamespace);
-    List<String> namespaceComponents = components.subList(0, components.size() - 1);
-    boolean isExtern = namespaceComponents.size() < 1;
-    String jsName = Iterables.getLast(components);
-    String jsNamespace =
-        isExtern ? JsUtils.JS_PACKAGE_GLOBAL : Joiner.on(".").join(namespaceComponents);
-
-    TypeDescriptor typeDescriptor = null;
-    if (isExtern) {
-      typeDescriptor = TypeDescriptors.createNative(jsNamespace, jsName, Collections.emptyList());
-    } else {
-      TypeDescriptor enclosingClassTypeDescriptor =
-          getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
-      String packageName =
-          Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
-
-      List<String> classComponents = new ArrayList<>();
-      classComponents.add(jsName);
-
-      typeDescriptor =
-          TypeDescriptors.createNative(
-              packageName, classComponents, jsNamespace, jsName, Collections.emptyList());
-    }
-
-    return typeDescriptor;
-  }
-
-  private static TypeDescriptor getOutermostEnclosingType(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.getEnclosingTypeDescriptor() == null) {
-      return typeDescriptor;
-    }
-    return getOutermostEnclosingType(typeDescriptor.getEnclosingTypeDescriptor());
-  }
 }

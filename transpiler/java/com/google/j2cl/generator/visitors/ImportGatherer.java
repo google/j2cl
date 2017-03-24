@@ -24,9 +24,12 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -90,6 +93,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitField(Field field) {
+    maybeAddNativeReference(field);
     addTypeDescriptor(field.getDescriptor().getTypeDescriptor(), ImportCategory.LAZY);
   }
 
@@ -121,6 +125,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitMethod(Method method) {
+    maybeAddNativeReference(method);
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
         || TypeDescriptors.isPrimitiveLong(returnTypeDescriptor)) {
@@ -129,6 +134,17 @@ public class ImportGatherer extends AbstractVisitor {
 
     for (Variable parameter : method.getParameters()) {
       addTypeDescriptor(parameter.getTypeDescriptor(), ImportCategory.LAZY);
+    }
+  }
+
+  private void maybeAddNativeReference(Member member) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isNative()
+        && memberDescriptor.isStatic()
+        && memberDescriptor.hasJsNamespace()
+        && !memberDescriptor.isExtern()) {
+      addTypeDescriptor(
+          AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor), ImportCategory.LAZY);
     }
   }
 
@@ -153,6 +169,7 @@ public class ImportGatherer extends AbstractVisitor {
     }
   }
 
+  @SuppressWarnings("ReferenceEquality")
   @Override
   public void exitTypeReference(TypeReference typeReference) {
     TypeDescriptor referencedTypeDescriptor = typeReference.getReferencedTypeDescriptor();

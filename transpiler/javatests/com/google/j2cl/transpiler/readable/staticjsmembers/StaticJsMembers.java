@@ -47,6 +47,9 @@ public class StaticJsMembers {
   @JsMethod(namespace = "foo.Bar", name = "baz")
   public static native boolean f5();
 
+  @JsMethod(namespace = "foo.Baz", name = "baz")
+  public static native boolean f6();
+
   public void test() {
     StaticJsMembers.f1(1);
     f1(1);

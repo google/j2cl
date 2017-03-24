@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
+import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
 import javax.annotation.Nullable;
 
@@ -99,6 +102,20 @@ public abstract class MemberDescriptor extends Node
   public boolean isJsOverlay() {
     return getJsInfo().isJsOverlay();
   }
+
+  public boolean isExtern() {
+    return isNative() && hasExternNamespace();
+  }
+
+  private boolean hasExternNamespace() {
+    checkArgument(isNative());
+    // A native type descriptor is an extern if its namespace is the global namespace or if
+    // it inherited the namespace from its (enclosing) extern type.
+    return JsUtils.isGlobal(getJsNamespace())
+        || (getEnclosingClassTypeDescriptor().isExtern()
+            && getJsNamespace().equals(getEnclosingClassTypeDescriptor().getQualifiedJsName()));
+  }
+
 
   @Override
   public String getSimpleJsName() {

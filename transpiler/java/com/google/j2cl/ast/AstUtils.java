@@ -20,13 +20,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
+import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -1105,5 +1109,50 @@ public class AstUtils {
   public static boolean startsWithNumber(String string) {
     char firstChar = string.charAt(0);
     return firstChar >= '0' && firstChar <= '9';
+  }
+
+  /**
+   * Returns a TypeDescriptor to refer to the enclosing name that represents the member namespace;
+   * this will transform a namespace=a.b.c on an JsMethod into a ficticious TypeDescriptor for
+   * namespace=a.b and name=c.
+   */
+  public static TypeDescriptor getNamespaceAsTypeDescriptor(MemberDescriptor memberDescriptor) {
+    String memberJsNamespace = memberDescriptor.getJsNamespace();
+    if (JsUtils.isGlobal(memberJsNamespace)) {
+      return TypeDescriptors.GLOBAL_NAMESPACE;
+    }
+
+    List<String> components = Splitter.on('.').omitEmptyStrings().splitToList(memberJsNamespace);
+    List<String> namespaceComponents = components.subList(0, components.size() - 1);
+    boolean isExtern = namespaceComponents.size() < 1;
+    String jsName = Iterables.getLast(components);
+    String jsNamespace =
+        isExtern ? JsUtils.JS_PACKAGE_GLOBAL : Joiner.on(".").join(namespaceComponents);
+
+    TypeDescriptor typeDescriptor = null;
+    if (isExtern) {
+      typeDescriptor = TypeDescriptors.createNative(jsNamespace, jsName, Collections.emptyList());
+    } else {
+      TypeDescriptor enclosingClassTypeDescriptor =
+          getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
+      String packageName =
+          Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
+
+      List<String> classComponents = new ArrayList<>();
+      classComponents.add(jsName);
+
+      typeDescriptor =
+          TypeDescriptors.createNative(
+              packageName, classComponents, jsNamespace, jsName, Collections.emptyList());
+    }
+
+    return typeDescriptor;
+  }
+
+  private static TypeDescriptor getOutermostEnclosingType(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.getEnclosingTypeDescriptor() == null) {
+      return typeDescriptor;
+    }
+    return getOutermostEnclosingType(typeDescriptor.getEnclosingTypeDescriptor());
   }
 }
