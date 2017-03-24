@@ -1,16 +1,17 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype.
+ * com.google.j2cl.transpiler.readable.jsoptional.Main$SpecializedSubtype.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
  */
-goog.module('com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.SpecializedSubtype$impl');
 
 
-const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.I$impl');
+const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.I$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -20,34 +21,34 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  */
 class SpecializedSubtype extends java_lang_Object {
   /**
-   * Private implementation constructor.
+   * JsConstructor 'SpecializedSubtype(Main, Object)'.
+   * @param {Main=} $outer_this
+   * @param {*} a
    * @public
    */
-  constructor() {
-    super();
-  }
-
-  /**
-   * Factory method corresponding to constructor 'SpecializedSubtype()'.
-   * @return {!SpecializedSubtype}
-   * @public
-   */
-  static $create__() {
+  constructor($outer_this, a) {
     SpecializedSubtype.$clinit();
-    let $instance = new SpecializedSubtype();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jsoptional_SpecializedSubtype__();
-    return $instance;
+    super();
+    /** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object(
+        $outer_this, a);
   }
 
   /**
-   * Initialization from constructor 'SpecializedSubtype()'.
+   * Initialization from constructor 'SpecializedSubtype(Main, Object)'.
+   * @param {Main} $outer_this
+   * @param {*} a
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_jsoptional_SpecializedSubtype__() {
+  $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object(
+      $outer_this, a) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype =
+        $outer_this;
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_jsoptional_SpecializedSubtype();
+    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype();
   }
 
   /**
@@ -97,6 +98,8 @@ class SpecializedSubtype extends java_lang_Object {
    */
   static $clinit() {
     SpecializedSubtype.$clinit = function() {};
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
@@ -106,13 +109,14 @@ class SpecializedSubtype extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jsoptional_SpecializedSubtype() {}
+  $init__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype() {
+  }
 };
 
 $Util.$setClassMetadata(
     SpecializedSubtype,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.jsoptional.SpecializedSubtype'));
+        'com.google.j2cl.transpiler.readable.jsoptional.Main$SpecializedSubtype'));
 
 
 I.$markImplementor(SpecializedSubtype);
@@ -122,4 +126,4 @@ I.$markImplementor(SpecializedSubtype);
  * Export class.
  */
 exports = SpecializedSubtype;
-//# sourceMappingURL=SpecializedSubtype.js.map
+//# sourceMappingURL=Main$SpecializedSubtype.js.map

@@ -1,0 +1,55 @@
+[static class NonJsTypeSubtype implements I<String> {
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }] => [/**
+ * @implements {I<?string>}
+...exports = NonJsTypeSubtype;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype"
+[static class NonJsTypeSubtype implements I<String> {
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }] => [/**
+   * Private implementation constructor.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype"
+[UNKNOWN] => [super();]
+[static class NonJsTypeSubtype implements I<String> {
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }] => [/**
+   * Factory method corresponding to constructor 'NonJsTypeSubtype()'.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype.<ctor>"
+[UNKNOWN] => [NonJsTypeSubtype.$clinit();]
+[UNKNOWN] => [let $instance = new NonJsTypeSubtype();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype__();]
+[UNKNOWN] => [return $instance;]
+[static class NonJsTypeSubtype implements I<String> {
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }] => [/**
+   * Initialization from constructor 'NonJsTypeSubtype()'.
+...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype();]
+[@Override
+    public void m(String t, @JsOptional Object o) {}] => [/**
+   * @param {?string} t
+...  m_m__java_lang_String__java_lang_Object(t, o) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype.m"
+[t] => [t] "t"
+[o] => [o] "o"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*=} arg1
+   * @return {void}
+   * @public
+   */
+  m(arg0, arg1) {
+    this.m_m__java_lang_String__java_lang_Object(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);
+  }]
+[UNKNOWN] => [this.m_m__java_lang_String__java_lang_Object(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

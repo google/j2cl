@@ -29,26 +29,29 @@ public class Main {
   }
 
   public void testFunction(Function f) {}
+
+  @JsType
+  interface I<T> {
+    void m(T t, @JsOptional Object o);
+  }
+
+  @JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+    @Override
+    public void m(T t, @JsOptional Object o) {}
+  }
+
+  @JsType
+  class SpecializedSubtype implements I<String> {
+    public SpecializedSubtype(@JsOptional Object a) {}
+
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }
+
+  static class NonJsTypeSubtype implements I<String> {
+    @Override
+    public void m(String t, @JsOptional Object o) {}
+  }
 }
 
-@JsType
-interface I<T> {
-  void m(T t, @JsOptional Object o);
-}
-
-@JsType
-class TemplatedSubtype<T extends String> implements I<T> {
-  @Override
-  public void m(T t, @JsOptional Object o) {}
-}
-
-@JsType
-class SpecializedSubtype implements I<String> {
-  @Override
-  public void m(String t, @JsOptional Object o) {}
-}
-
-class NonJsTypeSubtype implements I<String> {
-  @Override
-  public void m(String t, @JsOptional Object o) {}
-}

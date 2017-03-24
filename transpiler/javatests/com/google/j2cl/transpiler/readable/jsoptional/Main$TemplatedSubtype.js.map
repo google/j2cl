@@ -1,0 +1,55 @@
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [/**
+ * @template C_TemplatedSubtype_T
+...exports = TemplatedSubtype;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtype"
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [/**
+   * Private implementation constructor.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtype"
+[UNKNOWN] => [super();]
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [/**
+   * Factory method corresponding to constructor 'TemplatedSubtype()'.
+...    return $instance;
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtype.<ctor>"
+[UNKNOWN] => [TemplatedSubtype.$clinit();]
+[UNKNOWN] => [let $instance = new TemplatedSubtype();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_TemplatedSubtype__();]
+[UNKNOWN] => [return $instance;]
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [/**
+   * Initialization from constructor 'TemplatedSubtype()'.
+...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_TemplatedSubtype();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtype.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_TemplatedSubtype();]
+[@Override
+    public void m(T t, @JsOptional Object o) {}] => [/**
+   * @param {C_TemplatedSubtype_T} t
+...  m_m__java_lang_String__java_lang_Object(t, o) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtype.m"
+[t] => [t] "t"
+[o] => [o] "o"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*=} arg1
+   * @return {void}
+   * @public
+   */
+  m(arg0, arg1) {
+    this.m_m__java_lang_String__java_lang_Object(/**@type {C_TemplatedSubtype_T} */ ($Casts.to(arg0, java_lang_String)), arg1);
+  }]
+[UNKNOWN] => [this.m_m__java_lang_String__java_lang_Object(/**@type {C_TemplatedSubtype_T} */ ($Casts.to(arg0, java_lang_String)), arg1);]
+[UNKNOWN] => [java_lang_Object.$clinit();]

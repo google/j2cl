@@ -1,13 +1,13 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype.
+ * com.google.j2cl.transpiler.readable.jsoptional.Main$NonJsTypeSubtype.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
  */
-goog.module('com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtype$impl');
 
 
-const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.I$impl');
+const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.I$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -16,10 +16,9 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_T
- * @implements {I<C_T>}
+ * @implements {I<?string>}
  */
-class TemplatedSubtype extends java_lang_Object {
+class NonJsTypeSubtype extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -29,31 +28,30 @@ class TemplatedSubtype extends java_lang_Object {
   }
 
   /**
-   * Factory method corresponding to constructor 'TemplatedSubtype()'.
-   * @template C_T
-   * @return {!TemplatedSubtype<C_T>}
+   * Factory method corresponding to constructor 'NonJsTypeSubtype()'.
+   * @return {!NonJsTypeSubtype}
    * @public
    */
   static $create__() {
-    TemplatedSubtype.$clinit();
-    let $instance = new TemplatedSubtype();
+    NonJsTypeSubtype.$clinit();
+    let $instance = new NonJsTypeSubtype();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jsoptional_TemplatedSubtype__();
+        .$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'TemplatedSubtype()'.
+   * Initialization from constructor 'NonJsTypeSubtype()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_jsoptional_TemplatedSubtype__() {
+  $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_jsoptional_TemplatedSubtype();
+    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype();
   }
 
   /**
-   * @param {C_T} t
+   * @param {?string} t
    * @param {*} o
    * @return {void}
    * @public
@@ -70,7 +68,7 @@ class TemplatedSubtype extends java_lang_Object {
    */
   m(arg0, arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {C_T} */ ($Casts.to(arg0, java_lang_String)), arg1);
+        /**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);
   }
 
   /**
@@ -80,7 +78,7 @@ class TemplatedSubtype extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof TemplatedSubtype;
+    return instance instanceof NonJsTypeSubtype;
   }
 
   /**
@@ -90,7 +88,7 @@ class TemplatedSubtype extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, TemplatedSubtype);
+    return $Util.$canCastClass(classConstructor, NonJsTypeSubtype);
   }
 
   /**
@@ -98,7 +96,7 @@ class TemplatedSubtype extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    TemplatedSubtype.$clinit = function() {};
+    NonJsTypeSubtype.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
@@ -108,20 +106,21 @@ class TemplatedSubtype extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jsoptional_TemplatedSubtype() {}
+  $init__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype() {
+  }
 };
 
 $Util.$setClassMetadata(
-    TemplatedSubtype,
+    NonJsTypeSubtype,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.jsoptional.TemplatedSubtype'));
+        'com.google.j2cl.transpiler.readable.jsoptional.Main$NonJsTypeSubtype'));
 
 
-I.$markImplementor(TemplatedSubtype);
+I.$markImplementor(NonJsTypeSubtype);
 
 
 /**
  * Export class.
  */
-exports = TemplatedSubtype;
-//# sourceMappingURL=TemplatedSubtype.js.map
+exports = NonJsTypeSubtype;
+//# sourceMappingURL=Main$NonJsTypeSubtype.js.map

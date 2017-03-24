@@ -1,0 +1,13 @@
+[@JsType
+  interface I<T> {
+    void m(T t, @JsOptional Object o);
+  }] => [/**
+ * @interface
+...exports = I;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.I"
+[void m(T t, @JsOptional Object o);] => [/**
+   * @abstract
+...  m(t, o) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.I.m"
+[t] => [t] "t"
+[o] => [o] "o"

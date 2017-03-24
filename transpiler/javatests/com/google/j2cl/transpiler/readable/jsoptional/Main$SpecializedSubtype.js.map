@@ -1,0 +1,45 @@
+[@JsType
+  class SpecializedSubtype implements I<String> {
+...    public void m(String t, @JsOptional Object o) {}
+  }] => [/**
+ * @implements {I<?string>}
+...exports = SpecializedSubtype;
+] "com.google.j2cl.transpiler.readable.jsoptional.Main.SpecializedSubtype"
+[public SpecializedSubtype(@JsOptional Object a) {}] => [/**
+   * JsConstructor 'SpecializedSubtype(Main, Object)'.
+...    this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object($outer_this, a);
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.SpecializedSubtype.<ctor>"
+[a] => [a] "a"
+[UNKNOWN] => [SpecializedSubtype.$clinit();]
+[UNKNOWN] => [super();]
+[UNKNOWN] => [/** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype = null;]
+[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object($outer_this, a);]
+[public SpecializedSubtype(@JsOptional Object a) {}] => [/**
+   * Initialization from constructor 'SpecializedSubtype(Main, Object)'.
+...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype();
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.SpecializedSubtype.<ctor>"
+[a] => [a] "a"
+[UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype = $outer_this;]
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype();]
+[@Override
+    public void m(String t, @JsOptional Object o) {}] => [/**
+   * @param {?string} t
+...  m_m__java_lang_String__java_lang_Object(t, o) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.SpecializedSubtype.m"
+[t] => [t] "t"
+[o] => [o] "o"
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*=} arg1
+   * @return {void}
+   * @public
+   */
+  m(arg0, arg1) {
+    this.m_m__java_lang_String__java_lang_Object(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);
+  }]
+[UNKNOWN] => [this.m_m__java_lang_String__java_lang_Object(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)), arg1);]
+[UNKNOWN] => [java_lang_Object.$clinit();]
