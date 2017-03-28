@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.integration.nativeinjectionapt;
 /** Integration tests for native methods written by APTs. */
 public class Main {
   public static void main(String... args) {
-    assert MyClass.nativeStaticMethod().equals("MyClass");
-    assert NativeClass.nativeStaticMethod().equals("NativeClass");
+    assert NativeClass.nativeStaticMethod().equals("nativeStaticMethod");
   }
 }
