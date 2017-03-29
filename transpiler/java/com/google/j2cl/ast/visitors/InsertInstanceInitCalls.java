@@ -43,7 +43,7 @@ public class InsertInstanceInitCalls extends NormalizationPass {
           private void synthesizeInstanceInitCall(Method method) {
             MethodDescriptor initMethodDescriptor =
                 AstUtils.createInitMethodDescriptor(
-                    method.getDescriptor().getEnclosingClassTypeDescriptor());
+                    method.getDescriptor().getEnclosingTypeDescriptor());
 
             List<Expression> arguments = new ArrayList<>();
             MethodCall initCall =

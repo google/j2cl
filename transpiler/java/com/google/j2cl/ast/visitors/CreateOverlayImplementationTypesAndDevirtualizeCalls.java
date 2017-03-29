@@ -129,7 +129,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         TypeDescriptor typeDescriptor, MethodDescriptor targetMethodDescriptor) {
       MethodDescriptor bridgeMethodDescriptor =
           MethodDescriptor.Builder.from(targetMethodDescriptor)
-              .setEnclosingClassTypeDescriptor(typeDescriptor)
+              .setEnclosingTypeDescriptor(typeDescriptor)
               .setJsInfo(JsInfo.NONE)
               .setNative(false)
               .setSynthetic(true)
@@ -219,7 +219,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               .setMethodDescriptor(
                   MethodDescriptor.Builder.from(statifiedMethodDescriptor)
                       .setJsInfo(JsInfo.NONE)
-                      .setEnclosingClassTypeDescriptor(overlayImplTypeDescriptor)
+                      .setEnclosingTypeDescriptor(overlayImplTypeDescriptor)
                       .removeParameterOptionality()
                       .build())
               .setSourcePosition(method.getSourcePosition())
@@ -249,10 +249,10 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
       TypeDescriptor overlayTypeDescriptor =
           TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-              targetFieldDescriptor.getEnclosingClassTypeDescriptor());
+              targetFieldDescriptor.getEnclosingTypeDescriptor());
       return FieldAccess.Builder.from(
               FieldDescriptor.Builder.from(targetFieldDescriptor)
-                  .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
+                  .setEnclosingTypeDescriptor(overlayTypeDescriptor)
                   .build())
           .build();
     }
@@ -260,7 +260,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     static Node createRedirectedStaticMethodCall(
         MethodCall methodCall, TypeDescriptor overlayTypeDescriptor) {
       return MethodCall.Builder.from(methodCall)
-          .setEnclosingClass(overlayTypeDescriptor)
+          .setEnclosingTypeDescriptor(overlayTypeDescriptor)
           .setQualifier(null)
           .build();
     }
@@ -276,19 +276,16 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      TypeDescriptor enclosingClassTypeDescriptor =
-          methodCall.getTarget().getEnclosingClassTypeDescriptor();
+      TypeDescriptor enclosingTypeDescriptor = methodCall.getTarget().getEnclosingTypeDescriptor();
       boolean targetIsJsOverlayInNativeClass =
-          (enclosingClassTypeDescriptor.isNative()
-                  || enclosingClassTypeDescriptor.isJsFunctionInterface())
+          (enclosingTypeDescriptor.isNative() || enclosingTypeDescriptor.isJsFunctionInterface())
               && methodCall.getTarget().isJsOverlay();
       boolean targetIsDefaultMethodAccessedStatically =
           methodCall.getTarget().isDefaultMethod() && methodCall.isStaticDispatch();
 
       if (targetIsJsOverlayInNativeClass || targetIsDefaultMethodAccessedStatically) {
         TypeDescriptor targetOverlayTypeDescriptor =
-            TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-                enclosingClassTypeDescriptor);
+            TypeDescriptors.createOverlayImplementationClassTypeDescriptor(enclosingTypeDescriptor);
 
         if (methodCall.getTarget().isStatic()) {
           // Call already-static method directly at their new overlay class location.

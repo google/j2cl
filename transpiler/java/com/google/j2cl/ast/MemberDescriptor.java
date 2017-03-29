@@ -31,18 +31,18 @@ public abstract class MemberDescriptor extends Node
 
   public abstract JsInfo getJsInfo();
 
-  public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
+  public abstract TypeDescriptor getEnclosingTypeDescriptor();
 
   /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
   public boolean isMemberOf(TypeDescriptor typeDescriptor) {
-    return getEnclosingClassTypeDescriptor()
+    return getEnclosingTypeDescriptor()
         .getQualifiedSourceName()
         .equals(typeDescriptor.getQualifiedSourceName());
   }
 
   /** Returns true if {@code thatMemberDescriptor} is in the same type as this member. */
   public boolean inSameTypeAs(MemberDescriptor thatMemberDescriptor) {
-    return thatMemberDescriptor.isMemberOf(getEnclosingClassTypeDescriptor());
+    return thatMemberDescriptor.isMemberOf(getEnclosingTypeDescriptor());
   }
 
   @Nullable
@@ -112,8 +112,8 @@ public abstract class MemberDescriptor extends Node
     // A native type descriptor is an extern if its namespace is the global namespace or if
     // it inherited the namespace from its (enclosing) extern type.
     return JsUtils.isGlobal(getJsNamespace())
-        || (getEnclosingClassTypeDescriptor().isExtern()
-            && getJsNamespace().equals(getEnclosingClassTypeDescriptor().getQualifiedJsName()));
+        || (getEnclosingTypeDescriptor().isExtern()
+            && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
 
@@ -126,9 +126,7 @@ public abstract class MemberDescriptor extends Node
   @Override
   public String getJsNamespace() {
     String jsNamespace = getJsInfo().getJsNamespace();
-    return jsNamespace == null
-        ? getEnclosingClassTypeDescriptor().getQualifiedJsName()
-        : jsNamespace;
+    return jsNamespace == null ? getEnclosingTypeDescriptor().getQualifiedJsName() : jsNamespace;
   }
 
   public boolean hasJsNamespace() {
@@ -138,7 +136,7 @@ public abstract class MemberDescriptor extends Node
   /** Returns a qualified source name for the member. */
   public String getQualifiedSourceName() {
     return J2clUtils.format(
-        "%s.%s", getEnclosingClassTypeDescriptor().getQualifiedSourceName(), getName());
+        "%s.%s", getEnclosingTypeDescriptor().getQualifiedSourceName(), getName());
   }
 
   @Override

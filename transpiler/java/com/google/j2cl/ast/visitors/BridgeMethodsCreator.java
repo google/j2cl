@@ -354,7 +354,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     checkArgument(!typeDeclaration.isInterface());
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .setEnclosingClassTypeDescriptor(typeDeclaration.getUnsafeTypeDescriptor())
+        .setEnclosingTypeDescriptor(typeDeclaration.getUnsafeTypeDescriptor())
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .build();
   }
@@ -410,13 +410,13 @@ public class BridgeMethodsCreator extends NormalizationPass {
                   .build();
       arguments.add(argument);
     }
-    TypeDescriptor targetEnclosingClassTypeDescriptor =
-        targetMethodDescriptor.getEnclosingClassTypeDescriptor();
+    TypeDescriptor targetEnclosingTypeDescriptor =
+        targetMethodDescriptor.getEnclosingTypeDescriptor();
     Expression qualifier =
-        bridgeMethodDescriptor.isMemberOf(targetEnclosingClassTypeDescriptor)
-                || targetEnclosingClassTypeDescriptor.isInterface()
-            ? new ThisReference(targetEnclosingClassTypeDescriptor)
-            : new SuperReference(targetEnclosingClassTypeDescriptor);
+        bridgeMethodDescriptor.isMemberOf(targetEnclosingTypeDescriptor)
+                || targetEnclosingTypeDescriptor.isInterface()
+            ? new ThisReference(targetEnclosingTypeDescriptor)
+            : new SuperReference(targetEnclosingTypeDescriptor);
 
     Expression dispatchMethodCall =
         MethodCall.Builder.from(targetMethodDescriptor)

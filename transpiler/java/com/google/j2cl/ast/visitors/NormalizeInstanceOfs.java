@@ -65,7 +65,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(checkTypeDescriptor)
+            .setEnclosingTypeDescriptor(checkTypeDescriptor)
             .setName("$isInstance")
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
@@ -84,7 +84,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfType")
             .setParameterTypeDescriptors(
                 TypeDescriptors.get().javaLangObject,
@@ -115,7 +115,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setName("$instanceIsOfNative")
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)

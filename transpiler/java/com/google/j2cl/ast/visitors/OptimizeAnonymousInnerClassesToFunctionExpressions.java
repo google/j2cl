@@ -54,7 +54,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             TypeDescriptor targetTypeDescriptor =
-                newInstance.getTarget().getEnclosingClassTypeDescriptor();
+                newInstance.getTarget().getEnclosingTypeDescriptor();
             Type optimizableJsFunctionImplementation =
                 optimizableJsFunctionsByTypeDescriptor.get(targetTypeDescriptor);
             if (optimizableJsFunctionImplementation != null) {
@@ -92,7 +92,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             TypeDescriptor targetTypeDescriptor =
-                methodCall.getTarget().getEnclosingClassTypeDescriptor();
+                methodCall.getTarget().getEnclosingTypeDescriptor();
             if (optimizableJsFunctionsByTypeDescriptor.containsKey(targetTypeDescriptor)) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
@@ -102,10 +102,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
               return MethodCall.Builder.from(methodCall)
-                  .setEnclosingClass(
+                  .setEnclosingTypeDescriptor(
                       targetTypeDescriptor
                           .getJsFunctionMethodDescriptor()
-                          .getEnclosingClassTypeDescriptor())
+                          .getEnclosingTypeDescriptor())
                   .build();
             }
             return methodCall;
@@ -114,13 +114,13 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           @Override
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
             if (optimizableJsFunctionsByTypeDescriptor.containsKey(
-                fieldAccess.getTarget().getEnclosingClassTypeDescriptor())) {
+                fieldAccess.getTarget().getEnclosingTypeDescriptor())) {
               // Due to the cascading construction for captures in inner class construction,
               // at the end some field references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
               return FieldAccess.Builder.from(
                       FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                          .setEnclosingClassTypeDescriptor(
+                          .setEnclosingTypeDescriptor(
                               getCurrentType().getDeclaration().getUnsafeTypeDescriptor())
                           .build())
                   .setQualifier(fieldAccess.getQualifier())

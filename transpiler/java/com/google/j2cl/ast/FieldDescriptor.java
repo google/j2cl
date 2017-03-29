@@ -70,7 +70,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   @Override
   public boolean isNative() {
-    return getEnclosingClassTypeDescriptor().isNative() && !isJsOverlay();
+    return getEnclosingTypeDescriptor().isNative() && !isJsOverlay();
   }
 
   public boolean isCapture() {
@@ -121,7 +121,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Override
   public String getReadableDescription() {
     return J2clUtils.format(
-        "%s.%s", getEnclosingClassTypeDescriptor().getReadableDescription(), getName());
+        "%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
   }
 
   /** A Builder for FieldDescriptors. */
@@ -137,8 +137,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setEnclosingInstanceCapture(boolean isEnclosingInstanceCapture);
 
-    public abstract Builder setEnclosingClassTypeDescriptor(
-        TypeDescriptor enclosingClassTypeDescriptor);
+    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setName(String name);
 

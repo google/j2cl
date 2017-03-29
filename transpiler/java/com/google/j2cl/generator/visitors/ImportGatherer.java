@@ -151,15 +151,13 @@ public class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitMethodCall(MethodCall methodCall) {
     if (methodCall.isStaticDispatch()) {
-      addTypeDescriptor(
-          methodCall.getTarget().getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
+      addTypeDescriptor(methodCall.getTarget().getEnclosingTypeDescriptor(), ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitNewInstance(NewInstance newInstance) {
-    addTypeDescriptor(
-        newInstance.getTarget().getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
+    addTypeDescriptor(newInstance.getTarget().getEnclosingTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override

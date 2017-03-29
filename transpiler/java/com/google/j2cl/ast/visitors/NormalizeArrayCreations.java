@@ -62,7 +62,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           MethodDescriptor.newBuilder()
               .setConstructor(true)
               .setJsInfo(JsInfo.RAW_CTOR)
-              .setEnclosingClassTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
+              .setEnclosingTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
               .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
               .build();
 
@@ -73,7 +73,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName("$create")
@@ -113,7 +113,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName("$init")

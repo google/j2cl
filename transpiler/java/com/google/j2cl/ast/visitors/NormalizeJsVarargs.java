@@ -94,7 +94,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       //   Arrays.stampType(varargsParameter, new arrayType[]...[]);
       MethodDescriptor arrayStampTypeMethodDescriptor =
           MethodDescriptor.newBuilder()
-              .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+              .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
               .setJsInfo(JsInfo.RAW)
               .setStatic(true)
               .setName("$stampType")
@@ -167,7 +167,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
               .setStatic(true)
               .setName("$checkNotNull")
               .setJsInfo(JsInfo.RAW)
-              .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+              .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
               .setReturnTypeDescriptor(returnType)
               .addParameterTypeDescriptors(lastArgument.getTypeDescriptor())
               .build();

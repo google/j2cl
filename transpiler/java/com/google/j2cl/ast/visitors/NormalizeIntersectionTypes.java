@@ -153,6 +153,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
         });
   }
 
+  @SuppressWarnings("ReferenceEquality")
   private static Expression maybeInsertCastToMemberType(
       TypeDescriptor toTypeDescriptor, Expression expression) {
     if (!toTypeDescriptor.isClass()
@@ -224,7 +225,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
 
     Expression qualifier = expression.getQualifier();
     final TypeDescriptor requiredTypeDescriptor =
-        expression.getTarget().getEnclosingClassTypeDescriptor();
+        expression.getTarget().getEnclosingTypeDescriptor();
 
     // This is a member reference to a method or field on a type that is not the first type
     // in the intersection type, a cast is needed.

@@ -230,8 +230,7 @@ public class ExpressionTranspiler {
 
       private void renderStaticDispatchMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String typeName =
-            environment.aliasForType(methodDescriptor.getEnclosingClassTypeDescriptor());
+        String typeName = environment.aliasForType(methodDescriptor.getEnclosingTypeDescriptor());
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
 
         sourceBuilder.append(qualifier + "." + getJsMethodName(methodDescriptor) + ".call");
@@ -325,7 +324,7 @@ public class ExpressionTranspiler {
       public Void transformNewInstance(NewInstance expression) {
         checkArgument(expression.getQualifier() == null);
         TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
+            expression.getTarget().getEnclosingTypeDescriptor().getRawTypeDescriptor();
 
         sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
         renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
@@ -446,7 +445,7 @@ public class ExpressionTranspiler {
       private String getJsMethodName(MethodDescriptor methodDescriptor) {
         if (methodDescriptor.isInit()) {
           return ManglingNameUtils.getInitMangledName(
-              methodDescriptor.getEnclosingClassTypeDescriptor());
+              methodDescriptor.getEnclosingTypeDescriptor());
         } else {
           return ManglingNameUtils.getMangledName(methodDescriptor);
         }

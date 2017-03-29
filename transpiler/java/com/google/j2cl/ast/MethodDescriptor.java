@@ -163,9 +163,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
     // To override a package private method one must reside in the same package.
     if (thatVisibility.isPackagePrivate()
-        && !getEnclosingClassTypeDescriptor()
+        && !getEnclosingTypeDescriptor()
             .getPackageName()
-            .equals(that.getEnclosingClassTypeDescriptor().getPackageName())) {
+            .equals(that.getEnclosingTypeDescriptor().getPackageName())) {
       return false;
     }
 
@@ -253,12 +253,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     if (isConstructor()) {
       return J2clUtils.format(
-          "%s(%s)", getEnclosingClassTypeDescriptor().getReadableDescription(), parameterString);
+          "%s(%s)", getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
     }
     return J2clUtils.format(
         "%s %s.%s(%s)",
         getReturnTypeDescriptor().getReadableDescription(),
-        getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getEnclosingTypeDescriptor().getReadableDescription(),
         getName(),
         parameterString);
   }
@@ -288,9 +288,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
   @Memoized
   public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
-    return getEnclosingClassTypeDescriptor()
-        .getTypeDeclaration()
-        .getOverriddenMethodDescriptors(this);
+    return getEnclosingTypeDescriptor().getTypeDeclaration().getOverriddenMethodDescriptors(this);
   }
 
   /** A Builder for MethodDescriptors. */
@@ -318,8 +316,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
-    public abstract Builder setEnclosingClassTypeDescriptor(
-        TypeDescriptor enclosingClassTypeDescriptor);
+    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setName(String name);
 
@@ -424,7 +421,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 == methodDescriptor.getParameterTypeDescriptors().size(),
             "Method parameters (%s) for method %s don't match method declaration (%s)",
             methodDescriptor.getParameterTypeDescriptors(),
-            methodDescriptor.getEnclosingClassTypeDescriptor().getSimpleSourceName()
+            methodDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName()
                 + "."
                 + methodDescriptor.getName(),
             methodDeclarationParameterTypeDescriptors);

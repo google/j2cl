@@ -109,16 +109,16 @@ public class NormalizeTryWithResources extends NormalizationPass {
    * }</pre>
    */
   private static List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
-      MethodDescriptor safeClose =
-          MethodDescriptor.newBuilder()
-              .setJsInfo(JsInfo.RAW)
-              .setStatic(true)
-              .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-              .setName("safeClose")
-              .setParameterTypeDescriptors(
-                  TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable)
-              .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
-              .build();
+    MethodDescriptor safeClose =
+        MethodDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setEnclosingTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+            .setName("safeClose")
+            .setParameterTypeDescriptors(
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+            .build();
 
       Variable primaryException =
           Variable.newBuilder()

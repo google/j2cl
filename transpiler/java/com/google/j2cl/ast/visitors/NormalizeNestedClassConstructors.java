@@ -108,8 +108,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     public Node rewriteNewInstance(NewInstance newInstance) {
       if (newInstance.getQualifier() != null) {
         // outerClassInstance.new InnerClass(....) => new InnerClass(outerClassInstance, ....)
-        TypeDescriptor targetTypeDescriptor =
-            newInstance.getTarget().getEnclosingClassTypeDescriptor();
+        TypeDescriptor targetTypeDescriptor = newInstance.getTarget().getEnclosingTypeDescriptor();
         return NewInstance.Builder.from(newInstance)
             .addArgumentAndUpdateDescriptor(
                 0, newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
@@ -149,7 +148,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
                       FieldAccess.Builder.from(capturedField.getDescriptor())
                           .setQualifier(
                               new ThisReference(
-                                  method.getDescriptor().getEnclosingClassTypeDescriptor()))
+                                  method.getDescriptor().getEnclosingTypeDescriptor()))
                           .build())
                   .setOperator(BinaryOperator.ASSIGN)
                   .setRightOperand(parameter.getReference())
@@ -219,7 +218,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
-      TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingClassTypeDescriptor();
+      TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingTypeDescriptor();
       if (!capturedVariablesByCapturingTypeName.containsKey(
           typeDescriptor.getQualifiedSourceName())) {
         // No captures.
@@ -257,7 +256,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
                 .collect(Collectors.toList()));
       } else {
         // thread captures to super call if necessary.
-        TypeDescriptor superTypeDescriptor = target.getEnclosingClassTypeDescriptor();
+        TypeDescriptor superTypeDescriptor = target.getEnclosingTypeDescriptor();
         addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
         // a.super() => super(a)

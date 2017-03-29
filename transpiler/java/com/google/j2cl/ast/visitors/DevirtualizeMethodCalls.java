@@ -95,8 +95,8 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
                 || methodCall.getQualifier() instanceof ThisReference) {
               return methodCall;
             }
-            TypeDescriptor enclosingClassTypeDescriptor =
-                methodCall.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
+            TypeDescriptor enclosingTypeDescriptor =
+                methodCall.getTarget().getEnclosingTypeDescriptor().getRawTypeDescriptor();
             if (MethodDescriptors.isToStringMethodDescriptor(methodCall.getTarget())) {
               // Always devirtualize toString method to trampoline method. This ensures that
               // javascript class even if they extend java classes could still override toString
@@ -107,30 +107,27 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
                   TypeDescriptors.get().javaLangObject);
             }
             if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
-                enclosingClassTypeDescriptor)) {
+                enclosingTypeDescriptor)) {
               return AstUtils.createDevirtualizedMethodCall(
                   methodCall,
                   devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.get(
-                      enclosingClassTypeDescriptor));
+                      enclosingTypeDescriptor));
             }
             return methodCall;
           }
 
           private MethodCall devirtualizeJsFunctionImplMethodCalls(MethodCall methodCall) {
-            TypeDescriptor enclosingClassTypeDescriptor =
-                methodCall.getTarget().getEnclosingClassTypeDescriptor();
+            TypeDescriptor enclosingTypeDescriptor =
+                methodCall.getTarget().getEnclosingTypeDescriptor();
             if (methodCall.getTarget().isJsFunction()) {
               // Do not devirtualize the JsFunction method.
               return methodCall;
             }
-            return AstUtils.createDevirtualizedMethodCall(methodCall, enclosingClassTypeDescriptor);
+            return AstUtils.createDevirtualizedMethodCall(methodCall, enclosingTypeDescriptor);
           }
 
           private MethodCall devirtualize(MethodCall methodCall) {
-            if (methodCall
-                .getTarget()
-                .getEnclosingClassTypeDescriptor()
-                .isJsFunctionImplementation()) {
+            if (methodCall.getTarget().getEnclosingTypeDescriptor().isJsFunctionImplementation()) {
               return devirtualizeJsFunctionImplMethodCalls(methodCall);
             } else {
               return devirtualizeRegularMethodCall(methodCall);

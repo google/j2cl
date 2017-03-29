@@ -109,7 +109,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                 MethodDescriptor.newBuilder()
                     .setStatic(true)
                     .setJsInfo(JsInfo.RAW)
-                    .setEnclosingClassTypeDescriptor(
+                    .setEnclosingTypeDescriptor(
                         TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
                     .setName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
                     .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
@@ -144,7 +144,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
 
             int currentOrdinal =
                 ordinalsByEnumTypeDescriptor.add(
-                    enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
+                    enumField.getDescriptor().getEnclosingTypeDescriptor(), 1);
 
             return NewInstance.Builder.from(newInstance)
                 .addArgumentsAndUpdateDescriptor(

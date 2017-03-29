@@ -111,10 +111,10 @@ public abstract class Invocation extends Expression implements MemberReference {
       return this;
     }
 
-    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
       this.methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
-              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
               .build();
       return this;
     }

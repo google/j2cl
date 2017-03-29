@@ -71,10 +71,10 @@ public class AstUtils {
 
   /** Create "$init" MethodDescriptor. */
   public static MethodDescriptor createInitMethodDescriptor(
-      TypeDescriptor enclosingClassTypeDescriptor) {
+      TypeDescriptor enclosingTypeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setVisibility(Visibility.PRIVATE)
-        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(MethodDescriptor.INIT_METHOD_NAME)
         .build();
   }
@@ -84,7 +84,7 @@ public class AstUtils {
     return MethodDescriptor.newBuilder()
         .setStatic(true)
         .setJsInfo(JsInfo.RAW)
-        .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
+        .setEnclosingTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
         .setName(MethodDescriptor.SAME_METHOD_NAME)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
         .setParameterTypeDescriptors(
@@ -94,15 +94,15 @@ public class AstUtils {
 
   /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createImplicitConstructorDescriptor(
-      TypeDescriptor enclosingClassTypeDescriptor) {
+      TypeDescriptor enclosingTypeDescriptor) {
     JsInfo jsInfo =
-        isImplicitJsConstructor(enclosingClassTypeDescriptor.getTypeDeclaration())
+        isImplicitJsConstructor(enclosingTypeDescriptor.getTypeDeclaration())
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
             : JsInfo.NONE;
     return MethodDescriptor.newBuilder()
         .setVisibility(
-            getImplicitConstructorVisibility(enclosingClassTypeDescriptor.getTypeDeclaration()))
-        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+            getImplicitConstructorVisibility(enclosingTypeDescriptor.getTypeDeclaration()))
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setConstructor(true)
         .setJsInfo(jsInfo)
         .build();
@@ -185,7 +185,7 @@ public class AstUtils {
     if (!hasConstructorInvocation(method)) {
       return method
           .getDescriptor()
-          .getEnclosingClassTypeDescriptor()
+          .getEnclosingTypeDescriptor()
           .getSuperTypeDescriptor()
           .getDefaultConstructorMethodDescriptor();
     }
@@ -251,9 +251,9 @@ public class AstUtils {
 
   /** Returns the added field descriptor corresponding to the captured variable. */
   public static FieldDescriptor getFieldDescriptorForCapture(
-      TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
+      TypeDescriptor enclosingTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.newBuilder()
-        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(CAPTURES_PREFIX + capturedVariable.getName())
         .setVariableCapture(true)
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
@@ -268,7 +268,7 @@ public class AstUtils {
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
     return FieldDescriptor.newBuilder()
-        .setEnclosingClassTypeDescriptor(enclosingClassDescriptor)
+        .setEnclosingTypeDescriptor(enclosingClassDescriptor)
         .setName(ENCLOSING_INSTANCE_NAME)
         .setFinal(true)
         .setEnclosingInstanceCapture(true)
@@ -312,7 +312,7 @@ public class AstUtils {
     return createForwardingMethod(
         null,
         MethodDescriptor.Builder.from(specializedMethodDescriptor)
-            .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
+            .setEnclosingTypeDescriptor(fromTypeDescriptor)
             // TODO(b/35802406): don't synthesize methods with a separate declaration site.
             .setDeclarationMethodDescriptor(targetMethodDescriptor)
             .setSynthetic(true)
@@ -349,7 +349,7 @@ public class AstUtils {
       String jsDocDescription,
       boolean isStaticDispatch,
       boolean isOverride) {
-    checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
+    checkArgument(!fromMethodDescriptor.getEnclosingTypeDescriptor().isInterface());
     checkArgument(fromMethodDescriptor.isSynthetic());
     checkArgument(fromMethodDescriptor.isBridge());
 
@@ -409,8 +409,8 @@ public class AstUtils {
 
   /**
    * Creates devirtualized method call of {@code methodCall} as method call to the static method in
-   * {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
-   * parameter type.
+   * {@code targetTypeDescriptor} with the {@code instanceTypeDescriptor} as the first parameter
+   * type.
    *
    * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
@@ -424,7 +424,7 @@ public class AstUtils {
 
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
-            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
+            .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
@@ -434,7 +434,7 @@ public class AstUtils {
     MethodDescriptor methodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor)
             .setDeclarationMethodDescriptor(declarationMethodDescriptor)
-            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
+            .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
@@ -452,7 +452,7 @@ public class AstUtils {
   public static MethodCall createDevirtualizedMethodCall(
       MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
     return createDevirtualizedMethodCall(
-        methodCall, targetTypeDescriptor, methodCall.getTarget().getEnclosingClassTypeDescriptor());
+        methodCall, targetTypeDescriptor, methodCall.getTarget().getEnclosingTypeDescriptor());
   }
 
   /**
@@ -659,19 +659,18 @@ public class AstUtils {
   /**
    * Returns explicit qualifier for member reference (field access or method call).
    *
-   * <p>If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for
-   * static method/field and 'this' reference as the qualifier for instance method/field.
+   * <p>If {@code qualifier} is null, returns EnclosingTypeDescriptor as the qualifier for static
+   * method/field and 'this' reference as the qualifier for instance method/field.
    */
   static Expression getExplicitQualifier(Expression qualifier, MemberDescriptor memberDescriptor) {
     checkNotNull(memberDescriptor);
     if (qualifier != null) {
       return qualifier;
     }
-    TypeDescriptor enclosingClassTypeDescriptor =
-        memberDescriptor.getEnclosingClassTypeDescriptor();
+    TypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     return memberDescriptor.isStatic()
-        ? new TypeReference(enclosingClassTypeDescriptor.getRawTypeDescriptor())
-        : new ThisReference(enclosingClassTypeDescriptor);
+        ? new TypeReference(enclosingTypeDescriptor.getRawTypeDescriptor())
+        : new ThisReference(enclosingTypeDescriptor);
   }
 
   /** Returns true if the qualifier of the given member reference is 'this' reference. */
@@ -712,7 +711,7 @@ public class AstUtils {
     final Variable thisArg =
         Variable.newBuilder()
             .setName("$thisArg")
-            .setTypeDescriptor(method.getDescriptor().getEnclosingClassTypeDescriptor())
+            .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor())
             .setIsParameter(true)
             .setIsFinal(true)
             .build();
@@ -782,7 +781,7 @@ public class AstUtils {
     // Util getPrototype
     MethodDescriptor getPrototype =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
             .setName("$getPrototype")
             .setStatic(true)
             .setJsInfo(JsInfo.RAW)
@@ -796,7 +795,7 @@ public class AstUtils {
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
-                    .setEnclosingClassTypeDescriptor(lambdaType)
+                    .setEnclosingTypeDescriptor(lambdaType)
                     .setName(applyMethodName)
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
@@ -806,7 +805,7 @@ public class AstUtils {
 
     MethodDescriptor makeLambdaCall =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor())
             .setName("$makeLambdaFunction")
             .setStatic(true)
             .setJsInfo(JsInfo.RAW)
@@ -819,7 +818,7 @@ public class AstUtils {
     FieldAccess copyFunctionFieldAccess =
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
-                    .setEnclosingClassTypeDescriptor(lambdaType)
+                    .setEnclosingTypeDescriptor(lambdaType)
                     .setName("$copy")
                     .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
                     .setJsInfo(JsInfo.RAW_FIELD)
@@ -901,7 +900,7 @@ public class AstUtils {
     return MethodDescriptor.newBuilder()
         .setJsInfo(JsInfo.RAW)
         .setStatic(true)
-        .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+        .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
         .setName("$set")
         .setParameterTypeDescriptors(methodParams)
         .setReturnTypeDescriptor(elementType)
@@ -1133,7 +1132,7 @@ public class AstUtils {
 
     String jsNamespace = Joiner.on(".").join(namespaceComponents);
     TypeDescriptor enclosingClassTypeDescriptor =
-        getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
+        getOutermostEnclosingType(memberDescriptor.getEnclosingTypeDescriptor());
     String packageName =
         Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
 

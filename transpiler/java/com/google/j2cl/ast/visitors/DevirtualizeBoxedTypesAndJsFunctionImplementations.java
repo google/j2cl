@@ -62,17 +62,14 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               return false;
             }
 
-            TypeDescriptor enclosingClassTypeDescriptor =
-                methodDescriptor.getEnclosingClassTypeDescriptor();
+            TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
-            if (enclosingClassTypeDescriptor.isJsFunctionImplementation()
+            if (enclosingTypeDescriptor.isJsFunctionImplementation()
                 && methodDescriptor.isJsFunction()) {
               // If the JsFunction method has different method signature from the SAM method, it
               // should be devirtualized.
               MethodDescriptor samMethodDescriptor =
-                  methodDescriptor
-                      .getEnclosingClassTypeDescriptor()
-                      .getJsFunctionMethodDescriptor();
+                  methodDescriptor.getEnclosingTypeDescriptor().getJsFunctionMethodDescriptor();
               return !AstUtils.areParameterErasureEqual(methodDescriptor, samMethodDescriptor);
             }
             return true;

@@ -147,13 +147,12 @@ public class Method extends Member implements HasJsNameInfo {
     if (isConstructor()) {
       return J2clUtils.format(
           "%s(%s)",
-          getDescriptor().getEnclosingClassTypeDescriptor().getReadableDescription(),
-          parameterString);
+          getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
     }
     return J2clUtils.format(
         "%s %s.%s(%s)",
         getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
-        getDescriptor().getEnclosingClassTypeDescriptor().getReadableDescription(),
+        getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(),
         getDescriptor().getName(),
         parameterString);
   }

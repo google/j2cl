@@ -168,16 +168,16 @@ public class NormalizeCatchClauses extends NormalizationPass {
      */
     private static MethodCall checkIsInstanceCall(
         TypeDescriptor descriptor, Expression exceptionVariable) {
-      MethodDescriptor methodDescriptor =
-          MethodDescriptor.newBuilder()
-              .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
-              .setStatic(true)
-              .setJsInfo(JsInfo.RAW)
-              .setEnclosingClassTypeDescriptor(descriptor)
-              .setVisibility(Visibility.PUBLIC)
-              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-              .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-              .build();
+    MethodDescriptor methodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
+            .setStatic(true)
+            .setJsInfo(JsInfo.RAW)
+            .setEnclosingTypeDescriptor(descriptor)
+            .setVisibility(Visibility.PUBLIC)
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .build();
       return MethodCall.Builder.from(methodDescriptor).setArguments(exceptionVariable).build();
     }
 }

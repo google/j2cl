@@ -257,7 +257,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.newBuilder()
             .setConstructor(true)
-            .setEnclosingClassTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
+            .setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .build();
 
@@ -273,7 +273,7 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodCall synthesizeEmptySuperCall(TypeDescriptor superType) {
     MethodDescriptor superDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(superType)
+            .setEnclosingTypeDescriptor(superType)
             .setConstructor(true)
             .build();
     return MethodCall.Builder.from(superDescriptor).build();
@@ -328,7 +328,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
-    TypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingClassTypeDescriptor();
+    TypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingTypeDescriptor();
 
     if (enclosingType.hasJsConstructor()) {
       // Verify that we are not emitting factory methods for JsConstructors.
@@ -343,7 +343,7 @@ public class NormalizeConstructors extends NormalizationPass {
       checkArgument(
           primaryConstructorInvocation
               .getTarget()
-              .getEnclosingClassTypeDescriptor()
+              .getEnclosingTypeDescriptor()
               .hasSameRawType(enclosingType),
           "%s does not delegate to the primary constructor.",
           constructor.getDescriptor().getReadableDescription());
@@ -414,7 +414,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 enclosingType.isJsFunctionImplementation()
                     ? AstUtils.createLambdaInstance(enclosingType, newInstance.getReference())
                     : newInstance.getReference())
-            .setTypeDescriptor(constructor.getDescriptor().getEnclosingClassTypeDescriptor())
+            .setTypeDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor())
             .build();
 
     return Method.newBuilder()
@@ -459,10 +459,10 @@ public class NormalizeConstructors extends NormalizationPass {
         .setVisibility(Visibility.PUBLIC)
         .setConstructor(false)
         .setReturnTypeDescriptor(
-            TypeDescriptors.toNonNullable(constructor.getEnclosingClassTypeDescriptor()))
+            TypeDescriptors.toNonNullable(constructor.getEnclosingTypeDescriptor()))
         .setTypeParameterTypeDescriptors(
             Iterables.concat(
-                constructor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors(),
+                constructor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors(),
                 constructor.getTypeParameterTypeDescriptors()))
         .build();
   }
@@ -471,7 +471,7 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodDescriptor getImplicitJavascriptConstructorDescriptor(
       TypeDescriptor enclosingType) {
     return MethodDescriptor.newBuilder()
-        .setEnclosingClassTypeDescriptor(enclosingType)
+        .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
         .build();
@@ -481,10 +481,10 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodDescriptor primaryConstructorDescriptor(
       MethodDescriptor constructorDescriptor) {
 
-    TypeDescriptor enclosingType = constructorDescriptor.getEnclosingClassTypeDescriptor();
+    TypeDescriptor enclosingType = constructorDescriptor.getEnclosingTypeDescriptor();
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(enclosingType)
+            .setEnclosingTypeDescriptor(enclosingType)
             .setConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .setParameterTypeDescriptors(

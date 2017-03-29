@@ -225,7 +225,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
-        print(fieldDescriptor.getEnclosingClassTypeDescriptor());
+        print(fieldDescriptor.getEnclosingTypeDescriptor());
         print(".");
         print(fieldDescriptor.getName());
         return false;
@@ -314,7 +314,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
-        print(methodDescriptor.getEnclosingClassTypeDescriptor());
+        print(methodDescriptor.getEnclosingTypeDescriptor());
         print(".");
         print(methodDescriptor.getName());
         return false;
@@ -628,7 +628,7 @@ class ToStringRenderer {
       private void printInvocation(Invocation invocation) {
         MethodDescriptor target = invocation.getTarget();
         if (target.isConstructor()) {
-          print(target.getEnclosingClassTypeDescriptor().getSimpleSourceName() + ".");
+          print(target.getEnclosingTypeDescriptor().getSimpleSourceName() + ".");
         }
         print(target.getName());
         print("(");

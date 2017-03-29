@@ -22,16 +22,14 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptors;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.frontend.JdtUtils;
-
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.Modifier;
-import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 
 /**
  * Visitor that visit native methods and extract all information we need of the jsni blocks.
@@ -55,8 +53,8 @@ public class JsniMethodVisitor extends ASTVisitor {
     if (Modifier.isNative(method.getModifiers())) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(method.resolveBinding());
       List<String> parameterNames = extractParameterNames(method);
-      if (TypeDescriptors.isBoxedTypeAsJsPrimitives(
-          methodDescriptor.getEnclosingClassTypeDescriptor()) && !methodDescriptor.isStatic()) {
+      if (TypeDescriptors.isBoxedTypeAsJsPrimitives(methodDescriptor.getEnclosingTypeDescriptor())
+          && !methodDescriptor.isStatic()) {
         parameterNames.add(0, "$thisArg");
         methodDescriptor = MethodDescriptors.makeStaticMethodDescriptor(methodDescriptor);
       }

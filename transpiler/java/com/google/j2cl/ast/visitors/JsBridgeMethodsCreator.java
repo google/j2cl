@@ -152,12 +152,12 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
   private static MethodDescriptor getExposedNonJsMember(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isStatic()
         || methodDescriptor.isConstructor()
-        || methodDescriptor.getEnclosingClassTypeDescriptor().isInterface()
+        || methodDescriptor.getEnclosingTypeDescriptor().isInterface()
         || !methodDescriptor.isOrOverridesJsMember()) {
       return null;
     }
     // native js type is not generated, thus it does not expose any non-js methods.
-    if (methodDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
+    if (methodDescriptor.getEnclosingTypeDescriptor().isNative()) {
       return null;
     }
 
@@ -182,7 +182,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
     return AstUtils.createForwardingMethod(
         null,
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
-            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
+            .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)

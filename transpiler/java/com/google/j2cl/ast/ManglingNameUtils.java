@@ -60,17 +60,14 @@ public class ManglingNameUtils {
     switch (methodDescriptor.getVisibility()) {
       case PRIVATE:
         // To ensure that private methods never override each other.
-        suffix = "_$p_" + getMangledName(methodDescriptor.getEnclosingClassTypeDescriptor());
+        suffix = "_$p_" + getMangledName(methodDescriptor.getEnclosingTypeDescriptor());
         break;
       case PACKAGE_PRIVATE:
         // To ensure that package private methods only override one another when
         // they are in the same package.
         suffix =
             "_$pp_"
-                + methodDescriptor
-                    .getEnclosingClassTypeDescriptor()
-                    .getPackageName()
-                    .replace('.', '_');
+                + methodDescriptor.getEnclosingTypeDescriptor().getPackageName().replace('.', '_');
         break;
       default:
         suffix = "";
@@ -102,7 +99,7 @@ public class ManglingNameUtils {
    */
   public static String getCtorMangledName(MethodDescriptor methodDescriptor) {
     return "$ctor__"
-        + getMangledName(methodDescriptor.getEnclosingClassTypeDescriptor())
+        + getMangledName(methodDescriptor.getEnclosingTypeDescriptor())
         + getMangledParameterSignature(methodDescriptor);
   }
 
@@ -130,9 +127,9 @@ public class ManglingNameUtils {
     }
 
     String prefix = accessStaticsDirectly ? "$" : "";
-    checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
+    checkArgument(!fieldDescriptor.getEnclosingTypeDescriptor().isArray());
     String name = fieldDescriptor.getName();
-    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
+    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
     return J2clUtils.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }

@@ -169,7 +169,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     MemberDescriptor memberDescriptor = member.getDescriptor();
-    if (memberDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
+    if (memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
       checkMemberOfNativeJsType(member);
     }
 
@@ -242,7 +242,7 @@ public class JsInteropRestrictionsChecker {
 
     if (member
         .getJsNamespace()
-        .equals(member.getDescriptor().getEnclosingClassTypeDescriptor().getQualifiedJsName())) {
+        .equals(member.getDescriptor().getEnclosingTypeDescriptor().getQualifiedJsName())) {
       // Namespace set by the enclosing type has already been checked.
       return;
     }
@@ -273,8 +273,8 @@ public class JsInteropRestrictionsChecker {
 
     MemberDescriptor memberDescriptor = member.getDescriptor();
     String readableDescription = memberDescriptor.getReadableDescription();
-    if (!memberDescriptor.getEnclosingClassTypeDescriptor().isNative()
-        && !memberDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
+    if (!memberDescriptor.getEnclosingTypeDescriptor().isNative()
+        && !memberDescriptor.getEnclosingTypeDescriptor().isJsFunctionInterface()) {
       problems.error(
           member.getSourcePosition(),
           "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
@@ -298,7 +298,7 @@ public class JsInteropRestrictionsChecker {
         return;
       }
       if (member.isNative()
-          || (!memberDescriptor.getEnclosingClassTypeDescriptor().isFinal()
+          || (!memberDescriptor.getEnclosingTypeDescriptor().isFinal()
               && !memberDescriptor.isFinal()
               && !memberDescriptor.isStatic()
               && !memberDescriptor.getVisibility().isPrivate()
@@ -466,7 +466,7 @@ public class JsInteropRestrictionsChecker {
     problems.error(
         member.getSourcePosition(),
         "JsFunction interface '%s' cannot declare non-JsOverlay member '%s'.",
-        memberDescriptor.getEnclosingClassTypeDescriptor().getReadableDescription(),
+        memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
         memberDescriptor.getReadableDescription());
   }
 
@@ -525,7 +525,7 @@ public class JsInteropRestrictionsChecker {
         problems.error(
             member.getSourcePosition(),
             "JsFunction implementation '%s' cannot implement method '%s'.",
-            memberDescriptor.getEnclosingClassTypeDescriptor().getReadableDescription(),
+            memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
             member.getReadableDescription());
         return;
       }
@@ -998,7 +998,7 @@ public class JsInteropRestrictionsChecker {
     // TODO(b/36227943): Abide by standard rules regarding suppression annotations in
     // enclosing elements.
     return memberDescriptor.isUnusableByJsSuppressed()
-        || isUnusableByJsSuppressed(memberDescriptor.getEnclosingClassTypeDescriptor());
+        || isUnusableByJsSuppressed(memberDescriptor.getEnclosingTypeDescriptor());
   }
 
   private static boolean isUnusableByJsSuppressed(TypeDescriptor typeDescriptor) {
@@ -1008,9 +1008,8 @@ public class JsInteropRestrictionsChecker {
       return true;
     }
 
-    TypeDescriptor enclosingClassTypeDescriptor = typeDescriptor.getEnclosingTypeDescriptor();
-    return enclosingClassTypeDescriptor != null
-        && isUnusableByJsSuppressed(enclosingClassTypeDescriptor);
+    TypeDescriptor enclosingTypeDescriptor = typeDescriptor.getEnclosingTypeDescriptor();
+    return enclosingTypeDescriptor != null && isUnusableByJsSuppressed(enclosingTypeDescriptor);
   }
 
   private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {
@@ -1072,12 +1071,12 @@ public class JsInteropRestrictionsChecker {
     return methodDescriptor
         .getOverriddenMethodDescriptors()
         .stream()
-        .map(MethodDescriptor::getEnclosingClassTypeDescriptor)
+        .map(MethodDescriptor::getEnclosingTypeDescriptor)
         .anyMatch(TypeDescriptors::isJavaLangObject);
   }
 
   private static boolean canBeReferencedExternally(MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.getEnclosingClassTypeDescriptor().isAnonymous()) {
+    if (memberDescriptor.getEnclosingTypeDescriptor().isAnonymous()) {
       // members of anonymous classes can not be referenced externally
       return false;
     }

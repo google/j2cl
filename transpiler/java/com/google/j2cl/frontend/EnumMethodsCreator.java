@@ -74,7 +74,7 @@ public class EnumMethodsCreator {
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
+            .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
                 TypeDescriptors.createNative(
@@ -92,7 +92,7 @@ public class EnumMethodsCreator {
     this.valuesMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
+            .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(VALUES_METHOD_NAME)
             .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumTypeDescriptor, 1))
             .setParameterTypeDescriptors()
@@ -101,7 +101,7 @@ public class EnumMethodsCreator {
     this.valueOfMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(enumTypeDescriptor)
+            .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(VALUE_OF_METHOD_NAME)
             .setReturnTypeDescriptor(enumTypeDescriptor)
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
@@ -145,7 +145,7 @@ public class EnumMethodsCreator {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
             .setParameterTypeDescriptors(enumType.getDeclaration().getUnsafeTypeDescriptor())
@@ -154,7 +154,7 @@ public class EnumMethodsCreator {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(GET_VALUE_METHOD_NAME)
             .setReturnTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
             .setParameterTypeDescriptors(

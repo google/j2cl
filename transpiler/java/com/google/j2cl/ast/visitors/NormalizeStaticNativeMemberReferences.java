@@ -59,7 +59,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             // A.abs -> Math.abs.
             FieldDescriptor newFieldescriptor =
                 FieldDescriptor.Builder.from(fieldDescriptor)
-                    .setEnclosingClassTypeDescriptor(
+                    .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
                     .build();
             checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
@@ -77,7 +77,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             // A.abs() -> Math.abs().
             MethodDescriptor newMethodDescriptor =
                 MethodDescriptor.Builder.from(methodDescriptor)
-                    .setEnclosingClassTypeDescriptor(
+                    .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
                     .build();
             checkArgument(methodCall.getQualifier() instanceof TypeReference);

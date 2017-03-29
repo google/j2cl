@@ -40,7 +40,7 @@ public class InsertDivisionCoercions extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
             .setName("$coerceDivision")
             .setParameterTypeDescriptors(TypeDescriptors.get().primitiveInt)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveInt)

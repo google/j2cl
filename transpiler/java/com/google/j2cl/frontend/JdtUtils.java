@@ -90,7 +90,7 @@ public class JdtUtils {
 
     boolean isStatic = isStatic(variableBinding);
     Visibility visibility = getVisibility(variableBinding);
-    TypeDescriptor enclosingClassTypeDescriptor =
+    TypeDescriptor enclosingTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
@@ -107,7 +107,7 @@ public class JdtUtils {
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     boolean isFinal = JdtUtils.isFinal(variableBinding);
     return FieldDescriptor.newBuilder()
-        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(fieldName)
         .setTypeDescriptor(thisTypeDescriptor)
         .setStatic(isStatic)
@@ -670,7 +670,7 @@ public class JdtUtils {
 
   /** Creates a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    TypeDescriptor enclosingClassTypeDescriptor =
+    TypeDescriptor enclosingTypeDescriptor =
         createTypeDescriptor(methodBinding.getDeclaringClass());
 
     boolean isStatic = isStatic(methodBinding);
@@ -681,7 +681,7 @@ public class JdtUtils {
     boolean isNative =
         Modifier.isNative(methodBinding.getModifiers())
             || (!jsInfo.isJsOverlay()
-                && enclosingClassTypeDescriptor.isNative()
+                && enclosingTypeDescriptor.isNative()
                 && isAbstract(methodBinding));
 
     boolean isConstructor = methodBinding.isConstructor();
@@ -717,9 +717,9 @@ public class JdtUtils {
           i, JsInteropUtils.isJsOptional(methodBinding, i));
     }
 
-    if (enclosingClassTypeDescriptor.isAnonymous()
+    if (enclosingTypeDescriptor.isAnonymous()
         && isConstructor
-        && enclosingClassTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
+        && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
     /**
@@ -728,7 +728,7 @@ public class JdtUtils {
      */
     boolean isBridge = false;
     return methodDescriptorBuilder
-        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
         .setDeclarationMethodDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
@@ -962,7 +962,7 @@ public class JdtUtils {
 
   public static TypeDescriptor createLambdaTypeDescriptor(
       boolean inStaticContext,
-      final TypeDescriptor enclosingClassTypeDescriptor,
+      final TypeDescriptor enclosingTypeDescriptor,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
     // About Intersection typed Lambdas:
@@ -1018,17 +1018,17 @@ public class JdtUtils {
     TypeDeclaration lambdaTypeDeclaration =
         JdtUtils.createLambdaTypeDeclaration(
             inStaticContext,
-            enclosingClassTypeDescriptor.getTypeDeclaration(),
+            enclosingTypeDescriptor.getTypeDeclaration(),
             classComponents,
             lambdaTypeBinding);
 
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
-        .setEnclosingTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-        .setPackageName(enclosingClassTypeDescriptor.getPackageName())
+        .setPackageName(enclosingTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->
                 TypeDescriptor.Builder.from(selfTypeDescriptor)
@@ -1387,7 +1387,7 @@ public class JdtUtils {
 
   public static TypeDeclaration createLambdaTypeDeclaration(
       boolean inStaticContext,
-      final TypeDeclaration enclosingClassTypeDeclaration,
+      final TypeDeclaration enclosingTypeDeclaration,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
     // About Intersection typed Lambdas:
@@ -1429,12 +1429,12 @@ public class JdtUtils {
     }
     return TypeDeclaration.newBuilder()
         .setClassComponents(classComponents)
-        .setEnclosingTypeDeclaration(enclosingClassTypeDeclaration)
+        .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setCapturingEnclosingInstance(!inStaticContext)
         .setJsFunctionImplementation(isJsFunctionImplementation)
         .setLocal(true)
         .setAnonymous(true)
-        .setPackageName(enclosingClassTypeDeclaration.getPackageName())
+        .setPackageName(enclosingTypeDeclaration.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->
                 TypeDescriptor.Builder.from(selfTypeDescriptor.getUnsafeTypeDescriptor())
@@ -1447,7 +1447,7 @@ public class JdtUtils {
             () ->
                 createLambdaTypeDescriptor(
                     inStaticContext,
-                    enclosingClassTypeDeclaration.getUnsafeTypeDescriptor(),
+                    enclosingTypeDeclaration.getUnsafeTypeDescriptor(),
                     classComponents,
                     lambdaTypeBinding))
         .setTypeParameterDescriptors(typeParameterDescriptors)

@@ -45,7 +45,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
                     return AstUtils.createForwardingMethod(
                         null,
                         MethodDescriptor.Builder.from(entry.getValue())
-                            .setEnclosingClassTypeDescriptor(
+                            .setEnclosingTypeDescriptor(
                                 type.getDeclaration().getUnsafeTypeDescriptor())
                             .setSynthetic(true)
                             .setBridge(true)
@@ -134,7 +134,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
   private static MethodDescriptor findDirectOverriddenMethodDescriptor(
       MethodDescriptor overridingMethodDescriptor) {
     TypeDescriptor superClassTypeDescriptor =
-        overridingMethodDescriptor.getEnclosingClassTypeDescriptor().getSuperTypeDescriptor();
+        overridingMethodDescriptor.getEnclosingTypeDescriptor().getSuperTypeDescriptor();
     while (superClassTypeDescriptor != null) {
       for (MethodDescriptor declaredMethodDescriptor :
           superClassTypeDescriptor.getDeclaredMethodDescriptors()) {

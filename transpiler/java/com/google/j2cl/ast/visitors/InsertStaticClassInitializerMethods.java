@@ -44,8 +44,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
-                      newClinitCallStatement(
-                          method.getDescriptor().getEnclosingClassTypeDescriptor()))
+                      newClinitCallStatement(method.getDescriptor().getEnclosingTypeDescriptor()))
                   .build();
             }
             return method;
@@ -76,7 +75,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
     MethodDescriptor clinitMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(typeDescriptor)
+            .setEnclosingTypeDescriptor(typeDescriptor)
             .setName("$clinit")
             .setJsInfo(JsInfo.RAW)
             .build();

@@ -135,7 +135,7 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
             .setName(overflowMethodName)
             .setParameterTypeDescriptors(fromTypeDescriptor)
             .setReturnTypeDescriptor(toTypeDescriptor)

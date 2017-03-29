@@ -387,7 +387,7 @@ public class CompilationUnitBuilder {
                       superMethodDescriptor ->
                           superMethodDescriptor.isJsMember()
                               && !superMethodDescriptor
-                                  .getEnclosingClassTypeDescriptor()
+                                  .getEnclosingTypeDescriptor()
                                   .isStarOrUnknown())
               : methodDescriptor
                   .getOverriddenMethodDescriptors()
@@ -485,7 +485,7 @@ public class CompilationUnitBuilder {
               .orElse(constructorBinding);
       MethodDescriptor superConstructorDescriptor =
           MethodDescriptor.Builder.from(JdtUtils.createMethodDescriptor(superConstructorBinding))
-              .setEnclosingClassTypeDescriptor(type.getSuperTypeDescriptor())
+              .setEnclosingTypeDescriptor(type.getSuperTypeDescriptor())
               .build();
 
       if (superQualifierTypeDescriptor != null) {
@@ -527,7 +527,7 @@ public class CompilationUnitBuilder {
 
       // the qualifier for the NewInstance.
       Expression newInstanceQualifier =
-          constructorDescriptor.getEnclosingClassTypeDescriptor().isCapturingEnclosingInstance()
+          constructorDescriptor.getEnclosingTypeDescriptor().isCapturingEnclosingInstance()
               ? convertOuterClassReference(
                   JdtUtils.findCurrentTypeBinding(expression),
                   newInstanceTypeBinding.getDeclaringClass(),
@@ -983,7 +983,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingClassTypeDescriptor())
+          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
           .setParameters(
               JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())
                   .stream()
@@ -1146,7 +1146,7 @@ public class CompilationUnitBuilder {
         checkArgument(parameters.size() == 1);
 
         return FunctionExpression.newBuilder()
-            .setTypeDescriptor(functionalMethodDescriptor.getEnclosingClassTypeDescriptor())
+            .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
             .setParameters(parameters)
             .setStatements(
                 ReturnStatement.newBuilder()
@@ -1179,7 +1179,7 @@ public class CompilationUnitBuilder {
 
       Expression qualifier =
           targetConstructorMethodDescriptor
-                  .getEnclosingClassTypeDescriptor()
+                  .getEnclosingTypeDescriptor()
                   .isCapturingEnclosingInstance()
               // Inner classes may have an implicit enclosing class qualifier (2).
               ? convertOuterClassReference(
@@ -1189,7 +1189,7 @@ public class CompilationUnitBuilder {
               : null;
 
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingClassTypeDescriptor())
+          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
           .setParameters(parameters)
           .setStatements(
               (Statement)
@@ -1270,7 +1270,7 @@ public class CompilationUnitBuilder {
         MethodDescriptor targetMethodDescriptor,
         boolean isStaticDispatch) {
       checkArgument(
-          functionalMethodDescriptor.getEnclosingClassTypeDescriptor().isFunctionalInterface());
+          functionalMethodDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface());
 
       List<Variable> parameters =
           AstUtils.createParameterVariables(
@@ -1297,7 +1297,7 @@ public class CompilationUnitBuilder {
               functionalMethodDescriptor.getReturnTypeDescriptor());
       forwardingStatement.setSourcePosition(sourcePosition);
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingClassTypeDescriptor())
+          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
           .setParameters(parameters)
           .setStatements(forwardingStatement)
           .build();
@@ -1328,8 +1328,8 @@ public class CompilationUnitBuilder {
           expression instanceof LambdaExpression || expression instanceof MethodReference);
 
       ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
-      ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
-      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
+      ITypeBinding enclosingTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
+      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingTypeBinding);
       TypeDescriptor functionalInterfaceTypeDescriptor =
           JdtUtils.createTypeDescriptor(
               functionalInterfaceTypeBinding.getFunctionalInterfaceMethod().getDeclaringClass());
@@ -1365,7 +1365,7 @@ public class CompilationUnitBuilder {
               checkNotNull(JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding)));
       MethodDescriptor lambdaDispatchMethodDescriptor =
           MethodDescriptor.Builder.from(functionalMethodDescriptor)
-              .setEnclosingClassTypeDescriptor(lambdaTypeDescriptor)
+              .setEnclosingTypeDescriptor(lambdaTypeDescriptor)
               .setAbstract(false)
               .setNative(false)
               .build();
@@ -1375,9 +1375,7 @@ public class CompilationUnitBuilder {
           createLambdaImplementationMethod(
               lambdaDispatchMethodDescriptor,
               functionExpression,
-              !functionalMethodDescriptor
-                  .getEnclosingClassTypeDescriptor()
-                  .isStarOrUnknown());
+              !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown());
       lambdaMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(lambdaMethod);
 
@@ -1451,8 +1449,7 @@ public class CompilationUnitBuilder {
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
           lambdaTypeDeclaration.isCapturingEnclosingInstance()
-              ? convertOuterClassReference(
-                  enclosingClassTypeBinding, enclosingClassTypeBinding, true)
+              ? convertOuterClassReference(enclosingTypeBinding, enclosingTypeBinding, true)
               : null;
       return NewInstance.Builder.from(constructorMethodDescriptor).setQualifier(qualifier).build();
     }
@@ -1488,7 +1485,7 @@ public class CompilationUnitBuilder {
             public Node rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
               if (fieldDescriptor.isMemberOf(original.getUnsafeTypeDescriptor())) {
                 return FieldDescriptor.Builder.from(fieldDescriptor)
-                    .setEnclosingClassTypeDescriptor(replacement.getUnsafeTypeDescriptor())
+                    .setEnclosingTypeDescriptor(replacement.getUnsafeTypeDescriptor())
                     .build();
               }
               return fieldDescriptor;
@@ -1498,7 +1495,7 @@ public class CompilationUnitBuilder {
             public Node rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
               if (methodDescriptor.isMemberOf(original.getUnsafeTypeDescriptor())) {
                 return MethodDescriptor.Builder.from(methodDescriptor)
-                    .setEnclosingClassTypeDescriptor(replacement.getUnsafeTypeDescriptor())
+                    .setEnclosingTypeDescriptor(replacement.getUnsafeTypeDescriptor())
                     .build();
               }
               return methodDescriptor;
@@ -1679,7 +1676,7 @@ public class CompilationUnitBuilder {
       } else if (expression.getQualifier().resolveTypeBinding().isInterface()) {
         // This is a default method call.
         return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new ThisReference(methodDescriptor.getEnclosingClassTypeDescriptor()))
+            .setQualifier(new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()))
             .setArguments(arguments)
             .setIsStaticDispatch(true)
             .build();
@@ -2076,7 +2073,7 @@ public class CompilationUnitBuilder {
               MethodDescriptor.newBuilder()
                   .setJsInfo(JsInfo.RAW)
                   .setStatic(true)
-                  .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+                  .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
                   .setName("$get")
                   .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
                   .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
@@ -2093,7 +2090,7 @@ public class CompilationUnitBuilder {
           MethodDescriptor.newBuilder()
               .setJsInfo(JsInfo.RAW)
               .setStatic(true)
-              .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+              .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
               .setName("$get")
               .setParameterTypeDescriptors(
                   TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt)
