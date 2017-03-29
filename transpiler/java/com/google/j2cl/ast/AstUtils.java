@@ -1107,8 +1107,7 @@ public class AstUtils {
   }
 
   public static boolean startsWithNumber(String string) {
-    char firstChar = string.charAt(0);
-    return firstChar >= '0' && firstChar <= '9';
+    return Character.isDigit(string.charAt(0));
   }
 
   /**
@@ -1126,27 +1125,24 @@ public class AstUtils {
     List<String> namespaceComponents = components.subList(0, components.size() - 1);
     boolean isExtern = namespaceComponents.size() < 1;
     String jsName = Iterables.getLast(components);
-    String jsNamespace =
-        isExtern ? JsUtils.JS_PACKAGE_GLOBAL : Joiner.on(".").join(namespaceComponents);
 
-    TypeDescriptor typeDescriptor = null;
     if (isExtern) {
-      typeDescriptor = TypeDescriptors.createNative(jsNamespace, jsName, Collections.emptyList());
-    } else {
-      TypeDescriptor enclosingClassTypeDescriptor =
-          getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
-      String packageName =
-          Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
-
-      List<String> classComponents = new ArrayList<>();
-      classComponents.add(jsName);
-
-      typeDescriptor =
-          TypeDescriptors.createNative(
-              packageName, classComponents, jsNamespace, jsName, Collections.emptyList());
+      return TypeDescriptors.createNative(
+          JsUtils.JS_PACKAGE_GLOBAL, jsName, Collections.emptyList());
     }
 
-    return typeDescriptor;
+    String jsNamespace = Joiner.on(".").join(namespaceComponents);
+    TypeDescriptor enclosingClassTypeDescriptor =
+        getOutermostEnclosingType(memberDescriptor.getEnclosingClassTypeDescriptor());
+    String packageName =
+        Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
+
+    return TypeDescriptors.createNative(
+        packageName,
+        Collections.singletonList(jsName),
+        jsNamespace,
+        jsName,
+        Collections.emptyList());
   }
 
   private static TypeDescriptor getOutermostEnclosingType(TypeDescriptor typeDescriptor) {
