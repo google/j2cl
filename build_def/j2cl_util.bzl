@@ -1,18 +1,27 @@
 """Utility functions for the j2cl_* build rules / macros"""
 
+def _get_last_dir_occurrence_of(path, name):
+  """Returns the index of the last occurrence of directory name in path."""
+  if path == name:
+    return 0
+  if path.endswith("/" + name):
+    return path.rfind(name)
+  index = path.rfind("/" + name + "/")
+  if index != -1:
+    return index + 1
+  if path.startswith(name + "/"):
+    return 0
+  else:
+    return -1
+
+
 def _get_java_root_index(pkg_name):
   """Returns the index of the java_root within a build package"""
   # Find the java folder in the beginning, middle or end of a path.
-  if pkg_name.endswith("java"):
-    java_index = pkg_name.rfind("java")
-  else:
-    java_index = pkg_name.rfind("java/")
+  java_index = _get_last_dir_occurrence_of(pkg_name, "java")
 
   # Find the javatests folder in the beginning, middle or end of a path.
-  if pkg_name.endswith("javatests"):
-    javatests_index = pkg_name.rfind("javatests")
-  else:
-    javatests_index = pkg_name.rfind("javatests/")
+  javatests_index = _get_last_dir_occurrence_of(pkg_name, "javatests")
 
   if java_index == -1 and javatests_index == -1:
     fail("can not find java root: " + pkg_name)
