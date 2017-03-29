@@ -150,49 +150,52 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                 .setAnnotationType(boundType)
                 .build();
           }
-
-          @Override
-          public Expression rewriteFunctionExpression(FunctionExpression functionExpression) {
-            return FunctionExpression.Builder.from(functionExpression)
-                .setTypeDescriptor(
-                    replaceTypeVariableWithBound(
-                        functionExpression.getTypeDescriptor(), Predicates.alwaysTrue()))
-                .build();
-          }
         });
   }
 
   private TypeDescriptor replaceTypeVariableWithBound(
       TypeDescriptor typeDescriptor, Predicate<TypeDescriptor> shouldBeReplaced) {
-    // If it is a type variable that is declared by the method, replace with its bound.
-    if (shouldBeReplaced.test(typeDescriptor)) {
-      TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-      return boundTypeDescriptor.hasTypeArguments()
-          ? boundTypeDescriptor.getRawTypeDescriptor()
-          : boundTypeDescriptor;
+    switch (typeDescriptor.getKind()) {
+      case TYPE_VARIABLE:
+      case WILDCARD_OR_CAPTURE:
+        // If it is a type variable that is declared by the method, replace with its bound.
+        if (shouldBeReplaced.test(typeDescriptor)) {
+          TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+          return boundTypeDescriptor.hasTypeArguments()
+              ? boundTypeDescriptor.getRawTypeDescriptor()
+              : boundTypeDescriptor;
+        }
+        return typeDescriptor;
+      case ARRAY:
+        TypeDescriptor replacedLeafTypeDescriptor =
+            replaceTypeVariableWithBound(typeDescriptor.getLeafTypeDescriptor(), shouldBeReplaced);
+        return TypeDescriptors.getForArray(
+            replacedLeafTypeDescriptor,
+            typeDescriptor.getDimensions(),
+            typeDescriptor.isNullable());
+      case ENUM:
+      case CLASS:
+      case INTERFACE:
+        // If it is a JsFunction type, and the JsFunction method contains type variables, we have to
+        // replace it with 'window.Function' to get rid of 'bad type annotation' error.
+        if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
+          if (containsTypeVariableDeclaredByMethodInJsFunction(typeDescriptor, shouldBeReplaced)) {
+            return TypeDescriptors.NATIVE_FUNCTION;
+          }
+        } else if (typeDescriptor.hasTypeArguments()) {
+          return TypeDescriptors.replaceTypeArgumentDescriptors(
+              typeDescriptor,
+              Lists.transform(
+                  typeDescriptor.getTypeArgumentDescriptors(),
+                  typeArgument -> replaceTypeVariableWithBound(typeArgument, shouldBeReplaced)));
+        }
+        return typeDescriptor;
+      case UNION:
+      case INTERSECTION:
+        throw new AssertionError();
+      default:
+        return typeDescriptor;
     }
-    // If it is a JsFunction type, and the JsFunction method contains type variables, we have to
-    // replace it with 'window.Function' to get rid of 'bad type annotation' error.
-    if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
-      if (containsTypeVariableDeclaredByMethodInJsFunction(typeDescriptor, shouldBeReplaced)) {
-        return TypeDescriptors.NATIVE_FUNCTION;
-      }
-      return typeDescriptor;
-    }
-    if (typeDescriptor.hasTypeArguments()) {
-      return TypeDescriptors.replaceTypeArgumentDescriptors(
-          typeDescriptor,
-          Lists.transform(
-              typeDescriptor.getTypeArgumentDescriptors(),
-              typeArgument -> replaceTypeVariableWithBound(typeArgument, shouldBeReplaced)));
-    }
-    if (typeDescriptor.isArray()) {
-      TypeDescriptor boundTypeDescriptor =
-          replaceTypeVariableWithBound(typeDescriptor.getLeafTypeDescriptor(), shouldBeReplaced);
-      return TypeDescriptors.getForArray(
-          boundTypeDescriptor, typeDescriptor.getDimensions(), typeDescriptor.isNullable());
-    }
-    return typeDescriptor;
   }
 
   /**

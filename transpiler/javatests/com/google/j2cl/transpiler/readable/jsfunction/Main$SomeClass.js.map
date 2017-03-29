@@ -43,9 +43,9 @@
 ...    });
   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.SomeClass.testJsFunctionWithClassCapture"
 [Function<Object, Object> f = object -> new ArrayList<T>();] => [let f = ((/** * */ object) =>{
-      return /**@type {ArrayList} */ (ArrayList.$create__());
+      return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
     });]
 [f] => [f] "f"
 [object] => [object] "object"
-[new ArrayList<T>()] => [return /**@type {ArrayList} */ (ArrayList.$create__());]
+[new ArrayList<T>()] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]
