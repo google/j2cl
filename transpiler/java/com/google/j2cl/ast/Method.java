@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
@@ -216,6 +217,15 @@ public class Method extends Member implements HasJsNameInfo {
 
     public Builder addParameters(int index, Collection<Variable> newParameters) {
       parameters.addAll(index, newParameters);
+      methodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .addParameterTypeDescriptors(
+                  index,
+                  newParameters
+                      .stream()
+                      .map(Variable::getTypeDescriptor)
+                      .collect(toImmutableList()))
+              .build();
       return this;
     }
 
@@ -235,12 +245,12 @@ public class Method extends Member implements HasJsNameInfo {
     }
 
     public Builder setParameters(Variable... parameters) {
-      this.parameters = Arrays.asList(parameters);
-      return this;
+      return setParameters(Arrays.asList(parameters));
     }
 
-    public Builder setParameters(List<Variable> parameters) {
+    public Builder setParameters(Collection<Variable> parameters) {
       this.parameters = new ArrayList<>(parameters);
+      checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       return this;
     }
 
@@ -277,11 +287,11 @@ public class Method extends Member implements HasJsNameInfo {
     public Method build() {
       Block body = new Block(statements);
       body.setSourcePosition(bodySourcePosition);
+      checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       Method method =
           new Method(
-              // Update method descriptor parameter types from actual parameter types.
               MethodDescriptor.Builder.from(methodDescriptor)
-                  .setParameterTypeDescriptors(
+                  .updateParameterTypeDescriptors(
                       parameters
                           .stream()
                           .map(Variable::getTypeDescriptor)

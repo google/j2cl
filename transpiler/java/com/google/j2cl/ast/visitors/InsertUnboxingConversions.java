@@ -19,6 +19,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -77,8 +78,8 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteMethodInvocationContext(
-          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-        return maybeUnboxAndWiden(parameterTypeDescriptor, argumentExpression);
+          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+        return maybeUnboxAndWiden(parameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
 
       @Override

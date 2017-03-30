@@ -17,9 +17,9 @@ package com.google.j2cl.tools.jsni;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptors;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.frontend.JdtUtils;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class JsniMethodVisitor extends ASTVisitor {
       if (TypeDescriptors.isBoxedTypeAsJsPrimitives(methodDescriptor.getEnclosingTypeDescriptor())
           && !methodDescriptor.isStatic()) {
         parameterNames.add(0, "$thisArg");
-        methodDescriptor = MethodDescriptors.makeStaticMethodDescriptor(methodDescriptor);
+        methodDescriptor = AstUtils.makeDevirtualizedMethodDescriptor(methodDescriptor);
       }
       String methodMangledName = ManglingNameUtils.getMangledName(methodDescriptor);
       String javascriptBlock = extractJavascriptBlock(method);

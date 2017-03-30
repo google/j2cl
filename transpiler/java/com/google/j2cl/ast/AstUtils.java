@@ -22,8 +22,10 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.common.Cloneable;
 import com.google.j2cl.ast.common.JsUtils;
@@ -425,7 +427,6 @@ public class AstUtils {
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
             .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
             .setJsInfo(JsInfo.NONE)
@@ -727,17 +728,13 @@ public class AstUtils {
 
     // MethodDescriptor for the devirtualized static method.
     MethodDescriptor newMethodDescriptor =
-        MethodDescriptors.makeStaticMethodDescriptor(method.getDescriptor());
-
-    // Parameters for the devirtualized static method.
-    List<Variable> newParameters = new ArrayList<>();
-    newParameters.add(thisArg); // added extra parameter.
-    newParameters.addAll(method.getParameters()); // original parameters in the instance method.
+        makeDevirtualizedMethodDescriptor(method.getDescriptor());
 
     // Add the static method to current type.
     return Method.newBuilder()
         .setMethodDescriptor(newMethodDescriptor)
-        .setParameters(newParameters)
+        .setParameters(
+            ImmutableList.<Variable>builder().add(thisArg).addAll(method.getParameters()).build())
         .addStatements(method.getBody().getStatements())
         .setSourcePosition(method.getSourcePosition())
         .build();
@@ -1149,5 +1146,47 @@ public class AstUtils {
       return typeDescriptor;
     }
     return getOutermostEnclosingType(typeDescriptor.getEnclosingTypeDescriptor());
+  }
+
+  /**
+   * Creates a devritualized static MethodDescriptor from an instance MethodDescriptor.
+   *
+   * <p>The static MethodDescriptor has an extra parameter as its first parameter whose type is the
+   * enclosing class of {@code methodDescriptor}.
+   */
+  public static MethodDescriptor makeDevirtualizedMethodDescriptor(
+      MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.isStatic() || methodDescriptor.isConstructor()) {
+      return methodDescriptor;
+    }
+    TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+
+    MethodDescriptor.Builder methodBuilder =
+        MethodDescriptor.Builder.from(methodDescriptor)
+            .setParameterDescriptors(
+                ImmutableList.<ParameterDescriptor>builder()
+                    .add(
+                        ParameterDescriptor.newBuilder()
+                            .setTypeDescriptor(enclosingTypeDescriptor)
+                            .build())
+                    .addAll(methodDescriptor.getParameterDescriptors())
+                    .build())
+            .setTypeParameterTypeDescriptors(
+                ImmutableList.<TypeDescriptor>builder()
+                    .addAll(methodDescriptor.getTypeParameterTypeDescriptors())
+                    .addAll(enclosingTypeDescriptor.getTypeArgumentDescriptors())
+                    .build())
+            .setStatic(true)
+            .setAbstract(false)
+            .setJsInfo(JsInfo.NONE);
+
+    if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+      methodBuilder.setDeclarationMethodDescriptor(
+          makeDevirtualizedMethodDescriptor(
+              MethodDescriptor.Builder.from(methodDescriptor.getDeclarationMethodDescriptor())
+                  .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+                  .build()));
+    }
+    return methodBuilder.build();
   }
 }

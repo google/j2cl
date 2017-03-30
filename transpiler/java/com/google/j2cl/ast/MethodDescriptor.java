@@ -18,28 +18,69 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-/** A (by signature) reference to a method. */
+/** A reference to a method. */
 @AutoValue
 @Visitable
 public abstract class MethodDescriptor extends MemberDescriptor {
+  /** A method parameter descriptor */
+  @AutoValue
+  public abstract static class ParameterDescriptor {
+    public abstract TypeDescriptor getTypeDescriptor();
+
+    public abstract boolean isVarargs();
+
+    public abstract boolean isJsOptional();
+
+    public abstract Builder toBuilder();
+
+    public static Builder newBuilder() {
+      return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
+          .setVarargs(false)
+          .setJsOptional(false);
+    }
+
+    private static final ThreadLocalInterner<ParameterDescriptor> interner =
+        new ThreadLocalInterner<>();
+
+    /** A Builder for ParameterDescriptor. */
+    @AutoValue.Builder
+    public abstract static class Builder {
+      public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
+
+      public abstract Builder setVarargs(boolean isVarargs);
+
+      public abstract Builder setJsOptional(boolean isJsOptional);
+
+      abstract ParameterDescriptor autoBuild();
+
+      public ParameterDescriptor build() {
+        return interner.intern(autoBuild());
+      }
+    }
+  }
+
   public static final String INIT_METHOD_NAME = "$init";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
@@ -56,24 +97,32 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isConstructor();
 
-  public abstract boolean isVarargs();
+  public boolean isVarargs() {
+    return getParameterDescriptors().stream().anyMatch(ParameterDescriptor::isVarargs);
+  }
 
   @Override
   public abstract boolean isDefaultMethod();
 
   public abstract boolean isBridge();
 
-  public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
+  public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
 
-  abstract BitSet getParameterOptionality();
-
   public boolean isParameterOptional(int i) {
-    return getParameterOptionality().get(i);
+    return getParameterDescriptors().get(i).isJsOptional();
+  }
+
+  @Memoized
+  public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
+    return getParameterDescriptors()
+        .stream()
+        .map(ParameterDescriptor::getTypeDescriptor)
+        .collect(ImmutableList.toImmutableList());
   }
 
   public boolean isInit() {
@@ -119,7 +168,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * AST.
    */
   public boolean isJsMethodVarargs() {
-    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isConstructor());
+    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isJsConstructor());
   }
 
   @Override
@@ -195,7 +244,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public String getMethodSignature() {
     String name = getName();
     ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
-    return MethodDescriptors.getSignature(name, parameterTypeDescriptors);
+    return getSignature(name, parameterTypeDescriptors);
   }
 
   abstract Builder toBuilder();
@@ -210,14 +259,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setDefaultMethod(false)
         .setNative(false)
         .setStatic(false)
-        .setVarargs(false)
         .setFinal(false)
         .setSynthetic(false)
         .setBridge(false)
         .setJsFunction(false)
-        .setParameterOptionality(new BitSet())
         .setUnusableByJsSuppressed(false)
-        .setParameterTypeDescriptors(Collections.emptyList())
+        .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
   }
@@ -230,26 +277,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    // TODO(b/36493405): Add a parameter abstraction and simplify this and all code that traverses
-    // parameters positionally.
-
-    String parameterString = "";
-    String separator = "";
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-        getDeclarationMethodDescriptor().getParameterTypeDescriptors();
-    int varargsParameterIndex = parameterTypeDescriptors.size() - 1;
-    for (int i = 0; i < parameterTypeDescriptors.size(); i++) {
-      TypeDescriptor parameterTypeDescriptor =
-          parameterTypeDescriptors.get(i).getRawTypeDescriptor();
-      parameterString +=
-          separator
-              + (isJsMethodVarargs() && varargsParameterIndex == i
-                  ? parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription()
-                      + "..."
-                  : parameterTypeDescriptor.getReadableDescription());
-      separator = ", ";
-    }
-
+    String parameterString =
+        getParameterDescriptors()
+            .stream()
+            .map(MethodDescriptor::getParameterReadableDescription)
+            .collect(joining(", "));
 
     if (isConstructor()) {
       return J2clUtils.format(
@@ -261,6 +293,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         getEnclosingTypeDescriptor().getReadableDescription(),
         getName(),
         parameterString);
+  }
+
+  private static String getParameterReadableDescription(ParameterDescriptor parameterDescriptor) {
+    TypeDescriptor parameterTypeDescriptor =
+        parameterDescriptor.getTypeDescriptor().getRawTypeDescriptor();
+    if (parameterDescriptor.isVarargs()) {
+      return J2clUtils.format(
+          "%s...", parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription());
+    } else if (parameterDescriptor.isJsOptional()) {
+      return J2clUtils.format("@JsOptional %s", parameterTypeDescriptor.getReadableDescription());
+    }
+    return J2clUtils.format("%s", parameterTypeDescriptor.getReadableDescription());
   }
 
   /** Returns a signature suitable for override checking from the Java source perspective. */
@@ -300,8 +344,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setStatic(boolean isStatic);
 
-    public abstract Builder setVarargs(boolean isVarargs);
-
     public abstract Builder setConstructor(boolean isConstructor);
 
     public abstract Builder setAbstract(boolean isAbstract);
@@ -329,22 +371,62 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setTypeParameterTypeDescriptors(
         Iterable<TypeDescriptor> typeParameterTypeDescriptors);
 
-    public abstract Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors);
+    public Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
+      return setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
+    }
 
-    public abstract Builder setParameterTypeDescriptors(
-        List<TypeDescriptor> parameterTypeDescriptors);
+    public Builder setParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
+      return setParameterDescriptors(toParameterDescriptors(parameterTypeDescriptors));
+    }
+
+    public Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
+      checkArgument(parameterTypeDescriptors.size() == getParameterDescriptors().size());
+      ImmutableList.Builder<ParameterDescriptor> listBuilder = ImmutableList.builder();
+      Iterator<ParameterDescriptor> parameterDescriptorIterator =
+          getParameterDescriptors().iterator();
+      Iterator<TypeDescriptor> parameterTypeDescriptorIterator =
+          parameterTypeDescriptors.iterator();
+      while (parameterDescriptorIterator.hasNext()) {
+        checkState(parameterTypeDescriptorIterator.hasNext());
+        listBuilder.add(
+            parameterDescriptorIterator
+                .next()
+                .toBuilder()
+                .setTypeDescriptor(parameterTypeDescriptorIterator.next())
+                .build());
+      }
+      return setParameterDescriptors(listBuilder.build());
+    }
 
     public Builder addParameterTypeDescriptors(
         int index, TypeDescriptor... parameterTypeDescriptors) {
       return addParameterTypeDescriptors(index, Arrays.asList(parameterTypeDescriptors));
     }
 
+    abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
+
     public Builder addParameterTypeDescriptors(
-        int index, List<TypeDescriptor> parameterTypeDescriptors) {
-      List<TypeDescriptor> newParameterTypeDescriptors =
-          new ArrayList<>(getParameterTypeDescriptors());
-      newParameterTypeDescriptors.addAll(index, parameterTypeDescriptors);
-      return setParameterTypeDescriptors(newParameterTypeDescriptors);
+        int index, Collection<TypeDescriptor> parameterTypeDescriptors) {
+      List<ParameterDescriptor> newParameterDescriptors =
+          new ArrayList<>(getParameterDescriptors());
+      newParameterDescriptors.addAll(index, toParameterDescriptors(parameterTypeDescriptors));
+      if (getDeclarationMethodDescriptorOrNullIfSelf() != null) {
+        setDeclarationMethodDescriptorOrNullIfSelf(
+            MethodDescriptor.Builder.from(getDeclarationMethodDescriptorOrNullIfSelf())
+                .addParameterTypeDescriptors(index, parameterTypeDescriptors)
+                .build());
+      }
+      return setParameterDescriptors(newParameterDescriptors);
+    }
+
+    static ImmutableList<ParameterDescriptor> toParameterDescriptors(
+        Collection<TypeDescriptor> parameterTypeDescriptors) {
+      return parameterTypeDescriptors
+          .stream()
+          .map(
+              typeDescriptor ->
+                  ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
+          .collect(ImmutableList.toImmutableList());
     }
 
     public Builder addParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
@@ -352,24 +434,26 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     public Builder addParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
-      List<TypeDescriptor> newParameterTypeDescriptors =
-          new ArrayList<>(getParameterTypeDescriptors());
-      newParameterTypeDescriptors.addAll(parameterTypeDescriptors);
-      return setParameterTypeDescriptors(newParameterTypeDescriptors);
+      return addParameterTypeDescriptors(
+          getParameterDescriptors().size(), parameterTypeDescriptors);
     }
 
-    abstract Builder setParameterOptionality(BitSet parameterOptionality);
+    abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
-    abstract BitSet getParameterOptionality();
+    public abstract Builder setParameterDescriptors(
+        Iterable<ParameterDescriptor> parameterDescriptors);
 
-    public Builder setParameterOptionality(int i, boolean isOptional) {
-      BitSet parameterOptionality = getParameterOptionality();
-      parameterOptionality.set(i, isOptional);
-      return setParameterOptionality(parameterOptionality);
-    }
+    public abstract Builder setParameterDescriptors(
+        ImmutableList<ParameterDescriptor> parameterDescriptors);
 
     public Builder removeParameterOptionality() {
-      return setParameterOptionality(new BitSet());
+      return setParameterDescriptors(
+          getParameterDescriptors()
+              .stream()
+              .map(
+                  parameterDescriptor ->
+                      parameterDescriptor.toBuilder().setJsOptional(false).build())
+              .collect(ImmutableList.toImmutableList()));
     }
 
     public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
@@ -379,8 +463,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // Accessors to support validation, default construction and custom setters.
     abstract Builder setDeclarationMethodDescriptorOrNullIfSelf(
         MethodDescriptor declarationMethodDescriptor);
-
-    abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
     abstract boolean isConstructor();
 
@@ -398,35 +480,55 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(getName().isPresent());
       MethodDescriptor methodDescriptor = autoBuild();
 
-      // Bridge methods cannot be abstract nor native,
-      checkState(
-          !methodDescriptor.isBridge()
-              || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
-      // Bridge methods have to be marked synthetic,
-      checkState(!methodDescriptor.isBridge() || methodDescriptor.isSynthetic());
+      MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
+      if (internedMethodDescriptor != methodDescriptor) {
+        // This is a previously unseen method descriptor, make sure that it has been constructed
+        // property.
 
-      // Static methods cannot be abstract
-      checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
+        // Bridge methods cannot be abstract nor native,
+        checkState(
+            !methodDescriptor.isBridge()
+                || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
+        // Bridge methods have to be marked synthetic,
+        checkState(!methodDescriptor.isBridge() || methodDescriptor.isSynthetic());
 
-      // Only constructors can be JsConstructor
-      checkState(!methodDescriptor.isJsConstructor() || methodDescriptor.isConstructor());
+        // Static methods cannot be abstract
+        checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
 
-      // Constructors can not be JsMethods.
-      checkState(!methodDescriptor.isJsMethod() || !methodDescriptor.isConstructor());
-      if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
-        List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
-            methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
-        checkArgument(
-            methodDeclarationParameterTypeDescriptors.size()
-                == methodDescriptor.getParameterTypeDescriptors().size(),
-            "Method parameters (%s) for method %s don't match method declaration (%s)",
-            methodDescriptor.getParameterTypeDescriptors(),
-            methodDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName()
-                + "."
-                + methodDescriptor.getName(),
-            methodDeclarationParameterTypeDescriptors);
+        // Only constructors can be JsConstructor
+        checkState(!methodDescriptor.isJsConstructor() || methodDescriptor.isConstructor());
+
+        // Constructors can not be JsMethods.
+        checkState(!methodDescriptor.isJsMethod() || !methodDescriptor.isConstructor());
+
+        // At most 1 varargs parameter.
+        checkState(
+            methodDescriptor
+                    .getParameterDescriptors()
+                    .stream()
+                    .filter(ParameterDescriptor::isVarargs)
+                    .count()
+                <= 1);
+
+        // varargs parameter is the last one.
+        checkState(
+            !methodDescriptor.isVarargs()
+                || Iterables.getLast(methodDescriptor.getParameterDescriptors()).isVarargs());
+        if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+          List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
+              methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+          checkArgument(
+              methodDeclarationParameterTypeDescriptors.size()
+                  == methodDescriptor.getParameterTypeDescriptors().size(),
+              "Method parameters (%s) for method %s don't match method declaration (%s)",
+              methodDescriptor.getParameterTypeDescriptors(),
+              methodDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName()
+                  + "."
+                  + methodDescriptor.getName(),
+              methodDeclarationParameterTypeDescriptors);
+        }
       }
-      return interner.intern(methodDescriptor);
+      return internedMethodDescriptor;
     }
 
     public static Builder from(MethodDescriptor methodDescriptor) {
@@ -466,7 +568,30 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     return MethodDescriptor.Builder.from(this)
         .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
-        .setParameterTypeDescriptors(specializedParameterTypeDescriptors)
+        .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
         .build();
+  }
+
+
+  static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
+    return getSignature(name, Arrays.asList(parameterTypeDescriptors));
+  }
+
+  static String getSignature(String name, Iterable<TypeDescriptor> parameterTypeDescriptors) {
+    return name
+        + "("
+        + Streams.stream(parameterTypeDescriptors)
+            .map(
+                type ->
+                    TypeDescriptors.toNonNullable(type)
+                        .getRawTypeDescriptor()
+                        .getQualifiedBinaryName())
+            .collect(joining(", "))
+        + ")";
+  }
+
+  public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.getName().equals(TO_STRING_METHOD_NAME)
+        && methodDescriptor.getParameterTypeDescriptors().isEmpty();
   }
 }

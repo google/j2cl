@@ -69,23 +69,29 @@ public abstract class Invocation extends Expression implements MemberReference {
     public Builder addArgumentsAndUpdateDescriptor(
         int index, Collection<Expression> argumentExpressions) {
       arguments.addAll(index, argumentExpressions);
+      // Add the provided parameters to the proper index position of the existing parameters list.
+
       methodDescriptor =
-          MethodDescriptors.createWithExtraParameters(
-              methodDescriptor,
-              index,
-              argumentExpressions
-                  .stream()
-                  .map(Expression::getTypeDescriptor)
-                  .collect(Collectors.toList()));
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .addParameterTypeDescriptors(
+                  index,
+                  argumentExpressions
+                      .stream()
+                      .map(Expression::getTypeDescriptor)
+                      .collect(Collectors.toList()))
+              .build();
       return this;
     }
 
     public Builder addArgumentAndUpdateDescriptor(
         int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
       arguments.add(index, argumentExpression);
+      // Add the provided parameters to the proper index position of the existing parameters list.
+
       methodDescriptor =
-          MethodDescriptors.createWithExtraParameters(
-              methodDescriptor, index, parameterTypeDescriptor);
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .addParameterTypeDescriptors(index, parameterTypeDescriptor)
+              .build();
       return this;
     }
 

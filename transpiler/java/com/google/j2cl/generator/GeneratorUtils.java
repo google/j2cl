@@ -91,7 +91,7 @@ public class GeneratorUtils {
       return String.format(
           "@param {%s%s} %s",
           JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment),
-          method.getDescriptor().isParameterOptional(index) ? "=" : "",
+          method.getDescriptor().getParameterDescriptors().get(index).isJsOptional() ? "=" : "",
           name);
     }
   }

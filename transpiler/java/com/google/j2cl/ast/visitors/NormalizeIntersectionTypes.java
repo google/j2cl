@@ -26,6 +26,7 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import java.util.List;
@@ -108,8 +109,9 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
 
               @Override
               public Expression rewriteMethodInvocationContext(
-                  TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-                return maybeInsertCastToMemberType(parameterTypeDescriptor, argumentExpression);
+                  ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+                return maybeInsertCastToMemberType(
+                    parameterDescriptor.getTypeDescriptor(), argumentExpression);
               }
             }));
 

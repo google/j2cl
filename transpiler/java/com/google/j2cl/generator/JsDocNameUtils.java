@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -307,35 +308,33 @@ public class JsDocNameUtils {
     MethodDescriptor jsFunctionMethodDescriptor =
         checkNotNull(typeDescriptor.getConcreteJsFunctionMethodDescriptor());
 
-    List<String> parameterTypesList = new ArrayList<>();
-    int parameterCount = jsFunctionMethodDescriptor.getParameterTypeDescriptors().size();
-    for (int i = 0; i < parameterCount; i++) {
-      TypeDescriptor parameterTypeDescriptor =
-          jsFunctionMethodDescriptor.getParameterTypeDescriptors().get(i);
-
-      boolean isVarargsParameter =
-          jsFunctionMethodDescriptor.isJsMethodVarargs() && i == parameterCount - 1;
-      boolean isJsOptionalParameter = jsFunctionMethodDescriptor.isParameterOptional(i);
-
-      if (isVarargsParameter) {
-        checkArgument(parameterTypeDescriptor.isArray());
-        parameterTypesList.add(
-            "..."
-                + JsDocNameUtils.getJsDocName(
-                    parameterTypeDescriptor.getComponentTypeDescriptor(), environment));
-      } else {
-        parameterTypesList.add(
-            J2clUtils.format(
-                "%s%s",
-                JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment),
-                isJsOptionalParameter ? "=" : ""));
-      }
-    }
+    String parameterString =
+        jsFunctionMethodDescriptor
+            .getParameterDescriptors()
+            .stream()
+            .map(parameterDescriptor -> getParameterJsDocString(environment, parameterDescriptor))
+            .collect(joining(", "));
 
     return String.format(
         "function(%s):%s",
-        Joiner.on(", ").join(parameterTypesList),
+        parameterString,
         getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
+  }
+
+  private static String getParameterJsDocString(
+      GenerationEnvironment environment, ParameterDescriptor parameterDescriptor) {
+    if (parameterDescriptor.isVarargs()) {
+      return J2clUtils.format(
+          "...%s",
+          JsDocNameUtils.getJsDocName(
+              parameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor(), environment));
+    }
+    if (parameterDescriptor.isJsOptional()) {
+      return J2clUtils.format(
+          "%s=", JsDocNameUtils.getJsDocName(parameterDescriptor.getTypeDescriptor(), environment));
+    }
+    return J2clUtils.format(
+        "%s", JsDocNameUtils.getJsDocName(parameterDescriptor.getTypeDescriptor(), environment));
   }
 }
 

@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -476,13 +477,17 @@ public class BridgeMethodsCreator extends NormalizationPass {
         MethodDescriptor.Builder.from(
                 createMethodDescriptor(
                     typeDeclaration, bridgeMethodDescriptor, returnTypeDescriptor))
-            .setParameterTypeDescriptors(
+            .setParameterDescriptors(
                 bridgeMethodDescriptor
                     .getDeclarationMethodDescriptor()
-                    .getParameterTypeDescriptors()
+                    .getParameterDescriptors()
                     .stream()
-                    .map(p -> p.getRawTypeDescriptor())
-                    .toArray(TypeDescriptor[]::new))
+                    .map(
+                        p ->
+                            p.toBuilder()
+                                .setTypeDescriptor(p.getTypeDescriptor().getRawTypeDescriptor())
+                                .build())
+                    .collect(ImmutableList.toImmutableList()))
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)

@@ -28,6 +28,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -79,12 +80,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return castExpression;
     }
 
-    /**
-     * Expression is going to the given type.
-     */
+    /** Expression is going to the given type. */
     @SuppressWarnings("unused")
     public Expression rewriteMethodInvocationContext(
-        TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+        ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
       return argumentExpression;
     }
 
@@ -331,18 +330,17 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-        invocation.getTarget().getParameterTypeDescriptors();
+    ImmutableList<ParameterDescriptor> parameterDescriptors =
+        invocation.getTarget().getParameterDescriptors();
     List<Expression> argumentExpressions = invocation.getArguments();
 
     // Look at each param/argument pair.
     List<Expression> newArgumentExpressions = new ArrayList<>();
-    for (int argIndex = 0; argIndex < parameterTypeDescriptors.size(); argIndex++) {
-      TypeDescriptor parameterTypeDescriptor = parameterTypeDescriptors.get(argIndex);
+    for (int argIndex = 0; argIndex < parameterDescriptors.size(); argIndex++) {
+      ParameterDescriptor parameterDescriptor = parameterDescriptors.get(argIndex);
       Expression argumentExpression = argumentExpressions.get(argIndex);
       newArgumentExpressions.add(
-          contextRewriter.rewriteMethodInvocationContext(
-              parameterTypeDescriptor, argumentExpression));
+          contextRewriter.rewriteMethodInvocationContext(parameterDescriptor, argumentExpression));
     }
     return newArgumentExpressions;
   }

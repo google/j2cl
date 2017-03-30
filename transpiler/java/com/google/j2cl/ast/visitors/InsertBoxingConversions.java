@@ -20,6 +20,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -73,8 +74,8 @@ public class InsertBoxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteMethodInvocationContext(
-          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-        return maybeBox(parameterTypeDescriptor, argumentExpression);
+          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+        return maybeBox(parameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
     };
   }

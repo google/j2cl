@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -64,9 +65,11 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteMethodInvocationContext(
-          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
         return maybeCheckOverflow(
-            argumentExpression, argumentExpression.getTypeDescriptor(), parameterTypeDescriptor);
+            argumentExpression,
+            argumentExpression.getTypeDescriptor(),
+            parameterDescriptor.getTypeDescriptor());
       }
 
       @Override

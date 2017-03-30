@@ -23,6 +23,7 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -75,8 +76,9 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
 
       @Override
       public Expression rewriteMethodInvocationContext(
-          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-        return maybeInsertErasureTypeSafetyCast(parameterTypeDescriptor, argumentExpression);
+          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+        return maybeInsertErasureTypeSafetyCast(
+            parameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
     };
   }

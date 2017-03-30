@@ -636,7 +636,7 @@ public abstract class TypeDescriptor extends Node
   public MethodDescriptor getMethodDescriptorByName(
       String methodName, TypeDescriptor... parameters) {
     return getMethodDescriptorsBySignature()
-        .get(MethodDescriptors.getSignature(methodName, parameters));
+        .get(MethodDescriptor.getSignature(methodName, parameters));
   }
 
   /** The list of all methods available on a given type. */

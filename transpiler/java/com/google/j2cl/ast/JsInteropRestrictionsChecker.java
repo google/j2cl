@@ -23,6 +23,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
@@ -601,8 +602,9 @@ public class JsInteropRestrictionsChecker {
     Variable varargsParameter = method.getJsVarargsParameter();
     for (int i = 0; i < numberOfParameters; i++) {
       Variable parameter = method.getParameters().get(i);
-      if (method.getDescriptor().isParameterOptional(i)) {
-        if (methodDescriptor.getParameterTypeDescriptors().get(i).isPrimitive()) {
+      ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(i);
+      if (parameterDescriptor.isJsOptional()) {
+        if (parameterDescriptor.getTypeDescriptor().isPrimitive()) {
           problems.error(
               method.getSourcePosition(),
               "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
@@ -643,7 +645,7 @@ public class JsInteropRestrictionsChecker {
     // Check that parameters that are declared JsOptional in overridden methods remain JsOptional.
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getOverriddenMethodDescriptors()) {
-      for (int i = 0; i < overriddenMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+      for (int i = 0; i < overriddenMethodDescriptor.getParameterDescriptors().size(); i++) {
         if (!overriddenMethodDescriptor.isParameterOptional(i)) {
           continue;
         }

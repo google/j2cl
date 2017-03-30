@@ -32,6 +32,7 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Kind;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -691,15 +692,6 @@ public class JdtUtils {
         createTypeDescriptorWithNullability(
             methodBinding.getReturnType(), methodBinding.getAnnotations());
 
-    // generate parameters type descriptors.
-    List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
-    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
-      TypeDescriptor descriptor =
-          createTypeDescriptorWithNullability(
-              methodBinding.getParameterTypes()[i], methodBinding.getParameterAnnotations(i));
-      parameterTypeDescriptors.add(descriptor);
-    }
-
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {
       declarationMethodDescriptor = createMethodDescriptor(methodBinding.getMethodDeclaration());
@@ -710,11 +702,18 @@ public class JdtUtils {
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(JdtUtils::createTypeDescriptor);
 
-
-    MethodDescriptor.Builder methodDescriptorBuilder = MethodDescriptor.newBuilder();
+    ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
-      methodDescriptorBuilder.setParameterOptionality(
-          i, JsInteropUtils.isJsOptional(methodBinding, i));
+      parameterDescriptorBuilder.add(
+          ParameterDescriptor.newBuilder()
+              .setTypeDescriptor(
+                  createTypeDescriptorWithNullability(
+                      methodBinding.getParameterTypes()[i],
+                      methodBinding.getParameterAnnotations(i)))
+              .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
+              .setVarargs(
+                  i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
+              .build());
     }
 
     if (enclosingTypeDescriptor.isAnonymous()
@@ -727,12 +726,12 @@ public class JdtUtils {
      * bridge.
      */
     boolean isBridge = false;
-    return methodDescriptorBuilder
+    return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
+        .setParameterDescriptors(parameterDescriptorBuilder.build())
         .setDeclarationMethodDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
-        .setParameterTypeDescriptors(parameterTypeDescriptors)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .setJsFunction(JsInteropUtils.isOrOverridesJsFunctionMethod(methodBinding))
@@ -742,7 +741,6 @@ public class JdtUtils {
         .setNative(isNative)
         .setFinal(JdtUtils.isFinal(methodBinding))
         .setDefaultMethod(isDefault)
-        .setVarargs(methodBinding.isVarargs())
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
         .setBridge(isBridge)

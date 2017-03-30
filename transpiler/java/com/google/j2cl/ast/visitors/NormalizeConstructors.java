@@ -26,6 +26,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
@@ -487,16 +488,14 @@ public class NormalizeConstructors extends NormalizationPass {
             .setEnclosingTypeDescriptor(enclosingType)
             .setConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-            .setParameterTypeDescriptors(
-                constructorDescriptor
-                    .getDeclarationMethodDescriptor()
-                    .getParameterTypeDescriptors())
-            .setVarargs(constructorDescriptor.isVarargs())
+            .setParameterDescriptors(
+                constructorDescriptor.getDeclarationMethodDescriptor().getParameterDescriptors())
+            .setJsInfo(JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
             .build();
 
     return MethodDescriptor.Builder.from(javascriptConstructorDeclaration)
         .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
-        .setParameterTypeDescriptors(constructorDescriptor.getParameterTypeDescriptors())
+        .setParameterDescriptors(constructorDescriptor.getParameterDescriptors())
         .build();
   }
 }
