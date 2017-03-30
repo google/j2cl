@@ -15,12 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjectionapt.apt;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
-
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.SetMultimap;
@@ -33,23 +30,15 @@ import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.StandardLocation;
 
-/**
- * A simple APT that writes a native.js file for the class its processing.
- *
- * <p>To keep the APT simple it will only write public static methods.
- */
+/** A simple APT that writes a native JS files for the class its processing. */
 @AutoService(Processor.class)
 public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
 
   private class MyStep implements ProcessingStep {
 
-    private static final String NEWLINE = "\n";
-
-    @SuppressWarnings("unchecked")
     @Override
     public Set<? extends Class<? extends Annotation>> annotations() {
       return Sets.newHashSet(RunApt.class);
@@ -58,52 +47,48 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
     @Override
     public Set<Element> process(
         SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
-
       for (Element value : elementsByAnnotation.get(RunApt.class)) {
-        if (!MoreElements.isType(value)) {
-          continue;
-        }
-
         TypeElement typeElement = MoreElements.asType(value);
-        ImmutableList<String> methodNames =
-            ElementFilter.methodsIn(typeElement.getEnclosedElements())
-                .stream()
-                .map(input -> input.getSimpleName().toString())
-                .collect(toImmutableList());
-
         String packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
-        String className = typeElement.getSimpleName().toString();
-        writeNativeJsFile(packageName, className, methodNames);
+        writeNativeJsFile(packageName, typeElement.getSimpleName().toString());
+        writeJsFile(packageName, "NativeClass");
       }
-
       return ImmutableSet.of();
     }
 
-    private void writeNativeJsFile(
-        String packageName, String className, ImmutableList<String> methodNames) {
-      try (Writer writer =
-          processingEnv
-              .getFiler()
-              .createResource(
-                  StandardLocation.CLASS_OUTPUT,
-                  packageName,
-                  className + ".native.js",
-                  new Element[0])
-              .openWriter(); ) {
-
-        for (String methodName : methodNames) {
-          writer.write(String.format("%s.m_%s__ = function() {", className, methodName));
-          writer.write(NEWLINE);
-          writer.write(String.format("  return \"%s\";", methodName));
-          writer.write(NEWLINE);
-          writer.write("};");
-          writer.write(NEWLINE);
-          writer.write(NEWLINE);
-        }
+    private void writeNativeJsFile(String packageName, String className) {
+      try (Writer writer = createResource(packageName, className + ".native.js")) {
+        writeln(writer, "%s.nativeStaticMethod = function() {", className);
+        writeln(writer, "  return '%s';", className);
+        writeln(writer, "};");
       } catch (IOException e) {
-        processingEnv.getMessager().printMessage(Kind.ERROR, "Unable to write suite file.");
+        processingEnv.getMessager().printMessage(Kind.ERROR, "Unable to write file.");
         return;
       }
+    }
+
+    private void writeJsFile(String packageName, String className) {
+      try (Writer writer = createResource(packageName, className + ".js")) {
+        writeln(writer, "goog.module('%s.%s');", packageName, className);
+        writeln(writer, "class %s {", className);
+        writeln(writer, "  static nativeStaticMethod() { return '%s'; }", className);
+        writeln(writer, "};");
+        writeln(writer, "exports=%s;", className);
+      } catch (IOException e) {
+        processingEnv.getMessager().printMessage(Kind.ERROR, "Unable to write file.");
+        return;
+      }
+    }
+
+    private Writer createResource(String packageName, String resourceName) throws IOException {
+      return processingEnv
+          .getFiler()
+          .createResource(StandardLocation.CLASS_OUTPUT, packageName, resourceName, new Element[0])
+          .openWriter();
+    }
+
+    private void writeln(Writer writer, String format, Object... args) throws IOException {
+      writer.write(String.format(format, args) + "\n");
     }
   }
 
