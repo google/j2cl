@@ -25,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -1146,6 +1147,16 @@ public class CompilationUnitBuilder {
         // Array creation method references always have exactly one parameter.
         checkArgument(parameters.size() == 1);
 
+        // The size of the array is the only parameter in the implemented function. It's legal for
+        // the source to provide only one dimension parameter to to create a multidimensional array
+        // but our AST expects NewArray nodes to provide an expression for each dimension in the
+        // array type, hence the missing dimensions are padded with null.
+        ImmutableList<Expression> dimensionExpressions =
+            ImmutableList.<Expression>builder()
+                .add(parameters.get(0).getReference())
+                .addAll(Collections.nCopies(arrayType.getDimensions() - 1, NullLiteral.get()))
+                .build();
+
         return FunctionExpression.newBuilder()
             .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
             .setParameters(parameters)
@@ -1154,13 +1165,7 @@ public class CompilationUnitBuilder {
                     .setExpression(
                         NewArray.newBuilder()
                             .setTypeDescriptor(arrayType)
-                            .setDimensionExpressions(
-                                // The size of the array is the only parameter in the implemented
-                                // function.
-                                parameters
-                                    .stream()
-                                    .map(Variable::getReference)
-                                    .collect(toImmutableList()))
+                            .setDimensionExpressions(dimensionExpressions)
                             .build())
                     .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
                     .setSourcePosition(getSourcePosition(expression))
