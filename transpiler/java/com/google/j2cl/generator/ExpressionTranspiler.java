@@ -156,6 +156,14 @@ public class ExpressionTranspiler {
         return null;
       }
 
+      private void emitVariableWithJsDocAnnotation(Variable variable) {
+        sourceBuilder.append("/** ");
+        sourceBuilder.append(
+            JsDocNameUtils.getJsDocName(variable.getTypeDescriptor(), environment));
+        sourceBuilder.append(" */ ");
+        process(variable);
+      }
+
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
         Variable varargsParameter = expression.getJsVarargsParameter();
@@ -164,16 +172,13 @@ public class ExpressionTranspiler {
         for (Variable parameter : expression.getParameters()) {
           sourceBuilder.append(separator);
           if (parameter != varargsParameter) {
-            sourceBuilder.append("/** ");
-            sourceBuilder.append(
-                JsDocNameUtils.getJsDocName(parameter.getTypeDescriptor(), environment));
-            sourceBuilder.append(" */ ");
+            emitVariableWithJsDocAnnotation(parameter);
           } else {
             // There is no JsDoc syntax for inline annotations on varargs parameters, so
             // do not emit it here.
             sourceBuilder.append("...");
+            process(parameter);
           }
-          process(parameter);
           separator = ", ";
         }
         sourceBuilder.append(") =>");
@@ -401,7 +406,11 @@ public class ExpressionTranspiler {
       @Override
       public Void transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         Variable variable = fragment.getVariable();
-        process(variable);
+        if (fragment.needsTypeDeclaration()) {
+          emitVariableWithJsDocAnnotation(variable);
+        } else {
+          process(variable);
+        }
         if (fragment.getInitializer() != null) {
           sourceBuilder.append(" = ");
           process(fragment.getInitializer());

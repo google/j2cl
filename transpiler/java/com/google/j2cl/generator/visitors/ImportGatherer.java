@@ -41,6 +41,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -121,6 +122,15 @@ public class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitJsDocAnnotatedExpression(JsDocAnnotatedExpression jsDocAnnotatedExpression) {
     addTypeDescriptor(jsDocAnnotatedExpression.getTypeDescriptor(), ImportCategory.LAZY);
+  }
+
+  @Override
+  public void exitVariableDeclarationFragment(
+      VariableDeclarationFragment variableDeclarationFragment) {
+    if (variableDeclarationFragment.needsTypeDeclaration()) {
+      Variable variable = variableDeclarationFragment.getVariable();
+      addTypeDescriptor(variable.getTypeDescriptor(), ImportCategory.LAZY);
+    }
   }
 
   @Override

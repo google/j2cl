@@ -35,6 +35,7 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,16 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           public Expression rewriteFunctionExpression(FunctionExpression functionExpression) {
             return replaceTypeInFunctionExpressionParameters(
                 functionExpression, this::isTypeVariableDeclaredByCurrentMember);
+          }
+
+          @Override
+          public VariableDeclarationFragment rewriteVariableDeclarationFragment(
+              VariableDeclarationFragment variableDeclarationFragment) {
+            Variable variable = variableDeclarationFragment.getVariable();
+            variable.setTypeDescriptor(
+                replaceTypeVariableWithBound(
+                    variable.getTypeDescriptor(), this::isTypeVariableDeclaredByCurrentMember));
+            return variableDeclarationFragment;
           }
 
           private boolean isTypeVariableDeclaredByCurrentMember(TypeDescriptor typeDescriptor) {
@@ -150,7 +161,18 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                 .setAnnotationType(boundType)
                 .build();
           }
+
+          @Override
+          public VariableDeclarationFragment rewriteVariableDeclarationFragment(
+              VariableDeclarationFragment variableDeclarationFragment) {
+            Variable variable = variableDeclarationFragment.getVariable();
+            variable.setTypeDescriptor(
+                replaceTypeVariableWithBound(
+                    variable.getTypeDescriptor(), Predicates.alwaysTrue()));
+            return variableDeclarationFragment;
+          }
         });
+
   }
 
   private TypeDescriptor replaceTypeVariableWithBound(
@@ -191,6 +213,15 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
         }
         return typeDescriptor;
       case UNION:
+        return TypeDescriptors.createUnion(
+            typeDescriptor
+                .getUnionedTypeDescriptors()
+                .stream()
+                .map(
+                    unionTypeDescriptor ->
+                        replaceTypeVariableWithBound(unionTypeDescriptor, shouldBeReplaced))
+                .collect(Collectors.toList()),
+            typeDescriptor.getSuperTypeDescriptor());
       case INTERSECTION:
         throw new AssertionError();
       default:

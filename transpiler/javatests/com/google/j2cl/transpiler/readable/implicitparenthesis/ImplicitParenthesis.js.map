@@ -50,9 +50,9 @@
 ...    }
   }] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [UNKNOWN] => [ImplicitParenthesis.$clinit();]
-[int primitiveInt;] => [let primitiveInt;]
+[int primitiveInt;] => [let /** number */ primitiveInt;]
 [primitiveInt] => [primitiveInt] "primitiveInt"
-[Integer boxedInt;] => [let boxedInt;]
+[Integer boxedInt;] => [let /** Integer */ boxedInt;]
 [boxedInt] => [boxedInt] "boxedInt"
 [primitiveInt = 5;] => [primitiveInt = 5;]
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);]
@@ -66,7 +66,7 @@
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);]
 [primitiveInt = boxedInt = primitiveInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue__();]
 [assert primitiveInt == 5;] => [$Asserts.$enabled() && $Asserts.$assert(primitiveInt == 5);]
-[UNKNOWN] => [let $value;]
+[UNKNOWN] => [let /** Integer */ $value;]
 [primitiveInt = 5;] => [primitiveInt = 5;]
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);]
 [primitiveInt = boxedInt++;] => [primitiveInt = ($value = boxedInt, boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1), $value).m_intValue__();]
@@ -83,11 +83,11 @@
 ...    }
   }] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [UNKNOWN] => [ImplicitParenthesis.$clinit();]
-[int primitiveInt;] => [let primitiveInt;]
+[int primitiveInt;] => [let /** number */ primitiveInt;]
 [primitiveInt] => [primitiveInt] "primitiveInt"
-[Integer boxedInt;] => [let boxedInt;]
+[Integer boxedInt;] => [let /** Integer */ boxedInt;]
 [boxedInt] => [boxedInt] "boxedInt"
-[Boolean boxedBoolean;] => [let boxedBoolean;]
+[Boolean boxedBoolean;] => [let /** ?boolean */ boxedBoolean;]
 [boxedBoolean] => [boxedBoolean] "boxedBoolean"
 [primitiveInt = 5;] => [primitiveInt = 5;]
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);]

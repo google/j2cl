@@ -56,7 +56,7 @@
 [s1 += "a";] => [s1 += "a";]
 [s3 = s1 + s1 + s2 + null + "a";] => [s3 = "" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null) + "a";]
 [s3 = "a" + s1 + s1 + s2 + null;] => [s3 = "a" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);]
-[String s4;] => [let s4;]
+[String s4;] => [let /** ?string */ s4;]
 [s4] => [s4] "s4"
 [char c1 = 'F';] => [let c1 = 70 /* 'F' */;]
 [c1] => [c1] "c1"

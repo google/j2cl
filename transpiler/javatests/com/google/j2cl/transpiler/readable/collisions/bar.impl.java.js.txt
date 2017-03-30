@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.collisions.foo$impl');
 let com_google_j2cl_transpiler_readable_collisions_goog = goog.forwardDeclare('com.google.j2cl.transpiler.readable.collisions.goog$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class bar extends java_lang_Object {
@@ -75,6 +76,7 @@ class bar extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.collisions.foo$impl');
     com_google_j2cl_transpiler_readable_collisions_goog = goog.module.get(
         'com.google.j2cl.transpiler.readable.collisions.goog$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 
@@ -83,7 +85,8 @@ class bar extends java_lang_Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_collisions_bar() {
-    let foo$1$, bar$1$, goog$1$, flip, window$1$;
+    let /** number */ foo$1$, /** number */ bar$1$, /** number */ goog$1$,
+        /** number */ flip, /** number */ window$1$;
     Math.random();
     String.prototype.length;
     new String();

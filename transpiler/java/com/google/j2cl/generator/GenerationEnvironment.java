@@ -25,6 +25,7 @@ import com.google.j2cl.generator.visitors.Import;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /** Contains aliases for variables and Type Descriptors. */
 public class GenerationEnvironment {
@@ -65,6 +66,15 @@ public class GenerationEnvironment {
   public String aliasForType(TypeDescriptor typeDescriptor) {
     checkArgument(!typeDescriptor.isTypeVariable());
     checkArgument(!typeDescriptor.isWildCardOrCapture());
+    if (typeDescriptor.isUnion()) {
+      return "("
+          + typeDescriptor
+              .getUnionedTypeDescriptors()
+              .stream()
+              .map(this::aliasForType)
+              .collect(Collectors.joining(" | "))
+          + ")";
+    }
 
     return aliasForType(typeDescriptor.getTypeDeclaration());
   }

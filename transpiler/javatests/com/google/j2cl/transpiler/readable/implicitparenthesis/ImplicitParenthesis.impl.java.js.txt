@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class ImplicitParenthesis extends java_lang_Object {
@@ -64,8 +65,8 @@ class ImplicitParenthesis extends java_lang_Object {
    */
   static m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
     ImplicitParenthesis.$clinit();
-    let primitiveInt;
-    let boxedInt;
+    let /** number */ primitiveInt;
+    let /** Integer */ boxedInt;
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
@@ -90,7 +91,7 @@ class ImplicitParenthesis extends java_lang_Object {
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 5);
     }
     {
-      let $value;
+      let /** Integer */ $value;
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt =
@@ -116,9 +117,9 @@ class ImplicitParenthesis extends java_lang_Object {
    */
   static m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
     ImplicitParenthesis.$clinit();
-    let primitiveInt;
-    let boxedInt;
-    let boxedBoolean;
+    let /** number */ primitiveInt;
+    let /** Integer */ boxedInt;
+    let /** ?boolean */ boxedBoolean;
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
@@ -165,6 +166,7 @@ class ImplicitParenthesis extends java_lang_Object {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 
