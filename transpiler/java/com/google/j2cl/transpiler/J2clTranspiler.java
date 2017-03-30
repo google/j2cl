@@ -39,6 +39,7 @@ import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStaticClassInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
+import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
@@ -83,9 +84,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-/**
- * Translation tool for generating JavaScript source files from Java sources.
- */
+/** Translation tool for generating JavaScript source files from Java sources. */
 public class J2clTranspiler {
   private final Problems problems = new Problems();
   private FrontendOptions options;
@@ -250,6 +249,8 @@ public class J2clTranspiler {
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),
+            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+            new InsertTypeAnnotationOnGenericReturnTypes(),
             // TODO: remove the temporary fix once we switch to JSCompiler's new type checker.
             new FixTypeVariablesInMethods(),
             new InsertStaticClassInitializerMethods(),
@@ -315,9 +316,7 @@ public class J2clTranspiler {
     }
   }
 
-  /**
-   * Entry point for the tool, which runs the entire J2CL pipeline.
-   */
+  /** Entry point for the tool, which runs the entire J2CL pipeline. */
   public static void main(String[] args) {
     J2clTranspiler transpiler = new J2clTranspiler();
     Result result = transpiler.transpile(args);

@@ -16,6 +16,7 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -102,8 +103,9 @@ class Main extends java_lang_Object {
    */
   static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
-    let o1 = Class.$get($JavaScriptObject);
-    o1 = Class.$get(java_lang_Object, 1);
+    let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));
+    o1 = /**@type {Class<Array<Array<Bar>>>} */ (
+        Class.$get(java_lang_Object, 1));
   }
 
   /**
@@ -162,6 +164,7 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
     Class = goog.module.get('java.lang.Class$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();

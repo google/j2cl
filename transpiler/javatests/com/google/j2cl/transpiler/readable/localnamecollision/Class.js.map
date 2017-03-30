@@ -1,9 +1,9 @@
 [public class Class {
   public void main() {
 ...  }
-}] => [class Class extends java_lang_Object {
+}] => [class com_google_j2cl_transpiler_readable_localnamecollision_Class extends java_lang_Object {
   /**
-...exports = Class;
+...exports = com_google_j2cl_transpiler_readable_localnamecollision_Class;
 ] "com.google.j2cl.transpiler.readable.localnamecollision.Class"
 [public class Class {
   public void main() {
@@ -20,8 +20,8 @@
    * Factory method corresponding to constructor 'Class()'.
 ...    return $instance;
   }] "com.google.j2cl.transpiler.readable.localnamecollision.Class.<ctor>"
-[UNKNOWN] => [Class.$clinit();]
-[UNKNOWN] => [let $instance = new Class();]
+[UNKNOWN] => [com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit();]
+[UNKNOWN] => [let $instance = new com_google_j2cl_transpiler_readable_localnamecollision_Class();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();]
 [UNKNOWN] => [return $instance;]
 [public class Class {
@@ -37,7 +37,7 @@
     new Class().getClass();
   }] => [/**
    * @return {void}
-...    $Objects.m_getClass__java_lang_Object(Class.$create__());
+...    /**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(com_google_j2cl_transpiler_readable_localnamecollision_Class.$create__()));
   }] "com.google.j2cl.transpiler.readable.localnamecollision.Class.main"
-[new Class().getClass();] => [$Objects.m_getClass__java_lang_Object(Class.$create__());]
+[new Class().getClass();] => [/**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(com_google_j2cl_transpiler_readable_localnamecollision_Class.$create__()));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

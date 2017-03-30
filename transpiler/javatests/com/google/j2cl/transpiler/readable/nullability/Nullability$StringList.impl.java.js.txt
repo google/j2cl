@@ -59,7 +59,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_spliterator__() {
-    return List$$Overlay.m_spliterator__java_util_List(this);
+    return /**@type {Spliterator<C_E>} */ (
+        List$$Overlay.m_spliterator__java_util_List(this));
   }
 
   /**
@@ -69,7 +70,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_parallelStream__() {
-    return Collection$$Overlay.m_parallelStream__java_util_Collection(this);
+    return /**@type {Stream<C_E>} */ (
+        Collection$$Overlay.m_parallelStream__java_util_Collection(this));
   }
 
   /**
@@ -79,7 +81,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_stream__() {
-    return Collection$$Overlay.m_stream__java_util_Collection(this);
+    return /**@type {Stream<C_E>} */ (
+        Collection$$Overlay.m_stream__java_util_Collection(this));
   }
 
   /**

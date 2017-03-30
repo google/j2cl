@@ -38,33 +38,33 @@
 ...    objectCalls.getClass();
   }] => [/**
    * @return {void}
-...    $Objects.m_getClass__java_lang_Object(objectCalls);
+...    /**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(objectCalls));
   }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.main"
 [Object object = new Object();] => [let object = java_lang_Object.$create__();]
 [object] => [object] "object"
 [object.equals(object);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(object, object);]
 [object.hashCode();] => [$Objects.m_hashCode__java_lang_Object(object);]
 [object.toString();] => [$Objects.m_toString__java_lang_Object(object);]
-[object.getClass();] => [$Objects.m_getClass__java_lang_Object(object);]
+[object.getClass();] => [/**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(object));]
 [ObjectCalls[] objectCalls = new ObjectCalls[1];] => [let objectCalls = /**@type {!Array<ObjectCalls>} */ ($Arrays.$create([1], ObjectCalls));]
 [objectCalls] => [objectCalls] "objectCalls"
 [objectCalls.equals(objectCalls);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(objectCalls, objectCalls);]
 [objectCalls.hashCode();] => [$Objects.m_hashCode__java_lang_Object(objectCalls);]
 [objectCalls.toString();] => [$Objects.m_toString__java_lang_Object(objectCalls);]
-[objectCalls.getClass();] => [$Objects.m_getClass__java_lang_Object(objectCalls);]
+[objectCalls.getClass();] => [/**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(objectCalls));]
 [public void test() {
     equals(new Object());
 ...    this.getClass();
   }] => [/**
    * @return {void}
-...    this.m_getClass__();
+...    /**@type {Class<?>} */ (this.m_getClass__());
   }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.test"
 [equals(new Object());] => [this.equals(java_lang_Object.$create__());]
 [hashCode();] => [this.hashCode();]
 [toString();] => [this.toString();]
-[getClass();] => [this.m_getClass__();]
+[getClass();] => [/**@type {Class<?>} */ (this.m_getClass__());]
 [this.equals(new Object());] => [this.equals(java_lang_Object.$create__());]
 [this.hashCode();] => [this.hashCode();]
 [this.toString();] => [this.toString();]
-[this.getClass();] => [this.m_getClass__();]
+[this.getClass();] => [/**@type {Class<?>} */ (this.m_getClass__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]

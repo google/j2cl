@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Objects = goog.forwardDeclare('com.google.common.base.Objects$impl');
 let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
@@ -53,12 +54,14 @@ class Timing extends java_lang_Object {
    */
   static m_run__() {
     Timing.$clinit();
-    let fooStrings = Lists.m_newArrayList__arrayOf_java_lang_Object(
-        /**@type {!Array<?string>} */ (
-            $Arrays.$init(['foo'], java_lang_String)));
-    let barStrings = Lists.m_newArrayList__arrayOf_java_lang_Object(
-        /**@type {!Array<?string>} */ (
-            $Arrays.$init(['bar'], java_lang_String)));
+    let fooStrings = /**@type {ArrayList<?string>} */ (
+        Lists.m_newArrayList__arrayOf_java_lang_Object(
+            /**@type {!Array<?string>} */ (
+                $Arrays.$init(['foo'], java_lang_String))));
+    let barStrings = /**@type {ArrayList<?string>} */ (
+        Lists.m_newArrayList__arrayOf_java_lang_Object(
+            /**@type {!Array<?string>} */ (
+                $Arrays.$init(['bar'], java_lang_String))));
     return Objects.m_equal__java_lang_Object__java_lang_Object(
         fooStrings, barStrings);
   }
@@ -92,6 +95,7 @@ class Timing extends java_lang_Object {
     Objects = goog.module.get('com.google.common.base.Objects$impl');
     Lists = goog.module.get('com.google.common.collect.Lists$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     java_lang_Object.$clinit();
   }

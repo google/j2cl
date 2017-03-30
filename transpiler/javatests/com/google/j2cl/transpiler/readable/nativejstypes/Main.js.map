@@ -88,12 +88,12 @@
 ...    o1 = Bar[][].class;
   }] => [/**
    * @return {void}
-...    o1 = Class.$get(java_lang_Object, 1);
+...    o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [UNKNOWN] => [Main.$clinit();]
-[Object o1 = Bar.class;] => [let o1 = Class.$get($JavaScriptObject);]
+[Object o1 = Bar.class;] => [let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));]
 [o1] => [o1] "o1"
-[o1 = Bar[][].class;] => [o1 = Class.$get(java_lang_Object, 1);]
+[o1 = Bar[][].class;] => [o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));]
 [public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
 ...    bar.equals(new Object());

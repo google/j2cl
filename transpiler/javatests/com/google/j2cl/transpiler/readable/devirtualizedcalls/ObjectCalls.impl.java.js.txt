@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls$
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -55,14 +56,14 @@ class ObjectCalls extends java_lang_Object {
     $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
     $Objects.m_hashCode__java_lang_Object(object);
     $Objects.m_toString__java_lang_Object(object);
-    $Objects.m_getClass__java_lang_Object(object);
+    /**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(object));
     let objectCalls =
         /**@type {!Array<ObjectCalls>} */ ($Arrays.$create([1], ObjectCalls));
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         objectCalls, objectCalls);
     $Objects.m_hashCode__java_lang_Object(objectCalls);
     $Objects.m_toString__java_lang_Object(objectCalls);
-    $Objects.m_getClass__java_lang_Object(objectCalls);
+    /**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(objectCalls));
   }
 
   /**
@@ -73,11 +74,11 @@ class ObjectCalls extends java_lang_Object {
     this.equals(java_lang_Object.$create__());
     this.hashCode();
     this.toString();
-    this.m_getClass__();
+    /**@type {Class<?>} */ (this.m_getClass__());
     this.equals(java_lang_Object.$create__());
     this.hashCode();
     this.toString();
-    this.m_getClass__();
+    /**@type {Class<?>} */ (this.m_getClass__());
   }
 
   /**
@@ -106,6 +107,7 @@ class ObjectCalls extends java_lang_Object {
    */
   static $clinit() {
     ObjectCalls.$clinit = function() {};
+    Class = goog.module.get('java.lang.Class$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();

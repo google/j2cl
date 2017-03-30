@@ -41,9 +41,9 @@
 ...    return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);
   }] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [UNKNOWN] => [Timing.$clinit();]
-[List<String> fooStrings = Lists.newArrayList("foo");] => [let fooStrings = Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["foo"], java_lang_String)));]
+[List<String> fooStrings = Lists.newArrayList("foo");] => [let fooStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["foo"], java_lang_String))));]
 [fooStrings] => [fooStrings] "fooStrings"
-[List<String> barStrings = Lists.newArrayList("bar");] => [let barStrings = Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["bar"], java_lang_String)));]
+[List<String> barStrings = Lists.newArrayList("bar");] => [let barStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["bar"], java_lang_String))));]
 [barStrings] => [barStrings] "barStrings"
 [return Objects.equal(fooStrings, barStrings);] => [return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

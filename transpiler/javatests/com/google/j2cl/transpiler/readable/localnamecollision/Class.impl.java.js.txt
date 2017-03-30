@@ -10,10 +10,12 @@ goog.module('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl')
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class Class extends java_lang_Object {
+class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
+    java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -24,12 +26,13 @@ class Class extends java_lang_Object {
 
   /**
    * Factory method corresponding to constructor 'Class()'.
-   * @return {!Class}
+   * @return {!com_google_j2cl_transpiler_readable_localnamecollision_Class}
    * @public
    */
   static $create__() {
-    Class.$clinit();
-    let $instance = new Class();
+    com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit();
+    let $instance =
+        new com_google_j2cl_transpiler_readable_localnamecollision_Class();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();
     return $instance;
@@ -50,7 +53,9 @@ class Class extends java_lang_Object {
    * @public
    */
   m_main__() {
-    $Objects.m_getClass__java_lang_Object(Class.$create__());
+    /**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(
+        com_google_j2cl_transpiler_readable_localnamecollision_Class
+            .$create__()));
   }
 
   /**
@@ -60,7 +65,8 @@ class Class extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof Class;
+    return instance instanceof
+        com_google_j2cl_transpiler_readable_localnamecollision_Class;
   }
 
   /**
@@ -70,7 +76,9 @@ class Class extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Class);
+    return $Util.$canCastClass(
+        classConstructor,
+        com_google_j2cl_transpiler_readable_localnamecollision_Class);
   }
 
   /**
@@ -78,7 +86,9 @@ class Class extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    Class.$clinit = function() {};
+    com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit =
+        function() {};
+    java_lang_Class = goog.module.get('java.lang.Class$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();
   }
@@ -91,7 +101,7 @@ class Class extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Class,
+    com_google_j2cl_transpiler_readable_localnamecollision_Class,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
 
@@ -100,5 +110,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = Class;
+exports = com_google_j2cl_transpiler_readable_localnamecollision_Class;
 //# sourceMappingURL=Class.js.map

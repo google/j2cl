@@ -72,7 +72,8 @@ class CastGenericReturnType extends java_lang_Object {
       foo) {
     CastGenericReturnType.$clinit();
     if (!$Equality.$same(foo, null)) {
-      return CastGenericReturnType.m_inferGeneric__java_lang_Object(foo);
+      return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (
+          CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));
     }
     return null;
   }
@@ -103,7 +104,8 @@ class CastGenericReturnType extends java_lang_Object {
    */
   static m_main__() {
     CastGenericReturnType.$clinit();
-    let list = CastGenericReturnType.m_newArrayList__java_lang_Object('foo');
+    let list = /**@type {ArrayList<*>} */ (
+        CastGenericReturnType.m_newArrayList__java_lang_Object('foo'));
     CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);
   }
 
