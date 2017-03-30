@@ -1,5 +1,8 @@
 package com.google.j2cl.transpiler.readable.simpleautoboxing;
 
+import javaemul.internal.annotations.DoNotAutobox;
+import jsinterop.annotations.JsMethod;
+
 @SuppressWarnings({
   "IdentityBinaryExpression",
   "BoxedPrimitiveConstructor",
@@ -79,6 +82,27 @@ public class SimpleAutoBoxing {
     return null;
   }
 
+  public double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
+    return (double) o;
+  }
+
+  public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
+  @JsMethod
+  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
   @SuppressWarnings("unused")
   public void testNull() {
     Boolean b = null;
@@ -140,6 +164,10 @@ public class SimpleAutoBoxing {
     boxI = +boxI;
     boxI = -boxI;
     boxI = ~boxI;
+
+    double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
+    unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);
+    unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
   }
 
   @SuppressWarnings("unused")

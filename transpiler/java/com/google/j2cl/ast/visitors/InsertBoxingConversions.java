@@ -75,6 +75,9 @@ public class InsertBoxingConversions extends NormalizationPass {
       @Override
       public Expression rewriteMethodInvocationContext(
           ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+        if (parameterDescriptor.isDoNotAutobox()) {
+          return argumentExpression;
+        }
         return maybeBox(parameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
     };
@@ -83,13 +86,16 @@ public class InsertBoxingConversions extends NormalizationPass {
   private static Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
     if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isNonVoidPrimitiveType(expression.getTypeDescriptor())
-        && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())) {
+        && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())
+        && !toTypeDescriptor.isNative()) {
       return AstUtils.box(expression);
     }
     return expression;
   }
 
-  private Expression maybeNarrowPrimitive(TypeDescriptor toTypeDescriptor, Expression expression) {
+  @SuppressWarnings("ReferenceEquality")
+  private static Expression maybeNarrowPrimitive(
+      TypeDescriptor toTypeDescriptor, Expression expression) {
     // Get the literal's value.
     int value;
     if (expression instanceof NumberLiteral) {

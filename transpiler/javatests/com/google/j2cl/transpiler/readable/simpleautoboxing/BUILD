@@ -16,4 +16,5 @@ readable_example(
         "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:SelfEquality:OFF",
     ],
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

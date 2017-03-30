@@ -15,4 +15,5 @@ load(
 integration_test(
     name = "simpleautoboxing",
     srcs = glob(["*.java"]),
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

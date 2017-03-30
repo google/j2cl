@@ -53,12 +53,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract boolean isJsOptional();
 
+    public abstract boolean isDoNotAutobox();
+
     public abstract Builder toBuilder();
 
     public static Builder newBuilder() {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
-          .setJsOptional(false);
+          .setJsOptional(false)
+          .setDoNotAutobox(false);
     }
 
     private static final ThreadLocalInterner<ParameterDescriptor> interner =
@@ -72,6 +75,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       public abstract Builder setVarargs(boolean isVarargs);
 
       public abstract Builder setJsOptional(boolean isJsOptional);
+
+      public abstract Builder setDoNotAutobox(boolean isDoNotAutobox);
 
       abstract ParameterDescriptor autoBuild();
 

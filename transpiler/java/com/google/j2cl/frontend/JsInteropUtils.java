@@ -138,6 +138,10 @@ public class JsInteropUtils {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(methodBinding, i) != null;
   }
 
+  public static boolean isDoNotAutobox(IMethodBinding methodBinding, int i) {
+    return JsInteropAnnotationUtils.getDoNotAutoboxAnnotation(methodBinding, i) != null;
+  }
+
   public static boolean isJsType(ITypeBinding typeBinding) {
     return JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding) != null;
   }

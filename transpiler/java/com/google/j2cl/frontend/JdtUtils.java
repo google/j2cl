@@ -713,6 +713,7 @@ public class JdtUtils {
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(
                   i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
+              .setDoNotAutobox(JsInteropUtils.isDoNotAutobox(methodBinding, i))
               .build());
     }
 

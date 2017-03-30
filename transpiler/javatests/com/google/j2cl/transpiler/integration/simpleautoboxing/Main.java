@@ -1,5 +1,9 @@
 package com.google.j2cl.transpiler.integration.simpleautoboxing;
 
+import javaemul.internal.annotations.DoNotAutobox;
+import jsinterop.annotations.JsMethod;
+
+@SuppressWarnings("BoxedPrimitiveConstructor")
 public class Main {
   public Byte box(byte b) {
     return new Byte(b);
@@ -69,6 +73,27 @@ public class Main {
     return d;
   }
 
+  public double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
+    return (Double) o;
+  }
+
+  public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
+  @JsMethod
+  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
   public void testBoxByParameter() {
     byte b = (byte) 100;
     double d = 1111.0;
@@ -86,6 +111,9 @@ public class Main {
     assert (unbox(s) == s);
     assert (unbox(bool) == bool);
     assert (unbox(c) == c);
+    assert (takesAndReturnsPrimitiveDouble(3) == 3);
+    assert (sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
+    assert (sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
   }
 
   public void testBoxByAssignment() {
@@ -356,7 +384,7 @@ public class Main {
    * Actually the boolean conditional unboxings don't get inserted and aren't needed because we have
    * devirtualized Boolean.
    */
-  @SuppressWarnings("unused")
+  @SuppressWarnings("LoopConditionChecker")
   public void testConditionals() {
     Boolean boxedFalseBoolean = new Boolean(false);
 
@@ -384,7 +412,7 @@ public class Main {
       doFail();
     }
 
-    Object blah = boxedFalseBoolean ? doFail() : doNothing();
+    Object unusedBlah = boxedFalseBoolean ? doFail() : doNothing();
 
     // This one actually matters since we don't devirtualize Integer.
     switch (new Integer(100)) {

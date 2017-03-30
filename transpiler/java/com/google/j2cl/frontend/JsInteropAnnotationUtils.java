@@ -36,6 +36,8 @@ public class JsInteropAnnotationUtils {
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
   private static final String SUPPRESS_WARNINGS_NAME = "java.lang.SuppressWarnings";
+  private static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
+      "javaemul.internal.annotations.DoNotAutobox";
 
   private JsInteropAnnotationUtils() {}
 
@@ -73,6 +75,12 @@ public class JsInteropAnnotationUtils {
       IMethodBinding methodBinding, int parameterIndex) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getParameterAnnotations(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getDoNotAutoboxAnnotation(
+      IMethodBinding methodBinding, int parameterIndex) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getParameterAnnotations(parameterIndex), DO_NOT_AUTOBOX_ANNOTATION_NAME);
   }
 
   public static IAnnotationBinding getJsOverlayAnnotation(IBinding methodBinding) {

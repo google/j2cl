@@ -177,6 +177,54 @@
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.takesAndReturnsVoid"
 [v] => [v] "v"
 [return null;] => [return null;]
+[public double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
+    return (double) o;
+  }] => [/**
+   * @param {*} o
+...    return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.takesObjectAndReturnsPrimitiveDouble"
+[o] => [o] "o"
+[return (double) o;] => [return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));]
+[public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+...    return sum;
+  }] => [/**
+   * @param {Array<*>} numbers
+...    return sum;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
+[numbers] => [numbers] "numbers"
+[double sum = 0;] => [let sum = 0;]
+[sum] => [sum] "sum"
+[for (Object number : numbers) {
+      sum += (Double) number;
+    }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+      let number$1$ = $array[$index];
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));
+    }]
+[UNKNOWN] => [let number$1$ = $array[$index];]
+[number] => [number$1$] "number"
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));]
+[return sum;] => [return sum;]
+[@JsMethod
+  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
+...    return sum;
+  }] => [/**
+   * @param {...*} numbers
+...    return sum;
+  }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
+[numbers] => [numbers] "numbers"
+[double sum = 0;] => [let sum = 0;]
+[sum] => [sum] "sum"
+[for (Object number : numbers) {
+      sum += (Double) number;
+    }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
+      let number$1$ = $array[$index];
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));
+    }]
+[UNKNOWN] => [let number$1$ = $array[$index];]
+[number] => [number$1$] "number"
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));]
+[return sum;] => [return sum;]
 [@SuppressWarnings("unused")
   public void testNull() {
 ...    Long l = null;
@@ -194,10 +242,10 @@
 [l] => [l] "l"
 [@SuppressWarnings("unused")
   public void testBoxing() {
-...    boxI = ~boxI;
+...    unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
   }] => [/**
    * @return {void}
-...    boxI = Integer.m_valueOf__int(~boxI.m_intValue__());
+...    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boolean bool = true;] => [let bool = true;]
 [bool] => [bool] "bool"
@@ -259,6 +307,10 @@
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__());]
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());]
 [boxI = ~boxI;] => [boxI = Integer.m_valueOf__int(~boxI.m_intValue__());]
+[double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);] => [let unusedDouble = this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);]
+[unusedDouble] => [unusedDouble] "unusedDouble"
+[unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);] => [unusedDouble = this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 1.5, 1, 1, 1]);]
+[unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);] => [unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);]
 [@SuppressWarnings("unused")
   public void testUnboxing() {
 ...    i = ~boxI;

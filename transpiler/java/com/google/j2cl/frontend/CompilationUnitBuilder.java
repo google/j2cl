@@ -61,6 +61,7 @@ import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -1718,8 +1719,12 @@ public class CompilationUnitBuilder {
         IMethodBinding methodBinding, List<Expression> arguments) {
       checkArgument(methodBinding.isVarargs());
       int parametersLength = methodBinding.getParameterTypes().length;
-      TypeDescriptor varargsTypeDescriptor =
-          JdtUtils.createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      ParameterDescriptor varargsParameterDescriptor =
+          methodDescriptor
+              .getParameterDescriptors()
+              .get(methodDescriptor.getParameterDescriptors().size() - 1);
+      TypeDescriptor varargsTypeDescriptor = varargsParameterDescriptor.getTypeDescriptor();
       if (arguments.size() < parametersLength) {
         // no argument for the varargs, add an empty array.
         return new ArrayLiteral(varargsTypeDescriptor);
@@ -1727,6 +1732,14 @@ public class CompilationUnitBuilder {
       List<Expression> valueExpressions = new ArrayList<>();
       for (int i = parametersLength - 1; i < arguments.size(); i++) {
         valueExpressions.add(arguments.get(i));
+      }
+      if (varargsParameterDescriptor.isDoNotAutobox()) {
+        // Use a NATIVE_OBJECT[] instead of Object[] for @DoNotAutobox varargs, so that the
+        // boxing logic can avoid boxing here.
+        checkArgument(
+            TypeDescriptors.isJavaLangObject(
+                varargsParameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor()));
+        varargsTypeDescriptor = TypeDescriptors.getForArray(TypeDescriptors.NATIVE_OBJECT, 1);
       }
       return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
     }
