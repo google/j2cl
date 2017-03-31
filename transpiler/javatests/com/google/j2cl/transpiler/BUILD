@@ -50,7 +50,10 @@ j2cl_transpile(
     srcs = ["//jre/java:jre_java_files"],
     native_srcs_zips = ["//jre/java:jre_native_zips"],
     transpiler = ":RerunningJ2clTranspiler",
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    deps = [
+        "//third_party/java/gwt:gwt-javaemul-internal-annotations",
+        "//third_party/java/gwt:gwt-jsinterop-annotations",
+    ],
 )
 
 load("//tools/build_rules:build_test.bzl", "build_test")
