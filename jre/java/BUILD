@@ -4,8 +4,8 @@
 # Can depend on the native bootstrap JS but not on the VM opcode JS.
 
 package(default_visibility = [
-    "//:__subpackages__",
     "//third_party/java/j2cl:__subpackages__",
+    "//:__subpackages__",
 ])
 
 # Google owns the copyright

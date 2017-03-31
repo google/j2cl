@@ -19,5 +19,5 @@ integration_test(
         "Main.native.js",
     ],
     native_srcs_pkg = "com/google/j2cl/transpiler/integration/jsproperties",
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

@@ -16,5 +16,5 @@ integration_test(
     name = "removeunusedcontructorprops",
     srcs = glob(["**/*.java"]),
     native_srcs = ["Main.native.js"],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

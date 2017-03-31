@@ -32,6 +32,6 @@ readable_example(
         ":_externs",
     ],
     deps = [
-        "//jre/java:gwt-jsinterop-annotations",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
     ],
 )

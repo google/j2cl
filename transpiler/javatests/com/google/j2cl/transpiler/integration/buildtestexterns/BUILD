@@ -33,5 +33,5 @@ integration_test(
     test_externs_list = [
         ":externs",
     ],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

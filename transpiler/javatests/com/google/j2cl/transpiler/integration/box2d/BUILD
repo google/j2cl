@@ -29,7 +29,7 @@ integration_test(
         "//third_party/java/jbox2d:jbox2d_gwt",
     ],
     deps = [
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//third_party/java/jbox2d:jbox2d_j2cl",
-        "//jre/java:gwt-jsinterop-annotations",
     ],
 )

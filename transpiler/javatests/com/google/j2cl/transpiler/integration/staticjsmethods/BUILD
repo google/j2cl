@@ -24,5 +24,5 @@ integration_test(
     srcs = glob(["*.java"]),
     js_deps = [":Bar"],
     native_srcs = ["Main.native.js"],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

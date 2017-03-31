@@ -24,7 +24,7 @@ j2cl_mirror_from_gwt(
     ],
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
-        "//jre/java:gwt-jsinterop-annotations",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//third_party/java/junit:junit-j2cl",
     ],
 )

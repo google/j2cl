@@ -20,5 +20,5 @@ readable_example(
         "II.java",
         "JJ.java",
     ],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

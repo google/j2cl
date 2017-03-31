@@ -27,7 +27,7 @@ integration_test(
     js_deps = [":native_types"],
     main_class = "woo.Main",
     native_srcs = glob(["*.native.js"]),
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
 
 js_library(

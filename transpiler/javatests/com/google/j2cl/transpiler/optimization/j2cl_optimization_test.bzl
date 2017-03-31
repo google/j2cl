@@ -27,5 +27,5 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
       deps=[
           ":shared",
           "//third_party/java/junit:junit-j2cl",
-          "//jre/java:gwt-jsinterop-annotations",
+          "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
       ],)

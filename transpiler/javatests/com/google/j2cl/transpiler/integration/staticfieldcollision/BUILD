@@ -14,5 +14,5 @@ load(
 integration_test(
     name = "staticfieldcollision",
     srcs = glob(["*.java"]),
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

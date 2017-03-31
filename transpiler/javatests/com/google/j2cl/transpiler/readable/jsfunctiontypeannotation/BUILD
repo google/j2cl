@@ -14,5 +14,5 @@ readable_example(
     srcs = glob(["*.java"]),
     native_srcs = ["native_sources/Main.native.js"],
     native_srcs_pkg = "com/google/j2cl/transpiler/readable/jsfunctiontypeannotation",
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

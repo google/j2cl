@@ -18,7 +18,7 @@ integration_test(
     js_depinfos = ["handrolled.depinfo"],
     plugins = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt/apt"],
     deps = [
-        "//jre/java:gwt-jsinterop-annotations",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt/apt:annotation",
     ],
 )

@@ -18,7 +18,7 @@ integration_test(
     js_deps = [":native_types"],
     deps = [
         ":outer",
-        "//jre/java:gwt-jsinterop-annotations",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
     ],
 )
 

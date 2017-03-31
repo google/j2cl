@@ -19,5 +19,5 @@ integration_test(
         "jre.checks.checkLevel": "'NORMAL'",
         "jre.checkedMode": "'ENABLED'",
     },
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
