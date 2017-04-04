@@ -28,6 +28,8 @@ class Main extends java_lang_Object {
   constructor(a) {
     Main.$clinit();
     super();
+    /** @public {?function(?string=, ...*):*} */
+    this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main = null;
     this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
         a);
   }
@@ -114,7 +116,12 @@ class Main extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jsoptional_Main() {}
+  $init__com_google_j2cl_transpiler_readable_jsoptional_Main() {
+    this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main =
+        ((/** ?string */ s, ...varargs) => {
+          return s;
+        });
+  }
 };
 
 $Util.$setClassMetadata(

@@ -15,8 +15,10 @@ public class Main {
 
   @JsFunction
   interface Function {
-    Object f1(@JsOptional String i, Object... args);
+    Object f1(@JsOptional String s, Object... args);
   }
+
+  Function f = (s, varargs) -> s;
 
   @JsConstructor
   public Main(@JsOptional String a) {}
@@ -42,6 +44,7 @@ public class Main {
   }
 
   @JsType
+  @SuppressWarnings("ClassCanBeStatic")
   class SpecializedSubtype implements I<String> {
     public SpecializedSubtype(@JsOptional Object a) {}
 
