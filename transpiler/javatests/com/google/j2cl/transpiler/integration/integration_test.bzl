@@ -24,6 +24,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_UNOPTIMIZED_DEFS",
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
+load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
 
@@ -185,25 +186,37 @@ def integration_test(name,
           "--closure_entry_point=gen.test.Harness"
       ] + defs,
       externs_list=test_externs_list,
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
       jvm_flags=[
-          "-Dcom.google.testing.selenium.browser=CHROME_LINUX",
           "-Djsrunner.net.useJsBundles=true"
       ],
   )
 
   jsunit_test(
-      name="uncompiled_test",
-      tags=["manual", "notap"] if disable_uncompiled_test else [],
+      name="uncompiled_test_debug",
+      tags=["manual", "notap"],
       **jsunit_test_args
   )
 
+  web_test(
+      name="uncompiled_test",
+      browser="//testing/web/browsers:chrome-linux",
+      tags=["manual", "notap"] if disable_uncompiled_test else [],
+      test=":uncompiled_test_debug"
+  )
+
   jsunit_test(
-      name="compiled_test",
+      name="compiled_test_debug",
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      tags=["manual", "notap"] if disable_compiled_test else [],
+      tags=["manual", "notap"],
       **jsunit_test_args
+  )
+
+  web_test(
+      name="compiled_test",
+      browser="//testing/web/browsers:chrome-linux",
+      tags=["manual", "notap"] if disable_compiled_test else [],
+      test=":compiled_test_debug"
   )
 
 
