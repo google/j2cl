@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A reference to a method. */
@@ -551,7 +552,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public MethodDescriptor specializeTypeVariables(
       Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
-    if (applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+    return specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
+  }
+
+  public MethodDescriptor specializeTypeVariables(
+      Function<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (replacingTypeDescriptorByTypeVariable == Function.<TypeDescriptor>identity()) {
       return this;
     }
 
@@ -561,14 +568,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     // Specialized type variables (possibly recursively).
     TypeDescriptor specializedReturnTypeDescriptor =
-        returnTypeDescriptor.specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters);
+        returnTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
     ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
         parameterTypeDescriptors
             .stream()
             .map(
                 typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(
-                        applySpecializedTypeArgumentByTypeParameters))
+                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
     return MethodDescriptor.Builder.from(this)

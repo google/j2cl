@@ -32,7 +32,9 @@ import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
@@ -297,6 +299,14 @@ public class TypeDescriptors {
         false);
   }
 
+  public static Function<TypeDescriptor, TypeDescriptor> mappingFunctionFromMap(
+      Map<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    return replacingTypeDescriptorByTypeVariable.isEmpty()
+        ? Function.identity()
+        : typeDescriptor ->
+            replacingTypeDescriptorByTypeVariable.getOrDefault(typeDescriptor, typeDescriptor);
+  }
+
   /** Holds the bootstrap types. */
   @SuppressWarnings("ImmutableEnumChecker")
   public enum BootstrapType {
@@ -402,6 +412,7 @@ public class TypeDescriptors {
     }
     return TypeDescriptor.newBuilder()
         .setKind(Kind.INTERSECTION)
+        .setRawTypeDescriptorFactory(() -> superTypeDescriptor.getRawTypeDescriptor())
         .setTypeArgumentDescriptors(typeArguments)
         .setNullable(true)
         .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
@@ -475,16 +486,6 @@ public class TypeDescriptors {
         .setTypeDeclaration(typeDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setKind(kind)
-        .build();
-  }
-
-  public static TypeDescriptor replaceTypeArgumentDescriptors(
-      TypeDescriptor originalTypeDescriptor, Iterable<TypeDescriptor> typeArgumentTypeDescriptors) {
-    checkArgument(!originalTypeDescriptor.isArray());
-    checkArgument(!originalTypeDescriptor.isTypeVariable());
-    checkArgument(!originalTypeDescriptor.isUnion());
-    return TypeDescriptor.Builder.from(originalTypeDescriptor)
-        .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
         .build();
   }
 

@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
@@ -968,37 +969,69 @@ public abstract class TypeDescriptor extends Node
 
   public TypeDescriptor specializeTypeVariables(
       Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+    return specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
+  }
+
+  public TypeDescriptor specializeTypeVariables(
+      Function<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (replacingTypeDescriptorByTypeVariable == Function.<TypeDescriptor>identity()) {
+      return this;
+    }
     switch (getKind()) {
       case PRIMITIVE:
         return this;
       case ARRAY:
         return TypeDescriptors.getForArray(
-            getLeafTypeDescriptor()
-                .specializeTypeVariables(applySpecializedTypeArgumentByTypeParameters),
-            getDimensions());
+            getLeafTypeDescriptor().specializeTypeVariables(replacingTypeDescriptorByTypeVariable),
+            getDimensions(),
+            isNullable());
       case CLASS:
       case INTERFACE:
       case ENUM:
         if (getTypeArgumentDescriptors().isEmpty()
-            || applySpecializedTypeArgumentByTypeParameters.isEmpty()) {
+            && !isJsFunctionInterface()
+            && !isJsFunctionImplementation()) {
           return this;
         }
 
-        return TypeDescriptors.replaceTypeArgumentDescriptors(
-            this,
-            getTypeArgumentDescriptors()
+        return Builder.from(this)
+            .setTypeArgumentDescriptors(
+                getTypeArgumentDescriptors()
+                    .stream()
+                    .map(t -> t.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
+                    .collect(toImmutableList()))
+            .setJsFunctionMethodDescriptorFactory(
+                () ->
+                    getJsFunctionMethodDescriptor() != null
+                        ? getJsFunctionMethodDescriptor()
+                            .specializeTypeVariables(replacingTypeDescriptorByTypeVariable)
+                        : null)
+            .setConcreteJsFunctionMethodDescriptorFactory(
+                () ->
+                    getConcreteJsFunctionMethodDescriptor() != null
+                        ? getConcreteJsFunctionMethodDescriptor()
+                            .specializeTypeVariables(replacingTypeDescriptorByTypeVariable)
+                        : null)
+            .build();
+      case TYPE_VARIABLE:
+      case WILDCARD_OR_CAPTURE:
+        return replacingTypeDescriptorByTypeVariable.apply(this);
+      case UNION:
+        return TypeDescriptors.createUnion(
+            getUnionedTypeDescriptors()
                 .stream()
                 .map(
                     typeDescriptor ->
                         typeDescriptor.specializeTypeVariables(
-                            applySpecializedTypeArgumentByTypeParameters))
-                .collect(toImmutableList()));
-      case TYPE_VARIABLE:
-      case WILDCARD_OR_CAPTURE:
-        return applySpecializedTypeArgumentByTypeParameters.getOrDefault(this, this);
+                            replacingTypeDescriptorByTypeVariable))
+                .collect(ImmutableList.toImmutableList()),
+            getSuperTypeDescriptor() != null
+                ? getSuperTypeDescriptor()
+                    .specializeTypeVariables(replacingTypeDescriptorByTypeVariable)
+                : null);
       default:
-        throw new IllegalStateException(
-            "Union and intersection types should not need to be specialized");
+        throw new IllegalStateException("Intersection types should not need to be specialized");
     }
   }
 

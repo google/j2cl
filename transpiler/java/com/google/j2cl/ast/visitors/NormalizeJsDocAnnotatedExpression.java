@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
@@ -43,16 +45,21 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
             }
 
             TypeDescriptor annotationTypeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
+            Iterable<TypeDescriptor> typeArgumentTypeDescriptors =
+                Lists.transform(
+                    annotationTypeDescriptor.getTypeArgumentDescriptors(),
+                    typeArgument ->
+                        typeArgument.isWildCardOrCapture()
+                            ? TypeDescriptors.get().javaLangObject
+                            : typeArgument);
+            checkArgument(!annotationTypeDescriptor.isArray());
+            checkArgument(!annotationTypeDescriptor.isTypeVariable());
+            checkArgument(!annotationTypeDescriptor.isUnion());
             return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
                 .setAnnotationType(
-                    TypeDescriptors.replaceTypeArgumentDescriptors(
-                        annotationTypeDescriptor,
-                        Lists.transform(
-                            annotationTypeDescriptor.getTypeArgumentDescriptors(),
-                            typeArgument ->
-                                typeArgument.isWildCardOrCapture()
-                                    ? TypeDescriptors.get().javaLangObject
-                                    : typeArgument)))
+                    TypeDescriptor.Builder.from(annotationTypeDescriptor)
+                        .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
+                        .build())
                 .build();
           }
         });

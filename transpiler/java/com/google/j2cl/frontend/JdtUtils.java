@@ -1206,8 +1206,12 @@ public class JdtUtils {
     return () -> {
       TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
       if (rawTypeDescriptor.hasTypeArguments()) {
-        return TypeDescriptors.replaceTypeArgumentDescriptors(
-            rawTypeDescriptor, ImmutableList.of());
+        checkArgument(!rawTypeDescriptor.isArray());
+        checkArgument(!rawTypeDescriptor.isTypeVariable());
+        checkArgument(!rawTypeDescriptor.isUnion());
+        return TypeDescriptor.Builder.from(rawTypeDescriptor)
+            .setTypeArgumentDescriptors(ImmutableList.of())
+            .build();
       }
       return rawTypeDescriptor;
     };

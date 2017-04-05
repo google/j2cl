@@ -595,10 +595,13 @@ public abstract class TypeDeclaration extends Node
     return Builder.from(originalTypeDeclaration)
         .setTypeParameterDescriptors(typeParameterTypeDescriptors)
         .setUnsafeTypeDescriptorFactory(
-            () ->
-                TypeDescriptors.replaceTypeArgumentDescriptors(
-                    originalTypeDeclaration.getUnsafeTypeDescriptor(),
-                    typeParameterTypeDescriptors))
+            () -> {
+              TypeDescriptor originalTypeDescriptor =
+                  originalTypeDeclaration.getUnsafeTypeDescriptor();
+              return TypeDescriptor.Builder.from(originalTypeDescriptor)
+                  .setTypeArgumentDescriptors(typeParameterTypeDescriptors)
+                  .build();
+            })
         .build();
   }
 
