@@ -41,8 +41,8 @@ class GenericSubInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
   }
 
   /**
@@ -53,8 +53,8 @@ class GenericSubInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
   }
 
   /**

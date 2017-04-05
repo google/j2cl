@@ -49,8 +49,8 @@ class Foo {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
 
   /**
@@ -61,8 +61,8 @@ class Foo {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
 
   /**

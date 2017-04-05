@@ -37,8 +37,8 @@ class EmptyInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
   }
 
   /**
@@ -49,8 +49,8 @@ class EmptyInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
   }
 
   /**

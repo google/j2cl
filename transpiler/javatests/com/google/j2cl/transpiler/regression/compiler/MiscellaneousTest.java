@@ -88,8 +88,7 @@ public class MiscellaneousTest {
       assertThat(f1 instanceof PolyA[]).isFalse();
       assertThat(f1 instanceof IFoo[]).isTrue();
       assertThat(f1 instanceof PolyA).isFalse();
-      // TODO(b/36862977): Uncomment when bug is fixed.
-      // assertThat(f1 instanceof IFoo).isFalse();
+      assertThat(f1 instanceof IFoo).isFalse();
       assertThat(f1 instanceof Object[]).isTrue();
       assertThat(f1 instanceof Object[][]).isFalse();
 
@@ -109,8 +108,7 @@ public class MiscellaneousTest {
       assertThat(a1 instanceof PolyA[]).isTrue();
       assertThat(a1 instanceof IFoo[]).isTrue();
       assertThat(a1 instanceof PolyA).isFalse();
-      // TODO(b/36862977): Uncomment when bug is fixed.
-      // assertThat(a1 instanceof IFoo).isFalse();
+      assertThat(a1 instanceof IFoo).isFalse();
       assertThat(a1 instanceof Object[]).isTrue();
       assertThat(a1 instanceof Object[][]).isFalse();
 
@@ -131,8 +129,7 @@ public class MiscellaneousTest {
       assertThat(f2 instanceof PolyA[]).isFalse();
       assertThat(f2 instanceof IFoo[]).isFalse();
       assertThat(f2 instanceof PolyA).isFalse();
-      // TODO(b/36862977): Uncomment when bug is fixed.
-      // assertThat(f2 instanceof IFoo).isFalse();
+      assertThat(f2 instanceof IFoo).isFalse();
       assertThat(f2 instanceof Object[]).isTrue();
       assertThat(f2 instanceof Object[][]).isTrue();
 
@@ -154,8 +151,7 @@ public class MiscellaneousTest {
       assertThat(a2 instanceof PolyA[]).isFalse();
       assertThat(a2 instanceof IFoo[]).isFalse();
       assertThat(a2 instanceof PolyA).isFalse();
-      // TODO(b/36862977): Uncomment when bug is fixed.
-      // assertThat(a2 instanceof IFoo).isFalse();
+      assertThat(a2 instanceof IFoo).isFalse();
       assertThat(a2 instanceof Object[]).isTrue();
       assertThat(a2 instanceof Object[][]).isTrue();
 
@@ -228,8 +224,7 @@ public class MiscellaneousTest {
   public void testCasts() {
     Object o = FALSE ? (Object) new PolyA() : (Object) new PolyB();
     assertThat(o instanceof I).isTrue();
-    // TODO(b/36862977): Uncomment when bug is fixed.
-    // assertThat(o instanceof IFoo).isFalse();
+    assertThat(o instanceof IFoo).isFalse();
     assertThat(o instanceof IBar).isTrue();
     assertThat(o instanceof PolyA).isFalse();
     boolean b = o instanceof PolyB;

@@ -38,8 +38,8 @@ class GenericInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterface;
   }
 
   /**
@@ -50,8 +50,8 @@ class GenericInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterface;
   }
 
   /**

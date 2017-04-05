@@ -55,8 +55,8 @@ class MyInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyInterface;
   }
 
   /**
@@ -67,8 +67,8 @@ class MyInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyInterface;
   }
 
   /**

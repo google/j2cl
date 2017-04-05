@@ -59,8 +59,8 @@ class JsFunctionOptional {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptional;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionOptional;
   }
 
   /**

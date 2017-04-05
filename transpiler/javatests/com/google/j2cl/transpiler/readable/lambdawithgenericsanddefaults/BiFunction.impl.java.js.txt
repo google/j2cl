@@ -58,8 +58,8 @@ class BiFunction {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction;
   }
 
   /**
@@ -70,8 +70,8 @@ class BiFunction {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction;
   }
 
   /**

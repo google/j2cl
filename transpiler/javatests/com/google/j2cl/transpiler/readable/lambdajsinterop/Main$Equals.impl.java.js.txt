@@ -54,8 +54,8 @@ class Equals {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals;
   }
 
   /**
@@ -66,8 +66,8 @@ class Equals {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals;
   }
 
   /**

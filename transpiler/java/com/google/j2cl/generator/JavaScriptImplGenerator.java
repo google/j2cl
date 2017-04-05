@@ -385,7 +385,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     if (type.getDeclaration().isJsFunctionImplementation()) {
-      sourceBuilder.appendln("return instance != null && instance.$is__" + mangledTypeName + ";");
+      sourceBuilder.appendln("return instance != null && !!instance.$is__" + mangledTypeName + ";");
     } else {
       String className =
           environment.aliasForType(
@@ -416,7 +416,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.append("return instance != null && typeof instance == \"function\";");
     } else {
       sourceBuilder.append(
-          "return instance != null && instance.$implements__" + mangledTypeName + ";");
+          "return instance != null && !!instance.$implements__" + mangledTypeName + ";");
     }
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
@@ -441,7 +441,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     if (type.isInterface()) { // For interfaces
       sourceBuilder.append(
-          "return classConstructor != null && classConstructor.prototype.$implements__"
+          "return classConstructor != null && !!classConstructor.prototype.$implements__"
               + mangledTypeName
               + ";");
     } else { // For classes

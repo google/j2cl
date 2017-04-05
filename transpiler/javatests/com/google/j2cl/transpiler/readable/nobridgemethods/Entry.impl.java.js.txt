@@ -38,8 +38,8 @@ class Entry {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
   }
 
   /**
@@ -50,8 +50,8 @@ class Entry {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
   }
 
   /**

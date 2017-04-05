@@ -1,5 +1,5 @@
 [@JsType
-  class SpecializedSubtype implements I<String> {
+  @SuppressWarnings("ClassCanBeStatic")
 ...    public void m(String t, @JsOptional Object o) {}
   }] => [/**
  * @implements {I<?string>}

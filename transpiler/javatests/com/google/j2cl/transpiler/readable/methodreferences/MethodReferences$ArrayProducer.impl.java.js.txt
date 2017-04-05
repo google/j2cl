@@ -49,8 +49,8 @@ class ArrayProducer {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
   }
 
   /**
@@ -61,8 +61,8 @@ class ArrayProducer {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
   }
 
   /**

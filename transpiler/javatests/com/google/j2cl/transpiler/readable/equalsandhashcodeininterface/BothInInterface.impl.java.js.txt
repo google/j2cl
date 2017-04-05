@@ -54,8 +54,8 @@ class BothInInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
   }
 
   /**
@@ -66,8 +66,8 @@ class BothInInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
   }
 
   /**

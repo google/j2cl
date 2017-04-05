@@ -55,8 +55,8 @@ class I {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_I;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_I;
   }
 
   /**
@@ -67,8 +67,8 @@ class I {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_I;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_I;
   }
 
   /**

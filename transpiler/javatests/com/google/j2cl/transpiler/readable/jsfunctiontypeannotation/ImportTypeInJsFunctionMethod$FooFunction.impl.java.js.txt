@@ -59,8 +59,8 @@ class FooFunction {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod_FooFunction;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod_FooFunction;
   }
 
   /**

@@ -46,8 +46,8 @@ class SuperInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
   }
 
   /**
@@ -58,8 +58,8 @@ class SuperInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
   }
 
   /**

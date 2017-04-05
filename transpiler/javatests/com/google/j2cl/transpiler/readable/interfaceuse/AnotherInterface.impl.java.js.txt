@@ -47,8 +47,8 @@ class AnotherInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
   }
 
   /**
@@ -59,8 +59,8 @@ class AnotherInterface {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
   }
 
   /**

@@ -59,8 +59,8 @@ class EqualFunction {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction;
   }
 
   /**

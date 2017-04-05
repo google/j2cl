@@ -55,8 +55,8 @@ class JsProducer {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_JsProducer;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_JsProducer;
   }
 
   /**

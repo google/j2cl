@@ -46,8 +46,8 @@ class Predicate {
    */
   static $isInstance(instance) {
     return instance != null &&
-        instance
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate;
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate;
   }
 
   /**
@@ -58,8 +58,8 @@ class Predicate {
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
-        classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate;
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate;
   }
 
   /**
