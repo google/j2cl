@@ -161,15 +161,18 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunctionVarargs___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    let f = ((/** number */ i, ...numbers) => {
-      $Arrays.$stampType(numbers, $int, 1);
-      let sum = i;
-      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number$1$ = $array[$index];
-        sum += number$1$;
-      }
-      return sum;
-    });
+    let f =
+        (/** @param {number} i @param {...number} numbers */ (
+             i, ...numbers) => {
+          $Arrays.$stampType(numbers, $int, 1);
+          let sum = i;
+          for (let $array = numbers, $index = 0; $index < $array.length;
+               $index++) {
+            let number$1$ = $array[$index];
+            sum += number$1$;
+          }
+          return sum;
+        });
     return f;
   }
 
@@ -178,15 +181,17 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunctionVarargsInnerClass___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    return ((/** number */ i, ...numbers) => {
-      $Arrays.$stampType(numbers, $int, 1);
-      let sum = i;
-      for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number$1$ = $array[$index];
-        sum += number$1$;
-      }
-      return sum;
-    });
+    return (
+        /** @param {number} i @param {...number} numbers */ (i, ...numbers) => {
+          $Arrays.$stampType(numbers, $int, 1);
+          let sum = i;
+          for (let $array = numbers, $index = 0; $index < $array.length;
+               $index++) {
+            let number$1$ = $array[$index];
+            sum += number$1$;
+          }
+          return sum;
+        });
   }
 
   /**
@@ -194,7 +199,7 @@ class Main extends java_lang_Object {
    * @public
    */
   m_testJsFunctionOptional___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    let f = ((/** number */ i, /** ?number */ n) => {
+    let f = (/** @param {number} i @param {?number=} n */ (i, n) => {
       return $Primitives.$narrowDoubleToInt(
           (i + Double.m_doubleValue__java_lang_Double(n)));
     });

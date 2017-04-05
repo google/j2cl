@@ -20,6 +20,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.HasMethodDescriptor;
+import com.google.j2cl.ast.HasParameters;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -68,15 +70,17 @@ public class GeneratorUtils {
   }
 
   /**
-   * Returns the js doc annotations for parameter at {@code index} in {@code method}. It is of
-   * the form:
+   * Returns the js doc annotations for parameter at {@code index} in {@code methodOrFunction}. It
+   * is of the form:
+   *
+   * @param {parameterType} parameterName
    */
-  public static String getParameterJsDocAnnotation(
-      Method method, int index, GenerationEnvironment environment) {
-    Variable parameter = method.getParameters().get(index);
+  public static <T extends HasParameters & HasMethodDescriptor> String getParameterJsDocAnnotation(
+      T methodOrFunctionExpression, int index, GenerationEnvironment environment) {
+    Variable parameter = methodOrFunctionExpression.getParameters().get(index);
     TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
     String name = environment.aliasForVariable(parameter);
-    if (parameter == method.getJsVarargsParameter()) {
+    if (parameter == methodOrFunctionExpression.getJsVarargsParameter()) {
       // The parameter is a js var arg so we convert the type to an array
       checkArgument(parameterTypeDescriptor.isArray());
       // TODO(b/36141178): remove varargs that are typed with a type variable until type checking in
@@ -91,7 +95,13 @@ public class GeneratorUtils {
       return String.format(
           "@param {%s%s} %s",
           JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment),
-          method.getDescriptor().getParameterDescriptors().get(index).isJsOptional() ? "=" : "",
+          methodOrFunctionExpression
+                  .getDescriptor()
+                  .getParameterDescriptors()
+                  .get(index)
+                  .isJsOptional()
+              ? "="
+              : "",
           name);
     }
   }

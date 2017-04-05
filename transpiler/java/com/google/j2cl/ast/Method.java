@@ -34,7 +34,7 @@ import java.util.List;
 
 /** Method declaration. */
 @Visitable
-public class Method extends Member implements HasJsNameInfo {
+public class Method extends Member implements HasJsNameInfo, HasParameters, HasMethodDescriptor {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
@@ -59,10 +59,12 @@ public class Method extends Member implements HasJsNameInfo {
     return methodDescriptor;
   }
 
+  @Override
   public List<Variable> getParameters() {
     return parameters;
   }
 
+  @Override
   public Variable getJsVarargsParameter() {
     if (methodDescriptor.isJsMethodVarargs()) {
       return getVarargsParameter();

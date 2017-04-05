@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -36,6 +37,7 @@ import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -58,6 +60,7 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Transforms Expression to JavaScript source strings.
@@ -164,24 +167,57 @@ public class ExpressionTranspiler {
         process(variable);
       }
 
-      @Override
-      public Void transformFunctionExpression(FunctionExpression expression) {
-        Variable varargsParameter = expression.getJsVarargsParameter();
-        sourceBuilder.append("((");
+      private void emitFunctionHeaderJsDoc(FunctionExpression functionExpression) {
+        sourceBuilder.append("/** ");
+        for (int i = 0; i < functionExpression.getParameters().size(); i++) {
+          sourceBuilder.append(
+              GeneratorUtils.getParameterJsDocAnnotation(functionExpression, i, environment));
+          sourceBuilder.append(" ");
+        }
+        sourceBuilder.append("*/ ");
+      }
+
+      private void emitParameters(List<Variable> parameters, Consumer<Variable> emitter) {
+        sourceBuilder.append("(");
         String separator = "";
-        for (Variable parameter : expression.getParameters()) {
+        for (Variable parameter : parameters) {
           sourceBuilder.append(separator);
-          if (parameter != varargsParameter) {
-            emitVariableWithJsDocAnnotation(parameter);
-          } else {
-            // There is no JsDoc syntax for inline annotations on varargs parameters, so
-            // do not emit it here.
-            sourceBuilder.append("...");
-            process(parameter);
-          }
+          emitter.accept(parameter);
           separator = ", ";
         }
-        sourceBuilder.append(") =>");
+        sourceBuilder.append(")");
+      }
+
+      @Override
+      public Void transformFunctionExpression(FunctionExpression expression) {
+        sourceBuilder.append("(");
+        ImmutableList<ParameterDescriptor> parameterDescriptors =
+            expression
+                .getTypeDescriptor()
+                .getConcreteJsFunctionMethodDescriptor()
+                .getParameterDescriptors();
+        if (parameterDescriptors
+            .stream()
+            .anyMatch(
+                Predicates.or(ParameterDescriptor::isJsOptional, ParameterDescriptor::isVarargs))) {
+          // TODO(b/36818468, b/36855486): Emit a full method header since optional or varargs
+          // are not properly supported as inline annotations.
+          emitFunctionHeaderJsDoc(expression);
+          emitParameters(
+              expression.getParameters(),
+              parameter -> {
+                if (parameter == expression.getJsVarargsParameter()) {
+                  sourceBuilder.append("...");
+                }
+                process(parameter);
+              });
+        } else {
+          // Otherwise emit the more readable inline short form.
+          emitParameters(expression.getParameters(), this::emitVariableWithJsDocAnnotation);
+        }
+
+        // After the header is emitted, emit the rest of the arrow function.
+        sourceBuilder.append(" =>");
         new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
         sourceBuilder.append(")");
         return null;

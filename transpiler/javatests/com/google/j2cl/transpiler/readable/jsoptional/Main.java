@@ -46,6 +46,7 @@ public class Main {
   @JsType
   @SuppressWarnings("ClassCanBeStatic")
   class SpecializedSubtype implements I<String> {
+
     public SpecializedSubtype(@JsOptional Object a) {}
 
     @Override

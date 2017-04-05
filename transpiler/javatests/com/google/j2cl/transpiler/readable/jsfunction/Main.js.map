@@ -148,7 +148,7 @@
             sum += number;
           }
           return sum;
-        };] => [let f = ((/** number */ i, ...numbers) =>{
+        };] => [let f = (/** @param {number} i @param {...number} numbers */ (i, ...numbers) =>{
       $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
@@ -190,7 +190,7 @@
         }
         return sum;
       }
-    };] => [return ((/** number */ i, ...numbers) =>{
+    };] => [return (/** @param {number} i @param {...number} numbers */ (i, ...numbers) =>{
       $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
@@ -220,7 +220,7 @@
    * @return {void}
 ...    });
   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
-[JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((/** number */ i, /** ?number */ n) =>{
+[JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** @param {number} i @param {?number=} n */ (i, n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });]
 [f] => [f] "f"
