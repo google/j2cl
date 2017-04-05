@@ -34,7 +34,7 @@ set -e
 
 # Build  JRE and other deps
 blaze build third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:jre_bundle_deploy.jar \
-        third_party/java_src/j2cl/jre/java:gwt-jsinterop-annotations \
+        third_party/java/gwt:gwt-jsinterop-annotations-j2cl \
         &> /dev/null
 
 # Build the transpiler
