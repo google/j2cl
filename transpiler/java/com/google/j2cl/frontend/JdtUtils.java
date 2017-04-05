@@ -428,6 +428,10 @@ public class JdtUtils {
       return null;
     }
 
+    if (typeBinding.isNullType()) {
+      return TypeDescriptors.get().javaLangObject;
+    }
+
     if (isIntersectionType(typeBinding)) {
       return createIntersectionType(typeBinding);
     }
@@ -495,6 +499,7 @@ public class JdtUtils {
             && !binding.isArray()
             && !binding.isTypeVariable()
             && !binding.isWildcardType()
+            && !binding.isNullType()
             && binding.getPackage() == null;
     if (isIntersectionType) {
       checkArgument(

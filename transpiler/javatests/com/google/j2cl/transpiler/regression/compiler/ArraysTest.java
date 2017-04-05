@@ -1,0 +1,97 @@
+package com.google.j2cl.transpiler.regression.compiler;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+import jsinterop.annotations.JsMethod;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+@RunWith(JUnit4.class)
+public class ArraysTest {
+  @JsMethod
+  private static native Object createJsArray(int length) /*-{
+    return new Array(length);
+  }-*/;
+
+  @Test
+  public void testObjectArray_empty() {
+    Object nativeArray = createJsArray(0);
+    assertThat(nativeArray instanceof Object[]).isTrue();
+    assertThat(nativeArray instanceof Object[][]).isFalse();
+    assertThat(nativeArray instanceof int[]).isFalse();
+    assertThat(nativeArray instanceof List[]).isFalse();
+
+    Object objectArray = new Object[0];
+    assertThat(objectArray instanceof Object[]).isTrue();
+    assertThat(objectArray instanceof Object[][]).isFalse();
+    assertThat(objectArray instanceof int[]).isFalse();
+    assertThat(objectArray instanceof List[]).isFalse();
+    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
+    // correctly.
+    assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
+
+    assertThat(objectArray).isNotEqualTo(nativeArray);
+  }
+
+  @Test
+  public void testObjectArray_nonEmpty() {
+    // Native array is an object array
+    Object nativeArray = createJsArray(10);
+    assertThat(nativeArray instanceof Object[]).isTrue();
+    assertThat(nativeArray instanceof Object[][]).isFalse();
+    assertThat(nativeArray instanceof int[]).isFalse();
+    assertThat(nativeArray instanceof List[]).isFalse();
+    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
+    // correctly.
+    assertThat((Object) nativeArray.getClass()).isEqualTo(Object[].class);
+
+    Object objectArray = new Object[10];
+    assertThat(objectArray instanceof Object[]).isTrue();
+    assertThat(objectArray instanceof Object[][]).isFalse();
+    assertThat(objectArray instanceof int[]).isFalse();
+    assertThat(objectArray instanceof List[]).isFalse();
+    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
+    // correctly.
+    assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
+
+    assertThat(objectArray).isNotEqualTo(nativeArray);
+  }
+
+  @Test
+  public void testObjectObjectArray() {
+    Object array = new Object[10][];
+    assertThat(array instanceof Object[]).isTrue();
+    assertThat(array instanceof Object[][]).isTrue();
+    assertThat(array instanceof int[]).isFalse();
+    assertThat(array instanceof List[]).isFalse();
+    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
+    // correctly.
+    assertThat((Object) array.getClass()).isEqualTo(Object[][].class);
+
+    Object[] objectArray = (Object[]) array;
+    objectArray[0] = new Object[0];
+    objectArray[1] = new List<?>[1];
+    objectArray[2] = new Double[1];
+
+    // J2CL has different semantics for Object[] allowing assignability of primitive arrays to it.
+    // try {
+    //   objectArray[3] = new int[0];
+    //   fail("Should have thrown ArrayStoreException");
+    // } catch (ArrayStoreException expected) {
+    // }
+    try {
+      objectArray[4] = new Object();
+      fail("Should have thrown ArrayStoreException");
+    } catch (ArrayStoreException expected) {
+    }
+  }
+
+  @Test
+  public void testArraysToString() {
+    Object[] array = new Object[] {1, 2, 3};
+    assertThat(Object[].class.getName()).isEqualTo(((Object) array).toString().split("@")[0]);
+  }
+}

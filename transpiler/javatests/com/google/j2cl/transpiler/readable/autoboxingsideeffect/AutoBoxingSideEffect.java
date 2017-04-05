@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.readable.autoboxingsideeffect;
 
+@SuppressWarnings("BoxedPrimitiveConstructor")
 public class AutoBoxingSideEffect {
   public Integer foo;
 
