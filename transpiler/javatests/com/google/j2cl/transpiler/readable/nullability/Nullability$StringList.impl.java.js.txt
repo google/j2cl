@@ -59,7 +59,7 @@ class StringList extends ArrayList {
    * @public
    */
   m_spliterator__() {
-    return /**@type {Spliterator<C_E>} */ (
+    return /**@type {Spliterator<?string>} */ (
         List$$Overlay.m_spliterator__java_util_List(this));
   }
 
@@ -70,7 +70,7 @@ class StringList extends ArrayList {
    * @public
    */
   m_parallelStream__() {
-    return /**@type {Stream<C_E>} */ (
+    return /**@type {Stream<?string>} */ (
         Collection$$Overlay.m_parallelStream__java_util_Collection(this));
   }
 
@@ -81,7 +81,7 @@ class StringList extends ArrayList {
    * @public
    */
   m_stream__() {
-    return /**@type {Stream<C_E>} */ (
+    return /**@type {Stream<?string>} */ (
         Collection$$Overlay.m_stream__java_util_Collection(this));
   }
 

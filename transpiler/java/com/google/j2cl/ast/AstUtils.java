@@ -307,13 +307,14 @@ public class AstUtils {
      * been adequately specialized into the context of the class into which it is going to be
      * placed.
      */
-    MethodDescriptor specializedMethodDescriptor =
-        targetMethodDescriptor.specializeTypeVariables(
-            fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters());
+    Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters =
+        fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters();
 
     return createForwardingMethod(
         null,
-        MethodDescriptor.Builder.from(specializedMethodDescriptor)
+        MethodDescriptor.Builder.from(
+                targetMethodDescriptor.specializeTypeVariables(
+                    specializedTypeArgumentByTypeParameters))
             .setEnclosingTypeDescriptor(fromTypeDescriptor)
             // TODO(b/35802406): don't synthesize methods with a separate declaration site.
             .setDeclarationMethodDescriptor(targetMethodDescriptor)
@@ -322,7 +323,11 @@ public class AstUtils {
             .setAbstract(false)
             .setNative(false)
             .build(),
-        targetMethodDescriptor,
+        MethodDescriptor.Builder.from(
+                targetMethodDescriptor.specializeTypeVariables(
+                    specializedTypeArgumentByTypeParameters))
+            .setDeclarationMethodDescriptor(targetMethodDescriptor)
+            .build(),
         jsDocDescription,
         true,
         true);
