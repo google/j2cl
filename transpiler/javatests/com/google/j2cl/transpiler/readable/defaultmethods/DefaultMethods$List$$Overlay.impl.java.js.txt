@@ -11,6 +11,7 @@ const List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.De
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class List$$Overlay {
@@ -39,6 +40,20 @@ class List$$Overlay {
   }
 
   /**
+   * @template C_List_T
+   * @param {List<C_List_T>} $thisArg
+   * @param {number} startIndex
+   * @param {number} endIndex
+   * @return {List<C_List_T>}
+   * @public
+   */
+  static m_sublist__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__int__int(
+      $thisArg, startIndex, endIndex) {
+    List$$Overlay.$clinit();
+    return null;
+  }
+
+  /**
    * Returns whether the provided instance is of a class that implements this
    * interface.
    * @param {*} instance
@@ -56,6 +71,7 @@ class List$$Overlay {
   static $clinit() {
     List$$Overlay.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

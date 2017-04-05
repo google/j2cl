@@ -1,6 +1,6 @@
 [interface List<T> {
     default void add(T elem) {}
-    default void remove(T[] elems) {}
+...    }
   }] => [class List$$Overlay {
   /**
 ...exports = List$$Overlay;
@@ -17,3 +17,13 @@
   }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.remove"
 [elems] => [elems] "elems"
 [UNKNOWN] => [List$$Overlay.$clinit();]
+[default List<T> sublist(int startIndex, int endIndex) {
+      return null;
+    }] => [/**
+   * @template C_List_T
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.sublist"
+[startIndex] => [startIndex] "startIndex"
+[endIndex] => [endIndex] "endIndex"
+[UNKNOWN] => [List$$Overlay.$clinit();]
+[return null;] => [return null;]
