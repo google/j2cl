@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Frontend options, which can be initialized by a Flag instance that is already parsed.
@@ -60,7 +59,7 @@ public class FrontendOptions {
   private boolean declareLegacyNamespace;
   private boolean generateTimeReport;
 
-  private static final Set<String> VALID_JAVA_VERSIONS =
+  private static final ImmutableSet<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
 
   private static final String JAVA_EXTENSION = ".java";
