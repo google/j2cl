@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -65,26 +64,6 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteMethodCall(MethodCall methodCall) {
-            Expression qualifier = methodCall.getQualifier();
-            return MethodCall.Builder.from(methodCall)
-                .setQualifier(
-                    maybeInsertErasureTypeSafetyCast(qualifier.getTypeDescriptor(), qualifier))
-                .build();
-          }
-
-          @Override
-          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
-            Expression qualifier = fieldAccess.getQualifier();
-            return FieldAccess.Builder.from(fieldAccess)
-                .setQualifier(
-                    maybeInsertErasureTypeSafetyCast(qualifier.getTypeDescriptor(), qualifier))
-                .build();
-          }
-        });
   }
 
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
