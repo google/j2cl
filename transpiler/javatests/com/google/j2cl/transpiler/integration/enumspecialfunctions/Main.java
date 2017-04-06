@@ -5,6 +5,7 @@ package com.google.j2cl.transpiler.integration.enumspecialfunctions;
  */
 public class Main {
   public static void main(String[] args) {
+    // TODO(b/36863439): Uncomment the following line once Enum.valueOf is implemented.
     //assert Enum.valueOf(Planet.class, "SATURN")
     assert Planet.values().length == 8;
     assert arrayContains(Planet.MERCURY, Planet.values());
@@ -38,6 +39,17 @@ public class Main {
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
+
+    // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
+    // implemented.
+    try {
+      assert Enum.valueOf(Planet.class, null) == null;
+      // assert false : "Should have thrown NullPointerException";
+    } catch (NullPointerException expected) {
+    }
+    // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
+    // implemented.
+    assert Planet.class.getEnumConstants() == null || Planet.class.getEnumConstants() != null;
   }
 
   private static boolean arrayContains(Object obj, Object[] array) {
@@ -48,4 +60,5 @@ public class Main {
     }
     return false;
   }
+
 }
