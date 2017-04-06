@@ -56,7 +56,7 @@ def make_size_report():
 
   original_result = pool.apply_async(
       repo_util.build_optimized_tests, [repo_util.get_managed_path()],
-      callback=lambda x: console_log("    Original done buliding."))
+      callback=lambda x: console_log("    Original done building."))
   modified_result = pool.apply_async(
       repo_util.build_optimized_tests,
       callback=lambda x: console_log("    Modified done building."))
