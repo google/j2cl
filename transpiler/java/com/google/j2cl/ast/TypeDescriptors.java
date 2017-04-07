@@ -478,9 +478,6 @@ public class TypeDescriptors {
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
         .setNullable(true)
-        .setSimpleJsName(jsName)
-        .setJsNamespace(jsNamespace)
-        .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setTypeDeclaration(typeDeclaration)
@@ -553,7 +550,6 @@ public class TypeDescriptors {
         .setNullable(isNullable)
         .setLeafTypeDescriptor(leafTypeDescriptor)
         .setClassComponents(classComponents)
-        .setPackageName(leafTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setUniqueKey(uniqueKey)
         .build();

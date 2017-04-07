@@ -534,6 +534,7 @@ public class JsTypeTest extends MyTestCase {
   private static native boolean isUndefined(Object value);
 
   @JsMethod
+  @SuppressWarnings("unusable-by-js")
   private static native void setTheField(ConcreteJsType obj, ConcreteJsType.A value);
 
   @JsMethod

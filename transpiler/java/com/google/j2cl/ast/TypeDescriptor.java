@@ -44,7 +44,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -155,7 +154,10 @@ public abstract class TypeDescriptor extends Node
 
   /** Returns the fully package qualified name like "com.google.common". */
   @Nullable
-  public abstract String getPackageName();
+  @Memoized
+  public String getPackageName() {
+    return hasTypeDeclaration() ? getTypeDeclaration().getPackageName() : null;
+  }
 
   /**
    * Returns a list of Strings representing the current type's simple name and enclosing type simple
@@ -286,11 +288,19 @@ public abstract class TypeDescriptor extends Node
    */
   @Override
   @Nullable
-  public abstract String getSimpleJsName();
+  @Memoized
+  public String getSimpleJsName() {
+    return hasTypeDeclaration()
+        ? getTypeDeclaration().getSimpleJsName()
+        : AstUtils.getSimpleSourceName(getClassComponents());
+  }
 
   @Override
   @Nullable
-  public abstract String getJsNamespace();
+  @Memoized
+  public String getJsNamespace() {
+    return hasTypeDeclaration() ? getTypeDeclaration().getJsNamespace() : null;
+  }
 
   /** Returns true if the class captures its enclosing instance */
   public boolean isCapturingEnclosingInstance() {
@@ -530,16 +540,7 @@ public abstract class TypeDescriptor extends Node
 
   public boolean hasTypeDeclaration() {
     boolean hasClassDeclaration = getTypeDeclaration() != null;
-    // TODO: Clean up so that only Enum, Class, Interfaces and possibly primitive types have
-    // TypeDeclarations, all others should not have.
-    checkState(
-        hasClassDeclaration == isClass()
-            || isInterface()
-            || isEnum()
-            || isPrimitive()
-            || isIntersection()
-            || isWildCardOrCapture()
-            || isTypeVariable());
+    checkState(hasClassDeclaration == (isClass() || isInterface() || isEnum() || isPrimitive()));
     return hasClassDeclaration;
   }
 
@@ -735,12 +736,6 @@ public abstract class TypeDescriptor extends Node
 
     public abstract Builder setUnionedTypeDescriptors(List<TypeDescriptor> unionedTypeDescriptors);
 
-    public abstract Builder setPackageName(String packageName);
-
-    public abstract Builder setSimpleJsName(String simpleJsName);
-
-    public abstract Builder setJsNamespace(String jsNamespace);
-
     public abstract Builder setBoundTypeDescriptorFactory(
         DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
 
@@ -811,53 +806,12 @@ public abstract class TypeDescriptor extends Node
 
     public abstract Builder setTypeDeclaration(TypeDeclaration typeDeclaration);
 
-    // Builder accessors to aid construction.
-    abstract String getPackageName();
-
-    abstract ImmutableList<String> getClassComponents();
-
-    abstract Optional<String> getSimpleJsName();
-
-    abstract Optional<String> getJsNamespace();
-
-    abstract TypeDeclaration getTypeDeclaration();
-
-    abstract TypeDescriptor getEnclosingTypeDescriptor();
-
-    private String calculateJsNamespace() {
-      TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-      if (enclosingTypeDescriptor != null) {
-        TypeDeclaration typeDeclaration = getTypeDeclaration();
-        boolean isNative = typeDeclaration != null && typeDeclaration.isNative();
-        if (!isNative && enclosingTypeDescriptor.isNative()) {
-          // When there is a type nested within a native type, it's important not to generate a name
-          // like "Array.1" (like would happen if the outer native type was claiming to be native
-          // Array and the nested type was anonymous) since this is almost guaranteed to collide
-          // with other people also creating nested classes within a native type that claims to be
-          // native Array.
-          return enclosingTypeDescriptor.getQualifiedSourceName();
-        }
-        // Use the parent namespace.
-        return enclosingTypeDescriptor.getQualifiedJsName();
-      }
-      // Use the java package namespace.
-      return getPackageName();
-    }
-
     private static final ThreadLocalInterner<TypeDescriptor> interner = new ThreadLocalInterner<>();
 
     abstract TypeDescriptor autoBuild();
 
     @SuppressWarnings("ReferenceEquality")
     public TypeDescriptor build() {
-      if (!getSimpleJsName().isPresent()) {
-        setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
-      }
-
-      if (!getJsNamespace().isPresent()) {
-        setJsNamespace(calculateJsNamespace());
-      }
-
       TypeDescriptor typeDescriptor = autoBuild();
 
       checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());

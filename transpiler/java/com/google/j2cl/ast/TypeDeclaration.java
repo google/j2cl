@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -179,9 +178,6 @@ public abstract class TypeDeclaration extends Node
 
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
-
-  @Nullable
-  abstract String getUniqueKey();
 
   @Nullable
   abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
@@ -357,7 +353,7 @@ public abstract class TypeDeclaration extends Node
   /** A unique string for a give type. Used for interning. */
   @Memoized
   public String getUniqueId() {
-    String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
+    String uniqueKey = getQualifiedBinaryName();
     return uniqueKey + TypeDeclaration.createTypeParametersUniqueId(getTypeParameterDescriptors());
   }
 
@@ -683,8 +679,6 @@ public abstract class TypeDeclaration extends Node
   public abstract static class Builder {
     public abstract Builder setAnonymous(boolean isAnonymous);
 
-    public abstract Builder setUniqueKey(String key);
-
     public abstract Builder setClassComponents(List<String> classComponents);
 
     public abstract Builder setEnclosingTypeDeclaration(TypeDeclaration enclosingTypeDeclaration);
@@ -818,6 +812,12 @@ public abstract class TypeDeclaration extends Node
       }
 
       TypeDeclaration typeDeclaration = autoBuild();
+
+      checkState(
+          typeDeclaration.getKind() == Kind.CLASS
+              || typeDeclaration.getKind() == Kind.ENUM
+              || typeDeclaration.getKind() == Kind.INTERFACE
+              || typeDeclaration.getKind() == Kind.PRIMITIVE);
 
       // Can not be both a JsFunction implementation and js function interface
       checkState(

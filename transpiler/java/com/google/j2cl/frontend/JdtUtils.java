@@ -1032,7 +1032,6 @@ public class JdtUtils {
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-        .setPackageName(enclosingTypeDescriptor.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->
                 TypeDescriptor.Builder.from(selfTypeDescriptor)
@@ -1096,22 +1095,9 @@ public class JdtUtils {
 
     checkArgument(!typeBinding.isArray());
 
-    PackageInfoCache packageInfoCache = PackageInfoCache.get();
-
-    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
-    if (topLevelTypeBinding.isFromSource()) {
-      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-      // around in the class path to figure it out and it might even come up with the wrong answer
-      // for example if this class has also been globbed into some other library that is a
-      // dependency of this one.
-      PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
-    }
-
     Supplier<TypeDescriptor> rawTypeDescriptorFactory = getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
-    String packageName =
-        typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
     boolean isTypeVariable = typeBinding.isTypeVariable();
     boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
     boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
@@ -1163,9 +1149,7 @@ public class JdtUtils {
         };
     TypeDeclaration typeDeclaration = null;
     ITypeBinding declarationTypeBinding = typeBinding.getTypeDeclaration();
-    if (declarationTypeBinding != null
-        && !declarationTypeBinding.isTypeVariable()
-        && !declarationTypeBinding.isWildcardType()) {
+    if (declarationTypeBinding != null && !isTypeVariable && !isWildCardOrCapture) {
       checkArgument(
           !declarationTypeBinding.isArray() && !declarationTypeBinding.isParameterizedType());
       typeDeclaration = JdtUtils.createDeclarationForType(declarationTypeBinding);
@@ -1188,9 +1172,6 @@ public class JdtUtils {
             .setKind(getKindFromTypeBinding(typeBinding))
             .setNullable(isNullable)
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
-            .setSimpleJsName(getJsName(typeBinding))
-            .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
-            .setPackageName(packageName)
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
@@ -1308,6 +1289,7 @@ public class JdtUtils {
     checkArgument(!typeBinding.isParameterizedType());
     checkArgument(!typeBinding.isTypeVariable());
     checkArgument(!typeBinding.isWildcardType());
+    checkArgument(!typeBinding.isCapture());
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
 
@@ -1325,11 +1307,8 @@ public class JdtUtils {
     // Compute these first since they're reused in other calculations.
     String packageName =
         typeBinding.getPackage() == null ? null : typeBinding.getPackage().getName();
-    boolean isTypeVariable = typeBinding.isTypeVariable();
-    boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
     boolean isAbstract = isAbstract(typeBinding);
     boolean isFinal = isFinal(typeBinding);
-    String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
     Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
         () -> {
@@ -1388,7 +1367,6 @@ public class JdtUtils {
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
-        .setUniqueKey(uniqueKey)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .build();
   }
