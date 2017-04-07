@@ -431,8 +431,7 @@ public class CompilerTest {
     assertEquals(
         "interface com.google.j2cl.transpiler.regression.compiler.CompilerTest$Fruit",
         Fruit.class.toString());
-    // TODO(b/36862570): Uncomment the following line when the bug is fixed.
-    // assertEquals("class [I", int[].class.toString());
+    assertEquals("class [I", int[].class.toString());
     assertEquals("class [Ljava.lang.String;", String[].class.toString());
     assertEquals(
         "class [Lcom.google.j2cl.transpiler.regression.compiler.CompilerTest;",

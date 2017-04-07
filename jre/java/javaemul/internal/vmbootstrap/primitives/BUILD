@@ -14,30 +14,53 @@ load(":generate_primitive.bzl", "generate_primitive_type")
 # blaze build third_party/java_src/j2cl/transpiler/vmbootstrap/primitives:all
 # gnome-open blaze-genfiles/third_party/java_src/j2cl/transpiler/vmbootstrap/primitives/
 
-generate_primitive_type(name = "double")
+generate_primitive_type(
+    name = "double",
+    shortName = "D",
+)
 
-generate_primitive_type(name = "float")
+generate_primitive_type(
+    name = "float",
+    shortName = "F",
+)
 
-generate_primitive_type(name = "int")
+generate_primitive_type(
+    name = "int",
+    shortName = "I",
+)
 
-generate_primitive_type(name = "short")
+generate_primitive_type(
+    name = "short",
+    shortName = "S",
+)
 
-generate_primitive_type(name = "byte")
+generate_primitive_type(
+    name = "byte",
+    shortName = "B",
+)
 
-generate_primitive_type(name = "char")
+generate_primitive_type(
+    name = "char",
+    shortName = "C",
+)
 
-generate_primitive_type(name = "void")
+generate_primitive_type(
+    name = "void",
+    shortName = "_",
+)
 
 generate_primitive_type(
     name = "long",
     initValue = "Long.fromInt(0)",
     jsTypeName = "Long",
+    shortName = "J",
 )
 
 generate_primitive_type(
     name = "boolean",
     initValue = "false",
     jsTypeName = "boolean",
+    shortName = "Z",
 )
 
 filegroup(

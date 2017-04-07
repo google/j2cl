@@ -60,10 +60,11 @@ class Util {
   /**
    * @param {*} ctor
    * @param {string} name
+   * @param {string} shortName
    * @public
    */
-  static $setClassMetadataForPrimitive(ctor, name) {
-    ctor.prototype.$$classMetadata = [name, Util.TYPE_PRIMITIVE];
+  static $setClassMetadataForPrimitive(ctor, name, shortName) {
+    ctor.prototype.$$classMetadata = [name, Util.TYPE_PRIMITIVE, shortName];
   }
 
   /**
@@ -74,6 +75,21 @@ class Util {
   static $extractClassName(ctor) {
     if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[0];
+    } else if (jre.classMetadata == 'STRIPPED') {
+      return Util.$getGeneratedClassName_(ctor);
+    } else {
+      throw new Error('Incorrect value: ' + jre.classMetadata);
+    }
+  }
+
+  /**
+   * @param {*} ctor
+   * @return {string}
+   * @public
+   */
+  static $extractPrimitiveShortName(ctor) {
+    if (jre.classMetadata == 'SIMPLE') {
+      return ctor.prototype.$$classMetadata[2];
     } else if (jre.classMetadata == 'STRIPPED') {
       return Util.$getGeneratedClassName_(ctor);
     } else {

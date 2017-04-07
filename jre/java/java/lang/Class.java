@@ -13,12 +13,11 @@
  */
 package java.lang;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
-
-import java.io.Serializable;
-import java.lang.reflect.Type;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -55,8 +54,12 @@ public final class Class<T> implements Type, Serializable {
 
   public String getName() {
     String className = Util.$extractClassName(ctor);
-    if (isArray() && Util.$extractClassType(ctor) != Util.TYPE_PRIMITIVE) {
-      className = "L" + className + ";";
+    if (isArray()) {
+      if (Util.$extractClassType(ctor) != Util.TYPE_PRIMITIVE) {
+        className = "L" + className + ";";
+      } else {
+        className = Util.$extractPrimitiveShortName(ctor);
+      }
     }
     return repeatString("[", dimensionCount) + className;
   }
@@ -136,6 +139,8 @@ public final class Class<T> implements Type, Serializable {
     public static int TYPE_PRIMITIVE;
 
     public static native String $extractClassName(Object ctor);
+
+    public static native String $extractPrimitiveShortName(Object ctor);
 
     public static native int $extractClassType(Object ctor);
   }

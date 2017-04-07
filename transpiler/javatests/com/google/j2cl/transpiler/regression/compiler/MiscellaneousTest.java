@@ -193,13 +193,12 @@ public class MiscellaneousTest {
     int[][] d = new int[][] {{1, 2}, {3, 4}};
     int[][][] e = new int[][][] {{{1, 2}, {3, 4}}, {{5, 6}, {7, 8}}};
     if (expectClassMetadata()) {
-      // TODO(b/36862570): Uncomment when bug is fixed.
-      // assertThat(c.getClass().getName()).isEqualTo("[I");
-      // assertThat(d.getClass().getName()).isEqualTo("[[I");
-      // assertThat(d[1].getClass().getName()).isEqualTo("[I");
-      // assertThat(e.getClass().getName()).isEqualTo("[[[I");
-      // assertThat(e[1].getClass().getName()).isEqualTo("[[I");
-      // assertThat(e[1][1].getClass().getName()).isEqualTo("[I");
+      assertThat(c.getClass().getName()).isEqualTo("[I");
+      assertThat(d.getClass().getName()).isEqualTo("[[I");
+      assertThat(d[1].getClass().getName()).isEqualTo("[I");
+      assertThat(e.getClass().getName()).isEqualTo("[[[I");
+      assertThat(e[1].getClass().getName()).isEqualTo("[[I");
+      assertThat(e[1][1].getClass().getName()).isEqualTo("[I");
     }
     assertThat(c[1]).isEqualTo(2);
     assertThat(d[1][0]).isEqualTo(3);
@@ -211,6 +210,15 @@ public class MiscellaneousTest {
     b[2][1] = null;
     b = new int[3][][];
     b[2] = null;
+
+    assertThat(int[].class.getName()).isEqualTo("[I");
+    assertThat(short[].class.getName()).isEqualTo("[S");
+    assertThat(byte[].class.getName()).isEqualTo("[B");
+    assertThat(char[].class.getName()).isEqualTo("[C");
+    assertThat(long[].class.getName()).isEqualTo("[J");
+    assertThat(float[].class.getName()).isEqualTo("[F");
+    assertThat(double[].class.getName()).isEqualTo("[D");
+    assertThat(boolean[].class.getName()).isEqualTo("[Z");
   }
 
   @Test
