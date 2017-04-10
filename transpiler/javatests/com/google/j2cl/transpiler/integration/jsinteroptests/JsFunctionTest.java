@@ -29,6 +29,7 @@ public class JsFunctionTest extends MyTestCase {
     test.testJsFunctionViaFunctionMethods();
     test.testGetClass_jsFunction();
     test.testJsFunctionWithVarArgs();
+    test.testJsFunctionLambda();
   }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
@@ -411,25 +412,11 @@ public class JsFunctionTest extends MyTestCase {
     // new JsFunctionWithVarargsTestSub().test();
   }
 
-  // uncomment when Java8 is supported.
-  // public void testJsFunctionLambda_JS() {
-  //   MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };
-  //   assertEquals(12, callAsFunction(jsFunctionInterface, 10));
-  //   assertEquals(12, callAsCallBackFunction(jsFunctionInterface, 10));
-  // }
-  //
-  // public void testJsFunctionLambda_Java() {
-  //   MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };
-  //   assertEquals(12, jsFunctionInterface.foo(10));
-  // }
-  //
-  // public void testJsFunctionDefaultMethod() {
-  //   MyJsFunctionSubInterfaceWithDefaultMethod impl =
-  //       new MyJsFunctionSubInterfaceWithDefaultMethod() {
-  //       };
-  //   assertEquals(10, impl.foo(10));
-  //   assertEquals(10, callAsFunction(impl, 10));
-  // }
+  public void testJsFunctionLambda() {
+    MyJsFunctionInterface jsFunctionInterface = a -> a + 2;
+    assertEquals(12, callAsFunction(jsFunctionInterface, 10));
+    assertEquals(12, jsFunctionInterface.foo(10));
+  }
 
   public void assertJsTypeDoesntHaveFields(Object obj, String... fields) {
     for (String field : fields) {
