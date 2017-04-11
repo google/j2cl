@@ -109,17 +109,25 @@ public class JsInteropUtils {
     return JsMemberType.METHOD;
   }
 
-  private static JsMemberType getJsPropertyAccessorType(IMethodBinding method) {
-    if (method.getParameterTypes().length == 1
-        && method.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME)) {
+  private static JsMemberType getJsPropertyAccessorType(IMethodBinding methodBinding) {
+    if (methodBinding.getParameterTypes().length == 1 && returnsPrimitiveVoid(methodBinding)) {
       return JsMemberType.SETTER;
-    } else if (method.getParameterTypes().length == 0
-    // TODO(B/35881307): void should not be allowed as a return type for property getters.
-    // && !method.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME)
-    ) {
+    } else if (methodBinding.getParameterTypes().length == 0
+        && (!returnsPrimitiveVoid(methodBinding) || isDebugger(methodBinding))) {
       return JsMemberType.GETTER;
     }
     return JsMemberType.UNDEFINED_ACCESSOR;
+  }
+
+  private static boolean returnsPrimitiveVoid(IMethodBinding methodBinding) {
+    return methodBinding.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME);
+  }
+
+  private static boolean isDebugger(IMethodBinding methodBinding) {
+    int modifiers = methodBinding.getModifiers();
+    return methodBinding.getName().equals("debugger")
+        && Modifier.isNative(modifiers)
+        && JdtUtils.isStatic(methodBinding);
   }
 
   /**

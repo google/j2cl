@@ -212,20 +212,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "JsProperty 'int Buggy.isX()' cannot have a non-boolean return.",
             "JsProperty 'int Buggy.getY(int x)' should have a correct setter or getter signature.",
-            // TODO(b/35881307): Restore the error messages when this bug is closed.
-            // "JsProperty 'void Buggy.getZ()' should have a correct setter or getter signature.",
+            "JsProperty 'void Buggy.getZ()' should have a correct setter or getter signature.",
             "JsProperty 'void Buggy.setX(int x, int y)' should have a correct "
                 + "setter or getter signature.",
-            // TODO(b/35881307): Restore the right error messages when this bug is closed.
-            // "JsProperty 'void Buggy.setY()' should have a correct setter or getter signature.",
-            "JsProperty 'void Buggy.setY()' should either follow Java Bean naming conventions or "
-                + "provide a name.",
+            "JsProperty 'void Buggy.setY()' should have a correct setter or getter signature.",
             "JsProperty 'int Buggy.setZ(int z)' should have a correct setter or getter signature.",
-            // TODO(b/35881307): Restore the right error messages when this bug is closed.
-            // "JsProperty 'void Buggy.setStatic()' should have a correct setter or getter "
-            //     + "signature.",
-            "JsProperty 'void Buggy.setStatic()' should either follow Java Bean naming conventions "
-                + "or provide a name.",
+            "JsProperty 'void Buggy.setStatic()' should have a correct setter or getter "
+                + "signature.",
             "JsProperty 'void Buggy.setW(int... z)' cannot have a vararg parameter");
   }
 
@@ -564,30 +557,30 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "import jsinterop.annotations.JsMethod;",
             "import jsinterop.annotations.JsProperty;",
             "class ParentBuggy {",
-            "  @JsMethod void foo() {}",
-            "  @JsProperty void getBar() {}",
+            "  @JsMethod boolean foo() { return false; }",
+            "  @JsProperty boolean getBar() { return false; }",
             // TODO(b/35901141): Implement missing restriction check.
-            "  @JsProperty @JsMethod void getBax() {}",
-            "  @JsProperty void getBlah() {}",
-            "  @JsMethod(name = \"bleh\") void getBleh() {}",
+            "  @JsProperty @JsMethod boolean getBax() { return false; }",
+            "  @JsProperty boolean getBlah() { return false; }",
+            "  @JsMethod(name = \"bleh\") boolean getBleh() { return false; }",
             "}",
             "public class Buggy extends ParentBuggy {",
-            "  @JsProperty void getFoo() {}",
-            "  @JsMethod void bar() {}",
-            "  @JsProperty void getBleh() {}",
-            "  @JsMethod(name = \"blah\") void getBlah() {}",
+            "  @JsProperty boolean getFoo() { return false; }",
+            "  @JsMethod boolean bar() { return false; }",
+            "  @JsProperty boolean getBleh() { return false; }",
+            "  @JsMethod(name = \"blah\") boolean getBlah() { return false; }",
             "}")
         .assertCompileFails(
-            " 'void Buggy.getFoo()' and 'void ParentBuggy.foo()' cannot both use the same "
+            " 'boolean Buggy.getFoo()' and 'boolean ParentBuggy.foo()' cannot both use the same "
                 + "JavaScript name 'foo'.",
-            "'void Buggy.bar()' and 'void ParentBuggy.getBar()' cannot both use the same "
+            "'boolean Buggy.bar()' and 'boolean ParentBuggy.getBar()' cannot both use the same "
                 + "JavaScript name 'bar'.",
             // TODO(b/35915124): Improve error messages for this situation where the type of
             // js member is changed in the hierarchy.
-            "'void Buggy.getBleh()' and 'void ParentBuggy.getBleh()' cannot both use the same "
-                + "JavaScript name 'bleh'.",
-            "'void Buggy.getBlah()' and 'void ParentBuggy.getBlah()' cannot both use the same "
-                + "JavaScript name 'blah'.");
+            "'boolean Buggy.getBleh()' and 'boolean ParentBuggy.getBleh()' cannot both use the "
+                + "same JavaScript name 'bleh'.",
+            "'boolean Buggy.getBlah()' and 'boolean ParentBuggy.getBlah()' cannot both use the "
+                + "same JavaScript name 'blah'.");
   }
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
