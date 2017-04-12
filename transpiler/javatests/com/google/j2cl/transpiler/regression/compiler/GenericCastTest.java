@@ -49,15 +49,13 @@ public class GenericCastTest {
           }
           try {
             String unusedString = value.bar;
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // fail("Expected ClassCastException 2");
+            fail("Expected ClassCastException 2");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
           try {
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // String unusedString = value.baz();
-            // fail("Expected ClassCastException 3");
+            String unusedString = value.baz();
+            fail("Expected ClassCastException 3");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
@@ -81,15 +79,13 @@ public class GenericCastTest {
           }
           try {
             String unusedString = get().bar;
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // fail("Expected ClassCastException 2");
+            fail("Expected ClassCastException 2");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
           try {
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // String unusedString =  get().baz();
-            // fail("Expected ClassCastException 3");
+            String unusedString = get().baz();
+            fail("Expected ClassCastException 3");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
@@ -109,15 +105,13 @@ public class GenericCastTest {
       }
       try {
         String unusedString = value.bar;
-        // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-        // fail("Expected ClassCastException 2");
+        fail("Expected ClassCastException 2");
       } catch (ClassCastException expected) {
         assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
       }
       try {
-        // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-        // String unusedString =  value.baz();
-        // fail("Expected ClassCastException 3");
+        String unusedString = value.baz();
+        fail("Expected ClassCastException 3");
       } catch (ClassCastException expected) {
         assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
       }
@@ -135,15 +129,13 @@ public class GenericCastTest {
       }
       try {
         String unusedString = get().bar;
-        // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-        // fail("Expected ClassCastException 2");
+        fail("Expected ClassCastException 2");
       } catch (ClassCastException expected) {
         assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
       }
       try {
-        // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-        // String unusedString =  get().baz();
-        // fail("Expected ClassCastException 3");
+        String unusedString = get().baz();
+        fail("Expected ClassCastException 3");
       } catch (ClassCastException expected) {
         assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
       }
@@ -162,15 +154,13 @@ public class GenericCastTest {
           }
           try {
             String unusedString = get().bar;
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // fail("Expected ClassCastException 5b");
+            fail("Expected ClassCastException 5b");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
           try {
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // String unusedString =  get().baz();
-            // fail("Expected ClassCastException 5c");
+            String unusedString = get().baz();
+            fail("Expected ClassCastException 5c");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
@@ -184,15 +174,13 @@ public class GenericCastTest {
           }
           try {
             String unusedString = value.bar;
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // fail("Expected ClassCastException 6b");
+            fail("Expected ClassCastException 6b");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
           try {
-            // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-            // String unusedString =  value.baz();
-            // fail("Expected ClassCastException 6c");
+            String unusedString = value.baz();
+            fail("Expected ClassCastException 6c");
           } catch (ClassCastException expected) {
             assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
           }
@@ -225,15 +213,13 @@ public class GenericCastTest {
     }
     try {
       String unusedString = bug.value.bar;
-      // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-      // fail("Expected ClassCastException 2");
+      fail("Expected ClassCastException 2");
     } catch (ClassCastException expected) {
       assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
     }
     try {
-      // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-      // String unusedString =  bug.value.baz();
-      // fail("Expected ClassCastException 3");
+      String unusedString = bug.value.baz();
+      fail("Expected ClassCastException 3");
     } catch (ClassCastException expected) {
       assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
     }
@@ -255,15 +241,13 @@ public class GenericCastTest {
     }
     try {
       String unusedString = bug.get().bar;
-      // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-      // fail("Expected ClassCastException 2");
+      fail("Expected ClassCastException 2");
     } catch (ClassCastException expected) {
       assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
     }
     try {
-      // TODO(b/36864504): Uncomment when the erasure cast issue is fixed.
-      // String unusedString =  bug.get().baz();
-      // fail("Expected ClassCastException 3");
+      String unusedString = bug.get().baz();
+      fail("Expected ClassCastException 3");
     } catch (ClassCastException expected) {
       assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
     }
