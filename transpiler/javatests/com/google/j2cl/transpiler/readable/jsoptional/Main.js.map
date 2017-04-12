@@ -46,6 +46,12 @@
 ...  m_testFunction__com_google_j2cl_transpiler_readable_jsoptional_Main_Function(f) {
   }] "com.google.j2cl.transpiler.readable.jsoptional.Main.testFunction"
 [f] => [f] "f"
+[@JsMethod
+  public void testOptionalFunction(@JsOptional Function f) {}] => [/**
+   * @param {?function(?string=, ...*):*=} f
+...  testOptionalFunction(f) {
+  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.testOptionalFunction"
+[f] => [f] "f"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [Function f = (s, varargs) -> s;] => [this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main = (/** @param {?string=} s @param {...*} varargs */ (s, ...varargs) =>{
       return s;

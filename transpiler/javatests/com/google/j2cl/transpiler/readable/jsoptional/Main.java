@@ -32,6 +32,9 @@ public class Main {
 
   public void testFunction(Function f) {}
 
+  @JsMethod
+  public void testOptionalFunction(@JsOptional Function f) {}
+
   @JsType
   interface I<T> {
     void m(T t, @JsOptional Object o);
