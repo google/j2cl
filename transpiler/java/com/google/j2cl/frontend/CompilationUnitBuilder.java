@@ -270,7 +270,10 @@ public class CompilationUnitBuilder {
             AstUtils.getFieldDescriptorForCapture(
                 currentTypeDeclaration.getUnsafeTypeDescriptor(), capturedVariable);
         type.addField(
-            Field.Builder.from(fieldDescriptor).setCapturedVariable(capturedVariable).build());
+            Field.Builder.from(fieldDescriptor)
+                .setCapturedVariable(capturedVariable)
+                .setSourcePosition(type.getSourcePosition())
+                .build());
       }
       if (JdtUtils.capturesEnclosingInstance(typeBinding)) {
         // add field for enclosing instance.

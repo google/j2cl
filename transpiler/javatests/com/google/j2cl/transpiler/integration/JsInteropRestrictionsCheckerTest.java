@@ -2596,6 +2596,14 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             // anonymous @JsConstructor class with unusable-by-js captures.
             "  private void f17(Long a) { new A() { { f7(a); } }; }",
             "  public void trigger(Void v) { }", // Void succeeds.
+            "}",
+            "class Outer {",
+            "  {",
+            "    Long l = 1l;",
+            "    class A {",
+            "       Long f = l;",
+            "    }",
+            "  }",
             "}")
         .assertCompileSucceeds()
         .assertNoWarnings();

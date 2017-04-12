@@ -165,11 +165,11 @@ public class JsInteropRestrictionsChecker {
 
   private void checkMember(
       Member member, Map<String, JsMember> localNames, Map<String, JsMember> staticNames) {
-    if (!member.isMethod() && !member.isField()) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if ((!member.isMethod() && !member.isField()) || memberDescriptor.isSynthetic()) {
       return;
     }
 
-    MemberDescriptor memberDescriptor = member.getDescriptor();
     if (memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
       checkMemberOfNativeJsType(member);
     }
@@ -187,7 +187,7 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    if (canBeReferencedExternally(member.getDescriptor())) {
+    if (canBeReferencedExternally(memberDescriptor)) {
       checkUnusableByJs(member);
     }
 
@@ -1082,7 +1082,7 @@ public class JsInteropRestrictionsChecker {
       // members of anonymous classes can not be referenced externally
       return false;
     }
-    // TODO(b/36232076): There should be two method isJsMember and isOrOverridesJsMember to
+    // TODO(b/36232076): There should be two methods isJsMember and isOrOverridesJsMember to
     // distinguish when a member is explicitly marked (to consider the member as
     // canBeReferencedExternally) and when the member inherits through overriding a JsMember.
     return memberDescriptor.isJsMember() || memberDescriptor.isJsFunction();
