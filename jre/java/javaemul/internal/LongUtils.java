@@ -16,7 +16,8 @@ class LongUtils {
   }
 
   public static NativeLong $fromInt(int value) {
-    return NativeLong.fromInt(value);
+    // Ensure int is coerced to 32 bits.
+    return NativeLong.fromInt(value | 0);
   }
 
   public static NativeLong $fromNumber(double value) {

@@ -47,6 +47,10 @@ public class Main {
     assert overflowValue == expectValue;
   }
 
+  private void takesDouble(double overflowValue, double expectValue) {
+    assert overflowValue == expectValue;
+  }
+
   private void takesLong(long overflowValue, long expectValue) {
     assert overflowValue == expectValue;
   }
@@ -75,7 +79,7 @@ public class Main {
     // Int
     {
       ri = mi + mi;
-      assert ri == 4294967294L; // we don't honor int overflow for some operations
+      assert ri == 4294967294d; // we don't honor int overflow for some operations
 
       ri = mi / mi;
       assert ri == 1;
@@ -216,7 +220,7 @@ public class Main {
     // underflow/overflow.
 
     takesInt(11 / 2, 5);
-    takesLong(mi + 1, 2147483648L); // we don't honor int overflow for some operations
+    takesDouble(mi + 1, 2147483648d); // we don't honor int overflow for some operations
     takesLong(ml + 1L, -9223372036854775808L);
   }
 
@@ -239,7 +243,7 @@ public class Main {
 
     ri = mi;
     ri++;
-    assert ri == 2147483648L; // we don't honor int overflow for some operations
+    assert ri == 2147483648d; // we don't honor int overflow for some operations
 
     rl = ml;
     rl++;
@@ -273,7 +277,7 @@ public class Main {
 
     ri = mi;
     ri++;
-    assert ri == 2147483648L; // we don't honor int overflow for some operations
+    assert ri == 2147483648d; // we don't honor int overflow for some operations
 
     rl = ml;
     rl++;
