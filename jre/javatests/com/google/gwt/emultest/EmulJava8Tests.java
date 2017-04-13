@@ -21,6 +21,7 @@ import com.google.gwt.emultest.java8.lang.MathTest;
 import com.google.gwt.emultest.java8.lang.StringTest;
 import com.google.gwt.emultest.java8.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java8.util.ArrayListTest;
+import com.google.gwt.emultest.java8.util.ArraysTest;
 import com.google.gwt.emultest.java8.util.ComparatorTest;
 import com.google.gwt.emultest.java8.util.DoubleSummaryStatisticsTest;
 import com.google.gwt.emultest.java8.util.HashMapTest;
@@ -41,6 +42,12 @@ import com.google.gwt.emultest.java8.util.SpliteratorsTest;
 import com.google.gwt.emultest.java8.util.StringJoinerTest;
 import com.google.gwt.emultest.java8.util.TreeMapTest;
 import com.google.gwt.emultest.java8.util.VectorTest;
+import com.google.gwt.emultest.java8.util.stream.CollectorsTest;
+import com.google.gwt.emultest.java8.util.stream.DoubleStreamTest;
+import com.google.gwt.emultest.java8.util.stream.IntStreamTest;
+import com.google.gwt.emultest.java8.util.stream.LongStreamTest;
+import com.google.gwt.emultest.java8.util.stream.StreamSupportTest;
+import com.google.gwt.emultest.java8.util.stream.StreamTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -58,8 +65,7 @@ import org.junit.runners.Suite.SuiteClasses;
   BigIntegerConvertTest.class,
 
   //-- java.util
-  // TODO(b/35891278): Enable below tests
-  // ArraysTest.class,
+  ArraysTest.class,
   ArrayListTest.class,
   LinkedListTest.class,
   ListTest.class,
@@ -82,13 +88,12 @@ import org.junit.runners.Suite.SuiteClasses;
   IntSummaryStatisticsTest.class,
   LongSummaryStatisticsTest.class,
 
-  // TODO(b/35891278): Enable below tests
   //-- java.util.stream
-  // CollectorsTest.class,
-  // DoubleStreamTest.class,
-  // IntStreamTest.class,
-  // LongStreamTest.class,
-  // StreamTest.class,
-  // StreamSupportTest.class,
+  CollectorsTest.class,
+  DoubleStreamTest.class,
+  IntStreamTest.class,
+  LongStreamTest.class,
+  StreamTest.class,
+  StreamSupportTest.class,
 })
 public class EmulJava8Tests {}
