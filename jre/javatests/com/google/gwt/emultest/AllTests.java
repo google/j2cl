@@ -15,21 +15,17 @@
  */
 package com.google.gwt.emultest;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /** TestSuite for all of GWT's emul suites. */
-public class AllTests {
-
-  public static Test suite() {
-    TestSuite suite = new TestSuite("All Emul tests");
-    suite.addTest(BigDecimalSuite.suite());
-    suite.addTest(BigIntegerSuite.suite());
-    suite.addTest(CollectionsSuite.suite());
-    suite.addTest(EmulSuite.suite());
-    suite.addTest(EmulJava8Suite.suite());
-    suite.addTest(TreeMapSuiteSub.suite());
-    suite.addTest(TreeSetSuiteSub.suite());
-    return suite;
-  }
-}
+@RunWith(Suite.class)
+@SuiteClasses({
+  BigDecimalSuite.class,
+  BigIntegerSuite.class,
+  CollectionsSuite.class,
+  EmulSuite.class,
+  EmulJava8Suite.class,
+})
+public class AllTests {}
