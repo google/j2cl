@@ -264,31 +264,31 @@ public class Main {
     // natively in the original type.
 
     rb = mb;
-    rb++;
+    ++rb;
     assert rb == -128;
 
     rc = mc;
-    rc++;
+    ++rc;
     assert rc == 0;
 
     rs = ms;
-    rs++;
+    ++rs;
     assert rs == -32768;
 
     ri = mi;
-    ri++;
+    ++ri;
     assert ri == 2147483648d; // we don't honor int overflow for some operations
 
     rl = ml;
-    rl++;
+    ++rl;
     assert rl == -9223372036854775808L;
 
     rf = mf;
-    rf++;
+    ++rf;
     assert rf == 3.4028235E38f;
 
     rd = md;
-    rd++;
+    ++rd;
     assert rd == 1.7976931348623157E308D;
   }
 
