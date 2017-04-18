@@ -14,7 +14,6 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
       javacopts=javacopts,
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
       extra_defs=[
           "--rewrite_polyfills=false",
           "--strict",
@@ -23,7 +22,6 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
       ] + defs,
       deps_mgmt="closure",
       externs_list=["//javascript/externs:common"],
-      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       deps=[
           ":shared",
           "//third_party/java/junit:junit-j2cl",
