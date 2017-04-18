@@ -1,0 +1,92 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$Api.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Api$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParametricJsFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+/**
+ * @interface
+ */
+class Api {
+  /**
+   * @abstract
+   * @template M_Api_anApi_T
+   * @return {?function(M_Api_anApi_T):void}
+   * @public
+   */
+  m_anApi__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_Api =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_Api;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_Api;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Api.$clinit = function() {};
+    ParametricJsFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    Api,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$Api'));
+
+
+Api.$markImplementor(/** @type {Function} */ (Api));
+
+
+/**
+ * Export class.
+ */
+exports = Api;
+//# sourceMappingURL=Main$Api.js.map

@@ -1,0 +1,12 @@
+[@JsFunction
+  interface ParametricJsFunction<E> {
+    void call(E event);
+  }] => [/**
+ * @interface
+...exports = ParametricJsFunction;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction"
+[void call(E event);] => [/**
+   * @abstract
+...  m_call__java_lang_Object(event) {
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction.call"
+[event] => [event] "event"

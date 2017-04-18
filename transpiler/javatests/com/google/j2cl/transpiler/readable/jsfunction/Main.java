@@ -123,4 +123,21 @@ public class Main {
   void testJsFunctionOptional() {
     JsFunctionOptional f = (i, n) -> (int) (i + n);
   }
+
+  @JsFunction
+  interface ParametricJsFunction<E> {
+    void call(E event);
+  }
+
+  interface Api {
+    <T> ParametricJsFunction<T> anApi();
+  }
+
+  static class Implementor implements Api {
+    @Override
+    @JsMethod
+    public <T> ParametricJsFunction<T> anApi() {
+      return (ParametricJsFunction<T>) null;
+    }
+  }
 }

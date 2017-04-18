@@ -1,0 +1,128 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$Implementor.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Implementor$impl');
+
+
+const Api = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.Api$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParametricJsFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+/**
+ * @implements {Api}
+ */
+class Implementor extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Implementor()'.
+   * @return {!Implementor}
+   * @public
+   */
+  static $create__() {
+    Implementor.$clinit();
+    let $instance = new Implementor();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Implementor()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor();
+  }
+
+  /**
+   * @template M_Implementor_anApi_T
+   * @return {?function(M_Implementor_anApi_T):void}
+   * @public
+   */
+  anApi() {
+    return /**@type {?function(*):void} */ (
+        $Casts.to(null, ParametricJsFunction));
+  }
+
+  /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @template M_Api_anApi_T
+   * @return {?function(M_Api_anApi_T):void}
+   * @public
+   */
+  m_anApi__() {
+    return /**@type {?function(M_Implementor_anApi_T):void} */ (this.anApi());
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Implementor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Implementor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Implementor.$clinit = function() {};
+    ParametricJsFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor() {}
+};
+
+$Util.$setClassMetadata(
+    Implementor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$Implementor'));
+
+
+Api.$markImplementor(Implementor);
+
+
+/**
+ * Export class.
+ */
+exports = Implementor;
+//# sourceMappingURL=Main$Implementor.js.map
