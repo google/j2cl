@@ -30,7 +30,6 @@ import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -60,9 +59,16 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
         MethodDescriptor methodDescriptor = method.getDescriptor();
         Predicate<TypeDescriptor> shouldBeReplaced =
             typeDescriptor ->
-                methodDescriptor
-                        .getTypeParameterTypeDescriptors()
-                        .contains(TypeDescriptors.toNonNullable(typeDescriptor))
+                // TODO(b/37482332): Synthesized method (like bridges) may contain references to
+                // type variables that are not in the enclosing scope (e.g. a type variable
+                // introduced by the method that cause the bridge). When those method bodies are
+                // specialized correctly there should be no need to filter type variables that
+                // that are not declared by the class.
+                (typeDescriptor.isTypeVariable()
+                        && !type.getDeclaration()
+                            .getTypeParameterDescriptors()
+                            .contains(typeDescriptor))
+                    || methodDescriptor.getTypeParameterTypeDescriptors().contains(typeDescriptor)
                     || methodDescriptor.isJsFunction();
 
         method.accept(new RewriteTypeVariablesInJsDocAnnotations(shouldBeReplaced));
