@@ -1,0 +1,46 @@
+[static final class ParamtericImplementation<T> implements ParametricJsFunction<T> {
+    @Override
+...    }
+  }] => [/**
+ * @template C_ParamtericImplementation_T
+...exports = ParamtericImplementation;
+] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation"
+[static final class ParamtericImplementation<T> implements ParametricJsFunction<T> {
+    @Override
+...    }
+  }] => [/**
+   * Private implementation constructor.
+...    super();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation"
+[UNKNOWN] => [super();]
+[static final class ParamtericImplementation<T> implements ParametricJsFunction<T> {
+    @Override
+...    }
+  }] => [/**
+   * Factory method corresponding to constructor 'ParamtericImplementation()'.
+...    return $Util.$makeLambdaFunction($Util.$getPrototype(ParamtericImplementation).m_call__java_lang_Object, $instance, ParamtericImplementation.$copy);
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation.<ctor>"
+[UNKNOWN] => [ParamtericImplementation.$clinit();]
+[UNKNOWN] => [let $instance = new ParamtericImplementation();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation__();]
+[UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(ParamtericImplementation).m_call__java_lang_Object, $instance, ParamtericImplementation.$copy);]
+[static final class ParamtericImplementation<T> implements ParametricJsFunction<T> {
+    @Override
+...    }
+  }] => [/**
+   * Initialization from constructor 'ParamtericImplementation()'.
+...    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation();
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation.<ctor>"
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation();]
+[@Override
+    public void call(T t) {
+      Object o = (T) t;
+    }] => [/**
+   * @override
+...    let o = /**@type {*} */ ($Casts.to(t, java_lang_Object));
+  }] "com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation.call"
+[t] => [t] "t"
+[Object o = (T) t;] => [let o = /**@type {*} */ ($Casts.to(t, java_lang_Object));]
+[o] => [o] "o"
+[UNKNOWN] => [java_lang_Object.$clinit();]

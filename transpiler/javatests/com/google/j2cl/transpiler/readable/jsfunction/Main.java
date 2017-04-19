@@ -140,4 +140,11 @@ public class Main {
       return (ParametricJsFunction<T>) null;
     }
   }
+
+  static final class ParamtericImplementation<T> implements ParametricJsFunction<T> {
+    @Override
+    public void call(T t) {
+      Object o = (T) t;
+    }
+  }
 }

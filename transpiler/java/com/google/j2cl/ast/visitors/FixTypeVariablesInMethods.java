@@ -69,7 +69,10 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                             .getTypeParameterDescriptors()
                             .contains(typeDescriptor))
                     || methodDescriptor.getTypeParameterTypeDescriptors().contains(typeDescriptor)
+                    // JsFunction methods are annotated with @this {function(...):...} and loose
+                    // the ability to refer to type variables declared in the class.
                     || methodDescriptor.isJsFunction();
+        ;
 
         method.accept(new RewriteTypeVariablesInJsDocAnnotations(shouldBeReplaced));
       }

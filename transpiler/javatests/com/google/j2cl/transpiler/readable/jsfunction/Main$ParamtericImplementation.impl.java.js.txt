@@ -1,0 +1,134 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$ParamtericImplementation.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.ParamtericImplementation$impl');
+
+
+const ParametricJsFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+/**
+ * @template C_ParamtericImplementation_T
+ * @implements {ParametricJsFunction<C_ParamtericImplementation_T>}
+ */
+class ParamtericImplementation extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'ParamtericImplementation()'.
+   * @template C_ParamtericImplementation_T
+   * @return {function(C_ParamtericImplementation_T):void}
+   * @public
+   */
+  static $create__() {
+    ParamtericImplementation.$clinit();
+    let $instance = new ParamtericImplementation();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation__();
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(ParamtericImplementation).m_call__java_lang_Object,
+        $instance, ParamtericImplementation.$copy);
+  }
+
+  /**
+   * Initialization from constructor 'ParamtericImplementation()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation();
+  }
+
+  /**
+   * @override
+   * @this {?function(C_ParamtericImplementation_T):void}
+   * @param {C_ParamtericImplementation_T} t
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(t) {
+    let o = /**@type {*} */ ($Casts.to(t, java_lang_Object));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ParamtericImplementation);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {ParamtericImplementation} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation =
+        true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    ParamtericImplementation.$clinit = function() {};
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation() {
+  }
+};
+
+$Util.$setClassMetadata(
+    ParamtericImplementation,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$ParamtericImplementation'));
+
+
+ParametricJsFunction.$markImplementor(ParamtericImplementation);
+
+
+/**
+ * Export class.
+ */
+exports = ParamtericImplementation;
+//# sourceMappingURL=Main$ParamtericImplementation.js.map
