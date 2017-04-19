@@ -48,14 +48,6 @@ def j2cl_mirror_from_gwt(name,
     )
     packaged_js_srcs = [":" + name + "_js_files"]
 
-  # The content of depinfo file must be hand-maintained to keep in
-  # sync with the handrolled nativebootstrap and vmbootstrap JS files. The first
-  # row is a comma separated list of goog.require()d things and the second row
-  # is a comma separated list of goog.provide()d things.
-  #
-  # This is not a very maintainable solution. Only the JRE should go to the
-  # trouble to merge hand-rolled JS with a generated ZIP in one step.
-  # TODO(b/29509857): Replace all hand-rolled JS with Java then delete this.
   j2cl_library(
       name = name,
       srcs = [":" + name + "_java_files"],
@@ -63,7 +55,6 @@ def j2cl_mirror_from_gwt(name,
       native_srcs_zips = [":" + name + "_native_zips"],
       deps = deps,
       _js_deps = js_deps,
-      _js_depinfos = native.glob(["*.depinfo"]),
       **kwargs
   )
 
