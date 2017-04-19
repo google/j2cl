@@ -73,19 +73,19 @@ load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 j2cl_multi_test(
     name = "BigDecimal",
     shard_count = 5,
-    test_class = "com.google.gwt.emultest.BigDecimalTests",
+    test_class = "com.google.gwt.emultest.BigDecimalSuite",
 )
 
 j2cl_multi_test(
     name = "BigInteger",
     shard_count = 8,
-    test_class = "com.google.gwt.emultest.BigIntegerTests",
+    test_class = "com.google.gwt.emultest.BigIntegerSuite",
 )
 
 j2cl_multi_test(
     name = "Collections",
     shard_count = 16,
-    test_class = "com.google.gwt.emultest.CollectionsTests",
+    test_class = "com.google.gwt.emultest.CollectionsSuite",
 )
 
 j2cl_multi_test(
@@ -93,13 +93,13 @@ j2cl_multi_test(
     _js_srcs = ["test_defines.js"],
     bootstrap_files = ["test_defines.js"],
     shard_count = 16,
-    test_class = "com.google.gwt.emultest.EmulTests",
+    test_class = "com.google.gwt.emultest.EmulSuite",
 )
 
 j2cl_multi_test(
     name = "EmulJava8",
     shard_count = 8,
-    test_class = "com.google.gwt.emultest.EmulJava8Tests",
+    test_class = "com.google.gwt.emultest.EmulJava8Suite",
 )
 
 genrule(

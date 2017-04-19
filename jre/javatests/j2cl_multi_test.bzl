@@ -17,19 +17,16 @@ load("/third_party/java/j2cl/j2cl_test", "j2cl_test")
 
 def j2cl_multi_test(name, test_class, **kwargs):
   deps = [":emul_tests_lib", "//third_party/java/junit:junit-j2cl"]
-  srcs = [test_class.replace(".", "/") + ".java"]
   j2cl_test(name=name,
             test_class=test_class,
             generate_build_test=False,
-            srcs=srcs,
-            deps=deps,
+            runtime_deps=deps,
             **kwargs)
   j2cl_test(name=name + "_compiled",
             test_class=test_class,
             compile=1,
             generate_build_test=False,
-            srcs=srcs,
-            deps=deps,
+            runtime_deps=deps,
             extra_defs= [
                 # JRE tests use $doc and do other illegal things on purpose.
                 # b/33055288
