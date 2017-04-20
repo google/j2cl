@@ -19,7 +19,7 @@ load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 
 
 def readable_example(
-    name, srcs, supporting_srcs=[], native_srcs=[], native_srcs_pkg=None,
+    name, srcs, supporting_srcs=[], native_srcs=[],
     deps=[], js_deps=[], plugins=[], javacopts=[],  test_externs_list=None,
     _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
@@ -32,7 +32,6 @@ def readable_example(
     srcs: Source files to make readable output for.
     supporting_srcs: Source files referenced by the primary srcs.
     native_srcs: Foo.native.js files to merge in.
-    native_srcs_pkg: The package to palce on Foo.native.js files.
     deps: J2CL libraries referenced by the srcs.
     js_deps: JS libraries referenced by the srcs.
     plugins: APT processors to execute when generating readable output.
@@ -52,7 +51,6 @@ def readable_example(
             "-Xep:IdentityBinaryExpression:OFF",
         ] + javacopts,
         native_srcs=native_srcs,
-        native_srcs_pkg=native_srcs_pkg,
         deps=deps,
         plugins=plugins,
         _js_deps=js_deps,
@@ -69,7 +67,6 @@ def readable_example(
           "-target 8"
       ] + javacopts,
       native_srcs=native_srcs,
-      native_srcs_pkg=native_srcs_pkg,
       deps=deps + (["supporting_" + name] if supporting_srcs else []),
       plugins=plugins,
       _js_deps=js_deps,

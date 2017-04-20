@@ -26,11 +26,8 @@ js_library(
 readable_example(
     name = "externs",
     srcs = glob(["*.java"]),
-    native_srcs = ["Main.native.js"],
-    native_srcs_pkg = "CONVENTION",
-    test_externs_list = [
-        ":_externs",
-    ],
+    native_srcs = glob(["*.native.js"]),
+    test_externs_list = [":_externs"],
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
     ],

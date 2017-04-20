@@ -12,6 +12,5 @@ load(
 readable_example(
     name = "nativeinjection",
     srcs = glob(["*.java"]),
-    native_srcs = ["native_sources/NativeClass.native.js"],
-    native_srcs_pkg = "com/google/j2cl/transpiler/readable/nativeinjection",
+    native_srcs = glob(["*.native.js"]),
 )

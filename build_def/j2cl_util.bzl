@@ -59,18 +59,12 @@ def generate_zip(name, srcs, pkg, testonly = None):
     flatten = 0
     package_dir = None
     strip_prefix = None
-  elif pkg == "ABSOLUTE":
-    flatten = 0
-    package_dir = None
-    strip_prefix = ""
   elif pkg == "CONVENTION":
     flatten = 1
     package_dir = get_java_path(PACKAGE_NAME)
     strip_prefix = None
   else:
-    flatten = 1
-    package_dir = pkg
-    strip_prefix = None
+    fail("Incorrect package type: " + pkg)
 
   native.pkg_library(
       name=name + "_pkg_library",

@@ -15,9 +15,6 @@ load(
 integration_test(
     name = "jsproperties",
     srcs = glob(["*.java"]),
-    native_srcs = [
-        "Main.native.js",
-    ],
-    native_srcs_pkg = "com/google/j2cl/transpiler/integration/jsproperties",
+    native_srcs = glob(["*.native.js"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
