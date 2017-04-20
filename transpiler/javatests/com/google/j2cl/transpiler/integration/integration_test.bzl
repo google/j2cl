@@ -133,7 +133,7 @@ def integration_test(name,
       deps=[":" + name],
   )
   # For constructing readable optimized diffs.
-  readable_out_defs = [ "--variable_renaming=ALL" , "--property_renaming=OFF" , "--pretty_print"]
+  readable_out_defs = [ "--variable_renaming=OFF" , "--property_renaming=OFF" , "--pretty_print"]
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
