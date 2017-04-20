@@ -115,10 +115,10 @@ public class IntegrationTestCase extends TestCase {
       return this;
     }
 
-    public TranspileResult assertInfoMessages(String... expectedInfoMessages) throws Exception {
-      assertThat(getProblems().getInfoMessages())
-          .comparingElementsUsing(CONTAINS_STRING)
-          .containsExactlyElementsIn(Arrays.asList(expectedInfoMessages));
+    public TranspileResult assertLastMessage(String expectedMessage) throws Exception {
+      List<String> allMsgs = getProblems().getMessages();
+      String lastMessage = Iterables.getLast(allMsgs, "");
+      assertThat(lastMessage).contains(expectedMessage);
       return this;
     }
   }

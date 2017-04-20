@@ -2622,7 +2622,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertNoWarnings();
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
   public void testUnusableByJsWarns() throws Exception {
     compile(
             "Buggy",
@@ -2683,7 +2682,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + " by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long... a)' is not"
                 + " usable by but exposed to JavaScript.")
-        .assertInfoMessages(
+        .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "
                 + "corresponding member.");

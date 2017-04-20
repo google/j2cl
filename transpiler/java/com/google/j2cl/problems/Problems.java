@@ -22,8 +22,9 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -195,22 +196,26 @@ public class Problems {
   }
 
   public List<String> getErrors() {
-    return getProblems(Severity.ERROR);
+    return getMessages(Severity.ERROR);
   }
 
   public List<String> getWarnings() {
-    return getProblems(Severity.WARNING);
+    return getMessages(Severity.WARNING);
   }
 
   public List<String> getInfoMessages() {
-    return getProblems(Severity.INFO);
+    return getMessages(Severity.INFO);
   }
 
-  public List<String> getProblems(Severity... severities) {
-    return getProblems(Arrays.asList(severities));
+  public List<String> getMessages() {
+    return getMessages(EnumSet.allOf(Severity.class));
   }
 
-  public List<String> getProblems(Collection<Severity> severities) {
+  private List<String> getMessages(Severity severity) {
+    return getMessages(Collections.singleton(severity));
+  }
+
+  private List<String> getMessages(Collection<Severity> severities) {
     return problemsBySeverity
         .entries()
         .stream()
