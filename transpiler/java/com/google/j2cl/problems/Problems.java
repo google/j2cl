@@ -160,14 +160,11 @@ public class Problems {
   public void abortWhenPossible() {
     abortRequested = true;
   }
+  
   /** Prints all error messages and a summary. */
   public void report(PrintStream outputStream, PrintStream errorStream) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
-      if (severityMessagePair.getKey() == Severity.INFO) {
-        outputStream.println(severityMessagePair.getValue());
-      } else {
-        errorStream.println(severityMessagePair.getValue());
-      }
+      errorStream.println(severityMessagePair.getValue());
     }
     if (hasErrors() || hasWarnings()) {
       J2clUtils.printf(
