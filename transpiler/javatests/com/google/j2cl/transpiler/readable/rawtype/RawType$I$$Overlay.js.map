@@ -1,0 +1,12 @@
+[interface I<T extends RawType> {
+    default void f(T t) {}
+  }] => [class I$$Overlay {
+  /**
+...exports = I$$Overlay;
+] "com.google.j2cl.transpiler.readable.rawtype.RawType.I"
+[default void f(T t) {}] => [/**
+   * @template C_I_T
+...    I$$Overlay.$clinit();
+  }] "com.google.j2cl.transpiler.readable.rawtype.RawType.I.f"
+[t] => [t] "t"
+[UNKNOWN] => [I$$Overlay.$clinit();]

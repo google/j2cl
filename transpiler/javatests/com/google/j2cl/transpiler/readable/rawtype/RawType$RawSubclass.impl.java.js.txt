@@ -1,0 +1,128 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.rawtype.RawType$RawSubclass.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType.RawSubclass$impl');
+
+
+const I = goog.require('com.google.j2cl.transpiler.readable.rawtype.RawType.I$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
+let I$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType.I$$Overlay$impl');
+
+
+/**
+ * @implements {I}
+ */
+class RawSubclass extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'RawSubclass()'.
+   * @return {!RawSubclass}
+   * @public
+   */
+  static $create__() {
+    RawSubclass.$clinit();
+    let $instance = new RawSubclass();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'RawSubclass()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass();
+  }
+
+  /**
+   * @override
+   * @param {RawType} t
+   * @return {void}
+   * @public
+   */
+  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(arg0) {
+    I$$Overlay
+        .m_f__com_google_j2cl_transpiler_readable_rawtype_RawType_I__com_google_j2cl_transpiler_readable_rawtype_RawType(
+            this, arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof RawSubclass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, RawSubclass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    RawSubclass.$clinit = function() {};
+    RawType = goog.module.get(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
+    I$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType.I$$Overlay$impl');
+    java_lang_Object.$clinit();
+    I.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass() {}
+};
+
+$Util.$setClassMetadata(
+    RawSubclass,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType$RawSubclass'));
+
+
+I.$markImplementor(RawSubclass);
+
+
+/**
+ * Export class.
+ */
+exports = RawSubclass;
+//# sourceMappingURL=RawType$RawSubclass.js.map
