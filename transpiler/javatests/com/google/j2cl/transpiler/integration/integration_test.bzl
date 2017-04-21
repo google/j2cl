@@ -262,7 +262,6 @@ def _gwt_targets(java_package, srcs, deps, gwt_deps):
       compiler_opts=[
           "-optimize 9",
           "-style OBFUSCATED",
-          # "-style DETAILED",
           "-setProperty user.agent=safari",
           "-setProperty compiler.stackMode=strip",
           "-setProperty compiler.enum.obfuscate.names=true",
@@ -271,8 +270,6 @@ def _gwt_targets(java_package, srcs, deps, gwt_deps):
           "-setProperty user.agent.runtimeWarning=false",
           "-setProperty jre.checks.checkLevel=MINIMAL",
           "-XnoclassMetadata",
-          # "-XclosureCompiler",
-          "-setProperty compiler.useSourceMaps=true",
       ],
       shard_count=1,
       module_target=":gwt_module",

@@ -9,13 +9,13 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
-public class Main {
+public class Box2d {
   private static final int NUM_STEPS = 100;
   private static final int NUM_BALLS = 20;
 
   private final World world;
 
-  public Main() {
+  private Box2d() {
     // Define the gravity vector.
     Vec2 gravity = new Vec2(0f, -9.8f);
 
@@ -45,7 +45,7 @@ public class Main {
       ground.createFixture(groundEdgeFixtureDef);
     }
 
-    for (int i = 0; i < Main.NUM_BALLS; i++) {
+    for (int i = 0; i < NUM_BALLS; i++) {
       spawnBall();
     }
   }
@@ -79,12 +79,12 @@ public class Main {
     ball.createFixture(ballFixtureDef);
   }
 
-  public void step(float secondsPerFrame) {
+  private void step(float secondsPerFrame) {
     world.step(secondsPerFrame, 8, 3);
   }
 
-  public static void main(String... args) {
-    Main m = new Main();
+  public static void start() {
+    Box2d m = new Box2d();
     for (int i = 0; i < NUM_STEPS; i++) {
       m.step(1);
     }
