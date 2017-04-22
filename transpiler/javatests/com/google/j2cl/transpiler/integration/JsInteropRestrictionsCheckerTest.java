@@ -2236,11 +2236,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
-            "Native JsType method 'String NativeTypeWithBridge.foo()' should be native or abstract."
-            // TODO(b/37579830): Finalize checker implementation and enable this test.
-            //  "Line 29: 'int EntryPoint.NativeTypeWithHashCode.hashCode()' "
-            //      + "(exposed by 'EntryPoint.SomeClass3') cannot be assigned a different "
-            );
+            "Native JsType method 'String NativeTypeWithBridge.foo()' should be native"
+                + " or abstract.");
   }
 
   public void testNativeJsTypeImplementingJavaLangObjectMethodsSucceeds() throws Exception {
