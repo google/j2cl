@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
+  // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideConcreteMethodFails() throws Exception {
     compile(
             "Buggy",
@@ -78,7 +78,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
+  // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideHalfAndHalfFails() throws Exception {
     compile(
             "Buggy",
@@ -750,7 +750,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "('void ParentBuggy.foo()' with JavaScript name 'foo').");
   }
 
-  // TODO(b/27597597): Finalize checker implementation and enable this test.
+  // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testAccidentallyRenamedSuperInterfaceJsMethodFails() throws Exception {
     compile(
             "Buggy",
@@ -2237,7 +2237,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
             "Native JsType method 'String NativeTypeWithBridge.foo()' should be native or abstract."
-            // TODO(b/27597597): Finalize checker implementation and enable this test.
+            // TODO(b/37579830): Finalize checker implementation and enable this test.
             //  "Line 29: 'int EntryPoint.NativeTypeWithHashCode.hashCode()' "
             //      + "(exposed by 'EntryPoint.SomeClass3') cannot be assigned a different "
             );
@@ -2293,9 +2293,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
                 + "that is different from the JavaScript name of a method it overrides "
                 + "('int Object.hashCode()' with JavaScript name 'hashCode')"
-            // TODO(b/27597597): Finalize checker implementation and enable this test.
-            //"Line 11: Cannot use super to call 'EntryPoint.NativeType.toString'. "
-            //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
+            // TODO(b/37579977): Finalize checker implementation and enable this test.
             //"Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
             //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
             //"Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
