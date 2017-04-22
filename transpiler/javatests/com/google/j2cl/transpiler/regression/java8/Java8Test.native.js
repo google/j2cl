@@ -2,7 +2,7 @@
  * @return {*}
  * @public
  */
-__class
+Java8Test
     .createNativeJsTypeInterfaceWithStaticInitializationAndInstanceOverlayMethod =
     function() {
   return {
@@ -18,7 +18,7 @@ __class
  * @return {?string}
  * @public
  */
-__class.callFromJSNI = function(f) {
+Java8Test.callFromJSNI = function(f) {
   return f(2, 'a', 'b', 'c');
 };
 
@@ -27,7 +27,7 @@ __class.callFromJSNI = function(f) {
  * @return {?function():?number}
  * @public
  */
-__class.createNative = function() {
+Java8Test.createNative = function() {
   return function() {
     return 5;
   };

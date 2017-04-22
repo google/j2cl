@@ -267,16 +267,15 @@ $Util.$setClassMetadata(
 
 /**
  * Native Method Injection
- */
-// Alias for the class defined in this module
-const __class = Main;
+ */  // Long alias for the class defined in this module
+const com_google_j2cl_transpiler_readable_jsfunction_Main = Main;
 /**
  * @param {*} fn
  * @param {number} arg
  * @return {number}
  * @public
  */
-__class.callAsFunction = function(fn, arg) {
+Main.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
 };
 
@@ -284,13 +283,12 @@ __class.callAsFunction = function(fn, arg) {
  * @return {!Function}
  * @public
  */
-__class.createMyJsFunction =
-    function() {
+Main.createMyJsFunction = function() {
   let myFn = function(a) {
     return a;
   };
   return myFn;
-}
+};
 
 
 /**

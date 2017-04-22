@@ -4,6 +4,6 @@
  * @return {*}
  * @public
  */
-__class.createJsArray = function(length) {
+ArraysTest.createJsArray = function(length) {
   return new Array(length);
 };

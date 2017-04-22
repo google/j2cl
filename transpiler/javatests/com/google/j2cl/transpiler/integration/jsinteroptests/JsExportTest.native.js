@@ -3,7 +3,7 @@
  * @return {number}
  * @public
  */
-__class.callFoo = function(o) {
+JsExportTest.callFoo = function(o) {
   return o.foo();
 };
 
@@ -12,6 +12,6 @@ __class.callFoo = function(o) {
  * @return {number}
  * @public
  */
-__class.accessField = function(o) {
+JsExportTest.accessField = function(o) {
   return o.field;
-}
+};

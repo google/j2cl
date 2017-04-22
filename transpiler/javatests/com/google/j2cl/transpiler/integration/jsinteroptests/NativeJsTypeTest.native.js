@@ -1,63 +1,63 @@
 /**
  * @return {*}
  */
-__class.createNativeJsTypeWithOverlay = function() {
+NativeJsTypeTest.createNativeJsTypeWithOverlay = function() {
   return { m: function() { return 6; } };
 };
 
 /**
  * @return {*}
  */
-__class.createNativeObjectWithToString = function() {
+NativeJsTypeTest.createNativeObjectWithToString = function() {
   return {toString: function() { return 'Native type'; }};
 };
 
 /**
  * @return {*}
  */
-__class.createNativeObject = function() {
+NativeJsTypeTest.createNativeObject = function() {
   return {};
 };
 
 /**
  * @return {*}
  */
-__class.createNativeArray = function() {
+NativeJsTypeTest.createNativeArray = function() {
   return [];
 };
 
 /**
  * @return {*}
  */
-__class.createFunction = function() {
+NativeJsTypeTest.createFunction = function() {
   return function() {};
 };
 
 /**
  * @return {*}
  */
-__class.createNumber = function() {
+NativeJsTypeTest.createNumber = function() {
   return 42;
 };
 
 /**
  * @return {*}
  */
-__class.createBoxedNumber = function() {
+NativeJsTypeTest.createBoxedNumber = function() {
   return new Number(42);
 };
 
 /**
  * @return {*}
  */
-__class.createBoxedString = function() {
+NativeJsTypeTest.createBoxedString = function() {
   return new String('hello');
 };
 
 /**
  * @return {*}
  */
-__class.createNativeSubclass = function() {
+NativeJsTypeTest.createNativeSubclass = function() {
   return {
     add: function(e) { this[0] = e; },
     remove: function(e) {

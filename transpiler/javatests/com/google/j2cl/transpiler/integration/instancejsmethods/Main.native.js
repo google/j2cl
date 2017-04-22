@@ -4,8 +4,8 @@
  * @param {number} b
  * @return {number}
  */
-__class.callParentFun = function(p, a, b) {
-  __class.$clinit();
+Main.callParentFun = function(p, a, b) {
+  Main.$clinit();
   return p.sum(a, b);
 };
 
@@ -15,8 +15,8 @@ __class.callParentFun = function(p, a, b) {
  * @param {number} b
  * @return {number}
  */
-__class.callParentBar = function(p, a, b) {
-  __class.$clinit();
+Main.callParentBar = function(p, a, b) {
+  Main.$clinit();
   return p.bar(a, b);
 };
 
@@ -25,8 +25,8 @@ __class.callParentBar = function(p, a, b) {
  * @param {number} a
  * @return {number}
  */
-__class.callParentFoo = function(p, a) {
-  __class.$clinit();
+Main.callParentFoo = function(p, a) {
+  Main.$clinit();
   return p.myFoo(a);
 };
 
@@ -36,8 +36,8 @@ __class.callParentFoo = function(p, a) {
  * @param {number} b
  * @return {number}
  */
-__class.callChildFun = function(c, a, b) {
-  __class.$clinit();
+Main.callChildFun = function(c, a, b) {
+  Main.$clinit();
   return c.sum(a, b);
 };
 
@@ -47,8 +47,8 @@ __class.callChildFun = function(c, a, b) {
  * @param {number} b
  * @return {number}
  */
-__class.callChildBar = function(c, a, b) {
-  __class.$clinit();
+Main.callChildBar = function(c, a, b) {
+  Main.$clinit();
   return c.bar(a, b);
 };
 
@@ -57,8 +57,8 @@ __class.callChildBar = function(c, a, b) {
  * @param {number} a
  * @return {number}
  */
-__class.callChildFoo = function(c, a) {
-  __class.$clinit();
+Main.callChildFoo = function(c, a) {
+  Main.$clinit();
   return c.myFoo(a);
 };
 
@@ -67,7 +67,7 @@ __class.callChildFoo = function(c, a) {
  * @param {number} a
  * @return {number}
  */
-__class.callChildIntfFoo = function(c, a) {
-  __class.$clinit();
+Main.callChildIntfFoo = function(c, a) {
+  Main.$clinit();
   return c.intfFoo(a);
-}
+};

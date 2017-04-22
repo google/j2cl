@@ -3,7 +3,7 @@
  * @return {*}
  * @public
  */
-__class.callAsFunctionNoArgument = function(fn) {
+JsFunctionTest.callAsFunctionNoArgument = function(fn) {
   return (/** @type {Function} */ (fn))();
 };
 
@@ -13,7 +13,7 @@ __class.callAsFunctionNoArgument = function(fn) {
  * @return {number}
  * @public
  */
-__class.callAsFunction = function(fn, arg) {
+JsFunctionTest.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
 };
 
@@ -23,7 +23,7 @@ __class.callAsFunction = function(fn, arg) {
  * @return {number}
  * @public
  */
-__class.callWithFunctionApply = function(fn, arg) {
+JsFunctionTest.callWithFunctionApply = function(fn, arg) {
   return fn.apply(null, [arg]);
 };
 
@@ -33,7 +33,7 @@ __class.callWithFunctionApply = function(fn, arg) {
  * @return {number}
  * @public
  */
-__class.callWithFunctionCall = function(fn, arg) {
+JsFunctionTest.callWithFunctionCall = function(fn, arg) {
   return fn.call(null, arg);
 };
 
@@ -43,7 +43,7 @@ __class.callWithFunctionCall = function(fn, arg) {
  * @param {number} value
  * @public
  */
-__class.setField = function(object, fieldName, value) {
+JsFunctionTest.setField = function(object, fieldName, value) {
   object[fieldName] = value;
 };
 
@@ -53,7 +53,7 @@ __class.setField = function(object, fieldName, value) {
  * @return {number}
  * @public
  */
-__class.getField = function(object, fieldName) {
+JsFunctionTest.getField = function(object, fieldName) {
   return object[fieldName];
 };
 
@@ -63,7 +63,7 @@ __class.getField = function(object, fieldName) {
  * @return {number}
  * @public
  */
-__class.callIntFunction = function(object, functionName) {
+JsFunctionTest.callIntFunction = function(object, functionName) {
   return object[functionName]();
 };
 
@@ -71,7 +71,7 @@ __class.callIntFunction = function(object, functionName) {
  * @return {Function}
  * @public
  */
-__class.createMyJsFunction = function() {
+JsFunctionTest.createMyJsFunction = function() {
   var myFunction = function(a) { return a; };
   return myFunction;
 };
@@ -80,8 +80,10 @@ __class.createMyJsFunction = function() {
  * @return {Function}
  * @public
  */
-__class.createReferentialFunction = function() {
-  function myFunction() { return myFunction; }
+JsFunctionTest.createReferentialFunction = function() {
+  function myFunction() {
+    return myFunction;
+  }
   return myFunction;
 };
 
@@ -89,7 +91,7 @@ __class.createReferentialFunction = function() {
  * @return {Function}
  * @public
  */
-__class.createFunction = function() {
+JsFunctionTest.createFunction = function() {
   var fun = function(a) { return a; };
   return fun;
 };
@@ -98,7 +100,7 @@ __class.createFunction = function() {
  * @return {*}
  * @public
  */
-__class.createObject = function() {
+JsFunctionTest.createObject = function() {
   var a = {};
   return a;
 };
@@ -109,6 +111,6 @@ __class.createObject = function() {
  * @return {boolean}
  * @public
  */
-__class.hasField = function(object, fieldName) {
+JsFunctionTest.hasField = function(object, fieldName) {
   return object[fieldName] != undefined;
 };

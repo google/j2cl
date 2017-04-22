@@ -2,7 +2,7 @@
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPublicMethod = function(obj) {
+ConcreteJsType.hasPublicMethod = function(obj) {
   return obj.publicMethod != undefined;
 };
 
@@ -10,7 +10,7 @@ __class.hasPublicMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPublicStaticMethod = function(obj) {
+ConcreteJsType.hasPublicStaticMethod = function(obj) {
   return obj.publicStaticMethod != undefined;
 };
 
@@ -18,7 +18,7 @@ __class.hasPublicStaticMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPrivateMethod = function(obj) {
+ConcreteJsType.hasPrivateMethod = function(obj) {
   return obj.privateMethod != undefined;
 };
 
@@ -26,7 +26,7 @@ __class.hasPrivateMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasProtectedMethod = function(obj) {
+ConcreteJsType.hasProtectedMethod = function(obj) {
   return obj.protectedMethod != undefined;
 };
 
@@ -34,7 +34,7 @@ __class.hasProtectedMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPackageMethod = function(obj) {
+ConcreteJsType.hasPackageMethod = function(obj) {
   return obj.packageMethod != undefined;
 };
 
@@ -42,7 +42,7 @@ __class.hasPackageMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPublicField = function(obj) {
+ConcreteJsType.hasPublicField = function(obj) {
   return obj.publicField != undefined;
 };
 
@@ -50,7 +50,7 @@ __class.hasPublicField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPublicStaticField = function(obj) {
+ConcreteJsType.hasPublicStaticField = function(obj) {
   return obj.publicStaticField != undefined;
 };
 
@@ -58,7 +58,7 @@ __class.hasPublicStaticField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPrivateField = function(obj) {
+ConcreteJsType.hasPrivateField = function(obj) {
   return obj.privateField != undefined;
 };
 
@@ -66,7 +66,7 @@ __class.hasPrivateField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasProtectedField = function(obj) {
+ConcreteJsType.hasProtectedField = function(obj) {
   return obj.protectedField != undefined;
 };
 
@@ -74,6 +74,6 @@ __class.hasProtectedField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasPackageField = function(obj) {
+ConcreteJsType.hasPackageField = function(obj) {
   return obj.packageField != undefined;
 };

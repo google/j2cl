@@ -54,20 +54,24 @@ public class NativeJsFilesWriter {
   public void write(Multimap<String, JsniMethod> jsniMethodsByTypeName) {
     try (ZipOutputStream zipOutputStream = createZipOutputStream(zipFilefilePath)) {
 
-      for (String type : jsniMethodsByTypeName.keySet()) {
-        int lastDot = type.lastIndexOf('.');
-        String typeName = type.substring(lastDot + 1);
-        String packageName = type.substring(0, lastDot);
+      for (String qualifiedBinaryName : jsniMethodsByTypeName.keySet()) {
+        int lastDot = qualifiedBinaryName.lastIndexOf('.');
+        String simpleBinaryName = qualifiedBinaryName.substring(lastDot + 1);
+        String packageName = qualifiedBinaryName.substring(0, lastDot);
 
-        String content = buildContent(jsniMethodsByTypeName.get(type));
+        String typeAlias =
+            qualifiedBinaryName.replace("_", "__").replace('.', '_').replace('$', '_');
+        String content = buildContent(typeAlias, jsniMethodsByTypeName.get(qualifiedBinaryName));
 
         Preconditions.checkState(
             !Strings.isNullOrEmpty(content),
-            String.format("The content of the javascript file for the type %s is empty", type));
+            String.format(
+                "The content of the javascript file for the type %s is empty",
+                qualifiedBinaryName));
 
         // build js file name including directory.
         String directory = packageName.replaceAll("\\.", ZIP_PATH_SEPARATOR) + ZIP_PATH_SEPARATOR;
-        String javascriptFilePath = directory + typeName + ".native.js";
+        String javascriptFilePath = directory + simpleBinaryName + ".native.js";
         JsniConverter.log("content of " + javascriptFilePath + ":\n" + content);
         addTozipFile(zipOutputStream, javascriptFilePath, content);
       }
@@ -88,7 +92,7 @@ public class NativeJsFilesWriter {
     }
   }
 
-  private String buildContent(Collection<JsniMethod> jsniMethod) {
+  private String buildContent(String typeAlias, Collection<JsniMethod> jsniMethod) {
     StringBuilder contentBuilder = new StringBuilder();
 
     for (JsniMethod method : jsniMethod) {
@@ -97,7 +101,7 @@ public class NativeJsFilesWriter {
 
       contentBuilder.append(
           MessageFormat.format(
-              template, "__class", method.getName(), params, stripEnd(method.getBody())));
+              template, typeAlias, method.getName(), params, stripEnd(method.getBody())));
     }
 
     return contentBuilder.toString();

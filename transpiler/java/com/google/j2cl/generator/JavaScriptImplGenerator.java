@@ -705,12 +705,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderNativeSource() {
     if (nativeSource != null) {
-      sourceBuilder.appendLines(
-          "/**",
-          " * Native Method Injection",
-          " */",
-          "// Alias for the class defined in this module",
-          "const __class = " + className + ";");
+      sourceBuilder.appendLines("/**", " * Native Method Injection", " */");
+      String longAliasName = type.getDeclaration().getUnsafeTypeDescriptor().getLongAliasName();
+      if (!className.equals(longAliasName)) {
+        sourceBuilder.appendLines(
+            "// Long alias for the class defined in this module",
+            "const " + longAliasName + " = " + className + ";");
+      }
       sourceBuilder.newLine();
       sourceBuilder.appendln(nativeSource);
       sourceBuilder.newLine();

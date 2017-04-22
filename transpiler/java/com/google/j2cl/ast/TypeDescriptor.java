@@ -28,6 +28,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
@@ -534,6 +535,19 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   public TypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
+  }
+
+  @Memoized
+  public String getShortAliasName() {
+    // Add "$" prefix for bootstrap types and primitive types.
+    if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(this)) || isPrimitive()) {
+      return "$" + getSimpleSourceName();
+    }
+    return getSimpleSourceName();
+  }
+
+  public String getLongAliasName() {
+    return getQualifiedSourceName().replace("_", "__").replace('.', '_');
   }
 
   @Nullable

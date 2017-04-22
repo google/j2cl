@@ -328,7 +328,7 @@ public class ImportGatherer extends AbstractVisitor {
         String topLevelExtern = typeDescriptor.getQualifiedJsName().split("\\.")[0];
         localNameUses.add(topLevelExtern);
       } else {
-        localNameUses.add(computeShortAliasName(typeDescriptor));
+        localNameUses.add(typeDescriptor.getShortAliasName());
       }
     }
   }
@@ -348,23 +348,10 @@ public class ImportGatherer extends AbstractVisitor {
       return typeDescriptor.getQualifiedJsName();
     }
 
-    String shortAliasName = computeShortAliasName(typeDescriptor);
+    String shortAliasName = typeDescriptor.getShortAliasName();
     boolean unique = localNameUses.count(shortAliasName) == 1;
     return unique && JsProtectedNames.isLegalName(shortAliasName)
         ? shortAliasName
-        : computeLongAliasName(typeDescriptor);
-  }
-
-  private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getQualifiedSourceName().replaceAll("_", "__").replaceAll("\\.", "_");
-  }
-
-  private static String computeShortAliasName(TypeDescriptor typeDescriptor) {
-    // Add "$" prefix for bootstrap types and primitive types.
-    if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
-        || typeDescriptor.isPrimitive()) {
-      return "$" + typeDescriptor.getSimpleSourceName();
-    }
-    return typeDescriptor.getSimpleSourceName();
+        : typeDescriptor.getLongAliasName();
   }
 }

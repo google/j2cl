@@ -2,7 +2,7 @@
  * @return {*}
  * @public
  */
-__class.createNativeButton = function() {
+JsTypeTest.createNativeButton = function() {
   return document.createElement('button');
 };
 
@@ -10,7 +10,7 @@ __class.createNativeButton = function() {
  * @return {*}
  * @public
  */
-__class.createObject = function() {
+JsTypeTest.createObject = function() {
   return {};
 };
 
@@ -18,7 +18,7 @@ __class.createObject = function() {
  * @param {*} object
  * @return {number}
  */
-__class.callPublicMethod = function(object) {
+JsTypeTest.callPublicMethod = function(object) {
   return object.publicMethod();
 };
 
@@ -26,7 +26,7 @@ __class.callPublicMethod = function(object) {
  * @param {*} value
  * @return {boolean}
  */
-__class.isUndefined = function(value) {
+JsTypeTest.isUndefined = function(value) {
   return value == undefined;
 };
 
@@ -34,7 +34,7 @@ __class.isUndefined = function(value) {
  * @param {*} obj
  * @param {*} value
  */
-__class.setTheField = function(obj, value) {
+JsTypeTest.setTheField = function(obj, value) {
   obj.notTypeTightenedField = value;
 };
 
@@ -43,7 +43,7 @@ __class.setTheField = function(obj, value) {
  * @param {*} param
  * @return {*}
  */
-__class.callFoo = function(obj, param) {
+JsTypeTest.callFoo = function(obj, param) {
   return obj.foo(param);
 };
 
@@ -52,7 +52,7 @@ __class.callFoo = function(obj, param) {
  * @param {*} param
  * @return {*}
  */
-__class.callBar = function(obj, param) {
+JsTypeTest.callBar = function(obj, param) {
   return obj.bar(param);
 };
 
@@ -61,28 +61,28 @@ __class.callBar = function(obj, param) {
  * @param {*} param
  * @return {*}
  */
-__class.callM = function(obj, param) {
+JsTypeTest.callM = function(obj, param) {
   return obj.m(param);
 };
 
 /**
  * @param {*} jstype
  */
-__class.fillJsTypeField = function(jstype) {
+JsTypeTest.fillJsTypeField = function(jstype) {
   jstype.someField = {};
 };
 
 /**
  * @return {*}
  */
-__class.nativeObjectImplementingM = function() {
+JsTypeTest.nativeObjectImplementingM = function() {
   return {m: function() { return 3; }};
 };
 
 /**
  * @return {*}
  */
-__class.nativeJsFunction = function() {
+JsTypeTest.nativeJsFunction = function() {
   return function() { return 3; };
 };
 
@@ -90,7 +90,7 @@ __class.nativeJsFunction = function() {
  * @param {*} obj
  * @return {boolean}
  */
-__class.hasFieldRun = function(obj) {
+JsTypeTest.hasFieldRun = function(obj) {
   return obj.run != undefined;
 };
 
@@ -98,7 +98,7 @@ __class.hasFieldRun = function(obj) {
  * @param {*} enumeration
  * @return {number}
  */
-__class.callPublicMethodFromEnumeration = function(enumeration) {
+JsTypeTest.callPublicMethodFromEnumeration = function(enumeration) {
   return enumeration.idxAddOne();
 };
 
@@ -106,6 +106,6 @@ __class.callPublicMethodFromEnumeration = function(enumeration) {
  * @param {*} enumeration
  * @return {number}
  */
-__class.callPublicMethodFromEnumerationSubclass = function(enumeration) {
+JsTypeTest.callPublicMethodFromEnumerationSubclass = function(enumeration) {
   return enumeration.foo();
 };

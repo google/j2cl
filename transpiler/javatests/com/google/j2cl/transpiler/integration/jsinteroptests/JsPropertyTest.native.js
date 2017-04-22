@@ -2,7 +2,7 @@
  * @return {*}
  * @public
  */
-__class.createMyNativeJsType = function() {
+JsPropertyTest.createMyNativeJsType = function() {
   return new MyNativeJsType(0);
 };
 
@@ -10,7 +10,7 @@ __class.createMyNativeJsType = function() {
  * @return {*}
  * @public
  */
-__class.createJsTypeGetProperty = function() {
+JsPropertyTest.createJsTypeGetProperty = function() {
   var a = {};
   a['x'] = undefined;
   return a;
@@ -20,7 +20,7 @@ __class.createJsTypeGetProperty = function() {
  * @return {*}
  * @public
  */
-__class.createJsTypeIsProperty = function() {
+JsPropertyTest.createJsTypeIsProperty = function() {
   var a = {};
   a['x'] = false;
   return a;
@@ -30,7 +30,7 @@ __class.createJsTypeIsProperty = function() {
  * @return {*}
  * @public
  */
-__class.createMyJsInterfaceWithProtectedNames = function() {
+JsPropertyTest.createMyJsInterfaceWithProtectedNames = function() {
   var a = {};
   a['nullField'] = 'nullField';
   a['import'] = 'import';
@@ -43,7 +43,7 @@ __class.createMyJsInterfaceWithProtectedNames = function() {
  * @return {boolean}
  * @public
  */
-__class.isUndefined = function(value) {
+JsPropertyTest.isUndefined = function(value) {
   return value === undefined;
 };
 
@@ -53,7 +53,7 @@ __class.isUndefined = function(value) {
  * @return {boolean}
  * @public
  */
-__class.hasField = function(object, fieldName) {
+JsPropertyTest.hasField = function(object, fieldName) {
   return object[fieldName] != undefined;
 };
 
@@ -63,7 +63,7 @@ __class.hasField = function(object, fieldName) {
  * @return {number}
  * @public
  */
-__class.getProperty = function(object, name) {
+JsPropertyTest.getProperty = function(object, name) {
   return object[name];
 };
 
@@ -73,6 +73,6 @@ __class.getProperty = function(object, name) {
  * @param {*} value
  * @public
  */
-__class.setProperty = function(object, name, value) {
+JsPropertyTest.setProperty = function(object, name, value) {
   object[name] = value;
 };

@@ -2,16 +2,16 @@
  * @param {number} a
  * @return {number}
  */
-__class.m_callF1__int = function(a) {
-  __class.$clinit();
-  return __class.fun(a);
+Main.m_callF1__int = function(a) {
+  Main.$clinit();
+  return Main.fun(a);
 };
 
 /**
  * @param {number} a
  * @return {number}
  */
-__class.m_callF2__int = function(a) {
-  __class.$clinit();
-  return __class.f2(a);
+Main.m_callF2__int = function(a) {
+  Main.$clinit();
+  return Main.f2(a);
 };

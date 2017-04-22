@@ -3,15 +3,15 @@
  * @return {string}
  * @public
  */
-__class.prototype.m_nativeInstanceMethod__ = function() {
+NativeClass.prototype.m_nativeInstanceMethod__ = function() {
   return 'nativeInstanceMethod';
 };
 
 /**
  * Replaces the native static method 'nativeStaticMethod' in NativeClass.
- * @return {__class}
+ * @return {NativeClass}
  * @public
  */
-__class.m_nativeStaticMethod__ = function() {
+NativeClass.m_nativeStaticMethod__ = function() {
   return null;
 };

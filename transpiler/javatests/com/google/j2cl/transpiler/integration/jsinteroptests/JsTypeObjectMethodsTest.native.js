@@ -3,7 +3,7 @@
  * @param {number} b
  * @return {*}
  */
-__class.createWithEqualsAndHashCode = function(a, b) {
+JsTypeObjectMethodsTest.createWithEqualsAndHashCode = function(a, b) {
   return {
     a: a,
     b: b,
@@ -17,7 +17,7 @@ __class.createWithEqualsAndHashCode = function(a, b) {
  * @param {number} b
  * @return {*}
  */
-__class.createWithoutEqualsAndHashCode = function(a, b) {
+JsTypeObjectMethodsTest.createWithoutEqualsAndHashCode = function(a, b) {
   return {a: a, b: b};
 };
 
@@ -25,13 +25,13 @@ __class.createWithoutEqualsAndHashCode = function(a, b) {
  * @param {*} a
  * @return {*}
  */
-__class.callHashCode = function(a) {
+JsTypeObjectMethodsTest.callHashCode = function(a) {
   return a.hashCode();
 };
 
 /**
  * @return {void}
  */
-__class.patchErrorWithJavaLangObjectMethods = function() {
+JsTypeObjectMethodsTest.patchErrorWithJavaLangObjectMethods = function() {
   Error.prototype.equals = function(o) { return this.myValue == o.myValue; };
 };

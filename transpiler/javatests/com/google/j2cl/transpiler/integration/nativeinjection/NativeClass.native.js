@@ -3,7 +3,7 @@
  * @return {string}
  * @public
  */
-__class.prototype.m_nativeInstanceMethod__ = function() {
+NativeClass.prototype.m_nativeInstanceMethod__ = function() {
   return 'nativeInstanceMethod';
 };
 
@@ -12,6 +12,6 @@ __class.prototype.m_nativeInstanceMethod__ = function() {
  * @return {string}
  * @public
  */
-__class.m_nativeStaticMethod__ = function() {
+NativeClass.m_nativeStaticMethod__ = function() {
   return 'nativeStaticMethod';
 };

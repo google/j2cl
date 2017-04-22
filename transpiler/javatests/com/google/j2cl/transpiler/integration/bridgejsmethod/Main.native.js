@@ -4,7 +4,7 @@
  * @return {*}
  * @public
  */
-__class.callFun = function(o, arg) {
+Main.callFun = function(o, arg) {
   return o.fun(arg);
 };
 
@@ -15,6 +15,6 @@ __class.callFun = function(o, arg) {
  * @return {boolean}
  * @public
  */
-__class.callBar = function(o, t, s) {
+Main.callBar = function(o, t, s) {
   return o.bar(t, s);
-}
+};
