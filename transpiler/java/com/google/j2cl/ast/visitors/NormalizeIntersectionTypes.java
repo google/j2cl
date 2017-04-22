@@ -210,9 +210,8 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
       return expressionTypeDescriptor.getIntersectedTypeDescriptors();
     }
 
-    if ((expressionTypeDescriptor.isTypeVariable()
-            || expressionTypeDescriptor.isWildCardOrCapture())
-        && expressionTypeDescriptor.getBoundTypeDescriptor() != null) {
+    if (expressionTypeDescriptor.isTypeVariable()
+        || expressionTypeDescriptor.isWildCardOrCapture()) {
       return maybeGetIntersectedTypeDescriptors(expressionTypeDescriptor.getBoundTypeDescriptor());
     }
 

@@ -430,7 +430,8 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   public TypeDescriptor getBoundTypeDescriptor() {
     checkState(isTypeVariable() || isWildCardOrCapture());
-    return getBoundTypeDescriptorFactory().get(this);
+    TypeDescriptor boundTypeDescriptor = getBoundTypeDescriptorFactory().get(this);
+    return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
   public boolean isSupertypeOf(TypeDescriptor that) {
@@ -872,7 +873,6 @@ public abstract class TypeDescriptor extends Node
 
     Map<TypeDescriptor, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
         new HashMap<>();
-    TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
 
     TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     List<TypeDescriptor> superTypeOrInterfaceDescriptors = new ArrayList<>();
@@ -894,7 +894,9 @@ public abstract class TypeDescriptor extends Node
       for (int i = 0; i < typeParameterDescriptors.size(); i++) {
         TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
         TypeDescriptor typeArgumentDescriptor =
-            specializedTypeIsRaw ? javaLangObject : typeArgumentDescriptors.get(i);
+            specializedTypeIsRaw
+                ? typeParameterDescriptor.getBoundTypeDescriptor().getRawTypeDescriptor()
+                : typeArgumentDescriptors.get(i);
         immediateSpecializedTypeArgumentByTypeParameters.put(
             typeParameterDescriptor, typeArgumentDescriptor);
       }

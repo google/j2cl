@@ -12,7 +12,6 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
-let I$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType.I$$Overlay$impl');
 
 
 /**
@@ -59,19 +58,6 @@ class RawSubclass extends java_lang_Object {
   m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
 
   /**
-   * Default method forwarding stub.
-   * @override
-   * @param {*} arg0
-   * @return {void}
-   * @public
-   */
-  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(arg0) {
-    I$$Overlay
-        .m_f__com_google_j2cl_transpiler_readable_rawtype_RawType_I__com_google_j2cl_transpiler_readable_rawtype_RawType(
-            this, arg0);
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -99,8 +85,6 @@ class RawSubclass extends java_lang_Object {
     RawSubclass.$clinit = function() {};
     RawType = goog.module.get(
         'com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
-    I$$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.rawtype.RawType.I$$Overlay$impl');
     java_lang_Object.$clinit();
     I.$clinit();
   }

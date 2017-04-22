@@ -1,13 +1,6 @@
 package com.google.j2cl.transpiler.integration.typewildcards;
 
-class GenericType<T> {
-  public T field;
-
-  public GenericType(T f) {
-    this.field = f;
-  }
-}
-
+@SuppressWarnings("rawtypes")
 public class Main {
   public Object unbounded(GenericType<?> g) {
     return g.field;
@@ -38,7 +31,30 @@ public class Main {
 
     assert (m.lowerBound(gm) == m);
     assert (m.lowerBound(go) == o);
-  }
-}
 
-class SubClass extends Main {}
+    assert new RawSubclass().f(null).equals("RawSubclass");
+  }
+
+  interface I<T extends Main> {
+    default String f(T t) {
+      return "default";
+    }
+  }
+
+  static class RawSubclass implements I {
+    @Override
+    public String f(Main t) {
+      return "RawSubclass";
+    }
+  }
+
+  static class GenericType<T> {
+    public T field;
+
+    public GenericType(T f) {
+      this.field = f;
+    }
+  }
+
+  static class SubClass extends Main {}
+}
