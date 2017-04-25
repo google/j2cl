@@ -82,7 +82,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
   # Note that test suites are generated with .testsuite extension to avoid
   # j2cl_library automically including them as source.
   j2cl_library(
-      name = name,
+      name = name + "_lib",
       srcs = [test_input],
       deps = deps +  [
           "//third_party/java/j2cl/internal_do_not_use:internal_junit_annotations",
@@ -104,7 +104,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
   # TODO(goktug): use j2cl_library directly from jsunit_test instead of
   # extracting files from jar (output js zip can include all the required
   # files.)
-  out_jar = ":lib" + name + "_java_library.jar"
+  out_jar = ":lib" + name + "_lib_java_library.jar"
   native.genrule(
       name=name + "_transpile_gen",
       outs=[name + ".js.zip"],
