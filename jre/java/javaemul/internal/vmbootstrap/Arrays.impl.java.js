@@ -149,14 +149,32 @@ class Arrays {
    * @param {Array<*>} array
    * @param {*} leafType
    * @param {number} dimensionCount
-   * @return {void}
+   * @return {Array<*>}
    * @public
    */
   static $stampType(array, leafType, dimensionCount) {
+    return Arrays.$stampTypeInternal_(
+        array, leafType, leafType.$isInstance, leafType.$isAssignableFrom,
+        dimensionCount);
+  }
+
+  /**
+   * @param {Array<*>} array
+   * @param {*} leafType
+   * @param {Function} leafTypeIsInstance
+   * @param {Function} leafTypeIsAssignableFrom
+   * @param {number} dimensionCount
+   * @return {Array<*>}
+   * @private
+   */
+  static $stampTypeInternal_(
+      array, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
+      dimensionCount) {
     array.leafType = leafType;
-    array.leafTypeIsInstance = leafType.$isInstance;
-    array.leafTypeIsAssignableFrom = leafType.$isAssignableFrom;
+    array.leafTypeIsInstance = leafTypeIsInstance;
+    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
     array.dimensionCount = dimensionCount;
+    return array;
   }
 
   /**
