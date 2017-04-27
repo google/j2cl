@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -65,13 +66,27 @@ class $Lambda$Predicate$6 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {MethodReferences<C_T>} arg0
    * @return {boolean}
    * @public
    */
-  m_apply__java_lang_Object(arg0) {
+  m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
+      arg0) {
     return Boolean.m_booleanValue__java_lang_Boolean(arg0.m_isA__());
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {boolean}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this
+        .m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
+            /**@type {MethodReferences<C_T>} */ (
+                $Casts.to(arg0, MethodReferences)));
   }
 
   /**
@@ -103,6 +118,7 @@ class $Lambda$Predicate$6 extends java_lang_Object {
     MethodReferences = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

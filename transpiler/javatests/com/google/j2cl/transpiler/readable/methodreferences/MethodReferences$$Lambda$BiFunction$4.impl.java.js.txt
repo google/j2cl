@@ -14,6 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -66,16 +67,32 @@ class $Lambda$BiFunction$4 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {MethodReferences<C_T>} arg0
    * @param {(Number|?number)} arg1
    * @return {?boolean}
    * @public
    */
-  m_apply__java_lang_Object__java_lang_Object(arg0, arg1) {
+  m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences__java_lang_Number(
+      arg0, arg1) {
     return arg0
         .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
             arg1);
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {?boolean}
+   * @public
+   */
+  m_apply__java_lang_Object__java_lang_Object(arg0, arg1) {
+    return this
+        .m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences__java_lang_Number(
+            /**@type {MethodReferences<C_T>} */ (
+                $Casts.to(arg0, MethodReferences)),
+            /**@type {(Number|?number)} */ ($Casts.to(arg1, Number)));
   }
 
   /**
@@ -108,6 +125,7 @@ class $Lambda$BiFunction$4 extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Number = goog.module.get('java.lang.Number$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

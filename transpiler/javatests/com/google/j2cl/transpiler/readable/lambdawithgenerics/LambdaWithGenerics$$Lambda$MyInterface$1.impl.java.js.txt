@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -65,13 +66,24 @@ class $Lambda$MyInterface$1 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {Error} i
    * @return {Error}
    * @public
    */
-  m_foo__java_lang_Object(i) {
+  m_foo__java_lang_Error(i) {
     return i;
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {Error}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    return this.m_foo__java_lang_Error(
+        /**@type {Error} */ ($Casts.to(arg0, Error)));
   }
 
   /**
@@ -103,6 +115,7 @@ class $Lambda$MyInterface$1 extends java_lang_Object {
     LambdaWithGenerics = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
     Error = goog.module.get('java.lang.Error$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

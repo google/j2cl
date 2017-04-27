@@ -1371,10 +1371,12 @@ public class CompilationUnitBuilder {
               inStaticContext, enclosingType, classComponents, functionalInterfaceTypeBinding);
       MethodDescriptor functionalMethodDescriptor =
           JdtUtils.createMethodDescriptor(
-              checkNotNull(JdtUtils.findFunctionalMethodBinding(functionalInterfaceTypeBinding)));
+              checkNotNull(functionalInterfaceTypeBinding.getFunctionalInterfaceMethod()));
       MethodDescriptor lambdaDispatchMethodDescriptor =
           MethodDescriptor.Builder.from(functionalMethodDescriptor)
               .setEnclosingTypeDescriptor(lambdaTypeDescriptor)
+              // Since we are synthesizing a method (in a synthetic class), this is the declaration.
+              .setDeclarationMethodDescriptor(null)
               .setAbstract(false)
               .setNative(false)
               .build();
@@ -1384,7 +1386,15 @@ public class CompilationUnitBuilder {
           createLambdaImplementationMethod(
               lambdaDispatchMethodDescriptor,
               functionExpression,
-              !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown());
+              !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown()
+                  // Do not emit override if the implementation specializes a method, the actual
+                  // JavaScript override will be the corresponding bridge.
+                  && functionalMethodDescriptor
+                      .getMethodSignature()
+                      .equals(
+                          functionalMethodDescriptor
+                              .getDeclarationMethodDescriptor()
+                              .getMethodSignature()));
       lambdaMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(lambdaMethod);
 

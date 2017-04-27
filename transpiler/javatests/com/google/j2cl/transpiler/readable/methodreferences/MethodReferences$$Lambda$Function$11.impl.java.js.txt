@@ -14,6 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -66,13 +67,24 @@ class $Lambda$Function$11 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {Integer} arg0
    * @return {Array<*>}
    * @public
    */
-  m_apply__java_lang_Object(arg0) {
+  m_apply__java_lang_Integer(arg0) {
     return new Array(arg0.m_intValue__());
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {Array<*>}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this.m_apply__java_lang_Integer(
+        /**@type {Integer} */ ($Casts.to(arg0, Integer)));
   }
 
   /**
@@ -105,6 +117,7 @@ class $Lambda$Function$11 extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

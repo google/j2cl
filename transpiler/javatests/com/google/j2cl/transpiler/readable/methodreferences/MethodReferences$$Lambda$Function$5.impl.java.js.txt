@@ -14,6 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -66,16 +67,27 @@ class $Lambda$Function$5 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {(Number|?number)} arg0
    * @return {?boolean}
    * @public
    */
-  m_apply__java_lang_Object(arg0) {
+  m_apply__java_lang_Number(arg0) {
     return this
         .f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Function$5
         .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
             arg0);
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {?boolean}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this.m_apply__java_lang_Number(
+        /**@type {(Number|?number)} */ ($Casts.to(arg0, Number)));
   }
 
   /**
@@ -108,6 +120,7 @@ class $Lambda$Function$5 extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Number = goog.module.get('java.lang.Number$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

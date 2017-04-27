@@ -26,14 +26,24 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics_$Lambda$MyInterface$1();]
 [i -> i] => [/**
    * Lambda implementation method.
-   * @override
    * @param {Error} i
    * @return {Error}
    * @public
    */
-  m_foo__java_lang_Object(i) {
+  m_foo__java_lang_Error(i) {
     return i;
   }]
 [i] => [i] "i"
 [i] => [return i;]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {Error}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    return this.m_foo__java_lang_Error(/**@type {Error} */ ($Casts.to(arg0, Error)));
+  }]
+[UNKNOWN] => [return this.m_foo__java_lang_Error(/**@type {Error} */ ($Casts.to(arg0, Error)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

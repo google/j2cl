@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
@@ -65,13 +66,24 @@ class $Lambda$MyInterface$2 extends java_lang_Object {
 
   /**
    * Lambda implementation method.
-   * @override
    * @param {Enum<M_T>} i
    * @return {Enum<M_T>}
    * @public
    */
-  m_foo__java_lang_Object(i) {
+  m_foo__java_lang_Enum(i) {
     return i;
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {Enum<M_T>}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    return /**@type {Enum<M_T>} */ (this.m_foo__java_lang_Enum(
+        /**@type {Enum<M_T>} */ ($Casts.to(arg0, Enum))));
   }
 
   /**
@@ -103,6 +115,7 @@ class $Lambda$MyInterface$2 extends java_lang_Object {
     LambdaWithGenerics = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }
 

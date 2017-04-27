@@ -26,13 +26,23 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_$Lambda$Predicate$6();]
 [MethodReferences::isA] => [/**
    * Lambda implementation method.
-   * @override
    * @param {MethodReferences<C_T>} arg0
    * @return {boolean}
    * @public
    */
-  m_apply__java_lang_Object(arg0) {
+  m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(arg0) {
     return Boolean.m_booleanValue__java_lang_Boolean(arg0.m_isA__());
   }]
 [MethodReferences::isA] => [return Boolean.m_booleanValue__java_lang_Boolean(arg0.m_isA__());]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {boolean}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this.m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(/**@type {MethodReferences<C_T>} */ ($Casts.to(arg0, MethodReferences)));
+  }]
+[UNKNOWN] => [return this.m_apply__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(/**@type {MethodReferences<C_T>} */ ($Casts.to(arg0, MethodReferences)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

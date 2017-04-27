@@ -30,7 +30,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Method declaration. */
 @Visitable
@@ -290,6 +293,25 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       Block body = new Block(statements);
       body.setSourcePosition(bodySourcePosition);
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
+
+      Set<TypeDescriptor> typeParametersTypeDescriptors =
+          new LinkedHashSet<>(methodDescriptor.getTypeParameterTypeDescriptors());
+      for (Variable parameter : parameters) {
+        // Collect type variables that have been introduced by new parameters and are
+        // not already type parameters of the method nor of the enclosing class.
+        typeParametersTypeDescriptors.addAll(
+            parameter
+                .getTypeDescriptor()
+                .getAllTypeVariables()
+                .stream()
+                .filter(
+                    typeVariable ->
+                        !methodDescriptor
+                            .getEnclosingTypeDescriptor()
+                            .getTypeArgumentDescriptors()
+                            .contains(typeVariable))
+                .collect(Collectors.toList()));
+      }
       Method method =
           new Method(
               MethodDescriptor.Builder.from(methodDescriptor)
@@ -298,6 +320,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
                           .stream()
                           .map(Variable::getTypeDescriptor)
                           .collect(toImmutableList()))
+                  .setTypeParameterTypeDescriptors(typeParametersTypeDescriptors)
                   .build(),
               parameters,
               body,

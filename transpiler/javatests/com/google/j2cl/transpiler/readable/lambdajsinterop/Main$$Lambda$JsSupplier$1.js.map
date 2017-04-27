@@ -31,10 +31,15 @@
     return Integer.m_valueOf__int(1);
   }]
 [1] => [return Integer.m_valueOf__int(1);]
-[() -> 1] => [/**
-   * Default method forwarding stub.
-...    return /**@type {Integer} */ ($Casts.to(Equals$$Overlay.m_get__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals(this), Integer));
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1"
-[UNKNOWN] => [return /**@type {Integer} */ ($Casts.to(Equals$$Overlay.m_get__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Equals(this), Integer));]
+[UNKNOWN] => [/**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {Integer}
+   * @public
+   */
+  m_get__() {
+    return this.get();
+  }]
+[UNKNOWN] => [return this.get();]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [Equals.$clinit();]

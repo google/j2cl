@@ -629,9 +629,9 @@ public class Java8Test {
     assertThat((Object) c.foo()).isEqualTo("interface1.foo");
   }
 
-  abstract class AbstractClass implements InterfaceWithTwoDefenderMethods {}
+  abstract static class AbstractClass implements InterfaceWithTwoDefenderMethods {}
 
-  class Child1 extends AbstractClass {
+  static class Child1 extends AbstractClass {
 
     @Override
     public String foo() {
@@ -639,7 +639,7 @@ public class Java8Test {
     }
   }
 
-  class Child2 extends AbstractClass {}
+  static class Child2 extends AbstractClass {}
 
   @Test
   public void testAbstractClassImplementsInterface() {
@@ -2045,8 +2045,6 @@ public class Java8Test {
 
     T apply(T t);
 
-    // TODO(rluble): uncomment the line below to when bridges for default methods are created
-    // in functional expressions
     FunctionalExpressionBridgesI<T> m(T t);
   }
 
@@ -2079,9 +2077,8 @@ public class Java8Test {
         };
 
     assertBridgeDispatchIsCorrect(ann);
-    // TODO(b/36781352): Uncomment when bug is fixed.
-    // assertBridgeDispatchIsCorrect((String s) -> s + "");
-    // assertBridgeDispatchIsCorrect(Java8Test::identity);
+    assertBridgeDispatchIsCorrect((String s) -> s + "");
+    assertBridgeDispatchIsCorrect(Java8Test::identity);
   }
 
   private static void assertBridgeDispatchIsCorrect(

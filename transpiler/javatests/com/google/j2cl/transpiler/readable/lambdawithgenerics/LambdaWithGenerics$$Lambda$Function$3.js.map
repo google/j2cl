@@ -1,5 +1,5 @@
 [item -> 1L] => [/**
- * @template C_E, M_T
+ * @template M_T, C_E
 ...exports = $Lambda$Function$3;
 ] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$3"
 [item -> 1L] => [/**
@@ -26,25 +26,35 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics_$Lambda$Function$3();]
 [item -> 1L] => [/**
    * Lambda implementation method.
-   * @override
    * @param {M_T} item
-   * @return {?}
+   * @return {*}
    * @public
    */
-  m_apply__java_lang_Object(item) {
+  m_apply__java_lang_Enum(item) {
     return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
   }]
 [item] => [item] "item"
 [1L] => [return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);]
 [item -> 1L] => [/**
    * Default method forwarding stub.
-...    return /**@type {java_util_function_Function<?, *>} */ (Function$$Overlay.m_andThen__java_util_function_Function__java_util_function_Function(this, arg0));
+...    return /**@type {java_util_function_Function<M_T, *>} */ (Function$$Overlay.m_andThen__java_util_function_Function__java_util_function_Function(this, arg0));
   }] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$3"
-[UNKNOWN] => [return /**@type {java_util_function_Function<?, *>} */ (Function$$Overlay.m_andThen__java_util_function_Function__java_util_function_Function(this, arg0));]
+[UNKNOWN] => [return /**@type {java_util_function_Function<M_T, *>} */ (Function$$Overlay.m_andThen__java_util_function_Function__java_util_function_Function(this, arg0));]
 [item -> 1L] => [/**
    * Default method forwarding stub.
-...    return /**@type {java_util_function_Function<*, ?>} */ (Function$$Overlay.m_compose__java_util_function_Function__java_util_function_Function(this, arg0));
+...    return /**@type {java_util_function_Function<*, *>} */ (Function$$Overlay.m_compose__java_util_function_Function__java_util_function_Function(this, arg0));
   }] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Lambda$Function$3"
-[UNKNOWN] => [return /**@type {java_util_function_Function<*, ?>} */ (Function$$Overlay.m_compose__java_util_function_Function__java_util_function_Function(this, arg0));]
+[UNKNOWN] => [return /**@type {java_util_function_Function<*, *>} */ (Function$$Overlay.m_compose__java_util_function_Function__java_util_function_Function(this, arg0));]
+[UNKNOWN] => [/**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {*}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    return this.m_apply__java_lang_Enum(/**@type {M_T} */ ($Casts.to(arg0, Enum)));
+  }]
+[UNKNOWN] => [return this.m_apply__java_lang_Enum(/**@type {M_T} */ ($Casts.to(arg0, Enum)));]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [java_util_function_Function.$clinit();]

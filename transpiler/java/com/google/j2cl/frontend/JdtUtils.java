@@ -969,30 +969,9 @@ public class JdtUtils {
       final TypeDescriptor enclosingTypeDescriptor,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
-    // About Intersection typed Lambdas:
-    //
-    // From JLS 15.27.3: A lambda expression is compatible in an assignment context, invocation
-    // context, or casting context with a target type T if T is a functional interface type (§9.8)..
-    // From JLS 9.8:
-    // The declaration of a functional interface allows a functional interface type to be used in a
-    // program. There are four kinds of functional interface type:
-    // - The type of a non-generic (§6.1) functional interface
-    // - A parameterized type that is a parameterization (§4.5) of a generic functional interface
-    // - The raw type (§4.8) of a generic functional interface
-    // - An intersection type (§4.9) that induces a notional functional interface
-    // Note:
-    // In special circumstances, it is useful to treat an intersection type as a functional
-    // interface type. Typically, this will look like an intersection of a functional interface
-    // type with one or more marker interface types, such as Runnable & java.io.Serializable. (...)
-    final List<ITypeBinding> lambdaInterfaceBindings =
-        isIntersectionType(lambdaTypeBinding)
-            ? Arrays.asList(lambdaTypeBinding.getInterfaces())
-            : Collections.singletonList(lambdaTypeBinding);
 
-    if (isIntersectionType(lambdaTypeBinding)) {
-      checkArgument(lambdaTypeBinding.getSuperclass() == null);
-      checkState(lambdaInterfaceBindings.size() >= 2);
-    }
+    final List<ITypeBinding> lambdaInterfaceBindings =
+        getLambdaInterfaceBindings(lambdaTypeBinding);
 
     Supplier<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
         () ->
@@ -1029,6 +1008,13 @@ public class JdtUtils {
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
+        .setDeclaredMethodDescriptorsFactory(
+            // Declare the (synthetic) lambda method implemented in the lambda implementation class
+            // so that passes that rely on this information (like BridgeMethodCreator) handle
+            // these classes property.
+            typeDescriptor ->
+                getDeclaredMethodsForLambda(
+                    typeDescriptor, lambdaTypeBinding.getFunctionalInterfaceMethod()))
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
@@ -1044,6 +1030,46 @@ public class JdtUtils {
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setKind(Kind.CLASS)
         .build();
+  }
+
+  private static List<ITypeBinding> getLambdaInterfaceBindings(ITypeBinding lambdaTypeBinding) {
+
+    IMethodBinding functionalMethodBinding = lambdaTypeBinding.getFunctionalInterfaceMethod();
+    List<ITypeBinding> lambdaInterfaceBindings =
+        isIntersectionType(lambdaTypeBinding)
+            ? Arrays.asList(lambdaTypeBinding.getInterfaces())
+            : Collections.singletonList(lambdaTypeBinding);
+
+    // Replace the functional interface type with the parameterization that matches the functional
+    // method.
+    // In JDT modeling there are cases in which the parameterization for lambdaTypeBinding and
+    // the functionalMethodBinding do not match. Those cases are the ones in which JDT
+    // has some freedom to choose the types e.g.
+    //
+    //  <T extends A> f() {
+    //    Function<? super T, ?> f = i -> 0L;
+    //
+    // JDT will choose a type for the functional expression (this is probably determined by the JLS
+    // to be the most specific type?), in this case, it is Function<T, Long>. This type will be
+    // reflected as the declaring class of the functional method and is the same type that
+    // the corresponding functional expression has.
+
+    lambdaInterfaceBindings =
+        lambdaInterfaceBindings
+            .stream()
+            .map(
+                typeBinding ->
+                    typeBinding.getErasure()
+                            == functionalMethodBinding.getDeclaringClass().getErasure()
+                        ? functionalMethodBinding.getDeclaringClass()
+                        : typeBinding)
+            .collect(Collectors.toList());
+
+    if (isIntersectionType(lambdaTypeBinding)) {
+      checkArgument(lambdaTypeBinding.getSuperclass() == null);
+      checkState(lambdaInterfaceBindings.size() >= 2);
+    }
+    return lambdaInterfaceBindings;
   }
 
   private JdtUtils() {}
@@ -1376,33 +1402,13 @@ public class JdtUtils {
       final TypeDeclaration enclosingTypeDeclaration,
       List<String> classComponents,
       final ITypeBinding lambdaTypeBinding) {
-    // About Intersection typed Lambdas:
-    //
-    // From JLS 15.27.3: A lambda expression is compatible in an assignment context, invocation
-    // context, or casting context with a target type T if T is a functional interface type (§9.8)..
-    // From JLS 9.8:
-    // The declaration of a functional interface allows a functional interface type to be used in a
-    // program. There are four kinds of functional interface type:
-    // - The type of a non-generic (§6.1) functional interface
-    // - A parameterized type that is a parameterization (§4.5) of a generic functional interface
-    // - The raw type (§4.8) of a generic functional interface
-    // - An intersection type (§4.9) that induces a notional functional interface
-    // Note:
-    // In special circumstances, it is useful to treat an intersection type as a functional
-    // interface type. Typically, this will look like an intersection of a functional interface
-    // type with one or more marker interface types, such as Runnable & java.io.Serializable. (...)
-    final List<ITypeBinding> lambdaInterfaceBindings =
-        isIntersectionType(lambdaTypeBinding)
-            ? Arrays.asList(lambdaTypeBinding.getInterfaces())
-            : Collections.singletonList(lambdaTypeBinding);
 
-    if (isIntersectionType(lambdaTypeBinding)) {
-      checkArgument(lambdaTypeBinding.getSuperclass() == null);
-      checkState(lambdaInterfaceBindings.size() >= 2);
-    }
+    final List<ITypeBinding> lambdaInterfaceBindings =
+        getLambdaInterfaceBindings(lambdaTypeBinding);
 
     final ImmutableList<TypeDescriptor> lambdaInterfaceTypeDescriptors =
         createTypeDescriptors(lambdaInterfaceBindings);
+
     checkArgument(lambdaInterfaceTypeDescriptors.stream().allMatch(TypeDescriptor::isInterface));
     boolean isJsFunctionImplementation =
         lambdaInterfaceTypeDescriptors.stream().anyMatch(TypeDescriptor::isJsFunctionInterface);
@@ -1418,6 +1424,14 @@ public class JdtUtils {
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setCapturingEnclosingInstance(!inStaticContext)
         .setJsFunctionImplementation(isJsFunctionImplementation)
+        .setDeclaredMethodDescriptorsFactory(
+            // Declare the (synthetic) lambda method implemented in the lambda implementation class
+            // so that passes that rely on this information (like BridgeMethodCreator) handle
+            // these classes property.
+            typeDeclaration ->
+                getDeclaredMethodsForLambda(
+                    typeDeclaration.getUnsafeTypeDescriptor(),
+                    lambdaTypeBinding.getFunctionalInterfaceMethod()))
         .setLocal(true)
         .setAnonymous(true)
         .setPackageName(enclosingTypeDeclaration.getPackageName())
@@ -1440,5 +1454,21 @@ public class JdtUtils {
         .setVisibility(Visibility.PRIVATE)
         .setKind(Kind.CLASS)
         .build();
+  }
+
+  private static ImmutableMap<String, MethodDescriptor> getDeclaredMethodsForLambda(
+      TypeDescriptor enclosingTypeDescriptor, IMethodBinding functionalInterfaceMethod) {
+    // Declare the lambda implementation method as the only declared method in the
+    // synthetic class.
+
+    MethodDescriptor functionalMethodDescriptor =
+        MethodDescriptor.Builder.from(createMethodDescriptor(functionalInterfaceMethod))
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setDeclarationMethodDescriptor(null)
+            .setAbstract(false)
+            .setNative(false)
+            .build();
+    return ImmutableMap.of(
+        functionalMethodDescriptor.getMethodSignature(), functionalMethodDescriptor);
   }
 }
