@@ -35,7 +35,7 @@ public class Problems {
   public enum Message {
     ERR_FLAG_FILE("Cannot load flag file: %s.", 1),
     ERR_FILE_NOT_FOUND("File '%s' not found.", 1),
-    ERR_INVALID_SOURCE_FILE("Invalid source file '%s'.", 1),
+    ERR_UNKNOWN_INPUT_TYPE("Cannot recognize input type for file '%s'.", 1),
     ERR_INVALID_SOURCE_VERSION("Invalid source version '%s'.", 1),
     ERR_UNSUPPORTED_ENCODING("Unsupported encoding '%s'.", 1),
     ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output '%s': %s.", 2),
@@ -161,7 +161,7 @@ public class Problems {
   public void abortWhenPossible() {
     abortRequested = true;
   }
-  
+
   /** Prints all error messages and a summary. */
   public void report(PrintStream outputStream, PrintStream errorStream) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {

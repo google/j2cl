@@ -62,8 +62,6 @@ public class FrontendOptions {
   private static final ImmutableSet<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
 
-  private static final String JAVA_EXTENSION = ".java";
-  private static final String SRCJAR_EXTENSION = ".srcjar";
   private static final String ZIP_EXTENSION = ".zip";
 
   public FrontendOptions(Problems problems, FrontendFlags flags) {
@@ -230,7 +228,7 @@ public class FrontendOptions {
     Iterator<String> sourceFilePathsIterator = sourceFilePaths.iterator();
     while (sourceFilePathsIterator.hasNext()) {
       String sourceFilePath = sourceFilePathsIterator.next();
-      if (sourceFilePath.endsWith(SRCJAR_EXTENSION)) {
+      if (sourceFilePath.endsWith("jar")) {
         sourceJarPaths.add(sourceFilePath);
         sourceFilePathsIterator.remove();
       }
@@ -241,7 +239,7 @@ public class FrontendOptions {
     // temp dir prefixes.
     Path srcjarContentDir;
     try {
-      srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
+      srcjarContentDir = Files.createTempDirectory("source_jar");
     } catch (IOException e) {
       problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return;
@@ -262,7 +260,7 @@ public class FrontendOptions {
               @Override
               public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
                   throws IOException {
-                if (path.toString().endsWith(JAVA_EXTENSION)) {
+                if (path.toString().endsWith(".java")) {
                   jarSourceFilePaths.add(path.toAbsolutePath().toString());
                 }
                 return FileVisitResult.CONTINUE;
@@ -308,23 +306,25 @@ public class FrontendOptions {
 
   private boolean checkSourceFiles(List<String> sourceFiles) {
     for (String sourceFile : sourceFiles) {
-      if (sourceFile.endsWith(JAVA_EXTENSION) || sourceFile.endsWith(SRCJAR_EXTENSION)) {
+      if (isValidExtension(sourceFile)) {
         File file = new File(sourceFile);
-        if (!file.exists()) {
-          problems.error(Message.ERR_FILE_NOT_FOUND, sourceFile);
-          return false;
-        }
         if (!file.isFile()) {
-          problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
+          problems.error(Message.ERR_FILE_NOT_FOUND, sourceFile);
           return false;
         }
       } else {
         // does not support non-java files.
-        problems.error(Message.ERR_INVALID_SOURCE_FILE, sourceFile);
+        problems.error(Message.ERR_UNKNOWN_INPUT_TYPE, sourceFile);
         return false;
       }
     }
     return true;
+  }
+
+  private static boolean isValidExtension(String sourceFile) {
+    return sourceFile.endsWith(".java")
+        || sourceFile.endsWith(".srcjar")
+        || sourceFile.endsWith("-src.jar");
   }
 
   private void initDirOutput(String output) {

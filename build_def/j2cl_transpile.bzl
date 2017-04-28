@@ -134,7 +134,7 @@ j2cl_transpile = rule(
         "deps": attr.label_list(allow_files=[".jar"]),
         "srcs": attr.label_list(
             mandatory=True,
-            allow_files=[".java", ".srcjar"],
+            allow_files=[".java", ".srcjar", "-src.jar"],
         ),
         "native_srcs_zips": attr.label_list(
             allow_files=[".zip"],
