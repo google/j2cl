@@ -36,3 +36,10 @@ goog.provide('jre.logging');
 goog.define('jre.logging.logLevel', goog.DEBUG ? 'ALL' : 'SEVERE');
 /** @define {string} */
 goog.define('jre.logging.simpleConsoleHandler', "ENABLED");
+
+
+// TODO(b/30045450): Either map to a JsCompiler flag or rename to match our flag pattern.
+/**
+ * @define {boolean} Whether or not to honor assertions.
+ */
+goog.define("ASSERTIONS_ENABLED_", false);
