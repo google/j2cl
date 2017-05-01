@@ -150,6 +150,16 @@ def integration_test(name,
       deps=[":" + name],
   )
 
+  # For java testing.
+  native.java_binary(
+      name="java_binary",
+      srcs=srcs,
+      deps=[dep + "_java_library" for dep in deps],
+      main_class=main_class,
+      jvm_flags = ["-ea"],
+      tags=["manual"],
+  )
+
   # For constructing GWT transpiled output.
   if enable_gwt:
     _gwt_targets(java_package, srcs, deps, gwt_deps)
