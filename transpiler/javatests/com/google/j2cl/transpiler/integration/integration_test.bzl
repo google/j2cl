@@ -27,6 +27,16 @@ load("/tools/build_defs/label/def", "absolute_label")
 load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
+JAVAC_FLAGS = [
+    "-source 8",
+    "-target 8",
+    "-Xep:EqualsIncompatibleType:OFF",
+    "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
+    "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
+    "-Xep:SelfEquality:OFF",
+    "-Xep:LoopConditionChecker:OFF",
+    "-Xep:IdentityBinaryExpression:OFF",
+]
 
 def integration_test(name,
                      srcs,
@@ -98,16 +108,7 @@ def integration_test(name,
       srcs=srcs,
       generate_build_test=generate_build_test,
       deps=deps,
-      javacopts=[
-          "-source 8",
-          "-target 8",
-          "-Xep:EqualsIncompatibleType:OFF",
-          "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
-          "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
-          "-Xep:SelfEquality:OFF",
-          "-Xep:LoopConditionChecker:OFF",
-          "-Xep:IdentityBinaryExpression:OFF",
-      ],
+      javacopts=JAVAC_FLAGS,
       _js_deps=js_deps,
       native_srcs=native_srcs,
       _test_externs_list=test_externs_list,
@@ -156,7 +157,10 @@ def integration_test(name,
       srcs=srcs,
       deps=[dep + "_java_library" for dep in deps],
       main_class=main_class,
-      jvm_flags = ["-ea"],
+      javacopts=JAVAC_FLAGS,
+      jvm_flags = [
+          "-ea",
+      ],
       tags=["manual"],
   )
 
