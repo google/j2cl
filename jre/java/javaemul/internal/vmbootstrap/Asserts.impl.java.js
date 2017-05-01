@@ -15,19 +15,18 @@ class Asserts {
   static $assert(condition) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.toJs(
-          AssertionError.$create__java_lang_String('Assertion failed.'));
+      throw Exceptions.toJs(AssertionError.$create__());
     }
   }
 
   /**
    * @param {boolean} condition
-   * @param {?string} message
+   * @param {*} message
    */
   static $assertWithMessage(condition, message) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.toJs(AssertionError.$create__java_lang_String(message));
+      throw Exceptions.toJs(AssertionError.$create__java_lang_Object(message));
     }
   }
 
