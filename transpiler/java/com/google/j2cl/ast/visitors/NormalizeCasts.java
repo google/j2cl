@@ -78,7 +78,7 @@ public class NormalizeCasts extends NormalizationPass {
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
-            .setName("to")
+            .setName("$to")
             .setParameterTypeDescriptors(
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(castTypeDescriptor)
@@ -91,7 +91,7 @@ public class NormalizeCasts extends NormalizationPass {
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
 
-    // Casts.to(expr, TypeName);
+    // Casts.$to(expr, TypeName);
     return MethodCall.Builder.from(castToMethodDescriptor)
         .setArguments(expression, new TypeReference(castTypeDescriptorArgument))
         .build();

@@ -15,8 +15,8 @@ class Casts {
    * @param {*} castType
    * @return {*}
    */
-  static to(instance, castType) {
-    return Casts.toInternal(
+  static $to(instance, castType) {
+    return Casts.$toInternal(
         instance, /** @type {Function} */ (castType.$isInstance), castType);
   }
 
@@ -26,7 +26,7 @@ class Casts {
    * @param {*} castType
    * @return {*}
    */
-  static toInternal(instance, castTypeIsInstance, castType) {
+  static $toInternal(instance, castTypeIsInstance, castType) {
     if (jre.checks.temporaryEarlyBailOutFromCastCheck
         && jre.checkedMode != 'ENABLED') {
       // TODO(b/33100017): Investigate changes to JSCompiler to remove the need
