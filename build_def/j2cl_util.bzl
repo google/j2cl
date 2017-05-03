@@ -98,4 +98,6 @@ J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     "--manage_closure_dependencies=false",
     "--j2cl_pass=true",
     "--extra_smart_name_removal=true",
+    # Enable assert statements for tests (as java_test does the same)
+    "--remove_j2cl_asserts=false",
 ]

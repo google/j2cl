@@ -71,6 +71,8 @@ def integration_test(name,
   deps = [absolute_label(dep) for dep in deps]
 
   optimized_extra_defs = [
+      # Turn on asserts since the integration tests rely on them.
+      "--remove_j2cl_asserts=false",
       # OPTIMIZE ENUMS:
       # TODO(cromwellian): investigate why JSCompiler doesn't preserve original
       # name before ReplaceStrings sees it.
