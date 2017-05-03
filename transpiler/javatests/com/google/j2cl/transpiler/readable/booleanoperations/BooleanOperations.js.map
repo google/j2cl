@@ -76,14 +76,14 @@
 [acceptBoolean(ls = rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls = rs);]
 [Boolean br;] => [let /** ?boolean */ br;]
 [br] => [br] "br"
-[br = (Boolean) (ls == rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls == rs), Boolean));]
-[br = (Boolean) (ls != rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls != rs), Boolean));]
-[br = (Boolean) (ls ^ rs);] => [br = /**@type {?boolean} */ ($Casts.to((!!(ls ^ rs)), Boolean));]
-[br = (Boolean) (ls & rs);] => [br = /**@type {?boolean} */ ($Casts.to((!!(ls & rs)), Boolean));]
-[br = (Boolean) (ls | rs);] => [br = /**@type {?boolean} */ ($Casts.to((!!(ls | rs)), Boolean));]
-[br = (Boolean) (ls && rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls && rs), Boolean));]
-[br = (Boolean) (ls || rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls || rs), Boolean));]
-[br = (Boolean) (ls = rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls = rs), Boolean));]
+[br = (Boolean) (ls == rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls == rs), Boolean));]
+[br = (Boolean) (ls != rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls != rs), Boolean));]
+[br = (Boolean) (ls ^ rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls ^ rs)), Boolean));]
+[br = (Boolean) (ls & rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls & rs)), Boolean));]
+[br = (Boolean) (ls | rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls | rs)), Boolean));]
+[br = (Boolean) (ls && rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls && rs), Boolean));]
+[br = (Boolean) (ls || rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls || rs), Boolean));]
+[br = (Boolean) (ls = rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls = rs), Boolean));]
 [if (ls == rs) {
       r = true;
     }] => [if (ls == rs) {

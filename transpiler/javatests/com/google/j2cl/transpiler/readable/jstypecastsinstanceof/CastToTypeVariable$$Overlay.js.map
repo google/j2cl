@@ -10,7 +10,7 @@ public class CastToTypeVariable<T extends CastToTypeVariable<T>> {
 ...    return (T) this;
   }] => [/**
    * @template C_T
-...    return /**@type {Object} */ ($Casts.to($thisArg, CastToTypeVariable$$Overlay));
+...    return /**@type {Object} */ ($Casts.$to($thisArg, CastToTypeVariable$$Overlay));
   }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToTypeVariable.setField"
 [index] => [index] "index"
 [value] => [value] "value"
@@ -19,4 +19,4 @@ public class CastToTypeVariable<T extends CastToTypeVariable<T>> {
 [o] => [o] "o"
 [T[] a = (T[]) o;] => [let a = /**@type {Array<Object>} */ ($Arrays.$castToNative(o));]
 [a] => [a] "a"
-[return (T) this;] => [return /**@type {Object} */ ($Casts.to($thisArg, CastToTypeVariable$$Overlay));]
+[return (T) this;] => [return /**@type {Object} */ ($Casts.$to($thisArg, CastToTypeVariable$$Overlay));]

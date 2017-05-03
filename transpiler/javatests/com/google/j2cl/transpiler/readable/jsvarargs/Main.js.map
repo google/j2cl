@@ -95,12 +95,12 @@
     return elements[0].get(0);
   }] => [/**
    * @param {...List<Main>} elements
-...    return /**@type {Main} */ ($Casts.to(elements[0].getAtIndex(0), Main));
+...    return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [$Arrays.$stampType(elements, List, 1);]
-[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.to(elements[0].getAtIndex(0), Main));]
+[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));]
 [public void testStaticMethodNotFirst() {
     // multiple arguments.
 ...    Main.f1(1, ints);

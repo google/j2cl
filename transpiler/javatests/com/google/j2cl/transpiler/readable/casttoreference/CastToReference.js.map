@@ -38,7 +38,7 @@
 ...    o = (Object) d;
   }] => [/**
    * @return {void}
-...    o = /**@type {*} */ ($Casts.to(d, java_lang_Object));
+...    o = /**@type {*} */ ($Casts.$to(d, java_lang_Object));
   }] "com.google.j2cl.transpiler.readable.casttoreference.CastToReference.testPrimitiveToReference"
 [boolean bool = true;] => [let bool = true;]
 [bool] => [bool] "bool"
@@ -65,12 +65,12 @@
 [o = l;] => [o = Long.m_valueOf__long(l);]
 [o = f;] => [o = Float.m_valueOf__float(f);]
 [o = d;] => [o = d;]
-[o = (Object) bool;] => [o = /**@type {*} */ ($Casts.to(bool, java_lang_Object));]
-[o = (Object) b;] => [o = /**@type {*} */ ($Casts.to(Byte.m_valueOf__byte(b), java_lang_Object));]
-[o = (Object) c;] => [o = /**@type {*} */ ($Casts.to(Character.m_valueOf__char(c), java_lang_Object));]
-[o = (Object) s;] => [o = /**@type {*} */ ($Casts.to(Short.m_valueOf__short(s), java_lang_Object));]
-[o = (Object) i;] => [o = /**@type {*} */ ($Casts.to(Integer.m_valueOf__int(i), java_lang_Object));]
-[o = (Object) l;] => [o = /**@type {*} */ ($Casts.to(Long.m_valueOf__long(l), java_lang_Object));]
-[o = (Object) f;] => [o = /**@type {*} */ ($Casts.to(Float.m_valueOf__float(f), java_lang_Object));]
-[o = (Object) d;] => [o = /**@type {*} */ ($Casts.to(d, java_lang_Object));]
+[o = (Object) bool;] => [o = /**@type {*} */ ($Casts.$to(bool, java_lang_Object));]
+[o = (Object) b;] => [o = /**@type {*} */ ($Casts.$to(Byte.m_valueOf__byte(b), java_lang_Object));]
+[o = (Object) c;] => [o = /**@type {*} */ ($Casts.$to(Character.m_valueOf__char(c), java_lang_Object));]
+[o = (Object) s;] => [o = /**@type {*} */ ($Casts.$to(Short.m_valueOf__short(s), java_lang_Object));]
+[o = (Object) i;] => [o = /**@type {*} */ ($Casts.$to(Integer.m_valueOf__int(i), java_lang_Object));]
+[o = (Object) l;] => [o = /**@type {*} */ ($Casts.$to(Long.m_valueOf__long(l), java_lang_Object));]
+[o = (Object) f;] => [o = /**@type {*} */ ($Casts.$to(Float.m_valueOf__float(f), java_lang_Object));]
+[o = (Object) d;] => [o = /**@type {*} */ ($Casts.$to(d, java_lang_Object));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

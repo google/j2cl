@@ -71,7 +71,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_getAndSet__com_google_j2cl_transpiler_readable_intersectiontype_Getable(
       object) {
     IntersectionTypeTest.$clinit();
-    /**@type {Setable} */ ($Casts.to(object, Setable)).m_set__int(1);
+    /**@type {Setable} */ ($Casts.$to(object, Setable)).m_set__int(1);
     object.m_get__();
   }
 
@@ -85,9 +85,10 @@ class IntersectionTypeTest extends java_lang_Object {
     IntersectionTypeTest.$clinit();
     if ($Equality.$same(o, null)) {
       return /**@type {Getable<*>} */ (
-          $Casts.to($Casts.to(o, Getable), Setable));
+          $Casts.$to($Casts.$to(o, Getable), Setable));
     }
-    return /**@type {Getable<*>} */ ($Casts.to($Casts.to(o, Setable), Getable));
+    return /**@type {Getable<*>} */ (
+        $Casts.$to($Casts.$to(o, Setable), Getable));
   }
 
   /**
@@ -99,7 +100,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast1__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
     return /**@type {Getable<(Comparable<?string>|?boolean|?number|?string)>} */ (
-        $Casts.to($Casts.to(s, Setable), Getable));
+        $Casts.$to($Casts.$to(s, Setable), Getable));
   }
 
   /**
@@ -111,7 +112,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_cast2__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
     return /**@type {Getable<(Comparable<*>|?boolean|?number|?string)>} */ (
-        $Casts.to($Casts.to(s, Setable), Getable));
+        $Casts.$to($Casts.$to(s, Setable), Getable));
   }
 
   /**
@@ -130,7 +131,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_method__() {
     IntersectionTypeTest.$clinit();
     return /**@type {Cmp} */ (
-        $Casts.to($Casts.to($Lambda$Cmp$0.$create__(), Serial), Cmp));
+        $Casts.$to($Casts.$to($Lambda$Cmp$0.$create__(), Serial), Cmp));
   }
 
   /**
@@ -140,7 +141,7 @@ class IntersectionTypeTest extends java_lang_Object {
   static m_method2__() {
     IntersectionTypeTest.$clinit();
     return /**@type {Cmp2} */ (
-        $Casts.to($Casts.to($Lambda$Cmp2$1.$create__(), Serial), Cmp2));
+        $Casts.$to($Casts.$to($Lambda$Cmp2$1.$create__(), Serial), Cmp2));
   }
 
   /**
@@ -150,12 +151,12 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_testClosureAssignment__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
-    let e =
-        /**@type {A} */ ($Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
+    let e = /**@type {A} */ (
+        $Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));
     let g = /**@type {EmptyA} */ (
-        $Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
+        $Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));
     let s = /**@type {EmptyB} */ (
-        $Casts.to($Casts.to($Casts.to(o, EmptyB), EmptyA), A));
+        $Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));
   }
 
   /**
@@ -177,7 +178,7 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest() {
     IntersectionTypeTest.$clinit();
-    return /**@type {A} */ ($Casts.to(
+    return /**@type {A} */ ($Casts.$to(
         IntersectionTypeTest
             .m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
                 java_lang_Object.$create__()),
@@ -205,7 +206,7 @@ class IntersectionTypeTest extends java_lang_Object {
             .m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();
     IntersectionTypeTest
         .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
-            /**@type {A} */ ($Casts.to($Casts.to(o, EmptyA), A)));
+            /**@type {A} */ ($Casts.$to($Casts.$to(o, EmptyA), A)));
     IntersectionTypeTest
         .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
             IntersectionTypeTest

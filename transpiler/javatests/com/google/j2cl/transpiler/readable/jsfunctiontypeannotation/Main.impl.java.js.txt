@@ -75,7 +75,7 @@ class Main extends java_lang_Object {
       af, s) {
     Main.$clinit();
     return /**@type {?string} */ (
-        $Casts.to(af(s, Integer.m_valueOf__int(1)), java_lang_String));
+        $Casts.$to(af(s, Integer.m_valueOf__int(1)), java_lang_String));
   }
 
   /**
@@ -115,7 +115,7 @@ class Main extends java_lang_Object {
       b, s) {
     Main.$clinit();
     return /**@type {?string} */ (
-        $Casts.to(b(s, Integer.m_valueOf__int(1)), java_lang_String));
+        $Casts.$to(b(s, Integer.m_valueOf__int(1)), java_lang_String));
   }
 
   /**
@@ -153,14 +153,15 @@ class Main extends java_lang_Object {
   static m_testCast__() {
     Main.$clinit();
     let o = /**@type {function(?string, Integer):?string} */ (B.$create__());
-    let b1 = /**@type {?function(*, Integer):*} */ ($Casts.to(o, B));
+    let b1 = /**@type {?function(*, Integer):*} */ ($Casts.$to(o, B));
     let b2 =
-        /**@type {?function(?string, Integer):?string} */ ($Casts.to(o, B));
+        /**@type {?function(?string, Integer):?string} */ ($Casts.$to(o, B));
     let af1 = /**@type {?function(*, (Number|?number)):*} */ (
-        $Casts.to(o, ApplyFunction));
+        $Casts.$to(o, ApplyFunction));
     let af2 = /**@type {?function(?string, Integer):?string} */ (
-        $Casts.to(o, ApplyFunction));
-    let a = /**@type {?function(?number, ?number):?number} */ ($Casts.to(o, A));
+        $Casts.$to(o, ApplyFunction));
+    let a =
+        /**@type {?function(?number, ?number):?number} */ ($Casts.$to(o, A));
   }
 
   /**
@@ -171,7 +172,7 @@ class Main extends java_lang_Object {
     Main.$clinit();
     let b1 = B.$create__();
     let b2 =
-        /**@type {?function(*, Integer):*} */ ($Casts.to(B.$create__(), B));
+        /**@type {?function(*, Integer):*} */ ($Casts.$to(B.$create__(), B));
     let af1 = A.$create__();
   }
 

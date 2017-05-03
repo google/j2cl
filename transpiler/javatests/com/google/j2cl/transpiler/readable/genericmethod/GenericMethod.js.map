@@ -108,7 +108,7 @@
 [g.fun(new Exception());] => [g.m_fun__java_lang_Exception(Exception.$create__());]
 [g.fun(new Error());] => [g.m_fun__java_lang_Error(Error.$create__());]
 [g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["asdf"], java_lang_String)));]
-[String s = checked();] => [let s = /**@type {?string} */ ($Casts.to(this.m_checked__(), java_lang_String));]
+[String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));]
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());]
 [UNKNOWN] => [java_lang_Object.$clinit();]

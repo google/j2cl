@@ -181,10 +181,10 @@
     return (double) o;
   }] => [/**
    * @param {*} o
-...    return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));
+...    return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.takesObjectAndReturnsPrimitiveDouble"
 [o] => [o] "o"
-[return (double) o;] => [return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));]
+[return (double) o;] => [return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));]
 [public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
     double sum = 0;
 ...    return sum;
@@ -199,11 +199,11 @@
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
       let number$1$ = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }]
 [UNKNOWN] => [let number$1$ = $array[$index];]
 [number] => [number$1$] "number"
-[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));]
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));]
 [return sum;] => [return sum;]
 [@JsMethod
   public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
@@ -219,11 +219,11 @@
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
       let number$1$ = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }]
 [UNKNOWN] => [let number$1$ = $array[$index];]
 [number] => [number$1$] "number"
-[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(number$1$, Double)));]
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));]
 [return sum;] => [return sum;]
 [@SuppressWarnings("unused")
   public void testNull() {

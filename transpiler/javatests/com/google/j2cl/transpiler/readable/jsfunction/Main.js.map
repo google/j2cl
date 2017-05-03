@@ -117,11 +117,11 @@
     f(list.get(0));
   }] => [/**
    * @return {void}
-...    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));
+...    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));
   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());]
 [list] => [list] "list"
-[f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));]
+[f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));]
 [public static <A, T> A[] toArray(IntFunction<A[]> generator) {
     List<T> collected = null;
     return collected.toArray(generator.apply(collected.size()));

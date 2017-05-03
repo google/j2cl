@@ -65,15 +65,15 @@ class CastToGenerics extends java_lang_Object {
    */
   m_test__() {
     let o = Integer.$create__int(1);
-    let e = /**@type {C_E} */ ($Casts.to(o, Number));
-    let t = /**@type {C_T} */ ($Casts.to(o, java_lang_Object));
+    let e = /**@type {C_E} */ ($Casts.$to(o, Number));
+    let t = /**@type {C_T} */ ($Casts.$to(o, java_lang_Object));
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
     let c = /**@type {!CastToGenerics<?string, (Number|?number)>} */ (
         CastToGenerics.$create__());
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
-        $Casts.to(c, CastToGenerics));
-    cc = /**@type {CastToGenerics} */ ($Casts.to(c, CastToGenerics));
+        $Casts.$to(c, CastToGenerics));
+    cc = /**@type {CastToGenerics} */ ($Casts.$to(c, CastToGenerics));
   }
 
   /**
@@ -83,12 +83,12 @@ class CastToGenerics extends java_lang_Object {
    */
   m_castToTypeVariable__() {
     let o = Integer.$create__int(1);
-    let s = /**@type {*} */ ($Casts.to(o, java_lang_Object));
+    let s = /**@type {*} */ ($Casts.$to(o, java_lang_Object));
     let c = /**@type {CastToGenerics<*, (Number|?number)>} */ (
-        $Casts.to(o, CastToGenerics));
+        $Casts.$to(o, CastToGenerics));
     c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
-    c = /**@type {Enum} */ ($Casts.to(o, Enum));
-    let s1 = /**@type {?string} */ ($Casts.to(
+    c = /**@type {Enum} */ ($Casts.$to(o, Enum));
+    let s1 = /**@type {?string} */ ($Casts.$to(
         /**@type {!ClassWithGenericField<?string>} */ (
             ClassWithGenericField.$create__())
             .f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField,
@@ -110,7 +110,7 @@ class CastToGenerics extends java_lang_Object {
    */
   m_method__java_lang_Object(o) {
     if (Empty1.$isInstance(o)) {
-      return /**@type {Empty1} */ ($Casts.to(o, Empty1));
+      return /**@type {Empty1} */ ($Casts.$to(o, Empty1));
     }
     return null;
   }

@@ -108,25 +108,25 @@
 ...    double d = (double) o;
   }] => [/**
    * @return {void}
-...    let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));
+...    let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));
   }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [Object o = new Object();] => [let o = java_lang_Object.$create__();]
 [o] => [o] "o"
-[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.to(o, Boolean)));]
+[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.$to(o, Boolean)));]
 [bool] => [bool] "bool"
-[byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.to(o, Byte)).m_byteValue__();]
+[byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.$to(o, Byte)).m_byteValue__();]
 [b] => [b] "b"
-[char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.to(o, Character)).m_charValue__();]
+[char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.$to(o, Character)).m_charValue__();]
 [c] => [c] "c"
-[short s = (short) o;] => [let s = /**@type {Short} */ ($Casts.to(o, Short)).m_shortValue__();]
+[short s = (short) o;] => [let s = /**@type {Short} */ ($Casts.$to(o, Short)).m_shortValue__();]
 [s] => [s] "s"
-[int i = (int) o;] => [let i = /**@type {Integer} */ ($Casts.to(o, Integer)).m_intValue__();]
+[int i = (int) o;] => [let i = /**@type {Integer} */ ($Casts.$to(o, Integer)).m_intValue__();]
 [i] => [i] "i"
-[long l = (long) o;] => [let l = /**@type {Long} */ ($Casts.to(o, Long)).m_longValue__();]
+[long l = (long) o;] => [let l = /**@type {Long} */ ($Casts.$to(o, Long)).m_longValue__();]
 [l] => [l] "l"
-[float f = (float) o;] => [let f = /**@type {Float} */ ($Casts.to(o, Float)).m_floatValue__();]
+[float f = (float) o;] => [let f = /**@type {Float} */ ($Casts.$to(o, Float)).m_floatValue__();]
 [f] => [f] "f"
-[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.to(o, Double)));]
+[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));]
 [d] => [d] "d"
 [public void testUnboxAndWiden() {
     Byte boxedByte = Byte.valueOf((byte) 0);
