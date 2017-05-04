@@ -817,10 +817,7 @@ public class JsInteropRestrictionsChecker {
       case GETTER:
         TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
         if (methodDescriptor.getName().startsWith("is")
-            && !(TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)
-                // TODO(b/35880539): boxed booleans should not be allowed as return of
-                // properties of the form isXXX();
-                || TypeDescriptors.isJavaLangBoolean(returnTypeDescriptor))) {
+            && !TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor)) {
           problems.error(
               method.getSourcePosition(),
               "JsProperty '%s' cannot have a non-boolean return.",
