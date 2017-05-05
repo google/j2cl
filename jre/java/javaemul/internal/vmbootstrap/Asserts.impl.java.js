@@ -55,7 +55,7 @@ class Asserts {
  *         potential side effects) in the condition expression.
  * @private
  */
-goog.define('ASSERTIONS_ENABLED_', true);
+goog.define('ASSERTIONS_ENABLED_', false);
 
 
 /**
