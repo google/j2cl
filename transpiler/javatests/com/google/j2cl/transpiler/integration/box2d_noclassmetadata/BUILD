@@ -19,8 +19,14 @@ integration_test(
         "jre.checks.checkLevel": "NORMAL",
         "jre.classMetadata": "'STRIPPED'",
     },
-    # Override integration_test default since we don't want asserts for box2d tracking
-    defs = ["--remove_j2cl_asserts=true"],
+    defs = [
+        # TODO(cromwellian): investigate why JSCompiler doesn't preserve original
+        # name before ReplaceStrings sees it.
+        # Strip enum names:
+        "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
+        # Override integration_test default since we don't want asserts for box2d tracking
+        "--remove_j2cl_asserts=true",
+    ],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:box2d_j2cl",
     ],

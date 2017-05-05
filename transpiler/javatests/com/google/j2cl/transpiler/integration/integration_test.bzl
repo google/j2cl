@@ -73,10 +73,6 @@ def integration_test(name,
   optimized_extra_defs = [
       # Turn on asserts since the integration tests rely on them.
       "--remove_j2cl_asserts=false",
-      # OPTIMIZE ENUMS:
-      # TODO(cromwellian): investigate why JSCompiler doesn't preserve original
-      # name before ReplaceStrings sees it.
-      "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
       # Polyfill re-write is disabled so that size tracking only focuses on
       # size issues that are actionable outside of JSCompiler or are expected
       # to eventually be addressed inside of JSCompiler.
