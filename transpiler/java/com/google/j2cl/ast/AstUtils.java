@@ -45,6 +45,14 @@ public class AstUtils {
   private static final String CAPTURES_PREFIX = "$c_";
   private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
 
+  /**
+   * Whether or not it makes sense to require this type from javascript with a goog.require('xxx');
+   * This is used to detect if a goog.module.declareLegacyNamespace should be emitted for a class.
+   */
+  public static boolean canBeRequiredFromJs(TypeDeclaration typeDescriptor) {
+    return typeDescriptor.isJsType() && !typeDescriptor.isAnonymous();
+  }
+
   /** Return the String with first letter capitalized. */
   public static String toProperCase(String string) {
     if (string.isEmpty()) {

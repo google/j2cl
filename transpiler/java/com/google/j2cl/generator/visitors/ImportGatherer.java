@@ -72,10 +72,12 @@ public class ImportGatherer extends AbstractVisitor {
     SELF
   }
 
-  public static Multimap<ImportCategory, Import> gatherImports(Type type) {
+  public static Multimap<ImportCategory, Import> gatherImports(
+      Type type, boolean declareLegacyNamespace) {
     TimingCollector.get().startSubSample("Import Gathering Visitor");
 
-    Multimap<ImportCategory, Import> importsByCategory = new ImportGatherer().doGatherImports(type);
+    Multimap<ImportCategory, Import> importsByCategory =
+        new ImportGatherer(declareLegacyNamespace).doGatherImports(type);
     TimingCollector.get().endSubSample();
     return importsByCategory;
   }
@@ -85,7 +87,11 @@ public class ImportGatherer extends AbstractVisitor {
   private final Multimap<ImportCategory, TypeDescriptor> typeDescriptorsByCategory =
       LinkedHashMultimap.create();
 
-  private ImportGatherer() {}
+  private final boolean declareLegacyNamespace;
+
+  private ImportGatherer(boolean declareLegacyNamespace) {
+    this.declareLegacyNamespace = declareLegacyNamespace;
+  }
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
@@ -116,6 +122,18 @@ public class ImportGatherer extends AbstractVisitor {
     }
     for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
       addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
+    }
+
+    // Here we add an extra dependency on the outter namespace if declareLegacyNamespace is
+    // enabled.  This forces the outter namespaces to be declared first before the inner namespace
+    // which avoids errors in the JsCompiler. Note this interacts poorly with Outer classes that
+    // implement/extend Inner types.
+    if (declareLegacyNamespace
+        && AstUtils.canBeRequiredFromJs(type.getDeclaration())
+        && type.getDeclaration().getEnclosingTypeDeclaration() != null) {
+      addTypeDescriptor(
+          type.getDeclaration().getEnclosingTypeDeclaration().getUnsafeTypeDescriptor(),
+          ImportCategory.EAGER);
     }
   }
 

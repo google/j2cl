@@ -48,7 +48,7 @@ public abstract class JavaScriptGenerator {
     this.problems = problems;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.type = type;
-    importsByCategory = ImportGatherer.gatherImports(type);
+    importsByCategory = ImportGatherer.gatherImports(type, declareLegacyNamespace);
     Collection<Import> imports = importsByCategory.values();
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(imports, type);

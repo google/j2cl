@@ -194,7 +194,8 @@ public class OutputGeneratorStage {
   private void gatherDepinfo(
       Type type, Set<String> importModulePaths, Set<String> exportModulePaths) {
     // Gather imports.
-    Multimap<ImportCategory, Import> importsByCategory = ImportGatherer.gatherImports(type);
+    Multimap<ImportCategory, Import> importsByCategory =
+        ImportGatherer.gatherImports(type, declareLegacyNamespace);
     for (ImportCategory importCategory : ImportCategory.values()) {
       // Don't record use of the environment, it is not considered a dependency.
       if (importCategory == ImportCategory.EXTERN) {

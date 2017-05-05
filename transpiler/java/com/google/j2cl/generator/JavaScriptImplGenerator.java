@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
@@ -148,7 +149,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.module(...) declaration.
     sourceBuilder.appendln("goog.module('" + typeDeclaration.getImplModuleName() + "');");
-    if (declareLegacyNamespace && typeDeclaration.isJsType() && !typeDeclaration.isAnonymous()) {
+    if (declareLegacyNamespace && AstUtils.canBeRequiredFromJs(typeDeclaration)) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
