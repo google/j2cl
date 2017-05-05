@@ -92,8 +92,6 @@ def integration_test(name,
   # particular test needs one of these on they can override with
   # closure_defines.
   defines = {
-      # Turn on assertions since the integration tests rely on them.
-      "ASSERTIONS_ENABLED_" : "true",
       "jre.checks.checkLevel" : "MINIMAL",
       "jre.checkedMode" : "DISABLED",
       "jre.logging.logLevel" : "OFF",

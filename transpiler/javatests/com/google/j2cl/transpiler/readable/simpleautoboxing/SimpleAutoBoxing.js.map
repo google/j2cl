@@ -386,7 +386,7 @@
 ...    assert br;
   }] => [/**
    * @return {void}
-...    $Asserts.$enabled() && $Asserts.$assert(br);
+...    $Asserts.$assert(br);
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingBoolean"
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);]
 [boxB1] => [boxB1] "boxB1"
@@ -398,82 +398,82 @@
 [boxr] => [boxr] "boxr"
 [boxr = boxB1 == boxB2;] => [boxr = $Equality.$same(boxB1, boxB2);]
 [br = boxB1 == boxB2;] => [br = $Equality.$same(boxB1, boxB2);]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 != boxB2;] => [boxr = !$Equality.$same(boxB1, boxB2);]
 [br = boxB1 != boxB2;] => [br = !$Equality.$same(boxB1, boxB2);]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 ^ boxB2;] => [boxr = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^ Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
 [br = boxB1 ^ boxB2;] => [br = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^ Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 & boxB2;] => [boxr = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) & Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
 [br = boxB1 & boxB2;] => [br = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) & Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 | boxB2;] => [boxr = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) | Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
 [br = boxB1 | boxB2;] => [br = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) | Boolean.m_booleanValue__java_lang_Boolean(boxB2));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 && boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean(boxB2);]
 [br = boxB1 && boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean(boxB2);]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 || boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean(boxB2);]
 [br = boxB1 || boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean(boxB2);]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 = boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = boxB2));]
 [br = boxB1 = boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = boxB2));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 &= boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) & Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
 [br = boxB1 &= boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) & Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 |= boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) | Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
 [br = boxB1 |= boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) | Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [boxr = boxB1 ^= boxB2;] => [boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^ Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
 [br = boxB1 ^= boxB2;] => [br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^ Boolean.m_booleanValue__java_lang_Boolean(boxB2))));]
-[assert boxr;] => [$Asserts.$enabled() && $Asserts.$assert(boxr);]
-[assert br;] => [$Asserts.$enabled() && $Asserts.$assert(br);]
+[assert boxr;] => [$Asserts.$assert(boxr);]
+[assert br;] => [$Asserts.$assert(br);]
 [@SuppressWarnings("unused")
   public void testUnboxingEquality() {
 ...    assert i != boxI;
   }] => [/**
    * @return {void}
-...    $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());
+...    $Asserts.$assert(i != boxI.m_intValue__());
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingEquality"
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
 [boxB] => [boxB] "boxB"
 [boolean b = false;] => [let b = false;]
 [b] => [b] "b"
-[assert boxB == boxB;] => [$Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxB, boxB));]
-[assert boxB == b;] => [$Asserts.$enabled() && $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);]
-[assert b != b;] => [$Asserts.$enabled() && $Asserts.$assert(b != b);]
-[assert b != boxB;] => [$Asserts.$enabled() && $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));]
+[assert boxB == boxB;] => [$Asserts.$assert($Equality.$same(boxB, boxB));]
+[assert boxB == b;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);]
+[assert b != b;] => [$Asserts.$assert(b != b);]
+[assert b != boxB;] => [$Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));]
 [Integer boxI = new Integer(100);] => [let boxI = Integer.$create__int(100);]
 [boxI] => [boxI] "boxI"
 [int i = 101;] => [let i = 101;]
 [i] => [i] "i"
-[assert boxI == boxI;] => [$Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxI, boxI));]
-[assert boxI == i;] => [$Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue__() == i);]
-[assert i != i;] => [$Asserts.$enabled() && $Asserts.$assert(i != i);]
-[assert i != boxI;] => [$Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());]
+[assert boxI == boxI;] => [$Asserts.$assert($Equality.$same(boxI, boxI));]
+[assert boxI == i;] => [$Asserts.$assert(boxI.m_intValue__() == i);]
+[assert i != i;] => [$Asserts.$assert(i != i);]
+[assert i != boxI;] => [$Asserts.$assert(i != boxI.m_intValue__());]
 [public void testAssertStatement() {
     Boolean boxB = new Boolean(true);
 ...    assert b;
   }] => [/**
    * @return {void}
-...    $Asserts.$enabled() && $Asserts.$assert(b);
+...    $Asserts.$assert(b);
   }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
 [Boolean boxB = new Boolean(true);] => [let boxB = Boolean.$create__boolean(true);]
 [boxB] => [boxB] "boxB"
 [boolean b = true;] => [let b = true;]
 [b] => [b] "b"
-[assert boxB;] => [$Asserts.$enabled() && $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));]
-[assert b;] => [$Asserts.$enabled() && $Asserts.$assert(b);]
+[assert boxB;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));]
+[assert b;] => [$Asserts.$assert(b);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

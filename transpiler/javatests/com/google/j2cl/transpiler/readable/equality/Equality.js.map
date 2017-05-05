@@ -40,9 +40,9 @@
    * @return {void}
 ...    }
   }] "com.google.j2cl.transpiler.readable.equality.Equality.test"
-[assert false == false;] => [$Asserts.$enabled() && $Asserts.$assert(false == false);]
-[assert 0 != 1;] => [$Asserts.$enabled() && $Asserts.$assert(0 != 1);]
-[assert new Object() != new Object();] => [$Asserts.$enabled() && $Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), java_lang_Object.$create__()));]
-[assert null != new Object();] => [$Asserts.$enabled() && $Asserts.$assert(!$Equality.$same(null, java_lang_Object.$create__()));]
-[assert new Object() != null;] => [$Asserts.$enabled() && $Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), null));]
+[assert false == false;] => [$Asserts.$assert(false == false);]
+[assert 0 != 1;] => [$Asserts.$assert(0 != 1);]
+[assert new Object() != new Object();] => [$Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), java_lang_Object.$create__()));]
+[assert null != new Object();] => [$Asserts.$assert(!$Equality.$same(null, java_lang_Object.$create__()));]
+[assert new Object() != null;] => [$Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), null));]
 [UNKNOWN] => [java_lang_Object.$clinit();]

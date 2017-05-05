@@ -51,21 +51,16 @@ class Equality extends java_lang_Object {
    */
   m_test__() {
     {
-      $Asserts.$enabled() && $Asserts.$assert(false == false);
-      $Asserts.$enabled() && $Asserts.$assert(0 != 1);
+      $Asserts.$assert(false == false);
+      $Asserts.$assert(0 != 1);
     }
     {
-      $Asserts.$enabled() &&
-          $Asserts.$assert(!$Equality.$same(
-              java_lang_Object.$create__(), java_lang_Object.$create__()));
+      $Asserts.$assert(!$Equality.$same(
+          java_lang_Object.$create__(), java_lang_Object.$create__()));
     }
     {
-      $Asserts.$enabled() &&
-          $Asserts.$assert(
-              !$Equality.$same(null, java_lang_Object.$create__()));
-      $Asserts.$enabled() &&
-          $Asserts.$assert(
-              !$Equality.$same(java_lang_Object.$create__(), null));
+      $Asserts.$assert(!$Equality.$same(null, java_lang_Object.$create__()));
+      $Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), null));
     }
   }
 

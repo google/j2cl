@@ -16,10 +16,11 @@ integration_test(
     name = "box2d",
     srcs = glob(["*.java"]),
     closure_defines = {
-        "ASSERTIONS_ENABLED_": "false",
         "jre.checks.checkLevel": "OPTIMIZED",
         "jre.classMetadata": "'STRIPPED'",
     },
+    # Override integration_test default since we don't want asserts for box2d tracking
+    defs = ["--remove_j2cl_asserts=true"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:box2d_j2cl",
     ],

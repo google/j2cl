@@ -37,9 +37,9 @@
     assert new Outer().method() == 5;
   }] => [/**
    * @param {Array<?string>} args
-...    $Asserts.$enabled() && $Asserts.$assert(Outer.$create__().m_method__() == 5);
+...    $Asserts.$assert(Outer.$create__().m_method__() == 5);
   }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
-[assert new Outer().method() == 5;] => [$Asserts.$enabled() && $Asserts.$assert(Outer.$create__().m_method__() == 5);]
+[assert new Outer().method() == 5;] => [$Asserts.$assert(Outer.$create__().m_method__() == 5);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

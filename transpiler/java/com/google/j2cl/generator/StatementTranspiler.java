@@ -63,7 +63,6 @@ public class StatementTranspiler {
             assertStatement.getSourcePosition(),
             () -> {
               String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
-              builder.append(assertAlias + ".$enabled() && ");
               if (assertStatement.getMessage() == null) {
                 builder.append(assertAlias + ".$assert(");
                 renderExpression(assertStatement.getExpression());

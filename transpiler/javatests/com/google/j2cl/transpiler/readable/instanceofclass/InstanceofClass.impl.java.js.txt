@@ -52,12 +52,9 @@ class InstanceofClass extends java_lang_Object {
    */
   m_test__() {
     let object = InstanceofClass.$create__();
-    $Asserts.$enabled() &&
-        $Asserts.$assert(InstanceofClass.$isInstance(object));
-    $Asserts.$enabled() &&
-        $Asserts.$assert(java_lang_Object.$isInstance(object));
-    $Asserts.$enabled() &&
-        $Asserts.$assert(!(java_lang_String.$isInstance(object)));
+    $Asserts.$assert(InstanceofClass.$isInstance(object));
+    $Asserts.$assert(java_lang_Object.$isInstance(object));
+    $Asserts.$assert(!(java_lang_String.$isInstance(object)));
   }
 
   /**

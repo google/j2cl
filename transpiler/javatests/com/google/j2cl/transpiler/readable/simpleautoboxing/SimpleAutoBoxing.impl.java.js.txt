@@ -409,52 +409,52 @@ class SimpleAutoBoxing extends java_lang_Object {
     let /** boolean */ boxr;
     boxr = $Equality.$same(boxB1, boxB2);
     br = $Equality.$same(boxB1, boxB2);
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = !$Equality.$same(boxB1, boxB2);
     br = !$Equality.$same(boxB1, boxB2);
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
         !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
            Boolean.m_booleanValue__java_lang_Boolean(boxB2));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) ||
         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) ||
         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = boxB2));
     br = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = boxB2));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
@@ -463,8 +463,8 @@ class SimpleAutoBoxing extends java_lang_Object {
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
                 Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
@@ -473,8 +473,8 @@ class SimpleAutoBoxing extends java_lang_Object {
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
                 Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
@@ -483,8 +483,8 @@ class SimpleAutoBoxing extends java_lang_Object {
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
                 Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
-    $Asserts.$enabled() && $Asserts.$assert(boxr);
-    $Asserts.$enabled() && $Asserts.$assert(br);
+    $Asserts.$assert(boxr);
+    $Asserts.$assert(br);
   }
 
   /**
@@ -494,18 +494,16 @@ class SimpleAutoBoxing extends java_lang_Object {
   m_testUnboxingEquality__() {
     let boxB = Boolean.$create__boolean(true);
     let b = false;
-    $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxB, boxB));
-    $Asserts.$enabled() &&
-        $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);
-    $Asserts.$enabled() && $Asserts.$assert(b != b);
-    $Asserts.$enabled() &&
-        $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));
+    $Asserts.$assert($Equality.$same(boxB, boxB));
+    $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);
+    $Asserts.$assert(b != b);
+    $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));
     let boxI = Integer.$create__int(100);
     let i = 101;
-    $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxI, boxI));
-    $Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue__() == i);
-    $Asserts.$enabled() && $Asserts.$assert(i != i);
-    $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());
+    $Asserts.$assert($Equality.$same(boxI, boxI));
+    $Asserts.$assert(boxI.m_intValue__() == i);
+    $Asserts.$assert(i != i);
+    $Asserts.$assert(i != boxI.m_intValue__());
   }
 
   /**
@@ -515,9 +513,8 @@ class SimpleAutoBoxing extends java_lang_Object {
   m_testAssertStatement__() {
     let boxB = Boolean.$create__boolean(true);
     let b = true;
-    $Asserts.$enabled() &&
-        $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));
-    $Asserts.$enabled() && $Asserts.$assert(b);
+    $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));
+    $Asserts.$assert(b);
   }
 
   /**
