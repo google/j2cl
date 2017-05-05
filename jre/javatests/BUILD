@@ -63,6 +63,7 @@ java_test(
     ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
+        "//third_party/java/gwt:gwt-javaemul-internal-annotations",
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/junit",
     ],
