@@ -11,10 +11,7 @@ j2cl_test(
         "TestCases.srcjar",
         "TestShard.java",
     ],
-    tags = [
-        "manual",
-        "notap",  #TODO(b/38001177): re-enable when the test passes.
-    ],
+    tags = ["manual"],
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//third_party/java/junit:junit-j2cl",

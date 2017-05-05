@@ -21,7 +21,7 @@ public class TestShard extends TestCase {
     TestCase10754.test();
     TestCase11278.test();
     TestCase12589.test();
-    TestCase170.test();
+    //TestCase170.test();
     TestCase4517.test();
     TestCase4745.test();
     TestCase5678.test();
@@ -34,7 +34,7 @@ public class TestShard extends TestCase {
     TestCase2251.test();
     TestCase3302.test();
     TestCase3441.test();
-    TestCase3541.test();
+    //TestCase3541.test();
     TestCase3805.test();
     TestCase3961.test();
     TestCase5193.test();
@@ -52,7 +52,7 @@ public class TestShard extends TestCase {
     TestCase1008.test();
     TestCase11854.test();
     TestCase1934.test();
-    TestCase3235.test();
+    //TestCase3235.test();
     TestCase3240.test();
     TestCase3798.test();
     TestCase4595.test();
@@ -67,6 +67,7 @@ public class TestShard extends TestCase {
     TestCase9186.test();
     TestCase6755.test();
     TestCase9164.test();
+    // TestCase4445.test();  // illegal JsInterop
     TestCase8132.test();
     TestCase11431.test();
     TestCase2765.test();
@@ -74,6 +75,7 @@ public class TestShard extends TestCase {
     TestCase6678.test();
     TestCase7664.test();
     TestCase8295.test();
+    // TestCase1822.test();  // illegal JsInterop
     TestCase2273.test();
     TestCase9622.test();
     TestCase8322.test();
@@ -81,18 +83,19 @@ public class TestShard extends TestCase {
     TestCase4835.test();
     TestCase7256.test();
     TestCase11236.test();
-    TestCase3776.test();
+    //TestCase3776.test();
     TestCase4362.test();
-    TestCase6.test();
+    //TestCase6.test();
     TestCase6999.test();
     TestCase11585.test();
     TestCase12203.test();
     TestCase1428.test();
     TestCase1726.test();
-    TestCase3829.test();
+    //TestCase3829.test();
     TestCase4805.test();
-    TestCase5304.test();
+    //TestCase5304.test();
     TestCase5431.test();
+    //TestCase6407.test();  // illegal JsInterop
     TestCase1036.test();
     TestCase2386.test();
     TestCase4852.test();
@@ -132,6 +135,7 @@ public class TestShard extends TestCase {
     TestCase1731.test();
     TestCase2355.test();
     TestCase4048.test();
+    // TestCase4707.test();  // illegal JsInterop
     TestCase5553.test();
     TestCase6554.test();
     TestCase8971.test();
@@ -157,6 +161,7 @@ public class TestShard extends TestCase {
     TestCase4019.test();
     TestCase5215.test();
     TestCase5442.test();
+    // TestCase57.test();  // illegal JsInterop
     TestCase616.test();
     TestCase10417.test();
     TestCase2894.test();
@@ -166,16 +171,18 @@ public class TestShard extends TestCase {
     TestCase4409.test();
     TestCase5150.test();
     TestCase5747.test();
-    TestCase6913.test();
+    //TestCase6913.test();
     TestCase752.test();
     TestCase7972.test();
     TestCase1137.test();
+    // TestCase1623.test();  // illegal JsInterop
     TestCase318.test();
     TestCase3623.test();
     TestCase478.test();
     TestCase4917.test();
     TestCase5807.test();
     TestCase6345.test();
+    // TestCase7008.test();  // illegal JsInterop
     TestCase7517.test();
     TestCase7718.test();
     TestCase7861.test();
@@ -198,9 +205,9 @@ public class TestShard extends TestCase {
     TestCase4303.test();
     TestCase5249.test();
     TestCase6127.test();
-    TestCase7015.test();
+    //TestCase7015.test();
     TestCase7301.test();
-    TestCase7832.test();
+    //TestCase7832.test();
     TestCase9359.test();
     TestCase182.test();
     TestCase2071.test();
@@ -220,7 +227,7 @@ public class TestShard extends TestCase {
     TestCase4131.test();
     TestCase4215.test();
     TestCase4803.test();
-    TestCase492.test();
+    //TestCase492.test();
     TestCase5551.test();
     TestCase6367.test();
     TestCase7275.test();
@@ -230,10 +237,11 @@ public class TestShard extends TestCase {
     TestCase10040.test();
     TestCase11711.test();
     TestCase11730.test();
+    // TestCase2434.test();  // illegal JsInterop
     TestCase5300.test();
     TestCase575.test();
     TestCase595.test();
-    TestCase6071.test();
+    //TestCase6071.test();
     TestCase10171.test();
     TestCase10348.test();
     TestCase11811.test();
