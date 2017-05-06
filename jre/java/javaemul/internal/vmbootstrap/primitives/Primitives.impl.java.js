@@ -265,8 +265,7 @@ class Primitives {
    */
   static $narrowLongToInt(instance) {
     Primitives.$clinit();
-    let intValue = $LongUtils.$toInt(instance);
-    return Primitives.$toInt(intValue);
+    return $LongUtils.$toInt(instance);
   }
 
   /**

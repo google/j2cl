@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 12 size changes.
+There are 18 size changes.
 Total size (of already existing tests) changed from
-  1343885 to 1344135 bytes (100%->100.02%) and from
-  414547 to 414728 bytes (100%->100.04%) gzipped.
+  1344135 to 1344035 bytes (100%->99.99%) and from
+  414710 to 414692 bytes (100%->100.00%) gzipped.
 
 
 New reports:
@@ -13,16 +13,19 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+     3334   3329 boxingsideeffect (-0.15%)
+     2077   2075 binaryexpressions (-0.10%)
+     3750   3747 interfacedevirtualize (-0.08%)
+     4039   4036 simpleautoboxing (-0.07%)
 
 
 Expansion report highlights:
 **************************************
       old    new
-      690    703 gwtincompatible (1.88%)
-     1082   1097 switchstatement (1.39%)
-      970    983 externalunqualifiedstaticfield (1.34%)
-      964    976 overwrittentypevariables (1.24%)
+     2272   2275 narrowingprimitiveconversion (0.13%)
+     4191   4192 arrayofboxedtype (0.02%)
+    24321  24326 jsinteroptests (0.02%)
 
 
 All reports:
@@ -42,17 +45,17 @@ All reports:
      1842   1842 arrayleafinsertion (unchanged)
      2198   2198 arrayliteral (unchanged)
      1485   1485 arrayobjectcalls (unchanged)
-     4191   4191 arrayofboxedtype (unchanged)
+     4191   4192 arrayofboxedtype (0.02%)
      3464   3464 arrayreadwrite (unchanged)
      2368   2368 assertsimple (unchanged)
       822    822 backwardbridgemethod (unchanged)
-     2077   2077 binaryexpressions (unchanged)
+     2077   2075 binaryexpressions (-0.10%)
       764    764 blockscoping (unchanged)
-    38210  38305 box2d_default (0.25%)
-    36157  36157 box2d_noclassmetadata (unchanged)
-    34394  34394 box2d_noclassmetadata_checksmin (unchanged)
-    35981  35981 box2d_noclassmetadata_checksopt (unchanged)
-     3334   3334 boxingsideeffect (unchanged)
+    38305  38302 box2d_default (-0.01%)
+    36157  36154 box2d_noclassmetadata (-0.01%)
+    34394  34392 box2d_noclassmetadata_checksmin (-0.01%)
+    35981  35979 box2d_noclassmetadata_checksopt (-0.01%)
+     3334   3329 boxingsideeffect (-0.15%)
       808    808 breakstatement (unchanged)
      2485   2485 bridgejsmethod (unchanged)
      1546   1546 bridgemethodaccidentaloverride (unchanged)
@@ -71,14 +74,14 @@ All reports:
      1795   1795 casttogenerics (unchanged)
      1530   1530 casttointerface (unchanged)
      1320   1320 casttonativetypevariable (unchanged)
-     4225   4225 casttoprimitives (unchanged)
-     2656   2656 casttoreference (unchanged)
+     4225   4224 casttoprimitives (-0.02%)
+     2656   2655 casttoreference (-0.04%)
      1189   1189 castwithsideeffect (unchanged)
       777    777 circularcompiletimeconstant (unchanged)
      2966   2966 classcastexception (unchanged)
-     2381   2383 classliteral (0.08%)
+     2383   2383 classliteral (unchanged)
       768    768 classliteralobfuscated (unchanged)
-     1854   1857 classliteralstripped (0.16%)
+     1857   1857 classliteralstripped (unchanged)
       802    802 compiletimeconstant (unchanged)
       850    850 complexcascadingconstructor (unchanged)
       810    810 continuestatement (unchanged)
@@ -93,13 +96,13 @@ All reports:
        62     62 emptyclass (unchanged)
        62     62 emptyclasswithfields (unchanged)
        62     62 emptyclasswithparent (unchanged)
-      942    943 enummethods (0.11%)
+      943    943 enummethods (unchanged)
      1624   1624 enumobfuscation (unchanged)
-     1300   1303 enums (0.23%)
-     1729   1739 enumspecialfunctions (0.58%)
+     1303   1303 enums (unchanged)
+     1739   1739 enumspecialfunctions (unchanged)
      1080   1080 exceptionnotcaught (unchanged)
       812    812 exports (unchanged)
-      970    983 externalunqualifiedstaticfield (1.34%)
+      983    983 externalunqualifiedstaticfield (unchanged)
       807    807 fieldmethodclasscollision (unchanged)
       991    991 fieldshadowing (unchanged)
       781    781 finallyblock (unchanged)
@@ -109,7 +112,7 @@ All reports:
       991    991 genericmethod (unchanged)
        62     62 genericnativetype (unchanged)
       876    876 generictype (unchanged)
-      690    703 gwtincompatible (1.88%)
+      703    703 gwtincompatible (unchanged)
       791    791 ifstatement (unchanged)
       830    830 implementsgenericinterface (unchanged)
       683    683 implementsinterface (unchanged)
@@ -131,7 +134,7 @@ All reports:
       812    812 instanceofinterface (unchanged)
       936    936 instancequalifieronstaticfield (unchanged)
        62     62 interfaceabstractimpl (unchanged)
-     3750   3750 interfacedevirtualize (unchanged)
+     3750   3747 interfacedevirtualize (-0.08%)
        62     62 interfacejsbridge (unchanged)
        62     62 interfacemethoddispatch (unchanged)
       806    806 interfacewithfields (unchanged)
@@ -147,7 +150,7 @@ All reports:
      1583   1583 jsfunctionbridge (unchanged)
      2230   2230 jsfunctiontypeannotation (unchanged)
       829    829 jsinnerclass (unchanged)
-    24332  24339 jsinteroptests (0.03%)
+    24321  24326 jsinteroptests (0.02%)
       841    841 jsmethodoverride (unchanged)
       762    762 jsoverlay (unchanged)
       766    766 jsoverlaystaticrefs (unchanged)
@@ -170,7 +173,7 @@ All reports:
      1104   1104 multiplecatch (unchanged)
       844    844 multipleconstructors (unchanged)
        62     62 multipleroottypes (unchanged)
-     2272   2272 narrowingprimitiveconversion (unchanged)
+     2272   2275 narrowingprimitiveconversion (0.13%)
        62     62 nativeinjection (unchanged)
        62     62 nativeinjectionapt (unchanged)
       746    746 nativeinjectionwithoutmethods (unchanged)
@@ -184,15 +187,15 @@ All reports:
        62     62 nonnullablecomplex (unchanged)
      1060   1060 npecatch (unchanged)
      2119   2119 numberchilddevirtualcalls (unchanged)
-     2729   2729 numberdevirtualcalls (unchanged)
-     2867   2867 numberobjectcalls (unchanged)
+     2729   2728 numberdevirtualcalls (-0.04%)
+     2867   2866 numberobjectcalls (-0.03%)
      1516   1516 objectchilddevirtualcalls (unchanged)
      1364   1364 objectdevirtualcalls (unchanged)
        62     62 obviouslydeadcode (unchanged)
        62     62 overloadedmethods (unchanged)
       869    869 overridingclassmethods (unchanged)
       785    785 overridinginterfacemethods (unchanged)
-      964    976 overwrittentypevariables (1.24%)
+      976    976 overwrittentypevariables (unchanged)
        62     62 packagecrosscall (unchanged)
      1089   1089 packageprivatemethods (unchanged)
       975    975 parallelhierarchies (unchanged)
@@ -202,7 +205,7 @@ All reports:
       774    774 renamejsmethodsinnativejstype (unchanged)
      1894   1894 returnimplicitcasts (unchanged)
       819    819 shadowedfield (unchanged)
-     4039   4039 simpleautoboxing (unchanged)
+     4039   4036 simpleautoboxing (-0.07%)
       814    814 simplecascadingconstructor (unchanged)
       796    796 simpleliterals (unchanged)
      1426   1426 simplestarrayliteral (unchanged)
@@ -225,11 +228,11 @@ All reports:
       852    852 subnativejstype (unchanged)
       832    832 supercallnondefault (unchanged)
       904    904 supermethodcall (unchanged)
-     1082   1097 switchstatement (1.39%)
+     1097   1097 switchstatement (unchanged)
       746    746 synchronizedblock (unchanged)
        62     62 systemgetproperty (unchanged)
       862    862 ternaryexpression (unchanged)
-     3773   3780 trywithresource (0.19%)
+     3780   3780 trywithresource (unchanged)
       892    892 typewildcards (unchanged)
       793    793 unaryexpressions (unchanged)
      2873   2873 underflowoverflowconversion (unchanged)
