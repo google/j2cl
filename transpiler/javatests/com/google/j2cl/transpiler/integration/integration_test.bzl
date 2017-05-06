@@ -193,7 +193,8 @@ def integration_test(name,
       ] + defs,
       externs_list=test_externs_list,
       jvm_flags=[
-          "-Djsrunner.net.useJsBundles=true"
+          "-Djsrunner.net.useJsBundles=true",
+          "-DstacktraceDeobfuscation=true",
       ],
   )
 
