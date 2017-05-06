@@ -32,6 +32,7 @@ public class Main {
     TestCase5828.test();
     TestCase6.test();
     TestCase8435.test();
+    TestCase8939.test();
 
     // From allsimplebridges.
     Tester5.test();

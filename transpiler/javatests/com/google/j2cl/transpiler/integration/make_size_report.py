@@ -68,7 +68,7 @@ def make_size_report():
   original_result.get()
   modified_result.get()
 
-  print "  Collecting original amd modified optimized sizes."
+  print "  Collecting original and modified optimized sizes."
   original_js_files_by_test_name = (
       repo_util.get_js_files_by_test_name(repo_util.get_managed_path()))
   modified_js_files_by_test_name = repo_util.get_js_files_by_test_name()

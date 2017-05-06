@@ -209,7 +209,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // Then add any bridge method descriptors which are required by implemented interfaces but
     // which were shadowed by one of the generic specialization bridge method descriptors.
     for (TypeDescriptor interfaceTypeDescriptor :
-        typeDescriptor.getTypeDeclaration().getInterfaceTypeDescriptors()) {
+        typeDescriptor.getTypeDeclaration().getTransitiveInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor : interfaceTypeDescriptor.getMethodDescriptors()) {
         if (shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
           declaredPotentialBridgeMethodDescriptors.add(methodDescriptor);
