@@ -13,7 +13,7 @@
 package(default_visibility = ["//:__subpackages__"])
 
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "assembled_content_app_config", "mss_js_compiled_module_set_flat_files")
-load("//javascript/apps/fava/builddefs:fava.bzl", "pinto_processed_module_set")
+load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
 load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
 load("//build_def:j2cl_util.bzl", "J2CL_UNOPTIMIZED_DEFS")
 
