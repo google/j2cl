@@ -1,9 +1,7 @@
 package com.google.j2cl.transpiler.integration.binaryexpressions;
 
-/**
- * Test basic binary operations. This test does not aim to test primitive overflow and
- * Coercion.
- */
+/** Test basic binary operations. This test does not aim to test primitive overflow and Coercion. */
+@SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality"})
 public class Main {
   public static void main(String[] args) {
     int a = 6;
@@ -27,6 +25,7 @@ public class Main {
     assert (a | b) == 7;
     assert (a > b) && (a == 6);
     assert (a < b) || (a == 6);
+    assert (-1 >>> 0) == -1;
 
     assert a + b + a - b == 12;
     assert (a + b) * (a - b) == 27;
@@ -60,13 +59,20 @@ public class Main {
     d = -1;
     d >>>= 16;
     assert d == 65535;
+    d = -1;
+    d >>>= 0;
+    assert d == -1;
+
+    boolean bool = true;
+    bool &= false;
+    assert ("" + bool).equals("false");
 
     String s = null;
     assert s + s == "nullnull";
 
     // Use an array to allow uninitialized string references.
-    String[] stringArray = new String[1];
     // Uncomment when b/34460222 is fixed
+    // String[] stringArray = new String[1];
     // assert stringArray[0] + stringArray[0] == "nullnull";
 
     assert ((5 / 2) - 0.0) == 2.0;

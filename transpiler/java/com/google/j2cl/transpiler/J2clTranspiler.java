@@ -25,9 +25,9 @@ import com.google.j2cl.ast.visitors.DefaultMethodsResolver;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
-import com.google.j2cl.ast.visitors.FixBooleanOperators;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
+import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
@@ -42,6 +42,7 @@ import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
+import com.google.j2cl.ast.visitors.InsertUnsignedRightShiftCoercions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
@@ -234,7 +235,8 @@ public class J2clTranspiler {
             new NormalizeLongs(),
             new InsertUnderflowOverflowConversions(),
             new InsertDivisionCoercions(),
-            new FixBooleanOperators(),
+            new InsertBooleanCoercions(),
+            new InsertUnsignedRightShiftCoercions(),
             new ArrayAccessNormalizer(),
             new NormalizeConstructors(),
             new NormalizeCasts(),

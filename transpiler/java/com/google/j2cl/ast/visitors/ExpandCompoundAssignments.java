@@ -127,6 +127,11 @@ public class ExpandCompoundAssignments extends NormalizationPass {
       return false;
     }
 
+    if (operator == BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN) {
+      // >>>= needs expansion so that it is handled by FixUnsignedRightShiftOperator.
+      return true;
+    }
+
     TypeDescriptor targetTypeDescriptor = targetExpression.getTypeDescriptor();
     if ((operator == BinaryOperator.DIVIDE_ASSIGN || operator == BinaryOperator.REMAINDER_ASSIGN)
         && needsIntegralCoersion(targetTypeDescriptor)) {

@@ -34,7 +34,7 @@ import com.google.j2cl.ast.TypeDescriptors;
  * <p>This visitor finds these "bool ^ bool" situations and converts them to "!!(bool ^ bool)" so
  * that the return type is proper.
  */
-public class FixBooleanOperators extends NormalizationPass {
+public class InsertBooleanCoercions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -66,5 +66,4 @@ public class FixBooleanOperators extends NormalizationPass {
           }
         });
   }
-
 }
