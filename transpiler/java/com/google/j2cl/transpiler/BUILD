@@ -10,7 +10,7 @@ java_library(
     name = "transpiler_lib",
     srcs = ["J2clTranspiler.java"],
     deps = [
-        "//java/com/google/common/collect",
+        "//third_party:guava",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/visitors",
         "//transpiler/java/com/google/j2cl/common",

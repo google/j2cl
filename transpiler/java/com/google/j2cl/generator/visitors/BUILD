@@ -7,9 +7,8 @@ java_library(
     name = "visitors",
     srcs = glob(["*.java"]),
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//third_party/java/jsr305_annotations",
+        "//third_party:guava",
+        "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
     ],

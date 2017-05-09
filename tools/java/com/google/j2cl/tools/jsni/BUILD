@@ -20,7 +20,7 @@ java_library(
         "//java/com/google/common/collect",
         "//java/com/google/common/flags",
         "//java/com/google/common/io",
-        "//:jdt-core-stable",
+        "//third_party:jdt-core-stable",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/frontend",

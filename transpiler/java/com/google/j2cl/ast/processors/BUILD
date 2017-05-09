@@ -8,13 +8,11 @@ java_library(
     srcs = glob(["*.java"]),
     resources = glob(["*.vm"]),
     deps = [
-        "//java/com/google/common/annotations",
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//third_party/java/auto:auto_service",
-        "//third_party/java/auto:common",
-        "//third_party/java/jakarta_velocity",
-        "//third_party/java/jsr305_annotations",
+        "//third_party:auto_common",
+        "//third_party:auto_service",
+        "//third_party:guava",
+        "//third_party:jakarta_velocity",
+        "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast/annotations:annotations-internal",
     ],
 )
