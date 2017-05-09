@@ -2,7 +2,7 @@
 
 ## Expectations
 - Needs to be available to transpiled output
-- Is not part of the JRE and does
+- Is not part of the JRE
 - Does not reference the JRE
 
 Conceptually it is the lowest layer of JS because it is depended upon
