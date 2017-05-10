@@ -78,8 +78,6 @@ public class Main {
     assert string1.charAt(6) == '1';
 
     assert string1.subSequence(0, 2).equals("st");
-    // TODO: Test for IndexOutOfBoundsException when implementation is compiled from Java
-    // assert string1.subSequence(4, 2).equals("");
 
     // toString() already tested.
   }
@@ -106,7 +104,5 @@ public class Main {
     // substring (start, end)
     assert string1.substring(0, 2).equals("st");
     assert string1.substring(1, 5).equals("trin");
-
-    // TODO: Test for IndexOutOfBoundsException when implementation is compiled from Java
   }
 }

@@ -36,9 +36,8 @@ public class Main {
     assert object1.hashCode() != object2.hashCode();
 
     // ToString
-    // TODO: adjust when Object.toString()'s implementation is finished to include hex.
     assert object1.toString() instanceof String;
-    assert object1.toString() == "java.lang.Object@" + object1.hashCode();
+    assert object1.toString() == "java.lang.Object@" + Integer.toHexString(object1.hashCode());
     assert object1.toString() != object2.toString();
 
     // GetClass

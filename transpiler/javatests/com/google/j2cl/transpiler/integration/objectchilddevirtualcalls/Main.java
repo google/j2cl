@@ -20,6 +20,12 @@ package com.google.j2cl.transpiler.integration.objectchilddevirtualcalls;
  * that Object method devirtualization is occurring even for children of Object and that the
  * implementation being routed to is proper.
  */
+@SuppressWarnings({
+  "SelfEquals",
+  "IdentityBinaryExpression",
+  "ReferenceEquality",
+  "EqualsIncompatibleType"
+})
 public class Main {
   public static void main(String... args) {
     ChildClass childClass1 = new ChildClass();
@@ -36,11 +42,10 @@ public class Main {
     assert childClass1.hashCode() != childClass2.hashCode();
 
     // ToString
-    // TODO: adjust when Object.toString()'s implementation is finished to include hex.
     assert childClass1.toString() instanceof String;
     assert childClass1.toString()
         == "com.google.j2cl.transpiler.integration.objectchilddevirtualcalls.ChildClass@"
-            + childClass1.hashCode();
+            + Integer.toHexString(childClass1.hashCode());
     assert childClass1.toString() != childClass2.toString();
 
     // GetClass
