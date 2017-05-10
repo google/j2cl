@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -25,10 +26,11 @@ import jsinterop.annotations.JsType;
 class InternalJsMapFactory {
 
   @JsType(isNative = true, name = "Map", namespace = JsPackage.GLOBAL)
-  private static class NativeMap<V> extends InternalJsMap<V> { }
+  private static class NativeMap<V> {}
 
   public static  <V> InternalJsMap<V> newJsMap() {
-    return new NativeMap<V>();
+    // We know that NativeMap implements InternalJsMap contract but we don't want to put a bunch
+    // stubs by adding implements above.
+    return JsUtils.uncheckedCast(new NativeMap<V>());
   }
 }
-
