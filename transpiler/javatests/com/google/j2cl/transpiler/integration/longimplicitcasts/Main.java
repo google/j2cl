@@ -1,8 +1,11 @@
 package com.google.j2cl.transpiler.integration.longimplicitcasts;
 
-/**
- * Test implicit cast insertion in long operations.
- */
+/** Test implicit cast insertion in long operations. */
+@SuppressWarnings({
+  "FloatingPointLiteralPrecision",
+  "IdentityBinaryExpression",
+  "NarrowingCompoundAssignment"
+})
 public class Main {
   // Initialized with not-a-long.
   public long fieldLong = 100;
@@ -205,15 +208,7 @@ public class Main {
       int i = 0;
       long[] longArray = new long[3];
       longArray[i++] += 3;
-
-      // TODO: the previous line should have been expanded into
-      //    ($index = i++, longArray[$index] = longArray[$index] + 3)
-      // but was expanded to
-      //    longArray[i++] = longArray[i++] + 3
-      // instead
-      // Look at TODOS in OperatorSideEffectUtils.java
-
-      // assert i == 1;
+      assert i == 1;
     }
   }
 }
