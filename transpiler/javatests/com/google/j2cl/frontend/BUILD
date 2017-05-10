@@ -13,8 +13,8 @@ java_library(
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
-        "//third_party/java/eclipse:eclipse-jdt-core-4.5",
         "//third_party/java/junit",
+        "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/frontend",
     ],
 )

@@ -37,7 +37,7 @@ java_library(
 )
 
 java_library(
-    name = "jdt-core-stable",
+    name = "jdt-core",
     exports = [
         "@org_eclipse_jdt_compiler_apt//jar",
         "@org_eclipse_jdt_content_type//jar",
