@@ -1915,7 +1915,7 @@ public class CompilationUnitBuilder {
       if (binding instanceof ITypeBinding) {
         return null;
       }
-      // TODO: to be implemented
+      // TODO(rluble): to be implemented
       throw new RuntimeException(
           "Need to implement translation for SimpleName binding: "
               + expression.getClass().getName());

@@ -49,8 +49,8 @@ import java.util.List;
  * <p>At the call sites, array creation/literal the array is spread either statically (if it was an
  * array literal) or at runtime using the ES6 spread (...) operator.
  *
- * <p>TODO: Optimize the copying away if only read access to vararg[i] and vararg.length happen in
- * the body.
+ * <p>TODO(tdeegan): Optimize the copying away if only read access to vararg[i] and vararg.length
+ * happen in the body.
  */
 public class NormalizeJsVarargs extends NormalizationPass {
   @Override
@@ -159,7 +159,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // an array with a single null object.  In Javascript however we pass the values of the
       // varargs as arguments not as an array so there is no way to express this.
       // $checkNotNullVararg errors out early if null is passed as a jsvararg parameter.
-      // TODO: For non-nullable types we can avoid this.
+      // TODO(tdeegan): For non-nullable types we can avoid this.
       TypeDescriptor returnType = TypeDescriptors.toNonNullable(lastArgument.getTypeDescriptor());
       MethodDescriptor nullToEmptyDescriptor =
           MethodDescriptor.newBuilder()

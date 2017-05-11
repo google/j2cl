@@ -410,7 +410,7 @@ public class AstUtils {
     List<Expression> arguments =
         parameters.stream().map(Variable::getReference).collect(toImmutableList());
 
-    // TODO: Casts are probably needed on arguments if the types differ between the
+    // TODO(rluble): Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
     Expression forwardingMethodCall =
         MethodCall.Builder.from(toMethodDescriptor)
@@ -719,7 +719,7 @@ public class AstUtils {
             && !method.getDescriptor().isJsPropertySetter(),
         "JsPropery getter and setters should never be devirtualized " + method);
     checkArgument(method.getDescriptor().isPolymorphic());
-    // TODO: remove once init() function is synthesized in AST.
+    // TODO(rluble): remove once init() function is synthesized in AST.
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 
     final Variable thisArg =
@@ -1106,7 +1106,7 @@ public class AstUtils {
       Iterable<MethodDescriptor> methodDescriptors) {
     for (MethodDescriptor declaredMethod : methodDescriptors) {
       MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
-      // TODO(rluble) implement correct default replacement when existing method != null.
+      // TODO(rluble): implement correct default replacement when existing method != null.
       // Only replace the method if we found a default definition that implements the method at
       // that type; be sure to have all relevant examples, the semantics are quite particular.
       if (existingMethod == null) {

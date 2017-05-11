@@ -79,7 +79,7 @@ public class ManglingNameUtils {
       // This is an internal method so we render the actual name
       prefix = "";
     }
-    // TODO: We can remove this check and just use the regular method naming pattern.
+    // TODO(tdeegan): We can remove this check and just use the regular method naming pattern.
     if (methodDescriptor.getName().startsWith("$ctor")) {
       return methodDescriptor.getName();
     }

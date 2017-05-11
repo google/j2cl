@@ -293,9 +293,9 @@ public class JdtUtils {
   }
 
   static IMethodBinding findFunctionalMethodBinding(ITypeBinding typeBinding) {
-    // TODO: there maybe an issue in which case it inherits a default method from an interface
-    // and inherits an abstract method with the same signature from another interface. Add an
-    // example to address the potential issue.
+    // TODO(leafwang): there maybe an issue in which case it inherits a default method from an
+    // interface and inherits an abstract method with the same signature from another interface.
+    // Add an example to address the potential issue.
     checkArgument(typeBinding.isInterface());
     for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
       if (isAbstract(method)) {
@@ -778,7 +778,7 @@ public class JdtUtils {
       return JsInfo.NONE;
     }
 
-    // TODO: Do the same for JsProperty?
+    // TODO(epmjohnston): Do the same for JsProperty?
     if (jsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
       // Return the first JsInfo with a Js name specified.
       for (JsInfo jsInfoElement : jsInfoList) {

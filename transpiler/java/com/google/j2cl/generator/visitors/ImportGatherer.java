@@ -337,7 +337,7 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {
-    // TODO: We should also include TypeVariables on name recording.
+    // TODO(goktug): We should also include TypeVariables on name recording.
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       if (typeDescriptor.isExtern()) {
         // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such

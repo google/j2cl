@@ -101,7 +101,7 @@ public final class Class<T> implements Type, Serializable {
     return !isArray() && Util.$extractClassType(ctor) == type;
   }
 
-  // TODO: implement
+  // TODO(b/30745420): implement
   public T[] getEnumConstants() {
     return null;
   }

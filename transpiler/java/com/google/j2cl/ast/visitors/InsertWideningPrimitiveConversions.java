@@ -32,8 +32,8 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
  * type slot in assignment, binary numeric promotion, cast and method invocation conversion
  * contexts.
  *
- * <p>TODO: this pass removes NOOP casts (e.g. int -> float), which may cause wrong side effect if
- * the later passes depend on the cast type. Currently we carefully order these passes in
+ * <p>TODO(tdeegan): this pass removes NOOP casts (e.g. int -> float), which may cause wrong side
+ * effect if the later passes depend on the cast type. Currently we carefully order these passes in
  * J2clTranspiler to ensure all conversion contexts are correctly caught. But if it turns out the
  * side effect does lead to wrong result, we should remove the NOOP casts in a separate pass.
  */

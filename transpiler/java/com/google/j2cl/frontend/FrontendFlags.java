@@ -73,7 +73,7 @@ public class FrontendFlags {
     metaVar = "<file>",
     usage = "Directory or zip into which to place compiled output."
   )
-  // TODO: replace with -output instead of -d
+  // TODO(stalcup): replace with -output instead of -d
   @VisibleForTesting
   public String output = ".";
 

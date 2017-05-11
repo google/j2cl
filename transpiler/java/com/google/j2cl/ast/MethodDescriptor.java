@@ -169,8 +169,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * Returns true if it is a vararg method that can be referenced by JavaScript side. A
    * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
    *
-   * <p>TODO: In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We may
-   * want to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the
+   * <p>TODO(rluble): In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We
+   * may want to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the
    * AST.
    */
   public boolean isJsMethodVarargs() {

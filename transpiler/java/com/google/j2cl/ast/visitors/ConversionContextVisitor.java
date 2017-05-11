@@ -146,8 +146,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    // TODO: find out if what we do here in letting multiple conversion contexts perform changes on
-    // the same binary expression, all in one pass, is the right thing or the wrong thing.
+    // TODO(rluble): find out if what we do here in letting multiple conversion contexts perform
+    // changes on the same binary expression, all in one pass, is the right thing or the wrong
+    // thing.
 
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();

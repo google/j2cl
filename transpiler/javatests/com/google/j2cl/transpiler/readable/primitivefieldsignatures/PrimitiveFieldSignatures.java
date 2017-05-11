@@ -4,7 +4,6 @@ public class PrimitiveFieldSignatures {
   public byte a;
   public short b;
   public int c;
-  // TODO: implement longs.
   public long d;
   public float e;
   public double f;

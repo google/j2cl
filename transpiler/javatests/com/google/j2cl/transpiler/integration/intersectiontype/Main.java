@@ -71,7 +71,7 @@ public class Main {
 
   interface SimpleK {}
 
-  // TODO: Fix Lambda type inference.
+  // TODO(b/36781939): Fix Lambda type inference.
   //  public void testIntersectionCastWithLambdaExpr() {
   //    SimpleI simpleI1 =
   //        (SimpleI & EmptyI)
@@ -208,8 +208,8 @@ public class Main {
     int cmp(int a);
   }
 
-  // TODO: Lambdas do not have the correct types applied yet.  Jdt only recognizes this Lambda as
-  // Cmp whereas it should recognize Cmp and Serial.
+  // TODO(b/36781939): Lambdas do not have the correct types applied yet.  Jdt only recognizes this
+  // Lambda as Cmp whereas it should recognize Cmp and Serial.
   // https://bugs.eclipse.org/bugs/show_bug.cgi?id=496596
   public static Cmp method() {
     return (Cmp & Serial) () -> 1;

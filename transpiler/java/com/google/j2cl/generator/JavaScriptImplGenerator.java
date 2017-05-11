@@ -358,7 +358,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO: Move this to the ast in a normalization pass.
+  // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
     if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sourceBuilder.appendLines(
@@ -423,7 +423,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO: Move this to the ast in a normalization pass.
+  // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
     if (type.isJsOverlayImplementation()
         || type.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
@@ -455,8 +455,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO: Move this to the ast in a normalization pass.
-  // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
+  // TODO(tdeegan): Move this to the ast in a normalization pass.
+  // TODO(tdeegan): may copy Objects methods (equals, hashCode, etc. ) as well.
   private void renderCopyMethod() {
     if (!type.getDeclaration().isJsFunctionImplementation()) {
       return; // Only render the $copy method for jsfunctions
@@ -483,7 +483,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO: Move this to the ast in a normalization pass.
+  // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
 
@@ -569,7 +569,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  // TODO: Move this to the ast in a normalization pass.
+  // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClinit() {
     sourceBuilder.appendLines(
         "/**",
@@ -684,7 +684,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       return; // Do nothing
     }
     if (type.isInterface()) {
-      // TODO: remove cast after b/20102666 is handled in Closure.
+      // TODO(b/20102666): remove cast after b/20102666 is handled in Closure.
       sourceBuilder.appendln(
           className
               + ".$markImplementor(/** @type {"

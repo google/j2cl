@@ -231,7 +231,6 @@ public class J2clTranspiler {
             new InsertBoxingConversions(),
             new InsertNarrowingPrimitiveConversions(),
             new InsertWideningPrimitiveConversions(),
-            // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
             new NormalizeLongs(),
             new InsertUnderflowOverflowConversions(),
             new InsertDivisionCoercions(),
@@ -251,9 +250,11 @@ public class J2clTranspiler {
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),
-            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+            // TODO(b/24476009) : remove the temporary fix once switch to JSCompiler's new type
+            // checker.
             new InsertTypeAnnotationOnGenericReturnTypes(),
-            // TODO: remove the temporary fix once we switch to JSCompiler's new type checker.
+            // TODO(b/24476009) : remove the temporary fix once we switch to JSCompiler's new type
+            // checker.
             new FixTypeVariablesInMethods(),
             new InsertStaticClassInitializerMethods(),
             // Normalize multiexpressions again to remove unnecessary clutter, but run before

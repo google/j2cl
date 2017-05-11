@@ -691,7 +691,7 @@ public abstract class TypeDescriptor extends Node
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    // TODO: Actually provide a real readable description.
+    // TODO(rluble): Actually provide a real readable description.
     if (isAnonymous()) {
       if (getInterfaceTypeDescriptors().isEmpty()) {
         return "new " + getSuperTypeDescriptor().getReadableDescription();

@@ -561,7 +561,7 @@ public abstract class TypeDeclaration extends Node
           continue;
         }
 
-        // TODO: exclude package private method, and add a test for it.
+        // TODO(stalcup): exclude package private method, and add a test for it.
         if (superMethodDescriptor.isOverride(methodDescriptor)) {
           return superMethodDescriptor;
         }
@@ -579,7 +579,7 @@ public abstract class TypeDeclaration extends Node
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    // TODO: Actually provide a real readable description.
+    // TODO(stalcup): Actually provide a real readable description.
     return getSimpleSourceName();
   }
 

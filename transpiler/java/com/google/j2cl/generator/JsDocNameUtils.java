@@ -118,8 +118,8 @@ public class JsDocNameUtils {
     }
 
     checkArgument(!typeDescriptor.isIntersection());
-    // TODO: this looks like a hack to me, really the TypeDescriptor for JsFunctions should be
-    // created in the first place to know they themselves are nullable.
+    // TODO(stalcup): this looks like a hack to me, really the TypeDescriptor for JsFunctions should
+    // be created in the first place to know they themselves are nullable.
 
     // JsFunction interface and implementor is a real JS function.
     // Unlike other js types, functions have to be explicitly set to nullable.

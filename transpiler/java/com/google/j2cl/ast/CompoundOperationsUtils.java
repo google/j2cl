@@ -339,8 +339,8 @@ public class CompoundOperationsUtils {
          * The type of the operation should the promoted type of the operands, which is equivalent
          * to the widest type of its operands (or integer is integer is wider).
          */
-        // TODO: Return primitiveInt if wider. Due to order in which promotion operations are
-        // applied doing so here breaks code.
+        // TODO(rluble): Return primitiveInt if wider. Due to order in which promotion operations
+        // are applied doing so here breaks code.
         checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
         return widerType(leftOperandType, getCorrespondingPrimitiveType(rightOperandType));
       case LEFT_SHIFT:

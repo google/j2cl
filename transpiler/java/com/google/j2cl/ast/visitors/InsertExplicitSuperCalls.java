@@ -53,8 +53,8 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
             /*
              * Do not insert super() call to a native JS type. Otherwise it will lead to error
              * because a native JS type is not expected to have a $ctor method.
-             * TODO: super() call to native type should be inserted somewhere otherwise it will lead
-             * to an error if the native type has a non-empty constructor.
+             * TODO(rluble): super() call to native type should be inserted somewhere otherwise it
+             * will lead to an error if the native type has a non-empty constructor.
              */
             if (getCurrentType().getSuperTypeDescriptor().isNative()) {
               return;
