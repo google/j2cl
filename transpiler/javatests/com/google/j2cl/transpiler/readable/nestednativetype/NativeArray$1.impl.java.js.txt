@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.$1
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let NativeArray$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestednativetype.NativeArray$$Overlay$impl');
+
 
 class $1 extends java_lang_Object {
   /**
@@ -79,6 +81,8 @@ class $1 extends java_lang_Object {
    */
   static $clinit() {
     $1.$clinit = function() {};
+    NativeArray$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nestednativetype.NativeArray$$Overlay$impl');
     java_lang_Object.$clinit();
   }
 

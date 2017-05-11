@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let NativeJsTypeWithToString$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Overlay$impl');
+let NativeJsTypeWithoutToString$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Overlay$impl');
 let NativeJsTypeWithToString = goog.forwardDeclare('test.foo.NativeJsTypeWithToString');
 let NativeJsTypeWithoutToString = goog.forwardDeclare('test.foo.NativeJsTypeWithoutToString');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -89,6 +91,10 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
+    NativeJsTypeWithToString$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Overlay$impl');
+    NativeJsTypeWithoutToString$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Overlay$impl');
     NativeJsTypeWithToString =
         goog.module.get('test.foo.NativeJsTypeWithToString');
     NativeJsTypeWithoutToString =

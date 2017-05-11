@@ -12,6 +12,7 @@ const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowed
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let Consumer$$Overlay = goog.forwardDeclare('java.util.function.Consumer$$Overlay$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 
@@ -91,6 +92,8 @@ class C extends B {
   static $clinit() {
     C.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
+    Consumer$$Overlay =
+        goog.module.get('java.util.function.Consumer$$Overlay$impl');
     Consumer = goog.module.get('java.util.function.Consumer$impl');
     B.$clinit();
   }

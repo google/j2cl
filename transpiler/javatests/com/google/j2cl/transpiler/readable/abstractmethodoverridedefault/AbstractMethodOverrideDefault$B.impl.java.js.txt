@@ -11,6 +11,8 @@ const A = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverri
 const J = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let J$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$$Overlay$impl');
+
 
 /**
  * @abstract
@@ -72,6 +74,8 @@ class B extends A {
    */
   static $clinit() {
     B.$clinit = function() {};
+    J$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$$Overlay$impl');
     A.$clinit();
     J.$clinit();
   }

@@ -378,7 +378,7 @@ public class TypeDescriptors {
         jsName,
         Kind.INTERFACE,
         true,
-        true);
+        false);
   }
 
   public static TypeDescriptor createUnion(

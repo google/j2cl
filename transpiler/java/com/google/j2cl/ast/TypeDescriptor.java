@@ -212,6 +212,10 @@ public abstract class TypeDescriptor extends Node
     return getTypeDeclaration().isJsType();
   }
 
+  public boolean hasOverlayImplementationType() {
+    return hasTypeDeclaration() && getTypeDeclaration().hasOverlayImplementationType();
+  }
+
   /**
    * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
    * enclosing type) but is not a member type because it's location in the body is not in the

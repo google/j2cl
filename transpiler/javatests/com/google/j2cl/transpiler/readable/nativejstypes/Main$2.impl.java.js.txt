@@ -11,6 +11,8 @@ const Inner = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Zo
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Inner$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Another.Inner$$Overlay$impl');
+
 
 /**
  * @implements {Inner}
@@ -73,6 +75,8 @@ class $2 extends java_lang_Object {
    */
   static $clinit() {
     $2.$clinit = function() {};
+    Inner$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Another.Inner$$Overlay$impl');
     java_lang_Object.$clinit();
   }
 

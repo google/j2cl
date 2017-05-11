@@ -259,7 +259,16 @@ public class ImportGatherer extends AbstractVisitor {
     }
 
     mayAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
+    mayAddOverlayImplementationTypeDescriptor(typeDescriptor);
     addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
+  }
+
+  private void mayAddOverlayImplementationTypeDescriptor(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.hasOverlayImplementationType()) {
+      addTypeDescriptor(
+          typeDescriptor.getTypeDeclaration().getOverlayImplementationTypeDescriptor(),
+          ImportCategory.LAZY);
+    }
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {

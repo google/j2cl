@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let BI3$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3$$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -68,6 +69,8 @@ class BI3 {
    */
   static $clinit() {
     BI3.$clinit = function() {};
+    BI3$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3$$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
   }
 };

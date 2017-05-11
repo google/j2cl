@@ -12,8 +12,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+let Bar$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Overlay$impl');
+let Foo$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Overlay$impl');
+let Headers$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Headers$$Overlay$impl');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$1$impl');
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
+let Wildcard$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.Wildcard$$Overlay$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -158,10 +162,18 @@ class Main extends java_lang_Object {
     Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+    Bar$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Overlay$impl');
+    Foo$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Overlay$impl');
+    Headers$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Headers$$Overlay$impl');
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Main.$1$impl');
     $2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
+    Wildcard$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Main.Wildcard$$Overlay$impl');
     Class = goog.module.get('java.lang.Class$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

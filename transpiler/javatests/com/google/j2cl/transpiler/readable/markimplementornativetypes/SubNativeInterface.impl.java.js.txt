@@ -11,6 +11,8 @@ const RegularInterface = goog.require('com.google.j2cl.transpiler.readable.marki
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeInterface = goog.require('test.foo.MyNativeInterface');
 
+let MyNativeInterface$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface$$Overlay$impl');
+
 
 /**
  * @interface
@@ -64,6 +66,8 @@ class SubNativeInterface {
    */
   static $clinit() {
     SubNativeInterface.$clinit = function() {};
+    MyNativeInterface$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface$$Overlay$impl');
   }
 };
 

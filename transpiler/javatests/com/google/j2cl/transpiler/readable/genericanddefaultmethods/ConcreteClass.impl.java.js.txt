@@ -11,6 +11,7 @@ const GenericClass = goog.require('com.google.j2cl.transpiler.readable.generican
 const InterfaceWithDefault = goog.require('com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let InterfaceWithDefault$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -87,6 +88,8 @@ class ConcreteClass extends GenericClass {
    */
   static $clinit() {
     ConcreteClass.$clinit = function() {};
+    InterfaceWithDefault$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     GenericClass.$clinit();
     InterfaceWithDefault.$clinit();

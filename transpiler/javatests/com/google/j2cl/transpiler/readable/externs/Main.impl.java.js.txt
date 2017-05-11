@@ -13,6 +13,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Inner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl');
 let FooImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
 let FooOverlay$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooOverlay$$Overlay$impl');
+let Inner$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.Inner$$Overlay$impl');
+let InnerExtern$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.InnerExtern$$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -122,6 +124,10 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
     FooOverlay$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay$$Overlay$impl');
+    Inner$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.Inner$$Overlay$impl');
+    InnerExtern$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.InnerExtern$$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

@@ -12,6 +12,8 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeInterface = goog.require('test.foo.MyNativeInterface');
 
+let MyNativeInterface$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface$$Overlay$impl');
+
 
 /**
  * @implements {MyNativeInterface}
@@ -75,6 +77,8 @@ class Foo extends java_lang_Object {
    */
   static $clinit() {
     Foo.$clinit = function() {};
+    MyNativeInterface$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface$$Overlay$impl');
     java_lang_Object.$clinit();
   }
 

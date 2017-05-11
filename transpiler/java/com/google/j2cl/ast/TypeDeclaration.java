@@ -64,7 +64,6 @@ import javax.annotation.Nullable;
 @Visitable
 public abstract class TypeDeclaration extends Node
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
-
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -237,6 +236,16 @@ public abstract class TypeDeclaration extends Node
 
   public boolean isStarOrUnknown() {
     return getSimpleJsName().equals("*") || getSimpleJsName().equals("?");
+  }
+
+  @Memoized
+  public TypeDescriptor getOverlayImplementationTypeDescriptor() {
+    return TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+        getUnsafeTypeDescriptor());
+  }
+
+  public boolean hasOverlayImplementationType() {
+    return (isJsType() && isNative()) || declaresDefaultMethods();
   }
 
   /**

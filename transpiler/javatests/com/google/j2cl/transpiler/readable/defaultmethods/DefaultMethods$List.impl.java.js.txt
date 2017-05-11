@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -85,6 +86,8 @@ class List {
    */
   static $clinit() {
     List.$clinit = function() {};
+    List$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }

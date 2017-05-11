@@ -33,6 +33,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -163,7 +164,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           replacementTypeList.add(type);
         }
 
-        if (type.getDeclaration().isNative() || type.getDeclaration().declaresDefaultMethods()) {
+        if (type.getDeclaration().hasOverlayImplementationType()) {
           replacementTypeList.add(createOverlayImplementationType(type));
         }
       }
@@ -172,12 +173,12 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     }
 
     static Type createOverlayImplementationType(Type type) {
+      TypeDeclaration typeDeclaration = type.getDeclaration();
       TypeDescriptor overlayImplTypeDescriptor =
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-              type.getDeclaration().getUnsafeTypeDescriptor());
+          typeDeclaration.getOverlayImplementationTypeDescriptor();
       Type overlayClass =
           new Type(type.getVisibility(), overlayImplTypeDescriptor.getTypeDeclaration());
-      overlayClass.setNativeTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor());
+      overlayClass.setNativeTypeDescriptor(typeDeclaration.getUnsafeTypeDescriptor());
       overlayClass.setSourcePosition(type.getSourcePosition());
 
       for (Member member : type.getMembers()) {

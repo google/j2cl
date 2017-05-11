@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.B
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let BiFunction$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay$impl');
 let com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
 
 
@@ -80,6 +81,8 @@ class BiFunction {
    */
   static $clinit() {
     BiFunction.$clinit = function() {};
+    BiFunction$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay$impl');
     com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');

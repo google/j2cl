@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier
 const Equals = goog.require('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Equals$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$$Overlay$impl');
+
 
 /**
  * @interface
@@ -70,6 +72,8 @@ class JsSupplier {
    */
   static $clinit() {
     JsSupplier.$clinit = function() {};
+    Equals$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$$Overlay$impl');
     Equals.$clinit();
   }
 };
