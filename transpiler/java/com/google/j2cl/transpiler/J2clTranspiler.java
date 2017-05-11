@@ -250,10 +250,10 @@ public class J2clTranspiler {
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),
-            // TODO(b/24476009) : remove the temporary fix once switch to JSCompiler's new type
+            // TODO(b/24476009): remove the temporary fix once switch to JSCompiler's new type
             // checker.
             new InsertTypeAnnotationOnGenericReturnTypes(),
-            // TODO(b/24476009) : remove the temporary fix once we switch to JSCompiler's new type
+            // TODO(b/24476009): remove the temporary fix once we switch to JSCompiler's new type
             // checker.
             new FixTypeVariablesInMethods(),
             new InsertStaticClassInitializerMethods(),
