@@ -1,11 +1,11 @@
-[@SuppressWarnings("unused")
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
 }] => [/**
  * @template C_U
 ...exports = IntersectionTypeTest;
 ] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest"
-[@SuppressWarnings("unused")
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
 }] => [/**
@@ -13,7 +13,7 @@ public class IntersectionTypeTest<U> {
 ...    super();
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest"
 [UNKNOWN] => [super();]
-[@SuppressWarnings("unused")
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
 }] => [/**
@@ -24,7 +24,7 @@ public class IntersectionTypeTest<U> {
 [UNKNOWN] => [let $instance = new IntersectionTypeTest();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest__();]
 [UNKNOWN] => [return $instance;]
-[@SuppressWarnings("unused")
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
 }] => [/**
@@ -134,6 +134,14 @@ public class IntersectionTypeTest<U> {
   }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
 [UNKNOWN] => [IntersectionTypeTest.$clinit();]
 [return (T) get(new Object());] => [return /**@type {A} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(java_lang_Object.$create__()), A));]
+[private static <T extends A & EmptyA> Getable<T> n() {
+    return null;
+  }] => [/**
+   * @template M_T
+...    return null;
+  }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"
+[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[return null;] => [return null;]
 [private static <T extends A & EmptyA> void set(T t) {}] => [/**
    * @template M_T
 ...    IntersectionTypeTest.$clinit();
@@ -142,7 +150,7 @@ public class IntersectionTypeTest<U> {
 [UNKNOWN] => [IntersectionTypeTest.$clinit();]
 [public void testMethodCall() {
     Object o = m();
-...    set(m());
+...    // Getable<?> g = n();
   }] => [/**
    * @return {void}
 ...    IntersectionTypeTest.m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(IntersectionTypeTest.m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest());

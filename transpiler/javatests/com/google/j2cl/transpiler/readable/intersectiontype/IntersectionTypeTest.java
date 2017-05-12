@@ -18,7 +18,7 @@ interface Cmp2 {
   int cmp(int a);
 }
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
   public static <T extends Getable<?> & Setable> void getAndSet(T object) {
     object.set(1);
@@ -84,11 +84,17 @@ public class IntersectionTypeTest<U> {
     return (T) get(new Object());
   }
 
+  private static <T extends A & EmptyA> Getable<T> n() {
+    return null;
+  }
+
   private static <T extends A & EmptyA> void set(T t) {}
 
   public void testMethodCall() {
     Object o = m();
     set((A & EmptyA) o);
     set(m());
+    // TODO(b/38243420): Uncomment the following line when bug is fixed.
+    // Getable<?> g = n();
   }
 }
