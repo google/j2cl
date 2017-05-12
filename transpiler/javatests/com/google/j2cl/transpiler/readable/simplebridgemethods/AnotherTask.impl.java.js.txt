@@ -12,6 +12,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Superclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -100,6 +101,7 @@ class AnotherTask extends java_lang_Object {
     AnotherTask.$clinit = function() {};
     Superclass = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+    AssertionError = goog.module.get('java.lang.AssertionError$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }

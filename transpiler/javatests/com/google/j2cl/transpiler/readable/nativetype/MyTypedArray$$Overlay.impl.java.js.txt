@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.nativetype.MyTypedArray$$Overla
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -54,6 +55,7 @@ class MyTypedArray$$Overlay {
    */
   static $clinit() {
     MyTypedArray$$Overlay.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

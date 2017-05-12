@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main.Wildcard$$Ov
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 class Wildcard$$Overlay {
   /**
@@ -28,6 +30,7 @@ class Wildcard$$Overlay {
    */
   static $clinit() {
     Wildcard$$Overlay.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

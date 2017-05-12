@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$i
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
@@ -69,6 +70,7 @@ class EqualFunction {
    */
   static $clinit() {
     EqualFunction.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
   }
 };

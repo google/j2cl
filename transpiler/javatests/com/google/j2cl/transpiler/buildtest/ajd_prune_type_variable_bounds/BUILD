@@ -10,3 +10,11 @@ js_library(
         "//javascript/closure:base",
     ],
 )
+
+js_library(
+    name = "ajd",
+    deps_mgmt = "closure",
+    deps = [
+        ":B",
+    ],
+)

@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -67,6 +70,8 @@ class ApplyFunction {
    */
   static $clinit() {
     ApplyFunction.$clinit = function() {};
+    Number = goog.module.get('java.lang.Number$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

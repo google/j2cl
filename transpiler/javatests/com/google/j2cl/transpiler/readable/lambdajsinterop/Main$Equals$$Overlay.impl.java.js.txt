@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$$Ov
 const Equals = goog.require('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 class Equals$$Overlay {
   /**
@@ -41,6 +43,7 @@ class Equals$$Overlay {
    */
   static $clinit() {
     Equals$$Overlay.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

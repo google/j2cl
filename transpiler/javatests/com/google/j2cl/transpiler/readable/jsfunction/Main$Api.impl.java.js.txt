@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Api$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ParametricJsFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
@@ -72,6 +73,7 @@ class Api {
     Api.$clinit = function() {};
     ParametricJsFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');
   }
 };

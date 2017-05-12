@@ -11,6 +11,7 @@ const Foo = goog.require('com.google.j2cl.transpiler.readable.boundedtypesuperca
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 
 
 /**
@@ -98,6 +99,7 @@ class $1 extends Foo {
     $1.$clinit = function() {};
     Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
+    Comparable = goog.module.get('java.lang.Comparable$impl');
     Foo.$clinit();
   }
 

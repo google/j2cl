@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType.I$$Overlay$impl
 const I = goog.require('com.google.j2cl.transpiler.readable.rawtype.RawType.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
+
 
 class I$$Overlay {
   /**
@@ -41,6 +43,8 @@ class I$$Overlay {
    */
   static $clinit() {
     I$$Overlay.$clinit = function() {};
+    RawType = goog.module.get(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
   }
 };
 

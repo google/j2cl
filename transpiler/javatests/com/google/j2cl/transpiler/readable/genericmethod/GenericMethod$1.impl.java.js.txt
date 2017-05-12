@@ -10,6 +10,9 @@ goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.$1$
 const GenericMethod = goog.require('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @template M_T, C_T
@@ -100,6 +103,8 @@ class $1 extends GenericMethod {
    */
   static $clinit() {
     $1.$clinit = function() {};
+    Error = goog.module.get('java.lang.Error$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     GenericMethod.$clinit();
   }
 

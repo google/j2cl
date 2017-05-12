@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -68,6 +70,7 @@ class MyFunction {
    */
   static $clinit() {
     MyFunction.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

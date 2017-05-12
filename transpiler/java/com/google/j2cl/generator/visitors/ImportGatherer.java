@@ -218,9 +218,24 @@ public class ImportGatherer extends AbstractVisitor {
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
-    if (typeDescriptor.isTypeVariable()
-        || typeDescriptor.isWildCardOrCapture()
-        || typeDescriptor.isIntersection()) {
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
+      TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
+      if (boundTypeDescriptor != null) {
+        // Add type descriptor appearing as bounds of type variables. These are needed because
+        // j2cl code in dependent libraries might synthesize erasure casts that refer to these
+        // types.
+        // Avoid recursing into bounds type arguments, as these are not needed and they might
+        // introduce an infinite loop (e.g. class Enum<T extends Enum<T>>).
+        addTypeDescriptor(
+            boundTypeDescriptor.hasTypeArguments()
+                ? boundTypeDescriptor.getRawTypeDescriptor()
+                : boundTypeDescriptor,
+            ImportCategory.LAZY);
+      }
+      return;
+    }
+
+    if (typeDescriptor.isIntersection()) {
       return;
     }
 
