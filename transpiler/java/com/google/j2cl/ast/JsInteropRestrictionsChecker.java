@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Pair;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -38,6 +37,16 @@ import java.util.Map;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
+
+  private static class UpdatedJsMember {
+    final JsMember oldJsMember;
+    final JsMember newJsMember;
+
+    private UpdatedJsMember(JsMember oldJsMember, JsMember newJsMember) {
+      this.oldJsMember = oldJsMember;
+      this.newJsMember = newJsMember;
+    }
+  }
 
   public static void check(List<CompilationUnit> compilationUnits, Problems problems) {
     new JsInteropRestrictionsChecker(problems).checkCompilationUnits(compilationUnits);
@@ -853,10 +862,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkNameCollisions(Map<String, JsMember> localNames, Member member) {
-    Pair<JsMember, JsMember> oldAndNewJsMember =
-        updateJsMembers(localNames, member.getDescriptor());
-    JsMember oldJsMember = oldAndNewJsMember.getFirst();
-    JsMember newJsMember = oldAndNewJsMember.getSecond();
+    UpdatedJsMember oldAndNewJsMember = updateJsMembers(localNames, member.getDescriptor());
+    JsMember oldJsMember = oldAndNewJsMember.oldJsMember;
+    JsMember newJsMember = oldAndNewJsMember.newJsMember;
 
     checkNameConsistency(member);
     checkJsPropertyConsistency(member, newJsMember);
@@ -908,12 +916,12 @@ public class JsInteropRestrictionsChecker {
     return memberByLocalMemberNames;
   }
 
-  private static Pair<JsMember, JsMember> updateJsMembers(
+  private static UpdatedJsMember updateJsMembers(
       Map<String, JsMember> memberByNames, MemberDescriptor member) {
     JsMember oldJsMember = memberByNames.get(member.getSimpleJsName());
     JsMember newJsMember = createOrUpdateJsMember(oldJsMember, member);
     memberByNames.put(member.getSimpleJsName(), newJsMember);
-    return Pair.of(oldJsMember, newJsMember);
+    return new UpdatedJsMember(oldJsMember, newJsMember);
   }
 
   private static JsMember createOrUpdateJsMember(JsMember jsMember, MemberDescriptor member) {
