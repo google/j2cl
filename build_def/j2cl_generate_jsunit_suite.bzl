@@ -26,7 +26,7 @@ jsunit_test(
 """
 
 
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_def:j2cl_library.bzl", "j2cl_library")
 load("//build_def:j2cl_util.bzl", "get_java_package")
 
 _TEMPLATE = """

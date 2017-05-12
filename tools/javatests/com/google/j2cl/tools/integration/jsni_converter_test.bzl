@@ -19,8 +19,8 @@ jsni_converter_test()
 
 load("//build_def:jsni_to_native_js_bundle.bzl",
      "jsni_to_native_js_bundle")
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//build_def:j2cl_library.bzl", "j2cl_library")
+load("//build_def:j2cl_test.bzl", "j2cl_test")
 
 
 def jsni_converter_test():

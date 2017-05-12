@@ -3,7 +3,7 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//build_def:j2cl_test.bzl", "j2cl_test")
 
 j2cl_test(
     name = "Java8Test_uncompiled",

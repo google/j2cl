@@ -23,7 +23,7 @@ licenses(["unencumbered"])
 
 package(default_visibility = ["//visibility:public"])
 
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_def:j2cl_library.bzl", "j2cl_library")
 
 # ***************************************************
 # Transpiler related

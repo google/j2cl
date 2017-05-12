@@ -6,7 +6,7 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_def:j2cl_library.bzl", "j2cl_library")
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
 load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
