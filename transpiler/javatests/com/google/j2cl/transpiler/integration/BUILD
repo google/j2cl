@@ -111,7 +111,7 @@ java_library(
     name = "IntegrationTestCase",
     testonly = 1,
     srcs = ["IntegrationTestCase.java"],
-    data = ["//third_party/java/j2cl/internal_do_not_use:J2clTranspiler"],
+    data = ["//internal_do_not_use:J2clTranspiler"],
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",

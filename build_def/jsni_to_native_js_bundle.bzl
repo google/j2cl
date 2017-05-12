@@ -83,7 +83,7 @@ _jsni_to_j2cl_converter = rule(
             cfg="host",
             allow_files=True,
             executable=True,
-            default=Label("//third_party/java/j2cl/internal_do_not_use:JsniConverter")
+            default=Label("//internal_do_not_use:JsniConverter")
         )
     },
     implementation=_impl,

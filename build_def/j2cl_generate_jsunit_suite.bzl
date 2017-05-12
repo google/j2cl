@@ -85,11 +85,11 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
       name = name + "_lib",
       srcs = [test_input],
       deps = deps +  [
-          "//third_party/java/j2cl/internal_do_not_use:internal_junit_annotations",
+          "//internal_do_not_use:internal_junit_annotations",
           "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
       ],
       _js_deps = ["//javascript/closure/testing:testcase"],
-      plugins = ["//third_party/java/j2cl/internal_do_not_use:junit_processor"],
+      plugins = ["//internal_do_not_use:junit_processor"],
       testonly = 1,
       tags = tags,
       generate_build_test=False,
