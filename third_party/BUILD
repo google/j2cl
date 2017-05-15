@@ -81,10 +81,14 @@ java_library(
 
 java_library(
     name = "auto_common",
-    exports = ["@com_google_auto_common//jar],
+    exports = ["@com_google_auto_common//jar"],
 )
 
 java_library(
     name = "jakarta_velocity",
-    exports = ["@org_apache_velocity//jar"],
+    exports = [
+        "@org_apache_velocity//jar",
+        "@org_apache_commons_collections//jar",
+        "@org_apache_commons_lang2//jar",
+    ],
 )

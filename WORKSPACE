@@ -41,6 +41,16 @@ maven_jar(
 )
 
 maven_jar(
+    name = "org_apache_commons_collections",
+    artifact = "commons-collections:commons-collections:3.2.2",
+)
+
+maven_jar(
+    name = "org_apache_commons_lang2",
+    artifact = "commons-lang:commons-lang:2.6",
+)
+
+maven_jar(
     name = "org_apache_commons_lang3",
     artifact = "org.apache.commons:commons-lang3:3.5",
 )
