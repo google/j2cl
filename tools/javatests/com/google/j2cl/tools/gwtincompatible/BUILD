@@ -8,7 +8,7 @@ licenses(["unencumbered"])
 load("//java/com/google/testing/builddefs:GenTestRules.bzl", "GenTestRules")
 
 java_library(
-    name = "frontend",
+    name = "gwtincompatible",
     srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/base",
@@ -22,5 +22,5 @@ java_library(
 GenTestRules(
     name = "GeneratedTestRules",
     test_files = glob(["*.java"]),
-    deps = [":frontend"],
+    deps = [":gwtincompatible"],
 )
