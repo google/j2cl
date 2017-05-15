@@ -15,11 +15,12 @@
  */
 package com.google.j2cl.frontend;
 
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.frontend.common.GwtIncompatibleNodeCollector;
 import com.google.j2cl.problems.Problems;
+import com.google.j2cl.problems.Problems.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,14 +32,10 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FileASTRequestor;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
-import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 /**
  * A delegator of JDT's ASTParser that provides a more convenient interface for
@@ -94,15 +91,6 @@ public class JdtParser {
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
   public CompilationUnitsAndTypeBindings parseFiles(List<String> filePaths) {
-    // Preprocess every file and writes the preprocessed content to a temporary file.
-    JavaPreprocessor preprocessor = new JavaPreprocessor(compilerOptions);
-    final Map<String, String> preprocessedFilesByOriginal =
-        preprocessor.preprocessFiles(filePaths, encoding, problems);
-    if (preprocessedFilesByOriginal == null) {
-      checkState(
-          problems.problemCount() > 0, "Didn't get processed files map, but no errors generated.");
-      return null;
-    }
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(true);
@@ -116,11 +104,10 @@ public class JdtParser {
         new FileASTRequestor() {
           @Override
           public void acceptAST(String filePath, CompilationUnit compilationUnit) {
-            String originalFilePath = preprocessedFilesByOriginal.get(filePath);
-            checkState(originalFilePath != null, "Can't find original path for file %s", filePath);
-            if (checkCompilationErrors(originalFilePath, compilationUnit)) {
-              compilationUnitsByFilePath.put(originalFilePath, compilationUnit);
+            if (compilationHasErrors(filePath, compilationUnit)) {
+              return;
             }
+            compilationUnitsByFilePath.put(filePath, compilationUnit);
           }
 
           @Override
@@ -129,7 +116,7 @@ public class JdtParser {
           }
         };
     parser.createASTs(
-        preprocessedFilesByOriginal.keySet().stream().toArray(String[]::new),
+        filePaths.stream().toArray(String[]::new),
         getEncodings(filePaths.size()),
         wellKnownClassNames.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
         astRequestor,
@@ -163,58 +150,23 @@ public class JdtParser {
     return encodings;
   }
 
-  private boolean checkCompilationErrors(String filename, CompilationUnit unit) {
+  private boolean compilationHasErrors(String filename, CompilationUnit unit) {
     boolean hasErrors = false;
+    // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
+    // error since these should have been stripped by the build system already.
+    GwtIncompatibleNodeCollector collector = new GwtIncompatibleNodeCollector();
+    unit.accept(collector);
+    if (!collector.getNodes().isEmpty()) {
+      problems.error(Message.ERR_GWT_INCOMPATIBLE_FOUND_IN_COMPILE, filename);
+      return true; // Ignore possible type errors discovered below.
+    }
     for (IProblem problem : unit.getProblems()) {
-      // TODO(b/30126552): Replace this solution with a better alternative (which possibly is
-      // stripping GwtIncompatible as a preprocessing step outside the transpiler.
       if (problem.isError()) {
-        if (isErrorCausedByNotImplentingGwtIncompatibleOverride(problem, unit)) {
-          // HACK: Ignore GwtIncompatible related errors, this is fragile because is tied
-          // to the jdt error reporting.
-          continue;
-        }
         problems.error(problem.getSourceLineNumber(), filename, problem.getMessage());
         hasErrors = true;
       }
     }
-    return !hasErrors;
-  }
-
-  private boolean isErrorCausedByNotImplentingGwtIncompatibleOverride(
-      IProblem problem, CompilationUnit unit) {
-    final boolean[] found = new boolean[1];
-    // TODO(rluble): check if this error is caused by the presence of a GwtIncompatible
-    // abstract method.
-    if (problem.getID() == IProblem.AbstractMethodMustBeImplemented) {
-      final String superTypeName = problem.getArguments()[2];
-      final String methodName = problem.getArguments()[0];
-      unit.accept(
-          new ASTVisitor() {
-            @Override
-            public void endVisit(TypeDeclaration typeDeclaration) {
-              // Find the offending supertype.
-              ITypeBinding superTypeBinding =
-                  findTypeBindingByName(typeDeclaration.resolveBinding(), superTypeName);
-              if (superTypeBinding == null) {
-                return;
-              }
-              // Find the offending method.
-              for (IMethodBinding methodBinding : superTypeBinding.getDeclaredMethods()) {
-                if (!methodBinding.getName().equals(methodName)) {
-                  continue;
-                }
-                // Check whether it is annotated with GwtIncompatible.
-                for (IAnnotationBinding annotationBinding : methodBinding.getAnnotations()) {
-                  if (annotationBinding.getName().equals("GwtIncompatible")) {
-                    found[0] = true;
-                  }
-                }
-              }
-            }
-          });
-    }
-    return found[0];
+    return hasErrors;
   }
 
   private ITypeBinding findTypeBindingByName(ITypeBinding typeBinding, String soughtTypeName) {

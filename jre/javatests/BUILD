@@ -6,7 +6,6 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("//build_def:j2cl_library.bzl", "j2cl_library")
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
 load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
@@ -108,18 +107,4 @@ genrule(
     name = "test_defines",
     outs = ["test_defines.js"],
     cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
-)
-
-# TODO(dankuka): Eventually we want to provide a library target for apps that
-# need to be compatible with both gwt tests and j2cl tests, but this will
-# require some more careful thought.
-j2cl_library(
-    name = "gwt_test_case",
-    testonly = 1,
-    srcs = ["com/google/gwt/junit/client/GWTTestCase.java"],
-    visibility = [
-        "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
-        "//third_party/java_src/jsinterop/javatests/jsinterop/base:__subpackages__",
-    ],
-    deps = ["//third_party/java/junit:junit-j2cl"],
 )

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.tools.gwtincompatible;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,9 +26,7 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.SimpleName;
 
-/**
- * Collects unused imports, so they can be commented out, {@see JavaPreprocessor}.
- */
+/** Collects unused imports, so they can be commented out, {@see JavaPreprocessor}. */
 public class UnusedImportsNodeCollector extends ASTVisitor {
   private List<ImportDeclaration> unusedImports = new ArrayList<>();
   private Set<String> referencedNames = new HashSet<>();

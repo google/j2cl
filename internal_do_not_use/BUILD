@@ -23,8 +23,6 @@ licenses(["unencumbered"])
 
 package(default_visibility = ["//visibility:public"])
 
-load("//build_def:j2cl_library.bzl", "j2cl_library")
-
 # ***************************************************
 # Transpiler related
 # ***************************************************
@@ -40,11 +38,6 @@ java_binary(
 # Standard library related
 # ***************************************************
 
-j2cl_library(
-    name = "jre",
-    exports = ["//jre/java:jre"],
-)
-
 # ***************************************************
 # JUnit library related
 # ***************************************************
@@ -56,11 +49,6 @@ java_plugin(
     deps = ["//junit/java/com/google/j2cl/junit/apt:junit_processor"],
 )
 
-j2cl_library(
-    name = "internal_junit_annotations",
-    exports = ["//junit/java/com/google/j2cl/junit/apt:internal_junit_annotations"],
-)
-
 # ***************************************************
 # Tools related
 # **************************************************
@@ -69,9 +57,16 @@ java_binary(
     name = "JsniConverter",
     main_class = "com.google.j2cl.tools.jsni.JsniConverter",
     visibility = [
-        "//java/com/google/protobuf/contrib/gwt:__pkg__",
         "//:__subpackages__",
+        "//java/com/google/protobuf/contrib/gwt:__pkg__",
         "//third_party/java_src/jbox2d:__subpackages__",
     ],
     runtime_deps = ["//tools/java/com/google/j2cl/tools/jsni"],
+)
+
+java_binary(
+    name = "GwtIncompatibleStripper",
+    main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
+    visibility = ["//visibility:public"],
+    runtime_deps = ["//tools/java/com/google/j2cl/tools/gwtincompatible"],
 )

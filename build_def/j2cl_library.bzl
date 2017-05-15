@@ -30,6 +30,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "generate_zip", "J2CL_OPT
 load("/tools/build_defs/label/def", "absolute_label")
 load("/tools/build_defs/j2cl/def", "js_import")
 load("/tools/build_rules/build_test", "build_test")
+load("/third_party/java_src/j2cl/build_def/gwt_incompatible_stripper", "gwt_incompatible_stripper")
 
 def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
   """Copies an artifact from to remove build environment restrictions."""
@@ -130,6 +131,16 @@ def j2cl_library(native_srcs=[],
     java_exports += [export + "_java_library"]
     js_exports += [export]
 
+  gwt_incompatible_output = "%s-gwtincompatible-stripped.srcjar" % base_name
+  gwt_incompatible_stripper(
+      name= base_name + "-gwtincompatible-stripped",
+      srcs=srcs,
+      visibility=["//visibility:private"],
+      restricted_to=["//buildenv/j2cl:j2cl_compilation"],
+      deps=java_deps,
+      testonly=testonly,
+  )
+
   target_name = PACKAGE_NAME + ":" + base_name
   # If this is JRE itself, don't synthesize the JRE dep.
   if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
@@ -141,7 +152,7 @@ def j2cl_library(native_srcs=[],
 
   java_library_kwargs = dict(kwargs)
   java_library_kwargs["name"] = base_name + "_java_library"
-  java_library_kwargs["srcs"] = srcs
+  java_library_kwargs["srcs"] = [gwt_incompatible_output]
   java_library_kwargs["deps"] = java_deps or None
   java_library_kwargs["exports"] = java_exports
   # Direct automated dep picking tools away from this target.
