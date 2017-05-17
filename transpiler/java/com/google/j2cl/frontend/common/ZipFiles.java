@@ -32,7 +32,7 @@ import java.util.zip.ZipFile;
 
 /** Small fill in for io.ZipFiles since it's not open source yet. */
 // TODO(dankurka): remove this once io.ZipFiles is open source.
-final class ZipFiles {
+public final class ZipFiles {
 
   private static final class ZipEntryByteSource extends ByteSource {
 
@@ -55,7 +55,7 @@ final class ZipFiles {
     }
   }
 
-  static void unzipFile(File zipFile, File targetDirectory) throws IOException {
+  public static void unzipFile(File zipFile, File targetDirectory) throws IOException {
     checkNotNull(zipFile);
     checkNotNull(targetDirectory);
     checkArgument(
