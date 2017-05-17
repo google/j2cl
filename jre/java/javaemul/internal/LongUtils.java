@@ -8,8 +8,6 @@ import jsinterop.annotations.JsType;
  */
 @JsType(namespace = "vmbootstrap")
 class LongUtils {
-  // Make sure clinit is self nullified so tests doesn't time out (see b/28023199).
-  static int PRESERVE_CLINIT_NULLIFICATION = 1;
 
   public static int $compare(NativeLong a, NativeLong b) {
     return a.compare(b);
