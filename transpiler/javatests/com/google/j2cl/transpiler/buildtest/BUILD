@@ -12,7 +12,7 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
-load("//apps/framework/modulesets/builddefs:modulesets.bzl", "assembled_content_app_config", "mss_js_compiled_module_set_flat_files")
+load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
 load("//build_def:j2cl_test.bzl", "j2cl_test")
 load("//build_def:j2cl_util.bzl", "J2CL_UNOPTIMIZED_DEFS")
@@ -140,11 +140,6 @@ pinto_processed_module_set(
     deps = [":J2clPintoPmfEnhancerMss_pinto_module"],
 )
 
-assembled_content_app_config(
-    name = "J2clPintoPmfEnhancerMss_app_config",
-    config_file = "J2clPintoPmfEnhancerMss.config",
-)
-
 filegroup(
     name = "J2clPintoPmfEnhancerMss_filegroup",
     data = [
@@ -159,7 +154,7 @@ mss_js_compiled_module_set_flat_files(
     name = "J2clPintoPmfEnhancerMss",
     app_name = "J2clPintoPmfEnhancerMss",
     compile_modes = ["optimized"],
-    config = ":J2clPintoPmfEnhancerMss_app_config",
+    config = "J2clPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clPintoPmfEnhancerMss_processed_module_set"],
     scs_rowkey_prefix = "/external_content/modulesets/J2clPintoPmfEnhancerMss",
@@ -196,11 +191,6 @@ pinto_processed_module_set(
     deps = [":J2clAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
-assembled_content_app_config(
-    name = "J2clAjdPintoPmfEnhancerMss_app_config",
-    config_file = "J2clAjdPintoPmfEnhancerMss.config",
-)
-
 filegroup(
     name = "J2clAjdPintoPmfEnhancerMss_filegroup",
     data = [
@@ -215,7 +205,7 @@ mss_js_compiled_module_set_flat_files(
     name = "J2clAjdPintoPmfEnhancerMss",
     app_name = "J2clAjdPintoPmfEnhancerMss",
     compile_modes = ["optimized"],
-    config = ":J2clAjdPintoPmfEnhancerMss_app_config",
+    config = "J2clAjdPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clAjdPintoPmfEnhancerMss_processed_module_set"],
     scs_rowkey_prefix = "/external_content/modulesets/J2clAjdPintoPmfEnhancerMss",
@@ -241,11 +231,6 @@ pinto_processed_module_set(
     deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
-assembled_content_app_config(
-    name = "J2clDupeAjdPintoPmfEnhancerMss_app_config",
-    config_file = "J2clDupeAjdPintoPmfEnhancerMss.config",
-)
-
 filegroup(
     name = "J2clDupeAjdPintoPmfEnhancerMss_filegroup",
     data = [
@@ -260,7 +245,7 @@ mss_js_compiled_module_set_flat_files(
     name = "J2clDupeAjdPintoPmfEnhancerMss",
     app_name = "J2clDupeAjdPintoPmfEnhancerMss",
     compile_modes = ["optimized"],
-    config = ":J2clDupeAjdPintoPmfEnhancerMss_app_config",
+    config = "J2clDupeAjdPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
     scs_rowkey_prefix = "/external_content/modulesets/J2clDupeAjdPintoPmfEnhancerMss",
