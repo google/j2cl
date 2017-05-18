@@ -50,7 +50,7 @@ j2cl_test(
 )
 
 To make this example work one needs to add ":MyTestLib" to the runtime_deps of
-"MyTest" or to the expors of "MyTestSuiteLib". (b/33477895)
+"MyTest" or to the exports of "MyTestSuiteLib". (b/33477895)
 """
 
 load("//testing/web/build_defs:web.bzl", "web_test")
