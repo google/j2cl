@@ -52,7 +52,6 @@ public class FrontendOptions {
   private List<String> nativesourcezipEntries;
   private String output;
   private String encoding;
-  private String depinfoPath;
   private String sourceVersion;
   private List<String> sourceFilePaths;
   private FileSystem outputFileSystem;
@@ -79,7 +78,6 @@ public class FrontendOptions {
     setBootclassPathEntries(flags.bootclasspath);
     setNativeSourceZipEntries(flags.nativesourceszippath);
     setOutput(flags.output);
-    setDepinfoPath(flags.depinfoPath);
     setSourceFiles(flags.files);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
@@ -184,14 +182,6 @@ public class FrontendOptions {
       return false;
     }
     return true;
-  }
-
-  public String getDepinfoPath() {
-    return this.depinfoPath;
-  }
-
-  public void setDepinfoPath(String depinfoPath) {
-    this.depinfoPath = depinfoPath;
   }
 
   public String getSourceVersion() {

@@ -78,14 +78,6 @@ public class FrontendFlags {
   public String output = ".";
 
   @Option(
-    name = "-depinfo",
-    metaVar = "<file>",
-    usage = "Specifies whether and where to generate a dependency information file.",
-    hidden = true
-  )
-  protected String depinfoPath = null;
-
-  @Option(
     name = "-encoding",
     metaVar = "<encoding>",
     usage = "Specifies character encoding used by source files."

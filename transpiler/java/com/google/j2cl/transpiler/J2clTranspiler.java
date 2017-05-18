@@ -292,7 +292,6 @@ public class J2clTranspiler {
             options.getOutputFileSystem(),
             options.getOutput(),
             options.getDeclareLegacyNamespace(),
-            options.getDepinfoPath(),
             options.getShouldPrintReadableSourceMap(),
             problems)
         .generateOutputs(j2clCompilationUnits);
