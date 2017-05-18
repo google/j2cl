@@ -157,7 +157,6 @@ mss_js_compiled_module_set_flat_files(
     config = "J2clPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clPintoPmfEnhancerMss_processed_module_set"],
-    scs_rowkey_prefix = "/external_content/modulesets/J2clPintoPmfEnhancerMss",
     source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
 )
 
@@ -208,7 +207,6 @@ mss_js_compiled_module_set_flat_files(
     config = "J2clAjdPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clAjdPintoPmfEnhancerMss_processed_module_set"],
-    scs_rowkey_prefix = "/external_content/modulesets/J2clAjdPintoPmfEnhancerMss",
     source_filegroup = ":J2clAjdPintoPmfEnhancerMss_filegroup",
 )
 
@@ -248,6 +246,5 @@ mss_js_compiled_module_set_flat_files(
     config = "J2clDupeAjdPintoPmfEnhancerMss.config",
     languages = ["en"],
     module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
-    scs_rowkey_prefix = "/external_content/modulesets/J2clDupeAjdPintoPmfEnhancerMss",
     source_filegroup = ":J2clDupeAjdPintoPmfEnhancerMss_filegroup",
 )
