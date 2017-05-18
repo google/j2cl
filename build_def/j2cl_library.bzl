@@ -139,6 +139,7 @@ def j2cl_library(native_srcs=[],
       restricted_to=["//buildenv/j2cl:j2cl_compilation"],
       deps=java_deps,
       testonly=testonly,
+      tags=tags,
   )
 
   target_name = PACKAGE_NAME + ":" + base_name
