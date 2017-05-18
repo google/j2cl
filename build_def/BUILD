@@ -3,7 +3,6 @@
 #  This BUILD file does not need to do anything except exist.
 
 package(default_visibility = [
-    "//java/com/google/protobuf/contrib/gwt:__pkg__",
     "//:__subpackages__",
 ])
 
