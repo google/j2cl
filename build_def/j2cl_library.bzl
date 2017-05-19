@@ -131,9 +131,9 @@ def j2cl_library(native_srcs=[],
     java_exports += [export + "_java_library"]
     js_exports += [export]
 
-  gwt_incompatible_output = "%s-gwtincompatible-stripped.srcjar" % base_name
+  gwt_incompatible_stripped = base_name + "_gwtincompatible_stripped"
   gwt_incompatible_stripper(
-      name= base_name + "-gwtincompatible-stripped",
+      name=gwt_incompatible_stripped,
       srcs=srcs,
       visibility=["//visibility:private"],
       restricted_to=["//buildenv/j2cl:j2cl_compilation"],
@@ -153,7 +153,7 @@ def j2cl_library(native_srcs=[],
 
   java_library_kwargs = dict(kwargs)
   java_library_kwargs["name"] = base_name + "_java_library"
-  java_library_kwargs["srcs"] = [gwt_incompatible_output]
+  java_library_kwargs["srcs"] = [gwt_incompatible_stripped]
   java_library_kwargs["deps"] = java_deps or None
   java_library_kwargs["exports"] = java_exports
   # Direct automated dep picking tools away from this target.
