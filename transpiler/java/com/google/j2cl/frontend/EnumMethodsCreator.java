@@ -81,7 +81,7 @@ public class EnumMethodsCreator {
                     // Browser global
                     JsUtils.JS_PACKAGE_GLOBAL,
                     // Native type name
-                    "Object",
+                    "Map",
                     // Type parameters.
                     Lists.newArrayList(
                         TypeDescriptors.get().javaLangString,

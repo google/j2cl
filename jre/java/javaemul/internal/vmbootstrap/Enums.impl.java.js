@@ -11,15 +11,15 @@ class Enums {
   /**
    * @param {Array<T>} values An array containing all instances of a particular
    *     enum type.
-   * @return {Object<string, T>} A map from enum name to enum instance.
+   * @return {Map<string, T>} A map from enum name to enum instance.
    * @template T
    * @public
    */
   static createMapFromValues(values) {
-    let map = {};
+    let map = new Map();
     for (var i = 0; i < values.length; i++) {
-      let name = /** @type {Enum} */ (values[i]).name();
-      map[name] = values[i];
+      let e = /** @type {Enum} */ (values[i]);
+      map.set(e.name(), e);
     }
     return map;
   }
@@ -27,7 +27,7 @@ class Enums {
   /**
    * We need to throw an exception if the name does not exist in the map.
    * @param {?string} name
-   * @param {Object<string, T>} map
+   * @param {Map<string, ?>} map TODO(b/38182645): change ? with T
    * @return {T}
    * @template T
    * @public
@@ -37,7 +37,7 @@ class Enums {
     if (name == null) {
       throw Exceptions.toJs(IllegalArgumentException.$create__());
     }
-    let enumValue = map[name];
+    let enumValue = map.get(name);
     if (enumValue == undefined) {
       throw Exceptions.toJs(IllegalArgumentException.$create__());
     }

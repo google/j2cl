@@ -40,6 +40,20 @@ public class Main {
       // do nothing.
     }
 
+    try {
+      Planet.valueOf("toString");
+      assert false : "Should have thrown IllegalArgumentException.";
+    } catch (IllegalArgumentException e) {
+      // do nothing.
+    }
+
+    try {
+      Planet.valueOf("__proto__");
+      assert false : "Should have thrown IllegalArgumentException.";
+    } catch (IllegalArgumentException e) {
+      // do nothing.
+    }
+
     // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
     // implemented.
     try {
