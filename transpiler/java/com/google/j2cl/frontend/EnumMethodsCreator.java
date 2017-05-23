@@ -194,8 +194,7 @@ public class EnumMethodsCreator {
     Statement returnStatement =
         ReturnStatement.newBuilder()
             .setExpression(getMethodCall)
-            .setTypeDescriptor(
-                TypeDescriptors.getForArray(enumType.getDeclaration().getUnsafeTypeDescriptor(), 1))
+            .setTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
             .build();
 
     return Method.newBuilder()
