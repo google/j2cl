@@ -7,10 +7,8 @@ java_library(
     name = "common",
     srcs = glob(["*.java"]),
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/common/io",
-        "//third_party/java/apache_commons_lang3",
+        "//third_party:apache_commons_lang3",
+        "//third_party:guava",
         "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/problems",
     ],
