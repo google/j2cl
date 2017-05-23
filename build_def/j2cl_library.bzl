@@ -76,10 +76,14 @@ def _merge_zips(srczips, outzip, tags, testonly):
       testonly=testonly,
   )
 
-def j2cl_library(native_srcs=[],
+def j2cl_library(name,
+                 srcs=[],
+                 tags=[],
+                 native_srcs=[],
                  native_srcs_zips=[],
                  generate_build_test=None,
                  js_deps_mgmt="legacy",
+                 visibility=None,
                  _js_srcs=[],
                  _js_deps=[],
                  _readable_source_maps=False,
@@ -109,12 +113,13 @@ def j2cl_library(native_srcs=[],
   if not hasattr(native, "js_library"):
     return
 
-  base_name = kwargs["name"]
-  srcs = kwargs.get("srcs") or []
-  tags = kwargs.get("tags") or []
-  visibility = kwargs.get("visibility")
+  base_name = name
+  srcs = srcs or []
+  tags = tags or []
   testonly = kwargs.get("testonly")
 
+  # Direct automated dep picking tools and grok away from internal targets.
+  internal_tags = tags + ["avoid_dep", "no_grok"]
   java_exports = []
   js_exports = []
 
@@ -139,7 +144,7 @@ def j2cl_library(native_srcs=[],
       restricted_to=["//buildenv/j2cl:j2cl_compilation"],
       deps=java_deps,
       testonly=testonly,
-      tags=tags,
+      tags=internal_tags,
   )
 
   target_name = PACKAGE_NAME + ":" + base_name
@@ -152,15 +157,24 @@ def j2cl_library(native_srcs=[],
     js_deps += [dep]
 
   java_library_kwargs = dict(kwargs)
-  java_library_kwargs["name"] = base_name + "_java_library"
-  java_library_kwargs["srcs"] = [gwt_incompatible_stripped]
   java_library_kwargs["deps"] = java_deps or None
   java_library_kwargs["exports"] = java_exports
-  # Direct automated dep picking tools away from this target.
-  java_library_kwargs["tags"] = tags + ["avoid_dep"]
   java_library_kwargs["restricted_to"] = ["//buildenv/j2cl:j2cl_compilation"]
 
   native.java_library(
+      name = base_name + "_java_library",
+      srcs = [gwt_incompatible_stripped],
+      tags = internal_tags,
+      visibility = visibility,
+      **java_library_kwargs
+  )
+
+  # See: https://groups.google.com/a/google.com/forum/#!topic/grok-dev/ziIAgfo7GBg
+  native.java_library(
+      name = base_name + "_java_library_for_grok",
+      srcs = srcs,
+      tags = ["notap", "manual", "avoid_dep"],
+      visibility=["//visibility:private"],
       **java_library_kwargs
   )
 
@@ -185,7 +199,7 @@ def j2cl_library(native_srcs=[],
             "zip -q -i \"*.js\" -x \"*.native.js\" -r $$cwd/$(location %s) *" % js_sources_from_apt,
             "zip -q -i \"*.native.js\" -r $$cwd/$(location %s) *" % native_js_sources_from_apt,
         ]),
-        tags=tags,
+        tags=internal_tags,
         visibility=["//visibility:private"],
     )
 
@@ -209,7 +223,7 @@ def j2cl_library(native_srcs=[],
         readable_source_maps=_readable_source_maps,
         declare_legacy_namespace=_declare_legacy_namespace,
         restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-        tags=tags,
+        tags=internal_tags,
     )
 
     # Uh-oh: _js_import needs to depend on restricted_to=j2cl_compilation targets,
@@ -246,7 +260,7 @@ def j2cl_library(native_srcs=[],
   _merge_zips(
       srczips=src_zips,
       outzip=merged_zip,
-      tags=tags,
+      tags=internal_tags,
       testonly=testonly,
   )
 
@@ -258,7 +272,7 @@ def j2cl_library(native_srcs=[],
       exports=js_exports,
       srczip=merged_zip if src_zips else None,
       # Direct automated dep picking tools away from this target.
-      tags=tags + ["avoid_dep"],
+      tags=internal_tags,
       testonly=testonly,
   )
 
@@ -292,7 +306,7 @@ def j2cl_library(native_srcs=[],
         defs=J2CL_OPTIMIZED_DEFS,
         externs_list=_test_externs_list,
         include_default_externs="off" if _test_externs_list else "web",
-        tags=tags,
+        tags=internal_tags,
         compiler="//javascript/tools/jscompiler:head",
         testonly=1,
         visibility=["//visibility:private"],
@@ -304,5 +318,5 @@ def j2cl_library(native_srcs=[],
             base_name + "_js_binary",
             base_name + "_js_import",
         ],
-        tags=tags,
+        tags=internal_tags,
     )
