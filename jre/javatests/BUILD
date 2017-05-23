@@ -91,8 +91,8 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    _js_srcs = ["test_defines.js"],
-    bootstrap_files = ["test_defines.js"],
+    _js_srcs = [":test_defines"],
+    bootstrap_files = [":test_defines"],
     shard_count = 16,
     test_class = "com.google.gwt.emultest.EmulSuite",
 )
