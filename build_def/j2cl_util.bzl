@@ -100,4 +100,7 @@ J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     "--extra_smart_name_removal=true",
     # Enable assert statements for tests (as java_test does the same)
     "--remove_j2cl_asserts=false",
+    # turn off the closure debug loader since it is causing warnings
+    # in bundled mode
+    "--define=goog.ENABLE_DEBUG_LOADER=false",
 ]

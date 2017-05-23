@@ -119,7 +119,6 @@ _JS_UNIT_DEFAULT_TEST_PARAMETERS = {
     "deps_mgmt": "closure",
     "externs_list": ["//javascript/externs:common"],
     "jvm_flags": [
-        "-Djsrunner.net.useJsBundles=true",
         "-DstacktraceDeobfuscation=true",
      ],
 }
@@ -208,6 +207,10 @@ def j2cl_test(name,
   )
 
   jsunit_parameters = _extract_jsunit_parameters(kwargs)
+
+  # enforce bundled mode since the debug loader is disabled
+  jsunit_parameters["jvm_flags"] += ["-Djsrunner.net.useJsBundles=true"]
+
   # Define a jsunit_test:
   #   - sources is the zip coming from code gen
   #   - deps contains the j2cl_library from our code gen
