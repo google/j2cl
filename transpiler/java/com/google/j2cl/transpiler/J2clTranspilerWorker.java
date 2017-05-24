@@ -14,16 +14,13 @@
 package com.google.j2cl.transpiler;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
 import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -38,7 +35,7 @@ import java.util.concurrent.Future;
  * J2clTranspiler as a worker.
  */
 public class J2clTranspilerWorker {
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     if (!shouldRunAsWorker(args)) {
       // Blaze decides at runtime through a flag if we should be running as a worker
       // or just be performing a regular compile
@@ -47,12 +44,7 @@ public class J2clTranspilerWorker {
       return;
     }
 
-    try {
-      new J2clTranspilerWorker().run();
-    } catch (Exception e) {
-      Files.asCharSink(new File("/usr/local/google/home/tdeegan/trace.txt"), StandardCharsets.UTF_8)
-          .write(e.toString());
-    }
+    new J2clTranspilerWorker().run();
   }
 
   @VisibleForTesting
