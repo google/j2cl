@@ -20,7 +20,6 @@ j2cl_mirror_from_gwt(
     ],
     js_deps = [
         "//javascript/closure/reflect",
-        "//javascript/closure/log",
         "//javascript/closure/math:long",
         "//javascript/closure:base",
     ],
