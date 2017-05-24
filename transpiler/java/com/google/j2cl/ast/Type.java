@@ -68,12 +68,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   public boolean containsNonJsNativeMethods() {
     return getMethods()
         .stream()
-        .anyMatch(
-            method ->
-                method.isNative()
-                    && !method.getDescriptor().isJsPropertyGetter()
-                    && !method.getDescriptor().isJsPropertySetter()
-                    && !method.getDescriptor().isJsMethod());
+        .filter(Method::isNative)
+        .anyMatch(method -> !method.getDescriptor().isJsMember());
   }
 
   public void setStatic(boolean isStatic) {
