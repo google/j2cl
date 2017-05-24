@@ -30,5 +30,6 @@ j2cl_mirror_from_gwt(
     deps = [
         "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
     ],
 )
