@@ -55,7 +55,7 @@ java_plugin(
 
 java_binary(
     name = "JsniConverter",
-    main_class = "com.google.j2cl.tools.jsni.JsniConverter",
+    main_class = "com.google.j2cl.tools.jsni.Runner",
     visibility = [
         "//:__subpackages__",
         "//java/com/google/protobuf/contrib/gwt:__pkg__",

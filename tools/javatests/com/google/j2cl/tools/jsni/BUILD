@@ -18,10 +18,10 @@ java_library(
     testonly = 1,
     srcs = glob(["*.java"]),
     deps = [
-        "//java/com/google/common/flags",
         "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
         "//third_party/java/truth",
+        "//third_party:args4j",
         "//tools/java/com/google/j2cl/tools/jsni",
         "//transpiler/java/com/google/j2cl/frontend",
     ],

@@ -27,14 +27,8 @@ def _impl(ctx):
   dep_targets = ctx.attr.deps
   zip_file = ctx.new_file(ctx.label.name + "_native.js.zip")  # output zip file
 
-  if ctx.attr.debug:
-    print("java files: " + str(java_files))
-    print("dep_targets: " + str(dep_targets))
-    print("zip result file: " + str(zip_file))
-
   converter_args = ["--output_file", zip_file.path]
-  if ctx.attr.debug:
-    converter_args += ["--verbose"]
+
   for exclude_file in exclude_files:
     converter_args += ["--excludes", exclude_file.path]
   dep_files = set()
@@ -42,7 +36,7 @@ def _impl(ctx):
     dep_files += dep_target.files
     dep_files += dep_target.default_runfiles.files  # for exported libraries
   for dep_file in dep_files:
-    converter_args += ["--class_path", dep_file.path]
+    converter_args += ["--classpath", dep_file.path]
   converter_args += [f.path for f in java_files]
 
   ctx.action(
@@ -64,7 +58,6 @@ _jsni_to_j2cl_converter = rule(
             mandatory=True,
             allow_files=[".java"],
         ),
-        "debug": attr.bool(default=False),
         # Uh-oh: jsni_to_j2cl_converter needs to depend on
         # restricted_to=j2cl_compilation targets. But the jsni_to_j2cl_converter
         # can't (or at least probably shouldn't?) itself be

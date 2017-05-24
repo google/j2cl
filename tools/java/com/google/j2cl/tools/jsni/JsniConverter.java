@@ -15,21 +15,13 @@
  */
 package com.google.j2cl.tools.jsni;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.flags.Flag;
-import com.google.common.flags.FlagSpec;
-import com.google.common.flags.Flags;
-import com.google.common.flags.InvalidFlagValueException;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.problems.Problems;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -40,64 +32,15 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
  * instantiate the different Objects needed for the conversion.
  */
 public class JsniConverter {
-  @FlagSpec(name = "verbose", help = "Display debug messages")
-  private static final Flag<Boolean> isVerboseFlag = Flag.value(false);
-
-  @FlagSpec(name = "class_path", help = "The file paths to dependency jars.")
-  private static final Flag<List<String>> classPathFlag = Flag.stringCollector();
-
-  @FlagSpec(name = "output_file", help = "The path and base filename for the output zip file")
-  private static final Flag<String> outputFileFlag = Flag.value("");
-
-  @FlagSpec(name = "excludes", help = "The paths of files whose JSNI to exclude.")
-  private static final Flag<List<String>> excludesFlag = Flag.stringCollector();
-
   private final Problems problems = new Problems();
+  private final String outputFile;
 
-  public static void main(String[] args) throws InvalidFlagValueException {
-    String[] fileNames = Flags.parseAndReturnLeftovers(args);
-
-    validateFlags(fileNames);
-    JsniConverter jsniConverter = new JsniConverter(outputFileFlag.get());
-    try {
-      jsniConverter.convert(
-          Arrays.asList(fileNames), classPathFlag.get(), new HashSet<String>(excludesFlag.get()));
-    } catch (Problems.Exit e) {
-      jsniConverter.problems.report(System.out, System.err);
-    }
+  public JsniConverter(String outputFile) {
+    this.outputFile = outputFile;
   }
 
-  static void log(String message, Object... args) {
-    if (isVerboseFlag.get()) {
-      System.out.println(String.format(message, args));
-    }
-  }
-
-  private static void validateFlags(String[] fileNames) throws InvalidFlagValueException {
-    if (Strings.isNullOrEmpty(outputFileFlag.get())) {
-      throw new InvalidFlagValueException(
-          "Path to the output zip file is missing. Use --output_file flag to specify a path where "
-              + "the result zip file will be written.");
-    }
-
-    if (!classPathFlag.get().isEmpty()) {
-      for (String classPathEntry : classPathFlag.get()) {
-        if (!new File(classPathEntry).exists()) {
-          throw new InvalidFlagValueException(
-              String.format("File %s doesn't exist", classPathEntry));
-        }
-      }
-    }
-
-    if (fileNames.length == 0) {
-      throw new InvalidFlagValueException("Path to java file(s) to convert is(are) missing");
-    }
-
-    for (String fileName : fileNames) {
-      if (!new File(fileName).exists()) {
-        throw new InvalidFlagValueException(String.format("File %s doesn't exist", fileName));
-      }
-    }
+  public Problems getProblems() {
+    return problems;
   }
 
   private CompilationUnitsAndTypeBindings getCompilationUnitsAndTypeBindings(
@@ -116,12 +59,6 @@ public class JsniConverter {
     return compilationUnitsAndTypeBindings;
   }
 
-  private final String outputFile;
-
-  public JsniConverter(String outputFile) {
-    this.outputFile = outputFile;
-  }
-
   public void convert(
       List<String> javaFileNames, List<String> classPathEntries, Set<String> excludeFileNames) {
     Multimap<String, JsniMethod> jsniMethodsByType = ArrayListMultimap.create();
@@ -137,7 +74,6 @@ public class JsniConverter {
         continue;
       }
 
-      log("Converting %s", entry.getKey());
       jsniMethodsByType.putAll(
           NativeMethodExtractor.getJsniMethodsByType(
               entry.getKey(), entry.getValue(), compilationUnitsAndTypeBindings.getTypeBindings()));

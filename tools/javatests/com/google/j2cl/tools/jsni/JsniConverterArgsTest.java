@@ -16,14 +16,12 @@
 package com.google.j2cl.tools.jsni;
 
 import static com.google.j2cl.tools.jsni.ToolsTestUtils.getDataFilePath;
+import static org.junit.Assert.assertThrows;
 
-import com.google.common.flags.Flags;
-import com.google.common.flags.InvalidFlagValueException;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.kohsuke.args4j.CmdLineException;
 
 /**
  * Class testing that the converter throws the right exception if the arguments passed to him are
@@ -31,55 +29,45 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class JsniConverterArgsTest extends BaseJsniConverterTest {
-  @Before
-  public void resetFlags() {
-    Flags.disableStateCheckingForTest();
-    Flags.resetFlagForTest(JsniConverter.class, "verbose");
-    Flags.resetFlagForTest(JsniConverter.class, "output_file");
-    Flags.enableStateCheckingForTest();
-  }
-
   /**
    * If one java file passed to the converter doesn't exist, the converter throws an
    * InvalidFlagValueException
    */
-  @Test(expected = InvalidFlagValueException.class)
-  public void main_nonExistingJavaFile() throws InvalidFlagValueException {
+  @Test
+  public void main_nonExistingJavaFile() throws CmdLineException {
     String[] args = {"--output_file", getZipFilePath(), "nonExistingJavaFile.java"};
 
-    JsniConverter.main(args);
+    assertThrows(CmdLineException.class, () -> Runner.main(args));
   }
 
   /**
    * If one calls the converter without specifying java files to convert, the converter throws an
    * InvalidFlagValueException
    */
-  @Test(expected = InvalidFlagValueException.class)
-  public void main_noJavaFile() throws InvalidFlagValueException {
+  @Test
+  public void main_noJavaFile() throws CmdLineException {
     String[] args = {"--output_file", getZipFilePath()};
 
-    JsniConverter.main(args);
+    assertThrows(CmdLineException.class, () -> Runner.main(args));
   }
 
   /**
    * If one calls the converter without passing the mandatory --output_file flags, the converter
    * throws an InvalidFlagValueException
    */
-  @Test(expected = InvalidFlagValueException.class)
-  public void main_noOutputFileFlag() throws InvalidFlagValueException {
+  @Test
+  public void main_noOutputFileFlag() throws CmdLineException {
     String[] args = {getDataFilePath("SimpleClass.java")};
 
-    JsniConverter.main(args);
+    assertThrows(CmdLineException.class, () -> Runner.main(args));
   }
 
-  /**
-   * If the zip file cannot be created, the converter throws a RuntimeException
-   */
-  @Test(expected = RuntimeException.class)
-  public void main_invalidZipFile() throws InvalidFlagValueException {
+  /** If the zip file cannot be created, the converter throws a RuntimeException */
+  @Test
+  public void main_invalidZipFile() throws CmdLineException {
     String nonExistingPath = "/I_m/sure/this/path/doesnt/exist/._jsni_/converter/result.zip";
     String[] args = {"--output_file", nonExistingPath, getDataFilePath("SimpleClass.java")};
 
-    JsniConverter.main(args);
+    assertThrows(RuntimeException.class, () -> Runner.main(args));
   }
 }

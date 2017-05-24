@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.tools.jsni;
 
-import static com.google.j2cl.tools.jsni.JsniConverter.log;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -72,7 +70,6 @@ public class NativeJsFilesWriter {
         // build js file name including directory.
         String directory = packageName.replaceAll("\\.", ZIP_PATH_SEPARATOR) + ZIP_PATH_SEPARATOR;
         String javascriptFilePath = directory + simpleBinaryName + ".native.js";
-        JsniConverter.log("content of " + javascriptFilePath + ":\n" + content);
         addTozipFile(zipOutputStream, javascriptFilePath, content);
       }
 
@@ -82,8 +79,6 @@ public class NativeJsFilesWriter {
   }
 
   private ZipOutputStream createZipOutputStream(String zipFilefilePath) {
-    log("Creating %s", zipFilefilePath);
-
     try {
       return new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFilefilePath)));
     } catch (FileNotFoundException e) {
@@ -117,8 +112,6 @@ public class NativeJsFilesWriter {
 
   private void addTozipFile(ZipOutputStream zipOutputStream, String filePath, String content)
       throws IOException {
-    log("Zipping %s...", filePath);
-
     ZipEntry sourceEntry = new ZipEntry(filePath);
 
     zipOutputStream.putNextEntry(sourceEntry);
