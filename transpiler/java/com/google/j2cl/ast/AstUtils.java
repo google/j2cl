@@ -795,7 +795,7 @@ public class AstUtils {
             .setName("$getPrototype")
             .setStatic(true)
             .setJsInfo(JsInfo.RAW)
-            .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
+            .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
             .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
 
@@ -807,7 +807,7 @@ public class AstUtils {
                 FieldDescriptor.newBuilder()
                     .setEnclosingTypeDescriptor(lambdaType)
                     .setName(applyMethodName)
-                    .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
+                    .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(getPrototypeCall)
@@ -820,9 +820,9 @@ public class AstUtils {
             .setStatic(true)
             .setJsInfo(JsInfo.RAW)
             .setParameterTypeDescriptors(
-                TypeDescriptors.NATIVE_FUNCTION,
+                TypeDescriptors.get().nativeFunction,
                 TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.NATIVE_FUNCTION)
+                TypeDescriptors.get().nativeFunction)
             .build();
 
     FieldAccess copyFunctionFieldAccess =
@@ -830,7 +830,7 @@ public class AstUtils {
                 FieldDescriptor.newBuilder()
                     .setEnclosingTypeDescriptor(lambdaType)
                     .setName("$copy")
-                    .setTypeDescriptor(TypeDescriptors.NATIVE_FUNCTION)
+                    .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(new TypeReference(lambdaType))
@@ -1127,7 +1127,7 @@ public class AstUtils {
   public static TypeDescriptor getNamespaceAsTypeDescriptor(MemberDescriptor memberDescriptor) {
     String memberJsNamespace = memberDescriptor.getJsNamespace();
     if (JsUtils.isGlobal(memberJsNamespace)) {
-      return TypeDescriptors.GLOBAL_NAMESPACE;
+      return TypeDescriptors.get().globalNamespace;
     }
 
     List<String> components = Splitter.on('.').omitEmptyStrings().splitToList(memberJsNamespace);

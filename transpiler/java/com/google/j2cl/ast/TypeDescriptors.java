@@ -241,26 +241,26 @@ public class TypeDescriptors {
   }
 
   // Common browser native types.
-  public static final TypeDescriptor NATIVE_FUNCTION =
+  public final TypeDescriptor nativeFunction =
       createNative(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Function",
           Collections.emptyList());
-  public static final TypeDescriptor NATIVE_OBJECT =
+  public final TypeDescriptor nativeObject =
       createNative(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Object",
           Collections.emptyList());
-  public static final TypeDescriptor NATIVE_ARRAY =
+  public final TypeDescriptor nativeArray =
       createNative(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Array",
           Collections.emptyList());
 
-  public static final TypeDescriptor GLOBAL_NAMESPACE =
+  public final TypeDescriptor globalNamespace =
       // This is the global window references seen as a (phantom) type that will become the
       // enclosing class of native global methods and properties.
       createNative(

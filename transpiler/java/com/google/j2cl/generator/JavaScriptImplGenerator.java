@@ -336,7 +336,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Marks the provided class as implementing this interface.",
-        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName() + "} classConstructor",
+        " * @param {"
+            + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
+            + "} classConstructor",
         " * @public",
         " */",
         "static $markImplementor(classConstructor) ");
@@ -432,7 +434,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Returns whether the provided class is or extends this class.",
-        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName() + "} classConstructor",
+        " * @param {"
+            + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
+            + "} classConstructor",
         " * @return {boolean}",
         " * @public",
         " */",
@@ -688,7 +692,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(
           className
               + ".$markImplementor(/** @type {"
-              + TypeDescriptors.NATIVE_FUNCTION.getQualifiedJsName()
+              + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
               + "} */ ("
               + className
               + "));");

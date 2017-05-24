@@ -184,7 +184,7 @@ public class JsDocNameUtils {
       // same special case that already exists in the JSCompiler optimizing backend, and to
       // generalize it to work everywhere (including when types are referenced via an alias).
       String typeQualifiedName = rawTypeDescriptor.getQualifiedJsName();
-      if (typeQualifiedName.equals(TypeDescriptors.NATIVE_OBJECT.getQualifiedJsName())
+      if (typeQualifiedName.equals(TypeDescriptors.get().nativeObject.getQualifiedJsName())
           && rawTypeDescriptor.isJsType()
           && typeArgumentDescriptors.size() == 1) {
         typeParametersJsDoc = "string, " + typeParametersJsDoc;

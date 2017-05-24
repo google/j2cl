@@ -199,7 +199,7 @@ public class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitTypeReference(TypeReference typeReference) {
     TypeDescriptor referencedTypeDescriptor = typeReference.getReferencedTypeDescriptor();
-    if (referencedTypeDescriptor == TypeDescriptors.GLOBAL_NAMESPACE) {
+    if (referencedTypeDescriptor == TypeDescriptors.get().globalNamespace) {
       return;
     }
     addTypeDescriptor(referencedTypeDescriptor, ImportCategory.LAZY);

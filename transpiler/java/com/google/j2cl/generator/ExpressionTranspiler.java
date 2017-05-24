@@ -304,7 +304,7 @@ public class ExpressionTranspiler {
         // Static members in the global scope are explicitly qualified by a TypeReference node to
         // the TypeDescriptor representing the global scope.
         TypeReference typeReference = (TypeReference) qualifier;
-        return typeReference.getReferencedTypeDescriptor() != TypeDescriptors.GLOBAL_NAMESPACE;
+        return typeReference.getReferencedTypeDescriptor() != TypeDescriptors.get().globalNamespace;
       }
 
       /** JsProperty getter is emitted as property access: qualifier.property. */

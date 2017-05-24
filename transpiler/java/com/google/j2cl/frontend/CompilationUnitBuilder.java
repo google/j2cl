@@ -1757,7 +1757,7 @@ public class CompilationUnitBuilder {
         checkArgument(
             TypeDescriptors.isJavaLangObject(
                 varargsParameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor()));
-        varargsTypeDescriptor = TypeDescriptors.getForArray(TypeDescriptors.NATIVE_OBJECT, 1);
+        varargsTypeDescriptor = TypeDescriptors.getForArray(TypeDescriptors.get().nativeObject, 1);
       }
       return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
     }
@@ -2106,7 +2106,7 @@ public class CompilationUnitBuilder {
                   .setStatic(true)
                   .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
                   .setName("$get")
-                  .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
+                  .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
                   .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
                   .build())
           .setArguments(new TypeReference(literalTypeDescriptor))
@@ -2124,7 +2124,7 @@ public class CompilationUnitBuilder {
               .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
               .setName("$get")
               .setParameterTypeDescriptors(
-                  TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt)
+                  TypeDescriptors.get().nativeFunction, TypeDescriptors.get().primitiveInt)
               .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
 

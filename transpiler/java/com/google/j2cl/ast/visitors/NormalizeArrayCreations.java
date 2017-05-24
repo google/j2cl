@@ -62,7 +62,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           MethodDescriptor.newBuilder()
               .setConstructor(true)
               .setJsInfo(JsInfo.RAW_CTOR)
-              .setEnclosingTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
+              .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
               .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
               .build();
 
