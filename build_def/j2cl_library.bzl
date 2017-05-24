@@ -136,8 +136,6 @@ def j2cl_library(name,
     java_exports += [export + "_java_library"]
     js_exports += [export]
 
-  # Only run the @GwtIncompatible stripper if the annotation dep is listed.
-  strip_gwtincompatible = "//java/com/google/common/annotations:annotations-j2cl" in deps
   gwt_incompatible_stripped = base_name + "_gwtincompatible_stripped"
   gwt_incompatible_stripper(
       name=gwt_incompatible_stripped,
@@ -163,7 +161,7 @@ def j2cl_library(name,
 
   native.java_library(
       name = base_name + "_java_library",
-      srcs = [gwt_incompatible_stripped] if strip_gwtincompatible else srcs,
+      srcs = [gwt_incompatible_stripped],
       tags = internal_tags,
       visibility = visibility,
       **java_library_kwargs
