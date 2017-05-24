@@ -101,7 +101,7 @@ def _impl(ctx):
       executable=ctx.executable.transpiler,
       arguments=["@" + compiler_args_file.path],
       env=dict(LANG="en_US.UTF-8"),
-      execution_requirements={"supports-workers": "1"},
+      execution_requirements={"supports-workers": "1" if ctx.attr.supports_workers_internal else "0"},
       mnemonic = "J2clTranspile",
   )
 
@@ -116,6 +116,7 @@ Args:
   srcs: Source files (.java or .srcjar) to compile.
   deps: Java jar files for reference resolution.
   native_srcs_zips: JS zip files providing Foo.native.js implementations.
+  supports_workers_internal: A private option that allows workers to be disabled.
 """
 # Private Args:
 #   transpiler: J2CL compiler jar to use.
@@ -137,6 +138,7 @@ j2cl_transpile = rule(
             allow_files=True,
             default=Label("//internal_do_not_use:J2clTranspiler"),
         ),
+        "supports_workers_internal": attr.bool(default=True),
     },
     implementation=_impl,
     # Declare each output artifact by name, otherwise they can not be

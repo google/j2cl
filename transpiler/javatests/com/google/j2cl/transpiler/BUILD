@@ -49,6 +49,9 @@ j2cl_transpile(
     name = "jre_transpiled_twice",
     srcs = ["//jre/java:jre_java_files"],
     native_srcs_zips = ["//jre/java:jre_native_zips"],
+    # Turn off workers for this test since we are explicitly testing the compile and don't want the
+    # transpile to run in a worker. See: b/62060418.
+    supports_workers_internal = 0,
     transpiler = ":RerunningJ2clTranspiler",
     deps = [
         "//third_party/java/gwt:gwt-javaemul-internal-annotations",
