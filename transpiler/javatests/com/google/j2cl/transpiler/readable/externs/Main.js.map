@@ -47,11 +47,11 @@
   }] "com.google.j2cl.transpiler.readable.externs.Main.testFooOverlay"
 [fooOverlay] => [fooOverlay] "fooOverlay"
 [UNKNOWN] => [Main.$clinit();]
-[return fooOverlay.getFoo().equals("Hello");] => [return java_lang_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");]
+[return fooOverlay.getFoo().equals("Hello");] => [return java_lang_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");] "com.google.j2cl.transpiler.readable.externs.Main.testFooOverlay"
 [private static native void useDirectlyAsFoo(Object fooOverlay);] => [/**
    * @param {*} fooOverlay
 ...   */
-  // native static m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(fooOverlay) ] "com.google.j2cl.transpiler.readable.externs.Main.useDirectlyAsFoo"
+  // native static m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(fooOverlay)] "com.google.j2cl.transpiler.readable.externs.Main.useDirectlyAsFoo"
 [fooOverlay] => [fooOverlay] "fooOverlay"
 [public static void main(String... args) {
     testFooOverlay((FooOverlay) (Object) new FooImpl());
@@ -62,6 +62,6 @@
   }] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
-[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(/**@type {Foo} */ ($Casts.$to($Casts.$to(FooImpl.$create__(), java_lang_Object), FooOverlay$$Overlay)));]
-[useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(FooImpl.$create__());]
+[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(/**@type {Foo} */ ($Casts.$to($Casts.$to(FooImpl.$create__(), java_lang_Object), FooOverlay$$Overlay)));] "com.google.j2cl.transpiler.readable.externs.Main.main"
+[useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(FooImpl.$create__());] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [UNKNOWN] => [java_lang_Object.$clinit();]

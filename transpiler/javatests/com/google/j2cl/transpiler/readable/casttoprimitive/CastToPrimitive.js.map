@@ -40,69 +40,69 @@
    * @return {void}
 ...    d = d;
   }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
-[byte b = 1;] => [let b = 1;]
+[byte b = 1;] => [let b = 1;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [b] => [b] "b"
-[char c = 1;] => [let c = 1 /* "\u0001" */;]
+[char c = 1;] => [let c = 1 /* "\u0001" */;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [c] => [c] "c"
-[short s = 1;] => [let s = 1;]
+[short s = 1;] => [let s = 1;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [s] => [s] "s"
-[int i = 1;] => [let i = 1;]
+[int i = 1;] => [let i = 1;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [i] => [i] "i"
-[long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;]
+[long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [l] => [l] "l"
-[float f = 1.1f;] => [let f = 1.100000023841858;]
+[float f = 1.1f;] => [let f = 1.100000023841858;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [f] => [f] "f"
-[double d = 1.1;] => [let d = 1.1;]
+[double d = 1.1;] => [let d = 1.1;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [d] => [d] "d"
-[b = (byte) b;] => [b = b;]
-[c = (char) b;] => [c = $Primitives.$widenByteToChar(b);]
-[s = (short) b;] => [s = b;]
-[i = (int) b;] => [i = b;]
-[l = (long) b;] => [l = $Primitives.$widenByteToLong(b);]
-[f = (float) b;] => [f = b;]
-[d = (double) b;] => [d = b;]
-[b = (byte) c;] => [b = $Primitives.$narrowCharToByte(c);]
-[c = (char) c;] => [c = c;]
-[s = (short) c;] => [s = $Primitives.$narrowCharToShort(c);]
-[i = (int) c;] => [i = c;]
-[l = (long) c;] => [l = $Primitives.$widenCharToLong(c);]
-[f = (float) c;] => [f = c;]
-[d = (double) c;] => [d = c;]
-[b = (byte) s;] => [b = $Primitives.$narrowShortToByte(s);]
-[c = (char) s;] => [c = $Primitives.$narrowShortToChar(s);]
-[s = (short) s;] => [s = s;]
-[i = (int) s;] => [i = s;]
-[l = (long) s;] => [l = $Primitives.$widenShortToLong(s);]
-[f = (float) s;] => [f = s;]
-[d = (double) s;] => [d = s;]
-[b = (byte) i;] => [b = $Primitives.$narrowIntToByte(i);]
-[c = (char) i;] => [c = $Primitives.$narrowIntToChar(i);]
-[s = (short) i;] => [s = $Primitives.$narrowIntToShort(i);]
-[i = (int) i;] => [i = i;]
-[l = (long) i;] => [l = $Primitives.$widenIntToLong(i);]
-[f = (float) i;] => [f = i;]
-[d = (double) i;] => [d = i;]
-[b = (byte) l;] => [b = $Primitives.$narrowLongToByte(l);]
-[c = (char) l;] => [c = $Primitives.$narrowLongToChar(l);]
-[s = (short) l;] => [s = $Primitives.$narrowLongToShort(l);]
-[i = (int) l;] => [i = $Primitives.$narrowLongToInt(l);]
-[l = (long) l;] => [l = l;]
-[f = (float) l;] => [f = $Primitives.$widenLongToFloat(l);]
-[d = (double) l;] => [d = $Primitives.$widenLongToDouble(l);]
-[b = (byte) f;] => [b = $Primitives.$narrowFloatToByte(f);]
-[c = (char) f;] => [c = $Primitives.$narrowFloatToChar(f);]
-[s = (short) f;] => [s = $Primitives.$narrowFloatToShort(f);]
-[i = (int) f;] => [i = $Primitives.$narrowFloatToInt(f);]
-[l = (long) f;] => [l = $Primitives.$narrowFloatToLong(f);]
-[f = (float) f;] => [f = f;]
-[d = (double) f;] => [d = f;]
-[b = (byte) d;] => [b = $Primitives.$narrowDoubleToByte(d);]
-[c = (char) d;] => [c = $Primitives.$narrowDoubleToChar(d);]
-[s = (short) d;] => [s = $Primitives.$narrowDoubleToShort(d);]
-[i = (int) d;] => [i = $Primitives.$narrowDoubleToInt(d);]
-[l = (long) d;] => [l = $Primitives.$narrowDoubleToLong(d);]
-[f = (float) d;] => [f = d;]
-[d = (double) d;] => [d = d;]
+[b = (byte) b;] => [b = b;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) b;] => [c = $Primitives.$widenByteToChar(b);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) b;] => [s = b;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) b;] => [i = b;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) b;] => [l = $Primitives.$widenByteToLong(b);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) b;] => [f = b;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) b;] => [d = b;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) c;] => [b = $Primitives.$narrowCharToByte(c);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) c;] => [c = c;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) c;] => [s = $Primitives.$narrowCharToShort(c);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) c;] => [i = c;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) c;] => [l = $Primitives.$widenCharToLong(c);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) c;] => [f = c;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) c;] => [d = c;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) s;] => [b = $Primitives.$narrowShortToByte(s);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) s;] => [c = $Primitives.$narrowShortToChar(s);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) s;] => [s = s;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) s;] => [i = s;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) s;] => [l = $Primitives.$widenShortToLong(s);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) s;] => [f = s;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) s;] => [d = s;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) i;] => [b = $Primitives.$narrowIntToByte(i);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) i;] => [c = $Primitives.$narrowIntToChar(i);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) i;] => [s = $Primitives.$narrowIntToShort(i);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) i;] => [i = i;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) i;] => [l = $Primitives.$widenIntToLong(i);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) i;] => [f = i;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) i;] => [d = i;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) l;] => [b = $Primitives.$narrowLongToByte(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) l;] => [c = $Primitives.$narrowLongToChar(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) l;] => [s = $Primitives.$narrowLongToShort(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) l;] => [i = $Primitives.$narrowLongToInt(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) l;] => [l = l;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) l;] => [f = $Primitives.$widenLongToFloat(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) l;] => [d = $Primitives.$widenLongToDouble(l);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) f;] => [b = $Primitives.$narrowFloatToByte(f);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) f;] => [c = $Primitives.$narrowFloatToChar(f);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) f;] => [s = $Primitives.$narrowFloatToShort(f);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) f;] => [i = $Primitives.$narrowFloatToInt(f);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) f;] => [l = $Primitives.$narrowFloatToLong(f);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) f;] => [f = f;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) f;] => [d = f;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[b = (byte) d;] => [b = $Primitives.$narrowDoubleToByte(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[c = (char) d;] => [c = $Primitives.$narrowDoubleToChar(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[s = (short) d;] => [s = $Primitives.$narrowDoubleToShort(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[i = (int) d;] => [i = $Primitives.$narrowDoubleToInt(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[l = (long) d;] => [l = $Primitives.$narrowDoubleToLong(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[f = (float) d;] => [f = d;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
+[d = (double) d;] => [d = d;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [public void testReferenceToPrimitive() {
     Object o = new Object();
 ...    double d = (double) o;
@@ -110,23 +110,23 @@
    * @return {void}
 ...    let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));
   }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
-[Object o = new Object();] => [let o = java_lang_Object.$create__();]
+[Object o = new Object();] => [let o = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [o] => [o] "o"
-[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.$to(o, Boolean)));]
+[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.$to(o, Boolean)));] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [bool] => [bool] "bool"
-[byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.$to(o, Byte)).m_byteValue__();]
+[byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.$to(o, Byte)).m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [b] => [b] "b"
-[char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.$to(o, Character)).m_charValue__();]
+[char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.$to(o, Character)).m_charValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [c] => [c] "c"
-[short s = (short) o;] => [let s = /**@type {Short} */ ($Casts.$to(o, Short)).m_shortValue__();]
+[short s = (short) o;] => [let s = /**@type {Short} */ ($Casts.$to(o, Short)).m_shortValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [s] => [s] "s"
-[int i = (int) o;] => [let i = /**@type {Integer} */ ($Casts.$to(o, Integer)).m_intValue__();]
+[int i = (int) o;] => [let i = /**@type {Integer} */ ($Casts.$to(o, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [i] => [i] "i"
-[long l = (long) o;] => [let l = /**@type {Long} */ ($Casts.$to(o, Long)).m_longValue__();]
+[long l = (long) o;] => [let l = /**@type {Long} */ ($Casts.$to(o, Long)).m_longValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [l] => [l] "l"
-[float f = (float) o;] => [let f = /**@type {Float} */ ($Casts.$to(o, Float)).m_floatValue__();]
+[float f = (float) o;] => [let f = /**@type {Float} */ ($Casts.$to(o, Float)).m_floatValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [f] => [f] "f"
-[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));]
+[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [d] => [d] "d"
 [public void testUnboxAndWiden() {
     Byte boxedByte = Byte.valueOf((byte) 0);
@@ -135,16 +135,16 @@
    * @return {void}
 ...    let d = boxedByte.m_byteValue__();
   }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
-[Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);]
+[Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [boxedByte] => [boxedByte] "boxedByte"
-[short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__();]
+[short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [s] => [s] "s"
-[int i = (int) boxedByte;] => [let i = boxedByte.m_byteValue__();]
+[int i = (int) boxedByte;] => [let i = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [i] => [i] "i"
-[long l = (long) boxedByte;] => [let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());]
+[long l = (long) boxedByte;] => [let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [l] => [l] "l"
-[float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__();]
+[float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [f] => [f] "f"
-[double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();]
+[double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [d] => [d] "d"
 [UNKNOWN] => [java_lang_Object.$clinit();]

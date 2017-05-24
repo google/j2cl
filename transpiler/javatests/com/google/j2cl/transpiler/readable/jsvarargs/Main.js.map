@@ -35,7 +35,7 @@
 [f] => [f] "f"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main();]
-[this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;]
+[this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int"
 [@JsMethod
   public static int f1(int multiplier, int... numbers) {
     return numbers.length + numbers[0] + multiplier;
@@ -47,7 +47,7 @@
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
-[return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier;]
+[return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [@JsMethod
   public static int f2(int... numbers) {
     return numbers.length + numbers[0];
@@ -58,7 +58,7 @@
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
-[return numbers.length + numbers[0];] => [return numbers.length + numbers[0];]
+[return numbers.length + numbers[0];] => [return numbers.length + numbers[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [@JsMethod
   public int f3(int m, int... numbers) {
     return this.field + m + numbers[1];
@@ -69,7 +69,7 @@
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
-[return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];]
+[return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [@JsMethod
   public int f4(int... numbers) {
     return this.field + numbers[1];
@@ -79,7 +79,7 @@
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
-[return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];]
+[return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [@JsMethod
   public static <T> T generics(T... elements) {
     return elements[0];
@@ -89,7 +89,7 @@
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
-[return elements[0];] => [return elements[0];]
+[return elements[0];] => [return elements[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [@JsMethod
   public static Main parameterizedType(List<Main>... elements) {
     return elements[0].get(0);
@@ -100,7 +100,7 @@
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [$Arrays.$stampType(elements, List, 1);]
-[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));]
+[return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [public void testStaticMethodNotFirst() {
     // multiple arguments.
 ...    Main.f1(1, ints);
@@ -108,18 +108,18 @@
    * @return {void}
 ...    Main.f1(1, ...$Arrays.$checkNotNull(ints));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
-[f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
-[Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
-[f1(1);] => [Main.f1(1);]
-[Main.f1(1);] => [Main.f1(1);]
-[f1(1, new int[] {1, 2});] => [Main.f1(1, 1, 2);]
-[Main.f1(1, new int[] {1, 2});] => [Main.f1(1, 1, 2);]
-[f1(1, new int[] {});] => [Main.f1(1);]
-[Main.f1(1, new int[] {});] => [Main.f1(1);]
-[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[f1(1);] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1);] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[f1(1, new int[] {1, 2});] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1, new int[] {1, 2});] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[f1(1, new int[] {});] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1, new int[] {});] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [ints] => [ints] "ints"
-[f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
-[Main.f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));]
+[f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [public void testStaticMethodFirst() {
     // multiple arguments.
 ...    Main.<Integer>generics(integers);
@@ -127,29 +127,29 @@
    * @return {void}
 ...    Main.generics(...$Arrays.$checkNotNull(integers));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
-[f2(1, 2);] => [Main.f2(1, 2);]
-[generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));]
-[Main.f2(1, 2);] => [Main.f2(1, 2);]
-[Main.generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));]
-[f2();] => [Main.f2();]
-[generics();] => [Main.generics();]
-[Main.f2();] => [Main.f2();]
-[Main.generics();] => [Main.generics();]
-[Main.<Integer>generics();] => [Main.generics();]
-[f2(new int[] {1, 2});] => [Main.f2(1, 2);]
-[Main.f2(new int[] {1, 2});] => [Main.f2(1, 2);]
-[Main.generics(new int[] {1, 2});] => [Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int)));]
-[Main.<Integer>generics(new Integer[] {1, 2});] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));]
-[f2(new int[] {});] => [Main.f2();]
-[Main.f2(new int[] {});] => [Main.f2();]
-[Main.generics(new int[] {});] => [Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([], $int)));]
-[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[f2();] => [Main.f2();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[generics();] => [Main.generics();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.f2();] => [Main.f2();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.generics();] => [Main.generics();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.<Integer>generics();] => [Main.generics();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[f2(new int[] {1, 2});] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.f2(new int[] {1, 2});] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.generics(new int[] {1, 2});] => [Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int)));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.<Integer>generics(new Integer[] {1, 2});] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[f2(new int[] {});] => [Main.f2();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.f2(new int[] {});] => [Main.f2();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.generics(new int[] {});] => [Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([], $int)));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [ints] => [ints] "ints"
-[Integer[] integers = new Integer[] {1, 2};] => [let integers = /**@type {!Array<Integer>} */ ($Arrays.$init([Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));]
+[Integer[] integers = new Integer[] {1, 2};] => [let integers = /**@type {!Array<Integer>} */ ($Arrays.$init([Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [integers] => [integers] "integers"
-[f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
-[Main.f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));]
-[Main.<Integer>generics(integers);] => [Main.generics(...$Arrays.$checkNotNull(integers));]
+[f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.f2(ints);] => [Main.f2(...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[Main.<Integer>generics(integers);] => [Main.generics(...$Arrays.$checkNotNull(integers));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [public void testInstanceMethodNotFirst() {
     Main m = new Main(1);
 ...    m.f3(1, ints);
@@ -157,15 +157,15 @@
    * @return {void}
 ...    m.f3(1, ...$Arrays.$checkNotNull(ints));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
-[Main m = new Main(1);] => [let m = Main.$create__int(1);]
+[Main m = new Main(1);] => [let m = Main.$create__int(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [m] => [m] "m"
-[m.f3(1, 1, 2);] => [m.f3(1, 1, 2);]
-[m.f3(1);] => [m.f3(1);]
-[m.f3(1, new int[] {1, 2});] => [m.f3(1, 1, 2);]
-[m.f3(1, new int[] {});] => [m.f3(1);]
-[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[m.f3(1, 1, 2);] => [m.f3(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
+[m.f3(1);] => [m.f3(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
+[m.f3(1, new int[] {1, 2});] => [m.f3(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
+[m.f3(1, new int[] {});] => [m.f3(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
+[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [ints] => [ints] "ints"
-[m.f3(1, ints);] => [m.f3(1, ...$Arrays.$checkNotNull(ints));]
+[m.f3(1, ints);] => [m.f3(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [public void testInstanceMethodFirst() {
     Main m = new Main(1);
 ...    m.f4(ints);
@@ -173,15 +173,15 @@
    * @return {void}
 ...    m.f4(...$Arrays.$checkNotNull(ints));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
-[Main m = new Main(1);] => [let m = Main.$create__int(1);]
+[Main m = new Main(1);] => [let m = Main.$create__int(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [m] => [m] "m"
-[m.f4(1, 2);] => [m.f4(1, 2);]
-[m.f4();] => [m.f4();]
-[m.f4(new int[] {1, 2});] => [m.f4(1, 2);]
-[m.f4(new int[] {});] => [m.f4();]
-[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[m.f4(1, 2);] => [m.f4(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
+[m.f4();] => [m.f4();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
+[m.f4(new int[] {1, 2});] => [m.f4(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
+[m.f4(new int[] {});] => [m.f4();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
+[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [ints] => [ints] "ints"
-[m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));]
+[m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [public void testJsFunction() {
     AFunction a = new AFunction();
 ...    a.f1(0, os);
@@ -189,19 +189,19 @@
    * @return {void}
 ...    a(0, ...$Arrays.$checkNotNull(os));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
-[AFunction a = new AFunction();] => [let a = AFunction.$create__();]
+[AFunction a = new AFunction();] => [let a = AFunction.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [a] => [a] "a"
-[Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();]
+[Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [o1] => [o1] "o1"
-[Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();]
+[Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [o2] => [o2] "o2"
-[a.f1(0, o1, o2);] => [a(0, o1, o2);]
-[a.f1(0);] => [a(0);]
-[a.f1(0, new Object[] {o1, o2});] => [a(0, o1, o2);]
-[a.f1(0, new Object[] {});] => [a(0);]
-[Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];]
+[a.f1(0, o1, o2);] => [a(0, o1, o2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[a.f1(0);] => [a(0);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[a.f1(0, new Object[] {o1, o2});] => [a(0, o1, o2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[a.f1(0, new Object[] {});] => [a(0);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [os] => [os] "os"
-[a.f1(0, os);] => [a(0, ...$Arrays.$checkNotNull(os));]
+[a.f1(0, os);] => [a(0, ...$Arrays.$checkNotNull(os));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [public void testSideEffect() {
     int[] ints = new int[] {1, 2};
     new Main(1).f3(1, ints);
@@ -209,7 +209,7 @@
    * @return {void}
 ...    Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));
   }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
-[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
+[int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
 [ints] => [ints] "ints"
-[new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));]
+[new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
 [UNKNOWN] => [java_lang_Object.$clinit();]

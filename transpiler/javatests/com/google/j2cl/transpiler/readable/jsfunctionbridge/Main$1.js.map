@@ -70,7 +70,7 @@
   }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.apply"
 [s] => [s] "s"
 [UNKNOWN] => [$1.$clinit();]
-[return s + field;] => [return "" + s + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1;]
+[return s + field;] => [return "" + s + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1;] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.apply"
 [public String fun() {
             return field + apply("a");
           }] => [/**
@@ -78,6 +78,6 @@
 ...    return "" + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 + $thisArg("a");
   }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.fun"
 [UNKNOWN] => [$1.$clinit();]
-[return field + apply("a");] => [return "" + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 + $thisArg("a");]
+[return field + apply("a");] => [return "" + $thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 + $thisArg("a");] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.1.fun"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public String field = "abc";] => [this.f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_1 = "abc";]

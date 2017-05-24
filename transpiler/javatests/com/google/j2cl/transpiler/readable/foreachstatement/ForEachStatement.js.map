@@ -46,17 +46,17 @@
     }] => [for (let $iterator = /**@type {Iterator<Throwable>} */ (iterable.m_iterator__()); $iterator.m_hasNext__(); ) {
       let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));
       $Objects.m_toString__java_lang_Object(t);
-    }]
+    }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [UNKNOWN] => [let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));]
 [t] => [t] "t"
-[t.toString();] => [$Objects.m_toString__java_lang_Object(t);]
+[t.toString();] => [$Objects.m_toString__java_lang_Object(t);] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [for (Throwable t : new Throwable[10]) {
       t.toString();
     }] => [for (let $array = /**@type {!Array<Throwable>} */ ($Arrays.$create([10], Throwable)), $index = 0; $index < $array.length; $index++) {
       let t$1$ = $array[$index];
       $Objects.m_toString__java_lang_Object(t$1$);
-    }]
+    }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [UNKNOWN] => [let t$1$ = $array[$index];]
 [t] => [t$1$] "t"
-[t.toString();] => [$Objects.m_toString__java_lang_Object(t$1$);]
+[t.toString();] => [$Objects.m_toString__java_lang_Object(t$1$);] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

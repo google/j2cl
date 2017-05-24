@@ -40,7 +40,7 @@
 ...    $CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
   }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.test"
 [cs] => [cs] "cs"
-[cs.charAt(0);] => [$CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);]
+[cs.charAt(0);] => [$CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.test"
 [public void main() {
     String s = "s";
     test(s);
@@ -48,7 +48,7 @@
    * @return {void}
 ...    this.m_test__java_lang_CharSequence(s);
   }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
-[String s = "s";] => [let s = "s";]
+[String s = "s";] => [let s = "s";] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
 [s] => [s] "s"
-[test(s);] => [this.m_test__java_lang_CharSequence(s);]
+[test(s);] => [this.m_test__java_lang_CharSequence(s);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
 [UNKNOWN] => [java_lang_Object.$clinit();]

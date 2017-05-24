@@ -41,7 +41,7 @@
   }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.test"
 [x] => [x] "x"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();]
-[return Number.fun(x);] => [return Number.isInteger(x);]
+[return Number.fun(x);] => [return Number.isInteger(x);] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.test"
 [public static String fromCharCode(int[] array) {
     return getFromCharCodeFunction().apply(null, array);
   }] => [/**
@@ -50,7 +50,7 @@
   }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.fromCharCode"
 [array] => [array] "array"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();]
-[return getFromCharCodeFunction().apply(null, array);] => [return /**@type {?string} */ ($Casts.$to(/**@type {Function<?string>} */ (String.fromCharCode).apply(null, array), java_lang_String));]
+[return getFromCharCodeFunction().apply(null, array);] => [return /**@type {?string} */ ($Casts.$to(/**@type {Function<?string>} */ (String.fromCharCode).apply(null, array), java_lang_String));] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.fromCharCode"
 [public MyLiteralType testJsDocForLiteralType(MyLiteralType a) {
     return a;
   }] => [/**
@@ -58,5 +58,5 @@
 ...    return a;
   }] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.testJsDocForLiteralType"
 [a] => [a] "a"
-[return a;] => [return a;]
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.importglobaljstypes.Number.testJsDocForLiteralType"
 [UNKNOWN] => [java_lang_Object.$clinit();]

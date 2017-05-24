@@ -41,7 +41,7 @@
   }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.inferGeneric"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
-[return new CastGenericReturnType<>();] => [return /**@type {!CastGenericReturnType<*>} */ (CastGenericReturnType.$create__());]
+[return new CastGenericReturnType<>();] => [return /**@type {!CastGenericReturnType<*>} */ (CastGenericReturnType.$create__());] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.inferGeneric"
 [public static CastGenericReturnType<CastGenericReturnType<String>> tightenType(
       CastGenericReturnType<String> foo) {
 ...    return null;
@@ -53,13 +53,12 @@
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [if (foo != null) {
       // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
-      // ?Foo<!Foo<?string>>, which does not match the return type, ?Foo<?Foo<?string>>.
-      return inferGeneric(foo);
+...      return inferGeneric(foo);
     }] => [if (!$Equality.$same(foo, null)) {
       return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));
-    }]
-[return inferGeneric(foo);] => [return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));]
-[return null;] => [return null;]
+    }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
+[return inferGeneric(foo);] => [return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
 [public static <V> ArrayList<V> newArrayList(V foo) {
     return new ArrayList<>();
   }] => [/**
@@ -68,7 +67,7 @@
   }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.newArrayList"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
-[return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());]
+[return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.newArrayList"
 [public static void acceptsArrayListOfSuper(ArrayList<Object> foo) {
     // empty
   }] => [/**
@@ -85,7 +84,7 @@
 ...    CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);
   }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.main"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
-[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (CastGenericReturnType.m_newArrayList__java_lang_Object("foo"));]
+[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (CastGenericReturnType.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.main"
 [list] => [list] "list"
-[acceptsArrayListOfSuper(list);] => [CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);]
+[acceptsArrayListOfSuper(list);] => [CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.main"
 [UNKNOWN] => [java_lang_Object.$clinit();]

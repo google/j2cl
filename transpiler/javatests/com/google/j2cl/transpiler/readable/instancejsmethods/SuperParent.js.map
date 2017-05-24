@@ -41,7 +41,7 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.fun"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b + 111;] => [return a + b + 111;]
+[return a + b + 111;] => [return a + b + 111;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.fun"
 [public int bar(int a, int b) {
     return a * b + 222;
   }] => [/**
@@ -50,5 +50,5 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.bar"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a * b + 222;] => [return a * b + 222;]
+[return a * b + 222;] => [return a * b + 222;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.bar"
 [UNKNOWN] => [java_lang_Object.$clinit();]

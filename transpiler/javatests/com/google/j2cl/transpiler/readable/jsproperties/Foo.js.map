@@ -41,7 +41,7 @@
 ...    return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
 [UNKNOWN] => [Foo.$clinit();]
-[return f + 1;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;]
+[return f + 1;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
 [@JsProperty
   public static void setA(int x) {
     f = x + 2;
@@ -51,7 +51,7 @@
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
 [x] => [x] "x"
 [UNKNOWN] => [Foo.$clinit();]
-[f = x + 2;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;]
+[f = x + 2;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
 [@JsProperty(name = "abc")
   public static int getB() {
     return f + 3;
@@ -60,7 +60,7 @@
 ...    return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
 [UNKNOWN] => [Foo.$clinit();]
-[return f + 3;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;]
+[return f + 3;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
 [@JsProperty(name = "abc")
   public static void setB(int x) {
     f = x + 4;
@@ -70,5 +70,5 @@
   }] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
 [x] => [x] "x"
 [UNKNOWN] => [Foo.$clinit();]
-[f = x + 4;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;]
+[f = x + 4;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
 [UNKNOWN] => [java_lang_Object.$clinit();]

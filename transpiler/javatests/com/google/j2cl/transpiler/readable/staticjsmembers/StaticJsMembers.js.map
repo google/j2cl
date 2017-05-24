@@ -54,23 +54,23 @@
    * @return {void}
 ...    new window.Object();
   }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
-[StaticJsMembers.f1(1);] => [StaticJsMembers.fun(1);]
-[f1(1);] => [StaticJsMembers.fun(1);]
-[StaticJsMembers.f2(1);] => [StaticJsMembers.f2(1);]
-[f2(1);] => [StaticJsMembers.f2(1);]
-[StaticJsMembers.f3(1.1);] => [Math.floor(1.1);]
-[f3(1.1);] => [Math.floor(1.1);]
-[StaticJsMembers.f4(1.1);] => [isFinite(1.1);]
-[f4(1.1);] => [isFinite(1.1);]
-[StaticJsMembers.f5();] => [Bar.baz();]
-[f5();] => [Bar.baz();]
-[int n = field1;] => [let n = StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;]
+[StaticJsMembers.f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[StaticJsMembers.f2(1);] => [StaticJsMembers.f2(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[f2(1);] => [StaticJsMembers.f2(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[StaticJsMembers.f3(1.1);] => [Math.floor(1.1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[f3(1.1);] => [Math.floor(1.1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[StaticJsMembers.f4(1.1);] => [isFinite(1.1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[f4(1.1);] => [isFinite(1.1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[StaticJsMembers.f5();] => [Bar.baz();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[f5();] => [Bar.baz();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[int n = field1;] => [let n = StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [n] => [n] "n"
-[n = field2;] => [n = StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;]
-[n = Native.field3;] => [n = Math.PI;]
-[n = Native.field4;] => [n = top;]
-[n = Native.field5;] => [n = Bar.field;]
-[n = Native.field6;] => [n = window.top;]
-[new Native();] => [new Object();]
-[new Extern();] => [new window.Object();]
+[n = field2;] => [n = StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[n = Native.field3;] => [n = Math.PI;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[n = Native.field4;] => [n = top;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[n = Native.field5;] => [n = Bar.field;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[n = Native.field6;] => [n = window.top;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[new Native();] => [new Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[new Extern();] => [new window.Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -59,17 +59,16 @@
 [t] => [t] "t"
 [new GenericMethod<T>() { // inherit method T
       public void fun2(T t) {} // inherit method T
-
-      public <T> void fun2(T t) {} // redefine T
-    };] => [/**@type {!$1<Error, C_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));]
-[new LocalClass<T>();] => [/**@type {!$1LocalClass<Error, Error, C_T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));]
+...      public <T> void fun2(T t) {} // redefine T
+    };] => [/**@type {!$1<Error, C_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
+[new LocalClass<T>();] => [/**@type {!$1LocalClass<Error, Error, C_T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [public <T> GenericMethod<T> bar() {
     return null;
   }] => [/**
    * @template M_T
 ...    return null;
   }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.bar"
-[return null;] => [return null;]
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.bar"
 [public <T> T[] fun(T[] array) { // generic array type
     return array;
   }] => [/**
@@ -77,14 +76,14 @@
 ...    return array;
   }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [array] => [array] "array"
-[return array;] => [return array;]
+[return array;] => [return array;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [public <T> T checked() {
     return null;
   }] => [/**
    * @template M_T
 ...    return null;
   }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.checked"
-[return null;] => [return null;]
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.checked"
 [@UncheckedCast
   public <T> T unchecked() {
     return null;
@@ -92,7 +91,7 @@
    * @template M_T
 ...    return null;
   }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.unchecked"
-[return null;] => [return null;]
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.unchecked"
 [public void test() {
     GenericMethod<Number> g = new GenericMethod<>();
 ...    s = unchecked();
@@ -100,15 +99,15 @@
    * @return {void}
 ...    s = /**@type {?string} */ (this.m_unchecked__());
   }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
-[GenericMethod<Number> g = new GenericMethod<>();] => [let g = /**@type {!GenericMethod<(Number|?number)>} */ (GenericMethod.$create__());]
+[GenericMethod<Number> g = new GenericMethod<>();] => [let g = /**@type {!GenericMethod<(Number|?number)>} */ (GenericMethod.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [g] => [g] "g"
-[g.foo(g, g);] => [g.m_foo__java_lang_Object__java_lang_Object(g, g);]
-[g.<Error, Exception>foo(new Error(), new Exception());] => [g.m_foo__java_lang_Object__java_lang_Object(Error.$create__(), Exception.$create__());]
-[g.fun(new Object());] => [g.m_fun__java_lang_Object(java_lang_Object.$create__());]
-[g.fun(new Exception());] => [g.m_fun__java_lang_Exception(Exception.$create__());]
-[g.fun(new Error());] => [g.m_fun__java_lang_Error(Error.$create__());]
-[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["asdf"], java_lang_String)));]
-[String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));]
+[g.foo(g, g);] => [g.m_foo__java_lang_Object__java_lang_Object(g, g);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.<Error, Exception>foo(new Error(), new Exception());] => [g.m_foo__java_lang_Object__java_lang_Object(Error.$create__(), Exception.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new Object());] => [g.m_fun__java_lang_Object(java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new Exception());] => [g.m_fun__java_lang_Exception(Exception.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new Error());] => [g.m_fun__java_lang_Error(Error.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["asdf"], java_lang_String)));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [s] => [s] "s"
-[s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());]
+[s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

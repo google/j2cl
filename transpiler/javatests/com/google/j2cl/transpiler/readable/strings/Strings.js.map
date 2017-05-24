@@ -46,33 +46,33 @@
    * @return {void}
 ...    (StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "o";
   }] "com.google.j2cl.transpiler.readable.strings.Strings.test"
-[String s1 = null;] => [let s1 = null;]
+[String s1 = null;] => [let s1 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s1] => [s1] "s1"
-[String s2 = null;] => [let s2 = null;]
+[String s2 = null;] => [let s2 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s2] => [s2] "s2"
-[String s3 = s1 + s2;] => [let s3 = "" + s1 + s2;]
+[String s3 = s1 + s2;] => [let s3 = "" + s1 + s2;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s3] => [s3] "s3"
-[s2 += s2;] => [s2 += "" + s2;]
-[s1 += "a";] => [s1 += "a";]
-[s3 = s1 + s1 + s2 + null + "a";] => [s3 = "" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null) + "a";]
-[s3 = "a" + s1 + s1 + s2 + null;] => [s3 = "a" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);]
-[String s4;] => [let /** ?string */ s4;]
+[s2 += s2;] => [s2 += "" + s2;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s1 += "a";] => [s1 += "a";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s3 = s1 + s1 + s2 + null + "a";] => [s3 = "" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null) + "a";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s3 = "a" + s1 + s1 + s2 + null;] => [s3 = "a" + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[String s4;] => [let /** ?string */ s4;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s4] => [s4] "s4"
-[char c1 = 'F';] => [let c1 = 70 /* 'F' */;]
+[char c1 = 'F';] => [let c1 = 70 /* 'F' */;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [c1] => [c1] "c1"
-[char c2 = 'o';] => [let c2 = 111 /* 'o' */;]
+[char c2 = 'o';] => [let c2 = 111 /* 'o' */;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [c2] => [c2] "c2"
-[s4 = c1 + c2 + "o";] => [s4 = java_lang_String.m_valueOf__char(c1) + java_lang_String.m_valueOf__char(c2) + "o";]
-[s4 += 1L + "";] => [s4 += $Long.fromBits(1, 0) /* 1 */ + "";]
-[s4 += 1L;] => [s4 += $Long.fromBits(1, 0) /* 1 */;]
-[s4 += 'C';] => [s4 += java_lang_String.m_valueOf__char(67 /* 'C' */);]
-[s4 += 1;] => [s4 += 1;]
-[s4 += 1d;] => [s4 += 1.0;]
-[s4 += 1f;] => [s4 += 1.0;]
-[s4 += (short) 1;] => [s4 += 1;]
-[(new StringHolder()).s += s4;] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "" + s4;]
-[(new StringHolder()).s += c1;] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += java_lang_String.m_valueOf__char(c1);]
-[(new StringHolder()).s += "o";] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "o";]
+[s4 = c1 + c2 + "o";] => [s4 = java_lang_String.m_valueOf__char(c1) + java_lang_String.m_valueOf__char(c2) + "o";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1L + "";] => [s4 += $Long.fromBits(1, 0) /* 1 */ + "";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1L;] => [s4 += $Long.fromBits(1, 0) /* 1 */;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 'C';] => [s4 += java_lang_String.m_valueOf__char(67 /* 'C' */);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1;] => [s4 += 1;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1d;] => [s4 += 1.0;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1f;] => [s4 += 1.0;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += (short) 1;] => [s4 += 1;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[(new StringHolder()).s += s4;] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "" + s4;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[(new StringHolder()).s += c1;] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += java_lang_String.m_valueOf__char(c1);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[(new StringHolder()).s += "o";] => [(StringHolder.$create__()).f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder += "o";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [private String someString = "This is a string literal";] => [this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ = "This is a string literal";]
 [private String nonBmpChar = "𐍆";] => [this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ = "𐍆";]

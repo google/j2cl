@@ -55,7 +55,7 @@
 ...    return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
   }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.foo"
 [a] => [a] "a"
-[return a + this.bar() + this.field;] => [return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;]
+[return a + this.bar() + this.field;] => [return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.foo"
 [public int bar() {
     return 0;
   }] => [/**
@@ -63,7 +63,7 @@
 ...    return 0;
   }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
 [UNKNOWN] => [MyJsFunctionImpl.$clinit();]
-[return 0;] => [return 0;]
+[return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
 [public int fun() {
     return bar() + foo(1);
   }] => [/**
@@ -71,5 +71,5 @@
 ...    return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);
   }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
 [UNKNOWN] => [MyJsFunctionImpl.$clinit();]
-[return bar() + foo(1);] => [return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);]
+[return bar() + foo(1);] => [return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
 [UNKNOWN] => [java_lang_Object.$clinit();]

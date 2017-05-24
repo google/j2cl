@@ -40,7 +40,7 @@
    * @override
 ...    super.m_parentSimplest__();
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentSimplest"
-[super.parentSimplest();] => [super.m_parentSimplest__();]
+[super.parentSimplest();] => [super.m_parentSimplest__();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentSimplest"
 [@Override
   public void parentWithParams(int foo) {
     super.parentWithParams(foo);
@@ -49,7 +49,7 @@
 ...    super.m_parentWithParams__int(foo);
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentWithParams"
 [foo] => [foo] "foo"
-[super.parentWithParams(foo);] => [super.m_parentWithParams__int(foo);]
+[super.parentWithParams(foo);] => [super.m_parentWithParams__int(foo);] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentWithParams"
 [@Override
   public Child parentWithChangingReturn() {
 ...    return this;
@@ -57,8 +57,8 @@
    * @override
 ...    return this;
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentWithChangingReturn"
-[super.parentWithChangingReturn();] => [super.m_parentWithChangingReturn__();]
-[return this;] => [return this;]
+[super.parentWithChangingReturn();] => [super.m_parentWithChangingReturn__();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentWithChangingReturn"
+[return this;] => [return this;] "com.google.j2cl.transpiler.readable.supermethodcall.Child.parentWithChangingReturn"
 [@Override
   public void grandParentSimplest() {
     super.grandParentSimplest();
@@ -66,7 +66,7 @@
    * @override
 ...    super.m_grandParentSimplest__();
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentSimplest"
-[super.grandParentSimplest();] => [super.m_grandParentSimplest__();]
+[super.grandParentSimplest();] => [super.m_grandParentSimplest__();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentSimplest"
 [@Override
   public void grandParentWithParams(int foo) {
     super.grandParentWithParams(foo);
@@ -75,7 +75,7 @@
 ...    super.m_grandParentWithParams__int(foo);
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithParams"
 [foo] => [foo] "foo"
-[super.grandParentWithParams(foo);] => [super.m_grandParentWithParams__int(foo);]
+[super.grandParentWithParams(foo);] => [super.m_grandParentWithParams__int(foo);] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithParams"
 [@Override
   public Child grandParentWithChangingReturn() {
 ...    return this;
@@ -83,6 +83,6 @@
    * @override
 ...    return this;
   }] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithChangingReturn"
-[super.grandParentWithChangingReturn();] => [super.m_grandParentWithChangingReturn__();]
-[return this;] => [return this;]
+[super.grandParentWithChangingReturn();] => [super.m_grandParentWithChangingReturn__();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithChangingReturn"
+[return this;] => [return this;] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithChangingReturn"
 [UNKNOWN] => [Parent.$clinit();]

@@ -40,8 +40,8 @@
    * @return {void}
 ...    Math.PI;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
-[new NativeFoo().getA();] => [NativeFoo.$create__().hasOwnProperty;]
-[NativeFoo.getB();] => [Math.PI;]
+[new NativeFoo().getA();] => [NativeFoo.$create__().hasOwnProperty;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
+[NativeFoo.getB();] => [Math.PI;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
 [public void testStaticJsProperty() {
     Foo.getA();
 ...    Foo.setB(10);
@@ -49,10 +49,10 @@
    * @return {void}
 ...    Foo.abc = 10;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
-[Foo.getA();] => [Foo.a;]
-[Foo.setA(10);] => [Foo.a = 10;]
-[Foo.getB();] => [Foo.abc;]
-[Foo.setB(10);] => [Foo.abc = 10;]
+[Foo.getA();] => [Foo.a;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
+[Foo.setA(10);] => [Foo.a = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
+[Foo.getB();] => [Foo.abc;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
+[Foo.setB(10);] => [Foo.abc = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
 [public void testInstanceJsProperty() {
     Bar bar = new Bar();
 ...    bar.setB(10);
@@ -60,10 +60,10 @@
    * @return {void}
 ...    bar.abc = 10;
   }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
-[Bar bar = new Bar();] => [let bar = Bar.$create__();]
+[Bar bar = new Bar();] => [let bar = Bar.$create__();] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [bar] => [bar] "bar"
-[bar.getA();] => [bar.a;]
-[bar.setA(10);] => [bar.a = 10;]
-[bar.getB();] => [bar.abc;]
-[bar.setB(10);] => [bar.abc = 10;]
+[bar.getA();] => [bar.a;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
+[bar.setA(10);] => [bar.a = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
+[bar.getB();] => [bar.abc;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
+[bar.setB(10);] => [bar.abc = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [UNKNOWN] => [java_lang_Object.$clinit();]

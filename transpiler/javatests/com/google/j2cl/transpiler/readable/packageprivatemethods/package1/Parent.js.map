@@ -41,7 +41,7 @@
 ...    return a;
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.foo"
 [a] => [a] "a"
-[return a;] => [return a;]
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.foo"
 [@Override
   public int bar(int a, int b, int c) {
     return a + b + c + 1;
@@ -52,7 +52,7 @@
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
-[return a + b + c + 1;] => [return a + b + c + 1;]
+[return a + b + c + 1;] => [return a + b + c + 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
 [UNKNOWN] => [/**
    * Forwarding method for package private method.
    * @override

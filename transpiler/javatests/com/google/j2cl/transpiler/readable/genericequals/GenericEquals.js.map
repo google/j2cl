@@ -35,7 +35,7 @@
 [value] => [value] "value"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericequals_GenericEquals();]
-[this.value = value;] => [this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ = value;]
+[this.value = value;] => [this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ = value;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.$ctor__com_google_j2cl_transpiler_readable_genericequals_GenericEquals__java_lang_Object"
 [@Override
   public boolean equals(Object obj) {
 ...    return value.equals(other.value);
@@ -48,15 +48,15 @@
       return true;
     }] => [if ($Equality.$same(obj, this)) {
       return true;
-    }]
-[return true;] => [return true;]
+    }] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
+[return true;] => [return true;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [if (!(obj instanceof GenericEquals)) {
       return false;
     }] => [if (!(GenericEquals.$isInstance(obj))) {
       return false;
-    }]
-[return false;] => [return false;]
-[GenericEquals<?> other = (GenericEquals<?>) obj;] => [let other = /**@type {GenericEquals<*>} */ ($Casts.$to(obj, GenericEquals));]
+    }] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
+[return false;] => [return false;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
+[GenericEquals<?> other = (GenericEquals<?>) obj;] => [let other = /**@type {GenericEquals<*>} */ ($Casts.$to(obj, GenericEquals));] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [other] => [other] "other"
-[return value.equals(other.value);] => [return $Objects.m_equals__java_lang_Object__java_lang_Object(this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_, other.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_);]
+[return value.equals(other.value);] => [return $Objects.m_equals__java_lang_Object__java_lang_Object(this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_, other.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_);] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [UNKNOWN] => [java_lang_Object.$clinit();]

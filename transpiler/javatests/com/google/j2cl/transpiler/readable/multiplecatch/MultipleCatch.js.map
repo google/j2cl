@@ -42,24 +42,12 @@
   }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [try {
       throw new ClassCastException();
-    } catch (NullPointerException | ClassCastException e) {
-      // expected empty body.
-    } catch (RuntimeException r) {
-      r = null; // used to show exception variable is transpiled correctly.
+...      r = null; // used to show exception variable is transpiled correctly.
     }] => [try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ __$exc) {
-      __$exc = $Exceptions.toJava(__$exc);
-      if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
-        let e = /**@type {RuntimeException} */ (__$exc);
-      } else if (RuntimeException.$isInstance(__$exc)) {
-        let r = /**@type {RuntimeException} */ (__$exc);
-        r = null;
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }
-    }]
-[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());]
+...      }
+    }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
 [UNKNOWN] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
         let e = /**@type {RuntimeException} */ (__$exc);
@@ -79,6 +67,6 @@
       }]
 [UNKNOWN] => [let r = /**@type {RuntimeException} */ (__$exc);]
 [r] => [r] "r"
-[r = null;] => [r = null;]
+[r = null;] => [r = null;] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

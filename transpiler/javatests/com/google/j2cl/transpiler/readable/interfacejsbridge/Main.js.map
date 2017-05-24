@@ -40,16 +40,16 @@
    * @return {void}
 ...    d.foo(1);
   }] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
-[MyJsInterface a = new InterfaceImpl();] => [let a = InterfaceImpl.$create__();]
+[MyJsInterface a = new InterfaceImpl();] => [let a = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [a] => [a] "a"
-[MyInterface b = new InterfaceImpl();] => [let b = InterfaceImpl.$create__();]
+[MyInterface b = new InterfaceImpl();] => [let b = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [b] => [b] "b"
-[SubInterface c = new InterfaceImpl();] => [let c = InterfaceImpl.$create__();]
+[SubInterface c = new InterfaceImpl();] => [let c = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [c] => [c] "c"
-[InterfaceImpl d = new InterfaceImpl();] => [let d = InterfaceImpl.$create__();]
+[InterfaceImpl d = new InterfaceImpl();] => [let d = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [d] => [d] "d"
-[a.foo(1);] => [a.foo(1);]
-[b.foo(1);] => [b.m_foo__int(1);]
-[c.foo(1);] => [c.foo(1);]
-[d.foo(1);] => [d.foo(1);]
+[a.foo(1);] => [a.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
+[b.foo(1);] => [b.m_foo__int(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
+[c.foo(1);] => [c.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
+[d.foo(1);] => [d.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

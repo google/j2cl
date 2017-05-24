@@ -53,24 +53,18 @@
 ...    })("hello");
   }] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [s] => [s] "s"
-[final int r1 = r;] => [let r1 = this.$c_r;]
+[final int r1 = r;] => [let r1 = this.$c_r;] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [r1] => [r1] "r1"
-[final int var1 = var;] => [let var1 = this.$c_var;]
+[final int var1 = var;] => [let var1 = this.$c_var;] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [var1] => [var1] "var1"
-[final String x1 = x;] => [let x1 = this.$c_x;]
+[final String x1 = x;] => [let x1 = this.$c_x;] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [x1] => [x1] "x1"
 [return String.valueOf(r)
                         + s
-                        + x
-                        + var
-                        + new F() {
-                          @Override
-                          public String m(String s) {
-                            return s + r1 + x1 + var1;
-                          }
+...                          }
                         }.m("hello");] => [return "" + java_lang_String.m_valueOf__int(this.$c_r) + s + this.$c_x + this.$c_var + ((/** ?string */ s$1$) =>{
       return "" + s$1$ + r1 + x1 + var1;
-    })("hello");]
+    })("hello");] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [s] => [s$1$] "s"
-[return s + r1 + x1 + var1;] => [return "" + s$1$ + r1 + x1 + var1;]
+[return s + r1 + x1 + var1;] => [return "" + s$1$ + r1 + x1 + var1;] "com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.1.1.1.m"
 [UNKNOWN] => [java_lang_Object.$clinit();]

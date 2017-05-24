@@ -40,19 +40,19 @@
    * @return {void}
 ...    $Arrays.$set(objects2d[0], 1, null);
   }] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
-[Object[] objects = new Object[100];] => [let objects = new Array(100);]
+[Object[] objects = new Object[100];] => [let objects = new Array(100);] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
 [objects] => [objects] "objects"
-[objects = new Object[0];] => [objects = new Array(0);]
-[objects = new Object[] {null, null};] => [objects = [null, null];]
-[Object[][] objects2d = new Object[5][10];] => [let objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$create([5, 10], java_lang_Object));]
+[objects = new Object[0];] => [objects = new Array(0);] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[objects = new Object[] {null, null};] => [objects = [null, null];] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[Object[][] objects2d = new Object[5][10];] => [let objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$create([5, 10], java_lang_Object));] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
 [objects2d] => [objects2d] "objects2d"
-[objects2d = new Object[][] {{null, null}, null};] => [objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$init([[null, null], null], java_lang_Object, 2));]
-[objects2d = new Object[20][];] => [objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$create([20, null], java_lang_Object));]
-[Object object = objects[0];] => [let object = objects[0];]
+[objects2d = new Object[][] {{null, null}, null};] => [objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$init([[null, null], null], java_lang_Object, 2));] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[objects2d = new Object[20][];] => [objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$create([20, null], java_lang_Object));] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[Object object = objects[0];] => [let object = objects[0];] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
 [object] => [object] "object"
-[object = objects2d[0][1];] => [object = objects2d[0][1];]
-[objects[0] = null;] => [$Arrays.$set(objects, 0, null);]
-[objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);]
+[object = objects2d[0][1];] => [object = objects2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[objects[0] = null;] => [$Arrays.$set(objects, 0, null);] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
+[objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);] "com.google.j2cl.transpiler.readable.array.Array.objectArraySample"
 [public void javaObjectArraySample() {
     // Creation
 ...    objects2d[0][1] = null;
@@ -60,19 +60,19 @@
    * @return {void}
 ...    $Arrays.$set(objects2d[0], 1, null);
   }] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
-[SomeObject[] objects = new SomeObject[100];] => [let objects = /**@type {!Array<SomeObject>} */ ($Arrays.$create([100], SomeObject));]
+[SomeObject[] objects = new SomeObject[100];] => [let objects = /**@type {!Array<SomeObject>} */ ($Arrays.$create([100], SomeObject));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
 [objects] => [objects] "objects"
-[objects = new SomeObject[0];] => [objects = /**@type {!Array<SomeObject>} */ ($Arrays.$create([0], SomeObject));]
-[objects = new SomeObject[] {null, null};] => [objects = /**@type {!Array<SomeObject>} */ ($Arrays.$init([null, null], SomeObject));]
-[SomeObject[][] objects2d = new SomeObject[5][10];] => [let objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$create([5, 10], SomeObject));]
+[objects = new SomeObject[0];] => [objects = /**@type {!Array<SomeObject>} */ ($Arrays.$create([0], SomeObject));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[objects = new SomeObject[] {null, null};] => [objects = /**@type {!Array<SomeObject>} */ ($Arrays.$init([null, null], SomeObject));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[SomeObject[][] objects2d = new SomeObject[5][10];] => [let objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$create([5, 10], SomeObject));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
 [objects2d] => [objects2d] "objects2d"
-[objects2d = new SomeObject[][] {{null, null}, null};] => [objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$init([/**@type {!Array<SomeObject>} */ ($Arrays.$init([null, null], SomeObject)), null], SomeObject, 2));]
-[objects2d = new SomeObject[20][];] => [objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$create([20, null], SomeObject));]
-[SomeObject someObject = objects[0];] => [let someObject = objects[0];]
+[objects2d = new SomeObject[][] {{null, null}, null};] => [objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$init([/**@type {!Array<SomeObject>} */ ($Arrays.$init([null, null], SomeObject)), null], SomeObject, 2));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[objects2d = new SomeObject[20][];] => [objects2d = /**@type {!Array<Array<SomeObject>>} */ ($Arrays.$create([20, null], SomeObject));] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[SomeObject someObject = objects[0];] => [let someObject = objects[0];] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
 [someObject] => [someObject] "someObject"
-[someObject = objects2d[0][1];] => [someObject = objects2d[0][1];]
-[objects[0] = null;] => [$Arrays.$set(objects, 0, null);]
-[objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);]
+[someObject = objects2d[0][1];] => [someObject = objects2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[objects[0] = null;] => [$Arrays.$set(objects, 0, null);] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
+[objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);] "com.google.j2cl.transpiler.readable.array.Array.javaObjectArraySample"
 [void primitiveArraysSample() {
     // Creation
 ...    ++ints[0];
@@ -80,32 +80,32 @@
    * @return {void}
 ...    $Arrays.$set(ints, 0, ints[0] + 1);
   }] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
-[int[] ints = new int[100];] => [let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));]
+[int[] ints = new int[100];] => [let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
 [ints] => [ints] "ints"
-[ints = new int[0];] => [ints = /**@type {!Array<number>} */ ($Arrays.$create([0], $int));]
-[ints = new int[] {0, 1};] => [ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1], $int));]
-[int[][] ints2d = new int[5][10];] => [let ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));]
+[ints = new int[0];] => [ints = /**@type {!Array<number>} */ ($Arrays.$create([0], $int));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints = new int[] {0, 1};] => [ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1], $int));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[int[][] ints2d = new int[5][10];] => [let ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
 [ints2d] => [ints2d] "ints2d"
-[ints2d = new int[][] {{1, 2}, null};] => [ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$init([/**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int)), null], $int, 2));]
-[ints2d = new int[20][];] => [ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([20, null], $int));]
-[int n = ints[0];] => [let n = ints[0];]
+[ints2d = new int[][] {{1, 2}, null};] => [ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$init([/**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int)), null], $int, 2));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints2d = new int[20][];] => [ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([20, null], $int));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[int n = ints[0];] => [let n = ints[0];] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
 [n] => [n] "n"
-[n = ints2d[0][1];] => [n = ints2d[0][1];]
-[ints[0] = 1;] => [$Arrays.$set(ints, 0, 1);]
-[ints2d[0][1] = 1;] => [$Arrays.$set(ints2d[0], 1, 1);]
-[ints[0] += 1;] => [$Arrays.$set(ints, 0, ints[0] + 1);]
-[ints[0] -= 1;] => [$Arrays.$set(ints, 0, ints[0] - 1);]
-[ints[0] *= 1;] => [$Arrays.$set(ints, 0, ints[0] * 1);]
-[ints[0] /= 1;] => [$Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));]
-[ints[0] &= 1;] => [$Arrays.$set(ints, 0, ints[0] & 1);]
-[ints[0] ^= 1;] => [$Arrays.$set(ints, 0, ints[0] ^ 1);]
-[ints[0] |= 1;] => [$Arrays.$set(ints, 0, ints[0] | 1);]
-[ints[0] %= 1;] => [$Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));]
-[ints[0] <<= 1;] => [$Arrays.$set(ints, 0, ints[0] << 1);]
-[ints[0] >>= 1;] => [$Arrays.$set(ints, 0, ints[0] >> 1);]
-[ints[0] >>>= 1;] => [$Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));]
-[ints[0]++;] => [$Arrays.$set(ints, 0, ints[0] + 1);]
-[++ints[0];] => [$Arrays.$set(ints, 0, ints[0] + 1);]
+[n = ints2d[0][1];] => [n = ints2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] = 1;] => [$Arrays.$set(ints, 0, 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints2d[0][1] = 1;] => [$Arrays.$set(ints2d[0], 1, 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] += 1;] => [$Arrays.$set(ints, 0, ints[0] + 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] -= 1;] => [$Arrays.$set(ints, 0, ints[0] - 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] *= 1;] => [$Arrays.$set(ints, 0, ints[0] * 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] /= 1;] => [$Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] &= 1;] => [$Arrays.$set(ints, 0, ints[0] & 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] ^= 1;] => [$Arrays.$set(ints, 0, ints[0] ^ 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] |= 1;] => [$Arrays.$set(ints, 0, ints[0] | 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] %= 1;] => [$Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] <<= 1;] => [$Arrays.$set(ints, 0, ints[0] << 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] >>= 1;] => [$Arrays.$set(ints, 0, ints[0] >> 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0] >>>= 1;] => [$Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[ints[0]++;] => [$Arrays.$set(ints, 0, ints[0] + 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
+[++ints[0];] => [$Arrays.$set(ints, 0, ints[0] + 1);] "com.google.j2cl.transpiler.readable.array.Array.primitiveArraysSample"
 [void longArraysSample() {
     // Creation
 ...    --longs[0];
@@ -113,22 +113,22 @@
    * @return {void}
 ...    $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
   }] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
-[long[] longs = new long[100];] => [let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));]
+[long[] longs = new long[100];] => [let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
 [longs] => [longs] "longs"
-[longs = new long[0];] => [longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([0], $long));]
-[longs = new long[] {0, 1};] => [longs = /**@type {!Array<!$Long>} */ ($Arrays.$init([$Primitives.$widenIntToLong(0), $Primitives.$widenIntToLong(1)], $long));]
-[long[][] longs2d = new long[5][10];] => [let longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));]
+[longs = new long[0];] => [longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([0], $long));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs = new long[] {0, 1};] => [longs = /**@type {!Array<!$Long>} */ ($Arrays.$init([$Primitives.$widenIntToLong(0), $Primitives.$widenIntToLong(1)], $long));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[long[][] longs2d = new long[5][10];] => [let longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
 [longs2d] => [longs2d] "longs2d"
-[longs2d = new long[][] {{1, 2}, null};] => [longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$init([/**@type {!Array<!$Long>} */ ($Arrays.$init([$Primitives.$widenIntToLong(1), $Primitives.$widenIntToLong(2)], $long)), null], $long, 2));]
-[longs2d = new long[20][];] => [longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([20, null], $long));]
-[long n = longs[0];] => [let n = longs[0];]
+[longs2d = new long[][] {{1, 2}, null};] => [longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$init([/**@type {!Array<!$Long>} */ ($Arrays.$init([$Primitives.$widenIntToLong(1), $Primitives.$widenIntToLong(2)], $long)), null], $long, 2));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs2d = new long[20][];] => [longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([20, null], $long));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[long n = longs[0];] => [let n = longs[0];] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
 [n] => [n] "n"
-[n = longs2d[0][1];] => [n = longs2d[0][1];]
-[longs[0] = 1;] => [$Arrays.$set(longs, 0, $Primitives.$widenIntToLong(1));]
-[longs2d[0][1] = 1;] => [$Arrays.$set(longs2d[0], 1, $Primitives.$widenIntToLong(1));]
-[longs[0] += 1;] => [$Arrays.$set(longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));]
-[longs[0]--;] => [$Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));]
-[--longs[0];] => [$Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));]
+[n = longs2d[0][1];] => [n = longs2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs[0] = 1;] => [$Arrays.$set(longs, 0, $Primitives.$widenIntToLong(1));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs2d[0][1] = 1;] => [$Arrays.$set(longs2d[0], 1, $Primitives.$widenIntToLong(1));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs[0] += 1;] => [$Arrays.$set(longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[longs[0]--;] => [$Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
+[--longs[0];] => [$Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.array.Array.longArraysSample"
 [void devirtualizedTypeArraysSample() {
     // Creation
 ...    booleans[0] |= true;
@@ -136,20 +136,20 @@
    * @return {void}
 ...    $Arrays.$set(booleans, 0, !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | true));
   }] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
-[Boolean[] booleans = new Boolean[100];] => [let booleans = /**@type {!Array<?boolean>} */ ($Arrays.$create([100], Boolean));]
+[Boolean[] booleans = new Boolean[100];] => [let booleans = /**@type {!Array<?boolean>} */ ($Arrays.$create([100], Boolean));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
 [booleans] => [booleans] "booleans"
-[booleans = new Boolean[0];] => [booleans = /**@type {!Array<?boolean>} */ ($Arrays.$create([0], Boolean));]
-[booleans = new Boolean[] {true, false};] => [booleans = /**@type {!Array<?boolean>} */ ($Arrays.$init([true, false], Boolean));]
-[Boolean[][] booleans2d = new Boolean[5][10];] => [let booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$create([5, 10], Boolean));]
+[booleans = new Boolean[0];] => [booleans = /**@type {!Array<?boolean>} */ ($Arrays.$create([0], Boolean));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[booleans = new Boolean[] {true, false};] => [booleans = /**@type {!Array<?boolean>} */ ($Arrays.$init([true, false], Boolean));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[Boolean[][] booleans2d = new Boolean[5][10];] => [let booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$create([5, 10], Boolean));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
 [booleans2d] => [booleans2d] "booleans2d"
-[booleans2d = new Boolean[][] {{true, false}, null};] => [booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$init([/**@type {!Array<?boolean>} */ ($Arrays.$init([true, false], Boolean)), null], Boolean, 2));]
-[booleans2d = new Boolean[20][];] => [booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$create([20, null], Boolean));]
-[boolean b = booleans[0];] => [let b = Boolean.m_booleanValue__java_lang_Boolean(booleans[0]);]
+[booleans2d = new Boolean[][] {{true, false}, null};] => [booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$init([/**@type {!Array<?boolean>} */ ($Arrays.$init([true, false], Boolean)), null], Boolean, 2));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[booleans2d = new Boolean[20][];] => [booleans2d = /**@type {!Array<Array<?boolean>>} */ ($Arrays.$create([20, null], Boolean));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[boolean b = booleans[0];] => [let b = Boolean.m_booleanValue__java_lang_Boolean(booleans[0]);] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
 [b] => [b] "b"
-[b = booleans2d[0][1];] => [b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);]
-[booleans[0] = true;] => [$Arrays.$set(booleans, 0, true);]
-[booleans2d[0][1] = false;] => [$Arrays.$set(booleans2d[0], 1, false);]
-[booleans[0] |= true;] => [$Arrays.$set(booleans, 0, !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | true));]
+[b = booleans2d[0][1];] => [b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[booleans[0] = true;] => [$Arrays.$set(booleans, 0, true);] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[booleans2d[0][1] = false;] => [$Arrays.$set(booleans2d[0], 1, false);] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
+[booleans[0] |= true;] => [$Arrays.$set(booleans, 0, !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | true));] "com.google.j2cl.transpiler.readable.array.Array.devirtualizedTypeArraysSample"
 [void stringArraysSample() {
     // Creation
 ...    strings[0] += null;
@@ -157,20 +157,20 @@
    * @return {void}
 ...    $Arrays.$set(strings, 0, "" + strings[0] + java_lang_String.m_valueOf__java_lang_Object(null));
   }] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
-[String[] strings = new String[100];] => [let strings = /**@type {!Array<?string>} */ ($Arrays.$create([100], java_lang_String));]
+[String[] strings = new String[100];] => [let strings = /**@type {!Array<?string>} */ ($Arrays.$create([100], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [strings] => [strings] "strings"
-[strings = new String[0];] => [strings = /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));]
-[strings = new String[] {null, null};] => [strings = /**@type {!Array<?string>} */ ($Arrays.$init([null, null], java_lang_String));]
-[String[][] strings2d = new String[5][10];] => [let strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$create([5, 10], java_lang_String));]
+[strings = new String[0];] => [strings = /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings = new String[] {null, null};] => [strings = /**@type {!Array<?string>} */ ($Arrays.$init([null, null], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[String[][] strings2d = new String[5][10];] => [let strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$create([5, 10], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [strings2d] => [strings2d] "strings2d"
-[strings2d = new String[][] {{null, null}, null};] => [strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$init([/**@type {!Array<?string>} */ ($Arrays.$init([null, null], java_lang_String)), null], java_lang_String, 2));]
-[strings2d = new String[20][];] => [strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$create([20, null], java_lang_String));]
-[String b = strings[0];] => [let b = strings[0];]
+[strings2d = new String[][] {{null, null}, null};] => [strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$init([/**@type {!Array<?string>} */ ($Arrays.$init([null, null], java_lang_String)), null], java_lang_String, 2));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings2d = new String[20][];] => [strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$create([20, null], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[String b = strings[0];] => [let b = strings[0];] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [b] => [b] "b"
-[b = strings2d[0][1];] => [b = strings2d[0][1];]
-[strings[0] = null;] => [$Arrays.$set(strings, 0, null);]
-[strings2d[0][1] = null;] => [$Arrays.$set(strings2d[0], 1, null);]
-[strings[0] += null;] => [$Arrays.$set(strings, 0, "" + strings[0] + java_lang_String.m_valueOf__java_lang_Object(null));]
+[b = strings2d[0][1];] => [b = strings2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings[0] = null;] => [$Arrays.$set(strings, 0, null);] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings2d[0][1] = null;] => [$Arrays.$set(strings2d[0], 1, null);] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings[0] += null;] => [$Arrays.$set(strings, 0, "" + strings[0] + java_lang_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [public void nativeArraySample() {
     // Creation
 ...    nativeObjects2d[0][1] = null;
@@ -178,17 +178,17 @@
    * @return {void}
 ...    $Arrays.$set(nativeObjects2d[0], 1, null);
   }] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
-[NativeType[] nativeObjects = new NativeType[100];] => [let nativeObjects = new Array(100);]
+[NativeType[] nativeObjects = new NativeType[100];] => [let nativeObjects = new Array(100);] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
 [nativeObjects] => [nativeObjects] "nativeObjects"
-[nativeObjects = new NativeType[0];] => [nativeObjects = new Array(0);]
-[nativeObjects = new NativeType[] {null, null};] => [nativeObjects = [null, null];]
-[NativeType[][] nativeObjects2d = new NativeType[5][10];] => [let nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$create([5, 10], String));]
+[nativeObjects = new NativeType[0];] => [nativeObjects = new Array(0);] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[nativeObjects = new NativeType[] {null, null};] => [nativeObjects = [null, null];] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[NativeType[][] nativeObjects2d = new NativeType[5][10];] => [let nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$create([5, 10], String));] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
 [nativeObjects2d] => [nativeObjects2d] "nativeObjects2d"
-[nativeObjects2d = new NativeType[][] {{null, null}, null};] => [nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$init([[null, null], null], String, 2));]
-[nativeObjects2d = new NativeType[20][];] => [nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$create([20, null], String));]
-[NativeType nativeObject = nativeObjects[0];] => [let nativeObject = nativeObjects[0];]
+[nativeObjects2d = new NativeType[][] {{null, null}, null};] => [nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$init([[null, null], null], String, 2));] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[nativeObjects2d = new NativeType[20][];] => [nativeObjects2d = /**@type {!Array<Array<String>>} */ ($Arrays.$create([20, null], String));] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[NativeType nativeObject = nativeObjects[0];] => [let nativeObject = nativeObjects[0];] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
 [nativeObject] => [nativeObject] "nativeObject"
-[nativeObject = nativeObjects2d[0][1];] => [nativeObject = nativeObjects2d[0][1];]
-[nativeObjects[0] = null;] => [$Arrays.$set(nativeObjects, 0, null);]
-[nativeObjects2d[0][1] = null;] => [$Arrays.$set(nativeObjects2d[0], 1, null);]
+[nativeObject = nativeObjects2d[0][1];] => [nativeObject = nativeObjects2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[nativeObjects[0] = null;] => [$Arrays.$set(nativeObjects, 0, null);] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
+[nativeObjects2d[0][1] = null;] => [$Arrays.$set(nativeObjects2d[0], 1, null);] "com.google.j2cl.transpiler.readable.array.Array.nativeArraySample"
 [UNKNOWN] => [java_lang_Object.$clinit();]

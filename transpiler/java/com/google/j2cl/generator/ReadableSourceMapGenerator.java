@@ -85,15 +85,17 @@ public class ReadableSourceMapGenerator {
       if (condense && startLine + 3 < endLine) {
         content
             .append("\n")
-            .append(lines.get(startLine + 1))
+            .append(trimTrailingWhitespace(lines.get(startLine + 1)))
             .append("\n...")
-            .append(lines.get(endLine - 1));
+            .append(trimTrailingWhitespace(lines.get(endLine - 1)));
       } else {
         for (int line = startLine + 1; line < endLine; line++) {
           content.append("\n").append(trimTrailingWhitespace(lines.get(line)));
         }
       }
-      content.append("\n").append(lines.get(endLine).substring(0, endColumn));
+      content
+          .append("\n")
+          .append((trimTrailingWhitespace(lines.get(endLine).substring(0, endColumn))));
       return "[" + content.toString() + "]";
     }
 

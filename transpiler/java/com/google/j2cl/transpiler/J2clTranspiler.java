@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
+import com.google.j2cl.ast.visitors.AddMethodNameToSourcePosition;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
@@ -256,11 +257,16 @@ public class J2clTranspiler {
             // TODO(b/24476009): remove the temporary fix once we switch to JSCompiler's new type
             // checker.
             new FixTypeVariablesInMethods(),
+
+            // Perform post cleanups.
             new InsertStaticClassInitializerMethods(),
             // Normalize multiexpressions again to remove unnecessary clutter, but run before
             // variable motion.
             new NormalizeMultiExpressions(),
-            new MoveVariableDeclarationsToEnclosingBlock());
+            new MoveVariableDeclarationsToEnclosingBlock(),
+
+            // Enrich source mapping information for better stack deobfuscation.
+            new AddMethodNameToSourcePosition());
 
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);

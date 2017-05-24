@@ -37,7 +37,7 @@
    * Initialization from constructor 'LongImplicitCasts()'.
 ...    this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long($Primitives.$widenIntToLong(100));
   }] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<ctor>"
-[this(100);] => [this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long($Primitives.$widenIntToLong(100));]
+[this(100);] => [this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long($Primitives.$widenIntToLong(100));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__"
 [public LongImplicitCasts(long someValue) {}] => [/**
    * Factory method corresponding to constructor 'LongImplicitCasts(long)'.
 ...    return $instance;
@@ -61,39 +61,39 @@
    * @return {void}
 ...    }
   }] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
-[byte fbyte = 11;] => [let fbyte = 11;]
+[byte fbyte = 11;] => [let fbyte = 11;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [fbyte] => [fbyte] "fbyte"
-[char fchar = 12;] => [let fchar = 12 /* "\f" */;]
+[char fchar = 12;] => [let fchar = 12 /* "\f" */;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [fchar] => [fchar] "fchar"
-[short fshort = 13;] => [let fshort = 13;]
+[short fshort = 13;] => [let fshort = 13;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [fshort] => [fshort] "fshort"
-[int fint = 14;] => [let fint = 14;]
+[int fint = 14;] => [let fint = 14;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [fint] => [fint] "fint"
-[long flong = 15;] => [let flong = $Primitives.$widenIntToLong(15);]
+[long flong = 15;] => [let flong = $Primitives.$widenIntToLong(15);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [flong] => [flong] "flong"
-[float ffloat = 16;] => [let ffloat = 16;]
+[float ffloat = 16;] => [let ffloat = 16;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [ffloat] => [ffloat] "ffloat"
-[double fdouble = 17;] => [let fdouble = 17;]
+[double fdouble = 17;] => [let fdouble = 17;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [fdouble] => [fdouble] "fdouble"
-[long tlong = 0;] => [let tlong = $Primitives.$widenIntToLong(0);]
+[long tlong = 0;] => [let tlong = $Primitives.$widenIntToLong(0);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [tlong] => [tlong] "tlong"
-[tlong = fbyte;] => [tlong = $Primitives.$widenByteToLong(fbyte);]
-[tlong = flong;] => [tlong = flong;]
-[tlong = fint;] => [tlong = $Primitives.$widenIntToLong(fint);]
-[tlong += fint;] => [tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));]
-[tlong <<= fint;] => [tlong = $LongUtils.$leftShift(tlong, $Primitives.$widenIntToLong(fint));]
-[tlong += fchar;] => [tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));]
-[tlong += flong;] => [tlong = $LongUtils.$plus(tlong, flong);]
-[tlong += ffloat;] => [tlong = $Primitives.$narrowFloatToLong($Primitives.$widenLongToFloat(tlong) + ffloat);]
-[tlong = flong * fint;] => [tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));]
-[tlong = flong >> fint;] => [tlong = $LongUtils.$rightShiftSigned(flong, $Primitives.$widenIntToLong(fint));]
-[tlong = flong + fshort;] => [tlong = $LongUtils.$plus(flong, $Primitives.$widenShortToLong(fshort));]
-[tlong = flong + flong;] => [tlong = $LongUtils.$plus(flong, flong);]
-[compareLong(fint);] => [this.m_compareLong__long($Primitives.$widenIntToLong(fint));]
-[new LongImplicitCasts(fint);] => [LongImplicitCasts.$create__long($Primitives.$widenIntToLong(fint));]
-[compareLong(flong);] => [this.m_compareLong__long(flong);]
-[new LongImplicitCasts(flong);] => [LongImplicitCasts.$create__long(flong);]
-[tlong = flong << flong;] => [tlong = $LongUtils.$leftShift(flong, flong);]
-[tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, flong);]
+[tlong = fbyte;] => [tlong = $Primitives.$widenByteToLong(fbyte);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong;] => [tlong = flong;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = fint;] => [tlong = $Primitives.$widenIntToLong(fint);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong += fint;] => [tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong <<= fint;] => [tlong = $LongUtils.$leftShift(tlong, $Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong += fchar;] => [tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong += flong;] => [tlong = $LongUtils.$plus(tlong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong += ffloat;] => [tlong = $Primitives.$narrowFloatToLong($Primitives.$widenLongToFloat(tlong) + ffloat);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong * fint;] => [tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong >> fint;] => [tlong = $LongUtils.$rightShiftSigned(flong, $Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong + fshort;] => [tlong = $LongUtils.$plus(flong, $Primitives.$widenShortToLong(fshort));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong + flong;] => [tlong = $LongUtils.$plus(flong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[compareLong(fint);] => [this.m_compareLong__long($Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[new LongImplicitCasts(fint);] => [LongImplicitCasts.$create__long($Primitives.$widenIntToLong(fint));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[compareLong(flong);] => [this.m_compareLong__long(flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[new LongImplicitCasts(flong);] => [LongImplicitCasts.$create__long(flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = flong << flong;] => [tlong = $LongUtils.$leftShift(flong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public long fieldLong = 100;] => [this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts = $Primitives.$widenIntToLong(100);]

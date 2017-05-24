@@ -40,21 +40,21 @@
    * @return {void}
 ...    d.m_fun__int(1);
   }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
-[MyJsType a = new MyJsType();] => [let a = MyJsType.$create__();]
+[MyJsType a = new MyJsType();] => [let a = MyJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [a] => [a] "a"
-[SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();]
+[SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [b] => [b] "b"
-[MyInterface c = new SubJsType();] => [let c = SubJsType.$create__();]
+[MyInterface c = new SubJsType();] => [let c = SubJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [c] => [c] "c"
-[OtherInterface d = new SubJsType();] => [let d = SubJsType.$create__();]
+[OtherInterface d = new SubJsType();] => [let d = SubJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [d] => [d] "d"
-[a.foo(1);] => [a.foo(1);]
-[b.foo(1);] => [b.foo(1);]
-[c.foo(1);] => [c.m_foo__int(1);]
-[a.bar(1);] => [a.bar(1);]
-[b.bar(1);] => [b.bar(1);]
-[c.bar(1);] => [c.m_bar__int(1);]
-[a.fun(1);] => [a.fun(1);]
-[b.fun(1);] => [b.fun(1);]
-[d.fun(1);] => [d.m_fun__int(1);]
+[a.foo(1);] => [a.foo(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[b.foo(1);] => [b.foo(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[c.foo(1);] => [c.m_foo__int(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[a.bar(1);] => [a.bar(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[b.bar(1);] => [b.bar(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[c.bar(1);] => [c.m_bar__int(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[a.fun(1);] => [a.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[b.fun(1);] => [b.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
+[d.fun(1);] => [d.m_fun__int(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -42,16 +42,7 @@
   }] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
 [LambdaInterface l =
         (i -> {
-          // call to outer class's inherited function
-          funInParent(); // this.outer.funInParent()
-          this.funInParent(); // this.outer.funInParent()
-          LambdaInSubClass.this.funInParent(); // this.outer.funInParent()
-
-          // access to outer class's inherited fields
-          int a = fieldInParent;
-          a = this.fieldInParent;
-          a = LambdaInSubClass.this.fieldInParent;
-          return a;
-        });] => [let l = ($Lambda$LambdaInterface$0.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));]
+...          return a;
+        });] => [let l = ($Lambda$LambdaInterface$0.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
 [l] => [l] "l"
 [UNKNOWN] => [Parent.$clinit();]

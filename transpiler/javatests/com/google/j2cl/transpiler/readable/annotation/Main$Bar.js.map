@@ -43,8 +43,8 @@
    * @return {number}
 ...    return Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
-[Foo foo = null;] => [let foo = null;]
+[Foo foo = null;] => [let foo = null;] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
 [foo] => [foo] "foo"
-[foo.bar();] => [foo.m_bar__();]
-[return Foo.CONSTANT;] => [return Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo;]
+[foo.bar();] => [foo.m_bar__();] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
+[return Foo.CONSTANT;] => [return Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo;] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
 [UNKNOWN] => [java_lang_Object.$clinit();]

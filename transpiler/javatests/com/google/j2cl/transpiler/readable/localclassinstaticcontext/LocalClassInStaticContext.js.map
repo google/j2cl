@@ -41,15 +41,11 @@
 ...    let a = $3.$create__();
   }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [UNKNOWN] => [LocalClassInStaticContext.$clinit();]
-[new A();] => [$1A.$create__();]
+[new A();] => [$1A.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [Object a =
         new Object() {
-          void m() {
-            // Here it is created in an instance context but the class is defined in a static one,
-            // so no extra outer_this.
-            new A();
-          }
-        };] => [let a = $3.$create__();]
+...          }
+        };] => [let a = $3.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [a] => [a] "a"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public static Object f = new Object() {};] => [LocalClassInStaticContext.$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext = $1.$create__();]

@@ -42,22 +42,12 @@
   }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [try {
       throw new ClassCastException();
-    } catch (ClassCastException e) {
-      doSomething(e);
-    } finally {
+...    } finally {
     }] => [try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ __$exc) {
-      __$exc = $Exceptions.toJava(__$exc);
-      if (ClassCastException.$isInstance(__$exc)) {
-        let e = /**@type {ClassCastException} */ (__$exc);
-        SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }
-    } finally {
-    }]
-[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());]
+...    } finally {
+    }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
 [UNKNOWN] => [if (ClassCastException.$isInstance(__$exc)) {
         let e = /**@type {ClassCastException} */ (__$exc);
@@ -67,7 +57,7 @@
       }]
 [UNKNOWN] => [let e = /**@type {ClassCastException} */ (__$exc);]
 [e] => [e] "e"
-[doSomething(e);] => [SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);]
+[doSomething(e);] => [SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
 [public static void doSomething(ClassCastException e) {
     System.out.println("saw exception: " + e);
@@ -77,5 +67,5 @@
   }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.doSomething"
 [e] => [e] "e"
 [UNKNOWN] => [SimpleTryCatchThrow.$clinit();]
-[System.out.println("saw exception: " + e);] => [System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + java_lang_String.m_valueOf__java_lang_Object(e));]
+[System.out.println("saw exception: " + e);] => [System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + java_lang_String.m_valueOf__java_lang_Object(e));] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.doSomething"
 [UNKNOWN] => [java_lang_Object.$clinit();]

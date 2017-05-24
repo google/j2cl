@@ -46,23 +46,8 @@
 [a] => [a] "a"
 [MyInterface ii =
                       n -> {
-                        mm();
-                        aa();
-                        bb();
-                        MyInterface iii =
-                            m -> {
-                              mm();
-                              aa();
-                              bb();
-                              return new MyInterface() {
-                                @Override
-                                public int fun(int b) {
-                                  return b;
-                                }
-                              }.fun(100);
-                            };
-                        return iii.fun(200);
-                      };] => [let ii = $Lambda$MyInterface$0.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1(this);]
+...                        return iii.fun(200);
+                      };] => [let ii = $Lambda$MyInterface$0.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1(this);] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.fun"
 [ii] => [ii] "ii"
-[return ii.fun(300);] => [return ii.m_fun__int(300);]
+[return ii.fun(300);] => [return ii.m_fun__int(300);] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.fun"
 [UNKNOWN] => [java_lang_Object.$clinit();]

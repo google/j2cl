@@ -42,7 +42,7 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b + 1;] => [return a + b + 1;]
+[return a + b + 1;] => [return a + b + 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"
 [/**
    * Non-JsMethod that overrides a JsMethod without renaming.
 ...    return a * b + 1;
@@ -52,7 +52,7 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.bar"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a * b + 1;] => [return a * b + 1;]
+[return a * b + 1;] => [return a * b + 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.bar"
 [/**
    * JsMethod that overrides a JsMethod.
 ...    return a;
@@ -61,7 +61,7 @@
 ...    return a;
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.foo"
 [a] => [a] "a"
-[return a;] => [return a;]
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.foo"
 [/**
    * JsMethod that overrides a non-JsMethod from its interface.
 ...    return 1;
@@ -69,7 +69,7 @@
    * @return {number}
 ...    return 1;
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.intfFoo"
-[return 1;] => [return 1;]
+[return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.intfFoo"
 [UNKNOWN] => [/**
    * Bridge method for exposing non-JsMethod.
    * @override

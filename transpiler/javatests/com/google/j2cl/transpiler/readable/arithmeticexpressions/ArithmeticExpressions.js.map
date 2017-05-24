@@ -40,41 +40,41 @@
    * @return {void}
 ...    k = !!(k | true);
   }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
-[int a = 10;] => [let a = 10;]
+[int a = 10;] => [let a = 10;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [a] => [a] "a"
-[int b = a++;] => [let b = a++;]
+[int b = a++;] => [let b = a++;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [b] => [b] "b"
-[int c = a--;] => [let c = a--;]
+[int c = a--;] => [let c = a--;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [c] => [c] "c"
-[int d = ++a;] => [let d = ++a;]
+[int d = ++a;] => [let d = ++a;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [d] => [d] "d"
-[int e = --a;] => [let e = --a;]
+[int e = --a;] => [let e = --a;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [e] => [e] "e"
-[int f = -a;] => [let f = -a;]
+[int f = -a;] => [let f = -a;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [f] => [f] "f"
-[int g = +a;] => [let g = a;]
+[int g = +a;] => [let g = a;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [g] => [g] "g"
-[int h = ~a;] => [let h = ~a;]
+[int h = ~a;] => [let h = ~a;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [h] => [h] "h"
-[int i = 1 + 1 + 2 - 5;] => [let i = 1 + 1 + 2 - 5;]
+[int i = 1 + 1 + 2 - 5;] => [let i = 1 + 1 + 2 - 5;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [i] => [i] "i"
-[int j = (1 + 2) * (3 + 4);] => [let j = (1 + 2) * (3 + 4);]
+[int j = (1 + 2) * (3 + 4);] => [let j = (1 + 2) * (3 + 4);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [j] => [j] "j"
-[boolean k = !(1 + 2 + 3 == 4);] => [let k = !(1 + 2 + 3 == 4);]
+[boolean k = !(1 + 2 + 3 == 4);] => [let k = !(1 + 2 + 3 == 4);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [k] => [k] "k"
-[boolean l = (1 + 2 != 4);] => [let l = (1 + 2 != 4);]
+[boolean l = (1 + 2 != 4);] => [let l = (1 + 2 != 4);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [l] => [l] "l"
-[boolean m = Long.MAX_VALUE != 9223372036854776833d;] => [let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) != 9.223372036854778E18;]
+[boolean m = Long.MAX_VALUE != 9223372036854776833d;] => [let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) != 9.223372036854778E18;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [m] => [m] "m"
-[getLongArray()[0]++;] => [let $array = ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions();]
-[getLongArray()[0]++;] => [$Arrays.$set($array, 0, $LongUtils.$plus($array[0], $Long.fromBits(1, 0) /* 1 */));]
-[double o = (5 / 2) - 0.0;] => [let o = ($Primitives.$coerceDivision(5 / 2)) - 0.0;]
+[getLongArray()[0]++;] => [let $array = ArithmeticExpressions.m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[getLongArray()[0]++;] => [$Arrays.$set($array, 0, $LongUtils.$plus($array[0], $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[double o = (5 / 2) - 0.0;] => [let o = ($Primitives.$coerceDivision(5 / 2)) - 0.0;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [o] => [o] "o"
-[Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);]
+[Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [boxI] => [boxI] "boxI"
-[a += boxI;] => [a += boxI.m_intValue__();]
-[a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));]
-[((k)) |= true;] => [k = !!(k | true);]
+[a += boxI;] => [a += boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [static long[] getLongArray() {
     return new long[10];
   }] => [/**
@@ -82,5 +82,5 @@
 ...    return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));
   }] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [UNKNOWN] => [ArithmeticExpressions.$clinit();]
-[return new long[10];] => [return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));]
+[return new long[10];] => [return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [UNKNOWN] => [java_lang_Object.$clinit();]

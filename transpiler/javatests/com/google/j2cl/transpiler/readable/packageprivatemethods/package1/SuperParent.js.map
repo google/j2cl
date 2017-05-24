@@ -40,7 +40,7 @@
 ...    return a - 1;
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.foo"
 [a] => [a] "a"
-[return a - 1;] => [return a - 1;]
+[return a - 1;] => [return a - 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.foo"
 [int fun(int a, int b) {
     return a + b;
   }] => [/**
@@ -49,7 +49,7 @@
   }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.fun"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b;] => [return a + b;]
+[return a + b;] => [return a + b;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.fun"
 [int bar(int a, int b, int c) {
     return a + b + c;
   }] => [/**
@@ -59,5 +59,5 @@
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
-[return a + b + c;] => [return a + b + c;]
+[return a + b + c;] => [return a + b + c;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent.bar"
 [UNKNOWN] => [java_lang_Object.$clinit();]

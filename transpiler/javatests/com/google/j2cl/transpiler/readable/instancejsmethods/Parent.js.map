@@ -42,7 +42,7 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b;] => [return a + b;]
+[return a + b;] => [return a + b;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
 [/**
    * JsMethod that exposes non-JsMethod in parent, without renaming.
 ...    return a * b;
@@ -52,7 +52,7 @@
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
 [a] => [a] "a"
 [b] => [b] "b"
-[return a * b;] => [return a * b;]
+[return a * b;] => [return a * b;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
 [/**
    * JsMethod that does not expose non-JsMethod in parent.
 ...    return a;
@@ -61,7 +61,7 @@
 ...    return a;
   }] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.foo"
 [a] => [a] "a"
-[return a;] => [return a;]
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.foo"
 [UNKNOWN] => [/**
    * Bridge method for exposing non-JsMethod.
    * @override

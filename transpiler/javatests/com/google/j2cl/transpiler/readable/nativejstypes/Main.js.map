@@ -41,11 +41,11 @@
 ...    return foo.sum();
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [UNKNOWN] => [Main.$clinit();]
-[Foo foo = new Foo();] => [let foo = new Foo();]
+[Foo foo = new Foo();] => [let foo = new Foo();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo] => [foo] "foo"
-[foo.x = 50;] => [foo.x = 50;]
-[foo.y = 5;] => [foo.y = 5;]
-[return foo.sum();] => [return foo.sum();]
+[foo.x = 50;] => [foo.x = 50;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
+[foo.y = 5;] => [foo.y = 5;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
+[return foo.sum();] => [return foo.sum();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [public static int testNativeJsTypeWithoutNamespace() {
     Bar bar = new Bar(6, 7);
 ...    return bar.product();
@@ -54,12 +54,12 @@
 ...    return bar.product();
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [UNKNOWN] => [Main.$clinit();]
-[Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);]
+[Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [bar] => [bar] "bar"
-[bar.x = 50;] => [bar.x = 50;]
-[bar.y = 5;] => [bar.y = 5;]
-[Bar.f = 10;] => [Bar.f = 10;]
-[return bar.product();] => [return bar.product();]
+[bar.x = 50;] => [bar.x = 50;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[bar.y = 5;] => [bar.y = 5;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[Bar.f = 10;] => [Bar.f = 10;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[return bar.product();] => [return bar.product();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [public static void testInnerNativeJsType() {
     Bar.Inner unusedFoo = new Bar.Inner() {};
     Another.Inner unusedZoo = new Another.Inner() {};
@@ -68,9 +68,9 @@
 ...    let unusedZoo = $2.$create__();
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [UNKNOWN] => [Main.$clinit();]
-[Bar.Inner unusedFoo = new Bar.Inner() {};] => [let unusedFoo = $1.$create__();]
+[Bar.Inner unusedFoo = new Bar.Inner() {};] => [let unusedFoo = $1.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedFoo] => [unusedFoo] "unusedFoo"
-[Another.Inner unusedZoo = new Another.Inner() {};] => [let unusedZoo = $2.$create__();]
+[Another.Inner unusedZoo = new Another.Inner() {};] => [let unusedZoo = $2.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedZoo] => [unusedZoo] "unusedZoo"
 [public static void testGlobalNativeJsType() {
     Headers header = new Headers();
@@ -80,9 +80,9 @@
 ...    header.append("Content-Type", "text/xml");
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
 [UNKNOWN] => [Main.$clinit();]
-[Headers header = new Headers();] => [let header = new Headers();]
+[Headers header = new Headers();] => [let header = new Headers();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
 [header] => [header] "header"
-[header.append("Content-Type", "text/xml");] => [header.append("Content-Type", "text/xml");]
+[header.append("Content-Type", "text/xml");] => [header.append("Content-Type", "text/xml");] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
 [@SuppressWarnings("unused")
   public static void testNativeTypeClassLiteral() {
 ...    o1 = Bar[][].class;
@@ -91,9 +91,9 @@
 ...    o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [UNKNOWN] => [Main.$clinit();]
-[Object o1 = Bar.class;] => [let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));]
+[Object o1 = Bar.class;] => [let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
-[o1 = Bar[][].class;] => [o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));]
+[o1 = Bar[][].class;] => [o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
 ...    bar.equals(new Object());
@@ -102,16 +102,16 @@
 ...    $Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [UNKNOWN] => [Main.$clinit();]
-[Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);]
+[Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [bar] => [bar] "bar"
-[bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);]
-[bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);]
-[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());]
+[bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [Wildcard<String> get() {
     return null;
   }] => [/**
    * @return {?}
 ...    return null;
   }] "com.google.j2cl.transpiler.readable.nativejstypes.Main.get"
-[return null;] => [return null;]
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.get"
 [UNKNOWN] => [java_lang_Object.$clinit();]

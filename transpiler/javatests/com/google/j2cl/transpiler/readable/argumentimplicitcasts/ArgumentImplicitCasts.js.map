@@ -42,7 +42,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getChar"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getChar"
 [private static short getShort(short value) {
     return value;
   }] => [/**
@@ -51,7 +51,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getShort"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getShort"
 [private static int getInt(int value) {
     return value;
   }] => [/**
@@ -60,7 +60,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getInt"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getInt"
 [private static long getLong(long value) {
     return value;
   }] => [/**
@@ -69,7 +69,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getLong"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getLong"
 [private static float getFloat(float value) {
     return value;
   }] => [/**
@@ -78,7 +78,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getFloat"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getFloat"
 [private static double getDouble(double value) {
     return value;
   }] => [/**
@@ -87,7 +87,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getDouble"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getDouble"
 [@SuppressWarnings("unused")
   private static byte getByte(byte value) {
     return value;
@@ -97,7 +97,7 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getByte"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[return value;] => [return value;]
+[return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getByte"
 [public static void main(String... args) {
     // The right hand sides are explicitly cast and the left hand sides *should* have implicit casts
 ...    // assert new LongValueHolder(doubleValue).value == (long) doubleValue; // illegal
@@ -107,18 +107,18 @@
   }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
 [args] => [args] "args"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
-[assert getShort(BYTE_MAX_VALUE) == (short) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getShort__short_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert getInt(BYTE_MAX_VALUE) == (int) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getInt__int_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert getLong(BYTE_MAX_VALUE) == (long) BYTE_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(ArgumentImplicitCasts.m_getLong__long_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)), $Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));]
-[assert getFloat(BYTE_MAX_VALUE) == (float) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getFloat__float_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert getDouble(BYTE_MAX_VALUE) == (double) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert getFloat(LONG_MAX_VALUE) == (float) LONG_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getFloat__float_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenLongToFloat(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)) == $Primitives.$widenLongToFloat(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts));]
-[assert getDouble(LONG_MAX_VALUE) == (double) LONG_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenLongToDouble(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)) == $Primitives.$widenLongToDouble(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts));]
-[assert getDouble(FLOAT_MAX_VALUE) == (double) FLOAT_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_FLOAT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_FLOAT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert new IntValueHolder(BYTE_MAX_VALUE).value == (int) BYTE_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert new IntValueHolder(CHAR_MAX_VALUE).value == (int) CHAR_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert new IntValueHolder(SHORT_MAX_VALUE).value == (int) SHORT_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);]
-[assert new LongValueHolder(BYTE_MAX_VALUE).value == (long) BYTE_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));]
-[assert new LongValueHolder(CHAR_MAX_VALUE).value == (long) CHAR_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenCharToLong(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenCharToLong(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));]
-[assert new LongValueHolder(SHORT_MAX_VALUE).value == (long) SHORT_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));]
+[assert getShort(BYTE_MAX_VALUE) == (short) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getShort__short_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getInt(BYTE_MAX_VALUE) == (int) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getInt__int_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getLong(BYTE_MAX_VALUE) == (long) BYTE_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(ArgumentImplicitCasts.m_getLong__long_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)), $Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getFloat(BYTE_MAX_VALUE) == (float) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getFloat__float_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getDouble(BYTE_MAX_VALUE) == (double) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getFloat(LONG_MAX_VALUE) == (float) LONG_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getFloat__float_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenLongToFloat(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)) == $Primitives.$widenLongToFloat(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getDouble(LONG_MAX_VALUE) == (double) LONG_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts($Primitives.$widenLongToDouble(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)) == $Primitives.$widenLongToDouble(ArgumentImplicitCasts.f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert getDouble(FLOAT_MAX_VALUE) == (double) FLOAT_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getDouble__double_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_FLOAT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_FLOAT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new IntValueHolder(BYTE_MAX_VALUE).value == (int) BYTE_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new IntValueHolder(CHAR_MAX_VALUE).value == (int) CHAR_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new IntValueHolder(SHORT_MAX_VALUE).value == (int) SHORT_MAX_VALUE;] => [$Asserts.$assert(IntValueHolder.$create__int(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ == ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new LongValueHolder(BYTE_MAX_VALUE).value == (long) BYTE_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenByteToLong(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new LongValueHolder(CHAR_MAX_VALUE).value == (long) CHAR_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenCharToLong(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenCharToLong(ArgumentImplicitCasts.f_CHAR_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
+[assert new LongValueHolder(SHORT_MAX_VALUE).value == (long) SHORT_MAX_VALUE;] => [$Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
 [UNKNOWN] => [java_lang_Object.$clinit();]

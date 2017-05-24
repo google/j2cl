@@ -40,12 +40,12 @@
    * @return {void}
 ...    }while (count < 5);
   }] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
-[int count = 0;] => [let count = 0;]
+[int count = 0;] => [let count = 0;] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
 [count] => [count] "count"
 [do {
       count++;
     } while (count < 5);] => [do {
       count++;
-    }while (count < 5);]
-[count++;] => [count++;]
+    }while (count < 5);] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
+[count++;] => [count++;] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

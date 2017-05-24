@@ -56,12 +56,12 @@ public class SomeJsType<T> {
 ...    this.m_protectedMethod__();
   }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
 [@SuppressWarnings("unused")
-    int value = publicField + privateField + packageField + protectedField;] => [let value = this.publicField + this.f_privateField__com_google_j2cl_transpiler_readable_jstype_SomeJsType_ + this.f_packageField__com_google_j2cl_transpiler_readable_jstype_SomeJsType + this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType;]
+    int value = publicField + privateField + packageField + protectedField;] => [let value = this.publicField + this.f_privateField__com_google_j2cl_transpiler_readable_jstype_SomeJsType_ + this.f_packageField__com_google_j2cl_transpiler_readable_jstype_SomeJsType + this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType;] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
 [value] => [value] "value"
-[publicMethod();] => [this.publicMethod();]
-[privateMethod();] => [this.m_privateMethod___$p_com_google_j2cl_transpiler_readable_jstype_SomeJsType();]
-[packageMethod();] => [this.m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype();]
-[protectedMethod();] => [this.m_protectedMethod__();]
+[publicMethod();] => [this.publicMethod();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
+[privateMethod();] => [this.m_privateMethod___$p_com_google_j2cl_transpiler_readable_jstype_SomeJsType();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
+[packageMethod();] => [this.m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
+[protectedMethod();] => [this.m_protectedMethod__();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.useFieldsAndMethods"
 [public Wildcard testStarAndWildCard(Star s, Wildcard w) {
     Object object = new Object();
 ...    return (Wildcard) star;
@@ -71,9 +71,9 @@ public class SomeJsType<T> {
   }] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [s] => [s] "s"
 [w] => [w] "w"
-[Object object = new Object();] => [let object = java_lang_Object.$create__();]
+[Object object = new Object();] => [let object = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [object] => [object] "object"
-[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, java_lang_Object), Star$$Overlay));]
+[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, java_lang_Object), Star$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [star] => [star] "star"
-[return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, Wildcard$$Overlay));]
+[return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, Wildcard$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [UNKNOWN] => [java_lang_Object.$clinit();]
