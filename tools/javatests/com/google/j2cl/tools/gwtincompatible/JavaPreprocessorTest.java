@@ -25,18 +25,17 @@ import org.junit.runners.JUnit4;
 /** Tests for {@link JavaPreprocessor}. */
 @RunWith(JUnit4.class)
 public class JavaPreprocessorTest {
-  private static final String SOURCE_VERSION = "1.8";
 
   @Test
   public void testNoProcess() {
     String content = "public class Foo {}";
-    assertEquals(content, JavaPreprocessor.preprocessFile(content, SOURCE_VERSION));
+    assertEquals(content, JavaPreprocessor.processFile(content));
   }
 
   @Test
   public void testNoProcessString() {
     String content = "public class Foo {String a = \"@GwtIncompatible\");}";
-    assertEquals(content, JavaPreprocessor.preprocessFile(content, SOURCE_VERSION));
+    assertEquals(content, JavaPreprocessor.processFile(content));
   }
 
   @Test
@@ -57,7 +56,7 @@ public class JavaPreprocessorTest {
                 "public class Foo {",
                 "  public X m() {return null;}",
                 "}*/");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, JavaPreprocessor.processFile(before));
   }
 
   @Test
@@ -84,7 +83,7 @@ public class JavaPreprocessorTest {
                 "  @GwtIncompatible",
                 "  public D n() {}*/",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, JavaPreprocessor.processFile(before));
   }
 
   @Test
@@ -107,7 +106,7 @@ public class JavaPreprocessorTest {
                 "  public String b;*/",
                 "  public String c;",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, JavaPreprocessor.processFile(before));
   }
 
   @Test
@@ -148,7 +147,7 @@ public class JavaPreprocessorTest {
                 "  }*/",
                 "  String s;",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, JavaPreprocessor.processFile(before));
   }
 
   @Test
@@ -169,6 +168,6 @@ public class JavaPreprocessorTest {
                 "  /*@GwtIncompatible",
                 "  public void n() {foo(x /* the value of x **);}*/",
                 "}");
-    assertEquals(after, JavaPreprocessor.preprocessFile(before, SOURCE_VERSION));
+    assertEquals(after, JavaPreprocessor.processFile(before));
   }
 }

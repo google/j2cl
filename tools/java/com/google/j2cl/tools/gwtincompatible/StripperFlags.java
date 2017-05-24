@@ -28,40 +28,11 @@ public class StripperFlags {
   protected List<String> files = new ArrayList<>();
 
   @Option(
-    name = "-classpath",
-    aliases = {"-cp"},
-    metaVar = "<path>",
-    usage = "Specifies where to find user class files and annotation processors."
-  )
-  protected String classpath = "";
-
-  @Option(
-    name = "-sourcepath",
-    metaVar = "<file>",
-    usage = "Specifies where to find input source files."
-  )
-  protected String sourcepath = "";
-
-  @Option(
     name = "-d",
     metaVar = "<file>",
     usage = "The location into which to place output srcjar."
   )
   protected String outputPath;
-
-  @Option(
-    name = "-encoding",
-    metaVar = "<encoding>",
-    usage = "Specifies character encoding used by source files."
-  )
-  protected String encoding = System.getProperty("file.encoding", "UTF-8");
-
-  @Option(
-    name = "-source",
-    metaVar = "<release>",
-    usage = "Specifies source compatibility level (1.7, 1.8, etc)."
-  )
-  protected String source = "1.8";
 
   protected static StripperFlags parse(String[] args) {
     StripperFlags flags = new StripperFlags();

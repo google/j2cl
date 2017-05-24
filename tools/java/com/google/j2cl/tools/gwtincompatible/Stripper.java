@@ -40,8 +40,7 @@ public class Stripper {
     List<String> allPaths = FrontendUtils.expandSourcePathSourceJarEntries(flags.files, problems);
     abortIfError(problems);
 
-    JavaPreprocessor.preprocessFiles(
-        allPaths, outputZipFileSystem, flags.encoding, problems, flags.source);
+    JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);
     abortIfError(problems);
 
     try {

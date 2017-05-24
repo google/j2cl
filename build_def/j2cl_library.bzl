@@ -141,8 +141,6 @@ def j2cl_library(name,
       name=gwt_incompatible_stripped,
       srcs=srcs,
       visibility=["//visibility:private"],
-      restricted_to=["//buildenv/j2cl:j2cl_compilation"],
-      deps=java_deps,
       testonly=testonly,
       tags=internal_tags,
   )
