@@ -77,17 +77,17 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsName(Type type) {
-    if (!type.getDeclaration().isStarOrUnknown()) {
-      checkJsName(type.getSourcePosition(), type.getReadableDescription(), type);
+    if (type.getDeclaration().isStarOrUnknown()) {
+      if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
+        problems.error(
+            type.getSourcePosition(),
+            "Only native interfaces in the global namespace can be named '%s'.",
+            type.getSimpleJsName());
+      }
       return;
     }
 
-    if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
-      problems.error(
-          type.getSourcePosition(),
-          "Only native interfaces in the global namespace can be named '%s'.",
-          type.getSimpleJsName());
-    }
+    checkJsName(type.getSourcePosition(), type.getReadableDescription(), type);
   }
 
   private void checkType(Type type) {
