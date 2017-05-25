@@ -16,12 +16,9 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -41,23 +38,10 @@ public class InsertStringConversions extends NormalizationPass {
       public Expression rewriteStringContext(
           Expression operandExpression, Expression otherOperandExpression) {
         TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-        if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-          // If it's a string, and it is not null or the otherOperandExpression is not null,
-          // leave it alone.
-          if (AstUtils.isNonNullString(operandExpression)
-              || AstUtils.isNonNullString(otherOperandExpression)) {
-            return operandExpression;
-          } else {
-            // Otherwise, add an empty string at the front to make sure JS sees it as a
-            // string operation.
-            return BinaryExpression.newBuilder()
-                .setTypeDescriptor(TypeDescriptors.get().javaLangString)
-                .setLeftOperand(StringLiteral.fromPlainText(""))
-                .setOperator(BinaryOperator.PLUS)
-                .setRightOperand(operandExpression)
-                .build();
-          }
+        if (AstUtils.isNonNullString(operandExpression)) {
+          return operandExpression;
         }
+
         // Normally Java would call String.valueOf on a primitive but there is no need in J2CL
         // because JS converts primitives to String in the presence of a + operator.
         // We make an exception for Char which is represented as a JS number and hence needs to

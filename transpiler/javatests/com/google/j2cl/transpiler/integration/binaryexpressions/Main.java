@@ -70,10 +70,8 @@ public class Main {
     String s = null;
     assert s + s == "nullnull";
 
-    // Use an array to allow uninitialized string references.
-    // Uncomment when b/34460222 is fixed
-    // String[] stringArray = new String[1];
-    // assert stringArray[0] + stringArray[0] == "nullnull";
+    String[] stringArray = new String[1];
+    assert stringArray[0] + stringArray[0] == "nullnull";
 
     assert ((5 / 2) - 0.0) == 2.0;
 

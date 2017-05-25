@@ -99,10 +99,14 @@ class
     let r1 = this.$c_r;
     let var1 = this.$c_var;
     let x1 = this.$c_x;
-    return '' + java_lang_String.m_valueOf__int(this.$c_r) + s + this.$c_x +
-        this.$c_var + ((/** ?string */ s$1$) => {
-             return '' + s$1$ + r1 + x1 + var1;
-           })('hello');
+    return java_lang_String.m_valueOf__java_lang_Object(
+               java_lang_String.m_valueOf__int(this.$c_r)) +
+        java_lang_String.m_valueOf__java_lang_Object(s) +
+        java_lang_String.m_valueOf__java_lang_Object(this.$c_x) + this.$c_var +
+        java_lang_String.m_valueOf__java_lang_Object(((/** ?string */ s$1$) => {
+          return java_lang_String.m_valueOf__java_lang_Object(s$1$) + r1 +
+              java_lang_String.m_valueOf__java_lang_Object(x1) + var1;
+        })('hello'));
   }
 
   /**

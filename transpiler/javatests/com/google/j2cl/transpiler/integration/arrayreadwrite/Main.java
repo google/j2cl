@@ -261,10 +261,9 @@ public class Main {
     intArray[0] /= 2;
     assert intArray[0] == 1;
 
-    // Uncomment the following code after b/34460222 has been fixed
-    //    String[] stringArray = new String[1];
-    //    stringArray[0] += null;
-    //    assert stringArray[0].equals("nullnull");
+    String[] stringArray = new String[1];
+    stringArray[0] += null;
+    assert stringArray[0].equals("nullnull");
 
     boolean[] booleanArray = new boolean[1];
     booleanArray[0] |= true;

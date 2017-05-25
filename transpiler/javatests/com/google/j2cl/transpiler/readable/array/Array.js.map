@@ -155,7 +155,7 @@
 ...    strings[0] += null;
   }] => [/**
    * @return {void}
-...    $Arrays.$set(strings, 0, "" + strings[0] + java_lang_String.m_valueOf__java_lang_Object(null));
+...    $Arrays.$set(strings, 0, java_lang_String.m_valueOf__java_lang_Object(strings[0]) + java_lang_String.m_valueOf__java_lang_Object(null));
   }] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [String[] strings = new String[100];] => [let strings = /**@type {!Array<?string>} */ ($Arrays.$create([100], java_lang_String));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [strings] => [strings] "strings"
@@ -170,7 +170,7 @@
 [b = strings2d[0][1];] => [b = strings2d[0][1];] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [strings[0] = null;] => [$Arrays.$set(strings, 0, null);] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [strings2d[0][1] = null;] => [$Arrays.$set(strings2d[0], 1, null);] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
-[strings[0] += null;] => [$Arrays.$set(strings, 0, "" + strings[0] + java_lang_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
+[strings[0] += null;] => [$Arrays.$set(strings, 0, java_lang_String.m_valueOf__java_lang_Object(strings[0]) + java_lang_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.array.Array.stringArraysSample"
 [public void nativeArraySample() {
     // Creation
 ...    nativeObjects2d[0][1] = null;

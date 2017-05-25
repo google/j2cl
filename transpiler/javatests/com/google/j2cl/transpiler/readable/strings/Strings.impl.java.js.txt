@@ -62,34 +62,61 @@ class Strings extends java_lang_Object {
   m_test__() {
     let s1 = null;
     let s2 = null;
-    let s3 = '' + s1 + s2;
-    s2 += '' + s2;
-    s1 += 'a';
-    s3 = '' + s1 + s1 + s2 +
+    let s3 = java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(s2);
+    s2 = java_lang_String.m_valueOf__java_lang_Object(s2) +
+        java_lang_String.m_valueOf__java_lang_Object(s2);
+    s1 = java_lang_String.m_valueOf__java_lang_Object(s1) + 'a';
+    s3 = java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(s2) +
         java_lang_String.m_valueOf__java_lang_Object(null) + 'a';
-    s3 =
-        'a' + s1 + s1 + s2 + java_lang_String.m_valueOf__java_lang_Object(null);
+    s3 = 'a' + java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(s2) +
+        java_lang_String.m_valueOf__java_lang_Object(null);
     let /** ?string */ s4;
     let c1 = 70 /* 'F' */;
     let c2 = 111 /* 'o' */;
     s4 = java_lang_String.m_valueOf__char(c1) +
         java_lang_String.m_valueOf__char(c2) + 'o';
-    s4 += $Long.fromBits(1, 0) /* 1 */ + '';
-    s4 += $Long.fromBits(1, 0) /* 1 */;
-    s4 += java_lang_String.m_valueOf__char(67 /* 'C' */);
-    s4 += 1;
-    s4 += 1.0;
-    s4 += 1.0;
-    s4 += 1;
-    (StringHolder.$create__())
-        .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +=
-        '' + s4;
-    (StringHolder.$create__())
-        .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +=
-        java_lang_String.m_valueOf__char(c1);
-    (StringHolder.$create__())
-        .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder +=
-        'o';
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
+        $Long.fromBits(1, 0) /* 1 */ + '';
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
+        $Long.fromBits(1, 0) /* 1 */;
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
+        java_lang_String.m_valueOf__char(67 /* 'C' */);
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1;
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1.0;
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1.0;
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1;
+    {
+      let $qualifier = (StringHolder.$create__());
+      $qualifier
+          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+          java_lang_String.m_valueOf__java_lang_Object(
+              $qualifier
+                  .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
+          java_lang_String.m_valueOf__java_lang_Object(s4);
+    }
+    {
+      let $qualifier$1$ = (StringHolder.$create__());
+      $qualifier$1$
+          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+          java_lang_String.m_valueOf__java_lang_Object(
+              $qualifier$1$
+                  .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
+          java_lang_String.m_valueOf__char(c1);
+    }
+    {
+      let $qualifier$2$ = (StringHolder.$create__());
+      $qualifier$2$
+          .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
+          java_lang_String.m_valueOf__java_lang_Object(
+              $qualifier$2$
+                  .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
+          'o';
+    }
   }
 
   /**

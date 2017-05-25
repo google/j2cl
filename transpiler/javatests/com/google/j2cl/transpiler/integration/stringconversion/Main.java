@@ -41,7 +41,7 @@ public class Main {
 
     // Two Null String instances.
     String s1 = null;
-    String s2 = null;
+    String s2 = (new String[0])[0]; // undefined
     String s3 = s1 + s2; // two nullable string instances
     assert (s3.equals("nullnull"));
     s2 += s2; // nullable string compound assignment, plus a nullable string.

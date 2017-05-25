@@ -149,8 +149,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     // Only a handful of types do not need compound assignment expansion, these are the ones which
     // do not need extra instrumentation to perform the operations due to emulation (longs), boxing
     // or coercion (short, byte and boolean operations).
-    return !TypeDescriptors.isJavaLangString(targetTypeDescriptor)
-        && !TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)
+    return !TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)
         && !TypeDescriptors.isPrimitiveInt(targetTypeDescriptor);
   }
 
