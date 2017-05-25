@@ -19,17 +19,17 @@ j2cl_mirror_from_gwt(
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
     ],
     js_deps = [
-        "//javascript/closure/reflect",
-        "//javascript/closure/math:long",
-        "//javascript/closure:base",
+        "//third_party:closure_reflect",
+        "//third_party:closure_math_long",
+        "//third_party:closure_base",
     ],
     mirrored_files = [
-        "//third_party/java_src/gwt/svn/trunk/user:java_emul",
-        "//third_party/java_src/gwt/svn/trunk/user:java_emul_internal",
+        "//third_party:gwt_java_emul",
+        "//third_party:gwt_java_emul_internal",
     ],
     deps = [
-        "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
+        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

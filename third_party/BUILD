@@ -87,8 +87,33 @@ java_library(
 java_library(
     name = "jakarta_velocity",
     exports = [
-        "@org_apache_velocity//jar",
         "@org_apache_commons_collections//jar",
         "@org_apache_commons_lang2//jar",
+        "@org_apache_velocity//jar",
     ],
+)
+
+alias(
+    name = "closure_reflect",
+    actual = "@closure_library//:reflect",
+)
+
+alias(
+    name = "closure_math_long",
+    actual = "@closure_library//:math_long",
+)
+
+alias(
+    name = "closure_base",
+    actual = "@closure_library//:base",
+)
+
+alias(
+    name = "gwt_java_emul",
+    actual = "@org_gwtproject_gwt//:java_emul",
+)
+
+alias(
+    name = "gwt_java_emul_internal",
+    actual = "@org_gwtproject_gwt//:java_emul_internal",
 )

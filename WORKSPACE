@@ -114,3 +114,32 @@ http_jar(
     name = "org_eclipse_jdt_text",
     url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.text_3.5.400.v20150505-1044.jar",
 )
+
+new_http_archive(
+  name="closure_library",
+  url="https://github.com/google/closure-library/archive/v20170409.tar.gz",
+  build_file="closure_library.BUILD",
+  strip_prefix="closure-library-20170409"
+)
+
+new_http_archive(
+  name="org_gwtproject_gwt",
+  url="https://github.com/gwtproject/gwt/archive/2.8.1.tar.gz",
+  build_file="gwt.BUILD",
+  strip_prefix="gwt-2.8.1"
+)
+
+http_archive(
+    name = "io_bazel_rules_closure",
+    strip_prefix = "rules_closure-0.4.1",
+    sha256 = "ba5e2e10cdc4027702f96e9bdc536c6595decafa94847d08ae28c6cb48225124",
+    url = "http://mirror.bazel.build/github.com/bazelbuild/rules_closure/archive/0.4.1.tar.gz",
+)
+
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
+
+closure_repositories(
+    omit_args4j=True,
+    omit_closure_library=True,
+)
+
