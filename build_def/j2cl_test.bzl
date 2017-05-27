@@ -220,8 +220,9 @@ def j2cl_test(name,
       srcs=[":%s_generated_suite.js.zip" % name],
       deps=[
           # We add this direct dependency to prevent AJD from pruning _js_srcs.
-          # This is for boostrap_files which are dropped from jsunit_test
-          # compiled mode. See alternative solution: cl/156794921.
+          # This is for bootsrap sources which need to be passed as _js_srcs in
+          # j2cl_test for the compiled mode to pick it up (otherwise dropped
+          # in jsunit_test if user provided only in bootstrap_files).
           ":%s_lib" % name,
           ":%s_generated_suite_lib" % name,
           "//javascript/closure/testing:testsuite",
