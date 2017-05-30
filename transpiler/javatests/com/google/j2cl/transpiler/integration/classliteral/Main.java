@@ -196,6 +196,14 @@ public class Main {
     assertSame(Class.class, Object.class.getClass());
     assertSame(Class.class, int.class.getClass());
     assertSame(Class.class, Object[].class.getClass());
+
+    try {
+      Object nullObject = null;
+      nullObject.getClass();
+      assert false;
+    } catch (NullPointerException expected) {
+      // expected
+    }
   }
 
   public static void main(String[] args) {

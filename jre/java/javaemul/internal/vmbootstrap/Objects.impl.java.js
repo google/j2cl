@@ -109,13 +109,15 @@ class Objects {
       return Arrays.m_getClass__java_lang_Object(obj);
     } else if (obj instanceof Object) {
       return Class.$get(obj.constructor);
-    } else {
+    } else if (obj) {
       // Do not need to check existence of 'getClass' since j.l.Object#getClass
       // is final and all native types map to a single special class and so do
       // native functions.
       return Class.$get(
           type == 'function' ? JavaScriptFunction : JavaScriptObject);
     }
+
+    throw new TypeError("null.getClass");
   }
 
   /**
