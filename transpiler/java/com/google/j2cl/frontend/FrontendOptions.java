@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.frontend.common.ZipFiles;
 import com.google.j2cl.problems.Problems;
@@ -27,18 +28,15 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Frontend options, which can be initialized by a Flag instance that is already parsed.
@@ -208,23 +206,11 @@ public class FrontendOptions {
 
   public void setSourceFiles(List<String> sourceFiles) {
     if (checkSourceFiles(sourceFiles)) {
-      this.sourceFilePaths = new ArrayList<>(sourceFiles);
-      accumulateSourceJarContents();
+      this.sourceFilePaths = getAllSources(sourceFiles);
     }
   }
 
-  private void accumulateSourceJarContents() {
-    // Remove and isolate sourceJarPaths from sourceFilePaths.
-    List<String> sourceJarPaths = new ArrayList<>();
-    Iterator<String> sourceFilePathsIterator = sourceFilePaths.iterator();
-    while (sourceFilePathsIterator.hasNext()) {
-      String sourceFilePath = sourceFilePathsIterator.next();
-      if (sourceFilePath.endsWith("jar")) {
-        sourceJarPaths.add(sourceFilePath);
-        sourceFilePathsIterator.remove();
-      }
-    }
-
+  private ImmutableList<String> getAllSources(Collection<String> sources) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
@@ -233,42 +219,28 @@ public class FrontendOptions {
       srcjarContentDir = Files.createTempDirectory("source_jar");
     } catch (IOException e) {
       problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
-      return;
-    }
-
-    final List<String> jarSourceFilePaths = new ArrayList<>();
-
-    // Extract sourceJars and accumulate their contained .java files back into sourceFilePaths.
-    for (String sourceJarPath : sourceJarPaths) {
-      try {
-        // Extract the sourceJar.
-        ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
-
-        // Accumulate the contained .java files back into sourceFilePaths.
-        Files.walkFileTree(
-            srcjarContentDir,
-            new SimpleFileVisitor<Path>() {
-              @Override
-              public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
-                  throws IOException {
-                if (path.toString().endsWith(".java")) {
-                  jarSourceFilePaths.add(path.toAbsolutePath().toString());
-                }
-                return FileVisitResult.CONTINUE;
-              }
-            });
-      } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
-      }
+      return null;
     }
 
     // Sort source file paths so that our input is always in a stable order. If this is not done
     // and you can't trust the input to have been provided already in a stable order then the result
     // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
     // cause unstable optimization in JSCompiler.
-    Collections.sort(sourceFilePaths);
-    Collections.sort(jarSourceFilePaths);
-    sourceFilePaths.addAll(jarSourceFilePaths);
+    return sources
+        .stream()
+        .flatMap(f -> f.endsWith("jar") ? extractSourceJar(f, srcjarContentDir) : Stream.of(f))
+        .sorted()
+        .collect(ImmutableList.toImmutableList());
+  }
+
+  private Stream<String> extractSourceJar(String sourceJarPath, Path srcjarContentDir) {
+    try {
+      ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
+      return Files.walk(srcjarContentDir).map(Path::toString).filter(f -> f.endsWith(".java"));
+    } catch (IOException e) {
+      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+    }
+    return Stream.of();
   }
 
   public boolean getShouldPrintReadableSourceMap() {
