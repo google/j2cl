@@ -28,7 +28,7 @@ def _get_message(ctx):
     "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
     "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
   ]
-  index = len(ctx.attr.srcs) + len(ctx.configuration.bin_dir.path)
+  index = len(ctx.attr.deps) + len(ctx.configuration.bin_dir.path)
   return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx
 
 def _impl(ctx):
