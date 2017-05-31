@@ -47,6 +47,6 @@ public class InvalidOptionTest extends IntegrationTestCase {
     // Verify that the output location was rejected.
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
-        "-output location '" + outputLocation + "' must be a directory or .zip file");
+        "Output location '" + outputLocation + "' must be a directory or .zip file");
   }
 }

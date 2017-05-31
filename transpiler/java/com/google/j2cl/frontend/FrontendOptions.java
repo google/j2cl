@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.frontend.common.ZipFiles;
 import com.google.j2cl.problems.Problems;
@@ -33,9 +34,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -48,19 +47,16 @@ public class FrontendOptions {
   private List<String> sourcepathEntries;
   private List<String> bootclassPathEntries;
   private List<String> nativesourcezipEntries;
-  private String output;
+  private Path outputPath;
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
-  private FileSystem outputFileSystem;
   private boolean shouldPrintReadableMap;
   private boolean declareLegacyNamespace;
   private boolean generateTimeReport;
 
   private static final ImmutableSet<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
-
-  private static final String ZIP_EXTENSION = ".zip";
 
   public FrontendOptions(Problems problems, FrontendFlags flags) {
     this.problems = problems;
@@ -131,8 +127,8 @@ public class FrontendOptions {
     return true;
   }
 
-  public String getOutput() {
-    return this.output;
+  public Path getOutputPath() {
+    return this.outputPath;
   }
 
   /**
@@ -141,24 +137,7 @@ public class FrontendOptions {
    * The location can be either a directory or a zip file.
    */
   public void setOutput(String output) {
-    Path outputPath = Paths.get(output);
-    if (Files.exists(outputPath)
-        && !Files.isDirectory(outputPath)
-        && !output.endsWith(ZIP_EXTENSION)) {
-      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
-    }
-
-    if (output.endsWith(ZIP_EXTENSION)) {
-      // jar:file://output/Location/Path.zip!relative/File/Path.js
-      initZipOutput(outputPath);
-      return;
-    }
-    // file://output/Location/Path/relative/File/Path.js
-    initDirOutput(output);
-  }
-
-  public FileSystem getOutputFileSystem() {
-    return outputFileSystem;
+    this.outputPath = output.endsWith(".zip") ? getZipOutput(output) : getDirOutput(output);
   }
 
   public String getEncoding() {
@@ -290,29 +269,33 @@ public class FrontendOptions {
         || sourceFile.endsWith("-src.jar");
   }
 
-  private void initDirOutput(String output) {
-    this.outputFileSystem = FileSystems.getDefault();
-    this.output = output;
+  private Path getDirOutput(String output) {
+    Path outputPath = Paths.get(output);
+    if (Files.isRegularFile(outputPath)) {
+      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
+    }
+    return outputPath;
   }
 
-  private void initZipOutput(Path outputPath) {
+  private Path getZipOutput(String output) {
+    Path outputPath = Paths.get(output);
+    if (Files.isDirectory(outputPath)) {
+      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
+    }
 
     // Ensures that we will not fail if the zip already exists.
-    File zipFile = outputPath.toFile();
-    if (zipFile.exists()) {
-      zipFile.delete();
-    }
+    outputPath.toFile().delete();
 
     try {
-      Map<String, String> env = new HashMap<>();
-      env.put("create", "true");
-      this.outputFileSystem =
+      FileSystem newFileSystem =
           FileSystems.newFileSystem(
-              URI.create("jar:file:" + outputPath.toUri().getPath()), env, null);
+              URI.create("jar:file:" + outputPath.toAbsolutePath()),
+              ImmutableMap.of("create", "true"));
+      return newFileSystem.getPath("/");
     } catch (IOException e) {
       problems.error(Message.ERR_CANNOT_OPEN_ZIP, outputPath.toString(), e.getMessage());
+      return null;
     }
-    this.output = null;
   }
 
   private static List<String> getPathEntries(String path) {

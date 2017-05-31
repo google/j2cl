@@ -24,7 +24,6 @@ import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,8 +32,6 @@ import java.nio.file.attribute.FileTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -45,8 +42,7 @@ public class OutputGeneratorStage {
   private final Charset charset;
   private final List<String> nativeJavaScriptFileZipPaths;
   private final Problems problems;
-  private final FileSystem outputFileSystem;
-  private final String outputLocationPath;
+  private final Path outputPath;
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
   private final TimingCollector timingReport = TimingCollector.get();
@@ -54,15 +50,13 @@ public class OutputGeneratorStage {
   public OutputGeneratorStage(
       Charset charset,
       List<String> nativeJavaScriptFileZipPaths,
-      FileSystem outputFileSystem,
-      String outputLocationPath,
+      Path outputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
       Problems problems) {
     this.charset = charset;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
-    this.outputFileSystem = outputFileSystem;
-    this.outputLocationPath = outputLocationPath;
+    this.outputPath = outputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.problems = problems;
@@ -78,9 +72,6 @@ public class OutputGeneratorStage {
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getFilesByPathFromZip(
             nativeJavaScriptFileZipPaths, charset.name(), problems);
-
-    SortedSet<String> importModulePaths = new TreeSet<>();
-    SortedSet<String> exportModulePaths = new TreeSet<>();
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
@@ -127,11 +118,7 @@ public class OutputGeneratorStage {
                 + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
-            GeneratorUtils.getAbsolutePath(
-                outputFileSystem,
-                outputLocationPath,
-                GeneratorUtils.getRelativePath(type),
-                jsImplGenerator.getSuffix());
+            outputPath.resolve(GeneratorUtils.getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
         timingReport.startSample("Write impl");
         GeneratorUtils.writeToFile(
@@ -141,11 +128,8 @@ public class OutputGeneratorStage {
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
         Path absolutePathForHeader =
-            GeneratorUtils.getAbsolutePath(
-                outputFileSystem,
-                outputLocationPath,
-                GeneratorUtils.getRelativePath(type),
-                jsHeaderGenerator.getSuffix());
+            outputPath.resolve(
+                GeneratorUtils.getRelativePath(type) + jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
         timingReport.startSample("Write header");
         GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, problems);
@@ -180,9 +164,8 @@ public class OutputGeneratorStage {
     // Generate sourcemap files.
     new SourceMapGeneratorStage(
             charset,
-            outputFileSystem,
             compilationUnitFileName,
-            outputLocationPath,
+            outputPath,
             compilationUnitFilePath,
             javaScriptImplementationFileContents,
             problems,
@@ -199,23 +182,22 @@ public class OutputGeneratorStage {
         j2clUnit.getPackageName().replace(".", File.separator)
             + File.separator
             + j2clUnit.getName();
-    Path outputPath =
-        GeneratorUtils.getAbsolutePath(outputFileSystem, outputLocationPath, relativePath, ".java");
+    Path absolutePath = outputPath.resolve(relativePath + ".java");
     try {
       Files.copy(
           Paths.get(j2clUnit.getFilePath()),
-          outputPath,
+          absolutePath,
           StandardCopyOption.REPLACE_EXISTING,
           StandardCopyOption.COPY_ATTRIBUTES);
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
-      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
+      Files.setLastModifiedTime(absolutePath, FileTime.fromMillis(0));
     } catch (IOException e) {
       // TODO(tdeegan): This blows up during the JRE compile. Did this ever work? The sources are
       // available for compilation so no errors should be seen here unless there is an exceptional
       // condition.
       // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
-      // + outputPath + ":" + e.getMessage());
+      // + absolutePath + ":" + e.getMessage());
     }
   }
 }

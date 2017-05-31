@@ -32,7 +32,6 @@ import com.google.j2cl.problems.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
@@ -54,19 +53,6 @@ public class GeneratorUtils {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String typeName = typeDeclaration.getSimpleBinaryName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
-  }
-
-  /**
-   * Returns the absolute path for the given output FileSystem and output paths.
-   */
-  public static Path getAbsolutePath(
-      FileSystem outputFileSystem,
-      String outputLocationPath,
-      String relativeFilePath,
-      String suffix) {
-    return outputLocationPath != null
-        ? outputFileSystem.getPath(outputLocationPath, relativeFilePath + suffix)
-        : outputFileSystem.getPath(relativeFilePath + suffix);
   }
 
   /**

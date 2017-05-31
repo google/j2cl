@@ -84,6 +84,7 @@ import com.google.j2cl.problems.Problems;
 import com.google.j2cl.problems.Problems.Message;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystem;
 import java.util.List;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
@@ -295,8 +296,7 @@ public class J2clTranspiler {
     new OutputGeneratorStage(
             Charset.forName(options.getEncoding()),
             options.getNativeSourceZipEntries(),
-            options.getOutputFileSystem(),
-            options.getOutput(),
+            options.getOutputPath(),
             options.getDeclareLegacyNamespace(),
             options.getShouldPrintReadableSourceMap(),
             problems)
@@ -308,9 +308,10 @@ public class J2clTranspiler {
   private void maybeCloseFileSystem() {
     timingCollector.startSample("Close File System");
 
-    if (options.getOutputFileSystem() instanceof com.sun.nio.zipfs.ZipFileSystem) {
+    FileSystem outputFileSystem = options.getOutputPath().getFileSystem();
+    if (outputFileSystem instanceof com.sun.nio.zipfs.ZipFileSystem) {
       try {
-        options.getOutputFileSystem().close();
+        outputFileSystem.close();
       } catch (IOException e) {
         problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
       }

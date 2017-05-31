@@ -39,7 +39,7 @@ public class Problems {
     ERR_INVALID_SOURCE_VERSION("Invalid source version '%s'.", 1),
     ERR_UNSUPPORTED_ENCODING("Unsupported encoding '%s'.", 1),
     ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output '%s': %s.", 2),
-    ERR_OUTPUT_LOCATION("-output location '%s' must be a directory or .zip file.", 1),
+    ERR_OUTPUT_LOCATION("Output location '%s' must be a directory or .zip file.", 1),
     ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
     ERR_CANNOT_OPEN_ZIP("Cannot open zip '%s': %s.", 2),
     ERR_CANNOT_CLOSE_ZIP("Cannot close zip: %s.", 1),

@@ -9,7 +9,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.problems.Problems;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -23,8 +22,7 @@ public class SourceMapGeneratorStage {
 
   private final Charset charset;
   private final Problems problems;
-  private final FileSystem outputFileSystem;
-  private final String outputLocationPath;
+  private final Path outputPath;
   private final String javaSourceFile;
   private final String javaScriptImplementationFileContents;
   private final boolean generateReadableSourceMaps;
@@ -32,16 +30,14 @@ public class SourceMapGeneratorStage {
 
   public SourceMapGeneratorStage(
       Charset charset,
-      FileSystem outputFileSystem,
       String compilationUnitSourceFileName,
-      String outputLocationPath,
+      Path outputPath,
       String javaSourceFile,
       String javaScriptImplementationFileContents,
       Problems problems,
       boolean generateReadableSourceMaps) {
     this.charset = charset;
-    this.outputFileSystem = outputFileSystem;
-    this.outputLocationPath = outputLocationPath;
+    this.outputPath = outputPath;
     this.javaSourceFile = javaSourceFile;
     this.problems = problems;
     this.generateReadableSourceMaps = generateReadableSourceMaps;
@@ -64,11 +60,7 @@ public class SourceMapGeneratorStage {
         return;
       }
       Path absolutePathForSourceMap =
-          GeneratorUtils.getAbsolutePath(
-              outputFileSystem,
-              outputLocationPath,
-              GeneratorUtils.getRelativePath(type),
-              SOURCE_MAP_SUFFIX);
+          outputPath.resolve(GeneratorUtils.getRelativePath(type) + SOURCE_MAP_SUFFIX);
       GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
     } catch (IOException e) {
       problems.error("Could not generate source maps for %s: %s", javaSourceFile, e.getMessage());
