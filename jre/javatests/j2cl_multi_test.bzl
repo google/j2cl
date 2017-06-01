@@ -27,10 +27,4 @@ def j2cl_multi_test(name, test_class, **kwargs):
             compile=1,
             generate_build_test=False,
             runtime_deps=deps,
-            extra_defs= [
-                # JRE tests use $doc and do other illegal things on purpose.
-                # b/33055288
-                "--jscomp_off=undefinedVars",
-                "--jscomp_off=checkTypes",
-            ],
             **kwargs)
