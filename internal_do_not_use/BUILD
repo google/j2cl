@@ -28,10 +28,9 @@ package(default_visibility = ["//visibility:public"])
 # ***************************************************
 
 # Main J2CL transpiler binary.
-java_binary(
+alias(
     name = "J2clTranspiler",
-    main_class = "com.google.j2cl.transpiler.J2clTranspilerWorker",
-    runtime_deps = ["//transpiler/java/com/google/j2cl/transpiler:transpiler_worker_lib"],
+    actual = "//transpiler/java/com/google/j2cl/transpiler:J2clTranspiler_worker",
 )
 
 # ***************************************************

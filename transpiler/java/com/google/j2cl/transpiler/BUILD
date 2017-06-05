@@ -19,3 +19,15 @@ java_library(
         "//transpiler/java/com/google/j2cl/problems",
     ],
 )
+
+java_binary(
+    name = "J2clTranspiler",
+    main_class = "com.google.j2cl.transpiler.J2clTranspiler",
+    runtime_deps = [":transpiler_lib"],
+)
+
+java_binary(
+    name = "J2clTranspiler_worker",
+    main_class = "com.google.j2cl.transpiler.J2clTranspilerWorker",
+    runtime_deps = [":transpiler_worker_lib"],
+)
