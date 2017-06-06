@@ -79,7 +79,6 @@ are copyright and licensed as follows:
   1). members in JsFunction implementor cannot be JsProperty/JsMethod. (maybe)
 
 ## Tracking Closure warning issues
-- https://b.corp.google.com/hotlists/269212
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
 

@@ -167,7 +167,8 @@ def j2cl_library(name,
       **java_library_kwargs
   )
 
-  # See: https://groups.google.com/a/google.com/forum/#!topic/grok-dev/ziIAgfo7GBg
+  # Grok indexing is broken since we supply a source jar to java_library. Following target directly
+  # with sources is synthesized just to fix that.
   native.java_library(
       name = base_name + "_java_library_for_grok",
       srcs = srcs,

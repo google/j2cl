@@ -91,8 +91,7 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here. See:
-    # https://groups.google.com/a/google.com/d/msg/closure-team/-0eRaBREmHw/Kb_ZYRtWEAAJ
+    # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here.
     # TODO(b/62039178): Remove this.
     _js_srcs = [":test_defines"],
     bootstrap_files = [":test_defines"],
