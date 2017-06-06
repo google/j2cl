@@ -3,8 +3,8 @@ package(default_visibility = [
     "//third_party/java/j2cl:__subpackages__",
 ])
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 java_library(
     name = "transpiler_lib",

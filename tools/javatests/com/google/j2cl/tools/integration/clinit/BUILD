@@ -1,5 +1,5 @@
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 load(
     "//:tools/javatests/com/google/j2cl/tools/integration/jsni_converter_test.bzl",

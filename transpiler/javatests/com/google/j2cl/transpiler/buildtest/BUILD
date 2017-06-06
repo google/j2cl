@@ -17,8 +17,8 @@ load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_p
 load("//build_def:j2cl_test.bzl", "j2cl_test")
 load("//build_def:j2cl_util.bzl", "J2CL_UNOPTIMIZED_DEFS")
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 # ********************************************
 # Broken target with notap and manual tags should not break

@@ -1,7 +1,7 @@
 package(default_visibility = ["//:__subpackages__"])
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 load("//build_def:j2cl_test.bzl", "j2cl_test")
 

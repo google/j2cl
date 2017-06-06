@@ -4,8 +4,8 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 java_test(
     name = "JsniConverterTestSuite",

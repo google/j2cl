@@ -1,5 +1,5 @@
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 js_library(
     name = "A-native",

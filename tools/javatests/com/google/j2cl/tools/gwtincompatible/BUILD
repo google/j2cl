@@ -2,8 +2,8 @@ package(
     default_testonly = 1,
 )
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 load("//java/com/google/testing/builddefs:GenTestRules.bzl", "GenTestRules")
 

@@ -3,8 +3,8 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
 

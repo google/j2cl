@@ -11,8 +11,8 @@ package(default_visibility = ["//:__subpackages__"])
 load("//tools/build_rules:build_test.bzl", "build_test")
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 
-# Google owns the copyright
-licenses(["unencumbered"])
+# Apache2
+licenses(["notice"])
 
 # A java_binary to create a merged jar of all deps of the standard runtime.
 java_binary(
