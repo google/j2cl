@@ -61,11 +61,6 @@ public class IntegrationTestCase extends TestCase {
   protected static final String JRE_PATH =
       TEST_ROOT + "/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar";
 
-  public enum OutputType {
-    DIR,
-    ZIP
-  }
-
   /**
    * A bundle of data recording the results of a transpile operation.
    */
@@ -132,8 +127,8 @@ public class IntegrationTestCase extends TestCase {
     assertThat(output).named("Output").contains(snippet);
   }
 
-  protected static String[] getTranspileArgs(
-      File outputLocation, Class<?> testClass, String inputDirectoryName, String... extraArgs) {
+  private String[] getTranspileArgs(
+      File outputLocation, String inputDirectoryName, String... extraArgs) {
     List<String> argList = new ArrayList<>();
 
     // Output dir
@@ -141,7 +136,7 @@ public class IntegrationTestCase extends TestCase {
     argList.add(outputLocation.getAbsolutePath());
 
     // Input source
-    for (File sourceFile : listSourceFilesInDir(testClass, inputDirectoryName)) {
+    for (File sourceFile : listSourceFilesInDir(getClass(), inputDirectoryName)) {
       argList.add(sourceFile.getAbsolutePath());
     }
 
@@ -174,16 +169,15 @@ public class IntegrationTestCase extends TestCase {
     return sourceFiles;
   }
 
+  protected TranspileResult transpileDirectory(String directoryName, String... extraArgs)
+      throws IOException {
+    return transpileDirectory(directoryName, Files.createTempDir(), extraArgs);
+  }
+
   protected TranspileResult transpileDirectory(
-      String directoryName, OutputType outputType, String... extraArgs) throws IOException {
-    File outputLocation = Files.createTempDir();
-    if (outputType == OutputType.ZIP) {
-      outputLocation = new File(outputLocation, "output.zip");
-    }
-    String[] transpileArgs =
-        IntegrationTestCase.getTranspileArgs(
-            outputLocation, this.getClass(), directoryName, extraArgs);
-    return transpile(transpileArgs, outputLocation);
+      String directoryName, File output, String... extraArgs) throws IOException {
+    String[] transpileArgs = getTranspileArgs(output, directoryName, extraArgs);
+    return transpile(transpileArgs, output);
   }
 
   protected TranspileResult transpile(String[] args) {

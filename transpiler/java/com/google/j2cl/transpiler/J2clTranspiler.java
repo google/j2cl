@@ -83,7 +83,7 @@ import com.google.j2cl.generator.OutputGeneratorStage;
 import com.google.j2cl.problems.Problems;
 import com.google.j2cl.problems.Problems.Message;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.util.List;
 
@@ -294,7 +294,7 @@ public class J2clTranspiler {
     timingCollector.startSubSample("OutputGeneratorStage Constructor");
 
     new OutputGeneratorStage(
-            Charset.forName(options.getEncoding()),
+            StandardCharsets.UTF_8,
             options.getNativeSourceZipEntries(),
             options.getOutputPath(),
             options.getDeclareLegacyNamespace(),

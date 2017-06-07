@@ -21,7 +21,6 @@ import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.problems.Problems;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -49,9 +48,7 @@ public class JsniConverter {
     // is no special care being taken to ensure that the classpath is being properly constructed.
     // This may result in some JDT parse errors, but since we are not checking the resulting Error
     // object they are effectively being ignored.
-    JdtParser jdtParser =
-        new JdtParser(
-            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", problems);
+    JdtParser jdtParser = new JdtParser(classPathEntries, problems);
     jdtParser.setIncludeRunningVMBootclasspath(true);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         jdtParser.parseFiles(javaFileNames);

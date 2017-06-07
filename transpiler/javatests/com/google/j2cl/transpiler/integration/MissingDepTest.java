@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class MissingDepTest extends IntegrationTestCase {
   public void testMissingDep() throws IOException {
-    TranspileResult transpileResult = transpileDirectory("missingdep", OutputType.DIR);
+    TranspileResult transpileResult = transpileDirectory("missingdep");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(), "The type java.lang.Object cannot be resolved.");
   }

@@ -18,15 +18,12 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.frontend.common.ZipFiles;
 import com.google.j2cl.problems.Problems;
 import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -44,19 +41,12 @@ public class FrontendOptions {
   private final Problems problems;
 
   private List<String> classpathEntries;
-  private List<String> sourcepathEntries;
-  private List<String> bootclassPathEntries;
   private List<String> nativesourcezipEntries;
   private Path outputPath;
-  private String encoding;
-  private String sourceVersion;
   private List<String> sourceFilePaths;
   private boolean shouldPrintReadableMap;
   private boolean declareLegacyNamespace;
   private boolean generateTimeReport;
-
-  private static final ImmutableSet<String> VALID_JAVA_VERSIONS =
-      ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
 
   public FrontendOptions(Problems problems, FrontendFlags flags) {
     this.problems = problems;
@@ -67,16 +57,12 @@ public class FrontendOptions {
    * Initialize compiler options by parsed flags.
    */
   public void initOptions(FrontendFlags flags) {
-    setClasspathEntries(flags.classpath);
-    setSourcepathEntries(flags.sourcepath);
-    setBootclassPathEntries(flags.bootclasspath);
-    setNativeSourceZipEntries(flags.nativesourceszippath);
+    setClasspathEntries(flags.classPath);
+    setNativeSourceZipEntries(flags.nativeSourcePath);
     setOutput(flags.output);
     setSourceFiles(flags.files);
-    setSourceVersion(flags.source);
-    setEncoding(flags.encoding);
     setShouldPrintReadableSourceMap(flags.readableSourceMaps);
-    setDeclareLegacyNamespace(flags.declareLegacyNamespace);
+    setDeclareLegacyNamespace(flags.declareLegacyNamespaces);
     setGenerateTimeReport(flags.generateTimeReport);
   }
 
@@ -86,22 +72,6 @@ public class FrontendOptions {
 
   public void setClasspathEntries(String classpath) {
     this.classpathEntries = getPathEntries(classpath);
-  }
-
-  public List<String> getSourcepathEntries() {
-    return this.sourcepathEntries;
-  }
-
-  public void setSourcepathEntries(String sourcepath) {
-    this.sourcepathEntries = getPathEntries(sourcepath);
-  }
-
-  public List<String> getBootclassPathEntries() {
-    return this.bootclassPathEntries;
-  }
-
-  public void setBootclassPathEntries(String bootclassPath) {
-    this.bootclassPathEntries = getPathEntries(bootclassPath);
   }
 
   public List<String> getNativeSourceZipEntries() {
@@ -138,45 +108,6 @@ public class FrontendOptions {
    */
   public void setOutput(String output) {
     this.outputPath = output.endsWith(".zip") ? getZipOutput(output) : getDirOutput(output);
-  }
-
-  public String getEncoding() {
-    return this.encoding;
-  }
-
-  public void setEncoding(String encoding) {
-    if (checkEncoding(encoding)) {
-      this.encoding = encoding;
-    }
-  }
-
-  public boolean checkEncoding(String encoding) {
-    try {
-      // Verify encoding has a supported charset.
-      Charset.forName(encoding);
-    } catch (UnsupportedCharsetException e) {
-      problems.error(Message.ERR_UNSUPPORTED_ENCODING, encoding);
-      return false;
-    }
-    return true;
-  }
-
-  public String getSourceVersion() {
-    return this.sourceVersion;
-  }
-
-  public void setSourceVersion(String sourceVersion) {
-    if (checkSourceVersion(sourceVersion)) {
-      this.sourceVersion = sourceVersion;
-    }
-  }
-
-  public boolean checkSourceVersion(String sourceVersion) {
-    if (!VALID_JAVA_VERSIONS.contains(sourceVersion)) {
-      problems.error(Message.ERR_INVALID_SOURCE_VERSION, sourceVersion);
-      return false;
-    }
-    return true;
   }
 
   public List<String> getSourceFiles() {

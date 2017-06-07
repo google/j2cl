@@ -24,6 +24,6 @@ public class InvalidFlagTest extends IntegrationTestCase {
     TranspileResult transpileResult = transpile(args);
     assertErrorsContainsSnippet(
         transpileResult.getProblems(), "\"-unknown\" is not a valid option");
-    assertErrorsContainsSnippet(transpileResult.getProblems(), "Valid options:");
+    assertErrorsContainsSnippet(transpileResult.getProblems(), "use -help for a list");
   }
 }

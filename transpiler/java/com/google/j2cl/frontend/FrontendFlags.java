@@ -31,89 +31,58 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.OptionHandlerFilter;
 
 /** The set of supported flags. */
 public class FrontendFlags {
-  @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
+  @Argument(metaVar = "<source files>", required = true)
   protected List<String> files = new ArrayList<>();
 
   @Option(
     name = "-classpath",
-    aliases = {"-cp"},
+    aliases = "-cp",
     metaVar = "<path>",
     usage = "Specifies where to find user class files and annotation processors."
   )
-  protected String classpath = "";
+  protected String classPath = "";
 
   @Option(
-    name = "-sourcepath",
-    metaVar = "<file>",
-    usage = "Specifies where to find input source files."
-  )
-  protected String sourcepath = "";
-
-  @Option(
-    name = "-nativesourcezip",
-    metaVar = "<file>",
-    usage = "Specifies where to find zip file containing js impl files for native methods."
-  )
-  protected String nativesourceszippath = "";
-
-  /** Option that allows users to swap out the location of the JRE library. */
-  @Option(
-    name = "-bootclasspath",
+    name = "-nativesourcepath",
     metaVar = "<path>",
-    usage = "Overrides location of bootstrap class files"
+    usage = "Specifies where to find zip files containing native.js files for native methods."
   )
-  protected String bootclasspath = "";
+  protected String nativeSourcePath = "";
 
   @Option(
     name = "-d",
-    metaVar = "<file>",
+    metaVar = "<path>",
     usage = "Directory or zip into which to place compiled output."
   )
-  // TODO(stalcup): replace with -output instead of -d
   @VisibleForTesting
   public String output = ".";
 
-  @Option(
-    name = "-encoding",
-    metaVar = "<encoding>",
-    usage = "Specifies character encoding used by source files."
-  )
-  protected String encoding = System.getProperty("file.encoding", "UTF-8");
-
-  @Option(
-    name = "-source",
-    metaVar = "<release>",
-    usage = "Specifies source compatibility level (1.7, 1.8, etc)."
-  )
-  protected String source = "1.8";
-
-  @Option(name = "-h", aliases = "-help", usage = "print this message")
+  @Option(name = "-help", usage = "print this message")
   protected boolean help = false;
 
   @Option(
-    name = "-readableSourceMaps",
+    name = "-readablesourcemaps",
     usage = "Coerces generated source maps to human readable form.",
     hidden = true
   )
   protected boolean readableSourceMaps = false;
 
   @Option(
-    name = "-declareLegacyNamespace",
+    name = "-declarelegacynamespaces",
     usage =
         "Enable goog.module.declareLegacyNamespace() for generated goog.module()."
             + " For Docs during onboarding, do not use.",
     hidden = true
   )
-  protected boolean declareLegacyNamespace = false;
+  protected boolean declareLegacyNamespaces = false;
 
   @Option(
     name = "-time",
     usage = "Generates a report of time spent in all stages of the compiler.",
-    hidden = false
+    hidden = true
   )
   protected boolean generateTimeReport = false;
 
@@ -134,17 +103,25 @@ public class FrontendFlags {
       return;
     }
 
+    final String usage = "Usage: j2cl <options> <source files>";
+
     try {
       parser.parseArgument(args);
-      if (help) {
-        problems.info(J2clUtils.streamToString(parser::printUsage));
-        problems.abortWhenPossible();
-      }
     } catch (CmdLineException e) {
-      String message = e.getMessage() + "\n";
-      message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
-      message += "\nuse -help for a list of possible options in more details";
-      problems.error(message);
+      if (!help) {
+        String message = e.getMessage() + "\n";
+        message += usage + "\n";
+        message += "use -help for a list of possible options";
+        problems.error(message);
+      }
+    }
+
+    if (help) {
+      String message = usage + "\n";
+      message += "where possible options include:\n";
+      message += J2clUtils.streamToString(parser::printUsage);
+      problems.info(message);
+      problems.abortWhenPossible();
     }
   }
 

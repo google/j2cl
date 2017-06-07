@@ -30,14 +30,9 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
     TranspileResult transpileResult =
         transpileDirectory(
             "nativesourceserror",
-            OutputType.DIR,
-            "-source",
-            "1.8",
-            "-encoding",
-            "UTF-8",
             "-cp",
             JRE_PATH,
-            "-nativesourcezip",
+            "-nativesourcepath",
             NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
@@ -54,14 +49,9 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
     TranspileResult transpileResult =
         transpileDirectory(
             "nativesourceserror",
-            OutputType.DIR,
-            "-source",
-            "1.8",
-            "-encoding",
-            "UTF-8",
             "-cp",
             JRE_PATH,
-            "-nativesourcezip",
+            "-nativesourcepath",
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),
@@ -80,18 +70,13 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
    * <p>The compilation fails because there is no ExtraClass.java so not all the native sources are
    * used.
    */
-  public void testUnUsedSource() throws IOException, InterruptedException {
+  public void testUnusedSource() throws IOException, InterruptedException {
     TranspileResult transpileResult =
         transpileDirectory(
             "nativesourceserror",
-            OutputType.DIR,
-            "-source",
-            "1.8",
-            "-encoding",
-            "UTF-8",
             "-cp",
             JRE_PATH,
-            "-nativesourcezip",
+            "-nativesourcepath",
             NATIVE_SOURCES_ERROR_PATH + "too_many_native_sources.zip");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(),

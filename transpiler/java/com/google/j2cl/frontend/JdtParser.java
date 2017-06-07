@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.frontend;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.frontend.common.GwtIncompatibleNodeCollector;
@@ -44,38 +43,21 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 public class JdtParser {
   private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
-  private final List<String> classpathEntries = new ArrayList<>();
-  private final List<String> sourcepathEntries = new ArrayList<>();
-  private final String encoding;
+  private final List<String> classpathEntries;
   private boolean includeRunningVMBootclasspath;
 
   /** Create and initialize a JdtParser based on an options object. */
   public JdtParser(FrontendOptions options, Problems problems) {
-    this(
-        options.getSourceVersion(),
-        options.getClasspathEntries(),
-        options.getBootclassPathEntries(),
-        options.getSourcepathEntries(),
-        options.getEncoding(),
-        problems);
+    this(options.getClasspathEntries(), problems);
   }
 
   /** Create and initialize a JdtParser based on passed parameters. */
-  public JdtParser(
-      String sourceVersion,
-      List<String> classpathEntries,
-      List<String> bootclassPathEntries,
-      List<String> sourcepathEntries,
-      String encoding,
-      Problems problems) {
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, sourceVersion);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, sourceVersion);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, sourceVersion);
+  public JdtParser(List<String> classpathEntries, Problems problems) {
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, "1.8");
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, "1.8");
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, "1.8");
 
-    this.classpathEntries.addAll(classpathEntries);
-    this.classpathEntries.addAll(bootclassPathEntries);
-    this.sourcepathEntries.addAll(sourcepathEntries);
-    this.encoding = encoding;
+    this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
   }
 
@@ -135,18 +117,15 @@ public class JdtParser {
     parser.setResolveBindings(resolveBinding);
     parser.setEnvironment(
         Iterables.toArray(classpathEntries, String.class),
-        Iterables.toArray(sourcepathEntries, String.class),
-        getEncodings(sourcepathEntries.size()),
+        new String[0],
+        new String[0],
         includeRunningVMBootclasspath);
     return parser;
   }
 
   private String[] getEncodings(int length) {
-    if (encoding == null) {
-      return null;
-    }
     String[] encodings = new String[length];
-    Arrays.fill(encodings, encoding);
+    Arrays.fill(encodings, "UTF_8");
     return encodings;
   }
 

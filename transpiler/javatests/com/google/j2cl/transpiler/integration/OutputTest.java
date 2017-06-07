@@ -19,21 +19,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 
-/**
- * Tests that expected output is created.
- */
+/** Tests output flag. */
 public class OutputTest extends IntegrationTestCase {
+
   public void testOutputDir() throws IOException, InterruptedException {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "output",
-            OutputType.DIR,
-            "-source",
-            "1.8",
-            "-encoding",
-            "UTF-8",
-            "-cp",
-            JRE_PATH);
+    TranspileResult transpileResult = transpileDirectory("output", "-cp", JRE_PATH);
 
     assertEquals(0, transpileResult.getExitCode());
     assertFalse(transpileResult.getProblems().hasProblems());
@@ -51,22 +41,14 @@ public class OutputTest extends IntegrationTestCase {
   }
 
   public void testOutputZip() throws IOException, InterruptedException {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "output",
-            OutputType.ZIP,
-            "-source",
-            "1.8",
-            "-encoding",
-            "UTF-8",
-            "-cp",
-            JRE_PATH);
+    File outputLocation = File.createTempFile("output", ".zip");
+    TranspileResult transpileResult = transpileDirectory("output", outputLocation, "-cp", JRE_PATH);
 
     assertEquals(0, transpileResult.getExitCode());
     assertFalse(transpileResult.getProblems().hasErrors());
     assertTrue(transpileResult.getOutputLocation().exists());
 
-    try (ZipFile zipFile = new ZipFile(transpileResult.getOutputLocation())) {
+    try (ZipFile zipFile = new ZipFile(outputLocation)) {
       assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.java.js"));
       assertNotNull(
           zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.impl.java.js"));
@@ -75,6 +57,19 @@ public class OutputTest extends IntegrationTestCase {
           zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.impl.java.js"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
+  }
+
+  public void testOutputInvalidFile() throws IOException {
+    // Output to a location that is not a directory and is not a zip file.
+    File outputLocation = File.createTempFile("foo", ".txt");
+
+    // Run the transpile
+    TranspileResult transpileResult = transpileDirectory("output", outputLocation);
+
+    // Verify that the output location was rejected.
+    assertErrorsContainsSnippet(
+        transpileResult.getProblems(),
+        "Output location '" + outputLocation + "' must be a directory or .zip file");
   }
 
   private static void assertFileExists(File outputPath, String fileName) {

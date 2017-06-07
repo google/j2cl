@@ -25,14 +25,8 @@ public class HelpFlagTest extends IntegrationTestCase {
     String[] args = new String[] {"-help"};
     TranspileResult transpileResult = transpile(args);
     assertEquals(0, transpileResult.getExitCode());
-    assertOutputContainsSnippet(transpileResult.getProblems(), "<source files .java|.srcjar>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-bootclasspath <path>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-classpath (-cp) <path>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-d <file>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-encoding <encoding>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-h (-help)");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-source <release>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-sourcepath <file>");
-    assertOutputContainsSnippet(transpileResult.getProblems(), "-nativesourcezip <file>");
+    // Just a smoke test to verify that we printing some flags with description
+    assertOutputContainsSnippet(transpileResult.getProblems(), "-classpath");
+    assertOutputContainsSnippet(transpileResult.getProblems(), "Specifies where to find");
   }
 }

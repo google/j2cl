@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class SyntaxErrorTest extends IntegrationTestCase {
   public void testSyntaxError() throws IOException, InterruptedException {
-    TranspileResult transpileResult = transpileDirectory("syntaxerror", OutputType.DIR);
+    TranspileResult transpileResult = transpileDirectory("syntaxerror");
     assertErrorsContainsSnippet(transpileResult.getProblems(), "SyntaxError.java:20: Syntax error");
   }
 }

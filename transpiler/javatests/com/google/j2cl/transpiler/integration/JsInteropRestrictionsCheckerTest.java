@@ -23,7 +23,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -2730,9 +2729,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   private String[] getTranspilerArgs(File inputDir, File outputDir) {
     List<String> argList = new ArrayList<>();
 
-    argList.add("-sourcepath");
-    argList.add(inputDir.getAbsolutePath());
-
     // Output dir
     argList.add("-d");
     argList.add(outputDir.getAbsolutePath());
@@ -2744,7 +2740,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
       argList.add(sourceFile.getPath());
     }
 
-    argList.addAll(Arrays.asList("-source", "1.8", "-encoding", "UTF-8", "-cp", JRE_PATH));
+    argList.add("-cp");
+    argList.add(JRE_PATH);
 
     return Iterables.toArray(argList, String.class);
   }

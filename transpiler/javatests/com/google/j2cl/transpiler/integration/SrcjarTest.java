@@ -21,13 +21,13 @@ import java.io.IOException;
 public class SrcjarTest extends IntegrationTestCase {
   public void testMissingSrcjar() throws IOException {
     TranspileResult transpileResult =
-        transpileDirectory("missingsrcjar", OutputType.DIR, "/foo/bar/Missing.srcjar");
+        transpileDirectory("missingsrcjar", "/foo/bar/Missing.srcjar");
     assertErrorsContainsSnippet(
         transpileResult.getProblems(), "File '/foo/bar/Missing.srcjar' not found.");
   }
 
   public void testCorruptSrcjar() throws IOException {
-    TranspileResult transpileResult = transpileDirectory("corruptsrcjar", OutputType.DIR);
+    TranspileResult transpileResult = transpileDirectory("corruptsrcjar");
     assertErrorsContainsSnippet(transpileResult.getProblems(), "Cannot extract zip");
   }
 }

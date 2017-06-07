@@ -35,16 +35,6 @@ java_test(
 )
 
 java_test(
-    name = "InvalidOptionTest",
-    srcs = ["InvalidOptionTest.java"],
-    data = glob(["invalidoutputoption/**/*"]),
-    deps = [
-        ":IntegrationTestCase",
-        "//java/com/google/common/io",
-    ],
-)
-
-java_test(
     name = "SyntaxErrorTest",
     srcs = ["SyntaxErrorTest.java"],
     data = glob(["syntaxerror/**/*"]),
@@ -84,14 +74,10 @@ java_test(
     srcs = ["OutputTest.java"],
     data = glob(["output/**/*"]) + [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "ValidOptionsTest",
-    srcs = ["ValidOptionsTest.java"],
-    data = glob(["validoptions/**/*"]),
-    deps = [":IntegrationTestCase"],
+    deps = [
+        ":IntegrationTestCase",
+        "//java/com/google/common/io",
+    ],
 )
 
 java_test(
