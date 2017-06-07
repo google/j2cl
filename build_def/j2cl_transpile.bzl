@@ -19,14 +19,14 @@ j2cl_transpile directly.
 
 def _get_message(ctx):
   _MESSAGES = [
-    "Re" + "ti" + "cu" + "la" + "ti" + "ng" + "Sp" + "li" + "ne" + "s",
-    3 * ("\\" + "0" + "/ "),
-    "Co" + "mp" + "ut" + "in" + "g " + "PI",
-    "So" + " m" + "uch" + " Ja" + "va",
-    "Ma" + "ki" + "ng"  + " c" + "of" + "fee",
-    "So" + "lv" + "in" + "g " + "ha" + "lt" + "ing" + " p" + "ro" + "bl" + "em",
-    "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
-    "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
+      "Re" + "ti" + "cu" + "la" + "ti" + "ng" + "Sp" + "li" + "ne" + "s",
+      3 * ("\\" + "0" + "/ "),
+      "Co" + "mp" + "ut" + "in" + "g " + "PI",
+      "So" + " m" + "uch" + " Ja" + "va",
+      "Ma" + "ki" + "ng"  + " c" + "ov" + "fe" + "fe",
+      "So" + "lv" + "in" + "g " + "ha" + "lt" + "ing" + " p" + "ro" + "bl" + "em",
+      "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
+      "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
   ]
   index = len(ctx.attr.deps) + len(ctx.configuration.bin_dir.path)
   return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx
