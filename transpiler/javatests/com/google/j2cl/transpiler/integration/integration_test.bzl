@@ -90,7 +90,6 @@ def integration_test(name,
   defines = {
       "jre.checks.checkLevel" : "MINIMAL",
       "jre.checkedMode" : "DISABLED",
-      "jre.logging.logLevel" : "OFF",
   }
 
   defines.update(closure_defines)
