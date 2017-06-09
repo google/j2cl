@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -30,154 +31,43 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * Frontend options, which can be initialized by a Flag instance that is already parsed.
- */
-public class FrontendOptions {
-  private final Problems problems;
+/** Frontend options, which is initialized by a Flag instance that is already parsed. */
+@AutoValue
+public abstract class FrontendOptions {
 
-  private List<String> classpathEntries;
-  private List<String> nativesourcezipEntries;
-  private Path outputPath;
-  private List<String> sourceFilePaths;
-  private boolean shouldPrintReadableMap;
-  private boolean declareLegacyNamespace;
-  private boolean generateTimeReport;
+  public static FrontendOptions create(FrontendFlags flags, Problems problems) {
+    checkSourceFiles(flags.files, problems);
 
-  public FrontendOptions(Problems problems, FrontendFlags flags) {
-    this.problems = problems;
-    initOptions(flags);
+    return new AutoValue_FrontendOptions(
+        getPathEntries(flags.classPath),
+        getPathEntries(flags.nativeSourcePath),
+        getAllSources(flags.files, problems),
+        flags.output.endsWith(".zip")
+            ? getZipOutput(flags.output, problems)
+            : getDirOutput(flags.output, problems),
+        flags.readableSourceMaps,
+        flags.declareLegacyNamespaces,
+        flags.generateTimeReport);
   }
 
-  /**
-   * Initialize compiler options by parsed flags.
-   */
-  public void initOptions(FrontendFlags flags) {
-    setClasspathEntries(flags.classPath);
-    setNativeSourceZipEntries(flags.nativeSourcePath);
-    setOutput(flags.output);
-    setSourceFiles(flags.files);
-    setShouldPrintReadableSourceMap(flags.readableSourceMaps);
-    setDeclareLegacyNamespace(flags.declareLegacyNamespaces);
-    setGenerateTimeReport(flags.generateTimeReport);
-  }
+  public abstract List<String> getClasspathEntries();
 
-  public List<String> getClasspathEntries() {
-    return this.classpathEntries;
-  }
+  public abstract List<String> getNativeSourceZipEntries();
 
-  public void setClasspathEntries(String classpath) {
-    this.classpathEntries = getPathEntries(classpath);
-  }
+  public abstract List<String> getSourceFiles();
 
-  public List<String> getNativeSourceZipEntries() {
-    return this.nativesourcezipEntries;
-  }
+  public abstract Path getOutputPath();
 
-  public void setNativeSourceZipEntries(String zipFilePath) {
-    List<String> zipFilePaths =
-        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(zipFilePath);
-    if (checkNativeSourceZipEntries(zipFilePaths)) {
-      this.nativesourcezipEntries = zipFilePaths;
-    }
-  }
+  public abstract boolean getShouldPrintReadableSourceMap();
 
-  private boolean checkNativeSourceZipEntries(List<String> zipFilePaths) {
-    for (String path : zipFilePaths) {
-      File file = new File(path);
-      if (!file.exists()) {
-        problems.error(Message.ERR_FILE_NOT_FOUND, path);
-        return false;
-      }
-    }
-    return true;
-  }
+  public abstract boolean getDeclareLegacyNamespace();
 
-  public Path getOutputPath() {
-    return this.outputPath;
-  }
+  public abstract boolean getGenerateTimeReport();
 
-  /**
-   * Sets the output location.
-   * <p>
-   * The location can be either a directory or a zip file.
-   */
-  public void setOutput(String output) {
-    this.outputPath = output.endsWith(".zip") ? getZipOutput(output) : getDirOutput(output);
-  }
-
-  public List<String> getSourceFiles() {
-    return this.sourceFilePaths;
-  }
-
-  public void setSourceFiles(List<String> sourceFiles) {
-    if (checkSourceFiles(sourceFiles)) {
-      this.sourceFilePaths = getAllSources(sourceFiles);
-    }
-  }
-
-  private ImmutableList<String> getAllSources(Collection<String> sources) {
-    // Make sure to extract all of the Jars into a single temp dir so that when later sorting
-    // sourceFilePaths there is no instability introduced by differences in randomly generated
-    // temp dir prefixes.
-    Path srcjarContentDir;
-    try {
-      srcjarContentDir = Files.createTempDirectory("source_jar");
-    } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
-      return null;
-    }
-
-    // Sort source file paths so that our input is always in a stable order. If this is not done
-    // and you can't trust the input to have been provided already in a stable order then the result
-    // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
-    // cause unstable optimization in JSCompiler.
-    return sources
-        .stream()
-        .flatMap(f -> f.endsWith("jar") ? extractSourceJar(f, srcjarContentDir) : Stream.of(f))
-        .sorted()
-        .collect(ImmutableList.toImmutableList());
-  }
-
-  private Stream<String> extractSourceJar(String sourceJarPath, Path srcjarContentDir) {
-    try {
-      ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
-      return Files.walk(srcjarContentDir).map(Path::toString).filter(f -> f.endsWith(".java"));
-    } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
-    }
-    return Stream.of();
-  }
-
-  public boolean getShouldPrintReadableSourceMap() {
-    return shouldPrintReadableMap;
-  }
-
-  public void setShouldPrintReadableSourceMap(boolean shouldPrintReadableMap) {
-    this.shouldPrintReadableMap = shouldPrintReadableMap;
-  }
-
-  public boolean getDeclareLegacyNamespace() {
-    return declareLegacyNamespace;
-  }
-
-  public void setDeclareLegacyNamespace(boolean declareLegacyNamespace) {
-    this.declareLegacyNamespace = declareLegacyNamespace;
-  }
-
-  public boolean getGenerateTimeReport() {
-    return generateTimeReport;
-  }
-
-  private void setGenerateTimeReport(boolean generateTimeReport) {
-    this.generateTimeReport = generateTimeReport;
-  }
-
-  private boolean checkSourceFiles(List<String> sourceFiles) {
+  private static boolean checkSourceFiles(List<String> sourceFiles, Problems problems) {
     for (String sourceFile : sourceFiles) {
       if (isValidExtension(sourceFile)) {
         File file = new File(sourceFile);
@@ -200,7 +90,42 @@ public class FrontendOptions {
         || sourceFile.endsWith("-src.jar");
   }
 
-  private Path getDirOutput(String output) {
+  private static ImmutableList<String> getAllSources(List<String> sources, Problems problems) {
+    // Make sure to extract all of the Jars into a single temp dir so that when later sorting
+    // sourceFilePaths there is no instability introduced by differences in randomly generated
+    // temp dir prefixes.
+    Path srcjarContentDir;
+    try {
+      srcjarContentDir = Files.createTempDirectory("source_jar");
+    } catch (IOException e) {
+      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
+      return null;
+    }
+
+    // Sort source file paths so that our input is always in a stable order. If this is not done
+    // and you can't trust the input to have been provided already in a stable order then the result
+    // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
+    // cause unstable optimization in JSCompiler.
+    return sources
+        .stream()
+        .flatMap(
+            f -> f.endsWith("jar") ? extractSourceJar(f, srcjarContentDir, problems) : Stream.of(f))
+        .sorted()
+        .collect(ImmutableList.toImmutableList());
+  }
+
+  private static Stream<String> extractSourceJar(
+      String sourceJarPath, Path srcjarContentDir, Problems problems) {
+    try {
+      ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
+      return Files.walk(srcjarContentDir).map(Path::toString).filter(f -> f.endsWith(".java"));
+    } catch (IOException e) {
+      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+    }
+    return Stream.of();
+  }
+
+  private static Path getDirOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
     if (Files.isRegularFile(outputPath)) {
       problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
@@ -208,7 +133,7 @@ public class FrontendOptions {
     return outputPath;
   }
 
-  private Path getZipOutput(String output) {
+  private static Path getZipOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
     if (Files.isDirectory(outputPath)) {
       problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);

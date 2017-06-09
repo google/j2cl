@@ -25,20 +25,6 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
   private static final String NATIVE_SOURCES_ERROR_PATH =
       "third_party/java_src/j2cl/transpiler/javatests/" + PACKAGE_NAME;
 
-  /** Tries to load nonexistent.zip which doesn't exist. */
-  public void testMissingZip() throws IOException, InterruptedException {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "nativesourceserror",
-            "-cp",
-            JRE_PATH,
-            "-nativesourcepath",
-            NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
-    assertErrorsContainsSnippet(
-        transpileResult.getProblems(),
-        "File '" + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip' not found");
-  }
-
   /**
    * bad_name_native_sources.zip contains:
    * com/google/j2cl/transpiler/integration/nativesourceserror/BadNameNativeClass.native.js

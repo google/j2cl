@@ -153,7 +153,7 @@ public class J2clTranspiler {
     flags.parse(args);
     problems.abortIfRequested();
 
-    options = new FrontendOptions(problems, flags);
+    options = FrontendOptions.create(flags, problems);
     problems.abortIfRequested();
   }
 
