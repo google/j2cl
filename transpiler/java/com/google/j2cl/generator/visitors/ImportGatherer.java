@@ -22,6 +22,7 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
@@ -84,7 +85,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   private final Multiset<String> localNameUses = HashMultiset.create();
 
-  private final Multimap<ImportCategory, TypeDescriptor> typeDescriptorsByCategory =
+  private final SetMultimap<ImportCategory, TypeDescriptor> typeDescriptorsByCategory =
       LinkedHashMultimap.create();
 
   private final boolean declareLegacyNamespace;
@@ -205,17 +206,6 @@ public class ImportGatherer extends AbstractVisitor {
     addTypeDescriptor(referencedTypeDescriptor, ImportCategory.LAZY);
   }
 
-  private void addRawTypeDescriptor(
-      ImportCategory importCategory, TypeDescriptor rawTypeDescriptor) {
-    checkArgument(rawTypeDescriptor.getTypeArgumentDescriptors().isEmpty());
-
-    if (rawTypeDescriptor.isExtern()) {
-      importCategory = ImportCategory.EXTERN;
-    }
-
-    typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
-  }
-
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
@@ -243,8 +233,9 @@ public class ImportGatherer extends AbstractVisitor {
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
-      addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
-      addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
+      typeDescriptorsByCategory.put(
+          ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
+      typeDescriptorsByCategory.put(importCategory, TypeDescriptors.get().primitiveLong);
       return;
     }
 
@@ -275,7 +266,13 @@ public class ImportGatherer extends AbstractVisitor {
 
     mayAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
     mayAddOverlayImplementationTypeDescriptor(typeDescriptor);
-    addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
+
+    TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+    if (rawTypeDescriptor.isExtern()) {
+      importCategory = ImportCategory.EXTERN;
+    }
+
+    typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
   }
 
   private void mayAddOverlayImplementationTypeDescriptor(TypeDescriptor typeDescriptor) {
@@ -316,27 +313,23 @@ public class ImportGatherer extends AbstractVisitor {
         .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
 
     timingCollector.startSample("Record Local Name Uses");
-    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.SELF));
-    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.LAZY));
-    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EAGER));
-    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EXTERN));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.SELF));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
 
     timingCollector.startSample("Convert to imports");
     Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
     importsByCategory.putAll(
-        ImportCategory.LAZY,
-        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.LAZY)));
+        ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
     importsByCategory.putAll(
-        ImportCategory.EAGER,
-        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EAGER)));
+        ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
     importsByCategory.putAll(
-        ImportCategory.EXTERN,
-        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
+        ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
     // Creates an alias for the current type, last, to make sure that its name dodges externs
     // when necessary.
     importsByCategory.putAll(
-        ImportCategory.SELF,
-        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.SELF)));
+        ImportCategory.SELF, toImports(typeDescriptorsByCategory.get(ImportCategory.SELF)));
     timingCollector.endSubSample();
     return importsByCategory;
   }

@@ -55,12 +55,10 @@ public class GenerationEnvironment {
   }
 
   public String aliasForType(TypeDeclaration typeDeclaration) {
+    String alias = aliasByTypeBinaryName.get(typeDeclaration.getQualifiedBinaryName());
     checkState(
-        aliasByTypeBinaryName.containsKey(typeDeclaration.getQualifiedBinaryName()),
-        "An alias was needed for %s but no alias was found.",
-        typeDeclaration);
-
-    return aliasByTypeBinaryName.get(typeDeclaration.getQualifiedBinaryName());
+        alias != null, "An alias was needed for %s but no alias was found.", typeDeclaration);
+    return alias;
   }
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
