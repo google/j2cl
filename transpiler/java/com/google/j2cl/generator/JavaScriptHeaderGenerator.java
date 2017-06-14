@@ -54,12 +54,14 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         "// all files are included in the dependency tree.");
     sourceBuilder.newLine();
 
-    Set<String> requiredPaths = new HashSet<>();
+    Set<String> alreadyRequiredPaths = new HashSet<>();
+    // Make sure we don't self-import
+    alreadyRequiredPaths.add(type.getDeclaration().getQualifiedJsName());
     // goog.require(...) for eager imports.
     for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.EAGER))) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
-      if (requiredPaths.add(path)) {
+      if (alreadyRequiredPaths.add(path)) {
         sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }
     }
@@ -67,7 +69,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getHeaderModulePath();
-      if (requiredPaths.add(path)) {
+      if (alreadyRequiredPaths.add(path)) {
         sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }
     }
