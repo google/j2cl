@@ -90,8 +90,10 @@ J2CL_UNOPTIMIZED_DEFS = [
 # TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
 J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
                        ADVANCED_OPTIMIZATIONS_FLAGS +
-                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS +
-                       ["--extra_smart_name_removal=true"])
+                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
+                           "--extra_smart_name_removal=true",
+                           "--define=goog.DEBUG=false",
+                       ])
 
 J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     # Manage closure deps will strip our outputs in some tests
