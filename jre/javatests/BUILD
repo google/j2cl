@@ -33,9 +33,6 @@ j2cl_source_copy(
     name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
     excludes = [
-        # Uses a method on Throwable that is not present in Java:
-        # Throwable#getBackingJsObject
-        "javaemul/internal/ConsoleLogger.java",
         # Emulated charset contains classes extending from
         # java.nio.charset.Charset that are not implementing all Java methods.
         # This is okay in the emulated version since emulated
