@@ -92,6 +92,9 @@ def j2cl_library(name,
                  **kwargs):
   """Translates Java source into JS source in a js_library() target.
 
+  Implicit output targets:
+    lib<name>-src.jar: A java archive containing the sources (source jar).
+
   Args:
     srcs: Source files (.java or .srcjar) to compile.
     native_srcs: Foo.native.js source files.
@@ -237,6 +240,10 @@ def j2cl_library(name,
     apt_jszip_name = base_name + "_apt.js.zip"
     _do_env_copy(js_sources_from_apt, apt_jszip_name, testonly)
     src_zips += [":" + apt_jszip_name]
+
+    # Expose java sources similar to java_library
+    java_src_jar = "lib" + base_name + "-src.jar"
+    _do_env_copy("lib" + base_name + "_java_library-src.jar", java_src_jar, testonly)
 
   if _js_srcs:
     handrolled_js = base_name + "_handrolled.js.zip";
