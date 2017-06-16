@@ -4,19 +4,19 @@ J2CL
 > *THIS REPOSITORY IS AN EARLY_ACCESS OF J2CL AND SHOULD NOT BE DISCUSSED
 PUBLICLY.*
 
-J2CL is a Java to closure style javascript transpiler.
-The project aims to refresh GWT by enabling easy reuse of Java libraries in JS
-applications and by generating JS that tightly optimizes and correctly
-type-checks in [Google closure compiler](https://github.com/google/closure-compiler)
+J2CL is a transpiler from Java to Closure style JavaScript.
+The project enables easy reuse of Java libraries in JS applications by
+generating JS that tightly optimizes and correctly type-checks in
+[Google Closure Compiler](https://github.com/google/closure-compiler)
 
 Compile with Bazel
 ------------------
 
 You can build the transpiler from source by following the steps below:
 
-- You need to install [Bazel](https://bazel.build/versions/master/docs/install.html).
-- clone this repository with git: `git clone https://github.com/google/j2cl.git`
-- Inside the repository, have bazel build the jar file:
+- Install [Bazel](https://bazel.build/versions/master/docs/install.html).
+- Clone this repository with git: `git clone https://github.com/google/j2cl.git`
+- Build the jar file inside the repository with Bazel:
 
       $ bazel build //transpiler/java/com/google/j2cl/transpiler:J2clTranspiler_deploy.jar
 
