@@ -25,7 +25,8 @@ class Exceptions {
    * exception occurred during the resource initialization or in the try block, it is passed in here
    * so that we can add suppressed exceptions to it if the resource fails to close.
    */
-  public static Throwable safeClose(AutoCloseable resource, Throwable currentException) {
+  public static Throwable safeClose(
+      @SuppressWarnings("unusable-by-js") AutoCloseable resource, Throwable currentException) {
     if (resource == null) {
       return currentException;
     }
