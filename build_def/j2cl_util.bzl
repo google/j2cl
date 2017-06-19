@@ -105,4 +105,8 @@ J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     # turn off the closure debug loader since it is causing warnings
     # in bundled mode
     "--define=goog.ENABLE_DEBUG_LOADER=false",
+    # enables source maps for tests used in stack trace deobfuscation
+    "--apply_input_source_maps",
+    # set the naming pattern for the source map output
+    "--create_source_map=%outname%.sourcemap",
 ]
