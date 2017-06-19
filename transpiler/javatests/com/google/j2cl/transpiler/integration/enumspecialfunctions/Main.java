@@ -72,10 +72,12 @@ public class Main {
     // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
     // implemented.
     try {
-      assert Enum.valueOf(Planet.class, null) == null;
+      Enum.valueOf(Planet.class, null);
       // assert false : "Should have thrown NullPointerException";
-    } catch (NullPointerException expected) {
+      // } catch (NullPointerException expected) {
+    } catch (AssertionError expected) {
     }
+
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
     // implemented.
     assert Planet.class.getEnumConstants() == null || Planet.class.getEnumConstants() != null;

@@ -51,9 +51,9 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
   }
 
   @JsIgnore
-  public static native <T extends Enum<T>> T valueOf(Class<T> enumType, String name) /*-{
-    return null;
-  }-*/;
+  public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {
+    throw new AssertionError("not supported");
+  }
 
   @Override
   public String toString() {
