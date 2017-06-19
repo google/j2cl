@@ -44,6 +44,19 @@ java_library(
 
 # ********************************************
 
+load("//tools/build_rules:build_test.bzl", "build_test")
+
+# test implicit j2cl_library outputs
+build_test(
+    name = "implicit_outputs",
+    targets = [
+        ":example_j2cl_lib.js.zip",
+        ":libexample_j2cl_lib-src.jar",
+    ],
+)
+
+# ********************************************
+
 js_library(
     name = "launcher",
     srcs = ["Launcher.js"],
@@ -159,8 +172,6 @@ mss_js_compiled_module_set_flat_files(
     module_sets = ["J2clPintoPmfEnhancerMss_processed_module_set"],
     source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
 )
-
-load("//tools/build_rules:build_test.bzl", "build_test")
 
 build_test(
     name = "J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set_build_test",
