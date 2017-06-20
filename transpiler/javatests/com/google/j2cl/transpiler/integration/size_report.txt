@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 1 size changes.
+There are 8 size changes.
 Total size (of already existing tests) changed from
-  1416903 to 1416926 bytes (100%->100.00%) and from
-  441133 to 441097 bytes (100%->99.99%) gzipped.
+  1416926 to 1408447 bytes (100%->99.40%) and from
+  441097 to 438876 bytes (100%->99.50%) gzipped.
 
 
 New reports:
@@ -14,7 +14,10 @@ New reports:
 Shrinkage report highlights:
 **************************************
       old    new
-     6191   6155 logging (-0.58%)
+     2936   2519 staticinitsuper (-14.20%)
+     4300   3804 trywithresource (-11.53%)
+     4234   3818 loggingstripped (-9.83%)
+     6155   5834 logging (-5.22%)
 
 
 Expansion report highlights:
@@ -45,10 +48,10 @@ All reports:
       909    909 backwardbridgemethod (unchanged)
      2370   2370 binaryexpressions (unchanged)
       835    835 blockscoping (unchanged)
-    38986  38986 box2d_default (unchanged)
-    36798  36798 box2d_noclassmetadata (unchanged)
-    35096  35096 box2d_noclassmetadata_checksmin (unchanged)
-    36651  36651 box2d_noclassmetadata_checksopt (unchanged)
+    38986  38845 box2d_default (-0.36%)
+    36798  36670 box2d_noclassmetadata (-0.35%)
+    35096  34937 box2d_noclassmetadata_checksmin (-0.45%)
+    36651  36508 box2d_noclassmetadata_checksopt (-0.39%)
      3340   3340 boxingsideeffect (unchanged)
       880    880 breakstatement (unchanged)
      2516   2516 bridgejsmethod (unchanged)
@@ -159,8 +162,8 @@ All reports:
      1025   1025 lambdaswithgenerics (unchanged)
      1210   1210 localclasswithcaptures (unchanged)
       913    913 localgenericclassinitjustonce (unchanged)
-     6191   6155 logging (-0.58%)
-     4234   4234 loggingstripped (unchanged)
+     6155   5834 logging (-5.22%)
+     4234   3818 loggingstripped (-9.83%)
      2721   2721 longimplicitcasts (unchanged)
      2533   2533 longoperationsinglesideeffect (unchanged)
      1487   1487 methodreferences (unchanged)
@@ -215,7 +218,7 @@ All reports:
        62     62 staticfieldinitializer (unchanged)
        62     62 staticfields (unchanged)
       855    855 staticinitorder (unchanged)
-     2936   2936 staticinitsuper (unchanged)
+     2936   2519 staticinitsuper (-14.20%)
       835    835 staticjsmethods (unchanged)
       926    926 staticnestedclass (unchanged)
      1531   1531 strictequality (unchanged)
@@ -230,7 +233,7 @@ All reports:
       814    814 synchronizedblock (unchanged)
        62     62 systemgetproperty (unchanged)
       949    949 ternaryexpression (unchanged)
-     4300   4300 trywithresource (unchanged)
+     4300   3804 trywithresource (-11.53%)
       971    971 typewildcards (unchanged)
       869    869 unaryexpressions (unchanged)
      2958   2958 underflowoverflowconversion (unchanged)

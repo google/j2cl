@@ -93,6 +93,7 @@ J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
                        USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
                            "--extra_smart_name_removal=true",
                            "--define=goog.DEBUG=false",
+                           "--remove_unused_prototype_props_in_externs",
                        ])
 
 J2CL_TEST_DEFS = JS_TEST_FLAGS + [
