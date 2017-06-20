@@ -18,17 +18,20 @@ package com.google.j2cl.transpiler.integration;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
-/**
- * Tests for JsInteropRestrictionsChecker.
- */
+/** Tests for JsInteropRestrictionsChecker. */
 public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
   // TODO(b/37579830): Finalize checker implementation and enable this test.
@@ -257,7 +260,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
-
 
   public void testCollidingNativeJsPropertiesSucceeds() throws Exception {
     compile(
@@ -2290,11 +2292,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
                 + "that is different from the JavaScript name of a method it overrides "
                 + "('int Object.hashCode()' with JavaScript name 'hashCode')"
             // TODO(b/37579977): Finalize checker implementation and enable this test.
-            //"Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
+            // "Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
             //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
-            //"Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
+            // "Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'.
+            // 'java.lang.Object'"
             //    + " methods in native JsTypes cannot be called using super."
-            //"Line 20: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object'"
+            // "Line 20: Cannot use super to call 'EntryPoint.NativeType.equals'.
+            // 'java.lang.Object'"
             //    + " methods in native JsTypes cannot be called using super."
             );
   }
@@ -2617,8 +2621,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   public void testUnusableByJsWarns() throws Exception {
-    compile(
+    compileWithNative(
             "Buggy",
+            "C",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsFunction;",
             "import jsinterop.annotations.JsMethod;",
@@ -2626,9 +2631,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "class A {}",
             "@JsType interface I {}",
             "class B implements I {}",
-            "class C {", // non-jstype class with JsMethod
+            "class C {", // non-jstype class
             "  @JsMethod",
             "  public static void fc1(A a) {}", // JsMethod
+            "  public native void fc2(A a);", // native method
             "}",
             "class D {", // non-jstype class with JsProperty
             "  @JsProperty",
@@ -2648,6 +2654,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileSucceeds()
         .assertWarnings(
             "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
+                + "exposed to JavaScript.",
+            "[unusable-by-js] Method 'void C.fc2(A a)' is not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void C.fc2(A a)' is not usable by but "
                 + "exposed to JavaScript.",
             "[unusable-by-js] Type 'A' of field 'D.a' is not usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A a)' is not usable by but"
@@ -2703,6 +2712,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     //      + "usable by but exposed to JavaScript.");
   }
 
+  private TranspileResult compileWithNative(String mainClass, String nativeClass, String... source)
+      throws Exception {
+    return compile(source(mainClass, source), nativeSource(nativeClass, ""));
+  }
+
   private TranspileResult compile(String mainClass, String... source) throws Exception {
     return compile(source(mainClass, source));
   }
@@ -2719,14 +2733,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     for (Source source : sources) {
       Files.write(
-          new File(packageDir, source.mainClass + ".java").toPath(),
-          source.content,
-          Charset.forName("UTF-8"));
+          new File(packageDir, source.fileName).toPath(), source.content, Charset.forName("UTF-8"));
     }
     return transpile(getTranspilerArgs(inputDir, outputDir), outputDir);
   }
 
-  private String[] getTranspilerArgs(File inputDir, File outputDir) {
+  private String[] getTranspilerArgs(File inputDir, File outputDir) throws IOException {
     List<String> argList = new ArrayList<>();
 
     // Output dir
@@ -2734,10 +2746,19 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     argList.add(outputDir.getAbsolutePath());
 
     // Input source
-    List<File> sourceFiles = sourceFiles(inputDir);
+    List<Path> sourceFiles =
+        sourceFiles(inputDir, p -> p.endsWith(".java") || p.endsWith(".srcjar"));
     assertFalse(sourceFiles.isEmpty());
-    for (File sourceFile : sourceFiles) {
-      argList.add(sourceFile.getPath());
+    for (Path sourceFile : sourceFiles) {
+      argList.add(sourceFile.toString());
+    }
+
+    // Native js source
+    List<Path> nativeJsFiles = sourceFiles(inputDir, p -> p.endsWith(".native.js"));
+    if (!nativeJsFiles.isEmpty()) {
+      File nativeZip = zipFiles(inputDir.toPath(), nativeJsFiles, "nativefiles.zip");
+      argList.add("-nativesourcepath");
+      argList.add(nativeZip.getPath());
     }
 
     argList.add("-cp");
@@ -2746,12 +2767,26 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     return Iterables.toArray(argList, String.class);
   }
 
-  private static List<File> sourceFiles(File directory) {
+  private static File zipFiles(Path rootDir, List<Path> files, String outputFileName)
+      throws IOException {
+    File zipFile = new File(rootDir.toString(), outputFileName);
+
+    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFile));
+    for (Path file : files) {
+      out.putNextEntry(new ZipEntry(rootDir.relativize(file).toString()));
+      Files.copy(file, out);
+      out.closeEntry();
+    }
+    out.close();
+
+    return zipFile;
+  }
+
+  private static List<Path> sourceFiles(File directory, Predicate<String> filter) {
     try {
       return Files.walk(directory.toPath())
           .filter(Files::isRegularFile)
-          .filter(path -> path.toString().endsWith(".java") || path.toString().endsWith(".srcjar"))
-          .map(Path::toFile)
+          .filter(p -> filter.test(p.toString()))
           .collect(Collectors.toList());
     } catch (IOException e) {
       return null;
@@ -2759,17 +2794,22 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   private static class Source {
-    String mainClass;
+    String fileName;
     List<String> content;
 
-    Source(String mainClass, String... code) {
-      this.mainClass = mainClass;
-      this.content = Lists.newArrayList(code);
-      this.content.add(0, "package test;");
+    Source(String fileName, List<String> content) {
+      this.fileName = fileName;
+      this.content = content;
     }
   }
 
   private static Source source(String mainClass, String... code) {
-    return new Source(mainClass, code);
+    List<String> content = Lists.newArrayList("package test;");
+    content.addAll(Arrays.asList(code));
+    return new Source(mainClass + ".java", content);
+  }
+
+  private static Source nativeSource(String mainClass, String... code) {
+    return new Source(mainClass + ".native.js", Lists.newArrayList(code));
   }
 }

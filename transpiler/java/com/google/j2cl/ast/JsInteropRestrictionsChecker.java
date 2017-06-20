@@ -196,7 +196,7 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    if (canBeReferencedExternally(memberDescriptor)) {
+    if (canBeReferencedExternally(memberDescriptor) || memberDescriptor.isNative()) {
       checkUnusableByJs(member);
     }
 
@@ -984,6 +984,8 @@ public class JsInteropRestrictionsChecker {
     if (member.isMethod()) {
       Method method = (Method) member;
       MethodDescriptor methodDescriptor = method.getDescriptor();
+      warnIfUnusableByJs(methodDescriptor, "Method", member);
+
       TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
       warnIfUnusableByJs(returnTypeDescriptor, "Return type of", member);
 
@@ -1024,6 +1026,18 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    warnUnusableByJs(prefix, member);
+  }
+
+  private void warnIfUnusableByJs(MemberDescriptor memberDescriptor, String prefix, Member member) {
+    if (canBeReferencedExternally(memberDescriptor)) {
+      return;
+    }
+
+    warnUnusableByJs(prefix, member);
+  }
+
+  private void warnUnusableByJs(String prefix, Member member) {
     // TODO(b/36362935): consider [unusable-by-js] (suppressible) errors instead of warnings.
     problems.warning(
         member.getSourcePosition(),
