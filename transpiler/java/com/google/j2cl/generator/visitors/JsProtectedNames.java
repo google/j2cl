@@ -64,6 +64,7 @@ public class JsProtectedNames {
             "enum",
             "eval",
             "export",
+            "exports",
             "extends",
             "false",
             "final",
