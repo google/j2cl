@@ -422,9 +422,8 @@ public class JsFunctionTest extends MyTestCase {
     // Access through this (instanceField)
     assertEquals(
         8, ((JsFunctionWithVarargs) (n, numbers) -> numbers[n] + instanceField).f(1, 1, 3));
-    // TODO(b/36129262): JsFunctionWithVarargsTestSub fails to load.
-    // Uncomment assertion when bug is fixed.
-    // new JsFunctionWithVarargsTestSub().test();
+
+    new JsFunctionWithVarargsTestSub().test();
   }
 
   public void testJsFunctionLambda() {
