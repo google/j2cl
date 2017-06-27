@@ -13,6 +13,15 @@
 // limitations under the License.
 
 /**
+ * @return {Function}
+ */
+JsFunctionTest.createFunctionThatReturnsThis = function() {
+  return function() {
+    return this;
+  };
+};
+
+/**
  * @param {*} fn
  * @return {*}
  * @public

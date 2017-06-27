@@ -22,7 +22,7 @@ import jsinterop.annotations.JsType;
 
 /** Tests JsType object method devirtualization functionality. */
 public class JsTypeObjectMethodsTest extends MyTestCase {
-  public static void testAl() {
+  public static void testAll() {
     JsTypeObjectMethodsTest test = new JsTypeObjectMethodsTest();
     test.testEquals();
     test.testHashCode();

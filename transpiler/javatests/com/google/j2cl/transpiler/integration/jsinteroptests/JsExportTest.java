@@ -43,10 +43,7 @@ public class JsExportTest extends MyTestCase {
     test.testExportedFieldRefInExportedMethod();
     test.testExportedMethod();
     test.testInheritClassNamespace();
-    // Not supported in J2CL since the Closure import/export system does not allow exporting types
-    // onto the global scope and if we emitted a normal "var $NativeFoo = window.Foo;" style global
-    // type alias there would be nothing causing the file that provides Foo to be loaded.
-    // test.testInheritClassNamespace_empty();
+    test.testInheritClassNamespace_empty();
     test.testInheritClassNamespace_nested();
     test.testInheritClassNamespace_nestedNoExport();
     test.testInheritClassNamespace_noExport();
@@ -81,9 +78,6 @@ public class JsExportTest extends MyTestCase {
     assertTrue(MyClassExportsMethod.calledFromCallMe5);
   }
 
-  // Deprecated in J2CL, these methods attempt to be a calling interface in front of methods in
-  // MyClassExportsMethod that have been exported to a different namespace than the class. But
-  // J2CL does not allow members to be exported to a different namespace than their own class.
   // @JsMethod(namespace = JsPackage.GLOBAL, name = "exported")
   // private static native void myClassExportsMethodCallMe1();
   //
@@ -183,7 +177,7 @@ public class JsExportTest extends MyTestCase {
   }
 
   public void testExportClass_correctNamespace() {
-    // Check is deprecated in J2CL because these result in an attempt to import a module that
+    // Check is removed in J2CL because these result in an attempt to import a module that
     // does not exist and this attempt is a compile error in JSCompiler.
     // assertNull(getBarMyExportedClassCorrectNamespace());
     // assertNull(getBarFooMyExportedClassCorrectNamespace());
@@ -192,8 +186,6 @@ public class JsExportTest extends MyTestCase {
     assertTrue(o instanceof MyExportedClassCorrectNamespace);
   }
 
-  // Check is deprecated in J2CL because these result in an attempt to import a module that does not
-  // exist and this attempt is a compile error in JSCompiler.
   // @JsProperty(namespace = "bar", name = "MyExportedClassCorrectNamespace")
   // private static native Object getBarMyExportedClassCorrectNamespace();
   //
@@ -228,8 +220,8 @@ public class JsExportTest extends MyTestCase {
     assertEquals(100, MyExportedClass.EXPORTED_1);
     assertEquals(100, getExportedField());
 
-    // Different than GWT, exported fields and methods are not an immutable copy.
     setExportedField(1000);
+    // Different than GWT, fields are not copied to export namespace hence call reflects the change
     assertEquals(1000, MyExportedClass.EXPORTED_1);
     assertEquals(1000, getExportedField());
   }
@@ -244,8 +236,8 @@ public class JsExportTest extends MyTestCase {
     assertEquals(200, MyExportedClass.foo());
     assertEquals(200, callExportedMethod());
 
-    // Different than GWT, exported fields and methods are not an immutable copy.
     setExportedMethod(getReplacementExportedMethod());
+    // Different than GWT, methods are not copied to export namespace hence call reflects the change
     assertEquals(1000, MyExportedClass.foo());
     assertEquals(1000, callExportedMethod());
   }
@@ -268,7 +260,7 @@ public class JsExportTest extends MyTestCase {
     setExportedField2(myExportedClassNewInnerClass(10));
 
     // Different than GWT, exported fields and methods are not an immutable copy.
-    assertEquals(10, accessField(getExportedField2()));
+    assertEquals(10, getExportedField2());
     assertEquals(12, MyExportedClass.bar(1, 1));
     assertEquals(12, callExportedFieldByExportedMethod(1, 1));
   }
@@ -282,11 +274,8 @@ public class JsExportTest extends MyTestCase {
   @JsMethod(namespace = "woo.MyExportedClass", name = "newInnerClass")
   private static native InnerClass myExportedClassNewInnerClass(int a);
 
-  // Not exported in J2CL, the same functionality can be achieved by the following two steps access.
-  // @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
-  // private static native int getExportedField2();
-  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2")
-  private static native Object getExportedField2();
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
+  private static native int getExportedField2();
 
   @JsMethod
   private static native int accessField(Object o);
@@ -330,14 +319,12 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
   private static native int getBAR();
 
-// Not supported in J2CL since the Closure import/export system does not allow exporting types
-// onto the global scope and if we emitted a normal "var $NativeFoo = window.Foo;" style global
-// type alias there would be nothing causing the file that provides Foo to be loaded.
-//  public void testInheritClassNamespace_empty() {
-//    assertEquals(82, getDAN());
-//    assertNotNull(new NativeMyClassWithEmptyNamespace());
-//  }
-//
+  public void testInheritClassNamespace_empty() {
+    // Not supported in J2CL since the Closure modules system does not allow empty namespace.
+    // assertEquals(82, getDAN());
+    // assertNotNull(new NativeMyClassWithEmptyNamespace());
+  }
+
 //  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
 //  private static native int getDAN();
 //
@@ -406,8 +393,8 @@ public class JsExportTest extends MyTestCase {
   private static native Object getNestedEnum();
 
   public void testInheritPackageNamespace_subpackage() {
-    // This is different than GWT. Sub packages can't be imported or referenced in a goog.module()
-    // world. To attempt it is a compile error.
+    // This is different than GWT. Attempting to reference a package is a compile error
+    // in goog.module() world.
     // assertNull(getNestedSubpackage());
 
     assertNotNull(new NativeMyNestedExportedClassSansPackageNamespace());
@@ -514,21 +501,17 @@ public class JsExportTest extends MyTestCase {
   private static native Object getEnumerationC();
 
   public void testEnum_subclassMethodCallFromExportedEnumerations() {
-    assertEquals(100, callFoo(getEnumerationA()));
-    assertEquals(200, callFoo(getEnumerationB()));
-    assertEquals(1, callFoo(getEnumerationC()));
+    assertEquals(100, callPublicMethodFromEnumerationA());
+    assertEquals(200, callPublicMethodFromEnumerationB());
+    assertEquals(1, callPublicMethodFromEnumerationC());
   }
 
-  @JsMethod
-  private static native int callFoo(Object o);
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "A.foo")
+  private static native int callPublicMethodFromEnumerationA();
 
-  // Not supported in J2CL.
-  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "A.foo")
-  //  private static native int callPublicMethodFromEnumerationA();
-  //
-  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "B.foo")
-  //  private static native int callPublicMethodFromEnumerationB();
-  //
-  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "C.foo")
-  //  private static native int callPublicMethodFromEnumerationC();
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "B.foo")
+  private static native int callPublicMethodFromEnumerationB();
+
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "C.foo")
+  private static native int callPublicMethodFromEnumerationC();
 }

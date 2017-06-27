@@ -26,6 +26,6 @@ public class Main {
     JsTypeTest.testAll();
     NativeJsTypeTest.testAll();
     JsTypeVarargsTest.testAll();
-    JsTypeObjectMethodsTest.testAl();
+    JsTypeObjectMethodsTest.testAll();
   }
 }

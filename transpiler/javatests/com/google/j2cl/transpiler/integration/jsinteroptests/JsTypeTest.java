@@ -52,6 +52,7 @@ public class JsTypeTest extends MyTestCase {
     test.testStar();
     test.testWildcard();
     test.testNativeFunctionalInterface();
+    test.testInheritName();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -258,6 +259,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertTrue(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -275,6 +277,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -292,6 +295,7 @@ public class JsTypeTest extends MyTestCase {
     assertTrue(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertTrue(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -310,6 +314,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertTrue(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -328,6 +333,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
     assertTrue(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -346,6 +352,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementAnotherConcreteNativeJsType);
     assertFalse(object instanceof HTMLButtonElementConcreteNativeJsType);
     assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyNativeJsType);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -378,12 +385,9 @@ public class JsTypeTest extends MyTestCase {
 
   public void testInstanceOf_withNameSpace() {
     Object obj1 = createMyNamespacedJsInterface();
-    // Object obj2 = createMyWrongNamespacedJsInterface();
 
     assertTrue(obj1 instanceof MyNamespacedNativeJsType);
     assertFalse(obj1 instanceof MyNativeJsType);
-
-    // assertFalse(obj2 instanceof MyNamespacedNativeJsType);
   }
 
   private static Object createMyNativeJsType() {
@@ -697,5 +701,38 @@ public class JsTypeTest extends MyTestCase {
   public void testNativeFunctionalInterface() {
     NativeFunctionalInterface<String> nativeFunctionalInterface = (s) -> 10;
     assertEquals(10, nativeFunctionalInterface.f(""));
+  }
+
+  static class ClassWithJsMethod {
+    @JsMethod(name = "name")
+    public String className() {
+      return ClassWithJsMethod.class.getName();
+    }
+  }
+
+  static class ClassWithJsMethodInheritingName extends ClassWithJsMethod {
+    @JsMethod
+    public String className() {
+      return ClassWithJsMethodInheritingName.class.getName();
+    }
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  private interface HasName {
+    public String name();
+  }
+
+  private String callName(Object o) {
+    return ((HasName) o).name();
+  }
+
+  public void testInheritName() {
+    ClassWithJsMethod object = new ClassWithJsMethod();
+    assertEquals(ClassWithJsMethod.class.getName(), object.className());
+    assertEquals(ClassWithJsMethod.class.getName(), callName(object));
+
+    object = new ClassWithJsMethodInheritingName();
+    assertEquals(ClassWithJsMethodInheritingName.class.getName(), object.className());
+    assertEquals(ClassWithJsMethodInheritingName.class.getName(), callName(object));
   }
 }

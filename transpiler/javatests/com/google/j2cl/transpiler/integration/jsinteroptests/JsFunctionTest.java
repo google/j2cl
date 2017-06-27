@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 public class JsFunctionTest extends MyTestCase {
@@ -27,6 +28,7 @@ public class JsFunctionTest extends MyTestCase {
     test.testCast_fromJsFunction();
     test.testCast_fromJsObject();
     test.testCast_inJava();
+    test.testInstanceField();
     test.testInstanceOf_javaInstance();
     test.testInstanceOf_jsFunction();
     test.testInstanceOf_jsObject();
@@ -39,10 +41,13 @@ public class JsFunctionTest extends MyTestCase {
     test.testJsFunctionIdentity_java();
     test.testJsFunctionIdentity_js();
     test.testJsFunctionJs2Java();
+    // TODO(b/63040102): enable this test
+    // test.testJsFunctionProperty();
     test.testJsFunctionReferentialIntegrity();
     test.testJsFunctionSuccessiveCalls();
     test.testJsFunctionViaFunctionMethods();
-    test.testGetClass_jsFunction();
+    test.testGetClass();
+    test.testJsFunctionOptimization();
     test.testJsFunctionWithVarArgs();
     test.testJsFunctionLambda();
   }
@@ -168,7 +173,7 @@ public class JsFunctionTest extends MyTestCase {
             return this;
           }
         };
-    assert (id == callAsFunctionNoArgument(id));
+    assertEquals(id, callAsFunctionNoArgument(id));
   }
 
   public void testJsFunctionIdentity_java() {
@@ -226,7 +231,7 @@ public class JsFunctionTest extends MyTestCase {
 
   public void testJsFunctionReferentialIntegrity() {
     MyJsFunctionIdentityInterface intf = createReferentialFunction();
-    assert (intf == intf.identity());
+    assertEquals(intf, intf.identity());
   }
 
   public void testCast_fromJsFunction() {
@@ -320,11 +325,22 @@ public class JsFunctionTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementConcreteNativeJsType);
   }
 
-  public void testGetClass_jsFunction() {
-    // inline lambda
-    MyJsFunctionInterface lambda = a -> a;
+  public void testGetClass() {
+    MyJsFunctionInterface jsfunctionImplementation =
+        new MyJsFunctionInterface() {
+          @Override
+          public int foo(int a) {
+            return a;
+          }
+        };
+    assertEquals(MyJsFunctionInterface.class, jsfunctionImplementation.getClass());
+    assertEquals(MyJsFunctionInterface.class, ((Object) jsfunctionImplementation).getClass());
+    assertEquals(MyJsFunctionInterface.class, createMyJsFunction().getClass());
+    assertEquals(MyJsFunctionInterface.class, ((Object) createMyJsFunction()).getClass());
+  }
 
-    assertEquals(MyJsFunctionInterface.class, lambda.getClass());
+  public void testJsFunctionOptimization() {
+    MyJsFunctionInterface lambda = a -> a;
 
     // inner class optimizable to lambda
     MyJsFunctionInterface optimizableInner =
@@ -358,7 +374,7 @@ public class JsFunctionTest extends MyTestCase {
         functionRegExp.exec(lambda.toString()) != null
             || arrowRegExp.exec(lambda.toString()) != null);
 
-    // inner class optimizable to lambda
+    // inner class not optimizable to lambda
     MyJsFunctionInterface unoptimizableInner =
         new MyJsFunctionInterface() {
           @Override
@@ -371,6 +387,40 @@ public class JsFunctionTest extends MyTestCase {
           }
         };
     assertEquals(MyJsFunctionInterface.class, unoptimizableInner.getClass());
+  }
+
+  public void testInstanceField() {
+    MyJsFunctionInterface jsfunctionImplementation =
+        new MyJsFunctionInterface() {
+          String hello = new Object().getClass().getName();
+
+          @Override
+          public int foo(int a) {
+            return hello.length() + a;
+          }
+        };
+    assertEquals(Object.class.getName().length() + 4, jsfunctionImplementation.foo(4));
+  }
+
+  @JsFunction
+  interface JsFunctionInterface {
+    Object m();
+  }
+
+  @JsMethod
+  private static native JsFunctionInterface createFunctionThatReturnsThis();
+
+  public void testJsFunctionProperty() {
+    class JsFuncionProperty {
+      @JsProperty public JsFunctionInterface func;
+    }
+
+    JsFuncionProperty instance = new JsFuncionProperty();
+    instance.func = createFunctionThatReturnsThis();
+    assert instance != instance.func.m();
+
+    JsFunctionInterface funcInVar = instance.func;
+    assertSame(instance.func.m(), funcInVar.m());
   }
 
   @JsFunction
@@ -413,6 +463,7 @@ public class JsFunctionTest extends MyTestCase {
   }
 
   int instanceField = 5;
+
   public void testJsFunctionWithVarArgs() {
     assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsOptimizable()).f(1, 1, 3));
     assertEquals(3, ((JsFunctionWithVarargs) new JsFunctionWithVarargsNonOptimizable()).f(1, 1, 3));

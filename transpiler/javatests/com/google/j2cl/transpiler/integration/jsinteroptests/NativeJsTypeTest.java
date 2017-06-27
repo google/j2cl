@@ -335,6 +335,15 @@ public class NativeJsTypeTest extends MyTestCase {
     assertFalse(aBoxedNumber instanceof NativeFunction);
     assertFalse(aBoxedNumber instanceof NativeString);
 
+    Object anObject = new Object();
+    // True cases.
+    assertTrue(anObject instanceof NativeObject);
+    // False cases.
+    assertFalse(anObject instanceof NativeNumber);
+    assertFalse(anObject instanceof NativeArray);
+    assertFalse(anObject instanceof NativeFunction);
+    assertFalse(anObject instanceof NativeString);
+
     Object nullObject = null;
 
     assertFalse(nullObject instanceof NativeObject);

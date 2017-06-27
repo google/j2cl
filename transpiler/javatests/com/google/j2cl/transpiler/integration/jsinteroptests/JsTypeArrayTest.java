@@ -94,7 +94,6 @@ public class JsTypeArrayTest extends MyTestCase {
     public SimpleJsTypeAsAField[] arrayField;
   }
 
-  // TODO(rluble): Needs fixes in ImlementCastsAndTypeChecks, ArrayNormalizer and maybe type oracle.
   public void testJsTypeArray_asAField() {
     SimpleJsTypeAsAFieldHolder holder = new SimpleJsTypeAsAFieldHolder();
     fillArrayField(holder);

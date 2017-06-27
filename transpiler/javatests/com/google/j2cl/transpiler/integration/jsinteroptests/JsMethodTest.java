@@ -71,16 +71,15 @@ public class JsMethodTest extends MyTestCase {
     assertTrue(Double.isInfinite(-infinity()));
   }
 
-  @JsProperty(namespace = GLOBAL)
+  @JsProperty(namespace = "window")
   private static native void setJsInteropSecret(String magic);
 
-  @JsProperty(namespace = GLOBAL)
+  @JsProperty(namespace = "window")
   private static native String getJsInteropSecret();
 
   public void testStaticNativeJsPropertySetter() {
-    // Try to add a property to global namespace. Re-examine if we should support this and how.
-    // setJsInteropSecret("very secret!");
-    // assertEquals("very secret!", getJsInteropSecret());
+    setJsInteropSecret("very secret!");
+    assertEquals("very secret!", getJsInteropSecret());
   }
 
   interface FunctionalInterfaceWithJsMethod {
