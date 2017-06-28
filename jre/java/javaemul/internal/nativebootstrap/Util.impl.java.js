@@ -79,6 +79,19 @@ class Util {
    */
   static $setClassMetadataForPrimitive(ctor, name, shortName) {
     ctor.prototype.$$classMetadata = [name, Util.TYPE_PRIMITIVE, shortName];
+    // Primitives also marked separately as $isPrimitiveType works even without
+    // class metadata.
+    ctor.prototype.$$isPrimitive = true;
+  }
+
+  /**
+   * Returns whether the provided ctor represents primitive type.
+   * @param {*} ctor
+   * @return {boolean}
+   * @public
+   */
+  static $isPrimitiveType(ctor) {
+    return !!ctor && ctor.prototype.$$isPrimitive;
   }
 
   /**

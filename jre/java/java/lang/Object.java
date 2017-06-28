@@ -52,7 +52,10 @@ public class Object {
   }
 
   @JsMethod
-  private static boolean $isAssignableFrom(Object instance) {
-    return true;
+  private static boolean $isAssignableFrom(Object classConstructor) {
+    return !$isPrimitiveType(classConstructor);
   }
+
+  @JsMethod(namespace = "nativebootstrap.Util")
+  public static native boolean $isPrimitiveType(Object classConstructor);
 }

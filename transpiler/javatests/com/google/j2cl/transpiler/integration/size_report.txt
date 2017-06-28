@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 1 size changes.
+There are 10 size changes.
 Total size (of already existing tests) changed from
-  1414279 to 1424170 bytes (100%->100.70%) and from
-  440480 to 441117 bytes (100%->100.14%) gzipped.
+  1424170 to 1424804 bytes (100%->100.04%) and from
+  441117 to 441301 bytes (100%->100.04%) gzipped.
 
 
 New reports:
@@ -19,7 +19,10 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
       old    new
-    24541  25178 jsinteroptests (2.60%)
+     1204   1242 instanceofarray (3.16%)
+     2221   2236 arrayliteral (0.68%)
+     1613   1622 arrayleafinsertion (0.56%)
+     1878   1888 casttoarray (0.53%)
 
 
 All reports:
@@ -34,10 +37,10 @@ All reports:
        62     62 arithmeticexceptiondisabled (unchanged)
       827    827 arithmeticexceptiondisabledresultused (unchanged)
       987    987 arrayboundsgwtstyle (unchanged)
-     1969   1969 arraybranchinsertion (unchanged)
+     1969   1978 arraybranchinsertion (0.46%)
       888    888 arraycastsinglesideeffect (unchanged)
-     1613   1613 arrayleafinsertion (unchanged)
-     2221   2221 arrayliteral (unchanged)
+     1613   1622 arrayleafinsertion (0.56%)
+     2221   2236 arrayliteral (0.68%)
      1577   1577 arrayobjectcalls (unchanged)
      4209   4209 arrayofboxedtype (unchanged)
      3628   3628 arrayreadwrite (unchanged)
@@ -45,10 +48,10 @@ All reports:
       918    918 backwardbridgemethod (unchanged)
      2378   2378 binaryexpressions (unchanged)
       841    841 blockscoping (unchanged)
-    38874  38874 box2d_default (unchanged)
-    36694  36694 box2d_noclassmetadata (unchanged)
+    38874  38899 box2d_default (0.06%)
+    36694  36716 box2d_noclassmetadata (0.06%)
     34969  34969 box2d_noclassmetadata_checksmin (unchanged)
-    36550  36550 box2d_noclassmetadata_checksopt (unchanged)
+    36550  36572 box2d_noclassmetadata_checksopt (0.06%)
      3346   3346 boxingsideeffect (unchanged)
       885    885 breakstatement (unchanged)
      2523   2523 bridgejsmethod (unchanged)
@@ -60,12 +63,12 @@ All reports:
       852    852 cascadedstaticinit (unchanged)
      1304   1304 castdevirtualizedtypes (unchanged)
        62     62 castnull (unchanged)
-     1878   1878 casttoarray (unchanged)
+     1878   1888 casttoarray (0.53%)
      3185   3185 casttoboxedtype (unchanged)
      1492   1492 casttoclass (unchanged)
        62     62 casttoclassdisabled (unchanged)
      1134   1134 casttoclassdisabledresultused (unchanged)
-     1828   1828 casttogenerics (unchanged)
+     1828   1835 casttogenerics (0.38%)
      1575   1575 casttointerface (unchanged)
      1399   1399 casttonativetypevariable (unchanged)
      4278   4278 casttoprimitives (unchanged)
@@ -123,7 +126,7 @@ All reports:
       839    839 instanceinitorder (unchanged)
      1922   1922 instanceinnerclass (unchanged)
      1131   1131 instancejsmethods (unchanged)
-     1204   1204 instanceofarray (unchanged)
+     1204   1242 instanceofarray (3.16%)
      2545   2545 instanceofboxedtype (unchanged)
       879    879 instanceofclass (unchanged)
       883    883 instanceofinterface (unchanged)
@@ -145,7 +148,7 @@ All reports:
      1628   1628 jsfunctionbridge (unchanged)
      2278   2278 jsfunctiontypeannotation (unchanged)
       905    905 jsinnerclass (unchanged)
-    24541  25178 jsinteroptests (2.60%)
+    25178  25205 jsinteroptests (0.11%)
       917    917 jsmethodoverride (unchanged)
       841    841 jsoverlay (unchanged)
       842    842 jsoverlaystaticrefs (unchanged)
