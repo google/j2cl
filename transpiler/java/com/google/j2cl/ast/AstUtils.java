@@ -292,8 +292,8 @@ public class AstUtils {
     return Variable.newBuilder()
         .setName(field.getDescriptor().getName())
         .setTypeDescriptor(field.getDescriptor().getTypeDescriptor())
-        .setIsParameter(true)
-        .setIsFinal(true)
+        .setParameter(true)
+        .setFinal(true)
         .build();
   }
 
@@ -394,7 +394,7 @@ public class AstUtils {
           Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(parameterTypes.get(i))
-              .setIsParameter(true)
+              .setParameter(true)
               .build());
     }
     return parameters;
@@ -416,7 +416,7 @@ public class AstUtils {
         MethodCall.Builder.from(toMethodDescriptor)
             .setQualifier(qualifier)
             .setArguments(arguments)
-            .setIsStaticDispatch(isStaticDispatch)
+            .setStaticDispatch(isStaticDispatch)
             .build();
 
     return createReturnOrExpressionStatement(forwardingMethodCall, returnTypeDescriptor);
@@ -726,8 +726,8 @@ public class AstUtils {
         Variable.newBuilder()
             .setName("$thisArg")
             .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor())
-            .setIsParameter(true)
-            .setIsFinal(true)
+            .setParameter(true)
+            .setFinal(true)
             .build();
 
     // Replace all 'this' references in the method with parameter references.
@@ -861,7 +861,7 @@ public class AstUtils {
                             .setRightOperand(getInitialValue(field))
                             .build())
                     .setAnnotationType(field.getDescriptor().getTypeDescriptor())
-                    .setIsDeclaration(true)
+                    .setDeclaration(true)
                     .build()
                     .makeStatement())
         .collect(toList());

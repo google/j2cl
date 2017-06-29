@@ -133,12 +133,12 @@ public class Variable extends Node
       return this;
     }
 
-    public Builder setIsParameter(boolean isParameter) {
+    public Builder setParameter(boolean isParameter) {
       this.isParameter = isParameter;
       return this;
     }
 
-    public Builder setIsFinal(boolean isFinal) {
+    public Builder setFinal(boolean isFinal) {
       this.isFinal = isFinal;
       return this;
     }

@@ -387,7 +387,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
           Variable.newBuilder()
               .setName("arg" + i)
               .setTypeDescriptor(bridgeMethodDescriptor.getParameterTypeDescriptors().get(i))
-              .setIsParameter(true)
+              .setParameter(true)
               .build();
 
       parameters.add(parameter);

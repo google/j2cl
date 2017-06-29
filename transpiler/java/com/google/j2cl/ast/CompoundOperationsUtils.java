@@ -68,7 +68,7 @@ public class CompoundOperationsUtils {
     Expression qualifier = targetFieldAccess.getQualifier().clone();
     Variable qualifierVariable =
         Variable.newBuilder()
-            .setIsFinal(true)
+            .setFinal(true)
             .setName("$qualifier")
             .setTypeDescriptor(qualifier.getTypeDescriptor())
             .build();
@@ -113,7 +113,7 @@ public class CompoundOperationsUtils {
       // stored in $array.
       Variable arrayExpressionVariable =
           Variable.newBuilder()
-              .setIsFinal(true)
+              .setFinal(true)
               .setName("$array")
               .setTypeDescriptor(arrayExpression.getTypeDescriptor())
               .build();
@@ -125,7 +125,7 @@ public class CompoundOperationsUtils {
     if (!indexExpression.isIdempotent()) {
       Variable indexExpressionVariable =
           Variable.newBuilder()
-              .setIsFinal(true)
+              .setFinal(true)
               .setName("$index")
               .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
               .build();
@@ -167,7 +167,7 @@ public class CompoundOperationsUtils {
     PostfixOperator operator = postfixExpression.getOperator();
     Variable valueVariable =
         Variable.newBuilder()
-            .setIsFinal(true)
+            .setFinal(true)
             .setName("$value")
             .setTypeDescriptor(operand.getTypeDescriptor())
             .build();
@@ -205,7 +205,7 @@ public class CompoundOperationsUtils {
     Expression qualifier = fieldAccess.getQualifier().clone();
     Variable qualifierVariable =
         Variable.newBuilder()
-            .setIsFinal(true)
+            .setFinal(true)
             .setName("$qualifier")
             .setTypeDescriptor(qualifier.getTypeDescriptor())
             .build();

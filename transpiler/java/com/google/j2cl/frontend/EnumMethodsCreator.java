@@ -138,7 +138,7 @@ public class EnumMethodsCreator {
         Variable.newBuilder()
             .setName("name")
             .setTypeDescriptor(TypeDescriptors.get().javaLangString)
-            .setIsParameter(true)
+            .setParameter(true)
             .build();
 
     MethodDescriptor createMapMethodDescriptor =

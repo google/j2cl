@@ -126,7 +126,7 @@ public class MethodCall extends Invocation {
       return this;
     }
 
-    public Builder setIsStaticDispatch(boolean isStaticDispatch) {
+    public Builder setStaticDispatch(boolean isStaticDispatch) {
       this.isStaticDispatch = isStaticDispatch;
       return this;
     }

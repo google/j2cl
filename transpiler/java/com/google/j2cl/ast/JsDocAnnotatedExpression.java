@@ -89,7 +89,7 @@ public class JsDocAnnotatedExpression extends Expression {
       return this;
     }
 
-    public Builder setIsDeclaration(boolean isDeclaration) {
+    public Builder setDeclaration(boolean isDeclaration) {
       this.isDeclaration = isDeclaration;
       return this;
     }

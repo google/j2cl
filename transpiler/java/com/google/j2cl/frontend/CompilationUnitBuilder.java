@@ -312,7 +312,7 @@ public class CompilationUnitBuilder {
               .build();
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
-          .setIsEnumField(true)
+          .setEnumField(true)
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
           .build();
     }
@@ -835,7 +835,7 @@ public class CompilationUnitBuilder {
           Variable.newBuilder()
               .setName("$array")
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(expressionTypeBinding))
-              .setIsFinal(true)
+              .setFinal(true)
               .build();
 
       // int index = 0;
@@ -913,7 +913,7 @@ public class CompilationUnitBuilder {
               .setName("$iterator")
               .setTypeDescriptor(
                   JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()))
-              .setIsFinal(true)
+              .setFinal(true)
               .build();
 
       VariableDeclarationExpression iteratorDeclaration =
@@ -1079,7 +1079,7 @@ public class CompilationUnitBuilder {
       // qualifier.
       Variable variable =
           Variable.newBuilder()
-              .setIsFinal(true)
+              .setFinal(true)
               .setName("$$qualifier" + qualifierCounter++)
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(qualifier.resolveTypeBinding()))
               .build();
@@ -1697,7 +1697,7 @@ public class CompilationUnitBuilder {
         return MethodCall.Builder.from(methodDescriptor)
             .setQualifier(new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()))
             .setArguments(arguments)
-            .setIsStaticDispatch(true)
+            .setStaticDispatch(true)
             .build();
       } else {
         // OuterClass.super.fun() is transpiled to
@@ -1709,7 +1709,7 @@ public class CompilationUnitBuilder {
                     expression.getQualifier().resolveTypeBinding(),
                     true))
             .setArguments(arguments)
-            .setIsStaticDispatch(true)
+            .setStaticDispatch(true)
             .build();
       }
     }

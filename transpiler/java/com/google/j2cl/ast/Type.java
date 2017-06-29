@@ -199,7 +199,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     members.add(
         InitializerBlock.newBuilder()
             .setBlock(staticInitializer)
-            .setIsStatic(true)
+            .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .build());
   }
@@ -209,7 +209,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         index,
         InitializerBlock.newBuilder()
             .setBlock(staticInitializer)
-            .setIsStatic(true)
+            .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .build());
   }

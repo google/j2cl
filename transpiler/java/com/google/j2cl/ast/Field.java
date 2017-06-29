@@ -119,7 +119,7 @@ public class Field extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setIsEnumField(boolean isEnumField) {
+    public Builder setEnumField(boolean isEnumField) {
       this.isEnumField = isEnumField;
       return this;
     }

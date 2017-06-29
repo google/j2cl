@@ -68,12 +68,12 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                     Variable.newBuilder()
                         .setName(VALUE_NAME_PARAMETER_NAME)
                         .setTypeDescriptor(TypeDescriptors.get().javaLangString)
-                        .setIsParameter(true)
+                        .setParameter(true)
                         .build(),
                     Variable.newBuilder()
                         .setName(ORDINAL_PARAMETER_NAME)
                         .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-                        .setIsParameter(true)
+                        .setParameter(true)
                         .build())
                 .build();
           }

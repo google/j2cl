@@ -64,7 +64,7 @@ public class InitializerBlock extends Member {
     public static Builder from(InitializerBlock initializerBlock) {
       return newBuilder()
           .setBlock(initializerBlock.getBlock())
-          .setIsStatic(initializerBlock.isStatic())
+          .setStatic(initializerBlock.isStatic())
           .setSourcePosition(initializerBlock.getSourcePosition());
     }
 
@@ -78,7 +78,7 @@ public class InitializerBlock extends Member {
       return this;
     }
 
-    public Builder setIsStatic(boolean isStatic) {
+    public Builder setStatic(boolean isStatic) {
       this.isStatic = isStatic;
       return this;
     }

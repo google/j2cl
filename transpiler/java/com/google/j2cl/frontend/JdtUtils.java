@@ -136,8 +136,8 @@ public class JdtUtils {
     return Variable.newBuilder()
         .setName(name)
         .setTypeDescriptor(typeDescriptor)
-        .setIsFinal(isFinal)
-        .setIsParameter(isParameter)
+        .setFinal(isFinal)
+        .setParameter(isParameter)
         .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
         .build();
   }
