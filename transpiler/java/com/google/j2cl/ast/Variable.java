@@ -31,7 +31,6 @@ public class Variable extends Node
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
-  private final boolean isRaw;
   private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
   private final boolean isUnusableByJsSuppressed;
 
@@ -41,13 +40,11 @@ public class Variable extends Node
       TypeDescriptor typeDescriptor,
       boolean isFinal,
       boolean isParameter,
-      boolean isRaw,
       boolean isUnusableByJsSuppressed) {
     this.name = checkNotNull(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
-    this.isRaw = isRaw;
     this.sourcePosition = sourcePosition;
     this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
   }
@@ -66,14 +63,6 @@ public class Variable extends Node
 
   public boolean isParameter() {
     return isParameter;
-  }
-
-  /**
-   * Returns whether this is a Raw variable. Raw variables are not aliased in the output and thus
-   * can be used to represent JS native variables, for example, 'arguments'.
-   */
-  public boolean isRaw() {
-    return isRaw;
   }
 
   public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
@@ -120,7 +109,6 @@ public class Variable extends Node
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
     private boolean isParameter;
-    private boolean isRaw;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
     private boolean isUnusableByJsSuppressed = false;
 
@@ -128,7 +116,6 @@ public class Variable extends Node
       Builder builder = new Builder();
       builder.name = variable.getName();
       builder.typeDescriptor = variable.getTypeDescriptor();
-      builder.isRaw = variable.isRaw();
       builder.isFinal = variable.isFinal();
       builder.isParameter = variable.isParameter;
       builder.isUnusableByJsSuppressed = variable.isUnusableByJsSuppressed;
@@ -143,11 +130,6 @@ public class Variable extends Node
 
     public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
       this.typeDescriptor = typeDescriptor;
-      return this;
-    }
-
-    public Builder setIsRaw(boolean isRaw) {
-      this.isRaw = isRaw;
       return this;
     }
 
@@ -180,7 +162,6 @@ public class Variable extends Node
           typeDescriptor,
           isFinal,
           isParameter,
-          isRaw,
           isUnusableByJsSuppressed);
     }
   }

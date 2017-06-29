@@ -56,7 +56,7 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
         new AbstractVisitor() {
           @Override
           public void exitVariable(Variable variable) {
-            if (aliasByVariable.containsKey(variable) || variable.isRaw()) {
+            if (aliasByVariable.containsKey(variable)) {
               return;
             }
             String variableName = variable.getName();

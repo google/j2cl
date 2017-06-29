@@ -67,9 +67,7 @@ public class VerifyVariableScoping {
                     ? statementStack.peek()
                     : getCurrentMember() != null ? getCurrentMember() : getCurrentType();
             checkState(
-                getCurrentScope().accessibleVariables.contains(variableReference.getTarget())
-                    // Raw variables are not defined in any scope.
-                    || variableReference.getTarget().isRaw(),
+                getCurrentScope().accessibleVariables.contains(variableReference.getTarget()),
                 "%s in %s not defined in enclosing scope.",
                 variableReference.getTarget(),
                 context);
