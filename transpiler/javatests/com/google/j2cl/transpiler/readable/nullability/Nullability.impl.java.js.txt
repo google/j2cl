@@ -23,7 +23,6 @@ let List$$Overlay = goog.forwardDeclare('java.util.List$$Overlay$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
@@ -175,7 +174,7 @@ class Nullability extends java_lang_Object {
     b = x;
     foo.m_bar__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_nullability(
         x);
-    b = $Objects.m_toString__java_lang_Object(foo);
+    b = foo.toString();
     if (true) {
       return x;
     }
@@ -240,7 +239,6 @@ class Nullability extends java_lang_Object {
     List = goog.module.get('java.util.List$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     java_lang_Object.$clinit();
   }

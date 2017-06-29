@@ -11,7 +11,6 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class StringCalls extends java_lang_Object {
@@ -56,7 +55,7 @@ class StringCalls extends java_lang_Object {
     let sub2 =
         java_lang_String.m_substring__java_lang_String__int__int(literal, 2, 3);
     let trimmed = java_lang_String.m_trim__java_lang_String(literal);
-    let newString = $Objects.m_toString__java_lang_Object(literal);
+    let newString = java_lang_String.m_toString__java_lang_String(literal);
   }
 
   /**
@@ -86,7 +85,6 @@ class StringCalls extends java_lang_Object {
   static $clinit() {
     StringCalls.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();
   }
 

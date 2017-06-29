@@ -97,15 +97,6 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
 
             TypeDescriptor enclosingTypeDescriptor =
                 methodCall.getTarget().getEnclosingTypeDescriptor().getRawTypeDescriptor();
-            if (MethodDescriptor.isToStringMethodDescriptor(methodCall.getTarget())) {
-              // Always devirtualize toString method to trampoline method. This ensures that
-              // javascript class even if they extend java classes could still override toString
-              // method.
-              return AstUtils.createDevirtualizedMethodCall(
-                  methodCall,
-                  BootstrapType.OBJECTS.getDescriptor(),
-                  TypeDescriptors.get().javaLangObject);
-            }
             if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
                 enclosingTypeDescriptor)) {
               return AstUtils.createDevirtualizedMethodCall(

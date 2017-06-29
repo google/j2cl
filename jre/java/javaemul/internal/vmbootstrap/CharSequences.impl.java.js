@@ -63,6 +63,16 @@ class CharSequences {
    * Redirect the string calls to use the devirtualized version.
    *
    * @param {CharSequence|string} obj
+   * @return {string}
+   */
+  static m_toString__java_lang_CharSequence(obj) {
+    return obj.toString();
+  }
+
+  /**
+   * Redirect the string calls to use the devirtualized version.
+   *
+   * @param {CharSequence|string} obj
    * @param {number} start
    * @param {number} end
    * @return {CharSequence|string}

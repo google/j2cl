@@ -38,7 +38,7 @@
 ...    String newString = literal.toString();
   }] => [/**
    * @return {void}
-...    let newString = $Objects.m_toString__java_lang_Object(literal);
+...    let newString = java_lang_String.m_toString__java_lang_String(literal);
   }] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [String literal = "String";] => [let literal = "String";] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [literal] => [literal] "literal"
@@ -48,6 +48,6 @@
 [sub2] => [sub2] "sub2"
 [String trimmed = literal.trim();] => [let trimmed = java_lang_String.m_trim__java_lang_String(literal);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [trimmed] => [trimmed] "trimmed"
-[String newString = literal.toString();] => [let newString = $Objects.m_toString__java_lang_Object(literal);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
+[String newString = literal.toString();] => [let newString = java_lang_String.m_toString__java_lang_String(literal);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [newString] => [newString] "newString"
 [UNKNOWN] => [java_lang_Object.$clinit();]

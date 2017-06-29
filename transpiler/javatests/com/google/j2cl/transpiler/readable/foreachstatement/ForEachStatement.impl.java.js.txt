@@ -17,7 +17,6 @@ let Iterator$$Overlay = goog.forwardDeclare('java.util.Iterator$$Overlay$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class ForEachStatement extends java_lang_Object {
@@ -63,14 +62,14 @@ class ForEachStatement extends java_lang_Object {
          $iterator.m_hasNext__();) {
       let t =
           /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));
-      $Objects.m_toString__java_lang_Object(t);
+      t.toString();
     }
     for (let $array = /**@type {!Array<Throwable>} */ (
                  $Arrays.$create([10], Throwable)),
              $index = 0;
          $index < $array.length; $index++) {
       let t$1$ = $array[$index];
-      $Objects.m_toString__java_lang_Object(t$1$);
+      t$1$.toString();
     }
   }
 
@@ -107,7 +106,6 @@ class ForEachStatement extends java_lang_Object {
     Iterator = goog.module.get('java.util.Iterator$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();
   }
 

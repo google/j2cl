@@ -76,5 +76,48 @@ public class CharSequenceTest {
     assert s.getClass() == String.class;
     assert cs.getClass() != String.class;
   }
+
+  public static void testViaSuper() {
+    CharSequence cs =
+        new CharSequence() {
+          @Override
+          public int length() {
+            return 0;
+          }
+
+          @Override
+          public char charAt(int i) {
+            return 0;
+          }
+
+          @Override
+          public CharSequence subSequence(int i, int j) {
+            return null;
+          }
+
+          @Override
+          public boolean equals(Object c) {
+            return super.equals(c);
+          }
+
+          @Override
+          public int hashCode() {
+            return super.hashCode();
+          }
+
+          @Override
+          public String toString() {
+            return "sub" + super.toString();
+          }
+        };
+
+    assert cs.equals(cs);
+    assert !cs.equals("string");
+
+    assert cs.hashCode() == System.identityHashCode(cs);
+    assert cs.hashCode() != 0;
+
+    assert cs.toString().startsWith("sub");
+  }
 }
 

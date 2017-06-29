@@ -14,7 +14,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1$impl');
 let com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2_1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1.$2.$1$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -96,10 +95,10 @@ class $2 extends java_lang_Object {
         java_lang_String.m_valueOf__java_lang_Object(s) +
         java_lang_String.m_valueOf__java_lang_Object(this.$c_x) + this.$c_var +
         java_lang_String.m_valueOf__java_lang_Object(
-            $Objects.m_toString__java_lang_Object(
-                com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2_1
-                    .$create__com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2(
-                        this)));
+            com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2_1
+                .$create__com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2(
+                    this)
+                .toString());
   }
 
   /**
@@ -154,7 +153,6 @@ class $2 extends java_lang_Object {
         goog.module.get(
             'com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1.$2.$1$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }

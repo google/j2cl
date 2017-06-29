@@ -94,7 +94,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String NOT_SAME_METHOD_NAME = "$notSame";
   public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
-  public static final String TO_STRING_METHOD_NAME = "toString";
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
 
@@ -599,10 +598,5 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                         .getQualifiedBinaryName())
             .collect(joining(", "))
         + ")";
-  }
-
-  public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.getName().equals(TO_STRING_METHOD_NAME)
-        && methodDescriptor.getParameterTypeDescriptors().isEmpty();
   }
 }
