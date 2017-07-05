@@ -25,12 +25,13 @@ j2cl_library(
 
 """
 
-load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "generate_zip", "J2CL_OPTIMIZED_DEFS")
-load("/tools/build_defs/label/def", "absolute_label")
-load("/tools/build_defs/j2cl/def", "js_import")
-load("/tools/build_rules/build_test", "build_test")
-load("/third_party/java_src/j2cl/build_def/gwt_incompatible_stripper", "gwt_incompatible_stripper")
+load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
+load("//build_def:j2cl_util.bzl", "generate_zip", "J2CL_OPTIMIZED_DEFS")
+load("//tools/build_defs/label:def.bzl", "absolute_label")
+load("//tools/build_defs/j2cl:def.bzl", "js_import")
+load("//tools/build_defs/lib:lib.bzl", "collections")
+load("//tools/build_rules:build_test.bzl", "build_test")
+load("//build_def:gwt_incompatible_stripper.bzl", "gwt_incompatible_stripper")
 
 def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
   """Copies an artifact from to remove build environment restrictions."""
@@ -276,7 +277,7 @@ def j2cl_library(name,
   # dependency chain) when build has been invoked on the js_library() target.
   # Additionally, this is used as a workaround to make sure the zip ends up in the runfiles
   # directory as described in b/35847804.
-  js_library_data = set([merged_zip] + js_deps + js_exports)
+  js_library_data = collections.uniq([merged_zip] + js_deps + js_exports)
 
   # Theoretically we should be able to just create the js_import() target, but
   # some Blaze rules (like jsunit_test()) require that all their direct deps be
