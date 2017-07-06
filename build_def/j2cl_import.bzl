@@ -59,7 +59,6 @@ def j2cl_import(name,
     native.js_library(
         name=name,
         exports=[js],
-        deps_mgmt = "legacy",
         licenses=licenses,
         visibility=visibility,
         # Direct automated dep picking tools away from this target.
@@ -73,5 +72,4 @@ def j2cl_import(name,
         visibility=visibility,
         # Direct automated dep picking tools away from this target.
         tags=["avoid_dep"],
-        deps_mgmt = "legacy",
     )
