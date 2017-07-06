@@ -112,22 +112,23 @@ java_library(
 )
 
 js_binary(
-    name = "integration_binary",
+    name = "conformance_binary",
     compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
     defs = J2CL_OPTIMIZED_DEFS + [
         "--conformance_config=conformance_proto.txt",
+        "--jscomp_error=conformanceViolations",
         # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
         # "--jscomp_error=reportUnknownTypes",
     ],
     externs_list = ["//javascript/externs:common"],
     extra_inputs = ["conformance_proto.txt"],
     deps = [
-        "//transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclass",
+        "//internal_do_not_use:jre",
     ],
 )
 
 build_test(
-    name = "compiled_test",
-    targets = [":integration_binary"],
+    name = "conformance_test",
+    targets = [":conformance_binary"],
 )
