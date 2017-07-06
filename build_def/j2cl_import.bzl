@@ -58,7 +58,7 @@ def j2cl_import(name,
   if js:
     native.js_library(
         name=name,
-        deps=[js],
+        exports=[js],
         deps_mgmt = "legacy",
         licenses=licenses,
         visibility=visibility,
