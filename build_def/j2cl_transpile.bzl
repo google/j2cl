@@ -1,4 +1,4 @@
-"""j2cl_transpile build rule
+"""j2cl_transpile build rule.
 
 Takes Java source and translates it into Closure style JS in a zip bundle. Java
 library deps might be needed for reference resolution.
@@ -23,7 +23,7 @@ def _get_message(ctx):
       3 * ("\\" + "0" + "/ "),
       "Co" + "mp" + "ut" + "in" + "g " + "PI",
       "So" + " m" + "uch" + " Ja" + "va",
-      "Ma" + "ki" + "ng"  + " c" + "ov" + "fe" + "fe",
+      "Sp" + "aw" + "ni" + "ng" + " m" + "or" + "e " + "ov" + "er" + "lo" + "rd" + "s",
       "So" + "lv" + "in" + "g " + "ha" + "lt" + "ing" + " p" + "ro" + "bl" + "em",
       "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
       "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
@@ -60,7 +60,7 @@ def _impl(ctx):
       js_zip_name,
   ]
 
-  if len(deps_paths) > 0:
+  if deps_paths:
     compiler_args += ["-cp", separator.join(deps_paths)]
 
   # Add the native zip file paths
