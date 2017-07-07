@@ -8,9 +8,6 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
-load("//tools/build_rules:build_test.bzl", "build_test")
-load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
-
 # Apache2
 licenses(["notice"])
 
@@ -109,26 +106,4 @@ java_library(
         "//transpiler/java/com/google/j2cl/problems",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
     ],
-)
-
-js_binary(
-    name = "conformance_binary",
-    compile = 1,
-    compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_OPTIMIZED_DEFS + [
-        "--conformance_config=conformance_proto.txt",
-        "--jscomp_error=conformanceViolations",
-        # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
-        # "--jscomp_error=reportUnknownTypes",
-    ],
-    externs_list = ["//javascript/externs:common"],
-    extra_inputs = ["conformance_proto.txt"],
-    deps = [
-        "//internal_do_not_use:jre",
-    ],
-)
-
-build_test(
-    name = "conformance_test",
-    targets = [":conformance_binary"],
 )

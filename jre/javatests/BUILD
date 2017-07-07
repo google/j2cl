@@ -96,14 +96,37 @@ j2cl_multi_test(
     test_class = "com.google.gwt.emultest.EmulSuite",
 )
 
+genrule(
+    name = "test_defines",
+    outs = ["test_defines.js"],
+    cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
+)
+
 j2cl_multi_test(
     name = "EmulJava8",
     shard_count = 8,
     test_class = "com.google.gwt.emultest.EmulJava8Suite",
 )
 
-genrule(
-    name = "test_defines",
-    outs = ["test_defines.js"],
-    cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
+load("//tools/build_rules:build_test.bzl", "build_test")
+
+build_test(
+    name = "conformance_test",
+    targets = [":conformance_binary"],
+)
+
+load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
+
+js_binary(
+    name = "conformance_binary",
+    compile = 1,
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = J2CL_OPTIMIZED_DEFS + [
+        "--conformance_config=conformance_proto.txt",
+        "--jscomp_error=conformanceViolations",
+        # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
+        # "--jscomp_error=reportUnknownTypes",
+    ],
+    extra_inputs = ["conformance_proto.txt"],
+    deps = ["//jre/java:jre"],
 )
