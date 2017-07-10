@@ -135,18 +135,18 @@ public class J2clTranspilerWorkerTest {
     assertThat(worker.compilers.get(1).threadId).isNotEqualTo(currentThreadId);
     assertThat(worker.compilers.get(0).threadId).isNotEqualTo(worker.compilers.get(1).threadId);
 
-    // Did arguemnts arrive properly?
+    // Did arguments arrive properly?
     assertThat(worker.compilers.get(0).args).asList().containsExactly("-d", "First.java");
     assertThat(worker.compilers.get(1).args).asList().containsExactly("-d", "Second.java");
     // verify that out contains the two work things
 
-    ByteArrayInputStream outasInputStream = new ByteArrayInputStream(newOut.toByteArray());
+    ByteArrayInputStream outAsInputStream = new ByteArrayInputStream(newOut.toByteArray());
 
-    WorkResponse firstResponse = WorkResponse.parseDelimitedFrom(outasInputStream);
+    WorkResponse firstResponse = WorkResponse.parseDelimitedFrom(outAsInputStream);
     assertThat(firstResponse.getOutput()).isEqualTo("compiler_success\n");
     assertThat(firstResponse.getExitCode()).isEqualTo(0);
 
-    WorkResponse secondResponse = WorkResponse.parseDelimitedFrom(outasInputStream);
+    WorkResponse secondResponse = WorkResponse.parseDelimitedFrom(outAsInputStream);
     assertThat(secondResponse.getOutput())
         .isEqualTo("Error: compiler_failed\n1 error(s), 0 warning(s).\n");
     assertThat(secondResponse.getExitCode()).isEqualTo(1);
