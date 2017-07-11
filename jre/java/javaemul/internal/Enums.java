@@ -23,7 +23,8 @@ class Enums {
 
   @JsType(isNative = true, name = "Map", namespace = JsPackage.GLOBAL)
   private static class NativeMap<K, V> {
-    public native V get(K key);
+    // TODO(b/38182645): replace Enum with V
+    public native Enum get(K key);
 
     public native void set(K key, V value);
   }
@@ -41,11 +42,12 @@ class Enums {
     return map;
   }
 
-  public static <V> V getValueFromNameAndMap(String name, NativeMap<String, V> map) {
+  // TODO(b/38182645): replace NativeMap<String, ?> with NativeMap<String, T>
+  public static <T> T getValueFromNameAndMap(String name, NativeMap<String, ?> map) {
     if (name == null) {
       throw new IllegalArgumentException();
     }
-    V enumValue = map.get(name);
+    T enumValue = (T) map.get(name);
     if (enumValue == null) {
       throw new IllegalArgumentException();
     }
