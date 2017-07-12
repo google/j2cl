@@ -28,6 +28,9 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.MultiExpression;
+import com.google.j2cl.ast.NullLiteral;
+import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -61,6 +64,43 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
           public boolean enterBlock(Block block) {
             enclosingBlocks.push(block);
             return true;
+          }
+
+          /**
+           * In Java, you may declare a variable within a switch statement branch and use it within
+           * another branch. J2CL, by default, translates variable definitions to 'let' which are
+           * not hoisted up in switch cases in js so we manually hoist them here. See the
+           * switchstatement/Main#testSwitchVariableDeclarations test case.
+           *
+           * <p>We normalize variable definitions such that: <code>
+           * switch value {
+           *   case 1:
+           *     let i = 5;
+           *   case 2:
+           *     i = 2; // i is undefined here.
+           * }
+           *  </code> Which becomes: <code>
+           *  let i;
+           *  switch value {
+           *   case 1:
+           *     i = 5;
+           *   case 2:
+           *     i = 2;
+           *  }
+           *  </code>
+           */
+          @Override
+          public void exitSwitchStatement(SwitchStatement node) {
+            for (Statement s : node.getBodyStatements()) {
+              if (s instanceof ExpressionStatement) {
+                ExpressionStatement expression = (ExpressionStatement) s;
+                if (expression.getExpression() instanceof VariableDeclarationExpression) {
+                  // Jump to the exitVariableDeclarationExpression below.
+                  relocateToEnclosingBlock(
+                      (VariableDeclarationExpression) expression.getExpression());
+                }
+              }
+            }
           }
 
           @Override
@@ -106,6 +146,11 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
           @Override
           public void exitVariableDeclarationExpression(
               VariableDeclarationExpression variableDeclarationExpression) {
+            relocateToEnclosingBlock(variableDeclarationExpression);
+          }
+
+          private void relocateToEnclosingBlock(
+              VariableDeclarationExpression variableDeclarationExpression) {
             if (enclosingBlocks.peek() == null) {
               // Instance field initialization method $init is synthesized at generation, so
               // skip field initializations for now.
@@ -150,6 +195,10 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
                                 .setRightOperand(fragment.getInitializer())
                                 .build())
                     .collect(Collectors.toList());
+
+            if (assignments.isEmpty()) {
+              return NullLiteral.get();
+            }
 
             if (assignments.size() == 1) {
               return assignments.get(0);

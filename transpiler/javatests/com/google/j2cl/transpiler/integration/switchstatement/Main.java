@@ -37,8 +37,7 @@ public class Main {
     assert getEnumValue(Numbers.TWO) == 2;
     assert getEnumValue(Numbers.THREE) == 3; // Default
 
-    // TODO(b/63599017): Fix this.
-    // switchDeclarations();
+    testSwitchVariableDeclarations();
   }
 
   private static int getStringValue(String stringValue) {
@@ -89,16 +88,23 @@ public class Main {
     }
   }
 
-  private static void switchDeclarations() {
+  @SuppressWarnings("unused")
+  private static void testSwitchVariableDeclarations() {
     switch (3) {
       case 1:
-        int i = 0;
+        int i = 0, unassigned;
         int j = 2, b = j + 1;
         break;
       case 3:
         i = 3;
         assert i == 3;
         return;
+    }
+
+    switch (5) {
+      case 5:
+        int i = 1;
+        break;
     }
     assert false;
   }
