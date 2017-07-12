@@ -88,4 +88,45 @@
 [break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
 [default:] => [default: ] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
 [return;] => [return;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
+[@SuppressWarnings("unused")
+  private static void testSwitchVariableDeclarations() {
+...    assert false;
+  }] => [/**
+   * @return {void}
+...    $Asserts.$assert(false);
+  }] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[UNKNOWN] => [SwitchStatement.$clinit();]
+[switch (3) {
+      case 1:
+...        return;
+    }] => [switch (3) {
+      case 1:
+...        return;
+    }] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[case 1:] => [case 1: ] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[int unassigned, unassigned2;] => [let /** number */ unassigned, /** number */ unassigned2;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[unassigned] => [unassigned] "unassigned"
+[unassigned2] => [unassigned2] "unassigned2"
+[int i = 0;] => [let i = 0;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[i] => [i] "i"
+[int j = 2, b = j + 1;] => [let j = 2, b = j + 1;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[j] => [j] "j"
+[b] => [b] "b"
+[break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[case 3:] => [case 3: ] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[i = 3;] => [i = 3;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[assert i == 3;] => [$Asserts.$assert(i == 3);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[return;] => [return;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[switch (5) {
+      case 5:
+...        break;
+    }] => [switch (5) {
+      case 5:
+...        break;
+    }] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[case 5:] => [case 5: ] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[int i = 1;] => [let i$1$ = 1;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[i] => [i$1$] "i"
+[break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[assert false;] => [$Asserts.$assert(false);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -11,6 +11,8 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Numbers = goog.forwardDeclare('com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class SwitchStatement extends java_lang_Object {
@@ -85,6 +87,31 @@ class SwitchStatement extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static m_testSwitchVariableDeclarations___$p_com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement() {
+    SwitchStatement.$clinit();
+    switch (3) {
+      case 1:
+        let /** number */ unassigned, /** number */ unassigned2;
+        let i = 0;
+        let j = 2, b = j + 1;
+        break;
+      case 3:
+        i = 3;
+        $Asserts.$assert(i == 3);
+        return;
+    }
+    switch (5) {
+      case 5:
+        let i$1$ = 1;
+        break;
+    }
+    $Asserts.$assert(false);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -112,6 +139,8 @@ class SwitchStatement extends java_lang_Object {
     SwitchStatement.$clinit = function() {};
     Numbers = goog.module.get(
         'com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

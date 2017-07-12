@@ -53,4 +53,26 @@ public class SwitchStatement {
         return;
     }
   }
+
+  @SuppressWarnings("unused")
+  private static void testSwitchVariableDeclarations() {
+    switch (3) {
+      case 1:
+        int unassigned, unassigned2;
+        int i = 0;
+        int j = 2, b = j + 1;
+        break;
+      case 3:
+        i = 3;
+        assert i == 3;
+        return;
+    }
+
+    switch (5) {
+      case 5:
+        int i = 1;
+        break;
+    }
+    assert false;
+  }
 }
