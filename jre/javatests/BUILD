@@ -112,21 +112,35 @@ load("//tools/build_rules:build_test.bzl", "build_test")
 
 build_test(
     name = "conformance_test",
-    targets = [":conformance_binary"],
+    targets = [
+        ":conformance_binary",
+        ":conformance_binary_head",
+    ],
 )
 
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
+
+COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [
+    "--conformance_config=conformance_proto.txt",
+    "--jscomp_error=conformanceViolations",
+    # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
+    # "--jscomp_error=reportUnknownTypes",
+]
 
 js_binary(
     name = "conformance_binary",
     compile = 1,
+    defs = COMFORMANCE_CHECK_FLAGS,
+    extra_inputs = ["conformance_proto.txt"],
+    deps = ["//jre/java:jre"],
+)
+
+js_binary(
+    name = "conformance_binary_head",
+    compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_OPTIMIZED_DEFS + [
-        "--conformance_config=conformance_proto.txt",
-        "--jscomp_error=conformanceViolations",
-        # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
-        # "--jscomp_error=reportUnknownTypes",
-    ],
+    defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
     deps = ["//jre/java:jre"],
 )
