@@ -93,6 +93,7 @@ public class Main {
     switch (3) {
       case 1:
         int i = 0, unassigned;
+        int unassigned2;
         int j = 2, b = j + 1;
         break;
       case 3:
