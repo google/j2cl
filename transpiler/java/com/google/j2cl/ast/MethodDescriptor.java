@@ -25,7 +25,6 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Streams;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -96,6 +95,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
+
+  public static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
+    return getSignature(name, Arrays.asList(parameterTypeDescriptors));
+  }
+
+  private static String getSignature(String name, List<TypeDescriptor> parameterTypeDescriptors) {
+    return name
+        + parameterTypeDescriptors
+            .stream()
+            .map(
+                type ->
+                    TypeDescriptors.toNonNullable(type)
+                        .getRawTypeDescriptor()
+                        .getQualifiedBinaryName())
+            .collect(joining("(", ",", ")"));
+  }
 
   public abstract boolean isAbstract();
 
@@ -340,6 +355,39 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getEnclosingTypeDescriptor().getTypeDeclaration().getOverriddenMethodDescriptors(this);
   }
 
+  public MethodDescriptor specializeTypeVariables(
+      Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+    return specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
+  }
+
+  public MethodDescriptor specializeTypeVariables(
+      Function<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (replacingTypeDescriptorByTypeVariable == Function.<TypeDescriptor>identity()) {
+      return this;
+    }
+
+    // Original type variables.
+    TypeDescriptor returnTypeDescriptor = getReturnTypeDescriptor();
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
+
+    // Specialized type variables (possibly recursively).
+    TypeDescriptor specializedReturnTypeDescriptor =
+        returnTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
+    ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
+        parameterTypeDescriptors
+            .stream()
+            .map(
+                typeDescriptor ->
+                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
+            .collect(toImmutableList());
+
+    return MethodDescriptor.Builder.from(this)
+        .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
+        .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
+        .build();
+  }
+
   /** A Builder for MethodDescriptors. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -547,56 +595,5 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     private static final ThreadLocalInterner<MethodDescriptor> interner =
         new ThreadLocalInterner<>();
-  }
-
-  public MethodDescriptor specializeTypeVariables(
-      Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
-    return specializeTypeVariables(
-        TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
-  }
-
-  public MethodDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
-    if (replacingTypeDescriptorByTypeVariable == Function.<TypeDescriptor>identity()) {
-      return this;
-    }
-
-    // Original type variables.
-    TypeDescriptor returnTypeDescriptor = getReturnTypeDescriptor();
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
-
-    // Specialized type variables (possibly recursively).
-    TypeDescriptor specializedReturnTypeDescriptor =
-        returnTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
-    ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
-        parameterTypeDescriptors
-            .stream()
-            .map(
-                typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
-            .collect(toImmutableList());
-
-    return MethodDescriptor.Builder.from(this)
-        .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
-        .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
-        .build();
-  }
-
-
-  static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
-    return getSignature(name, Arrays.asList(parameterTypeDescriptors));
-  }
-
-  static String getSignature(String name, Iterable<TypeDescriptor> parameterTypeDescriptors) {
-    return name
-        + "("
-        + Streams.stream(parameterTypeDescriptors)
-            .map(
-                type ->
-                    TypeDescriptors.toNonNullable(type)
-                        .getRawTypeDescriptor()
-                        .getQualifiedBinaryName())
-            .collect(joining(", "))
-        + ")";
   }
 }

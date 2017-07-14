@@ -33,7 +33,6 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.HasReadableDescription;
 import com.google.j2cl.ast.common.JsUtils;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -371,9 +370,10 @@ public abstract class TypeDeclaration extends Node
     if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
       return "";
     }
-    return J2clUtils.format(
-        "<%s>",
-        typeParameterDescriptors.stream().map(TypeDescriptor::getUniqueId).collect(joining(", ")));
+    return typeParameterDescriptors
+        .stream()
+        .map(TypeDescriptor::getUniqueId)
+        .collect(joining("<", ", ", ">"));
   }
 
   @Override
