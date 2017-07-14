@@ -1,58 +1,16 @@
-[class InitMethodDispatch<T> {
-  int value;
-...  }
-}] => [/**
- * @template C_T
-...exports = InitMethodDispatch;
-] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch"
-[class InitMethodDispatch<T> {
-  int value;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = 0;
-  }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = 0;]
-[InitMethodDispatch() {
-    this(1);
-...    // would be redundant (in light of the fact that it delegates to this()).
-  }] => [/**
-   * Factory method corresponding to constructor 'InitMethodDispatch()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [UNKNOWN] => [InitMethodDispatch.$clinit();]
 [UNKNOWN] => [let $instance = new InitMethodDispatch();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__();]
 [UNKNOWN] => [return $instance;]
-[InitMethodDispatch() {
-    this(1);
-...    // would be redundant (in light of the fact that it delegates to this()).
-  }] => [/**
-   * Initialization from constructor 'InitMethodDispatch()'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);
-  }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__"
-[InitMethodDispatch(int i) {
-    value = i;
-    // This will translate to a $ctor method that *does* dispatch to $init().
-  }] => [/**
-   * Factory method corresponding to constructor 'InitMethodDispatch(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [i] => [i] "i"
 [UNKNOWN] => [InitMethodDispatch.$clinit();]
 [UNKNOWN] => [let $instance = new InitMethodDispatch();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(i);]
 [UNKNOWN] => [return $instance;]
-[InitMethodDispatch(int i) {
-    value = i;
-    // This will translate to a $ctor method that *does* dispatch to $init().
-  }] => [/**
-   * Initialization from constructor 'InitMethodDispatch(int)'.
-...    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = i;
-  }] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<ctor>"
 [i] => [i] "i"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch();]

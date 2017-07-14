@@ -1,38 +1,10 @@
-[public class StaticFieldCompoundAssignment {
-  public static long one = 1;
-...  }
-}] => [class StaticFieldCompoundAssignment extends java_lang_Object {
-  /**
-...exports = StaticFieldCompoundAssignment;
-] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment"
-[public class StaticFieldCompoundAssignment {
-  public static long one = 1;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Long.fromBits(0, 0) /* 0 */;
-  }] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {!$Long} */
     this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Long.fromBits(0, 0) /* 0 */;]
-[public class StaticFieldCompoundAssignment {
-  public static long one = 1;
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'StaticFieldCompoundAssignment()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<ctor>"
 [UNKNOWN] => [StaticFieldCompoundAssignment.$clinit();]
 [UNKNOWN] => [let $instance = new StaticFieldCompoundAssignment();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticFieldCompoundAssignment {
-  public static long one = 1;
-...  }
-}] => [/**
-   * Initialization from constructor 'StaticFieldCompoundAssignment()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment();
-  }] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

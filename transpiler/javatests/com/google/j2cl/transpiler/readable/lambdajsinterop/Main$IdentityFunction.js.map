@@ -1,45 +1,10 @@
-[private static final class IdentityFunction implements Function<Object, Object> {
-    @Override
-...    }
-  }] => [/**
- * @implements {com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function<*, *>}
-...exports = IdentityFunction;
-] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction"
-[private static final class IdentityFunction implements Function<Object, Object> {
-    @Override
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction"
 [UNKNOWN] => [super();]
-[private static final class IdentityFunction implements Function<Object, Object> {
-    @Override
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'IdentityFunction()'.
-...    return $Util.$makeLambdaFunction($Util.$getPrototype(IdentityFunction).m_apply__java_lang_Object, $instance, IdentityFunction.$copy);
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction.<ctor>"
 [UNKNOWN] => [IdentityFunction.$clinit();]
 [UNKNOWN] => [let $instance = new IdentityFunction();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_IdentityFunction__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(IdentityFunction).m_apply__java_lang_Object, $instance, IdentityFunction.$copy);]
-[private static final class IdentityFunction implements Function<Object, Object> {
-    @Override
-...    }
-  }] => [/**
-   * Initialization from constructor 'IdentityFunction()'.
-...    this.$init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_IdentityFunction();
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_IdentityFunction();]
-[@Override
-    public Object apply(Object o) {
-      return o;
-    }] => [/**
-   * @override
-...    return o;
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction.apply"
 [o] => [o] "o"
 [return o;] => [return o;] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction.apply"
 [UNKNOWN] => [java_lang_Object.$clinit();]

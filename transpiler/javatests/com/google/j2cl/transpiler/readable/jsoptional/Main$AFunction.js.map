@@ -1,45 +1,10 @@
-[static final class AFunction implements Function {
-    @Override
-...    }
-  }] => [/**
- * @implements {com_google_j2cl_transpiler_readable_jsoptional_Main_Function}
-...exports = AFunction;
-] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction"
-[static final class AFunction implements Function {
-    @Override
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction"
 [UNKNOWN] => [super();]
-[static final class AFunction implements Function {
-    @Override
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'AFunction()'.
-...    return $Util.$makeLambdaFunction($Util.$getPrototype(AFunction).m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.<ctor>"
 [UNKNOWN] => [AFunction.$clinit();]
 [UNKNOWN] => [let $instance = new AFunction();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(AFunction).m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);]
-[static final class AFunction implements Function {
-    @Override
-...    }
-  }] => [/**
-   * Initialization from constructor 'AFunction()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction();
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_AFunction();]
-[@Override
-    public Object f1(@JsOptional String i, Object... args) {
-      return args[0];
-    }] => [/**
-   * @override
-...    return args[0];
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.f1"
 [i] => [i] "i"
 [args] => [args] "args"
 [return args[0];] => [return args[0];] "com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction.f1"

@@ -1,51 +1,16 @@
-[class InnerClass {
-      public void fun() {
-...      }
-    }] => [class $1InnerClass extends java_lang_Object {
-  /**
-...exports = $1InnerClass;
-] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass"
-[class InnerClass {
-      public void fun() {
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.$c_localVar = 0;
-  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NestedLocalClasses} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass = null;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_localVar = 0;]
-[class InnerClass {
-      public void fun() {
-...      }
-    }] => [/**
-   * Factory method corresponding to constructor 'InnerClass(NestedLocalClasses, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.<ctor>"
 [UNKNOWN] => [$1InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses__int($outer_this, $c_localVar);]
 [UNKNOWN] => [return $instance;]
-[class InnerClass {
-      public void fun() {
-...      }
-    }] => [/**
-   * Initialization from constructor 'InnerClass(NestedLocalClasses, int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass();
-  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass = $outer_this;]
 [UNKNOWN] => [this.$c_localVar = $c_localVar;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass();]
-[public void fun() {
-        final int localVarInInnerClass = 1;
-...        }
-      }] => [/**
-   * @return {void}
-...    $1InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int(this, this.$c_localVar, localVarInInnerClass);
-  }] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.fun"
 [final int localVarInInnerClass = 1;] => [let localVarInInnerClass = 1;] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.fun"
 [localVarInInnerClass] => [localVarInInnerClass] "localVarInInnerClass"
 [new InnerInnerClass();] => [$1InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int(this, this.$c_localVar, localVarInInnerClass);] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.fun"

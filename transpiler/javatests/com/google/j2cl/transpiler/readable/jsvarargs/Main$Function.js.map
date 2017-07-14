@@ -1,13 +1,2 @@
-[@JsFunction
-  interface Function {
-    Object f1(int i, Object... args);
-  }] => [/**
- * @interface
-...exports = com_google_j2cl_transpiler_readable_jsvarargs_Main_Function;
-] "com.google.j2cl.transpiler.readable.jsvarargs.Main.Function"
-[Object f1(int i, Object... args);] => [/**
-   * @abstract
-...  m_f1__int__arrayOf_java_lang_Object(i, ...args) {
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.Function.f1"
 [i] => [i] "i"
 [args] => [args] "args"

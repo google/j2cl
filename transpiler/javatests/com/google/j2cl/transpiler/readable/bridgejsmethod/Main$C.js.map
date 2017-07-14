@@ -1,56 +1,11 @@
-[public static class C extends A<Integer> {
-    // It's not a directly annotated JsMethod, but overrides a JsMethod.
-...    }
-  }] => [/**
- * @extends {A<Integer>}
-...exports = C;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C"
-[public static class C extends A<Integer> {
-    // It's not a directly annotated JsMethod, but overrides a JsMethod.
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C"
 [UNKNOWN] => [super();]
-[public static class C extends A<Integer> {
-    // It's not a directly annotated JsMethod, but overrides a JsMethod.
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'C()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C.<ctor>"
 [UNKNOWN] => [C.$clinit();]
 [UNKNOWN] => [let $instance = new C();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_C__();]
 [UNKNOWN] => [return $instance;]
-[public static class C extends A<Integer> {
-    // It's not a directly annotated JsMethod, but overrides a JsMethod.
-...    }
-  }] => [/**
-   * Initialization from constructor 'C()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_C();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_C();]
-[@Override
-    public Integer fun(Integer i) {
-      return i;
-    }] => [/**
-   * @param {Integer} i
-...    return i;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C.fun"
 [i] => [i] "i"
 [return i;] => [return i;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.C.fun"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {Integer}
-   * @public
-   */
-  fun(arg0) {
-    return this.m_fun__java_lang_Integer(/**@type {Integer} */ ($Casts.$to(arg0, Integer)));
-  }]
 [UNKNOWN] => [return this.m_fun__java_lang_Integer(/**@type {Integer} */ ($Casts.$to(arg0, Integer)));]
 [UNKNOWN] => [A.$clinit();]

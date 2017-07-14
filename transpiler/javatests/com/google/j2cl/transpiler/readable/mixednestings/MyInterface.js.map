@@ -1,11 +1,1 @@
-[interface MyInterface {
-  int fun(int a);
-}] => [/**
- * @interface
-...exports = MyInterface;
-] "com.google.j2cl.transpiler.readable.mixednestings.MyInterface"
-[int fun(int a);] => [/**
-   * @abstract
-...  m_fun__int(a) {
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MyInterface.fun"
 [a] => [a] "a"

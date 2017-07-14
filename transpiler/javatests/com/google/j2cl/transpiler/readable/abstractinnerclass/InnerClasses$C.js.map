@@ -1,43 +1,8 @@
-[abstract class C implements A {
-    void bar() {
-...    }
-  }] => [/**
- * @abstract
-...exports = C;
-] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C"
-[abstract class C implements A {
-    void bar() {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses_C = null;
-  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClasses} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses_C = null;]
-[abstract class C implements A {
-    void bar() {
-...    }
-  }] => [/**
-   * Initialization from constructor 'C(InnerClasses)'.
-...    this.$init__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses_C();
-  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses_C = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses_C();]
-[void bar() {
-      foo();
-    }] => [/**
-   * @return {void}
-...    this.m_foo__();
-  }] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C.bar"
 [foo();] => [this.m_foo__();] "com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C.bar"
-[UNKNOWN] => [/**
-   * @abstract
-   * @override
-   * @return {void}
-   * @public
-   */
-  m_foo__() {
-  }]
 [UNKNOWN] => [java_lang_Object.$clinit();]

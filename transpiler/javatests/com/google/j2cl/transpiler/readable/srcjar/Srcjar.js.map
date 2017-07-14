@@ -1,45 +1,10 @@
-[public class Srcjar {
-  @SuppressWarnings("unused")
-...  }
-}] => [class Srcjar extends java_lang_Object {
-  /**
-...exports = Srcjar;
-] "com.google.j2cl.transpiler.readable.srcjar.Srcjar"
-[public class Srcjar {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.srcjar.Srcjar"
 [UNKNOWN] => [super();]
-[public class Srcjar {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Srcjar()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.srcjar.Srcjar.<ctor>"
 [UNKNOWN] => [Srcjar.$clinit();]
 [UNKNOWN] => [let $instance = new Srcjar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_srcjar_Srcjar__();]
 [UNKNOWN] => [return $instance;]
-[public class Srcjar {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Initialization from constructor 'Srcjar()'.
-...    this.$init__com_google_j2cl_transpiler_readable_srcjar_Srcjar();
-  }] "com.google.j2cl.transpiler.readable.srcjar.Srcjar.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_srcjar_Srcjar();]
-[@SuppressWarnings("unused")
-  public static void test() {
-    Foo foo = new Foo();
-  }] => [/**
-   * @return {void}
-...    let foo = Foo.$create__();
-  }] "com.google.j2cl.transpiler.readable.srcjar.Srcjar.test"
 [UNKNOWN] => [Srcjar.$clinit();]
 [Foo foo = new Foo();] => [let foo = Foo.$create__();] "com.google.j2cl.transpiler.readable.srcjar.Srcjar.test"
 [foo] => [foo] "foo"

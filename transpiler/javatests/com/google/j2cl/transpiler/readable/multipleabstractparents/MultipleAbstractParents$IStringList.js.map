@@ -1,13 +1,1 @@
-[public interface IStringList extends List<String> {
-    @Override
-    public String getFoo(String string);
-  }] => [/**
- * @interface
-...exports = IStringList;
-] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList"
-[@Override
-    public String getFoo(String string);] => [/**
-   * @abstract
-...  m_getFoo__java_lang_String(string$1$) {
-  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.getFoo"
 [string] => [string$1$] "string"

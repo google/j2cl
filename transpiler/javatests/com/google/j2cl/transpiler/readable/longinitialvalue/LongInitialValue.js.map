@@ -1,22 +1,4 @@
-[public abstract class LongInitialValue {
-  static long LONG_VALUE;
-}] => [/**
- * @abstract
-...exports = LongInitialValue;
-] "com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue"
-[public abstract class LongInitialValue {
-  static long LONG_VALUE;
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue"
 [UNKNOWN] => [super();]
-[public abstract class LongInitialValue {
-  static long LONG_VALUE;
-}] => [/**
-   * Initialization from constructor 'LongInitialValue()'.
-...    this.$init__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue();
-  }] "com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,58 +1,12 @@
-[public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
-  @Override
-...  }
-}] => [/**
- * @template C_K, C_V
-...exports = EnumMap;
-] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap"
-[public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap"
 [UNKNOWN] => [super();]
-[public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'EnumMap()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap.<ctor>"
 [UNKNOWN] => [EnumMap.$clinit();]
 [UNKNOWN] => [let $instance = new EnumMap();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap__();]
 [UNKNOWN] => [return $instance;]
-[public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Initialization from constructor 'EnumMap()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap();]
-[@Override
-  public V put(K key, V value) {
-    return value;
-  }] => [/**
-   * @param {C_K} key
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap.put"
 [key] => [key] "key"
 [value] => [value] "value"
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap.put"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*} arg1
-   * @return {C_V}
-   * @public
-   */
-  m_put__java_lang_Object__java_lang_Object(arg0, arg1) {
-    return this.m_put__java_lang_Enum__java_lang_Object(/**@type {C_K} */ ($Casts.$to(arg0, Enum)), arg1);
-  }]
 [UNKNOWN] => [return this.m_put__java_lang_Enum__java_lang_Object(/**@type {C_K} */ ($Casts.$to(arg0, Enum)), arg1);]
 [UNKNOWN] => [AbstractMap.$clinit();]

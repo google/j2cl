@@ -1,18 +1,1 @@
-[public interface BothInInterface {
-
-...  int hashCode();
-}] => [/**
- * @interface
-...exports = BothInInterface;
-] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface"
-[@Override
-  boolean equals(Object obj);] => [/**
-   * @abstract
-...  equals(obj) {
-  }] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface.equals"
 [obj] => [obj] "obj"
-[@Override
-  int hashCode();] => [/**
-   * @abstract
-...  hashCode() {
-  }] "com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface.hashCode"

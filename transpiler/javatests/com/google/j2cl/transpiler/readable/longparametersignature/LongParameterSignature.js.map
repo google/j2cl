@@ -1,37 +1,9 @@
-[public class LongParameterSignature {
-  public void main(long foo) {}
-}] => [class LongParameterSignature extends java_lang_Object {
-  /**
-...exports = LongParameterSignature;
-] "com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature"
-[public class LongParameterSignature {
-  public void main(long foo) {}
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature"
 [UNKNOWN] => [super();]
-[public class LongParameterSignature {
-  public void main(long foo) {}
-}] => [/**
-   * Factory method corresponding to constructor 'LongParameterSignature()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature.<ctor>"
 [UNKNOWN] => [LongParameterSignature.$clinit();]
 [UNKNOWN] => [let $instance = new LongParameterSignature();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature__();]
 [UNKNOWN] => [return $instance;]
-[public class LongParameterSignature {
-  public void main(long foo) {}
-}] => [/**
-   * Initialization from constructor 'LongParameterSignature()'.
-...    this.$init__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature();
-  }] "com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature();]
-[public void main(long foo) {}] => [/**
-   * @param {!$Long} foo
-...  m_main__long(foo) {
-  }] "com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature.main"
 [foo] => [foo] "foo"
 [UNKNOWN] => [java_lang_Object.$clinit();]

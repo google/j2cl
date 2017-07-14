@@ -1,45 +1,10 @@
-[public class SimpleLiterals {
-  @SuppressWarnings("unused")
-...  }
-}] => [class SimpleLiterals extends java_lang_Object {
-  /**
-...exports = SimpleLiterals;
-] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals"
-[public class SimpleLiterals {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals"
 [UNKNOWN] => [super();]
-[public class SimpleLiterals {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'SimpleLiterals()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.<ctor>"
 [UNKNOWN] => [SimpleLiterals.$clinit();]
 [UNKNOWN] => [let $instance = new SimpleLiterals();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals__();]
 [UNKNOWN] => [return $instance;]
-[public class SimpleLiterals {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Initialization from constructor 'SimpleLiterals()'.
-...    this.$init__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals();
-  }] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals();]
-[@SuppressWarnings("unused")
-  public void main() {
-...    Class<?> f = SimpleLiterals.class;
-  }] => [/**
-   * @return {void}
-...    let f = /**@type {Class<SimpleLiterals>} */ (Class.$get(SimpleLiterals));
-  }] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.main"
 [boolean a = false;] => [let a = false;] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.main"
 [a] => [a] "a"
 [char b = 'a';] => [let b = 97 /* 'a' */;] "com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.main"

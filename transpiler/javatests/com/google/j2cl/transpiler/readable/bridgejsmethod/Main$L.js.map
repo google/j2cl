@@ -1,57 +1,11 @@
-[public static class L<L1> extends K<String, L1> {
-    /**
-...    void fun(String string, L1 l1) {}
-  }] => [/**
- * @template C_L_L1
-...exports = L;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L"
-[public static class L<L1> extends K<String, L1> {
-    /**
-...    void fun(String string, L1 l1) {}
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L"
 [UNKNOWN] => [super();]
-[public static class L<L1> extends K<String, L1> {
-    /**
-...    void fun(String string, L1 l1) {}
-  }] => [/**
-   * Factory method corresponding to constructor 'L()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L.<ctor>"
 [UNKNOWN] => [L.$clinit();]
 [UNKNOWN] => [let $instance = new L();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L__();]
 [UNKNOWN] => [return $instance;]
-[public static class L<L1> extends K<String, L1> {
-    /**
-...    void fun(String string, L1 l1) {}
-  }] => [/**
-   * Initialization from constructor 'L()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_K__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_L();]
-[/**
-     * Like the G/H example but requires type specialization across classes instead of interfaces,
-...    @Override
-    void fun(String string, L1 l1) {}] => [/**
-   * @param {?string} string$1$
-...  fun(string$1$, l1) {
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L.fun"
 [string] => [string$1$] "string"
 [l1] => [l1] "l1"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*} arg1
-   * @return {void}
-   * @public
-   */
-  m_fun__java_lang_Object__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_bridgejsmethod(arg0, arg1) {
-    this.fun(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
-  }]
 [UNKNOWN] => [this.fun(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);]
 [UNKNOWN] => [K.$clinit();]

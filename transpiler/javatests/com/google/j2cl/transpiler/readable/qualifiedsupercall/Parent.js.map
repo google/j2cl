@@ -1,36 +1,8 @@
-[class Parent {
-  public void fun() {}
-}] => [class Parent extends java_lang_Object {
-  /**
-...exports = Parent;
-] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent"
-[class Parent {
-  public void fun() {}
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent"
 [UNKNOWN] => [super();]
-[class Parent {
-  public void fun() {}
-}] => [/**
-   * Factory method corresponding to constructor 'Parent()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent__();]
 [UNKNOWN] => [return $instance;]
-[class Parent {
-  public void fun() {}
-}] => [/**
-   * Initialization from constructor 'Parent()'.
-...    this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent();
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent();]
-[public void fun() {}] => [/**
-   * @return {void}
-...  m_fun__() {
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.fun"
 [UNKNOWN] => [java_lang_Object.$clinit();]

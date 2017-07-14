@@ -1,17 +1,3 @@
-[public class CompileTimeConstant {
-  public static final int A = 10;
-...  public final boolean I2 = G2 > 100;
-}] => [class CompileTimeConstant extends java_lang_Object {
-  /**
-...exports = CompileTimeConstant;
-] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant"
-[public class CompileTimeConstant {
-  public static final int A = 10;
-...  public final boolean I2 = G2 > 100;
-}] => [/**
-   * Private implementation constructor.
-...    this.f_I2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = true;
-  }] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_A2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 10;]
@@ -31,24 +17,10 @@
     this.f_H2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 65 /* "A" */;]
 [UNKNOWN] => [/** @public {boolean} */
     this.f_I2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = true;]
-[public class CompileTimeConstant {
-  public static final int A = 10;
-...  public final boolean I2 = G2 > 100;
-}] => [/**
-   * Factory method corresponding to constructor 'CompileTimeConstant()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<ctor>"
 [UNKNOWN] => [CompileTimeConstant.$clinit();]
 [UNKNOWN] => [let $instance = new CompileTimeConstant();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant__();]
 [UNKNOWN] => [return $instance;]
-[public class CompileTimeConstant {
-  public static final int A = 10;
-...  public final boolean I2 = G2 > 100;
-}] => [/**
-   * Initialization from constructor 'CompileTimeConstant()'.
-...    this.$init__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant();
-  }] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

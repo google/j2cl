@@ -1,44 +1,10 @@
-[class A {
-  public int foo(int a) {
-...  }
-}] => [class A extends java_lang_Object {
-  /**
-...exports = A;
-] "com.google.j2cl.transpiler.readable.jsbridgebackward.A"
-[class A {
-  public int foo(int a) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsbridgebackward.A"
 [UNKNOWN] => [super();]
-[class A {
-  public int foo(int a) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'A()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgebackward_A__();]
 [UNKNOWN] => [return $instance;]
-[class A {
-  public int foo(int a) {
-...  }
-}] => [/**
-   * Initialization from constructor 'A()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsbridgebackward_A();
-  }] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgebackward_A();]
-[public int foo(int a) {
-    return a;
-  }] => [/**
-   * @param {number} a
-...    return a;
-  }] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.foo"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.foo"
 [UNKNOWN] => [java_lang_Object.$clinit();]

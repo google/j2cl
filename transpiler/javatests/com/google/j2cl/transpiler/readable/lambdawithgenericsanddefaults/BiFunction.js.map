@@ -1,20 +1,3 @@
-[@FunctionalInterface
-interface BiFunction<T, U, R> {
-...  }
-}] => [/**
- * @interface
-...exports = BiFunction;
-] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction"
-[R apply(T t, U u);] => [/**
-   * @abstract
-...  m_apply__java_lang_Object__java_lang_Object(t, u) {
-  }] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.apply"
 [t] => [t] "t"
 [u] => [u] "u"
-[default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
-    return (t, u) -> after.apply(this.apply(t, u));
-  }] => [/**
-   * @template M_V
-...  m_andThen__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function(after) {
-  }] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.andThen"
 [after] => [after] "after"

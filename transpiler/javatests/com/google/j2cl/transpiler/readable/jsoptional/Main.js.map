@@ -1,56 +1,20 @@
-[public class Main {
-  @JsMethod
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.jsoptional.Main"
-[@JsConstructor
-  public Main(@JsOptional String a) {}] => [/**
-   * JsConstructor 'Main(@JsOptional String)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(a);
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?function(?string=, ...*):*} */
     this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main = null;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(a);]
-[@JsMethod
-  public void method1(int i1, @JsOptional Double d, @JsOptional Integer i) {}] => [/**
-   * @param {number} i1
-...  method1(i1, d, i) {
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.method1"
 [i1] => [i1] "i1"
 [d] => [d] "d"
 [i] => [i] "i"
-[@JsMethod
-  public void method2(String s1, @JsOptional Double d, Boolean... i) {}] => [/**
-   * @param {?string} s1
-...    $Arrays.$stampType(i, Boolean, 1);
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.method2"
 [s1] => [s1] "s1"
 [d] => [d] "d"
 [i] => [i] "i"
 [UNKNOWN] => [$Arrays.$stampType(i, Boolean, 1);]
-[@JsConstructor
-  public Main(@JsOptional String a) {}] => [/**
-   * Initialization from constructor 'Main(@JsOptional String)'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();]
-[public void testFunction(Function f) {}] => [/**
-   * @param {?function(?string=, ...*):*} f
-...  m_testFunction__com_google_j2cl_transpiler_readable_jsoptional_Main_Function(f) {
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.testFunction"
 [f] => [f] "f"
-[@JsMethod
-  public void testOptionalFunction(@JsOptional Function f) {}] => [/**
-   * @param {?function(?string=, ...*):*=} f
-...  testOptionalFunction(f) {
-  }] "com.google.j2cl.transpiler.readable.jsoptional.Main.testOptionalFunction"
 [f] => [f] "f"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [Function f = (s, varargs) -> s;] => [this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main = (/** @param {?string=} s @param {...*} varargs */ (s, ...varargs) =>{

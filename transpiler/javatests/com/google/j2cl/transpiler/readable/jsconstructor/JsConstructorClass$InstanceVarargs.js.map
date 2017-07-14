@@ -1,17 +1,3 @@
-[@SuppressWarnings("ClassCanBeStatic")
-  public class InstanceVarargs extends A {
-...    }
-  }] => [class InstanceVarargs extends A {
-  /**
-...exports = InstanceVarargs;
-] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs"
-[@JsConstructor
-    public InstanceVarargs(int... args) {
-      super(args[1]);
-    }] => [/**
-   * JsConstructor 'InstanceVarargs(JsConstructorClass, int...)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int($outer_this, args);
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [InstanceVarargs.$clinit();]
 [UNKNOWN] => [$Arrays.$stampType(args, $int, 1);]
@@ -19,13 +5,6 @@
 [UNKNOWN] => [/** @public {JsConstructorClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs = null;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int($outer_this, args);]
-[@JsConstructor
-    public InstanceVarargs(int... args) {
-      super(args[1]);
-    }] => [/**
-   * Initialization from constructor 'InstanceVarargs(JsConstructorClass, int...)'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs.<ctor>"
 [args] => [args] "args"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs = $outer_this;]
 [super(args[1]);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(args[1]);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int"

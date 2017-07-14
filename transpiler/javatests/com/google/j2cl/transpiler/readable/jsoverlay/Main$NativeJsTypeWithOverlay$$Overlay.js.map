@@ -1,63 +1,14 @@
-[@JsType(isNative = true, namespace = "test.foo")
-  public static class NativeJsTypeWithOverlay {
-...    }
-  }] => [class NativeJsTypeWithOverlay$$Overlay {
-  /**
-...exports = NativeJsTypeWithOverlay$$Overlay;
-] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay"
-[@JsOverlay
-    public final int callM() {
-      return m();
-    }] => [/**
-   * @param {NativeJsTypeWithOverlay} $thisArg
-...    return $thisArg.m();
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.callM"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return m();] => [return $thisArg.m();] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.callM"
-[@JsOverlay
-    public static final int fun() {
-      return 1;
-    }] => [/**
-   * @return {number}
-...    return 1;
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.fun"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.fun"
-[@JsOverlay
-    private static final int bar() {
-      return 1;
-    }] => [/**
-   * @return {number}
-...    return 1;
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.bar"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.bar"
-[@JsOverlay
-    private final int foo() {
-      return 1;
-    }] => [/**
-   * @param {NativeJsTypeWithOverlay} $thisArg
-...    return 1;
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.foo"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.foo"
-[@JsOverlay
-    public static int varargs(int... a) {
-      return a[0];
-    }] => [/**
-   * @param {Array<number>} a
-...    return a[0];
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.varargs"
 [a] => [a] "a"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return a[0];] => [return a[0];] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.varargs"
-[@JsOverlay
-    private int baz() {
-      return 1;
-    }] => [/**
-   * @param {NativeJsTypeWithOverlay} $thisArg
-...    return 1;
-  }] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.baz"
 [UNKNOWN] => [NativeJsTypeWithOverlay$$Overlay.$clinit();]
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Overlay.baz"
 [@JsOverlay public static Object staticField = new Object();] => [NativeJsTypeWithOverlay$$Overlay.$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay$$Overlay = java_lang_Object.$create__();]

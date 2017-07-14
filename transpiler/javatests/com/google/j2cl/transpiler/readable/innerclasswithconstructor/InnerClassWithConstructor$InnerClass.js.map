@@ -1,59 +1,21 @@
-[class InnerClass {
-    public int b;
-...    }
-  }] => [class InnerClass extends java_lang_Object {
-  /**
-...exports = InnerClass;
-] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass"
-[class InnerClass {
-    public int b;
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = 0;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClassWithConstructor} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = 0;]
-[public InnerClass(int b) {
-      this.b = a + b;
-    }] => [/**
-   * Factory method corresponding to constructor 'InnerClass(InnerClassWithConstructor, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.<ctor>"
 [b] => [b] "b"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int($outer_this, b);]
 [UNKNOWN] => [return $instance;]
-[public InnerClass(int b) {
-      this.b = a + b;
-    }] => [/**
-   * Initialization from constructor 'InnerClass(InnerClassWithConstructor, int)'.
-...    this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor + b;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.<ctor>"
 [b] => [b] "b"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass();]
 [this.b = a + b;] => [this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor + b;] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int"
-[public InnerClass() {
-      this(a);
-    }] => [/**
-   * Factory method corresponding to constructor 'InnerClass(InnerClassWithConstructor)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor($outer_this);]
 [UNKNOWN] => [return $instance;]
-[public InnerClass() {
-      this(a);
-    }] => [/**
-   * Initialization from constructor 'InnerClass(InnerClassWithConstructor)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int($outer_this, $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor);
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.<ctor>"
 [this(a);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int($outer_this, $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor);] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor"
 [UNKNOWN] => [java_lang_Object.$clinit();]

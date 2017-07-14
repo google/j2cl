@@ -1,45 +1,10 @@
-[public class BreakStatement {
-  public void test() {
-...  }
-}] => [class BreakStatement extends java_lang_Object {
-  /**
-...exports = BreakStatement;
-] "com.google.j2cl.transpiler.readable.breakstatement.BreakStatement"
-[public class BreakStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.breakstatement.BreakStatement"
 [UNKNOWN] => [super();]
-[public class BreakStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'BreakStatement()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.breakstatement.BreakStatement.<ctor>"
 [UNKNOWN] => [BreakStatement.$clinit();]
 [UNKNOWN] => [let $instance = new BreakStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement__();]
 [UNKNOWN] => [return $instance;]
-[public class BreakStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'BreakStatement()'.
-...    this.$init__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement();
-  }] "com.google.j2cl.transpiler.readable.breakstatement.BreakStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement();]
-[public void test() {
-    for (; ; ) {
-...    }
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.breakstatement.BreakStatement.test"
 [for (; ; ) {
       break;
     }] => [for (; ; ) {

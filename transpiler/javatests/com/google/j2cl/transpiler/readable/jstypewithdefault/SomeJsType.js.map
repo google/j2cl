@@ -1,39 +1,11 @@
-[public class SomeJsType implements Interface {}] => [/**
- * @implements {Interface}
-...exports = SomeJsType;
-] "com.google.j2cl.transpiler.readable.jstypewithdefault.SomeJsType"
-[public class SomeJsType implements Interface {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jstypewithdefault.SomeJsType"
 [UNKNOWN] => [super();]
-[public class SomeJsType implements Interface {}] => [/**
-   * Factory method corresponding to constructor 'SomeJsType()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jstypewithdefault.SomeJsType.<ctor>"
 [UNKNOWN] => [SomeJsType.$clinit();]
 [UNKNOWN] => [let $instance = new SomeJsType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jstypewithdefault_SomeJsType__();]
 [UNKNOWN] => [return $instance;]
-[public class SomeJsType implements Interface {}] => [/**
-   * Initialization from constructor 'SomeJsType()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jstypewithdefault_SomeJsType();
-  }] "com.google.j2cl.transpiler.readable.jstypewithdefault.SomeJsType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstypewithdefault_SomeJsType();]
-[public class SomeJsType implements Interface {}] => [/**
-   * Default method forwarding stub.
-...    Interface$$Overlay.m_defaultMethod__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface(this);
-  }] "com.google.j2cl.transpiler.readable.jstypewithdefault.SomeJsType"
 [UNKNOWN] => [Interface$$Overlay.m_defaultMethod__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface(this);]
-[UNKNOWN] => [/**
-   * Bridge to JsMethod.
-   * @return {void}
-   * @public
-   */
-  m_defaultMethod__() {
-    this.defaultMethod();
-  }]
 [UNKNOWN] => [this.defaultMethod();]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [Interface.$clinit();]

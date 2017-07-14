@@ -1,45 +1,10 @@
-[public class DoWhileStatement {
-  public void test() {
-...  }
-}] => [class DoWhileStatement extends java_lang_Object {
-  /**
-...exports = DoWhileStatement;
-] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement"
-[public class DoWhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement"
 [UNKNOWN] => [super();]
-[public class DoWhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'DoWhileStatement()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.<ctor>"
 [UNKNOWN] => [DoWhileStatement.$clinit();]
 [UNKNOWN] => [let $instance = new DoWhileStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement__();]
 [UNKNOWN] => [return $instance;]
-[public class DoWhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'DoWhileStatement()'.
-...    this.$init__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement();
-  }] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement();]
-[public void test() {
-    int count = 0;
-...    } while (count < 5);
-  }] => [/**
-   * @return {void}
-...    }while (count < 5);
-  }] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
 [int count = 0;] => [let count = 0;] "com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement.test"
 [count] => [count] "count"
 [do {

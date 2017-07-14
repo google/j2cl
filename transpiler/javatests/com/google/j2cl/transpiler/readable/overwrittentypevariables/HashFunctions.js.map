@@ -1,57 +1,15 @@
-[public class HashFunctions {
-  public static final <T> HashFunction<T> hashFunction() {
-...  }
-}] => [class HashFunctions extends java_lang_Object {
-  /**
-...exports = HashFunctions;
-] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions"
-[public class HashFunctions {
-  public static final <T> HashFunction<T> hashFunction() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions"
 [UNKNOWN] => [super();]
-[public class HashFunctions {
-  public static final <T> HashFunction<T> hashFunction() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'HashFunctions()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.<ctor>"
 [UNKNOWN] => [HashFunctions.$clinit();]
 [UNKNOWN] => [let $instance = new HashFunctions();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions__();]
 [UNKNOWN] => [return $instance;]
-[public class HashFunctions {
-  public static final <T> HashFunction<T> hashFunction() {
-...  }
-}] => [/**
-   * Initialization from constructor 'HashFunctions()'.
-...    this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions();
-  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions();]
-[public static final <T> HashFunction<T> hashFunction() {
-    return new HashFunction<T>() {
-...    };
-  }] => [/**
-   * @template M_T
-...    return /**@type {!$1<*>} */ ($1.$create__());
-  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.hashFunction"
 [UNKNOWN] => [HashFunctions.$clinit();]
 [return new HashFunction<T>() {
       @Override
 ...      }
     };] => [return /**@type {!$1<*>} */ ($1.$create__());] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.hashFunction"
-[public static final <T extends Enum<T>> HashFunction<T> enumHashFunction() {
-    return new HashFunction<T>() {
-...    };
-  }] => [/**
-   * @template M_T
-...    return /**@type {!$2<Enum>} */ ($2.$create__());
-  }] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.enumHashFunction"
 [UNKNOWN] => [HashFunctions.$clinit();]
 [return new HashFunction<T>() {
       @Override

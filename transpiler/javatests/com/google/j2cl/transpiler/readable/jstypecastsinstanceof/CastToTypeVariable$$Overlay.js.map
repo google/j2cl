@@ -1,17 +1,3 @@
-[@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class CastToTypeVariable<T extends CastToTypeVariable<T>> {
-...  }
-}] => [class CastToTypeVariable$$Overlay {
-  /**
-...exports = CastToTypeVariable$$Overlay;
-] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToTypeVariable"
-[@SuppressWarnings({"unused", "unchecked"})
-  @JsOverlay
-...    return (T) this;
-  }] => [/**
-   * @template C_T
-...    return /**@type {Object} */ ($Casts.$to($thisArg, CastToTypeVariable$$Overlay));
-  }] "com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToTypeVariable.setField"
 [index] => [index] "index"
 [value] => [value] "value"
 [UNKNOWN] => [CastToTypeVariable$$Overlay.$clinit();]

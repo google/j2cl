@@ -1,45 +1,10 @@
-[public class Main {
-  public void test() {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main"
-[public class Main {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main();
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main();]
-[public void test() {
-    MyJsType a = new MyJsType();
-...    d.fun(1);
-  }] => [/**
-   * @return {void}
-...    d.m_fun__int(1);
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [MyJsType a = new MyJsType();] => [let a = MyJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [a] => [a] "a"
 [SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"

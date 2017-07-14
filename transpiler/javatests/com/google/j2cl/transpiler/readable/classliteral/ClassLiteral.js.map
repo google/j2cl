@@ -1,45 +1,10 @@
-[public class ClassLiteral {
-  @SuppressWarnings("unused")
-...  }
-}] => [class ClassLiteral extends java_lang_Object {
-  /**
-...exports = ClassLiteral;
-] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral"
-[public class ClassLiteral {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral"
 [UNKNOWN] => [super();]
-[public class ClassLiteral {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'ClassLiteral()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral.<ctor>"
 [UNKNOWN] => [ClassLiteral.$clinit();]
 [UNKNOWN] => [let $instance = new ClassLiteral();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral__();]
 [UNKNOWN] => [return $instance;]
-[public class ClassLiteral {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Initialization from constructor 'ClassLiteral()'.
-...    this.$init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral();
-  }] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral();]
-[@SuppressWarnings("unused")
-  public void main() {
-...    o = ClassLiteral[][].class;
-  }] => [/**
-   * @return {void}
-...    o = /**@type {Class<Array<Array<ClassLiteral>>>} */ (Class.$get(ClassLiteral, 2));
-  }] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral.main"
 [Object o = ClassLiteral.class;] => [let o = /**@type {Class<ClassLiteral>} */ (Class.$get(ClassLiteral));] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral.main"
 [o] => [o] "o"
 [o = ClassLiteral[][].class;] => [o = /**@type {Class<Array<Array<ClassLiteral>>>} */ (Class.$get(ClassLiteral, 2));] "com.google.j2cl.transpiler.readable.classliteral.ClassLiteral.main"

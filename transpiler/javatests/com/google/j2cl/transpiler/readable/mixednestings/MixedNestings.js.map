@@ -1,47 +1,9 @@
-[/**
- * Test lambda having access to local variables and arguments when placed in mixed scopes.
-...  }
-}] => [class MixedNestings extends java_lang_Object {
-  /**
-...exports = MixedNestings;
-] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings"
-[/**
- * Test lambda having access to local variables and arguments when placed in mixed scopes.
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings"
 [UNKNOWN] => [super();]
-[/**
- * Test lambda having access to local variables and arguments when placed in mixed scopes.
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'MixedNestings()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.<ctor>"
 [UNKNOWN] => [MixedNestings.$clinit();]
 [UNKNOWN] => [let $instance = new MixedNestings();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings__();]
 [UNKNOWN] => [return $instance;]
-[/**
- * Test lambda having access to local variables and arguments when placed in mixed scopes.
-...  }
-}] => [/**
-   * Initialization from constructor 'MixedNestings()'.
-...    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings();
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings();]
-[public void mm() {}] => [/**
-   * @return {void}
-...  m_mm__() {
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.mm"
-[public void test() {
-    new A().a();
-  }] => [/**
-   * @return {void}
-...    A.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(this).m_a__();
-  }] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.test"
 [new A().a();] => [A.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(this).m_a__();] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

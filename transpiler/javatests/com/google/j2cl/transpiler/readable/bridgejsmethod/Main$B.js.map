@@ -1,74 +1,13 @@
-[public static class B extends A<String> {
-    // It is a JsMethod itself and also overrides a JsMethod.
-...    public void bar(String s) {}
-  }] => [/**
- * @extends {A<?string>}
-...exports = B;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B"
-[public static class B extends A<String> {
-    // It is a JsMethod itself and also overrides a JsMethod.
-...    public void bar(String s) {}
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B"
 [UNKNOWN] => [super();]
-[public static class B extends A<String> {
-    // It is a JsMethod itself and also overrides a JsMethod.
-...    public void bar(String s) {}
-  }] => [/**
-   * Factory method corresponding to constructor 'B()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.<ctor>"
 [UNKNOWN] => [B.$clinit();]
 [UNKNOWN] => [let $instance = new B();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B__();]
 [UNKNOWN] => [return $instance;]
-[public static class B extends A<String> {
-    // It is a JsMethod itself and also overrides a JsMethod.
-...    public void bar(String s) {}
-  }] => [/**
-   * Initialization from constructor 'B()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B();]
-[@Override
-    @JsMethod
-...      return s;
-    }] => [/**
-   * @param {?string} s
-...    return s;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.fun"
 [s] => [s] "s"
 [return s;] => [return s;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.fun"
-[@JsMethod
-    @Override
-    public void bar(String s) {}] => [/**
-   * @param {?string} s
-...  bar(s) {
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B.bar"
 [s] => [s] "s"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {void}
-   * @public
-   */
-  m_bar__java_lang_Object(arg0) {
-    this.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));
-  }]
 [UNKNOWN] => [this.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {?string}
-   * @public
-   */
-  fun(arg0) {
-    return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));
-  }]
 [UNKNOWN] => [return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
 [UNKNOWN] => [A.$clinit();]

@@ -1,40 +1,11 @@
-[class B implements JJ {}] => [/**
- * @implements {JJ}
-...exports = B;
-] "com.google.j2cl.transpiler.readable.bridgemethoddefault.B"
-[class B implements JJ {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.B"
 [UNKNOWN] => [super();]
-[class B implements JJ {}] => [/**
-   * Factory method corresponding to constructor 'B()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.B.<ctor>"
 [UNKNOWN] => [B.$clinit();]
 [UNKNOWN] => [let $instance = new B();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethoddefault_B__();]
 [UNKNOWN] => [return $instance;]
-[class B implements JJ {}] => [/**
-   * Initialization from constructor 'B()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethoddefault_B();
-  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.B.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethoddefault_B();]
-[class B implements JJ {}] => [/**
-   * Default method forwarding stub.
-...    JJ$$Overlay.m_m__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ__java_lang_Object(this, arg0);
-  }] "com.google.j2cl.transpiler.readable.bridgemethoddefault.B"
 [UNKNOWN] => [JJ$$Overlay.m_m__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ__java_lang_Object(this, arg0);]
-[UNKNOWN] => [/**
-   * Bridge to JsMethod.
-   * @param {*} arg0
-   * @return {void}
-   * @public
-   */
-  m_m__java_lang_Object(arg0) {
-    this.m(arg0);
-  }]
 [UNKNOWN] => [this.m(arg0);]
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [UNKNOWN] => [JJ.$clinit();]

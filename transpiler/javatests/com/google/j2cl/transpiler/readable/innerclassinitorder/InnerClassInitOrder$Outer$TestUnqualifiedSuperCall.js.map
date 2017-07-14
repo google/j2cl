@@ -1,36 +1,10 @@
-[public class TestUnqualifiedSuperCall extends OuterIsNotSuper {
-      public TestUnqualifiedSuperCall() {
-...      }
-    }] => [class TestUnqualifiedSuperCall extends OuterIsNotSuper {
-  /**
-...exports = TestUnqualifiedSuperCall;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall"
-[public class TestUnqualifiedSuperCall extends OuterIsNotSuper {
-      public TestUnqualifiedSuperCall() {
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall = null;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall = null;]
-[public TestUnqualifiedSuperCall() {
-        super();
-      }] => [/**
-   * Factory method corresponding to constructor 'TestUnqualifiedSuperCall(Outer)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.<ctor>"
 [UNKNOWN] => [TestUnqualifiedSuperCall.$clinit();]
 [UNKNOWN] => [let $instance = new TestUnqualifiedSuperCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer($outer_this);]
 [UNKNOWN] => [return $instance;]
-[public TestUnqualifiedSuperCall() {
-        super();
-      }] => [/**
-   * Initialization from constructor 'TestUnqualifiedSuperCall(Outer)'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall = $outer_this;]
 [super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer($outer_this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall();]

@@ -1,35 +1,9 @@
-[public class Child extends Parent {
-  public Child(int a) {
-...  }
-}] => [class Child extends Parent {
-  /**
-...exports = Child;
-] "com.google.j2cl.transpiler.readable.supercallnondefault.Child"
-[public class Child extends Parent {
-  public Child(int a) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child"
 [UNKNOWN] => [super();]
-[public Child(int a) {
-    super(a);
-  }] => [/**
-   * Factory method corresponding to constructor 'Child(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<ctor>"
 [a] => [a] "a"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [let $instance = new Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a);]
 [UNKNOWN] => [return $instance;]
-[public Child(int a) {
-    super(a);
-  }] => [/**
-   * Initialization from constructor 'Child(int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<ctor>"
 [a] => [a] "a"
 [super(a);] => [this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(a);] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();]

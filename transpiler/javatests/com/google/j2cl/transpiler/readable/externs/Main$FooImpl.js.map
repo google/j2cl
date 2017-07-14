@@ -1,34 +1,10 @@
-[static class FooImpl {
-    @JsProperty String foo;
-  }] => [class FooImpl extends java_lang_Object {
-  /**
-...exports = FooImpl;
-] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl"
-[static class FooImpl {
-    @JsProperty String foo;
-  }] => [/**
-   * Private implementation constructor.
-...    this.foo = null;
-  }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.foo = null;]
-[static class FooImpl {
-    @JsProperty String foo;
-  }] => [/**
-   * Factory method corresponding to constructor 'FooImpl()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl.<ctor>"
 [UNKNOWN] => [FooImpl.$clinit();]
 [UNKNOWN] => [let $instance = new FooImpl();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_externs_Main_FooImpl__();]
 [UNKNOWN] => [return $instance;]
-[static class FooImpl {
-    @JsProperty String foo;
-  }] => [/**
-   * Initialization from constructor 'FooImpl()'.
-...    this.$init__com_google_j2cl_transpiler_readable_externs_Main_FooImpl();
-  }] "com.google.j2cl.transpiler.readable.externs.Main.FooImpl.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_externs_Main_FooImpl();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,44 +1,9 @@
-[{
-          void m() {
-...          }
-        }] => [class $3 extends java_lang_Object {
-  /**
-...exports = $3;
-] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3"
-[{
-          void m() {
-...          }
-        }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3"
 [UNKNOWN] => [super();]
-[{
-          void m() {
-...          }
-        }] => [/**
-   * Factory method corresponding to constructor 'new Object()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3"
 [UNKNOWN] => [$3.$clinit();]
 [UNKNOWN] => [let $instance = new $3();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_3__();]
 [UNKNOWN] => [return $instance;]
-[{
-          void m() {
-...          }
-        }] => [/**
-   * Initialization from constructor 'new Object()'.
-...    this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_3();
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_3();]
-[void m() {
-            // Here it is created in an instance context but the class is defined in a static one,
-...            new A();
-          }] => [/**
-   * @return {void}
-...    $1A.$create__();
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3.m"
 [new A();] => [$1A.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.3.m"
 [UNKNOWN] => [java_lang_Object.$clinit();]

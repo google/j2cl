@@ -1,53 +1,13 @@
-[class LocalClass extends ChildClass {
-      @Override
-...      }
-    }] => [class $1LocalClass extends ChildClass {
-  /**
-...exports = $1LocalClass;
-] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass"
-[class LocalClass extends ChildClass {
-      @Override
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass = null;
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {ChildClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass = null;]
-[class LocalClass extends ChildClass {
-      @Override
-...      }
-    }] => [/**
-   * Factory method corresponding to constructor 'LocalClass(ChildClass)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.<ctor>"
 [UNKNOWN] => [$1LocalClass.$clinit();]
 [UNKNOWN] => [let $instance = new $1LocalClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class LocalClass extends ChildClass {
-      @Override
-...      }
-    }] => [/**
-   * Initialization from constructor 'LocalClass(ChildClass)'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass();
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass();]
-[@Override
-      public void funInParentOuter() {}] => [/**
-   * @override
-...  m_funInParentOuter__() {
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.funInParentOuter"
-[public void test() {
-        funInOuter(); // this.funInOuter
-...        ChildClass.this.funInParentOuter(); // $outer.funInParentOuter()
-      }] => [/**
-   * @return {void}
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass.m_funInParentOuter__();
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.test"
 [funInOuter();] => [this.m_funInOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.test"
 [ChildClass.this.funInOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_1LocalClass.m_funInOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.test"
 [funInParentOuter();] => [this.m_funInParentOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass.test"

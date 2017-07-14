@@ -1,20 +1,3 @@
-[interface I<T> {
-  int foo(T t);
-...  }
-}] => [/**
- * @interface
-...exports = I;
-] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I"
-[int foo(T t);] => [/**
-   * @abstract
-...  m_foo__java_lang_Object(t) {
-  }] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.foo"
 [t] => [t] "t"
-[static int staticFoo() {
-    return 0;
-  }] => [/**
-   * @return {number}
-...    return 0;
-  }] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.staticFoo"
 [UNKNOWN] => [I.$clinit();]
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.staticFoo"

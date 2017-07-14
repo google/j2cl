@@ -1,49 +1,13 @@
-[{ // inherit method T
-      public void fun2(T t) {} // inherit method T
-...      public <T> void fun2(T t) {} // redefine T
-    }] => [/**
- * @template M_T, C_T
-...exports = $1;
-] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1"
-[{ // inherit method T
-      public void fun2(T t) {} // inherit method T
-...      public <T> void fun2(T t) {} // redefine T
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1 = null;
-  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {GenericMethod<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1 = null;]
-[{ // inherit method T
-      public void fun2(T t) {} // inherit method T
-...      public <T> void fun2(T t) {} // redefine T
-    }] => [/**
-   * Factory method corresponding to constructor 'new GenericMethod(GenericMethod)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1"
 [UNKNOWN] => [$1.$clinit();]
 [UNKNOWN] => [let $instance = new $1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod($outer_this);]
 [UNKNOWN] => [return $instance;]
-[{ // inherit method T
-      public void fun2(T t) {} // inherit method T
-...      public <T> void fun2(T t) {} // redefine T
-    }] => [/**
-   * Initialization from constructor 'new GenericMethod(GenericMethod)'.
-...    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1();
-  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1 = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1();]
-[public void fun2(T t) {}] => [/**
-   * @param {M_T} t
-...  m_fun2__java_lang_Error(t) {
-  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1.fun2"
 [t] => [t] "t"
-[public <T> void fun2(T t) {}] => [/**
-   * @template M__fun2_T
-...  m_fun2__java_lang_Object(t) {
-  }] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.1.fun2"
 [t] => [t] "t"
 [UNKNOWN] => [GenericMethod.$clinit();]

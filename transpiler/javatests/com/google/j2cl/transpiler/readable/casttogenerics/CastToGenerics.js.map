@@ -1,45 +1,10 @@
-[public class CastToGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [/**
- * @template C_T, C_E
-...exports = CastToGenerics;
-] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics"
-[public class CastToGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics"
 [UNKNOWN] => [super();]
-[public class CastToGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [/**
-   * Factory method corresponding to constructor 'CastToGenerics()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<ctor>"
 [UNKNOWN] => [CastToGenerics.$clinit();]
 [UNKNOWN] => [let $instance = new CastToGenerics();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics__();]
 [UNKNOWN] => [return $instance;]
-[public class CastToGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [/**
-   * Initialization from constructor 'CastToGenerics()'.
-...    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();]
-[@SuppressWarnings({"unused", "unchecked", "rawtypes"})
-  public void test() {
-...    cc = (CastToGenerics) c;
-  }] => [/**
-   * @return {void}
-...    cc = /**@type {CastToGenerics} */ ($Casts.$to(c, CastToGenerics));
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
 [o] => [o] "o"
 [E e = (E) o;] => [let e = /**@type {C_E} */ ($Casts.$to(o, Number));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
@@ -55,13 +20,6 @@
 [CastToGenerics<Error, Number> cc = (CastToGenerics<Error, Number>) c;] => [let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ ($Casts.$to(c, CastToGenerics));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
 [cc] => [cc] "cc"
 [cc = (CastToGenerics) c;] => [cc = /**@type {CastToGenerics} */ ($Casts.$to(c, CastToGenerics));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
-[@SuppressWarnings({"unchecked", "unused", "cast"})
-  public <S, V extends Enum<V>> void castToTypeVariable() {
-...    String s1 = new ClassWithGenericField<String>().field;
-  }] => [/**
-   * @template M_S, M_V
-...    let s1 = /**@type {?string} */ ($Casts.$to(/**@type {!ClassWithGenericField<?string>} */ (ClassWithGenericField.$create__()).f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField, java_lang_String));
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
 [o] => [o] "o"
 [S s = (S) o;] => [let s = /**@type {*} */ ($Casts.$to(o, java_lang_Object));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
@@ -72,20 +30,6 @@
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.$to(o, Enum));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
 [String s1 = new ClassWithGenericField<String>().field;] => [let s1 = /**@type {?string} */ ($Casts.$to(/**@type {!ClassWithGenericField<?string>} */ (ClassWithGenericField.$create__()).f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField, java_lang_String));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
 [s1] => [s1] "s1"
-[/**
-   * This method tests that J2CL correctly sets the Generic to its bound inside a method since
-...    }
-  }] => [/**
-   * @template M_TT
-...  m_outerGenericMethod__() {
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.outerGenericMethod"
-[public <EE extends Empty1 & Empty2<EE>> EE method(Object o) {
-    if (o instanceof Empty1) {
-...    return null;
-  }] => [/**
-   * @template M_EE
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.method"
 [o] => [o] "o"
 [if (o instanceof Empty1) {
       return (EE) o;
@@ -94,12 +38,6 @@
     }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.method"
 [return (EE) o;] => [return /**@type {Empty1} */ ($Casts.$to(o, Empty1));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.method"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.method"
-[public static <T> Foo<T> doSomething() {
-    return new Foo<T>() { };
-  }] => [/**
-   * @template M_T
-...    return /**@type {!$1<*>} */ ($1.$create__());
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.doSomething"
 [UNKNOWN] => [CastToGenerics.$clinit();]
 [return new Foo<T>() { };] => [return /**@type {!$1<*>} */ ($1.$create__());] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.doSomething"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,44 +1,10 @@
-[public class Implementor extends Interface.ClassWithAbstractMethod
-    implements Interface, Interface.NestedInterface {
-...  }
-}] => [/**
- * @implements {Interface}
-...exports = Implementor;
-] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor"
-[public class Implementor extends Interface.ClassWithAbstractMethod
-    implements Interface, Interface.NestedInterface {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor"
 [UNKNOWN] => [super();]
-[public class Implementor extends Interface.ClassWithAbstractMethod
-    implements Interface, Interface.NestedInterface {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Implementor()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.<ctor>"
 [UNKNOWN] => [Implementor.$clinit();]
 [UNKNOWN] => [let $instance = new Implementor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor__();]
 [UNKNOWN] => [return $instance;]
-[public class Implementor extends Interface.ClassWithAbstractMethod
-    implements Interface, Interface.NestedInterface {
-...  }
-}] => [/**
-   * Initialization from constructor 'Implementor()'.
-...    this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor();
-  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Interface_ClassWithAbstractMethod__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor();]
-[public void compatibleMethod() {
-    int a = 4; // Show that the source map line numbers are preserved correctly.
-  }] => [/**
-   * @return {void}
-...    let a = 4;
-  }] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.compatibleMethod"
 [int a = 4;] => [let a = 4;] "com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.compatibleMethod"
 [a] => [a] "a"
 [UNKNOWN] => [ClassWithAbstractMethod.$clinit();]

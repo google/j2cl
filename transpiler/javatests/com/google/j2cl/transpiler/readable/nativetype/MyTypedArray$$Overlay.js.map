@@ -1,26 +1,5 @@
-[@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class MyTypedArray<T> {
-...  }
-}] => [class MyTypedArray$$Overlay {
-  /**
-...exports = MyTypedArray$$Overlay;
-] "com.google.j2cl.transpiler.readable.nativetype.MyTypedArray"
-[@JsOverlay
-  public final int size() {
-    return length;
-  }] => [/**
-   * @template C_T
-...    return $thisArg.length;
-  }] "com.google.j2cl.transpiler.readable.nativetype.MyTypedArray.size"
 [UNKNOWN] => [MyTypedArray$$Overlay.$clinit();]
 [return length;] => [return $thisArg.length;] "com.google.j2cl.transpiler.readable.nativetype.MyTypedArray$$Overlay.size"
-[@JsOverlay
-  public final T get(int index) {
-    return null;
-  }] => [/**
-   * @template C_T
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.nativetype.MyTypedArray.get"
 [index] => [index] "index"
 [UNKNOWN] => [MyTypedArray$$Overlay.$clinit();]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nativetype.MyTypedArray$$Overlay.get"

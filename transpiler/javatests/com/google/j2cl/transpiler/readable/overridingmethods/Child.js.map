@@ -1,46 +1,8 @@
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [/**
- * @implements {SomeInterface}
-...exports = Child;
-] "com.google.j2cl.transpiler.readable.overridingmethods.Child"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.overridingmethods.Child"
 [UNKNOWN] => [super();]
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [/**
-   * Factory method corresponding to constructor 'Child()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [let $instance = new Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();]
 [UNKNOWN] => [return $instance;]
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [/**
-   * Initialization from constructor 'Child()'.
-...    this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();
-  }] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();]
-[@Override
-  public void fun() {}] => [/**
-   * @override
-...  m_fun__() {
-  }] "com.google.j2cl.transpiler.readable.overridingmethods.Child.fun"
-[@Override
-  public void bar() {}] => [/**
-   * @override
-...  m_bar__() {
-  }] "com.google.j2cl.transpiler.readable.overridingmethods.Child.bar"
 [UNKNOWN] => [Parent.$clinit();]

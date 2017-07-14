@@ -1,45 +1,10 @@
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main();]
-[public static void test() {
-    A a = new A<Integer>();
-...    l.fun("foo", 1);
-  }] => [/**
-   * @return {void}
-...    l.fun("foo", Integer.m_valueOf__int(1));
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [UNKNOWN] => [Main.$clinit();]
 [A a = new A<Integer>();] => [let a = /**@type {!A<Integer>} */ (A.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [a] => [a] "a"

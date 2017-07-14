@@ -137,31 +137,23 @@ def replace_transpiled_js(target_names):
     zip_file_path = "/tmp/js.zip/%s_j2cl_transpile.js.zip" % target_name
     extractDir = JAVA_DIR + "/"
 
-    find_command_js_map_sources = ["find", EXAMPLES_DIR + target_name,
-                                   "-name", "*.js.map"]
-
-    # Remove old map files before unzipping the new ones
-    run_cmd_get_output(find_command_js_map_sources
-                       + ["-exec", "rm", "{}", ";"])
-
-    files_to_copy = ["*.js", "*.js.map"]
+    # Remove the old .js.map and .js.txt files (results from the last run)
+    run_cmd_get_output([
+        "find", EXAMPLES_DIR + target_name, "-name", "*.js.*", "-exec", "rm",
+        "{}", ";"
+    ])
 
     run_cmd_get_output(
-        ["unzip", "-o", "-d", extractDir, zip_file_path] + files_to_copy)
+        ["unzip", "-o", "-d", extractDir, zip_file_path, "-x", "*.java"])
 
     find_command_js_sources = ["find", EXAMPLES_DIR + target_name,
                                "-name", "*.java.js"]
-
-    find_command_js_test_sources = ["find", EXAMPLES_DIR + target_name,
-                                    "-name", "*.js.txt"]
 
     # Format .js files
     run_cmd_get_output(find_command_js_sources +
                        ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
 
-    # Remove the old .js.txt files (results from the last run)
-    run_cmd_get_output(find_command_js_test_sources +
-                       ["-exec", "rm", "{}", ";"])
+
 
     # Move the newly unzipped .js => .js.txt
     run_cmd_get_output(find_command_js_sources +

@@ -1,43 +1,9 @@
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [class OuterClass extends java_lang_Object {
-  /**
-...exports = OuterClass;
-] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass"
 [UNKNOWN] => [super();]
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'OuterClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<ctor>"
 [UNKNOWN] => [OuterClass.$clinit();]
 [UNKNOWN] => [let $instance = new OuterClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__();]
 [UNKNOWN] => [return $instance;]
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Initialization from constructor 'OuterClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();]
-[public void test() {
-    new OuterClass().new InnerClass().new InnerInnerClass();
-  }] => [/**
-   * @return {void}
-...    InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(InnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(OuterClass.$create__()));
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.test"
 [new OuterClass().new InnerClass().new InnerInnerClass();] => [InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(InnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(OuterClass.$create__()));] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

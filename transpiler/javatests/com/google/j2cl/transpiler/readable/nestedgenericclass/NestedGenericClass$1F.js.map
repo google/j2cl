@@ -1,36 +1,12 @@
-[class F { // non-generic class
-      public S f;
-    }] => [/**
- * @template M_S, C_T
-...exports = $1F;
-] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1F"
-[class F { // non-generic class
-      public S f;
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_f__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F = null;
-  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1F"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NestedGenericClass<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F = null;]
 [UNKNOWN] => [/** @public {M_S} */
     this.f_f__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F = null;]
-[class F { // non-generic class
-      public S f;
-    }] => [/**
-   * Factory method corresponding to constructor 'F(NestedGenericClass)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1F.<ctor>"
 [UNKNOWN] => [$1F.$clinit();]
 [UNKNOWN] => [let $instance = new $1F();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class F { // non-generic class
-      public S f;
-    }] => [/**
-   * Initialization from constructor 'F(NestedGenericClass)'.
-...    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F();
-  }] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1F.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1F();]

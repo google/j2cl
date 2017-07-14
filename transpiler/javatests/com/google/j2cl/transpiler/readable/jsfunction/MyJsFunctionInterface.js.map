@@ -1,12 +1,1 @@
-[/**
- * Notes for restrictions on JsFunction:
-...  int foo(int a);
-}] => [/**
- * @interface
-...exports = MyJsFunctionInterface;
-] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface"
-[int foo(int a);] => [/**
-   * @abstract
-...  m_foo__int(a) {
-  }] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface.foo"
 [a] => [a] "a"

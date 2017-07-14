@@ -1,45 +1,10 @@
-[public class AbstractMap<K, V> implements Map<K, V> {
-  @Override
-...  }
-}] => [/**
- * @template C_K, C_V
-...exports = AbstractMap;
-] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap"
-[public class AbstractMap<K, V> implements Map<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap"
 [UNKNOWN] => [super();]
-[public class AbstractMap<K, V> implements Map<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'AbstractMap()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap.<ctor>"
 [UNKNOWN] => [AbstractMap.$clinit();]
 [UNKNOWN] => [let $instance = new AbstractMap();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__();]
 [UNKNOWN] => [return $instance;]
-[public class AbstractMap<K, V> implements Map<K, V> {
-  @Override
-...  }
-}] => [/**
-   * Initialization from constructor 'AbstractMap()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap();]
-[@Override
-  public V put(K key, V value) {
-    return value;
-  }] => [/**
-   * @override
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap.put"
 [key] => [key] "key"
 [value] => [value] "value"
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap.put"

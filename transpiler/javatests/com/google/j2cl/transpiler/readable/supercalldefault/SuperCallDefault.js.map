@@ -1,34 +1,8 @@
-[public class SuperCallDefault {
-  public SuperCallDefault() {
-...  }
-}] => [class SuperCallDefault extends java_lang_Object {
-  /**
-...exports = SuperCallDefault;
-] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault"
-[public class SuperCallDefault {
-  public SuperCallDefault() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault"
 [UNKNOWN] => [super();]
-[public SuperCallDefault() {
-    super();
-  }] => [/**
-   * Factory method corresponding to constructor 'SuperCallDefault()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<ctor>"
 [UNKNOWN] => [SuperCallDefault.$clinit();]
 [UNKNOWN] => [let $instance = new SuperCallDefault();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault__();]
 [UNKNOWN] => [return $instance;]
-[public SuperCallDefault() {
-    super();
-  }] => [/**
-   * Initialization from constructor 'SuperCallDefault()'.
-...    this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();
-  }] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<ctor>"
 [super();] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault__"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

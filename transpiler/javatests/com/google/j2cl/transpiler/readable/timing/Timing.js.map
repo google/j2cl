@@ -1,45 +1,10 @@
-[/**
- * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
-...  }
-}] => [class Timing extends java_lang_Object {
-  /**
-...exports = Timing;
-] "com.google.j2cl.transpiler.readable.timing.Timing"
-[/**
- * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.timing.Timing"
 [UNKNOWN] => [super();]
-[/**
- * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Timing()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.timing.Timing.<ctor>"
 [UNKNOWN] => [Timing.$clinit();]
 [UNKNOWN] => [let $instance = new Timing();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_timing_Timing__();]
 [UNKNOWN] => [return $instance;]
-[/**
- * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
-...  }
-}] => [/**
-   * Initialization from constructor 'Timing()'.
-...    this.$init__com_google_j2cl_transpiler_readable_timing_Timing();
-  }] "com.google.j2cl.transpiler.readable.timing.Timing.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_timing_Timing();]
-[public static boolean run() {
-    // Use both Guava collections and base libraries, just so the source and BUILD validators don't
-...    return Objects.equal(fooStrings, barStrings);
-  }] => [/**
-   * @return {boolean}
-...    return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);
-  }] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [UNKNOWN] => [Timing.$clinit();]
 [List<String> fooStrings = Lists.newArrayList("foo");] => [let fooStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["foo"], java_lang_String))));] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [fooStrings] => [fooStrings] "fooStrings"

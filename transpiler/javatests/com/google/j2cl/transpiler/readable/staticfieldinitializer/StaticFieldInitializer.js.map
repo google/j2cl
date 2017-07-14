@@ -1,36 +1,8 @@
-[public class StaticFieldInitializer {
-  public static int a = 2;
-  public static int b = a * 4;
-}] => [class StaticFieldInitializer extends java_lang_Object {
-  /**
-...exports = StaticFieldInitializer;
-] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer"
-[public class StaticFieldInitializer {
-  public static int a = 2;
-  public static int b = a * 4;
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer"
 [UNKNOWN] => [super();]
-[public class StaticFieldInitializer {
-  public static int a = 2;
-  public static int b = a * 4;
-}] => [/**
-   * Factory method corresponding to constructor 'StaticFieldInitializer()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<ctor>"
 [UNKNOWN] => [StaticFieldInitializer.$clinit();]
 [UNKNOWN] => [let $instance = new StaticFieldInitializer();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticFieldInitializer {
-  public static int a = 2;
-  public static int b = a * 4;
-}] => [/**
-   * Initialization from constructor 'StaticFieldInitializer()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer();
-  }] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

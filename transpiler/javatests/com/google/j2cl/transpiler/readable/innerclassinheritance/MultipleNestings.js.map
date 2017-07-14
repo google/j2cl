@@ -1,40 +1,8 @@
-[public class MultipleNestings {
-  public class Parent {
-...  }
-}] => [class MultipleNestings extends java_lang_Object {
-  /**
-...exports = MultipleNestings;
-] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings"
-[public class MultipleNestings {
-  public class Parent {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings"
 [UNKNOWN] => [super();]
-[public class MultipleNestings {
-  public class Parent {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'MultipleNestings()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.<ctor>"
 [UNKNOWN] => [MultipleNestings.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleNestings();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings__();]
 [UNKNOWN] => [return $instance;]
-[public class MultipleNestings {
-  public class Parent {
-...  }
-}] => [/**
-   * Initialization from constructor 'MultipleNestings()'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();]
-[public void funInM() {}] => [/**
-   * @return {void}
-...  m_funInM__() {
-  }] "com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.funInM"
 [UNKNOWN] => [java_lang_Object.$clinit();]

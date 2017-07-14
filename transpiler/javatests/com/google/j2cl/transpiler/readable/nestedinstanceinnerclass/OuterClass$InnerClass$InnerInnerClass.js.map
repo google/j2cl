@@ -1,17 +1,3 @@
-[public class InnerInnerClass {
-      public InnerClass x = InnerClass.this;
-      public OuterClass y = OuterClass.this;
-    }] => [class InnerInnerClass extends java_lang_Object {
-  /**
-...exports = InnerInnerClass;
-] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass"
-[public class InnerInnerClass {
-      public InnerClass x = InnerClass.this;
-      public OuterClass y = OuterClass.this;
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_y__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = null;
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = null;]
@@ -19,24 +5,10 @@
     this.f_x__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = null;]
 [UNKNOWN] => [/** @public {OuterClass} */
     this.f_y__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = null;]
-[public class InnerInnerClass {
-      public InnerClass x = InnerClass.this;
-      public OuterClass y = OuterClass.this;
-    }] => [/**
-   * Factory method corresponding to constructor 'InnerInnerClass(InnerClass)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.<ctor>"
 [UNKNOWN] => [InnerInnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerInnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass($outer_this);]
 [UNKNOWN] => [return $instance;]
-[public class InnerInnerClass {
-      public InnerClass x = InnerClass.this;
-      public OuterClass y = OuterClass.this;
-    }] => [/**
-   * Initialization from constructor 'InnerInnerClass(InnerClass)'.
-...    this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass();
-  }] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass();]

@@ -1,53 +1,10 @@
-[public class GrandParent {
-  public void grandParentSimplest() {}
-...  }
-}] => [class GrandParent extends java_lang_Object {
-  /**
-...exports = GrandParent;
-] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent"
-[public class GrandParent {
-  public void grandParentSimplest() {}
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent"
 [UNKNOWN] => [super();]
-[public class GrandParent {
-  public void grandParentSimplest() {}
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'GrandParent()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<ctor>"
 [UNKNOWN] => [GrandParent.$clinit();]
 [UNKNOWN] => [let $instance = new GrandParent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent__();]
 [UNKNOWN] => [return $instance;]
-[public class GrandParent {
-  public void grandParentSimplest() {}
-...  }
-}] => [/**
-   * Initialization from constructor 'GrandParent()'.
-...    this.$init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();]
-[public void grandParentSimplest() {}] => [/**
-   * @return {void}
-...  m_grandParentSimplest__() {
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.grandParentSimplest"
-[@SuppressWarnings("unused")
-  public void grandParentWithParams(int foo) {}] => [/**
-   * @param {number} foo
-...  m_grandParentWithParams__int(foo) {
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.grandParentWithParams"
 [foo] => [foo] "foo"
-[public Object grandParentWithChangingReturn() {
-    return null;
-  }] => [/**
-   * @return {*}
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.grandParentWithChangingReturn"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.grandParentWithChangingReturn"
 [UNKNOWN] => [java_lang_Object.$clinit();]

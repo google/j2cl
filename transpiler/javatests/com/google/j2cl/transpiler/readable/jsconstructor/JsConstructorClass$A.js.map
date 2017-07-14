@@ -1,53 +1,19 @@
-[/**
-   * A regular class (no JsConstructor), with two constructors.
-...    public A() {}
-  }] => [class A extends java_lang_Object {
-  /**
-...exports = A;
-] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A"
-[/**
-   * A regular class (no JsConstructor), with two constructors.
-...    public A() {}
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_fA__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A = 0;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_fA__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A = 0;]
-[public A(int x) {
-      this.fA = x;
-    }] => [/**
-   * Factory method corresponding to constructor 'A(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(x);]
 [UNKNOWN] => [return $instance;]
-[public A(int x) {
-      this.fA = x;
-    }] => [/**
-   * Initialization from constructor 'A(int)'.
-...    this.f_fA__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A = x;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A();]
 [this.fA = x;] => [this.f_fA__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A = x;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int"
-[public A() {}] => [/**
-   * Factory method corresponding to constructor 'A()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__();]
 [UNKNOWN] => [return $instance;]
-[public A() {}] => [/**
-   * Initialization from constructor 'A()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

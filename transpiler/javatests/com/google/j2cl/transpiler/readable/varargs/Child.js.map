@@ -1,34 +1,8 @@
-[class Child extends Varargs {
-  public Child() {
-...  }
-}] => [class Child extends Varargs {
-  /**
-...exports = Child;
-] "com.google.j2cl.transpiler.readable.varargs.Child"
-[class Child extends Varargs {
-  public Child() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.varargs.Child"
 [UNKNOWN] => [super();]
-[public Child() {
-    super(1);
-  }] => [/**
-   * Factory method corresponding to constructor 'Child()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.varargs.Child.<ctor>"
 [UNKNOWN] => [Child.$clinit();]
 [UNKNOWN] => [let $instance = new Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__();]
 [UNKNOWN] => [return $instance;]
-[public Child() {
-    super(1);
-  }] => [/**
-   * Initialization from constructor 'Child()'.
-...    this.$init__com_google_j2cl_transpiler_readable_varargs_Child();
-  }] "com.google.j2cl.transpiler.readable.varargs.Child.<ctor>"
 [super(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));] "com.google.j2cl.transpiler.readable.varargs.Child.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_varargs_Child();]
 [UNKNOWN] => [Varargs.$clinit();]

@@ -1,45 +1,10 @@
-[public class Main {
-  public void testCallBySuperParent() {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.instancejsmethods.Main"
-[public class Main {
-  public void testCallBySuperParent() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public void testCallBySuperParent() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public void testCallBySuperParent() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();
-  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();]
-[public void testCallBySuperParent() {
-    SuperParent sp = new SuperParent();
-...    intf.intfFoo();
-  }] => [/**
-   * @return {void}
-...    intf.m_intfFoo__();
-  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [sp] => [sp] "sp"
 [SuperParent p = new Parent();] => [let p = Parent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
@@ -61,13 +26,6 @@
 [pp.foo(1);] => [pp.myFoo(1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [cc.foo(1);] => [cc.myFoo(1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [intf.intfFoo();] => [intf.m_intfFoo__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
-[public static void testCallByConcreteType() {
-    SuperParent sp = new SuperParent();
-...    c.intfFoo();
-  }] => [/**
-   * @return {void}
-...    c.intfFoo();
-  }] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [UNKNOWN] => [Main.$clinit();]
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [sp] => [sp] "sp"

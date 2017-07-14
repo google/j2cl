@@ -1,36 +1,8 @@
-[public class Main {
-  @interface Foo {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.annotation.Main"
-[public class Main {
-  @interface Foo {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.annotation.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  @interface Foo {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_annotation_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  @interface Foo {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_annotation_Main();
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_annotation_Main();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

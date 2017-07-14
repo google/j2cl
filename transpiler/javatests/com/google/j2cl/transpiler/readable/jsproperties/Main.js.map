@@ -1,65 +1,16 @@
-[public class Main {
-  public void testNativeJsProperty() {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.jsproperties.Main"
-[public class Main {
-  public void testNativeJsProperty() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public void testNativeJsProperty() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public void testNativeJsProperty() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsproperties_Main();
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsproperties_Main();]
-[public void testNativeJsProperty() {
-    new NativeFoo().getA();
-    NativeFoo.getB();
-  }] => [/**
-   * @return {void}
-...    Math.PI;
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
 [new NativeFoo().getA();] => [NativeFoo.$create__().hasOwnProperty;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
 [NativeFoo.getB();] => [Math.PI;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testNativeJsProperty"
-[public void testStaticJsProperty() {
-    Foo.getA();
-...    Foo.setB(10);
-  }] => [/**
-   * @return {void}
-...    Foo.abc = 10;
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
 [Foo.getA();] => [Foo.a;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
 [Foo.setA(10);] => [Foo.a = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
 [Foo.getB();] => [Foo.abc;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
 [Foo.setB(10);] => [Foo.abc = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testStaticJsProperty"
-[public void testInstanceJsProperty() {
-    Bar bar = new Bar();
-...    bar.setB(10);
-  }] => [/**
-   * @return {void}
-...    bar.abc = 10;
-  }] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [Bar bar = new Bar();] => [let bar = Bar.$create__();] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [bar] => [bar] "bar"
 [bar.getA();] => [bar.a;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"

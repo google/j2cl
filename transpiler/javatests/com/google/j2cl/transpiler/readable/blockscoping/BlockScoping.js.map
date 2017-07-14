@@ -1,45 +1,10 @@
-[public class BlockScoping {
-  @SuppressWarnings("unused")
-...  }
-}] => [class BlockScoping extends java_lang_Object {
-  /**
-...exports = BlockScoping;
-] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping"
-[public class BlockScoping {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping"
 [UNKNOWN] => [super();]
-[public class BlockScoping {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'BlockScoping()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping.<ctor>"
 [UNKNOWN] => [BlockScoping.$clinit();]
 [UNKNOWN] => [let $instance = new BlockScoping();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping__();]
 [UNKNOWN] => [return $instance;]
-[public class BlockScoping {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Initialization from constructor 'BlockScoping()'.
-...    this.$init__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping();
-  }] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping();]
-[@SuppressWarnings("unused")
-  public void main() {
-...    }
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping.main"
 [int i = 0;] => [let i = 0;] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping.main"
 [i] => [i] "i"
 [int i = 1;] => [let i$1$ = 1;] "com.google.j2cl.transpiler.readable.blockscoping.BlockScoping.main"

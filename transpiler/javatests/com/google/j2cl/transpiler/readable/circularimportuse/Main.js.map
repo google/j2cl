@@ -1,45 +1,10 @@
-[public class Main {
-  @SuppressWarnings("unused")
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.circularimportuse.Main"
-[public class Main {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.circularimportuse.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_circularimportuse_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  @SuppressWarnings("unused")
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Main();
-  }] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Main();]
-[@SuppressWarnings("unused")
-  public static void main(String... args) {
-...    Right right = new Right();
-  }] => [/**
-   * @param {Array<?string>} args
-...    let right = Right.$create__();
-  }] "com.google.j2cl.transpiler.readable.circularimportuse.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
 [Left left = new Left();] => [let left = Left.$create__();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.main"

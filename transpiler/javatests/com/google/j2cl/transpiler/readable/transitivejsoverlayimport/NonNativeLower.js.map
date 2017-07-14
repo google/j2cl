@@ -1,26 +1,5 @@
-[public class NonNativeLower extends NonNativeUpper {
-  @JsConstructor
-...  void doNonNativeLowerInstanceMethod() {}
-}] => [class NonNativeLower extends NonNativeUpper {
-  /**
-...exports = NonNativeLower;
-] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower"
-[@JsConstructor
-  public NonNativeLower() {}] => [/**
-   * JsConstructor 'NonNativeLower()'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower__();
-  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.<ctor>"
 [UNKNOWN] => [NonNativeLower.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower__();]
-[@JsConstructor
-  public NonNativeLower() {}] => [/**
-   * Initialization from constructor 'NonNativeLower()'.
-...    this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower();
-  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.<ctor>"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_NonNativeLower();]
-[void doNonNativeLowerInstanceMethod() {}] => [/**
-   * @return {void}
-...  m_doNonNativeLowerInstanceMethod___$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport() {
-  }] "com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower.doNonNativeLowerInstanceMethod"
 [UNKNOWN] => [NonNativeUpper.$clinit();]

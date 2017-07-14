@@ -82,6 +82,7 @@ public class ReadableSourceMapGenerator {
     if (endLine != startLine || endColumn == -1) {
       StringBuilder content =
           new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
+      // TODO!!!!! revert?
       if (condense && startLine + 3 < endLine) {
         content
             .append("\n")

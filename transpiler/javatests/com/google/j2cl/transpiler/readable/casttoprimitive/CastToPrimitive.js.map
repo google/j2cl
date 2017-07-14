@@ -1,45 +1,10 @@
-[public class CastToPrimitive {
-  public void test() {
-...  }
-}] => [class CastToPrimitive extends java_lang_Object {
-  /**
-...exports = CastToPrimitive;
-] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive"
-[public class CastToPrimitive {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive"
 [UNKNOWN] => [super();]
-[public class CastToPrimitive {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'CastToPrimitive()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.<ctor>"
 [UNKNOWN] => [CastToPrimitive.$clinit();]
 [UNKNOWN] => [let $instance = new CastToPrimitive();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive__();]
 [UNKNOWN] => [return $instance;]
-[public class CastToPrimitive {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'CastToPrimitive()'.
-...    this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();]
-[public void test() {
-    byte b = 1;
-...    d = (double) d;
-  }] => [/**
-   * @return {void}
-...    d = d;
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [byte b = 1;] => [let b = 1;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [b] => [b] "b"
 [char c = 1;] => [let c = 1 /* "\u0001" */;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
@@ -103,13 +68,6 @@
 [l = (long) d;] => [l = $Primitives.$narrowDoubleToLong(d);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [f = (float) d;] => [f = d;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
 [d = (double) d;] => [d = d;] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.test"
-[public void testReferenceToPrimitive() {
-    Object o = new Object();
-...    double d = (double) o;
-  }] => [/**
-   * @return {void}
-...    let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [Object o = new Object();] => [let o = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [o] => [o] "o"
 [boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.$to(o, Boolean)));] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
@@ -128,13 +86,6 @@
 [f] => [f] "f"
 [double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testReferenceToPrimitive"
 [d] => [d] "d"
-[public void testUnboxAndWiden() {
-    Byte boxedByte = Byte.valueOf((byte) 0);
-...    double d = (double) boxedByte;
-  }] => [/**
-   * @return {void}
-...    let d = boxedByte.m_byteValue__();
-  }] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [boxedByte] => [boxedByte] "boxedByte"
 [short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"

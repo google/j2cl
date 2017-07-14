@@ -1,68 +1,12 @@
-[public class SubNumber extends Number {
-
-...  }
-}] => [class SubNumber extends Number {
-  /**
-...exports = SubNumber;
-] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber"
-[public class SubNumber extends Number {
-
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber"
 [UNKNOWN] => [super();]
-[public class SubNumber extends Number {
-
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'SubNumber()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.<ctor>"
 [UNKNOWN] => [SubNumber.$clinit();]
 [UNKNOWN] => [let $instance = new SubNumber();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber__();]
 [UNKNOWN] => [return $instance;]
-[public class SubNumber extends Number {
-
-...  }
-}] => [/**
-   * Initialization from constructor 'SubNumber()'.
-...    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Number__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();]
-[@Override
-  public int intValue() {
-    return 0;
-  }] => [/**
-   * @override
-...    return 0;
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.intValue"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.intValue"
-[@Override
-  public long longValue() {
-    return (long) 0;
-  }] => [/**
-   * @override
-...    return $Primitives.$widenIntToLong(0);
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.longValue"
 [return (long) 0;] => [return $Primitives.$widenIntToLong(0);] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.longValue"
-[@Override
-  public float floatValue() {
-    return 0;
-  }] => [/**
-   * @override
-...    return 0;
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.floatValue"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.floatValue"
-[@Override
-  public double doubleValue() {
-    return 0;
-  }] => [/**
-   * @override
-...    return 0;
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.doubleValue"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.doubleValue"
 [UNKNOWN] => [Number.$clinit();]

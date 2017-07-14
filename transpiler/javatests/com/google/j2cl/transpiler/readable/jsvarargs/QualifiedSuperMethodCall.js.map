@@ -1,34 +1,8 @@
-[public class QualifiedSuperMethodCall extends Main {
-  public QualifiedSuperMethodCall() {
-...  }
-}] => [class QualifiedSuperMethodCall extends Main {
-  /**
-...exports = QualifiedSuperMethodCall;
-] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall"
-[public class QualifiedSuperMethodCall extends Main {
-  public QualifiedSuperMethodCall() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall"
 [UNKNOWN] => [super();]
-[public QualifiedSuperMethodCall() {
-    super(0);
-  }] => [/**
-   * Factory method corresponding to constructor 'QualifiedSuperMethodCall()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall.<ctor>"
 [UNKNOWN] => [QualifiedSuperMethodCall.$clinit();]
 [UNKNOWN] => [let $instance = new QualifiedSuperMethodCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall__();]
 [UNKNOWN] => [return $instance;]
-[public QualifiedSuperMethodCall() {
-    super(0);
-  }] => [/**
-   * Initialization from constructor 'QualifiedSuperMethodCall()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall();
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall.<ctor>"
 [super(0);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(0);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall__"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall();]
 [UNKNOWN] => [Main.$clinit();]

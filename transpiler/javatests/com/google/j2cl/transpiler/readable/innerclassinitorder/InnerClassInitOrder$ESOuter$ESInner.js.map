@@ -1,59 +1,21 @@
-[class ESInner {
-      public int value;
-...      }
-    }] => [class ESInner extends java_lang_Object {
-  /**
-...exports = ESInner;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner"
-[class ESInner {
-      public int value;
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 0;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {ESOuter} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 0;]
-[public ESInner() {
-        value = 1;
-      }] => [/**
-   * Factory method corresponding to constructor 'ESInner(ESOuter)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [UNKNOWN] => [ESInner.$clinit();]
 [UNKNOWN] => [let $instance = new ESInner();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter($outer_this);]
 [UNKNOWN] => [return $instance;]
-[public ESInner() {
-        value = 1;
-      }] => [/**
-   * Initialization from constructor 'ESInner(ESOuter)'.
-...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 1;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner();]
 [value = 1;] => [this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 1;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter"
-[public ESInner(int value) {
-        this.value = value;
-      }] => [/**
-   * Factory method corresponding to constructor 'ESInner(ESOuter, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [ESInner.$clinit();]
 [UNKNOWN] => [let $instance = new ESInner();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__int($outer_this, value);]
 [UNKNOWN] => [return $instance;]
-[public ESInner(int value) {
-        this.value = value;
-      }] => [/**
-   * Initialization from constructor 'ESInner(ESOuter, int)'.
-...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = value;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.<ctor>"
 [value] => [value] "value"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

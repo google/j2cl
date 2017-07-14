@@ -1,37 +1,11 @@
-[public class Parent {
-  public int field;
-...  }
-}] => [class Parent extends java_lang_Object {
-  /**
-...exports = Parent;
-] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent"
-[public class Parent {
-  public int field;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;]
-[public Parent(int f) {
-    this.field = f;
-  }] => [/**
-   * Factory method corresponding to constructor 'Parent(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<ctor>"
 [f] => [f] "f"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(f);]
 [UNKNOWN] => [return $instance;]
-[public Parent(int f) {
-    this.field = f;
-  }] => [/**
-   * Initialization from constructor 'Parent(int)'.
-...    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = f;
-  }] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<ctor>"
 [f] => [f] "f"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Parent();]

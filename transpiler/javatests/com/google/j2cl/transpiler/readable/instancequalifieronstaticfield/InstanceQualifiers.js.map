@@ -1,61 +1,14 @@
-[public class InstanceQualifiers {
-  public static int staticField = 100;
-...  }
-}] => [class InstanceQualifiers extends java_lang_Object {
-  /**
-...exports = InstanceQualifiers;
-] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers"
-[public class InstanceQualifiers {
-  public static int staticField = 100;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers"
 [UNKNOWN] => [super();]
-[public class InstanceQualifiers {
-  public static int staticField = 100;
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'InstanceQualifiers()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.<ctor>"
 [UNKNOWN] => [InstanceQualifiers.$clinit();]
 [UNKNOWN] => [let $instance = new InstanceQualifiers();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers__();]
 [UNKNOWN] => [return $instance;]
-[public class InstanceQualifiers {
-  public static int staticField = 100;
-...  }
-}] => [/**
-   * Initialization from constructor 'InstanceQualifiers()'.
-...    this.$init__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers();
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers();]
-[public static int getStaticValue() {
-    return staticField;
-  }] => [/**
-   * @return {number}
-...    return InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers;
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.getStaticValue"
 [UNKNOWN] => [InstanceQualifiers.$clinit();]
 [return staticField;] => [return InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers;] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.getStaticValue"
-[public static InstanceQualifiers getStaticInstanceQualifiers() {
-    return null;
-  }] => [/**
-   * @return {InstanceQualifiers}
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers"
 [UNKNOWN] => [InstanceQualifiers.$clinit();]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers"
-[public static void main(String... args) {
-    InstanceQualifiers main = new InstanceQualifiers();
-...    }
-  }] => [/**
-   * @param {Array<?string>} args
-...    }
-  }] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.main"
 [args] => [args] "args"
 [UNKNOWN] => [InstanceQualifiers.$clinit();]
 [InstanceQualifiers main = new InstanceQualifiers();] => [let main = InstanceQualifiers.$create__();] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.main"

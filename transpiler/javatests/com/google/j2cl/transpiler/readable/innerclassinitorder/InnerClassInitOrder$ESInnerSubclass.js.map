@@ -1,56 +1,18 @@
-[private static class ESInnerSubclass extends ESOuter.ESInner {
-    ESInnerSubclass(ESOuter outer) {
-...    }
-  }] => [class ESInnerSubclass extends ESInner {
-  /**
-...exports = ESInnerSubclass;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass"
-[private static class ESInnerSubclass extends ESOuter.ESInner {
-    ESInnerSubclass(ESOuter outer) {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass"
 [UNKNOWN] => [super();]
-[ESInnerSubclass(ESOuter outer) {
-      outer.super();
-    }] => [/**
-   * Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
 [UNKNOWN] => [ESInnerSubclass.$clinit();]
 [UNKNOWN] => [let $instance = new ESInnerSubclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(outer);]
 [UNKNOWN] => [return $instance;]
-[ESInnerSubclass(ESOuter outer) {
-      outer.super();
-    }] => [/**
-   * Initialization from constructor 'ESInnerSubclass(ESOuter)'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [outer] => [outer] "outer"
 [outer.super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(outer);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();]
-[ESInnerSubclass(int value, ESOuter outer) {
-      outer.super(value);
-    }] => [/**
-   * Factory method corresponding to constructor 'ESInnerSubclass(int, ESOuter)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"
 [outer] => [outer] "outer"
 [UNKNOWN] => [ESInnerSubclass.$clinit();]
 [UNKNOWN] => [let $instance = new ESInnerSubclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(value, outer);]
 [UNKNOWN] => [return $instance;]
-[ESInnerSubclass(int value, ESOuter outer) {
-      outer.super(value);
-    }] => [/**
-   * Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.<ctor>"
 [value] => [value] "value"
 [outer] => [outer] "outer"
 [outer.super(value);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__int(outer, value);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter"

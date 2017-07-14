@@ -1,58 +1,16 @@
-[@SuppressWarnings("BoxedPrimitiveConstructor")
-public class AutoBoxingSideEffect {
-...  }
-}] => [class AutoBoxingSideEffect extends java_lang_Object {
-  /**
-...exports = AutoBoxingSideEffect;
-] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect"
-[@SuppressWarnings("BoxedPrimitiveConstructor")
-public class AutoBoxingSideEffect {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_ = 0;
-  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Integer} */
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = null;]
 [UNKNOWN] => [/** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_ = 0;]
-[@SuppressWarnings("BoxedPrimitiveConstructor")
-public class AutoBoxingSideEffect {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'AutoBoxingSideEffect()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.<ctor>"
 [UNKNOWN] => [AutoBoxingSideEffect.$clinit();]
 [UNKNOWN] => [let $instance = new AutoBoxingSideEffect();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect__();]
 [UNKNOWN] => [return $instance;]
-[@SuppressWarnings("BoxedPrimitiveConstructor")
-public class AutoBoxingSideEffect {
-...  }
-}] => [/**
-   * Initialization from constructor 'AutoBoxingSideEffect()'.
-...    this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
-  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();]
-[public AutoBoxingSideEffect getWithSideEffect() {
-    sideEffect++;
-    return this;
-  }] => [/**
-   * @return {AutoBoxingSideEffect}
-...    return this;
-  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.getWithSideEffect"
 [sideEffect++;] => [this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_++;] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.getWithSideEffect"
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.getWithSideEffect"
-[@SuppressWarnings("unused")
-  public void main() {
-...    b++;
-  }] => [/**
-   * @return {void}
-...    b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1));
-  }] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [UNKNOWN] => [let /** AutoBoxingSideEffect */ $qualifier, /** Integer */ $value, /** Integer */ $value$1$, /** AutoBoxingSideEffect */ $qualifier$1$, /** Integer */ $value$2$;]
 [Integer i = 10000;] => [let i = Integer.m_valueOf__int(10000);] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [i] => [i] "i"

@@ -1,36 +1,10 @@
-[public class ConcreteClass extends GenericClass<String> implements InterfaceWithDefault {}] => [/**
- * @extends {GenericClass<?string>}
-...exports = ConcreteClass;
-] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass"
-[public class ConcreteClass extends GenericClass<String> implements InterfaceWithDefault {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass"
 [UNKNOWN] => [super();]
-[public class ConcreteClass extends GenericClass<String> implements InterfaceWithDefault {}] => [/**
-   * Factory method corresponding to constructor 'ConcreteClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass.<ctor>"
 [UNKNOWN] => [ConcreteClass.$clinit();]
 [UNKNOWN] => [let $instance = new ConcreteClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass__();]
 [UNKNOWN] => [return $instance;]
-[public class ConcreteClass extends GenericClass<String> implements InterfaceWithDefault {}] => [/**
-   * Initialization from constructor 'ConcreteClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass();
-  }] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass();]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {?string} arg0
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_String(arg0) {
-    super.m_foo__java_lang_Object(arg0);
-  }]
 [UNKNOWN] => [super.m_foo__java_lang_Object(arg0);]
 [UNKNOWN] => [GenericClass.$clinit();]
 [UNKNOWN] => [InterfaceWithDefault.$clinit();]

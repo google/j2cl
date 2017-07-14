@@ -1,30 +1,9 @@
-[/**
-   * A JsConstructor class, which extends a subclass of a JsConstructor class.
-...    }
-  }] => [class F extends C {
-  /**
-...exports = F;
-] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.F"
-[@JsConstructor
-    public F(int x) {
-...      this.fF = x + 3;
-    }] => [/**
-   * JsConstructor 'F(int)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F__int(x);
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.F.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [F.$clinit();]
 [UNKNOWN] => [super(x + 2);]
 [UNKNOWN] => [/** @public {number} */
     this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F = 0;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F__int(x);]
-[@JsConstructor
-    public F(int x) {
-...      this.fF = x + 3;
-    }] => [/**
-   * Initialization from constructor 'F(int)'.
-...    this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F = x + 3;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.F.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F();]
 [this.fF = x + 3;] => [this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F = x + 3;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.F.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F__int"

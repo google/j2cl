@@ -1,36 +1,8 @@
-[public class StaticInitializers {
-  public static int a = 5;
-...  }
-}] => [class StaticInitializers extends java_lang_Object {
-  /**
-...exports = StaticInitializers;
-] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers"
-[public class StaticInitializers {
-  public static int a = 5;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers"
 [UNKNOWN] => [super();]
-[public class StaticInitializers {
-  public static int a = 5;
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'StaticInitializers()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<ctor>"
 [UNKNOWN] => [StaticInitializers.$clinit();]
 [UNKNOWN] => [let $instance = new StaticInitializers();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticInitializers {
-  public static int a = 5;
-...  }
-}] => [/**
-   * Initialization from constructor 'StaticInitializers()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers();
-  }] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

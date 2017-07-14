@@ -1,17 +1,3 @@
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [class Strings extends java_lang_Object {
-  /**
-...exports = Strings;
-] "com.google.j2cl.transpiler.readable.strings.Strings"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ = null;
-  }] "com.google.j2cl.transpiler.readable.strings.Strings"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {?string} */
     this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ = null;]
@@ -19,33 +5,12 @@
     this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ = null;]
 [UNKNOWN] => [/** @public {?string} */
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ = null;]
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Strings()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.strings.Strings.<ctor>"
 [UNKNOWN] => [Strings.$clinit();]
 [UNKNOWN] => [let $instance = new Strings();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();]
 [UNKNOWN] => [return $instance;]
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/**
-   * Initialization from constructor 'Strings()'.
-...    this.$init__com_google_j2cl_transpiler_readable_strings_Strings();
-  }] "com.google.j2cl.transpiler.readable.strings.Strings.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_strings_Strings();]
-[public void test() {
-    // Two Null String instances.
-...    (new StringHolder()).s += "o";
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [String s1 = null;] => [let s1 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s1] => [s1] "s1"
 [String s2 = null;] => [let s2 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"

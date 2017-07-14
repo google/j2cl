@@ -1,11 +1,1 @@
-[interface SuperInterface<T> {
-  void foo(T t);
-}] => [/**
- * @interface
-...exports = SuperInterface;
-] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface"
-[void foo(T t);] => [/**
-   * @abstract
-...  m_foo__java_lang_Object(t) {
-  }] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.foo"
 [t] => [t] "t"

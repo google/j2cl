@@ -1,59 +1,15 @@
-[class O extends N {
-    private B b;
-...    }
-  }] => [class O extends N {
-  /**
-...exports = O;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O"
-[class O extends N {
-    private B b;
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_ = null;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O = null;]
 [UNKNOWN] => [/** @public {B} */
     this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_ = null;]
-[class O extends N {
-    private B b;
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'O(Main)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O.<ctor>"
 [UNKNOWN] => [O.$clinit();]
 [UNKNOWN] => [let $instance = new O();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O__com_google_j2cl_transpiler_readable_bridgejsmethod_Main($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class O extends N {
-    private B b;
-...    }
-  }] => [/**
-   * Initialization from constructor 'O(Main)'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O = $outer_this;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_N__com_google_j2cl_transpiler_readable_bridgejsmethod_Main($outer_this);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O();]
-[@Override
-    public B getB() {
-      return b;
-    }] => [/**
-   * @override
-...    return this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O.getB"
 [return b;] => [return this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.O.getB"
-[UNKNOWN] => [/**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @return {B}
-   * @public
-   */
-  m_getB__() {
-    return this.getB();
-  }]
 [UNKNOWN] => [return this.getB();]
 [UNKNOWN] => [N.$clinit();]

@@ -1,57 +1,14 @@
-[public class Main {
-  public static void fun(Double... elements) {}
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.wideningandboxing.Main"
-[public class Main {
-  public static void fun(Double... elements) {}
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public static void fun(Double... elements) {}
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_wideningandboxing_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public static void fun(Double... elements) {}
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_wideningandboxing_Main();
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_wideningandboxing_Main();]
-[public static void fun(Double... elements) {}] => [/**
-   * @param {Array<?number>} elements
-...    Main.$clinit();
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.fun"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
-[public static void bar(Float... elements) {}] => [/**
-   * @param {Array<Float>} elements
-...    Main.$clinit();
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.bar"
 [elements] => [elements] "elements"
 [UNKNOWN] => [Main.$clinit();]
-[public static void foo() {
-    int[] numbers = new int[] {1, 2};
-...    bar((float) 'a', (float) 4, (float) numbers[0]);
-  }] => [/**
-   * @return {void}
-...    Main.m_bar__arrayOf_java_lang_Float(/**@type {!Array<Float>} */ ($Arrays.$init([Float.m_valueOf__float(97 /* 'a' */), Float.m_valueOf__float(4), Float.m_valueOf__float(numbers[0])], Float)));
-  }] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.foo"
 [UNKNOWN] => [Main.$clinit();]
 [int[] numbers = new int[] {1, 2};] => [let numbers = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.wideningandboxing.Main.foo"
 [numbers] => [numbers] "numbers"

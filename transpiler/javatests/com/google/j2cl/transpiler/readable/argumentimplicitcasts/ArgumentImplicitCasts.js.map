@@ -1,110 +1,31 @@
-[/**
- * Tests implicit conversion in method call argument values.
-...  }
-}] => [class ArgumentImplicitCasts extends java_lang_Object {
-  /**
-...exports = ArgumentImplicitCasts;
-] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts"
-[/**
- * Tests implicit conversion in method call argument values.
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts"
 [UNKNOWN] => [super();]
-[/**
- * Tests implicit conversion in method call argument values.
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'ArgumentImplicitCasts()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.<ctor>"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [UNKNOWN] => [let $instance = new ArgumentImplicitCasts();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts__();]
 [UNKNOWN] => [return $instance;]
-[/**
- * Tests implicit conversion in method call argument values.
-...  }
-}] => [/**
-   * Initialization from constructor 'ArgumentImplicitCasts()'.
-...    this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();]
-[@SuppressWarnings("unused")
-  private static char getChar(char value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getChar"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getChar"
-[private static short getShort(short value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getShort"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getShort"
-[private static int getInt(int value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getInt"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getInt"
-[private static long getLong(long value) {
-    return value;
-  }] => [/**
-   * @param {!$Long} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getLong"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getLong"
-[private static float getFloat(float value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getFloat"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getFloat"
-[private static double getDouble(double value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getDouble"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getDouble"
-[@SuppressWarnings("unused")
-  private static byte getByte(byte value) {
-    return value;
-  }] => [/**
-   * @param {number} value
-...    return value;
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getByte"
 [value] => [value] "value"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [return value;] => [return value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.getByte"
-[public static void main(String... args) {
-    // The right hand sides are explicitly cast and the left hand sides *should* have implicit casts
-...    // assert new LongValueHolder(doubleValue).value == (long) doubleValue; // illegal
-  }] => [/**
-   * @param {Array<?string>} args
-...    $Asserts.$assert($LongUtils.$equals(LongValueHolder.$create__long($Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)).f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_LongValueHolder_, $Primitives.$widenShortToLong(ArgumentImplicitCasts.f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));
-  }] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"
 [args] => [args] "args"
 [UNKNOWN] => [ArgumentImplicitCasts.$clinit();]
 [assert getShort(BYTE_MAX_VALUE) == (short) BYTE_MAX_VALUE;] => [$Asserts.$assert(ArgumentImplicitCasts.m_getShort__short_$p_com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts(ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts) == ArgumentImplicitCasts.f_BYTE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts);] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.main"

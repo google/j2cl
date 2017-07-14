@@ -1,11 +1,1 @@
-[interface I<I1> {
-  String get(Consumer<? super I1> consumer);
-}] => [/**
- * @interface
-...exports = I;
-] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I"
-[String get(Consumer<? super I1> consumer);] => [/**
-   * @abstract
-...  m_get__java_util_function_Consumer(consumer) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I.get"
 [consumer] => [consumer] "consumer"

@@ -1,24 +1,8 @@
-[class GenericClass<T> {}] => [/**
- * @template C_T
-...exports = GenericClass;
-] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass"
-[class GenericClass<T> {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass"
 [UNKNOWN] => [super();]
-[class GenericClass<T> {}] => [/**
-   * Factory method corresponding to constructor 'GenericClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass.<ctor>"
 [UNKNOWN] => [GenericClass.$clinit();]
 [UNKNOWN] => [let $instance = new GenericClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();]
 [UNKNOWN] => [return $instance;]
-[class GenericClass<T> {}] => [/**
-   * Initialization from constructor 'GenericClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
-  }] "com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,54 +1,13 @@
-[/**
- * Tests that a cast is inserted when a method call returns a generic type.
-...  }
-}] => [/**
- * @template C_T
-...exports = CastGenericReturnType;
-] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType"
-[/**
- * Tests that a cast is inserted when a method call returns a generic type.
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType"
 [UNKNOWN] => [super();]
-[/**
- * Tests that a cast is inserted when a method call returns a generic type.
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'CastGenericReturnType()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.<ctor>"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [UNKNOWN] => [let $instance = new CastGenericReturnType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_castgenericreturntype_CastGenericReturnType__();]
 [UNKNOWN] => [return $instance;]
-[/**
- * Tests that a cast is inserted when a method call returns a generic type.
-...  }
-}] => [/**
-   * Initialization from constructor 'CastGenericReturnType()'.
-...    this.$init__com_google_j2cl_transpiler_readable_castgenericreturntype_CastGenericReturnType();
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_castgenericreturntype_CastGenericReturnType();]
-[public static <T> CastGenericReturnType<T> inferGeneric(T foo) {
-    return new CastGenericReturnType<>();
-  }] => [/**
-   * @template M_T
-...    return /**@type {!CastGenericReturnType<*>} */ (CastGenericReturnType.$create__());
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.inferGeneric"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [return new CastGenericReturnType<>();] => [return /**@type {!CastGenericReturnType<*>} */ (CastGenericReturnType.$create__());] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.inferGeneric"
-[public static CastGenericReturnType<CastGenericReturnType<String>> tightenType(
-      CastGenericReturnType<String> foo) {
-...    return null;
-  }] => [/**
-   * @param {CastGenericReturnType<?string>} foo
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [if (foo != null) {
@@ -59,30 +18,11 @@
     }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
 [return inferGeneric(foo);] => [return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.tightenType"
-[public static <V> ArrayList<V> newArrayList(V foo) {
-    return new ArrayList<>();
-  }] => [/**
-   * @template M_V
-...    return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.newArrayList"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.newArrayList"
-[public static void acceptsArrayListOfSuper(ArrayList<Object> foo) {
-    // empty
-  }] => [/**
-   * @param {ArrayList<*>} foo
-...    CastGenericReturnType.$clinit();
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.acceptsArrayListOfSuper"
 [foo] => [foo] "foo"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
-[public static void main() {
-    ArrayList<Object> list = newArrayList("foo");
-    acceptsArrayListOfSuper(list);
-  }] => [/**
-   * @return {void}
-...    CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);
-  }] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.main"
 [UNKNOWN] => [CastGenericReturnType.$clinit();]
 [ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (CastGenericReturnType.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType.main"
 [list] => [list] "list"

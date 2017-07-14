@@ -1,36 +1,8 @@
-[class bar {
-  {
-...  }
-}] => [class bar extends java_lang_Object {
-  /**
-...exports = bar;
-] "com.google.j2cl.transpiler.readable.collisions.bar"
-[class bar {
-  {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.collisions.bar"
 [UNKNOWN] => [super();]
-[class bar {
-  {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'bar()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.collisions.bar.<ctor>"
 [UNKNOWN] => [bar.$clinit();]
 [UNKNOWN] => [let $instance = new bar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_collisions_bar__();]
 [UNKNOWN] => [return $instance;]
-[class bar {
-  {
-...  }
-}] => [/**
-   * Initialization from constructor 'bar()'.
-...    this.$init__com_google_j2cl_transpiler_readable_collisions_bar();
-  }] "com.google.j2cl.transpiler.readable.collisions.bar.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_collisions_bar();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

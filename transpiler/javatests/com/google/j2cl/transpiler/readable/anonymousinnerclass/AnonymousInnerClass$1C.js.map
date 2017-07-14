@@ -1,15 +1,3 @@
-[class C {
-      public int fInC = arg;
-    }] => [class $1C extends java_lang_Object {
-  /**
-...exports = $1C;
-] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.1C"
-[class C {
-      public int fInC = arg;
-    }] => [/**
-   * Private implementation constructor.
-...    this.$c_arg = 0;
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.1C"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {AnonymousInnerClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_1C = null;]
@@ -17,22 +5,10 @@
     this.f_fInC__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_1C = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_arg = 0;]
-[class C {
-      public int fInC = arg;
-    }] => [/**
-   * Factory method corresponding to constructor 'C(AnonymousInnerClass, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.1C.<ctor>"
 [UNKNOWN] => [$1C.$clinit();]
 [UNKNOWN] => [let $instance = new $1C();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_1C__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int($outer_this, $c_arg);]
 [UNKNOWN] => [return $instance;]
-[class C {
-      public int fInC = arg;
-    }] => [/**
-   * Initialization from constructor 'C(AnonymousInnerClass, int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_1C();
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.1C.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_1C = $outer_this;]
 [UNKNOWN] => [this.$c_arg = $c_arg;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

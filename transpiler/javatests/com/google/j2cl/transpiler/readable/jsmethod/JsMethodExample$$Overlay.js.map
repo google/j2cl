@@ -1,17 +1,3 @@
-[@JsType(isNative = true, name = "console", namespace = JsPackage.GLOBAL)
-public class JsMethodExample {
-...  }
-}] => [class JsMethodExample$$Overlay {
-  /**
-...exports = JsMethodExample$$Overlay;
-] "com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample"
-[@JsOverlay
-  public static void main(String... args) {
-    log("test");
-  }] => [/**
-   * @param {Array<?string>} args
-...    console.log("test");
-  }] "com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.main"
 [args] => [args] "args"
 [UNKNOWN] => [JsMethodExample$$Overlay.$clinit();]
 [log("test");] => [console.log("test");] "com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample$$Overlay.main"

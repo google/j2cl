@@ -1,54 +1,16 @@
-[static class P1<T1> {
-    class P2<T2> extends P1<T1> {
-...    }
-  }] => [/**
- * @template C_P1_T1
-...exports = P1;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1"
-[static class P1<T1> {
-    class P2<T2> extends P1<T1> {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1 = 0;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1 = 0;]
-[P1() {
-      this(1);
-    }] => [/**
-   * Factory method corresponding to constructor 'P1()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.<ctor>"
 [UNKNOWN] => [P1.$clinit();]
 [UNKNOWN] => [let $instance = new P1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__();]
 [UNKNOWN] => [return $instance;]
-[P1() {
-      this(1);
-    }] => [/**
-   * Initialization from constructor 'P1()'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__int(1);
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.<ctor>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__int(1);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__"
-[P1(int i) {
-      value = i;
-    }] => [/**
-   * Factory method corresponding to constructor 'P1(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.<ctor>"
 [i] => [i] "i"
 [UNKNOWN] => [P1.$clinit();]
 [UNKNOWN] => [let $instance = new P1();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__int(i);]
 [UNKNOWN] => [return $instance;]
-[P1(int i) {
-      value = i;
-    }] => [/**
-   * Initialization from constructor 'P1(int)'.
-...    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1 = i;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.<ctor>"
 [i] => [i] "i"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1();]

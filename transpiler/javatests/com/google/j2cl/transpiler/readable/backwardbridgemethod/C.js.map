@@ -1,44 +1,10 @@
-[class C<T> {
-  public T get(T t) {
-...  }
-}] => [/**
- * @template C_T
-...exports = C;
-] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C"
-[class C<T> {
-  public T get(T t) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C"
 [UNKNOWN] => [super();]
-[class C<T> {
-  public T get(T t) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'C()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<ctor>"
 [UNKNOWN] => [C.$clinit();]
 [UNKNOWN] => [let $instance = new C();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_C__();]
 [UNKNOWN] => [return $instance;]
-[class C<T> {
-  public T get(T t) {
-...  }
-}] => [/**
-   * Initialization from constructor 'C()'.
-...    this.$init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C();
-  }] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C();]
-[public T get(T t) {
-    return null;
-  }] => [/**
-   * @param {C_T} t
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.get"
 [t] => [t] "t"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.get"
 [UNKNOWN] => [java_lang_Object.$clinit();]

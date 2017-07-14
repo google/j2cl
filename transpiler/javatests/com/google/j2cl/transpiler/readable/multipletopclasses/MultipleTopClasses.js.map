@@ -1,24 +1,8 @@
-[public class MultipleTopClasses extends AnotherClass {}] => [class MultipleTopClasses extends AnotherClass {
-  /**
-...exports = MultipleTopClasses;
-] "com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses"
-[public class MultipleTopClasses extends AnotherClass {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses"
 [UNKNOWN] => [super();]
-[public class MultipleTopClasses extends AnotherClass {}] => [/**
-   * Factory method corresponding to constructor 'MultipleTopClasses()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses.<ctor>"
 [UNKNOWN] => [MultipleTopClasses.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleTopClasses();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses__();]
 [UNKNOWN] => [return $instance;]
-[public class MultipleTopClasses extends AnotherClass {}] => [/**
-   * Initialization from constructor 'MultipleTopClasses()'.
-...    this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses();
-  }] "com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses();]
 [UNKNOWN] => [AnotherClass.$clinit();]

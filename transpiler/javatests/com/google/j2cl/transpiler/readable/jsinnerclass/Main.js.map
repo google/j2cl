@@ -1,44 +1,10 @@
-[public class Main {
-  static class Outer {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.jsinnerclass.Main"
-[public class Main {
-  static class Outer {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  static class Outer {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  static class Outer {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main();
-  }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main();]
-[public static void main(String... args) {
-    assert new Outer().method() == 5;
-  }] => [/**
-   * @param {Array<?string>} args
-...    $Asserts.$assert(Outer.$create__().m_method__() == 5);
-  }] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.main"
 [args] => [args] "args"
 [UNKNOWN] => [Main.$clinit();]
 [assert new Outer().method() == 5;] => [$Asserts.$assert(Outer.$create__().m_method__() == 5);] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.main"

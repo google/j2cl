@@ -1,43 +1,9 @@
-[public class Class {
-  public void main() {
-...  }
-}] => [class com_google_j2cl_transpiler_readable_localnamecollision_Class extends java_lang_Object {
-  /**
-...exports = com_google_j2cl_transpiler_readable_localnamecollision_Class;
-] "com.google.j2cl.transpiler.readable.localnamecollision.Class"
-[public class Class {
-  public void main() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Class"
 [UNKNOWN] => [super();]
-[public class Class {
-  public void main() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Class()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Class.<ctor>"
 [UNKNOWN] => [com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit();]
 [UNKNOWN] => [let $instance = new com_google_j2cl_transpiler_readable_localnamecollision_Class();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();]
 [UNKNOWN] => [return $instance;]
-[public class Class {
-  public void main() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Class()'.
-...    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Class();
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Class.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Class();]
-[public void main() {
-    new Class().getClass();
-  }] => [/**
-   * @return {void}
-...    /**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(com_google_j2cl_transpiler_readable_localnamecollision_Class.$create__()));
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Class.main"
 [new Class().getClass();] => [/**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(com_google_j2cl_transpiler_readable_localnamecollision_Class.$create__()));] "com.google.j2cl.transpiler.readable.localnamecollision.Class.main"
 [UNKNOWN] => [java_lang_Object.$clinit();]

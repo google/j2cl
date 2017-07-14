@@ -1,32 +1,8 @@
-[public static class Yar {
-    public static String b = "qwerty";
-  }] => [class Yar extends java_lang_Object {
-  /**
-...exports = Yar;
-] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yar"
-[public static class Yar {
-    public static String b = "qwerty";
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yar"
 [UNKNOWN] => [super();]
-[public static class Yar {
-    public static String b = "qwerty";
-  }] => [/**
-   * Factory method corresponding to constructor 'Yar()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yar.<ctor>"
 [UNKNOWN] => [Yar.$clinit();]
 [UNKNOWN] => [let $instance = new Yar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yar__();]
 [UNKNOWN] => [return $instance;]
-[public static class Yar {
-    public static String b = "qwerty";
-  }] => [/**
-   * Initialization from constructor 'Yar()'.
-...    this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yar();
-  }] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yar.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yar();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

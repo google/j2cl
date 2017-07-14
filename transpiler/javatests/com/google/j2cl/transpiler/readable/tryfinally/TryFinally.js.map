@@ -1,45 +1,10 @@
-[public class TryFinally {
-  public void main() {
-...  }
-}] => [class TryFinally extends java_lang_Object {
-  /**
-...exports = TryFinally;
-] "com.google.j2cl.transpiler.readable.tryfinally.TryFinally"
-[public class TryFinally {
-  public void main() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.tryfinally.TryFinally"
 [UNKNOWN] => [super();]
-[public class TryFinally {
-  public void main() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'TryFinally()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.tryfinally.TryFinally.<ctor>"
 [UNKNOWN] => [TryFinally.$clinit();]
 [UNKNOWN] => [let $instance = new TryFinally();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally__();]
 [UNKNOWN] => [return $instance;]
-[public class TryFinally {
-  public void main() {
-...  }
-}] => [/**
-   * Initialization from constructor 'TryFinally()'.
-...    this.$init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();
-  }] "com.google.j2cl.transpiler.readable.tryfinally.TryFinally.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();]
-[public void main() {
-    try {
-...    }
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.tryfinally.TryFinally.main"
 [try {
       assert true;
     } finally {

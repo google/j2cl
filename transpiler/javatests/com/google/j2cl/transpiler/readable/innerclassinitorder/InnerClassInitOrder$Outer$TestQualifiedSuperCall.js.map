@@ -1,34 +1,8 @@
-[public static class TestQualifiedSuperCall extends OuterIsNotSuper {
-      public TestQualifiedSuperCall() {
-...      }
-    }] => [class TestQualifiedSuperCall extends OuterIsNotSuper {
-  /**
-...exports = TestQualifiedSuperCall;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall"
-[public static class TestQualifiedSuperCall extends OuterIsNotSuper {
-      public TestQualifiedSuperCall() {
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall"
 [UNKNOWN] => [super();]
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [/**
-   * Factory method corresponding to constructor 'TestQualifiedSuperCall()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.<ctor>"
 [UNKNOWN] => [TestQualifiedSuperCall.$clinit();]
 [UNKNOWN] => [let $instance = new TestQualifiedSuperCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();]
 [UNKNOWN] => [return $instance;]
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [/**
-   * Initialization from constructor 'TestQualifiedSuperCall()'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.<ctor>"
 [new Outer(1).new OuterIsSuper(2).super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(OuterIsSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(Outer.$create__int(1), 2));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall();]
 [UNKNOWN] => [OuterIsNotSuper.$clinit();]

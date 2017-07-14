@@ -1,45 +1,10 @@
-[public class WhileStatement {
-  public void test() {
-...  }
-}] => [class WhileStatement extends java_lang_Object {
-  /**
-...exports = WhileStatement;
-] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement"
-[public class WhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement"
 [UNKNOWN] => [super();]
-[public class WhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'WhileStatement()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement.<ctor>"
 [UNKNOWN] => [WhileStatement.$clinit();]
 [UNKNOWN] => [let $instance = new WhileStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement__();]
 [UNKNOWN] => [return $instance;]
-[public class WhileStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'WhileStatement()'.
-...    this.$init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();
-  }] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();]
-[public void test() {
-    int count = 0;
-...    }
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement.test"
 [int count = 0;] => [let count = 0;] "com.google.j2cl.transpiler.readable.whilestatement.WhileStatement.test"
 [count] => [count] "count"
 [while (count < 5) {

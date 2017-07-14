@@ -1,43 +1,10 @@
-[static class SubMain extends Main {
-    public SubMain() {
-...    }
-  }] => [class SubMain extends Main {
-  /**
-...exports = SubMain;
-] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain"
-[static class SubMain extends Main {
-    public SubMain() {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain"
 [UNKNOWN] => [super();]
-[public SubMain() {
-      super(10);
-    }] => [/**
-   * Factory method corresponding to constructor 'SubMain()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.<ctor>"
 [UNKNOWN] => [SubMain.$clinit();]
 [UNKNOWN] => [let $instance = new SubMain();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();]
 [UNKNOWN] => [return $instance;]
-[public SubMain() {
-      super(10);
-    }] => [/**
-   * Initialization from constructor 'SubMain()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.<ctor>"
 [super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();]
-[@Override
-    public int f3(int m, int... numbers) {
-...      return a;
-    }] => [/**
-   * @override
-...    return a;
-  }] "com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain.f3"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]

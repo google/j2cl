@@ -1,67 +1,13 @@
-[public static final class A implements ApplyFunction<Double, Double> {
-    @Override
-...    }
-  }] => [/**
- * @implements {ApplyFunction<?number, ?number>}
-...exports = A;
-] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A"
-[public static final class A implements ApplyFunction<Double, Double> {
-    @Override
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A"
 [UNKNOWN] => [super();]
-[public static final class A implements ApplyFunction<Double, Double> {
-    @Override
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'A()'.
-...    return $Util.$makeLambdaFunction($Util.$getPrototype(A).m_apply__java_lang_Object__java_lang_Number, $instance, A.$copy);
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(A).m_apply__java_lang_Object__java_lang_Number, $instance, A.$copy);]
-[public static final class A implements ApplyFunction<Double, Double> {
-    @Override
-...    }
-  }] => [/**
-   * Initialization from constructor 'A()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A();
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A();]
-[@Override
-    public Double apply(Double d, Double i) {
-      return d;
-    }] => [/**
-   * @param {?number} d
-...  m_apply__java_lang_Double__java_lang_Double(d, i) {
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A.apply"
 [d] => [d] "d"
 [i] => [i] "i"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @this {?function(?number, ?number):?number}
-   * @param {*} arg0
-   * @param {(Number|?number)} arg1
-   * @return {?number}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
-    return A.m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A__java_lang_Double__java_lang_Double(this, /**@type {?number} */ ($Casts.$to(arg0, Double)), /**@type {?number} */ ($Casts.$to(arg1, Double)));
-  }]
 [UNKNOWN] => [return A.m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_A__java_lang_Double__java_lang_Double(this, /**@type {?number} */ ($Casts.$to(arg0, Double)), /**@type {?number} */ ($Casts.$to(arg1, Double)));]
-[@Override
-    public Double apply(Double d, Double i) {
-      return d;
-    }] => [/**
-   * @param {?function(?number, ?number):?number} $thisArg
-...    return d;
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A.apply"
 [d] => [d] "d"
 [i] => [i] "i"
 [UNKNOWN] => [A.$clinit();]

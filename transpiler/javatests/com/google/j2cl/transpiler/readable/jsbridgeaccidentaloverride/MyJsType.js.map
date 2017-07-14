@@ -1,68 +1,15 @@
-[@JsType
-public class MyJsType implements OtherInterface {
-...  }
-}] => [/**
- * @implements {OtherInterface}
-...exports = MyJsType;
-] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType"
-[@JsType
-public class MyJsType implements OtherInterface {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType"
 [UNKNOWN] => [super();]
-[MyJsType() {}] => [/**
-   * Factory method corresponding to constructor 'MyJsType()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<ctor>"
 [UNKNOWN] => [MyJsType.$clinit();]
 [UNKNOWN] => [let $instance = new MyJsType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();]
 [UNKNOWN] => [return $instance;]
-[MyJsType() {}] => [/**
-   * Initialization from constructor 'MyJsType()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();]
-[/**
-   * Accidentally exposes non-JsMethod MyInterface.foo(). Thus there should be a bridge method in
-...    return a;
-  }] => [/**
-   * @param {number} a
-...    return a;
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.foo"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.foo"
-[/**
-   * Does not accidentally exposes non-JsMethod MyInterface.bar() because SubJsType exposes it. A
-...    return a + 1;
-  }] => [/**
-   * @param {number} a
-...    return a + 1;
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.bar"
 [a] => [a] "a"
 [return a + 1;] => [return a + 1;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.bar"
-[/**
-   * Exposes non-JsMethod OtherInterface.fun(). There should be a bridge method in MyJsType. There
-...    return a - 1;
-  }] => [/**
-   * @param {number} a
-...    return a - 1;
-  }] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.fun"
 [a] => [a] "a"
 [return a - 1;] => [return a - 1;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.fun"
-[UNKNOWN] => [/**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  m_fun__int(arg0) {
-    return this.fun(arg0);
-  }]
 [UNKNOWN] => [return this.fun(arg0);]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,43 +1,9 @@
-[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
-  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
-}] => [/**
- * @template C_C1
-...exports = C;
-] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C"
-[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
-  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C"
 [UNKNOWN] => [super();]
-[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
-  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
-}] => [/**
-   * Factory method corresponding to constructor 'C()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<ctor>"
 [UNKNOWN] => [C.$clinit();]
 [UNKNOWN] => [let $instance = new C();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__();]
 [UNKNOWN] => [return $instance;]
-[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
-  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
-}] => [/**
-   * Initialization from constructor 'C()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C();]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {Consumer} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_util_function_Consumer(arg0) {
-    return super.m_get__java_lang_Object(arg0);
-  }]
 [UNKNOWN] => [return super.m_get__java_lang_Object(arg0);]
 [UNKNOWN] => [B.$clinit();]

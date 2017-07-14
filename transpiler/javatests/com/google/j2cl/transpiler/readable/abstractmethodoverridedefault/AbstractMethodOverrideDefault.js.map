@@ -1,36 +1,8 @@
-[public class AbstractMethodOverrideDefault {
-  interface I {
-...  }
-}] => [class AbstractMethodOverrideDefault extends java_lang_Object {
-  /**
-...exports = AbstractMethodOverrideDefault;
-] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault"
-[public class AbstractMethodOverrideDefault {
-  interface I {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault"
 [UNKNOWN] => [super();]
-[public class AbstractMethodOverrideDefault {
-  interface I {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'AbstractMethodOverrideDefault()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.<ctor>"
 [UNKNOWN] => [AbstractMethodOverrideDefault.$clinit();]
 [UNKNOWN] => [let $instance = new AbstractMethodOverrideDefault();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault__();]
 [UNKNOWN] => [return $instance;]
-[public class AbstractMethodOverrideDefault {
-  interface I {
-...  }
-}] => [/**
-   * Initialization from constructor 'AbstractMethodOverrideDefault()'.
-...    this.$init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault();
-  }] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

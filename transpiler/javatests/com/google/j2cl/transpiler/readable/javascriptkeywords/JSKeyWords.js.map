@@ -1,45 +1,10 @@
-[public class JSKeyWords {
-  public int test(int in) {
-...  }
-}] => [class JSKeyWords extends java_lang_Object {
-  /**
-...exports = JSKeyWords;
-] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords"
-[public class JSKeyWords {
-  public int test(int in) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords"
 [UNKNOWN] => [super();]
-[public class JSKeyWords {
-  public int test(int in) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'JSKeyWords()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<ctor>"
 [UNKNOWN] => [JSKeyWords.$clinit();]
 [UNKNOWN] => [let $instance = new JSKeyWords();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords__();]
 [UNKNOWN] => [return $instance;]
-[public class JSKeyWords {
-  public int test(int in) {
-...  }
-}] => [/**
-   * Initialization from constructor 'JSKeyWords()'.
-...    this.$init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords();
-  }] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords();]
-[public int test(int in) {
-    int let = 0;
-    return let + in;
-  }] => [/**
-   * @param {number} in$1$
-...    return let$1$ + in$1$;
-  }] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
 [in] => [in$1$] "in"
 [int let = 0;] => [let let$1$ = 0;] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
 [let] => [let$1$] "let"

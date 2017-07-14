@@ -1,45 +1,10 @@
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [class AnonymousInnerClass extends java_lang_Object {
-  /**
-...exports = AnonymousInnerClass;
-] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass"
 [UNKNOWN] => [super();]
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'AnonymousInnerClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<ctor>"
 [UNKNOWN] => [AnonymousInnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new AnonymousInnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__();]
 [UNKNOWN] => [return $instance;]
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [/**
-   * Initialization from constructor 'AnonymousInnerClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass();
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass();]
-[public void test(final int arg) {
-    InnerClass ic = new InnerClass() {}; // new an anonymous class with implicit qualifier.
-...    C c = new C() {}; // new an anonymous local class.
-  }] => [/**
-   * @param {number} arg
-...    let c = $3.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int(this, arg);
-  }] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.test"
 [arg] => [arg] "arg"
 [InnerClass ic = new InnerClass() {};] => [let ic = $1.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(this);] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.test"
 [ic] => [ic] "ic"

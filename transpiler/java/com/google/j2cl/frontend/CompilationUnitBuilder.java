@@ -401,7 +401,7 @@ public class CompilationUnitBuilder {
       return Method.newBuilder()
           .setMethodDescriptor(methodDescriptor)
           .setOverride(isOverride)
-          .setSourcePosition(getSourcePosition(methodDescriptor.getQualifiedSourceName(), node));
+          .setSourcePosition(getSourcePosition(node));
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
@@ -761,7 +761,6 @@ public class CompilationUnitBuilder {
           .setName(name)
           .setStartPosition(startLineNumber, startColumnNumber)
           .setEndPosition(endLineNumber, endColumnNumber)
-          .setName(name)
           .build();
     }
 
@@ -1359,8 +1358,7 @@ public class CompilationUnitBuilder {
               classComponents,
               functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Visibility.PRIVATE, lambdaTypeDeclaration);
-      lambdaType.setSourcePosition(
-          getSourcePosition(lambdaTypeDeclaration.getQualifiedSourceName(), expression));
+      lambdaType.setSourcePosition(getSourcePosition(expression));
       pushType(lambdaType);
       FunctionExpression functionExpression = functionExpressionSupplier.get();
 
@@ -2208,8 +2206,7 @@ public class CompilationUnitBuilder {
 
       Type type = new Type(visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
-      type.setSourcePosition(
-          getSourcePosition(typeDeclaration.getQualifiedSourceName(), typeDeclarationNode));
+      type.setSourcePosition(getSourcePosition(typeDeclarationNode));
       return type;
     }
   }

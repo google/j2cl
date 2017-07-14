@@ -1,14 +1,2 @@
-[static interface BI1 extends BI3 {
-    @Override
-    String get(String value);
-  }] => [/**
- * @interface
-...exports = BI1;
-] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI1"
-[@Override
-    String get(String value);] => [/**
-   * @abstract
-...  get(value) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI1.get"
 [value] => [value] "value"
 [UNKNOWN] => [BI3.$clinit();]

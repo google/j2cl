@@ -1,45 +1,12 @@
-[public static class JsConstructorSubtypeOfRegularType extends RegularType {
-    @JsConstructor
-...    }
-  }] => [class JsConstructorSubtypeOfRegularType extends RegularType {
-  /**
-...exports = JsConstructorSubtypeOfRegularType;
-] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType"
-[@JsConstructor
-    public JsConstructorSubtypeOfRegularType(Object object) {
-      super(object);
-    }] => [/**
-   * JsConstructor 'JsConstructorSubtypeOfRegularType(Object)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__java_lang_Object(object);
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.<ctor>"
 [object] => [object] "object"
 [UNKNOWN] => [JsConstructorSubtypeOfRegularType.$clinit();]
 [UNKNOWN] => [super();]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__java_lang_Object(object);]
-[@JsConstructor
-    public JsConstructorSubtypeOfRegularType(Object object) {
-      super(object);
-    }] => [/**
-   * Initialization from constructor 'JsConstructorSubtypeOfRegularType(Object)'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.<ctor>"
 [object] => [object] "object"
 [super(object);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_RegularType__java_lang_Object(object);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__java_lang_Object"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType();]
-[public JsConstructorSubtypeOfRegularType() {
-      this(new Object());
-    }] => [/**
-   * Factory method corresponding to constructor 'JsConstructorSubtypeOfRegularType()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.<ctor>"
 [UNKNOWN] => [JsConstructorSubtypeOfRegularType.$clinit();]
 [UNKNOWN] => [let $instance = new JsConstructorSubtypeOfRegularType(java_lang_Object.$create__());]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__();]
 [UNKNOWN] => [return $instance;]
-[public JsConstructorSubtypeOfRegularType() {
-      this(new Object());
-    }] => [/**
-   * Initialization from constructor 'JsConstructorSubtypeOfRegularType()'.
-...  $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__() {
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.<ctor>"
 [UNKNOWN] => [RegularType.$clinit();]

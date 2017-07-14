@@ -1,45 +1,10 @@
-[public class CastToArray {
-  @SuppressWarnings({"cast", "unused"})
-...  }
-}] => [class CastToArray extends java_lang_Object {
-  /**
-...exports = CastToArray;
-] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray"
-[public class CastToArray {
-  @SuppressWarnings({"cast", "unused"})
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray"
 [UNKNOWN] => [super();]
-[public class CastToArray {
-  @SuppressWarnings({"cast", "unused"})
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'CastToArray()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray.<ctor>"
 [UNKNOWN] => [CastToArray.$clinit();]
 [UNKNOWN] => [let $instance = new CastToArray();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttoarray_CastToArray__();]
 [UNKNOWN] => [return $instance;]
-[public class CastToArray {
-  @SuppressWarnings({"cast", "unused"})
-...  }
-}] => [/**
-   * Initialization from constructor 'CastToArray()'.
-...    this.$init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray();
-  }] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray();]
-[@SuppressWarnings({"cast", "unused"})
-  public void main() {
-...    Object bar = (Object[][]) null;
-  }] => [/**
-   * @return {void}
-...    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, java_lang_Object, 2));
-  }] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray.main"
 [Object foo = (Object[]) null;] => [let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray.main"
 [foo] => [foo] "foo"
 [Object bar = (Object[][]) null;] => [let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, java_lang_Object, 2));] "com.google.j2cl.transpiler.readable.casttoarray.CastToArray.main"

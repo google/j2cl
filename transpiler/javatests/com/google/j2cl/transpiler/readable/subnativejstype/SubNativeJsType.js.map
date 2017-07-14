@@ -1,43 +1,10 @@
-[public class SubNativeJsType extends MyNativeJsType {
-  @JsConstructor
-...  }
-}] => [class SubNativeJsType extends MyNativeJsType {
-  /**
-...exports = SubNativeJsType;
-] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType"
-[@JsConstructor
-  public SubNativeJsType(int x) {
-    super(x + 1);
-  }] => [/**
-   * JsConstructor 'SubNativeJsType(int)'.
-...    this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(x);
-  }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [SubNativeJsType.$clinit();]
 [UNKNOWN] => [super(x + 1);]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(x);]
-[@JsConstructor
-  public SubNativeJsType(int x) {
-    super(x + 1);
-  }] => [/**
-   * Initialization from constructor 'SubNativeJsType(int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType();
-  }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"
 [x] => [x] "x"
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType();]
-[public SubNativeJsType() {
-    this(10);
-  }] => [/**
-   * Factory method corresponding to constructor 'SubNativeJsType()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"
 [UNKNOWN] => [SubNativeJsType.$clinit();]
 [UNKNOWN] => [let $instance = new SubNativeJsType(10);]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__();]
 [UNKNOWN] => [return $instance;]
-[public SubNativeJsType() {
-    this(10);
-  }] => [/**
-   * Initialization from constructor 'SubNativeJsType()'.
-...  $ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__() {
-  }] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<ctor>"

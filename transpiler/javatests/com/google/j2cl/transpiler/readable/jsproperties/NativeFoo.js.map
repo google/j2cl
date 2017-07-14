@@ -1,41 +1,8 @@
-[/**
- * Tests for native JsProperty.
-...  public static native double getB();
-}] => [class NativeFoo extends java_lang_Object {
-  /**
-...exports = NativeFoo;
-] "com.google.j2cl.transpiler.readable.jsproperties.NativeFoo"
-[/**
- * Tests for native JsProperty.
-...  public static native double getB();
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsproperties.NativeFoo"
 [UNKNOWN] => [super();]
-[/**
- * Tests for native JsProperty.
-...  public static native double getB();
-}] => [/**
-   * Factory method corresponding to constructor 'NativeFoo()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsproperties.NativeFoo.<ctor>"
 [UNKNOWN] => [NativeFoo.$clinit();]
 [UNKNOWN] => [let $instance = new NativeFoo();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_NativeFoo__();]
 [UNKNOWN] => [return $instance;]
-[/**
- * Tests for native JsProperty.
-...  public static native double getB();
-}] => [/**
-   * Initialization from constructor 'NativeFoo()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsproperties_NativeFoo();
-  }] "com.google.j2cl.transpiler.readable.jsproperties.NativeFoo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsproperties_NativeFoo();]
-[@JsProperty(name = "hasOwnProperty")
-  public native Object getA();] => [/**
-   * @return {*}
-...   */
-  // native get hasOwnProperty()] "com.google.j2cl.transpiler.readable.jsproperties.NativeFoo.getA"
 [UNKNOWN] => [java_lang_Object.$clinit();]

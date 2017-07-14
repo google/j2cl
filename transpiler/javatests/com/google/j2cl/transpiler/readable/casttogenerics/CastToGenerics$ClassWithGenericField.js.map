@@ -1,34 +1,10 @@
-[static class ClassWithGenericField<T extends Comparable> {
-    T field;
-  }] => [/**
- * @template C_ClassWithGenericField_T
-...exports = ClassWithGenericField;
-] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField"
-[static class ClassWithGenericField<T extends Comparable> {
-    T field;
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField = null;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {C_ClassWithGenericField_T} */
     this.f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField = null;]
-[static class ClassWithGenericField<T extends Comparable> {
-    T field;
-  }] => [/**
-   * Factory method corresponding to constructor 'ClassWithGenericField()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField.<ctor>"
 [UNKNOWN] => [ClassWithGenericField.$clinit();]
 [UNKNOWN] => [let $instance = new ClassWithGenericField();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField__();]
 [UNKNOWN] => [return $instance;]
-[static class ClassWithGenericField<T extends Comparable> {
-    T field;
-  }] => [/**
-   * Initialization from constructor 'ClassWithGenericField()'.
-...    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField();
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

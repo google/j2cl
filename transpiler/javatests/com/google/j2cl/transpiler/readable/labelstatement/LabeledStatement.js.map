@@ -1,45 +1,10 @@
-[public class LabeledStatement {
-  public void test() {
-...  }
-}] => [class LabeledStatement extends java_lang_Object {
-  /**
-...exports = LabeledStatement;
-] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement"
-[public class LabeledStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement"
 [UNKNOWN] => [super();]
-[public class LabeledStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'LabeledStatement()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.<ctor>"
 [UNKNOWN] => [LabeledStatement.$clinit();]
 [UNKNOWN] => [let $instance = new LabeledStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_labelstatement_LabeledStatement__();]
 [UNKNOWN] => [return $instance;]
-[public class LabeledStatement {
-  public void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'LabeledStatement()'.
-...    this.$init__com_google_j2cl_transpiler_readable_labelstatement_LabeledStatement();
-  }] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_labelstatement_LabeledStatement();]
-[public void test() {
-    LABEL:
-...    }
-  }] => [/**
-   * @return {void}
-...    }
-  }] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.test"
 [LABEL:
     for (; ; ) {
       break LABEL;

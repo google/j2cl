@@ -1,40 +1,12 @@
-[public class PublicInstanceFields {
-  public int a = 1;
-  public int b;
-}] => [class PublicInstanceFields extends java_lang_Object {
-  /**
-...exports = PublicInstanceFields;
-] "com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields"
-[public class PublicInstanceFields {
-  public int a = 1;
-  public int b;
-}] => [/**
-   * Private implementation constructor.
-...    this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields = 0;
-  }] "com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields = 0;]
 [UNKNOWN] => [/** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields = 0;]
-[public class PublicInstanceFields {
-  public int a = 1;
-  public int b;
-}] => [/**
-   * Factory method corresponding to constructor 'PublicInstanceFields()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields.<ctor>"
 [UNKNOWN] => [PublicInstanceFields.$clinit();]
 [UNKNOWN] => [let $instance = new PublicInstanceFields();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields__();]
 [UNKNOWN] => [return $instance;]
-[public class PublicInstanceFields {
-  public int a = 1;
-  public int b;
-}] => [/**
-   * Initialization from constructor 'PublicInstanceFields()'.
-...    this.$init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
-  }] "com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,45 +1,10 @@
-[public class Asserts {
-  int n() {
-...  }
-}] => [class Asserts extends java_lang_Object {
-  /**
-...exports = Asserts;
-] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts"
-[public class Asserts {
-  int n() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts"
 [UNKNOWN] => [super();]
-[public class Asserts {
-  int n() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Asserts()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<ctor>"
 [UNKNOWN] => [Asserts.$clinit();]
 [UNKNOWN] => [let $instance = new Asserts();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Asserts__();]
 [UNKNOWN] => [return $instance;]
-[public class Asserts {
-  int n() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Asserts()'.
-...    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts();
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts();]
-[int n() {
-    assert 5 != 4;
-    return 5;
-  }] => [/**
-   * @return {number}
-...    return 5;
-  }] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.n"
 [assert 5 != 4;] => [$Asserts.$assert(5 != 4);] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.n"
 [return 5;] => [return 5;] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.n"
 [UNKNOWN] => [java_lang_Object.$clinit();]

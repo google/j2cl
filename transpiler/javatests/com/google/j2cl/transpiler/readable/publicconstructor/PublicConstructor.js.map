@@ -1,28 +1,8 @@
-[public class PublicConstructor {
-  public PublicConstructor() {}
-}] => [class PublicConstructor extends java_lang_Object {
-  /**
-...exports = PublicConstructor;
-] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor"
-[public class PublicConstructor {
-  public PublicConstructor() {}
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor"
 [UNKNOWN] => [super();]
-[public PublicConstructor() {}] => [/**
-   * Factory method corresponding to constructor 'PublicConstructor()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<ctor>"
 [UNKNOWN] => [PublicConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new PublicConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor__();]
 [UNKNOWN] => [return $instance;]
-[public PublicConstructor() {}] => [/**
-   * Initialization from constructor 'PublicConstructor()'.
-...    this.$init__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor();
-  }] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,36 +1,8 @@
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [class StaticConstant extends java_lang_Object {
-  /**
-...exports = StaticConstant;
-] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant"
 [UNKNOWN] => [super();]
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [/**
-   * Factory method corresponding to constructor 'StaticConstant()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<ctor>"
 [UNKNOWN] => [StaticConstant.$clinit();]
 [UNKNOWN] => [let $instance = new StaticConstant();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [/**
-   * Initialization from constructor 'StaticConstant()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant();
-  }] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

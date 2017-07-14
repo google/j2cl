@@ -1,46 +1,12 @@
-[public class BoundedJsArrays {
-  private BoundedJsArrays() {}
-...  }
-}] => [class BoundedJsArrays extends java_lang_Object {
-  /**
-...exports = BoundedJsArrays;
-] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays"
-[public class BoundedJsArrays {
-  private BoundedJsArrays() {}
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays"
 [UNKNOWN] => [super();]
-[private BoundedJsArrays() {}] => [/**
-   * Factory method corresponding to constructor 'BoundedJsArrays()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.<ctor>"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [UNKNOWN] => [let $instance = new BoundedJsArrays();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays__();]
 [UNKNOWN] => [return $instance;]
-[private BoundedJsArrays() {}] => [/**
-   * Initialization from constructor 'BoundedJsArrays()'.
-...    this.$init__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays();
-  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays();]
-[public static <V> BoundedJsArray<V> create() {
-    return BoundedJsArray.<V>create();
-  }] => [/**
-   * @template M_V
-...    return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__());
-  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.create"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [return BoundedJsArray.<V>create();] => [return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__());] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.create"
-[public static <V> BoundedJsArray<V> createWithSize(int size) {
-    return BoundedJsArray.<V>create(size);
-  }] => [/**
-   * @template M_V
-...    return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__int(size));
-  }] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.createWithSize"
 [size] => [size] "size"
 [UNKNOWN] => [BoundedJsArrays.$clinit();]
 [return BoundedJsArray.<V>create(size);] => [return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__int(size));] "com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays.createWithSize"

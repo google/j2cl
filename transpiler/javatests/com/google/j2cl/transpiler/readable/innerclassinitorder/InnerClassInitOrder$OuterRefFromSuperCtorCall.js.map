@@ -1,38 +1,10 @@
-[class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
-    OuterRefFromSuperCtorCall() {
-...    }
-  }] => [class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
-  /**
-...exports = OuterRefFromSuperCtorCall;
-] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall"
-[class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
-    OuterRefFromSuperCtorCall() {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall = null;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {InnerClassInitOrder} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall = null;]
-[OuterRefFromSuperCtorCall() {
-      super(new Object() {
-...      });
-    }] => [/**
-   * Factory method corresponding to constructor 'OuterRefFromSuperCtorCall(InnerClassInitOrder)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.<ctor>"
 [UNKNOWN] => [OuterRefFromSuperCtorCall.$clinit();]
 [UNKNOWN] => [let $instance = new OuterRefFromSuperCtorCall();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder($outer_this);]
 [UNKNOWN] => [return $instance;]
-[OuterRefFromSuperCtorCall() {
-      super(new Object() {
-...      });
-    }] => [/**
-   * Initialization from constructor 'OuterRefFromSuperCtorCall(InnerClassInitOrder)'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall();
-  }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall = $outer_this;]
 [super(new Object() {
         @Override

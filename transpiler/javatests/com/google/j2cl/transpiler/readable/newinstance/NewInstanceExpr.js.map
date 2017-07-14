@@ -1,44 +1,10 @@
-[public class NewInstanceExpr {
-  public static void main(String[] args) {
-...  }
-}] => [class NewInstanceExpr extends java_lang_Object {
-  /**
-...exports = NewInstanceExpr;
-] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr"
-[public class NewInstanceExpr {
-  public static void main(String[] args) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr"
 [UNKNOWN] => [super();]
-[public class NewInstanceExpr {
-  public static void main(String[] args) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'NewInstanceExpr()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<ctor>"
 [UNKNOWN] => [NewInstanceExpr.$clinit();]
 [UNKNOWN] => [let $instance = new NewInstanceExpr();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr__();]
 [UNKNOWN] => [return $instance;]
-[public class NewInstanceExpr {
-  public static void main(String[] args) {
-...  }
-}] => [/**
-   * Initialization from constructor 'NewInstanceExpr()'.
-...    this.$init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();
-  }] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();]
-[public static void main(String[] args) {
-    NewInstanceExpr a = new NewInstanceExpr();
-  }] => [/**
-   * @param {Array<?string>} args
-...    let a = NewInstanceExpr.$create__();
-  }] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"
 [args] => [args] "args"
 [UNKNOWN] => [NewInstanceExpr.$clinit();]
 [NewInstanceExpr a = new NewInstanceExpr();] => [let a = NewInstanceExpr.$create__();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"

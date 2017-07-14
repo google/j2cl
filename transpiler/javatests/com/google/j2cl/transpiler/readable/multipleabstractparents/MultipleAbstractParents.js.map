@@ -1,45 +1,10 @@
-[public class MultipleAbstractParents {
-  public interface List<T> {
-...  }
-}] => [class MultipleAbstractParents extends java_lang_Object {
-  /**
-...exports = MultipleAbstractParents;
-] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents"
-[public class MultipleAbstractParents {
-  public interface List<T> {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents"
 [UNKNOWN] => [super();]
-[public class MultipleAbstractParents {
-  public interface List<T> {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'MultipleAbstractParents()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.<ctor>"
 [UNKNOWN] => [MultipleAbstractParents.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleAbstractParents();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents__();]
 [UNKNOWN] => [return $instance;]
-[public class MultipleAbstractParents {
-  public interface List<T> {
-...  }
-}] => [/**
-   * Initialization from constructor 'MultipleAbstractParents()'.
-...    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();
-  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();]
-[public static void main(String... args) {
-    assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
-...    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
-  }] => [/**
-   * @param {Array<?string>} args
-...    $Asserts.$assert(java_lang_String.m_equals__java_lang_String__java_lang_Object((/**@type {IStringList} */ ($Casts.$to(StringList.$create__(), IStringList))).m_getFoo__java_lang_String(null), "AbstractCollection"));
-  }] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.main"
 [args] => [args] "args"
 [UNKNOWN] => [MultipleAbstractParents.$clinit();]
 [assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");] => [$Asserts.$assert(java_lang_String.m_equals__java_lang_String__java_lang_Object(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()).m_getFoo__java_lang_Object(null), "AbstractCollection"));] "com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.main"

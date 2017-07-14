@@ -1,50 +1,11 @@
-[public static class A<T> {
-    @JsMethod
-...    public void bar(T t) {}
-  }] => [/**
- * @template C_A_T
-...exports = A;
-] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A"
-[public static class A<T> {
-    @JsMethod
-...    public void bar(T t) {}
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A"
 [UNKNOWN] => [super();]
-[public static class A<T> {
-    @JsMethod
-...    public void bar(T t) {}
-  }] => [/**
-   * Factory method corresponding to constructor 'A()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A.<ctor>"
 [UNKNOWN] => [A.$clinit();]
 [UNKNOWN] => [let $instance = new A();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();]
 [UNKNOWN] => [return $instance;]
-[public static class A<T> {
-    @JsMethod
-...    public void bar(T t) {}
-  }] => [/**
-   * Initialization from constructor 'A()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A();
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A();]
-[@JsMethod
-    public T fun(T t) {
-      return t;
-    }] => [/**
-   * @param {C_A_T} t
-...    return t;
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A.fun"
 [t] => [t] "t"
 [return t;] => [return t;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A.fun"
-[public void bar(T t) {}] => [/**
-   * @param {C_A_T} t
-...  m_bar__java_lang_Object(t) {
-  }] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A.bar"
 [t] => [t] "t"
 [UNKNOWN] => [java_lang_Object.$clinit();]

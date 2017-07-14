@@ -1,90 +1,34 @@
-[public class MultipleConstructors {
-  private int id;
-...  }
-}] => [class MultipleConstructors extends java_lang_Object {
-  /**
-...exports = MultipleConstructors;
-] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors"
-[public class MultipleConstructors {
-  private int id;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = false;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = 0;]
 [UNKNOWN] => [/** @public {boolean} */
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = false;]
-[public MultipleConstructors(int id) {
-    this.id = id;
-    this.flag = (id == 0);
-  }] => [/**
-   * Factory method corresponding to constructor 'MultipleConstructors(int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [id] => [id] "id"
 [UNKNOWN] => [MultipleConstructors.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleConstructors();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int(id);]
 [UNKNOWN] => [return $instance;]
-[public MultipleConstructors(int id) {
-    this.id = id;
-    this.flag = (id == 0);
-  }] => [/**
-   * Initialization from constructor 'MultipleConstructors(int)'.
-...    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = (id == 0);
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [id] => [id] "id"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();]
 [this.id = id;] => [this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = id;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int"
 [this.flag = (id == 0);] => [this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = (id == 0);] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int"
-[public MultipleConstructors(boolean flag) {
-    this.id = -1;
-    this.flag = flag;
-  }] => [/**
-   * Factory method corresponding to constructor 'MultipleConstructors(boolean)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [flag] => [flag] "flag"
 [UNKNOWN] => [MultipleConstructors.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleConstructors();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean(flag);]
 [UNKNOWN] => [return $instance;]
-[public MultipleConstructors(boolean flag) {
-    this.id = -1;
-    this.flag = flag;
-  }] => [/**
-   * Initialization from constructor 'MultipleConstructors(boolean)'.
-...    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = flag;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [flag] => [flag] "flag"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();]
 [this.id = -1;] => [this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = -1;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean"
 [this.flag = flag;] => [this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = flag;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean"
-[public MultipleConstructors(int id, boolean flag) {
-    this.id = id;
-    this.flag = flag;
-  }] => [/**
-   * Factory method corresponding to constructor 'MultipleConstructors(int, boolean)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [id] => [id] "id"
 [flag] => [flag] "flag"
 [UNKNOWN] => [MultipleConstructors.$clinit();]
 [UNKNOWN] => [let $instance = new MultipleConstructors();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int__boolean(id, flag);]
 [UNKNOWN] => [return $instance;]
-[public MultipleConstructors(int id, boolean flag) {
-    this.id = id;
-    this.flag = flag;
-  }] => [/**
-   * Initialization from constructor 'MultipleConstructors(int, boolean)'.
-...    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = flag;
-  }] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<ctor>"
 [id] => [id] "id"
 [flag] => [flag] "flag"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]

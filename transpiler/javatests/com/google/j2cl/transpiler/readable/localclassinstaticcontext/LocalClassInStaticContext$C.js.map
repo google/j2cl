@@ -1,47 +1,12 @@
-[public static class C {
-    public int f = 1;
-...    }
-  }] => [class C extends java_lang_Object {
-  /**
-...exports = C;
-] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C"
-[public static class C {
-    public int f = 1;
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C = 0;
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C = 0;]
-[public static class C {
-    public int f = 1;
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'C()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.<ctor>"
 [UNKNOWN] => [C.$clinit();]
 [UNKNOWN] => [let $instance = new C();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C__();]
 [UNKNOWN] => [return $instance;]
-[public static class C {
-    public int f = 1;
-...    }
-  }] => [/**
-   * Initialization from constructor 'C()'.
-...    this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C();
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C();]
-[public void test() {
-      // It should have an enclosing instance, although its outer class is static.
-...      new D().fun();
-    }] => [/**
-   * @return {void}
-...    $1D.$create__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C(this).m_fun__();
-  }] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.test"
 [new D().fun();] => [$1D.$create__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C(this).m_fun__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.C.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [public int f = 1;] => [this.f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext_C = 1;]

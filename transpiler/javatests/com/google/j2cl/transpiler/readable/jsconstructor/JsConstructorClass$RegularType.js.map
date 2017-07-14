@@ -1,29 +1,9 @@
-[public static class RegularType {
-    public RegularType(Object b) {}
-  }] => [class RegularType extends java_lang_Object {
-  /**
-...exports = RegularType;
-] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType"
-[public static class RegularType {
-    public RegularType(Object b) {}
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType"
 [UNKNOWN] => [super();]
-[public RegularType(Object b) {}] => [/**
-   * Factory method corresponding to constructor 'RegularType(Object)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType.<ctor>"
 [b] => [b] "b"
 [UNKNOWN] => [RegularType.$clinit();]
 [UNKNOWN] => [let $instance = new RegularType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_RegularType__java_lang_Object(b);]
 [UNKNOWN] => [return $instance;]
-[public RegularType(Object b) {}] => [/**
-   * Initialization from constructor 'RegularType(Object)'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_RegularType();
-  }] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.RegularType.<ctor>"
 [b] => [b] "b"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_RegularType();]

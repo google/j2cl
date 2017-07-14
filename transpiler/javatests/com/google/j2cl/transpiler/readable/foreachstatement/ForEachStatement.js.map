@@ -1,45 +1,10 @@
-[public class ForEachStatement {
-  public void test(Iterable<Throwable> iterable) {
-...  }
-}] => [class ForEachStatement extends java_lang_Object {
-  /**
-...exports = ForEachStatement;
-] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement"
-[public class ForEachStatement {
-  public void test(Iterable<Throwable> iterable) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement"
 [UNKNOWN] => [super();]
-[public class ForEachStatement {
-  public void test(Iterable<Throwable> iterable) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'ForEachStatement()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<ctor>"
 [UNKNOWN] => [ForEachStatement.$clinit();]
 [UNKNOWN] => [let $instance = new ForEachStatement();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement__();]
 [UNKNOWN] => [return $instance;]
-[public class ForEachStatement {
-  public void test(Iterable<Throwable> iterable) {
-...  }
-}] => [/**
-   * Initialization from constructor 'ForEachStatement()'.
-...    this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
-  }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();]
-[public void test(Iterable<Throwable> iterable) {
-    for (Throwable t : iterable) {
-...    }
-  }] => [/**
-   * @param {Iterable<Throwable>} iterable
-...    }
-  }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [iterable] => [iterable] "iterable"
 [for (Throwable t : iterable) {
       t.toString();

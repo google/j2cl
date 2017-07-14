@@ -1,13 +1,2 @@
-[@JsFunction
-public interface EqualFunction<T> {
-  boolean equal(T first, T second);
-}] => [/**
- * @interface
-...exports = EqualFunction;
-] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction"
-[boolean equal(T first, T second);] => [/**
-   * @abstract
-...  m_equal__java_lang_Object__java_lang_Object(first, second) {
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction.equal"
 [first] => [first] "first"
 [second] => [second] "second"

@@ -1,13 +1,1 @@
-[@JsFunction
-  interface MyFunction {
-...    String x(@Nonnull String a);
-  }] => [/**
- * @interface
-...exports = MyFunction;
-] "com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction"
-[@Nonnull
-    String x(@Nonnull String a);] => [/**
-   * @abstract
-...  m_x__java_lang_String(a) {
-  }] "com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction.x"
 [a] => [a] "a"

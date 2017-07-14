@@ -1,43 +1,9 @@
-[public class StaticFieldAccessLevels {
-  public static int a;
-...  }
-}] => [class StaticFieldAccessLevels extends java_lang_Object {
-  /**
-...exports = StaticFieldAccessLevels;
-] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels"
-[public class StaticFieldAccessLevels {
-  public static int a;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels"
 [UNKNOWN] => [super();]
-[public class StaticFieldAccessLevels {
-  public static int a;
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'StaticFieldAccessLevels()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.<ctor>"
 [UNKNOWN] => [StaticFieldAccessLevels.$clinit();]
 [UNKNOWN] => [let $instance = new StaticFieldAccessLevels();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticFieldAccessLevels {
-  public static int a;
-...  }
-}] => [/**
-   * Initialization from constructor 'StaticFieldAccessLevels()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();
-  }] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();]
-[public int test() {
-    return b ? a : StaticFieldAccessLevels.d;
-  }] => [/**
-   * @return {number}
-...    return StaticFieldAccessLevels.$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ ? StaticFieldAccessLevels.$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels : StaticFieldAccessLevels.$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;
-  }] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.test"
 [return b ? a : StaticFieldAccessLevels.d;] => [return StaticFieldAccessLevels.$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ ? StaticFieldAccessLevels.$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels : StaticFieldAccessLevels.$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

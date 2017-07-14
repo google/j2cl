@@ -1,28 +1,8 @@
-[@JsType(namespace = "bar.foo.baz")
-  static class InnerClass {}] => [class InnerClass extends java_lang_Object {
-  /**
-...exports = InnerClass;
-] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass"
-[@JsType(namespace = "bar.foo.baz")
-  static class InnerClass {}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass"
 [UNKNOWN] => [super();]
-[@JsType(namespace = "bar.foo.baz")
-  static class InnerClass {}] => [/**
-   * Factory method corresponding to constructor 'InnerClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass__();]
 [UNKNOWN] => [return $instance;]
-[@JsType(namespace = "bar.foo.baz")
-  static class InnerClass {}] => [/**
-   * Initialization from constructor 'InnerClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass();
-  }] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

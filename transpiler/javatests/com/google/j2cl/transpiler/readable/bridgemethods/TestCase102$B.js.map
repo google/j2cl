@@ -1,45 +1,5 @@
-[abstract static class B<B1> implements BI1, BI2 {
-    public abstract String get(B1 value);
-  }] => [/**
- * @abstract
-...exports = B;
-] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.B"
-[abstract static class B<B1> implements BI1, BI2 {
-    public abstract String get(B1 value);
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.B"
 [UNKNOWN] => [super();]
-[abstract static class B<B1> implements BI1, BI2 {
-    public abstract String get(B1 value);
-  }] => [/**
-   * Initialization from constructor 'B()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_B();
-  }] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.B.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_B();]
-[public abstract String get(B1 value);] => [/**
-   * @abstract
-...  m_get__java_lang_Object(value) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.B.get"
 [value] => [value] "value"
-[UNKNOWN] => [/**
-   * @abstract
-   * @override
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_lang_String(arg0) {
-  }]
-[UNKNOWN] => [/**
-   * @abstract
-   * @override
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  get(arg0) {
-  }]
 [UNKNOWN] => [java_lang_Object.$clinit();]

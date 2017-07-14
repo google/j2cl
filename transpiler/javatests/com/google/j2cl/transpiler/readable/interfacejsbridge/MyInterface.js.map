@@ -1,11 +1,1 @@
-[interface MyInterface {
-  int foo(int a);
-}] => [/**
- * @interface
-...exports = MyInterface;
-] "com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface"
-[int foo(int a);] => [/**
-   * @abstract
-...  m_foo__int(a) {
-  }] "com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface.foo"
 [a] => [a] "a"

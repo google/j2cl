@@ -1,45 +1,10 @@
-[public class AnonymousClass {
-  public void main() {
-...  }
-}] => [class AnonymousClass extends java_lang_Object {
-  /**
-...exports = AnonymousClass;
-] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass"
-[public class AnonymousClass {
-  public void main() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass"
 [UNKNOWN] => [super();]
-[public class AnonymousClass {
-  public void main() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'AnonymousClass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.<ctor>"
 [UNKNOWN] => [AnonymousClass.$clinit();]
 [UNKNOWN] => [let $instance = new AnonymousClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass__();]
 [UNKNOWN] => [return $instance;]
-[public class AnonymousClass {
-  public void main() {
-...  }
-}] => [/**
-   * Initialization from constructor 'AnonymousClass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass();
-  }] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass();]
-[public void main() {
-    SomeClass instance =
-...        };
-  }] => [/**
-   * @return {void}
-...    let instance = $1.$create__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass__int(this, 1);
-  }] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.main"
 [SomeClass instance =
         new SomeClass(1) {
 ...          }

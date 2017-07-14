@@ -1,53 +1,10 @@
-[class Subclass extends Superclass<AssertionError> {
-  // bridge method: m1(Error a) {m1((AssertionError) a);}
-...  public void m1(AssertionError a) {}
-}] => [/**
- * @extends {Superclass<AssertionError>}
-...exports = Subclass;
-] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass"
-[class Subclass extends Superclass<AssertionError> {
-  // bridge method: m1(Error a) {m1((AssertionError) a);}
-...  public void m1(AssertionError a) {}
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass"
 [UNKNOWN] => [super();]
-[class Subclass extends Superclass<AssertionError> {
-  // bridge method: m1(Error a) {m1((AssertionError) a);}
-...  public void m1(AssertionError a) {}
-}] => [/**
-   * Factory method corresponding to constructor 'Subclass()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<ctor>"
 [UNKNOWN] => [Subclass.$clinit();]
 [UNKNOWN] => [let $instance = new Subclass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass__();]
 [UNKNOWN] => [return $instance;]
-[class Subclass extends Superclass<AssertionError> {
-  // bridge method: m1(Error a) {m1((AssertionError) a);}
-...  public void m1(AssertionError a) {}
-}] => [/**
-   * Initialization from constructor 'Subclass()'.
-...    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass();
-  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass();]
-[@Override
-  public void m1(AssertionError a) {}] => [/**
-   * @param {AssertionError} a
-...  m_m1__java_lang_AssertionError(a) {
-  }] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.m1"
 [a] => [a] "a"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {Error} arg0
-   * @return {void}
-   * @public
-   */
-  m_m1__java_lang_Error(arg0) {
-    this.m_m1__java_lang_AssertionError(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));
-  }]
 [UNKNOWN] => [this.m_m1__java_lang_AssertionError(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));]
 [UNKNOWN] => [Superclass.$clinit();]

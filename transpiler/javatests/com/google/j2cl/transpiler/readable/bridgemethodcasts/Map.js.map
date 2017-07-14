@@ -1,12 +1,2 @@
-[public interface Map<K, V> {
-  V put(K key, V value);
-}] => [/**
- * @interface
-...exports = Map;
-] "com.google.j2cl.transpiler.readable.bridgemethodcasts.Map"
-[V put(K key, V value);] => [/**
-   * @abstract
-...  m_put__java_lang_Object__java_lang_Object(key, value) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.put"
 [key] => [key] "key"
 [value] => [value] "value"

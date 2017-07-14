@@ -1,12 +1,1 @@
-[@JsType
-interface MyJsInterface {
-  int foo(int a);
-}] => [/**
- * @interface
-...exports = MyJsInterface;
-] "com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface"
-[int foo(int a);] => [/**
-   * @abstract
-...  foo(a) {
-  }] "com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.foo"
 [a] => [a] "a"

@@ -1,75 +1,16 @@
-[public class MethodReferences<T> {
-
-...  }
-}] => [/**
- * @template C_T
-...exports = MethodReferences;
-] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences"
-[public class MethodReferences<T> {
-
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences"
 [UNKNOWN] => [super();]
-[public class MethodReferences<T> {
-
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'MethodReferences()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.<ctor>"
 [UNKNOWN] => [MethodReferences.$clinit();]
 [UNKNOWN] => [let $instance = new MethodReferences();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences__();]
 [UNKNOWN] => [return $instance;]
-[public class MethodReferences<T> {
-
-...  }
-}] => [/**
-   * Initialization from constructor 'MethodReferences()'.
-...    this.$init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences();
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences();]
-[static Object m() {
-    return new Object();
-  }] => [/**
-   * @return {*}
-...    return java_lang_Object.$create__();
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.m"
 [UNKNOWN] => [MethodReferences.$clinit();]
 [return new Object();] => [return java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.m"
-[public Boolean isA() {
-    return true;
-  }] => [/**
-   * @return {?boolean}
-...    return true;
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.isA"
 [return true;] => [return true;] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.isA"
-[Object self() {
-    return this;
-  }] => [/**
-   * @return {*}
-...    return this;
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.self"
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.self"
-[Boolean sameAs(Number n) {
-    return false;
-  }] => [/**
-   * @param {(Number|?number)} n
-...    return false;
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.sameAs"
 [n] => [n] "n"
 [return false;] => [return false;] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.sameAs"
-[void main() {
-    Producer<Object> objectFactory = Object::new;
-...    JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = this::sameAs;
-  }] => [/**
-   * @return {void}
-...    });
-  }] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.main"
 [UNKNOWN] => [let /** MethodReferences<*> */ $$qualifier1, /** MethodReferences<*> */ $$qualifier2, /** MethodReferences<*> */ $$qualifier3;]
 [Producer<Object> objectFactory = Object::new;] => [let objectFactory = /**@type {!$Lambda$Producer$1<C_T>} */ ($Lambda$Producer$1.$create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(this));] "com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.main"
 [objectFactory] => [objectFactory] "objectFactory"

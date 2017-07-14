@@ -1,25 +1,4 @@
-[interface List<T> {
-    default void add(T elem) {}
-...    }
-  }] => [/**
- * @interface
-...exports = List;
-] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List"
-[default void add(T elem) {}] => [/**
-   * @param {C_List_T} elem
-...  m_add__java_lang_Object(elem) {
-  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.add"
 [elem] => [elem] "elem"
-[default void remove(T[] elems) {}] => [/**
-   * @param {Array<C_List_T>} elems
-...  m_remove__arrayOf_java_lang_Object(elems) {
-  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.remove"
 [elems] => [elems] "elems"
-[default List<T> sublist(int startIndex, int endIndex) {
-      return null;
-    }] => [/**
-   * @param {number} startIndex
-...  m_sublist__int__int(startIndex, endIndex) {
-  }] "com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.sublist"
 [startIndex] => [startIndex] "startIndex"
 [endIndex] => [endIndex] "endIndex"

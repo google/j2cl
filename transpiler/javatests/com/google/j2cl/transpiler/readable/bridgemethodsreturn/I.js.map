@@ -1,11 +1,1 @@
-[public interface I<T, S> {
-  T fun(S s);
-}] => [/**
- * @interface
-...exports = I;
-] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.I"
-[T fun(S s);] => [/**
-   * @abstract
-...  m_fun__java_lang_Object(s) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.I.fun"
 [s] => [s] "s"

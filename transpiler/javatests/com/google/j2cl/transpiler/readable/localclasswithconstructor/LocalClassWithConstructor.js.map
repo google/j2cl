@@ -1,45 +1,10 @@
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [class LocalClassWithConstructor extends java_lang_Object {
-  /**
-...exports = LocalClassWithConstructor;
-] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor"
 [UNKNOWN] => [super();]
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'LocalClassWithConstructor()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<ctor>"
 [UNKNOWN] => [LocalClassWithConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new LocalClassWithConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__();]
 [UNKNOWN] => [return $instance;]
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [/**
-   * Initialization from constructor 'LocalClassWithConstructor()'.
-...    this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor();
-  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor();]
-[public void test(final int p) {
-    final int localVar = 1;
-...    new LocalClass(1);
-  }] => [/**
-   * @param {number} p
-...    $1LocalClass.$create__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int(this, localVar, p, 1);
-  }] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.test"
 [p] => [p] "p"
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.test"
 [localVar] => [localVar] "localVar"

@@ -1,38 +1,10 @@
-[public class Foo {
-
-...  private NativeBar nativeBar = new NativeBar();
-}] => [class Foo extends java_lang_Object {
-  /**
-...exports = Foo;
-] "com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo"
-[public class Foo {
-
-...  private NativeBar nativeBar = new NativeBar();
-}] => [/**
-   * Private implementation constructor.
-...    this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ = null;
-  }] "com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {NativeBar} */
     this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ = null;]
-[public class Foo {
-
-...  private NativeBar nativeBar = new NativeBar();
-}] => [/**
-   * Factory method corresponding to constructor 'Foo()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo.<ctor>"
 [UNKNOWN] => [Foo.$clinit();]
 [UNKNOWN] => [let $instance = new Foo();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo__();]
 [UNKNOWN] => [return $instance;]
-[public class Foo {
-
-...  private NativeBar nativeBar = new NativeBar();
-}] => [/**
-   * Initialization from constructor 'Foo()'.
-...    this.$init__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo();
-  }] "com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

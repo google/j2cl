@@ -1,46 +1,12 @@
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [class InnerClass extends java_lang_Object {
-  /**
-...exports = InnerClass;
-] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass = null;
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {QualifiedSuperCall} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass = null;]
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'InnerClass(QualifiedSuperCall)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass.<ctor>"
 [UNKNOWN] => [InnerClass.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClass();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall($outer_this);]
 [UNKNOWN] => [return $instance;]
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [/**
-   * Initialization from constructor 'InnerClass(QualifiedSuperCall)'.
-...    this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass();
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass();]
-[public void test() {
-      QualifiedSuperCall.super.fun();
-    }] => [/**
-   * @return {void}
-...    Parent.prototype.m_fun__.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass);
-  }] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass.test"
 [QualifiedSuperCall.super.fun();] => [Parent.prototype.m_fun__.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass);] "com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

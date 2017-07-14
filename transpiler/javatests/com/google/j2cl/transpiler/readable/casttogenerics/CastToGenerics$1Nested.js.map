@@ -1,47 +1,13 @@
-[class Nested<SS> {
-      private void nestedGenericMethod(Object o) {
-...      }
-    }] => [/**
- * @template C_1Nested_SS, M_TT, C_T, C_E
-...exports = $1Nested;
-] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested"
-[class Nested<SS> {
-      private void nestedGenericMethod(Object o) {
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested = null;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {CastToGenerics<C_T, C_E>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested = null;]
-[class Nested<SS> {
-      private void nestedGenericMethod(Object o) {
-...      }
-    }] => [/**
-   * Factory method corresponding to constructor 'Nested(CastToGenerics)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested.<ctor>"
 [UNKNOWN] => [$1Nested.$clinit();]
 [UNKNOWN] => [let $instance = new $1Nested();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class Nested<SS> {
-      private void nestedGenericMethod(Object o) {
-...      }
-    }] => [/**
-   * Initialization from constructor 'Nested(CastToGenerics)'.
-...    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested();
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_1Nested();]
-[private void nestedGenericMethod(Object o) {
-        TT t = (TT) o;
-      }] => [/**
-   * @param {*} o
-...    let t = /**@type {M_TT} */ ($Casts.$to(o, Enum));
-  }] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested.nestedGenericMethod"
 [o] => [o] "o"
 [TT t = (TT) o;] => [let t = /**@type {M_TT} */ ($Casts.$to(o, Enum));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1Nested.nestedGenericMethod"
 [t] => [t] "t"

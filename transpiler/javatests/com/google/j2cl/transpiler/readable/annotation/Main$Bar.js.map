@@ -1,48 +1,13 @@
-[class Bar {
-
-...    }
-  }] => [class Bar extends java_lang_Object {
-  /**
-...exports = Bar;
-] "com.google.j2cl.transpiler.readable.annotation.Main.Bar"
-[class Bar {
-
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    this.f_$outer_this__com_google_j2cl_transpiler_readable_annotation_Main_Bar = null;
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.Bar"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_annotation_Main_Bar = null;]
-[class Bar {
-
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'Bar(Main)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.<ctor>"
 [UNKNOWN] => [Bar.$clinit();]
 [UNKNOWN] => [let $instance = new Bar();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_annotation_Main_Bar__com_google_j2cl_transpiler_readable_annotation_Main($outer_this);]
 [UNKNOWN] => [return $instance;]
-[class Bar {
-
-...    }
-  }] => [/**
-   * Initialization from constructor 'Bar(Main)'.
-...    this.$init__com_google_j2cl_transpiler_readable_annotation_Main_Bar();
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_annotation_Main_Bar = $outer_this;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_annotation_Main_Bar();]
-[int baz() {
-      Foo foo = null;
-...      return Foo.CONSTANT;
-    }] => [/**
-   * @return {number}
-...    return Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
-  }] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
 [Foo foo = null;] => [let foo = null;] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"
 [foo] => [foo] "foo"
 [foo.bar();] => [foo.m_bar__();] "com.google.j2cl.transpiler.readable.annotation.Main.Bar.baz"

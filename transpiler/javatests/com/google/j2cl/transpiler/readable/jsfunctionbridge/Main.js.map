@@ -1,45 +1,10 @@
-[public class Main {
-  public static void test() {
-...  }
-}] => [class Main extends java_lang_Object {
-  /**
-...exports = Main;
-] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main"
-[public class Main {
-  public static void test() {
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main"
 [UNKNOWN] => [super();]
-[public class Main {
-  public static void test() {
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Main()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.<ctor>"
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main__();]
 [UNKNOWN] => [return $instance;]
-[public class Main {
-  public static void test() {
-...  }
-}] => [/**
-   * Initialization from constructor 'Main()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main();
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main();]
-[public static void test() {
-    ApplyFunction<String> foo =
-...    foo.apply("a");
-  }] => [/**
-   * @return {void}
-...    foo("a");
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.test"
 [UNKNOWN] => [Main.$clinit();]
 [ApplyFunction<String> foo =
         new ApplyFunction<String>() {
@@ -49,22 +14,10 @@
 [callGeneric(foo, "a");] => [Main.m_callGeneric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_ApplyFunction__java_lang_Object(foo, "a");] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.test"
 [callParametric(foo, "a");] => [Main.m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main_ApplyFunction__java_lang_String(foo, "a");] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.test"
 [foo.apply("a");] => [foo("a");] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.test"
-[public static Object callGeneric(ApplyFunction af, Object o) {
-    return af.apply(o);
-  }] => [/**
-   * @param {?function(*):*} af
-...    return af(o);
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.callGeneric"
 [af] => [af] "af"
 [o] => [o] "o"
 [UNKNOWN] => [Main.$clinit();]
 [return af.apply(o);] => [return af(o);] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.callGeneric"
-[public static String callParametric(ApplyFunction<String> af, String s) {
-    return af.apply(s);
-  }] => [/**
-   * @param {?function(?string):?string} af
-...    return /**@type {?string} */ ($Casts.$to(af(s), java_lang_String));
-  }] "com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.callParametric"
 [af] => [af] "af"
 [s] => [s] "s"
 [UNKNOWN] => [Main.$clinit();]

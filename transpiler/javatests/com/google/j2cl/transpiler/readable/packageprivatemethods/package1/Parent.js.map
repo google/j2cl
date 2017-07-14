@@ -1,69 +1,15 @@
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [class Parent extends SuperParent {
-  /**
-...exports = Parent;
-] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent"
 [UNKNOWN] => [super();]
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'Parent()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<ctor>"
 [UNKNOWN] => [Parent.$clinit();]
 [UNKNOWN] => [let $instance = new Parent();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();]
 [UNKNOWN] => [return $instance;]
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [/**
-   * Initialization from constructor 'Parent()'.
-...    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent();
-  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent();]
-[@Override
-  int foo(int a) {
-    return a;
-  }] => [/**
-   * @override
-...    return a;
-  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.foo"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.foo"
-[@Override
-  public int bar(int a, int b, int c) {
-    return a + b + c + 1;
-  }] => [/**
-   * @param {number} a
-...    return a + b + c + 1;
-  }] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
 [return a + b + c + 1;] => [return a + b + c + 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
-[UNKNOWN] => [/**
-   * Forwarding method for package private method.
-   * @override
-   * @param {number} arg0
-   * @param {number} arg1
-   * @param {number} arg2
-   * @return {number}
-   * @public
-   */
-  m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(arg0, arg1, arg2) {
-    return this.m_bar__int__int__int(arg0, arg1, arg2);
-  }]
 [UNKNOWN] => [return this.m_bar__int__int__int(arg0, arg1, arg2);]
 [UNKNOWN] => [SuperParent.$clinit();]

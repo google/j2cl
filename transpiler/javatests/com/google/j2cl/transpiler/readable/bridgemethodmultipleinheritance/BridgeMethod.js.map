@@ -1,90 +1,15 @@
-[public class BridgeMethod extends Parent<AssertionError>
-    implements SomeInterface<AssertionError, Number> {
-...  public void fun(Number t) {} // not override, no bridge method.
-}] => [/**
- * @extends {Parent<AssertionError>}
-...exports = BridgeMethod;
-] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod"
-[public class BridgeMethod extends Parent<AssertionError>
-    implements SomeInterface<AssertionError, Number> {
-...  public void fun(Number t) {} // not override, no bridge method.
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod"
 [UNKNOWN] => [super();]
-[public class BridgeMethod extends Parent<AssertionError>
-    implements SomeInterface<AssertionError, Number> {
-...  public void fun(Number t) {} // not override, no bridge method.
-}] => [/**
-   * Factory method corresponding to constructor 'BridgeMethod()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<ctor>"
 [UNKNOWN] => [BridgeMethod.$clinit();]
 [UNKNOWN] => [let $instance = new BridgeMethod();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod__();]
 [UNKNOWN] => [return $instance;]
-[public class BridgeMethod extends Parent<AssertionError>
-    implements SomeInterface<AssertionError, Number> {
-...  public void fun(Number t) {} // not override, no bridge method.
-}] => [/**
-   * Initialization from constructor 'BridgeMethod()'.
-...    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();]
-[@Override
-  public void foo(AssertionError a, Number n) {}] => [/**
-   * @param {AssertionError} a
-...  m_foo__java_lang_AssertionError__java_lang_Number(a, n) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.foo"
 [a] => [a] "a"
 [n] => [n] "n"
-[@Override
-  public void bar(Number t) {}] => [/**
-   * @override
-...  m_bar__java_lang_Number(t) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.bar"
 [t] => [t] "t"
-[public void fun(Number t) {}] => [/**
-   * @param {(Number|?number)} t
-...  m_fun__java_lang_Number(t) {
-  }] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.fun"
 [t] => [t] "t"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {Error} arg0
-   * @param {(Number|?number)} arg1
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Error__java_lang_Number(arg0, arg1) {
-    this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
-  }]
 [UNKNOWN] => [this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*} arg1
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
-    this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), /**@type {(Number|?number)} */ ($Casts.$to(arg1, Number)));
-  }]
 [UNKNOWN] => [this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), /**@type {(Number|?number)} */ ($Casts.$to(arg1, Number)));]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {(Number|?number)} arg1
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
-    this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
-  }]
 [UNKNOWN] => [this.m_foo__java_lang_AssertionError__java_lang_Number(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);]
 [UNKNOWN] => [Parent.$clinit();]

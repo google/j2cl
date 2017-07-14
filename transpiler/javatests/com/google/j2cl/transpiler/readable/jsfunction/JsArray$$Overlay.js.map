@@ -1,16 +1,2 @@
-[@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class JsArray {
-...  private native void sort(MyJsFunctionInterface func);
-}] => [class JsArray$$Overlay {
-  /**
-...exports = JsArray$$Overlay;
-] "com.google.j2cl.transpiler.readable.jsfunction.JsArray"
-[@JsOverlay
-  public final void sort() {
-    sort(new MyJsFunctionImpl());
-  }] => [/**
-   * @param {Array} $thisArg
-...    $thisArg.sort(MyJsFunctionImpl.$create__());
-  }] "com.google.j2cl.transpiler.readable.jsfunction.JsArray.sort"
 [UNKNOWN] => [JsArray$$Overlay.$clinit();]
 [sort(new MyJsFunctionImpl());] => [$thisArg.sort(MyJsFunctionImpl.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.JsArray$$Overlay.sort"

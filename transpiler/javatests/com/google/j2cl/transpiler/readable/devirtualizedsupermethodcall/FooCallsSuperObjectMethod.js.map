@@ -1,44 +1,9 @@
-[public class FooCallsSuperObjectMethod {
-  @Override
-...  }
-}] => [class FooCallsSuperObjectMethod extends java_lang_Object {
-  /**
-...exports = FooCallsSuperObjectMethod;
-] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod"
-[public class FooCallsSuperObjectMethod {
-  @Override
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod"
 [UNKNOWN] => [super();]
-[public class FooCallsSuperObjectMethod {
-  @Override
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'FooCallsSuperObjectMethod()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod.<ctor>"
 [UNKNOWN] => [FooCallsSuperObjectMethod.$clinit();]
 [UNKNOWN] => [let $instance = new FooCallsSuperObjectMethod();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod__();]
 [UNKNOWN] => [return $instance;]
-[public class FooCallsSuperObjectMethod {
-  @Override
-...  }
-}] => [/**
-   * Initialization from constructor 'FooCallsSuperObjectMethod()'.
-...    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod();
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod();]
-[@Override
-  public int hashCode() {
-    return super.hashCode();
-  }] => [/**
-   * @override
-...    return super.hashCode();
-  }] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod.hashCode"
 [return super.hashCode();] => [return super.hashCode();] "com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod.hashCode"
 [UNKNOWN] => [java_lang_Object.$clinit();]

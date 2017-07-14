@@ -1,70 +1,18 @@
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
- * @extends {Enum<SimpleEnum>}
-...exports = SimpleEnum;
-] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum"
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum"
 [UNKNOWN] => [super();]
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
-   * Factory method corresponding to constructor 'SimpleEnum(String, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum.<ctor>"
 [UNKNOWN] => [SimpleEnum.$clinit();]
 [UNKNOWN] => [let $instance = new SimpleEnum();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [return $instance;]
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
-   * Initialization from constructor 'SimpleEnum(String, int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum();
-  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum();]
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
-   * @param {?string} name
-...    return $Enums.getValueFromNameAndMap(name, SimpleEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_);
-  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum"
 [UNKNOWN] => [SimpleEnum.$clinit();]
 [UNKNOWN] => [if ($Equality.$same(SimpleEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_, null)) {
       SimpleEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ = /**@type {Map<?string, !SimpleEnum>} */ ($Enums.createMapFromValues(SimpleEnum.m_values__()));
     }]
 [UNKNOWN] => [SimpleEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ = /**@type {Map<?string, !SimpleEnum>} */ ($Enums.createMapFromValues(SimpleEnum.m_values__()));]
 [UNKNOWN] => [return $Enums.getValueFromNameAndMap(name, SimpleEnum.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_);]
-[public enum SimpleEnum {
-  V1,
-  V2
-}] => [/**
-   * @return {Array<SimpleEnum>}
-...    return /**@type {!Array<SimpleEnum>} */ ($Arrays.$init([SimpleEnum.$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum, SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum], SimpleEnum));
-  }] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum"
 [UNKNOWN] => [SimpleEnum.$clinit();]
 [UNKNOWN] => [return /**@type {!Array<SimpleEnum>} */ ($Arrays.$init([SimpleEnum.$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum, SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum], SimpleEnum));]
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {SimpleEnum} */ ($Casts.$to(arg0, SimpleEnum)));
-  }]
 [UNKNOWN] => [return super.compareTo(/**@type {SimpleEnum} */ ($Casts.$to(arg0, SimpleEnum)));]
 [UNKNOWN] => [Enum.$clinit();]
 [V1] => [SimpleEnum.$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum = SimpleEnum.$create__java_lang_String__int($Util.$makeEnumName("V1"), 0);]

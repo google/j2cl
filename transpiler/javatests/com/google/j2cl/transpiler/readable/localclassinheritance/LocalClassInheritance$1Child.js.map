@@ -1,50 +1,16 @@
-[class Child extends Parent {
-      public void n() {
-...      }
-    }] => [class $1Child extends $1Parent {
-  /**
-...exports = $1Child;
-] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child"
-[class Child extends Parent {
-      public void n() {
-...      }
-    }] => [/**
-   * Private implementation constructor.
-...    this.$c_f = 0;
-  }] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {LocalClassInheritance} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Child = null;]
 [UNKNOWN] => [/** @public {number} */
     this.$c_f = 0;]
-[class Child extends Parent {
-      public void n() {
-...      }
-    }] => [/**
-   * Factory method corresponding to constructor 'Child(LocalClassInheritance, int)'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child.<ctor>"
 [UNKNOWN] => [$1Child.$clinit();]
 [UNKNOWN] => [let $instance = new $1Child();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Child__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__int($outer_this, $c_f);]
 [UNKNOWN] => [return $instance;]
-[class Child extends Parent {
-      public void n() {
-...      }
-    }] => [/**
-   * Initialization from constructor 'Child(LocalClassInheritance, int)'.
-...    this.$init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Child();
-  }] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child.<ctor>"
 [UNKNOWN] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Child = $outer_this;]
 [UNKNOWN] => [this.$c_f = $c_f;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Parent__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__int($outer_this, $c_f);]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Child();]
-[public void n() {
-        int i = f;
-      }] => [/**
-   * @override
-...    let i = this.$c_f;
-  }] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child.n"
 [int i = f;] => [let i = this.$c_f;] "com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child.n"
 [i] => [i] "i"
 [UNKNOWN] => [$1Parent.$clinit();]

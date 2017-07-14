@@ -1,38 +1,10 @@
-[public class InnerClassWithConstructor {
-  public int a;
-...  }
-}] => [class InnerClassWithConstructor extends java_lang_Object {
-  /**
-...exports = InnerClassWithConstructor;
-] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor"
-[public class InnerClassWithConstructor {
-  public int a;
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor = 0;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor"
 [UNKNOWN] => [super();]
 [UNKNOWN] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor = 0;]
-[public class InnerClassWithConstructor {
-  public int a;
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'InnerClassWithConstructor()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.<ctor>"
 [UNKNOWN] => [InnerClassWithConstructor.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClassWithConstructor();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__();]
 [UNKNOWN] => [return $instance;]
-[public class InnerClassWithConstructor {
-  public int a;
-...  }
-}] => [/**
-   * Initialization from constructor 'InnerClassWithConstructor()'.
-...    this.$init__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor();
-  }] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor();]
 [UNKNOWN] => [java_lang_Object.$clinit();]

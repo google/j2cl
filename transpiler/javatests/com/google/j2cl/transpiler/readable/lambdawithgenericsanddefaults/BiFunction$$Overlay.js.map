@@ -1,16 +1,3 @@
-[@FunctionalInterface
-interface BiFunction<T, U, R> {
-...  }
-}] => [class BiFunction$$Overlay {
-  /**
-...exports = BiFunction$$Overlay;
-] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction"
-[default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
-    return (t, u) -> after.apply(this.apply(t, u));
-  }] => [/**
-   * @template M_V, C_T, C_U, C_R
-...    return /**@type {!$Lambda$BiFunction$0<*, *, *, *>} */ ($Lambda$BiFunction$0.$create__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function($thisArg, after));
-  }] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.andThen"
 [after] => [after] "after"
 [UNKNOWN] => [BiFunction$$Overlay.$clinit();]
 [return (t, u) -> after.apply(this.apply(t, u));] => [return /**@type {!$Lambda$BiFunction$0<*, *, *, *>} */ ($Lambda$BiFunction$0.$create__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function($thisArg, after));] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay.andThen"

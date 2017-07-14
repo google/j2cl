@@ -1,13 +1,1 @@
-[interface SubInterface extends MyJsInterface, MyInterface {
-  @Override
-  int foo(int a);
-}] => [/**
- * @interface
-...exports = SubInterface;
-] "com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface"
-[@Override
-  int foo(int a);] => [/**
-   * @abstract
-...  foo(a) {
-  }] "com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface.foo"
 [a] => [a] "a"

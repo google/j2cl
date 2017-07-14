@@ -1,59 +1,14 @@
-[public class StaticJsMembers {
-
-...  }
-}] => [class StaticJsMembers extends java_lang_Object {
-  /**
-...exports = StaticJsMembers;
-] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers"
-[public class StaticJsMembers {
-
-...  }
-}] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers"
 [UNKNOWN] => [super();]
-[public class StaticJsMembers {
-
-...  }
-}] => [/**
-   * Factory method corresponding to constructor 'StaticJsMembers()'.
-...    return $instance;
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<ctor>"
 [UNKNOWN] => [StaticJsMembers.$clinit();]
 [UNKNOWN] => [let $instance = new StaticJsMembers();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__();]
 [UNKNOWN] => [return $instance;]
-[public class StaticJsMembers {
-
-...  }
-}] => [/**
-   * Initialization from constructor 'StaticJsMembers()'.
-...    this.$init__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers();
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers();]
-[@JsMethod(name = "fun")
-  public static void f1(int a) {}] => [/**
-   * @param {number} a
-...    StaticJsMembers.$clinit();
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f1"
 [a] => [a] "a"
 [UNKNOWN] => [StaticJsMembers.$clinit();]
-[@JsMethod
-  public static void f2(int a) {}] => [/**
-   * @param {number} a
-...    StaticJsMembers.$clinit();
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f2"
 [a] => [a] "a"
 [UNKNOWN] => [StaticJsMembers.$clinit();]
-[public void test() {
-    StaticJsMembers.f1(1);
-...    new Extern();
-  }] => [/**
-   * @return {void}
-...    new window.Object();
-  }] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [StaticJsMembers.f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [StaticJsMembers.f2(1);] => [StaticJsMembers.f2(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"

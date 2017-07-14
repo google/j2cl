@@ -1,18 +1,1 @@
-[interface Equals<T> {
-    boolean equals(Object o);
-...    }
-  }] => [/**
- * @interface
-...exports = Equals;
-] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals"
-[boolean equals(Object o);] => [/**
-   * @abstract
-...  equals(o) {
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals.equals"
 [o] => [o] "o"
-[default T get() {
-      return null;
-    }] => [/**
-   * @return {C_Equals_T}
-...  m_get__() {
-  }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals.get"

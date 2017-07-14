@@ -1,11 +1,1 @@
-[interface I<T extends RawType> {
-    default void f(T t) {}
-  }] => [/**
- * @interface
-...exports = I;
-] "com.google.j2cl.transpiler.readable.rawtype.RawType.I"
-[default void f(T t) {}] => [/**
-   * @param {C_I_T} t
-...  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {
-  }] "com.google.j2cl.transpiler.readable.rawtype.RawType.I.f"
 [t] => [t] "t"

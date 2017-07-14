@@ -1,67 +1,13 @@
-[public static final class B<T> implements ApplyFunction<T, Integer> {
-    @Override
-...    }
-  }] => [/**
- * @template C_B_T
-...exports = B;
-] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B"
-[public static final class B<T> implements ApplyFunction<T, Integer> {
-    @Override
-...    }
-  }] => [/**
-   * Private implementation constructor.
-...    super();
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B"
 [UNKNOWN] => [super();]
-[public static final class B<T> implements ApplyFunction<T, Integer> {
-    @Override
-...    }
-  }] => [/**
-   * Factory method corresponding to constructor 'B()'.
-...    return $Util.$makeLambdaFunction($Util.$getPrototype(B).m_apply__java_lang_Object__java_lang_Number, $instance, B.$copy);
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B.<ctor>"
 [UNKNOWN] => [B.$clinit();]
 [UNKNOWN] => [let $instance = new B();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_B__();]
 [UNKNOWN] => [return $Util.$makeLambdaFunction($Util.$getPrototype(B).m_apply__java_lang_Object__java_lang_Number, $instance, B.$copy);]
-[public static final class B<T> implements ApplyFunction<T, Integer> {
-    @Override
-...    }
-  }] => [/**
-   * Initialization from constructor 'B()'.
-...    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_B();
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B.<ctor>"
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_B();]
-[@Override
-    public T apply(T element, Integer i) {
-      return null;
-    }] => [/**
-   * @param {C_B_T} element
-...  m_apply__java_lang_Object__java_lang_Integer(element, i) {
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B.apply"
 [element] => [element] "element"
 [i] => [i] "i"
-[UNKNOWN] => [/**
-   * Bridge method.
-   * @override
-   * @this {?function(C_B_T, Integer):C_B_T}
-   * @param {*} arg0
-   * @param {(Number|?number)} arg1
-   * @return {C_B_T}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
-    return B.m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_B__java_lang_Object__java_lang_Integer(this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
-  }]
 [UNKNOWN] => [return B.m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main_B__java_lang_Object__java_lang_Integer(this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));]
-[@Override
-    public T apply(T element, Integer i) {
-      return null;
-    }] => [/**
-   * @template C_B_T
-...    return null;
-  }] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B.apply"
 [element] => [element] "element"
 [i] => [i] "i"
 [UNKNOWN] => [B.$clinit();]
