@@ -1,16 +1,20 @@
 # Description:
 #   Jsni to native js file converter tool code.
 
-package(default_visibility = [
-    "//third_party/java/j2cl:__subpackages__",
-    "//:__subpackages__",
-])
+package(default_visibility = ["//:__subpackages__"])
 
 # Apache2
 licenses(["notice"])
 
-# Libraries
-# =========================================================
+java_binary(
+    name = "JsniConverter",
+    main_class = "com.google.j2cl.tools.jsni.Runner",
+    visibility = [
+        "//:__subpackages__",
+        "//third_party/java_src/jbox2d:__subpackages__",
+    ],
+    runtime_deps = [":jsni"],
+)
 
 java_library(
     name = "jsni",

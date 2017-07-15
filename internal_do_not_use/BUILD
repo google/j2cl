@@ -41,31 +41,21 @@ alias(
 # JUnit library related
 # ***************************************************
 
-# Performs JUnit specific translation.
-java_plugin(
-    name = "junit_processor",
-    processor_class = "com.google.j2cl.junit.apt.J2clTestingProcessor",
-    deps = ["//junit/java/com/google/j2cl/junit/apt:junit_processor"],
+alias(
+    name = "junit_processor_plugin",
+    actual = "//junit/java/com/google/j2cl/junit/apt:junit_processor_plugin",
 )
 
 # ***************************************************
 # Tools related
 # **************************************************
 
-java_binary(
+alias(
     name = "JsniConverter",
-    main_class = "com.google.j2cl.tools.jsni.Runner",
-    visibility = [
-        "//:__subpackages__",
-        "//java/com/google/protobuf/contrib/gwt:__pkg__",
-        "//third_party/java_src/jbox2d:__subpackages__",
-    ],
-    runtime_deps = ["//tools/java/com/google/j2cl/tools/jsni"],
+    actual = "//tools/java/com/google/j2cl/tools/jsni:JsniConverter",
 )
 
-java_binary(
+alias(
     name = "GwtIncompatibleStripper",
-    main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
-    visibility = ["//visibility:public"],
-    runtime_deps = ["//tools/java/com/google/j2cl/tools/gwtincompatible"],
+    actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper",
 )

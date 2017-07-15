@@ -89,7 +89,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
           "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
       ],
       _js_deps = ["//javascript/closure/testing:testcase"],
-      plugins = ["//internal_do_not_use:junit_processor"],
+      plugins = ["//internal_do_not_use:junit_processor_plugin"],
       testonly = 1,
       tags = tags,
       generate_build_test=False,
