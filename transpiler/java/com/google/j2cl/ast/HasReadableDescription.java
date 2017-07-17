@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.common;
+package com.google.j2cl.ast;
 
 /**
  * Implemented by nodes that provide a readable description.

@@ -13,14 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.common;
+package com.google.j2cl.ast;
 
-/**
- * Marks a node as having metadata that the rewriter needs to preserve. Its up to the node
- * implementation to copy the metadata.
- */
-public interface HasMetadata<T extends HasMetadata<T>> {
-  void copyMetadataFrom(HasMetadata<T> store);
+/** Abstracts JsInterop name related information for the AST nodes. */
+public interface HasJsNameInfo {
+  /** The name specified directly on a type, method or field. */
+  String getSimpleJsName();
 
-  T getMetadata();
+  /** The namespace specified on a package, type, method or field. */
+  String getJsNamespace();
+
+  /** Whether it is a native type, method or field. */
+  boolean isNative();
 }

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.j2cl.frontend.common;
+package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,7 +32,7 @@ import java.util.zip.ZipFile;
 
 /** Small fill in for io.ZipFiles since it's not open source yet. */
 // TODO(dankurka): remove this once io.ZipFiles is open source.
-public final class ZipFiles {
+final class ZipFiles {
 
   private static final class ZipEntryByteSource extends ByteSource {
 

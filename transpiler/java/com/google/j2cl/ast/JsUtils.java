@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.common;
+package com.google.j2cl.ast;
 
 /** Some JavaScript related utility functions. */
 public class JsUtils {

@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.common;
+package com.google.j2cl.frontend;
 
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;

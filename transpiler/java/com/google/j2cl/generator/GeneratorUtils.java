@@ -28,7 +28,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;

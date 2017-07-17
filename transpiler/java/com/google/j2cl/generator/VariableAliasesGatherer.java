@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator.visitors;
+package com.google.j2cl.generator;
 
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
@@ -32,7 +32,7 @@ import java.util.Set;
  * Traverses a Type and gathers variable names in each method and creates non colliding local
  * aliases for variables that collide with import module names or collide with JavaScript keywords.
  */
-public class VariableAliasesGatheringVisitor extends AbstractVisitor {
+class VariableAliasesGatherer extends AbstractVisitor {
 
   /**
    * Returns the aliases of the variables whose names collide with import aliases or Javascript

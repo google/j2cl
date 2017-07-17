@@ -17,10 +17,10 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;

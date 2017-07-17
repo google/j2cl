@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.tools.jsni;
 
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;

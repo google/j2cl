@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator.visitors;
+package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -51,7 +51,7 @@ import java.util.Set;
  * Traverses a Type, gathers imports for all things it references and creates non colliding local
  * aliases for each import.
  */
-public class ImportGatherer extends AbstractVisitor {
+class ImportGatherer extends AbstractVisitor {
 
   /**
    * Enums for describing the category of an import.

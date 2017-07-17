@@ -24,7 +24,7 @@ java_library(
         "//java/com/google/common/io",
         "//third_party/java/args4j",
         "//third_party:jdt-core",
-        "//transpiler/java/com/google/j2cl/frontend/common",
-        "//transpiler/java/com/google/j2cl/problems",
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )

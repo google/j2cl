@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator.visitors;
+package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.TypeDescriptor;
 
@@ -26,7 +26,7 @@ import com.google.j2cl.ast.TypeDescriptor;
  * }
  * </pre>
  */
-public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
+class Import implements Comparable<Import> {
 
   private String alias;
   private TypeDescriptor typeDescriptor;
@@ -37,7 +37,6 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
   }
 
   /** Returns the alias. */
-  @Override
   public String getAlias() {
     return alias;
   }
@@ -59,7 +58,6 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
   }
 
   /** Returns the associated type descriptor. */
-  @Override
   public TypeDescriptor getElement() {
     return typeDescriptor;
   }

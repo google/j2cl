@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.generator.visitors.Import;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

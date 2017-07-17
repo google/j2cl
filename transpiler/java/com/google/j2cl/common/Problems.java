@@ -13,14 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.problems;
+package com.google.j2cl.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.common.J2clUtils;
-import com.google.j2cl.common.SourcePosition;
 import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Collections;

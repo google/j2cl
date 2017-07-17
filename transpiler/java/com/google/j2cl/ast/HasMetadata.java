@@ -13,11 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator.visitors;
+package com.google.j2cl.ast;
 
-/** A generic alias interface. */
-public interface Alias<T> {
-  T getElement();
+/**
+ * Marks a node as having metadata that the rewriter needs to preserve. Its up to the node
+ * implementation to copy the metadata.
+ */
+public interface HasMetadata<T extends HasMetadata<T>> {
+  void copyMetadataFrom(HasMetadata<T> store);
 
-  String getAlias();
+  T getMetadata();
 }

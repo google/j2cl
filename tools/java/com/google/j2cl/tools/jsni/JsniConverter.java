@@ -17,10 +17,10 @@ package com.google.j2cl.tools.jsni;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
-import com.google.j2cl.problems.Problems;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;

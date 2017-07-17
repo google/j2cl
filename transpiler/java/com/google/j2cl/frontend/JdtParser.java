@@ -17,9 +17,8 @@ package com.google.j2cl.frontend;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.frontend.common.GwtIncompatibleNodeCollector;
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

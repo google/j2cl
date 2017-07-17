@@ -20,12 +20,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatherer;
-import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
-import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -51,7 +48,7 @@ public abstract class JavaScriptGenerator {
     importsByCategory = ImportGatherer.gatherImports(type, declareLegacyNamespace);
     Collection<Import> imports = importsByCategory.values();
     Map<Variable, String> aliasByVariable =
-        VariableAliasesGatheringVisitor.gatherVariableAliases(imports, type);
+        VariableAliasesGatherer.gatherVariableAliases(imports, type);
     environment = new GenerationEnvironment(imports, aliasByVariable);
   }
 

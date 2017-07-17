@@ -13,14 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.sourcemap;
+package com.google.j2cl.ast;
 
-import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.common.SourcePosition;
 
-/**
- * An interface for source nodes that know their position in the original source.
- */
+/** An interface for source nodes that know their position in the original source. */
 public interface HasSourcePosition extends HasMetadata<HasSourcePosition> {
   // The location in the original Java source file.
   SourcePosition getSourcePosition();

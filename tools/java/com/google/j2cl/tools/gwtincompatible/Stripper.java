@@ -13,9 +13,9 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import com.google.j2cl.frontend.common.FrontendUtils;
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.frontend.FrontendUtils;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;

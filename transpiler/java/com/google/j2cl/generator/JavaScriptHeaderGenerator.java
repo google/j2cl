@@ -17,9 +17,8 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashSet;
 import java.util.Set;
 

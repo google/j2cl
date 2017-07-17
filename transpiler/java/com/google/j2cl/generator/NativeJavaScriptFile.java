@@ -17,8 +17,8 @@ package com.google.j2cl.generator;
 
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

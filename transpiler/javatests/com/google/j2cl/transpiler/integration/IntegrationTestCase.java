@@ -21,7 +21,7 @@ import com.google.common.io.Files;
 import com.google.common.truth.Correspondence;
 import com.google.devtools.build.runtime.Runfiles;
 import com.google.j2cl.common.J2clUtils;
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.J2clTranspiler;
 import java.io.File;
 import java.io.IOException;

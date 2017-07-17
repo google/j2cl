@@ -17,8 +17,6 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.common.HasReadableDescription;
-import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 
 /** Abstract base class for class members. */

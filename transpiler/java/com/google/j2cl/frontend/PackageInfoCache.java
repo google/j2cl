@@ -15,14 +15,13 @@
  */
 package com.google.j2cl.frontend;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.problems.Problems;
-import com.google.j2cl.problems.Problems.Message;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.Message;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;

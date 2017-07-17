@@ -36,10 +36,9 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
-import com.google.j2cl.problems.Problems;
+import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashMap;
 import java.util.Map;
 
