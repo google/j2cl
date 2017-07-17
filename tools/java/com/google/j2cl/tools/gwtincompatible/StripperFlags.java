@@ -14,6 +14,7 @@
 
 package com.google.j2cl.tools.gwtincompatible;
 
+import com.google.j2cl.common.Problems;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
@@ -34,7 +35,7 @@ public class StripperFlags {
   )
   protected String outputPath;
 
-  protected static StripperFlags parse(String[] args) {
+  protected static StripperFlags parse(String[] args, Problems problems) {
     StripperFlags flags = new StripperFlags();
     CmdLineParser parser = new CmdLineParser(flags);
 
@@ -44,7 +45,7 @@ public class StripperFlags {
       String message = e.getMessage() + "\n";
       message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
       message += "\nuse -help for a list of possible options in more details";
-      System.out.println(message);
+      problems.error(message);
     }
     return flags;
   }

@@ -149,8 +149,7 @@ public class J2clTranspiler {
   private void loadOptions(String[] args) {
     timingCollector.startSubSample("Parse flags");
 
-    FrontendFlags flags = new FrontendFlags(problems);
-    flags.parse(args);
+    FrontendFlags flags = FrontendFlags.parse(args, problems);
     problems.abortIfRequested();
 
     options = FrontendOptions.create(flags, problems);
@@ -329,7 +328,7 @@ public class J2clTranspiler {
   public static void main(String[] args) {
     J2clTranspiler transpiler = new J2clTranspiler();
     Result result = transpiler.transpile(args);
-    result.getProblems().report(System.out, System.err);
+    result.getProblems().report(System.err);
     System.exit(result.getExitCode());
   }
 }

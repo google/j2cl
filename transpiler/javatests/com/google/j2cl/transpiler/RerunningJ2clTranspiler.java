@@ -63,7 +63,7 @@ public class RerunningJ2clTranspiler {
       try {
         Result result = transpiler.transpile(args);
         success = result.getExitCode() == 0;
-        result.getProblems().report(System.out, System.err);
+        result.getProblems().report(System.err);
       } catch (RuntimeException r) {
         // Compiler correctness preconditions were violated. Log a stacktrace and quit the test
         r.printStackTrace();
@@ -72,9 +72,11 @@ public class RerunningJ2clTranspiler {
     }
   }
 
-  public static void main(final String[] args) throws ZipException, IOException {
-    FrontendFlags frontendFlags = new FrontendFlags(new Problems());
-    frontendFlags.parse(args);
+  public static void main(final String[] args) throws Exception {
+    Problems problems = new Problems();
+    FrontendFlags frontendFlags = FrontendFlags.parse(args, problems);
+    problems.abortIfRequested();
+
     File outputZip = new File(frontendFlags.output);
 
     boolean firstCompileSuccess = compile(new CompilerRunner(args));

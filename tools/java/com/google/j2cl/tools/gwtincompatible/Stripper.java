@@ -30,31 +30,32 @@ import java.util.List;
 public class Stripper {
 
   public static void main(String... args) {
-    StripperFlags flags = StripperFlags.parse(args);
     Problems problems = new Problems();
 
-    Path outputPath = Paths.get(flags.outputPath);
-    FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
-    abortIfError(problems);
-
-    List<String> allPaths = FrontendUtils.expandSourcePathSourceJarEntries(flags.files, problems);
-    abortIfError(problems);
-
-    JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);
-    abortIfError(problems);
-
     try {
-      outputZipFileSystem.close();
-    } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
-    }
-    abortIfError(problems);
-  }
+      StripperFlags flags = StripperFlags.parse(args, problems);
+      problems.abortIfRequested();
 
-  private static void abortIfError(Problems problems) {
-    if (problems.hasErrors()) {
-      problems.report(System.out, System.err);
-      System.exit(1);
+      Path outputPath = Paths.get(flags.outputPath);
+      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
+      problems.abortIfRequested();
+
+      List<String> allPaths = FrontendUtils.expandSourcePathSourceJarEntries(flags.files, problems);
+      problems.abortIfRequested();
+
+      JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);
+      problems.abortIfRequested();
+
+      try {
+        outputZipFileSystem.close();
+      } catch (IOException e) {
+        problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
+      }
+      problems.abortIfRequested();
+
+    } catch (Problems.Exit e) {
+      problems.report(System.err);
+      System.exit(e.getExitCode());
     }
   }
 }

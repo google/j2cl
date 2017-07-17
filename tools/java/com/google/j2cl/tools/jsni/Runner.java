@@ -50,7 +50,7 @@ public class Runner {
       jsniConverter.convert(javaFileNames, classPathEntries, new HashSet<String>(excludeFileNames));
 
     } catch (Problems.Exit e) {
-      jsniConverter.getProblems().report(System.out, System.err);
+      jsniConverter.getProblems().report(System.err);
     }
   }
 

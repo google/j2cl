@@ -165,7 +165,7 @@ public class Problems {
   }
 
   /** Prints all error messages and a summary. */
-  public void report(PrintStream outputStream, PrintStream errorStream) {
+  public void report(PrintStream errorStream) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
       errorStream.println(severityMessagePair.getValue());
     }

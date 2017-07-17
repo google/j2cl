@@ -123,7 +123,7 @@ public class IntegrationTestCase extends TestCase {
   }
 
   protected static void assertOutputContainsSnippet(Problems problems, String snippet) {
-    String output = J2clUtils.streamToString(stream -> problems.report(stream, stream));
+    String output = J2clUtils.streamToString(stream -> problems.report(stream));
     assertThat(output).named("Output").contains(snippet);
   }
 

@@ -86,21 +86,16 @@ public class FrontendFlags {
   )
   protected boolean generateTimeReport = false;
 
-  private final Problems problems;
-
-  public FrontendFlags(Problems problems) {
-    this.problems = problems;
-  }
-
   /** Parses the given args list and updates values. */
-  public void parse(String[] args) {
-    CmdLineParser parser = new CmdLineParser(this);
+  public static FrontendFlags parse(String[] args, Problems problems) {
+    FrontendFlags flags = new FrontendFlags();
+    CmdLineParser parser = new CmdLineParser(flags);
 
     try {
       args = maybeLoadFlagFile(args);
     } catch (IOException e) {
       problems.error(Message.ERR_FLAG_FILE, e.getMessage());
-      return;
+      return flags;
     }
 
     final String usage = "Usage: j2cl <options> <source files>";
@@ -108,7 +103,7 @@ public class FrontendFlags {
     try {
       parser.parseArgument(args);
     } catch (CmdLineException e) {
-      if (!help) {
+      if (!flags.help) {
         String message = e.getMessage() + "\n";
         message += usage + "\n";
         message += "use -help for a list of possible options";
@@ -116,13 +111,15 @@ public class FrontendFlags {
       }
     }
 
-    if (help) {
+    if (flags.help) {
       String message = usage + "\n";
       message += "where possible options include:\n";
       message += J2clUtils.streamToString(parser::printUsage);
       problems.info(message);
       problems.abortWhenPossible();
     }
+
+    return flags;
   }
 
   private static String[] maybeLoadFlagFile(String[] args) throws IOException {

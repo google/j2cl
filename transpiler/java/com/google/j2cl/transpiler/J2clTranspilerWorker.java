@@ -104,7 +104,7 @@ public class J2clTranspilerWorker {
 
     try {
       Result result = futureResult.get();
-      result.getProblems().report(outputStream, outputStream);
+      result.getProblems().report(outputStream);
       return result.getExitCode();
     } catch (RuntimeException | ExecutionException e) {
       // Compiler had a bug, report this and quit the process.
