@@ -22,6 +22,7 @@ import com.google.j2cl.common.Problems.Message;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -84,7 +85,7 @@ public class NativeJavaScriptFile {
    * <p>/com/google/example/nativejsfile2 => NativeJavaScriptFile
    */
   public static Map<String, NativeJavaScriptFile> getFilesByPathFromZip(
-      List<String> zipPaths, String charSet, Problems problems) {
+      List<String> zipPaths, Problems problems) {
     Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
     for (String zipPath : zipPaths) {
       try (ZipFile zipFile = new ZipFile(zipPath)) {
@@ -94,7 +95,8 @@ public class NativeJavaScriptFile {
             continue; // If the path isn't of type NATIVE_EXTENSION, don't add it.
           }
           InputStream stream = zipFile.getInputStream(entry);
-          String content = CharStreams.toString(new InputStreamReader(stream, charSet));
+          String content =
+              CharStreams.toString(new InputStreamReader(stream, StandardCharsets.UTF_8));
           Closeables.closeQuietly(stream);
           NativeJavaScriptFile file = new NativeJavaScriptFile(entry.getName(), content, zipPath);
           loadedFilesByPath.put(file.getPathWithoutExtension(), file);

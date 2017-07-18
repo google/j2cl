@@ -26,5 +26,6 @@ java_library(
         "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/frontend",
+        "//transpiler/java/com/google/j2cl/generator",
     ],
 )

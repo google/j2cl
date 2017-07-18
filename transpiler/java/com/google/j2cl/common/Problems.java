@@ -34,9 +34,6 @@ public class Problems {
     ERR_FLAG_FILE("Cannot load flag file: %s.", 1),
     ERR_FILE_NOT_FOUND("File '%s' not found.", 1),
     ERR_UNKNOWN_INPUT_TYPE("Cannot recognize input type for file '%s'.", 1),
-    ERR_INVALID_SOURCE_VERSION("Invalid source version '%s'.", 1),
-    ERR_UNSUPPORTED_ENCODING("Unsupported encoding '%s'.", 1),
-    ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output '%s': %s.", 2),
     ERR_OUTPUT_LOCATION("Output location '%s' must be a directory or .zip file.", 1),
     ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
     ERR_CANNOT_OPEN_ZIP("Cannot open zip '%s': %s.", 2),
@@ -44,7 +41,7 @@ public class Problems {
     ERR_NATIVE_JAVA_SOURCE_NO_MATCH("Cannot find matching native file '%s'.", 1),
     ERR_NATIVE_UNUSED_NATIVE_SOURCE("Native JavaScript file '%s' not used.", 1),
     ERR_CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory: %s.", 1),
-    ERR_CANNOT_OPEN_FILE("Cannot open file '%s': %s.", 2),
+    ERR_CANNOT_OPEN_FILE("Cannot open file: %s.", 1),
     ERR_PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
     ERR_CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
     ERR_GWT_INCOMPATIBLE_FOUND_IN_COMPILE(

@@ -23,7 +23,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,7 +38,6 @@ import java.util.Map.Entry;
  * generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
-  private final Charset charset;
   private final List<String> nativeJavaScriptFileZipPaths;
   private final Problems problems;
   private final Path outputPath;
@@ -48,13 +46,11 @@ public class OutputGeneratorStage {
   private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
-      Charset charset,
       List<String> nativeJavaScriptFileZipPaths,
       Path outputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
       Problems problems) {
-    this.charset = charset;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputPath = outputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
@@ -70,8 +66,7 @@ public class OutputGeneratorStage {
     timingReport.startSample("Native files gather");
 
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
-        NativeJavaScriptFile.getFilesByPathFromZip(
-            nativeJavaScriptFileZipPaths, charset.name(), problems);
+        NativeJavaScriptFile.getFilesByPathFromZip(nativeJavaScriptFileZipPaths, problems);
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
@@ -121,8 +116,7 @@ public class OutputGeneratorStage {
             outputPath.resolve(GeneratorUtils.getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
         timingReport.startSample("Write impl");
-        GeneratorUtils.writeToFile(
-            absolutePathForImpl, javaScriptImplementationSource, charset, problems);
+        GeneratorUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
 
         timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
@@ -132,7 +126,7 @@ public class OutputGeneratorStage {
                 GeneratorUtils.getRelativePath(type) + jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
         timingReport.startSample("Write header");
-        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, problems);
+        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
 
         timingReport.startSample("Render source maps");
         generateSourceMaps(
@@ -163,7 +157,6 @@ public class OutputGeneratorStage {
     String compilationUnitFilePath = j2clUnit.getFilePath();
     // Generate sourcemap files.
     new SourceMapGeneratorStage(
-            charset,
             compilationUnitFileName,
             outputPath,
             compilationUnitFilePath,

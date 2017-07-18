@@ -18,18 +18,16 @@ package com.google.j2cl.tools.gwtincompatible;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.GwtIncompatibleNodeCollector;
+import com.google.j2cl.generator.GeneratorUtils;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,22 +51,17 @@ public class JavaPreprocessor {
   public static void preprocessFiles(
       List<String> filePaths, FileSystem outputFileSystem, Problems problems) {
     for (String file : filePaths) {
+      String processedFileContent;
       try {
-        String fileContent = MoreFiles.asCharSource(Paths.get(file), Charsets.UTF_8).read();
-        String processedFileContent = processFile(fileContent);
-
-        // Write the processed file to output
-        Path outputFilePath = outputFileSystem.getPath(file);
-        Files.createDirectories(outputFilePath.getParent());
-        Files.write(outputFilePath, processedFileContent.getBytes(Charsets.UTF_8));
-
-        // Wipe entries modification time so that input->output mapping is stable
-        // regardless of the time of day. This is for blaze artifact determinism.
-        Files.setLastModifiedTime(outputFilePath, FileTime.fromMillis(0));
+        String fileContent = MoreFiles.asCharSource(Paths.get(file), StandardCharsets.UTF_8).read();
+        processedFileContent = processFile(fileContent);
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_OPEN_FILE, file, e.getMessage());
+        problems.error(Message.ERR_CANNOT_OPEN_FILE, e.toString());
         return;
       }
+
+      // Write the processed file to output
+      GeneratorUtils.writeToFile(outputFileSystem.getPath(file), processedFileContent, problems);
     }
   }
 

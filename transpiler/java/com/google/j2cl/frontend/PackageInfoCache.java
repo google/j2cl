@@ -86,7 +86,7 @@ public class PackageInfoCache {
       try {
         classPathUrls.add(new URL("file:" + classPathEntry));
       } catch (MalformedURLException e) {
-        problems.error(Message.ERR_CANNOT_OPEN_FILE, classPathEntry, e.getMessage());
+        problems.error(Message.ERR_CANNOT_OPEN_FILE, e.toString());
       }
     }
     URLClassLoader resourcesClassLoader =

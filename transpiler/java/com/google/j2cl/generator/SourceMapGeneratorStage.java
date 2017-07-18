@@ -23,7 +23,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -35,7 +34,6 @@ import java.util.Map.Entry;
 public class SourceMapGeneratorStage {
   public static final String SOURCE_MAP_SUFFIX = ".js.map";
 
-  private final Charset charset;
   private final Problems problems;
   private final Path outputPath;
   private final String javaSourceFile;
@@ -44,14 +42,12 @@ public class SourceMapGeneratorStage {
   private final String compilationUnitSourceFileName;
 
   public SourceMapGeneratorStage(
-      Charset charset,
       String compilationUnitSourceFileName,
       Path outputPath,
       String javaSourceFile,
       String javaScriptImplementationFileContents,
       Problems problems,
       boolean generateReadableSourceMaps) {
-    this.charset = charset;
     this.outputPath = outputPath;
     this.javaSourceFile = javaSourceFile;
     this.problems = problems;
@@ -76,7 +72,7 @@ public class SourceMapGeneratorStage {
       }
       Path absolutePathForSourceMap =
           outputPath.resolve(GeneratorUtils.getRelativePath(type) + SOURCE_MAP_SUFFIX);
-      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, problems);
+      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, problems);
     } catch (IOException e) {
       problems.error("Could not generate source maps for %s: %s", javaSourceFile, e.getMessage());
     }

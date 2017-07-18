@@ -31,7 +31,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
@@ -116,13 +116,12 @@ public class GeneratorUtils {
     return method.getDescriptor().getVisibility().jsText;
   }
 
-  public static void writeToFile(
-      Path outputPath, String content, Charset charset, Problems problems) {
+  public static void writeToFile(Path outputPath, String content, Problems problems) {
     try {
       // Write using the provided fileSystem (which might be the regular file system or might be a
       // zip file.)
       Files.createDirectories(outputPath.getParent());
-      Files.write(outputPath, content.getBytes(charset));
+      Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
       Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
