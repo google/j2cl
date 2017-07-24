@@ -18,8 +18,6 @@ import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.FrontendUtils;
 import java.io.IOException;
 import java.nio.file.FileSystem;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -36,11 +34,10 @@ public class Stripper {
       StripperFlags flags = StripperFlags.parse(args, problems);
       problems.abortIfRequested();
 
-      Path outputPath = Paths.get(flags.outputPath);
-      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
+      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(flags.outputPath, problems);
       problems.abortIfRequested();
 
-      List<String> allPaths = FrontendUtils.expandSourcePathSourceJarEntries(flags.files, problems);
+      List<String> allPaths = FrontendUtils.getAllSources(flags.files, problems);
       problems.abortIfRequested();
 
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);

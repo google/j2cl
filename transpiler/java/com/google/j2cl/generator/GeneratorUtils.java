@@ -126,7 +126,7 @@ public class GeneratorUtils {
       // regardless of the time of day.
       Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
     } catch (IOException e) {
-      problems.error("Could not write to file %s: %s", outputPath, e.getMessage());
+      problems.error("Could not write to file: %s", e.toString());
       problems.abortIfRequested();
     }
   }
