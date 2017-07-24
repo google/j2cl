@@ -16,6 +16,7 @@ readable_example(
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_OPTIMIZED_DEFS")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
+load("/tools/build_rules/build_test", "build_test")
 
 
 def readable_example(
@@ -45,34 +46,29 @@ def readable_example(
         name="supporting_" + name,
         srcs=supporting_srcs,
         javacopts=[
-            "-source 8",
-            "-target 8",
             "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
             "-Xep:IdentityBinaryExpression:OFF",
         ] + javacopts,
         native_srcs=native_srcs,
         deps=deps,
         plugins=plugins,
+        generate_build_test=False,
         _js_deps=js_deps,
         _declare_legacy_namespace=_declare_legacy_namespace,
-        _test_externs_list=test_externs_list,
     )
 
   # Transpile the Java files.
   j2cl_library(
       name=name,
       srcs=srcs,
-      javacopts=[
-          "-source 8",
-          "-target 8"
-      ] + javacopts,
+      javacopts=javacopts,
       native_srcs=native_srcs,
       deps=deps + (["supporting_" + name] if supporting_srcs else []),
       plugins=plugins,
+      generate_build_test=False,
       _js_deps=js_deps,
       _readable_source_maps=True,
       _declare_legacy_namespace=_declare_legacy_namespace,
-      _test_externs_list=test_externs_list,
   )
 
   # Verify compilability of generated JS.
@@ -84,4 +80,9 @@ def readable_example(
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=[":" + name],
+  )
+
+  build_test(
+      name=name + "_build_test",
+      targets=[name + "_binary"],
   )
