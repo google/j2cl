@@ -40,6 +40,8 @@ public class JsFunctionTest extends MyTestCase {
     test.testJsFunctionCallFromAMember();
     test.testJsFunctionIdentity_java();
     test.testJsFunctionIdentity_js();
+    // TODO(b/63941038): enable this test
+    // test.testJsFunctionIdentity_ctor();
     test.testJsFunctionJs2Java();
     // TODO(b/63040102): enable this test
     // test.testJsFunctionProperty();
@@ -185,6 +187,26 @@ public class JsFunctionTest extends MyTestCase {
           }
         };
     assert (id == id.identity());
+  }
+
+  private static final class MyJsFunctionIdentityInConstructor
+      implements MyJsFunctionIdentityInterface {
+
+    public MyJsFunctionIdentityInConstructor storedThis;
+
+    public MyJsFunctionIdentityInConstructor() {
+      storedThis = this;
+    }
+
+    @Override
+    public Object identity() {
+      return this;
+    }
+  }
+
+  public void testJsFunctionIdentity_ctor() {
+    MyJsFunctionIdentityInConstructor id = new MyJsFunctionIdentityInConstructor();
+    assert (id.storedThis == id.identity());
   }
 
   public void testJsFunctionAccess() {
