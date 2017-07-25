@@ -41,12 +41,6 @@ class Casts {
    * @return {*}
    */
   static $toInternal(instance, castTypeIsInstance, castType) {
-    if (jre.checks.temporaryEarlyBailOutFromCastCheck
-        && jre.checkedMode != 'ENABLED') {
-      // TODO(b/33100017): Investigate changes to JSCompiler to remove the need
-      // for this check.
-      return instance;
-    }
     Casts.$clinit();
 
     // TODO(goktug) remove isTypeCheck after JsCompiler can remove calls to
