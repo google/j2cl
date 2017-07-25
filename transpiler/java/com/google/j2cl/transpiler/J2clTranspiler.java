@@ -306,7 +306,8 @@ public class J2clTranspiler {
     timingCollector.startSample("Close File System");
 
     FileSystem outputFileSystem = options.getOutputPath().getFileSystem();
-    if (outputFileSystem instanceof com.sun.nio.zipfs.ZipFileSystem) {
+    if (outputFileSystem.getClass().getCanonicalName().equals("com.sun.nio.zipfs.ZipFileSystem")
+        || outputFileSystem.getClass().getCanonicalName().equals("jdk.nio.zipfs.ZipFileSystem")) {
       try {
         outputFileSystem.close();
       } catch (IOException e) {

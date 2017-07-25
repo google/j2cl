@@ -204,6 +204,11 @@ public class PackageInfoCache {
     if (typeResource == null) {
       return null;
     } else {
+      if (typeResource.getProtocol().equals("jrt")) {
+        // Java 9 SDK url, ignore for now.
+        // TODO(rluble): revisit when compiling under -source 9.
+        return null;
+      }
       String resourcePath = typeResource.getFile();
       String originClassPathEntry =
           resourcePath.substring(0, resourcePath.length() - classFilePath.length());
