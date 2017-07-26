@@ -13,16 +13,6 @@ filegroup(
     srcs = ["foo_externs.js"],
 )
 
-js_library(
-    name = "externs",
-    srcs = [
-        "//javascript/externs:common",
-        "//javascript/externs/api/client",
-        ":foo_externs",
-    ],
-    deps_mgmt = "legacy",
-)
-
 integration_test(
     name = "buildtestexterns",
     srcs = glob(["*.java"]),
@@ -30,8 +20,6 @@ integration_test(
         "jre.checks.checkLevel": "'NORMAL'",
         "jre.checkedMode": "'ENABLED'",
     },
-    test_externs_list = [
-        ":externs",
-    ],
+    test_externs_list = [":foo_externs"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
