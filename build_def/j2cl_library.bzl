@@ -154,6 +154,8 @@ def j2cl_library(name,
   if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
     deps += ["//internal_do_not_use:jre"]
 
+  java_deps = java_deps[:]
+  js_deps = js_deps[:]
   for dep in deps:
     java_deps += [dep + "_java_library"]
     js_deps += [dep]
@@ -196,7 +198,7 @@ def j2cl_library(name,
         visibility=["//visibility:private"],
     )
 
-    native_srcs_zips += [native_js_sources_from_apt]
+    native_srcs_zips = native_srcs_zips + [native_js_sources_from_apt]
 
     # TODO: *Further* lock down 'visibility' of internal targets.
     if native_srcs:
@@ -205,7 +207,7 @@ def j2cl_library(name,
       native_srcs_zips += [":" + native_zip_name]
 
     # Do the transpilation
-    js_sources_from_transpile= ":" + base_name + "_j2cl_transpile.js.zip"
+    js_sources_from_transpile = ":" + base_name + "_j2cl_transpile.js.zip"
     j2cl_transpile(
         name=base_name + "_j2cl_transpile",
         # Using -src.jar of the java_library since that includes APT generated src.
