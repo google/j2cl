@@ -107,7 +107,7 @@ public class EnumSetTest extends TestSet {
     assertIterationOrder(collection);
   }
 
-  private void assertIterationOrder(Collection<Numbers> nums) {
+  private static void assertIterationOrder(Collection<Numbers> nums) {
     int lastOrdinal = -1;
     for (Numbers n : nums) {
       assertTrue(n.ordinal() > lastOrdinal);
@@ -145,11 +145,10 @@ public class EnumSetTest extends TestSet {
     assertIteration(expectedOrder2, testSet);
   }
 
-  private <E> void assertIteration(Collection<E> expected, Collection<E> actual) {
-    Iterator<E> expectedIt = expected.iterator();
-    Iterator<E> actualIt = actual.iterator();
-    expected.forEach(e -> assertEquals(e, actualIt.next()));
-    assertFalse(actualIt.hasNext());
+  private static <E> void assertIteration(Collection<E> expected, Collection<E> actual) {
+    Iterator<E> actualIter = actual.iterator();
+    expected.forEach(e -> assertEquals(e, actualIter.next()));
+    assertFalse(actualIter.hasNext());
   }
 
   public void testClone() {
