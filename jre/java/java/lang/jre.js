@@ -40,9 +40,6 @@ goog.define('jre.checks.type', 'AUTO');
 /** @define {string} */
 goog.define('jre.checks.critical', 'AUTO');
 
-// TODO(b/33100017): Remove once bug is fixed.
-/** @define {boolean} */
-goog.define('jre.checks.temporaryEarlyBailOutFromCastCheck', false);
 
 goog.provide('jre.logging');
 
