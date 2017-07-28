@@ -38,9 +38,10 @@ public class AddMethodNameToSourcePosition extends NormalizationPass {
                 && sourcePosition != SourcePosition.UNKNOWN
                 && sourcePosition != SourcePosition.DUMMY) {
               Method method = (Method) getCurrentMember();
-              String qualifiedMethodName = method.getDescriptor().getQualifiedSourceName();
               statement.setSourcePosition(
-                  SourcePosition.Builder.from(sourcePosition).setName(qualifiedMethodName).build());
+                  SourcePosition.Builder.from(sourcePosition)
+                      .setName(method.getDescriptor().getQualifiedBinaryName())
+                      .build());
             }
             return true;
           }

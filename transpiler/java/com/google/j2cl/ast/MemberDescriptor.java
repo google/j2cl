@@ -130,10 +130,10 @@ public abstract class MemberDescriptor extends Node
     return getJsInfo().getJsNamespace() != null;
   }
 
-  /** Returns a qualified source name for the member. */
-  public String getQualifiedSourceName() {
+  /** Returns a qualified binary name for the member. */
+  public String getQualifiedBinaryName() {
     return J2clUtils.format(
-        "%s.%s", getEnclosingTypeDescriptor().getQualifiedSourceName(), getName());
+        "%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), getName());
   }
 
   @Override
