@@ -123,7 +123,11 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
 
   private static Expression maybeInsertErasureTypeSafetyCast(
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (!fromTypeDescriptor.isTypeVariable() && !fromTypeDescriptor.isWildCardOrCapture()) {
+    TypeDescriptor leafTypeDescriptor =
+        fromTypeDescriptor.isArray()
+            ? fromTypeDescriptor.getLeafTypeDescriptor()
+            : fromTypeDescriptor;
+    if (!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture()) {
       return expression;
     } else if (!AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
       return CastExpression.newBuilder()

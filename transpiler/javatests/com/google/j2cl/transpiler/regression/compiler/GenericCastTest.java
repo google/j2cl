@@ -297,4 +297,33 @@ public class GenericCastTest {
   public void testInternalAccess() {
     new LiarFoo().testInternalAccess();
   }
+
+  private static <T> T[] newGenericArray() {
+    return (T[]) new String[] {"Hello"};
+  }
+
+  private static <T, U> T getElement(U[] array, int index) {
+    return (T) array[index];
+  }
+
+  @Test
+  public void testGenericArrayCasts() {
+    String[] array = newGenericArray();
+    assertThat(array[0]).isEqualTo("Hello");
+    assertThat(newGenericArray()[0]).isEqualTo("Hello");
+    try {
+      Integer[] intArray = newGenericArray();
+      fail("Expected ClassCastException (1)");
+    } catch (ClassCastException expected) {
+      assertThat(expected.getMessage())
+          .isEqualTo("[Ljava.lang.String; cannot be cast to [Ljava.lang.Integer;");
+    }
+    try {
+      Integer n = getElement(newGenericArray(), 0);
+      fail("Expected ClassCastException (2)");
+    } catch (ClassCastException expected) {
+      assertThat(expected.getMessage())
+          .isEqualTo("java.lang.String cannot be cast to java.lang.Integer");
+    }
+  }
 }
