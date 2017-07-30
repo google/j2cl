@@ -140,7 +140,7 @@ class LongUtils {
   }
 
   @JsType(isNative = true, name = "Long", namespace = "nativebootstrap")
-  private static class NativeLong {
+  static class NativeLong {
     public static native NativeLong fromBits(int lowBits, int highBits);
 
     public static native NativeLong fromInt(int value);

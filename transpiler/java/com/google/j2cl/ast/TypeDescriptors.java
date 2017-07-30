@@ -316,15 +316,15 @@ public class TypeDescriptors {
     ASSERTS("vmbootstrap", "Asserts"),
     ARRAYS("vmbootstrap", "Arrays"),
     CASTS("vmbootstrap", "Casts"),
-    PRIMITIVES("vmbootstrap.primitives", "Primitives"),
+    PRIMITIVES("vmbootstrap", "Primitives"),
     ENUMS("vmbootstrap", "Enums"),
+    EXCEPTIONS("vmbootstrap", "Exceptions"),
     LONG_UTILS("vmbootstrap", "LongUtils"),
     JAVA_SCRIPT_OBJECT("vmbootstrap", "JavaScriptObject"),
     JAVA_SCRIPT_FUNCTION("vmbootstrap", "JavaScriptFunction"),
     NATIVE_EQUALITY("nativebootstrap", "Equality"),
     NATIVE_UTIL("nativebootstrap", "Util"),
-    NATIVE_LONG("nativebootstrap", "Long"),
-    EXCEPTIONS("vmbootstrap", "Exceptions");
+    NATIVE_LONG("nativebootstrap", "Long");
 
     private final TypeDescriptor typeDescriptor;
 
