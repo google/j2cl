@@ -12,4 +12,7 @@ load(
 readable_example(
     name = "localnamecollision",
     srcs = glob(["**/*.java"]),
+    javacopts = [
+        "-XepDisableAllChecks",
+    ],
 )

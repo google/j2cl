@@ -11,16 +11,14 @@ load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
 j2cl_optimization_test(
     name = "BooleansTest",
     javacopts = [
-        "-Xep:SelfEquality:OFF",
-        "-Xep:IdentityBinaryExpression:OFF",
+        "-XepDisableAllChecks",
     ],
 )
 
 j2cl_optimization_test(
     name = "StringsTest",
     javacopts = [
-        "-Xep:SelfEquality:OFF",
-        "-Xep:IdentityBinaryExpression:OFF",
+        "-XepDisableAllChecks",
     ],
 )
 

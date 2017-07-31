@@ -12,5 +12,7 @@ load(
 readable_example(
     name = "equality",
     srcs = glob(["*.java"]),
-    javacopts = ["-Xep:IdentityBinaryExpression:OFF"],
+    javacopts = [
+        "-XepDisableAllChecks",
+    ],
 )
