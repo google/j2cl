@@ -309,23 +309,19 @@ public class NormalizeConstructors extends NormalizationPass {
         continue;
       }
       Method method = (Method) members.get(i);
-      if (shouldOutputStaticFactoryCreateMethod(type, method)) {
-        // Insert the factory method just before the corresponding constructor, and advance.
-        members.add(i++, factoryMethodForConstructor(method, type));
-      }
-    }
-  }
+      MethodDescriptor methodDescriptor = method.getDescriptor();
 
-  private static boolean shouldOutputStaticFactoryCreateMethod(Type type, Method method) {
-    if (type.isAbstract() || !method.isConstructor() || method.getDescriptor().isJsConstructor()) {
-      return false;
+      if (!methodDescriptor.isConstructor() || methodDescriptor.isJsConstructor()) {
+        continue;
+      }
+
+      if (type.containsMethod(ManglingNameUtils.getFactoryMethodMangledName(methodDescriptor))) {
+        continue;
+      }
+
+      // Insert the factory method just before the corresponding constructor, and advance.
+      members.add(i++, factoryMethodForConstructor(method, type));
     }
-    String mangledNameOfCreate =
-        ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor());
-    if (type.containsMethod(mangledNameOfCreate)) {
-      return false;
-    }
-    return true;
   }
 
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
