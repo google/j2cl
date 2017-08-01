@@ -68,5 +68,14 @@ public class Main {
     assert !(ints1d instanceof String[]);
     assert !(ints1d instanceof String[][]);
     assert ints1d instanceof int[];
+
+    Object ints2d = new int[1][];
+    assert ints2d instanceof Object;
+    assert ints2d instanceof Object[];
+    assert !(ints2d instanceof Object[][]);
+    assert !(ints2d instanceof String[]);
+    assert !(ints2d instanceof String[][]);
+    assert !(ints2d instanceof int[]);
+    assert ints2d instanceof int[][];
   }
 }
