@@ -19,7 +19,6 @@ public class Main {
   public static void main(String... args) {
     testFullArray();
     testPartialArray();
-    testEmptyArray();
   }
 
   private static void testFullArray() {
@@ -27,14 +26,6 @@ public class Main {
 
     // You can insert a leaf value of a different but conforming type.
     array[0] = new Person();
-
-    // You can NOT insert to an out of bounds index.
-    try {
-      array[100] = new Person();
-      assert false : "An expected failure did not occur.";
-    } catch (ArrayIndexOutOfBoundsException e) {
-      // expected
-    }
 
     // When inserting a leaf value the type must conform.
     try {
@@ -66,18 +57,5 @@ public class Main {
     // And then insert a leaf value that conforms to the strictest leaf type
     partialArray[0][0] = new Person();
     partialArray[0][0] = null;
-  }
-
-  private static void testEmptyArray() {
-    // You can create a zero length array.
-    Object[] emptyArray = new Object[0];
-
-    // But any insertion attempt will be out of bounds.
-    try {
-      emptyArray[0] = new Person();
-      assert false : "An expected failure did not occur.";
-    } catch (ArrayIndexOutOfBoundsException e) {
-      // expected
-    }
   }
 }

@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.integration.arrayliteral;
 
 public class Main {
   public static void main(String... args) {
-    testEmptyArrayLiteral();
+    testSimpleArrayLiteral();
     testOneD();
     testTwoD();
     testPartial2D();
@@ -25,15 +25,19 @@ public class Main {
     testTerseLiteral();
   }
 
-  private static void testEmptyArrayLiteral() {
+  public static void testSimpleArrayLiteral() {
     Object[] empty = new Object[] {};
     assert empty.length == 0;
-    try {
-      empty[0] = null;
-      assert false : "Should have already thrown IndexOutOfBounds.";
-    } catch (ArrayIndexOutOfBoundsException e) {
-      // expected
-    }
+    assert Object[].class == empty.getClass();
+
+    Main[] emptyM = new Main[] {};
+    assert emptyM.length == 0;
+    assert Main[].class == emptyM.getClass();
+
+    Object[] values = new Object[] {"sam", "bob", "charlie"};
+    values[0] = "jimmy";
+    // We don't throw exception on out of bounds index.
+    values[100] = "ted";
   }
 
   private static void testOneD() {
@@ -50,13 +54,8 @@ public class Main {
     oneD[1] = 5;
     oneD[2] = 5;
 
-    // You can NOT insert to an out of bounds index.
-    try {
-      oneD[3] = 5;
-      assert false : "An expected failure did not occur.";
-    } catch (ArrayIndexOutOfBoundsException e) {
-      // expected
-    }
+    // We don't throw exception on out of bounds index.
+    oneD[3] = 5;
   }
 
   private static void testPartial2D() {
@@ -98,13 +97,8 @@ public class Main {
     twoD[1][0] = main;
     twoD[1][1] = main;
 
-    // You can NOT insert to an out of bounds index.
-    try {
-      twoD[0][2] = main;
-      assert false : "An expected failure did not occur.";
-    } catch (ArrayIndexOutOfBoundsException e) {
-      // expected
-    }
+    // We don't throw exception on out of bounds index.
+    twoD[0][2] = main;
 
     // When inserting a leaf value the type must conform.
     try {

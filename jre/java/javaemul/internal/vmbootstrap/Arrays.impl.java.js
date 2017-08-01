@@ -21,16 +21,11 @@ goog.module('vmbootstrap.Arrays$impl');
 // Don't reformat these imports! The uncompiled test harness contains a bug
 // that will miss some multiline goog.require's.
 let Hashing = goog.require('nativebootstrap.Hashing$impl');
-
-let ArrayIndexOutOfBoundsException = goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
-let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Object = goog.forwardDeclare('java.lang.Object');
 let Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
-let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
-let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 /**
  * Static Array helper and devirtualized functions.
@@ -203,12 +198,6 @@ class Arrays {
    */
   static $set(array, index, value) {
     Arrays.$clinit();
-    if (ARRAY_CHECK_BOUNDS_) {
-      if (index >= array.length || index < 0) {
-        // Index must be within bounds.
-        Arrays.$throwArrayIndexOutOfBoundsException();
-      }
-    }
 
     // TODO(goktug) remove m_isTypeChecked when $canSet_ could be marked or
     // proved as side effect free.
@@ -428,28 +417,6 @@ class Arrays {
   }
 
   /**
-   * Isolates the exception throw here so that calling functions that perform
-   * casts can still be optimized by V8.
-   *
-   * @private
-   */
-  static $throwArrayIndexOutOfBoundsException() {
-    Arrays.$clinit();
-    throw Exceptions.toJs(ArrayIndexOutOfBoundsException.$create__());
-  }
-
-  /**
-   * Isolates the exception throw here so that calling functions that perform
-   * casts can still be optimized by V8.
-   *
-   * @private
-   */
-  static $throwNullPointerException() {
-    Arrays.$clinit();
-    throw Exceptions.toJs(NullPointerException.$create__());
-  }
-
-  /**
    * Ensure the array is not null before returning it.
    * @param {Array<*>} arrayOrNull
    * @return {!Array<*>}
@@ -466,20 +433,14 @@ class Arrays {
    */
   static $clinit() {
     Arrays.$clinit = function() {};
-    ArrayIndexOutOfBoundsException =
-        goog.module.get('java.lang.ArrayIndexOutOfBoundsException$impl');
-    Casts = goog.module.get('vmbootstrap.Casts$impl');
     Class = goog.module.get('java.lang.Class');
     Object = goog.module.get('java.lang.Object');
     Objects = goog.module.get('vmbootstrap.Objects$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
-    NullPointerException =
-        goog.module.get('java.lang.NullPointerException$impl');
-    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }
-};
+}
 
 
 /**
@@ -497,17 +458,6 @@ class Arrays {
  * @private
  */
 Arrays.EnhancedArray_;
-
-
-/**
- * Is off by default to match default GWT behavior. Once the standard library is
- * fixed to no longer violate this constraint, we can remove this flag and start
- * using jre.checks.bounds (which is enforced to be enabled in development).
- *
- * @define {boolean} Whether or not to check bounds on insertion.
- * @private
- */
-goog.define('ARRAY_CHECK_BOUNDS_', false);
 
 
 /**

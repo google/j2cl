@@ -15,7 +15,6 @@ integration_test(
     name = "arrayliteral",
     srcs = glob(["*.java"]),
     closure_defines = {
-        "ARRAY_CHECK_BOUNDS_": "true",
         "jre.checks.type": "'ENABLED'",
     },
 )
