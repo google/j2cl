@@ -29,7 +29,7 @@ def _get_message(ctx):
       "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
   ]
   index = len(ctx.attr.deps) + len(ctx.configuration.bin_dir.path)
-  return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx
+  return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx.label
 
 def _impl(ctx):
   separator = ctx.configuration.host_path_separator
