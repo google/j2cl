@@ -1,0 +1,108 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringListChild.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const, missingRequire, missingOverride}
+ */
+goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringListChild$impl');
+
+
+const StringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+class StringListChild extends StringList {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'StringListChild()'.
+   * @return {!StringListChild}
+   * @public
+   */
+  static $create__() {
+    StringListChild.$clinit();
+    let $instance = new StringListChild();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'StringListChild()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList__();
+    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild();
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  m_getFoo__java_lang_String(arg0) {
+    return super.m_getFoo__java_lang_Object(arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StringListChild;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StringListChild);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    StringListChild.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    StringList.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild() {
+  }
+};
+
+$Util.$setClassMetadata(
+    StringListChild,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringListChild'));
+
+
+
+/**
+ * Export class.
+ */
+exports = StringListChild;
+//# sourceMappingURL=MultipleAbstractParents$StringListChild.js.map

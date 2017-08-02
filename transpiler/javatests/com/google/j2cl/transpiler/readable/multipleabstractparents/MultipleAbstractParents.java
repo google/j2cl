@@ -54,6 +54,8 @@ public class MultipleAbstractParents {
 
   public static class StringList extends AbstractStringList {}
 
+  public static class StringListChild extends StringList {}
+
   public static void main(String... args) {
     assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
     assert new StringList().getFoo(null).equals("AbstractCollection");
