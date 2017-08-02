@@ -11,8 +11,8 @@ const Number = goog.require('java.lang.Number$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 class SubNumber extends Number {
@@ -109,8 +109,8 @@ class SubNumber extends Number {
    */
   static $clinit() {
     SubNumber.$clinit = function() {};
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
-    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     Number.$clinit();
   }
 

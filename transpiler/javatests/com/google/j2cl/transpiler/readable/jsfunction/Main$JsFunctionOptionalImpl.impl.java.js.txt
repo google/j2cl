@@ -12,8 +12,8 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 /**
@@ -107,8 +107,8 @@ class JsFunctionOptionalImpl extends java_lang_Object {
   static $clinit() {
     JsFunctionOptionalImpl.$clinit = function() {};
     Double = goog.module.get('java.lang.Double$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     java_lang_Object.$clinit();
   }
 
