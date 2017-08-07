@@ -30,13 +30,7 @@ load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 JAVAC_FLAGS = [
     "-source 8",
     "-target 8",
-    "-Xep:BooleanConstantChecker:OFF",
-    "-Xep:EqualsIncompatibleType:OFF",
-    "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
-    "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
-    "-Xep:SelfEquality:OFF",
-    "-Xep:LoopConditionChecker:OFF",
-    "-Xep:IdentityBinaryExpression:OFF",
+    "-XepDisableAllChecks",
 ]
 
 def integration_test(name,
