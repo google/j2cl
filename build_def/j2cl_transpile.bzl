@@ -89,7 +89,7 @@ def _impl(ctx):
       content = "\n".join(compiler_args)
   )
 
-  inputs = java_files
+  inputs = java_files[:]
   inputs += list(dep_files)
   inputs += js_native_zip_files
   inputs += [compiler_args_file]
