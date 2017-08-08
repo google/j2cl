@@ -287,7 +287,7 @@ def j2cl_library(name,
   # JS provider, but they don't.
   native.js_library(
       name=base_name,
-      deps=[base_name + "_js_import"],
+      exports=[base_name + "_js_import"],
       deps_mgmt = js_deps_mgmt,
       data=js_library_data,
       testonly=testonly,

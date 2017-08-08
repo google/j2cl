@@ -72,4 +72,5 @@ def j2cl_import(name,
         visibility=visibility,
         # Direct automated dep picking tools away from this target.
         tags=["avoid_dep"],
+        exports_migrated = True,
     )
