@@ -44,18 +44,10 @@ def _impl(ctx):
   )
 
 
-_j2cl_source_copy = rule(
+j2cl_source_copy = rule(
     attrs={
         "srcs": attr.label_list(mandatory=True, allow_files=[".java"]),
         "excludes": attr.string_list(),
     },
     implementation=_impl,
 )
-
-
-def j2cl_source_copy(name, srcs, excludes=[]):
-  _j2cl_source_copy(
-      name=name,
-      srcs=srcs,
-      excludes=excludes,
-  )
