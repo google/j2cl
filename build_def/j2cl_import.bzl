@@ -26,8 +26,6 @@ j2cl_library(
 """
 
 
-load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
-
 
 def j2cl_import(name,
                 jar,
