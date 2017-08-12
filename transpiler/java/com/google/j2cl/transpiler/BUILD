@@ -21,12 +21,14 @@ java_library(
 
 java_binary(
     name = "J2clTranspiler",
+    jvm_flags = ["-XX:+TieredCompilation"],
     main_class = "com.google.j2cl.transpiler.J2clTranspiler",
     runtime_deps = [":transpiler_lib"],
 )
 
 java_binary(
     name = "J2clTranspiler_worker",
+    jvm_flags = ["-XX:+TieredCompilation"],
     main_class = "com.google.j2cl.transpiler.J2clTranspilerWorker",
     runtime_deps = [":transpiler_worker_lib"],
 )
