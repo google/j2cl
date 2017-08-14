@@ -125,7 +125,6 @@ new_http_archive(
 http_archive(
   name="org_gwtproject_gwt",
   url="https://gwt.googlesource.com/gwt/+archive/master.tar.gz",
-  strip_prefix="gwt-master"
 )
 
 http_archive(
