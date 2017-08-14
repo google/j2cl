@@ -110,10 +110,10 @@ alias(
 
 alias(
     name = "gwt_java_emul",
-    actual = "@org_gwtproject_gwt//:java_emul",
+    actual = "@org_gwtproject_gwt//user:java_emul",
 )
 
 alias(
     name = "gwt_java_emul_internal",
-    actual = "@org_gwtproject_gwt//:java_emul_internal",
+    actual = "@org_gwtproject_gwt//user:java_emul_internal",
 )
