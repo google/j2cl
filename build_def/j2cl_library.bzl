@@ -42,6 +42,7 @@ def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
       testonly=testonly,
       tags=["notap", "manual"],
       cmd="cp $(location %s) $@" % env_restricted_artifact,
+      local=True,
   )
 
 def _get_absolute_labels(args, key):
@@ -75,6 +76,7 @@ def _merge_zips(srczips, outzip, tags, testonly):
       ]),
       tags=tags,
       testonly=testonly,
+      local=True,
   )
 
 def j2cl_library(name,
@@ -196,6 +198,7 @@ def j2cl_library(name,
         ]),
         tags=internal_tags,
         visibility=["//visibility:private"],
+        local=True,
     )
 
     native_srcs_zips = native_srcs_zips + [native_js_sources_from_apt]
