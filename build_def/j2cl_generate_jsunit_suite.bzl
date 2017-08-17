@@ -57,6 +57,7 @@ def _generate_test_input(name, test_class):
       cmd="echo \"%s\" > $@" % java_code,
       tags=["manual", "notap"],
       testonly = 1,
+      local=True,
   )
 
   return java_class + ".java"
@@ -117,4 +118,5 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
       testonly=1,
       tags=["manual", "notap"],
       tools=[out_jar],
+      local=True,
   )
