@@ -173,16 +173,6 @@ mss_js_compiled_module_set_flat_files(
     source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
 )
 
-build_test(
-    name = "J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set_build_test",
-    targets = [
-        # This target actually compiles the JS and needs to be referenced by a
-        # test to make sure the compile is attempted. Seems like it should be
-        # part of the MSS target binary compile... but some magic way it is not.
-        ":J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set",
-    ],
-)
-
 # ********************************************
 
 pinto_module(
@@ -233,6 +223,7 @@ pinto_module(
 
 pinto_processed_module_set(
     name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
+    enable_j2cl_legacy_mode = True,  # Deal with duplicate files. Enables ZipExpanderPlugin.
     externs_list = ["//javascript/externs:common"],
     module_graph_root = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
     order_gss_by_provide_require = False,
@@ -258,4 +249,16 @@ mss_js_compiled_module_set_flat_files(
     languages = ["en"],
     module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
     source_filegroup = ":J2clDupeAjdPintoPmfEnhancerMss_filegroup",
+)
+
+build_test(
+    name = "J2clPintoPmfEnhancerMss_buildtest",
+    targets = [
+        # This target actually compiles the JS and needs to be referenced by a
+        # test to make sure the compile is attempted. Seems like it should be
+        # part of the MSS target binary compile... but some magic way it is not.
+        ":J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set",
+        ":J2clAjdPintoPmfEnhancerMss",
+        ":J2clDupeAjdPintoPmfEnhancerMss",
+    ],
 )
