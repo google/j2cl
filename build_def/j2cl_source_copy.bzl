@@ -40,7 +40,7 @@ def _impl(ctx):
   # We need to return the output files so that they get recognized as outputs
   # from blaze
   return struct(
-      files=set(java_out_files),
+      files=depset(java_out_files),
   )
 
 

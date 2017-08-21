@@ -227,7 +227,7 @@ def j2cl_test(name,
           ":%s_generated_suite_lib" % name,
           "//javascript/closure/testing:testsuite",
       ],
-      tags = set(tags + ["manual", "notap"]),
+      tags = depset(tags + ["manual", "notap"]),
       **jsunit_parameters
   )
 

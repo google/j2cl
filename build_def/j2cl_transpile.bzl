@@ -36,7 +36,7 @@ def _impl(ctx):
   java_files = ctx.files.srcs  # java files that need to be compiled
   js_native_zip_files = ctx.files.native_srcs_zips
   deps = ctx.attr.deps
-  dep_files = set()
+  dep_files = depset()
   deps_paths = []
   java_files_paths = []
 
@@ -106,7 +106,7 @@ def _impl(ctx):
   )
 
   return struct(
-      files=set([js_zip_artifact])
+      files=depset([js_zip_artifact])
   )
 
 

@@ -31,7 +31,7 @@ def _impl(ctx):
 
   for exclude_file in exclude_files:
     converter_args += ["--excludes", exclude_file.path]
-  dep_files = set()
+  dep_files = depset()
   for dep_target in dep_targets:
     dep_files += dep_target.files
     dep_files += dep_target.default_runfiles.files  # for exported libraries
@@ -48,7 +48,7 @@ def _impl(ctx):
   )
 
   return struct(
-      files=set([zip_file]),
+      files=depset([zip_file]),
   )
 
 
