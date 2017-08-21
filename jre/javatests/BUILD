@@ -144,3 +144,13 @@ js_binary(
     extra_inputs = ["conformance_proto.txt"],
     deps = ["//jre/java:jre"],
 )
+
+# TODO(dankuka): Eventually we want to provide a library target for apps that
+# need to be compatible with both gwt tests and j2cl tests, but this will
+# require some more careful thought.
+java_library(
+    name = "gwt_test_case",
+    testonly = 1,
+    srcs = ["com/google/gwt/junit/client/GWTTestCase.java"],
+    deps = ["//third_party/java/junit"],
+)
