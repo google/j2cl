@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Reports optimized size changes caused by the current CL."""
+"""Reports size changes caused by the current CL."""
 
 from multiprocessing import Pool
 import os
 import signal
+import sys
 import zlib
 
 import repo_util
@@ -49,18 +50,18 @@ def create_pool():
   return pool
 
 
-def make_size_report():
+def make_size_report(optimized, file_name, bundle_test_targets):
   """Compare current test sizes and generate a report."""
   row_format = "  %7s%7s %s (%s)\n"
 
-  file_name = os.path.join(os.path.dirname(__file__), "size_report.txt")
-  repo_util.check_out_file(file_name)
-  size_report_file = open(file_name, "w+")
+  path_name = os.path.join(os.path.dirname(__file__), file_name)
+  repo_util.check_out_file(path_name)
+  size_report_file = open(path_name, "w+")
 
   synced_to_cl = repo_util.compute_synced_to_cl()
   repo_util.managed_repo_sync_to(synced_to_cl)
 
-  size_report_file.write("Integration tests optimized size report:\n")
+  size_report_file.write("Integration tests size report:\n")
   size_report_file.write("**************************************\n")
 
   print "  Building original and modified targets."
@@ -81,10 +82,12 @@ def make_size_report():
   original_result.get()
   modified_result.get()
 
-  print "  Collecting original and modified optimized sizes."
-  original_js_files_by_test_name = (
-      repo_util.get_js_files_by_test_name(repo_util.get_managed_path()))
-  modified_js_files_by_test_name = repo_util.get_js_files_by_test_name()
+  test_targets = None if optimized else bundle_test_targets
+  print "  Collecting original and modified sizes."
+  original_js_files_by_test_name = repo_util.get_js_files_by_test_name(
+      optimized, cwd=repo_util.get_managed_path(), test_targets=test_targets)
+  modified_js_files_by_test_name = repo_util.get_js_files_by_test_name(
+      optimized, cwd=None, test_targets=test_targets)
 
   print "  Comparing results."
   # Collect all test names
@@ -128,9 +131,9 @@ def make_size_report():
         modified_total_size += modified_size
         modified_total_size_gzip += modified_size_gzip
 
-    # If the original optimized JS file exists
+    # If the original JS file exists
     if original_size >= 0:
-      # If the modified optimized JS file exists
+      # If the modified JS file exists
       if modified_size >= 0:
         # Both files exist, so compare their sizes.
         size_percent = (modified_size / float(original_size)) * 100
@@ -147,7 +150,7 @@ def make_size_report():
           size_change_count += 1
     else:
       if modified_size >= 0:
-        # The original optimized JS file doesn't exist and the
+        # The original JS file doesn't exist and the
         # modified one does, this is a new result.
         size_change_count += 1
         size_percent = 100
@@ -235,10 +238,24 @@ def make_size_report():
 
 
 def main():
-  print "Generating the size change report:"
+  optimized = True
+  test_targets = None
+  if "--uncompiled" in sys.argv:
+    optimized = False
+    test_targets = [
+        "//third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/box2d_default:optimized_js",
+        "//third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclass:optimized_js",
+    ]
+
+  if optimized:
+    print "[OPTIMIZED] Generating the size change report:"
+  else:
+    print "[BUNDLE] Generating the size change report:"
+
+  file_name = "size_report.txt" if optimized else "size_report_uncompiled.txt"
 
   repo_util.managed_repo_validate_environment()
-  make_size_report()
+  make_size_report(optimized, file_name, test_targets)
 
 
 main()
