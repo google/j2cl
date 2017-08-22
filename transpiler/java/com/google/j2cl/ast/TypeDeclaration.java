@@ -370,7 +370,7 @@ public abstract class TypeDeclaration extends Node
     return typeParameterDescriptors
         .stream()
         .map(TypeDescriptor::getUniqueId)
-        .collect(joining("<", ", ", ">"));
+        .collect(joining(", ", "<", ">"));
   }
 
   @Override

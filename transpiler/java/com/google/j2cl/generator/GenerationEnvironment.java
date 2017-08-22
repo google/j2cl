@@ -64,13 +64,11 @@ public class GenerationEnvironment {
     checkArgument(!typeDescriptor.isTypeVariable());
     checkArgument(!typeDescriptor.isWildCardOrCapture());
     if (typeDescriptor.isUnion()) {
-      return "("
-          + typeDescriptor
-              .getUnionedTypeDescriptors()
-              .stream()
-              .map(this::aliasForType)
-              .collect(Collectors.joining(" | "))
-          + ")";
+      return typeDescriptor
+          .getUnionedTypeDescriptors()
+          .stream()
+          .map(this::aliasForType)
+          .collect(Collectors.joining(" | ", "(", ")"));
     }
 
     return aliasForType(typeDescriptor.getTypeDeclaration());

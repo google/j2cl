@@ -109,7 +109,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     TypeDescriptors.toNonNullable(type)
                         .getRawTypeDescriptor()
                         .getQualifiedBinaryName())
-            .collect(joining("(", ",", ")"));
+            .collect(joining(",", "(", ")"));
   }
 
   public abstract boolean isAbstract();
