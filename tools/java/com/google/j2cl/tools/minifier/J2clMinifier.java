@@ -14,8 +14,13 @@
 package com.google.j2cl.tools.minifier;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -525,5 +530,19 @@ public class J2clMinifier {
     writeIdentifier(minifiedContentBuffer, identifierBuffer, c);
     minifiedContentBuffer.append(c);
     return identifierBuffer;
+  }
+
+  /**
+   * Entry point to the minfier standalone binary.
+   *
+   * <p>Usage: minifier file-to-minifiy.js
+   *
+   * <p>Outputs results to stdout.
+   */
+  public static void main(String... args) throws IOException {
+    Preconditions.checkState(args.length == 1, "Provide a input file to minify");
+    String file = args[0];
+    String contents = new String(Files.readAllBytes(Paths.get(file)), StandardCharsets.UTF_8);
+    System.out.println(new J2clMinifier().minify(contents));
   }
 }

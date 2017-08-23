@@ -120,6 +120,7 @@ def integration_test(name,
       externs_list= test_externs_list,
       deps=[":" + name],
   )
+
   # For constructing readable optimized diffs.
   readable_out_defs = [ "--variable_renaming=OFF" , "--property_renaming=OFF" , "--pretty_print"]
   native.js_binary(
@@ -130,6 +131,7 @@ def integration_test(name,
       externs_list=test_externs_list,
       deps=[":" + name],
   )
+
   # For constructing readable unoptimized diffs.
   native.js_binary(
       name="readable_unoptimized_js",
@@ -138,6 +140,15 @@ def integration_test(name,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=[":" + name],
+  )
+
+  minifier = "//tools/java/com/google/j2cl/tools/minifier:J2clMinifier"
+  native.genrule(
+      name="readable_unoptimized_js_minified",
+      srcs=[":readable_unoptimized_js-bundle.js"],
+      tools=[minifier],
+      cmd="$(location %s) $(SRCS) > $(OUTS)" % minifier,
+      outs=["readable_unoptimized_js_minified-bundle.js"],
   )
 
   # For java testing.

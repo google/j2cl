@@ -15,3 +15,9 @@ java_library(
     compatible_with = ["//buildenv/target:appengine"],
     deps = ["//third_party:guava"],
 )
+
+java_binary(
+    name = "J2clMinifier",
+    main_class = "com.google.j2cl.tools.minifier.J2clMinifier",
+    runtime_deps = [":minifier"],
+)
