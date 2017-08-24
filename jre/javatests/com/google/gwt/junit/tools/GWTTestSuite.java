@@ -27,6 +27,5 @@ public class GWTTestSuite extends TestSuite {
   }
 
   public GWTTestSuite(String name) {
-    super(name);
   }
 }
