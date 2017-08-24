@@ -10,7 +10,7 @@ licenses(["notice"])
 
 java_binary(
     name = "GwtIncompatibleStripper",
-    main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
+    main_class = "com.google.j2cl.tools.gwtincompatible.StripperWorker",
     runtime_deps = ["//tools/java/com/google/j2cl/tools/gwtincompatible"],
 )
 

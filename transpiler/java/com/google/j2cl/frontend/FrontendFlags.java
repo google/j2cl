@@ -16,16 +16,9 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Splitter;
-import com.google.common.io.Files;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
@@ -91,13 +84,6 @@ public class FrontendFlags {
     FrontendFlags flags = new FrontendFlags();
     CmdLineParser parser = new CmdLineParser(flags);
 
-    try {
-      args = maybeLoadFlagFile(args);
-    } catch (IOException e) {
-      problems.error(Message.ERR_FLAG_FILE, e.getMessage());
-      return flags;
-    }
-
     final String usage = "Usage: j2cl <options> <source files>";
 
     try {
@@ -120,33 +106,5 @@ public class FrontendFlags {
     }
 
     return flags;
-  }
-
-  private static String[] maybeLoadFlagFile(String[] args) throws IOException {
-    // Loads a potential flag file
-    // Flag files are only allowed as the last parameter and need to start
-    // with an '@'
-    if (args.length == 0) {
-      return args;
-    }
-
-    String potentialFlagFile = args[args.length - 1];
-
-    if (potentialFlagFile == null || !potentialFlagFile.startsWith("@")) {
-      return args;
-    }
-
-    String flagFile = potentialFlagFile.substring(1);
-
-    List<String> combinedArgs = new ArrayList<>();
-    String flagFileContent = Files.toString(new File(flagFile), StandardCharsets.UTF_8);
-    List<String> argsFromFlagFile =
-        Splitter.on('\n').omitEmptyStrings().splitToList(flagFileContent);
-    combinedArgs.addAll(Arrays.asList(args));
-    // remove the flag file entry
-    combinedArgs.remove(combinedArgs.size() - 1);
-    combinedArgs.addAll(argsFromFlagFile);
-
-    return combinedArgs.toArray(new String[0]);
   }
 }

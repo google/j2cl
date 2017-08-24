@@ -17,6 +17,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.FrontendUtils;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.FileSystem;
 import java.util.List;
 
@@ -28,6 +29,10 @@ import java.util.List;
 public class Stripper {
 
   public static void main(String... args) {
+    new Stripper().run(args, System.err);
+  }
+
+  public void run(String[] args, PrintStream outputStream) {
     Problems problems = new Problems();
 
     try {
@@ -51,7 +56,7 @@ public class Stripper {
       problems.abortIfRequested();
 
     } catch (Problems.Exit e) {
-      problems.report(System.err);
+      problems.report(outputStream);
       System.exit(e.getExitCode());
     }
   }

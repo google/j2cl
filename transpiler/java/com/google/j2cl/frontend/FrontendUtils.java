@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems;
@@ -22,11 +23,14 @@ import com.google.j2cl.common.Problems.Message;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -89,5 +93,35 @@ public class FrontendUtils {
       problems.error(Message.ERR_CANNOT_OPEN_ZIP, outputPath.toString(), e.getMessage());
       return null;
     }
+  }
+
+  /**
+   * Loads a potential flag file and returns the flags. Flag files are only allowed as the last
+   * parameter and need to start with an '@'.
+   */
+  public static String[] expandFlagFile(String[] args) throws IOException {
+    if (args.length == 0) {
+      return args;
+    }
+
+    String potentialFlagFile = args[args.length - 1];
+
+    if (potentialFlagFile == null || !potentialFlagFile.startsWith("@")) {
+      return args;
+    }
+
+    String flagFile = potentialFlagFile.substring(1);
+
+    List<String> combinedArgs = new ArrayList<>();
+    String flagFileContent =
+        com.google.common.io.Files.toString(new File(flagFile), StandardCharsets.UTF_8);
+    List<String> argsFromFlagFile =
+        Splitter.on('\n').omitEmptyStrings().splitToList(flagFileContent);
+    Collections.addAll(combinedArgs, args);
+    // remove the flag file entry
+    combinedArgs.remove(combinedArgs.size() - 1);
+    combinedArgs.addAll(argsFromFlagFile);
+
+    return combinedArgs.toArray(new String[0]);
   }
 }

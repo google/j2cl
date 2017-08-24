@@ -13,15 +13,9 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
-import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
+import com.google.j2cl.frontend.BaseWorker;
 import com.google.j2cl.transpiler.J2clTranspiler.Result;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,71 +28,20 @@ import java.util.concurrent.Future;
  * and thus gain significant speedups. This class implements the blaze worker protocol and drives
  * J2clTranspiler as a worker.
  */
-public class J2clTranspilerWorker {
+public class J2clTranspilerWorker extends BaseWorker {
   public static void main(String[] args) {
-    if (!shouldRunAsWorker(args)) {
-      // Blaze decides at runtime through a flag if we should be running as a worker
-      // or just be performing a regular compile
-      // This falls back to the regular compiler.
-      J2clTranspiler.main(args);
-      return;
-    }
-
-    new J2clTranspilerWorker().run();
+    new J2clTranspilerWorker().start(args);
   }
 
-  @VisibleForTesting
-  void run() {
-    try {
-      dispatchWorkRequestsForever();
-    } catch (IOException e) {
-      // IOException will only occur if System.in has been closed
-      // In that case we silently exit our process
-    }
-  }
-
-  private WorkRequest getWorkRequest() throws IOException {
-    return WorkRequest.parseDelimitedFrom(getInput());
-  }
-
-  @VisibleForTesting
-  InputStream getInput() {
-    return System.in;
-  }
-
-  private void dispatchWorkRequestsForever() throws IOException {
-    while (true) {
-      WorkRequest workRequest = getWorkRequest();
-
-      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      int exitCode = runCompiler(extractArgs(workRequest), new PrintStream(outputStream));
-
-      WorkResponse.newBuilder()
-          .setExitCode(exitCode)
-          .setOutput(outputStream.toString())
-          .build()
-          .writeDelimitedTo(System.out);
-    }
-  }
-
-  @VisibleForTesting
-  J2clTranspiler createTranspiler() {
-    return new J2clTranspiler();
-  }
-
-  @VisibleForTesting
-  void exit(int code) {
-    System.exit(code);
-  }
-
-  private int runCompiler(final String[] args, PrintStream outputStream) {
+  @Override
+  public int runAsWorker(String[] args, PrintStream outputStream) {
     // Compiler has no static state, but rather uses thread local variables.
-    // Because of this we invoke the compiler on a different thread each time.
+    // Because of this, we invoke the compiler on a different thread each time.
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     Future<Result> futureResult =
         executorService.submit(
             () -> {
-              J2clTranspiler transpiler = createTranspiler();
+              J2clTranspiler transpiler = new J2clTranspiler();
               return transpiler.transpile(args);
             });
 
@@ -106,24 +49,13 @@ public class J2clTranspilerWorker {
       Result result = futureResult.get();
       result.getProblems().report(outputStream);
       return result.getExitCode();
-    } catch (RuntimeException | ExecutionException e) {
-      // Compiler had a bug, report this and quit the process.
-      e.printStackTrace(System.err);
-      exit(-2);
-      return -3;
-    } catch (InterruptedException e) {
-      // Compilation has been interrupted, set the interrupt flag in the current thread.
-      System.err.println("Transpilation interrupted.");
-      Thread.currentThread().interrupt();
+    } catch (InterruptedException | ExecutionException e) {
+      throw new RuntimeException("Internal compiler error: ", e);
     }
-    return 0;
   }
 
-  private String[] extractArgs(WorkRequest workRequest) {
-    return workRequest.getArgumentsList().toArray(new String[0]);
-  }
-
-  private static boolean shouldRunAsWorker(String[] args) {
-    return Arrays.asList(args).contains("--persistent_worker");
+  @Override
+  public void runStandard(String[] args) {
+    J2clTranspiler.main(args);
   }
 }

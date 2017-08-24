@@ -84,7 +84,7 @@ def _impl(ctx):
 
   # Create an action to write the flag file
   compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
-  ctx.file_action(
+  ctx.actions.write(
       output = compiler_args_file,
       content = "\n".join(compiler_args)
   )

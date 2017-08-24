@@ -21,6 +21,7 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.frontend.FrontendFlags;
+import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.File;
 import java.io.IOException;
@@ -72,8 +73,9 @@ public class RerunningJ2clTranspiler {
     }
   }
 
-  public static void main(final String[] args) throws Exception {
+  public static void main(final String[] rawArgs) throws Exception {
     Problems problems = new Problems();
+    String[] args = FrontendUtils.expandFlagFile(rawArgs);
     FrontendFlags frontendFlags = FrontendFlags.parse(args, problems);
     problems.abortIfRequested();
 
