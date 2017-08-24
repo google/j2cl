@@ -15,13 +15,11 @@
  */
 package com.google.gwt.junit.tools;
 
-import junit.framework.TestSuite;
-
 /**
- * This is a slimmed down version of GWTTestSuite, so that we can compile and run GWT's emul
- * tests in a JRE.
+ * This is a slimmed down version of GWTTestSuite, so that we can compile and run GWT's emul tests
+ * in a JRE.
  */
-public class GWTTestSuite extends TestSuite {
+public class GWTTestSuite {
 
   public GWTTestSuite() {
   }
