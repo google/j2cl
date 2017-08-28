@@ -1,25 +1,55 @@
-[UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {number} */
-    this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;]
-[UNKNOWN] => [/** @public {number} */
-    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;]
+[public class CascadingConstructor {
+  private int a;
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: constructor>"
+[public class CascadingConstructor {
+  private int a;
+...  }
+}] => [/** @public {number} */
+    this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: constructor>"
+[public class CascadingConstructor {
+  private int a;
+...  }
+}] => [/** @public {number} */
+    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = 0;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: constructor>"
 [a] => [a] "a"
 [b] => [b] "b"
 [UNKNOWN] => [CascadingConstructor.$clinit();]
-[UNKNOWN] => [let $instance = new CascadingConstructor();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, b);]
-[UNKNOWN] => [return $instance;]
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [let $instance = new CascadingConstructor();] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, b);] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
 [a] => [a] "a"
 [b] => [b] "b"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor();]
-[this.a = a;] => [this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = a;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int"
-[this.b = b;] => [this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = b;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int"
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<init>"
+[private CascadingConstructor(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }] => [this.$init__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor();] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<init>"
+[this.a = a;] => [this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = a;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<init>"
+[this.b = b;] => [this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ = b;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<init>"
 [a] => [a] "a"
 [UNKNOWN] => [CascadingConstructor.$clinit();]
-[UNKNOWN] => [let $instance = new CascadingConstructor();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(a);]
-[UNKNOWN] => [return $instance;]
+[public CascadingConstructor(int a) {
+    this(a, a * 2);
+  }] => [let $instance = new CascadingConstructor();] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
+[public CascadingConstructor(int a) {
+    this(a, a * 2);
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(a);] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
+[public CascadingConstructor(int a) {
+    this(a, a * 2);
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<synthetic: create>"
 [a] => [a] "a"
-[this(a, a * 2);] => [this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, a * 2);] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int"
+[this(a, a * 2);] => [this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(a, a * 2);] "com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,8 +1,19 @@
-[UNKNOWN] => [super();]
+[class Child extends Varargs {
+  public Child() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: constructor>"
 [UNKNOWN] => [Child.$clinit();]
-[UNKNOWN] => [let $instance = new Child();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__();]
-[UNKNOWN] => [return $instance;]
-[super(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));] "com.google.j2cl.transpiler.readable.varargs.Child.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__"
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_varargs_Child();]
+[public Child() {
+    super(1);
+  }] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: create>"
+[public Child() {
+    super(1);
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: create>"
+[public Child() {
+    super(1);
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: create>"
+[super(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));] "com.google.j2cl.transpiler.readable.varargs.Child.<init>"
+[public Child() {
+    super(1);
+  }] => [this.$init__com_google_j2cl_transpiler_readable_varargs_Child();] "com.google.j2cl.transpiler.readable.varargs.Child.<init>"
 [UNKNOWN] => [Varargs.$clinit();]

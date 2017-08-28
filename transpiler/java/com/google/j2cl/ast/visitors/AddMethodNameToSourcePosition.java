@@ -34,9 +34,14 @@ public class AddMethodNameToSourcePosition extends NormalizationPass {
             }
 
             SourcePosition sourcePosition = statement.getSourcePosition();
-            if (sourcePosition != null
-                && sourcePosition != SourcePosition.UNKNOWN
-                && sourcePosition != SourcePosition.DUMMY) {
+
+            // If there is already a name in the AST do not overwrite
+            // Some synthesized methods fill out the name earlier
+            if (sourcePosition.getName() != null) {
+              return true;
+            }
+
+            if (!sourcePosition.isAbsent()) {
               Method method = (Method) getCurrentMember();
               statement.setSourcePosition(
                   SourcePosition.Builder.from(sourcePosition)

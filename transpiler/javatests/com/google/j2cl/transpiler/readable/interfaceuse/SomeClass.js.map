@@ -1,9 +1,27 @@
-[UNKNOWN] => [super();]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: constructor>"
 [UNKNOWN] => [SomeClass.$clinit();]
-[UNKNOWN] => [let $instance = new SomeClass();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [let $instance = new SomeClass();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: create>"
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass__();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: create>"
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: create>"
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<init>"
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<init>"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.run"
 [UNKNOWN] => [java_lang_Object.$clinit();]

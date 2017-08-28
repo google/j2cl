@@ -1,8 +1,19 @@
-[UNKNOWN] => [super();]
+[public class SuperCallDefault {
+  public SuperCallDefault() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: constructor>"
 [UNKNOWN] => [SuperCallDefault.$clinit();]
-[UNKNOWN] => [let $instance = new SuperCallDefault();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault__();]
-[UNKNOWN] => [return $instance;]
-[super();] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault__"
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();]
+[public SuperCallDefault() {
+    super();
+  }] => [let $instance = new SuperCallDefault();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: create>"
+[public SuperCallDefault() {
+    super();
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault__();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: create>"
+[public SuperCallDefault() {
+    super();
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: create>"
+[super();] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<init>"
+[public SuperCallDefault() {
+    super();
+  }] => [this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

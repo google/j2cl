@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: constructor>"
 [UNKNOWN] => [Child.$clinit();]
-[UNKNOWN] => [let $instance = new Child();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Child();]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<init>"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Child();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<init>"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b + 1;] => [return a + b + 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"

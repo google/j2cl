@@ -1,13 +1,29 @@
-[UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {number} */
-    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;]
+[public class Parent {
+  public int field;
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: constructor>"
+[public class Parent {
+  public int field;
+...  }
+}] => [/** @public {number} */
+    this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: constructor>"
 [f] => [f] "f"
 [UNKNOWN] => [Parent.$clinit();]
-[UNKNOWN] => [let $instance = new Parent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(f);]
-[UNKNOWN] => [return $instance;]
+[public Parent(int f) {
+    this.field = f;
+  }] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: create>"
+[public Parent(int f) {
+    this.field = f;
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(f);] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: create>"
+[public Parent(int f) {
+    this.field = f;
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: create>"
 [f] => [f] "f"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Parent();]
-[this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = f;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int"
+[public Parent(int f) {
+    this.field = f;
+  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<init>"
+[public Parent(int f) {
+    this.field = f;
+  }] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Parent();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<init>"
+[this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = f;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: constructor>"
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $instance = new Main();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Main__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();]
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: create>"
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Main__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: create>"
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: create>"
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<init>"
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<init>"
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [sp] => [sp] "sp"
 [SuperParent p = new Parent();] => [let p = Parent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"

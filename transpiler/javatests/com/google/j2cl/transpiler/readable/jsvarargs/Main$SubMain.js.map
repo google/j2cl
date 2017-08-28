@@ -1,10 +1,21 @@
-[UNKNOWN] => [super();]
+[static class SubMain extends Main {
+    public SubMain() {
+...    }
+  }] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: constructor>"
 [UNKNOWN] => [SubMain.$clinit();]
-[UNKNOWN] => [let $instance = new SubMain();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();]
-[UNKNOWN] => [return $instance;]
-[super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__"
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();]
+[public SubMain() {
+      super(10);
+    }] => [let $instance = new SubMain();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: create>"
+[public SubMain() {
+      super(10);
+    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: create>"
+[public SubMain() {
+      super(10);
+    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: create>"
+[super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<init>"
+[public SubMain() {
+      super(10);
+    }] => [this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<init>"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
 [UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]

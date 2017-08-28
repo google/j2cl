@@ -1,11 +1,24 @@
-[UNKNOWN] => [super();]
+[static class OuterRefFromSuperCtorBase {
+    OuterRefFromSuperCtorBase(Object o) {
+...    }
+  }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: constructor>"
 [o] => [o] "o"
 [UNKNOWN] => [OuterRefFromSuperCtorBase.$clinit();]
-[UNKNOWN] => [let $instance = new OuterRefFromSuperCtorBase();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(o);]
-[UNKNOWN] => [return $instance;]
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [let $instance = new OuterRefFromSuperCtorBase();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: create>"
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(o);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: create>"
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: create>"
 [o] => [o] "o"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase();]
-[o.toString();] => [$Objects.m_toString__java_lang_Object(o);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object"
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<init>"
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<init>"
+[o.toString();] => [$Objects.m_toString__java_lang_Object(o);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

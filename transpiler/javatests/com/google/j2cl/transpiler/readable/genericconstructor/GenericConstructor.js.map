@@ -1,22 +1,25 @@
-[UNKNOWN] => [super();]
+[public class GenericConstructor<T> {
+  // constructor with both method level and class level type parameters.
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: constructor>"
 [s] => [s] "s"
 [t] => [t] "t"
 [UNKNOWN] => [GenericConstructor.$clinit();]
-[UNKNOWN] => [let $instance = new GenericConstructor();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(s, t);]
-[UNKNOWN] => [return $instance;]
+[public <S> GenericConstructor(S s, T t) {}] => [let $instance = new GenericConstructor();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
+[public <S> GenericConstructor(S s, T t) {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(s, t);] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
+[public <S> GenericConstructor(S s, T t) {}] => [return $instance;] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
 [s] => [s] "s"
 [t] => [t] "t"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();]
+[public <S> GenericConstructor(S s, T t) {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<init>"
+[public <S> GenericConstructor(S s, T t) {}] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<init>"
 [t] => [t] "t"
 [UNKNOWN] => [GenericConstructor.$clinit();]
-[UNKNOWN] => [let $instance = new GenericConstructor();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(t);]
-[UNKNOWN] => [return $instance;]
+[public <T> GenericConstructor(T t) {}] => [let $instance = new GenericConstructor();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
+[public <T> GenericConstructor(T t) {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(t);] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
+[public <T> GenericConstructor(T t) {}] => [return $instance;] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<synthetic: create>"
 [t] => [t] "t"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();]
+[public <T> GenericConstructor(T t) {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<init>"
+[public <T> GenericConstructor(T t) {}] => [this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.<init>"
 [new GenericConstructor<Error>(new Exception(), new Error());] => [/**@type {!GenericConstructor<Error>} */ (GenericConstructor.$create__java_lang_Object__java_lang_Object(Exception.$create__(), Error.$create__()));] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.test"
 [new GenericConstructor<Error>(new Exception());] => [/**@type {!GenericConstructor<Error>} */ (GenericConstructor.$create__java_lang_Object(Exception.$create__()));] "com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor.test"
 [UNKNOWN] => [java_lang_Object.$clinit();]

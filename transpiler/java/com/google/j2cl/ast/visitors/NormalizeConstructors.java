@@ -43,6 +43,8 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.common.SourcePosition.Builder;
 import java.util.Collections;
 import java.util.List;
 
@@ -179,6 +181,9 @@ public class NormalizeConstructors extends NormalizationPass {
             if (!method.isConstructor()) {
               return method;
             }
+
+            updateNameInSourcePosition(method, "<init>");
+
             return Method.newBuilder()
                 .setMethodDescriptor(
                     ctorMethodDescriptorFromJavaConstructor(method.getDescriptor()))
@@ -204,6 +209,32 @@ public class NormalizeConstructors extends NormalizationPass {
                 .build();
           }
         });
+  }
+
+  private static void updateNameInSourcePosition(Method method, String name) {
+    // Updates statements source position to point to the originating method / statement,
+    // so that stack traces come out similar to Java ofr synthetic methods.
+    method
+        .getBody()
+        .getStatements()
+        .stream()
+        .forEach(
+            s -> {
+              SourcePosition sourcePosition = s.getSourcePosition();
+              if (sourcePosition.isAbsent()) {
+                sourcePosition = method.getSourcePosition();
+              }
+              s.setSourcePosition(
+                  Builder.from(sourcePosition)
+                      .setName(
+                          method
+                                  .getDescriptor()
+                                  .getEnclosingTypeDescriptor()
+                                  .getQualifiedBinaryName()
+                              + "."
+                              + name)
+                      .build());
+            });
   }
 
   private static Method synthesizeJsConstructor(Type type) {
@@ -237,15 +268,20 @@ public class NormalizeConstructors extends NormalizationPass {
             jsConstructorParameters,
             superConstructorInvocation.makeStatement()));
 
-    return Method.newBuilder()
-        .setMethodDescriptor(jsConstructor.getDescriptor())
-        .setParameters(jsConstructorParameters)
-        .addStatements(body)
-        .setJsDocDescription(
-            J2clUtils.format(
-                "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
-        .setSourcePosition(jsConstructor.getSourcePosition())
-        .build();
+    Method method =
+        Method.newBuilder()
+            .setMethodDescriptor(jsConstructor.getDescriptor())
+            .setParameters(jsConstructorParameters)
+            .addStatements(body)
+            .setJsDocDescription(
+                J2clUtils.format(
+                    "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
+            .setSourcePosition(jsConstructor.getSourcePosition())
+            .build();
+
+    updateNameInSourcePosition(method, "<init>");
+
+    return method;
   }
 
   private static Method synthesizePrivateConstructor(Type type) {
@@ -262,12 +298,16 @@ public class NormalizeConstructors extends NormalizationPass {
             .setVisibility(Visibility.PUBLIC)
             .build();
 
-    return Method.newBuilder()
-        .setMethodDescriptor(constructorDescriptor)
-        .addStatements(body)
-        .setJsDocDescription("Private implementation constructor.")
-        .setSourcePosition(type.getSourcePosition())
-        .build();
+    Method method =
+        Method.newBuilder()
+            .setMethodDescriptor(constructorDescriptor)
+            .addStatements(body)
+            .setJsDocDescription("Private implementation constructor.")
+            .setSourcePosition(type.getSourcePosition())
+            .build();
+
+    updateNameInSourcePosition(method, "<synthetic: constructor>");
+    return method;
   }
 
   /** Synthesizes a method descriptor for a "super" call to the constructor. */
@@ -350,7 +390,6 @@ public class NormalizeConstructors extends NormalizationPass {
           enclosingType,
           primaryConstructorDescriptor(primaryConstructorInvocation.getTarget()),
           AstUtils.clone(primaryConstructorInvocation.getArguments()));
-
     }
 
     return synthesizeFactoryMethod(
@@ -414,16 +453,21 @@ public class NormalizeConstructors extends NormalizationPass {
             .setTypeDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor())
             .build();
 
-    return Method.newBuilder()
-        .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
-        .setParameters(factoryMethodParameters)
-        .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
-        .setJsDocDescription(
-            J2clUtils.format(
-                "Factory method corresponding to constructor '%s'.",
-                constructor.getDescriptor().getReadableDescription()))
-        .setSourcePosition(constructor.getSourcePosition())
-        .build();
+    Method method =
+        Method.newBuilder()
+            .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
+            .setParameters(factoryMethodParameters)
+            .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
+            .setJsDocDescription(
+                J2clUtils.format(
+                    "Factory method corresponding to constructor '%s'.",
+                    constructor.getDescriptor().getReadableDescription()))
+            .setSourcePosition(constructor.getSourcePosition())
+            .build();
+
+    updateNameInSourcePosition(method, "<synthetic: create>");
+
+    return method;
   }
 
   public static Method getJsConstructor(Type type) {

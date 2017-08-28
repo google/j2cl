@@ -56,6 +56,14 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     return getStartFilePosition().getLine() - o.getStartFilePosition().getLine();
   }
 
+  public boolean isAbsent() {
+    return this == UNKNOWN || this == DUMMY;
+  }
+
+  public boolean isUnknown() {
+    return this == UNKNOWN;
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -83,7 +91,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     }
 
     public static Builder from(SourcePosition sourcePosition) {
-      checkArgument(sourcePosition != UNKNOWN && sourcePosition != DUMMY);
+      checkArgument(!sourcePosition.isAbsent());
       return sourcePosition.toBuilder();
     }
 

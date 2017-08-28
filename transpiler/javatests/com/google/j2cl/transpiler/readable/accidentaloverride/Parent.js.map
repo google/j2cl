@@ -1,9 +1,27 @@
-[UNKNOWN] => [super();]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [super();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: constructor>"
 [UNKNOWN] => [Parent.$clinit();]
-[UNKNOWN] => [let $instance = new Parent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: create>"
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: create>"
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: create>"
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<init>"
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<init>"
 [e] => [e] "e"
 [UNKNOWN] => [java_lang_Object.$clinit();]

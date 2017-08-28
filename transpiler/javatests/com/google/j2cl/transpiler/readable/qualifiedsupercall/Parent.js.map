@@ -1,8 +1,20 @@
-[UNKNOWN] => [super();]
+[class Parent {
+  public void fun() {}
+}] => [super();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: constructor>"
 [UNKNOWN] => [Parent.$clinit();]
-[UNKNOWN] => [let $instance = new Parent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent();]
+[class Parent {
+  public void fun() {}
+}] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: create>"
+[class Parent {
+  public void fun() {}
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent__();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: create>"
+[class Parent {
+  public void fun() {}
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: create>"
+[class Parent {
+  public void fun() {}
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<init>"
+[class Parent {
+  public void fun() {}
+}] => [this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

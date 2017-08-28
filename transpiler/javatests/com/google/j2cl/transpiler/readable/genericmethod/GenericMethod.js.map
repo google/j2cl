@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: constructor>"
 [UNKNOWN] => [GenericMethod.$clinit();]
-[UNKNOWN] => [let $instance = new GenericMethod();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [let $instance = new GenericMethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: create>"
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: create>"
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: create>"
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<init>"
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<init>"
 [f] => [f] "f"
 [s] => [s] "s"
 [o] => [o] "o"

@@ -1,8 +1,26 @@
-[UNKNOWN] => [super();]
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: constructor>"
 [UNKNOWN] => [Parent.$clinit();]
-[UNKNOWN] => [let $instance = new Parent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent();]
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: create>"
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent__();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: create>"
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: create>"
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<init>"
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

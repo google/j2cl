@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: constructor>"
 [UNKNOWN] => [SuperParent.$clinit();]
-[UNKNOWN] => [let $instance = new SuperParent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent();]
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [let $instance = new SuperParent();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: create>"
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: create>"
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: create>"
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<init>"
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<init>"
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b + 111;] => [return a + b + 111;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.fun"

@@ -1,9 +1,27 @@
-[UNKNOWN] => [super();]
+[public class A {
+  public int m() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: constructor>"
 [UNKNOWN] => [A.$clinit();]
-[UNKNOWN] => [let $instance = new A();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_package2_A__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_package2_A();]
+[public class A {
+  public int m() {
+...  }
+}] => [let $instance = new A();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: create>"
+[public class A {
+  public int m() {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_package2_A__();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: create>"
+[public class A {
+  public int m() {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: create>"
+[public class A {
+  public int m() {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<init>"
+[public class A {
+  public int m() {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_package2_A();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<init>"
 [return 2;] => [return 2;] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.m"
 [UNKNOWN] => [java_lang_Object.$clinit();]

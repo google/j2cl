@@ -87,8 +87,7 @@ public class SourceMapGeneratorStage {
         javaSourcePositionByOutputSourcePosition.entrySet()) {
       SourcePosition javaSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
-      if (javaSourcePosition == SourcePosition.UNKNOWN
-          || javaScriptSourcePosition == SourcePosition.UNKNOWN) {
+      if (javaSourcePosition.isUnknown() || javaScriptSourcePosition.isUnknown()) {
         continue;
       }
       sourceMapGenerator.addMapping(

@@ -73,7 +73,7 @@ public class ReadableSourceMapGenerator {
       SourcePosition sourcePosition, List<String> lines, boolean condense) {
     int startLine = sourcePosition.getStartFilePosition().getLine();
     int endLine = sourcePosition.getEndFilePosition().getLine();
-    if (sourcePosition == SourcePosition.UNKNOWN) {
+    if (sourcePosition.isUnknown()) {
       return "[UNKNOWN]";
     }
     String fragment = lines.get(startLine);

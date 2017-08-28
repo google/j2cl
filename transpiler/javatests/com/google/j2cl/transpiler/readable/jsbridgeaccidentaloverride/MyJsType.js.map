@@ -1,10 +1,13 @@
-[UNKNOWN] => [super();]
+[@JsType
+public class MyJsType implements OtherInterface {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<synthetic: constructor>"
 [UNKNOWN] => [MyJsType.$clinit();]
-[UNKNOWN] => [let $instance = new MyJsType();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();]
+[MyJsType() {}] => [let $instance = new MyJsType();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<synthetic: create>"
+[MyJsType() {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<synthetic: create>"
+[MyJsType() {}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<synthetic: create>"
+[MyJsType() {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<init>"
+[MyJsType() {}] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.<init>"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType.foo"
 [a] => [a] "a"

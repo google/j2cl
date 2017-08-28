@@ -1,18 +1,48 @@
-[UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {number} */
-    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = 0;]
+[class InitMethodDispatch<T> {
+  int value;
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: constructor>"
+[class InitMethodDispatch<T> {
+  int value;
+...  }
+}] => [/** @public {number} */
+    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = 0;] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: constructor>"
 [UNKNOWN] => [InitMethodDispatch.$clinit();]
-[UNKNOWN] => [let $instance = new InitMethodDispatch();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__();]
-[UNKNOWN] => [return $instance;]
-[this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__"
+[InitMethodDispatch() {
+    this(1);
+...    // would be redundant (in light of the fact that it delegates to this()).
+  }] => [let $instance = new InitMethodDispatch();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
+[InitMethodDispatch() {
+    this(1);
+...    // would be redundant (in light of the fact that it delegates to this()).
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
+[InitMethodDispatch() {
+    this(1);
+...    // would be redundant (in light of the fact that it delegates to this()).
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
+[this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(1);] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<init>"
 [i] => [i] "i"
 [UNKNOWN] => [InitMethodDispatch.$clinit();]
-[UNKNOWN] => [let $instance = new InitMethodDispatch();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(i);]
-[UNKNOWN] => [return $instance;]
+[InitMethodDispatch(int i) {
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [let $instance = new InitMethodDispatch();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
+[InitMethodDispatch(int i) {
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(i);] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
+[InitMethodDispatch(int i) {
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<synthetic: create>"
 [i] => [i] "i"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch();]
-[value = i;] => [this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = i;] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int"
+[InitMethodDispatch(int i) {
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<init>"
+[InitMethodDispatch(int i) {
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [this.$init__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch();] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<init>"
+[value = i;] => [this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch = i;] "com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

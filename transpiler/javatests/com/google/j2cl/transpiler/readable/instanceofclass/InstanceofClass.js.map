@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: constructor>"
 [UNKNOWN] => [InstanceofClass.$clinit();]
-[UNKNOWN] => [let $instance = new InstanceofClass();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [let $instance = new InstanceofClass();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: create>"
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass__();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: create>"
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: create>"
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<init>"
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<init>"
 [Object object = new InstanceofClass();] => [let object = InstanceofClass.$create__();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [object] => [object] "object"
 [assert object instanceof InstanceofClass;] => [$Asserts.$assert(InstanceofClass.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"

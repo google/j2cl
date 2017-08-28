@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[class bar {
+  {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: constructor>"
 [UNKNOWN] => [bar.$clinit();]
-[UNKNOWN] => [let $instance = new bar();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_collisions_bar__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_collisions_bar();]
+[class bar {
+  {
+...  }
+}] => [let $instance = new bar();] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: create>"
+[class bar {
+  {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_collisions_bar__();] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: create>"
+[class bar {
+  {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: create>"
+[class bar {
+  {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[class bar {
+  {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_collisions_bar();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]
 [int foo, bar, goog, flip, window;] => [let /** number */ foo$1$, /** number */ bar$1$, /** number */ goog$1$, /** number */ flip, /** number */ window$1$;]
 [foo] => [foo$1$] "foo"

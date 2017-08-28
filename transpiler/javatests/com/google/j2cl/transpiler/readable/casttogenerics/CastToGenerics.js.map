@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [super();] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<synthetic: constructor>"
 [UNKNOWN] => [CastToGenerics.$clinit();]
-[UNKNOWN] => [let $instance = new CastToGenerics();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();]
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [let $instance = new CastToGenerics();] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<synthetic: create>"
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics__();] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<synthetic: create>"
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<synthetic: create>"
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<init>"
+[public class CastToGenerics<T, E extends Number> {
+
+...  public static class Foo<V> { }
+}] => [this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.<init>"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"
 [o] => [o] "o"
 [E e = (E) o;] => [let e = /**@type {C_E} */ ($Casts.$to(o, Number));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.test"

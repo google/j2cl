@@ -1,9 +1,27 @@
-[UNKNOWN] => [super();]
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: constructor>"
 [UNKNOWN] => [Foo.$clinit();]
-[UNKNOWN] => [let $instance = new Foo();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo();]
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [let $instance = new Foo();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: create>"
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo__();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: create>"
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: create>"
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<init>"
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<init>"
 [return Dummy.class.getSimpleName();] => [return /**@type {Class<Dummy>} */ (Class.$get(Dummy)).m_getSimpleName__();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.toString"
 [UNKNOWN] => [java_lang_Object.$clinit();]

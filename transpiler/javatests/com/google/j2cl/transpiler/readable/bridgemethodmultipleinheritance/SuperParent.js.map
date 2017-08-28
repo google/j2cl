@@ -1,10 +1,22 @@
-[UNKNOWN] => [super();]
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: constructor>"
 [UNKNOWN] => [SuperParent.$clinit();]
-[UNKNOWN] => [let $instance = new SuperParent();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();]
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [let $instance = new SuperParent();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: create>"
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: create>"
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: create>"
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<init>"
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<init>"
 [t] => [t] "t"
 [s] => [s] "s"
 [UNKNOWN] => [java_lang_Object.$clinit();]

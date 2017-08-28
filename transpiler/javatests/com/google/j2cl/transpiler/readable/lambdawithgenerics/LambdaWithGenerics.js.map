@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<synthetic: constructor>"
 [UNKNOWN] => [LambdaWithGenerics.$clinit();]
-[UNKNOWN] => [let $instance = new LambdaWithGenerics();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();]
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [let $instance = new LambdaWithGenerics();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<synthetic: create>"
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics__();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<synthetic: create>"
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<synthetic: create>"
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<init>"
+[public class LambdaWithGenerics<E> {
+  public <T> T test1(MyInterface<T> intf, T e) {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<init>"
 [intf] => [intf] "intf"
 [e] => [e] "e"
 [return intf.foo(e);] => [return intf.m_foo__java_lang_Object(e);] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.test1"

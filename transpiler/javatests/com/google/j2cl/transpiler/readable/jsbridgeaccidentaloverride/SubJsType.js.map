@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [super();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<synthetic: constructor>"
 [UNKNOWN] => [SubJsType.$clinit();]
-[UNKNOWN] => [let $instance = new SubJsType();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();]
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [let $instance = new SubJsType();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<synthetic: create>"
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<synthetic: create>"
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<synthetic: create>"
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<init>"
+[public class SubJsType extends MyJsType implements MyInterface {
+  // There should be bridge method for MyInterface.foo() because it is accidentally overridden
+...  // MyJsType.
+}] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.<init>"
 [a] => [a] "a"
 [return a + 2;] => [return a + 2;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.bar"
 [UNKNOWN] => [return this.bar(arg0);]

@@ -1,5 +1,8 @@
-[UNKNOWN] => [super();]
+[abstract class SomeClass {
+  public abstract String foo();
+...  SomeClass(int i) {}
+}] => [super();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.<synthetic: constructor>"
 [i] => [i] "i"
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();]
+[SomeClass(int i) {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.<init>"
+[SomeClass(int i) {}] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeClass.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]

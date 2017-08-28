@@ -1,10 +1,28 @@
-[UNKNOWN] => [super();]
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<synthetic: constructor>"
 [UNKNOWN] => [BridgeMethod.$clinit();]
-[UNKNOWN] => [let $instance = new BridgeMethod();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();]
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [let $instance = new BridgeMethod();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<synthetic: create>"
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<synthetic: create>"
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<synthetic: create>"
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<init>"
+[public class BridgeMethod extends Parent<AssertionError>
+    implements SomeInterface<AssertionError, Number> {
+...  public void fun(Number t) {} // not override, no bridge method.
+}] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod.<init>"
 [a] => [a] "a"
 [n] => [n] "n"
 [t] => [t] "t"

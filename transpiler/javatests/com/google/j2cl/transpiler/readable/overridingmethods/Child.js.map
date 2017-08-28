@@ -1,8 +1,26 @@
-[UNKNOWN] => [super();]
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [super();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: constructor>"
 [UNKNOWN] => [Child.$clinit();]
-[UNKNOWN] => [let $instance = new Child();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();]
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: create>"
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<init>"
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<init>"
 [UNKNOWN] => [Parent.$clinit();]

@@ -1,8 +1,26 @@
-[UNKNOWN] => [super();]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [super();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: constructor>"
 [UNKNOWN] => [NativeClass.$clinit();]
-[UNKNOWN] => [let $instance = new NativeClass();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();]
-[UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object__();]
-[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [let $instance = new NativeClass();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: create>"
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: create>"
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: create>"
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<init>"
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<init>"
 [UNKNOWN] => [java_lang_Object.$clinit();]
