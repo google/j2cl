@@ -34,7 +34,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   @Override
   public String renderOutput() {
-    renderFileOverview("lateProvide");
+    renderFileOverview("extraRequire", "lateProvide", "unusedLocalVariables");
 
     TypeDeclaration typeDeclaration = type.getDeclaration();
     sourceBuilder.appendln("goog.module('" + typeDeclaration.getModuleName() + "');");
