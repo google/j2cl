@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import com.google.j2cl.frontend.BaseWorker;
+import com.google.j2cl.bazel.BaseWorker;
 import java.io.PrintStream;
 
 /** Runs The @GwtIncompatible stripper as a worker. */

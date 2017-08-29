@@ -13,7 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.j2cl.frontend.BaseWorker;
+import com.google.j2cl.bazel.BaseWorker;
 import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.PrintStream;
 import java.util.concurrent.ExecutionException;
