@@ -17,15 +17,18 @@ package com.google.j2cl.transpiler.integration.enums;
 
 public class Main {
 
-  static enum Foo {
+  enum Foo {
     FOO,
-    FOZ
+    FOZ,
+    UNREFERENCED_VALUE,
+    UNREFERENCED_SUBCLASS_VALUE {}
   }
 
-  static enum Bar {
+  enum Bar {
     BAR(1),
     BAZ(Foo.FOO),
     BANG(5) {
+      @Override
       int getF() {
         return f + 2;
       }
