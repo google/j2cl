@@ -1,6 +1,12 @@
 [args] => [args] "args"
-[UNKNOWN] => [InstanceVarargs.$clinit();]
-[UNKNOWN] => [$Arrays.$stampType(args, $int, 1);]
+[@JsConstructor
+    public InstanceVarargs(int... args) {
+      super(args[1]);
+    }] => [InstanceVarargs.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs.<init>"
+[@JsConstructor
+    public InstanceVarargs(int... args) {
+      super(args[1]);
+    }] => [$Arrays.$stampType(args, $int, 1);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs.<init>"
 [@JsConstructor
     public InstanceVarargs(int... args) {
       super(args[1]);
@@ -24,4 +30,7 @@
     public InstanceVarargs(int... args) {
       super(args[1]);
     }] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs.<init>"
-[UNKNOWN] => [A.$clinit();]
+[@SuppressWarnings("ClassCanBeStatic")
+  public class InstanceVarargs extends A {
+...    }
+  }] => [A.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs.<clinit>"

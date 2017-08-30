@@ -8,7 +8,9 @@
 }] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = 0;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: constructor>"
 [f] => [f] "f"
-[UNKNOWN] => [Parent.$clinit();]
+[public Parent(int f) {
+    this.field = f;
+  }] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: create>"
 [public Parent(int f) {
     this.field = f;
   }] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<synthetic: create>"
@@ -26,4 +28,7 @@
     this.field = f;
   }] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Parent();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<init>"
 [this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent = f;] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Parent {
+  public int field;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Parent.<clinit>"

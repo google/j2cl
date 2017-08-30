@@ -2,7 +2,10 @@
   public void testCallBySuperParent() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<synthetic: create>"
 [public class Main {
   public void testCallBySuperParent() {
 ...  }
@@ -44,7 +47,10 @@
 [pp.foo(1);] => [pp.myFoo(1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [cc.foo(1);] => [cc.myFoo(1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
 [intf.intfFoo();] => [intf.m_intfFoo__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallBySuperParent"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testCallByConcreteType() {
+    SuperParent sp = new SuperParent();
+...    c.intfFoo();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [sp] => [sp] "sp"
 [Parent p = new Parent();] => [let p = Parent.$create__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
@@ -60,4 +66,7 @@
 [c.bar(6, 7);] => [c.bar(6, 7);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [c.foo(1);] => [c.myFoo(1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
 [c.intfFoo();] => [c.intfFoo();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.testCallByConcreteType"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public void testCallBySuperParent() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Main.<clinit>"

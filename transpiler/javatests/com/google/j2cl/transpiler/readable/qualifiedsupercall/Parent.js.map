@@ -1,7 +1,9 @@
 [class Parent {
   public void fun() {}
 }] => [super();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: constructor>"
-[UNKNOWN] => [Parent.$clinit();]
+[class Parent {
+  public void fun() {}
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: create>"
 [class Parent {
   public void fun() {}
 }] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<synthetic: create>"
@@ -17,4 +19,6 @@
 [class Parent {
   public void fun() {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class Parent {
+  public void fun() {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent.<clinit>"

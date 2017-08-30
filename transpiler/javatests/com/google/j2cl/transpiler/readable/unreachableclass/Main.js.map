@@ -2,7 +2,10 @@
   {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<synthetic: create>"
 [public class Main {
   {
 ...  }
@@ -23,39 +26,36 @@
   {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_unreachableclass_Main();] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<clinit>"
 [try {
     } catch (RuntimeException e) {
-      class A {
-        void m() {
-          class B {
-            private void n() {}
-          }
-        }
-      }
-      new A().m();
-      new Object() {};
+...      new Object() {};
     }] => [try {
     } catch (/** @type {*} */ __$exc) {
-      __$exc = $Exceptions.toJava(__$exc);
-      if (RuntimeException.$isInstance(__$exc)) {
+...      }
+    }] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
+[public class Main {
+  {
+...  }
+}] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
+[public class Main {
+  {
+...  }
+}] => [if (RuntimeException.$isInstance(__$exc)) {
         let e = /**@type {RuntimeException} */ (__$exc);
-        $Unreachable$740$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();
-        $Unreachable$874.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }
-    }]
-[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
-[UNKNOWN] => [if (RuntimeException.$isInstance(__$exc)) {
-        let e = /**@type {RuntimeException} */ (__$exc);
-        $Unreachable$740$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();
-        $Unreachable$874.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }]
-[UNKNOWN] => [let e = /**@type {RuntimeException} */ (__$exc);]
+...        throw $Exceptions.toJs(__$exc);
+      }] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
+[public class Main {
+  {
+...  }
+}] => [let e = /**@type {RuntimeException} */ (__$exc);] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
 [e] => [e] "e"
-[new A().m();] => [$Unreachable$740$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();]
-[new Object() {};] => [$Unreachable$874.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);]
-[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
+[new A().m();] => [$Unreachable$740$A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this).m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
+[new Object() {};] => [$Unreachable$874.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(this);] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"
+[public class Main {
+  {
+...  }
+}] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.unreachableclass.Main.<init>"

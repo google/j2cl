@@ -8,7 +8,9 @@
 }] => [/** @public {C_T} */
     this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ = null;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.<synthetic: constructor>"
 [value] => [value] "value"
-[UNKNOWN] => [GenericEquals.$clinit();]
+[public GenericEquals(T value) {
+    this.value = value;
+  }] => [GenericEquals.$clinit();] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.<synthetic: create>"
 [public GenericEquals(T value) {
     this.value = value;
   }] => [let $instance = new GenericEquals();] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.<synthetic: create>"
@@ -42,4 +44,7 @@
 [GenericEquals<?> other = (GenericEquals<?>) obj;] => [let other = /**@type {GenericEquals<*>} */ ($Casts.$to(obj, GenericEquals));] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [other] => [other] "other"
 [return value.equals(other.value);] => [return $Objects.m_equals__java_lang_Object__java_lang_Object(this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_, other.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_);] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class GenericEquals<T> {
+
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.<clinit>"

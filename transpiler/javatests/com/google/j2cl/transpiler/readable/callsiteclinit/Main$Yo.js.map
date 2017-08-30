@@ -1,7 +1,9 @@
 [public static class Yo {
     public static String a = "asdf";
   }] => [super();] "com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.<synthetic: constructor>"
-[UNKNOWN] => [Yo.$clinit();]
+[public static class Yo {
+    public static String a = "asdf";
+  }] => [Yo.$clinit();] "com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.<synthetic: create>"
 [public static class Yo {
     public static String a = "asdf";
   }] => [let $instance = new Yo();] "com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.<synthetic: create>"
@@ -17,5 +19,7 @@
 [public static class Yo {
     public static String a = "asdf";
   }] => [this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo();] "com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public static class Yo {
+    public static String a = "asdf";
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.<clinit>"
 [public static String a = "asdf";] => [Yo.$f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo = "asdf";]

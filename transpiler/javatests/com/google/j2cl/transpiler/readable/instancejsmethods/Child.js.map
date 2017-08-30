@@ -2,7 +2,10 @@
   /**
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: constructor>"
-[UNKNOWN] => [Child.$clinit();]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<synthetic: create>"
 [public class Child extends Parent implements MyInterface {
   /**
 ...  }
@@ -32,5 +35,11 @@
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.foo"
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.intfFoo"
-[UNKNOWN] => [return this.intfFoo();]
-[UNKNOWN] => [Parent.$clinit();]
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [return this.intfFoo();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.intfFoo"
+[public class Child extends Parent implements MyInterface {
+  /**
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.<clinit>"

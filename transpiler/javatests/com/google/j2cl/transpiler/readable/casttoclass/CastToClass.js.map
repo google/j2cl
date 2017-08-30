@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.casttoclass.CastToClass.<synthetic: constructor>"
-[UNKNOWN] => [CastToClass.$clinit();]
+[public class CastToClass {
+  public void main() {
+...  }
+}] => [CastToClass.$clinit();] "com.google.j2cl.transpiler.readable.casttoclass.CastToClass.<synthetic: create>"
 [public class CastToClass {
   public void main() {
 ...  }
@@ -27,4 +30,7 @@
 [o] => [o] "o"
 [CastToClass c = (CastToClass) o;] => [let c = /**@type {CastToClass} */ ($Casts.$to(o, CastToClass));] "com.google.j2cl.transpiler.readable.casttoclass.CastToClass.main"
 [c] => [c] "c"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class CastToClass {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.casttoclass.CastToClass.<clinit>"

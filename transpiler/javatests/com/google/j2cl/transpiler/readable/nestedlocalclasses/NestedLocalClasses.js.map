@@ -2,7 +2,10 @@
   public void test(final int p) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.<synthetic: constructor>"
-[UNKNOWN] => [NestedLocalClasses.$clinit();]
+[public class NestedLocalClasses {
+  public void test(final int p) {
+...  }
+}] => [NestedLocalClasses.$clinit();] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.<synthetic: create>"
 [public class NestedLocalClasses {
   public void test(final int p) {
 ...  }
@@ -26,4 +29,7 @@
 [p] => [p] "p"
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.test"
 [localVar] => [localVar] "localVar"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class NestedLocalClasses {
+  public void test(final int p) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.<clinit>"

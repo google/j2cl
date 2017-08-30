@@ -7,7 +7,10 @@
 ...      public <T extends Number> void fun2(T t) {}
     }] => [/** @public {GenericMethod<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1LocalClass.<synthetic: constructor>"
-[UNKNOWN] => [$1LocalClass.$clinit();]
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [$1LocalClass.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1LocalClass.<synthetic: create>"
 [class LocalClass<T> extends GenericMethod<T> {
       public void fun2(T t) {}
 ...      public <T extends Number> void fun2(T t) {}
@@ -34,4 +37,7 @@
     }] => [this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1LocalClass();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1LocalClass.<init>"
 [t] => [t] "t"
 [t] => [t] "t"
-[UNKNOWN] => [GenericMethod.$clinit();]
+[class LocalClass<T> extends GenericMethod<T> {
+      public void fun2(T t) {}
+...      public <T extends Number> void fun2(T t) {}
+    }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1LocalClass.<clinit>"

@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
-import com.google.j2cl.ast.visitors.AddMethodNameToSourcePosition;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
@@ -26,6 +25,7 @@ import com.google.j2cl.ast.visitors.DefaultMethodsResolver;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
+import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
@@ -265,7 +265,7 @@ public class J2clTranspiler {
             new MoveVariableDeclarationsToEnclosingBlock(),
 
             // Enrich source mapping information for better stack deobfuscation.
-            new AddMethodNameToSourcePosition());
+            new FilloutMissingSourceMapInformation());
 
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);

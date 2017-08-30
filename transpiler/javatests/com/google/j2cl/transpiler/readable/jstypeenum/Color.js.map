@@ -2,7 +2,10 @@
 public enum Color {
 ...  BLUE
 }] => [super();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.<synthetic: constructor>"
-[UNKNOWN] => [Color.$clinit();]
+[@JsType
+public enum Color {
+...  BLUE
+}] => [Color.$clinit();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.<synthetic: create>"
 [@JsType
 public enum Color {
 ...  BLUE
@@ -23,16 +26,40 @@ public enum Color {
 public enum Color {
 ...  BLUE
 }] => [this.$init__com_google_j2cl_transpiler_readable_jstypeenum_Color();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.<init>"
-[UNKNOWN] => [Color.$clinit();]
-[UNKNOWN] => [if ($Equality.$same(Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_, null)) {
+[@JsType
+public enum Color {
+...  BLUE
+}] => [Color.$clinit();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.valueOf"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [if ($Equality.$same(Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_, null)) {
       Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ = /**@type {Map<?string, !Color>} */ ($Enums.createMapFromValues(Color.values()));
-    }]
-[UNKNOWN] => [Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ = /**@type {Map<?string, !Color>} */ ($Enums.createMapFromValues(Color.values()));]
-[UNKNOWN] => [return $Enums.getValueFromNameAndMap(name, Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);]
-[UNKNOWN] => [Color.$clinit();]
-[UNKNOWN] => [return /**@type {!Array<Color>} */ ($Arrays.$init([Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color], Color));]
-[UNKNOWN] => [return super.compareTo(/**@type {Color} */ ($Casts.$to(arg0, Color)));]
-[UNKNOWN] => [Enum.$clinit();]
+    }] "com.google.j2cl.transpiler.readable.jstypeenum.Color.valueOf"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ = /**@type {Map<?string, !Color>} */ ($Enums.createMapFromValues(Color.values()));] "com.google.j2cl.transpiler.readable.jstypeenum.Color.valueOf"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [return $Enums.getValueFromNameAndMap(name, Color.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);] "com.google.j2cl.transpiler.readable.jstypeenum.Color.valueOf"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [Color.$clinit();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.values"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [return /**@type {!Array<Color>} */ ($Arrays.$init([Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color, Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color], Color));] "com.google.j2cl.transpiler.readable.jstypeenum.Color.values"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [return super.compareTo(/**@type {Color} */ ($Casts.$to(arg0, Color)));] "com.google.j2cl.transpiler.readable.jstypeenum.Color.compareTo"
+[@JsType
+public enum Color {
+...  BLUE
+}] => [Enum.$clinit();] "com.google.j2cl.transpiler.readable.jstypeenum.Color.<clinit>"
 [RED] => [Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("RED"), 0);]
 [GREEN] => [Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("GREEN"), 1);]
 [BLUE] => [Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("BLUE"), 2);]

@@ -2,7 +2,10 @@
   int n() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<synthetic: constructor>"
-[UNKNOWN] => [Asserts.$clinit();]
+[public class Asserts {
+  int n() {
+...  }
+}] => [Asserts.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<synthetic: create>"
 [public class Asserts {
   int n() {
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts();] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<init>"
 [assert 5 != 4;] => [$Asserts.$assert(5 != 4);] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.n"
 [return 5;] => [return 5;] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.n"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Asserts {
+  int n() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.Asserts.<clinit>"

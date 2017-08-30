@@ -2,7 +2,10 @@
   public void testNativeJsProperty() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsproperties.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public void testNativeJsProperty() {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Main.<synthetic: create>"
 [public class Main {
   public void testNativeJsProperty() {
 ...  }
@@ -35,4 +38,7 @@
 [bar.setA(10);] => [bar.a = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [bar.getB();] => [bar.abc;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
 [bar.setB(10);] => [bar.abc = 10;] "com.google.j2cl.transpiler.readable.jsproperties.Main.testInstanceJsProperty"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public void testNativeJsProperty() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Main.<clinit>"

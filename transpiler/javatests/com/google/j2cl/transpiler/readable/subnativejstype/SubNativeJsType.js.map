@@ -1,5 +1,8 @@
 [x] => [x] "x"
-[UNKNOWN] => [SubNativeJsType.$clinit();]
+[@JsConstructor
+  public SubNativeJsType(int x) {
+    super(x + 1);
+  }] => [SubNativeJsType.$clinit();] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<init>"
 [@JsConstructor
   public SubNativeJsType(int x) {
     super(x + 1);
@@ -13,7 +16,9 @@
   public SubNativeJsType(int x) {
     super(x + 1);
   }] => [this.$init__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType();] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<init>"
-[UNKNOWN] => [SubNativeJsType.$clinit();]
+[public SubNativeJsType() {
+    this(10);
+  }] => [SubNativeJsType.$clinit();] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<synthetic: create>"
 [public SubNativeJsType() {
     this(10);
   }] => [let $instance = new SubNativeJsType(10);] "com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.<synthetic: create>"

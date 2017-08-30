@@ -2,7 +2,10 @@
 public class StaticBlockLocalVar {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<synthetic: constructor>"
-[UNKNOWN] => [StaticBlockLocalVar.$clinit();]
+[@SuppressWarnings("unused")
+public class StaticBlockLocalVar {
+...  }
+}] => [StaticBlockLocalVar.$clinit();] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<synthetic: create>"
 [@SuppressWarnings("unused")
 public class StaticBlockLocalVar {
 ...  }
@@ -23,7 +26,10 @@ public class StaticBlockLocalVar {
 public class StaticBlockLocalVar {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_staticblocklocalvar_StaticBlockLocalVar();] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
-[int i = 10;] => [let i = 10;]
+[@SuppressWarnings("unused")
+public class StaticBlockLocalVar {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
+[int i = 10;] => [let i = 10;] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
 [i] => [i] "i"
-[i += 20;] => [i += 20;]
+[i += 20;] => [i += 20;] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"

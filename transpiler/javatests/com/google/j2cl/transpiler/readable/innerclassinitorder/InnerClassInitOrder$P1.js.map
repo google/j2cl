@@ -7,7 +7,9 @@
 ...    }
   }] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1 = 0;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: constructor>"
-[UNKNOWN] => [P1.$clinit();]
+[P1() {
+      this(1);
+    }] => [P1.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: create>"
 [P1() {
       this(1);
     }] => [let $instance = new P1();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: create>"
@@ -19,7 +21,9 @@
     }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: create>"
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__int(1);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<init>"
 [i] => [i] "i"
-[UNKNOWN] => [P1.$clinit();]
+[P1(int i) {
+      value = i;
+    }] => [P1.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: create>"
 [P1(int i) {
       value = i;
     }] => [let $instance = new P1();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<synthetic: create>"
@@ -37,4 +41,7 @@
       value = i;
     }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<init>"
 [value = i;] => [this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1 = i;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[static class P1<T1> {
+    class P2<T2> extends P1<T1> {
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1.<clinit>"

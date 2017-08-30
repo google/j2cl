@@ -7,7 +7,10 @@
 ...    }
   }] => [/** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_Main_SomeClass = null;] "com.google.j2cl.transpiler.readable.jsfunction.Main$SomeClass.<synthetic: constructor>"
-[UNKNOWN] => [SomeClass.$clinit();]
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
+...    }
+  }] => [SomeClass.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main$SomeClass.<synthetic: create>"
 [@SuppressWarnings("ClassCanBeStatic")
   class SomeClass<T> {
 ...    }
@@ -38,4 +41,7 @@
 [f] => [f] "f"
 [object] => [object] "object"
 [new ArrayList<T>()] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main$SomeClass.testJsFunctionWithClassCapture"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@SuppressWarnings("ClassCanBeStatic")
+  class SomeClass<T> {
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main$SomeClass.<clinit>"

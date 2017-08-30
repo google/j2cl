@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: constructor>"
-[UNKNOWN] => [Equality.$clinit();]
+[public class Equality {
+  public void test() {
+...  }
+}] => [Equality.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: create>"
 [public class Equality {
   public void test() {
 ...  }
@@ -28,4 +31,7 @@
 [assert new Object() != new Object();] => [$Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), java_lang_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert null != new Object();] => [$Asserts.$assert(!$Equality.$same(null, java_lang_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != null;] => [$Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), null));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Equality {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<clinit>"

@@ -8,7 +8,9 @@
   }] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ = 0;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<synthetic: constructor>"
 [value] => [value] "value"
-[UNKNOWN] => [IntValueHolder.$clinit();]
+[public IntValueHolder(int value) {
+      this.value = value;
+    }] => [IntValueHolder.$clinit();] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<synthetic: create>"
 [public IntValueHolder(int value) {
       this.value = value;
     }] => [let $instance = new IntValueHolder();] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<synthetic: create>"
@@ -26,4 +28,7 @@
       this.value = value;
     }] => [this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder();] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<init>"
 [this.value = value;] => [this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts_IntValueHolder_ = value;] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[private static class IntValueHolder {
+    private int value;
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.<clinit>"

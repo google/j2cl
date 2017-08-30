@@ -2,7 +2,10 @@
   static class InnerEntry<K> implements Entry<K> {}
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<synthetic: constructor>"
-[UNKNOWN] => [TreeMap.$clinit();]
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [TreeMap.$clinit();] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<synthetic: create>"
 [public class TreeMap<K> extends Map<K> {
   static class InnerEntry<K> implements Entry<K> {}
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap();] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<init>"
 [key] => [key] "key"
 [return new InnerEntry<K>();] => [return /**@type {!InnerEntry<C_K>} */ (InnerEntry.$create__());] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.getCeilingEntry"
-[UNKNOWN] => [Map.$clinit();]
+[public class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+...  }
+}] => [Map.$clinit();] "com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.<clinit>"

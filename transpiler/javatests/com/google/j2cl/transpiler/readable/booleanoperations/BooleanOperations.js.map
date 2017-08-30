@@ -2,7 +2,10 @@
   @SuppressWarnings("unused")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.<synthetic: constructor>"
-[UNKNOWN] => [BooleanOperations.$clinit();]
+[public class BooleanOperations {
+  @SuppressWarnings("unused")
+...  }
+}] => [BooleanOperations.$clinit();] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.<synthetic: create>"
 [public class BooleanOperations {
   @SuppressWarnings("unused")
 ...  }
@@ -24,7 +27,10 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations();] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.<init>"
 [b] => [b] "b"
-[UNKNOWN] => [BooleanOperations.$clinit();]
+[@SuppressWarnings("unused")
+  private static void acceptBoolean(boolean b) {
+    // does nothing
+  }] => [BooleanOperations.$clinit();] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.acceptBoolean"
 [boolean ls = true;] => [let ls = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [ls] => [ls] "ls"
 [boolean rs = true;] => [let rs = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
@@ -108,4 +114,7 @@
 [Outer outer = new Outer();] => [let outer = $1Outer.$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(this);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [outer] => [outer] "outer"
 [outer.b |= (outer = null) == null;] => [outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | $Equality.$same((outer = null), null));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class BooleanOperations {
+  @SuppressWarnings("unused")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.<clinit>"

@@ -1,7 +1,9 @@
 [class Baz<S> {
       void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
     }] => [super();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz.<synthetic: constructor>"
-[UNKNOWN] => [$1Baz.$clinit();]
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [$1Baz.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz.<synthetic: create>"
 [class Baz<S> {
       void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
     }] => [let $instance = new $1Baz();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz.<synthetic: create>"
@@ -20,4 +22,6 @@
 [foo] => [foo] "foo"
 [bar] => [bar] "bar"
 [baz] => [baz] "baz"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class Baz<S> {
+      void qux(Baz<S> foo, Baz<T> bar, Baz<String> baz) {}
+    }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Baz.<clinit>"

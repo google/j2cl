@@ -1,5 +1,6 @@
 [a] => [a] "a"
-[UNKNOWN] => [Main.$clinit();]
+[@JsConstructor
+  public Main(@JsOptional String a) {}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsoptional.Main.<init>"
 [@JsConstructor
   public Main(@JsOptional String a) {}] => [super();] "com.google.j2cl.transpiler.readable.jsoptional.Main.<init>"
 [@JsConstructor
@@ -13,7 +14,8 @@
 [s1] => [s1] "s1"
 [d] => [d] "d"
 [i] => [i] "i"
-[UNKNOWN] => [$Arrays.$stampType(i, Boolean, 1);]
+[@JsMethod
+  public void method2(String s1, @JsOptional Double d, Boolean... i) {}] => [$Arrays.$stampType(i, Boolean, 1);] "com.google.j2cl.transpiler.readable.jsoptional.Main.method2"
 [a] => [a] "a"
 [@JsConstructor
   public Main(@JsOptional String a) {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsoptional.Main.<init>"
@@ -21,7 +23,10 @@
   public Main(@JsOptional String a) {}] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();] "com.google.j2cl.transpiler.readable.jsoptional.Main.<init>"
 [f] => [f] "f"
 [f] => [f] "f"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @JsMethod
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsoptional.Main.<clinit>"
 [Function f = (s, varargs) -> s;] => [this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main = (/** @param {?string=} s @param {...*} varargs */ (s, ...varargs) =>{
       return s;
     });]

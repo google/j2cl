@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.<synthetic: constructor>"
-[UNKNOWN] => [MultipleCatch.$clinit();]
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [MultipleCatch.$clinit();] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.<synthetic: create>"
 [public class MultipleCatch {
   public void main() {
 ...  }
@@ -31,25 +34,40 @@
 ...      }
     }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
-[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
-[UNKNOWN] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
+[public void main() {
+    try {
+...    }
+  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+[public void main() {
+    try {
+...    }
+  }] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
         let e = /**@type {RuntimeException} */ (__$exc);
-      } else if (RuntimeException.$isInstance(__$exc)) {
-        let r = /**@type {RuntimeException} */ (__$exc);
-        r = null;
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }]
-[UNKNOWN] => [let e = /**@type {RuntimeException} */ (__$exc);]
+...        throw $Exceptions.toJs(__$exc);
+      }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+[public void main() {
+    try {
+...    }
+  }] => [let e = /**@type {RuntimeException} */ (__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [e] => [e] "e"
-[UNKNOWN] => [if (RuntimeException.$isInstance(__$exc)) {
+[public void main() {
+    try {
+...    }
+  }] => [if (RuntimeException.$isInstance(__$exc)) {
         let r = /**@type {RuntimeException} */ (__$exc);
-        r = null;
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }]
-[UNKNOWN] => [let r = /**@type {RuntimeException} */ (__$exc);]
+...        throw $Exceptions.toJs(__$exc);
+      }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+[public void main() {
+    try {
+...    }
+  }] => [let r = /**@type {RuntimeException} */ (__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [r] => [r] "r"
 [r = null;] => [r = null;] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
-[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public void main() {
+    try {
+...    }
+  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+[public class MultipleCatch {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.<clinit>"

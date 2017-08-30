@@ -24,7 +24,9 @@
     this.$c_p = 0;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<synthetic: constructor>"
 [a] => [a] "a"
 [b] => [b] "b"
-[UNKNOWN] => [$1LocalClass.$clinit();]
+[public LocalClass(int a, int b) {
+        field = localVar + a + b;
+      }] => [$1LocalClass.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<synthetic: create>"
 [public LocalClass(int a, int b) {
         field = localVar + a + b;
       }] => [let $instance = new $1LocalClass();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<synthetic: create>"
@@ -53,7 +55,10 @@
       }] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<init>"
 [field = localVar + a + b;] => [this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar + a + b;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<init>"
 [a] => [a] "a"
-[UNKNOWN] => [$1LocalClass.$clinit();]
+[public LocalClass(int a) {
+        this(a, p);
+        field = localVar;
+      }] => [$1LocalClass.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<synthetic: create>"
 [public LocalClass(int a) {
         this(a, p);
         field = localVar;
@@ -69,4 +74,7 @@
 [a] => [a] "a"
 [this(a, p);] => [this.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int($outer_this, $c_localVar, $c_p, a, $c_p);] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<init>"
 [field = localVar;] => [this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass = $c_localVar;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class LocalClass {
+      public int field;
+...      }
+    }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass.<clinit>"

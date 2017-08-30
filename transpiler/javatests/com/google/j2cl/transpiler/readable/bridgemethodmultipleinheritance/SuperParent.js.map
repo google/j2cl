@@ -1,7 +1,9 @@
 [class SuperParent<T, S> {
   public void foo(T t, S s) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: constructor>"
-[UNKNOWN] => [SuperParent.$clinit();]
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: create>"
 [class SuperParent<T, S> {
   public void foo(T t, S s) {}
 }] => [let $instance = new SuperParent();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<synthetic: create>"
@@ -19,4 +21,6 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<init>"
 [t] => [t] "t"
 [s] => [s] "s"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class SuperParent<T, S> {
+  public void foo(T t, S s) {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent.<clinit>"

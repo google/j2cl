@@ -2,7 +2,10 @@
   @Override
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: constructor>"
-[UNKNOWN] => [SomeClass.$clinit();]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [SomeClass.$clinit();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<synthetic: create>"
 [public class SomeClass implements SomeInterface, AnotherInterface {
   @Override
 ...  }
@@ -24,4 +27,7 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<init>"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.run"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SomeClass implements SomeInterface, AnotherInterface {
+  @Override
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.interfaceuse.SomeClass.<clinit>"

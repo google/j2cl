@@ -13,7 +13,9 @@
   }] => [/** @public {number} */
     this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = 0;] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: constructor>"
 [b] => [b] "b"
-[UNKNOWN] => [InnerClass.$clinit();]
+[public InnerClass(int b) {
+      this.b = a + b;
+    }] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: create>"
 [public InnerClass(int b) {
       this.b = a + b;
     }] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: create>"
@@ -34,7 +36,9 @@
       this.b = a + b;
     }] => [this.$init__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<init>"
 [this.b = a + b;] => [this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass = $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor + b;] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<init>"
-[UNKNOWN] => [InnerClass.$clinit();]
+[public InnerClass() {
+      this(a);
+    }] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: create>"
 [public InnerClass() {
       this(a);
     }] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: create>"
@@ -45,4 +49,7 @@
       this(a);
     }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<synthetic: create>"
 [this(a);] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int($outer_this, $outer_this.f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor);] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class InnerClass {
+    public int b;
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass.<clinit>"

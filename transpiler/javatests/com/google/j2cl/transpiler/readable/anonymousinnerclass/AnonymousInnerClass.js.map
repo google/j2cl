@@ -2,7 +2,10 @@
   public class InnerClass {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: constructor>"
-[UNKNOWN] => [AnonymousInnerClass.$clinit();]
+[public class AnonymousInnerClass {
+  public class InnerClass {
+...  }
+}] => [AnonymousInnerClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: create>"
 [public class AnonymousInnerClass {
   public class InnerClass {
 ...  }
@@ -32,4 +35,7 @@
 [b] => [b] "b"
 [C c = new C() {};] => [let c = $3.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int(this, arg);] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.test"
 [c] => [c] "c"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class AnonymousInnerClass {
+  public class InnerClass {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<clinit>"

@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: constructor>"
-[UNKNOWN] => [InstanceofClass.$clinit();]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [InstanceofClass.$clinit();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<synthetic: create>"
 [public class InstanceofClass {
   public void test() {
 ...  }
@@ -28,4 +31,7 @@
 [assert object instanceof InstanceofClass;] => [$Asserts.$assert(InstanceofClass.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [assert object instanceof Object;] => [$Asserts.$assert(java_lang_Object.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [assert !(object instanceof String);] => [$Asserts.$assert(!(java_lang_String.$isInstance(object)));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class InstanceofClass {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.<clinit>"

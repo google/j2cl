@@ -2,7 +2,10 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsoverlay.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsoverlay.Main.<synthetic: create>"
 [public class Main {
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
@@ -36,4 +39,7 @@
 [NativeJsTypeWithOverlay.staticField = null;] => [NativeJsTypeWithOverlay$$Overlay.f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay$$Overlay = null;] "com.google.j2cl.transpiler.readable.jsoverlay.Main.test"
 [NativeJsTypeWithOverlay.varargs(1, 2, 3);] => [NativeJsTypeWithOverlay$$Overlay.m_varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));] "com.google.j2cl.transpiler.readable.jsoverlay.Main.test"
 [n.baz();] => [NativeJsTypeWithOverlay$$Overlay.m_baz__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$p_com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay$$Overlay(n);] "com.google.j2cl.transpiler.readable.jsoverlay.Main.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsoverlay.Main.<clinit>"

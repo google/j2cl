@@ -56,6 +56,8 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
     return null;
   }
 
+  public abstract String getStackTraceMethodName();
+
   @Override
   public String getReadableDescription() {
     return getDescriptor().getReadableDescription();

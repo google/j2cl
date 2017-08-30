@@ -1,7 +1,9 @@
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<synthetic: constructor>"
-[UNKNOWN] => [C.$clinit();]
+[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
+  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
+}] => [C.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<synthetic: create>"
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [let $instance = new C();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<synthetic: create>"
@@ -17,5 +19,9 @@
 [class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
   // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
 }] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<init>"
-[UNKNOWN] => [return super.m_get__java_lang_Object(arg0);]
-[UNKNOWN] => [B.$clinit();]
+[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
+  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
+}] => [return super.m_get__java_lang_Object(arg0);] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.get"
+[class C<C1> extends B<C1, Consumer<? super C1>> implements I<C1> {
+  // Needs a bridge from the I.get(Consumer) signature to B.get(Object) implementation.
+}] => [B.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C.<clinit>"

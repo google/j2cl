@@ -2,7 +2,10 @@
   public static int fun(MyJsFunctionInterface fn, int a) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: create>"
 [public class Main {
   public static int fun(MyJsFunctionInterface fn, int a) {
 ...  }
@@ -25,7 +28,9 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [fn] => [fn] "fn"
 [a] => [a] "a"
-[UNKNOWN] => [Main.$clinit();]
+[public static int fun(MyJsFunctionInterface fn, int a) {
+    return fn.foo(a);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.fun"
 [return fn.foo(a);] => [return fn(a);] "com.google.j2cl.transpiler.readable.jsfunction.Main.fun"
 [MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
 [func] => [func] "func"
@@ -63,12 +68,15 @@
 [fn] => [fn] "fn"
 [arg] => [arg] "arg"
 [f] => [f] "f"
-[UNKNOWN] => [Main.$clinit();]
+[public static void f(Function<String, String> f) {}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.f"
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [list] => [list] "list"
 [f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [generator] => [generator] "generator"
-[UNKNOWN] => [Main.$clinit();]
+[public static <A, T> A[] toArray(IntFunction<A[]> generator) {
+    List<T> collected = null;
+    return collected.toArray(generator.apply(collected.size()));
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
 [List<T> collected = null;] => [let collected = null;] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
 [collected] => [collected] "collected"
 [return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
@@ -82,7 +90,10 @@
 [f] => [f] "f"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[JsFunctionVarargs testJsFunctionVarargs() {
+    JsFunctionVarargs f =
+...    return f;
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
@@ -91,7 +102,10 @@
         let number$1$ = $array[$index];
         sum += number$1$;
       }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
-[UNKNOWN] => [let number$1$ = $array[$index];]
+[JsFunctionVarargs testJsFunctionVarargs() {
+    JsFunctionVarargs f =
+...    return f;
+  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
@@ -105,7 +119,10 @@
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[JsFunctionVarargs testJsFunctionVarargsInnerClass() {
+    return new JsFunctionVarargs() {
+...    };
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
@@ -114,7 +131,10 @@
         let number$1$ = $array[$index];
         sum += number$1$;
       }] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
-[UNKNOWN] => [let number$1$ = $array[$index];]
+[JsFunctionVarargs testJsFunctionVarargsInnerClass() {
+    return new JsFunctionVarargs() {
+...    };
+  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
@@ -125,4 +145,7 @@
 [i] => [i] "i"
 [n] => [n] "n"
 [(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public static int fun(MyJsFunctionInterface fn, int a) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"

@@ -2,7 +2,10 @@
   @SuppressWarnings("unused")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.<synthetic: constructor>"
-[UNKNOWN] => [LocalClassWithOuterGenerics.$clinit();]
+[public class LocalClassWithOuterGenerics<A> {
+  @SuppressWarnings("unused")
+...  }
+}] => [LocalClassWithOuterGenerics.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.<synthetic: create>"
 [public class LocalClassWithOuterGenerics<A> {
   @SuppressWarnings("unused")
 ...  }
@@ -23,9 +26,15 @@
   @SuppressWarnings("unused")
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.<init>"
-[UNKNOWN] => [LocalClassWithOuterGenerics.$clinit();]
+[@SuppressWarnings("unused")
+  public static <T> void foo() {
+...    Baz<Object> baz = new Baz<>();
+  }] => [LocalClassWithOuterGenerics.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
 [Bar bar = new Bar();] => [let bar = /**@type {!$1Bar<*>} */ ($1Bar.$create__());] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
 [bar] => [bar] "bar"
 [Baz<Object> baz = new Baz<>();] => [let baz = /**@type {!$1Baz<*, *>} */ ($1Baz.$create__());] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
 [baz] => [baz] "baz"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class LocalClassWithOuterGenerics<A> {
+  @SuppressWarnings("unused")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.<clinit>"

@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<synthetic: constructor>"
-[UNKNOWN] => [LambdaInSubClass.$clinit();]
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [LambdaInSubClass.$clinit();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<synthetic: create>"
 [public class LambdaInSubClass extends Parent {
   public void test() {
 ...  }
@@ -28,4 +31,7 @@
 ...          return a;
         });] => [let l = ($Lambda$LambdaInterface$0.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
 [l] => [l] "l"
-[UNKNOWN] => [Parent.$clinit();]
+[public class LambdaInSubClass extends Parent {
+  public void test() {
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<clinit>"

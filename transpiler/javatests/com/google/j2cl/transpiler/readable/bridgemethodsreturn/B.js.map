@@ -2,7 +2,10 @@
   // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.<synthetic: constructor>"
-[UNKNOWN] => [B.$clinit();]
+[public class B extends A<Number, String> implements I<Integer, String> {
+  // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
+...  }
+}] => [B.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.<synthetic: create>"
 [public class B extends A<Number, String> implements I<Integer, String> {
   // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
 ...  }
@@ -25,5 +28,11 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.<init>"
 [s] => [s] "s"
 [return new Integer(1);] => [return Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.fun"
-[UNKNOWN] => [return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [A.$clinit();]
+[public class B extends A<Number, String> implements I<Integer, String> {
+  // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
+...  }
+}] => [return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.fun"
+[public class B extends A<Number, String> implements I<Integer, String> {
+  // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
+...  }
+}] => [A.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.<clinit>"

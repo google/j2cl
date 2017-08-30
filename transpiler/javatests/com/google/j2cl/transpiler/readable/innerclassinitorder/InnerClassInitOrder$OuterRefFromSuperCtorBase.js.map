@@ -3,7 +3,9 @@
 ...    }
   }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: constructor>"
 [o] => [o] "o"
-[UNKNOWN] => [OuterRefFromSuperCtorBase.$clinit();]
+[OuterRefFromSuperCtorBase(Object o) {
+      o.toString();
+    }] => [OuterRefFromSuperCtorBase.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: create>"
 [OuterRefFromSuperCtorBase(Object o) {
       o.toString();
     }] => [let $instance = new OuterRefFromSuperCtorBase();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<synthetic: create>"
@@ -21,4 +23,7 @@
       o.toString();
     }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<init>"
 [o.toString();] => [$Objects.m_toString__java_lang_Object(o);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[static class OuterRefFromSuperCtorBase {
+    OuterRefFromSuperCtorBase(Object o) {
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase.<clinit>"

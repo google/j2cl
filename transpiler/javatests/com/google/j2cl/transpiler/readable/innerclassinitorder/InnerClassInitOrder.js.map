@@ -17,7 +17,10 @@
 ...  }
 }] => [/** @public {OuterIsSuper} */
     this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = null;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: constructor>"
-[UNKNOWN] => [InnerClassInitOrder.$clinit();]
+[/**
+ * Smoke test for inner classes, copied from GWT.
+...  }
+}] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: create>"
 [/**
  * Smoke test for inner classes, copied from GWT.
 ...  }
@@ -88,7 +91,10 @@
       let theAp = $array[$index];
       theAp.m_act__();
     }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
-[UNKNOWN] => [let theAp = $array[$index];]
+[public void testInnerClassLoop() {
+    abstract class AddNumber {
+...    assert (number == 1156);
+  }] => [let theAp = $array[$index];] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [theAp] => [theAp] "theAp"
 [theAp.act();] => [theAp.m_act__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [assert (number == 1156);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1156));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
@@ -118,7 +124,10 @@
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
 [args] => [args] "args"
-[UNKNOWN] => [InnerClassInitOrder.$clinit();]
+[public static void main(String... args) {
+    InnerClassInitOrder m = new InnerClassInitOrder();
+...    m.testUnqualifiedSuperCallAnon();
+  }] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [InnerClassInitOrder m = new InnerClassInitOrder();] => [let m = InnerClassInitOrder.$create__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m] => [m] "m"
 [m.testOuterThisFromSuperCall();] => [m.m_testOuterThisFromSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
@@ -136,7 +145,10 @@
 [m.testUnqualifiedAlloc();] => [m.m_testUnqualifiedAlloc__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m.testUnqualifiedSuperCall();] => [m.m_testUnqualifiedSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m.testUnqualifiedSuperCallAnon();] => [m.m_testUnqualifiedSuperCallAnon__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[/**
+ * Smoke test for inner classes, copied from GWT.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<clinit>"
 [public int number = 0;] => [this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder = 0;]
 [private final Outer outer = new Outer(1);] => [this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = Outer.$create__int(1);]
 [private final Outer.OuterIsSuper outerIsSuper = outer.new OuterIsSuper(2);] => [this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = OuterIsSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, 2);]

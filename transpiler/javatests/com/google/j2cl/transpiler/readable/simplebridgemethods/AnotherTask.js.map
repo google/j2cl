@@ -2,7 +2,10 @@
   // overrides and changes the signature.
 ...  public void call(Superclass<T> t) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<synthetic: constructor>"
-[UNKNOWN] => [AnotherTask.$clinit();]
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [AnotherTask.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<synthetic: create>"
 [class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
   // overrides and changes the signature.
 ...  public void call(Superclass<T> t) {}
@@ -24,5 +27,11 @@
 ...  public void call(Superclass<T> t) {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<init>"
 [t] => [t] "t"
-[UNKNOWN] => [this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(/**@type {Superclass<C_T>} */ ($Casts.$to(arg0, Superclass)));]
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(/**@type {Superclass<C_T>} */ ($Casts.$to(arg0, Superclass)));] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.call"
+[class AnotherTask<T extends AssertionError> implements Callable<Superclass<T>> {
+  // overrides and changes the signature.
+...  public void call(Superclass<T> t) {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.<clinit>"

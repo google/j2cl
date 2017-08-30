@@ -2,7 +2,10 @@
     // inherited B.bar() accidentally overrides J.bar().
 ...    // only one bridge.
   }] => [super();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.<synthetic: constructor>"
-[UNKNOWN] => [E.$clinit();]
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [E.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.<synthetic: create>"
 [public static class E extends B implements J<String> {
     // inherited B.bar() accidentally overrides J.bar().
 ...    // only one bridge.
@@ -23,6 +26,15 @@
     // inherited B.bar() accidentally overrides J.bar().
 ...    // only one bridge.
   }] => [this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.<init>"
-[UNKNOWN] => [super.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [return super.fun(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [B.$clinit();]
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [super.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.bar"
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [return super.fun(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.fun"
+[public static class E extends B implements J<String> {
+    // inherited B.bar() accidentally overrides J.bar().
+...    // only one bridge.
+  }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E.<clinit>"

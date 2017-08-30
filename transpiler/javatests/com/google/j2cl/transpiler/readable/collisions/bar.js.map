@@ -2,7 +2,10 @@
   {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: constructor>"
-[UNKNOWN] => [bar.$clinit();]
+[class bar {
+  {
+...  }
+}] => [bar.$clinit();] "com.google.j2cl.transpiler.readable.collisions.bar.<synthetic: create>"
 [class bar {
   {
 ...  }
@@ -23,15 +26,18 @@
   {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_collisions_bar();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
-[int foo, bar, goog, flip, window;] => [let /** number */ foo$1$, /** number */ bar$1$, /** number */ goog$1$, /** number */ flip, /** number */ window$1$;]
+[class bar {
+  {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.collisions.bar.<clinit>"
+[int foo, bar, goog, flip, window;] => [let /** number */ foo$1$, /** number */ bar$1$, /** number */ goog$1$, /** number */ flip, /** number */ window$1$;] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
 [foo] => [foo$1$] "foo"
 [bar] => [bar$1$] "bar"
 [goog] => [goog$1$] "goog"
 [flip] => [flip] "flip"
 [window] => [window$1$] "window"
-[Blah.m();] => [Math.random();]
-[Blah.getN();] => [String.prototype.length;]
-[new Blah();] => [new String();]
-[new goog();] => [com_google_j2cl_transpiler_readable_collisions_goog.$create__();]
-[new foo();] => [foo.$create__();]
+[Blah.m();] => [Math.random();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[Blah.getN();] => [String.prototype.length;] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[new Blah();] => [new String();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[new goog();] => [com_google_j2cl_transpiler_readable_collisions_goog.$create__();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[new foo();] => [foo.$create__();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"

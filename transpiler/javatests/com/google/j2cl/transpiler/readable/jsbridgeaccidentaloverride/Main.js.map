@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public void test() {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: create>"
 [public class Main {
   public void test() {
 ...  }
@@ -40,4 +43,7 @@
 [a.fun(1);] => [a.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [b.fun(1);] => [b.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [d.fun(1);] => [d.m_fun__int(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<clinit>"

@@ -2,7 +2,10 @@
   public int test(int in) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<synthetic: constructor>"
-[UNKNOWN] => [JSKeyWords.$clinit();]
+[public class JSKeyWords {
+  public int test(int in) {
+...  }
+}] => [JSKeyWords.$clinit();] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<synthetic: create>"
 [public class JSKeyWords {
   public int test(int in) {
 ...  }
@@ -27,4 +30,7 @@
 [int let = 0;] => [let let$1$ = 0;] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
 [let] => [let$1$] "let"
 [return let + in;] => [return let$1$ + in$1$;] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class JSKeyWords {
+  public int test(int in) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<clinit>"

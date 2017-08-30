@@ -2,7 +2,10 @@
   @Override
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.<synthetic: constructor>"
-[UNKNOWN] => [Child.$clinit();]
+[public class Child extends Parent {
+  @Override
+...  }
+}] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.<synthetic: create>"
 [public class Child extends Parent {
   @Override
 ...  }
@@ -33,4 +36,7 @@
 [super.grandParentWithParams(foo);] => [super.m_grandParentWithParams__int(foo);] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithParams"
 [super.grandParentWithChangingReturn();] => [super.m_grandParentWithChangingReturn__();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithChangingReturn"
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.supermethodcall.Child.grandParentWithChangingReturn"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Child extends Parent {
+  @Override
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.supermethodcall.Child.<clinit>"

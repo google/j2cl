@@ -1,7 +1,9 @@
 [public class FunctionImpl implements Function {
   public void test(Function f) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.functiontype.FunctionImpl.<synthetic: constructor>"
-[UNKNOWN] => [FunctionImpl.$clinit();]
+[public class FunctionImpl implements Function {
+  public void test(Function f) {}
+}] => [FunctionImpl.$clinit();] "com.google.j2cl.transpiler.readable.functiontype.FunctionImpl.<synthetic: create>"
 [public class FunctionImpl implements Function {
   public void test(Function f) {}
 }] => [let $instance = new FunctionImpl();] "com.google.j2cl.transpiler.readable.functiontype.FunctionImpl.<synthetic: create>"
@@ -18,4 +20,6 @@
   public void test(Function f) {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_functiontype_FunctionImpl();] "com.google.j2cl.transpiler.readable.functiontype.FunctionImpl.<init>"
 [f] => [f] "f"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class FunctionImpl implements Function {
+  public void test(Function f) {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.functiontype.FunctionImpl.<clinit>"

@@ -53,6 +53,11 @@ public class Field extends Member implements HasJsNameInfo {
     return this.capturedVariable;
   }
 
+  @Override
+  public String getStackTraceMethodName() {
+    return null;
+  }
+
   public boolean hasInitializer() {
     return initializer != null;
   }

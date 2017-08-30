@@ -7,7 +7,10 @@
 ...  public void funInParent() {}
 }] => [/** @public {number} */
     this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent = 0;] "com.google.j2cl.transpiler.readable.lambdainsubclass.Parent.<synthetic: constructor>"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Parent {
+  public int fieldInParent;
+...  public void funInParent() {}
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdainsubclass.Parent.<synthetic: create>"
 [public class Parent {
   public int fieldInParent;
 ...  public void funInParent() {}
@@ -28,4 +31,7 @@
   public int fieldInParent;
 ...  public void funInParent() {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent();] "com.google.j2cl.transpiler.readable.lambdainsubclass.Parent.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Parent {
+  public int fieldInParent;
+...  public void funInParent() {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdainsubclass.Parent.<clinit>"

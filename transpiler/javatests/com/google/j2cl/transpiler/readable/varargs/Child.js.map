@@ -2,7 +2,9 @@
   public Child() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: constructor>"
-[UNKNOWN] => [Child.$clinit();]
+[public Child() {
+    super(1);
+  }] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: create>"
 [public Child() {
     super(1);
   }] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.varargs.Child.<synthetic: create>"
@@ -16,4 +18,7 @@
 [public Child() {
     super(1);
   }] => [this.$init__com_google_j2cl_transpiler_readable_varargs_Child();] "com.google.j2cl.transpiler.readable.varargs.Child.<init>"
-[UNKNOWN] => [Varargs.$clinit();]
+[class Child extends Varargs {
+  public Child() {
+...  }
+}] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Child.<clinit>"

@@ -8,7 +8,9 @@
 }] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: constructor>"
 [f] => [f] "f"
-[UNKNOWN] => [Main.$clinit();]
+[public Main(int f) {
+    this.field = f;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: create>"
 [public Main(int f) {
     this.field = f;
   }] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: create>"
@@ -28,26 +30,53 @@
 [this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<init>"
 [multiplier] => [multiplier] "multiplier"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[@JsMethod
+  public static int f1(int multiplier, int... numbers) {
+    return numbers.length + numbers[0] + multiplier;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
+[@JsMethod
+  public static int f1(int multiplier, int... numbers) {
+    return numbers.length + numbers[0] + multiplier;
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[@JsMethod
+  public static int f2(int... numbers) {
+    return numbers.length + numbers[0];
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
+[@JsMethod
+  public static int f2(int... numbers) {
+    return numbers.length + numbers[0];
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [return numbers.length + numbers[0];] => [return numbers.length + numbers[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[@JsMethod
+  public int f3(int m, int... numbers) {
+    return this.field + m + numbers[1];
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [numbers] => [numbers] "numbers"
-[UNKNOWN] => [$Arrays.$stampType(numbers, $int, 1);]
+[@JsMethod
+  public int f4(int... numbers) {
+    return this.field + numbers[1];
+  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [elements] => [elements] "elements"
-[UNKNOWN] => [Main.$clinit();]
+[@JsMethod
+  public static <T> T generics(T... elements) {
+    return elements[0];
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [return elements[0];] => [return elements[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [elements] => [elements] "elements"
-[UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [$Arrays.$stampType(elements, List, 1);]
+[@JsMethod
+  public static Main parameterizedType(List<Main>... elements) {
+    return elements[0].get(0);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
+[@JsMethod
+  public static Main parameterizedType(List<Main>... elements) {
+    return elements[0].get(0);
+  }] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
@@ -118,4 +147,7 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
 [ints] => [ints] "ints"
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"

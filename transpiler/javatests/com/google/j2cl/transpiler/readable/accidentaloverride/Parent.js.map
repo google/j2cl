@@ -2,7 +2,10 @@
   @SuppressWarnings("unused")
   public void foo(T e) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: constructor>"
-[UNKNOWN] => [Parent.$clinit();]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<synthetic: create>"
 [class Parent<T extends Error> {
   @SuppressWarnings("unused")
   public void foo(T e) {}
@@ -24,4 +27,7 @@
   public void foo(T e) {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<init>"
 [e] => [e] "e"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class Parent<T extends Error> {
+  @SuppressWarnings("unused")
+  public void foo(T e) {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.accidentaloverride.Parent.<clinit>"

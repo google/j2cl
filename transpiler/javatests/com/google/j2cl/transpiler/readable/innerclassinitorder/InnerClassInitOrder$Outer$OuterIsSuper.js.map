@@ -8,7 +8,9 @@
     }] => [/** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper = null;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.<synthetic: constructor>"
 [i] => [i] "i"
-[UNKNOWN] => [OuterIsSuper.$clinit();]
+[public OuterIsSuper(int i) {
+        super(i);
+      }] => [OuterIsSuper.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.<synthetic: create>"
 [public OuterIsSuper(int i) {
         super(i);
       }] => [let $instance = new OuterIsSuper();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.<synthetic: create>"
@@ -33,4 +35,7 @@
 ...          }
         }.go();] => [return $1.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int(this, 1).m_go__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.checkDispatchFromSub2"
 [return new OuterIsNotSuper();] => [return OuterIsNotSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.unqualifiedAlloc"
-[UNKNOWN] => [Outer.$clinit();]
+[public class OuterIsSuper extends Outer {
+      public OuterIsSuper(int i) {
+...      }
+    }] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper.<clinit>"

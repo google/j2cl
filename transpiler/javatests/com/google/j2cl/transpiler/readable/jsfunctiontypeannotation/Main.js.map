@@ -2,7 +2,10 @@
   @JsFunction
 ...  public static native double callOnFunction(A f);
 }] => [super();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @JsFunction
+...  public static native double callOnFunction(A f);
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.<synthetic: create>"
 [public class Main {
   @JsFunction
 ...  public static native double callOnFunction(A f);
@@ -26,27 +29,41 @@
 [af] => [af] "af"
 [o] => [o] "o"
 [n] => [n] "n"
-[UNKNOWN] => [Main.$clinit();]
+[public static Object callGenericInterface(ApplyFunction af, Object o, Number n) {
+    return af.apply(o, n);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callGenericInterface"
 [return af.apply(o, n);] => [return af(o, n);] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callGenericInterface"
 [af] => [af] "af"
 [s] => [s] "s"
-[UNKNOWN] => [Main.$clinit();]
+[public static String callParametricInterface(ApplyFunction<String, Integer> af, String s) {
+    return af.apply(s, 1);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callParametricInterface"
 [return af.apply(s, 1);] => [return /**@type {?string} */ ($Casts.$to(af(s, Integer.m_valueOf__int(1)), java_lang_String));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callParametricInterface"
 [af] => [af] "af"
 [u] => [u] "u"
 [v] => [v] "v"
-[UNKNOWN] => [Main.$clinit();]
+[public static <U, V extends Number> U callParametricWithTypeVariable(
+      ApplyFunction<U, V> af, U u, V v) {
+    return af.apply(u, v);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callParametricWithTypeVariable"
 [return af.apply(u, v);] => [return af(u, v);] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callParametricWithTypeVariable"
 [b] => [b] "b"
 [o] => [o] "o"
 [n] => [n] "n"
-[UNKNOWN] => [Main.$clinit();]
+[public static Object callImplementorGeneric(B b, Object o, Integer n) {
+    return b.apply(o, n);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callImplementorGeneric"
 [return b.apply(o, n);] => [return b(o, n);] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callImplementorGeneric"
 [b] => [b] "b"
 [s] => [s] "s"
-[UNKNOWN] => [Main.$clinit();]
+[public static String callImplementorParametric(B<String> b, String s) {
+    return b.apply(s, 1);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callImplementorParametric"
 [return b.apply(s, 1);] => [return /**@type {?string} */ ($Casts.$to(b(s, Integer.m_valueOf__int(1)), java_lang_String));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.callImplementorParametric"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testParameterTypes() {
+    ApplyFunction foo = new B<String>();
+...    callOnFunction(new A());
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
 [ApplyFunction foo = new B<String>();] => [let foo = /**@type {function(?string, Integer):?string} */ (B.$create__());] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
 [foo] => [foo] "foo"
 [ApplyFunction bar = new A();] => [let bar = A.$create__();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
@@ -61,7 +78,10 @@
 [foo.apply("a", 1);] => [foo("a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
 [bar.apply(1.1, 1.1);] => [bar(1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
 [callOnFunction(new A());] => [Main.callOnFunction(A.$create__());] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testParameterTypes"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testCast() {
+    Object o = new B<String>();
+...    A a = (A) o;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testCast"
 [Object o = new B<String>();] => [let o = /**@type {function(?string, Integer):?string} */ (B.$create__());] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testCast"
 [o] => [o] "o"
 [B b1 = (B) o;] => [let b1 = /**@type {?function(*, Integer):*} */ ($Casts.$to(o, B));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testCast"
@@ -74,7 +94,10 @@
 [af2] => [af2] "af2"
 [A a = (A) o;] => [let a = /**@type {?function(?number, ?number):?number} */ ($Casts.$to(o, A));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testCast"
 [a] => [a] "a"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testNewInstance() {
+    B b1 = new B();
+...    ApplyFunction af1 = new A();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testNewInstance"
 [B b1 = new B();] => [let b1 = B.$create__();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testNewInstance"
 [b1] => [b1] "b1"
 [B<String> b2 = (B) new B<String>();] => [let b2 = /**@type {?function(*, Integer):*} */ ($Casts.$to(B.$create__(), B));] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testNewInstance"
@@ -82,4 +105,7 @@
 [ApplyFunction af1 = new A();] => [let af1 = A.$create__();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.testNewInstance"
 [af1] => [af1] "af1"
 [f] => [f] "f"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @JsFunction
+...  public static native double callOnFunction(A f);
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.<clinit>"

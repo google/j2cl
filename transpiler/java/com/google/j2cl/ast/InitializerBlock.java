@@ -26,10 +26,12 @@ import com.google.j2cl.common.SourcePosition;
 public class InitializerBlock extends Member {
   @Visitable Block block;
   private final boolean isStatic;
+  private TypeDescriptor enclosingTypeDescriptor;
 
-  public InitializerBlock(Block block, boolean isStatic) {
+  private InitializerBlock(Block block, boolean isStatic, TypeDescriptor enclosingTypeDescriptor) {
     this.block = checkNotNull(block);
     this.isStatic = isStatic;
+    this.enclosingTypeDescriptor = checkNotNull(enclosingTypeDescriptor);
   }
 
   public Block getBlock() {
@@ -47,6 +49,17 @@ public class InitializerBlock extends Member {
   }
 
   @Override
+  public String getStackTraceMethodName() {
+    String prefix = getEnclosingTypeDescriptor().getQualifiedBinaryName() + ".";
+
+    return isStatic ? prefix + "<clinit>" : prefix + "<init>";
+  }
+
+  private TypeDescriptor getEnclosingTypeDescriptor() {
+    return enclosingTypeDescriptor;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
   }
@@ -60,12 +73,19 @@ public class InitializerBlock extends Member {
     private Block block;
     private boolean isStatic;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private TypeDescriptor enclosingTypeDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {
       return newBuilder()
           .setBlock(initializerBlock.getBlock())
           .setStatic(initializerBlock.isStatic())
-          .setSourcePosition(initializerBlock.getSourcePosition());
+          .setSourcePosition(initializerBlock.getSourcePosition())
+          .setEnclosingTypeDescriptor(initializerBlock.getEnclosingTypeDescriptor());
+    }
+
+    public Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
+      this.enclosingTypeDescriptor = enclosingTypeDescriptor;
+      return this;
     }
 
     public Builder setBlock(Block block) {
@@ -86,7 +106,8 @@ public class InitializerBlock extends Member {
     public InitializerBlock build() {
       checkState(block != null);
       checkState(sourcePosition != null);
-      InitializerBlock initializerBlock = new InitializerBlock(block, isStatic);
+      InitializerBlock initializerBlock =
+          new InitializerBlock(block, isStatic, enclosingTypeDescriptor);
       initializerBlock.setSourcePosition(sourcePosition);
       return initializerBlock;
     }

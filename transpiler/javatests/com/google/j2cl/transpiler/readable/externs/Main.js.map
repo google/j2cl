@@ -17,7 +17,10 @@
 ...  TopLevelExtern.Inner inner;
 }] => [/** @public {Inner} */
     this.f_inner__com_google_j2cl_transpiler_readable_externs_Main = null;] "com.google.j2cl.transpiler.readable.externs.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  static class FooImpl {
+...  TopLevelExtern.Inner inner;
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main.<synthetic: create>"
 [public class Main {
   static class FooImpl {
 ...  TopLevelExtern.Inner inner;
@@ -39,11 +42,19 @@
 ...  TopLevelExtern.Inner inner;
 }] => [this.$init__com_google_j2cl_transpiler_readable_externs_Main();] "com.google.j2cl.transpiler.readable.externs.Main.<init>"
 [fooOverlay] => [fooOverlay] "fooOverlay"
-[UNKNOWN] => [Main.$clinit();]
+[private static boolean testFooOverlay(FooOverlay fooOverlay) {
+    return fooOverlay.getFoo().equals("Hello");
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main.testFooOverlay"
 [return fooOverlay.getFoo().equals("Hello");] => [return java_lang_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");] "com.google.j2cl.transpiler.readable.externs.Main.testFooOverlay"
 [fooOverlay] => [fooOverlay] "fooOverlay"
 [args] => [args] "args"
-[UNKNOWN] => [Main.$clinit();]
+[public static void main(String... args) {
+    testFooOverlay((FooOverlay) (Object) new FooImpl());
+    useDirectlyAsFoo(new FooImpl());
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(/**@type {Foo} */ ($Casts.$to($Casts.$to(FooImpl.$create__(), java_lang_Object), FooOverlay$$Overlay)));] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(FooImpl.$create__());] "com.google.j2cl.transpiler.readable.externs.Main.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  static class FooImpl {
+...  TopLevelExtern.Inner inner;
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main.<clinit>"

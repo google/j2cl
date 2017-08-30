@@ -2,7 +2,10 @@
   public static Object f = new Object() {}; // Initializer in a static field declaration.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<synthetic: constructor>"
-[UNKNOWN] => [LocalClassInStaticContext.$clinit();]
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [LocalClassInStaticContext.$clinit();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<synthetic: create>"
 [public class LocalClassInStaticContext {
   public static Object f = new Object() {}; // Initializer in a static field declaration.
 ...  }
@@ -23,15 +26,21 @@
   public static Object f = new Object() {}; // Initializer in a static field declaration.
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<init>"
-[UNKNOWN] => [LocalClassInStaticContext.$clinit();]
+[public static void test() {
+    // In a static function.
+...        };
+  }] => [LocalClassInStaticContext.$clinit();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [new A();] => [$1A.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [Object a =
         new Object() {
 ...          }
         };] => [let a = $3.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [a] => [a] "a"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class LocalClassInStaticContext {
+  public static Object f = new Object() {}; // Initializer in a static field declaration.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<clinit>"
 [public static Object f = new Object() {};] => [LocalClassInStaticContext.$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext = $1.$create__();]
-[new B();] => [$1B.$create__();]
-[Object b = new Object() {};] => [let b = $2.$create__();]
+[new B();] => [$1B.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<clinit>"
+[Object b = new Object() {};] => [let b = $2.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<clinit>"
 [b] => [b] "b"

@@ -2,7 +2,10 @@
   public <T> int compare0(Comparable<T> c, T t) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.<synthetic: constructor>"
-[UNKNOWN] => [InterfaceDevirtualize.$clinit();]
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [InterfaceDevirtualize.$clinit();] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.<synthetic: create>"
 [public class InterfaceDevirtualize {
   public <T> int compare0(Comparable<T> c, T t) {
 ...  }
@@ -47,4 +50,7 @@
 [d1] => [d1] "d1"
 [d2] => [d2] "d2"
 [return d1.compareTo(d2);] => [return d1.m_compareTo__java_lang_Integer(d2);] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.compare3"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class InterfaceDevirtualize {
+  public <T> int compare0(Comparable<T> c, T t) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.<clinit>"

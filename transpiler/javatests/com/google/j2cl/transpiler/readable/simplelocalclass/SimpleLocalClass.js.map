@@ -2,7 +2,10 @@
   public void test(final int p) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: constructor>"
-[UNKNOWN] => [SimpleLocalClass.$clinit();]
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [SimpleLocalClass.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: create>"
 [public class SimpleLocalClass {
   public void test(final int p) {
 ...  }
@@ -30,4 +33,7 @@
 [new InnerClassWithoutCaptures();] => [$1InnerClassWithoutCaptures.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(this);] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.test"
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.fun"
 [localVar] => [localVar] "localVar"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SimpleLocalClass {
+  public void test(final int p) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<clinit>"

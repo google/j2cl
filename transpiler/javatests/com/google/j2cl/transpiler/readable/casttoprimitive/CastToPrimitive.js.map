@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.<synthetic: constructor>"
-[UNKNOWN] => [CastToPrimitive.$clinit();]
+[public class CastToPrimitive {
+  public void test() {
+...  }
+}] => [CastToPrimitive.$clinit();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.<synthetic: create>"
 [public class CastToPrimitive {
   public void test() {
 ...  }
@@ -116,4 +119,7 @@
 [f] => [f] "f"
 [double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.testUnboxAndWiden"
 [d] => [d] "d"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class CastToPrimitive {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive.<clinit>"

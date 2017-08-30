@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.<synthetic: constructor>"
-[UNKNOWN] => [SwitchStatement.$clinit();]
+[public class SwitchStatement {
+  public void main() {
+...  }
+}] => [SwitchStatement.$clinit();] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.<synthetic: create>"
 [public class SwitchStatement {
   public void main() {
 ...  }
@@ -71,14 +74,20 @@
 [break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
 [default:] => [default: ] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
 [return;] => [return;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.main"
-[UNKNOWN] => [let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i$1$;]
+[@SuppressWarnings("unused")
+  private static void testSwitchVariableDeclarations() {
+...    assert false;
+  }] => [let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i$1$;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [unassigned] => [unassigned] "unassigned"
 [unassigned2] => [unassigned2] "unassigned2"
 [i] => [i] "i"
 [j] => [j] "j"
 [b] => [b] "b"
 [i] => [i$1$] "i"
-[UNKNOWN] => [SwitchStatement.$clinit();]
+[@SuppressWarnings("unused")
+  private static void testSwitchVariableDeclarations() {
+...    assert false;
+  }] => [SwitchStatement.$clinit();] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [switch (3) {
       case 1:
 ...        return;
@@ -106,4 +115,7 @@
 [int i = 1;] => [i$1$ = 1;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [assert false;] => [$Asserts.$assert(false);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SwitchStatement {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.<clinit>"

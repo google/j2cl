@@ -2,7 +2,10 @@
     // It is a JsMethod itself and also overrides a JsMethod.
 ...    public void bar(String s) {}
   }] => [super();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.<synthetic: constructor>"
-[UNKNOWN] => [B.$clinit();]
+[public static class B extends A<String> {
+    // It is a JsMethod itself and also overrides a JsMethod.
+...    public void bar(String s) {}
+  }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.<synthetic: create>"
 [public static class B extends A<String> {
     // It is a JsMethod itself and also overrides a JsMethod.
 ...    public void bar(String s) {}
@@ -26,6 +29,15 @@
 [s] => [s] "s"
 [return s;] => [return s;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.fun"
 [s] => [s] "s"
-[UNKNOWN] => [this.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));]
-[UNKNOWN] => [A.$clinit();]
+[public static class B extends A<String> {
+    // It is a JsMethod itself and also overrides a JsMethod.
+...    public void bar(String s) {}
+  }] => [this.bar(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.bar"
+[public static class B extends A<String> {
+    // It is a JsMethod itself and also overrides a JsMethod.
+...    public void bar(String s) {}
+  }] => [return this.m_fun__java_lang_String(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.fun"
+[public static class B extends A<String> {
+    // It is a JsMethod itself and also overrides a JsMethod.
+...    public void bar(String s) {}
+  }] => [A.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.<clinit>"

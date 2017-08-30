@@ -2,7 +2,10 @@
   @JsMethod(name = "bar")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: constructor>"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<synthetic: create>"
 [public class Parent {
   @JsMethod(name = "bar")
 ...  }
@@ -23,4 +26,7 @@
   @JsMethod(name = "bar")
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Parent {
+  @JsMethod(name = "bar")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsmethodoverride.Parent.<clinit>"

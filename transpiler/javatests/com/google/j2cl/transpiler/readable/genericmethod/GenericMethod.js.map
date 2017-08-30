@@ -2,7 +2,10 @@
   public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: constructor>"
-[UNKNOWN] => [GenericMethod.$clinit();]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: create>"
 [public class GenericMethod<T> {
   public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
 ...  }
@@ -49,4 +52,7 @@
 [String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class GenericMethod<T> {
+  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<clinit>"

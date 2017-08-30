@@ -1,10 +1,12 @@
 [public class PrivateConstructor {
   private PrivateConstructor() {}
 }] => [super();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<synthetic: constructor>"
-[UNKNOWN] => [PrivateConstructor.$clinit();]
+[private PrivateConstructor() {}] => [PrivateConstructor.$clinit();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<synthetic: create>"
 [private PrivateConstructor() {}] => [let $instance = new PrivateConstructor();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<synthetic: create>"
 [private PrivateConstructor() {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor__();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<synthetic: create>"
 [private PrivateConstructor() {}] => [return $instance;] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<synthetic: create>"
 [private PrivateConstructor() {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<init>"
 [private PrivateConstructor() {}] => [this.$init__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class PrivateConstructor {
+  private PrivateConstructor() {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.<clinit>"

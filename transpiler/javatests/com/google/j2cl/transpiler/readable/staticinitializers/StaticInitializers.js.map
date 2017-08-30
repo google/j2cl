@@ -2,7 +2,10 @@
   public static int a = 5;
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<synthetic: constructor>"
-[UNKNOWN] => [StaticInitializers.$clinit();]
+[public class StaticInitializers {
+  public static int a = 5;
+...  }
+}] => [StaticInitializers.$clinit();] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<synthetic: create>"
 [public class StaticInitializers {
   public static int a = 5;
 ...  }
@@ -23,7 +26,10 @@
   public static int a = 5;
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers();] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class StaticInitializers {
+  public static int a = 5;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
 [public static int a = 5;] => [StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 5;]
 [public static int b = a * 2;] => [StaticInitializers.$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers * 2;]
-[a = 10;] => [StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 10;]
+[a = 10;] => [StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 10;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"

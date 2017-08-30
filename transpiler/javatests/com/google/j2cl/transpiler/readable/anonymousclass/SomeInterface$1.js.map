@@ -2,7 +2,10 @@
         public String foo() {
 ...        }
       }] => [super();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<synthetic: constructor>"
-[UNKNOWN] => [$1.$clinit();]
+[{
+        public String foo() {
+...        }
+      }] => [$1.$clinit();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<synthetic: create>"
 [{
         public String foo() {
 ...        }
@@ -24,4 +27,7 @@
 ...        }
       }] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface_1();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<init>"
 [return "a";] => [return "a";] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.foo"
-[UNKNOWN] => [SomeClass.$clinit();]
+[{
+        public String foo() {
+...        }
+      }] => [SomeClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<clinit>"

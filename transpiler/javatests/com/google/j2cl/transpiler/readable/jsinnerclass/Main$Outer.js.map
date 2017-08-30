@@ -7,7 +7,10 @@
 ...    }
   }] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 0;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: constructor>"
-[UNKNOWN] => [Outer.$clinit();]
+[static class Outer {
+    int a = 2;
+...    }
+  }] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: create>"
 [static class Outer {
     int a = 2;
 ...    }
@@ -29,5 +32,8 @@
 ...    }
   }] => [this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
 [return new Inner().getB() + a;] => [return new Inner(this).getB() + this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.method"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[static class Outer {
+    int a = 2;
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<clinit>"
 [int a = 2;] => [this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 2;]

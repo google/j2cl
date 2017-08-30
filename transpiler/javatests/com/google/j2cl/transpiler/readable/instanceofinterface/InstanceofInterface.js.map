@@ -2,7 +2,10 @@
   public boolean test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface.<synthetic: constructor>"
-[UNKNOWN] => [InstanceofInterface.$clinit();]
+[public class InstanceofInterface {
+  public boolean test() {
+...  }
+}] => [InstanceofInterface.$clinit();] "com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface.<synthetic: create>"
 [public class InstanceofInterface {
   public boolean test() {
 ...  }
@@ -26,4 +29,7 @@
 [Object o = new Object();] => [let o = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface.test"
 [o] => [o] "o"
 [return o instanceof Serializable;] => [return Serializable.$isInstance(o);] "com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class InstanceofInterface {
+  public boolean test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface.<clinit>"

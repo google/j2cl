@@ -1,6 +1,9 @@
 [i] => [i] "i"
 [args] => [args] "args"
-[UNKNOWN] => [SubVarargsConstructorClass.$clinit();]
+[@JsConstructor
+    public SubVarargsConstructorClass(int i, Object... args) {
+      super(args);
+    }] => [SubVarargsConstructorClass.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubVarargsConstructorClass.<init>"
 [@JsConstructor
     public SubVarargsConstructorClass(int i, Object... args) {
       super(args);

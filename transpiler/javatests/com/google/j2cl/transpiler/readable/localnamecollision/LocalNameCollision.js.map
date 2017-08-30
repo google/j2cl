@@ -39,7 +39,10 @@
 [$Asserts] => [$Asserts$1$] "$Asserts"
 [l_Asserts] => [l_Asserts] "l_Asserts"
 [A] => [A] "A"
-[UNKNOWN] => [LocalNameCollision.$clinit();]
+[@SuppressWarnings("unused")
+  // test class and parameters collision in constructor.
+...            && (l_Asserts == A);
+  }] => [LocalNameCollision.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<synthetic: create>"
 [@SuppressWarnings("unused")
   // test class and parameters collision in constructor.
 ...            && (l_Asserts == A);
@@ -70,4 +73,7 @@
 ...            && $Asserts instanceof Asserts
             && (l_Asserts == A);] => [let result = LocalNameCollision$1$ && LocalNameCollision.$isInstance(Asserts$1$) && Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<init>"
 [result] => [result] "result"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class LocalNameCollision {
+  @SuppressWarnings("unused")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<clinit>"

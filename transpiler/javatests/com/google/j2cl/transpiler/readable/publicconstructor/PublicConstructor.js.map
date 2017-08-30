@@ -1,10 +1,12 @@
 [public class PublicConstructor {
   public PublicConstructor() {}
 }] => [super();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<synthetic: constructor>"
-[UNKNOWN] => [PublicConstructor.$clinit();]
+[public PublicConstructor() {}] => [PublicConstructor.$clinit();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<synthetic: create>"
 [public PublicConstructor() {}] => [let $instance = new PublicConstructor();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<synthetic: create>"
 [public PublicConstructor() {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor__();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<synthetic: create>"
 [public PublicConstructor() {}] => [return $instance;] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<synthetic: create>"
 [public PublicConstructor() {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<init>"
 [public PublicConstructor() {}] => [this.$init__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class PublicConstructor {
+  public PublicConstructor() {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.<clinit>"

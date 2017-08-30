@@ -2,7 +2,10 @@
   @Override
 ...  public void bar() {}
 }] => [super();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: constructor>"
-[UNKNOWN] => [Child.$clinit();]
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: create>"
 [public class Child extends Parent implements SomeInterface {
   @Override
 ...  public void bar() {}
@@ -23,4 +26,7 @@
   @Override
 ...  public void bar() {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<init>"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Child extends Parent implements SomeInterface {
+  @Override
+...  public void bar() {}
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<clinit>"

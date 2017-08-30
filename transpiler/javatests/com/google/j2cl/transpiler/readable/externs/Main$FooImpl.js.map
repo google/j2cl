@@ -5,7 +5,9 @@
     @JsProperty String foo;
   }] => [/** @public {?string} */
     this.foo = null;] "com.google.j2cl.transpiler.readable.externs.Main$FooImpl.<synthetic: constructor>"
-[UNKNOWN] => [FooImpl.$clinit();]
+[static class FooImpl {
+    @JsProperty String foo;
+  }] => [FooImpl.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main$FooImpl.<synthetic: create>"
 [static class FooImpl {
     @JsProperty String foo;
   }] => [let $instance = new FooImpl();] "com.google.j2cl.transpiler.readable.externs.Main$FooImpl.<synthetic: create>"
@@ -21,4 +23,6 @@
 [static class FooImpl {
     @JsProperty String foo;
   }] => [this.$init__com_google_j2cl_transpiler_readable_externs_Main_FooImpl();] "com.google.j2cl.transpiler.readable.externs.Main$FooImpl.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[static class FooImpl {
+    @JsProperty String foo;
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main$FooImpl.<clinit>"

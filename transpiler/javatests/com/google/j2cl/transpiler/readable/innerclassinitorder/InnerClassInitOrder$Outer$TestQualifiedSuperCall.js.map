@@ -2,7 +2,9 @@
       public TestQualifiedSuperCall() {
 ...      }
     }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: constructor>"
-[UNKNOWN] => [TestQualifiedSuperCall.$clinit();]
+[public TestQualifiedSuperCall() {
+        new Outer(1).new OuterIsSuper(2).super();
+      }] => [TestQualifiedSuperCall.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: create>"
 [public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
       }] => [let $instance = new TestQualifiedSuperCall();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: create>"
@@ -16,4 +18,7 @@
 [public TestQualifiedSuperCall() {
         new Outer(1).new OuterIsSuper(2).super();
       }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<init>"
-[UNKNOWN] => [OuterIsNotSuper.$clinit();]
+[public static class TestQualifiedSuperCall extends OuterIsNotSuper {
+      public TestQualifiedSuperCall() {
+...      }
+    }] => [OuterIsNotSuper.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<clinit>"

@@ -12,7 +12,10 @@
 ...  }
 }] => [/** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ = 0;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: constructor>"
-[UNKNOWN] => [SimpleLongs.$clinit();]
+[public class SimpleLongs {
+  public long foo = 0;
+...  }
+}] => [SimpleLongs.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: create>"
 [public class SimpleLongs {
   public long foo = 0;
 ...  }
@@ -36,7 +39,10 @@
 [return 0;] => [return $Primitives.$widenIntToLong(0);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getBar"
 [sideEffect++;] => [this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getWithSideEffect"
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getWithSideEffect"
-[UNKNOWN] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value$1$, /** SimpleLongs */ $qualifier$1$, /** !$Long */ $value$2$;]
+[@SuppressWarnings("unused")
+  public void main() {
+...    g = getBar();
+  }] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value$1$, /** SimpleLongs */ $qualifier$1$, /** !$Long */ $value$2$;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [long a = 0L;] => [let a = $Long.fromBits(0, 0) /* 0 */;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [a] => [a] "a"
 [a = -100000L;] => [a = $LongUtils.$negate($Long.fromBits(100000, 0) /* 100000 */);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
@@ -60,5 +66,8 @@
 [long g = foo;] => [let g = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [g] => [g] "g"
 [g = getBar();] => [g = this.m_getBar__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SimpleLongs {
+  public long foo = 0;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<clinit>"
 [public long foo = 0;] => [this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $Primitives.$widenIntToLong(0);]

@@ -2,7 +2,10 @@
   public void test(Iterable<Throwable> iterable) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<synthetic: constructor>"
-[UNKNOWN] => [ForEachStatement.$clinit();]
+[public class ForEachStatement {
+  public void test(Iterable<Throwable> iterable) {
+...  }
+}] => [ForEachStatement.$clinit();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<synthetic: create>"
 [public class ForEachStatement {
   public void test(Iterable<Throwable> iterable) {
 ...  }
@@ -30,7 +33,10 @@
       let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));
       t.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[UNKNOWN] => [let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));]
+[public void test(Iterable<Throwable> iterable) {
+    for (Throwable t : iterable) {
+...    }
+  }] => [let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [t] => [t] "t"
 [t.toString();] => [t.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [for (Throwable t : new Throwable[10]) {
@@ -39,7 +45,13 @@
       let t$1$ = $array[$index];
       t$1$.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[UNKNOWN] => [let t$1$ = $array[$index];]
+[public void test(Iterable<Throwable> iterable) {
+    for (Throwable t : iterable) {
+...    }
+  }] => [let t$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [t] => [t$1$] "t"
 [t.toString();] => [t$1$.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class ForEachStatement {
+  public void test(Iterable<Throwable> iterable) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<clinit>"

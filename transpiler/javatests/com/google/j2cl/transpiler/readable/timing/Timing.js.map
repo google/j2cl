@@ -2,7 +2,10 @@
  * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.timing.Timing.<synthetic: constructor>"
-[UNKNOWN] => [Timing.$clinit();]
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [Timing.$clinit();] "com.google.j2cl.transpiler.readable.timing.Timing.<synthetic: create>"
 [/**
  * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
 ...  }
@@ -23,10 +26,16 @@
  * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_timing_Timing();] "com.google.j2cl.transpiler.readable.timing.Timing.<init>"
-[UNKNOWN] => [Timing.$clinit();]
+[public static boolean run() {
+    // Use both Guava collections and base libraries, just so the source and BUILD validators don't
+...    return Objects.equal(fooStrings, barStrings);
+  }] => [Timing.$clinit();] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [List<String> fooStrings = Lists.newArrayList("foo");] => [let fooStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["foo"], java_lang_String))));] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [fooStrings] => [fooStrings] "fooStrings"
 [List<String> barStrings = Lists.newArrayList("bar");] => [let barStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["bar"], java_lang_String))));] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [barStrings] => [barStrings] "barStrings"
 [return Objects.equal(fooStrings, barStrings);] => [return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);] "com.google.j2cl.transpiler.readable.timing.Timing.run"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[/**
+ * An example that exists to pull in Guava so that JSCompiler's slow type check time of translated
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.timing.Timing.<clinit>"

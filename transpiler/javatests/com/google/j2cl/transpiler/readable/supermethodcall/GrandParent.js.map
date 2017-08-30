@@ -2,7 +2,10 @@
   public void grandParentSimplest() {}
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<synthetic: constructor>"
-[UNKNOWN] => [GrandParent.$clinit();]
+[public class GrandParent {
+  public void grandParentSimplest() {}
+...  }
+}] => [GrandParent.$clinit();] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<synthetic: create>"
 [public class GrandParent {
   public void grandParentSimplest() {}
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<init>"
 [foo] => [foo] "foo"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.grandParentWithChangingReturn"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class GrandParent {
+  public void grandParentSimplest() {}
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.<clinit>"

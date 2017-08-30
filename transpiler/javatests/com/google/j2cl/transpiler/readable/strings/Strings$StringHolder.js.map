@@ -5,7 +5,9 @@
     String s = "A";
   }] => [/** @public {?string} */
     this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = null;] "com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.<synthetic: constructor>"
-[UNKNOWN] => [StringHolder.$clinit();]
+[private static class StringHolder {
+    String s = "A";
+  }] => [StringHolder.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.<synthetic: create>"
 [private static class StringHolder {
     String s = "A";
   }] => [let $instance = new StringHolder();] "com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.<synthetic: create>"
@@ -21,5 +23,7 @@
 [private static class StringHolder {
     String s = "A";
   }] => [this.$init__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder();] "com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[private static class StringHolder {
+    String s = "A";
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings$StringHolder.<clinit>"
 [String s = "A";] => [this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = "A";]

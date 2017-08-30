@@ -2,7 +2,10 @@
   @interface Foo {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.annotation.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @interface Foo {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.annotation.Main.<synthetic: create>"
 [public class Main {
   @interface Foo {
 ...  }
@@ -23,4 +26,7 @@
   @interface Foo {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_annotation_Main();] "com.google.j2cl.transpiler.readable.annotation.Main.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @interface Foo {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.annotation.Main.<clinit>"

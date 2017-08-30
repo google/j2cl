@@ -1,7 +1,9 @@
 [class Bar {
       void baz(Bar other) {}
     }] => [super();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar.<synthetic: constructor>"
-[UNKNOWN] => [$1Bar.$clinit();]
+[class Bar {
+      void baz(Bar other) {}
+    }] => [$1Bar.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar.<synthetic: create>"
 [class Bar {
       void baz(Bar other) {}
     }] => [let $instance = new $1Bar();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar.<synthetic: create>"
@@ -18,4 +20,6 @@
       void baz(Bar other) {}
     }] => [this.$init__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar.<init>"
 [other] => [other] "other"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class Bar {
+      void baz(Bar other) {}
+    }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$1Bar.<clinit>"

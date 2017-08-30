@@ -2,7 +2,10 @@
   public class InnerClass {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: constructor>"
-[UNKNOWN] => [OuterClass.$clinit();]
+[public class OuterClass {
+  public class InnerClass {
+...  }
+}] => [OuterClass.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: create>"
 [public class OuterClass {
   public class InnerClass {
 ...  }
@@ -24,4 +27,7 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<init>"
 [new OuterClass().new InnerClass().new InnerInnerClass();] => [InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(InnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(OuterClass.$create__()));] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class OuterClass {
+  public class InnerClass {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<clinit>"

@@ -2,7 +2,10 @@
  * Test String devirtualization.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: constructor>"
-[UNKNOWN] => [StringCalls.$clinit();]
+[/**
+ * Test String devirtualization.
+...  }
+}] => [StringCalls.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: create>"
 [/**
  * Test String devirtualization.
 ...  }
@@ -33,4 +36,7 @@
 [trimmed] => [trimmed] "trimmed"
 [String newString = literal.toString();] => [let newString = java_lang_String.m_toString__java_lang_String(literal);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [newString] => [newString] "newString"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[/**
+ * Test String devirtualization.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<clinit>"

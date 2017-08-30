@@ -2,7 +2,10 @@
   public int foo(int a) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<synthetic: constructor>"
-[UNKNOWN] => [A.$clinit();]
+[class A {
+  public int foo(int a) {
+...  }
+}] => [A.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<synthetic: create>"
 [class A {
   public int foo(int a) {
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsbridgebackward_A();] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<init>"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.foo"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class A {
+  public int foo(int a) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgebackward.A.<clinit>"

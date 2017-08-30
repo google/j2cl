@@ -2,7 +2,10 @@
   public static void main(String[] args) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<synthetic: constructor>"
-[UNKNOWN] => [AssertSimple.$clinit();]
+[public class AssertSimple {
+  public static void main(String[] args) {
+...  }
+}] => [AssertSimple.$clinit();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<synthetic: create>"
 [public class AssertSimple {
   public static void main(String[] args) {
 ...  }
@@ -24,6 +27,11 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<init>"
 [args] => [args] "args"
-[UNKNOWN] => [AssertSimple.$clinit();]
+[public static void main(String[] args) {
+    assert 1 + 2 == 3;
+  }] => [AssertSimple.$clinit();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3;] => [$Asserts.$assert(1 + 2 == 3);] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class AssertSimple {
+  public static void main(String[] args) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<clinit>"

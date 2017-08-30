@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.<synthetic: constructor>"
-[UNKNOWN] => [SimpleTryCatchThrow.$clinit();]
+[public class SimpleTryCatchThrow {
+  public void main() {
+...  }
+}] => [SimpleTryCatchThrow.$clinit();] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.<synthetic: create>"
 [public class SimpleTryCatchThrow {
   public void main() {
 ...  }
@@ -31,18 +34,33 @@
 ...    } finally {
     }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
-[UNKNOWN] => [if (ClassCastException.$isInstance(__$exc)) {
+[public void main() {
+    try {
+...    }
+  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[public void main() {
+    try {
+...    }
+  }] => [if (ClassCastException.$isInstance(__$exc)) {
         let e = /**@type {ClassCastException} */ (__$exc);
-        SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
-      } else {
-        throw $Exceptions.toJs(__$exc);
-      }]
-[UNKNOWN] => [let e = /**@type {ClassCastException} */ (__$exc);]
+...        throw $Exceptions.toJs(__$exc);
+      }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[public void main() {
+    try {
+...    }
+  }] => [let e = /**@type {ClassCastException} */ (__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [e] => [e] "e"
 [doSomething(e);] => [SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
+[public void main() {
+    try {
+...    }
+  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [e] => [e] "e"
-[UNKNOWN] => [SimpleTryCatchThrow.$clinit();]
+[public static void doSomething(ClassCastException e) {
+    System.out.println("saw exception: " + e);
+  }] => [SimpleTryCatchThrow.$clinit();] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.doSomething"
 [System.out.println("saw exception: " + e);] => [System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + java_lang_String.m_valueOf__java_lang_Object(e));] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.doSomething"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SimpleTryCatchThrow {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.<clinit>"

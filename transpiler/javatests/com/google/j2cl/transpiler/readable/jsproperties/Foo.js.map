@@ -2,7 +2,10 @@
  * Tests for non native static JsProperty.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: constructor>"
-[UNKNOWN] => [Foo.$clinit();]
+[/**
+ * Tests for non native static JsProperty.
+...  }
+}] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: create>"
 [/**
  * Tests for non native static JsProperty.
 ...  }
@@ -23,14 +26,29 @@
  * Tests for non native static JsProperty.
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsproperties_Foo();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<init>"
-[UNKNOWN] => [Foo.$clinit();]
+[@JsProperty
+  public static int getA() {
+    return f + 1;
+  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
 [return f + 1;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
 [x] => [x] "x"
-[UNKNOWN] => [Foo.$clinit();]
+[@JsProperty
+  public static void setA(int x) {
+    f = x + 2;
+  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
 [f = x + 2;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
-[UNKNOWN] => [Foo.$clinit();]
+[@JsProperty(name = "abc")
+  public static int getB() {
+    return f + 3;
+  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
 [return f + 3;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
 [x] => [x] "x"
-[UNKNOWN] => [Foo.$clinit();]
+[@JsProperty(name = "abc")
+  public static void setB(int x) {
+    f = x + 4;
+  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
 [f = x + 4;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[/**
+ * Tests for non native static JsProperty.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<clinit>"

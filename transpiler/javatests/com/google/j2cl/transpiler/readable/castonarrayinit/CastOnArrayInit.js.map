@@ -2,7 +2,10 @@
   public static class Foo<T> {}
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: constructor>"
-[UNKNOWN] => [CastOnArrayInit.$clinit();]
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: create>"
 [public class CastOnArrayInit {
   public static class Foo<T> {}
 ...  }
@@ -24,11 +27,17 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<init>"
 [args] => [args] "args"
-[UNKNOWN] => [CastOnArrayInit.$clinit();]
-[UNKNOWN] => [CastOnArrayInit.$clinit();]
+[public static <E> void fun(Foo<E>... args) {}] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
+[public static <E> void test() {
+    Foo<E> f1 = new Foo<>();
+...    fun(f1, f2);
+  }] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<*>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f1] => [f1] "f1"
 [Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!Foo<*>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f2] => [f2] "f2"
 [fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(/**@type {!Array<Foo<*>>} */ ($Arrays.$init([f1, f2], Foo)));] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class CastOnArrayInit {
+  public static class Foo<T> {}
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<clinit>"

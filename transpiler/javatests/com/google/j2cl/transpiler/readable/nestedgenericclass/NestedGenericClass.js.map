@@ -2,7 +2,10 @@
   // nested generic classes with shadowing type parameters.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.<synthetic: constructor>"
-[UNKNOWN] => [NestedGenericClass.$clinit();]
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [NestedGenericClass.$clinit();] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.<synthetic: create>"
 [public class NestedGenericClass<T> {
   // nested generic classes with shadowing type parameters.
 ...  }
@@ -35,4 +38,7 @@
 [b] => [b] "b"
 [n.new C();] => [/**@type {!C<(Number|?number)>} */ (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n));] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.test"
 [n.new C().new D();] => [/**@type {!D<(Number|?number)>} */ (D.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|?number)>} */ (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(n))));] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class NestedGenericClass<T> {
+  // nested generic classes with shadowing type parameters.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.<clinit>"

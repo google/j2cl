@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: constructor>"
-[UNKNOWN] => [ArithmeticExpressions.$clinit();]
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: create>"
 [public class ArithmeticExpressions {
   public void main() {
 ...  }
@@ -58,6 +61,11 @@
 [a += boxI;] => [a += boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
-[UNKNOWN] => [ArithmeticExpressions.$clinit();]
+[static long[] getLongArray() {
+    return new long[10];
+  }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [return new long[10];] => [return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class ArithmeticExpressions {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"

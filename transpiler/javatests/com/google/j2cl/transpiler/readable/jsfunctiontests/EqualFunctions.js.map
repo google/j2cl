@@ -2,18 +2,27 @@
   private EqualFunctions() {}
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: constructor>"
-[UNKNOWN] => [EqualFunctions.$clinit();]
+[private EqualFunctions() {}] => [EqualFunctions.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: create>"
 [private EqualFunctions() {}] => [let $instance = new EqualFunctions();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: create>"
 [private EqualFunctions() {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions__();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: create>"
 [private EqualFunctions() {}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: create>"
 [private EqualFunctions() {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<init>"
 [private EqualFunctions() {}] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<init>"
-[UNKNOWN] => [EqualFunctions.$clinit();]
+[@SuppressWarnings("unchecked")
+  public static final <T> EqualFunction<T> objectEqualFunction() {
+    return (EqualFunction<T>) forObject;
+  }] => [EqualFunctions.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.objectEqualFunction"
 [return (EqualFunction<T>) forObject;] => [return /**@type {?function(*, *):boolean} */ ($Casts.$to(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.objectEqualFunction"
-[UNKNOWN] => [EqualFunctions.$clinit();]
+[@SuppressWarnings("unchecked")
+  public static final <T> EqualFunction<T> collectionEqualFunction() {
+    return (EqualFunction<T>) forCollection;
+  }] => [EqualFunctions.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.collectionEqualFunction"
 [return (EqualFunction<T>) forCollection;] => [return /**@type {?function(*, *):boolean} */ ($Casts.$to(EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.collectionEqualFunction"
 [customFunction] => [customFunction] "customFunction"
-[UNKNOWN] => [EqualFunctions.$clinit();]
+[/**
+   * Returns a equals function that can handle array equal logic in addition to the custom equal
+...    };
+  }] => [EqualFunctions.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.withCollection"
 [return new EqualFunction<T>() {
       @Override
 ...      }
@@ -24,7 +33,10 @@
 [objB] => [objB] "objB"
 [return true;] => [return true;] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.withCollection"
 [equalFn] => [equalFn] "equalFn"
-[UNKNOWN] => [EqualFunctions.$clinit();]
+[public static <T> EqualFunction<Foo<T>> createEqualFn(final EqualFunction<T> equalFn) {
+    return new EqualFunction<Foo<T>>() {
+...    };
+  }] => [EqualFunctions.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.createEqualFn"
 [return new EqualFunction<Foo<T>>() {
       @Override
 ...      }
@@ -34,7 +46,10 @@
 [first] => [first] "first"
 [second] => [second] "second"
 [return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.createEqualFn"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class EqualFunctions {
+  private EqualFunctions() {}
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<clinit>"
 [public static EqualFunction<Object> forObject =
       new EqualFunction<Object>() {
         @Override

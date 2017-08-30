@@ -42,18 +42,55 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
   @Visitable Block body;
   private boolean isOverride;
   private String jsDocDescription;
+  private SyntheticMethodType syntheticMethodType;
+
+  public enum SyntheticMethodType {
+    NOT_SYNTHTETIC,
+    FACTORY_CONSTRUCTOR() {
+      public String getName(Method method) {
+        return synthesizeMethodName(method, "<synthetic: create>");
+      }
+    },
+    JAVASCRIPT_TRIVIAL_CONSTRUCTOR() {
+      public String getName(Method method) {
+        return synthesizeMethodName(method, "<synthetic: constructor>");
+      }
+    },
+    CONSTRUCTOR_IMPLEMENTATION() {
+      public String getName(Method method) {
+        return synthesizeMethodName(method, "<init>");
+      }
+    };
+
+    public String getName(Method method) {
+      if (method.isConstructor()) {
+        return synthesizeMethodName(method, "<init>");
+      }
+      return method.getDescriptor().getQualifiedBinaryName();
+    }
+
+    private static String synthesizeMethodName(Method method, String syntheticName) {
+      return getEnclosingTypeDescriptor(method).getQualifiedBinaryName() + "." + syntheticName;
+    }
+  }
+
+  private static TypeDescriptor getEnclosingTypeDescriptor(Method method) {
+    return method.getDescriptor().getEnclosingTypeDescriptor();
+  }
 
   private Method(
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
       boolean isOverride,
-      String jsDocDescription) {
+      String jsDocDescription,
+      SyntheticMethodType syntheticMethodType) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.isOverride = isOverride;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
+    this.syntheticMethodType = syntheticMethodType;
   }
 
   @Override
@@ -79,6 +116,14 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       return Iterables.getLast(getParameters());
     }
     return null;
+  }
+
+  public SyntheticMethodType getSyntheticMethodType() {
+    return syntheticMethodType;
+  }
+
+  public String getStackTraceMethodName() {
+    return syntheticMethodType.getName(this);
   }
 
   public Block getBody() {
@@ -152,12 +197,12 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     if (isConstructor()) {
       return J2clUtils.format(
           "%s(%s)",
-          getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
+          getEnclosingTypeDescriptor(Method.this).getReadableDescription(), parameterString);
     }
     return J2clUtils.format(
         "%s %s.%s(%s)",
         getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
-        getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(),
+        getEnclosingTypeDescriptor(Method.this).getReadableDescription(),
         getDescriptor().getName(),
         parameterString);
   }
@@ -202,6 +247,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
     private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SyntheticMethodType syntheticMethodType = SyntheticMethodType.NOT_SYNTHTETIC;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -212,6 +258,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
+      builder.syntheticMethodType = method.getSyntheticMethodType();
       return builder;
     }
 
@@ -288,6 +335,11 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       return this;
     }
 
+    public Builder setSyntheticMethodType(SyntheticMethodType syntheticMethodType) {
+      this.syntheticMethodType = syntheticMethodType;
+      return this;
+    }
+
     public Method build() {
       Block body = new Block(statements);
       body.setSourcePosition(bodySourcePosition);
@@ -324,7 +376,8 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
               parameters,
               body,
               isOverride,
-              jsDocDescription);
+              jsDocDescription,
+              syntheticMethodType);
       method.setSourcePosition(sourcePosition);
       return method;
     }

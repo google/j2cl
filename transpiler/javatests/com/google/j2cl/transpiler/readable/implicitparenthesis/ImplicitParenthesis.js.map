@@ -2,7 +2,10 @@
  * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: constructor>"
-[UNKNOWN] => [ImplicitParenthesis.$clinit();]
+[/**
+ * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
+...  }
+}] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: create>"
 [/**
  * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
 ...  }
@@ -25,7 +28,10 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<init>"
 [examples();] => [ImplicitParenthesis.m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.test"
 [nonExamples();] => [ImplicitParenthesis.m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.test"
-[UNKNOWN] => [ImplicitParenthesis.$clinit();]
+[private static void examples() {
+    int primitiveInt;
+...    }
+  }] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [int primitiveInt;] => [let /** number */ primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt] => [primitiveInt] "primitiveInt"
 [Integer boxedInt;] => [let /** Integer */ boxedInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
@@ -42,7 +48,10 @@
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = boxedInt = primitiveInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [assert primitiveInt == 5;] => [$Asserts.$assert(primitiveInt == 5);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
-[UNKNOWN] => [let /** Integer */ $value;]
+[private static void examples() {
+    int primitiveInt;
+...    }
+  }] => [let /** Integer */ $value;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = 5;] => [primitiveInt = 5;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = boxedInt++;] => [primitiveInt = ($value = boxedInt, boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1), $value).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
@@ -51,7 +60,10 @@
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = ++boxedInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1)).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [assert primitiveInt == 11;] => [$Asserts.$assert(primitiveInt == 11);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
-[UNKNOWN] => [ImplicitParenthesis.$clinit();]
+[private static void nonExamples() {
+    int primitiveInt;
+...    }
+  }] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [int primitiveInt;] => [let /** number */ primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [primitiveInt] => [primitiveInt] "primitiveInt"
 [Integer boxedInt;] => [let /** Integer */ boxedInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
@@ -67,4 +79,7 @@
 [boxedBoolean = true;] => [boxedBoolean = true;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [boxedBoolean = boxedInt == primitiveInt;] => [boxedBoolean = boxedInt.m_intValue__() == primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [assert boxedBoolean == false;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[/**
+ * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"

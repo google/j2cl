@@ -2,7 +2,10 @@
   @SuppressWarnings("unused")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @SuppressWarnings("unused")
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<synthetic: create>"
 [public class Main {
   @SuppressWarnings("unused")
 ...  }
@@ -24,9 +27,15 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Main();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<init>"
 [args] => [args] "args"
-[UNKNOWN] => [Main.$clinit();]
+[@SuppressWarnings("unused")
+  public static void main(String... args) {
+...    Right right = new Right();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.main"
 [Left left = new Left();] => [let left = Left.$create__();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.main"
 [left] => [left] "left"
 [Right right = new Right();] => [let right = Right.$create__();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.main"
 [right] => [right] "right"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @SuppressWarnings("unused")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.circularimportuse.Main.<clinit>"

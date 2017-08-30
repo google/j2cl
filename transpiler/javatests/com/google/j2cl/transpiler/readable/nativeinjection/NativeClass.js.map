@@ -2,7 +2,10 @@
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
 }] => [super();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: constructor>"
-[UNKNOWN] => [NativeClass.$clinit();]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [NativeClass.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: create>"
 [public class NativeClass {
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
@@ -23,4 +26,7 @@
   public native String nativeInstanceMethod();
 ...  public static native NativeClass nativeStaticMethod();
 }] => [this.$init__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class NativeClass {
+  public native String nativeInstanceMethod();
+...  public static native NativeClass nativeStaticMethod();
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<clinit>"

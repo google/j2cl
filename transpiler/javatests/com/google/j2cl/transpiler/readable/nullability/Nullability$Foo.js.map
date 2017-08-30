@@ -2,7 +2,10 @@
     void bar(T t) {}
 ...    }
   }] => [super();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: constructor>"
-[UNKNOWN] => [Foo.$clinit();]
+[static class Foo<T> {
+    void bar(T t) {}
+...    }
+  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: create>"
 [static class Foo<T> {
     void bar(T t) {}
 ...    }
@@ -26,4 +29,7 @@
 [t] => [t] "t"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.baz"
 [return "Foo";] => [return "Foo";] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.toString"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[static class Foo<T> {
+    void bar(T t) {}
+...    }
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<clinit>"

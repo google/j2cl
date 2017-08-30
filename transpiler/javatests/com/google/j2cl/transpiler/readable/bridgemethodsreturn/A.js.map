@@ -2,7 +2,10 @@
   public T fun(S s) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.A.<synthetic: constructor>"
-[UNKNOWN] => [A.$clinit();]
+[public class A<T, S> {
+  public T fun(S s) {
+...  }
+}] => [A.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.A.<synthetic: create>"
 [public class A<T, S> {
   public T fun(S s) {
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_A();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.A.<init>"
 [s] => [s] "s"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.A.fun"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class A<T, S> {
+  public T fun(S s) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.A.<clinit>"

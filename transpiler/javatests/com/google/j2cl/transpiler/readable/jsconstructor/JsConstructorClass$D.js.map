@@ -1,4 +1,7 @@
-[UNKNOWN] => [D.$clinit();]
+[@JsConstructor
+    public D() {
+...      this.fD = 10;
+    }] => [D.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<init>"
 [@JsConstructor
     public D() {
 ...      this.fD = 10;
@@ -18,7 +21,10 @@
     }] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_D();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<init>"
 [this.fD = 10;] => [this.f_fD__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_D = 10;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<init>"
 [x] => [x] "x"
-[UNKNOWN] => [D.$clinit();]
+[public D(int x) {
+      this(); // must call this().
+      this.fD = x;
+    }] => [D.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<synthetic: create>"
 [public D(int x) {
       this(); // must call this().
       this.fD = x;
@@ -33,5 +39,8 @@
     }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<synthetic: create>"
 [x] => [x] "x"
 [this.fD = x;] => [this.f_fD__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_D = x;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<init>"
-[UNKNOWN] => [B.$clinit();]
+[/**
+   * A class with JsConstructor, which extends a JsConstructor class.
+...    }
+  }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$D.<clinit>"
 [public int fD = 8;] => [this.f_fD__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_D = 8;]

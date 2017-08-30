@@ -2,7 +2,10 @@
   // bridge method: m1(Error a) {m1((AssertionError) a);}
 ...  public void m1(AssertionError a) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<synthetic: constructor>"
-[UNKNOWN] => [Subclass.$clinit();]
+[class Subclass extends Superclass<AssertionError> {
+  // bridge method: m1(Error a) {m1((AssertionError) a);}
+...  public void m1(AssertionError a) {}
+}] => [Subclass.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<synthetic: create>"
 [class Subclass extends Superclass<AssertionError> {
   // bridge method: m1(Error a) {m1((AssertionError) a);}
 ...  public void m1(AssertionError a) {}
@@ -24,5 +27,11 @@
 ...  public void m1(AssertionError a) {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<init>"
 [a] => [a] "a"
-[UNKNOWN] => [this.m_m1__java_lang_AssertionError(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));]
-[UNKNOWN] => [Superclass.$clinit();]
+[class Subclass extends Superclass<AssertionError> {
+  // bridge method: m1(Error a) {m1((AssertionError) a);}
+...  public void m1(AssertionError a) {}
+}] => [this.m_m1__java_lang_AssertionError(/**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.m1"
+[class Subclass extends Superclass<AssertionError> {
+  // bridge method: m1(Error a) {m1((AssertionError) a);}
+...  public void m1(AssertionError a) {}
+}] => [Superclass.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass.<clinit>"

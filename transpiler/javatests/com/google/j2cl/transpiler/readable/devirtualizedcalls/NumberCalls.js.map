@@ -2,7 +2,10 @@
   public void main() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.<synthetic: constructor>"
-[UNKNOWN] => [NumberCalls.$clinit();]
+[public class NumberCalls {
+  public void main() {
+...  }
+}] => [NumberCalls.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.<synthetic: create>"
 [public class NumberCalls {
   public void main() {
 ...  }
@@ -125,4 +128,7 @@
 [Boolean bool = new Boolean(true);] => [let bool = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.main"
 [bool] => [bool] "bool"
 [bool.booleanValue();] => [Boolean.m_booleanValue__java_lang_Boolean(bool);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class NumberCalls {
+  public void main() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.<clinit>"

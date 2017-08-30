@@ -2,7 +2,10 @@
   static class Outer {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  static class Outer {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<synthetic: create>"
 [public class Main {
   static class Outer {
 ...  }
@@ -24,6 +27,11 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<init>"
 [args] => [args] "args"
-[UNKNOWN] => [Main.$clinit();]
+[public static void main(String... args) {
+    assert new Outer().method() == 5;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.main"
 [assert new Outer().method() == 5;] => [$Asserts.$assert(Outer.$create__().m_method__() == 5);] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  static class Outer {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main.<clinit>"

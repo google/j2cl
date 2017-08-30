@@ -3,7 +3,9 @@
 ...    }
   }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<synthetic: constructor>"
 [outer] => [outer] "outer"
-[UNKNOWN] => [ESInnerSubclass.$clinit();]
+[ESInnerSubclass(ESOuter outer) {
+      outer.super();
+    }] => [ESInnerSubclass.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<synthetic: create>"
 [ESInnerSubclass(ESOuter outer) {
       outer.super();
     }] => [let $instance = new ESInnerSubclass();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<synthetic: create>"
@@ -20,7 +22,9 @@
     }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<init>"
 [value] => [value] "value"
 [outer] => [outer] "outer"
-[UNKNOWN] => [ESInnerSubclass.$clinit();]
+[ESInnerSubclass(int value, ESOuter outer) {
+      outer.super(value);
+    }] => [ESInnerSubclass.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<synthetic: create>"
 [ESInnerSubclass(int value, ESOuter outer) {
       outer.super(value);
     }] => [let $instance = new ESInnerSubclass();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<synthetic: create>"
@@ -36,4 +40,7 @@
 [ESInnerSubclass(int value, ESOuter outer) {
       outer.super(value);
     }] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<init>"
-[UNKNOWN] => [ESInner.$clinit();]
+[private static class ESInnerSubclass extends ESOuter.ESInner {
+    ESInnerSubclass(ESOuter outer) {
+...    }
+  }] => [ESInner.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass.<clinit>"

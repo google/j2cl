@@ -2,7 +2,10 @@
   // Use an annotation, to trigger the APT DummyProcessor.
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: constructor>"
-[UNKNOWN] => [Foo.$clinit();]
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<synthetic: create>"
 [public class Foo {
   // Use an annotation, to trigger the APT DummyProcessor.
 ...  }
@@ -24,4 +27,7 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<init>"
 [return Dummy.class.getSimpleName();] => [return /**@type {Class<Dummy>} */ (Class.$get(Dummy)).m_getSimpleName__();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.toString"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Foo {
+  // Use an annotation, to trigger the APT DummyProcessor.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo.<clinit>"

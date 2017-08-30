@@ -2,7 +2,10 @@
   public int m() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: constructor>"
-[UNKNOWN] => [A.$clinit();]
+[public class A {
+  public int m() {
+...  }
+}] => [A.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<synthetic: create>"
 [public class A {
   public int m() {
 ...  }
@@ -24,4 +27,7 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_package2_A();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<init>"
 [return 2;] => [return 2;] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.m"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class A {
+  public int m() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.localnamecollision.package2.A.<clinit>"

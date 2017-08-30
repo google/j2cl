@@ -62,7 +62,10 @@
 ...  }
 }] => [/** @public {*} */
     this.f_f12__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.<synthetic: constructor>"
-[UNKNOWN] => [DefaultNullable.$clinit();]
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [DefaultNullable.$clinit();] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.<synthetic: create>"
 [public class DefaultNullable {
   private String f1 = "Hello";
 ...  }
@@ -90,8 +93,13 @@
 [b] => [b] "b"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.m2"
 [args] => [args] "args"
-[UNKNOWN] => [$Arrays.$stampType(args, java_lang_String, 1);]
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@JsMethod
+  public void m3(String... args) {
+  }] => [$Arrays.$stampType(args, java_lang_String, 1);] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.m3"
+[public class DefaultNullable {
+  private String f1 = "Hello";
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable.<clinit>"
 [private String f1 = "Hello";] => [this.f_f1__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = "Hello";]
 [@Nullable private String f2 = null;] => [this.f_f2__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;]
 [@org.checkerframework.checker.nullness.qual.Nullable private String f3 = null;] => [this.f_f3__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ = null;]

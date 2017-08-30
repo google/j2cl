@@ -8,7 +8,9 @@
 }] => [/** @public {!$Long} */
     this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts = $Long.fromBits(0, 0) /* 0 */;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: constructor>"
 [leftValue] => [leftValue] "leftValue"
-[UNKNOWN] => [LongImplicitCasts.$clinit();]
+[public LongImplicitCasts() {
+    this(100);
+  }] => [LongImplicitCasts.$clinit();] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
 [public LongImplicitCasts() {
     this(100);
   }] => [let $instance = new LongImplicitCasts();] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
@@ -20,7 +22,7 @@
   }] => [return $instance;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
 [this(100);] => [this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long($Primitives.$widenIntToLong(100));] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<init>"
 [someValue] => [someValue] "someValue"
-[UNKNOWN] => [LongImplicitCasts.$clinit();]
+[public LongImplicitCasts(long someValue) {}] => [LongImplicitCasts.$clinit();] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
 [public LongImplicitCasts(long someValue) {}] => [let $instance = new LongImplicitCasts();] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
 [public LongImplicitCasts(long someValue) {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long(someValue);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
 [public LongImplicitCasts(long someValue) {}] => [return $instance;] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<synthetic: create>"
@@ -61,5 +63,8 @@
 [new LongImplicitCasts(flong);] => [LongImplicitCasts.$create__long(flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [tlong = flong << flong;] => [tlong = $LongUtils.$leftShift(flong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class LongImplicitCasts {
+  // Initialized with not-a-long.
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.<clinit>"
 [public long fieldLong = 100;] => [this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts = $Primitives.$widenIntToLong(100);]

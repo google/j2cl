@@ -1,4 +1,7 @@
-[UNKNOWN] => [Bar.$clinit();]
+[@JsType // Does *not* use the namespace from the parent package
+public class Bar {
+  public static final int WOO = 1001;
+}] => [Bar.$clinit();] "com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar.<init>"
 [@JsType // Does *not* use the namespace from the parent package
 public class Bar {
   public static final int WOO = 1001;
@@ -15,4 +18,7 @@ public class Bar {
 public class Bar {
   public static final int WOO = 1001;
 }] => [this.$init__com_google_j2cl_transpiler_readable_packageinfosubpackage_subpackage_Bar();] "com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@JsType // Does *not* use the namespace from the parent package
+public class Bar {
+  public static final int WOO = 1001;
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar.<clinit>"

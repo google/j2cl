@@ -2,7 +2,10 @@
   public int fun(int a, int b) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: constructor>"
-[UNKNOWN] => [SuperParent.$clinit();]
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<synthetic: create>"
 [public class SuperParent {
   public int fun(int a, int b) {
 ...  }
@@ -29,4 +32,7 @@
 [a] => [a] "a"
 [b] => [b] "b"
 [return a * b + 222;] => [return a * b + 222;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.bar"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SuperParent {
+  public int fun(int a, int b) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<clinit>"

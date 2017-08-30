@@ -7,7 +7,10 @@
 ...  }
 }] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl = 0;] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<synthetic: constructor>"
-[UNKNOWN] => [MyJsFunctionImpl.$clinit();]
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [MyJsFunctionImpl.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<synthetic: create>"
 [public final class MyJsFunctionImpl implements MyJsFunctionInterface {
   public int field;
 ...  }
@@ -30,8 +33,15 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<init>"
 [a] => [a] "a"
 [return a + this.bar() + this.field;] => [return a + MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.foo"
-[UNKNOWN] => [MyJsFunctionImpl.$clinit();]
+[public int bar() {
+    return 0;
+  }] => [MyJsFunctionImpl.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.bar"
-[UNKNOWN] => [MyJsFunctionImpl.$clinit();]
+[public int fun() {
+    return bar() + foo(1);
+  }] => [MyJsFunctionImpl.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
 [return bar() + foo(1);] => [return MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl($thisArg) + $thisArg(1);] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.fun"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public final class MyJsFunctionImpl implements MyJsFunctionInterface {
+  public int field;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.<clinit>"

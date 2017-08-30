@@ -2,7 +2,10 @@
   public static int a = 2;
   public static int b = a * 4;
 }] => [super();] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<synthetic: constructor>"
-[UNKNOWN] => [StaticFieldInitializer.$clinit();]
+[public class StaticFieldInitializer {
+  public static int a = 2;
+  public static int b = a * 4;
+}] => [StaticFieldInitializer.$clinit();] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<synthetic: create>"
 [public class StaticFieldInitializer {
   public static int a = 2;
   public static int b = a * 4;
@@ -23,6 +26,9 @@
   public static int a = 2;
   public static int b = a * 4;
 }] => [this.$init__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer();] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class StaticFieldInitializer {
+  public static int a = 2;
+  public static int b = a * 4;
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer.<clinit>"
 [public static int a = 2;] => [StaticFieldInitializer.$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer = 2;]
 [public static int b = a * 4;] => [StaticFieldInitializer.$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer = StaticFieldInitializer.$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer * 4;]

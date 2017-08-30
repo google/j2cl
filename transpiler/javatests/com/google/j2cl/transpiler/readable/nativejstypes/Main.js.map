@@ -2,7 +2,10 @@
   public static int testNativeJsTypeWithNamespace() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public static int testNativeJsTypeWithNamespace() {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<synthetic: create>"
 [public class Main {
   public static int testNativeJsTypeWithNamespace() {
 ...  }
@@ -23,37 +26,58 @@
   public static int testNativeJsTypeWithNamespace() {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_nativejstypes_Main();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<init>"
-[UNKNOWN] => [Main.$clinit();]
+[public static int testNativeJsTypeWithNamespace() {
+    Foo foo = new Foo();
+...    return foo.sum();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [Foo foo = new Foo();] => [let foo = new Foo();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo] => [foo] "foo"
 [foo.x = 50;] => [foo.x = 50;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo.y = 5;] => [foo.y = 5;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
 [return foo.sum();] => [return foo.sum();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithNamespace"
-[UNKNOWN] => [Main.$clinit();]
+[public static int testNativeJsTypeWithoutNamespace() {
+    Bar bar = new Bar(6, 7);
+...    return bar.product();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [bar] => [bar] "bar"
 [bar.x = 50;] => [bar.x = 50;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [bar.y = 5;] => [bar.y = 5;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [Bar.f = 10;] => [Bar.f = 10;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [return bar.product();] => [return bar.product();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testInnerNativeJsType() {
+    Bar.Inner unusedFoo = new Bar.Inner() {};
+    Another.Inner unusedZoo = new Another.Inner() {};
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [Bar.Inner unusedFoo = new Bar.Inner() {};] => [let unusedFoo = $1.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedFoo] => [unusedFoo] "unusedFoo"
 [Another.Inner unusedZoo = new Another.Inner() {};] => [let unusedZoo = $2.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedZoo] => [unusedZoo] "unusedZoo"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testGlobalNativeJsType() {
+    Headers header = new Headers();
+    header.append("Content-Type", "text/xml");
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
 [Headers header = new Headers();] => [let header = new Headers();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
 [header] => [header] "header"
 [header.append("Content-Type", "text/xml");] => [header.append("Content-Type", "text/xml");] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"
-[UNKNOWN] => [Main.$clinit();]
+[@SuppressWarnings("unused")
+  public static void testNativeTypeClassLiteral() {
+...    o1 = Bar[][].class;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [Object o1 = Bar.class;] => [let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
 [o1 = Bar[][].class;] => [o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
-[UNKNOWN] => [Main.$clinit();]
+[public static void testNativeTypeObjectMethods() {
+    Bar bar = new Bar(6, 7);
+...    bar.equals(new Object());
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [bar] => [bar] "bar"
 [bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.get"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public static int testNativeJsTypeWithNamespace() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<clinit>"

@@ -2,7 +2,10 @@
   @JsFunction
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @JsFunction
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<synthetic: create>"
 [public class Main {
   @JsFunction
 ...  }
@@ -23,7 +26,10 @@
   @JsFunction
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_lambdajsinterop_Main();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<init>"
-[UNKNOWN] => [Main.$clinit();]
+[/** Returns the identity function. */
+  @SuppressWarnings("unchecked")
+...    return (Function<E, E>) identityFunction;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.identity"
 [if (identityFunction == null) {
       // Lazy initialize the field.
       identityFunction = new IdentityFunction();
@@ -32,7 +38,10 @@
     }] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.identity"
 [identityFunction = new IdentityFunction();] => [Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ = IdentityFunction.$create__();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.identity"
 [return (Function<E, E>) identityFunction;] => [return /**@type {?function(*):*} */ ($Casts.$to(Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_, com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function));] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.identity"
-[UNKNOWN] => [Main.$clinit();]
+[public static void main() {
+    Thenable<String> rv = (f1, f2) -> f1.execute(null);
+...    equals.get();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
 [Thenable<String> rv = (f1, f2) -> f1.execute(null);] => [let rv = $Lambda$Thenable$0.$create__();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
 [rv] => [rv] "rv"
 [JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = $Lambda$JsSupplier$1.$create__();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
@@ -42,5 +51,8 @@
 [equals] => [equals] "equals"
 [equals.equals(null);] => [equals.equals(null);] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
 [equals.get();] => [equals.m_get__();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @JsFunction
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<clinit>"
 [private static IdentityFunction identityFunction = null;] => [Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ = null;]

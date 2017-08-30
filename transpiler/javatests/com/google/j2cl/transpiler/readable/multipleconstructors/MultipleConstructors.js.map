@@ -13,7 +13,10 @@
 }] => [/** @public {boolean} */
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = false;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<synthetic: constructor>"
 [id] => [id] "id"
-[UNKNOWN] => [MultipleConstructors.$clinit();]
+[public MultipleConstructors(int id) {
+    this.id = id;
+    this.flag = (id == 0);
+  }] => [MultipleConstructors.$clinit();] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<synthetic: create>"
 [public MultipleConstructors(int id) {
     this.id = id;
     this.flag = (id == 0);
@@ -38,7 +41,10 @@
 [this.id = id;] => [this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = id;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
 [this.flag = (id == 0);] => [this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = (id == 0);] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
 [flag] => [flag] "flag"
-[UNKNOWN] => [MultipleConstructors.$clinit();]
+[public MultipleConstructors(boolean flag) {
+    this.id = -1;
+    this.flag = flag;
+  }] => [MultipleConstructors.$clinit();] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<synthetic: create>"
 [public MultipleConstructors(boolean flag) {
     this.id = -1;
     this.flag = flag;
@@ -64,7 +70,10 @@
 [this.flag = flag;] => [this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = flag;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
 [id] => [id] "id"
 [flag] => [flag] "flag"
-[UNKNOWN] => [MultipleConstructors.$clinit();]
+[public MultipleConstructors(int id, boolean flag) {
+    this.id = id;
+    this.flag = flag;
+  }] => [MultipleConstructors.$clinit();] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<synthetic: create>"
 [public MultipleConstructors(int id, boolean flag) {
     this.id = id;
     this.flag = flag;
@@ -89,4 +98,7 @@
   }] => [this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
 [this.id = id;] => [this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = id;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
 [this.flag = flag;] => [this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ = flag;] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class MultipleConstructors {
+  private int id;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors.<clinit>"

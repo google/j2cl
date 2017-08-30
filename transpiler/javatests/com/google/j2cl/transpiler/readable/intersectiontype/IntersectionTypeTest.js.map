@@ -2,7 +2,10 @@
 public class IntersectionTypeTest<U> {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<synthetic: constructor>"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
+public class IntersectionTypeTest<U> {
+...  }
+}] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<synthetic: create>"
 [@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
@@ -24,11 +27,17 @@ public class IntersectionTypeTest<U> {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<init>"
 [object] => [object] "object"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static <T extends Getable<?> & Setable> void getAndSet(T object) {
+    object.set(1);
+    object.get();
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
 [object.set(1);] => [/**@type {Setable} */ ($Casts.$to(object, Setable)).m_set__int(1);] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
 [object.get();] => [object.m_get__();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
 [o] => [o] "o"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static <T> Getable<T> cast(Object o) {
+
+...    return (Getable<T> & Setable) o;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [if (o == null) {
       return (Setable & Getable<T>) o;
     }] => [if ($Equality.$same(o, null)) {
@@ -37,19 +46,30 @@ public class IntersectionTypeTest<U> {
 [return (Setable & Getable<T>) o;] => [return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [return (Getable<T> & Setable) o;] => [return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Setable), Getable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [s] => [s] "s"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static <T> Getable<Comparable<String>> cast1(Object s) {
+    return (Getable<Comparable<String>> & Setable) s;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
 [return (Getable<Comparable<String>> & Setable) s;] => [return /**@type {Getable<(Comparable<?string>|?boolean|?number|?string)>} */ ($Casts.$to($Casts.$to(s, Setable), Getable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
 [s] => [s] "s"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static <T> Getable<Comparable<T>> cast2(Object s) {
+    return (Getable<Comparable<T>> & Setable) s;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
 [return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<*>|?boolean|?number|?string)>} */ ($Casts.$to($Casts.$to(s, Setable), Getable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
 [s] => [s] "s"
 [return s;] => [return s;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast3"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static Cmp method() {
+    return (Cmp & Serial) () -> 1;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method"
 [return (Cmp & Serial) () -> 1;] => [return /**@type {Cmp} */ ($Casts.$to($Casts.$to($Lambda$Cmp$0.$create__(), Serial), Cmp));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static Cmp2 method2() {
+    return (Cmp2 & Serial) (a) -> 1;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method2"
 [return (Cmp2 & Serial) (a) -> 1;] => [return /**@type {Cmp2} */ ($Casts.$to($Casts.$to($Lambda$Cmp2$1.$create__(), Serial), Cmp2));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method2"
 [o] => [o] "o"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[public static void testClosureAssignment(Object o) {
+    A e = (A & EmptyA & EmptyB) o;
+...    EmptyB s = (A & EmptyA & EmptyB) o;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testClosureAssignment"
 [A e = (A & EmptyA & EmptyB) o;] => [let e = /**@type {A} */ ($Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testClosureAssignment"
 [e] => [e] "e"
 [EmptyA g = (A & EmptyA & EmptyB) o;] => [let g = /**@type {EmptyA} */ ($Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testClosureAssignment"
@@ -57,16 +77,25 @@ public class IntersectionTypeTest<U> {
 [EmptyB s = (A & EmptyA & EmptyB) o;] => [let s = /**@type {EmptyB} */ ($Casts.$to($Casts.$to($Casts.$to(o, EmptyB), EmptyA), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testClosureAssignment"
 [s] => [s] "s"
 [t] => [t] "t"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[private static <T> T get(T t) {
+    return t;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.get"
 [return t;] => [return t;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.get"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[private static <T extends A & EmptyA> T m() {
+    return (T) get(new Object());
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
 [return (T) get(new Object());] => [return /**@type {A} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(java_lang_Object.$create__()), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[private static <T extends A & EmptyA> Getable<T> n() {
+    return null;
+  }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"
 [t] => [t] "t"
-[UNKNOWN] => [IntersectionTypeTest.$clinit();]
+[private static <T extends A & EmptyA> void set(T t) {}] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.set"
 [Object o = m();] => [let o = IntersectionTypeTest.m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testMethodCall"
 [o] => [o] "o"
 [set((A & EmptyA) o);] => [IntersectionTypeTest.m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(/**@type {A} */ ($Casts.$to($Casts.$to(o, EmptyA), A)));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testMethodCall"
 [set(m());] => [IntersectionTypeTest.m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(IntersectionTypeTest.m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest());] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.testMethodCall"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
+public class IntersectionTypeTest<U> {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<clinit>"

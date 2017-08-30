@@ -7,7 +7,10 @@
 ...  }
 }] => [/** @public {!$Long} */
     this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Long.fromBits(0, 0) /* 0 */;] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<synthetic: constructor>"
-[UNKNOWN] => [StaticFieldCompoundAssignment.$clinit();]
+[public class StaticFieldCompoundAssignment {
+  public static long one = 1;
+...  }
+}] => [StaticFieldCompoundAssignment.$clinit();] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<synthetic: create>"
 [public class StaticFieldCompoundAssignment {
   public static long one = 1;
 ...  }
@@ -28,8 +31,11 @@
   public static long one = 1;
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment();] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class StaticFieldCompoundAssignment {
+  public static long one = 1;
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<clinit>"
 [public static long one = 1;] => [StaticFieldCompoundAssignment.$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Primitives.$widenIntToLong(1);]
 [public static long foo = one++;] => [StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = ( () => {let $value = StaticFieldCompoundAssignment.$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment;StaticFieldCompoundAssignment.$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */); return $value;})();]
 [public long bar = foo++;] => [this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = ( () => {let $value = StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment;StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */); return $value;})();]
-[foo++;] => [StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */);]
+[foo++;] => [StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<init>"

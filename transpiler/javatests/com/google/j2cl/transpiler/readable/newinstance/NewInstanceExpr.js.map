@@ -2,7 +2,10 @@
   public static void main(String[] args) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<synthetic: constructor>"
-[UNKNOWN] => [NewInstanceExpr.$clinit();]
+[public class NewInstanceExpr {
+  public static void main(String[] args) {
+...  }
+}] => [NewInstanceExpr.$clinit();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<synthetic: create>"
 [public class NewInstanceExpr {
   public static void main(String[] args) {
 ...  }
@@ -24,7 +27,12 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<init>"
 [args] => [args] "args"
-[UNKNOWN] => [NewInstanceExpr.$clinit();]
+[public static void main(String[] args) {
+    NewInstanceExpr a = new NewInstanceExpr();
+  }] => [NewInstanceExpr.$clinit();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"
 [NewInstanceExpr a = new NewInstanceExpr();] => [let a = NewInstanceExpr.$create__();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"
 [a] => [a] "a"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class NewInstanceExpr {
+  public static void main(String[] args) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<clinit>"

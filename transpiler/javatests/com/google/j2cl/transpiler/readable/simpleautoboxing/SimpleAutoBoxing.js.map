@@ -2,7 +2,10 @@
   "IdentityBinaryExpression",
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.<synthetic: constructor>"
-[UNKNOWN] => [SimpleAutoBoxing.$clinit();]
+[@SuppressWarnings({
+  "IdentityBinaryExpression",
+...  }
+}] => [SimpleAutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.<synthetic: create>"
 [@SuppressWarnings({
   "IdentityBinaryExpression",
 ...  }
@@ -70,7 +73,10 @@
       let number$1$ = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
-[UNKNOWN] => [let number$1$ = $array[$index];]
+[public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+...    return sum;
+  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
 [number] => [number$1$] "number"
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
@@ -83,7 +89,10 @@
       let number$1$ = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
-[UNKNOWN] => [let number$1$ = $array[$index];]
+[@JsMethod
+  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
+...    return sum;
+  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
 [number] => [number$1$] "number"
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
@@ -296,4 +305,7 @@
 [b] => [b] "b"
 [assert boxB;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
 [assert b;] => [$Asserts.$assert(b);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@SuppressWarnings({
+  "IdentityBinaryExpression",
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.<clinit>"

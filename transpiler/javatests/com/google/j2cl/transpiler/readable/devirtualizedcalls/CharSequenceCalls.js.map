@@ -2,7 +2,10 @@
   public void test(CharSequence cs) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.<synthetic: constructor>"
-[UNKNOWN] => [CharSequenceCalls.$clinit();]
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [CharSequenceCalls.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.<synthetic: create>"
 [public class CharSequenceCalls {
   public void test(CharSequence cs) {
 ...  }
@@ -28,4 +31,7 @@
 [String s = "s";] => [let s = "s";] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
 [s] => [s] "s"
 [test(s);] => [this.m_test__java_lang_CharSequence(s);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.main"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class CharSequenceCalls {
+  public void test(CharSequence cs) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.<clinit>"

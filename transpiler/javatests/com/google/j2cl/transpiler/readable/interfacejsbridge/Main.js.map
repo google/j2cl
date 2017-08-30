@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  public void test() {
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: create>"
 [public class Main {
   public void test() {
 ...  }
@@ -35,4 +38,7 @@
 [b.foo(1);] => [b.m_foo__int(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [c.foo(1);] => [c.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [d.foo(1);] => [d.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<clinit>"

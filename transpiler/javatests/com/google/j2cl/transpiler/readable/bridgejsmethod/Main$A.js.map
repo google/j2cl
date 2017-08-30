@@ -2,7 +2,10 @@
     @JsMethod
 ...    public void bar(T t) {}
   }] => [super();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A.<synthetic: constructor>"
-[UNKNOWN] => [A.$clinit();]
+[public static class A<T> {
+    @JsMethod
+...    public void bar(T t) {}
+  }] => [A.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A.<synthetic: create>"
 [public static class A<T> {
     @JsMethod
 ...    public void bar(T t) {}
@@ -26,4 +29,7 @@
 [t] => [t] "t"
 [return t;] => [return t;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A.fun"
 [t] => [t] "t"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public static class A<T> {
+    @JsMethod
+...    public void bar(T t) {}
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A.<clinit>"

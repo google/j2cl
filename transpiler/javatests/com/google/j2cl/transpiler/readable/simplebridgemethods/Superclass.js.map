@@ -1,7 +1,9 @@
 [class Superclass<T extends Error> {
   public void m1(T t) {}
 }] => [super();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<synthetic: constructor>"
-[UNKNOWN] => [Superclass.$clinit();]
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [Superclass.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<synthetic: create>"
 [class Superclass<T extends Error> {
   public void m1(T t) {}
 }] => [let $instance = new Superclass();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<synthetic: create>"
@@ -18,4 +20,6 @@
   public void m1(T t) {}
 }] => [this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<init>"
 [t] => [t] "t"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class Superclass<T extends Error> {
+  public void m1(T t) {}
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass.<clinit>"

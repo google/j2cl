@@ -1,6 +1,7 @@
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [super();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<synthetic: constructor>"
-[UNKNOWN] => [InnerClass.$clinit();]
+[@JsType(namespace = "bar.foo.baz")
+  static class InnerClass {}] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<synthetic: create>"
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<synthetic: create>"
 [@JsType(namespace = "bar.foo.baz")
@@ -11,4 +12,5 @@
   static class InnerClass {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<init>"
 [@JsType(namespace = "bar.foo.baz")
   static class InnerClass {}] => [this.$init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@JsType(namespace = "bar.foo.baz")
+  static class InnerClass {}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.<clinit>"

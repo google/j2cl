@@ -2,7 +2,10 @@
   Left createLeft() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<synthetic: constructor>"
-[UNKNOWN] => [Right.$clinit();]
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [Right.$clinit();] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<synthetic: create>"
 [public class Right {
   Left createLeft() {
 ...  }
@@ -24,4 +27,7 @@
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_circularimportuse_Right();] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<init>"
 [return new Left();] => [return Left.$create__();] "com.google.j2cl.transpiler.readable.circularimportuse.Right.createLeft"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Right {
+  Left createLeft() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.circularimportuse.Right.<clinit>"

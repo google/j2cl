@@ -2,7 +2,10 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: constructor>"
-[UNKNOWN] => [Main.$clinit();]
+[public class Main {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: create>"
 [public class Main {
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
@@ -23,7 +26,10 @@
   @JsType(isNative = true, namespace = "test.foo")
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<init>"
-[UNKNOWN] => [Main.$clinit();]
+[public static void test() {
+    NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();
+...    n4.toString();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();] => [let n1 = new NativeJsTypeWithToString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [n1] => [n1] "n1"
 [n1.toString();] => [n1.toString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
@@ -36,4 +42,7 @@
 [Object n4 = new NativeJsTypeWithoutToString();] => [let n4 = new NativeJsTypeWithoutToString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [n4] => [n4] "n4"
 [n4.toString();] => [$Objects.m_toString__java_lang_Object(n4);] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Main {
+  @JsType(isNative = true, namespace = "test.foo")
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<clinit>"

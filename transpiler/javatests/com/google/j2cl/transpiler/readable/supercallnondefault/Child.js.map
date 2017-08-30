@@ -3,7 +3,9 @@
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: constructor>"
 [a] => [a] "a"
-[UNKNOWN] => [Child.$clinit();]
+[public Child(int a) {
+    super(a);
+  }] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
 [public Child(int a) {
     super(a);
   }] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
@@ -18,4 +20,7 @@
 [public Child(int a) {
     super(a);
   }] => [this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<init>"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Child extends Parent {
+  public Child(int a) {
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<clinit>"

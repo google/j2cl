@@ -2,7 +2,9 @@
   public SuperCallDefault() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: constructor>"
-[UNKNOWN] => [SuperCallDefault.$clinit();]
+[public SuperCallDefault() {
+    super();
+  }] => [SuperCallDefault.$clinit();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: create>"
 [public SuperCallDefault() {
     super();
   }] => [let $instance = new SuperCallDefault();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<synthetic: create>"
@@ -16,4 +18,7 @@
 [public SuperCallDefault() {
     super();
   }] => [this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<init>"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class SuperCallDefault {
+  public SuperCallDefault() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault.<clinit>"

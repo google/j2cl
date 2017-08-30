@@ -17,35 +17,43 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.common.SourcePosition;
 
-/** Adds method qualified names to source positions for sourcemaps */
-public class AddMethodNameToSourcePosition extends NormalizationPass {
+/**
+ * Adds method qualified names to source positions for sourcemaps and fills out missing information
+ */
+public class FilloutMissingSourceMapInformation extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
           public boolean enterStatement(Statement statement) {
-            if (getCurrentMember() == null || !(getCurrentMember() instanceof Method)) {
+            if (getCurrentMember() == null || getCurrentMember() instanceof Field) {
               return false;
             }
 
             SourcePosition sourcePosition = statement.getSourcePosition();
-
             // If there is already a name in the AST do not overwrite
             // Some synthesized methods fill out the name earlier
             if (sourcePosition.getName() != null) {
               return true;
             }
 
+            if (sourcePosition.isAbsent()) {
+              sourcePosition = getCurrentMember().getSourcePosition();
+            }
+            if (sourcePosition.isAbsent()) {
+              sourcePosition = getCurrentType().getSourcePosition();
+            }
             if (!sourcePosition.isAbsent()) {
-              Method method = (Method) getCurrentMember();
+              Member member = getCurrentMember();
               statement.setSourcePosition(
                   SourcePosition.Builder.from(sourcePosition)
-                      .setName(method.getDescriptor().getQualifiedBinaryName())
+                      .setName(member.getStackTraceMethodName())
                       .build());
             }
             return true;

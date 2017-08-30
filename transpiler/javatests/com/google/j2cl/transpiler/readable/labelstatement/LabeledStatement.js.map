@@ -2,7 +2,10 @@
   public void test() {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.<synthetic: constructor>"
-[UNKNOWN] => [LabeledStatement.$clinit();]
+[public class LabeledStatement {
+  public void test() {
+...  }
+}] => [LabeledStatement.$clinit();] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.<synthetic: create>"
 [public class LabeledStatement {
   public void test() {
 ...  }
@@ -47,4 +50,7 @@
       continue LABEL1;
     }] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.test"
 [continue LABEL1;] => [continue LABEL1;] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.test"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class LabeledStatement {
+  public void test() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement.<clinit>"

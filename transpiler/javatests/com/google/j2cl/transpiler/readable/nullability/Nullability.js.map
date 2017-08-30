@@ -1,5 +1,6 @@
 [a] => [a] "a"
-[UNKNOWN] => [Nullability.$clinit();]
+[@JsConstructor
+  public Nullability(@Nonnull String a) {}] => [Nullability.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [@JsConstructor
   public Nullability(@Nonnull String a) {}] => [super();] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [@JsConstructor
@@ -51,7 +52,10 @@
 [return "";] => [return "";] "com.google.j2cl.transpiler.readable.nullability.Nullability.m2"
 [a] => [a] "a"
 [args] => [args] "args"
-[UNKNOWN] => [$Arrays.$stampType(args, java_lang_String, 1);]
+[@JsMethod
+  public String m3(@Nonnull String a, @NonNull String... args) {
+    return null;
+  }] => [$Arrays.$stampType(args, java_lang_String, 1);] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
 [f] => [f] "f"
 [a] => [a] "a"
@@ -101,7 +105,10 @@
 [return ClassInSubpackage.getString();] => [return ClassInSubpackage.m_getString__();] "com.google.j2cl.transpiler.readable.nullability.Nullability.castingNeeded"
 [function] => [function$1$] "function"
 [m4(function);] => [this.m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability_MyFunction(function$1$);] "com.google.j2cl.transpiler.readable.nullability.Nullability.functions"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[public class Nullability {
+  @Nonnull private String f1 = "Hello";
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability.<clinit>"
 [@Nonnull private String f1 = "Hello";] => [this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ = "Hello";]
 [private String f2 = null;] => [this.f_f2__com_google_j2cl_transpiler_readable_nullability_Nullability_ = null;]
 [@Nullable private String f3 = null;] => [this.f_f3__com_google_j2cl_transpiler_readable_nullability_Nullability_ = null;]

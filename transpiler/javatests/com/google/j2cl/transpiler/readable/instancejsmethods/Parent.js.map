@@ -2,7 +2,10 @@
   /**
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: constructor>"
-[UNKNOWN] => [Parent.$clinit();]
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: create>"
 [public class Parent extends SuperParent {
   /**
 ...  }
@@ -31,6 +34,15 @@
 [return a * b;] => [return a * b;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.foo"
-[UNKNOWN] => [return this.bar(arg0, arg1);]
-[UNKNOWN] => [return this.sum(arg0, arg1);]
-[UNKNOWN] => [SuperParent.$clinit();]
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [return this.bar(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [return this.sum(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
+[public class Parent extends SuperParent {
+  /**
+...  }
+}] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<clinit>"

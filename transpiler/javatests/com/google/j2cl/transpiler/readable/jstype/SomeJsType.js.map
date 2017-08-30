@@ -1,4 +1,7 @@
-[UNKNOWN] => [SomeJsType.$clinit();]
+[@JsType
+public class SomeJsType<T> {
+...  }
+}] => [SomeJsType.$clinit();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<init>"
 [@JsType
 public class SomeJsType<T> {
 ...  }
@@ -49,4 +52,7 @@ public class SomeJsType<T> {
 [Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, java_lang_Object), Star$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [star] => [star] "star"
 [return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, Wildcard$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@JsType
+public class SomeJsType<T> {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<clinit>"

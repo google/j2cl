@@ -2,7 +2,10 @@
   public T get(T t) {
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<synthetic: constructor>"
-[UNKNOWN] => [C.$clinit();]
+[class C<T> {
+  public T get(T t) {
+...  }
+}] => [C.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<synthetic: create>"
 [class C<T> {
   public T get(T t) {
 ...  }
@@ -25,4 +28,7 @@
 }] => [this.$init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<init>"
 [t] => [t] "t"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.get"
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[class C<T> {
+  public T get(T t) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.C.<clinit>"

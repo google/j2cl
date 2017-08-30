@@ -2,7 +2,10 @@
   static class TemplatedSubtype<T extends String> implements I<T> {
 ...    public void m(T t, @JsOptional Object o) {}
   }] => [super();] "com.google.j2cl.transpiler.readable.jsoptional.Main$TemplatedSubtype.<synthetic: constructor>"
-[UNKNOWN] => [TemplatedSubtype.$clinit();]
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [TemplatedSubtype.$clinit();] "com.google.j2cl.transpiler.readable.jsoptional.Main$TemplatedSubtype.<synthetic: create>"
 [@JsType
   static class TemplatedSubtype<T extends String> implements I<T> {
 ...    public void m(T t, @JsOptional Object o) {}
@@ -25,5 +28,11 @@
   }] => [this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main_TemplatedSubtype();] "com.google.j2cl.transpiler.readable.jsoptional.Main$TemplatedSubtype.<init>"
 [t] => [t] "t"
 [o] => [o] "o"
-[UNKNOWN] => [this.m_m__java_lang_String__java_lang_Object(/**@type {C_TemplatedSubtype_T} */ ($Casts.$to(arg0, java_lang_String)), arg1);]
-[UNKNOWN] => [java_lang_Object.$clinit();]
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [this.m_m__java_lang_String__java_lang_Object(/**@type {C_TemplatedSubtype_T} */ ($Casts.$to(arg0, java_lang_String)), arg1);] "com.google.j2cl.transpiler.readable.jsoptional.Main$TemplatedSubtype.m"
+[@JsType
+  static class TemplatedSubtype<T extends String> implements I<T> {
+...    public void m(T t, @JsOptional Object o) {}
+  }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsoptional.Main$TemplatedSubtype.<clinit>"
