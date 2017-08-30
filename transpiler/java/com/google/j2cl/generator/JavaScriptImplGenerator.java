@@ -730,6 +730,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO(stalcup): switch to generator.setFileLength() when that becomes possible.
   private void recordFileLengthInSourceMap() {
     // The JS position must have non-zero size otherwise the mapping will be ignored.
-    sourceBuilder.emitWithMapping(SourcePosition.DUMMY, () -> sourceBuilder.append(" "));
+    sourceBuilder.emitWithMapping(SourcePosition.EOF, () -> sourceBuilder.append(" "));
   }
 }

@@ -46,8 +46,8 @@ public class ReadableSourceMapGenerator {
         SourcePosition javaSourcePosition = entry.getValue();
         SourcePosition javaScriptSourcePosition = entry.getKey();
 
-        // Do not display dummy mappings in readable output.
-        if (javaSourcePosition == SourcePosition.DUMMY) {
+        // Do not display the eof mapping in readable output.
+        if (javaSourcePosition.isEof()) {
           continue;
         }
 

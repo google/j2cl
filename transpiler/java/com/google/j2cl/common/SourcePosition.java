@@ -36,8 +36,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
   public abstract @Nullable String getName();
 
   // For mappings that should not be displayed in readable output.
-  public static final SourcePosition DUMMY =
-      newBuilder().setFilePath("UNKNOWN").setStartPosition(0, 0).setEndPosition(0, 0).build();
+  public static final SourcePosition EOF =
+      newBuilder().setFilePath("EOF").setStartPosition(0, 0).setEndPosition(0, 0).build();
 
   public static final SourcePosition UNKNOWN =
       newBuilder().setFilePath("UNKNOWN").setStartPosition(-1, -1).setEndPosition(-1, -1).build();
@@ -57,7 +57,11 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
   }
 
   public boolean isAbsent() {
-    return this == UNKNOWN || this == DUMMY;
+    return isUnknown() || isEof();
+  }
+
+  public boolean isEof() {
+    return this == EOF;
   }
 
   public boolean isUnknown() {
