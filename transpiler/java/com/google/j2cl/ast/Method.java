@@ -47,16 +47,19 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
   public enum SyntheticMethodType {
     NOT_SYNTHTETIC,
     FACTORY_CONSTRUCTOR() {
+      @Override
       public String getName(Method method) {
         return synthesizeMethodName(method, "<synthetic: create>");
       }
     },
     JAVASCRIPT_TRIVIAL_CONSTRUCTOR() {
+      @Override
       public String getName(Method method) {
         return synthesizeMethodName(method, "<synthetic: constructor>");
       }
     },
     CONSTRUCTOR_IMPLEMENTATION() {
+      @Override
       public String getName(Method method) {
         return synthesizeMethodName(method, "<init>");
       }
@@ -122,6 +125,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     return syntheticMethodType;
   }
 
+  @Override
   public String getStackTraceMethodName() {
     return syntheticMethodType.getName(this);
   }
