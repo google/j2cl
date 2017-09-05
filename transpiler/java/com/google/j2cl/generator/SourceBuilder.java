@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Strings;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -33,6 +35,7 @@ class SourceBuilder {
   private int currentIndentation = 0;
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
+  private boolean finished = false;
 
   public void emitWithOptionalNamedMapping(
       SourcePosition javaSourcePosition, Runnable codeEmitter) {
@@ -54,11 +57,31 @@ class SourceBuilder {
         javaSourcePosition);
   }
 
+  /**
+   * Give the SourceMap file construction library enough information to be able to generate all of
+   * the required empty group elements between the last mapping and the end of the file.
+   */
+  private void emitEOF() {
+    // TODO(stalcup): switch to generator.setFileLength() when that becomes possible.
+    // Emit eof marker
+    if (sb.length() != 0) {
+      emitWithMapping(
+          SourcePosition.newBuilder()
+              .setFilePath("EOF")
+              .setStartPosition(0, 0)
+              .setEndPosition(0, 0)
+              .build(),
+          () -> append(" "));
+    }
+    finished = true;
+  }
+
   public SortedMap<SourcePosition, SourcePosition> getMappings() {
     return javaSourceInfoByOutputSourceInfo;
   }
 
   public void append(String source) {
+    checkState(!finished);
     String indentedSource =
         source.replace(
             System.lineSeparator(),
@@ -104,6 +127,7 @@ class SourceBuilder {
   }
 
   public String build() {
+    emitEOF();
     return sb.toString();
   }
 

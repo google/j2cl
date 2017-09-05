@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.CharMatcher;
 import com.google.common.io.Files;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -36,20 +39,23 @@ public class ReadableSourceMapGenerator {
       Path javaSourceFile,
       String javaScriptImplementationFileContents) {
     StringBuilder sb = new StringBuilder();
+
+    List<Entry<SourcePosition, SourcePosition>> entries =
+        new ArrayList<>(javaSourcePositionByOutputSourcePosition.entrySet());
+    // remove the EOF marker.
+    SourcePosition eofMarker = entries.get(entries.size() - 1).getValue();
+    // Make sure we are not removing a meaninful mapping instead of the eofMarker.
+    checkState(eofMarker.getEndFilePosition().equals(eofMarker.getStartFilePosition()));
+    entries.remove(entries.size() - 1);
+
     try {
       List<String> javaSourceLines =
           Files.readLines(javaSourceFile.toFile(), Charset.defaultCharset());
       List<String> javaScriptSourceLines =
           Arrays.asList(javaScriptImplementationFileContents.split("\n"));
-      for (Entry<SourcePosition, SourcePosition> entry :
-          javaSourcePositionByOutputSourcePosition.entrySet()) {
+      for (Entry<SourcePosition, SourcePosition> entry : entries) {
         SourcePosition javaSourcePosition = entry.getValue();
         SourcePosition javaScriptSourcePosition = entry.getKey();
-
-        // Do not display the eof mapping in readable output.
-        if (javaSourcePosition.isEof()) {
-          continue;
-        }
 
         boolean hasName = javaSourcePosition.getName() != null;
 
@@ -73,7 +79,7 @@ public class ReadableSourceMapGenerator {
       SourcePosition sourcePosition, List<String> lines, boolean condense) {
     int startLine = sourcePosition.getStartFilePosition().getLine();
     int endLine = sourcePosition.getEndFilePosition().getLine();
-    if (sourcePosition.isUnknown()) {
+    if (sourcePosition.isAbsent()) {
       return "[UNKNOWN]";
     }
     String fragment = lines.get(startLine);

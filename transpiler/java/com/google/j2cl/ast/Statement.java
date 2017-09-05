@@ -22,7 +22,7 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 public abstract class Statement extends Node implements HasSourcePosition, Cloneable<Statement> {
   // unknown by default.
-  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+  private SourcePosition sourcePosition = SourcePosition.ABSENT;
 
   @Override
   public SourcePosition getSourcePosition() {

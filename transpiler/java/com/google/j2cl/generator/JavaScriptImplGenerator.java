@@ -37,7 +37,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashMap;
 import java.util.Map;
@@ -127,7 +126,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       renderNativeSource();
       renderExports();
       renderSourceMapLocation();
-      recordFileLengthInSourceMap();
       return sourceBuilder.build();
     } catch (RuntimeException e) {
       // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
@@ -721,15 +719,5 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderExpression(Expression expression) {
     ExpressionTranspiler.render(expression, environment, sourceBuilder);
-  }
-
-  /**
-   * Give the SourceMap file construction library enough information to be able to generate all of
-   * the required empty group elements between the last mapping and the end of the file.
-   */
-  // TODO(stalcup): switch to generator.setFileLength() when that becomes possible.
-  private void recordFileLengthInSourceMap() {
-    // The JS position must have non-zero size otherwise the mapping will be ignored.
-    sourceBuilder.emitWithMapping(SourcePosition.EOF, () -> sourceBuilder.append(" "));
   }
 }

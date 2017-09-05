@@ -29,7 +29,7 @@ public class Variable extends Node
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
-  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+  private SourcePosition sourcePosition;
   private final boolean isUnusableByJsSuppressed;
 
   private Variable(
@@ -107,7 +107,7 @@ public class Variable extends Node
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
     private boolean isParameter;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
     private boolean isUnusableByJsSuppressed = false;
 
     public static Builder from(Variable variable) {

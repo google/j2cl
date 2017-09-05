@@ -67,7 +67,7 @@ public class ReturnStatement extends Statement {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
 
     public static Builder from(ReturnStatement returnStatement) {
       return newBuilder()

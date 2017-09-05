@@ -23,7 +23,7 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 @Context
 public abstract class Member extends Node implements HasSourcePosition, HasReadableDescription {
-  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+  private SourcePosition sourcePosition = SourcePosition.ABSENT;
 
   public abstract boolean isStatic();
 

@@ -101,7 +101,8 @@ public class Field extends Member implements HasJsNameInfo {
     private Expression initializer;
     private boolean isEnumField;
     private Variable capturedVariable;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+
     public static Builder from(Field field) {
       Builder builder = new Builder();
       builder.fieldDescriptor = field.getDescriptor();

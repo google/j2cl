@@ -72,7 +72,7 @@ public class InitializerBlock extends Member {
   public static class Builder {
     private Block block;
     private boolean isStatic;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
     private TypeDescriptor enclosingTypeDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {

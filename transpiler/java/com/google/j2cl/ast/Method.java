@@ -249,8 +249,8 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     private List<Statement> statements = new ArrayList<>();
     private boolean isOverride;
     private String jsDocDescription;
-    private SourcePosition bodySourcePosition = SourcePosition.UNKNOWN;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition bodySourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
     private SyntheticMethodType syntheticMethodType = SyntheticMethodType.NOT_SYNTHTETIC;
 
     public static Builder from(Method method) {

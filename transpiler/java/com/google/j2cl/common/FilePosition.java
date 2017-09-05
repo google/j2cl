@@ -36,6 +36,20 @@ public final class FilePosition {
   }
 
   @Override
+  public boolean equals(Object that) {
+    if (!(that instanceof FilePosition)) {
+      return false;
+    }
+    FilePosition thatFilePosition = (FilePosition) that;
+    return line == thatFilePosition.line && column == thatFilePosition.column;
+  }
+
+  @Override
+  public int hashCode() {
+    return line * 37 + column;
+  }
+
+  @Override
   public String toString() {
     return "(" + getLine() + ":" + getColumn() + ")";
   }

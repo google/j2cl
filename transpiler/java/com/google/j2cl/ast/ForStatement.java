@@ -90,7 +90,7 @@ public class ForStatement extends Statement {
     private Expression conditionExpression;
     private List<Expression> updates = new ArrayList<>();
     private Block body;
-    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
 
     public static Builder from(ForStatement forStatement) {
       return newBuilder()
