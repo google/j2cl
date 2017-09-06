@@ -10,9 +10,6 @@
 [foo] => [foo] "foo"
 [SimpleEnum2(int foo) {
     this.foo = foo;
-  }] => [SimpleEnum2.$clinit();] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<synthetic: ctor_create>"
-[SimpleEnum2(int foo) {
-    this.foo = foo;
   }] => [let $instance = new SimpleEnum2();] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<synthetic: ctor_create>"
 [SimpleEnum2(int foo) {
     this.foo = foo;
@@ -29,9 +26,6 @@
   }] => [this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2();] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<init>"
 [this.foo = foo;] => [this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = foo;] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<init>"
 [foo] => [foo] "foo"
-[SimpleEnum2(SimpleEnum foo) {
-    this(foo.ordinal());
-  }] => [SimpleEnum2.$clinit();] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<synthetic: ctor_create>"
 [SimpleEnum2(SimpleEnum foo) {
     this(foo.ordinal());
   }] => [let $instance = new SimpleEnum2();] "com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.<synthetic: ctor_create>"

@@ -23,6 +23,7 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -38,9 +39,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Method rewriteMethod(Method method) {
-            boolean isStaticMethod = method.getDescriptor().isStatic();
-            boolean isJsConstructor = method.getDescriptor().isJsConstructor();
-            if (isStaticMethod || isJsConstructor) {
+            if (needsClinitCall(method.getDescriptor())) {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
@@ -58,7 +57,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
           public void exitType(Type type) {
             List<Statement> superClinitCallStatements = new ArrayList<>();
 
-            if (needsClinitCall(type.getSuperTypeDescriptor())) {
+            if (hasClinitMethod(type.getSuperTypeDescriptor())) {
               superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(
@@ -85,7 +84,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
   private void addRequiredSuperInterfacesClinitCalls(
       TypeDescriptor typeDescriptor, List<Statement> superClinitCallStatements) {
     for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
-      if (!needsClinitCall(interfaceTypeDescriptor)) {
+      if (!hasClinitMethod(interfaceTypeDescriptor)) {
         continue;
       }
 
@@ -103,7 +102,27 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
     }
   }
 
-  private static boolean needsClinitCall(TypeDescriptor typeDescriptor) {
+  private static boolean needsClinitCall(MethodDescriptor methodDescriptor) {
+    // Skip native methods.
+    if (methodDescriptor.isNative()) {
+      return false;
+    }
+
+    // At this point all constructors (except JsConstructors) are static factory ($create) methods,
+    // so clinits need to be inserted only on static methods or JsConstructors. clinits are not
+    // needed in factories or JsConstructors for enum classes because those are already only called
+    // from the clinit itself.
+
+    if (methodDescriptor.getEnclosingTypeDescriptor().isEnum()
+        && methodDescriptor.getMethodOrigin() == MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
+      // These are the classes corresponding to enums excluding the anonymous enum subclasses.
+      return false;
+    }
+
+    return methodDescriptor.isStatic() || methodDescriptor.isJsConstructor();
+  }
+
+  private static boolean hasClinitMethod(TypeDescriptor typeDescriptor) {
     return typeDescriptor != null
         && !typeDescriptor.isNative()
         && !typeDescriptor.isJsFunctionInterface();
