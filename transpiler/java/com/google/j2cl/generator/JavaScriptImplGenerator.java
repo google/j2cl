@@ -112,12 +112,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public String renderOutput() {
     try {
       renderFileOverview(
+          "const",
+          "extraRequire",
+          "missingOverride",
+          "missingRequire",
           "suspiciousCode",
           "transitionalSuspiciousCodeWarnings",
-          "uselessCode",
-          "const",
-          "missingRequire",
-          "missingOverride");
+          "unusedLocalVariables",
+          "uselessCode");
       renderImports();
       renderTypeAnnotation();
       renderTypeBody();
