@@ -107,7 +107,7 @@ js_module_binary(
 js_library(
     name = "J2clAjdJSCompiler_library",
     deps_mgmt = "closure",  # Turns on AJD.
-    deps = [":launcher"],
+    exports = [":launcher"],
 )
 
 js_binary(
@@ -124,7 +124,7 @@ js_binary(
 js_library(
     name = "J2clDupeAjdJSCompiler_library",
     deps_mgmt = "closure",  # Turns on AJD.
-    deps = [":dupe_launcher"],
+    exports = [":dupe_launcher"],
 )
 
 js_binary(
