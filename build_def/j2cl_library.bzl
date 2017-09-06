@@ -55,6 +55,7 @@ def _get_absolute_labels(args, key):
 
 def _merge_zips(srczips, outzip, tags, testonly):
   """Merges provided zip files."""
+  zip_tool = "$$cwd/$(location //third_party/zip:zip)"
   native.genrule(
       name=outzip + "_genrule",
       srcs=srczips,
@@ -72,8 +73,9 @@ def _merge_zips(srczips, outzip, tags, testonly):
           "cd $$TMPDIR",
           # zip errors out for empty dir - a dummy dir (even excluded) prevents that.
           "mkdir __dummy__",
-          "zip -qr $$cwd/$@ . -x __dummy__",
+          "%s -jt -X -qr $$cwd/$@ . -x __dummy__" % zip_tool,
       ]),
+      tools=["//third_party/zip:zip"],
       tags=tags,
       testonly=testonly,
       local=True,
@@ -183,6 +185,7 @@ def j2cl_library(name,
     # extract js files from apts
     js_sources_from_apt = base_name + "js_src_apt.zip"
     native_js_sources_from_apt = base_name + "_native_js_src_apt.zip"
+    zip_tool = "$$cwd/$(location //third_party/zip:zip)"
     native.genrule(
         name=base_name + "_extract_native_js_apt",
         srcs=["lib" + base_name + "_java_library.jar"],
@@ -193,10 +196,13 @@ def j2cl_library(name,
             "unzip -q $(SRCS) -x \"*.class\" -d $$TMPDIR",
             "cwd=$$PWD",
             "cd $$TMPDIR",
-            "zip -q -i \"*.js\" -x \"*.native.js\" -r $$cwd/$(location %s) *" % js_sources_from_apt,
-            "zip -q -i \"*.native.js\" -r $$cwd/$(location %s) *" % native_js_sources_from_apt,
+            "%s -jt -X -q -i \"*.js\" -x \"*.native.js\" -r $$cwd/$(location %s) *" % (
+                zip_tool, js_sources_from_apt),
+            "%s -jt -X -q -i \"*.native.js\" -r $$cwd/$(location %s) *" % (
+                zip_tool, native_js_sources_from_apt),
         ]),
         tags=internal_tags,
+        tools=["//third_party/zip:zip"],
         visibility=["//visibility:private"],
         local=True,
     )
