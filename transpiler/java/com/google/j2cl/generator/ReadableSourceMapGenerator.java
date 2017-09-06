@@ -80,7 +80,7 @@ public class ReadableSourceMapGenerator {
     int startLine = sourcePosition.getStartFilePosition().getLine();
     int endLine = sourcePosition.getEndFilePosition().getLine();
     if (sourcePosition.isAbsent()) {
-      return "[UNKNOWN]";
+      return "[ABSENT]";
     }
     String fragment = lines.get(startLine);
     int endColumn = sourcePosition.getEndFilePosition().getColumn();
