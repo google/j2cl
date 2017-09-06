@@ -27,19 +27,19 @@
 [public C(int x, int y) {
       this(x + y); // must call this(int);
       this.fC = 7;
-    }] => [C.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: create>"
+    }] => [C.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: ctor_create>"
 [public C(int x, int y) {
       this(x + y); // must call this(int);
       this.fC = 7;
-    }] => [let $instance = new C(x + y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: create>"
+    }] => [let $instance = new C(x + y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: ctor_create>"
 [public C(int x, int y) {
       this(x + y); // must call this(int);
       this.fC = 7;
-    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int__int(x, y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: create>"
+    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int__int(x, y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: ctor_create>"
 [public C(int x, int y) {
       this(x + y); // must call this(int);
       this.fC = 7;
-    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: create>"
+    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<synthetic: ctor_create>"
 [x] => [x] "x"
 [y] => [y] "y"
 [this.fC = 7;] => [this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C = 7;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$C.<init>"

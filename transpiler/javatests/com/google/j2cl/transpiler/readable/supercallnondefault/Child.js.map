@@ -1,20 +1,20 @@
 [public class Child extends Parent {
   public Child(int a) {
 ...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: constructor>"
+}] => [super();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: ctor_js>"
 [a] => [a] "a"
 [public Child(int a) {
     super(a);
-  }] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
+  }] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: ctor_create>"
 [public Child(int a) {
     super(a);
-  }] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
+  }] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: ctor_create>"
 [public Child(int a) {
     super(a);
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a);] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a);] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: ctor_create>"
 [public Child(int a) {
     super(a);
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: create>"
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<synthetic: ctor_create>"
 [a] => [a] "a"
 [super(a);] => [this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(a);] "com.google.j2cl.transpiler.readable.supercallnondefault.Child.<init>"
 [public Child(int a) {

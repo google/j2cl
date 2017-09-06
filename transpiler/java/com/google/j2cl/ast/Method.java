@@ -49,13 +49,13 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     FACTORY_CONSTRUCTOR() {
       @Override
       public String getName(Method method) {
-        return synthesizeMethodName(method, "<synthetic: create>");
+        return synthesizeMethodName(method, "<synthetic: ctor_create>");
       }
     },
     JAVASCRIPT_TRIVIAL_CONSTRUCTOR() {
       @Override
       public String getName(Method method) {
-        return synthesizeMethodName(method, "<synthetic: constructor>");
+        return synthesizeMethodName(method, "<synthetic: ctor_js>");
       }
     },
     CONSTRUCTOR_IMPLEMENTATION() {
