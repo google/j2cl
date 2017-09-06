@@ -53,7 +53,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
               Member member = getCurrentMember();
               statement.setSourcePosition(
                   SourcePosition.Builder.from(sourcePosition)
-                      .setName(member.getStackTraceMethodName())
+                      .setName(member.getQualifiedBinaryName())
                       .build());
             }
             return true;

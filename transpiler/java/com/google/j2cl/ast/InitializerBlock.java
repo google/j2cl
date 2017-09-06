@@ -49,7 +49,7 @@ public class InitializerBlock extends Member {
   }
 
   @Override
-  public String getStackTraceMethodName() {
+  public String getQualifiedBinaryName() {
     String prefix = getEnclosingTypeDescriptor().getQualifiedBinaryName() + ".";
 
     return isStatic ? prefix + "<clinit>" : prefix + "<init>";

@@ -56,7 +56,7 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
     return null;
   }
 
-  public abstract String getStackTraceMethodName();
+  public abstract String getQualifiedBinaryName();
 
   @Override
   public String getReadableDescription() {

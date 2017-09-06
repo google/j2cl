@@ -30,9 +30,9 @@ import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.Method.SyntheticMethodType;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
@@ -190,7 +190,6 @@ public class NormalizeConstructors extends NormalizationPass {
                     J2clUtils.format(
                         "Initialization from constructor '%s'.",
                         method.getDescriptor().getReadableDescription()))
-                .setSyntheticMethodType(SyntheticMethodType.CONSTRUCTOR_IMPLEMENTATION)
                 .build();
           }
 
@@ -263,6 +262,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .setConstructor(true)
             .setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
+            .setMethodOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
             .build();
 
     return Method.newBuilder()
@@ -270,7 +270,6 @@ public class NormalizeConstructors extends NormalizationPass {
         .addStatements(body)
         .setJsDocDescription("Private implementation constructor.")
         .setSourcePosition(type.getSourcePosition())
-        .setSyntheticMethodType(SyntheticMethodType.JAVASCRIPT_TRIVIAL_CONSTRUCTOR)
         .build();
   }
 
@@ -426,7 +425,6 @@ public class NormalizeConstructors extends NormalizationPass {
                 "Factory method corresponding to constructor '%s'.",
                 constructor.getDescriptor().getReadableDescription()))
         .setSourcePosition(constructor.getSourcePosition())
-        .setSyntheticMethodType(SyntheticMethodType.FACTORY_CONSTRUCTOR)
         .build();
   }
 
@@ -447,6 +445,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setStatic(false)
         .setJsInfo(JsInfo.NONE)
         .removeParameterOptionality()
+        .setMethodOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
         .setVisibility(Visibility.PUBLIC)
         .build();
   }
@@ -465,6 +464,7 @@ public class NormalizeConstructors extends NormalizationPass {
             Iterables.concat(
                 constructor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors(),
                 constructor.getTypeParameterTypeDescriptors()))
+        .setMethodOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
         .build();
   }
 

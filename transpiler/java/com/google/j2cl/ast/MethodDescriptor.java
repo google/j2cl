@@ -86,6 +86,28 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
   }
 
+  /** Whether the method originated in source code or was synthesized by a pass */
+  public enum MethodOrigin {
+    SOURCE,
+    SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
+    SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>"),
+    SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>");
+
+    private final String methodName;
+
+    MethodOrigin() {
+      this(null);
+    }
+
+    MethodOrigin(String methodName) {
+      this.methodName = methodName;
+    }
+
+    public String getName() {
+      return methodName;
+    }
+  }
+
   public static final String INIT_METHOD_NAME = "$init";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
@@ -145,6 +167,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .collect(ImmutableList.toImmutableList());
   }
 
+  public abstract MethodOrigin getMethodOrigin();
+
   public boolean isInit() {
     return getName().equals(INIT_METHOD_NAME) && !isStatic();
   }
@@ -203,6 +227,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public boolean isOrOverridesJsMember() {
     return isJsMember() || !getOverriddenJsMembers().isEmpty();
+  }
+
+  @Override
+  @Memoized
+  public String getQualifiedBinaryName() {
+    String name =
+        getMethodOrigin() == MethodOrigin.SOURCE ? getName() : getMethodOrigin().getName();
+    return J2clUtils.format("%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), name);
   }
 
   /**
@@ -284,6 +316,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setBridge(false)
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
+        .setMethodOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -421,6 +454,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setJsInfo(JsInfo jsInfo);
 
+    public abstract Builder setMethodOrigin(MethodOrigin methodOrigin);
+
     public abstract Builder setTypeParameterTypeDescriptors(
         Iterable<TypeDescriptor> typeParameterTypeDescriptors);
 
@@ -527,7 +562,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (isConstructor()) {
         checkState(!getName().isPresent(), "Should not set names for constructors.");
         // Choose consistent naming for constructors.
-        setName("<ctor>");
+        setName("<init>");
       }
 
       checkState(getName().isPresent());

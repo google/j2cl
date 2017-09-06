@@ -54,7 +54,7 @@ public class Field extends Member implements HasJsNameInfo {
   }
 
   @Override
-  public String getStackTraceMethodName() {
+  public String getQualifiedBinaryName() {
     return null;
   }
 

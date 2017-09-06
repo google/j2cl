@@ -42,40 +42,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
   @Visitable Block body;
   private boolean isOverride;
   private String jsDocDescription;
-  private SyntheticMethodType syntheticMethodType;
-
-  public enum SyntheticMethodType {
-    NOT_SYNTHTETIC,
-    FACTORY_CONSTRUCTOR() {
-      @Override
-      public String getName(Method method) {
-        return synthesizeMethodName(method, "<synthetic: ctor_create>");
-      }
-    },
-    JAVASCRIPT_TRIVIAL_CONSTRUCTOR() {
-      @Override
-      public String getName(Method method) {
-        return synthesizeMethodName(method, "<synthetic: ctor_js>");
-      }
-    },
-    CONSTRUCTOR_IMPLEMENTATION() {
-      @Override
-      public String getName(Method method) {
-        return synthesizeMethodName(method, "<init>");
-      }
-    };
-
-    public String getName(Method method) {
-      if (method.isConstructor()) {
-        return synthesizeMethodName(method, "<init>");
-      }
-      return method.getDescriptor().getQualifiedBinaryName();
-    }
-
-    private static String synthesizeMethodName(Method method, String syntheticName) {
-      return getEnclosingTypeDescriptor(method).getQualifiedBinaryName() + "." + syntheticName;
-    }
-  }
 
   private static TypeDescriptor getEnclosingTypeDescriptor(Method method) {
     return method.getDescriptor().getEnclosingTypeDescriptor();
@@ -86,14 +52,12 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       List<Variable> parameters,
       Block body,
       boolean isOverride,
-      String jsDocDescription,
-      SyntheticMethodType syntheticMethodType) {
+      String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.isOverride = isOverride;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
-    this.syntheticMethodType = syntheticMethodType;
   }
 
   @Override
@@ -121,13 +85,9 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     return null;
   }
 
-  public SyntheticMethodType getSyntheticMethodType() {
-    return syntheticMethodType;
-  }
-
   @Override
-  public String getStackTraceMethodName() {
-    return syntheticMethodType.getName(this);
+  public String getQualifiedBinaryName() {
+    return getDescriptor().getQualifiedBinaryName();
   }
 
   public Block getBody() {
@@ -251,7 +211,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     private String jsDocDescription;
     private SourcePosition bodySourcePosition = SourcePosition.ABSENT;
     private SourcePosition sourcePosition = SourcePosition.ABSENT;
-    private SyntheticMethodType syntheticMethodType = SyntheticMethodType.NOT_SYNTHTETIC;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -262,7 +221,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
-      builder.syntheticMethodType = method.getSyntheticMethodType();
       return builder;
     }
 
@@ -339,11 +297,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
       return this;
     }
 
-    public Builder setSyntheticMethodType(SyntheticMethodType syntheticMethodType) {
-      this.syntheticMethodType = syntheticMethodType;
-      return this;
-    }
-
     public Method build() {
       Block body = new Block(statements);
       body.setSourcePosition(bodySourcePosition);
@@ -380,8 +333,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
               parameters,
               body,
               isOverride,
-              jsDocDescription,
-              syntheticMethodType);
+              jsDocDescription);
       method.setSourcePosition(sourcePosition);
       return method;
     }
