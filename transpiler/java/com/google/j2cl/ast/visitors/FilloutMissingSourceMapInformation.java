@@ -43,12 +43,16 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
             checkArgument(!sourcePosition.isAbsent());
 
             MemberDescriptor memberDescriptor = getCurrentMember().getDescriptor();
-            tagStatements(
-                functionExpression.getBody(),
-                J2clUtils.format(
-                    "%s.<lambda in %s>",
-                    memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
-                    memberDescriptor.getBinaryName()));
+
+            String qualifiedBinaryName =
+                sourcePosition.getName() != null
+                    ? sourcePosition.getName()
+                    : J2clUtils.format(
+                        "%s.<lambda in %s>",
+                        memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
+                        memberDescriptor.getBinaryName());
+
+            tagStatements(functionExpression.getBody(), qualifiedBinaryName);
             return true;
           }
 

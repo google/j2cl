@@ -54,7 +54,7 @@
       return a$1$ + n;
     }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
 [a] => [a$1$] "a"
-[return a + n;] => [return a$1$ + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in test>"
+[return a + n;] => [return a$1$ + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
 [new MyJsFunctionInterface() {
       @Override
 ...      }
@@ -63,8 +63,8 @@
       return 0;
     })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
 [a] => [a$2$] "a"
-[handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in test>"
-[return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in test>"
+[handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
+[return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
 [fn] => [fn] "fn"
 [arg] => [arg] "arg"
 [f] => [f] "f"
@@ -121,21 +121,21 @@
 [@Override
       public int m(int i, int... numbers) {
 ...        return sum;
-      }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
-[int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+      }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+[int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
           sum += number;
         }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];
         sum += number$1$;
-      }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+      }] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
 [for (int number : numbers) {
           sum += number;
-        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
 [number] => [number$1$] "number"
-[sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
-[return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+[sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+[return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** @param {number} i @param {?number=} n */ (i, n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"

@@ -34,6 +34,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -152,7 +153,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
             .setTypeDescriptor(type.getSuperInterfaceTypeDescriptors().get(0))
             .setParameters(jsFunctionMethodImplementation.getParameters())
             .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
-            .setSourcePosition(jsFunctionMethodImplementation.getSourcePosition())
+            .setSourcePosition(
+                SourcePosition.Builder.from(jsFunctionMethodImplementation.getSourcePosition())
+                    .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
+                    .build())
             .build();
 
     final Map<FieldDescriptor, Variable> capturesByFieldDescriptor = new HashMap<>();
