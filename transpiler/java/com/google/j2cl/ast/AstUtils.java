@@ -25,6 +25,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.J2clUtils;
@@ -77,13 +78,25 @@ public class AstUtils {
     return classComponents;
   }
 
-  /** Create "$init" MethodDescriptor. */
-  public static MethodDescriptor createInitMethodDescriptor(
-      TypeDescriptor enclosingTypeDescriptor) {
+  /** Returns the class initializer method descriptor for a particular type */
+  public static MethodDescriptor getClinitMethodDescriptor(TypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
+        .setStatic(true)
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
+        .setMethodOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
+        .setJsInfo(JsInfo.RAW)
+        .build();
+  }
+
+  /** Returns the instance initializer method descriptor for a particular type */
+  public static MethodDescriptor getInitMethodDescriptor(TypeDescriptor typeDescriptor) {
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setName(ManglingNameUtils.getInitMangledName(typeDescriptor))
         .setVisibility(Visibility.PRIVATE)
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(MethodDescriptor.INIT_METHOD_NAME)
+        .setMethodOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
+        .setJsInfo(JsInfo.RAW)
         .build();
   }
 

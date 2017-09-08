@@ -274,7 +274,8 @@ public class ExpressionTranspiler {
         String typeName = environment.aliasForType(methodDescriptor.getEnclosingTypeDescriptor());
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
 
-        sourceBuilder.append(qualifier + "." + getJsMethodName(methodDescriptor) + ".call");
+        sourceBuilder.append(
+            qualifier + "." + ManglingNameUtils.getMangledName(methodDescriptor) + ".call");
         renderDelimitedAndSeparated(
             "(",
             ", ",
@@ -329,7 +330,7 @@ public class ExpressionTranspiler {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
           process(expression.getQualifier());
         } else {
-          renderQualifiedName(expression.getQualifier(), getJsMethodName(target));
+          renderQualifiedName(expression.getQualifier(), ManglingNameUtils.getMangledName(target));
         }
       }
 
@@ -484,15 +485,6 @@ public class ExpressionTranspiler {
           sourceBuilder.append(currentSeparator);
           currentSeparator = separator;
           process(node);
-        }
-      }
-
-      private String getJsMethodName(MethodDescriptor methodDescriptor) {
-        if (methodDescriptor.isInit()) {
-          return ManglingNameUtils.getInitMangledName(
-              methodDescriptor.getEnclosingTypeDescriptor());
-        } else {
-          return ManglingNameUtils.getMangledName(methodDescriptor);
         }
       }
     }.process(expression);

@@ -107,7 +107,7 @@ public class ManglingNameUtils {
    * Returns the mangled name of $init method for a type.
    */
   public static String getInitMangledName(TypeDescriptor typeDescriptor) {
-    return "$init__" + getMangledName(typeDescriptor);
+    return MethodDescriptor.INIT_METHOD_NAME + "__" + getMangledName(typeDescriptor);
   }
 
   /**

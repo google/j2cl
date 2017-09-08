@@ -17,9 +17,9 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -71,13 +71,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
   }
 
   private static Statement newClinitCallStatement(TypeDescriptor typeDescriptor) {
-    MethodDescriptor clinitMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(typeDescriptor)
-            .setName("$clinit")
-            .setJsInfo(JsInfo.RAW)
-            .build();
+    MethodDescriptor clinitMethodDescriptor = AstUtils.getClinitMethodDescriptor(typeDescriptor);
     return MethodCall.Builder.from(clinitMethodDescriptor).build().makeStatement();
   }
 

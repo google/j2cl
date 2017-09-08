@@ -560,12 +560,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClinit() {
-    sourceBuilder.appendLines(
-        "/**",
-        " * Runs inline static field initializers.",
-        " * @public",
-        " */",
-        "static $clinit() ");
+    renderInitializerMethodHeader(
+        AstUtils.getClinitMethodDescriptor(type.getDeclaration().getUnsafeTypeDescriptor()),
+        "Runs inline static field initializers.");
     sourceBuilder.openBrace();
 
     // Set this method to reference an empty function so that it will not be executed again.
@@ -592,16 +589,25 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.isJsOverlayImplementation() || type.isInterface()) {
       return;
     }
-    sourceBuilder.appendLines(
-        "/**",
-        " * Runs instance field and block initializers.",
-        " * @private",
-        " */",
-        "$init__" + mangledTypeName + "() ");
+    renderInitializerMethodHeader(
+        AstUtils.getInitMethodDescriptor(type.getDeclaration().getUnsafeTypeDescriptor()),
+        "Runs instance field and block initializers.");
     sourceBuilder.openBrace();
     renderInitializerElements(type.getInstanceMembers());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
+  }
+
+  private void renderInitializerMethodHeader(
+      MethodDescriptor methodDescriptor, String description) {
+    sourceBuilder.appendLines(
+        "/**",
+        " * " + description,
+        " * " + (methodDescriptor.getVisibility().isPrivate() ? "@private" : "@public"),
+        " */",
+        (methodDescriptor.isStatic() ? "static " : "")
+            + ManglingNameUtils.getMangledName(methodDescriptor)
+            + "() ");
   }
 
   private void renderInitializerElements(Iterable<Member> members) {

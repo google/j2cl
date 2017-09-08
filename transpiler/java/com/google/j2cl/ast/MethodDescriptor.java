@@ -91,7 +91,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SOURCE,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
     SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>"),
-    SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>");
+    SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
+    SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
+    SYNTHETIC_INSTANCE_INITIALIZER("<init>");
 
     private final String methodName;
 
@@ -109,6 +111,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public static final String INIT_METHOD_NAME = "$init";
+  public static final String CLINIT_METHOD_NAME = "$clinit";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
   public static final String SAME_METHOD_NAME = "$same";
@@ -170,7 +173,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public abstract MethodOrigin getMethodOrigin();
 
   public boolean isInit() {
-    return getName().equals(INIT_METHOD_NAME) && !isStatic();
+    return getMethodOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
   }
 
   /**
