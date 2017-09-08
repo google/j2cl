@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,11 +32,17 @@ public class FunctionExpression extends Expression implements HasParameters, Has
   @Visitable final List<Variable> parameters;
   @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
+  private final SourcePosition sourcePosition;
 
-  private FunctionExpression(TypeDescriptor typeDescriptor, List<Variable> parameters, Block body) {
+  private FunctionExpression(
+      TypeDescriptor typeDescriptor,
+      List<Variable> parameters,
+      Block body,
+      SourcePosition sourcePosition) {
     this.parameters = checkNotNull(parameters);
     this.body = checkNotNull(body);
     this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.sourcePosition = sourcePosition;
   }
 
   @Override
@@ -69,6 +76,10 @@ public class FunctionExpression extends Expression implements HasParameters, Has
     return typeDescriptor.getJsFunctionMethodDescriptor().isJsMethodVarargs();
   }
 
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
   @Override
   public FunctionExpression clone() {
     List<Variable> clonedParameters = AstUtils.clone(parameters);
@@ -78,6 +89,7 @@ public class FunctionExpression extends Expression implements HasParameters, Has
         .setTypeDescriptor(typeDescriptor)
         .setParameters(clonedParameters)
         .setStatements(clonedBody.getStatements())
+        .setSourcePosition(sourcePosition)
         .build();
   }
 
@@ -95,6 +107,7 @@ public class FunctionExpression extends Expression implements HasParameters, Has
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private TypeDescriptor typeDescriptor;
+    private SourcePosition sourcePosition = SourcePosition.ABSENT;
 
     public static Builder from(FunctionExpression expression) {
       return new Builder()
@@ -127,8 +140,14 @@ public class FunctionExpression extends Expression implements HasParameters, Has
       return this;
     }
 
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
     public FunctionExpression build() {
-      return new FunctionExpression(typeDescriptor, parameters, new Block(statements));
+      return new FunctionExpression(
+          typeDescriptor, parameters, new Block(statements), sourcePosition);
     }
   }
 }

@@ -234,10 +234,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Override
   @Memoized
-  public String getQualifiedBinaryName() {
-    String name =
-        getMethodOrigin() == MethodOrigin.SOURCE ? getName() : getMethodOrigin().getName();
-    return J2clUtils.format("%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), name);
+  public String getBinaryName() {
+    return getMethodOrigin() == MethodOrigin.SOURCE ? getName() : getMethodOrigin().getName();
   }
 
   /**

@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -102,6 +103,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   abstract Builder toBuilder();
+
+  @Override
+  @Memoized
+  public String getBinaryName() {
+    return getName();
+  }
 
   public static Builder newBuilder() {
     return new AutoValue_FieldDescriptor.Builder()

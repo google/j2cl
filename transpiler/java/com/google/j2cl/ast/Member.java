@@ -51,10 +51,7 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
     return false;
   }
 
-  public MemberDescriptor getDescriptor() {
-    // Subclasses should provide a real value, when applicable.
-    return null;
-  }
+  public abstract MemberDescriptor getDescriptor();
 
   public abstract String getQualifiedBinaryName();
 

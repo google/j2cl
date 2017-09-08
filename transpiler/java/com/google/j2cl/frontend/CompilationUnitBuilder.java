@@ -997,6 +997,7 @@ public class CompilationUnitBuilder {
               convertLambdaBody(
                       expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
                   .getStatements())
+          .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 
@@ -1172,6 +1173,7 @@ public class CompilationUnitBuilder {
                     .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
                     .setSourcePosition(getSourcePosition(expression))
                     .build())
+            .setSourcePosition(getSourcePosition(expression))
             .build();
       }
 
@@ -1214,6 +1216,7 @@ public class CompilationUnitBuilder {
                       .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
                       .setSourcePosition(getSourcePosition(expression))
                       .build())
+          .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 
@@ -1308,6 +1311,7 @@ public class CompilationUnitBuilder {
           .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
           .setParameters(parameters)
           .setStatements(forwardingStatement)
+          .setSourcePosition(sourcePosition)
           .build();
     }
 

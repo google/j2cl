@@ -133,8 +133,10 @@ public abstract class MemberDescriptor extends Node
   /** Returns a qualified binary name for the member. */
   public String getQualifiedBinaryName() {
     return J2clUtils.format(
-        "%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), getName());
+        "%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), getBinaryName());
   }
+
+  public abstract String getBinaryName();
 
   @Override
   public Node accept(Processor processor) {

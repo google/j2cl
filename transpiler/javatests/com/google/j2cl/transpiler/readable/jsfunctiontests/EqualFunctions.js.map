@@ -31,7 +31,7 @@
     });] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.withCollection"
 [objA] => [objA] "objA"
 [objB] => [objB] "objB"
-[return true;] => [return true;] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.withCollection"
+[return true;] => [return true;] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<lambda in withCollection>"
 [equalFn] => [equalFn] "equalFn"
 [public static <T> EqualFunction<Foo<T>> createEqualFn(final EqualFunction<T> equalFn) {
     return new EqualFunction<Foo<T>>() {
@@ -45,7 +45,7 @@
     });] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.createEqualFn"
 [first] => [first] "first"
 [second] => [second] "second"
-[return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.createEqualFn"
+[return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<lambda in createEqualFn>"
 [public class EqualFunctions {
   private EqualFunctions() {}
 ...  }
@@ -61,7 +61,7 @@
     });]
 [first] => [first] "first"
 [second] => [second] "second"
-[return first == second;] => [return $Equality.$same(first, second);]
+[return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<lambda in forObject>"
 [public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(Integer, Integer):boolean} */ (EqualFunctions.m_objectEqualFunction__());]
 [/**
    * Equal function handling array equal logic in addition to object equal.

@@ -26,12 +26,12 @@ import com.google.j2cl.common.SourcePosition;
 public class InitializerBlock extends Member {
   @Visitable Block block;
   private final boolean isStatic;
-  private TypeDescriptor enclosingTypeDescriptor;
+  private final MethodDescriptor methodDescriptor;
 
-  private InitializerBlock(Block block, boolean isStatic, TypeDescriptor enclosingTypeDescriptor) {
+  private InitializerBlock(Block block, boolean isStatic, MethodDescriptor methodDescriptor) {
     this.block = checkNotNull(block);
     this.isStatic = isStatic;
-    this.enclosingTypeDescriptor = checkNotNull(enclosingTypeDescriptor);
+    this.methodDescriptor = checkNotNull(methodDescriptor);
   }
 
   public Block getBlock() {
@@ -50,13 +50,12 @@ public class InitializerBlock extends Member {
 
   @Override
   public String getQualifiedBinaryName() {
-    String prefix = getEnclosingTypeDescriptor().getQualifiedBinaryName() + ".";
-
-    return isStatic ? prefix + "<clinit>" : prefix + "<init>";
+    return methodDescriptor.getQualifiedBinaryName();
   }
 
-  private TypeDescriptor getEnclosingTypeDescriptor() {
-    return enclosingTypeDescriptor;
+  @Override
+  public MethodDescriptor getDescriptor() {
+    return methodDescriptor;
   }
 
   @Override
@@ -73,18 +72,18 @@ public class InitializerBlock extends Member {
     private Block block;
     private boolean isStatic;
     private SourcePosition sourcePosition = SourcePosition.ABSENT;
-    private TypeDescriptor enclosingTypeDescriptor;
+    private MethodDescriptor methodDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {
       return newBuilder()
           .setBlock(initializerBlock.getBlock())
           .setStatic(initializerBlock.isStatic())
           .setSourcePosition(initializerBlock.getSourcePosition())
-          .setEnclosingTypeDescriptor(initializerBlock.getEnclosingTypeDescriptor());
+          .setDescriptor(initializerBlock.getDescriptor());
     }
 
-    public Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
-      this.enclosingTypeDescriptor = enclosingTypeDescriptor;
+    public Builder setDescriptor(MethodDescriptor methodDescriptor) {
+      this.methodDescriptor = methodDescriptor;
       return this;
     }
 
@@ -106,8 +105,7 @@ public class InitializerBlock extends Member {
     public InitializerBlock build() {
       checkState(block != null);
       checkState(sourcePosition != null);
-      InitializerBlock initializerBlock =
-          new InitializerBlock(block, isStatic, enclosingTypeDescriptor);
+      InitializerBlock initializerBlock = new InitializerBlock(block, isStatic, methodDescriptor);
       initializerBlock.setSourcePosition(sourcePosition);
       return initializerBlock;
     }

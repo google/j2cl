@@ -15,11 +15,17 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 
 /**
@@ -31,11 +37,52 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
-          public boolean enterStatement(Statement statement) {
-            if (getCurrentMember() == null || getCurrentMember() instanceof Field) {
-              return false;
+          public boolean enterFunctionExpression(FunctionExpression functionExpression) {
+            SourcePosition sourcePosition = functionExpression.getSourcePosition();
+
+            checkArgument(!sourcePosition.isAbsent());
+
+            MemberDescriptor memberDescriptor = getCurrentMember().getDescriptor();
+            tagStatements(
+                functionExpression.getBody(),
+                sourcePosition,
+                J2clUtils.format(
+                    "%s.<lambda in %s>",
+                    memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
+                    memberDescriptor.getBinaryName()));
+            return true;
+          }
+
+          @Override
+          public boolean enterMember(Member member) {
+            if (member instanceof Field) {
+              return true;
             }
 
+            SourcePosition defaultSourcePosition = member.getSourcePosition();
+
+            if (defaultSourcePosition.isAbsent()) {
+              defaultSourcePosition = getCurrentType().getSourcePosition();
+            }
+
+            tagStatements(member, defaultSourcePosition, member.getQualifiedBinaryName());
+            return true;
+          }
+        });
+  }
+
+  private static void tagStatements(
+      Node node, SourcePosition defaultSourcePosition, String methodName) {
+    node.accept(
+        new AbstractVisitor() {
+          @Override
+          public boolean enterFunctionExpression(FunctionExpression functionExpression) {
+            // Do not recurse into FunctionExpressions.
+            return false;
+          }
+
+          @Override
+          public boolean enterStatement(Statement statement) {
             SourcePosition sourcePosition = statement.getSourcePosition();
             // If there is already a name in the AST do not overwrite
             // Some synthesized methods fill out the name earlier
@@ -44,17 +91,12 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
             }
 
             if (sourcePosition.isAbsent()) {
-              sourcePosition = getCurrentMember().getSourcePosition();
+              sourcePosition = defaultSourcePosition;
             }
-            if (sourcePosition.isAbsent()) {
-              sourcePosition = getCurrentType().getSourcePosition();
-            }
+
             if (!sourcePosition.isAbsent()) {
-              Member member = getCurrentMember();
               statement.setSourcePosition(
-                  SourcePosition.Builder.from(sourcePosition)
-                      .setName(member.getQualifiedBinaryName())
-                      .build());
+                  SourcePosition.Builder.from(sourcePosition).setName(methodName).build());
             }
             return true;
           }
