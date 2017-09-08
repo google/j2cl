@@ -45,11 +45,9 @@
   String nullableString = "b";
 ...  String result = someChar + nullableString;
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<clinit>"
-[String nullableString = "b";] => [this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = "b";]
-[char someChar = 'a';] => [this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = 97 /* 'a' */;]
+[String nullableString = "b";] => [this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = "b";] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<init>"
+[char someChar = 'a';] => [this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = 97 /* 'a' */;] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<init>"
 [/**
    * someChar will be boxed in output using String.valueOf(Character.valueOf(someChar)) and since
-   * the return value is nullable the concatenation expression needs further special handling
-   * (prefixing the expression with "" + ) to guard against null + null concatenation.
-   */
-  String result = someChar + nullableString;] => [this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = java_lang_String.m_valueOf__char(this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable) + java_lang_String.m_valueOf__java_lang_Object(this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable);]
+...   */
+  String result = someChar + nullableString;] => [this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable = java_lang_String.m_valueOf__char(this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable) + java_lang_String.m_valueOf__java_lang_Object(this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable);] "com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable.<init>"

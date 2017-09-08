@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
@@ -114,19 +115,13 @@ public class ManglingNameUtils {
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldDescriptor fieldDescriptor) {
-    return getMangledName(fieldDescriptor, false);
-  }
-
-  /**
-   * Returns the mangled name of a field.
-   */
-  public static String getMangledName(
-      FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
-    if (fieldDescriptor.isJsProperty() && !accessStaticsDirectly) {
+    if (fieldDescriptor.isJsProperty()) {
       return fieldDescriptor.getSimpleJsName();
     }
 
-    String prefix = accessStaticsDirectly ? "$" : "";
+    String prefix =
+        fieldDescriptor.getFieldOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD ? "$" : "";
+
     checkArgument(!fieldDescriptor.getEnclosingTypeDescriptor().isArray());
     String name = fieldDescriptor.getName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingTypeDescriptor());

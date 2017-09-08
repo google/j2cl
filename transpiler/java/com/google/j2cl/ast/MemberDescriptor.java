@@ -37,6 +37,13 @@ public abstract class MemberDescriptor extends Node
         .equals(typeDescriptor.getQualifiedSourceName());
   }
 
+  /** Returns true if {@code typeDeclaration} is the enclosing class of this member. */
+  public boolean isMemberOf(TypeDeclaration typeDeclaration) {
+    return getEnclosingTypeDescriptor()
+        .getQualifiedSourceName()
+        .equals(typeDeclaration.getQualifiedSourceName());
+  }
+
   /** Returns true if {@code thatMemberDescriptor} is in the same type as this member. */
   public boolean inSameTypeAs(MemberDescriptor thatMemberDescriptor) {
     return thatMemberDescriptor.isMemberOf(getEnclosingTypeDescriptor());

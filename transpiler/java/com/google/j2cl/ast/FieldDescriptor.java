@@ -38,6 +38,14 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isEnclosingInstanceCapture();
 
+  public abstract FieldOrigin getFieldOrigin();
+
+  /** Whether this field originates in the source code or is synthetic. */
+  public enum FieldOrigin {
+    SOURCE,
+    SYNTHETIC_BACKING_FIELD;
+  }
+
   /**
    * Returns the descriptor of the field declaration. A field descriptor might describe a
    * specialized version of a field, e.g.
@@ -121,7 +129,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setVariableCapture(false)
         .setEnclosingInstanceCapture(false)
         .setSynthetic(false)
-        .setUnusableByJsSuppressed(false);
+        .setUnusableByJsSuppressed(false)
+        .setFieldOrigin(FieldOrigin.SOURCE);
   }
 
   /** Returns a description that is useful for error messages. */
@@ -157,6 +166,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setJsInfo(JsInfo jsInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
+
+    public abstract Builder setFieldOrigin(FieldOrigin fieldOrigin);
 
     public Builder setDeclarationFieldDescriptor(FieldDescriptor declarationFieldDescriptor) {
       return setDeclarationFieldDescriptorOrNullIfSelf(declarationFieldDescriptor);

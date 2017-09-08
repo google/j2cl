@@ -264,6 +264,24 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return members.stream().filter(Member::isStatic).collect(ImmutableList.toImmutableList());
   }
 
+  public ImmutableList<InitializerBlock> getStaticInitializerBlocks() {
+    return members
+        .stream()
+        .filter(Member::isStatic)
+        .filter(Member::isInitializerBlock)
+        .map(member -> (InitializerBlock) member)
+        .collect(ImmutableList.toImmutableList());
+  }
+
+  public ImmutableList<InitializerBlock> getInstanceInitializerBlocks() {
+    return members
+        .stream()
+        .filter(Predicates.not(Member::isStatic))
+        .filter(Member::isInitializerBlock)
+        .map(member -> (InitializerBlock) member)
+        .collect(ImmutableList.toImmutableList());
+  }
+
   public ImmutableList<Method> getConstructors() {
     return getMethods()
         .stream()

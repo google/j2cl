@@ -145,16 +145,8 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformFieldAccess(FieldAccess fieldAccess) {
-        // When inside the same class, access static fields directly.
-        boolean insideSameEnclosingClass =
-            fieldAccess.getTarget().isStatic()
-                && fieldAccess.getTarget().isMemberOf(environment.getEnclosingTypeDescriptor());
-        // No private backing field for compile time constants.
-        boolean accessBackingPrivateField =
-            !fieldAccess.getTarget().isCompileTimeConstant() && insideSameEnclosingClass;
 
-        String fieldMangledName =
-            ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);
+        String fieldMangledName = ManglingNameUtils.getMangledName(fieldAccess.getTarget());
         renderQualifiedName(fieldAccess.getQualifier(), fieldMangledName);
         return null;
       }

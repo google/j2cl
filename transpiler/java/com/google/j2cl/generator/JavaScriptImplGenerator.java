@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.ManglingNameUtils;
-import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
@@ -38,6 +37,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -513,7 +513,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String indirectStaticFieldName =
           ManglingNameUtils.getMangledName(staticField.getDescriptor());
       String directStaticFieldAccess =
-          ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
+          ManglingNameUtils.getMangledName(
+              AstUtils.getBackingFieldDescriptor(staticField.getDescriptor()));
 
       sourceBuilder.appendLines(
           "/**",
@@ -578,7 +579,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     // Static field and static initializer blocks.
-    renderInitializerElements(type.getStaticMembers());
+    renderInitializerElements(type.getStaticInitializerBlocks());
 
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
@@ -593,7 +594,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         AstUtils.getInitMethodDescriptor(type.getDeclaration().getUnsafeTypeDescriptor()),
         "Runs instance field and block initializers.");
     sourceBuilder.openBrace();
-    renderInitializerElements(type.getInstanceMembers());
+    renderInitializerElements(type.getInstanceInitializerBlocks());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
@@ -610,32 +611,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             + "() ");
   }
 
-  private void renderInitializerElements(Iterable<Member> members) {
-    for (Member member : members) {
-      if (member instanceof Field) {
-        Field field = (Field) member;
-        if (field.hasInitializer() && !field.isCompileTimeConstant()) {
-          sourceBuilder.newLine();
-          sourceBuilder.emitWithMapping(
-              field.getSourcePosition(),
-              () -> {
-                boolean isInstanceField = !field.getDescriptor().isStatic();
-                String fieldName =
-                    ManglingNameUtils.getMangledName(field.getDescriptor(), !isInstanceField);
-                sourceBuilder.append(
-                    (isInstanceField ? "this" : className) + "." + fieldName + " = ");
-                renderExpression(field.getInitializer());
-                sourceBuilder.append(";");
-              });
-        }
-      } else if (member instanceof InitializerBlock) {
-        InitializerBlock block = (InitializerBlock) member;
-        for (Statement initializer : block.getBlock().getStatements()) {
-          sourceBuilder.newLine();
-          statementTranspiler.renderStatement(initializer);
-        }
+  private void renderInitializerElements(Collection<InitializerBlock> initializerBlocks) {
+    for (InitializerBlock initializerBlock : initializerBlocks) {
+      for (Statement initializer : initializerBlock.getBlock().getStatements()) {
+        sourceBuilder.newLine();
+        statementTranspiler.renderStatement(initializer);
       }
-      // other members are not involved in class initialization, hence they are skipped here.
     }
   }
 
@@ -644,8 +625,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String jsDocType =
           JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
       if (staticField.isCompileTimeConstant()) {
-        String publicFieldAccess =
-            ManglingNameUtils.getMangledName(staticField.getDescriptor(), false);
+        String publicFieldAccess = ManglingNameUtils.getMangledName(staticField.getDescriptor());
         sourceBuilder.appendLines(
             "/**",
             " * @public {" + jsDocType + "}",
@@ -656,7 +636,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append(";");
       } else {
         String privateFieldAccess =
-            ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
+            ManglingNameUtils.getMangledName(
+                AstUtils.getBackingFieldDescriptor(staticField.getDescriptor()));
         sourceBuilder.appendLines(
             "/**",
             " * @private {" + jsDocType + "}",

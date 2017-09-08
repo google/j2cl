@@ -35,10 +35,10 @@ import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
+import com.google.j2cl.ast.visitors.InsertInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
-import com.google.j2cl.ast.visitors.InsertStaticClassInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
@@ -258,7 +258,7 @@ public class J2clTranspiler {
             new FixTypeVariablesInMethods(),
 
             // Perform post cleanups.
-            new InsertStaticClassInitializerMethods(),
+            new InsertInitializerMethods(),
             // Normalize multiexpressions again to remove unnecessary clutter, but run before
             // variable motion.
             new NormalizeMultiExpressions(),

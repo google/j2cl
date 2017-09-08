@@ -52,18 +52,15 @@
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<clinit>"
 [public static EqualFunction<Object> forObject =
       new EqualFunction<Object>() {
-        @Override
-        public boolean equal(Object first, Object second) {
-          return first == second;
-        }
+...        }
       };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = ((/** * */ first, /** * */ second) =>{
       return $Equality.$same(first, second);
-    });]
+    });] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<clinit>"
 [first] => [first] "first"
 [second] => [second] "second"
-[return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<lambda in forObject>"
-[public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(Integer, Integer):boolean} */ (EqualFunctions.m_objectEqualFunction__());]
+[return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<lambda in <clinit>>"
+[public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(Integer, Integer):boolean} */ (EqualFunctions.m_objectEqualFunction__());] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<clinit>"
 [/**
    * Equal function handling array equal logic in addition to object equal.
    */
-  public static EqualFunction<Object> forCollection = withCollection(forObject);] => [EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(*, *):boolean} */ (EqualFunctions.m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions));]
+  public static EqualFunction<Object> forCollection = withCollection(forObject);] => [EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(*, *):boolean} */ (EqualFunctions.m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions));] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<clinit>"

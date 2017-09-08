@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -151,14 +152,9 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
 
           private void relocateToEnclosingBlock(
               VariableDeclarationExpression variableDeclarationExpression) {
-            if (enclosingBlocks.peek() == null) {
-              // Instance field initialization method $init is synthesized at generation, so
-              // skip field initializations for now.
-              // TODO(b/34928687): synthesize $init in the AST.
-              return;
-            }
+
             variableDeclarationsToRelocateByBlock.put(
-                enclosingBlocks.peek(), variableDeclarationExpression);
+                checkNotNull(enclosingBlocks.peek()), variableDeclarationExpression);
           }
 
           private void visitInitializers(
