@@ -41,6 +41,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.SourcePosition;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,13 +114,10 @@ public class EnumMethodsCreator {
     enumType.addField(
         Field.Builder.from(this.namesToValuesMapFieldDescriptor)
             .setInitializer(NullLiteral.get())
+            .setSourcePosition(enumType.getSourcePosition())
             .build());
-    Method valueOfMethod = createValueOfMethod();
-    valueOfMethod.setSourcePosition(enumType.getSourcePosition());
-    enumType.addMethod(valueOfMethod);
-    Method valuesMethod = createValuesMethod();
-    valuesMethod.setSourcePosition(enumType.getSourcePosition());
-    enumType.addMethod(valuesMethod);
+    createValueOfMethod(enumType);
+    createValuesMethod(enumType);
   }
 
   /**
@@ -133,7 +131,9 @@ public class EnumMethodsCreator {
    * }
    * </code>
    */
-  private Method createValueOfMethod() {
+  private void createValueOfMethod(Type enumType) {
+    SourcePosition sourcePosition = enumType.getSourcePosition();
+
     Variable nameParameter =
         Variable.newBuilder()
             .setName("name")
@@ -179,10 +179,13 @@ public class EnumMethodsCreator {
                 FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .setRightOperand(createMapCall)
             .build()
-            .makeStatement();
+            .makeStatement(sourcePosition);
     Statement ifStatement =
         new IfStatement(
-            namesToValuesMapIsNullComparison, new Block(assignMapCallToFieldStatement), null);
+            sourcePosition,
+            namesToValuesMapIsNullComparison,
+            new Block(sourcePosition, assignMapCallToFieldStatement),
+            null);
 
     // Return statement
     Expression getMethodCall =
@@ -195,13 +198,16 @@ public class EnumMethodsCreator {
         ReturnStatement.newBuilder()
             .setExpression(getMethodCall)
             .setTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
+            .setSourcePosition(sourcePosition)
             .build();
 
-    return Method.newBuilder()
-        .setMethodDescriptor(valueOfMethodDescriptor)
-        .setParameters(nameParameter)
-        .addStatements(ifStatement, returnStatement)
-        .build();
+    enumType.addMethod(
+        Method.newBuilder()
+            .setMethodDescriptor(valueOfMethodDescriptor)
+            .setParameters(nameParameter)
+            .addStatements(ifStatement, returnStatement)
+            .setSourcePosition(sourcePosition)
+            .build());
   }
 
   /**
@@ -214,7 +220,9 @@ public class EnumMethodsCreator {
    * }
    * </code>
    */
-  private Method createValuesMethod() {
+  private void createValuesMethod(Type enumType) {
+    SourcePosition sourcePosition = enumType.getSourcePosition();
+
     // Create method body.
     List<Expression> values =
         enumType
@@ -226,13 +234,16 @@ public class EnumMethodsCreator {
     TypeDescriptor arrayTypeDescriptor =
         TypeDescriptors.getForArray(enumType.getDeclaration().getUnsafeTypeDescriptor(), 1);
 
-    return Method.newBuilder()
-        .setMethodDescriptor(valuesMethodDescriptor)
-        .addStatements(
-            ReturnStatement.newBuilder()
-                .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))
-                .setTypeDescriptor(arrayTypeDescriptor)
-                .build())
-        .build();
+    enumType.addMethod(
+        Method.newBuilder()
+            .setMethodDescriptor(valuesMethodDescriptor)
+            .addStatements(
+                ReturnStatement.newBuilder()
+                    .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))
+                    .setTypeDescriptor(arrayTypeDescriptor)
+                    .setSourcePosition(sourcePosition)
+                    .build())
+            .setSourcePosition(sourcePosition)
+            .build());
   }
 }

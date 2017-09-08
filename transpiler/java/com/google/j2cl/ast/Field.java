@@ -30,10 +30,12 @@ public class Field extends Member implements HasJsNameInfo {
   private Variable capturedVariable;
 
   private Field(
+      SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       boolean isEnumField,
       Variable capturedVariable) {
+    super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
     this.isEnumField = isEnumField;
@@ -101,7 +103,7 @@ public class Field extends Member implements HasJsNameInfo {
     private Expression initializer;
     private boolean isEnumField;
     private Variable capturedVariable;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition;
 
     public static Builder from(Field field) {
       Builder builder = new Builder();
@@ -148,9 +150,7 @@ public class Field extends Member implements HasJsNameInfo {
     }
 
     public Field build() {
-      Field field = new Field(fieldDescriptor, initializer, isEnumField, capturedVariable);
-      field.setSourcePosition(sourcePosition);
-      return field;
+      return new Field(sourcePosition, fieldDescriptor, initializer, isEnumField, capturedVariable);
     }
   }
 }

@@ -78,7 +78,10 @@ public class InsertExceptionConversions extends NormalizationPass {
                     .setRightOperand(toJavaCall)
                     .build();
 
-            catchClause.getBody().getStatements().add(0, assignment.makeStatement());
+            catchClause
+                .getBody()
+                .getStatements()
+                .add(0, assignment.makeStatement(catchClause.getBody().getSourcePosition()));
 
             return catchClause;
           }
@@ -100,7 +103,7 @@ public class InsertExceptionConversions extends NormalizationPass {
                     .setArguments(originalStatement.getExpression())
                     .build();
 
-            return new ThrowStatement(toJsCall);
+            return new ThrowStatement(originalStatement.getSourcePosition(), toJsCall);
           }
         });
   }

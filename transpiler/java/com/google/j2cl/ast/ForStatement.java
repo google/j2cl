@@ -38,10 +38,12 @@ public class ForStatement extends Statement {
   @Visitable Statement body;
 
   private ForStatement(
+      SourcePosition sourcePosition,
       Expression conditionExpression,
       Statement body,
       List<Expression> initializers,
       List<Expression> updates) {
+    super(sourcePosition);
     this.conditionExpression = conditionExpression;
     this.body = checkNotNull(body);
     this.initializers.addAll(checkNotNull(initializers));
@@ -90,7 +92,7 @@ public class ForStatement extends Statement {
     private Expression conditionExpression;
     private List<Expression> updates = new ArrayList<>();
     private Block body;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition;
 
     public static Builder from(ForStatement forStatement) {
       return newBuilder()
@@ -125,12 +127,8 @@ public class ForStatement extends Statement {
     }
 
     public Builder setBody(Statement body) {
-      this.body = (body instanceof Block) ? (Block) body : new Block(body);
-      return this;
-    }
-
-    public Builder setBody(List<Statement> statements) {
-      this.body = new Block(statements);
+      this.body =
+          (body instanceof Block) ? (Block) body : new Block(body.getSourcePosition(), body);
       return this;
     }
 
@@ -145,10 +143,7 @@ public class ForStatement extends Statement {
     }
 
     public ForStatement build() {
-      ForStatement forStatement =
-          new ForStatement(conditionExpression, body, initializers, updates);
-      forStatement.setSourcePosition(sourcePosition);
-      return forStatement;
+      return new ForStatement(sourcePosition, conditionExpression, body, initializers, updates);
     }
   }
 }

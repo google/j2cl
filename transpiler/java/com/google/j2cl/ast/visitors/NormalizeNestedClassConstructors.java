@@ -153,7 +153,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
                   .setOperator(BinaryOperator.ASSIGN)
                   .setRightOperand(parameter.getReference())
                   .build();
-          methodBuilder.addStatement(i++, initializer.makeStatement());
+          methodBuilder.addStatement(i++, initializer.makeStatement(method.getSourcePosition()));
         }
         return methodBuilder.build();
       }

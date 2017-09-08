@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
@@ -23,7 +25,11 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 @Context
 public abstract class Member extends Node implements HasSourcePosition, HasReadableDescription {
-  private SourcePosition sourcePosition = SourcePosition.ABSENT;
+  private SourcePosition sourcePosition;
+
+  public Member(SourcePosition sourcePosition) {
+    this.sourcePosition = checkNotNull(sourcePosition);
+  }
 
   public abstract boolean isStatic();
 

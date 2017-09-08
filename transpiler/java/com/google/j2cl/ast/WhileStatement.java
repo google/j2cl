@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * While Statement.
@@ -27,7 +28,9 @@ public class WhileStatement extends Statement {
   @Visitable Expression conditionExpression;
   @Visitable Statement body;
 
-  public WhileStatement(Expression conditionExpression, Statement body) {
+  public WhileStatement(
+      SourcePosition sourcePosition, Expression conditionExpression, Statement body) {
+    super(sourcePosition);
     this.conditionExpression = checkNotNull(conditionExpression);
     this.body = checkNotNull(body);
   }
@@ -42,10 +45,8 @@ public class WhileStatement extends Statement {
 
   @Override
   public WhileStatement clone() {
-    WhileStatement whileStatement =
-        new WhileStatement(conditionExpression.clone(), AstUtils.clone(body));
-    whileStatement.setSourcePosition(this.getSourcePosition());
-    return whileStatement;
+    return new WhileStatement(
+        getSourcePosition(), conditionExpression.clone(), AstUtils.clone(body));
   }
 
   @Override

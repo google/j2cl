@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -36,10 +37,12 @@ public class TryStatement extends Statement {
   @Visitable @Nullable Block finallyBlock;
 
   public TryStatement(
+      SourcePosition sourcePosition,
       List<VariableDeclarationExpression> resourceDeclarations,
       Block body,
       List<CatchClause> catchClauses,
       Block finallyBlock) {
+    super(sourcePosition);
     this.body = checkNotNull(body);
     this.catchClauses.addAll(checkNotNull(catchClauses));
     this.finallyBlock = finallyBlock;
@@ -66,6 +69,7 @@ public class TryStatement extends Statement {
   public TryStatement clone() {
     TryStatement tryStatement =
         new TryStatement(
+            getSourcePosition(),
             AstUtils.clone(resourceDeclarations),
             body.clone(),
             AstUtils.clone(catchClauses),

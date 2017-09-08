@@ -72,7 +72,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
                             AstUtils.createImplicitConstructorDescriptor(superTypeDescriptor))
                         .setArguments(Collections.emptyList())
                         .build()
-                        .makeStatement());
+                        .makeStatement(method.getBody().getSourcePosition()));
           }
         });
   }

@@ -315,6 +315,7 @@ public class AstUtils {
    * <p>fromTypeDescriptor.method (args) { return Target.prototype.method.call(this,args); } }
    */
   public static Method createStaticForwardingMethod(
+      SourcePosition sourcePosition,
       MethodDescriptor targetMethodDescriptor,
       TypeDescriptor fromTypeDescriptor,
       String jsDocDescription) {
@@ -330,6 +331,7 @@ public class AstUtils {
         fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters();
 
     return createForwardingMethod(
+        sourcePosition,
         null,
         MethodDescriptor.Builder.from(
                 targetMethodDescriptor.specializeTypeVariables(
@@ -359,16 +361,24 @@ public class AstUtils {
    * <p>fromMethodDescriptor (args) { return this.toMethodDescriptor(args); }
    */
   public static Method createForwardingMethod(
+      SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription,
       boolean isOverride) {
     return createForwardingMethod(
-        qualifier, fromMethodDescriptor, toMethodDescriptor, jsDocDescription, false, isOverride);
+        sourcePosition,
+        qualifier,
+        fromMethodDescriptor,
+        toMethodDescriptor,
+        jsDocDescription,
+        false,
+        isOverride);
   }
 
   private static Method createForwardingMethod(
+      SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
@@ -384,6 +394,7 @@ public class AstUtils {
 
     Statement statement =
         createForwardingStatement(
+            sourcePosition,
             qualifier,
             toMethodDescriptor,
             isStaticDispatch,
@@ -395,6 +406,7 @@ public class AstUtils {
         .addStatements(statement)
         .setOverride(isOverride)
         .setJsDocDescription(jsDocDescription)
+        .setSourcePosition(sourcePosition)
         .build();
   }
 
@@ -412,6 +424,7 @@ public class AstUtils {
   }
 
   public static Statement createForwardingStatement(
+      SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor toMethodDescriptor,
       boolean isStaticDispatch,
@@ -430,7 +443,8 @@ public class AstUtils {
             .setStaticDispatch(isStaticDispatch)
             .build();
 
-    return createReturnOrExpressionStatement(forwardingMethodCall, returnTypeDescriptor);
+    return createReturnOrExpressionStatement(
+        sourcePosition, forwardingMethodCall, returnTypeDescriptor);
   }
 
   /**
@@ -859,7 +873,8 @@ public class AstUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static List<Statement> generateInstanceFieldDeclarationStatements(Type type) {
+  public static List<Statement> generateInstanceFieldDeclarationStatements(
+      Type type, SourcePosition sourcePosition) {
     return type.getFields()
         .stream()
         .filter(field -> !field.getDescriptor().isStatic())
@@ -874,7 +889,8 @@ public class AstUtils {
                     .setAnnotationType(field.getDescriptor().getTypeDescriptor())
                     .setDeclaration(true)
                     .build()
-                    .makeStatement())
+                    .makeStatement(
+                        field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition))
         .collect(toList());
   }
 
@@ -1086,7 +1102,7 @@ public class AstUtils {
                 .setQualifier(qualifier)
                 .setArguments(superConstructorArguments)
                 .build()
-                .makeStatement())
+                .makeStatement(sourcePosition))
         .setSourcePosition(sourcePosition)
         .build();
   }
@@ -1103,12 +1119,15 @@ public class AstUtils {
    * statement
    */
   public static Statement createReturnOrExpressionStatement(
-      Expression expression, TypeDescriptor methodReturnTypeDescriptor) {
+      SourcePosition sourcePosition,
+      Expression expression,
+      TypeDescriptor methodReturnTypeDescriptor) {
     return TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)
-        ? expression.makeStatement()
+        ? expression.makeStatement(sourcePosition)
         : ReturnStatement.newBuilder()
             .setExpression(expression)
             .setTypeDescriptor(methodReturnTypeDescriptor)
+            .setSourcePosition(sourcePosition)
             .build();
   }
 

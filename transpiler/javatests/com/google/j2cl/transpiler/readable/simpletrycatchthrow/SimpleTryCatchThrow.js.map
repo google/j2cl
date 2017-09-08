@@ -34,27 +34,23 @@
 ...    } finally {
     }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[public void main() {
-    try {
-...    }
-  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[public void main() {
-    try {
-...    }
-  }] => [if (ClassCastException.$isInstance(__$exc)) {
+[{
+      doSomething(e);
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[{
+      doSomething(e);
+    }] => [if (ClassCastException.$isInstance(__$exc)) {
         let e = /**@type {ClassCastException} */ (__$exc);
 ...        throw $Exceptions.toJs(__$exc);
       }] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[public void main() {
-    try {
-...    }
-  }] => [let e = /**@type {ClassCastException} */ (__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[{
+      doSomething(e);
+    }] => [let e = /**@type {ClassCastException} */ (__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [e] => [e] "e"
 [doSomething(e);] => [SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
-[public void main() {
-    try {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
+[{
+      doSomething(e);
+    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow.main"
 [e] => [e] "e"
 [public static void doSomething(ClassCastException e) {
     System.out.println("saw exception: " + e);

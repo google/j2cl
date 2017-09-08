@@ -42,15 +42,20 @@ public class ControlStatementFormatter extends NormalizationPass {
             }
 
             thenStatement =
-                thenStatement instanceof Block ? thenStatement : new Block(thenStatement);
+                thenStatement instanceof Block
+                    ? thenStatement
+                    : new Block(thenStatement.getSourcePosition(), thenStatement);
             elseStatement =
                 elseStatement == null
                         || elseStatement instanceof Block
                         || elseStatement instanceof IfStatement
                     ? elseStatement
-                    : new Block(elseStatement);
+                    : new Block(elseStatement.getSourcePosition(), elseStatement);
             return new IfStatement(
-                ifStatement.getConditionExpression(), thenStatement, elseStatement);
+                ifStatement.getSourcePosition(),
+                ifStatement.getConditionExpression(),
+                thenStatement,
+                elseStatement);
           }
 
           @Override
@@ -75,7 +80,10 @@ public class ControlStatementFormatter extends NormalizationPass {
               return doWhileStatement;
             }
 
-            return new DoWhileStatement(doWhileStatement.getConditionExpression(), new Block(body));
+            return new DoWhileStatement(
+                doWhileStatement.getSourcePosition(),
+                doWhileStatement.getConditionExpression(),
+                new Block(body.getSourcePosition(), body));
           }
 
           @Override
@@ -85,7 +93,10 @@ public class ControlStatementFormatter extends NormalizationPass {
               return whileStatement;
             }
 
-            return new WhileStatement(whileStatement.getConditionExpression(), new Block(body));
+            return new WhileStatement(
+                whileStatement.getSourcePosition(),
+                whileStatement.getConditionExpression(),
+                new Block(body.getSourcePosition(), body));
           }
         });
   }

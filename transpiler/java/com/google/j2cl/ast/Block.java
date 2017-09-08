@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,27 +29,30 @@ public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
 
   public Block(Block fromBlock) {
-    this(fromBlock.getStatements());
-    setSourcePosition(fromBlock.getSourcePosition());
+    this(fromBlock.getSourcePosition(), fromBlock.getStatements());
   }
 
-  public Block(Statement... statements) {
-    this(Arrays.asList(statements));
+  public Block(SourcePosition sourcePosition, Statement... statements) {
+    this(sourcePosition, Arrays.asList(statements));
   }
 
-  public Block(List<Statement> statements) {
+  public Block(SourcePosition sourcePosition, List<Statement> statements) {
+    super(sourcePosition);
     this.statements.addAll(checkNotNull(statements));
   }
 
-  public Block() {}
+  public Block(SourcePosition sourcePosition) {
+    super(sourcePosition);
+  }
 
   public List<Statement> getStatements() {
     return statements;
+    
   }
 
   @Override
   public Block clone() {
-    Block block = new Block(AstUtils.clone(statements));
+    Block block = new Block(getSourcePosition(), AstUtils.clone(statements));
     block.setSourcePosition(this.getSourcePosition());
     return block;
   }

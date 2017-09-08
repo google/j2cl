@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Class for throw statement.
@@ -26,7 +27,8 @@ import com.google.j2cl.ast.annotations.Visitable;
 public class ThrowStatement extends Statement {
   @Visitable Expression expression;
 
-  public ThrowStatement(Expression expression) {
+  public ThrowStatement(SourcePosition sourcePosition, Expression expression) {
+    super(sourcePosition);
     this.expression = checkNotNull(expression);
   }
 
@@ -36,9 +38,7 @@ public class ThrowStatement extends Statement {
 
   @Override
   public ThrowStatement clone() {
-    ThrowStatement throwStatement = new ThrowStatement(expression.clone());
-    throwStatement.setSourcePosition(this.getSourcePosition());
-    return throwStatement;
+    return new ThrowStatement(getSourcePosition(), expression.clone());
   }
 
   @Override

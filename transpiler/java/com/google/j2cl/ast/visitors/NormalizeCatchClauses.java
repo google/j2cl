@@ -38,6 +38,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,6 +84,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
               return statement;
             }
             return new TryStatement(
+                statement.getSourcePosition(),
                 statement.getResourceDeclarations(),
                 statement.getBody(),
                 Collections.singletonList(mergeClauses(statement.getCatchClauses())),
@@ -92,55 +94,66 @@ public class NormalizeCatchClauses extends NormalizationPass {
   }
 
   private static CatchClause mergeClauses(List<CatchClause> clauses) {
-      checkArgument(!clauses.isEmpty());
-      // Create a temporary exception variable.
-      Variable exceptionVariable =
-          Variable.newBuilder()
-              .setName("__$exc")
-              .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
-              .build();
-      Statement body = bodyBuilder(clauses, exceptionVariable);
-      return new CatchClause(exceptionVariable, new Block(body));
+    checkArgument(!clauses.isEmpty());
+
+    SourcePosition sourcePosition = clauses.get(0).getBody().getSourcePosition();
+    // Create a temporary exception variable.
+    Variable exceptionVariable =
+        Variable.newBuilder()
+            .setName("__$exc")
+            .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setSourcePosition(sourcePosition)
+            .build();
+
+    Statement body = bodyBuilder(sourcePosition, clauses, exceptionVariable);
+    return new CatchClause(exceptionVariable, new Block(body.getSourcePosition(), body));
+  }
+
+  private static Statement bodyBuilder(
+      SourcePosition firstClauseSourcePosition,
+      List<CatchClause> clauses,
+      Variable exceptionVariable) {
+    // Base case. If no more clauses left the last statement throws the exception.
+    if (clauses.isEmpty()) {
+      Statement noMatchThrowException =
+          new ThrowStatement(firstClauseSourcePosition, exceptionVariable.getReference());
+      return new Block(firstClauseSourcePosition, noMatchThrowException);
     }
 
-  private static Statement bodyBuilder(List<CatchClause> clauses, Variable exceptionVariable) {
-      // Base case. If no more clauses left the last statement throws the exception.
-      if (clauses.isEmpty()) {
-        Statement noMatchThrowException = new ThrowStatement(exceptionVariable.getReference());
-        return new Block(noMatchThrowException);
-      }
+    CatchClause clause = clauses.get(0);
+    Variable catchVariable = clause.getExceptionVar();
 
-      CatchClause clause = clauses.get(0);
-      Variable catchVariable = clause.getExceptionVar();
+    TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();
+    List<TypeDescriptor> typesToCheck =
+        exceptionTypeDescriptor.isUnion()
+            ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
+            : Collections.singletonList(exceptionTypeDescriptor);
+    Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
+    SourcePosition currentClauseSourcePosition = clause.getBody().getSourcePosition();
+    List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
+    TypeDescriptor catchVariableTypeDescriptor =
+        catchVariable.getTypeDescriptor().isUnion()
+            ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
+            : catchVariable.getTypeDescriptor();
+    ExpressionStatement assignment =
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(
+                catchVariable,
+                JsDocAnnotatedExpression.newBuilder()
+                    .setExpression(exceptionVariable.getReference())
+                    .setAnnotationType(catchVariableTypeDescriptor)
+                    .build())
+            .build()
+            .makeStatement(currentClauseSourcePosition);
+    catchClauseBody.add(0, assignment);
 
-      TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();
-      List<TypeDescriptor> typesToCheck =
-          exceptionTypeDescriptor.isUnion()
-              ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
-              : Collections.singletonList(exceptionTypeDescriptor);
-      Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
-      List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
-      TypeDescriptor catchVariableTypeDescriptor =
-          catchVariable.getTypeDescriptor().isUnion()
-              ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
-              : catchVariable.getTypeDescriptor();
-      ExpressionStatement assignment =
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(
-                  catchVariable,
-                  JsDocAnnotatedExpression.newBuilder()
-                      .setExpression(exceptionVariable.getReference())
-                      .setAnnotationType(catchVariableTypeDescriptor)
-                      .build())
-              .build()
-              .makeStatement();
-      catchClauseBody.add(0, assignment);
-
-      return new IfStatement(
-          condition,
-          new Block(catchClauseBody),
-          bodyBuilder(clauses.subList(1, clauses.size()), exceptionVariable));
-    }
+    return new IfStatement(
+        currentClauseSourcePosition,
+        condition,
+        new Block(currentClauseSourcePosition, catchClauseBody),
+        bodyBuilder(
+            firstClauseSourcePosition, clauses.subList(1, clauses.size()), exceptionVariable));
+  }
 
   /**
    * Given a list of types t1, t2, t3.. and an exceptionVariable e, this method generates an

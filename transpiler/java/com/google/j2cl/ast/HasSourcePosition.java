@@ -18,19 +18,9 @@ package com.google.j2cl.ast;
 import com.google.j2cl.common.SourcePosition;
 
 /** An interface for source nodes that know their position in the original source. */
-public interface HasSourcePosition extends HasMetadata<HasSourcePosition> {
+public interface HasSourcePosition {
   // The location in the original Java source file.
   SourcePosition getSourcePosition();
 
   void setSourcePosition(SourcePosition sourcePosition);
-
-  @Override
-  default void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
-    setSourcePosition(store.getMetadata().getSourcePosition());
-  }
-
-  @Override
-  default HasSourcePosition getMetadata() {
-    return this;
-  }
 }

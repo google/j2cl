@@ -45,7 +45,6 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
             MemberDescriptor memberDescriptor = getCurrentMember().getDescriptor();
             tagStatements(
                 functionExpression.getBody(),
-                sourcePosition,
                 J2clUtils.format(
                     "%s.<lambda in %s>",
                     memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
@@ -59,20 +58,13 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
               return true;
             }
 
-            SourcePosition defaultSourcePosition = member.getSourcePosition();
-
-            if (defaultSourcePosition.isAbsent()) {
-              defaultSourcePosition = getCurrentType().getSourcePosition();
-            }
-
-            tagStatements(member, defaultSourcePosition, member.getQualifiedBinaryName());
+            tagStatements(member, member.getQualifiedBinaryName());
             return true;
           }
         });
   }
 
-  private static void tagStatements(
-      Node node, SourcePosition defaultSourcePosition, String methodName) {
+  private static void tagStatements(Node node, String methodName) {
     node.accept(
         new AbstractVisitor() {
           @Override
@@ -90,14 +82,8 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
               return true;
             }
 
-            if (sourcePosition.isAbsent()) {
-              sourcePosition = defaultSourcePosition;
-            }
-
-            if (!sourcePosition.isAbsent()) {
-              statement.setSourcePosition(
-                  SourcePosition.Builder.from(sourcePosition).setName(methodName).build());
-            }
+            statement.setSourcePosition(
+                SourcePosition.Builder.from(sourcePosition).setName(methodName).build());
             return true;
           }
         });

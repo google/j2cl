@@ -33,10 +33,9 @@
       let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));
       t.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[public void test(Iterable<Throwable> iterable) {
-    for (Throwable t : iterable) {
-...    }
-  }] => [let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
+[for (Throwable t : iterable) {
+      t.toString();
+    }] => [let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [t] => [t] "t"
 [t.toString();] => [t.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [for (Throwable t : new Throwable[10]) {
@@ -45,10 +44,9 @@
       let t$1$ = $array[$index];
       t$1$.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[public void test(Iterable<Throwable> iterable) {
-    for (Throwable t : iterable) {
-...    }
-  }] => [let t$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
+[for (Throwable t : new Throwable[10]) {
+      t.toString();
+    }] => [let t$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [t] => [t$1$] "t"
 [t.toString();] => [t$1$.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [public class ForEachStatement {

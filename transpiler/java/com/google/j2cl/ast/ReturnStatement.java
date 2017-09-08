@@ -29,7 +29,9 @@ public class ReturnStatement extends Statement {
   @Visitable @Nullable Expression expression;
   private final TypeDescriptor returnTypeDescriptor;
 
-  private ReturnStatement(Expression expression, TypeDescriptor returnTypeDescriptor) {
+  private ReturnStatement(
+      SourcePosition sourcePosition, Expression expression, TypeDescriptor returnTypeDescriptor) {
+    super(sourcePosition);
     this.expression = expression;
     this.returnTypeDescriptor = checkNotNull(returnTypeDescriptor);
   }
@@ -67,7 +69,7 @@ public class ReturnStatement extends Statement {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor typeDescriptor;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition;
 
     public static Builder from(ReturnStatement returnStatement) {
       return newBuilder()
@@ -92,9 +94,7 @@ public class ReturnStatement extends Statement {
     }
 
     public ReturnStatement build() {
-      ReturnStatement returnStatement = new ReturnStatement(expression, typeDescriptor);
-      returnStatement.setSourcePosition(sourcePosition);
-      return returnStatement;
+      return new ReturnStatement(sourcePosition, expression, typeDescriptor);
     }
   }
 }

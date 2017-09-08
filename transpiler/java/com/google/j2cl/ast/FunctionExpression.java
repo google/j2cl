@@ -26,23 +26,24 @@ import java.util.List;
 
 /** Class for an inline (lambda) function expression. */
 @Visitable
-public class FunctionExpression extends Expression implements HasParameters, HasMethodDescriptor {
+public class FunctionExpression extends Expression
+    implements HasParameters, HasMethodDescriptor, HasSourcePosition {
   // The visitors traverse the @Visitable members of the class in the order they appear.
   // The parameter declarations need to be traversed before the body.
   @Visitable final List<Variable> parameters;
   @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
-  private final SourcePosition sourcePosition;
+  private SourcePosition sourcePosition;
 
   private FunctionExpression(
+      SourcePosition sourcePosition,
       TypeDescriptor typeDescriptor,
       List<Variable> parameters,
-      Block body,
-      SourcePosition sourcePosition) {
+      Block body) {
     this.parameters = checkNotNull(parameters);
     this.body = checkNotNull(body);
     this.typeDescriptor = checkNotNull(typeDescriptor);
-    this.sourcePosition = sourcePosition;
+    this.sourcePosition = checkNotNull(sourcePosition);
   }
 
   @Override
@@ -61,6 +62,16 @@ public class FunctionExpression extends Expression implements HasParameters, Has
   }
 
   @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
+  }
+
+  @Override
   public Variable getJsVarargsParameter() {
     if (isJsVarargs()) {
       return Iterables.getLast(getParameters());
@@ -74,10 +85,6 @@ public class FunctionExpression extends Expression implements HasParameters, Has
 
   public boolean isJsVarargs() {
     return typeDescriptor.getJsFunctionMethodDescriptor().isJsMethodVarargs();
-  }
-
-  public SourcePosition getSourcePosition() {
-    return sourcePosition;
   }
 
   @Override
@@ -107,7 +114,7 @@ public class FunctionExpression extends Expression implements HasParameters, Has
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private TypeDescriptor typeDescriptor;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition;
 
     public static Builder from(FunctionExpression expression) {
       return new Builder()
@@ -147,7 +154,7 @@ public class FunctionExpression extends Expression implements HasParameters, Has
 
     public FunctionExpression build() {
       return new FunctionExpression(
-          typeDescriptor, parameters, new Block(statements), sourcePosition);
+          sourcePosition, typeDescriptor, parameters, new Block(sourcePosition, statements));
     }
   }
 }

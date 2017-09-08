@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
 /**
@@ -25,11 +26,13 @@ import javax.annotation.Nullable;
 public class SwitchCase extends Statement {
   @Nullable @Visitable Expression matchExpression;
 
-  public SwitchCase(Expression matchExpression) {
+  public SwitchCase(SourcePosition sourcePosition, Expression matchExpression) {
+    super(sourcePosition);
     this.matchExpression = matchExpression;
   }
 
-  public SwitchCase() {
+  public SwitchCase(SourcePosition sourcePosition) {
+    super(sourcePosition);
   }
 
   public boolean isDefault() {
@@ -42,9 +45,7 @@ public class SwitchCase extends Statement {
 
   @Override
   public SwitchCase clone() {
-    SwitchCase switchCase = new SwitchCase(AstUtils.clone(matchExpression));
-    switchCase.setSourcePosition(this.getSourcePosition());
-    return switchCase;
+    return new SwitchCase(getSourcePosition(), AstUtils.clone(matchExpression));
   }
 
   @Override

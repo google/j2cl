@@ -102,10 +102,9 @@
         let number$1$ = $array[$index];
         sum += number$1$;
       }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
-[(int i, int... numbers) -> {
-          int sum = i;
-...          return sum;
-        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
+[for (int number : numbers) {
+            sum += number;
+          }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
@@ -119,10 +118,10 @@
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
-[{
-      @Override
-...      }
-    }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+[@Override
+      public int m(int i, int... numbers) {
+...        return sum;
+      }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
 [int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
@@ -131,10 +130,9 @@
         let number$1$ = $array[$index];
         sum += number$1$;
       }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
-[{
-      @Override
-...      }
-    }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
+[for (int number : numbers) {
+          sum += number;
+        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
 [number] => [number$1$] "number"
 [sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargsInnerClass>"

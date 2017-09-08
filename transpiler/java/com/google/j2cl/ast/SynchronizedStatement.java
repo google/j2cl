@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Synchronized statement.
@@ -27,7 +28,8 @@ public class SynchronizedStatement extends Statement {
   @Visitable Expression expression;
   @Visitable Block body;
 
-  public SynchronizedStatement(Expression expression, Block body) {
+  public SynchronizedStatement(SourcePosition sourcePosition, Expression expression, Block body) {
+    super(sourcePosition);
     this.expression = checkNotNull(expression);
     this.body = checkNotNull(body);
   }
@@ -42,10 +44,7 @@ public class SynchronizedStatement extends Statement {
 
   @Override
   public SynchronizedStatement clone() {
-    SynchronizedStatement synchronizedStatement =
-        new SynchronizedStatement(expression.clone(), body.clone());
-    synchronizedStatement.setSourcePosition(this.getSourcePosition());
-    return synchronizedStatement;
+    return new SynchronizedStatement(getSourcePosition(), expression.clone(), body.clone());
   }
 
   @Override

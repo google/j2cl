@@ -27,6 +27,7 @@ import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,9 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
-                      newClinitCallStatement(method.getDescriptor().getEnclosingTypeDescriptor()))
+                      newClinitCallStatement(
+                          method.getBody().getSourcePosition(),
+                          method.getDescriptor().getEnclosingTypeDescriptor()))
                   .build();
             }
             return method;
@@ -58,25 +61,32 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
             List<Statement> superClinitCallStatements = new ArrayList<>();
 
             if (hasClinitMethod(type.getSuperTypeDescriptor())) {
-              superClinitCallStatements.add(newClinitCallStatement(type.getSuperTypeDescriptor()));
+              superClinitCallStatements.add(
+                  newClinitCallStatement(type.getSourcePosition(), type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(
-                type.getDeclaration().getUnsafeTypeDescriptor(), superClinitCallStatements);
+                type.getSourcePosition(),
+                type.getDeclaration().getUnsafeTypeDescriptor(),
+                superClinitCallStatements);
 
             if (!superClinitCallStatements.isEmpty()) {
-              type.addStaticInitializerBlock(0, new Block(superClinitCallStatements));
+              type.addStaticInitializerBlock(
+                  0, new Block(type.getSourcePosition(), superClinitCallStatements));
             }
           }
         });
   }
 
-  private static Statement newClinitCallStatement(TypeDescriptor typeDescriptor) {
+  private static Statement newClinitCallStatement(
+      SourcePosition sourcePosition, TypeDescriptor typeDescriptor) {
     MethodDescriptor clinitMethodDescriptor = AstUtils.getClinitMethodDescriptor(typeDescriptor);
-    return MethodCall.Builder.from(clinitMethodDescriptor).build().makeStatement();
+    return MethodCall.Builder.from(clinitMethodDescriptor).build().makeStatement(sourcePosition);
   }
 
   private void addRequiredSuperInterfacesClinitCalls(
-      TypeDescriptor typeDescriptor, List<Statement> superClinitCallStatements) {
+      SourcePosition sourcePosition,
+      TypeDescriptor typeDescriptor,
+      List<Statement> superClinitCallStatements) {
     for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
       if (!hasClinitMethod(interfaceTypeDescriptor)) {
         continue;
@@ -85,14 +95,16 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
       if (interfaceTypeDescriptor.getTypeDeclaration().declaresDefaultMethods()) {
         // The interface declares a default method; invoke its clinit which will initialize
         // the interface and all it superinterfaces that declare default methods.
-        superClinitCallStatements.add(newClinitCallStatement(interfaceTypeDescriptor));
+        superClinitCallStatements.add(
+            newClinitCallStatement(sourcePosition, interfaceTypeDescriptor));
         continue;
       }
 
       // The interface does not declare a default method so don't call its clinit; instead recurse
       // into its super interface hierarchy to invoke clinits of super interfaces that declare
       // default methods.
-      addRequiredSuperInterfacesClinitCalls(interfaceTypeDescriptor, superClinitCallStatements);
+      addRequiredSuperInterfacesClinitCalls(
+          sourcePosition, interfaceTypeDescriptor, superClinitCallStatements);
     }
   }
 

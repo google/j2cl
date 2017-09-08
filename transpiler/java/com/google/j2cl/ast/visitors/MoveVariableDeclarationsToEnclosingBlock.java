@@ -225,7 +225,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
               VariableDeclarationExpression.newBuilder()
                   .addVariableDeclarations(variablesToRelocate)
                   .build()
-                  .makeStatement());
+                  .makeStatement(block.getSourcePosition()));
     }
   }
 }

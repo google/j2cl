@@ -44,6 +44,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.SourcePosition;
 import java.util.Collections;
 import java.util.List;
 
@@ -186,6 +187,7 @@ public class NormalizeConstructors extends NormalizationPass {
                     ctorMethodDescriptorFromJavaConstructor(method.getDescriptor()))
                 .setParameters(method.getParameters())
                 .addStatements(method.getBody().getStatements())
+                .setSourcePosition(method.getSourcePosition())
                 .setJsDocDescription(
                     J2clUtils.format(
                         "Initialization from constructor '%s'.",
@@ -218,13 +220,15 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Variable> jsConstructorParameters = AstUtils.clone(jsConstructor.getParameters());
     List<Expression> arguments = AstUtils.getReferences(jsConstructorParameters);
 
-    List<Statement> body = AstUtils.generateInstanceFieldDeclarationStatements(type);
+    SourcePosition jsConstructorSourcePosition = jsConstructor.getSourcePosition();
+    List<Statement> body =
+        AstUtils.generateInstanceFieldDeclarationStatements(type, jsConstructorSourcePosition);
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(jsConstructor.getDescriptor());
 
     MethodCall ctorCall = MethodCall.Builder.from(ctorDescriptor).setArguments(arguments).build();
-    body.add(ctorCall.makeStatement());
+    body.add(ctorCall.makeStatement(jsConstructorSourcePosition));
 
     // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a
     // regular Java class.  Otherwise we get the arguments from the primary constructor.  Also
@@ -237,7 +241,7 @@ public class NormalizeConstructors extends NormalizationPass {
         AstUtils.replaceVariables(
             jsConstructor.getParameters(),
             jsConstructorParameters,
-            superConstructorInvocation.makeStatement()));
+            superConstructorInvocation.makeStatement(jsConstructorSourcePosition)));
 
     return Method.newBuilder()
         .setMethodDescriptor(jsConstructor.getDescriptor())
@@ -246,15 +250,19 @@ public class NormalizeConstructors extends NormalizationPass {
         .setJsDocDescription(
             J2clUtils.format(
                 "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
-        .setSourcePosition(jsConstructor.getSourcePosition())
+        .setSourcePosition(jsConstructorSourcePosition)
         .build();
   }
 
   private static Method synthesizePrivateConstructor(Type type) {
-    List<Statement> body = AstUtils.generateInstanceFieldDeclarationStatements(type);
+    SourcePosition sourcePosition = type.getSourcePosition();
+
+    List<Statement> body =
+        AstUtils.generateInstanceFieldDeclarationStatements(type, sourcePosition);
 
     if (type.getDeclaration().getSuperTypeDescriptor() != null) {
-      body.add(0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement());
+      body.add(
+          0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement(sourcePosition));
     }
 
     MethodDescriptor constructorDescriptor =
@@ -269,7 +277,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(constructorDescriptor)
         .addStatements(body)
         .setJsDocDescription("Private implementation constructor.")
-        .setSourcePosition(type.getSourcePosition())
+        .setSourcePosition(sourcePosition)
         .build();
   }
 
@@ -385,6 +393,8 @@ public class NormalizeConstructors extends NormalizationPass {
     // let $instance = new Class(<javascriptConstructorArguments>);
     Variable newInstance =
         Variable.newBuilder().setName("$instance").setTypeDescriptor(enclosingType).build();
+
+    SourcePosition constructorSourcePosition = constructor.getSourcePosition();
     Statement newInstanceStatement =
         AstUtils.replaceVariables(
                 constructor.getParameters(),
@@ -396,7 +406,7 @@ public class NormalizeConstructors extends NormalizationPass {
                             .setArguments(javascriptConstructorArguments)
                             .build())
                     .build())
-            .makeStatement();
+            .makeStatement(constructorSourcePosition);
 
     // $instance.$ctor...();
     Statement ctorCallStatement =
@@ -404,7 +414,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .setQualifier(newInstance.getReference())
             .setArguments(relayArguments)
             .build()
-            .makeStatement();
+            .makeStatement(constructorSourcePosition);
 
     // return $instance
     Statement returnStatement =
@@ -414,6 +424,7 @@ public class NormalizeConstructors extends NormalizationPass {
                     ? AstUtils.createLambdaInstance(enclosingType, newInstance.getReference())
                     : newInstance.getReference())
             .setTypeDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor())
+            .setSourcePosition(constructorSourcePosition)
             .build();
 
     return Method.newBuilder()
@@ -424,7 +435,7 @@ public class NormalizeConstructors extends NormalizationPass {
             J2clUtils.format(
                 "Factory method corresponding to constructor '%s'.",
                 constructor.getDescriptor().getReadableDescription()))
-        .setSourcePosition(constructor.getSourcePosition())
+        .setSourcePosition(constructorSourcePosition)
         .build();
   }
 

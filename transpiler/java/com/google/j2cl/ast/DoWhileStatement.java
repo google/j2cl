@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * DoWhile Statement.
@@ -27,7 +28,9 @@ public class DoWhileStatement extends Statement {
   @Visitable Expression conditionExpression;
   @Visitable Statement body;
 
-  public DoWhileStatement(Expression conditionExpression, Statement body) {
+  public DoWhileStatement(
+      SourcePosition sourcePosition, Expression conditionExpression, Statement body) {
+    super(sourcePosition);
     this.conditionExpression = checkNotNull(conditionExpression);
     this.body = checkNotNull(body);
   }
@@ -42,10 +45,8 @@ public class DoWhileStatement extends Statement {
 
   @Override
   public DoWhileStatement clone() {
-    DoWhileStatement doWhileStatement =
-        new DoWhileStatement(conditionExpression.clone(), AstUtils.clone(body));
-    doWhileStatement.setSourcePosition(this.getSourcePosition());
-    return doWhileStatement;
+    return new DoWhileStatement(
+        getSourcePosition(), conditionExpression.clone(), AstUtils.clone(body));
   }
 
   @Override

@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 
@@ -22,7 +25,11 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 public abstract class Statement extends Node implements HasSourcePosition, Cloneable<Statement> {
   // unknown by default.
-  private SourcePosition sourcePosition = SourcePosition.ABSENT;
+  private SourcePosition sourcePosition;
+
+  public Statement(SourcePosition sourcePosition) {
+    setSourcePosition(sourcePosition);
+  }
 
   @Override
   public SourcePosition getSourcePosition() {
@@ -31,6 +38,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
 
   @Override
   public void setSourcePosition(SourcePosition sourcePosition) {
+    checkArgument(!checkNotNull(sourcePosition).isAbsent());
     this.sourcePosition = sourcePosition;
   }
 

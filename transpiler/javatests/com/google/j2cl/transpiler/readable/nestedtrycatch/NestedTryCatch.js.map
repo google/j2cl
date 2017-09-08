@@ -34,21 +34,21 @@
 ...      }
     }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [if (Exception.$isInstance(__$exc)) {
+[{
+      try {
+...      }
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+      try {
+...      }
+    }] => [if (Exception.$isInstance(__$exc)) {
         let ae = /**@type {Exception} */ (__$exc);
 ...        throw $Exceptions.toJs(__$exc);
       }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [let ae = /**@type {Exception} */ (__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+      try {
+...      }
+    }] => [let ae = /**@type {Exception} */ (__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [ae] => [ae] "ae"
 [try {
         throw new Exception();
@@ -58,30 +58,26 @@
 ...          }
         }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [if (Exception.$isInstance(__$exc$1$)) {
+[{
+        // expected empty body.
+      }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+        // expected empty body.
+      }] => [if (Exception.$isInstance(__$exc$1$)) {
             let ie = /**@type {Exception} */ (__$exc$1$);
 ...            throw $Exceptions.toJs(__$exc$1$);
           }] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [let ie = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+        // expected empty body.
+      }] => [let ie = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [ie] => [ie] "ie"
-[public void main() {
-    try {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
-[public void main() {
-    try {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+        // expected empty body.
+      }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
+[{
+      try {
+...      }
+    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.main"
 [public class NestedTryCatch {
   public void main() {
 ...  }

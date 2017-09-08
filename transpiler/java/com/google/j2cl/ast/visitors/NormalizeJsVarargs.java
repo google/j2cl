@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -116,7 +115,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
               .build();
 
       List<Statement> statements = body.getStatements();
-      statements.add(0, arrayStampTypeMethodCall.makeStatement());
+      statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
     }
   }
 

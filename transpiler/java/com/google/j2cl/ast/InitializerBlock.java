@@ -28,7 +28,12 @@ public class InitializerBlock extends Member {
   private final boolean isStatic;
   private final MethodDescriptor methodDescriptor;
 
-  private InitializerBlock(Block block, boolean isStatic, MethodDescriptor methodDescriptor) {
+  private InitializerBlock(
+      SourcePosition sourcePosition,
+      Block block,
+      boolean isStatic,
+      MethodDescriptor methodDescriptor) {
+    super(sourcePosition);
     this.block = checkNotNull(block);
     this.isStatic = isStatic;
     this.methodDescriptor = checkNotNull(methodDescriptor);
@@ -71,7 +76,7 @@ public class InitializerBlock extends Member {
   public static class Builder {
     private Block block;
     private boolean isStatic;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition sourcePosition;
     private MethodDescriptor methodDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {
@@ -105,9 +110,7 @@ public class InitializerBlock extends Member {
     public InitializerBlock build() {
       checkState(block != null);
       checkState(sourcePosition != null);
-      InitializerBlock initializerBlock = new InitializerBlock(block, isStatic, methodDescriptor);
-      initializerBlock.setSourcePosition(sourcePosition);
-      return initializerBlock;
+      return new InitializerBlock(sourcePosition, block, isStatic, methodDescriptor);
     }
   }
 }

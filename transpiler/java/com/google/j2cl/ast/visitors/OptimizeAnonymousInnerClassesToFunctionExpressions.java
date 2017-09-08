@@ -152,7 +152,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
             .setTypeDescriptor(type.getSuperInterfaceTypeDescriptors().get(0))
             .setParameters(jsFunctionMethodImplementation.getParameters())
             .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
-            .setSourcePosition(type.getSourcePosition())
+            .setSourcePosition(jsFunctionMethodImplementation.getSourcePosition())
             .build();
 
     final Map<FieldDescriptor, Variable> capturesByFieldDescriptor = new HashMap<>();

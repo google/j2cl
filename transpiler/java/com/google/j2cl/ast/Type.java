@@ -35,12 +35,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private boolean isStatic;
   @Visitable TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
-  private SourcePosition sourcePosition = SourcePosition.ABSENT;
+  private SourcePosition sourcePosition;
 
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
 
-  public Type(Visibility visibility, TypeDeclaration typeDeclaration) {
+  public Type(
+      SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
+    this.sourcePosition = checkNotNull(sourcePosition);
     checkArgument(
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
     this.visibility = visibility;

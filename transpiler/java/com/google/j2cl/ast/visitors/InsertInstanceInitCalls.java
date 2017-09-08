@@ -51,7 +51,10 @@ public class InsertInstanceInitCalls extends NormalizationPass {
             // If the constructor has a super() call, insert $init call after it. Otherwise, insert
             // to the top of the method body.
             int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
-            method.getBody().getStatements().add(insertIndex, initCall.makeStatement());
+            method
+                .getBody()
+                .getStatements()
+                .add(insertIndex, initCall.makeStatement(method.getBody().getSourcePosition()));
           }
         });
   }

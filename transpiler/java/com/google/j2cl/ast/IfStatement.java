@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
 /**
@@ -29,12 +30,17 @@ public class IfStatement extends Statement {
   @Visitable Statement thenStatement;
   @Visitable @Nullable Statement elseStatement;
 
-  public IfStatement(Expression conditionExpression, Statement thenStatement) {
-    this(conditionExpression, thenStatement, null);
+  public IfStatement(
+      SourcePosition sourcePosition, Expression conditionExpression, Statement thenStatement) {
+    this(sourcePosition, conditionExpression, thenStatement, null);
   }
 
   public IfStatement(
-      Expression conditionExpression, Statement thenStatement, Statement elseStatement) {
+      SourcePosition sourcePosition,
+      Expression conditionExpression,
+      Statement thenStatement,
+      Statement elseStatement) {
+    super(sourcePosition);
     this.conditionExpression = checkNotNull(conditionExpression);
     this.thenStatement = checkNotNull(thenStatement);
     this.elseStatement = elseStatement;
@@ -54,10 +60,11 @@ public class IfStatement extends Statement {
 
   @Override
   public IfStatement clone() {
-    IfStatement ifStatement =
-        new IfStatement(conditionExpression, thenStatement.clone(), AstUtils.clone(elseStatement));
-    ifStatement.setSourcePosition(this.getSourcePosition());
-    return ifStatement;
+    return new IfStatement(
+        getSourcePosition(),
+        conditionExpression,
+        thenStatement.clone(),
+        AstUtils.clone(elseStatement));
   }
 
   @Override

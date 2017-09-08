@@ -140,6 +140,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public Node rewriteAssertStatement(AssertStatement assertStatement) {
     // unary numeric promotion context
     return new AssertStatement(
+        assertStatement.getSourcePosition(),
         contextRewriter.rewriteUnaryNumericPromotionContext(assertStatement.getExpression()),
         assertStatement.getMessage());
   }
@@ -304,6 +305,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
             contextRewriter.rewriteAssignmentContext(
                 returnStatement.getTypeDescriptor(), returnStatement.getExpression()))
         .setTypeDescriptor(returnStatement.getTypeDescriptor())
+        .setSourcePosition(returnStatement.getSourcePosition())
         .build();
   }
 
@@ -311,6 +313,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
     // unary numeric promotion
     return new SwitchStatement(
+        switchStatement.getSourcePosition(),
         contextRewriter.rewriteUnaryNumericPromotionContext(switchStatement.getSwitchExpression()),
         switchStatement.getBodyStatements());
   }

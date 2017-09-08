@@ -30,69 +30,56 @@
     try (ClosableThing thing = new ClosableThing()) {
 ...    }
   }] => [TryWithResource.$clinit();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [let $primaryExc = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [let thing = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [let $primaryExc = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [let thing = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
 [thing] => [thing] "thing"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [try {
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [try {
         thing = ClosableThing.$create__();
 ...        }
       }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [thing = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [thing = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
 [int i = 0;] => [let i = 0;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
 [i] => [i] "i"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [if (Throwable.$isInstance(__$exc)) {
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [if (Throwable.$isInstance(__$exc)) {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
 ...          throw $Exceptions.toJs(__$exc);
         }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [$primaryExc = $exceptionFromTry;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [if (!$Equality.$same($primaryExc, null)) {
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [$primaryExc = $exceptionFromTry;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
-[public static void tryWithResource() {
-    try (ClosableThing thing = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs($primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
+[try (ClosableThing thing = new ClosableThing()) {
+      int i = 0;
+    }] => [throw $Exceptions.toJs($primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResource"
 [args] => [args] "args"
 [public static void tryWithResourceMultipleResources(String[] args) {
     try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
@@ -105,105 +92,101 @@
       let $primaryExc = null;
 ...      }
     }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [let $primaryExc = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [let thing = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [let $primaryExc = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [let thing = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [thing] => [thing] "thing"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [let thing2 = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [let thing2 = null;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [thing2] => [thing2] "thing2"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [try {
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [try {
         thing = ClosableThing.$create__();
 ...        }
       }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [thing = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [thing2 = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [thing = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [thing2 = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [int i = 0;] => [let i = 0;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [i] => [i] "i"
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [if (Throwable.$isInstance(__$exc)) {
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [if (Throwable.$isInstance(__$exc)) {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
 ...          throw $Exceptions.toJs(__$exc);
         }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [$primaryExc = $exceptionFromTry;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [$primaryExc = $Exceptions.safeClose(thing2, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [if (!$Equality.$same($primaryExc, null)) {
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [$primaryExc = $exceptionFromTry;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [$primaryExc = $Exceptions.safeClose(thing2, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs($primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [if (Exception.$isInstance(__$exc$1$)) {
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+...      int b = 10;
+    }] => [throw $Exceptions.toJs($primaryExc);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[{
+      int b = 10;
+    }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[{
+      int b = 10;
+    }] => [if (Exception.$isInstance(__$exc$1$)) {
         let e = /**@type {Exception} */ (__$exc$1$);
 ...        throw $Exceptions.toJs(__$exc$1$);
       }] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [let e = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[{
+      int b = 10;
+    }] => [let e = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [e] => [e] "e"
 [int b = 10;] => [let b = 10;] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [b] => [b] "b"
-[public static void tryWithResourceMultipleResources(String[] args) {
-    try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
-...    }
-  }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
+[{
+      int b = 10;
+    }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.tryWithResourceMultipleResources"
 [public class TryWithResource {
   static class ClosableThing implements AutoCloseable {
 ...  }

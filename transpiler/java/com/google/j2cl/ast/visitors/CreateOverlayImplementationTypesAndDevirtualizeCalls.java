@@ -37,6 +37,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
    */
   private static class OverlayBridgesCreator {
 
-    static void addBridges(
+    private static void addBridges(
         Type type, TypeDescriptor typeDescriptor, TypeDescriptor superTypeDescriptor) {
       for (MethodDescriptor methodDescriptor : superTypeDescriptor.getMethodDescriptors()) {
         // The only methods that need a bridge are JsOverlay methods that will be moved to the
@@ -106,11 +107,12 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           continue;
         }
 
-        type.addMethod(createBridgeMethod(typeDescriptor, methodDescriptor));
+        type.addMethod(
+            createBridgeMethod(type.getSourcePosition(), typeDescriptor, methodDescriptor));
       }
     }
 
-    static void applyTo(CompilationUnit compilationUnit) {
+    private static void applyTo(CompilationUnit compilationUnit) {
       for (Type type : compilationUnit.getTypes()) {
         TypeDescriptor typeDescriptor = type.getDeclaration().getUnsafeTypeDescriptor();
         TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
@@ -126,8 +128,10 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       }
     }
 
-    static Method createBridgeMethod(
-        TypeDescriptor typeDescriptor, MethodDescriptor targetMethodDescriptor) {
+    private static Method createBridgeMethod(
+        SourcePosition sourcePosition,
+        TypeDescriptor typeDescriptor,
+        MethodDescriptor targetMethodDescriptor) {
       MethodDescriptor bridgeMethodDescriptor =
           MethodDescriptor.Builder.from(targetMethodDescriptor)
               .setEnclosingTypeDescriptor(typeDescriptor)
@@ -139,6 +143,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               .build();
 
       return AstUtils.createForwardingMethod(
+          sourcePosition,
           new ThisReference(typeDescriptor.getSuperTypeDescriptor()),
           bridgeMethodDescriptor,
           targetMethodDescriptor,
@@ -154,7 +159,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
    */
   private static class OverlayImplementationTypesCreator {
 
-    static void applyTo(CompilationUnit compilationUnit) {
+    private static void applyTo(CompilationUnit compilationUnit) {
       List<Type> replacementTypeList = new ArrayList<>();
 
       // TODO(goktug): we should actually do proper rewrite of the nodes. Current code leaves
@@ -172,12 +177,15 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       compilationUnit.getTypes().addAll(replacementTypeList);
     }
 
-    static Type createOverlayImplementationType(Type type) {
+    private static Type createOverlayImplementationType(Type type) {
       TypeDeclaration typeDeclaration = type.getDeclaration();
       TypeDescriptor overlayImplTypeDescriptor =
           typeDeclaration.getOverlayImplementationTypeDescriptor();
       Type overlayClass =
-          new Type(type.getVisibility(), overlayImplTypeDescriptor.getTypeDeclaration());
+          new Type(
+              type.getSourcePosition(),
+              type.getVisibility(),
+              overlayImplTypeDescriptor.getTypeDeclaration());
       overlayClass.setNativeTypeDescriptor(typeDeclaration.getUnsafeTypeDescriptor());
       overlayClass.setSourcePosition(type.getSourcePosition());
 
@@ -198,6 +206,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               Field.Builder.from(field)
                   .setInitializer(AstUtils.clone(field.getInitializer()))
                   .setEnclosingClass(overlayImplTypeDescriptor)
+                  .setSourcePosition(field.getSourcePosition())
                   .build());
         } else {
           InitializerBlock initializerBlock = (InitializerBlock) member;
@@ -210,7 +219,8 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       return overlayClass;
     }
 
-    static Method createOverlayMethod(Method method, TypeDescriptor overlayImplTypeDescriptor) {
+    private static Method createOverlayMethod(
+        Method method, TypeDescriptor overlayImplTypeDescriptor) {
       Method statifiedMethod =
           method.getDescriptor().isStatic() ? method : AstUtils.createDevirtualizedMethod(method);
       MethodDescriptor statifiedMethodDescriptor = statifiedMethod.getDescriptor();
@@ -244,7 +254,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
    */
   private static class MemberAccessesRedirector extends AbstractRewriter {
 
-    static Node createRedirectedAccessToOverlayClass(FieldAccess fieldAccess) {
+    private static Node createRedirectedAccessToOverlayClass(FieldAccess fieldAccess) {
       checkArgument(fieldAccess.getTarget().isStatic());
 
       FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
@@ -258,7 +268,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           .build();
     }
 
-    static Node createRedirectedStaticMethodCall(
+    private static Node createRedirectedStaticMethodCall(
         MethodCall methodCall, TypeDescriptor overlayTypeDescriptor) {
       return MethodCall.Builder.from(methodCall)
           .setEnclosingTypeDescriptor(overlayTypeDescriptor)

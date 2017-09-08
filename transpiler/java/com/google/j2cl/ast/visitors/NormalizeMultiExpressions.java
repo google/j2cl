@@ -60,15 +60,16 @@ public class NormalizeMultiExpressions extends NormalizationPass {
 
         if (expressions.isEmpty()) {
           // Eliminate empty multi expressions.
-          return new EmptyStatement();
+          return new EmptyStatement(statement.getSourcePosition());
         } else if (expressions.size() == 1) {
           // If the multi expression contains only one expression, then unwrap it.
-          return expressions.get(0).makeStatement();
+          return expressions.get(0).makeStatement(statement.getSourcePosition());
         } else {
           // If there are multiple expressions then turn it into a block so that any var creation
           // appears immediately before its use rather than being hoisted to the top of the
           // enclosing block.
           return new Block(
+              statement.getSourcePosition(),
               expressions
                   .stream()
                   .map(

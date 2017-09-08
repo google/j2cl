@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Labeled Statement.
@@ -28,7 +29,8 @@ public class LabeledStatement extends Statement {
   private final String labelName;
   @Visitable Statement body;
 
-  public LabeledStatement(String labelName, Statement body) {
+  public LabeledStatement(SourcePosition sourcePosition, String labelName, Statement body) {
+    super(sourcePosition);
     this.labelName = checkNotNull(labelName);
     this.body = checkNotNull(body);
   }
@@ -43,9 +45,7 @@ public class LabeledStatement extends Statement {
 
   @Override
   public LabeledStatement clone() {
-    LabeledStatement labeledStatement = new LabeledStatement(labelName, body.clone());
-    labeledStatement.setSourcePosition(this.getSourcePosition());
-    return labeledStatement;
+    return new LabeledStatement(getSourcePosition(), labelName, body.clone());
   }
 
   @Override

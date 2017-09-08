@@ -91,10 +91,9 @@
       let theAp = $array[$index];
       theAp.m_act__();
     }] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
-[public void testInnerClassLoop() {
-    abstract class AddNumber {
-...    assert (number == 1156);
-  }] => [let theAp = $array[$index];] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
+[for (AddNumber theAp : results) {
+      theAp.act();
+    }] => [let theAp = $array[$index];] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [theAp] => [theAp] "theAp"
 [theAp.act();] => [theAp.m_act__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [assert (number == 1156);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1156));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"

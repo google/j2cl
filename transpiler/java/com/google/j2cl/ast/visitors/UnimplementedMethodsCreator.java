@@ -174,6 +174,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
                 AstUtils.createParameterVariables(
                     stubMethodDescriptor.getParameterTypeDescriptors()))
             .setOverride(true)
+            .setSourcePosition(type.getSourcePosition())
             .build());
   }
 }

@@ -26,6 +26,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -40,7 +41,8 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
-      type.addMethods(createBridgeMethods(type.getDeclaration(), type.getMethods()));
+      type.addMethods(
+          createBridgeMethods(type.getSourcePosition(), type.getDeclaration(), type.getMethods()));
     }
   }
 
@@ -60,7 +62,9 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private static List<Method> createBridgeMethods(
-      TypeDeclaration enclosingTypeDeclaration, Iterable<Method> existingMethods) {
+      SourcePosition sourcePosition,
+      TypeDeclaration enclosingTypeDeclaration,
+      Iterable<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
@@ -93,6 +97,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
 
       Method bridgeMethod =
           createBridgeMethod(
+              sourcePosition,
               enclosingTypeDeclaration.getUnsafeTypeDescriptor(),
               bridgeMethodDescriptor,
               entry.getValue());
@@ -176,10 +181,12 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
   }
 
   private static Method createBridgeMethod(
+      SourcePosition sourcePosition,
       TypeDescriptor targetTypeDescriptor,
       MethodDescriptor bridgeMethodDescriptor,
       MethodDescriptor forwardToMethodDescriptor) {
     return AstUtils.createForwardingMethod(
+        sourcePosition,
         null,
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
             .setEnclosingTypeDescriptor(targetTypeDescriptor)

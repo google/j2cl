@@ -283,6 +283,7 @@ public class CompilationUnitBuilder {
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         currentTypeDeclaration.getUnsafeTypeDescriptor(),
                         type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
+                .setSourcePosition(type.getSourcePosition())
                 .build());
       }
     }
@@ -369,7 +370,9 @@ public class CompilationUnitBuilder {
 
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
-          methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
+          methodDeclaration.getBody() == null
+              ? new Block(getSourcePosition(methodDeclaration))
+              : convert(methodDeclaration.getBody());
 
       return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
           .setParameters(parameters)
@@ -706,7 +709,7 @@ public class CompilationUnitBuilder {
         case ASTNode.DO_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.DoStatement) statement);
         case ASTNode.EMPTY_STATEMENT:
-          return new EmptyStatement();
+          return new EmptyStatement(getSourcePosition(statement));
         case ASTNode.EXPRESSION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ExpressionStatement) statement);
         case ASTNode.FOR_STATEMENT:
@@ -779,15 +782,19 @@ public class CompilationUnitBuilder {
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
       return new LabeledStatement(
-          statement.getLabel().getIdentifier(), convert(statement.getBody()));
+          getSourcePosition(statement),
+          statement.getLabel().getIdentifier(),
+          convert(statement.getBody()));
     }
 
     private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
-      return new BreakStatement(getIdentifierOrNull(statement.getLabel()));
+      return new BreakStatement(
+          getSourcePosition(statement), getIdentifierOrNull(statement.getLabel()));
     }
 
     private ContinueStatement convert(org.eclipse.jdt.core.dom.ContinueStatement statement) {
-      return new ContinueStatement(getIdentifierOrNull(statement.getLabel()));
+      return new ContinueStatement(
+          getSourcePosition(statement), getIdentifierOrNull(statement.getLabel()));
     }
 
     private String getIdentifierOrNull(SimpleName label) {
@@ -803,6 +810,7 @@ public class CompilationUnitBuilder {
           .setConditionExpression(convertOrNull(statement.getExpression()))
           .setBody(convert(statement.getBody()))
           .setUpdates(convertExpressions(JdtUtils.asTypedList(statement.updaters())))
+          .setSourcePosition(getSourcePosition(statement))
           .build();
     }
 
@@ -865,7 +873,7 @@ public class CompilationUnitBuilder {
                       .setIndexExpression(indexVariable.getReference())
                       .build())
               .build()
-              .makeStatement();
+              .makeStatement(getSourcePosition(statement));
 
       return ForStatement.newBuilder()
           .setConditionExpression(condition)
@@ -885,6 +893,7 @@ public class CompilationUnitBuilder {
                   .setOperand(indexVariable.getReference())
                   .setOperator(PostfixOperator.INCREMENT)
                   .build())
+          .setSourcePosition(getSourcePosition(statement))
           .build();
     }
 
@@ -943,7 +952,7 @@ public class CompilationUnitBuilder {
                       .setQualifier(iteratorVariable.getReference())
                       .build())
               .build()
-              .makeStatement();
+              .makeStatement(getSourcePosition(statement));
 
       return ForStatement.newBuilder()
           .setConditionExpression(condition)
@@ -951,11 +960,15 @@ public class CompilationUnitBuilder {
           // Prepend the variable declaration.
           .addStatement(0, forVariableDeclarationStatement)
           .setInitializers(iteratorDeclaration)
+          .setSourcePosition(getSourcePosition(statement))
           .build();
     }
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
-      return new DoWhileStatement(convert(statement.getExpression()), convert(statement.getBody()));
+      return new DoWhileStatement(
+          getSourcePosition(statement),
+          convert(statement.getExpression()),
+          convert(statement.getBody()));
     }
 
     private Statement convert(
@@ -965,11 +978,15 @@ public class CompilationUnitBuilder {
     }
 
     private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement statement) {
-      return new WhileStatement(convert(statement.getExpression()), convert(statement.getBody()));
+      return new WhileStatement(
+          getSourcePosition(statement),
+          convert(statement.getExpression()),
+          convert(statement.getBody()));
     }
 
     private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement statement) {
       return new IfStatement(
+          getSourcePosition(statement),
           convert(statement.getExpression()),
           convert(statement.getThenStatement()),
           convertOrNull(statement.getElseStatement()));
@@ -1010,9 +1027,10 @@ public class CompilationUnitBuilder {
         checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
-            AstUtils.createReturnOrExpressionStatement(lambdaMethodBody, returnTypeDescriptor);
+            AstUtils.createReturnOrExpressionStatement(
+                getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
         statement.setSourcePosition(getSourcePosition(lambdaBody));
-        body = new Block(statement);
+        body = new Block(getSourcePosition(lambdaBody), statement);
       }
       return body;
     }
@@ -1082,6 +1100,7 @@ public class CompilationUnitBuilder {
               .setFinal(true)
               .setName("$$qualifier" + qualifierCounter++)
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(qualifier.resolveTypeBinding()))
+              .setSourcePosition(getSourcePosition(expression))
               .build();
       // Store the declaring type in the local scope so that variable declaration scope points to
       // the right type when the functional expression is effectively constructed.
@@ -1301,6 +1320,7 @@ public class CompilationUnitBuilder {
 
       Statement forwardingStatement =
           AstUtils.createForwardingStatement(
+              sourcePosition,
               qualifier,
               targetMethodDescriptor,
               isStaticDispatch,
@@ -1361,8 +1381,8 @@ public class CompilationUnitBuilder {
               enclosingType.getTypeDeclaration(),
               classComponents,
               functionalInterfaceTypeBinding);
-      Type lambdaType = new Type(Visibility.PRIVATE, lambdaTypeDeclaration);
-      lambdaType.setSourcePosition(getSourcePosition(expression));
+      Type lambdaType =
+          new Type(getSourcePosition(expression), Visibility.PRIVATE, lambdaTypeDeclaration);
       pushType(lambdaType);
       FunctionExpression functionExpression = functionExpressionSupplier.get();
 
@@ -1386,6 +1406,7 @@ public class CompilationUnitBuilder {
       // Construct lambda method and add it to lambda inner class.
       Method lambdaMethod =
           createLambdaImplementationMethod(
+              getSourcePosition(expression),
               lambdaDispatchMethodDescriptor,
               functionExpression,
               !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown()
@@ -1397,7 +1418,6 @@ public class CompilationUnitBuilder {
                           functionalMethodDescriptor
                               .getDeclarationMethodDescriptor()
                               .getMethodSignature()));
-      lambdaMethod.setSourcePosition(getSourcePosition(expression));
       lambdaType.addMethod(lambdaMethod);
 
       // Add fields for captured local variables.
@@ -1407,6 +1427,10 @@ public class CompilationUnitBuilder {
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
                 .setCapturedVariable(capturedVariable)
+                .setSourcePosition(
+                    SourcePosition.Builder.from(capturedVariable.getSourcePosition())
+                        .setName(null)
+                        .build())
                 .build());
       }
 
@@ -1418,6 +1442,7 @@ public class CompilationUnitBuilder {
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         lambdaTypeDescriptor,
                         lambdaType.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
+                .setSourcePosition(lambdaType.getSourcePosition())
                 .build());
       }
 
@@ -1525,6 +1550,7 @@ public class CompilationUnitBuilder {
     }
 
     private Method createLambdaImplementationMethod(
+        SourcePosition sourcePosition,
         MethodDescriptor lambdaDispatchMethodDescriptor,
         FunctionExpression functionExpression,
         boolean isOverride) {
@@ -1534,13 +1560,16 @@ public class CompilationUnitBuilder {
           .setParameters(functionExpression.getParameters())
           .setOverride(isOverride)
           .addStatements(functionExpression.getBody().getStatements())
+          .setSourcePosition(sourcePosition)
           .setJsDocDescription("Lambda implementation method.")
           .build();
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
       return new AssertStatement(
-          convert(statement.getExpression()), convertOrNull(statement.getMessage()));
+          getSourcePosition(statement),
+          convert(statement.getExpression()),
+          convertOrNull(statement.getMessage()));
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment expression) {
@@ -1557,6 +1586,7 @@ public class CompilationUnitBuilder {
           JdtUtils.asTypedList(block.statements());
 
       return new Block(
+          getSourcePosition(block),
           statements.stream().map(this::convert).filter(Predicates.notNull()).collect(toList()));
     }
 
@@ -1572,11 +1602,11 @@ public class CompilationUnitBuilder {
           .setArguments(
               convertArguments(constructorBinding, JdtUtils.asTypedList(statement.arguments())))
           .build()
-          .makeStatement();
+          .makeStatement(getSourcePosition(statement));
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement statement) {
-      return convert(statement.getExpression()).makeStatement();
+      return convert(statement.getExpression()).makeStatement(getSourcePosition(statement));
     }
 
     private FieldAccess convert(org.eclipse.jdt.core.dom.SuperFieldAccess expression) {
@@ -1850,6 +1880,7 @@ public class CompilationUnitBuilder {
       return ReturnStatement.newBuilder()
           .setExpression(convertOrNull(statement.getExpression()))
           .setTypeDescriptor(returnTypeDescriptor)
+          .setSourcePosition(getSourcePosition(statement))
           .build();
     }
 
@@ -2028,12 +2059,13 @@ public class CompilationUnitBuilder {
 
     private SwitchCase convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
       return statement.isDefault()
-          ? new SwitchCase()
-          : new SwitchCase(convert(statement.getExpression()));
+          ? new SwitchCase(getSourcePosition(statement))
+          : new SwitchCase(getSourcePosition(statement), convert(statement.getExpression()));
     }
 
     private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement statement) {
       return new SwitchStatement(
+          getSourcePosition(statement),
           convert(statement.getExpression()),
           convertStatements(JdtUtils.asTypedList(statement.statements())));
     }
@@ -2041,7 +2073,9 @@ public class CompilationUnitBuilder {
     private SynchronizedStatement convert(
         org.eclipse.jdt.core.dom.SynchronizedStatement statement) {
       return new SynchronizedStatement(
-          convert(statement.getExpression()), convert(statement.getBody()));
+          getSourcePosition(statement),
+          convert(statement.getExpression()),
+          convert(statement.getBody()));
     }
 
     private ExpressionStatement convert(
@@ -2064,7 +2098,7 @@ public class CompilationUnitBuilder {
           .setQualifier(qualifier)
           .setArguments(arguments)
           .build()
-          .makeStatement();
+          .makeStatement(getSourcePosition(expression));
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
@@ -2139,7 +2173,7 @@ public class CompilationUnitBuilder {
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {
-      return new ThrowStatement(convert(statement.getExpression()));
+      return new ThrowStatement(getSourcePosition(statement), convert(statement.getExpression()));
     }
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
@@ -2149,6 +2183,7 @@ public class CompilationUnitBuilder {
           JdtUtils.asTypedList(statement.catchClauses());
 
       return new TryStatement(
+          getSourcePosition(statement),
           resources.stream().map(this::convert).collect(toList()),
           convert(statement.getBody()),
           catchClauses.stream().map(this::convert).collect(toList()),
@@ -2198,7 +2233,7 @@ public class CompilationUnitBuilder {
       return VariableDeclarationExpression.newBuilder()
           .setVariableDeclarationFragments(fragments.stream().map(this::convert).collect(toList()))
           .build()
-          .makeStatement();
+          .makeStatement(getSourcePosition(statement));
     }
 
     private Type createType(ITypeBinding typeBinding, ASTNode typeDeclarationNode) {
@@ -2208,9 +2243,8 @@ public class CompilationUnitBuilder {
       Visibility visibility = JdtUtils.getVisibility(typeBinding);
       TypeDeclaration typeDeclaration = JdtUtils.createDeclarationForType(typeBinding);
 
-      Type type = new Type(visibility, typeDeclaration);
+      Type type = new Type(getSourcePosition(typeDeclarationNode), visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
-      type.setSourcePosition(getSourcePosition(typeDeclarationNode));
       return type;
     }
   }

@@ -47,13 +47,8 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return Visitor_Expression.visit(processor, this);
   }
 
-  public ExpressionStatement makeStatement() {
-    return new ExpressionStatement(this);
-  }
-
   public ExpressionStatement makeStatement(SourcePosition sourcePosition) {
-    ExpressionStatement statement = makeStatement();
-    statement.setSourcePosition(sourcePosition);
+    ExpressionStatement statement = new ExpressionStatement(sourcePosition, this);
     return statement;
   }
 }

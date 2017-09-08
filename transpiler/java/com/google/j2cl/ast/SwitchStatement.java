@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,9 @@ public class SwitchStatement extends Statement {
   @Visitable Expression switchExpression;
   @Visitable List<Statement> bodyStatements = new ArrayList<>();
 
-  public SwitchStatement(Expression switchExpression, List<Statement> bodyStatements) {
+  public SwitchStatement(
+      SourcePosition sourcePosition, Expression switchExpression, List<Statement> bodyStatements) {
+    super(sourcePosition);
     this.switchExpression = checkNotNull(switchExpression);
     this.bodyStatements.addAll(checkNotNull(bodyStatements));
   }
@@ -44,10 +47,8 @@ public class SwitchStatement extends Statement {
 
   @Override
   public SwitchStatement clone() {
-    SwitchStatement switchStatement =
-        new SwitchStatement(switchExpression.clone(), AstUtils.clone(bodyStatements));
-    switchStatement.setSourcePosition(this.getSourcePosition());
-    return switchStatement;
+    return new SwitchStatement(
+        getSourcePosition(), switchExpression.clone(), AstUtils.clone(bodyStatements));
   }
 
   @Override

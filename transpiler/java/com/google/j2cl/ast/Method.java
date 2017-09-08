@@ -48,11 +48,13 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
   }
 
   private Method(
+      SourcePosition sourcePosition,
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
       boolean isOverride,
       String jsDocDescription) {
+    super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
     this.isOverride = isOverride;
@@ -209,8 +211,8 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     private List<Statement> statements = new ArrayList<>();
     private boolean isOverride;
     private String jsDocDescription;
-    private SourcePosition bodySourcePosition = SourcePosition.ABSENT;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private SourcePosition bodySourcePosition;
+    private SourcePosition sourcePosition;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -298,8 +300,10 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
     }
 
     public Method build() {
-      Block body = new Block(statements);
-      body.setSourcePosition(bodySourcePosition);
+      if (bodySourcePosition == null) {
+        bodySourcePosition = sourcePosition;
+      }
+      Block body = new Block(bodySourcePosition, statements);
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
 
       Set<TypeDescriptor> typeParametersTypeDescriptors =
@@ -320,22 +324,17 @@ public class Method extends Member implements HasJsNameInfo, HasParameters, HasM
                             .contains(typeVariable))
                 .collect(Collectors.toList()));
       }
-      Method method =
-          new Method(
-              MethodDescriptor.Builder.from(methodDescriptor)
-                  .updateParameterTypeDescriptors(
-                      parameters
-                          .stream()
-                          .map(Variable::getTypeDescriptor)
-                          .collect(toImmutableList()))
-                  .setTypeParameterTypeDescriptors(typeParametersTypeDescriptors)
-                  .build(),
-              parameters,
-              body,
-              isOverride,
-              jsDocDescription);
-      method.setSourcePosition(sourcePosition);
-      return method;
+      return new Method(
+          sourcePosition,
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .updateParameterTypeDescriptors(
+                  parameters.stream().map(Variable::getTypeDescriptor).collect(toImmutableList()))
+              .setTypeParameterTypeDescriptors(typeParametersTypeDescriptors)
+              .build(),
+          parameters,
+          body,
+          isOverride,
+          jsDocDescription);
     }
   }
 }

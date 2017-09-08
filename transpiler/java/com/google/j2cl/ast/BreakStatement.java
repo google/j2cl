@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
 /**
@@ -26,7 +27,8 @@ public class BreakStatement extends Statement {
 
   @Nullable private final String labelName;
 
-  public BreakStatement(String labelName) {
+  public BreakStatement(SourcePosition sourcePosition, String labelName) {
+    super(sourcePosition);
     this.labelName = labelName;
   }
 
@@ -36,9 +38,7 @@ public class BreakStatement extends Statement {
 
   @Override
   public BreakStatement clone() {
-    BreakStatement breakStatement = new BreakStatement(labelName);
-    breakStatement.setSourcePosition(this.getSourcePosition());
-    return breakStatement;
+    return new BreakStatement(getSourcePosition(), labelName);
   }
 
   @Override

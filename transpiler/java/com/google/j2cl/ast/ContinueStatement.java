@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
 /**
@@ -26,7 +27,8 @@ public class ContinueStatement extends Statement {
 
   @Nullable private final String labelName;
 
-  public ContinueStatement(String labelName) {
+  public ContinueStatement(SourcePosition sourcePosition, String labelName) {
+    super(sourcePosition);
     this.labelName = labelName;
   }
 
@@ -36,9 +38,7 @@ public class ContinueStatement extends Statement {
 
   @Override
   public ContinueStatement clone() {
-    ContinueStatement continueStatement = new ContinueStatement(labelName);
-    continueStatement.setSourcePosition(this.getSourcePosition());
-    return continueStatement;
+    return new ContinueStatement(getSourcePosition(), labelName);
   }
 
   @Override

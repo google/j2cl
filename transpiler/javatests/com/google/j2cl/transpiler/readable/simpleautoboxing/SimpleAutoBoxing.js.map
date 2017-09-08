@@ -73,10 +73,9 @@
       let number$1$ = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
-[public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
-    double sum = 0;
-...    return sum;
-  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
+[for (Object number : numbers) {
+      sum += (Double) number;
+    }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
 [number] => [number$1$] "number"
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxing"
@@ -89,10 +88,9 @@
       let number$1$ = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
     }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
-[@JsMethod
-  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
-...    return sum;
-  }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
+[for (Object number : numbers) {
+      sum += (Double) number;
+    }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
 [number] => [number$1$] "number"
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.sumWithoutBoxingJsVarargs"

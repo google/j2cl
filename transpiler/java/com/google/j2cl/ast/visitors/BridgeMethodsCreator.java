@@ -80,7 +80,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       MethodDescriptor targetMethodDescriptor = entry.getValue();
 
       Method bridgeMethod =
-          createBridgeMethod(type.getDeclaration(), bridgeMethodDescriptor, targetMethodDescriptor);
+          createBridgeMethod(type, bridgeMethodDescriptor, targetMethodDescriptor);
 
       if (!usedMangledNames.add(ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor()))) {
         // Do not generate duplicate bridge methods in one class.
@@ -368,9 +368,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
    * implementation that should be targeted.
    */
   private static Method createBridgeMethod(
-      TypeDeclaration typeDeclaration,
-      MethodDescriptor bridgeMethodDescriptor,
-      MethodDescriptor targetMethodDescriptor) {
+      Type type, MethodDescriptor bridgeMethodDescriptor, MethodDescriptor targetMethodDescriptor) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
     MethodDescriptor originalBridgeMethodDescriptor = bridgeMethodDescriptor;
 
     bridgeMethodDescriptor =
@@ -432,9 +431,12 @@ public class BridgeMethodsCreator extends NormalizationPass {
         .setParameters(parameters)
         .addStatements(
             AstUtils.createReturnOrExpressionStatement(
-                dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor()))
+                type.getSourcePosition(),
+                dispatchMethodCall,
+                bridgeMethodDescriptor.getReturnTypeDescriptor()))
         .setOverride(true)
         .setJsDocDescription("Bridge method.")
+        .setSourcePosition(type.getSourcePosition())
         .build();
   }
 

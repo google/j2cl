@@ -53,7 +53,8 @@ public class ExpandCompoundAssignments extends NormalizationPass {
             if (expression instanceof PostfixExpression) {
               PostfixExpression postfixExpression = (PostfixExpression) expression;
               if (needsExpansion(postfixExpression.getOperator(), postfixExpression.getOperand())) {
-                return toPrefixExpression(postfixExpression).makeStatement();
+                return toPrefixExpression(postfixExpression)
+                    .makeStatement(expressionStatement.getSourcePosition());
               }
             }
             return expressionStatement;

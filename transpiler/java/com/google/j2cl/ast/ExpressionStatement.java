@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Class for expression statement;
@@ -26,7 +27,8 @@ import com.google.j2cl.ast.annotations.Visitable;
 public class ExpressionStatement extends Statement {
   @Visitable Expression expression;
 
-  ExpressionStatement(Expression expression) {
+  ExpressionStatement(SourcePosition sourcePosition, Expression expression) {
+    super(sourcePosition);
     this.expression = checkNotNull(expression);
   }
 
@@ -36,7 +38,8 @@ public class ExpressionStatement extends Statement {
 
   @Override
   public ExpressionStatement clone() {
-    ExpressionStatement expressionStatement = new ExpressionStatement(expression.clone());
+    ExpressionStatement expressionStatement =
+        new ExpressionStatement(getSourcePosition(), expression.clone());
     expressionStatement.setSourcePosition(this.getSourcePosition());
     return expressionStatement;
   }

@@ -115,6 +115,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
     for (MethodDescriptor targetMethodDescriptor : defaultMethodDescriptorsBySignature.values()) {
       Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
+              type.getSourcePosition(),
               targetMethodDescriptor,
               type.getDeclaration().getUnsafeTypeDescriptor(),
               "Default method forwarding stub.");
@@ -145,6 +146,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
         // See b/31312257.
         type.addMethod(
             AstUtils.createForwardingMethod(
+                type.getSourcePosition(),
                 null,
                 MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())
                     .setJsInfo(JsInfo.NONE)

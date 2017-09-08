@@ -16,16 +16,21 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 
 /**
  * Class for empty statements.
  */
 @Visitable
 public class EmptyStatement extends Statement {
+
+  public EmptyStatement(SourcePosition sourcePosition) {
+    super(sourcePosition);
+  }
+
   @Override
   public EmptyStatement clone() {
-    EmptyStatement emptyStatement = new EmptyStatement();
-    emptyStatement.setSourcePosition(this.getSourcePosition());
+    EmptyStatement emptyStatement = new EmptyStatement(getSourcePosition());
     return emptyStatement;
   }
 
