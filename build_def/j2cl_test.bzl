@@ -55,10 +55,10 @@ To make this example work one needs to add ":MyTestLib" to the runtime_deps of
 
 load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
-load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
-load("/third_party/java_src/j2cl/build_def/j2cl_generate_jsunit_suite",
+load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_def:j2cl_generate_jsunit_suite.bzl",
      "j2cl_generate_jsunit_suite")
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package",
+load("//build_def:j2cl_util.bzl", "get_java_package",
      "J2CL_TEST_DEFS")
 
 

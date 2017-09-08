@@ -14,9 +14,9 @@ readable_example(
 """
 
 
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_OPTIMIZED_DEFS")
-load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
-load("/tools/build_rules/build_test", "build_test")
+load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//tools/build_rules:build_test.bzl", "build_test")
 
 
 def readable_example(
