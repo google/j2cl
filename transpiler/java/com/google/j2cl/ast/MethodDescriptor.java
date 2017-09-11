@@ -110,7 +110,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
   }
 
-  public static final String INIT_METHOD_NAME = "$init";
+  public static final String INIT_METHOD_PREFIX = "$init";
+  public static final String CTOR_METHOD_PREFIX = "$ctor";
   public static final String CLINIT_METHOD_NAME = "$clinit";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.

@@ -80,35 +80,9 @@ public class ManglingNameUtils {
       // This is an internal method so we render the actual name
       prefix = "";
     }
-    // TODO(tdeegan): We can remove this check and just use the regular method naming pattern.
-    if (methodDescriptor.getName().startsWith("$ctor")) {
-      return methodDescriptor.getName();
-    }
+
     return J2clUtils.format(
         "%s%s%s%s", prefix, methodDescriptor.getName(), parameterSignature, suffix);
-  }
-
-  /**
-   * Returns the mangled name of the constructor factory method $create.
-   */
-  public static String getFactoryMethodMangledName(MethodDescriptor methodDescriptor) {
-    return "$create" + getMangledParameterSignature(methodDescriptor);
-  }
-
-  /**
-   * Returns the mangled name of $ctor method for a particular constructor.
-   */
-  public static String getCtorMangledName(MethodDescriptor methodDescriptor) {
-    return "$ctor__"
-        + getMangledName(methodDescriptor.getEnclosingTypeDescriptor())
-        + getMangledParameterSignature(methodDescriptor);
-  }
-
-  /**
-   * Returns the mangled name of $init method for a type.
-   */
-  public static String getInitMangledName(TypeDescriptor typeDescriptor) {
-    return MethodDescriptor.INIT_METHOD_NAME + "__" + getMangledName(typeDescriptor);
   }
 
   /**

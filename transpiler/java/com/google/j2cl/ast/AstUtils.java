@@ -94,11 +94,19 @@ public class AstUtils {
   public static MethodDescriptor getInitMethodDescriptor(TypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(typeDescriptor)
-        .setName(ManglingNameUtils.getInitMangledName(typeDescriptor))
+        .setName(getInitName(typeDescriptor))
         .setVisibility(Visibility.PRIVATE)
         .setMethodOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
         .setJsInfo(JsInfo.RAW)
         .build();
+  }
+
+  /** Returns the name of $init method for a type. */
+  private static String getInitName(TypeDescriptor typeDescriptor) {
+    // Synthesize a name that is unique per class to avoid property clashes in JS.
+    return MethodDescriptor.INIT_METHOD_PREFIX
+        + "__"
+        + ManglingNameUtils.getMangledName(typeDescriptor);
   }
 
   /** Create "Equality.$same()" MethodDescriptor. */

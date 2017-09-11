@@ -326,7 +326,8 @@ public class NormalizeConstructors extends NormalizationPass {
         continue;
       }
 
-      if (type.containsMethod(ManglingNameUtils.getFactoryMethodMangledName(methodDescriptor))) {
+      if (type.containsMethod(
+          ManglingNameUtils.getMangledName(factoryDescriptorForConstructor(methodDescriptor)))) {
         continue;
       }
 
@@ -451,7 +452,7 @@ public class NormalizeConstructors extends NormalizationPass {
       MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
     return MethodDescriptor.Builder.from(constructor)
-        .setName(ManglingNameUtils.getCtorMangledName(constructor))
+        .setName(getCtorName(constructor))
         .setConstructor(false)
         .setStatic(false)
         .setJsInfo(JsInfo.NONE)
@@ -459,6 +460,14 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
         .setVisibility(Visibility.PUBLIC)
         .build();
+  }
+
+  /** Returns the name of $ctor method for a particular constructor. */
+  private static String getCtorName(MethodDescriptor methodDescriptor) {
+    // Synthesize a name that is unique per class to avoid property clashes in JS.
+    return MethodDescriptor.CTOR_METHOD_PREFIX
+        + "__"
+        + ManglingNameUtils.getMangledName(methodDescriptor.getEnclosingTypeDescriptor());
   }
 
   /** Method descriptor for $create methods. */
