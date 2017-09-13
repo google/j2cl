@@ -18,15 +18,12 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.HasMethodDescriptor;
 import com.google.j2cl.ast.HasParameters;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
 import java.io.File;
@@ -90,13 +87,6 @@ public class GeneratorUtils {
               : "",
           name);
     }
-  }
-
-  public static Expression getInitialValue(Field field) {
-    if (field.isCompileTimeConstant()) {
-      return field.getInitializer();
-    }
-    return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
   public static String getExtendsClause(Type type, GenerationEnvironment environment) {

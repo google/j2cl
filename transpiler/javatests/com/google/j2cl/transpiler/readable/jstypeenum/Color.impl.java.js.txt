@@ -108,26 +108,6 @@ class Color extends Enum {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof Color;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Color);
-  }
-
-  /**
    * A static field getter.
    * @return {!Color}
    * @public
@@ -220,6 +200,26 @@ class Color extends Enum {
      Color
          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Color;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Color);
   }
 
   /**

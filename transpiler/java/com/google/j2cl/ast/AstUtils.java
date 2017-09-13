@@ -25,7 +25,6 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -85,7 +84,7 @@ public class AstUtils {
         .setStatic(true)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setMethodOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
+        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
         .setJsInfo(JsInfo.RAW)
         .build();
   }
@@ -96,7 +95,7 @@ public class AstUtils {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(getInitName(typeDescriptor))
         .setVisibility(Visibility.PRIVATE)
-        .setMethodOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
+        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
         .setJsInfo(JsInfo.RAW)
         .build();
   }
@@ -1242,14 +1241,4 @@ public class AstUtils {
     return methodBuilder.build();
   }
 
-  /** Returns the field descriptor for a the field backing the static setter/getters. */
-  public static FieldDescriptor getBackingFieldDescriptor(FieldDescriptor fieldDescriptor) {
-    checkArgument(
-        fieldDescriptor.isStatic()
-            && fieldDescriptor.getFieldOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD);
-    return FieldDescriptor.Builder.from(fieldDescriptor)
-        .setJsInfo(JsInfo.NONE)
-        .setFieldOrigin(FieldOrigin.SYNTHETIC_BACKING_FIELD)
-        .build();
-  }
 }

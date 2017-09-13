@@ -270,7 +270,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .setConstructor(true)
             .setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
-            .setMethodOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
+            .setOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
             .build();
 
     return Method.newBuilder()
@@ -457,7 +457,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setStatic(false)
         .setJsInfo(JsInfo.NONE)
         .removeParameterOptionality()
-        .setMethodOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
+        .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
         .setVisibility(Visibility.PUBLIC)
         .build();
   }
@@ -484,7 +484,7 @@ public class NormalizeConstructors extends NormalizationPass {
             Iterables.concat(
                 constructor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors(),
                 constructor.getTypeParameterTypeDescriptors()))
-        .setMethodOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
+        .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
         .build();
   }
 

@@ -46,6 +46,24 @@
 [first] => [first] "first"
 [second] => [second] "second"
 [return first == second;] => [return $Equality.$same(first, second);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$3.equal"
+[public static EqualFunction<Object> forObject =
+      new EqualFunction<Object>() {
+...        }
+      };] => [return (EqualFunctions.$clinit(), EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: getter>"
+[public static EqualFunction<Object> forObject =
+      new EqualFunction<Object>() {
+...        }
+      };] => [(EqualFunctions.$clinit(), EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = value);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: setter>"
+[public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [return (EqualFunctions.$clinit(), EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: getter>"
+[public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [(EqualFunctions.$clinit(), EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = value);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: setter>"
+[/**
+   * Equal function handling array equal logic in addition to object equal.
+   */
+  public static EqualFunction<Object> forCollection = withCollection(forObject);] => [return (EqualFunctions.$clinit(), EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: getter>"
+[/**
+   * Equal function handling array equal logic in addition to object equal.
+   */
+  public static EqualFunction<Object> forCollection = withCollection(forObject);] => [(EqualFunctions.$clinit(), EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = value);] "com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.<synthetic: setter>"
 [public class EqualFunctions {
   private EqualFunctions() {}
 ...  }

@@ -46,26 +46,6 @@ class StaticInitializers extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof StaticInitializers;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, StaticInitializers);
-  }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -115,6 +95,26 @@ class StaticInitializers extends java_lang_Object {
      StaticInitializers
          .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticInitializers;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticInitializers);
   }
 
   /**

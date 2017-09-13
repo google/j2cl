@@ -36,6 +36,8 @@
 ...          }
         };] => [let a = $3.$create__();] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.test"
 [a] => [a] "a"
+[public static Object f = new Object() {};] => [return (LocalClassInStaticContext.$clinit(), LocalClassInStaticContext.$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext);] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<synthetic: getter>"
+[public static Object f = new Object() {};] => [(LocalClassInStaticContext.$clinit(), LocalClassInStaticContext.$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext = value);] "com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.<synthetic: setter>"
 [public class LocalClassInStaticContext {
   public static Object f = new Object() {}; // Initializer in a static field declaration.
 ...  }

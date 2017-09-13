@@ -87,13 +87,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** Whether the method originated in source code or was synthesized by a pass */
-  public enum MethodOrigin {
+  public enum MethodOrigin implements MemberDescriptor.Origin {
     SOURCE,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
     SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>"),
     SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
     SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
-    SYNTHETIC_INSTANCE_INITIALIZER("<init>");
+    SYNTHETIC_INSTANCE_INITIALIZER("<init>"),
+    SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
+    SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>");
 
     private final String methodName;
 
@@ -171,10 +173,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .collect(ImmutableList.toImmutableList());
   }
 
-  public abstract MethodOrigin getMethodOrigin();
+  @Override
+  public abstract MethodOrigin getOrigin();
 
   public boolean isInit() {
-    return getMethodOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
+    return getOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
   }
 
   /**
@@ -229,6 +232,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return true;
   }
 
+  public boolean isPropertyGetter() {
+    return isJsPropertyGetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_GETTER;
+  }
+
+  public boolean isPropertySetter() {
+    return isJsPropertySetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_SETTER;
+  }
+
   public boolean isOrOverridesJsMember() {
     return isJsMember() || !getOverriddenJsMembers().isEmpty();
   }
@@ -236,7 +247,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   @Memoized
   public String getBinaryName() {
-    return getMethodOrigin() == MethodOrigin.SOURCE ? getName() : getMethodOrigin().getName();
+    return getOrigin() == MethodOrigin.SOURCE ? getName() : getOrigin().getName();
   }
 
   /**
@@ -318,7 +329,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setBridge(false)
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
-        .setMethodOrigin(MethodOrigin.SOURCE)
+        .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
@@ -456,7 +467,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setJsInfo(JsInfo jsInfo);
 
-    public abstract Builder setMethodOrigin(MethodOrigin methodOrigin);
+    public abstract Builder setOrigin(MethodOrigin methodOrigin);
 
     public abstract Builder setTypeParameterTypeDescriptors(
         Iterable<TypeDescriptor> typeParameterTypeDescriptors);

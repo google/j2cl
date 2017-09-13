@@ -83,26 +83,6 @@ class Foo extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof Foo;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Foo);
-  }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -122,6 +102,26 @@ class Foo extends java_lang_Object {
   static set f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_(value) {
     (Foo.$clinit(),
      Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Foo;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Foo);
   }
 
   /**

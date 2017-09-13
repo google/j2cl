@@ -109,26 +109,6 @@ class Numbers extends Enum {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof Numbers;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Numbers);
-  }
-
-  /**
    * A static field getter.
    * @return {!Numbers}
    * @public
@@ -204,6 +184,26 @@ class Numbers extends Enum {
      Numbers
          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Numbers;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Numbers);
   }
 
   /**

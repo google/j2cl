@@ -48,6 +48,8 @@
     f = x + 4;
   }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
 [f = x + 4;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
+[private static int f;] => [return (Foo.$clinit(), Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_);] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: getter>"
+[private static int f;] => [(Foo.$clinit(), Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = value);] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: setter>"
 [/**
  * Tests for non native static JsProperty.
 ...  }

@@ -24,6 +24,8 @@ import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Literal;
+import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.UnaryExpression;
@@ -45,6 +47,17 @@ public class NormalizeMultiExpressions extends NormalizationPass {
   }
 
   private static class FlattenMultiExpressions extends AbstractRewriter {
+
+    @Override
+    public boolean shouldProcessMethod(Method method) {
+      // Do not rewrite multiexpressions in synthetic setter/getters because:
+      //   (1) jscompiler has a custom pass to inline these and expects them in a specific way, and
+      //   (2) there is no reason to normalize these as there will be no variable declarations in
+      //       them.
+      return method.getDescriptor().getOrigin() != MethodOrigin.SYNTHETIC_PROPERTY_SETTER
+          && method.getDescriptor().getOrigin() != MethodOrigin.SYNTHETIC_PROPERTY_GETTER;
+    }
+
     @Override
     public Statement rewriteExpressionStatement(ExpressionStatement statement) {
       if (statement.getExpression() instanceof MultiExpression) {

@@ -51,6 +51,12 @@
 [n = Native.field6;] => [n = window.top;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [new Native();] => [new Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [new Extern();] => [new window.Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
+[@JsProperty(name = "field")
+  public static int field1;] => [return (StaticJsMembers.$clinit(), StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: getter>"
+[@JsProperty(name = "field")
+  public static int field1;] => [(StaticJsMembers.$clinit(), StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = value);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: setter>"
+[@JsProperty public static int field2;] => [return (StaticJsMembers.$clinit(), StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: getter>"
+[@JsProperty public static int field2;] => [(StaticJsMembers.$clinit(), StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = value);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: setter>"
 [public class StaticJsMembers {
 
 ...  }

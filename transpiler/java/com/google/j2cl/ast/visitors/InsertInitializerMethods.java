@@ -15,27 +15,34 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.Field.Builder;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.InitializerBlock;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +52,7 @@ import java.util.List;
  * to static the static initializer where needed.
  */
 public class InsertInitializerMethods extends NormalizationPass {
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     // Add clinit calls to static methods and (real js) constructors.
@@ -56,7 +64,7 @@ public class InsertInitializerMethods extends NormalizationPass {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
-                      newClinitCallStatement(
+                      createClinitClassStatement(
                           method.getBody().getSourcePosition(),
                           method.getDescriptor().getEnclosingTypeDescriptor()))
                   .build();
@@ -74,7 +82,8 @@ public class InsertInitializerMethods extends NormalizationPass {
 
             if (hasClinitMethod(type.getSuperTypeDescriptor())) {
               superClinitCallStatements.add(
-                  newClinitCallStatement(type.getSourcePosition(), type.getSuperTypeDescriptor()));
+                  createClinitClassStatement(
+                      type.getSourcePosition(), type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(
                 type.getSourcePosition(),
@@ -88,19 +97,38 @@ public class InsertInitializerMethods extends NormalizationPass {
           }
         });
 
-    // Move field initialization to InitializerBlocks keeping them in source order.
     for (Type type : compilationUnit.getTypes()) {
+      // Synthesize static getters/setter to ensure class initialization is run on static field
+      // accesses
+      for (Field staticField : type.getStaticFields()) {
+        if (staticField.isCompileTimeConstant()) {
+          continue;
+        }
+        synthesizePropertyGetter(type, staticField);
+        synthesizePropertySetter(type, staticField);
+      }
+
+      // Move field initialization to InitializerBlocks keeping them in source order.
       List<Field> fieldDeclarations = new ArrayList<>();
       type.accept(
           new AbstractRewriter() {
             @Override
             public Member rewriteField(Field field) {
+              Expression declarationValue =
+                  field.isCompileTimeConstant() ? field.getInitializer() : null;
+              fieldDeclarations.add(
+                  Field.Builder.from(
+                          field.isStatic() && !field.isCompileTimeConstant()
+                              ? getBackingFieldDescriptor(field.getDescriptor())
+                              : field.getDescriptor())
+                      .setInitializer(declarationValue)
+                      .setSourcePosition(field.getSourcePosition())
+                      .build());
+
               if (!field.hasInitializer() || field.isCompileTimeConstant()) {
-                fieldDeclarations.add(field);
+                // Not initialized in <clinit> nor <init>.
                 return null;
               }
-
-              fieldDeclarations.add(Builder.from(field).setInitializer(null).build());
 
               // Replace the field declaration with an initializer block inplace to preserve
               // ordering.
@@ -119,10 +147,8 @@ public class InsertInitializerMethods extends NormalizationPass {
           });
       // Keep the fields for declaration purpose.
       type.addFields(fieldDeclarations);
-    }
 
-    // Replace field access within the class for accesses to the backing field.
-    for (Type type : compilationUnit.getTypes()) {
+      // Replace field access within the class for accesses to the backing field.
       type.accept(
           new AbstractRewriter() {
             @Override
@@ -136,11 +162,58 @@ public class InsertInitializerMethods extends NormalizationPass {
                 return fieldAccess;
               }
 
-              return FieldAccess.Builder.from(AstUtils.getBackingFieldDescriptor(fieldDescriptor))
-                  .build();
+              return FieldAccess.Builder.from(getBackingFieldDescriptor(fieldDescriptor)).build();
             }
           });
     }
+  }
+
+  public void synthesizePropertyGetter(Type type, Field field) {
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    type.addMethod(
+        Method.newBuilder()
+            .setSourcePosition(field.getSourcePosition())
+            .setMethodDescriptor(getGetterMethodDescriptor(fieldDescriptor))
+            .setJsDocDescription("A static field getter.")
+            .addStatements(
+                AstUtils.createReturnOrExpressionStatement(
+                    field.getSourcePosition(),
+                    MultiExpression.newBuilder()
+                        .addExpressions(
+                            createClinitCallExpression(
+                                fieldDescriptor.getEnclosingTypeDescriptor()),
+                            FieldAccess.Builder.from(fieldDescriptor).build())
+                        .build(),
+                    fieldDescriptor.getTypeDescriptor()))
+            .build());
+  }
+
+  public void synthesizePropertySetter(Type type, Field field) {
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    Variable parameter =
+        Variable.newBuilder()
+            .setName("value")
+            .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
+            .setParameter(true)
+            .setSourcePosition(field.getSourcePosition())
+            .build();
+    type.addMethod(
+        Method.newBuilder()
+            .setSourcePosition(field.getSourcePosition())
+            .setMethodDescriptor(getSetterMethodDescriptor(fieldDescriptor))
+            .setParameters(parameter)
+            .setJsDocDescription("A static field setter.")
+            .addStatements(
+                MultiExpression.newBuilder()
+                    .addExpressions(
+                        createClinitCallExpression(fieldDescriptor.getEnclosingTypeDescriptor()),
+                        BinaryExpression.Builder.asAssignmentTo(
+                                FieldAccess.Builder.from(fieldDescriptor).build())
+                            .setRightOperand(parameter.getReference())
+                            .build())
+                    .build()
+                    .makeStatement(field.getSourcePosition()))
+            .build());
   }
 
   private static Block createInitializerBlockFromFieldInitializer(Field field) {
@@ -149,9 +222,7 @@ public class InsertInitializerMethods extends NormalizationPass {
     Block block =
         new Block(
             sourcePosition,
-            BinaryExpression.newBuilder()
-                .setOperator(BinaryOperator.ASSIGN)
-                .setLeftOperand(
+            BinaryExpression.Builder.asAssignmentTo(
                     FieldAccess.Builder.from(fieldDescriptor)
                         .setQualifier(
                             fieldDescriptor.isStatic()
@@ -159,17 +230,20 @@ public class InsertInitializerMethods extends NormalizationPass {
                                 : new ThisReference(fieldDescriptor.getEnclosingTypeDescriptor()))
                         .build())
                 .setRightOperand(field.getInitializer())
-                .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
                 .build()
                 .makeStatement(sourcePosition));
     block.setSourcePosition(sourcePosition);
     return block;
   }
 
-  private static Statement newClinitCallStatement(
+  private static Statement createClinitClassStatement(
       SourcePosition sourcePosition, TypeDescriptor typeDescriptor) {
+    return createClinitCallExpression(typeDescriptor).makeStatement(sourcePosition);
+  }
+
+  private static Expression createClinitCallExpression(TypeDescriptor typeDescriptor) {
     MethodDescriptor clinitMethodDescriptor = AstUtils.getClinitMethodDescriptor(typeDescriptor);
-    return MethodCall.Builder.from(clinitMethodDescriptor).build().makeStatement(sourcePosition);
+    return MethodCall.Builder.from(clinitMethodDescriptor).build();
   }
 
   private void addRequiredSuperInterfacesClinitCalls(
@@ -185,7 +259,7 @@ public class InsertInitializerMethods extends NormalizationPass {
         // The interface declares a default method; invoke its clinit which will initialize
         // the interface and all it superinterfaces that declare default methods.
         superClinitCallStatements.add(
-            newClinitCallStatement(sourcePosition, interfaceTypeDescriptor));
+            createClinitClassStatement(sourcePosition, interfaceTypeDescriptor));
         continue;
       }
 
@@ -209,7 +283,7 @@ public class InsertInitializerMethods extends NormalizationPass {
     // from the clinit itself.
 
     if (methodDescriptor.getEnclosingTypeDescriptor().isEnum()
-        && methodDescriptor.getMethodOrigin() == MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
+        && methodDescriptor.getOrigin() == MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
       // These are the classes corresponding to enums excluding the anonymous enum subclasses.
       return false;
     }
@@ -221,5 +295,43 @@ public class InsertInitializerMethods extends NormalizationPass {
     return typeDescriptor != null
         && !typeDescriptor.isNative()
         && !typeDescriptor.isJsFunctionInterface();
+  }
+
+  /** Returns the field descriptor for a the field backing the static setter/getters. */
+  private static FieldDescriptor getBackingFieldDescriptor(FieldDescriptor fieldDescriptor) {
+    checkArgument(
+        fieldDescriptor.isStatic()
+            && fieldDescriptor.getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD);
+    return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setJsInfo(JsInfo.NONE)
+        .setOrigin(FieldOrigin.SYNTHETIC_BACKING_FIELD)
+        .build();
+  }
+
+  private static MethodDescriptor getSetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
+    checkState(fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant());
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
+        .setName(fieldDescriptor.getName())
+        .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
+        .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
+        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+        .setVisibility(fieldDescriptor.getVisibility())
+        .setJsInfo(fieldDescriptor.isJsProperty() ? JsInfo.RAW : JsInfo.NONE)
+        .setStatic(true)
+        .build();
+  }
+
+  private static MethodDescriptor getGetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
+    checkState(fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant());
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
+        .setName(fieldDescriptor.getName())
+        .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_GETTER)
+        .setReturnTypeDescriptor(fieldDescriptor.getTypeDescriptor())
+        .setVisibility(fieldDescriptor.getVisibility())
+        .setJsInfo(fieldDescriptor.isJsProperty() ? JsInfo.RAW : JsInfo.NONE)
+        .setStatic(true)
+        .build();
   }
 }

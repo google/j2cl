@@ -46,26 +46,6 @@ class StaticFieldInitializer extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof StaticFieldInitializer;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, StaticFieldInitializer);
-  }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -115,6 +95,26 @@ class StaticFieldInitializer extends java_lang_Object {
      StaticFieldInitializer
          .$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticFieldInitializer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticFieldInitializer);
   }
 
   /**

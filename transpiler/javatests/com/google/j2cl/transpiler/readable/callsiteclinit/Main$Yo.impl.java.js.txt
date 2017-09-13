@@ -46,26 +46,6 @@ class Yo extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof Yo;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Yo);
-  }
-
-  /**
    * A static field getter.
    * @return {?string}
    * @public
@@ -87,6 +67,26 @@ class Yo extends java_lang_Object {
     (Yo.$clinit(),
      Yo.$f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Yo;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Yo);
   }
 
   /**

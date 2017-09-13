@@ -26,6 +26,9 @@ import javax.annotation.Nullable;
 public abstract class MemberDescriptor extends Node
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
+  /** Represents the origin of a specific member */
+  public interface Origin {}
+
   public abstract JsInfo getJsInfo();
 
   public abstract TypeDescriptor getEnclosingTypeDescriptor();
@@ -64,6 +67,8 @@ public abstract class MemberDescriptor extends Node
   public abstract boolean isPolymorphic();
 
   public abstract boolean isSynthetic();
+
+  public abstract Origin getOrigin();
 
   public boolean isMethod() {
     return false;

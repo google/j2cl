@@ -41,22 +41,26 @@ public class ManglingNameUtils {
     return rawTypeDescriptor.getQualifiedSourceName().replace('.', '_');
   }
 
-  /**
-   * Returns the mangled name of a method.
-   */
+  /** Returns the mangled name of a method. */
   public static String getMangledName(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isConstructor()) {
       return "constructor";
     }
-    if (methodDescriptor.isJsPropertyGetter()) {
-      return "get" + " " + methodDescriptor.getSimpleJsName();
+
+    if (methodDescriptor.isPropertyGetter()) {
+      return "get " + getPropertyMangledName(methodDescriptor);
     }
-    if (methodDescriptor.isJsPropertySetter()) {
-      return "set" + " " + methodDescriptor.getSimpleJsName();
+
+    if (methodDescriptor.isPropertySetter()) {
+      return "set " + getPropertyMangledName(methodDescriptor);
     }
+
     if (methodDescriptor.isJsMethod()) {
       return methodDescriptor.getSimpleJsName();
     }
+
+    // All special cases have been handled. Go ahead and construct the mangled name for a plain
+    // Java method.
     String suffix;
     switch (methodDescriptor.getVisibility()) {
       case PRIVATE:
@@ -89,17 +93,23 @@ public class ManglingNameUtils {
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldDescriptor fieldDescriptor) {
-    if (fieldDescriptor.isJsProperty()) {
-      return fieldDescriptor.getSimpleJsName();
+    return getPropertyMangledName(fieldDescriptor);
+  }
+
+  private static String getPropertyMangledName(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.isJsMember()) {
+      return memberDescriptor.getSimpleJsName();
     }
 
-    String prefix =
-        fieldDescriptor.getFieldOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD ? "$" : "";
+    // TODO(rluble): make naming consistent. Follow the logic for methods where if the field
+    // starts with "$" the prefix is omitted. For now maintain the current mangling scheme.
+    String prefix = memberDescriptor.getOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD ? "$" : "";
 
-    checkArgument(!fieldDescriptor.getEnclosingTypeDescriptor().isArray());
-    String name = fieldDescriptor.getName();
-    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingTypeDescriptor());
-    String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
+    TypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
+    checkArgument(!enclosingTypeDescriptor.isArray());
+    String name = memberDescriptor.getName();
+    String typeMangledName = getMangledName(enclosingTypeDescriptor);
+    String privateSuffix = memberDescriptor.getVisibility().isPrivate() ? "_" : "";
     return J2clUtils.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 

@@ -97,31 +97,11 @@ class StaticJsMembers extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof StaticJsMembers;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, StaticJsMembers);
-  }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
    */
-  static get field() {
+  static get field1() {
     return (
         StaticJsMembers.$clinit(),
         StaticJsMembers
@@ -134,7 +114,7 @@ class StaticJsMembers extends java_lang_Object {
    * @return {void}
    * @public
    */
-  static set field(value) {
+  static set field1(value) {
     (StaticJsMembers.$clinit(),
      StaticJsMembers
          .$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
@@ -164,6 +144,26 @@ class StaticJsMembers extends java_lang_Object {
      StaticJsMembers
          .$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticJsMembers;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticJsMembers);
   }
 
   /**

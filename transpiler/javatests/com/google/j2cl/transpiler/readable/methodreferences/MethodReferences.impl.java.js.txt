@@ -201,26 +201,6 @@ class MethodReferences extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof MethodReferences;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, MethodReferences);
-  }
-
-  /**
    * A static field getter.
    * @return {Producer<?string>}
    * @public
@@ -244,6 +224,26 @@ class MethodReferences extends java_lang_Object {
      MethodReferences
          .$f_staticStringProducer__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof MethodReferences;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MethodReferences);
   }
 
   /**

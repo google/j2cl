@@ -60,26 +60,6 @@ class LocalClassInStaticContext extends java_lang_Object {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof LocalClassInStaticContext;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LocalClassInStaticContext);
-  }
-
-  /**
    * A static field getter.
    * @return {*}
    * @public
@@ -103,6 +83,26 @@ class LocalClassInStaticContext extends java_lang_Object {
      LocalClassInStaticContext
          .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
          value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LocalClassInStaticContext;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LocalClassInStaticContext);
   }
 
   /**

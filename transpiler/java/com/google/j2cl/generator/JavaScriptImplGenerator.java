@@ -18,7 +18,6 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Expression;
@@ -34,7 +33,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.Collection;
@@ -61,12 +59,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
+  private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.isStatic() ? "static " : "";
+  }
+
   /** Emits the method header including (static) (getter/setter) methodName(parametersList). */
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
-    String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
-    sourceBuilder.append(Joiner.on(" ").skipNulls().join(staticQualifier, methodName));
+    sourceBuilder.append(
+        getMethodQualifiers(methodDescriptor) + ManglingNameUtils.getMangledName(methodDescriptor));
     sourceBuilder.append("(");
     String separator = "";
     Variable varargsParameter = method.getJsVarargsParameter();
@@ -240,7 +241,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderIsInstanceMethod();
     renderIsAssignableFromMethod();
     renderCopyMethod();
-    renderStaticFieldGettersSetters();
     renderClinit();
     renderInitMethod();
     environment.setEnclosingTypeDescriptor(null);
@@ -503,62 +503,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private void renderStaticFieldGettersSetters() {
-    for (Field staticField : type.getStaticFields()) {
-      if (staticField.isCompileTimeConstant()) {
-        continue;
-      }
-      Visibility staticFieldVisibility = staticField.getDescriptor().getVisibility();
-      String staticFieldType = getJsDocName(staticField.getDescriptor().getTypeDescriptor());
-      String indirectStaticFieldName =
-          ManglingNameUtils.getMangledName(staticField.getDescriptor());
-      String directStaticFieldAccess =
-          ManglingNameUtils.getMangledName(
-              AstUtils.getBackingFieldDescriptor(staticField.getDescriptor()));
-
-      sourceBuilder.appendLines(
-          "/**",
-          " * A static field getter.",
-          " * @return {" + staticFieldType + "}",
-          " * @" + staticFieldVisibility.jsText,
-          " */",
-          "static get " + indirectStaticFieldName + "() ");
-      sourceBuilder.openBrace();
-      sourceBuilder.newLine();
-      sourceBuilder.append(
-          "return ("
-              + className
-              + ".$clinit(), "
-              + className
-              + "."
-              + directStaticFieldAccess
-              + ");");
-      sourceBuilder.closeBrace();
-      sourceBuilder.newLines(2);
-
-      sourceBuilder.appendLines(
-          "/**",
-          " * A static field setter.",
-          " * @param {" + staticFieldType + "} value",
-          " * @return {void}",
-          " * @" + staticFieldVisibility.jsText,
-          " */",
-          "static set " + indirectStaticFieldName + "(value) ");
-      sourceBuilder.openBrace();
-      sourceBuilder.newLine();
-      sourceBuilder.append(
-          "("
-              + className
-              + ".$clinit(), "
-              + className
-              + "."
-              + directStaticFieldAccess
-              + " = value);");
-      sourceBuilder.closeBrace();
-      sourceBuilder.newLines(2);
-    }
-  }
-
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClinit() {
     renderInitializerMethodHeader(
@@ -624,31 +568,27 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Field staticField : type.getStaticFields()) {
       String jsDocType =
           JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
+
       if (staticField.isCompileTimeConstant()) {
-        String publicFieldAccess = ManglingNameUtils.getMangledName(staticField.getDescriptor());
-        sourceBuilder.appendLines(
-            "/**",
-            " * @public {" + jsDocType + "}",
-            " * @const",
-            " */",
-            className + "." + publicFieldAccess + " = ");
-        renderExpression(GeneratorUtils.getInitialValue(staticField));
-        sourceBuilder.append(";");
+        sourceBuilder.appendLines("/**", " * @public {" + jsDocType + "}", " * @const", " */");
       } else {
-        String privateFieldAccess =
-            ManglingNameUtils.getMangledName(
-                AstUtils.getBackingFieldDescriptor(staticField.getDescriptor()));
-        sourceBuilder.appendLines(
-            "/**",
-            " * @private {" + jsDocType + "}",
-            " */",
-            className + "." + privateFieldAccess + " = ");
-        renderExpression(GeneratorUtils.getInitialValue(staticField));
-        sourceBuilder.append(";");
+        sourceBuilder.appendLines("/**", " * @private {" + jsDocType + "}", " */");
       }
+
+      sourceBuilder.newLine();
+      String fieldName = ManglingNameUtils.getMangledName(staticField.getDescriptor());
+      sourceBuilder.append(className + "." + fieldName + " = ");
+      renderExpression(getInitialValue(staticField));
+      sourceBuilder.append(";");
       // emit 2 empty lines
       sourceBuilder.newLines(3);
     }
+  }
+
+  private static Expression getInitialValue(Field field) {
+    return field.getInitializer() != null
+        ? field.getInitializer()
+        : TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
   /**
