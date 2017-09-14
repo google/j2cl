@@ -23,7 +23,9 @@ public class Foo {
     return "me";
   }
 
-  @JsType(isNative = true, name = "Foo", namespace = "zoo")
+  // Refer to the implementation "zoo.Foo$impl" instead to avoid creating an "invalid" circular
+  // reference.
+  @JsType(isNative = true, name = "Foo$impl", namespace = "zoo")
   public static class ZooFoo {
     public static native String getMe();
   }
