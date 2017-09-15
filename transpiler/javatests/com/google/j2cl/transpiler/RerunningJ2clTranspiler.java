@@ -107,6 +107,11 @@ public class RerunningJ2clTranspiler {
         System.exit(-2);
       }
     }
+
+    if (!firstCompileSuccess) {
+      System.err.println("Compile failed");
+      System.exit(-3);
+    }
   }
 
   private static boolean compile(CompilerRunner compilerRunner) {

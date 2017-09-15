@@ -42,6 +42,7 @@ j2cl_transpile(
     deps = [
         "//third_party/java/gwt:gwt-javaemul-internal-annotations",
         "//third_party/java/gwt:gwt-jsinterop-annotations",
+        "//third_party/java/jsr305_annotations",
     ],
 )
 
