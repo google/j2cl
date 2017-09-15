@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.common;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import com.google.auto.value.AutoValue;
 import javax.annotation.Nullable;
 
@@ -35,9 +33,6 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public abstract @Nullable String getName();
 
-  public static final SourcePosition ABSENT =
-      newBuilder().setFilePath("ABSENT").setStartPosition(-1, -1).setEndPosition(-1, -1).build();
-
   @Override
   public int compareTo(SourcePosition o) {
     if (getFilePath() != null) {
@@ -50,10 +45,6 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
       return getStartFilePosition().getColumn() - o.getStartFilePosition().getColumn();
     }
     return getStartFilePosition().getLine() - o.getStartFilePosition().getLine();
-  }
-
-  public boolean isAbsent() {
-    return this == ABSENT;
   }
 
   abstract Builder toBuilder();
@@ -83,7 +74,6 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     }
 
     public static Builder from(SourcePosition sourcePosition) {
-      checkArgument(!sourcePosition.isAbsent());
       return sourcePosition.toBuilder();
     }
 

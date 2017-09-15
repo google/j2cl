@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
@@ -449,9 +450,11 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformVariable(Variable variable) {
-        sourceBuilder.emitWithOptionalNamedMapping(
-            variable.getSourcePosition(),
+        sourceBuilder.emitWithMapping(
+            // Only map variables if they are named.
+            AstUtils.emptySourcePositionIfNotNamed(variable.getSourcePosition()),
             () -> sourceBuilder.append(environment.aliasForVariable(variable)));
+
         return null;
       }
 

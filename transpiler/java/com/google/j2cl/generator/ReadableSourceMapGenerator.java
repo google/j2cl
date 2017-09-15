@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
@@ -54,8 +55,8 @@ public class ReadableSourceMapGenerator {
       List<String> javaScriptSourceLines =
           Arrays.asList(javaScriptImplementationFileContents.split("\n"));
       for (Entry<SourcePosition, SourcePosition> entry : entries) {
-        SourcePosition javaSourcePosition = entry.getValue();
-        SourcePosition javaScriptSourcePosition = entry.getKey();
+        SourcePosition javaSourcePosition = checkNotNull(entry.getValue());
+        SourcePosition javaScriptSourcePosition = checkNotNull(entry.getKey());
 
         boolean hasName = javaSourcePosition.getName() != null;
 
@@ -79,9 +80,6 @@ public class ReadableSourceMapGenerator {
       SourcePosition sourcePosition, List<String> lines, boolean condense) {
     int startLine = sourcePosition.getStartFilePosition().getLine();
     int endLine = sourcePosition.getEndFilePosition().getLine();
-    if (sourcePosition.isAbsent()) {
-      return "[ABSENT]";
-    }
     String fragment = lines.get(startLine);
     int endColumn = sourcePosition.getEndFilePosition().getColumn();
     int startColumn = sourcePosition.getStartFilePosition().getColumn();

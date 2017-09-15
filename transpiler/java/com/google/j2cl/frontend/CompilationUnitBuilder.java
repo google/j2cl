@@ -101,6 +101,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -1100,7 +1101,6 @@ public class CompilationUnitBuilder {
               .setFinal(true)
               .setName("$$qualifier" + qualifierCounter++)
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(qualifier.resolveTypeBinding()))
-              .setSourcePosition(getSourcePosition(expression))
               .build();
       // Store the declaring type in the local scope so that variable declaration scope points to
       // the right type when the functional expression is effectively constructed.
@@ -1381,8 +1381,8 @@ public class CompilationUnitBuilder {
               enclosingType.getTypeDeclaration(),
               classComponents,
               functionalInterfaceTypeBinding);
-      Type lambdaType =
-          new Type(getSourcePosition(expression), Visibility.PRIVATE, lambdaTypeDeclaration);
+      SourcePosition sourcePosition = getSourcePosition(expression);
+      Type lambdaType = new Type(sourcePosition, Visibility.PRIVATE, lambdaTypeDeclaration);
       pushType(lambdaType);
       FunctionExpression functionExpression = functionExpressionSupplier.get();
 
@@ -1406,7 +1406,7 @@ public class CompilationUnitBuilder {
       // Construct lambda method and add it to lambda inner class.
       Method lambdaMethod =
           createLambdaImplementationMethod(
-              getSourcePosition(expression),
+              sourcePosition,
               lambdaDispatchMethodDescriptor,
               functionExpression,
               !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown()
@@ -1423,14 +1423,17 @@ public class CompilationUnitBuilder {
       // Add fields for captured local variables.
       for (Variable capturedVariable :
           capturesByTypeName.get(lambdaTypeDeclaration.getQualifiedSourceName())) {
+        Optional<SourcePosition> variableSourcePosition = capturedVariable.getSourcePosition();
         lambdaType.addField(
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
                 .setCapturedVariable(capturedVariable)
                 .setSourcePosition(
-                    SourcePosition.Builder.from(capturedVariable.getSourcePosition())
-                        .setName(null)
-                        .build())
+                    variableSourcePosition.isPresent()
+                        ? SourcePosition.Builder.from(variableSourcePosition.get())
+                            .setName(null)
+                            .build()
+                        : sourcePosition)
                 .build());
       }
 
@@ -2045,9 +2048,10 @@ public class CompilationUnitBuilder {
 
     private Variable createVariable(VariableDeclaration variableDeclaration) {
       IVariableBinding variableBinding = variableDeclaration.resolveBinding();
-      Variable variable = JdtUtils.createVariable(variableBinding);
-      variable.setSourcePosition(
-          getSourcePosition(variable.getName(), variableDeclaration.getName()));
+      Variable variable =
+          JdtUtils.createVariable(
+              getSourcePosition(variableBinding.getName(), variableDeclaration.getName()),
+              variableBinding);
       variableByJdtBinding.put(variableBinding, variable);
       recordEnclosingType(variable, currentType);
       return variable;

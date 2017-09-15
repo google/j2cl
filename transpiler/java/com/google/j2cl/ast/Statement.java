@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -38,8 +37,7 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
 
   @Override
   public void setSourcePosition(SourcePosition sourcePosition) {
-    checkArgument(!checkNotNull(sourcePosition).isAbsent());
-    this.sourcePosition = sourcePosition;
+    this.sourcePosition = checkNotNull(sourcePosition);
   }
 
   @Override

@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
@@ -38,9 +38,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public boolean enterFunctionExpression(FunctionExpression functionExpression) {
-            SourcePosition sourcePosition = functionExpression.getSourcePosition();
-
-            checkArgument(!sourcePosition.isAbsent());
+            SourcePosition sourcePosition = checkNotNull(functionExpression.getSourcePosition());
 
             MemberDescriptor memberDescriptor = getCurrentMember().getDescriptor();
 

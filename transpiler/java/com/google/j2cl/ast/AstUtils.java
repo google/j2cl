@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -1241,4 +1242,11 @@ public class AstUtils {
     return methodBuilder.build();
   }
 
+  /** Returns an Optional.empty() if optionalSourcePosition is empty or unnamed */
+  public static Optional<SourcePosition> emptySourcePositionIfNotNamed(
+      Optional<SourcePosition> optionalSourcePosition) {
+    return optionalSourcePosition.flatMap(
+        sourcePosition ->
+            sourcePosition.getName() == null ? Optional.empty() : Optional.of(sourcePosition));
+  }
 }

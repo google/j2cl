@@ -20,20 +20,20 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
+import java.util.Optional;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node
-    implements Cloneable<Variable>, HasSourcePosition, HasUnusableByJsSuppression {
+public class Variable extends Node implements Cloneable<Variable>, HasUnusableByJsSuppression {
   private final String name;
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
-  private SourcePosition sourcePosition;
+  private final Optional<SourcePosition> sourcePosition;
   private final boolean isUnusableByJsSuppressed;
 
   private Variable(
-      SourcePosition sourcePosition,
+      Optional<SourcePosition> sourcePosition,
       String name,
       TypeDescriptor typeDescriptor,
       boolean isFinal,
@@ -90,14 +90,8 @@ public class Variable extends Node
     return new Builder();
   }
 
-  @Override
-  public SourcePosition getSourcePosition() {
-    return sourcePosition;
-  }
-
-  @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
+  public Optional<SourcePosition> getSourcePosition() {
+    return checkNotNull(sourcePosition);
   }
 
   /** Builder for Variable. */
@@ -107,7 +101,7 @@ public class Variable extends Node
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
     private boolean isParameter;
-    private SourcePosition sourcePosition = SourcePosition.ABSENT;
+    private Optional<SourcePosition> sourcePosition = Optional.empty();
     private boolean isUnusableByJsSuppressed = false;
 
     public static Builder from(Variable variable) {
@@ -142,7 +136,7 @@ public class Variable extends Node
     }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
+      this.sourcePosition = Optional.of(sourcePosition);
       return this;
     }
 

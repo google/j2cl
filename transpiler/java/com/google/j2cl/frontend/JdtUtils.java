@@ -41,6 +41,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -122,7 +123,7 @@ public class JdtUtils {
         .build();
   }
 
-  static Variable createVariable(IVariableBinding variableBinding) {
+  static Variable createVariable(SourcePosition sourcePosition, IVariableBinding variableBinding) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
         variableBinding.isParameter()
@@ -139,6 +140,7 @@ public class JdtUtils {
         .setFinal(isFinal)
         .setParameter(isParameter)
         .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
+        .setSourcePosition(sourcePosition)
         .build();
   }
 

@@ -195,7 +195,6 @@ public class InsertInitializerMethods extends NormalizationPass {
             .setName("value")
             .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
             .setParameter(true)
-            .setSourcePosition(field.getSourcePosition())
             .build();
     type.addMethod(
         Method.newBuilder()

@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Strings;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
@@ -37,16 +39,16 @@ class SourceBuilder {
       new TreeMap<>();
   private boolean finished = false;
 
-  public void emitWithOptionalNamedMapping(
-      SourcePosition javaSourcePosition, Runnable codeEmitter) {
-    if (javaSourcePosition.getName() != null) {
-      emitWithMapping(javaSourcePosition, codeEmitter);
-    } else {
+  public void emitWithMapping(Optional<SourcePosition> javaSourcePosition, Runnable codeEmitter) {
+    if (!javaSourcePosition.isPresent()) {
       codeEmitter.run();
+    } else {
+      emitWithMapping(javaSourcePosition.get(), codeEmitter);
     }
   }
 
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
+    checkNotNull(javaSourcePosition);
     FilePosition startPosition = getCurrentPosition();
     codeEmitter.run();
     javaSourceInfoByOutputSourceInfo.put(
@@ -67,7 +69,6 @@ class SourceBuilder {
     if (sb.length() != 0) {
       emitWithMapping(
           SourcePosition.newBuilder()
-              .setFilePath("EOF")
               .setStartPosition(0, 0)
               .setEndPosition(0, 0)
               .build(),

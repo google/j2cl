@@ -76,8 +76,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       if (parameter == varargsParameter) {
         sourceBuilder.append("...");
       }
-      sourceBuilder.emitWithOptionalNamedMapping(
-          parameter.getSourcePosition(),
+      sourceBuilder.emitWithMapping(
+          // Only map parameters if they are named.
+          AstUtils.emptySourcePositionIfNotNamed(parameter.getSourcePosition()),
           () -> sourceBuilder.append(environment.aliasForVariable(parameter)));
       separator = ", ";
     }
