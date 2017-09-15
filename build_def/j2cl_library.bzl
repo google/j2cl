@@ -62,7 +62,7 @@ def _merge_zips(srczips, outzip, tags, testonly):
       outs=[":" + outzip],
       cmd="\n".join([
           # Unzip the srczips into a temp dir.
-          "TMPDIR=$$(mktemp -d $@.tmp.XXXXXX)",
+          "TMPDIR=$$(mktemp -d)",
           "for src in $(SRCS); do",
           # unzip errors out for empty zip so we ignore that with || true
           "  unzip -q $$src -d $$TMPDIR 2> /dev/null || true",
@@ -192,7 +192,7 @@ def j2cl_library(name,
         outs=[js_sources_from_apt, native_js_sources_from_apt],
         restricted_to=["//buildenv/j2cl:j2cl_compilation"],
         cmd="\n".join([
-            "TMPDIR=$$(mktemp -d tmp.XXXXXX)",
+            "TMPDIR=$$(mktemp -d)",
             "unzip -q $(SRCS) -x \"*.class\" -d $$TMPDIR",
             "cwd=$$PWD",
             "cd $$TMPDIR",
