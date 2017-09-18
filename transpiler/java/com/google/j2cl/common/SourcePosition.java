@@ -16,6 +16,7 @@
 package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import javax.annotation.Nullable;
 
 /**
@@ -45,6 +46,13 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
       return getStartFilePosition().getColumn() - o.getStartFilePosition().getColumn();
     }
     return getStartFilePosition().getLine() - o.getStartFilePosition().getLine();
+  }
+
+  @Memoized
+  @Nullable
+  public String getFileName() {
+    String filePath = getFilePath();
+    return filePath == null ? filePath : getFileName(filePath);
   }
 
   abstract Builder toBuilder();
@@ -82,5 +90,11 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     public SourcePosition build() {
       return autoBuild();
     }
+  }
+
+  /** Returns the file name portion of a path. */
+  public static String getFileName(String filePath) {
+    String[] pathComponents = filePath.split(J2clUtils.FILEPATH_SEPARATOR);
+    return pathComponents[pathComponents.length - 1];
   }
 }

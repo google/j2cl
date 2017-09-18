@@ -19,11 +19,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.io.Files;
+import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +37,13 @@ public class ReadableSourceMapGenerator {
   /** The source location of the ast node to print, input or output. */
   public static String generate(
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
-      Path javaSourceFile,
-      String javaScriptImplementationFileContents) {
+      String javaScriptImplementationFileContents,
+      NativeJavaScriptFile nativeJavaScriptFile,
+      String j2clUnitFilePath) {
+
+    Map<String, List<String>> sourceLinesByFileName =
+        buildSourceLinesByFileName(nativeJavaScriptFile, j2clUnitFilePath);
+
     StringBuilder sb = new StringBuilder();
 
     List<Entry<SourcePosition, SourcePosition>> entries =
@@ -49,31 +54,45 @@ public class ReadableSourceMapGenerator {
     checkState(eofMarker.getEndFilePosition().equals(eofMarker.getStartFilePosition()));
     entries.remove(entries.size() - 1);
 
-    try {
-      List<String> javaSourceLines =
-          Files.readLines(javaSourceFile.toFile(), Charset.defaultCharset());
-      List<String> javaScriptSourceLines =
-          Arrays.asList(javaScriptImplementationFileContents.split("\n"));
-      for (Entry<SourcePosition, SourcePosition> entry : entries) {
-        SourcePosition javaSourcePosition = checkNotNull(entry.getValue());
-        SourcePosition javaScriptSourcePosition = checkNotNull(entry.getKey());
+    List<String> javaScriptSourceLines =
+        Arrays.asList(javaScriptImplementationFileContents.split("\n"));
+    for (Entry<SourcePosition, SourcePosition> entry : entries) {
+      SourcePosition javaSourcePosition = checkNotNull(entry.getValue());
+      SourcePosition javaScriptSourcePosition = checkNotNull(entry.getKey());
+      List<String> javaSourceLines = sourceLinesByFileName.get(javaSourcePosition.getFileName());
 
-        boolean hasName = javaSourcePosition.getName() != null;
+      boolean hasName = javaSourcePosition.getName() != null;
 
-        sb.append(extract(javaSourcePosition, javaSourceLines, hasName))
-            .append(" => ")
-            .append(extract(javaScriptSourcePosition, javaScriptSourceLines, hasName).trim());
+      sb.append(extract(javaSourcePosition, javaSourceLines, hasName))
+          .append(" => ")
+          .append(extract(javaScriptSourcePosition, javaScriptSourceLines, hasName).trim());
 
-        if (hasName) {
-          sb.append(" \"").append(javaSourcePosition.getName()).append("\"");
-        }
-
-        sb.append("\n");
+      if (hasName) {
+        sb.append(" \"").append(javaSourcePosition.getName()).append("\"");
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+
+      sb.append("\n");
     }
     return sb.toString();
+  }
+
+  private static Map<String, List<String>> buildSourceLinesByFileName(
+      NativeJavaScriptFile nativeJavaScriptFile, String j2clUnitFilePath) {
+    ImmutableMap.Builder<String, List<String>> contentsByFileNameBuilder = ImmutableMap.builder();
+
+    if (nativeJavaScriptFile != null) {
+      String nativeJavaScriptFileFileName = nativeJavaScriptFile.getRelativeFilePath();
+      contentsByFileNameBuilder.put(
+          SourcePosition.getFileName(nativeJavaScriptFileFileName),
+          Splitter.on('\n').splitToList(nativeJavaScriptFile.getContent()));
+    }
+    try {
+      contentsByFileNameBuilder.put(
+          SourcePosition.getFileName(j2clUnitFilePath),
+          java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
+    } catch (IOException expected) {
+    }
+    return contentsByFileNameBuilder.build();
   }
 
   private static String extract(
@@ -86,7 +105,6 @@ public class ReadableSourceMapGenerator {
     if (endLine != startLine || endColumn == -1) {
       StringBuilder content =
           new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
-      // TODO!!!!! revert?
       if (condense && startLine + 3 < endLine) {
         content
             .append("\n")

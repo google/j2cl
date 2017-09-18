@@ -48,6 +48,13 @@ public class NativeJavaScriptFile {
     this.zipPath = zipPath;
   }
 
+  /** Returns the path for the native file relative to the root. */
+  public String getRelativeFilePath() {
+    // Replace .native.js by .native_js so that the file is not seen as a JavaScript source
+    // by jscompiler.
+    return getPathWithoutExtension() + ".native_js";
+  }
+
   public String getPathWithoutExtension() {
     return relativePath.substring(0, relativePath.lastIndexOf(NATIVE_EXTENSION));
   }
@@ -56,14 +63,11 @@ public class NativeJavaScriptFile {
     return content;
   }
 
-  public String getZipPath() {
-    return zipPath;
-  }
-
   @Override
   public String toString() {
     return zipPath + "!/" + relativePath;
   }
+
   /**
    * Can only set to used.
    */

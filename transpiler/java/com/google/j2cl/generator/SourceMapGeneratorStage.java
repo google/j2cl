@@ -20,11 +20,8 @@ import com.google.debugging.sourcemap.SourceMapFormat;
 import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -32,53 +29,14 @@ import java.util.Map.Entry;
  * Generates the source maps.
  */
 public class SourceMapGeneratorStage {
-  public static final String SOURCE_MAP_SUFFIX = ".js.map";
 
-  private final Problems problems;
-  private final Path outputPath;
-  private final String javaSourceFile;
-  private final String javaScriptImplementationFileContents;
-  private final boolean generateReadableSourceMaps;
-  private final String compilationUnitSourceFileName;
-
-  public SourceMapGeneratorStage(
-      String compilationUnitSourceFileName,
-      Path outputPath,
-      String javaSourceFile,
-      String javaScriptImplementationFileContents,
-      Problems problems,
-      boolean generateReadableSourceMaps) {
-    this.outputPath = outputPath;
-    this.javaSourceFile = javaSourceFile;
-    this.problems = problems;
-    this.generateReadableSourceMaps = generateReadableSourceMaps;
-    this.compilationUnitSourceFileName = compilationUnitSourceFileName;
-    this.javaScriptImplementationFileContents = javaScriptImplementationFileContents;
+  public static String generateSourceMaps(
+      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
+      throws IOException {
+    return renderSourceMapToString(type, javaSourcePositionByOutputSourcePosition);
   }
 
-  public void generateSourceMaps(
-      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
-    try {
-      String output =
-          generateReadableSourceMaps
-              ? ReadableSourceMapGenerator.generate(
-                  javaSourcePositionByOutputSourcePosition,
-                  Paths.get(javaSourceFile),
-                  javaScriptImplementationFileContents)
-              : renderSourceMapToString(type, javaSourcePositionByOutputSourcePosition);
-
-      if (output.isEmpty() && generateReadableSourceMaps) {
-        return;
-      }
-      Path absolutePathForSourceMap =
-          outputPath.resolve(GeneratorUtils.getRelativePath(type) + SOURCE_MAP_SUFFIX);
-      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, problems);
-    } catch (IOException e) {
-      problems.error("Could not generate source maps for %s: %s", javaSourceFile, e.getMessage());
-    }
-  }
-
-  private String renderSourceMapToString(
+  private static String renderSourceMapToString(
       Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
       throws IOException {
     SourceMapGenerator sourceMapGenerator =
@@ -89,7 +47,7 @@ public class SourceMapGeneratorStage {
       SourcePosition javaScriptSourcePosition = entry.getKey();
 
       sourceMapGenerator.addMapping(
-          compilationUnitSourceFileName,
+          javaSourcePosition.getFileName(),
           javaSourcePosition.getName(),
           toFilePosition(javaSourcePosition.getStartFilePosition()),
           toFilePosition(javaScriptSourcePosition.getStartFilePosition()),
@@ -107,7 +65,7 @@ public class SourceMapGeneratorStage {
    * @param j2clFilePosition
    * @return JsCompiler sourcemap File Position
    */
-  private FilePosition toFilePosition(com.google.j2cl.common.FilePosition j2clFilePosition) {
+  private static FilePosition toFilePosition(com.google.j2cl.common.FilePosition j2clFilePosition) {
     return new FilePosition(j2clFilePosition.getLine(), j2clFilePosition.getColumn());
   }
 }

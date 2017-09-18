@@ -23,6 +23,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,7 +95,7 @@ public class OutputGeneratorStage {
         }
 
         if (matchingNativeFile != null) {
-          jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
+          jsImplGenerator.setNativeSource(matchingNativeFile);
           matchingNativeFile.setUsed();
         }
 
@@ -109,8 +110,7 @@ public class OutputGeneratorStage {
 
         timingReport.startSample("Render impl");
         jsImplGenerator.setRelativeSourceMapLocation(
-            type.getDeclaration().getSimpleBinaryName()
-                + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
+            type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
             outputPath.resolve(GeneratorUtils.getRelativePath(type) + jsImplGenerator.getSuffix());
@@ -133,7 +133,12 @@ public class OutputGeneratorStage {
             j2clCompilationUnit,
             type,
             javaScriptImplementationSource,
-            jsImplGenerator.getSourceMappings());
+            jsImplGenerator.getSourceMappings(),
+            matchingNativeFile);
+
+        if (matchingNativeFile != null) {
+          copyNativeJsFileToOutput(matchingNativeFile);
+        }
       }
 
       timingReport.startSample("Copy *.java sources");
@@ -148,22 +153,40 @@ public class OutputGeneratorStage {
     }
   }
 
+  private static final String SOURCE_MAP_SUFFIX = ".js.map";
+
   private void generateSourceMaps(
       CompilationUnit j2clUnit,
       Type type,
       String javaScriptImplementationFileContents,
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
-    String compilationUnitFileName = j2clUnit.getFileName();
-    String compilationUnitFilePath = j2clUnit.getFilePath();
-    // Generate sourcemap files.
-    new SourceMapGeneratorStage(
-            compilationUnitFileName,
-            outputPath,
-            compilationUnitFilePath,
-            javaScriptImplementationFileContents,
-            problems,
-            shouldGenerateReadableSourceMaps)
-        .generateSourceMaps(type, javaSourcePositionByOutputSourcePosition);
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
+      NativeJavaScriptFile nativeJavaScriptFile) {
+    try {
+      String output;
+      if (shouldGenerateReadableSourceMaps) {
+        output =
+            ReadableSourceMapGenerator.generate(
+                javaSourcePositionByOutputSourcePosition,
+                javaScriptImplementationFileContents,
+                nativeJavaScriptFile,
+                j2clUnit.getFilePath());
+        if (output.isEmpty()) {
+          return;
+        }
+      } else {
+        // Generate sourcemap files.
+        output =
+            SourceMapGeneratorStage.generateSourceMaps(
+                type, javaSourcePositionByOutputSourcePosition);
+      }
+
+      Path absolutePathForSourceMap =
+          outputPath.resolve(GeneratorUtils.getRelativePath(type) + SOURCE_MAP_SUFFIX);
+      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, problems);
+    } catch (IOException e) {
+      problems.error(
+          "Could not generate source maps for %s: %s", j2clUnit.getName(), e.getMessage());
+    }
   }
 
   /**
@@ -190,7 +213,17 @@ public class OutputGeneratorStage {
       // available for compilation so no errors should be seen here unless there is an exceptional
       // condition.
       // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
-      // + absolutePath + ":" + e.getMessage());
+      // + absoluteOutputPath + ":" + e.getMessage());
+    }
+  }
+
+  private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
+    Path absolutePath = outputPath.resolve(nativeJavaScriptFile.getRelativeFilePath());
+    try {
+      Files.write(absolutePath, nativeJavaScriptFile.getContent().getBytes(StandardCharsets.UTF_8));
+      Files.setLastModifiedTime(absolutePath, FileTime.fromMillis(0));
+    } catch (IOException e) {
+      problems.warning("Could not copy native js file to " + absolutePath + ":" + e.getMessage());
     }
   }
 }

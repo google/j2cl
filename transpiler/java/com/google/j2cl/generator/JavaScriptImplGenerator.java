@@ -18,6 +18,9 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Expression;
@@ -34,6 +37,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,7 +45,7 @@ import java.util.Map;
 
 /** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
-  private String nativeSource;
+  private NativeJavaScriptFile nativeSource;
   private String relativeSourceMapLocation;
 
   private String className;
@@ -94,7 +98,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     this.relativeSourceMapLocation = checkNotNull(relativeSourceMapLocation);
   }
 
-  public void setNativeSource(String nativeSource) {
+  public void setNativeSource(NativeJavaScriptFile nativeSource) {
     this.nativeSource = checkNotNull(nativeSource);
   }
 
@@ -631,7 +635,27 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             "const " + longAliasName + " = " + className + ";");
       }
       sourceBuilder.newLine();
-      sourceBuilder.appendln(nativeSource);
+      int nativeSourceLine = 0;
+      String content = nativeSource.getContent();
+      for (String line : Splitter.on('\n').split(content)) {
+        String trimmedLine = CharMatcher.whitespace().trimTrailingFrom(line);
+
+        if (!trimmedLine.isEmpty()) {
+          int firstNonWhitespaceColumn = CharMatcher.whitespace().negate().indexIn(trimmedLine);
+          sourceBuilder.append(Strings.repeat(" ", firstNonWhitespaceColumn));
+          // Only map the trimmed section of the line.
+          sourceBuilder.emitWithMapping(
+              SourcePosition.newBuilder()
+                  .setStartPosition(nativeSourceLine, firstNonWhitespaceColumn)
+                  .setEndPosition(nativeSourceLine, trimmedLine.length())
+                  .setFilePath(nativeSource.getRelativeFilePath())
+                  .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
+                  .build(),
+              () -> sourceBuilder.append(trimmedLine.substring(firstNonWhitespaceColumn)));
+        }
+        sourceBuilder.newLine();
+        nativeSourceLine++;
+      }
       sourceBuilder.newLine();
     }
   }

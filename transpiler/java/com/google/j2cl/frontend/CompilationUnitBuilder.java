@@ -761,7 +761,7 @@ public class CompilationUnitBuilder {
       int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
       int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
       return SourcePosition.newBuilder()
-          .setFilePath(currentSourceFile)
+          .setFilePath(j2clCompilationUnit.getFilePath())
           .setName(name)
           .setStartPosition(startLineNumber, startColumnNumber)
           .setEndPosition(endLineNumber, endColumnNumber)

@@ -143,6 +143,12 @@ def replace_transpiled_js(target_names):
         "{}", ";"
     ])
 
+    # Remove the old ".native_js" files (results from the last run)
+    run_cmd_get_output([
+        "find", EXAMPLES_DIR + target_name, "-name", "*.native_js", "-exec",
+        "rm", "{}", ";"
+    ])
+
     run_cmd_get_output(
         ["unzip", "-o", "-d", extractDir, zip_file_path, "-x", "*.java"])
 

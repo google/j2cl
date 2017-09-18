@@ -54,11 +54,6 @@ public class CompilationUnit extends Node {
     return filePath.substring(0, filePath.lastIndexOf(J2clUtils.FILEPATH_SEPARATOR));
   }
 
-  public String getFileName() {
-    String[] pathComponents = filePath.split(J2clUtils.FILEPATH_SEPARATOR);
-    return pathComponents[pathComponents.length - 1];
-  }
-
   public String getPackageName() {
     return packageName;
   }

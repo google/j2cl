@@ -51,6 +51,10 @@ class SourceBuilder {
     checkNotNull(javaSourcePosition);
     FilePosition startPosition = getCurrentPosition();
     codeEmitter.run();
+    if (getCurrentPosition().equals(startPosition)) {
+      // Do not record empty mappings.
+      return;
+    }
     javaSourceInfoByOutputSourceInfo.put(
         SourcePosition.newBuilder()
             .setStartFilePosition(startPosition)
