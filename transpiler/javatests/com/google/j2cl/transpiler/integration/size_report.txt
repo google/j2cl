@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 2 size changes.
+There are 10 size changes.
 Total size (of already existing tests) changed from
-  1483416 to 1483398 bytes (100%->100.00%) and from
-  465936 to 465934 bytes (100%->100.00%) gzipped.
+  1483398 to 1481538 bytes (100%->99.87%) and from
+  465934 to 465633 bytes (100%->99.94%) gzipped.
 
 
 New reports:
@@ -14,7 +14,10 @@ New reports:
 Shrinkage report highlights:
 **************************************
       old    new
-     6018   6016 logging (-0.03%)
+     3995   3913 loggingstripped (-2.05%)
+     6016   5922 logging (-1.56%)
+     1576   1555 enums (-1.33%)
+      954    943 gwtincompatiblesrcjar (-1.15%)
 
 
 Expansion report highlights:
@@ -72,9 +75,9 @@ All reports:
      1456   1456 castwithsideeffect (unchanged)
      1016   1016 circularcompiletimeconstant (unchanged)
      3196   3196 classcastexception (unchanged)
-     2816   2816 classliteral (unchanged)
+     2816   2808 classliteral (-0.28%)
      1009   1009 classliteralobfuscated (unchanged)
-     2126   2126 classliteralstripped (unchanged)
+     2126   2119 classliteralstripped (-0.33%)
      1046   1046 compiletimeconstant (unchanged)
      1093   1093 complexcascadingconstructor (unchanged)
      1049   1049 continuestatement (unchanged)
@@ -90,8 +93,8 @@ All reports:
        62     62 emptyclasswithfields (unchanged)
        62     62 emptyclasswithparent (unchanged)
      1197   1197 enummethods (unchanged)
-     1864   1864 enumobfuscation (unchanged)
-     1576   1576 enums (unchanged)
+     1864   1854 enumobfuscation (-0.54%)
+     1576   1555 enums (-1.33%)
      1966   1966 enumspecialfunctions (unchanged)
      1252   1252 exceptionnotcaught (unchanged)
      1043   1043 exports (unchanged)
@@ -105,8 +108,8 @@ All reports:
      1237   1237 genericmethod (unchanged)
        62     62 genericnativetype (unchanged)
      1118   1118 generictype (unchanged)
-      950    950 gwtincompatible (unchanged)
-      954    954 gwtincompatiblesrcjar (unchanged)
+      950    940 gwtincompatible (-1.05%)
+      954    943 gwtincompatiblesrcjar (-1.15%)
      1032   1032 ifstatement (unchanged)
      1088   1088 implementsgenericinterface (unchanged)
       920    920 implementsinterface (unchanged)
@@ -144,7 +147,7 @@ All reports:
      1766   1766 jsfunctionbridge (unchanged)
      2420   2420 jsfunctiontypeannotation (unchanged)
      1069   1069 jsinnerclass (unchanged)
-    25316  25316 jsinteroptests (unchanged)
+    25316  25265 jsinteroptests (-0.20%)
      1075   1075 jsmethodoverride (unchanged)
       999    999 jsoverlay (unchanged)
      1005   1005 jsoverlaystaticrefs (unchanged)
@@ -158,8 +161,8 @@ All reports:
      1197   1197 lambdaswithgenerics (unchanged)
      1376   1376 localclasswithcaptures (unchanged)
      1086   1086 localgenericclassinitjustonce (unchanged)
-     6018   6016 logging (-0.03%)
-     3995   3995 loggingstripped (unchanged)
+     6016   5922 logging (-1.56%)
+     3995   3913 loggingstripped (-2.05%)
      2902   2902 longimplicitcasts (unchanged)
      2735   2735 longoperationsinglesideeffect (unchanged)
      1652   1652 methodreferences (unchanged)
@@ -213,7 +216,7 @@ All reports:
        62     62 staticfieldinitializer (unchanged)
        62     62 staticfields (unchanged)
      1022   1022 staticinitorder (unchanged)
-     2695   2695 staticinitsuper (unchanged)
+     2695   2688 staticinitsuper (-0.26%)
       998    998 staticjsmethods (unchanged)
      1095   1095 staticnestedclass (unchanged)
      1698   1698 strictequality (unchanged)
