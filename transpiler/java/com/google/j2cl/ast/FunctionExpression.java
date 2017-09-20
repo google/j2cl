@@ -120,7 +120,8 @@ public class FunctionExpression extends Expression
       return new Builder()
           .setTypeDescriptor(expression.getTypeDescriptor())
           .setParameters(expression.getParameters())
-          .setStatements(expression.getBody().getStatements());
+          .setStatements(expression.getBody().getStatements())
+          .setSourcePosition(expression.getSourcePosition());
     }
 
     public Builder setStatements(List<Statement> statements) {
