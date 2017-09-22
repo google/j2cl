@@ -74,6 +74,8 @@ def _merge_zips(srczips, outzip, tags, testonly):
           # zip errors out for empty dir - a dummy dir (even excluded) prevents that.
           "mkdir __dummy__",
           "%s -jt -X -qr $$cwd/$@ . -x __dummy__" % zip_tool,
+          # Remove temporary directory.
+          "rm -r $$TMPDIR",
       ]),
       tools=["//third_party/zip:zip"],
       tags=tags,
@@ -200,6 +202,7 @@ def j2cl_library(name,
                 zip_tool, js_sources_from_apt),
             "%s -jt -X -q -i \"*.native.js\" -r $$cwd/$(location %s) *" % (
                 zip_tool, native_js_sources_from_apt),
+            "rm -r $$TMPDIR",
         ]),
         tags=internal_tags,
         tools=["//third_party/zip:zip"],
