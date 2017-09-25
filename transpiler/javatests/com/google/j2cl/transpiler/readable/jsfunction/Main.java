@@ -162,4 +162,12 @@ public class Main {
       Object o = (T) t;
     }
   }
+
+  static void functionExpressionTypeReplacement() {
+    ParametricJsFunction<String> f =
+        unused -> {
+          List<List<?>> l = new ArrayList<>();
+          l.add(new ArrayList<String>());
+        };
+  }
 }

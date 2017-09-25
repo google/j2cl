@@ -143,6 +143,22 @@
 [i] => [i] "i"
 [n] => [n] "n"
 [(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionOptional>"
+[static void functionExpressionTypeReplacement() {
+    ParametricJsFunction<String> f =
+...        };
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.functionExpressionTypeReplacement"
+[ParametricJsFunction<String> f =
+        unused -> {
+...          l.add(new ArrayList<String>());
+        };] => [let f = ((/** ?string */ unused) =>{
+      let l = /**@type {!ArrayList<List<*>>} */ (ArrayList.$create__());
+      l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
+    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.functionExpressionTypeReplacement"
+[f] => [f] "f"
+[unused] => [unused] "unused"
+[List<List<?>> l = new ArrayList<>();] => [let l = /**@type {!ArrayList<List<*>>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in functionExpressionTypeReplacement>"
+[l] => [l] "l"
+[l.add(new ArrayList<String>());] => [l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in functionExpressionTypeReplacement>"
 [public class Main {
   public static int fun(MyJsFunctionInterface fn, int a) {
 ...  }
