@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-
 import com.google.common.base.Predicates;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
@@ -72,7 +71,6 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                     // JsFunction methods are annotated with @this {function(...):...} and loose
                     // the ability to refer to type variables declared in the class.
                     || methodDescriptor.isJsFunction();
-        ;
 
         method.accept(new RewriteTypeVariablesInJsDocAnnotations(shouldBeReplaced));
       }
@@ -86,7 +84,10 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
             removeAllTypeVariables(functionExpression.getBody());
-            replaceTypeInFunctionExpressionParameters(functionExpression, Predicates.alwaysTrue());
+            replaceTypeInFunctionExpressionParameters(
+                functionExpression,
+                typeDescriptor ->
+                    typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture());
           }
 
           @Override
@@ -122,7 +123,9 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
   }
 
   private void removeAllTypeVariables(Node node) {
-    node.accept(new RewriteTypeVariablesInJsDocAnnotations(Predicates.alwaysTrue()));
+    node.accept(
+        new RewriteTypeVariablesInJsDocAnnotations(
+            typeDescriptor -> typeDescriptor.isTypeVariable()));
   }
 
   private static TypeDescriptor replaceTypeVariableWithBound(
@@ -149,10 +152,11 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
         return annotation;
       }
       TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
-      TypeDescriptor boundType = replaceTypeVariableWithBound(castTypeDescriptor, shouldBeReplaced);
+      TypeDescriptor replacedTypeDescriptor =
+          replaceTypeVariableWithBound(castTypeDescriptor, shouldBeReplaced);
       return JsDocAnnotatedExpression.newBuilder()
           .setExpression(annotation.getExpression())
-          .setAnnotationType(boundType)
+          .setAnnotationType(replacedTypeDescriptor)
           .build();
     }
 
