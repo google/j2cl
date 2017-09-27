@@ -393,12 +393,10 @@ public class Java8Test {
   }
 
   interface ThreeArgs {
-
     int foo(int x, int y, int z);
   }
 
   interface ThreeVarArgs {
-
     int foo(int x, int y, int... z);
   }
 
@@ -410,8 +408,7 @@ public class Java8Test {
     return sum;
   }
 
-  // TODO(b/36783555): Uncomment once the bug is fixed.
-  // @Test
+  @Test
   public void testVarArgsReferenceBinding() {
     ThreeArgs t = Java8Test::addMany;
     assertThat((Object) t.foo(1, 2, 3)).isEqualTo(6);

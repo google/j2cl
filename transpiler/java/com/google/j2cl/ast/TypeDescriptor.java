@@ -436,6 +436,21 @@ public abstract class TypeDescriptor extends Node
     return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
+  public boolean isAssignableTo(TypeDescriptor that) {
+    TypeDescriptor thisRawTypeDescriptor = getRawTypeDescriptor();
+    TypeDescriptor thatRawTypeDescriptor = that.getRawTypeDescriptor();
+    if (!thatRawTypeDescriptor.isArray()) {
+      if (!thisRawTypeDescriptor.isArray()) {
+        return isSubtypeOf(thatRawTypeDescriptor);
+      }
+      return TypeDescriptors.isJavaLangObject(thatRawTypeDescriptor);
+    }
+    return thisRawTypeDescriptor.isArray()
+        && thisRawTypeDescriptor
+            .getComponentTypeDescriptor()
+            .isAssignableTo(thatRawTypeDescriptor.getComponentTypeDescriptor());
+  }
+
   public boolean isSupertypeOf(TypeDescriptor that) {
     return that.getRawSuperTypesIncludingSelf().contains(this.getRawTypeDescriptor());
   }

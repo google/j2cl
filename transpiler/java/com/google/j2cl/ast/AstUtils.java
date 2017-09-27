@@ -440,8 +440,9 @@ public class AstUtils {
       List<Variable> parameters,
       TypeDescriptor returnTypeDescriptor) {
 
-    List<Expression> arguments =
-        parameters.stream().map(Variable::getReference).collect(toImmutableList());
+    List<Expression> arguments = parameters.stream().map(Variable::getReference).collect(toList());
+
+    AstUtils.maybePackageVarargs(toMethodDescriptor, arguments);
 
     // TODO(rluble): Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
@@ -1248,5 +1249,65 @@ public class AstUtils {
     return optionalSourcePosition.flatMap(
         sourcePosition ->
             sourcePosition.getName() == null ? Optional.empty() : Optional.of(sourcePosition));
+  }
+
+  /** Replaces the var arguments with packaged array. */
+  public static void maybePackageVarargs(
+      MethodDescriptor methodDescriptor, List<Expression> arguments) {
+    if (shouldPackageVarargs(methodDescriptor, arguments)) {
+      Expression packagedVarargs = getPackagedVarargs(methodDescriptor, arguments);
+      int parameterLength = methodDescriptor.getParameterDescriptors().size();
+      while (arguments.size() >= parameterLength) {
+        arguments.remove(parameterLength - 1);
+      }
+      arguments.add(packagedVarargs);
+    }
+  }
+
+  /** Returns if a method call is invoked with varargs that are not in an explicit array format. */
+  private static boolean shouldPackageVarargs(
+      MethodDescriptor methodDescriptor, List<Expression> arguments) {
+    int parametersLength = methodDescriptor.getParameterDescriptors().size();
+    if (!methodDescriptor.isVarargs()) {
+      return false;
+    }
+    if (arguments.size() != parametersLength) {
+      return true;
+    }
+    Expression lastArgument = arguments.get(parametersLength - 1);
+    ParameterDescriptor lastParameter =
+        methodDescriptor.getParameterDescriptors().get(parametersLength - 1);
+
+    return lastArgument != NullLiteral.get()
+        && !lastArgument.getTypeDescriptor().isAssignableTo(lastParameter.getTypeDescriptor());
+  }
+
+  /** Returns the package the varargs argument as an array. */
+  private static Expression getPackagedVarargs(
+      MethodDescriptor methodDescriptor, List<Expression> arguments) {
+    checkArgument(methodDescriptor.isVarargs());
+    int parametersLength = methodDescriptor.getParameterDescriptors().size();
+    ParameterDescriptor varargsParameterDescriptor =
+        methodDescriptor
+            .getParameterDescriptors()
+            .get(methodDescriptor.getParameterDescriptors().size() - 1);
+    TypeDescriptor varargsTypeDescriptor = varargsParameterDescriptor.getTypeDescriptor();
+    if (arguments.size() < parametersLength) {
+      // no argument for the varargs, add an empty array.
+      return new ArrayLiteral(varargsTypeDescriptor);
+    }
+    List<Expression> valueExpressions = new ArrayList<>();
+    for (int i = parametersLength - 1; i < arguments.size(); i++) {
+      valueExpressions.add(arguments.get(i));
+    }
+    if (varargsParameterDescriptor.isDoNotAutobox()) {
+      // Use a NATIVE_OBJECT[] instead of Object[] for @DoNotAutobox varargs, so that the
+      // boxing logic can avoid boxing here.
+      checkArgument(
+          TypeDescriptors.isJavaLangObject(
+              varargsParameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor()));
+      varargsTypeDescriptor = TypeDescriptors.getForArray(TypeDescriptors.get().nativeObject, 1);
+    }
+    return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
   }
 }

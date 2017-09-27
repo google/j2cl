@@ -128,6 +128,7 @@ public class Main {
     int[] ints = new int[] {1, 2};
     f1(1, ints);
     Main.f1(1, ints);
+    Main.f1(1, null);
   }
 
   public void testStaticMethodFirst() {

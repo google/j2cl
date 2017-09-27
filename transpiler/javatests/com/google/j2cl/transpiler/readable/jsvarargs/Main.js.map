@@ -90,6 +90,7 @@
 [ints] => [ints] "ints"
 [f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, ints);] => [Main.f1(1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[Main.f1(1, null);] => [Main.f1(1, ...$Arrays.$checkNotNull(null));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [Main.f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
