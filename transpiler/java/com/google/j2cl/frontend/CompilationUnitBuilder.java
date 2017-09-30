@@ -756,9 +756,9 @@ public class CompilationUnitBuilder {
     public SourcePosition getSourcePosition(String name, ASTNode node) {
       int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
       int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
-      int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
-      int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
-      int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
+      int lastCharacterPosition = node.getStartPosition() + node.getLength() - 1;
+      int endLineNumber = jdtCompilationUnit.getLineNumber(lastCharacterPosition) - 1;
+      int endColumnNumber = jdtCompilationUnit.getColumnNumber(lastCharacterPosition) + 1;
       return SourcePosition.newBuilder()
           .setFilePath(j2clCompilationUnit.getFilePath())
           .setName(name)
