@@ -22,6 +22,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
@@ -30,7 +31,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.TypeReference;
 
 /** Replaces cast expression with corresponding cast method call. */
 public class NormalizeCasts extends NormalizationPass {
@@ -93,7 +93,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Casts.$to(expr, TypeName);
     return MethodCall.Builder.from(castToMethodDescriptor)
-        .setArguments(expression, new TypeReference(castTypeDescriptorArgument))
+        .setArguments(expression, new JavaScriptConstructorReference(castTypeDescriptorArgument))
         .build();
   }
 
@@ -136,7 +136,7 @@ public class NormalizeCasts extends NormalizationPass {
         MethodCall.Builder.from(castToMethodDescriptor)
             .setArguments(
                 castExpression.getExpression(),
-                new TypeReference(castTypeDescriptorArgument),
+                new JavaScriptConstructorReference(castTypeDescriptorArgument),
                 new NumberLiteral(
                     TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()))
             .build();

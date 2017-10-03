@@ -15,18 +15,21 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Refers to a Java type or a constructor in Javascript.
- */
+/** Refers a constructor in Javascript. */
 @Visitable
-public class TypeReference extends Expression {
+public class JavaScriptConstructorReference extends Expression {
   @Visitable TypeDescriptor typeDescriptor;
 
-  public TypeReference(TypeDescriptor typeDescriptor) {
+  public JavaScriptConstructorReference(TypeDescriptor typeDescriptor) {
+    checkArgument(
+        !typeDescriptor.isArray()
+            && !typeDescriptor.isIntersection()
+            && !typeDescriptor.isUnion());
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
@@ -41,8 +44,8 @@ public class TypeReference extends Expression {
   }
 
   @Override
-  public TypeReference clone() {
-    return new TypeReference(typeDescriptor);
+  public JavaScriptConstructorReference clone() {
+    return new JavaScriptConstructorReference(typeDescriptor);
   }
 
   public TypeDescriptor getReferencedTypeDescriptor() {
@@ -51,6 +54,6 @@ public class TypeReference extends Expression {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_TypeReference.visit(processor, this);
+    return Visitor_JavaScriptConstructorReference.visit(processor, this);
   }
 }

@@ -22,10 +22,10 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeReference;
 
 /**
  * Normalizes the static native js members accesses.
@@ -62,7 +62,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
                     .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
                     .build();
-            checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
+            checkArgument(fieldAccess.getQualifier() instanceof JavaScriptConstructorReference);
             return FieldAccess.Builder.from(newFieldescriptor).build();
           }
 
@@ -80,7 +80,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
                     .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
                     .build();
-            checkArgument(methodCall.getQualifier() instanceof TypeReference);
+            checkArgument(methodCall.getQualifier() instanceof JavaScriptConstructorReference);
             return MethodCall.Builder.from(newMethodDescriptor)
                 .setArguments(methodCall.getArguments())
                 .build();

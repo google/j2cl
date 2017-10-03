@@ -56,6 +56,7 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
@@ -85,7 +86,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -1307,7 +1307,7 @@ public class CompilationUnitBuilder {
 
       List<Variable> forwardingParameters = parameters;
       if (!targetMethodDescriptor.isStatic()
-          && (qualifier == null || qualifier instanceof TypeReference)) {
+          && (qualifier == null || qualifier instanceof JavaScriptConstructorReference)) {
         // The qualifier for the instance method becomes the first parameter. Method references to
         // instance methods without an explicit qualifier use the first parameter in the functional
         // interface as the qualifier for the method call.
@@ -2086,7 +2086,7 @@ public class CompilationUnitBuilder {
                   .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
                   .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
                   .build())
-          .setArguments(new TypeReference(literalTypeDescriptor))
+          .setArguments(new JavaScriptConstructorReference(literalTypeDescriptor))
           .build();
     }
 
@@ -2107,7 +2107,7 @@ public class CompilationUnitBuilder {
 
       return MethodCall.Builder.from(classMethodDescriptor)
           .setArguments(
-              new TypeReference(literalTypeDescriptor.getLeafTypeDescriptor()),
+              new JavaScriptConstructorReference(literalTypeDescriptor.getLeafTypeDescriptor()),
               new NumberLiteral(
                   TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions()))
           .build();

@@ -28,6 +28,7 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FunctionExpression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
@@ -40,7 +41,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
@@ -198,8 +198,9 @@ class ImportGatherer extends AbstractVisitor {
 
   @SuppressWarnings("ReferenceEquality")
   @Override
-  public void exitTypeReference(TypeReference typeReference) {
-    TypeDescriptor referencedTypeDescriptor = typeReference.getReferencedTypeDescriptor();
+  public void exitJavaScriptConstructorReference(
+      JavaScriptConstructorReference constructorReference) {
+    TypeDescriptor referencedTypeDescriptor = constructorReference.getReferencedTypeDescriptor();
     if (referencedTypeDescriptor == TypeDescriptors.get().globalNamespace) {
       return;
     }

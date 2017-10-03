@@ -23,6 +23,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
@@ -31,7 +32,6 @@ import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeReference;
 
 /** Normalizes array creations. */
 public class NormalizeArrayCreations extends NormalizationPass {
@@ -89,7 +89,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
                 new ArrayLiteral(
                     TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                     newArrayExpression.getDimensionExpressions()),
-                new TypeReference(
+                new JavaScriptConstructorReference(
                     newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
             .build();
     return JsDocAnnotatedExpression.newBuilder()
@@ -131,7 +131,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           MethodCall.Builder.from(arrayInitMethodDescriptor)
               .setArguments(
                   newArrayExpression.getArrayLiteral(),
-                  new TypeReference(
+                  new JavaScriptConstructorReference(
                       newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
               .build();
       return JsDocAnnotatedExpression.newBuilder()
@@ -151,7 +151,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           MethodCall.Builder.from(arrayInitMethodDescriptor)
               .setArguments(
                   newArrayExpression.getArrayLiteral(),
-                  new TypeReference(
+                  new JavaScriptConstructorReference(
                       newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()),
                   new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount))
               .build();

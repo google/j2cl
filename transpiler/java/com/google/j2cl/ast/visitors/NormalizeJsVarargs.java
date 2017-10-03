@@ -23,6 +23,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Invocation;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -35,7 +36,6 @@ import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import java.util.List;
 
@@ -108,7 +108,8 @@ public class NormalizeJsVarargs extends NormalizationPass {
           MethodCall.Builder.from(arrayStampTypeMethodDescriptor)
               .setArguments(
                   varargsParameter.getReference(),
-                  new TypeReference(varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
+                  new JavaScriptConstructorReference(
+                      varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
                   new NumberLiteral(
                       TypeDescriptors.get().primitiveDouble,
                       varargsParameter.getTypeDescriptor().getDimensions()))

@@ -718,7 +718,7 @@ public class AstUtils {
     }
     TypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     return memberDescriptor.isStatic()
-        ? new TypeReference(enclosingTypeDescriptor.getRawTypeDescriptor())
+        ? new JavaScriptConstructorReference(enclosingTypeDescriptor.getRawTypeDescriptor())
         : new ThisReference(enclosingTypeDescriptor);
   }
 
@@ -835,7 +835,9 @@ public class AstUtils {
             .build();
 
     MethodCall getPrototypeCall =
-        MethodCall.Builder.from(getPrototype).setArguments(new TypeReference(lambdaType)).build();
+        MethodCall.Builder.from(getPrototype)
+            .setArguments(new JavaScriptConstructorReference(lambdaType))
+            .build();
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
@@ -868,7 +870,7 @@ public class AstUtils {
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
-            .setQualifier(new TypeReference(lambdaType))
+            .setQualifier(new JavaScriptConstructorReference(lambdaType))
             .build();
 
     return MethodCall.Builder.from(makeLambdaCall)

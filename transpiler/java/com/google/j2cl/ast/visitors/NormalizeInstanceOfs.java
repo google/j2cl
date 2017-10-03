@@ -21,6 +21,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -28,7 +29,6 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
-    arguments.add(new TypeReference(checkTypeDescriptor.getLeafTypeDescriptor()));
+    arguments.add(new JavaScriptConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()));
     arguments.add(
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);

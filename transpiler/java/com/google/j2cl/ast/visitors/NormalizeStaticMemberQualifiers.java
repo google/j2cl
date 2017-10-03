@@ -19,10 +19,10 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.TypeReference;
 
 /**
  * Rewrites strange field or method accesses of the form "instance.staticField" to the more normal
@@ -86,6 +86,6 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
     }
     MemberReference memberReference = (MemberReference) expression;
     return memberReference.getTarget().isStatic()
-        && !(memberReference.getQualifier() instanceof TypeReference);
+        && !(memberReference.getQualifier() instanceof JavaScriptConstructorReference);
   }
 }

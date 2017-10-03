@@ -34,6 +34,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
@@ -54,7 +55,6 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -291,14 +291,16 @@ public class ExpressionTranspiler {
           return false;
         }
 
-        if (!(qualifier instanceof TypeReference)) {
+        if (!(qualifier instanceof JavaScriptConstructorReference)) {
           return true;
         }
 
-        // Static members in the global scope are explicitly qualified by a TypeReference node to
-        // the TypeDescriptor representing the global scope.
-        TypeReference typeReference = (TypeReference) qualifier;
-        return typeReference.getReferencedTypeDescriptor() != TypeDescriptors.get().globalNamespace;
+        // Static members in the global scope are explicitly qualified by a
+        // JavaScriptConstructorReference node to the TypeDescriptor representing the global scope.
+        JavaScriptConstructorReference constructorReference =
+            (JavaScriptConstructorReference) qualifier;
+        return constructorReference.getReferencedTypeDescriptor()
+            != TypeDescriptors.get().globalNamespace;
       }
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
@@ -421,8 +423,10 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformTypeReference(TypeReference typeReference) {
-        sourceBuilder.append(environment.aliasForType(typeReference.getReferencedTypeDescriptor()));
+      public Void transformJavaScriptConstructorReference(
+          JavaScriptConstructorReference constructorReference) {
+        sourceBuilder.append(
+            environment.aliasForType(constructorReference.getReferencedTypeDescriptor()));
         return null;
       }
 
