@@ -87,6 +87,12 @@ j2cl_multi_test(
 )
 
 j2cl_multi_test(
+    name = "Concurrent",
+    shard_count = 5,
+    test_class = "com.google.gwt.emultest.ConcurrentSuite",
+)
+
+j2cl_multi_test(
     name = "Emul",
     # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here.
     # TODO(b/62039178): Remove this.
