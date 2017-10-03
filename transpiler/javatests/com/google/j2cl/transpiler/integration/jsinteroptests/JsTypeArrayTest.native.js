@@ -68,3 +68,11 @@ JsTypeArrayTest.returnObjectArrayFromNative = function() {
 JsTypeArrayTest.returnSomeFunction = function() {
   return function(a) { return a + 2; };
 };
+
+/**
+ * @param {*} object
+ * @return {!Array<?string>}
+ */
+JsTypeArrayTest.nonNumericKeys = function(object) {
+  return Object.getOwnPropertyNames(object).filter(key => !isFinite(key));
+};
