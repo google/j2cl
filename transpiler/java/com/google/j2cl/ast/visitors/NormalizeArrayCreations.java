@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -57,21 +56,30 @@ public class NormalizeArrayCreations extends NormalizationPass {
     checkArgument(newArrayExpression.getArrayLiteral() == null);
 
     if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
-      checkState(newArrayExpression.getDimensionExpressions().size() == 1);
-      Expression dimensionExpression =
-          Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
+      if (newArrayExpression.getDimensionExpressions().size() == 1) {
+        Expression dimensionExpression =
+            Iterables.getOnlyElement(newArrayExpression.getDimensionExpressions());
 
-      MethodDescriptor nativeArrayConstructor =
-          MethodDescriptor.newBuilder()
-              .setConstructor(true)
-              .setJsInfo(JsInfo.RAW_CTOR)
-              .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
-              .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
-              .build();
+        MethodDescriptor nativeArrayConstructor =
+            MethodDescriptor.newBuilder()
+                .setConstructor(true)
+                .setJsInfo(JsInfo.RAW_CTOR)
+                .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
+                .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
+                .build();
 
-      return NewInstance.Builder.from(nativeArrayConstructor)
-          .setArguments(dimensionExpression)
-          .build();
+        return NewInstance.Builder.from(nativeArrayConstructor)
+            .setArguments(dimensionExpression)
+            .build();
+      }
+
+      return createNonNullableAnnotation(
+          AstUtils.createArraysMethodCall(
+              "$createNative",
+              new ArrayLiteral(
+                  TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                  newArrayExpression.getDimensionExpressions())),
+          newArrayExpression.getTypeDescriptor());
     }
 
     return createNonNullableAnnotation(

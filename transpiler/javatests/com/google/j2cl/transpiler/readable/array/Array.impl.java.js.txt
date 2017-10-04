@@ -240,11 +240,10 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     nativeObjects = new Array(0);
     nativeObjects = [null, null];
     let nativeObjects2d =
-        /**@type {!Array<Array<String>>} */ ($Arrays.$create([5, 10], String));
-    nativeObjects2d = /**@type {!Array<Array<String>>} */ (
-        $Arrays.$init([[null, null], null], String, 2));
-    nativeObjects2d = /**@type {!Array<Array<String>>} */ (
-        $Arrays.$create([20, null], String));
+        /**@type {!Array<Array<String>>} */ ($Arrays.$createNative([5, 10]));
+    nativeObjects2d = [[null, null], null];
+    nativeObjects2d =
+        /**@type {!Array<Array<String>>} */ ($Arrays.$createNative([20, null]));
     let nativeObject = nativeObjects[0];
     nativeObject = nativeObjects2d[0][1];
     $Arrays.$set(nativeObjects, 0, null);

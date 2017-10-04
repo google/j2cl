@@ -15,10 +15,26 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import java.util.Arrays;
+
 public class MyTestCase {
   public static void assertEquals(Object expected, Object actual) {
     assert expected.equals(actual)
         : "Not equals - expected: <" + expected + "> - actual: <" + actual + ">";
+  }
+
+  public static void assertEquals(Object[] expected, Object[] actual) {
+    String message =
+        "Not equals - expected: <"
+            + Arrays.toString(expected)
+            + "> - actual: <"
+            + Arrays.toString(actual)
+            + ">";
+    assert expected.length == actual.length : message;
+
+    for (int i = 0; i < expected.length; i++) {
+      assert expected[i].equals(actual[i]) : message;
+    }
   }
 
   public static void assertEquals(int expected, int actual) {

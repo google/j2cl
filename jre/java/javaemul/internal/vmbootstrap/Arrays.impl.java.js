@@ -49,6 +49,21 @@ class Arrays {
   }
 
   /**
+   * Creates, initializes, and returns a native array with the given
+   * number of dimensions.
+   * Note that this is only used for multi dimension native array creation since
+   * single dimension array creation uses a faster code path.
+   *
+   * @param {Array<number>} dimensionLengths
+   * @return {Array<*>}
+   * @public
+   */
+  static $createNative(dimensionLengths) {
+    return Arrays.$createInternal(
+        dimensionLengths, null, null, null, undefined);
+  }
+
+  /**
    * @param {Array<number>} dimensionLengths
    * @param {*} leafType
    * @param {Function} leafTypeIsInstance
@@ -66,13 +81,15 @@ class Arrays {
     }
 
     let array = [];
-    array.leafType = leafType;
-    array.leafTypeIsInstance = leafTypeIsInstance;
-    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-    array.dimensionCount = dimensionLengths.length;
-    array.length = length;
+    if (leafType) {
+      array.leafType = leafType;
+      array.leafTypeIsInstance = leafTypeIsInstance;
+      array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
+      array.dimensionCount = dimensionLengths.length;
+      array.length = length;
+    }
 
-    if (array.dimensionCount > 1) {
+    if (dimensionLengths.length > 1) {
       // Contains sub arrays.
       let subDimensionLengths = dimensionLengths.slice(1);
       for (let i = 0; i < length; i++) {

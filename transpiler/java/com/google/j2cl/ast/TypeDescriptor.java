@@ -239,13 +239,12 @@ public abstract class TypeDescriptor extends Node
 
   /** Returns true for arrays where raw JavaScript array representation is enough. */
   public boolean isUntypedArray() {
-    //TODO(b/36179585): Either have the same semantics as GWT for untyped arrays or update the
-    // jsinterop spec to reflect the new behavior.
-    if (!isArray() || getDimensions() != 1) {
+    if (!isArray()) {
       return false;
     }
+
     return getLeafTypeDescriptor().isNative()
-        || TypeDescriptors.isJavaLangObject(getLeafTypeDescriptor());
+        || (TypeDescriptors.isJavaLangObject(getLeafTypeDescriptor()) && getDimensions() == 1);
   }
 
   public abstract boolean isNullable();

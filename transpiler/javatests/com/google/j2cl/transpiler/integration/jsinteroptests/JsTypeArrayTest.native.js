@@ -74,5 +74,7 @@ JsTypeArrayTest.returnSomeFunction = function() {
  * @return {!Array<?string>}
  */
 JsTypeArrayTest.nonNumericKeys = function(object) {
-  return Object.getOwnPropertyNames(object).filter(key => !isFinite(key));
+  let array = Object.getOwnPropertyNames(object).filter(key => !isFinite(key));
+  array.sort();
+  return array;
 };

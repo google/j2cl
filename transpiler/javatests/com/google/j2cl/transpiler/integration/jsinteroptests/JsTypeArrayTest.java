@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -38,8 +36,7 @@ public class JsTypeArrayTest extends MyTestCase {
     test.testObjectArray_castFromNative();
     test.testObjectArray_instanceOf();
     test.testJsFunctionArray();
-    // TODO(b/31432119): enable once this bug is fixed
-    // test.testNativeArrays();
+    test.testNativeArrays();
   }
 
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
@@ -220,19 +217,15 @@ public class JsTypeArrayTest extends MyTestCase {
     NativeTypedefInterface[][] nativeTypeDef2d = new NativeTypedefInterface[10][];
     nativeTypeDef2d[1] = (NativeTypedefInterface[]) new NativeObjectInterface[0];
 
-    // TODO(b/31432119): enable once this bug is fixed
-    // NativeWildcardInterface[][] nativeWildcard2d = new NativeWildcardInterface[10][];
-    // nativeWildcard2d[1] = (NativeWildcardInterface[]) new NativeObjectInterface[0];
+    NativeWildcardInterface[][] nativeWildcard2d = new NativeWildcardInterface[10][];
+    nativeWildcard2d[1] = (NativeWildcardInterface[]) new NativeObjectInterface[0];
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
   private static class NativeArray {}
 
   private void assertHasNoMetadata(Object array) {
-    Object noMetadataArray = new NativeArray();
-    assertEquals(
-        new HashSet<>(Arrays.asList(noMetadataArray)),
-        new HashSet<>(Arrays.asList(nonNumericKeys(array))));
+    assertEquals(nonNumericKeys(new NativeArray()), nonNumericKeys(array));
   }
 
   @JsFunction

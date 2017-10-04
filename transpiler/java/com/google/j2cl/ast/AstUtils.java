@@ -93,6 +93,12 @@ public class AstUtils {
                           TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                           TypeDescriptors.get().javaLangObject))
                   .put(
+                      "$createNative",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          1,
+                          TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1)))
+                  .put(
                       "$init",
                       new MethodInfo(
                           TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
