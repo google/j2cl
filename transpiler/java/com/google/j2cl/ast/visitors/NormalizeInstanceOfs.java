@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
@@ -80,25 +81,13 @@ public class NormalizeInstanceOfs extends NormalizationPass {
   private static Node rewriteJavaArrayInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setName("$instanceIsOfType")
-            .setParameterTypeDescriptors(
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().primitiveInt)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-            .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(instanceOfExpression.getExpression());
-    arguments.add(new JavaScriptConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()));
-    arguments.add(
-        new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
+
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);
-    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
+    return AstUtils.createArraysMethodCall(
+        "$instanceIsOfType",
+        instanceOfExpression.getExpression(),
+        new JavaScriptConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()),
+        new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
   }
 
   /**
@@ -111,18 +100,8 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     checkArgument(checkTypeDescriptor.isArray());
     checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
 
-    MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setName("$instanceIsOfNative")
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-            .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(instanceOfExpression.getExpression());
-    // Arrays.$isArray(expr);
-    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
+    // Arrays.$instanceIsOfNative(expr);
+    return AstUtils.createArraysMethodCall(
+        "$instanceIsOfNative", instanceOfExpression.getExpression());
   }
 }

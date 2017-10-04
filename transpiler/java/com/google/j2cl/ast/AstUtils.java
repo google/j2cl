@@ -23,6 +23,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
@@ -31,6 +32,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -44,6 +46,83 @@ import java.util.function.Function;
 public class AstUtils {
   private static final String CAPTURES_PREFIX = "$c_";
   private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
+
+  private static class MethodInfo {
+    private TypeDescriptor returnType;
+    private int requiredParameters;
+    private List<TypeDescriptor> parameters;
+
+    private MethodInfo(
+        TypeDescriptor returnType, int requiredParameters, TypeDescriptor... parameters) {
+      checkArgument(requiredParameters >= 0 && requiredParameters <= parameters.length);
+      this.returnType = returnType;
+      this.requiredParameters = requiredParameters;
+      this.parameters = Arrays.asList(parameters);
+    }
+  }
+
+  private static final ThreadLocal<Map<String, MethodInfo>> arraysMethodInfoByMethodName =
+      ThreadLocal.withInitial(
+          () ->
+              ImmutableMap.<String, MethodInfo>builder()
+                  .put(
+                      "$castTo",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          3,
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().primitiveInt))
+                  .put(
+                      "$castToNative",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          1,
+                          TypeDescriptors.get().javaLangObject))
+                  .put(
+                      "$checkNotNull",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          1,
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1)))
+                  .put(
+                      "$create",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          2,
+                          TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                          TypeDescriptors.get().javaLangObject))
+                  .put(
+                      "$init",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          2,
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().primitiveInt))
+                  .put(
+                      "$instanceIsOfType",
+                      new MethodInfo(
+                          TypeDescriptors.get().javaLangBoolean,
+                          3,
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().primitiveInt))
+                  .put(
+                      "$instanceIsOfNative",
+                      new MethodInfo(
+                          TypeDescriptors.get().javaLangBoolean,
+                          1,
+                          TypeDescriptors.get().javaLangObject))
+                  .put(
+                      "$stampType",
+                      new MethodInfo(
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          3,
+                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObject,
+                          TypeDescriptors.get().primitiveDouble))
+                  .build());
 
   /**
    * Whether or not it makes sense to require this type from javascript with a goog.require('xxx');
@@ -906,6 +985,34 @@ public class AstUtils {
         .collect(toList());
   }
 
+  /** Create a call to an Arrays method. */
+  public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
+    return createArraysMethodCall(methodName, Arrays.asList(arguments));
+  }
+
+  /** Create a call to an Arrays method. */
+  public static MethodCall createArraysMethodCall(String methodName, List<Expression> arguments) {
+    MethodInfo methodInfo = arraysMethodInfoByMethodName.get().get(methodName);
+    List<TypeDescriptor> parameterTypeDescriptors = methodInfo.parameters;
+    int requiredParameters = methodInfo.requiredParameters;
+    TypeDescriptor returnTypeDescriptor = methodInfo.returnType;
+
+    checkArgument(arguments.size() >= requiredParameters);
+
+    MethodDescriptor arrayCreateMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setName(methodName)
+            .setParameterTypeDescriptors(parameterTypeDescriptors.subList(0, arguments.size()))
+            .setReturnTypeDescriptor(returnTypeDescriptor)
+            .build();
+    // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
+    // parameter type instead of the type parameter itself.
+    return MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
+  }
+
   /**
    * Create a call to an array set expression for a binary operator.
    *
@@ -955,6 +1062,7 @@ public class AstUtils {
         .setReturnTypeDescriptor(elementType)
         .build();
   }
+
   /**
    * Returns all type variables that appear in the subtree, e.g. the parameters of a
    * TypeDeclaration, the arguments of a TypeDescriptor, etc.

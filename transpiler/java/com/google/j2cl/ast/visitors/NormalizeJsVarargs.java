@@ -18,13 +18,13 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -91,29 +91,18 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // TODO(b/36180242): avoid stamping if not needed.
       // stamp the rest (varargs) parameter.
       //   Arrays.stampType(varargsParameter, new arrayType[]...[]);
-      MethodDescriptor arrayStampTypeMethodDescriptor =
-          MethodDescriptor.newBuilder()
-              .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-              .setJsInfo(JsInfo.RAW)
-              .setStatic(true)
-              .setName("$stampType")
-              .setParameterTypeDescriptors(
-                  TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
-                  TypeDescriptors.get().javaLangObject,
-                  TypeDescriptors.get().primitiveDouble)
-              .build();
+
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
       MethodCall arrayStampTypeMethodCall =
-          MethodCall.Builder.from(arrayStampTypeMethodDescriptor)
-              .setArguments(
-                  varargsParameter.getReference(),
-                  new JavaScriptConstructorReference(
-                      varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
-                  new NumberLiteral(
-                      TypeDescriptors.get().primitiveDouble,
-                      varargsParameter.getTypeDescriptor().getDimensions()))
-              .build();
+          AstUtils.createArraysMethodCall(
+              "$stampType",
+              varargsParameter.getReference(),
+              new JavaScriptConstructorReference(
+                  varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
+              new NumberLiteral(
+                  TypeDescriptors.get().primitiveDouble,
+                  varargsParameter.getTypeDescriptor().getDimensions()));
 
       List<Statement> statements = body.getStatements();
       statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
@@ -152,33 +141,21 @@ public class NormalizeJsVarargs extends NormalizationPass {
         }
       }
 
-      // Here we wrap the vararg type with $Util.$checkNotNullVararg before applying the spread
+      // Here we wrap the vararg type with $Array.$checkNotNull before applying the spread
       // operator because the spread of a null causes a runtime exception in Javascript.
       // The reason for this is that there is a mismatch between Java varargs and Javascript varargs
       // semantics.  In Java, if you pass a null for the varargs it passes a null array rather than
       // an array with a single null object.  In Javascript however we pass the values of the
       // varargs as arguments not as an array so there is no way to express this.
-      // $checkNotNullVararg errors out early if null is passed as a jsvararg parameter.
+      // $checkNotNull errors out early if null is passed as a jsvararg parameter.
       // TODO(tdeegan): For non-nullable types we can avoid this.
       TypeDescriptor returnType = TypeDescriptors.toNonNullable(lastArgument.getTypeDescriptor());
-      MethodDescriptor nullToEmptyDescriptor =
-          MethodDescriptor.newBuilder()
-              .setReturnTypeDescriptor(returnType)
-              .setStatic(true)
-              .setName("$checkNotNull")
-              .setJsInfo(JsInfo.RAW)
-              .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-              .setReturnTypeDescriptor(returnType)
-              .addParameterTypeDescriptors(lastArgument.getTypeDescriptor())
-              .build();
 
-      MethodCall nullToEmpty =
-          MethodCall.Builder.from(nullToEmptyDescriptor).setArguments(lastArgument).build();
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               PrefixExpression.newBuilder()
                   .setTypeDescriptor(returnType)
-                  .setOperand(nullToEmpty)
+                  .setOperand(AstUtils.createArraysMethodCall("$checkNotNull", lastArgument))
                   .setOperator(PrefixOperator.SPREAD)
                   .build())
           .build();

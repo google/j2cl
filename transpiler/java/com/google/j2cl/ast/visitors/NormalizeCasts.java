@@ -112,18 +112,6 @@ public class NormalizeCasts extends NormalizationPass {
 
   private static Expression createJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .setName("$castTo")
-            .setParameterTypeDescriptors(
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().primitiveInt)
-            .setReturnTypeDescriptor(arrayCastTypeDescriptor)
-            .build();
 
     TypeDescriptor castTypeDescriptorArgument =
         arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor();
@@ -133,13 +121,13 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall =
-        MethodCall.Builder.from(castToMethodDescriptor)
-            .setArguments(
-                castExpression.getExpression(),
-                new JavaScriptConstructorReference(castTypeDescriptorArgument),
-                new NumberLiteral(
-                    TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()))
-            .build();
+        AstUtils.createArraysMethodCall(
+            "$castTo",
+            castExpression.getExpression(),
+            new JavaScriptConstructorReference(castTypeDescriptorArgument),
+            new NumberLiteral(
+                TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
+
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(castMethodCall)
@@ -150,21 +138,10 @@ public class NormalizeCasts extends NormalizationPass {
   private static Expression createNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     checkArgument(castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .setName("$castToNative")
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
-            .build();
 
     // Arrays.$castToNative(expr);
     MethodCall castMethodCall =
-        MethodCall.Builder.from(castToMethodDescriptor)
-            .setArguments(castExpression.getExpression())
-            .build();
+        AstUtils.createArraysMethodCall("$castToNative", castExpression.getExpression());
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(castMethodCall)

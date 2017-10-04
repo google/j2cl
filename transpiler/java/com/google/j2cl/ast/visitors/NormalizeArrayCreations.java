@@ -19,19 +19,22 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import java.util.List;
 
 /** Normalizes array creations. */
 public class NormalizeArrayCreations extends NormalizationPass {
@@ -71,31 +74,15 @@ public class NormalizeArrayCreations extends NormalizationPass {
           .build();
     }
 
-    MethodDescriptor arrayCreateMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setName("$create")
-            .setParameterTypeDescriptors(
+    return createNonNullableAnnotation(
+        AstUtils.createArraysMethodCall(
+            "$create",
+            new ArrayLiteral(
                 TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
-                TypeDescriptors.get().javaLangObject)
-            .build();
-    // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
-    // parameter type instead of the type parameter itself.
-    MethodCall arrayCreateMethodCall =
-        MethodCall.Builder.from(arrayCreateMethodDescriptor)
-            .setArguments(
-                new ArrayLiteral(
-                    TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
-                    newArrayExpression.getDimensionExpressions()),
-                new JavaScriptConstructorReference(
-                    newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
-            .build();
-    return JsDocAnnotatedExpression.newBuilder()
-        .setExpression(arrayCreateMethodCall)
-        .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
-        .build();
+                newArrayExpression.getDimensionExpressions()),
+            new JavaScriptConstructorReference(
+                newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor())),
+        newArrayExpression.getTypeDescriptor());
   }
 
   /**
@@ -106,61 +93,33 @@ public class NormalizeArrayCreations extends NormalizationPass {
     checkArgument(newArrayExpression.getArrayLiteral() != null);
 
     if (newArrayExpression.getTypeDescriptor().isUntypedArray()) {
-      checkState(newArrayExpression.getDimensionExpressions().size() == 1);
       return newArrayExpression.getArrayLiteral();
     }
 
+    List<Expression> arguments =
+        Lists.newArrayList(
+            newArrayExpression.getArrayLiteral(),
+            new JavaScriptConstructorReference(
+                newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()));
+
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
-    MethodDescriptor arrayInitMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setName("$init")
-            .setParameterTypeDescriptors(
-                TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
-                TypeDescriptors.get().javaLangObject)
-            .build();
-
-    if (dimensionCount == 1) {
-      // Number of dimensions defaults to 1 so we can leave that parameter out.
-
-      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
-      // parameter type instead of the type parameter itself.
-      MethodCall arrayInitMethodCall =
-          MethodCall.Builder.from(arrayInitMethodDescriptor)
-              .setArguments(
-                  newArrayExpression.getArrayLiteral(),
-                  new JavaScriptConstructorReference(
-                      newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()))
-              .build();
-      return JsDocAnnotatedExpression.newBuilder()
-          .setExpression(arrayInitMethodCall)
-          .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
-          .build();
-    } else {
-      // It's multidimensional, make dimensions explicit.
-      arrayInitMethodDescriptor =
-          MethodDescriptor.Builder.from(arrayInitMethodDescriptor)
-              .addParameterTypeDescriptors(TypeDescriptors.get().primitiveInt)
-              .build();
-
-      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
-      // parameter type instead of the type parameter itself.
-      MethodCall arrayInitMethodCall =
-          MethodCall.Builder.from(arrayInitMethodDescriptor)
-              .setArguments(
-                  newArrayExpression.getArrayLiteral(),
-                  new JavaScriptConstructorReference(
-                      newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()),
-                  new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount))
-              .build();
-
-      return JsDocAnnotatedExpression.newBuilder()
-          .setExpression(arrayInitMethodCall)
-          .setAnnotationType(TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()))
-          .build();
+    if (dimensionCount > 1) {
+      arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
     }
+
+    return createNonNullableAnnotation(
+        AstUtils.createArraysMethodCall("$init", arguments),
+        newArrayExpression.getTypeDescriptor());
   }
 
+  /**
+   * Annotates the expression with the non nullable type corresponding to {@code typeDescriptor}.
+   */
+  private static Expression createNonNullableAnnotation(
+      Expression expression, TypeDescriptor typeDescriptor) {
+    return JsDocAnnotatedExpression.newBuilder()
+        .setExpression(expression)
+        .setAnnotationType(TypeDescriptors.toNonNullable(typeDescriptor))
+        .build();
+  }
 }
