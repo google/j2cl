@@ -71,9 +71,9 @@ def _merge_zips(srczips, outzip, tags, testonly):
           # Rezip the temp dir using relative paths.
           "cwd=$$PWD",
           "cd $$TMPDIR",
-          # zip errors out for empty dir - a dummy dir (even excluded) prevents that.
-          "mkdir __dummy__",
-          "%s -jt -X -qr $$cwd/$@ . -x __dummy__" % zip_tool,
+          # Ensure the directory is nonempty, or zip errors out.
+          "mkdir -p __dummy__",
+          "%s -jt -X -qr $$cwd/$@ ." % zip_tool,
           # Remove temporary directory.
           "rm -r $$TMPDIR",
       ]),
