@@ -24,7 +24,7 @@ let Hashing = goog.require('nativebootstrap.Hashing$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
-let Object = goog.forwardDeclare('java.lang.Object');
+let JavaLangObject = goog.forwardDeclare('java.lang.Object');
 let Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
@@ -33,6 +33,7 @@ let Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
  * @public
  */
 class Arrays {
+
   /**
    * Creates, initializes, and returns an array with the given number of
    * dimensions, lengths and of the given type.
@@ -43,7 +44,7 @@ class Arrays {
    * @public
    */
   static $create(dimensionLengths, leafType) {
-    return Arrays.$createInternal(
+    return Arrays.$createInternal_(
         dimensionLengths, leafType, leafType.$isInstance,
         leafType.$isAssignableFrom, leafType.$initialArrayValue);
   }
@@ -59,8 +60,7 @@ class Arrays {
    * @public
    */
   static $createNative(dimensionLengths) {
-    return Arrays.$createInternal(
-        dimensionLengths, null, null, null, undefined);
+    return Arrays.$createRecursiveInternal_(dimensionLengths, null, undefined);
   }
 
   /**
@@ -72,30 +72,42 @@ class Arrays {
    * @return {Array<*>}
    * @private
    */
-  static $createInternal(
+  static $createInternal_(
       dimensionLengths, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
       leafTypeInitialValue) {
+    return Arrays.$createRecursiveInternal_(
+        dimensionLengths, leafTypeInitialValue,
+        Arrays.$createMetadata_(
+            leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
+            dimensionLengths.length));
+  }
+
+  /**
+   * @param {Array<number>} dimensionLengths
+   * @param {*} leafTypeInitialValue
+   * @param {Arrays.Metadata_} metadata
+   * @return {Array<*>}
+   * @private
+   */
+  static $createRecursiveInternal_(dimensionLengths, leafTypeInitialValue, metadata) {
     let length = dimensionLengths[0];
     if (length == null) {
       return null;
     }
-
     let array = [];
-    if (leafType) {
-      array.leafType = leafType;
-      array.leafTypeIsInstance = leafTypeIsInstance;
-      array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-      array.dimensionCount = dimensionLengths.length;
-      array.length = length;
+    array.length = length;
+    if (metadata) {
+      array.$$arrayMetadata = metadata;
     }
 
     if (dimensionLengths.length > 1) {
       // Contains sub arrays.
       let subDimensionLengths = dimensionLengths.slice(1);
+      let subComponentMetadata =
+          metadata && Arrays.$createSubComponentMetadata_(metadata);
       for (let i = 0; i < length; i++) {
-        array[i] = Arrays.$createInternal(
-            subDimensionLengths, leafType, leafTypeIsInstance,
-            leafTypeIsAssignableFrom, leafTypeInitialValue);
+        array[i] = Arrays.$createRecursiveInternal_(
+            subDimensionLengths, leafTypeInitialValue, subComponentMetadata);
       }
     } else {
       // Contains leaf type values.
@@ -121,18 +133,15 @@ class Arrays {
    * <p>
    * Unlike array creation, the actual lengths of each dimension do not need to
    * be specified because the passed array already contains values.
-   * <p>
-   * This modification is potentially destructive and should only ever be
-   * applied to brand new array literals.
    *
    * @param {Array<*>} array
    * @param {*} leafType
-   * @param {number} opt_dimensionCount
+   * @param {number=} opt_dimensionCount
    * @return {Array<*>}
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
-    return Arrays.$initRecursiveInternal(
+    return Arrays.$initInternal_(
         array, leafType, leafType.$isInstance, leafType.$isAssignableFrom,
         opt_dimensionCount || 1);
   }
@@ -146,25 +155,34 @@ class Arrays {
    * @return {Array<*>}
    * @private
    */
-  static $initRecursiveInternal(
+  static $initInternal_(
       array, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
       dimensionCount) {
-    array.leafType = leafType;
-    array.leafTypeIsInstance = leafTypeIsInstance;
-    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-    array.dimensionCount = dimensionCount;
+    return Arrays.$initRecursiveInternal_(
+        array,
+        Arrays.$createMetadata_(
+            leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
+            dimensionCount)
 
-    // Length is not set since the provided array already contain values and
-    // knows its own length.
-    if (array.dimensionCount > 1) {
+    );
+  }
+
+  /**
+   * @param {Array<*>} array
+   * @param {Arrays.Metadata_} metadata
+   * @return {Array<*>}
+   * @private
+   */
+  static $initRecursiveInternal_(array, metadata) {
+    array.$$arrayMetadata = metadata;
+
+    if (metadata.dimensionCount > 1) {
+      let subComponentMetadata = Arrays.$createSubComponentMetadata_(metadata);
       for (let i = 0; i < array.length; i++) {
-        let nestedArray = array[i];
-        if (nestedArray == null) {
-          continue;
+        let nestedArray = /** @type {Array<*>} */ (array[i]);
+        if (nestedArray) {
+          Arrays.$initRecursiveInternal_(nestedArray, subComponentMetadata);
         }
-        Arrays.$initRecursiveInternal(
-            /** @type {Array<*>} */ (nestedArray), leafType, leafTypeIsInstance,
-            leafTypeIsAssignableFrom, dimensionCount - 1);
       }
     }
 
@@ -180,26 +198,20 @@ class Arrays {
    */
   static $stampType(array, leafType, dimensionCount) {
     return Arrays.$stampTypeInternal_(
-        array, leafType, leafType.$isInstance, leafType.$isAssignableFrom,
-        dimensionCount);
+        array,
+        Arrays.$createMetadata_(
+            leafType, leafType.$isInstance, leafType.$isAssignableFrom,
+            dimensionCount));
   }
 
   /**
    * @param {Array<*>} array
-   * @param {*} leafType
-   * @param {Function} leafTypeIsInstance
-   * @param {Function} leafTypeIsAssignableFrom
-   * @param {number} dimensionCount
+   * @param {Arrays.Metadata_} metadata
    * @return {Array<*>}
    * @private
    */
-  static $stampTypeInternal_(
-      array, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-      dimensionCount) {
-    array.leafType = leafType;
-    array.leafTypeIsInstance = leafTypeIsInstance;
-    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-    array.dimensionCount = dimensionCount;
+  static $stampTypeInternal_(array, metadata) {
+    array.$$arrayMetadata = metadata;
     return array;
   }
 
@@ -235,19 +247,17 @@ class Arrays {
    * @private
    */
   static $canSet_(array, index, value) {
-    // Only check when the array has a known leaf type. JS native arrays won't
-    // have it.
-    if (/** @type {*} */ (array).leafTypeIsInstance) {
-      var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
-      if (enhancedArray.dimensionCount > 1) {
-        if (!Arrays.$instanceIsOfTypeInternal(
-                value, enhancedArray.leafType,
-                enhancedArray.leafTypeIsAssignableFrom,
-                enhancedArray.dimensionCount - 1)) {
+    // Only check when the array has metadata.
+    var metadata = Arrays.$getMetadata_(array);
+    if (metadata) {
+      if (metadata.dimensionCount > 1) {
+        if (!Arrays.$instanceIsOfTypeInternal_(
+                value, metadata.leafType, metadata.leafTypeIsAssignableFrom,
+                metadata.dimensionCount - 1)) {
           // The inserted array must fit dimensions and the array leaf type.
           return false;
         }
-      } else if (value != null && !enhancedArray.leafTypeIsInstance(value)) {
+      } else if (value != null && !metadata.leafTypeIsInstance(value)) {
         // The inserted value must fit the array leaf type.
         // If leafType is not a primitive type, a 'null' should always be a
         // legal value. If leafType is a primitive type, value cannot be null
@@ -266,13 +276,7 @@ class Arrays {
    * @public
    */
   static $copyType(array, otherArray) {
-    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
-    var otherEnhancedArray = /** @type {Arrays.EnhancedArray_} */ (otherArray);
-    enhancedArray.leafType = otherEnhancedArray.leafType;
-    enhancedArray.leafTypeIsInstance = otherEnhancedArray.leafTypeIsInstance;
-    enhancedArray.leafTypeIsAssignableFrom =
-        otherEnhancedArray.leafTypeIsAssignableFrom;
-    enhancedArray.dimensionCount = otherEnhancedArray.dimensionCount;
+    array.$$arrayMetadata = Arrays.$getMetadata_(otherArray);
   }
 
   /**
@@ -287,7 +291,7 @@ class Arrays {
    * @public
    */
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
-    return Arrays.$instanceIsOfTypeInternal(
+    return Arrays.$instanceIsOfTypeInternal_(
         instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
         requiredDimensionCount);
   }
@@ -300,7 +304,7 @@ class Arrays {
    * @return {boolean}
    * @private
    */
-  static $instanceIsOfTypeInternal(
+  static $instanceIsOfTypeInternal_(
       instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
       requiredDimensionCount) {
     Arrays.$clinit();
@@ -309,21 +313,17 @@ class Arrays {
       return false;
     }
 
-    // TODO(michaelthomas): Consider checking that this is an enhanced array
-    // before casting.
-    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (instance);
+    var metadata = Arrays.$getMetadata_(instance) ||
+        /** @type {Arrays.Metadata_} */ ({dimensionCount: 1});
 
-    // One dimensional Object arrays are emitted as a raw JS [] array literal
-    // and will be missing the dimensionCount field.
-    var effectiveInstanceDimensionCount = (enhancedArray.dimensionCount || 1);
-
+    var effectiveInstanceDimensionCount = metadata.dimensionCount;
     if (effectiveInstanceDimensionCount == requiredDimensionCount) {
       // If dimensions are equal then the leaftypes must be castable.
-      return requiredLeafTypeIsAssignableFrom(enhancedArray.leafType);
+      return requiredLeafTypeIsAssignableFrom(metadata.leafType);
     }
     if (effectiveInstanceDimensionCount > requiredDimensionCount) {
       // If shrinking the dimensions then the new leaf type must *be* Object.
-      return Object == requiredLeafType;
+      return JavaLangObject == requiredLeafType;
     }
     return false;
   }
@@ -352,7 +352,7 @@ class Arrays {
    * @public
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
-    return Arrays.$castToInternal(
+    return Arrays.$castToInternal_(
         instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
         requiredDimensionCount);
   }
@@ -363,15 +363,15 @@ class Arrays {
    * @param {Function} requiredLeafTypeIsAssignableFrom
    * @param {number} requiredDimensionCount
    * @return {*}
-   * @public
+   * @private
    */
-  static $castToInternal(
+  static $castToInternal_(
       instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
       requiredDimensionCount) {
     Arrays.$clinit();
     if (InternalPreconditions.m_isTypeChecked__()) {
       const castSucceeds = instance == null ||
-          Arrays.$instanceIsOfTypeInternal(
+          Arrays.$instanceIsOfTypeInternal_(
               instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
               requiredDimensionCount);
       if (!castSucceeds) {
@@ -409,7 +409,7 @@ class Arrays {
   }
 
   /**
-   * @param {*} obj
+   * @param {Array<*>} obj
    * @return {string}
    * @public
    */
@@ -420,17 +420,18 @@ class Arrays {
   }
 
   /**
-   * @param {*} obj
+   * @param {Array<*>} obj
    * @return {Class}
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
     Arrays.$clinit();
-    if (obj.leafType) {
-      return Class.$get(obj.leafType, obj.dimensionCount || 1);
+    var metadata = Arrays.$getMetadata_(obj);
+    if (metadata) {
+      return Class.$get(metadata.leafType, metadata.dimensionCount);
     }
     // Uninitialized arrays lack a 'leafType' but are implicitly Object[].
-    return Class.$get(Object, 1);
+    return Class.$get(JavaLangObject, 1);
   }
 
   /**
@@ -445,13 +446,55 @@ class Arrays {
   }
 
   /**
+   * @param {Arrays.Metadata_} metadata
+   * @return {Arrays.Metadata_}
+   * @private
+   */
+  static $createSubComponentMetadata_(metadata) {
+    return Arrays.$createMetadata_(
+        metadata.leafType,
+        metadata.leafTypeIsInstance,
+        metadata.leafTypeIsAssignableFrom,
+        metadata.dimensionCount - 1,
+    );
+  }
+
+  /**
+   * @param {*} leafType
+   * @param {Function} leafTypeIsInstance
+   * @param {Function} leafTypeIsAssignableFrom
+   * @param {number} dimensionCount
+   * @return {Arrays.Metadata_}
+   * @private
+   */
+  static $createMetadata_(
+      leafType, leafTypeIsInstance, leafTypeIsAssignableFrom, dimensionCount) {
+    return {
+      leafType: leafType,
+      leafTypeIsInstance: leafTypeIsInstance,
+      leafTypeIsAssignableFrom: leafTypeIsAssignableFrom,
+      dimensionCount: dimensionCount,
+    };
+  }
+
+   /**
+    * @param {Array<*>} array
+    * @return {Arrays.Metadata_}
+    * @private
+    */
+  static $getMetadata_(array) {
+    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
+    return enhancedArray.$$arrayMetadata;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
     Arrays.$clinit = function() {};
     Class = goog.module.get('java.lang.Class');
-    Object = goog.module.get('java.lang.Object');
+    JavaLangObject = goog.module.get('java.lang.Object');
     Objects = goog.module.get('vmbootstrap.Objects$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     InternalPreconditions =
@@ -462,14 +505,23 @@ class Arrays {
 
 /**
  * A typedef for the extra properties added to new arrays which are created via
- * this class. These properties allow for better emulation of Java array
- * semantics.
+ * this class. These properties allow for  emulation of Java array semantics.
  *
  * @typedef {{
  *   leafType: *,
  *   leafTypeIsInstance: Function,
  *   leafTypeIsAssignableFrom: Function,
  *   dimensionCount: number,
+ * }}
+ * @private
+ */
+Arrays.Metadata_;
+
+/**
+ * Arrays.Metadata_ enhanced Array.
+ *
+ * @typedef {{
+ *   $$arrayMetadata: Arrays.Metadata_,
  *   length: number
  * }}
  * @private
