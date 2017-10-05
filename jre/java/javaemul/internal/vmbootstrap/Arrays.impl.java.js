@@ -455,7 +455,7 @@ class Arrays {
         metadata.leafType,
         metadata.leafTypeIsInstance,
         metadata.leafTypeIsAssignableFrom,
-        metadata.dimensionCount - 1,
+        metadata.dimensionCount - 1
     );
   }
 
@@ -473,7 +473,7 @@ class Arrays {
       leafType: leafType,
       leafTypeIsInstance: leafTypeIsInstance,
       leafTypeIsAssignableFrom: leafTypeIsAssignableFrom,
-      dimensionCount: dimensionCount,
+      dimensionCount: dimensionCount
     };
   }
 
