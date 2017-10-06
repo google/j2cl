@@ -22,7 +22,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
@@ -68,8 +67,6 @@ public class NormalizeCasts extends NormalizationPass {
 
   private static Expression createCheckCastCall(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    TypeDescriptor rawCastTypeDescriptor =
-        castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
     // Avoid pointlessly nesting type annotations inside of runtime cast calls.
     Expression expression = AstUtils.removeTypeAnnotationIfPresent(castExpression.getExpression());
 
@@ -83,17 +80,10 @@ public class NormalizeCasts extends NormalizationPass {
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
-    TypeDescriptor castTypeDescriptorArgument =
-        rawCastTypeDescriptor.isNative()
-            ? TypeDescriptors.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
-            : rawCastTypeDescriptor;
-    checkArgument(
-        !castTypeDescriptorArgument.isNative(),
-        "Should not pass a native type to Arrays.$castTo().");
 
     // Casts.$to(expr, TypeName);
     return MethodCall.Builder.from(castToMethodDescriptor)
-        .setArguments(expression, new JavaScriptConstructorReference(castTypeDescriptorArgument))
+        .setArguments(expression, AstUtils.getMetadataConstructorReference(castTypeDescriptor))
         .build();
   }
 
@@ -113,18 +103,13 @@ public class NormalizeCasts extends NormalizationPass {
   private static Expression createJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
 
-    TypeDescriptor castTypeDescriptorArgument =
-        arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor();
-    checkArgument(
-        !castTypeDescriptorArgument.isNative(),
-        "Should not pass a native type to Arrays.$castTo().");
-
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall =
         AstUtils.createArraysMethodCall(
             "$castTo",
             castExpression.getExpression(),
-            new JavaScriptConstructorReference(castTypeDescriptorArgument),
+            AstUtils.getMetadataConstructorReference(
+                arrayCastTypeDescriptor.getLeafTypeDescriptor()),
             new NumberLiteral(
                 TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
 

@@ -7,17 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
 
 
-const com_google_j2cl_transpiler_readable_jsvarargs_Main_Function = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.Function$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-/**
- * @implements {com_google_j2cl_transpiler_readable_jsvarargs_Main_Function}
- */
 class AFunction extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -53,7 +50,6 @@ class AFunction extends java_lang_Object {
   }
 
   /**
-   * @override
    * @this {?function(number, ...*):*}
    * @param {number} i
    * @param {...*} args
@@ -121,8 +117,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction'));
 
 
-com_google_j2cl_transpiler_readable_jsvarargs_Main_Function.$markImplementor(
-    AFunction);
+$JavaScriptFunction.$markImplementor(AFunction);
 
 
 /**

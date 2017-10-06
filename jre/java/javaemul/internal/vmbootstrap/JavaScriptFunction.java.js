@@ -26,5 +26,5 @@ let _$Util = goog.require('nativebootstrap.Util');
 
 
 // Re-exports the implementation.
-let JavaScriptObject = goog.require('vmbootstrap.JavaScriptFunction$impl');
-exports = JavaScriptObject;
+const JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+exports = JavaScriptFunction;

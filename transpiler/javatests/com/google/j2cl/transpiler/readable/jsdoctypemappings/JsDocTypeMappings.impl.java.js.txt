@@ -12,7 +12,6 @@ const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ExportedType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName$impl');
-let NativeFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeFunction$impl');
 let NativeType$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeType$$Overlay$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -26,6 +25,7 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Comparator$$Overlay = goog.forwardDeclare('java.util.Comparator$$Overlay$impl');
 let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
@@ -290,8 +290,6 @@ class JsDocTypeMappings extends java_lang_Object {
     JsDocTypeMappings.$clinit = function() {};
     ExportedType = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName$impl');
-    NativeFunction = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeFunction$impl');
     NativeType$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeType$$Overlay$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
@@ -306,6 +304,8 @@ class JsDocTypeMappings extends java_lang_Object {
     java_lang_String = goog.module.get('java.lang.String$impl');
     Comparator$$Overlay = goog.module.get('java.util.Comparator$$Overlay$impl');
     Comparator = goog.module.get('java.util.Comparator$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');

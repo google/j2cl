@@ -7,17 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.$1$impl');
 
 
-const ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunction$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-/**
- * @implements {ApplyFunction<?string>}
- */
 class $1 extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -69,7 +66,6 @@ class $1 extends java_lang_Object {
 
   /**
    * Bridge method.
-   * @override
    * @this {?function(?string):?string}
    * @param {*} arg0
    * @return {?string}
@@ -172,7 +168,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunctionbridge.Main$1'));
 
 
-ApplyFunction.$markImplementor($1);
+$JavaScriptFunction.$markImplementor($1);
 
 
 /**

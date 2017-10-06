@@ -71,7 +71,7 @@ public class OutputGeneratorStage {
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
-        if (type.getDeclaration().isNative()) {
+        if (type.getDeclaration().isNative() || type.getDeclaration().isJsFunctionInterface()) {
           // Don't generate JS for native JsTypes.
           continue;
         }

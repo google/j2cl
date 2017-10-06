@@ -7,9 +7,9 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B$impl');
 
 
-const ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
@@ -18,7 +18,6 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @template C_B_T
- * @implements {ApplyFunction<C_B_T, Integer>}
  */
 class B extends java_lang_Object {
   /**
@@ -65,7 +64,6 @@ class B extends java_lang_Object {
 
   /**
    * Bridge method.
-   * @override
    * @this {?function(C_B_T, Integer):C_B_T}
    * @param {*} arg0
    * @param {(Number|?number)} arg1
@@ -152,7 +150,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$B'));
 
 
-ApplyFunction.$markImplementor(B);
+$JavaScriptFunction.$markImplementor(B);
 
 
 /**

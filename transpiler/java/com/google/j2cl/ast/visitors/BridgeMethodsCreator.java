@@ -426,6 +426,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
     checkArgument(bridgeMethodDescriptor.isSynthetic());
     checkArgument(bridgeMethodDescriptor.isBridge());
+
+    // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
+    // Determine whether the method needs @override annotation.
+    boolean isOverride = AstUtils.overrideNeedsAtOverrideAnnotation(originalBridgeMethodDescriptor);
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
@@ -434,7 +438,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 type.getSourcePosition(),
                 dispatchMethodCall,
                 bridgeMethodDescriptor.getReturnTypeDescriptor()))
-        .setOverride(true)
+        .setOverride(isOverride)
         .setJsDocDescription("Bridge method.")
         .setSourcePosition(type.getSourcePosition())
         .build();

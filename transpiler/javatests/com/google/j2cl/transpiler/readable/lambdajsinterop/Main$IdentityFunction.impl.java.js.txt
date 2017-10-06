@@ -7,14 +7,11 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
 
 
-const com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function = goog.require('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 
-/**
- * @implements {com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function<*, *>}
- */
 class IdentityFunction extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -50,7 +47,6 @@ class IdentityFunction extends java_lang_Object {
   }
 
   /**
-   * @override
    * @this {?function(*):*}
    * @param {*} o
    * @return {*}
@@ -117,8 +113,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main$IdentityFunction'));
 
 
-com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function
-    .$markImplementor(IdentityFunction);
+$JavaScriptFunction.$markImplementor(IdentityFunction);
 
 
 /**

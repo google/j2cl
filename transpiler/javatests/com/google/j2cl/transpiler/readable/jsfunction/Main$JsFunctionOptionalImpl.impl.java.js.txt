@@ -7,18 +7,15 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptionalImpl$impl');
 
 
-const JsFunctionOptional = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionOptional$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-/**
- * @implements {JsFunctionOptional}
- */
 class JsFunctionOptionalImpl extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -54,7 +51,6 @@ class JsFunctionOptionalImpl extends java_lang_Object {
   }
 
   /**
-   * @override
    * @this {?function(number, ?number=):number}
    * @param {number} i
    * @param {?number=} number$1$
@@ -126,7 +122,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionOptionalImpl'));
 
 
-JsFunctionOptional.$markImplementor(JsFunctionOptionalImpl);
+$JavaScriptFunction.$markImplementor(JsFunctionOptionalImpl);
 
 
 /**

@@ -12,10 +12,10 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Lambda$JsSupplier$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1$impl');
 let $Lambda$Thenable$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
-let com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
 let IdentityFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
 class Main extends java_lang_Object {
@@ -65,7 +65,7 @@ class Main extends java_lang_Object {
     }
     return /**@type {?function(*):*} */ ($Casts.$to(
         Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_,
-        com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function));
+        $JavaScriptFunction));
   }
 
   /**
@@ -136,13 +136,12 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$JsSupplier$1$impl');
     $Lambda$Thenable$0 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.$Lambda$Thenable$0$impl');
-    com_google_j2cl_transpiler_readable_lambdajsinterop_Main_Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Function$impl');
     IdentityFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.IdentityFunction$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     java_lang_Object.$clinit();
     Main.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdajsinterop_Main_ =
         null;

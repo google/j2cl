@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsInfo;
@@ -30,8 +29,6 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Replaces instanceof expression with corresponding $isInstance method call. */
 public class NormalizeInstanceOfs extends NormalizationPass {
@@ -57,36 +54,35 @@ public class NormalizeInstanceOfs extends NormalizationPass {
   private static Node rewriteRegularInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    if (checkTypeDescriptor.isNative()) {
-      checkTypeDescriptor =
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(checkTypeDescriptor);
-    }
+    JavaScriptConstructorReference javaScriptConstructorReference =
+        AstUtils.getMetadataConstructorReference(checkTypeDescriptor);
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingTypeDescriptor(checkTypeDescriptor)
+            .setEnclosingTypeDescriptor(
+                javaScriptConstructorReference.getReferencedTypeDescriptor())
             .setName("$isInstance")
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
-    List<Expression> arguments = new ArrayList<>();
-    arguments.add(instanceOfExpression.getExpression());
 
     // TypeName.$isInstance(expr);
-    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
+    return MethodCall.Builder.from(isInstanceMethodDescriptor)
+        .setQualifier(javaScriptConstructorReference)
+        .setArguments(instanceOfExpression.getExpression())
+        .build();
   }
 
   private static Node rewriteJavaArrayInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);
     return AstUtils.createArraysMethodCall(
         "$instanceIsOfType",
         instanceOfExpression.getExpression(),
-        new JavaScriptConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()),
+        AstUtils.getMetadataConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()),
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
   }
 

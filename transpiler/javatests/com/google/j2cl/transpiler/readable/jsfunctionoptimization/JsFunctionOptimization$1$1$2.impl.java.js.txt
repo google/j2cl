@@ -7,9 +7,9 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1.$2$impl');
 
 
-const F = goog.require('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.F$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1$impl');
 let com_google_j2cl_transpiler_readable_jsfunctionoptimization_JsFunctionOptimization_1_1_2_1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization.$1.$1.$2.$1$impl');
@@ -17,9 +17,6 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-/**
- * @implements {F}
- */
 class $2 extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -82,7 +79,6 @@ class $2 extends java_lang_Object {
   }
 
   /**
-   * @override
    * @this {?function(?string):?string}
    * @param {?string} s
    * @return {?string}
@@ -173,7 +169,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFunctionOptimization$1$1$2'));
 
 
-F.$markImplementor($2);
+$JavaScriptFunction.$markImplementor($2);
 
 
 /**

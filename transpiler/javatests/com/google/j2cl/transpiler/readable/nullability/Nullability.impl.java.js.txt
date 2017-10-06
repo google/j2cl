@@ -13,7 +13,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Preconditions = goog.forwardDeclare('com.google.common.base.Preconditions$impl');
 let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
-let MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
 let StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
 let ClassInSubpackage = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
@@ -23,6 +22,7 @@ let List$$Overlay = goog.forwardDeclare('java.util.List$$Overlay$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
@@ -226,8 +226,6 @@ class Nullability extends java_lang_Object {
     Lists = goog.module.get('com.google.common.collect.Lists$impl');
     Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
-    MyFunction = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
     StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
     ClassInSubpackage = goog.module.get(
@@ -239,6 +237,8 @@ class Nullability extends java_lang_Object {
     List = goog.module.get('java.util.List$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     java_lang_Object.$clinit();
   }

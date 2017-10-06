@@ -386,25 +386,26 @@ public class CompilationUnitBuilder {
 
     private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
       boolean isOverride =
-          methodDescriptor.isJsMember()
-              ? methodDescriptor
-                  .getOverriddenMethodDescriptors()
-                  .stream()
-                  .anyMatch(
-                      superMethodDescriptor ->
-                          superMethodDescriptor.isJsMember()
-                              && !superMethodDescriptor
-                                  .getEnclosingTypeDescriptor()
-                                  .isStarOrUnknown())
-              : methodDescriptor
-                  .getOverriddenMethodDescriptors()
-                  .stream()
-                  .anyMatch(methodDescriptor::isJsOverride);
+          methodDescriptor
+              .getOverriddenMethodDescriptors()
+              .stream()
+              .anyMatch(m -> requiresOverrideAnnotation(methodDescriptor, m));
       return Method.newBuilder()
           .setMethodDescriptor(methodDescriptor)
           .setOverride(isOverride)
           .setSourcePosition(getSourcePosition(node));
+    }
+
+    private boolean requiresOverrideAnnotation(
+        MethodDescriptor methodDescriptor, MethodDescriptor overriddenMethodDescriptor) {
+      if (methodDescriptor.isJsMember()) {
+        return overriddenMethodDescriptor.isJsMember()
+            && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
+      }
+      return methodDescriptor.isJsOverride(overriddenMethodDescriptor)
+          && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {

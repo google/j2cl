@@ -200,7 +200,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (!superInterfaceType.isStarOrUnknown()) {
+        if (doesClassExistInJavaScript(superInterfaceType)) {
           sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
         }
       }
@@ -221,7 +221,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         buffer.appendln(" * @extends {" + supertype + "}");
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (!superInterfaceType.isStarOrUnknown()) {
+        if (doesClassExistInJavaScript(superInterfaceType)) {
           buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
         }
       }
@@ -233,6 +233,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" */");
       }
     }
+  }
+
+  private boolean doesClassExistInJavaScript(TypeDescriptor type) {
+    return !type.isStarOrUnknown() && !type.isJsFunctionInterface();
   }
 
   private void renderTypeBody() {
@@ -484,8 +488,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String name = null;
     if (type.isJsOverlayImplementation()) {
       name = type.getNativeTypeDescriptor().getQualifiedJsName();
-    } else if (type.getDeclaration().isJsFunctionInterface()) {
-      name = "Function";
     } else {
       name = type.getDeclaration().getQualifiedBinaryName();
     }
@@ -618,8 +620,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         if (interfaceTypeDescriptor.isNative()) {
           continue;
         }
-        String interfaceName = environment.aliasForType(interfaceTypeDescriptor);
-        sourceBuilder.appendln(interfaceName + ".$markImplementor(" + className + ");");
+        renderExpression(AstUtils.getMetadataConstructorReference(interfaceTypeDescriptor));
+        sourceBuilder.appendln(".$markImplementor(" + className + ");");
       }
     }
     sourceBuilder.newLines(2);

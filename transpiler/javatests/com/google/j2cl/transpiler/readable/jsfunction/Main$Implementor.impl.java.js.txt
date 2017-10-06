@@ -11,8 +11,8 @@ const Api = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.Ap
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let ParametricJsFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
@@ -58,7 +58,7 @@ class Implementor extends java_lang_Object {
    */
   anApi() {
     return /**@type {?function(*):void} */ (
-        $Casts.$to(null, ParametricJsFunction));
+        $Casts.$to(null, $JavaScriptFunction));
   }
 
   /**
@@ -98,9 +98,9 @@ class Implementor extends java_lang_Object {
    */
   static $clinit() {
     Implementor.$clinit = function() {};
-    ParametricJsFunction = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsfunction.Main.ParametricJsFunction$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     java_lang_Object.$clinit();
   }

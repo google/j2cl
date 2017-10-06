@@ -268,6 +268,16 @@ class ImportGatherer extends AbstractVisitor {
     mayAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
     mayAddOverlayImplementationTypeDescriptor(typeDescriptor);
 
+    if (typeDescriptor.isJsFunctionInterface()) {
+      // If the type is a @JsFunction replace the specific @JsFunction interface type descriptor
+      // with the generic JavaScriptFunction type descriptor.
+      // Most of the specific references have already been replaced however, @JsFunction
+      // Java implementations still consider the @JsFunction interface a superinterface and
+      // need to import it to able to call $markImplementor() for class setup.
+      addTypeDescriptor(BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor(), importCategory);
+      return;
+    }
+
     TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (rawTypeDescriptor.isExtern()) {
       importCategory = ImportCategory.EXTERN;

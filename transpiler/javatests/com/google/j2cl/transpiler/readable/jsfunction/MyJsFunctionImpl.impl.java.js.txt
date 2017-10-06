@@ -7,16 +7,13 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 
 
-const MyJsFunctionInterface = goog.require('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-/**
- * @implements {MyJsFunctionInterface}
- */
 class MyJsFunctionImpl extends java_lang_Object {
   /**
    * Private implementation constructor.
@@ -67,7 +64,6 @@ class MyJsFunctionImpl extends java_lang_Object {
   m_fun__() {}
 
   /**
-   * @override
    * @this {?function(number):number}
    * @param {number} a
    * @return {number}
@@ -165,7 +161,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl'));
 
 
-MyJsFunctionInterface.$markImplementor(MyJsFunctionImpl);
+$JavaScriptFunction.$markImplementor(MyJsFunctionImpl);
 
 
 /**

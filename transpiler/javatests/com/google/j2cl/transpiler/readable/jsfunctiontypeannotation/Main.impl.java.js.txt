@@ -11,13 +11,13 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A$impl');
-let ApplyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
 let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
 class Main extends java_lang_Object {
@@ -157,9 +157,9 @@ class Main extends java_lang_Object {
     let b2 =
         /**@type {?function(?string, Integer):?string} */ ($Casts.$to(o, B));
     let af1 = /**@type {?function(*, (Number|?number)):*} */ (
-        $Casts.$to(o, ApplyFunction));
+        $Casts.$to(o, $JavaScriptFunction));
     let af2 = /**@type {?function(?string, Integer):?string} */ (
-        $Casts.$to(o, ApplyFunction));
+        $Casts.$to(o, $JavaScriptFunction));
     let a =
         /**@type {?function(?number, ?number):?number} */ ($Casts.$to(o, A));
   }
@@ -211,8 +211,6 @@ class Main extends java_lang_Object {
     Main.$clinit = function() {};
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A$impl');
-    ApplyFunction = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
     B = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B$impl');
     Double = goog.module.get('java.lang.Double$impl');
@@ -220,6 +218,8 @@ class Main extends java_lang_Object {
     Number = goog.module.get('java.lang.Number$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     java_lang_Object.$clinit();
   }
 

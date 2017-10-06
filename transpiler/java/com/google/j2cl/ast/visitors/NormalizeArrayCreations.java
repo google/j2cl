@@ -24,7 +24,6 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -82,14 +81,14 @@ public class NormalizeArrayCreations extends NormalizationPass {
           newArrayExpression.getTypeDescriptor());
     }
 
+    TypeDescriptor leafTypeDescriptor = newArrayExpression.getLeafTypeDescriptor();
     return createNonNullableAnnotation(
         AstUtils.createArraysMethodCall(
             "$create",
             new ArrayLiteral(
                 TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                 newArrayExpression.getDimensionExpressions()),
-            new JavaScriptConstructorReference(
-                newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor())),
+            AstUtils.getMetadataConstructorReference(leafTypeDescriptor)),
         newArrayExpression.getTypeDescriptor());
   }
 
@@ -104,11 +103,11 @@ public class NormalizeArrayCreations extends NormalizationPass {
       return newArrayExpression.getArrayLiteral();
     }
 
+    TypeDescriptor leafTypeDescriptor = newArrayExpression.getLeafTypeDescriptor();
     List<Expression> arguments =
         Lists.newArrayList(
             newArrayExpression.getArrayLiteral(),
-            new JavaScriptConstructorReference(
-                newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor()));
+            AstUtils.getMetadataConstructorReference(leafTypeDescriptor));
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     if (dimensionCount > 1) {

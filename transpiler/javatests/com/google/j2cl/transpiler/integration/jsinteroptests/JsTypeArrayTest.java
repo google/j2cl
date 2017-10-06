@@ -235,25 +235,55 @@ public class JsTypeArrayTest extends MyTestCase {
 
   @JsFunction
   private interface SomeOtherFunction {
-    int m(int i);
+    int n(Object o, int j);
+  }
+
+  private static final class SomeFunctionImplementation implements SomeFunction {
+    public int m(int i) {
+      return 0;
+    }
   }
 
   public void testJsFunctionArray() {
-    Object[] array = new SomeFunction[10];
+    Object[] someFunctionArray = new SomeFunction[10];
 
-    array[0] = returnSomeFunction();
+    // @JsFunction arrays can contain any type of function.
+    someFunctionArray[0] = returnSomeFunction();
 
-    assertTrue(array instanceof SomeFunction[]);
-    assertFalse(array instanceof SomeOtherFunction[]);
+    // @JsFunction arrays are interchangeable with each other.
+    assertTrue(someFunctionArray instanceof SomeFunction[]);
+    assertTrue(someFunctionArray instanceof SomeOtherFunction[]);
+    assertFalse(new Object[0] instanceof SomeOtherFunction[]);
 
+    // @JsFunction arrays are interchangeable
+    SomeOtherFunction[] someOtherFunctionArray = (SomeOtherFunction[]) someFunctionArray;
+
+    someOtherFunctionArray[0] = (a, b) -> 2;
+    // @JsFunction arrays accept any @JsFunction implementation.
+    someFunctionArray[2] = (SomeOtherFunction) (a, b) -> 2;
+    ((Object[]) someOtherFunctionArray)[0] = new SomeFunctionImplementation();
+
+    Object[] someFunctionImplementationArray = new SomeFunctionImplementation[1];
+
+    // @JsFunction arrays variables can reference any function implementation implementation arrays,
+    // whether its the declared @JsFunction interface or not.
+    SomeFunction[] aSomeFunctionArray = (SomeFunction[]) someFunctionImplementationArray;
+    SomeOtherFunction[] aSomeOtherFunctionArray =
+        (SomeOtherFunction[]) someFunctionImplementationArray;
+
+    // @JsFunction implementation arrays can only contain particular functions.
+    someFunctionImplementationArray[0] = new SomeFunctionImplementation();
     try {
-      SomeOtherFunction[] other = (SomeOtherFunction[]) array;
+      // SomeFunctionImplementation[] arrays can only contain the specific JsFunction
+      // implementation.
+      someFunctionImplementationArray[0] = (SomeFunction) (a) -> a + 1;
       fail("Should have thrown");
-    } catch (ClassCastException expected) {
+    } catch (ArrayStoreException expected) {
     }
 
     try {
-      array[1] = new Object();
+      // @JsFunction arrays can only contain functions.
+      someFunctionArray[1] = new Object();
       fail("Should have thrown");
     } catch (ArrayStoreException expected) {
     }

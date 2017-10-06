@@ -71,7 +71,7 @@
 [public static void f(Function<String, String> f) {}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.f"
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [list] => [list] "list"
-[f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), com_google_j2cl_transpiler_readable_jsfunction_Main_Function)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
+[f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
 [generator] => [generator] "generator"
 [public static <A, T> A[] toArray(IntFunction<A[]> generator) {
     List<T> collected = null;

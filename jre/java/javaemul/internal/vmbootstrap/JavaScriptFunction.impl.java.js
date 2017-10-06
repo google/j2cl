@@ -25,9 +25,48 @@ let $Util = goog.require('nativebootstrap.Util$impl');
  * Provides class literal and Object methods implementations for
  * JsFunctions.
  */
-class JavaScriptFunction {}
+class JavaScriptFunction {
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype.$implements__$$JavaScriptFunction = true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype.$implements__$$JavaScriptFunction;
+  }
+}
 
 $Util.$setClassMetadata(JavaScriptFunction, 'JavaScriptFunction');
+
+
+JavaScriptFunction.$markImplementor(
+    /** @type {Function} */ (JavaScriptFunction));
+
 
 /**
  * Exported class.
