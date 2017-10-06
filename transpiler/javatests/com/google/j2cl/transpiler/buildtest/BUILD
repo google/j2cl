@@ -147,6 +147,7 @@ pinto_module(
 pinto_processed_module_set(
     name = "J2clPintoPmfEnhancerMss_processed_module_set",
     module_graph_root = "J2clPintoPmfEnhancerMss_pinto_module",
+    use_depgraph = False,
     deps = [":J2clPintoPmfEnhancerMss_pinto_module"],
 )
 
@@ -182,6 +183,7 @@ pinto_module(
 pinto_processed_module_set(
     name = "J2clAjdPintoPmfEnhancerMss_processed_module_set",
     module_graph_root = "J2clAjdPintoPmfEnhancerMss_pinto_module",
+    use_depgraph = False,
     deps = [":J2clAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
@@ -219,6 +221,7 @@ pinto_processed_module_set(
     name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
     enable_j2cl_legacy_mode = True,  # Deal with duplicate files. Enables ZipExpanderPlugin.
     module_graph_root = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+    use_depgraph = False,
     deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
 )
 
