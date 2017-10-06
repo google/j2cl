@@ -43,7 +43,6 @@ public class JdtParser {
   private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
   private final List<String> classpathEntries;
-  private boolean includeRunningVMBootclasspath;
 
   /** Create and initialize a JdtParser based on an options object. */
   public JdtParser(FrontendOptions options, Problems problems) {
@@ -105,20 +104,13 @@ public class JdtParser {
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);
   }
 
-  public void setIncludeRunningVMBootclasspath(boolean includeRunningVMBootclasspath) {
-    this.includeRunningVMBootclasspath = includeRunningVMBootclasspath;
-  }
-
   private ASTParser newASTParser(boolean resolveBinding) {
     ASTParser parser = ASTParser.newParser(AST.JLS8);
 
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(resolveBinding);
     parser.setEnvironment(
-        Iterables.toArray(classpathEntries, String.class),
-        new String[0],
-        new String[0],
-        includeRunningVMBootclasspath);
+        Iterables.toArray(classpathEntries, String.class), new String[0], new String[0], false);
     return parser;
   }
 
