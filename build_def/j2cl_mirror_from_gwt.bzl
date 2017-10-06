@@ -6,8 +6,8 @@ overlaying files from current directory.
 """
 
 load(":j2cl_source_copy.bzl", "j2cl_source_copy")
-load(":jsni_to_native_js_bundle.bzl", "jsni_to_native_js_bundle")
-load("//build_def:j2cl_library.bzl", "j2cl_library")
+load(":j2cl_library.bzl", "j2cl_library")
+load(":j2cl_util.bzl", "generate_zip")
 
 def j2cl_mirror_from_gwt(name,
                          mirrored_files,
@@ -32,28 +32,19 @@ def j2cl_mirror_from_gwt(name,
       srcs = [":" + name + "_copy"] + super_srcs,
   )
 
-  jsni_to_native_js_bundle(
-      name = name +"_native_zips",
-      srcs = [":" + name + "_java_files"],
-      native_srcs = native_srcs,
-      testonly = kwargs.get("testonly", 0),
-      deps = [":" + name + "_java_library"],
+  # TODO(b/67481861): Do we really need custom zipping w/ RELATIVE?
+  generate_zip(
+      name = name + "_native.zip",
+      srcs = native_srcs,
+      pkg = "RELATIVE",
   )
-
-  packaged_js_srcs = None
-  if js_srcs:
-    native.filegroup(
-        name = name + "_js_files",
-        srcs = js_srcs,
-    )
-    packaged_js_srcs = [":" + name + "_js_files"]
 
   j2cl_library(
       name = name,
       srcs = [":" + name + "_java_files"],
-      _js_srcs = packaged_js_srcs,
-      native_srcs_zips = [":" + name + "_native_zips"],
+      native_srcs_zips = [name + "_native.zip"],
       deps = deps,
+      _js_srcs = js_srcs,
       _js_deps = js_deps,
       **kwargs
   )
