@@ -43,8 +43,7 @@ public class JsFunctionTest extends MyTestCase {
     // TODO(b/63941038): enable this test
     // test.testJsFunctionIdentity_ctor();
     test.testJsFunctionJs2Java();
-    // TODO(b/63040102): enable this test
-    // test.testJsFunctionProperty();
+    test.testJsFunctionProperty();
     test.testJsFunctionReferentialIntegrity();
     test.testJsFunctionSuccessiveCalls();
     test.testJsFunctionViaFunctionMethods();
@@ -429,20 +428,64 @@ public class JsFunctionTest extends MyTestCase {
     Object m();
   }
 
+  @JsFunction
+  interface JsFunctionInterfaceWithT<T> {
+    T m();
+  }
+
   @JsMethod
   private static native JsFunctionInterface createFunctionThatReturnsThis();
 
   public void testJsFunctionProperty() {
     class JsFuncionProperty {
-      @JsProperty public JsFunctionInterface func;
+      @JsProperty public JsFunctionInterface func = createFunctionThatReturnsThis();
+
+      @JsProperty
+      public JsFunctionInterface getF() {
+        return createFunctionThatReturnsThis();
+      }
     }
 
+    JsFunctionInterface[] array = new JsFunctionInterface[] {createFunctionThatReturnsThis()};
     JsFuncionProperty instance = new JsFuncionProperty();
-    instance.func = createFunctionThatReturnsThis();
-    assert instance != instance.func.m();
+    JsFunctionInterface funcInVar;
 
-    JsFunctionInterface funcInVar = instance.func;
-    assertSame(instance.func.m(), funcInVar.m());
+    // Field
+    assert instance != instance.func.m();
+    // Assert that "this" is bound to the same object regardless of whether the calls is made
+    // directly or from variable.
+    funcInVar = instance.func;
+    assertSame(funcInVar.m(), instance.func.m());
+
+    // Getter
+    assert instance != instance.getF().m();
+    // Assert that "this" is bound to the same object regardless of whether the calls is made
+    // directly or from variable.
+    funcInVar = instance.getF();
+    assertSame(funcInVar.m(), instance.getF().m());
+
+    // Array Access
+    assert array != array[0].m();
+    // Assert that "this" is bound to the same object regardless of whether the calls is made
+    // directly or from variable.
+    funcInVar = array[0];
+    assertSame(funcInVar.m(), array[0].m());
+
+    // Parenthesized
+    assert instance != (instance.func).m();
+    // Assert that "this" is bound to the same object regardless of whether the calls is made
+    // directly or from variable.
+    funcInVar = instance.func;
+    assertSame(funcInVar.m(), (instance.func).m());
+
+    // Conditional expression
+    // Currently there is no way to write it in Java without parenthesis but the parenthesis might
+    // be dropped in the future.
+    assert instance != ((instance != null) ? instance.func : instance.func).m();
+    // Assert that "this" is bound to the same object regardless of whether the calls is made
+    // directly or from variable.
+    funcInVar = (instance != null) ? instance.func : instance.func;
+    assertSame(funcInVar.m(), ((instance != null) ? instance.func : instance.func).m());
   }
 
   @JsFunction

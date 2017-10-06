@@ -1,0 +1,114 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$ClassWithJsFunctionProperty.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class ClassWithJsFunctionProperty extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {?function(?string):void} */
+    this.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty =
+        null;
+  }
+
+  /**
+   * Factory method corresponding to constructor
+   * 'ClassWithJsFunctionProperty()'.
+   * @return {!ClassWithJsFunctionProperty}
+   * @public
+   */
+  static $create__() {
+    ClassWithJsFunctionProperty.$clinit();
+    let $instance = new ClassWithJsFunctionProperty();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'ClassWithJsFunctionProperty()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty();
+  }
+
+  /**
+   * @return {?function(?string):void}
+   * @public
+   */
+  get function() {
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof ClassWithJsFunctionProperty;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ClassWithJsFunctionProperty);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    ClassWithJsFunctionProperty.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty() {
+  }
+};
+
+$Util.$setClassMetadata(
+    ClassWithJsFunctionProperty,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$ClassWithJsFunctionProperty'));
+
+
+
+/**
+ * Export class.
+ */
+exports = ClassWithJsFunctionProperty;
+//# sourceMappingURL=Main$ClassWithJsFunctionProperty.js.map

@@ -21,6 +21,7 @@ import java.util.function.IntFunction;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
+import jsinterop.annotations.JsProperty;
 
 public class Main {
   public static int fun(MyJsFunctionInterface fn, int a) {
@@ -169,5 +170,22 @@ public class Main {
           List<List<?>> l = new ArrayList<>();
           l.add(new ArrayList<String>());
         };
+  }
+
+  private static class ClassWithJsFunctionProperty {
+    ParametricJsFunction<String> function;
+
+    @JsProperty
+    ParametricJsFunction<String> getFunction() {
+      return null;
+    }
+  }
+
+  void testJsFunctionPropertyCall() {
+    ClassWithJsFunctionProperty c = new ClassWithJsFunctionProperty();
+    c.function.call("");
+    c.getFunction().call("");
+    (c.function).call("");
+    (c != null ? c.function : null).call("");
   }
 }

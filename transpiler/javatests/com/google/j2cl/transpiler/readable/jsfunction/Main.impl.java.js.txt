@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ClassWithJsFunctionProperty = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -17,11 +18,13 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List$$Overlay = goog.forwardDeclare('java.util.List$$Overlay$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let IntFunction = goog.forwardDeclare('java.util.function.IntFunction$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class Main extends java_lang_Object {
@@ -217,6 +220,35 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionPropertyCall___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
+    let c = ClassWithJsFunctionProperty.$create__();
+    {
+      let $function =
+          c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty;
+      $function('');
+    }
+    {
+      let $function$1$ = /**@type {?function(?string):void} */ (c.function);
+      $function$1$('');
+    }
+    {
+      let $function$2$ =
+          (c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty);
+      $function$2$('');
+    }
+    {
+      let $function$3$ =
+          (!$Equality.$same(c, null) ?
+               c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty :
+               null);
+      $function$3$('');
+    }
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -242,6 +274,8 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
+    ClassWithJsFunctionProperty = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
     MyJsFunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
     Double = goog.module.get('java.lang.Double$impl');
@@ -250,12 +284,14 @@ class Main extends java_lang_Object {
     List$$Overlay = goog.module.get('java.util.List$$Overlay$impl');
     List = goog.module.get('java.util.List$impl');
     IntFunction = goog.module.get('java.util.function.IntFunction$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     java_lang_Object.$clinit();
   }
 
