@@ -27,8 +27,6 @@ import com.google.j2cl.ast.Expression;
 
 /**
  * Rewrites array set operations to use Arrays.$set or LongUtils.$set operations.
- *
- * <p>This prevents side effects from being duplicated.
  */
 public class ArrayAccessNormalizer extends NormalizationPass {
   @Override
