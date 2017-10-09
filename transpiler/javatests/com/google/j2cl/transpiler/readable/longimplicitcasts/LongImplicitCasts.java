@@ -90,5 +90,9 @@ public class LongImplicitCasts {
       tlong = flong << flong;
       tlong <<= flong;
     }
+    // Repro for b/67599510
+    {
+      tlong = 0 + 1 + 2L;
+    }
   }
 }
