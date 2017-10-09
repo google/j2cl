@@ -311,9 +311,23 @@ def j2cl_library(name,
     generate_build_test = True
 
   if generate_build_test and src_zips:
+    # Add an empty .js file to the js_binary build test compilation so that  jscompiler does not
+    # error out when there are no .js source (e.g. all sources are @JsFunction).
+    native.genrule(
+        name=base_name + "_empty_js_file",
+        cmd="echo \"// empty file\" > $(OUTS)",
+        outs=[base_name + "_empty_js_file.js"],
+    )
+    native.js_library(
+        name=base_name + "_empty_js_file_lib",
+        srcs=[base_name + "_empty_js_file"]
+    )
     native.js_binary(
         name=base_name + "_js_binary",
-        deps=[base_name],
+        deps=[
+            base_name,
+            base_name + "_empty_js_file_lib",
+        ],
         defs=J2CL_OPTIMIZED_DEFS,
         externs_list=_test_externs_list,
         include_default_externs="off" if _test_externs_list else "web",
