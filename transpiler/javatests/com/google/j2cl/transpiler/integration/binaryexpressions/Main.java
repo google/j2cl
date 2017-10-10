@@ -113,5 +113,11 @@ public class Main {
     outer = new Outer();
     outer.new Inner();
     assert outer.b;
+
+    // Binary expression from JDT InfixExpression with extended operands.
+    double n = 1;
+    long l = 2L;
+    // TODO(b/67599510): Uncomment when handling of InfixExpression with extended operands is fixed.
+    // assert  20 + l + n == n + l + 20;
   }
 }
