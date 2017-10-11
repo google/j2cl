@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import java.util.Optional;
 
 /**
  * Inserts an unboxing operation (and optionally followed by a widening primitive conversion in some
@@ -39,7 +40,8 @@ public class InsertUnboxingConversions extends NormalizationPass {
       @Override
       public Expression rewriteAssignmentContext(
           TypeDescriptor toTypeDescriptor, Expression expression) {
-        return maybeUnboxAndWiden(toTypeDescriptor, expression);
+        Optional<Expression> unboxedExpression = maybeUnboxAndWiden(toTypeDescriptor, expression);
+        return unboxedExpression.orElse(expression);
       }
 
       @Override
@@ -53,33 +55,19 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteCastContext(CastExpression castExpression) {
-        TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+        Expression expression = castExpression.getExpression();
         TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-        if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-            && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
 
-          // An unboxing conversion....
-          Expression resultExpression = AstUtils.unbox(castExpression.getExpression());
-
-          // ...optionally followed by a widening primitive conversion.
-          fromTypeDescriptor = resultExpression.getTypeDescriptor();
-          if (!fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
-            resultExpression =
-                CastExpression.newBuilder()
-                    .setExpression(resultExpression)
-                    .setCastTypeDescriptor(toTypeDescriptor)
-                    .build();
-          }
-
-          return resultExpression;
-        }
-        return castExpression;
+        Optional<Expression> unboxedExpression = maybeUnboxAndWiden(toTypeDescriptor, expression);
+        return unboxedExpression.orElse(castExpression);
       }
 
       @Override
       public Expression rewriteMethodInvocationContext(
           ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-        return maybeUnboxAndWiden(parameterDescriptor.getTypeDescriptor(), argumentExpression);
+        Optional<Expression> unboxedExpression =
+            maybeUnboxAndWiden(parameterDescriptor.getTypeDescriptor(), argumentExpression);
+        return unboxedExpression.orElse(argumentExpression);
       }
 
       @Override
@@ -92,7 +80,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
     };
   }
 
-  private static Expression maybeUnboxAndWiden(
+  private static Optional<Expression> maybeUnboxAndWiden(
       TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
@@ -111,8 +99,8 @@ public class InsertUnboxingConversions extends NormalizationPass {
                 .build();
       }
 
-      return resultExpression;
+      return Optional.of(resultExpression);
     }
-    return expression;
+    return Optional.empty();
   }
 }
