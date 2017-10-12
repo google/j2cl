@@ -229,6 +229,14 @@
 [i = +boxI;] => [i = boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = -boxI;] => [i = -boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = ~boxI;] => [i = ~boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
+[boxD = -boxD;] => [boxD = -Double.m_doubleValue__java_lang_Double(boxD);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
+[boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
+[switch (boxI) {
+      default:
+    }] => [switch (boxI.m_intValue__()) {
+      default:
+    }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
+[default:] => [default: ] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingBoolean"
 [boxB1] => [boxB1] "boxB1"
 [Boolean boxB2 = new Boolean(false);] => [let boxB2 = Boolean.$create__boolean(false);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingBoolean"
@@ -303,6 +311,28 @@
 [b] => [b] "b"
 [assert boxB;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
 [assert b;] => [$Asserts.$assert(b);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testAssertStatement"
+[public void testUnderflowOverflow() {
+    Byte boxedByte = Byte.MIN_VALUE;
+...    assert ++boxedByte == Byte.MIN_VALUE;
+  }] => [let /** Byte */ $value, /** Byte */ $value$1$;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[Byte boxedByte = Byte.MIN_VALUE;] => [let boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[boxedByte] => [boxedByte] "boxedByte"
+[assert boxedByte-- == Byte.MIN_VALUE;] => [$Asserts.$assert(($value = boxedByte, boxedByte = Byte.m_valueOf__byte($Primitives.$toByte(boxedByte.m_byteValue__() - 1)), $value).m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[assert boxedByte == Byte.MAX_VALUE;] => [$Asserts.$assert(boxedByte.m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[boxedByte = Byte.MIN_VALUE;] => [boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[assert --boxedByte == Byte.MAX_VALUE;] => [$Asserts.$assert((boxedByte = Byte.m_valueOf__byte($Primitives.$toByte(boxedByte.m_byteValue__() - 1))).m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[boxedByte = Byte.MAX_VALUE;] => [boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[assert boxedByte++ == Byte.MAX_VALUE;] => [$Asserts.$assert(($value$1$ = boxedByte, boxedByte = Byte.m_valueOf__byte($Primitives.$toByte(boxedByte.m_byteValue__() + 1)), $value$1$).m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[assert boxedByte == Byte.MIN_VALUE;] => [$Asserts.$assert(boxedByte.m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[boxedByte = Byte.MAX_VALUE;] => [boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[assert ++boxedByte == Byte.MIN_VALUE;] => [$Asserts.$assert((boxedByte = Byte.m_valueOf__byte($Primitives.$toByte(boxedByte.m_byteValue__() + 1))).m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[Boolean boxB = null;] => [let boxB = null;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[boxB] => [boxB] "boxB"
+[boxB = !boxB;] => [boxB = !boxB;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[boxB = boxB && boxB;] => [boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) && Boolean.m_booleanValue__java_lang_Boolean(boxB);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[boxB = boxB ? boxB : boxB;] => [boxB = boxB ? boxB : boxB;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[if (boxB) {}] => [if (boxB) {
+    }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
 [@SuppressWarnings({
   "IdentityBinaryExpression",
 ...  }

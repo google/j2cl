@@ -396,6 +396,9 @@ class SimpleAutoBoxing extends java_lang_Object {
     i = boxI.m_intValue__();
     i = -boxI.m_intValue__();
     i = ~boxI.m_intValue__();
+    boxD = -Double.m_doubleValue__java_lang_Double(boxD);
+    boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
+    switch (boxI.m_intValue__()) { default: }
   }
 
   /**
@@ -515,6 +518,56 @@ class SimpleAutoBoxing extends java_lang_Object {
     let b = true;
     $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));
     $Asserts.$assert(b);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testUnderflowOverflow__() {
+    let /** Byte */ $value, /** Byte */ $value$1$;
+    let boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        ($value = boxedByte,
+         boxedByte = Byte.m_valueOf__byte(
+             $Primitives.$toByte(boxedByte.m_byteValue__() - 1)),
+         $value)
+            .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        boxedByte.m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
+    boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        (boxedByte = Byte.m_valueOf__byte(
+             $Primitives.$toByte(boxedByte.m_byteValue__() - 1)))
+            .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
+    boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        ($value$1$ = boxedByte,
+         boxedByte = Byte.m_valueOf__byte(
+             $Primitives.$toByte(boxedByte.m_byteValue__() + 1)),
+         $value$1$)
+            .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        boxedByte.m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
+    boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
+    $Asserts.$assert(
+        (boxedByte = Byte.m_valueOf__byte(
+             $Primitives.$toByte(boxedByte.m_byteValue__() + 1)))
+            .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testBooleanUnboxing__() {
+    let boxB = null;
+    boxB = !boxB;
+    boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) &&
+        Boolean.m_booleanValue__java_lang_Boolean(boxB);
+    boxB = boxB ? boxB : boxB;
+    if (boxB) {
+    }
   }
 
   /**

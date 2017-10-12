@@ -244,6 +244,11 @@ public class SimpleAutoBoxing {
     i = +boxI;
     i = -boxI;
     i = ~boxI;
+    boxD = -boxD;
+    boxI = -boxI;
+    switch (boxI) {
+      default:
+    }
   }
 
   @SuppressWarnings("unused")
@@ -337,5 +342,31 @@ public class SimpleAutoBoxing {
 
     assert boxB;
     assert b;
+  }
+
+  public void testUnderflowOverflow() {
+    Byte boxedByte = Byte.MIN_VALUE;
+    assert boxedByte-- == Byte.MIN_VALUE;
+    assert boxedByte == Byte.MAX_VALUE;
+    boxedByte = Byte.MIN_VALUE;
+    assert --boxedByte == Byte.MAX_VALUE;
+
+    boxedByte = Byte.MAX_VALUE;
+    assert boxedByte++ == Byte.MAX_VALUE;
+    assert boxedByte == Byte.MIN_VALUE;
+    boxedByte = Byte.MAX_VALUE;
+    assert ++boxedByte == Byte.MIN_VALUE;
+  }
+
+  @SuppressWarnings("unused")
+  public void testBooleanUnboxing() {
+    Boolean boxB = null;
+    boxB = !boxB;
+    boxB = boxB && boxB;
+    boxB = boxB ? boxB : boxB;
+    if (boxB) {}
+    // TODO(b/67734970) : uncomment once the bug is fixed.
+    // boolean b = false;
+    // b |= boxB |= b |= boxB;
   }
 }

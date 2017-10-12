@@ -15,6 +15,9 @@ load(
 integration_test(
     name = "simpleautoboxing",
     srcs = glob(["*.java"]),
+    closure_defines = {
+        "jre.checks.checkLevel": "NORMAL",
+    },
     deps = [
         "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",

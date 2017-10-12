@@ -14,4 +14,7 @@ load(
 integration_test(
     name = "unaryexpressions",
     srcs = glob(["*.java"]),
+    closure_defines = {
+        "jre.checks.checkLevel": "NORMAL",
+    },
 )

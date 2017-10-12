@@ -277,9 +277,18 @@ public class Main {
     Boolean b1 = new Boolean(true);
     Boolean b2 = new Boolean(false);
     Boolean boxB = b1 && b2;
-    boolean b = b1 || b2;
+    boolean b3 = b1 || b2;
     assert (!boxB.booleanValue());
-    assert (b);
+    assert (b3);
+
+    {
+      Boolean b = null;
+      try {
+        b = b && b;
+        assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
   }
 
   private int foo = 0;
@@ -363,6 +372,16 @@ public class Main {
 
     primitiveResult = alwaysTrue ? primitiveValue : primitiveValue;
     assert primitiveResult == 10;
+
+    {
+      Boolean b = null;
+      try {
+        b = b ? b : b;
+        // TODO(b/67705604): uncomment test when bug is fixed.
+        // assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
   }
 
   @SuppressWarnings("cast")
@@ -438,7 +457,59 @@ public class Main {
         // If unboxing is missing we'll arrive here.
         doFail();
     }
+
+    Boolean b = null;
+    {
+      try {
+        if (b) {}
+        // TODO(b/67705604): uncomment test when bug is fixed.
+        // assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
+
+    {
+      try {
+        while (b) {}
+        // TODO(b/67705604): uncomment test when bug is fixed.
+        // assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
+
+    {
+      try {
+        for (; b; ) {}
+        // TODO(b/67705604): uncomment test when bug is fixed.
+        // assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
+
+    {
+      try {
+        do {} while (b);
+        // TODO(b/67705604): uncomment test when bug is fixed.
+        // assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
+
+    {
+      Integer i = null;
+      try {
+        switch (i) {
+            // Some logic inside the switch to prevent jscompiler from optimizing it away.
+          case 1:
+            i = 3;
+          default:
+        }
+        assert false : "Should have thrown NPE";
+      } catch (NullPointerException expected) {
+      }
+    }
   }
+
 
   public Object doFail() {
     assert false;

@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 4 size changes.
+There are 3 size changes.
 Total size (of already existing tests) changed from
-  1514813 to 1515084 bytes (100%->100.02%) and from
-  472243 to 472313 bytes (100%->100.01%) gzipped.
+  1515084 to 1521220 bytes (100%->100.40%) and from
+  472311 to 474419 bytes (100%->100.45%) gzipped.
 
 
 New reports:
@@ -19,10 +19,9 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
       old    new
-    36988  37024 box2d_noclassmetadata (0.10%)
-     2190   2192 arraybranchinsertion (0.09%)
-    39122  39147 box2d_default (0.06%)
-    27632  27639 jsinteroptests (0.03%)
+     1045   1851 unaryexpressions (77.13%)
+     4415   5388 simpleautoboxing (22.04%)
+     3254   3583 underflowoverflowconversion (10.11%)
 
 
 All reports:
@@ -36,7 +35,7 @@ All reports:
      2594   2594 arithmeticexception (unchanged)
        62     62 arithmeticexceptiondisabled (unchanged)
       999    999 arithmeticexceptiondisabledresultused (unchanged)
-     2190   2192 arraybranchinsertion (0.09%)
+     2190   2190 arraybranchinsertion (unchanged)
      1059   1059 arraycastsinglesideeffect (unchanged)
      1757   1757 arrayleafinsertion (unchanged)
      2377   2377 arrayliteral (unchanged)
@@ -47,8 +46,8 @@ All reports:
      1089   1089 backwardbridgemethod (unchanged)
      2647   2647 binaryexpressions (unchanged)
      1010   1010 blockscoping (unchanged)
-    39122  39147 box2d_default (0.06%)
-    36988  37024 box2d_noclassmetadata (0.10%)
+    39147  39147 box2d_default (unchanged)
+    37024  37024 box2d_noclassmetadata (unchanged)
     35202  35202 box2d_noclassmetadata_checksmin (unchanged)
     36810  36810 box2d_noclassmetadata_checksopt (unchanged)
      3593   3593 boxingsideeffect (unchanged)
@@ -147,7 +146,7 @@ All reports:
      1776   1776 jsfunctionbridge (unchanged)
      2456   2456 jsfunctiontypeannotation (unchanged)
      1080   1080 jsinnerclass (unchanged)
-    27632  27639 jsinteroptests (0.03%)
+    27639  27639 jsinteroptests (unchanged)
      1087   1087 jsmethodoverride (unchanged)
      1010   1010 jsoverlay (unchanged)
      1015   1015 jsoverlaystaticrefs (unchanged)
@@ -205,7 +204,7 @@ All reports:
      2206   2206 returnimplicitcasts (unchanged)
        62     62 selfreferencingnativetype (unchanged)
      1084   1084 shadowedfield (unchanged)
-     4415   4415 simpleautoboxing (unchanged)
+     4415   5388 simpleautoboxing (22.04%)
      1065   1065 simplecascadingconstructor (unchanged)
      1040   1040 simpleliterals (unchanged)
        62     62 srcjar (unchanged)
@@ -233,8 +232,8 @@ All reports:
      1126   1126 ternaryexpression (unchanged)
      4016   4016 trywithresource (unchanged)
      1148   1148 typewildcards (unchanged)
-     1045   1045 unaryexpressions (unchanged)
-     3254   3254 underflowoverflowconversion (unchanged)
+     1045   1851 unaryexpressions (77.13%)
+     3254   3583 underflowoverflowconversion (10.11%)
       243    243 unusedmultiexpressionreturn (unchanged)
      1868   1868 varargs (unchanged)
      1108   1108 variablecollisions (unchanged)

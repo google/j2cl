@@ -166,6 +166,7 @@ public class Main {
     }
   }
 
+  @SuppressWarnings("NarrowingCompoundAssignment")
   private void testCompoundAssignment() {
     // Only bothering to test byte because this test is not about proving what is done with a type,
     // it's about proving that compound assignment rewriting doesn't interfere with underflow
@@ -271,6 +272,22 @@ public class Main {
     rd = md;
     rd++;
     assert rd == 1.7976931348623157E308D;
+
+    byte b = Byte.MIN_VALUE;
+    assert b-- == Byte.MIN_VALUE;
+    assert b == Byte.MAX_VALUE;
+
+    b = Byte.MAX_VALUE;
+    assert b++ == Byte.MAX_VALUE;
+    assert b == Byte.MIN_VALUE;
+
+    Byte boxedByte = Byte.MIN_VALUE;
+    assert boxedByte-- == Byte.MIN_VALUE;
+    assert boxedByte == Byte.MAX_VALUE;
+
+    boxedByte = Byte.MAX_VALUE;
+    assert boxedByte++ == Byte.MAX_VALUE;
+    assert boxedByte == Byte.MIN_VALUE;
   }
 
   private void testPrefixOperations() {
@@ -305,6 +322,18 @@ public class Main {
     rd = md;
     ++rd;
     assert rd == 1.7976931348623157E308D;
+
+    byte b = Byte.MIN_VALUE;
+    assert --b == Byte.MAX_VALUE;
+
+    b = Byte.MAX_VALUE;
+    assert ++b == Byte.MIN_VALUE;
+
+    Byte boxedByte = Byte.MIN_VALUE;
+    assert --boxedByte == Byte.MAX_VALUE;
+
+    boxedByte = Byte.MAX_VALUE;
+    assert ++boxedByte == Byte.MIN_VALUE;
   }
 
   private void testReturnAssignment() {
