@@ -200,6 +200,8 @@ java_test(
     args = ["--nooutputredirect"],
     data = ["%s/%s:optimized_js" % (integration_package, f) for f in integration_test_names],
     shard_count = 1,
+    # TODO(goktug): Put this test back on TAP. See https://groups.google.com/a/google.com/d/topic/jscomp-team/AhEF9p5mGpE/discussion
+    tags = ["notap"],
     deps = [
         "//java/com/google/ads/testing/testmetricsrecorder",
         "//java/com/google/common/collect",
