@@ -73,6 +73,7 @@ public class Main {
     // Char + String
     char c1 = 'F';
     char c2 = 'o';
-    assert (c1 + c2 + "o").equals("Foo");
+    int i = c1 + c2;
+    assert (c1 + c2 + "o").equals(i + "o");
   }
 }

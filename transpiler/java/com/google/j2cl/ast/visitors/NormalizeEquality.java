@@ -54,7 +54,6 @@ public class NormalizeEquality extends NormalizationPass {
                     .build();
             if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
               return PrefixExpression.newBuilder()
-                  .setTypeDescriptor(sameCall.getTypeDescriptor())
                   .setOperand(sameCall)
                   .setOperator(PrefixOperator.NOT)
                   .build();

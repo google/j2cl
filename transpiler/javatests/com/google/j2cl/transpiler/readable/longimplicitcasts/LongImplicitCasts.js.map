@@ -63,7 +63,7 @@
 [new LongImplicitCasts(flong);] => [LongImplicitCasts.$create__long(flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [tlong = flong << flong;] => [tlong = $LongUtils.$leftShift(flong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, flong);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
-[tlong = 0 + 1 + 2L;] => [tlong = $LongUtils.$plus(0 + 1, $Long.fromBits(2, 0) /* 2 */);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
+[tlong = 0 + 1 + 2L;] => [tlong = $LongUtils.$plus($Primitives.$widenIntToLong(0 + 1), $Long.fromBits(2, 0) /* 2 */);] "com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts.test"
 [public class LongImplicitCasts {
   // Initialized with not-a-long.
 ...  }

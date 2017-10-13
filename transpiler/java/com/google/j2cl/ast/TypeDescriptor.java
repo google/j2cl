@@ -697,6 +697,17 @@ public abstract class TypeDescriptor extends Node
         .collect(toImmutableList());
   }
 
+  /**
+   * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
+   * {@code typeDescriptor} otherwise
+   */
+  @Memoized
+  public TypeDescriptor unboxType() {
+    if (TypeDescriptors.isBoxedType(this)) {
+      return TypeDescriptors.getPrimitiveTypeFromBoxType(this);
+    }
+    return this;
+  }
 
   @Override
   public String toString() {

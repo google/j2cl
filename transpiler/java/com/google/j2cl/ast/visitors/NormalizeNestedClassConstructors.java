@@ -143,7 +143,6 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
           BinaryExpression initializer =
               BinaryExpression.newBuilder()
-                  .setTypeDescriptor(capturedField.getDescriptor().getTypeDescriptor())
                   .setLeftOperand(
                       FieldAccess.Builder.from(capturedField.getDescriptor())
                           .setQualifier(

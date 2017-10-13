@@ -194,7 +194,6 @@ public class NormalizeTryWithResources extends NormalizationPass {
         new ThrowStatement(sourcePosition, primaryException.getReference());
     Expression primaryExceptionNotEqualsNull =
         BinaryExpression.newBuilder()
-            .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .setLeftOperand(primaryException.getReference())
             .setOperator(BinaryOperator.NOT_EQUALS)
             .setRightOperand(NullLiteral.get())

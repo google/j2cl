@@ -61,9 +61,11 @@ class ExtendedOperands extends java_lang_Object {
     let /** !$Long */ l;
     let /** number */ d;
     l = $LongUtils.$minus(
-        2 - boxedInteger.m_intValue__(), $Long.fromBits(2, 0) /* 2 */);
+        $Primitives.$widenIntToLong(2 - boxedInteger.m_intValue__()),
+        $Long.fromBits(2, 0) /* 2 */);
     l = $LongUtils.$or(
-        2 | boxedInteger.m_intValue__(), $Long.fromBits(2, 0) /* 2 */);
+        $Primitives.$widenIntToLong(2 | boxedInteger.m_intValue__()),
+        $Long.fromBits(2, 0) /* 2 */);
     l = $LongUtils.$times(
         $LongUtils.$times(
             $LongUtils.$times(
@@ -72,16 +74,18 @@ class ExtendedOperands extends java_lang_Object {
             $Primitives.$widenIntToLong(60)),
         $Primitives.$widenIntToLong(24));
     l = $LongUtils.$times(
-        $LongUtils.$times(
-            $LongUtils.$times(24 * 60, $Primitives.$widenIntToLong(60)), l),
+        $LongUtils.$times($Primitives.$widenIntToLong(24 * 60 * 60), l),
         $Long.fromBits(1000000, 0) /* 1000000 */);
     d = $Primitives.$widenLongToDouble(l = $Primitives.$widenIntToLong(i = 20));
     l = $Primitives.$widenIntToLong(
         (boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());
     l = $LongUtils.$plus(
-        $LongUtils.$plus(i + boxedInteger.m_intValue__(), l),
+        $LongUtils.$plus(
+            $Primitives.$widenIntToLong(i + boxedInteger.m_intValue__()), l),
         $Primitives.$widenIntToLong(20));
-    d = $Primitives.$widenIntToLong(20) + l + d;
+    d = $Primitives.$widenLongToDouble(
+            $LongUtils.$plus($Primitives.$widenIntToLong(20), l)) +
+        d;
   }
 
   /**

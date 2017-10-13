@@ -50,5 +50,8 @@ public class AutoBoxingSideEffect {
 
     Byte b = 0;
     b++;
+
+    Character ch = 'c';
+    ch++;
   }
 }

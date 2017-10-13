@@ -269,12 +269,7 @@ public class CompoundOperationsUtils {
 
   /** Returns number literal with value 1. */
   public static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
-    TypeDescriptor primitiveTypeDescriptor =
-        TypeDescriptors.isBoxedType(typeDescriptor)
-            ? TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor)
-            : typeDescriptor;
-
-    return new NumberLiteral(primitiveTypeDescriptor, 1);
+    return new NumberLiteral(typeDescriptor.unboxType(), 1);
   }
 
   /** Returns assignment in the form of {leftOperand = leftOperand operator rightOperand}. */
@@ -283,100 +278,39 @@ public class CompoundOperationsUtils {
 
     return BinaryExpression.Builder.asAssignmentTo(leftOperand)
         .setRightOperand(
-            BinaryExpression.newBuilder()
-                .setTypeDescriptor(
-                    binaryOperationResultType(
-                        operator,
-                        leftOperand.getTypeDescriptor(),
-                        rightOperand.getTypeDescriptor()))
-                .setLeftOperand(leftOperand.clone())
-                .setOperator(operator)
-                .setRightOperand(rightOperand)
-                .build())
+            maybeCast(
+                leftOperand.getTypeDescriptor(),
+                BinaryExpression.newBuilder()
+                    .setLeftOperand(leftOperand.clone())
+                    .setOperator(operator)
+                    .setRightOperand(rightOperand)
+                    .build()))
         .build();
   }
 
-  /** Determines the binary operation type based on the types of the operands. */
-  private static TypeDescriptor binaryOperationResultType(
-      BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightOperandType) {
-
-    if (TypeDescriptors.get().isJavaLangString(leftOperandType)) {
-      return leftOperandType;
+  // When expanding compound assignments (and prefix/postfix operations) there is an implicit cast
+  // that might need to be inserted.
+  //
+  // Byte b;
+  // ++b;
+  //
+  // is equivalent to
+  //
+  // Byte b;
+  // b = (byte) (b + 1);
+  //
+  @SuppressWarnings("ReferenceEquality")
+  private static Expression maybeCast(TypeDescriptor typeDescriptor, Expression expression) {
+    typeDescriptor = typeDescriptor.unboxType();
+    if (!TypeDescriptors.isNumericPrimitive(typeDescriptor)
+        || typeDescriptor == expression.getTypeDescriptor()) {
+      return expression;
     }
 
-    leftOperandType = getCorrespondingPrimitiveType(leftOperandType);
-
-    /**
-     * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
-     * operands and makes the operation to be the same type as both operands. Since this method is
-     * potentially called before or while numeric promotion is being performed there is no guarantee
-     * operand promotion was already performed; so that fact is taken into account.
-     */
-    switch (operator) {
-        /*
-         * Bitwise and logical operators: JLS 15.22.
-         */
-      case BIT_AND:
-      case BIT_OR:
-      case BIT_XOR:
-        if (TypeDescriptors.isPrimitiveBoolean(leftOperandType)) {
-          // Handle logical operations (on type boolean).
-          return leftOperandType;
-        }
-        // fallthrough for bitwise operations on numbers.
-        /*
-         * Additive operators for numeric types: JLS 15.18.2.
-         */
-      case PLUS:
-      case MINUS:
-        /*
-         * Multiplicative operators for numeric types: JLS 15.17.
-         */
-      case TIMES:
-      case DIVIDE:
-      case REMAINDER:
-        /**
-         * The type of the operation should the promoted type of the operands, which is equivalent
-         * to the widest type of its operands (or integer is integer is wider).
-         */
-        // TODO(rluble): Return primitiveInt if wider. Due to order in which promotion operations
-        // are applied doing so here breaks code.
-        checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
-        return widerType(leftOperandType, getCorrespondingPrimitiveType(rightOperandType));
-      case LEFT_SHIFT:
-      case RIGHT_SHIFT_SIGNED:
-      case RIGHT_SHIFT_UNSIGNED:
-        /**
-         * Shift operators: JLS 15.19.
-         *
-         * <p>Type type of the operation is the type of the promoted left hand operand.
-         */
-        return leftOperandType;
-      default:
-        // This method only handles operations resulting from unfolding compound assignment
-        // expressions.
-        throw new IllegalArgumentException();
-    }
+    return CastExpression.newBuilder()
+        .setCastTypeDescriptor(typeDescriptor)
+        .setExpression(expression)
+        .build();
   }
 
-  /** Returns the type descriptor for the wider type. */
-  private static TypeDescriptor widerType(
-      TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
-    return TypeDescriptors.getWidth(thatTypeDescriptor)
-            > TypeDescriptors.getWidth(thisTypeDescriptor)
-        ? thatTypeDescriptor
-        : thisTypeDescriptor;
-  }
-
-  /**
-   * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
-   * {@code typeDescriptor} otherwise
-   */
-  public static TypeDescriptor getCorrespondingPrimitiveType(TypeDescriptor typeDescriptor) {
-    if (TypeDescriptors.isBoxedType(typeDescriptor)) {
-      return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
-    }
-    checkArgument(typeDescriptor.isPrimitive());
-    return typeDescriptor;
-  }
 }

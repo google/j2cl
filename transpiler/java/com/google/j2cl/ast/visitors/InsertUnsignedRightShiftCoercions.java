@@ -43,7 +43,6 @@ public class InsertUnsignedRightShiftCoercions extends NormalizationPass {
               return MultiExpression.newBuilder()
                   .addExpressions(
                       BinaryExpression.newBuilder()
-                          .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
                           .setLeftOperand(binaryExpression)
                           .setOperator(BinaryOperator.BIT_OR)
                           .setRightOperand(new NumberLiteral(TypeDescriptors.get().primitiveInt, 0))

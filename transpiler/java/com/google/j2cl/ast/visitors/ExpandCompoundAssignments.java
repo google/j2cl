@@ -115,8 +115,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         && operator != BinaryOperator.ASSIGN
         && TypeDescriptors.isIntegralPrimitiveType(lhsTypeDescriptor)
         && TypeDescriptors.getWidth(lhsTypeDescriptor)
-            < TypeDescriptors.getWidth(
-                CompoundOperationsUtils.getCorrespondingPrimitiveType(rhsTypeDescriptor))) {
+            < TypeDescriptors.getWidth(rhsTypeDescriptor.unboxType())) {
       // Compound assignment contexts perform implicit narrowing coercions.
       return true;
     }
@@ -135,7 +134,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
 
     TypeDescriptor targetTypeDescriptor = targetExpression.getTypeDescriptor();
     if ((operator == BinaryOperator.DIVIDE_ASSIGN || operator == BinaryOperator.REMAINDER_ASSIGN)
-        && needsIntegralCoersion(targetTypeDescriptor)) {
+        && needsIntegralCoercion(targetTypeDescriptor)) {
       // Integral division and remainder always need expansion for truncation and/or division by
       // zero check insertion.
       return true;
@@ -154,11 +153,8 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         && !TypeDescriptors.isPrimitiveInt(targetTypeDescriptor);
   }
 
-  private static boolean needsIntegralCoersion(TypeDescriptor targetTypeDescriptor) {
-    return TypeDescriptors.isIntegralPrimitiveType(targetTypeDescriptor)
-        || (TypeDescriptors.isBoxedType(targetTypeDescriptor)
-            && TypeDescriptors.isIntegralPrimitiveType(
-                CompoundOperationsUtils.getCorrespondingPrimitiveType(targetTypeDescriptor)));
+  private static boolean needsIntegralCoercion(TypeDescriptor targetTypeDescriptor) {
+    return TypeDescriptors.isIntegralPrimitiveType(targetTypeDescriptor.unboxType());
   }
 
   /** Rewrites a postfix expressions int the list into the corresponding prefix expressions. */

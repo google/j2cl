@@ -26,9 +26,8 @@ import com.google.j2cl.ast.annotations.Visitable;
 public class PrefixExpression extends UnaryExpression {
   private PrefixOperator operator;
 
-  private PrefixExpression(
-      TypeDescriptor typeDescriptor, Expression operand, PrefixOperator operator) {
-    super(checkNotNull(typeDescriptor), operand);
+  private PrefixExpression(Expression operand, PrefixOperator operator) {
+    super(operand);
     this.operator = checkNotNull(operator);
   }
 
@@ -44,7 +43,7 @@ public class PrefixExpression extends UnaryExpression {
 
   @Override
   public PrefixExpression clone() {
-    return new PrefixExpression(getTypeDescriptor(), getOperand().clone(), operator);
+    return new PrefixExpression(getOperand().clone(), operator);
   }
 
   @Override
@@ -65,13 +64,12 @@ public class PrefixExpression extends UnaryExpression {
       return (Builder)
           newBuilder()
               .setOperand(expression.getOperand())
-              .setTypeDescriptor(expression.getTypeDescriptor())
               .setOperator(expression.getOperator());
     }
 
     @Override
-    PrefixExpression doBuild(TypeDescriptor typeDescriptor, Expression operand, Operator operator) {
-      return new PrefixExpression(typeDescriptor, operand, (PrefixOperator) operator);
+    PrefixExpression doBuild(Expression operand, Operator operator) {
+      return new PrefixExpression(operand, (PrefixOperator) operator);
     }
   }
 }

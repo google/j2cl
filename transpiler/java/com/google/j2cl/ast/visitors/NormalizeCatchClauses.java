@@ -169,8 +169,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
                   typeDescriptor ->
                       checkIsInstanceCall(typeDescriptor, exceptionVariable.getReference()))
               .collect(Collectors.toList());
-      return AstUtils.joinExpressionsWithBinaryOperator(
-          TypeDescriptors.get().primitiveBoolean, BinaryOperator.CONDITIONAL_OR, methodCalls);
+    return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, methodCalls);
     }
 
     /**

@@ -34,7 +34,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import java.util.List;
@@ -149,12 +148,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // varargs as arguments not as an array so there is no way to express this.
       // $checkNotNull errors out early if null is passed as a jsvararg parameter.
       // TODO(tdeegan): For non-nullable types we can avoid this.
-      TypeDescriptor returnType = TypeDescriptors.toNonNullable(lastArgument.getTypeDescriptor());
-
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               PrefixExpression.newBuilder()
-                  .setTypeDescriptor(returnType)
                   .setOperand(AstUtils.createArraysMethodCall("$checkNotNull", lastArgument))
                   .setOperator(PrefixOperator.SPREAD)
                   .build())

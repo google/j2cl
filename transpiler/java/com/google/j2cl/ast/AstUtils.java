@@ -611,7 +611,7 @@ public class AstUtils {
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
-    TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
+    TypeDescriptor primitiveType = boxType.unboxType();
 
     MethodDescriptor valueMethodDescriptor =
         boxType.getMethodDescriptorByName(
@@ -828,7 +828,7 @@ public class AstUtils {
   }
 
   public static Expression joinExpressionsWithBinaryOperator(
-      TypeDescriptor outputType, BinaryOperator operator, List<Expression> expressions) {
+      BinaryOperator operator, List<Expression> expressions) {
     if (expressions.isEmpty()) {
       return null;
     }
@@ -836,10 +836,8 @@ public class AstUtils {
       return expressions.get(0);
     }
     Expression joinedExpressions =
-        joinExpressionsWithBinaryOperator(
-            outputType, operator, expressions.subList(1, expressions.size()));
+        joinExpressionsWithBinaryOperator(operator, expressions.subList(1, expressions.size()));
     return BinaryExpression.newBuilder()
-        .setTypeDescriptor(outputType)
         .setLeftOperand(expressions.get(0))
         .setOperator(operator)
         .setRightOperand(joinedExpressions)
@@ -1467,4 +1465,5 @@ public class AstUtils {
     return !overrideMethod.getEnclosingTypeDescriptor().isStarOrUnknown()
         && !overrideMethod.getEnclosingTypeDescriptor().isJsFunctionInterface();
   }
+
 }

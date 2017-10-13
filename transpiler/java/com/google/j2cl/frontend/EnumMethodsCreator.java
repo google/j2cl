@@ -165,7 +165,6 @@ public class EnumMethodsCreator {
     // If statement
     Expression namesToValuesMapIsNullComparison =
         BinaryExpression.newBuilder()
-            .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .setLeftOperand(FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .setOperator(BinaryOperator.EQUALS)
             .setRightOperand(NullLiteral.get())

@@ -530,7 +530,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     $Asserts.$assert(
         ($value = boxedByte,
          boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$toByte(boxedByte.m_byteValue__() - 1)),
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)),
          $value)
             .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
     $Asserts.$assert(
@@ -538,13 +538,13 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
     $Asserts.$assert(
         (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$toByte(boxedByte.m_byteValue__() - 1)))
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)))
             .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
     boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
         ($value$1$ = boxedByte,
          boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$toByte(boxedByte.m_byteValue__() + 1)),
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)),
          $value$1$)
             .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
@@ -552,7 +552,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
         (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$toByte(boxedByte.m_byteValue__() + 1)))
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)))
             .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
   }
 

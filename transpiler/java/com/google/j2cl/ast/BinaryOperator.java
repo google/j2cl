@@ -54,8 +54,8 @@ public enum BinaryOperator implements Operator {
   RIGHT_SHIFT_SIGNED_ASSIGN(">>=", RIGHT_SHIFT_SIGNED),
   RIGHT_SHIFT_UNSIGNED_ASSIGN(">>>=", RIGHT_SHIFT_UNSIGNED);
 
-  private String symbol;
-  private BinaryOperator underlyingBinaryOperator;
+  private final String symbol;
+  private final BinaryOperator underlyingBinaryOperator;
 
   BinaryOperator(String symbol) {
     this(symbol, null);
@@ -78,6 +78,10 @@ public enum BinaryOperator implements Operator {
 
   @Override
   public boolean hasSideEffect() {
+    return isAssignmentOperator();
+  }
+
+  public boolean isAssignmentOperator() {
     return this == ASSIGN || underlyingBinaryOperator != null;
   }
 
@@ -100,9 +104,13 @@ public enum BinaryOperator implements Operator {
     }
   }
 
+  public boolean isLeftAssociative() {
+    // All binary operators except for assignment operators are left-associative;
+    return !isAssignmentOperator();
+  }
+
   @Override
   public String toString() {
     return symbol;
   }
-
 }

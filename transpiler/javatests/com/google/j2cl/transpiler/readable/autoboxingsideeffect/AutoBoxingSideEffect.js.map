@@ -40,7 +40,7 @@ public class AutoBoxingSideEffect {
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.getWithSideEffect"
 [@SuppressWarnings("unused")
   public void main() {
-...    b++;
+...    ch++;
   }] => [let /** AutoBoxingSideEffect */ $qualifier, /** Integer */ $value, /** Integer */ $value$1$, /** AutoBoxingSideEffect */ $qualifier$1$, /** Integer */ $value$2$;] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [Integer i = 10000;] => [let i = Integer.m_valueOf__int(10000);] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [i] => [i] "i"
@@ -61,7 +61,10 @@ public class AutoBoxingSideEffect {
 [f = getWithSideEffect().foo++;] => [f = (($qualifier$1$ = this.m_getWithSideEffect__(), $value$2$ = $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect), $qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect = Integer.m_valueOf__int($qualifier$1$.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect.m_intValue__() + 1), $value$2$);] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [Byte b = 0;] => [let b = Byte.m_valueOf__byte(0);] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [b] => [b] "b"
-[b++;] => [b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1));] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
+[b++;] => [b = Byte.m_valueOf__byte($Primitives.$narrowIntToByte(b.m_byteValue__() + 1));] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
+[Character ch = 'c';] => [let ch = Character.m_valueOf__char(99 /* "c" */);] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
+[ch] => [ch] "ch"
+[ch++;] => [ch = Character.m_valueOf__char($Primitives.$narrowIntToChar(ch.m_charValue__() + 1));] "com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.main"
 [@SuppressWarnings("BoxedPrimitiveConstructor")
 public class AutoBoxingSideEffect {
 ...  }

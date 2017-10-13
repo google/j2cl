@@ -48,10 +48,8 @@ public class InsertBooleanCoercions extends NormalizationPass {
                   || binaryExpression.getOperator() == BinaryOperator.BIT_OR
                   || binaryExpression.getOperator() == BinaryOperator.BIT_XOR) {
                 return PrefixExpression.newBuilder()
-                    .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
                     .setOperand(
                         PrefixExpression.newBuilder()
-                            .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
                             .setOperand(
                                 MultiExpression.newBuilder()
                                     .setExpressions(binaryExpression)

@@ -26,9 +26,8 @@ import com.google.j2cl.ast.annotations.Visitable;
 public class PostfixExpression extends UnaryExpression {
   private PostfixOperator operator;
 
-  private PostfixExpression(
-      TypeDescriptor typeDescriptor, Expression operand, PostfixOperator operator) {
-    super(checkNotNull(typeDescriptor), operand);
+  private PostfixExpression(Expression operand, PostfixOperator operator) {
+    super(operand);
     this.operator = checkNotNull(operator);
   }
 
@@ -39,7 +38,7 @@ public class PostfixExpression extends UnaryExpression {
 
   @Override
   public PostfixExpression clone() {
-    return new PostfixExpression(getTypeDescriptor(), getOperand().clone(), operator);
+    return new PostfixExpression(getOperand().clone(), operator);
   }
 
   @Override
@@ -64,14 +63,12 @@ public class PostfixExpression extends UnaryExpression {
       return (Builder)
           newBuilder()
               .setOperand(expression.getOperand())
-              .setTypeDescriptor(expression.getTypeDescriptor())
               .setOperator(expression.getOperator());
     }
 
     @Override
-    PostfixExpression doBuild(
-        TypeDescriptor typeDescriptor, Expression operand, Operator operator) {
-      return new PostfixExpression(typeDescriptor, operand, (PostfixOperator) operator);
+    PostfixExpression doBuild(Expression operand, Operator operator) {
+      return new PostfixExpression(operand, (PostfixOperator) operator);
     }
   }
 }

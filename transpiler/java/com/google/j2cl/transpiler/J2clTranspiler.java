@@ -42,7 +42,6 @@ import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
-import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertUnsignedRightShiftCoercions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
@@ -233,7 +232,6 @@ public class J2clTranspiler {
             new InsertNarrowingPrimitiveConversions(),
             new InsertWideningPrimitiveConversions(),
             new NormalizeLongs(),
-            new InsertUnderflowOverflowConversions(),
             new InsertDivisionCoercions(),
             new InsertBooleanCoercions(),
             new InsertUnsignedRightShiftCoercions(),

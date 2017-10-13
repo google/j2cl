@@ -856,7 +856,6 @@ public class CompilationUnitBuilder {
       // $index < $array.length
       Expression condition =
           BinaryExpression.newBuilder()
-              .setTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
               .setLeftOperand(indexVariable.getReference())
               .setOperator(BinaryOperator.LESS)
               .setRightOperand(
@@ -890,7 +889,6 @@ public class CompilationUnitBuilder {
                   .build())
           .setUpdates(
               PostfixExpression.newBuilder()
-                  .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
                   .setOperand(indexVariable.getReference())
                   .setOperator(PostfixOperator.INCREMENT)
                   .build())
@@ -1577,7 +1575,6 @@ public class CompilationUnitBuilder {
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment expression) {
       return BinaryExpression.newBuilder()
-          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
           .setLeftOperand(convert(expression.getLeftHandSide()))
           .setOperator(JdtUtils.getBinaryOperator(expression.getOperator()))
           .setRightOperand(convert(expression.getRightHandSide()))
@@ -1645,9 +1642,11 @@ public class CompilationUnitBuilder {
       Expression leftOperand = convert(expression.getLeftOperand());
       Expression rightOperand = convert(expression.getRightOperand());
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
+
+      checkArgument(!expression.hasExtendedOperands() || operator.isLeftAssociative());
+
       BinaryExpression binaryExpression =
           BinaryExpression.newBuilder()
-              .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
               .setLeftOperand(leftOperand)
               .setOperator(operator)
               .setRightOperand(rightOperand)
@@ -1658,7 +1657,6 @@ public class CompilationUnitBuilder {
             (org.eclipse.jdt.core.dom.Expression) object;
         binaryExpression =
             BinaryExpression.newBuilder()
-                .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
                 .setLeftOperand(binaryExpression)
                 .setOperator(operator)
                 .setRightOperand(convert(extendedOperand))
@@ -1778,7 +1776,6 @@ public class CompilationUnitBuilder {
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
       return PostfixExpression.newBuilder()
-          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
           .setOperand(convert(expression.getOperand()))
           .setOperator(JdtUtils.getPostfixOperator(expression.getOperator()))
           .build();
@@ -1786,7 +1783,6 @@ public class CompilationUnitBuilder {
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
       return PrefixExpression.newBuilder()
-          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
           .setOperand(convert(expression.getOperand()))
           .setOperator(JdtUtils.getPrefixOperator(expression.getOperator()))
           .build();

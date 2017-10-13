@@ -206,7 +206,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || rightOperand != binaryExpression.getRightOperand()) {
       binaryExpression =
           BinaryExpression.newBuilder()
-              .setTypeDescriptor(binaryExpression.getTypeDescriptor())
               .setLeftOperand(leftOperand)
               .setOperator(binaryExpression.getOperator())
               .setRightOperand(rightOperand)
@@ -316,7 +315,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // unary numeric promotion context
     if (AstUtils.matchesUnaryNumericPromotionContext(postfixExpression.getTypeDescriptor())) {
       return PostfixExpression.newBuilder()
-          .setTypeDescriptor(postfixExpression.getTypeDescriptor())
           .setOperand(
               contextRewriter.rewriteUnaryNumericPromotionContext(postfixExpression.getOperand()))
           .setOperator(postfixExpression.getOperator())
@@ -330,7 +328,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // unary numeric promotion context
     if (AstUtils.matchesBooleanConversionContext(prefixExpression.getOperator())) {
       return PrefixExpression.newBuilder()
-          .setTypeDescriptor(prefixExpression.getTypeDescriptor())
           .setOperand(
               contextRewriter.rewriteBooleanConversionContext(prefixExpression.getOperand()))
           .setOperator(prefixExpression.getOperator())
@@ -340,7 +337,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // unary numeric promotion context
     if (AstUtils.matchesUnaryNumericPromotionContext(prefixExpression)) {
       return PrefixExpression.newBuilder()
-          .setTypeDescriptor(prefixExpression.getTypeDescriptor())
           .setOperand(
               contextRewriter.rewriteUnaryNumericPromotionContext(prefixExpression.getOperand()))
           .setOperator(prefixExpression.getOperator())
