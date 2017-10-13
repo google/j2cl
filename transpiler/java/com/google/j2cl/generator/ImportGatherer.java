@@ -265,8 +265,11 @@ class ImportGatherer extends AbstractVisitor {
       }
     }
 
-    mayAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
-    mayAddOverlayImplementationTypeDescriptor(typeDescriptor);
+    // Synthetic classes may be referred directly from other compilation units that are compiled
+    // separately. In order for this classes to be preserved and not pruned by AJD, any user of the
+    // original class should have a dependency on the synthetic classes.
+    maybeAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
+    maybeAddOverlayImplementationTypeDescriptor(typeDescriptor);
 
     if (typeDescriptor.isJsFunctionInterface()) {
       // If the type is a @JsFunction replace the specific @JsFunction interface type descriptor
@@ -286,7 +289,7 @@ class ImportGatherer extends AbstractVisitor {
     typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
   }
 
-  private void mayAddOverlayImplementationTypeDescriptor(TypeDescriptor typeDescriptor) {
+  private void maybeAddOverlayImplementationTypeDescriptor(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.hasOverlayImplementationType()) {
       addTypeDescriptor(
           typeDescriptor.getTypeDeclaration().getOverlayImplementationTypeDescriptor(),
@@ -349,7 +352,7 @@ class ImportGatherer extends AbstractVisitor {
    * JsFunction type is annotated as function(Foo):Bar, we need to import the parameter types and
    * return type.
    */
-  private void mayAddTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
+  private void maybeAddTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
       MethodDescriptor jsFunctionMethodDescriptor =
           typeDescriptor.getConcreteJsFunctionMethodDescriptor();
@@ -383,7 +386,7 @@ class ImportGatherer extends AbstractVisitor {
     Set<Import> imports = new LinkedHashSet<>();
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       Preconditions.checkState(!typeDescriptor.isTypeVariable());
-      Preconditions.checkState(typeDescriptor.isNative() || !typeDescriptor.hasTypeArguments());
+      Preconditions.checkState(!typeDescriptor.hasTypeArguments());
       imports.add(new Import(computeAlias(typeDescriptor), typeDescriptor));
     }
     return imports;
