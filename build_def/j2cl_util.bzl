@@ -83,7 +83,6 @@ load(
 )
 
 J2CL_UNOPTIMIZED_DEFS = [
-    "--j2cl_pass=true",
     "--language_out=ECMASCRIPT5",
 ]
 
@@ -99,7 +98,6 @@ J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
 J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     # Manage closure deps will strip our outputs in some tests
     "--manage_closure_dependencies=false",
-    "--j2cl_pass=true",
     "--extra_smart_name_removal=true",
     # Enable assert statements for tests (as java_test does the same)
     "--remove_j2cl_asserts=false",
