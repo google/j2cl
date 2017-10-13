@@ -267,8 +267,7 @@ public class CompilationUnitBuilder {
       for (Variable capturedVariable :
           capturesByTypeName.get(currentTypeDeclaration.getQualifiedSourceName())) {
         FieldDescriptor fieldDescriptor =
-            AstUtils.getFieldDescriptorForCapture(
-                currentTypeDeclaration.getUnsafeTypeDescriptor(), capturedVariable);
+            AstUtils.getFieldDescriptorForCapture(type.getTypeDescriptor(), capturedVariable);
         type.addField(
             Field.Builder.from(fieldDescriptor)
                 .setCapturedVariable(capturedVariable)
@@ -281,7 +280,7 @@ public class CompilationUnitBuilder {
             0,
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
-                        currentTypeDeclaration.getUnsafeTypeDescriptor(),
+                        type.getTypeDescriptor(),
                         type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
                 .setSourcePosition(type.getSourcePosition())
                 .build());
@@ -856,7 +855,7 @@ public class CompilationUnitBuilder {
       // $index < $array.length
       Expression condition =
           BinaryExpression.newBuilder()
-              .setLeftOperand(indexVariable.getReference())
+              .setLeftOperand(indexVariable)
               .setOperator(BinaryOperator.LESS)
               .setRightOperand(
                   FieldAccess.Builder.from(AstUtilConstants.getArrayLengthFieldDescriptor())
@@ -1628,7 +1627,7 @@ public class CompilationUnitBuilder {
       // If the field is referenced like a current type field with explicit 'this' but is part of
       // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
       if (qualifier instanceof ThisReference
-          && !fieldDescriptor.isMemberOf(currentType.getDeclaration().getUnsafeTypeDescriptor())) {
+          && !fieldDescriptor.isMemberOf(currentType.getTypeDescriptor())) {
         qualifier =
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
@@ -1856,8 +1855,7 @@ public class CompilationUnitBuilder {
           // It refers to a field.
           FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
           if (!fieldDescriptor.isStatic()
-              && !fieldDescriptor.isMemberOf(
-                  currentType.getDeclaration().getUnsafeTypeDescriptor())) {
+              && !fieldDescriptor.isMemberOf(currentType.getTypeDescriptor())) {
             return FieldAccess.Builder.from(fieldDescriptor)
                 .setQualifier(
                     convertOuterClassReference(
@@ -1909,7 +1907,7 @@ public class CompilationUnitBuilder {
      */
     private Expression convertOuterClassReference(
         ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
-      TypeDescriptor currentTypeDescriptor = currentType.getDeclaration().getUnsafeTypeDescriptor();
+      TypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
       Expression qualifier = new ThisReference(currentTypeDescriptor);
       ITypeBinding innerTypeBinding = currentTypeBinding;
       if (!JdtUtils.createTypeDescriptor(innerTypeBinding).hasSameRawType(currentTypeDescriptor)) {
@@ -1961,7 +1959,7 @@ public class CompilationUnitBuilder {
       // for reference to a captured variable, if it is in a constructor, translate to
       // reference to outer parameter, otherwise, translate to reference to corresponding
       // field created for the captured variable.
-      TypeDescriptor currentTypeDescriptor = currentType.getDeclaration().getUnsafeTypeDescriptor();
+      TypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
       FieldDescriptor fieldDescriptor =
           AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
       ThisReference qualifier = new ThisReference(currentTypeDescriptor);

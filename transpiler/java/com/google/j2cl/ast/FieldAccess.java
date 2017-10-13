@@ -29,7 +29,7 @@ public class FieldAccess extends Expression implements MemberReference {
 
   private FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
     this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
-    this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor);
+    this.qualifier = checkNotNull(qualifier);
   }
 
   @Override
@@ -101,7 +101,8 @@ public class FieldAccess extends Expression implements MemberReference {
     }
 
     public FieldAccess build() {
-      return new FieldAccess(this.qualifier, this.targetFieldDescriptor);
+      return new FieldAccess(
+          AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor), targetFieldDescriptor);
     }
   }
 }

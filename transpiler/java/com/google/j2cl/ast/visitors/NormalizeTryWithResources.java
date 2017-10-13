@@ -170,7 +170,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<Statement> catchBlockStatements =
         Arrays.asList(
             BinaryExpression.Builder.asAssignmentTo(primaryException)
-                .setRightOperand(exceptionFromTry.getReference())
+                .setRightOperand(exceptionFromTry)
                 .build()
                 .makeStatement(sourcePosition),
             new ThrowStatement(sourcePosition, exceptionFromTry.getReference()));
@@ -194,7 +194,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
         new ThrowStatement(sourcePosition, primaryException.getReference());
     Expression primaryExceptionNotEqualsNull =
         BinaryExpression.newBuilder()
-            .setLeftOperand(primaryException.getReference())
+            .setLeftOperand(primaryException)
             .setOperator(BinaryOperator.NOT_EQUALS)
             .setRightOperand(NullLiteral.get())
             .build();

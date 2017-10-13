@@ -57,13 +57,13 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
             }
 
             // A.abs -> Math.abs.
-            FieldDescriptor newFieldescriptor =
+            FieldDescriptor newFieldDescriptor =
                 FieldDescriptor.Builder.from(fieldDescriptor)
                     .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
                     .build();
             checkArgument(fieldAccess.getQualifier() instanceof JavaScriptConstructorReference);
-            return FieldAccess.Builder.from(newFieldescriptor).build();
+            return FieldAccess.Builder.from(newFieldDescriptor).build();
           }
 
           @Override

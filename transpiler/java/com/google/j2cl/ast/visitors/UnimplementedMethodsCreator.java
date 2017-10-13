@@ -163,7 +163,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
   private static void addStubMethod(Type type, MethodDescriptor methodDescriptor) {
     MethodDescriptor stubMethodDescriptor =
         MethodDescriptor.Builder.from(methodDescriptor)
-            .setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
+            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setAbstract(true)
             .setNative(false)
             .build();

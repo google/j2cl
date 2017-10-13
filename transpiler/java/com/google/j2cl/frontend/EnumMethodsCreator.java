@@ -70,7 +70,7 @@ public class EnumMethodsCreator {
 
   private EnumMethodsCreator(Type enumType) {
     boolean jsType = enumType.getDeclaration().isJsType();
-    TypeDescriptor enumTypeDescriptor = enumType.getDeclaration().getUnsafeTypeDescriptor();
+    TypeDescriptor enumTypeDescriptor = enumType.getTypeDescriptor();
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
@@ -148,7 +148,7 @@ public class EnumMethodsCreator {
             .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(CREATE_MAP_METHOD_NAME)
             .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
-            .setParameterTypeDescriptors(enumType.getDeclaration().getUnsafeTypeDescriptor())
+            .setParameterTypeDescriptors(enumType.getTypeDescriptor())
             .build();
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -156,7 +156,7 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .setName(GET_VALUE_METHOD_NAME)
-            .setReturnTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
+            .setReturnTypeDescriptor(enumType.getTypeDescriptor())
             .setParameterTypeDescriptors(
                 nameParameter.getTypeDescriptor(),
                 namesToValuesMapFieldDescriptor.getTypeDescriptor())
@@ -174,8 +174,7 @@ public class EnumMethodsCreator {
     Expression createMapCall =
         MethodCall.Builder.from(createMapMethodDescriptor).setArguments(valuesCall).build();
     Statement assignMapCallToFieldStatement =
-        BinaryExpression.Builder.asAssignmentTo(
-                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
+        BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
             .setRightOperand(createMapCall)
             .build()
             .makeStatement(sourcePosition);
@@ -196,7 +195,7 @@ public class EnumMethodsCreator {
     Statement returnStatement =
         ReturnStatement.newBuilder()
             .setExpression(getMethodCall)
-            .setTypeDescriptor(enumType.getDeclaration().getUnsafeTypeDescriptor())
+            .setTypeDescriptor(enumType.getTypeDescriptor())
             .setSourcePosition(sourcePosition)
             .build();
 
@@ -231,7 +230,7 @@ public class EnumMethodsCreator {
             .collect(Collectors.toList());
 
     TypeDescriptor arrayTypeDescriptor =
-        TypeDescriptors.getForArray(enumType.getDeclaration().getUnsafeTypeDescriptor(), 1);
+        TypeDescriptors.getForArray(enumType.getTypeDescriptor(), 1);
 
     enumType.addMethod(
         Method.newBuilder()

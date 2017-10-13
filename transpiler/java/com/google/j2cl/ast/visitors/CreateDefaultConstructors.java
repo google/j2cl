@@ -45,8 +45,7 @@ public class CreateDefaultConstructors extends NormalizationPass {
 
           private void synthesizeDefaultConstructor(Type type) {
             MethodDescriptor methodDescriptor =
-                AstUtils.createImplicitConstructorDescriptor(
-                    type.getDeclaration().getUnsafeTypeDescriptor());
+                AstUtils.createImplicitConstructorDescriptor(type.getTypeDescriptor());
             type.addMethod(
                 0,
                 Method.newBuilder()

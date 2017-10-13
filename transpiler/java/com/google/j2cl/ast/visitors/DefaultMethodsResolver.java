@@ -52,7 +52,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
 
       // Remove methods that are already implemented in the class or any of its superclasses
       TypeDescriptor declaringClassTypeDescriptor =
-          type.isInterface() ? null : type.getDeclaration().getUnsafeTypeDescriptor();
+          type.isInterface() ? null : type.getTypeDescriptor();
       while (declaringClassTypeDescriptor != null) {
         for (MethodDescriptor declaredMethodDescriptor :
             declaringClassTypeDescriptor.getDeclaredMethodDescriptors()) {
@@ -102,8 +102,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
     // some later analysis.
     for (int i = 0; i < typeDescriptors.size(); i++) {
       TypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
-      typeDescriptors.set(
-          i, superInterfaceTypeDescriptor.getTypeDeclaration().getUnsafeTypeDescriptor());
+      typeDescriptors.set(i, superInterfaceTypeDescriptor.unparameterizedTypeDescriptor());
     }
     Collections.sort(typeDescriptors, TypeDescriptor.MORE_SPECIFIC_INTERFACES_FIRST);
     return typeDescriptors;
@@ -117,7 +116,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
           AstUtils.createStaticForwardingMethod(
               type.getSourcePosition(),
               targetMethodDescriptor,
-              type.getDeclaration().getUnsafeTypeDescriptor(),
+              type.getTypeDescriptor(),
               "Default method forwarding stub.");
       defaultForwardingMethod.setSourcePosition(type.getSourcePosition());
       type.addMethod(defaultForwardingMethod);

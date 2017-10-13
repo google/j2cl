@@ -72,7 +72,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
             MethodDescriptor targetMethod = methodCall.getTarget();
             if (!targetMethod.isConstructor()
                 || AstUtils.isDelegatedConstructorCall(
-                    methodCall, getCurrentType().getDeclaration().getUnsafeTypeDescriptor())) {
+                    methodCall, getCurrentType().getTypeDescriptor())) {
               return methodCall;
             }
             // super() call.
@@ -81,9 +81,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
               return methodCall;
             }
             return MethodCall.Builder.from(methodCall)
-                .setQualifier(
-                    findSuperCallQualifier(
-                        getCurrentType().getDeclaration().getUnsafeTypeDescriptor()))
+                .setQualifier(findSuperCallQualifier(getCurrentType().getTypeDescriptor()))
                 .build();
           }
 

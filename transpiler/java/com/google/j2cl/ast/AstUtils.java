@@ -990,8 +990,7 @@ public class AstUtils {
             field ->
                 JsDocAnnotatedExpression.newBuilder()
                     .setExpression(
-                        BinaryExpression.Builder.asAssignmentTo(
-                                FieldAccess.Builder.from(field).build())
+                        BinaryExpression.Builder.asAssignmentTo(field)
                             .setRightOperand(getInitialValue(field))
                             .build())
                     .setAnnotationType(field.getDescriptor().getTypeDescriptor())

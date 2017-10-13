@@ -114,7 +114,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     private static void applyTo(CompilationUnit compilationUnit) {
       for (Type type : compilationUnit.getTypes()) {
-        TypeDescriptor typeDescriptor = type.getDeclaration().getUnsafeTypeDescriptor();
+        TypeDescriptor typeDescriptor = type.getTypeDescriptor();
         TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
         // The only classes that should have bridges added are regular classes that are the
         // immediate subclass a native JsType class.

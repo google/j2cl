@@ -58,8 +58,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
     super(problems, declareLegacyNamespace, type);
     this.className = environment.aliasForType(type.getDeclaration());
-    this.mangledTypeName =
-        ManglingNameUtils.getMangledName(type.getDeclaration().getUnsafeTypeDescriptor());
+    this.mangledTypeName = ManglingNameUtils.getMangledName(type.getTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
@@ -244,7 +243,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append("class " + className + " " + extendsClause);
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    environment.setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor());
+    environment.setEnclosingTypeDescriptor(type.getTypeDescriptor());
     renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
@@ -308,8 +307,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && method.getDescriptor().isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
         && !method.getDescriptor().getName().startsWith("$ctor")) {
-      sourceBuilder.appendln(
-          " * @this {" + getJsDocName(type.getDeclaration().getUnsafeTypeDescriptor()) + "}");
+      sourceBuilder.appendln(" * @this {" + getJsDocName(type.getTypeDescriptor()) + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
       sourceBuilder.appendln(
@@ -388,7 +386,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           environment.aliasForType(
               type.isJsOverlayImplementation()
                   ? type.getNativeTypeDescriptor().getRawTypeDescriptor()
-                  : type.getDeclaration().getUnsafeTypeDescriptor());
+                  : type.getTypeDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
     }
     sourceBuilder.closeBrace();
@@ -513,7 +511,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClinit() {
     renderInitializerMethodHeader(
-        AstUtils.getClinitMethodDescriptor(type.getDeclaration().getUnsafeTypeDescriptor()),
+        AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()),
         "Runs inline static field initializers.");
     sourceBuilder.openBrace();
 
@@ -542,7 +540,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       return;
     }
     renderInitializerMethodHeader(
-        AstUtils.getInitMethodDescriptor(type.getDeclaration().getUnsafeTypeDescriptor()),
+        AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()),
         "Runs instance field and block initializers.");
     sourceBuilder.openBrace();
     renderInitializerElements(type.getInstanceInitializerBlocks());
@@ -630,7 +628,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderNativeSource() {
     if (nativeSource != null) {
       sourceBuilder.appendLines("/**", " * Native Method Injection", " */");
-      String longAliasName = type.getDeclaration().getUnsafeTypeDescriptor().getLongAliasName();
+      String longAliasName = type.getTypeDescriptor().getLongAliasName();
       if (!className.equals(longAliasName)) {
         sourceBuilder.appendLines(
             "// Long alias for the class defined in this module",

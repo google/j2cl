@@ -121,8 +121,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // the removed jsfunction class and need to point to the proper enclosing class.
               return FieldAccess.Builder.from(
                       FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                          .setEnclosingTypeDescriptor(
-                              getCurrentType().getDeclaration().getUnsafeTypeDescriptor())
+                          .setEnclosingTypeDescriptor(getCurrentType().getTypeDescriptor())
                           .build())
                   .setQualifier(fieldAccess.getQualifier())
                   .build();
@@ -137,7 +136,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Due to the cascading construction for captures in inner class construction,
               // at the end some this references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
-              return new ThisReference(getCurrentType().getDeclaration().getUnsafeTypeDescriptor());
+              return new ThisReference(getCurrentType().getTypeDescriptor());
             }
             return thisReference;
           }
@@ -190,8 +189,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
     for (Type type : compilationUnit.getTypes()) {
       if (canBeOptimized(type)) {
-        optimizableJsFunctionsByTypeDescriptor.put(
-            type.getDeclaration().getUnsafeTypeDescriptor(), type);
+        optimizableJsFunctionsByTypeDescriptor.put(type.getTypeDescriptor(), type);
       }
     }
     return optimizableJsFunctionsByTypeDescriptor;
@@ -248,9 +246,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
             new AbstractVisitor() {
               @Override
               public boolean enterFieldAccess(FieldAccess fieldAccess) {
-                if (fieldAccess
-                        .getTarget()
-                        .isMemberOf(type.getDeclaration().getUnsafeTypeDescriptor())
+                if (fieldAccess.getTarget().isMemberOf(type.getTypeDescriptor())
                     && fieldAccess.getQualifier() instanceof ThisReference) {
                   // Skip "this" references when accessing captures.
                   return false;

@@ -114,7 +114,7 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitType(Type type) {
-    addTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor(), ImportCategory.SELF);
+    addTypeDescriptor(type.getTypeDescriptor(), ImportCategory.SELF);
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
@@ -125,8 +125,8 @@ class ImportGatherer extends AbstractVisitor {
       addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
     }
 
-    // Here we add an extra dependency on the outter namespace if declareLegacyNamespace is
-    // enabled.  This forces the outter namespaces to be declared first before the inner namespace
+    // Here we add an extra dependency on the outer namespace if declareLegacyNamespace is
+    // enabled.  This forces the outer namespaces to be declared first before the inner namespace
     // which avoids errors in the JsCompiler. Note this interacts poorly with Outer classes that
     // implement/extend Inner types.
     if (declareLegacyNamespace

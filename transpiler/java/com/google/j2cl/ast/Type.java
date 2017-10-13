@@ -49,6 +49,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     this.typeDeclaration = typeDeclaration;
   }
 
+  /**
+   * Returns the TypeDescriptor for this Type parametrized by the type variables from the
+   * declaration.
+   */
+  public TypeDescriptor getTypeDescriptor() {
+    return getDeclaration().getUnsafeTypeDescriptor();
+  }
+
   public Kind getKind() {
     return typeDeclaration.getKind();
   }
@@ -181,8 +189,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         InitializerBlock.newBuilder()
             .setBlock(instanceInitializer)
             .setSourcePosition(instanceInitializer.getSourcePosition())
-            .setDescriptor(
-                AstUtils.getInitMethodDescriptor(getDeclaration().getUnsafeTypeDescriptor()))
+            .setDescriptor(AstUtils.getInitMethodDescriptor(getTypeDescriptor()))
             .build());
   }
 
@@ -202,8 +209,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .setBlock(staticInitializer)
             .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
-            .setDescriptor(
-                AstUtils.getClinitMethodDescriptor(getDeclaration().getUnsafeTypeDescriptor()))
+            .setDescriptor(AstUtils.getClinitMethodDescriptor(getTypeDescriptor()))
             .build());
   }
 
@@ -214,8 +220,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .setBlock(staticInitializer)
             .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
-            .setDescriptor(
-                AstUtils.getClinitMethodDescriptor(getDeclaration().getUnsafeTypeDescriptor()))
+            .setDescriptor(AstUtils.getClinitMethodDescriptor(getTypeDescriptor()))
             .build());
   }
 

@@ -38,7 +38,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -86,9 +85,7 @@ public class InsertInitializerMethods extends NormalizationPass {
                       type.getSourcePosition(), type.getSuperTypeDescriptor()));
             }
             addRequiredSuperInterfacesClinitCalls(
-                type.getSourcePosition(),
-                type.getDeclaration().getUnsafeTypeDescriptor(),
-                superClinitCallStatements);
+                type.getSourcePosition(), type.getTypeDescriptor(), superClinitCallStatements);
 
             if (!superClinitCallStatements.isEmpty()) {
               type.addStaticInitializerBlock(
@@ -206,9 +203,8 @@ public class InsertInitializerMethods extends NormalizationPass {
                 MultiExpression.newBuilder()
                     .addExpressions(
                         createClinitCallExpression(fieldDescriptor.getEnclosingTypeDescriptor()),
-                        BinaryExpression.Builder.asAssignmentTo(
-                                FieldAccess.Builder.from(fieldDescriptor).build())
-                            .setRightOperand(parameter.getReference())
+                        BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
+                            .setRightOperand(parameter)
                             .build())
                     .build()
                     .makeStatement(field.getSourcePosition()))
@@ -221,13 +217,7 @@ public class InsertInitializerMethods extends NormalizationPass {
     Block block =
         new Block(
             sourcePosition,
-            BinaryExpression.Builder.asAssignmentTo(
-                    FieldAccess.Builder.from(fieldDescriptor)
-                        .setQualifier(
-                            fieldDescriptor.isStatic()
-                                ? null
-                                : new ThisReference(fieldDescriptor.getEnclosingTypeDescriptor()))
-                        .build())
+            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
                 .setRightOperand(field.getInitializer())
                 .build()
                 .makeStatement(sourcePosition));

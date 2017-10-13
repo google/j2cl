@@ -268,7 +268,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.newBuilder()
             .setConstructor(true)
-            .setEnclosingTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor())
+            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .setOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
             .build();

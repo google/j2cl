@@ -46,8 +46,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
                           type.getSourcePosition(),
                           null,
                           MethodDescriptor.Builder.from(entry.getValue())
-                              .setEnclosingTypeDescriptor(
-                                  type.getDeclaration().getUnsafeTypeDescriptor())
+                              .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                               .setSynthetic(true)
                               .setBridge(true)
                               .setNative(false)

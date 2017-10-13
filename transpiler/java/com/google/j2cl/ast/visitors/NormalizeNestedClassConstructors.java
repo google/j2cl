@@ -26,7 +26,6 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -135,22 +134,19 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // Maybe add capturing field initialization statements if the current constructor method does
       // not delegate to any other constructor method in the current class.
       if (!AstUtils.isDelegatedConstructorCall(
-          AstUtils.getConstructorInvocation(method),
-          getCurrentType().getDeclaration().getUnsafeTypeDescriptor())) {
+          AstUtils.getConstructorInvocation(method), getCurrentType().getTypeDescriptor())) {
         Method.Builder methodBuilder = Method.Builder.from(method);
         int i = 0;
         for (Field capturedField : getFieldsForCaptures(getCurrentType())) {
           Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
           BinaryExpression initializer =
-              BinaryExpression.newBuilder()
-                  .setLeftOperand(
+              BinaryExpression.Builder.asAssignmentTo(
                       FieldAccess.Builder.from(capturedField.getDescriptor())
                           .setQualifier(
                               new ThisReference(
                                   method.getDescriptor().getEnclosingTypeDescriptor()))
                           .build())
-                  .setOperator(BinaryOperator.ASSIGN)
-                  .setRightOperand(parameter.getReference())
+                  .setRightOperand(parameter)
                   .build();
           methodBuilder.addStatement(i++, initializer.makeStatement(method.getSourcePosition()));
         }
@@ -239,8 +235,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       }
 
       MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
-      if (AstUtils.isDelegatedConstructorCall(
-          methodCall, getCurrentType().getDeclaration().getUnsafeTypeDescriptor())) {
+      if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getTypeDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
 
@@ -294,7 +289,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           // If the capturedVariable is also a captured variable in current type,
           // pass the corresponding field in current type as an argument.
           FieldAccess.Builder.from(capturingField.getDescriptor())
-              .setQualifier(new ThisReference(type.getDeclaration().getUnsafeTypeDescriptor()))
+              .setQualifier(new ThisReference(type.getTypeDescriptor()))
               .build()
           // otherwise, the captured variable is in the scope of the current type,
           // so pass the variable directly as an argument.

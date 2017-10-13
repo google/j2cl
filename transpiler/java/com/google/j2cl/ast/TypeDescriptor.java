@@ -435,6 +435,17 @@ public abstract class TypeDescriptor extends Node
     return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
+  /** Returns type descriptor for the same type use the type parameters from the declaration. */
+  @Memoized
+  public TypeDescriptor unparameterizedTypeDescriptor() {
+    if (isIntersection()) {
+      return TypeDescriptors.createIntersection(
+          toUnparameterizedTypeDescriptors(getInterfaceTypeDescriptors()));
+    }
+
+    return getTypeDeclaration().getUnsafeTypeDescriptor();
+  }
+
   public boolean isAssignableTo(TypeDescriptor that) {
     TypeDescriptor thisRawTypeDescriptor = getRawTypeDescriptor();
     TypeDescriptor thatRawTypeDescriptor = that.getRawTypeDescriptor();
@@ -1037,5 +1048,14 @@ public abstract class TypeDescriptor extends Node
   /** Returns the height of the largest inheritance chain of any interface implemented here. */
   public int getMaxInterfaceDepth() {
     return hasTypeDeclaration() ? getTypeDeclaration().getMaxInterfaceDepth() : 1;
+  }
+
+  /** Returns a the unparameterized version of {@code typeDescriptors}. */
+  public static ImmutableList<TypeDescriptor> toUnparameterizedTypeDescriptors(
+      List<TypeDescriptor> typeDescriptors) {
+    return typeDescriptors
+        .stream()
+        .map(TypeDescriptor::unparameterizedTypeDescriptor)
+        .collect(toImmutableList());
   }
 }

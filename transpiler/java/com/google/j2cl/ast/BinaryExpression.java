@@ -213,15 +213,25 @@ public class BinaryExpression extends Expression {
           .setRightOperand(expression.getRightOperand());
     }
 
-    public static Builder asAssignmentTo(Variable variable) {
+    public static Builder asAssignmentTo(Expression lvalue) {
+      return new Builder().setLeftOperand(lvalue).setOperator(BinaryOperator.ASSIGN);
+    }
+
+    public static Builder asAssignmentTo(Field field) {
       return new Builder()
-          .setLeftOperand(variable.getReference())
+          .setLeftOperand(FieldAccess.Builder.from(field).build())
           .setOperator(BinaryOperator.ASSIGN);
     }
 
-    public static Builder asAssignmentTo(Expression lvalue) {
+    public static Builder asAssignmentTo(FieldDescriptor fieldDescriptor) {
       return new Builder()
-          .setLeftOperand(lvalue)
+          .setLeftOperand(FieldAccess.Builder.from(fieldDescriptor).build())
+          .setOperator(BinaryOperator.ASSIGN);
+    }
+
+    public static Builder asAssignmentTo(Variable variable) {
+      return new Builder()
+          .setLeftOperand(variable.getReference())
           .setOperator(BinaryOperator.ASSIGN);
     }
 
@@ -230,8 +240,18 @@ public class BinaryExpression extends Expression {
       return this;
     }
 
+    public Builder setLeftOperand(Variable variable) {
+      this.leftOperand = variable.getReference();
+      return this;
+    }
+
     public Builder setRightOperand(Expression operand) {
       this.rightOperand = operand;
+      return this;
+    }
+
+    public Builder setRightOperand(Variable variable) {
+      this.rightOperand = variable.getReference();
       return this;
     }
 
