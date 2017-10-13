@@ -66,8 +66,7 @@ public class Main {
       Boolean b = null;
       try {
         b = !b;
-        // TODO(b/67705604): uncomment test when bug is fixed.
-        // assert false : "Should have thrown NPE";
+        assert false : "Should have thrown NPE";
       } catch (NullPointerException expected) {
       }
     }

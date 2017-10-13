@@ -54,6 +54,14 @@ public class InsertUnboxingConversions extends NormalizationPass {
       }
 
       @Override
+      public Expression rewriteBooleanConversionContext(Expression operandExpression) {
+        if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
+          return AstUtils.unbox(operandExpression);
+        }
+        return operandExpression;
+      }
+
+      @Override
       public Expression rewriteCastContext(CastExpression castExpression) {
         Expression expression = castExpression.getExpression();
         TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();

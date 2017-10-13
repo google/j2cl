@@ -158,7 +158,7 @@
 [boxF = boxF - boxF;] => [boxF = Float.m_valueOf__float(boxF.m_floatValue__() - boxF.m_floatValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boxI = boxI * boxI;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__() * boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boxL = boxL / boxL;] => [boxL = Long.m_valueOf__long($LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
-[boxBool = !boxBool;] => [boxBool = !boxBool;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
+[boxBool = !boxBool;] => [boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
 [boxI = ~boxI;] => [boxI = Integer.m_valueOf__int(~boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBoxing"
@@ -225,7 +225,7 @@
 [f = boxF - boxF;] => [f = boxF.m_floatValue__() - boxF.m_floatValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = boxI * boxI;] => [i = boxI.m_intValue__() * boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [l = boxL / boxL;] => [l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
-[bool = !boxBool;] => [bool = !boxBool;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
+[bool = !boxBool;] => [bool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = +boxI;] => [i = boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = -boxI;] => [i = -boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
 [i = ~boxI;] => [i = ~boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxing"
@@ -328,10 +328,10 @@
 [assert ++boxedByte == Byte.MIN_VALUE;] => [$Asserts.$assert((boxedByte = Byte.m_valueOf__byte($Primitives.$toByte(boxedByte.m_byteValue__() + 1))).m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
 [Boolean boxB = null;] => [let boxB = null;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
 [boxB] => [boxB] "boxB"
-[boxB = !boxB;] => [boxB = !boxB;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[boxB = !boxB;] => [boxB = !Boolean.m_booleanValue__java_lang_Boolean(boxB);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
 [boxB = boxB && boxB;] => [boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) && Boolean.m_booleanValue__java_lang_Boolean(boxB);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
-[boxB = boxB ? boxB : boxB;] => [boxB = boxB ? boxB : boxB;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
-[if (boxB) {}] => [if (boxB) {
+[boxB = boxB ? boxB : boxB;] => [boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) ? boxB : boxB;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
+[if (boxB) {}] => [if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
     }] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testBooleanUnboxing"
 [@SuppressWarnings({
   "IdentityBinaryExpression",

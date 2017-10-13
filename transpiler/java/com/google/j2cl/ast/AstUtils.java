@@ -693,6 +693,22 @@ public class AstUtils {
     return matchesBinaryNumericPromotionContext(leftOperand, operator, rightOperand);
   }
 
+  /** See JLS 5.1. */
+  public static boolean matchesBooleanConversionContext(BinaryOperator operator) {
+    switch (operator) {
+      case CONDITIONAL_AND:
+      case CONDITIONAL_OR:
+        return true; // Booleans get these operators.
+      default:
+        return false;
+    }
+  }
+
+  /** See JLS 5.1. */
+  public static boolean matchesBooleanConversionContext(PrefixOperator operator) {
+    return operator == PrefixOperator.NOT;
+  }
+
   /** See JLS 5.6.2. */
   public static boolean matchesBinaryNumericPromotionContext(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
@@ -721,9 +737,6 @@ public class AstUtils {
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
         return true; // Both numerics and booleans get these operators.
-      case CONDITIONAL_AND:
-      case CONDITIONAL_OR:
-        return true; // Only booleans get these operators (though not mentioned in the JLS).
       case EQUALS:
       case NOT_EQUALS:
         return leftIsPrimitive || rightIsPrimitive; // Equality is sometimes instance comparison.
