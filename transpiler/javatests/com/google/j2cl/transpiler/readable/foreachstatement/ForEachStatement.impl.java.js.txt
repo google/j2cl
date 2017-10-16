@@ -10,11 +10,11 @@ goog.module('com.google.j2cl.transpiler.readable.foreachstatement.ForEachStateme
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Iterable$$Overlay = goog.forwardDeclare('java.lang.Iterable$$Overlay$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let java_lang_Iterable_$Overlay = goog.forwardDeclare('java.lang.Iterable.$Overlay$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
-let Iterator$$Overlay = goog.forwardDeclare('java.util.Iterator$$Overlay$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let java_util_Iterator_$Overlay = goog.forwardDeclare('java.util.Iterator.$Overlay$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -99,11 +99,13 @@ class ForEachStatement extends java_lang_Object {
    */
   static $clinit() {
     ForEachStatement.$clinit = function() {};
-    Iterable$$Overlay = goog.module.get('java.lang.Iterable$$Overlay$impl');
     Iterable = goog.module.get('java.lang.Iterable$impl');
+    java_lang_Iterable_$Overlay =
+        goog.module.get('java.lang.Iterable.$Overlay$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');
-    Iterator$$Overlay = goog.module.get('java.util.Iterator$$Overlay$impl');
     Iterator = goog.module.get('java.util.Iterator$impl');
+    java_util_Iterator_$Overlay =
+        goog.module.get('java.util.Iterator.$Overlay$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();

@@ -4,14 +4,14 @@
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.jsmemberinnativetype.MyNativeType$$Overlay$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsmemberinnativetype.MyNativeType.$Overlay$impl');
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeType = goog.require('test.foo.MyNativeType');
 
 
-class MyNativeType$$Overlay {
+class $Overlay {
   /**
    * @param {MyNativeType} $thisArg
    * @return {void}
@@ -19,7 +19,7 @@ class MyNativeType$$Overlay {
    */
   static m_useFieldsAndMethods__com_google_j2cl_transpiler_readable_jsmemberinnativetype_MyNativeType(
       $thisArg) {
-    MyNativeType$$Overlay.$clinit();
+    $Overlay.$clinit();
     let value = $thisArg.publicField + $thisArg.privateField +
         $thisArg.packageField + $thisArg.protectedField;
     $thisArg.publicMethod();
@@ -43,16 +43,16 @@ class MyNativeType$$Overlay {
    * @public
    */
   static $clinit() {
-    MyNativeType$$Overlay.$clinit = function() {};
+    $Overlay.$clinit = function() {};
   }
 };
 
 $Util.$setClassMetadata(
-    MyNativeType$$Overlay, $Util.$makeClassName('test.foo.MyNativeType'));
+    $Overlay, $Util.$makeClassName('test.foo.MyNativeType'));
 
 
 /**
  * Export class.
  */
-exports = MyNativeType$$Overlay;
+exports = $Overlay;
 //# sourceMappingURL=MyNativeType$$Overlay.js.map

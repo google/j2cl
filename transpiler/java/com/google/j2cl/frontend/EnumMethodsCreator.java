@@ -78,7 +78,7 @@ public class EnumMethodsCreator {
             .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
-                TypeDescriptors.createNative(
+                TypeDescriptors.createNativeTypeDescriptor(
                     // Browser global
                     JsUtils.JS_PACKAGE_GLOBAL,
                     // Native type name

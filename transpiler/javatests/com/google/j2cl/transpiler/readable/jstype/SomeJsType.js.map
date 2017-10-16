@@ -49,9 +49,9 @@ public class SomeJsType<T> {
 [w] => [w] "w"
 [Object object = new Object();] => [let object = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [object] => [object] "object"
-[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, java_lang_Object), Star$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
+[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, java_lang_Object), com_google_j2cl_transpiler_readable_jstype_SomeJsType_Star_$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [star] => [star] "star"
-[return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, Wildcard$$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
+[return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, com_google_j2cl_transpiler_readable_jstype_SomeJsType_Wildcard_$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [@JsType
 public class SomeJsType<T> {
 ...  }

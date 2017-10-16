@@ -11,7 +11,7 @@ const Interface = goog.require('com.google.j2cl.transpiler.readable.jstypewithde
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Interface$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypewithdefault.Interface$$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypewithdefault.Interface.$Overlay$impl');
 
 
 /**
@@ -56,7 +56,7 @@ class SomeJsType extends java_lang_Object {
    * @public
    */
   defaultMethod() {
-    Interface$$Overlay
+    $Overlay
         .m_defaultMethod__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface(
             this);
   }
@@ -96,8 +96,8 @@ class SomeJsType extends java_lang_Object {
    */
   static $clinit() {
     SomeJsType.$clinit = function() {};
-    Interface$$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstypewithdefault.Interface$$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstypewithdefault.Interface.$Overlay$impl');
     java_lang_Object.$clinit();
     Interface.$clinit();
   }

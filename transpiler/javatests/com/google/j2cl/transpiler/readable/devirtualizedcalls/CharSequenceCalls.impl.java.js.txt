@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequence
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let CharSequence$$Overlay = goog.forwardDeclare('java.lang.CharSequence$$Overlay$impl');
 let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let $Overlay = goog.forwardDeclare('java.lang.CharSequence.$Overlay$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 
 
@@ -91,9 +91,8 @@ class CharSequenceCalls extends java_lang_Object {
    */
   static $clinit() {
     CharSequenceCalls.$clinit = function() {};
-    CharSequence$$Overlay =
-        goog.module.get('java.lang.CharSequence$$Overlay$impl');
     CharSequence = goog.module.get('java.lang.CharSequence$impl');
+    $Overlay = goog.module.get('java.lang.CharSequence.$Overlay$impl');
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
     java_lang_Object.$clinit();
   }

@@ -34,7 +34,6 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -524,7 +523,7 @@ public abstract class TypeDescriptor extends Node
 
   /**
    * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
-   * unless it is modified by JsType/JsPacakge.
+   * unless it is modified by JsType/JsPackage.
    *
    * <p>This is used for driving module name (hence importing etc.), long alias name, mangled name
    * generation and other similar scenarios.
@@ -748,15 +747,14 @@ public abstract class TypeDescriptor extends Node
         // Default values.
         .setNullable(true)
         .setDimensions(0)
-        .setUnionedTypeDescriptors(Collections.emptyList())
-        .setTypeArgumentDescriptors(Collections.emptyList())
+        .setUnionedTypeDescriptors(ImmutableList.of())
+        .setTypeArgumentDescriptors(ImmutableList.of())
         .setBoundTypeDescriptorFactory(() -> null)
         .setConcreteJsFunctionMethodDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
-        .setRawTypeDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null)
         .setTypeDeclaration(null);
   }

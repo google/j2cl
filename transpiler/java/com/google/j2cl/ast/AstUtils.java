@@ -29,11 +29,9 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -158,9 +156,9 @@ public class AstUtils {
 
   /** Returns new synthesized inner class components. */
   public static List<String> synthesizeInnerClassComponents(
-      TypeDescriptor enclosingType, String prefix, String descriptiveName, int uniqueId) {
+      TypeDescriptor enclosingType, Object... parts) {
     List<String> classComponents = Lists.newArrayList(enclosingType.getClassComponents());
-    classComponents.add(J2clUtils.format("$%s$%s$%s", prefix, descriptiveName, uniqueId));
+    classComponents.add("$" + Joiner.on("$").join(parts));
     return classComponents;
   }
 
@@ -1287,7 +1285,7 @@ public class AstUtils {
 
   /**
    * Returns a TypeDescriptor to refer to the enclosing name that represents the member namespace;
-   * this will transform a namespace=a.b.c on an JsMethod into a ficticious TypeDescriptor for
+   * this will transform a namespace=a.b.c on an JsMethod into a fictitious TypeDescriptor for
    * namespace=a.b and name=c.
    */
   public static TypeDescriptor getNamespaceAsTypeDescriptor(MemberDescriptor memberDescriptor) {
@@ -1302,8 +1300,8 @@ public class AstUtils {
     String jsName = Iterables.getLast(components);
 
     if (isExtern) {
-      return TypeDescriptors.createNative(
-          JsUtils.JS_PACKAGE_GLOBAL, jsName, Collections.emptyList());
+      return TypeDescriptors.createNativeTypeDescriptor(
+          JsUtils.JS_PACKAGE_GLOBAL, jsName, ImmutableList.of());
     }
 
     String jsNamespace = Joiner.on(".").join(namespaceComponents);
@@ -1312,12 +1310,8 @@ public class AstUtils {
     String packageName =
         Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
 
-    return TypeDescriptors.createNative(
-        packageName,
-        Collections.singletonList(jsName),
-        jsNamespace,
-        jsName,
-        Collections.emptyList());
+    return TypeDescriptors.createNativeTypeDescriptor(
+        packageName, ImmutableList.of(jsName), jsNamespace, jsName, ImmutableList.of());
   }
 
   private static TypeDescriptor getOutermostEnclosingType(TypeDescriptor typeDescriptor) {
@@ -1448,7 +1442,7 @@ public class AstUtils {
 
     if (typeDescriptor.isNative()) {
       return new JavaScriptConstructorReference(
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(typeDescriptor));
+          TypeDescriptors.createOverlayImplementationTypeDescriptor(typeDescriptor));
     }
 
     if (typeDescriptor.isJsFunctionInterface()) {

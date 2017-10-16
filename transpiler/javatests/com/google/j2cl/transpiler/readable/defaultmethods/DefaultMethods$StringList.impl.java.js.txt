@@ -11,7 +11,7 @@ const List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.De
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.$Overlay$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -60,7 +60,7 @@ class StringList extends java_lang_Object {
    * @public
    */
   m_add__java_lang_Object(arg0) {
-    List$$Overlay
+    $Overlay
         .m_add__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__java_lang_Object(
             this, arg0);
   }
@@ -73,7 +73,7 @@ class StringList extends java_lang_Object {
    * @public
    */
   m_remove__arrayOf_java_lang_Object(arg0) {
-    List$$Overlay
+    $Overlay
         .m_remove__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__arrayOf_java_lang_Object(
             this, arg0);
   }
@@ -88,7 +88,7 @@ class StringList extends java_lang_Object {
    */
   m_sublist__int__int(arg0, arg1) {
     return /**@type {List<?string>} */ (
-        List$$Overlay
+        $Overlay
             .m_sublist__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__int__int(
                 this, arg0, arg1));
   }
@@ -119,8 +119,8 @@ class StringList extends java_lang_Object {
    */
   static $clinit() {
     StringList.$clinit = function() {};
-    List$$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.$Overlay$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

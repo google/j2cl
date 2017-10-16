@@ -20,13 +20,11 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import java.util.Collections;
@@ -241,19 +239,19 @@ public class TypeDescriptors {
 
   // Common browser native types.
   public final TypeDescriptor nativeFunction =
-      createNative(
+      createNativeTypeDescriptor(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Function",
           Collections.emptyList());
   public final TypeDescriptor nativeObject =
-      createNative(
+      createNativeTypeDescriptor(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Object",
           Collections.emptyList());
   public final TypeDescriptor nativeArray =
-      createNative(
+      createNativeTypeDescriptor(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "Array",
@@ -262,41 +260,67 @@ public class TypeDescriptors {
   public final TypeDescriptor globalNamespace =
       // This is the global window references seen as a (phantom) type that will become the
       // enclosing class of native global methods and properties.
-      createNative(
+      createNativeTypeDescriptor(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
           "",
           Collections.emptyList());
 
+  /** Returns the TypeDeclaration for the Overlay implementation type. */
+  private static TypeDeclaration createOverlayImplementationTypeDeclaration(
+      TypeDescriptor typeDescriptor) {
+
+    TypeDescriptor unparameterizedTypeDescriptor = typeDescriptor.unparameterizedTypeDescriptor();
+
+    List<String> classComponents =
+        AstUtils.synthesizeInnerClassComponents(
+            unparameterizedTypeDescriptor, AstUtilConstants.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
+
+    return TypeDeclaration.newBuilder()
+        .setSuperTypeDescriptorFactory(
+            () -> getOverlayImplementationSuperTypeDescriptor(unparameterizedTypeDescriptor))
+        .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())
+        .setClassComponents(classComponents)
+        .setRawTypeDescriptorFactory(
+            () ->
+                createOverlayImplementationTypeDescriptor(
+                    unparameterizedTypeDescriptor.getRawTypeDescriptor()))
+        .setUnsafeTypeDescriptorFactory(
+            () -> createOverlayImplementationTypeDescriptor(unparameterizedTypeDescriptor))
+        .setVisibility(Visibility.PUBLIC)
+        .setKind(unparameterizedTypeDescriptor.getKind())
+        .build();
+  }
+
   /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */
-  public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
+  public static TypeDescriptor createOverlayImplementationTypeDescriptor(
       TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
 
-    TypeDescriptor superTypeDescriptor =
-        typeDescriptor.getSuperTypeDescriptor() == null
-                || !(typeDescriptor.getSuperTypeDescriptor().isNative()
-                    || typeDescriptor.getSuperTypeDescriptor().isInterface())
-            ? null
-            : createOverlayImplementationClassTypeDescriptor(
-                typeDescriptor.getSuperTypeDescriptor());
+    TypeDeclaration overlayImplementationTypeDeclaration =
+        createOverlayImplementationTypeDeclaration(typeDescriptor);
 
-    List<String> classComponents =
-        AstUtils.synthesizeClassComponents(
-            typeDescriptor,
-            simpleName -> simpleName + AstUtilConstants.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
-
-    return createExactly(
-        superTypeDescriptor,
-        typeDescriptor.getPackageName(),
-        classComponents,
-        Collections.emptyList(),
-        typeDescriptor.getPackageName(),
-        Joiner.on(".").join(classComponents),
-        typeDescriptor.getKind(),
-        false,
-        false);
+    return TypeDescriptor.newBuilder()
+        .setSuperTypeDescriptorFactory(
+            () -> getOverlayImplementationSuperTypeDescriptor(typeDescriptor))
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setTypeDeclaration(overlayImplementationTypeDeclaration)
+        .setClassComponents(overlayImplementationTypeDeclaration.getClassComponents())
+        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().getRawTypeDescriptor())
+        .setKind(overlayImplementationTypeDeclaration.getKind())
+        .build();
   }
+
+  private static TypeDescriptor getOverlayImplementationSuperTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
+    TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+
+    return superTypeDescriptor == null
+            || !(superTypeDescriptor.isNative() || superTypeDescriptor.isInterface())
+        ? null
+        : createOverlayImplementationTypeDescriptor(superTypeDescriptor);
+  }
+
 
   public static Function<TypeDescriptor, TypeDescriptor> mappingFunctionFromMap(
       Map<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
@@ -329,9 +353,7 @@ public class TypeDescriptors {
     private final TypeDescriptor typeDescriptor;
 
     BootstrapType(String packageName, String name) {
-      this.typeDescriptor =
-          createExactly(
-              Kind.CLASS, packageName, Collections.singletonList(name), Collections.emptyList());
+      this.typeDescriptor = createBoostrapTypeDescriptor(Kind.CLASS, packageName, name);
     }
 
     public TypeDescriptor getDescriptor() {
@@ -352,9 +374,25 @@ public class TypeDescriptors {
   // Not externally instantiable.
   private TypeDescriptors() {}
 
-  public static TypeDescriptor createNative(
+  /** Returns a TypeDescriptor to a Bootstrap type; used to synthesize calls to the runtime. */
+  private static TypeDescriptor createBoostrapTypeDescriptor(
+      Kind kind, String packageName, String bootstrapClassName) {
+    checkArgument(!bootstrapClassName.contains("<"));
+    return createSyntheticTypeDescriptor(
+        null,
+        packageName,
+        ImmutableList.of(bootstrapClassName),
+        ImmutableList.of(),
+        null,
+        null,
+        kind,
+        false,
+        false);
+  }
+
+  public static TypeDescriptor createNativeTypeDescriptor(
       String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
-    return createNative(
+    return createNativeTypeDescriptor(
         null,
         Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
         jsNamespace,
@@ -362,13 +400,13 @@ public class TypeDescriptors {
         typeArgumentDescriptors);
   }
 
-  public static TypeDescriptor createNative(
+  static TypeDescriptor createNativeTypeDescriptor(
       String packageName,
       List<String> classComponents,
       String jsNamespace,
       String jsName,
       List<TypeDescriptor> typeArgumentDescriptors) {
-    return createExactly(
+    return createSyntheticTypeDescriptor(
         null,
         packageName,
         classComponents,
@@ -420,25 +458,12 @@ public class TypeDescriptors {
         .build();
   }
 
-  public static TypeDescriptor createExactly(
-      Kind kind,
-      String packageName,
-      List<String> classComponents,
-      List<TypeDescriptor> typeArgumentDescriptors) {
-    checkArgument(!Iterables.getLast(classComponents).contains("<"));
-    return createExactly(
-        null,
-        packageName,
-        classComponents,
-        typeArgumentDescriptors,
-        null,
-        null,
-        kind,
-        false,
-        false);
-  }
-
-  static TypeDescriptor createExactly(
+  /**
+   * Returns a TypeDescriptor that is not related to Java classes.
+   *
+   * <p>Used to synthesize type descriptors to Bootstrap types and native JS types.
+   */
+  private static TypeDescriptor createSyntheticTypeDescriptor(
       final TypeDescriptor superTypeDescriptor,
       final String packageName,
       final List<String> classComponents,
@@ -450,11 +475,11 @@ public class TypeDescriptors {
       final boolean isJsType) {
     Supplier<TypeDescriptor> rawTypeDescriptorFactory =
         () ->
-            createExactly(
+            createSyntheticTypeDescriptor(
                 superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
                 packageName,
                 classComponents,
-                Collections.emptyList(),
+                ImmutableList.of(),
                 jsNamespace,
                 jsName,
                 kind,
@@ -462,17 +487,34 @@ public class TypeDescriptors {
                 isJsType);
 
     TypeDeclaration typeDeclaration =
-        TypeDeclaration.createExactly(
-            superTypeDescriptor,
-            packageName,
-            classComponents,
-            // Type declaration for native descriptors do not introduce type variables.
-            Collections.emptyList(),
-            jsNamespace,
-            jsName,
-            kind,
-            isNative,
-            isJsType);
+        TypeDeclaration.newBuilder()
+            .setClassComponents(classComponents)
+            .setJsType(isJsType)
+            .setNative(isNative)
+            .setSimpleJsName(jsName)
+            .setJsNamespace(jsNamespace)
+            .setPackageName(packageName)
+            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+            .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
+            .setUnsafeTypeDescriptorFactory(
+                () ->
+                    createSyntheticTypeDescriptor(
+                        superTypeDescriptor,
+                        packageName,
+                        classComponents,
+                        ImmutableList.of(),
+                        jsNamespace,
+                        jsName,
+                        kind,
+                        isNative,
+                        isJsType))
+            // Synthetic type declarations do not need to have type variables.
+            // TODO(b/63118697): Make sure declaratations are consistent with descriptor w.r.t
+            // type parameters.
+            .setTypeParameterDescriptors(ImmutableList.of())
+            .setVisibility(Visibility.PUBLIC)
+            .setKind(kind)
+            .build();
 
     return TypeDescriptor.newBuilder()
         .setClassComponents(classComponents)

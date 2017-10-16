@@ -65,15 +65,15 @@ import java.util.List;
  *   <li>class D extends C {}
  * </ul>
  *
- * <p>A's "fooMethod" should be moved to A$Overlay and instance like "a.fooMethod()" should be
- * rewritten as "A$Overlay.fooMethod(a)".
+ * <p>A's "fooMethod" should be moved to A.$Overlay and instance like "a.fooMethod()" should be
+ * rewritten as "A.$Overlay.fooMethod(a)".
  *
- * <p>B's B$Overlay class should contain no methods and no bridge either but it will be emitted to
- * extend A$Overlay. Instance dispatches like "b.fooMethod()" should be rewritten as
- * "B$Overlay.fooMethod(b)", taking advantage of static method inheritance in ES6 classes.
+ * <p>B's B.$Overlay class should contain no methods and no bridge either but it will be emitted to
+ * extend A.$Overlay. Instance dispatches like "b.fooMethod()" should be rewritten as
+ * "B.$Overlay.fooMethod(b)", taking advantage of static method inheritance in ES6 classes.
  *
  * <p>C has an impl class instead of an overlay class. A bridge method named "fooMethod" should
- * added in C that calls "B$Overlay.fooMethod(this)" and instance dispatches like "c.fooMethod()"
+ * added in C that calls "B.$Overlay.fooMethod(this)" and instance dispatches like "c.fooMethod()"
  * should be left as they are.
  *
  * <p>D needs no changes since it inherits the bridge added in C. Instance dispatches like
@@ -259,7 +259,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
       FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
       TypeDescriptor overlayTypeDescriptor =
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+          TypeDescriptors.createOverlayImplementationTypeDescriptor(
               targetFieldDescriptor.getEnclosingTypeDescriptor());
       return FieldAccess.Builder.from(
               FieldDescriptor.Builder.from(targetFieldDescriptor)
@@ -296,7 +296,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
       if (targetIsJsOverlayInNativeClass || targetIsDefaultMethodAccessedStatically) {
         TypeDescriptor targetOverlayTypeDescriptor =
-            TypeDescriptors.createOverlayImplementationClassTypeDescriptor(enclosingTypeDescriptor);
+            TypeDescriptors.createOverlayImplementationTypeDescriptor(enclosingTypeDescriptor);
 
         if (methodCall.getTarget().isStatic()) {
           // Call already-static method directly at their new overlay class location.
@@ -308,7 +308,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           // If the current instance type has an overlay class then call overlay methods statically
           // on that overlay class, they will prototypically resolve to the final location.
           TypeDescriptor instanceOverlayTypeDescriptor =
-              TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+              TypeDescriptors.createOverlayImplementationTypeDescriptor(
                   methodCall.getQualifier().getTypeDescriptor());
           return AstUtils.createDevirtualizedMethodCall(methodCall, instanceOverlayTypeDescriptor);
         } else {

@@ -483,7 +483,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
 
       // Find the corresponding superconstructor, the ClassInstanceCreation construct does not
-      // have a reference the the super constructor that needs to be called. But the synthetic
+      // have a reference the super constructor that needs to be called. But the synthetic
       // anonymous class constructor is a subsignature of the corresponding super constructor.
       IMethodBinding superConstructorBinding =
           Arrays.stream(typeBinding.getSuperclass().getDeclaredMethods())

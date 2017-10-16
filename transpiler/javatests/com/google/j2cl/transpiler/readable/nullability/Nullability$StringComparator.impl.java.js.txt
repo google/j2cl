@@ -12,9 +12,9 @@ const Comparator = goog.require('java.util.Comparator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let Comparator$$Overlay = goog.forwardDeclare('java.util.Comparator$$Overlay$impl');
-let Function$$Overlay = goog.forwardDeclare('java.util.function.Function$$Overlay$impl');
+let java_util_Comparator_$Overlay = goog.forwardDeclare('java.util.Comparator.$Overlay$impl');
 let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let java_util_function_Function_$Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
 let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
 let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
 let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
@@ -74,7 +74,7 @@ class StringComparator extends java_lang_Object {
    */
   m_reversed__() {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay.m_reversed__java_util_Comparator(this));
+        java_util_Comparator_$Overlay.m_reversed__java_util_Comparator(this));
   }
 
   /**
@@ -86,7 +86,7 @@ class StringComparator extends java_lang_Object {
    */
   m_thenComparing__java_util_Comparator(arg0) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparing__java_util_Comparator__java_util_Comparator(
                 this, arg0));
   }
@@ -101,7 +101,7 @@ class StringComparator extends java_lang_Object {
    */
   m_thenComparing__java_util_function_Function(arg0) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparing__java_util_Comparator__java_util_function_Function(
                 this, arg0));
   }
@@ -118,7 +118,7 @@ class StringComparator extends java_lang_Object {
   m_thenComparing__java_util_function_Function__java_util_Comparator(
       arg0, arg1) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparing__java_util_Comparator__java_util_function_Function__java_util_Comparator(
                 this, arg0, arg1));
   }
@@ -132,7 +132,7 @@ class StringComparator extends java_lang_Object {
    */
   m_thenComparingDouble__java_util_function_ToDoubleFunction(arg0) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparingDouble__java_util_Comparator__java_util_function_ToDoubleFunction(
                 this, arg0));
   }
@@ -146,7 +146,7 @@ class StringComparator extends java_lang_Object {
    */
   m_thenComparingInt__java_util_function_ToIntFunction(arg0) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparingInt__java_util_Comparator__java_util_function_ToIntFunction(
                 this, arg0));
   }
@@ -160,7 +160,7 @@ class StringComparator extends java_lang_Object {
    */
   m_thenComparingLong__java_util_function_ToLongFunction(arg0) {
     return /**@type {Comparator<string>} */ (
-        Comparator$$Overlay
+        java_util_Comparator_$Overlay
             .m_thenComparingLong__java_util_Comparator__java_util_function_ToLongFunction(
                 this, arg0));
   }
@@ -206,11 +206,12 @@ class StringComparator extends java_lang_Object {
   static $clinit() {
     StringComparator.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
-    Comparator$$Overlay = goog.module.get('java.util.Comparator$$Overlay$impl');
-    Function$$Overlay =
-        goog.module.get('java.util.function.Function$$Overlay$impl');
+    java_util_Comparator_$Overlay =
+        goog.module.get('java.util.Comparator.$Overlay$impl');
     java_util_function_Function =
         goog.module.get('java.util.function.Function$impl');
+    java_util_function_Function_$Overlay =
+        goog.module.get('java.util.function.Function.$Overlay$impl');
     ToDoubleFunction =
         goog.module.get('java.util.function.ToDoubleFunction$impl');
     ToIntFunction = goog.module.get('java.util.function.ToIntFunction$impl');

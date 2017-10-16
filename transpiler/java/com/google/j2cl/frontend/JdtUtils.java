@@ -42,12 +42,12 @@ import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -223,7 +223,7 @@ public class JdtUtils {
   static IMethodBinding getMethodBinding(
       ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
 
-    Queue<ITypeBinding> deque = new LinkedList<>();
+    Queue<ITypeBinding> deque = new ArrayDeque<>();
     deque.add(typeBinding);
 
     while (!deque.isEmpty()) {
@@ -512,7 +512,7 @@ public class JdtUtils {
   }
 
   public static List<String> getClassComponents(ITypeBinding typeBinding) {
-    List<String> classComponents = new LinkedList<>();
+    List<String> classComponents = new ArrayList<>();
     if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
       return Collections.singletonList("?");
     }
@@ -1111,6 +1111,7 @@ public class JdtUtils {
    * don't need a separate cache for each thread (like interners have) since JDT's ITypeBinding
    * instances (which we are using as keys) are unique per JDT parse.
    */
+  @SuppressWarnings("JdkObsolete")
   private static Map<ITypeBinding, TypeDescriptor> cachedTypeDescriptorByTypeBinding =
       new Hashtable<>();
 
@@ -1436,7 +1437,6 @@ public class JdtUtils {
                     lambdaTypeBinding.getFunctionalInterfaceMethod()))
         .setLocal(true)
         .setAnonymous(true)
-        .setPackageName(enclosingTypeDeclaration.getPackageName())
         .setRawTypeDescriptorFactory(
             selfTypeDescriptor ->
                 TypeDescriptor.Builder.from(selfTypeDescriptor.getUnsafeTypeDescriptor())

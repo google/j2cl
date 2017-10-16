@@ -11,10 +11,10 @@ const ArrayList = goog.require('java.util.ArrayList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let Collection$$Overlay = goog.forwardDeclare('java.util.Collection$$Overlay$impl');
-let List$$Overlay = goog.forwardDeclare('java.util.List$$Overlay$impl');
-let Spliterator$$Overlay = goog.forwardDeclare('java.util.Spliterator$$Overlay$impl');
+let java_util_Collection_$Overlay = goog.forwardDeclare('java.util.Collection.$Overlay$impl');
+let java_util_List_$Overlay = goog.forwardDeclare('java.util.List.$Overlay$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let java_util_Spliterator_$Overlay = goog.forwardDeclare('java.util.Spliterator.$Overlay$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
 
 
@@ -61,7 +61,7 @@ class StringList extends ArrayList {
    */
   m_spliterator__() {
     return /**@type {Spliterator<?string>} */ (
-        List$$Overlay.m_spliterator__java_util_List(this));
+        java_util_List_$Overlay.m_spliterator__java_util_List(this));
   }
 
   /**
@@ -72,7 +72,8 @@ class StringList extends ArrayList {
    */
   m_parallelStream__() {
     return /**@type {Stream<?string>} */ (
-        Collection$$Overlay.m_parallelStream__java_util_Collection(this));
+        java_util_Collection_$Overlay.m_parallelStream__java_util_Collection(
+            this));
   }
 
   /**
@@ -83,7 +84,7 @@ class StringList extends ArrayList {
    */
   m_stream__() {
     return /**@type {Stream<?string>} */ (
-        Collection$$Overlay.m_stream__java_util_Collection(this));
+        java_util_Collection_$Overlay.m_stream__java_util_Collection(this));
   }
 
   /**
@@ -113,11 +114,12 @@ class StringList extends ArrayList {
   static $clinit() {
     StringList.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
-    Collection$$Overlay = goog.module.get('java.util.Collection$$Overlay$impl');
-    List$$Overlay = goog.module.get('java.util.List$$Overlay$impl');
-    Spliterator$$Overlay =
-        goog.module.get('java.util.Spliterator$$Overlay$impl');
+    java_util_Collection_$Overlay =
+        goog.module.get('java.util.Collection.$Overlay$impl');
+    java_util_List_$Overlay = goog.module.get('java.util.List.$Overlay$impl');
     Spliterator = goog.module.get('java.util.Spliterator$impl');
+    java_util_Spliterator_$Overlay =
+        goog.module.get('java.util.Spliterator.$Overlay$impl');
     Stream = goog.module.get('java.util.stream.Stream$impl');
     ArrayList.$clinit();
   }

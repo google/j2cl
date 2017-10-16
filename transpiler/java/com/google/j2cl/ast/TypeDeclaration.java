@@ -33,7 +33,6 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -236,8 +235,7 @@ public abstract class TypeDeclaration extends Node
 
   @Memoized
   public TypeDescriptor getOverlayImplementationTypeDescriptor() {
-    return TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-        getUnsafeTypeDescriptor());
+    return TypeDescriptors.createOverlayImplementationTypeDescriptor(getUnsafeTypeDescriptor());
   }
 
   public boolean hasOverlayImplementationType() {
@@ -300,7 +298,7 @@ public abstract class TypeDeclaration extends Node
 
   /**
    * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
-   * unless it is modified by JsType/JsPacakge.
+   * unless it is modified by JsType/JsPackage.
    *
    * <p>This is used for driving module name (hence importing etc.), long alias name, mangled name
    * generation and other similar scenarios.
@@ -604,56 +602,6 @@ public abstract class TypeDeclaration extends Node
         .build();
   }
 
-  static TypeDeclaration createExactly(
-      final TypeDescriptor superTypeDescriptor,
-      final String packageName,
-      final List<String> classComponents,
-      final List<TypeDescriptor> typeParameterDescriptors,
-      final String jsNamespace,
-      final String jsName,
-      final Kind kind,
-      final boolean isNative,
-      final boolean isJsType) {
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
-        () ->
-            TypeDescriptors.createExactly(
-                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
-                packageName,
-                classComponents,
-                Collections.emptyList(),
-                jsNamespace,
-                jsName,
-                kind,
-                isNative,
-                isJsType);
-
-    return newBuilder()
-        .setClassComponents(classComponents)
-        .setJsType(isJsType)
-        .setNative(isNative)
-        .setSimpleJsName(jsName)
-        .setJsNamespace(jsNamespace)
-        .setPackageName(packageName)
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
-        .setUnsafeTypeDescriptorFactory(
-            () ->
-                TypeDescriptors.createExactly(
-                    superTypeDescriptor,
-                    packageName,
-                    classComponents,
-                    typeParameterDescriptors,
-                    jsNamespace,
-                    jsName,
-                    kind,
-                    isNative,
-                    isJsType))
-        .setTypeParameterDescriptors(typeParameterDescriptors)
-        .setVisibility(Visibility.PUBLIC)
-        .setKind(kind)
-        .build();
-  }
-
   public static Builder newBuilder() {
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
@@ -669,11 +617,10 @@ public abstract class TypeDeclaration extends Node
         .setJsType(false)
         .setLocal(false)
         .setUnusableByJsSuppressed(false)
-        .setTypeParameterDescriptors(Collections.emptyList())
+        .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
-        .setRawTypeDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null);
   }
 
@@ -770,7 +717,7 @@ public abstract class TypeDeclaration extends Node
     }
 
     // Builder accessors to aid construction.
-    abstract String getPackageName();
+    abstract Optional<String> getPackageName();
 
     abstract ImmutableList<String> getClassComponents();
 
@@ -778,13 +725,13 @@ public abstract class TypeDeclaration extends Node
 
     abstract Optional<String> getJsNamespace();
 
-    abstract TypeDeclaration getEnclosingTypeDeclaration();
+    abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
     abstract boolean isNative();
 
     private String calculateJsNamespace() {
-      TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
-      if (enclosingTypeDeclaration != null) {
+      if (getEnclosingTypeDeclaration().isPresent()) {
+        TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration().get();
         if (!isNative() && enclosingTypeDeclaration.isNative()) {
           // When there is a type nested within a native type, it's important not to generate a name
           // like "Array.1" (like would happen if the outer native type was claiming to be native
@@ -797,7 +744,7 @@ public abstract class TypeDeclaration extends Node
         return enclosingTypeDeclaration.getQualifiedJsName();
       }
       // Use the java package namespace.
-      return getPackageName();
+      return getPackageName().get();
     }
 
     private static final ThreadLocalInterner<TypeDeclaration> interner =
@@ -806,6 +753,10 @@ public abstract class TypeDeclaration extends Node
     abstract TypeDeclaration autoBuild();
 
     public TypeDeclaration build() {
+      if (!getPackageName().isPresent() && getEnclosingTypeDeclaration().isPresent()) {
+        setPackageName(getEnclosingTypeDeclaration().get().getPackageName());
+      }
+
       if (!getSimpleJsName().isPresent()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
       }
@@ -821,6 +772,14 @@ public abstract class TypeDeclaration extends Node
               || typeDeclaration.getKind() == Kind.ENUM
               || typeDeclaration.getKind() == Kind.INTERFACE
               || typeDeclaration.getKind() == Kind.PRIMITIVE);
+
+      // If this is an inner class, make sure the package is consistent.
+      checkState(
+          typeDeclaration.getEnclosingTypeDeclaration() == null
+              || typeDeclaration
+                  .getEnclosingTypeDeclaration()
+                  .getPackageName()
+                  .equals(typeDeclaration.getPackageName()));
 
       // Can not be both a JsFunction implementation and js function interface
       checkState(

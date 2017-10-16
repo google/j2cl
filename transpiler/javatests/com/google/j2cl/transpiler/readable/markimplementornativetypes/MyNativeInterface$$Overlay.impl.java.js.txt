@@ -4,14 +4,14 @@
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface$$Overlay$impl');
+goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay$impl');
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeInterface = goog.require('test.foo.MyNativeInterface');
 
 
-class MyNativeInterface$$Overlay {
+class $Overlay {
   /**
    * Returns whether the provided instance is of a class that implements this
    * interface.
@@ -28,17 +28,16 @@ class MyNativeInterface$$Overlay {
    * @public
    */
   static $clinit() {
-    MyNativeInterface$$Overlay.$clinit = function() {};
+    $Overlay.$clinit = function() {};
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    MyNativeInterface$$Overlay,
-    $Util.$makeClassName('test.foo.MyNativeInterface'));
+    $Overlay, $Util.$makeClassName('test.foo.MyNativeInterface'));
 
 
 /**
  * Export class.
  */
-exports = MyNativeInterface$$Overlay;
+exports = $Overlay;
 //# sourceMappingURL=MyNativeInterface$$Overlay.js.map

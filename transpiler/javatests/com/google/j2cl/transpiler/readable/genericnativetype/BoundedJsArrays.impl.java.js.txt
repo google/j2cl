@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArra
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let BoundedJsArray$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray$$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -53,7 +53,7 @@ class BoundedJsArrays extends java_lang_Object {
    */
   static m_create__() {
     BoundedJsArrays.$clinit();
-    return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__());
+    return /**@type {Array<*>} */ ($Overlay.m_create__());
   }
 
   /**
@@ -64,7 +64,7 @@ class BoundedJsArrays extends java_lang_Object {
    */
   static m_createWithSize__int(size) {
     BoundedJsArrays.$clinit();
-    return /**@type {Array<*>} */ (BoundedJsArray$$Overlay.m_create__int(size));
+    return /**@type {Array<*>} */ ($Overlay.m_create__int(size));
   }
 
   /**
@@ -93,8 +93,8 @@ class BoundedJsArrays extends java_lang_Object {
    */
   static $clinit() {
     BoundedJsArrays.$clinit = function() {};
-    BoundedJsArray$$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray$$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }

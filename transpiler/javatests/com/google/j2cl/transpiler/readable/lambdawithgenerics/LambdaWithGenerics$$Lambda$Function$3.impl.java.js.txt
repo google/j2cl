@@ -15,7 +15,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
-let Function$$Overlay = goog.forwardDeclare('java.util.function.Function$$Overlay$impl');
+let $Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -87,7 +87,7 @@ class $Lambda$Function$3 extends java_lang_Object {
    */
   m_andThen__java_util_function_Function(arg0) {
     return /**@type {java_util_function_Function<M_T, *>} */ (
-        Function$$Overlay
+        $Overlay
             .m_andThen__java_util_function_Function__java_util_function_Function(
                 this, arg0));
   }
@@ -102,7 +102,7 @@ class $Lambda$Function$3 extends java_lang_Object {
    */
   m_compose__java_util_function_Function(arg0) {
     return /**@type {java_util_function_Function<*, *>} */ (
-        Function$$Overlay
+        $Overlay
             .m_compose__java_util_function_Function__java_util_function_Function(
                 this, arg0));
   }
@@ -149,8 +149,7 @@ class $Lambda$Function$3 extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Long = goog.module.get('java.lang.Long$impl');
-    Function$$Overlay =
-        goog.module.get('java.util.function.Function$$Overlay$impl');
+    $Overlay = goog.module.get('java.util.function.Function.$Overlay$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
     java_util_function_Function.$clinit();
