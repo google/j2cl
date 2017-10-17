@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.async.Async$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let IThenable$$Overlay = goog.forwardDeclare('elemental2.promise.IThenable$$Overlay$impl');
-let Promise$$Overlay = goog.forwardDeclare('elemental2.promise.Promise$$Overlay$impl');
+let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
 let Void = goog.forwardDeclare('java.lang.Void$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -53,7 +53,7 @@ class Async extends java_lang_Object {
    */
   async m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_async() {
     return /**@type {Promise<?void>} */ (
-        Promise$$Overlay.m_resolve__java_lang_Object(
+        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
             /**@type {?void} */ ($Casts.$to(null, Void))));
   }
 
@@ -65,7 +65,7 @@ class Async extends java_lang_Object {
   m_staticAsyncMethod___$pp_com_google_j2cl_transpiler_readable_async() {
     Async.$clinit();
     return /**@type {Promise<?void>} */ (
-        Promise$$Overlay.m_resolve__java_lang_Object(
+        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
             /**@type {?void} */ ($Casts.$to(null, Void))));
   }
 
@@ -95,10 +95,10 @@ class Async extends java_lang_Object {
    */
   static $clinit() {
     Async.$clinit = function() {};
-    IThenable$$Overlay =
-        goog.module.get('elemental2.promise.IThenable$$Overlay$impl');
-    Promise$$Overlay =
-        goog.module.get('elemental2.promise.Promise$$Overlay$impl');
+    elemental2_promise_IThenable_$Overlay =
+        goog.module.get('elemental2.promise.IThenable.$Overlay$impl');
+    elemental2_promise_Promise_$Overlay =
+        goog.module.get('elemental2.promise.Promise.$Overlay$impl');
     Void = goog.module.get('java.lang.Void$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
