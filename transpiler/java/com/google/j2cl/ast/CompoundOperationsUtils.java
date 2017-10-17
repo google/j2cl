@@ -272,7 +272,7 @@ public class CompoundOperationsUtils {
     return new NumberLiteral(typeDescriptor.unboxType(), 1);
   }
 
-  /** Returns assignment in the form of {leftOperand = leftOperand operator rightOperand}. */
+  /** Returns assignment in the form of {leftOperand = leftOperand operator (rightOperand)}. */
   private static BinaryExpression assignToLeftOperand(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
@@ -283,7 +283,12 @@ public class CompoundOperationsUtils {
                 BinaryExpression.newBuilder()
                     .setLeftOperand(leftOperand.clone())
                     .setOperator(operator)
-                    .setRightOperand(rightOperand)
+                    // TODO(b/67753876): Remove multiexpression once J2cl handles precedence
+                    // correctly.
+                    // Add parenthesis to the right expression to handle cases like a += b += c, and
+                    // emit code that is syntactically correct.
+                    .setRightOperand(
+                        MultiExpression.newBuilder().addExpressions(rightOperand).build())
                     .build()))
         .build();
   }

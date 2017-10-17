@@ -505,6 +505,14 @@ public class Main {
     }
   }
 
+  public static void testCompoundAssignmenBoxUnboxtSequence() {
+    Integer boxI = 1;
+    int i = 2;
+    boxI /* 6 */ += i /* 5 */ += boxI /* 3 */ += i /* 2*/;
+
+    assert i == 5;
+    assert boxI == 6;
+  }
 
   public Object doFail() {
     assert false;
@@ -528,5 +536,6 @@ public class Main {
     m.testCasts();
     m.testArrayExpressions();
     m.testConditionals();
+    m.testCompoundAssignmenBoxUnboxtSequence();
   }
 }

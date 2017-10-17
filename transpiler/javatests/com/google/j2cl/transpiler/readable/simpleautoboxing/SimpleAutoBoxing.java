@@ -249,6 +249,7 @@ public class SimpleAutoBoxing {
     switch (boxI) {
       default:
     }
+    i += boxI += i += boxI;
   }
 
   @SuppressWarnings("unused")
@@ -313,6 +314,14 @@ public class SimpleAutoBoxing {
     br = boxB1 ^= boxB2;
     assert boxr;
     assert br;
+
+    Boolean boxB = null;
+    boxB = !boxB;
+    boxB = boxB && boxB;
+    boxB = boxB ? boxB : boxB;
+    if (boxB) {}
+    boolean b = false;
+    b |= boxB |= b |= boxB;
   }
 
   @SuppressWarnings("unused")
@@ -356,17 +365,5 @@ public class SimpleAutoBoxing {
     assert boxedByte == Byte.MIN_VALUE;
     boxedByte = Byte.MAX_VALUE;
     assert ++boxedByte == Byte.MIN_VALUE;
-  }
-
-  @SuppressWarnings("unused")
-  public void testBooleanUnboxing() {
-    Boolean boxB = null;
-    boxB = !boxB;
-    boxB = boxB && boxB;
-    boxB = boxB ? boxB : boxB;
-    if (boxB) {}
-    // TODO(b/67734970) : uncomment once the bug is fixed.
-    // boolean b = false;
-    // b |= boxB |= b |= boxB;
   }
 }

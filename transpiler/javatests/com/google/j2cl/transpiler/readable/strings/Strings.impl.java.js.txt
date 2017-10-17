@@ -65,8 +65,9 @@ class Strings extends java_lang_Object {
     let s3 = java_lang_String.m_valueOf__java_lang_Object(s1) +
         java_lang_String.m_valueOf__java_lang_Object(s2);
     s2 = java_lang_String.m_valueOf__java_lang_Object(s2) +
-        java_lang_String.m_valueOf__java_lang_Object(s2);
-    s1 = java_lang_String.m_valueOf__java_lang_Object(s1) + 'a';
+        java_lang_String.m_valueOf__java_lang_Object((s2));
+    s1 = java_lang_String.m_valueOf__java_lang_Object(s1) +
+        java_lang_String.m_valueOf__java_lang_Object(('a'));
     s3 = java_lang_String.m_valueOf__java_lang_Object(s1) +
         java_lang_String.m_valueOf__java_lang_Object(s1) +
         java_lang_String.m_valueOf__java_lang_Object(s2) +
@@ -80,15 +81,16 @@ class Strings extends java_lang_Object {
     let c2 = 111 /* 'o' */;
     s4 = c1 + c2 + 'o';
     s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
-        $Long.fromBits(1, 0) /* 1 */ + '';
+        java_lang_String.m_valueOf__java_lang_Object(
+            ($Long.fromBits(1, 0) /* 1 */ + ''));
     s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
-        $Long.fromBits(1, 0) /* 1 */;
+        ($Long.fromBits(1, 0) /* 1 */);
     s4 = java_lang_String.m_valueOf__java_lang_Object(s4) +
-        java_lang_String.m_valueOf__char(67 /* 'C' */);
-    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1;
-    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1.0;
-    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1.0;
-    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + 1;
+        java_lang_String.m_valueOf__char((67 /* 'C' */));
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + (1);
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + (1.0);
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + (1.0);
+    s4 = java_lang_String.m_valueOf__java_lang_Object(s4) + (1);
     {
       let $qualifier = (StringHolder.$create__());
       $qualifier
@@ -96,7 +98,7 @@ class Strings extends java_lang_Object {
           java_lang_String.m_valueOf__java_lang_Object(
               $qualifier
                   .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
-          java_lang_String.m_valueOf__java_lang_Object(s4);
+          java_lang_String.m_valueOf__java_lang_Object((s4));
     }
     {
       let $qualifier$1$ = (StringHolder.$create__());
@@ -105,7 +107,7 @@ class Strings extends java_lang_Object {
           java_lang_String.m_valueOf__java_lang_Object(
               $qualifier$1$
                   .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
-          java_lang_String.m_valueOf__char(c1);
+          java_lang_String.m_valueOf__char((c1));
     }
     {
       let $qualifier$2$ = (StringHolder.$create__());
@@ -114,7 +116,7 @@ class Strings extends java_lang_Object {
           java_lang_String.m_valueOf__java_lang_Object(
               $qualifier$2$
                   .f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) +
-          'o';
+          java_lang_String.m_valueOf__java_lang_Object(('o'));
     }
   }
 

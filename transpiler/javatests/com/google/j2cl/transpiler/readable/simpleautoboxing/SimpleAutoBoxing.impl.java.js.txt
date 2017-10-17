@@ -399,6 +399,9 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxD = -Double.m_doubleValue__java_lang_Double(boxD);
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
     switch (boxI.m_intValue__()) { default: }
+    i += (boxI = Integer.m_valueOf__int(
+              boxI.m_intValue__() + (i += boxI.m_intValue__())))
+             .m_intValue__();
   }
 
   /**
@@ -461,33 +464,49 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
+    let boxB = null;
+    boxB = !Boolean.m_booleanValue__java_lang_Boolean(boxB);
+    boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) &&
+        Boolean.m_booleanValue__java_lang_Boolean(boxB);
+    boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) ? boxB : boxB;
+    if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
+    }
+    let b = false;
+    b =
+        !!(b |
+           Boolean.m_booleanValue__java_lang_Boolean((
+               boxB = !!(
+                   Boolean.m_booleanValue__java_lang_Boolean(boxB) |
+                   (b = !!(
+                        b |
+                        Boolean.m_booleanValue__java_lang_Boolean((boxB))))))));
   }
 
   /**
@@ -530,7 +549,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     $Asserts.$assert(
         ($value = boxedByte,
          boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)),
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - (1))),
          $value)
             .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
     $Asserts.$assert(
@@ -538,13 +557,13 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
     $Asserts.$assert(
         (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)))
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - (1))))
             .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
     boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
         ($value$1$ = boxedByte,
          boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)),
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + (1))),
          $value$1$)
             .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
@@ -552,22 +571,8 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
     $Asserts.$assert(
         (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)))
+             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + (1))))
             .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_testBooleanUnboxing__() {
-    let boxB = null;
-    boxB = !Boolean.m_booleanValue__java_lang_Boolean(boxB);
-    boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) &&
-        Boolean.m_booleanValue__java_lang_Boolean(boxB);
-    boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) ? boxB : boxB;
-    if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
-    }
   }
 
   /**

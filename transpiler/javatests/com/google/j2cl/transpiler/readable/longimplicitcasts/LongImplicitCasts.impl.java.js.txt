@@ -104,14 +104,14 @@ class LongImplicitCasts extends java_lang_Object {
     }
     {
       tlong = $Primitives.$widenIntToLong(fint);
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));
-      tlong = $LongUtils.$leftShift(tlong, $Primitives.$widenIntToLong(fint));
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong((fint)));
+      tlong = $LongUtils.$leftShift(tlong, $Primitives.$widenIntToLong((fint)));
     }
     {
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));
-      tlong = $LongUtils.$plus(tlong, flong);
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong((fchar)));
+      tlong = $LongUtils.$plus(tlong, (flong));
       tlong = $Primitives.$narrowFloatToLong(
-          $Primitives.$widenLongToFloat(tlong) + ffloat);
+          $Primitives.$widenLongToFloat(tlong) + (ffloat));
     }
     {
       tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));
@@ -130,7 +130,7 @@ class LongImplicitCasts extends java_lang_Object {
     }
     {
       tlong = $LongUtils.$leftShift(flong, flong);
-      tlong = $LongUtils.$leftShift(tlong, flong);
+      tlong = $LongUtils.$leftShift(tlong, (flong));
     }
     {
       tlong = $LongUtils.$plus(

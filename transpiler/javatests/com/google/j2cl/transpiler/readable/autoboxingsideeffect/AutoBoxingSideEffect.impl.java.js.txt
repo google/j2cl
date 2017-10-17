@@ -74,12 +74,12 @@ class AutoBoxingSideEffect extends java_lang_Object {
         /** Integer */ $value$2$;
     let i = Integer.m_valueOf__int(10000);
     let c = Integer.m_valueOf__int(1000);
-    c = Integer.m_valueOf__int(c.m_intValue__() + i.m_intValue__());
+    c = Integer.m_valueOf__int(c.m_intValue__() + (i).m_intValue__());
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                 .m_intValue__() +
-            i.m_intValue__());
+            (i).m_intValue__());
     {
       let $qualifier$2$ = this.m_getWithSideEffect__();
       $qualifier$2$
@@ -88,19 +88,19 @@ class AutoBoxingSideEffect extends java_lang_Object {
               $qualifier$2$
                   .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                   .m_intValue__() +
-              i.m_intValue__());
+              (i).m_intValue__());
     }
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                 .m_intValue__()
-            << i.m_intValue__());
-    let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+            << (i).m_intValue__());
+    let e = c = Integer.m_valueOf__int(c.m_intValue__() + (1));
     e = this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                 .m_intValue__() +
-            1);
+            (1));
     e =
         ($qualifier = this.m_getWithSideEffect__(),
          $qualifier
@@ -109,9 +109,10 @@ class AutoBoxingSideEffect extends java_lang_Object {
                  $qualifier
                      .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                      .m_intValue__() +
-                 1));
+                 (1)));
     let f =
-        ($value = i, i = Integer.m_valueOf__int(i.m_intValue__() + 1), $value);
+        ($value = i, i = Integer.m_valueOf__int(i.m_intValue__() + (1)),
+         $value);
     f =
         ($value$1$ =
              this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect,
@@ -119,7 +120,7 @@ class AutoBoxingSideEffect extends java_lang_Object {
              Integer.m_valueOf__int(
                  this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                      .m_intValue__() +
-                 1),
+                 (1)),
          $value$1$);
     f =
         (($qualifier$1$ = this.m_getWithSideEffect__(),
@@ -132,14 +133,14 @@ class AutoBoxingSideEffect extends java_lang_Object {
                  $qualifier$1$
                      .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
                      .m_intValue__() +
-                 1),
+                 (1)),
          $value$2$);
     let b = Byte.m_valueOf__byte(0);
     b = Byte.m_valueOf__byte(
-        $Primitives.$narrowIntToByte(b.m_byteValue__() + 1));
+        $Primitives.$narrowIntToByte(b.m_byteValue__() + (1)));
     let ch = Character.m_valueOf__char(99 /* "c" */);
     ch = Character.m_valueOf__char(
-        $Primitives.$narrowIntToChar(ch.m_charValue__() + 1));
+        $Primitives.$narrowIntToChar(ch.m_charValue__() + (1)));
   }
 
   /**

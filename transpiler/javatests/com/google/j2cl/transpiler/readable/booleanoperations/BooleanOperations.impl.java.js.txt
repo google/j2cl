@@ -75,9 +75,9 @@ class BooleanOperations extends java_lang_Object {
     r = ls && rs;
     r = ls || rs;
     r = ls = rs;
-    r = !!(r ^ rs);
-    r = !!(r & rs);
-    r = !!(r | rs);
+    r = !!(r ^ (rs));
+    r = !!(r & (rs));
+    r = !!(r | (rs));
     BooleanOperations
         .m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(
             ls == rs);
@@ -140,7 +140,7 @@ class BooleanOperations extends java_lang_Object {
         .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer =
         !!(finalOuter
                .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer |
-           true);
+           (true));
     let outer =
         $1Outer
             .$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(
@@ -149,7 +149,7 @@ class BooleanOperations extends java_lang_Object {
         .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer =
         !!(outer
                .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer |
-           $Equality.$same((outer = null), null));
+           ($Equality.$same((outer = null), null)));
   }
 
   /**
