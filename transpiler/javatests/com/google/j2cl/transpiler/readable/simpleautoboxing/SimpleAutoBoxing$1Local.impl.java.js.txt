@@ -1,0 +1,118 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing$1Local.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$1Local$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+
+
+/**
+ * @template C_1Local_T, M_T
+ */
+class $1Local extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Local()'.
+   * @template C_1Local_T, M_T
+   * @return {!$1Local<C_1Local_T, M_T>}
+   * @public
+   */
+  static $create__() {
+    $1Local.$clinit();
+    let $instance = new $1Local();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing_1Local__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Local()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing_1Local__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing_1Local();
+  }
+
+  /**
+   * @param {C_1Local_T} l
+   * @return {!$Long}
+   * @public
+   */
+  m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(
+      l) {
+    $Asserts.$assert(
+        l.equals(Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */)));
+    return l;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $1Local;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $1Local);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $1Local.$clinit = function() {};
+    Long = goog.module.get('java.lang.Long$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing_1Local() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $1Local,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing$1Local'));
+
+
+
+/**
+ * Export class.
+ */
+exports = $1Local;
+//# sourceMappingURL=SimpleAutoBoxing$1Local.js.map

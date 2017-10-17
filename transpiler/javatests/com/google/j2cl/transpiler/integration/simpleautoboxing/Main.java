@@ -505,13 +505,55 @@ public class Main {
     }
   }
 
-  public static void testCompoundAssignmenBoxUnboxtSequence() {
+  public static void testCompoundAssignmentBoxUnboxSequence() {
     Integer boxI = 1;
     int i = 2;
     boxI /* 6 */ += i /* 5 */ += boxI /* 3 */ += i /* 2*/;
 
     assert i == 5;
     assert boxI == 6;
+  }
+
+  public static <T extends Long> void testUnboxingFromTypeVariable() {
+    T n = (T) (Long) 10L;
+    // Auto unboxing from variable n.
+    long l = n;
+    // TODO(b/67872245): uncomment when bug is fixed.
+    // assert l == 10L;
+
+    class Local<T extends Long> {
+      long toLong(T l) {
+        // Auto unboxing from variable l.
+        assert l.equals(11L);
+        return l;
+      }
+    }
+
+    // Auto boxing parameter.
+    l = new Local<>().toLong(11L);
+    // TODO(b/67872245): uncomment when bug is fixed.
+    // assert l == 11L;
+  }
+
+  public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
+    T n = (T) (Long) 10L;
+    // Auto unboxing from variable n.
+    long l = n;
+    // TODO(b/67872245): uncomment when bug is fixed.
+    // assert l == 10L;
+
+    class Local<T extends Long & Comparable<Long>> {
+      long toLong(T l) {
+        // Auto unboxing from variable l.
+        assert l.equals(11L);
+        return l;
+      }
+    }
+
+    // Auto boxing parameter.
+    l = new Local<>().toLong(11L);
+    // TODO(b/67872245): uncomment when bug is fixed.
+    // assert l == 11L;
   }
 
   public Object doFail() {
@@ -536,6 +578,8 @@ public class Main {
     m.testCasts();
     m.testArrayExpressions();
     m.testConditionals();
-    m.testCompoundAssignmenBoxUnboxtSequence();
+    m.testCompoundAssignmentBoxUnboxSequence();
+    m.testUnboxingFromTypeVariable();
+    m.testUnboxingFromIntersectionType();
   }
 }

@@ -337,6 +337,28 @@
 [assert boxedByte == Byte.MIN_VALUE;] => [$Asserts.$assert(boxedByte.m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
 [boxedByte = Byte.MAX_VALUE;] => [boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
 [assert ++boxedByte == Byte.MIN_VALUE;] => [$Asserts.$assert((boxedByte = Byte.m_valueOf__byte($Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + (1)))).m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnderflowOverflow"
+[public static <T extends Long> void testUnboxingFromTypeVariable() {
+    T n = (T) (Long) 10L;
+...    assert l == 11L;
+  }] => [SimpleAutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[T n = (T) (Long) 10L;] => [let n = /**@type {Long} */ ($Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[n] => [n] "n"
+[long l = n;] => [let l = n;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[l] => [l] "l"
+[assert l == 10L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[l = new Local<>().toLong(11L);] => [l = /**@type {!$1Local<Long, Long>} */ ($1Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromTypeVariable"
+[public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
+    T n = (T) (Long) 10L;
+...    assert l == 11L;
+  }] => [SimpleAutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
+[T n = (T) (Long) 10L;] => [let n = /**@type {Long} */ ($Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
+[n] => [n] "n"
+[long l = n;] => [let l = n;] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
+[l] => [l] "l"
+[assert l == 10L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
+[l = new Local<>().toLong(11L);] => [l = /**@type {!$2Local<Long, Long>} */ ($2Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
+[assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));] "com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.testUnboxingFromIntersectionType"
 [@SuppressWarnings({
   "IdentityBinaryExpression",
 ...  }

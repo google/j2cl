@@ -366,4 +366,39 @@ public class SimpleAutoBoxing {
     boxedByte = Byte.MAX_VALUE;
     assert ++boxedByte == Byte.MIN_VALUE;
   }
+
+  public static <T extends Long> void testUnboxingFromTypeVariable() {
+    T n = (T) (Long) 10L;
+    // Auto unboxing from variable n.
+    long l = n;
+    assert l == 10L;
+
+    class Local<T extends Long> {
+      long toLong(T l) {
+        // Auto unboxing from variable l.
+        assert l.equals(11L);
+        return l;
+      }
+    }
+    l = new Local<>().toLong(11L);
+    assert l == 11L;
+  }
+
+  public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
+    T n = (T) (Long) 10L;
+    // Auto unboxing from variable n.
+    long l = n;
+    assert l == 10L;
+
+    class Local<T extends Long & Comparable<Long>> {
+      long toLong(T l) {
+        // Auto unboxing from variable l.
+        assert l.equals(11L);
+        return l;
+      }
+    }
+    // Auto boxing parameter.
+    l = new Local<>().toLong(11L);
+    assert l == 11L;
+  }
 }

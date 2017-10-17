@@ -11,6 +11,8 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$1Local$impl');
+let $2Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$2Local$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -576,6 +578,40 @@ class SimpleAutoBoxing extends java_lang_Object {
   }
 
   /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  static m_testUnboxingFromTypeVariable__() {
+    SimpleAutoBoxing.$clinit();
+    let n = /**@type {Long} */ (
+        $Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));
+    let l = n;
+    $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));
+    l = /**@type {!$1Local<Long, Long>} */ ($1Local.$create__())
+            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(
+                Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));
+    $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));
+  }
+
+  /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  static m_testUnboxingFromIntersectionType__() {
+    SimpleAutoBoxing.$clinit();
+    let n = /**@type {Long} */ (
+        $Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));
+    let l = n;
+    $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));
+    l = /**@type {!$2Local<Long, Long>} */ ($2Local.$create__())
+            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(
+                Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));
+    $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -601,6 +637,10 @@ class SimpleAutoBoxing extends java_lang_Object {
    */
   static $clinit() {
     SimpleAutoBoxing.$clinit = function() {};
+    $1Local = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$1Local$impl');
+    $2Local = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$2Local$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
