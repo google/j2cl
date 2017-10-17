@@ -294,15 +294,11 @@ public class Main {
     long l = (long) o;
     assert l == 1;
 
-    // TODO(b/67872245): This should act as if o is of type Long and call floatValue() without first
-    // casting to (Float).
-    // float f = (float) o;
-    // assert f == 1.0;
+    float f = (float) o;
+    assert f == 1.0;
 
-    // TODO(b/67872245): This should act as if o is of type Long and call doubleValue() without
-    // first casting to (Double).
-    // double d = (double) o;
-    // assert d == 1.0;
+    double d = (double) o;
+    assert d == 1.0;
   }
 
   public static <T extends Long & Comparable<Long>>
@@ -311,15 +307,11 @@ public class Main {
     long l = (long) o;
     assert l == 1;
 
-    // TODO(b/67872245): This should act as if o is of type Long and call floatValue() without first
-    // casting to (Float).
-    // float f = (float) o;
-    // assert f == 1.0;
+    float f = (float) o;
+    assert f == 1.0;
 
-    // TODO(b/67872245): This should act as if o is of type Long and call doubleValue() without
-    // first casting to (Double).
-    // double d = (double) o;
-    // assert d == 1.0;
+    double d = (double) o;
+    assert d == 1.0;
   }
 
   @SuppressWarnings("unused")

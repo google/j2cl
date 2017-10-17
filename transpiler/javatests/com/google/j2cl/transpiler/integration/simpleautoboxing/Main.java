@@ -518,8 +518,7 @@ public class Main {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
-    // TODO(b/67872245): uncomment when bug is fixed.
-    // assert l == 10L;
+    assert l == 10L;
 
     class Local<T extends Long> {
       long toLong(T l) {
@@ -531,16 +530,14 @@ public class Main {
 
     // Auto boxing parameter.
     l = new Local<>().toLong(11L);
-    // TODO(b/67872245): uncomment when bug is fixed.
-    // assert l == 11L;
+    assert l == 11L;
   }
 
   public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
-    // TODO(b/67872245): uncomment when bug is fixed.
-    // assert l == 10L;
+    assert l == 10L;
 
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {
@@ -552,8 +549,7 @@ public class Main {
 
     // Auto boxing parameter.
     l = new Local<>().toLong(11L);
-    // TODO(b/67872245): uncomment when bug is fixed.
-    // assert l == 11L;
+    assert l == 11L;
   }
 
   public Object doFail() {

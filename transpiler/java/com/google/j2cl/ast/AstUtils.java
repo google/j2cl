@@ -607,7 +607,7 @@ public class AstUtils {
    * expression => expression.intValue().
    */
   public static Expression unbox(Expression expression) {
-    TypeDescriptor boxType = expression.getTypeDescriptor();
+    TypeDescriptor boxType = expression.getTypeDescriptor().getRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
     TypeDescriptor primitiveType = boxType.unboxType();
 

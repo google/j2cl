@@ -105,14 +105,13 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isTypeVariable()) {
-      return false;
-    }
-    return get().boxedTypeByPrimitiveType.containsValue(TypeDescriptors.toNullable(typeDescriptor));
+    return get()
+        .boxedTypeByPrimitiveType
+        .containsValue(TypeDescriptors.toNullable(typeDescriptor.getRawTypeDescriptor()));
   }
 
   public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
-    return get().boxedTypeByPrimitiveType.containsKey(typeDescriptor);
+    return get().boxedTypeByPrimitiveType.containsKey(typeDescriptor.getRawTypeDescriptor());
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
