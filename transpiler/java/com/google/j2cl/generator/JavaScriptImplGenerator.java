@@ -63,10 +63,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.isStatic() ? "static " : "";
+    String staticQualifier = methodDescriptor.isStatic() ? "static " : "";
+    String asyncQualifier = methodDescriptor.getJsInfo().isJsAsync() ? "async " : "";
+    return staticQualifier + asyncQualifier;
   }
 
-  /** Emits the method header including (static) (getter/setter) methodName(parametersList). */
+  /**
+   * Emits the method header including (static) (async) (getter/setter) methodName(parametersList).
+   */
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     sourceBuilder.append(

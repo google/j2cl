@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 public class JsInteropAnnotationUtils {
   private static final String JS_CONSTRUCTOR_ANNOTATION_NAME =
       "jsinterop.annotations.JsConstructor";
+  private static final String JS_ASYNC_ANNOTATION_NAME = "jsinterop.annotations.JsAsync";
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
@@ -40,6 +41,11 @@ public class JsInteropAnnotationUtils {
       "javaemul.internal.annotations.DoNotAutobox";
 
   private JsInteropAnnotationUtils() {}
+
+  public static IAnnotationBinding getJsAsyncAnnotation(IBinding methodBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getAnnotations(), JS_ASYNC_ANNOTATION_NAME);
+  }
 
   public static IAnnotationBinding getJsConstructorAnnotation(IMethodBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(

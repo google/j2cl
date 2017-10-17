@@ -60,6 +60,7 @@ public class JsInteropUtils {
       boolean isAccessor) {
 
     boolean jsOverlay = isJsOverlay(member);
+    boolean jsAsync = isJsAsync(member);
 
     if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) == null) {
       boolean publicMemberOfJsType =
@@ -72,11 +73,16 @@ public class JsInteropUtils {
             .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
             .setJsNamespace(JsInteropAnnotationUtils.getJsNamespace(memberAnnotation))
             .setJsOverlay(jsOverlay)
+            .setJsAsync(jsAsync)
             .build();
       }
     }
 
-    return JsInfo.newBuilder().setJsMemberType(JsMemberType.NONE).setJsOverlay(jsOverlay).build();
+    return JsInfo.newBuilder()
+        .setJsMemberType(JsMemberType.NONE)
+        .setJsOverlay(jsOverlay)
+        .setJsAsync(jsAsync)
+        .build();
   }
 
   public static boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
@@ -136,6 +142,10 @@ public class JsInteropUtils {
    */
   public static boolean isJsMember(IMethodBinding methodBinding) {
     return getJsInfo(methodBinding).getJsMemberType() != JsMemberType.NONE;
+  }
+
+  public static boolean isJsAsync(IBinding methodBinding) {
+    return JsInteropAnnotationUtils.getJsAsyncAnnotation(methodBinding) != null;
   }
 
   public static boolean isJsOverlay(IBinding methodBinding) {

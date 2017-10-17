@@ -40,6 +40,8 @@ public abstract class JsInfo {
 
   public abstract boolean isJsOverlay();
 
+  public abstract boolean isJsAsync();
+
   abstract Builder toBuilder();
 
   /** Not a JS member. */
@@ -54,7 +56,8 @@ public abstract class JsInfo {
   public static Builder newBuilder() {
     return new AutoValue_JsInfo.Builder()
         // Default values.
-        .setJsOverlay(false);
+        .setJsOverlay(false)
+        .setJsAsync(false);
   }
 
   /** A Builder for JsInfo. */
@@ -68,6 +71,8 @@ public abstract class JsInfo {
     public abstract Builder setJsNamespace(String jsNamespace);
 
     public abstract Builder setJsOverlay(boolean isJsOverlay);
+
+    public abstract Builder setJsAsync(boolean isJsAsync);
 
     abstract JsInfo autoBuild();
 

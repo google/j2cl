@@ -758,38 +758,45 @@ public class JdtUtils {
 
   /** Checks overriding chain to compute JsInfo. */
   static JsInfo computeJsInfo(IMethodBinding methodBinding) {
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    if (jsInfo.isJsOverlay()) {
-      return jsInfo;
+    JsInfo originalJsInfo = JsInteropUtils.getJsInfo(methodBinding);
+    if (originalJsInfo.isJsOverlay()) {
+      return originalJsInfo;
     }
 
-    List<JsInfo> jsInfoList = new ArrayList<>();
+    List<JsInfo> inheritedJsInfoList = new ArrayList<>();
 
     // Add the JsInfo of the method and all the overridden methods to the list.
-    if (jsInfo.getJsMemberType() != JsMemberType.NONE) {
-      jsInfoList.add(jsInfo);
+    if (originalJsInfo.getJsMemberType() != JsMemberType.NONE) {
+      inheritedJsInfoList.add(originalJsInfo);
     }
     for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
       JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
       if (inheritedJsInfo.getJsMemberType() != JsMemberType.NONE) {
-        jsInfoList.add(inheritedJsInfo);
+        inheritedJsInfoList.add(inheritedJsInfo);
       }
     }
 
-    if (jsInfoList.isEmpty()) {
-      return JsInfo.NONE;
+    if (inheritedJsInfoList.isEmpty()) {
+      return originalJsInfo;
     }
 
     // TODO(epmjohnston): Do the same for JsProperty?
-    if (jsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
+    if (inheritedJsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
       // Return the first JsInfo with a Js name specified.
-      for (JsInfo jsInfoElement : jsInfoList) {
-        if (jsInfoElement.getJsName() != null) {
-          return jsInfoElement;
+      for (JsInfo inheritedJsInfo : inheritedJsInfoList) {
+        if (inheritedJsInfo.getJsName() != null) {
+          // Don't inherit @JsAsync annotation from overridden methods.
+          return JsInfo.Builder.from(inheritedJsInfo)
+              .setJsAsync(originalJsInfo.isJsAsync())
+              .build();
         }
       }
     }
-    return jsInfoList.get(0);
+
+    // Don't inherit @JsAsync annotation from overridden methods.
+    return JsInfo.Builder.from(inheritedJsInfoList.get(0))
+        .setJsAsync(originalJsInfo.isJsAsync())
+        .build();
   }
 
   public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {

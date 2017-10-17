@@ -1,0 +1,124 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.async.Async.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.async.Async$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IThenable$$Overlay = goog.forwardDeclare('elemental2.promise.IThenable$$Overlay$impl');
+let Promise$$Overlay = goog.forwardDeclare('elemental2.promise.Promise$$Overlay$impl');
+let Void = goog.forwardDeclare('java.lang.Void$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class Async extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Async()'.
+   * @return {!Async}
+   * @public
+   */
+  static $create__() {
+    Async.$clinit();
+    let $instance = new Async();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_async_Async__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Async()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_async_Async__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_async_Async();
+  }
+
+  /**
+   * @return {IThenable<?void>}
+   * @public
+   */
+  async m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_async() {
+    return /**@type {Promise<?void>} */ (
+        Promise$$Overlay.m_resolve__java_lang_Object(
+            /**@type {?void} */ ($Casts.$to(null, Void))));
+  }
+
+  /**
+   * @return {IThenable<?void>}
+   * @public
+   */
+  static async
+  m_staticAsyncMethod___$pp_com_google_j2cl_transpiler_readable_async() {
+    Async.$clinit();
+    return /**@type {Promise<?void>} */ (
+        Promise$$Overlay.m_resolve__java_lang_Object(
+            /**@type {?void} */ ($Casts.$to(null, Void))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Async;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Async);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Async.$clinit = function() {};
+    IThenable$$Overlay =
+        goog.module.get('elemental2.promise.IThenable$$Overlay$impl');
+    Promise$$Overlay =
+        goog.module.get('elemental2.promise.Promise$$Overlay$impl');
+    Void = goog.module.get('java.lang.Void$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_async_Async() {}
+};
+
+$Util.$setClassMetadata(
+    Async,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.async.Async'));
+
+
+
+/**
+ * Export class.
+ */
+exports = Async;
+//# sourceMappingURL=Async.js.map
