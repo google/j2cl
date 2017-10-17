@@ -57,7 +57,7 @@ public class NativeJsTypeTest extends MyTestCase {
   private interface MyNativeJsTypeInterfaceOnlyOneConcreteImplementor {}
 
   public void testClassLiterals() {
-    assertEquals("JavaScriptObject", MyNativeJsType.class.getName());
+    assertEquals("<native object>", MyNativeJsType.class.getName());
     assertEquals(MyNativeJsType.class, MyNativeJsType.class);
     assertEquals(MyNativeJsType.class, MyNativeJsTypeInterface.class);
     assertEquals(MyNativeJsType[].class, MyNativeJsType[].class);

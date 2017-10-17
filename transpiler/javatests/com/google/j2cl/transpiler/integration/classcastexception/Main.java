@@ -129,7 +129,7 @@ public class Main {
       assert e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to JavaScriptFunction")
+                      + " cannot be cast to <native function>")
           : "Got unexpected message " + e.getMessage();
     }
   }

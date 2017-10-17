@@ -177,8 +177,8 @@ public class Main {
   }
 
   public static void testNative() {
-    assertEquals("JavaScriptObject", NativeType.class.getName());
-    assertEquals("JavaScriptFunction", NativeFunction.class.getName());
+    assertEquals("<native object>", NativeType.class.getName());
+    assertEquals("<native function>", NativeFunction.class.getName());
   }
 
   static class GenericClass<T> {}

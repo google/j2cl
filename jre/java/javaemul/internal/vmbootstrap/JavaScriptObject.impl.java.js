@@ -27,7 +27,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
  */
 class JavaScriptObject {}
 
-$Util.$setClassMetadata(JavaScriptObject, 'JavaScriptObject');
+$Util.$setClassMetadata(JavaScriptObject, '<native object>');
 
 /**
  * Exported class.
