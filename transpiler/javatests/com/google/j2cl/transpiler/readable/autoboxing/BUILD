@@ -10,7 +10,7 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "simpleautoboxing",
+    name = "autoboxing",
     srcs = glob(["*.java"]),
     javacopts = [
         "-Xep:IdentityBinaryExpression:OFF",

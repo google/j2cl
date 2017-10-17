@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.integration.casttoprimitives;
 
+@SuppressWarnings({"BoxedPrimitiveConstructor", "unchecked"})
 public class Main {
   public static void main(String[] args) {
     testPrimitiveToPrimitive();
-    testReferenceToPrimitive();
+    testObjectReferenceToPrimitive();
     testBoxedToPrimitive();
+    testTypeExtendsLongReferenceToPrimitive();
+    testTypeExtendsIntersectionReferenceToPrimitive();
   }
 
   @SuppressWarnings("unused")
@@ -202,7 +205,7 @@ public class Main {
   }
 
   @SuppressWarnings("unused")
-  public static void testReferenceToPrimitive() {
+  public static void testObjectReferenceToPrimitive() {
     Object o = new Object();
     try {
       boolean bool = (boolean) o;
@@ -284,6 +287,39 @@ public class Main {
     o = new Double(1.2);
     double d = (double) o;
     assert d == 1.2;
+  }
+
+  public static <T extends Long> void testTypeExtendsLongReferenceToPrimitive() {
+    T o = (T) new Long(1);
+    long l = (long) o;
+    assert l == 1;
+
+    // TODO(b/67872245): This should act as if o is of type Long and call floatValue() without first
+    // casting to (Float).
+    // float f = (float) o;
+    // assert f == 1.0;
+
+    // TODO(b/67872245): This should act as if o is of type Long and call doubleValue() without
+    // first casting to (Double).
+    // double d = (double) o;
+    // assert d == 1.0;
+  }
+
+  public static <T extends Long & Comparable<Long>>
+      void testTypeExtendsIntersectionReferenceToPrimitive() {
+    T o = (T) new Long(1);
+    long l = (long) o;
+    assert l == 1;
+
+    // TODO(b/67872245): This should act as if o is of type Long and call floatValue() without first
+    // casting to (Float).
+    // float f = (float) o;
+    // assert f == 1.0;
+
+    // TODO(b/67872245): This should act as if o is of type Long and call doubleValue() without
+    // first casting to (Double).
+    // double d = (double) o;
+    // assert d == 1.0;
   }
 
   @SuppressWarnings("unused")

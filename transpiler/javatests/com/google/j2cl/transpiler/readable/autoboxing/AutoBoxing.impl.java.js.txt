@@ -1,18 +1,18 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.
+ * com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing$impl');
+goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$impl');
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $1Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$1Local$impl');
-let $2Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$2Local$impl');
+let $1Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$impl');
+let $2Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$2Local$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -38,7 +38,7 @@ let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 
-class SimpleAutoBoxing extends java_lang_Object {
+class AutoBoxing extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -48,26 +48,26 @@ class SimpleAutoBoxing extends java_lang_Object {
   }
 
   /**
-   * Factory method corresponding to constructor 'SimpleAutoBoxing()'.
-   * @return {!SimpleAutoBoxing}
+   * Factory method corresponding to constructor 'AutoBoxing()'.
+   * @return {!AutoBoxing}
    * @public
    */
   static $create__() {
-    SimpleAutoBoxing.$clinit();
-    let $instance = new SimpleAutoBoxing();
+    AutoBoxing.$clinit();
+    let $instance = new AutoBoxing();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing__();
+        .$ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'SimpleAutoBoxing()'.
+   * Initialization from constructor 'AutoBoxing()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing__() {
+  $ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+    this.$init__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing();
   }
 
   /**
@@ -583,13 +583,13 @@ class SimpleAutoBoxing extends java_lang_Object {
    * @public
    */
   static m_testUnboxingFromTypeVariable__() {
-    SimpleAutoBoxing.$clinit();
+    AutoBoxing.$clinit();
     let n = /**@type {Long} */ (
         $Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));
     let l = n;
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));
     l = /**@type {!$1Local<Long, Long>} */ ($1Local.$create__())
-            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(
+            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
                 Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));
   }
@@ -600,13 +600,13 @@ class SimpleAutoBoxing extends java_lang_Object {
    * @public
    */
   static m_testUnboxingFromIntersectionType__() {
-    SimpleAutoBoxing.$clinit();
+    AutoBoxing.$clinit();
     let n = /**@type {Long} */ (
         $Casts.$to(Long.m_valueOf__long($Long.fromBits(10, 0) /* 10 */), Long));
     let l = n;
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(10, 0) /* 10 */));
     l = /**@type {!$2Local<Long, Long>} */ ($2Local.$create__())
-            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_simpleautoboxing(
+            .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
                 Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));
   }
@@ -618,7 +618,7 @@ class SimpleAutoBoxing extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof SimpleAutoBoxing;
+    return instance instanceof AutoBoxing;
   }
 
   /**
@@ -628,7 +628,7 @@ class SimpleAutoBoxing extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SimpleAutoBoxing);
+    return $Util.$canCastClass(classConstructor, AutoBoxing);
   }
 
   /**
@@ -636,11 +636,11 @@ class SimpleAutoBoxing extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    SimpleAutoBoxing.$clinit = function() {};
+    AutoBoxing.$clinit = function() {};
     $1Local = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$1Local$impl');
+        'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$impl');
     $2Local = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.$2Local$impl');
+        'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$2Local$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
@@ -671,19 +671,18 @@ class SimpleAutoBoxing extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
-  }
+  $init__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing() {}
 };
 
 $Util.$setClassMetadata(
-    SimpleAutoBoxing,
+    AutoBoxing,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing'));
+        'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing'));
 
 
 
 /**
  * Export class.
  */
-exports = SimpleAutoBoxing;
-//# sourceMappingURL=SimpleAutoBoxing.js.map
+exports = AutoBoxing;
+//# sourceMappingURL=AutoBoxing.js.map

@@ -47,18 +47,12 @@ public class InsertUnboxingConversions extends NormalizationPass {
       @Override
       public Expression rewriteBinaryNumericPromotionContext(
           Expression subjectOperandExpression, Expression otherOperandExpression) {
-        if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())) {
-          return AstUtils.unbox(subjectOperandExpression);
-        }
-        return subjectOperandExpression;
+        return maybeUnbox(subjectOperandExpression);
       }
 
       @Override
       public Expression rewriteBooleanConversionContext(Expression operandExpression) {
-        if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
-          return AstUtils.unbox(operandExpression);
-        }
-        return operandExpression;
+        return maybeUnbox(operandExpression);
       }
 
       @Override
@@ -80,12 +74,16 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-        if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
-          return AstUtils.unbox(operandExpression);
-        }
-        return operandExpression;
+        return maybeUnbox(operandExpression);
       }
     };
+  }
+
+  private static Expression maybeUnbox(Expression expression) {
+    if (TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
+      return AstUtils.unbox(expression);
+    }
+    return expression;
   }
 
   private static Optional<Expression> maybeUnboxAndWiden(

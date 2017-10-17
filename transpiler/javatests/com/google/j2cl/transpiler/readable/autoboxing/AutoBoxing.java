@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.readable.simpleautoboxing;
+package com.google.j2cl.transpiler.readable.autoboxing;
 
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
@@ -24,7 +24,7 @@ import jsinterop.annotations.JsMethod;
   "ReferenceEquality",
   "ShortCircuitBoolean"
 })
-public class SimpleAutoBoxing {
+public class AutoBoxing {
   public Boolean box(boolean b) {
     return b; // auto-boxing by return
   }
