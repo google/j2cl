@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
@@ -287,10 +288,7 @@ public class ExpressionTranspiler {
 
       @SuppressWarnings("ReferenceEquality")
       private boolean shouldRenderQualifier(Expression qualifier) {
-        if (qualifier == null) {
-          return false;
-        }
-
+        checkNotNull(qualifier);
         if (!(qualifier instanceof JavaScriptConstructorReference)) {
           return true;
         }
