@@ -276,8 +276,6 @@ public class TypeDescriptors {
             unparameterizedTypeDescriptor, AstUtilConstants.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
 
     return TypeDeclaration.newBuilder()
-        .setSuperTypeDescriptorFactory(
-            () -> getOverlayImplementationSuperTypeDescriptor(unparameterizedTypeDescriptor))
         .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())
         .setClassComponents(classComponents)
         .setRawTypeDescriptorFactory(
@@ -300,8 +298,6 @@ public class TypeDescriptors {
         createOverlayImplementationTypeDeclaration(typeDescriptor);
 
     return TypeDescriptor.newBuilder()
-        .setSuperTypeDescriptorFactory(
-            () -> getOverlayImplementationSuperTypeDescriptor(typeDescriptor))
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDeclaration(overlayImplementationTypeDeclaration)
         .setClassComponents(overlayImplementationTypeDeclaration.getClassComponents())
@@ -309,17 +305,6 @@ public class TypeDescriptors {
         .setKind(overlayImplementationTypeDeclaration.getKind())
         .build();
   }
-
-  private static TypeDescriptor getOverlayImplementationSuperTypeDescriptor(
-      TypeDescriptor typeDescriptor) {
-    TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
-
-    return superTypeDescriptor == null
-            || !(superTypeDescriptor.isNative() || superTypeDescriptor.isInterface())
-        ? null
-        : createOverlayImplementationTypeDescriptor(superTypeDescriptor);
-  }
-
 
   public static Function<TypeDescriptor, TypeDescriptor> mappingFunctionFromMap(
       Map<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
