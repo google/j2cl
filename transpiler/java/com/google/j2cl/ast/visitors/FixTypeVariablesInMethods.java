@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Predicates;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
@@ -25,12 +24,10 @@ import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -52,7 +49,7 @@ import java.util.stream.Collectors;
 public class FixTypeVariablesInMethods extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // Rewrite method bodies to avoid references to template variables declared by the method (1).
+    // 1. Rewrite method bodies to avoid references to template variables declared by the method.
     for (Type type : compilationUnit.getTypes()) {
       for (Method method : type.getMethods()) {
         MethodDescriptor methodDescriptor = method.getDescriptor();
@@ -76,9 +73,8 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
       }
     }
 
-    // Rewrite method bodies of anonymous functions to avoid references to template variables (2);
-    // anonymous functions in the compiled output are a result of @JsFunction lambdas and
-    // multiexpressions that declared variables.
+    // 2. Rewrite method bodies of anonymous functions to avoid references to template variables;
+    //    anonymous functions in the compiled output are a result of @JsFunction lambdas.
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
@@ -88,16 +84,6 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                 functionExpression,
                 typeDescriptor ->
                     typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture());
-          }
-
-          @Override
-          public void exitMultiExpression(MultiExpression multiExpression) {
-            if (multiExpression
-                .getExpressions()
-                .stream()
-                .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
-              removeAllTypeVariables(multiExpression);
-            }
           }
         });
   }
