@@ -1,0 +1,112 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$A.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.A$impl');
+
+
+const X = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {X}
+ */
+class A extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {number} */
+    this.f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A =
+        0;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'A()'.
+   * @return {!A}
+   * @public
+   */
+  static $create__() {
+    A.$clinit();
+    let $instance = new A();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'A()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_m__() {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof A;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, A);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    A.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A() {}
+};
+
+$Util.$setClassMetadata(
+    A,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$A'));
+
+
+X.$markImplementor(A);
+
+
+/**
+ * Export class.
+ */
+exports = A;
+//# sourceMappingURL=TypeWildCards$A.js.map

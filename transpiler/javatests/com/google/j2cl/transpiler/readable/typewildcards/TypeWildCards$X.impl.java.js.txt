@@ -1,0 +1,85 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$X.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @interface
+ */
+class X {
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  m_m__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    X.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    X,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$X'));
+
+
+X.$markImplementor(/** @type {Function} */ (X));
+
+
+/**
+ * Export class.
+ */
+exports = X;
+//# sourceMappingURL=TypeWildCards$X.js.map

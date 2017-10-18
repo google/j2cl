@@ -29,4 +29,30 @@ public class TypeWildCards {
     upperBound(new GenericType<TypeWildCards>());
     lowerBound(new GenericType<TypeWildCards>());
   }
+
+  private interface X {
+    void m();
+  }
+
+  private interface Y {
+    void n();
+  }
+
+  private static class A implements X {
+    int f;
+
+    @Override
+    public void m() {}
+  }
+
+  public static <T extends A> void testBoundedTypeMemberAccess(T t) {
+    int i = t.f;
+    t.m();
+  }
+
+  public static <T extends A & Y> void testIntersectionBoundedTypeMemberAccess(T t) {
+    int i = t.f;
+    t.m();
+    t.n();
+  }
 }

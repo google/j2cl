@@ -32,6 +32,23 @@
 [unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
 [upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
 [lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
+[t] => [t] "t"
+[public static <T extends A> void testBoundedTypeMemberAccess(T t) {
+    int i = t.f;
+    t.m();
+  }] => [TypeWildCards.$clinit();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[int i = t.f;] => [let i = t.f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[i] => [i] "i"
+[t.m();] => [t.m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[t] => [t] "t"
+[public static <T extends A & Y> void testIntersectionBoundedTypeMemberAccess(T t) {
+    int i = t.f;
+...    t.n();
+  }] => [TypeWildCards.$clinit();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[int i = t.f;] => [let i = t.f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[i] => [i] "i"
+[t.m();] => [t.m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.n();] => [/**@type {Y} */ ($Casts.$to(t, Y)).m_n__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [public class TypeWildCards {
   public void unbounded(GenericType<?> g) {}
 ...  }
