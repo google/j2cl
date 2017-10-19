@@ -19,10 +19,12 @@
 from multiprocessing import Pool
 import os
 import signal
-import sys
 import zlib
 
 import repo_util
+
+
+size_format = "  %9s%9s"
 
 
 def get_gzip_size(content):
@@ -32,8 +34,7 @@ def get_gzip_size(content):
 
 
 def print_table_header(size_report_file):
-  header_format = "  %7s%7s\n"
-  size_report_file.write(header_format % ("old", "new"))
+  size_report_file.write((size_format + "\n") % ("old", "new"))
 
 
 def console_log(message):
@@ -50,9 +51,8 @@ def create_pool():
   return pool
 
 
-def make_size_report(optimized, file_name, bundle_test_targets):
+def make_size_report(file_name, original_targets, modified_targets, uncompiled):
   """Compare current test sizes and generate a report."""
-  row_format = "  %7s%7s %s (%s)\n"
 
   path_name = os.path.join(os.path.dirname(__file__), file_name)
   repo_util.check_out_file(path_name)
@@ -69,10 +69,11 @@ def make_size_report(optimized, file_name, bundle_test_targets):
   pool = create_pool()
 
   original_result = pool.apply_async(
-      repo_util.build_optimized_tests, [repo_util.get_managed_path()],
+      repo_util.build_tests,
+      [original_targets, repo_util.get_managed_path()],
       callback=lambda x: console_log("    Original done building."))
   modified_result = pool.apply_async(
-      repo_util.build_optimized_tests,
+      repo_util.build_tests, [modified_targets],
       callback=lambda x: console_log("    Modified done building."))
   pool.close()
   pool.join()
@@ -82,29 +83,21 @@ def make_size_report(optimized, file_name, bundle_test_targets):
   original_result.get()
   modified_result.get()
 
-  test_targets = None if optimized else bundle_test_targets
   print "  Collecting original and modified sizes."
   original_js_files_by_test_name = repo_util.get_js_files_by_test_name(
-      optimized, cwd=repo_util.get_managed_path(), test_targets=test_targets)
+      original_targets, uncompiled)
   modified_js_files_by_test_name = repo_util.get_js_files_by_test_name(
-      optimized, cwd=None, test_targets=test_targets)
+      modified_targets, uncompiled)
 
   print "  Comparing results."
-  # Collect all test names
-  all_test_names = set()
-  all_test_names.update(original_js_files_by_test_name.keys())
-  all_test_names.update(modified_js_files_by_test_name.keys())
-  all_test_names = sorted(list(all_test_names))
 
   original_total_size = 0
   modified_total_size = 0
   original_total_size_gzip = 0
   modified_total_size_gzip = 0
-  size_change_count = 0
   all_reports = []
-  new_reports = []
 
-  for test_name in all_test_names:
+  for test_name in sorted(modified_js_files_by_test_name.keys()):
     original_js_file = original_js_files_by_test_name.get(test_name)
     modified_js_file = modified_js_files_by_test_name.get(test_name)
 
@@ -115,66 +108,28 @@ def make_size_report(optimized, file_name, bundle_test_targets):
         original_js_file) if original_js_file else -1
     original_size_gzip = get_gzip_size(
         open(original_js_file).read()) if original_js_file else -1
-    modified_size = os.path.getsize(
-        modified_js_file) if modified_js_file else -1
-    modified_size_gzip = get_gzip_size(
-        open(modified_js_file).read()) if modified_js_file else -1
+    modified_size = os.path.getsize(modified_js_file)
+    modified_size_gzip = get_gzip_size(open(modified_js_file).read())
 
-    # If this is a pre-existing test
     if original_size >= 0:
-      # Log it's prexisting size
       original_total_size += original_size
       original_total_size_gzip += original_size_gzip
-      # And if an updated size exists then
-      if modified_size >= 0:
-        # Log that too
-        modified_total_size += modified_size
-        modified_total_size_gzip += modified_size_gzip
+      modified_total_size += modified_size
+      modified_total_size_gzip += modified_size_gzip
 
-    # If the original JS file exists
-    if original_size >= 0:
-      # If the modified JS file exists
-      if modified_size >= 0:
-        # Both files exist, so compare their sizes.
-        size_percent = (modified_size / float(original_size)) * 100
-        size_percent_gzip = (modified_size_gzip /
-                             float(original_size_gzip)) * 100
-        note = ("unchanged" if original_size_gzip == modified_size_gzip else
-                "%.2f%%" % (size_percent_gzip - 100))
-        message = (row_format %
-                   (original_size_gzip, modified_size_gzip, test_name, note))
-        all_reports.append((size_percent_gzip, message))
-
-        if (modified_size != original_size or
-            modified_size_gzip != original_size_gzip):
-          size_change_count += 1
+    if uncompiled:
+      report = create_report(test_name, original_size, modified_size)
     else:
-      if modified_size >= 0:
-        # The original JS file doesn't exist and the
-        # modified one does, this is a new result.
-        size_change_count += 1
-        size_percent = 100
-        size_percent_gzip = 100
-        note = "new"
-        message = (row_format %
-                   (original_size_gzip, modified_size_gzip, test_name, note))
-        all_reports.append((size_percent, message))
-        new_reports.append(message)
+      report = create_report(test_name, original_size_gzip, modified_size_gzip)
 
-  # Keep a maximum of 4 of the largest shrinkages.
-  shrinkage_reports = (
-      sorted(all_reports, key=lambda report: report[0], reverse=False)[0:4])
-  shrinkage_reports = [
-      report for report in shrinkage_reports if report[0] < 100
-  ]
-  # Keep a maximum of 4 of the largest expansions.
-  expansion_reports = (
-      sorted(all_reports, key=lambda report: report[0], reverse=True)[0:4])
-  expansion_reports = [
-      report for report in expansion_reports if report[0] > 100
-  ]
+    if report:
+      all_reports.append(report)
 
-  size_report_file.write("There are %s size changes.\n" % size_change_count)
+  changed_reports = [report for report in all_reports if report[0] != 100]
+  shrinkage_reports = [report for report in changed_reports if report[0] < 100]
+  expansion_reports = [report for report in changed_reports if report[0] > 100]
+
+  size_report_file.write("There are %s size changes.\n" % len(changed_reports))
 
   if modified_total_size != original_total_size:
     total_percent = (modified_total_size / float(original_total_size)) * 100
@@ -182,8 +137,8 @@ def make_size_report(optimized, file_name, bundle_test_targets):
                           float(original_total_size_gzip)) * 100
     size_report_file.write(
         "Total size (of already existing tests) "
-        "changed from\n  %s to %s bytes (100%%->%2.2f%%) and from\n  "
-        "%s to %s bytes (100%%->%2.2f%%) gzipped.\n" %
+        "changed from\n  %s to %s bytes (100%%->%2.1f%%) and from\n  "
+        "%s to %s bytes (100%%->%2.1f%%) gzipped.\n" %
         (original_total_size, modified_total_size, total_percent,
          original_total_size_gzip, modified_total_size_gzip,
          total_percent_gzip))
@@ -193,69 +148,76 @@ def make_size_report(optimized, file_name, bundle_test_targets):
 
   size_report_file.write("\n")
   size_report_file.write("\n")
-  size_report_file.write("New reports:\n")
-  size_report_file.write("**************************************\n")
-  if new_reports:
-    for new_report in new_reports:
-      size_report_file.write(new_report)
-  else:
-    size_report_file.write("  none\n")
-
-  size_report_file.write("\n")
-  size_report_file.write("\n")
   size_report_file.write("Shrinkage report highlights:\n")
   size_report_file.write("**************************************\n")
-  if shrinkage_reports:
-    print_table_header(size_report_file)
-    for shrinkage_report in shrinkage_reports:
-      size_report_file.write(shrinkage_report[1])
-  else:
-    size_report_file.write("  none\n")
+  print_table(size_report_file,
+              sorted(shrinkage_reports, key=lambda r: r[0], reverse=False)[0:4])
 
   size_report_file.write("\n")
   size_report_file.write("\n")
   size_report_file.write("Expansion report highlights:\n")
   size_report_file.write("**************************************\n")
-  if expansion_reports:
-    print_table_header(size_report_file)
-    for expansion_report in expansion_reports:
-      size_report_file.write(expansion_report[1])
-  else:
-    size_report_file.write("  none\n")
+  print_table(size_report_file,
+              sorted(expansion_reports, key=lambda r: r[0], reverse=True)[0:4])
 
   size_report_file.write("\n")
   size_report_file.write("\n")
   size_report_file.write("All reports:\n")
   size_report_file.write("**************************************\n")
-  if all_reports:
-    print_table_header(size_report_file)
-    for size_percent, report in all_reports:
-      size_report_file.write(report)
-  else:
-    size_report_file.write("  none\n")
+  print_table(size_report_file, all_reports)
+
   size_report_file.close()
   print "  Closing report (%s)" % size_report_file.name
 
 
-def main():
-  optimized = True
-  test_targets = None
-  if "--uncompiled" in sys.argv:
-    optimized = False
-    test_targets = [
-        "//third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/box2d_default:optimized_js",
-        "//third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclass:optimized_js",
-    ]
-
-  if optimized:
-    print "[OPTIMIZED] Generating the size change report:"
+def print_table(size_report_file, reports):
+  if reports:
+    print_table_header(size_report_file)
+    for report in reports:
+      size_report_file.write(report[1])
   else:
-    print "[BUNDLE] Generating the size change report:"
+    size_report_file.write("  none\n")
 
-  file_name = "size_report.txt" if optimized else "size_report_uncompiled.txt"
 
+def create_report(test_name, original_size, modified_size):
+  """Generate a report for a single test."""
+
+  if modified_size < 0:
+    return None
+
+  if original_size >= 0:
+    # Both files exist, so compare their sizes.
+    size_percent = (modified_size / float(original_size)) * 100
+    note = "unchanged" if size_percent == 100 else "%.1f%%" % (
+        size_percent - 100)
+  else:
+    # The original JS file doesn't exist, this is a new result.
+    size_percent = 100
+    note = "new"
+
+  row_format = size_format + " %s (%s)\n"
+  message = row_format % (original_size, modified_size, test_name, note)
+
+  return (size_percent, message)
+
+
+def main():
   repo_util.managed_repo_validate_environment()
-  make_size_report(optimized, file_name, test_targets)
+
+  print "[OPTIMIZED] Generating the size change report:"
+  original_targets = repo_util.get_all_optimized_tests(
+      repo_util.get_managed_path())
+  modified_targets = repo_util.get_all_optimized_tests()
+  make_size_report(
+      "size_report.txt", original_targets, modified_targets, uncompiled=False)
+
+  print "[UNCOMPILED] Generating the size change report:"
+  targets = [
+      repo_util.get_optimized_test("box2d_default"),
+      repo_util.get_optimized_test("emptyclass"),
+  ]
+  make_size_report(
+      "size_report_uncompiled.txt", targets, targets, uncompiled=True)
 
 
 main()

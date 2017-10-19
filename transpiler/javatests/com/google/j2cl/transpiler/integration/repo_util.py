@@ -56,10 +56,10 @@ CITC_GOOGLE3_PATH = ("/google/src/cloud/%s/j2cl-size/google3" %
                      getpass.getuser())
 
 
-def build_optimized_tests(cwd=None):
+def build_tests(test_targets, cwd=None):
   """Blaze builds all integration tests in parallel."""
   process_util.run_cmd_get_output(
-      ["blaze", "build", TEST_TARGET_PATTERN],
+      ["blaze", "build"] + test_targets,
       cwd=cwd)
 
 
@@ -123,25 +123,30 @@ def compute_synced_to_cl():
     return int(synced_to_cl)
 
 
-def get_js_files_by_test_name(optimized, cwd, test_targets):
+def get_optimized_test(test_name):
+  return OBFUSCATED_OPT_TEST_PATTERN % test_name
+
+
+def get_all_optimized_tests(cwd=None):
+  test_targets = process_util.run_cmd_get_output(
+      [
+          "blaze", "query",
+          "filter('%s', %s)" %
+          (OBFUSCATED_OPT_TEST_PATTERN % ".*", TEST_TARGET_PATTERN)
+      ],
+      cwd=cwd).split("\n")
+  return filter(bool, test_targets)
+
+
+def get_js_files_by_test_name(test_targets, uncompiled):
   """Finds and returns a test_name<->optimized_js_file map."""
-  # Gather a list of the names of the test targets we care about
-  if test_targets is None:
-    test_targets = (process_util.run_cmd_get_output(
-        [
-            "blaze", "query",
-            "filter('.*:optimized_js', kind(%s, %s))" % ("js_binary",
-                                                         TEST_TARGET_PATTERN)
-        ],
-        cwd=cwd).split("\n"))
-    test_targets = filter(bool, test_targets)
 
   # Convert to a map of names<->jsFile pairs
   test_names = [
-      process_util.extract_pattern(".*integration/(.*?):optimized_js",
+      process_util.extract_pattern(OBFUSCATED_OPT_TEST_PATTERN % "(.*?)",
                                    size_target) for size_target in test_targets
   ]
-  extension = ".js" if optimized else "-bundle.js"
+  extension = "-bundle.js" if uncompiled else ".js"
   js_files = [
       size_target.replace("//", "blaze-bin/").replace(":", "/") + extension
       for size_target in test_targets
