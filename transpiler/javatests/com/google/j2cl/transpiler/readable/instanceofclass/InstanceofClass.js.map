@@ -30,7 +30,7 @@
 [object] => [object] "object"
 [assert object instanceof InstanceofClass;] => [$Asserts.$assert(InstanceofClass.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [assert object instanceof Object;] => [$Asserts.$assert(java_lang_Object.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
-[assert !(object instanceof String);] => [$Asserts.$assert(!(java_lang_String.$isInstance(object)));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
+[assert !(object instanceof String);] => [$Asserts.$assert(!java_lang_String.$isInstance(object));] "com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.test"
 [public class InstanceofClass {
   public void test() {
 ...  }

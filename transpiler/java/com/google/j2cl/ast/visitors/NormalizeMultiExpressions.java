@@ -23,6 +23,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
@@ -104,8 +106,42 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           flattenedExpressions.add(expression);
         }
       }
+
+      if (flattenedExpressions.size() == 1) {
+        Expression expression = Iterables.getOnlyElement(flattenedExpressions);
+        // TODO(b/67753876): All of this would be unnecessary if we parenthesize according to
+        // precedence.
+        if (areParenthesisUnnecessary(expression)) {
+          return expression;
+        }
+      }
       return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
     }
+  }
+
+  private static boolean areParenthesisUnnecessary(Expression expression) {
+    if (expression instanceof Invocation) {
+      // @JsProperty Setters are not safe to unparenthesize, e.g. unparenthesizing
+      //     a | (b.f = 1)
+      // into
+      //     a | b.f = 1
+      // results in syntactically incorrect code.
+      //
+      // That being said, @JsProperty setters are not allowed to return a type other than void;
+      // so currently there is no syntactic way to get into this situation.
+      // TODO(b/67998290): Replace the return with the following lines if we ever allow non
+      // void @JsProperty setters.
+      // Invocation invocation = (Invocation) expression;
+      // return true; !invocation.getTarget().isJsPropertySetter();
+      return true;
+    } else if (expression instanceof FieldAccess) {
+      // Field accesses are always safe to unparenthesize.
+      return true;
+    } else if (expression instanceof Literal) {
+      // Literals are always safe to unparenthesize.
+      return true;
+    }
+    return false;
   }
 
   private static class SwitchMultiExpressionsAndSideEffectingExpressions extends AbstractRewriter {

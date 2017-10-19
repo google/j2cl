@@ -120,19 +120,19 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     n = ints2d[0][1];
     $Arrays.$set(ints, 0, 1);
     $Arrays.$set(ints2d[0], 1, 1);
-    $Arrays.$set(ints, 0, ints[0] + (1));
-    $Arrays.$set(ints, 0, ints[0] - (1));
-    $Arrays.$set(ints, 0, ints[0] * (1));
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / (1)));
-    $Arrays.$set(ints, 0, ints[0] & (1));
-    $Arrays.$set(ints, 0, ints[0] ^ (1));
-    $Arrays.$set(ints, 0, ints[0] | (1));
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % (1)));
-    $Arrays.$set(ints, 0, ints[0] << (1));
-    $Arrays.$set(ints, 0, ints[0] >> (1));
-    $Arrays.$set(ints, 0, (ints[0] >>> (1) | 0));
-    $Arrays.$set(ints, 0, ints[0] + (1));
-    $Arrays.$set(ints, 0, ints[0] + (1));
+    $Arrays.$set(ints, 0, ints[0] + 1);
+    $Arrays.$set(ints, 0, ints[0] - 1);
+    $Arrays.$set(ints, 0, ints[0] * 1);
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
+    $Arrays.$set(ints, 0, ints[0] & 1);
+    $Arrays.$set(ints, 0, ints[0] ^ 1);
+    $Arrays.$set(ints, 0, ints[0] | 1);
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
+    $Arrays.$set(ints, 0, ints[0] << 1);
+    $Arrays.$set(ints, 0, ints[0] >> 1);
+    $Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));
+    $Arrays.$set(ints, 0, ints[0] + 1);
+    $Arrays.$set(ints, 0, ints[0] + 1);
   }
 
   /**
@@ -162,11 +162,11 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     $Arrays.$set(longs, 0, $Primitives.$widenIntToLong(1));
     $Arrays.$set(longs2d[0], 1, $Primitives.$widenIntToLong(1));
     $Arrays.$set(
-        longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong((1))));
+        longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));
     $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], ($Long.fromBits(1, 0) /* 1 */)));
+        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
     $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], ($Long.fromBits(1, 0) /* 1 */)));
+        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
   }
 
   /**
@@ -196,7 +196,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     $Arrays.$set(booleans2d[0], 1, false);
     $Arrays.$set(
         booleans, 0,
-        !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | (true)));
+        !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | true));
   }
 
   /**
@@ -228,7 +228,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     $Arrays.$set(
         strings, 0,
         java_lang_String.m_valueOf__java_lang_Object(strings[0]) +
-            java_lang_String.m_valueOf__java_lang_Object((null)));
+            java_lang_String.m_valueOf__java_lang_Object(null));
   }
 
   /**

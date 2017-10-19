@@ -37,7 +37,7 @@
 [return true;] => [return true;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [if (!(obj instanceof GenericEquals)) {
       return false;
-    }] => [if (!(GenericEquals.$isInstance(obj))) {
+    }] => [if (!GenericEquals.$isInstance(obj)) {
       return false;
     }] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"
 [return false;] => [return false;] "com.google.j2cl.transpiler.readable.genericequals.GenericEquals.equals"

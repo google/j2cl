@@ -70,7 +70,7 @@ class GenericEquals extends java_lang_Object {
     if ($Equality.$same(obj, this)) {
       return true;
     }
-    if (!(GenericEquals.$isInstance(obj))) {
+    if (!GenericEquals.$isInstance(obj)) {
       return false;
     }
     let other = /**@type {GenericEquals<*>} */ ($Casts.$to(obj, GenericEquals));
