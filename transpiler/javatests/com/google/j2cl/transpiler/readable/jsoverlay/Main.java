@@ -15,10 +15,32 @@
  */
 package com.google.j2cl.transpiler.readable.jsoverlay;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
 
 public class Main {
+
+  @JsType(isNative = true, namespace = "test.foo")
+  public interface NativeJsTypeInterfaceWithOverlay {
+    @JsOverlay String COMPILE_TIME_CONSTANT = "10";
+
+    @JsOverlay Object staticField = new Object();
+
+    int m();
+
+    @JsOverlay
+    default int callM() {
+      return m();
+    }
+  }
+
+  static class NativeJsTypeInterfaceWithOverlayImpl implements NativeJsTypeInterfaceWithOverlay {
+    public int m() {
+      return 0;
+    }
+  }
+
   @JsType(isNative = true, namespace = "test.foo")
   public static class NativeJsTypeWithOverlay {
     public static int nonJsOverlayField;
@@ -61,6 +83,19 @@ public class Main {
     private int baz() {
       return 1;
     }
+
+    @JsOverlay
+    public final void overlayWithJsFunction() {
+      new Intf() {
+        @Override
+        public void run() {}
+      }.run();
+    }
+  }
+
+  @JsFunction
+  private interface Intf {
+    void run();
   }
 
   public void test() {
@@ -75,5 +110,13 @@ public class Main {
     NativeJsTypeWithOverlay.staticField = null;
     NativeJsTypeWithOverlay.varargs(1, 2, 3);
     n.baz();
+
+    NativeJsTypeInterfaceWithOverlay foo = new NativeJsTypeInterfaceWithOverlayImpl();
+    foo.m();
+    foo.callM();
+
+    String b =
+        NativeJsTypeInterfaceWithOverlay.COMPILE_TIME_CONSTANT
+            + NativeJsTypeInterfaceWithOverlay.staticField;
   }
 }

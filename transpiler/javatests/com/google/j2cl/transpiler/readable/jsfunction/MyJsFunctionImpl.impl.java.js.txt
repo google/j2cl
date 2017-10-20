@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface.$Overlay$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -103,6 +104,19 @@ class MyJsFunctionImpl extends java_lang_Object {
   }
 
   /**
+   * @param {?function(number):number} $thisArg
+   * @return {number}
+   * @public
+   */
+  static m_overlayMethod__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+      $thisArg) {
+    MyJsFunctionImpl.$clinit();
+    return $Overlay
+        .m_overlayMethod__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface(
+            $thisArg);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -144,6 +158,8 @@ class MyJsFunctionImpl extends java_lang_Object {
    */
   static $clinit() {
     MyJsFunctionImpl.$clinit = function() {};
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface.$Overlay$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }

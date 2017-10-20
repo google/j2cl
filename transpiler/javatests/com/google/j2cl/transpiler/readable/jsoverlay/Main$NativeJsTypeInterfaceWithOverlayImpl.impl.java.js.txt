@@ -1,0 +1,113 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlayImpl.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInterfaceWithOverlay');
+
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+
+
+/**
+ * @implements {NativeJsTypeInterfaceWithOverlay}
+ */
+class NativeJsTypeInterfaceWithOverlayImpl extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor
+   * 'NativeJsTypeInterfaceWithOverlayImpl()'.
+   * @return {!NativeJsTypeInterfaceWithOverlayImpl}
+   * @public
+   */
+  static $create__() {
+    NativeJsTypeInterfaceWithOverlayImpl.$clinit();
+    let $instance = new NativeJsTypeInterfaceWithOverlayImpl();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'NativeJsTypeInterfaceWithOverlayImpl()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl();
+  }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m() {
+    return 0;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, NativeJsTypeInterfaceWithOverlayImpl);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    NativeJsTypeInterfaceWithOverlayImpl.$clinit = function() {};
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl() {
+  }
+};
+
+$Util.$setClassMetadata(
+    NativeJsTypeInterfaceWithOverlayImpl,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlayImpl'));
+
+
+
+/**
+ * Export class.
+ */
+exports = NativeJsTypeInterfaceWithOverlayImpl;
+//# sourceMappingURL=Main$NativeJsTypeInterfaceWithOverlayImpl.js.map
