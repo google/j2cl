@@ -51,11 +51,6 @@ alias(
 # **************************************************
 
 alias(
-    name = "JsniConverter",
-    actual = "//tools/java/com/google/j2cl/tools/jsni:JsniConverter",
-)
-
-alias(
     name = "GwtIncompatibleStripper",
     actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper",
 )
