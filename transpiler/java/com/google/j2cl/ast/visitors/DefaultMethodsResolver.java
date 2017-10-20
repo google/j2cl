@@ -74,7 +74,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
     for (TypeDescriptor superInterfaceTypeDescriptor : superInterfaceTypeDescriptors) {
       for (MethodDescriptor declaredMethodDescriptor :
           superInterfaceTypeDescriptor.getDeclaredMethodDescriptors()) {
-        if (!declaredMethodDescriptor.isDefaultMethod()) {
+        if (!declaredMethodDescriptor.isDefaultMethod() || declaredMethodDescriptor.isJsOverlay()) {
           continue;
         }
 

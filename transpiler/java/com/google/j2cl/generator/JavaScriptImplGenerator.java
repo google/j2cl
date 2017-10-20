@@ -265,11 +265,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderTypeMethods() {
     for (Method method : type.getMethods()) {
-      // JsOverlay methods are rendered in their own files.
-      if (method.getDescriptor().isJsOverlay()) {
-        continue;
-      }
-
       if (method.isNative()) {
         // If the method is native, output JsDoc comments so it can serve as a template for
         // native.js. However if the method is pointing to a different namespace then there
