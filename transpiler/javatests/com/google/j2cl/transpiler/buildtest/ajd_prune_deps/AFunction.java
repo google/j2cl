@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package b;
+package a;
 
-import a.AChild;
-import a.AFunctionChild;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsOverlay;
 
-public class B {
-  public static AChild getAChild() {
-    return new AChild();
-  }
+@JsFunction
+public interface AFunction {
+  void foo();
 
-  public static AFunctionChild getAFunctionChild() {
-    return new AFunctionChild();
+  @JsOverlay
+  default String overlayMethod() {
+    return "don't prune me please!";
   }
 }

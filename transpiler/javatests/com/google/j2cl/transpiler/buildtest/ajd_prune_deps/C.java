@@ -20,6 +20,7 @@ import b.B;
 public class C {
 
   public C() {
-    B.getA().overlayMethod();
+    B.getAChild().overlayMethod();
+    B.getAFunctionChild().overlayMethod();
   }
 }

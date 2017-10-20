@@ -13,17 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package b;
+package a;
 
-import a.AChild;
-import a.AFunctionChild;
+public final class AFunctionChild implements AFunction {
 
-public class B {
-  public static AChild getAChild() {
-    return new AChild();
-  }
-
-  public static AFunctionChild getAFunctionChild() {
-    return new AFunctionChild();
-  }
+  @Override
+  public void foo() {}
 }

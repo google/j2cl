@@ -13,17 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package b;
+package a;
 
-import a.AChild;
-import a.AFunctionChild;
+import jsinterop.annotations.JsType;
 
-public class B {
-  public static AChild getAChild() {
-    return new AChild();
-  }
-
-  public static AFunctionChild getAFunctionChild() {
-    return new AFunctionChild();
-  }
-}
+@JsType
+public class AChild extends A {}
