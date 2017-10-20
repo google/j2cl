@@ -32,7 +32,7 @@ public class IntersectionTypeTest<U> {
     object.get();
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
 [object.set(1);] => [/**@type {Setable} */ ($Casts.$to(object, Setable)).m_set__int(1);] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
-[object.get();] => [object.m_get__();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
+[object.get();] => [/**@type {Getable} */ (object).m_get__();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.getAndSet"
 [o] => [o] "o"
 [public static <T> Getable<T> cast(Object o) {
 

@@ -31,6 +31,7 @@ import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
+import com.google.j2cl.ast.visitors.InsertCastsToTypeBounds;
 import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
@@ -245,10 +246,16 @@ public class J2clTranspiler {
             new NormalizeJsVarargs(),
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
+
+            // Needs to run after passes that do code synthesis are run so that it handles the
+            // synthesize code as well.
+            // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
+            // to template variables.
+            new InsertCastsToTypeBounds(),
             new RemoveUnneededJsDocAnnotations(),
             new NormalizeJsDocAnnotatedExpression(),
 
-            // Dodge JSCompiler limitations.
+            // Dodge OTI limitations.
             new UnimplementedMethodsCreator(),
             // TODO(b/24476009): remove the temporary fix once switch to JSCompiler's new type
             // checker.

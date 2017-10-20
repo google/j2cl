@@ -1167,22 +1167,28 @@ public class JdtUtils {
             Arrays.stream(typeBinding.getDeclaredFields())
                 .map(JdtUtils::createFieldDescriptor)
                 .collect(toImmutableList());
-    ;
-
-    boolean hasTypeBounds =
-        (isTypeVariable || isWildCardOrCapture) && typeBinding.getTypeBounds().length != 0;
 
     Supplier<TypeDescriptor> boundTypeDescriptorFactory =
         () -> {
-          if (!hasTypeBounds) {
+          if (!isTypeVariable && !isWildCardOrCapture) {
             return null;
           }
-          ITypeBinding[] boundTypeBindings = typeBinding.getTypeBounds();
-          if (boundTypeBindings.length == 1) {
-            return createTypeDescriptor(boundTypeBindings[0]);
+          // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it returns empty in
+          // the current version of JDT.
+
+          List<ITypeBinding> bounds = Lists.newArrayList(typeBinding.getInterfaces());
+          if (typeBinding.getSuperclass() != JdtUtils.javaLangObjectTypeBinding.get()) {
+            bounds.add(0, typeBinding.getSuperclass());
           }
-          return TypeDescriptors.createIntersection(createTypeDescriptors(boundTypeBindings));
+          if (bounds.isEmpty()) {
+            return TypeDescriptors.get().javaLangObject;
+          }
+          if (bounds.size() == 1) {
+            return createTypeDescriptor(bounds.get(0));
+          }
+          return TypeDescriptors.createIntersection(createTypeDescriptors(bounds));
         };
+
     TypeDeclaration typeDeclaration = null;
     ITypeBinding declarationTypeBinding = typeBinding.getTypeDeclaration();
     if (declarationTypeBinding != null && !isTypeVariable && !isWildCardOrCapture) {

@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const Comparator = goog.require('java.util.Comparator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let java_util_Comparator_$Overlay = goog.forwardDeclare('java.util.Comparator.$Overlay$impl');
 let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
@@ -205,6 +206,7 @@ class NullableStringComparator extends java_lang_Object {
    */
   static $clinit() {
     NullableStringComparator.$clinit = function() {};
+    Comparable = goog.module.get('java.lang.Comparable$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     java_util_Comparator_$Overlay =
         goog.module.get('java.util.Comparator.$Overlay$impl');
