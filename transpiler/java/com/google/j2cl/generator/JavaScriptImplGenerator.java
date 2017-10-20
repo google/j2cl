@@ -406,8 +406,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     if (type.isJsOverlayImplementation()) {
       sourceBuilder.append("return true;");
-    } else if (type.getDeclaration().isJsFunctionInterface()) {
-      sourceBuilder.append("return instance != null && typeof instance == \"function\";");
     } else {
       sourceBuilder.append(
           "return instance != null && !!instance.$implements__" + mangledTypeName + ";");
