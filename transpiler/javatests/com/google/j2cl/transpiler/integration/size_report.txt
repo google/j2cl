@@ -1,21 +1,26 @@
 Integration tests size report:
 **************************************
-There are 2 size changes.
+There are 7 size changes.
 Total size (of already existing tests) changed from
-  1517728 to 1517718 bytes (100%->100.0%) and from
-  473246 to 473258 bytes (100%->100.0%) gzipped.
+  1517718 to 1517746 bytes (100%->100.0%) and from
+  473260 to 473258 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       4462     4458 arrayofboxedtype (-0.1%)
+       2849     2847 classliteral (-0.1%)
+      36420    36419 box2d_noclassmetadata_checksopt (-0.0%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       5547     5555 simpleautoboxing (0.1%)
-       4458     4462 arrayofboxedtype (0.1%)
+       2712     2714 staticinitsuper (0.1%)
+       3914     3915 loggingstripped (0.0%)
+      34759    34760 box2d_noclassmetadata_checksmin (0.0%)
+      38815    38816 box2d_default (0.0%)
 
 
 All reports:
@@ -34,16 +39,16 @@ All reports:
        1760     1760 arrayleafinsertion (unchanged)
        2380     2380 arrayliteral (unchanged)
        1784     1784 arrayobjectcalls (unchanged)
-       4458     4462 arrayofboxedtype (0.1%)
+       4462     4458 arrayofboxedtype (-0.1%)
        3895     3895 arrayreadwrite (unchanged)
        2604     2604 assertsimple (unchanged)
        1091     1091 backwardbridgemethod (unchanged)
        2675     2675 binaryexpressions (unchanged)
        1012     1012 blockscoping (unchanged)
-      38815    38815 box2d_default (unchanged)
+      38815    38816 box2d_default (0.0%)
       36622    36622 box2d_noclassmetadata (unchanged)
-      34759    34759 box2d_noclassmetadata_checksmin (unchanged)
-      36420    36420 box2d_noclassmetadata_checksopt (unchanged)
+      34759    34760 box2d_noclassmetadata_checksmin (0.0%)
+      36420    36419 box2d_noclassmetadata_checksopt (-0.0%)
        3596     3596 boxingsideeffect (unchanged)
        1057     1057 breakstatement (unchanged)
        2708     2708 bridgejsmethod (unchanged)
@@ -68,7 +73,7 @@ All reports:
        1472     1472 castwithsideeffect (unchanged)
        1027     1027 circularcompiletimeconstant (unchanged)
        3237     3237 classcastexception (unchanged)
-       2847     2847 classliteral (unchanged)
+       2849     2847 classliteral (-0.1%)
        1019     1019 classliteralobfuscated (unchanged)
        2163     2163 classliteralstripped (unchanged)
        1055     1055 compiletimeconstant (unchanged)
@@ -155,7 +160,7 @@ All reports:
        1383     1383 localclasswithcaptures (unchanged)
        1097     1097 localgenericclassinitjustonce (unchanged)
        5962     5962 logging (unchanged)
-       3914     3914 loggingstripped (unchanged)
+       3914     3915 loggingstripped (0.0%)
        2988     2988 longimplicitcasts (unchanged)
        2760     2760 longoperationsinglesideeffect (unchanged)
        1694     1694 methodreferences (unchanged)
@@ -198,7 +203,7 @@ All reports:
        2205     2205 returnimplicitcasts (unchanged)
          62       62 selfreferencingnativetype (unchanged)
        1084     1084 shadowedfield (unchanged)
-       5547     5555 simpleautoboxing (0.1%)
+       5555     5555 simpleautoboxing (unchanged)
        1065     1065 simplecascadingconstructor (unchanged)
        1041     1041 simpleliterals (unchanged)
          62       62 srcjar (unchanged)
@@ -209,7 +214,7 @@ All reports:
          62       62 staticfieldinitializer (unchanged)
          62       62 staticfields (unchanged)
        1032     1032 staticinitorder (unchanged)
-       2712     2712 staticinitsuper (unchanged)
+       2712     2714 staticinitsuper (0.1%)
        1008     1008 staticjsmethods (unchanged)
        1104     1104 staticnestedclass (unchanged)
        1743     1743 strictequality (unchanged)
