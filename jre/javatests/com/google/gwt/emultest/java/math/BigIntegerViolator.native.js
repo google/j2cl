@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const BigInteger_ = goog.require("java.math.BigInteger");
+
 /**
  * @param {number} v
  * @return {BigInteger}
  * @public
  */
 BigIntegerViolator.m_fromDouble__double = function(v) {
-  BigIntegerViolator.$clinit();
-  return BigInteger.m_valueOf__double_$pp_java_math(v);
+  return BigInteger_.m_valueOf__double_$pp_java_math(v);
 };
