@@ -11,8 +11,6 @@ const AbstractCollection = goog.require('com.google.j2cl.transpiler.readable.mul
 const List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @abstract
@@ -65,7 +63,6 @@ class AbstractList extends AbstractCollection {
    */
   static $clinit() {
     AbstractList.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
     AbstractCollection.$clinit();
   }
 

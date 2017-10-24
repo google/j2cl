@@ -15,7 +15,6 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
 class EqualFunctions extends java_lang_Object {
@@ -208,14 +207,10 @@ class EqualFunctions extends java_lang_Object {
    */
   static $clinit() {
     EqualFunctions.$clinit = function() {};
-    Foo = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     java_lang_Object.$clinit();
     EqualFunctions
         .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =

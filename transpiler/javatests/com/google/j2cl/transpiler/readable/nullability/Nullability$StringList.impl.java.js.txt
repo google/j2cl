@@ -113,14 +113,9 @@ class StringList extends ArrayList {
    */
   static $clinit() {
     StringList.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
     java_util_Collection_$Overlay =
         goog.module.get('java.util.Collection.$Overlay$impl');
     java_util_List_$Overlay = goog.module.get('java.util.List.$Overlay$impl');
-    Spliterator = goog.module.get('java.util.Spliterator$impl');
-    java_util_Spliterator_$Overlay =
-        goog.module.get('java.util.Spliterator.$Overlay$impl');
-    Stream = goog.module.get('java.util.stream.Stream$impl');
     ArrayList.$clinit();
   }
 

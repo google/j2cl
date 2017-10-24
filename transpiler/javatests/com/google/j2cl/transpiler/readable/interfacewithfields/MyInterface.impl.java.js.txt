@@ -9,8 +9,6 @@ goog.module('com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 /**
  * @interface
@@ -61,7 +59,6 @@ class MyInterface {
    */
   static $clinit() {
     MyInterface.$clinit = function() {};
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

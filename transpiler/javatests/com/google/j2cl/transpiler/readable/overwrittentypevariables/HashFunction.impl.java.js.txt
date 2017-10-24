@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFu
 const MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -66,8 +65,6 @@ class HashFunction {
    */
   static $clinit() {
     HashFunction.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
   }
 };
 

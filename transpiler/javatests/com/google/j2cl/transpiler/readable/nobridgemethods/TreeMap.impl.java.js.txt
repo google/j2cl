@@ -11,7 +11,6 @@ const Map = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.Ma
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -89,7 +88,6 @@ class TreeMap extends Map {
     TreeMap.$clinit = function() {};
     InnerEntry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
     Map.$clinit();
   }
 

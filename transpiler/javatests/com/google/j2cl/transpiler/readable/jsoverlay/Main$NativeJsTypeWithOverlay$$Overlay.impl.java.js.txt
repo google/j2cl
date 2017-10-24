@@ -11,8 +11,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeJsTypeWithOverlay = goog.require('test.foo.NativeJsTypeWithOverlay');
 
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $Overlay {
@@ -131,8 +129,6 @@ class $Overlay {
   static $clinit() {
     $Overlay.$clinit = function() {};
     java_lang_Object = goog.module.get('java.lang.Object$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $Overlay
         .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
         java_lang_Object.$create__();

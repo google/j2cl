@@ -9,8 +9,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Othe
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 /**
  * @interface
@@ -69,7 +67,6 @@ class OtherInterface {
    */
   static $clinit() {
     OtherInterface.$clinit = function() {};
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

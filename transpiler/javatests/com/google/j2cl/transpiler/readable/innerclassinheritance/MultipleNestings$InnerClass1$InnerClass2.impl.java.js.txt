@@ -111,8 +111,6 @@ class InnerClass2 extends Parent {
    */
   static $clinit() {
     InnerClass2.$clinit = function() {};
-    InnerClass1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
     Parent.$clinit();
   }
 

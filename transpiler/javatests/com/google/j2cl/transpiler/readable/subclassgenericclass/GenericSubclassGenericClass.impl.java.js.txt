@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSub
 const GenericClass = goog.require('com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @template C_T
@@ -77,7 +75,6 @@ class GenericSubclassGenericClass extends GenericClass {
    */
   static $clinit() {
     GenericSubclassGenericClass.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
     GenericClass.$clinit();
   }
 

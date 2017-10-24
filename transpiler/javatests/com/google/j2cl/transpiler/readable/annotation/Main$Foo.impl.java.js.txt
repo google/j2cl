@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
 const Annotation = goog.require('java.lang.annotation.Annotation$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 /**
  * @interface
@@ -71,7 +69,6 @@ class Foo {
    */
   static $clinit() {
     Foo.$clinit = function() {};
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

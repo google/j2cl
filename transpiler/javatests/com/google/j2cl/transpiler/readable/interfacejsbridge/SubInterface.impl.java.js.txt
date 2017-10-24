@@ -11,8 +11,6 @@ const MyInterface = goog.require('com.google.j2cl.transpiler.readable.interfacej
 const MyJsInterface = goog.require('com.google.j2cl.transpiler.readable.interfacejsbridge.MyJsInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 /**
  * @interface
@@ -76,7 +74,6 @@ class SubInterface {
    */
   static $clinit() {
     SubInterface.$clinit = function() {};
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 
