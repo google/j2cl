@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.integration.intersectiontype;
 
-@SuppressWarnings("unused")
 public class Main {
   public static void main(String[] args) {
     new Main().run();
@@ -30,16 +29,17 @@ public class Main {
     testLambdaTypeInference();
   }
 
-  class EmptyA {}
+  private static class EmptyA {}
 
-  interface EmptyI {}
+  private interface EmptyI {}
 
-  interface EmptyJ {}
+  private interface EmptyJ {}
 
-  class EmptyB extends EmptyA implements EmptyI {}
+  private static class EmptyB extends EmptyA implements EmptyI {}
 
-  class EmptyC extends EmptyA implements EmptyI, EmptyJ {}
+  private static class EmptyC extends EmptyA implements EmptyI, EmptyJ {}
 
+  @SuppressWarnings("unused")
   public void testBaseIntersectionCast() {
     EmptyA localB = new EmptyB();
     EmptyA localC = new EmptyC();
@@ -58,33 +58,42 @@ public class Main {
       EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
       assert false : "Should have thrown a ClassCastException";
     } catch (ClassCastException e) {
-      // Expected.
+      assert e.getMessage()
+          .equals(
+              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB cannot be cast "
+                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyC");
     }
     try {
       EmptyB c2BI = (EmptyB & EmptyI) localC;
       assert false : "Should have thrown a ClassCastException";
     } catch (ClassCastException e) {
-      // Expected.
+      assert e.getMessage()
+          .equals(
+              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyC cannot be cast "
+                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB");
     }
     try {
       EmptyJ jj = (EmptyB & EmptyJ) localB;
       assert false : "Should have thrown a ClassCastException";
     } catch (ClassCastException e) {
-      // Expected.
+      assert e.getMessage()
+          .equals(
+              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB cannot be cast "
+                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyJ");
     }
   }
 
-  interface SimpleI {
+  private interface SimpleI {
     int fun();
   }
 
-  interface SimpleJ {
+  private interface SimpleJ {
     int foo();
 
     int bar();
   }
 
-  interface SimpleK {}
+  private interface SimpleK {}
 
   // TODO(b/36781939): Fix Lambda type inference.
   //  public void testIntersectionCastWithLambdaExpr() {
@@ -153,20 +162,20 @@ public class Main {
   //            .fun();
   //  }
 
-  class SimpleA {
+  private static class SimpleA {
     public int bar() {
       return 11;
     }
   }
 
-  class SimpleB extends SimpleA implements SimpleI {
+  private static class SimpleB extends SimpleA implements SimpleI {
     @Override
     public int fun() {
       return 22;
     }
   }
 
-  class SimpleC extends SimpleA implements SimpleI {
+  private static class SimpleC extends SimpleA implements SimpleI {
     @Override
     public int fun() {
       return 33;
@@ -178,7 +187,7 @@ public class Main {
     }
   }
 
-  class SimpleD implements SimpleI, SimpleJ {
+  private static class SimpleD implements SimpleI, SimpleJ {
 
     @Override
     public int foo() {
@@ -213,13 +222,13 @@ public class Main {
     assert 33 == ii.fun();
   }
 
-  interface Serial {}
+  private interface Serial {}
 
-  interface Cmp {
+  private interface Cmp {
     int cmp();
   }
 
-  interface Cmp2 {
+  private interface Cmp2 {
     int cmp(int a);
   }
 

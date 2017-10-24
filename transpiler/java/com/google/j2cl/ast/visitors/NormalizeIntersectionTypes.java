@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -42,6 +41,7 @@ import java.util.List;
  * <p>
  *
  * <pre>
+ * <code>
  *  class A<T extends Comparable<T> & CharSequence> {
  *    CharSequence g(T t) {
  *      Object o = (A & B) t;
@@ -50,6 +50,7 @@ import java.util.List;
  *      return t;
  *    }
  *  }
+ * </code>
  * </pre>
  *
  * <p>gets translated as
@@ -57,14 +58,16 @@ import java.util.List;
  * <p>
  *
  * <pre>
+ * <code>
  *  class A<T extends Comparable<T>> {
  *    CharSequence g(T t) {
- *      Object o = (A)(B) t;
+ *      Object o = /** @type {A} * / (B)(A) t;
  *      t.compareTo(null);
  *      ((CharSequence) t).length();
  *      return (CharSequence) t;
  *    }
  *  }
+ * </code>
  * </pre>
  *
  * <p>The interesting case where type erasure casts can not be inserted is as follows:
@@ -72,6 +75,7 @@ import java.util.List;
  * <p>
  *
  * <pre>
+ * <code>
  * interface F<T extends A> {
  *   void do(T t);
  * }
@@ -79,6 +83,7 @@ import java.util.List;
  * class C<T extends A & B> {
  *   void do(T t) { t.methodOfB(); }
  * }
+ * </code>
  * </pre>
  *
  * <p>At runtime code like:
@@ -86,7 +91,9 @@ import java.util.List;
  * <p>
  *
  * <pre>
+ * <code>
  *   ((F) new C()).do(new A());
+ * </code>
  * </pre>
  *
  * <p>should fail with a ClassCastException. Normally a bridge would have been constructed to
@@ -129,7 +136,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
           }
         });
 
-    // Replace intersection casts with a sequence of type casts, i.e. transform (A & B) into (A)(B).
+    // Replace intersection casts with a sequence of type casts, i.e. transform (A & B) into (B)(A).
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -141,16 +148,25 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
 
             Expression expression = castExpression.getExpression();
             // Emit the casts so that the first type in the intersection corresponds to the
-            // outermost cast.
+            // innermost cast.
             for (TypeDescriptor intersectedTypeDescriptor :
-                Lists.reverse(castTypeDescriptor.getIntersectedTypeDescriptors())) {
+                castTypeDescriptor.getIntersectedTypeDescriptors()) {
               expression =
                   CastExpression.newBuilder()
                       .setExpression(expression)
                       .setCastTypeDescriptor(intersectedTypeDescriptor)
                       .build();
             }
-            return expression;
+            // Annotate the expression so that is typed (in closure) with the first type in the
+            // intersection. Intersection types do not have a direct representation in closure.
+            // Since in general we need a consistent view of the closure type of expressions,
+            // we chose the to see expressions typed at an intersection cast as being explicitly
+            // typed at the first component, which is also consistent with the JVM type (the erasure
+            // of an intersection cast is the erasure of its first component).
+            return JsDocAnnotatedExpression.newBuilder()
+                .setAnnotationType(castTypeDescriptor.getIntersectedTypeDescriptors().get(0))
+                .setExpression(expression)
+                .build();
           }
         });
   }
