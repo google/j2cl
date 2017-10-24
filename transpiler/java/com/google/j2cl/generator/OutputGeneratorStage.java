@@ -17,6 +17,8 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.common.SourcePosition;
@@ -83,8 +85,8 @@ public class OutputGeneratorStage {
         // If the java type contains any native methods, search for matching native file.
         timingReport.startSample("Native files read");
 
-        String typeRelativePath = GeneratorUtils.getRelativePath(type);
-        String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, type);
+        String typeRelativePath = getRelativePath(type);
+        String typeAbsolutePath = getAbsolutePath(j2clCompilationUnit, type);
 
         // Locate matching native files that either have the same relative package as their Java
         // class (useful when Java and native.js files started in different directories on disk).
@@ -113,20 +115,19 @@ public class OutputGeneratorStage {
             type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
-            outputPath.resolve(GeneratorUtils.getRelativePath(type) + jsImplGenerator.getSuffix());
+            outputPath.resolve(getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
         timingReport.startSample("Write impl");
-        GeneratorUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
+        J2clUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
 
         timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
         Path absolutePathForHeader =
-            outputPath.resolve(
-                GeneratorUtils.getRelativePath(type) + jsHeaderGenerator.getSuffix());
+            outputPath.resolve(getRelativePath(type) + jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
         timingReport.startSample("Write header");
-        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
+        J2clUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
 
         timingReport.startSample("Render source maps");
         generateSourceMaps(
@@ -180,9 +181,8 @@ public class OutputGeneratorStage {
                 type, javaSourcePositionByOutputSourcePosition);
       }
 
-      Path absolutePathForSourceMap =
-          outputPath.resolve(GeneratorUtils.getRelativePath(type) + SOURCE_MAP_SUFFIX);
-      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, problems);
+      Path absolutePathForSourceMap = outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
+      J2clUtils.writeToFile(absolutePathForSourceMap, output, problems);
     } catch (IOException e) {
       problems.error(
           "Could not generate source maps for %s: %s", j2clUnit.getName(), e.getMessage());
@@ -225,5 +225,20 @@ public class OutputGeneratorStage {
     } catch (IOException e) {
       problems.warning("Could not copy native js file to " + absolutePath + ":" + e.getMessage());
     }
+  }
+
+  /** Returns the relative output path for a given type. */
+  private static String getRelativePath(Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    String typeName = typeDeclaration.getSimpleBinaryName();
+    String packageName = typeDeclaration.getPackageName();
+    return packageName.replace(".", File.separator) + File.separator + typeName;
+  }
+
+  /** Returns the absolute binary path for a given type. */
+  private static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    String typeName = typeDeclaration.getSimpleBinaryName();
+    return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 }

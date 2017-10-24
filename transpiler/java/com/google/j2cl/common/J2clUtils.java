@@ -18,8 +18,12 @@ package com.google.j2cl.common;
 import java.beans.Introspector;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
 import java.util.function.Consumer;
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -66,5 +70,21 @@ public class J2clUtils {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     streamOutputer.accept(new PrintStream(outputStream));
     return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
+  }
+
+  public static void writeToFile(Path outputPath, String content, Problems problems) {
+    try {
+      // Write using the provided fileSystem (which might be the regular file system or might be a
+      // zip file.)
+      Files.createDirectories(outputPath.getParent());
+      Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      // TODO(b/67415734): Introduce a builder and move responsibility of sanitizing files to there.
+      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
+    } catch (IOException e) {
+      problems.error("Could not write to file: %s", e.toString());
+      problems.abortIfRequested();
+    }
   }
 }

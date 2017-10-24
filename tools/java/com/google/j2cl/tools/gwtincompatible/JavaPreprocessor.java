@@ -20,10 +20,10 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.GwtIncompatibleNodeCollector;
-import com.google.j2cl.generator.GeneratorUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
@@ -61,7 +61,7 @@ public class JavaPreprocessor {
       }
 
       // Write the processed file to output
-      GeneratorUtils.writeToFile(outputFileSystem.getPath(file), processedFileContent, problems);
+      J2clUtils.writeToFile(outputFileSystem.getPath(file), processedFileContent, problems);
     }
   }
 

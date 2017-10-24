@@ -17,41 +17,16 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.HasMethodDescriptor;
 import com.google.j2cl.ast.HasParameters;
-import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.common.Problems;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.attribute.FileTime;
 
 /**
  * Utility functions related to source generation in the J2CL AST.
  */
 public class GeneratorUtils {
-  /** Returns the relative output path for a given type. */
-  public static String getRelativePath(Type type) {
-    TypeDeclaration typeDeclaration = type.getDeclaration();
-    String typeName = typeDeclaration.getSimpleBinaryName();
-    String packageName = typeDeclaration.getPackageName();
-    return packageName.replace(".", File.separator) + File.separator + typeName;
-  }
-
-  /** Returns the absolute binary path for a given type. */
-  public static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
-    TypeDeclaration typeDeclaration = type.getDeclaration();
-    String typeName = typeDeclaration.getSimpleBinaryName();
-    return compilationUnit.getDirectoryPath() + File.separator + typeName;
-  }
-
   /**
    * Returns the js doc annotations for parameter at {@code index} in {@code methodOrFunction}. It
    * is of the form:
@@ -98,26 +73,5 @@ public class GeneratorUtils {
     return String.format("extends %s ", superTypeName);
   }
 
-  /**
-   * The ctor visibility should never be public since it is not intended to be called externally
-   * unless a super class calls it as part of the ctor chain.
-   */
-  public static String visibilityForMethod(Method method) {
-    return method.getDescriptor().getVisibility().jsText;
-  }
-
-  public static void writeToFile(Path outputPath, String content, Problems problems) {
-    try {
-      // Write using the provided fileSystem (which might be the regular file system or might be a
-      // zip file.)
-      Files.createDirectories(outputPath.getParent());
-      Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
-      // Wipe entries modification time so that input->output mapping is stable
-      // regardless of the time of day.
-      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
-    } catch (IOException e) {
-      problems.error("Could not write to file: %s", e.toString());
-      problems.abortIfRequested();
-    }
-  }
+  private GeneratorUtils() {}
 }

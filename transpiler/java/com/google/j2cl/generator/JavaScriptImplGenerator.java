@@ -320,7 +320,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (!method.getDescriptor().isConstructor()) {
       sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
     }
-    sourceBuilder.appendln(" * @" + GeneratorUtils.visibilityForMethod(method));
+    sourceBuilder.appendln(" * @" + method.getDescriptor().getVisibility().jsText);
     sourceBuilder.appendln(" */");
   }
 
