@@ -1,8 +1,6 @@
 # Description:
 #   Test for J2cl worker integration
 
-package(default_visibility = ["//:__subpackages__"])
-
 # Apache2
 licenses(["notice"])
 

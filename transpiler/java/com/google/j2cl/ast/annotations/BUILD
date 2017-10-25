@@ -1,4 +1,4 @@
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = ["//transpiler:__subpackages__"])
 
 # Apache2
 licenses(["notice"])

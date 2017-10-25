@@ -1,15 +1,19 @@
-package(
-    default_testonly = 1,
-)
-
 # Apache2
 licenses(["notice"])
 
-load("//java/com/google/testing/builddefs:GenTestRules.bzl", "GenTestRules")
+java_test(
+    name = "JavaPreprocessorTest",
+    srcs = ["JavaPreprocessorTest.java"],
+    deps = [
+        "//java/com/google/common/base",
+        "//third_party/java/junit",
+        "//tools/java/com/google/j2cl/tools/gwtincompatible",
+    ],
+)
 
-java_library(
-    name = "gwtincompatible",
-    srcs = glob(["*.java"]),
+java_test(
+    name = "UnusedImportsNodeCollectorTest",
+    srcs = ["UnusedImportsNodeCollectorTest.java"],
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
@@ -17,10 +21,4 @@ java_library(
         "//third_party/java/junit",
         "//tools/java/com/google/j2cl/tools/gwtincompatible",
     ],
-)
-
-GenTestRules(
-    name = "GeneratedTestRules",
-    test_files = glob(["*.java"]),
-    deps = [":gwtincompatible"],
 )

@@ -1,7 +1,5 @@
 # NOTE: This package uses internal tools. It should not be made open-source.
 
-package(default_visibility = ["//:__subpackages__"])
-
 # Apache2
 licenses(["notice"])
 

@@ -10,8 +10,6 @@
 #
 # TODO(stalcup): add a Boq web example when Boq web is ready.
 
-package(default_visibility = ["//:__subpackages__"])
-
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
 load("//build_def:j2cl_test.bzl", "j2cl_test")
