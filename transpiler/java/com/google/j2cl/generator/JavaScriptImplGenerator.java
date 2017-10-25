@@ -36,12 +36,14 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
@@ -109,12 +111,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return JsDocNameUtils.getJsDocName(typeDescriptor, environment);
   }
 
-  public String getJsDocName(TypeDescriptor typeDescriptor, boolean shouldUseClassName) {
-    return JsDocNameUtils.getJsDocName(typeDescriptor, shouldUseClassName, environment);
-  }
-
-  public String getJsDocNames(Iterable<TypeDescriptor> typeDescriptors) {
-    return JsDocNameUtils.getJsDocNames(typeDescriptors, environment);
+  public String getCommaSeparatedJsDocNames(Collection<TypeDescriptor> typeDescriptors) {
+    return JsDocNameUtils.getCommaSeparatedJsDocNames(typeDescriptors, environment);
   }
 
   @Override
@@ -199,13 +197,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendLines("/**", " * @interface");
       sourceBuilder.newLine();
       if (type.getDeclaration().hasTypeParameters()) {
-        String templates = getJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
+        String templates =
+            getCommaSeparatedJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (doesClassExistInJavaScript(superInterfaceType)) {
-          sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
-        }
+        renderIfClassExists(" * @extends {%s}", superInterfaceType, sourceBuilder);
       }
       sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
@@ -214,19 +211,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         buffer.appendln(" * @abstract");
       }
       if (type.getDeclaration().hasTypeParameters()) {
-        String templates = getJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
+        String templates =
+            getCommaSeparatedJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
         buffer.appendln(" * @template " + templates);
       }
       if (type.getSuperTypeDescriptor() != null
-          && type.getSuperTypeDescriptor().hasTypeArguments()
-          && !type.getSuperTypeDescriptor().isStarOrUnknown()) {
-        String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
-        buffer.appendln(" * @extends {" + supertype + "}");
+          && type.getSuperTypeDescriptor().hasTypeArguments()) {
+        // No need to render if it does not have type arguments as it will also appear in the
+        // extends clause of the class definition.
+        renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), buffer);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        if (doesClassExistInJavaScript(superInterfaceType)) {
-          buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
-        }
+        renderIfClassExists(" * @implements {%s}", superInterfaceType, buffer);
       }
 
       String annotation = buffer.build();
@@ -235,6 +231,31 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append(annotation);
         sourceBuilder.appendln(" */");
       }
+    }
+  }
+
+  /**
+   * Renders the line using {@code formatString} only if {@code typeDescriptor} is an actual class
+   * in JavaScript.
+   *
+   * <p>Used to render the @extends/@implements clauses.
+   */
+  private void renderIfClassExists(
+      String formatString, TypeDescriptor typeDescriptor, SourceBuilder sourceBuilder) {
+    if (doesClassExistInJavaScript(typeDescriptor)) {
+      String typeArgumentsString =
+          typeDescriptor.hasTypeArguments()
+              ? typeDescriptor
+                  .getTypeArgumentDescriptors()
+                  .stream()
+                  .map(this::getJsDocName)
+                  .collect(Collectors.joining(", ", "<", ">"))
+              : "";
+
+      sourceBuilder.appendln(
+          J2clUtils.format(
+              formatString,
+              environment.aliasForType(typeDescriptor.getTypeDeclaration()) + typeArgumentsString));
     }
   }
 
@@ -305,8 +326,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
-          JsDocNameUtils.getJsDocNames(
-              method.getDescriptor().getTypeParameterTypeDescriptors(), environment);
+          getCommaSeparatedJsDocNames(method.getDescriptor().getTypeParameterTypeDescriptors());
       sourceBuilder.appendln(" * @template " + templateParamNames);
     }
 

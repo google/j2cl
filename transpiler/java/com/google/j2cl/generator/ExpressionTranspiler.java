@@ -122,8 +122,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
-        String jsdoc =
-            JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), false, environment);
+        String jsdoc = JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), environment);
         if (annotation.isDeclaration()) {
           sourceBuilder.appendln("/** @public {" + jsdoc + "} */");
           process(annotation.getExpression());

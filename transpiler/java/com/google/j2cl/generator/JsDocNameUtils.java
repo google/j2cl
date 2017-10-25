@@ -24,7 +24,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
@@ -36,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Utility functions for JsDoc names.
@@ -85,59 +85,36 @@ public class JsDocNameUtils {
                     javaLangCharSequence, javaLangString);
               });
 
+  /** Returns the list of JsDoc names of a list of type descriptors separated by comma. */
+  static String getCommaSeparatedJsDocNames(
+      Collection<TypeDescriptor> typeDescriptors, final GenerationEnvironment environment) {
+    return typeDescriptors
+        .stream()
+        .map(typeDescriptor -> getJsDocName(typeDescriptor, environment))
+        .collect(Collectors.joining(", "));
+  }
 
-  /**
-   * Returns the JsDoc type name.
-   */
+  /** Returns the JsDoc type name. */
   static String getJsDocName(TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
-    return getJsDocName(typeDescriptor, false, environment);
-  }
+    checkArgument(!typeDescriptor.isIntersection());
 
-  /**
-   * Returns the list of JsDoc names of a list of type descriptors separated by comma.
-   */
-  static String getJsDocNames(
-      Iterable<TypeDescriptor> typeDescriptors, final GenerationEnvironment environment) {
-    Iterable<String> typeParameterDescriptors =
-        Iterables.transform(
-            typeDescriptors, typeDescriptor -> getJsDocName(typeDescriptor, environment));
-    return Joiner.on(", ").join(typeParameterDescriptors);
-  }
-
-  /**
-   * Returns the JsDoc type name.
-   * If {@code shouldUseClassName} is true (when it is used in extends or implements clause, or is
-   * used in constructor), use the class name not the specialized name.
-   */
-  static String getJsDocName(
-      TypeDescriptor typeDescriptor,
-      boolean shouldUseClassName,
-      GenerationEnvironment environment) {
     if (typeDescriptor.isStarOrUnknown()) {
       return typeDescriptor.getSimpleJsName();
     }
-
-    checkArgument(!typeDescriptor.isIntersection());
     // TODO(stalcup): this looks like a hack to me, really the TypeDescriptor for JsFunctions should
     // be created in the first place to know they themselves are nullable.
 
     // JsFunction interface and implementor is a real JS function.
     // Unlike other js types, functions have to be explicitly set to nullable.
-    if (!shouldUseClassName
-        && (typeDescriptor.isJsFunctionInterface()
-            || typeDescriptor.isJsFunctionImplementation())) {
+    if ((typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation())) {
       return getJsDocNameWithNullability(
           getJsDocNameForJsFunction(typeDescriptor, environment), typeDescriptor.isNullable());
     }
 
-    if (!typeDescriptor.isNullable() && !shouldUseClassName && !typeDescriptor.isPrimitive()) {
+    if (!typeDescriptor.isNullable() && !typeDescriptor.isPrimitive()) {
       return getJsDocNameWithNullability(
-          getJsDocName(TypeDescriptors.toNullable(typeDescriptor), shouldUseClassName, environment),
+          getJsDocName(TypeDescriptors.toNullable(typeDescriptor), environment),
           false /* nullable */);
-    }
-
-    if (shouldUseClassName) {
-      typeDescriptor = TypeDescriptors.toNullable(typeDescriptor);
     }
 
     // Everything below is nullable.
@@ -157,10 +134,7 @@ public class JsDocNameUtils {
       case TypeDescriptors.LONG_TYPE_NAME:
         return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
-        if (!shouldUseClassName) {
-          return "*";
-        }
-        break;
+        return "*";
       default:
         checkState(!typeDescriptor.isPrimitive());
     }
@@ -176,7 +150,8 @@ public class JsDocNameUtils {
     if (typeDescriptor.hasTypeArguments()) {
       TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       List<TypeDescriptor> typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
-      String typeParametersJsDoc = getJsDocNames(typeArgumentDescriptors, environment);
+      String typeParametersJsDoc =
+          getCommaSeparatedJsDocNames(typeArgumentDescriptors, environment);
 
       // If the type is the native 'Object' class and is being given exactly one type parameter
       // then it is being used as a map. Expand it to two type parameters where the first one
@@ -192,7 +167,7 @@ public class JsDocNameUtils {
 
       String jsDocName =
           String.format("%s<%s>", environment.aliasForType(rawTypeDescriptor), typeParametersJsDoc);
-      if (!shouldUseClassName && hasDevirtualizedSubtype(rawTypeDescriptor)) {
+      if (hasDevirtualizedSubtype(rawTypeDescriptor)) {
         // types that are extended or implemented by unboxed types
         // JsDoc type should be a union type.
         jsDocName =
@@ -204,12 +179,12 @@ public class JsDocNameUtils {
     }
 
     // Special cases for unboxed types.
-    if (!shouldUseClassName && needsJsDocNameMapping(typeDescriptor)) {
+    if (needsJsDocNameMapping(typeDescriptor)) {
       return mapDevirtualizedJsDocName(typeDescriptor);
     }
 
     // types that are extended or implemented by unboxed types.
-    if (!shouldUseClassName && hasDevirtualizedSubtype(typeDescriptor)) {
+    if (hasDevirtualizedSubtype(typeDescriptor)) {
       return String.format(
           "(%s|%s)",
           environment.aliasForType(typeDescriptor),
