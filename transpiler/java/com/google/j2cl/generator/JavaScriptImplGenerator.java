@@ -243,8 +243,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeBody() {
-    String extendsClause = GeneratorUtils.getExtendsClause(type, environment);
-    sourceBuilder.append("class " + className + " " + extendsClause);
+    sourceBuilder.append("class " + className + " " + getExtendsClause(type, environment));
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     environment.setEnclosingTypeDescriptor(type.getTypeDescriptor());
@@ -261,6 +260,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
     renderClassMetadata();
     sourceBuilder.newLines(2);
+  }
+
+  private static String getExtendsClause(Type type, GenerationEnvironment environment) {
+    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
+      return "";
+    }
+    String superTypeName = environment.aliasForType(superTypeDescriptor);
+    return String.format("extends %s ", superTypeName);
   }
 
   private void renderTypeMethods() {

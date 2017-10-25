@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.HasMethodDescriptor;
 import com.google.j2cl.ast.HasParameters;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
@@ -62,15 +61,6 @@ public class GeneratorUtils {
               : "",
           name);
     }
-  }
-
-  public static String getExtendsClause(Type type, GenerationEnvironment environment) {
-    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
-      return "";
-    }
-    String superTypeName = environment.aliasForType(superTypeDescriptor);
-    return String.format("extends %s ", superTypeName);
   }
 
   private GeneratorUtils() {}
