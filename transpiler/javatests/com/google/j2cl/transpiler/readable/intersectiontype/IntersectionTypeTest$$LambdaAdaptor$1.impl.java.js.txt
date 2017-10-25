@@ -12,6 +12,9 @@ const Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontyp
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 /**
  * @template C_T
@@ -87,6 +90,9 @@ class $LambdaAdaptor$1 extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor$1.$clinit = function() {};
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

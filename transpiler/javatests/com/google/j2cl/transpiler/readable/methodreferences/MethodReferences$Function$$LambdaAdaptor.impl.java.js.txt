@@ -11,6 +11,8 @@ const com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Func
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+
 
 /**
  * @template C_Function_T, C_Function_U
@@ -85,6 +87,8 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     java_lang_Object.$clinit();
   }
 

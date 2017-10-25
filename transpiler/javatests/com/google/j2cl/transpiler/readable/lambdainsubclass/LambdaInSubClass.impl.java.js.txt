@@ -11,6 +11,7 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.lambdainsubclas
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class LambdaInSubClass extends Parent {
@@ -90,6 +91,7 @@ class LambdaInSubClass extends Parent {
     LambdaInSubClass.$clinit = function() {};
     LambdaInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Parent.$clinit();
   }
 

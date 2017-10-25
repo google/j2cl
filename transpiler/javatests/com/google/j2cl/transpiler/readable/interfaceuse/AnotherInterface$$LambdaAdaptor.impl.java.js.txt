@@ -11,6 +11,9 @@ const AnotherInterface = goog.require('com.google.j2cl.transpiler.readable.inter
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 /**
  * @implements {AnotherInterface}
@@ -83,6 +86,9 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 
