@@ -1,1 +1,9 @@
 [a] => [a] "a"
+[interface SubInterface extends MyJsInterface, MyInterface {
+  @Override
+  int foo(int a);
+}] => [SubInterface.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface.<synthetic: adapt_lambda>"
+[interface SubInterface extends MyJsInterface, MyInterface {
+  @Override
+  int foo(int a);
+}] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface.<synthetic: adapt_lambda>"

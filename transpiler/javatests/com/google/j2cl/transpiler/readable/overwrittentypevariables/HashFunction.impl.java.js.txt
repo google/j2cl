@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFu
 const MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -19,6 +21,17 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
  * @extends {MyFunction<C_T, ?string>}
  */
 class HashFunction {
+  /**
+   * @template C_T
+   * @param {?function(C_T):?string} fn
+   * @return {HashFunction<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    HashFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
+
   /**
    * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
@@ -65,6 +78,8 @@ class HashFunction {
    */
   static $clinit() {
     HashFunction.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
   }
 };
 

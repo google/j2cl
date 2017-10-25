@@ -29,8 +29,20 @@
 [LambdaInterface l =
         (i -> {
 ...          return a;
-        });] => [let l = $Lambda$LambdaInterface$0.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this);] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
+        });] => [let l = LambdaInterface.$adapt(((/** number */ i) =>{
+      this.m_funInParent__();
+...      return a;
+    }));] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.test"
 [l] => [l] "l"
+[i] => [i] "i"
+[funInParent();] => [this.m_funInParent__();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[this.funInParent();] => [this.m_funInParent__();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[LambdaInSubClass.this.funInParent();] => [this.m_funInParent__();] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[int a = fieldInParent;] => [let a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[a] => [a] "a"
+[a = this.fieldInParent;] => [a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[a = LambdaInSubClass.this.fieldInParent;] => [a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.<lambda in test>"
 [public class LambdaInSubClass extends Parent {
   public void test() {
 ...  }

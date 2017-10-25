@@ -28,6 +28,7 @@ import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
 import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
+import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
@@ -193,6 +194,7 @@ public class J2clTranspiler {
     List<NormalizationPass> passes =
         ImmutableList.of(
             // Class structure normalizations.
+            new ImplementLambdaExpressions(),
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),

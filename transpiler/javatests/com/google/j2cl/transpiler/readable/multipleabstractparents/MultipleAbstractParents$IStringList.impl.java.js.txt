@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 const List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -25,6 +26,16 @@ class IStringList {
    * @public
    */
   m_getFoo__java_lang_String(string$1$) {}
+
+  /**
+   * @param {?function(?string):?string} fn
+   * @return {IStringList}
+   * @public
+   */
+  static $adapt(fn) {
+    IStringList.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -72,6 +83,8 @@ class IStringList {
    */
   static $clinit() {
     IStringList.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
   }
 };
 

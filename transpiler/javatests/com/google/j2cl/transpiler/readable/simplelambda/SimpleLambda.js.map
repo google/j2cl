@@ -34,35 +34,70 @@
 [intf] => [intf] "intf"
 [n] => [n] "n"
 [return this.field + intf.foo(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + intf.m_foo__int(n);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.test"
-[int result = test(i -> i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$0.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaNoCapture"
+[int result = test(i -> i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i) =>{
+      return i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaNoCapture"
 [result] => [result] "result"
+[i] => [i] "i"
+[i + 1] => [return i + 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaNoCapture>"
 [result =
         test(
 ...            },
-            10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaNoCapture"
-[int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$2.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureField"
+            10);] => [result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i$1$) =>{
+      return i$1$ + 2;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaNoCapture"
+[i] => [i$1$] "i"
+[return i + 2;] => [return i$1$ + 2;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaNoCapture>"
+[int result = test(i -> field + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i) =>{
+      return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureField"
 [result] => [result] "result"
+[i] => [i] "i"
+[field + i + 1] => [return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCaptureField>"
 [int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureLocal"
 [x] => [x] "x"
-[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$3.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureLocal"
+[int result = test(i -> x + i + 1, 10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i) =>{
+      return x + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureLocal"
 [result] => [result] "result"
+[i] => [i] "i"
+[x + i + 1] => [return x + i + 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCaptureLocal>"
 [int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureFieldAndLocal"
 [x] => [x] "x"
 [int result =
         test(
 ...            },
-            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$4.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(this, x), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureFieldAndLocal"
+            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i) =>{
+      let y = 1;
+      return x + y + this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCaptureFieldAndLocal"
 [result] => [result] "result"
+[i] => [i] "i"
+[int y = 1;] => [let y = 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCaptureFieldAndLocal>"
+[y] => [y] "y"
+[return x + y + this.field + i + 1;] => [return x + y + this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda + i + 1;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCaptureFieldAndLocal>"
 [int result =
         test(
 ...            },
-            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int($Lambda$MyInterface$5.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCallOuterFunction"
+            10);] => [let result = this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(MyInterface.$adapt(((/** number */ i) =>{
+      this.m_funOuter__();
+...      return i + 2;
+    })), 10);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaCallOuterFunction"
 [result] => [result] "result"
+[i] => [i] "i"
+[funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCallOuterFunction>"
+[this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCallOuterFunction>"
+[SimpleLambda.this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCallOuterFunction>"
+[return i + 2;] => [return i + 2;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaCallOuterFunction>"
 [public static void testLambdaInStaticContext() {
     MyInterface f = (i) -> i;
   }] => [SimpleLambda.$clinit();] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaInStaticContext"
-[MyInterface f = (i) -> i;] => [let f = $Lambda$MyInterface$6.$create__();] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaInStaticContext"
+[MyInterface f = (i) -> i;] => [let f = MyInterface.$adapt(((/** number */ i) =>{
+      return i;
+    }));] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testLambdaInStaticContext"
 [f] => [f] "f"
+[i] => [i] "i"
+[i] => [return i;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaInStaticContext>"
 [public class SimpleLambda {
   public int field = 100;
 ...  }

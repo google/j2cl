@@ -26,8 +26,11 @@
   interface Runner {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn();] "com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.<init>"
-[Runner runner = () -> new Object();] => [let runner = $Lambda$Runner$0.$create__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn(this);] "com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.test"
+[Runner runner = () -> new Object();] => [let runner = Runner.$adapt((() =>{
+      java_lang_Object.$create__();
+    }));] "com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.test"
 [runner] => [runner] "runner"
+[new Object()] => [java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.<lambda in test>"
 [public class LambdaNoReturn {
   interface Runner {
 ...  }

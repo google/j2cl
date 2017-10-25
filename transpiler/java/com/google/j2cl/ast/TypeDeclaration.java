@@ -586,22 +586,6 @@ public abstract class TypeDeclaration extends Node
 
   abstract Builder toBuilder();
 
-  public static TypeDeclaration replaceTypeParameterDescriptors(
-      TypeDeclaration originalTypeDeclaration,
-      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
-    return Builder.from(originalTypeDeclaration)
-        .setTypeParameterDescriptors(typeParameterTypeDescriptors)
-        .setUnsafeTypeDescriptorFactory(
-            () -> {
-              TypeDescriptor originalTypeDescriptor =
-                  originalTypeDeclaration.getUnsafeTypeDescriptor();
-              return TypeDescriptor.Builder.from(originalTypeDescriptor)
-                  .setTypeArgumentDescriptors(typeParameterTypeDescriptors)
-                  .build();
-            })
-        .build();
-  }
-
   public static Builder newBuilder() {
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.

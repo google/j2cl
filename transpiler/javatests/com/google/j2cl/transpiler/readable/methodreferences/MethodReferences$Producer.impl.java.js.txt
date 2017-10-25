@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferenc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -21,6 +24,17 @@ class Producer {
    * @public
    */
   m_produce__() {}
+
+  /**
+   * @template C_Producer_T
+   * @param {?function():C_Producer_T} fn
+   * @return {Producer<C_Producer_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    Producer.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +81,8 @@ class Producer {
    */
   static $clinit() {
     Producer.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
   }
 };
 

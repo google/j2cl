@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.simplebridgemethods.Callable$im
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplebridgemethods.Callable.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class Callable {
    * @public
    */
   m_call__java_lang_Object(v) {}
+
+  /**
+   * @template C_V
+   * @param {?function(C_V):void} fn
+   * @return {Callable<C_V>}
+   * @public
+   */
+  static $adapt(fn) {
+    Callable.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class Callable {
    */
   static $clinit() {
     Callable.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable.$LambdaAdaptor$impl');
   }
 };
 

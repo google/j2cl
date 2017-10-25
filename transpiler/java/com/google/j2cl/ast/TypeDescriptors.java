@@ -428,9 +428,25 @@ public class TypeDescriptors {
             .filter(TypeDescriptor::isInterface)
             .collect(toImmutableList());
     Set<TypeDescriptor> typeArguments = Sets.newLinkedHashSet();
+
+    TypeDescriptor jsFunctionIntefaceTypeDescriptor = null;
     for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
-      typeArguments.addAll(intersectedType.getAllTypeVariables());
+      typeArguments.addAll(intersectedType.getTypeArgumentDescriptors());
+      if (intersectedType.getJsFunctionMethodDescriptor() != null
+          || intersectedType.getConcreteJsFunctionMethodDescriptor() != null) {
+        jsFunctionIntefaceTypeDescriptor = intersectedType;
+      }
     }
+
+    MethodDescriptor concreteJsFunctionMethodDescriptor =
+        jsFunctionIntefaceTypeDescriptor != null
+            ? jsFunctionIntefaceTypeDescriptor.getConcreteJsFunctionMethodDescriptor()
+            : null;
+    MethodDescriptor jsFunctionMethodDescriptor =
+        jsFunctionIntefaceTypeDescriptor != null
+            ? jsFunctionIntefaceTypeDescriptor.getJsFunctionMethodDescriptor()
+            : null;
+
     return TypeDescriptor.newBuilder()
         .setKind(Kind.INTERSECTION)
         .setRawTypeDescriptorFactory(() -> superTypeDescriptor.getRawTypeDescriptor())
@@ -439,6 +455,9 @@ public class TypeDescriptors {
         .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
         .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setClassComponents(createUniqueName(intersectedTypeDescriptors, "&"))
+        // @JsFunction interfaces should be restricted from participating in intersection types.
+        .setConcreteJsFunctionMethodDescriptorFactory(() -> concreteJsFunctionMethodDescriptor)
+        .setJsFunctionMethodDescriptorFactory(() -> jsFunctionMethodDescriptor)
         .build();
   }
 
@@ -537,6 +556,15 @@ public class TypeDescriptors {
     }
 
     return TypeDescriptor.Builder.from(originalTypeDescriptor).setNullable(true).build();
+  }
+
+  /** Returns a the unparameterized version of {@code typeDescriptors}. */
+  public static ImmutableList<TypeDescriptor> toUnparameterizedTypeDescriptors(
+      List<TypeDescriptor> typeDescriptors) {
+    return typeDescriptors
+        .stream()
+        .map(TypeDescriptor::unparameterizedTypeDescriptor)
+        .collect(toImmutableList());
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor leafTypeDescriptor, int dimensions) {

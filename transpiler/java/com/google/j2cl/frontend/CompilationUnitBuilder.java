@@ -28,7 +28,6 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AssertStatement;
@@ -66,7 +65,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
@@ -100,9 +98,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -122,7 +117,6 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodReference;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.SuperMethodReference;
@@ -142,7 +136,6 @@ public class CompilationUnitBuilder {
     private String currentSourceFile;
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private CompilationUnit j2clCompilationUnit;
-    private int lambdaCounter;
     private int qualifierCounter;
 
     private void pushType(Type type) {
@@ -997,12 +990,12 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding()));
     }
 
-    private FunctionExpression convertLambdaToFunctionExpression(LambdaExpression expression) {
+    private Expression convert(LambdaExpression expression) {
       MethodDescriptor functionalMethodDescriptor =
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
+          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
           .setParameters(
               JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())
                   .stream()
@@ -1033,32 +1026,6 @@ public class CompilationUnitBuilder {
       return body;
     }
 
-    private Expression convert(LambdaExpression expression) {
-      return maybeSynthesizeImplementationClass(
-          expression, () -> convertLambdaToFunctionExpression(expression));
-    }
-
-    /**
-     * Either synthesizes a lambda implementation class or returns the function expression.
-     *
-     * <p>It takes a FunctionExpression Supplier because the logic to implement captures requires
-     * the enclosing type hierarchy to be present. If there is the need to synthesize a lambda
-     * implementation class, such class will be created and pushed into the stack before the body of
-     * the FunctionExpression is converted.
-     */
-    private Expression maybeSynthesizeImplementationClass(
-        org.eclipse.jdt.core.dom.Expression expression,
-        Supplier<FunctionExpression> functionalExpressionSupplier) {
-      TypeDescriptor functionalInterfaceTypeDescriptor =
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
-
-      if (functionalInterfaceTypeDescriptor.isJsFunctionInterface()) {
-        return functionalExpressionSupplier.get();
-      }
-
-      return synthesizeFunctionalExpressionImplementation(expression, functionalExpressionSupplier);
-    }
-
     /**
      * Converts method reference expressions of the form:
      *
@@ -1077,18 +1044,16 @@ public class CompilationUnitBuilder {
       org.eclipse.jdt.core.dom.Expression qualifier = expression.getExpression();
       if (JdtUtils.isEffectivelyConstant(qualifier)) {
         // There is no need to introduce a temporary variable for the qualifier.
-        return maybeSynthesizeImplementationClass(
-            expression,
-            () ->
-                createForwardingFunctionExpression(
-                    getSourcePosition(expression),
-                    // functional interface method that the expression implements.
-                    JdtUtils.createMethodDescriptor(
-                        expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                    convert(qualifier),
-                    // target method to forward to.
-                    JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-                    false));
+        return createForwardingFunctionExpression(
+            getSourcePosition(expression),
+            JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+            // functional interface method that the expression implements.
+            JdtUtils.createMethodDescriptor(
+                expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
+            convert(qualifier),
+            // target method to forward to.
+            JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
+            false);
       }
       // The semantics require that the qualifier be evaluated in the context where the method
       // reference appears, so here we introduce a temporary variable to store the evaluated
@@ -1109,27 +1074,19 @@ public class CompilationUnitBuilder {
                   .addVariableDeclaration(variable, convert(qualifier))
                   .build(),
               // Construct the functional expression.
-              maybeSynthesizeImplementationClass(
-                  expression,
-                  () ->
-                      createForwardingFunctionExpression(
-                          getSourcePosition(expression),
-                          // functional interface method that the expression implements.
-                          JdtUtils.createMethodDescriptor(
-                              expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                          declaringType == currentType
-                              ? variable.getReference()
-                              : convertCapturedVariableReference(
-                                  variable, declaringType.getDeclaration()),
-                          // target method to forward to.
-                          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-                          false)))
+              createForwardingFunctionExpression(
+                  getSourcePosition(expression),
+                  JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+                  // functional interface method that the expression implements.
+                  JdtUtils.createMethodDescriptor(
+                      expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
+                  declaringType == currentType
+                      ? variable.getReference()
+                      : convertCapturedVariableReference(variable, declaringType.getDeclaration()),
+                  // target method to forward to.
+                  JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
+                  false))
           .build();
-    }
-
-    private Expression convert(CreationReference expression) {
-      return maybeSynthesizeImplementationClass(
-          expression, () -> convertCreationReferenceToFunctionExpression(expression));
     }
 
     /**
@@ -1142,9 +1099,7 @@ public class CompilationUnitBuilder {
      *          A:new       into     (par1, ..., parN) -> new A(par1, ..., parN)
      * </pre>
      */
-    private FunctionExpression convertCreationReferenceToFunctionExpression(
-        CreationReference expression) {
-
+    private Expression convert(CreationReference expression) {
       ITypeBinding expressionTypeBinding = expression.getType().resolveBinding();
       MethodDescriptor functionalMethodDescriptor =
           JdtUtils.createMethodDescriptor(
@@ -1246,16 +1201,14 @@ public class CompilationUnitBuilder {
      * </pre>
      */
     private Expression convert(TypeMethodReference expression) {
-      return maybeSynthesizeImplementationClass(
-          expression,
-          () ->
-              createForwardingFunctionExpression(
-                  getSourcePosition(expression),
-                  JdtUtils.createMethodDescriptor(
-                      expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                  null,
-                  JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-                  false));
+      return createForwardingFunctionExpression(
+          getSourcePosition(expression),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createMethodDescriptor(
+              expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
+          null,
+          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
+          false);
     }
 
     /**
@@ -1268,22 +1221,19 @@ public class CompilationUnitBuilder {
      * </pre>
      */
     private Expression convert(SuperMethodReference expression) {
-      return maybeSynthesizeImplementationClass(
-          expression,
-          () -> {
-            IMethodBinding methodBinding = expression.resolveMethodBinding();
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
 
-            return createForwardingFunctionExpression(
-                getSourcePosition(expression),
-                JdtUtils.createMethodDescriptor(
-                    expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    methodBinding.getDeclaringClass(),
-                    false),
-                JdtUtils.createMethodDescriptor(methodBinding),
-                true);
-          });
+      return createForwardingFunctionExpression(
+          getSourcePosition(expression),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createMethodDescriptor(
+              expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
+          convertOuterClassReference(
+              JdtUtils.findCurrentTypeBinding(expression),
+              methodBinding.getDeclaringClass(),
+              false),
+          JdtUtils.createMethodDescriptor(methodBinding),
+          true);
     }
 
     /**
@@ -1292,12 +1242,11 @@ public class CompilationUnitBuilder {
      */
     private FunctionExpression createForwardingFunctionExpression(
         SourcePosition sourcePosition,
+        TypeDescriptor expressionTypeDescriptor,
         MethodDescriptor functionalMethodDescriptor,
         Expression qualifier,
         MethodDescriptor targetMethodDescriptor,
         boolean isStaticDispatch) {
-      checkArgument(
-          functionalMethodDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface());
 
       List<Variable> parameters =
           AstUtils.createParameterVariables(
@@ -1325,243 +1274,10 @@ public class CompilationUnitBuilder {
               functionalMethodDescriptor.getReturnTypeDescriptor());
       forwardingStatement.setSourcePosition(sourcePosition);
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
+          .setTypeDescriptor(expressionTypeDescriptor)
           .setParameters(parameters)
           .setStatements(forwardingStatement)
           .setSourcePosition(sourcePosition)
-          .build();
-    }
-
-    /**
-     * Synthesizes the class implementing the lambda expression or method reference.
-     *
-     * <p>Lambda expressions and method references that are not JsFunction implementations are
-     * converted to inner classes:
-     *
-     * <pre>
-     * class Enclosing$lambda$0 implements I {
-     *   Enclosing$lambda$0(captures) {// initialize captures}
-     *   private T lambda$0(args) {...lambda_expression_with_captures ... }
-     *   public T samMethod0(args) { return this.lambda$0(args); }
-     * }</pre>
-     *
-     * <p>and returns {@code new Enclosing$lambda$0(captures)}.
-     *
-     * <p>The creation of the body is done through a {@link Supplier} interface because the captures
-     * need to be resolved at construction.
-     */
-    private Expression synthesizeFunctionalExpressionImplementation(
-        org.eclipse.jdt.core.dom.Expression expression,
-        Supplier<FunctionExpression> functionExpressionSupplier) {
-      checkArgument(
-          expression instanceof LambdaExpression || expression instanceof MethodReference);
-
-      ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
-      ITypeBinding enclosingTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
-      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingTypeBinding);
-      TypeDescriptor functionalInterfaceTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              functionalInterfaceTypeBinding.getFunctionalInterfaceMethod().getDeclaringClass());
-
-      // TODO(goktug): use type simple name instead of functional interface type.
-      List<String> classComponents =
-          AstUtils.synthesizeInnerClassComponents(
-              enclosingType,
-              "Lambda",
-              functionalInterfaceTypeDescriptor.getSimpleSourceName(),
-              lambdaCounter++);
-
-      boolean inStaticContext = JdtUtils.isInStaticContext(expression);
-      TypeDeclaration lambdaTypeDeclaration =
-          JdtUtils.createLambdaTypeDeclaration(
-              inStaticContext,
-              enclosingType.getTypeDeclaration(),
-              classComponents,
-              functionalInterfaceTypeBinding);
-      SourcePosition sourcePosition = getSourcePosition(expression);
-      Type lambdaType = new Type(sourcePosition, Visibility.PRIVATE, lambdaTypeDeclaration);
-      pushType(lambdaType);
-      FunctionExpression functionExpression = functionExpressionSupplier.get();
-
-      // Construct and add the lambda dynamic dispatch method that delegates to the lambda
-      // implementation method.
-      TypeDescriptor lambdaTypeDescriptor =
-          JdtUtils.createLambdaTypeDescriptor(
-              inStaticContext, enclosingType, classComponents, functionalInterfaceTypeBinding);
-      MethodDescriptor functionalMethodDescriptor =
-          JdtUtils.createMethodDescriptor(
-              checkNotNull(functionalInterfaceTypeBinding.getFunctionalInterfaceMethod()));
-      MethodDescriptor lambdaDispatchMethodDescriptor =
-          MethodDescriptor.Builder.from(functionalMethodDescriptor)
-              .setEnclosingTypeDescriptor(lambdaTypeDescriptor)
-              // Since we are synthesizing a method (in a synthetic class), this is the declaration.
-              .setDeclarationMethodDescriptor(null)
-              .setAbstract(false)
-              .setNative(false)
-              .build();
-
-      // Construct lambda method and add it to lambda inner class.
-      Method lambdaMethod =
-          createLambdaImplementationMethod(
-              sourcePosition,
-              lambdaDispatchMethodDescriptor,
-              functionExpression,
-              !functionalMethodDescriptor.getEnclosingTypeDescriptor().isStarOrUnknown()
-                  // Do not emit override if the implementation specializes a method, the actual
-                  // JavaScript override will be the corresponding bridge.
-                  && functionalMethodDescriptor
-                      .getMethodSignature()
-                      .equals(
-                          functionalMethodDescriptor
-                              .getDeclarationMethodDescriptor()
-                              .getMethodSignature()));
-      lambdaType.addMethod(lambdaMethod);
-
-      // Add fields for captured local variables.
-      for (Variable capturedVariable :
-          capturesByTypeName.get(lambdaTypeDeclaration.getQualifiedSourceName())) {
-        Optional<SourcePosition> variableSourcePosition = capturedVariable.getSourcePosition();
-        lambdaType.addField(
-            Field.Builder.from(
-                    AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
-                .setCapturedVariable(capturedVariable)
-                .setSourcePosition(
-                    variableSourcePosition.isPresent()
-                        ? SourcePosition.Builder.from(variableSourcePosition.get())
-                            .setName(null)
-                            .build()
-                        : sourcePosition)
-                .build());
-      }
-
-      if (lambdaTypeDeclaration.isCapturingEnclosingInstance()) {
-        // Add field for enclosing instance.
-        lambdaType.addField(
-            0,
-            Field.Builder.from(
-                    AstUtils.getFieldDescriptorForEnclosingInstance(
-                        lambdaTypeDescriptor,
-                        lambdaType.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
-                .setSourcePosition(lambdaType.getSourcePosition())
-                .build());
-      }
-
-      // Collect all type variables that are in context. Those might come from the functional
-      // interface instantiation, from the captures (which are the fields in this synthetic
-      // anonymous inner class, or from the lambda body e.g.
-      //
-      // interface Func<T, U> {
-      //   U apply(T t);
-      // }
-      //
-      // static <T> void f() {
-      //    List<T>  var = ...
-      //    m((String s)-> var.get(0));
-      //
-      // The lambda class here should be declared
-      //
-      // class LambdaImplementation<T> implements Func<String, T> {
-      //   List<T> captured$var;
-      //   ....
-      //   public T apply(String t) {return captured$var.get(0); }
-      // }
-      //
-      // and type variable T in this example comes for the captured variable "var" for type List<T>.
-      //
-      // Collect all free type variables appearing in the body of the implementation as they will
-      // be modelled as type variables for the lambda implementation class.
-      final Set<TypeDescriptor> lambdaTypeVariableTypeDescriptors =
-          AstUtils.getAllTypeVariables(lambdaType);
-
-      // Add the relevant type parameters to the anonymous inner class that implements the lambda.
-      lambdaTypeDeclaration =
-          TypeDeclaration.replaceTypeParameterDescriptors(
-              lambdaTypeDescriptor.getTypeDeclaration(), lambdaTypeVariableTypeDescriptors);
-      lambdaTypeDescriptor = lambdaTypeDeclaration.getUnsafeTypeDescriptor();
-
-      // Note that the original type descriptor for the lambda was computed above.  However, once
-      // we traverse the lambda method we determine the captured variables and need to add their
-      // type variables to the lambda TypeDescriptor's type arguments.  This new TypeDescriptor
-      // needs to replace the old one throughout the Lambda Type.
-      replaceLambdaDescriptor(lambdaType, lambdaTypeDeclaration);
-
-      // Add lambda class to compilation unit.
-      j2clCompilationUnit.addType(lambdaType);
-      popType();
-
-      // Replace the lambda with new LambdaClass()
-      MethodDescriptor constructorMethodDescriptor =
-          AstUtils.createImplicitConstructorDescriptor(lambdaTypeDescriptor);
-      // qualifier should not be null if the lambda is nested in another lambda.
-      Expression qualifier =
-          lambdaTypeDeclaration.isCapturingEnclosingInstance()
-              ? convertOuterClassReference(enclosingTypeBinding, enclosingTypeBinding, true)
-              : null;
-      return NewInstance.Builder.from(constructorMethodDescriptor).setQualifier(qualifier).build();
-    }
-
-    /**
-     * Replace the type descriptor for a given Type. Note that this is only safe for specific cases
-     * where we know the type will not occur recursively inside other TypeDescriptors, which happens
-     * to be the case for the synthetic lambda class TypeDescriptor.
-     */
-    private void replaceLambdaDescriptor(Type type, final TypeDeclaration replacement) {
-      final TypeDeclaration original = type.getDeclaration();
-      type.accept(
-          new AbstractRewriter() {
-            @SuppressWarnings("ReferenceEquality")
-            @Override
-            public Node rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
-              if (typeDeclaration == original) {
-                return replacement;
-              }
-              return typeDeclaration;
-            }
-
-            @SuppressWarnings("ReferenceEquality")
-            @Override
-            public Node rewriteTypeDescriptor(TypeDescriptor typeDescriptor) {
-              if (typeDescriptor == original.getUnsafeTypeDescriptor()) {
-                return replacement.getUnsafeTypeDescriptor();
-              }
-              return typeDescriptor;
-            }
-
-            @Override
-            public Node rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
-              if (fieldDescriptor.isMemberOf(original.getUnsafeTypeDescriptor())) {
-                return FieldDescriptor.Builder.from(fieldDescriptor)
-                    .setEnclosingTypeDescriptor(replacement.getUnsafeTypeDescriptor())
-                    .build();
-              }
-              return fieldDescriptor;
-            }
-
-            @Override
-            public Node rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
-              if (methodDescriptor.isMemberOf(original.getUnsafeTypeDescriptor())) {
-                return MethodDescriptor.Builder.from(methodDescriptor)
-                    .setEnclosingTypeDescriptor(replacement.getUnsafeTypeDescriptor())
-                    .build();
-              }
-              return methodDescriptor;
-            }
-          });
-    }
-
-    private Method createLambdaImplementationMethod(
-        SourcePosition sourcePosition,
-        MethodDescriptor lambdaDispatchMethodDescriptor,
-        FunctionExpression functionExpression,
-        boolean isOverride) {
-
-      return Method.newBuilder()
-          .setMethodDescriptor(lambdaDispatchMethodDescriptor)
-          .setParameters(functionExpression.getParameters())
-          .setOverride(isOverride)
-          .addStatements(functionExpression.getBody().getStatements())
-          .setSourcePosition(sourcePosition)
-          .setJsDocDescription("Lambda implementation method.")
           .build();
     }
 

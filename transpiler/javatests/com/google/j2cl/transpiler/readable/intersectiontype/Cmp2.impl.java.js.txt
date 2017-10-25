@@ -9,9 +9,13 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
+ * @template C_T
  */
 class Cmp2 {
   /**
@@ -21,6 +25,17 @@ class Cmp2 {
    * @public
    */
   m_cmp__int(a) {}
+
+  /**
+   * @template C_T
+   * @param {?function(number):number} fn
+   * @return {Cmp2<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    Cmp2.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +82,8 @@ class Cmp2 {
    */
   static $clinit() {
     Cmp2.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.Cmp2.$LambdaAdaptor$impl');
   }
 };
 

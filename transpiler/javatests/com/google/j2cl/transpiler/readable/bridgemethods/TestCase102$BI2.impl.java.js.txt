@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2$i
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2.$LambdaAdaptor$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -23,6 +24,16 @@ class BI2 {
    * @public
    */
   get(value) {}
+
+  /**
+   * @param {?function(?string):?string} fn
+   * @return {BI2}
+   * @public
+   */
+  static $adapt(fn) {
+    BI2.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -69,6 +80,8 @@ class BI2 {
    */
   static $clinit() {
     BI2.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2.$LambdaAdaptor$impl');
   }
 };
 

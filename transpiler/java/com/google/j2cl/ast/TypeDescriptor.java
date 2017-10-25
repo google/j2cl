@@ -28,6 +28,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
@@ -193,7 +194,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   public boolean isFunctionalInterface() {
-    return getTypeDeclaration().isFunctionalInterface();
+    return hasTypeDeclaration() && getTypeDeclaration().isFunctionalInterface();
   }
 
   public boolean isJsFunctionImplementation() {
@@ -263,6 +264,9 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
       getDeclaredMethodDescriptorsFactory();
+
+  @Nullable
+  abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
 
   @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
@@ -373,6 +377,7 @@ public abstract class TypeDescriptor extends Node
   }
 
   @Memoized
+  @Nullable
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     return getConcreteJsFunctionMethodDescriptorFactory().get(this);
   }
@@ -415,6 +420,12 @@ public abstract class TypeDescriptor extends Node
     return getJsFunctionMethodDescriptorFactory().get(this);
   }
 
+  @Memoized
+  @Nullable
+  public MethodDescriptor getSingleAbstractMethodDescriptor() {
+    return getSingleAbstractMethodDescriptorFactory().get(this);
+  }
+
   /**
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
@@ -434,12 +445,37 @@ public abstract class TypeDescriptor extends Node
     return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
+  /** Returns the single declared constructor fo this class. */
+  @Memoized
+  public MethodDescriptor getSingleConstructor() {
+    return getDeclaredMethodDescriptors()
+        .stream()
+        .filter(MethodDescriptor::isConstructor)
+        .collect(MoreCollectors.onlyElement());
+  }
+
+  /** Returns the functional interface for a type. */
+  @Memoized
+  public TypeDescriptor getFunctionalInterface() {
+    TypeDescriptor functionalInterfaceTypeDescriptor =
+        isIntersection()
+            ? getInterfaceTypeDescriptors()
+                .stream()
+                .filter(TypeDescriptor::isFunctionalInterface)
+                .findFirst()
+                .get()
+            : this;
+
+    checkState(functionalInterfaceTypeDescriptor.isFunctionalInterface());
+    return functionalInterfaceTypeDescriptor;
+  }
+
   /** Returns type descriptor for the same type use the type parameters from the declaration. */
   @Memoized
   public TypeDescriptor unparameterizedTypeDescriptor() {
     if (isIntersection()) {
       return TypeDescriptors.createIntersection(
-          toUnparameterizedTypeDescriptors(getInterfaceTypeDescriptors()));
+          TypeDescriptors.toUnparameterizedTypeDescriptors(getInterfaceTypeDescriptors()));
     }
 
     return getTypeDeclaration().getUnsafeTypeDescriptor();
@@ -486,17 +522,23 @@ public abstract class TypeDescriptor extends Node
   @Memoized
   public Set<TypeDescriptor> getAllTypeVariables() {
     Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
-    getAllTypeVariables(this, typeVariables);
+    collectAllTypeVariables(this, typeVariables);
     return typeVariables;
   }
 
-  private static void getAllTypeVariables(
+  private static void collectAllTypeVariables(
       TypeDescriptor typeDescriptor, Set<TypeDescriptor> typeVariables) {
     if (typeDescriptor.isTypeVariable()) {
       typeVariables.add(typeDescriptor);
     }
     for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
-      getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
+      collectAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
+    }
+    if (typeDescriptor.isJsFunctionInterface()) {
+      for (TypeDescriptor jsFunctionTypeParameter :
+          typeDescriptor.getJsFunctionMethodDescriptor().getTypeParameterTypeDescriptors()) {
+        collectAllTypeVariables(jsFunctionTypeParameter, typeVariables);
+      }
     }
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
@@ -755,6 +797,7 @@ public abstract class TypeDescriptor extends Node
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
+        .setSingleAbstractMethodDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null)
         .setTypeDeclaration(null);
   }
@@ -828,6 +871,15 @@ public abstract class TypeDescriptor extends Node
       return setRawTypeDescriptorFactory(typeDescriptor -> rawTypeDescriptorFactory.get());
     }
 
+    public abstract Builder setSingleAbstractMethodDescriptorFactory(
+        DescriptorFactory<MethodDescriptor> singleAbstractMethodDescriptorFactory);
+
+    public Builder setSingleAbstractMethodDescriptorFactory(
+        Supplier<MethodDescriptor> singleAbstractMethodDescriptorFactory) {
+      return setSingleAbstractMethodDescriptorFactory(
+          typeDescriptor -> singleAbstractMethodDescriptorFactory.get());
+    }
+
     public abstract Builder setSuperTypeDescriptorFactory(
         DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory);
 
@@ -870,10 +922,6 @@ public abstract class TypeDescriptor extends Node
       // Can not be both a JsFunction implementation and js function interface
       checkState(
           !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isJsFunctionInterface());
-
-      // Can not be both a JsFunction implementation and a functional interface
-      checkState(
-          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isFunctionalInterface());
 
       // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
       // type descriptor that does not make sense.
@@ -1048,12 +1096,4 @@ public abstract class TypeDescriptor extends Node
     return hasTypeDeclaration() ? getTypeDeclaration().getMaxInterfaceDepth() : 1;
   }
 
-  /** Returns a the unparameterized version of {@code typeDescriptors}. */
-  public static ImmutableList<TypeDescriptor> toUnparameterizedTypeDescriptors(
-      List<TypeDescriptor> typeDescriptors) {
-    return typeDescriptors
-        .stream()
-        .map(TypeDescriptor::unparameterizedTypeDescriptor)
-        .collect(toImmutableList());
-  }
 }

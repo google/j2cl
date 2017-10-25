@@ -42,16 +42,36 @@
     return null;
   }] => [LambdaWithGenerics.$clinit();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.m"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.m"
-[test1(i -> i, new Error());] => [this.m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(/**@type {!$Lambda$MyInterface$0<C_E>} */ ($Lambda$MyInterface$0.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this)), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
-[test2(i -> i, new Error());] => [this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(/**@type {!$Lambda$MyInterface$1<C_E>} */ ($Lambda$MyInterface$1.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this)), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
-[test3(i -> i, (Enum<T>) null);] => [/**@type {Enum<Enum>} */ (LambdaWithGenerics.m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(/**@type {!$Lambda$MyInterface$2<Enum, C_E>} */ ($Lambda$MyInterface$2.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this)), /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
-[Function<? super T, ?> f = item -> 1L;] => [let f = /**@type {!$Lambda$Function$3<Enum, C_E>} */ ($Lambda$Function$3.$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(this));] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
+[test1(i -> i, new Error());] => [this.m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(/**@type {MyInterface<Error>} */ (MyInterface.$adapt(((/** Error */ i) =>{
+      return i;
+    }))), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
+[i] => [i] "i"
+[i] => [return i;] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<lambda in testLambdaNoCapture>"
+[test2(i -> i, new Error());] => [this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(/**@type {MyInterface<Error>} */ (MyInterface.$adapt(((/** Error */ i$1$) =>{
+      return i$1$;
+    }))), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
+[i] => [i$1$] "i"
+[i] => [return i$1$;] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<lambda in testLambdaNoCapture>"
+[test3(i -> i, (Enum<T>) null);] => [/**@type {Enum<Enum>} */ (LambdaWithGenerics.m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(/**@type {MyInterface<Enum<Enum>>} */ (MyInterface.$adapt(((/** Enum<Enum> */ i$2$) =>{
+      return i$2$;
+    }))), /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
+[i] => [i$2$] "i"
+[i] => [return i$2$;] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<lambda in testLambdaNoCapture>"
+[Function<? super T, ?> f = item -> 1L;] => [let f = /**@type {java_util_function_Function<?, ?>} */ (java_util_function_Function.$adapt(((/** Enum */ item) =>{
+      return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
+    })));] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLambdaNoCapture"
 [f] => [f] "f"
+[item] => [item] "item"
+[1L] => [return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<lambda in testLambdaNoCapture>"
 [public static void testLabdaCallingStaticMethod() {
     Function<Object, ?> f = l -> m();
   }] => [LambdaWithGenerics.$clinit();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLabdaCallingStaticMethod"
-[Function<Object, ?> f = l -> m();] => [let f = $Lambda$Function$4.$create__();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLabdaCallingStaticMethod"
+[Function<Object, ?> f = l -> m();] => [let f = /**@type {java_util_function_Function<*, ?>} */ (java_util_function_Function.$adapt(((/** * */ l) =>{
+      return LambdaWithGenerics.m_m__();
+    })));] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.testLabdaCallingStaticMethod"
 [f] => [f] "f"
+[l] => [l] "l"
+[m()] => [return LambdaWithGenerics.m_m__();] "com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.<lambda in testLabdaCallingStaticMethod>"
 [public class LambdaWithGenerics<E> {
   public <T> T test1(MyInterface<T> intf, T e) {
 ...  }

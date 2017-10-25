@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.backwardbridgemethod.I$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.backwardbridgemethod.I.$LambdaAdaptor$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -23,6 +24,16 @@ class I {
    * @public
    */
   m_get__java_lang_String(s) {}
+
+  /**
+   * @param {?function(?string):?string} fn
+   * @return {I}
+   * @public
+   */
+  static $adapt(fn) {
+    I.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -69,6 +80,8 @@ class I {
    */
   static $clinit() {
     I.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.backwardbridgemethod.I.$LambdaAdaptor$impl');
   }
 };
 

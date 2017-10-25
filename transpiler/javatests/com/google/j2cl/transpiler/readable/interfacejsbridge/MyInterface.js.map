@@ -1,1 +1,7 @@
 [a] => [a] "a"
+[interface MyInterface {
+  int foo(int a);
+}] => [MyInterface.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface.<synthetic: adapt_lambda>"
+[interface MyInterface {
+  int foo(int a);
+}] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface.<synthetic: adapt_lambda>"

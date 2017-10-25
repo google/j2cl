@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferenc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -23,6 +26,17 @@ class BiFunction {
    * @public
    */
   m_apply__java_lang_Object__java_lang_Object(t, u) {}
+
+  /**
+   * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_V
+   * @param {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V} fn
+   * @return {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_V>}
+   * @public
+   */
+  static $adapt(fn) {
+    BiFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<*, *, *>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -69,6 +83,8 @@ class BiFunction {
    */
   static $clinit() {
     BiFunction.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
   }
 };
 

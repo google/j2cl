@@ -29,7 +29,7 @@ interface Cmp {
   int cmp();
 }
 
-interface Cmp2 {
+interface Cmp2<T> {
   int cmp(int a);
 }
 
@@ -67,7 +67,7 @@ public class IntersectionTypeTest<U> {
     return s;
   }
 
-  // TODO(tdeegan): Lambdas do not have the correct types applied yet.  Jdt only recognizes this
+  // TODO(b/67780070): Lambdas do not have the correct types applied yet.  Jdt only recognizes this
   // Lambda as Cmp whereas it should recognize Cmp and Serial.
   // https://bugs.eclipse.org/bugs/show_bug.cgi?id=496596
   public static Cmp method() {

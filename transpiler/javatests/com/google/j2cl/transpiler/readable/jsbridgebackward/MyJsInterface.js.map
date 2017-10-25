@@ -1,1 +1,9 @@
 [a] => [a] "a"
+[@JsType
+interface MyJsInterface {
+  int foo(int a);
+}] => [MyJsInterface.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.<synthetic: adapt_lambda>"
+[@JsType
+interface MyJsInterface {
+  int foo(int a);
+}] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.<synthetic: adapt_lambda>"

@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.A
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$Overlay$impl');
+
 
 /**
  * @interface
@@ -26,6 +29,16 @@ class J {
    * @public
    */
   m_bar__() {}
+
+  /**
+   * @param {?function():void} fn
+   * @return {J}
+   * @public
+   */
+  static $adapt(fn) {
+    J.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -72,6 +85,8 @@ class J {
    */
   static $clinit() {
     J.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');
   }
 };
 

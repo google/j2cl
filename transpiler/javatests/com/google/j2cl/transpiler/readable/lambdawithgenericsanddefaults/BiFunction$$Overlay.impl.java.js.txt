@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.B
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let BiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$impl');
-let $Lambda$BiFunction$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$Lambda$BiFunction$0$impl');
 let com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
@@ -26,10 +25,11 @@ class $Overlay {
   static m_andThen__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function(
       $thisArg, after) {
     $Overlay.$clinit();
-    return /**@type {!$Lambda$BiFunction$0<*, *, *, *>} */ (
-        $Lambda$BiFunction$0
-            .$create__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function(
-                $thisArg, after));
+    return /**@type {BiFunction<*, *, *>} */ (
+        BiFunction.$adapt(((/** * */ t, /** * */ u) => {
+          return after.m_apply__java_lang_Object(
+              $thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
+        })));
   }
 
   /**
@@ -49,8 +49,8 @@ class $Overlay {
    */
   static $clinit() {
     $Overlay.$clinit = function() {};
-    $Lambda$BiFunction$0 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$Lambda$BiFunction$0$impl');
+    BiFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$impl');
   }
 };
 

@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferenc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -23,6 +26,18 @@ class
    * @public
    */
   m_apply__java_lang_Object(t) {}
+
+  /**
+   * @template C_Function_T, C_Function_U
+   * @param {?function(C_Function_T):C_Function_U} fn
+   * @return {com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function<C_Function_T, C_Function_U>}
+   * @public
+   */
+  static $adapt(fn) {
+    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
+        .$clinit();
+    return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -70,6 +85,8 @@ class
   static $clinit() {
     com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
         .$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
   }
 };
 

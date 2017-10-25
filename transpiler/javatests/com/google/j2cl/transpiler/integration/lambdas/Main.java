@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.lambdas;
 
+@SuppressWarnings("MultipleTopLevelClasses")
 interface MyInterface {
   int foo(int i);
 }
@@ -77,6 +78,29 @@ public class Main {
     assert (this.field == 200);
   }
 
+  interface Equals<T> {
+    @Override
+    boolean equals(Object object);
+
+    default T get() {
+      return null;
+    }
+  }
+
+  interface SubEquals extends Equals<String> {
+    @Override
+    String get();
+  }
+
+  @SuppressWarnings({"SelfEquals", "EqualsIncompatibleType"})
+  public void testSpecialLambdas() {
+    SubEquals getHello = () -> "Hello";
+
+    assert getHello.equals(getHello);
+    assert !getHello.equals("Hello");
+    assert "Hello".equals(getHello.get());
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     m.testLambdaNoCapture();
@@ -85,5 +109,6 @@ public class Main {
     m.testLambdaCaptureLocal();
     m.testLambdaCaptureFieldAndLocal();
     m.testLambdaCaptureField2();
+    m.testSpecialLambdas();
   }
 }

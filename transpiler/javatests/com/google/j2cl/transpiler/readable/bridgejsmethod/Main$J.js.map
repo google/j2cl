@@ -1,1 +1,9 @@
 [t] => [t] "t"
+[/** Interface with non-JsMethod. */
+  public interface J<T> {
+    void bar(T t);
+  }] => [J.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J.<synthetic: adapt_lambda>"
+[/** Interface with non-JsMethod. */
+  public interface J<T> {
+    void bar(T t);
+  }] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J.<synthetic: adapt_lambda>"

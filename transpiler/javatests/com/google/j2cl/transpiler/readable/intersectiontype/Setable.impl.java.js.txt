@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl')
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Setable.$LambdaAdaptor$impl');
+
 
 /**
  * @interface
@@ -21,6 +23,16 @@ class Setable {
    * @public
    */
   m_set__int(i) {}
+
+  /**
+   * @param {?function(number):void} fn
+   * @return {Setable}
+   * @public
+   */
+  static $adapt(fn) {
+    Setable.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +79,8 @@ class Setable {
    */
   static $clinit() {
     Setable.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.Setable.$LambdaAdaptor$impl');
   }
 };
 

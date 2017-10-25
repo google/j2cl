@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferenc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class ArrayProducer {
    * @public
    */
   m_produce__int(size) {}
+
+  /**
+   * @template C_ArrayProducer_T
+   * @param {?function(number):Array<C_ArrayProducer_T>} fn
+   * @return {ArrayProducer<C_ArrayProducer_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    ArrayProducer.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class ArrayProducer {
    */
   static $clinit() {
     ArrayProducer.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
   }
 };
 

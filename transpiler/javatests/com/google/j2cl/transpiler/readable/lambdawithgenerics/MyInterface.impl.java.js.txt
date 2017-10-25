@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class MyInterface {
    * @public
    */
   m_foo__java_lang_Object(i) {}
+
+  /**
+   * @template C_T
+   * @param {?function(C_T):C_T} fn
+   * @return {MyInterface<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    MyInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class MyInterface {
    */
   static $clinit() {
     MyInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface.$LambdaAdaptor$impl');
   }
 };
 

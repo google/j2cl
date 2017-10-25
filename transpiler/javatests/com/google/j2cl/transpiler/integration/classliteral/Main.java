@@ -21,9 +21,9 @@ import jsinterop.annotations.JsType;
 
 public class Main {
 
-  class Foo {}
+  private class Foo {}
 
-  public static void testClass() {
+  private static void testClass() {
     Object o = new Main();
     assertSame(Main.class, o.getClass());
     assertSame(Object.class, o.getClass().getSuperclass());
@@ -52,12 +52,12 @@ public class Main {
     assert !Foo.class.isArray() : "Foo.class.isArray() returned true";
     assert !Foo.class.isEnum() : "Foo.class.isEnum() returned true";
     assert !Foo.class.isPrimitive() : "Foo.class.isPrimitive() returned true";
-    assert !Foo.class.isInterface() : "Foo.class.isArray() returned true";
+    assert !Foo.class.isInterface() : "Foo.class.isInterface() returned true";
   }
 
-  interface IFoo {}
+  private interface IFoo {}
 
-  public static void testInterface() {
+  private static void testInterface() {
     assertSame(null, IFoo.class.getSuperclass());
 
     assertEquals(
@@ -78,7 +78,7 @@ public class Main {
     assert IFoo.class.isInterface() : "IFoo.class.isInterface() returned false";
   }
 
-  public static void testPrimitive() {
+  private static void testPrimitive() {
     assertSame(null, int.class.getSuperclass());
 
     assertEquals("int", int.class.getName());
@@ -92,19 +92,19 @@ public class Main {
     assert !int.class.isInterface() : "int.class.isInterface() returned true";
   }
 
-  public static void testPrimitivesUnboxed() {
+  private static void testPrimitivesUnboxed() {
     Object b = true;
     Object d = 0.1;
     assertEquals(Boolean.class, b.getClass());
     assertEquals(Double.class, d.getClass());
   }
 
-  static enum Bar {
+  private enum Bar {
     BAR,
-    BAZ {};
+    BAZ {}
   }
 
-  public static void testEnum() {
+  private static void testEnum() {
     Object o = Bar.BAR;
     assertSame(Bar.class, o.getClass());
     assertSame(Enum.class, o.getClass().getSuperclass());
@@ -128,7 +128,7 @@ public class Main {
     assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
   }
 
-  public static void testEnumSubclass() {
+  private static void testEnumSubclass() {
     Object o = Bar.BAZ;
     assertNotSame(Bar.class, o.getClass());
     assertSame(Bar.class, o.getClass().getSuperclass());
@@ -145,7 +145,7 @@ public class Main {
     assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
   }
 
-  public static void testArray() {
+  private static void testArray() {
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
     assertSame(Object.class, o.getClass().getSuperclass());
@@ -169,23 +169,85 @@ public class Main {
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  interface NativeType {}
+  private interface NativeType {}
 
   @JsFunction
-  interface NativeFunction {
+  private interface NativeFunction {
     void f();
   }
 
-  public static void testNative() {
+  private static void testNative() {
     assertEquals("<native object>", NativeType.class.getName());
     assertEquals("<native function>", NativeFunction.class.getName());
   }
 
-  static class GenericClass<T> {}
+  private interface SomeFunctionalInterface {
+    void m();
+  }
 
-  interface GenericInterface<T> {}
+  private interface SomeOtherFunctionalInterface {
+    void m();
+  }
 
-  public static void testGeneric() {
+  private static void testLambda() {
+    SomeFunctionalInterface originalLambda = () -> {};
+    SomeFunctionalInterface lambdaWithSameInterfaceAsOriginalLambda = () -> {};
+
+    // TODO(b/67589892): lambda instances are all instances of the same adaptor class, sharing
+    // the class literal. Uncomment the test when this is fixed.
+
+    // Different lambda instances should have different class objects, even if they implement the
+    // same functional interface.
+    // assertNotSame(
+    //     originalLambda.getClass(),
+    //     lambdaWithSameInterfaceAsOriginalLambda.getClass());
+
+    assertSame(originalLambda.getClass(), originalLambda.getClass());
+
+    // TODO(b/67589892): redundant after above assert are enabled, remove.
+    // Lambda instances implementing different interfaces should have different class objects.
+    SomeOtherFunctionalInterface lambdaWithDifferentInterface = () -> {};
+    assertNotSame(originalLambda.getClass(), lambdaWithDifferentInterface.getClass());
+
+    assert !originalLambda.getClass().isArray() : "lambda.getClass().isArray() returned true";
+    assert !originalLambda.getClass().isEnum() : "lambda.getClass().isEnum() returned true";
+    assert !originalLambda.getClass().isPrimitive()
+        : "lambda.getClass().isPrimitive() returned true";
+    assert !originalLambda.getClass().isInterface()
+        : "lambda.getClass().isInterface() returned true";
+  }
+
+  private interface SomeFunctionalInterfaceWithParameter {
+    void m(int a);
+  }
+
+  private interface MarkerInterface {}
+
+  private static void testLambdaIntersectionType() {
+    SomeFunctionalInterfaceWithParameter intersectionLambda =
+        (SomeFunctionalInterfaceWithParameter & MarkerInterface) (a) -> {};
+    SomeFunctionalInterfaceWithParameter anotherIntersectionLambda =
+        (SomeFunctionalInterfaceWithParameter & MarkerInterface) (a) -> {};
+    SomeFunctionalInterfaceWithParameter lambdaWithSameInterfaceAsOriginalLambda = (a) -> {};
+
+    assertSame(intersectionLambda.getClass(), intersectionLambda.getClass());
+    assertNotSame(intersectionLambda.getClass(), anotherIntersectionLambda.getClass());
+    assertNotSame(
+        intersectionLambda.getClass(), lambdaWithSameInterfaceAsOriginalLambda.getClass());
+
+    assert !intersectionLambda.getClass().isArray() : "lambda.getClass().isArray() returned true";
+    assert !intersectionLambda.getClass().isEnum() : "lambda.getClass().isEnum() returned true";
+    assert !intersectionLambda.getClass().isPrimitive()
+        : "lambda.getClass().isPrimitive() returned true";
+    assert !intersectionLambda.getClass().isInterface()
+        : "lambda.getClass().isInterface() returned true";
+  }
+
+  private static class GenericClass<T> {}
+
+  private interface GenericInterface<T> {}
+
+  private static void testGeneric() {
     GenericClass<Number> g = new GenericClass<>();
     assertSame(GenericClass.class, g.getClass());
     assertEquals("Main$GenericClass", GenericClass.class.getSimpleName());
@@ -194,7 +256,7 @@ public class Main {
 
   private static boolean clinitCalled = false;
 
-  static class ClinitTest {
+  private static class ClinitTest {
     static {
       clinitCalled = true;
     }
@@ -207,7 +269,7 @@ public class Main {
   }
 
   @SuppressWarnings("GetClassOnClass")
-  public static void testMisc() {
+  private static void testMisc() {
     assertSame(Class.class, Object.class.getClass());
     assertSame(Class.class, int.class.getClass());
     assertSame(Class.class, Object[].class.getClass());
@@ -233,6 +295,8 @@ public class Main {
     testGeneric();
     testClinit();
     testMisc();
+    testLambda();
+    testLambdaIntersectionType();
   }
 
   private static void assertEquals(Object expected, Object actual) {

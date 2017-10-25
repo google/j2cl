@@ -1,2 +1,10 @@
 [t] => [t] "t"
 [o] => [o] "o"
+[@JsType
+  interface I<T> {
+    void m(T t, @JsOptional Object o);
+  }] => [I.$clinit();] "com.google.j2cl.transpiler.readable.jsoptional.Main$I.<synthetic: adapt_lambda>"
+[@JsType
+  interface I<T> {
+    void m(T t, @JsOptional Object o);
+  }] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.jsoptional.Main$I.<synthetic: adapt_lambda>"

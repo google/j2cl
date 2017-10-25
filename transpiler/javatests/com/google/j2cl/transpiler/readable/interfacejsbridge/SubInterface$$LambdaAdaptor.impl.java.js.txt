@@ -1,0 +1,122 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface.$LambdaAdaptor$impl');
+
+
+const SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @implements {SubInterface}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(number):number} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function(number):number} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(number):number} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  foo(arg0) {
+    let /** ?function(number):number */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) {
+    return this.foo(arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface$$LambdaAdaptor'));
+
+
+SubInterface.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=SubInterface$$LambdaAdaptor.js.map

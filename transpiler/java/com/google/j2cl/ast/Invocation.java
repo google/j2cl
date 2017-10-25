@@ -56,6 +56,10 @@ public abstract class Invocation extends Expression implements MemberReference {
       return invocation.createBuilder();
     }
 
+    public Builder setArguments(Expression... arguments) {
+      return setArguments(Arrays.asList(arguments));
+    }
+
     public Builder setArguments(List<Expression> arguments) {
       this.arguments.clear();
       this.arguments.addAll(arguments);

@@ -11,6 +11,7 @@ const Equals = goog.require('com.google.j2cl.transpiler.readable.lambdajsinterop
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals.$Overlay$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier.$LambdaAdaptor$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 
@@ -26,6 +27,18 @@ class JsSupplier {
    * @public
    */
   get() {}
+
+  /**
+   * @template C_JsSupplier_T
+   * @param {?function():C_JsSupplier_T} fn
+   * @return {JsSupplier<C_JsSupplier_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    JsSupplier.$clinit();
+    return /**@type {!$LambdaAdaptor<(Number|?number)>} */ (
+        new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -73,6 +86,8 @@ class JsSupplier {
    */
   static $clinit() {
     JsSupplier.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier.$LambdaAdaptor$impl');
     Equals.$clinit();
   }
 };

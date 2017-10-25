@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface$i
 const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.interfaceuse.SomeInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface.$LambdaAdaptor$impl');
+
 
 /**
  * @interface
@@ -22,6 +24,16 @@ class AnotherInterface {
    * @public
    */
   m_run__() {}
+
+  /**
+   * @param {?function():number} fn
+   * @return {AnotherInterface}
+   * @public
+   */
+  static $adapt(fn) {
+    AnotherInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -69,6 +81,8 @@ class AnotherInterface {
    */
   static $clinit() {
     AnotherInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface.$LambdaAdaptor$impl');
   }
 };
 

@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I$imp
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -30,6 +33,17 @@ class I {
   static m_staticFoo__() {
     I.$clinit();
     return 0;
+  }
+
+  /**
+   * @template C_T
+   * @param {?function(C_T):number} fn
+   * @return {I<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    I.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
   }
 
   /**
@@ -77,6 +91,8 @@ class I {
    */
   static $clinit() {
     I.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.$LambdaAdaptor$impl');
   }
 };
 

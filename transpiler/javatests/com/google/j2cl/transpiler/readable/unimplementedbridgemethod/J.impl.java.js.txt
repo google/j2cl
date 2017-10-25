@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J$imp
 const I = goog.require('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -18,6 +19,16 @@ let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
  * @extends {I<?string>}
  */
 class J {
+  /**
+   * @param {?function(?string):number} fn
+   * @return {J}
+   * @public
+   */
+  static $adapt(fn) {
+    J.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
   /**
    * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
@@ -64,6 +75,8 @@ class J {
    */
   static $clinit() {
     J.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
   }
 };
 

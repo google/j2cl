@@ -13,8 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Cmp = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
 let Cmp2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
 let Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
-let $Lambda$Cmp$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp$0$impl');
-let $Lambda$Cmp2$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp2$1$impl');
+let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
 let EmptyA = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
 let EmptyB = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
@@ -130,8 +129,13 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp} */ (
-        $Casts.$to($Casts.$to($Lambda$Cmp$0.$create__(), Cmp), Serial));
+    return /**@type {Cmp} */ ($Casts.$to(
+        $Casts.$to(
+            Cmp.$adapt((() => {
+              return 1;
+            })),
+            Cmp),
+        Serial));
   }
 
   /**
@@ -140,8 +144,13 @@ class IntersectionTypeTest extends java_lang_Object {
    */
   static m_method2__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp2} */ (
-        $Casts.$to($Casts.$to($Lambda$Cmp2$1.$create__(), Cmp2), Serial));
+    return /**@type {Cmp2} */ ($Casts.$to(
+        $Casts.$to(
+            new $LambdaAdaptor$1(((/** number */ a) => {
+              return 1;
+            })),
+            Cmp2),
+        Serial));
   }
 
   /**
@@ -255,10 +264,8 @@ class IntersectionTypeTest extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
-    $Lambda$Cmp$0 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp$0$impl');
-    $Lambda$Cmp2$1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Lambda$Cmp2$1$impl');
+    $LambdaAdaptor$1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
     EmptyA = goog.module.get(

@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface$i
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface.$LambdaAdaptor$impl');
+
 
 /**
  * @interface
@@ -21,6 +23,16 @@ class MyInterface {
    * @public
    */
   m_foo__int(a) {}
+
+  /**
+   * @param {?function(number):number} fn
+   * @return {MyInterface}
+   * @public
+   */
+  static $adapt(fn) {
+    MyInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +79,8 @@ class MyInterface {
    */
   static $clinit() {
     MyInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface.$LambdaAdaptor$impl');
   }
 };
 

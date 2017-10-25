@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.P$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.P.$LambdaAdaptor$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -22,6 +23,16 @@ class P {
    * @public
    */
   m_getKey__() {}
+
+  /**
+   * @param {?function():?string} fn
+   * @return {P}
+   * @public
+   */
+  static $adapt(fn) {
+    P.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +79,8 @@ class P {
    */
   static $clinit() {
     P.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.P.$LambdaAdaptor$impl');
   }
 };
 

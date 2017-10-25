@@ -1,1 +1,7 @@
 [t] => [t] "t"
+[public interface SimpleGenericInterface<T> {
+  T fun(T t);
+}] => [SimpleGenericInterface.$clinit();] "com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface.<synthetic: adapt_lambda>"
+[public interface SimpleGenericInterface<T> {
+  T fun(T t);
+}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface.<synthetic: adapt_lambda>"

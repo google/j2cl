@@ -26,8 +26,11 @@
   interface Runner {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope();] "com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.<init>"
-[Runner runner = () -> new Object() {};] => [let runner = $Lambda$Runner$0.$create__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope(this);] "com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.test"
+[Runner runner = () -> new Object() {};] => [let runner = Runner.$adapt((() =>{
+      return $1.$create__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope(this);
+    }));] "com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.test"
 [runner] => [runner] "runner"
+[new Object() {}] => [return $1.$create__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope(this);] "com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.<lambda in test>"
 [public class LambdaNestedScope {
   interface Runner {
 ...  }

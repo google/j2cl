@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.F
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Lambda$Function$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$Lambda$Function$1$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$LambdaAdaptor$impl');
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
@@ -27,8 +27,11 @@ class
   static m_identity__() {
     com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
         .$clinit();
-    return /**@type {!$Lambda$Function$1<*>} */ (
-        $Lambda$Function$1.$create__());
+    return /**@type {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<*, *>} */ (
+        com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
+            .$adapt(((/** * */ t) => {
+              return t;
+            })));
   }
 
   /**
@@ -38,6 +41,18 @@ class
    * @public
    */
   m_apply__java_lang_Object(t) {}
+
+  /**
+   * @template C_T, C_R
+   * @param {?function(C_T):C_R} fn
+   * @return {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<C_T, C_R>}
+   * @public
+   */
+  static $adapt(fn) {
+    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
+        .$clinit();
+    return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -85,8 +100,8 @@ class
   static $clinit() {
     com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
         .$clinit = function() {};
-    $Lambda$Function$1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$Lambda$Function$1$impl');
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$LambdaAdaptor$impl');
   }
 };
 

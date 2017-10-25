@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let $Overlay = goog.forwardDeclare('java.util.function.Consumer.$Overlay$impl');
@@ -26,6 +28,17 @@ class I {
    * @public
    */
   m_get__java_util_function_Consumer(consumer) {}
+
+  /**
+   * @template C_I1
+   * @param {?function(Consumer<?>):?string} fn
+   * @return {I<C_I1>}
+   * @public
+   */
+  static $adapt(fn) {
+    I.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -72,6 +85,8 @@ class I {
    */
   static $clinit() {
     I.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I.$LambdaAdaptor$impl');
   }
 };
 

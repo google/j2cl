@@ -95,7 +95,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
     SYNTHETIC_INSTANCE_INITIALIZER("<init>"),
     SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
-    SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>");
+    SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
+    SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>");
 
     private final String methodName;
 

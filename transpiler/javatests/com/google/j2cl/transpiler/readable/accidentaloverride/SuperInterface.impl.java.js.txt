@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterfa
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class SuperInterface {
    * @public
    */
   m_foo__java_lang_Object(t) {}
+
+  /**
+   * @template C_T
+   * @param {?function(C_T):void} fn
+   * @return {SuperInterface<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    SuperInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class SuperInterface {
    */
   static $clinit() {
     SuperInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
   }
 };
 

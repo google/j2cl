@@ -18,6 +18,8 @@ package com.google.j2cl.ast;
 /** Constants supporting manipulation of J2CL AST. */
 public class AstUtilConstants {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
+  public static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
+  public static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
 

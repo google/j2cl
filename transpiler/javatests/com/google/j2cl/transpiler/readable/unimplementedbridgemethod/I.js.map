@@ -3,3 +3,11 @@
     return 0;
   }] => [I.$clinit();] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.staticFoo"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.staticFoo"
+[interface I<T> {
+  int foo(T t);
+...  }
+}] => [I.$clinit();] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.<synthetic: adapt_lambda>"
+[interface I<T> {
+  int foo(T t);
+...  }
+}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.<synthetic: adapt_lambda>"

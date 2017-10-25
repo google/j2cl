@@ -158,7 +158,7 @@ public class AstUtils {
   public static List<String> synthesizeInnerClassComponents(
       TypeDescriptor enclosingType, Object... parts) {
     List<String> classComponents = Lists.newArrayList(enclosingType.getClassComponents());
-    classComponents.add("$" + Joiner.on("$").join(parts));
+    classComponents.add("$" + Joiner.on("$").skipNulls().join(parts));
     return classComponents;
   }
 
@@ -478,8 +478,6 @@ public class AstUtils {
       boolean isStaticDispatch,
       boolean isOverride) {
     checkArgument(!fromMethodDescriptor.getEnclosingTypeDescriptor().isInterface());
-    checkArgument(fromMethodDescriptor.isSynthetic());
-    checkArgument(fromMethodDescriptor.isBridge());
 
     List<Variable> parameters =
         createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());

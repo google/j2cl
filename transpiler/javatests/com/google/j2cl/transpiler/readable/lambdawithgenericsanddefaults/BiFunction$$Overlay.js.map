@@ -2,4 +2,9 @@
 [default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
     return (t, u) -> after.apply(this.apply(t, u));
   }] => [$Overlay.$clinit();] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay.andThen"
-[return (t, u) -> after.apply(this.apply(t, u));] => [return /**@type {!$Lambda$BiFunction$0<*, *, *, *>} */ ($Lambda$BiFunction$0.$create__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function($thisArg, after));] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay.andThen"
+[return (t, u) -> after.apply(this.apply(t, u));] => [return /**@type {BiFunction<*, *, *>} */ (BiFunction.$adapt(((/** * */ t, /** * */ u) =>{
+      return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
+    })));] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay.andThen"
+[t] => [t] "t"
+[u] => [u] "u"
+[after.apply(this.apply(t, u))] => [return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));] "com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$$Overlay.<lambda in andThen>"

@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I.$LambdaAdaptor$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 
@@ -24,6 +25,18 @@ class I {
    * @public
    */
   fun(t) {}
+
+  /**
+   * @template C_I_T
+   * @param {?function(C_I_T):C_I_T} fn
+   * @return {I<C_I_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    I.$clinit();
+    return /**@type {!$LambdaAdaptor<(Number|?number)>} */ (
+        new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -70,6 +83,8 @@ class I {
    */
   static $clinit() {
     I.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I.$LambdaAdaptor$impl');
   }
 };
 

@@ -9,6 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedS
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.Runner.$LambdaAdaptor$impl');
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
@@ -22,6 +23,16 @@ class Runner {
    * @public
    */
   m_run__() {}
+
+  /**
+   * @param {?function():*} fn
+   * @return {Runner}
+   * @public
+   */
+  static $adapt(fn) {
+    Runner.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +79,8 @@ class Runner {
    */
   static $clinit() {
     Runner.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.Runner.$LambdaAdaptor$impl');
   }
 };
 

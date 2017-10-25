@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -24,6 +26,17 @@ class Collection {
    * @public
    */
   m_getFoo__java_lang_Object(t) {}
+
+  /**
+   * @template C_Collection_T
+   * @param {?function(C_Collection_T):?string} fn
+   * @return {Collection<C_Collection_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    Collection.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -70,6 +83,8 @@ class Collection {
    */
   static $clinit() {
     Collection.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
   }
 };
 

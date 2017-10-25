@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class G {
    * @public
    */
   m_enclose__java_lang_Object(value) {}
+
+  /**
+   * @template C_G_V
+   * @param {?function(C_G_V):C_G_V} fn
+   * @return {G<C_G_V>}
+   * @public
+   */
+  static $adapt(fn) {
+    G.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class G {
    */
   static $clinit() {
     G.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G.$LambdaAdaptor$impl');
   }
 };
 

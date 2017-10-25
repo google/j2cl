@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubCla
 const Parent = goog.require('com.google.j2cl.transpiler.readable.lambdainsubclass.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Lambda$LambdaInterface$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.$Lambda$LambdaInterface$0$impl');
+let LambdaInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
 
 
 class LambdaInSubClass extends Parent {
@@ -50,10 +50,16 @@ class LambdaInSubClass extends Parent {
    * @public
    */
   m_test__() {
-    let l =
-        $Lambda$LambdaInterface$0
-            .$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(
-                this);
+    let l = LambdaInterface.$adapt(((/** number */ i) => {
+      this.m_funInParent__();
+      this.m_funInParent__();
+      this.m_funInParent__();
+      let a =
+          this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;
+      a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;
+      a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent;
+      return a;
+    }));
   }
 
   /**
@@ -82,8 +88,8 @@ class LambdaInSubClass extends Parent {
    */
   static $clinit() {
     LambdaInSubClass.$clinit = function() {};
-    $Lambda$LambdaInterface$0 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.$Lambda$LambdaInterface$0$impl');
+    LambdaInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
     Parent.$clinit();
   }
 

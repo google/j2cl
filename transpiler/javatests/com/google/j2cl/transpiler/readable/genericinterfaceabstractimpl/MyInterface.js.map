@@ -1,1 +1,7 @@
 [t] => [t] "t"
+[public interface MyInterface<T> {
+  T fun(T t);
+}] => [MyInterface.$clinit();] "com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.MyInterface.<synthetic: adapt_lambda>"
+[public interface MyInterface<T> {
+  T fun(T t);
+}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.MyInterface.<synthetic: adapt_lambda>"

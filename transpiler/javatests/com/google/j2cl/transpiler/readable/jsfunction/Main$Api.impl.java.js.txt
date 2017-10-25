@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Api$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.Api.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -21,6 +24,17 @@ class Api {
    * @public
    */
   m_anApi__() {}
+
+  /**
+   * @template M_Api_anApi_T
+   * @param {?function():?function(M_Api_anApi_T):void} fn
+   * @return {Api}
+   * @public
+   */
+  static $adapt(fn) {
+    Api.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,6 +81,8 @@ class Api {
    */
   static $clinit() {
     Api.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.Api.$LambdaAdaptor$impl');
   }
 };
 

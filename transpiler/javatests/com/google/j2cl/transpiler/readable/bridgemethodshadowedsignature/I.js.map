@@ -1,1 +1,7 @@
 [consumer] => [consumer] "consumer"
+[interface I<I1> {
+  String get(Consumer<? super I1> consumer);
+}] => [I.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I.<synthetic: adapt_lambda>"
+[interface I<I1> {
+  String get(Consumer<? super I1> consumer);
+}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I.<synthetic: adapt_lambda>"

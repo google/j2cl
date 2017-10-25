@@ -1,1 +1,7 @@
 [s] => [s] "s"
+[public interface I<T, S> {
+  T fun(S s);
+}] => [I.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.I.<synthetic: adapt_lambda>"
+[public interface I<T, S> {
+  T fun(S s);
+}] => [return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgemethodsreturn.I.<synthetic: adapt_lambda>"

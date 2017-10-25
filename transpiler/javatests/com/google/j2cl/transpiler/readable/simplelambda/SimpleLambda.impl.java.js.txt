@@ -11,13 +11,6 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
-let $Lambda$MyInterface$0 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$0$impl');
-let $Lambda$MyInterface$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$1$impl');
-let $Lambda$MyInterface$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2$impl');
-let $Lambda$MyInterface$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$3$impl');
-let $Lambda$MyInterface$4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$4$impl');
-let $Lambda$MyInterface$5 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5$impl');
-let $Lambda$MyInterface$6 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$6$impl');
 
 
 class SimpleLambda extends java_lang_Object {
@@ -80,15 +73,15 @@ class SimpleLambda extends java_lang_Object {
   m_testLambdaNoCapture__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$0
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-                    this),
+            MyInterface.$adapt(((/** number */ i) => {
+              return i + 1;
+            })),
             10);
     result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$1
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-                    this),
+            MyInterface.$adapt(((/** number */ i$1$) => {
+              return i$1$ + 2;
+            })),
             10);
   }
 
@@ -99,9 +92,10 @@ class SimpleLambda extends java_lang_Object {
   m_testLambdaCaptureField__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$2
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-                    this),
+            MyInterface.$adapt(((/** number */ i) => {
+              return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
+                  i + 1;
+            })),
             10);
   }
 
@@ -113,9 +107,9 @@ class SimpleLambda extends java_lang_Object {
     let x = 1;
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$3
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(
-                    this, x),
+            MyInterface.$adapt(((/** number */ i) => {
+              return x + i + 1;
+            })),
             10);
   }
 
@@ -127,9 +121,12 @@ class SimpleLambda extends java_lang_Object {
     let x = 1;
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$4
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__int(
-                    this, x),
+            MyInterface.$adapt(((/** number */ i) => {
+              let y = 1;
+              return x + y +
+                  this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
+                  i + 1;
+            })),
             10);
   }
 
@@ -140,9 +137,12 @@ class SimpleLambda extends java_lang_Object {
   m_testLambdaCallOuterFunction__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
-            $Lambda$MyInterface$5
-                .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-                    this),
+            MyInterface.$adapt(((/** number */ i) => {
+              this.m_funOuter__();
+              this.m_funOuter__();
+              this.m_funOuter__();
+              return i + 2;
+            })),
             10);
   }
 
@@ -152,7 +152,9 @@ class SimpleLambda extends java_lang_Object {
    */
   static m_testLambdaInStaticContext__() {
     SimpleLambda.$clinit();
-    let f = $Lambda$MyInterface$6.$create__();
+    let f = MyInterface.$adapt(((/** number */ i) => {
+      return i;
+    }));
   }
 
   /**
@@ -181,20 +183,8 @@ class SimpleLambda extends java_lang_Object {
    */
   static $clinit() {
     SimpleLambda.$clinit = function() {};
-    $Lambda$MyInterface$0 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$0$impl');
-    $Lambda$MyInterface$1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$1$impl');
-    $Lambda$MyInterface$2 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$2$impl');
-    $Lambda$MyInterface$3 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$3$impl');
-    $Lambda$MyInterface$4 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$4$impl');
-    $Lambda$MyInterface$5 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$5$impl');
-    $Lambda$MyInterface$6 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$Lambda$MyInterface$6$impl');
+    MyInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
     java_lang_Object.$clinit();
   }
 

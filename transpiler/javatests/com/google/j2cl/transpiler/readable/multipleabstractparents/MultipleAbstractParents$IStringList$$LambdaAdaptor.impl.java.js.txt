@@ -1,0 +1,128 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
+
+
+const IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {IStringList}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(?string):?string} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function(?string):?string} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(?string):?string} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  m_getFoo__java_lang_String(arg0) {
+    let /** ?function(?string):?string */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {?string}
+   * @public
+   */
+  m_getFoo__java_lang_Object(arg0) {
+    return this.m_getFoo__java_lang_String(
+        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList$$LambdaAdaptor'));
+
+
+IStringList.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=MultipleAbstractParents$IStringList$$LambdaAdaptor.js.map

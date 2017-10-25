@@ -1,0 +1,112 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
+
+
+const MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template C_F, C_T
+ * @implements {MyFunction<C_F, C_T>}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(C_F):C_T} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function(C_F):C_T} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(C_F):C_T} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {C_F} arg0
+   * @return {C_T}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) {
+    let /** ?function(C_F):C_T */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$$LambdaAdaptor'));
+
+
+MyFunction.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=MyFunction$$LambdaAdaptor.js.map

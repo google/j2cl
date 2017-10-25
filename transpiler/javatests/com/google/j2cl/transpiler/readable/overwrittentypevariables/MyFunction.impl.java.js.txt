@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunc
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +25,17 @@ class MyFunction {
    * @public
    */
   m_apply__java_lang_Object(input) {}
+
+  /**
+   * @template C_F, C_T
+   * @param {?function(C_F):C_T} fn
+   * @return {MyFunction<C_F, C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    MyFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -68,6 +82,8 @@ class MyFunction {
    */
   static $clinit() {
     MyFunction.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
   }
 };
 

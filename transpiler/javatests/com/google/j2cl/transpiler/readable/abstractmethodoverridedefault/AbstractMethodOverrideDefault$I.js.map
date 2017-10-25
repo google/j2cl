@@ -1,0 +1,8 @@
+[interface I {
+    void foo();
+...    default void bar() {}
+  }] => [I.$clinit();] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"
+[interface I {
+    void foo();
+...    default void bar() {}
+  }] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"

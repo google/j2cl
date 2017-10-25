@@ -1,1 +1,7 @@
 [input] => [input] "input"
+[public interface MyFunction<F, T> {
+  T apply(F input);
+}] => [MyFunction.$clinit();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.<synthetic: adapt_lambda>"
+[public interface MyFunction<F, T> {
+  T apply(F input);
+}] => [return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.<synthetic: adapt_lambda>"

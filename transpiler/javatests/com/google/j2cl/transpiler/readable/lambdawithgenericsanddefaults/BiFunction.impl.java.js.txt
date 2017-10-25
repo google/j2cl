@@ -9,8 +9,10 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.B
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$LambdaAdaptor$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$Overlay$impl');
 let com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -35,6 +37,17 @@ class BiFunction {
    */
   m_andThen__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function(
       after) {}
+
+  /**
+   * @template C_T, C_U, C_R
+   * @param {?function(C_T, C_U):C_R} fn
+   * @return {BiFunction<C_T, C_U, C_R>}
+   * @public
+   */
+  static $adapt(fn) {
+    BiFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<*, *, *>} */ (new $LambdaAdaptor(fn));
+  }
 
   /**
    * Marks the provided class as implementing this interface.
@@ -81,6 +94,8 @@ class BiFunction {
    */
   static $clinit() {
     BiFunction.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$LambdaAdaptor$impl');
   }
 };
 
