@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let NestedLocalClasses = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$impl');
 let $1InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.$1InnerClass.$1InnerInnerClass$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $1InnerClass extends java_lang_Object {
@@ -99,8 +100,11 @@ class $1InnerClass extends java_lang_Object {
    */
   static $clinit() {
     $1InnerClass.$clinit = function() {};
+    NestedLocalClasses = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$impl');
     $1InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.$1InnerClass.$1InnerInnerClass$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

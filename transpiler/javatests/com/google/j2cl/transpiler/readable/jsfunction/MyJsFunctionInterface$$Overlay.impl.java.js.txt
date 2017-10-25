@@ -8,6 +8,9 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterfac
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $Overlay {
@@ -39,6 +42,7 @@ class $Overlay {
    */
   static $clinit() {
     $Overlay.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

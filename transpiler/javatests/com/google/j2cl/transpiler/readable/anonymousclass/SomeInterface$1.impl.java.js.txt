@@ -11,6 +11,7 @@ const SomeClass = goog.require('com.google.j2cl.transpiler.readable.anonymouscla
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $1 extends SomeClass {
@@ -85,6 +86,8 @@ class $1 extends SomeClass {
    */
   static $clinit() {
     $1.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     SomeClass.$clinit();
   }
 

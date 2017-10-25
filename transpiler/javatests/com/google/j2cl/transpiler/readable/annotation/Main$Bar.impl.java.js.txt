@@ -93,6 +93,8 @@ class Bar extends java_lang_Object {
    */
   static $clinit() {
     Bar.$clinit = function() {};
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.annotation.Main$impl');
     Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
     java_lang_Object.$clinit();

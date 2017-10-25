@@ -87,6 +87,10 @@ class $4 extends TestUnqualifiedSuperCall {
    */
   static $clinit() {
     $4.$clinit = function() {};
+    InnerClassInitOrder = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    OuterIsSuper = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
     TestUnqualifiedSuperCall.$clinit();
   }
 

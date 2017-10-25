@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Inner = goog.forwardDeclare('com.google.test.Inner$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class Outer extends java_lang_Object {
@@ -83,6 +84,7 @@ class Outer extends java_lang_Object {
   static $clinit() {
     Outer.$clinit = function() {};
     Inner = goog.module.get('com.google.test.Inner$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

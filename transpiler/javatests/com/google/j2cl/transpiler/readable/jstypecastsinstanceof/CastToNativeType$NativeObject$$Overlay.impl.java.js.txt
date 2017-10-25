@@ -9,6 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNat
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 class $Overlay {
   /**
@@ -27,6 +29,7 @@ class $Overlay {
    */
   static $clinit() {
     $Overlay.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

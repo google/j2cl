@@ -96,6 +96,8 @@ class SomeClass extends java_lang_Object {
    */
   static $clinit() {
     SomeClass.$clinit = function() {};
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     java_lang_Object.$clinit();
   }

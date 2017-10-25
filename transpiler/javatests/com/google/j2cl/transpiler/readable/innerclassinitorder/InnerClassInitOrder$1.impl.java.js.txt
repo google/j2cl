@@ -11,6 +11,7 @@ const $1AddNumber = goog.require('com.google.j2cl.transpiler.readable.innerclass
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $1 extends $1AddNumber {
@@ -96,6 +97,9 @@ class $1 extends $1AddNumber {
    */
   static $clinit() {
     $1.$clinit = function() {};
+    InnerClassInitOrder = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $1AddNumber.$clinit();
   }
 

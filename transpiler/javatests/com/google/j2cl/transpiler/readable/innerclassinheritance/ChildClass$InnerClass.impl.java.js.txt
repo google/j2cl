@@ -11,6 +11,7 @@ const ParentInner = goog.require('com.google.j2cl.transpiler.readable.innerclass
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ChildClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class InnerClass extends ParentInner {
@@ -123,6 +124,9 @@ class InnerClass extends ParentInner {
    */
   static $clinit() {
     InnerClass.$clinit = function() {};
+    ChildClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     ParentInner.$clinit();
   }
 

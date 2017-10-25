@@ -10,6 +10,9 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 const P1 = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 /**
  * @template C_P1_P2_T2, C_P1_T1
@@ -116,6 +119,8 @@ class P2 extends P1 {
    */
   static $clinit() {
     P2.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     P1.$clinit();
   }
 

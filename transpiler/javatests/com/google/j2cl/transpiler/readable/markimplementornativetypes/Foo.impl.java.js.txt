@@ -77,6 +77,8 @@ class Foo extends java_lang_Object {
    */
   static $clinit() {
     Foo.$clinit = function() {};
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay$impl');
     java_lang_Object.$clinit();
   }
 

@@ -12,6 +12,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.$1B.$1$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
@@ -105,6 +106,10 @@ class com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_1
   static $clinit() {
     com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1_1
         .$clinit = function() {};
+    com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1 =
+        goog.module.get(
+            'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.$1B.$1$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

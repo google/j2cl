@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let LocalClassWithConstructor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $1LocalClass extends java_lang_Object {
@@ -140,6 +141,9 @@ class $1LocalClass extends java_lang_Object {
    */
   static $clinit() {
     $1LocalClass.$clinit = function() {};
+    LocalClassWithConstructor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

@@ -97,6 +97,9 @@ class $1 extends Foo {
    */
   static $clinit() {
     $1.$clinit = function() {};
+    Bar = goog.module.get(
+        'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
+    Comparable = goog.module.get('java.lang.Comparable$impl');
     Foo.$clinit();
   }
 

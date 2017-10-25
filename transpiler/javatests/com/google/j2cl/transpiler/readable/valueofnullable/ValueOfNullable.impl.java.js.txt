@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 
 
 class ValueOfNullable extends java_lang_Object {
@@ -81,6 +82,7 @@ class ValueOfNullable extends java_lang_Object {
   static $clinit() {
     ValueOfNullable.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
+    $char = goog.module.get('vmbootstrap.primitives.$char$impl');
     java_lang_Object.$clinit();
   }
 

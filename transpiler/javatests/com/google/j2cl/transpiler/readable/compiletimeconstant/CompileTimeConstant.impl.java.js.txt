@@ -12,6 +12,10 @@ const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
 class CompileTimeConstant extends java_lang_Object {
@@ -99,6 +103,11 @@ class CompileTimeConstant extends java_lang_Object {
    */
   static $clinit() {
     CompileTimeConstant.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $char = goog.module.get('vmbootstrap.primitives.$char$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     java_lang_Object.$clinit();
   }
 

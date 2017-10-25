@@ -11,6 +11,7 @@ const $1Parent = goog.require('com.google.j2cl.transpiler.readable.localclassinh
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let LocalClassInheritance = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class $1Child extends $1Parent {
@@ -97,6 +98,9 @@ class $1Child extends $1Parent {
    */
   static $clinit() {
     $1Child.$clinit = function() {};
+    LocalClassInheritance = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $1Parent.$clinit();
   }
 

@@ -14,6 +14,7 @@ let $1Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.booleanop
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
 
 class BooleanOperations extends java_lang_Object {
@@ -182,6 +183,7 @@ class BooleanOperations extends java_lang_Object {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     java_lang_Object.$clinit();
   }
 

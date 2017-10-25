@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.staticconstant.StaticConstant$i
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 class StaticConstant extends java_lang_Object {
   /**
@@ -69,6 +71,7 @@ class StaticConstant extends java_lang_Object {
    */
   static $clinit() {
     StaticConstant.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

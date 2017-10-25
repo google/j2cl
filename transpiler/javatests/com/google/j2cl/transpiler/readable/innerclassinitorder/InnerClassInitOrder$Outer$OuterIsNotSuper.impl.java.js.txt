@@ -91,6 +91,8 @@ class OuterIsNotSuper extends java_lang_Object {
    */
   static $clinit() {
     OuterIsNotSuper.$clinit = function() {};
+    Outer = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
     java_lang_Object.$clinit();
   }
 

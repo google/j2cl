@@ -53,17 +53,23 @@ import java.util.Set;
  */
 class ImportGatherer extends AbstractVisitor {
 
-  /** Describes the category of an import. */
+  /**
+   * Enums for describing the category of an import.
+   *
+   * <p>An EAGER import is one that should occur in the declaration phase because it provides a
+   * supertype.
+   *
+   * <p>An EXTERN import should only be emitted as the creation of a type alias.
+   *
+   * <p>A LAZY import should defer to the execution phase so that circular imports are avoided.
+   *
+   * <p>The SELF is not emitted and only exists to ensure that an alias is created for the current
+   * type.
+   */
   public enum ImportCategory {
-    /** Used in load-time during initial load of the classes. */
-    LOADTIME,
-    /** Used in run-time during method execution. */
-    RUNTIME,
-    /** Used for JsDoc purposes and in some cases for circumventing AJD pruning. */
-    JSDOC,
-    /** Not emitted and only exists to ensure that the name is preserved. */
+    EAGER,
     EXTERN,
-    /** Not emitted and only exists to ensure that an alias is created for the current type. */
+    LAZY,
     SELF
   }
 
@@ -90,23 +96,19 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.RUNTIME);
+    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
   public void exitField(Field field) {
     maybeAddNativeReference(field);
-    // A static long field needs to be initialized a load time which is done by code generator.
-    if (TypeDescriptors.isPrimitiveLong(field.getDescriptor().getTypeDescriptor())) {
-      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.LOADTIME);
-    }
-    collectForJsDoc(field.getDescriptor().getTypeDescriptor());
+    addTypeDescriptor(field.getDescriptor().getTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
   public void exitFunctionExpression(FunctionExpression functionExpression) {
     for (Variable parameter : functionExpression.getParameters()) {
-      collectForJsDoc(parameter.getTypeDescriptor());
+      addTypeDescriptor(parameter.getTypeDescriptor(), ImportCategory.LAZY);
     }
   }
 
@@ -114,25 +116,13 @@ class ImportGatherer extends AbstractVisitor {
   public void exitType(Type type) {
     addTypeDescriptor(type.getTypeDescriptor(), ImportCategory.SELF);
 
-    if (type.isJsOverlayImplementation() && type.getNativeTypeDescriptor().isNative()) {
-      // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
-      // Also requiring native type makes sure the native type is not pruned by AJD.
-      addTypeDescriptor(type.getNativeTypeDescriptor(), ImportCategory.LOADTIME);
-    }
-
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
     if (type.getSuperTypeDescriptor() != null) {
-      collectForJsDoc(type.getSuperTypeDescriptor());
-      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.LOADTIME);
+      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
     }
     for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
-      collectForJsDoc(superInterfaceTypeDescriptor);
-      // JsFunction super interface reference is replaced with generic one by the code generator.
-      if (superInterfaceTypeDescriptor.isJsFunctionInterface()) {
-        superInterfaceTypeDescriptor = BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
-      }
-      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.LOADTIME);
+      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
     }
 
     // Here we add an extra dependency on the outer namespace if declareLegacyNamespace is
@@ -144,13 +134,13 @@ class ImportGatherer extends AbstractVisitor {
         && type.getDeclaration().getEnclosingTypeDeclaration() != null) {
       addTypeDescriptor(
           type.getDeclaration().getEnclosingTypeDeclaration().getUnsafeTypeDescriptor(),
-          ImportCategory.LOADTIME);
+          ImportCategory.EAGER);
     }
   }
 
   @Override
   public void exitJsDocAnnotatedExpression(JsDocAnnotatedExpression jsDocAnnotatedExpression) {
-    collectForJsDoc(jsDocAnnotatedExpression.getTypeDescriptor());
+    addTypeDescriptor(jsDocAnnotatedExpression.getTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
@@ -158,18 +148,21 @@ class ImportGatherer extends AbstractVisitor {
       VariableDeclarationFragment variableDeclarationFragment) {
     if (variableDeclarationFragment.needsTypeDeclaration()) {
       Variable variable = variableDeclarationFragment.getVariable();
-      collectForJsDoc(variable.getTypeDescriptor());
+      addTypeDescriptor(variable.getTypeDescriptor(), ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitMethod(Method method) {
     maybeAddNativeReference(method);
-
-    collectForJsDoc(method.getDescriptor().getReturnTypeDescriptor());
+    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
+    if (!returnTypeDescriptor.isPrimitive()
+        || TypeDescriptors.isPrimitiveLong(returnTypeDescriptor)) {
+      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
+    }
 
     for (Variable parameter : method.getParameters()) {
-      collectForJsDoc(parameter.getTypeDescriptor());
+      addTypeDescriptor(parameter.getTypeDescriptor(), ImportCategory.LAZY);
     }
   }
 
@@ -180,28 +173,26 @@ class ImportGatherer extends AbstractVisitor {
         && memberDescriptor.hasJsNamespace()
         && !memberDescriptor.isExtern()) {
       addTypeDescriptor(
-          AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor), ImportCategory.RUNTIME);
+          AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor), ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitMethodCall(MethodCall methodCall) {
     if (methodCall.isStaticDispatch()) {
-      addTypeDescriptor(
-          methodCall.getTarget().getEnclosingTypeDescriptor(), ImportCategory.RUNTIME);
+      addTypeDescriptor(methodCall.getTarget().getEnclosingTypeDescriptor(), ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitNewInstance(NewInstance newInstance) {
-    addTypeDescriptor(newInstance.getTarget().getEnclosingTypeDescriptor(), ImportCategory.RUNTIME);
+    addTypeDescriptor(newInstance.getTarget().getEnclosingTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
   public void exitNumberLiteral(NumberLiteral numberLiteral) {
-    // Long number literal are transformed by expression transpiler to use NATIVE_LONG.
     if (TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
-      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.LOADTIME);
+      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.EAGER);
     }
   }
 
@@ -211,121 +202,112 @@ class ImportGatherer extends AbstractVisitor {
       JavaScriptConstructorReference constructorReference) {
     TypeDescriptor referencedTypeDescriptor = constructorReference.getReferencedTypeDescriptor();
     if (referencedTypeDescriptor == TypeDescriptors.get().globalNamespace) {
-      // We don't need to record global since it doesn't have a name but we still want the rest of
-      // the extern since they have a name that we should record and preserve.
       return;
     }
-    addTypeDescriptor(referencedTypeDescriptor, ImportCategory.RUNTIME);
-  }
-
-  private void collectForJsDoc(TypeDescriptor typeDescriptor) {
-    // Overlay classes may be referred directly from other compilation units that are compiled
-    // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
-    // original class should have a dependency on the overlay class.
-    if (typeDescriptor.hasOverlayImplementationType()) {
-      collectForJsDoc(typeDescriptor.getTypeDeclaration().getOverlayImplementationTypeDescriptor());
-    }
-
-    // JsDoc for {@code long} uses NATIVE_LONG.
-    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
-      collectForJsDoc(BootstrapType.NATIVE_LONG.getDescriptor());
-      return;
-    }
-
-    // JsDoc for primitives uses Closure builtins.
-    if (typeDescriptor.isPrimitive()) {
-      return;
-    }
-
-    // JsDoc for arrays uses Closure builtin but template part requires the leaf type.
-    if (typeDescriptor.isArray()) {
-      collectForJsDoc(typeDescriptor.getLeafTypeDescriptor());
-      return;
-    }
-
-    if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
-      collectTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
-      return;
-    }
-
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
-      collectTypeDescriptorsIntroducedByTypeBounds(typeDescriptor);
-      return;
-    }
-
-    if (typeDescriptor.hasTypeArguments()) {
-      for (TypeDescriptor typeArgumentDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
-        collectForJsDoc(typeArgumentDescriptor);
-      }
-    }
-
-    addTypeDescriptor(typeDescriptor, ImportCategory.JSDOC);
-  }
-
-  /**
-   * JsFunction type is annotated as function(Foo):Bar, we need to import the parameter types and
-   * return type.
-   */
-  private void collectTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
-    MethodDescriptor jsFunctionMethodDescriptor =
-        typeDescriptor.getConcreteJsFunctionMethodDescriptor();
-    for (TypeDescriptor parameterTypeDescriptor :
-        jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {
-      collectForJsDoc(parameterTypeDescriptor);
-    }
-    collectForJsDoc(jsFunctionMethodDescriptor.getReturnTypeDescriptor());
-  }
-
-  /**
-   * Type bounds may be implicitly referred from other compilation units that are compiled
-   * separately due to synthesized erasure casts. In order for these classes to be preserved and not
-   * pruned by AJD, we should create a dependency to the bound.
-   */
-  private void collectTypeDescriptorsIntroducedByTypeBounds(TypeDescriptor typeDescriptor) {
-    TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
-
-    if (boundTypeDescriptor == TypeDescriptors.get().javaLangObject) {
-      // Effectively unbounded and will not result in erasure casts.
-      return;
-    }
-
-    // Avoid recursing into bounds type arguments, as these are not needed and they might introduce
-    // an infinite loop (e.g. class Enum<T extends Enum<T>>).
-    if (boundTypeDescriptor.hasTypeArguments()) {
-      boundTypeDescriptor = boundTypeDescriptor.getRawTypeDescriptor();
-    }
-
-    if (boundTypeDescriptor.isIntersection()) {
-      // TODO(68033041): add missing case to ajd_prune_type_variable_bounds and handle this.
-    } else {
-      collectForJsDoc(boundTypeDescriptor);
-    }
+    addTypeDescriptor(referencedTypeDescriptor, ImportCategory.LAZY);
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
-    checkArgument(
-        !typeDescriptor.isJsFunctionInterface()
-            && !typeDescriptor.isArray()
-            && !typeDescriptor.isUnion()
-            && !typeDescriptor.isIntersection()
-            && !typeDescriptor.isWildCardOrCapture()
-            && !typeDescriptor.isTypeVariable());
+    // Type variables can't be depended upon.
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
+      TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
+      if (boundTypeDescriptor != null) {
+        // Add type descriptor appearing as bounds of type variables. These are needed because
+        // j2cl code in dependent libraries might synthesize erasure casts that refer to these
+        // types.
+        // Avoid recursing into bounds type arguments, as these are not needed and they might
+        // introduce an infinite loop (e.g. class Enum<T extends Enum<T>>).
+        addTypeDescriptor(
+            boundTypeDescriptor.hasTypeArguments()
+                ? boundTypeDescriptor.getRawTypeDescriptor()
+                : boundTypeDescriptor,
+            ImportCategory.LAZY);
+      }
+      return;
+    }
+
+    if (typeDescriptor.isIntersection()) {
+      return;
+    }
+
     checkArgument(!typeDescriptor.getQualifiedJsName().isEmpty());
+    // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
+    // primitive and the native JS 'Long' emulation class.
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
+      typeDescriptorsByCategory.put(
+          ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
+      typeDescriptorsByCategory.put(importCategory, TypeDescriptors.get().primitiveLong);
+      return;
+    }
+
+    // Unroll the types inside of a union type.
+    if (typeDescriptor.isUnion()) {
+      for (TypeDescriptor containedTypeDescriptor : typeDescriptor.getUnionedTypeDescriptors()) {
+        addTypeDescriptor(containedTypeDescriptor, importCategory);
+      }
+      return;
+    }
+
+    // Unroll the leaf type in an array type and special case add the native Array utilities.
+    if (typeDescriptor.isArray()) {
+      addTypeDescriptor(BootstrapType.ARRAYS.getDescriptor(), ImportCategory.LAZY);
+      addTypeDescriptor(typeDescriptor.getLeafTypeDescriptor(), importCategory);
+      return;
+    }
+
+    // If there is a type signature like Map<Entry<K, V>> then the Entry type argument needs to be
+    // imported.
+    if (typeDescriptor.hasTypeArguments()) {
+      for (TypeDescriptor typeArgumentDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
+        // But the type argument imports do not need to be eager since they are not acting here as
+        // super type or super interface.
+        addTypeDescriptor(typeArgumentDescriptor, ImportCategory.LAZY);
+      }
+    }
+
+    // Synthetic classes may be referred directly from other compilation units that are compiled
+    // separately. In order for this classes to be preserved and not pruned by AJD, any user of the
+    // original class should have a dependency on the synthetic classes.
+    maybeAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
+    maybeAddOverlayImplementationTypeDescriptor(typeDescriptor);
+
+    if (typeDescriptor.isJsFunctionInterface()) {
+      // If the type is a @JsFunction replace the specific @JsFunction interface type descriptor
+      // with the generic JavaScriptFunction type descriptor.
+      // Most of the specific references have already been replaced however, @JsFunction
+      // Java implementations still consider the @JsFunction interface a superinterface and
+      // need to import it to able to call $markImplementor() for class setup.
+      addTypeDescriptor(BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor(), importCategory);
+      return;
+    }
 
     TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (rawTypeDescriptor.isExtern()) {
       importCategory = ImportCategory.EXTERN;
     }
+
     typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
+  }
+
+  private void maybeAddOverlayImplementationTypeDescriptor(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.hasOverlayImplementationType()) {
+      addTypeDescriptor(
+          typeDescriptor.getTypeDeclaration().getOverlayImplementationTypeDescriptor(),
+          ImportCategory.LAZY);
+    }
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
     TimingCollector timingCollector = TimingCollector.get();
     timingCollector.startSubSample("Add default Classes");
 
+    if (type.isJsOverlayImplementation()) {
+      // The synthesized JsOverlayImpl type should import the native type eagerly.
+      addTypeDescriptor(type.getNativeTypeDescriptor(), ImportCategory.EAGER);
+    }
     // Util class implements some utility functions and does not depend on any other class, always
     // import it eagerly.
-    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.LOADTIME);
+    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
 
     // Collect type references.
     timingCollector.startSample("Collect type references");
@@ -335,40 +317,27 @@ class ImportGatherer extends AbstractVisitor {
 
     timingCollector.startSample("Remove duplicate references");
     typeDescriptorsByCategory
-        .get(ImportCategory.RUNTIME)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
+        .get(ImportCategory.LAZY)
+        .removeAll(typeDescriptorsByCategory.get(ImportCategory.EAGER));
     typeDescriptorsByCategory
-        .get(ImportCategory.RUNTIME)
+        .get(ImportCategory.LAZY)
         .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
     typeDescriptorsByCategory
-        .get(ImportCategory.LOADTIME)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
-
-    typeDescriptorsByCategory
-        .get(ImportCategory.JSDOC)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
-    typeDescriptorsByCategory
-        .get(ImportCategory.JSDOC)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.RUNTIME));
-    typeDescriptorsByCategory
-        .get(ImportCategory.JSDOC)
+        .get(ImportCategory.EAGER)
         .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
 
     timingCollector.startSample("Record Local Name Uses");
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.SELF));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.RUNTIME));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.JSDOC));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
 
     timingCollector.startSample("Convert to imports");
     Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
     importsByCategory.putAll(
-        ImportCategory.RUNTIME, toImports(typeDescriptorsByCategory.get(ImportCategory.RUNTIME)));
+        ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
     importsByCategory.putAll(
-        ImportCategory.LOADTIME, toImports(typeDescriptorsByCategory.get(ImportCategory.LOADTIME)));
-    importsByCategory.putAll(
-        ImportCategory.JSDOC, toImports(typeDescriptorsByCategory.get(ImportCategory.JSDOC)));
+        ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
     importsByCategory.putAll(
         ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
     // Creates an alias for the current type, last, to make sure that its name dodges externs
@@ -377,6 +346,25 @@ class ImportGatherer extends AbstractVisitor {
         ImportCategory.SELF, toImports(typeDescriptorsByCategory.get(ImportCategory.SELF)));
     timingCollector.endSubSample();
     return importsByCategory;
+  }
+
+  /**
+   * JsFunction type is annotated as function(Foo):Bar, we need to import the parameter types and
+   * return type.
+   */
+  private void maybeAddTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
+      MethodDescriptor jsFunctionMethodDescriptor =
+          typeDescriptor.getConcreteJsFunctionMethodDescriptor();
+      if (jsFunctionMethodDescriptor == null) {
+        return;
+      }
+      for (TypeDescriptor parameterTypeDescriptor :
+          jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {
+        addTypeDescriptor(parameterTypeDescriptor, ImportCategory.LAZY);
+      }
+      addTypeDescriptor(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), ImportCategory.LAZY);
+    }
   }
 
   private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {

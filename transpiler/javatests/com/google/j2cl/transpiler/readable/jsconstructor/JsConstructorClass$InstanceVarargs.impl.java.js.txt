@@ -76,6 +76,8 @@ class InstanceVarargs extends A {
    */
   static $clinit() {
     InstanceVarargs.$clinit = function() {};
+    JsConstructorClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     A.$clinit();

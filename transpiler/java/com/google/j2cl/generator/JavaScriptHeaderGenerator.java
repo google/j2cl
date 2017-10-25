@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
@@ -58,20 +57,15 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     // Make sure we don't self-import
     alreadyRequiredPaths.add(type.getDeclaration().getQualifiedJsName());
     // goog.require(...) for eager imports.
-    for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.LOADTIME))) {
+    for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.EAGER))) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {
         sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }
     }
-    // goog.require(...) for lazy imports
-    Iterable<Import> lazyImports =
-        sortImports(
-            Iterables.concat(
-                importsByCategory.get(ImportCategory.RUNTIME),
-                importsByCategory.get(ImportCategory.JSDOC)));
-    for (Import lazyImport : lazyImports) {
+    // goog.require(...) for lazy imports.
+    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {

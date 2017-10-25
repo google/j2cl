@@ -11,6 +11,7 @@ const ESInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinit
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ESOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class ESInnerSubclass extends ESInner {
@@ -109,6 +110,9 @@ class ESInnerSubclass extends ESInner {
    */
   static $clinit() {
     ESInnerSubclass.$clinit = function() {};
+    ESOuter = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     ESInner.$clinit();
   }
 

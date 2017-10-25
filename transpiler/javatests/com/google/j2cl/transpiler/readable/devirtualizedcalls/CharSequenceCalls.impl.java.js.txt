@@ -91,6 +91,8 @@ class CharSequenceCalls extends java_lang_Object {
    */
   static $clinit() {
     CharSequenceCalls.$clinit = function() {};
+    CharSequence = goog.module.get('java.lang.CharSequence$impl');
+    $Overlay = goog.module.get('java.lang.CharSequence.$Overlay$impl');
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
     java_lang_Object.$clinit();
   }

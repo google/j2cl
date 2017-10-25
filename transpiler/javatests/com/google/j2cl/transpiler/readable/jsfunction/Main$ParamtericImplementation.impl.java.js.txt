@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 /**
@@ -103,6 +104,7 @@ class ParamtericImplementation extends java_lang_Object {
   static $clinit() {
     ParamtericImplementation.$clinit = function() {};
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     java_lang_Object.$clinit();
   }
 

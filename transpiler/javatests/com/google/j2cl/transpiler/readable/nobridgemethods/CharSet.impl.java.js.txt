@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.$1$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 class CharSet extends java_lang_Object {
@@ -84,6 +85,8 @@ class CharSet extends java_lang_Object {
     CharSet.$clinit = function() {};
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.$1$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     java_lang_Object.$clinit();
   }
 

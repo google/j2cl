@@ -87,6 +87,10 @@ class $2 extends OuterIsNotSuper {
    */
   static $clinit() {
     $2.$clinit = function() {};
+    InnerClassInitOrder = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    OuterIsSuper = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
     OuterIsNotSuper.$clinit();
   }
 

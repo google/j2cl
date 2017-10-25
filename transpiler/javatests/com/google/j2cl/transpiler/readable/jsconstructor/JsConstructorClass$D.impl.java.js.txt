@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClas
 const B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 class D extends B {
   /**
@@ -89,6 +91,7 @@ class D extends B {
    */
   static $clinit() {
     D.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     B.$clinit();
   }
 

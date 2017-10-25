@@ -88,6 +88,8 @@ class SomeInterface {
    */
   static $clinit() {
     SomeInterface.$clinit = function() {};
+    SomeClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$1$impl');
     SomeInterface

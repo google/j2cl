@@ -89,6 +89,9 @@ class R extends Q {
    */
   static $clinit() {
     R.$clinit = function() {};
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     Q.$clinit();
   }
 

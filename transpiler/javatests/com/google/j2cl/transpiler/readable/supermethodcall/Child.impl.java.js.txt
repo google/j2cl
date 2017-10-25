@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.supermethodcall.Child$impl');
 const Parent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 class Child extends Parent {
   /**
@@ -127,6 +129,7 @@ class Child extends Parent {
    */
   static $clinit() {
     Child.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Parent.$clinit();
   }
 

@@ -11,6 +11,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.M.$LambdaAdaptor$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
 /**
@@ -79,8 +80,12 @@ class M {
    */
   static $clinit() {
     M.$clinit = function() {};
+    B = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.M.$LambdaAdaptor$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
   }
 };
 

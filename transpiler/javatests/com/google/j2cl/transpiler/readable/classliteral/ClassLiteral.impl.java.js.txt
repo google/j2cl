@@ -11,6 +11,7 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 class ClassLiteral extends java_lang_Object {
@@ -82,6 +83,7 @@ class ClassLiteral extends java_lang_Object {
   static $clinit() {
     ClassLiteral.$clinit = function() {};
     Class = goog.module.get('java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     java_lang_Object.$clinit();
   }
 

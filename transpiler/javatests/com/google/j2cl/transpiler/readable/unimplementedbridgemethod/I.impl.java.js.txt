@@ -11,6 +11,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.$LambdaAdaptor$impl');
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
@@ -93,6 +95,10 @@ class I {
     I.$clinit = function() {};
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I.$LambdaAdaptor$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

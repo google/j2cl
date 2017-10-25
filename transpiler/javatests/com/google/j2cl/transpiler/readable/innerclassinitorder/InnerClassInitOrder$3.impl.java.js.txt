@@ -83,6 +83,8 @@ class $3 extends TestQualifiedSuperCall {
    */
   static $clinit() {
     $3.$clinit = function() {};
+    InnerClassInitOrder = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     TestQualifiedSuperCall.$clinit();
   }
 

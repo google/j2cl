@@ -84,6 +84,10 @@ class RawSubclass extends java_lang_Object {
    */
   static $clinit() {
     RawSubclass.$clinit = function() {};
+    RawType = goog.module.get(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.rawtype.RawType.I.$Overlay$impl');
     java_lang_Object.$clinit();
     I.$clinit();
   }

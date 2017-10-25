@@ -115,6 +115,7 @@ class B extends A {
    */
   static $clinit() {
     B.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     A.$clinit();

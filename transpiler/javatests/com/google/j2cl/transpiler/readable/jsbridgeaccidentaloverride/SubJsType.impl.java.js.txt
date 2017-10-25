@@ -11,6 +11,8 @@ const MyInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgeac
 const MyJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 /**
  * @implements {MyInterface}
@@ -105,6 +107,7 @@ class SubJsType extends MyJsType {
    */
   static $clinit() {
     SubJsType.$clinit = function() {};
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     MyJsType.$clinit();
   }
 
