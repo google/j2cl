@@ -4,6 +4,7 @@
 # Can depend on the native bootstrap JS but not on the VM opcode JS.
 
 package(default_visibility = [
+    "//third_party/java/j2cl:__pkg__",
     "//internal_do_not_use:__pkg__",
     "//jre/javatests:__pkg__",
     "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
