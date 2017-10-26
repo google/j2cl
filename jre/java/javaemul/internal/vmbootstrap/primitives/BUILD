@@ -3,7 +3,7 @@
 #
 # Depends on the JRE JS.
 
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = ["//jre/java:__pkg__"])
 
 # Apache2
 licenses(["notice"])
