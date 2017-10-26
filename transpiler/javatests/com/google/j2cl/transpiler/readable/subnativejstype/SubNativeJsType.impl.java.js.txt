@@ -11,7 +11,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeJsType = goog.require('test.foo.MyNativeJsType');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.subnativejstype.MyNativeJsType.$Overlay$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class SubNativeJsType extends MyNativeJsType {
@@ -85,9 +84,6 @@ class SubNativeJsType extends MyNativeJsType {
    */
   static $clinit() {
     SubNativeJsType.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.subnativejstype.MyNativeJsType.$Overlay$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 
   /**

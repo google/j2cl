@@ -13,7 +13,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals.$Overlay$impl');
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier.$LambdaAdaptor$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
 /**
@@ -87,13 +86,8 @@ class JsSupplier {
    */
   static $clinit() {
     JsSupplier.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.Equals.$Overlay$impl');
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdajsinterop.Main.JsSupplier.$LambdaAdaptor$impl');
-    Number = goog.module.get('java.lang.Number$impl');
-    $JavaScriptFunction =
-        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     Equals.$clinit();
   }
 };

@@ -159,7 +159,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.require(...) for eager imports.
     Map<String, String> aliasesByPath = new HashMap<>();
-    Iterable<Import> eagerImports = sortImports(importsByCategory.get(ImportCategory.EAGER));
+    Iterable<Import> eagerImports = sortImports(importsByCategory.get(ImportCategory.LOADTIME));
     for (Import eagerImport : eagerImports) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getImplModulePath();
@@ -177,7 +177,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     // goog.forwardDeclare(...) for lazy imports.
-    Iterable<Import> lazyImports = sortImports(importsByCategory.get(ImportCategory.LAZY));
+    Iterable<Import> lazyImports =
+        sortImports(
+            Iterables.concat(
+                importsByCategory.get(ImportCategory.RUNTIME),
+                importsByCategory.get(ImportCategory.JSDOC)));
     for (Import lazyImport : lazyImports) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
@@ -545,7 +549,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append(className + ".$clinit = function() {};");
 
     // goog.module.get(...) for lazy imports.
-    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
+    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.RUNTIME))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
       sourceBuilder.newLine();

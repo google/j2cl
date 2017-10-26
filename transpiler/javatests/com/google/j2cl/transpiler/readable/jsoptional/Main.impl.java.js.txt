@@ -15,8 +15,6 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class Main extends java_lang_Object {
@@ -108,13 +106,7 @@ class Main extends java_lang_Object {
   static $clinit() {
     Main.$clinit = function() {};
     Boolean = goog.module.get('java.lang.Boolean$impl');
-    Double = goog.module.get('java.lang.Double$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $JavaScriptFunction =
-        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 

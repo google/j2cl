@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.implementsgenericinterface.Gene
 const GenericInterface = goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @interface
@@ -65,7 +63,6 @@ class GenericSubInterface {
    */
   static $clinit() {
     GenericSubInterface.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

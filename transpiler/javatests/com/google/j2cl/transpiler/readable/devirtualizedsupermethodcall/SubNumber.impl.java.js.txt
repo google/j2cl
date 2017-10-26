@@ -8,11 +8,10 @@ goog.module('com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Su
 
 
 const Number = goog.require('java.lang.Number$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
-let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
 class SubNumber extends Number {
@@ -110,7 +109,6 @@ class SubNumber extends Number {
   static $clinit() {
     SubNumber.$clinit = function() {};
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     Number.$clinit();
   }
 

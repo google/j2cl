@@ -88,9 +88,6 @@ class ConcreteClass extends GenericClass {
    */
   static $clinit() {
     ConcreteClass.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
     GenericClass.$clinit();
     InterfaceWithDefault.$clinit();
   }

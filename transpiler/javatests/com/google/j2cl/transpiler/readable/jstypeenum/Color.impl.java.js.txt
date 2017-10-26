@@ -16,7 +16,6 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
@@ -228,13 +227,10 @@ class Color extends Enum {
    */
   static $clinit() {
     Color.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
     Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color =
         Color.$create__java_lang_String__int($Util.$makeEnumName('RED'), 0);

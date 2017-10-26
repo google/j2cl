@@ -8,7 +8,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMapp
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ExportedType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName$impl');
@@ -25,10 +24,8 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
 let java_util_Comparator_$Overlay = goog.forwardDeclare('java.util.Comparator.$Overlay$impl');
-let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
-let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
-let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class JsDocTypeMappings extends java_lang_Object {
@@ -288,29 +285,7 @@ class JsDocTypeMappings extends java_lang_Object {
    */
   static $clinit() {
     JsDocTypeMappings.$clinit = function() {};
-    ExportedType = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName$impl');
-    com_google_j2cl_transpiler_readable_jsdoctypemappings_JsDocTypeMappings_NativeType_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay$impl');
-    Boolean = goog.module.get('java.lang.Boolean$impl');
-    Byte = goog.module.get('java.lang.Byte$impl');
-    Character = goog.module.get('java.lang.Character$impl');
-    Comparable = goog.module.get('java.lang.Comparable$impl');
-    Double = goog.module.get('java.lang.Double$impl');
-    Float = goog.module.get('java.lang.Float$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
-    Long = goog.module.get('java.lang.Long$impl');
-    Short = goog.module.get('java.lang.Short$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    Comparator = goog.module.get('java.util.Comparator$impl');
-    java_util_Comparator_$Overlay =
-        goog.module.get('java.util.Comparator.$Overlay$impl');
-    $JavaScriptFunction =
-        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
-    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     java_lang_Object.$clinit();
   }
 

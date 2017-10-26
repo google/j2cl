@@ -8,10 +8,9 @@ goog.module('com.google.j2cl.transpiler.readable.longparametersignature.LongPara
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 
 class LongParameterSignature extends java_lang_Object {
@@ -79,7 +78,6 @@ class LongParameterSignature extends java_lang_Object {
    */
   static $clinit() {
     LongParameterSignature.$clinit = function() {};
-    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     java_lang_Object.$clinit();
   }
 

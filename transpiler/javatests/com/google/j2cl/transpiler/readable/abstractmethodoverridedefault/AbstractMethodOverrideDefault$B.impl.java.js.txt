@@ -74,8 +74,6 @@ class B extends A {
    */
   static $clinit() {
     B.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$Overlay$impl');
     A.$clinit();
     J.$clinit();
   }
