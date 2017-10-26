@@ -13,16 +13,6 @@
  */
 package com.google.j2cl.tools.minifier;
 
-import com.google.common.collect.Lists;
-import com.google.common.io.Files;
-import com.google.devtools.build.runtime.Runfiles;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import junit.framework.TestCase;
 
 /** Tests for {@link J2clMinifier}. */
@@ -188,97 +178,6 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("'\"/* */\"'");
   }
 
-  public void testAbiIntegration_field() throws IOException {
-    String readableExampleName = "instancefieldinitializer";
-    Map<String, String> expectedMappings = new HashMap<>();
-    expectedMappings.put("$create__", "create＿1");
-    expectedMappings.put(
-        "$ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer__",
-        "ctor＿1");
-    expectedMappings.put(
-        "f_b__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "b＿1");
-    expectedMappings.put("$ctor__java_lang_Object__", "ctor＿2");
-    expectedMappings.put(
-        "f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "a＿1");
-    expectedMappings.put(
-        "$init__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "init＿1");
-
-    verifyReadableExample(readableExampleName, expectedMappings);
-  }
-
-  public void testAbiIntegration_metafunctions() throws IOException {
-    String readableExampleName = "implementsgenericinterface";
-    Map<String, String> expectedMappings = new HashMap<>();
-    expectedMappings.put("$ctor__java_lang_Object__", "ctor＿2");
-    expectedMappings.put(
-        "$ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl__",
-        "ctor＿1");
-    expectedMappings.put("$create__", "create＿1");
-    expectedMappings.put(
-        "$init__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceImpl",
-        "init＿2");
-    expectedMappings.put(
-        "$ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceImpl__",
-        "ctor＿3");
-    expectedMappings.put(
-        "$init__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl",
-        "init＿1");
-    expectedMappings.put(
-        "$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface",
-        "implements＿2");
-    expectedMappings.put(
-        "$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterface",
-        "implements＿1");
-
-    verifyReadableExample(readableExampleName, expectedMappings);
-  }
-
-  public void testAbiIntegration_method() throws IOException {
-    String readableExampleName = "arithmeticexpressions";
-    Map<String, String> expectedMappings = new HashMap<>();
-    expectedMappings.put(
-        "m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions",
-        "getLongArray＿1");
-    expectedMappings.put("f_MAX_VALUE__java_lang_Long", "MAX_VALUE＿1");
-    expectedMappings.put("$create__", "create＿1");
-    expectedMappings.put(
-        "$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions",
-        "init＿1");
-    expectedMappings.put("m_main__", "main＿1");
-    expectedMappings.put(
-        "$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__",
-        "ctor＿1");
-    expectedMappings.put("$ctor__java_lang_Object__", "ctor＿2");
-    expectedMappings.put("m_intValue__", "intValue＿1");
-    expectedMappings.put("m_valueOf__int", "valueOf＿1");
-
-    verifyReadableExample(readableExampleName, expectedMappings);
-  }
-
-  public void testAbiIntegration_staticfield() throws IOException {
-    String readableExampleName = "instancefieldinitializer";
-    Map<String, String> expectedMappings = new HashMap<>();
-    expectedMappings.put(
-        "$ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer__",
-        "ctor＿1");
-    expectedMappings.put("$create__", "create＿1");
-    expectedMappings.put(
-        "f_b__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "b＿1");
-    expectedMappings.put("$ctor__java_lang_Object__", "ctor＿2");
-    expectedMappings.put(
-        "f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "a＿1");
-    expectedMappings.put(
-        "$init__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer",
-        "init＿1");
-
-    verifyReadableExample(readableExampleName, expectedMappings);
-  }
-
   private void assertChange(String input, String output) {
     assertEquals(output, minifier.minify(input));
   }
@@ -286,40 +185,6 @@ public class J2clMinifierTest extends TestCase {
   private void assertNoChange(String input) {
     assertEquals(input, minifier.minify(input));
   }
-
-  private void verifyReadableExample(
-      String readableExampleName, Map<String, String> expectedMappings) throws IOException {
-    File inputDirectory =
-        new File(
-            Runfiles.getRunfilesDir()
-                + "/google3/third_party/java_src/j2cl/transpiler/javatests"
-                + "/com/google/j2cl/transpiler/readable/"
-                + readableExampleName);
-
-    List<File> jsFiles = Lists.newArrayList(inputDirectory.listFiles());
-    Collections.sort(jsFiles);
-
-    for (File jsFile : jsFiles) {
-      if (!jsFile.getName().endsWith(".js.txt")) {
-        continue;
-      }
-      minifier.minify(Files.toString(jsFile, StandardCharsets.UTF_8));
-    }
-
-    System.out.println("Actual mappings:");
-    Map<String, String> actualMappings = minifier.minifiedIdentifiersByIdentifier;
-    for (String mangledIdentifier : minifier.minifiedIdentifiersByIdentifier.keySet()) {
-      System.out.println(
-          "expectedMappings.put(\""
-              + mangledIdentifier
-              + "\", \""
-              + actualMappings.get(mangledIdentifier)
-              + "\");");
-    }
-
-    assertEquals(expectedMappings, actualMappings);
-  }
-
   @Override
   protected void setUp() throws Exception {
     super.setUp();
