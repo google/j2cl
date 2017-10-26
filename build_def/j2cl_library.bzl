@@ -93,6 +93,7 @@ def j2cl_library(name,
                  visibility=None,
                  _js_srcs=[],
                  _js_deps=[],
+                 _js_exports=[],
                  _readable_source_maps=False,
                  _declare_legacy_namespace=False,
                  _test_externs_list=[],
@@ -116,6 +117,7 @@ def j2cl_library(name,
   #       For the JsInterop scenario, we encourage developers to create
   #       proper JsInterop stubs next to the js_library rule and create a
   #       j2cl_import rule there.
+  #   _js_exports: Exported js_library dependencies.
   #   _declare_legacy_namespace: A temporary measure while onboarding Docs, do
   #       not use.
 
@@ -131,10 +133,9 @@ def j2cl_library(name,
   # Direct automated dep picking tools and grok away from internal targets.
   internal_tags = tags + ["avoid_dep", "no_grok"]
   java_exports = []
-  js_exports = []
-
   java_deps = []
-  js_deps = _js_deps
+  js_deps = _js_deps[:]
+  js_exports = _js_exports[:]
 
   exports = _get_absolute_labels(kwargs, "exports")
   deps = _get_absolute_labels(kwargs, "deps")
@@ -160,8 +161,6 @@ def j2cl_library(name,
   if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
     deps += ["//internal_do_not_use:jre"]
 
-  java_deps = java_deps[:]
-  js_deps = js_deps[:]
   for dep in deps:
     java_deps += [dep + "_java_library"]
     js_deps += [dep]
