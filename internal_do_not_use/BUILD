@@ -41,11 +41,6 @@ alias(
 # JUnit library related
 # ***************************************************
 
-alias(
-    name = "junit_processor_plugin",
-    actual = "//junit/java/com/google/j2cl/junit/apt:junit_processor_plugin",
-)
-
 # ***************************************************
 # Tools related
 # **************************************************
