@@ -20,16 +20,14 @@ import com.google.common.collect.Maps;
 import com.google.testing.javascript.JavascriptSizeHelper;
 import com.google.testing.util.TestRecorderProperties;
 import com.google.testing.util.TestUtil;
-
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * A binary size test that reports results to sponge.
@@ -42,7 +40,8 @@ public class J2clJavaScriptSizeTest extends TestCase implements TestRecorderProp
   private final Map<String, Object> measurements = Maps.newHashMap();
 
   private static final String BASE_BINARY_DIR =
-      "/google3/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/";
+      "/google3/third_party/java_src/j2cl/transpiler/"
+          + "javatests/com/google/j2cl/transpiler/integration/";
 
   public void testJavaScriptSizes() throws IOException {
     List<File> binaryDirs = new ArrayList<>();
@@ -69,10 +68,8 @@ public class J2clJavaScriptSizeTest extends TestCase implements TestRecorderProp
     JavascriptSizeHelper sizeHelper = new JavascriptSizeHelper();
 
     for (File binaryDir : binaryDirs) {
-      String name = binaryDir.getName();
       pushToMeasurementResults(
-          name, sizeHelper.getJavascriptFileSize(binaryDir, false /* no gzip */));
-      pushToMeasurementResults(name, sizeHelper.getJavascriptFileSize(binaryDir, true /* gzip */));
+          binaryDir.getName(), sizeHelper.getJavascriptFileSize(binaryDir, false /* no gzip */));
     }
 
     SpongeMetricsRecorder recorder = new SpongeMetricsRecorder(benchmarkName);
@@ -84,11 +81,7 @@ public class J2clJavaScriptSizeTest extends TestCase implements TestRecorderProp
 
   private void pushToMeasurementResults(String name, Map<String, Long> results) {
     for (Entry<String, Long> entry : results.entrySet()) {
-      String testKeyName = name + "_minopt_js";
-      if (entry.getKey().contains("-gzip")) {
-        testKeyName = testKeyName + "_gzip";
-      }
-      measurements.put(testKeyName, entry.getValue());
+      measurements.put(name + "_minopt_js", entry.getValue());
     }
   }
 
