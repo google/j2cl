@@ -1,4 +1,4 @@
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding:__subpackages__"])
 
 # Apache2
 licenses(["notice"])
@@ -12,7 +12,5 @@ java_library(
 js_library(
     name = "forwarder",
     deps_mgmt = "legacy",
-    exports = [
-        "//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo",
-    ],
+    exports = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo"],
 )

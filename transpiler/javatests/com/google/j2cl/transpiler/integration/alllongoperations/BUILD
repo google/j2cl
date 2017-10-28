@@ -1,4 +1,4 @@
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/sizetest:__pkg__"])
 
 # Apache2
 licenses(["notice"])
