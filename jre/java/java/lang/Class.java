@@ -27,14 +27,14 @@ public final class Class<T> implements Type, Serializable {
 
   /**
    * Returns the Class instance that corresponds to provided constructor and optional dimension
-   * count in the case of an array.
-   * This method is used by transpiler to implement the class literals.
+   * count in the case of an array. This method is used by transpiler to implement the class
+   * literals.
    */
   @JsMethod
-  static native Class<?> $get(Object ctor, int dimensionCount);
+  public static native Class<?> $get(Object ctor, int dimensionCount);
 
   @JsMethod
-  static native Class<?> $get(Object ctor);
+  public static native Class<?> $get(Object ctor);
 
   /**
    * The JavaScript constructor for the underlying Java type that this Class instance belongs to.
