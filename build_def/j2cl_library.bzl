@@ -48,8 +48,8 @@ def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
 def _get_absolute_labels(args, key):
   """Returns the absolute label for the provided key if exists, otherwise empty."""
   labels = args.get(key) or []
-  if type(labels) != type([]):
-    fail("Expected value of type 'list(label)' for attribute '%s' in j2cl_library rule" % key)
+  if not type(labels) in ["list", "depset"]:
+    fail("Expected depset or list for the attribute '%s' in j2cl_library rule" % key)
 
   return [absolute_label(target) for target in labels]
 
