@@ -655,38 +655,41 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderNativeSource() {
-    if (nativeSource != null) {
-      sourceBuilder.appendLines("/**", " * Native Method Injection", " */");
-      String longAliasName = type.getTypeDescriptor().getLongAliasName();
-      if (!className.equals(longAliasName)) {
-        sourceBuilder.appendLines(
-            "// Long alias for the class defined in this module",
-            "const " + longAliasName + " = " + className + ";");
-      }
-      sourceBuilder.newLine();
-      int nativeSourceLine = 0;
-      String content = nativeSource.getContent();
-      for (String line : Splitter.on('\n').split(content)) {
-        String trimmedLine = CharMatcher.whitespace().trimTrailingFrom(line);
+    if (nativeSource == null) {
+      return;
+    }
 
-        if (!trimmedLine.isEmpty()) {
-          int firstNonWhitespaceColumn = CharMatcher.whitespace().negate().indexIn(trimmedLine);
-          sourceBuilder.append(Strings.repeat(" ", firstNonWhitespaceColumn));
-          // Only map the trimmed section of the line.
-          sourceBuilder.emitWithMapping(
-              SourcePosition.newBuilder()
-                  .setStartPosition(nativeSourceLine, firstNonWhitespaceColumn)
-                  .setEndPosition(nativeSourceLine, trimmedLine.length())
-                  .setFilePath(nativeSource.getRelativeFilePath())
-                  .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
-                  .build(),
-              () -> sourceBuilder.append(trimmedLine.substring(firstNonWhitespaceColumn)));
-        }
-        sourceBuilder.newLine();
-        nativeSourceLine++;
-      }
+    sourceBuilder.appendln("/* NATIVE.JS EPILOG */");
+    sourceBuilder.newLine();
+
+    String longAliasName = type.getTypeDescriptor().getLongAliasName();
+    if (!className.equals(longAliasName)) {
+      sourceBuilder.appendln("const " + longAliasName + " = " + className + ";");
       sourceBuilder.newLine();
     }
+
+    int nativeSourceLine = 0;
+    String content = nativeSource.getContent();
+    for (String line : Splitter.on('\n').split(content)) {
+      String trimmedLine = CharMatcher.whitespace().trimTrailingFrom(line);
+
+      if (!trimmedLine.isEmpty()) {
+        int firstNonWhitespaceColumn = CharMatcher.whitespace().negate().indexIn(trimmedLine);
+        sourceBuilder.append(Strings.repeat(" ", firstNonWhitespaceColumn));
+        // Only map the trimmed section of the line.
+        sourceBuilder.emitWithMapping(
+            SourcePosition.newBuilder()
+                .setStartPosition(nativeSourceLine, firstNonWhitespaceColumn)
+                .setEndPosition(nativeSourceLine, trimmedLine.length())
+                .setFilePath(nativeSource.getRelativeFilePath())
+                .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
+                .build(),
+            () -> sourceBuilder.append(trimmedLine.substring(firstNonWhitespaceColumn)));
+      }
+      sourceBuilder.newLine();
+      nativeSourceLine++;
+    }
+    sourceBuilder.newLine();
   }
 
   private void renderExports() {
