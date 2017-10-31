@@ -61,7 +61,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
     if (methodDescriptor.isJsMethodVarargs()) {
       checkState(
           passedArguments.size() >= declaredParameterTypes.size() - 1,
-          "Invalid method call argument count. Expected at lease %s arguments but received "
+          "Invalid method call argument count. Expected at least %s arguments but received "
               + "%s in call to method '%s() from compilation unit %s",
           declaredParameterTypes.size(),
           passedArguments.size(),

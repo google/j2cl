@@ -281,19 +281,18 @@ public class CompilationUnitBuilder {
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
+      IMethodBinding enumConstructorBinding = enumConstantDeclaration.resolveConstructorBinding();
       if (enumConstantDeclaration.getAnonymousClassDeclaration() != null) {
         convertAnonymousClassDeclaration(
-            enumConstantDeclaration.getAnonymousClassDeclaration(),
-            enumConstantDeclaration.resolveConstructorBinding(),
-            null);
+            enumConstantDeclaration.getAnonymousClassDeclaration(), enumConstructorBinding, null);
       }
 
       Expression initializer =
-          NewInstance.Builder.from(
-                  JdtUtils.createMethodDescriptor(
-                      enumConstantDeclaration.resolveConstructorBinding()))
+          NewInstance.Builder.from(JdtUtils.createMethodDescriptor(enumConstructorBinding))
               .setArguments(
-                  convertExpressions(JdtUtils.asTypedList(enumConstantDeclaration.arguments())))
+                  convertArguments(
+                      enumConstructorBinding,
+                      JdtUtils.asTypedList(enumConstantDeclaration.arguments())))
               .build();
 
       FieldDescriptor fieldDescriptor =

@@ -23,8 +23,7 @@ public enum Enum1 {
 enum Enum2 {
   VALUE1(2),
   VALUE2(Enum1.V1),
-  // TODO(b/68720338): uncomment when fixed.
-  // VALUE3,
+  VALUE3,
   VALUE4(5) {};
 
   int foo = Enum1.V1.ordinal();
