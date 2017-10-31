@@ -11,9 +11,6 @@ const Callable = goog.require('com.google.j2cl.transpiler.readable.simplebridgem
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
-
 
 /**
  * @template C_V
@@ -88,9 +85,6 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    $JavaScriptFunction =
-        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     java_lang_Object.$clinit();
   }
 

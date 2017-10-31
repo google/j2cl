@@ -11,8 +11,6 @@ const Runner = goog.require('com.google.j2cl.transpiler.readable.lambdanestedsco
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-
 
 /**
  * @implements {Runner}
@@ -85,8 +83,6 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    $JavaScriptFunction =
-        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     java_lang_Object.$clinit();
   }
 
