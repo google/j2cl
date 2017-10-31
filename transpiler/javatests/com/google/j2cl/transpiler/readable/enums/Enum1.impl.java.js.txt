@@ -1,0 +1,254 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.enums.Enum1.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.enums.Enum1$impl');
+
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+
+/**
+ * @extends {Enum<Enum1>}
+ */
+class Enum1 extends Enum {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Enum1(String, int)'.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!Enum1}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    let $instance = new Enum1();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_enums_Enum1__java_lang_String__int(
+            $name, $ordinal);
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Enum1(String, int)'.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_enums_Enum1__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_enums_Enum1();
+  }
+
+  /**
+   * @param {?string} name
+   * @return {Enum1}
+   * @public
+   */
+  static m_valueOf__java_lang_String(name) {
+    Enum1.$clinit();
+    if ($Equality.$same(
+            Enum1
+                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_,
+            null)) {
+      Enum1
+          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
+          /**@type {Map<?string, !Enum1>} */ (
+              $Enums.createMapFromValues(Enum1.m_values__()));
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        Enum1
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_);
+  }
+
+  /**
+   * @return {Array<Enum1>}
+   * @public
+   */
+  static m_values__() {
+    Enum1.$clinit();
+    return /**@type {!Array<Enum1>} */ ($Arrays.$init(
+        [
+          Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1,
+          Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1
+        ],
+        Enum1));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Enum1} */ ($Casts.$to(arg0, Enum1)));
+  }
+
+  /**
+   * A static field getter.
+   * @return {!Enum1}
+   * @public
+   */
+  static get f_V1__com_google_j2cl_transpiler_readable_enums_Enum1() {
+    return (
+        Enum1.$clinit(),
+        Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!Enum1} value
+   * @return {void}
+   * @public
+   */
+  static set f_V1__com_google_j2cl_transpiler_readable_enums_Enum1(value) {
+    (Enum1.$clinit(),
+     Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1 = value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!Enum1}
+   * @public
+   */
+  static get f_V2__com_google_j2cl_transpiler_readable_enums_Enum1() {
+    return (
+        Enum1.$clinit(),
+        Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!Enum1} value
+   * @return {void}
+   * @public
+   */
+  static set f_V2__com_google_j2cl_transpiler_readable_enums_Enum1(value) {
+    (Enum1.$clinit(),
+     Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1 = value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {Map<?string, !Enum1>}
+   * @public
+   */
+  static get f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_() {
+    return (
+        Enum1.$clinit(),
+        Enum1
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_);
+  }
+
+  /**
+   * A static field setter.
+   * @param {Map<?string, !Enum1>} value
+   * @return {void}
+   * @public
+   */
+  static set f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_(
+      value) {
+    (Enum1.$clinit(),
+     Enum1
+         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
+         value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Enum1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Enum1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Enum1.$clinit = function() {};
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    Enum.$clinit();
+    Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1 =
+        Enum1.$create__java_lang_String__int($Util.$makeEnumName('V1'), 0);
+    Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1 =
+        Enum1.$create__java_lang_String__int($Util.$makeEnumName('V2'), 1);
+    Enum1
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_enums_Enum1() {}
+};
+
+$Util.$setClassMetadataForEnum(
+    Enum1,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.enums.Enum1'));
+
+
+/**
+ * @private {!Enum1}
+ */
+Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1 = null;
+
+
+/**
+ * @private {!Enum1}
+ */
+Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1 = null;
+
+
+/**
+ * @private {Map<?string, !Enum1>}
+ */
+Enum1.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
+    null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Enum1;
+//# sourceMappingURL=Enum1.js.map

@@ -1,0 +1,107 @@
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_js>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [/** @public {number} */
+    this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = 0;] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_js>"
+[foo] => [foo] "foo"
+[Enum2(int foo) {
+    this.foo = foo;
+  }] => [let $instance = new Enum2();] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(int foo) {
+    this.foo = foo;
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int($name, $ordinal, foo);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(int foo) {
+    this.foo = foo;
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[foo] => [foo] "foo"
+[Enum2(int foo) {
+    this.foo = foo;
+  }] => [this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[Enum2(int foo) {
+    this.foo = foo;
+  }] => [this.$init__com_google_j2cl_transpiler_readable_enums_Enum2();] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[this.foo = foo;] => [this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = foo;] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[foo] => [foo] "foo"
+[Enum2(Enum foo) {
+    this(foo.ordinal());
+  }] => [let $instance = new Enum2();] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(Enum foo) {
+    this(foo.ordinal());
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__java_lang_Enum($name, $ordinal, foo);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(Enum foo) {
+    this(foo.ordinal());
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[foo] => [foo] "foo"
+[this(foo.ordinal());] => [this.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int($name, $ordinal, foo.ordinal());] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[somePars] => [somePars] "somePars"
+[Enum2(Object... somePars) {
+    this(somePars.length);
+  }] => [let $instance = new Enum2();] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(Object... somePars) {
+    this(somePars.length);
+  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__arrayOf_java_lang_Object($name, $ordinal, somePars);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[Enum2(Object... somePars) {
+    this(somePars.length);
+  }] => [return $instance;] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: ctor_create>"
+[somePars] => [somePars] "somePars"
+[this(somePars.length);] => [this.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int($name, $ordinal, somePars.length);] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [Enum2.$clinit();] "com.google.j2cl.transpiler.readable.enums.Enum2.valueOf"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [if ($Equality.$same(Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_, null)) {
+      Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = /**@type {Map<?string, !Enum2>} */ ($Enums.createMapFromValues(Enum2.m_values__()));
+    }] "com.google.j2cl.transpiler.readable.enums.Enum2.valueOf"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = /**@type {Map<?string, !Enum2>} */ ($Enums.createMapFromValues(Enum2.m_values__()));] "com.google.j2cl.transpiler.readable.enums.Enum2.valueOf"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [return $Enums.getValueFromNameAndMap(name, Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_);] "com.google.j2cl.transpiler.readable.enums.Enum2.valueOf"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [Enum2.$clinit();] "com.google.j2cl.transpiler.readable.enums.Enum2.values"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [return /**@type {!Array<Enum2>} */ ($Arrays.$init([Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2, Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2, Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2], Enum2));] "com.google.j2cl.transpiler.readable.enums.Enum2.values"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [return super.compareTo(/**@type {Enum2} */ ($Casts.$to(arg0, Enum2)));] "com.google.j2cl.transpiler.readable.enums.Enum2.compareTo"
+[VALUE1(2)] => [return (Enum2.$clinit(), Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
+[VALUE1(2)] => [(Enum2.$clinit(), Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2 = value);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: setter>"
+[VALUE2(Enum1.V1)] => [return (Enum2.$clinit(), Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
+[VALUE2(Enum1.V1)] => [(Enum2.$clinit(), Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2 = value);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: setter>"
+[VALUE4(5) {}] => [return (Enum2.$clinit(), Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
+[VALUE4(5) {}] => [(Enum2.$clinit(), Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2 = value);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: setter>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [return (Enum2.$clinit(), Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [(Enum2.$clinit(), Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = value);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: setter>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [Enum.$clinit();] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[VALUE1(2)] => [Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.$create__java_lang_String__int__int($Util.$makeEnumName("VALUE1"), 0, 2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[VALUE2(Enum1.V1)] => [Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.$create__java_lang_String__int__java_lang_Enum($Util.$makeEnumName("VALUE2"), 1, Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[VALUE4(5) {}] => [Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2 = $1.$create__java_lang_String__int__int($Util.$makeEnumName("VALUE4"), 2, 5);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[enum Enum2 {
+  VALUE1(2),
+...  }
+}] => [Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = null;] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[int foo = Enum1.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1.ordinal();] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"

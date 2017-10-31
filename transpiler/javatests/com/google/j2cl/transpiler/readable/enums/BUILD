@@ -8,6 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "simpleenum",
+    name = "enums",
     srcs = glob(["*.java"]),
 )

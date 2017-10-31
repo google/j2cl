@@ -13,25 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.readable.simpleenum;
+package com.google.j2cl.transpiler.readable.enums;
 
-public enum SimpleEnum {
+public enum Enum1 {
   V1,
   V2
 }
 
-enum SimpleEnum2 {
+enum Enum2 {
   VALUE1(2),
-  VALUE2(SimpleEnum.V1),
-  VALUE3(5) {};
+  VALUE2(Enum1.V1),
+  // TODO(b/68720338): uncomment when fixed.
+  // VALUE3,
+  VALUE4(5) {};
 
-  int foo = SimpleEnum.V1.ordinal();
+  int foo = Enum1.V1.ordinal();
 
-  SimpleEnum2(int foo) {
+  Enum2(int foo) {
     this.foo = foo;
   }
 
-  SimpleEnum2(SimpleEnum foo) {
+  Enum2(Enum foo) {
     this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
   }
 }
