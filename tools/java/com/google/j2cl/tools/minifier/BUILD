@@ -16,7 +16,7 @@ java_library(
     srcs = ["J2clMinifier.java"],
     compatible_with = ["//buildenv/target:appengine"],
     visibility = [
-        "//third_party/java/j2cl:__pkg__",
+        "//:__pkg__",
         "//tools/javatests/com/google/j2cl/tools/minifier:__pkg__",
     ],
     deps = ["//third_party:guava"],
