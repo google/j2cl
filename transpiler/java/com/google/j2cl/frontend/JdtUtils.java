@@ -779,7 +779,7 @@ public class JdtUtils {
       return originalJsInfo;
     }
 
-    // TODO(epmjohnston): Do the same for JsProperty?
+    // TODO(b/67778330): Make the handling of @JsProperty consistent with the handling of @JsMethod.
     if (inheritedJsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
       // Return the first JsInfo with a Js name specified.
       for (JsInfo inheritedJsInfo : inheritedJsInfoList) {
