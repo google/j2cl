@@ -6,26 +6,27 @@
 # Apache2
 licenses(["notice"])
 
-java_binary(
-    name = "GwtIncompatibleStripper",
-    main_class = "com.google.j2cl.tools.gwtincompatible.StripperWorker",
-    visibility = ["//internal_do_not_use:__pkg__"],
-    runtime_deps = ["//tools/java/com/google/j2cl/tools/gwtincompatible"],
-)
-
 java_library(
-    name = "gwtincompatible",
-    srcs = glob(["*.java"]),
+    name = "gwtincompatible_lib",
+    srcs = glob(
+        ["*.java"],
+        exclude = ["StripperWorker.java"],
+    ),
     visibility = ["//tools/javatests/com/google/j2cl/tools/gwtincompatible:__pkg__"],
     deps = [
         "//java/com/google/common/annotations",
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//java/com/google/common/io",
-        "//third_party/java/args4j",
         "//third_party:jdt-core",
-        "//transpiler/java/com/google/j2cl/bazel",
+        "//third_party/java/args4j",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/frontend",
     ],
+)
+
+java_binary(
+    name = "GwtIncompatibleStripper",
+    main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
+    runtime_deps = [":gwtincompatible_lib"],
 )

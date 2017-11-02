@@ -47,5 +47,5 @@ alias(
 
 alias(
     name = "GwtIncompatibleStripper",
-    actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper",
+    actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper_worker",
 )
