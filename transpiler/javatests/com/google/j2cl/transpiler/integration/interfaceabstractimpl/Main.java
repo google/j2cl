@@ -47,6 +47,8 @@ interface Z extends X {
   int funInZ();
 
   int barInZ();
+
+  int klmInZ();
 }
 
 interface I extends W {
@@ -61,7 +63,15 @@ interface J extends W, Z, X {
   int barInJ();
 }
 
-abstract class C implements Z {
+class E {
+  public int klmInZ() {
+    return 42;
+  }
+}
+
+class D extends E {}
+
+abstract class C extends D implements Z {
   @Override
   public int barInZ() {
     return 1;
@@ -73,6 +83,8 @@ abstract class C implements Z {
   }
 
   public abstract int barInI();
+
+  // klmInZ from grandparent is accidentally overridden
 }
 
 abstract class B extends C implements W, X, Y {
@@ -153,5 +165,6 @@ public class Main {
     assert (subA.funInX() == 10);
     assert (subA.funInY() == 11);
     assert (subA.funInZ() == 9);
+    assert (subA.klmInZ() == 42);
   }
 }
