@@ -156,6 +156,8 @@ public class OutputGeneratorStage {
 
   private static final String SOURCE_MAP_SUFFIX = ".js.map";
 
+  private static final String READABLE_MAPPINGS_SUFFIX = ".js.mappings";
+
   private void generateSourceMaps(
       CompilationUnit j2clUnit,
       Type type,
@@ -163,31 +165,35 @@ public class OutputGeneratorStage {
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       NativeJavaScriptFile nativeJavaScriptFile) {
     try {
-      String output;
+      // Generate sourcemap files.
+      String output =
+          SourceMapGeneratorStage.generateSourceMaps(
+              type, javaSourcePositionByOutputSourcePosition);
+
+      Path absolutePathForSourceMap = outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
+      J2clUtils.writeToFile(absolutePathForSourceMap, output, problems);
+
       if (shouldGenerateReadableSourceMaps) {
-        output =
+        String readableOutput =
             ReadableSourceMapGenerator.generate(
                 javaSourcePositionByOutputSourcePosition,
                 javaScriptImplementationFileContents,
                 nativeJavaScriptFile,
                 j2clUnit.getFilePath());
-        if (output.isEmpty()) {
+        if (readableOutput.isEmpty()) {
           return;
         }
-      } else {
-        // Generate sourcemap files.
-        output =
-            SourceMapGeneratorStage.generateSourceMaps(
-                type, javaSourcePositionByOutputSourcePosition);
-      }
 
-      Path absolutePathForSourceMap = outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
-      J2clUtils.writeToFile(absolutePathForSourceMap, output, problems);
+        Path absolutePathForReadableSourceMap =
+            outputPath.resolve(getRelativePath(type) + READABLE_MAPPINGS_SUFFIX);
+        J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
+      }
     } catch (IOException e) {
       problems.error(
-          "Could not generate source maps for %s: %s", j2clUnit.getName(), e.getMessage());
+          "Could not generate source map file for %s: %s", j2clUnit.getName(), e.getMessage());
     }
   }
+
 
   /**
    * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,

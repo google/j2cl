@@ -149,8 +149,10 @@ def replace_transpiled_js(target_names):
         "rm", "{}", ";"
     ])
 
-    run_cmd_get_output(
-        ["unzip", "-o", "-d", extractDir, zip_file_path, "-x", "*.java"])
+    run_cmd_get_output([
+        "unzip", "-o", "-d", extractDir, zip_file_path, "-x", "*.java", "-x",
+        "*.map"
+    ])
 
     find_command_js_sources = ["find", EXAMPLES_DIR + target_name,
                                "-name", "*.java.js"]
