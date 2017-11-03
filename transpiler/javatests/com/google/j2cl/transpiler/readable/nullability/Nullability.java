@@ -18,20 +18,16 @@ package com.google.j2cl.transpiler.readable.nullability;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-
-import org.checkerframework.checker.nullness.compatqual.NullableType;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import org.checkerframework.checker.nullness.compatqual.NullableType;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Nullability {
   @Nonnull private String f1 = "Hello";
@@ -156,6 +152,19 @@ public class Nullability {
     @Override
     public int compare(@Nullable String a, @Nullable String b) {
       return 0;
+    }
+  }
+
+  interface NullableTemplatedReturn<T> {
+    @Nullable
+    T foo();
+  }
+
+  public static class NullableTemplatedReturnOverride implements NullableTemplatedReturn<String> {
+    @Nullable
+    @Override
+    public String foo() {
+      return "foo";
     }
   }
 }
