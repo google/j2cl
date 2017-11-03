@@ -12,6 +12,6 @@ readable_example(
     srcs = glob(["*.java"]),
     deps = [
         "//third_party/java/elemental2:elemental2-promise-j2cl",
-        "//third_party/java/gwt:gwt-jsinterop-async-annotations-j2cl",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
     ],
 )
