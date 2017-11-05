@@ -17,8 +17,11 @@ package com.google.j2cl.ast;
 
 import java.util.List;
 
-/** Implemented by nodes that have parameters. */
+/** Implemented by nodes that have parameters and a method descriptor. */
 public interface HasParameters {
+
+  MethodDescriptor getDescriptor();
+
   List<Variable> getParameters();
 
   Variable getJsVarargsParameter();

@@ -78,6 +78,16 @@
     return elements[0].get(0);
   }] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
+[elements] => [elements] "elements"
+[@JsMethod
+  public static <T> T parameterizedByT(List<T>... elements) {
+    return elements[0].get(0);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
+[@JsMethod
+  public static <T> T parameterizedByT(List<T>... elements) {
+    return elements[0].get(0);
+  }] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
+[return elements[0].get(0);] => [return elements[0].getAtIndex(0);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [f1(1);] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"

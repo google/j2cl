@@ -125,6 +125,19 @@ public class Main {
   }
 
   @JsFunction
+  interface JsFunctionVarargsGenerics<T> {
+    int m(int i, T... numbers);
+  }
+
+  <T> void f1(JsFunctionVarargsGenerics<T> x) {}
+
+  <T> void f2(JsFunctionVarargsGenerics<List<T>> x) {}
+
+  // TODO(b/68721890): uncomment when bug is fixed.
+  // @JsMethod
+  // <T> void f3(JsFunctionVarargsGenerics<List<T>>... x) {}
+
+  @JsFunction
   interface JsFunctionOptional {
     int m(int i, @JsOptional Double number);
   }

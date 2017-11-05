@@ -80,6 +80,7 @@ public class ExpressionTranspiler {
     // TODO(rluble): create a visitor based abstraction for cases like this where the only
     // feature that is needed is the delegated dynamic dispatch.
     new AbstractTransformer<Void>() {
+      ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(environment);
 
       @Override
       public Void transformArrayAccess(ArrayAccess arrayAccess) {
@@ -122,7 +123,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
-        String jsdoc = JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), environment);
+        String jsdoc = closureTypesGenerator.getClosureTypeString(annotation.getTypeDescriptor());
         if (annotation.isDeclaration()) {
           sourceBuilder.appendln("/** @public {" + jsdoc + "} */");
           process(annotation.getExpression());
@@ -155,7 +156,7 @@ public class ExpressionTranspiler {
       private void emitVariableWithJsDocAnnotation(Variable variable) {
         sourceBuilder.append("/** ");
         sourceBuilder.append(
-            JsDocNameUtils.getJsDocName(variable.getTypeDescriptor(), environment));
+            closureTypesGenerator.getClosureTypeString(variable.getTypeDescriptor()));
         sourceBuilder.append(" */ ");
         process(variable);
       }
@@ -163,8 +164,7 @@ public class ExpressionTranspiler {
       private void emitFunctionHeaderJsDoc(FunctionExpression functionExpression) {
         sourceBuilder.append("/** ");
         for (int i = 0; i < functionExpression.getParameters().size(); i++) {
-          sourceBuilder.append(
-              GeneratorUtils.getParameterJsDocAnnotation(functionExpression, i, environment));
+          sourceBuilder.append(closureTypesGenerator.getJsDocForParameter(functionExpression, i));
           sourceBuilder.append(" ");
         }
         sourceBuilder.append("*/ ");

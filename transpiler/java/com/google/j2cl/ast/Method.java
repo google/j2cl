@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 
 /** Method declaration. */
 @Visitable
-public class Method extends Member implements HasJsNameInfo, HasParameters, HasMethodDescriptor {
+public class Method extends Member implements HasJsNameInfo, HasParameters {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;

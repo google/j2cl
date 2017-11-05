@@ -183,6 +183,18 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangVoid);
   }
 
+  public static boolean isJavaLangComparable(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangComparable);
+  }
+
+  public static boolean isJavaLangCharSequence(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangCharSequence);
+  }
+
+  public static boolean isJavaLangNumber(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangNumber);
+  }
+
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         && !isPrimitiveBoolean(typeDescriptor)

@@ -124,6 +124,18 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @template M_T
+   * @param {...List<?>} elements
+   * @return {M_T}
+   * @public
+   */
+  static parameterizedByT(...elements) {
+    Main.$clinit();
+    $Arrays.$stampType(elements, List, 1);
+    return elements[0].getAtIndex(0);
+  }
+
+  /**
    * @return {void}
    * @public
    */

@@ -111,6 +111,11 @@ public class Main {
     return elements[0].get(0);
   }
 
+  @JsMethod
+  public static <T> T parameterizedByT(List<T>... elements) {
+    return elements[0].get(0);
+  }
+
   public void testStaticMethodNotFirst() {
     // multiple arguments.
     f1(1, 1, 2);

@@ -49,6 +49,7 @@ import java.util.stream.Collectors;
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private NativeJavaScriptFile nativeSource;
   private String relativeSourceMapLocation;
+  private final ClosureTypesGenerator closureTypesGenerator;
 
   private String className;
   private String mangledTypeName;
@@ -62,6 +63,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     this.className = environment.aliasForType(type.getDeclaration());
     this.mangledTypeName = ManglingNameUtils.getMangledName(type.getTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
+    this.closureTypesGenerator = new ClosureTypesGenerator(environment);
   }
 
   private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
@@ -99,20 +101,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return FILE_SUFFIX;
   }
 
-  public void setRelativeSourceMapLocation(String relativeSourceMapLocation) {
+  void setRelativeSourceMapLocation(String relativeSourceMapLocation) {
     this.relativeSourceMapLocation = checkNotNull(relativeSourceMapLocation);
   }
 
   public void setNativeSource(NativeJavaScriptFile nativeSource) {
     this.nativeSource = checkNotNull(nativeSource);
-  }
-
-  public String getJsDocName(TypeDescriptor typeDescriptor) {
-    return JsDocNameUtils.getJsDocName(typeDescriptor, environment);
-  }
-
-  public String getCommaSeparatedJsDocNames(Collection<TypeDescriptor> typeDescriptors) {
-    return JsDocNameUtils.getCommaSeparatedJsDocNames(typeDescriptors, environment);
   }
 
   @Override
@@ -202,7 +196,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       if (type.getDeclaration().hasTypeParameters()) {
         String templates =
-            getCommaSeparatedJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
+            closureTypesGenerator.getCommaSeparatedClosureTypesString(
+                type.getDeclaration().getTypeParameterDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
@@ -216,7 +211,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       if (type.getDeclaration().hasTypeParameters()) {
         String templates =
-            getCommaSeparatedJsDocNames(type.getDeclaration().getTypeParameterDescriptors());
+            closureTypesGenerator.getCommaSeparatedClosureTypesString(
+                type.getDeclaration().getTypeParameterDescriptors());
         buffer.appendln(" * @template " + templates);
       }
       if (type.getSuperTypeDescriptor() != null
@@ -252,7 +248,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               ? typeDescriptor
                   .getTypeArgumentDescriptors()
                   .stream()
-                  .map(this::getJsDocName)
+                  .map(td -> closureTypesGenerator.getClosureTypeString(td))
                   .collect(Collectors.joining(", ", "<", ">"))
               : "";
 
@@ -330,7 +326,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
-          getCommaSeparatedJsDocNames(method.getDescriptor().getTypeParameterTypeDescriptors());
+          closureTypesGenerator.getCommaSeparatedClosureTypesString(
+              method.getDescriptor().getTypeParameterTypeDescriptors());
       sourceBuilder.appendln(" * @template " + templateParamNames);
     }
 
@@ -338,13 +335,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && method.getDescriptor().isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
         && !method.getDescriptor().getName().startsWith("$ctor")) {
-      sourceBuilder.appendln(" * @this {" + getJsDocName(type.getTypeDescriptor()) + "}");
+      sourceBuilder.appendln(
+          " * @this {"
+              + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
+              + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
-      sourceBuilder.appendln(
-          " * " + GeneratorUtils.getParameterJsDocAnnotation(method, i, environment));
+      sourceBuilder.appendln(" * " + closureTypesGenerator.getJsDocForParameter(method, i));
     }
-    String returnTypeName = getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
+    String returnTypeName =
+        closureTypesGenerator.getClosureTypeString(
+            method.getDescriptor().getReturnTypeDescriptor());
     if (!method.getDescriptor().isConstructor()) {
       sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
     }
@@ -600,13 +601,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderStaticFieldDeclarations() {
     for (Field staticField : type.getStaticFields()) {
-      String jsDocType =
-          JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
+      String closureTypeString =
+          closureTypesGenerator.getClosureTypeString(
+              staticField.getDescriptor().getTypeDescriptor());
 
       if (staticField.isCompileTimeConstant()) {
-        sourceBuilder.appendLines("/**", " * @public {" + jsDocType + "}", " * @const", " */");
+        sourceBuilder.appendLines(
+            "/**", " * @public {" + closureTypeString + "}", " * @const", " */");
       } else {
-        sourceBuilder.appendLines("/**", " * @private {" + jsDocType + "}", " */");
+        sourceBuilder.appendLines("/**", " * @private {" + closureTypeString + "}", " */");
       }
 
       sourceBuilder.newLine();
