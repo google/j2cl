@@ -22,14 +22,14 @@ goog.module('vmbootstrap.Comparables');
 
 // Imports headers for both eager and lazy dependencies to ensure that
 // all files are included in the dependency tree.
-let _Boolean = goog.require('java.lang.Boolean');
-let _Class = goog.require('java.lang.Class');
-let _Comparable = goog.require('java.lang.Comparable');
-let _Double = goog.require('java.lang.Double');
-let _String = goog.require('java.lang.String');
-let _$boolean = goog.require('vmbootstrap.primitives.$boolean');
-let _$double = goog.require('vmbootstrap.primitives.$double');
+const _Boolean = goog.require('java.lang.Boolean');
+const _Class = goog.require('java.lang.Class');
+const _Comparable = goog.require('java.lang.Comparable');
+const _Double = goog.require('java.lang.Double');
+const _String = goog.require('java.lang.String');
+const _$boolean = goog.require('vmbootstrap.primitives.$boolean');
+const _$double = goog.require('vmbootstrap.primitives.$double');
 
 // Re-exports the implementation.
-let Comparables = goog.require('vmbootstrap.Comparables$impl');
+const Comparables = goog.require('vmbootstrap.Comparables$impl');
 exports = Comparables;

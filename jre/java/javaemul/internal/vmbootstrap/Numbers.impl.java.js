@@ -18,7 +18,7 @@
 goog.module('vmbootstrap.Numbers$impl');
 
 
-let $Long = goog.require('nativebootstrap.Long$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
 
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');

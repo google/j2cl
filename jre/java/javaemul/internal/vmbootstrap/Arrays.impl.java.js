@@ -20,7 +20,7 @@ goog.module('vmbootstrap.Arrays$impl');
 
 // Don't reformat these imports! The uncompiled test harness contains a bug
 // that will miss some multiline goog.require's.
-let Hashing = goog.require('nativebootstrap.Hashing$impl');
+const Hashing = goog.require('nativebootstrap.Hashing$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');

@@ -18,7 +18,7 @@
 goog.module('vmbootstrap.JavaScriptObject$impl');
 
 
-let $Util = goog.require('nativebootstrap.Util$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**

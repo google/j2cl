@@ -18,7 +18,7 @@
 goog.module('nativebootstrap.Long$impl');
 
 
-let Long = goog.require('goog.math.Long');
+const Long = goog.require('goog.math.Long');
 
 
 /**
