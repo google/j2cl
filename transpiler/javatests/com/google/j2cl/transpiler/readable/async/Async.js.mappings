@@ -32,6 +32,18 @@
     return Promise.resolve((Void) null);
   }] => [Async.$clinit();] "com.google.j2cl.transpiler.readable.async.Async.staticAsyncMethod"
 [return Promise.resolve((Void) null);] => [return /**@type {Promise<?void>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))));] "com.google.j2cl.transpiler.readable.async.Async.staticAsyncMethod"
+[AsyncInterface i = () -> Promise.resolve(5);] => [let i = AsyncInterface.$adapt((async () =>{
+      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
+    }));] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
+[i] => [i] "i"
+[Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.async.Async.<lambda in testAsyncLambdas>"
+[i.asyncCall();] => [/**@type {IThenable<Integer>} */ (i.m_asyncCall__());] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
+[AsyncJsInterface j = () -> Promise.resolve(5);] => [let j = (async () =>{
+      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
+    });] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
+[j] => [j] "j"
+[Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.async.Async.<lambda in testAsyncLambdas>"
+[j.doSomething();] => [/**@type {IThenable<Integer>} */ (j());] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
 [public class Async {
   @JsAsync
 ...  }
