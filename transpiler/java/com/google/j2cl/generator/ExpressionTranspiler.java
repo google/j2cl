@@ -184,6 +184,11 @@ public class ExpressionTranspiler {
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
         sourceBuilder.append("(");
+
+        if (expression.getDescriptor().isJsAsync()) {
+          sourceBuilder.append("async ");
+        }
+
         ImmutableList<ParameterDescriptor> parameterDescriptors =
             expression
                 .getTypeDescriptor()

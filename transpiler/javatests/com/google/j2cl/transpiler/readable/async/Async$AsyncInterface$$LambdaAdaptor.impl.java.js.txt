@@ -1,0 +1,113 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.async.Async$AsyncInterface$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.async.Async.AsyncInterface.$LambdaAdaptor$impl');
+
+
+const AsyncInterface = goog.require('com.google.j2cl.transpiler.readable.async.Async.AsyncInterface$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+
+/**
+ * @implements {AsyncInterface}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function():IThenable<Integer>} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function():IThenable<Integer>} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function():IThenable<Integer>} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @return {IThenable<Integer>}
+   * @public
+   */
+  async m_asyncCall__() {
+    let /** ?function():IThenable<Integer> */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor,
+        /**@type {IThenable<Integer>} */ ($function()));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_async_Async_AsyncInterface_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.async.Async$AsyncInterface$$LambdaAdaptor'));
+
+
+AsyncInterface.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Async$AsyncInterface$$LambdaAdaptor.js.map

@@ -86,6 +86,10 @@ public abstract class MemberDescriptor extends Node
     return false;
   }
 
+  public boolean isJsAsync() {
+    return getJsInfo().isJsAsync();
+  }
+
   public boolean isJsConstructor() {
     return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
   }

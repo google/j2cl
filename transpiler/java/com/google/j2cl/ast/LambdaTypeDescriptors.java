@@ -272,10 +272,13 @@ public class LambdaTypeDescriptors {
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       TypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
-    return MethodDescriptor.newBuilder()
-        .from(singleAbstractMethod)
+    return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
-        .setJsInfo(JsInfo.NONE)
+        .setJsInfo(
+            JsInfo.newBuilder()
+                .setJsMemberType(JsMemberType.NONE)
+                .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
+                .build())
         .setNative(false)
         .setJsFunction(true)
         .build();

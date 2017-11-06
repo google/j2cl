@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.readable.async;
 import elemental2.promise.IThenable;
 import elemental2.promise.Promise;
 import jsinterop.annotations.JsAsync;
+import jsinterop.annotations.JsFunction;
 
 public class Async {
   @JsAsync
@@ -28,5 +29,42 @@ public class Async {
   @JsAsync
   static IThenable<Void> staticAsyncMethod() {
     return Promise.resolve((Void) null);
+  }
+
+  void testAsyncLambdas() {
+    AsyncInterface i = () -> Promise.resolve(5);
+    i.asyncCall();
+
+    AsyncJsInterface j = () -> Promise.resolve(5);
+    j.doSomething();
+  }
+
+  interface AsyncInterface {
+    @JsAsync
+    IThenable<Integer> asyncCall();
+  }
+
+  interface AsyncInterfaceWithDefaultMethod {
+    @JsAsync
+    default IThenable<Integer> asyncCall() {
+      return Promise.resolve(5);
+    }
+  }
+
+  // TODO(skill): fix @JsAsync use case for @JsProperty
+  /*
+  static class ClassWithProperty {
+    @JsAsync
+    @JsProperty
+    IThenable<Integer> getX() {
+      return Promise.resolve(5);
+    }
+  }
+  */
+
+  @JsFunction
+  interface AsyncJsInterface {
+    @JsAsync
+    IThenable<Integer> doSomething();
   }
 }

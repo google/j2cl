@@ -179,7 +179,7 @@ def integration_test(name,
       var Main = goog.require('%s');
       testSuite({
         test_Main: function() {
-          Main.m_main__arrayOf_java_lang_String([]);
+          return Main.m_main__arrayOf_java_lang_String([]);
         }
       });
   """ % (main_class)
