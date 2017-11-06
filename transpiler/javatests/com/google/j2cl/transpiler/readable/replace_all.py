@@ -106,7 +106,7 @@ def blaze_build(target_names, build_all):
   """Blaze build everything in 1-go, for speed."""
   global INTEGRATION_TARGET_PATTERN
 
-  args = ["blaze", "build"]
+  args = ["blaze", "build", "-c", "fastbuild"]
   args += [readable_j2cl_target(target_name) for target_name in target_names]
 
   if not FLAGS.nologs:
