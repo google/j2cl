@@ -161,6 +161,7 @@ def integration_test(name,
       jvm_flags = [
           "-ea",
       ],
+      restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
       tags=["manual"],
   )
 
