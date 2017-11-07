@@ -62,7 +62,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
+        sourceBuilder.appendln("const _" + alias + " = goog.require('" + path + "');");
       }
     }
     // goog.require(...) for lazy imports
