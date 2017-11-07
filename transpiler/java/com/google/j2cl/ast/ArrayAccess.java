@@ -45,7 +45,7 @@ public class ArrayAccess extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return arrayExpression.getTypeDescriptor().getComponentTypeDescriptor();
+    return ((ArrayTypeDescriptor) arrayExpression.getTypeDescriptor()).getComponentTypeDescriptor();
   }
 
   @Override

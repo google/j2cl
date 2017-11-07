@@ -76,7 +76,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           AstUtils.createArraysMethodCall(
               "$createNative",
               new ArrayLiteral(
-                  TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                  TypeDescriptors.get().javaLangObjectArray,
                   newArrayExpression.getDimensionExpressions())),
           newArrayExpression.getTypeDescriptor());
     }
@@ -86,7 +86,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
         AstUtils.createArraysMethodCall(
             "$create",
             new ArrayLiteral(
-                TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                TypeDescriptors.get().javaLangObjectArray,
                 newArrayExpression.getDimensionExpressions()),
             AstUtils.getMetadataConstructorReference(leafTypeDescriptor)),
         newArrayExpression.getTypeDescriptor());
@@ -111,7 +111,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     if (dimensionCount > 1) {
-      arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
+      arguments.add(NumberLiteral.of(dimensionCount));
     }
 
     return createNonNullableAnnotation(
@@ -126,7 +126,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       Expression expression, TypeDescriptor typeDescriptor) {
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(expression)
-        .setAnnotationType(TypeDescriptors.toNonNullable(typeDescriptor))
+        .setAnnotationType(typeDescriptor.toNonNullable())
         .build();
   }
 }

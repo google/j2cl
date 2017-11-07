@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -32,7 +33,6 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import java.util.ArrayList;
@@ -73,15 +73,15 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   }
 
   private static Type createOverlayImplementationType(Type type) {
-    TypeDescriptor overlayImplTypeDescriptor =
+    DeclaredTypeDescriptor overlayImplTypeDescriptor =
         TypeDescriptors.createOverlayImplementationTypeDescriptor(
-            type.getDeclaration().getUnsafeTypeDescriptor());
+            type.getDeclaration().getUnparamterizedTypeDescriptor());
     Type overlayClass =
         new Type(
             type.getSourcePosition(),
             type.getVisibility(),
             overlayImplTypeDescriptor.getTypeDeclaration());
-    overlayClass.setNativeTypeDescriptor(type.getDeclaration().getUnsafeTypeDescriptor());
+    overlayClass.setNativeTypeDescriptor(type.getDeclaration().getUnparamterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
       if (member instanceof Method) {
@@ -112,7 +112,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   }
 
   private static Method createOverlayMethod(
-      Method method, TypeDescriptor overlayImplTypeDescriptor) {
+      Method method, DeclaredTypeDescriptor overlayImplTypeDescriptor) {
     Method statifiedMethod =
         method.getDescriptor().isStatic() ? method : AstUtils.createDevirtualizedMethod(method);
     Method movedMethod =
@@ -142,7 +142,8 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
       MethodDescriptor methodDescriptor = methodCall.getTarget();
-      TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+      DeclaredTypeDescriptor enclosingTypeDescriptor =
+          methodDescriptor.getEnclosingTypeDescriptor();
 
       boolean targetIsJsOverlayInNativeClass =
           (enclosingTypeDescriptor.isNative() || enclosingTypeDescriptor.isJsFunctionInterface())
@@ -153,7 +154,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
       if (targetIsDefaultMethodAccessedStatically || targetIsJsOverlayInNativeClass) {
 
-        TypeDescriptor overlayTypeDescriptor =
+        DeclaredTypeDescriptor overlayTypeDescriptor =
             TypeDescriptors.createOverlayImplementationTypeDescriptor(enclosingTypeDescriptor);
         if (methodCall.getTarget().isStatic()) {
           return MethodCall.Builder.from(methodCall)
@@ -173,7 +174,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       FieldDescriptor target = fieldAccess.getTarget();
       if (target.isJsOverlay()) {
         checkArgument(target.isStatic());
-        TypeDescriptor overlayTypeDescriptor =
+        DeclaredTypeDescriptor overlayTypeDescriptor =
             TypeDescriptors.createOverlayImplementationTypeDescriptor(
                 target.getEnclosingTypeDescriptor());
         return FieldAccess.Builder.from(

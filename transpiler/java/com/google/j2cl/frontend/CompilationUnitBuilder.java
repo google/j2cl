@@ -30,6 +30,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.AstUtils;
@@ -44,6 +45,7 @@ import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.ContinueStatement;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
@@ -85,6 +87,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnaryExpression;
+import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -98,7 +101,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
@@ -274,7 +276,7 @@ public class CompilationUnitBuilder {
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         type.getTypeDescriptor(),
-                        type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
+                        type.getEnclosingTypeDeclaration().getUnparamterizedTypeDescriptor()))
                 .setSourcePosition(type.getSourcePosition())
                 .build());
       }
@@ -300,7 +302,7 @@ public class CompilationUnitBuilder {
       // Enum fields are always non-nullable.
       fieldDescriptor =
           FieldDescriptor.Builder.from(fieldDescriptor)
-              .setTypeDescriptor(TypeDescriptors.toNonNullable(fieldDescriptor.getTypeDescriptor()))
+              .setTypeDescriptor(fieldDescriptor.getTypeDescriptor().toNonNullable())
               .build();
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
@@ -419,8 +421,8 @@ public class CompilationUnitBuilder {
       ArrayLiteral arrayLiteral =
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
-      TypeDescriptor typeDescriptor =
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
+      ArrayTypeDescriptor typeDescriptor =
+          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
       return NewArray.newBuilder()
           .setTypeDescriptor(typeDescriptor)
           .setDimensionExpressions(dimensionExpressions)
@@ -430,7 +432,7 @@ public class CompilationUnitBuilder {
 
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convertExpressions(JdtUtils.asTypedList(expression.expressions())));
     }
 
@@ -527,7 +529,10 @@ public class CompilationUnitBuilder {
 
       // the qualifier for the NewInstance.
       Expression newInstanceQualifier =
-          constructorDescriptor.getEnclosingTypeDescriptor().isCapturingEnclosingInstance()
+          constructorDescriptor
+                  .getEnclosingTypeDescriptor()
+                  .getTypeDeclaration()
+                  .isCapturingEnclosingInstance()
               ? convertOuterClassReference(
                   JdtUtils.findCurrentTypeBinding(expression),
                   newInstanceTypeBinding.getDeclaringClass(),
@@ -664,7 +669,8 @@ public class CompilationUnitBuilder {
           JdtUtils.asTypedList(expression.fragments());
 
       return VariableDeclarationExpression.newBuilder()
-          .setVariableDeclarationFragments(fragments.stream().map(this::convert).collect(toList()))
+          .setVariableDeclarationFragments(
+              fragments.stream().map(this::convert).collect(toImmutableList()))
           .build();
     }
 
@@ -875,8 +881,7 @@ public class CompilationUnitBuilder {
           .setInitializers(
               VariableDeclarationExpression.newBuilder()
                   .addVariableDeclaration(arrayVariable, convert(statement.getExpression()))
-                  .addVariableDeclaration(
-                      indexVariable, new NumberLiteral(TypeDescriptors.get().primitiveInt, 0))
+                  .addVariableDeclaration(indexVariable, NumberLiteral.of(0))
                   .build())
           .setUpdates(
               PostfixExpression.newBuilder()
@@ -999,7 +1004,7 @@ public class CompilationUnitBuilder {
               JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())
                   .stream()
                   .map(this::convert)
-                  .collect(toList()))
+                  .collect(toImmutableList()))
           .setStatements(
               convertLambdaBody(
                       expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
@@ -1041,11 +1046,13 @@ public class CompilationUnitBuilder {
     private Expression convert(ExpressionMethodReference expression) {
       checkNotNull(expression.getExpression());
       org.eclipse.jdt.core.dom.Expression qualifier = expression.getExpression();
+      TypeDescriptor expressionTypeDescriptor =
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
       if (JdtUtils.isEffectivelyConstant(qualifier)) {
         // There is no need to introduce a temporary variable for the qualifier.
         return createForwardingFunctionExpression(
             getSourcePosition(expression),
-            JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+            expressionTypeDescriptor,
             // functional interface method that the expression implements.
             JdtUtils.createMethodDescriptor(
                 expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
@@ -1075,7 +1082,7 @@ public class CompilationUnitBuilder {
               // Construct the functional expression.
               createForwardingFunctionExpression(
                   getSourcePosition(expression),
-                  JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+                  expressionTypeDescriptor,
                   // functional interface method that the expression implements.
                   JdtUtils.createMethodDescriptor(
                       expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
@@ -1114,7 +1121,8 @@ public class CompilationUnitBuilder {
       // If the expression does not resolve, it is an array creation.
       if (expression.resolveMethodBinding() == null) {
         // convert A[]::new into (size) -> new A[size]
-        TypeDescriptor arrayType = JdtUtils.createTypeDescriptor(expressionTypeBinding);
+        ArrayTypeDescriptor arrayType =
+            (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expressionTypeBinding);
 
         checkArgument(arrayType.isArray());
         // Array creation method references always have exactly one parameter.
@@ -1160,6 +1168,7 @@ public class CompilationUnitBuilder {
       Expression qualifier =
           targetConstructorMethodDescriptor
                   .getEnclosingTypeDescriptor()
+                  .getTypeDeclaration()
                   .isCapturingEnclosingInstance()
               // Inner classes may have an implicit enclosing class qualifier (2).
               ? convertOuterClassReference(
@@ -1200,11 +1209,11 @@ public class CompilationUnitBuilder {
      * </pre>
      */
     private Expression convert(TypeMethodReference expression) {
+      ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
       return createForwardingFunctionExpression(
           getSourcePosition(expression),
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          JdtUtils.createMethodDescriptor(
-              expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
+          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding),
+          JdtUtils.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()),
           null,
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
           false);
@@ -1224,7 +1233,7 @@ public class CompilationUnitBuilder {
 
       return createForwardingFunctionExpression(
           getSourcePosition(expression),
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
           JdtUtils.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
           convertOuterClassReference(
@@ -1301,7 +1310,11 @@ public class CompilationUnitBuilder {
 
       return new Block(
           getSourcePosition(block),
-          statements.stream().map(this::convert).filter(Predicates.notNull()).collect(toList()));
+          statements
+              .stream()
+              .map(this::convert)
+              .filter(Predicates.notNull())
+              .collect(toImmutableList()));
     }
 
     private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause catchClause) {
@@ -1622,7 +1635,7 @@ public class CompilationUnitBuilder {
      */
     private Expression convertOuterClassReference(
         ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
-      TypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
+      DeclaredTypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
       Expression qualifier = new ThisReference(currentTypeDescriptor);
       ITypeBinding innerTypeBinding = currentTypeBinding;
       if (!JdtUtils.createTypeDescriptor(innerTypeBinding).hasSameRawType(currentTypeDescriptor)) {
@@ -1631,7 +1644,9 @@ public class CompilationUnitBuilder {
             FieldAccess.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         currentTypeDescriptor,
-                        currentType.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor()))
+                        currentType
+                            .getEnclosingTypeDeclaration()
+                            .getUnparamterizedTypeDescriptor()))
                 .setQualifier(qualifier)
                 .build();
       }
@@ -1644,7 +1659,8 @@ public class CompilationUnitBuilder {
           break;
         }
 
-        TypeDescriptor enclosingTypeDescriptor = JdtUtils.createTypeDescriptor(innerTypeBinding);
+        DeclaredTypeDescriptor enclosingTypeDescriptor =
+            JdtUtils.createDeclaredTypeDescriptor(innerTypeBinding);
         TypeDescriptor fieldTypeDescriptor =
             JdtUtils.createTypeDescriptor(innerTypeBinding.getDeclaringClass());
 
@@ -1674,7 +1690,7 @@ public class CompilationUnitBuilder {
       // for reference to a captured variable, if it is in a constructor, translate to
       // reference to outer parameter, otherwise, translate to reference to corresponding
       // field created for the captured variable.
-      TypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
+      DeclaredTypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
       FieldDescriptor fieldDescriptor =
           AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
       ThisReference qualifier = new ThisReference(currentTypeDescriptor);
@@ -1761,31 +1777,33 @@ public class CompilationUnitBuilder {
       ITypeBinding typeBinding = literal.getType().resolveBinding();
 
       TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
-      TypeDescriptor javaLangClassTypeDescriptor =
-          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
+      DeclaredTypeDescriptor javaLangClassTypeDescriptor =
+          JdtUtils.createDeclaredTypeDescriptor(literal.resolveTypeBinding());
 
       if (literalTypeDescriptor.isArray()) {
-        if (literalTypeDescriptor.getLeafTypeDescriptor().isNative()) {
-          // class literal of native js type array returns Object[].class
-          literalTypeDescriptor =
-              TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1);
-        }
-        return convertArrayTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+        return convertArrayTypeLiteral(
+            (ArrayTypeDescriptor) literalTypeDescriptor, javaLangClassTypeDescriptor);
       }
 
       if (literalTypeDescriptor.isNative()) {
         // class literal of native JsType is JavaScriptObject.class
-        literalTypeDescriptor = TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor();
-      } else if (literalTypeDescriptor.isJsFunctionInterface()
+        return convertTypeLiteral(
+            TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor(),
+            javaLangClassTypeDescriptor);
+      }
+
+      if (literalTypeDescriptor.isJsFunctionInterface()
           || literalTypeDescriptor.isJsFunctionImplementation()) {
         // class literal for JsFunction interfaces and implementations.
-        literalTypeDescriptor = TypeDescriptors.BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
+        return convertTypeLiteral(
+            TypeDescriptors.BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor(),
+            javaLangClassTypeDescriptor);
       }
-      return convertRegularTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+      return convertTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
     }
 
-    private Expression convertRegularTypeLiteral(
-        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
+    private Expression convertTypeLiteral(
+        TypeDescriptor literalTypeDescriptor, DeclaredTypeDescriptor javaLangClassTypeDescriptor) {
       // <ClassLiteralClass>.$getClass()
       return MethodCall.Builder.from(
               MethodDescriptor.newBuilder()
@@ -1796,13 +1814,17 @@ public class CompilationUnitBuilder {
                   .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
                   .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
                   .build())
-          .setArguments(new JavaScriptConstructorReference(literalTypeDescriptor))
+          .setArguments(AstUtils.getMetadataConstructorReference(literalTypeDescriptor))
           .build();
     }
 
     private Expression convertArrayTypeLiteral(
-        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
-      checkState(literalTypeDescriptor.isArray());
+        ArrayTypeDescriptor literalTypeDescriptor,
+        DeclaredTypeDescriptor javaLangClassTypeDescriptor) {
+      if (literalTypeDescriptor.isUntypedArray()) {
+        // class literal of native js type array returns Object[].class
+        literalTypeDescriptor = TypeDescriptors.get().javaLangObjectArray;
+      }
 
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.newBuilder()
@@ -1817,9 +1839,9 @@ public class CompilationUnitBuilder {
 
       return MethodCall.Builder.from(classMethodDescriptor)
           .setArguments(
-              new JavaScriptConstructorReference(literalTypeDescriptor.getLeafTypeDescriptor()),
-              new NumberLiteral(
-                  TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions()))
+              AstUtils.getMetadataConstructorReference(
+                  literalTypeDescriptor.getLeafTypeDescriptor()),
+              NumberLiteral.of(literalTypeDescriptor.getDimensions()))
           .build();
     }
 
@@ -1835,20 +1857,23 @@ public class CompilationUnitBuilder {
 
       return new TryStatement(
           getSourcePosition(statement),
-          resources.stream().map(this::convert).collect(toList()),
+          resources.stream().map(this::convert).collect(toImmutableList()),
           convert(statement.getBody()),
-          catchClauses.stream().map(this::convert).collect(toList()),
+          catchClauses.stream().map(this::convert).collect(toImmutableList()),
           convertOrNull(statement.getFinally()));
     }
 
     private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
-      return TypeDescriptors.createUnion(
-          JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types())
-              .stream()
-              .map(org.eclipse.jdt.core.dom.Type::resolveBinding)
-              .map(JdtUtils::createTypeDescriptor)
-              .collect(toList()),
-          JdtUtils.createTypeDescriptor(unionType.resolveBinding()));
+      return UnionTypeDescriptor.newBuilder()
+          .setClosestCommonSuperTypeDescriptor(
+              JdtUtils.createDeclaredTypeDescriptor(unionType.resolveBinding()))
+          .setUnionTypeDescriptors(
+              JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types())
+                  .stream()
+                  .map(org.eclipse.jdt.core.dom.Type::resolveBinding)
+                  .map(JdtUtils::createTypeDescriptor)
+                  .collect(toImmutableList()))
+          .build();
     }
 
     private VariableDeclarationFragment convert(
@@ -1882,7 +1907,8 @@ public class CompilationUnitBuilder {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
           JdtUtils.asTypedList(statement.fragments());
       return VariableDeclarationExpression.newBuilder()
-          .setVariableDeclarationFragments(fragments.stream().map(this::convert).collect(toList()))
+          .setVariableDeclarationFragments(
+              fragments.stream().map(this::convert).collect(toImmutableList()))
           .build()
           .makeStatement(getSourcePosition(statement));
     }
@@ -1930,7 +1956,7 @@ public class CompilationUnitBuilder {
             entry ->
                 compilationUnitBuilder.buildCompilationUnit(
                     entry.getKey(), entry.getValue(), wellKnownTypeBindings))
-        .collect(Collectors.toList());
+        .collect(toImmutableList());
   }
 
   private static void sortPackageInfoFirst(

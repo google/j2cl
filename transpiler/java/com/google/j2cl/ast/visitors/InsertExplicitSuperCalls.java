@@ -18,10 +18,10 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 import java.util.Collections;
 
 /**
@@ -62,7 +62,8 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
             synthesizeSuperCall(method, getCurrentType().getSuperTypeDescriptor());
           }
 
-          private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
+          private void synthesizeSuperCall(
+              Method method, DeclaredTypeDescriptor superTypeDescriptor) {
             method
                 .getBody()
                 .getStatements()

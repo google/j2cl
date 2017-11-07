@@ -117,7 +117,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
   private static Expression widenTo(TypeDescriptor toTypeDescriptor, Expression subjectExpression) {
     TypeDescriptor fromTypeDescriptor = subjectExpression.getTypeDescriptor();
     // Don't emit known NOOP widenings.
-    if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+    if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
       return subjectExpression;
     }
 

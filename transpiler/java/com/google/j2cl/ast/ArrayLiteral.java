@@ -28,14 +28,14 @@ import java.util.List;
  */
 @Visitable
 public class ArrayLiteral extends Expression {
-  private TypeDescriptor typeDescriptor;
+  private final ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
-  public ArrayLiteral(TypeDescriptor typeDescriptor, Expression... valueExpressions) {
+  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, Expression... valueExpressions) {
     this(typeDescriptor, Arrays.asList(valueExpressions));
   }
 
-  public ArrayLiteral(TypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
+  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
     checkState(typeDescriptor.isArray());
 
     this.typeDescriptor = checkNotNull(typeDescriptor);
@@ -47,7 +47,7 @@ public class ArrayLiteral extends Expression {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public ArrayTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

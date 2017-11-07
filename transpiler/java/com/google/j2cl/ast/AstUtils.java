@@ -66,7 +66,7 @@ public class AstUtils {
                   .put(
                       "$castTo",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           3,
                           TypeDescriptors.get().javaLangObject,
                           TypeDescriptors.get().javaLangObject,
@@ -74,34 +74,34 @@ public class AstUtils {
                   .put(
                       "$castToNative",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           1,
                           TypeDescriptors.get().javaLangObject))
                   .put(
                       "$checkNotNull",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           1,
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1)))
+                          TypeDescriptors.get().javaLangObjectArray))
                   .put(
                       "$create",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           2,
-                          TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           TypeDescriptors.get().javaLangObject))
                   .put(
                       "$createNative",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           1,
-                          TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1)))
+                          TypeDescriptors.get().javaLangObjectArray))
                   .put(
                       "$init",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           2,
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           TypeDescriptors.get().javaLangObject,
                           TypeDescriptors.get().primitiveInt))
                   .put(
@@ -121,9 +121,9 @@ public class AstUtils {
                   .put(
                       "$stampType",
                       new MethodInfo(
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           3,
-                          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+                          TypeDescriptors.get().javaLangObjectArray,
                           TypeDescriptors.get().javaLangObject,
                           TypeDescriptors.get().primitiveDouble))
                   .build());
@@ -163,7 +163,7 @@ public class AstUtils {
   }
 
   /** Returns the class initializer method descriptor for a particular type */
-  public static MethodDescriptor getClinitMethodDescriptor(TypeDescriptor typeDescriptor) {
+  public static MethodDescriptor getClinitMethodDescriptor(DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setStatic(true)
         .setEnclosingTypeDescriptor(typeDescriptor)
@@ -174,7 +174,7 @@ public class AstUtils {
   }
 
   /** Returns the instance initializer method descriptor for a particular type */
-  public static MethodDescriptor getInitMethodDescriptor(TypeDescriptor typeDescriptor) {
+  public static MethodDescriptor getInitMethodDescriptor(DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(getInitName(typeDescriptor))
@@ -185,7 +185,7 @@ public class AstUtils {
   }
 
   /** Returns the name of $init method for a type. */
-  private static String getInitName(TypeDescriptor typeDescriptor) {
+  private static String getInitName(DeclaredTypeDescriptor typeDescriptor) {
     // Synthesize a name that is unique per class to avoid property clashes in JS.
     return MethodDescriptor.INIT_METHOD_PREFIX
         + "__"
@@ -207,7 +207,7 @@ public class AstUtils {
 
   /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createImplicitConstructorDescriptor(
-      TypeDescriptor enclosingTypeDescriptor) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor) {
     JsInfo jsInfo =
         isImplicitJsConstructor(enclosingTypeDescriptor.getTypeDeclaration())
             ? JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
@@ -309,62 +309,9 @@ public class AstUtils {
         : delegatedMethodDescriptor;
   }
 
-  /** Returns whether other is a subtype of one. */
-  public static boolean isSubType(TypeDescriptor one, TypeDescriptor other) {
-    return one != null
-        && (one.hasSameRawType(other) || isSubType(one.getSuperTypeDescriptor(), other));
-  }
-
-  /**
-   * The following is the cast table between primitive types. The cell marked as 'X' indicates that
-   * no cast is needed.
-   *
-   * <p>For other cases, cast from A to B is translated to method call $castAToB.
-   *
-   * <p>The general pattern is that you need casts that shrink, all casts involving 'long' (because
-   * it has a custom boxed implementation) and the byte->char and char->short casts because char is
-   * unsigned.
-   *
-   * <p><code>
-   * from\to       byte |  char | short | int   | long | float | double|
-   * -------------------------------------------------------------------
-   * byte        |  X   |       |   X   |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * char        |      |   X   |       |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * short       |      |       |   X   |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * int         |      |       |       |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * long        |      |       |       |       |   X  |       |       |
-   * -------------------------------------------------------------------
-   * float       |      |       |       |       |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * double      |      |       |       |       |      |   X   |   X   |
-   * </code>
-   */
-  public static boolean canRemoveCast(
-      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
-    if (fromTypeDescriptor.isSubtypeOf(toTypeDescriptor)) {
-      return true;
-    }
-
-    if (TypeDescriptors.isPrimitiveLong(fromTypeDescriptor)
-        || TypeDescriptors.isPrimitiveLong(toTypeDescriptor)) {
-      return false;
-    }
-    return TypeDescriptors.isPrimitiveFloatOrDouble(toTypeDescriptor)
-        || (TypeDescriptors.isPrimitiveInt(toTypeDescriptor)
-            && (TypeDescriptors.isPrimitiveByte(fromTypeDescriptor)
-                || TypeDescriptors.isPrimitiveChar(fromTypeDescriptor)
-                || TypeDescriptors.isPrimitiveShort(fromTypeDescriptor)))
-        || (TypeDescriptors.isPrimitiveShort(toTypeDescriptor)
-            && TypeDescriptors.isPrimitiveByte(fromTypeDescriptor));
-  }
-
   /** Returns the added field descriptor corresponding to the captured variable. */
   public static FieldDescriptor getFieldDescriptorForCapture(
-      TypeDescriptor enclosingTypeDescriptor, Variable capturedVariable) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(CAPTURES_PREFIX + capturedVariable.getName())
@@ -379,7 +326,7 @@ public class AstUtils {
 
   /** Returns the added field corresponding to the enclosing instance. */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
-      TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
+      DeclaredTypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingClassDescriptor)
         .setName(ENCLOSING_INSTANCE_NAME)
@@ -409,7 +356,7 @@ public class AstUtils {
   public static Method createStaticForwardingMethod(
       SourcePosition sourcePosition,
       MethodDescriptor targetMethodDescriptor,
-      TypeDescriptor fromTypeDescriptor,
+      DeclaredTypeDescriptor fromTypeDescriptor,
       String jsDocDescription) {
 
     /**
@@ -547,7 +494,7 @@ public class AstUtils {
    */
   public static MethodCall createDevirtualizedMethodCall(
       MethodCall methodCall,
-      TypeDescriptor targetTypeDescriptor,
+      DeclaredTypeDescriptor targetTypeDescriptor,
       TypeDescriptor sourceTypeDescriptor) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     checkArgument(!targetMethodDescriptor.isConstructor());
@@ -580,20 +527,21 @@ public class AstUtils {
   }
 
   public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
+      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
     return createDevirtualizedMethodCall(
         methodCall, targetTypeDescriptor, methodCall.getTarget().getEnclosingTypeDescriptor());
   }
-
+  
   /**
    * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
    * expression => Integer.valueOf(expression).
    */
   public static Expression box(Expression expression) {
-    TypeDescriptor primitiveType = expression.getTypeDescriptor();
-    checkArgument(TypeDescriptors.isNonVoidPrimitiveType(primitiveType));
+    PrimitiveTypeDescriptor primitiveType =
+        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
+    checkArgument(!TypeDescriptors.isPrimitiveVoid(primitiveType));
     checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
-    TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
+    DeclaredTypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     MethodDescriptor valueOfMethodDescriptor =
         boxType.getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
@@ -605,7 +553,8 @@ public class AstUtils {
    * expression => expression.intValue().
    */
   public static Expression unbox(Expression expression) {
-    TypeDescriptor boxType = expression.getTypeDescriptor().getRawTypeDescriptor();
+    DeclaredTypeDescriptor boxType =
+        (DeclaredTypeDescriptor) expression.getTypeDescriptor().getRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
     TypeDescriptor primitiveType = boxType.unboxType();
 
@@ -810,7 +759,7 @@ public class AstUtils {
     if (qualifier != null) {
       return qualifier;
     }
-    TypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
+    DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     return memberDescriptor.isStatic()
         ? new JavaScriptConstructorReference(enclosingTypeDescriptor.getRawTypeDescriptor())
         : new ThisReference(enclosingTypeDescriptor);
@@ -908,12 +857,19 @@ public class AstUtils {
    *
    * <p>$Util.$makeLambdaFunction( $Util.$getPrototype(Type).m_equal, $instance, Type.$copy);
    */
-  public static MethodCall createLambdaInstance(TypeDescriptor lambdaType, Expression instance) {
+  public static MethodCall createLambdaInstance(
+      DeclaredTypeDescriptor lambdaType, Expression instance) {
     checkArgument(lambdaType.isJsFunctionImplementation());
 
+    // Use the method from the interface instead instead of the implementation method, since it is
+    // the appropriate semantic behaviour. The function might be called(directly as a function) from
+    // as a @JsFunction which might require dispatch through the bridge.
+    MethodDescriptor jsFunctionMethodDescriptor =
+        lambdaType.getFunctionalInterface().getJsFunctionMethodDescriptor();
+
     // Class.prototype.apply
-    String applyMethodName =
-        ManglingNameUtils.getMangledName(lambdaType.getJsFunctionMethodDescriptor());
+    String functionalMethodMangledName =
+        ManglingNameUtils.getMangledName(jsFunctionMethodDescriptor);
 
     // Util getPrototype
     MethodDescriptor getPrototype =
@@ -935,7 +891,7 @@ public class AstUtils {
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
                     .setEnclosingTypeDescriptor(lambdaType)
-                    .setName(applyMethodName)
+                    .setName(functionalMethodMangledName)
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
@@ -1037,7 +993,8 @@ public class AstUtils {
       Expression array, Expression index, Expression value) {
 
     // Get the type of the elements in the array.
-    TypeDescriptor elementType = array.getTypeDescriptor().getComponentTypeDescriptor();
+    ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) array.getTypeDescriptor();
+    TypeDescriptor elementType = arrayTypeDescriptor.getComponentTypeDescriptor();
 
     // Create the parameter type descriptor list.
     TypeDescriptor[] methodParams = {
@@ -1224,7 +1181,7 @@ public class AstUtils {
                 : constructorParameters)
             .stream()
             .map(Variable::getReference)
-            .collect(toList());
+            .collect(toImmutableList());
 
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
@@ -1278,7 +1235,7 @@ public class AstUtils {
   }
 
   public static boolean startsWithNumber(String string) {
-    return Character.isDigit(string.charAt(0));
+    return !string.isEmpty() && Character.isDigit(string.charAt(0));
   }
 
   /**
@@ -1286,7 +1243,8 @@ public class AstUtils {
    * this will transform a namespace=a.b.c on an JsMethod into a fictitious TypeDescriptor for
    * namespace=a.b and name=c.
    */
-  public static TypeDescriptor getNamespaceAsTypeDescriptor(MemberDescriptor memberDescriptor) {
+  public static DeclaredTypeDescriptor getNamespaceAsTypeDescriptor(
+      MemberDescriptor memberDescriptor) {
     String memberJsNamespace = memberDescriptor.getJsNamespace();
     if (JsUtils.isGlobal(memberJsNamespace)) {
       return TypeDescriptors.get().globalNamespace;
@@ -1298,8 +1256,7 @@ public class AstUtils {
     String jsName = Iterables.getLast(components);
 
     if (isExtern) {
-      return TypeDescriptors.createNativeTypeDescriptor(
-          JsUtils.JS_PACKAGE_GLOBAL, jsName, ImmutableList.of());
+      return TypeDescriptors.createGlobalNativeTypeDescriptor(jsName);
     }
 
     String jsNamespace = Joiner.on(".").join(namespaceComponents);
@@ -1308,11 +1265,10 @@ public class AstUtils {
     String packageName =
         Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
 
-    return TypeDescriptors.createNativeTypeDescriptor(
-        packageName, ImmutableList.of(jsName), jsNamespace, jsName, ImmutableList.of());
+    return TypeDescriptors.createNativeTypeDescriptor(packageName, jsName, jsNamespace);
   }
 
-  private static TypeDescriptor getOutermostEnclosingType(TypeDescriptor typeDescriptor) {
+  private static TypeDescriptor getOutermostEnclosingType(DeclaredTypeDescriptor typeDescriptor) {
     if (typeDescriptor.getEnclosingTypeDescriptor() == null) {
       return typeDescriptor;
     }
@@ -1330,7 +1286,7 @@ public class AstUtils {
     if (methodDescriptor.isStatic() || methodDescriptor.isConstructor()) {
       return methodDescriptor;
     }
-    TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+    DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     MethodDescriptor.Builder methodBuilder =
         MethodDescriptor.Builder.from(methodDescriptor)
@@ -1409,7 +1365,8 @@ public class AstUtils {
         methodDescriptor
             .getParameterDescriptors()
             .get(methodDescriptor.getParameterDescriptors().size() - 1);
-    TypeDescriptor varargsTypeDescriptor = varargsParameterDescriptor.getTypeDescriptor();
+    ArrayTypeDescriptor varargsTypeDescriptor =
+        (ArrayTypeDescriptor) varargsParameterDescriptor.getTypeDescriptor();
     if (arguments.size() < parametersLength) {
       // no argument for the varargs, add an empty array.
       return new ArrayLiteral(varargsTypeDescriptor);
@@ -1419,12 +1376,14 @@ public class AstUtils {
       valueExpressions.add(arguments.get(i));
     }
     if (varargsParameterDescriptor.isDoNotAutobox()) {
+      checkArgument(
+          TypeDescriptors.isJavaLangObject(varargsTypeDescriptor.getComponentTypeDescriptor()));
       // Use a NATIVE_OBJECT[] instead of Object[] for @DoNotAutobox varargs, so that the
       // boxing logic can avoid boxing here.
-      checkArgument(
-          TypeDescriptors.isJavaLangObject(
-              varargsParameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor()));
-      varargsTypeDescriptor = TypeDescriptors.getForArray(TypeDescriptors.get().nativeObject, 1);
+      varargsTypeDescriptor =
+          ArrayTypeDescriptor.newBuilder()
+              .setComponentTypeDescriptor(TypeDescriptors.get().nativeObject)
+              .build();
     }
     return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
   }
@@ -1436,18 +1395,7 @@ public class AstUtils {
    */
   public static JavaScriptConstructorReference getMetadataConstructorReference(
       TypeDescriptor typeDescriptor) {
-    typeDescriptor = typeDescriptor.getRawTypeDescriptor();
-
-    if (typeDescriptor.isNative()) {
-      return new JavaScriptConstructorReference(
-          TypeDescriptors.createOverlayImplementationTypeDescriptor(typeDescriptor));
-    }
-
-    if (typeDescriptor.isJsFunctionInterface()) {
-      return new JavaScriptConstructorReference(BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor());
-    }
-
-    return new JavaScriptConstructorReference(typeDescriptor);
+    return new JavaScriptConstructorReference(typeDescriptor.getMetadataTypeDescriptor());
   }
 
   /** Whether this method require methods that override it to have an @override @JsDoc annotation */

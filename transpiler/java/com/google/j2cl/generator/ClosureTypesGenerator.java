@@ -21,10 +21,13 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.HasParameters;
 import com.google.j2cl.ast.Kind;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -93,7 +96,8 @@ class ClosureTypesGenerator {
             .specializeTypeVariables(
                 typeDescriptor ->
                     typeDescriptor.isTypeVariable()
-                        ? TypeDescriptor.Builder.from(typeDescriptor)
+                        ? DeclaredTypeDescriptor.Builder.from(
+                                (DeclaredTypeDescriptor) typeDescriptor)
                             .setKind(Kind.WILDCARD_OR_CAPTURE)
                             .setUniqueKey(typeDescriptor.getUniqueId() + "??")
                             .build()
@@ -106,7 +110,7 @@ class ClosureTypesGenerator {
   private ClosureType getClosureType(TypeDescriptor typeDescriptor) {
 
     if (typeDescriptor.isPrimitive()) {
-      return getClosureTypeForPrimitive(typeDescriptor);
+      return getClosureTypeForPrimitive((PrimitiveTypeDescriptor) typeDescriptor);
     }
 
     if (typeDescriptor.isTypeVariable()) {
@@ -118,23 +122,25 @@ class ClosureTypesGenerator {
     }
 
     if (typeDescriptor.isArray()) {
-      return getClosureTypeForArray(typeDescriptor);
+      return getClosureTypeForArray((ArrayTypeDescriptor) typeDescriptor);
     }
 
-    if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
-      return getClosureTypeForJsFunction(typeDescriptor);
+    DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+
+    if (declaredTypeDescriptor.isJsFunctionInterface()
+        || declaredTypeDescriptor.isJsFunctionImplementation()) {
+      return getClosureTypeForJsFunction(declaredTypeDescriptor);
     }
 
     return withNullability(
         getClosureTypeForDeclaration(
-            typeDescriptor.getTypeDeclaration(),
-            getClosureTypes(typeDescriptor.getTypeArgumentDescriptors())),
+            declaredTypeDescriptor.getTypeDeclaration(),
+            getClosureTypes(declaredTypeDescriptor.getTypeArgumentDescriptors())),
         typeDescriptor.isNullable());
   }
 
   /** Returns the Closure type for a primitive type descriptor */
-  private ClosureType getClosureTypeForPrimitive(TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isPrimitive());
+  private ClosureType getClosureTypeForPrimitive(PrimitiveTypeDescriptor typeDescriptor) {
 
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
       return getClosureType(BootstrapType.NATIVE_LONG.getDescriptor()).toNonNullable();
@@ -174,19 +180,17 @@ class ClosureTypesGenerator {
   }
 
   /** Returns the Closure type for an array type descriptor. */
-  private ClosureType getClosureTypeForArray(TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isArray());
+  private ClosureType getClosureTypeForArray(ArrayTypeDescriptor typeDescriptor) {
     return withNullability(
         new ClosureNamedType("Array", getClosureType(typeDescriptor.getComponentTypeDescriptor())),
         typeDescriptor.isNullable());
   }
 
   /** Returns the Closure type for a @JsFunction type descriptor. */
-  private ClosureType getClosureTypeForJsFunction(TypeDescriptor typeDescriptor) {
+  private ClosureType getClosureTypeForJsFunction(DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(
         typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation());
-    MethodDescriptor functionalMethodDescriptor =
-        typeDescriptor.getConcreteJsFunctionMethodDescriptor();
+    MethodDescriptor functionalMethodDescriptor = typeDescriptor.getJsFunctionMethodDescriptor();
     return withNullability(
         new ClosureFunctionType(
             toClosureTypeParameters(functionalMethodDescriptor),
@@ -209,7 +213,8 @@ class ClosureTypesGenerator {
     boolean isOptional = parameterDescriptor.isJsOptional();
     TypeDescriptor parameterTypeDescriptor =
         isJsVarargs
-            ? parameterDescriptor.getTypeDescriptor().getComponentTypeDescriptor()
+            ? ((ArrayTypeDescriptor) parameterDescriptor.getTypeDescriptor())
+                .getComponentTypeDescriptor()
             : parameterDescriptor.getTypeDescriptor();
     return new ClosureFunctionType.Parameter(
         isJsVarargs, isOptional, getClosureType(parameterTypeDescriptor));

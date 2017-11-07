@@ -23,9 +23,9 @@ import com.google.j2cl.ast.annotations.Visitable;
 /** Refers a constructor in Javascript. */
 @Visitable
 public class JavaScriptConstructorReference extends Expression {
-  @Visitable TypeDescriptor typeDescriptor;
+  @Visitable DeclaredTypeDescriptor typeDescriptor;
 
-  public JavaScriptConstructorReference(TypeDescriptor typeDescriptor) {
+  public JavaScriptConstructorReference(DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(
         !typeDescriptor.isArray()
             && !typeDescriptor.isIntersection()
@@ -34,7 +34,7 @@ public class JavaScriptConstructorReference extends Expression {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public DeclaredTypeDescriptor getTypeDescriptor() {
     return TypeDescriptors.get().nativeFunction;
   }
 
@@ -48,7 +48,7 @@ public class JavaScriptConstructorReference extends Expression {
     return new JavaScriptConstructorReference(typeDescriptor);
   }
 
-  public TypeDescriptor getReferencedTypeDescriptor() {
+  public DeclaredTypeDescriptor getReferencedTypeDescriptor() {
     return typeDescriptor;
   }
 

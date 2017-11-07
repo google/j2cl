@@ -16,7 +16,7 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -125,11 +125,11 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor leafTypeDescriptor =
         fromTypeDescriptor.isArray()
-            ? fromTypeDescriptor.getLeafTypeDescriptor()
+            ? ((ArrayTypeDescriptor) fromTypeDescriptor).getLeafTypeDescriptor()
             : fromTypeDescriptor;
     if (!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture()) {
       return expression;
-    } else if (!AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+    } else if (!fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
       return CastExpression.newBuilder()
           .setExpression(expression)
           .setCastTypeDescriptor(toTypeDescriptor)

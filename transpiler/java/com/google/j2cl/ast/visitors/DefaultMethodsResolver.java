@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -42,7 +43,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
 
       // Collect all super interfaces with more specific interfaces first since default methods in
       // more specific interfaces take precedence over default methods in less specific interfaces.
-      List<TypeDescriptor> declarationSuperInterfaceTypeDescriptors =
+      List<DeclaredTypeDescriptor> declarationSuperInterfaceTypeDescriptors =
           collectDeclarationSuperInterfaces(type.getDeclaration());
 
       // Gather all (most specific) default methods declared through the interfaces of this class.
@@ -51,7 +52,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
               type.getDeclaration(), declarationSuperInterfaceTypeDescriptors);
 
       // Remove methods that are already implemented in the class or any of its superclasses
-      TypeDescriptor declaringClassTypeDescriptor =
+      DeclaredTypeDescriptor declaringClassTypeDescriptor =
           type.isInterface() ? null : type.getTypeDescriptor();
       while (declaringClassTypeDescriptor != null) {
         for (MethodDescriptor declaredMethodDescriptor :
@@ -68,10 +69,10 @@ public class DefaultMethodsResolver extends NormalizationPass {
   }
 
   private static Map<String, MethodDescriptor> getDefaultMethodDescriptorsBySignature(
-      TypeDeclaration typeDeclaration, List<TypeDescriptor> superInterfaceTypeDescriptors) {
+      TypeDeclaration typeDeclaration, List<DeclaredTypeDescriptor> superInterfaceTypeDescriptors) {
     // Gather all (most specific) default methods declared through the interfaces of this class.
     Map<String, MethodDescriptor> defaultMethodDescriptorsBySignature = new LinkedHashMap<>();
-    for (TypeDescriptor superInterfaceTypeDescriptor : superInterfaceTypeDescriptors) {
+    for (DeclaredTypeDescriptor superInterfaceTypeDescriptor : superInterfaceTypeDescriptors) {
       for (MethodDescriptor declaredMethodDescriptor :
           superInterfaceTypeDescriptor.getDeclaredMethodDescriptors()) {
         if (!declaredMethodDescriptor.isDefaultMethod() || declaredMethodDescriptor.isJsOverlay()) {
@@ -81,7 +82,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
         MethodDescriptor specializedMethodDescriptor =
             declaredMethodDescriptor.specializeTypeVariables(
                 typeDeclaration
-                    .getUnsafeTypeDescriptor()
+                    .getUnparamterizedTypeDescriptor()
                     .getSpecializedTypeArgumentByTypeParameters());
 
         String specializedSignature = specializedMethodDescriptor.getOverrideSignature();
@@ -94,14 +95,14 @@ public class DefaultMethodsResolver extends NormalizationPass {
     return defaultMethodDescriptorsBySignature;
   }
 
-  private static List<TypeDescriptor> collectDeclarationSuperInterfaces(
+  private static List<DeclaredTypeDescriptor> collectDeclarationSuperInterfaces(
       TypeDeclaration typeDeclaration) {
-    List<TypeDescriptor> typeDescriptors =
+    List<DeclaredTypeDescriptor> typeDescriptors =
         Lists.newArrayList(typeDeclaration.getTransitiveInterfaceTypeDescriptors());
     // Make sure the interface descriptors are declaration versions. This improves cache hits in
     // some later analysis.
     for (int i = 0; i < typeDescriptors.size(); i++) {
-      TypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
+      DeclaredTypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
       typeDescriptors.set(i, superInterfaceTypeDescriptor.unparameterizedTypeDescriptor());
     }
     Collections.sort(typeDescriptors, TypeDescriptor.MORE_SPECIFIC_INTERFACES_FIRST);

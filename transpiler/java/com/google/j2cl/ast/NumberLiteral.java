@@ -22,6 +22,18 @@ import com.google.j2cl.ast.annotations.Visitable;
 /** Number literal node. */
 @Visitable
 public class NumberLiteral extends Literal {
+  public static NumberLiteral of(int value) {
+    return new NumberLiteral(TypeDescriptors.get().primitiveInt, value);
+  }
+
+  public static NumberLiteral of(long value) {
+    return new NumberLiteral(TypeDescriptors.get().primitiveLong, value);
+  }
+
+  public static NumberLiteral of(double value) {
+    return new NumberLiteral(TypeDescriptors.get().primitiveDouble, value);
+  }
+
   private final TypeDescriptor typeDescriptor;
   private final Number value;
 

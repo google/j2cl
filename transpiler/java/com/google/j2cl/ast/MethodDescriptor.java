@@ -133,11 +133,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return name
         + parameterTypeDescriptors
             .stream()
-            .map(
-                type ->
-                    TypeDescriptors.toNonNullable(type)
-                        .getRawTypeDescriptor()
-                        .getQualifiedBinaryName())
+            .map(type -> type.toNonNullable().getRawTypeDescriptor().getQualifiedBinaryName())
             .collect(joining(",", "(", ")"));
   }
 
@@ -243,6 +239,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public boolean isOrOverridesJsMember() {
     return isJsMember() || !getOverriddenJsMembers().isEmpty();
+  }
+
+  @Override
+  @Memoized
+  public boolean isOrOverridesJavaLangObjectMethod() {
+    if (!isPolymorphic()) {
+      return false;
+    }
+
+    return getOverriddenMethodDescriptors()
+        .stream()
+        .map(MethodDescriptor::getEnclosingTypeDescriptor)
+        .anyMatch(TypeDescriptors::isJavaLangObject);
   }
 
   @Override
@@ -366,8 +375,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     TypeDescriptor parameterTypeDescriptor =
         parameterDescriptor.getTypeDescriptor().getRawTypeDescriptor();
     if (parameterDescriptor.isVarargs()) {
+      ArrayTypeDescriptor parameterArrayTypeDescriptor =
+          (ArrayTypeDescriptor) parameterTypeDescriptor;
       return J2clUtils.format(
-          "%s...", parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription());
+          "%s...",
+          parameterArrayTypeDescriptor.getComponentTypeDescriptor().getReadableDescription());
     } else if (parameterDescriptor.isJsOptional()) {
       return J2clUtils.format("@JsOptional %s", parameterTypeDescriptor.getReadableDescription());
     }
@@ -458,7 +470,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
-    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
+    public abstract Builder setEnclosingTypeDescriptor(
+        DeclaredTypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setName(String name);
 

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -29,9 +30,9 @@ import com.google.j2cl.ast.TypeDescriptor;
 class Import implements Comparable<Import> {
 
   private String alias;
-  private TypeDescriptor typeDescriptor;
+  private DeclaredTypeDescriptor typeDescriptor;
 
-  Import(String alias, TypeDescriptor typeDescriptor) {
+  Import(String alias, DeclaredTypeDescriptor typeDescriptor) {
     this.alias = alias;
     this.typeDescriptor = typeDescriptor;
   }

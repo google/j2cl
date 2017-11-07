@@ -18,12 +18,12 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -100,7 +100,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
              * <p>This is done by examining the JS method signatures of all methods required by
              * implemented interfaces (from both immediate interfaces and their super interfaces).
              */
-            for (TypeDescriptor interfaceTypeDescriptor :
+            for (DeclaredTypeDescriptor interfaceTypeDescriptor :
                 getImmediateInterfacesAndTheirSupers(type.getDeclaration())) {
               for (MethodDescriptor methodDescriptor :
                   interfaceTypeDescriptor.getDeclaredMethodDescriptors()) {
@@ -130,20 +130,21 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
     return signatures;
   }
 
-  private static Set<TypeDescriptor> getImmediateInterfacesAndTheirSupers(
+  private static Set<DeclaredTypeDescriptor> getImmediateInterfacesAndTheirSupers(
       TypeDeclaration classTypeDeclaration) {
-    Set<TypeDescriptor> interfaces = new HashSet<>();
-    for (TypeDescriptor interfaceTypeDescriptor :
+    Set<DeclaredTypeDescriptor> interfaces = new HashSet<>();
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor :
         classTypeDeclaration.getInterfaceTypeDescriptors()) {
       interfaces.addAll(getAllSuperInterfaces(interfaceTypeDescriptor));
     }
     return interfaces;
   }
 
-  private static Set<TypeDescriptor> getAllSuperInterfaces(TypeDescriptor interfaceTypeDescriptor) {
-    Set<TypeDescriptor> interfaces = new HashSet<>();
+  private static Set<DeclaredTypeDescriptor> getAllSuperInterfaces(
+      DeclaredTypeDescriptor interfaceTypeDescriptor) {
+    Set<DeclaredTypeDescriptor> interfaces = new HashSet<>();
     interfaces.add(interfaceTypeDescriptor);
-    for (TypeDescriptor superInterfaceTypeDescriptor :
+    for (DeclaredTypeDescriptor superInterfaceTypeDescriptor :
         interfaceTypeDescriptor.getInterfaceTypeDescriptors()) {
       interfaces.addAll(getAllSuperInterfaces(superInterfaceTypeDescriptor));
     }
@@ -151,10 +152,10 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
   }
 
   private static Set<String> getJsSignaturesInImmediateInterfacesTransitive(
-      TypeDeclaration classTypeDeclaration) {
-    return getImmediateInterfacesAndTheirSupers(classTypeDeclaration)
+      TypeDeclaration typeDeclaration) {
+    return getImmediateInterfacesAndTheirSupers(typeDeclaration)
         .stream()
-        .map(TypeDescriptor::getDeclaredMethodDescriptors)
+        .map(DeclaredTypeDescriptor::getDeclaredMethodDescriptors)
         .flatMap(Collection::stream)
         .map(ManglingNameUtils::getMangledName)
         .collect(Collectors.toSet());

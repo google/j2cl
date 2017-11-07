@@ -24,6 +24,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -129,7 +130,7 @@ public class InsertInitializerMethods extends NormalizationPass {
 
               // Replace the field declaration with an initializer block inplace to preserve
               // ordering.
-              TypeDescriptor enclosingTypeDescriptor =
+              DeclaredTypeDescriptor enclosingTypeDescriptor =
                   field.getDescriptor().getEnclosingTypeDescriptor();
               return InitializerBlock.newBuilder()
                   .setDescriptor(
@@ -226,20 +227,21 @@ public class InsertInitializerMethods extends NormalizationPass {
   }
 
   private static Statement createClinitClassStatement(
-      SourcePosition sourcePosition, TypeDescriptor typeDescriptor) {
+      SourcePosition sourcePosition, DeclaredTypeDescriptor typeDescriptor) {
     return createClinitCallExpression(typeDescriptor).makeStatement(sourcePosition);
   }
 
-  private static Expression createClinitCallExpression(TypeDescriptor typeDescriptor) {
+  private static Expression createClinitCallExpression(DeclaredTypeDescriptor typeDescriptor) {
     MethodDescriptor clinitMethodDescriptor = AstUtils.getClinitMethodDescriptor(typeDescriptor);
     return MethodCall.Builder.from(clinitMethodDescriptor).build();
   }
 
   private void addRequiredSuperInterfacesClinitCalls(
       SourcePosition sourcePosition,
-      TypeDescriptor typeDescriptor,
+      DeclaredTypeDescriptor typeDescriptor,
       List<Statement> superClinitCallStatements) {
-    for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor :
+        typeDescriptor.getInterfaceTypeDescriptors()) {
       if (!hasClinitMethod(interfaceTypeDescriptor)) {
         continue;
       }

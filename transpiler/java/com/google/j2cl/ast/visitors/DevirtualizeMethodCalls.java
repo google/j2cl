@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -60,7 +61,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
            * the trampoline methods which are implemented in corresponding types (Objects, Numbers,
            * etc.).
            */
-          private final Map<TypeDescriptor, TypeDescriptor>
+          private final Map<DeclaredTypeDescriptor, DeclaredTypeDescriptor>
               devirtualizedMethodTargetTypeDescriptorByTypeDescriptor = new LinkedHashMap<>();
 
           {
@@ -108,7 +109,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
           }
 
           private MethodCall devirtualizeJsFunctionImplMethodCalls(MethodCall methodCall) {
-            TypeDescriptor enclosingTypeDescriptor =
+            DeclaredTypeDescriptor enclosingTypeDescriptor =
                 methodCall.getTarget().getEnclosingTypeDescriptor();
             if (methodCall.getTarget().isJsFunction()) {
               // Do not devirtualize the JsFunction method.

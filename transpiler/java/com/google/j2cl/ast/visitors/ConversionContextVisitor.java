@@ -15,10 +15,13 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
@@ -44,7 +47,6 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.WhileStatement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Driver for rewriting conversions in different contexts.
@@ -132,7 +134,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public ArrayLiteral rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
     // assignment context
-    TypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
+    ArrayTypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
     List<Expression> valueExpressions =
         arrayLiteral
             .getValueExpressions()
@@ -141,7 +143,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
                 valueExpression ->
                     contextRewriter.rewriteAssignmentContext(
                         typeDescriptor.getComponentTypeDescriptor(), valueExpression))
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
     return new ArrayLiteral(typeDescriptor, valueExpressions);
   }
 
@@ -294,7 +296,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
             .getDimensionExpressions()
             .stream()
             .map(contextRewriter::rewriteUnaryNumericPromotionContext)
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
     return NewArray.newBuilder()
         .setTypeDescriptor(newArray.getTypeDescriptor())
         .setDimensionExpressions(dimensionExpressions)

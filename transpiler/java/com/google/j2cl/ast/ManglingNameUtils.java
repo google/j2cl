@@ -35,8 +35,9 @@ public class ManglingNameUtils {
     // Method signature should be decided by the erasure type.
     TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (rawTypeDescriptor.isArray()) {
-      return Strings.repeat("arrayOf_", rawTypeDescriptor.getDimensions())
-          + getMangledName(rawTypeDescriptor.getLeafTypeDescriptor());
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) rawTypeDescriptor;
+      return Strings.repeat("arrayOf_", arrayTypeDescriptor.getDimensions())
+          + getMangledName(arrayTypeDescriptor.getLeafTypeDescriptor());
     }
     return rawTypeDescriptor.getQualifiedSourceName().replace('.', '_');
   }

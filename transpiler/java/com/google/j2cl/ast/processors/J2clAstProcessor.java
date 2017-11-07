@@ -41,7 +41,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
@@ -83,7 +82,7 @@ public class J2clAstProcessor extends AbstractProcessor {
         deferredTypeNames
             .stream()
             .map(deferred -> processingEnv.getElementUtils().getTypeElement(deferred))
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
     if (roundEnv.processingOver()) {
       // Create abstract visitor class
 

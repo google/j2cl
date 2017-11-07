@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Method;
@@ -28,7 +29,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 
 /**
  * Set the qualifier of super calls that should have a qualifier.
@@ -59,7 +59,9 @@ public class FixSuperCallQualifiers extends NormalizationPass {
           public boolean shouldProcessType(Type type) {
             // super class of {@code type} is an instance nested class.
             return type.getSuperTypeDescriptor() != null
-                && type.getSuperTypeDescriptor().isCapturingEnclosingInstance();
+                && type.getSuperTypeDescriptor()
+                    .getTypeDeclaration()
+                    .isCapturingEnclosingInstance();
           }
 
           @Override
@@ -85,16 +87,16 @@ public class FixSuperCallQualifiers extends NormalizationPass {
                 .build();
           }
 
-          private Expression findSuperCallQualifier(TypeDescriptor typeDescriptor) {
-            TypeDescriptor superTypeDescriptor =
+          private Expression findSuperCallQualifier(DeclaredTypeDescriptor typeDescriptor) {
+            DeclaredTypeDescriptor superTypeDescriptor =
                 checkNotNull(typeDescriptor.getSuperTypeDescriptor());
-            TypeDescriptor outerTypeDescriptor =
+            DeclaredTypeDescriptor outerTypeDescriptor =
                 checkNotNull(superTypeDescriptor.getEnclosingTypeDescriptor());
 
             Expression qualifier = new ThisReference(typeDescriptor);
-            TypeDescriptor currentTypeDescriptor = typeDescriptor;
+            DeclaredTypeDescriptor currentTypeDescriptor = typeDescriptor;
             while (currentTypeDescriptor.getEnclosingTypeDescriptor() != null
-                && !AstUtils.isSubType(currentTypeDescriptor, outerTypeDescriptor)) {
+                && !currentTypeDescriptor.isAssignableTo(outerTypeDescriptor)) {
               qualifier =
                   FieldAccess.Builder.from(
                           AstUtils.getFieldDescriptorForEnclosingInstance(

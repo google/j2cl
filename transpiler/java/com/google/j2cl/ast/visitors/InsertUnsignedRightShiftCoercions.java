@@ -22,7 +22,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * Coerces the result of an unsigned shift due to different semantics in Java and JavaScript.
@@ -45,7 +44,7 @@ public class InsertUnsignedRightShiftCoercions extends NormalizationPass {
                       BinaryExpression.newBuilder()
                           .setLeftOperand(binaryExpression)
                           .setOperator(BinaryOperator.BIT_OR)
-                          .setRightOperand(new NumberLiteral(TypeDescriptors.get().primitiveInt, 0))
+                          .setRightOperand(NumberLiteral.of(0))
                           .build())
                   .build();
             }

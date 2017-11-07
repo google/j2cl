@@ -16,9 +16,9 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -26,6 +26,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -45,7 +46,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Checks circumstances where a bridge method should be generated and creates the bridge methods.
@@ -107,7 +107,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                     .get(methodDescriptor)
                     .stream()
                     .filter(bridgeMethod -> bridgeMethod.getDescriptor().isJsMethod())
-                    .collect(Collectors.toList());
+                    .collect(toImmutableList());
             if (bridgeJsMethods.isEmpty()) {
               return method;
             }
@@ -137,12 +137,12 @@ public class BridgeMethodsCreator extends NormalizationPass {
         new LinkedHashMap<>();
 
     for (MethodDescriptor potentialBridgeMethodDescriptor :
-        getPotentialBridgeMethodDescriptors(typeDeclaration.getUnsafeTypeDescriptor())) {
+        getPotentialBridgeMethodDescriptors(typeDeclaration.getUnparamterizedTypeDescriptor())) {
       // Attempt to target a concrete method on the prototype chain.
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.getUnsafeTypeDescriptor(),
+              typeDeclaration.getUnparamterizedTypeDescriptor(),
               false /* findDefaultMethods */);
       if (targetMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -166,7 +166,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       MethodDescriptor targetDefaultMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.getUnsafeTypeDescriptor(),
+              typeDeclaration.getUnparamterizedTypeDescriptor(),
               true /* findDefaultMethods */);
       if (targetDefaultMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -188,7 +188,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
    * method that may need a bridge method.
    */
   private static List<MethodDescriptor> getPotentialBridgeMethodDescriptors(
-      TypeDescriptor typeDescriptor) {
+      DeclaredTypeDescriptor typeDescriptor) {
     List<MethodDescriptor> declaredPotentialBridgeMethodDescriptors =
         getDeclaredPotentialBridgeMethodDescriptors(typeDescriptor);
 
@@ -208,7 +208,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
     // Then add any bridge method descriptors which are required by implemented interfaces but
     // which were shadowed by one of the generic specialization bridge method descriptors.
-    for (TypeDescriptor interfaceTypeDescriptor :
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor :
         typeDescriptor.getTypeDeclaration().getTransitiveInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor : interfaceTypeDescriptor.getMethodDescriptors()) {
         if (shadowedSignatures.contains(methodDescriptor.getOverrideSignature())) {
@@ -221,9 +221,9 @@ public class BridgeMethodsCreator extends NormalizationPass {
   }
 
   private static List<MethodDescriptor> getDeclaredPotentialBridgeMethodDescriptors(
-      TypeDescriptor typeDescriptor) {
+      DeclaredTypeDescriptor typeDescriptor) {
     List<MethodDescriptor> potentialBridgeMethodDescriptors = new ArrayList<>();
-    TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+    DeclaredTypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
     if (superTypeDescriptor != null) {
       // add the potential bridge methods from direct super class.
       potentialBridgeMethodDescriptors.addAll(
@@ -232,7 +232,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       potentialBridgeMethodDescriptors.addAll(
           getDeclaredPotentialBridgeMethodDescriptors(superTypeDescriptor));
     }
-    for (TypeDescriptor superInterface : typeDescriptor.getInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor superInterface : typeDescriptor.getInterfaceTypeDescriptors()) {
       // add the potential bridge methods from direct super interfaces.
       potentialBridgeMethodDescriptors.addAll(
           getPotentialBridgeMethodDescriptorsInType(superInterface));
@@ -245,7 +245,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
   /** Returns the potential methods in {@code type} that may need a bridge method. */
   private static Collection<MethodDescriptor> getPotentialBridgeMethodDescriptorsInType(
-      TypeDescriptor typeDescriptor) {
+      DeclaredTypeDescriptor typeDescriptor) {
     return Collections2.filter(
         typeDescriptor.getDeclaredMethodDescriptors(),
         /**
@@ -274,7 +274,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
    */
   private static MethodDescriptor findForwardingMethodDescriptor(
       MethodDescriptor bridgeMethodDescriptor,
-      TypeDescriptor typeDescriptor,
+      DeclaredTypeDescriptor typeDescriptor,
       boolean findDefaultMethods) {
     for (MethodDescriptor declaredMethodDescriptor :
         typeDescriptor.getDeclaredMethodDescriptors()) {
@@ -305,7 +305,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
     if (findDefaultMethods) {
       // recurse to super interfaces.
-      for (TypeDescriptor interfaceTypeDescriptor : typeDescriptor.getInterfaceTypeDescriptors()) {
+      for (DeclaredTypeDescriptor interfaceTypeDescriptor :
+          typeDescriptor.getInterfaceTypeDescriptors()) {
         MethodDescriptor targetMethodDescriptor =
             findForwardingMethodDescriptor(
                 bridgeMethodDescriptor, interfaceTypeDescriptor, findDefaultMethods);
@@ -328,7 +329,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
    */
   private static MethodDescriptor findBackwardingMethodDescriptor(
       MethodDescriptor bridgeMethodDescriptor, TypeDeclaration typeDeclaration) {
-    for (TypeDescriptor superInterface : typeDeclaration.getTransitiveInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor superInterface :
+        typeDeclaration.getTransitiveInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor : superInterface.getDeclaredMethodDescriptors()) {
         if (methodDescriptor
                 == methodDescriptor.getDeclarationMethodDescriptor() // non-generic method,
@@ -355,7 +357,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     checkArgument(!typeDeclaration.isInterface());
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .setEnclosingTypeDescriptor(typeDeclaration.getUnsafeTypeDescriptor())
+        .setEnclosingTypeDescriptor(typeDeclaration.getUnparamterizedTypeDescriptor())
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .build();
   }
@@ -410,7 +412,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                   .build();
       arguments.add(argument);
     }
-    TypeDescriptor targetEnclosingTypeDescriptor =
+    DeclaredTypeDescriptor targetEnclosingTypeDescriptor =
         targetMethodDescriptor.getEnclosingTypeDescriptor();
     Expression qualifier =
         bridgeMethodDescriptor.isMemberOf(targetEnclosingTypeDescriptor)
@@ -493,7 +495,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                             p.toBuilder()
                                 .setTypeDescriptor(p.getTypeDescriptor().getRawTypeDescriptor())
                                 .build())
-                    .collect(ImmutableList.toImmutableList()))
+                    .collect(toImmutableList()))
             .setSynthetic(true)
             .setBridge(true)
             .setAbstract(false)

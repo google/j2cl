@@ -20,6 +20,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -63,9 +64,9 @@ public class ImplementLambdaExpressions extends NormalizationPass {
           && !type.getDeclaration().isJsFunctionInterface()
           && !type.getDeclaration().isNative()) {
 
-        TypeDescriptor adaptorTypeDescriptor =
+        DeclaredTypeDescriptor adaptorTypeDescriptor =
             LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(type.getTypeDescriptor());
-        TypeDescriptor jsFunctionTypeDescriptor =
+        DeclaredTypeDescriptor jsFunctionTypeDescriptor =
             LambdaTypeDescriptors.createJsFunctionTypeDescriptor(type.getTypeDescriptor());
 
         // Create and add the LambdaAdaptor type for the functional interface.
@@ -94,7 +95,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             if (typeDescriptor.isIntersection() || typeDescriptor.isNative()) {
               // For these cases create a per instance adaptor.
 
-              TypeDescriptor adaptorTypeDescriptor =
+              DeclaredTypeDescriptor adaptorTypeDescriptor =
                   LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(
                       typeDescriptor,
                       getCurrentType().getTypeDescriptor(),
@@ -120,11 +121,14 @@ public class ImplementLambdaExpressions extends NormalizationPass {
                   .build();
             }
 
+            DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
+                (DeclaredTypeDescriptor) typeDescriptor;
             // A.$adapt((...) -> {...})
             return MethodCall.Builder.from(
                     getAdaptMethodDescriptor(
-                        typeDescriptor,
-                        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor)))
+                        functionalInterfaceTypeDescriptor,
+                        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+                            functionalInterfaceTypeDescriptor)))
                 .setArguments(
                     FunctionExpression.Builder.from(functionExpression)
                         .setTypeDescriptor(
@@ -141,10 +145,10 @@ public class ImplementLambdaExpressions extends NormalizationPass {
   /** Adds the $adapt method to the functional interface. */
   private void addAdaptMethod(
       Type functionalInterfaceType,
-      TypeDescriptor jsFunctionTypeDescriptor,
-      TypeDescriptor adaptorTypeDescriptor) {
+      DeclaredTypeDescriptor jsFunctionTypeDescriptor,
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
 
-    TypeDescriptor functionalInterfaceTypeTypeDescriptor =
+    DeclaredTypeDescriptor functionalInterfaceTypeTypeDescriptor =
         functionalInterfaceType.getTypeDescriptor();
     checkArgument(
         functionalInterfaceTypeTypeDescriptor.isFunctionalInterface()
@@ -185,7 +189,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
   }
 
   private MethodDescriptor getAdaptMethodDescriptor(
-      TypeDescriptor enclosingTypeDescriptor, TypeDescriptor jsFunctionTypeDescriptor) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor, TypeDescriptor jsFunctionTypeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setName("$adapt")
         .setJsInfo(JsInfo.RAW)
@@ -219,11 +223,11 @@ public class ImplementLambdaExpressions extends NormalizationPass {
   private Type createLambdaAdaptorType(
       SourcePosition sourcePosition,
       TypeDescriptor typeDescriptor,
-      TypeDescriptor adaptorTypeDescriptor) {
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
 
     adaptorTypeDescriptor = adaptorTypeDescriptor.unparameterizedTypeDescriptor();
 
-    TypeDescriptor jsFunctionTypeDescriptor =
+    DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
     Type adaptorType =
         new Type(sourcePosition, Visibility.PUBLIC, adaptorTypeDescriptor.getTypeDeclaration());
@@ -277,8 +281,8 @@ public class ImplementLambdaExpressions extends NormalizationPass {
   /** Creates the constructor for the lambda adaptor class. */
   private Method createLambdaAdaptorConstructor(
       SourcePosition sourcePosition,
-      TypeDescriptor adaptorTypeDescriptor,
-      TypeDescriptor jsFunctionTypeDescriptor,
+      DeclaredTypeDescriptor adaptorTypeDescriptor,
+      DeclaredTypeDescriptor jsFunctionTypeDescriptor,
       FieldDescriptor jsFunctionFieldDescriptor) {
 
     MethodDescriptor adaptorConstructor = adaptorTypeDescriptor.getSingleConstructor();

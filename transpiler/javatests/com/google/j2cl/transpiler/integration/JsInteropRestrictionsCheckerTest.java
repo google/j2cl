@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.io.File;
@@ -27,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -1655,7 +1656,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "Buggy",
             "import jsinterop.annotations.JsType;",
             "public class Buggy { void m() { @JsType class Local {} } }")
-        .assertCompileFails("Local class '$1Local' cannot be a JsType.");
+        .assertCompileFails("Local class 'Local' cannot be a JsType.");
   }
 
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() throws Exception {
@@ -2787,7 +2788,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
       return Files.walk(directory.toPath())
           .filter(Files::isRegularFile)
           .filter(p -> filter.test(p.toString()))
-          .collect(Collectors.toList());
+          .collect(toImmutableList());
     } catch (IOException e) {
       return null;
     }

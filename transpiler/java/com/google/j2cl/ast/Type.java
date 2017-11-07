@@ -38,7 +38,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private SourcePosition sourcePosition;
 
   // Used to store the original native type for a synthesized @JsOverlay implementation type.
-  private TypeDescriptor nativeTypeDescriptor;
+  private DeclaredTypeDescriptor nativeTypeDescriptor;
 
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
@@ -53,8 +53,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * Returns the TypeDescriptor for this Type parametrized by the type variables from the
    * declaration.
    */
-  public TypeDescriptor getTypeDescriptor() {
-    return getDeclaration().getUnsafeTypeDescriptor();
+  public DeclaredTypeDescriptor getTypeDescriptor() {
+    return getDeclaration().getUnparamterizedTypeDescriptor();
   }
 
   public Kind getKind() {
@@ -103,11 +103,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isClass();
   }
 
-  public TypeDescriptor getNativeTypeDescriptor() {
+  public DeclaredTypeDescriptor getNativeTypeDescriptor() {
     return this.nativeTypeDescriptor;
   }
 
-  public void setNativeTypeDescriptor(TypeDescriptor nativeTypeDescriptor) {
+  public void setNativeTypeDescriptor(DeclaredTypeDescriptor nativeTypeDescriptor) {
     this.nativeTypeDescriptor = nativeTypeDescriptor;
   }
 
@@ -228,11 +228,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.getEnclosingTypeDeclaration();
   }
 
-  public TypeDescriptor getSuperTypeDescriptor() {
+  public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     return typeDeclaration.getSuperTypeDescriptor();
   }
 
-  public List<TypeDescriptor> getSuperInterfaceTypeDescriptors() {
+  public List<DeclaredTypeDescriptor> getSuperInterfaceTypeDescriptors() {
     return typeDeclaration.getInterfaceTypeDescriptors();
   }
 

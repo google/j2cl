@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -42,8 +43,24 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
         if (toTypeDescriptor.isPrimitive()
             && TypeDescriptors.isNonBoxedReferenceType(fromTypeDescriptor)) {
           TypeDescriptor boxedTypeDescriptor =
-              TypeDescriptors.getBoxTypeFromPrimitiveType(toTypeDescriptor);
-          // (int) new Object(); => (int) (Integer) new Object();
+              TypeDescriptors.getBoxTypeFromPrimitiveType(
+                  (PrimitiveTypeDescriptor) toTypeDescriptor);
+          // This is to make sure that code like
+          //
+          //   Object o = new Long(10);
+          //   int i = (int) o;
+          //
+          // throws a ClassCastException trying to cast Long to Integer instead of silently
+          // assigning 10 to i by calling o.intValue.
+          //
+          // In this case
+          //
+          //   int i = (int) o;
+          //
+          // will become
+          //
+          //   int i = (int) (Integer) o;
+          //
           return CastExpression.newBuilder()
               .setExpression(
                   CastExpression.newBuilder()

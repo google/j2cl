@@ -154,7 +154,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setEnclosingInstanceCapture(boolean isEnclosingInstanceCapture);
 
-    public abstract Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor);
+    public abstract Builder setEnclosingTypeDescriptor(
+        DeclaredTypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setName(String name);
 

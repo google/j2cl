@@ -32,7 +32,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Method declaration. */
 @Visitable
@@ -175,9 +174,11 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
 
   private String getParameterReadableDescription(Variable parameter) {
     if (parameter == getVarargsParameter()) {
+      ArrayTypeDescriptor parameterTypeDescriptor =
+          (ArrayTypeDescriptor) parameter.getTypeDescriptor();
       return J2clUtils.format(
           "%s... %s",
-          parameter.getTypeDescriptor().getComponentTypeDescriptor().getReadableDescription(),
+          parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription(),
           parameter.getName());
     }
     return J2clUtils.format(
@@ -322,7 +323,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
                             .getEnclosingTypeDescriptor()
                             .getTypeArgumentDescriptors()
                             .contains(typeVariable))
-                .collect(Collectors.toList()));
+                .collect(toImmutableList()));
       }
       return new Method(
           sourcePosition,

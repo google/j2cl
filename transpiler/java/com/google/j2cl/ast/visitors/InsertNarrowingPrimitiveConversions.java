@@ -47,7 +47,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           TypeDescriptor toTypeDescriptor, Expression expression) {
         TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
-        if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)
+        if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)
             || !shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
           return expression;
         }
@@ -63,7 +63,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
 
         if (toTypeDescriptor.isPrimitive()
             && fromTypeDescriptor.isPrimitive()
-            && AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+            && fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
           return expression;
         }
 

@@ -20,8 +20,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
@@ -149,8 +151,10 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             Expression expression = castExpression.getExpression();
             // Emit the casts so that the first type in the intersection corresponds to the
             // innermost cast.
+            IntersectionTypeDescriptor intersectionTypeDescriptor =
+                (IntersectionTypeDescriptor) castTypeDescriptor;
             for (TypeDescriptor intersectedTypeDescriptor :
-                castTypeDescriptor.getIntersectedTypeDescriptors()) {
+                intersectionTypeDescriptor.getIntersectionTypeDescriptors()) {
               expression =
                   CastExpression.newBuilder()
                       .setExpression(expression)
@@ -164,7 +168,8 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             // typed at the first component, which is also consistent with the JVM type (the erasure
             // of an intersection cast is the erasure of its first component).
             return JsDocAnnotatedExpression.newBuilder()
-                .setAnnotationType(castTypeDescriptor.getIntersectedTypeDescriptors().get(0))
+                .setAnnotationType(
+                    intersectionTypeDescriptor.getIntersectionTypeDescriptors().get(0))
                 .setExpression(expression)
                 .build();
           }
@@ -174,9 +179,10 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
   @SuppressWarnings("ReferenceEquality")
   private static Expression maybeInsertCastToMemberType(
       TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (!toTypeDescriptor.isClass()
-        && !toTypeDescriptor.isInterface()
-        && !toTypeDescriptor.isEnum()) {
+    if (toTypeDescriptor.isTypeVariable()
+        || toTypeDescriptor.isWildCardOrCapture()
+        // TODO(b/68885310): primitives should be handled below.
+        || toTypeDescriptor.isPrimitive()) {
       // Do not insert the runtime cast if the destination is not a declared type. For example if
       // the destination type is a type variable the corresponding cast will be inserted by the
       // pass that inserts casts due to type erasure.
@@ -184,7 +190,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     }
 
     TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-    List<TypeDescriptor> intersectedTypeDescriptors =
+    List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
         maybeGetIntersectedTypeDescriptors(expressionTypeDescriptor);
     if (intersectedTypeDescriptors == null) {
       return expression;
@@ -193,7 +199,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     TypeDescriptor targetInstanceTypeDescriptor =
         intersectedTypeDescriptors
             .stream()
-            .filter(toTypeDescriptor::isSupertypeOf)
+            .filter(typeDescriptor -> typeDescriptor.isAssignableTo(toTypeDescriptor))
             .findFirst()
             .get();
 
@@ -220,15 +226,14 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
         .build();
   }
 
-  private static List<TypeDescriptor> maybeGetIntersectedTypeDescriptors(
-      TypeDescriptor expressionTypeDescriptor) {
-    if (expressionTypeDescriptor.isIntersection()) {
-      return expressionTypeDescriptor.getIntersectedTypeDescriptors();
+  private static List<DeclaredTypeDescriptor> maybeGetIntersectedTypeDescriptors(
+      TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isIntersection()) {
+      return ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors();
     }
 
-    if (expressionTypeDescriptor.isTypeVariable()
-        || expressionTypeDescriptor.isWildCardOrCapture()) {
-      return maybeGetIntersectedTypeDescriptors(expressionTypeDescriptor.getBoundTypeDescriptor());
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
+      return maybeGetIntersectedTypeDescriptors(typeDescriptor.getBoundTypeDescriptor());
     }
 
     return null;

@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.base.Predicates;
@@ -20,6 +21,7 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -92,7 +94,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
         new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
-            TypeDescriptor targetTypeDescriptor =
+            DeclaredTypeDescriptor targetTypeDescriptor =
                 methodCall.getTarget().getEnclosingTypeDescriptor();
             if (optimizableJsFunctionsByTypeDescriptor.containsKey(targetTypeDescriptor)) {
               // The calls that are typed as directly to the anonymous inner class are redirected
@@ -105,6 +107,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               return MethodCall.Builder.from(methodCall)
                   .setEnclosingTypeDescriptor(
                       targetTypeDescriptor
+                          .getFunctionalInterface()
                           .getJsFunctionMethodDescriptor()
                           .getEnclosingTypeDescriptor())
                   .build();
@@ -147,9 +150,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
   private static FunctionExpression optimizeToFunctionExpression(
       final Type type, final Set<Variable> enclosingCaptures) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
+    DeclaredTypeDescriptor jsFunctionTypeDescriptor =
+        type.getSuperInterfaceTypeDescriptors().get(0);
+    checkState(jsFunctionTypeDescriptor.isJsFunctionInterface());
     FunctionExpression lambdaMethodImplementation =
         FunctionExpression.newBuilder()
-            .setTypeDescriptor(type.getSuperInterfaceTypeDescriptors().get(0))
+            .setTypeDescriptor(jsFunctionTypeDescriptor)
             .setParameters(jsFunctionMethodImplementation.getParameters())
             .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
             .setSourcePosition(
@@ -175,7 +181,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                 return capturedVariable.getReference();
               } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
                 return new ThisReference(
-                    type.getEnclosingTypeDeclaration().getUnsafeTypeDescriptor());
+                    type.getEnclosingTypeDeclaration().getUnparamterizedTypeDescriptor());
               }
             }
             return fieldAccess;

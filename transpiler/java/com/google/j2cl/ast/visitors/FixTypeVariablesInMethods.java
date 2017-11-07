@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
@@ -30,7 +32,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Temporary workaround for b/24476009.
@@ -104,7 +105,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
                                 variable.getTypeDescriptor(),
                                 isTypeVariableDeclaredByCurrentMember))
                         .build())
-            .collect(Collectors.toList()),
+            .collect(toImmutableList()),
         functionExpression);
   }
 

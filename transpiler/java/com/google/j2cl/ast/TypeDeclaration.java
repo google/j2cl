@@ -58,7 +58,10 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDeclaration extends Node
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
+    implements HasJsNameInfo,
+        HasReadableDescription,
+        HasUnusableByJsSuppression,
+        HasQualifiedBinaryName {
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -97,6 +100,7 @@ public abstract class TypeDeclaration extends Node
    * and other similar scenarios.
    */
   @Memoized
+  @Override
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
   }
@@ -165,24 +169,23 @@ public abstract class TypeDeclaration extends Node
   }
 
   public boolean isJsConstructorSubtype() {
-    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     return superTypeDescriptor != null && superTypeDescriptor.hasJsConstructor();
   }
-
-
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
 
   @Nullable
-  abstract DescriptorFactory<ImmutableList<TypeDescriptor>> getInterfaceTypeDescriptorsFactory();
+  abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
+      getInterfaceTypeDescriptorsFactory();
 
   @Nullable
-  abstract DescriptorFactory<TypeDescriptor> getRawTypeDescriptorFactory();
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
 
-  abstract DescriptorFactory<TypeDescriptor> getUnsafeTypeDescriptorFactory();
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getUnparameterizedTypeDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<TypeDescriptor> getSuperTypeDescriptorFactory();
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
   @Nullable
   abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
@@ -235,7 +238,8 @@ public abstract class TypeDeclaration extends Node
 
   @Memoized
   public TypeDescriptor getOverlayImplementationTypeDescriptor() {
-    return TypeDescriptors.createOverlayImplementationTypeDescriptor(getUnsafeTypeDescriptor());
+    return TypeDescriptors.createOverlayImplementationTypeDescriptor(
+        getUnparamterizedTypeDescriptor());
   }
 
   public boolean hasOverlayImplementationType() {
@@ -247,7 +251,7 @@ public abstract class TypeDeclaration extends Node
    * on this type.
    */
   @Memoized
-  public ImmutableList<TypeDescriptor> getInterfaceTypeDescriptors() {
+  public ImmutableList<DeclaredTypeDescriptor> getInterfaceTypeDescriptors() {
     return getInterfaceTypeDescriptorsFactory().get(this);
   }
 
@@ -269,17 +273,17 @@ public abstract class TypeDeclaration extends Node
    * directly on this type or on some super type or super interface.
    */
   @Memoized
-  public Set<TypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
-    Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
+  public Set<DeclaredTypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
+    Set<DeclaredTypeDescriptor> typeDescriptors = new LinkedHashSet<>();
 
     // Recursively gather from super interfaces.
-    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
       typeDescriptors.add(interfaceTypeDescriptor);
       typeDescriptors.addAll(interfaceTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
     }
 
     // Recursively gather from super type.
-    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     if (superTypeDescriptor != null) {
       typeDescriptors.addAll(superTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
     }
@@ -292,7 +296,7 @@ public abstract class TypeDeclaration extends Node
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Memoized
-  public @Nullable TypeDescriptor getRawTypeDescriptor() {
+  public @Nullable DeclaredTypeDescriptor getRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
@@ -332,7 +336,7 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Memoized
-  public @Nullable TypeDescriptor getSuperTypeDescriptor() {
+  public @Nullable DeclaredTypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 
@@ -346,8 +350,8 @@ public abstract class TypeDeclaration extends Node
    * the matching TypeDescriptor.
    */
   @Memoized
-  public TypeDescriptor getUnsafeTypeDescriptor() {
-    return getUnsafeTypeDescriptorFactory().get(this);
+  public DeclaredTypeDescriptor getUnparamterizedTypeDescriptor() {
+    return getUnparameterizedTypeDescriptorFactory().get(this);
   }
 
   /** A unique string for a give type. Used for interning. */
@@ -403,7 +407,7 @@ public abstract class TypeDeclaration extends Node
     }
 
     // Finally add the methods that appear in super interfaces.
-    for (TypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
       AstUtils.updateMethodsBySignature(
           methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
     }
@@ -477,11 +481,11 @@ public abstract class TypeDeclaration extends Node
   public List<MethodDescriptor> getAccidentallyOverriddenMethodDescriptors() {
     List<MethodDescriptor> accidentalOverriddenMethods = new ArrayList<>();
 
-    Set<TypeDescriptor> transitiveSuperTypeInterfaceTypeDescriptors =
+    Set<DeclaredTypeDescriptor> transitiveSuperTypeInterfaceTypeDescriptors =
         getSuperTypeDescriptor() != null
             ? getSuperTypeDescriptor().getTransitiveInterfaceTypeDescriptors()
             : ImmutableSet.of();
-    for (TypeDescriptor superInterfaceTypeDescriptor :
+    for (DeclaredTypeDescriptor superInterfaceTypeDescriptor :
         Sets.difference(
             getTransitiveInterfaceTypeDescriptors(), transitiveSuperTypeInterfaceTypeDescriptors)) {
       accidentalOverriddenMethods.addAll(
@@ -515,7 +519,7 @@ public abstract class TypeDeclaration extends Node
           getSuperTypeDescriptor().getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
     }
 
-    for (TypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
       methodDescriptorsByOverrideSignature.putAll(
           interfaceTypeDescriptor.getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
     }
@@ -540,7 +544,7 @@ public abstract class TypeDeclaration extends Node
 
   /** Returns the method descriptors that are declared in a particular super type but not here. */
   private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
-      TypeDescriptor superTypeDescriptor) {
+      DeclaredTypeDescriptor superTypeDescriptor) {
     return superTypeDescriptor
         .getDeclaredMethodDescriptors()
         .stream()
@@ -554,7 +558,7 @@ public abstract class TypeDeclaration extends Node
    */
   public MethodDescriptor getOverridingMethodDescriptorInSuperclasses(
       MethodDescriptor methodDescriptor) {
-    TypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     while (superTypeDescriptor != null) {
       for (MethodDescriptor superMethodDescriptor :
           superTypeDescriptor.getDeclaredMethodDescriptors()) {
@@ -580,7 +584,16 @@ public abstract class TypeDeclaration extends Node
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    // TODO(stalcup): Actually provide a real readable description.
+    // TODO(rluble): Actually provide a real readable description.
+    if (isAnonymous()) {
+      if (getInterfaceTypeDescriptors().isEmpty()) {
+        return "new " + getSuperTypeDescriptor().getReadableDescription();
+      } else {
+        return "new " + getInterfaceTypeDescriptors().get(0).getReadableDescription();
+      }
+    } else if (isLocal()) {
+      return getSimpleSourceName().replaceFirst("\\$\\d+", "");
+    }
     return getSimpleSourceName();
   }
 
@@ -651,35 +664,37 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setJsNamespace(String jsNamespace);
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
-        DescriptorFactory<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory);
+        DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);
 
     public Builder setInterfaceTypeDescriptorsFactory(
-        Supplier<ImmutableList<TypeDescriptor>> interfaceTypeDescriptorsFactory) {
+        Supplier<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory) {
       return setInterfaceTypeDescriptorsFactory(
           typeDescriptor -> interfaceTypeDescriptorsFactory.get());
     }
 
     public abstract Builder setRawTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory);
+        DescriptorFactory<DeclaredTypeDescriptor> rawTypeDescriptorFactory);
 
-    public Builder setRawTypeDescriptorFactory(Supplier<TypeDescriptor> rawTypeDescriptorFactory) {
+    public Builder setRawTypeDescriptorFactory(
+        Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory) {
       return setRawTypeDescriptorFactory(typeDescriptor -> rawTypeDescriptorFactory.get());
     }
 
     public abstract Builder setSuperTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory);
+        DescriptorFactory<DeclaredTypeDescriptor> superTypeDescriptorFactory);
 
     public Builder setSuperTypeDescriptorFactory(
-        Supplier<TypeDescriptor> superTypeDescriptorFactory) {
+        Supplier<DeclaredTypeDescriptor> superTypeDescriptorFactory) {
       return setSuperTypeDescriptorFactory(typeDescriptor -> superTypeDescriptorFactory.get());
     }
 
-    public abstract Builder setUnsafeTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> unsafeTypeDescriptorFactory);
+    public abstract Builder setUnparameterizedTypeDescriptorFactory(
+        DescriptorFactory<DeclaredTypeDescriptor> unsafeTypeDescriptorFactory);
 
-    public Builder setUnsafeTypeDescriptorFactory(
-        Supplier<TypeDescriptor> unsafeTypeDescriptorFactory) {
-      return setUnsafeTypeDescriptorFactory(typeDescriptor -> unsafeTypeDescriptorFactory.get());
+    public Builder setUnparameterizedTypeDescriptorFactory(
+        Supplier<DeclaredTypeDescriptor> unsafeTypeDescriptorFactory) {
+      return setUnparameterizedTypeDescriptorFactory(
+          typeDescriptor -> unsafeTypeDescriptorFactory.get());
     }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(
@@ -754,8 +769,7 @@ public abstract class TypeDeclaration extends Node
       checkState(
           typeDeclaration.getKind() == Kind.CLASS
               || typeDeclaration.getKind() == Kind.ENUM
-              || typeDeclaration.getKind() == Kind.INTERFACE
-              || typeDeclaration.getKind() == Kind.PRIMITIVE);
+              || typeDeclaration.getKind() == Kind.INTERFACE);
 
       // If this is an inner class, make sure the package is consistent.
       checkState(

@@ -18,13 +18,13 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Invocation;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -34,7 +34,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import java.util.List;
 
@@ -83,7 +82,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
     }
 
     private static void maybeAddVarargsPreamble(Variable varargsParameter, Block body) {
-      if (varargsParameter.getTypeDescriptor().isUntypedArray()) {
+      ArrayTypeDescriptor varargsParameterTypeDescriptor =
+          (ArrayTypeDescriptor) varargsParameter.getTypeDescriptor();
+      if (varargsParameterTypeDescriptor.isUntypedArray()) {
         return;
       }
 
@@ -97,11 +98,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
           AstUtils.createArraysMethodCall(
               "$stampType",
               varargsParameter.getReference(),
-              new JavaScriptConstructorReference(
-                  varargsParameter.getTypeDescriptor().getLeafTypeDescriptor()),
-              new NumberLiteral(
-                  TypeDescriptors.get().primitiveDouble,
-                  varargsParameter.getTypeDescriptor().getDimensions()));
+              AstUtils.getMetadataConstructorReference(
+                  varargsParameterTypeDescriptor.getLeafTypeDescriptor()),
+              NumberLiteral.of(varargsParameterTypeDescriptor.getDimensions()));
 
       List<Statement> statements = body.getStatements();
       statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));

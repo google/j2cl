@@ -23,6 +23,7 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
@@ -200,7 +201,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                 type.getDeclaration().getTypeParameterDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
-      for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
+      for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
         renderIfClassExists(" * @extends {%s}", superInterfaceType, sourceBuilder);
       }
       sourceBuilder.appendln(" */");
@@ -221,7 +222,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         // extends clause of the class definition.
         renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), buffer);
       }
-      for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
+      for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
         renderIfClassExists(" * @implements {%s}", superInterfaceType, buffer);
       }
 
@@ -241,7 +242,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    * <p>Used to render the @extends/@implements clauses.
    */
   private void renderIfClassExists(
-      String formatString, TypeDescriptor typeDescriptor, SourceBuilder sourceBuilder) {
+      String formatString, DeclaredTypeDescriptor typeDescriptor, SourceBuilder sourceBuilder) {
     if (doesClassExistInJavaScript(typeDescriptor)) {
       String typeArgumentsString =
           typeDescriptor.hasTypeArguments()

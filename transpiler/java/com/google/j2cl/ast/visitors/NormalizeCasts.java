@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -33,6 +34,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /** Replaces cast expression with corresponding cast method call. */
 public class NormalizeCasts extends NormalizationPass {
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -88,31 +90,11 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static Expression createArrayCastExpression(CastExpression castExpression) {
-    checkArgument(castExpression.getCastTypeDescriptor().isArray());
-
-    if (castExpression
-        .getCastTypeDescriptor()
-        .getLeafTypeDescriptor()
-        .getRawTypeDescriptor()
-        .isNative()) {
-      return createNativeJsArrayCastExpression(castExpression);
-    }
-    return createJavaArrayCastExpression(castExpression);
-  }
-
-  private static Expression createJavaArrayCastExpression(CastExpression castExpression) {
-    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
+    ArrayTypeDescriptor arrayCastTypeDescriptor =
+        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
 
     // Arrays.$castTo(expr, leafType, dimension);
-    MethodCall castMethodCall =
-        AstUtils.createArraysMethodCall(
-            "$castTo",
-            castExpression.getExpression(),
-            AstUtils.getMetadataConstructorReference(
-                arrayCastTypeDescriptor.getLeafTypeDescriptor()),
-            new NumberLiteral(
-                TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
-
+    MethodCall castMethodCall = createArrayCastCall(castExpression);
     // /**@type {}*/ ()
     return JsDocAnnotatedExpression.newBuilder()
         .setExpression(castMethodCall)
@@ -120,17 +102,19 @@ public class NormalizeCasts extends NormalizationPass {
         .build();
   }
 
-  private static Expression createNativeJsArrayCastExpression(CastExpression castExpression) {
-    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    checkArgument(castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
+  private static MethodCall createArrayCastCall(CastExpression castExpression) {
+    ArrayTypeDescriptor arrayCastTypeDescriptor =
+        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
+    TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
 
-    // Arrays.$castToNative(expr);
-    MethodCall castMethodCall =
-        AstUtils.createArraysMethodCall("$castToNative", castExpression.getExpression());
-    // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.newBuilder()
-        .setExpression(castMethodCall)
-        .setAnnotationType(castTypeDescriptor)
-        .build();
+    if (leafTypeDescriptor.getRawTypeDescriptor().isNative()) {
+      return AstUtils.createArraysMethodCall("$castToNative", castExpression.getExpression());
+    }
+
+    return AstUtils.createArraysMethodCall(
+        "$castTo",
+        castExpression.getExpression(),
+        AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
+        NumberLiteral.of(arrayCastTypeDescriptor.getDimensions()));
   }
 }

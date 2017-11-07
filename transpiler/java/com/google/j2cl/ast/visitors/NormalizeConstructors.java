@@ -24,6 +24,7 @@ import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
@@ -38,7 +39,6 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -282,7 +282,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   /** Synthesizes a method descriptor for a "super" call to the constructor. */
-  private static MethodCall synthesizeEmptySuperCall(TypeDescriptor superType) {
+  private static MethodCall synthesizeEmptySuperCall(DeclaredTypeDescriptor superType) {
     MethodDescriptor superDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(superType)
@@ -337,7 +337,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
-    TypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingTypeDescriptor();
+    DeclaredTypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingTypeDescriptor();
 
     if (enclosingType.hasJsConstructor()) {
       // Verify that we are not emitting factory methods for JsConstructors.
@@ -383,7 +383,7 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static Method synthesizeFactoryMethod(
       Method constructor,
-      TypeDescriptor enclosingType,
+      DeclaredTypeDescriptor enclosingType,
       MethodDescriptor javascriptConstructor,
       List<Expression> javascriptConstructorArguments) {
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
@@ -478,8 +478,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setName(MethodDescriptor.CREATE_METHOD_NAME)
         .setVisibility(Visibility.PUBLIC)
         .setConstructor(false)
-        .setReturnTypeDescriptor(
-            TypeDescriptors.toNonNullable(constructor.getEnclosingTypeDescriptor()))
+        .setReturnTypeDescriptor(constructor.getEnclosingTypeDescriptor().toNonNullable())
         .setTypeParameterTypeDescriptors(
             Iterables.concat(
                 constructor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors(),
@@ -490,7 +489,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   /** Method descriptor for the implicit (parameterless) ES6 constructor */
   private static MethodDescriptor getImplicitJavascriptConstructorDescriptor(
-      TypeDescriptor enclosingType) {
+      DeclaredTypeDescriptor enclosingType) {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
@@ -502,7 +501,7 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodDescriptor primaryConstructorDescriptor(
       MethodDescriptor constructorDescriptor) {
 
-    TypeDescriptor enclosingType = constructorDescriptor.getEnclosingTypeDescriptor();
+    DeclaredTypeDescriptor enclosingType = constructorDescriptor.getEnclosingTypeDescriptor();
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(enclosingType)

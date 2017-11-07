@@ -27,7 +27,7 @@ public class AstUtilConstants {
       ThreadLocal.withInitial(
           () ->
               FieldDescriptor.newBuilder()
-                  .setEnclosingTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+                  .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
                   .setName("length")
                   .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
                   .setStatic(false)

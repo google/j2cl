@@ -31,7 +31,7 @@ public abstract class MemberDescriptor extends Node
 
   public abstract JsInfo getJsInfo();
 
-  public abstract TypeDescriptor getEnclosingTypeDescriptor();
+  public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
   /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
   public boolean isMemberOf(TypeDescriptor typeDescriptor) {
@@ -129,6 +129,22 @@ public abstract class MemberDescriptor extends Node
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
+  /** Whether this member overrides a java.lang.Object method. */
+  public boolean isOrOverridesJavaLangObjectMethod() {
+    return false;
+  }
+
+  /** Returns whether the member can be referenced directly from JavaScript code. */
+  public boolean canBeReferencedExternally() {
+    if (getEnclosingTypeDescriptor().isAnonymous()) {
+      // members of anonymous classes can not be referenced externally
+      return false;
+    }
+    // TODO(b/36232076): There should be two methods isJsMember and isOrOverridesJsMember to
+    // distinguish when a member is explicitly marked (to consider the member as
+    // canBeReferencedExternally) and when the member inherits through overriding a JsMember.
+    return isJsMember() || isJsFunction();
+  }
 
   @Override
   public String getSimpleJsName() {

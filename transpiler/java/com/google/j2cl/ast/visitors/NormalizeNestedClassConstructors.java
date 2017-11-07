@@ -27,6 +27,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -107,7 +108,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     public Node rewriteNewInstance(NewInstance newInstance) {
       if (newInstance.getQualifier() != null) {
         // outerClassInstance.new InnerClass(....) => new InnerClass(outerClassInstance, ....)
-        TypeDescriptor targetTypeDescriptor = newInstance.getTarget().getEnclosingTypeDescriptor();
+        DeclaredTypeDescriptor targetTypeDescriptor =
+            newInstance.getTarget().getEnclosingTypeDescriptor();
         return NewInstance.Builder.from(newInstance)
             .addArgumentAndUpdateDescriptor(
                 0, newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
@@ -250,7 +252,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
                 .collect(Collectors.toList()));
       } else {
         // thread captures to super call if necessary.
-        TypeDescriptor superTypeDescriptor = target.getEnclosingTypeDescriptor();
+        DeclaredTypeDescriptor superTypeDescriptor = target.getEnclosingTypeDescriptor();
         addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
         // a.super() => super(a)

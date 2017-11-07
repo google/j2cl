@@ -190,10 +190,7 @@ public class ExpressionTranspiler {
         }
 
         ImmutableList<ParameterDescriptor> parameterDescriptors =
-            expression
-                .getTypeDescriptor()
-                .getConcreteJsFunctionMethodDescriptor()
-                .getParameterDescriptors();
+            expression.getDescriptor().getParameterDescriptors();
         if (parameterDescriptors
             .stream()
             .anyMatch(

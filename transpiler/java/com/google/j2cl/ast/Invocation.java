@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Abstracts invocations, i.e. method calls and new instances.
@@ -82,7 +82,7 @@ public abstract class Invocation extends Expression implements MemberReference {
                   argumentExpressions
                       .stream()
                       .map(Expression::getTypeDescriptor)
-                      .collect(Collectors.toList()))
+                      .collect(toImmutableList()))
               .build();
       return this;
     }
@@ -121,7 +121,7 @@ public abstract class Invocation extends Expression implements MemberReference {
       return this;
     }
 
-    public Builder setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
+    public Builder setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
       this.methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
               .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

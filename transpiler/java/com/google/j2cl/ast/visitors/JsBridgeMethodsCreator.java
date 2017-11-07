@@ -20,12 +20,12 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -92,13 +92,13 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
       bridgeMethodDescriptor =
           bridgeMethodDescriptor.specializeTypeVariables(
               enclosingTypeDeclaration
-                  .getUnsafeTypeDescriptor()
+                  .getUnparamterizedTypeDescriptor()
                   .getSpecializedTypeArgumentByTypeParameters());
 
       Method bridgeMethod =
           createBridgeMethod(
               sourcePosition,
-              enclosingTypeDeclaration.getUnsafeTypeDescriptor(),
+              enclosingTypeDeclaration.getUnparamterizedTypeDescriptor(),
               bridgeMethodDescriptor,
               entry.getValue());
 
@@ -182,7 +182,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
 
   private static Method createBridgeMethod(
       SourcePosition sourcePosition,
-      TypeDescriptor targetTypeDescriptor,
+      DeclaredTypeDescriptor targetTypeDescriptor,
       MethodDescriptor bridgeMethodDescriptor,
       MethodDescriptor forwardToMethodDescriptor) {
     return AstUtils.createForwardingMethod(

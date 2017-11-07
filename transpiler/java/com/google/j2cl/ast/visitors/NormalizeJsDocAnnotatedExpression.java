@@ -15,11 +15,10 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -44,7 +43,9 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
               return jsDocAnnotatedExpression;
             }
 
-            TypeDescriptor annotationTypeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
+            DeclaredTypeDescriptor annotationTypeDescriptor =
+                (DeclaredTypeDescriptor) jsDocAnnotatedExpression.getTypeDescriptor();
+
             Iterable<TypeDescriptor> typeArgumentTypeDescriptors =
                 Lists.transform(
                     annotationTypeDescriptor.getTypeArgumentDescriptors(),
@@ -52,12 +53,9 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
                         typeArgument.isWildCardOrCapture()
                             ? TypeDescriptors.get().javaLangObject
                             : typeArgument);
-            checkArgument(!annotationTypeDescriptor.isArray());
-            checkArgument(!annotationTypeDescriptor.isTypeVariable());
-            checkArgument(!annotationTypeDescriptor.isUnion());
             return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
                 .setAnnotationType(
-                    TypeDescriptor.Builder.from(annotationTypeDescriptor)
+                    DeclaredTypeDescriptor.Builder.from(annotationTypeDescriptor)
                         .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
                         .build())
                 .build();

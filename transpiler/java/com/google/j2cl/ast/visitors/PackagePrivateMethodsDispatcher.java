@@ -17,11 +17,11 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,7 +132,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
    */
   private static MethodDescriptor findDirectOverriddenMethodDescriptor(
       MethodDescriptor overridingMethodDescriptor) {
-    TypeDescriptor superClassTypeDescriptor =
+    DeclaredTypeDescriptor superClassTypeDescriptor =
         overridingMethodDescriptor.getEnclosingTypeDescriptor().getSuperTypeDescriptor();
     while (superClassTypeDescriptor != null) {
       for (MethodDescriptor declaredMethodDescriptor :

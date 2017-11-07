@@ -16,6 +16,7 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
@@ -23,6 +24,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
@@ -35,6 +37,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
@@ -42,7 +45,6 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Since JavaScript doesn't support multiple catch clauses, we convert multiple catch clauses to a
@@ -125,14 +127,15 @@ public class NormalizeCatchClauses extends NormalizationPass {
     TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();
     List<TypeDescriptor> typesToCheck =
         exceptionTypeDescriptor.isUnion()
-            ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
+            ? ((UnionTypeDescriptor) exceptionTypeDescriptor).getUnionTypeDescriptors()
             : Collections.singletonList(exceptionTypeDescriptor);
     Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
     SourcePosition currentClauseSourcePosition = clause.getBody().getSourcePosition();
     List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
     TypeDescriptor catchVariableTypeDescriptor =
         catchVariable.getTypeDescriptor().isUnion()
-            ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
+            ? ((UnionTypeDescriptor) catchVariable.getTypeDescriptor())
+                .getClosestCommonSuperTypeDescriptor()
             : catchVariable.getTypeDescriptor();
     ExpressionStatement assignment =
         VariableDeclarationExpression.newBuilder()
@@ -162,23 +165,24 @@ public class NormalizeCatchClauses extends NormalizationPass {
    */
   private static Expression checkTypeExpression(
       Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
-      List<Expression> methodCalls =
-          typeDescriptors
-              .stream()
-              .map(
-                  typeDescriptor ->
-                      checkIsInstanceCall(typeDescriptor, exceptionVariable.getReference()))
-              .collect(Collectors.toList());
+    List<Expression> methodCalls =
+        typeDescriptors
+            .stream()
+            .map(
+                typeDescriptor ->
+                    checkIsInstanceCall(
+                        (DeclaredTypeDescriptor) typeDescriptor, exceptionVariable.getReference()))
+            .collect(toImmutableList());
     return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, methodCalls);
     }
 
-    /**
-     * Generate method call:
-     *
-     * <p>Class.$isInstance(exceptionVariable).
-     */
-    private static MethodCall checkIsInstanceCall(
-        TypeDescriptor descriptor, Expression exceptionVariable) {
+  /**
+   * Generate method call:
+   *
+   * <p>Class.$isInstance(exceptionVariable).
+   */
+  private static MethodCall checkIsInstanceCall(
+      DeclaredTypeDescriptor descriptor, Expression exceptionVariable) {
     MethodDescriptor methodDescriptor =
         MethodDescriptor.newBuilder()
             .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)

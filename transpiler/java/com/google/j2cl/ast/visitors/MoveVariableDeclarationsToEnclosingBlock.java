@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -38,7 +39,6 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Moves variable declarations to enclosing blocks.
@@ -190,7 +190,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
                             BinaryExpression.Builder.asAssignmentTo(fragment.getVariable())
                                 .setRightOperand(fragment.getInitializer())
                                 .build())
-                    .collect(Collectors.toList());
+                    .collect(toImmutableList());
 
             if (assignments.isEmpty()) {
               return NullLiteral.get();
@@ -212,7 +212,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
               .stream()
               .flatMap(declaration -> declaration.getFragments().stream())
               .map(VariableDeclarationFragment::getVariable)
-              .collect(Collectors.toList());
+              .collect(toImmutableList());
 
       block
           .getStatements()

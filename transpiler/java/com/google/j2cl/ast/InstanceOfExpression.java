@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -32,6 +33,12 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     this.expression = checkNotNull(expression);
     this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
     this.sourcePosition = sourcePosition;
+    checkArgument(
+        !testTypeDescriptor.isTypeVariable()
+            && !testTypeDescriptor.isWildCardOrCapture()
+            && !testTypeDescriptor.isUnion()
+            && !testTypeDescriptor.isIntersection()
+            && !testTypeDescriptor.isPrimitive());
   }
 
   public Expression getExpression() {

@@ -17,17 +17,12 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,34 +31,39 @@ import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
-  public TypeDescriptor primitiveBoolean;
-  public TypeDescriptor primitiveByte;
-  public TypeDescriptor primitiveChar;
-  public TypeDescriptor primitiveDouble;
-  public TypeDescriptor primitiveFloat;
-  public TypeDescriptor primitiveInt;
-  public TypeDescriptor primitiveLong;
-  public TypeDescriptor primitiveShort;
-  public TypeDescriptor primitiveVoid;
+  public PrimitiveTypeDescriptor primitiveBoolean;
+  public PrimitiveTypeDescriptor primitiveByte;
+  public PrimitiveTypeDescriptor primitiveChar;
+  public PrimitiveTypeDescriptor primitiveDouble;
+  public PrimitiveTypeDescriptor primitiveFloat;
+  public PrimitiveTypeDescriptor primitiveInt;
+  public PrimitiveTypeDescriptor primitiveLong;
+  public PrimitiveTypeDescriptor primitiveShort;
+  public PrimitiveTypeDescriptor primitiveVoid;
 
-  public TypeDescriptor javaLangBoolean;
-  public TypeDescriptor javaLangByte;
-  public TypeDescriptor javaLangCharacter;
-  public TypeDescriptor javaLangDouble;
-  public TypeDescriptor javaLangFloat;
-  public TypeDescriptor javaLangInteger;
-  public TypeDescriptor javaLangLong;
-  public TypeDescriptor javaLangShort;
-  public TypeDescriptor javaLangString;
-  public TypeDescriptor javaLangVoid;
+  public DeclaredTypeDescriptor javaLangBoolean;
+  public DeclaredTypeDescriptor javaLangByte;
+  public DeclaredTypeDescriptor javaLangCharacter;
+  public DeclaredTypeDescriptor javaLangDouble;
+  public DeclaredTypeDescriptor javaLangFloat;
+  public DeclaredTypeDescriptor javaLangInteger;
+  public DeclaredTypeDescriptor javaLangLong;
+  public DeclaredTypeDescriptor javaLangShort;
+  public DeclaredTypeDescriptor javaLangString;
+  public DeclaredTypeDescriptor javaLangVoid;
 
-  public TypeDescriptor javaLangClass;
-  public TypeDescriptor javaLangObject;
-  public TypeDescriptor javaLangThrowable;
+  public DeclaredTypeDescriptor javaLangClass;
+  public DeclaredTypeDescriptor javaLangObject;
+  public DeclaredTypeDescriptor javaLangThrowable;
 
-  public TypeDescriptor javaLangNumber;
-  public TypeDescriptor javaLangComparable;
-  public TypeDescriptor javaLangCharSequence;
+  public DeclaredTypeDescriptor javaLangNumber;
+  public DeclaredTypeDescriptor javaLangComparable;
+  public DeclaredTypeDescriptor javaLangCharSequence;
+
+  public DeclaredTypeDescriptor javaLangCloneable;
+  public DeclaredTypeDescriptor javaIoSerializable;
+
+  public ArrayTypeDescriptor javaLangObjectArray;
 
   public static final String SHORT_TYPE_NAME = "short";
   public static final String LONG_TYPE_NAME = "long";
@@ -75,8 +75,19 @@ public class TypeDescriptors {
   public static final String INT_TYPE_NAME = "int";
   public static final String VOID_TYPE_NAME = "void";
 
+  // Common browser native types.
+  public final DeclaredTypeDescriptor nativeFunction = createGlobalNativeTypeDescriptor("Function");
+  public final DeclaredTypeDescriptor nativeObject = createGlobalNativeTypeDescriptor("Object");
+  public final DeclaredTypeDescriptor nativeArray = createGlobalNativeTypeDescriptor("Array");
+
+  /**
+   * Global window reference that is the enclosing class of native global methods and properties.
+   */
+  public final DeclaredTypeDescriptor globalNamespace = createGlobalNativeTypeDescriptor("");
+
   /** Primitive type descriptors and boxed type descriptors mapping. */
-  private BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType = HashBiMap.create();
+  private final BiMap<PrimitiveTypeDescriptor, DeclaredTypeDescriptor> boxedTypeByPrimitiveType =
+      HashBiMap.create();
 
   private static final ThreadLocal<TypeDescriptors> typeDescriptors = new ThreadLocal<>();
 
@@ -96,18 +107,19 @@ public class TypeDescriptors {
     return typeDescriptors.get() != null;
   }
 
-  public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
+  public static DeclaredTypeDescriptor getBoxTypeFromPrimitiveType(
+      PrimitiveTypeDescriptor primitiveType) {
     return get().boxedTypeByPrimitiveType.get(primitiveType);
   }
 
-  public static TypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
-    return get().boxedTypeByPrimitiveType.inverse().get(TypeDescriptors.toNullable(boxType));
+  public static PrimitiveTypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
+    return get().boxedTypeByPrimitiveType.inverse().get(boxType.toNullable());
   }
 
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
     return get()
         .boxedTypeByPrimitiveType
-        .containsValue(TypeDescriptors.toNullable(typeDescriptor.getRawTypeDescriptor()));
+        .containsValue(typeDescriptor.getRawTypeDescriptor().toNullable());
   }
 
   public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
@@ -120,23 +132,23 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveBoolean);
+    return get().primitiveBoolean.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveByte(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveByte);
+    return get().primitiveByte.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveChar(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveChar);
+    return get().primitiveChar.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveDouble);
+    return get().primitiveDouble.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveFloat(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveFloat);
+    return get().primitiveFloat.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveFloatOrDouble(TypeDescriptor typeDescriptor) {
@@ -144,19 +156,19 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveInt(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveInt);
+    return get().primitiveInt.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveLong(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveLong);
+    return get().primitiveLong.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveShort(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveShort);
+    return get().primitiveShort.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveVoid(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().primitiveVoid);
+    return get().primitiveVoid.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
@@ -193,6 +205,14 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangNumber(TypeDescriptor typeDescriptor) {
     return typeDescriptor.hasSameRawType(get().javaLangNumber);
+  }
+
+  public static boolean isJavaIoSerializable(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaIoSerializable);
+  }
+
+  public static boolean isJavaLangCloneable(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangCloneable);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
@@ -248,40 +268,12 @@ public class TypeDescriptors {
     }
   }
 
-  // Common browser native types.
-  public final TypeDescriptor nativeFunction =
-      createNativeTypeDescriptor(
-          JsUtils.JS_PACKAGE_GLOBAL,
-          // Native type name
-          "Function",
-          Collections.emptyList());
-  public final TypeDescriptor nativeObject =
-      createNativeTypeDescriptor(
-          JsUtils.JS_PACKAGE_GLOBAL,
-          // Native type name
-          "Object",
-          Collections.emptyList());
-  public final TypeDescriptor nativeArray =
-      createNativeTypeDescriptor(
-          JsUtils.JS_PACKAGE_GLOBAL,
-          // Native type name
-          "Array",
-          Collections.emptyList());
-
-  public final TypeDescriptor globalNamespace =
-      // This is the global window references seen as a (phantom) type that will become the
-      // enclosing class of native global methods and properties.
-      createNativeTypeDescriptor(
-          JsUtils.JS_PACKAGE_GLOBAL,
-          // Native type name
-          "",
-          Collections.emptyList());
-
   /** Returns the TypeDeclaration for the Overlay implementation type. */
   private static TypeDeclaration createOverlayImplementationTypeDeclaration(
-      TypeDescriptor typeDescriptor) {
+      DeclaredTypeDescriptor typeDescriptor) {
 
-    TypeDescriptor unparameterizedTypeDescriptor = typeDescriptor.unparameterizedTypeDescriptor();
+    DeclaredTypeDescriptor unparameterizedTypeDescriptor =
+        typeDescriptor.unparameterizedTypeDescriptor();
 
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
@@ -294,22 +286,23 @@ public class TypeDescriptors {
             () ->
                 createOverlayImplementationTypeDescriptor(
                     unparameterizedTypeDescriptor.getRawTypeDescriptor()))
-        .setUnsafeTypeDescriptorFactory(
+        .setUnparameterizedTypeDescriptorFactory(
             () -> createOverlayImplementationTypeDescriptor(unparameterizedTypeDescriptor))
         .setVisibility(Visibility.PUBLIC)
-        .setKind(unparameterizedTypeDescriptor.getKind())
+        .setKind(unparameterizedTypeDescriptor.getTypeDeclaration().getKind())
         .build();
   }
 
   /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */
-  public static TypeDescriptor createOverlayImplementationTypeDescriptor(
-      TypeDescriptor typeDescriptor) {
+  public static DeclaredTypeDescriptor createOverlayImplementationTypeDescriptor(
+      DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
+    checkArgument(typeDescriptor.hasTypeDeclaration());
 
     TypeDeclaration overlayImplementationTypeDeclaration =
         createOverlayImplementationTypeDeclaration(typeDescriptor);
 
-    return TypeDescriptor.newBuilder()
+    return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDeclaration(overlayImplementationTypeDeclaration)
         .setClassComponents(overlayImplementationTypeDeclaration.getClassComponents())
@@ -346,20 +339,20 @@ public class TypeDescriptors {
     NATIVE_UTIL("nativebootstrap", "Util"),
     NATIVE_LONG("nativebootstrap", "Long");
 
-    private final TypeDescriptor typeDescriptor;
+    private final DeclaredTypeDescriptor typeDescriptor;
 
     BootstrapType(String packageName, String name) {
       this.typeDescriptor = createBoostrapTypeDescriptor(Kind.CLASS, packageName, name);
     }
 
-    public TypeDescriptor getDescriptor() {
+    public DeclaredTypeDescriptor getDescriptor() {
       return typeDescriptor;
     }
 
-    public static final Set<TypeDescriptor> typeDescriptors;
+    public static final Set<DeclaredTypeDescriptor> typeDescriptors;
 
     static {
-      ImmutableSet.Builder<TypeDescriptor> setBuilder = new ImmutableSet.Builder<>();
+      ImmutableSet.Builder<DeclaredTypeDescriptor> setBuilder = new ImmutableSet.Builder<>();
       for (BootstrapType value : BootstrapType.values()) {
         setBuilder.add(value.getDescriptor());
       }
@@ -370,107 +363,44 @@ public class TypeDescriptors {
   // Not externally instantiable.
   private TypeDescriptors() {}
 
+  public static DeclaredTypeDescriptor createPrimitiveMetadataTypeDescriptor(
+      PrimitiveTypeDescriptor primitiveTypeDescriptor) {
+    // Prepend "$" so that internal aliases start with "$".
+    return createSyntheticTypeDescriptor(
+        "vmbootstrap.primitives",
+        "$" + primitiveTypeDescriptor.getSimpleSourceName(),
+        ImmutableList.of(),
+        null,
+        Kind.CLASS,
+        false);
+  }
+
   /** Returns a TypeDescriptor to a Bootstrap type; used to synthesize calls to the runtime. */
-  private static TypeDescriptor createBoostrapTypeDescriptor(
+  private static DeclaredTypeDescriptor createBoostrapTypeDescriptor(
       Kind kind, String packageName, String bootstrapClassName) {
     checkArgument(!bootstrapClassName.contains("<"));
     return createSyntheticTypeDescriptor(
-        null,
-        packageName,
-        ImmutableList.of(bootstrapClassName),
-        ImmutableList.of(),
-        null,
-        null,
-        kind,
-        false,
-        false);
+        packageName, bootstrapClassName, ImmutableList.of(), null, kind, false);
   }
 
-  public static TypeDescriptor createNativeTypeDescriptor(
-      String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
+  public static DeclaredTypeDescriptor createGlobalNativeTypeDescriptor(
+      String jsName, TypeDescriptor... typeArgumentDescriptors) {
     return createNativeTypeDescriptor(
-        null,
-        Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
-        jsNamespace,
-        jsName,
-        typeArgumentDescriptors);
+        null, jsName, JsUtils.JS_PACKAGE_GLOBAL, typeArgumentDescriptors);
   }
 
-  static TypeDescriptor createNativeTypeDescriptor(
+  static DeclaredTypeDescriptor createNativeTypeDescriptor(
       String packageName,
-      List<String> classComponents,
+      String className,
       String jsNamespace,
-      String jsName,
-      List<TypeDescriptor> typeArgumentDescriptors) {
+      TypeDescriptor... typeArgumentDescriptors) {
     return createSyntheticTypeDescriptor(
-        null,
         packageName,
-        classComponents,
-        typeArgumentDescriptors,
+        className,
+        Arrays.asList(typeArgumentDescriptors),
         jsNamespace,
-        jsName,
         Kind.INTERFACE,
-        true,
-        false);
-  }
-
-  public static TypeDescriptor createUnion(
-      List<TypeDescriptor> unionedTypeDescriptors, final TypeDescriptor superTypeDescriptor) {
-    return TypeDescriptor.newBuilder()
-        .setNullable(true)
-        .setKind(Kind.UNION)
-        .setRawTypeDescriptorFactory(typeDescriptor -> typeDescriptor)
-        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
-        .setUnionedTypeDescriptors(unionedTypeDescriptors)
-        .setClassComponents(createUniqueName(unionedTypeDescriptors, "|"))
-        .build();
-  }
-
-  public static TypeDescriptor createIntersection(List<TypeDescriptor> intersectedTypeDescriptors) {
-    TypeDescriptor defaultSuperType = get().javaLangObject;
-    final TypeDescriptor superTypeDescriptor =
-        intersectedTypeDescriptors
-            .stream()
-            .filter(typeDescriptor -> !typeDescriptor.isInterface())
-            .findFirst()
-            .orElse(defaultSuperType);
-    final ImmutableList<TypeDescriptor> interfaceTypeDescriptors =
-        intersectedTypeDescriptors
-            .stream()
-            .filter(TypeDescriptor::isInterface)
-            .collect(toImmutableList());
-    Set<TypeDescriptor> typeArguments = Sets.newLinkedHashSet();
-
-    TypeDescriptor jsFunctionIntefaceTypeDescriptor = null;
-    for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
-      typeArguments.addAll(intersectedType.getTypeArgumentDescriptors());
-      if (intersectedType.getJsFunctionMethodDescriptor() != null
-          || intersectedType.getConcreteJsFunctionMethodDescriptor() != null) {
-        jsFunctionIntefaceTypeDescriptor = intersectedType;
-      }
-    }
-
-    MethodDescriptor concreteJsFunctionMethodDescriptor =
-        jsFunctionIntefaceTypeDescriptor != null
-            ? jsFunctionIntefaceTypeDescriptor.getConcreteJsFunctionMethodDescriptor()
-            : null;
-    MethodDescriptor jsFunctionMethodDescriptor =
-        jsFunctionIntefaceTypeDescriptor != null
-            ? jsFunctionIntefaceTypeDescriptor.getJsFunctionMethodDescriptor()
-            : null;
-
-    return TypeDescriptor.newBuilder()
-        .setKind(Kind.INTERSECTION)
-        .setRawTypeDescriptorFactory(() -> superTypeDescriptor.getRawTypeDescriptor())
-        .setTypeArgumentDescriptors(typeArguments)
-        .setNullable(true)
-        .setInterfaceTypeDescriptorsFactory(() -> interfaceTypeDescriptors)
-        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
-        .setClassComponents(createUniqueName(intersectedTypeDescriptors, "&"))
-        // @JsFunction interfaces should be restricted from participating in intersection types.
-        .setConcreteJsFunctionMethodDescriptorFactory(() -> concreteJsFunctionMethodDescriptor)
-        .setJsFunctionMethodDescriptorFactory(() -> jsFunctionMethodDescriptor)
-        .build();
+        true);
   }
 
   /**
@@ -478,51 +408,29 @@ public class TypeDescriptors {
    *
    * <p>Used to synthesize type descriptors to Bootstrap types and native JS types.
    */
-  private static TypeDescriptor createSyntheticTypeDescriptor(
-      final TypeDescriptor superTypeDescriptor,
+  private static DeclaredTypeDescriptor createSyntheticTypeDescriptor(
       final String packageName,
-      final List<String> classComponents,
+      final String className,
       final List<TypeDescriptor> typeArgumentDescriptors,
       final String jsNamespace,
-      final String jsName,
       final Kind kind,
-      final boolean isNative,
-      final boolean isJsType) {
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory =
+      final boolean isNative) {
+    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
         () ->
             createSyntheticTypeDescriptor(
-                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null,
-                packageName,
-                classComponents,
-                ImmutableList.of(),
-                jsNamespace,
-                jsName,
-                kind,
-                isNative,
-                isJsType);
+                packageName, className, ImmutableList.of(), jsNamespace, kind, isNative);
 
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
-            .setClassComponents(classComponents)
-            .setJsType(isJsType)
+            .setClassComponents(ImmutableList.of(className))
             .setNative(isNative)
-            .setSimpleJsName(jsName)
             .setJsNamespace(jsNamespace)
             .setPackageName(packageName)
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-            .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
-            .setUnsafeTypeDescriptorFactory(
+            .setUnparameterizedTypeDescriptorFactory(
                 () ->
                     createSyntheticTypeDescriptor(
-                        superTypeDescriptor,
-                        packageName,
-                        classComponents,
-                        ImmutableList.of(),
-                        jsNamespace,
-                        jsName,
-                        kind,
-                        isNative,
-                        isJsType))
+                        packageName, className, ImmutableList.of(), jsNamespace, kind, isNative))
             // Synthetic type declarations do not need to have type variables.
             // TODO(b/63118697): Make sure declaratations are consistent with descriptor w.r.t
             // type parameters.
@@ -531,93 +439,28 @@ public class TypeDescriptors {
             .setKind(kind)
             .build();
 
-    return TypeDescriptor.newBuilder()
-        .setClassComponents(classComponents)
-        .setNullable(true)
+    return DeclaredTypeDescriptor.newBuilder()
+        .setClassComponents(ImmutableList.of(className))
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSuperTypeDescriptorFactory(() -> superTypeDescriptor)
         .setTypeDeclaration(typeDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setKind(kind)
         .build();
   }
 
-  public static TypeDescriptor toGivenNullability(TypeDescriptor typeDescriptor, boolean nullable) {
-    return nullable ? toNullable(typeDescriptor) : toNonNullable(typeDescriptor);
+  public static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
+    return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
-  public static TypeDescriptor toNonNullable(TypeDescriptor originalTypeDescriptor) {
-    if (originalTypeDescriptor.isTypeVariable()) {
-      // Type variables are placeholders and do not impose nullability constraints.
-      return originalTypeDescriptor;
-    }
-    if (!originalTypeDescriptor.isNullable()) {
-      return originalTypeDescriptor;
-    }
-
-    return TypeDescriptor.Builder.from(originalTypeDescriptor).setNullable(false).build();
-  }
-
-  public static TypeDescriptor toNullable(TypeDescriptor originalTypeDescriptor) {
-    if (originalTypeDescriptor.isPrimitive()) {
-      // Primitive types are always non nullable.
-      return originalTypeDescriptor;
-    }
-    if (originalTypeDescriptor.isNullable()) {
-      return originalTypeDescriptor;
-    }
-
-    return TypeDescriptor.Builder.from(originalTypeDescriptor).setNullable(true).build();
-  }
-
-  /** Returns a the unparameterized version of {@code typeDescriptors}. */
-  public static ImmutableList<TypeDescriptor> toUnparameterizedTypeDescriptors(
-      List<TypeDescriptor> typeDescriptors) {
+  /** Returns the unparameterized version of {@code typeDescriptors}. */
+  @SuppressWarnings("unchecked")
+  public static <T extends TypeDescriptor> ImmutableList<T> toUnparameterizedTypeDescriptors(
+      List<T> typeDescriptors) {
     return typeDescriptors
         .stream()
         .map(TypeDescriptor::unparameterizedTypeDescriptor)
-        .collect(toImmutableList());
-  }
-
-  public static TypeDescriptor getForArray(TypeDescriptor leafTypeDescriptor, int dimensions) {
-    return getForArray(leafTypeDescriptor, dimensions, true);
-  }
-
-  public static TypeDescriptor getForArray(
-      TypeDescriptor leafTypeDescriptor, int dimensions, boolean isNullable) {
-    checkArgument(!leafTypeDescriptor.isArray());
-    checkArgument(!leafTypeDescriptor.isUnion());
-
-    if (dimensions == 0) {
-      return leafTypeDescriptor;
-    }
-    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
-        selfTypeDescriptor ->
-            getForArray(
-                selfTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor(),
-                selfTypeDescriptor.getDimensions(),
-                selfTypeDescriptor.isNullable());
-
-    // Compute everything else.
-    TypeDescriptor componentTypeDescriptor =
-        getForArray(leafTypeDescriptor, dimensions - 1, isNullable);
-
-    List<String> classComponents =
-        AstUtils.synthesizeClassComponents(
-            componentTypeDescriptor, simpleName -> simpleName + "[]");
-
-    String uniqueKey = leafTypeDescriptor.getUniqueId() + Strings.repeat("[]", dimensions);
-
-    return TypeDescriptor.newBuilder()
-        .setComponentTypeDescriptor(componentTypeDescriptor)
-        .setDimensions(dimensions)
-        .setKind(Kind.ARRAY)
-        .setNullable(isNullable)
-        .setLeafTypeDescriptor(leafTypeDescriptor)
-        .setClassComponents(classComponents)
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setUniqueKey(uniqueKey)
-        .build();
+        .map(typeDescriptor -> (T) typeDescriptor)
+        .collect(ImmutableList.toImmutableList());
   }
 
   public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {
@@ -641,22 +484,6 @@ public class TypeDescriptors {
     }
   }
 
-  public static String createUniqueName(
-      final List<TypeDescriptor> typeDescriptors, String separator) {
-    return typeDescriptors
-        .stream()
-        .map(
-            typeDescriptor -> {
-              String binaryName = typeDescriptor.getQualifiedBinaryName();
-              if (typeDescriptor.hasTypeArguments()) {
-                binaryName += "_";
-                binaryName += createUniqueName(typeDescriptor.getTypeArgumentDescriptors(), "_");
-              }
-              return binaryName.replace('.', '_');
-            })
-        .collect(joining(separator));
-  }
-
   /** Builder for TypeDescriptors. */
   public static class SingletonInitializer {
 
@@ -664,17 +491,21 @@ public class TypeDescriptors {
 
     public void init() {
       set(typeDescriptors);
+      typeDescriptors.javaLangObjectArray =
+          ArrayTypeDescriptor.newBuilder()
+              .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
+              .build();
     }
 
     public SingletonInitializer addPrimitiveBoxedTypeDescriptorPair(
-        TypeDescriptor primitiveType, TypeDescriptor boxedType) {
+        PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
       addPrimitiveType(primitiveType);
       addReferenceType(boxedType);
       addBoxedTypeMapping(primitiveType, boxedType);
       return this;
     }
 
-    public SingletonInitializer addPrimitiveType(TypeDescriptor primitiveType) {
+    public SingletonInitializer addPrimitiveType(PrimitiveTypeDescriptor primitiveType) {
       checkArgument(
           primitiveType.isPrimitive(),
           "%s is not a primitive type",
@@ -714,13 +545,16 @@ public class TypeDescriptors {
       return this;
     }
 
-    public SingletonInitializer addReferenceType(TypeDescriptor referenceType) {
+    public SingletonInitializer addReferenceType(DeclaredTypeDescriptor referenceType) {
       checkArgument(
           !referenceType.isPrimitive(),
           "%s is not a reference type",
           referenceType.getQualifiedSourceName());
       String name = referenceType.getQualifiedSourceName();
       switch (name) {
+        case "java.io.Serializable":
+          typeDescriptors.javaIoSerializable = referenceType;
+          break;
         case "java.lang.Boolean":
           typeDescriptors.javaLangBoolean = referenceType;
           break;
@@ -769,6 +603,9 @@ public class TypeDescriptors {
         case "java.lang.CharSequence":
           typeDescriptors.javaLangCharSequence = referenceType;
           break;
+        case "java.lang.Cloneable":
+          typeDescriptors.javaLangCloneable = referenceType;
+          break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);
       }
@@ -776,7 +613,7 @@ public class TypeDescriptors {
     }
 
     private TypeDescriptor addBoxedTypeMapping(
-        TypeDescriptor primitiveType, TypeDescriptor boxedType) {
+        PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
       return typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
     }
   }

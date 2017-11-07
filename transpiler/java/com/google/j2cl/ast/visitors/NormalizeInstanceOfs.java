@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsInfo;
@@ -38,12 +40,8 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteInstanceOfExpression(InstanceOfExpression expression) {
-            TypeDescriptor testTypeDescriptor = expression.getTestTypeDescriptor();
-            if (testTypeDescriptor.isArray()
-                && testTypeDescriptor.getLeafTypeDescriptor().isNative()) {
-              return rewriteNativeJsArrayInstanceOfExpression(expression);
-            } else if (testTypeDescriptor.isArray()) {
-              return rewriteJavaArrayInstanceOfExpression(expression);
+            if (expression.getTestTypeDescriptor().isArray()) {
+              return rewriteArrayInstanceOfExpression(expression);
             } else {
               return rewriteRegularInstanceOfExpression(expression);
             }
@@ -75,29 +73,21 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         .build();
   }
 
-  private static Node rewriteJavaArrayInstanceOfExpression(
-      InstanceOfExpression instanceOfExpression) {
-    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    // Arrays.$instanceIsOfType(expr, leafType, dimensions);
+  private static Node rewriteArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+    Expression expression = instanceOfExpression.getExpression();
+    ArrayTypeDescriptor checkTypeDescriptor =
+        (ArrayTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
+    TypeDescriptor leafTypeDescriptor = checkTypeDescriptor.getLeafTypeDescriptor();
+    checkState(!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture());
+
+    if (leafTypeDescriptor.isNative()) {
+      return AstUtils.createArraysMethodCall("$instanceIsOfNative", expression);
+    }
+
     return AstUtils.createArraysMethodCall(
         "$instanceIsOfType",
-        instanceOfExpression.getExpression(),
-        AstUtils.getMetadataConstructorReference(checkTypeDescriptor.getLeafTypeDescriptor()),
-        new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
-  }
-
-  /**
-   * Instanceof check on array with leaf type that is a native JsType is equivalent to check if the
-   * instance is a raw JS array (i.e. Array.isArray(instance)).
-   */
-  private static Node rewriteNativeJsArrayInstanceOfExpression(
-      InstanceOfExpression instanceOfExpression) {
-    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    checkArgument(checkTypeDescriptor.isArray());
-    checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
-
-    // Arrays.$instanceIsOfNative(expr);
-    return AstUtils.createArraysMethodCall(
-        "$instanceIsOfNative", instanceOfExpression.getExpression());
+        expression,
+        AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
+        NumberLiteral.of(checkTypeDescriptor.getDimensions()));
   }
 }

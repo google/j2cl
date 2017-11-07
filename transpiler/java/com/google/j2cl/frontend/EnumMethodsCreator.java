@@ -16,19 +16,20 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -36,14 +37,12 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * This class generates the AST structure for the synthesized static methods values and valueOf on
@@ -70,7 +69,7 @@ public class EnumMethodsCreator {
 
   private EnumMethodsCreator(Type enumType) {
     boolean jsType = enumType.getDeclaration().isJsType();
-    TypeDescriptor enumTypeDescriptor = enumType.getTypeDescriptor();
+    DeclaredTypeDescriptor enumTypeDescriptor = enumType.getTypeDescriptor();
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
@@ -78,15 +77,10 @@ public class EnumMethodsCreator {
             .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
             .setTypeDescriptor(
-                TypeDescriptors.createNativeTypeDescriptor(
-                    // Browser global
-                    JsUtils.JS_PACKAGE_GLOBAL,
-                    // Native type name
+                TypeDescriptors.createGlobalNativeTypeDescriptor(
                     "Map",
-                    // Type parameters.
-                    Lists.newArrayList(
-                        TypeDescriptors.get().javaLangString,
-                        TypeDescriptors.toNonNullable(enumTypeDescriptor))))
+                    TypeDescriptors.get().javaLangString,
+                    enumTypeDescriptor.toNonNullable()))
             .setStatic(true)
             .setVisibility(Visibility.PRIVATE)
             .build();
@@ -95,7 +89,11 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(VALUES_METHOD_NAME)
-            .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumTypeDescriptor, 1))
+            .setReturnTypeDescriptor(
+                ArrayTypeDescriptor.newBuilder()
+                    .setComponentTypeDescriptor(enumType.getTypeDescriptor())
+                    .setNullable(true)
+                    .build())
             .setParameterTypeDescriptors()
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
@@ -227,10 +225,12 @@ public class EnumMethodsCreator {
             .getEnumFields()
             .stream()
             .map(enumField -> FieldAccess.Builder.from(enumField.getDescriptor()).build())
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
 
-    TypeDescriptor arrayTypeDescriptor =
-        TypeDescriptors.getForArray(enumType.getTypeDescriptor(), 1);
+    ArrayTypeDescriptor arrayTypeDescriptor =
+        ArrayTypeDescriptor.newBuilder()
+            .setComponentTypeDescriptor(enumType.getTypeDescriptor())
+            .build();
 
     enumType.addMethod(
         Method.newBuilder()

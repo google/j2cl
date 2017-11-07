@@ -32,26 +32,28 @@ import java.util.function.Function;
 public class LambdaTypeDescriptors {
 
   /** Returns the TypeDescriptor for a LambdaAdaptor class. */
-  public static TypeDescriptor createLambdaAdaptorTypeDescriptor(TypeDescriptor typeDescriptor) {
-    return createLambdaAdaptorTypeDescriptor(typeDescriptor, typeDescriptor, Optional.empty());
+  public static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
+    return createLambdaAdaptorTypeDescriptor(
+        typeDescriptor, (DeclaredTypeDescriptor) typeDescriptor, Optional.empty());
   }
 
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
-  public static TypeDescriptor createLambdaAdaptorTypeDescriptor(
+  public static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor,
-      TypeDescriptor enclosingTypeDescriptor,
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
       Optional<Integer> uniqueId) {
 
-    List<TypeDescriptor> interfaceTypeDescriptors =
+    List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
         typeDescriptor.isIntersection()
-            ? typeDescriptor.getInterfaceTypeDescriptors()
-            : ImmutableList.of(typeDescriptor);
+            ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
+            : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
-    TypeDescriptor functionalInterfaceTypeDescriptor = interfaceTypeDescriptors.get(0);
+    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor = interfaceTypeDescriptors.get(0);
 
     checkArgument(!functionalInterfaceTypeDescriptor.isJsFunctionInterface());
 
-    TypeDescriptor jsFunctionInterface =
+    DeclaredTypeDescriptor jsFunctionInterface =
         createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
     ImmutableList<TypeDescriptor> typeArgumentDescriptors =
@@ -71,7 +73,7 @@ public class LambdaTypeDescriptors {
             jsFunctionInterface,
             uniqueId);
 
-    return TypeDescriptor.newBuilder()
+    return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setTypeDeclaration(adaptorDeclaration)
         .setTypeArgumentDescriptors(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
@@ -96,7 +98,7 @@ public class LambdaTypeDescriptors {
    * <li>a SAM method implementation forwarding to the @JsFunction interface.
    */
   private static ImmutableMap<String, MethodDescriptor> getLambdaAdaptorMethodDescriptors(
-      TypeDescriptor jsFunctionInterface, TypeDescriptor adaptorTypeDescriptor) {
+      DeclaredTypeDescriptor jsFunctionInterface, DeclaredTypeDescriptor adaptorTypeDescriptor) {
     return createMethodDescriptorBySignatureMap(
         getLambdaAdaptorConstructor(jsFunctionInterface, adaptorTypeDescriptor),
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
@@ -104,10 +106,10 @@ public class LambdaTypeDescriptors {
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
   private static TypeDeclaration createLambdaAdaptorTypeDeclaration(
-      TypeDescriptor enclosingTypeDescriptor,
-      List<TypeDescriptor> interfaceTypeDescriptors,
-      TypeDescriptor functionalInterfaceTypeDescriptor,
-      TypeDescriptor jsFunctionInterface,
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
+      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor,
+      DeclaredTypeDescriptor jsFunctionInterface,
       Optional<Integer> uniqueId) {
 
     List<String> classComponents =
@@ -135,7 +137,7 @@ public class LambdaTypeDescriptors {
         .setClassComponents(classComponents)
         .setRawTypeDescriptorFactory(
             () ->
-                TypeDescriptor.Builder.from(
+                DeclaredTypeDescriptor.Builder.from(
                         createLambdaAdaptorTypeDescriptor(
                             functionalInterfaceTypeDescriptor.getRawTypeDescriptor(),
                             enclosingTypeDescriptor.getRawTypeDescriptor(),
@@ -145,11 +147,11 @@ public class LambdaTypeDescriptors {
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDeclaration ->
                 getLambdaAdaptorMethodDescriptors(
-                    jsFunctionInterface, adaptorTypeDeclaration.getUnsafeTypeDescriptor()))
+                    jsFunctionInterface, adaptorTypeDeclaration.getUnparamterizedTypeDescriptor()))
         .setInterfaceTypeDescriptorsFactory(
             () -> TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
-        .setUnsafeTypeDescriptorFactory(
+        .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaAdaptorTypeDescriptor(
                     functionalInterfaceTypeDescriptor.unparameterizedTypeDescriptor(),
@@ -163,7 +165,7 @@ public class LambdaTypeDescriptors {
 
   /** Returns the MethodDescriptor for the constructor of the LambdaAdaptor class. */
   private static MethodDescriptor getLambdaAdaptorConstructor(
-      TypeDescriptor jsFunctionInterface, TypeDescriptor adaptorTypeDescriptor) {
+      DeclaredTypeDescriptor jsFunctionInterface, DeclaredTypeDescriptor adaptorTypeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         .setConstructor(true)
@@ -174,8 +176,9 @@ public class LambdaTypeDescriptors {
 
   /** Returns the MethodDescriptor for the SAM implementation in the LambdaAdaptor class. */
   @SuppressWarnings("ReferenceEquality")
-  public static MethodDescriptor getAdaptorForwardingMethod(TypeDescriptor adaptorTypeDescriptor) {
-    TypeDescriptor unparameterizedAdaptorTypeDescriptor =
+  public static MethodDescriptor getAdaptorForwardingMethod(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    DeclaredTypeDescriptor unparameterizedAdaptorTypeDescriptor =
         adaptorTypeDescriptor.unparameterizedTypeDescriptor();
     MethodDescriptor methodDeclarationDescriptor = null;
     if (unparameterizedAdaptorTypeDescriptor != adaptorTypeDescriptor) {
@@ -183,7 +186,7 @@ public class LambdaTypeDescriptors {
           getAdaptorForwardingMethod(unparameterizedAdaptorTypeDescriptor);
     }
 
-    TypeDescriptor functionalInterfaceTypeDescriptor =
+    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         adaptorTypeDescriptor.getInterfaceTypeDescriptors().get(0);
     checkState(
         functionalInterfaceTypeDescriptor.getFunctionalInterface()
@@ -204,8 +207,9 @@ public class LambdaTypeDescriptors {
   }
 
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
-  public static TypeDescriptor createJsFunctionTypeDescriptor(TypeDescriptor typeDescriptor) {
-    TypeDescriptor functionalTypeDescriptor =
+  public static DeclaredTypeDescriptor createJsFunctionTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor functionalTypeDescriptor =
         typeDescriptor.getFunctionalInterface().unparameterizedTypeDescriptor();
 
     MethodDescriptor jsFunctionMethodDescriptor =
@@ -216,7 +220,7 @@ public class LambdaTypeDescriptors {
     TypeDeclaration jsFunctionDeclaration =
         createJsFunctionTypeDeclaration(functionalTypeDescriptor);
 
-    return TypeDescriptor.newBuilder()
+    return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(functionalTypeDescriptor)
         .setTypeDeclaration(jsFunctionDeclaration)
         .setClassComponents(jsFunctionDeclaration.getClassComponents())
@@ -228,8 +232,8 @@ public class LambdaTypeDescriptors {
             jsfunctionTypeDescriptor ->
                 createJsFunctionMethodDescriptor(
                     jsfunctionTypeDescriptor, jsFunctionMethodDescriptor))
-        .setJsFunctionMethodDescriptorFactory(TypeDescriptor::getSingleAbstractMethodDescriptor)
-        .setConcreteJsFunctionMethodDescriptorFactory(TypeDescriptor::getJsFunctionMethodDescriptor)
+        .setJsFunctionMethodDescriptorFactory(
+            DeclaredTypeDescriptor::getSingleAbstractMethodDescriptor)
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDescriptor ->
                 createMethodDescriptorBySignatureMap(
@@ -239,7 +243,7 @@ public class LambdaTypeDescriptors {
 
   /** Returns the TypeDeclaration for the JsFunction class. */
   private static TypeDeclaration createJsFunctionTypeDeclaration(
-      TypeDescriptor functionalTypeDescriptor) {
+      DeclaredTypeDescriptor functionalTypeDescriptor) {
 
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
@@ -258,9 +262,9 @@ public class LambdaTypeDescriptors {
             jsfunctionTypeDeclaration ->
                 createMethodDescriptorBySignatureMap(
                     createJsFunctionMethodDescriptor(
-                        jsfunctionTypeDeclaration.getUnsafeTypeDescriptor(),
+                        jsfunctionTypeDeclaration.getUnparamterizedTypeDescriptor(),
                         functionalTypeDescriptor.getSingleAbstractMethodDescriptor())))
-        .setUnsafeTypeDescriptorFactory(
+        .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createJsFunctionTypeDescriptor(
                     functionalTypeDescriptor.unparameterizedTypeDescriptor()))
@@ -271,7 +275,7 @@ public class LambdaTypeDescriptors {
 
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
-      TypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
+      DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
     return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setJsInfo(

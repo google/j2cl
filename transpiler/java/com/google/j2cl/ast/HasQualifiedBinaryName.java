@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,11 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-/** Kind of type declaration. */
-public enum Kind {
-  CLASS,
-  ENUM,
-  INTERFACE,
-  TYPE_VARIABLE,
-  WILDCARD_OR_CAPTURE
+/** Implemented by nodes that provide a qualified binary name. */
+public interface HasQualifiedBinaryName {
+  /** Returns the qualified binary name */
+  String getQualifiedBinaryName();
 }

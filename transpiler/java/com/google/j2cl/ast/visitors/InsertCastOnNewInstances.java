@@ -18,7 +18,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptors;
 
 /** Inserts type annotation for 'new' a generic type or a JsFunction type. */
 public class InsertCastOnNewInstances extends NormalizationPass {
@@ -34,7 +33,7 @@ public class InsertCastOnNewInstances extends NormalizationPass {
             // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
             return JsDocAnnotatedExpression.newBuilder()
                 .setExpression(newInstance)
-                .setAnnotationType(TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()))
+                .setAnnotationType(newInstance.getTypeDescriptor().toNonNullable())
                 .build();
           }
         });

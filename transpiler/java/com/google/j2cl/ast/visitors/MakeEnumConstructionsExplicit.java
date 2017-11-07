@@ -21,9 +21,12 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -32,6 +35,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -125,12 +129,8 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
             // Rewrite newInstances for the creation of the enum constants to include the assigned
             // ordinal and name.
             if (!getCurrentType().isEnum()
-                || !getCurrentMember().isField()
-                || !((Field) getCurrentMember())
-                    .getDescriptor()
-                    .getTypeDescriptor()
-                    .getTypeDeclaration()
-                    .equals(getCurrentType().getDeclaration())) {
+                || !isEnumField(
+                    getCurrentMember().getDescriptor(), getCurrentType().getDeclaration())) {
 
               // Enum constants creations are exactly those that are field initializers for fields
               // whose class is then enum class.
@@ -151,9 +151,25 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                     0,
                     enumReplaceStringMethodCall(
                         StringLiteral.fromPlainText(enumField.getDescriptor().getName())),
-                    new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
+                    NumberLiteral.of(currentOrdinal))
                 .build();
           }
         });
+  }
+
+  private static boolean isEnumField(
+      MemberDescriptor memberDescriptor, TypeDeclaration enumTypeDeclaration) {
+    // TODO(b/68882167: the code here seems incorrect and not account for corner cases.
+    if (!memberDescriptor.isField()) {
+      return false;
+    }
+
+    FieldDescriptor fieldDescriptor = (FieldDescriptor) memberDescriptor;
+    if (fieldDescriptor.getTypeDescriptor() instanceof DeclaredTypeDescriptor) {
+      return ((DeclaredTypeDescriptor) fieldDescriptor.getTypeDescriptor())
+          .getTypeDeclaration()
+          .equals(enumTypeDeclaration);
+    }
+    return false;
   }
 }

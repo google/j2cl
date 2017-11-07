@@ -43,11 +43,12 @@ public class FunctionExpression extends Expression implements HasParameters, Has
     this.body = checkNotNull(body);
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.sourcePosition = checkNotNull(sourcePosition);
+    checkNotNull(typeDescriptor.getFunctionalInterface());
   }
 
   @Override
   public MethodDescriptor getDescriptor() {
-    return typeDescriptor.getConcreteJsFunctionMethodDescriptor();
+    return typeDescriptor.getFunctionalInterface().getJsFunctionMethodDescriptor();
   }
 
   @Override
@@ -83,7 +84,7 @@ public class FunctionExpression extends Expression implements HasParameters, Has
   }
 
   public boolean isJsVarargs() {
-    return typeDescriptor.getJsFunctionMethodDescriptor().isJsMethodVarargs();
+    return getDescriptor().isJsMethodVarargs();
   }
 
   @Override

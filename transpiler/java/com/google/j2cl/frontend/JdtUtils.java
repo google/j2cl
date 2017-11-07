@@ -24,9 +24,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Kind;
@@ -34,6 +37,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -91,8 +95,8 @@ public class JdtUtils {
 
     boolean isStatic = isStatic(variableBinding);
     Visibility visibility = getVisibility(variableBinding);
-    TypeDescriptor enclosingTypeDescriptor =
-        createTypeDescriptor(variableBinding.getDeclaringClass());
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
     TypeDescriptor thisTypeDescriptor =
@@ -403,6 +407,17 @@ public class JdtUtils {
     return false;
   }
 
+  /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
+  public static DeclaredTypeDescriptor createDeclaredTypeDescriptor(ITypeBinding typeBinding) {
+    return createTypeDescriptor(typeBinding, DeclaredTypeDescriptor.class);
+  }
+
+  /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
+  public static <T extends TypeDescriptor> T createTypeDescriptor(
+      ITypeBinding typeBinding, Class<T> clazz) {
+    return clazz.cast(createTypeDescriptor(typeBinding));
+  }
+
   /** Creates a TypeDescriptor from a JDT TypeBinding. */
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
@@ -419,30 +434,30 @@ public class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
-    TypeDescriptor descriptor = internalCreateTypeDescriptor(typeBinding);
-    return TypeDescriptors.toGivenNullability(
-        descriptor, isNullable(typeBinding, elementAnnotations));
-  }
-
-  private static TypeDescriptor internalCreateTypeDescriptor(ITypeBinding typeBinding) {
-    if (typeBinding == null) {
-      return null;
-    }
-
-    if (typeBinding.isNullType()) {
-      return TypeDescriptors.get().javaLangObject;
+    if (typeBinding.isPrimitive()) {
+      return PrimitiveTypeDescriptor.newBuilder()
+          .setSimpleSourceName(typeBinding.getName())
+          .build();
     }
 
     if (isIntersectionType(typeBinding)) {
       return createIntersectionType(typeBinding);
     }
 
-    if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
-      return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
+    if (typeBinding.isNullType()) {
+      return TypeDescriptors.get().javaLangObject;
     }
 
-    return createForType(typeBinding);
+    boolean isNullable = isNullable(typeBinding, elementAnnotations);
+    if (typeBinding.isArray()) {
+      TypeDescriptor componentTypeDescriptor = createTypeDescriptor(typeBinding.getComponentType());
+      return ArrayTypeDescriptor.newBuilder()
+          .setComponentTypeDescriptor(componentTypeDescriptor)
+          .setNullable(isNullable)
+          .build();
+    }
+
+    return TypeDescriptors.withNullability(createForType(typeBinding), isNullable);
   }
 
   /**
@@ -451,16 +466,16 @@ public class JdtUtils {
    */
   private static boolean isNullable(
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+    checkArgument(!typeBinding.isPrimitive());
+
     if (typeBinding.isTypeVariable()) {
       return true;
-    }
-    if (typeBinding.isPrimitive()) {
-      return false;
     }
     if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
       // Void is always nullable.
       return true;
     }
+
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
             Arrays.asList(elementAnnotations),
@@ -608,7 +623,8 @@ public class JdtUtils {
       if (typeBinding.getDeclaringMember() == null
           || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
         typeArgumentDescriptors.addAll(
-            createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
+            createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
+                .getTypeArgumentDescriptors());
       }
     }
 
@@ -677,8 +693,8 @@ public class JdtUtils {
 
   /** Creates a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    TypeDescriptor enclosingTypeDescriptor =
-        createTypeDescriptor(methodBinding.getDeclaringClass());
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(methodBinding.getDeclaringClass());
 
     boolean isStatic = isStatic(methodBinding);
     Visibility visibility = getVisibility(methodBinding);
@@ -859,16 +875,8 @@ public class JdtUtils {
     return false;
   }
 
-  /** Returns the MethodDescriptor for the SAM method in JsFunction interface. */
-  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
-    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
-    return samInJsFunctionInterface == null
-        ? null
-        : createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
-  }
-
   /** Returns the MethodDescriptor for the concrete JsFunction method implementation. */
-  public static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     if (samInJsFunctionInterface == null) {
       return null;
@@ -920,8 +928,21 @@ public class JdtUtils {
     return typeBindings.stream().map(JdtUtils::createTypeDescriptor).collect(toImmutableList());
   }
 
+  private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
+      List<ITypeBinding> typeBindings, Class<T> clazz) {
+    return typeBindings
+        .stream()
+        .map(typeBinding -> createTypeDescriptor(typeBinding, clazz))
+        .collect(toImmutableList());
+  }
+
   private static ImmutableList<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
     return createTypeDescriptors(Arrays.asList(typeBindings));
+  }
+
+  private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
+      ITypeBinding[] typeBindings, Class<T> clazz) {
+    return createTypeDescriptors(Arrays.asList(typeBindings), clazz);
   }
 
   private static ThreadLocal<ITypeBinding> javaLangObjectTypeBinding = new ThreadLocal<>();
@@ -934,40 +955,48 @@ public class JdtUtils {
     }
     SingletonInitializer singletonInitializer =
         new SingletonInitializer()
-            // Add primitive void type.
-            .addPrimitiveType(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)))
             // Add primitive boxed types.
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(
+                        ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(
+                        ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
             .addPrimitiveBoxedTypeDescriptorPair(
-                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)),
-                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Void")));
+                (PrimitiveTypeDescriptor)
+                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)),
+                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Void")));
     // Add well-known, non-primitive types.
     for (ITypeBinding typeBinding : typeBindings) {
-      singletonInitializer.addReferenceType(createTypeDescriptor(typeBinding));
+      singletonInitializer.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
     }
     singletonInitializer.init();
   }
@@ -985,7 +1014,7 @@ public class JdtUtils {
     checkArgument(isIntersectionType(binding));
     List<ITypeBinding> bindings = Lists.newArrayList(binding.getInterfaces());
     if (binding.getSuperclass() != null) {
-      bindings.add(binding.getSuperclass());
+      bindings.add(0, binding.getSuperclass());
     }
     checkArgument(bindings.size() >= 2);
     return bindings;
@@ -999,9 +1028,11 @@ public class JdtUtils {
   private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
     checkArgument(isIntersectionType(typeBinding));
     List<ITypeBinding> intersectedTypeBindings = getTypeBindingsForIntersectionType(typeBinding);
-    List<TypeDescriptor> intersectedTypeDescriptors =
-        createTypeDescriptors(intersectedTypeBindings);
-    return TypeDescriptors.createIntersection(intersectedTypeDescriptors);
+    List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
+        createTypeDescriptors(intersectedTypeBindings, DeclaredTypeDescriptor.class);
+    return IntersectionTypeDescriptor.newBuilder()
+        .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
+        .build();
   }
 
   /**
@@ -1021,13 +1052,14 @@ public class JdtUtils {
     }
 
     checkArgument(!typeBinding.isArray());
+    checkArgument(!typeBinding.isPrimitive());
 
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory = getRawTypeDescriptorSupplier(typeBinding);
+    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
+        getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
     boolean isTypeVariable = typeBinding.isTypeVariable();
     boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
-    boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
     String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
     Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
@@ -1077,7 +1109,10 @@ public class JdtUtils {
           if (bounds.size() == 1) {
             return createTypeDescriptor(bounds.get(0));
           }
-          return TypeDescriptors.createIntersection(createTypeDescriptors(bounds));
+          return IntersectionTypeDescriptor.newBuilder()
+              .setIntersectionTypeDescriptors(
+                  createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
+              .build();
         };
 
     TypeDeclaration typeDeclaration = null;
@@ -1090,25 +1125,25 @@ public class JdtUtils {
 
     // Compute these even later
     TypeDescriptor typeDescriptor =
-        TypeDescriptor.newBuilder()
+        DeclaredTypeDescriptor.newBuilder()
             .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
             .setClassComponents(getClassComponents(typeBinding))
-            .setConcreteJsFunctionMethodDescriptorFactory(
-                () -> getConcreteJsFunctionMethodDescriptor(typeBinding))
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 isTypeVariable || isWildCardOrCapture
                     ? null
-                    : createTypeDescriptor(typeBinding.getDeclaringClass()))
+                    : createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
             .setInterfaceTypeDescriptorsFactory(
-                () -> createTypeDescriptors(typeBinding.getInterfaces()))
+                () ->
+                    createTypeDescriptors(
+                        typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
             .setKind(getKindFromTypeBinding(typeBinding))
-            .setNullable(isNullable)
             .setSingleAbstractMethodDescriptorFactory(
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-            .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
+            .setSuperTypeDescriptorFactory(
+                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
@@ -1118,14 +1153,16 @@ public class JdtUtils {
     return typeDescriptor;
   }
 
-  private static Supplier<TypeDescriptor> getRawTypeDescriptorSupplier(ITypeBinding typeBinding) {
+  private static Supplier<DeclaredTypeDescriptor> getRawTypeDescriptorSupplier(
+      ITypeBinding typeBinding) {
     return () -> {
-      TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
+      DeclaredTypeDescriptor rawTypeDescriptor =
+          createDeclaredTypeDescriptor(typeBinding.getErasure());
       if (rawTypeDescriptor.hasTypeArguments()) {
         checkArgument(!rawTypeDescriptor.isArray());
         checkArgument(!rawTypeDescriptor.isTypeVariable());
         checkArgument(!rawTypeDescriptor.isUnion());
-        return TypeDescriptor.Builder.from(rawTypeDescriptor)
+        return DeclaredTypeDescriptor.Builder.from(rawTypeDescriptor)
             .setTypeArgumentDescriptors(ImmutableList.of())
             .build();
       }
@@ -1134,16 +1171,14 @@ public class JdtUtils {
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
+    checkArgument(!typeBinding.isArray());
+    checkArgument(!typeBinding.isPrimitive());
     // First look whether it is a type variable, a wildcard or capture to avoid mislabeling the
     // the kind. TypeVariables that are bound to Enum respond true to ITypeBinding.isEnum().
     if (typeBinding.isTypeVariable()) {
       return Kind.TYPE_VARIABLE;
     } else if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
       return Kind.WILDCARD_OR_CAPTURE;
-    } else if (typeBinding.isPrimitive()) {
-      return Kind.PRIMITIVE;
-    } else if (typeBinding.isArray()) {
-      return Kind.ARRAY;
     } else if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
       // Do not consider the anonymous classes that constitute enum values as Enums, only the
       // enum "class" itself is considered Kind.ENUM.
@@ -1157,18 +1192,14 @@ public class JdtUtils {
   }
 
   private static String getJsName(final ITypeBinding typeBinding) {
-    if (typeBinding.isPrimitive()) {
-      return "$" + typeBinding.getName();
-    }
+    checkArgument(!typeBinding.isPrimitive());
     return JsInteropAnnotationUtils.getJsName(
         JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
   }
 
   private static String getJsNamespace(
       ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
-    if (typeBinding.isPrimitive()) {
-      return "vmbootstrap.primitives";
-    }
+    checkArgument(!typeBinding.isPrimitive());
     String jsNamespace =
         JsInteropAnnotationUtils.getJsNamespace(
             JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
@@ -1237,7 +1268,8 @@ public class JdtUtils {
       PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
 
-    Supplier<TypeDescriptor> rawTypeDescriptorFactory = getRawTypeDescriptorSupplier(typeBinding);
+    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
+        getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
     String packageName =
@@ -1279,8 +1311,8 @@ public class JdtUtils {
         .setClassComponents(getClassComponents(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
-            () -> createTypeDescriptors(typeBinding.getInterfaces()))
-        .setUnsafeTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding))
+            () -> createTypeDescriptors(typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
+        .setUnparameterizedTypeDescriptorFactory(() -> createDeclaredTypeDescriptor(typeBinding))
         .setAbstract(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
         .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
@@ -1296,7 +1328,8 @@ public class JdtUtils {
         .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-        .setSuperTypeDescriptorFactory(() -> createTypeDescriptor(typeBinding.getSuperclass()))
+        .setSuperTypeDescriptorFactory(
+            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeParameterDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)

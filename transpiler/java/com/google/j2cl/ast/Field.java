@@ -136,7 +136,7 @@ public class Field extends Member implements HasJsNameInfo {
       return this;
     }
 
-    public Builder setEnclosingClass(TypeDescriptor enclosingTypeDescriptor) {
+    public Builder setEnclosingClass(DeclaredTypeDescriptor enclosingTypeDescriptor) {
       this.fieldDescriptor =
           FieldDescriptor.Builder.from(fieldDescriptor)
               .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
