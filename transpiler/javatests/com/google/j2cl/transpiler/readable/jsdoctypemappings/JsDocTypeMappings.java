@@ -131,4 +131,60 @@ public class JsDocTypeMappings {
   <MethodTypeParameter> MethodTypeParameter returnMethodTypeParameter() {
     return null;
   }
+
+  @JsType(isNative = true, name = "number", namespace = JsPackage.GLOBAL)
+  interface NativeNumber {}
+
+  NativeNumber returnNativeNumber() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "boolean", namespace = JsPackage.GLOBAL)
+  interface NativeBoolean {}
+
+  NativeBoolean returnNativeBoolean() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "string", namespace = JsPackage.GLOBAL)
+  interface NativeString {}
+
+  NativeString returnNativeString() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "null", namespace = JsPackage.GLOBAL)
+  interface NativeNull {}
+
+  NativeNull returnNativeNull() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "undefined", namespace = JsPackage.GLOBAL)
+  interface NativeUndefined {}
+
+  NativeUndefined returnNativeUndefined() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "void", namespace = JsPackage.GLOBAL)
+  interface NativeVoid {}
+
+  NativeVoid returnNativeVoid() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
+  interface NativeStar {}
+
+  NativeStar returnStar() {
+    return null;
+  }
+
+  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
+  interface NativeWildcard {}
+
+  NativeWildcard returnNativeWildcard() {
+    return null;
+  }
 }

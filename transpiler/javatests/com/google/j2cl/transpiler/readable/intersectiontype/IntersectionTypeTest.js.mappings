@@ -49,12 +49,12 @@ public class IntersectionTypeTest<U> {
 [public static <T> Getable<Comparable<String>> cast1(Object s) {
     return (Getable<Comparable<String>> & Setable) s;
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
-[return (Getable<Comparable<String>> & Setable) s;] => [return /**@type {Getable<(Comparable<?string>|?boolean|?number|?string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
+[return (Getable<Comparable<String>> & Setable) s;] => [return /**@type {Getable<(Comparable<?string>|boolean|number|string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
 [s] => [s] "s"
 [public static <T> Getable<Comparable<T>> cast2(Object s) {
     return (Getable<Comparable<T>> & Setable) s;
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
-[return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<*>|?boolean|?number|?string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
+[return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<*>|boolean|number|string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
 [s] => [s] "s"
 [return s;] => [return s;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast3"
 [public static Cmp method() {

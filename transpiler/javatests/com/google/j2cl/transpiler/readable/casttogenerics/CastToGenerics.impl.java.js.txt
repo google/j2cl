@@ -69,9 +69,9 @@ class CastToGenerics extends java_lang_Object {
     let t = /**@type {C_T} */ ($Casts.$to(o, java_lang_Object));
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
-    let c = /**@type {!CastToGenerics<?string, (Number|?number)>} */ (
+    let c = /**@type {!CastToGenerics<?string, (Number|number)>} */ (
         CastToGenerics.$create__());
-    let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
+    let cc = /**@type {CastToGenerics<Error, (Number|number)>} */ (
         $Casts.$to(c, CastToGenerics));
     cc = /**@type {CastToGenerics} */ ($Casts.$to(c, CastToGenerics));
   }
@@ -84,7 +84,7 @@ class CastToGenerics extends java_lang_Object {
   m_castToTypeVariable__() {
     let o = Integer.$create__int(1);
     let s = /**@type {*} */ ($Casts.$to(o, java_lang_Object));
-    let c = /**@type {CastToGenerics<*, (Number|?number)>} */ (
+    let c = /**@type {CastToGenerics<*, (Number|number)>} */ (
         $Casts.$to(o, CastToGenerics));
     c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
     c = /**@type {Enum} */ ($Casts.$to(o, Enum));

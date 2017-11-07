@@ -20,7 +20,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @extends {Parent<AssertionError>}
- * @implements {SomeInterface<AssertionError, (Number|?number)>}
+ * @implements {SomeInterface<AssertionError, (Number|number)>}
  */
 class BridgeMethod extends Parent {
   /**
@@ -56,7 +56,7 @@ class BridgeMethod extends Parent {
 
   /**
    * @param {AssertionError} a
-   * @param {(Number|?number)} n
+   * @param {(Number|number)} n
    * @return {void}
    * @public
    */
@@ -64,14 +64,14 @@ class BridgeMethod extends Parent {
 
   /**
    * @override
-   * @param {(Number|?number)} t
+   * @param {(Number|number)} t
    * @return {void}
    * @public
    */
   m_bar__java_lang_Number(t) {}
 
   /**
-   * @param {(Number|?number)} t
+   * @param {(Number|number)} t
    * @return {void}
    * @public
    */
@@ -81,7 +81,7 @@ class BridgeMethod extends Parent {
    * Bridge method.
    * @override
    * @param {Error} arg0
-   * @param {(Number|?number)} arg1
+   * @param {(Number|number)} arg1
    * @return {void}
    * @public
    */
@@ -101,14 +101,14 @@ class BridgeMethod extends Parent {
   m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
         /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)),
-        /**@type {(Number|?number)} */ ($Casts.$to(arg1, Number)));
+        /**@type {(Number|number)} */ ($Casts.$to(arg1, Number)));
   }
 
   /**
    * Bridge method.
    * @override
    * @param {*} arg0
-   * @param {(Number|?number)} arg1
+   * @param {(Number|number)} arg1
    * @return {void}
    * @public
    */

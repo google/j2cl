@@ -244,51 +244,24 @@ class ClosureTypesGenerator {
     if (TypeDescriptors.isJavaLangComparable(typeDescriptor)) {
       return new ClosureUnionType(
           new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters),
-          BOOLEAN.toNullable(),
-          NUMBER.toNullable(),
-          STRING.toNullable());
+          BOOLEAN,
+          NUMBER,
+          STRING);
     }
 
     if (TypeDescriptors.isJavaLangCharSequence(typeDescriptor)) {
       return new ClosureUnionType(
-          new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters),
-          STRING.toNullable());
+          new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters), STRING);
     }
 
     if (TypeDescriptors.isJavaLangNumber(typeDescriptor)) {
       return new ClosureUnionType(
-          new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters),
-          NUMBER.toNullable());
+          new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters), NUMBER);
     }
 
     if (specialClosureTypesByName.containsKey(typeDeclaration.getQualifiedJsName())) {
-      // Java types are always nullable, so when a  user declares an extern @JsType(isNative=true)
-      // that is actually referring to any of the types that have different "default" nullability,
-      // we need to be aware to emit the right closure type. E.g. in the following program
-      //
-      //    @JsType(isNative=true, namespace=JsPackage.GLOBAL,name="double") class NativeDouble {
-      //       ...
-      //    }
-      //
-      //    void m(@NonNull NativeDouble d1, NativeDouble d2) { ... }
-      //
-      // the method m would be translated as
-      //
-      //   /**
-      //    * @param {double} d1
-      //    * @param {?double} d2
-      //    */
-      //    m(d1, d2) { ....}
-      //
-      // instead of
-      //
-      //   /**
-      //    * @param {!double} d1
-      //    * @param {double} d2
-      //    */
-      //    m(d1, d2) { ....}
-      //
-      // to be consistent with the implicit nullability of classes.
+      // Java types are nullable by default as well as most Closure types with some exceptions.
+      // Here we represent those type specially so we can handle their nullability properly.
       return specialClosureTypesByName.get(typeDeclaration.getQualifiedJsName());
     }
 
@@ -588,7 +561,8 @@ class ClosureTypesGenerator {
   }
 
   // Primitive types.
-  private static final ClosurePrimitiveType UNDEFINED = new ClosurePrimitiveType("undefined", true);
+  private static final ClosurePrimitiveType UNDEFINED =
+      new ClosurePrimitiveType("undefined", false);
   private static final ClosurePrimitiveType NULL = new ClosurePrimitiveType("null", true);
   private static final ClosurePrimitiveType STRING = new ClosurePrimitiveType("string", false);
   private static final ClosurePrimitiveType NUMBER = new ClosurePrimitiveType("number", false);
@@ -612,5 +586,9 @@ class ClosureTypesGenerator {
           .put(NULL.render(), NULL)
           .put(ANY.render(), ANY)
           .put(UNKNOWN.render(), UNKNOWN)
+          .put(STRING.render(), STRING)
+          .put(NUMBER.render(), NUMBER)
+          .put(BOOLEAN.render(), BOOLEAN)
+          .put(VOID.render(), VOID)
           .build();
 }

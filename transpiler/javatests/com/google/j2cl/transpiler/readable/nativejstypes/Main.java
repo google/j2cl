@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.nativejstypes;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 public class Main {
   public static int testNativeJsTypeWithNamespace() {
@@ -55,12 +53,5 @@ public class Main {
     bar.toString();
     bar.hashCode();
     bar.equals(new Object());
-  }
-
-  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
-  interface Wildcard<T> {}
-
-  Wildcard<String> get() {
-    return null;
   }
 }
