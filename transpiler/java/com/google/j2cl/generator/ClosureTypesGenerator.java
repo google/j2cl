@@ -32,6 +32,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
@@ -125,6 +126,10 @@ class ClosureTypesGenerator {
       return getClosureTypeForArray((ArrayTypeDescriptor) typeDescriptor);
     }
 
+    if (typeDescriptor.isUnion()) {
+      return getClosureTypeForUnion((UnionTypeDescriptor) typeDescriptor);
+    }
+
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
     if (declaredTypeDescriptor.isJsFunctionInterface()
@@ -183,6 +188,13 @@ class ClosureTypesGenerator {
   private ClosureType getClosureTypeForArray(ArrayTypeDescriptor typeDescriptor) {
     return withNullability(
         new ClosureNamedType("Array", getClosureType(typeDescriptor.getComponentTypeDescriptor())),
+        typeDescriptor.isNullable());
+  }
+
+  /** Returns the Closure type for a union type descriptor. */
+  private ClosureType getClosureTypeForUnion(UnionTypeDescriptor typeDescriptor) {
+    return withNullability(
+        new ClosureUnionType(getClosureTypes(typeDescriptor.getUnionTypeDescriptors())),
         typeDescriptor.isNullable());
   }
 

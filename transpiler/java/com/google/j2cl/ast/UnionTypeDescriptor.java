@@ -52,9 +52,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   public abstract ImmutableList<TypeDescriptor> getUnionTypeDescriptors();
 
-  // TODO(b/68941889): Make this a computed property or plainly remove the need for it.
-  public abstract DeclaredTypeDescriptor getClosestCommonSuperTypeDescriptor();
-
   @Override
   @Memoized
   public boolean isNullable() {
@@ -64,7 +61,13 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   @Memoized
   public DeclaredTypeDescriptor getRawTypeDescriptor() {
-    return getClosestCommonSuperTypeDescriptor().getRawTypeDescriptor();
+    DeclaredTypeDescriptor typeDescriptor =
+        (DeclaredTypeDescriptor) getUnionTypeDescriptors().get(0).getRawTypeDescriptor();
+    // Find the closest common ancestor of all the types in the union.
+    while (typeDescriptor != null && !isAssignableTo(typeDescriptor)) {
+      typeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+    }
+    return typeDescriptor == null ? TypeDescriptors.get().javaLangObject : typeDescriptor;
   }
 
   @Override
@@ -84,8 +87,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
     return newBuilder()
         .setUnionTypeDescriptors(
             TypeDescriptors.toUnparameterizedTypeDescriptors(getUnionTypeDescriptors()))
-        .setClosestCommonSuperTypeDescriptor(
-            getClosestCommonSuperTypeDescriptor().unparameterizedTypeDescriptor())
         .build();
   }
 
@@ -145,12 +146,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
       return this;
     }
 
-    DeclaredTypeDescriptor superTypeDescriptor =
-        getClosestCommonSuperTypeDescriptor() != null
-            ? (DeclaredTypeDescriptor)
-                getClosestCommonSuperTypeDescriptor()
-                    .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
-            : null;
     ImmutableList<TypeDescriptor> specializedUnionTypes =
         getUnionTypeDescriptors()
             .stream()
@@ -159,10 +154,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
                     typeDescriptor.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
             .collect(ImmutableList.toImmutableList());
 
-    return newBuilder()
-        .setClosestCommonSuperTypeDescriptor(superTypeDescriptor)
-        .setUnionTypeDescriptors(specializedUnionTypes)
-        .build();
+    return newBuilder().setUnionTypeDescriptors(specializedUnionTypes).build();
   }
 
   @Override
@@ -180,9 +172,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   /** Builder for a UnionTypeDescriptor. */
   @AutoValue.Builder
   public abstract static class Builder extends TypeDescriptor.Builder {
-
-    public abstract Builder setClosestCommonSuperTypeDescriptor(
-        DeclaredTypeDescriptor superTypeDescriptor);
 
     public abstract Builder setUnionTypeDescriptors(Iterable<TypeDescriptor> components);
 

@@ -1865,8 +1865,6 @@ public class CompilationUnitBuilder {
 
     private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
       return UnionTypeDescriptor.newBuilder()
-          .setClosestCommonSuperTypeDescriptor(
-              JdtUtils.createDeclaredTypeDescriptor(unionType.resolveBinding()))
           .setUnionTypeDescriptors(
               JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types())
                   .stream()

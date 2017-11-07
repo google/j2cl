@@ -43,6 +43,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
@@ -242,6 +243,14 @@ class ImportGatherer extends AbstractVisitor {
 
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
       collectTypeDescriptorsIntroducedByTypeBounds(typeDescriptor);
+      return;
+    }
+
+    if (typeDescriptor.isUnion()) {
+      for (TypeDescriptor unionTypeDescriptor :
+          ((UnionTypeDescriptor) typeDescriptor).getUnionTypeDescriptors()) {
+        collectForJsDoc(unionTypeDescriptor);
+      }
       return;
     }
 

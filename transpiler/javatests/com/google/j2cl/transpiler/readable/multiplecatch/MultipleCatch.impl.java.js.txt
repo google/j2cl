@@ -59,7 +59,8 @@ class MultipleCatch extends java_lang_Object {
       __$exc = $Exceptions.toJava(__$exc);
       if (NullPointerException.$isInstance(__$exc) ||
           ClassCastException.$isInstance(__$exc)) {
-        let e = /**@type {RuntimeException} */ (__$exc);
+        let e =
+            /**@type {(NullPointerException|ClassCastException)} */ (__$exc);
       } else if (RuntimeException.$isInstance(__$exc)) {
         let r = /**@type {RuntimeException} */ (__$exc);
         r = null;

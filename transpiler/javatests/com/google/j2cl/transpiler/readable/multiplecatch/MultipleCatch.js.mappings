@@ -40,12 +40,12 @@
 [{
       // expected empty body.
     }] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
-        let e = /**@type {RuntimeException} */ (__$exc);
+        let e = /**@type {(NullPointerException|ClassCastException)} */ (__$exc);
 ...        throw $Exceptions.toJs(__$exc);
       }] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [{
       // expected empty body.
-    }] => [let e = /**@type {RuntimeException} */ (__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
+    }] => [let e = /**@type {(NullPointerException|ClassCastException)} */ (__$exc);] "com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.main"
 [e] => [e] "e"
 [{
       r = null; // used to show exception variable is transpiled correctly.

@@ -132,18 +132,13 @@ public class NormalizeCatchClauses extends NormalizationPass {
     Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
     SourcePosition currentClauseSourcePosition = clause.getBody().getSourcePosition();
     List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
-    TypeDescriptor catchVariableTypeDescriptor =
-        catchVariable.getTypeDescriptor().isUnion()
-            ? ((UnionTypeDescriptor) catchVariable.getTypeDescriptor())
-                .getClosestCommonSuperTypeDescriptor()
-            : catchVariable.getTypeDescriptor();
     ExpressionStatement assignment =
         VariableDeclarationExpression.newBuilder()
             .addVariableDeclaration(
                 catchVariable,
                 JsDocAnnotatedExpression.newBuilder()
                     .setExpression(exceptionVariable.getReference())
-                    .setAnnotationType(catchVariableTypeDescriptor)
+                    .setAnnotationType(catchVariable.getTypeDescriptor())
                     .build())
             .build()
             .makeStatement(currentClauseSourcePosition);
