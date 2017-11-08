@@ -46,13 +46,8 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
             // Add the static method to current type.
             // NOTE: The added method will be traversed, and will be skipped.
             getCurrentType().addMethod(AstUtils.createDevirtualizedMethod(method));
-            // Turn the instance method to an empty method since it should not be called. But we
-            // should not delete it otherwise it may lead to JSCompiler errors that complains that
-            // the class does not implement all the methods in its super interfaces.
-            return Method.Builder.from(method)
-                .clearStatements()
-                .setParameters(AstUtils.clone(method.getParameters()))
-                .build();
+
+            return null;
           }
 
           private boolean shouldDevirtualize(Method method) {

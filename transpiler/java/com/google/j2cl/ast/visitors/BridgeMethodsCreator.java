@@ -38,6 +38,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,8 +55,12 @@ public class BridgeMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
-      // Don't bridge methods in abstract classes.
-      if (type.isAbstract()) {
+      // Don't bridge methods in abstract classes. Ideally we should emit and avoid re-emitting in
+      // subclasses. That would reduce unnecessary bridges and make subclassing in JavaScript work
+      // properly (b/64280462). In the meantime, we need bridges for boxed primitives hence that is
+      // special cased here.
+      if (type.getDeclaration().isAbstract()
+          && !TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
         continue;
       }
 

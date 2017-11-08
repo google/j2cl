@@ -1313,7 +1313,7 @@ public class JdtUtils {
         .setInterfaceTypeDescriptorsFactory(
             () -> createTypeDescriptors(typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
         .setUnparameterizedTypeDescriptorFactory(() -> createDeclaredTypeDescriptor(typeBinding))
-        .setAbstract(isAbstract)
+        .setHasAbstractModifier(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
         .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
         .setFinal(isFinal)

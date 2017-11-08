@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Creates unimplemented methods in abstract class.
@@ -80,7 +81,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
                 filledSignatures.addAll(getDeclaredMethodSignatures(superTypeDeclaration));
               } while (superTypeDeclaration.getSuperTypeDescriptor() != null);
             }
-            filledSignatures.addAll(getDeclaredMethodSignatures(type.getDeclaration()));
+            filledSignatures.addAll(getDeclaredMethodSignatures(type));
             /**
              * Bridge method passes may or may not have seen fit to fill yet-more signatures on the
              * current type (yes even if the current type is abstract, if it contains concrete
@@ -118,16 +119,20 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
         });
   }
 
-  private static Set<String> getDeclaredMethodSignatures(TypeDeclaration classTypeDeclaration) {
-    Set<String> signatures = new HashSet<>();
-    for (MethodDescriptor methodDescriptor : classTypeDeclaration.getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.isConstructor() || methodDescriptor.isStatic()) {
-        continue;
-      }
+  private static Set<String> getDeclaredMethodSignatures(Type type) {
+    return getDeclaredMethodSignatures(type.getMethods().stream().map(Method::getDescriptor));
+  }
 
-      signatures.add(ManglingNameUtils.getMangledName(methodDescriptor));
-    }
-    return signatures;
+  private static Set<String> getDeclaredMethodSignatures(TypeDeclaration type) {
+    return getDeclaredMethodSignatures(type.getDeclaredMethodDescriptors().stream());
+  }
+
+  private static Set<String> getDeclaredMethodSignatures(
+      Stream<MethodDescriptor> methodDescriptors) {
+    return methodDescriptors
+        .filter(MethodDescriptor::isPolymorphic)
+        .map(ManglingNameUtils::getMangledName)
+        .collect(Collectors.toSet());
   }
 
   private static Set<DeclaredTypeDescriptor> getImmediateInterfacesAndTheirSupers(

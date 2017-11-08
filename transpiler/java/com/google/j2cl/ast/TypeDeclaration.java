@@ -134,7 +134,10 @@ public abstract class TypeDeclaration extends Node
 
   public abstract Kind getKind();
 
-  public abstract boolean isAbstract();
+  public boolean isAbstract() {
+    return getHasAbstractModifier()
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(getRawTypeDescriptor());
+  }
 
   public abstract boolean isFinal();
 
@@ -172,27 +175,6 @@ public abstract class TypeDeclaration extends Node
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     return superTypeDescriptor != null && superTypeDescriptor.hasJsConstructor();
   }
-
-  /* PRIVATE AUTO_VALUE PROPERTIES */
-
-  @Nullable
-  abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
-      getInterfaceTypeDescriptorsFactory();
-
-  @Nullable
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
-
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getUnparameterizedTypeDescriptorFactory();
-
-  @Nullable
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
-
-  @Nullable
-  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-      getDeclaredMethodDescriptorsFactory();
-
-  @Nullable
-  abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
   /**
    * Returns the JavaScript name for this class. This is same as simple source name unless modified
@@ -597,13 +579,36 @@ public abstract class TypeDeclaration extends Node
     return getSimpleSourceName();
   }
 
+  /* PRIVATE AUTO_VALUE PROPERTIES */
+
+  abstract boolean getHasAbstractModifier();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
+      getInterfaceTypeDescriptorsFactory();
+
+  @Nullable
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
+
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getUnparameterizedTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
+      getDeclaredMethodDescriptorsFactory();
+
+  @Nullable
+  abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
-        .setAbstract(false)
+        .setHasAbstractModifier(false)
         .setAnonymous(false)
         .setNative(false)
         .setCapturingEnclosingInstance(false)
@@ -630,7 +635,7 @@ public abstract class TypeDeclaration extends Node
 
     public abstract Builder setEnclosingTypeDeclaration(TypeDeclaration enclosingTypeDeclaration);
 
-    public abstract Builder setAbstract(boolean isAbstract);
+    public abstract Builder setHasAbstractModifier(boolean hasAbstractModifier);
 
     public abstract Builder setKind(Kind kind);
 
