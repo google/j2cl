@@ -1,0 +1,252 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.trycatch.TryCatch.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.trycatch.TryCatch$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing$impl');
+let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+
+class TryCatch extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'TryCatch()'.
+   * @return {!TryCatch}
+   * @public
+   */
+  static $create__() {
+    TryCatch.$clinit();
+    let $instance = new TryCatch();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'TryCatch()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_trycatch_TryCatch();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testMultiCatch__() {
+    try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (NullPointerException.$isInstance(__$exc) ||
+          ClassCastException.$isInstance(__$exc)) {
+        let e =
+            /**@type {(NullPointerException|ClassCastException)} */ (__$exc);
+        throw $Exceptions.toJs(e);
+      } else if (RuntimeException.$isInstance(__$exc)) {
+        let r = /**@type {RuntimeException} */ (__$exc);
+        r = null;
+      } else {
+        throw $Exceptions.toJs(__$exc);
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testFinally__() {
+    try {
+      $Asserts.$assert(true);
+    } finally {
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testTryWithResource__() {
+    try {
+      let $primaryExc = null;
+      let thing = null;
+      let thing2 = null;
+      try {
+        thing = ClosableThing.$create__();
+        thing2 = ClosableThing.$create__();
+        throw $Exceptions.toJs(Exception.$create__());
+      } catch (/** @type {*} */ __$exc) {
+        __$exc = $Exceptions.toJava(__$exc);
+        if (Throwable.$isInstance(__$exc)) {
+          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs(__$exc);
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if (!$Equality.$same($primaryExc, null)) {
+          throw $Exceptions.toJs($primaryExc);
+        }
+      }
+    } catch (/** @type {*} */ __$exc$1$) {
+      __$exc$1$ = $Exceptions.toJava(__$exc$1$);
+      if (Exception.$isInstance(__$exc$1$)) {
+        let e = /**@type {Exception} */ (__$exc$1$);
+      } else {
+        throw $Exceptions.toJs(__$exc$1$);
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testNestedTryCatch__() {
+    try {
+      throw $Exceptions.toJs(Exception.$create__());
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (Exception.$isInstance(__$exc)) {
+        let ae = /**@type {Exception} */ (__$exc);
+        try {
+          throw $Exceptions.toJs(Exception.$create__());
+        } catch (/** @type {*} */ __$exc$1$) {
+          __$exc$1$ = $Exceptions.toJava(__$exc$1$);
+          if (Exception.$isInstance(__$exc$1$)) {
+            let ie = /**@type {Exception} */ (__$exc$1$);
+          } else {
+            throw $Exceptions.toJs(__$exc$1$);
+          }
+        }
+      } else {
+        throw $Exceptions.toJs(__$exc);
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testThrowGenerics__() {
+    throw $Exceptions.toJs(
+        this.m_getT__java_lang_Object_$p_com_google_j2cl_transpiler_readable_trycatch_TryCatch(
+            Exception.$create__()));
+  }
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {M_T}
+   * @public
+   */
+  m_getT__java_lang_Object_$p_com_google_j2cl_transpiler_readable_trycatch_TryCatch(
+      t) {
+    return t;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testThrowBoundGenerics__() {
+    throw $Exceptions.toJs(
+        this.m_getThrowable___$p_com_google_j2cl_transpiler_readable_trycatch_TryCatch());
+  }
+
+  /**
+   * @template M_T
+   * @return {M_T}
+   * @public
+   */
+  m_getThrowable___$p_com_google_j2cl_transpiler_readable_trycatch_TryCatch() {
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof TryCatch;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TryCatch);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    TryCatch.$clinit = function() {};
+    ClosableThing = goog.module.get(
+        'com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing$impl');
+    ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
+    Exception = goog.module.get('java.lang.Exception$impl');
+    NullPointerException =
+        goog.module.get('java.lang.NullPointerException$impl');
+    RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+    Throwable = goog.module.get('java.lang.Throwable$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_trycatch_TryCatch() {}
+};
+
+$Util.$setClassMetadata(
+    TryCatch,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.trycatch.TryCatch'));
+
+
+
+/**
+ * Export class.
+ */
+exports = TryCatch;
+//# sourceMappingURL=TryCatch.js.map

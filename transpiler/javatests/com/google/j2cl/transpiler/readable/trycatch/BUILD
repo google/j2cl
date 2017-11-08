@@ -8,6 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "trywithresource",
+    name = "trycatch",
     srcs = glob(["*.java"]),
 )

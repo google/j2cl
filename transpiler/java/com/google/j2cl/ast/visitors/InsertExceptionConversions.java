@@ -16,24 +16,24 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThrowStatement;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /**
  * Adds Java Throwable to JavaScript Error conversion.
  *
  * <p>This pass makes sure that exceptions work well across Java/JavaScript boundary. Instead of
  * throwing subclasses of Java Throwable class in generated throw statements, we basically throw the
- * backing JavaScript error object so the generated code looks like this: <pre>{@code
+ * backing JavaScript error object so the generated code looks like this:
+ *
+ * <pre>
+ * <code>
  *   try {
  *     throw $Exceptions.toJs(new SomeJavaException);
  *   } catch(e) {
@@ -44,7 +44,8 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
  *       throw $Exception.toJs(e);
  *     }
  *   }
- * }</pre>
+ * </code>
+ * </pre>
  *
  * <p>As the propagated thrown object is converted to real JavaScript error, it plays better with
  * the browser dev tools (doesn't work well with custom error objects) and callers from JavaScript
@@ -58,20 +59,9 @@ public class InsertExceptionConversions extends NormalizationPass {
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
 
-            MethodDescriptor toJava =
-                MethodDescriptor.newBuilder()
-                    .setJsInfo(JsInfo.RAW)
-                    .setStatic(true)
-                    .setEnclosingTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-                    .setName("toJava")
-                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
-                    .build();
-
             MethodCall toJavaCall =
-                MethodCall.Builder.from(toJava)
-                    .setArguments(catchClause.getExceptionVar().getReference())
-                    .build();
+                AstUtils.createExceptionsMethodCall(
+                    "toJava", catchClause.getExceptionVar().getReference());
 
             Expression assignment =
                 BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVar())
@@ -87,23 +77,12 @@ public class InsertExceptionConversions extends NormalizationPass {
           }
 
           @Override
-          public Node rewriteThrowStatement(ThrowStatement originalStatement) {
-            MethodDescriptor toJs =
-                MethodDescriptor.newBuilder()
-                    .setJsInfo(JsInfo.RAW)
-                    .setStatic(true)
-                    .setEnclosingTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-                    .setName("toJs")
-                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
-                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
-                    .build();
+          public Node rewriteThrowStatement(ThrowStatement throwStatement) {
 
             MethodCall toJsCall =
-                MethodCall.Builder.from(toJs)
-                    .setArguments(originalStatement.getExpression())
-                    .build();
+                AstUtils.createExceptionsMethodCall("toJs", throwStatement.getExpression());
 
-            return new ThrowStatement(originalStatement.getSourcePosition(), toJsCall);
+            return new ThrowStatement(throwStatement.getSourcePosition(), toJsCall);
           }
         });
   }

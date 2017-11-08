@@ -1,19 +1,21 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.tryfinally.TryFinally.
+ * com.google.j2cl.transpiler.readable.trycatch.TryCatch$ClosableThing.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.tryfinally.TryFinally$impl');
+goog.module('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing$impl');
 
 
+const AutoCloseable = goog.require('java.lang.AutoCloseable$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
-
-class TryFinally extends java_lang_Object {
+/**
+ * @implements {AutoCloseable}
+ */
+class ClosableThing extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -23,38 +25,34 @@ class TryFinally extends java_lang_Object {
   }
 
   /**
-   * Factory method corresponding to constructor 'TryFinally()'.
-   * @return {!TryFinally}
+   * Factory method corresponding to constructor 'ClosableThing()'.
+   * @return {!ClosableThing}
    * @public
    */
   static $create__() {
-    TryFinally.$clinit();
-    let $instance = new TryFinally();
+    ClosableThing.$clinit();
+    let $instance = new ClosableThing();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally__();
+        .$ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'TryFinally()'.
+   * Initialization from constructor 'ClosableThing()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally__() {
+  $ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();
+    this.$init__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing();
   }
 
   /**
+   * @override
    * @return {void}
    * @public
    */
-  m_main__() {
-    try {
-      $Asserts.$assert(true);
-    } finally {
-    }
-  }
+  m_close__() {}
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -63,7 +61,7 @@ class TryFinally extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof TryFinally;
+    return instance instanceof ClosableThing;
   }
 
   /**
@@ -73,7 +71,7 @@ class TryFinally extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, TryFinally);
+    return $Util.$canCastClass(classConstructor, ClosableThing);
   }
 
   /**
@@ -81,8 +79,7 @@ class TryFinally extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    TryFinally.$clinit = function() {};
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    ClosableThing.$clinit = function() {};
     java_lang_Object.$clinit();
   }
 
@@ -90,18 +87,21 @@ class TryFinally extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally() {}
+  $init__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing() {
+  }
 };
 
 $Util.$setClassMetadata(
-    TryFinally,
+    ClosableThing,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
+        'com.google.j2cl.transpiler.readable.trycatch.TryCatch$ClosableThing'));
 
+
+AutoCloseable.$markImplementor(ClosableThing);
 
 
 /**
  * Export class.
  */
-exports = TryFinally;
-//# sourceMappingURL=TryFinally.js.map
+exports = ClosableThing;
+//# sourceMappingURL=TryCatch$ClosableThing.js.map

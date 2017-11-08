@@ -59,74 +59,101 @@ public class AstUtils {
     }
   }
 
-  private static final ThreadLocal<Map<String, MethodInfo>> arraysMethodInfoByMethodName =
-      ThreadLocal.withInitial(
-          () ->
-              ImmutableMap.<String, MethodInfo>builder()
-                  .put(
-                      "$castTo",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          3,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().primitiveInt))
-                  .put(
-                      "$castToNative",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          1,
-                          TypeDescriptors.get().javaLangObject))
-                  .put(
-                      "$checkNotNull",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          1,
-                          TypeDescriptors.get().javaLangObjectArray))
-                  .put(
-                      "$create",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          2,
-                          TypeDescriptors.get().javaLangObjectArray,
-                          TypeDescriptors.get().javaLangObject))
-                  .put(
-                      "$createNative",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          1,
-                          TypeDescriptors.get().javaLangObjectArray))
-                  .put(
-                      "$init",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          2,
-                          TypeDescriptors.get().javaLangObjectArray,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().primitiveInt))
-                  .put(
-                      "$instanceIsOfType",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangBoolean,
-                          3,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().primitiveInt))
-                  .put(
-                      "$instanceIsOfNative",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangBoolean,
-                          1,
-                          TypeDescriptors.get().javaLangObject))
-                  .put(
-                      "$stampType",
-                      new MethodInfo(
-                          TypeDescriptors.get().javaLangObjectArray,
-                          3,
-                          TypeDescriptors.get().javaLangObjectArray,
-                          TypeDescriptors.get().javaLangObject,
-                          TypeDescriptors.get().primitiveDouble))
-                  .build());
+  private static final ThreadLocal<Map<TypeDescriptor, Map<String, MethodInfo>>>
+      runtimeMethodInfoByMethodNameByType =
+          ThreadLocal.withInitial(
+              () ->
+                  ImmutableMap.of(
+                      BootstrapType.ARRAYS.getDescriptor(),
+                      // Arrays methods
+                      ImmutableMap.<String, MethodInfo>builder()
+                          .put(
+                              "$castTo",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  3,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().primitiveInt))
+                          .put(
+                              "$castToNative",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  1,
+                                  TypeDescriptors.get().javaLangObject))
+                          .put(
+                              "$checkNotNull",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  1,
+                                  TypeDescriptors.get().javaLangObjectArray))
+                          .put(
+                              "$create",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  2,
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  TypeDescriptors.get().javaLangObject))
+                          .put(
+                              "$createNative",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  1,
+                                  TypeDescriptors.get().javaLangObjectArray))
+                          .put(
+                              "$init",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  2,
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().primitiveInt))
+                          .put(
+                              "$instanceIsOfType",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangBoolean,
+                                  3,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().primitiveInt))
+                          .put(
+                              "$instanceIsOfNative",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangBoolean,
+                                  1,
+                                  TypeDescriptors.get().javaLangObject))
+                          .put(
+                              "$stampType",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  3,
+                                  TypeDescriptors.get().javaLangObjectArray,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().primitiveDouble))
+                          .build(),
+                      BootstrapType.EXCEPTIONS.getDescriptor(),
+                      // Exception methods
+                      ImmutableMap.<String, MethodInfo>builder()
+                          .put(
+                              "toJava",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangThrowable,
+                                  1,
+                                  TypeDescriptors.get().javaLangObject))
+                          .put(
+                              "toJs",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangObject,
+                                  1,
+                                  TypeDescriptors.get().javaLangThrowable))
+                          .put(
+                              "safeClose",
+                              new MethodInfo(
+                                  TypeDescriptors.get().javaLangThrowable,
+                                  2,
+                                  TypeDescriptors.get().javaLangObject,
+                                  TypeDescriptors.get().javaLangThrowable))
+                          .build()));
 
   /**
    * Whether or not it makes sense to require this type from javascript with a goog.require('xxx');
@@ -960,7 +987,24 @@ public class AstUtils {
 
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, List<Expression> arguments) {
-    MethodInfo methodInfo = arraysMethodInfoByMethodName.get().get(methodName);
+    return createRuntimeMethodCall(BootstrapType.ARRAYS.getDescriptor(), methodName, arguments);
+  }
+
+  /** Create a call to an Exceptions method. */
+  public static MethodCall createExceptionsMethodCall(String methodName, Expression... arguments) {
+    return createExceptionsMethodCall(methodName, Arrays.asList(arguments));
+  }
+  /** Create a call to an Exceptions method. */
+  public static MethodCall createExceptionsMethodCall(
+      String methodName, List<Expression> arguments) {
+    return createRuntimeMethodCall(BootstrapType.EXCEPTIONS.getDescriptor(), methodName, arguments);
+  }
+
+  /** Create a call to a J2cl runtime method. */
+  private static MethodCall createRuntimeMethodCall(
+      DeclaredTypeDescriptor vmTypeDescriptor, String methodName, List<Expression> arguments) {
+    MethodInfo methodInfo =
+        runtimeMethodInfoByMethodNameByType.get().get(vmTypeDescriptor).get(methodName);
     List<TypeDescriptor> parameterTypeDescriptors = methodInfo.parameters;
     int requiredParameters = methodInfo.requiredParameters;
     TypeDescriptor returnTypeDescriptor = methodInfo.returnType;
@@ -969,7 +1013,7 @@ public class AstUtils {
 
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .setEnclosingTypeDescriptor(vmTypeDescriptor)
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName(methodName)
