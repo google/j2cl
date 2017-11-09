@@ -59,7 +59,7 @@ class TryCatch extends java_lang_Object {
   m_testMultiCatch__() {
     try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ __$exc) {
+    } catch (__$exc) {
       __$exc = $Exceptions.toJava(__$exc);
       if (NullPointerException.$isInstance(__$exc) ||
           ClassCastException.$isInstance(__$exc)) {
@@ -99,7 +99,7 @@ class TryCatch extends java_lang_Object {
         thing = ClosableThing.$create__();
         thing2 = ClosableThing.$create__();
         throw $Exceptions.toJs(Exception.$create__());
-      } catch (/** @type {*} */ __$exc) {
+      } catch (__$exc) {
         __$exc = $Exceptions.toJava(__$exc);
         if (Throwable.$isInstance(__$exc)) {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
@@ -115,7 +115,7 @@ class TryCatch extends java_lang_Object {
           throw $Exceptions.toJs($primaryExc);
         }
       }
-    } catch (/** @type {*} */ __$exc$1$) {
+    } catch (__$exc$1$) {
       __$exc$1$ = $Exceptions.toJava(__$exc$1$);
       if (Exception.$isInstance(__$exc$1$)) {
         let e = /**@type {Exception} */ (__$exc$1$);
@@ -132,13 +132,13 @@ class TryCatch extends java_lang_Object {
   m_testNestedTryCatch__() {
     try {
       throw $Exceptions.toJs(Exception.$create__());
-    } catch (/** @type {*} */ __$exc) {
+    } catch (__$exc) {
       __$exc = $Exceptions.toJava(__$exc);
       if (Exception.$isInstance(__$exc)) {
         let ae = /**@type {Exception} */ (__$exc);
         try {
           throw $Exceptions.toJs(Exception.$create__());
-        } catch (/** @type {*} */ __$exc$1$) {
+        } catch (__$exc$1$) {
           __$exc$1$ = $Exceptions.toJava(__$exc$1$);
           if (Exception.$isInstance(__$exc$1$)) {
             let ie = /**@type {Exception} */ (__$exc$1$);

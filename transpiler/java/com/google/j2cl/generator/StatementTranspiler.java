@@ -286,7 +286,7 @@ public class StatementTranspiler {
               render(tryStatement.getBody());
               for (CatchClause catchClause : tryStatement.getCatchClauses()) {
                 builder.append(
-                    " catch (/** @type {*} */ "
+                    " catch ("
                         + environment.aliasForVariable(catchClause.getExceptionVar())
                         + ") ");
                 render(catchClause.getBody());
