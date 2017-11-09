@@ -1941,7 +1941,6 @@ public class CompilationUnitBuilder {
         compilationUnitsAndTypeBindings.getTypeBindings();
     CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder();
 
-    new ArrayList<>();
     List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries =
         new ArrayList<>(jdtUnitsByFilePath.entrySet());
     // Ensure that all source package-info classes come before all other classes so that the
