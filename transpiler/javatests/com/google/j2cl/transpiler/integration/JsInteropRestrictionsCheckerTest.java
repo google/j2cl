@@ -1454,7 +1454,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertCompileFails(
             "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
             "JsFunction 'InvalidJsFunctionClass' has to be a functional interface.",
-            " JsFunction implementation 'NonFinalJsFunction' must be final.",
+            "JsFunction implementation 'NonFinalJsFunction' must be final.",
             "'JsFunctionMarkedAsJsType' cannot be both a JsFunction implementation and "
                 + "a JsType at the same time.",
             "JsFunction 'JsFunctionExtendsInterface' cannot extend other interfaces.",

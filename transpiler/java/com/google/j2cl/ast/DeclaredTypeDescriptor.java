@@ -888,16 +888,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
       checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
 
-      // Can not be both a JsFunction implementation and js function interface
-      checkState(
-          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isJsFunctionInterface());
-
-      // Can not be both a JsFunction implementation and a functional interface
-      checkState(
-          !typeDescriptor.isJsFunctionImplementation() || !typeDescriptor.isFunctionalInterface());
-
-      // TODO(tdeegan): Complete the precondition checks to make sure we are never building a
-      // type descriptor that does not make sense.
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 
       // Some native standard typedescriptors are created BEFORE typeDescriptors is initialized.

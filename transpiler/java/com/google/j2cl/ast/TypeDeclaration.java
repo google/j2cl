@@ -143,7 +143,11 @@ public abstract class TypeDeclaration extends Node
 
   public abstract boolean isFunctionalInterface();
 
-  public abstract boolean isJsFunctionImplementation();
+  @Memoized
+  public boolean isJsFunctionImplementation() {
+    return isClass()
+        && getInterfaceTypeDescriptors().stream().anyMatch(TypeDescriptor::isJsFunctionInterface);
+  }
 
   public abstract boolean isJsFunctionInterface();
 
@@ -615,7 +619,6 @@ public abstract class TypeDeclaration extends Node
         .setFinal(false)
         .setFunctionalInterface(false)
         .setJsFunctionInterface(false)
-        .setJsFunctionImplementation(false)
         .setJsType(false)
         .setLocal(false)
         .setUnusableByJsSuppressed(false)
@@ -646,8 +649,6 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
-
-    public abstract Builder setJsFunctionImplementation(boolean jsFunctionImplementation);
 
     public abstract Builder setJsType(boolean isJsType);
 
@@ -784,15 +785,8 @@ public abstract class TypeDeclaration extends Node
                   .getPackageName()
                   .equals(typeDeclaration.getPackageName()));
 
-      // Can not be both a JsFunction implementation and js function interface
-      checkState(
-          !typeDeclaration.isJsFunctionImplementation()
-              || !typeDeclaration.isJsFunctionInterface());
-
-      // Can not be both a JsFunction implementation and a functional interface
-      checkState(
-          !typeDeclaration.isJsFunctionImplementation()
-              || !typeDeclaration.isFunctionalInterface());
+      // Has to be an interface to be a functional interface.
+      checkState(typeDeclaration.isInterface() || !typeDeclaration.isFunctionalInterface());
 
       checkState(
           typeDeclaration

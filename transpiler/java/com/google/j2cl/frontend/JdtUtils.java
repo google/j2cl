@@ -858,12 +858,12 @@ public class JdtUtils {
         && !Modifier.isPrivate(methodBinding.getModifiers());
   }
 
-  public static boolean isLocal(ITypeBinding typeBinding) {
+  private static boolean isLocal(ITypeBinding typeBinding) {
     return typeBinding.isLocal();
   }
 
   /** Returns true if {@code typeBinding} is a class that implements a JsFunction interface. */
-  public static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
+  private static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
     if (typeBinding == null || !typeBinding.isClass()) {
       return false;
     }
@@ -876,7 +876,7 @@ public class JdtUtils {
   }
 
   /** Returns the MethodDescriptor for the concrete JsFunction method implementation. */
-  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+  private static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     if (samInJsFunctionInterface == null) {
       return null;
@@ -1319,7 +1319,6 @@ public class JdtUtils {
         .setFinal(isFinal)
         .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
-        .setJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
         .setNative(JsInteropUtils.isNativeType(typeBinding))
         .setAnonymous(typeBinding.isAnonymous())
