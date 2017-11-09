@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.readable.varargs;
 
+import java.io.Serializable;
+
 public class Varargs {
   public Varargs(int... args) {}
 
@@ -23,6 +25,10 @@ public class Varargs {
   }
 
   public void test(int a, Object... args) {}
+
+  public void testCloneable(Cloneable... args) {}
+
+  public void testSerializable(Serializable... args) {}
 
   public static <T> void fun(T... elements) {}
 
@@ -36,6 +42,9 @@ public class Varargs {
     v.test(1, new Object());
     v.test(1, new Object[] {new Object()});
     v.test(1, new Object[] {});
+    v.test(1, new Object[][] {});
+    v.testCloneable(new Object[][] {});
+    v.testSerializable(new Object[][] {});
   }
 }
 

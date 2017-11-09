@@ -62,8 +62,9 @@ public class JdtParser {
   private static final List<String> wellKnownClassNames =
       ImmutableList.of(
           "java.io.Serializable",
-          "java.lang.Class",
           "java.lang.CharSequence",
+          "java.lang.Class",
+          "java.lang.Cloneable",
           "java.lang.Comparable",
           "java.lang.Number",
           "java.lang.Object",
