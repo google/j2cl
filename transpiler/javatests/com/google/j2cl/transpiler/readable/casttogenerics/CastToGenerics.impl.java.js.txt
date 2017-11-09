@@ -11,7 +11,6 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
-let ClassWithGenericField = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField$impl');
 let Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Empty1$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
@@ -88,11 +87,6 @@ class CastToGenerics extends java_lang_Object {
         $Casts.$to(o, CastToGenerics));
     c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
     c = /**@type {Enum} */ ($Casts.$to(o, Enum));
-    let s1 = /**@type {?string} */ ($Casts.$to(
-        /**@type {!ClassWithGenericField<?string>} */ (
-            ClassWithGenericField.$create__())
-            .f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField,
-        java_lang_String));
   }
 
   /**
@@ -153,14 +147,11 @@ class CastToGenerics extends java_lang_Object {
     CastToGenerics.$clinit = function() {};
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$1$impl');
-    ClassWithGenericField = goog.module.get(
-        'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.ClassWithGenericField$impl');
     Empty1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Empty1$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Number = goog.module.get('java.lang.Number$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();

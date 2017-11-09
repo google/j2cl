@@ -49,8 +49,6 @@
 [c] => [c] "c"
 [c = (S[]) o;] => [c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.$to(o, Enum));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
-[String s1 = new ClassWithGenericField<String>().field;] => [let s1 = /**@type {?string} */ ($Casts.$to(/**@type {!ClassWithGenericField<?string>} */ (ClassWithGenericField.$create__()).f_field__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics_ClassWithGenericField, java_lang_String));] "com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.castToTypeVariable"
-[s1] => [s1] "s1"
 [o] => [o] "o"
 [if (o instanceof Empty1) {
       return (EE) o;

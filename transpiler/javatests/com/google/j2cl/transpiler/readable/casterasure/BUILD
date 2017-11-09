@@ -8,6 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "castgenericreturntype",
+    name = "casterasure",
     srcs = glob(["*.java"]),
 )

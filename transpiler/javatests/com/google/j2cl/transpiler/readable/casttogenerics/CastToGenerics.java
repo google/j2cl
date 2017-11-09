@@ -31,10 +31,6 @@ public class CastToGenerics<T, E extends Number> {
     cc = (CastToGenerics) c;
   }
 
-  static class ClassWithGenericField<T extends Comparable> {
-    T field;
-  }
-
   @SuppressWarnings({"unchecked", "unused", "cast"})
   public <S, V extends Enum<V>> void castToTypeVariable() {
     Object o = new Integer(1);
@@ -42,9 +38,8 @@ public class CastToGenerics<T, E extends Number> {
     Object c = (CastToGenerics<S, Number>) o;
     c = (S[]) o;
     c = (V) o;
-    String s1 = new ClassWithGenericField<String>().field;
   }
-  
+
   /**
    * This method tests that J2CL correctly sets the Generic to its bound inside a method since
    * closure compiler cannot handle it.
