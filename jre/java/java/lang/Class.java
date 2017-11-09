@@ -31,10 +31,10 @@ public final class Class<T> implements Type, Serializable {
    * literals.
    */
   @JsMethod
-  static native Class<?> $get(Object ctor, int dimensionCount);
+  public static native Class<?> $get(Object ctor, int dimensionCount);
 
   @JsMethod
-  static native Class<?> $get(Object ctor);
+  public static native Class<?> $get(Object ctor);
 
   /**
    * The JavaScript constructor for the underlying Java type that this Class instance belongs to.
