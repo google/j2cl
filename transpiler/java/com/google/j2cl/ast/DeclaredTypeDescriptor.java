@@ -308,7 +308,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getRawTypeDescriptorFactory().get(this);
   }
 
-  @Override
   @Memoized
   @Nullable
   public TypeDescriptor getBoundTypeDescriptor() {
@@ -669,14 +668,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       TypeDeclaration superTypeOrInterfaceDeclaration =
           superTypeOrInterfaceDescriptor.getTypeDeclaration();
 
-      ImmutableList<TypeDescriptor> typeParameterDescriptors =
+      ImmutableList<DeclaredTypeDescriptor> typeParameterDescriptors =
           superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
       ImmutableList<TypeDescriptor> typeArgumentDescriptors =
           superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
 
       boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
       for (int i = 0; i < typeParameterDescriptors.size(); i++) {
-        TypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
+        DeclaredTypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
         TypeDescriptor typeArgumentDescriptor =
             specializedTypeIsRaw
                 ? typeParameterDescriptor.getBoundTypeDescriptor().getRawTypeDescriptor()

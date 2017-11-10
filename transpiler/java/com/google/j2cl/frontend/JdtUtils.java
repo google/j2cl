@@ -1329,7 +1329,7 @@ public class JdtUtils {
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSuperTypeDescriptorFactory(
             () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
-        .setTypeParameterDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
+        .setTypeParameterDescriptors((Iterable) getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)

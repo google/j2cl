@@ -178,12 +178,6 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   public abstract TypeDescriptor getRawTypeDescriptor();
 
-  /** Returns the bound for a type variable. */
-  @Nullable
-  public TypeDescriptor getBoundTypeDescriptor() {
-    return null;
-  }
-
   /** Returns the functional interface implemented by the type */
   @Nullable
   public DeclaredTypeDescriptor getFunctionalInterface() {

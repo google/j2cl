@@ -128,7 +128,7 @@ public abstract class TypeDeclaration extends Node
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();
 
-  public abstract ImmutableList<TypeDescriptor> getTypeParameterDescriptors();
+  public abstract ImmutableList<DeclaredTypeDescriptor> getTypeParameterDescriptors();
 
   public abstract Visibility getVisibility();
 
@@ -348,13 +348,13 @@ public abstract class TypeDeclaration extends Node
   }
 
   private static String createTypeParametersUniqueId(
-      List<TypeDescriptor> typeParameterDescriptors) {
+      List<DeclaredTypeDescriptor> typeParameterDescriptors) {
     if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
       return "";
     }
     return typeParameterDescriptors
         .stream()
-        .map(TypeDescriptor::getUniqueId)
+        .map(DeclaredTypeDescriptor::getUniqueId)
         .collect(joining(", ", "<", ">"));
   }
 
@@ -659,7 +659,7 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setTypeParameterDescriptors(
-        Iterable<TypeDescriptor> typeParameterDescriptors);
+        Iterable<DeclaredTypeDescriptor> typeParameterDescriptors);
 
     public abstract Builder setVisibility(Visibility visibility);
 

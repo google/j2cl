@@ -118,17 +118,18 @@ public class LambdaTypeDescriptors {
             AstUtilConstants.FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME,
             uniqueId.orElse(null));
 
-    ImmutableList<TypeDescriptor> typeParameterDescriptors =
-        ImmutableList.<TypeDescriptor>builder()
+    ImmutableList<DeclaredTypeDescriptor> typeParameterDescriptors =
+        ImmutableList.<DeclaredTypeDescriptor>builder()
             .addAll(
                 functionalInterfaceTypeDescriptor
                     .getTypeDeclaration()
                     .getTypeParameterDescriptors())
             .addAll(
-                functionalInterfaceTypeDescriptor
-                    .unparameterizedTypeDescriptor()
-                    .getSingleAbstractMethodDescriptor()
-                    .getTypeParameterTypeDescriptors())
+                (Iterable)
+                    functionalInterfaceTypeDescriptor
+                        .unparameterizedTypeDescriptor()
+                        .getSingleAbstractMethodDescriptor()
+                        .getTypeParameterTypeDescriptors())
             .build();
 
     return TypeDeclaration.newBuilder()

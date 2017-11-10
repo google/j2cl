@@ -242,7 +242,7 @@ class ImportGatherer extends AbstractVisitor {
     }
 
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
-      collectTypeDescriptorsIntroducedByTypeBounds(typeDescriptor);
+      collectTypeDescriptorsIntroducedByTypeBounds((DeclaredTypeDescriptor) typeDescriptor);
       return;
     }
 
@@ -297,7 +297,7 @@ class ImportGatherer extends AbstractVisitor {
    * separately due to synthesized erasure casts. In order for these classes to be preserved and not
    * pruned by AJD, we should create a dependency to the bound.
    */
-  private void collectTypeDescriptorsIntroducedByTypeBounds(TypeDescriptor typeDescriptor) {
+  private void collectTypeDescriptorsIntroducedByTypeBounds(DeclaredTypeDescriptor typeDescriptor) {
     TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
 
     if (TypeDescriptors.isJavaLangObject(boundTypeDescriptor)) {

@@ -233,7 +233,8 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     }
 
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
-      return maybeGetIntersectedTypeDescriptors(typeDescriptor.getBoundTypeDescriptor());
+      return maybeGetIntersectedTypeDescriptors(
+          ((DeclaredTypeDescriptor) typeDescriptor).getBoundTypeDescriptor());
     }
 
     return null;

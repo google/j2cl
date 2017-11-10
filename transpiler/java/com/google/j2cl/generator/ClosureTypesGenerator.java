@@ -63,7 +63,8 @@ class ClosureTypesGenerator {
    * Returns the string representation of a collection of Closure types for use in a JsDoc
    * annotation.
    */
-  public String getCommaSeparatedClosureTypesString(Collection<TypeDescriptor> typeDescriptors) {
+  public String getCommaSeparatedClosureTypesString(
+      Collection<? extends TypeDescriptor> typeDescriptors) {
     return getClosureTypes(typeDescriptors)
         .stream()
         .map(ClosureType::render)
@@ -233,7 +234,8 @@ class ClosureTypesGenerator {
   }
 
   /** Returns Closure types for collection of type descriptors. */
-  private ImmutableList<ClosureType> getClosureTypes(Collection<TypeDescriptor> typeDescriptors) {
+  private ImmutableList<ClosureType> getClosureTypes(
+      Collection<? extends TypeDescriptor> typeDescriptors) {
     return typeDescriptors.stream().map(this::getClosureType).collect(toImmutableList());
   }
 
