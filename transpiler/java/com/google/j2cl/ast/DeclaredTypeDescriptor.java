@@ -470,11 +470,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   public abstract TypeDeclaration getTypeDeclaration();
 
-  @Override
-  public boolean hasTypeDeclaration() {
-    boolean hasClassDeclaration = getTypeDeclaration() != null;
-    checkState(hasClassDeclaration == (isClass() || isInterface() || isEnum()));
-    return hasClassDeclaration;
+  private boolean hasTypeDeclaration() {
+    return getTypeDeclaration() != null;
   }
 
   @Memoized
@@ -887,6 +884,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
       checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
+      checkState(
+          typeDescriptor.hasTypeDeclaration()
+              == (typeDescriptor.isClass()
+                  || typeDescriptor.isInterface()
+                  || typeDescriptor.isEnum()));
 
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 

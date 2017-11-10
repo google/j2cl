@@ -223,10 +223,6 @@ public abstract class TypeDescriptor extends Node
     return Joiner.on(".").join(getClassComponents());
   }
 
-  public boolean hasTypeDeclaration() {
-    return false;
-  }
-
   /** A unique string for a give type. Used for interning. */
   public abstract String getUniqueId();
 

@@ -297,7 +297,7 @@ public class TypeDescriptors {
   public static DeclaredTypeDescriptor createOverlayImplementationTypeDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
-    checkArgument(typeDescriptor.hasTypeDeclaration());
+    checkArgument(!typeDescriptor.isTypeVariable() && !typeDescriptor.isWildCardOrCapture());
 
     TypeDeclaration overlayImplementationTypeDeclaration =
         createOverlayImplementationTypeDeclaration(typeDescriptor);
