@@ -247,9 +247,7 @@ public abstract class TypeDeclaration extends Node
     return 1
         + getInterfaceTypeDescriptors()
             .stream()
-            .mapToInt(
-                interfaceTypeDescriptor ->
-                    interfaceTypeDescriptor.unparameterizedTypeDescriptor().getMaxInterfaceDepth())
+            .mapToInt(i -> i.getTypeDeclaration().getMaxInterfaceDepth())
             .max()
             .orElse(0);
   }

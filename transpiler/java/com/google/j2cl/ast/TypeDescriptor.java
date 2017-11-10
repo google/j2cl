@@ -20,7 +20,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.annotations.Visitable;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -30,11 +29,6 @@ import javax.annotation.Nullable;
 @Visitable
 public abstract class TypeDescriptor extends Node
     implements Comparable<TypeDescriptor>, HasReadableDescription, HasQualifiedBinaryName {
-
-  public static final Comparator<TypeDescriptor> MORE_SPECIFIC_INTERFACES_FIRST =
-      (thisTypeDescriptor, thatTypeDescriptor) ->
-          Integer.compare(
-              thatTypeDescriptor.getMaxInterfaceDepth(), thisTypeDescriptor.getMaxInterfaceDepth());
 
   @Override
   public Node accept(Processor processor) {
@@ -284,11 +278,6 @@ public abstract class TypeDescriptor extends Node
   /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
   public abstract TypeDescriptor specializeTypeVariables(
       Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable);
-
-  /** Returns the height of the largest inheritance chain of any interface implemented here. */
-  public int getMaxInterfaceDepth() {
-    return 1;
-  }
 
   abstract Builder toBuilder();
 

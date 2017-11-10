@@ -742,12 +742,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     throw new AssertionError(getKind());
   }
 
-  /** Returns the height of the largest inheritance chain of any interface implemented here. */
-  @Override
-  public int getMaxInterfaceDepth() {
-    return hasTypeDeclaration() ? getTypeDeclaration().getMaxInterfaceDepth() : 1;
-  }
-
   @Override
   public String toString() {
     return getUniqueId();

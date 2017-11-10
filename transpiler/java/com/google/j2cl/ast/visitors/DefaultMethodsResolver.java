@@ -24,7 +24,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -105,7 +104,14 @@ public class DefaultMethodsResolver extends NormalizationPass {
       DeclaredTypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
       typeDescriptors.set(i, superInterfaceTypeDescriptor.unparameterizedTypeDescriptor());
     }
-    Collections.sort(typeDescriptors, TypeDescriptor.MORE_SPECIFIC_INTERFACES_FIRST);
+
+    // Sort so most specific interfaces are first.
+    Collections.sort(
+        typeDescriptors,
+        (t1, t2) ->
+            t2.getTypeDeclaration().getMaxInterfaceDepth()
+                - t1.getTypeDeclaration().getMaxInterfaceDepth());
+
     return typeDescriptors;
   }
 
