@@ -30,6 +30,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import java.util.List;
@@ -73,7 +74,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       }
 
       return createNonNullableAnnotation(
-          AstUtils.createArraysMethodCall(
+          RuntimeMethods.createArraysMethodCall(
               "$createNative",
               new ArrayLiteral(
                   TypeDescriptors.get().javaLangObjectArray,
@@ -83,7 +84,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     TypeDescriptor leafTypeDescriptor = newArrayExpression.getLeafTypeDescriptor();
     return createNonNullableAnnotation(
-        AstUtils.createArraysMethodCall(
+        RuntimeMethods.createArraysMethodCall(
             "$create",
             new ArrayLiteral(
                 TypeDescriptors.get().javaLangObjectArray,
@@ -115,7 +116,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     }
 
     return createNonNullableAnnotation(
-        AstUtils.createArraysMethodCall("$init", arguments),
+        RuntimeMethods.createArraysMethodCall("$init", arguments),
         newArrayExpression.getTypeDescriptor());
   }
 

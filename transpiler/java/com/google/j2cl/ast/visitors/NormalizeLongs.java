@@ -22,14 +22,11 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /** Replaces long operations with corresponding long utils method calls. */
 public class NormalizeLongs extends NormalizationPass {
@@ -56,23 +53,11 @@ public class NormalizeLongs extends NormalizationPass {
               return binaryExpression;
             }
 
-            TypeDescriptor leftParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-            TypeDescriptor rightParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-
-            MethodDescriptor longUtilsMethodDescriptor =
-                MethodDescriptor.newBuilder()
-                    .setJsInfo(JsInfo.RAW)
-                    .setStatic(true)
-                    .setEnclosingTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
-                    .setName(getLongOperationFunctionName(operator))
-                    .setParameterTypeDescriptors(
-                        leftParameterTypeDescriptor, rightParameterTypeDescriptor)
-                    .setReturnTypeDescriptor(returnTypeDescriptor)
-                    .build();
-            // LongUtils.$someOperation(leftOperand, rightOperand);
-            return MethodCall.Builder.from(longUtilsMethodDescriptor)
-                .setArguments(leftOperand, rightOperand)
-                .build();
+            return RuntimeMethods.createLongUtilsMethodCall(
+                getLongOperationFunctionName(operator),
+                returnTypeDescriptor,
+                leftOperand,
+                rightOperand);
           }
 
           @Override
@@ -88,20 +73,9 @@ public class NormalizeLongs extends NormalizationPass {
               return prefixExpression.getOperand();
             }
 
-            TypeDescriptor parameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-            TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveLong;
-
-            MethodDescriptor longUtilsMethodDescriptor =
-                MethodDescriptor.newBuilder()
-                    .setJsInfo(JsInfo.RAW)
-                    .setStatic(true)
-                    .setEnclosingTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
-                    .setName(getLongOperationFunctionName(operator))
-                    .setParameterTypeDescriptors(parameterTypeDescriptor)
-                    .setReturnTypeDescriptor(returnTypeDescriptor)
-                    .build();
             // LongUtils.$someOperation(operand);
-            return MethodCall.Builder.from(longUtilsMethodDescriptor).setArguments(operand).build();
+            return RuntimeMethods.createLongUtilsMethodCall(
+                getLongOperationFunctionName(operator), operand);
           }
         });
   }

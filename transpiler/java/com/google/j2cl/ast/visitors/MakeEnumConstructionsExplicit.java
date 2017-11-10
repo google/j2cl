@@ -25,14 +25,13 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -109,19 +108,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
           }
 
           private MethodCall enumReplaceStringMethodCall(Expression nameVariable) {
-            MethodDescriptor makeEnumNameMethodDescriptor =
-                MethodDescriptor.newBuilder()
-                    .setStatic(true)
-                    .setJsInfo(JsInfo.RAW)
-                    .setEnclosingTypeDescriptor(
-                        TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-                    .setName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
-                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
-                    .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
-                    .build();
-            return MethodCall.Builder.from(makeEnumNameMethodDescriptor)
-                .setArguments(nameVariable)
-                .build();
+            return RuntimeMethods.createUtilMethodCall("$makeEnumName", nameVariable);
           }
 
           @Override

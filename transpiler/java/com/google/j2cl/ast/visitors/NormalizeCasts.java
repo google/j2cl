@@ -28,6 +28,7 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -108,10 +109,10 @@ public class NormalizeCasts extends NormalizationPass {
     TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
 
     if (leafTypeDescriptor.getRawTypeDescriptor().isNative()) {
-      return AstUtils.createArraysMethodCall("$castToNative", castExpression.getExpression());
+      return RuntimeMethods.createArraysMethodCall("$castToNative", castExpression.getExpression());
     }
 
-    return AstUtils.createArraysMethodCall(
+    return RuntimeMethods.createArraysMethodCall(
         "$castTo",
         castExpression.getExpression(),
         AstUtils.getMetadataConstructorReference(leafTypeDescriptor),

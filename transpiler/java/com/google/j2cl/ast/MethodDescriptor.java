@@ -118,12 +118,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String CLINIT_METHOD_NAME = "$clinit";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
-  public static final String SAME_METHOD_NAME = "$same";
-  public static final String NOT_SAME_METHOD_NAME = "$notSame";
   public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String CREATE_METHOD_NAME = "$create";
-  public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
 
   public static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
     return getSignature(name, Arrays.asList(parameterTypeDescriptors));

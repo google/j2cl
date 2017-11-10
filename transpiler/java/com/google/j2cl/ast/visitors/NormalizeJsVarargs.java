@@ -33,6 +33,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Variable;
 import java.util.List;
@@ -95,7 +96,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
       MethodCall arrayStampTypeMethodCall =
-          AstUtils.createArraysMethodCall(
+          RuntimeMethods.createArraysMethodCall(
               "$stampType",
               varargsParameter.getReference(),
               AstUtils.getMetadataConstructorReference(
@@ -150,7 +151,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               PrefixExpression.newBuilder()
-                  .setOperand(AstUtils.createArraysMethodCall("$checkNotNull", lastArgument))
+                  .setOperand(RuntimeMethods.createArraysMethodCall("$checkNotNull", lastArgument))
                   .setOperator(PrefixOperator.SPREAD)
                   .build())
           .build();

@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -28,6 +27,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NullLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
@@ -165,7 +165,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<Statement> finallyBlockStatements = new ArrayList<>();
     for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
       MethodCall safeCloseCall =
-          AstUtils.createExceptionsMethodCall(
+          RuntimeMethods.createExceptionsMethodCall(
               "safeClose",
               declaration.getFragments().get(0).getVariable().getReference(),
               primaryException.getReference());

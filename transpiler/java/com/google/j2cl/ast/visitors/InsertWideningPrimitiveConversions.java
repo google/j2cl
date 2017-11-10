@@ -19,13 +19,10 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
@@ -114,28 +111,13 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
     return true;
   }
 
-  private static Expression widenTo(TypeDescriptor toTypeDescriptor, Expression subjectExpression) {
-    TypeDescriptor fromTypeDescriptor = subjectExpression.getTypeDescriptor();
+  private static Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
+    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
     // Don't emit known NOOP widenings.
     if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
-      return subjectExpression;
+      return expression;
     }
 
-    String widenMethodName =
-        String.format(
-            "$widen%sTo%s",
-            AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-            AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
-    MethodDescriptor widenMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setName(widenMethodName)
-            .setParameterTypeDescriptors(fromTypeDescriptor)
-            .setReturnTypeDescriptor(toTypeDescriptor)
-            .build();
-    // Primitives.$widenAToB(expr);
-    return MethodCall.Builder.from(widenMethodDescriptor).setArguments(subjectExpression).build();
+    return RuntimeMethods.createWideningPrimitivesMethodCall(expression, toTypeDescriptor);
   }
 }

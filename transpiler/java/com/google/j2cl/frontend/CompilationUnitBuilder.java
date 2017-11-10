@@ -59,7 +59,6 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -73,6 +72,7 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
@@ -1777,19 +1777,19 @@ public class CompilationUnitBuilder {
       ITypeBinding typeBinding = literal.getType().resolveBinding();
 
       TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
-      DeclaredTypeDescriptor javaLangClassTypeDescriptor =
+      DeclaredTypeDescriptor parameterizedJavaLangClassTypeDescriptor =
           JdtUtils.createDeclaredTypeDescriptor(literal.resolveTypeBinding());
 
       if (literalTypeDescriptor.isArray()) {
         return convertArrayTypeLiteral(
-            (ArrayTypeDescriptor) literalTypeDescriptor, javaLangClassTypeDescriptor);
+            (ArrayTypeDescriptor) literalTypeDescriptor, parameterizedJavaLangClassTypeDescriptor);
       }
 
       if (literalTypeDescriptor.isNative()) {
         // class literal of native JsType is JavaScriptObject.class
         return convertTypeLiteral(
             TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor(),
-            javaLangClassTypeDescriptor);
+            parameterizedJavaLangClassTypeDescriptor);
       }
 
       if (literalTypeDescriptor.isJsFunctionInterface()
@@ -1797,52 +1797,33 @@ public class CompilationUnitBuilder {
         // class literal for JsFunction interfaces and implementations.
         return convertTypeLiteral(
             TypeDescriptors.BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor(),
-            javaLangClassTypeDescriptor);
+            parameterizedJavaLangClassTypeDescriptor);
       }
-      return convertTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+      return convertTypeLiteral(literalTypeDescriptor, parameterizedJavaLangClassTypeDescriptor);
     }
 
     private Expression convertTypeLiteral(
-        TypeDescriptor literalTypeDescriptor, DeclaredTypeDescriptor javaLangClassTypeDescriptor) {
-      // <ClassLiteralClass>.$getClass()
-      return MethodCall.Builder.from(
-              MethodDescriptor.newBuilder()
-                  .setJsInfo(JsInfo.RAW)
-                  .setStatic(true)
-                  .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
-                  .setName("$get")
-                  .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
-                  .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
-                  .build())
-          .setArguments(AstUtils.getMetadataConstructorReference(literalTypeDescriptor))
-          .build();
+        TypeDescriptor literalTypeDescriptor,
+        DeclaredTypeDescriptor parameterizedJavaLangClassTypeDescriptor) {
+      // Class.$get(constructor)
+      return RuntimeMethods.createClassGetMethodCall(
+          parameterizedJavaLangClassTypeDescriptor,
+          AstUtils.getMetadataConstructorReference(literalTypeDescriptor));
     }
 
     private Expression convertArrayTypeLiteral(
         ArrayTypeDescriptor literalTypeDescriptor,
-        DeclaredTypeDescriptor javaLangClassTypeDescriptor) {
+        DeclaredTypeDescriptor parameterizedJavaLangClassTypeDescriptor) {
       if (literalTypeDescriptor.isUntypedArray()) {
         // class literal of native js type array returns Object[].class
         literalTypeDescriptor = TypeDescriptors.get().javaLangObjectArray;
       }
 
-      MethodDescriptor classMethodDescriptor =
-          MethodDescriptor.newBuilder()
-              .setJsInfo(JsInfo.RAW)
-              .setStatic(true)
-              .setEnclosingTypeDescriptor(javaLangClassTypeDescriptor)
-              .setName("$get")
-              .setParameterTypeDescriptors(
-                  TypeDescriptors.get().nativeFunction, TypeDescriptors.get().primitiveInt)
-              .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
-              .build();
-
-      return MethodCall.Builder.from(classMethodDescriptor)
-          .setArguments(
-              AstUtils.getMetadataConstructorReference(
-                  literalTypeDescriptor.getLeafTypeDescriptor()),
-              NumberLiteral.of(literalTypeDescriptor.getDimensions()))
-          .build();
+      // Class.$get(leafConstructor, dimenstions)
+      return RuntimeMethods.createClassGetMethodCall(
+          parameterizedJavaLangClassTypeDescriptor,
+          AstUtils.getMetadataConstructorReference(literalTypeDescriptor.getLeafTypeDescriptor()),
+          NumberLiteral.of(literalTypeDescriptor.getDimensions()));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

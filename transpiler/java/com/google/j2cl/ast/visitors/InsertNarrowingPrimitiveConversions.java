@@ -16,18 +16,14 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Sets;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import java.util.Set;
 
 /**
@@ -139,24 +135,9 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           return convertLiteral(((CharacterLiteral) expression).getValue(), toTypeDescriptor);
         }
 
-        TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-        String narrowMethodName =
-            String.format(
-                "$narrow%sTo%s",
-                AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-                AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
-        MethodDescriptor narrowMethodDescriptor =
-            MethodDescriptor.newBuilder()
-                .setJsInfo(JsInfo.RAW)
-                .setStatic(true)
-                .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-                .setName(narrowMethodName)
-                .setParameterTypeDescriptors(fromTypeDescriptor)
-                .setReturnTypeDescriptor(toTypeDescriptor)
-                .build();
-        // Primitives.$narrowAToB(expr);
-        return MethodCall.Builder.from(narrowMethodDescriptor).setArguments(expression).build();
+        return RuntimeMethods.createPrimitivesNarrowingMethodCall(expression, toTypeDescriptor);
       }
     };
   }
+
 }

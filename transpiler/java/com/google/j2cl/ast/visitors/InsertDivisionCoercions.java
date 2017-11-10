@@ -21,13 +21,10 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /**
  * Instruments integer division and remainders to emit ArithmeticExpression if necessary and coerce
@@ -36,16 +33,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 public class InsertDivisionCoercions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    final MethodDescriptor coerceDivisionMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setName("$coerceDivision")
-            .setParameterTypeDescriptors(TypeDescriptors.get().primitiveInt)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveInt)
-            .build();
-
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -60,9 +47,7 @@ public class InsertDivisionCoercions extends NormalizationPass {
               // Long operations have already been normalized out.
               checkArgument(!TypeDescriptors.isPrimitiveLong(expressionTypeDescriptor));
 
-              return MethodCall.Builder.from(coerceDivisionMethodDescriptor)
-                  .setArguments(binaryExpression)
-                  .build();
+              return RuntimeMethods.createPrimitivesMethodCall("$coerceDivision", binaryExpression);
             }
             return binaryExpression;
           }

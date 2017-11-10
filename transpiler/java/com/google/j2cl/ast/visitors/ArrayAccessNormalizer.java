@@ -19,11 +19,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.RuntimeMethods;
 
 /**
  * Rewrites array set operations to use Arrays.$set or LongUtils.$set operations.
@@ -40,7 +40,7 @@ public class ArrayAccessNormalizer extends NormalizationPass {
               checkArgument(expression.getOperator() == BinaryOperator.ASSIGN);
               ArrayAccess leftSide = (ArrayAccess) expression.getLeftOperand();
               // Return a call to an Arrays or LongUtils array assignment method.
-              return AstUtils.createArraySetExpression(
+              return RuntimeMethods.createArraySetMethodCall(
                   leftSide.getArrayExpression(),
                   leftSide.getIndexExpression(),
                   expression.getRightOperand());

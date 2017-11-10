@@ -29,6 +29,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -81,10 +82,10 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     checkState(!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture());
 
     if (leafTypeDescriptor.isNative()) {
-      return AstUtils.createArraysMethodCall("$instanceIsOfNative", expression);
+      return RuntimeMethods.createArraysMethodCall("$instanceIsOfNative", expression);
     }
 
-    return AstUtils.createArraysMethodCall(
+    return RuntimeMethods.createArraysMethodCall(
         "$instanceIsOfType",
         expression,
         AstUtils.getMetadataConstructorReference(leafTypeDescriptor),

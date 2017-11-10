@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
@@ -24,6 +23,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.RuntimeMethods;
 
 /** Replaces object == object expressions with Equality.$same(object, object) calls. */
 public class NormalizeEquality extends NormalizationPass {
@@ -48,10 +48,8 @@ public class NormalizeEquality extends NormalizationPass {
             // Rewrite object - object comparisons to avoid JS implicit conversions and still treat
             // null and undefined as equivalent.
             MethodCall sameCall =
-                MethodCall.Builder.from(AstUtils.createUtilSameMethodDescriptor())
-                    .setArguments(
-                        binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
-                    .build();
+                RuntimeMethods.createEqualityMethodCall(
+                    "$same", binaryExpression.getLeftOperand(), binaryExpression.getRightOperand());
             if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
               return PrefixExpression.newBuilder()
                   .setOperand(sameCall)

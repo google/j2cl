@@ -16,13 +16,13 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.ThrowStatement;
 
 /**
@@ -60,7 +60,7 @@ public class InsertExceptionConversions extends NormalizationPass {
           public Node rewriteCatchClause(CatchClause catchClause) {
 
             MethodCall toJavaCall =
-                AstUtils.createExceptionsMethodCall(
+                RuntimeMethods.createExceptionsMethodCall(
                     "toJava", catchClause.getExceptionVar().getReference());
 
             Expression assignment =
@@ -80,7 +80,7 @@ public class InsertExceptionConversions extends NormalizationPass {
           public Node rewriteThrowStatement(ThrowStatement throwStatement) {
 
             MethodCall toJsCall =
-                AstUtils.createExceptionsMethodCall("toJs", throwStatement.getExpression());
+                RuntimeMethods.createExceptionsMethodCall("toJs", throwStatement.getExpression());
 
             return new ThrowStatement(throwStatement.getSourcePosition(), toJsCall);
           }
