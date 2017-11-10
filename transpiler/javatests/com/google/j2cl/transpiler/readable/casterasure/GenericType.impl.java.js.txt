@@ -11,8 +11,6 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -80,63 +78,6 @@ class GenericType extends java_lang_Object {
   }
 
   /**
-   * @template M_T
-   * @param {M_T} foo
-   * @return {GenericType<M_T>}
-   * @public
-   */
-  static m_inferGeneric__java_lang_Object(foo) {
-    GenericType.$clinit();
-    return /**@type {!GenericType<*>} */ (GenericType.$create__());
-  }
-
-  /**
-   * @param {GenericType<?string>} foo
-   * @return {GenericType<GenericType<?string>>}
-   * @public
-   */
-  static m_tightenType__com_google_j2cl_transpiler_readable_casterasure_GenericType(
-      foo) {
-    GenericType.$clinit();
-    if (!$Equality.$same(foo, null)) {
-      return /**@type {GenericType<GenericType<?string>>} */ (
-          GenericType.m_inferGeneric__java_lang_Object(foo));
-    }
-    return null;
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  static m_main__() {
-    GenericType.$clinit();
-    let list = /**@type {ArrayList<*>} */ (
-        GenericType.m_newArrayList__java_lang_Object('foo'));
-    GenericType.m_acceptsArrayListOfObject__java_util_ArrayList(list);
-  }
-
-  /**
-   * @template M_V
-   * @param {M_V} foo
-   * @return {ArrayList<M_V>}
-   * @public
-   */
-  static m_newArrayList__java_lang_Object(foo) {
-    GenericType.$clinit();
-    return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
-  }
-
-  /**
-   * @param {ArrayList<*>} foo
-   * @return {void}
-   * @public
-   */
-  static m_acceptsArrayListOfObject__java_util_ArrayList(foo) {
-    GenericType.$clinit();
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -163,8 +104,6 @@ class GenericType extends java_lang_Object {
   static $clinit() {
     GenericType.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
-    ArrayList = goog.module.get('java.util.ArrayList$impl');
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }

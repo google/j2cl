@@ -39,40 +39,6 @@
 [String str = new GenericType<String>().field;] => [let str = /**@type {?string} */ ($Casts.$to(/**@type {!GenericType<?string>} */ (GenericType.$create__()).f_field__com_google_j2cl_transpiler_readable_casterasure_GenericType, java_lang_String));] "com.google.j2cl.transpiler.readable.casterasure.GenericType.addErasureCast"
 [str] => [str] "str"
 [str = new GenericType<String>().method();] => [str = /**@type {?string} */ ($Casts.$to(/**@type {!GenericType<?string>} */ (GenericType.$create__()).m_method___$pp_com_google_j2cl_transpiler_readable_casterasure(), java_lang_String));] "com.google.j2cl.transpiler.readable.casterasure.GenericType.addErasureCast"
-[foo] => [foo] "foo"
-[public static <T> GenericType<T> inferGeneric(T foo) {
-    return new GenericType<>();
-  }] => [GenericType.$clinit();] "com.google.j2cl.transpiler.readable.casterasure.GenericType.inferGeneric"
-[return new GenericType<>();] => [return /**@type {!GenericType<*>} */ (GenericType.$create__());] "com.google.j2cl.transpiler.readable.casterasure.GenericType.inferGeneric"
-[foo] => [foo] "foo"
-[public static GenericType<GenericType<String>> tightenType(GenericType<String> foo) {
-    if (foo != null) {
-...    return null;
-  }] => [GenericType.$clinit();] "com.google.j2cl.transpiler.readable.casterasure.GenericType.tightenType"
-[if (foo != null) {
-      // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
-...      return inferGeneric(foo);
-    }] => [if (!$Equality.$same(foo, null)) {
-      return /**@type {GenericType<GenericType<?string>>} */ (GenericType.m_inferGeneric__java_lang_Object(foo));
-    }] "com.google.j2cl.transpiler.readable.casterasure.GenericType.tightenType"
-[return inferGeneric(foo);] => [return /**@type {GenericType<GenericType<?string>>} */ (GenericType.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.casterasure.GenericType.tightenType"
-[return null;] => [return null;] "com.google.j2cl.transpiler.readable.casterasure.GenericType.tightenType"
-[public static void main() {
-    ArrayList<Object> list = newArrayList("foo");
-...    acceptsArrayListOfObject(list);
-  }] => [GenericType.$clinit();] "com.google.j2cl.transpiler.readable.casterasure.GenericType.main"
-[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (GenericType.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.casterasure.GenericType.main"
-[list] => [list] "list"
-[acceptsArrayListOfObject(list);] => [GenericType.m_acceptsArrayListOfObject__java_util_ArrayList(list);] "com.google.j2cl.transpiler.readable.casterasure.GenericType.main"
-[foo] => [foo] "foo"
-[public static <V> ArrayList<V> newArrayList(V foo) {
-    return new ArrayList<>();
-  }] => [GenericType.$clinit();] "com.google.j2cl.transpiler.readable.casterasure.GenericType.newArrayList"
-[return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.casterasure.GenericType.newArrayList"
-[foo] => [foo] "foo"
-[public static void acceptsArrayListOfObject(ArrayList<Object> foo) {
-    // empty
-  }] => [GenericType.$clinit();] "com.google.j2cl.transpiler.readable.casterasure.GenericType.acceptsArrayListOfObject"
 [/**
  * Tests that a cast is inserted due to erasures.
 ...  }

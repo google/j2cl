@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.casterasure;
 
-import java.util.ArrayList;
 
 /**
  * Tests that a cast is inserted due to erasures.
@@ -30,33 +29,5 @@ public class GenericType<T> {
   public static void addErasureCast() {
     String str = new GenericType<String>().field;
     str = new GenericType<String>().method();
-  }
-
-  public static <T> GenericType<T> inferGeneric(T foo) {
-    return new GenericType<>();
-  }
-
-  public static GenericType<GenericType<String>> tightenType(GenericType<String> foo) {
-    if (foo != null) {
-      // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
-      // ?Foo<!Foo<?string>>, which does not match the return type, ?Foo<?Foo<?string>>.
-      return inferGeneric(foo);
-    }
-    return null;
-  }
-
-
-  public static void main() {
-    ArrayList<Object> list = newArrayList("foo");
-    // list will be tightened to ArrayList<String> hence OTI would complain below without a cast.
-    acceptsArrayListOfObject(list);
-  }
-
-  public static <V> ArrayList<V> newArrayList(V foo) {
-    return new ArrayList<>();
-  }
-
-  public static void acceptsArrayListOfObject(ArrayList<Object> foo) {
-    // empty
   }
 }

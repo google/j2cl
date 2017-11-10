@@ -1,0 +1,78 @@
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<synthetic: ctor_js>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<synthetic: ctor_create>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [let $instance = new InferReturn();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<synthetic: ctor_create>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<synthetic: ctor_create>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<synthetic: ctor_create>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<init>"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_inferreturn_InferReturn();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<init>"
+[foo] => [foo] "foo"
+[public static <T> InferReturn<T> inferGeneric(T foo) {
+    return new InferReturn<>();
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
+[return new InferReturn<>();] => [return /**@type {!InferReturn<*>} */ (InferReturn.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
+[foo] => [foo] "foo"
+[public static InferReturn<InferReturn<String>> tightenType(InferReturn<String> foo) {
+    if (foo != null) {
+...    return null;
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+[if (foo != null) {
+      // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
+...      return inferGeneric(foo);
+    }] => [if (!$Equality.$same(foo, null)) {
+      return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));
+    }] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+[return inferGeneric(foo);] => [return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+[public static void main() {
+    ArrayList<Object> list = newArrayList("foo");
+...    acceptsArrayOfObject(array);
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (InferReturn.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[list] => [list] "list"
+[acceptsArrayListOfObject(list);] => [InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[Object[] array = newArray("foo");] => [let array = InferReturn.m_newArray__java_lang_Object("foo");] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[array] => [array] "array"
+[acceptsArrayOfObject(array);] => [InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[foo] => [foo] "foo"
+[public static <V> ArrayList<V> newArrayList(V foo) {
+    return new ArrayList<>();
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
+[return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
+[foo] => [foo] "foo"
+[public static <V> V[] newArray(V foo) {
+    return (V[]) new Object[0];
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
+[return (V[]) new Object[0];] => [return /**@type {Array<*>} */ ($Arrays.$castTo(new Array(0), java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
+[foo] => [foo] "foo"
+[public static void acceptsArrayListOfObject(ArrayList<Object> foo) {
+    // empty
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.acceptsArrayListOfObject"
+[foo] => [foo] "foo"
+[public static void acceptsArrayOfObject(Object[] foo) {
+    // empty
+  }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.acceptsArrayOfObject"
+[/** Tests that Closure type inference based on return doesn't result in warnings. */
+public class InferReturn<T> {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"

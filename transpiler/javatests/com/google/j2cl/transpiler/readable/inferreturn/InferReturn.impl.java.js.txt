@@ -1,0 +1,185 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.inferreturn.InferReturn.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.inferreturn.InferReturn$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+/**
+ * @template C_T
+ */
+class InferReturn extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'InferReturn()'.
+   * @template C_T
+   * @return {!InferReturn<C_T>}
+   * @public
+   */
+  static $create__() {
+    InferReturn.$clinit();
+    let $instance = new InferReturn();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'InferReturn()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_inferreturn_InferReturn();
+  }
+
+  /**
+   * @template M_T
+   * @param {M_T} foo
+   * @return {InferReturn<M_T>}
+   * @public
+   */
+  static m_inferGeneric__java_lang_Object(foo) {
+    InferReturn.$clinit();
+    return /**@type {!InferReturn<*>} */ (InferReturn.$create__());
+  }
+
+  /**
+   * @param {InferReturn<?string>} foo
+   * @return {InferReturn<InferReturn<?string>>}
+   * @public
+   */
+  static m_tightenType__com_google_j2cl_transpiler_readable_inferreturn_InferReturn(
+      foo) {
+    InferReturn.$clinit();
+    if (!$Equality.$same(foo, null)) {
+      return /**@type {InferReturn<InferReturn<?string>>} */ (
+          InferReturn.m_inferGeneric__java_lang_Object(foo));
+    }
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_main__() {
+    InferReturn.$clinit();
+    let list = /**@type {ArrayList<*>} */ (
+        InferReturn.m_newArrayList__java_lang_Object('foo'));
+    InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);
+    let array = InferReturn.m_newArray__java_lang_Object('foo');
+    InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);
+  }
+
+  /**
+   * @template M_V
+   * @param {M_V} foo
+   * @return {ArrayList<M_V>}
+   * @public
+   */
+  static m_newArrayList__java_lang_Object(foo) {
+    InferReturn.$clinit();
+    return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
+  }
+
+  /**
+   * @template M_V
+   * @param {M_V} foo
+   * @return {Array<M_V>}
+   * @public
+   */
+  static m_newArray__java_lang_Object(foo) {
+    InferReturn.$clinit();
+    return /**@type {Array<*>} */ (
+        $Arrays.$castTo(new Array(0), java_lang_Object, 1));
+  }
+
+  /**
+   * @param {ArrayList<*>} foo
+   * @return {void}
+   * @public
+   */
+  static m_acceptsArrayListOfObject__java_util_ArrayList(foo) {
+    InferReturn.$clinit();
+  }
+
+  /**
+   * @param {Array<*>} foo
+   * @return {void}
+   * @public
+   */
+  static m_acceptsArrayOfObject__arrayOf_java_lang_Object(foo) {
+    InferReturn.$clinit();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InferReturn;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InferReturn);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    InferReturn.$clinit = function() {};
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_inferreturn_InferReturn() {}
+};
+
+$Util.$setClassMetadata(
+    InferReturn,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.inferreturn.InferReturn'));
+
+
+
+/**
+ * Export class.
+ */
+exports = InferReturn;
+//# sourceMappingURL=InferReturn.js.map
