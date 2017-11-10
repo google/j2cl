@@ -109,13 +109,13 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
     if (expression instanceof MethodCall) {
       MethodDescriptor target = ((MethodCall) expression).getTarget();
       return maybeInsertErasureTypeSafetyCast(
-          target.getDeclarationMethodDescriptor().getReturnTypeDescriptor(),
+          target.getDeclarationDescriptor().getReturnTypeDescriptor(),
           toTypeDescriptor,
           expression);
     } else if (expression instanceof FieldAccess) {
       FieldDescriptor target = ((FieldAccess) expression).getTarget();
       return maybeInsertErasureTypeSafetyCast(
-          target.getDeclarationFieldDescriptor().getTypeDescriptor(), toTypeDescriptor, expression);
+          target.getDeclarationDescriptor().getTypeDescriptor(), toTypeDescriptor, expression);
     } else {
       return expression;
     }

@@ -123,7 +123,7 @@ public class ManglingNameUtils {
    */
   private static List<String> getMangledParameterTypes(MethodDescriptor methodDescriptor) {
     return Lists.transform(
-        methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors(),
+        methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors(),
         parameterTypeDescriptor -> getMangledName(parameterTypeDescriptor.getRawTypeDescriptor()));
   }
 }

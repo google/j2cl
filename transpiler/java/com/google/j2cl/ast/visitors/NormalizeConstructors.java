@@ -508,7 +508,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .setConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .setParameterDescriptors(
-                constructorDescriptor.getDeclarationMethodDescriptor().getParameterDescriptors())
+                constructorDescriptor.getDeclarationDescriptor().getParameterDescriptors())
             .setJsInfo(JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
             .build();
 

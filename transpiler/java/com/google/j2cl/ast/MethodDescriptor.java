@@ -194,7 +194,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * <p>
    * </pre>
    */
-  public MethodDescriptor getDeclarationMethodDescriptor() {
+  @Override
+  public MethodDescriptor getDeclarationDescriptor() {
     return getDeclarationMethodDescriptorOrNullIfSelf() == null
         ? this
         : getDeclarationMethodDescriptorOrNullIfSelf();
@@ -629,9 +630,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         checkState(
             !methodDescriptor.isVarargs()
                 || Iterables.getLast(methodDescriptor.getParameterDescriptors()).isVarargs());
-        if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+        if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {
           List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
-              methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+              methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors();
           checkArgument(
               methodDeclarationParameterTypeDescriptors.size()
                   == methodDescriptor.getParameterTypeDescriptors().size(),

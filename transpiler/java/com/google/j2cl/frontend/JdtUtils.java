@@ -1079,8 +1079,7 @@ public class JdtUtils {
                 // When considering the type I<A,A>, there are two different method bindings
                 // that describe the single method 'void foo(A a)' each with the respective
                 // method declaration.
-                methodDescriptor.getDeclarationMethodDescriptor().getMethodSignature(),
-                methodDescriptor);
+                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
           }
           return mapBuilder.build();
         };
@@ -1294,8 +1293,7 @@ public class JdtUtils {
                 // When considering the type I<A,A>, there are two different method bindings
                 // that describe the single method 'void foo(A a)' each with the respective
                 // method declaration.
-                methodDescriptor.getDeclarationMethodDescriptor().getMethodSignature(),
-                methodDescriptor);
+                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
           }
           return mapBuilder.build();
         };

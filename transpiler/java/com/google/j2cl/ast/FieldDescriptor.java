@@ -65,7 +65,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
    * <p>
    * </pre>
    */
-  public FieldDescriptor getDeclarationFieldDescriptor() {
+  @Override
+  public FieldDescriptor getDeclarationDescriptor() {
     return getDeclarationFieldDescriptorOrNullIfSelf() == null
         ? this
         : getDeclarationFieldDescriptorOrNullIfSelf();

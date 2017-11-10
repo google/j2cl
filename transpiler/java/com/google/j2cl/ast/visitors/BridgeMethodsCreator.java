@@ -93,7 +93,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       }
 
       bridgeMethodsByTargetMethodDescriptor.put(
-          targetMethodDescriptor.getDeclarationMethodDescriptor(), bridgeMethod);
+          targetMethodDescriptor.getDeclarationDescriptor(), bridgeMethod);
     }
 
     fixJsInfo(type, bridgeMethodsByTargetMethodDescriptor);
@@ -262,10 +262,9 @@ public class BridgeMethodsCreator extends NormalizationPass {
             !methodDescriptor.isConstructor()
                 && !methodDescriptor.isSynthetic()
                 // is a parameterized method.
-                && methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()
+                && methodDescriptor != methodDescriptor.getDeclarationDescriptor()
                 // type erasure changes the signature
-                && !methodDescriptor.isJsOverride(
-                    methodDescriptor.getDeclarationMethodDescriptor()));
+                && !methodDescriptor.isJsOverride(methodDescriptor.getDeclarationDescriptor()));
   }
 
   /**
@@ -290,8 +289,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
           && declaredMethodDescriptor.isJsOverride(bridgeMethodDescriptor)
           // original method declarations have different signatures
           && !declaredMethodDescriptor
-              .getDeclarationMethodDescriptor()
-              .isJsOverride(bridgeMethodDescriptor.getDeclarationMethodDescriptor())) {
+              .getDeclarationDescriptor()
+              .isJsOverride(bridgeMethodDescriptor.getDeclarationDescriptor())) {
         // find a overriding method (also possible accidental overriding), this is the method that
         // should be targeted.
         return declaredMethodDescriptor;
@@ -337,13 +336,11 @@ public class BridgeMethodsCreator extends NormalizationPass {
     for (DeclaredTypeDescriptor superInterface :
         typeDeclaration.getTransitiveInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor : superInterface.getDeclaredMethodDescriptors()) {
-        if (methodDescriptor
-                == methodDescriptor.getDeclarationMethodDescriptor() // non-generic method,
+        if (methodDescriptor == methodDescriptor.getDeclarationDescriptor() // non-generic method,
             // generic method has been investigated by findForwardingMethod.
             && methodDescriptor.isJsOverride(bridgeMethodDescriptor)
             // is overridden by a generic method with different erasure parameter types.
-            && !methodDescriptor.isJsOverride(
-                bridgeMethodDescriptor.getDeclarationMethodDescriptor())) {
+            && !methodDescriptor.isJsOverride(bridgeMethodDescriptor.getDeclarationDescriptor())) {
           return methodDescriptor;
         }
       }
@@ -387,7 +384,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     List<Expression> arguments = new ArrayList<>();
 
     MethodDescriptor declarationBridgeMethodDescriptor =
-        bridgeMethodDescriptor.getDeclarationMethodDescriptor();
+        bridgeMethodDescriptor.getDeclarationDescriptor();
     for (int i = 0; i < bridgeMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
       Variable parameter =
           Variable.newBuilder()
@@ -480,7 +477,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // Using the return type of the targeted method also avoids generating redundant bridge methods
     // for two methods that have the same parameter signature but different return types.
     TypeDescriptor returnTypeDescriptor =
-        bridgeMethodDescriptor == bridgeMethodDescriptor.getDeclarationMethodDescriptor()
+        bridgeMethodDescriptor == bridgeMethodDescriptor.getDeclarationDescriptor()
             ? bridgeMethodDescriptor
                 .getReturnTypeDescriptor() // use its own return type if it is a concrete method
             : targetMethodDescriptor
@@ -492,7 +489,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                     typeDeclaration, bridgeMethodDescriptor, returnTypeDescriptor))
             .setParameterDescriptors(
                 bridgeMethodDescriptor
-                    .getDeclarationMethodDescriptor()
+                    .getDeclarationDescriptor()
                     .getParameterDescriptors()
                     .stream()
                     .map(

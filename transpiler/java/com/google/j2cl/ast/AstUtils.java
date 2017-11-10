@@ -528,7 +528,7 @@ public class AstUtils {
     checkArgument(!targetMethodDescriptor.isStatic());
 
     MethodDescriptor declarationMethodDescriptor =
-        MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
+        MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationDescriptor())
             .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
@@ -861,9 +861,9 @@ public class AstUtils {
    */
   public static boolean areParameterErasureEqual(MethodDescriptor left, MethodDescriptor right) {
     List<TypeDescriptor> leftParameterTypeDescriptors =
-        left.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+        left.getDeclarationDescriptor().getParameterTypeDescriptors();
     List<TypeDescriptor> rightParameterTypeDescriptors =
-        right.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+        right.getDeclarationDescriptor().getParameterTypeDescriptors();
 
     if (!left.getName().equals(right.getName())
         || leftParameterTypeDescriptors.size() != rightParameterTypeDescriptors.size()) {
@@ -1351,10 +1351,10 @@ public class AstUtils {
             .setAbstract(false)
             .setJsInfo(JsInfo.NONE);
 
-    if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+    if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {
       methodBuilder.setDeclarationMethodDescriptor(
           makeDevirtualizedMethodDescriptor(
-              MethodDescriptor.Builder.from(methodDescriptor.getDeclarationMethodDescriptor())
+              MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
                   .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
                   .build()));
     }
