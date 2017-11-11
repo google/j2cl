@@ -278,6 +278,12 @@ class ClosureTypesGenerator {
           new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters), NUMBER);
     }
 
+    if (TypeDescriptors.isJavaLangCloneable(typeDescriptor)
+        || TypeDescriptors.isJavaIoSerializable(typeDescriptor)) {
+      return new ClosureUnionType(
+          new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters), ARRAY);
+    }
+
     if (specialClosureTypesByName.containsKey(typeDeclaration.getQualifiedJsName())) {
       // Java types are nullable by default as well as most Closure types with some exceptions.
       // Here we represent those type specially so we can handle their nullability properly.
@@ -579,7 +585,8 @@ class ClosureTypesGenerator {
     }
   }
 
-  // Primitive types.
+  /* CLOSURE BUILT-IN TYPES */
+
   private static final ClosurePrimitiveType UNDEFINED =
       new ClosurePrimitiveType("undefined", false);
   private static final ClosurePrimitiveType NULL = new ClosurePrimitiveType("null", true);
@@ -587,11 +594,8 @@ class ClosureTypesGenerator {
   private static final ClosurePrimitiveType NUMBER = new ClosurePrimitiveType("number", false);
   private static final ClosurePrimitiveType VOID = new ClosurePrimitiveType("void", false);
   private static final ClosurePrimitiveType BOOLEAN = new ClosurePrimitiveType("boolean", false);
-
-  /** Special top or any type. */
+  private static final ClosurePrimitiveType ARRAY = new ClosurePrimitiveType("Array", true);
   private static final ClosurePrimitiveType ANY = new ClosurePrimitiveType("*", true);
-
-  /** Special "Untyped" type. */
   private static final ClosureUnknownType UNKNOWN = new ClosureUnknownType();
 
   /**

@@ -13,7 +13,9 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array.NativeType.$Overlay$impl');
 let SomeObject = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
@@ -57,7 +59,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_objectArraySample__() {
+  m_testObjectArray__() {
     let objects = new Array(100);
     objects = new Array(0);
     objects = [null, null];
@@ -77,7 +79,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_javaObjectArraySample__() {
+  m_testJavaTypeArray__() {
     let objects =
         /**@type {!Array<SomeObject>} */ ($Arrays.$create([100], SomeObject));
     objects =
@@ -105,7 +107,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_primitiveArraysSample___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testPrimitiveArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));
     ints = /**@type {!Array<number>} */ ($Arrays.$create([0], $int));
     ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1], $int));
@@ -139,7 +141,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_longArraysSample___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));
     longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([0], $long));
     longs = /**@type {!Array<!$Long>} */ ($Arrays.$init(
@@ -173,7 +175,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_devirtualizedTypeArraysSample___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testDevirtualizedTypeArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let booleans =
         /**@type {!Array<?boolean>} */ ($Arrays.$create([100], Boolean));
     booleans = /**@type {!Array<?boolean>} */ ($Arrays.$create([0], Boolean));
@@ -203,7 +205,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_stringArraysSample___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testStringArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let strings = /**@type {!Array<?string>} */ (
         $Arrays.$create([100], java_lang_String));
     strings =
@@ -235,7 +237,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_nativeArraySample__() {
+  m_testNativeArray__() {
     let nativeObjects = new Array(100);
     nativeObjects = new Array(0);
     nativeObjects = [null, null];
@@ -249,6 +251,29 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     $Arrays.$set(nativeObjects, 0, null);
     $Arrays.$set(nativeObjects2d[0], 1, null);
   }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testArraysSupertypeClosureTypes__() {
+    this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
+    this.m_consumesSerializable__java_io_Serializable(new Array(10));
+  }
+
+  /**
+   * @param {(Cloneable|Array)} cloneable
+   * @return {void}
+   * @public
+   */
+  m_consumesCloneable__java_lang_Cloneable(cloneable) {}
+
+  /**
+   * @param {(Serializable|Array)} serializable
+   * @return {void}
+   * @public
+   */
+  m_consumesSerializable__java_io_Serializable(serializable) {}
 
   /**
    * Returns whether the provided instance is an instance of this class.

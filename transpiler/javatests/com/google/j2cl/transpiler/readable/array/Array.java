@@ -15,11 +15,12 @@
  */
 package com.google.j2cl.transpiler.readable.array;
 
+import java.io.Serializable;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Array {
-  public void objectArraySample() {
+  public void testObjectArray() {
     // Creation
     Object[] objects = new Object[100];
     objects = new Object[0];
@@ -39,7 +40,7 @@ public class Array {
 
   private class SomeObject {}
 
-  public void javaObjectArraySample() {
+  public void testJavaTypeArray() {
     // Creation
     SomeObject[] objects = new SomeObject[100];
     objects = new SomeObject[0];
@@ -57,7 +58,7 @@ public class Array {
     objects2d[0][1] = null;
   }
 
-  void primitiveArraysSample() {
+  void testPrimitiveArrays() {
     // Creation
     int[] ints = new int[100];
     ints = new int[0];
@@ -90,7 +91,7 @@ public class Array {
     ++ints[0];
   }
 
-  void longArraysSample() {
+  void testArrays() {
     // Creation
     long[] longs = new long[100];
     longs = new long[0];
@@ -113,7 +114,7 @@ public class Array {
     --longs[0];
   }
 
-  void devirtualizedTypeArraysSample() {
+  void testDevirtualizedTypeArrays() {
     // Creation
     Boolean[] booleans = new Boolean[100];
     booleans = new Boolean[0];
@@ -134,7 +135,7 @@ public class Array {
     booleans[0] |= true;
   }
 
-  void stringArraysSample() {
+  void testStringArrays() {
     // Creation
     String[] strings = new String[100];
     strings = new String[0];
@@ -158,7 +159,7 @@ public class Array {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   private static class NativeType {}
 
-  public void nativeArraySample() {
+  public void testNativeArray() {
     // Creation
     NativeType[] nativeObjects = new NativeType[100];
     nativeObjects = new NativeType[0];
@@ -175,4 +176,13 @@ public class Array {
     nativeObjects[0] = null;
     nativeObjects2d[0][1] = null;
   }
+
+  public void testArraysSupertypeClosureTypes() {
+    consumesCloneable(new Object[10]);
+    consumesSerializable(new Object[10]);
+  }
+
+  public void consumesCloneable(Cloneable cloneable) {}
+
+  public void consumesSerializable(Serializable serializable) {}
 }
