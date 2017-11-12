@@ -13,8 +13,3 @@ readable_example(
     name = "arithmeticexpressions",
     srcs = glob(["*.java"]),
 )
-
-filegroup(
-    name = "readable_js",
-    data = glob(["*.js.txt"]),
-)

@@ -11,8 +11,3 @@ readable_example(
     name = "staticfieldinitializer",
     srcs = glob(["*.java"]),
 )
-
-filegroup(
-    name = "readable_js",
-    data = glob(["*.js.txt"]),
-)
