@@ -130,8 +130,6 @@ COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [
     "--jscomp_error=conformanceViolations",
     # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
     # "--jscomp_error=reportUnknownTypes",
-    # TODO(goktug): Move to J2CL_OPTIMIZED_DEFS
-    "--language_out=ECMASCRIPT5_STRICT",
 ]
 
 js_binary(

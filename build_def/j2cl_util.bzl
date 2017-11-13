@@ -83,7 +83,7 @@ load(
 )
 
 J2CL_UNOPTIMIZED_DEFS = [
-    "--language_out=ECMASCRIPT5",
+    "--language_out=ECMASCRIPT5_STRICT",
 ]
 
 # TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
