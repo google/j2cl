@@ -28,6 +28,9 @@ class GenericEquals extends java_lang_Object {
     /** @public {C_T} */
     this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
         null;
+    /** @public {GenericEquals<C_T>} */
+    this.f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
+        null;
   }
 
   /**
@@ -58,6 +61,20 @@ class GenericEquals extends java_lang_Object {
     this.$init__com_google_j2cl_transpiler_readable_genericequals_GenericEquals();
     this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
         value;
+    this.f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
+        null;
+  }
+
+  /**
+   * @param {GenericEquals<?>} other
+   * @return {*}
+   * @public
+   */
+  m_foo__com_google_j2cl_transpiler_readable_genericequals_GenericEquals(
+      other) {
+    return other
+        .f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_
+        .f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_;
   }
 
   /**

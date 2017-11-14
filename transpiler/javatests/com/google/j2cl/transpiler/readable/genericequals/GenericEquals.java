@@ -18,9 +18,15 @@ package com.google.j2cl.transpiler.readable.genericequals;
 public class GenericEquals<T> {
 
   private final T value;
+  private final GenericEquals<T> value2;
 
   public GenericEquals(T value) {
     this.value = value;
+    this.value2 = null;
+  }
+
+  public Object foo(GenericEquals<?> other) {
+    return other.value2.value;
   }
 
   @Override

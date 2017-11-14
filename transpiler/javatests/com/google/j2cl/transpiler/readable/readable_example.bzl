@@ -76,9 +76,14 @@ def readable_example(
     test_externs_list=["//javascript/externs:common"]
   native.js_binary(
       name=name + "_binary",
-      defs=J2CL_OPTIMIZED_DEFS + ["--summary_detail_level=3"],
+      defs=J2CL_OPTIMIZED_DEFS + [
+          "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/conformance_proto.txt",
+          "--jscomp_warning=conformanceViolations",
+          "--summary_detail_level=3",
+      ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
+      extra_inputs=["//transpiler/javatests/com/google/j2cl/transpiler/readable:conformance_proto"],
       deps=[":" + name],
   )
 
