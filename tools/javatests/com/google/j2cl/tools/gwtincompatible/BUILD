@@ -17,7 +17,7 @@ java_test(
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
-        "//third_party/java/eclipse:eclipse-jdt-core-4.7",
+        "//third_party/java/eclipse:eclipse-jdt-core-4.5",
         "//third_party/java/junit",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
     ],

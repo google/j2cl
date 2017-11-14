@@ -67,6 +67,9 @@ public class IntersectionTypeTest<U> {
     return s;
   }
 
+  // TODO(b/67780070): Lambdas do not have the correct types applied yet.  Jdt only recognizes this
+  // Lambda as Cmp whereas it should recognize Cmp and Serial.
+  // https://bugs.eclipse.org/bugs/show_bug.cgi?id=496596
   public static Cmp method() {
     return (Cmp & Serial) () -> 1;
   }
