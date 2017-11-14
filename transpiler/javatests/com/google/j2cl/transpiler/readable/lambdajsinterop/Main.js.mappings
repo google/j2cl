@@ -49,9 +49,9 @@
 [f1] => [f1] "f1"
 [f2] => [f2] "f2"
 [f1.execute(null)] => [f1(null);] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<lambda in main>"
-[JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = /**@type {JsSupplier<Integer>} */ (JsSupplier.$adapt((() =>{
+[JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = JsSupplier.$adapt((() =>{
       return Integer.m_valueOf__int(1);
-    })));] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
+    }));] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"
 [stringJsSupplier] => [stringJsSupplier] "stringJsSupplier"
 [1] => [return Integer.m_valueOf__int(1);] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.<lambda in main>"
 [stringJsSupplier.get();] => [stringJsSupplier.get();] "com.google.j2cl.transpiler.readable.lambdajsinterop.Main.main"

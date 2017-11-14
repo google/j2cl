@@ -37,13 +37,13 @@
     }));] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
 [i] => [i] "i"
 [Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.async.Async.<lambda in testAsyncLambdas>"
-[i.asyncCall();] => [/**@type {IThenable<Integer>} */ (i.m_asyncCall__());] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
+[i.asyncCall();] => [i.m_asyncCall__();] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
 [AsyncJsInterface j = () -> Promise.resolve(5);] => [let j = (async () =>{
       return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
     });] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
 [j] => [j] "j"
 [Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.async.Async.<lambda in testAsyncLambdas>"
-[j.doSomething();] => [/**@type {IThenable<Integer>} */ (j());] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
+[j.doSomething();] => [j();] "com.google.j2cl.transpiler.readable.async.Async.testAsyncLambdas"
 [public class Async {
   @JsAsync
 ...  }

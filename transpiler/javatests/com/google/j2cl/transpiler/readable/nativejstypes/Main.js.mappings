@@ -64,9 +64,9 @@
   public static void testNativeTypeClassLiteral() {
 ...    o1 = Bar[][].class;
   }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
-[Object o1 = Bar.class;] => [let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
+[Object o1 = Bar.class;] => [let o1 = Class.$get($JavaScriptObject);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
-[o1 = Bar[][].class;] => [o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
+[o1 = Bar[][].class;] => [o1 = Class.$get(java_lang_Object, 1);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
 ...    bar.equals(new Object());

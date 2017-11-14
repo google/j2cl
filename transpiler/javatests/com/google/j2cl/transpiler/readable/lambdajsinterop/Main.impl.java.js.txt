@@ -83,10 +83,9 @@ class Main extends java_lang_Object {
           /** ?function(Throwable):?void */ f2) => {
           f1(null);
         })));
-    let stringJsSupplier =
-        /**@type {JsSupplier<Integer>} */ (JsSupplier.$adapt((() => {
-          return Integer.m_valueOf__int(1);
-        })));
+    let stringJsSupplier = JsSupplier.$adapt((() => {
+      return Integer.m_valueOf__int(1);
+    }));
     stringJsSupplier.get();
     let equals = stringJsSupplier;
     equals.equals(null);

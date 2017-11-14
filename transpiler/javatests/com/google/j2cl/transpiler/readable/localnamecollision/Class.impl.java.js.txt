@@ -10,12 +10,10 @@ goog.module('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl')
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
-    java_lang_Object {
+class Class extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -26,13 +24,12 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
 
   /**
    * Factory method corresponding to constructor 'Class()'.
-   * @return {!com_google_j2cl_transpiler_readable_localnamecollision_Class}
+   * @return {!Class}
    * @public
    */
   static $create__() {
-    com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit();
-    let $instance =
-        new com_google_j2cl_transpiler_readable_localnamecollision_Class();
+    Class.$clinit();
+    let $instance = new Class();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();
     return $instance;
@@ -53,9 +50,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   m_main__() {
-    /**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(
-        com_google_j2cl_transpiler_readable_localnamecollision_Class
-            .$create__()));
+    $Objects.m_getClass__java_lang_Object(Class.$create__());
   }
 
   /**
@@ -65,8 +60,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof
-        com_google_j2cl_transpiler_readable_localnamecollision_Class;
+    return instance instanceof Class;
   }
 
   /**
@@ -76,9 +70,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor,
-        com_google_j2cl_transpiler_readable_localnamecollision_Class);
+    return $Util.$canCastClass(classConstructor, Class);
   }
 
   /**
@@ -86,8 +78,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit =
-        function() {};
+    Class.$clinit = function() {};
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     java_lang_Object.$clinit();
   }
@@ -100,7 +91,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
 };
 
 $Util.$setClassMetadata(
-    com_google_j2cl_transpiler_readable_localnamecollision_Class,
+    Class,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
 
@@ -109,5 +100,5 @@ $Util.$setClassMetadata(
 /**
  * Export class.
  */
-exports = com_google_j2cl_transpiler_readable_localnamecollision_Class;
+exports = Class;
 //# sourceMappingURL=Class.js.map

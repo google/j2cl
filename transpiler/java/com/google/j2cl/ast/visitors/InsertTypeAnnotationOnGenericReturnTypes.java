@@ -17,10 +17,13 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.TypeDescriptor;
 
 /**
  * Inserts a cast for the return type of methods which return generic types. This avoids a potential
@@ -52,7 +55,25 @@ public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass 
 
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      if (methodCall.getTarget().getReturnTypeDescriptor().hasTypeArguments()) {
+      MethodDescriptor methodDeclaration = methodCall.getTarget().getDeclarationDescriptor();
+      // Type variable should be declared in method to trigger inference.
+      boolean methodDeclaresTypeVariables =
+          !methodDeclaration.getTypeParameterTypeDescriptors().isEmpty();
+      TypeDescriptor returnTypeDescriptor = methodDeclaration.getReturnTypeDescriptor();
+      // Type variable should be used in method return type and return type should a generic type
+      // for inference to matter (as mismatches becomes an issue due invariant generic type
+      // parameters in OTI).
+      boolean methodReturnHasTypeVariables = !returnTypeDescriptor.getAllTypeVariables().isEmpty();
+      boolean methodReturnIsGenericType =
+          returnTypeDescriptor instanceof DeclaredTypeDescriptor
+              && ((DeclaredTypeDescriptor) returnTypeDescriptor).hasTypeArguments();
+
+      // In reality, for an inference mismatch to occur, type variable used in return should be
+      // declared by the method. However there is no easy way to check that right now so we are
+      // approximating here since extra casts does only hurt uncompiled size.
+      if (methodDeclaresTypeVariables
+          && methodReturnHasTypeVariables
+          && methodReturnIsGenericType) {
         return JsDocAnnotatedExpression.newBuilder()
             .setExpression(methodCall)
             .setAnnotationType(methodCall.getTypeDescriptor())

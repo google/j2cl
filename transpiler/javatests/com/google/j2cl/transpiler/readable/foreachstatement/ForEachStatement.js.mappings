@@ -29,7 +29,7 @@
 [iterable] => [iterable] "iterable"
 [for (Throwable t : iterable) {
       t.toString();
-    }] => [for (let $iterator = /**@type {Iterator<Throwable>} */ (iterable.m_iterator__()); $iterator.m_hasNext__(); ) {
+    }] => [for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__(); ) {
       let t = /**@type {Throwable} */ ($Casts.$to($iterator.m_next__(), Throwable));
       t.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"

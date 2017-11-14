@@ -12,7 +12,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar.$Overlay$impl');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$1$impl');
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Main.$2$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
@@ -102,9 +101,8 @@ class Main extends java_lang_Object {
    */
   static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
-    let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));
-    o1 = /**@type {Class<Array<Array<Bar>>>} */ (
-        Class.$get(java_lang_Object, 1));
+    let o1 = Class.$get($JavaScriptObject);
+    o1 = Class.$get(java_lang_Object, 1);
   }
 
   /**

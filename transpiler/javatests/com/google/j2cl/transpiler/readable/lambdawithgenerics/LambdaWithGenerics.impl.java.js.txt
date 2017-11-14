@@ -16,7 +16,6 @@ let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
-let $Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -110,16 +109,14 @@ class LambdaWithGenerics extends java_lang_Object {
    */
   m_testLambdaNoCapture__() {
     this.m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(
-        /**@type {MyInterface<Error>} */ (
-            MyInterface.$adapt(((/** Error */ i) => {
-              return i;
-            }))),
+        MyInterface.$adapt(((/** Error */ i) => {
+          return i;
+        })),
         Error.$create__());
     this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
-        /**@type {MyInterface<Error>} */ (
-            MyInterface.$adapt(((/** Error */ i$1$) => {
-              return i$1$;
-            }))),
+        MyInterface.$adapt(((/** Error */ i$1$) => {
+          return i$1$;
+        })),
         Error.$create__());
     /**@type {Enum<Enum>} */
     (LambdaWithGenerics
@@ -129,10 +126,9 @@ class LambdaWithGenerics extends java_lang_Object {
                    return i$2$;
                  }))),
              /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));
-    let f = /**@type {java_util_function_Function<?, ?>} */ (
-        java_util_function_Function.$adapt(((/** Enum */ item) => {
-          return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
-        })));
+    let f = java_util_function_Function.$adapt(((/** Enum */ item) => {
+      return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
+    }));
   }
 
   /**
@@ -141,10 +137,9 @@ class LambdaWithGenerics extends java_lang_Object {
    */
   static m_testLabdaCallingStaticMethod__() {
     LambdaWithGenerics.$clinit();
-    let f = /**@type {java_util_function_Function<*, ?>} */ (
-        java_util_function_Function.$adapt(((/** * */ l) => {
-          return LambdaWithGenerics.m_m__();
-        })));
+    let f = java_util_function_Function.$adapt(((/** * */ l) => {
+      return LambdaWithGenerics.m_m__();
+    }));
   }
 
   /**
