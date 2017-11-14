@@ -38,13 +38,18 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
           @Override
           public Expression rewriteJsDocAnnotatedExpression(
               JsDocAnnotatedExpression jsDocAnnotatedExpression) {
+            TypeDescriptor typeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
             if (jsDocAnnotatedExpression.isDeclaration()
-                || !jsDocAnnotatedExpression.getTypeDescriptor().hasTypeArguments()) {
+                || !(typeDescriptor instanceof DeclaredTypeDescriptor)) {
               return jsDocAnnotatedExpression;
             }
 
             DeclaredTypeDescriptor annotationTypeDescriptor =
-                (DeclaredTypeDescriptor) jsDocAnnotatedExpression.getTypeDescriptor();
+                (DeclaredTypeDescriptor) typeDescriptor;
+
+            if (!annotationTypeDescriptor.hasTypeArguments()) {
+              return jsDocAnnotatedExpression;
+            }
 
             Iterable<TypeDescriptor> typeArgumentTypeDescriptors =
                 Lists.transform(

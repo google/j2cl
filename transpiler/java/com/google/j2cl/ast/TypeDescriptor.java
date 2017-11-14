@@ -116,10 +116,6 @@ public abstract class TypeDescriptor extends Node
 
   public abstract boolean isNullable();
 
-  public boolean hasTypeArguments() {
-    return false;
-  }
-
   public boolean isPrimitive() {
     return false;
   }

@@ -57,7 +57,7 @@ public class NewInstance extends Invocation {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public DeclaredTypeDescriptor getTypeDescriptor() {
     return constructorMethodDescriptor.getEnclosingTypeDescriptor();
   }
 

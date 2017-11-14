@@ -307,7 +307,7 @@ class ImportGatherer extends AbstractVisitor {
 
     // Avoid recursing into bounds type arguments, as these are not needed and they might introduce
     // an infinite loop (e.g. class Enum<T extends Enum<T>>).
-    if (boundTypeDescriptor.hasTypeArguments()) {
+    if (boundTypeDescriptor instanceof DeclaredTypeDescriptor) {
       boundTypeDescriptor = boundTypeDescriptor.getRawTypeDescriptor();
     }
 

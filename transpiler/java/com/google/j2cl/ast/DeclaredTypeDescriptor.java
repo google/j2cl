@@ -217,7 +217,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return hasTypeDeclaration() ? getTypeDeclaration().getJsNamespace() : null;
   }
 
-  @Override
   public boolean hasTypeArguments() {
     return !getTypeArgumentDescriptors().isEmpty();
   }
