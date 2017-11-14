@@ -119,7 +119,10 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         Method.Builder.from(statifiedMethod)
             .setMethodDescriptor(
                 MethodDescriptor.Builder.from(statifiedMethod.getDescriptor())
-                    .setJsInfo(JsInfo.NONE)
+                    .setJsInfo(
+                        JsInfo.Builder.from(JsInfo.NONE)
+                            .setJsAsync(method.getDescriptor().isJsAsync())
+                            .build())
                     .setEnclosingTypeDescriptor(overlayImplTypeDescriptor)
                     .removeParameterOptionality()
                     .build())

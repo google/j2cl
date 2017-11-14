@@ -69,8 +69,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
     String staticQualifier = methodDescriptor.isStatic() ? "static " : "";
-    String asyncQualifier = methodDescriptor.getJsInfo().isJsAsync() ? "async " : "";
-    return staticQualifier + asyncQualifier;
+    if (!methodDescriptor.isAbstract() && methodDescriptor.isJsAsync()) {
+      // Do not emit the "async" modifier for abstract methods since jscompiler will emit
+      // a warning due to the way async are transpiled down.
+      return staticQualifier + "async ";
+    }
+    return staticQualifier;
   }
 
   /**
@@ -78,8 +82,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    */
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    sourceBuilder.append(
-        getMethodQualifiers(methodDescriptor) + ManglingNameUtils.getMangledName(methodDescriptor));
+    sourceBuilder.append(getMethodQualifiers(methodDescriptor));
+    sourceBuilder.append(ManglingNameUtils.getMangledName(methodDescriptor));
     sourceBuilder.append("(");
     String separator = "";
     Variable varargsParameter = method.getJsVarargsParameter();

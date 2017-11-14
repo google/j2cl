@@ -11,7 +11,7 @@ load(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "async",
+    name = "jsasync",
     srcs = glob(["*.java"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.integration.async;
+package com.google.j2cl.transpiler.integration.jsasync;
 
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
@@ -52,10 +52,16 @@ public class Main {
     assert result == 15;
     result += await(InterfaceWithDefaultMethod.staticAsyncMethod());
     assert result == 20;
-    // TODO(skill): fix async default interface methods.
-    // result += await(new InterfaceWithDefaultMethod() {}.getDefaultAsync());
-    // assert result == 30;
+    result += await(new InterfaceWithDefaultMethod() {}.defaultAsyncMethod());
+    assert result == 30;
+    // TODO(b/69036598): uncomment when bug is fixed.
+    // result += same(await(ten())); // Causes expression decomposition error in JsCompiler.
+    // assert result == 40;
     return Promise.resolve(result);
+  }
+
+  private static int same(int i) {
+    return i;
   }
 
   @JsFunction
@@ -65,14 +71,12 @@ public class Main {
   }
 
   private interface InterfaceWithDefaultMethod {
-    /*
     @JsAsync
     default Promise defaultAsyncMethod() {
       int result = await(ten());
       assert result == 10;
       return Promise.resolve(result);
     }
-    */
 
     @JsAsync
     static Promise staticAsyncMethod() {

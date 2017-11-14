@@ -1,0 +1,50 @@
+[public class Main {
+  @JsAsync
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsasync_Main__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[public class Main {
+  @JsAsync
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[return Promise.resolve((Void) null);] => [return /**@type {Promise<?void>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[@JsAsync
+  static IThenable<Void> staticAsyncMethod() {
+    return Promise.resolve((Void) null);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[return Promise.resolve((Void) null);] => [return /**@type {Promise<?void>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[AsyncInterface i = () -> Promise.resolve(5);] => [let i = AsyncInterface.$adapt((async () =>{
+      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
+    }));] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[i] => [i] "i"
+[Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[i.asyncCall();] => [i.m_asyncCall__();] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[AsyncJsInterface j = () -> Promise.resolve(5);] => [let j = (async () =>{
+      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
+    });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[j] => [j] "j"
+[Promise.resolve(5)] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[j.doSomething();] => [j();] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[public class Main {
+  @JsAsync
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"

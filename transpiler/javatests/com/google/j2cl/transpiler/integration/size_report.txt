@@ -7,22 +7,22 @@ Total size (of already existing tests) did not change.
 Shrinkage report highlights:
 **************************************
         old      new
-       2373     2368 arrayliteral (-0.2%)
-       4594     4590 arrayofboxedtype (-0.1%)
        1758     1757 arrayobjectcalls (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       3015     3016 classliteral (0.0%)
+       4590     4594 arrayofboxedtype (0.1%)
+       2698     2700 staticinitsuper (0.1%)
+       2129     2130 classliteralstripped (0.0%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    6457790  6426788 box2d_default (-0.5%)
-    3845228  3816420 emptyclass (-0.7%)
+    6426788  6426788 box2d_default (unchanged)
+    3816420  3816420 emptyclass (unchanged)
 
 
 All reports:
@@ -39,12 +39,11 @@ All reports:
        2177     2177 arraybranchinsertion (unchanged)
        1068     1068 arraycastsinglesideeffect (unchanged)
        1765     1765 arrayleafinsertion (unchanged)
-       2373     2368 arrayliteral (-0.2%)
+       2368     2368 arrayliteral (unchanged)
        1758     1757 arrayobjectcalls (-0.1%)
-       4594     4590 arrayofboxedtype (-0.1%)
+       4590     4594 arrayofboxedtype (0.1%)
        4012     4012 arrayreadwrite (unchanged)
        2622     2622 assertsimple (unchanged)
-       2669     2669 async (unchanged)
        1082     1082 backwardbridgemethod (unchanged)
        2679     2679 binaryexpressions (unchanged)
        1021     1021 blockscoping (unchanged)
@@ -76,9 +75,9 @@ All reports:
        1447     1447 castwithsideeffect (unchanged)
        1037     1037 circularcompiletimeconstant (unchanged)
        3234     3234 classcastexception (unchanged)
-       3015     3016 classliteral (0.0%)
+       3015     3015 classliteral (unchanged)
        1030     1030 classliteralobfuscated (unchanged)
-       2129     2129 classliteralstripped (unchanged)
+       2129     2130 classliteralstripped (0.0%)
        1064     1064 compiletimeconstant (unchanged)
        1105     1105 complexcascadingconstructor (unchanged)
        1068     1068 continuestatement (unchanged)
@@ -138,6 +137,7 @@ All reports:
        1063     1063 interfacewithfields (unchanged)
        2247     2247 intersectiontype (unchanged)
        1367     1367 iteratormethodresolution (unchanged)
+         -1     2753 jsasync (new)
          75       75 jsbridgebackward (unchanged)
        1349     1349 jsbridgemethodaccidentaloverride (unchanged)
          75       75 jsbridgemultipleaccidental (unchanged)
@@ -216,7 +216,7 @@ All reports:
          75       75 staticfieldinitializer (unchanged)
          75       75 staticfields (unchanged)
        1041     1041 staticinitorder (unchanged)
-       2698     2698 staticinitsuper (unchanged)
+       2698     2700 staticinitsuper (0.1%)
        1017     1017 staticjsmethods (unchanged)
        1112     1112 staticnestedclass (unchanged)
        1756     1756 strictequality (unchanged)

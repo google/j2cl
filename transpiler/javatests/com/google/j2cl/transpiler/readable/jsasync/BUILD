@@ -8,7 +8,7 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "async",
+    name = "jsasync",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party/java/elemental2:elemental2-promise-j2cl",

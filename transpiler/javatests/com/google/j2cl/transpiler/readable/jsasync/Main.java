@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.readable.async;
+package com.google.j2cl.transpiler.readable.jsasync;
 
 import elemental2.promise.IThenable;
 import elemental2.promise.Promise;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
 
-public class Async {
+public class Main {
   @JsAsync
   IThenable<Void> asyncMethod() {
     return Promise.resolve((Void) null);
