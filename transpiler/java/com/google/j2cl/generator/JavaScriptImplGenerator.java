@@ -30,6 +30,7 @@ import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -617,10 +618,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendLines("/**", " * @private {" + closureTypeString + "}", " */");
       }
 
+      // TODO(rluble): Move all top level initializations to the AST.
       sourceBuilder.newLine();
       String fieldName = ManglingNameUtils.getMangledName(staticField.getDescriptor());
-      sourceBuilder.append(className + "." + fieldName + " = ");
-      renderExpression(getInitialValue(staticField));
+      sourceBuilder.append(className + "." + fieldName);
+      Expression initialValue = getInitialValue(staticField);
+      if (initialValue != NullLiteral.get()) {
+        // Only initialize static fields that are initialized to non null constants. Otherwise
+        // leave undefined which is semantically equivalent in J2cl.
+        sourceBuilder.append(" = ");
+        renderExpression(initialValue);
+      }
       sourceBuilder.append(";");
       // emit 2 empty lines
       sourceBuilder.newLines(3);

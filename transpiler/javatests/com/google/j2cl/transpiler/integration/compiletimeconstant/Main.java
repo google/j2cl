@@ -30,6 +30,7 @@ public class Main {
     public static final int CONSTANT_COMPOSED = CONSTANT_PLUS_ONE + CONSTANT;
     public static final String CONSTANT_STRING = "constant";
     public static final String CONSTANT_COMPOSED_STRING = "constant" + CONSTANT_STRING;
+    public static final Object OBJ = null;
 
     // non-compile time constants
     public static int nonConstant = 20;
@@ -63,5 +64,7 @@ public class Main {
     total += CompileTimeConstants.nonConstant;
     assert ranClinit == true;
     assert total == 78;
+
+    assert CompileTimeConstants.OBJ == null;
   }
 }
