@@ -17,7 +17,6 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -99,9 +98,6 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformBinaryExpression(BinaryExpression expression) {
-        checkState(
-            !(expression.getOperator().hasSideEffect()
-                && expression.getLeftOperand() instanceof ArrayAccess));
         process(expression.getLeftOperand());
         sourceBuilder.append(" " + expression.getOperator() + " ");
         process(expression.getRightOperand());

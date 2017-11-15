@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
@@ -35,11 +33,9 @@ public class ArrayAccessNormalizer extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression expression) {
-            if (expression.getOperator().hasSideEffect()
+            if (expression.getOperator() == BinaryOperator.ASSIGN
                 && expression.getLeftOperand() instanceof ArrayAccess) {
-              checkArgument(expression.getOperator() == BinaryOperator.ASSIGN);
               ArrayAccess leftSide = (ArrayAccess) expression.getLeftOperand();
-              // Return a call to an Arrays or LongUtils array assignment method.
               return RuntimeMethods.createArraySetMethodCall(
                   leftSide.getArrayExpression(),
                   leftSide.getIndexExpression(),

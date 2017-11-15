@@ -1,27 +1,29 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 5 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  1530994 to 1530057 bytes (100%->99.9%) and from
+  479172 to 478728 bytes (100%->99.9%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1758     1757 arrayobjectcalls (-0.1%)
+       4012     3812 arrayreadwrite (-5.0%)
+        250      246 unusedmultiexpressionreturn (-1.6%)
+      36519    36437 box2d_noclassmetadata_checksopt (-0.2%)
+      36730    36652 box2d_noclassmetadata (-0.2%)
 
 
 Expansion report highlights:
 **************************************
-        old      new
-       4590     4594 arrayofboxedtype (0.1%)
-       2698     2700 staticinitsuper (0.1%)
-       2129     2130 classliteralstripped (0.0%)
+  none
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    6426788  6426788 box2d_default (unchanged)
+    6426788  6425986 box2d_default (-0.0%)
     3816420  3816420 emptyclass (unchanged)
 
 
@@ -40,17 +42,17 @@ All reports:
        1068     1068 arraycastsinglesideeffect (unchanged)
        1765     1765 arrayleafinsertion (unchanged)
        2368     2368 arrayliteral (unchanged)
-       1758     1757 arrayobjectcalls (-0.1%)
-       4590     4594 arrayofboxedtype (0.1%)
-       4012     4012 arrayreadwrite (unchanged)
+       1757     1757 arrayobjectcalls (unchanged)
+       4590     4590 arrayofboxedtype (unchanged)
+       4012     3812 arrayreadwrite (-5.0%)
        2622     2622 assertsimple (unchanged)
        1082     1082 backwardbridgemethod (unchanged)
        2679     2679 binaryexpressions (unchanged)
        1021     1021 blockscoping (unchanged)
-      38946    38946 box2d_default (unchanged)
-      36730    36730 box2d_noclassmetadata (unchanged)
+      38946    38866 box2d_default (-0.2%)
+      36730    36652 box2d_noclassmetadata (-0.2%)
       34801    34801 box2d_noclassmetadata_checksmin (unchanged)
-      36519    36519 box2d_noclassmetadata_checksopt (unchanged)
+      36519    36437 box2d_noclassmetadata_checksopt (-0.2%)
        3594     3594 boxingsideeffect (unchanged)
        1065     1065 breakstatement (unchanged)
        2678     2678 bridgejsmethod (unchanged)
@@ -77,7 +79,7 @@ All reports:
        3234     3234 classcastexception (unchanged)
        3015     3015 classliteral (unchanged)
        1030     1030 classliteralobfuscated (unchanged)
-       2129     2130 classliteralstripped (0.0%)
+       2129     2129 classliteralstripped (unchanged)
        1064     1064 compiletimeconstant (unchanged)
        1105     1105 complexcascadingconstructor (unchanged)
        1068     1068 continuestatement (unchanged)
@@ -137,7 +139,7 @@ All reports:
        1063     1063 interfacewithfields (unchanged)
        2247     2247 intersectiontype (unchanged)
        1367     1367 iteratormethodresolution (unchanged)
-         -1     2753 jsasync (new)
+       2753     2753 jsasync (unchanged)
          75       75 jsbridgebackward (unchanged)
        1349     1349 jsbridgemethodaccidentaloverride (unchanged)
          75       75 jsbridgemultipleaccidental (unchanged)
@@ -216,7 +218,7 @@ All reports:
          75       75 staticfieldinitializer (unchanged)
          75       75 staticfields (unchanged)
        1041     1041 staticinitorder (unchanged)
-       2698     2700 staticinitsuper (0.1%)
+       2698     2698 staticinitsuper (unchanged)
        1017     1017 staticjsmethods (unchanged)
        1112     1112 staticnestedclass (unchanged)
        1756     1756 strictequality (unchanged)
@@ -235,7 +237,7 @@ All reports:
        1157     1157 typewildcards (unchanged)
        1889     1889 unaryexpressions (unchanged)
        3633     3633 underflowoverflowconversion (unchanged)
-        250      250 unusedmultiexpressionreturn (unchanged)
+        250      246 unusedmultiexpressionreturn (-1.6%)
        1864     1864 varargs (unchanged)
        1117     1117 variablecollisions (unchanged)
        1016     1016 whilestatement (unchanged)

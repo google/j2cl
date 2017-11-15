@@ -107,7 +107,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_testPrimitiveArrays___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testIntArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));
     ints = /**@type {!Array<number>} */ ($Arrays.$create([0], $int));
     ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1], $int));
@@ -122,26 +122,34 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     n = ints2d[0][1];
     $Arrays.$set(ints, 0, 1);
     $Arrays.$set(ints2d[0], 1, 1);
-    $Arrays.$set(ints, 0, ints[0] + 1);
-    $Arrays.$set(ints, 0, ints[0] - 1);
-    $Arrays.$set(ints, 0, ints[0] * 1);
+    ints[0] += 1;
+    ints[0] -= 1;
+    ints[0] *= 1;
     $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
-    $Arrays.$set(ints, 0, ints[0] & 1);
-    $Arrays.$set(ints, 0, ints[0] ^ 1);
-    $Arrays.$set(ints, 0, ints[0] | 1);
+    ints[0] &= 1;
+    ints[0] ^= 1;
+    ints[0] |= 1;
     $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
-    $Arrays.$set(ints, 0, ints[0] << 1);
-    $Arrays.$set(ints, 0, ints[0] >> 1);
+    ints[0] <<= 1;
+    ints[0] >>= 1;
     $Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));
-    $Arrays.$set(ints, 0, ints[0] + 1);
-    $Arrays.$set(ints, 0, ints[0] + 1);
+    ints[0]++;
+    ++ints[0];
+    let i = 0;
+    ints[i++]++;
+    ++ints[++i];
+    {
+      let $array = ints, $index = i++;
+      $Arrays.$set(
+          $array, $index, $Primitives.$coerceDivision($array[$index] / 1));
+    }
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testArrays___$pp_com_google_j2cl_transpiler_readable_array() {
+  m_testLongArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));
     longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([0], $long));
     longs = /**@type {!Array<!$Long>} */ ($Arrays.$init(

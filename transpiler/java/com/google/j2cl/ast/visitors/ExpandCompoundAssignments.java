@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
@@ -137,12 +136,6 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         && needsIntegralCoercion(targetTypeDescriptor)) {
       // Integral division and remainder always need expansion for truncation and/or division by
       // zero check insertion.
-      return true;
-    }
-
-    if (targetExpression instanceof ArrayAccess) {
-      // Compound assignment on arrays always need expansion (array stores are instrumented so
-      // that bound and type checking can occur).
       return true;
     }
 

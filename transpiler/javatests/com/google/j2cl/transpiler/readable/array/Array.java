@@ -58,7 +58,7 @@ public class Array {
     objects2d[0][1] = null;
   }
 
-  void testPrimitiveArrays() {
+  void testIntArrays() {
     // Creation
     int[] ints = new int[100];
     ints = new int[0];
@@ -89,9 +89,15 @@ public class Array {
     ints[0] >>>= 1;
     ints[0]++;
     ++ints[0];
+
+    // Index with side effects
+    int i = 0;
+    ints[i++]++;
+    ++ints[++i];
+    ints[i++] /= 1;
   }
 
-  void testArrays() {
+  void testLongArrays() {
     // Creation
     long[] longs = new long[100];
     longs = new long[0];
