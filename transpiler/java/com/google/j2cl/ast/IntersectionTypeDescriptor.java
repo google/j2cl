@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkState;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -181,9 +180,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
         new ThreadLocalInterner<>();
 
     public IntersectionTypeDescriptor build() {
-      IntersectionTypeDescriptor typeDescriptor = autoBuild();
-      checkState(typeDescriptor.getIntersectionTypeDescriptors().size() > 1);
-      return interner.intern(typeDescriptor);
+      return interner.intern(autoBuild());
     }
   }
 }

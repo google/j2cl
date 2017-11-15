@@ -15,9 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.typewildcards;
 
-import java.util.List;
-import java.util.function.Function;
-
 class GenericType<T> {}
 
 public class TypeWildCards {
@@ -57,41 +54,5 @@ public class TypeWildCards {
     int i = t.f;
     t.m();
     t.n();
-  }
-
-  public interface IntegerSupplier {
-    Integer get();
-  }
-
-  public interface HasKey {
-    String getKey();
-  }
-
-  public abstract class Element implements HasKey, IntegerSupplier {}
-
-  public abstract class OtherElement implements IntegerSupplier, HasKey {}
-
-  public abstract class SubOtherElement extends OtherElement implements HasKey {}
-
-  private static <F, V> List<V> transform(List<F> from, Function<? super F, ? extends V> function) {
-    return null;
-  }
-
-  private static <E> List<E> concat(List<? extends E> a, List<? extends E> b) {
-    return null;
-  }
-
-  public void testInferredGenericIntersection() {
-    List<Element> elements = null;
-    List<SubOtherElement> otherElements = null;
-    // This is a rather complicated way to make sure the inference ends with a wildcard extending
-    // multiple bounds. This is type of code that  exposes b/67858399.
-    List<Integer> integers =
-        transform(
-            concat(elements, otherElements),
-            a -> {
-              a.getKey();
-              return a.get();
-            });
   }
 }

@@ -60,14 +60,14 @@ public class IntersectionTypeTest<U> {
 [public static Cmp method() {
     return (Cmp & Serial) () -> 1;
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method"
-[return (Cmp & Serial) () -> 1;] => [return /**@type {Cmp} */ ($Casts.$to($Casts.$to(new $LambdaAdaptor$1((() =>{
+[return (Cmp & Serial) () -> 1;] => [return /**@type {Cmp} */ ($Casts.$to($Casts.$to(Cmp.$adapt((() =>{
       return 1;
     })), Cmp), Serial));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method"
 [1] => [return 1;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<lambda in method>"
 [public static Cmp2 method2() {
     return (Cmp2 & Serial) (a) -> 1;
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method2"
-[return (Cmp2 & Serial) (a) -> 1;] => [return /**@type {Cmp2} */ ($Casts.$to($Casts.$to(new $LambdaAdaptor$2(((/** number */ a) =>{
+[return (Cmp2 & Serial) (a) -> 1;] => [return /**@type {Cmp2} */ ($Casts.$to($Casts.$to(new $LambdaAdaptor$1(((/** number */ a) =>{
       return 1;
     })), Cmp2), Serial));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.method2"
 [a] => [a] "a"
