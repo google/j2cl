@@ -161,8 +161,6 @@ def replace_transpiled_js(target_names):
     run_cmd_get_output(find_command_js_sources +
                        ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
 
-
-
     # Move the newly unzipped .js => .js.txt
     run_cmd_get_output(find_command_js_sources +
                        ["-exec", "mv", "{}", "{}.txt", ";"])
@@ -182,8 +180,7 @@ def gather_closure_warnings(build_log):
     ])
 
     # Remove folder path spam.
-    build_log = build_log.replace(
-        "blaze-out/gcc-4.X.Y-crosstool-v18-hybrid-grtev4-k8-fastbuild/bin/", "")
+    build_log = build_log.replace("blaze-out/k8-fastbuild/genfiles/", "")
     # Remove stable (but occasionally changing) line number details.
     build_log = replace_pattern(r"\:([0-9]*)\:", "", build_log)
     # Filter out the unstable ", ##% typed" message
