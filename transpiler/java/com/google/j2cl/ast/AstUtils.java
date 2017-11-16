@@ -30,11 +30,9 @@ import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 /** Utility functions to manipulate J2CL AST. */
@@ -827,45 +825,6 @@ public class AstUtils {
                     .makeStatement(
                         field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition))
         .collect(toList());
-  }
-
-  /**
-   * Returns all type variables that appear in the subtree, e.g. the parameters of a
-   * TypeDeclaration, the arguments of a TypeDescriptor, etc.
-   */
-  public static Set<TypeDescriptor> getAllTypeVariables(Node node) {
-    final Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
-    node.accept(
-        new AbstractVisitor() {
-          @Override
-          public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
-            typeVariables.addAll(typeDeclaration.getTypeParameterDescriptors());
-            return false;
-          }
-
-          @Override
-          public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-            typeVariables.addAll(typeDescriptor.getAllTypeVariables());
-            return false;
-          }
-
-          @Override
-          public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
-            typeVariables.addAll(fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
-            return false;
-          }
-
-          @Override
-          public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
-            typeVariables.addAll(methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
-            for (TypeDescriptor parameterTypeDescriptor :
-                methodDescriptor.getParameterTypeDescriptors()) {
-              typeVariables.addAll(parameterTypeDescriptor.getAllTypeVariables());
-            }
-            return false;
-          }
-        });
-    return typeVariables;
   }
 
   public static String getSimpleSourceName(List<String> classComponents) {
