@@ -77,8 +77,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "}",
             "public class Buggy {}  // Unrelated class")
         .assertCompileFails(
-            "'void Baz.doIt(Bar)' and "
-                + "'void Baz.doIt(Foo)' cannot both use the same JavaScript name 'doIt'.");
+            "'void Baz.doIt(Foo)' and "
+                + "'void Baz.doIt(Bar)' cannot both use the same JavaScript name 'doIt'.");
   }
 
   // TODO(b/37579830): Finalize checker implementation and enable this test.
@@ -161,7 +161,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int display = 0;",
             "}")
         .assertCompileFails(
-            "'Buggy.display' and 'Buggy.show' cannot both use the same "
+            "'Buggy.show' and 'Buggy.display' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -258,7 +258,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  boolean getX();",
             "}")
         .assertCompileFails(
-            "'boolean Buggy.getX()' and 'boolean Buggy.isX()' "
+            "'boolean Buggy.isX()' and 'boolean Buggy.getX()' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -300,8 +300,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  void setX(int x);",
             "}")
         .assertCompileFails(
-            "'void Buggy.setX(int)' and "
-                + "'void Buggy.setX(boolean)' cannot both use the same JavaScript name 'x'.");
+            "'void Buggy.setX(boolean)' and 'void Buggy.setX(int)' "
+                + "cannot both use the same JavaScript name 'x'.");
   }
 
   public void testCollidingJsMethodAndJsPropertyGetterFails() throws Exception {
@@ -320,9 +320,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public int getX() {return 0;}",
             "}")
         .assertCompileFails(
-            "'int IBuggy.getX()' and 'boolean IBuggy.x(boolean)' "
+            "'boolean IBuggy.x(boolean)' and 'int IBuggy.getX()' "
                 + "cannot both use the same JavaScript name 'x'.",
-            "'int Buggy.getX()' and 'boolean Buggy.x(boolean)' "
+            "'boolean Buggy.x(boolean)' and 'int Buggy.getX()' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -342,9 +342,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void setX(int a) {}",
             "}")
         .assertCompileFails(
-            "'void IBuggy.setX(int)' and 'boolean IBuggy.x(boolean)' "
+            "'boolean IBuggy.x(boolean)' and 'void IBuggy.setX(int)' "
                 + "cannot both use the same JavaScript name 'x'.",
-            "'void Buggy.setX(int)' and 'boolean Buggy.x(boolean)' "
+            "'boolean Buggy.x(boolean)' and 'void Buggy.setX(int)' "
                 + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -359,7 +359,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void setDisplay2(int x) {}",
             "}")
         .assertCompileFails(
-            "'void Buggy.setDisplay2(int)' and 'void Buggy.setDisplay(int)' cannot both use the "
+            "'void Buggy.setDisplay(int)' and 'void Buggy.setDisplay2(int)' cannot both use the "
                 + "same JavaScript name 'display'.");
   }
 
@@ -374,7 +374,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void display() {}",
             "}")
         .assertCompileFails(
-            "'void Buggy.display()' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.show()' and 'void Buggy.display()' cannot both use the same "
                 + "JavaScript name 'show'");
   }
 
@@ -390,7 +390,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static void show() {}",
             "}")
         .assertCompileFails(
-            "'void Buggy.show()' and 'void Buggy.setShow(int)' cannot both use the same "
+            "'void Buggy.setShow(int)' and 'void Buggy.show()' cannot both use the same "
                 + "JavaScript name 'show'");
   }
 
@@ -406,7 +406,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public static final int show = 0;",
             "}")
         .assertCompileFails(
-            "'Buggy.show' and 'void Buggy.show()' cannot both use the same "
+            "'void Buggy.show()' and 'Buggy.show' cannot both use the same "
                 + "JavaScript name 'show'.");
   }
 
@@ -420,7 +420,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public final int show = 0;",
             "}")
         .assertCompileFails(
-            "'Buggy.show' and 'void Buggy.show()' "
+            "'void Buggy.show()' and 'Buggy.show' "
                 + "cannot both use the same JavaScript name 'show'.");
   }
 
@@ -434,8 +434,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public void show() {}",
             "}")
         .assertCompileFails(
-            "'void Buggy.show()' and "
-                + "'void Buggy.show(int)' cannot both use the same JavaScript name 'show'.");
+            "'void Buggy.show(int)' and "
+                + "'void Buggy.show()' cannot both use the same JavaScript name 'show'.");
   }
 
   public void testValidCollidingSubclassMembersSucceeds() throws Exception {
@@ -573,16 +573,14 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod(name = \"blah\") boolean getBlah() { return false; }",
             "}")
         .assertCompileFails(
-            " 'boolean Buggy.getFoo()' and 'boolean ParentBuggy.foo()' cannot both use the same "
+            "'boolean Buggy.getFoo()' and 'boolean ParentBuggy.foo()' cannot both use the same "
                 + "JavaScript name 'foo'.",
             "'boolean Buggy.bar()' and 'boolean ParentBuggy.getBar()' cannot both use the same "
                 + "JavaScript name 'bar'.",
-            // TODO(b/35915124): Improve error messages for this situation where the type of
-            // js member is changed in the hierarchy.
-            "'boolean Buggy.getBleh()' and 'boolean ParentBuggy.getBleh()' cannot both use the "
-                + "same JavaScript name 'bleh'.",
-            "'boolean Buggy.getBlah()' and 'boolean ParentBuggy.getBlah()' cannot both use the "
-                + "same JavaScript name 'blah'.");
+            "JsProperty 'boolean Buggy.getBleh()' cannot override "
+                + "JsMethod 'boolean ParentBuggy.getBleh()'.",
+            "JsMethod 'boolean Buggy.getBlah()' cannot override JsProperty "
+                + "'boolean ParentBuggy.getBlah()'.");
   }
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
@@ -961,10 +959,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsMethod(name = \"z\") public void setZ(int z) {}",
             "}")
         .assertCompileFails(
-            "'int Buggy.getY()' and 'int Super.getY()' cannot both use the same "
-                + "JavaScript name 'getY'.",
-            "'void Buggy.setZ(int)' and 'void Super.setZ(int)' cannot both use the same "
-                + "JavaScript name 'z'.");
+            "JsProperty 'int Buggy.getY()' cannot override JsMethod 'int Super.getY()'.",
+            "JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty 'void Super.setZ(int)'.");
   }
 
   // GWT enforces some restriction on JSNI JsMethods. In J2CL,  JSNI is just a comment and no test
@@ -2166,7 +2162,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  public native boolean equals(Object obj);",
             "}",
             "@JsType(isNative=true) class OtherBuggy implements HasHashCode {",
-            "  public native String toString();",
+            "  public native String toString(int i);",
             "  public native boolean equals(Object obj);",
             "  public native int hashCode();",
             "}",
@@ -2421,7 +2417,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertNoWarnings();
   }
 
-  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails()
+  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsSucceeds()
       throws Exception {
     compile(
             "Buggy",
@@ -2435,9 +2431,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             "  @JsConstructor public Buggy() {}",
             "  public void m(Object o) { }",
             "}")
-        .assertCompileFails(
-            "'void Buggy.m(Object)' and 'void Super.m(int)' cannot both use the same "
-                + "JavaScript name 'm'.");
+        .assertCompileSucceeds()
+        .assertNoWarnings();
   }
 
   public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() throws Exception {
@@ -2452,17 +2447,48 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         .assertNoWarnings();
   }
 
-  public void testNonJsTypeWithNativeInstanceMethodOverloadsFails() throws Exception {
+  public void testNonJsTypeWithNativeInstanceMethodOverloadsSucceeds() throws Exception {
+    compile(
+            "Leaf",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsProperty;",
+            "class Top {",
+            "  @JsMethod public void m(int o) {}",
+            "}",
+            "class SubTop extends Top {",
+            // Redefines m to be a setter
+            "  @JsMethod public native void m(int o);",
+            "  @JsProperty public void setM(int m) { }",
+            "}",
+            "class SubSubTop extends SubTop {",
+            //  Adds a getter
+            "  @JsProperty public int getM() { return 0; }",
+            "}",
+            "public class Leaf extends SubSubTop {",
+            // makes setter/getter pair native to define a different overload for the
+            // JavaScript name
+            "  @JsProperty public native void setM(int m);",
+            "  @JsProperty public native int getM();",
+            "  @JsMethod public void m(int o, Object opt_o) { }",
+            "}")
+        .assertCompileSucceeds()
+        .assertNoWarnings();
+  }
+
+  public void testNonSingleOverloadImplementationFails() throws Exception {
     compile(
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
-            "public class Buggy {",
-            "  @JsMethod public native void m(Object o);",
+            "class Super {",
             "  @JsMethod public void m(int o) { }",
+            "}",
+            "public class Buggy extends Super {",
+            "  @JsMethod public native void m(Object o);",
+            "  @JsMethod public void m(int o, Object opt_o) { }",
             "}")
         .assertCompileFails(
-            "'void Buggy.m(int)' and 'void Buggy.m(Object)' cannot both use the same "
-                + "JavaScript name 'm'.");
+            "'void Buggy.m(int, Object)' and 'void Super.m(int)' cannot both use the "
+                + "same JavaScript name 'm'.");
   }
 
   public void testNonJsTypeExtendsJsTypeSucceeds() throws Exception {

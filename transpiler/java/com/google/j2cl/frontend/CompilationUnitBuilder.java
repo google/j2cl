@@ -299,11 +299,6 @@ public class CompilationUnitBuilder {
 
       FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
-      // Enum fields are always non-nullable.
-      fieldDescriptor =
-          FieldDescriptor.Builder.from(fieldDescriptor)
-              .setTypeDescriptor(fieldDescriptor.getTypeDescriptor().toNonNullable())
-              .build();
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
           .setEnumField(true)

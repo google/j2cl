@@ -21,28 +21,19 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.MoreCollectors;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
-
-  private static class UpdatedJsMember {
-    final JsMember oldJsMember;
-    final JsMember newJsMember;
-
-    private UpdatedJsMember(JsMember oldJsMember, JsMember newJsMember) {
-      this.oldJsMember = oldJsMember;
-      this.newJsMember = newJsMember;
-    }
-  }
 
   public static void check(List<CompilationUnit> compilationUnits, Problems problems) {
     new JsInteropRestrictionsChecker(problems).checkCompilationUnits(compilationUnits);
@@ -112,10 +103,12 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    Map<String, JsMember> localNames = collectLocalNames(type.getSuperTypeDescriptor());
-    Map<String, JsMember> staticNames = new HashMap<>();
+    Multimap<String, MemberDescriptor> instanceJsMembersByName =
+        collectInstanceNames(type.getTypeDescriptor());
+    Multimap<String, MemberDescriptor> staticJsMembersByName =
+        collectStaticNames(type.getTypeDescriptor());
     for (Member member : type.getMembers()) {
-      checkMember(member, localNames, staticNames);
+      checkMember(member, instanceJsMembersByName, staticJsMembersByName);
     }
     checkInstanceOfNativeJsTypesOrJsFunctionImplementations(type);
   }
@@ -169,7 +162,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkMember(
-      Member member, Map<String, JsMember> localNames, Map<String, JsMember> staticNames) {
+      Member member,
+      Multimap<String, MemberDescriptor> instanceJsMembersByName,
+      Multimap<String, MemberDescriptor> staticJsMembersByName) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
     if ((!member.isMethod() && !member.isField()) || memberDescriptor.isSynthetic()) {
       return;
@@ -198,16 +193,16 @@ public class JsInteropRestrictionsChecker {
 
     checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
 
-    if (isCheckedLocalName(memberDescriptor)) {
-      checkNameCollisions(localNames, member);
+    if (isInstanceJsMember(memberDescriptor)) {
+      checkNameCollisions(instanceJsMembersByName, member);
     }
 
-    if (isCheckedStaticName(memberDescriptor)) {
-      checkNameCollisions(staticNames, member);
+    if (isStaticJsMember(memberDescriptor)) {
+      checkNameCollisions(staticJsMembersByName, member);
     }
   }
 
-  private void checkNameConsistency(Member member) {
+  private void checkOverrideConsistency(Member member) {
     if (!member.isMethod() || !member.getDescriptor().isJsMember()) {
       return;
     }
@@ -226,6 +221,19 @@ public class JsInteropRestrictionsChecker {
                 + " JavaScript name of a method it overrides ('%s' with JavaScript name '%s').",
             member.getReadableDescription(),
             jsName,
+            overriddenMethodDescriptor.getReadableDescription(),
+            parentName);
+        break;
+      }
+
+      if (overriddenMethodDescriptor.isJsMethod() != method.getDescriptor().isJsMethod()) {
+        // Overrides can not change JsMethod to JsProperty nor vice versa.
+        problems.error(
+            method.getSourcePosition(),
+            "%s '%s' cannot override %s '%s'.",
+            member.getDescriptor().isJsMethod() ? "JsMethod" : "JsProperty",
+            member.getReadableDescription(),
+            overriddenMethodDescriptor.isJsMethod() ? "JsMethod" : "JsProperty",
             overriddenMethodDescriptor.getReadableDescription(),
             parentName);
         break;
@@ -775,30 +783,6 @@ public class JsInteropRestrictionsChecker {
         .orElse(null);
   }
 
-  private static class JsMember {
-    private MemberDescriptor member;
-    private MethodDescriptor setter;
-    private MethodDescriptor getter;
-
-    public JsMember(MemberDescriptor member) {
-      this.member = member;
-    }
-
-    public JsMember(MemberDescriptor member, MethodDescriptor setter, MethodDescriptor getter) {
-      this.member = member;
-      this.setter = setter;
-      this.getter = getter;
-    }
-
-    public boolean isNative() {
-      return member.isNative();
-    }
-
-    public boolean isPropertyAccessor() {
-      return setter != null || getter != null;
-    }
-  }
-
   private boolean checkJsPropertyAccessor(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     JsMemberType memberType = methodDescriptor.getJsInfo().getJsMemberType();
@@ -844,32 +828,58 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
-  private void checkJsPropertyConsistency(Member member, JsMember newMember) {
-    if (newMember.setter != null && newMember.getter != null) {
-      List<TypeDescriptor> setterParams = newMember.setter.getParameterTypeDescriptors();
-      if (!newMember.getter.getReturnTypeDescriptor().hasSameRawType(setterParams.get(0))) {
-        problems.error(
-            member.getSourcePosition(),
-            "JsProperty setter '%s' and getter '%s' cannot have inconsistent types.",
-            newMember.setter.getReadableDescription(),
-            newMember.getter.getReadableDescription());
-      }
+  private boolean checkJsPropertyConsistency(
+      SourcePosition sourcePosition, MethodDescriptor thisMember, MethodDescriptor thatMember) {
+    MethodDescriptor setter = thisMember.isJsPropertySetter() ? thisMember : thatMember;
+    MethodDescriptor getter = thisMember.isJsPropertyGetter() ? thisMember : thatMember;
+
+    List<TypeDescriptor> setterParams = setter.getParameterTypeDescriptors();
+    if (!getter.getReturnTypeDescriptor().hasSameRawType(setterParams.get(0))) {
+      problems.error(
+          sourcePosition,
+          "JsProperty setter '%s' and getter '%s' cannot have inconsistent types.",
+          setter.getReadableDescription(),
+          getter.getReadableDescription());
+      return false;
     }
+    return true;
   }
 
-  private void checkNameCollisions(Map<String, JsMember> localNames, Member member) {
-    UpdatedJsMember oldAndNewJsMember = updateJsMembers(localNames, member.getDescriptor());
-    JsMember oldJsMember = oldAndNewJsMember.oldJsMember;
-    JsMember newJsMember = oldAndNewJsMember.newJsMember;
-
-    checkNameConsistency(member);
-    checkJsPropertyConsistency(member, newJsMember);
-
-    if (oldJsMember == null || oldJsMember == newJsMember) {
+  private void checkNameCollisions(
+      Multimap<String, MemberDescriptor> jsMembersByName, Member member) {
+    checkOverrideConsistency(member);
+    if (member.isNative()) {
       return;
     }
 
-    if (oldJsMember.isNative() && newJsMember.isNative()) {
+    String name = member.getDescriptor().getSimpleJsName();
+
+    Set<MemberDescriptor> potentiallyCollidingMembers =
+        new LinkedHashSet<>(jsMembersByName.get(name));
+
+    // Remove self.
+    boolean removed =
+        potentiallyCollidingMembers.removeIf(md -> isSameMember(member.getDescriptor(), md));
+    checkState(removed);
+
+    // Remove native members.
+    potentiallyCollidingMembers.removeIf(MemberDescriptor::isNative);
+
+    if (potentiallyCollidingMembers.isEmpty()) {
+      // No conflicting members, proceed.
+      return;
+    }
+
+    MemberDescriptor potentiallyCollidingMember = potentiallyCollidingMembers.iterator().next();
+    if (potentiallyCollidingMembers.size() == 1
+        && isJsPropertyAccessorPair(member.getDescriptor(), potentiallyCollidingMember)) {
+      if (!checkJsPropertyConsistency(
+          member.getSourcePosition(),
+          (MethodDescriptor) member.getDescriptor(),
+          (MethodDescriptor) potentiallyCollidingMember)) {
+        // remove colliding method, to avoid duplicate error messages.
+        jsMembersByName.get(name).removeIf(md -> isSameMember(member.getDescriptor(), md));
+      }
       return;
     }
 
@@ -877,81 +887,71 @@ public class JsInteropRestrictionsChecker {
         member.getSourcePosition(),
         "'%s' and '%s' cannot both use the same JavaScript name '%s'.",
         member.getDescriptor().getReadableDescription(),
-        oldJsMember.member.getReadableDescription(),
-        member.getDescriptor().getSimpleJsName());
+        potentiallyCollidingMember.getReadableDescription(),
+        name);
+
+    // remove colliding method, to avoid duplicate error messages.
+    jsMembersByName.get(name).removeIf(md -> isSameMember(member.getDescriptor(), md));
   }
 
-  private static boolean isCheckedLocalName(MemberDescriptor memberDescriptor) {
+  // TODO(b/69130180): j2cl confuses the declaration of methods that have type parameters with
+  // the unparameterized version. We remove the method if their declarations are the same which
+  // means they are the same method.
+  private static boolean isSameMember(MemberDescriptor thisMember, MemberDescriptor thatMember) {
+    return thisMember.getDeclarationDescriptor() == thatMember.getDeclarationDescriptor();
+  }
+
+  private static boolean isJsPropertyAccessorPair(
+      MemberDescriptor thisMember, MemberDescriptor thatMember) {
+    return (thisMember.isJsPropertyGetter() && thatMember.isJsPropertySetter())
+        || (thatMember.isJsPropertyGetter() && thisMember.isJsPropertySetter());
+  }
+
+  private static boolean isInstanceJsMember(MemberDescriptor memberDescriptor) {
     return !(memberDescriptor.isStatic() || memberDescriptor.isConstructor())
         && memberDescriptor.isJsMember()
         && !memberDescriptor.isSynthetic();
   }
 
-  private static boolean isCheckedStaticName(MemberDescriptor memberDescriptor) {
+  private static boolean isStaticJsMember(MemberDescriptor memberDescriptor) {
     // Constructors are checked specifically to give a better error message.
     return memberDescriptor.isStatic()
         && memberDescriptor.isJsMember()
         && !memberDescriptor.isSynthetic();
   }
 
-  private static HashMap<String, JsMember> collectLocalNames(
+  private static Multimap<String, MemberDescriptor> collectInstanceNames(
       DeclaredTypeDescriptor typeDescriptor) {
     if (typeDescriptor == null) {
-      return new LinkedHashMap<>();
+      return LinkedHashMultimap.create();
     }
 
-    HashMap<String, JsMember> memberByLocalMemberNames =
-        collectLocalNames(typeDescriptor.getSuperTypeDescriptor());
-    for (MemberDescriptor member :
-        Iterables.concat(
-            typeDescriptor.getDeclaredMethodDescriptors(),
-            typeDescriptor.getDeclaredFieldDescriptors())) {
-      if (isCheckedLocalName(member)) {
-        updateJsMembers(memberByLocalMemberNames, member);
+    Multimap<String, MemberDescriptor> instanceMembersByName =
+        collectInstanceNames(typeDescriptor.getSuperTypeDescriptor());
+    for (MemberDescriptor member : typeDescriptor.getDeclaredMemberDescriptors()) {
+      if (isInstanceJsMember(member)) {
+        addMember(instanceMembersByName, member);
       }
     }
-    return memberByLocalMemberNames;
+    return instanceMembersByName;
   }
 
-  private static UpdatedJsMember updateJsMembers(
-      Map<String, JsMember> memberByNames, MemberDescriptor member) {
-    JsMember oldJsMember = memberByNames.get(member.getSimpleJsName());
-    JsMember newJsMember = createOrUpdateJsMember(oldJsMember, member);
-    memberByNames.put(member.getSimpleJsName(), newJsMember);
-    return new UpdatedJsMember(oldJsMember, newJsMember);
-  }
-
-  private static JsMember createOrUpdateJsMember(JsMember jsMember, MemberDescriptor member) {
-    switch (member.getJsInfo().getJsMemberType()) {
-      case GETTER:
-        if (jsMember != null && jsMember.isPropertyAccessor()) {
-          if (jsMember.getter == null || overrides(member, jsMember.getter)) {
-            jsMember.getter = (MethodDescriptor) member;
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(
-            member, jsMember == null ? null : jsMember.setter, (MethodDescriptor) member);
-      case SETTER:
-        if (jsMember != null && jsMember.isPropertyAccessor()) {
-          if (jsMember.setter == null || overrides(member, jsMember.setter)) {
-            jsMember.setter = (MethodDescriptor) member;
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(
-            member, (MethodDescriptor) member, jsMember == null ? null : jsMember.getter);
-      default:
-        if (jsMember != null && !jsMember.isPropertyAccessor()) {
-          if (overrides(member, jsMember.member)) {
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(member);
+  private static Multimap<String, MemberDescriptor> collectStaticNames(
+      DeclaredTypeDescriptor typeDescriptor) {
+    Multimap<String, MemberDescriptor> staticMembersByName = LinkedHashMultimap.create();
+    for (MemberDescriptor member : typeDescriptor.getDeclaredMemberDescriptors()) {
+      if (isStaticJsMember(member)) {
+        addMember(staticMembersByName, member);
+      }
     }
+    return staticMembersByName;
+  }
+
+  private static void addMember(
+      Multimap<String, MemberDescriptor> memberByMemberName, MemberDescriptor member) {
+    String name = member.getSimpleJsName();
+    Iterables.removeIf(memberByMemberName.get(name), m -> overrides(member, m));
+    memberByMemberName.put(name, member);
   }
 
   private static boolean overrides(
@@ -960,8 +960,10 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    MethodDescriptor method = (MethodDescriptor) member;
-    return method.isOverride((MethodDescriptor) potentiallyOverriddenMember);
+    MethodDescriptor method = (MethodDescriptor) member.getDeclarationDescriptor();
+    MethodDescriptor potentiallyOverriddenMethod = (MethodDescriptor) potentiallyOverriddenMember;
+    return method.isOverride(potentiallyOverriddenMethod)
+        || method.isOverride(potentiallyOverriddenMethod.getDeclarationDescriptor());
   }
 
   private void checkUnusableByJs(Member member) {
@@ -1044,5 +1046,4 @@ public class JsInteropRestrictionsChecker {
         member.getReadableDescription());
     wasUnusableByJsWarningReported = true;
   }
-
 }

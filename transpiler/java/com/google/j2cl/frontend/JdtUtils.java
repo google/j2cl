@@ -103,6 +103,11 @@ public class JdtUtils {
         createTypeDescriptorWithNullability(
             variableBinding.getType(), variableBinding.getAnnotations());
 
+    if (variableBinding.isEnumConstant()) {
+      // Enum fields are always non-nullable.
+      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
+    }
+
     FieldDescriptor declarationFieldDescriptor = null;
     if (variableBinding.getVariableDeclaration() != variableBinding) {
       declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
