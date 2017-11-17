@@ -6,3 +6,19 @@
 [@JsOverlay Object staticField = new Object();] => [return ($Overlay.$clinit(), $Overlay.$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);] "com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlay$$Overlay.<synthetic: getter>"
 [@JsOverlay Object staticField = new Object();] => [($Overlay.$clinit(), $Overlay.$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = value);] "com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlay$$Overlay.<synthetic: setter>"
 [@JsOverlay Object staticField = new Object();] => [$Overlay.$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlay$$Overlay.<clinit>"
+[@JsOverlay String COMPILE_TIME_CONSTANT = "10";] => [/** @public {?string} @const */
+$Overlay.f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = "10";]
+[@JsType(isNative = true, namespace = "test.foo")
+  public interface NativeJsTypeInterfaceWithOverlay {
+    @JsOverlay String COMPILE_TIME_CONSTANT = "10";
+
+    @JsOverlay Object staticField = new Object();
+
+    int m();
+
+    @JsOverlay
+    default int callM() {
+      return m();
+    }
+  }] => [/** @private {*} */
+$Overlay.$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay;]

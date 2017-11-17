@@ -807,24 +807,28 @@ public class AstUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static List<Statement> generateInstanceFieldDeclarationStatements(
-      Type type, SourcePosition sourcePosition) {
-    return type.getFields()
-        .stream()
-        .filter(field -> !field.getDescriptor().isStatic())
-        .map(
-            field ->
-                JsDocAnnotatedExpression.newBuilder()
-                    .setExpression(
-                        BinaryExpression.Builder.asAssignmentTo(field)
-                            .setRightOperand(getInitialValue(field))
-                            .build())
-                    .setAnnotationType(field.getDescriptor().getTypeDescriptor())
-                    .setDeclaration(true)
-                    .build()
-                    .makeStatement(
-                        field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition))
-        .collect(toList());
+  /** Returns a field declaration statement. */
+  public static Statement declarationStatement(Field field, SourcePosition sourcePosition) {
+    boolean isPublic = !field.isStatic() || field.isCompileTimeConstant();
+
+    // Only skip declaration on static fields.
+    boolean skipNullInitialization =
+        field.isStatic() && getInitialValue(field) == NullLiteral.get();
+
+    Expression declarationExpression =
+        skipNullInitialization
+            ? FieldAccess.newBuilder().setTargetFieldDescriptor(field.getDescriptor()).build()
+            : BinaryExpression.Builder.asAssignmentTo(field)
+                .setRightOperand(getInitialValue(field))
+                .build();
+
+    return JsDocFieldDeclaration.newBuilder()
+        .setExpression(declarationExpression)
+        .setFieldType(field.getDescriptor().getTypeDescriptor())
+        .setPublic(isPublic)
+        .setConst(field.isCompileTimeConstant())
+        .build()
+        .makeStatement(field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition);
   }
 
   public static String getSimpleSourceName(List<String> classComponents) {
@@ -952,9 +956,9 @@ public class AstUtils {
         .build();
   }
 
-  public static Expression removeTypeAnnotationIfPresent(Expression expression) {
-    if (expression instanceof JsDocAnnotatedExpression) {
-      return ((JsDocAnnotatedExpression) expression).getExpression();
+  public static Expression removeJsDocCastIfPresent(Expression expression) {
+    if (expression instanceof JsDocCastExpression) {
+      return ((JsDocCastExpression) expression).getExpression();
     }
     return expression;
   }

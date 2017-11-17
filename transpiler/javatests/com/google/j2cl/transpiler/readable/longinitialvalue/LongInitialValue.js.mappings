@@ -12,3 +12,7 @@
 [public abstract class LongInitialValue {
   static long LONG_VALUE;
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue.<clinit>"
+[public abstract class LongInitialValue {
+  static long LONG_VALUE;
+}] => [/** @private {!$Long} */
+LongInitialValue.$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue = $Long.fromBits(0, 0) /* 0 */;]

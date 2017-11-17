@@ -2,23 +2,23 @@
   public static final Object OBJ = null;
 ...  public final boolean I2 = G2 > 100;
 }] => [super();] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final int A2 = 10;] => [/** @public {number} */
+[public final int A2 = 10;] => [/** @public {number} @const */
     this.f_A2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 10;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final int B2 = 20;] => [/** @public {number} */
+[public final int B2 = 20;] => [/** @public {number} @const */
     this.f_B2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 20;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final int C2 = A * B;] => [/** @public {number} */
+[public final int C2 = A * B;] => [/** @public {number} @const */
     this.f_C2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 200;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final String D2 = "Tur\"tle";] => [/** @public {?string} */
+[public final String D2 = "Tur\"tle";] => [/** @public {?string} @const */
     this.f_D2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Tur\"tle";] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final String E2 = "Do\"ve";] => [/** @public {?string} */
+[public final String E2 = "Do\"ve";] => [/** @public {?string} @const */
     this.f_E2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Do\"ve";] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final String F2 = D2 + E2;] => [/** @public {?string} */
+[public final String F2 = D2 + E2;] => [/** @public {?string} @const */
     this.f_F2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Tur\"tleDo\"ve";] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final long G2 = 10000L;] => [/** @public {!$Long} */
+[public final long G2 = 10000L;] => [/** @public {!$Long} @const */
     this.f_G2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = $Long.fromBits(10000, 0) /* 10000 */;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final char H2 = 'A';] => [/** @public {number} */
+[public final char H2 = 'A';] => [/** @public {number} @const */
     this.f_H2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 65 /* "A" */;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
-[public final boolean I2 = G2 > 100;] => [/** @public {boolean} */
+[public final boolean I2 = G2 > 100;] => [/** @public {boolean} @const */
     this.f_I2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = true;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<synthetic: ctor_js>"
 [public class CompileTimeConstant {
   public static final Object OBJ = null;
@@ -51,3 +51,49 @@
 ...  public final boolean I2 = G2 > 100;
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<clinit>"
 [public static final Object OBJ = null;] => [CompileTimeConstant.$f_OBJ__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = null;] "com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant.<clinit>"
+[public class CompileTimeConstant {
+  public static final Object OBJ = null;
+
+  public static final int A = 10;
+  public static final int B = 20;
+  public static final int C = A * B;
+
+  public static final String D = "Tur\"tle";
+  public static final String E = "Do\"ve";
+  public static final String F = D + E;
+
+  public static final long G = 10000L;
+  public static final char H = 'A';
+  public static final boolean I = G > 100;
+
+  public final int A2 = 10;
+  public final int B2 = 20;
+  public final int C2 = A * B;
+
+  public final String D2 = "Tur\"tle";
+  public final String E2 = "Do\"ve";
+  public final String F2 = D2 + E2;
+
+  public final long G2 = 10000L;
+  public final char H2 = 'A';
+  public final boolean I2 = G2 > 100;
+}] => [/** @private {*} */
+CompileTimeConstant.$f_OBJ__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant;]
+[public static final int A = 10;] => [/** @public {number} @const */
+CompileTimeConstant.f_A__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 10;]
+[public static final int B = 20;] => [/** @public {number} @const */
+CompileTimeConstant.f_B__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 20;]
+[public static final int C = A * B;] => [/** @public {number} @const */
+CompileTimeConstant.f_C__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 200;]
+[public static final String D = "Tur\"tle";] => [/** @public {?string} @const */
+CompileTimeConstant.f_D__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Tur\"tle";]
+[public static final String E = "Do\"ve";] => [/** @public {?string} @const */
+CompileTimeConstant.f_E__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Do\"ve";]
+[public static final String F = D + E;] => [/** @public {?string} @const */
+CompileTimeConstant.f_F__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = "Tur\"tleDo\"ve";]
+[public static final long G = 10000L;] => [/** @public {!$Long} @const */
+CompileTimeConstant.f_G__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = $Long.fromBits(10000, 0) /* 10000 */;]
+[public static final char H = 'A';] => [/** @public {number} @const */
+CompileTimeConstant.f_H__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = 65 /* "A" */;]
+[public static final boolean I = G > 100;] => [/** @public {boolean} @const */
+CompileTimeConstant.f_I__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant = true;]

@@ -35,7 +35,8 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
+import com.google.j2cl.ast.JsDocFieldDeclaration;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -118,16 +119,27 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
-        String jsdoc = closureTypesGenerator.getClosureTypeString(annotation.getTypeDescriptor());
-        if (annotation.isDeclaration()) {
-          sourceBuilder.appendln("/** @public {" + jsdoc + "} */");
-          process(annotation.getExpression());
-        } else {
-          sourceBuilder.append("/**@type {" + jsdoc + "} */ (");
-          process(annotation.getExpression());
-          sourceBuilder.append(")");
-        }
+      public Void transformJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
+        String jsdoc =
+            closureTypesGenerator.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
+        sourceBuilder.append("/**@type {" + jsdoc + "} */ (");
+        process(jsDocCastExpression.getExpression());
+        sourceBuilder.append(")");
+        return null;
+      }
+
+      @Override
+      public Void transformJsDocFieldDeclaration(JsDocFieldDeclaration declaration) {
+        String jsdoc = closureTypesGenerator.getClosureTypeString(declaration.getTypeDescriptor());
+        sourceBuilder.appendln(
+            "/** "
+                + (declaration.isPublic() ? "@public" : "@private")
+                + " {"
+                + jsdoc
+                + "} "
+                + (declaration.isConst() ? "@const " : "")
+                + "*/");
+        process(declaration.getExpression());
         return null;
       }
 

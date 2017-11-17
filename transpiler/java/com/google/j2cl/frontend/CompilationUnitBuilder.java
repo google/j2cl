@@ -58,7 +58,7 @@ import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -1428,9 +1428,9 @@ public class CompilationUnitBuilder {
       if (JdtUtils.hasUncheckedCastAnnotation(methodBinding)) {
         // Annotate the invocation with the expected type. When InsertErasureSureTypeSafetyCasts
         // runs, this invocation will be skipped as it will no longer be an assignment context.
-        return JsDocAnnotatedExpression.newBuilder()
+        return JsDocCastExpression.newBuilder()
             .setExpression(methodCall)
-            .setAnnotationType(methodDescriptor.getReturnTypeDescriptor())
+            .setCastType(methodDescriptor.getReturnTypeDescriptor())
             .build();
       }
       return methodCall;

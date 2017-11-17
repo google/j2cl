@@ -22,11 +22,11 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.Node;
 
 /** Removes unneeded JsDocAnnotations that arise from transformations. */
-public final class RemoveUnneededJsDocAnnotations extends NormalizationPass {
+public final class RemoveUnneededJsDocCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -39,13 +39,13 @@ public final class RemoveUnneededJsDocAnnotations extends NormalizationPass {
           }
 
           @Override
-          public Node rewriteJsDocAnnotatedExpression(final JsDocAnnotatedExpression expression) {
+          public Node rewriteJsDocCastExpression(final JsDocCastExpression expression) {
             // Nested JsDoc cast annotations don't provide any extra information to JS type
             // checkers. Remove the extras.
             Expression innerExpressionWithoutTypeAnnotation =
-                AstUtils.removeTypeAnnotationIfPresent(expression.getExpression());
+                AstUtils.removeJsDocCastIfPresent(expression.getExpression());
             if (innerExpressionWithoutTypeAnnotation != expression.getExpression()) {
-              return JsDocAnnotatedExpression.Builder.from(expression)
+              return JsDocCastExpression.Builder.from(expression)
                   .setExpression(innerExpressionWithoutTypeAnnotation)
                   .build();
             }

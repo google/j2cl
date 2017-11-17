@@ -24,7 +24,7 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
@@ -167,9 +167,8 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             // we chose the to see expressions typed at an intersection cast as being explicitly
             // typed at the first component, which is also consistent with the JVM type (the erasure
             // of an intersection cast is the erasure of its first component).
-            return JsDocAnnotatedExpression.newBuilder()
-                .setAnnotationType(
-                    intersectionTypeDescriptor.getIntersectionTypeDescriptors().get(0))
+            return JsDocCastExpression.newBuilder()
+                .setCastType(intersectionTypeDescriptor.getIntersectionTypeDescriptors().get(0))
                 .setExpression(expression)
                 .build();
           }
@@ -220,9 +219,9 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     }
 
     // No cast needed. Going from an intersection to a member type just requires a type annotation.
-    return JsDocAnnotatedExpression.newBuilder()
+    return JsDocCastExpression.newBuilder()
         .setExpression(expression)
-        .setAnnotationType(targetInstanceTypeDescriptor)
+        .setCastType(targetInstanceTypeDescriptor)
         .build();
   }
 

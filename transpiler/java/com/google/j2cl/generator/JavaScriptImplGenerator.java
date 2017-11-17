@@ -30,7 +30,6 @@ import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
@@ -607,38 +606,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderStaticFieldDeclarations() {
     for (Field staticField : type.getStaticFields()) {
-      String closureTypeString =
-          closureTypesGenerator.getClosureTypeString(
-              staticField.getDescriptor().getTypeDescriptor());
-
-      if (staticField.isCompileTimeConstant()) {
-        sourceBuilder.appendLines(
-            "/**", " * @public {" + closureTypeString + "}", " * @const", " */");
-      } else {
-        sourceBuilder.appendLines("/**", " * @private {" + closureTypeString + "}", " */");
-      }
-
-      // TODO(rluble): Move all top level initializations to the AST.
-      sourceBuilder.newLine();
-      String fieldName = ManglingNameUtils.getMangledName(staticField.getDescriptor());
-      sourceBuilder.append(className + "." + fieldName);
-      Expression initialValue = getInitialValue(staticField);
-      if (initialValue != NullLiteral.get()) {
-        // Only initialize static fields that are initialized to non null constants. Otherwise
-        // leave undefined which is semantically equivalent in J2cl.
-        sourceBuilder.append(" = ");
-        renderExpression(initialValue);
-      }
-      sourceBuilder.append(";");
+      statementTranspiler.renderStatement(
+          AstUtils.declarationStatement(staticField, type.getSourcePosition()));
       // emit 2 empty lines
       sourceBuilder.newLines(3);
     }
-  }
-
-  private static Expression getInitialValue(Field field) {
-    return field.getInitializer() != null
-        ? field.getInitializer()
-        : TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
   /**

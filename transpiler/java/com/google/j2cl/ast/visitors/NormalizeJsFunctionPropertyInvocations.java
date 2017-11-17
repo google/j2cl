@@ -21,7 +21,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
@@ -106,7 +106,7 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
         || qualifier instanceof ArrayAccess
         || qualifier instanceof MultiExpression
         || qualifier instanceof ConditionalExpression
-        || qualifier instanceof JsDocAnnotatedExpression
+        || qualifier instanceof JsDocCastExpression
         || (qualifier instanceof MethodCall
             && ((MethodCall) qualifier).getTarget().isJsPropertyGetter());
   }

@@ -45,3 +45,23 @@
 [public long bar = foo++;] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<init>"
 [public long bar = foo++;] => [this.f_bar__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = ($value = StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */), $value);] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<init>"
 [foo++;] => [StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $LongUtils.$plus(StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment, $Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.staticfieldcompoundassignment.StaticFieldCompoundAssignment.<init>"
+[public class StaticFieldCompoundAssignment {
+  public static long one = 1;
+  public static long foo = one++;
+  public long bar = foo++;
+
+  {
+    foo++;
+  }
+}] => [/** @private {!$Long} */
+StaticFieldCompoundAssignment.$f_one__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Long.fromBits(0, 0) /* 0 */;]
+[public class StaticFieldCompoundAssignment {
+  public static long one = 1;
+  public static long foo = one++;
+  public long bar = foo++;
+
+  {
+    foo++;
+  }
+}] => [/** @private {!$Long} */
+StaticFieldCompoundAssignment.$f_foo__com_google_j2cl_transpiler_readable_staticfieldcompoundassignment_StaticFieldCompoundAssignment = $Long.fromBits(0, 0) /* 0 */;]

@@ -52,3 +52,77 @@
 [staticWithBlock = Yar.b;] => [Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = Yar.f_b__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yar;] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.<clinit>"
 [private String instanceField = Yo.a;] => [this.f_instanceField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yo;] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.<init>"
 [instanceWithBlock = Yar.b;] => [this.f_instanceWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ = Yar.f_b__com_google_j2cl_transpiler_readable_callsiteclinit_Main_Yar;] "com.google.j2cl.transpiler.readable.callsiteclinit.Main.<init>"
+[public class Main {
+  public static class Yo {
+    public static String a = "asdf";
+  }
+
+  public static class Yar {
+    public static String b = "qwerty";
+  }
+
+  public static class Yas {
+    public static String c = "string";
+  }
+
+  private static String staticField = Yo.a;
+
+  private static String staticWithBlock;
+
+  static {
+    String temp = Yas.c;
+    {
+      // Test inner block.
+      staticWithBlock = Yar.b;
+    }
+  }
+
+  private String instanceField = Yo.a;
+  private String instanceWithBlock;
+
+  {
+    instanceWithBlock = Yar.b;
+  }
+
+  public void asdf() {
+    String insideMethod = Yo.a;
+  }
+}] => [/** @private {?string} */
+Main.$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_;]
+[public class Main {
+  public static class Yo {
+    public static String a = "asdf";
+  }
+
+  public static class Yar {
+    public static String b = "qwerty";
+  }
+
+  public static class Yas {
+    public static String c = "string";
+  }
+
+  private static String staticField = Yo.a;
+
+  private static String staticWithBlock;
+
+  static {
+    String temp = Yas.c;
+    {
+      // Test inner block.
+      staticWithBlock = Yar.b;
+    }
+  }
+
+  private String instanceField = Yo.a;
+  private String instanceWithBlock;
+
+  {
+    instanceWithBlock = Yar.b;
+  }
+
+  public void asdf() {
+    String insideMethod = Yo.a;
+  }
+}] => [/** @private {?string} */
+Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_;]

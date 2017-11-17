@@ -120,13 +120,21 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
-        if (annotation.isDeclaration()) {
-          print(J2clUtils.format("/** @public {%s} */ ", annotation.getTypeDescriptor()));
-        } else {
-          print(J2clUtils.format("/** @type {%s} */ ", annotation.getTypeDescriptor()));
-        }
-        accept(annotation.getExpression());
+      public boolean enterJsDocCastExpression(JsDocCastExpression castExpression) {
+        print(J2clUtils.format("/** @type {%s} */ ", castExpression.getTypeDescriptor()));
+        accept(castExpression.getExpression());
+        return false;
+      }
+
+      @Override
+      public boolean enterJsDocFieldDeclaration(JsDocFieldDeclaration fieldDeclaration) {
+        print(
+            J2clUtils.format(
+                "/** %s {%s} %s */ ",
+                fieldDeclaration.isPublic() ? "@public" : "@private",
+                fieldDeclaration.getTypeDescriptor(),
+                fieldDeclaration.isConst() ? "@const" : ""));
+        accept(fieldDeclaration.getExpression());
         return false;
       }
 

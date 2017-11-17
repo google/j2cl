@@ -39,3 +39,47 @@
   public static int a;
 ...  }
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.<clinit>"
+[public class StaticFieldAccessLevels {
+  public static int a;
+  private static boolean b;
+  protected static Object c;
+  static int d;
+
+  public int test() {
+    return b ? a : StaticFieldAccessLevels.d;
+  }
+}] => [/** @private {number} */
+StaticFieldAccessLevels.$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels = 0;]
+[public class StaticFieldAccessLevels {
+  public static int a;
+  private static boolean b;
+  protected static Object c;
+  static int d;
+
+  public int test() {
+    return b ? a : StaticFieldAccessLevels.d;
+  }
+}] => [/** @private {boolean} */
+StaticFieldAccessLevels.$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ = false;]
+[public class StaticFieldAccessLevels {
+  public static int a;
+  private static boolean b;
+  protected static Object c;
+  static int d;
+
+  public int test() {
+    return b ? a : StaticFieldAccessLevels.d;
+  }
+}] => [/** @private {*} */
+StaticFieldAccessLevels.$f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;]
+[public class StaticFieldAccessLevels {
+  public static int a;
+  private static boolean b;
+  protected static Object c;
+  static int d;
+
+  public int test() {
+    return b ? a : StaticFieldAccessLevels.d;
+  }
+}] => [/** @private {number} */
+StaticFieldAccessLevels.$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels = 0;]

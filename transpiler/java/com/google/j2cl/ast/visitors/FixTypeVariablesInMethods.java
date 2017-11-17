@@ -23,7 +23,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -44,8 +44,8 @@ import java.util.function.Predicate;
  *
  * <p>To avoid warnings by JsCompiler this pass replaces these "unreferenceable" template variables
  * by their bound. Note that there are only two AST construct of interest: {@link
- * JsDocAnnotatedExpression} and {@link FunctionExpression} because these are the only ones that
- * emit JsDoc inline (and therefore can produce template references).
+ * JsDocCastExpression} and {@link FunctionExpression} because these are the only ones that emit
+ * JsDoc inline (and therefore can produce template references).
  */
 public class FixTypeVariablesInMethods extends NormalizationPass {
   @Override
@@ -134,16 +134,13 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
     }
 
     @Override
-    public Node rewriteJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
-      if (annotation.isDeclaration()) {
-        return annotation;
-      }
+    public Node rewriteJsDocCastExpression(JsDocCastExpression annotation) {
       TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
       TypeDescriptor replacedTypeDescriptor =
           replaceTypeVariableWithBound(castTypeDescriptor, shouldBeReplaced);
-      return JsDocAnnotatedExpression.newBuilder()
+      return JsDocCastExpression.newBuilder()
           .setExpression(annotation.getExpression())
-          .setAnnotationType(replacedTypeDescriptor)
+          .setCastType(replacedTypeDescriptor)
           .build();
     }
 

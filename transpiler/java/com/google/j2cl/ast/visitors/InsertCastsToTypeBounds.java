@@ -19,7 +19,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -119,8 +119,8 @@ public class InsertCastsToTypeBounds extends NormalizationPass {
 
     TypeDescriptor typeDescriptor = qualifier.getTypeDescriptor();
     if (isBoundedTypeVariable(typeDescriptor)) {
-      return JsDocAnnotatedExpression.newBuilder()
-          .setAnnotationType(typeDescriptor.getRawTypeDescriptor())
+      return JsDocCastExpression.newBuilder()
+          .setCastType(typeDescriptor.getRawTypeDescriptor())
           .setExpression(qualifier)
           .build();
     }

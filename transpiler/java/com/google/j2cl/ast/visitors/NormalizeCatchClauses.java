@@ -28,7 +28,7 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -136,9 +136,9 @@ public class NormalizeCatchClauses extends NormalizationPass {
         VariableDeclarationExpression.newBuilder()
             .addVariableDeclaration(
                 catchVariable,
-                JsDocAnnotatedExpression.newBuilder()
+                JsDocCastExpression.newBuilder()
                     .setExpression(exceptionVariable.getReference())
-                    .setAnnotationType(catchVariable.getTypeDescriptor())
+                    .setCastType(catchVariable.getTypeDescriptor())
                     .build())
             .build()
             .makeStatement(currentClauseSourcePosition);

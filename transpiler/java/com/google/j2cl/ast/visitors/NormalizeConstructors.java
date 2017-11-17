@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
@@ -56,7 +57,6 @@ import java.util.List;
  * into calls to these factory methods.
  */
 public class NormalizeConstructors extends NormalizationPass {
-
   /**
    * This pass transforms Java constructors into methods with the $ctor prefix, and synthesizes a
    * single constructor per class (which will end up being the actual Javascript ES6 constructor).
@@ -222,7 +222,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     SourcePosition jsConstructorSourcePosition = jsConstructor.getSourcePosition();
     List<Statement> body =
-        AstUtils.generateInstanceFieldDeclarationStatements(type, jsConstructorSourcePosition);
+        generateInstanceFieldDeclarationStatements(type, jsConstructorSourcePosition);
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(jsConstructor.getDescriptor());
@@ -257,8 +257,7 @@ public class NormalizeConstructors extends NormalizationPass {
   private static Method synthesizePrivateConstructor(Type type) {
     SourcePosition sourcePosition = type.getSourcePosition();
 
-    List<Statement> body =
-        AstUtils.generateInstanceFieldDeclarationStatements(type, sourcePosition);
+    List<Statement> body = generateInstanceFieldDeclarationStatements(type, sourcePosition);
 
     if (type.getDeclaration().getSuperTypeDescriptor() != null) {
       body.add(
@@ -516,5 +515,13 @@ public class NormalizeConstructors extends NormalizationPass {
         .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
         .setParameterDescriptors(constructorDescriptor.getParameterDescriptors())
         .build();
+  }
+
+  private static List<Statement> generateInstanceFieldDeclarationStatements(
+      Type type, SourcePosition sourcePosition) {
+    return type.getInstanceFields()
+        .stream()
+        .map(field -> AstUtils.declarationStatement(field, sourcePosition))
+        .collect(toList());
   }
 }

@@ -15,7 +15,7 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 
@@ -31,9 +31,9 @@ public class InsertCastOnNewInstances extends NormalizationPass {
               return newInstance;
             }
             // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-            return JsDocAnnotatedExpression.newBuilder()
+            return JsDocCastExpression.newBuilder()
                 .setExpression(newInstance)
-                .setAnnotationType(newInstance.getTypeDescriptor().toNonNullable())
+                .setCastType(newInstance.getTypeDescriptor().toNonNullable())
                 .build();
           }
         });

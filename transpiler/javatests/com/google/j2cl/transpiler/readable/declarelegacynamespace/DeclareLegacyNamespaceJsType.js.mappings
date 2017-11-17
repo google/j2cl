@@ -34,3 +34,16 @@ public abstract class DeclareLegacyNamespaceJsType {
     @Override
 ...    }
   };] => [DeclareLegacyNamespaceJsType.$f_TRUTHY__com_google_j2cl_transpiler_readable_declarelegacynamespace_DeclareLegacyNamespaceJsType = new $1();] "com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType.<clinit>"
+[@JsType
+public abstract class DeclareLegacyNamespaceJsType {
+
+  public static final DeclareLegacyNamespaceJsType TRUTHY = new DeclareLegacyNamespaceJsType() {
+    @Override
+    public boolean foo() {
+      return true;
+    }
+  };
+
+  public abstract boolean foo();
+}] => [/** @private {DeclareLegacyNamespaceJsType} */
+DeclareLegacyNamespaceJsType.$f_TRUTHY__com_google_j2cl_transpiler_readable_declarelegacynamespace_DeclareLegacyNamespaceJsType;]

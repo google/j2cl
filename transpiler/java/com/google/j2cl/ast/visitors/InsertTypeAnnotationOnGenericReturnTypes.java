@@ -19,7 +19,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -40,7 +40,7 @@ public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass 
 
   private static class Rewriter extends AbstractRewriter {
     @Override
-    public boolean shouldProcessJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
+    public boolean shouldProcessJsDocCastExpression(JsDocCastExpression annotation) {
       if (annotation.getExpression() instanceof MethodCall) {
         MethodCall methodCall = (MethodCall) annotation.getExpression();
         for (Expression expression : methodCall.getArguments()) {
@@ -74,9 +74,9 @@ public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass 
       if (methodDeclaresTypeVariables
           && methodReturnHasTypeVariables
           && methodReturnIsGenericType) {
-        return JsDocAnnotatedExpression.newBuilder()
+        return JsDocCastExpression.newBuilder()
             .setExpression(methodCall)
-            .setAnnotationType(methodCall.getTypeDescriptor())
+            .setCastType(methodCall.getTypeDescriptor())
             .build();
       }
       return methodCall;

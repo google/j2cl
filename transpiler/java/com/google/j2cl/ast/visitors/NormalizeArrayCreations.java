@@ -24,7 +24,7 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
@@ -125,9 +125,9 @@ public class NormalizeArrayCreations extends NormalizationPass {
    */
   private static Expression createNonNullableAnnotation(
       Expression expression, TypeDescriptor typeDescriptor) {
-    return JsDocAnnotatedExpression.newBuilder()
+    return JsDocCastExpression.newBuilder()
         .setExpression(expression)
-        .setAnnotationType(typeDescriptor.toNonNullable())
+        .setCastType(typeDescriptor.toNonNullable())
         .build();
   }
 }

@@ -69,3 +69,89 @@
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.<clinit>"
 [public static int staticField = 100;] => [InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 100;] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.<clinit>"
 [public static int sideEffectCount = 0;] => [InstanceQualifiers.$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 0;] "com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers.<clinit>"
+[public class InstanceQualifiers {
+  public static int staticField = 100;
+  public static int sideEffectCount = 0;
+
+  public static int getStaticValue() {
+    return staticField;
+  }
+
+  public static InstanceQualifiers getStaticInstanceQualifiers() {
+    return null;
+  }
+
+  public static void main(String... args) {
+    InstanceQualifiers main = new InstanceQualifiers();
+    int i = 0;
+
+    {
+      staticField = 100;
+    }
+
+    {
+      main.staticField = 100;
+      main.getStaticInstanceQualifiers().staticField = 300;
+    }
+
+    {
+      i = main.staticField;
+      i = main.getStaticValue();
+      i = main.getStaticInstanceQualifiers().staticField;
+    }
+
+    {
+      main.staticField += 100;
+      main.getStaticInstanceQualifiers().staticField += 100;
+    }
+
+    {
+      main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField +=
+          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();
+    }
+  }
+}] => [/** @private {number} */
+InstanceQualifiers.$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 0;]
+[public class InstanceQualifiers {
+  public static int staticField = 100;
+  public static int sideEffectCount = 0;
+
+  public static int getStaticValue() {
+    return staticField;
+  }
+
+  public static InstanceQualifiers getStaticInstanceQualifiers() {
+    return null;
+  }
+
+  public static void main(String... args) {
+    InstanceQualifiers main = new InstanceQualifiers();
+    int i = 0;
+
+    {
+      staticField = 100;
+    }
+
+    {
+      main.staticField = 100;
+      main.getStaticInstanceQualifiers().staticField = 300;
+    }
+
+    {
+      i = main.staticField;
+      i = main.getStaticValue();
+      i = main.getStaticInstanceQualifiers().staticField;
+    }
+
+    {
+      main.staticField += 100;
+      main.getStaticInstanceQualifiers().staticField += 100;
+    }
+
+    {
+      main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField +=
+          main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue();
+    }
+  }
+}] => [/** @private {number} */
+InstanceQualifiers.$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers = 0;]

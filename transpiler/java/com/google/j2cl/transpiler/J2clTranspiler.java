@@ -58,7 +58,7 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
-import com.google.j2cl.ast.visitors.NormalizeJsDocAnnotatedExpression;
+import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
@@ -69,7 +69,7 @@ import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
-import com.google.j2cl.ast.visitors.RemoveUnneededJsDocAnnotations;
+import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -254,8 +254,8 @@ public class J2clTranspiler {
             // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
             // to template variables.
             new InsertCastsToTypeBounds(),
-            new RemoveUnneededJsDocAnnotations(),
-            new NormalizeJsDocAnnotatedExpression(),
+            new RemoveUnneededJsDocCasts(),
+            new NormalizeJsDocCastExpressions(),
 
             // Dodge OTI limitations.
             new UnimplementedMethodsCreator(),

@@ -20,7 +20,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -30,25 +30,23 @@ import com.google.j2cl.ast.TypeDescriptors;
  * <p>They are functionally equivalent except that the first trips up JSCompiler's unknown
  * properties checker.
  */
-public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
+public class NormalizeJsDocCastExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Expression rewriteJsDocAnnotatedExpression(
-              JsDocAnnotatedExpression jsDocAnnotatedExpression) {
-            TypeDescriptor typeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
-            if (jsDocAnnotatedExpression.isDeclaration()
-                || !(typeDescriptor instanceof DeclaredTypeDescriptor)) {
-              return jsDocAnnotatedExpression;
+          public Expression rewriteJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
+            TypeDescriptor typeDescriptor = jsDocCastExpression.getTypeDescriptor();
+            if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
+              return jsDocCastExpression;
             }
 
             DeclaredTypeDescriptor annotationTypeDescriptor =
                 (DeclaredTypeDescriptor) typeDescriptor;
 
             if (!annotationTypeDescriptor.hasTypeArguments()) {
-              return jsDocAnnotatedExpression;
+              return jsDocCastExpression;
             }
 
             Iterable<TypeDescriptor> typeArgumentTypeDescriptors =
@@ -58,8 +56,8 @@ public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
                         typeArgument.isWildCardOrCapture()
                             ? TypeDescriptors.get().javaLangObject
                             : typeArgument);
-            return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
-                .setAnnotationType(
+            return JsDocCastExpression.Builder.from(jsDocCastExpression)
+                .setCastType(
                     DeclaredTypeDescriptor.Builder.from(annotationTypeDescriptor)
                         .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
                         .build())

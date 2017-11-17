@@ -108,3 +108,108 @@
 ...  }
 }] => [Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = null;] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
 [int foo = Enum1.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1.ordinal();] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
+[enum Enum2 {
+  VALUE1(2),
+  VALUE2(Enum1.V1),
+  VALUE3,
+  VALUE4(5) {};
+
+  int foo = Enum1.V1.ordinal();
+
+  Enum2(int foo) {
+    this.foo = foo;
+  }
+
+  Enum2(Enum foo) {
+    this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
+  }
+}] => [/** @private {!Enum2} */
+Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2;]
+[enum Enum2 {
+  VALUE1(2),
+  VALUE2(Enum1.V1),
+  VALUE3,
+  VALUE4(5) {};
+
+  int foo = Enum1.V1.ordinal();
+
+  Enum2(int foo) {
+    this.foo = foo;
+  }
+
+  Enum2(Enum foo) {
+    this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
+  }
+}] => [/** @private {!Enum2} */
+Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2;]
+[enum Enum2 {
+  VALUE1(2),
+  VALUE2(Enum1.V1),
+  VALUE3,
+  VALUE4(5) {};
+
+  int foo = Enum1.V1.ordinal();
+
+  Enum2(int foo) {
+    this.foo = foo;
+  }
+
+  Enum2(Enum foo) {
+    this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
+  }
+}] => [/** @private {!Enum2} */
+Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2;]
+[enum Enum2 {
+  VALUE1(2),
+  VALUE2(Enum1.V1),
+  VALUE3,
+  VALUE4(5) {};
+
+  int foo = Enum1.V1.ordinal();
+
+  Enum2(int foo) {
+    this.foo = foo;
+  }
+
+  Enum2(Enum foo) {
+    this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
+  }
+}] => [/** @private {!Enum2} */
+Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2;]
+[enum Enum2 {
+  VALUE1(2),
+  VALUE2(Enum1.V1),
+  VALUE3,
+  VALUE4(5) {};
+
+  int foo = Enum1.V1.ordinal();
+
+  Enum2(int foo) {
+    this.foo = foo;
+  }
+
+  Enum2(Enum foo) {
+    this(foo.ordinal());
+  }
+
+  Enum2(Object... somePars) {
+    this(somePars.length);
+  }
+}] => [/** @private {Map<?string, !Enum2>} */
+Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_;]

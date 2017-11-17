@@ -83,8 +83,7 @@ public class CastExpression extends Expression {
     }
 
     public CastExpression build() {
-      return new CastExpression(
-          AstUtils.removeTypeAnnotationIfPresent(expression), castTypeDescriptor);
+      return new CastExpression(AstUtils.removeJsDocCastIfPresent(expression), castTypeDescriptor);
     }
   }
 }

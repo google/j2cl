@@ -23,7 +23,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsDocAnnotatedExpression;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -62,16 +62,16 @@ public class NormalizeCasts extends NormalizationPass {
 
     Expression resultingExpression = createCheckCastCall(castExpression);
     // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.newBuilder()
+    return JsDocCastExpression.newBuilder()
         .setExpression(resultingExpression)
-        .setAnnotationType(castExpression.getCastTypeDescriptor())
+        .setCastType(castExpression.getCastTypeDescriptor())
         .build();
   }
 
   private static Expression createCheckCastCall(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     // Avoid pointlessly nesting type annotations inside of runtime cast calls.
-    Expression expression = AstUtils.removeTypeAnnotationIfPresent(castExpression.getExpression());
+    Expression expression = AstUtils.removeJsDocCastIfPresent(castExpression.getExpression());
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -97,9 +97,9 @@ public class NormalizeCasts extends NormalizationPass {
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall = createArrayCastCall(castExpression);
     // /**@type {}*/ ()
-    return JsDocAnnotatedExpression.newBuilder()
+    return JsDocCastExpression.newBuilder()
         .setExpression(castMethodCall)
-        .setAnnotationType(arrayCastTypeDescriptor)
+        .setCastType(arrayCastTypeDescriptor)
         .build();
   }
 

@@ -37,3 +37,51 @@ public class JsIgnoreExample {
 [@JsIgnore
   public static int notExportedField = 20;] => [JsIgnoreExample.$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 20;] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
 [public static final Object CONSTNAME = new Object();] => [JsIgnoreExample.$f_CONSTNAME__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
+[@JsType
+public class JsIgnoreExample {
+
+  public static void exportedFunction() {}
+
+  @JsIgnore
+  public static void notExportedFunction() {}
+
+  public static int exportedField = 10;
+
+  @JsIgnore
+  public static int notExportedField = 20;
+
+  public static final Object CONSTNAME = new Object();
+}] => [/** @private {number} */
+JsIgnoreExample.$f_exportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 0;]
+[@JsType
+public class JsIgnoreExample {
+
+  public static void exportedFunction() {}
+
+  @JsIgnore
+  public static void notExportedFunction() {}
+
+  public static int exportedField = 10;
+
+  @JsIgnore
+  public static int notExportedField = 20;
+
+  public static final Object CONSTNAME = new Object();
+}] => [/** @private {number} */
+JsIgnoreExample.$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 0;]
+[@JsType
+public class JsIgnoreExample {
+
+  public static void exportedFunction() {}
+
+  @JsIgnore
+  public static void notExportedFunction() {}
+
+  public static int exportedField = 10;
+
+  @JsIgnore
+  public static int notExportedField = 20;
+
+  public static final Object CONSTNAME = new Object();
+}] => [/** @private {*} */
+JsIgnoreExample.$f_CONSTNAME__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample;]
