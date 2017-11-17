@@ -490,12 +490,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .collect(joining(", ", "<", ">"));
   }
 
-  @Override
-  @Memoized
-  public int hashCode() {
-    return super.hashCode();
-  }
-
   /**
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
@@ -739,11 +733,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         return replacementTypeArgumentByTypeVariable.apply(this);
     }
     throw new AssertionError(getKind());
-  }
-
-  @Override
-  public String toString() {
-    return getUniqueId();
   }
 
   /** Returns a description that is useful for error messages. */

@@ -16,7 +16,6 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -29,53 +28,6 @@ import javax.annotation.Nullable;
 @Visitable
 public abstract class TypeDescriptor extends Node
     implements Comparable<TypeDescriptor>, HasReadableDescription, HasQualifiedBinaryName {
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_TypeDescriptor.visit(processor, this);
-  }
-
-  @Override
-  public int compareTo(TypeDescriptor that) {
-    return getUniqueId().compareTo(that.getUniqueId());
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == null) {
-      return false;
-    }
-
-    if (o == this) {
-      return true;
-    }
-
-    if (getClass().equals(o.getClass())) {
-      return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
-    }
-    return false;
-  }
-
-  public boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
-    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
-    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
-    // not consistent, in particular the second form does not propagate the removal of type
-    // variables inward. These two construction end up with different data but with the same unique
-    // id, so the first one that is constructed will be interned and used everywhere.
-    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
-    // the wrong information be used in some cases.
-
-    // For type variables, wildcards and captures we still need to do getRawTypeDescriptor to get
-    // the bound.
-    TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? getRawTypeDescriptor() : this;
-    other =
-        other.isTypeVariable() || other.isWildCardOrCapture()
-            ? other.getRawTypeDescriptor()
-            : other;
-    return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
-  }
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
   public String getSimpleBinaryName() {
@@ -91,6 +43,23 @@ public abstract class TypeDescriptor extends Node
   @Override
   public String getQualifiedBinaryName() {
     return getSimpleBinaryName();
+  }
+
+  /**
+   * Returns the unqualified simple source name like "Inner". Used when a readable name is required
+   * to refer to the type like a short alias, Debug/Error output, etc.
+   */
+  public String getSimpleSourceName() {
+    return AstUtils.getSimpleSourceName(getClassComponents());
+  }
+
+  /**
+   * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
+   * places where original name is useful (like aliasing, identifying the corressponding java type,
+   * Debug/Error output, etc.
+   */
+  public String getQualifiedSourceName() {
+    return Joiner.on(".").join(getClassComponents());
   }
 
   /**
@@ -114,7 +83,16 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
-  public abstract boolean isNullable();
+  public boolean isNative() {
+    return false;
+  }
+
+  public boolean isStarOrUnknown() {
+    return false;
+  }
+
+  /** Return whether this type can be used directly by JavaScript code. */
+  public abstract boolean canBeReferencedExternally();
 
   public boolean isPrimitive() {
     return false;
@@ -153,66 +131,14 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
-  public boolean isStarOrUnknown() {
-    return false;
-  }
-
-  public boolean isNative() {
-    return false;
-  }
-
-  /**
-   * Returns the erasure type (see definition of erasure type at
-   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
-   */
+  /** Returns the type that holds the metadata for the class type */
   @Nullable
-  public abstract TypeDescriptor getRawTypeDescriptor();
+  public abstract DeclaredTypeDescriptor getMetadataTypeDescriptor();
 
   /** Returns the functional interface implemented by the type */
   @Nullable
   public DeclaredTypeDescriptor getFunctionalInterface() {
     return null;
-  }
-
-  /** Returns the type that holds the metadata for the class type */
-  @Nullable
-  public abstract DeclaredTypeDescriptor getMetadataTypeDescriptor();
-
-  /** Returns type descriptor for the same type use the type parameters from the declaration. */
-  public abstract TypeDescriptor unparameterizedTypeDescriptor();
-
-  public boolean isAssignableTo(TypeDescriptor that) {
-    return this == that;
-  }
-
-  /** Returns all type variables that appear in the type arguments slot(s). */
-  public Set<TypeDescriptor> getAllTypeVariables() {
-    return ImmutableSet.of();
-  }
-
-  /**
-   * Returns the unqualified simple source name like "Inner". Used when a readable name is required
-   * to refer to the type like a short alias, Debug/Error output, etc.
-   */
-  public String getSimpleSourceName() {
-    return AstUtils.getSimpleSourceName(getClassComponents());
-  }
-
-  /**
-   * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
-   * places where original name is useful (like aliasing, identifying the corressponding java type,
-   * Debug/Error output, etc.
-   */
-  public String getQualifiedSourceName() {
-    return Joiner.on(".").join(getClassComponents());
-  }
-
-  /** A unique string for a give type. Used for interning. */
-  public abstract String getUniqueId();
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(getUniqueId());
   }
 
   /**
@@ -223,24 +149,27 @@ public abstract class TypeDescriptor extends Node
     return this;
   }
 
+  public abstract boolean isNullable();
+
   /** Return a nullable version of this type descriptor if possible. */
   public abstract TypeDescriptor toNullable();
 
   /** Return a non nullable version of this type descriptor if possible. */
   public abstract TypeDescriptor toNonNullable();
 
-  /** Return whether this type can be used directly by JavaScript code. */
-  public abstract boolean canBeReferencedExternally();
+  /** Returns type descriptor for the same type use the type parameters from the declaration. */
+  public abstract TypeDescriptor unparameterizedTypeDescriptor();
 
-  @Override
-  public String toString() {
-    return getUniqueId();
-  }
+  /**
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
+   */
+  @Nullable
+  public abstract TypeDescriptor getRawTypeDescriptor();
 
-  /** Returns a description that is useful for error messages. */
-  @Override
-  public String getReadableDescription() {
-    return getSimpleSourceName();
+  /** Returns all the free type variables that appear in the type. */
+  public Set<TypeDescriptor> getAllTypeVariables() {
+    return ImmutableSet.of();
   }
 
   /**
@@ -274,6 +203,76 @@ public abstract class TypeDescriptor extends Node
   /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
   public abstract TypeDescriptor specializeTypeVariables(
       Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable);
+
+  public boolean hasSameRawType(TypeDescriptor other) {
+    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
+    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
+    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
+    // not consistent, in particular the second form does not propagate the removal of type
+    // variables inward. These two construction end up with different data but with the same unique
+    // id, so the first one that is constructed will be interned and used everywhere.
+    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
+    // the wrong information be used in some cases.
+
+    // For type variables, wildcards and captures we still need to do getRawTypeDescriptor to get
+    // the bound.
+    TypeDescriptor thisTypeDescriptor =
+        isTypeVariable() || isWildCardOrCapture() ? getRawTypeDescriptor() : this;
+    other =
+        other.isTypeVariable() || other.isWildCardOrCapture()
+            ? other.getRawTypeDescriptor()
+            : other;
+    return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
+  }
+
+  public boolean isAssignableTo(TypeDescriptor that) {
+    return this == that;
+  }
+
+  /** A unique string for a give type. Used for interning. */
+  public abstract String getUniqueId();
+
+  @Override
+  public final int compareTo(TypeDescriptor that) {
+    return getUniqueId().compareTo(that.getUniqueId());
+  }
+
+  @Override
+  public final boolean equals(Object o) {
+    if (o == null) {
+      return false;
+    }
+
+    if (o == this) {
+      return true;
+    }
+
+    if (getClass().equals(o.getClass())) {
+      return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
+    }
+    return false;
+  }
+
+  @Override
+  public final int hashCode() {
+    return getUniqueId().hashCode();
+  }
+
+  @Override
+  public final String toString() {
+    return getUniqueId();
+  }
+
+  /** Returns a description that is useful for error messages. */
+  @Override
+  public String getReadableDescription() {
+    return getSimpleSourceName();
+  }
+
+  @Override
+  public Node accept(Processor processor) {
+    return Visitor_TypeDescriptor.visit(processor, this);
+  }
 
   abstract Builder toBuilder();
 
