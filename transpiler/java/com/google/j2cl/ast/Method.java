@@ -42,10 +42,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
   private boolean isOverride;
   private String jsDocDescription;
 
-  private static TypeDescriptor getEnclosingTypeDescriptor(Method method) {
-    return method.getDescriptor().getEnclosingTypeDescriptor();
-  }
-
   private Method(
       SourcePosition sourcePosition,
       MethodDescriptor methodDescriptor,
@@ -162,12 +158,12 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
     if (isConstructor()) {
       return J2clUtils.format(
           "%s(%s)",
-          getEnclosingTypeDescriptor(Method.this).getReadableDescription(), parameterString);
+          getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
     }
     return J2clUtils.format(
         "%s %s.%s(%s)",
         getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
-        getEnclosingTypeDescriptor(Method.this).getReadableDescription(),
+        getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(),
         getDescriptor().getName(),
         parameterString);
   }
