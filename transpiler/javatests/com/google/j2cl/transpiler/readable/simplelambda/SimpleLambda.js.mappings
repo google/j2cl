@@ -98,6 +98,18 @@
 [f] => [f] "f"
 [i] => [i] "i"
 [i] => [return i;] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testLambdaInStaticContext>"
+[Functional<T> wrapped = (f) -> new Functional<T>() {
+      @Override
+...      }
+    };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
+      return $1.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this);
+    })));] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.testMethodTypeVariableThrowLambda"
+[wrapped] => [wrapped] "wrapped"
+[f] => [f] "f"
+[new Functional<T>() {
+      @Override
+...      }
+    }] => [return $1.$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(this);] "com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.<lambda in testMethodTypeVariableThrowLambda>"
 [public class SimpleLambda {
   public int field = 100;
 ...  }

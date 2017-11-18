@@ -11,6 +11,8 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$1$impl');
+let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.Functional$impl');
 
 
 class SimpleLambda extends java_lang_Object {
@@ -158,6 +160,20 @@ class SimpleLambda extends java_lang_Object {
   }
 
   /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  m_testMethodTypeVariableThrowLambda__() {
+    let wrapped = /**@type {Functional<*>} */ (
+        Functional.$adapt(((/** Functional<*> */ f) => {
+          return $1
+              .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+                  this);
+        })));
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -185,6 +201,10 @@ class SimpleLambda extends java_lang_Object {
     SimpleLambda.$clinit = function() {};
     MyInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$1$impl');
+    Functional = goog.module.get(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.Functional$impl');
     java_lang_Object.$clinit();
   }
 

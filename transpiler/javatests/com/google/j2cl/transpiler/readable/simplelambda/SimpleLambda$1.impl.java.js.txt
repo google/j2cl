@@ -1,0 +1,123 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$1.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.$1$impl');
+
+
+const Functional = goog.require('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.Functional$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SimpleLambda = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$impl');
+
+
+/**
+ * @implements {Functional<M_T>}
+ */
+class $1 extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {SimpleLambda} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1 =
+        null;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'new Functional(SimpleLambda)'.
+   * @param {SimpleLambda} $outer_this
+   * @return {!$1}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+      $outer_this) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'new Functional(SimpleLambda)'.
+   * @param {SimpleLambda} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1 =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1();
+  }
+
+  /**
+   * @override
+   * @template M_T
+   * @param {Functional<M_T>} f
+   * @return {Functional<M_T>}
+   * @public
+   */
+  m_wrap__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_Functional(
+      f) {
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $1.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda_1() {}
+};
+
+$Util.$setClassMetadata(
+    $1,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$1'));
+
+
+Functional.$markImplementor($1);
+
+
+/**
+ * Export class.
+ */
+exports = $1;
+//# sourceMappingURL=SimpleLambda$1.js.map

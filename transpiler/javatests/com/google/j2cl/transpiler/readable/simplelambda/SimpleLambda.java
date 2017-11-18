@@ -73,4 +73,19 @@ public class SimpleLambda {
   public static void testLambdaInStaticContext() {
     MyInterface f = (i) -> i;
   }
+
+  interface Functional<T> {
+    Functional<T> wrap(Functional<T> f);
+  }
+
+  public <T> void testMethodTypeVariableThrowLambda() {
+    Functional<T> wrapped =
+        (f) ->
+            new Functional<T>() {
+              @Override
+              public Functional<T> wrap(Functional<T> f) {
+                return null;
+              }
+            };
+  }
 }
