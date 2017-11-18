@@ -24,14 +24,11 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
+import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
@@ -40,7 +37,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -156,38 +152,15 @@ public class NormalizeCatchClauses extends NormalizationPass {
    * Given a list of types t1, t2, t3.. and an exceptionVariable e, this method generates an
    * expression that checks if e is of type t1 or t2, or t3...
    *
-   * <p>t1.$isInstance(e) || t2.$isInstance(e) || t3.$isInstance(e) ...
+   * <p>e instance of t1 || e instanceof t2 || e instanceof t3 ...
    */
   private static Expression checkTypeExpression(
       Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
-    List<Expression> methodCalls =
+    List<InstanceOfExpression> instanceofs =
         typeDescriptors
             .stream()
-            .map(
-                typeDescriptor ->
-                    checkIsInstanceCall(
-                        (DeclaredTypeDescriptor) typeDescriptor, exceptionVariable.getReference()))
+            .map(t -> new InstanceOfExpression(null, exceptionVariable.getReference(), t))
             .collect(toImmutableList());
-    return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, methodCalls);
-    }
-
-  /**
-   * Generate method call:
-   *
-   * <p>Class.$isInstance(exceptionVariable).
-   */
-  private static MethodCall checkIsInstanceCall(
-      DeclaredTypeDescriptor descriptor, Expression exceptionVariable) {
-    MethodDescriptor methodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
-            .setStatic(true)
-            .setJsInfo(JsInfo.RAW)
-            .setEnclosingTypeDescriptor(descriptor)
-            .setVisibility(Visibility.PUBLIC)
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-            .build();
-      return MethodCall.Builder.from(methodDescriptor).setArguments(exceptionVariable).build();
-    }
+    return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, instanceofs);
+  }
 }

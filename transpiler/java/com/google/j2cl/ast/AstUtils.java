@@ -672,7 +672,7 @@ public class AstUtils {
   }
 
   public static Expression joinExpressionsWithBinaryOperator(
-      BinaryOperator operator, List<Expression> expressions) {
+      BinaryOperator operator, List<? extends Expression> expressions) {
     if (expressions.isEmpty()) {
       return null;
     }
