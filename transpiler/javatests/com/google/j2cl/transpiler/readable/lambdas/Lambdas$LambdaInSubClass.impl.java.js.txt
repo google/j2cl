@@ -1,0 +1,115 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.LambdaInSubClass$impl');
+
+
+const Parent = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
+
+
+class LambdaInSubClass extends Parent {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'LambdaInSubClass()'.
+   * @return {!LambdaInSubClass}
+   * @public
+   */
+  static $create__() {
+    LambdaInSubClass.$clinit();
+    let $instance = new LambdaInSubClass();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'LambdaInSubClass()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();
+    this.$init__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaInSubclass__() {
+    let l = FunctionalInterface.$adapt(((/** number */ i) => {
+      this.m_funInParent__();
+      this.m_funInParent__();
+      this.m_funInParent__();
+      let a =
+          this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;
+      a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;
+      a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;
+      return a;
+    }));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LambdaInSubClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaInSubClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    LambdaInSubClass.$clinit = function() {};
+    FunctionalInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
+    Parent.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass() {
+  }
+};
+
+$Util.$setClassMetadata(
+    LambdaInSubClass,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass'));
+
+
+
+/**
+ * Export class.
+ */
+exports = LambdaInSubClass;
+//# sourceMappingURL=Lambdas$LambdaInSubClass.js.map

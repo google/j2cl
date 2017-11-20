@@ -1,0 +1,117 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.lambdas.Lambdas$GenericFunctionalInterface$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
+
+
+const GenericFunctionalInterface = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template C_GenericFunctionalInterface_T
+ * @implements {GenericFunctionalInterface<C_GenericFunctionalInterface_T>}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**
+     * @public {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T}
+     */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {C_GenericFunctionalInterface_T} arg0
+   * @return {C_GenericFunctionalInterface_T}
+   * @public
+   */
+  m_m__java_lang_Object(arg0) {
+    let /**
+           ?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T
+         */
+            $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas$GenericFunctionalInterface$$LambdaAdaptor'));
+
+
+GenericFunctionalInterface.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Lambdas$GenericFunctionalInterface$$LambdaAdaptor.js.map

@@ -1,0 +1,108 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.lambdas.Lambdas$JsSupplier.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier$impl');
+
+
+const Equals = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals.$Overlay$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+
+
+/**
+ * @interface
+ * @template C_JsSupplier_T
+ * @extends {Equals<C_JsSupplier_T>}
+ */
+class JsSupplier {
+  /**
+   * @abstract
+   * @return {C_JsSupplier_T}
+   * @public
+   */
+  get() {}
+
+  /**
+   * @template C_JsSupplier_T
+   * @param {?function():C_JsSupplier_T} fn
+   * @return {JsSupplier<C_JsSupplier_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    JsSupplier.$clinit();
+    return /**@type {!$LambdaAdaptor<(Number|number)>} */ (
+        new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    Equals.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JsSupplier.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
+    Equals.$clinit();
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    JsSupplier,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas$JsSupplier'));
+
+
+JsSupplier.$markImplementor(/** @type {Function} */ (JsSupplier));
+
+
+/**
+ * Export class.
+ */
+exports = JsSupplier;
+//# sourceMappingURL=Lambdas$JsSupplier.js.map

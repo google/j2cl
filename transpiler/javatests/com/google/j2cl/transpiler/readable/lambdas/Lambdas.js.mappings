@@ -1,0 +1,419 @@
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_js>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [/** @public {number} */
+    this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_js>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_create>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [let $instance = new Lambdas();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_create>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_create>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: ctor_create>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_lambdas_Lambdas();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
+[intf] => [intf] "intf"
+[n] => [n] "n"
+[return this.field + intf.m(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + intf.m_m__int(n);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.call"
+[call(i -> i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      return i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaExpressionStyle"
+[i] => [i] "i"
+[i + 1] => [return i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaExpressionStyle>"
+[call(
+        i -> {
+...        },
+        10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      return i + 2;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaBlockStyle"
+[i] => [i] "i"
+[return i + 2;] => [return i + 2;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaBlockStyle>"
+[call(i -> field + i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureField"
+[i] => [i] "i"
+[field + i + 1] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureField>"
+[int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureLocal"
+[x] => [x] "x"
+[call(i -> x + i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      return x + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureLocal"
+[i] => [i] "i"
+[x + i + 1] => [return x + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureLocal>"
+[int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureFieldAndLocal"
+[x] => [x] "x"
+[call(
+        i -> {
+...        },
+        10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      let y = 1;
+      return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureFieldAndLocal"
+[i] => [i] "i"
+[int y = 1;] => [let y = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureFieldAndLocal>"
+[y] => [y] "y"
+[return x + y + this.field + i + 1;] => [return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureFieldAndLocal>"
+[call(
+        i -> {
+...        },
+        10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt(((/** number */ i) =>{
+      this.m_funOuter__();
+...      return i + 2;
+    })), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallOuterFunction"
+[i] => [i] "i"
+[funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
+[this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
+[Lambdas.this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
+[return i + 2;] => [return i + 2;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
+[public static void testLambdaInStaticContext() {
+    FunctionalInterface f = (i) -> i;
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaInStaticContext"
+[FunctionalInterface f = (i) -> i;] => [let f = FunctionalInterface.$adapt(((/** number */ i) =>{
+      return i;
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaInStaticContext"
+[f] => [f] "f"
+[i] => [i] "i"
+[i] => [return i;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaInStaticContext>"
+[Functional<T> wrapped =
+        (f) ->
+...              }
+            };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
+      return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testMethodTypeVariableThrowLambda"
+[wrapped] => [wrapped] "wrapped"
+[f] => [f] "f"
+[new Functional<T>() {
+              @Override
+...              }
+            }] => [return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testMethodTypeVariableThrowLambda>"
+[intf] => [intf] "intf"
+[e] => [e] "e"
+[return intf.m(e);] => [return intf.m_m__java_lang_Object(e);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callWithTypeVariable"
+[intf] => [intf] "intf"
+[e] => [e] "e"
+[return intf.m(e);] => [return /**@type {Error} */ ($Casts.$to(intf.m_m__java_lang_Object(e), Error));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callParameterized"
+[intf] => [intf] "intf"
+[e] => [e] "e"
+[public static <T extends Enum<T>> Enum<T> callTypeVariableWithBounds(
+      GenericFunctionalInterface<Enum<T>> intf, Enum<T> e) {
+    return intf.m(e);
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callTypeVariableWithBounds"
+[return intf.m(e);] => [return /**@type {Enum<Enum>} */ ($Casts.$to(intf.m_m__java_lang_Object(e), Enum));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callTypeVariableWithBounds"
+[callWithTypeVariable(i -> i, new Error());] => [this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(GenericFunctionalInterface.$adapt(((/** Error */ i) =>{
+      return i;
+    })), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+[i] => [i] "i"
+[i] => [return i;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[callParameterized(i -> i, new Error());] => [this.m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(GenericFunctionalInterface.$adapt(((/** Error */ i$1$) =>{
+      return i$1$;
+    })), Error.$create__());] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+[i] => [i$1$] "i"
+[i] => [return i$1$;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [/**@type {Enum<Enum>} */ (Lambdas.m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/**@type {GenericFunctionalInterface<Enum<Enum>>} */ (GenericFunctionalInterface.$adapt(((/** Enum<Enum> */ i$2$) =>{
+      return i$2$;
+    }))), /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+[i] => [i$2$] "i"
+[i] => [return i$2$;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[Function<? super T, ?> f = item -> 1L;] => [let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(((/** Enum */ item) =>{
+      return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+[f] => [f] "f"
+[item] => [item] "item"
+[1L] => [return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[public static Object m() {
+    return null;
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.m"
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.m"
+[public static void testLambdaCallingStaticMethod() {
+    Function<Object, ?> f = l -> m();
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallingStaticMethod"
+[Function<Object, ?> f = l -> m();] => [let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(((/** * */ l) =>{
+      return Lambdas.m_m__();
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallingStaticMethod"
+[f] => [f] "f"
+[l] => [l] "l"
+[m()] => [return Lambdas.m_m__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallingStaticMethod>"
+[FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object();] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() =>{
+      java_lang_Object.$create__();
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaReturningVoidAsExpression"
+[runner] => [runner] "runner"
+[new Object()] => [java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaReturningVoidAsExpression>"
+[FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object() {};] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() =>{
+      $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testAnonymousInsideLambda"
+[runner] => [runner] "runner"
+[new Object() {}] => [$2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testAnonymousInsideLambda>"
+[/** Returns the identity function. */
+  @SuppressWarnings("unchecked")
+...    return (GenericJsFunction<E, E>) identityFunction;
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
+[if (identityFunction == null) {
+      // Lazy initialize the field.
+      identityFunction = new IdentityFunction();
+    }] => [if ($Equality.$same(Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_, null)) {
+      Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = IdentityFunction.$create__();
+    }] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
+[identityFunction = new IdentityFunction();] => [Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = IdentityFunction.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
+[return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(*):*} */ ($Casts.$to(Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
+[public static void testJsInteropLambdas() {
+    Thenable<String> rv = (f1, f2) -> f1.apply(null);
+...    equals.get();
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[Thenable<String> rv = (f1, f2) -> f1.apply(null);] => [let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
+      f1(null);
+    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[rv] => [rv] "rv"
+[f1] => [f1] "f1"
+[f2] => [f2] "f2"
+[f1.apply(null)] => [f1(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testJsInteropLambdas>"
+[JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = JsSupplier.$adapt((() =>{
+      return Integer.m_valueOf__int(1);
+    }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[stringJsSupplier] => [stringJsSupplier] "stringJsSupplier"
+[1] => [return Integer.m_valueOf__int(1);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testJsInteropLambdas>"
+[stringJsSupplier.get();] => [stringJsSupplier.get();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[Equals equals = stringJsSupplier;] => [let equals = stringJsSupplier;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[equals] => [equals] "equals"
+[equals.equals(null);] => [equals.equals(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[equals.get();] => [equals.m_get__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[private static IdentityFunction identityFunction = null;] => [return (Lambdas.$clinit(), Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: getter>"
+[private static IdentityFunction identityFunction = null;] => [(Lambdas.$clinit(), Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = value);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: setter>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
+[private static IdentityFunction identityFunction = null;] => [Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
+[public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
+[@SuppressWarnings("unused")
+public class Lambdas {
+  public int field = 100;
+
+  interface FunctionalInterface {
+    int m(int i);
+  }
+
+  public int call(FunctionalInterface intf, int n) {
+    return this.field + intf.m(n);
+  }
+
+  public void testLambdaExpressionStyle() {
+    call(i -> i + 1, 10);
+  }
+
+  public void testLambdaBlockStyle() {
+    call(
+        i -> {
+          return i + 2;
+        },
+        10);
+  }
+
+  public void testLambdaCaptureField() {
+    call(i -> field + i + 1, 10);
+  }
+
+  public void testLambdaCaptureLocal() {
+    int x = 1;
+    call(i -> x + i + 1, 10);
+  }
+
+  public void testLambdaCaptureFieldAndLocal() {
+    int x = 1;
+    call(
+        i -> {
+          int y = 1;
+          return x + y + this.field + i + 1;
+        },
+        10);
+  }
+
+  public void funOuter() {}
+
+  public void testLambdaCallOuterFunction() {
+    call(
+        i -> {
+          funOuter();
+          this.funOuter();
+          Lambdas.this.funOuter();
+          return i + 2;
+        },
+        10);
+  }
+
+  public static void testLambdaInStaticContext() {
+    FunctionalInterface f = (i) -> i;
+  }
+
+  interface Functional<T> {
+    Functional<T> wrap(Functional<T> f);
+  }
+
+  @SuppressWarnings("unused")
+  public <T> void testMethodTypeVariableThrowLambda() {
+    Functional<T> wrapped =
+        (f) ->
+            new Functional<T>() {
+              @Override
+              public Functional<T> wrap(Functional<T> f) {
+                return null;
+              }
+            };
+  }
+
+  interface GenericFunctionalInterface<T> {
+    T m(T i);
+  }
+
+  public <T> T callWithTypeVariable(GenericFunctionalInterface<T> intf, T e) {
+    return intf.m(e);
+  }
+
+  public Error callParameterized(GenericFunctionalInterface<Error> intf, Error e) {
+    return intf.m(e);
+  }
+
+  public static <T extends Enum<T>> Enum<T> callTypeVariableWithBounds(
+      GenericFunctionalInterface<Enum<T>> intf, Enum<T> e) {
+    return intf.m(e);
+  }
+
+  // Lambdas with default methods.
+  interface BiFunction<T, U, R> {
+    R apply(T t, U u);
+
+    default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+      return (t, u) -> after.apply(this.apply(t, u));
+    }
+  }
+
+  interface Function<T, R> {
+    static <T> Function<T, T> identity() {
+      return t -> t;
+    }
+
+    R apply(T t);
+  }
+
+  public <T extends Enum<T>> void testLambdaWithGenerics() {
+    callWithTypeVariable(i -> i, new Error());
+    callParameterized(i -> i, new Error());
+    callTypeVariableWithBounds(i -> i, (Enum<T>) null);
+    Function<? super T, ?> f = item -> 1L;
+  }
+
+  public static Object m() {
+    return null;
+  }
+
+  public static void testLambdaCallingStaticMethod() {
+    Function<Object, ?> f = l -> m();
+  }
+
+  interface FunctionalInterfaceWithMethodReturningVoid {
+    void run();
+  }
+
+  public void testLambdaReturningVoidAsExpression() {
+    FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object();
+  }
+
+  public void testAnonymousInsideLambda() {
+    FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object() {};
+  }
+
+  private static class Parent {
+    public int fieldInParent;
+
+    public void funInParent() {}
+  }
+
+  private static class LambdaInSubClass extends Parent {
+    public void testLambdaInSubclass() {
+      FunctionalInterface l =
+          (i -> {
+            // call to outer class's inherited function
+            funInParent(); // this.outer.funInParent()
+            this.funInParent(); // this.outer.funInParent()
+            LambdaInSubClass.this.funInParent(); // this.outer.funInParent()
+
+            // access to outer class's inherited fields
+            int a = fieldInParent;
+            a = this.fieldInParent;
+            a = LambdaInSubClass.this.fieldInParent;
+            return a;
+          });
+    }
+  }
+
+  @JsFunction
+  public interface GenericJsFunction<R, T> {
+    R apply(T t);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  public interface Thenable<T> {
+    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
+  }
+
+  // @Nullable
+  private static IdentityFunction identityFunction = null;
+
+  /** Returns the identity function. */
+  @SuppressWarnings("unchecked")
+  public static <E> GenericJsFunction<E, E> identity() {
+    if (identityFunction == null) {
+      // Lazy initialize the field.
+      identityFunction = new IdentityFunction();
+    }
+    return (GenericJsFunction<E, E>) identityFunction;
+  }
+
+  private static final class IdentityFunction implements GenericJsFunction<Object, Object> {
+    @Override
+    public Object apply(Object o) {
+      return o;
+    }
+  }
+
+  interface Equals<T> {
+    boolean equals(Object o);
+
+    default T get() {
+      return null;
+    }
+  }
+
+  interface JsSupplier<T extends Number> extends Equals<T> {
+    @JsMethod
+    T get();
+  }
+
+  public static void testJsInteropLambdas() {
+    Thenable<String> rv = (f1, f2) -> f1.apply(null);
+    JsSupplier<Integer> stringJsSupplier = () -> 1;
+    stringJsSupplier.get();
+    Equals equals = stringJsSupplier;
+    equals.equals(null);
+    equals.get();
+  }
+}] => [/** @private {?function(*):*} */
+Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_;]

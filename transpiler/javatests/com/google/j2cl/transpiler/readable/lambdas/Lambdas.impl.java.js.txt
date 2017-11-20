@@ -1,0 +1,456 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.lambdas.Lambdas.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
+let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
+let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+let com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
+let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
+let FunctionalInterfaceWithMethodReturningVoid = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
+let GenericFunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface$impl');
+let IdentityFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.IdentityFunction$impl');
+let JsSupplier = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Void = goog.forwardDeclare('java.lang.Void$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+
+
+class Lambdas extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {number} */
+    this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 0;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Lambdas()'.
+   * @return {!Lambdas}
+   * @public
+   */
+  static $create__() {
+    Lambdas.$clinit();
+    let $instance = new Lambdas();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Lambdas()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_lambdas_Lambdas();
+  }
+
+  /**
+   * @param {FunctionalInterface} intf
+   * @param {number} n
+   * @return {number}
+   * @public
+   */
+  m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+      intf, n) {
+    return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
+        intf.m_m__int(n);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaExpressionStyle__() {
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          return i + 1;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaBlockStyle__() {
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          return i + 2;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureField__() {
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
+              i + 1;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureLocal__() {
+    let x = 1;
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          return x + i + 1;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureFieldAndLocal__() {
+    let x = 1;
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          let y = 1;
+          return x + y +
+              this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
+              i + 1;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funOuter__() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCallOuterFunction__() {
+    this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
+        FunctionalInterface.$adapt(((/** number */ i) => {
+          this.m_funOuter__();
+          this.m_funOuter__();
+          this.m_funOuter__();
+          return i + 2;
+        })),
+        10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testLambdaInStaticContext__() {
+    Lambdas.$clinit();
+    let f = FunctionalInterface.$adapt(((/** number */ i) => {
+      return i;
+    }));
+  }
+
+  /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  m_testMethodTypeVariableThrowLambda__() {
+    let wrapped = /**@type {Functional<*>} */ (
+        Functional.$adapt(((/** Functional<*> */ f) => {
+          return $1
+              .$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
+                  this);
+        })));
+  }
+
+  /**
+   * @template M_T
+   * @param {GenericFunctionalInterface<M_T>} intf
+   * @param {M_T} e
+   * @return {M_T}
+   * @public
+   */
+  m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
+      intf, e) {
+    return intf.m_m__java_lang_Object(e);
+  }
+
+  /**
+   * @param {GenericFunctionalInterface<Error>} intf
+   * @param {Error} e
+   * @return {Error}
+   * @public
+   */
+  m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
+      intf, e) {
+    return /**@type {Error} */ (
+        $Casts.$to(intf.m_m__java_lang_Object(e), Error));
+  }
+
+  /**
+   * @template M_T
+   * @param {GenericFunctionalInterface<Enum<M_T>>} intf
+   * @param {Enum<M_T>} e
+   * @return {Enum<M_T>}
+   * @public
+   */
+  static m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
+      intf, e) {
+    Lambdas.$clinit();
+    return /**@type {Enum<Enum>} */ (
+        $Casts.$to(intf.m_m__java_lang_Object(e), Enum));
+  }
+
+  /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  m_testLambdaWithGenerics__() {
+    this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
+        GenericFunctionalInterface.$adapt(((/** Error */ i) => {
+          return i;
+        })),
+        Error.$create__());
+    this.m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
+        GenericFunctionalInterface.$adapt(((/** Error */ i$1$) => {
+          return i$1$;
+        })),
+        Error.$create__());
+    /**@type {Enum<Enum>} */
+    (Lambdas
+         .m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
+             /**@type {GenericFunctionalInterface<Enum<Enum>>} */ (
+                 GenericFunctionalInterface.$adapt(
+                     ((/** Enum<Enum> */ i$2$) => {
+                       return i$2$;
+                     }))),
+             /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));
+    let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(
+        ((/** Enum */ item) => {
+          return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
+        }));
+  }
+
+  /**
+   * @return {*}
+   * @public
+   */
+  static m_m__() {
+    Lambdas.$clinit();
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testLambdaCallingStaticMethod__() {
+    Lambdas.$clinit();
+    let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(
+        ((/** * */ l) => {
+          return Lambdas.m_m__();
+        }));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaReturningVoidAsExpression__() {
+    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
+      java_lang_Object.$create__();
+    }));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testAnonymousInsideLambda__() {
+    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
+      $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+    }));
+  }
+
+  /**
+   * @template M_E
+   * @return {?function(M_E):M_E}
+   * @public
+   */
+  static m_identity__() {
+    Lambdas.$clinit();
+    if ($Equality.$same(
+            Lambdas
+                .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_,
+            null)) {
+      Lambdas
+          .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
+          IdentityFunction.$create__();
+    }
+    return /**@type {?function(*):*} */ ($Casts.$to(
+        Lambdas
+            .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_,
+        $JavaScriptFunction));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testJsInteropLambdas__() {
+    Lambdas.$clinit();
+    let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(
+        ((/** ?function(?string):?void */ f1,
+          /** ?function(Throwable):?void */ f2) => {
+          f1(null);
+        })));
+    let stringJsSupplier = JsSupplier.$adapt((() => {
+      return Integer.m_valueOf__int(1);
+    }));
+    stringJsSupplier.get();
+    let equals = stringJsSupplier;
+    equals.equals(null);
+    equals.m_get__();
+  }
+
+  /**
+   * A static field getter.
+   * @return {?function(*):*}
+   * @public
+   */
+  static get f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_() {
+    return (
+        Lambdas.$clinit(),
+        Lambdas
+            .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);
+  }
+
+  /**
+   * A static field setter.
+   * @param {?function(*):*} value
+   * @return {void}
+   * @public
+   */
+  static set f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_(
+      value) {
+    (Lambdas.$clinit(),
+     Lambdas
+         .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
+         value);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Lambdas;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Lambdas);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Lambdas.$clinit = function() {};
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
+    $2 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
+    $LambdaAdaptor$1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function =
+        goog.module.get(
+            'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+    Functional = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
+    FunctionalInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
+    FunctionalInterfaceWithMethodReturningVoid = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
+    GenericFunctionalInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface$impl');
+    IdentityFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.IdentityFunction$impl');
+    JsSupplier = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier$impl');
+    Enum = goog.module.get('java.lang.Enum$impl');
+    Error = goog.module.get('java.lang.Error$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    Long = goog.module.get('java.lang.Long$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+    java_lang_Object.$clinit();
+    Lambdas
+        .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdas_Lambdas() {
+    this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;
+  }
+};
+
+$Util.$setClassMetadata(
+    Lambdas,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas'));
+
+
+/** @private {?function(*):*} */
+Lambdas
+    .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_;
+
+
+
+/**
+ * Export class.
+ */
+exports = Lambdas;
+//# sourceMappingURL=Lambdas.js.map
