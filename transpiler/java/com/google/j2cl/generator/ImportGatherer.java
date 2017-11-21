@@ -16,8 +16,8 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -41,6 +41,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -243,44 +244,38 @@ class ImportGatherer extends AbstractVisitor {
 
     // JsDoc for arrays uses Closure builtin but template part requires the leaf type.
     if (typeDescriptor.isArray()) {
-      collectForJsDoc(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
-      return;
-    }
-
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
-      collectTypeDescriptorsIntroducedByTypeBounds((DeclaredTypeDescriptor) typeDescriptor);
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      collectForJsDoc(arrayTypeDescriptor.getLeafTypeDescriptor());
       return;
     }
 
     if (typeDescriptor.isUnion()) {
-      for (TypeDescriptor unionTypeDescriptor :
-          ((UnionTypeDescriptor) typeDescriptor).getUnionTypeDescriptors()) {
-        collectForJsDoc(unionTypeDescriptor);
-      }
+      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+      unionTypeDescriptor.getUnionTypeDescriptors().forEach(this::collectForJsDoc);
       return;
     }
 
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
-    // Overlay classes may be referred directly from other compilation units that are compiled
-    // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
-    // original class should have a dependency on the overlay class.
-    if (declaredTypeDescriptor.hasOverlayImplementationType()) {
-      collectForJsDoc(
-          declaredTypeDescriptor.getTypeDeclaration().getOverlayImplementationTypeDescriptor());
-    }
-
-    if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
-      collectTypeDescriptorsIntroducedByJsFunction((DeclaredTypeDescriptor) typeDescriptor);
+    if (declaredTypeDescriptor.isTypeVariable() || declaredTypeDescriptor.isWildCardOrCapture()) {
+      collectTypeDescriptorsIntroducedByTypeBounds(declaredTypeDescriptor);
       return;
     }
 
-    if (declaredTypeDescriptor.hasTypeArguments()) {
-      for (TypeDescriptor typeArgumentDescriptor :
-          declaredTypeDescriptor.getTypeArgumentDescriptors()) {
-        collectForJsDoc(typeArgumentDescriptor);
-      }
+    // Overlay classes may be referred directly from other compilation units that are compiled
+    // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
+    // original class should have a dependency on the overlay class.
+    TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
+    if (typeDeclaration.hasOverlayImplementationType()) {
+      collectForJsDoc(typeDeclaration.getOverlayImplementationTypeDescriptor());
     }
+
+    if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
+      collectTypeDescriptorsIntroducedByJsFunction(declaredTypeDescriptor);
+      return;
+    }
+
+    declaredTypeDescriptor.getTypeArgumentDescriptors().forEach(this::collectForJsDoc);
 
     addTypeDescriptor(declaredTypeDescriptor, ImportCategory.JSDOC);
   }
@@ -333,7 +328,7 @@ class ImportGatherer extends AbstractVisitor {
     checkArgument(!typeDescriptor.getQualifiedJsName().isEmpty());
 
     DeclaredTypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-    if (rawTypeDescriptor.isExtern()) {
+    if (rawTypeDescriptor.getTypeDeclaration().isExtern()) {
       importCategory = ImportCategory.EXTERN;
     }
     typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
@@ -351,7 +346,7 @@ class ImportGatherer extends AbstractVisitor {
     timingCollector.startSample("Collect type references");
     type.accept(this);
 
-    Preconditions.checkState(typeDescriptorsByCategory.get(ImportCategory.SELF).size() == 1);
+    checkState(typeDescriptorsByCategory.get(ImportCategory.SELF).size() == 1);
 
     timingCollector.startSample("Remove duplicate references");
     typeDescriptorsByCategory
@@ -402,14 +397,15 @@ class ImportGatherer extends AbstractVisitor {
   private void recordLocalNameUses(Set<DeclaredTypeDescriptor> typeDescriptors) {
     // TODO(goktug): We should also include TypeVariables on name recording.
     for (DeclaredTypeDescriptor typeDescriptor : typeDescriptors) {
-      if (typeDescriptor.isExtern()) {
+      TypeDeclaration typeDeclaration = typeDescriptor.getTypeDeclaration();
+      if (typeDeclaration.isExtern()) {
         // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such
         // as window.String, for that scenario only the top level qualifier "window" needs to be
         // avoided.
-        String topLevelExtern = typeDescriptor.getQualifiedJsName().split("\\.")[0];
+        String topLevelExtern = typeDeclaration.getQualifiedJsName().split("\\.")[0];
         localNameUses.add(topLevelExtern);
       } else {
-        localNameUses.add(typeDescriptor.getShortAliasName());
+        localNameUses.add(typeDeclaration.getShortAliasName());
       }
     }
   }
@@ -417,22 +413,24 @@ class ImportGatherer extends AbstractVisitor {
   private Set<Import> toImports(Set<DeclaredTypeDescriptor> typeDescriptors) {
     Set<Import> imports = new LinkedHashSet<>();
     for (DeclaredTypeDescriptor typeDescriptor : typeDescriptors) {
-      Preconditions.checkState(!typeDescriptor.isTypeVariable());
-      Preconditions.checkState(!typeDescriptor.hasTypeArguments());
-      imports.add(new Import(computeAlias(typeDescriptor), typeDescriptor));
+      checkState(!typeDescriptor.isTypeVariable() && !typeDescriptor.isWildCardOrCapture());
+      checkState(!typeDescriptor.hasTypeArguments());
+
+      TypeDeclaration typeDeclaration = typeDescriptor.getTypeDeclaration();
+      imports.add(new Import(computeAlias(typeDeclaration), typeDeclaration));
     }
     return imports;
   }
 
-  private String computeAlias(DeclaredTypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isExtern()) {
-      return typeDescriptor.getQualifiedJsName();
+  private String computeAlias(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isExtern()) {
+      return typeDeclaration.getQualifiedJsName();
     }
 
-    String shortAliasName = typeDescriptor.getShortAliasName();
+    String shortAliasName = typeDeclaration.getShortAliasName();
     boolean unique = localNameUses.count(shortAliasName) == 1;
     return unique && JsProtectedNames.isLegalName(shortAliasName)
         ? shortAliasName
-        : typeDescriptor.getLongAliasName();
+        : typeDeclaration.getLongAliasName();
   }
 }

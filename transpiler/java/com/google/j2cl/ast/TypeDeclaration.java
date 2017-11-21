@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -112,6 +113,19 @@ public abstract class TypeDeclaration extends Node
 
   public String getImplModuleName() {
     return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
+  }
+
+  @Memoized
+  public String getShortAliasName() {
+    if (BootstrapType.typeDescriptors.contains(getUnparamterizedTypeDescriptor())) {
+      return "$" + getSimpleSourceName();
+    }
+    return getSimpleSourceName();
+  }
+
+  @Memoized
+  public String getLongAliasName() {
+    return getQualifiedSourceName().replace("_", "__").replace('.', '_');
   }
 
   /** Returns the fully package qualified name like "com.google.common". */
@@ -214,8 +228,18 @@ public abstract class TypeDeclaration extends Node
     return getKind() == Kind.ENUM;
   }
 
+  @Memoized
   public boolean isExtern() {
-    return JsUtils.isGlobal(getJsNamespace()) && isNative();
+    return isNative() && hasExternNamespace();
+  }
+
+  private boolean hasExternNamespace() {
+    // A native type descriptor is an extern if its namespace is the global namespace or if
+    // it inherited the namespace from its (enclosing) extern type.
+    return JsUtils.isGlobal(getJsNamespace())
+        || (getEnclosingTypeDeclaration() != null
+            && getEnclosingTypeDeclaration().isExtern()
+            && getJsNamespace().equals(getEnclosingTypeDeclaration().getQualifiedJsName()));
   }
 
   public boolean isStarOrUnknown() {

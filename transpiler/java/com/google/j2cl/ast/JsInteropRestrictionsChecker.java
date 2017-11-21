@@ -312,7 +312,7 @@ public class JsInteropRestrictionsChecker {
         return;
       }
       if (member.isNative()
-          || (!memberDescriptor.getEnclosingTypeDescriptor().isFinal()
+          || (!memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isFinal()
               && !memberDescriptor.isFinal()
               && !memberDescriptor.isStatic()
               && !memberDescriptor.getVisibility().isPrivate()

@@ -264,8 +264,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private boolean doesClassExistInJavaScript(TypeDescriptor type) {
-    return !type.isStarOrUnknown() && !type.isJsFunctionInterface();
+  private boolean doesClassExistInJavaScript(DeclaredTypeDescriptor type) {
+    return !type.getTypeDeclaration().isStarOrUnknown() && !type.isJsFunctionInterface();
   }
 
   private void renderTypeBody() {
@@ -289,8 +289,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private static String getExtendsClause(Type type, GenerationEnvironment environment) {
-    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
+    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    if (superTypeDescriptor == null || superTypeDescriptor.getTypeDeclaration().isStarOrUnknown()) {
       return "";
     }
     String superTypeName = environment.aliasForType(superTypeDescriptor);
@@ -650,7 +650,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendln("/* NATIVE.JS EPILOG */");
     sourceBuilder.newLine();
 
-    String longAliasName = type.getTypeDescriptor().getLongAliasName();
+    String longAliasName = type.getDeclaration().getLongAliasName();
     if (!className.equals(longAliasName)) {
       sourceBuilder.appendln("const " + longAliasName + " = " + className + ";");
       sourceBuilder.newLine();

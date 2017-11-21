@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDeclaration;
 
 /**
  * A Node class that represents the goog.require statement:
@@ -29,12 +28,12 @@ import com.google.j2cl.ast.TypeDescriptor;
  */
 class Import implements Comparable<Import> {
 
-  private String alias;
-  private DeclaredTypeDescriptor typeDescriptor;
+  private final String alias;
+  private final TypeDeclaration typeDeclaration;
 
-  Import(String alias, DeclaredTypeDescriptor typeDescriptor) {
+  Import(String alias, TypeDeclaration typeDeclaration) {
     this.alias = alias;
-    this.typeDescriptor = typeDescriptor;
+    this.typeDeclaration = typeDeclaration;
   }
 
   /** Returns the alias. */
@@ -47,7 +46,7 @@ class Import implements Comparable<Import> {
    * in the case of JsTypes with a customized namespace.
    */
   public String getImplModulePath() {
-    return typeDescriptor.getImplModuleName();
+    return typeDeclaration.getImplModuleName();
   }
 
   /**
@@ -55,12 +54,12 @@ class Import implements Comparable<Import> {
    * path in the case of JsTypes with a customized namespace.
    */
   public String getHeaderModulePath() {
-    return typeDescriptor.getModuleName();
+    return typeDeclaration.getModuleName();
   }
 
   /** Returns the associated type descriptor. */
-  public TypeDescriptor getElement() {
-    return typeDescriptor;
+  public TypeDeclaration getElement() {
+    return typeDeclaration;
   }
 
   /** Imported items should be sorted by module name first, and then class name. */
@@ -71,6 +70,6 @@ class Import implements Comparable<Import> {
 
   @Override
   public String toString() {
-    return alias + " => " + typeDescriptor;
+    return alias + " => " + typeDeclaration;
   }
 }

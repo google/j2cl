@@ -702,7 +702,7 @@ class JdtUtils {
               .build());
     }
 
-    if (enclosingTypeDescriptor.isAnonymous()
+    if (enclosingTypeDescriptor.getTypeDeclaration().isAnonymous()
         && isConstructor
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();

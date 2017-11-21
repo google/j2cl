@@ -127,7 +127,7 @@ public abstract class MemberDescriptor extends Node
     // A native type descriptor is an extern if its namespace is the global namespace or if
     // it inherited the namespace from its (enclosing) extern type.
     return JsUtils.isGlobal(getJsNamespace())
-        || (getEnclosingTypeDescriptor().isExtern()
+        || (getEnclosingTypeDescriptor().getTypeDeclaration().isExtern()
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
@@ -138,7 +138,7 @@ public abstract class MemberDescriptor extends Node
 
   /** Returns whether the member can be referenced directly from JavaScript code. */
   public boolean canBeReferencedExternally() {
-    if (getEnclosingTypeDescriptor().isAnonymous()) {
+    if (getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()) {
       // members of anonymous classes can not be referenced externally
       return false;
     }

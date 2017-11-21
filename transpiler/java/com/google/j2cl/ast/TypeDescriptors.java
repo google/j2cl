@@ -467,21 +467,24 @@ public class TypeDescriptors {
     checkArgument(!typeDescriptor.isUnion());
 
     // Primitives.
-    switch (typeDescriptor.getQualifiedSourceName()) {
-      case BOOLEAN_TYPE_NAME:
-        return BooleanLiteral.get(false);
-      case BYTE_TYPE_NAME:
-      case SHORT_TYPE_NAME:
-      case INT_TYPE_NAME:
-      case FLOAT_TYPE_NAME:
-      case DOUBLE_TYPE_NAME:
-      case CHAR_TYPE_NAME:
-        return new NumberLiteral(typeDescriptor, 0);
-      case LONG_TYPE_NAME:
-        return new NumberLiteral(typeDescriptor, 0L);
-      default:
-        return NullLiteral.get();
+    if (typeDescriptor.isPrimitive()) {
+      switch (typeDescriptor.getQualifiedSourceName()) {
+        case BOOLEAN_TYPE_NAME:
+          return BooleanLiteral.get(false);
+        case BYTE_TYPE_NAME:
+        case SHORT_TYPE_NAME:
+        case INT_TYPE_NAME:
+        case FLOAT_TYPE_NAME:
+        case DOUBLE_TYPE_NAME:
+        case CHAR_TYPE_NAME:
+          return new NumberLiteral(typeDescriptor, 0);
+        case LONG_TYPE_NAME:
+          return new NumberLiteral(typeDescriptor, 0L);
+        default:
+          throw new AssertionError();
+      }
     }
+    return NullLiteral.get();
   }
 
   /** Builder for TypeDescriptors. */

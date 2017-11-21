@@ -79,15 +79,7 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
-  public boolean isJsType() {
-    return false;
-  }
-
   public boolean isNative() {
-    return false;
-  }
-
-  public boolean isStarOrUnknown() {
     return false;
   }
 

@@ -286,8 +286,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // To override a package private method one must reside in the same package.
     if (thatVisibility.isPackagePrivate()
         && !getEnclosingTypeDescriptor()
+            .getTypeDeclaration()
             .getPackageName()
-            .equals(that.getEnclosingTypeDescriptor().getPackageName())) {
+            .equals(that.getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName())) {
       return false;
     }
 
@@ -591,12 +592,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
 
       checkState(getName().isPresent());
+
       MethodDescriptor methodDescriptor = autoBuild();
 
       MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
       if (internedMethodDescriptor != methodDescriptor) {
         // This is a previously unseen method descriptor, make sure that it has been constructed
         // property.
+        checkState(
+            !methodDescriptor.getEnclosingTypeDescriptor().isTypeVariable()
+                && !methodDescriptor.getEnclosingTypeDescriptor().isWildCardOrCapture());
 
         // Bridge methods cannot be abstract nor native,
         checkState(

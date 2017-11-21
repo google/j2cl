@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -55,7 +54,7 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class DeclaredTypeDescriptor extends TypeDescriptor
-    implements HasUnusableByJsSuppression, HasJsNameInfo {
+    implements HasUnusableByJsSuppression {
 
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
@@ -88,29 +87,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  @Memoized
-  public String getQualifiedBinaryName() {
-    return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
-  }
-
-  /** Returns the globally unique qualified name by which this type should be defined/imported. */
-  public String getModuleName() {
-    return getQualifiedJsName();
-  }
-
-  public String getImplModuleName() {
-    return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
-  }
-
-  @Override
   public boolean isUnusableByJsSuppressed() {
     return getTypeDeclaration().isUnusableByJsSuppressed();
-  }
-
-  @Nullable
-  @Memoized
-  public String getPackageName() {
-    return hasTypeDeclaration() ? getTypeDeclaration().getPackageName() : null;
   }
 
   @Override
@@ -137,19 +115,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   public boolean isJsFunctionInterface() {
     return hasTypeDeclaration() && getTypeDeclaration().isJsFunctionInterface();
-  }
-
-  @Override
-  public boolean isJsType() {
-    return getTypeDeclaration().isJsType();
-  }
-
-  public boolean hasOverlayImplementationType() {
-    return hasTypeDeclaration() && getTypeDeclaration().hasOverlayImplementationType();
-  }
-
-  public boolean isAnonymous() {
-    return hasTypeDeclaration() && getTypeDeclaration().isAnonymous();
   }
 
   @Override
@@ -197,26 +162,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
-  /**
-   * Returns the JavaScript name for this class. This is same as simple source name unless modified
-   * by JsType.
-   */
-  @Override
-  @Nullable
-  @Memoized
-  public String getSimpleJsName() {
-    return hasTypeDeclaration()
-        ? getTypeDeclaration().getSimpleJsName()
-        : AstUtils.getSimpleSourceName(getClassComponents());
-  }
-
-  @Override
-  @Nullable
-  @Memoized
-  public String getJsNamespace() {
-    return hasTypeDeclaration() ? getTypeDeclaration().getJsNamespace() : null;
-  }
-
   public boolean hasTypeArguments() {
     return !getTypeArgumentDescriptors().isEmpty();
   }
@@ -246,26 +191,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /** Returns whether the described type is an enum. */
   public boolean isEnum() {
     return getKind() == Kind.ENUM;
-  }
-
-  @Memoized
-  public boolean isExtern() {
-    return isNative() && hasExternNamespace();
-  }
-
-  @Override
-  public boolean isStarOrUnknown() {
-    return hasTypeDeclaration() && getTypeDeclaration().isStarOrUnknown();
-  }
-
-  private boolean hasExternNamespace() {
-    checkArgument(isNative());
-    // A native type descriptor is an extern if its namespace is the global namespace or if
-    // it inherited the namespace from its (enclosing) extern type.
-    return JsUtils.isGlobal(getJsNamespace())
-        || (getEnclosingTypeDescriptor() != null
-            && getEnclosingTypeDescriptor().isExtern()
-            && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
   /**
@@ -433,36 +358,31 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * generation and other similar scenarios.
    */
   public String getQualifiedJsName() {
-    if (JsUtils.isGlobal(getJsNamespace())) {
-      return getSimpleJsName();
-    }
-    return getJsNamespace() + "." + getSimpleJsName();
+    return getTypeDeclaration().getQualifiedJsName();
   }
 
   @Memoized
   @Override
   public String getQualifiedSourceName() {
-    return Joiner.on(".")
-        .skipNulls()
-        .join(getPackageName(), Joiner.on(".").join(getClassComponents()));
+    if (hasTypeDeclaration()) {
+      return getTypeDeclaration().getQualifiedSourceName();
+    }
+    return super.getQualifiedSourceName();
+  }
+
+  @Override
+  @Memoized
+  public String getQualifiedBinaryName() {
+    if (hasTypeDeclaration()) {
+      return getTypeDeclaration().getQualifiedBinaryName();
+    }
+    return getSimpleBinaryName();
   }
 
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
-  }
-
-  @Memoized
-  public String getShortAliasName() {
-    if (BootstrapType.typeDescriptors.contains(toNullable())) {
-      return "$" + getSimpleSourceName();
-    }
-    return getSimpleSourceName();
-  }
-
-  public String getLongAliasName() {
-    return getQualifiedSourceName().replace("_", "__").replace('.', '_');
   }
 
   @Nullable
@@ -632,7 +552,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return getRawTypeDescriptor().canBeReferencedExternally();
     }
 
-    if (isJsType() || isJsFunctionInterface() || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)) {
+    if (getTypeDeclaration().isJsType()
+        || isJsFunctionInterface()
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)) {
       return true;
     }
 
@@ -864,6 +786,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     public DeclaredTypeDescriptor build() {
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
+      checkState(
+          typeDescriptor.getEnclosingTypeDescriptor() == null
+              || (!typeDescriptor.getEnclosingTypeDescriptor().isTypeVariable()
+                  && !typeDescriptor.getEnclosingTypeDescriptor().isWildCardOrCapture()));
+
       checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
       checkState(
           typeDescriptor.hasTypeDeclaration()
@@ -873,12 +800,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 
-      // Some native standard typedescriptors are created BEFORE typeDescriptors is initialized.
+      // Some native standard TypeDescriptors are created BEFORE TypeDescriptors is initialized.
       if (TypeDescriptors.isInitialized()) {
         // Make sure there is only one global namespace TypeDescriptor (see b/32903150).
         checkArgument(
-            internedTypeDescriptor.getQualifiedJsName() == null
-                || !internedTypeDescriptor.getQualifiedJsName().isEmpty()
+            internedTypeDescriptor.getTypeDeclaration() == null
+                || internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName() == null
+                || !internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName().isEmpty()
                 || TypeDescriptors.get().globalNamespace == null
                 || internedTypeDescriptor == TypeDescriptors.get().globalNamespace,
             "Attempt to build type descriptor %s for the global scope that is not %s.",
