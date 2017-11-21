@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
+let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
@@ -181,10 +182,25 @@ class Lambdas extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_testMethodTypeVariableThrowLambda__() {
+  m_testInstanceMethodTypeVariableThroughLambda__() {
     let wrapped = /**@type {Functional<*>} */ (
         Functional.$adapt(((/** Functional<*> */ f) => {
           return $1
+              .$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
+                  this);
+        })));
+  }
+
+  /**
+   * @template M_T
+   * @return {void}
+   * @public
+   */
+  static m_testStaticMethodTypeVariableThroughLambda__() {
+    Lambdas.$clinit();
+    let wrapped = /**@type {Functional<*>} */ (
+        Functional.$adapt(((/** Functional<*> */ f) => {
+          return $2
               .$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
                   this);
         })));
@@ -296,7 +312,7 @@ class Lambdas extends java_lang_Object {
    */
   m_testAnonymousInsideLambda__() {
     let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
-      $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+      $3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
     }));
   }
 
@@ -397,6 +413,8 @@ class Lambdas extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
     $2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
+    $3 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
     $LambdaAdaptor$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
     com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function =

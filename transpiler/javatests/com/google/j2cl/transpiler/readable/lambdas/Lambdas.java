@@ -85,7 +85,19 @@ public class Lambdas {
   }
 
   @SuppressWarnings("unused")
-  public <T> void testMethodTypeVariableThrowLambda() {
+  public <T> void testInstanceMethodTypeVariableThroughLambda() {
+    Functional<T> wrapped =
+        (f) ->
+            new Functional<T>() {
+              @Override
+              public Functional<T> wrap(Functional<T> f) {
+                return null;
+              }
+            };
+  }
+
+  @SuppressWarnings("unused")
+  public static <T> void testStaticMethodTypeVariableThroughLambda() {
     Functional<T> wrapped =
         (f) ->
             new Functional<T>() {

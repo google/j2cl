@@ -98,13 +98,29 @@ public class Lambdas {
 ...              }
             };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
       return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
-    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testMethodTypeVariableThrowLambda"
+    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testInstanceMethodTypeVariableThroughLambda"
 [wrapped] => [wrapped] "wrapped"
 [f] => [f] "f"
 [new Functional<T>() {
               @Override
 ...              }
-            }] => [return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testMethodTypeVariableThrowLambda>"
+            }] => [return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testInstanceMethodTypeVariableThroughLambda>"
+[@SuppressWarnings("unused")
+  public static <T> void testStaticMethodTypeVariableThroughLambda() {
+...            };
+  }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testStaticMethodTypeVariableThroughLambda"
+[Functional<T> wrapped =
+        (f) ->
+...              }
+            };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
+      return $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testStaticMethodTypeVariableThroughLambda"
+[wrapped] => [wrapped] "wrapped"
+[f] => [f] "f"
+[new Functional<T>() {
+              @Override
+...              }
+            }] => [return $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testStaticMethodTypeVariableThroughLambda>"
 [intf] => [intf] "intf"
 [e] => [e] "e"
 [return intf.m(e);] => [return intf.m_m__java_lang_Object(e);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callWithTypeVariable"
@@ -158,10 +174,10 @@ public class Lambdas {
 [runner] => [runner] "runner"
 [new Object()] => [java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaReturningVoidAsExpression>"
 [FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object() {};] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() =>{
-      $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+      $3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
     }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testAnonymousInsideLambda"
 [runner] => [runner] "runner"
-[new Object() {}] => [$2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testAnonymousInsideLambda>"
+[new Object() {}] => [$3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testAnonymousInsideLambda>"
 [/** Returns the identity function. */
   @SuppressWarnings("unchecked")
 ...    return (GenericJsFunction<E, E>) identityFunction;
@@ -268,7 +284,19 @@ public class Lambdas {
   }
 
   @SuppressWarnings("unused")
-  public <T> void testMethodTypeVariableThrowLambda() {
+  public <T> void testInstanceMethodTypeVariableThroughLambda() {
+    Functional<T> wrapped =
+        (f) ->
+            new Functional<T>() {
+              @Override
+              public Functional<T> wrap(Functional<T> f) {
+                return null;
+              }
+            };
+  }
+
+  @SuppressWarnings("unused")
+  public static <T> void testStaticMethodTypeVariableThroughLambda() {
     Functional<T> wrapped =
         (f) ->
             new Functional<T>() {
