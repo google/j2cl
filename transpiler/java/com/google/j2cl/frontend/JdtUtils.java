@@ -79,16 +79,16 @@ import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
 /** Utility functions to manipulate JDT internal representations. */
-public class JdtUtils {
+class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
-  static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
+  public static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
     return compilationUnit.getPackage() == null
         ? ""
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
   }
 
-  static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
+  public static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
     if (isArrayLengthBinding(variableBinding)) {
       return AstUtilConstants.getArrayLengthFieldDescriptor();
     }
@@ -131,7 +131,8 @@ public class JdtUtils {
         .build();
   }
 
-  static Variable createVariable(SourcePosition sourcePosition, IVariableBinding variableBinding) {
+  public static Variable createVariable(
+      SourcePosition sourcePosition, IVariableBinding variableBinding) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
         variableBinding.isParameter()
@@ -228,7 +229,7 @@ public class JdtUtils {
     }
   }
 
-  static IMethodBinding getMethodBinding(
+  public static IMethodBinding getMethodBinding(
       ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
 
     Queue<ITypeBinding> deque = new ArrayDeque<>();
@@ -287,38 +288,19 @@ public class JdtUtils {
     }
   }
 
-  static boolean isStatic(BodyDeclaration bodyDeclaration) {
+  public static boolean isStatic(BodyDeclaration bodyDeclaration) {
     return Modifier.isStatic(bodyDeclaration.getModifiers());
   }
 
-  static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
+  public static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
     return variableBinding.getName().equals("length")
         && variableBinding.isField()
         && variableBinding.getDeclaringClass() == null;
   }
 
   /** Returns true if the binding is annotated with @UncheckedCast. */
-  static boolean hasUncheckedCastAnnotation(IBinding binding) {
+  public static boolean hasUncheckedCastAnnotation(IBinding binding) {
     return JdtAnnotationUtils.hasAnnotation(binding, "javaemul.internal.annotations.UncheckedCast");
-  }
-
-  static IMethodBinding findFunctionalMethodBinding(ITypeBinding typeBinding) {
-    // TODO(leafwang): there maybe an issue in which case it inherits a default method from an
-    // interface and inherits an abstract method with the same signature from another interface.
-    // Add an example to address the potential issue.
-    checkArgument(typeBinding.isInterface());
-    for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
-      if (isAbstract(method)) {
-        return method;
-      }
-    }
-    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-      IMethodBinding functionalMethodBinding = findFunctionalMethodBinding(superInterface);
-      if (functionalMethodBinding != null) {
-        return functionalMethodBinding;
-      }
-    }
-    return null;
   }
 
   /**
@@ -327,7 +309,7 @@ public class JdtUtils {
    * interface superTypeBinding. As 'subtype' is transitive and reflective, a type is subtype of
    * itself.
    */
-  static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
+  public static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
     if (areSameErasedType(superTypeBinding, subTypeBinding)) {
       return true;
     }
@@ -345,7 +327,7 @@ public class JdtUtils {
     return false;
   }
 
-  static boolean areSameErasedType(ITypeBinding typeBinding, ITypeBinding otherTypeBinding) {
+  public static boolean areSameErasedType(ITypeBinding typeBinding, ITypeBinding otherTypeBinding) {
     return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
   }
 
@@ -388,37 +370,13 @@ public class JdtUtils {
     }
   }
 
-  /** Returns whether the ASTNode is in a static context. */
-  public static boolean isInStaticContext(org.eclipse.jdt.core.dom.ASTNode node) {
-    org.eclipse.jdt.core.dom.ASTNode currentNode = node.getParent();
-    while (currentNode != null) {
-      switch (currentNode.getNodeType()) {
-        case ASTNode.FIELD_DECLARATION:
-          if (findCurrentTypeBinding(currentNode).isInterface()) {
-            // Field declarations in interface are implicitly static.
-            return true;
-          }
-          // fall through
-        case ASTNode.METHOD_DECLARATION:
-        case ASTNode.INITIALIZER:
-          return isStatic((BodyDeclaration) currentNode);
-        case ASTNode.ENUM_CONSTANT_DECLARATION: // enum constants are implicitly static.
-          return true;
-        default:
-          break;
-      }
-      currentNode = currentNode.getParent();
-    }
-    return false;
-  }
-
   /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
   public static DeclaredTypeDescriptor createDeclaredTypeDescriptor(ITypeBinding typeBinding) {
     return createTypeDescriptor(typeBinding, DeclaredTypeDescriptor.class);
   }
 
   /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
-  public static <T extends TypeDescriptor> T createTypeDescriptor(
+  private static <T extends TypeDescriptor> T createTypeDescriptor(
       ITypeBinding typeBinding, Class<T> clazz) {
     return clazz.cast(createTypeDescriptor(typeBinding));
   }
@@ -501,9 +459,9 @@ public class JdtUtils {
   }
 
   /**
-   * Incase the given type binding is nested, return the outermost possible enclosing type binding.
+   * In case the given type binding is nested, return the outermost possible enclosing type binding.
    */
-  public static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
+  private static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
     ITypeBinding topLevelClass = typeBinding;
     while (topLevelClass.getDeclaringClass() != null) {
       topLevelClass = topLevelClass.getDeclaringClass();
@@ -530,7 +488,7 @@ public class JdtUtils {
     return isIntersectionType;
   }
 
-  public static List<String> getClassComponents(ITypeBinding typeBinding) {
+  private static List<String> getClassComponents(ITypeBinding typeBinding) {
     List<String> classComponents = new ArrayList<>();
     if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
       return Collections.singletonList("?");
@@ -601,7 +559,7 @@ public class JdtUtils {
     return binaryName;
   }
 
-  public static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
+  private static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
     List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
     if (typeBinding.isParameterizedType()) {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
@@ -640,7 +598,7 @@ public class JdtUtils {
     return getVisibility(binding.getModifiers());
   }
 
-  public static Visibility getVisibility(int modifiers) {
+  private static Visibility getVisibility(int modifiers) {
     if (Modifier.isPublic(modifiers)) {
       return Visibility.PUBLIC;
     } else if (Modifier.isProtected(modifiers)) {
@@ -652,15 +610,15 @@ public class JdtUtils {
     }
   }
 
-  public static boolean isDefaultMethod(IMethodBinding binding) {
+  private static boolean isDefaultMethod(IMethodBinding binding) {
     return Modifier.isDefault(binding.getModifiers());
   }
 
-  public static boolean isAbstract(IBinding binding) {
+  private static boolean isAbstract(IBinding binding) {
     return Modifier.isAbstract(binding.getModifiers());
   }
 
-  public static boolean isFinal(IBinding binding) {
+  private static boolean isFinal(IBinding binding) {
     return Modifier.isFinal(binding.getModifiers());
   }
 
@@ -749,10 +707,8 @@ public class JdtUtils {
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
-    /**
-     * JDT does not provide method bindings for any bridge methods so the current one must not be a
-     * bridge.
-     */
+    // JDT does not provide method bindings for any bridge methods so the current one must not be a
+    // bridge.
     boolean isBridge = false;
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -777,7 +733,7 @@ public class JdtUtils {
   }
 
   /** Checks overriding chain to compute JsInfo. */
-  static JsInfo computeJsInfo(IMethodBinding methodBinding) {
+  private static JsInfo computeJsInfo(IMethodBinding methodBinding) {
     JsInfo originalJsInfo = JsInteropUtils.getJsInfo(methodBinding);
     if (originalJsInfo.isJsOverlay()) {
       return originalJsInfo;
@@ -823,7 +779,7 @@ public class JdtUtils {
     return getOverriddenMethodsInType(methodBinding, methodBinding.getDeclaringClass());
   }
 
-  public static Set<IMethodBinding> getOverriddenMethodsInType(
+  private static Set<IMethodBinding> getOverriddenMethodsInType(
       IMethodBinding methodBinding, ITypeBinding typeBinding) {
     Set<IMethodBinding> overriddenMethods = new HashSet<>();
     for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
@@ -1005,8 +961,6 @@ public class JdtUtils {
     }
     singletonInitializer.init();
   }
-
-  private JdtUtils() {}
 
   /**
    * Extracts the intersected types from a jdt type binding. These are represented as a super class
@@ -1339,4 +1293,6 @@ public class JdtUtils {
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .build();
   }
+
+  private JdtUtils() {}
 }
