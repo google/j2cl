@@ -258,6 +258,27 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin() == MethodOrigin.SOURCE ? getName() : getOrigin().getName();
   }
 
+  @Override
+  public boolean isSameMember(MemberDescriptor thatMember) {
+    // TODO(b/69130180): Ideally isSameMember should be not be overridden here and use the
+    // implementation in MemberDescriptor, which relies in comparing the declarations directly.
+    // The current codebase does not enforce the invariant and sometimes references to the same
+    // member end up with different declarations.
+    if (!(thatMember instanceof MethodDescriptor)) {
+      return false;
+    }
+
+    // TODO(b/63118697): To work around nullability differences in method declarations,
+    // just check that the methods have the same signatures and are in the same type.
+    if (!inSameTypeAs(thatMember)) {
+      return false;
+    }
+
+    MethodDescriptor thisMethod = this.getDeclarationDescriptor();
+    MethodDescriptor thatMethod = (MethodDescriptor) thatMember.getDeclarationDescriptor();
+    return thisMethod.getMethodSignature().equals(thatMethod.getMethodSignature());
+  }
+
   /**
    * Returns whether this method descriptor overrides the provided method descriptor from the Java
    * source perspective.

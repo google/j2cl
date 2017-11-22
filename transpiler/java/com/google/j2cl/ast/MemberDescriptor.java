@@ -54,6 +54,14 @@ public abstract class MemberDescriptor extends Node
     return thatMemberDescriptor.isMemberOf(getEnclosingTypeDescriptor());
   }
 
+  /**
+   * Returns true if both members are references/declaration of the same particular member in the
+   * same enclosing class.
+   */
+  public boolean isSameMember(MemberDescriptor thatMember) {
+    return getDeclarationDescriptor() == thatMember.getDeclarationDescriptor();
+  }
+
   @Nullable
   public abstract String getName();
 

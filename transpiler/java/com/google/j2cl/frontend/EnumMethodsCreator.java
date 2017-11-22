@@ -18,6 +18,7 @@ package com.google.j2cl.frontend;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.BinaryExpression;
@@ -89,10 +90,12 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(VALUES_METHOD_NAME)
+            // Set the expected nullability for jsinterop purposes. Values returns a nonnullable
+            // array of nonnullable enum values.
             .setReturnTypeDescriptor(
                 ArrayTypeDescriptor.newBuilder()
-                    .setComponentTypeDescriptor(enumType.getTypeDescriptor())
-                    .setNullable(true)
+                    .setComponentTypeDescriptor(enumTypeDescriptor.toNonNullable())
+                    .setNullable(false)
                     .build())
             .setParameterTypeDescriptors()
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
@@ -102,8 +105,8 @@ public class EnumMethodsCreator {
             .setStatic(true)
             .setEnclosingTypeDescriptor(enumTypeDescriptor)
             .setName(VALUE_OF_METHOD_NAME)
-            .setReturnTypeDescriptor(enumTypeDescriptor)
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
+            .setReturnTypeDescriptor(enumTypeDescriptor.toNonNullable())
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString.toNonNullable())
             .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
   }
@@ -135,7 +138,8 @@ public class EnumMethodsCreator {
     Variable nameParameter =
         Variable.newBuilder()
             .setName("name")
-            .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+            .setTypeDescriptor(
+                Iterables.getOnlyElement(valueOfMethodDescriptor.getParameterTypeDescriptors()))
             .setParameter(true)
             .build();
 

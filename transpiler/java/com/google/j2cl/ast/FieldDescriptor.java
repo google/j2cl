@@ -108,6 +108,25 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  public boolean isSameMember(MemberDescriptor thatMember) {
+    // TODO(b/69130180): Ideally isSameMember should be not be overridden here and use the
+    // implementation in MemberDescriptor, which relies in comparing the declarations directly.
+    // The current codebase does not enforce the invariant and sometimes references to the same
+    // member end up with different declarations.
+    if (!(thatMember instanceof FieldDescriptor)) {
+      return false;
+    }
+
+    if (!inSameTypeAs(thatMember)) {
+      return false;
+    }
+
+    FieldDescriptor thisField = this.getDeclarationDescriptor();
+    FieldDescriptor thatField = (FieldDescriptor) thatMember.getDeclarationDescriptor();
+    return thisField.getName().equals(thatField.getName());
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);
   }

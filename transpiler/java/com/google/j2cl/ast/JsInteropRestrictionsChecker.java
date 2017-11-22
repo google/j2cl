@@ -858,8 +858,7 @@ public class JsInteropRestrictionsChecker {
         new LinkedHashSet<>(jsMembersByName.get(name));
 
     // Remove self.
-    boolean removed =
-        potentiallyCollidingMembers.removeIf(md -> isSameMember(member.getDescriptor(), md));
+    boolean removed = potentiallyCollidingMembers.removeIf(member.getDescriptor()::isSameMember);
     checkState(removed);
 
     // Remove native members.
@@ -878,7 +877,7 @@ public class JsInteropRestrictionsChecker {
           (MethodDescriptor) member.getDescriptor(),
           (MethodDescriptor) potentiallyCollidingMember)) {
         // remove colliding method, to avoid duplicate error messages.
-        jsMembersByName.get(name).removeIf(md -> isSameMember(member.getDescriptor(), md));
+        jsMembersByName.get(name).removeIf(member.getDescriptor()::isSameMember);
       }
       return;
     }
@@ -891,14 +890,7 @@ public class JsInteropRestrictionsChecker {
         name);
 
     // remove colliding method, to avoid duplicate error messages.
-    jsMembersByName.get(name).removeIf(md -> isSameMember(member.getDescriptor(), md));
-  }
-
-  // TODO(b/69130180): j2cl confuses the declaration of methods that have type parameters with
-  // the unparameterized version. We remove the method if their declarations are the same which
-  // means they are the same method.
-  private static boolean isSameMember(MemberDescriptor thisMember, MemberDescriptor thatMember) {
-    return thisMember.getDeclarationDescriptor() == thatMember.getDeclarationDescriptor();
+    jsMembersByName.get(name).removeIf(member.getDescriptor()::isSameMember);
   }
 
   private static boolean isJsPropertyAccessorPair(
