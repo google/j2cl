@@ -717,12 +717,12 @@ public abstract class TypeDeclaration extends Node
     }
 
     public abstract Builder setUnparameterizedTypeDescriptorFactory(
-        DescriptorFactory<DeclaredTypeDescriptor> unsafeTypeDescriptorFactory);
+        DescriptorFactory<DeclaredTypeDescriptor> unparameterizedTypeDescriptorFactory);
 
     public Builder setUnparameterizedTypeDescriptorFactory(
-        Supplier<DeclaredTypeDescriptor> unsafeTypeDescriptorFactory) {
+        Supplier<DeclaredTypeDescriptor> unparameterizedTypeDescriptorFactory) {
       return setUnparameterizedTypeDescriptorFactory(
-          typeDescriptor -> unsafeTypeDescriptorFactory.get());
+          typeDescriptor -> unparameterizedTypeDescriptorFactory.get());
     }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(
