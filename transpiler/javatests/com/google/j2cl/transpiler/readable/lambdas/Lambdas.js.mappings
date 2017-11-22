@@ -97,14 +97,14 @@ public class Lambdas {
         (f) ->
 ...              }
             };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
-      return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+      return /**@type {!$1<*>} */ ($1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this));
     })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testInstanceMethodTypeVariableThroughLambda"
 [wrapped] => [wrapped] "wrapped"
 [f] => [f] "f"
 [new Functional<T>() {
               @Override
 ...              }
-            }] => [return $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testInstanceMethodTypeVariableThroughLambda>"
+            }] => [return /**@type {!$1<*>} */ ($1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testInstanceMethodTypeVariableThroughLambda>"
 [@SuppressWarnings("unused")
   public static <T> void testStaticMethodTypeVariableThroughLambda() {
 ...            };
@@ -113,14 +113,14 @@ public class Lambdas {
         (f) ->
 ...              }
             };] => [let wrapped = /**@type {Functional<*>} */ (Functional.$adapt(((/** Functional<*> */ f) =>{
-      return $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
+      return /**@type {!$2<*>} */ ($2.$create__());
     })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testStaticMethodTypeVariableThroughLambda"
 [wrapped] => [wrapped] "wrapped"
 [f] => [f] "f"
 [new Functional<T>() {
               @Override
 ...              }
-            }] => [return $2.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testStaticMethodTypeVariableThroughLambda>"
+            }] => [return /**@type {!$2<*>} */ ($2.$create__());] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testStaticMethodTypeVariableThroughLambda>"
 [intf] => [intf] "intf"
 [e] => [e] "e"
 [return intf.m(e);] => [return intf.m_m__java_lang_Object(e);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callWithTypeVariable"

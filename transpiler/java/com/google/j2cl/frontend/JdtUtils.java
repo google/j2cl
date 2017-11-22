@@ -567,28 +567,21 @@ class JdtUtils {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
     }
 
-    // Find type parameters in the enclosing scope and copy them over as well.
-    boolean isInstanceNestedClass =
-        typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
-    if (isInstanceNestedClass) {
-      // Occasionally JDT's type bindings are specialized in a way that accidentally loses track of
-      // it's type's method declaration scope. If so then backtrack the specialization to restore
-      // access.
-      if (typeBinding.getDeclaringMethod() == null
-          && typeBinding.getTypeDeclaration().getDeclaringMethod() != null) {
-        typeBinding = typeBinding.getTypeDeclaration();
-      }
+    // DO NOT USE getDeclaringMethod(). getDeclaringMethod() returns a synthetic static method
+    // in the declaring class, instead of the proper lambda method with the declaring method
+    // enclosing it when the declaration is inside a lambda. If the declaring method declares a
+    // type variable, it would get lost.
+    IBinding declarationBinding = getDeclaringMethodOrFieldBinding(typeBinding);
+    if (declarationBinding instanceof IMethodBinding) {
+      typeArgumentDescriptors.addAll(
+          createTypeDescriptors(((IMethodBinding) declarationBinding).getTypeParameters()));
+    }
 
-      if (typeBinding.getDeclaringMethod() != null) {
-        typeArgumentDescriptors.addAll(
-            createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
-      }
-      if (typeBinding.getDeclaringMember() == null
-          || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
-        typeArgumentDescriptors.addAll(
-            createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
-                .getTypeArgumentDescriptors());
-      }
+    if (capturesEnclosingInstance(typeBinding.getTypeDeclaration())) {
+      // Find type parameters in the enclosing scope and copy them over as well.
+      typeArgumentDescriptors.addAll(
+          createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
+              .getTypeArgumentDescriptors());
     }
 
     return typeArgumentDescriptors;
@@ -646,12 +639,31 @@ class JdtUtils {
     if (typeBinding.isLocal()) {
       // Local types (which include anonymous classes in JDT) are static only if they are declared
       // in a static context; i.e. if the member where they are declared is static.
-      return !isStatic(typeBinding.getTypeDeclaration().getDeclaringMember());
+      return !isStatic(getDeclaringMethodOrFieldBinding(typeBinding));
     } else {
       checkArgument(typeBinding.isMember());
       // Member classes must be marked explicitly static.
       return !isStatic(typeBinding);
     }
+  }
+
+  /**
+   * Returns the declaring member binding if any, skipping lambdas which are returned by JDT as
+   * declaring members but are not.
+   */
+  private static IBinding getDeclaringMethodOrFieldBinding(ITypeBinding typeBinding) {
+    IBinding declarationBinding = typeBinding.getTypeDeclaration().getDeclaringMember();
+
+    // Skip all lambda method bindings.
+    while (isLambdaBinding(declarationBinding)) {
+      declarationBinding = ((IMethodBinding) declarationBinding).getDeclaringMember();
+    }
+    return declarationBinding;
+  }
+
+  private static boolean isLambdaBinding(IBinding binding) {
+    return binding instanceof IMethodBinding
+        && ((IMethodBinding) binding).getDeclaringMember() != null;
   }
 
   /** Creates a MethodDescriptor directly based on the given JDT method binding. */

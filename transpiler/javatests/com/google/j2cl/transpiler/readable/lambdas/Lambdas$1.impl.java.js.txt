@@ -15,6 +15,7 @@ let Lambdas = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.L
 
 
 /**
+ * @template M_T
  * @implements {Functional<M_T>}
  */
 class $1 extends java_lang_Object {
@@ -31,8 +32,9 @@ class $1 extends java_lang_Object {
 
   /**
    * Factory method corresponding to constructor 'new Functional(Lambdas)'.
+   * @template M_T
    * @param {Lambdas} $outer_this
-   * @return {!$1}
+   * @return {!$1<M_T>}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
@@ -61,7 +63,6 @@ class $1 extends java_lang_Object {
 
   /**
    * @override
-   * @template M_T
    * @param {Functional<M_T>} f
    * @return {Functional<M_T>}
    * @public

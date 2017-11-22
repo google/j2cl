@@ -11,10 +11,9 @@ const Functional = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lam
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Lambdas = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas$impl');
-
 
 /**
+ * @template M_T
  * @implements {Functional<M_T>}
  */
 class $2 extends java_lang_Object {
@@ -24,44 +23,33 @@ class $2 extends java_lang_Object {
    */
   constructor() {
     super();
-    /** @public {Lambdas} */
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2 =
-        null;
   }
 
   /**
-   * Factory method corresponding to constructor 'new Functional(Lambdas)'.
-   * @param {Lambdas} $outer_this
-   * @return {!$2}
+   * Factory method corresponding to constructor 'new Functional()'.
+   * @template M_T
+   * @return {!$2<M_T>}
    * @public
    */
-  static $create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
-      $outer_this) {
+  static $create__() {
     $2.$clinit();
     let $instance = new $2();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
-            $outer_this);
+    $instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'new Functional(Lambdas)'.
-   * @param {Lambdas} $outer_this
+   * Initialization from constructor 'new Functional()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
-      $outer_this) {
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2 =
-        $outer_this;
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2__() {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_lambdas_Lambdas_2();
   }
 
   /**
    * @override
-   * @template M_T
    * @param {Functional<M_T>} f
    * @return {Functional<M_T>}
    * @public
