@@ -34,10 +34,6 @@ class Equality {
   }
 };
 
-// Ensure Equality.$same() is not inlined so J2clEqualitySameRewriterPass can
-// detect all calls.
-// TODO(goktug): we should have a better way of doing this.
-goog.global['_$same'] = Equality.$same;
 
 /**
  * Exported class.

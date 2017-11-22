@@ -67,6 +67,8 @@ def integration_test(name,
   optimized_extra_defs = [
       # Turn on asserts since the integration tests rely on them.
       "--remove_j2cl_asserts=false",
+      # Avoid 'use strict' noise.
+      "--emit_use_strict=false",
       # Polyfill re-write is disabled so that size tracking only focuses on
       # size issues that are actionable outside of JSCompiler or are expected
       # to eventually be addressed inside of JSCompiler.
