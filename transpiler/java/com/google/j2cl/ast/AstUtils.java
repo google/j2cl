@@ -811,7 +811,9 @@ public class AstUtils {
   public static Statement declarationStatement(Field field, SourcePosition sourcePosition) {
     boolean isPublic = !field.isStatic() || field.isCompileTimeConstant();
 
-    boolean skipNullInitialization = getInitialValue(field) == NullLiteral.get();
+    // Only skip declaration on static fields.
+    boolean skipNullInitialization =
+        field.isStatic() && getInitialValue(field) == NullLiteral.get();
 
     Expression declarationExpression =
         skipNullInitialization
