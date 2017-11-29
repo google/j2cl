@@ -27,6 +27,7 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -635,7 +636,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         if (interfaceTypeDescriptor.isNative()) {
           continue;
         }
-        renderExpression(AstUtils.getMetadataConstructorReference(interfaceTypeDescriptor));
+        JavaScriptConstructorReference markImplementorConstructor =
+            AstUtils.getMetadataConstructorReference(interfaceTypeDescriptor);
+        renderExpression(markImplementorConstructor);
         sourceBuilder.appendln(".$markImplementor(" + className + ");");
       }
     }

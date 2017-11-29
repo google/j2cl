@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.LinkedHashMultimap;
@@ -49,7 +50,6 @@ import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -84,7 +84,7 @@ class ImportGatherer extends AbstractVisitor {
 
   private final Multiset<String> localNameUses = HashMultiset.create();
 
-  private final SetMultimap<ImportCategory, DeclaredTypeDescriptor> typeDescriptorsByCategory =
+  private final SetMultimap<ImportCategory, TypeDeclaration> typeDeclarationByCategory =
       LinkedHashMultimap.create();
 
   private final boolean declareLegacyNamespace;
@@ -95,7 +95,7 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.RUNTIME);
+    addTypeDeclaration(BootstrapType.ASSERTS.getDeclaration(), ImportCategory.RUNTIME);
   }
 
   @Override
@@ -103,7 +103,7 @@ class ImportGatherer extends AbstractVisitor {
     maybeAddNativeReference(field);
     // A static long field needs to be initialized a load time which is done by code generator.
     if (TypeDescriptors.isPrimitiveLong(field.getDescriptor().getTypeDescriptor())) {
-      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.LOADTIME);
+      addTypeDeclaration(BootstrapType.NATIVE_LONG.getDeclaration(), ImportCategory.LOADTIME);
     }
     collectForJsDoc(field.getDescriptor().getTypeDescriptor());
   }
@@ -117,19 +117,21 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitType(Type type) {
-    addTypeDescriptor(type.getTypeDescriptor(), ImportCategory.SELF);
+    addTypeDeclaration(type.getDeclaration(), ImportCategory.SELF);
 
     if (type.isJsOverlayImplementation() && type.getNativeTypeDescriptor().isNative()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
       // Also requiring native type makes sure the native type is not pruned by AJD.
-      addTypeDescriptor(type.getNativeTypeDescriptor(), ImportCategory.LOADTIME);
+      addTypeDeclaration(
+          type.getNativeTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
     if (type.getSuperTypeDescriptor() != null) {
       collectForJsDoc(type.getSuperTypeDescriptor());
-      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.LOADTIME);
+      addTypeDeclaration(
+          type.getSuperTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
     for (DeclaredTypeDescriptor superInterfaceTypeDescriptor :
         type.getSuperInterfaceTypeDescriptors()) {
@@ -138,19 +140,19 @@ class ImportGatherer extends AbstractVisitor {
       if (superInterfaceTypeDescriptor.isJsFunctionInterface()) {
         superInterfaceTypeDescriptor = BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
       }
-      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.LOADTIME);
+      addTypeDeclaration(
+          superInterfaceTypeDescriptor.getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
     // Here we add an extra dependency on the outer namespace if declareLegacyNamespace is
     // enabled.  This forces the outer namespaces to be declared first before the inner namespace
     // which avoids errors in the JsCompiler. Note this interacts poorly with Outer classes that
     // implement/extend Inner types.
+    TypeDeclaration enclosingTypeDeclaration = type.getDeclaration().getEnclosingTypeDeclaration();
     if (declareLegacyNamespace
         && AstUtils.canBeRequiredFromJs(type.getDeclaration())
-        && type.getDeclaration().getEnclosingTypeDeclaration() != null) {
-      addTypeDescriptor(
-          type.getDeclaration().getEnclosingTypeDeclaration().getUnparamterizedTypeDescriptor(),
-          ImportCategory.LOADTIME);
+        && enclosingTypeDeclaration != null) {
+      addTypeDeclaration(enclosingTypeDeclaration, ImportCategory.LOADTIME);
     }
   }
 
@@ -190,29 +192,33 @@ class ImportGatherer extends AbstractVisitor {
         && memberDescriptor.isStatic()
         && memberDescriptor.hasJsNamespace()
         && !memberDescriptor.isExtern()) {
-      addTypeDescriptor(
-          AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor), ImportCategory.RUNTIME);
+      addTypeDeclaration(
+          AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor).getTypeDeclaration(),
+          ImportCategory.RUNTIME);
     }
   }
 
   @Override
   public void exitMethodCall(MethodCall methodCall) {
     if (methodCall.isStaticDispatch()) {
-      addTypeDescriptor(
-          methodCall.getTarget().getEnclosingTypeDescriptor(), ImportCategory.RUNTIME);
+      addTypeDeclaration(
+          methodCall.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration(),
+          ImportCategory.RUNTIME);
     }
   }
 
   @Override
   public void exitNewInstance(NewInstance newInstance) {
-    addTypeDescriptor(newInstance.getTarget().getEnclosingTypeDescriptor(), ImportCategory.RUNTIME);
+    addTypeDeclaration(
+        newInstance.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration(),
+        ImportCategory.RUNTIME);
   }
 
   @Override
   public void exitNumberLiteral(NumberLiteral numberLiteral) {
     // Long number literal are transformed by expression transpiler to use NATIVE_LONG.
     if (TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
-      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.LOADTIME);
+      addTypeDeclaration(BootstrapType.NATIVE_LONG.getDeclaration(), ImportCategory.LOADTIME);
     }
   }
 
@@ -220,14 +226,13 @@ class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitJavaScriptConstructorReference(
       JavaScriptConstructorReference constructorReference) {
-    DeclaredTypeDescriptor referencedTypeDescriptor =
-        constructorReference.getReferencedTypeDescriptor();
-    if (referencedTypeDescriptor == TypeDescriptors.get().globalNamespace) {
+    TypeDeclaration referencedTypeDeclaration = constructorReference.getReferencedTypeDeclaration();
+    if (referencedTypeDeclaration == TypeDescriptors.get().globalNamespace.getTypeDeclaration()) {
       // We don't need to record global since it doesn't have a name but we still want the rest of
       // the extern since they have a name that we should record and preserve.
       return;
     }
-    addTypeDescriptor(referencedTypeDescriptor, ImportCategory.RUNTIME);
+    addTypeDeclaration(referencedTypeDeclaration, ImportCategory.RUNTIME);
   }
 
   private void collectForJsDoc(TypeDescriptor typeDescriptor) {
@@ -277,7 +282,7 @@ class ImportGatherer extends AbstractVisitor {
 
     declaredTypeDescriptor.getTypeArgumentDescriptors().forEach(this::collectForJsDoc);
 
-    addTypeDescriptor(declaredTypeDescriptor, ImportCategory.JSDOC);
+    addTypeDeclaration(declaredTypeDescriptor.getTypeDeclaration(), ImportCategory.JSDOC);
   }
 
   /**
@@ -319,19 +324,14 @@ class ImportGatherer extends AbstractVisitor {
     }
   }
 
-  private void addTypeDescriptor(
-      DeclaredTypeDescriptor typeDescriptor, ImportCategory importCategory) {
-    checkArgument(
-        !typeDescriptor.isJsFunctionInterface()
-            && !typeDescriptor.isWildCardOrCapture()
-            && !typeDescriptor.isTypeVariable());
-    checkArgument(!typeDescriptor.getQualifiedJsName().isEmpty());
+  private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
+    checkArgument(!typeDeclaration.isJsFunctionInterface());
+    checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
 
-    DeclaredTypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-    if (rawTypeDescriptor.getTypeDeclaration().isExtern()) {
+    if (typeDeclaration.isExtern()) {
       importCategory = ImportCategory.EXTERN;
     }
-    typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
+    typeDeclarationByCategory.put(importCategory, typeDeclaration);
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
@@ -340,64 +340,63 @@ class ImportGatherer extends AbstractVisitor {
 
     // Util class implements some utility functions and does not depend on any other class, always
     // import it eagerly.
-    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.LOADTIME);
+    addTypeDeclaration(BootstrapType.NATIVE_UTIL.getDeclaration(), ImportCategory.LOADTIME);
 
     // Collect type references.
     timingCollector.startSample("Collect type references");
     type.accept(this);
 
-    checkState(typeDescriptorsByCategory.get(ImportCategory.SELF).size() == 1);
+    checkState(typeDeclarationByCategory.get(ImportCategory.SELF).size() == 1);
 
     timingCollector.startSample("Remove duplicate references");
-    typeDescriptorsByCategory
+    typeDeclarationByCategory
         .get(ImportCategory.RUNTIME)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
-    typeDescriptorsByCategory
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
+    typeDeclarationByCategory
         .get(ImportCategory.RUNTIME)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
-    typeDescriptorsByCategory
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
+    typeDeclarationByCategory
         .get(ImportCategory.LOADTIME)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
 
-    typeDescriptorsByCategory
+    typeDeclarationByCategory
         .get(ImportCategory.JSDOC)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
-    typeDescriptorsByCategory
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
+    typeDeclarationByCategory
         .get(ImportCategory.JSDOC)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.RUNTIME));
-    typeDescriptorsByCategory
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.RUNTIME));
+    typeDeclarationByCategory
         .get(ImportCategory.JSDOC)
-        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
+        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
 
     timingCollector.startSample("Record Local Name Uses");
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.SELF));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.RUNTIME));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LOADTIME));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.JSDOC));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
+    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.SELF));
+    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.RUNTIME));
+    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
+    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.JSDOC));
+    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.EXTERN));
 
     timingCollector.startSample("Convert to imports");
     Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
     importsByCategory.putAll(
-        ImportCategory.RUNTIME, toImports(typeDescriptorsByCategory.get(ImportCategory.RUNTIME)));
+        ImportCategory.RUNTIME, toImports(typeDeclarationByCategory.get(ImportCategory.RUNTIME)));
     importsByCategory.putAll(
-        ImportCategory.LOADTIME, toImports(typeDescriptorsByCategory.get(ImportCategory.LOADTIME)));
+        ImportCategory.LOADTIME, toImports(typeDeclarationByCategory.get(ImportCategory.LOADTIME)));
     importsByCategory.putAll(
-        ImportCategory.JSDOC, toImports(typeDescriptorsByCategory.get(ImportCategory.JSDOC)));
+        ImportCategory.JSDOC, toImports(typeDeclarationByCategory.get(ImportCategory.JSDOC)));
     importsByCategory.putAll(
-        ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
+        ImportCategory.EXTERN, toImports(typeDeclarationByCategory.get(ImportCategory.EXTERN)));
     // Creates an alias for the current type, last, to make sure that its name dodges externs
     // when necessary.
     importsByCategory.putAll(
-        ImportCategory.SELF, toImports(typeDescriptorsByCategory.get(ImportCategory.SELF)));
+        ImportCategory.SELF, toImports(typeDeclarationByCategory.get(ImportCategory.SELF)));
     timingCollector.endSubSample();
     return importsByCategory;
   }
 
-  private void recordLocalNameUses(Set<DeclaredTypeDescriptor> typeDescriptors) {
+  private void recordLocalNameUses(Set<TypeDeclaration> typeDeclarations) {
     // TODO(goktug): We should also include TypeVariables on name recording.
-    for (DeclaredTypeDescriptor typeDescriptor : typeDescriptors) {
-      TypeDeclaration typeDeclaration = typeDescriptor.getTypeDeclaration();
+    for (TypeDeclaration typeDeclaration : typeDeclarations) {
       if (typeDeclaration.isExtern()) {
         // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such
         // as window.String, for that scenario only the top level qualifier "window" needs to be
@@ -410,16 +409,12 @@ class ImportGatherer extends AbstractVisitor {
     }
   }
 
-  private Set<Import> toImports(Set<DeclaredTypeDescriptor> typeDescriptors) {
-    Set<Import> imports = new LinkedHashSet<>();
-    for (DeclaredTypeDescriptor typeDescriptor : typeDescriptors) {
-      checkState(!typeDescriptor.isTypeVariable() && !typeDescriptor.isWildCardOrCapture());
-      checkState(!typeDescriptor.hasTypeArguments());
+  private Set<Import> toImports(Set<TypeDeclaration> typeDeclarations) {
+    return typeDeclarations.stream().map(this::createImport).collect(toImmutableSet());
+  }
 
-      TypeDeclaration typeDeclaration = typeDescriptor.getTypeDeclaration();
-      imports.add(new Import(computeAlias(typeDeclaration), typeDeclaration));
-    }
-    return imports;
+  private Import createImport(TypeDeclaration typeDeclaration) {
+    return new Import(computeAlias(typeDeclaration), typeDeclaration);
   }
 
   private String computeAlias(TypeDeclaration typeDeclaration) {

@@ -125,7 +125,7 @@ public abstract class TypeDescriptor extends Node
 
   /** Returns the type that holds the metadata for the class type */
   @Nullable
-  public abstract DeclaredTypeDescriptor getMetadataTypeDescriptor();
+  public abstract TypeDeclaration getMetadataTypeDeclaration();
 
   /** Returns the functional interface implemented by the type */
   @Nullable

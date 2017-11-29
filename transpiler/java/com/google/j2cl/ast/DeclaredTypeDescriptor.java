@@ -275,18 +275,18 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   @Memoized
-  public DeclaredTypeDescriptor getMetadataTypeDescriptor() {
+  public TypeDeclaration getMetadataTypeDeclaration() {
     DeclaredTypeDescriptor rawTypeDescriptor = getRawTypeDescriptor();
 
     if (rawTypeDescriptor.isNative()) {
-      return TypeDescriptors.createOverlayImplementationTypeDescriptor(rawTypeDescriptor);
+      return TypeDescriptors.createOverlayImplementationTypeDeclaration(rawTypeDescriptor);
     }
 
     if (rawTypeDescriptor.isJsFunctionInterface()) {
-      return BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
+      return BootstrapType.JAVA_SCRIPT_FUNCTION.getDeclaration();
     }
 
-    return rawTypeDescriptor;
+    return rawTypeDescriptor.getTypeDeclaration();
   }
 
   @Memoized

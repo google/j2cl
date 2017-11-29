@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -23,14 +22,10 @@ import com.google.j2cl.ast.annotations.Visitable;
 /** Refers a constructor in Javascript. */
 @Visitable
 public class JavaScriptConstructorReference extends Expression {
-  @Visitable DeclaredTypeDescriptor typeDescriptor;
+  @Visitable TypeDeclaration typeDeclaration;
 
-  public JavaScriptConstructorReference(DeclaredTypeDescriptor typeDescriptor) {
-    checkArgument(
-        !typeDescriptor.isArray()
-            && !typeDescriptor.isIntersection()
-            && !typeDescriptor.isUnion());
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+  public JavaScriptConstructorReference(TypeDeclaration typeDeclaration) {
+    this.typeDeclaration = checkNotNull(typeDeclaration);
   }
 
   @Override
@@ -45,11 +40,11 @@ public class JavaScriptConstructorReference extends Expression {
 
   @Override
   public JavaScriptConstructorReference clone() {
-    return new JavaScriptConstructorReference(typeDescriptor);
+    return new JavaScriptConstructorReference(typeDeclaration);
   }
 
-  public DeclaredTypeDescriptor getReferencedTypeDescriptor() {
-    return typeDescriptor;
+  public TypeDeclaration getReferencedTypeDeclaration() {
+    return typeDeclaration;
   }
 
   @Override

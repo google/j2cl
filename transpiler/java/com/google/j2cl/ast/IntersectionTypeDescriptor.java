@@ -76,8 +76,8 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Nullable
-  public DeclaredTypeDescriptor getMetadataTypeDescriptor() {
-    return getRawTypeDescriptor().getMetadataTypeDescriptor();
+  public TypeDeclaration getMetadataTypeDeclaration() {
+    return getRawTypeDescriptor().getMetadataTypeDeclaration();
   }
 
   @Override

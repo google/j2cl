@@ -554,7 +554,7 @@ class ToStringRenderer {
       @Override
       public boolean enterJavaScriptConstructorReference(
           JavaScriptConstructorReference constructorReference) {
-        print(constructorReference.getReferencedTypeDescriptor().getQualifiedSourceName());
+        print(constructorReference.getReferencedTypeDeclaration().getQualifiedSourceName());
         return false;
       }
 

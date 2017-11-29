@@ -88,7 +88,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Nullable
-  public DeclaredTypeDescriptor getMetadataTypeDescriptor() {
+  public TypeDeclaration getMetadataTypeDeclaration() {
     return null;
   }
 

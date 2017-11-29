@@ -306,8 +306,8 @@ public class ExpressionTranspiler {
         // JavaScriptConstructorReference node to the TypeDescriptor representing the global scope.
         JavaScriptConstructorReference constructorReference =
             (JavaScriptConstructorReference) qualifier;
-        return constructorReference.getReferencedTypeDescriptor()
-            != TypeDescriptors.get().globalNamespace;
+        return constructorReference.getReferencedTypeDeclaration()
+            != TypeDescriptors.get().globalNamespace.getTypeDeclaration();
       }
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
@@ -433,7 +433,7 @@ public class ExpressionTranspiler {
       public Void transformJavaScriptConstructorReference(
           JavaScriptConstructorReference constructorReference) {
         sourceBuilder.append(
-            environment.aliasForType(constructorReference.getReferencedTypeDescriptor()));
+            environment.aliasForType(constructorReference.getReferencedTypeDeclaration()));
         return null;
       }
 

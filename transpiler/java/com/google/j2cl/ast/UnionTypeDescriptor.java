@@ -72,7 +72,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Nullable
-  public DeclaredTypeDescriptor getMetadataTypeDescriptor() {
+  public TypeDeclaration getMetadataTypeDeclaration() {
     return null;
   }
 

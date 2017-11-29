@@ -660,7 +660,7 @@ public class AstUtils {
     }
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     return memberDescriptor.isStatic()
-        ? new JavaScriptConstructorReference(enclosingTypeDescriptor.getRawTypeDescriptor())
+        ? new JavaScriptConstructorReference(enclosingTypeDescriptor.getTypeDeclaration())
         : new ThisReference(enclosingTypeDescriptor);
   }
 
@@ -772,7 +772,7 @@ public class AstUtils {
 
     MethodCall getPrototypeCall =
         RuntimeMethods.createUtilMethodCall(
-            "$getPrototype", new JavaScriptConstructorReference(lambdaType));
+            "$getPrototype", new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()));
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
@@ -793,7 +793,7 @@ public class AstUtils {
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
-            .setQualifier(new JavaScriptConstructorReference(lambdaType))
+            .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
             .build();
 
     return RuntimeMethods.createUtilMethodCall(
@@ -1155,7 +1155,7 @@ public class AstUtils {
    */
   public static JavaScriptConstructorReference getMetadataConstructorReference(
       TypeDescriptor typeDescriptor) {
-    return new JavaScriptConstructorReference(typeDescriptor.getMetadataTypeDescriptor());
+    return new JavaScriptConstructorReference(typeDescriptor.getMetadataTypeDeclaration());
   }
 
   /** Whether this method require methods that override it to have an @override @JsDoc annotation */

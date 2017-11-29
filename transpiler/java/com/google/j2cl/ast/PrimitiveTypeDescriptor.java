@@ -139,8 +139,8 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public DeclaredTypeDescriptor getMetadataTypeDescriptor() {
-    return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this);
+  public TypeDeclaration getMetadataTypeDeclaration() {
+    return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this).getTypeDeclaration();
   }
 
   @Memoized

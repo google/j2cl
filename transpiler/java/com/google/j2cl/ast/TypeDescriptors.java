@@ -215,6 +215,10 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangCloneable);
   }
 
+  public static boolean isJavaLangClass(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangClass);
+  }
+
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         && !isPrimitiveBoolean(typeDescriptor)
@@ -269,7 +273,7 @@ public class TypeDescriptors {
   }
 
   /** Returns the TypeDeclaration for the Overlay implementation type. */
-  private static TypeDeclaration createOverlayImplementationTypeDeclaration(
+  public static TypeDeclaration createOverlayImplementationTypeDeclaration(
       DeclaredTypeDescriptor typeDescriptor) {
 
     DeclaredTypeDescriptor unparameterizedTypeDescriptor =
@@ -347,6 +351,10 @@ public class TypeDescriptors {
 
     public DeclaredTypeDescriptor getDescriptor() {
       return typeDescriptor;
+    }
+
+    public TypeDeclaration getDeclaration() {
+      return typeDescriptor.getTypeDeclaration();
     }
 
     public static final Set<DeclaredTypeDescriptor> typeDescriptors;
