@@ -55,6 +55,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract boolean isDoNotAutobox();
 
+    @Memoized
+    public ParameterDescriptor toRawParameterDescriptor() {
+      return toBuilder().setTypeDescriptor(getTypeDescriptor().getRawTypeDescriptor()).build();
+    }
+
     public abstract Builder toBuilder();
 
     public static Builder newBuilder() {
@@ -204,6 +209,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // encodes a self reference for AutoValue purposes and provide the accessor above to hide
   // the details.
   abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
+
+  @Override
+  @Memoized
+  public MethodDescriptor toRawMemberDescriptor() {
+    return toBuilder()
+        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getRawTypeDescriptor())
+        .setTypeParameterTypeDescriptors(ImmutableList.of())
+        .setReturnTypeDescriptor(getReturnTypeDescriptor().getRawTypeDescriptor())
+        .setParameterDescriptors(
+            getParameterDescriptors()
+                .stream()
+                .map(ParameterDescriptor::toRawParameterDescriptor)
+                .collect(toImmutableList()))
+        .build();
+  }
 
   /**
    * Returns true if it is a vararg method that can be referenced by JavaScript side. A

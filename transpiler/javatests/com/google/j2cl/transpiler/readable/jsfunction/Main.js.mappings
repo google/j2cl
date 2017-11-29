@@ -194,10 +194,10 @@
 [f] => [f] "f"
 [o] => [o] "o"
 [n] => [n] "n"
-[public static Object _callInterfaceRaw(JsBiFunction f, Object o, Number n) {
+[public static Object callInterfaceRaw(JsBiFunction f, Object o, Number n) {
     return f.apply(o, n);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main._callInterfaceRaw"
-[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main._callInterfaceRaw"
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceRaw"
+[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceRaw"
 [f] => [f] "f"
 [s] => [s] "s"
 [public static String callInterfaceParameterized(JsBiFunction<String, Integer> f, String s) {
@@ -215,10 +215,10 @@
 [f] => [f] "f"
 [o] => [o] "o"
 [n] => [n] "n"
-[public static Object _callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
+[public static Object callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
     return f.apply(o, n);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main._callImplementorRaw"
-[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main._callImplementorRaw"
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callImplementorRaw"
+[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.callImplementorRaw"
 [f] => [f] "f"
 [s] => [s] "s"
 [public static String callImplementorParameterized(TIntegerJsBiFunction<String> f, String s) {
@@ -233,12 +233,12 @@
 [tIntegerJsBiFunction] => [tIntegerJsBiFunction] "tIntegerJsBiFunction"
 [JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();] => [let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
-[_callInterfaceRaw(tIntegerJsBiFunction, "a", 1);] => [Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, "a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
-[_callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callInterfaceRaw(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, "a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [callInterfaceParameterized(tIntegerJsBiFunction, "a");] => [Main.m_callInterfaceParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_String(tIntegerJsBiFunction, "a");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, "a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
-[_callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);] => [Main.m__callImplementorRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(/**@type {function(?number, Integer):?number} */ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);] => [Main.m_callImplementorRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(/**@type {function(?number, Integer):?number} */ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");] => [Main.m_callImplementorParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_String(/**@type {function(?string, Integer):?string} */ (TIntegerJsBiFunction.$create__()), "");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [tIntegerJsBiFunction.apply("a", 1);] => [tIntegerJsBiFunction("a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
 [doubleDoubleJsBiFunction.apply(1.1, 1.1);] => [doubleDoubleJsBiFunction(1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"

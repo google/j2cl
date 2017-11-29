@@ -80,6 +80,15 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   abstract FieldDescriptor getDeclarationFieldDescriptorOrNullIfSelf();
 
   @Override
+  @Memoized
+  public FieldDescriptor toRawMemberDescriptor() {
+    return toBuilder()
+        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getRawTypeDescriptor())
+        .setTypeDescriptor(getTypeDescriptor().getRawTypeDescriptor())
+        .build();
+  }
+
+  @Override
   public boolean isNative() {
     return getEnclosingTypeDescriptor().isNative() && !isJsOverlay();
   }

@@ -1125,19 +1125,61 @@ class JdtUtils {
 
   private static Supplier<DeclaredTypeDescriptor> getRawTypeDescriptorSupplier(
       ITypeBinding typeBinding) {
+    // Synthesizing a raw type descriptor requires making sure that all types this class refers to,
+    // e.g as supertypes, as parameters and results types in methods and as field types are also raw
+    // types, and that no method declares type variables.
     return () -> {
       DeclaredTypeDescriptor rawTypeDescriptor =
           createDeclaredTypeDescriptor(typeBinding.getErasure());
-      if (rawTypeDescriptor.hasTypeArguments()) {
-        checkArgument(!rawTypeDescriptor.isArray());
-        checkArgument(!rawTypeDescriptor.isTypeVariable());
-        checkArgument(!rawTypeDescriptor.isUnion());
-        return DeclaredTypeDescriptor.Builder.from(rawTypeDescriptor)
-            .setTypeArgumentDescriptors(ImmutableList.of())
-            .build();
-      }
-      return rawTypeDescriptor;
+      checkArgument(!rawTypeDescriptor.isTypeVariable());
+      checkArgument(!rawTypeDescriptor.isWildCardOrCapture());
+      return DeclaredTypeDescriptor.Builder.from(rawTypeDescriptor)
+          .setEnclosingTypeDescriptor(
+              getRawDescriptorOrNull(rawTypeDescriptor.getEnclosingTypeDescriptor()))
+          .setTypeArgumentDescriptors(ImmutableList.of())
+          .setDeclaredFieldDescriptorsFactory(
+              () ->
+                  rawTypeDescriptor
+                      .getDeclaredFieldDescriptors()
+                      .stream()
+                      .map(FieldDescriptor::toRawMemberDescriptor)
+                      .collect(toImmutableList()))
+          .setDeclaredMethodDescriptorsFactory(
+              () -> {
+                ImmutableMap.Builder<String, MethodDescriptor>
+                    declaredMethodDescriptorsBySignatureBuilder = ImmutableMap.builder();
+                for (MethodDescriptor methodDescriptor :
+                    rawTypeDescriptor.getDeclaredMethodDescriptors()) {
+                  declaredMethodDescriptorsBySignatureBuilder.put(
+                      methodDescriptor.getDeclarationDescriptor().getMethodSignature(),
+                      methodDescriptor.toRawMemberDescriptor());
+                }
+                return declaredMethodDescriptorsBySignatureBuilder.build();
+              })
+          .setJsFunctionMethodDescriptorFactory(
+              () -> getRawDescriptorOrNull(rawTypeDescriptor.getJsFunctionMethodDescriptor()))
+          .setSuperTypeDescriptorFactory(
+              () -> getRawDescriptorOrNull(rawTypeDescriptor.getSuperTypeDescriptor()))
+          .setInterfaceTypeDescriptorsFactory(
+              () ->
+                  rawTypeDescriptor
+                      .getInterfaceTypeDescriptors()
+                      .stream()
+                      .map(DeclaredTypeDescriptor::getRawTypeDescriptor)
+                      .collect(toImmutableList()))
+          .setSingleAbstractMethodDescriptorFactory(
+              () -> getRawDescriptorOrNull(rawTypeDescriptor.getSingleAbstractMethodDescriptor()))
+          .build();
     };
+  }
+
+  private static MethodDescriptor getRawDescriptorOrNull(MethodDescriptor methodDescriptor) {
+    return methodDescriptor == null ? null : methodDescriptor.toRawMemberDescriptor();
+  }
+
+  private static DeclaredTypeDescriptor getRawDescriptorOrNull(
+      DeclaredTypeDescriptor typeDescriptor) {
+    return typeDescriptor == null ? null : typeDescriptor.getRawTypeDescriptor();
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {

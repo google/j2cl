@@ -35,6 +35,8 @@ public abstract class MemberDescriptor extends Node
 
   public abstract MemberDescriptor getDeclarationDescriptor();
 
+  public abstract MemberDescriptor toRawMemberDescriptor();
+
   /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
   public boolean isMemberOf(TypeDescriptor typeDescriptor) {
     return getEnclosingTypeDescriptor()

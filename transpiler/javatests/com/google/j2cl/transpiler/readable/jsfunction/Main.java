@@ -272,10 +272,7 @@ public class Main {
     }
   }
 
-  // TODO(b/69800106): Remove "_" once the bug is fixed. The underscore seems to guarantees that
-  // this method which refers to Function as a raw type is seen before others that use Function
-  // as a parameterized type thus avoiding b/69800106.
-  public static Object _callInterfaceRaw(JsBiFunction f, Object o, Number n) {
+  public static Object callInterfaceRaw(JsBiFunction f, Object o, Number n) {
     return f.apply(o, n);
   }
 
@@ -288,10 +285,7 @@ public class Main {
     return f.apply(u, v);
   }
 
-  // TODO(b/69800106): Remove "_" once the bug is fixed. The underscore seems to guarantees that
-  // this method which refers to Function as a raw type is seen before others that use Function
-  // as a parameterized type thus avoiding b/69800106.
-  public static Object _callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
+  public static Object callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
     return f.apply(o, n);
   }
 
@@ -302,12 +296,12 @@ public class Main {
   public static void testParameterTypes() {
     JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();
     JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();
-    _callInterfaceRaw(tIntegerJsBiFunction, "a", 1);
-    _callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);
+    callInterfaceRaw(tIntegerJsBiFunction, "a", 1);
+    callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);
     callInterfaceParameterized(tIntegerJsBiFunction, "a");
     callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);
     callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);
-    _callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);
+    callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);
     callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");
     tIntegerJsBiFunction.apply("a", 1);
     doubleDoubleJsBiFunction.apply(1.1, 1.1);
