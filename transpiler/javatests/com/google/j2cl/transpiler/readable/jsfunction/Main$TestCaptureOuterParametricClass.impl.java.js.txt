@@ -1,0 +1,113 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$TestCaptureOuterParametricClass.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.TestCaptureOuterParametricClass$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+
+
+/**
+ * @template C_TestCaptureOuterParametricClass_T
+ */
+class TestCaptureOuterParametricClass extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor
+   * 'TestCaptureOuterParametricClass()'.
+   * @template C_TestCaptureOuterParametricClass_T
+   * @return {!TestCaptureOuterParametricClass<C_TestCaptureOuterParametricClass_T>}
+   * @public
+   */
+  static $create__() {
+    TestCaptureOuterParametricClass.$clinit();
+    let $instance = new TestCaptureOuterParametricClass();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TestCaptureOuterParametricClass__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'TestCaptureOuterParametricClass()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TestCaptureOuterParametricClass__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_TestCaptureOuterParametricClass();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test__() {
+    let f = ((/** * */ object) => {
+      return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
+    });
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof TestCaptureOuterParametricClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, TestCaptureOuterParametricClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    TestCaptureOuterParametricClass.$clinit = function() {};
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_TestCaptureOuterParametricClass() {
+  }
+};
+
+$Util.$setClassMetadata(
+    TestCaptureOuterParametricClass,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$TestCaptureOuterParametricClass'));
+
+
+
+/**
+ * Export class.
+ */
+exports = TestCaptureOuterParametricClass;
+//# sourceMappingURL=Main$TestCaptureOuterParametricClass.js.map

@@ -1,85 +1,94 @@
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [super();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
+...  }
+}] => [/** @public {?function(?):void} */
+    this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main = null;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
+[public class Main {
+  @JsFunction
+...  }
+}] => [/** @public {?function(?string):void} */
+    this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main = null;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
+[public class Main {
+  @JsFunction
 ...  }
 }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_create>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_create>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_create>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_create>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [fn] => [fn] "fn"
 [a] => [a] "a"
-[public static int fun(MyJsFunctionInterface fn, int a) {
+[public static int callFn(JsFunctionInterface fn, int a) {
     return fn.foo(a);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.fun"
-[return fn.foo(a);] => [return fn(a);] "com.google.j2cl.transpiler.readable.jsfunction.Main.fun"
-[MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callFn"
+[return fn.foo(a);] => [return fn(a);] "com.google.j2cl.transpiler.readable.jsfunction.Main.callFn"
+[JsFunctionImplementation func = new JsFunctionImplementation();] => [let func = JsFunctionImplementation.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunction"
 [func] => [func] "func"
-[func.foo(10);] => [func(10);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[callAsFunction(func, 10);] => [Main.callAsFunction(func, 10);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[fun(createMyJsFunction(), 10);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(Main.createMyJsFunction(), 10);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[int a = func.field;] => [let a = func.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
+[func.foo(10);] => [func(10);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunction"
+[callFn(createNativeFunction(), 10);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(Main.createNativeFunction(), 10);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunction"
+[int a = func.field;] => [let a = func.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunction"
 [a] => [a] "a"
-[func.bar();] => [MyJsFunctionImpl.m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(func);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[final int n = 4;] => [let n = 4;] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
+[func.bar();] => [JsFunctionImplementation.m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(func);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunction"
+[final int n = 4;] => [let n = 4;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [n] => [n] "n"
-[fun((number) -> number + n, n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((/** number */ number$1$) =>{
+[callFn((number) -> number + n, n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(((/** number */ number$1$) =>{
       return number$1$ + n;
-    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
+    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [number] => [number$1$] "number"
-[number + n] => [return number$1$ + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in test>"
-[fun(
-        new MyJsFunctionInterface() {
+[number + n] => [return number$1$ + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionsCapturingLocal>"
+[callFn(
+        new JsFunctionInterface() {
 ...        },
-        n);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(((/** number */ a$1$) =>{
-      return a$1$ + n;
-    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[a] => [a$1$] "a"
-[return a + n;] => [return a$1$ + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
-[new MyJsFunctionInterface() {
+        n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(((/** number */ a) =>{
+      return a + n;
+    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
+[a] => [a] "a"
+[return a + n;] => [return a + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
+[new JsFunctionInterface() {
       @Override
 ...      }
-    }.foo(3);] => [((/** number */ a$2$) =>{
-      this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+    }.foo(3);] => [((/** number */ a$1$) =>{
+      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
       return 0;
-    })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.test"
-[a] => [a$2$] "a"
-[handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
+    })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
+[a] => [a$1$] "a"
+[instanceMethod();] => [this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
-[fn] => [fn] "fn"
-[arg] => [arg] "arg"
-[f] => [f] "f"
-[public static void f(Function<String, String> f) {}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.f"
-[List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
+[new JsFunctionInterface() {
+      @Override
+...      }
+    }.foo(3);] => [((/** number */ a) =>{
+      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+      return 0;
+    })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionThis"
+[a] => [a] "a"
+[instanceMethod();] => [this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.foo"
+[return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.foo"
+[List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionErasureCasts"
 [list] => [list] "list"
-[f(list.get(0));] => [Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.test2"
-[generator] => [generator] "generator"
-[public static <A, T> A[] toArray(IntFunction<A[]> generator) {
-    List<T> collected = null;
-    return collected.toArray(generator.apply(collected.size()));
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
-[List<T> collected = null;] => [let collected = null;] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
-[collected] => [collected] "collected"
-[return collected.toArray(generator.apply(collected.size()));] => [return collected.m_toArray__arrayOf_java_lang_Object(/**@type {Array<*>} */ ($Arrays.$castTo(generator.m_apply__int(collected.size()), java_lang_Object, 1)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.toArray"
+[acceptsJsFunction(list.get(0));] => [Main.m_acceptsJsFunction__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(/**@type {?function(?string):?string} */ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionErasureCasts"
+[f] => [f] "f"
+[public static void acceptsJsFunction(Function<String, String> f) {}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.acceptsJsFunction"
 [JsFunctionVarargs f =
         (int i, int... numbers) -> {
 ...          return sum;
@@ -121,23 +130,38 @@
 [@Override
       public int m(int i, int... numbers) {
 ...        return sum;
-      }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
-[int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+      }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
+[int sum = i;] => [let sum = i;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
           sum += number;
         }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number$1$ = $array[$index];
         sum += number$1$;
-      }] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+      }] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [for (int number : numbers) {
           sum += number;
-        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+        }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [number] => [number$1$] "number"
-[sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
-[return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.m"
+[sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
+[return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [x] => [x] "x"
 [x] => [x] "x"
+[x] => [x] "x"
+[@JsMethod
+  <T> void acceptsVarargsJsFunctionWithTypeVariableInVarargs(JsFunctionVarargsGenerics<T>... x) {}] => [$Arrays.$stampType(x, $JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.acceptsVarargsJsFunctionWithTypeVariableInVarargs"
+[x] => [x] "x"
+[@JsMethod
+  <T> void acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(
+      JsFunctionVarargsGenerics<List<T>>... x) {}] => [$Arrays.$stampType(x, $JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs"
+[x] => [x] "x"
+[@JsMethod
+  void acceptsJsFunctionInVarargs(SimpleJsFunction... x) {}] => [$Arrays.$stampType(x, $JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.acceptsJsFunctionInVarargs"
+[SimpleJsFunction[] array = {};] => [let array = /**@type {!Array<?function():void>} */ ($Arrays.$init([], $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
+[array] => [array] "array"
+[Object o = SimpleJsFunction.class;] => [let o = Class.$get($JavaScriptFunction);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
+[o] => [o] "o"
+[o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** @param {number} i @param {?number=} n */ (i, n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
@@ -145,22 +169,18 @@
 [i] => [i] "i"
 [n] => [n] "n"
 [(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionOptional>"
-[static void functionExpressionTypeReplacement() {
-    ParametricJsFunction<String> f =
-...        };
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.functionExpressionTypeReplacement"
 [ParametricJsFunction<String> f =
         unused -> {
 ...          l.add(new ArrayList<String>());
         };] => [let f = ((/** ?string */ unused) =>{
       let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());
       l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.functionExpressionTypeReplacement"
+    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testFunctionExpressionTypeReplacement"
 [f] => [f] "f"
 [unused] => [unused] "unused"
-[List<List<?>> l = new ArrayList<>();] => [let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in functionExpressionTypeReplacement>"
+[List<List<?>> l = new ArrayList<>();] => [let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
 [l] => [l] "l"
-[l.add(new ArrayList<String>());] => [l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in functionExpressionTypeReplacement>"
+[l.add(new ArrayList<String>());] => [l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
 [ClassWithJsFunctionProperty c = new ClassWithJsFunctionProperty();] => [let c = ClassWithJsFunctionProperty.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionPropertyCall"
 [c] => [c] "c"
 [c.function.call("");] => [let $function = c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionPropertyCall"
@@ -171,10 +191,98 @@
 [(c.function).call("");] => [$function$2$("");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionPropertyCall"
 [(c != null ? c.function : null).call("");] => [let $function$3$ = (!$Equality.$same(c, null) ? c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty : null);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionPropertyCall"
 [(c != null ? c.function : null).call("");] => [$function$3$("");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionPropertyCall"
+[f] => [f] "f"
+[o] => [o] "o"
+[n] => [n] "n"
+[public static Object _callInterfaceRaw(JsBiFunction f, Object o, Number n) {
+    return f.apply(o, n);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main._callInterfaceRaw"
+[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main._callInterfaceRaw"
+[f] => [f] "f"
+[s] => [s] "s"
+[public static String callInterfaceParameterized(JsBiFunction<String, Integer> f, String s) {
+    return f.apply(s, 1);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceParameterized"
+[return f.apply(s, 1);] => [return /**@type {?string} */ ($Casts.$to(f(s, Integer.m_valueOf__int(1)), java_lang_String));] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceParameterized"
+[f] => [f] "f"
+[u] => [u] "u"
+[v] => [v] "v"
+[public static <U, V extends Number> U callInterfaceUnparameterized(
+      JsBiFunction<U, V> f, U u, V v) {
+    return f.apply(u, v);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceUnparameterized"
+[return f.apply(u, v);] => [return f(u, v);] "com.google.j2cl.transpiler.readable.jsfunction.Main.callInterfaceUnparameterized"
+[f] => [f] "f"
+[o] => [o] "o"
+[n] => [n] "n"
+[public static Object _callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
+    return f.apply(o, n);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main._callImplementorRaw"
+[return f.apply(o, n);] => [return f(o, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main._callImplementorRaw"
+[f] => [f] "f"
+[s] => [s] "s"
+[public static String callImplementorParameterized(TIntegerJsBiFunction<String> f, String s) {
+    return f.apply(s, 1);
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.callImplementorParameterized"
+[return f.apply(s, 1);] => [return /**@type {?string} */ ($Casts.$to(f(s, Integer.m_valueOf__int(1)), java_lang_String));] "com.google.j2cl.transpiler.readable.jsfunction.Main.callImplementorParameterized"
+[public static void testParameterTypes() {
+    JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();
+...    callOnFunction(new DoubleDoubleJsBiFunction());
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();] => [let tIntegerJsBiFunction = /**@type {function(?string, Integer):?string} */ (TIntegerJsBiFunction.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[tIntegerJsBiFunction] => [tIntegerJsBiFunction] "tIntegerJsBiFunction"
+[JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();] => [let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
+[_callInterfaceRaw(tIntegerJsBiFunction, "a", 1);] => [Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, "a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[_callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callInterfaceParameterized(tIntegerJsBiFunction, "a");] => [Main.m_callInterfaceParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_String(tIntegerJsBiFunction, "a");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, "a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[_callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);] => [Main.m__callImplementorRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(/**@type {function(?number, Integer):?number} */ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");] => [Main.m_callImplementorParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_String(/**@type {function(?string, Integer):?string} */ (TIntegerJsBiFunction.$create__()), "");] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[tIntegerJsBiFunction.apply("a", 1);] => [tIntegerJsBiFunction("a", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[doubleDoubleJsBiFunction.apply(1.1, 1.1);] => [doubleDoubleJsBiFunction(1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[callOnFunction(new DoubleDoubleJsBiFunction());] => [Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.testParameterTypes"
+[f] => [f] "f"
+[public static void testCast() {
+    Object o = new TIntegerJsBiFunction<String>();
+...    DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[Object o = new TIntegerJsBiFunction<String>();] => [let o = /**@type {function(?string, Integer):?string} */ (TIntegerJsBiFunction.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[o] => [o] "o"
+[TIntegerJsBiFunction rawTIntegerJsBiFunction = (TIntegerJsBiFunction) o;] => [let rawTIntegerJsBiFunction = /**@type {?function(*, Integer):*} */ ($Casts.$to(o, TIntegerJsBiFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[rawTIntegerJsBiFunction] => [rawTIntegerJsBiFunction] "rawTIntegerJsBiFunction"
+[TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =
+        (TIntegerJsBiFunction<String>) o;] => [let parameterizedTIntegerJsBiFunction = /**@type {?function(?string, Integer):?string} */ ($Casts.$to(o, TIntegerJsBiFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[parameterizedTIntegerJsBiFunction] => [parameterizedTIntegerJsBiFunction] "parameterizedTIntegerJsBiFunction"
+[JsBiFunction anotherRawJsBiFunction = (JsBiFunction) o;] => [let anotherRawJsBiFunction = /**@type {?function(*, (Number|number)):*} */ ($Casts.$to(o, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[anotherRawJsBiFunction] => [anotherRawJsBiFunction] "anotherRawJsBiFunction"
+[JsBiFunction<String, Integer> anotherParameterizedJsBiFunction =
+        (JsBiFunction<String, Integer>) o;] => [let anotherParameterizedJsBiFunction = /**@type {?function(?string, Integer):?string} */ ($Casts.$to(o, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[anotherParameterizedJsBiFunction] => [anotherParameterizedJsBiFunction] "anotherParameterizedJsBiFunction"
+[DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;] => [let doubleDoubleJsBiFunction = /**@type {?function(?number, ?number):?number} */ ($Casts.$to(o, DoubleDoubleJsBiFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testCast"
+[doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
+[public static void testNewInstance() {
+    TIntegerJsBiFunction rawTIntegerJsBiFunction = new TIntegerJsBiFunction();
+...    JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();
+  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testNewInstance"
+[TIntegerJsBiFunction rawTIntegerJsBiFunction = new TIntegerJsBiFunction();] => [let rawTIntegerJsBiFunction = TIntegerJsBiFunction.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testNewInstance"
+[rawTIntegerJsBiFunction] => [rawTIntegerJsBiFunction] "rawTIntegerJsBiFunction"
+[TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =
+        (TIntegerJsBiFunction) new TIntegerJsBiFunction<String>();] => [let parameterizedTIntegerJsBiFunction = /**@type {?function(*, Integer):*} */ ($Casts.$to(TIntegerJsBiFunction.$create__(), TIntegerJsBiFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.testNewInstance"
+[parameterizedTIntegerJsBiFunction] => [parameterizedTIntegerJsBiFunction] "parameterizedTIntegerJsBiFunction"
+[JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();] => [let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testNewInstance"
+[rawJsBiFunction] => [rawJsBiFunction] "rawJsBiFunction"
 [public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
 ...  }
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"
+[ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** * */ event) =>{
+    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
+[event] => [event] "event"
+[ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};] => [this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** ?string */ event) =>{
+    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
+[event] => [event] "event"
 [// Copyright 2017 Google Inc.] => [// Copyright 2017 Google Inc.] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [//] => [//] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [// Licensed under the Apache License, Version 2.0 (the "License");] => [// Licensed under the Apache License, Version 2.0 (the "License");] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
@@ -189,19 +297,19 @@
 [// See the License for the specific language governing permissions and] => [// See the License for the specific language governing permissions and] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [// limitations under the License.] => [// limitations under the License.] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [/**] => [/**] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[* @param {*} fn] => [* @param {*} fn] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[* @param {number} arg] => [* @param {number} arg] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[* @return {number}] => [* @return {number}] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[* @return {function(number):number}] => [* @return {function(number):number}] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [* @public] => [* @public] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [*/] => [*/] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[Main.callAsFunction = function(fn, arg) {] => [Main.callAsFunction = function(fn, arg) {] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[return (/** @type {Function} */ (fn))(arg);] => [return (/** @type {Function} */ (fn))(arg);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[Main.createNativeFunction = function() {] => [Main.createNativeFunction = function() {] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[return function(a) {] => [return function(a) {] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[};] => [};] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [};] => [};] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [/**] => [/**] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[* @return {!Function}] => [* @return {!Function}] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[* @param {function(?number, ?number):?number} fn] => [* @param {function(?number, ?number):?number} fn] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[* @return {?number}] => [* @return {?number}] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [* @public] => [* @public] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [*/] => [*/] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[Main.createMyJsFunction = function() {] => [Main.createMyJsFunction = function() {] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[let myFn = function(a) { return a; };] => [let myFn = function(a) { return a; };] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
-[return myFn;] => [return myFn;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[Main.callOnFunction = function(fn) {] => [Main.callOnFunction = function(fn) {] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
+[return fn(1.1, 1.1);] => [return fn(1.1, 1.1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"
 [};] => [};] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"

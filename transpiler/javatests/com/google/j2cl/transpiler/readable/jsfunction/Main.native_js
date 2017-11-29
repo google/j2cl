@@ -13,20 +13,20 @@
 // limitations under the License.
 
 /**
- * @param {*} fn
- * @param {number} arg
- * @return {number}
+ * @return {function(number):number}
  * @public
  */
-Main.callAsFunction = function(fn, arg) {
-  return (/** @type {Function} */ (fn))(arg);
+Main.createNativeFunction = function() {
+  return function(a) {
+    return a;
+  };
 };
 
 /**
- * @return {!Function}
+ * @param {function(?number, ?number):?number} fn
+ * @return {?number}
  * @public
  */
-Main.createMyJsFunction = function() {
-  let myFn = function(a) { return a; };
-  return myFn;
+Main.callOnFunction = function(fn) {
+  return fn(1.1, 1.1);
 };

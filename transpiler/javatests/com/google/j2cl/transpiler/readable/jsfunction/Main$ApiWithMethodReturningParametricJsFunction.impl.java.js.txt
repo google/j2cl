@@ -1,0 +1,103 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$ApiWithMethodReturningParametricJsFunction.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+
+/**
+ * @interface
+ */
+class ApiWithMethodReturningParametricJsFunction {
+  /**
+   * @abstract
+   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
+   * @return {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
+   * @public
+   */
+  m_anApi__() {}
+
+  /**
+   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
+   * @param {?function():?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void} fn
+   * @return {ApiWithMethodReturningParametricJsFunction}
+   * @public
+   */
+  static $adapt(fn) {
+    ApiWithMethodReturningParametricJsFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    ApiWithMethodReturningParametricJsFunction.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    ApiWithMethodReturningParametricJsFunction,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$ApiWithMethodReturningParametricJsFunction'));
+
+
+ApiWithMethodReturningParametricJsFunction.$markImplementor(
+    /** @type {Function} */ (ApiWithMethodReturningParametricJsFunction));
+
+
+/**
+ * Export class.
+ */
+exports = ApiWithMethodReturningParametricJsFunction;
+//# sourceMappingURL=Main$ApiWithMethodReturningParametricJsFunction.js.map

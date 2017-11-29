@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Implementor$impl');
 
 
-const Api = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.Api$impl');
+const ApiWithMethodReturningParametricJsFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -16,7 +16,7 @@ let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$im
 
 
 /**
- * @implements {Api}
+ * @implements {ApiWithMethodReturningParametricJsFunction}
  */
 class Implementor extends java_lang_Object {
   /**
@@ -63,8 +63,8 @@ class Implementor extends java_lang_Object {
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
-   * @template M_Api_anApi_T
-   * @return {?function(M_Api_anApi_T):void}
+   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
+   * @return {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
    * @public
    */
   m_anApi__() {
@@ -116,7 +116,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.jsfunction.Main$Implementor'));
 
 
-Api.$markImplementor(Implementor);
+ApiWithMethodReturningParametricJsFunction.$markImplementor(Implementor);
 
 
 /**

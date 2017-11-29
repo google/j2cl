@@ -1,0 +1,152 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.Main$TIntegerJsBiFunction.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.TIntegerJsBiFunction$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_TIntegerJsBiFunction_T
+ */
+class TIntegerJsBiFunction extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'TIntegerJsBiFunction()'.
+   * @template C_TIntegerJsBiFunction_T
+   * @return {function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T}
+   * @public
+   */
+  static $create__() {
+    TIntegerJsBiFunction.$clinit();
+    let $instance = new TIntegerJsBiFunction();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__();
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(TIntegerJsBiFunction)
+            .m_apply__java_lang_Object__java_lang_Number,
+        $instance, TIntegerJsBiFunction.$copy);
+  }
+
+  /**
+   * Initialization from constructor 'TIntegerJsBiFunction()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction();
+  }
+
+  /**
+   * Bridge method.
+   * @this {?function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T}
+   * @param {*} arg0
+   * @param {(Number|number)} arg1
+   * @return {C_TIntegerJsBiFunction_T}
+   * @public
+   */
+  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
+    return TIntegerJsBiFunction
+        .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
+            this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
+  }
+
+  /**
+   * @template C_TIntegerJsBiFunction_T
+   * @param {?function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T} $thisArg
+   * @param {C_TIntegerJsBiFunction_T} element
+   * @param {Integer} i
+   * @return {C_TIntegerJsBiFunction_T}
+   * @public
+   */
+  static m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
+      $thisArg, element, i) {
+    TIntegerJsBiFunction.$clinit();
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TIntegerJsBiFunction);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {TIntegerJsBiFunction} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction =
+        true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    TIntegerJsBiFunction.$clinit = function() {};
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction() {
+  }
+};
+
+$Util.$setClassMetadata(
+    TIntegerJsBiFunction,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main$TIntegerJsBiFunction'));
+
+
+$JavaScriptFunction.$markImplementor(TIntegerJsBiFunction);
+
+
+/**
+ * Export class.
+ */
+exports = TIntegerJsBiFunction;
+//# sourceMappingURL=Main$TIntegerJsBiFunction.js.map

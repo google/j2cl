@@ -11,14 +11,18 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ClassWithJsFunctionProperty = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
-let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
-let com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface.$Overlay$impl');
+let DoubleDoubleJsBiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.DoubleDoubleJsBiFunction$impl');
+let JsFunctionImplementation = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionImplementation$impl');
+let com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionInterface.$Overlay$impl');
+let TIntegerJsBiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.TIntegerJsBiFunction$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let java_util_List_$Overlay = goog.forwardDeclare('java.util.List.$Overlay$impl');
-let IntFunction = goog.forwardDeclare('java.util.function.IntFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -34,6 +38,12 @@ class Main extends java_lang_Object {
    */
   constructor() {
     super();
+    /** @public {?function(?):void} */
+    this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main =
+        null;
+    /** @public {?function(?string):void} */
+    this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main =
+        null;
   }
 
   /**
@@ -59,12 +69,18 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @return {?function(number):number}
+   * @public
+   */
+  // native static createNativeFunction()
+
+  /**
    * @param {?function(number):number} fn
    * @param {number} a
    * @return {number}
    * @public
    */
-  static m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
+  static m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
       fn, a) {
     Main.$clinit();
     return fn(a);
@@ -74,53 +90,67 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_test__() {
-    let func = MyJsFunctionImpl.$create__();
+  m_testJsFunction__() {
+    let func = JsFunctionImplementation.$create__();
     func(10);
-    Main.callAsFunction(func, 10);
-    Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
-        Main.createMyJsFunction(), 10);
+    Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
+        Main.createNativeFunction(), 10);
     let a =
-        func.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
-    MyJsFunctionImpl
-        .m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+        func.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
+    JsFunctionImplementation
+        .m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(
             func);
-    let n = 4;
-    Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
-        ((/** number */ number$1$) => {
-          return number$1$ + n;
-        }),
-        n);
-    Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
-        ((/** number */ a$1$) => {
-          return a$1$ + n;
-        }),
-        n);
-    ((/** number */ a$2$) => {
-      this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
-      return 0;
-    })(3);
   }
-
-  /**
-   * @param {*} fn
-   * @param {number} arg
-   * @return {number}
-   * @public
-   */
-  // native static callAsFunction(fn, arg)
-
-  /**
-   * @return {?function(number):number}
-   * @public
-   */
-  // native static createMyJsFunction()
 
   /**
    * @return {void}
    * @public
    */
-  m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main() {
+  m_testJsFunctionsCapturingLocal__() {
+    let n = 4;
+    Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
+        ((/** number */ number$1$) => {
+          return number$1$ + n;
+        }),
+        n);
+    Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
+        ((/** number */ a) => {
+          return a + n;
+        }),
+        n);
+    ((/** number */ a$1$) => {
+      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+      return 0;
+    })(3);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionThis__() {
+    ((/** number */ a) => {
+      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+      return 0;
+    })(3);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionErasureCasts__() {
+    let list = /**@type {!ArrayList<?function(?string):?string>} */ (
+        ArrayList.$create__());
+    Main.m_acceptsJsFunction__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(
+        /**@type {?function(?string):?string} */ (
+            $Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));
   }
 
   /**
@@ -128,34 +158,9 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  static m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(f) {
+  static m_acceptsJsFunction__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(
+      f) {
     Main.$clinit();
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test2__() {
-    let list = /**@type {!ArrayList<?function(?string):?string>} */ (
-        ArrayList.$create__());
-    Main.m_f__com_google_j2cl_transpiler_readable_jsfunction_Main_Function(
-        /**@type {?function(?string):?string} */ (
-            $Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));
-  }
-
-  /**
-   * @template M_A, M_T
-   * @param {IntFunction<Array<M_A>>} generator
-   * @return {Array<M_A>}
-   * @public
-   */
-  static m_toArray__java_util_function_IntFunction(generator) {
-    Main.$clinit();
-    let collected = null;
-    return collected.m_toArray__arrayOf_java_lang_Object(
-        /**@type {Array<*>} */ ($Arrays.$castTo(
-            generator.m_apply__int(collected.size()), java_lang_Object, 1)));
   }
 
   /**
@@ -202,7 +207,7 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_f1__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction(
+  m_acceptsVarargsJsFunctionWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction(
       x) {}
 
   /**
@@ -211,8 +216,48 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_f2__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction(
+  m_acceptsVarargsJsFunctionWithParemetrizedType__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction(
       x) {}
+
+  /**
+   * @template M_T
+   * @param {...?function(number, ...?):number} x
+   * @return {void}
+   * @public
+   */
+  acceptsVarargsJsFunctionWithTypeVariableInVarargs(...x) {
+    $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  }
+
+  /**
+   * @template M_T
+   * @param {...?function(number, ...List<?>):number} x
+   * @return {void}
+   * @public
+   */
+  acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(...x) {
+    $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  }
+
+  /**
+   * @param {...?function():void} x
+   * @return {void}
+   * @public
+   */
+  acceptsJsFunctionInVarargs(...x) {
+    $Arrays.$stampType(x, $JavaScriptFunction, 1);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunctionClassLiterals___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
+    let array = /**@type {!Array<?function():void>} */ (
+        $Arrays.$init([], $JavaScriptFunction));
+    let o = Class.$get($JavaScriptFunction);
+    o = Class.$get($JavaScriptFunction, 1);
+  }
 
   /**
    * @return {void}
@@ -229,8 +274,7 @@ class Main extends java_lang_Object {
    * @return {void}
    * @public
    */
-  static m_functionExpressionTypeReplacement___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    Main.$clinit();
+  m_testFunctionExpressionTypeReplacement___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
     let f = ((/** ?string */ unused) => {
       let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());
       l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
@@ -267,6 +311,148 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @param {?function(*, (Number|number)):*} f
+   * @param {*} o
+   * @param {(Number|number)} n
+   * @return {*}
+   * @public
+   */
+  static m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+      f, o, n) {
+    Main.$clinit();
+    return f(o, n);
+  }
+
+  /**
+   * @param {?function(?string, Integer):?string} f
+   * @param {?string} s
+   * @return {?string}
+   * @public
+   */
+  static m_callInterfaceParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_String(
+      f, s) {
+    Main.$clinit();
+    return /**@type {?string} */ (
+        $Casts.$to(f(s, Integer.m_valueOf__int(1)), java_lang_String));
+  }
+
+  /**
+   * @template M_U, M_V
+   * @param {?function(M_U, M_V):M_U} f
+   * @param {M_U} u
+   * @param {M_V} v
+   * @return {M_U}
+   * @public
+   */
+  static m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+      f, u, v) {
+    Main.$clinit();
+    return f(u, v);
+  }
+
+  /**
+   * @param {?function(*, Integer):*} f
+   * @param {*} o
+   * @param {Integer} n
+   * @return {*}
+   * @public
+   */
+  static m__callImplementorRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
+      f, o, n) {
+    Main.$clinit();
+    return f(o, n);
+  }
+
+  /**
+   * @param {?function(?string, Integer):?string} f
+   * @param {?string} s
+   * @return {?string}
+   * @public
+   */
+  static m_callImplementorParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_String(
+      f, s) {
+    Main.$clinit();
+    return /**@type {?string} */ (
+        $Casts.$to(f(s, Integer.m_valueOf__int(1)), java_lang_String));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testParameterTypes__() {
+    Main.$clinit();
+    let tIntegerJsBiFunction =
+        /**@type {function(?string, Integer):?string} */ (
+            TIntegerJsBiFunction.$create__());
+    let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+    Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+        tIntegerJsBiFunction, 'a', Integer.m_valueOf__int(1));
+    Main.m__callInterfaceRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+        doubleDoubleJsBiFunction, 1.1, 1.1);
+    Main.m_callInterfaceParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_String(
+        tIntegerJsBiFunction, 'a');
+    Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+        tIntegerJsBiFunction, 'a', Integer.m_valueOf__int(1));
+    Main.m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
+        doubleDoubleJsBiFunction, 1.1, 1.1);
+    Main.m__callImplementorRaw__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
+        /**@type {function(?number, Integer):?number} */ (
+            TIntegerJsBiFunction.$create__()),
+        1.1, Integer.m_valueOf__int(1));
+    Main.m_callImplementorParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_String(
+        /**@type {function(?string, Integer):?string} */ (
+            TIntegerJsBiFunction.$create__()),
+        '');
+    tIntegerJsBiFunction('a', Integer.m_valueOf__int(1));
+    doubleDoubleJsBiFunction(1.1, 1.1);
+    Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());
+  }
+
+  /**
+   * @param {?function(?number, ?number):?number} f
+   * @return {number}
+   * @public
+   */
+  // native static callOnFunction(f)
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testCast__() {
+    Main.$clinit();
+    let o = /**@type {function(?string, Integer):?string} */ (
+        TIntegerJsBiFunction.$create__());
+    let rawTIntegerJsBiFunction = /**@type {?function(*, Integer):*} */ (
+        $Casts.$to(o, TIntegerJsBiFunction));
+    let parameterizedTIntegerJsBiFunction =
+        /**@type {?function(?string, Integer):?string} */ (
+            $Casts.$to(o, TIntegerJsBiFunction));
+    let anotherRawJsBiFunction = /**@type {?function(*, (Number|number)):*} */ (
+        $Casts.$to(o, $JavaScriptFunction));
+    let anotherParameterizedJsBiFunction =
+        /**@type {?function(?string, Integer):?string} */ (
+            $Casts.$to(o, $JavaScriptFunction));
+    let doubleDoubleJsBiFunction =
+        /**@type {?function(?number, ?number):?number} */ (
+            $Casts.$to(o, DoubleDoubleJsBiFunction));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testNewInstance__() {
+    Main.$clinit();
+    let rawTIntegerJsBiFunction = TIntegerJsBiFunction.$create__();
+    let parameterizedTIntegerJsBiFunction =
+        /**@type {?function(*, Integer):*} */ (
+            $Casts.$to(TIntegerJsBiFunction.$create__(), TIntegerJsBiFunction));
+    let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -294,9 +480,16 @@ class Main extends java_lang_Object {
     Main.$clinit = function() {};
     ClassWithJsFunctionProperty = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
-    MyJsFunctionImpl = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
+    DoubleDoubleJsBiFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.DoubleDoubleJsBiFunction$impl');
+    JsFunctionImplementation = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionImplementation$impl');
+    TIntegerJsBiFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.TIntegerJsBiFunction$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
@@ -312,7 +505,12 @@ class Main extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jsfunction_Main() {}
+  $init__com_google_j2cl_transpiler_readable_jsfunction_Main() {
+    this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main =
+        ((/** * */ event) => {});
+    this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main =
+        ((/** ?string */ event) => {});
+  }
 };
 
 $Util.$setClassMetadata(
@@ -341,24 +539,22 @@ const com_google_j2cl_transpiler_readable_jsfunction_Main = Main;
 // limitations under the License.
 
 /**
- * @param {*} fn
- * @param {number} arg
- * @return {number}
+ * @return {function(number):number}
  * @public
  */
-Main.callAsFunction = function(fn, arg) {
-  return (/** @type {Function} */ (fn))(arg);
+Main.createNativeFunction = function() {
+  return function(a) {
+    return a;
+  };
 };
 
 /**
- * @return {!Function}
+ * @param {function(?number, ?number):?number} fn
+ * @return {?number}
  * @public
  */
-Main.createMyJsFunction = function() {
-  let myFn = function(a) {
-    return a;
-  };
-  return myFn;
+Main.callOnFunction = function(fn) {
+  return fn(1.1, 1.1);
 };
 
 

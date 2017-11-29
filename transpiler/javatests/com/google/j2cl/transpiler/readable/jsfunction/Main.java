@@ -17,34 +17,71 @@ package com.google.j2cl.transpiler.readable.jsfunction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntFunction;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 public class Main {
-  public static int fun(MyJsFunctionInterface fn, int a) {
+  @JsFunction
+  interface Function<T, U> {
+    T apply(U u);
+  }
+
+  @JsFunction
+  interface JsFunctionInterface {
+    int foo(int a);
+
+    @JsOverlay
+    default int overlayMethod() {
+      return foo(42);
+    }
+  }
+
+  private static final class JsFunctionImplementation implements JsFunctionInterface {
+    public int field;
+
+    public int bar() {
+      return 0;
+    }
+
+    public int fun() {
+      return bar() + foo(1);
+    }
+
+    @Override
+    public int foo(int a) {
+      return a + this.bar() + this.field;
+    }
+  }
+
+  @JsMethod
+  public static native JsFunctionInterface createNativeFunction();
+
+  public static int callFn(JsFunctionInterface fn, int a) {
     return fn.foo(a);
   }
 
-  public void test() {
-    MyJsFunctionImpl func = new MyJsFunctionImpl();
+  public void testJsFunction() {
+    JsFunctionImplementation func = new JsFunctionImplementation();
     // call by java
     func.foo(10);
-    // call by js
-    callAsFunction(func, 10);
     // pass Javascript function to java.
-    fun(createMyJsFunction(), 10);
+    callFn(createNativeFunction(), 10);
     // call other instance methods and fields.
     int a = func.field;
     func.bar();
+  }
 
+  public void testJsFunctionsCapturingLocal() {
     final int n = 4;
     // Use number as a variable to make sure it is aliased properly.
-    fun((number) -> number + n, n);
-    fun(
-        new MyJsFunctionInterface() {
+    callFn((number) -> number + n, n);
+    callFn(
+        new JsFunctionInterface() {
           @Override
           public int foo(int a) {
             return a + n;
@@ -52,44 +89,37 @@ public class Main {
         },
         n);
 
-    new MyJsFunctionInterface() {
+    new JsFunctionInterface() {
       @Override
       public int foo(int a) {
-        handleReceiveCommands();
+        instanceMethod();
         return 0;
       }
     }.foo(3);
-
   }
 
-  @JsMethod
-  public static native int callAsFunction(Object fn, int arg);
-
-  @JsMethod
-  public static native MyJsFunctionInterface createMyJsFunction();
-
-  private void handleReceiveCommands() {}
-
-  @JsFunction
-  interface Function<T, U> {
-    T apply(U u);
+  public void testJsFunctionThis() {
+    new JsFunctionInterface() {
+      @Override
+      public int foo(int a) {
+        // captures this
+        instanceMethod();
+        return 0;
+      }
+    }.foo(3);
   }
 
-  public static void f(Function<String, String> f) {}
+  private void instanceMethod() {}
 
-  public void test2() {
+  public void testJsFunctionErasureCasts() {
     List<Function<String, String>> list = new ArrayList<>();
-    f(list.get(0));
+    acceptsJsFunction(list.get(0));
   }
 
-  public static <A, T> A[] toArray(IntFunction<A[]> generator) {
-    List<T> collected = null;
-    return collected.toArray(generator.apply(collected.size()));
-  }
+  public static void acceptsJsFunction(Function<String, String> f) {}
 
-  @SuppressWarnings("ClassCanBeStatic")
-  class SomeClass<T> {
-    public void testJsFunctionWithClassCapture() {
+  static class TestCaptureOuterParametricClass<T> {
+    public void test() {
       Function<Object, Object> f = object -> new ArrayList<T>();
     }
   }
@@ -129,13 +159,30 @@ public class Main {
     int m(int i, T... numbers);
   }
 
-  <T> void f1(JsFunctionVarargsGenerics<T> x) {}
+  <T> void acceptsVarargsJsFunctionWithTypeVariable(JsFunctionVarargsGenerics<T> x) {}
 
-  <T> void f2(JsFunctionVarargsGenerics<List<T>> x) {}
+  <T> void acceptsVarargsJsFunctionWithParemetrizedType(JsFunctionVarargsGenerics<List<T>> x) {}
 
-  // TODO(b/68721890): uncomment when bug is fixed.
-  // @JsMethod
-  // <T> void f3(JsFunctionVarargsGenerics<List<T>>... x) {}
+  @JsMethod
+  <T> void acceptsVarargsJsFunctionWithTypeVariableInVarargs(JsFunctionVarargsGenerics<T>... x) {}
+
+  @JsMethod
+  <T> void acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(
+      JsFunctionVarargsGenerics<List<T>>... x) {}
+
+  @JsFunction
+  interface SimpleJsFunction {
+    void m();
+  }
+
+  @JsMethod
+  void acceptsJsFunctionInVarargs(SimpleJsFunction... x) {}
+
+  void testJsFunctionClassLiterals() {
+    SimpleJsFunction[] array = {};
+    Object o = SimpleJsFunction.class;
+    o = SimpleJsFunction[].class;
+  }
 
   @JsFunction
   interface JsFunctionOptional {
@@ -158,11 +205,15 @@ public class Main {
     void call(E event);
   }
 
-  interface Api {
+  ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};
+
+  ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};
+
+  interface ApiWithMethodReturningParametricJsFunction {
     <T> ParametricJsFunction<T> anApi();
   }
 
-  static class Implementor implements Api {
+  static class Implementor implements ApiWithMethodReturningParametricJsFunction {
     @Override
     @JsMethod
     public <T> ParametricJsFunction<T> anApi() {
@@ -177,7 +228,7 @@ public class Main {
     }
   }
 
-  static void functionExpressionTypeReplacement() {
+  void testFunctionExpressionTypeReplacement() {
     ParametricJsFunction<String> f =
         unused -> {
           List<List<?>> l = new ArrayList<>();
@@ -200,5 +251,97 @@ public class Main {
     c.getFunction().call("");
     (c.function).call("");
     (c != null ? c.function : null).call("");
+  }
+
+  @JsFunction
+  interface JsBiFunction<T, S extends Number> {
+    T apply(T t, S s);
+  }
+
+  public static final class DoubleDoubleJsBiFunction implements JsBiFunction<Double, Double> {
+    @Override
+    public Double apply(Double d, Double i) {
+      return d;
+    }
+  }
+
+  public static final class TIntegerJsBiFunction<T> implements JsBiFunction<T, Integer> {
+    @Override
+    public T apply(T element, Integer i) {
+      return null;
+    }
+  }
+
+  // TODO(b/69800106): Remove "_" once the bug is fixed. The underscore seems to guarantees that
+  // this method which refers to Function as a raw type is seen before others that use Function
+  // as a parameterized type thus avoiding b/69800106.
+  public static Object _callInterfaceRaw(JsBiFunction f, Object o, Number n) {
+    return f.apply(o, n);
+  }
+
+  public static String callInterfaceParameterized(JsBiFunction<String, Integer> f, String s) {
+    return f.apply(s, 1);
+  }
+
+  public static <U, V extends Number> U callInterfaceUnparameterized(
+      JsBiFunction<U, V> f, U u, V v) {
+    return f.apply(u, v);
+  }
+
+  // TODO(b/69800106): Remove "_" once the bug is fixed. The underscore seems to guarantees that
+  // this method which refers to Function as a raw type is seen before others that use Function
+  // as a parameterized type thus avoiding b/69800106.
+  public static Object _callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n) {
+    return f.apply(o, n);
+  }
+
+  public static String callImplementorParameterized(TIntegerJsBiFunction<String> f, String s) {
+    return f.apply(s, 1);
+  }
+
+  public static void testParameterTypes() {
+    JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();
+    JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();
+    _callInterfaceRaw(tIntegerJsBiFunction, "a", 1);
+    _callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);
+    callInterfaceParameterized(tIntegerJsBiFunction, "a");
+    callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);
+    callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);
+    _callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);
+    callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");
+    tIntegerJsBiFunction.apply("a", 1);
+    doubleDoubleJsBiFunction.apply(1.1, 1.1);
+    callOnFunction(new DoubleDoubleJsBiFunction());
+  }
+
+  @JsMethod
+  public static native double callOnFunction(DoubleDoubleJsBiFunction f);
+
+  public static void testCast() {
+    Object o = new TIntegerJsBiFunction<String>();
+    TIntegerJsBiFunction rawTIntegerJsBiFunction = (TIntegerJsBiFunction) o;
+    TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =
+        (TIntegerJsBiFunction<String>) o;
+    JsBiFunction anotherRawJsBiFunction = (JsBiFunction) o;
+    JsBiFunction<String, Integer> anotherParameterizedJsBiFunction =
+        (JsBiFunction<String, Integer>) o;
+    DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;
+  }
+
+  public static void testNewInstance() {
+    TIntegerJsBiFunction rawTIntegerJsBiFunction = new TIntegerJsBiFunction();
+    TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =
+        (TIntegerJsBiFunction) new TIntegerJsBiFunction<String>();
+    JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();
+  }
+
+  @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+  interface TestJsFunctionInJsOverlayCapturingOuter {
+    @JsOverlay
+    default void test() {
+      sort(a -> TestJsFunctionInJsOverlayCapturingOuter.this == null ? 0 : 1);
+    }
+
+    void sort(JsFunctionInterface func);
   }
 }
