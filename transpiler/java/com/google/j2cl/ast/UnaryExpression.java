@@ -29,7 +29,7 @@ public abstract class UnaryExpression extends Expression {
 
   UnaryExpression(Expression operand) {
     this.operand = checkNotNull(operand);
-    this.typeDescriptor = operand.getTypeDescriptor().unboxType();
+    this.typeDescriptor = operand.getTypeDescriptor().toUnboxedType();
   }
 
   public Expression getOperand() {

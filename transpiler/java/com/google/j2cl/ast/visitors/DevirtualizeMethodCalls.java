@@ -76,7 +76,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
             devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
                 TypeDescriptors.get().javaLangNumber, BootstrapType.NUMBERS.getDescriptor());
             devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
-                TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor(),
+                TypeDescriptors.get().javaLangComparable.toRawTypeDescriptor(),
                 BootstrapType.COMPARABLES.getDescriptor());
             devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
                 TypeDescriptors.get().javaLangCharSequence,
@@ -97,7 +97,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
             }
 
             TypeDescriptor enclosingTypeDescriptor =
-                methodCall.getTarget().getEnclosingTypeDescriptor().getRawTypeDescriptor();
+                methodCall.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
             if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
                 enclosingTypeDescriptor)) {
               return AstUtils.createDevirtualizedMethodCall(

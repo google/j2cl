@@ -75,13 +75,13 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   private static Type createOverlayImplementationType(Type type) {
     DeclaredTypeDescriptor overlayImplTypeDescriptor =
         TypeDescriptors.createOverlayImplementationTypeDescriptor(
-            type.getDeclaration().getUnparamterizedTypeDescriptor());
+            type.getDeclaration().toUnparamterizedTypeDescriptor());
     Type overlayClass =
         new Type(
             type.getSourcePosition(),
             type.getVisibility(),
             overlayImplTypeDescriptor.getTypeDeclaration());
-    overlayClass.setNativeTypeDescriptor(type.getDeclaration().getUnparamterizedTypeDescriptor());
+    overlayClass.setNativeTypeDescriptor(type.getDeclaration().toUnparamterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
       if (member instanceof Method) {

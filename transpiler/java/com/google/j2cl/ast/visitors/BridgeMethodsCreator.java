@@ -142,12 +142,12 @@ public class BridgeMethodsCreator extends NormalizationPass {
         new LinkedHashMap<>();
 
     for (MethodDescriptor potentialBridgeMethodDescriptor :
-        getPotentialBridgeMethodDescriptors(typeDeclaration.getUnparamterizedTypeDescriptor())) {
+        getPotentialBridgeMethodDescriptors(typeDeclaration.toUnparamterizedTypeDescriptor())) {
       // Attempt to target a concrete method on the prototype chain.
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.getUnparamterizedTypeDescriptor(),
+              typeDeclaration.toUnparamterizedTypeDescriptor(),
               false /* findDefaultMethods */);
       if (targetMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -171,7 +171,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       MethodDescriptor targetDefaultMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.getUnparamterizedTypeDescriptor(),
+              typeDeclaration.toUnparamterizedTypeDescriptor(),
               true /* findDefaultMethods */);
       if (targetDefaultMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -359,7 +359,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     checkArgument(!typeDeclaration.isInterface());
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .setEnclosingTypeDescriptor(typeDeclaration.getUnparamterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(typeDeclaration.toUnparamterizedTypeDescriptor())
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .build();
   }
@@ -495,7 +495,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                     .map(
                         p ->
                             p.toBuilder()
-                                .setTypeDescriptor(p.getTypeDescriptor().getRawTypeDescriptor())
+                                .setTypeDescriptor(p.getTypeDescriptor().toRawTypeDescriptor())
                                 .build())
                     .collect(toImmutableList()))
             .setSynthetic(true)

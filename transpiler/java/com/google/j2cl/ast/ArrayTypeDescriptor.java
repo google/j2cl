@@ -79,9 +79,9 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public ArrayTypeDescriptor getRawTypeDescriptor() {
+  public ArrayTypeDescriptor toRawTypeDescriptor() {
     return toBuilder()
-        .setComponentTypeDescriptor(getComponentTypeDescriptor().getRawTypeDescriptor())
+        .setComponentTypeDescriptor(getComponentTypeDescriptor().toRawTypeDescriptor())
         .setNullable(true)
         .build();
   }
@@ -99,17 +99,17 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public ArrayTypeDescriptor unparameterizedTypeDescriptor() {
+  public ArrayTypeDescriptor toUnparameterizedTypeDescriptor() {
     return toBuilder()
-        .setComponentTypeDescriptor(getComponentTypeDescriptor().unparameterizedTypeDescriptor())
+        .setComponentTypeDescriptor(getComponentTypeDescriptor().toUnparameterizedTypeDescriptor())
         .setNullable(true)
         .build();
   }
 
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
-    ArrayTypeDescriptor thisRawTypeDescriptor = getRawTypeDescriptor();
-    TypeDescriptor thatRawTypeDescriptor = that.getRawTypeDescriptor();
+    ArrayTypeDescriptor thisRawTypeDescriptor = toRawTypeDescriptor();
+    TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
     if (!thatRawTypeDescriptor.isArray()) {
       return TypeDescriptors.isJavaLangObject(thatRawTypeDescriptor)
           || TypeDescriptors.isJavaIoSerializable(thatRawTypeDescriptor)

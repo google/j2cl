@@ -137,7 +137,7 @@ public abstract class TypeDescriptor extends Node
    * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
    * {@code typeDescriptor} otherwise
    */
-  public TypeDescriptor unboxType() {
+  public TypeDescriptor toUnboxedType() {
     return this;
   }
 
@@ -150,14 +150,14 @@ public abstract class TypeDescriptor extends Node
   public abstract TypeDescriptor toNonNullable();
 
   /** Returns type descriptor for the same type use the type parameters from the declaration. */
-  public abstract TypeDescriptor unparameterizedTypeDescriptor();
+  public abstract TypeDescriptor toUnparameterizedTypeDescriptor();
 
   /**
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Nullable
-  public abstract TypeDescriptor getRawTypeDescriptor();
+  public abstract TypeDescriptor toRawTypeDescriptor();
 
   /** Returns all the free type variables that appear in the type. */
   public Set<TypeDescriptor> getAllTypeVariables() {
@@ -197,23 +197,21 @@ public abstract class TypeDescriptor extends Node
       Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable);
 
   public boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
+    // TODO(rluble): compare using toRawTypeDescriptor once raw TypeDescriptors are constructed
     // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
     // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
     // not consistent, in particular the second form does not propagate the removal of type
     // variables inward. These two construction end up with different data but with the same unique
     // id, so the first one that is constructed will be interned and used everywhere.
-    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
+    // Using toRawTypeDescriptor here triggers the second (incorrect) construction and causes
     // the wrong information be used in some cases.
 
-    // For type variables, wildcards and captures we still need to do getRawTypeDescriptor to get
+    // For type variables, wildcards and captures we still need to do toRawTypeDescriptor to get
     // the bound.
     TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? getRawTypeDescriptor() : this;
+        isTypeVariable() || isWildCardOrCapture() ? toRawTypeDescriptor() : this;
     other =
-        other.isTypeVariable() || other.isWildCardOrCapture()
-            ? other.getRawTypeDescriptor()
-            : other;
+        other.isTypeVariable() || other.isWildCardOrCapture() ? other.toRawTypeDescriptor() : other;
     return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
   }
 

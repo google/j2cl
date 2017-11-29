@@ -117,7 +117,7 @@ public abstract class TypeDeclaration extends Node
 
   @Memoized
   public String getShortAliasName() {
-    if (BootstrapType.typeDescriptors.contains(getUnparamterizedTypeDescriptor())) {
+    if (BootstrapType.typeDescriptors.contains(toUnparamterizedTypeDescriptor())) {
       return "$" + getSimpleSourceName();
     }
     return getSimpleSourceName();
@@ -150,7 +150,7 @@ public abstract class TypeDeclaration extends Node
 
   public boolean isAbstract() {
     return getHasAbstractModifier()
-        || TypeDescriptors.isBoxedTypeAsJsPrimitives(getRawTypeDescriptor());
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(toRawTypeDescriptor());
   }
 
   public abstract boolean isFinal();
@@ -249,7 +249,7 @@ public abstract class TypeDeclaration extends Node
   @Memoized
   public TypeDescriptor getOverlayImplementationTypeDescriptor() {
     return TypeDescriptors.createOverlayImplementationTypeDescriptor(
-        getUnparamterizedTypeDescriptor());
+        toUnparamterizedTypeDescriptor());
   }
 
   public boolean hasOverlayImplementationType() {
@@ -304,7 +304,7 @@ public abstract class TypeDeclaration extends Node
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Memoized
-  public @Nullable DeclaredTypeDescriptor getRawTypeDescriptor() {
+  public @Nullable DeclaredTypeDescriptor toRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
@@ -358,7 +358,7 @@ public abstract class TypeDeclaration extends Node
    * the matching TypeDescriptor.
    */
   @Memoized
-  public DeclaredTypeDescriptor getUnparamterizedTypeDescriptor() {
+  public DeclaredTypeDescriptor toUnparamterizedTypeDescriptor() {
     return getUnparameterizedTypeDescriptorFactory().get(this);
   }
 

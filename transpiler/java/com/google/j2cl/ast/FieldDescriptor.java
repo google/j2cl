@@ -83,8 +83,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   @Memoized
   public FieldDescriptor toRawMemberDescriptor() {
     return toBuilder()
-        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getRawTypeDescriptor())
-        .setTypeDescriptor(getTypeDescriptor().getRawTypeDescriptor())
+        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().toRawTypeDescriptor())
+        .setTypeDescriptor(getTypeDescriptor().toRawTypeDescriptor())
         .build();
   }
 

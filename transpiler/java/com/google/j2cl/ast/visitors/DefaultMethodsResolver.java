@@ -81,7 +81,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
         MethodDescriptor specializedMethodDescriptor =
             declaredMethodDescriptor.specializeTypeVariables(
                 typeDeclaration
-                    .getUnparamterizedTypeDescriptor()
+                    .toUnparamterizedTypeDescriptor()
                     .getSpecializedTypeArgumentByTypeParameters());
 
         String specializedSignature = specializedMethodDescriptor.getOverrideSignature();
@@ -102,7 +102,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
     // some later analysis.
     for (int i = 0; i < typeDescriptors.size(); i++) {
       DeclaredTypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
-      typeDescriptors.set(i, superInterfaceTypeDescriptor.unparameterizedTypeDescriptor());
+      typeDescriptors.set(i, superInterfaceTypeDescriptor.toUnparameterizedTypeDescriptor());
     }
 
     // Sort so most specific interfaces are first.

@@ -109,7 +109,7 @@ public class BinaryExpression extends Expression {
       default:
     }
 
-    leftOperandType = leftOperandType.unboxType();
+    leftOperandType = leftOperandType.toUnboxedType();
 
     /**
      * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
@@ -145,7 +145,7 @@ public class BinaryExpression extends Expression {
          * to the widest type of its operands (or integer is integer is wider).
          */
         checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
-        return widerType(leftOperandType, rightOperandType.unboxType());
+        return widerType(leftOperandType, rightOperandType.toUnboxedType());
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:

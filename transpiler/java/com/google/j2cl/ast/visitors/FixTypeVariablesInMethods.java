@@ -118,7 +118,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
   private static TypeDescriptor replaceTypeVariableWithBound(
       TypeDescriptor typeDescriptor, Predicate<TypeDescriptor> shouldBeReplaced) {
     return typeDescriptor.specializeTypeVariables(
-        t -> shouldBeReplaced.test(t) ? t.getRawTypeDescriptor() : t);
+        t -> shouldBeReplaced.test(t) ? t.toRawTypeDescriptor() : t);
   }
 
   /**

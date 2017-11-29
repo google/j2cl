@@ -243,7 +243,7 @@ class ClosureTypesGenerator {
   private ClosureType getClosureTypeForDeclaration(
       TypeDeclaration typeDeclaration, List<ClosureType> typeParameters) {
 
-    TypeDescriptor typeDescriptor = typeDeclaration.getRawTypeDescriptor();
+    TypeDescriptor typeDescriptor = typeDeclaration.toRawTypeDescriptor();
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return STRING.toNullable();
     }

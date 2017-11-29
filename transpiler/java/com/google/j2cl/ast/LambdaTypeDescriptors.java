@@ -81,7 +81,7 @@ public class LambdaTypeDescriptors {
         .setInterfaceTypeDescriptorsFactory(
             () -> TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors))
         .setClassComponents(adaptorDeclaration.getClassComponents())
-        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().getRawTypeDescriptor())
+        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().toRawTypeDescriptor())
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setKind(Kind.CLASS)
         .setDeclaredMethodDescriptorsFactory(
@@ -127,7 +127,7 @@ public class LambdaTypeDescriptors {
             .addAll(
                 (Iterable)
                     functionalInterfaceTypeDescriptor
-                        .unparameterizedTypeDescriptor()
+                        .toUnparameterizedTypeDescriptor()
                         .getSingleAbstractMethodDescriptor()
                         .getTypeParameterTypeDescriptors())
             .build();
@@ -140,23 +140,23 @@ public class LambdaTypeDescriptors {
             () ->
                 DeclaredTypeDescriptor.Builder.from(
                         createLambdaAdaptorTypeDescriptor(
-                            functionalInterfaceTypeDescriptor.getRawTypeDescriptor(),
-                            enclosingTypeDescriptor.getRawTypeDescriptor(),
+                            functionalInterfaceTypeDescriptor.toRawTypeDescriptor(),
+                            enclosingTypeDescriptor.toRawTypeDescriptor(),
                             uniqueId))
                     .setTypeArgumentDescriptors(ImmutableList.of())
                     .build())
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDeclaration ->
                 getLambdaAdaptorMethodDescriptors(
-                    jsFunctionInterface, adaptorTypeDeclaration.getUnparamterizedTypeDescriptor()))
+                    jsFunctionInterface, adaptorTypeDeclaration.toUnparamterizedTypeDescriptor()))
         .setInterfaceTypeDescriptorsFactory(
             () -> TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaAdaptorTypeDescriptor(
-                    functionalInterfaceTypeDescriptor.unparameterizedTypeDescriptor(),
-                    enclosingTypeDescriptor.unparameterizedTypeDescriptor(),
+                    functionalInterfaceTypeDescriptor.toUnparameterizedTypeDescriptor(),
+                    enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
                     uniqueId))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
@@ -180,7 +180,7 @@ public class LambdaTypeDescriptors {
   public static MethodDescriptor getAdaptorForwardingMethod(
       DeclaredTypeDescriptor adaptorTypeDescriptor) {
     DeclaredTypeDescriptor unparameterizedAdaptorTypeDescriptor =
-        adaptorTypeDescriptor.unparameterizedTypeDescriptor();
+        adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
     MethodDescriptor methodDeclarationDescriptor = null;
     if (unparameterizedAdaptorTypeDescriptor != adaptorTypeDescriptor) {
       methodDeclarationDescriptor =
@@ -211,7 +211,7 @@ public class LambdaTypeDescriptors {
   public static DeclaredTypeDescriptor createJsFunctionTypeDescriptor(
       TypeDescriptor typeDescriptor) {
     DeclaredTypeDescriptor functionalTypeDescriptor =
-        typeDescriptor.getFunctionalInterface().unparameterizedTypeDescriptor();
+        typeDescriptor.getFunctionalInterface().toUnparameterizedTypeDescriptor();
 
     MethodDescriptor jsFunctionMethodDescriptor =
         functionalTypeDescriptor.getSingleAbstractMethodDescriptor();
@@ -226,7 +226,7 @@ public class LambdaTypeDescriptors {
         .setTypeDeclaration(jsFunctionDeclaration)
         .setClassComponents(jsFunctionDeclaration.getClassComponents())
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
-        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().getRawTypeDescriptor())
+        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().toRawTypeDescriptor())
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
         .setKind(Kind.INTERFACE)
         .setSingleAbstractMethodDescriptorFactory(
@@ -256,19 +256,19 @@ public class LambdaTypeDescriptors {
             functionalTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
         .setClassComponents(classComponents)
         .setRawTypeDescriptorFactory(
-            () -> createJsFunctionTypeDescriptor(functionalTypeDescriptor.getRawTypeDescriptor()))
+            () -> createJsFunctionTypeDescriptor(functionalTypeDescriptor.toRawTypeDescriptor()))
         .setJsFunctionInterface(true)
         .setFunctionalInterface(true)
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDeclaration ->
                 createMethodDescriptorBySignatureMap(
                     createJsFunctionMethodDescriptor(
-                        jsfunctionTypeDeclaration.getUnparamterizedTypeDescriptor(),
+                        jsfunctionTypeDeclaration.toUnparamterizedTypeDescriptor(),
                         functionalTypeDescriptor.getSingleAbstractMethodDescriptor())))
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createJsFunctionTypeDescriptor(
-                    functionalTypeDescriptor.unparameterizedTypeDescriptor()))
+                    functionalTypeDescriptor.toUnparameterizedTypeDescriptor()))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.INTERFACE)
         .build();

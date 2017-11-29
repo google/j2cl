@@ -120,7 +120,7 @@ public class InsertCastsToTypeBounds extends NormalizationPass {
     TypeDescriptor typeDescriptor = qualifier.getTypeDescriptor();
     if (isBoundedTypeVariable(typeDescriptor)) {
       return JsDocCastExpression.newBuilder()
-          .setCastType(typeDescriptor.getRawTypeDescriptor())
+          .setCastType(typeDescriptor.toRawTypeDescriptor())
           .setExpression(qualifier)
           .build();
     }
@@ -130,9 +130,9 @@ public class InsertCastsToTypeBounds extends NormalizationPass {
 
   private static boolean isBoundedTypeVariable(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
-      // If there is a bound, getRawTypeDescriptor returns its erasure. Note that intersection types
+      // If there is a bound, toRawTypeDescriptor returns its erasure. Note that intersection types
       // have already been handled and we only care about the first type.
-      return !TypeDescriptors.isJavaLangObject(typeDescriptor.getRawTypeDescriptor());
+      return !TypeDescriptors.isJavaLangObject(typeDescriptor.toRawTypeDescriptor());
     }
     return false;
   }

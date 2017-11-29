@@ -66,23 +66,21 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using getRawTypeDescriptor once raw TypeDescriptors are constructed
+    // TODO(rluble): compare using toRawTypeDescriptor once raw TypeDescriptors are constructed
     // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
     // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
     // not consistent, in particular the second form does not propagate the removal of type
     // variables inward. These two construction end up with different data but with the same unique
     // id, so the first one that is constructed will be interned and used everywhere.
-    // Using getRawTypeDescriptor here triggers the second (incorrect) construction and causes
+    // Using toRawTypeDescriptor here triggers the second (incorrect) construction and causes
     // the wrong information be used in some cases.
 
-    // For type variables, wildcards and captures we still need to do getRawTypeDescriptor to get
+    // For type variables, wildcards and captures we still need to do toRawTypeDescriptor to get
     // the bound.
     TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? getRawTypeDescriptor() : this;
+        isTypeVariable() || isWildCardOrCapture() ? toRawTypeDescriptor() : this;
     other =
-        other.isTypeVariable() || other.isWildCardOrCapture()
-            ? other.getRawTypeDescriptor()
-            : other;
+        other.isTypeVariable() || other.isWildCardOrCapture() ? other.toRawTypeDescriptor() : other;
     return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
   }
 
@@ -228,7 +226,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   @Memoized
   @Nullable
-  public DeclaredTypeDescriptor getRawTypeDescriptor() {
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
   }
 
@@ -276,7 +274,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
-    DeclaredTypeDescriptor rawTypeDescriptor = getRawTypeDescriptor();
+    DeclaredTypeDescriptor rawTypeDescriptor = toRawTypeDescriptor();
 
     if (rawTypeDescriptor.isNative()) {
       return TypeDescriptors.createOverlayImplementationTypeDeclaration(rawTypeDescriptor);
@@ -291,24 +289,24 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Memoized
   @Override
-  public DeclaredTypeDescriptor unparameterizedTypeDescriptor() {
-    return getTypeDeclaration().getUnparamterizedTypeDescriptor();
+  public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
+    return getTypeDeclaration().toUnparamterizedTypeDescriptor();
   }
 
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
-    TypeDescriptor thatRawTypeDescriptor = that.getRawTypeDescriptor();
+    TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
     return thatRawTypeDescriptor instanceof DeclaredTypeDescriptor
         && isSubtypeOf(thatRawTypeDescriptor);
   }
 
   private boolean isSubtypeOf(TypeDescriptor that) {
-    return getRawSuperTypesIncludingSelf().contains(that.getRawTypeDescriptor());
+    return getRawSuperTypesIncludingSelf().contains(that.toRawTypeDescriptor());
   }
 
   private Set<DeclaredTypeDescriptor> getRawSuperTypesIncludingSelf() {
     Set<DeclaredTypeDescriptor> allRawSupertypesIncludingSelf = new LinkedHashSet<>();
-    allRawSupertypesIncludingSelf.add(getRawTypeDescriptor());
+    allRawSupertypesIncludingSelf.add(toRawTypeDescriptor());
     if (getSuperTypeDescriptor() != null) {
       allRawSupertypesIncludingSelf.addAll(
           getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
@@ -514,7 +512,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    */
   @Memoized
   @Override
-  public TypeDescriptor unboxType() {
+  public TypeDescriptor toUnboxedType() {
     if (TypeDescriptors.isBoxedType(this)) {
       return TypeDescriptors.getPrimitiveTypeFromBoxType(this);
     }
@@ -549,7 +547,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   public boolean canBeReferencedExternally() {
     if (isWildCardOrCapture() || isTypeVariable()) {
-      return getRawTypeDescriptor().canBeReferencedExternally();
+      return toRawTypeDescriptor().canBeReferencedExternally();
     }
 
     if (getTypeDeclaration().isJsType()
@@ -593,7 +591,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         DeclaredTypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
         TypeDescriptor typeArgumentDescriptor =
             specializedTypeIsRaw
-                ? typeParameterDescriptor.getBoundTypeDescriptor().getRawTypeDescriptor()
+                ? typeParameterDescriptor.getBoundTypeDescriptor().toRawTypeDescriptor()
                 : typeArgumentDescriptors.get(i);
         immediateSpecializedTypeArgumentByTypeParameters.put(
             typeParameterDescriptor, typeArgumentDescriptor);
@@ -603,7 +601,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
       Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
           superTypeOrInterfaceDeclaration
-              .getUnparamterizedTypeDescriptor()
+              .toUnparamterizedTypeDescriptor()
               .getSpecializedTypeArgumentByTypeParameters();
 
       for (Entry<TypeDescriptor, TypeDescriptor> entry :

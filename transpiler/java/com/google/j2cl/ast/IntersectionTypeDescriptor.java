@@ -50,8 +50,8 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public DeclaredTypeDescriptor getRawTypeDescriptor() {
-    return getIntersectionTypeDescriptors().get(0).getRawTypeDescriptor();
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    return getIntersectionTypeDescriptors().get(0).toRawTypeDescriptor();
   }
 
   @Override
@@ -77,12 +77,12 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @Override
   @Nullable
   public TypeDeclaration getMetadataTypeDeclaration() {
-    return getRawTypeDescriptor().getMetadataTypeDeclaration();
+    return toRawTypeDescriptor().getMetadataTypeDeclaration();
   }
 
   @Override
   @Memoized
-  public IntersectionTypeDescriptor unparameterizedTypeDescriptor() {
+  public IntersectionTypeDescriptor toUnparameterizedTypeDescriptor() {
     return newBuilder()
         .setIntersectionTypeDescriptors(
             TypeDescriptors.toUnparameterizedTypeDescriptors(getIntersectionTypeDescriptors()))

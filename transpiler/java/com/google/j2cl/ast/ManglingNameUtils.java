@@ -33,7 +33,7 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(TypeDescriptor typeDescriptor) {
     // Method signature should be decided by the erasure type.
-    TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+    TypeDescriptor rawTypeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (rawTypeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) rawTypeDescriptor;
       return Strings.repeat("arrayOf_", arrayTypeDescriptor.getDimensions())
@@ -128,6 +128,6 @@ public class ManglingNameUtils {
   private static List<String> getMangledParameterTypes(MethodDescriptor methodDescriptor) {
     return Lists.transform(
         methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors(),
-        parameterTypeDescriptor -> getMangledName(parameterTypeDescriptor.getRawTypeDescriptor()));
+        parameterTypeDescriptor -> getMangledName(parameterTypeDescriptor.toRawTypeDescriptor()));
   }
 }

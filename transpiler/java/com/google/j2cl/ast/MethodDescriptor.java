@@ -57,7 +57,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     @Memoized
     public ParameterDescriptor toRawParameterDescriptor() {
-      return toBuilder().setTypeDescriptor(getTypeDescriptor().getRawTypeDescriptor()).build();
+      return toBuilder().setTypeDescriptor(getTypeDescriptor().toRawTypeDescriptor()).build();
     }
 
     public abstract Builder toBuilder();
@@ -135,7 +135,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return name
         + parameterTypeDescriptors
             .stream()
-            .map(type -> type.toNonNullable().getRawTypeDescriptor().getQualifiedBinaryName())
+            .map(type -> type.toNonNullable().toRawTypeDescriptor().getQualifiedBinaryName())
             .collect(joining(",", "(", ")"));
   }
 
@@ -214,9 +214,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Memoized
   public MethodDescriptor toRawMemberDescriptor() {
     return toBuilder()
-        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().getRawTypeDescriptor())
+        .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().toRawTypeDescriptor())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
-        .setReturnTypeDescriptor(getReturnTypeDescriptor().getRawTypeDescriptor())
+        .setReturnTypeDescriptor(getReturnTypeDescriptor().toRawTypeDescriptor())
         .setParameterDescriptors(
             getParameterDescriptors()
                 .stream()
@@ -413,7 +413,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   private static String getParameterReadableDescription(ParameterDescriptor parameterDescriptor) {
     TypeDescriptor parameterTypeDescriptor =
-        parameterDescriptor.getTypeDescriptor().getRawTypeDescriptor();
+        parameterDescriptor.getTypeDescriptor().toRawTypeDescriptor();
     if (parameterDescriptor.isVarargs()) {
       ArrayTypeDescriptor parameterArrayTypeDescriptor =
           (ArrayTypeDescriptor) parameterTypeDescriptor;
@@ -437,7 +437,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     String separator = "";
     for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
       signatureBuilder.append(separator);
-      signatureBuilder.append(parameterType.getRawTypeDescriptor().getQualifiedBinaryName());
+      signatureBuilder.append(parameterType.toRawTypeDescriptor().getQualifiedBinaryName());
       separator = ";";
     }
     signatureBuilder.append(")");

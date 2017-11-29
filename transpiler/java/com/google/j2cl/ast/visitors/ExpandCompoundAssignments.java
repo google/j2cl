@@ -114,7 +114,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         && operator != BinaryOperator.ASSIGN
         && TypeDescriptors.isIntegralPrimitiveType(lhsTypeDescriptor)
         && TypeDescriptors.getWidth(lhsTypeDescriptor)
-            < TypeDescriptors.getWidth(rhsTypeDescriptor.unboxType())) {
+            < TypeDescriptors.getWidth(rhsTypeDescriptor.toUnboxedType())) {
       // Compound assignment contexts perform implicit narrowing coercions.
       return true;
     }
@@ -147,7 +147,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
   }
 
   private static boolean needsIntegralCoercion(TypeDescriptor targetTypeDescriptor) {
-    return TypeDescriptors.isIntegralPrimitiveType(targetTypeDescriptor.unboxType());
+    return TypeDescriptors.isIntegralPrimitiveType(targetTypeDescriptor.toUnboxedType());
   }
 
   /** Rewrites a postfix expressions int the list into the corresponding prefix expressions. */

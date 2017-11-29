@@ -108,7 +108,7 @@ public class NormalizeCasts extends NormalizationPass {
         (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
     TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
 
-    if (leafTypeDescriptor.getRawTypeDescriptor().isNative()) {
+    if (leafTypeDescriptor.toRawTypeDescriptor().isNative()) {
       return RuntimeMethods.createArraysMethodCall("$castToNative", castExpression.getExpression());
     }
 

@@ -276,7 +276,7 @@ public class CompilationUnitBuilder {
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         type.getTypeDescriptor(),
-                        type.getEnclosingTypeDeclaration().getUnparamterizedTypeDescriptor()))
+                        type.getEnclosingTypeDeclaration().toUnparamterizedTypeDescriptor()))
                 .setSourcePosition(type.getSourcePosition())
                 .build());
       }
@@ -1639,9 +1639,7 @@ public class CompilationUnitBuilder {
             FieldAccess.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
                         currentTypeDescriptor,
-                        currentType
-                            .getEnclosingTypeDeclaration()
-                            .getUnparamterizedTypeDescriptor()))
+                        currentType.getEnclosingTypeDeclaration().toUnparamterizedTypeDescriptor()))
                 .setQualifier(qualifier)
                 .build();
       }

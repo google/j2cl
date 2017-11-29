@@ -269,7 +269,7 @@ public class CompoundOperationsUtils {
 
   /** Returns number literal with value 1. */
   public static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
-    return new NumberLiteral(typeDescriptor.unboxType(), 1);
+    return new NumberLiteral(typeDescriptor.toUnboxedType(), 1);
   }
 
   /** Returns assignment in the form of {leftOperand = leftOperand operator (rightOperand)}. */
@@ -306,7 +306,7 @@ public class CompoundOperationsUtils {
   //
   @SuppressWarnings("ReferenceEquality")
   private static Expression maybeCast(TypeDescriptor typeDescriptor, Expression expression) {
-    typeDescriptor = typeDescriptor.unboxType();
+    typeDescriptor = typeDescriptor.toUnboxedType();
     if (!TypeDescriptors.isNumericPrimitive(typeDescriptor)
         || typeDescriptor == expression.getTypeDescriptor()) {
       return expression;

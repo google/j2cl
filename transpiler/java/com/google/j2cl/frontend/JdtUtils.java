@@ -1165,7 +1165,7 @@ class JdtUtils {
                   rawTypeDescriptor
                       .getInterfaceTypeDescriptors()
                       .stream()
-                      .map(DeclaredTypeDescriptor::getRawTypeDescriptor)
+                      .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
                       .collect(toImmutableList()))
           .setSingleAbstractMethodDescriptorFactory(
               () -> getRawDescriptorOrNull(rawTypeDescriptor.getSingleAbstractMethodDescriptor()))
@@ -1179,7 +1179,7 @@ class JdtUtils {
 
   private static DeclaredTypeDescriptor getRawDescriptorOrNull(
       DeclaredTypeDescriptor typeDescriptor) {
-    return typeDescriptor == null ? null : typeDescriptor.getRawTypeDescriptor();
+    return typeDescriptor == null ? null : typeDescriptor.toRawTypeDescriptor();
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {

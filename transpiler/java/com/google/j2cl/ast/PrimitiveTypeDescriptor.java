@@ -46,7 +46,7 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public PrimitiveTypeDescriptor getRawTypeDescriptor() {
+  public PrimitiveTypeDescriptor toRawTypeDescriptor() {
     return this;
   }
 
@@ -62,7 +62,7 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public PrimitiveTypeDescriptor unparameterizedTypeDescriptor() {
+  public PrimitiveTypeDescriptor toUnparameterizedTypeDescriptor() {
     return this;
   }
 

@@ -423,7 +423,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String className =
           environment.aliasForType(
               type.isJsOverlayImplementation()
-                  ? type.getNativeTypeDescriptor().getRawTypeDescriptor()
+                  ? type.getNativeTypeDescriptor().toRawTypeDescriptor()
                   : type.getTypeDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
     }

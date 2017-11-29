@@ -225,7 +225,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
       TypeDescriptor typeDescriptor,
       DeclaredTypeDescriptor adaptorTypeDescriptor) {
 
-    adaptorTypeDescriptor = adaptorTypeDescriptor.unparameterizedTypeDescriptor();
+    adaptorTypeDescriptor = adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
 
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);

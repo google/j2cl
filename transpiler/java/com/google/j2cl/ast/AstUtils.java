@@ -453,9 +453,9 @@ public class AstUtils {
    */
   public static Expression unbox(Expression expression) {
     DeclaredTypeDescriptor boxType =
-        (DeclaredTypeDescriptor) expression.getTypeDescriptor().getRawTypeDescriptor();
+        (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
-    TypeDescriptor primitiveType = boxType.unboxType();
+    TypeDescriptor primitiveType = boxType.toUnboxedType();
 
     MethodDescriptor valueMethodDescriptor =
         boxType.getMethodDescriptorByName(

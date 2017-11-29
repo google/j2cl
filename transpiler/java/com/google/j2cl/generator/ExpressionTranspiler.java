@@ -368,7 +368,7 @@ public class ExpressionTranspiler {
       public Void transformNewInstance(NewInstance expression) {
         checkArgument(expression.getQualifier() == null);
         TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingTypeDescriptor().getRawTypeDescriptor();
+            expression.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
 
         sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
         renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());

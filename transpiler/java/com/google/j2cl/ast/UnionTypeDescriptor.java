@@ -60,9 +60,9 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public DeclaredTypeDescriptor getRawTypeDescriptor() {
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
     DeclaredTypeDescriptor typeDescriptor =
-        (DeclaredTypeDescriptor) getUnionTypeDescriptors().get(0).getRawTypeDescriptor();
+        (DeclaredTypeDescriptor) getUnionTypeDescriptors().get(0).toRawTypeDescriptor();
     // Find the closest common ancestor of all the types in the union.
     while (typeDescriptor != null && !isAssignableTo(typeDescriptor)) {
       typeDescriptor = typeDescriptor.getSuperTypeDescriptor();
@@ -83,7 +83,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public UnionTypeDescriptor unparameterizedTypeDescriptor() {
+  public UnionTypeDescriptor toUnparameterizedTypeDescriptor() {
     return newBuilder()
         .setUnionTypeDescriptors(
             TypeDescriptors.toUnparameterizedTypeDescriptors(getUnionTypeDescriptors()))

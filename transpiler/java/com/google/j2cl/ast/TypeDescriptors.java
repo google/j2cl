@@ -119,11 +119,11 @@ public class TypeDescriptors {
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
     return get()
         .boxedTypeByPrimitiveType
-        .containsValue(typeDescriptor.getRawTypeDescriptor().toNullable());
+        .containsValue(typeDescriptor.toRawTypeDescriptor().toNullable());
   }
 
   public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
-    return get().boxedTypeByPrimitiveType.containsKey(typeDescriptor.getRawTypeDescriptor());
+    return get().boxedTypeByPrimitiveType.containsKey(typeDescriptor.toRawTypeDescriptor());
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
@@ -277,7 +277,7 @@ public class TypeDescriptors {
       DeclaredTypeDescriptor typeDescriptor) {
 
     DeclaredTypeDescriptor unparameterizedTypeDescriptor =
-        typeDescriptor.unparameterizedTypeDescriptor();
+        typeDescriptor.toUnparameterizedTypeDescriptor();
 
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
@@ -289,7 +289,7 @@ public class TypeDescriptors {
         .setRawTypeDescriptorFactory(
             () ->
                 createOverlayImplementationTypeDescriptor(
-                    unparameterizedTypeDescriptor.getRawTypeDescriptor()))
+                    unparameterizedTypeDescriptor.toRawTypeDescriptor()))
         .setUnparameterizedTypeDescriptorFactory(
             () -> createOverlayImplementationTypeDescriptor(unparameterizedTypeDescriptor))
         .setVisibility(Visibility.PUBLIC)
@@ -310,7 +310,7 @@ public class TypeDescriptors {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDeclaration(overlayImplementationTypeDeclaration)
         .setClassComponents(overlayImplementationTypeDeclaration.getClassComponents())
-        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().getRawTypeDescriptor())
+        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().toRawTypeDescriptor())
         .setKind(overlayImplementationTypeDeclaration.getKind())
         .build();
   }
@@ -466,7 +466,7 @@ public class TypeDescriptors {
       List<T> typeDescriptors) {
     return typeDescriptors
         .stream()
-        .map(TypeDescriptor::unparameterizedTypeDescriptor)
+        .map(TypeDescriptor::toUnparameterizedTypeDescriptor)
         .map(typeDescriptor -> (T) typeDescriptor)
         .collect(ImmutableList.toImmutableList());
   }
