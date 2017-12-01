@@ -27,4 +27,10 @@ public class JsMethodExample {
   public static void main(String... args) {
     log("test");
   }
+
+  // TODO(b/70040143): uncomment when the bug is fixed.
+  // @JsMethod
+  // public <T extends ArrayList<String>> T testMethod() {
+  //   return null;
+  // }
 }
