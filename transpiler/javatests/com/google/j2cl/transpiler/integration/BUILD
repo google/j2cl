@@ -18,60 +18,13 @@ java_binary(
 )
 
 java_test(
-    name = "HelpFlagTest",
-    srcs = ["HelpFlagTest.java"],
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "InvalidFlagTest",
-    srcs = ["InvalidFlagTest.java"],
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "SyntaxErrorTest",
-    srcs = ["SyntaxErrorTest.java"],
-    data = glob(["syntaxerror/**/*"]),
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "MissingDepTest",
-    srcs = ["MissingDepTest.java"],
-    data = glob(["missingdep/**/*"]),
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "SrcjarTest",
-    srcs = ["SrcjarTest.java"],
-    data = glob([
-        "corruptsrcjar/**/*",
-        "missingsrcjar/**/*",
-    ]),
-    deps = [":IntegrationTestCase"],
-)
-
-java_test(
-    name = "NativeSourcesErrorTest",
-    srcs = ["NativeSourcesErrorTest.java"],
-    data = glob(["nativesourceserror/**/*"]) + [":jre_bundle_deploy.jar"],
+    name = "CommandLineInvocationTest",
+    srcs = ["CommandLineInvocationTest.java"],
+    data = [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
-        ":IntegrationTestCase",
-        "//transpiler/java/com/google/j2cl/generator",
-    ],
-)
-
-java_test(
-    name = "OutputTest",
-    srcs = ["OutputTest.java"],
-    data = glob(["output/**/*"]) + [":jre_bundle_deploy.jar"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
-    deps = [
-        ":IntegrationTestCase",
-        "//java/com/google/common/io",
+        ":TranspilerTester",
+        "//third_party/java/junit",
     ],
 )
 
@@ -81,22 +34,24 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
-        ":IntegrationTestCase",
+        ":TranspilerTester",
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//java/com/google/common/io",
+        "//third_party/java/junit",
     ],
 )
 
 java_library(
-    name = "IntegrationTestCase",
+    name = "TranspilerTester",
     testonly = 1,
-    srcs = ["IntegrationTestCase.java"],
+    srcs = [
+        "TranspilerTester.java",
+    ],
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//java/com/google/common/io",
-        "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
         "//third_party/java/truth",
         "//transpiler/java/com/google/j2cl/common",
