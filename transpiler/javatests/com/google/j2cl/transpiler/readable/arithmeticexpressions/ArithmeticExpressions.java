@@ -36,6 +36,8 @@ public class ArithmeticExpressions {
     Integer boxI = 3;
     a += boxI;
 
+    a = a << 31L;
+    a <<= 1L;
     a += 1L;
 
     ((k)) |= true;

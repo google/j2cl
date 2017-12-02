@@ -59,6 +59,8 @@
 [Integer boxI = 3;] => [let boxI = Integer.m_valueOf__int(3);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [boxI] => [boxI] "boxI"
 [a += boxI;] => [a += boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[a = a << 31L;] => [a = $LongUtils.$leftShift($Primitives.$widenIntToLong(a), $Long.fromBits(31, 0) /* 31 */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
+[a <<= 1L;] => [a = $LongUtils.$leftShift($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.main"
 [static long[] getLongArray() {
