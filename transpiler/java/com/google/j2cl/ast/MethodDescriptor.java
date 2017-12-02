@@ -490,6 +490,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** A Builder for MethodDescriptors. */
   @AutoValue.Builder
   public abstract static class Builder {
+
     public abstract Builder setDefaultMethod(boolean isDefault);
 
     public abstract Builder setNative(boolean isNative);
@@ -625,11 +626,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract MethodDescriptor autoBuild();
 
+    private static final String CONSTRUCTOR_METHOD_NAME = "<init>";
+
     public MethodDescriptor build() {
       if (isConstructor()) {
-        checkState(!getName().isPresent(), "Should not set names for constructors.");
-        // Choose consistent naming for constructors.
-        setName("<init>");
+        // Constructors have a constant name <init>.
+        checkState(!getName().isPresent() || getName().get().equals(CONSTRUCTOR_METHOD_NAME));
+
+        setName(CONSTRUCTOR_METHOD_NAME);
       }
 
       checkState(getName().isPresent());
