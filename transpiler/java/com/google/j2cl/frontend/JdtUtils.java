@@ -420,7 +420,11 @@ class JdtUtils {
           .build();
     }
 
-    return TypeDescriptors.withNullability(createForType(typeBinding), isNullable);
+    return withNullability(createDeclaredType(typeBinding), isNullable);
+  }
+
+  private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
+    return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
   /**
@@ -1012,14 +1016,14 @@ class JdtUtils {
    * instances (which we are using as keys) are unique per JDT parse.
    */
   @SuppressWarnings("JdkObsolete")
-  private static Map<ITypeBinding, TypeDescriptor> cachedTypeDescriptorByTypeBinding =
-      new Hashtable<>();
+  private static final Map<ITypeBinding, DeclaredTypeDescriptor>
+      cachedDeclaredTypeDescriptorByTypeBinding = new Hashtable<>();
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  private static TypeDescriptor createForType(final ITypeBinding typeBinding) {
-    if (cachedTypeDescriptorByTypeBinding.containsKey(typeBinding)) {
-      return cachedTypeDescriptorByTypeBinding.get(typeBinding);
+  private static DeclaredTypeDescriptor createDeclaredType(final ITypeBinding typeBinding) {
+    if (cachedDeclaredTypeDescriptorByTypeBinding.containsKey(typeBinding)) {
+      return cachedDeclaredTypeDescriptorByTypeBinding.get(typeBinding);
     }
 
     checkArgument(!typeBinding.isArray());
@@ -1094,7 +1098,7 @@ class JdtUtils {
     }
 
     // Compute these even later
-    TypeDescriptor typeDescriptor =
+    DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
             .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
             .setClassComponents(getClassComponents(typeBinding))
@@ -1119,7 +1123,7 @@ class JdtUtils {
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .setUniqueKey(uniqueKey)
             .build();
-    cachedTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
+    cachedDeclaredTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
     return typeDescriptor;
   }
 

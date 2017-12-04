@@ -456,10 +456,6 @@ public class TypeDescriptors {
         .build();
   }
 
-  public static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
-    return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
-  }
-
   /** Returns the unparameterized version of {@code typeDescriptors}. */
   @SuppressWarnings("unchecked")
   public static <T extends TypeDescriptor> ImmutableList<T> toUnparameterizedTypeDescriptors(
