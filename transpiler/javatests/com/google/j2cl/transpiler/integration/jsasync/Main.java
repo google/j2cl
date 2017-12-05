@@ -15,25 +15,25 @@
  */
 package com.google.j2cl.transpiler.integration.jsasync;
 
+import static com.google.j2cl.transpiler.integration.jsasync.Promise.await;
+
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 public class Main {
 
-  static Promise five() {
+  private static Promise<Integer> five() {
     return Promise.resolve(5);
   }
 
-  static Promise ten() {
+  private static Promise<Integer> ten() {
     return Promise.resolve(10);
   }
 
   @JsAsync
   @JsMethod
-  static Promise fifteen() {
+  private static Promise<Integer> fifteen() {
     int a = await(five());
     assert a == 5;
     JsIntFunction asyncFunction =
@@ -47,16 +47,17 @@ public class Main {
   }
 
   @JsAsync
-  public static Promise main(String... args) {
+  public static Promise<?> main(@SuppressWarnings("unused") String... args) {
     int result = await(fifteen());
     assert result == 15;
     result += await(InterfaceWithDefaultMethod.staticAsyncMethod());
     assert result == 20;
     result += await(new InterfaceWithDefaultMethod() {}.defaultAsyncMethod());
     assert result == 30;
-    // TODO(b/69036598): uncomment when bug is fixed.
-    // result += same(await(ten())); // Causes expression decomposition error in JsCompiler.
-    // assert result == 40;
+    result += same(await(ten()) + await(ten()));
+    assert result == 50;
+    result += await(ClinitTest.X);
+    assert result == 60;
     return Promise.resolve(result);
   }
 
@@ -67,30 +68,22 @@ public class Main {
   @JsFunction
   private interface JsIntFunction {
     @JsAsync
-    Promise get();
+    Promise<Integer> get();
   }
 
   private interface InterfaceWithDefaultMethod {
     @JsAsync
-    default Promise defaultAsyncMethod() {
+    default Promise<Integer> defaultAsyncMethod() {
       int result = await(ten());
       assert result == 10;
       return Promise.resolve(result);
     }
 
     @JsAsync
-    static Promise staticAsyncMethod() {
+    static Promise<Integer> staticAsyncMethod() {
       int result = await(five());
       assert result == 5;
       return Promise.resolve(result);
     }
   }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  private static class Promise {
-    public static native Promise resolve(int value);
-  }
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native int await(Promise thenable);
 }

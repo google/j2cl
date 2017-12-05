@@ -1,0 +1,133 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsasync.Main$1.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.$1$impl');
+
+
+const BaseInterface = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main$impl');
+let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {BaseInterface}
+ */
+class $1 extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_1 =
+        null;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'new BaseInterface(Main)'.
+   * @param {Main} $outer_this
+   * @return {!$1}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_jsasync_Main(
+      $outer_this) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsasync_Main_1__com_google_j2cl_transpiler_readable_jsasync_Main(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'new BaseInterface(Main)'.
+   * @param {Main} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsasync_Main_1__com_google_j2cl_transpiler_readable_jsasync_Main(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_1 =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsasync_Main_1();
+  }
+
+  /**
+   * @override
+   * @return {IThenable<Integer>}
+   * @public
+   */
+  async m_asyncCall__() {
+    return /**@type {Promise<Integer>} */ (
+        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+            /**@type {Integer} */ ($Casts.$to(
+                (await this
+                     .f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_1
+                     .f_x__com_google_j2cl_transpiler_readable_jsasync_Main_),
+                Integer))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $1.$clinit = function() {};
+    elemental2_promise_Promise_$Overlay =
+        goog.module.get('elemental2.promise.Promise.$Overlay$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsasync_Main_1() {}
+};
+
+$Util.$setClassMetadata(
+    $1,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.jsasync.Main$1'));
+
+
+BaseInterface.$markImplementor($1);
+
+
+/**
+ * Export class.
+ */
+exports = $1;
+//# sourceMappingURL=Main$1.js.map

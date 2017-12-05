@@ -21,7 +21,7 @@ load("//tools/build_rules:build_test.bzl", "build_test")
 
 def readable_example(
     name, srcs, supporting_srcs=[], native_srcs=[],
-    deps=[], js_deps=[], plugins=[], javacopts=[],  test_externs_list=None,
+    deps=[], js_deps=[], plugins=[], javacopts=[], defs=[], test_externs_list=None,
     _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -37,6 +37,7 @@ def readable_example(
     js_deps: JS libraries referenced by the srcs.
     plugins: APT processors to execute when generating readable output.
     javacopts: Custom opts to pass to the Java library rule.
+    defs: Custom flags to pass to the JavaScript compiler.
     test_externs_list: Custom externs to support build test verification.
     _declare_legacy_namespace: Whether to use legacy namespaces in output.
   """
@@ -80,7 +81,7 @@ def readable_example(
           "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/conformance_proto.txt",
           "--jscomp_warning=conformanceViolations",
           "--summary_detail_level=3",
-      ],
+      ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       extra_inputs=["//transpiler/javatests/com/google/j2cl/transpiler/readable:conformance_proto"],

@@ -25,6 +25,7 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.AwaitExpression;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
@@ -94,6 +95,14 @@ public class ExpressionTranspiler {
       @Override
       public Void transformArrayLiteral(ArrayLiteral arrayLiteral) {
         renderDelimitedAndSeparated("[", ", ", "]", arrayLiteral.getValueExpressions());
+        return null;
+      }
+
+      @Override
+      public Void transformAwaitExpression(AwaitExpression awaitExpression) {
+        sourceBuilder.append("(await ");
+        process(awaitExpression.getExpression());
+        sourceBuilder.append(")");
         return null;
       }
 

@@ -1,28 +1,25 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.jsasync.Main$AsyncInterface.
+ * com.google.j2cl.transpiler.readable.jsasync.Main$BaseInterface.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface$impl');
 
 
-const BaseInterface = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface.$LambdaAdaptor$impl');
 let $Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 
 /**
  * @interface
- * @extends {BaseInterface}
  */
-class AsyncInterface {
+class BaseInterface {
   /**
    * @abstract
-   * @override
    * @return {IThenable<Integer>}
    * @public
    */
@@ -30,11 +27,11 @@ class AsyncInterface {
 
   /**
    * @param {?function():IThenable<Integer>} fn
-   * @return {AsyncInterface}
+   * @return {BaseInterface}
    * @public
    */
   static $adapt(fn) {
-    AsyncInterface.$clinit();
+    BaseInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
 
@@ -44,12 +41,11 @@ class AsyncInterface {
    * @public
    */
   static $markImplementor(classConstructor) {
-    BaseInterface.$markImplementor(classConstructor);
     /**
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface =
+        .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_BaseInterface =
         true;
   }
 
@@ -63,7 +59,7 @@ class AsyncInterface {
   static $isInstance(instance) {
     return instance != null &&
         !!instance
-              .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface;
+              .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_BaseInterface;
   }
 
   /**
@@ -75,7 +71,7 @@ class AsyncInterface {
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
         !!classConstructor.prototype
-              .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface;
+              .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_BaseInterface;
   }
 
   /**
@@ -83,23 +79,23 @@ class AsyncInterface {
    * @public
    */
   static $clinit() {
-    AsyncInterface.$clinit = function() {};
+    BaseInterface.$clinit = function() {};
     $LambdaAdaptor = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
+        'com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface.$LambdaAdaptor$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    AsyncInterface,
+    BaseInterface,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.jsasync.Main$AsyncInterface'));
+        'com.google.j2cl.transpiler.readable.jsasync.Main$BaseInterface'));
 
 
-AsyncInterface.$markImplementor(/** @type {Function} */ (AsyncInterface));
+BaseInterface.$markImplementor(/** @type {Function} */ (BaseInterface));
 
 
 /**
  * Export class.
  */
-exports = AsyncInterface;
-//# sourceMappingURL=Main$AsyncInterface.js.map
+exports = BaseInterface;
+//# sourceMappingURL=Main$BaseInterface.js.map

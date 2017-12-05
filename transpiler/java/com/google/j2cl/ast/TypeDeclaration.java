@@ -309,20 +309,6 @@ public abstract class TypeDeclaration extends Node
   }
 
   /**
-   * Returns the qualified JavaScript name of the type. Same as {@link #getQualifiedSourceName}
-   * unless it is modified by JsType/JsPackage.
-   *
-   * <p>This is used for driving module name (hence importing etc.), long alias name, mangled name
-   * generation and other similar scenarios.
-   */
-  public String getQualifiedJsName() {
-    if (JsUtils.isGlobal(getJsNamespace())) {
-      return getSimpleJsName();
-    }
-    return getJsNamespace() + "." + getSimpleJsName();
-  }
-
-  /**
    * Returns the unqualified simple source name like "Inner". Used when a readable name is required
    * to refer to the type like a short alias, Debug/Error output, etc.
    */

@@ -1,0 +1,147 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsasync.Main$3.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.$3$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main$impl');
+let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class $3 extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3 =
+        null;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'new
+   * JsFunctionInterface(Main)'.
+   * @param {Main} $outer_this
+   * @return {function():IThenable<Integer>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_jsasync_Main(
+      $outer_this) {
+    $3.$clinit();
+    let $instance = new $3();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsasync_Main_3__com_google_j2cl_transpiler_readable_jsasync_Main(
+            $outer_this);
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype($3).m_doSomething__, $instance, $3.$copy);
+  }
+
+  /**
+   * Initialization from constructor 'new JsFunctionInterface(Main)'.
+   * @param {Main} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsasync_Main_3__com_google_j2cl_transpiler_readable_jsasync_Main(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3 =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_jsasync_Main_3();
+  }
+
+  /**
+   * @this {?function():IThenable<Integer>}
+   * @return {IThenable<Integer>}
+   * @public
+   */
+  async m_doSomething__() {
+    let tmp = this;
+    return /**@type {Promise<Integer>} */ (
+        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+            /**@type {Integer} */ ($Casts.$to(
+                (await this
+                     .f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3
+                     .f_x__com_google_j2cl_transpiler_readable_jsasync_Main_),
+                Integer))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance.$is__com_google_j2cl_transpiler_readable_jsasync_Main_3;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $3);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {$3} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    to.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3 =
+        from.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3;
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsasync_Main_3 = true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $3.$clinit = function() {};
+    elemental2_promise_Promise_$Overlay =
+        goog.module.get('elemental2.promise.Promise.$Overlay$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsasync_Main_3() {}
+};
+
+$Util.$setClassMetadata(
+    $3,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.jsasync.Main$3'));
+
+
+$JavaScriptFunction.$markImplementor($3);
+
+
+/**
+ * Export class.
+ */
+exports = $3;
+//# sourceMappingURL=Main$3.js.map

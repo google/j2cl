@@ -19,52 +19,100 @@ import elemental2.promise.IThenable;
 import elemental2.promise.Promise;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 public class Main {
+
+  private final IThenable<Integer> x = Promise.resolve(10);
+
   @JsAsync
-  IThenable<Void> asyncMethod() {
-    return Promise.resolve((Void) null);
+  IThenable<Void> emptyAsyncMethod() {
+    return null;
+  }
+
+  @JsAsync
+  IThenable<Integer> asyncMethod() {
+    int result = await(Promise.resolve(7));
+    return parametricAsyncMethod(result);
+  }
+
+  @JsAsync
+  <T> IThenable<T> parametricAsyncMethod(T value) {
+    return Promise.resolve(await(Promise.resolve(value)));
   }
 
   @JsAsync
   static IThenable<Void> staticAsyncMethod() {
-    return Promise.resolve((Void) null);
+    return Promise.resolve(await(Promise.resolve((Void) null)));
   }
 
+  @SuppressWarnings("unused")
   void testAsyncLambdas() {
-    AsyncInterface i = () -> Promise.resolve(5);
-    i.asyncCall();
+    AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));
 
-    AsyncJsInterface j = () -> Promise.resolve(5);
-    j.doSomething();
+    BaseInterface o =
+        new BaseInterface() {
+          @JsAsync
+          @Override
+          public IThenable<Integer> asyncCall() {
+            return Promise.resolve(await(x));
+          }
+        };
+
+    AsyncJsFunctionInterface j = () -> Promise.resolve(await(Promise.resolve(5)));
+
+    JsFunctionInterface optimizableJsFunction =
+        new JsFunctionInterface() {
+          @JsAsync
+          @Override
+          public IThenable<Integer> doSomething() {
+            // TODO(b/70149347): Fix OptimizeAnonymousInnerClassesToFunctionExpressions to propagate
+            // the async modifier to optimized anonymous inner classes.
+            return Promise.resolve(5);
+          }
+        };
+
+    JsFunctionInterface unoptimizableJsFunction =
+        new JsFunctionInterface() {
+          @JsAsync
+          @Override
+          public IThenable<Integer> doSomething() {
+            @SuppressWarnings("unused")
+            JsFunctionInterface tmp = this;
+            return Promise.resolve(await(x));
+          }
+        };
   }
 
-  interface AsyncInterface {
-    @JsAsync
+  interface BaseInterface {
     IThenable<Integer> asyncCall();
   }
 
-  interface AsyncInterfaceWithDefaultMethod {
+  interface AsyncInterface extends BaseInterface {
+    @JsAsync
+    @Override
+    IThenable<Integer> asyncCall();
+  }
+
+  interface InterfaceWithAsyncDefaultMethod {
     @JsAsync
     default IThenable<Integer> asyncCall() {
-      return Promise.resolve(5);
+      return Promise.resolve(await(Promise.resolve(5)));
     }
   }
-
-  // TODO(skill): fix @JsAsync use case for @JsProperty
-  /*
-  static class ClassWithProperty {
-    @JsAsync
-    @JsProperty
-    IThenable<Integer> getX() {
-      return Promise.resolve(5);
-    }
-  }
-  */
 
   @JsFunction
-  interface AsyncJsInterface {
+  interface JsFunctionInterface {
+    IThenable<Integer> doSomething();
+  }
+
+  @JsFunction
+  interface AsyncJsFunctionInterface {
     @JsAsync
     IThenable<Integer> doSomething();
   }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native <T> T await(IThenable<T> thenable);
 }

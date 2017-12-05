@@ -58,6 +58,7 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
+import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
@@ -272,6 +273,9 @@ public class J2clTranspiler {
             // variable motion.
             new NormalizeMultiExpressions(),
             new MoveVariableDeclarationsToEnclosingBlock(),
+
+            // Handle await keyword
+            new NormalizeJsAwaitMethodInvocations(),
 
             // Enrich source mapping information for better stack deobfuscation.
             new FilloutMissingSourceMapInformation());

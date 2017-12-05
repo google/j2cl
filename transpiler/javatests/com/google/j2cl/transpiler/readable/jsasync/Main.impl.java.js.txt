@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsasync.Main$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.$1$impl');
+let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.$3$impl');
 let AsyncInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface$impl');
 let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
 let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
@@ -25,6 +27,8 @@ class Main extends java_lang_Object {
    */
   constructor() {
     super();
+    /** @public {IThenable<Integer>} */
+    this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = null;
   }
 
   /**
@@ -53,10 +57,39 @@ class Main extends java_lang_Object {
    * @return {IThenable<?void>}
    * @public
    */
+  async m_emptyAsyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync() {
+    return null;
+  }
+
+  /**
+   * @return {IThenable<Integer>}
+   * @public
+   */
   async m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync() {
-    return /**@type {Promise<?void>} */ (
+    let result =
+        (await /**@type {Promise<Integer>} */ (
+             elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+                 Integer.m_valueOf__int(7))))
+            .m_intValue__();
+    return /**@type {IThenable<Integer>} */ (
+        this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(
+            Integer.m_valueOf__int(result)));
+  }
+
+  /**
+   * @template M_T
+   * @param {M_T} value
+   * @return {IThenable<M_T>}
+   * @public
+   */
+  async
+  m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(
+      value) {
+    return /**@type {Promise<*>} */ (
         elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
-            /**@type {?void} */ ($Casts.$to(null, Void))));
+            (await /**@type {Promise<*>} */ (
+                elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+                    value)))));
   }
 
   /**
@@ -68,7 +101,12 @@ class Main extends java_lang_Object {
     Main.$clinit();
     return /**@type {Promise<?void>} */ (
         elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
-            /**@type {?void} */ ($Casts.$to(null, Void))));
+            /**@type {?void} */ ($Casts.$to(
+                (await /**@type {Promise<?void>} */ (
+                    elemental2_promise_Promise_$Overlay
+                        .m_resolve__java_lang_Object(
+                            /**@type {?void} */ ($Casts.$to(null, Void))))),
+                Void))));
   }
 
   /**
@@ -79,15 +117,31 @@ class Main extends java_lang_Object {
     let i = AsyncInterface.$adapt((async () => {
       return /**@type {Promise<Integer>} */ (
           elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
-              Integer.m_valueOf__int(5)));
+              /**@type {Integer} */ ($Casts.$to(
+                  (await /**@type {Promise<Integer>} */ (
+                      elemental2_promise_Promise_$Overlay
+                          .m_resolve__java_lang_Object(
+                              Integer.m_valueOf__int(5)))),
+                  Integer))));
     }));
-    i.m_asyncCall__();
+    let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
     let j = (async () => {
+      return /**@type {Promise<Integer>} */ (
+          elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+              /**@type {Integer} */ ($Casts.$to(
+                  (await /**@type {Promise<Integer>} */ (
+                      elemental2_promise_Promise_$Overlay
+                          .m_resolve__java_lang_Object(
+                              Integer.m_valueOf__int(5)))),
+                  Integer))));
+    });
+    let optimizableJsFunction = (() => {
       return /**@type {Promise<Integer>} */ (
           elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
               Integer.m_valueOf__int(5)));
     });
-    j();
+    let unoptimizableJsFunction =
+        $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
   }
 
   /**
@@ -116,6 +170,10 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsasync.Main.$1$impl');
+    $3 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsasync.Main.$3$impl');
     AsyncInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface$impl');
     elemental2_promise_Promise_$Overlay =
@@ -130,7 +188,12 @@ class Main extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jsasync_Main() {}
+  $init__com_google_j2cl_transpiler_readable_jsasync_Main() {
+    this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ =
+        /**@type {Promise<Integer>} */ (
+            elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+                Integer.m_valueOf__int(10)));
+  }
 };
 
 $Util.$setClassMetadata(

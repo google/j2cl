@@ -25,4 +25,12 @@ public interface HasJsNameInfo {
 
   /** Whether it is a native type, method or field. */
   boolean isNative();
+
+  /** Returns the qualified JavaScript name of a type, method or field. */
+  default String getQualifiedJsName() {
+    if (JsUtils.isGlobal(getJsNamespace())) {
+      return getSimpleJsName();
+    }
+    return getJsNamespace() + "." + getSimpleJsName();
+  }
 }

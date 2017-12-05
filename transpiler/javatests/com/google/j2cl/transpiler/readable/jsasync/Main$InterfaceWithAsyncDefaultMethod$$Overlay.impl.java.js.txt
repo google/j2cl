@@ -1,0 +1,77 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsasync.Main$InterfaceWithAsyncDefaultMethod$$Overlay.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod.$Overlay$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InterfaceWithAsyncDefaultMethod = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod$impl');
+let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class
+    com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod_$Overlay {
+  /**
+   * @param {InterfaceWithAsyncDefaultMethod} $thisArg
+   * @return {IThenable<Integer>}
+   * @public
+   */
+  static async
+  m_asyncCall__com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod(
+      $thisArg) {
+    com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod_$Overlay
+        .$clinit();
+    return /**@type {Promise<Integer>} */ (
+        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
+            /**@type {Integer} */ ($Casts.$to(
+                (await /**@type {Promise<Integer>} */ (
+                    elemental2_promise_Promise_$Overlay
+                        .m_resolve__java_lang_Object(
+                            Integer.m_valueOf__int(5)))),
+                Integer))));
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return true;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod_$Overlay
+        .$clinit = function() {};
+    elemental2_promise_Promise_$Overlay =
+        goog.module.get('elemental2.promise.Promise.$Overlay$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod_$Overlay,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod'));
+
+
+/**
+ * Export class.
+ */
+exports =
+    com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod_$Overlay;
+//# sourceMappingURL=Main$InterfaceWithAsyncDefaultMethod$$Overlay.js.map
