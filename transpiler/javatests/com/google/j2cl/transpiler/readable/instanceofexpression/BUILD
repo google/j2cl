@@ -8,6 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "instanceofinterface",
+    name = "instanceofexpression",
     srcs = glob(["*.java"]),
 )

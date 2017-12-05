@@ -1,15 +1,16 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType.
+ * com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType$impl');
+goog.module('com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions$impl');
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -19,9 +20,12 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
-class InstanceofBoxedType extends java_lang_Object {
+class InstanceofExpressions extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -31,33 +35,53 @@ class InstanceofBoxedType extends java_lang_Object {
   }
 
   /**
-   * Factory method corresponding to constructor 'InstanceofBoxedType()'.
-   * @return {!InstanceofBoxedType}
+   * Factory method corresponding to constructor 'InstanceofExpressions()'.
+   * @return {!InstanceofExpressions}
    * @public
    */
   static $create__() {
-    InstanceofBoxedType.$clinit();
-    let $instance = new InstanceofBoxedType();
+    InstanceofExpressions.$clinit();
+    let $instance = new InstanceofExpressions();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType__();
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'InstanceofBoxedType()'.
+   * Initialization from constructor 'InstanceofExpressions()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType__() {
+  $ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType();
+    this.$init__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions();
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_test__() {
+  m_testInstanceofClass__() {
+    let object = InstanceofExpressions.$create__();
+    $Asserts.$assert(InstanceofExpressions.$isInstance(object));
+    $Asserts.$assert(java_lang_Object.$isInstance(object));
+    $Asserts.$assert(!java_lang_String.$isInstance(object));
+  }
+
+  /**
+   * @return {boolean}
+   * @public
+   */
+  m_testInstanceofInterface__() {
+    let o = java_lang_Object.$create__();
+    return Serializable.$isInstance(o);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testInstanceofBoxedType__() {
     let b = Integer.$create__int(1);
     let a = Byte.$isInstance(b);
     a = Double.$isInstance(b);
@@ -71,13 +95,23 @@ class InstanceofBoxedType extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testInstanceOfArray__() {
+    let object = java_lang_Object.$create__();
+    let a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
+    let b = $Arrays.$instanceIsOfType(object, java_lang_Object, 2);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof InstanceofBoxedType;
+    return instance instanceof InstanceofExpressions;
   }
 
   /**
@@ -87,7 +121,7 @@ class InstanceofBoxedType extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InstanceofBoxedType);
+    return $Util.$canCastClass(classConstructor, InstanceofExpressions);
   }
 
   /**
@@ -95,7 +129,8 @@ class InstanceofBoxedType extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    InstanceofBoxedType.$clinit = function() {};
+    InstanceofExpressions.$clinit = function() {};
+    Serializable = goog.module.get('java.io.Serializable$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
@@ -105,6 +140,9 @@ class InstanceofBoxedType extends java_lang_Object {
     Long = goog.module.get('java.lang.Long$impl');
     Number = goog.module.get('java.lang.Number$impl');
     Short = goog.module.get('java.lang.Short$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     java_lang_Object.$clinit();
   }
 
@@ -112,19 +150,19 @@ class InstanceofBoxedType extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
+  $init__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions() {
   }
 };
 
 $Util.$setClassMetadata(
-    InstanceofBoxedType,
+    InstanceofExpressions,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType'));
+        'com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions'));
 
 
 
 /**
  * Export class.
  */
-exports = InstanceofBoxedType;
-//# sourceMappingURL=InstanceofBoxedType.js.map
+exports = InstanceofExpressions;
+//# sourceMappingURL=InstanceofExpressions.js.map
