@@ -11,12 +11,14 @@ const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
-let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
 class ArithmeticExpressions extends java_lang_Object {
@@ -26,6 +28,12 @@ class ArithmeticExpressions extends java_lang_Object {
    */
   constructor() {
     super();
+    /** @public {!$Long} */
+    this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        $Long.fromBits(0, 0) /* 0 */;
+    /** @public {!$Long} */
+    this.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        $Long.fromBits(0, 0) /* 0 */;
   }
 
   /**
@@ -55,7 +63,7 @@ class ArithmeticExpressions extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_main__() {
+  m_testPrimitives__() {
     let a = 10;
     let b = a++;
     let c = a--;
@@ -70,16 +78,7 @@ class ArithmeticExpressions extends java_lang_Object {
     let l = (1 + 2 != 4);
     let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
-    {
-      let $array =
-          ArithmeticExpressions
-              .m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions();
-      $Arrays.$set(
-          $array, 0, $LongUtils.$plus($array[0], $Long.fromBits(1, 0) /* 1 */));
-    }
     let o = $Primitives.$coerceDivision(5 / 2) - 0.0;
-    let boxI = Integer.m_valueOf__int(3);
-    a += boxI.m_intValue__();
     a = $LongUtils.$leftShift(
         $Primitives.$widenIntToLong(a), $Long.fromBits(31, 0) /* 31 */);
     a = $LongUtils.$leftShift(
@@ -90,12 +89,217 @@ class ArithmeticExpressions extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testCompoundArray__() {
+    let ints = null;
+    ints[0] += 1;
+    ints[0] -= 1;
+    ints[0] *= 1;
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
+    ints[0] &= 1;
+    ints[0] ^= 1;
+    ints[0] |= 1;
+    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
+    ints[0] <<= 1;
+    ints[0] >>= 1;
+    $Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));
+    ints[0]++;
+    ++ints[0];
+    let i = 0;
+    ints[i++]++;
+    ++ints[++i];
+    {
+      let $array = ints, $index = i++;
+      $Arrays.$set(
+          $array, $index, $Primitives.$coerceDivision($array[$index] / 1));
+    }
+    let longs = null;
+    $Arrays.$set(
+        longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));
+    $Arrays.$set(
+        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
+    $Arrays.$set(
+        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
+    {
+      let $array$1$ =
+          ArithmeticExpressions
+              .m_getLongArray___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
+      $Arrays.$set(
+          $array$1$, 0,
+          $LongUtils.$plus($array$1$[0], $Long.fromBits(1, 0) /* 1 */));
+    }
+    let booleans = null;
+    $Arrays.$set(booleans, 0, !!(booleans[0] | true));
+    let strings = null;
+    $Arrays.$set(
+        strings, 0,
+        java_lang_String.m_valueOf__java_lang_Object(strings[0]) +
+            java_lang_String.m_valueOf__java_lang_Object(null));
+  }
+
+  /**
    * @return {Array<!$Long>}
    * @public
    */
-  static m_getLongArray___$pp_com_google_j2cl_transpiler_readable_arithmeticexpressions() {
+  static m_getLongArray___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
     ArithmeticExpressions.$clinit();
-    return /**@type {!Array<!$Long>} */ ($Arrays.$create([10], $long));
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testCompoundBoxedTypes__() {
+    let /** Integer */ $value, /** Integer */ $value$1$;
+    let c = Integer.m_valueOf__int(1000);
+    let d = Integer.m_valueOf__int(10000);
+    d = Integer.m_valueOf__int(d.m_intValue__() + (c).m_intValue__());
+    let i = 43;
+    d = Integer.m_valueOf__int(d.m_intValue__() + (i));
+    d = Integer.m_valueOf__int(d.m_intValue__() << (i));
+    i += c.m_intValue__();
+    let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+    e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+    let f =
+        ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value);
+    f =
+        ($value$1$ = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1),
+         $value$1$);
+    let b = Byte.m_valueOf__byte(0);
+    b = Byte.m_valueOf__byte(
+        $Primitives.$narrowIntToByte(b.m_byteValue__() + 1));
+    let ch = Character.m_valueOf__char(99 /* "c" */);
+    ch = Character.m_valueOf__char(
+        $Primitives.$narrowIntToChar(ch.m_charValue__() + 1));
+  }
+
+  /**
+   * @return {Integer}
+   * @public
+   */
+  static m_getInteger___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    ArithmeticExpressions.$clinit();
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    ArithmeticExpressions.$clinit();
+    {
+      let $qualifier =
+          ArithmeticExpressions
+              .m_getWithSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
+      $qualifier
+          .f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+          $LongUtils.$plus(
+              $qualifier
+                  .f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+              $Primitives.$widenIntToLong(5));
+    }
+  }
+
+  /**
+   * @return {ArithmeticExpressions}
+   * @public
+   */
+  static m_getWithSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    ArithmeticExpressions.$clinit();
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testExtendedOperands__() {
+    let boxedInteger = Integer.m_valueOf__int(3);
+    let /** number */ i;
+    let /** !$Long */ l;
+    let /** number */ d;
+    l = $LongUtils.$minus(
+        $Primitives.$widenIntToLong(2 - boxedInteger.m_intValue__()),
+        $Long.fromBits(2, 0) /* 2 */);
+    l = $LongUtils.$or(
+        $Primitives.$widenIntToLong(2 | boxedInteger.m_intValue__()),
+        $Long.fromBits(2, 0) /* 2 */);
+    l = $LongUtils.$times(
+        $LongUtils.$times(
+            $LongUtils.$times(
+                $LongUtils.$times($Long.fromBits(1000000, 0) /* 1000000 */, l),
+                $Primitives.$widenIntToLong(60)),
+            $Primitives.$widenIntToLong(60)),
+        $Primitives.$widenIntToLong(24));
+    l = $LongUtils.$times(
+        $LongUtils.$times($Primitives.$widenIntToLong(24 * 60 * 60), l),
+        $Long.fromBits(1000000, 0) /* 1000000 */);
+    d = $Primitives.$widenLongToDouble(l = $Primitives.$widenIntToLong(i = 20));
+    l = $Primitives.$widenIntToLong(
+        (boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());
+    l = $LongUtils.$plus(
+        $LongUtils.$plus(
+            $Primitives.$widenIntToLong(i + boxedInteger.m_intValue__()), l),
+        $Primitives.$widenIntToLong(20));
+    d = $Primitives.$widenLongToDouble(
+            $LongUtils.$plus($Primitives.$widenIntToLong(20), l)) +
+        d;
+  }
+
+  /**
+   * A static field getter.
+   * @return {!$Long}
+   * @public
+   */
+  static get f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    return (
+        ArithmeticExpressions.$clinit(),
+        ArithmeticExpressions
+            .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!$Long} value
+   * @return {void}
+   * @public
+   */
+  static set f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
+      value) {
+    (ArithmeticExpressions.$clinit(),
+     ArithmeticExpressions
+         .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+         value);
+  }
+
+  /**
+   * A static field getter.
+   * @return {!$Long}
+   * @public
+   */
+  static get f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    return (
+        ArithmeticExpressions.$clinit(),
+        ArithmeticExpressions
+            .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);
+  }
+
+  /**
+   * A static field setter.
+   * @param {!$Long} value
+   * @return {void}
+   * @public
+   */
+  static set f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
+      value) {
+    (ArithmeticExpressions.$clinit(),
+     ArithmeticExpressions
+         .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+         value);
   }
 
   /**
@@ -124,13 +328,31 @@ class ArithmeticExpressions extends java_lang_Object {
    */
   static $clinit() {
     ArithmeticExpressions.$clinit = function() {};
+    Byte = goog.module.get('java.lang.Byte$impl');
+    Character = goog.module.get('java.lang.Character$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Long = goog.module.get('java.lang.Long$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     java_lang_Object.$clinit();
+    ArithmeticExpressions
+        .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        $Primitives.$widenIntToLong(1);
+    let /** !$Long */ $value;
+    ArithmeticExpressions
+        .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        ($value =
+             ArithmeticExpressions
+                 .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+         ArithmeticExpressions
+             .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+             $LongUtils.$plus(
+                 ArithmeticExpressions
+                     .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+                 $Long.fromBits(1, 0) /* 1 */),
+         $value);
   }
 
   /**
@@ -138,6 +360,18 @@ class ArithmeticExpressions extends java_lang_Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    let /** !$Long */ $value;
+    this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        ($value =
+             ArithmeticExpressions
+                 .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+         ArithmeticExpressions
+             .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+             $LongUtils.$plus(
+                 ArithmeticExpressions
+                     .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+                 $Long.fromBits(1, 0) /* 1 */),
+         $value);
   }
 };
 
@@ -145,6 +379,18 @@ $Util.$setClassMetadata(
     ArithmeticExpressions,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
+
+
+/** @private {!$Long} */
+ArithmeticExpressions
+    .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+    $Long.fromBits(0, 0) /* 0 */;
+
+
+/** @private {!$Long} */
+ArithmeticExpressions
+    .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+    $Long.fromBits(0, 0) /* 0 */;
 
 
 

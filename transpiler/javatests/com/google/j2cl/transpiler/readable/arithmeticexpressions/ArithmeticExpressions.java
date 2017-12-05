@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.readable.arithmeticexpressions;
 
 public class ArithmeticExpressions {
-  public void main() {
+  public void testPrimitives() {
     int a = 10;
     int b = a++;
     int c = a--;
@@ -30,11 +30,7 @@ public class ArithmeticExpressions {
     boolean k = !(1 + 2 + 3 == 4);
     boolean l = (1 + 2 != 4);
     boolean m = Long.MAX_VALUE != 9223372036854776833d;
-    getLongArray()[0]++;
     double o = (5 / 2) - 0.0;
-
-    Integer boxI = 3;
-    a += boxI;
 
     a = a << 31L;
     a <<= 1L;
@@ -43,7 +39,102 @@ public class ArithmeticExpressions {
     ((k)) |= true;
   }
 
-  static long[] getLongArray() {
-    return new long[10];
+  // Compount assignments in static fields
+  public static long one = 1;
+  public static long foo = one++;
+  public long bar = foo++;
+
+  public void testCompoundArray() {
+    int[] ints = null;
+    ints[0] += 1;
+    ints[0] -= 1;
+    ints[0] *= 1;
+    ints[0] /= 1;
+    ints[0] &= 1;
+    ints[0] ^= 1;
+    ints[0] |= 1;
+    ints[0] %= 1;
+    ints[0] <<= 1;
+    ints[0] >>= 1;
+    ints[0] >>>= 1;
+    ints[0]++;
+    ++ints[0];
+    int i = 0;
+    ints[i++]++;
+    ++ints[++i];
+    ints[i++] /= 1;
+
+    long[] longs = null;
+    longs[0] += 1;
+    longs[0]--;
+    --longs[0];
+    getLongArray()[0]++;
+
+    boolean[] booleans = null;
+    booleans[0] |= true;
+
+    String[] strings = null;
+    strings[0] += null;
+  }
+
+  private static long[] getLongArray() {
+    return null;
+  }
+
+  public void testCompoundBoxedTypes() {
+    Integer c = 1000;
+
+    // Compound expressions.
+    Integer d = 10000;
+    d += c;
+
+    int i = 43;
+    d += i;
+    d <<= i;
+    i += c;
+
+    // Prefix expressions;
+    Integer e = ++c;
+    e = ++c;
+
+    // Postfix expressions.
+    Integer f = c++;
+    f = c++;
+    Byte b = 0;
+    b++;
+    Character ch = 'c';
+    ch++;
+  }
+
+  private static Integer getInteger() {
+    return null;
+  }
+
+  long intField;
+
+  private static void testSideEffect() {
+    getWithSideEffect().intField += 5;
+  }
+
+  private static ArithmeticExpressions getWithSideEffect() {
+    return null;
+  }
+
+  // This is a readable example that exposes the nuances of JDT representation of InfixExpression,
+  // where certain expressions are represented as operator, list of operands rather than a
+  // nested binary tree structure.
+  public void testExtendedOperands() {
+    Integer boxedInteger = 3;
+    int i;
+    long l;
+    double d;
+    l = 2 - boxedInteger - 2L;
+    l = 2 | boxedInteger | 2L;
+    l = 1000000L * l * 60 * 60 * 24;
+    l = 24 * 60 * 60 * l * 1000000L;
+    d = l = i = 20;
+    l = boxedInteger = i = 20;
+    l = i + boxedInteger + l + 20;
+    d = 20 + l + d;
   }
 }

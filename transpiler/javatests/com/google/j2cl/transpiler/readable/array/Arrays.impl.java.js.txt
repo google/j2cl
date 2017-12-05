@@ -1,30 +1,29 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.array.Array.
+ * com.google.j2cl.transpiler.readable.array.Arrays.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.array.Array$impl');
+goog.module('com.google.j2cl.transpiler.readable.array.Arrays$impl');
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array.NativeType.$Overlay$impl');
-let SomeObject = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Arrays.NativeType.$Overlay$impl');
+let SomeObject = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Arrays.SomeObject$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
-class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
+class Arrays extends java_lang_Object {
   /**
    * Private implementation constructor.
    * @public
@@ -34,25 +33,25 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
   }
 
   /**
-   * Factory method corresponding to constructor 'Array()'.
-   * @return {!com_google_j2cl_transpiler_readable_array_Array}
+   * Factory method corresponding to constructor 'Arrays()'.
+   * @return {!Arrays}
    * @public
    */
   static $create__() {
-    com_google_j2cl_transpiler_readable_array_Array.$clinit();
-    let $instance = new com_google_j2cl_transpiler_readable_array_Array();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_array_Array__();
+    Arrays.$clinit();
+    let $instance = new Arrays();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_array_Arrays__();
     return $instance;
   }
 
   /**
-   * Initialization from constructor 'Array()'.
+   * Initialization from constructor 'Arrays()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_array_Array__() {
+  $ctor__com_google_j2cl_transpiler_readable_array_Arrays__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_array_Array();
+    this.$init__com_google_j2cl_transpiler_readable_array_Arrays();
   }
 
   /**
@@ -122,27 +121,6 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     n = ints2d[0][1];
     $Arrays.$set(ints, 0, 1);
     $Arrays.$set(ints2d[0], 1, 1);
-    ints[0] += 1;
-    ints[0] -= 1;
-    ints[0] *= 1;
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
-    ints[0] &= 1;
-    ints[0] ^= 1;
-    ints[0] |= 1;
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
-    ints[0] <<= 1;
-    ints[0] >>= 1;
-    $Arrays.$set(ints, 0, (ints[0] >>> 1 | 0));
-    ints[0]++;
-    ++ints[0];
-    let i = 0;
-    ints[i++]++;
-    ++ints[++i];
-    {
-      let $array = ints, $index = i++;
-      $Arrays.$set(
-          $array, $index, $Primitives.$coerceDivision($array[$index] / 1));
-    }
   }
 
   /**
@@ -171,12 +149,6 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     n = longs2d[0][1];
     $Arrays.$set(longs, 0, $Primitives.$widenIntToLong(1));
     $Arrays.$set(longs2d[0], 1, $Primitives.$widenIntToLong(1));
-    $Arrays.$set(
-        longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));
-    $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
-    $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
   }
 
   /**
@@ -204,9 +176,6 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);
     $Arrays.$set(booleans, 0, true);
     $Arrays.$set(booleans2d[0], 1, false);
-    $Arrays.$set(
-        booleans, 0,
-        !!(Boolean.m_booleanValue__java_lang_Boolean(booleans[0]) | true));
   }
 
   /**
@@ -235,10 +204,6 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
     b = strings2d[0][1];
     $Arrays.$set(strings, 0, null);
     $Arrays.$set(strings2d[0], 1, null);
-    $Arrays.$set(
-        strings, 0,
-        java_lang_String.m_valueOf__java_lang_Object(strings[0]) +
-            java_lang_String.m_valueOf__java_lang_Object(null));
   }
 
   /**
@@ -290,7 +255,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof com_google_j2cl_transpiler_readable_array_Array;
+    return instance instanceof Arrays;
   }
 
   /**
@@ -300,8 +265,7 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, com_google_j2cl_transpiler_readable_array_Array);
+    return $Util.$canCastClass(classConstructor, Arrays);
   }
 
   /**
@@ -309,13 +273,12 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_array_Array.$clinit = function() {};
+    Arrays.$clinit = function() {};
     SomeObject = goog.module.get(
-        'com.google.j2cl.transpiler.readable.array.Array.SomeObject$impl');
+        'com.google.j2cl.transpiler.readable.array.Arrays.SomeObject$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
@@ -326,17 +289,17 @@ class com_google_j2cl_transpiler_readable_array_Array extends java_lang_Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_array_Array() {}
+  $init__com_google_j2cl_transpiler_readable_array_Arrays() {}
 };
 
 $Util.$setClassMetadata(
-    com_google_j2cl_transpiler_readable_array_Array,
-    $Util.$makeClassName('com.google.j2cl.transpiler.readable.array.Array'));
+    Arrays,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.array.Arrays'));
 
 
 
 /**
  * Export class.
  */
-exports = com_google_j2cl_transpiler_readable_array_Array;
-//# sourceMappingURL=Array.js.map
+exports = Arrays;
+//# sourceMappingURL=Arrays.js.map

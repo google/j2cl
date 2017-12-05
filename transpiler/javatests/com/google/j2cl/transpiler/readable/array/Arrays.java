@@ -19,7 +19,7 @@ import java.io.Serializable;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-public class Array {
+public class Arrays {
   public void testObjectArray() {
     // Creation
     Object[] objects = new Object[100];
@@ -74,27 +74,6 @@ public class Array {
     // Assignment
     ints[0] = 1;
     ints2d[0][1] = 1;
-
-    // Compound assignment.
-    ints[0] += 1;
-    ints[0] -= 1;
-    ints[0] *= 1;
-    ints[0] /= 1;
-    ints[0] &= 1;
-    ints[0] ^= 1;
-    ints[0] |= 1;
-    ints[0] %= 1;
-    ints[0] <<= 1;
-    ints[0] >>= 1;
-    ints[0] >>>= 1;
-    ints[0]++;
-    ++ints[0];
-
-    // Index with side effects
-    int i = 0;
-    ints[i++]++;
-    ++ints[++i];
-    ints[i++] /= 1;
   }
 
   void testLongArrays() {
@@ -114,10 +93,6 @@ public class Array {
     longs[0] = 1;
     longs2d[0][1] = 1;
 
-    // Compound assignment.
-    longs[0] += 1;
-    longs[0]--;
-    --longs[0];
   }
 
   void testDevirtualizedTypeArrays() {
@@ -136,9 +111,6 @@ public class Array {
     // Assignment
     booleans[0] = true;
     booleans2d[0][1] = false;
-
-    // Compound assignment.
-    booleans[0] |= true;
   }
 
   void testStringArrays() {
@@ -157,9 +129,6 @@ public class Array {
     // Assignment
     strings[0] = null;
     strings2d[0][1] = null;
-
-    // Compound assignment.
-    strings[0] += null;
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
