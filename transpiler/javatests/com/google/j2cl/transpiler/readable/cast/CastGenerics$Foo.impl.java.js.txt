@@ -1,0 +1,97 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.cast.CastGenerics$Foo.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.Foo$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template C_Foo_V
+ */
+class Foo extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Foo()'.
+   * @template C_Foo_V
+   * @return {!Foo<C_Foo_V>}
+   * @public
+   */
+  static $create__() {
+    Foo.$clinit();
+    let $instance = new Foo();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Foo__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Foo()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Foo__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_cast_CastGenerics_Foo();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Foo;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Foo);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Foo.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_cast_CastGenerics_Foo() {}
+};
+
+$Util.$setClassMetadata(
+    Foo,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics$Foo'));
+
+
+
+/**
+ * Export class.
+ */
+exports = Foo;
+//# sourceMappingURL=CastGenerics$Foo.js.map

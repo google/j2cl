@@ -1,0 +1,213 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.cast.CastGenerics.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
+let Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Foo$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_T, C_E
+ */
+class CastGenerics extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {C_T} */
+    this.f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics = null;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'CastGenerics()'.
+   * @template C_T, C_E
+   * @return {!CastGenerics<C_T, C_E>}
+   * @public
+   */
+  static $create__() {
+    CastGenerics.$clinit();
+    let $instance = new CastGenerics();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'CastGenerics()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_cast_CastGenerics();
+  }
+
+  /**
+   * @return {C_T}
+   * @public
+   */
+  m_method___$pp_com_google_j2cl_transpiler_readable_cast() {
+    return null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testErasureCast__() {
+    CastGenerics.$clinit();
+    let str = /**@type {?string} */ ($Casts.$to(
+        /**@type {!CastGenerics<?string, (Number|number)>} */ (
+            CastGenerics.$create__())
+            .f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics,
+        java_lang_String));
+    str = /**@type {?string} */ ($Casts.$to(
+        /**@type {!CastGenerics<?string, (Number|number)>} */ (
+            CastGenerics.$create__())
+            .m_method___$pp_com_google_j2cl_transpiler_readable_cast(),
+        java_lang_String));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testCastToParamterizedType__() {
+    CastGenerics.$clinit();
+    let o = Integer.$create__int(1);
+    let cc = /**@type {CastGenerics<Error, (Number|number)>} */ (
+        $Casts.$to(o, CastGenerics));
+    cc = /**@type {CastGenerics} */ ($Casts.$to(o, CastGenerics));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testCastToTypeVariable__() {
+    let o = Integer.$create__int(1);
+    let e = /**@type {C_E} */ ($Casts.$to(o, Number));
+    let t = /**@type {C_T} */ ($Casts.$to(o, java_lang_Object));
+    let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
+    let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
+  }
+
+  /**
+   * @template M_S, M_V
+   * @return {void}
+   * @public
+   */
+  m_testCastToMethodTypeVariable__() {
+    let o = Integer.$create__int(1);
+    let s = /**@type {*} */ ($Casts.$to(o, java_lang_Object));
+    let c = /**@type {CastGenerics<*, (Number|number)>} */ (
+        $Casts.$to(o, CastGenerics));
+    c = /**@type {Array<*>} */ ($Arrays.$castTo(o, java_lang_Object, 1));
+    c = /**@type {Enum} */ ($Casts.$to(o, Enum));
+  }
+
+  /**
+   * @template M_TT
+   * @return {void}
+   * @public
+   */
+  m_outerGenericMethod__() {}
+
+  /**
+   * @template M_EE
+   * @param {*} o
+   * @return {M_EE}
+   * @public
+   */
+  m_method__java_lang_Object(o) {
+    if (Empty1.$isInstance(o)) {
+      return /**@type {Empty1} */ ($Casts.$to(o, Empty1));
+    }
+    return null;
+  }
+
+  /**
+   * @template M_T
+   * @return {Foo<M_T>}
+   * @public
+   */
+  static m_doSomething__() {
+    CastGenerics.$clinit();
+    return /**@type {!$1<*>} */ ($1.$create__());
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof CastGenerics;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CastGenerics);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    CastGenerics.$clinit = function() {};
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
+    Empty1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
+    Enum = goog.module.get('java.lang.Enum$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    Number = goog.module.get('java.lang.Number$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_cast_CastGenerics() {}
+};
+
+$Util.$setClassMetadata(
+    CastGenerics,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics'));
+
+
+
+/**
+ * Export class.
+ */
+exports = CastGenerics;
+//# sourceMappingURL=CastGenerics.js.map

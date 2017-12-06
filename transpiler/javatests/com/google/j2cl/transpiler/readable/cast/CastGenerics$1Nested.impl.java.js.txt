@@ -1,0 +1,124 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.cast.CastGenerics$1Nested.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.$1Nested$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CastGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_1Nested_SS, M_TT, C_T, C_E
+ */
+class $1Nested extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {CastGenerics<C_T, C_E>} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested =
+        null;
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Nested(CastGenerics)'.
+   * @template C_1Nested_SS, M_TT, C_T, C_E
+   * @param {CastGenerics<C_T, C_E>} $outer_this
+   * @return {!$1Nested<C_1Nested_SS, M_TT, C_T, C_E>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_cast_CastGenerics(
+      $outer_this) {
+    $1Nested.$clinit();
+    let $instance = new $1Nested();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested__com_google_j2cl_transpiler_readable_cast_CastGenerics(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Nested(CastGenerics)'.
+   * @param {CastGenerics<C_T, C_E>} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested__com_google_j2cl_transpiler_readable_cast_CastGenerics(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested();
+  }
+
+  /**
+   * @param {*} o
+   * @return {void}
+   * @public
+   */
+  m_nestedGenericMethod__java_lang_Object_$p_com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested(
+      o) {
+    let t = /**@type {M_TT} */ ($Casts.$to(o, Enum));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $1Nested;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $1Nested);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $1Nested.$clinit = function() {};
+    Enum = goog.module.get('java.lang.Enum$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested() {}
+};
+
+$Util.$setClassMetadata(
+    $1Nested,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics$1Nested'));
+
+
+
+/**
+ * Export class.
+ */
+exports = $1Nested;
+//# sourceMappingURL=CastGenerics$1Nested.js.map
