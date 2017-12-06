@@ -47,28 +47,28 @@
     }));] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [i] => [i] "i"
 [Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
-[BaseInterface o = new BaseInterface() {
-      @JsAsync
-...      }
-    };] => [let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[BaseInterface o =
+        new BaseInterface() {
+...          }
+        };] => [let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [o] => [o] "o"
 [AsyncJsFunctionInterface j = () -> Promise.resolve(await(Promise.resolve(5)));] => [let j = (async () =>{
       return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
     });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [j] => [j] "j"
 [Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
-[JsFunctionInterface optimizableJsFunction = new JsFunctionInterface() {
-      @JsAsync
-...      }
-    };] => [let optimizableJsFunction = (() =>{
+[JsFunctionInterface optimizableJsFunction =
+        new JsFunctionInterface() {
+...          }
+        };] => [let optimizableJsFunction = (() =>{
       return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
     });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [optimizableJsFunction] => [optimizableJsFunction] "optimizableJsFunction"
 [return Promise.resolve(5);] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main$2.doSomething"
-[JsFunctionInterface unoptimizableJsFunction = new JsFunctionInterface() {
-      @JsAsync
-...      }
-    };] => [let unoptimizableJsFunction = $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
+[JsFunctionInterface unoptimizableJsFunction =
+        new JsFunctionInterface() {
+...          }
+        };] => [let unoptimizableJsFunction = $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [unoptimizableJsFunction] => [unoptimizableJsFunction] "unoptimizableJsFunction"
 [public class Main {
 
