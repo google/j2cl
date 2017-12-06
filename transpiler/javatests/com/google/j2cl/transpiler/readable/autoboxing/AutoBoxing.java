@@ -352,20 +352,6 @@ public class AutoBoxing {
     assert b;
   }
 
-  public void testUnderflowOverflow() {
-    Byte boxedByte = Byte.MIN_VALUE;
-    assert boxedByte-- == Byte.MIN_VALUE;
-    assert boxedByte == Byte.MAX_VALUE;
-    boxedByte = Byte.MIN_VALUE;
-    assert --boxedByte == Byte.MAX_VALUE;
-
-    boxedByte = Byte.MAX_VALUE;
-    assert boxedByte++ == Byte.MAX_VALUE;
-    assert boxedByte == Byte.MIN_VALUE;
-    boxedByte = Byte.MAX_VALUE;
-    assert ++boxedByte == Byte.MIN_VALUE;
-  }
-
   public static <T extends Long> void testUnboxingFromTypeVariable() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.

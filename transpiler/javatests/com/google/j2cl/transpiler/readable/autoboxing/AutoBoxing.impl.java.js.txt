@@ -538,42 +538,6 @@ class AutoBoxing extends java_lang_Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_testUnderflowOverflow__() {
-    let /** Byte */ $value, /** Byte */ $value$1$;
-    let boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        ($value = boxedByte,
-         boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)),
-         $value)
-            .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        boxedByte.m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
-    boxedByte = Byte.m_valueOf__byte(Byte.f_MIN_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() - 1)))
-            .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
-    boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        ($value$1$ = boxedByte,
-         boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)),
-         $value$1$)
-            .m_byteValue__() == Byte.f_MAX_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        boxedByte.m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
-    boxedByte = Byte.m_valueOf__byte(Byte.f_MAX_VALUE__java_lang_Byte);
-    $Asserts.$assert(
-        (boxedByte = Byte.m_valueOf__byte(
-             $Primitives.$narrowIntToByte(boxedByte.m_byteValue__() + 1)))
-            .m_byteValue__() == Byte.f_MIN_VALUE__java_lang_Byte);
-  }
-
-  /**
    * @template M_T
    * @return {void}
    * @public
