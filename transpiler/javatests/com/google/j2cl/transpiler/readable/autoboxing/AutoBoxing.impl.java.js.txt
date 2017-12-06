@@ -23,6 +23,7 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let Void = goog.forwardDeclare('java.lang.Void$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
@@ -224,6 +225,13 @@ class AutoBoxing extends java_lang_Object {
   }
 
   /**
+   * @param {Array<Float>} elements
+   * @return {void}
+   * @public
+   */
+  m_takesFloatVarArgs__arrayOf_java_lang_Float(elements) {}
+
+  /**
    * @param {*} o
    * @return {number}
    * @public
@@ -267,17 +275,6 @@ class AutoBoxing extends java_lang_Object {
    * @return {void}
    * @public
    */
-  m_testNull__() {
-    let b = null;
-    let d = null;
-    let i = null;
-    let l = null;
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
   m_testBoxing__() {
     let bool = true;
     let d = 1111.0;
@@ -295,7 +292,6 @@ class AutoBoxing extends java_lang_Object {
     let boxL = Long.m_valueOf__long(l);
     let boxS = Short.m_valueOf__short(s);
     let boxC = Character.m_valueOf__char(c);
-    let o = Integer.m_valueOf__int(0);
     boxBool = true;
     boxD = 100.0;
     boxB = Byte.m_valueOf__byte(0);
@@ -313,24 +309,33 @@ class AutoBoxing extends java_lang_Object {
     l = this.m_unbox__java_lang_Long(Long.m_valueOf__long(l));
     s = this.m_unbox__java_lang_Short(Short.m_valueOf__short(s));
     c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
+    let /** * */ o;
+    o = 100.0;
+    o = Integer.m_valueOf__int(0);
+    o = Character.m_valueOf__char(97 /* 'a' */);
     boxBool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxD = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
-    boxF =
-        Float.m_valueOf__float(boxF.m_floatValue__() - boxF.m_floatValue__());
-    boxI = Integer.m_valueOf__int(boxI.m_intValue__() * boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(
+        $Primitives.$coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
     boxL = Long.m_valueOf__long(
         $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxI = Integer.m_valueOf__int(boxI.m_intValue__());
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
-    boxI = Integer.m_valueOf__int(~boxI.m_intValue__());
     let unusedDouble =
         this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
     unusedDouble =
         this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 1.5, 1, 1, 1]);
     unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);
+    this.m_takesFloatVarArgs__arrayOf_java_lang_Float(
+        /**@type {!Array<Float>} */ ($Arrays.$init(
+            [
+              Float.m_valueOf__float(1.0), Float.m_valueOf__float(97 /* 'a' */),
+              Float.m_valueOf__float(4)
+            ],
+            Float)));
   }
 
   /**
@@ -641,6 +646,7 @@ class AutoBoxing extends java_lang_Object {
     Long = goog.module.get('java.lang.Long$impl');
     Short = goog.module.get('java.lang.Short$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');

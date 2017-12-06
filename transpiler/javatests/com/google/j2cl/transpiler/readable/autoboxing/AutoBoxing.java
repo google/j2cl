@@ -97,6 +97,8 @@ public class AutoBoxing {
     return null;
   }
 
+  public void takesFloatVarArgs(Float... elements) {}
+
   public double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
     return (double) o;
   }
@@ -116,14 +118,6 @@ public class AutoBoxing {
       sum += (Double) number;
     }
     return sum;
-  }
-
-  @SuppressWarnings("unused")
-  public void testNull() {
-    Boolean b = null;
-    Double d = null;
-    Integer i = null;
-    Long l = null;
   }
 
   @SuppressWarnings("unused")
@@ -148,7 +142,6 @@ public class AutoBoxing {
     Character boxC = c;
 
     // auto-boxing by assignment with literals
-    Object o = 0;
     boxBool = true;
     boxD = 100.0;
     boxB = 0;
@@ -169,20 +162,26 @@ public class AutoBoxing {
     s = unbox(s);
     c = unbox(c);
 
+    // auto-boxing by assignment to Object
+    Object o;
+    o = 100d;
+    o = 0;
+    o = 'a';
+
     // auto-boxing by assignment
     boxBool = boxBool && boxBool;
     boxD = boxD + boxD;
-    boxF = boxF - boxF;
-    boxI = boxI * boxI;
+    boxI = boxI / boxI;
     boxL = boxL / boxL;
     boxBool = !boxBool;
     boxI = +boxI;
     boxI = -boxI;
-    boxI = ~boxI;
 
     double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
     unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);
     unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
+
+    takesFloatVarArgs(1.0f, (float) 'a', (float) 4);
   }
 
   @SuppressWarnings("unused")
