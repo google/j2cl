@@ -104,6 +104,10 @@ public class ArithmeticExpressions {
     b++;
     Character ch = 'c';
     ch++;
+
+    // Method call on result of arithmetic expressions.
+    (++f).intValue();
+    (f--).intValue();
   }
 
   private static Integer getInteger() {

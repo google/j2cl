@@ -79,5 +79,9 @@ public class Main {
       } catch (NullPointerException expected) {
       }
     }
+
+    Integer i = 10;
+    assert (i++).getClass() == Integer.class;
+    assert (--i).intValue() == 10;
   }
 }

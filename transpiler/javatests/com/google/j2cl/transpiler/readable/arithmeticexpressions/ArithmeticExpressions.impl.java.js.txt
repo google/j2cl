@@ -153,7 +153,8 @@ class ArithmeticExpressions extends java_lang_Object {
    * @public
    */
   m_testCompoundBoxedTypes__() {
-    let /** Integer */ $value, /** Integer */ $value$1$;
+    let /** Integer */ $value, /** Integer */ $value$1$,
+        /** Integer */ $value$2$;
     let c = Integer.m_valueOf__int(1000);
     let d = Integer.m_valueOf__int(10000);
     d = Integer.m_valueOf__int(d.m_intValue__() + (c).m_intValue__());
@@ -174,6 +175,9 @@ class ArithmeticExpressions extends java_lang_Object {
     let ch = Character.m_valueOf__char(99 /* "c" */);
     ch = Character.m_valueOf__char(
         $Primitives.$narrowIntToChar(ch.m_charValue__() + 1));
+    (f = Integer.m_valueOf__int(f.m_intValue__() + 1)).m_intValue__();
+    ($value$2$ = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value$2$)
+        .m_intValue__();
   }
 
   /**
