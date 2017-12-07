@@ -67,6 +67,8 @@
 [a = a << 31L;] => [a = $LongUtils.$leftShift($Primitives.$widenIntToLong(a), $Long.fromBits(31, 0) /* 31 */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a <<= 1L;] => [a = $LongUtils.$leftShift($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[a /= 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[a += Double.MAX_VALUE;] => [a = $Primitives.$narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"
@@ -123,6 +125,9 @@
 [Integer e = ++c;] => [let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [e] => [e] "e"
 [e = ++c;] => [e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[Double e2 = 100d;] => [let e2 = 100.0;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[e2] => [e2] "e2"
+[++e2;] => [e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Integer f = c++;] => [let f = ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [f] => [f] "f"
 [f = c++;] => [f = ($value$1$ = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value$1$);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
@@ -196,6 +201,8 @@
     a = a << 31L;
     a <<= 1L;
     a += 1L;
+    a /= 1L;
+    a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
   }
@@ -257,6 +264,8 @@
     // Prefix expressions;
     Integer e = ++c;
     e = ++c;
+    Double e2 = 100d;
+    ++e2;
 
     // Postfix expressions.
     Integer f = c++;
@@ -324,6 +333,8 @@ ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpr
     a = a << 31L;
     a <<= 1L;
     a += 1L;
+    a /= 1L;
+    a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
   }
@@ -385,6 +396,8 @@ ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpr
     // Prefix expressions;
     Integer e = ++c;
     e = ++c;
+    Double e2 = 100d;
+    ++e2;
 
     // Postfix expressions.
     Integer f = c++;

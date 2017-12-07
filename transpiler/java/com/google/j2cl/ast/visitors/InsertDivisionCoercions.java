@@ -41,12 +41,9 @@ public class InsertDivisionCoercions extends NormalizationPass {
                 binaryExpression.getOperator() == BinaryOperator.DIVIDE
                     || binaryExpression.getOperator() == BinaryOperator.REMAINDER;
             TypeDescriptor expressionTypeDescriptor = binaryExpression.getTypeDescriptor();
-            if (isDivision
-                && TypeDescriptors.isNumericPrimitive(expressionTypeDescriptor)
-                && !TypeDescriptors.isPrimitiveFloatOrDouble(expressionTypeDescriptor)) {
+            if (isDivision && TypeDescriptors.isIntegralPrimitiveType(expressionTypeDescriptor)) {
               // Long operations have already been normalized out.
               checkArgument(!TypeDescriptors.isPrimitiveLong(expressionTypeDescriptor));
-
               return RuntimeMethods.createPrimitivesMethodCall("$coerceDivision", binaryExpression);
             }
             return binaryExpression;

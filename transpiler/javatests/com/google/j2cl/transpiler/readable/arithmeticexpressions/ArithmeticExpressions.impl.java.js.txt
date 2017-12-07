@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
@@ -85,6 +86,10 @@ class ArithmeticExpressions extends java_lang_Object {
         $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */);
     a = $Primitives.$narrowLongToInt($LongUtils.$plus(
         $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
+    a = $Primitives.$narrowLongToInt($LongUtils.$divide(
+        $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
+    a = $Primitives.$narrowDoubleToInt(
+        a + Double.f_MAX_VALUE__java_lang_Double);
     k = !!(k | true);
   }
 
@@ -164,6 +169,8 @@ class ArithmeticExpressions extends java_lang_Object {
     i += c.m_intValue__();
     let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
     e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+    let e2 = 100.0;
+    e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;
     let f =
         ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value);
     f =
@@ -334,6 +341,7 @@ class ArithmeticExpressions extends java_lang_Object {
     ArithmeticExpressions.$clinit = function() {};
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
+    Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Long = goog.module.get('java.lang.Long$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');

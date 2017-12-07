@@ -48,6 +48,8 @@ public class Main {
     int i = 1;
     i += 1L;
     assert i == 2;
+    i += Double.MAX_VALUE;
+    assert i == Integer.MAX_VALUE;
 
     int d = 10;
     assert d == 10;

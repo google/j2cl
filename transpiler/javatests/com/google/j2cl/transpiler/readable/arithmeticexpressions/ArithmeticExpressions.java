@@ -35,6 +35,8 @@ public class ArithmeticExpressions {
     a = a << 31L;
     a <<= 1L;
     a += 1L;
+    a /= 1L;
+    a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
   }
@@ -96,6 +98,8 @@ public class ArithmeticExpressions {
     // Prefix expressions;
     Integer e = ++c;
     e = ++c;
+    Double e2 = 100d;
+    ++e2;
 
     // Postfix expressions.
     Integer f = c++;

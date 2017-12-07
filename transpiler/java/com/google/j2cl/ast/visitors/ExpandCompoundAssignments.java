@@ -25,7 +25,6 @@ import com.google.j2cl.ast.CompoundOperationsUtils;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.ForStatement;
-import com.google.j2cl.ast.Operator;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
@@ -51,7 +50,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
 
             if (expression instanceof PostfixExpression) {
               PostfixExpression postfixExpression = (PostfixExpression) expression;
-              if (needsExpansion(postfixExpression.getOperator(), postfixExpression.getOperand())) {
+              if (needsExpansion(postfixExpression)) {
                 return toPrefixExpression(postfixExpression)
                     .makeStatement(expressionStatement.getSourcePosition());
               }
@@ -88,7 +87,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
 
           @Override
           public Expression rewritePrefixExpression(PrefixExpression prefixExpression) {
-            if (needsExpansion(prefixExpression.getOperator(), prefixExpression.getOperand())) {
+            if (needsExpansion(prefixExpression)) {
               return CompoundOperationsUtils.expandExpression(prefixExpression);
             }
             return prefixExpression;
@@ -96,7 +95,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
 
           @Override
           public Expression rewritePostfixExpression(PostfixExpression postfixExpression) {
-            if (needsExpansion(postfixExpression.getOperator(), postfixExpression.getOperand())) {
+            if (needsExpansion(postfixExpression)) {
               return CompoundOperationsUtils.expandExpression(postfixExpression);
             }
             return postfixExpression;
@@ -105,49 +104,49 @@ public class ExpandCompoundAssignments extends NormalizationPass {
   }
 
   private static boolean needsExpansion(BinaryExpression expression) {
-    BinaryOperator operator = expression.getOperator();
-    Expression leftOperand = expression.getLeftOperand();
-
     TypeDescriptor lhsTypeDescriptor = expression.getLeftOperand().getTypeDescriptor();
     TypeDescriptor rhsTypeDescriptor = expression.getRightOperand().getTypeDescriptor();
-    if (operator.hasSideEffect()
-        && operator != BinaryOperator.ASSIGN
-        && TypeDescriptors.isIntegralPrimitiveType(lhsTypeDescriptor)
-        && TypeDescriptors.getWidth(lhsTypeDescriptor)
-            < TypeDescriptors.getWidth(rhsTypeDescriptor.toUnboxedType())) {
-      // Compound assignment contexts perform implicit narrowing coercions.
-      return true;
-    }
-    return needsExpansion(operator, leftOperand);
-  }
+    BinaryOperator operator = expression.getOperator();
 
-  private static boolean needsExpansion(Operator operator, Expression targetExpression) {
-    if (!operator.hasSideEffect() || operator == BinaryOperator.ASSIGN) {
+    if (!operator.isCompoundAssignment()) {
       return false;
     }
 
-    if (operator == BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN) {
-      // >>>= needs expansion so that it is handled by FixUnsignedRightShiftOperator.
-      return true;
+    // For floating point, native arithmetic is good enough and doesn't need instrumentation.
+    if (TypeDescriptors.isPrimitiveFloatOrDouble(lhsTypeDescriptor)) {
+      return false;
     }
 
-    TypeDescriptor targetTypeDescriptor = targetExpression.getTypeDescriptor();
-    if ((operator == BinaryOperator.DIVIDE_ASSIGN || operator == BinaryOperator.REMAINDER_ASSIGN)
-        && needsIntegralCoercion(targetTypeDescriptor)) {
-      // Integral division and remainder always need expansion for truncation and/or division by
-      // zero check insertion.
-      return true;
+    // For int, native arithmetic is mostly good but we need instrumentaion in a few cases:
+    // - Division operations (/ and %) requires truncation and divide-by-zero check
+    // - Right-shift requires truncation
+    // - Right-hand-size w/ a wider type that upgrades the all arithmetic to a wider type
+    if (TypeDescriptors.isPrimitiveInt(lhsTypeDescriptor)
+        && operator != BinaryOperator.DIVIDE_ASSIGN
+        && operator != BinaryOperator.REMAINDER_ASSIGN
+        && operator != BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN
+        && TypeDescriptors.getWidth(rhsTypeDescriptor.toUnboxedType())
+            <= TypeDescriptors.getWidth(lhsTypeDescriptor)) {
+      return false;
     }
 
-    // Only a handful of types do not need compound assignment expansion, these are the ones which
-    // do not need extra instrumentation to perform the operations due to emulation (longs), boxing
-    // or coercion (short, byte and boolean operations).
-    return !TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)
-        && !TypeDescriptors.isPrimitiveInt(targetTypeDescriptor);
+    return true;
   }
 
-  private static boolean needsIntegralCoercion(TypeDescriptor targetTypeDescriptor) {
-    return TypeDescriptors.isIntegralPrimitiveType(targetTypeDescriptor.toUnboxedType());
+  private static boolean needsExpansion(UnaryExpression expression) {
+    TypeDescriptor targetTypeDescriptor = expression.getOperand().getTypeDescriptor();
+
+    if (!expression.getOperator().hasSideEffect()) {
+      return false;
+    }
+
+    // For floating point and int, native arithmetic is good enough for unary operations.
+    if (TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)
+        || TypeDescriptors.isPrimitiveInt(targetTypeDescriptor)) {
+      return false;
+    }
+
+    return true;
   }
 
   /** Rewrites a postfix expressions int the list into the corresponding prefix expressions. */
@@ -158,7 +157,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     for (Expression expression : expressions) {
       if (expression instanceof PostfixExpression) {
         PostfixExpression postfixExpression = (PostfixExpression) expression;
-        if (needsExpansion(postfixExpression.getOperator(), postfixExpression.getOperand())) {
+        if (needsExpansion(postfixExpression)) {
           expression = toPrefixExpression(postfixExpression);
         }
       }
