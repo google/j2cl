@@ -127,7 +127,7 @@ public class CompoundOperationsUtils {
           Variable.newBuilder()
               .setFinal(true)
               .setName("$index")
-              .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+              .setTypeDescriptor(PrimitiveTypes.INT)
               .build();
       variableDeclarationFragments.add(
           new VariableDeclarationFragment(indexExpressionVariable, indexExpression));
@@ -293,8 +293,8 @@ public class CompoundOperationsUtils {
         .build();
   }
 
-  // When expanding compound assignments (and prefix/postfix operations) there is an implicit cast
-  // that might need to be inserted.
+  // When expanding compound assignments (and prefix/postfix operations) there is an implicit
+  // (narrowing) cast that might need to be inserted.
   //
   // Byte b;
   // ++b;
@@ -306,7 +306,10 @@ public class CompoundOperationsUtils {
   //
   @SuppressWarnings("ReferenceEquality")
   private static Expression maybeCast(TypeDescriptor typeDescriptor, Expression expression) {
-    typeDescriptor = typeDescriptor.toUnboxedType();
+    typeDescriptor =
+        TypeDescriptors.isBoxedType(typeDescriptor)
+            ? typeDescriptor.toUnboxedType()
+            : typeDescriptor;
     if (!TypeDescriptors.isNumericPrimitive(typeDescriptor)
         || typeDescriptor == expression.getTypeDescriptor()) {
       return expression;

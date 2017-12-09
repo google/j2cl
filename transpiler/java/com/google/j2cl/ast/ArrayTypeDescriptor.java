@@ -184,7 +184,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 
-  @Override
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -195,7 +194,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   /** Builder for an ArrayTypeDescriptor. */
   @AutoValue.Builder
-  public abstract static class Builder extends TypeDescriptor.Builder {
+  public abstract static class Builder {
 
     public abstract Builder setComponentTypeDescriptor(TypeDescriptor leafTypeDescriptor);
 

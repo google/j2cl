@@ -35,8 +35,7 @@ public class InsertStringConversions extends NormalizationPass {
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteStringContext(
-          Expression operandExpression, Expression otherOperandExpression) {
+      public Expression rewriteStringContext(Expression operandExpression) {
         TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
         if (AstUtils.isNonNullString(operandExpression)) {
           return operandExpression;

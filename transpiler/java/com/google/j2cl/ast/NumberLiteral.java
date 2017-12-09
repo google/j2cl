@@ -23,21 +23,21 @@ import com.google.j2cl.ast.annotations.Visitable;
 @Visitable
 public class NumberLiteral extends Literal {
   public static NumberLiteral of(int value) {
-    return new NumberLiteral(TypeDescriptors.get().primitiveInt, value);
+    return new NumberLiteral(PrimitiveTypes.INT, value);
   }
 
   public static NumberLiteral of(long value) {
-    return new NumberLiteral(TypeDescriptors.get().primitiveLong, value);
+    return new NumberLiteral(PrimitiveTypes.LONG, value);
   }
 
   public static NumberLiteral of(double value) {
-    return new NumberLiteral(TypeDescriptors.get().primitiveDouble, value);
+    return new NumberLiteral(PrimitiveTypes.DOUBLE, value);
   }
 
-  private final TypeDescriptor typeDescriptor;
+  private final PrimitiveTypeDescriptor typeDescriptor;
   private final Number value;
 
-  public NumberLiteral(TypeDescriptor typeDescriptor, Number value) {
+  public NumberLiteral(PrimitiveTypeDescriptor typeDescriptor, Number value) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.value = value;
   }
@@ -47,7 +47,7 @@ public class NumberLiteral extends Literal {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public PrimitiveTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

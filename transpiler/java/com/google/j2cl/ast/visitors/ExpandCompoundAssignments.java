@@ -29,6 +29,7 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnaryExpression;
@@ -125,8 +126,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         && operator != BinaryOperator.DIVIDE_ASSIGN
         && operator != BinaryOperator.REMAINDER_ASSIGN
         && operator != BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN
-        && TypeDescriptors.getWidth(rhsTypeDescriptor.toUnboxedType())
-            <= TypeDescriptors.getWidth(lhsTypeDescriptor)) {
+        && !rhsTypeDescriptor.toUnboxedType().isWiderThan(PrimitiveTypes.INT)) {
       return false;
     }
 

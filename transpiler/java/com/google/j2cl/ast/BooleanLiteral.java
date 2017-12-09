@@ -40,7 +40,7 @@ public class BooleanLiteral extends Literal {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().primitiveBoolean;
+    return PrimitiveTypes.BOOLEAN;
   }
 
   @Override

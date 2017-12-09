@@ -109,8 +109,7 @@ public class InsertBoxingConversions extends NormalizationPass {
     // Create the narrowed literal.
     if (toTypeDescriptor == TypeDescriptors.get().javaLangByte
         || toTypeDescriptor == TypeDescriptors.get().javaLangShort) {
-      return new NumberLiteral(
-          TypeDescriptors.getPrimitiveTypeFromBoxType(toTypeDescriptor), value);
+      return new NumberLiteral(toTypeDescriptor.toUnboxedType(), value);
     } else if (toTypeDescriptor == TypeDescriptors.get().javaLangCharacter) {
       return new CharacterLiteral((char) value);
     } else {

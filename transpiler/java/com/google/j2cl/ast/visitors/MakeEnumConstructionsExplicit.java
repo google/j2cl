@@ -31,6 +31,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.Type;
@@ -75,7 +76,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                         .build(),
                     Variable.newBuilder()
                         .setName(ORDINAL_PARAMETER_NAME)
-                        .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+                        .setTypeDescriptor(PrimitiveTypes.INT)
                         .setParameter(true)
                         .build())
                 .build();

@@ -71,6 +71,8 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
@@ -332,7 +334,8 @@ public class CompilationUnitBuilder {
       Object constantValue = variableBinding.getConstantValue();
       if (constantValue instanceof Number) {
         return new NumberLiteral(
-            JdtUtils.createTypeDescriptor(variableBinding.getType()), (Number) constantValue);
+            JdtUtils.createTypeDescriptor(variableBinding.getType()).toUnboxedType(),
+            (Number) constantValue);
       }
       if (constantValue instanceof String) {
         return StringLiteral.fromPlainText((String) constantValue);
@@ -840,10 +843,7 @@ public class CompilationUnitBuilder {
 
       // int index = 0;
       Variable indexVariable =
-          Variable.newBuilder()
-              .setName("$index")
-              .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-              .build();
+          Variable.newBuilder().setName("$index").setTypeDescriptor(PrimitiveTypes.INT).build();
 
       // $index < $array.length
       Expression condition =
@@ -1485,7 +1485,8 @@ public class CompilationUnitBuilder {
         constantValue = constantValue.doubleValue();
       }
       return new NumberLiteral(
-          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()), constantValue);
+          (PrimitiveTypeDescriptor) JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()),
+          constantValue);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {

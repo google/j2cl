@@ -29,7 +29,12 @@ public abstract class UnaryExpression extends Expression {
 
   UnaryExpression(Expression operand) {
     this.operand = checkNotNull(operand);
-    this.typeDescriptor = operand.getTypeDescriptor().toUnboxedType();
+    // TODO(b/70335704): incoming type should not be unboxed, unless it has no side effects.
+    TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
+    this.typeDescriptor =
+        TypeDescriptors.isBoxedType(typeDescriptor)
+            ? typeDescriptor.toUnboxedType()
+            : typeDescriptor;
   }
 
   public Expression getOperand() {

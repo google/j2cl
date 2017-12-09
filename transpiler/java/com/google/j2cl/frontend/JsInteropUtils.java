@@ -17,7 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.PrimitiveTypes;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -126,7 +126,10 @@ public class JsInteropUtils {
   }
 
   private static boolean returnsPrimitiveVoid(IMethodBinding methodBinding) {
-    return methodBinding.getReturnType().getQualifiedName().equals(TypeDescriptors.VOID_TYPE_NAME);
+    return methodBinding
+        .getReturnType()
+        .getQualifiedName()
+        .equals(PrimitiveTypes.VOID.getSimpleSourceName());
   }
 
   private static boolean isDebugger(IMethodBinding methodBinding) {

@@ -21,6 +21,8 @@ import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -82,14 +84,12 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           return false;
         }
 
-        int fromWidth = TypeDescriptors.getWidth(fromTypeDescriptor);
-        int toWidth = TypeDescriptors.getWidth(toTypeDescriptor);
-
         Set<TypeDescriptor> typeDescriptors = Sets.newHashSet(fromTypeDescriptor, toTypeDescriptor);
 
-        if (fromWidth <= toWidth
-            && !(typeDescriptors.contains(TypeDescriptors.get().primitiveShort)
-                && typeDescriptors.contains(TypeDescriptors.get().primitiveChar))) {
+        if (!((PrimitiveTypeDescriptor) fromTypeDescriptor)
+                .isWiderThan((PrimitiveTypeDescriptor) toTypeDescriptor)
+            && !(typeDescriptors.contains(PrimitiveTypes.SHORT)
+                && typeDescriptors.contains(PrimitiveTypes.CHAR))) {
           // Don't modify non-narrowing casts, except for the special case between
           // short and char.
           return false;
@@ -103,20 +103,22 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         if (literalValue instanceof Number) {
           Number numberLiteral = (Number) literalValue;
           // Narrow at compile time.
+          PrimitiveTypeDescriptor literalTypeDescriptor =
+              (PrimitiveTypeDescriptor) toTypeDescriptor;
           if (TypeDescriptors.isPrimitiveByte(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.byteValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.byteValue());
           } else if (TypeDescriptors.isPrimitiveChar(toTypeDescriptor)) {
             return new CharacterLiteral((char) numberLiteral.intValue());
           } else if (TypeDescriptors.isPrimitiveShort(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.shortValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.shortValue());
           } else if (TypeDescriptors.isPrimitiveInt(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.intValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.intValue());
           } else if (TypeDescriptors.isPrimitiveLong(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.longValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.longValue());
           } else if (TypeDescriptors.isPrimitiveFloat(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.floatValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.floatValue());
           } else if (TypeDescriptors.isPrimitiveDouble(toTypeDescriptor)) {
-            return new NumberLiteral(toTypeDescriptor, numberLiteral.doubleValue());
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.doubleValue());
           }
         } else if (literalValue instanceof Character) {
           Character characterLiteral = (Character) literalValue;
@@ -139,5 +141,4 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
       }
     };
   }
-
 }

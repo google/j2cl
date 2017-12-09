@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
@@ -508,15 +509,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /**
    * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
-   * {@code typeDescriptor} otherwise
+   * throws an exception otherwise.
    */
   @Memoized
   @Override
-  public TypeDescriptor toUnboxedType() {
-    if (TypeDescriptors.isBoxedType(this)) {
-      return TypeDescriptors.getPrimitiveTypeFromBoxType(this);
-    }
-    return this;
+  public PrimitiveTypeDescriptor toUnboxedType() {
+    checkState(TypeDescriptors.isBoxedType(this));
+    return checkNotNull(TypeDescriptors.getPrimitiveTypeFromBoxType(this));
   }
 
   @Override
@@ -669,7 +668,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return Visitor_DeclaredTypeDescriptor.visit(processor, this);
   }
 
-  @Override
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -688,7 +686,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /** Builder for a TypeDescriptor. */
   @AutoValue.Builder
-  public abstract static class Builder extends TypeDescriptor.Builder {
+  public abstract static class Builder {
 
     public abstract Builder setUniqueKey(String key);
 

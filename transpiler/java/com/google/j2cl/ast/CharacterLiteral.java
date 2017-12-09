@@ -45,7 +45,7 @@ public class CharacterLiteral extends Literal {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().primitiveChar;
+    return PrimitiveTypes.CHAR;
   }
 
   @Override

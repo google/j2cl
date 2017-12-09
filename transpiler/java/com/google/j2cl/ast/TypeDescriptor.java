@@ -133,14 +133,17 @@ public abstract class TypeDescriptor extends Node
     return null;
   }
 
-  /**
-   * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
-   * {@code typeDescriptor} otherwise
-   */
-  public TypeDescriptor toUnboxedType() {
-    return this;
+  /** Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type. */
+  public PrimitiveTypeDescriptor toUnboxedType() {
+    return (PrimitiveTypeDescriptor) this;
   }
 
+  /** Returns the value for uninitialized expression of this type. */
+  public Expression getDefaultValue() {
+    return NullLiteral.get();
+  }
+
+  /** Return whether this type is nullable or not. */
   public abstract boolean isNullable();
 
   /** Return a nullable version of this type descriptor if possible. */
@@ -263,9 +266,4 @@ public abstract class TypeDescriptor extends Node
   public Node accept(Processor processor) {
     return Visitor_TypeDescriptor.visit(processor, this);
   }
-
-  abstract Builder toBuilder();
-
-  /** Builder for a TypeDescriptor. */
-  public abstract static class Builder {}
 }

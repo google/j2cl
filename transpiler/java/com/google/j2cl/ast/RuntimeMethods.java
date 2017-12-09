@@ -57,7 +57,7 @@ public class RuntimeMethods {
                 .setName("$set")
                 .setParameterTypeDescriptors(
                     TypeDescriptors.get().javaLangObjectArray, // array
-                    TypeDescriptors.get().primitiveInt, // index
+                    PrimitiveTypes.INT, // index
                     elementType)
                 .setReturnTypeDescriptor(elementType)
                 .build())
@@ -74,7 +74,7 @@ public class RuntimeMethods {
     checkArgument(arguments.length == 1 || arguments.length == 2);
 
     List<TypeDescriptor> parameterTypeDescriptors =
-        ImmutableList.of(TypeDescriptors.get().nativeFunction, TypeDescriptors.get().primitiveInt);
+        ImmutableList.of(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT);
     return MethodCall.Builder.from(
             MethodDescriptor.newBuilder()
                 .setJsInfo(JsInfo.RAW)
@@ -134,8 +134,7 @@ public class RuntimeMethods {
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
             .setName(name)
-            .setParameterTypeDescriptors(
-                TypeDescriptors.get().primitiveLong, TypeDescriptors.get().primitiveLong)
+            .setParameterTypeDescriptors(PrimitiveTypes.LONG, PrimitiveTypes.LONG)
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // LongUtils.$someOperation(leftOperand, rightOperand);
@@ -226,7 +225,7 @@ public class RuntimeMethods {
                                       .setParameters(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().primitiveInt)
+                                          PrimitiveTypes.INT)
                                       .build())
                               .put(
                                   "$castToNative",
@@ -261,7 +260,7 @@ public class RuntimeMethods {
                                       .setParameters(
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().primitiveInt)
+                                          PrimitiveTypes.INT)
                                       .setRequiredParameters(2)
                                       .build())
                               .put(
@@ -271,7 +270,7 @@ public class RuntimeMethods {
                                       .setParameters(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().primitiveInt)
+                                          PrimitiveTypes.INT)
                                       .build())
                               .put(
                                   "$instanceIsOfNative",
@@ -286,7 +285,7 @@ public class RuntimeMethods {
                                       .setParameters(
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().primitiveDouble)
+                                          PrimitiveTypes.DOUBLE)
                                       .build())
                               .build())
                       .put(
@@ -347,7 +346,7 @@ public class RuntimeMethods {
                               .put(
                                   "$same",
                                   MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().primitiveBoolean)
+                                      .setReturnType(PrimitiveTypes.BOOLEAN)
                                       .setParameters(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject)
@@ -360,8 +359,8 @@ public class RuntimeMethods {
                               .put(
                                   "$coerceDivision",
                                   MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().primitiveInt)
-                                      .setParameters(TypeDescriptors.get().primitiveInt)
+                                      .setReturnType(PrimitiveTypes.INT)
+                                      .setParameters(PrimitiveTypes.INT)
                                       .build())
                               .build())
                       .put(
@@ -371,14 +370,14 @@ public class RuntimeMethods {
                               .put(
                                   "$negate",
                                   MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().primitiveLong)
-                                      .setParameters(TypeDescriptors.get().primitiveLong)
+                                      .setReturnType(PrimitiveTypes.LONG)
+                                      .setParameters(PrimitiveTypes.LONG)
                                       .build())
                               .put(
                                   "$not",
                                   MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().primitiveLong)
-                                      .setParameters(TypeDescriptors.get().primitiveLong)
+                                      .setReturnType(PrimitiveTypes.LONG)
+                                      .setParameters(PrimitiveTypes.LONG)
                                       .build())
                               .build())
                       .build());

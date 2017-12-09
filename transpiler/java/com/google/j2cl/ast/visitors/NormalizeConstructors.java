@@ -36,11 +36,11 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
@@ -492,7 +492,7 @@ public class NormalizeConstructors extends NormalizationPass {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
-        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .build();
   }
 
@@ -505,7 +505,7 @@ public class NormalizeConstructors extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(enclosingType)
             .setConstructor(true)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+            .setReturnTypeDescriptor(PrimitiveTypes.VOID)
             .setParameterDescriptors(
                 constructorDescriptor.getDeclarationDescriptor().getParameterDescriptors())
             .setJsInfo(JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())

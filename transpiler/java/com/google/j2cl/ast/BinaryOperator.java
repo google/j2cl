@@ -81,6 +81,7 @@ public enum BinaryOperator implements Operator {
     return isAssignmentOperator();
   }
 
+  /** Returns true for plain assignment and compound assignment operators. */
   public boolean isAssignmentOperator() {
     return this == ASSIGN || underlyingBinaryOperator != null;
   }
@@ -98,6 +99,20 @@ public enum BinaryOperator implements Operator {
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  public boolean isRelationalOperator() {
+    switch (this) {
+      case LESS:
+      case LESS_EQUALS:
+      case EQUALS:
+      case NOT_EQUALS:
+      case GREATER:
+      case GREATER_EQUALS:
         return true;
       default:
         return false;

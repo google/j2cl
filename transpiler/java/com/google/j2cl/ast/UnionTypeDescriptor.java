@@ -162,16 +162,13 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
 
-  @Override
-  abstract Builder toBuilder();
-
   public static Builder newBuilder() {
     return new AutoValue_UnionTypeDescriptor.Builder();
   }
 
   /** Builder for a UnionTypeDescriptor. */
   @AutoValue.Builder
-  public abstract static class Builder extends TypeDescriptor.Builder {
+  public abstract static class Builder {
 
     public abstract Builder setUnionTypeDescriptors(Iterable<TypeDescriptor> components);
 

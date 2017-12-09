@@ -15,44 +15,56 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.auto.value.AutoValue;
-import com.google.auto.value.extension.memoized.Memoized;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.function.Function;
+import javax.annotation.concurrent.Immutable;
 
 /** A primitive type. */
-@AutoValue
 @Visitable
-public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
+@Immutable
+public class PrimitiveTypeDescriptor extends TypeDescriptor {
+  private final String name;
+  private final String boxedClassName;
+  private final int precisionOrder;
 
   @Override
-  public abstract String getSimpleSourceName();
+  public String getSimpleSourceName() {
+    return name;
+  }
+
+  /** Returns the qualified source name of the corresponding boxed class. */
+  public String getBoxedClassName() {
+    return boxedClassName;
+  }
 
   @Override
-  @Memoized
   public ImmutableList<String> getClassComponents() {
     return ImmutableList.of(getSimpleSourceName());
   }
 
   @Override
-  @Memoized
+  public Expression getDefaultValue() {
+    checkState(!PrimitiveTypes.VOID.equals(this));
+    if (PrimitiveTypes.BOOLEAN.equals(this)) {
+      return BooleanLiteral.get(false);
+    }
+
+    if (PrimitiveTypes.LONG.equals(this)) {
+      return new NumberLiteral(this, 0L);
+    }
+
+    return new NumberLiteral(this, 0);
+  }
+
+  @Override
   public boolean isNullable() {
     return false;
-  }
-
-  @Override
-  @Memoized
-  public PrimitiveTypeDescriptor toRawTypeDescriptor() {
-    return this;
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_PrimitiveTypeDescriptor.visit(processor, this);
   }
 
   @Override
@@ -60,8 +72,43 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
     return true;
   }
 
+  /**
+   * Returns true if {@code thisType} is wider than {@code thatType} from the arithmetic precision
+   * perspective.
+   *
+   * <p>Arithmetic operations with types of different widths require conversions.
+   */
+  public boolean isWiderThan(PrimitiveTypeDescriptor thatType) {
+    checkArgument(isNumeric());
+    checkArgument(thatType.isNumeric());
+    return precisionOrder > thatType.precisionOrder;
+  }
+
+  private boolean isNumeric() {
+    return precisionOrder > 0;
+  }
+
+  /** Returns the wider type descriptor, {@code this} if both have the same width */
+  public PrimitiveTypeDescriptor widerTypeDescriptor(PrimitiveTypeDescriptor thatTypeDescriptor) {
+    return thatTypeDescriptor.isWiderThan(this) ? thatTypeDescriptor : this;
+  }
+
   @Override
-  @Memoized
+  public PrimitiveTypeDescriptor toRawTypeDescriptor() {
+    return this;
+  }
+
+  @Override
+  public PrimitiveTypeDescriptor toNullable() {
+    return this;
+  }
+
+  @Override
+  public PrimitiveTypeDescriptor toNonNullable() {
+    return this;
+  }
+
+  @Override
   public PrimitiveTypeDescriptor toUnparameterizedTypeDescriptor() {
     return this;
   }
@@ -116,34 +163,16 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
     return false;
   }
 
-  /** A unique string for a give type. Used for interning. */
-  @Override
-  public String getUniqueId() {
-    return getSimpleSourceName();
-  }
-
-  @Override
-  public PrimitiveTypeDescriptor toNullable() {
-    return this;
-  }
-
-  @Override
-  public PrimitiveTypeDescriptor toNonNullable() {
-    return this;
-  }
-
   @Override
   public boolean canBeReferencedExternally() {
     return true;
   }
 
   @Override
-  @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
     return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this).getTypeDeclaration();
   }
 
-  @Memoized
   @Override
   public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
     return ImmutableMap.of();
@@ -155,26 +184,20 @@ public abstract class PrimitiveTypeDescriptor extends TypeDescriptor {
     return this;
   }
 
+  /** A unique string for a give type. Used for interning. */
   @Override
-  abstract Builder toBuilder();
-
-  public static Builder newBuilder() {
-    return new AutoValue_PrimitiveTypeDescriptor.Builder();
+  public String getUniqueId() {
+    return getSimpleSourceName();
   }
 
-  /** Builder for a TypeDescriptor. */
-  @AutoValue.Builder
-  public abstract static class Builder extends TypeDescriptor.Builder {
+  @Override
+  public Node accept(Processor processor) {
+    return Visitor_PrimitiveTypeDescriptor.visit(processor, this);
+  }
 
-    public abstract Builder setSimpleSourceName(String name);
-
-    abstract PrimitiveTypeDescriptor autoBuild();
-
-    private static final ThreadLocalInterner<PrimitiveTypeDescriptor> interner =
-        new ThreadLocalInterner<>();
-
-    public PrimitiveTypeDescriptor build() {
-      return interner.intern(autoBuild());
-    }
+  PrimitiveTypeDescriptor(String name, String boxedClassName, int precisionOrder) {
+    this.name = name;
+    this.boxedClassName = boxedClassName;
+    this.precisionOrder = precisionOrder;
   }
 }

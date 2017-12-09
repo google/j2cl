@@ -29,6 +29,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -66,7 +67,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
                     .toUnparamterizedTypeDescriptor())
             .setName("$isInstance")
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
             .build();
 
     // TypeName.$isInstance(expr);

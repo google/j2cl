@@ -31,16 +31,6 @@ import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
-  public PrimitiveTypeDescriptor primitiveBoolean;
-  public PrimitiveTypeDescriptor primitiveByte;
-  public PrimitiveTypeDescriptor primitiveChar;
-  public PrimitiveTypeDescriptor primitiveDouble;
-  public PrimitiveTypeDescriptor primitiveFloat;
-  public PrimitiveTypeDescriptor primitiveInt;
-  public PrimitiveTypeDescriptor primitiveLong;
-  public PrimitiveTypeDescriptor primitiveShort;
-  public PrimitiveTypeDescriptor primitiveVoid;
-
   public DeclaredTypeDescriptor javaLangBoolean;
   public DeclaredTypeDescriptor javaLangByte;
   public DeclaredTypeDescriptor javaLangCharacter;
@@ -64,16 +54,6 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaIoSerializable;
 
   public ArrayTypeDescriptor javaLangObjectArray;
-
-  public static final String SHORT_TYPE_NAME = "short";
-  public static final String LONG_TYPE_NAME = "long";
-  public static final String FLOAT_TYPE_NAME = "float";
-  public static final String DOUBLE_TYPE_NAME = "double";
-  public static final String CHAR_TYPE_NAME = "char";
-  public static final String BYTE_TYPE_NAME = "byte";
-  public static final String BOOLEAN_TYPE_NAME = "boolean";
-  public static final String INT_TYPE_NAME = "int";
-  public static final String VOID_TYPE_NAME = "void";
 
   // Common browser native types.
   public final DeclaredTypeDescriptor nativeFunction = createGlobalNativeTypeDescriptor("Function");
@@ -132,23 +112,23 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveBoolean(TypeDescriptor typeDescriptor) {
-    return get().primitiveBoolean.equals(typeDescriptor);
+    return PrimitiveTypes.BOOLEAN.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveByte(TypeDescriptor typeDescriptor) {
-    return get().primitiveByte.equals(typeDescriptor);
+    return PrimitiveTypes.BYTE.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveChar(TypeDescriptor typeDescriptor) {
-    return get().primitiveChar.equals(typeDescriptor);
+    return PrimitiveTypes.CHAR.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveDouble(TypeDescriptor typeDescriptor) {
-    return get().primitiveDouble.equals(typeDescriptor);
+    return PrimitiveTypes.DOUBLE.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveFloat(TypeDescriptor typeDescriptor) {
-    return get().primitiveFloat.equals(typeDescriptor);
+    return PrimitiveTypes.FLOAT.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveFloatOrDouble(TypeDescriptor typeDescriptor) {
@@ -156,19 +136,19 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveInt(TypeDescriptor typeDescriptor) {
-    return get().primitiveInt.equals(typeDescriptor);
+    return PrimitiveTypes.INT.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveLong(TypeDescriptor typeDescriptor) {
-    return get().primitiveLong.equals(typeDescriptor);
+    return PrimitiveTypes.LONG.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveShort(TypeDescriptor typeDescriptor) {
-    return get().primitiveShort.equals(typeDescriptor);
+    return PrimitiveTypes.SHORT.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveVoid(TypeDescriptor typeDescriptor) {
-    return get().primitiveVoid.equals(typeDescriptor);
+    return PrimitiveTypes.VOID.equals(typeDescriptor);
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
@@ -244,32 +224,6 @@ public class TypeDescriptors {
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
     return !typeDescriptor.isPrimitive() && !isBoxedType(typeDescriptor);
-  }
-
-  /**
-   * Returns an idea of the "width" of a numeric primitive type to help with deciding when a
-   * conversion would be a narrowing and when it would be a widening.
-   *
-   * <p>Even though the floating point types are only 4 and 8 bytes respectively they are considered
-   * very wide because of the magnitude of the maximum values they can encode.
-   */
-  public static int getWidth(TypeDescriptor typeDescriptor) {
-    checkArgument(isNumericPrimitive(typeDescriptor));
-
-    if (isPrimitiveByte(typeDescriptor)) {
-      return 1;
-    } else if (isPrimitiveShort(typeDescriptor) || isPrimitiveChar(typeDescriptor)) {
-      return 2;
-    } else if (isPrimitiveInt(typeDescriptor)) {
-      return 4;
-    } else if (isPrimitiveLong(typeDescriptor)) {
-      return 8;
-    } else if (isPrimitiveFloat(typeDescriptor)) {
-      return 4 + 100;
-    } else {
-      checkArgument(isPrimitiveDouble(typeDescriptor));
-      return 8 + 100;
-    }
   }
 
   /** Returns the TypeDeclaration for the Overlay implementation type. */
@@ -467,32 +421,8 @@ public class TypeDescriptors {
         .collect(ImmutableList.toImmutableList());
   }
 
-  public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {
-    checkArgument(!typeDescriptor.isUnion());
-
-    // Primitives.
-    if (typeDescriptor.isPrimitive()) {
-      switch (typeDescriptor.getQualifiedSourceName()) {
-        case BOOLEAN_TYPE_NAME:
-          return BooleanLiteral.get(false);
-        case BYTE_TYPE_NAME:
-        case SHORT_TYPE_NAME:
-        case INT_TYPE_NAME:
-        case FLOAT_TYPE_NAME:
-        case DOUBLE_TYPE_NAME:
-        case CHAR_TYPE_NAME:
-          return new NumberLiteral(typeDescriptor, 0);
-        case LONG_TYPE_NAME:
-          return new NumberLiteral(typeDescriptor, 0L);
-        default:
-          throw new AssertionError();
-      }
-    }
-    return NullLiteral.get();
-  }
-
   /** Builder for TypeDescriptors. */
-  public static class SingletonInitializer {
+  public static class Builder {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
 
@@ -504,55 +434,14 @@ public class TypeDescriptors {
               .build();
     }
 
-    public SingletonInitializer addPrimitiveBoxedTypeDescriptorPair(
+    public Builder addPrimitiveBoxedTypeDescriptorPair(
         PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
-      addPrimitiveType(primitiveType);
       addReferenceType(boxedType);
       addBoxedTypeMapping(primitiveType, boxedType);
       return this;
     }
 
-    public SingletonInitializer addPrimitiveType(PrimitiveTypeDescriptor primitiveType) {
-      checkArgument(
-          primitiveType.isPrimitive(),
-          "%s is not a primitive type",
-          primitiveType.getQualifiedSourceName());
-      String name = primitiveType.getQualifiedSourceName();
-      switch (name) {
-        case TypeDescriptors.BOOLEAN_TYPE_NAME:
-          typeDescriptors.primitiveBoolean = primitiveType;
-          break;
-        case TypeDescriptors.BYTE_TYPE_NAME:
-          typeDescriptors.primitiveByte = primitiveType;
-          break;
-        case TypeDescriptors.CHAR_TYPE_NAME:
-          typeDescriptors.primitiveChar = primitiveType;
-          break;
-        case TypeDescriptors.DOUBLE_TYPE_NAME:
-          typeDescriptors.primitiveDouble = primitiveType;
-          break;
-        case TypeDescriptors.FLOAT_TYPE_NAME:
-          typeDescriptors.primitiveFloat = primitiveType;
-          break;
-        case TypeDescriptors.INT_TYPE_NAME:
-          typeDescriptors.primitiveInt = primitiveType;
-          break;
-        case TypeDescriptors.LONG_TYPE_NAME:
-          typeDescriptors.primitiveLong = primitiveType;
-          break;
-        case TypeDescriptors.SHORT_TYPE_NAME:
-          typeDescriptors.primitiveShort = primitiveType;
-          break;
-        case TypeDescriptors.VOID_TYPE_NAME:
-          typeDescriptors.primitiveVoid = primitiveType;
-          break;
-        default:
-          throw new IllegalStateException("Unexpected primitive type in well known set: " + name);
-      }
-      return this;
-    }
-
-    public SingletonInitializer addReferenceType(DeclaredTypeDescriptor referenceType) {
+    public Builder addReferenceType(DeclaredTypeDescriptor referenceType) {
       checkArgument(
           !referenceType.isPrimitive(),
           "%s is not a reference type",

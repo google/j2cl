@@ -160,16 +160,13 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
         .build();
   }
 
-  @Override
-  abstract Builder toBuilder();
-
   public static Builder newBuilder() {
     return new AutoValue_IntersectionTypeDescriptor.Builder();
   }
 
   /** Builder for an IntersectionTypeDescriptor. */
   @AutoValue.Builder
-  public abstract static class Builder extends TypeDescriptor.Builder {
+  public abstract static class Builder {
 
     public abstract Builder setIntersectionTypeDescriptors(
         Iterable<DeclaredTypeDescriptor> components);

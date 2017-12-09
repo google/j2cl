@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+
 /** Constants supporting manipulation of J2CL AST. */
 public class AstUtilConstants {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
@@ -29,7 +30,7 @@ public class AstUtilConstants {
               FieldDescriptor.newBuilder()
                   .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
                   .setName("length")
-                  .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+                  .setTypeDescriptor(PrimitiveTypes.INT)
                   .setStatic(false)
                   .setJsInfo(JsInfo.RAW_FIELD)
                   .build());

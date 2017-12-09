@@ -38,10 +38,10 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
@@ -306,7 +306,7 @@ public class InsertInitializerMethods extends NormalizationPass {
         .setName(fieldDescriptor.getName())
         .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
         .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
-        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setVisibility(fieldDescriptor.getVisibility())
         .setJsInfo(fieldDescriptor.isJsProperty() ? JsInfo.RAW : JsInfo.NONE)
         .setStatic(true)

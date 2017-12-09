@@ -455,7 +455,7 @@ public class AstUtils {
     DeclaredTypeDescriptor boxType =
         (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
-    TypeDescriptor primitiveType = boxType.toUnboxedType();
+    PrimitiveTypeDescriptor primitiveType = boxType.toUnboxedType();
 
     MethodDescriptor valueMethodDescriptor =
         boxType.getMethodDescriptorByName(
@@ -590,39 +590,36 @@ public class AstUtils {
   }
 
   /**
-   * See JLS 5.6.2. <code>
-   * X and double -> double
-   * X and float -> float
-   * X and long -> long
-   * otherwise -> int
-   * </code>
+   * Returns the type of the numeric binary expression, which is the wider type of its operands, or
+   * int if it is wider.
+   *
+   * <p>See JLS 5.6.2.
    */
-  public static TypeDescriptor chooseWidenedTypeDescriptor(
-      TypeDescriptor leftTypeDescriptor, TypeDescriptor rightTypeDescriptor) {
-    checkArgument(leftTypeDescriptor.isPrimitive());
-    checkArgument(rightTypeDescriptor.isPrimitive());
-
-    // Pick the wider of the two provided type descriptors.
-    TypeDescriptor widenedTypeDescriptor =
-        TypeDescriptors.getWidth(leftTypeDescriptor) > TypeDescriptors.getWidth(rightTypeDescriptor)
-            ? leftTypeDescriptor
-            : rightTypeDescriptor;
-
-    // If it's smaller than int then use int.
-    if (TypeDescriptors.getWidth(widenedTypeDescriptor)
-        < TypeDescriptors.getWidth(TypeDescriptors.get().primitiveInt)) {
-      widenedTypeDescriptor = TypeDescriptors.get().primitiveInt;
+  public static PrimitiveTypeDescriptor getNumbericBinaryExpressionTypeDescriptor(
+      PrimitiveTypeDescriptor thisTypeDescriptor, PrimitiveTypeDescriptor thatTypeDescriptor) {
+    if (TypeDescriptors.isPrimitiveDouble(thisTypeDescriptor)
+        || TypeDescriptors.isPrimitiveDouble(thatTypeDescriptor)) {
+      return PrimitiveTypes.DOUBLE;
     }
 
-    return widenedTypeDescriptor;
+    if (TypeDescriptors.isPrimitiveFloat(thisTypeDescriptor)
+        || TypeDescriptors.isPrimitiveFloat(thatTypeDescriptor)) {
+      return PrimitiveTypes.FLOAT;
+    }
+
+    if (TypeDescriptors.isPrimitiveLong(thisTypeDescriptor)
+        || TypeDescriptors.isPrimitiveLong(thatTypeDescriptor)) {
+      return PrimitiveTypes.LONG;
+    }
+
+    return PrimitiveTypes.INT;
   }
 
   public static MethodDescriptor getStringValueOfMethodDescriptor(TypeDescriptor typeDescriptor) {
-
     // Find the right overload.
     if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
         || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
-      typeDescriptor = TypeDescriptors.get().primitiveInt;
+      typeDescriptor = PrimitiveTypes.INT;
     } else if (!typeDescriptor.isPrimitive()) {
       typeDescriptor = TypeDescriptors.get().javaLangObject;
     }
@@ -804,7 +801,7 @@ public class AstUtils {
     if (field.isCompileTimeConstant()) {
       return field.getInitializer();
     }
-    return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
+    return field.getDescriptor().getTypeDescriptor().getDefaultValue();
   }
 
   /** Returns a field declaration statement. */

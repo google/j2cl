@@ -90,23 +90,8 @@ public class BinaryExpression extends Expression {
       return TypeDescriptors.get().javaLangString;
     }
 
-    switch (operator) {
-        /*
-         * Conditional operators: JLS 15.23.
-         */
-      case CONDITIONAL_AND:
-      case CONDITIONAL_OR:
-        /*
-         * Relational operators: JLS 15.20.
-         */
-      case LESS:
-      case LESS_EQUALS:
-      case EQUALS:
-      case NOT_EQUALS:
-      case GREATER:
-      case GREATER_EQUALS:
-        return TypeDescriptors.get().primitiveBoolean;
-      default:
+    if (operator.isRelationalOperator()) {
+      return PrimitiveTypes.BOOLEAN;
     }
 
     leftOperandType = leftOperandType.toUnboxedType();
@@ -118,6 +103,11 @@ public class BinaryExpression extends Expression {
      * operand promotion was already performed; so that fact is taken into account.
      */
     switch (operator) {
+        /*
+         * Conditional operators: JLS 15.23.
+         */
+      case CONDITIONAL_AND:
+      case CONDITIONAL_OR:
         /*
          * Bitwise and logical operators: JLS 15.22.
          */
@@ -145,7 +135,8 @@ public class BinaryExpression extends Expression {
          * to the widest type of its operands (or integer is integer is wider).
          */
         checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
-        return widerType(leftOperandType, rightOperandType.toUnboxedType());
+        return AstUtils.getNumbericBinaryExpressionTypeDescriptor(
+            (PrimitiveTypeDescriptor) leftOperandType, rightOperandType.toUnboxedType());
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
@@ -172,26 +163,6 @@ public class BinaryExpression extends Expression {
     }
 
     return false;
-  }
-
-  /**
-   * Numeric binary operations are typed at the wider type of its operands, or int if it is wider.
-   */
-  private static TypeDescriptor widerType(
-      TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
-    TypeDescriptor widerTypeDescriptor =
-        TypeDescriptors.getWidth(thatTypeDescriptor) > TypeDescriptors.getWidth(thisTypeDescriptor)
-            ? thatTypeDescriptor
-            : thisTypeDescriptor;
-
-    // Arithmetic operations on integral types always result in int or long, whichever is wider.
-    widerTypeDescriptor =
-        TypeDescriptors.getWidth(TypeDescriptors.get().primitiveInt)
-                > TypeDescriptors.getWidth(widerTypeDescriptor)
-            ? TypeDescriptors.get().primitiveInt
-            : widerTypeDescriptor;
-
-    return widerTypeDescriptor;
   }
 
   public static Builder newBuilder() {

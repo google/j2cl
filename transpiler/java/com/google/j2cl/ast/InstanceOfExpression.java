@@ -51,7 +51,7 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().primitiveBoolean;
+    return PrimitiveTypes.BOOLEAN;
   }
 
   @Override

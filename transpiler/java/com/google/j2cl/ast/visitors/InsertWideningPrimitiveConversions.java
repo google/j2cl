@@ -20,6 +20,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -62,8 +63,9 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
         }
 
         TypeDescriptor widenedTypeDescriptor =
-            AstUtils.chooseWidenedTypeDescriptor(
-                otherOperand.getTypeDescriptor(), subjectOperand.getTypeDescriptor());
+            AstUtils.getNumbericBinaryExpressionTypeDescriptor(
+                (PrimitiveTypeDescriptor) otherOperand.getTypeDescriptor(),
+                (PrimitiveTypeDescriptor) subjectOperand.getTypeDescriptor());
         if (!shouldWiden(widenedTypeDescriptor, subjectOperand)) {
           return subjectOperand;
         }
@@ -100,15 +102,8 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
       return false;
     }
 
-    int fromWidth = TypeDescriptors.getWidth(fromTypeDescriptor);
-    int toWidth = TypeDescriptors.getWidth(toTypeDescriptor);
-
-    // Don't modify non-widening casts.
-    if (fromWidth >= toWidth) {
-      return false;
-    }
-
-    return true;
+    return ((PrimitiveTypeDescriptor) toTypeDescriptor)
+        .isWiderThan((PrimitiveTypeDescriptor) fromTypeDescriptor);
   }
 
   private static Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {

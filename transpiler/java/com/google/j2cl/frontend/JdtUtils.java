@@ -38,10 +38,10 @@ import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
@@ -398,9 +398,7 @@ class JdtUtils {
       return null;
     }
     if (typeBinding.isPrimitive()) {
-      return PrimitiveTypeDescriptor.newBuilder()
-          .setSimpleSourceName(typeBinding.getName())
-          .build();
+      return PrimitiveTypes.get(typeBinding.getName());
     }
 
     if (isIntersectionType(typeBinding)) {
@@ -930,52 +928,22 @@ class JdtUtils {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
-    SingletonInitializer singletonInitializer =
-        new SingletonInitializer()
-            // Add primitive boxed types.
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(
-                        ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(
-                        ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
-            .addPrimitiveBoxedTypeDescriptorPair(
-                (PrimitiveTypeDescriptor)
-                    createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)),
-                createDeclaredTypeDescriptor(ast.resolveWellKnownType("java.lang.Void")));
+    TypeDescriptors.Builder builder = new TypeDescriptors.Builder();
+    for (PrimitiveTypeDescriptor typeDescriptor : PrimitiveTypes.TYPES) {
+      addPrimitive(ast, builder, typeDescriptor);
+    }
     // Add well-known, non-primitive types.
     for (ITypeBinding typeBinding : typeBindings) {
-      singletonInitializer.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
+      builder.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
     }
-    singletonInitializer.init();
+    builder.init();
+  }
+
+  private static void addPrimitive(
+      AST ast, TypeDescriptors.Builder builder, PrimitiveTypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor boxedType =
+        createDeclaredTypeDescriptor(ast.resolveWellKnownType(typeDescriptor.getBoxedClassName()));
+    builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);
   }
 
   /**
@@ -983,7 +951,7 @@ class JdtUtils {
    * and 1 or more super interfaces.
    */
   private static List<ITypeBinding> getTypeBindingsForIntersectionType(ITypeBinding binding) {
-    // NOTE: Per JDT documentation binding.getTypeBounds() should return the components  of
+    // NOTE: Per JDT documentation binding.getTypeBounds() should return the components of
     // the intersection type but it does not.
     // TODO(rluble): revisit when JDT is upgraded to 4.7.
     checkArgument(isIntersectionType(binding));

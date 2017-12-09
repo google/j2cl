@@ -382,7 +382,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
-        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid);
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID);
   }
 
   @Override

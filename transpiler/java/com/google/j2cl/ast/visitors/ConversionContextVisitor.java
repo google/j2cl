@@ -93,12 +93,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return argumentExpression;
     }
 
-    /**
-     * Expression is always going to String.
-     */
+    /** Expression is always going to String. */
     @SuppressWarnings("unused")
-    public Expression rewriteStringContext(
-        Expression operandExpression, Expression otherOperandExpression) {
+    public Expression rewriteStringContext(Expression operandExpression) {
       return operandExpression;
     }
 
@@ -183,9 +180,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // string context
     if (AstUtils.matchesStringContext(binaryExpression)) {
       if (!binaryExpression.getOperator().isCompoundAssignment()) {
-        leftOperand = contextRewriter.rewriteStringContext(leftOperand, rightOperand);
+        leftOperand = contextRewriter.rewriteStringContext(leftOperand);
       }
-      rightOperand = contextRewriter.rewriteStringContext(rightOperand, leftOperand);
+      rightOperand = contextRewriter.rewriteStringContext(rightOperand);
     }
 
     // unary numeric promotion context
