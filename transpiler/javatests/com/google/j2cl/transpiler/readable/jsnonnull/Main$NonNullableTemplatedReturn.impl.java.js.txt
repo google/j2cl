@@ -1,0 +1,94 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsnonnull.Main$NonNullableTemplatedReturn.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsnonnull.Main.NonNullableTemplatedReturn$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @interface
+ * @template C_NonNullableTemplatedReturn_T
+ */
+class NonNullableTemplatedReturn {
+  /**
+   * @abstract
+   * @return {C_NonNullableTemplatedReturn_T}
+   * @public
+   */
+  m_get__() {}
+
+  /**
+   * @abstract
+   * @return {Array<C_NonNullableTemplatedReturn_T>}
+   * @public
+   */
+  m_getArray__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplatedReturn =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplatedReturn;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplatedReturn;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    NonNullableTemplatedReturn.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    NonNullableTemplatedReturn,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsnonnull.Main$NonNullableTemplatedReturn'));
+
+
+NonNullableTemplatedReturn.$markImplementor(
+    /** @type {Function} */ (NonNullableTemplatedReturn));
+
+
+/**
+ * Export class.
+ */
+exports = NonNullableTemplatedReturn;
+//# sourceMappingURL=Main$NonNullableTemplatedReturn.js.map

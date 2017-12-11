@@ -31,6 +31,7 @@ public class JsInteropAnnotationUtils {
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
+  private static final String JS_NONNULL_ANNOTATION_NAME = "jsinterop.annotations.JsNonNull";
   private static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
   private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
   private static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
@@ -83,6 +84,7 @@ public class JsInteropAnnotationUtils {
         methodBinding.getParameterAnnotations(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
   }
 
+
   public static IAnnotationBinding getDoNotAutoboxAnnotation(
       IMethodBinding methodBinding, int parameterIndex) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
@@ -92,6 +94,12 @@ public class JsInteropAnnotationUtils {
   public static IAnnotationBinding getJsOverlayAnnotation(IBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME);
+  }
+
+  public static boolean hasJsNonNullAnnotation(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+            typeBinding.getTypeAnnotations(), JS_NONNULL_ANNOTATION_NAME)
+        != null;
   }
 
   public static boolean isJsPackageAnnotation(IAnnotationBinding annotation) {

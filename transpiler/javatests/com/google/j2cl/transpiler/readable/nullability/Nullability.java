@@ -15,9 +15,7 @@
  */
 package com.google.j2cl.transpiler.readable.nullability;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -63,59 +61,6 @@ public class Nullability {
   }
 
   public void m4(@Nonnull MyFunction f) {}
-
-  @NonNull
-  public String ternary(boolean a, String s) {
-    return a ? s : s;
-  }
-
-  // Cases in which calling other method and returning doesn't require casting.
-  // TODO(simionato): This creates casting even thought it's not needed, add a visitor to do
-  // flow analysis to tighten nullability on local variables to fix this.
-  @Nonnull
-  public String castingNotNeeded() {
-    String a = "";
-    List<@NonNull Double> b = new ArrayList<>(); // VariableDeclaration
-    b = new ArrayList<>(); // Binary Expression
-    String c = null;
-    m1(a, b, c);
-    this.f1 = a;
-    if (true) {
-      // Cast not needed since NonNullableClass.getString returns !string.
-      return ClassInSubpackage.getNonNullString();
-    }
-    return a;
-  }
-
-  // Cases in which casting is needed, since we can't infer nullability or we are using a library
-  // that doesn't have nullability annotations.
-  @Nonnull
-  public String castingNeeded(@Nullable String a, Foo<@NonNull String> foo, @Nonnull String b) {
-    this.f4 = Lists.newArrayList();
-    this.f4 = new StringList();
-    this.f4 = (List) new StringList();
-    String x = m3("");
-    Preconditions.checkNotNull(x);
-    // JS Compiler can't infer that after this point x is not null.
-    new Nullability(x);
-    m3(x, x, x);
-    this.f1 = x;
-    b = x;
-    foo.bar(x);
-    b = foo.toString();
-    if (true) {
-      return x;
-    }
-    @NonNull String[] myArray = "Hel-lo".split("-");
-    m3(myArray[0]);
-    // Cast needed since NullableClass.getString returns ?string.
-    return ClassInSubpackage.getString();
-  }
-
-  public void functions(@Nullable MyFunction function) {
-    // Will have to generate a cast here.
-    m4(function);
-  }
 
   static class Foo<T> {
     void bar(T t) {}

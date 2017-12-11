@@ -441,6 +441,11 @@ class JdtUtils {
       return true;
     }
 
+    if (JsInteropAnnotationUtils.hasJsNonNullAnnotation(typeBinding)) {
+      return false;
+    }
+
+    // TODO(b/70164536): Deprecate non J2CL-specific nullability annotations.
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
             Arrays.asList(elementAnnotations),
@@ -448,7 +453,7 @@ class JdtUtils {
             Arrays.asList(typeBinding.getAnnotations()));
     for (IAnnotationBinding annotation : allAnnotations) {
       String annotationName = annotation.getName();
-      // TODO(simionato): Replace those annotations with J2CL-specific annotations
+
       if (annotationName.equals("Nullable") || annotationName.equals("NullableType")) {
         return true;
       }
