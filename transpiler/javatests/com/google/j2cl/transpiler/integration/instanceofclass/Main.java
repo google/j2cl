@@ -25,5 +25,21 @@ public class Main {
     assert object instanceof Object;
     assert !(object instanceof String);
     assert "A String Literal" instanceof String;
+
+    try {
+      assert hasSideEffect() instanceof Object;
+      assert false;
+    } catch (IllegalArgumentException expected) {
+    }
+
+    try {
+      assert hasSideEffect() instanceof ThreadLocal;
+      assert false;
+    } catch (IllegalArgumentException expected) {
+    }
+  }
+
+  private static Object hasSideEffect() {
+    throw new IllegalArgumentException();
   }
 }
