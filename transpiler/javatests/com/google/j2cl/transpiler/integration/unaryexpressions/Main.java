@@ -83,5 +83,23 @@ public class Main {
     Integer i = 10;
     assert (i++).getClass() == Integer.class;
     assert (--i).intValue() == 10;
+
+    // TODO(b/70581166): Uncomment when fixed.
+    // try {
+    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
+    //   ref.field++;
+    //   assert false : "Should have thrown ClassCastException";
+    // } catch (ClassCastException expected) {
+    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
+    //       : "Got unexpected message " + expected.getMessage(); ;
+    // }
+  }
+
+  public static class Ref<T> {
+    T field;
+
+    Ref(T value) {
+      field = value;
+    }
   }
 }

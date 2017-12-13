@@ -70,6 +70,9 @@
 [a /= 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += Double.MAX_VALUE;] => [a = $Primitives.$narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[Ref<Integer> ref = null;] => [let ref = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[ref] => [ref] "ref"
+[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"
 [ints[0] += 1;] => [ints[0] += 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
@@ -205,6 +208,13 @@
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
+
+    class Ref<T> {
+      T field;
+    }
+
+    Ref<Integer> ref = null;
+    ref.field++;
   }
 
   // Compount assignments in static fields
@@ -337,6 +347,13 @@ ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpr
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
+
+    class Ref<T> {
+      T field;
+    }
+
+    Ref<Integer> ref = null;
+    ref.field++;
   }
 
   // Compount assignments in static fields

@@ -120,5 +120,23 @@ public class Main {
     double n = 1;
     long l = 2L;
     assert 20 + l + n == n + l + 20;
+
+    // TODO(b/70581166): Uncomment when fixed.
+    // try {
+    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
+    //   ref.field += 1;
+    //   assert false : "Should have thrown ClassCastException";
+    // } catch (ClassCastException expected) {
+    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
+    //       : "Got unexpected message " + expected.getMessage(); ;
+    // }
+  }
+
+  public static class Ref<T> {
+    T field;
+
+    Ref(T value) {
+      field = value;
+    }
   }
 }
