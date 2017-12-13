@@ -39,14 +39,6 @@ public class ArithmeticExpressions {
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
-
-    class Ref<T> {
-      T field;
-    }
-
-    Ref<Integer> ref = null;
-    ref.field++;
-    a = a + ref.field;
   }
 
   // Compount assignments in static fields
@@ -120,6 +112,14 @@ public class ArithmeticExpressions {
     // Method call on result of arithmetic expressions.
     (++f).intValue();
     (f--).intValue();
+
+    class Ref<T> {
+      T field;
+    }
+
+    Ref<Integer> ref = null;
+    ref.field++;
+    int n = 1 + ref.field;
   }
 
   private static Integer getInteger() {

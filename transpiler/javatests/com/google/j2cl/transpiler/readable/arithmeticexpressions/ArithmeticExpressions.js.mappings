@@ -70,10 +70,6 @@
 [a /= 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += Double.MAX_VALUE;] => [a = $Primitives.$narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [((k)) |= true;] => [k = !!(k | true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
-[Ref<Integer> ref = null;] => [let ref = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
-[ref] => [ref] "ref"
-[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
-[a = a + ref.field;] => [a = a + ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"
 [ints[0] += 1;] => [ints[0] += 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
@@ -114,7 +110,7 @@
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [public void testCompoundBoxedTypes() {
     Integer c = 1000;
-...    (f--).intValue();
+...    int n = 1 + ref.field;
   }] => [let /** Integer */ $value, /** Integer */ $value$1$, /** Integer */ $value$2$;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Integer c = 1000;] => [let c = Integer.m_valueOf__int(1000);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [c] => [c] "c"
@@ -143,6 +139,11 @@
 [ch++;] => [ch = Character.m_valueOf__char($Primitives.$narrowIntToChar(ch.m_charValue__() + 1));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [(++f).intValue();] => [(f = Integer.m_valueOf__int(f.m_intValue__() + 1)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [(f--).intValue();] => [($value$2$ = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value$2$).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[Ref<Integer> ref = null;] => [let ref = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[ref] => [ref] "ref"
+[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[int n = 1 + ref.field;] => [let n = 1 + ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[n] => [n] "n"
 [private static Integer getInteger() {
     return null;
   }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
@@ -209,14 +210,6 @@
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
-
-    class Ref<T> {
-      T field;
-    }
-
-    Ref<Integer> ref = null;
-    ref.field++;
-    a = a + ref.field;
   }
 
   // Compount assignments in static fields
@@ -290,6 +283,14 @@
     // Method call on result of arithmetic expressions.
     (++f).intValue();
     (f--).intValue();
+
+    class Ref<T> {
+      T field;
+    }
+
+    Ref<Integer> ref = null;
+    ref.field++;
+    int n = 1 + ref.field;
   }
 
   private static Integer getInteger() {
@@ -349,14 +350,6 @@ ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpr
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
-
-    class Ref<T> {
-      T field;
-    }
-
-    Ref<Integer> ref = null;
-    ref.field++;
-    a = a + ref.field;
   }
 
   // Compount assignments in static fields
@@ -430,6 +423,14 @@ ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpr
     // Method call on result of arithmetic expressions.
     (++f).intValue();
     (f--).intValue();
+
+    class Ref<T> {
+      T field;
+    }
+
+    Ref<Integer> ref = null;
+    ref.field++;
+    int n = 1 + ref.field;
   }
 
   private static Integer getInteger() {
