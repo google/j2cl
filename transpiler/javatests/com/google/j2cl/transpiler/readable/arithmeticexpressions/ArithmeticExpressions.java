@@ -46,6 +46,7 @@ public class ArithmeticExpressions {
 
     Ref<Integer> ref = null;
     ref.field++;
+    a = a + ref.field;
   }
 
   // Compount assignments in static fields

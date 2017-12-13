@@ -130,6 +130,24 @@ public class Main {
     //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
     //       : "Got unexpected message " + expected.getMessage(); ;
     // }
+
+    // try {
+    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
+    //   int x = 1 + ref.field;
+    //   assert false : "Should have thrown ClassCastException";
+    // } catch (ClassCastException expected) {
+    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
+    //       : "Got unexpected message " + expected.getMessage(); ;
+    // }
+
+    // try {
+    //   Ref<Boolean> ref = (Ref) new Ref<Integer>(1);
+    //   boolean b = ref.field || ref.field;
+    //   assert false : "Should have thrown ClassCastException";
+    // } catch (ClassCastException expected) {
+    //  assert expected.getMessage().equals("java.lang.Integer cannot be cast to java.lang.Boolean")
+    //       : "Got unexpected message " + expected.getMessage(); ;
+    // }
   }
 
   public static class Ref<T> {
