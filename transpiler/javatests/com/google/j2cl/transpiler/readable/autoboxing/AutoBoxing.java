@@ -358,6 +358,9 @@ public class AutoBoxing {
     long l = n;
     assert l == 10L;
 
+    // TODO(b/70629499): Uncomment when unboxing type variables in arithmetic expressions is fixed.
+    // n++;
+
     class Local<T extends Long> {
       long toLong(T l) {
         // Auto unboxing from variable l.
@@ -374,6 +377,10 @@ public class AutoBoxing {
     // Auto unboxing from variable n.
     long l = n;
     assert l == 10L;
+
+    // TODO(b/70629499): Uncomment when unboxing type variables in arithmetic expressions is fixed.
+    // is fixed.
+    // n++;
 
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {
