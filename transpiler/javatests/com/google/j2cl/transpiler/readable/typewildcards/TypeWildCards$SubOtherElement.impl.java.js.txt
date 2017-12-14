@@ -1,0 +1,98 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$SubOtherElement.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.SubOtherElement$impl');
+
+
+const HasKey = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey$impl');
+const OtherElement = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.OtherElement$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
+
+
+/**
+ * @abstract
+ * @implements {HasKey}
+ */
+class SubOtherElement extends OtherElement {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {TypeWildCards} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement =
+        null;
+  }
+
+  /**
+   * Initialization from constructor 'SubOtherElement(TypeWildCards)'.
+   * @param {TypeWildCards} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_OtherElement__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+        $outer_this);
+    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SubOtherElement;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubOtherElement);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SubOtherElement.$clinit = function() {};
+    OtherElement.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement() {
+  }
+};
+
+$Util.$setClassMetadata(
+    SubOtherElement,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$SubOtherElement'));
+
+
+HasKey.$markImplementor(SubOtherElement);
+
+
+/**
+ * Export class.
+ */
+exports = SubOtherElement;
+//# sourceMappingURL=TypeWildCards$SubOtherElement.js.map

@@ -7,40 +7,39 @@
 goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
 
 
-const Cmp2 = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
+const Cmp = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
 const Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_T
- * @implements {Cmp2<C_T>}
+ * @implements {Cmp}
  * @implements {Serial}
  */
 class $LambdaAdaptor$1 extends java_lang_Object {
   /**
    * JsConstructor '$LambdaAdaptor$1($JsFunction)'.
-   * @param {?function(number):number} fn
+   * @param {?function():number} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor$1.$clinit();
     super();
-    /** @public {?function(number):number} */
+    /** @public {?function():number} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1 =
         null;
-    this.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__com_google_j2cl_transpiler_readable_intersectiontype_Cmp2_$JsFunction(
+    this.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$JsFunction(
         fn);
   }
 
   /**
    * Initialization from constructor '$LambdaAdaptor$1($JsFunction)'.
-   * @param {?function(number):number} fn
+   * @param {?function():number} fn
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__com_google_j2cl_transpiler_readable_intersectiontype_Cmp2_$JsFunction(
+  $ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$JsFunction(
       fn) {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1();
@@ -49,16 +48,15 @@ class $LambdaAdaptor$1 extends java_lang_Object {
   }
 
   /**
-   * @param {number} arg0
    * @return {number}
    * @public
    */
-  m_cmp__int(arg0) {
-    let /** ?function(number):number */ $function;
+  m_cmp__() {
+    let /** ?function():number */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1,
-        $function(arg0));
+        $function());
   }
 
   /**
@@ -104,7 +102,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$$LambdaAdaptor$1'));
 
 
-Cmp2.$markImplementor($LambdaAdaptor$1);
+Cmp.$markImplementor($LambdaAdaptor$1);
 Serial.$markImplementor($LambdaAdaptor$1);
 
 

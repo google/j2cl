@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.unreachableclass.Main$impl');
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Unreachable$740$A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unreachableclass.Main.$Unreachable$740$A$impl');
-let $Unreachable$874 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unreachableclass.Main.$Unreachable$874$impl');
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unreachableclass.Main.$1$impl');
+let $1A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unreachableclass.Main.$1A$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
@@ -74,10 +74,10 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
-    $Unreachable$740$A = goog.module.get(
-        'com.google.j2cl.transpiler.readable.unreachableclass.Main.$Unreachable$740$A$impl');
-    $Unreachable$874 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.unreachableclass.Main.$Unreachable$874$impl');
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.unreachableclass.Main.$1$impl');
+    $1A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.unreachableclass.Main.$1A$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     java_lang_Object.$clinit();
@@ -93,13 +93,11 @@ class Main extends java_lang_Object {
       __$exc = $Exceptions.toJava(__$exc);
       if (RuntimeException.$isInstance(__$exc)) {
         let e = /**@type {RuntimeException} */ (__$exc);
-        $Unreachable$740$A
-            .$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(
-                this)
+        $1A.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(
+               this)
             .m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass();
-        $Unreachable$874
-            .$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(
-                this);
+        $1.$create__com_google_j2cl_transpiler_readable_unreachableclass_Main(
+            this);
       } else {
         throw $Exceptions.toJs(__$exc);
       }

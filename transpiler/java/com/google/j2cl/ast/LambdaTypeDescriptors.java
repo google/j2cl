@@ -44,12 +44,8 @@ public class LambdaTypeDescriptors {
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       Optional<Integer> uniqueId) {
 
-    List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
-        typeDescriptor.isIntersection()
-            ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
-            : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
-
-    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor = interfaceTypeDescriptors.get(0);
+    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
+        typeDescriptor.getFunctionalInterface();
 
     checkArgument(!functionalInterfaceTypeDescriptor.isJsFunctionInterface());
 
@@ -64,6 +60,11 @@ public class LambdaTypeDescriptors {
                     .getSingleAbstractMethodDescriptor()
                     .getTypeParameterTypeDescriptors())
             .build();
+
+    List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
+        typeDescriptor.isIntersection()
+            ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
+            : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
@@ -188,7 +189,7 @@ public class LambdaTypeDescriptors {
     }
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        adaptorTypeDescriptor.getInterfaceTypeDescriptors().get(0);
+        adaptorTypeDescriptor.getFunctionalInterface();
     checkState(
         functionalInterfaceTypeDescriptor.getFunctionalInterface()
             == functionalInterfaceTypeDescriptor);

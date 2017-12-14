@@ -477,22 +477,12 @@ class JdtUtils {
   }
 
   private static boolean isIntersectionType(ITypeBinding binding) {
-    // TODO(rluble): Use isIntersectionType once JDT is upgraded to RELEASE_4_7 which correctly
-    // exposes intersection types through ITypeBinding.
-    boolean isIntersectionType =
-        !binding.isPrimitive()
-            && !binding.isCapture()
-            && !binding.isArray()
-            && !binding.isTypeVariable()
-            && !binding.isWildcardType()
-            && !binding.isNullType()
-            && binding.getPackage() == null;
-    if (isIntersectionType) {
-      checkArgument(
-          (binding.getSuperclass() != null && binding.getInterfaces().length >= 1)
-              || (binding.getSuperclass() == null && binding.getInterfaces().length >= 2));
-    }
-    return isIntersectionType;
+    return binding.isIntersectionType()
+        // JDT returns true for isIntersectionType() for type variables, wildcards and captures
+        // with intersection type bounds.
+        && !binding.isCapture()
+        && !binding.isTypeVariable()
+        && !binding.isWildcardType();
   }
 
   private static List<String> getClassComponents(ITypeBinding typeBinding) {
@@ -952,32 +942,14 @@ class JdtUtils {
   }
 
   /**
-   * Extracts the intersected types from a jdt type binding. These are represented as a super class
-   * and 1 or more super interfaces.
-   */
-  private static List<ITypeBinding> getTypeBindingsForIntersectionType(ITypeBinding binding) {
-    // NOTE: Per JDT documentation binding.getTypeBounds() should return the components of
-    // the intersection type but it does not.
-    // TODO(rluble): revisit when JDT is upgraded to 4.7.
-    checkArgument(isIntersectionType(binding));
-    List<ITypeBinding> bindings = Lists.newArrayList(binding.getInterfaces());
-    if (binding.getSuperclass() != null) {
-      bindings.add(0, binding.getSuperclass());
-    }
-    checkArgument(bindings.size() >= 2);
-    return bindings;
-  }
-
-  /**
    * Since we don't have access to the enclosing class, the proper package and naming cannot be
    * computed here. Instead we have an early normalization pass that traverses the intersection
    * types and sets the correct package and binaryName etc.
    */
   private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
     checkArgument(isIntersectionType(typeBinding));
-    List<ITypeBinding> intersectedTypeBindings = getTypeBindingsForIntersectionType(typeBinding);
     List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
-        createTypeDescriptors(intersectedTypeBindings, DeclaredTypeDescriptor.class);
+        createTypeDescriptors(typeBinding.getTypeBounds(), DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
@@ -1043,8 +1015,8 @@ class JdtUtils {
           if (!isTypeVariable && !isWildCardOrCapture) {
             return null;
           }
-          // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it returns empty in
-          // the current version of JDT.
+          // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it broken in the
+          // current JDT version. It returns empty for some cases involving wildcards and inference.
 
           List<ITypeBinding> bounds = Lists.newArrayList(typeBinding.getInterfaces());
           if (typeBinding.getSuperclass() != JdtUtils.javaLangObjectTypeBinding.get()) {
@@ -1056,6 +1028,7 @@ class JdtUtils {
           if (bounds.size() == 1) {
             return createTypeDescriptor(bounds.get(0));
           }
+
           return IntersectionTypeDescriptor.newBuilder()
               .setIntersectionTypeDescriptors(
                   createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
