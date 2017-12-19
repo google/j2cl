@@ -15,100 +15,42 @@
  */
 package com.google.j2cl.transpiler.integration.unaryexpressions;
 
-/**
- * Test unary operations.
- */
+/** Test unary operations. */
 public class Main {
   public static void main(String[] args) {
-    {
-      int a = 10;
-      assert a == 10;
-
-      int b = a++;
-      assert a == 11;
-      assert b == 10;
-
-      int c = a--;
-      assert a == 10;
-      assert c == 11;
-
-      int d = ++a;
-      assert a == 11;
-      assert d == 11;
-
-      int e = --a;
-      assert a == 10;
-      assert e == 10;
-
-      int f = -a;
-      assert f == -10;
-
-      int g = +a;
-      assert g == 10;
-
-      int h = ~a;
-      assert h == ~10;
-
-      boolean i = (a == 100);
-      assert !i;
-    }
-
-    {
-      Double d = null;
-      try {
-        d = +d;
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
-
-    {
-      Boolean b = null;
-      try {
-        b = !b;
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
-
-    {
-      Integer n = null;
-      try {
-        n = -n;
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
-
-    Integer i = 10;
-    assert (i++).getClass() == Integer.class;
-    assert (--i).intValue() == 10;
-
-    // TODO(b/70581166): Uncomment when fixed.
-    // try {
-    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
-    //   ref.field++;
-    //   assert false : "Should have thrown ClassCastException";
-    // } catch (ClassCastException expected) {
-    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
-    //       : "Got unexpected message " + expected.getMessage(); ;
-    // }
-    //
-    // try {
-    //   Ref<Boolean> ref = (Ref) new Ref<Integer>(1);
-    //   boolean b = !ref.field;
-    //   assert false : "Should have thrown ClassCastException";
-    // } catch (ClassCastException expected) {
-    //  assert expected.getMessage().equals("java.lang.Integer cannot be cast to java.lang.Boolean")
-    //       : "Got unexpected message " + expected.getMessage(); ;
-    // }
+    testBasicUnaryExpressions();
   }
 
-  public static class Ref<T> {
-    T field;
+  public static void testBasicUnaryExpressions() {
+    int a = 10;
+    assert a == 10;
 
-    Ref(T value) {
-      field = value;
-    }
+    int b = a++;
+    assert a == 11;
+    assert b == 10;
+
+    int c = a--;
+    assert a == 10;
+    assert c == 11;
+
+    int d = ++a;
+    assert a == 11;
+    assert d == 11;
+
+    int e = --a;
+    assert a == 10;
+    assert e == 10;
+
+    int f = -a;
+    assert f == -10;
+
+    int g = +a;
+    assert g == 10;
+
+    int h = ~a;
+    assert h == ~10;
+
+    boolean i = (a == 100);
+    assert !i;
   }
 }

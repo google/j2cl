@@ -32,7 +32,7 @@
 ...  private static native <T> T await(IThenable<T> thenable);
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.jsasync.Main.emptyAsyncMethod"
-[int result = await(Promise.resolve(7));] => [let result = (await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(7)))).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [result] => [result] "result"
 [return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>} */ (this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(Integer.m_valueOf__int(result)));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [value] => [value] "value"

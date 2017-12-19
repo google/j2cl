@@ -141,8 +141,8 @@
 [(f--).intValue();] => [($value$2$ = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value$2$).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Ref<Integer> ref = null;] => [let ref = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [ref] => [ref] "ref"
-[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[int n = 1 + ref.field;] => [let n = 1 + ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref.m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(/**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[int n = 1 + ref.field;] => [let n = 1 + /**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [n] => [n] "n"
 [private static Integer getInteger() {
     return null;

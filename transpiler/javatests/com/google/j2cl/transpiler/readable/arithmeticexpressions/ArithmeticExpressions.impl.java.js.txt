@@ -18,6 +18,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
@@ -188,11 +189,17 @@ class ArithmeticExpressions extends java_lang_Object {
     let ref = null;
     ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref =
         Integer.m_valueOf__int(
-            ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref
+            /**@type {Integer} */
+            ($Casts.$to(
+                 ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref,
+                 Integer))
                 .m_intValue__() +
             1);
     let n = 1 +
-        ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref
+        /**@type {Integer} */
+        ($Casts.$to(
+             ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref,
+             Integer))
             .m_intValue__();
   }
 
@@ -355,6 +362,7 @@ class ArithmeticExpressions extends java_lang_Object {
     Long = goog.module.get('java.lang.Long$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     java_lang_Object.$clinit();

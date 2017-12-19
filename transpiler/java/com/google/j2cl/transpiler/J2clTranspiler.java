@@ -204,7 +204,6 @@ public class J2clTranspiler {
             new PackagePrivateMethodsDispatcher(),
             new BridgeMethodsCreator(),
             new JsBridgeMethodsCreator(),
-            new InsertErasureTypeSafetyCasts(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),
@@ -228,6 +227,8 @@ public class J2clTranspiler {
             new NormalizeMultiExpressions(),
             // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
             new ExpandCompoundAssignments(),
+            new InsertErasureTypeSafetyCasts(),
+
             // Runs before unboxing conversion.
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),

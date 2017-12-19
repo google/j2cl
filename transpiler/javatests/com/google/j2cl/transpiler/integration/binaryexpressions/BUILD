@@ -12,4 +12,8 @@ load(
 integration_test(
     name = "binaryexpressions",
     srcs = glob(["*.java"]),
+    closure_defines = {
+        "jre.checks.checkLevel": "'NORMAL'",
+        "jre.checkedMode": "'ENABLED'",
+    },
 )

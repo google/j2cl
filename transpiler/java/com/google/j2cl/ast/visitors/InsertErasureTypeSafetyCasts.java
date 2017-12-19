@@ -26,6 +26,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * Inserts a casts needed for type safety due to type erasure.
@@ -71,8 +72,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
           public Expression rewriteMethodCall(MethodCall methodCall) {
             Expression qualifier = methodCall.getQualifier();
             return MethodCall.Builder.from(methodCall)
-                .setQualifier(
-                    maybeInsertErasureTypeSafetyCast(qualifier.getTypeDescriptor(), qualifier))
+                .setQualifier(maybeInsertErasureTypeSafetyCast(qualifier))
                 .build();
           }
 
@@ -80,8 +80,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
           public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
             Expression qualifier = fieldAccess.getQualifier();
             return FieldAccess.Builder.from(fieldAccess)
-                .setQualifier(
-                    maybeInsertErasureTypeSafetyCast(qualifier.getTypeDescriptor(), qualifier))
+                .setQualifier(maybeInsertErasureTypeSafetyCast(qualifier))
                 .build();
           }
         });
@@ -92,7 +91,34 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       @Override
       public Expression rewriteAssignmentContext(
           TypeDescriptor toTypeDescriptor, Expression expression) {
-        return maybeInsertErasureTypeSafetyCast(toTypeDescriptor, expression);
+        return maybeInsertErasureTypeSafetyCast(
+            toTypeDescriptor.isPrimitive() ? expression.getTypeDescriptor() : toTypeDescriptor,
+            expression);
+      }
+
+      @Override
+      public Expression rewriteBinaryNumericPromotionContext(
+          Expression subjectOperandExpression, Expression otherOperandExpression) {
+        return maybeInsertErasureTypeSafetyCast(subjectOperandExpression);
+      }
+
+      @Override
+      public Expression rewriteStringContext(Expression expression) {
+        // Erasure casts are only needed in string contexts if the type of the expression is String
+        // otherwise it is treated as Object and converted using String.valueOf.
+        return TypeDescriptors.isJavaLangString(expression.getTypeDescriptor())
+            ? maybeInsertErasureTypeSafetyCast(expression)
+            : expression;
+      }
+
+      @Override
+      public Expression rewriteUnaryNumericPromotionContext(Expression expression) {
+        return maybeInsertErasureTypeSafetyCast(expression);
+      }
+
+      @Override
+      public Expression rewriteBooleanConversionContext(Expression expression) {
+        return maybeInsertErasureTypeSafetyCast(expression);
       }
 
       @Override
@@ -102,6 +128,10 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
             parameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
     };
+  }
+
+  private static Expression maybeInsertErasureTypeSafetyCast(Expression expression) {
+    return maybeInsertErasureTypeSafetyCast(expression.getTypeDescriptor(), expression);
   }
 
   private static Expression maybeInsertErasureTypeSafetyCast(

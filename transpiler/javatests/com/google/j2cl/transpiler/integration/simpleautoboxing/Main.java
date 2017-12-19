@@ -15,10 +15,22 @@
  */
 package com.google.j2cl.transpiler.integration.simpleautoboxing;
 
+import java.util.function.Supplier;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
 
-@SuppressWarnings("BoxedPrimitiveConstructor")
+@SuppressWarnings({
+  "BoxedPrimitiveConstructor",
+  "unchecked",
+  "MissingDefault",
+  "FallThrough",
+  "TypeParameterShadowing",
+  "NarrowingCompoundAssignment",
+  "ReferenceEquality",
+  "IdentityBinaryExpression",
+  "SelfAssignment",
+  "ReturnValueIgnored"
+})
 public class Main {
   public Byte box(byte b) {
     return new Byte(b);
@@ -158,6 +170,18 @@ public class Main {
     assert (boxC.charValue() == c);
   }
 
+  public void testBoxedCompoundAssignmentResult() {
+    Integer i = 10;
+    assertIsBoxedInteger(i++);
+    assertIsBoxedInteger(--i);
+    assert (i++).getClass() == Integer.class;
+    assert (--i).intValue() == 10;
+  }
+
+  public void assertIsBoxedInteger(@DoNotAutobox Object object) {
+    assert object instanceof Integer;
+  }
+
   public void testUnboxByParameter() {
     Byte boxB = new Byte((byte) 100);
     Double boxD = new Double(1111.0);
@@ -281,13 +305,60 @@ public class Main {
     assert (!boxB.booleanValue());
     assert (b3);
 
-    {
-      Boolean b = null;
-      try {
-        b = b && b;
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
+    // Unboxing can cause NPE.
+    Boolean b = null;
+    assertThrowsNullPointerException(() -> b && b);
+    assertThrowsNullPointerException(() -> !b);
+
+    Double d = null;
+    assertThrowsNullPointerException(() -> +d);
+
+    Integer n = null;
+    assertThrowsNullPointerException(() -> -n);
+
+    Ref<Integer> shortInIntegerRef = (Ref) new Ref<Short>((short) 1);
+    Ref<Integer> booleanInIntegerRef = (Ref) new Ref<Boolean>(true);
+    Ref<Boolean> integerInBooleanRef = (Ref) new Ref<Integer>(1);
+    Ref<String> integerInStringRef = (Ref) new Ref<Integer>(1);
+
+    // Unboxing can cause ClassCastException.
+    assertThrowsClassCastException(() -> booleanInIntegerRef.field++, Integer.class);
+
+    assertThrowsClassCastException(() -> -booleanInIntegerRef.field, Integer.class);
+
+    assertThrowsClassCastException(() -> !integerInBooleanRef.field, Boolean.class);
+
+    assertThrowsClassCastException(() -> booleanInIntegerRef.field += 1, Integer.class);
+
+    assertThrowsClassCastException(() -> 1 + booleanInIntegerRef.field, Integer.class);
+
+    assertThrowsClassCastException(
+        () -> integerInBooleanRef.field || integerInBooleanRef.field, Boolean.class);
+
+    assertThrowsClassCastException(
+        () -> integerInStringRef.field + integerInStringRef.field, String.class);
+
+    assertThrowsClassCastException(
+        () -> integerInStringRef.field = integerInStringRef.field, String.class);
+
+    assertThrowsClassCastException(
+        () -> {
+          int x = shortInIntegerRef.field;
+          return x;
+        },
+        Integer.class);
+
+    // Should not throw since it should be converted into a string using String.valueOf(Object) and
+    // thus does not require an erasure casts (the JLS requires just enough erasure casts to
+    // make the program type safe).
+    String unusedS = "" + booleanInIntegerRef.field;
+  }
+
+  public static class Ref<T> {
+    T field;
+
+    Ref(T value) {
+      field = value;
     }
   }
 
@@ -373,14 +444,8 @@ public class Main {
     primitiveResult = alwaysTrue ? primitiveValue : primitiveValue;
     assert primitiveResult == 10;
 
-    {
-      Boolean b = null;
-      try {
-        b = b ? b : b;
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
+    Boolean b = null;
+    assertThrowsNullPointerException(() -> b ? b : b);
   }
 
   @SuppressWarnings("cast")
@@ -458,51 +523,37 @@ public class Main {
     }
 
     Boolean b = null;
-    {
-      try {
-        if (b) {}
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
 
-    {
-      try {
-        while (b) {}
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
+    assertThrowsNullPointerException(
+        () -> {
+          if (b) {}
+        });
 
-    {
-      try {
-        for (; b; ) {}
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
+    assertThrowsNullPointerException(
+        () -> {
+          while (b) {}
+        });
 
-    {
-      try {
-        do {} while (b);
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
+    assertThrowsNullPointerException(
+        () -> {
+          for (; b; ) {}
+        });
 
-    {
-      Integer i = null;
-      try {
-        switch (i) {
-            // Some logic inside the switch to prevent jscompiler from optimizing it away.
-          case 1:
-            i = 3;
-          default:
-        }
-        assert false : "Should have thrown NPE";
-      } catch (NullPointerException expected) {
-      }
-    }
+    assertThrowsNullPointerException(
+        () -> {
+          do {} while (b);
+        });
+
+    assertThrowsNullPointerException(
+        () -> {
+          Integer i = null;
+          switch (i) {
+              // Some logic inside the switch to prevent jscompiler from optimizing it away.
+            case 1:
+              i = 3;
+            default:
+          }
+        });
   }
 
   public static void testCompoundAssignmentBoxUnboxSequence() {
@@ -561,6 +612,32 @@ public class Main {
     return null;
   }
 
+  private static <T> void assertThrowsClassCastException(Supplier<T> supplier, Class<?> toClass) {
+    try {
+      supplier.get();
+      assert false : "Should have thrown ClassCastException";
+    } catch (ClassCastException expected) {
+      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getCanonicalName())
+          : "Got unexpected message " + expected.getMessage();
+    }
+  }
+
+  private static <T> void assertThrowsNullPointerException(Runnable runnable) {
+    assertThrowsNullPointerException(
+        () -> {
+          runnable.run();
+          return null;
+        });
+  }
+
+  private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
+    try {
+      supplier.get();
+      assert false : "Should have thrown NPE";
+    } catch (NullPointerException expected) {
+    }
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     m.testBoxByParameter();
@@ -568,14 +645,15 @@ public class Main {
     m.testUnboxByParameter();
     m.testUnboxByAssignment();
     m.testUnboxByOperator();
+    m.testBoxedCompoundAssignmentResult();
     m.testNull();
     m.testAllNumericTypes();
     m.testTernary();
     m.testCasts();
     m.testArrayExpressions();
     m.testConditionals();
-    m.testCompoundAssignmentBoxUnboxSequence();
-    m.testUnboxingFromTypeVariable();
-    m.testUnboxingFromIntersectionType();
+    testCompoundAssignmentBoxUnboxSequence();
+    testUnboxingFromTypeVariable();
+    testUnboxingFromIntersectionType();
   }
 }

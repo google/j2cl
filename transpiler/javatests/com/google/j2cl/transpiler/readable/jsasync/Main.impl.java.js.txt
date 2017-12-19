@@ -67,9 +67,12 @@ class Main extends java_lang_Object {
    */
   async m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync() {
     let result =
-        (await /**@type {Promise<Integer>} */ (
-             elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
-                 Integer.m_valueOf__int(7))))
+        /**@type {Integer} */ ($Casts.$to(
+                                   (await /**@type {Promise<Integer>} */ (
+                                       elemental2_promise_Promise_$Overlay
+                                           .m_resolve__java_lang_Object(
+                                               Integer.m_valueOf__int(7)))),
+                                   Integer))
             .m_intValue__();
     return /**@type {IThenable<Integer>} */ (
         this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(

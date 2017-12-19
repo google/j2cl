@@ -19,6 +19,13 @@ package com.google.j2cl.transpiler.integration.binaryexpressions;
 @SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality"})
 public class Main {
   public static void main(String[] args) {
+    testIntegerArithmetic();
+    testBooleanOperations();
+    testStringConcatentation();
+    testExtendedOperands();
+  }
+
+  public static void testIntegerArithmetic() {
     int a = 6;
     int b = 3;
     int c = -1;
@@ -44,6 +51,8 @@ public class Main {
 
     assert a + b + a - b == 12;
     assert (a + b) * (a - b) == 27;
+
+    assert ((5 / 2) - 0.0) == 2.0;
 
     int i = 1;
     i += 1L;
@@ -79,24 +88,19 @@ public class Main {
     d = -1;
     d >>>= 0;
     assert d == -1;
+  }
 
+  public static void testBooleanOperations() {
     boolean bool = true;
     bool &= false;
     assert ("" + bool).equals("false");
-
-    String s = null;
-    assert s + s == "nullnull";
-
-    String[] stringArray = new String[1];
-    assert stringArray[0] + stringArray[0] == "nullnull";
-
-    assert ((5 / 2) - 0.0) == 2.0;
-
     // Compound assignment with enclosing instance.
     class Outer {
+
       boolean b;
 
       class Inner {
+
         {
           b |= true;
         }
@@ -115,46 +119,20 @@ public class Main {
     outer = new Outer();
     outer.new Inner();
     assert outer.b;
+  }
 
+  public static void testStringConcatentation() {
+    String s = null;
+    assert s + s == "nullnull";
+
+    String[] stringArray = new String[1];
+    assert stringArray[0] + stringArray[0] == "nullnull";
+  }
+
+  public static void testExtendedOperands() {
     // Binary expression from JDT InfixExpression with extended operands.
     double n = 1;
     long l = 2L;
     assert 20 + l + n == n + l + 20;
-
-    // TODO(b/70581166): Uncomment when fixed.
-    // try {
-    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
-    //   ref.field += 1;
-    //   assert false : "Should have thrown ClassCastException";
-    // } catch (ClassCastException expected) {
-    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
-    //       : "Got unexpected message " + expected.getMessage(); ;
-    // }
-
-    // try {
-    //   Ref<Integer> ref = (Ref) new Ref<Boolean>(true);
-    //   int x = 1 + ref.field;
-    //   assert false : "Should have thrown ClassCastException";
-    // } catch (ClassCastException expected) {
-    //  assert expected.getMessage().equals("java.lang.Boolean cannot be cast to java.lang.Integer")
-    //       : "Got unexpected message " + expected.getMessage(); ;
-    // }
-
-    // try {
-    //   Ref<Boolean> ref = (Ref) new Ref<Integer>(1);
-    //   boolean b = ref.field || ref.field;
-    //   assert false : "Should have thrown ClassCastException";
-    // } catch (ClassCastException expected) {
-    //  assert expected.getMessage().equals("java.lang.Integer cannot be cast to java.lang.Boolean")
-    //       : "Got unexpected message " + expected.getMessage(); ;
-    // }
-  }
-
-  public static class Ref<T> {
-    T field;
-
-    Ref(T value) {
-      field = value;
-    }
   }
 }

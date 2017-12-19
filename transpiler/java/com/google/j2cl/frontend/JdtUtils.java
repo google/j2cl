@@ -663,7 +663,7 @@ class JdtUtils {
         && ((IMethodBinding) binding).getDeclaringMember() != null;
   }
 
-  /** Creates a MethodDescriptor directly based on the given JDT method binding. */
+  /** Create a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodBinding.getDeclaringClass());
