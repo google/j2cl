@@ -17,7 +17,7 @@ maven_jar(
 
 maven_jar(
     name = "com_google_auto_value",
-    artifact = "com.google.auto.value:auto-value:1.4",
+    artifact = "com.google.auto.value:auto-value:1.5.3",
 )
 
 maven_jar(
