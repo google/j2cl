@@ -34,11 +34,8 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
     this.sourcePosition = sourcePosition;
     checkArgument(
-        !testTypeDescriptor.isTypeVariable()
-            && !testTypeDescriptor.isWildCardOrCapture()
-            && !testTypeDescriptor.isUnion()
-            && !testTypeDescriptor.isIntersection()
-            && !testTypeDescriptor.isPrimitive());
+        testTypeDescriptor instanceof DeclaredTypeDescriptor
+            || testTypeDescriptor instanceof ArrayTypeDescriptor);
   }
 
   public Expression getExpression() {

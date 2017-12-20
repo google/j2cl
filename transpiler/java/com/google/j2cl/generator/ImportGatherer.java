@@ -46,6 +46,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -260,12 +261,12 @@ class ImportGatherer extends AbstractVisitor {
       return;
     }
 
-    DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
-
-    if (declaredTypeDescriptor.isTypeVariable() || declaredTypeDescriptor.isWildCardOrCapture()) {
-      collectTypeDescriptorsIntroducedByTypeBounds(declaredTypeDescriptor);
+    if (typeDescriptor instanceof TypeVariable) {
+      collectTypeDescriptorsIntroducedByTypeBounds((TypeVariable) typeDescriptor);
       return;
     }
+
+    DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
     // Overlay classes may be referred directly from other compilation units that are compiled
     // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
@@ -303,7 +304,7 @@ class ImportGatherer extends AbstractVisitor {
    * separately due to synthesized erasure casts. In order for these classes to be preserved and not
    * pruned by AJD, we should create a dependency to the bound.
    */
-  private void collectTypeDescriptorsIntroducedByTypeBounds(DeclaredTypeDescriptor typeDescriptor) {
+  private void collectTypeDescriptorsIntroducedByTypeBounds(TypeVariable typeDescriptor) {
     TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
 
     if (TypeDescriptors.isJavaLangObject(boundTypeDescriptor)) {

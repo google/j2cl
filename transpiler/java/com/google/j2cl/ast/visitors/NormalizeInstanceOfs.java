@@ -21,6 +21,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
@@ -29,6 +30,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -82,7 +84,9 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     ArrayTypeDescriptor checkTypeDescriptor =
         (ArrayTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
     TypeDescriptor leafTypeDescriptor = checkTypeDescriptor.getLeafTypeDescriptor();
-    checkState(!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture());
+    checkState(
+        leafTypeDescriptor instanceof DeclaredTypeDescriptor
+            || leafTypeDescriptor instanceof PrimitiveTypeDescriptor);
 
     if (leafTypeDescriptor.isNative()) {
       return RuntimeMethods.createArraysMethodCall("$instanceIsOfNative", expression);

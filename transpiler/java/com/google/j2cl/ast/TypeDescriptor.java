@@ -90,16 +90,8 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
-  public boolean isTypeVariable() {
-    return false;
-  }
-
   /** Returns whether the described type is a union. */
   public boolean isUnion() {
-    return false;
-  }
-
-  public boolean isWildCardOrCapture() {
     return false;
   }
 
@@ -163,7 +155,7 @@ public abstract class TypeDescriptor extends Node
   public abstract TypeDescriptor toRawTypeDescriptor();
 
   /** Returns all the free type variables that appear in the type. */
-  public Set<TypeDescriptor> getAllTypeVariables() {
+  public Set<TypeVariable> getAllTypeVariables() {
     return ImmutableSet.of();
   }
 
@@ -187,19 +179,19 @@ public abstract class TypeDescriptor extends Node
    * - B1 -> C1
    * </pre>
    */
-  public abstract Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters();
+  public abstract Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters();
 
   public TypeDescriptor specializeTypeVariables(
-      Map<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+      Map<TypeVariable, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     return specializeTypeVariables(
         TypeDescriptors.mappingFunctionFromMap(replacementTypeArgumentByTypeVariable));
   }
 
   /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
   public abstract TypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable);
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable);
 
-  public boolean hasSameRawType(TypeDescriptor other) {
+  public final boolean hasSameRawType(TypeDescriptor other) {
     // TODO(rluble): compare using toRawTypeDescriptor once raw TypeDescriptors are constructed
     // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
     // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
@@ -211,10 +203,8 @@ public abstract class TypeDescriptor extends Node
 
     // For type variables, wildcards and captures we still need to do toRawTypeDescriptor to get
     // the bound.
-    TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? toRawTypeDescriptor() : this;
-    other =
-        other.isTypeVariable() || other.isWildCardOrCapture() ? other.toRawTypeDescriptor() : other;
+    TypeDescriptor thisTypeDescriptor = this instanceof TypeVariable ? toRawTypeDescriptor() : this;
+    other = other instanceof TypeVariable ? other.toRawTypeDescriptor() : other;
     return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
   }
 

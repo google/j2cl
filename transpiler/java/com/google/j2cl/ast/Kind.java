@@ -19,7 +19,5 @@ package com.google.j2cl.ast;
 public enum Kind {
   CLASS,
   ENUM,
-  INTERFACE,
-  TYPE_VARIABLE,
-  WILDCARD_OR_CAPTURE
+  INTERFACE
 }

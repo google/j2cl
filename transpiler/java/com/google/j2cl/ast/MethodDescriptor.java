@@ -158,7 +158,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
   /** Type parameters declared in the method. */
-  public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
+  public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
   public boolean isParameterOptional(int i) {
     return getParameterDescriptors().get(i).isJsOptional();
@@ -455,14 +455,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public MethodDescriptor specializeTypeVariables(
-      Map<TypeDescriptor, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+      Map<TypeVariable, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
     return specializeTypeVariables(
         TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
   }
 
   public MethodDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
-    if (replacingTypeDescriptorByTypeVariable == Function.<TypeDescriptor>identity()) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacingTypeDescriptorByTypeVariable)) {
       return this;
     }
 
@@ -525,7 +525,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setOrigin(MethodOrigin methodOrigin);
 
     public abstract Builder setTypeParameterTypeDescriptors(
-        Iterable<TypeDescriptor> typeParameterTypeDescriptors);
+        Iterable<TypeVariable> typeParameterTypeDescriptors);
 
     public Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
       return setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
@@ -643,10 +643,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
       if (internedMethodDescriptor != methodDescriptor) {
         // This is a previously unseen method descriptor, make sure that it has been constructed
-        // property.
-        checkState(
-            !methodDescriptor.getEnclosingTypeDescriptor().isTypeVariable()
-                && !methodDescriptor.getEnclosingTypeDescriptor().isWildCardOrCapture());
+        // properly.
 
         // Bridge methods cannot be abstract nor native,
         checkState(

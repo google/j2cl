@@ -218,9 +218,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
       checkState(
           !fieldDescriptor.isVariableCapture() || !fieldDescriptor.isEnclosingInstanceCapture());
-      checkState(
-          !fieldDescriptor.getEnclosingTypeDescriptor().isTypeVariable()
-              && !fieldDescriptor.getEnclosingTypeDescriptor().isWildCardOrCapture());
 
       return interner.intern(fieldDescriptor);
     }

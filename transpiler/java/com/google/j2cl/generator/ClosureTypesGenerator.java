@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.HasParameters;
-import com.google.j2cl.ast.Kind;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
@@ -32,6 +31,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.J2clUtils;
@@ -96,14 +96,13 @@ class ClosureTypesGenerator {
         parameterDescriptor
             .getTypeDescriptor()
             .specializeTypeVariables(
-                typeDescriptor ->
-                    typeDescriptor.isTypeVariable()
-                        ? DeclaredTypeDescriptor.Builder.from(
-                                (DeclaredTypeDescriptor) typeDescriptor)
-                            .setKind(Kind.WILDCARD_OR_CAPTURE)
-                            .setUniqueKey(typeDescriptor.getUniqueId() + "??")
+                typeVariable ->
+                    !typeVariable.isWildcardOrCapture()
+                        ? TypeVariable.Builder.from(typeVariable)
+                            .setWildcardOrCapture(true)
+                            .setUniqueKey(typeVariable.getUniqueId() + "??")
                             .build()
-                        : typeDescriptor);
+                        : typeVariable);
 
     return parameterDescriptor.toBuilder().setTypeDescriptor(parameterTypeDescriptor).build();
   }
@@ -115,12 +114,8 @@ class ClosureTypesGenerator {
       return getClosureTypeForPrimitive((PrimitiveTypeDescriptor) typeDescriptor);
     }
 
-    if (typeDescriptor.isTypeVariable()) {
-      return getClosureTypeForTypeVariable(typeDescriptor);
-    }
-
-    if (typeDescriptor.isWildCardOrCapture()) {
-      return UNKNOWN;
+    if (typeDescriptor instanceof TypeVariable) {
+      return getClosureTypeForTypeVariable((TypeVariable) typeDescriptor);
     }
 
     if (typeDescriptor.isArray()) {
@@ -161,15 +156,18 @@ class ClosureTypesGenerator {
   }
 
   /** Returns the template variable name for a type variable for use in JsDoc annotations. */
-  private static ClosureType getClosureTypeForTypeVariable(TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isTypeVariable());
+  private static ClosureType getClosureTypeForTypeVariable(TypeVariable typeVariable) {
+    if (typeVariable.isWildcardOrCapture()) {
+      return UNKNOWN;
+    }
+
     // Template variable like "C_T".
 
     // TODO(b/68715725): Clean up naming for type variables so that no special handling is needed
     // here.
 
     // skip the top level class component for better output readability.
-    List<String> classComponents = typeDescriptor.getClassComponents();
+    List<String> classComponents = typeVariable.getClassComponents();
     List<String> nameComponents =
         new ArrayList<>(classComponents.subList(1, classComponents.size()));
 
@@ -177,7 +175,7 @@ class ClosureTypesGenerator {
     // level and class-level type variable and avoid variable name starts with a number.
     // concat class components to avoid collisions between type variables in inner/outer class.
     // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-    String simpleName = typeDescriptor.getSimpleSourceName();
+    String simpleName = typeVariable.getSimpleSourceName();
     nameComponents.set(
         nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
     String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);

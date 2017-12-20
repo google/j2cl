@@ -69,7 +69,8 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     if (getLeafTypeDescriptor().isPrimitive()) {
       return false;
     }
-    DeclaredTypeDescriptor leafTypeDescriptor = (DeclaredTypeDescriptor) getLeafTypeDescriptor();
+    DeclaredTypeDescriptor leafTypeDescriptor =
+        (DeclaredTypeDescriptor) getLeafTypeDescriptor().toRawTypeDescriptor();
     return leafTypeDescriptor.isNative()
         || (TypeDescriptors.isJavaLangObject(getLeafTypeDescriptor()) && getDimensions() == 1);
   }
@@ -122,7 +123,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Set<TypeDescriptor> getAllTypeVariables() {
+  public Set<TypeVariable> getAllTypeVariables() {
     return getLeafTypeDescriptor().getAllTypeVariables();
   }
 
@@ -162,14 +163,14 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
     return getLeafTypeDescriptor().getSpecializedTypeArgumentByTypeParameters();
   }
 
   @Override
   public ArrayTypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    if (replacementTypeArgumentByTypeVariable == Function.<TypeDescriptor>identity()) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
     return toBuilder()

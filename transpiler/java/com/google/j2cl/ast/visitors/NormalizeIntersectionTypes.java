@@ -30,6 +30,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeVariable;
 import java.util.List;
 
 /**
@@ -178,8 +179,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
   @SuppressWarnings("ReferenceEquality")
   private static Expression maybeInsertCastToMemberType(
       TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (toTypeDescriptor.isTypeVariable()
-        || toTypeDescriptor.isWildCardOrCapture()
+    if (toTypeDescriptor instanceof TypeVariable
         // TODO(b/68885310): primitives should be handled below.
         || toTypeDescriptor.isPrimitive()) {
       // Do not insert the runtime cast if the destination is not a declared type. For example if
@@ -208,8 +208,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
       return expression;
     }
 
-    if (expressionTypeDescriptor.isTypeVariable()
-        || expressionTypeDescriptor.isWildCardOrCapture()) {
+    if (expressionTypeDescriptor instanceof TypeVariable) {
       // A cast is needed because there is no guarantee that this check has already been performed
       // when going from a type variable with an intersection type as an upper bound to a member.
       return CastExpression.newBuilder()
@@ -231,9 +230,9 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
       return ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors();
     }
 
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
+    if (typeDescriptor instanceof TypeVariable) {
       return maybeGetIntersectedTypeDescriptors(
-          ((DeclaredTypeDescriptor) typeDescriptor).getBoundTypeDescriptor());
+          ((TypeVariable) typeDescriptor).getBoundTypeDescriptor());
     }
 
     return null;

@@ -265,7 +265,7 @@ public class AstUtils {
      * been adequately specialized into the context of the class into which it is going to be
      * placed.
      */
-    Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters =
+    Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters =
         fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters();
 
     return createForwardingMethod(
@@ -1056,9 +1056,10 @@ public class AstUtils {
                     .addAll(methodDescriptor.getParameterDescriptors())
                     .build())
             .setTypeParameterTypeDescriptors(
-                ImmutableList.<TypeDescriptor>builder()
+                ImmutableList.<TypeVariable>builder()
                     .addAll(methodDescriptor.getTypeParameterTypeDescriptors())
-                    .addAll(enclosingTypeDescriptor.getTypeArgumentDescriptors())
+                    .addAll(
+                        enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
                     .build())
             .setStatic(true)
             .setAbstract(false)
@@ -1160,5 +1161,10 @@ public class AstUtils {
   public static boolean overrideNeedsAtOverrideAnnotation(MethodDescriptor overrideMethod) {
     return !overrideMethod.getEnclosingTypeDescriptor().getTypeDeclaration().isStarOrUnknown()
         && !overrideMethod.getEnclosingTypeDescriptor().isJsFunctionInterface();
+  }
+
+  /** Whether the function is the identity function. */
+  public static boolean isIdentityFunction(Function<?, ?> function) {
+    return function == Function.identity();
   }
 }

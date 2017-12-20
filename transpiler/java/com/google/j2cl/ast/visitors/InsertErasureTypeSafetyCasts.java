@@ -27,6 +27,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeVariable;
 
 /**
  * Inserts a casts needed for type safety due to type erasure.
@@ -157,7 +158,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
         fromTypeDescriptor.isArray()
             ? ((ArrayTypeDescriptor) fromTypeDescriptor).getLeafTypeDescriptor()
             : fromTypeDescriptor;
-    if (!leafTypeDescriptor.isTypeVariable() && !leafTypeDescriptor.isWildCardOrCapture()) {
+    if (!(leafTypeDescriptor instanceof TypeVariable)) {
       return expression;
     } else if (!fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
       return CastExpression.newBuilder()

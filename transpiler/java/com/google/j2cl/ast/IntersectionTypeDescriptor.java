@@ -98,7 +98,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Set<TypeDescriptor> getAllTypeVariables() {
+  public Set<TypeVariable> getAllTypeVariables() {
     return getIntersectionTypeDescriptors()
         .stream()
         .map(TypeDescriptor::getAllTypeVariables)
@@ -133,8 +133,8 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Memoized
   @Override
-  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    ImmutableMap.Builder<TypeDescriptor, TypeDescriptor> mapBuilder = ImmutableMap.builder();
+  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+    ImmutableMap.Builder<TypeVariable, TypeDescriptor> mapBuilder = ImmutableMap.builder();
     for (TypeDescriptor typeDescriptor : getIntersectionTypeDescriptors()) {
       mapBuilder.putAll(typeDescriptor.getSpecializedTypeArgumentByTypeParameters());
     }
@@ -143,8 +143,8 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public IntersectionTypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    if (replacementTypeArgumentByTypeVariable == Function.<TypeDescriptor>identity()) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
 

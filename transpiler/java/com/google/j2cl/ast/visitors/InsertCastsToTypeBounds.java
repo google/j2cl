@@ -24,6 +24,7 @@ import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeVariable;
 
 /**
  * Provide more precise type to jscompiler by annotating expressions that are typed at a bounded
@@ -129,7 +130,7 @@ public class InsertCastsToTypeBounds extends NormalizationPass {
   }
 
   private static boolean isBoundedTypeVariable(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture()) {
+    if (typeDescriptor instanceof TypeVariable) {
       // If there is a bound, toRawTypeDescriptor returns its erasure. Note that intersection types
       // have already been handled and we only care about the first type.
       return !TypeDescriptors.isJavaLangObject(typeDescriptor.toRawTypeDescriptor());

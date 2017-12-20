@@ -98,7 +98,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Set<TypeDescriptor> getAllTypeVariables() {
+  public Set<TypeVariable> getAllTypeVariables() {
     return getUnionTypeDescriptors()
         .stream()
         .map(TypeDescriptor::getAllTypeVariables)
@@ -131,8 +131,8 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Memoized
   @Override
-  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    ImmutableMap.Builder<TypeDescriptor, TypeDescriptor> mapBuilder = ImmutableMap.builder();
+  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+    ImmutableMap.Builder<TypeVariable, TypeDescriptor> mapBuilder = ImmutableMap.builder();
     for (TypeDescriptor typeDescriptor : getUnionTypeDescriptors()) {
       mapBuilder.putAll(typeDescriptor.getSpecializedTypeArgumentByTypeParameters());
     }
@@ -141,8 +141,8 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public UnionTypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    if (replacementTypeArgumentByTypeVariable == Function.<TypeDescriptor>identity()) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
 

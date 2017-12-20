@@ -42,6 +42,7 @@ import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
@@ -397,6 +398,7 @@ class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
+
     if (typeBinding.isPrimitive()) {
       return PrimitiveTypes.get(typeBinding.getName());
     }
@@ -407,6 +409,10 @@ class JdtUtils {
 
     if (typeBinding.isNullType()) {
       return TypeDescriptors.get().javaLangObject;
+    }
+
+    if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
+      return createTypeVariable(typeBinding);
     }
 
     boolean isNullable = isNullable(typeBinding, elementAnnotations);
@@ -421,6 +427,38 @@ class JdtUtils {
     return withNullability(createDeclaredType(typeBinding), isNullable);
   }
 
+  private static TypeDescriptor createTypeVariable(ITypeBinding typeBinding) {
+    Supplier<TypeDescriptor> boundTypeDescriptorFactory = () -> getTypeBound(typeBinding);
+
+    return TypeVariable.newBuilder()
+        .setBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
+        .setEnclosingTypeDescriptorSupplier(
+            () -> (DeclaredTypeDescriptor) createTypeDescriptor(typeBinding.getDeclaringClass()))
+        .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
+        .setUniqueKey(typeBinding.getKey())
+        .setClassComponents(getClassComponents(typeBinding))
+        .build();
+  }
+
+  private static TypeDescriptor getTypeBound(ITypeBinding typeBinding) {
+    // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it returns empty for
+    // wildcards in the current version of JDT.
+
+    List<ITypeBinding> bounds = Lists.newArrayList(typeBinding.getInterfaces());
+    if (typeBinding.getSuperclass() != JdtUtils.javaLangObjectTypeBinding.get()) {
+      bounds.add(0, typeBinding.getSuperclass());
+    }
+    if (bounds.isEmpty()) {
+      return TypeDescriptors.get().javaLangObject;
+    }
+    if (bounds.size() == 1) {
+      return createTypeDescriptor(bounds.get(0));
+    }
+    return IntersectionTypeDescriptor.newBuilder()
+        .setIntersectionTypeDescriptors(createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
+        .build();
+  }
+
   private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
@@ -433,9 +471,6 @@ class JdtUtils {
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     checkArgument(!typeBinding.isPrimitive());
 
-    if (typeBinding.isTypeVariable()) {
-      return true;
-    }
     if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
       // Void is always nullable.
       return true;
@@ -692,9 +727,10 @@ class JdtUtils {
     }
 
     // generate type parameters declared in the method.
-    Iterable<TypeDescriptor> typeParameterTypeDescriptors =
+    Iterable<TypeVariable> typeParameterTypeDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
-            .transform(JdtUtils::createTypeDescriptor);
+            .transform(JdtUtils::createTypeDescriptor)
+            .transform(typeDescriptor -> (TypeVariable) typeDescriptor);
 
     ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
@@ -961,7 +997,7 @@ class JdtUtils {
    * instances (which we are using as keys) are unique per JDT parse.
    */
   @SuppressWarnings("JdkObsolete")
-  private static final Map<ITypeBinding, DeclaredTypeDescriptor>
+  private static Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBinding = new Hashtable<>();
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
@@ -976,11 +1012,6 @@ class JdtUtils {
 
     Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
         getRawTypeDescriptorSupplier(typeBinding);
-
-    // Compute these first since they're reused in other calculations.
-    boolean isTypeVariable = typeBinding.isTypeVariable();
-    boolean isWildCardOrCapture = typeBinding.isWildcardType() || typeBinding.isCapture();
-    String uniqueKey = (isTypeVariable || isWildCardOrCapture) ? typeBinding.getKey() : null;
 
     Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
         () -> {
@@ -1010,34 +1041,9 @@ class JdtUtils {
                 .map(JdtUtils::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    Supplier<TypeDescriptor> boundTypeDescriptorFactory =
-        () -> {
-          if (!isTypeVariable && !isWildCardOrCapture) {
-            return null;
-          }
-          // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it broken in the
-          // current JDT version. It returns empty for some cases involving wildcards and inference.
-
-          List<ITypeBinding> bounds = Lists.newArrayList(typeBinding.getInterfaces());
-          if (typeBinding.getSuperclass() != JdtUtils.javaLangObjectTypeBinding.get()) {
-            bounds.add(0, typeBinding.getSuperclass());
-          }
-          if (bounds.isEmpty()) {
-            return TypeDescriptors.get().javaLangObject;
-          }
-          if (bounds.size() == 1) {
-            return createTypeDescriptor(bounds.get(0));
-          }
-
-          return IntersectionTypeDescriptor.newBuilder()
-              .setIntersectionTypeDescriptors(
-                  createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
-              .build();
-        };
-
     TypeDeclaration typeDeclaration = null;
     ITypeBinding declarationTypeBinding = typeBinding.getTypeDeclaration();
-    if (declarationTypeBinding != null && !isTypeVariable && !isWildCardOrCapture) {
+    if (declarationTypeBinding != null) {
       checkArgument(
           !declarationTypeBinding.isArray() && !declarationTypeBinding.isParameterizedType());
       typeDeclaration = JdtUtils.createDeclarationForType(declarationTypeBinding);
@@ -1046,13 +1052,10 @@ class JdtUtils {
     // Compute these even later
     DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
-            .setBoundTypeDescriptorFactory(boundTypeDescriptorFactory)
             .setClassComponents(getClassComponents(typeBinding))
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
-                isTypeVariable || isWildCardOrCapture
-                    ? null
-                    : createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
+                createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
@@ -1067,7 +1070,6 @@ class JdtUtils {
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
-            .setUniqueKey(uniqueKey)
             .build();
     cachedDeclaredTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
     return typeDescriptor;
@@ -1081,8 +1083,6 @@ class JdtUtils {
     return () -> {
       DeclaredTypeDescriptor rawTypeDescriptor =
           createDeclaredTypeDescriptor(typeBinding.getErasure());
-      checkArgument(!rawTypeDescriptor.isTypeVariable());
-      checkArgument(!rawTypeDescriptor.isWildCardOrCapture());
       return DeclaredTypeDescriptor.Builder.from(rawTypeDescriptor)
           .setEnclosingTypeDescriptor(
               getRawDescriptorOrNull(rawTypeDescriptor.getEnclosingTypeDescriptor()))
@@ -1135,13 +1135,11 @@ class JdtUtils {
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isPrimitive());
-    // First look whether it is a type variable, a wildcard or capture to avoid mislabeling the
-    // the kind. TypeVariables that are bound to Enum respond true to ITypeBinding.isEnum().
-    if (typeBinding.isTypeVariable()) {
-      return Kind.TYPE_VARIABLE;
-    } else if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
-      return Kind.WILDCARD_OR_CAPTURE;
-    } else if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
+    checkArgument(!typeBinding.isTypeVariable());
+    checkArgument(!typeBinding.isWildcardType());
+    checkArgument(!typeBinding.isCapture());
+
+    if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
       // Do not consider the anonymous classes that constitute enum values as Enums, only the
       // enum "class" itself is considered Kind.ENUM.
       return Kind.ENUM;

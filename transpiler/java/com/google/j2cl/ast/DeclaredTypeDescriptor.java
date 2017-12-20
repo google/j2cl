@@ -23,7 +23,6 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -46,8 +45,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 /**
- * A usage-site reference to a declared type, i.e. a class, an interface, an enum, a type variable,
- * or a wildcard.
+ * A usage-site reference to a declared type, i.e. a class, an interface or an enum.
  *
  * <p>Some properties are lazily calculated since type relationships are a graph (not a tree) and
  * this class is a value type. Those properties are set through {@code DescriptorFactory}.
@@ -63,26 +61,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    */
   public interface DescriptorFactory<T> {
     T get(DeclaredTypeDescriptor typeDescriptor);
-  }
-
-  @Override
-  public boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using toRawTypeDescriptor once raw TypeDescriptors are constructed
-    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
-    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
-    // not consistent, in particular the second form does not propagate the removal of type
-    // variables inward. These two construction end up with different data but with the same unique
-    // id, so the first one that is constructed will be interned and used everywhere.
-    // Using toRawTypeDescriptor here triggers the second (incorrect) construction and causes
-    // the wrong information be used in some cases.
-
-    // For type variables, wildcards and captures we still need to do toRawTypeDescriptor to get
-    // the bound.
-    TypeDescriptor thisTypeDescriptor =
-        isTypeVariable() || isWildCardOrCapture() ? toRawTypeDescriptor() : this;
-    other =
-        other.isTypeVariable() || other.isWildCardOrCapture() ? other.toRawTypeDescriptor() : other;
-    return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
   }
 
   @Override
@@ -130,9 +108,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
 
-  @Nullable
-  abstract String getUniqueKey();
-
   abstract Kind getKind();
 
   @Nullable
@@ -156,23 +131,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<TypeDescriptor> getBoundTypeDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
   public boolean hasTypeArguments() {
     return !getTypeArgumentDescriptors().isEmpty();
-  }
-
-  @Override
-  public boolean isTypeVariable() {
-    return getKind() == Kind.TYPE_VARIABLE;
-  }
-
-  @Override
-  public boolean isWildCardOrCapture() {
-    return getKind() == Kind.WILDCARD_OR_CAPTURE;
   }
 
   /** Returns whether the described type is a class. */
@@ -229,14 +191,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Nullable
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
-  }
-
-  @Memoized
-  @Nullable
-  public TypeDescriptor getBoundTypeDescriptor() {
-    checkState(isTypeVariable() || isWildCardOrCapture());
-    TypeDescriptor boundTypeDescriptor = getBoundTypeDescriptorFactory().get(this);
-    return boundTypeDescriptor != null ? boundTypeDescriptor : TypeDescriptors.get().javaLangObject;
   }
 
   @Nullable
@@ -320,17 +274,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   @Memoized
-  public Set<TypeDescriptor> getAllTypeVariables() {
-    Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
+  public Set<TypeVariable> getAllTypeVariables() {
+    Set<TypeVariable> typeVariables = new LinkedHashSet<>();
     collectAllTypeVariables(this, typeVariables);
     return typeVariables;
   }
 
   private static void collectAllTypeVariables(
-      DeclaredTypeDescriptor typeDescriptor, Set<TypeDescriptor> typeVariables) {
-    if (typeDescriptor.isTypeVariable()) {
-      typeVariables.add(typeDescriptor);
-    }
+      DeclaredTypeDescriptor typeDescriptor, Set<TypeVariable> typeVariables) {
     for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
       typeVariables.addAll(typeArgumentTypeDescriptor.getAllTypeVariables());
     }
@@ -394,7 +345,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Override
   public String getUniqueId() {
-    String uniqueKey = MoreObjects.firstNonNull(getUniqueKey(), getQualifiedBinaryName());
+    String uniqueKey = getQualifiedBinaryName();
     String prefix = isNullable() ? "?" : "!";
     return prefix + uniqueKey + createTypeArgumentsUniqueId(getTypeArgumentDescriptors());
   }
@@ -529,13 +480,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public DeclaredTypeDescriptor toNonNullable() {
-    if (isTypeVariable()) {
-      // TODO(b/68726480): Model nullability of type variable references correctly.
-      // There is no distinction between a reference and a declaration for type variables, and
-      // comparison between type variables is done by reference, there can only either be marked
-      // nullable.
-      return this;
-    }
     if (!isNullable()) {
       return this;
     }
@@ -545,10 +489,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean canBeReferencedExternally() {
-    if (isWildCardOrCapture() || isTypeVariable()) {
-      return toRawTypeDescriptor().canBeReferencedExternally();
-    }
-
     if (getTypeDeclaration().isJsType()
         || isJsFunctionInterface()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)) {
@@ -563,10 +503,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Memoized
   @Override
-  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    Map<TypeDescriptor, TypeDescriptor> specializedTypeArgumentByTypeParameters = new HashMap<>();
+  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+    Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters = new HashMap<>();
 
-    Map<TypeDescriptor, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
+    Map<TypeVariable, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
         new HashMap<>();
 
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
@@ -580,14 +520,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       TypeDeclaration superTypeOrInterfaceDeclaration =
           superTypeOrInterfaceDescriptor.getTypeDeclaration();
 
-      ImmutableList<DeclaredTypeDescriptor> typeParameterDescriptors =
+      ImmutableList<TypeVariable> typeParameterDescriptors =
           superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
       ImmutableList<TypeDescriptor> typeArgumentDescriptors =
           superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
 
       boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
       for (int i = 0; i < typeParameterDescriptors.size(); i++) {
-        DeclaredTypeDescriptor typeParameterDescriptor = typeParameterDescriptors.get(i);
+        TypeVariable typeParameterDescriptor = typeParameterDescriptors.get(i);
         TypeDescriptor typeArgumentDescriptor =
             specializedTypeIsRaw
                 ? typeParameterDescriptor.getBoundTypeDescriptor().toRawTypeDescriptor()
@@ -598,12 +538,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       specializedTypeArgumentByTypeParameters.putAll(
           immediateSpecializedTypeArgumentByTypeParameters);
 
-      Map<TypeDescriptor, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
+      Map<TypeVariable, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
           superTypeOrInterfaceDeclaration
               .toUnparamterizedTypeDescriptor()
               .getSpecializedTypeArgumentByTypeParameters();
 
-      for (Entry<TypeDescriptor, TypeDescriptor> entry :
+      for (Entry<TypeVariable, TypeDescriptor> entry :
           superSpecializedTypeArgumentByTypeParameters.entrySet()) {
         TypeDescriptor typeArgumentDescriptor = entry.getValue();
 
@@ -620,38 +560,30 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public TypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    if (replacementTypeArgumentByTypeVariable == Function.<TypeDescriptor>identity()) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
-    switch (getKind()) {
-      case CLASS:
-      case INTERFACE:
-      case ENUM:
-        if (getTypeArgumentDescriptors().isEmpty()
-            && !isJsFunctionInterface()
-            && !isJsFunctionImplementation()) {
-          return this;
-        }
-
-        return Builder.from(this)
-            .setTypeArgumentDescriptors(
-                getTypeArgumentDescriptors()
-                    .stream()
-                    .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
-                    .collect(toImmutableList()))
-            .setJsFunctionMethodDescriptorFactory(
-                () ->
-                    getJsFunctionMethodDescriptor() != null
-                        ? getJsFunctionMethodDescriptor()
-                            .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
-                        : null)
-            .build();
-      case TYPE_VARIABLE:
-      case WILDCARD_OR_CAPTURE:
-        return replacementTypeArgumentByTypeVariable.apply(this);
+    if (getTypeArgumentDescriptors().isEmpty()
+        // TODO(b/70853239): See why this is needed.
+        && !isJsFunctionInterface()
+        && !isJsFunctionImplementation()) {
+      return this;
     }
-    throw new AssertionError(getKind());
+
+    return Builder.from(this)
+        .setTypeArgumentDescriptors(
+            getTypeArgumentDescriptors()
+                .stream()
+                .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                .collect(toImmutableList()))
+        .setJsFunctionMethodDescriptorFactory(
+            () ->
+                getJsFunctionMethodDescriptor() != null
+                    ? getJsFunctionMethodDescriptor()
+                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    : null)
+        .build();
   }
 
   /** Returns a description that is useful for error messages. */
@@ -675,7 +607,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // Default values.
         .setNullable(true)
         .setTypeArgumentDescriptors(ImmutableList.of())
-        .setBoundTypeDescriptorFactory(() -> null)
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
@@ -688,8 +619,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setUniqueKey(String key);
-
     public abstract Builder setClassComponents(List<String> classComponents);
 
     public abstract Builder setEnclosingTypeDescriptor(
@@ -701,14 +630,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     public abstract Builder setTypeArgumentDescriptors(
         Iterable<TypeDescriptor> typeArgumentDescriptors);
-
-    public abstract Builder setBoundTypeDescriptorFactory(
-        DescriptorFactory<TypeDescriptor> boundTypeDescriptorFactory);
-
-    public Builder setBoundTypeDescriptorFactory(
-        Supplier<TypeDescriptor> boundTypeDescriptorFactory) {
-      return setBoundTypeDescriptorFactory(typeDescriptor -> boundTypeDescriptorFactory.get());
-    }
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);
@@ -782,12 +703,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     public DeclaredTypeDescriptor build() {
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
-      checkState(
-          typeDescriptor.getEnclosingTypeDescriptor() == null
-              || (!typeDescriptor.getEnclosingTypeDescriptor().isTypeVariable()
-                  && !typeDescriptor.getEnclosingTypeDescriptor().isWildCardOrCapture()));
-
-      checkState(!typeDescriptor.isTypeVariable() || typeDescriptor.isNullable());
       checkState(
           typeDescriptor.hasTypeDeclaration()
               == (typeDescriptor.isClass()

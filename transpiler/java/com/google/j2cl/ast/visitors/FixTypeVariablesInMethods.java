@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.base.Predicates;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
@@ -29,6 +30,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import java.util.function.Predicate;
@@ -54,18 +56,18 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
     for (Type type : compilationUnit.getTypes()) {
       for (Method method : type.getMethods()) {
         MethodDescriptor methodDescriptor = method.getDescriptor();
-        Predicate<TypeDescriptor> shouldBeReplaced =
-            typeDescriptor ->
+        Predicate<TypeVariable> shouldBeReplaced =
+            typeVariable ->
                 // TODO(b/37482332): Synthesized method (like bridges) may contain references to
                 // type variables that are not in the enclosing scope (e.g. a type variable
                 // introduced by the method that cause the bridge). When those method bodies are
                 // specialized correctly there should be no need to filter type variables that
                 // that are not declared by the class.
-                (typeDescriptor.isTypeVariable()
+                (!typeVariable.isWildcardOrCapture()
                         && !type.getDeclaration()
                             .getTypeParameterDescriptors()
-                            .contains(typeDescriptor))
-                    || methodDescriptor.getTypeParameterTypeDescriptors().contains(typeDescriptor)
+                            .contains(typeVariable))
+                    || methodDescriptor.getTypeParameterTypeDescriptors().contains(typeVariable)
                     // JsFunction methods are annotated with @this {function(...):...} and loose
                     // the ability to refer to type variables declared in the class.
                     || methodDescriptor.isJsFunction();
@@ -81,17 +83,14 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
             removeAllTypeVariables(functionExpression.getBody());
-            replaceTypeInFunctionExpressionParameters(
-                functionExpression,
-                typeDescriptor ->
-                    typeDescriptor.isTypeVariable() || typeDescriptor.isWildCardOrCapture());
+            replaceTypeInFunctionExpressionParameters(functionExpression, Predicates.alwaysTrue());
           }
         });
   }
 
   private static FunctionExpression replaceTypeInFunctionExpressionParameters(
       FunctionExpression functionExpression,
-      Predicate<TypeDescriptor> isTypeVariableDeclaredByCurrentMember) {
+      Predicate<TypeVariable> isTypeVariableDeclaredByCurrentMember) {
     return AstUtils.replaceVariables(
         functionExpression.getParameters(),
         functionExpression
@@ -112,13 +111,13 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
   private void removeAllTypeVariables(Node node) {
     node.accept(
         new RewriteTypeVariablesInJsDocAnnotations(
-            typeDescriptor -> typeDescriptor.isTypeVariable()));
+            typeVariable -> !typeVariable.isWildcardOrCapture()));
   }
 
   private static TypeDescriptor replaceTypeVariableWithBound(
-      TypeDescriptor typeDescriptor, Predicate<TypeDescriptor> shouldBeReplaced) {
+      TypeDescriptor typeDescriptor, Predicate<TypeVariable> shouldBeReplaced) {
     return typeDescriptor.specializeTypeVariables(
-        t -> shouldBeReplaced.test(t) ? t.toRawTypeDescriptor() : t);
+        tv -> shouldBeReplaced.test(tv) ? tv.toRawTypeDescriptor() : tv);
   }
 
   /**
@@ -127,9 +126,9 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
    */
   private static class RewriteTypeVariablesInJsDocAnnotations extends AbstractRewriter {
 
-    private final Predicate<TypeDescriptor> shouldBeReplaced;
+    private final Predicate<TypeVariable> shouldBeReplaced;
 
-    private RewriteTypeVariablesInJsDocAnnotations(Predicate<TypeDescriptor> shouldBeReplaced) {
+    private RewriteTypeVariablesInJsDocAnnotations(Predicate<TypeVariable> shouldBeReplaced) {
       this.shouldBeReplaced = shouldBeReplaced;
     }
 

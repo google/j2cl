@@ -480,7 +480,10 @@ public class NormalizeConstructors extends NormalizationPass {
         .setReturnTypeDescriptor(constructor.getEnclosingTypeDescriptor().toNonNullable())
         .setTypeParameterTypeDescriptors(
             Iterables.concat(
-                constructor.getEnclosingTypeDescriptor().getTypeArgumentDescriptors(),
+                constructor
+                    .getEnclosingTypeDescriptor()
+                    .getTypeDeclaration()
+                    .getTypeParameterDescriptors(),
                 constructor.getTypeParameterTypeDescriptors()))
         .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
         .build();

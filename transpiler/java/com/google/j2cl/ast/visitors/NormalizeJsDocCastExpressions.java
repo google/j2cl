@@ -23,6 +23,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeVariable;
 
 /**
  * Rewrites /## @type {Foo<?>} #/ casts (but not declarations) to /## @type {Foo<*>} #/.
@@ -53,7 +54,8 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
                 Lists.transform(
                     annotationTypeDescriptor.getTypeArgumentDescriptors(),
                     typeArgument ->
-                        typeArgument.isWildCardOrCapture()
+                        typeArgument instanceof TypeVariable
+                                && ((TypeVariable) typeArgument).isWildcardOrCapture()
                             ? TypeDescriptors.get().javaLangObject
                             : typeArgument);
             return JsDocCastExpression.Builder.from(jsDocCastExpression)

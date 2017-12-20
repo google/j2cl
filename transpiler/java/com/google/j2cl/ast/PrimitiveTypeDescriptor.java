@@ -174,13 +174,13 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Map<TypeDescriptor, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
+  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
     return ImmutableMap.of();
   }
 
   @Override
   public PrimitiveTypeDescriptor specializeTypeVariables(
-      Function<TypeDescriptor, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     return this;
   }
 

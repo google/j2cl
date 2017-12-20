@@ -303,7 +303,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
       Block body = new Block(bodySourcePosition, statements);
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
 
-      Set<TypeDescriptor> typeParametersTypeDescriptors =
+      Set<TypeVariable> typeParametersTypeDescriptors =
           new LinkedHashSet<>(methodDescriptor.getTypeParameterTypeDescriptors());
       for (Variable parameter : parameters) {
         // Collect type variables that have been introduced by new parameters and are

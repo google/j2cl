@@ -255,7 +255,6 @@ public class TypeDescriptors {
   public static DeclaredTypeDescriptor createOverlayImplementationTypeDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
-    checkArgument(!typeDescriptor.isTypeVariable() && !typeDescriptor.isWildCardOrCapture());
 
     TypeDeclaration overlayImplementationTypeDeclaration =
         createOverlayImplementationTypeDeclaration(typeDescriptor);
@@ -269,8 +268,8 @@ public class TypeDescriptors {
         .build();
   }
 
-  public static Function<TypeDescriptor, TypeDescriptor> mappingFunctionFromMap(
-      Map<TypeDescriptor, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+  public static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(
+      Map<TypeVariable, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
     return replacingTypeDescriptorByTypeVariable.isEmpty()
         ? Function.identity()
         : typeDescriptor ->

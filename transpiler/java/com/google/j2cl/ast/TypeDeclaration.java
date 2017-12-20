@@ -142,7 +142,7 @@ public abstract class TypeDeclaration extends Node
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();
 
-  public abstract ImmutableList<DeclaredTypeDescriptor> getTypeParameterDescriptors();
+  public abstract ImmutableList<TypeVariable> getTypeParameterDescriptors();
 
   public abstract Visibility getVisibility();
 
@@ -355,14 +355,13 @@ public abstract class TypeDeclaration extends Node
     return uniqueKey + TypeDeclaration.createTypeParametersUniqueId(getTypeParameterDescriptors());
   }
 
-  private static String createTypeParametersUniqueId(
-      List<DeclaredTypeDescriptor> typeParameterDescriptors) {
+  private static String createTypeParametersUniqueId(List<TypeVariable> typeParameterDescriptors) {
     if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
       return "";
     }
     return typeParameterDescriptors
         .stream()
-        .map(DeclaredTypeDescriptor::getUniqueId)
+        .map(TypeVariable::getUniqueId)
         .collect(joining(", ", "<", ">"));
   }
 
@@ -667,7 +666,7 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setTypeParameterDescriptors(
-        Iterable<DeclaredTypeDescriptor> typeParameterDescriptors);
+        Iterable<TypeVariable> typeParameterDescriptors);
 
     public abstract Builder setVisibility(Visibility visibility);
 
@@ -780,11 +779,6 @@ public abstract class TypeDeclaration extends Node
 
       TypeDeclaration typeDeclaration = autoBuild();
 
-      checkState(
-          typeDeclaration.getKind() == Kind.CLASS
-              || typeDeclaration.getKind() == Kind.ENUM
-              || typeDeclaration.getKind() == Kind.INTERFACE);
-
       // If this is an inner class, make sure the package is consistent.
       checkState(
           typeDeclaration.getEnclosingTypeDeclaration() == null
@@ -800,7 +794,7 @@ public abstract class TypeDeclaration extends Node
           typeDeclaration
               .getTypeParameterDescriptors()
               .stream()
-              .allMatch(TypeDescriptor::isTypeVariable));
+              .noneMatch(TypeVariable::isWildcardOrCapture));
       return interner.intern(typeDeclaration);
     }
 
