@@ -60,59 +60,68 @@ maven_jar(
   artifact = "org.apache.velocity:velocity:1.7",
 )
 
+# Eclipse JARs listed at
+# http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/
+
 http_jar(
     name = "org_eclipse_jdt_content_type",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.core.contenttype_3.5.0.v20150421-2214.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.commands_3.9.0.v20170530-1048.jar",
+    sha256 = "d8017bcc6001e26abaae318ccd8b9c7f9f052a464f21e5dbb5378df08d66c82d"
+
 )
 
 http_jar(
     name = "org_eclipse_jdt_jobs",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.core.jobs_3.7.0.v20150330-2103.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.jobs_3.9.2.v20171030-1027.jar",
+    sha256 = "9818431379389d33d0bd3aca5c028508a36fdfbd94289b0680bf31e6a1c67b0c"
 )
 
 http_jar(
     name = "org_eclipse_jdt_resources",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.core.resources_3.10.1.v20150725-1910.jar",
-)
-
-http_jar(
-    name = "org_eclipse_jdt_runtime_compatibility",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.core.runtime.compatibility_3.2.300.v20150423-0821.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.resources_3.12.0.v20170417-1558.jar",
+    sha256 = "53769434d4703a930d6dad83ad4b8bdc22159142c67982db874b53aa26c91e5b"
 )
 
 http_jar(
     name = "org_eclipse_jdt_runtime",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.core.runtime_3.11.1.v20150903-1804.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.runtime_3.13.0.v20170207-1030.jar",
+    sha256 = "4cfaf05c1451438ca9086dc09cdcfacc91e6267cb65a7e37688d80f493a33314"
 )
 
 http_jar(
     name = "org_eclipse_jdt_equinox_common",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.equinox.common_3.7.0.v20150402-1709.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.equinox.common_3.9.0.v20170207-1454.jar",
+    sha256 = "3812af843ff6435f2f55385d50f3aa5c063e6674ffb6cf31a2dae8e1e1bfd638"
 )
 
 http_jar(
     name = "org_eclipse_jdt_equinox_preferences",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.equinox.preferences_3.5.300.v20150408-1437.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.equinox.preferences_3.7.0.v20170126-2132.jar",
+    sha256 = "117fe2c119727b4843137ce491c14e9e4a667e394335eaa58d0480ea2a9157de"
 )
 
 http_jar(
     name = "org_eclipse_jdt_compiler_apt",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.jdt.compiler.apt_1.2.0.v20150514-0146.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.jdt.compiler.apt_1.3.60.v20171129-1553.jar",
+    sha256 = "2f15f4a9a64a28fd874d1820ae13d15aed94ea3fd354b9d0d700c9e5526ebed3"
 )
 
 http_jar(
     name = "org_eclipse_jdt_core",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.jdt.core_3.11.2.v20160128-0629.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.jdt.core_3.13.100.v20171123-1049.jar",
+    sha256 = "39f10cd0ed30b46a7fb09ef8eb96f27fcc1587d3cb1f2e995d8ff26220761016"
 )
 
 http_jar(
     name = "org_eclipse_jdt_osgi",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.osgi_3.10.102.v20160118-1700.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.osgi_3.12.50.v20170928-1321.jar",
+    sha256 = "6b54b32b6f61e778ec2a8bd9ed75e17cc7faf5eb18114ac6f61b4436b47ada53"
 )
 
 http_jar(
     name = "org_eclipse_jdt_text",
-    url = "http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/plugins/org.eclipse.text_3.5.400.v20150505-1044.jar",
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.text_3.6.100.v20170203-0814.jar",
+    sha256 = "a3ba2afbb3a2633d29cb864acff3f13080bfcd70bdfdaddf9fd87443c75ad455"
 )
 
 new_http_archive(
@@ -143,4 +152,3 @@ closure_repositories(
     omit_args4j=True,
     omit_com_google_javascript_closure_library=True
 )
-

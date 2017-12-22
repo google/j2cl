@@ -48,7 +48,6 @@ java_library(
         "@org_eclipse_jdt_osgi//jar",
         "@org_eclipse_jdt_resources//jar",
         "@org_eclipse_jdt_runtime//jar",
-        "@org_eclipse_jdt_runtime_compatibility//jar",
         "@org_eclipse_jdt_text//jar",
     ],
 )
