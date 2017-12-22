@@ -889,43 +889,16 @@ public class Java8Test {
     int fun();
   }
 
-  interface SimpleJ {
-
-    int foo();
-
-    int bar();
-  }
-
   interface SimpleK {}
 
-  // TODO(b/36781939): Uncomment when bug is fixed.
-  // @Test
+  @Test
   public void testIntersectionCastWithLambdaExpr() {
-    SimpleI simpleI1 =
-        (SimpleI & EmptyI)
-            () -> {
-              return 11;
-            };
+    SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
     assertThat((Object) simpleI1.fun()).isEqualTo(11);
-    SimpleI simpleI2 =
-        (EmptyI & SimpleI)
-            () -> {
-              return 22;
-            };
+    SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
     assertThat((Object) simpleI2.fun()).isEqualTo(22);
-    EmptyI emptyI =
-        (EmptyI & SimpleI)
-            () -> {
-              return 33;
-            };
-    assertThat(
-            (Object)
-                ((SimpleI & SimpleK)
-                        () -> {
-                          return 55;
-                        })
-                    .fun())
-        .isEqualTo(55);
+    EmptyI emptyI = (EmptyI & SimpleI) () -> 33;
+    assertThat((Object) ((SimpleI & SimpleK) () -> 55).fun()).isEqualTo(55);
   }
 
   static class SimpleA {

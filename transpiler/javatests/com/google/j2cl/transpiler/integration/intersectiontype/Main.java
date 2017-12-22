@@ -23,7 +23,7 @@ public class Main {
   public void run() {
     // Tests from GWT
     testBaseIntersectionCast();
-    //    testIntersectionCastWithLambdaExpr();
+    testIntersectionCastWithLambdaExpr();
     testIntersectionCastPolymorphism();
     // Custom tests
     testLambdaTypeInference();
@@ -95,72 +95,14 @@ public class Main {
 
   private interface SimpleK {}
 
-  // TODO(b/36781939): Fix Lambda type inference.
-  //  public void testIntersectionCastWithLambdaExpr() {
-  //    SimpleI simpleI1 =
-  //        (SimpleI & EmptyI)
-  //            () -> {
-  //              return 11;
-  //            };
-  //    assert 11 == simpleI1.fun();
-  //    SimpleI simpleI2 =
-  //        (EmptyI & SimpleI)
-  //            () -> {
-  //              return 22;
-  //            };
-  //    assert 22 == simpleI2.fun();
-  //    EmptyI emptyI =
-  //        (EmptyI & SimpleI)
-  //            () -> {
-  //              return 33;
-  //            };
-  //    try {
-  //      ((EmptyA & SimpleI)
-  //              () -> {
-  //                return 33;
-  //              })
-  //          .fun();
-  //      assert false : "Should have thrown a ClassCastException";
-  //    } catch (ClassCastException e) {
-  //      // expected.
-  //    }
-  //    try {
-  //      ((SimpleI & SimpleJ)
-  //              () -> {
-  //                return 44;
-  //              })
-  //          .fun();
-  //      assert false : "Should have thrown a ClassCastException";
-  //    } catch (ClassCastException e) {
-  //      // expected.
-  //    }
-  //    try {
-  //      ((SimpleI & SimpleJ)
-  //              () -> {
-  //                return 44;
-  //              })
-  //          .foo();
-  //      assert false : "Should have thrown a ClassCastException";
-  //    } catch (ClassCastException e) {
-  //      // expected.
-  //    }
-  //    try {
-  //      ((SimpleI & SimpleJ)
-  //              () -> {
-  //                return 44;
-  //              })
-  //          .bar();
-  //      assert false : "Should have thrown a ClassCastException";
-  //    } catch (ClassCastException e) {
-  //      // expected.
-  //    }
-  //    assert 55
-  //        == ((SimpleI & SimpleK)
-  //                () -> {
-  //                  return 55;
-  //                })
-  //            .fun();
-  //  }
+  public void testIntersectionCastWithLambdaExpr() {
+    SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
+    assert 11 == simpleI1.fun();
+    SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
+    assert 22 == simpleI2.fun();
+    EmptyI emptyI = (EmptyI & SimpleI) () -> 33;
+    assert 55 == ((SimpleI & SimpleK) () -> 55).fun();
+  }
 
   private static class SimpleA {
     public int bar() {
@@ -232,9 +174,6 @@ public class Main {
     int cmp(int a);
   }
 
-  // TODO(b/36781939): Lambdas do not have the correct types applied yet.  Jdt only recognizes this
-  // Lambda as Cmp whereas it should recognize Cmp and Serial.
-  // https://bugs.eclipse.org/bugs/show_bug.cgi?id=496596
   public static Cmp method() {
     return (Cmp & Serial) () -> 1;
   }
@@ -246,7 +185,7 @@ public class Main {
 
   public static void testLambdaTypeInference() {
     // The first one fails because the lambda is not properly typed.
-    // assert method().cmp() == 1;
+    assert method().cmp() == 1;
     assert method2().cmp(4) == 2;
   }
 }
