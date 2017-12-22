@@ -98,6 +98,11 @@ public abstract class TypeVariable extends TypeDescriptor {
   }
 
   @Override
+  public PrimitiveTypeDescriptor toUnboxedType() {
+    return toRawTypeDescriptor().toUnboxedType();
+  }
+
+  @Override
   public TypeDescriptor toUnparameterizedTypeDescriptor() {
     return this;
   }

@@ -24,17 +24,10 @@ import com.google.j2cl.ast.annotations.Visitable;
  */
 @Visitable
 public abstract class UnaryExpression extends Expression {
-  private TypeDescriptor typeDescriptor;
   @Visitable Expression operand;
 
   UnaryExpression(Expression operand) {
     this.operand = checkNotNull(operand);
-    // TODO(b/70335704): incoming type should not be unboxed, unless it has no side effects.
-    TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
-    this.typeDescriptor =
-        TypeDescriptors.isBoxedType(typeDescriptor)
-            ? typeDescriptor.toUnboxedType()
-            : typeDescriptor;
   }
 
   public Expression getOperand() {
@@ -45,12 +38,19 @@ public abstract class UnaryExpression extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
-  }
+    if (getOperator().hasSideEffect()) {
+      return operand.getTypeDescriptor();
+    }
 
-  @Override
-  public boolean isIdempotent() {
-    return !getOperator().hasSideEffect() && getOperand().isIdempotent();
+    PrimitiveTypeDescriptor operandTypeDescriptor = operand.getTypeDescriptor().toUnboxedType();
+
+    // JLS 5.6.1
+    if (TypeDescriptors.isPrimitiveShort(operandTypeDescriptor)
+        || TypeDescriptors.isPrimitiveChar(operandTypeDescriptor)
+        || TypeDescriptors.isPrimitiveByte(operandTypeDescriptor)) {
+      return PrimitiveTypes.INT;
+    }
+    return operandTypeDescriptor;
   }
 
   @Override
