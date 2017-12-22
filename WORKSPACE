@@ -129,15 +129,18 @@ http_archive(
 
 http_archive(
     name = "io_bazel_rules_closure",
-    strip_prefix = "rules_closure-0.4.1",
-    sha256 = "ba5e2e10cdc4027702f96e9bdc536c6595decafa94847d08ae28c6cb48225124",
-    url = "http://mirror.bazel.build/github.com/bazelbuild/rules_closure/archive/0.4.1.tar.gz",
+    strip_prefix = "rules_closure-0.4.2",
+    sha256 = "25f5399f18d8bf9ce435f85c6bbf671ec4820bc4396b3022cc5dc4bc66303609",
+    urls = [
+        "http://mirror.bazel.build/github.com/bazelbuild/rules_closure/archive/0.4.2.tar.gz",
+        "https://github.com/bazelbuild/rules_closure/archive/0.4.2.tar.gz",
+    ],
 )
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
 
 closure_repositories(
     omit_args4j=True,
-    omit_closure_library=True,
+    omit_com_google_javascript_closure_library=True
 )
 
