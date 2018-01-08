@@ -16,6 +16,7 @@ let $2Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.autoboxin
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -309,6 +310,18 @@ class AutoBoxing extends java_lang_Object {
     l = this.m_unbox__java_lang_Long(Long.m_valueOf__long(l));
     s = this.m_unbox__java_lang_Short(Short.m_valueOf__short(s));
     c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
+    let unusedDouble =
+        this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
+    unusedDouble =
+        this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 1.5, 1, 1, 1]);
+    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);
+    this.m_takesFloatVarArgs__arrayOf_java_lang_Float(
+        /**@type {!Array<Float>} */ ($Arrays.$init(
+            [
+              Float.m_valueOf__float(1.0), Float.m_valueOf__float(97 /* 'a' */),
+              Float.m_valueOf__float(4)
+            ],
+            Float)));
     let /** * */ o;
     o = 100.0;
     o = Integer.m_valueOf__int(0);
@@ -324,18 +337,8 @@ class AutoBoxing extends java_lang_Object {
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxI = Integer.m_valueOf__int(boxI.m_intValue__());
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
-    let unusedDouble =
-        this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
-    unusedDouble =
-        this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 1.5, 1, 1, 1]);
-    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);
-    this.m_takesFloatVarArgs__arrayOf_java_lang_Float(
-        /**@type {!Array<Float>} */ ($Arrays.$init(
-            [
-              Float.m_valueOf__float(1.0), Float.m_valueOf__float(97 /* 'a' */),
-              Float.m_valueOf__float(4)
-            ],
-            Float)));
+    o = /**@type {Integer} */ (
+        $Casts.$to(Integer.m_valueOf__int(15), Comparable));
   }
 
   /**
@@ -573,6 +576,9 @@ class AutoBoxing extends java_lang_Object {
             .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
                 Long.m_valueOf__long($Long.fromBits(11, 0) /* 11 */));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromBits(11, 0) /* 11 */));
+    let i = /**@type {Integer} */ (
+                $Casts.$to(Integer.m_valueOf__int(10), Comparable))
+                .m_intValue__();
   }
 
   /**
@@ -608,6 +614,7 @@ class AutoBoxing extends java_lang_Object {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
+    Comparable = goog.module.get('java.lang.Comparable$impl');
     Double = goog.module.get('java.lang.Double$impl');
     Float = goog.module.get('java.lang.Float$impl');
     Integer = goog.module.get('java.lang.Integer$impl');

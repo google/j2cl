@@ -161,6 +161,10 @@ public class AutoBoxing {
     l = unbox(l);
     s = unbox(s);
     c = unbox(c);
+    double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
+    unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);
+    unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
+    takesFloatVarArgs(1.0f, (float) 'a', (float) 4);
 
     // auto-boxing by assignment to Object
     Object o;
@@ -177,11 +181,8 @@ public class AutoBoxing {
     boxI = +boxI;
     boxI = -boxI;
 
-    double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
-    unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);
-    unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
-
-    takesFloatVarArgs(1.0f, (float) 'a', (float) 4);
+    // auto-boxing by intersection cast.
+    o = (Integer & Comparable<Integer>) 15;
   }
 
   @SuppressWarnings("unused")
@@ -354,7 +355,7 @@ public class AutoBoxing {
 
   public static <T extends Long> void testUnboxingFromTypeVariable() {
     T n = (T) (Long) 10L;
-    // Auto unboxing from variable n.
+    // auto-unboxing from variable n.
     long l = n;
     assert l == 10L;
 
@@ -362,7 +363,7 @@ public class AutoBoxing {
 
     class Local<T extends Long> {
       long toLong(T l) {
-        // Auto unboxing from variable l.
+        // auto-unboxing from variable l.
         assert l.equals(11L);
         return l;
       }
@@ -373,7 +374,7 @@ public class AutoBoxing {
 
   public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
     T n = (T) (Long) 10L;
-    // Auto unboxing from variable n.
+    // auto-unboxing from variable n.
     long l = n;
     assert l == 10L;
 
@@ -381,13 +382,15 @@ public class AutoBoxing {
 
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {
-        // Auto unboxing from variable l.
+        // auto-unboxing from variable l.
         assert l.equals(11L);
         return l;
       }
     }
-    // Auto boxing parameter.
+    // auto-boxing parameter.
     l = new Local<>().toLong(11L);
     assert l == 11L;
+
+    int i = (Integer & Comparable<Integer>) 10;
   }
 }
