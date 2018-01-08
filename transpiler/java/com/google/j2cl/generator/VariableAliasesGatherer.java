@@ -21,7 +21,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import java.util.HashMap;
@@ -47,7 +47,9 @@ class VariableAliasesGatherer extends AbstractVisitor {
             .map(anImport -> anImport.getAlias().split("\\\\.")[0])
             .collect(toImmutableSet());
 
-    final Multimap<Member, String> variableAliasesByMember = HashMultimap.create();
+    // Gather variables by MemberDescriptor because clinit() and init() are synthesized at
+    // generation from multiple members.
+    final Multimap<MemberDescriptor, String> variableAliasesByMember = HashMultimap.create();
     final Map<Variable, String> aliasByVariable = new HashMap<>();
 
     // Create aliases for variables, making sure that variables declared in the same member do not
@@ -71,13 +73,14 @@ class VariableAliasesGatherer extends AbstractVisitor {
               variableName += suffix + "$";
             }
             aliasByVariable.put(variable, variableName);
-            variableAliasesByMember.put(getCurrentMember(), variableName);
+            variableAliasesByMember.put(getCurrentMember().getDescriptor(), variableName);
           }
 
           private boolean isNameUnavailable(String variableName) {
             return forbiddenNames.contains(variableName)
                 || !JsProtectedNames.isLegalName(variableName)
-                || variableAliasesByMember.containsEntry(getCurrentMember(), variableName);
+                || variableAliasesByMember.containsEntry(
+                    getCurrentMember().getDescriptor(), variableName);
           }
         });
     return aliasByVariable;

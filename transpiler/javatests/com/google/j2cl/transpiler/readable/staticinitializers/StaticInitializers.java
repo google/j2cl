@@ -22,5 +22,10 @@ public class StaticInitializers {
 
   static {
     a = 10;
+    int duplicated = 0;
+  }
+
+  static {
+    int duplicated = 1;
   }
 }

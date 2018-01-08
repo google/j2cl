@@ -37,6 +37,10 @@
 [public static int a = 5;] => [StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 5;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
 [public static int b = a * 2;] => [StaticInitializers.$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers * 2;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
 [a = 10;] => [StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 10;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
+[int duplicated = 0;] => [let duplicated = 0;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
+[duplicated] => [duplicated] "duplicated"
+[int duplicated = 1;] => [let duplicated$1$ = 1;] "com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers.<clinit>"
+[duplicated] => [duplicated$1$] "duplicated"
 [public class StaticInitializers {
   public static int a = 5;
 
@@ -44,6 +48,11 @@
 
   static {
     a = 10;
+    int duplicated = 0;
+  }
+
+  static {
+    int duplicated = 1;
   }
 }] => [/** @private {number} */
 StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 0;]
@@ -54,6 +63,11 @@ StaticInitializers.$f_a__com_google_j2cl_transpiler_readable_staticinitializers_
 
   static {
     a = 10;
+    int duplicated = 0;
+  }
+
+  static {
+    int duplicated = 1;
   }
 }] => [/** @private {number} */
 StaticInitializers.$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers = 0;]
