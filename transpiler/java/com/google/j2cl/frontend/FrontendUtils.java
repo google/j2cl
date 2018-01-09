@@ -60,21 +60,29 @@ public class FrontendUtils {
     return sources
         .stream()
         .flatMap(
-            f -> f.endsWith("jar") ? extractSourceJar(f, srcjarContentDir, problems) : Stream.of(f))
+            f ->
+                f.endsWith("jar")
+                    ? extractSourceJar(f, srcjarContentDir, problems).stream()
+                    : Stream.of(f))
         .sorted()
         .distinct()
         .collect(ImmutableList.toImmutableList());
   }
 
-  private static Stream<String> extractSourceJar(
+  private static ImmutableList<String> extractSourceJar(
       String sourceJarPath, Path srcjarContentDir, Problems problems) {
     try {
       ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
-      return Files.walk(srcjarContentDir).map(Path::toString).filter(f -> f.endsWith(".java"));
+      try (Stream<Path> stream = Files.walk(srcjarContentDir)) {
+        return stream
+            .map(Path::toString)
+            .filter(f -> f.endsWith(".java"))
+            .collect(ImmutableList.toImmutableList());
+      }
     } catch (IOException e) {
       problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
     }
-    return Stream.of();
+    return ImmutableList.of();
   }
 
   public static FileSystem initZipOutput(String output, Problems problems) {
