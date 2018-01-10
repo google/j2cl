@@ -403,6 +403,8 @@ class AutoBoxing extends java_lang_Object {
     i += (boxI = Integer.m_valueOf__int(
               boxI.m_intValue__() + (i += boxI.m_intValue__())))
              .m_intValue__();
+    l = $LongUtils.$leftShift(
+        l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));
   }
 
   /**

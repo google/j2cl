@@ -70,8 +70,8 @@ class LongUtils {
     return leftLong.greaterThanOrEqual(rightLong);
   }
 
-  public static NativeLong $leftShift(NativeLong valueLong, NativeLong numBits) {
-    return valueLong.shiftLeft(numBits.toInt());
+  public static NativeLong $leftShift(NativeLong valueLong, int numBits) {
+    return valueLong.shiftLeft(numBits);
   }
 
   public static boolean $less(NativeLong leftLong, NativeLong rightLong) {
@@ -107,12 +107,12 @@ class LongUtils {
     return leftLong.modulo(rightLong);
   }
 
-  public static NativeLong $rightShiftSigned(NativeLong valueLong, NativeLong numBits) {
-    return valueLong.shiftRight(numBits.toInt());
+  public static NativeLong $rightShiftSigned(NativeLong valueLong, int numBits) {
+    return valueLong.shiftRight(numBits);
   }
 
-  public static NativeLong $rightShiftUnsigned(NativeLong valueLong, NativeLong numBits) {
-    return valueLong.shiftRightUnsigned(numBits.toInt());
+  public static NativeLong $rightShiftUnsigned(NativeLong valueLong, int numBits) {
+    return valueLong.shiftRightUnsigned(numBits);
   }
 
   public static NativeLong $times(NativeLong leftLong, NativeLong rightLong) {

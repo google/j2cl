@@ -250,6 +250,7 @@ public class AutoBoxing {
       default:
     }
     i += boxI += i += boxI;
+    l = l << boxL;
   }
 
   @SuppressWarnings("unused")

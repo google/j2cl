@@ -39,6 +39,7 @@ import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -185,12 +186,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       rightOperand = contextRewriter.rewriteStringContext(rightOperand);
     }
 
-    // unary numeric promotion context
-    if (AstUtils.matchesUnaryNumericPromotionContext(binaryExpression)) {
+    /* See JLS 5.6.1. */
+    if (binaryExpression.getOperator().isShiftOperator()) {
       if (!binaryExpression.getOperator().isCompoundAssignment()) {
+        // the left operand matches a unary numeric promotion context.
         leftOperand = contextRewriter.rewriteUnaryNumericPromotionContext(leftOperand);
       }
-      rightOperand = contextRewriter.rewriteUnaryNumericPromotionContext(rightOperand);
+      // The left operand of a shift will be always treated as an int as the maximum shift distance
+      // is 64.
+      rightOperand = contextRewriter.rewriteAssignmentContext(PrimitiveTypes.INT, rightOperand);
     }
 
     // boolean context

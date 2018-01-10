@@ -88,6 +88,9 @@ public class Main {
     d = -1;
     d >>>= 0;
     assert d == -1;
+
+    // Make sure that promotion rules from shift operations are correct.
+    assert Integer.MAX_VALUE << 1L == -2;
   }
 
   public static void testBooleanOperations() {

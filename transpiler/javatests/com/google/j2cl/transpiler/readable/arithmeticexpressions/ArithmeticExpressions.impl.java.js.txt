@@ -81,10 +81,8 @@ class ArithmeticExpressions extends java_lang_Object {
     let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
     let o = $Primitives.$coerceDivision(5 / 2) - 0.0;
-    a = $LongUtils.$leftShift(
-        $Primitives.$widenIntToLong(a), $Long.fromBits(31, 0) /* 31 */);
-    a = $LongUtils.$leftShift(
-        $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */);
+    a = a << 31;
+    a = a << $Primitives.$narrowLongToInt($Long.fromBits(1, 0) /* 1 */);
     a = $Primitives.$narrowLongToInt($LongUtils.$plus(
         $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
     a = $Primitives.$narrowLongToInt($LongUtils.$divide(

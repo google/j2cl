@@ -522,11 +522,6 @@ public class AstUtils {
     return TypeDescriptors.isBoxedOrPrimitiveType(returnTypeDescriptor);
   }
 
-  /** See JLS 5.6.1. */
-  public static boolean matchesUnaryNumericPromotionContext(BinaryExpression binaryExpression) {
-    return binaryExpression.getOperator().isShiftOperator();
-  }
-
   /** See JLS 5.6.2. */
   public static boolean matchesBinaryNumericPromotionContext(BinaryExpression binaryExpression) {
     // Both operands must be boxed or primitive.
@@ -577,9 +572,6 @@ public class AstUtils {
       case BIT_XOR:
       case BIT_AND:
       case BIT_OR:
-      case LEFT_SHIFT:
-      case RIGHT_SHIFT_SIGNED:
-      case RIGHT_SHIFT_UNSIGNED:
         return true; // Both numerics and booleans get these operators.
       case EQUALS:
       case NOT_EQUALS:
