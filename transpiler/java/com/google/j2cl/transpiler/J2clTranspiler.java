@@ -205,7 +205,6 @@ public class J2clTranspiler {
             new BridgeMethodsCreator(),
             new JsBridgeMethodsCreator(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
-            new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
@@ -228,6 +227,9 @@ public class J2clTranspiler {
             // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
             new ExpandCompoundAssignments(),
             new InsertErasureTypeSafetyCasts(),
+            // Needs to run after InsertErasureTypeSafetyCasts, as they might introduce
+            // intersection casts.
+            new NormalizeIntersectionTypes(),
 
             // Runs before unboxing conversion.
             new InsertStringConversions(),

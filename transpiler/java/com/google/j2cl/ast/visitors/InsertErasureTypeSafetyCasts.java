@@ -160,7 +160,9 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
             : fromTypeDescriptor;
     if (!(leafTypeDescriptor instanceof TypeVariable)) {
       return expression;
-    } else if (!fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
+    }
+
+    if (!fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
       return CastExpression.newBuilder()
           .setExpression(expression)
           .setCastTypeDescriptor(toTypeDescriptor)

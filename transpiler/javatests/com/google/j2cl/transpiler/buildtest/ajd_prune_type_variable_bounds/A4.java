@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package b;
+package a;
 
-import a.A1;
-import a.A2;
-import a.A3;
-import a.A4;
-import a.A5;
+import n.NativeType4;
 
-public class B {
-  static void main(String... args) {
-    A1.newA1().getType().doSomething();
-    A2.newA2().getType().get().doSomething();
-    A3.newA3().getType().get().get().doSomething();
-    A4.newA4().getType().doSomething();
-    A5.newA5().getType().doSomething();
+/** Tests that the first component of the intersection bound n.NativeType4 is not pruned. */
+public abstract class A4<T> {
+  public T getType() {
+    return null;
+  }
+
+  public static <T extends NativeType4 & Marker> A4<T> newA4() {
+    return null;
   }
 }

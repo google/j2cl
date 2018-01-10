@@ -52,7 +52,19 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @Override
   @Memoized
   public DeclaredTypeDescriptor toRawTypeDescriptor() {
-    return getIntersectionTypeDescriptors().get(0).toRawTypeDescriptor();
+    return getFirstType().toRawTypeDescriptor();
+  }
+
+  /**
+   * Returns the first type in the intersection.
+   *
+   * <p>Following the approach Java uses regarding erasure of intersection types, variables and
+   * expression of intersection types are seen as being typed at the first component. J2cl inserts
+   * the necessary casts when accessing members the other types in the intersection type.
+   */
+  @Memoized
+  public DeclaredTypeDescriptor getFirstType() {
+    return getIntersectionTypeDescriptors().get(0);
   }
 
   @Override

@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.HasParameters;
+import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
@@ -126,6 +127,10 @@ class ClosureTypesGenerator {
       return getClosureTypeForUnion((UnionTypeDescriptor) typeDescriptor);
     }
 
+    if (typeDescriptor.isIntersection()) {
+      return getClosureTypeForIntersection((IntersectionTypeDescriptor) typeDescriptor);
+    }
+
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
     if (declaredTypeDescriptor.isJsFunctionInterface()
@@ -195,6 +200,16 @@ class ClosureTypesGenerator {
     return withNullability(
         new ClosureUnionType(getClosureTypes(typeDescriptor.getUnionTypeDescriptors())),
         typeDescriptor.isNullable());
+  }
+
+  /** Returns the Closure type for an intersection type descriptor. */
+  private ClosureType getClosureTypeForIntersection(IntersectionTypeDescriptor typeDescriptor) {
+    // Intersection types do not have an equivalent in the Closure type system. Following the
+    // approach that Java takes regarding erasure and intersection types, the Closure type for
+    // an intersection type will be the closure type for the first type in the intersection.
+    // Whenever there are accesses to members of other types in the intersection, the appropriate
+    // Closure casts will be emitted.
+    return getClosureType(typeDescriptor.getFirstType());
   }
 
   /** Returns the Closure type for a @JsFunction type descriptor. */

@@ -7,6 +7,8 @@ js_library(
         "native1.js",
         "native2.js",
         "native3.js",
+        "native4.js",
+        "native5.js",
     ],
     deps = [
         "//javascript/closure:base",

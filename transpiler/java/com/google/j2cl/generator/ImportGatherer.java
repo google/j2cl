@@ -31,6 +31,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FunctionExpression;
+import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsDocFieldDeclaration;
@@ -275,6 +276,13 @@ class ImportGatherer extends AbstractVisitor {
       return;
     }
 
+    if (typeDescriptor.isIntersection()) {
+      IntersectionTypeDescriptor intersectionTypeDescriptor =
+          (IntersectionTypeDescriptor) typeDescriptor;
+      intersectionTypeDescriptor.getIntersectionTypeDescriptors().forEach(this::collectForJsDoc);
+      return;
+    }
+
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
     // Overlay classes may be referred directly from other compilation units that are compiled
@@ -313,19 +321,15 @@ class ImportGatherer extends AbstractVisitor {
    * separately due to synthesized erasure casts. In order for these classes to be preserved and not
    * pruned by AJD, we should create a dependency to the bound.
    */
-  private void collectTypeDescriptorsIntroducedByTypeBounds(TypeVariable typeDescriptor) {
-    TypeDescriptor boundTypeDescriptor = typeDescriptor.getBoundTypeDescriptor();
+  private void collectTypeDescriptorsIntroducedByTypeBounds(TypeVariable typeVariable) {
+    TypeDescriptor boundTypeDescriptor = typeVariable.getBoundTypeDescriptor();
 
     if (TypeDescriptors.isJavaLangObject(boundTypeDescriptor)) {
       // Effectively unbounded and will not result in erasure casts.
       return;
     }
 
-    if (boundTypeDescriptor.isIntersection()) {
-      // TODO(68033041): add missing case to ajd_prune_type_variable_bounds and handle this.
-    } else {
-      collectForJsDoc(boundTypeDescriptor);
-    }
+    collectForJsDoc(boundTypeDescriptor);
   }
 
   private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {

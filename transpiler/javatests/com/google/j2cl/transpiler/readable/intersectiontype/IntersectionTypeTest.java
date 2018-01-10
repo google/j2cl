@@ -106,7 +106,6 @@ public class IntersectionTypeTest<U> {
     Object o = m();
     set((A & EmptyA) o);
     set(m());
-    // TODO(b/38243420): Uncomment the following line when bug is fixed.
-    // Getable<?> g = n();
+    Getable<?> g = n();
   }
 }

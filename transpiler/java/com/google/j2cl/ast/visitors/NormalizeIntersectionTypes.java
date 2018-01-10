@@ -169,7 +169,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             // typed at the first component, which is also consistent with the JVM type (the erasure
             // of an intersection cast is the erasure of its first component).
             return JsDocCastExpression.newBuilder()
-                .setCastType(intersectionTypeDescriptor.getIntersectionTypeDescriptors().get(0))
+                .setCastType(intersectionTypeDescriptor.getFirstType())
                 .setExpression(expression)
                 .build();
           }
