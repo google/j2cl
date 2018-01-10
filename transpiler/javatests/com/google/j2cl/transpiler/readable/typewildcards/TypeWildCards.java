@@ -94,4 +94,12 @@ public class TypeWildCards {
               return a.get();
             });
   }
+
+  class Foo extends GenericType<Foo> {}
+
+  private static void takesRecursiveGeneric(GenericType<Foo> foo) {}
+
+  public void testRecursiveGeneric() {
+    takesRecursiveGeneric(new Foo());
+  }
 }

@@ -76,6 +76,9 @@
 [a] => [a] "a"
 [a.getKey();] => [/**@type {HasKey} */ (a).m_getKey__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
 [return a.get();] => [return /**@type {IntegerSupplier} */ ($Casts.$to(a, IntegerSupplier)).m_get__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[foo] => [foo] "foo"
+[private static void takesRecursiveGeneric(GenericType<Foo> foo) {}] => [TypeWildCards.$clinit();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.takesRecursiveGeneric"
+[takesRecursiveGeneric(new Foo());] => [TypeWildCards.m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(Foo.$create__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(this));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testRecursiveGeneric"
 [public class TypeWildCards {
   public void unbounded(GenericType<?> g) {}
 ...  }

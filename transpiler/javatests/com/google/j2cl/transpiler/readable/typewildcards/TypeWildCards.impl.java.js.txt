@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let GenericType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.A$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Foo$impl');
 let HasKey = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey$impl');
 let IntegerSupplier = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier$impl');
 let Y = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y$impl');
@@ -172,6 +173,27 @@ class TypeWildCards extends java_lang_Object {
   }
 
   /**
+   * @param {GenericType<Foo>} foo
+   * @return {void}
+   * @public
+   */
+  static m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+      foo) {
+    TypeWildCards.$clinit();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testRecursiveGeneric__() {
+    TypeWildCards
+        .m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+            Foo.$create__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+                this));
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -199,6 +221,8 @@ class TypeWildCards extends java_lang_Object {
     TypeWildCards.$clinit = function() {};
     GenericType = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
+    Foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Foo$impl');
     IntegerSupplier = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier$impl');
     Y = goog.module.get(
