@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package a;
+package n;
 
-import n.NativeType;
+import jsinterop.annotations.JsType;
 
-public abstract class A<T extends NativeType> {
-  public T getType() {
-    return null;
-  }
-
-  public static <T extends NativeType> A<T> newA() {
-    return null;
-  }
+@JsType(isNative = true, namespace = "a", name = "Native3")
+public interface NativeType3 {
+  void doSomething();
 }

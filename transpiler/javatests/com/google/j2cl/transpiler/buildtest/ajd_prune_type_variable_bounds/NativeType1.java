@@ -17,7 +17,7 @@ package n;
 
 import jsinterop.annotations.JsType;
 
-@JsType(isNative = true, namespace = "a", name = "Native")
-public class NativeType {
+@JsType(isNative = true, namespace = "a", name = "Native1")
+public class NativeType1 {
   public native void doSomething();
 }

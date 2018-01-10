@@ -4,7 +4,9 @@ licenses(["notice"])
 js_library(
     name = "nativejs",
     srcs = [
-        "native.js",
+        "native1.js",
+        "native2.js",
+        "native3.js",
     ],
     deps = [
         "//javascript/closure:base",

@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package b;
+package a;
 
-import a.A1;
-import a.A2;
-import a.A3;
+import n.NativeType1;
 
-public class B {
-  static void main(String... args) {
-    A1.newA1().getType().doSomething();
-    A2.newA2().getType().get().doSomething();
-    A3.newA3().getType().get().get().doSomething();
+/** Tests that the bound n.Native1 is not pruned. */
+public abstract class A1<T> {
+  public T getType() {
+    return null;
+  }
+
+  public static <T extends NativeType1> A1<T> newA1() {
+    return null;
   }
 }

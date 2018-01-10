@@ -13,13 +13,13 @@
 // limitations under the License.
 
 /**
- * @fileoverview Description of this file.
+ * @fileoverview  A native class that should not be pruned.
  */
 
-goog.module('a.Native');
+goog.module('a.Native1');
 
-class Native {
+class Native1 {
   doSomething() {}
 }
 
-exports = Native;
+exports = Native1;

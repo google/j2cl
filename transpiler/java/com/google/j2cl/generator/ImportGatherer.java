@@ -51,6 +51,7 @@ import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -84,6 +85,8 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();
+
+  private final Set<TypeDescriptor> collectedForJsDoc = new HashSet<>();
 
   private final SetMultimap<ImportCategory, TypeDeclaration> typeDeclarationByCategory =
       LinkedHashMultimap.create();
@@ -237,6 +240,12 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private void collectForJsDoc(TypeDescriptor typeDescriptor) {
+    // Avoid the recursion that might arise from type variable declarations,
+    // (e.g. class Enum<T extends Enum<T>>).
+    if (!collectedForJsDoc.add(typeDescriptor)) {
+      return;
+    }
+
     // JsDoc for {@code long} uses NATIVE_LONG.
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
       collectForJsDoc(BootstrapType.NATIVE_LONG.getDescriptor());
@@ -310,12 +319,6 @@ class ImportGatherer extends AbstractVisitor {
     if (TypeDescriptors.isJavaLangObject(boundTypeDescriptor)) {
       // Effectively unbounded and will not result in erasure casts.
       return;
-    }
-
-    // Avoid recursing into bounds type arguments, as these are not needed and they might introduce
-    // an infinite loop (e.g. class Enum<T extends Enum<T>>).
-    if (boundTypeDescriptor instanceof DeclaredTypeDescriptor) {
-      boundTypeDescriptor = boundTypeDescriptor.toRawTypeDescriptor();
     }
 
     if (boundTypeDescriptor.isIntersection()) {
