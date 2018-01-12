@@ -21,11 +21,8 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
@@ -35,7 +32,6 @@ import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -117,11 +113,12 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
             // Rewrite newInstances for the creation of the enum constants to include the assigned
             // ordinal and name.
             if (!getCurrentType().isEnum()
-                || !isEnumField(
-                    getCurrentMember().getDescriptor(), getCurrentType().getDeclaration())) {
-
-              // Enum constants creations are exactly those that are field initializers for fields
-              // whose class is then enum class.
+                || !newInstance
+                    .getTarget()
+                    .getEnclosingTypeDescriptor()
+                    .isAssignableTo(getCurrentType().getTypeDescriptor())) {
+              // Only new instance for the enum class or (anonymous) subclasses are the ones that
+              // need to be rewritten here.
               return newInstance;
             }
             // This is definitely an enum initialization NewInstance.
@@ -143,21 +140,5 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                 .build();
           }
         });
-  }
-
-  private static boolean isEnumField(
-      MemberDescriptor memberDescriptor, TypeDeclaration enumTypeDeclaration) {
-    // TODO(b/68882167: the code here seems incorrect and not account for corner cases.
-    if (!memberDescriptor.isField()) {
-      return false;
-    }
-
-    FieldDescriptor fieldDescriptor = (FieldDescriptor) memberDescriptor;
-    if (fieldDescriptor.getTypeDescriptor() instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) fieldDescriptor.getTypeDescriptor())
-          .getTypeDeclaration()
-          .equals(enumTypeDeclaration);
-    }
-    return false;
   }
 }

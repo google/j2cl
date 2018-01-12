@@ -44,7 +44,5 @@ enum Enum2 {
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }

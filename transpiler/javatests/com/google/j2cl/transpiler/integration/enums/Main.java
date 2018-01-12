@@ -85,7 +85,6 @@ public class Main {
       assert b != null;
     }
 
-    // TODO(b/68882167): Uncomment test when this is fixed.
-    // assert Baz.field == null;
+    assert Baz.field == null;
   }
 }

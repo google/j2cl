@@ -110,7 +110,7 @@
 [VALUE2(Enum1.V1)] => [Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.$create__java_lang_String__int__java_lang_Enum($Util.$makeEnumName("VALUE2"), 1, Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
 [VALUE3] => [Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.$create__java_lang_String__int__arrayOf_java_lang_Object($Util.$makeEnumName("VALUE3"), 2, []);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
 [VALUE4(5) {}] => [Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2 = $1.$create__java_lang_String__int__int($Util.$makeEnumName("VALUE4"), 3, 5);] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
-[static Enum2 C = f(new Object());] => [Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.m_f__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_enums(java_lang_Object.$create__java_lang_String__int($Util.$makeEnumName("C"), 4));] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
+[static Enum2 C = f(new Object());] => [Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum2.m_f__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_enums(java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
 [enum Enum2 {
   VALUE1(2),
 ...  static Enum2 C = f(new Object());
@@ -140,8 +140,6 @@
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {!Enum2} */
 Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2;]
@@ -169,8 +167,6 @@ Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2;]
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {!Enum2} */
 Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2;]
@@ -198,8 +194,6 @@ Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2;]
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {!Enum2} */
 Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2;]
@@ -227,8 +221,6 @@ Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2;]
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {!Enum2} */
 Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2;]
@@ -256,8 +248,6 @@ Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2;]
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {Enum2} */
 Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2;]
@@ -285,8 +275,6 @@ Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2;]
     return null;
   }
 
-  // TODO(b/68882167): J2cl makes the unsafe assumption that all static fields of the <enum> class
-  // which are of type <enum> are the enum's fields.
   static Enum2 C = f(new Object());
 }] => [/** @private {Map<?string, !Enum2>} */
 Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_;]
