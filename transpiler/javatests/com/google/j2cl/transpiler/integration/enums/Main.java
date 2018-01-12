@@ -51,6 +51,16 @@ public class Main {
     }
   }
 
+  enum Baz {
+    A;
+
+    static Baz f(Object o) {
+      return null;
+    }
+
+    static Baz field = f(new Object());
+  }
+
   public static void main(String[] args) {
     assert Foo.FOO.ordinal() == 0;
     assert Foo.FOO.name().equals("FOO");
@@ -74,5 +84,8 @@ public class Main {
     for (Bar b : Bar.ENUM_SET) {
       assert b != null;
     }
+
+    // TODO(b/68882167): Uncomment test when this is fixed.
+    // assert Baz.field == null;
   }
 }
