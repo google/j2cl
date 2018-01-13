@@ -256,7 +256,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   private boolean isSubtypeOf(TypeDescriptor that) {
-    return getRawSuperTypesIncludingSelf().contains(that.toRawTypeDescriptor());
+    // TODO(70951075): Add other relations due to jsinterop so they are optimized as well.
+    return TypeDescriptors.isJavaLangObject(that)
+        || getRawSuperTypesIncludingSelf().contains(that.toRawTypeDescriptor());
   }
 
   private Set<DeclaredTypeDescriptor> getRawSuperTypesIncludingSelf() {

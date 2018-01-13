@@ -21,14 +21,17 @@ public class InstanceofExpressions {
 
   public void testInstanceofClass() {
     Object object = new InstanceofExpressions();
-    assert object instanceof InstanceofExpressions;
-    assert object instanceof Object;
-    assert !(object instanceof String);
+    boolean b;
+    b = object instanceof Object;
+    b = object instanceof InstanceofExpressions;
+    b = object instanceof String;
   }
 
-  public boolean testInstanceofInterface() {
+  public void testInstanceofInterface() {
     Object o = new Object();
-    return o instanceof Serializable;
+    boolean b;
+    b = o instanceof Serializable;
+    b = new Serializable() {} instanceof Serializable;
   }
 
   public void testInstanceofBoxedType() {
@@ -43,12 +46,35 @@ public class InstanceofExpressions {
     a = b instanceof Number;
     a = b instanceof Character;
     a = b instanceof Boolean;
+
+    Double d = null;
+    a = d instanceof Object;
+    a = d instanceof Number;
+    a = d instanceof Double;
   }
 
   public void testInstanceOfArray() {
     Object object = new Object();
+    Object[] objectArray = new Object[0];
+    Object[][] objectDoubleArray = new Object[0][];
+    String[] stringArray = new String[0];
 
-    boolean a = object instanceof Object[];
-    boolean b = object instanceof Object[][];
+    boolean a;
+    a = object instanceof Object[];
+    a = object instanceof String[][];
+    a = object instanceof Object[];
+    a = object instanceof String[][];
+
+    a = objectArray instanceof Object[];
+    a = objectArray instanceof String[];
+    a = objectArray instanceof Object[][];
+    a = objectArray instanceof String[][];
+
+    a = objectDoubleArray instanceof Object[];
+    a = objectDoubleArray instanceof Object[][];
+    a = objectDoubleArray instanceof String[][];
+
+    a = stringArray instanceof Object[];
+    a = stringArray instanceof String[];
   }
 }

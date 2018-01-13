@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.instanceofexpression.Instanceof
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.$1$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -21,8 +22,8 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
 class InstanceofExpressions extends java_lang_Object {
@@ -63,18 +64,24 @@ class InstanceofExpressions extends java_lang_Object {
    */
   m_testInstanceofClass__() {
     let object = InstanceofExpressions.$create__();
-    $Asserts.$assert(InstanceofExpressions.$isInstance(object));
-    $Asserts.$assert(java_lang_Object.$isInstance(object));
-    $Asserts.$assert(!java_lang_String.$isInstance(object));
+    let /** boolean */ b;
+    b = !$Equality.$same(object, null);
+    b = InstanceofExpressions.$isInstance(object);
+    b = java_lang_String.$isInstance(object);
   }
 
   /**
-   * @return {boolean}
+   * @return {void}
    * @public
    */
   m_testInstanceofInterface__() {
     let o = java_lang_Object.$create__();
-    return Serializable.$isInstance(o);
+    let /** boolean */ b;
+    b = Serializable.$isInstance(o);
+    b = !$Equality.$same(
+        $1.$create__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions(
+            this),
+        null);
   }
 
   /**
@@ -92,6 +99,10 @@ class InstanceofExpressions extends java_lang_Object {
     a = Number.$isInstance(b);
     a = Character.$isInstance(b);
     a = Boolean.$isInstance(b);
+    let d = null;
+    a = !$Equality.$same(d, null);
+    a = !$Equality.$same(d, null);
+    a = !$Equality.$same(d, null);
   }
 
   /**
@@ -100,8 +111,25 @@ class InstanceofExpressions extends java_lang_Object {
    */
   m_testInstanceOfArray__() {
     let object = java_lang_Object.$create__();
-    let a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
-    let b = $Arrays.$instanceIsOfType(object, java_lang_Object, 2);
+    let objectArray = new Array(0);
+    let objectDoubleArray = /**@type {!Array<Array<*>>} */ (
+        $Arrays.$create([0, null], java_lang_Object));
+    let stringArray =
+        /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));
+    let /** boolean */ a;
+    a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
+    a = $Arrays.$instanceIsOfType(object, java_lang_String, 2);
+    a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
+    a = $Arrays.$instanceIsOfType(object, java_lang_String, 2);
+    a = !$Equality.$same(objectArray, null);
+    a = $Arrays.$instanceIsOfType(objectArray, java_lang_String, 1);
+    a = $Arrays.$instanceIsOfType(objectArray, java_lang_Object, 2);
+    a = $Arrays.$instanceIsOfType(objectArray, java_lang_String, 2);
+    a = !$Equality.$same(objectDoubleArray, null);
+    a = !$Equality.$same(objectDoubleArray, null);
+    a = $Arrays.$instanceIsOfType(objectDoubleArray, java_lang_String, 2);
+    a = !$Equality.$same(stringArray, null);
+    a = !$Equality.$same(stringArray, null);
   }
 
   /**
@@ -130,6 +158,8 @@ class InstanceofExpressions extends java_lang_Object {
    */
   static $clinit() {
     InstanceofExpressions.$clinit = function() {};
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.$1$impl');
     Serializable = goog.module.get('java.io.Serializable$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
@@ -141,8 +171,8 @@ class InstanceofExpressions extends java_lang_Object {
     Number = goog.module.get('java.lang.Number$impl');
     Short = goog.module.get('java.lang.Short$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     java_lang_Object.$clinit();
   }
 
