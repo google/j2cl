@@ -101,6 +101,10 @@ def make_size_report(file_name, original_targets, modified_targets,
         create_report(test_name,
                       os.path.getsize(original_js_file),
                       os.path.getsize(modified_js_file)))
+    uncompiled_reports.append(
+        create_report(test_name + ".minified",
+                      repo_util.get_minimized_size(original_js_file),
+                      repo_util.get_minimized_size(modified_js_file)))
 
   original_total_size = 0
   modified_total_size = 0

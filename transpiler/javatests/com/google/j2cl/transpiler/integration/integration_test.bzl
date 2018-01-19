@@ -144,15 +144,6 @@ def integration_test(name,
       deps=[":" + name],
   )
 
-  minifier = "//tools/java/com/google/j2cl/tools/minifier:J2clMinifier"
-  native.genrule(
-      name="readable_unoptimized_js_minified",
-      srcs=[":readable_unoptimized_js-bundle.js"],
-      tools=[minifier],
-      cmd="$(location %s) $(SRCS) > $(OUTS)" % minifier,
-      outs=["readable_unoptimized_js_minified-bundle.js"],
-  )
-
   # For java testing.
   native.java_binary(
       name="java_binary",

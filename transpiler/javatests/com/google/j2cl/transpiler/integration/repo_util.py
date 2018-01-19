@@ -22,31 +22,16 @@ from os.path import expanduser
 
 import process_util
 
-# pylint: disable=global-variable-not-assigned
-TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                       "com/google/j2cl/transpiler/integration/...:all")
-OBFUSCATED_OPT_TEST_PATTERN = (
-    "//third_party/java_src/j2cl/transpiler/javatests/"
-    "com/google/j2cl/transpiler/integration/"
-    "%s:optimized_js")
-OBFUSCATED_OPT_TEST_FILE = (
-    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
-    "com/google/j2cl/transpiler/integration/"
-    "%s/optimized_js.js")
-READABLE_OPT_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
-                             "com/google/j2cl/transpiler/integration/"
-                             "%s:readable_optimized_js")
-READABLE_OPT_TEST_FILE = (
-    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
-    "com/google/j2cl/transpiler/integration/"
-    "%s/readable_optimized_js.js")
-READABLE_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
-                         "com/google/j2cl/transpiler/integration/"
-                         "%s:readable_unoptimized_js")
-READABLE_TEST_FILE = (
-    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
-    "com/google/j2cl/transpiler/integration/"
-    "%s/readable_unoptimized_js.js")
+J2CL_ROOT = "//third_party/java_src/j2cl/"
+J2CL_MINIFER = (
+    J2CL_ROOT + "tools/java/com/google/j2cl/tools/minifier:J2clMinifier")
+INTEGRATION_ROOT = (
+    J2CL_ROOT + "transpiler/javatests/com/google/j2cl/transpiler/integration/")
+TEST_TARGET_PATTERN = INTEGRATION_ROOT + "...:all"
+OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js"
+READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js"
+READABLE_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_unoptimized_js"
+
 HOME_DIR_PATH = expanduser("~")
 
 GIT_MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
@@ -65,15 +50,12 @@ def build_tests(test_targets, cwd=None):
 
 def get_obfuscated_optimized_test_file(test_name):
   """Returns the path to the obfuscated opt JS file the given test."""
-  global OBFUSCATED_OPT_TEST_FILE
 
-  return OBFUSCATED_OPT_TEST_FILE % test_name
+  return get_file_from_target(OBFUSCATED_OPT_TEST_PATTERN % test_name)
 
 
 def build_obfuscated_optimized_test(test_name, cwd=None):
   """Blaze builds the obfuscated opt JS for a particular test."""
-  global OBFUSCATED_OPT_TEST_PATTERN
-
   process_util.run_cmd_get_output(
       ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name],
       cwd=cwd)
@@ -81,15 +63,11 @@ def build_obfuscated_optimized_test(test_name, cwd=None):
 
 def get_readable_optimized_test_file(test_name):
   """Returns the path to the readable opt JS file the given test."""
-  global READABLE_OPT_TEST_FILE
-
-  return READABLE_OPT_TEST_FILE % test_name
+  return get_file_from_target(READABLE_OPT_TEST_PATTERN % test_name)
 
 
 def build_readable_optimized_test(test_name, cwd=None):
   """Blaze builds the readable opt JS for a particular test."""
-  global READABLE_OPT_TEST_PATTERN
-
   process_util.run_cmd_get_output(
       ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name],
       cwd=cwd)
@@ -97,15 +75,11 @@ def build_readable_optimized_test(test_name, cwd=None):
 
 def get_readable_unoptimized_test_file(test_name):
   """Returns the path to the readable unoptimized JS file the given test."""
-  global READABLE_TEST_FILE
-
-  return READABLE_TEST_FILE % test_name
+  return get_file_from_target(READABLE_TEST_PATTERN % test_name)
 
 
 def build_readable_unoptimized_test(test_name, cwd=None):
   """Blaze builds the readable unoptimized JS for a particular test."""
-  global READABLE_TEST_PATTERN
-
   process_util.run_cmd_get_output(
       ["blaze", "build", READABLE_TEST_PATTERN % test_name],
       cwd=cwd)
@@ -147,11 +121,19 @@ def get_js_files_by_test_name(test_targets, uncompiled):
                                    size_target) for size_target in test_targets
   ]
   extension = "-bundle.js" if uncompiled else ".js"
-  js_files = [
-      size_target.replace("//", "blaze-bin/").replace(":", "/") + extension
-      for size_target in test_targets
-  ]
+  js_files = [get_file_from_target(t, extension) for t in test_targets]
   return dict(zip(test_names, js_files))
+
+
+def get_minimized_size(js_file):
+  """Runs the given file through J2clMinifier."""
+  minified = process_util.run_cmd_get_output(
+      ["blaze", "run", J2CL_MINIFER, "--", os.path.abspath(js_file)])
+  return len(minified)
+
+
+def get_file_from_target(target, extension=".js"):
+  return target.replace("//", "blaze-bin/").replace(":", "/") + extension
 
 
 def managed_repo_sync_to(cl):
@@ -167,8 +149,6 @@ def managed_repo_sync_to(cl):
 
 def managed_repo_validate_environment():
   """Ensure expected directories exist."""
-  global GIT_MANAGED_REPO_PATH
-
   if is_git():
     if not os.path.isdir(GIT_MANAGED_REPO_PATH):
       print("  Creating managed opt size tracking git5 repo at '%s'" %

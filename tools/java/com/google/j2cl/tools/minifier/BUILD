@@ -7,7 +7,6 @@ licenses(["notice"])
 java_binary(
     name = "J2clMinifier",
     main_class = "com.google.j2cl.tools.minifier.J2clMinifier",
-    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/integration:__subpackages__"],
     runtime_deps = [":minifier"],
 )
 
