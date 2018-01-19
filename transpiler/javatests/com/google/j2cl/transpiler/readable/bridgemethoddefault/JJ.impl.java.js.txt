@@ -1,0 +1,90 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ$impl');
+
+
+const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+
+/**
+ * @interface
+ * @extends {I<*>}
+ */
+class JJ {
+  /**
+   * @param {*} o
+   * @return {void}
+   * @public
+   */
+  m(o) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    I.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JJ.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    JJ,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ'));
+
+
+JJ.$markImplementor(/** @type {Function} */ (JJ));
+
+
+/**
+ * Export class.
+ */
+exports = JJ;
+//# sourceMappingURL=JJ.js.map

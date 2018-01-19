@@ -1,0 +1,103 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+
+/**
+ * @interface
+ * @template C_T
+ */
+class PureInterface {
+  /**
+   * @abstract
+   * @param {C_T} t
+   * @return {void}
+   * @public
+   */
+  m_run__java_lang_Object(t) {}
+
+  /**
+   * @template C_T
+   * @param {?function(C_T):void} fn
+   * @return {PureInterface<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    PureInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    PureInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    PureInterface,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface'));
+
+
+PureInterface.$markImplementor(/** @type {Function} */ (PureInterface));
+
+
+/**
+ * Export class.
+ */
+exports = PureInterface;
+//# sourceMappingURL=PureInterface.js.map

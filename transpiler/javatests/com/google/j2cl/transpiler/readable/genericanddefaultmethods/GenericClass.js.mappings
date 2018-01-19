@@ -1,0 +1,34 @@
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<synthetic: ctor_js>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [GenericClass.$clinit();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<synthetic: ctor_create>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [let $instance = new GenericClass();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<synthetic: ctor_create>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<synthetic: ctor_create>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<synthetic: ctor_create>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<init>"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [this.$init__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<init>"
+[value] => [value] "value"
+[System.out.println("in GenericClass");] => [System.f_out__java_lang_System.m_println__java_lang_String("in GenericClass");] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.foo"
+[public class GenericClass<T> {
+  public void foo(T value) {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass.<clinit>"

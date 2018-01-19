@@ -9,9 +9,5 @@ load(
 # Creates verification target
 readable_example(
     name = "defaultmethodstwointerfaces",
-    srcs = ["ConcreteClass.java"],
-    supporting_srcs = [
-        "InterfaceWithDefaultMethod.java",
-        "PureInterface.java",
-    ],
+    srcs = glob(["*.java"]),
 )

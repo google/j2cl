@@ -9,14 +9,6 @@ load(
 # Creates verification target
 readable_example(
     name = "bridgemethoddefault",
-    srcs = [
-        "A.java",
-        "B.java",
-    ],
-    supporting_srcs = [
-        "I.java",
-        "II.java",
-        "JJ.java",
-    ],
+    srcs = glob(["*.java"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

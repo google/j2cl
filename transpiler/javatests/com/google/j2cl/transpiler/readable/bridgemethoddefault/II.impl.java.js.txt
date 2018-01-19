@@ -1,0 +1,90 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethoddefault.II.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.II$impl');
+
+
+const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @interface
+ * @extends {I<?string>}
+ */
+class II {
+  /**
+   * @param {?string} s
+   * @return {void}
+   * @public
+   */
+  m_m__java_lang_String(s) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    I.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    II.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    II,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethoddefault.II'));
+
+
+II.$markImplementor(/** @type {Function} */ (II));
+
+
+/**
+ * Export class.
+ */
+exports = II;
+//# sourceMappingURL=II.js.map

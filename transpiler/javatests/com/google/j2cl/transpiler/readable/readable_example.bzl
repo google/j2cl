@@ -7,7 +7,6 @@ Example usage:
 
 # Creates verification target
 readable_example(
-    name = "foobar",
     srcs = glob(["*.java"]),
 )
 
@@ -20,7 +19,7 @@ load("//tools/build_rules:build_test.bzl", "build_test")
 
 
 def readable_example(
-    name, srcs, supporting_srcs=[], native_srcs=[],
+    name, srcs, native_srcs=[],
     deps=[], js_deps=[], plugins=[], javacopts=[], defs=[], test_externs_list=None,
     _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
@@ -31,7 +30,6 @@ def readable_example(
   Args:
     name: The name of the readable example to generate.
     srcs: Source files to make readable output for.
-    supporting_srcs: Source files referenced by the primary srcs.
     native_srcs: Foo.native.js files to merge in.
     deps: J2CL libraries referenced by the srcs.
     js_deps: JS libraries referenced by the srcs.
@@ -42,29 +40,13 @@ def readable_example(
     _declare_legacy_namespace: Whether to use legacy namespaces in output.
   """
 
-  if supporting_srcs:
-    j2cl_library(
-        name="supporting_" + name,
-        srcs=supporting_srcs,
-        javacopts=[
-            "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
-            "-Xep:IdentityBinaryExpression:OFF",
-        ] + javacopts,
-        native_srcs=native_srcs,
-        deps=deps,
-        plugins=plugins,
-        generate_build_test=False,
-        _js_deps=js_deps,
-        _declare_legacy_namespace=_declare_legacy_namespace,
-    )
-
   # Transpile the Java files.
   j2cl_library(
-      name=name,
+      name="readable",
       srcs=srcs,
       javacopts=javacopts,
       native_srcs=native_srcs,
-      deps=deps + (["supporting_" + name] if supporting_srcs else []),
+      deps=deps,
       plugins=plugins,
       generate_build_test=False,
       _js_deps=js_deps,
@@ -76,7 +58,7 @@ def readable_example(
   if not test_externs_list:
     test_externs_list=["//javascript/externs:common"]
   native.js_binary(
-      name=name + "_binary",
+      name="readable_binary",
       defs=J2CL_OPTIMIZED_DEFS + [
           "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/conformance_proto.txt",
           "--jscomp_warning=conformanceViolations",
@@ -85,10 +67,10 @@ def readable_example(
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       extra_inputs=["//transpiler/javatests/com/google/j2cl/transpiler/readable:conformance_proto"],
-      deps=[":" + name],
+      deps=[":readable"],
   )
 
   build_test(
-      name=name + "_build_test",
-      targets=[name + "_binary"],
+      name="readable_build_test",
+      targets=["readable_binary"],
   )

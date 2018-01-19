@@ -9,9 +9,5 @@ load(
 # Creates verification target
 readable_example(
     name = "genericanddefaultmethods",
-    srcs = ["ConcreteClass.java"],
-    supporting_srcs = [
-        "GenericClass.java",
-        "InterfaceWithDefault.java",
-    ],
+    srcs = glob(["*.java"]),
 )

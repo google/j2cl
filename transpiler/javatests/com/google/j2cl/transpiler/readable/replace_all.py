@@ -26,33 +26,19 @@ from google3.pyglib import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean("nologs", False, "skips jscompiler step.")
-flags.DEFINE_string("example_name", "*",
-                    "only process examples matched by this regexp")
+flags.DEFINE_boolean("logs", True, "skips jscompiler step if false.")
+flags.DEFINE_string("name_filter", ".*",
+                    "only process readables matched by this regexp")
 flags.DEFINE_boolean("skip_integration", False, "only build readables.")
 
-# pylint: disable=global-variable-not-assigned
 INTEGRATION_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                               "com/google/j2cl/transpiler/integration/...:all")
-JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
-EXAMPLES_DIR = JAVA_DIR + "/com/google/j2cl/transpiler/readable/"
-READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                           "com/google/j2cl/transpiler/readable/...")
-SUCCESS_CODE = 0
+JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/"
+READABLE_TARGET_PATTERN = JAVA_DIR + "com/google/j2cl/transpiler/readable/..."
 
 
 class CmdExecutionError(Exception):
   """Indicates that a cmd execution returned a non-zero exit code."""
-
-
-def readable_binary_target(readable_target_name):
-  return (EXAMPLES_DIR + readable_target_name + ":" +
-          readable_target_name + "_binary")
-
-
-def readable_j2cl_target(readable_target_name):
-  return (EXAMPLES_DIR + readable_target_name + ":" +
-          readable_target_name + "_j2cl_transpile")
 
 
 def extract_pattern(pattern_string, from_value):
@@ -67,7 +53,6 @@ def replace_pattern(pattern_string, replacement, in_value):
 
 def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   """Runs a cmd command and returns output as a string."""
-  global SUCCESS_CODE
 
   process = (Popen(
       cmd_args, shell=shell, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd))
@@ -75,87 +60,63 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   output = results[0]
   if include_stderr:
     output = (output + "\n" if output else "") + results[1]
-  if process.wait() != SUCCESS_CODE:
+  if process.wait() != 0:
     raise CmdExecutionError("cmd invocation " + str(cmd_args) +
                             " failed with\n" + results[1])
 
   return output
 
 
-def get_readable_target_names():
-  """Finds and returns the names of readable targets."""
-  global READABLE_TARGET_PATTERN
+def get_readable_dirs(name_filter):
+  """Finds and returns the dirs of readable examples."""
 
-  example_name_re = re.compile(".*/readable/" +
-                               FLAGS.example_name.replace("*", ".*") +
-                               ":.*")
-
-  test_targets = (run_cmd_get_output(
-      ["blaze", "query", "filter('.*:.*_j2cl_transpile', kind(%s, %s))" %
-       ("j2cl_transpile", READABLE_TARGET_PATTERN)]).split("\n"))
-  test_targets = [item for item in test_targets
-                  if bool(item) and example_name_re.match(item)]
-
-  return [
-      extract_pattern(".*readable/(.*?):.*_j2cl_transpile", size_target)
-      for size_target in test_targets
-  ]
+  readable_dirs = run_cmd_get_output(
+      [
+          "blaze", "query",
+          "filter('%s:readable$', %s)" % (name_filter, READABLE_TARGET_PATTERN),
+          "--output=package"
+      ]
+  ).split("\n")
+  return filter(bool, readable_dirs)
 
 
-def blaze_build(target_names, build_all):
+def blaze_build(target_dirs, build_integration_tests):
   """Blaze build everything in 1-go, for speed."""
-  global INTEGRATION_TARGET_PATTERN
 
-  args = ["blaze", "build", "-c", "fastbuild"]
-  args += [readable_j2cl_target(target_name) for target_name in target_names]
+  target_name = "readable_j2cl_transpile" if FLAGS.logs else "readable_binary"
+  build_targets = [d + ":" + target_name for d in target_dirs]
 
-  if not FLAGS.nologs:
-    readable_binary_targets = [readable_binary_target(target_name)
-                               for target_name in target_names]
+  if build_integration_tests:
+    build_targets += [INTEGRATION_TARGET_PATTERN]
 
-    # Build both all readable targets in one build command so that
-    # blaze build parallelizes all the work. Saves a lot of time.
-    args += readable_binary_targets
-
-    if build_all and not FLAGS.skip_integration:
-      args += [INTEGRATION_TARGET_PATTERN]
-
-  return run_cmd_get_output(args, include_stderr=True)
+  cmd = ["blaze", "build", "-c", "fastbuild"] + build_targets
+  return run_cmd_get_output(cmd, include_stderr=True)
 
 
-def replace_transpiled_js(target_names):
+def replace_transpiled_js(readable_dirs):
   """Copy and reformat and replace with Blaze built JS."""
 
-  # Copy all the zips in one COPY command so that some of the
-  # network communication is parallelized.
-  if not os.path.isdir("/tmp/js.zip"):
-    os.mkdir("/tmp/js.zip")
-  run_cmd_get_output(
-      ["cp -f blaze-bin/%s**/*.js.zip /tmp/js.zip" % EXAMPLES_DIR], shell=True)
-
-  for target_name in target_names:
-    zip_file_path = "/tmp/js.zip/%s_j2cl_transpile.js.zip" % target_name
-    extractDir = JAVA_DIR + "/"
+  for readable_dir in readable_dirs:
+    zip_file_path = "blaze-bin/%s/readable_j2cl_transpile.js.zip" % readable_dir
 
     # Remove the old .js.map and .js.txt files (results from the last run)
     run_cmd_get_output([
-        "find", EXAMPLES_DIR + target_name, "-name", "*.js.*", "-exec", "rm",
+        "find", readable_dir, "-name", "*.js.*", "-exec", "rm",
         "{}", ";"
     ])
 
     # Remove the old ".native_js" files (results from the last run)
     run_cmd_get_output([
-        "find", EXAMPLES_DIR + target_name, "-name", "*.native_js", "-exec",
+        "find", readable_dir, "-name", "*.native_js", "-exec",
         "rm", "{}", ";"
     ])
 
     run_cmd_get_output([
-        "unzip", "-o", "-d", extractDir, zip_file_path, "-x", "*.java", "-x",
+        "unzip", "-o", "-d", JAVA_DIR, zip_file_path, "-x", "*.java", "-x",
         "*.map"
     ])
 
-    find_command_js_sources = ["find", EXAMPLES_DIR + target_name,
-                               "-name", "*.java.js"]
+    find_command_js_sources = ["find", readable_dir, "-name", "*.java.js"]
 
     # Format .js files
     run_cmd_get_output(find_command_js_sources +
@@ -179,8 +140,6 @@ def gather_closure_warnings(build_log):
         not in line and "Building" not in line
     ])
 
-    # Remove folder path spam.
-    build_log = build_log.replace("blaze-out/k8-fastbuild/genfiles/", "")
     # Remove stable (but occasionally changing) line number details.
     build_log = replace_pattern(r"\:([0-9]*)\:", "", build_log)
     # Filter out the unstable ", ##% typed" message
@@ -202,29 +161,30 @@ def gather_closure_warnings(build_log):
 
 
 def main(unused_argv):
-  build_all = FLAGS.example_name == "*"
+  build_all = FLAGS.name_filter == ".*"
 
   print "Generating readable JS and build logs:"
-  readable_target_names = get_readable_target_names()
+  readable_dirs = get_readable_dirs(FLAGS.name_filter)
+  if build_all:
+    print "  Blaze building everything"
+  else:
+    print "  Blaze building:"
+    print "\n".join(["    " + d for d in readable_dirs])
 
-  if not build_all:
-    print "\n    ".join(["  (restricted to):"] + readable_target_names)
-
-  print "  Blaze building everything"
-  if FLAGS.nologs:
-    print "     (skipping logs)"
-  build_log = blaze_build(readable_target_names, build_all)
+  build_integration_tests = (build_all
+                             and FLAGS.logs and not FLAGS.skip_integration)
+  build_log = blaze_build(readable_dirs, build_integration_tests)
 
   print "  Copying and reformatting transpiled JS"
-  replace_transpiled_js(readable_target_names)
+  replace_transpiled_js(readable_dirs)
 
-  if FLAGS.nologs:
+  if not FLAGS.logs:
     print "  Skipping logs!!!"
   else:
     print "  Processing build logs"
     gather_closure_warnings(build_log)
 
-  print "run 'git gui' to see changes"
+  print "run diff on repo to see changes"
 
 
 if __name__ == "__main__":
