@@ -19,7 +19,7 @@ load("//tools/build_rules:build_test.bzl", "build_test")
 
 
 def readable_example(
-    name, srcs, native_srcs=[],
+    srcs, native_srcs=[],
     deps=[], js_deps=[], plugins=[], javacopts=[], defs=[], test_externs_list=None,
     _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
@@ -28,7 +28,6 @@ def readable_example(
   java_library() rules.
 
   Args:
-    name: The name of the readable example to generate.
     srcs: Source files to make readable output for.
     native_srcs: Foo.native.js files to merge in.
     deps: J2CL libraries referenced by the srcs.

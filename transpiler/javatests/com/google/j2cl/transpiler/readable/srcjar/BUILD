@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "srcjar",
     srcs = [
         "Foo.srcjar",  # Provides Foo.java
         "Srcjar.java",  # References Foo

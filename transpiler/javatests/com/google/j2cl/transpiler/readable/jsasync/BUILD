@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "jsasync",
     srcs = glob(["*.java"]),
     defs = [
         "--allow_method_call_decomposing",

@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "jsmemberinnativetype",
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],

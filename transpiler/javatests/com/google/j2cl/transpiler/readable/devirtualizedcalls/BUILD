@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "devirtualizedcalls",
     srcs = glob(["*.java"]),
     javacopts = [
         "-Xep:SelfEquals:OFF",  # go/self-equals-lsc

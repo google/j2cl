@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "defaultnullable",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party/java/checker_framework:annotations-j2cl",

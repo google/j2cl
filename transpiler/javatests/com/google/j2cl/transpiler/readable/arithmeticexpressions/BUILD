@@ -10,6 +10,5 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "arithmeticexpressions",
     srcs = glob(["*.java"]),
 )

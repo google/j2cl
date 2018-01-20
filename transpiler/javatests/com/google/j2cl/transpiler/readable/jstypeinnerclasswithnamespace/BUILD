@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "jstypeinnerclasswithnamespace",
     srcs = glob(["*.java"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

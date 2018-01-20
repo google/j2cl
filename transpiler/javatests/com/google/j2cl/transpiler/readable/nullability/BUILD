@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "nullability",
     srcs = glob(["*.java"]),
     deps = [
         ":subpackage",

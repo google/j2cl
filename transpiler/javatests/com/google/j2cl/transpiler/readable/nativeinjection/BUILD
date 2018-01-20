@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "nativeinjection",
     srcs = glob(["*.java"]),
     native_srcs = glob(["*.native.js"]),
 )

@@ -8,6 +8,5 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "initmethoddispatch",
     srcs = glob(["*.java"]),
 )

@@ -8,6 +8,5 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "abstractinterfaceimpl",
     srcs = glob(["*.java"]),
 )

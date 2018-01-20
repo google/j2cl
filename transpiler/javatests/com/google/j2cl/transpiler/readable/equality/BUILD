@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "equality",
     srcs = glob(["*.java"]),
     javacopts = [
         "-XepDisableAllChecks",

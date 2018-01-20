@@ -8,6 +8,5 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "newinstance",
     srcs = glob(["*.java"]),
 )

@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "declarelegacynamespace",
     srcs = glob(["*.java"]),
     _declare_legacy_namespace = True,
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],

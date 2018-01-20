@@ -22,7 +22,6 @@ js_library(
 
 # Creates verification target
 readable_example(
-    name = "externs",
     srcs = glob(["*.java"]),
     native_srcs = glob(["*.native.js"]),
     test_externs_list = [":_externs"],

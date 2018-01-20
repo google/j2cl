@@ -8,6 +8,5 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "trycatch",
     srcs = glob(["*.java"]),
 )

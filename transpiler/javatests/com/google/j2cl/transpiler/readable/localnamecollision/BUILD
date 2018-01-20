@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "localnamecollision",
     srcs = glob(["**/*.java"]),
     javacopts = [
         "-XepDisableAllChecks",

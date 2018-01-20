@@ -8,7 +8,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "aptgeneratordep",
     srcs = ["Foo.java"],
     deps = [":dummy-processor-export-j2cl"],
 )
