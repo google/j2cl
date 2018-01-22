@@ -480,6 +480,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertTranspileFails(
             "Buggy",
             "import jsinterop.annotations.JsType;",
+            "import jsinterop.annotations.JsMethod;",
             "@JsType",
             "interface IBuggy1 {",
             "  void show();",
@@ -493,10 +494,27 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "class Buggy2 extends Buggy implements IBuggy2 {",
             "  public void show(boolean b) {}",
+            "}",
+            "interface IBuggy3 {",
+            "@JsMethod(name = \"display\")",
+            "  void show(boolean b);",
+            "}",
+            "class Buggy3 implements IBuggy2, IBuggy3 {",
+            "  public void show(boolean b) {}",
+            "}",
+            "class Main {",
+            "  public static void main() {",
+            "    Object o;",
+            // TODO(b/67913644): This lambda should be rejected but it is not.
+            "    o = (IBuggy2 & IBuggy3) (b) -> {};",
+            "  }",
             "}")
         .assertErrors(
             "'void Buggy2.show(boolean)' and 'void Buggy.show()' cannot both use the same "
-                + "JavaScript name 'show'.");
+                + "JavaScript name 'show'.",
+            "'void Buggy3.show(boolean b)' cannot be assigned JavaScript name 'display' that is "
+                + "different from the JavaScript name of a method it overrides "
+                + "('void IBuggy2.show(boolean)' with JavaScript name 'show').");
   }
 
   // TODO(b/36232268): enable once the bug is fixed.
@@ -1357,6 +1375,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "final class Buggy2 implements Function2 {",
             "  public String getFoo() { return null;}",
+            "}",
+            "@JsFunction",
+            "interface ParametricFunction<T> {",
+            "  Object getFoo(T t);",
+            "}",
+            "final class ImplementationWithBridge implements ParametricFunction<String> {",
+            "  public Double getFoo(String s) { return new Double(0); }",
+            "}",
+            "class Main {",
+            "  public static void main() {",
+            "    Object o;",
+            "    o = (ParametricFunction<?>) (s) -> (Double) null;",
+            "  }",
             "}")
         .assertNoWarnings();
   }
@@ -1407,7 +1438,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "final class JsFunctionExtendingBaseClass extends BaseClass implements Function {",
             "  public int getFoo() { return 0; }",
             "}",
-            "final class JsFunctionMultipleInterfaces implements Function, Cloneable {",
+            "final class JsFunctionMultipleInterfaces implements Cloneable, Function {",
             "  public int getFoo() { return 0; }",
             "}",
             "@JsFunction @JsType",
@@ -1416,6 +1447,23 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "@JsFunction",
             "class InvalidJsFunctionClass {",
+            "}",
+            "interface Foo {",
+            "  int getFoo();",
+            "}",
+            "final class JsFunctionImplementingDefaultMethod implements Foo, Function {",
+            "  public int getFoo() { return 0; }",
+            "}",
+            "@JsFunction",
+            "interface FunctionWithDefaultMethod {",
+            "  default int getFoo() { return 0; }",
+            "}",
+            "class Main {",
+            "  public static void main() {",
+            "    Object o;",
+            // TODO(b/67913644): All these should be rejected but are not.
+            "    o = (Foo & Function) () -> 0;",
+            "  }",
             "}")
         .assertErrors(
             "'InvalidJsTypeJsFunction' cannot be both a JsFunction and a JsType at the same time.",
@@ -1449,7 +1497,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
                 + "nor JsProperty.",
             "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
-                + "nor JsProperty.");
+                + "nor JsProperty.",
+            "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement more "
+                + "than one interface",
+            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface",
+            // TODO(b/72314317): This error should not be emitted as it is misleading.
+            "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement "
+                + "method 'int JsFunctionImplementingDefaultMethod.getFoo()'");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {
@@ -1772,6 +1826,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "final class FunctionImpl implements Function {",
             "   public void m(String a, @JsOptional String b) {}",
+            "}",
+            "class Main {",
+            "  public static void main() {",
+            "    Object o;",
+            "    o = (Function) (String s, @JsOptional String b) -> {};",
+            "  }",
             "}")
         .assertNoWarnings();
   }
@@ -1781,6 +1841,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Buggy",
             "import jsinterop.annotations.JsMethod;",
             "import jsinterop.annotations.JsOptional;",
+            "import jsinterop.annotations.JsFunction;",
             "interface Interface {",
             "  @JsMethod void foo(@JsOptional Object o);",
             "  @JsMethod Object bar(@JsOptional Object o);",
@@ -1790,6 +1851,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsMethod public void foo(Object o) {}",
             "  @Override",
             "  @JsMethod public String bar(Object o) { return null; }",
+            "}",
+            "@JsFunction interface Function {",
+            "  void m(String a, @JsOptional String b);",
+            "}",
+            "class Main {",
+            "  public static void main() {",
+            "    Object o;",
+            // TODO(b/72319249): This should not pass restriction checks.
+            "    o = (Function) (String s, String b) -> {};",
+            "  }",
             "}")
         .assertErrors(
             "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional",
