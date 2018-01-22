@@ -54,10 +54,10 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -287,10 +287,6 @@ class JdtUtils {
       default:
         return null;
     }
-  }
-
-  public static boolean isStatic(BodyDeclaration bodyDeclaration) {
-    return Modifier.isStatic(bodyDeclaration.getModifiers());
   }
 
   public static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
@@ -658,6 +654,10 @@ class JdtUtils {
     return Modifier.isStatic(binding.getModifiers());
   }
 
+  public static boolean isStatic(BodyDeclaration bodyDeclaration) {
+    return Modifier.isStatic(bodyDeclaration.getModifiers());
+  }
+
   /**
    * Returns true if instances of this type capture its outer instances; i.e. if it is an non static
    * member class, or an anonymous or local class defined in an instance context.
@@ -868,65 +868,40 @@ class JdtUtils {
     return typeBinding.isLocal();
   }
 
-  /** Returns true if {@code typeBinding} is a class that implements a JsFunction interface. */
-  private static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
-    if (typeBinding == null || !typeBinding.isClass()) {
-      return false;
-    }
-    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-      if (JsInteropUtils.isJsFunction(superInterface)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /** Returns the MethodDescriptor for the concrete JsFunction method implementation. */
+  /** Returns the MethodDescriptor for the JsFunction method. */
   private static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
-    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
-    if (samInJsFunctionInterface == null) {
-      return null;
+    if (JsInteropUtils.isJsFunction(typeBinding)
+        && typeBinding.getFunctionalInterfaceMethod() != null) {
+      // typeBinding.getFunctionalInterfaceMethod returns in some cases the method declaration
+      // instead of the method with the corresponding parameterization. Note: this is observed in
+      // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
+      IMethodBinding jsFunctionMethodBinding =
+          Arrays.stream(typeBinding.getDeclaredMethods())
+              .filter(
+                  methodBinding ->
+                      methodBinding.getMethodDeclaration()
+                          == typeBinding.getFunctionalInterfaceMethod().getMethodDeclaration())
+              .findFirst()
+              .get();
+      return createMethodDescriptor(jsFunctionMethodBinding);
     }
-    if (typeBinding.isInterface()) {
-      return createMethodDescriptor(samInJsFunctionInterface);
-    }
-    for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-      if (methodBinding.isSynthetic()) {
-        // skip the synthetic method.
-        continue;
-      }
-      if (methodBinding.overrides(samInJsFunctionInterface)) {
-        return createMethodDescriptor(methodBinding);
-      }
-    }
-    return null;
+
+    // Find implementation method that corresponds to JsFunction.
+    Optional<ITypeBinding> jsFunctionInterface =
+        Arrays.stream(typeBinding.getInterfaces()).filter(JsInteropUtils::isJsFunction).findFirst();
+
+    return jsFunctionInterface
+        .map(ITypeBinding::getFunctionalInterfaceMethod)
+        .flatMap(jsFunctionMethod -> getOverrideInType(typeBinding, jsFunctionMethod))
+        .orElse(null);
   }
 
-  /** Returns JsFunction method in JsFunction interface. */
-  private static IMethodBinding getSAMInJsFunctionInterface(ITypeBinding typeBinding) {
-    if (!isJsFunctionImplementation(typeBinding) && !JsInteropUtils.isJsFunction(typeBinding)) {
-      return null;
-    }
-    ITypeBinding jsFunctionInterface =
-        typeBinding.isInterface() ? typeBinding : typeBinding.getInterfaces()[0];
-
-    // TODO(rluble): all the logic below should be replaced by
-    //
-    //   return jsFunctionInterface.getFunctionalInterfaceMethod()
-    //
-    // but doing so ends up with slightly different generic signatures.
-    //
-    List<IMethodBinding> abstractMethods =
-        Arrays.stream(jsFunctionInterface.getDeclaredMethods())
-            .filter(JdtUtils::isAbstract)
-            .collect(Collectors.toList());
-
-    checkArgument(
-        abstractMethods.size() == 1,
-        "Type %s should have one and only one abstract method.",
-        jsFunctionInterface.getName());
-
-    return abstractMethods.get(0);
+  private static Optional<MethodDescriptor> getOverrideInType(
+      ITypeBinding typeBinding, IMethodBinding methodBinding) {
+    return Arrays.stream(typeBinding.getDeclaredMethods())
+        .filter(m -> m.overrides(methodBinding))
+        .findFirst()
+        .map(JdtUtils::createMethodDescriptor);
   }
 
   private static ImmutableList<TypeDescriptor> createTypeDescriptors(
