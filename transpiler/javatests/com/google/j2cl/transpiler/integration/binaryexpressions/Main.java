@@ -16,16 +16,17 @@
 package com.google.j2cl.transpiler.integration.binaryexpressions;
 
 /** Test basic binary operations. This test does not aim to test primitive overflow and Coercion. */
-@SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality"})
+@SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality", "ConstantOverflow"})
 public class Main {
   public static void main(String[] args) {
-    testIntegerArithmetic();
+    testArithmetic();
+    testOverflow();
     testBooleanOperations();
     testStringConcatentation();
     testExtendedOperands();
   }
 
-  public static void testIntegerArithmetic() {
+  public static void testArithmetic() {
     int a = 6;
     int b = 3;
     int c = -1;
@@ -91,6 +92,33 @@ public class Main {
 
     // Make sure that promotion rules from shift operations are correct.
     assert Integer.MAX_VALUE << 1L == -2;
+  }
+
+  public static void testOverflow() {
+    // No overflow, as the mutiplication is always performed in integer precision
+    assert Byte.MAX_VALUE * Byte.MAX_VALUE == 0x3f01;
+    assert Short.MAX_VALUE * Short.MAX_VALUE == 0x3fff0001;
+
+    // Overflow in long precision which is emulated
+    assert Long.MAX_VALUE * Long.MAX_VALUE == 1L;
+
+    // Overflow followed by an explicit int coercion results in the correct value because this
+    // 32-bit integer overflow does not exceed the 52-bit JS integer precision.
+    assert (Character.MAX_VALUE * Character.MAX_VALUE | 0) == -131071;
+
+    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
+    // below should have been:
+    // assert Character.MAX_VALUE * Character.MAX_VALUE == -131071 /*0xfffe0001*/;
+    assert Character.MAX_VALUE * Character.MAX_VALUE == 4294836225d;
+
+    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
+    // below should have been:
+    // assert Integer.MAX_VALUE * Integer.MAX_VALUE == 1;
+    assert Integer.MAX_VALUE * Integer.MAX_VALUE == 4611686014132420600d;
+    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
+    // below should have been:
+    // assert (Integer.MAX_VALUE * Integer.MAX_VALUE | 0) == 1;
+    assert (Integer.MAX_VALUE * Integer.MAX_VALUE | 0) == 0;
   }
 
   public static void testBooleanOperations() {
