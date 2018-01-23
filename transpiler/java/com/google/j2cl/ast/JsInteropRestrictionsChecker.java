@@ -30,6 +30,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -146,18 +147,21 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkIllegalOverrides(Method method) {
-    for (MethodDescriptor overriddenMethodDescriptor :
-        method.getDescriptor().getOverriddenMethodDescriptors()) {
-      checkState(!overriddenMethodDescriptor.isSynthetic());
+    Optional<MethodDescriptor> jsOverlayOverride =
+        method
+            .getDescriptor()
+            .getOverriddenMethodDescriptors()
+            .stream()
+            .filter(MethodDescriptor::isJsOverlay)
+            .findFirst();
 
-      if (overriddenMethodDescriptor.isJsOverlay()) {
-        problems.error(
-            method.getSourcePosition(),
-            "Method '%s' cannot override a JsOverlay method '%s'.",
-            method.getReadableDescription(),
-            overriddenMethodDescriptor.getReadableDescription());
-        return;
-      }
+    if (jsOverlayOverride.isPresent()) {
+      checkState(!jsOverlayOverride.get().isSynthetic());
+      problems.error(
+          method.getSourcePosition(),
+          "Method '%s' cannot override a JsOverlay method '%s'.",
+          method.getReadableDescription(),
+          jsOverlayOverride.get().getReadableDescription());
     }
   }
 
@@ -494,13 +498,6 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
-      problems.error(
-          type.getSourcePosition(),
-          "JsFunction implementation '%s' cannot implement more than one interface.",
-          readableDescription);
-    }
-
     if (typeDeclaration.isJsType()) {
       problems.error(
           type.getSourcePosition(),
@@ -508,11 +505,20 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
+    if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsFunction implementation '%s' cannot implement more than one interface.",
+          readableDescription);
+      return;
+    }
+
     if (!TypeDescriptors.isJavaLangObject(type.getSuperTypeDescriptor())) {
       problems.error(
           type.getSourcePosition(),
           "JsFunction implementation '%s' cannot extend a class.",
           readableDescription);
+      return;
     }
 
     for (Member member : type.getMembers()) {
@@ -528,19 +534,24 @@ public class JsInteropRestrictionsChecker {
 
     if (member instanceof Method) {
       Method method = (Method) member;
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (!methodDescriptor
-          .getOverriddenMethodDescriptors()
-          .stream()
-          .allMatch(MethodDescriptor::isJsFunction)) {
+      Optional<MethodDescriptor> nonJsFunctionOverride =
+          method
+              .getDescriptor()
+              .getOverriddenMethodDescriptors()
+              .stream()
+              .filter(Predicates.not(MethodDescriptor::isJsFunction))
+              .findFirst();
+
+      if (nonJsFunctionOverride.isPresent()) {
         // Methods that are not effectively static dispatch are disallowed. In this case these
         // could only be overrideable methods of java.lang.Object, i.e. toString, hashCode
         // and equals.
+
         problems.error(
             member.getSourcePosition(),
-            "JsFunction implementation '%s' cannot implement method '%s'.",
+            "JsFunction implementation '%s' cannot override method '%s'.",
             memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
-            member.getReadableDescription());
+            nonJsFunctionOverride.get().getReadableDescription());
         return;
       }
     }

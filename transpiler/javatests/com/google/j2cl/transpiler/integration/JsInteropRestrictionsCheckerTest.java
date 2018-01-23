@@ -1490,20 +1490,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty.",
             "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
                 + "JsMethod nor JsProperty.",
-            "JsFunction implementation 'Buggy' cannot implement method 'String Buggy.toString()'.",
-            "JsFunction implementation 'Buggy' cannot implement method "
-                + "'boolean Buggy.equals(Object o)'.",
-            "JsFunction implementation 'Buggy' cannot implement method 'int Buggy.hashCode()'.",
+            "JsFunction implementation 'Buggy' cannot override method 'String Object.toString()'.",
+            "JsFunction implementation 'Buggy' cannot override method "
+                + "'boolean Object.equals(Object)'.",
+            "JsFunction implementation 'Buggy' cannot override method 'int Object.hashCode()'.",
             "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
                 + "nor JsProperty.",
             "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
                 + "nor JsProperty.",
             "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement more "
                 + "than one interface",
-            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface",
-            // TODO(b/72314317): This error should not be emitted as it is misleading.
-            "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement "
-                + "method 'int JsFunctionImplementingDefaultMethod.getFoo()'");
+            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {
