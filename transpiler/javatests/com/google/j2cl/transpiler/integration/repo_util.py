@@ -20,6 +20,9 @@ import getpass
 import os
 from os.path import expanduser
 
+
+import shutil
+import sys
 import process_util
 
 J2CL_ROOT = "//third_party/java_src/j2cl/"
@@ -48,41 +51,19 @@ def build_tests(test_targets, cwd=None):
       cwd=cwd)
 
 
-def get_obfuscated_optimized_test_file(test_name):
+def get_obfuscated_optimized_test(test_name):
   """Returns the path to the obfuscated opt JS file the given test."""
-
-  return get_file_from_target(OBFUSCATED_OPT_TEST_PATTERN % test_name)
-
-
-def build_obfuscated_optimized_test(test_name, cwd=None):
-  """Blaze builds the obfuscated opt JS for a particular test."""
-  process_util.run_cmd_get_output(
-      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name],
-      cwd=cwd)
+  return OBFUSCATED_OPT_TEST_PATTERN % test_name
 
 
-def get_readable_optimized_test_file(test_name):
+def get_readable_optimized_test(test_name):
   """Returns the path to the readable opt JS file the given test."""
-  return get_file_from_target(READABLE_OPT_TEST_PATTERN % test_name)
+  return READABLE_OPT_TEST_PATTERN % test_name
 
 
-def build_readable_optimized_test(test_name, cwd=None):
-  """Blaze builds the readable opt JS for a particular test."""
-  process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name],
-      cwd=cwd)
-
-
-def get_readable_unoptimized_test_file(test_name):
+def get_readable_unoptimized_test(test_name):
   """Returns the path to the readable unoptimized JS file the given test."""
-  return get_file_from_target(READABLE_TEST_PATTERN % test_name)
-
-
-def build_readable_unoptimized_test(test_name, cwd=None):
-  """Blaze builds the readable unoptimized JS for a particular test."""
-  process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_TEST_PATTERN % test_name],
-      cwd=cwd)
+  return READABLE_TEST_PATTERN % test_name
 
 
 def compute_synced_to_cl():
@@ -197,3 +178,48 @@ def get_cwd(managed):
 
 def get_managed_path():
   return GIT_GOOGLE3_PATH if is_git() else CITC_GOOGLE3_PATH
+
+
+def diff_target(get_target):
+  """Diffs managed repo and current CL for the output."""
+
+  if len(sys.argv) != 2:
+    print "must pass the name of the test to diff as an argument"
+    return
+
+  test_name = sys.argv[1]
+  js_target = get_target(test_name)
+  js_file_path = get_file_from_target(js_target)
+
+  print "Constructing a diff of obfuscated opt JS changes in '%s'." % test_name
+
+  managed_repo_validate_environment()
+
+  synced_to_cl = compute_synced_to_cl()
+
+  print "  syncing managed repo to your same sync CL " + str(synced_to_cl)
+  managed_repo_sync_to(synced_to_cl)
+
+  print ("  blaze building obfuscated opt JS for '%s' in the managed repo" %
+         test_name)
+  build_tests([js_target], get_managed_path())
+
+  print "    formatting JS"
+  managed_js_file = "/tmp/managed.%s.js" % test_name
+  shutil.copyfile(get_managed_path() + "/" + js_file_path,
+                  managed_js_file)
+  process_util.run_cmd_get_output(["clang-format", "-i", managed_js_file])
+
+  print ("  blaze building obfuscated opt JS for '%s' in the live repo" %
+         test_name)
+  build_tests([js_target])
+
+  print "    formatting JS"
+  live_js_file = "/tmp/live.%s.js" % test_name
+  shutil.copyfile(js_file_path, live_js_file)
+  process_util.run_cmd_get_output(["clang-format", "-i", live_js_file])
+
+  print "  starting meld"
+  process_util.run_cmd_get_output(["meld", managed_js_file, live_js_file])
+
+  print "  done"
