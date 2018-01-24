@@ -31,10 +31,9 @@ flags.DEFINE_string("name_filter", ".*",
                     "only process readables matched by this regexp")
 flags.DEFINE_boolean("skip_integration", False, "only build readables.")
 
-INTEGRATION_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                              "com/google/j2cl/transpiler/integration/...:all")
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "com/google/j2cl/transpiler/readable/..."
+INTEGRATION_TARGET_PATTERN = JAVA_DIR + "com/google/j2cl/transpiler/integration/..."
 
 
 class CmdExecutionError(Exception):
@@ -98,25 +97,22 @@ def replace_transpiled_js(readable_dirs):
 
   for readable_dir in readable_dirs:
     zip_file_path = "blaze-bin/%s/readable_j2cl_transpile.js.zip" % readable_dir
+    output = readable_dir + "/output"
 
-    # Remove the old .js.map and .js.txt files (results from the last run)
+    # Clean the output directory from the result of last run.
+    run_cmd_get_output(["rm", "-Rf", output])
+    run_cmd_get_output(["mkdir", output])
+
+    # Update the output directory with result of the new run.
     run_cmd_get_output([
-        "find", readable_dir, "-name", "*.js.*", "-exec", "rm",
-        "{}", ";"
+        "unzip", "-o", "-d", output, zip_file_path, "-x", "*.java", "-x", "*.map"
     ])
-
-    # Remove the old ".native_js" files (results from the last run)
+    # Normalize the path relative to output directory.
     run_cmd_get_output([
-        "find", readable_dir, "-name", "*.native_js", "-exec",
-        "rm", "{}", ";"
-    ])
+        "mv " + output + "/" + os.path.relpath(readable_dir, JAVA_DIR) + "/* " + output
+    ], shell=True)
 
-    run_cmd_get_output([
-        "unzip", "-o", "-d", JAVA_DIR, zip_file_path, "-x", "*.java", "-x",
-        "*.map"
-    ])
-
-    find_command_js_sources = ["find", readable_dir, "-name", "*.java.js"]
+    find_command_js_sources = ["find", output, "-name", "*.js"]
 
     # Format .js files
     run_cmd_get_output(find_command_js_sources +
