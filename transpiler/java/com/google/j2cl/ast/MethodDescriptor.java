@@ -135,7 +135,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return name
         + parameterTypeDescriptors
             .stream()
-            .map(type -> type.toNonNullable().toRawTypeDescriptor().getQualifiedBinaryName())
+            .map(TypeDescriptor::toRawTypeDescriptor)
+            .map(TypeDescriptor::getQualifiedBinaryName)
             .collect(joining(",", "(", ")"));
   }
 
@@ -559,8 +560,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return addParameterTypeDescriptors(index, Arrays.asList(parameterTypeDescriptors));
     }
 
-    abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
-
     public Builder addParameterTypeDescriptors(
         int index, Collection<TypeDescriptor> parameterTypeDescriptors) {
       List<ParameterDescriptor> newParameterDescriptors =
@@ -575,16 +574,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors(newParameterDescriptors);
     }
 
-    static ImmutableList<ParameterDescriptor> toParameterDescriptors(
-        Collection<TypeDescriptor> parameterTypeDescriptors) {
-      return parameterTypeDescriptors
-          .stream()
-          .map(
-              typeDescriptor ->
-                  ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
-          .collect(ImmutableList.toImmutableList());
-    }
-
     public Builder addParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
       return addParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
     }
@@ -594,7 +583,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           getParameterDescriptors().size(), parameterTypeDescriptors);
     }
 
+    abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
+
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
+
+    static ImmutableList<ParameterDescriptor> toParameterDescriptors(
+        Collection<TypeDescriptor> parameterTypeDescriptors) {
+      return parameterTypeDescriptors
+          .stream()
+          .map(
+              typeDescriptor ->
+                  ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
+          .collect(ImmutableList.toImmutableList());
+    }
 
     public abstract Builder setParameterDescriptors(
         Iterable<ParameterDescriptor> parameterDescriptors);

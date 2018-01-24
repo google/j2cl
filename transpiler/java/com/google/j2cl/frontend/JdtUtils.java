@@ -455,7 +455,8 @@ class JdtUtils {
         .build();
   }
 
-  private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
+  private static DeclaredTypeDescriptor withNullability(
+      DeclaredTypeDescriptor typeDescriptor, boolean nullable) {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
