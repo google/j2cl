@@ -486,9 +486,6 @@ class JdtUtils {
     for (IAnnotationBinding annotation : allAnnotations) {
       String annotationName = annotation.getName();
 
-      if (annotationName.equals("Nullable") || annotationName.equals("NullableType")) {
-        return true;
-      }
       if (annotationName.equalsIgnoreCase("Nonnull")) {
         return false;
       }
