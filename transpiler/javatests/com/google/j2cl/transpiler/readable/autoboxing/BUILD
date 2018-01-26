@@ -9,10 +9,6 @@ load(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    javacopts = [
-        "-Xep:IdentityBinaryExpression:OFF",
-        "-Xep:SelfEquality:OFF",
-    ],
     deps = [
         "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",

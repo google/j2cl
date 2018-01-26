@@ -9,7 +9,4 @@ load(
 # Creates verification target
 readable_example(
     srcs = glob(["**/*.java"]),
-    javacopts = [
-        "-XepDisableAllChecks",
-    ],
 )
