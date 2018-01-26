@@ -56,11 +56,7 @@ def make_size_report(file_name, original_targets, modified_targets,
   """Compare current test sizes and generate a report."""
 
   path_name = os.path.join(os.path.dirname(__file__), file_name)
-  repo_util.check_out_file(path_name)
   size_report_file = open(path_name, "w+")
-
-  synced_to_cl = repo_util.compute_synced_to_cl()
-  repo_util.managed_repo_sync_to(synced_to_cl)
 
   size_report_file.write("Integration tests size report:\n")
   size_report_file.write("**************************************\n")
@@ -71,7 +67,7 @@ def make_size_report(file_name, original_targets, modified_targets,
 
   original_result = pool.apply_async(
       repo_util.build_tests,
-      [original_targets, repo_util.get_managed_path()],
+      [original_targets, repo_util.get_j2size_repo_path()],
       callback=lambda x: console_log("    Original done building."))
   modified_result = pool.apply_async(
       repo_util.build_tests, [modified_targets],
@@ -96,7 +92,7 @@ def make_size_report(file_name, original_targets, modified_targets,
 
   for test_name in sorted(uncompiled_js_files_by_test_name.keys()):
     modified_js_file = uncompiled_js_files_by_test_name.get(test_name)
-    original_js_file = repo_util.get_managed_path() + "/" + modified_js_file
+    original_js_file = repo_util.get_j2size_repo_path() + "/" + modified_js_file
     uncompiled_reports.append(
         create_report(test_name,
                       os.path.getsize(original_js_file),
@@ -114,7 +110,7 @@ def make_size_report(file_name, original_targets, modified_targets,
 
   for test_name in sorted(optimized_js_files_by_test_name.keys()):
     modified_js_file = optimized_js_files_by_test_name.get(test_name)
-    original_js_file = repo_util.get_managed_path() + "/" + modified_js_file
+    original_js_file = repo_util.get_j2size_repo_path() + "/" + modified_js_file
 
     existing_target = os.path.exists(original_js_file)
 
@@ -214,11 +210,10 @@ def create_report(test_name, original_size, modified_size):
 
 
 def main():
-  repo_util.managed_repo_validate_environment()
-
+  repo_util.sync_j2size_repo()
   print "Generating the size change report:"
   original_targets = repo_util.get_all_optimized_tests(
-      repo_util.get_managed_path())
+      repo_util.get_j2size_repo_path())
   modified_targets = repo_util.get_all_optimized_tests()
   uncompiled_targets = [
       repo_util.get_optimized_test("box2d_default"),
