@@ -82,7 +82,7 @@ def get_readable_dirs(name_filter):
 def blaze_build(target_dirs, build_integration_tests):
   """Blaze build everything in 1-go, for speed."""
 
-  target_name = "readable_j2cl_transpile" if FLAGS.logs else "readable_binary"
+  target_name = "readable_binary" if FLAGS.logs else "readable_j2cl_transpile"
   build_targets = [d + ":" + target_name for d in target_dirs]
 
   if build_integration_tests:
