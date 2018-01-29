@@ -262,6 +262,8 @@ public class J2clTranspiler {
             new NormalizeJsDocCastExpressions(),
 
             // Dodge OTI limitations.
+            // TODO(b/30365337): remove after JSCompiler stops requiring unnecessary abstract
+            // methods on abstract classes.
             new UnimplementedMethodsCreator(),
             // TODO(b/24476009): remove the temporary fix once switch to JSCompiler's new type
             // checker.
