@@ -265,7 +265,7 @@ public class J2clTranspiler {
             // TODO(b/30365337): remove after JSCompiler stops requiring unnecessary abstract
             // methods on abstract classes.
             new UnimplementedMethodsCreator(),
-            // TODO(b/24476009): remove the temporary fix once switch to JSCompiler's new type
+            // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
             // checker.
             new InsertTypeAnnotationOnGenericReturnTypes(),
             // TODO(b/24476009): remove the temporary fix once we switch to JSCompiler's new type
