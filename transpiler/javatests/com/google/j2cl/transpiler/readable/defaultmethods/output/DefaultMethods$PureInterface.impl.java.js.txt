@@ -1,35 +1,35 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.
+ * com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$PureInterface.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface$impl');
+goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.PureInterface$impl');
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.$LambdaAdaptor$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.PureInterface.$LambdaAdaptor$impl');
 let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
  * @interface
- * @template C_T
+ * @template C_PureInterface_T
  */
 class PureInterface {
   /**
    * @abstract
-   * @param {C_T} t
+   * @param {C_PureInterface_T} t
    * @return {void}
    * @public
    */
   m_run__java_lang_Object(t) {}
 
   /**
-   * @template C_T
-   * @param {?function(C_T):void} fn
-   * @return {PureInterface<C_T>}
+   * @template C_PureInterface_T
+   * @param {?function(C_PureInterface_T):void} fn
+   * @return {PureInterface<C_PureInterface_T>}
    * @public
    */
   static $adapt(fn) {
@@ -47,7 +47,7 @@ class PureInterface {
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface =
+        .$implements__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_PureInterface =
         true;
   }
 
@@ -61,7 +61,7 @@ class PureInterface {
   static $isInstance(instance) {
     return instance != null &&
         !!instance
-              .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface;
+              .$implements__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_PureInterface;
   }
 
   /**
@@ -73,7 +73,7 @@ class PureInterface {
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
         !!classConstructor.prototype
-              .$implements__com_google_j2cl_transpiler_readable_defaultmethodstwointerfaces_PureInterface;
+              .$implements__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_PureInterface;
   }
 
   /**
@@ -83,14 +83,14 @@ class PureInterface {
   static $clinit() {
     PureInterface.$clinit = function() {};
     $LambdaAdaptor = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface.$LambdaAdaptor$impl');
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.PureInterface.$LambdaAdaptor$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
     PureInterface,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.PureInterface'));
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$PureInterface'));
 
 
 PureInterface.$markImplementor(/** @type {Function} */ (PureInterface));
@@ -100,4 +100,4 @@ PureInterface.$markImplementor(/** @type {Function} */ (PureInterface));
  * Export class.
  */
 exports = PureInterface;
-//# sourceMappingURL=PureInterface.js.map
+//# sourceMappingURL=DefaultMethods$PureInterface.js.map

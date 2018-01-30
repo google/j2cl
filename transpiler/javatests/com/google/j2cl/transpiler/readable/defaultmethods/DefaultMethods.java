@@ -27,4 +27,15 @@ public class DefaultMethods {
   static class AConcreteList<T> implements List<T> {}
 
   static class StringList implements List<String> {}
+
+  interface PureInterface<T> {
+    void run(T t);
+  }
+
+  interface InterfaceWithDefaultMethod extends PureInterface<String> {
+    @Override
+    default void run(String string) {}
+  }
+
+  static class ConcreteClass implements InterfaceWithDefaultMethod {}
 }
