@@ -82,8 +82,9 @@ def get_readable_dirs(name_filter):
 def blaze_build(target_dirs, build_integration_tests):
   """Blaze build everything in 1-go, for speed."""
 
-  target_name = "readable_binary" if FLAGS.logs else "readable_j2cl_transpile"
-  build_targets = [d + ":" + target_name for d in target_dirs]
+  build_targets = [d + ":readable_j2cl_transpile" for d in target_dirs]
+  if FLAGS.logs:
+    build_targets += [d + ":readable_binary" for d in target_dirs]
 
   if build_integration_tests:
     build_targets += [INTEGRATION_TARGET_PATTERN]
@@ -136,6 +137,8 @@ def gather_closure_warnings(build_log):
         not in line and "Building" not in line
     ])
 
+    # Remove folder path spam.
+    build_log = build_log.replace("blaze-out/k8-fastbuild/genfiles/", "")
     # Remove stable (but occasionally changing) line number details.
     build_log = replace_pattern(r"\:([0-9]*)\:", "", build_log)
     # Filter out the unstable ", ##% typed" message
