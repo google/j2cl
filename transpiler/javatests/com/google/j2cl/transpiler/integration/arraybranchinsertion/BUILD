@@ -12,5 +12,4 @@ load(
 integration_test(
     name = "arraybranchinsertion",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
 )

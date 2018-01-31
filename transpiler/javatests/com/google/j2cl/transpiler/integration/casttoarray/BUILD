@@ -12,5 +12,4 @@ load(
 integration_test(
     name = "casttoarray",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
 )

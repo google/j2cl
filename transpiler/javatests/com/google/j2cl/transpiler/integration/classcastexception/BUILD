@@ -12,7 +12,6 @@ load(
 integration_test(
     name = "classcastexception",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
     js_deps = ["//javascript/closure/math:long"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

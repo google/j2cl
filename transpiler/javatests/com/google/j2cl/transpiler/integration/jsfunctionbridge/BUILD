@@ -13,6 +13,5 @@ load(
 integration_test(
     name = "jsfunctionbridge",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

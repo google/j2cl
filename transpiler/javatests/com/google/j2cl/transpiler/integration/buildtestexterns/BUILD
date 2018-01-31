@@ -14,10 +14,6 @@ filegroup(
 integration_test(
     name = "buildtestexterns",
     srcs = glob(["*.java"]),
-    closure_defines = {
-        "jre.checks.checkLevel": "'NORMAL'",
-        "jre.checkedMode": "'ENABLED'",
-    },
     test_externs_list = [":foo_externs"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

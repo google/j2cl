@@ -12,4 +12,8 @@ load(
 integration_test(
     name = "casttoclassdisabledresultused",
     srcs = glob(["*.java"]),
+    closure_defines = {
+        "jre.checks.type": "DISABLED",
+        "jre.checkedMode": "DISABLED",
+    },
 )

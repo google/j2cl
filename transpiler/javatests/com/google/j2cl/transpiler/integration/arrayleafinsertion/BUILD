@@ -12,5 +12,4 @@ load(
 integration_test(
     name = "arrayleafinsertion",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
 )

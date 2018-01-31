@@ -13,8 +13,4 @@ load(
 integration_test(
     name = "interfacewithfields",
     srcs = glob(["*.java"]),
-    closure_defines = {
-        "jre.checks.checkLevel": "'NORMAL'",
-        "jre.checkedMode": "'ENABLED'",
-    },
 )

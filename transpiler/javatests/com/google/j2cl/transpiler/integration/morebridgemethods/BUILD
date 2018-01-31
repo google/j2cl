@@ -13,9 +13,5 @@ load(
 integration_test(
     name = "morebridgemethods",
     srcs = glob(["*.java"]),
-    closure_defines = {
-        "jre.checks.checkLevel": "'NORMAL'",
-        "jre.checkedMode": "'ENABLED'",
-    },
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

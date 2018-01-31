@@ -13,7 +13,6 @@ load(
 integration_test(
     name = "jsinteroptests",
     srcs = glob(["**/*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
     defs = [
         # Make sure property renaming & variable renaming is turned off,
         # otherwise JsTypeTest fails since it asserts properties.

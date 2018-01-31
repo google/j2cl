@@ -76,21 +76,13 @@ def integration_test(name,
       # Cuts optimize time nearly in half and the optimization leaks that it
       # previously hid no longer exist.
       "--closure_entry_point=gen.opt.Harness",
+      # Since integration tests are used for optimized size tracking, set
+      # behavior to the mode with the smallest output size which is what we
+      # expect to be used for customer application production releases.
+      "--define=jre.checks.checkLevel=MINIMAL",
   ]
 
-  # Since integration tests are used for optimized size tracking, set
-  # behavior to the mode with the smallest output size which is what we expect
-  # will also be used for customer application production releases. If some
-  # particular test needs one of these on they can override with
-  # closure_defines.
-  defines = {
-      "jre.checks.checkLevel" : "MINIMAL",
-      "jre.checkedMode" : "DISABLED",
-  }
-
-  defines.update(closure_defines)
-
-  define_flags = ["--define=%s=%s" % (k,v) for (k,v) in defines.items()]
+  define_flags = ["--define=%s=%s" % (k,v) for (k,v) in closure_defines.items()]
 
   defs = defs + define_flags
 

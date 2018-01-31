@@ -12,4 +12,8 @@ load(
 integration_test(
     name = "arithmeticexceptiondisabledresultused",
     srcs = glob(["*.java"]),
+    closure_defines = {
+        "jre.checks.numeric": "DISABLED",
+        "jre.checkedMode": "DISABLED",
+    },
 )

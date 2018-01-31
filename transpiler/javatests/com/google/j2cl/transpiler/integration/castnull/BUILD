@@ -13,5 +13,4 @@ load(
 integration_test(
     name = "castnull",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "'ENABLED'"},
 )
