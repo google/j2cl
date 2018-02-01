@@ -1345,18 +1345,8 @@ public class CompilationUnitBuilder {
 
     private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
       Expression qualifier = convert(expression.getExpression());
-      IVariableBinding variableBinding = expression.resolveFieldBinding();
-      FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
-      // If the field is referenced like a current type field with explicit 'this' but is part of
-      // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
-      if (qualifier instanceof ThisReference
-          && !fieldDescriptor.isMemberOf(currentType.getTypeDescriptor())) {
-        qualifier =
-            convertOuterClassReference(
-                JdtUtils.findCurrentTypeBinding(expression),
-                variableBinding.getDeclaringClass(),
-                false);
-      }
+      FieldDescriptor fieldDescriptor =
+          JdtUtils.createFieldDescriptor(expression.resolveFieldBinding());
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
@@ -1634,16 +1624,6 @@ public class CompilationUnitBuilder {
       DeclaredTypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
       Expression qualifier = new ThisReference(currentTypeDescriptor);
       ITypeBinding innerTypeBinding = currentTypeBinding;
-      if (!JdtUtils.createTypeDescriptor(innerTypeBinding).hasSameRawType(currentTypeDescriptor)) {
-        // currentType is a lambda type.
-        qualifier =
-            FieldAccess.Builder.from(
-                    AstUtils.getFieldDescriptorForEnclosingInstance(
-                        currentTypeDescriptor,
-                        currentType.getEnclosingTypeDeclaration().toUnparamterizedTypeDescriptor()))
-                .setQualifier(qualifier)
-                .build();
-      }
       while (innerTypeBinding.getDeclaringClass() != null) {
         boolean found =
             strict
