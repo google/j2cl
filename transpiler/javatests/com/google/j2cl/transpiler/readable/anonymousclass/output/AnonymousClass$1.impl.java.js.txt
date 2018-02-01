@@ -11,6 +11,7 @@ const SomeClass = goog.require('com.google.j2cl.transpiler.readable.anonymouscla
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -23,6 +24,9 @@ class $1 extends SomeClass {
     super();
     /** @public {AnonymousClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1 =
+        null;
+    /** @public {*} */
+    this.f_object__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1 =
         null;
   }
 
@@ -103,6 +107,8 @@ class $1 extends SomeClass {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1() {
+    this.f_object__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1 =
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1;
   }
 };
 

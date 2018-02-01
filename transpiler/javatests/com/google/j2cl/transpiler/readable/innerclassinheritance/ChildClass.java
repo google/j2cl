@@ -59,6 +59,8 @@ public class ChildClass extends ParentOuter {
 
   public void testLocalClass() {
     class LocalClass extends ChildClass {
+      Object object = this;
+
       @Override
       public void funInParentOuter() {}
 

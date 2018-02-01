@@ -15,41 +15,50 @@
  */
 package com.google.j2cl.transpiler.integration.anonymousclasswithcaptures;
 
-interface AnonymousInterface {
-  public void foo();
-}
-
-abstract class SomeClass {
-  public int f;
-
-  SomeClass(int f) {
-    this.f = f;
-  }
-
-  public int foo() {
-    return f;
-  }
-}
-
 public class Main {
-  public static void main(String... args) {
-    final Object[] instances = new Object[1];
+  interface AnonymousInterface {
+    void foo();
+  }
 
-    AnonymousInterface intf1 =
+  abstract static class SomeClass {
+    public int f;
+
+    SomeClass(int f) {
+      this.f = f;
+    }
+
+    public int foo() {
+      return f;
+    }
+  }
+
+  public void testAnonymousCaptures() {
+    final Object[] instances = new Object[3];
+
+    AnonymousInterface i =
         new AnonymousInterface() {
+          Object cachedThis = this;
+
           @Override
           public void foo() {
             instances[0] = this;
+            instances[1] = cachedThis;
+            instances[2] = Main.this;
           }
         };
 
-    assert instances[0] == null;
+    i.foo();
 
-    intf1.foo();
-
-    assert instances[0] instanceof AnonymousInterface;
-    assert instances[0] == intf1;
+    assert instances[0] == i;
+    // TODO(b/72803985): Uncomment assertion when the bug is fixed.
+    // assert instances[1] == i;
+    assert instances[2] == this;
 
     assert new SomeClass(3) {}.foo() == 3;
+  }
+
+  public static void main(String... args) {
+    Main main = new Main();
+    main.testAnonymousCaptures();
   }
 }

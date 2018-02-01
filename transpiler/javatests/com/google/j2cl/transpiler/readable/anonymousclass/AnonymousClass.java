@@ -25,6 +25,8 @@ public class AnonymousClass {
   public void main() {
     SomeClass instance =
         new SomeClass(1) {
+          Object object = this;
+
           public String foo() {
             return "a";
           }
