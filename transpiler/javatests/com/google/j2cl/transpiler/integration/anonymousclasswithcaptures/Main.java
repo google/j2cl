@@ -50,8 +50,7 @@ public class Main {
     i.foo();
 
     assert instances[0] == i;
-    // TODO(b/72803985): Uncomment assertion when the bug is fixed.
-    // assert instances[1] == i;
+    assert instances[1] == i;
     assert instances[2] == this;
 
     assert new SomeClass(3) {}.foo() == 3;

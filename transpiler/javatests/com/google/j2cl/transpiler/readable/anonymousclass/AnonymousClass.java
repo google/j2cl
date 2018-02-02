@@ -26,6 +26,7 @@ public class AnonymousClass {
     SomeClass instance =
         new SomeClass(1) {
           Object object = this;
+          Object outer = AnonymousClass.this;
 
           public String foo() {
             return "a";

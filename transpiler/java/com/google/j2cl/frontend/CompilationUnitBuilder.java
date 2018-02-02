@@ -1743,8 +1743,13 @@ public class CompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
+      ITypeBinding currentTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
+      if (expression.getQualifier() == null) {
+        // Unqualified this reference.
+        return new ThisReference(JdtUtils.createTypeDescriptor(currentTypeBinding));
+      }
       return convertOuterClassReference(
-          JdtUtils.findCurrentTypeBinding(expression), expression.resolveTypeBinding(), true);
+          currentTypeBinding, expression.getQualifier().resolveTypeBinding(), true);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {
