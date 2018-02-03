@@ -173,7 +173,7 @@ class Util {
 
   /**
    * Create a function that applies the specified jsFunctionMethod on itself,
-   * and copies {@code instance}' properties to itself.
+   * and copies `instance`' properties to itself.
    *
    * @param {Function} jsFunctionMethod
    * @param {*} instance
