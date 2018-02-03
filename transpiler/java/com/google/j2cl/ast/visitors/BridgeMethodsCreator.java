@@ -361,6 +361,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
         .setEnclosingTypeDescriptor(typeDeclaration.toUnparamterizedTypeDescriptor())
         .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setDefaultMethod(false)
         .build();
   }
 

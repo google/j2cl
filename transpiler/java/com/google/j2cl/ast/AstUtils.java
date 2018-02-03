@@ -281,6 +281,7 @@ public class AstUtils {
             .setBridge(true)
             .setAbstract(false)
             .setNative(false)
+            .setDefaultMethod(false)
             .build(),
         MethodDescriptor.Builder.from(
                 targetMethodDescriptor.specializeTypeVariables(
@@ -404,6 +405,7 @@ public class AstUtils {
             .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
+            .setDefaultMethod(false)
             .setJsInfo(JsInfo.NONE)
             .build();
 
@@ -414,6 +416,7 @@ public class AstUtils {
             .addParameterTypeDescriptors(0, sourceTypeDescriptor)
             .setStatic(true)
             .setAbstract(false)
+            .setDefaultMethod(false)
             .setJsInfo(JsInfo.NONE)
             .build();
 
@@ -1055,6 +1058,7 @@ public class AstUtils {
                     .build())
             .setStatic(true)
             .setAbstract(false)
+            .setDefaultMethod(false)
             .setJsInfo(JsInfo.NONE);
 
     if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {

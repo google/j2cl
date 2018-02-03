@@ -172,6 +172,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setAbstract(true)
             .setNative(false)
+            .setDefaultMethod(false)
             .build();
     type.addMethod(
         Method.newBuilder()

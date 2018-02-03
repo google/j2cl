@@ -642,8 +642,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       MethodDescriptor methodDescriptor = autoBuild();
 
       MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
-      if (internedMethodDescriptor != methodDescriptor) {
-        // This is a previously unseen method descriptor, make sure that it has been constructed
+      if (internedMethodDescriptor == methodDescriptor) {
+        // This method descriptor is seen for the first time, make sure that it has been constructed
         // properly.
 
         // Bridge methods cannot be abstract nor native,
@@ -661,6 +661,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         // Constructors can not be JsMethods.
         checkState(!methodDescriptor.isJsMethod() || !methodDescriptor.isConstructor());
+
+        // Default methods can not be static.
+        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isStatic());
+
+        // Default methods can not be constructors.
+        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isConstructor());
+
+        // Default methods can not be bridges.
+        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isAbstract());
+
+        // Default methods can not be abstract.
+        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isBridge());
+
+        // Default methods can only be in interfaces.
+        checkState(
+            !methodDescriptor.isDefaultMethod()
+                || methodDescriptor.getEnclosingTypeDescriptor().isInterface());
 
         // At most 1 varargs parameter.
         checkState(
