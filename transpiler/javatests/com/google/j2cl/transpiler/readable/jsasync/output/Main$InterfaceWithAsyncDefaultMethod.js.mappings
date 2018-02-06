@@ -1,0 +1,5 @@
+[@JsAsync
+    default IThenable<Integer> asyncCall() {
+      return Promise.resolve(await(Promise.resolve(5)));
+    }] => [InterfaceWithAsyncDefaultMethod.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main$InterfaceWithAsyncDefaultMethod.asyncCall__$default"
+[return Promise.resolve(await(Promise.resolve(5)));] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main$InterfaceWithAsyncDefaultMethod.asyncCall__$default"

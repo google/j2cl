@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.A
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$LambdaAdaptor$impl');
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$Overlay$impl');
 
 
 /**
@@ -38,6 +37,16 @@ class I {
   static $adapt(fn) {
     I.$clinit();
     return new $LambdaAdaptor(fn);
+  }
+
+  /**
+   * @param {I} $thisArg
+   * @return {void}
+   * @public
+   */
+  static m_bar__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
+      $thisArg) {
+    I.$clinit();
   }
 
   /**

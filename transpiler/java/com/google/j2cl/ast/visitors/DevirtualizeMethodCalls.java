@@ -100,7 +100,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
                 methodCall.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
             if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
                 enclosingTypeDescriptor)) {
-              return AstUtils.createDevirtualizedMethodCall(
+              return AstUtils.devirtualizeMethodCall(
                   methodCall,
                   devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.get(
                       enclosingTypeDescriptor));
@@ -115,7 +115,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
               // Do not devirtualize the JsFunction method.
               return methodCall;
             }
-            return AstUtils.createDevirtualizedMethodCall(methodCall, enclosingTypeDescriptor);
+            return AstUtils.devirtualizeMethodCall(methodCall, enclosingTypeDescriptor);
           }
 
           private MethodCall devirtualize(MethodCall methodCall) {

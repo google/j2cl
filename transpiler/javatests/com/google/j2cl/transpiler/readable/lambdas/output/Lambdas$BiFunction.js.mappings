@@ -9,3 +9,13 @@
     R apply(T t, U u);
 ...    }
   }] => [return /**@type {!$LambdaAdaptor<*, *, *>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<synthetic: adapt_lambda>"
+[after] => [after] "after"
+[default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+      return (t, u) -> after.apply(this.apply(t, u));
+    }] => [BiFunction.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.andThen__$default"
+[return (t, u) -> after.apply(this.apply(t, u));] => [return /**@type {BiFunction<*, *, *>} */ (BiFunction.$adapt(((/** * */ t, /** * */ u) =>{
+      return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
+    })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.andThen__$default"
+[t] => [t] "t"
+[u] => [u] "u"
+[after.apply(this.apply(t, u))] => [return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<lambda in andThen__$default>"

@@ -43,11 +43,8 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               return method;
             }
 
-            // Add the static method to current type.
-            // NOTE: The added method will be traversed, and will be skipped.
-            getCurrentType().addMethod(AstUtils.createDevirtualizedMethod(method));
-
-            return null;
+            return AstUtils.devirtualizeMethod(
+                method, method.getDescriptor().getEnclosingTypeDescriptor());
           }
 
           private boolean shouldDevirtualize(Method method) {

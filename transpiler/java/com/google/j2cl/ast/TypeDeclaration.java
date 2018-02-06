@@ -84,6 +84,7 @@ public abstract class TypeDeclaration extends Node
     return false;
   }
 
+  @Memoized
   public boolean declaresDefaultMethods() {
     return isInterface()
         && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefaultMethod);
@@ -253,7 +254,7 @@ public abstract class TypeDeclaration extends Node
   }
 
   public boolean hasOverlayImplementationType() {
-    return (isJsType() && isNative()) || declaresDefaultMethods();
+    return (isJsType() && isNative()) || (isJsFunctionInterface() && declaresDefaultMethods());
   }
 
   /**

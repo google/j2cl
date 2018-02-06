@@ -11,8 +11,6 @@ const I = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverri
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$Overlay$impl');
-
 
 /**
  * @implements {I}
@@ -66,9 +64,8 @@ class $LambdaAdaptor extends java_lang_Object {
    * @public
    */
   m_bar__() {
-    $Overlay
-        .m_bar__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
-            this);
+    I.m_bar__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
+        this);
   }
 
   /**
@@ -97,8 +94,6 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$Overlay$impl');
     java_lang_Object.$clinit();
     I.$clinit();
   }

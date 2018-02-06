@@ -52,20 +52,6 @@ class JsFunctionImplementation extends java_lang_Object {
   }
 
   /**
-   * @this {?function(number):number}
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  m_foo__int(a) {
-    return a +
-        JsFunctionImplementation
-            .m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(
-                this) +
-        this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
-  }
-
-  /**
    * @param {?function(number):number} $thisArg
    * @return {number}
    * @public
@@ -88,6 +74,20 @@ class JsFunctionImplementation extends java_lang_Object {
                .m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(
                    $thisArg) +
         $thisArg(1);
+  }
+
+  /**
+   * @this {?function(number):number}
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_foo__int(a) {
+    return a +
+        JsFunctionImplementation
+            .m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(
+                this) +
+        this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
   }
 
   /**

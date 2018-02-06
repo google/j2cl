@@ -13,9 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let java_util_Comparator_$Overlay = goog.forwardDeclare('java.util.Comparator.$Overlay$impl');
 let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
-let java_util_function_Function_$Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
 let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
 let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
 let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
@@ -74,7 +72,8 @@ class NullableStringComparator extends java_lang_Object {
    * @public
    */
   m_reversed__() {
-    return java_util_Comparator_$Overlay.m_reversed__java_util_Comparator(this);
+    return /**@type {Comparator<?string>} */ (
+        Comparator.m_reversed__$default__java_util_Comparator(this));
   }
 
   /**
@@ -85,9 +84,10 @@ class NullableStringComparator extends java_lang_Object {
    * @public
    */
   m_thenComparing__java_util_Comparator(arg0) {
-    return java_util_Comparator_$Overlay
-        .m_thenComparing__java_util_Comparator__java_util_Comparator(
-            this, arg0);
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_Comparator(
+                this, arg0));
   }
 
   /**
@@ -100,8 +100,8 @@ class NullableStringComparator extends java_lang_Object {
    */
   m_thenComparing__java_util_function_Function(arg0) {
     return /**@type {Comparator<?string>} */ (
-        java_util_Comparator_$Overlay
-            .m_thenComparing__java_util_Comparator__java_util_function_Function(
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_function_Function(
                 this, arg0));
   }
 
@@ -117,8 +117,8 @@ class NullableStringComparator extends java_lang_Object {
   m_thenComparing__java_util_function_Function__java_util_Comparator(
       arg0, arg1) {
     return /**@type {Comparator<?string>} */ (
-        java_util_Comparator_$Overlay
-            .m_thenComparing__java_util_Comparator__java_util_function_Function__java_util_Comparator(
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(
                 this, arg0, arg1));
   }
 
@@ -130,9 +130,10 @@ class NullableStringComparator extends java_lang_Object {
    * @public
    */
   m_thenComparingDouble__java_util_function_ToDoubleFunction(arg0) {
-    return java_util_Comparator_$Overlay
-        .m_thenComparingDouble__java_util_Comparator__java_util_function_ToDoubleFunction(
-            this, arg0);
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction(
+                this, arg0));
   }
 
   /**
@@ -143,9 +144,10 @@ class NullableStringComparator extends java_lang_Object {
    * @public
    */
   m_thenComparingInt__java_util_function_ToIntFunction(arg0) {
-    return java_util_Comparator_$Overlay
-        .m_thenComparingInt__java_util_Comparator__java_util_function_ToIntFunction(
-            this, arg0);
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction(
+                this, arg0));
   }
 
   /**
@@ -156,9 +158,10 @@ class NullableStringComparator extends java_lang_Object {
    * @public
    */
   m_thenComparingLong__java_util_function_ToLongFunction(arg0) {
-    return java_util_Comparator_$Overlay
-        .m_thenComparingLong__java_util_Comparator__java_util_function_ToLongFunction(
-            this, arg0);
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction(
+                this, arg0));
   }
 
   /**
@@ -202,8 +205,6 @@ class NullableStringComparator extends java_lang_Object {
   static $clinit() {
     NullableStringComparator.$clinit = function() {};
     java_lang_String = goog.module.get('java.lang.String$impl');
-    java_util_Comparator_$Overlay =
-        goog.module.get('java.util.Comparator.$Overlay$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
     Comparator.$clinit();

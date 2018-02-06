@@ -81,7 +81,7 @@ public class AstUtils {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setJsInfo(JsInfo.RAW)
+        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .build();
   }
 
@@ -386,55 +386,6 @@ public class AstUtils {
   }
 
   /**
-   * Creates devirtualized method call of {@code methodCall} as method call to the static method in
-   * {@code targetTypeDescriptor} with the {@code instanceTypeDescriptor} as the first parameter
-   * type.
-   *
-   * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
-   */
-  public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall,
-      DeclaredTypeDescriptor targetTypeDescriptor,
-      TypeDescriptor sourceTypeDescriptor) {
-    MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-    checkArgument(!targetMethodDescriptor.isConstructor());
-    checkArgument(!targetMethodDescriptor.isStatic());
-
-    MethodDescriptor declarationMethodDescriptor =
-        MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationDescriptor())
-            .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .setStatic(true)
-            .setAbstract(false)
-            .setDefaultMethod(false)
-            .setJsInfo(JsInfo.NONE)
-            .build();
-
-    MethodDescriptor methodDescriptor =
-        MethodDescriptor.Builder.from(targetMethodDescriptor)
-            .setDeclarationMethodDescriptor(declarationMethodDescriptor)
-            .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .addParameterTypeDescriptors(0, sourceTypeDescriptor)
-            .setStatic(true)
-            .setAbstract(false)
-            .setDefaultMethod(false)
-            .setJsInfo(JsInfo.NONE)
-            .build();
-
-    List<Expression> arguments = methodCall.getArguments();
-    // Turn the instance into now a first parameter to the devirtualized method.
-    Expression instance = checkNotNull(methodCall.getQualifier());
-    arguments.add(0, instance);
-    // Call the method like Objects.foo(instance, ...)
-    return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
-  }
-
-  public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
-    return createDevirtualizedMethodCall(
-        methodCall, targetTypeDescriptor, methodCall.getTarget().getEnclosingTypeDescriptor());
-  }
-  
-  /**
    * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
    * expression => Integer.valueOf(expression).
    */
@@ -473,7 +424,7 @@ public class AstUtils {
     MethodCall methodCall =
         MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
-      methodCall = createDevirtualizedMethodCall(methodCall, boxType);
+      methodCall = devirtualizeMethodCall(methodCall, boxType);
     }
     return methodCall;
   }
@@ -532,28 +483,6 @@ public class AstUtils {
     Expression rightOperand = binaryExpression.getRightOperand();
     BinaryOperator operator = binaryExpression.getOperator();
 
-    return matchesBinaryNumericPromotionContext(leftOperand, operator, rightOperand);
-  }
-
-  /** See JLS 5.1. */
-  public static boolean matchesBooleanConversionContext(BinaryOperator operator) {
-    switch (operator) {
-      case CONDITIONAL_AND:
-      case CONDITIONAL_OR:
-        return true; // Booleans get these operators.
-      default:
-        return false;
-    }
-  }
-
-  /** See JLS 5.1. */
-  public static boolean matchesBooleanConversionContext(PrefixOperator operator) {
-    return operator == PrefixOperator.NOT;
-  }
-
-  /** See JLS 5.6.2. */
-  public static boolean matchesBinaryNumericPromotionContext(
-      Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
     if (!TypeDescriptors.isBoxedOrPrimitiveType(leftOperand.getTypeDescriptor())
         || !TypeDescriptors.isBoxedOrPrimitiveType(rightOperand.getTypeDescriptor())) {
       return false;
@@ -582,6 +511,22 @@ public class AstUtils {
       default:
         return false;
     }
+  }
+
+  /** See JLS 5.1. */
+  public static boolean matchesBooleanConversionContext(BinaryOperator operator) {
+    switch (operator) {
+      case CONDITIONAL_AND:
+      case CONDITIONAL_OR:
+        return true; // Booleans get these operators.
+      default:
+        return false;
+    }
+  }
+
+  /** See JLS 5.1. */
+  public static boolean matchesBooleanConversionContext(PrefixOperator operator) {
+    return operator == PrefixOperator.NOT;
   }
 
   /**
@@ -677,46 +622,6 @@ public class AstUtils {
         .setLeftOperand(expressions.get(0))
         .setOperator(operator)
         .setRightOperand(joinedExpressions)
-        .build();
-  }
-
-  public static Method createDevirtualizedMethod(Method method) {
-    checkArgument(
-        !method.getDescriptor().isJsPropertyGetter()
-            && !method.getDescriptor().isJsPropertySetter(),
-        "JsPropery getter and setters should never be devirtualized " + method);
-    checkArgument(method.getDescriptor().isPolymorphic());
-    // TODO(rluble): remove once init() function is synthesized in AST.
-    checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
-
-    final Variable thisArg =
-        Variable.newBuilder()
-            .setName("$thisArg")
-            .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor())
-            .setParameter(true)
-            .setFinal(true)
-            .build();
-
-    // Replace all 'this' references in the method with parameter references.
-    method.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteThisReference(ThisReference thisReference) {
-            return thisArg.getReference();
-          }
-        });
-
-    // MethodDescriptor for the devirtualized static method.
-    MethodDescriptor newMethodDescriptor =
-        makeDevirtualizedMethodDescriptor(method.getDescriptor());
-
-    // Add the static method to current type.
-    return Method.newBuilder()
-        .setMethodDescriptor(newMethodDescriptor)
-        .setParameters(
-            ImmutableList.<Variable>builder().add(thisArg).addAll(method.getParameters()).build())
-        .addStatements(method.getBody().getStatements())
-        .setSourcePosition(method.getSourcePosition())
         .build();
   }
 
@@ -1028,20 +933,159 @@ public class AstUtils {
   }
 
   /**
-   * Creates a devritualized static MethodDescriptor from an instance MethodDescriptor.
+   * Creates a static method in {@code targetTypeDescriptor} with the same signature and body as
+   * {@code method}.
+   */
+  public static Method createStaticOverlayMethod(
+      Method method, DeclaredTypeDescriptor targetTypeDescriptor) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    checkArgument(methodDescriptor.isStatic());
+
+    return Method.Builder.from(method)
+        .setMethodDescriptor(
+            MethodDescriptor.Builder.from(methodDescriptor)
+                .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+                .setEnclosingTypeDescriptor(targetTypeDescriptor)
+                .removeParameterOptionality()
+                .build())
+        .build();
+  }
+
+  /** Transforms {@code method} into an empty stub */
+  public static void stubMethod(Method method) {
+    // clear the method body from the original type and use a fresh list of parameters.
+    method.getBody().getStatements().clear();
+    List<Variable> newParameters = clone(method.getParameters());
+    method.getParameters().clear();
+    method.getParameters().addAll(newParameters);
+  }
+
+  /**
+   * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
+   * resulting method in {@enclosingTypeDescriptor}.
+   */
+  public static Method devirtualizeMethod(
+      Method method, DeclaredTypeDescriptor enclosingTypeDescriptor) {
+    return devirtualizeMethod(method, enclosingTypeDescriptor, Optional.empty());
+  }
+
+  /**
+   * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
+   * resulting method in {@enclosingTypeDescriptor} and adding {@code postfix} to its name to avoid
+   * possible name collisions with already existing static methods.
+   */
+  public static Method devirtualizeMethod(Method method, String postfix) {
+    checkArgument(!postfix.isEmpty());
+    return devirtualizeMethod(
+        method, method.getDescriptor().getEnclosingTypeDescriptor(), Optional.of(postfix));
+  }
+
+  /**
+   * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
+   * resulting method in according to {@code devirtualizedMethodDescriptor}.
+   */
+  private static Method devirtualizeMethod(
+      Method method, DeclaredTypeDescriptor enclosingTypeDescriptor, Optional<String> postfix) {
+    checkArgument(
+        !method.getDescriptor().isJsPropertyGetter()
+            && !method.getDescriptor().isJsPropertySetter(),
+        "JsPropery getter and setters should never be devirtualized " + method);
+    checkArgument(method.getDescriptor().isPolymorphic());
+    checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
+
+    MethodDescriptor devirtualizedMethodDescriptor =
+        devirtualizeMethodDescriptor(method.getDescriptor(), enclosingTypeDescriptor, postfix);
+
+    final Variable thisArg =
+        Variable.newBuilder()
+            .setName("$thisArg")
+            .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor())
+            .setParameter(true)
+            .setFinal(true)
+            .build();
+
+    // Replace all 'this' references in the method with parameter references.
+    method.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteThisReference(ThisReference thisReference) {
+            return thisArg.getReference();
+          }
+        });
+
+    // Add the static method to current type.
+    return Method.newBuilder()
+        .setMethodDescriptor(devirtualizedMethodDescriptor)
+        .setParameters(
+            ImmutableList.<Variable>builder().add(thisArg).addAll(method.getParameters()).build())
+        .addStatements(method.getBody().getStatements())
+        .setSourcePosition(method.getSourcePosition())
+        .build();
+  }
+
+  /**
+   * Creates devirtualized method call of {@code methodCall} as method call to the static method in
+   * {@code targetTypeDescriptor} with the {@code instanceTypeDescriptor} as the first parameter
+   * type.
+   *
+   * <p>instance.instanceMethod(a, b) => TargetType.staticMethod(instance, a, b)
+   */
+  public static MethodCall devirtualizeMethodCall(
+      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
+    return devirtualizeMethodCall(methodCall, targetTypeDescriptor, Optional.empty());
+  }
+
+  /**
+   * Creates devirtualized method call of {@code methodCall} as method call to the corresponding
+   * static method in the same type with the {@code instanceTypeDescriptor} as the first parameter
+   * type. Since the devirtualized method is in the same type a {@code postfix} is used to make sure
+   * there is no collision with an already existing static method.
+   *
+   * <p>instance.instanceMethod(a, b) => staticMethod_postfix(instance, a, b)
+   */
+  public static MethodCall devirtualizeMethodCall(MethodCall methodCall, String postfix) {
+    checkArgument(!postfix.isEmpty());
+    return devirtualizeMethodCall(
+        methodCall, methodCall.getTarget().getEnclosingTypeDescriptor(), Optional.of(postfix));
+  }
+
+  private static MethodCall devirtualizeMethodCall(
+      MethodCall methodCall,
+      DeclaredTypeDescriptor targetTypeDescriptor,
+      Optional<String> postfix) {
+    MethodDescriptor devirtualizedMethodDescriptor =
+        devirtualizeMethodDescriptor(methodCall.getTarget(), targetTypeDescriptor, postfix);
+
+    // Call the method like Objects.foo(instance, ...)
+    List<Expression> arguments =
+        ImmutableList.<Expression>builder()
+            // Turn the instance into now a first parameter to the devirtualized method.
+            .add(checkNotNull(methodCall.getQualifier()))
+            .addAll(methodCall.getArguments())
+            .build();
+    return MethodCall.Builder.from(devirtualizedMethodDescriptor).setArguments(arguments).build();
+  }
+
+  /**
+   * Creates a devirtualized static MethodDescriptor from an instance MethodDescriptor.
    *
    * <p>The static MethodDescriptor has an extra parameter as its first parameter whose type is the
    * enclosing class of {@code methodDescriptor}.
    */
-  public static MethodDescriptor makeDevirtualizedMethodDescriptor(
-      MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.isStatic() || methodDescriptor.isConstructor()) {
-      return methodDescriptor;
-    }
+  private static MethodDescriptor devirtualizeMethodDescriptor(
+      MethodDescriptor methodDescriptor,
+      DeclaredTypeDescriptor targetTypeDescriptor,
+      Optional<String> postfix) {
+    checkArgument(!methodDescriptor.isConstructor());
+    checkArgument(!methodDescriptor.isStatic());
+
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
+    String devirtualizedMethodName = methodDescriptor.getName() + postfix.orElse("");
     MethodDescriptor.Builder methodBuilder =
         MethodDescriptor.Builder.from(methodDescriptor)
+            .setName(devirtualizedMethodName)
+            .setEnclosingTypeDescriptor(targetTypeDescriptor)
             .setParameterDescriptors(
                 ImmutableList.<ParameterDescriptor>builder()
                     .add(
@@ -1059,14 +1103,17 @@ public class AstUtils {
             .setStatic(true)
             .setAbstract(false)
             .setDefaultMethod(false)
-            .setJsInfo(JsInfo.NONE);
+            .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+            .removeParameterOptionality();
 
     if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {
       methodBuilder.setDeclarationMethodDescriptor(
-          makeDevirtualizedMethodDescriptor(
+          devirtualizeMethodDescriptor(
               MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
                   .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-                  .build()));
+                  .build(),
+              targetTypeDescriptor,
+              postfix));
     }
     return methodBuilder.build();
   }

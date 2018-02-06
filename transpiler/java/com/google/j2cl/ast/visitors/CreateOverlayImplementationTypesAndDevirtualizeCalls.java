@@ -26,50 +26,62 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.InitializerBlock;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Variable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates Overlay types, bridges to overlay methods and redirects member accesses:
+ * Creates Overlay types, devirtualizes default and overlay methods and redirects member accesses:
  *
- * <p>Creates Overlay types (by moving fields and methods from the original type to the new Overlay
- * type) for JsTypes that have fields or methods and for Interfaces that have default methods.
+ * <p>For native types and JsFunction interfaces, creates overlays that will contain the overlay
+ * methods (devirtualizing them if needed) and the overlay fields.
  *
- * <p>Any references to the moved fields and methods are redirected to the new location.
+ * <p>For regular interfaces devirtualizes default methods.
  *
- * <p>When moving instance methods out of a JsType, those methods must be devirtualized. As a result
- * reference sites must be converted from instance method calls to static method calls.
+ * <p>Any references to the modified fields and methods are redirected appropriately.
  */
 public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends NormalizationPass {
+
+  private static final String DEFAULT_PREFIX = "__$default";
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     createOverlayImplementationTypes(compilationUnit);
+    devirtualizeInterfaceMethods(compilationUnit);
     compilationUnit.accept(new MemberAccessesRedirector());
   }
 
+  private void devirtualizeInterfaceMethods(CompilationUnit compilationUnit) {
+    for (Type type : compilationUnit.getTypes()) {
+      if (!type.isInterface()) {
+        continue;
+      }
+      List<Method> devirtualizedMethods = new ArrayList<>();
+      for (Method method : type.getMethods()) {
+        if (method.getDescriptor().isDefaultMethod()) {
+          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, DEFAULT_PREFIX));
+          AstUtils.stubMethod(method);
+        }
+      }
+      type.addMethods(devirtualizedMethods);
+    }
+  }
+
   private void createOverlayImplementationTypes(CompilationUnit compilationUnit) {
-    List<Type> replacementTypeList = new ArrayList<>();
+    List<Type> overlayTypes = new ArrayList<>();
 
     for (Type type : compilationUnit.getTypes()) {
-      if (!(type.getDeclaration().isNative() || type.getDeclaration().isJsFunctionInterface())) {
-        replacementTypeList.add(type);
+      if (!type.getDeclaration().hasOverlayImplementationType()) {
+        continue;
       }
-      if (type.getDeclaration().hasOverlayImplementationType()) {
-        replacementTypeList.add(createOverlayImplementationType(type));
-      }
+      overlayTypes.add(createOverlayImplementationType(type));
     }
-    compilationUnit.getTypes().clear();
-    compilationUnit.getTypes().addAll(replacementTypeList);
+    compilationUnit.getTypes().addAll(overlayTypes);
   }
 
   private static Type createOverlayImplementationType(Type type) {
@@ -84,17 +96,14 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     overlayClass.setNativeTypeDescriptor(type.getDeclaration().toUnparamterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
+      if (!member.getDescriptor().isJsOverlay()) {
+        continue;
+      }
       if (member instanceof Method) {
         Method method = (Method) member;
-        if (!method.getDescriptor().isJsOverlay() && !method.getDescriptor().isDefaultMethod()) {
-          continue;
-        }
         overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
       } else if (member instanceof Field) {
         Field field = (Field) member;
-        if (!field.getDescriptor().isJsOverlay()) {
-          continue;
-        }
         checkState(field.getDescriptor().isStatic());
         overlayClass.addField(
             Field.Builder.from(field)
@@ -105,71 +114,51 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         InitializerBlock initializerBlock = (InitializerBlock) member;
         checkState(initializerBlock.isStatic());
         overlayClass.addStaticInitializerBlock(AstUtils.clone(initializerBlock.getBlock()));
-        initializerBlock.getBlock().getStatements().clear();
       }
     }
+    type.getMembers()
+        .removeIf(member -> member.getDescriptor().isJsOverlay() || member.isInitializerBlock());
     return overlayClass;
   }
 
   private static Method createOverlayMethod(
       Method method, DeclaredTypeDescriptor overlayImplTypeDescriptor) {
-    Method statifiedMethod =
-        method.getDescriptor().isStatic() ? method : AstUtils.createDevirtualizedMethod(method);
-    Method movedMethod =
-        Method.Builder.from(statifiedMethod)
-            .setMethodDescriptor(
-                MethodDescriptor.Builder.from(statifiedMethod.getDescriptor())
-                    .setJsInfo(
-                        JsInfo.Builder.from(JsInfo.NONE)
-                            .setJsAsync(method.getDescriptor().isJsAsync())
-                            .build())
-                    .setEnclosingTypeDescriptor(overlayImplTypeDescriptor)
-                    .removeParameterOptionality()
-                    .build())
-            .build();
-
-    // clear the method body from the original type and use a fresh list of parameters.
-    method.getBody().getStatements().clear();
-    List<Variable> newParameters = AstUtils.clone(method.getParameters());
-    method.getParameters().clear();
-    method.getParameters().addAll(newParameters);
-
-    return movedMethod;
+    return method.getDescriptor().isStatic()
+        ? AstUtils.createStaticOverlayMethod(method, overlayImplTypeDescriptor)
+        : AstUtils.devirtualizeMethod(method, overlayImplTypeDescriptor);
   }
 
   /**
-   * Finds accesses to properties that have been moved to overlay classes, and rewrites the accesses
-   * to the new location.
+   * Updates all field accesses to fields that have been moved and method calls to the methods that
+   * have been moved and/or devirtualized.
    */
   private static class MemberAccessesRedirector extends AbstractRewriter {
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      MethodDescriptor methodDescriptor = methodCall.getTarget();
       DeclaredTypeDescriptor enclosingTypeDescriptor =
-          methodDescriptor.getEnclosingTypeDescriptor();
+          methodCall.getTarget().getEnclosingTypeDescriptor();
 
-      boolean targetIsJsOverlayInNativeClass =
-          (enclosingTypeDescriptor.isNative() || enclosingTypeDescriptor.isJsFunctionInterface())
-              && methodCall.getTarget().isJsOverlay();
-
-      boolean targetIsDefaultMethodAccessedStatically =
-          methodCall.getTarget().isDefaultMethod() && methodCall.isStaticDispatch();
-
-      if (targetIsDefaultMethodAccessedStatically || targetIsJsOverlayInNativeClass) {
-
-        DeclaredTypeDescriptor overlayTypeDescriptor =
-            TypeDescriptors.createOverlayImplementationTypeDescriptor(enclosingTypeDescriptor);
-        if (methodCall.getTarget().isStatic()) {
-          return MethodCall.Builder.from(methodCall)
-              .setEnclosingTypeDescriptor(overlayTypeDescriptor)
-              .setQualifier(null)
-              .build();
-        }
-        // Devirtualize *instance* JsOverlay method.
-        return AstUtils.createDevirtualizedMethodCall(methodCall, overlayTypeDescriptor);
+      if (methodCall.getTarget().isJsOverlay()) {
+        return redirectCall(
+            methodCall,
+            TypeDescriptors.createOverlayImplementationTypeDescriptor(enclosingTypeDescriptor));
       }
-
+      if (methodCall.getTarget().isDefaultMethod() && methodCall.isStaticDispatch()) {
+        // Only redirect static dispatch to default methods.
+        checkArgument(!enclosingTypeDescriptor.getTypeDeclaration().hasOverlayImplementationType());
+        return AstUtils.devirtualizeMethodCall(methodCall, DEFAULT_PREFIX);
+      }
       return methodCall;
+    }
+
+    private static Node redirectCall(MethodCall methodCall, DeclaredTypeDescriptor targetType) {
+      if (methodCall.getTarget().isStatic()) {
+        return MethodCall.Builder.from(methodCall)
+            .setEnclosingTypeDescriptor(targetType)
+            .setQualifier(null)
+            .build();
+      }
+      return AstUtils.devirtualizeMethodCall(methodCall, targetType);
     }
 
     @Override

@@ -254,7 +254,7 @@ public class TypeDescriptors {
   /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */
   public static DeclaredTypeDescriptor createOverlayImplementationTypeDescriptor(
       DeclaredTypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
+    checkArgument(typeDescriptor.isNative() || typeDescriptor.isJsFunctionInterface());
 
     TypeDeclaration overlayImplementationTypeDeclaration =
         createOverlayImplementationTypeDeclaration(typeDescriptor);

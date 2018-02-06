@@ -9,8 +9,6 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.$Overlay$impl');
-
 
 /**
  * @interface
@@ -38,6 +36,44 @@ class List {
    * @public
    */
   m_sublist__int__int(startIndex, endIndex) {}
+
+  /**
+   * @template C_List_T
+   * @param {List<C_List_T>} $thisArg
+   * @param {C_List_T} elem
+   * @return {void}
+   * @public
+   */
+  static m_add__$default__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__java_lang_Object(
+      $thisArg, elem) {
+    List.$clinit();
+  }
+
+  /**
+   * @template C_List_T
+   * @param {List<C_List_T>} $thisArg
+   * @param {Array<C_List_T>} elems
+   * @return {void}
+   * @public
+   */
+  static m_remove__$default__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__arrayOf_java_lang_Object(
+      $thisArg, elems) {
+    List.$clinit();
+  }
+
+  /**
+   * @template C_List_T
+   * @param {List<C_List_T>} $thisArg
+   * @param {number} startIndex
+   * @param {number} endIndex
+   * @return {List<C_List_T>}
+   * @public
+   */
+  static m_sublist__$default__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods_List__int__int(
+      $thisArg, startIndex, endIndex) {
+    List.$clinit();
+    return null;
+  }
 
   /**
    * Marks the provided class as implementing this interface.

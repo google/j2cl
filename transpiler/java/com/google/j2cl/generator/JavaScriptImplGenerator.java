@@ -16,7 +16,6 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
@@ -53,8 +52,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private String relativeSourceMapLocation;
   private final ClosureTypesGenerator closureTypesGenerator;
 
-  private String className;
-  private String mangledTypeName;
 
   protected final StatementTranspiler statementTranspiler;
 
@@ -62,8 +59,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
     super(problems, declareLegacyNamespace, type);
-    this.className = environment.aliasForType(type.getDeclaration());
-    this.mangledTypeName = ManglingNameUtils.getMangledName(type.getTypeDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
     this.closureTypesGenerator = new ClosureTypesGenerator(environment);
   }
@@ -270,7 +265,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeBody() {
-    sourceBuilder.append("class " + className + " " + getExtendsClause(type, environment));
+    sourceBuilder.append(
+        "class "
+            + environment.aliasForType(type.getDeclaration())
+            + " "
+            + getExtendsClause(type, environment));
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     environment.setEnclosingTypeDescriptor(type.getTypeDescriptor());
@@ -385,31 +384,32 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "/**",
         " * @public {boolean}",
         " */",
-        "classConstructor.prototype.$implements__" + mangledTypeName + " = true;");
+        "classConstructor.prototype.$implements__"
+            + ManglingNameUtils.getMangledName(type.getTypeDescriptor())
+            + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
+    if (type.getNativeTypeDescriptor() != null
+        && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
+      // JsFunction interface overlays do not need $isInstance.
+      return;
+    }
     if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sourceBuilder.appendLines(
           "/**", " * $isInstance() function implementation is provided separately.", " */");
       sourceBuilder.newLine();
       return;
     }
-    if (type.isInterface()) {
-      renderIsInstanceForInterfaceType();
-    } else {
-      checkState(type.isClass() || type.isEnum());
-      renderIsInstanceForClassType();
-    }
-  }
-
-  private void renderIsInstanceForClassType() {
     sourceBuilder.appendLines(
         "/**",
-        " * Returns whether the provided instance is an instance of this class.",
+        type.isInterface()
+            ? " * Returns whether the provided instance is of "
+                + "a class that implements this interface."
+            : " * Returns whether the provided instance is an instance of this class.",
         " * @param {*} instance",
         " * @return {boolean}",
         " * @public",
@@ -418,39 +418,40 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     if (type.getDeclaration().isJsFunctionImplementation()) {
-      sourceBuilder.appendln("return instance != null && !!instance.$is__" + mangledTypeName + ";");
+      renderIsInstanceOfJsFunctionImplementationStatement(type.getTypeDescriptor());
+    } else if (type.isJsOverlayImplementation()) {
+      if (type.isInterface()) {
+        sourceBuilder.append("return true;");
+      } else {
+        renderIsInstanceOfClassStatement(type.getNativeTypeDescriptor());
+      }
+    } else if (type.isInterface()) {
+      renderIsInstanceOfInterfaceStatement(type.getTypeDescriptor());
     } else {
-      String className =
-          environment.aliasForType(
-              type.isJsOverlayImplementation()
-                  ? type.getNativeTypeDescriptor().toRawTypeDescriptor()
-                  : type.getTypeDescriptor());
-      sourceBuilder.append("return instance instanceof " + className + ";");
+      renderIsInstanceOfClassStatement(type.getTypeDescriptor());
     }
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
-  private void renderIsInstanceForInterfaceType() {
-    sourceBuilder.appendLines(
-        "/**",
-        " * Returns whether the provided instance is of a class that implements this",
-        " * interface.",
-        " * @param {*} instance",
-        " * @return {boolean}",
-        " * @public",
-        " */",
-        "static $isInstance(instance) ");
-    sourceBuilder.openBrace();
-    sourceBuilder.newLine();
-    if (type.isJsOverlayImplementation()) {
-      sourceBuilder.append("return true;");
-    } else {
-      sourceBuilder.append(
-          "return instance != null && !!instance.$implements__" + mangledTypeName + ";");
-    }
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLines(2);
+  private void renderIsInstanceOfClassStatement(DeclaredTypeDescriptor typeDescriptor) {
+    sourceBuilder.append(
+        "return instance instanceof " + environment.aliasForType(typeDescriptor) + ";");
+  }
+
+  private void renderIsInstanceOfInterfaceStatement(DeclaredTypeDescriptor typeDescriptor) {
+    sourceBuilder.append(
+        "return instance != null && !!instance.$implements__"
+            + ManglingNameUtils.getMangledName(typeDescriptor)
+            + ";");
+  }
+
+  private void renderIsInstanceOfJsFunctionImplementationStatement(
+      DeclaredTypeDescriptor typeDescriptor) {
+    sourceBuilder.appendln(
+        "return instance != null && !!instance.$is__"
+            + ManglingNameUtils.getMangledName(typeDescriptor)
+            + ";");
   }
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.
@@ -475,13 +476,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.isInterface()) { // For interfaces
       sourceBuilder.append(
           "return classConstructor != null && !!classConstructor.prototype.$implements__"
-              + mangledTypeName
+              + ManglingNameUtils.getMangledName(type.getTypeDescriptor())
               + ";");
     } else { // For classes
       BootstrapType.NATIVE_UTIL.getDescriptor();
       String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
       sourceBuilder.append(
-          "return " + utilAlias + ".$canCastClass(classConstructor, " + className + ");");
+          "return "
+              + utilAlias
+              + ".$canCastClass(classConstructor, "
+              + environment.aliasForType(type.getDeclaration())
+              + ");");
     }
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
@@ -496,7 +501,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Copies the fields from {@code from} to {@code to}.",
-        " * @param {" + className + "} from",
+        " * @param {" + environment.aliasForType(type.getDeclaration()) + "} from",
         " * @param {*} to",
         " * @public",
         " */",
@@ -510,13 +515,19 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     sourceBuilder.appendLines(
         "// Marks the object is an instance of this class.",
-        "to.$is__" + mangledTypeName + " = true;");
+        "to.$is__" + ManglingNameUtils.getMangledName(type.getTypeDescriptor()) + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
+    if (type.getNativeTypeDescriptor() != null
+        && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
+      // JsFunction interface overlays do not need class metadata.
+      return;
+    }
+
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
 
     String name = null;
@@ -527,6 +538,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
+    String className = environment.aliasForType(type.getDeclaration());
     if (type.isInterface()) {
       sourceBuilder.appendln(
           utilAlias
@@ -553,7 +565,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // Set this method to reference an empty function so that it will not be executed again.
     sourceBuilder.newLine();
-    sourceBuilder.append(className + ".$clinit = function() {};");
+    sourceBuilder.append(
+        environment.aliasForType(type.getDeclaration()) + ".$clinit = function() {};");
 
     // goog.module.get(...) for lazy imports.
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.RUNTIME))) {
@@ -622,6 +635,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.isJsOverlayImplementation()) {
       return; // Do nothing
     }
+
+    String className = environment.aliasForType(type.getDeclaration());
     if (type.isInterface()) {
       // TODO(b/20102666): remove cast after b/20102666 is handled in Closure.
       sourceBuilder.appendln(
@@ -650,6 +665,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       return;
     }
 
+    String className = environment.aliasForType(type.getDeclaration());
     sourceBuilder.appendln("/* NATIVE.JS EPILOG */");
     sourceBuilder.newLine();
 
@@ -684,7 +700,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderExports() {
-    sourceBuilder.appendLines("/**", " * Export class.", " */", "exports = " + className + ";");
+    sourceBuilder.appendLines(
+        "/**",
+        " * Export class.",
+        " */",
+        "exports = " + environment.aliasForType(type.getDeclaration()) + ";");
     sourceBuilder.newLine();
   }
 

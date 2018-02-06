@@ -56,20 +56,6 @@ class TIntegerJsBiFunction extends java_lang_Object {
   }
 
   /**
-   * Bridge method.
-   * @this {?function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T}
-   * @param {*} arg0
-   * @param {(Number|number)} arg1
-   * @return {C_TIntegerJsBiFunction_T}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
-    return TIntegerJsBiFunction
-        .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
-            this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
-  }
-
-  /**
    * @template C_TIntegerJsBiFunction_T
    * @param {?function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T} $thisArg
    * @param {C_TIntegerJsBiFunction_T} element
@@ -81,6 +67,20 @@ class TIntegerJsBiFunction extends java_lang_Object {
       $thisArg, element, i) {
     TIntegerJsBiFunction.$clinit();
     return null;
+  }
+
+  /**
+   * Bridge method.
+   * @this {?function(C_TIntegerJsBiFunction_T, Integer):C_TIntegerJsBiFunction_T}
+   * @param {*} arg0
+   * @param {(Number|number)} arg1
+   * @return {C_TIntegerJsBiFunction_T}
+   * @public
+   */
+  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
+    return TIntegerJsBiFunction
+        .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
+            this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
   }
 
   /**

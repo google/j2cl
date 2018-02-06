@@ -11,10 +11,9 @@ const ArrayList = goog.require('java.util.ArrayList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
-let java_util_Collection_$Overlay = goog.forwardDeclare('java.util.Collection.$Overlay$impl');
-let java_util_List_$Overlay = goog.forwardDeclare('java.util.List.$Overlay$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
-let java_util_Spliterator_$Overlay = goog.forwardDeclare('java.util.Spliterator.$Overlay$impl');
 let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
 
 
@@ -60,7 +59,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_spliterator__() {
-    return java_util_List_$Overlay.m_spliterator__java_util_List(this);
+    return /**@type {Spliterator<?string>} */ (
+        List.m_spliterator__$default__java_util_List(this));
   }
 
   /**
@@ -70,8 +70,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_parallelStream__() {
-    return java_util_Collection_$Overlay.m_parallelStream__java_util_Collection(
-        this);
+    return /**@type {Stream<?string>} */ (
+        Collection.m_parallelStream__$default__java_util_Collection(this));
   }
 
   /**
@@ -81,7 +81,8 @@ class StringList extends ArrayList {
    * @public
    */
   m_stream__() {
-    return java_util_Collection_$Overlay.m_stream__java_util_Collection(this);
+    return /**@type {Stream<?string>} */ (
+        Collection.m_stream__$default__java_util_Collection(this));
   }
 
   /**
@@ -110,9 +111,8 @@ class StringList extends ArrayList {
    */
   static $clinit() {
     StringList.$clinit = function() {};
-    java_util_Collection_$Overlay =
-        goog.module.get('java.util.Collection.$Overlay$impl');
-    java_util_List_$Overlay = goog.module.get('java.util.List.$Overlay$impl');
+    Collection = goog.module.get('java.util.Collection$impl');
+    List = goog.module.get('java.util.List$impl');
     ArrayList.$clinit();
   }
 

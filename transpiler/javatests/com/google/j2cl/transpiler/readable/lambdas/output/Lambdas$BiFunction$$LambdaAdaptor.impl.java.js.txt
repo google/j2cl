@@ -11,7 +11,6 @@ const BiFunction = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lam
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction.$Overlay$impl');
 let com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 
 
@@ -75,8 +74,8 @@ class $LambdaAdaptor extends java_lang_Object {
   m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
       arg0) {
     return /**@type {BiFunction<C_BiFunction_T, C_BiFunction_U, *>} */ (
-        $Overlay
-            .m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
+        BiFunction
+            .m_andThen__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
                 this, arg0));
   }
 
@@ -106,8 +105,6 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction.$Overlay$impl');
     java_lang_Object.$clinit();
     BiFunction.$clinit();
   }
