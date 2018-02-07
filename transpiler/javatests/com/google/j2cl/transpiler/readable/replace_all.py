@@ -149,14 +149,13 @@ def gather_closure_warnings(build_log):
     # Don't write build.log files for integration tests.
     if "readable/" not in build_log_path:
       continue
-    if "\n0 error(s), 0 warning(s)" in build_log:
-      # No errors, no warnings, delete the build.log file if it exists.
-      if os.path.isfile(build_log_path):
-        run_cmd_get_output(["rm", build_log_path])
+    if os.path.isfile(build_log_path):
+      run_cmd_get_output(["rm", build_log_path])
 
-      continue
-    with open(build_log_path, "w") as build_log_file:
-      build_log_file.write(build_log)
+    if "\n0 error(s), 0 warning(s)" not in build_log:
+      # There are errors, emit the build.log file.
+      with open(build_log_path, "w") as build_log_file:
+        build_log_file.write(build_log)
 
 
 def main(unused_argv):
