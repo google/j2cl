@@ -48,6 +48,16 @@ public class TryCatch {
     }
   }
 
+  public void testTryWithResourceJava9() {
+    ClosableThing thing = new ClosableThing();
+    ClosableThing thing2 = new ClosableThing();
+    try (thing; thing2) {
+      throw new Exception();
+    } catch (Exception e) {
+      // expected empty body.
+    }
+  }
+
   public void testNestedTryCatch() {
     try {
       throw new Exception();

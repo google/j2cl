@@ -22,38 +22,33 @@ import java.util.List;
  * or close stage.
  */
 class FailableResource implements AutoCloseable {
-  public static enum FailureMode {
+  public enum FailureMode {
     None,
-    Open,
-    Close
+    OnConstruction,
+    OnClose
   }
 
   List<String> orderLog;
   String name;
   FailureMode failureMode;
 
-  public FailableResource(String name, List<String> orderLog, FailureMode failureMode)
-      throws Exception {
+  public FailableResource(String name, List<String> orderLog, FailureMode failureMode) {
     this.orderLog = orderLog;
     this.name = name;
     this.failureMode = failureMode;
-    open();
-  }
-
-  public void open() throws Exception {
-    if (failureMode == FailureMode.Open) {
-      orderLog.add(this.name + " throw open");
-      throw new Exception("open");
+    if (this.failureMode == FailureMode.OnConstruction) {
+      this.orderLog.add(this.name + " throw OnConstruction");
+      throw new RuntimeException("OnConstruction");
     }
-    orderLog.add(this.name + " open");
+    this.orderLog.add(this.name + " OnConstruction");
   }
 
   @Override
-  public void close() throws Exception {
-    if (failureMode == FailureMode.Close) {
-      orderLog.add(this.name + " throw close");
-      throw new Exception("close");
+  public void close() {
+    if (failureMode == FailureMode.OnClose) {
+      orderLog.add(this.name + " throw OnClose");
+      throw new RuntimeException("OnClose");
     }
-    orderLog.add(this.name + " close");
+    orderLog.add(this.name + " OnClose");
   }
 }

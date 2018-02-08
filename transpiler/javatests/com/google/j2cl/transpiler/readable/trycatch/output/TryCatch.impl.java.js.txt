@@ -129,6 +129,47 @@ class TryCatch extends java_lang_Object {
    * @return {void}
    * @public
    */
+  m_testTryWithResourceJava9__() {
+    let thing = ClosableThing.$create__();
+    let thing2 = ClosableThing.$create__();
+    try {
+      let $primaryExc = null;
+      let $resource = null;
+      let $resource$1$ = null;
+      try {
+        $resource = thing;
+        $resource$1$ = thing2;
+        throw $Exceptions.toJs(Exception.$create__());
+      } catch (__$exc) {
+        __$exc = $Exceptions.toJava(__$exc);
+        if (Throwable.$isInstance(__$exc)) {
+          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs(__$exc);
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose($resource$1$, $primaryExc);
+        $primaryExc = $Exceptions.safeClose($resource, $primaryExc);
+        if (!$Equality.$same($primaryExc, null)) {
+          throw $Exceptions.toJs($primaryExc);
+        }
+      }
+    } catch (__$exc$1$) {
+      __$exc$1$ = $Exceptions.toJava(__$exc$1$);
+      if (Exception.$isInstance(__$exc$1$)) {
+        let e = /**@type {Exception} */ (__$exc$1$);
+      } else {
+        throw $Exceptions.toJs(__$exc$1$);
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
   m_testNestedTryCatch__() {
     try {
       throw $Exceptions.toJs(Exception.$create__());

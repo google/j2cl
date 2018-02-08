@@ -17,6 +17,11 @@ load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
 load("//tools/build_rules:build_test.bzl", "build_test")
 
+JAVAC_FLAGS = [
+  "-source 9",
+  "-target 9",
+  "-XepDisableAllChecks",
+]
 
 def readable_example(
     srcs, native_srcs=[],
@@ -42,7 +47,7 @@ def readable_example(
   j2cl_library(
       name="readable",
       srcs=srcs,
-      javacopts=["-XepDisableAllChecks"],
+      javacopts=JAVAC_FLAGS,
       native_srcs=native_srcs,
       deps=deps,
       plugins=plugins,

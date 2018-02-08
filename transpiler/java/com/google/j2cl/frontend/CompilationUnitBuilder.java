@@ -1810,17 +1810,34 @@ public class CompilationUnitBuilder {
     }
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
-      List<org.eclipse.jdt.core.dom.VariableDeclarationExpression> resources =
+      List<org.eclipse.jdt.core.dom.Expression> resources =
           JdtUtils.asTypedList(statement.resources());
       List<org.eclipse.jdt.core.dom.CatchClause> catchClauses =
           JdtUtils.asTypedList(statement.catchClauses());
 
       return new TryStatement(
           getSourcePosition(statement),
-          resources.stream().map(this::convert).collect(toImmutableList()),
+          resources.stream().map(this::convert).map(this::toResource).collect(toImmutableList()),
           convert(statement.getBody()),
           catchClauses.stream().map(this::convert).collect(toImmutableList()),
           convertOrNull(statement.getFinally()));
+    }
+
+    private VariableDeclarationExpression toResource(Expression expression) {
+      if (expression instanceof VariableDeclarationExpression) {
+        return (VariableDeclarationExpression) expression;
+      }
+
+      // Create temporary variables for resources declared outside of the try statement.
+      return VariableDeclarationExpression.newBuilder()
+          .addVariableDeclaration(
+              Variable.newBuilder()
+                  .setName("$resource")
+                  .setTypeDescriptor(expression.getTypeDescriptor())
+                  .setFinal(true)
+                  .build(),
+              expression)
+          .build();
     }
 
     private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {

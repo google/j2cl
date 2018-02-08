@@ -26,11 +26,14 @@
   public void test() {
 ...  }
 }] => [this.$init__com_google_j2cl_transpiler_readable_interfacewithfields_Main();] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.<init>"
-[int a = MyInterface.a + MyInterface.b;] => [let a = MyInterface.f_a__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface + MyInterface.f_b__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface;] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
+[int a = MyInterface.A + MyInterface.B;] => [let a = MyInterface.f_A__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface + MyInterface.f_B__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface;] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
 [a] => [a] "a"
-[MyInterface intf = new MyInterface() {};] => [let intf = $1.$create__com_google_j2cl_transpiler_readable_interfacewithfields_Main(this);] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
-[intf] => [intf] "intf"
-[a = intf.a + intf.b;] => [a = (intf, MyInterface.f_a__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface) + (intf, MyInterface.f_b__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface);] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
+[MyInterface i =
+        new MyInterface() {
+...          public void g() {}
+        };] => [let i = $1.$create__com_google_j2cl_transpiler_readable_interfacewithfields_Main(this);] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
+[i] => [i] "i"
+[a = i.A + i.B;] => [a = (i, MyInterface.f_A__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface) + (i, MyInterface.f_B__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface);] "com.google.j2cl.transpiler.readable.interfacewithfields.Main.test"
 [public class Main {
   public void test() {
 ...  }

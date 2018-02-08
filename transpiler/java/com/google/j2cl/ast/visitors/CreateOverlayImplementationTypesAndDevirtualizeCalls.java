@@ -27,8 +27,10 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -47,7 +49,8 @@ import java.util.List;
  */
 public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends NormalizationPass {
 
-  private static final String DEFAULT_PREFIX = "__$default";
+  private static final String DEFAULT_POSTFIX = "__$default";
+  private static final String PRIVATE_POSTFIX = "__$private";
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -63,13 +66,34 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       }
       List<Method> devirtualizedMethods = new ArrayList<>();
       for (Method method : type.getMethods()) {
-        if (method.getDescriptor().isDefaultMethod()) {
-          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, DEFAULT_PREFIX));
+        MethodDescriptor methodDescriptor = method.getDescriptor();
+        if (methodDescriptor.isDefaultMethod()) {
+          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
           AstUtils.stubMethod(method);
+        } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
+          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
         }
       }
+      type.getMembers()
+          .removeIf(
+              CreateOverlayImplementationTypesAndDevirtualizeCalls
+                  ::isInterfacePrivateInstanceMethod);
       type.addMethods(devirtualizedMethods);
     }
+  }
+
+  private static boolean isInterfacePrivateInstanceMethod(Member member) {
+    return isInterfacePrivateInstanceMethod(member.getDescriptor());
+  }
+
+  private static boolean isInterfacePrivateInstanceMethod(MemberDescriptor memberDescriptor) {
+    if (!(memberDescriptor instanceof MethodDescriptor)) {
+      return false;
+    }
+    MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+    return methodDescriptor.getEnclosingTypeDescriptor().isInterface()
+        && methodDescriptor.getVisibility().isPrivate()
+        && !methodDescriptor.isStatic();
   }
 
   private void createOverlayImplementationTypes(CompilationUnit compilationUnit) {
@@ -113,11 +137,11 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       } else {
         InitializerBlock initializerBlock = (InitializerBlock) member;
         checkState(initializerBlock.isStatic());
-        overlayClass.addStaticInitializerBlock(AstUtils.clone(initializerBlock.getBlock()));
+        overlayClass.addStaticInitializerBlock(initializerBlock.getBlock());
       }
     }
-    type.getMembers()
-        .removeIf(member -> member.getDescriptor().isJsOverlay() || member.isInitializerBlock());
+
+    type.getMembers().removeIf(member -> member.getDescriptor().isJsOverlay());
     return overlayClass;
   }
 
@@ -135,18 +159,24 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   private static class MemberAccessesRedirector extends AbstractRewriter {
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      DeclaredTypeDescriptor enclosingTypeDescriptor =
-          methodCall.getTarget().getEnclosingTypeDescriptor();
+      MethodDescriptor methodDescriptor = methodCall.getTarget();
 
-      if (methodCall.getTarget().isJsOverlay()) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor =
+          methodDescriptor.getEnclosingTypeDescriptor();
+
+      if (methodDescriptor.isJsOverlay()) {
         return redirectCall(
             methodCall,
             TypeDescriptors.createOverlayImplementationTypeDescriptor(enclosingTypeDescriptor));
       }
-      if (methodCall.getTarget().isDefaultMethod() && methodCall.isStaticDispatch()) {
-        // Only redirect static dispatch to default methods.
+      if (methodDescriptor.isDefaultMethod() && methodCall.isStaticDispatch()) {
+        // Only redirect static dispatch to default methods, not instance dispatch.
         checkArgument(!enclosingTypeDescriptor.getTypeDeclaration().hasOverlayImplementationType());
-        return AstUtils.devirtualizeMethodCall(methodCall, DEFAULT_PREFIX);
+        return AstUtils.devirtualizeMethodCall(methodCall, DEFAULT_POSTFIX);
+      }
+      if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
+        checkArgument(!enclosingTypeDescriptor.getTypeDeclaration().hasOverlayImplementationType());
+        return AstUtils.devirtualizeMethodCall(methodCall, PRIVATE_POSTFIX);
       }
       return methodCall;
     }

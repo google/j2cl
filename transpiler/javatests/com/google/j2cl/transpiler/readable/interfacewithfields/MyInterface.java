@@ -16,6 +16,18 @@
 package com.google.j2cl.transpiler.readable.interfacewithfields;
 
 public interface MyInterface {
-  public int a = 1;
-  public static int b = 2;
+  public int A = 1;
+  public static int B = 2;
+
+  default void d() {
+    this.f();
+  }
+
+  void e();
+
+  private void f() {
+    this.e();
+  }
+
+  void g();
 }

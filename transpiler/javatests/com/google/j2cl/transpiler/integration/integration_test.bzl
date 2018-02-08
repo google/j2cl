@@ -28,8 +28,8 @@ load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
 JAVAC_FLAGS = [
-    "-source 8",
-    "-target 8",
+    "-source 9",
+    "-target 9",
     "-XepDisableAllChecks",
 ]
 

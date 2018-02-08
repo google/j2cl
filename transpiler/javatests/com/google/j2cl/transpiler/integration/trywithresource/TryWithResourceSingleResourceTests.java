@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.trywithresource;
 
 import com.google.j2cl.transpiler.integration.trywithresource.FailableResource.FailureMode;
-
 import java.util.ArrayList;
 
 public class TryWithResourceSingleResourceTests {
@@ -39,15 +38,15 @@ public class TryWithResourceSingleResourceTests {
   private static void testTryWithResourceSingleResourceInitializationFails() {
     int numCaught = 0;
     try {
-      testSingleResource(FailureMode.Open, false);
+      testSingleResource(FailureMode.OnConstruction, false);
     } catch (Exception e) {
-      assert e.getMessage().equals("open") : "Should fail to open";
+      assert e.getMessage().equals("OnConstruction") : "Should fail on construction";
       numCaught++;
     }
     try {
-      testSingleResource(FailureMode.Open, true);
+      testSingleResource(FailureMode.OnConstruction, true);
     } catch (Exception e) {
-      assert e.getMessage().equals("open") : "Should fail to open";
+      assert e.getMessage().equals("OnConstruction") : "Should fail on construction";
       numCaught++;
     }
     assert numCaught == 2 : "Should have thrown an exception in every case.";
@@ -73,11 +72,11 @@ public class TryWithResourceSingleResourceTests {
     // then the try-with-resources statement completes abruptly because of a throw of value V with
     // V2 added to the suppressed exception list of V.
     try {
-      testSingleResource(FailureMode.Close, true);
+      testSingleResource(FailureMode.OnClose, true);
     } catch (Exception e) {
       assert e.getMessage().equals("try") : "Should fail to complete try block.";
       assert e.getSuppressed().length == 1;
-      assert e.getSuppressed()[0].getMessage().equals("close");
+      assert e.getSuppressed()[0].getMessage().equals("OnClose");
       numCaught++;
     }
     assert numCaught == 2 : "Should have thrown an exception in every case.";
@@ -91,9 +90,9 @@ public class TryWithResourceSingleResourceTests {
   private static void testTryWithResourceSingleResourceCloseFails() {
     int numCaught = 0;
     try {
-      testSingleResource(FailureMode.Close, false);
+      testSingleResource(FailureMode.OnClose, false);
     } catch (Exception e) {
-      assert e.getMessage().equals("close") : "Should fail to close resource.";
+      assert e.getMessage().equals("OnClose") : "Should fail to close resource.";
       numCaught++;
     }
     assert numCaught == 1 : "Should have thrown an exception.";

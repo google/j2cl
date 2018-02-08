@@ -168,6 +168,106 @@
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
+[ClosableThing thing = new ClosableThing();] => [let thing = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[thing] => [thing] "thing"
+[ClosableThing thing2 = new ClosableThing();] => [let thing2 = ClosableThing.$create__();] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[thing2] => [thing2] "thing2"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [try {
+      let $primaryExc = null;
+...      }
+    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $primaryExc = null;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $resource = null;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $resource$1$ = null;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [try {
+        $resource = thing;
+...        }
+      }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$resource = thing;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$resource$1$ = thing2;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [if (Throwable.$isInstance(__$exc)) {
+          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
+...          throw $Exceptions.toJs(__$exc);
+        }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $exceptionFromTry;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose($resource$1$, $primaryExc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose($resource, $primaryExc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [if (!$Equality.$same($primaryExc, null)) {
+          throw $Exceptions.toJs($primaryExc);
+        }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($primaryExc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [if (Exception.$isInstance(__$exc$1$)) {
+        let e = /**@type {Exception} */ (__$exc$1$);
+...        throw $Exceptions.toJs(__$exc$1$);
+      }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [let e = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+[e] => [e] "e"
+[{
+      // expected empty body.
+    }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
 [try {
       throw new Exception();
 ...      }

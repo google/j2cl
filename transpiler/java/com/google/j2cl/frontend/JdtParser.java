@@ -51,9 +51,9 @@ public class JdtParser {
 
   /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(List<String> classpathEntries, Problems problems) {
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, "1.8");
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, "1.8");
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, "1.8");
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_9);
 
     this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
@@ -107,7 +107,7 @@ public class JdtParser {
   }
 
   private ASTParser newASTParser(boolean resolveBinding) {
-    ASTParser parser = ASTParser.newParser(AST.JLS8);
+    ASTParser parser = ASTParser.newParser(AST.JLS9);
 
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(resolveBinding);
