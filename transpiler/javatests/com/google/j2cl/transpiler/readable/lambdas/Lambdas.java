@@ -203,7 +203,6 @@ public class Lambdas {
     void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
   }
 
-  // @Nullable
   private static IdentityFunction identityFunction = null;
 
   /** Returns the identity function. */

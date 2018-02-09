@@ -22,7 +22,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtilConstants;
@@ -65,7 +64,6 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -100,9 +98,7 @@ class JdtUtils {
         createDeclaredTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
-    TypeDescriptor thisTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            variableBinding.getType(), variableBinding.getAnnotations());
+    TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
 
     if (variableBinding.isEnumConstant()) {
       // Enum fields are always non-nullable.
@@ -135,11 +131,7 @@ class JdtUtils {
   public static Variable createVariable(
       SourcePosition sourcePosition, IVariableBinding variableBinding) {
     String name = variableBinding.getName();
-    TypeDescriptor typeDescriptor =
-        variableBinding.isParameter()
-            ? createTypeDescriptorWithNullability(
-                variableBinding.getType(), variableBinding.getAnnotations())
-            : createTypeDescriptor(variableBinding.getType());
+    TypeDescriptor typeDescriptor = createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
     boolean isUnusableByJsSuppressed =
@@ -380,17 +372,6 @@ class JdtUtils {
 
   /** Creates a TypeDescriptor from a JDT TypeBinding. */
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
-  }
-
-  /**
-   * Creates a type descriptor for the given type binding, taking into account nullability.
-   *
-   * @param typeBinding the type binding, used to create the type descriptor.
-   * @param elementAnnotations the annotations on the element
-   */
-  private static TypeDescriptor createTypeDescriptorWithNullability(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     if (typeBinding == null) {
       return null;
     }
@@ -411,7 +392,7 @@ class JdtUtils {
       return createTypeVariable(typeBinding);
     }
 
-    boolean isNullable = isNullable(typeBinding, elementAnnotations);
+    boolean isNullable = isNullable(typeBinding);
     if (typeBinding.isArray()) {
       TypeDescriptor componentTypeDescriptor = createTypeDescriptor(typeBinding.getComponentType());
       return ArrayTypeDescriptor.newBuilder()
@@ -460,12 +441,8 @@ class JdtUtils {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
-  /**
-   * Returns whether the given type binding should be nullable, according to the annotations on it
-   * and if nullability is enabled for the package containing the binding.
-   */
-  private static boolean isNullable(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+  /** Returns whether the given type binding should be nullable. */
+  private static boolean isNullable(ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isPrimitive());
 
     if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
@@ -473,25 +450,7 @@ class JdtUtils {
       return true;
     }
 
-    if (JsInteropAnnotationUtils.hasJsNonNullAnnotation(typeBinding)) {
-      return false;
-    }
-
-    // TODO(b/70164536): Deprecate non J2CL-specific nullability annotations.
-    Iterable<IAnnotationBinding> allAnnotations =
-        Iterables.concat(
-            Arrays.asList(elementAnnotations),
-            Arrays.asList(typeBinding.getTypeAnnotations()),
-            Arrays.asList(typeBinding.getAnnotations()));
-    for (IAnnotationBinding annotation : allAnnotations) {
-      String annotationName = annotation.getName();
-
-      if (annotationName.equalsIgnoreCase("Nonnull")) {
-        return false;
-      }
-    }
-
-    return true;
+    return !JsInteropAnnotationUtils.hasJsNonNullAnnotation(typeBinding);
   }
 
   /**
@@ -715,9 +674,7 @@ class JdtUtils {
     boolean isConstructor = methodBinding.isConstructor();
     String methodName = methodBinding.getName();
 
-    TypeDescriptor returnTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            methodBinding.getReturnType(), methodBinding.getAnnotations());
+    TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {
@@ -734,10 +691,7 @@ class JdtUtils {
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
       parameterDescriptorBuilder.add(
           ParameterDescriptor.newBuilder()
-              .setTypeDescriptor(
-                  createTypeDescriptorWithNullability(
-                      methodBinding.getParameterTypes()[i],
-                      methodBinding.getParameterAnnotations(i)))
+              .setTypeDescriptor(createTypeDescriptor(methodBinding.getParameterTypes()[i]))
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(
                   i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
