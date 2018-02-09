@@ -1,0 +1,142 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface$$LambdaAdaptor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
+
+
+const SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Interface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @implements {SubInterface}
+ */
+class $LambdaAdaptor extends java_lang_Object {
+  /**
+   * JsConstructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function():void} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function():void} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$JsFunction(
+        fn);
+  }
+
+  /**
+   * Initialization from constructor '$LambdaAdaptor($JsFunction)'.
+   * @param {?function():void} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_interfaceMethod__() {
+    {
+      let $function =
+          this.f_$$fn__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor;
+      $function();
+    }
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_defaultMethodX__java_lang_String(arg0) {
+    SubInterface
+        .m_defaultMethodX__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
+            this, arg0);
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_defaultMethod__java_lang_Object(arg0) {
+    Interface
+        .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
+            this, arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = function() {};
+    Interface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+    java_lang_Object.$clinit();
+    SubInterface.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface_$LambdaAdaptor() {
+  }
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface$$LambdaAdaptor'));
+
+
+SubInterface.$markImplementor($LambdaAdaptor);
+
+
+/**
+ * Export class.
+ */
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Main$SubInterface$$LambdaAdaptor.js.map

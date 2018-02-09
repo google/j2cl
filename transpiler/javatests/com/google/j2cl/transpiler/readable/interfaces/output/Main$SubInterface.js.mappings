@@ -1,0 +1,18 @@
+[s] => [s] "s"
+[interface SubInterface extends Interface<String> {
+    // TODO(b/73140371): When the bug is fixed rename defaultMethodX to defaultMethod so that it
+...    }
+  }] => [SubInterface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.<synthetic: adapt_lambda>"
+[interface SubInterface extends Interface<String> {
+    // TODO(b/73140371): When the bug is fixed rename defaultMethodX to defaultMethod so that it
+...    }
+  }] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.<synthetic: adapt_lambda>"
+[s] => [s] "s"
+[default void defaultMethodX(String s) {
+      Interface.super.defaultMethod(s);
+    }] => [SubInterface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.defaultMethodX__$default"
+[Interface.super.defaultMethod(s);] => [Interface.m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object($thisArg, s);] "com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.defaultMethodX__$default"
+[interface SubInterface extends Interface<String> {
+    // TODO(b/73140371): When the bug is fixed rename defaultMethodX to defaultMethod so that it
+...    }
+  }] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.<clinit>"

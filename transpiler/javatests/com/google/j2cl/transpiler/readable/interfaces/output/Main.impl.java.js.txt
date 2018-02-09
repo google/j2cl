@@ -1,0 +1,120 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.interfaces.Main.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.interfaces.Main$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Implementor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.Implementor$impl');
+let Interface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+
+
+class Main extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Main()'.
+   * @return {!Main}
+   * @public
+   */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_interfaces_Main__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Main()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfaces_Main__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_interfaces_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testInterfaceMembers___$pp_com_google_j2cl_transpiler_readable_interfaces() {
+    let i =
+        Implementor
+            .$create__com_google_j2cl_transpiler_readable_interfaces_Main(this);
+    i.m_interfaceMethod__();
+    i.m_defaultMethod__java_lang_Object(null);
+    Interface.m_staticInterfaceMethod__();
+    let x =
+        (Implementor
+             .$create__com_google_j2cl_transpiler_readable_interfaces_Main(
+                 this),
+         Interface
+             .f_a__com_google_j2cl_transpiler_readable_interfaces_Main_Interface) +
+        Interface
+            .f_b__com_google_j2cl_transpiler_readable_interfaces_Main_Interface;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = function() {};
+    Implementor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaces.Main.Implementor$impl');
+    Interface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+    java_lang_Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_interfaces_Main() {}
+};
+
+$Util.$setClassMetadata(
+    Main,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfaces.Main'));
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;
+//# sourceMappingURL=Main.js.map

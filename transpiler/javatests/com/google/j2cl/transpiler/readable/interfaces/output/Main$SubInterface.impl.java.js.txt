@@ -1,0 +1,118 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
+
+
+const Interface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @interface
+ * @extends {Interface<?string>}
+ */
+class SubInterface {
+  /**
+   * @param {?string} s
+   * @return {void}
+   * @public
+   */
+  m_defaultMethodX__java_lang_String(s) {}
+
+  /**
+   * @param {?function():void} fn
+   * @return {SubInterface}
+   * @public
+   */
+  static $adapt(fn) {
+    SubInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  /**
+   * @param {SubInterface} $thisArg
+   * @param {?string} s
+   * @return {void}
+   * @public
+   */
+  static m_defaultMethodX__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
+      $thisArg, s) {
+    SubInterface.$clinit();
+    Interface
+        .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
+            $thisArg, s);
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    Interface.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SubInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
+    Interface.$clinit();
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    SubInterface,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface'));
+
+
+SubInterface.$markImplementor(/** @type {Function} */ (SubInterface));
+
+
+/**
+ * Export class.
+ */
+exports = SubInterface;
+//# sourceMappingURL=Main$SubInterface.js.map

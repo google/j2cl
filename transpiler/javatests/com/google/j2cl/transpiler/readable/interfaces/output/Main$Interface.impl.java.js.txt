@@ -1,0 +1,154 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.interfaces.Main$Interface.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.Interface.$LambdaAdaptor$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+
+/**
+ * @interface
+ * @template C_Interface_T
+ */
+class Interface {
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  m_interfaceMethod__() {}
+
+  /**
+   * @param {C_Interface_T} t
+   * @return {void}
+   * @public
+   */
+  m_defaultMethod__java_lang_Object(t) {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_staticInterfaceMethod__() {
+    Interface.$clinit();
+  }
+
+  /**
+   * @template C_Interface_T
+   * @param {?function():void} fn
+   * @return {Interface<C_Interface_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    Interface.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * @template C_Interface_T
+   * @param {Interface<C_Interface_T>} $thisArg
+   * @param {C_Interface_T} t
+   * @return {void}
+   * @public
+   */
+  static m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
+      $thisArg, t) {
+    Interface.$clinit();
+    Interface
+        .m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object_$p_com_google_j2cl_transpiler_readable_interfaces_Main_Interface(
+            $thisArg, t);
+  }
+
+  /**
+   * @template C_Interface_T
+   * @param {Interface<C_Interface_T>} $thisArg
+   * @param {C_Interface_T} t
+   * @return {void}
+   * @public
+   */
+  static m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object_$p_com_google_j2cl_transpiler_readable_interfaces_Main_Interface(
+      $thisArg, t) {
+    Interface.$clinit();
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_Interface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_Interface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Interface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.interfaces.Main.Interface.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    Interface,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfaces.Main$Interface'));
+
+
+/** @public {number} @const */
+Interface.f_a__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
+    1;
+
+
+/** @public {number} @const */
+Interface.f_b__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
+    2;
+
+
+Interface.$markImplementor(/** @type {Function} */ (Interface));
+
+
+/**
+ * Export class.
+ */
+exports = Interface;
+//# sourceMappingURL=Main$Interface.js.map
