@@ -270,14 +270,14 @@ class CastPrimitives extends java_lang_Object {
     }
     {
       tlong = $Primitives.$widenIntToLong(fint);
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong((fint)));
-      tlong = $LongUtils.$leftShift(tlong, (fint));
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));
+      tlong = $LongUtils.$leftShift(tlong, fint);
     }
     {
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong((fchar)));
-      tlong = $LongUtils.$plus(tlong, (flong));
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));
+      tlong = $LongUtils.$plus(tlong, flong);
       tlong = $Primitives.$narrowFloatToLong(
-          $Primitives.$widenLongToFloat(tlong) + (ffloat));
+          $Primitives.$widenLongToFloat(tlong) + ffloat);
     }
     {
       tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));
@@ -289,8 +289,7 @@ class CastPrimitives extends java_lang_Object {
     }
     {
       tlong = $LongUtils.$leftShift(flong, $Primitives.$narrowLongToInt(tlong));
-      tlong =
-          $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt((flong)));
+      tlong = $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt(flong));
     }
     {
       tlong = $LongUtils.$plus(

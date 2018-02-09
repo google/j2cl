@@ -78,7 +78,7 @@ class ImplicitParenthesis extends java_lang_Object {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt = (boxedInt = Integer.m_valueOf__int(
-                          boxedInt.m_intValue__() + (primitiveInt)))
+                          boxedInt.m_intValue__() + primitiveInt))
                          .m_intValue__();
       $Asserts.$assert(primitiveInt == 15);
     }

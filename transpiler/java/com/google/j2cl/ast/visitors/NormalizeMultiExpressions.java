@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
@@ -30,6 +31,8 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayList;
@@ -129,16 +132,24 @@ public class NormalizeMultiExpressions extends NormalizationPass {
       //
       // That being said, @JsProperty setters are not allowed to return a type other than void;
       // so currently there is no syntactic way to get into this situation.
-      // TODO(b/67998290): Replace the return with the following lines if we ever allow non
-      // void @JsProperty setters.
-      // Invocation invocation = (Invocation) expression;
-      // return true; !invocation.getTarget().isJsPropertySetter();
       return true;
     } else if (expression instanceof FieldAccess) {
       // Field accesses are always safe to unparenthesize.
       return true;
     } else if (expression instanceof Literal) {
       // Literals are always safe to unparenthesize.
+      return true;
+    } else if (expression instanceof VariableReference) {
+      // Variable references are always safe to unparenthesize.
+      return true;
+    } else if (expression instanceof ArrayAccess) {
+      // Array access are always safe to unparenthesize.
+      return true;
+    } else if (expression instanceof SuperReference) {
+      // "super" is always safe to unparenthesize.
+      return true;
+    } else if (expression instanceof ThisReference) {
+      // "this" is always safe to unparenthesize.
       return true;
     }
     return false;

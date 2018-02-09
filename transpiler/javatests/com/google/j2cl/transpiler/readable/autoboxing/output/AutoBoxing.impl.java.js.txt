@@ -467,31 +467,31 @@ class AutoBoxing extends java_lang_Object {
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
              !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean((boxB2)))));
+                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     let boxB = null;
@@ -502,14 +502,13 @@ class AutoBoxing extends java_lang_Object {
     if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
     }
     let b = false;
-    b =
-        !!(b |
-           Boolean.m_booleanValue__java_lang_Boolean((
-               boxB = !!(
-                   Boolean.m_booleanValue__java_lang_Boolean(boxB) |
-                   (b = !!(
-                        b |
-                        Boolean.m_booleanValue__java_lang_Boolean((boxB))))))));
+    b = !!(
+        b |
+        Boolean.m_booleanValue__java_lang_Boolean(
+            (boxB = !!(
+                 Boolean.m_booleanValue__java_lang_Boolean(boxB) |
+                 (b = !!(
+                      b | Boolean.m_booleanValue__java_lang_Boolean(boxB)))))));
   }
 
   /**

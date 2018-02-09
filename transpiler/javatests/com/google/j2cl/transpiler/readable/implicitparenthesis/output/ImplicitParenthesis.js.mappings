@@ -42,7 +42,7 @@
 [assert primitiveInt == 15;] => [$Asserts.$assert(primitiveInt == 15);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = 5;] => [primitiveInt = 5;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
-[primitiveInt = boxedInt += primitiveInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + (primitiveInt))).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
+[primitiveInt = boxedInt += primitiveInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + primitiveInt)).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [assert primitiveInt == 15;] => [$Asserts.$assert(primitiveInt == 15);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = 5;] => [primitiveInt = 5;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
