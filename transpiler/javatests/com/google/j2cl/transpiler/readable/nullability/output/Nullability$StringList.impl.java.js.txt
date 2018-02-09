@@ -1,0 +1,138 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.nullability.Nullability$StringList.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
+
+
+const ArrayList = goog.require('java.util.ArrayList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let Collection = goog.forwardDeclare('java.util.Collection$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
+
+
+/**
+ * @extends {ArrayList<?string>}
+ */
+class StringList extends ArrayList {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'StringList()'.
+   * @return {!StringList}
+   * @public
+   */
+  static $create__() {
+    StringList.$clinit();
+    let $instance = new StringList();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_StringList__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'StringList()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_StringList__() {
+    this.$ctor__java_util_ArrayList__();
+    this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability_StringList();
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @return {Spliterator<?string>}
+   * @public
+   */
+  m_spliterator__() {
+    return /**@type {Spliterator<?string>} */ (
+        List.m_spliterator__$default__java_util_List(this));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @return {Stream<?string>}
+   * @public
+   */
+  m_parallelStream__() {
+    return /**@type {Stream<?string>} */ (
+        Collection.m_parallelStream__$default__java_util_Collection(this));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @return {Stream<?string>}
+   * @public
+   */
+  m_stream__() {
+    return /**@type {Stream<?string>} */ (
+        Collection.m_stream__$default__java_util_Collection(this));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StringList;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StringList);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    StringList.$clinit = function() {};
+    Collection = goog.module.get('java.util.Collection$impl');
+    List = goog.module.get('java.util.List$impl');
+    ArrayList.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nullability_Nullability_StringList() {
+  }
+};
+
+$Util.$setClassMetadata(
+    StringList,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.nullability.Nullability$StringList'));
+
+
+
+/**
+ * Export class.
+ */
+exports = StringList;
+//# sourceMappingURL=Nullability$StringList.js.map
