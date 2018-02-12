@@ -28,6 +28,7 @@ import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
 import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
+import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
@@ -244,6 +245,7 @@ public class J2clTranspiler {
             new InsertUnsignedRightShiftCoercions(),
             new NormalizeJsFunctionPropertyInvocations(),
             new ArrayAccessNormalizer(),
+            new ImplementAssertStatements(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),

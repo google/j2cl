@@ -59,23 +59,7 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
-        builder.emitWithMapping(
-            assertStatement.getSourcePosition(),
-            () -> {
-              String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
-              if (assertStatement.getMessage() == null) {
-                builder.append(assertAlias + ".$assert(");
-                renderExpression(assertStatement.getExpression());
-                builder.append(");");
-              } else {
-                builder.append(assertAlias + ".$assertWithMessage(");
-                renderExpression(assertStatement.getExpression());
-                builder.append(", ");
-                renderExpression(assertStatement.getMessage());
-                builder.append(");");
-              }
-            });
-        return false;
+        throw new AssertionError("AssertStatement should have been normalized away.");
       }
 
       @Override

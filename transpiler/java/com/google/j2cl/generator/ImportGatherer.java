@@ -26,7 +26,6 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
@@ -96,11 +95,6 @@ class ImportGatherer extends AbstractVisitor {
 
   private ImportGatherer(boolean declareLegacyNamespace) {
     this.declareLegacyNamespace = declareLegacyNamespace;
-  }
-
-  @Override
-  public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDeclaration(BootstrapType.ASSERTS.getDeclaration(), ImportCategory.RUNTIME);
   }
 
   @Override

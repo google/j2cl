@@ -65,6 +65,11 @@ public class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to an Asserts method. */
+  public static MethodCall createAssertsMethodCall(String methodName, List<Expression> arguments) {
+    return createRuntimeMethodCall(BootstrapType.ASSERTS.getDescriptor(), methodName, arguments);
+  }
+
   /** Create a call to an Class method. */
   public static MethodCall createClassGetMethodCall(
       DeclaredTypeDescriptor parameterizedJavaLangClassTypeDescriptor, Expression... arguments) {
@@ -378,6 +383,25 @@ public class RuntimeMethods {
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.LONG)
+                                      .build())
+                              .build())
+                      .put(
+                          BootstrapType.ASSERTS.getDescriptor(),
+                          // Asserts methods
+                          ImmutableMap.<String, MethodInfo>builder()
+                              .put(
+                                  "$assert",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(PrimitiveTypes.BOOLEAN)
+                                      .build())
+                              .put(
+                                  "$assertWithMessage",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(
+                                          PrimitiveTypes.BOOLEAN,
+                                          TypeDescriptors.get().javaLangString)
                                       .build())
                               .build())
                       .build());
