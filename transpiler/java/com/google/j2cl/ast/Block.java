@@ -47,7 +47,6 @@ public class Block extends Statement {
 
   public List<Statement> getStatements() {
     return statements;
-    
   }
 
   @Override

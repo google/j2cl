@@ -343,6 +343,12 @@ public class RuntimeMethods {
                                       .setReturnType(TypeDescriptors.get().javaLangString)
                                       .setParameters(TypeDescriptors.get().javaLangString)
                                       .build())
+                              .put(
+                                  "$synchronized",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .build())
                               .build())
                       .put(
                           BootstrapType.NATIVE_EQUALITY.getDescriptor(),

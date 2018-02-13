@@ -35,7 +35,6 @@ import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.WhileStatement;
 import java.util.List;
 
@@ -236,17 +235,7 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
-        builder.emitWithMapping(
-            synchronizedStatement.getSourcePosition(),
-            () -> {
-              String utilAlias =
-                  environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-              builder.append(utilAlias + ".$synchronized(");
-              renderExpression(synchronizedStatement.getExpression());
-              builder.appendln(");");
-              render(synchronizedStatement.getBody());
-            });
-        return false;
+        throw new AssertionError("SynchronizedStatement should have been normalized away.");
       }
 
       @Override

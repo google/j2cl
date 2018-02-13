@@ -30,6 +30,7 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
+import com.google.j2cl.ast.visitors.ImplementSynchronizedStatements;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
@@ -246,6 +247,7 @@ public class J2clTranspiler {
             new NormalizeJsFunctionPropertyInvocations(),
             new ArrayAccessNormalizer(),
             new ImplementAssertStatements(),
+            new ImplementSynchronizedStatements(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),
