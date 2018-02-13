@@ -37,6 +37,16 @@ java_library(
 )
 
 java_library(
+    name = "gwt-jsinterop-annotations-j2cl",
+    exports = [":gwt-jsinterop-annotations"],
+)
+
+java_library(
+    name = "gwt-javaemul-internal-annotations-j2cl",
+    exports = ["@org_gwtproject_gwt//:gwt-javaemul-internal-annotations"],
+)
+
+java_library(
     name = "jdt-core",
     exports = [
         "@org_eclipse_jdt_compiler_apt//jar",

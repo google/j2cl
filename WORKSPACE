@@ -32,7 +32,8 @@ maven_jar(
 
 maven_jar(
     name = "com_google_jsinterop_annotations",
-    artifact = "com.google.jsinterop:jsinterop-annotations:1.0.2",
+    artifact = "com.google.jsinterop:jsinterop-annotations:HEAD-SNAPSHOT",
+    repository = "https://oss.sonatype.org/content/repositories/google-snapshots/"
 )
 
 maven_jar(
@@ -138,12 +139,8 @@ http_archive(
 
 http_archive(
     name = "io_bazel_rules_closure",
-    strip_prefix = "rules_closure-0.4.2",
-    sha256 = "25f5399f18d8bf9ce435f85c6bbf671ec4820bc4396b3022cc5dc4bc66303609",
-    urls = [
-        "http://mirror.bazel.build/github.com/bazelbuild/rules_closure/archive/0.4.2.tar.gz",
-        "https://github.com/bazelbuild/rules_closure/archive/0.4.2.tar.gz",
-    ],
+    strip_prefix = "rules_closure-master",
+    url = "https://github.com/bazelbuild/rules_closure/archive/master.zip",
 )
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
