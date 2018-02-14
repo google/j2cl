@@ -32,6 +32,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionWithComment;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
@@ -154,11 +155,13 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformCharacterLiteral(CharacterLiteral characterLiteral) {
-        sourceBuilder.append(
-            Integer.toString(characterLiteral.getValue())
-                + " /* "
-                + characterLiteral.getEscapedValue()
-                + " */");
+        throw new AssertionError("CharacterLiteral should have been normalized away.");
+      }
+
+      @Override
+      public Void transformExpressionWithComment(ExpressionWithComment expressionWithComment) {
+        process(expressionWithComment.getExpression());
+        sourceBuilder.append(" /* " + expressionWithComment.getComment() + " */");
         return null;
       }
 

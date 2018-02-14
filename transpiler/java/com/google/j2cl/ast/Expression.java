@@ -22,9 +22,7 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 public abstract class Expression extends Node implements Cloneable<Expression> {
 
-  /**
-   * Returns the type descriptor of the value that is returned by this expression.
-   */
+  /** Returns the type descriptor of the value that is returned by this expression. */
   public abstract TypeDescriptor getTypeDescriptor();
 
   /**
@@ -39,6 +37,16 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return false;
   }
 
+  /** Creates an ExpressionStatement with this expression as its code */
+  public ExpressionStatement makeStatement(SourcePosition sourcePosition) {
+    return new ExpressionStatement(sourcePosition, this);
+  }
+
+  /** Returns the expression enclosed as an expression with a comment. */
+  public ExpressionWithComment withComment(String comment) {
+    return new ExpressionWithComment(this, comment);
+  }
+
   @Override
   public abstract Expression clone();
 
@@ -47,8 +55,4 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return Visitor_Expression.visit(processor, this);
   }
 
-  public ExpressionStatement makeStatement(SourcePosition sourcePosition) {
-    ExpressionStatement statement = new ExpressionStatement(sourcePosition, this);
-    return statement;
-  }
 }

@@ -24,6 +24,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.ExpressionWithComment;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Literal;
@@ -151,6 +152,9 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     } else if (expression instanceof ThisReference) {
       // "this" is always safe to unparenthesize.
       return true;
+    } else if (expression instanceof ExpressionWithComment) {
+      // expressions with comment are safe to unparenthesize if the underlying expression is.
+      return areParenthesisUnnecessary(((ExpressionWithComment) expression).getExpression());
     }
     return false;
   }
