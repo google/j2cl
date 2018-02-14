@@ -73,12 +73,12 @@ public class JavaPreprocessor {
     }
 
     Map<String, String> compilerOptions = new HashMap<>();
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_9);
 
     // Parse the file.
-    ASTParser parser = ASTParser.newParser(AST.JLS8);
+    ASTParser parser = ASTParser.newParser(AST.JLS9);
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(false);
     parser.setSource(fileContent.toCharArray());
