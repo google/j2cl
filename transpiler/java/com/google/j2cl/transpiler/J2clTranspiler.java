@@ -30,6 +30,7 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
+import com.google.j2cl.ast.visitors.ImplementStaticInitialization;
 import com.google.j2cl.ast.visitors.ImplementSynchronizedStatements;
 import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
@@ -39,7 +40,6 @@ import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
-import com.google.j2cl.ast.visitors.InsertInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
@@ -59,6 +59,7 @@ import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeCharLiterals;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
+import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
@@ -249,6 +250,7 @@ public class J2clTranspiler {
             new ArrayAccessNormalizer(),
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),
+            new NormalizeFieldInitialization(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),
@@ -279,7 +281,7 @@ public class J2clTranspiler {
             new FixTypeVariablesInMethods(),
 
             // Perform post cleanups.
-            new InsertInitializerMethods(),
+            new ImplementStaticInitialization(),
             // Normalize multiexpressions again to remove unnecessary clutter, but run before
             // variable motion.
             new NormalizeMultiExpressions(),

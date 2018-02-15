@@ -25,6 +25,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.common.SourcePosition;
@@ -697,26 +698,15 @@ public class AstUtils {
         "$makeLambdaFunction", applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
   }
 
-  private static Expression getInitialValue(Field field) {
-    if (field.isCompileTimeConstant()) {
-      return field.getInitializer();
-    }
-    return field.getDescriptor().getTypeDescriptor().getDefaultValue();
-  }
-
   /** Returns a field declaration statement. */
   public static Statement declarationStatement(Field field, SourcePosition sourcePosition) {
-    boolean isPublic = !field.isStatic() || field.isCompileTimeConstant();
-
-    // Only skip declaration on static fields.
-    boolean skipNullInitialization =
-        field.isStatic() && getInitialValue(field) == NullLiteral.get();
+    boolean isPublic = field.getDescriptor().getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD;
 
     Expression declarationExpression =
-        skipNullInitialization
+        field.getInitializer() == null
             ? FieldAccess.newBuilder().setTargetFieldDescriptor(field.getDescriptor()).build()
             : BinaryExpression.Builder.asAssignmentTo(field)
-                .setRightOperand(getInitialValue(field))
+                .setRightOperand(field.getInitializer())
                 .build();
 
     return JsDocFieldDeclaration.newBuilder()

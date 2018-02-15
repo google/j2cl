@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
@@ -30,7 +29,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
-import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
@@ -48,10 +46,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Synthesizes static initializer (clinit) and instance initializer (init) methods and inserts calls
- * to static the static initializer where needed.
+ * Implements static initialization by synthesizing getter and setters for static fields and
+ * instrumenting static members so that static initialization (clinit) is triggered according to
+ * Java semantics.
  */
-public class InsertInitializerMethods extends NormalizationPass {
+public class ImplementStaticInitialization extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -99,52 +98,27 @@ public class InsertInitializerMethods extends NormalizationPass {
       // Synthesize static getters/setter to ensure class initialization is run on static field
       // accesses
       for (Field staticField : type.getStaticFields()) {
-        if (staticField.isCompileTimeConstant()) {
+        if (!triggersClinit(staticField.getDescriptor())) {
           continue;
         }
         synthesizePropertyGetter(type, staticField);
         synthesizePropertySetter(type, staticField);
       }
 
-      // Move field initialization to InitializerBlocks keeping them in source order.
-      List<Field> fieldDeclarations = new ArrayList<>();
+      // Replace the actual static fields with their backing fields.
       type.accept(
           new AbstractRewriter() {
             @Override
             public Member rewriteField(Field field) {
-              Expression declarationValue =
-                  field.isCompileTimeConstant() ? field.getInitializer() : null;
-              fieldDeclarations.add(
-                  Field.Builder.from(
-                          field.isStatic() && !field.isCompileTimeConstant()
-                              ? getBackingFieldDescriptor(field.getDescriptor())
-                              : field.getDescriptor())
-                      .setInitializer(declarationValue)
-                      .setSourcePosition(field.getSourcePosition())
-                      .build());
-
-              if (!field.hasInitializer() || field.isCompileTimeConstant()) {
-                // Not initialized in <clinit> nor <init>.
-                return null;
+              if (!triggersClinit(field.getDescriptor())) {
+                return field;
               }
-
-              // Replace the field declaration with an initializer block inplace to preserve
-              // ordering.
-              DeclaredTypeDescriptor enclosingTypeDescriptor =
-                  field.getDescriptor().getEnclosingTypeDescriptor();
-              return InitializerBlock.newBuilder()
-                  .setDescriptor(
-                      field.isStatic()
-                          ? AstUtils.getClinitMethodDescriptor(enclosingTypeDescriptor)
-                          : AstUtils.getInitMethodDescriptor(enclosingTypeDescriptor))
+              return Field.Builder.from(getBackingFieldDescriptor(field.getDescriptor()))
+                  .setInitializer(field.getInitializer())
                   .setSourcePosition(field.getSourcePosition())
-                  .setStatic(field.isStatic())
-                  .setBlock(createInitializerBlockFromFieldInitializer(field))
                   .build();
             }
           });
-      // Keep the fields for declaration purpose.
-      type.addFields(fieldDeclarations);
 
       // Replace field access within the class for accesses to the backing field.
       type.accept(
@@ -152,7 +126,7 @@ public class InsertInitializerMethods extends NormalizationPass {
             @Override
             public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
               FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-              if (!fieldDescriptor.isStatic() || fieldDescriptor.isCompileTimeConstant()) {
+              if (!triggersClinit(fieldDescriptor)) {
                 return fieldAccess;
               }
 
@@ -164,6 +138,10 @@ public class InsertInitializerMethods extends NormalizationPass {
             }
           });
     }
+  }
+
+  private static boolean triggersClinit(FieldDescriptor fieldDescriptor) {
+    return fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant();
   }
 
   public void synthesizePropertyGetter(Type type, Field field) {
@@ -210,20 +188,6 @@ public class InsertInitializerMethods extends NormalizationPass {
                     .build()
                     .makeStatement(field.getSourcePosition()))
             .build());
-  }
-
-  private static Block createInitializerBlockFromFieldInitializer(Field field) {
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
-    SourcePosition sourcePosition = field.getSourcePosition();
-    Block block =
-        new Block(
-            sourcePosition,
-            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
-                .setRightOperand(field.getInitializer())
-                .build()
-                .makeStatement(sourcePosition));
-    block.setSourcePosition(sourcePosition);
-    return block;
   }
 
   private static Statement createClinitClassStatement(
@@ -300,7 +264,6 @@ public class InsertInitializerMethods extends NormalizationPass {
   }
 
   private static MethodDescriptor getSetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
-    checkState(fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant());
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
         .setName(fieldDescriptor.getName())
@@ -314,7 +277,6 @@ public class InsertInitializerMethods extends NormalizationPass {
   }
 
   private static MethodDescriptor getGetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
-    checkState(fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant());
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
         .setName(fieldDescriptor.getName())
