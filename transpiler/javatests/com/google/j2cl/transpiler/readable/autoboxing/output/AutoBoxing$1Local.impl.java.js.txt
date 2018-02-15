@@ -8,10 +8,10 @@ goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$i
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('java.lang.Long$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
@@ -90,6 +90,7 @@ class $1Local extends java_lang_Object {
   static $clinit() {
     $1Local.$clinit = function() {};
     Long = goog.module.get('java.lang.Long$impl');
+    $Long = goog.module.get('nativebootstrap.Long$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     java_lang_Object.$clinit();
   }

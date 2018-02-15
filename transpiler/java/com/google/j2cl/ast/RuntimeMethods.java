@@ -148,6 +148,18 @@ public class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to a native Long method. */
+  public static MethodCall createNativeLongMethodCall(String methodName, Expression... arguments) {
+    return createNativeLongMethodCall(methodName, Arrays.asList(arguments));
+  }
+
+  /** Create a call to an native Long method. */
+  private static MethodCall createNativeLongMethodCall(
+      String methodName, List<Expression> arguments) {
+    return createRuntimeMethodCall(
+        BootstrapType.NATIVE_LONG.getDescriptor(), methodName, arguments);
+  }
+
   /** Create a call to a Primitives method. */
   public static MethodCall createPrimitivesMethodCall(String methodName, Expression... arguments) {
     return createPrimitivesMethodCall(methodName, Arrays.asList(arguments));
@@ -408,6 +420,17 @@ public class RuntimeMethods {
                                       .setParameters(
                                           PrimitiveTypes.BOOLEAN,
                                           TypeDescriptors.get().javaLangString)
+                                      .build())
+                              .build())
+                      .put(
+                          BootstrapType.NATIVE_LONG.getDescriptor(),
+                          // goog.math.long methods
+                          ImmutableMap.<String, MethodInfo>builder()
+                              .put(
+                                  "fromBits",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.LONG)
+                                      .setParameters(PrimitiveTypes.INT, PrimitiveTypes.INT)
                                       .build())
                               .build())
                       .build());

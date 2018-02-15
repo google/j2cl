@@ -56,7 +56,6 @@ import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
 import com.google.j2cl.ast.visitors.NormalizeCasts;
 import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
-import com.google.j2cl.ast.visitors.NormalizeCharLiterals;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
@@ -66,6 +65,7 @@ import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
+import com.google.j2cl.ast.visitors.NormalizeLiterals;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
@@ -259,7 +259,7 @@ public class J2clTranspiler {
             new NormalizeJsVarargs(),
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
-            new NormalizeCharLiterals(),
+            new NormalizeLiterals(),
 
             // Needs to run after passes that do code synthesis are run so that it handles the
             // synthesize code as well.

@@ -8,7 +8,6 @@ goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$impl');
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1Local = goog.forwardDeclare('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$impl');
@@ -24,6 +23,7 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let Void = goog.forwardDeclare('java.lang.Void$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -622,6 +622,7 @@ class AutoBoxing extends java_lang_Object {
     Long = goog.module.get('java.lang.Long$impl');
     Short = goog.module.get('java.lang.Short$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Long = goog.module.get('nativebootstrap.Long$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

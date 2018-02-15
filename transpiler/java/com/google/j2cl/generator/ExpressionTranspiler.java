@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -57,7 +58,6 @@ import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -244,21 +244,6 @@ public class ExpressionTranspiler {
         return null;
       }
 
-      private void renderLongNumberLiteral(NumberLiteral expression) {
-        long longValue = expression.getValue().longValue();
-        long lowOrderBits = longValue << 32 >> 32;
-        long highOrderBits = longValue >> 32;
-        sourceBuilder.append(
-            environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor())
-                + ".fromBits("
-                + lowOrderBits
-                + ", "
-                + highOrderBits
-                + ") /* "
-                + longValue
-                + " */");
-      }
-
       @Override
       public Void transformConditionalExpression(ConditionalExpression conditionalExpression) {
         process(conditionalExpression.getConditionExpression());
@@ -395,11 +380,8 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformNumberLiteral(NumberLiteral expression) {
-        if (TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor())) {
-          renderLongNumberLiteral(expression);
-        } else {
-          sourceBuilder.append(expression.getValue().toString());
-        }
+        checkState(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
+        sourceBuilder.append(expression.getValue().toString());
         return null;
       }
 
