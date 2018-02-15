@@ -40,7 +40,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -100,10 +99,6 @@ class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitField(Field field) {
     maybeAddNativeReference(field);
-    // A static long field needs to be initialized a load time which is done by code generator.
-    if (TypeDescriptors.isPrimitiveLong(field.getDescriptor().getTypeDescriptor())) {
-      addTypeDeclaration(BootstrapType.NATIVE_LONG.getDeclaration(), ImportCategory.LOADTIME);
-    }
     collectForJsDoc(field.getDescriptor().getTypeDescriptor());
   }
 
@@ -200,25 +195,13 @@ class ImportGatherer extends AbstractVisitor {
   @Override
   public void exitMethodCall(MethodCall methodCall) {
     if (methodCall.isStaticDispatch()) {
-      addTypeDeclaration(
-          methodCall.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration(),
-          ImportCategory.RUNTIME);
+      addTypeDeclaration(methodCall.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration());
     }
   }
 
   @Override
   public void exitNewInstance(NewInstance newInstance) {
-    addTypeDeclaration(
-        newInstance.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration(),
-        ImportCategory.RUNTIME);
-  }
-
-  @Override
-  public void exitNumberLiteral(NumberLiteral numberLiteral) {
-    // Long number literal are transformed by expression transpiler to use NATIVE_LONG.
-    if (TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
-      addTypeDeclaration(BootstrapType.NATIVE_LONG.getDeclaration(), ImportCategory.LOADTIME);
-    }
+    addTypeDeclaration(newInstance.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 
   @SuppressWarnings("ReferenceEquality")
@@ -231,7 +214,7 @@ class ImportGatherer extends AbstractVisitor {
       // the extern since they have a name that we should record and preserve.
       return;
     }
-    addTypeDeclaration(referencedTypeDeclaration, ImportCategory.RUNTIME);
+    addTypeDeclaration(referencedTypeDeclaration);
   }
 
   private void collectForJsDoc(TypeDescriptor typeDescriptor) {
@@ -324,6 +307,13 @@ class ImportGatherer extends AbstractVisitor {
     }
 
     collectForJsDoc(boundTypeDescriptor);
+  }
+
+  /** Adds a type declaration and figuring out whether is a LOADTIME or RUNTIME dependency. */
+  private void addTypeDeclaration(TypeDeclaration typeDeclaration) {
+    boolean isLoadTimeStatement = getCurrentMember() instanceof Field;
+    addTypeDeclaration(
+        typeDeclaration, isLoadTimeStatement ? ImportCategory.LOADTIME : ImportCategory.RUNTIME);
   }
 
   private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
