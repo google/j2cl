@@ -125,6 +125,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       renderImports();
       renderTypeAnnotation();
       renderTypeBody();
+      renderClassMetadata();
       renderStaticFieldDeclarations();
       renderMarkImplementorCalls();
       renderNativeSource();
@@ -272,7 +273,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             + getExtendsClause(type, environment));
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    environment.setEnclosingTypeDescriptor(type.getTypeDescriptor());
     renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
@@ -280,11 +280,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderCopyMethod();
     renderClinit();
     renderInitMethod();
-    environment.setEnclosingTypeDescriptor(null);
     sourceBuilder.closeBrace();
     sourceBuilder.append(";");
-    sourceBuilder.newLines(2);
-    renderClassMetadata();
     sourceBuilder.newLines(2);
   }
 
@@ -525,6 +522,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.getNativeTypeDescriptor() != null
         && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
       // JsFunction interface overlays do not need class metadata.
+      sourceBuilder.newLines(2);
       return;
     }
 
@@ -554,6 +552,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(
           utilAlias + ".$setClassMetadata(" + className + ", " + obfuscatableName + ");");
     }
+    sourceBuilder.newLines(2);
   }
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.

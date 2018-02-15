@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.HasQualifiedBinaryName;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,7 +33,6 @@ public class GenerationEnvironment {
   private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
 
   private final Map<Variable, String> aliasByVariable;
-  private TypeDescriptor enclosingTypeDescriptor;
 
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     for (Import anImport : imports) {
@@ -59,18 +57,5 @@ public class GenerationEnvironment {
         "An alias was needed for %s but no alias was found.",
         hasQualifiedBinaryName);
     return alias;
-  }
-
-  public TypeDescriptor getEnclosingTypeDescriptor() {
-    return enclosingTypeDescriptor;
-  }
-
-  /**
-   * Allows the template system to control whether static field references are generated to the
-   * wrapping getter/setter or the private data field. Makes it possible to ensure that references
-   * are direct when the reference site is internal to the same class..
-   */
-  public void setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
-    this.enclosingTypeDescriptor = enclosingTypeDescriptor;
   }
 }
