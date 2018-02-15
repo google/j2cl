@@ -34,7 +34,7 @@
 [s] => [s] "s"
 [int i = 1;] => [let i = 1;] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
 [i] => [i] "i"
-[long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
+[long l = 1L;] => [let l = $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
 [l] => [l] "l"
 [float f = 1.1f;] => [let f = 1.100000023841858;] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
 [f] => [f] "f"
@@ -202,7 +202,7 @@
 [tlong = flong + flong;] => [tlong = $LongUtils.$plus(flong, flong);] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [tlong = flong << tlong;] => [tlong = $LongUtils.$leftShift(flong, $Primitives.$narrowLongToInt(tlong));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt(flong));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
-[tlong = 0 + 1 + 2L;] => [tlong = $LongUtils.$plus($Primitives.$widenIntToLong(0 + 1), $Long.fromBits(2, 0) /* 2 */);] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
+[tlong = 0 + 1 + 2L;] => [tlong = $LongUtils.$plus($Primitives.$widenIntToLong(0 + 1), $Long.fromInt(2));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [public class CastPrimitives {
   public void testPrimitiveCasts() {
 ...  }

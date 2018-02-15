@@ -427,6 +427,12 @@ public class RuntimeMethods {
                           // goog.math.long methods
                           ImmutableMap.<String, MethodInfo>builder()
                               .put(
+                                  "fromInt",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.LONG)
+                                      .setParameters(PrimitiveTypes.INT)
+                                      .build())
+                              .put(
                                   "fromBits",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)

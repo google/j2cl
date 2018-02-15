@@ -24,7 +24,7 @@ class SimpleLongs extends java_lang_Object {
     super();
     /** @public {!$Long} */
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-        $Long.fromBits(0, 0) /* 0 */;
+        $Long.fromInt(0);
     /** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ =
         0;
@@ -78,20 +78,20 @@ class SimpleLongs extends java_lang_Object {
     let /** SimpleLongs */ $qualifier, /** !$Long */ $value,
         /** !$Long */ $value$1$, /** SimpleLongs */ $qualifier$1$,
         /** !$Long */ $value$2$;
-    let a = $Long.fromBits(0, 0) /* 0 */;
-    a = $LongUtils.$negate($Long.fromBits(100000, 0) /* 100000 */);
-    a = $Long.fromBits(100000, 0) /* 100000 */;
+    let a = $Long.fromInt(0);
+    a = $LongUtils.$negate($Long.fromInt(100000));
+    a = $Long.fromInt(100000);
     let b = $LongUtils.$negate($Long.fromBits(-2147483648, 0) /* 2147483648 */);
     b = $Long.fromBits(-2147483648, 0) /* 2147483648 */;
     b = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
     b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
     let c = $LongUtils.$plus(a, b);
     c = $LongUtils.$divide(a, b);
-    let e = a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */);
+    let e = a = $LongUtils.$plus(a, $Long.fromInt(1));
     e = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
         $LongUtils.$plus(
             this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-            $Long.fromBits(1, 0) /* 1 */);
+            $Long.fromInt(1));
     e =
         ($qualifier = this.m_getWithSideEffect__(),
          $qualifier
@@ -99,17 +99,15 @@ class SimpleLongs extends java_lang_Object {
              $LongUtils.$plus(
                  $qualifier
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $Long.fromBits(1, 0) /* 1 */));
-    let f =
-        ($value = a, a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */),
-         $value);
+                 $Long.fromInt(1)));
+    let f = ($value = a, a = $LongUtils.$plus(a, $Long.fromInt(1)), $value);
     f =
         ($value$1$ =
              this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
          this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
              $LongUtils.$plus(
                  this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $Long.fromBits(1, 0) /* 1 */),
+                 $Long.fromInt(1)),
          $value$1$);
     f =
         (($qualifier$1$ = this.m_getWithSideEffect__(),
@@ -121,7 +119,7 @@ class SimpleLongs extends java_lang_Object {
              $LongUtils.$plus(
                  $qualifier$1$
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $Long.fromBits(1, 0) /* 1 */),
+                 $Long.fromInt(1)),
          $value$2$);
     let g =
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;

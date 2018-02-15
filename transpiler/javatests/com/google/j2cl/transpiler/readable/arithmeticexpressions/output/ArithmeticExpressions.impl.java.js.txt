@@ -32,10 +32,10 @@ class ArithmeticExpressions extends java_lang_Object {
     super();
     /** @public {!$Long} */
     this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-        $Long.fromBits(0, 0) /* 0 */;
+        $Long.fromInt(0);
     /** @public {!$Long} */
     this.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-        $Long.fromBits(0, 0) /* 0 */;
+        $Long.fromInt(0);
   }
 
   /**
@@ -82,11 +82,11 @@ class ArithmeticExpressions extends java_lang_Object {
         9.223372036854778E18;
     let o = $Primitives.$coerceDivision(5 / 2) - 0.0;
     a = a << 31;
-    a = a << $Primitives.$narrowLongToInt($Long.fromBits(1, 0) /* 1 */);
-    a = $Primitives.$narrowLongToInt($LongUtils.$plus(
-        $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
-    a = $Primitives.$narrowLongToInt($LongUtils.$divide(
-        $Primitives.$widenIntToLong(a), $Long.fromBits(1, 0) /* 1 */));
+    a = a << $Primitives.$narrowLongToInt($Long.fromInt(1));
+    a = $Primitives.$narrowLongToInt(
+        $LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
+    a = $Primitives.$narrowLongToInt(
+        $LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
     a = $Primitives.$narrowDoubleToInt(
         a + Double.f_MAX_VALUE__java_lang_Double);
     k = !!(k | true);
@@ -122,17 +122,14 @@ class ArithmeticExpressions extends java_lang_Object {
     let longs = null;
     $Arrays.$set(
         longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));
-    $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
-    $Arrays.$set(
-        longs, 0, $LongUtils.$minus(longs[0], $Long.fromBits(1, 0) /* 1 */));
+    $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
+    $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     {
       let $array$1$ =
           ArithmeticExpressions
               .m_getLongArray___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
       $Arrays.$set(
-          $array$1$, 0,
-          $LongUtils.$plus($array$1$[0], $Long.fromBits(1, 0) /* 1 */));
+          $array$1$, 0, $LongUtils.$plus($array$1$[0], $Long.fromInt(1)));
     }
     let booleans = null;
     $Arrays.$set(booleans, 0, !!(booleans[0] | true));
@@ -249,20 +246,20 @@ class ArithmeticExpressions extends java_lang_Object {
     let /** number */ d;
     l = $LongUtils.$minus(
         $Primitives.$widenIntToLong(2 - boxedInteger.m_intValue__()),
-        $Long.fromBits(2, 0) /* 2 */);
+        $Long.fromInt(2));
     l = $LongUtils.$or(
         $Primitives.$widenIntToLong(2 | boxedInteger.m_intValue__()),
-        $Long.fromBits(2, 0) /* 2 */);
+        $Long.fromInt(2));
     l = $LongUtils.$times(
         $LongUtils.$times(
             $LongUtils.$times(
-                $LongUtils.$times($Long.fromBits(1000000, 0) /* 1000000 */, l),
+                $LongUtils.$times($Long.fromInt(1000000), l),
                 $Primitives.$widenIntToLong(60)),
             $Primitives.$widenIntToLong(60)),
         $Primitives.$widenIntToLong(24));
     l = $LongUtils.$times(
         $LongUtils.$times($Primitives.$widenIntToLong(24 * 60 * 60), l),
-        $Long.fromBits(1000000, 0) /* 1000000 */);
+        $Long.fromInt(1000000));
     d = $Primitives.$widenLongToDouble(l = $Primitives.$widenIntToLong(i = 20));
     l = $Primitives.$widenIntToLong(
         (boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());
@@ -378,7 +375,7 @@ class ArithmeticExpressions extends java_lang_Object {
              $LongUtils.$plus(
                  ArithmeticExpressions
                      .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
-                 $Long.fromBits(1, 0) /* 1 */),
+                 $Long.fromInt(1)),
          $value);
   }
 
@@ -397,7 +394,7 @@ class ArithmeticExpressions extends java_lang_Object {
              $LongUtils.$plus(
                  ArithmeticExpressions
                      .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
-                 $Long.fromBits(1, 0) /* 1 */),
+                 $Long.fromInt(1)),
          $value);
   }
 };
@@ -411,13 +408,13 @@ $Util.$setClassMetadata(
 /** @private {!$Long} */
 ArithmeticExpressions
     .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-    $Long.fromBits(0, 0) /* 0 */;
+    $Long.fromInt(0);
 
 
 /** @private {!$Long} */
 ArithmeticExpressions
     .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-    $Long.fromBits(0, 0) /* 0 */;
+    $Long.fromInt(0);
 
 
 

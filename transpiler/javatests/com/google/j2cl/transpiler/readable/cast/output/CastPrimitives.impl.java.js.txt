@@ -67,7 +67,7 @@ class CastPrimitives extends java_lang_Object {
     let c = 1 /* "\u0001" */;
     let s = 1;
     let i = 1;
-    let l = $Long.fromBits(1, 0) /* 1 */;
+    let l = $Long.fromInt(1);
     let f = 1.100000023841858;
     let d = 1.1;
     b = b;
@@ -293,7 +293,7 @@ class CastPrimitives extends java_lang_Object {
     }
     {
       tlong = $LongUtils.$plus(
-          $Primitives.$widenIntToLong(0 + 1), $Long.fromBits(2, 0) /* 2 */);
+          $Primitives.$widenIntToLong(0 + 1), $Long.fromInt(2));
     }
   }
 

@@ -43,14 +43,20 @@ public class NormalizeLiterals extends NormalizationPass {
             }
 
             long longValue = numberLiteral.getValue().longValue();
+            int intValue = numberLiteral.getValue().intValue();
 
-            long lowOrderBits = longValue << 32 >> 32;
-            long highOrderBits = longValue >> 32;
-            return RuntimeMethods.createNativeLongMethodCall(
-                    "fromBits",
-                    NumberLiteral.of((int) lowOrderBits),
-                    NumberLiteral.of((int) highOrderBits))
-                .withComment(String.valueOf(longValue));
+            if (longValue == intValue) {
+              return RuntimeMethods.createNativeLongMethodCall(
+                  "fromInt", NumberLiteral.of(intValue));
+            } else {
+              long lowOrderBits = longValue << 32 >> 32;
+              long highOrderBits = longValue >> 32;
+              return RuntimeMethods.createNativeLongMethodCall(
+                      "fromBits",
+                      NumberLiteral.of((int) lowOrderBits),
+                      NumberLiteral.of((int) highOrderBits))
+                  .withComment(String.valueOf(longValue));
+            }
           }
         });
   }
