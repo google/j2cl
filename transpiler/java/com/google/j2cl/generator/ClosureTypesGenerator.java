@@ -256,23 +256,12 @@ class ClosureTypesGenerator {
   private ClosureType getClosureTypeForDeclaration(
       TypeDeclaration typeDeclaration, List<ClosureType> typeParameters) {
 
-    TypeDescriptor typeDescriptor = typeDeclaration.toRawTypeDescriptor();
-    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return STRING.toNullable();
-    }
-    if (TypeDescriptors.isJavaLangObject(typeDescriptor)) {
-      return ANY.toNullable();
-    }
-    if (TypeDescriptors.isJavaLangVoid(typeDescriptor)) {
-      return VOID.toNullable();
-    }
-    if (TypeDescriptors.isJavaLangDouble(typeDescriptor)) {
-      return NUMBER.toNullable();
-    }
-    if (TypeDescriptors.isJavaLangBoolean(typeDescriptor)) {
-      return BOOLEAN.toNullable();
+    ClosureType closureType = maybeGetStandardClosureType(typeDeclaration);
+    if (closureType != null) {
+      return closureType;
     }
 
+    TypeDescriptor typeDescriptor = typeDeclaration.toRawTypeDescriptor();
     if (TypeDescriptors.isJavaLangComparable(typeDescriptor)) {
       return new ClosureUnionType(
           new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters),
@@ -315,6 +304,10 @@ class ClosureTypesGenerator {
     }
 
     return new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters);
+  }
+
+  public static ClosureType maybeGetStandardClosureType(TypeDeclaration typeDeclaration) {
+    return closureTypeByTypeDeclaration.get().get(typeDeclaration);
   }
 
   private static ClosureType withNullability(ClosureType type, boolean nullable) {
@@ -627,4 +620,17 @@ class ClosureTypesGenerator {
           .put(BOOLEAN.render(), BOOLEAN)
           .put(VOID.render(), VOID)
           .build();
+
+  /**
+   * Map from typed eclarations that are mapped into closure native types to the corresponding type
+   */
+  private static final ThreadLocal<Map<TypeDeclaration, ClosureType>> closureTypeByTypeDeclaration =
+      ThreadLocal.withInitial(
+          () ->
+              ImmutableMap.of(
+                  TypeDescriptors.get().javaLangObject.getTypeDeclaration(), ANY.toNullable(),
+                  TypeDescriptors.get().javaLangString.getTypeDeclaration(), STRING.toNullable(),
+                  TypeDescriptors.get().javaLangDouble.getTypeDeclaration(), NUMBER.toNullable(),
+                  TypeDescriptors.get().javaLangBoolean.getTypeDeclaration(), BOOLEAN.toNullable(),
+                  TypeDescriptors.get().javaLangVoid.getTypeDeclaration(), VOID.toNullable()));
 }

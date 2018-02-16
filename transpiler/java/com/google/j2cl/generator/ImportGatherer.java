@@ -262,6 +262,13 @@ class ImportGatherer extends AbstractVisitor {
 
     DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
 
+    // JsDoc for types that are mapped directly into closure types.
+    if (ClosureTypesGenerator.maybeGetStandardClosureType(
+            declaredTypeDescriptor.getTypeDeclaration())
+        != null) {
+      return;
+    }
+
     // Overlay classes may be referred directly from other compilation units that are compiled
     // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
     // original class should have a dependency on the overlay class.
