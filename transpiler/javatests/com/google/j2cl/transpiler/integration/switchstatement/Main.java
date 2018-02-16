@@ -15,8 +15,16 @@
  */
 package com.google.j2cl.transpiler.integration.switchstatement;
 
+import java.util.function.Supplier;
+
 public class Main {
   public static void main(String... args) {
+    testSwitchValues();
+    testSwitchVariableDeclarations();
+    testSwitchNull();
+  }
+
+  private static void testSwitchValues() {
     assert getStringValue("zero") == 1; // Cascade
     assert getStringValue("one") == 1;
     assert getStringValue("two") == 2;
@@ -32,12 +40,15 @@ public class Main {
     assert getIntValue(2) == 2;
     assert getIntValue(3) == 3; // Default
 
+    assert getBoxedIntValue(new Integer(0)) == 1; // Cascade
+    assert getBoxedIntValue(new Integer(1)) == 1;
+    assert getBoxedIntValue(new Integer(2)) == 2;
+    assert getBoxedIntValue(new Integer(3)) == 3; // Default
+
     assert getEnumValue(Numbers.ZERO) == 1; // Cascade
     assert getEnumValue(Numbers.ONE) == 1;
     assert getEnumValue(Numbers.TWO) == 2;
     assert getEnumValue(Numbers.THREE) == 3; // Default
-
-    testSwitchVariableDeclarations();
   }
 
   private static int getStringValue(String stringValue) {
@@ -58,6 +69,18 @@ public class Main {
       case '1':
         return 1;
       case '2':
+        return 2;
+      default:
+        return 3;
+    }
+  }
+
+  private static int getBoxedIntValue(Integer i) {
+    switch (i) {
+      case 0:
+      case 1:
+        return 1;
+      case 2:
         return 2;
       default:
         return 3;
@@ -108,5 +131,21 @@ public class Main {
         break;
     }
     assert false;
+  }
+
+  private static void testSwitchNull() {
+    assertThrowsNullPointerException(() -> getBoxedIntValue(null));
+    // TODO(b/73508132): Uncomment when the semantics of the switch statement are correct w.r.t
+    // null values.
+    // assertThrowsNullPointerException(() -> getStringValue(null));
+    // assertThrowsNullPointerException(() -> getEnumValue(null));
+  }
+
+  private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
+    try {
+      supplier.get();
+      assert false : "Should have thrown NPE";
+    } catch (NullPointerException expected) {
+    }
   }
 }
