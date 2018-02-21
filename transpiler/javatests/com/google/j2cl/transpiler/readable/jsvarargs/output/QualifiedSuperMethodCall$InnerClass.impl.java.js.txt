@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 let QualifiedSuperMethodCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$impl');
+let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -79,7 +80,7 @@ class InnerClass extends java_lang_Object {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     Main.prototype.f3.call(
         this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass,
-        1, ...$Arrays.$checkNotNull(ints));
+        1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
   /**
@@ -110,6 +111,8 @@ class InnerClass extends java_lang_Object {
     InnerClass.$clinit = function() {};
     Main = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
+    $InternalPreconditions =
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();

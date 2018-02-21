@@ -13,6 +13,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let AFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -148,9 +149,12 @@ class Main extends java_lang_Object {
     Main.f1(1);
     Main.f1(1);
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    Main.f1(1, ...$Arrays.$checkNotNull(ints));
-    Main.f1(1, ...$Arrays.$checkNotNull(ints));
-    Main.f1(1, ...$Arrays.$checkNotNull(null));
+    Main.f1(
+        1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+    Main.f1(
+        1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+    Main.f1(
+        1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(null));
   }
 
   /**
@@ -177,9 +181,10 @@ class Main extends java_lang_Object {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     let integers = /**@type {!Array<Integer>} */ ($Arrays.$init(
         [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
-    Main.f2(...$Arrays.$checkNotNull(ints));
-    Main.f2(...$Arrays.$checkNotNull(ints));
-    Main.generics(...$Arrays.$checkNotNull(integers));
+    Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+    Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+    Main.generics(
+        ...$InternalPreconditions.m_checkNotNull__java_lang_Object(integers));
   }
 
   /**
@@ -193,7 +198,7 @@ class Main extends java_lang_Object {
     m.f3(1, 1, 2);
     m.f3(1);
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f3(1, ...$Arrays.$checkNotNull(ints));
+    m.f3(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
   /**
@@ -207,7 +212,7 @@ class Main extends java_lang_Object {
     m.f4(1, 2);
     m.f4();
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f4(...$Arrays.$checkNotNull(ints));
+    m.f4(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
   /**
@@ -223,7 +228,7 @@ class Main extends java_lang_Object {
     a(0, o1, o2);
     a(0);
     let os = [o1, o2];
-    a(0, ...$Arrays.$checkNotNull(os));
+    a(0, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(os));
   }
 
   /**
@@ -232,7 +237,17 @@ class Main extends java_lang_Object {
    */
   m_testSideEffect__() {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));
+    Main.$create__int(1).f3(
+        1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testNullJsVarargs__() {
+    let ints = null;
+    Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
   /**
@@ -265,6 +280,8 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     List = goog.module.get('java.util.List$impl');
+    $InternalPreconditions =
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

@@ -294,7 +294,8 @@ public class TypeDescriptors {
     JAVA_SCRIPT_FUNCTION("vmbootstrap", "JavaScriptFunction"),
     NATIVE_EQUALITY("nativebootstrap", "Equality"),
     NATIVE_UTIL("nativebootstrap", "Util"),
-    NATIVE_LONG("nativebootstrap", "Long");
+    NATIVE_LONG("nativebootstrap", "Long"),
+    INTERNAL_PRECONDITIONS("javaemul.internal", "InternalPreconditions");
 
     private final DeclaredTypeDescriptor typeDescriptor;
 

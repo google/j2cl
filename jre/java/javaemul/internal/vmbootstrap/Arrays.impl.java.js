@@ -435,17 +435,6 @@ class Arrays {
   }
 
   /**
-   * Ensure the array is not null before returning it.
-   * @param {Array<*>} arrayOrNull
-   * @return {!Array<*>}
-   */
-  static $checkNotNull(arrayOrNull) {
-    Arrays.$clinit();
-    InternalPreconditions.m_checkNotNull__java_lang_Object(arrayOrNull);
-    return /** @type {!Array<*>} */ (arrayOrNull);
-  }
-
-  /**
    * @param {Arrays.Metadata_} metadata
    * @return {Arrays.Metadata_}
    * @private

@@ -216,4 +216,9 @@ public class Main {
     int[] ints = new int[] {1, 2};
     new Main(1).f3(1, ints);
   }
+
+  public void testNullJsVarargs() {
+    int[] ints = null;
+    Main.f2(ints);
+  }
 }

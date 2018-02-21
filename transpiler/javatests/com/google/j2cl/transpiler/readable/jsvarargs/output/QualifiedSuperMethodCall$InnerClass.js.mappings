@@ -41,7 +41,7 @@
 [QualifiedSuperMethodCall.super.f3(1, new int[] {});] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [ints] => [ints] "ints"
-[QualifiedSuperMethodCall.super.f3(1, ints);] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, ...$Arrays.$checkNotNull(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
+[QualifiedSuperMethodCall.super.f3(1, ints);] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [public class InnerClass {
     public void test() {
 ...    }

@@ -140,18 +140,18 @@ public class NormalizeJsVarargs extends NormalizationPass {
         }
       }
 
-      // Here we wrap the vararg type with $Array.$checkNotNull before applying the spread
-      // operator because the spread of a null causes a runtime exception in Javascript.
+      // Here we wrap the vararg type with InternalPreconditions.checkNotNull before applying the
+      // spread operator because the spread of a null causes a runtime exception in Javascript.
       // The reason for this is that there is a mismatch between Java varargs and Javascript varargs
       // semantics.  In Java, if you pass a null for the varargs it passes a null array rather than
       // an array with a single null object.  In Javascript however we pass the values of the
       // varargs as arguments not as an array so there is no way to express this.
-      // $checkNotNull errors out early if null is passed as a jsvararg parameter.
+      // checkNotNull errors out early if null is passed as a jsvararg parameter.
       // TODO(tdeegan): For non-nullable types we can avoid this.
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               PrefixExpression.newBuilder()
-                  .setOperand(RuntimeMethods.createArraysMethodCall("$checkNotNull", lastArgument))
+                  .setOperand(RuntimeMethods.createCheckNotNullCall(lastArgument))
                   .setOperator(PrefixOperator.SPREAD)
                   .build())
           .build();
