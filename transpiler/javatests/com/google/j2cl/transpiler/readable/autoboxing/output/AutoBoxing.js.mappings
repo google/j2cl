@@ -232,7 +232,6 @@
     }] => [switch (boxI.m_intValue__()) {
       default:
     }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
-[default:] => [default: ] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [i += boxI += i += boxI;] => [i += (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i += boxI.m_intValue__()))).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [l = l << boxL;] => [l = $LongUtils.$leftShift(l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"

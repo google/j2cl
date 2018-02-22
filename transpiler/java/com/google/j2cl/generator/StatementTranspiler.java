@@ -194,17 +194,19 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        builder.emitWithMapping(
-            switchCase.getSourcePosition(),
-            () -> {
-              if (switchCase.isDefault()) {
-                builder.append("default: ");
-              } else {
-                builder.append("case ");
-                renderExpression(switchCase.getMatchExpression());
-                builder.append(": ");
-              }
-            });
+        if (switchCase.isDefault()) {
+          builder.append("default: ");
+        } else {
+          builder.append("case ");
+          renderExpression(switchCase.getCaseExpression());
+          builder.append(": ");
+        }
+        builder.indent();
+        for (Statement statement : switchCase.getStatements()) {
+          builder.newLine();
+          render(statement);
+        }
+        builder.unindent();
         return false;
       }
 
@@ -217,16 +219,9 @@ public class StatementTranspiler {
               renderExpression(switchStatement.getSwitchExpression());
               builder.append(") ");
               builder.openBrace();
-              for (Statement statement : switchStatement.getBodyStatements()) {
-                if (statement instanceof SwitchCase) {
-                  builder.newLine();
-                  render(statement);
-                } else {
-                  builder.indent();
-                  builder.newLine();
-                  render(statement);
-                  builder.unindent();
-                }
+              for (SwitchCase switchcase : switchStatement.getCases()) {
+                builder.newLine();
+                render(switchcase);
               }
               builder.closeBrace();
             });

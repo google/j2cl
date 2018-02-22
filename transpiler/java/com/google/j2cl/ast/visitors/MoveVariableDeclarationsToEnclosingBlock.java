@@ -32,6 +32,7 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.SwitchCase;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -92,13 +93,14 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
            */
           @Override
           public void exitSwitchStatement(SwitchStatement node) {
-            for (Statement s : node.getBodyStatements()) {
-              if (s instanceof ExpressionStatement) {
-                ExpressionStatement expression = (ExpressionStatement) s;
-                if (expression.getExpression() instanceof VariableDeclarationExpression) {
-                  // Jump to the exitVariableDeclarationExpression below.
-                  relocateToEnclosingBlock(
-                      (VariableDeclarationExpression) expression.getExpression());
+            for (SwitchCase switchCase : node.getCases()) {
+              for (Statement statement : switchCase.getStatements()) {
+                if (statement instanceof ExpressionStatement) {
+                  ExpressionStatement expression = (ExpressionStatement) statement;
+                  if (expression.getExpression() instanceof VariableDeclarationExpression) {
+                    relocateToEnclosingBlock(
+                        (VariableDeclarationExpression) expression.getExpression());
+                  }
                 }
               }
             }

@@ -430,14 +430,20 @@ class ToStringRenderer {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        if (switchCase.getMatchExpression() != null) {
+        if (switchCase.getCaseExpression() != null) {
           print("case ");
-          accept(switchCase.getMatchExpression());
+          accept(switchCase.getCaseExpression());
         } else {
           print("default");
         }
-
         print(":");
+        indent();
+        for (Statement statement : switchCase.getStatements()) {
+          newLine();
+          accept(statement);
+        }
+        unIndent();
+
         return false;
       }
 
@@ -447,18 +453,10 @@ class ToStringRenderer {
         accept(switchStatement.getSwitchExpression());
         print(") {");
         indent();
-        indent();
-        for (Statement statement : switchStatement.getBodyStatements()) {
-          if (statement instanceof SwitchCase) {
-            unIndent();
-          }
+        for (SwitchCase switchCase : switchStatement.getCases()) {
           newLine();
-          accept(statement);
-          if (statement instanceof SwitchCase) {
-            indent();
-          }
+          accept(switchCase);
         }
-        unIndent();
         unIndent();
         newLine();
         print("}");

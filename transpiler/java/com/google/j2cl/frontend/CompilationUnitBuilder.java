@@ -26,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ArrayAccess;
@@ -677,10 +678,6 @@ public class CompilationUnitBuilder {
       return expressions.stream().map(this::convert).collect(toCollection(ArrayList::new));
     }
 
-    private List<Statement> convertStatements(List<org.eclipse.jdt.core.dom.Statement> statements) {
-      return statements.stream().map(this::convert).collect(toCollection(ArrayList::new));
-    }
-
     private ConditionalExpression convert(
         org.eclipse.jdt.core.dom.ConditionalExpression conditionalExpression) {
       return new ConditionalExpression(
@@ -720,8 +717,6 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) statement);
-        case ASTNode.SWITCH_CASE:
-          return convert((org.eclipse.jdt.core.dom.SwitchCase) statement);
         case ASTNode.SWITCH_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.SwitchStatement) statement);
         case ASTNode.SYNCHRONIZED_STATEMENT:
@@ -1698,17 +1693,30 @@ public class CompilationUnitBuilder {
       return new StringLiteral(literal.getEscapedValue());
     }
 
-    private SwitchCase convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
-      return statement.isDefault()
-          ? new SwitchCase(getSourcePosition(statement))
-          : new SwitchCase(getSourcePosition(statement), convert(statement.getExpression()));
+    private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {
+      Expression switchExpression = convert(switchStatement.getExpression());
+
+      List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
+      for (org.eclipse.jdt.core.dom.Statement statement :
+          JdtUtils.<org.eclipse.jdt.core.dom.Statement>asTypedList(switchStatement.statements())) {
+        if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase) {
+          caseBuilders.add(convert((org.eclipse.jdt.core.dom.SwitchCase) statement));
+        } else {
+          Iterables.getLast(caseBuilders).addStatement(convertStatement(statement));
+        }
+      }
+
+      return SwitchStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(switchStatement))
+          .setSwitchExpression(switchExpression)
+          .setCases(caseBuilders.stream().map(SwitchCase.Builder::build).collect(toImmutableList()))
+          .build();
     }
 
-    private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement statement) {
-      return new SwitchStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convertStatements(JdtUtils.asTypedList(statement.statements())));
+    private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
+      return statement.isDefault()
+          ? SwitchCase.newBuilder()
+          : SwitchCase.newBuilder().setCaseExpression(convert(statement.getExpression()));
     }
 
     private SynchronizedStatement convert(

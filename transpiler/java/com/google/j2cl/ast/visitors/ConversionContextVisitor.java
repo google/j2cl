@@ -371,7 +371,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return new SwitchStatement(
         switchStatement.getSourcePosition(),
         contextRewriter.rewriteUnaryNumericPromotionContext(switchStatement.getSwitchExpression()),
-        switchStatement.getBodyStatements());
+        switchStatement.getCases());
   }
 
   @Override
