@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -89,7 +88,7 @@ public class NewInstance extends Invocation {
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public static class Builder extends Invocation.Builder {
+  public static class Builder extends Invocation.Builder<Builder, NewInstance> {
     public static Builder from(NewInstance newInstance) {
       return new Builder(newInstance);
     }
@@ -100,28 +99,6 @@ public class NewInstance extends Invocation {
       return builder;
     }
 
-    @Override
-    public Builder setQualifier(Expression qualifier) {
-      super.setQualifier(qualifier);
-      return this;
-    }
-
-    public Builder setArguments(Expression... arguments) {
-      return setArguments(Arrays.asList(arguments));
-    }
-
-    @Override
-    public Builder setArguments(List<Expression> arguments) {
-      super.setArguments(arguments);
-      return this;
-    }
-
-    @Override
-    public NewInstance build() {
-      return (NewInstance) super.build();
-    }
-
-    @Override
     protected NewInstance doCreateInvocation(
         Expression qualifierExpression,
         MethodDescriptor methodDescriptor,

@@ -36,7 +36,7 @@ public abstract class Invocation extends Expression implements MemberReference {
 
   public abstract List<Expression> getArguments();
 
-  abstract Builder createBuilder();
+  abstract Builder<?, ?> createBuilder();
 
   @Override
   public abstract Node accept(Processor processor);
@@ -46,31 +46,31 @@ public abstract class Invocation extends Expression implements MemberReference {
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public abstract static class Builder {
+  public abstract static class Builder<T extends Builder<T, I>, I extends Invocation> {
 
     private Expression qualifierExpression;
     private MethodDescriptor methodDescriptor;
     private List<Expression> arguments = new ArrayList<>();
 
-    public static Builder from(Invocation invocation) {
+    public static Builder<?, ?> from(Invocation invocation) {
       return invocation.createBuilder();
     }
 
-    public Builder setArguments(Expression... arguments) {
+    public T setArguments(Expression... arguments) {
       return setArguments(Arrays.asList(arguments));
     }
 
-    public Builder setArguments(List<Expression> arguments) {
+    public T setArguments(List<Expression> arguments) {
       this.arguments.clear();
       this.arguments.addAll(arguments);
-      return this;
+      return getThis();
     }
 
-    public Builder addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
+    public T addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
       return addArgumentsAndUpdateDescriptor(index, Arrays.asList(argumentExpressions));
     }
 
-    public Builder addArgumentsAndUpdateDescriptor(
+    public T addArgumentsAndUpdateDescriptor(
         int index, Collection<Expression> argumentExpressions) {
       arguments.addAll(index, argumentExpressions);
       // Add the provided parameters to the proper index position of the existing parameters list.
@@ -84,10 +84,10 @@ public abstract class Invocation extends Expression implements MemberReference {
                       .map(Expression::getTypeDescriptor)
                       .collect(toImmutableList()))
               .build();
-      return this;
+      return getThis();
     }
 
-    public Builder addArgumentAndUpdateDescriptor(
+    public T addArgumentAndUpdateDescriptor(
         int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
       arguments.add(index, argumentExpression);
       // Add the provided parameters to the proper index position of the existing parameters list.
@@ -96,48 +96,53 @@ public abstract class Invocation extends Expression implements MemberReference {
           MethodDescriptor.Builder.from(methodDescriptor)
               .addParameterTypeDescriptors(index, parameterTypeDescriptor)
               .build();
-      return this;
+      return getThis();
     }
 
-    public Builder replaceVarargsArgument(Expression... replacementArguments) {
+    public T replaceVarargsArgument(Expression... replacementArguments) {
       return replaceVarargsArgument(Arrays.asList(replacementArguments));
     }
 
-    public Builder replaceVarargsArgument(List<Expression> replacementArguments) {
+    public T replaceVarargsArgument(List<Expression> replacementArguments) {
       checkState(methodDescriptor.isJsMethodVarargs());
       int lastArgumentPosition = arguments.size() - 1;
       arguments.remove(lastArgumentPosition);
       arguments.addAll(replacementArguments);
-      return this;
+      return getThis();
     }
 
-    public Builder setQualifier(Expression qualifierExpression) {
+    public T setQualifier(Expression qualifierExpression) {
       this.qualifierExpression = qualifierExpression;
-      return this;
+      return getThis();
     }
 
-    public Builder setMethodDescriptor(MethodDescriptor methodDescriptor) {
+    public T setMethodDescriptor(MethodDescriptor methodDescriptor) {
       this.methodDescriptor = methodDescriptor;
-      return this;
+      return getThis();
     }
 
-    public Builder setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
+    public T setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
       this.methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
               .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
               .build();
-      return this;
+      return getThis();
     }
 
-    public Invocation build() {
+    @SuppressWarnings("unchecked")
+    private T getThis() {
+      return (T) this;
+    }
+
+    public final I build() {
       return doCreateInvocation(qualifierExpression, methodDescriptor, arguments);
     }
 
-    protected abstract Invocation doCreateInvocation(
+    protected abstract I doCreateInvocation(
         Expression qualifierExpression,
         MethodDescriptor finalMethodDescriptor,
         List<Expression> finalArguments);
-    
+
     protected Builder(Invocation invocation) {
       this.qualifierExpression = invocation.getQualifier();
       this.methodDescriptor = invocation.getTarget();
@@ -145,7 +150,6 @@ public abstract class Invocation extends Expression implements MemberReference {
     }
 
     protected Builder() {
-      this.arguments = Lists.newArrayList();
     }
   }
 }

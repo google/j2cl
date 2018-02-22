@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -96,7 +95,7 @@ public class MethodCall extends Invocation {
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public static class Builder extends Invocation.Builder {
+  public static class Builder extends Invocation.Builder<Builder, MethodCall> {
     private boolean isStaticDispatch;
 
     public static Builder from(MethodCall methodCall) {
@@ -109,31 +108,9 @@ public class MethodCall extends Invocation {
       return builder;
     }
 
-    @Override
-    public Builder setQualifier(Expression qualifier) {
-      super.setQualifier(qualifier);
-      return this;
-    }
-
-    public Builder setArguments(Expression... arguments) {
-      super.setArguments(Arrays.asList(arguments));
-      return this;
-    }
-
-    @Override
-    public Builder setArguments(List<Expression> arguments) {
-      super.setArguments(arguments);
-      return this;
-    }
-
     public Builder setStaticDispatch(boolean isStaticDispatch) {
       this.isStaticDispatch = isStaticDispatch;
       return this;
-    }
-
-    @Override
-    public MethodCall build() {
-      return (MethodCall) super.build();
     }
 
     @Override
