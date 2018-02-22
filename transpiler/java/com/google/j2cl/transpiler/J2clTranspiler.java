@@ -20,7 +20,6 @@ import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
-import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
 import com.google.j2cl.ast.visitors.DefaultMethodsResolver;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
@@ -60,10 +59,12 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
+import com.google.j2cl.ast.visitors.NormalizeInterfaceMethods;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
+import com.google.j2cl.ast.visitors.NormalizeJsOverlayMembers;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLiterals;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
@@ -219,7 +220,8 @@ public class J2clTranspiler {
             new NormalizeNestedClassConstructors(),
             // Runs at the very end of 'Class structure normalizations' section since we do not need
             // to apply other normalizations on the synthesized native JS types.
-            new CreateOverlayImplementationTypesAndDevirtualizeCalls(),
+            new NormalizeJsOverlayMembers(),
+            new NormalizeInterfaceMethods(),
 
             // Statement/Expression normalizations
             new NormalizeArrayLiterals(),

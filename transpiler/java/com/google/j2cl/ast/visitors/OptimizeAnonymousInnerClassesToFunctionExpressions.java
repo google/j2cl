@@ -28,6 +28,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
@@ -104,12 +105,16 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
+              MethodDescriptor methodDescriptor =
+                  MethodDescriptor.Builder.from(methodCall.getTarget())
+                      .setEnclosingTypeDescriptor(
+                          targetTypeDescriptor
+                              .getFunctionalInterface()
+                              .getJsFunctionMethodDescriptor()
+                              .getEnclosingTypeDescriptor())
+                      .build();
               return MethodCall.Builder.from(methodCall)
-                  .setEnclosingTypeDescriptor(
-                      targetTypeDescriptor
-                          .getFunctionalInterface()
-                          .getJsFunctionMethodDescriptor()
-                          .getEnclosingTypeDescriptor())
+                  .setMethodDescriptor(methodDescriptor)
                   .build();
             }
             return methodCall;
