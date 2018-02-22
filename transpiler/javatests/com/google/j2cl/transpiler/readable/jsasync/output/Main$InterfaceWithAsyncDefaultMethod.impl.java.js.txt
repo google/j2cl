@@ -20,10 +20,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  */
 class InterfaceWithAsyncDefaultMethod {
   /**
+   * @abstract
    * @return {IThenable<Integer>}
    * @public
    */
-  async m_asyncCall__() {}
+  m_asyncCall__() {}
 
   /**
    * @param {InterfaceWithAsyncDefaultMethod} $thisArg

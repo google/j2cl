@@ -20,14 +20,11 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Devirtualizes default and private instance interface methods and rewrites the corresponding
@@ -49,25 +46,39 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
       if (!type.isInterface()) {
         continue;
       }
-      List<Method> devirtualizedMethods = new ArrayList<>();
-      for (Method method : type.getMethods()) {
-        MethodDescriptor methodDescriptor = method.getDescriptor();
-        checkState(!methodDescriptor.isJsOverlay());
+      type.accept(
+          new AbstractRewriter() {
+            @Override
+            public Method rewriteMethod(Method method) {
+              MethodDescriptor methodDescriptor = method.getDescriptor();
+              checkState(!methodDescriptor.isJsOverlay());
 
-        if (methodDescriptor.isDefaultMethod()) {
-          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
-          AstUtils.stubMethod(method);
-        } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
-          devirtualizedMethods.add(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
-        }
-      }
-      type.getMembers().removeIf(NormalizeInterfaceMethods::isInterfacePrivateInstanceMethod);
-      type.addMethods(devirtualizedMethods);
+              if (methodDescriptor.isDefaultMethod()) {
+                type.addMethod(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
+                // Retain the interface method declaration.
+                return createInterfaceMethodDeclaration(method);
+              } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
+                type.addMethod(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
+                return null;
+              } else {
+                return method;
+              }
+            }
+          });
     }
   }
 
-  private static boolean isInterfacePrivateInstanceMethod(Member member) {
-    return isInterfacePrivateInstanceMethod(member.getDescriptor());
+  private Method createInterfaceMethodDeclaration(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    return Method.newBuilder()
+        .setMethodDescriptor(
+            MethodDescriptor.Builder.from(methodDescriptor)
+                .setAbstract(true)
+                .setDefaultMethod(false)
+                .build())
+        .setParameters(AstUtils.clone(method.getParameters()))
+        .setSourcePosition(method.getSourcePosition())
+        .build();
   }
 
   private static boolean isInterfacePrivateInstanceMethod(MemberDescriptor memberDescriptor) {

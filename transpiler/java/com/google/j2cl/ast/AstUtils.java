@@ -941,15 +941,6 @@ public class AstUtils {
         .build();
   }
 
-  /** Transforms {@code method} into an empty stub */
-  public static void stubMethod(Method method) {
-    // clear the method body from the original type and use a fresh list of parameters.
-    method.getBody().getStatements().clear();
-    List<Variable> newParameters = clone(method.getParameters());
-    method.getParameters().clear();
-    method.getParameters().addAll(newParameters);
-  }
-
   /**
    * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
    * resulting method in {@enclosingTypeDescriptor}.
