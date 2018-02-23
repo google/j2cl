@@ -21,6 +21,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -90,8 +91,8 @@ public class SwitchStatement extends Statement {
       return setCases(Arrays.asList(cases));
     }
 
-    public Builder setCases(List<SwitchCase> cases) {
-      this.switchCases = cases;
+    public Builder setCases(Collection<SwitchCase> cases) {
+      this.switchCases = new ArrayList<>(cases);
       return this;
     }
 

@@ -1191,4 +1191,17 @@ public class AstUtils {
   public static boolean isIdentityFunction(Function<?, ?> function) {
     return function == Function.identity();
   }
+
+  /** Returns the field descriptor for the const field that holds the ordinal value. */
+  public static FieldDescriptor getEnumOrdinalConstantFieldDescriptor(
+      FieldDescriptor fieldDescriptor) {
+    checkArgument(fieldDescriptor.isStatic());
+    return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setCompileTimeConstant(true)
+        .setSynthetic(true)
+        .setTypeDescriptor(PrimitiveTypes.INT)
+        .setJsInfo(JsInfo.NONE)
+        .setOrigin(FieldOrigin.SYNTHETIC_ORDINAL_FIELD)
+        .build();
+  }
 }

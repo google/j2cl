@@ -48,7 +48,6 @@ import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnsignedRightShiftCoercions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
-import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
 import com.google.j2cl.ast.visitors.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.ast.visitors.NormalizationPass;
 import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
@@ -56,6 +55,8 @@ import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
 import com.google.j2cl.ast.visitors.NormalizeCasts;
 import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
+import com.google.j2cl.ast.visitors.NormalizeEnumClasses;
+import com.google.j2cl.ast.visitors.NormalizeEnumSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
@@ -214,7 +215,7 @@ public class J2clTranspiler {
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
             new InsertCastOnNewInstances(),
-            new MakeEnumConstructionsExplicit(),
+            new NormalizeEnumClasses(),
             new FixSuperCallQualifiers(),
             new InsertInstanceInitCalls(),
             new NormalizeNestedClassConstructors(),
@@ -238,6 +239,7 @@ public class J2clTranspiler {
             new NormalizeIntersectionTypes(),
 
             // Runs before unboxing conversion.
+            new NormalizeEnumSwitchStatements(),
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),
             new InsertUnboxingConversions(),

@@ -66,6 +66,7 @@ public class JdtParser {
           "java.lang.Class",
           "java.lang.Cloneable",
           "java.lang.Comparable",
+          "java.lang.Enum",
           "java.lang.Number",
           "java.lang.Object",
           "java.lang.String",

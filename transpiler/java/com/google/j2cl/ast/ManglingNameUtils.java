@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
@@ -106,9 +105,7 @@ public class ManglingNameUtils {
       return memberDescriptor.getSimpleJsName();
     }
 
-    // TODO(rluble): make naming consistent. Follow the logic for methods where if the field
-    // starts with "$" the prefix is omitted. For now maintain the current mangling scheme.
-    String prefix = memberDescriptor.getOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD ? "$" : "";
+    String prefix = memberDescriptor.getOrigin().getPrefix();
 
     TypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     checkArgument(!enclosingTypeDescriptor.isArray());

@@ -138,7 +138,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     members.add(position, checkNotNull(field));
   }
 
-  public void addFields(List<Field> fields) {
+  public void addFields(Collection<Field> fields) {
     members.addAll(checkNotNull(fields));
   }
 
@@ -147,7 +147,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * distinguish enum fields from static fields created in the enum body.
    */
   public ImmutableList<Field> getEnumFields() {
-    checkArgument(typeDeclaration.isEnum());
     return getFields().stream().filter(Field::isEnumField).collect(ImmutableList.toImmutableList());
 
   }

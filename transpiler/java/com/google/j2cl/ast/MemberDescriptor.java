@@ -27,7 +27,10 @@ public abstract class MemberDescriptor extends Node
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
   /** Represents the origin of a specific member */
-  public interface Origin {}
+  public interface Origin {
+    /** Returns the prefix to be used for mangling members */
+    String getPrefix();
+  }
 
   public abstract JsInfo getJsInfo();
 

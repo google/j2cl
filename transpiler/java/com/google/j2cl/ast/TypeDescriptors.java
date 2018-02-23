@@ -45,6 +45,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangClass;
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangThrowable;
+  public DeclaredTypeDescriptor javaLangEnum;
 
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangComparable;
@@ -197,6 +198,10 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangClass(TypeDescriptor typeDescriptor) {
     return typeDescriptor.hasSameRawType(get().javaLangClass);
+  }
+
+  public static boolean isJavaLangEnum(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangEnum);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
@@ -501,6 +506,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Cloneable":
           typeDescriptors.javaLangCloneable = referenceType;
+          break;
+        case "java.lang.Enum":
+          typeDescriptors.javaLangEnum = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

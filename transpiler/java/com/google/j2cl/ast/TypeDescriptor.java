@@ -110,6 +110,11 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
+  /** Returns whether the described type is an enum type. */
+  public boolean isEnum() {
+    return false;
+  }
+
   /** Returns whether the described type is an interface. */
   public boolean isIntersection() {
     return false;

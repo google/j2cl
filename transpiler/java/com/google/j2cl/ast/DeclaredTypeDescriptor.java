@@ -137,19 +137,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return !getTypeArgumentDescriptors().isEmpty();
   }
 
-  /** Returns whether the described type is a class. */
   @Override
   public boolean isClass() {
     return getKind() == Kind.CLASS;
   }
 
-  /** Returns whether the described type is an interface. */
   @Override
   public boolean isInterface() {
     return getKind() == Kind.INTERFACE;
   }
 
-  /** Returns whether the described type is an enum. */
+  @Override
   public boolean isEnum() {
     return getKind() == Kind.ENUM;
   }

@@ -116,6 +116,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public String getName() {
       return methodName;
     }
+
+    @Override
+    public String getPrefix() {
+      return "";
+    }
   }
 
   public static final String INIT_METHOD_PREFIX = "$init";

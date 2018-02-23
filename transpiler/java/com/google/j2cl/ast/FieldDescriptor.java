@@ -44,7 +44,23 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   /** Whether this field originates in the source code or is synthetic. */
   public enum FieldOrigin implements MemberDescriptor.Origin {
     SOURCE,
-    SYNTHETIC_BACKING_FIELD
+    SYNTHETIC_BACKING_FIELD("$"),
+    SYNTHETIC_ORDINAL_FIELD("$ordinal$");
+
+    private final String prefix;
+
+    FieldOrigin() {
+      this("");
+    }
+
+    FieldOrigin(String prefix) {
+      this.prefix = prefix;
+    }
+
+    @Override
+    public String getPrefix() {
+      return prefix;
+    }
   }
 
   /**

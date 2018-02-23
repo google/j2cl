@@ -66,6 +66,12 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
     private Expression caseExpression = null;
     private List<Statement> statements = new ArrayList<>();
 
+    public static Builder from(SwitchCase switchCase) {
+      return newBuilder()
+          .setCaseExpression(AstUtils.clone(switchCase.getCaseExpression()))
+          .setStatements(AstUtils.clone(switchCase.getStatements()));
+    }
+
     public Builder setCaseExpression(Expression caseExpression) {
       this.caseExpression = caseExpression;
       return this;
