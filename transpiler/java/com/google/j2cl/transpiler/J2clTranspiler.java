@@ -73,6 +73,7 @@ import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
+import com.google.j2cl.ast.visitors.NormalizeStringSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
@@ -237,9 +238,9 @@ public class J2clTranspiler {
             // Needs to run after InsertErasureTypeSafetyCasts, as they might introduce
             // intersection casts.
             new NormalizeIntersectionTypes(),
-
-            // Runs before unboxing conversion.
+            new NormalizeStringSwitchStatements(),
             new NormalizeEnumSwitchStatements(),
+            // Runs before unboxing conversion.
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),
             new InsertUnboxingConversions(),

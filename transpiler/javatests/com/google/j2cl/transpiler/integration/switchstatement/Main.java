@@ -136,9 +136,7 @@ public class Main {
   private static void testSwitchNull() {
     assertThrowsNullPointerException(() -> getBoxedIntValue(null));
     assertThrowsNullPointerException(() -> getEnumValue(null));
-    // TODO(b/73508132): Uncomment when the semantics of the switch statement are correct w.r.t
-    // null values.
-    // assertThrowsNullPointerException(() -> getStringValue(null));
+    assertThrowsNullPointerException(() -> getStringValue(null));
   }
 
   private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
