@@ -47,8 +47,6 @@ public class ArraysTest {
     // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
     // correctly.
     assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
-
-    assertThat(objectArray).isNotEqualTo(nativeArray);
   }
 
   @Test
@@ -71,8 +69,6 @@ public class ArraysTest {
     // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
     // correctly.
     assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
-
-    assertThat(objectArray).isNotEqualTo(nativeArray);
   }
 
   @Test
