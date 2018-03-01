@@ -87,12 +87,12 @@ public class ArraysTest {
     objectArray[1] = new List<?>[1];
     objectArray[2] = new Double[1];
 
-    // J2CL has different semantics for Object[] allowing assignability of primitive arrays to it.
-    // try {
-    //   objectArray[3] = new int[0];
-    //   fail("Should have thrown ArrayStoreException");
-    // } catch (ArrayStoreException expected) {
-    // }
+    try {
+      objectArray[3] = new int[0];
+      fail("Should have thrown ArrayStoreException");
+    } catch (ArrayStoreException expected) {
+    }
+
     try {
       objectArray[4] = new Object();
       fail("Should have thrown ArrayStoreException");
