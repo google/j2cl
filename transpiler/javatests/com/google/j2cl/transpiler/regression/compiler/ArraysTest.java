@@ -44,9 +44,7 @@ public class ArraysTest {
     assertThat(objectArray instanceof Object[][]).isFalse();
     assertThat(objectArray instanceof int[]).isFalse();
     assertThat(objectArray instanceof List[]).isFalse();
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
+    assertThat(objectArray.getClass()).isEqualTo(Object[].class);
   }
 
   @Test
@@ -57,18 +55,14 @@ public class ArraysTest {
     assertThat(nativeArray instanceof Object[][]).isFalse();
     assertThat(nativeArray instanceof int[]).isFalse();
     assertThat(nativeArray instanceof List[]).isFalse();
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) nativeArray.getClass()).isEqualTo(Object[].class);
+    assertThat(nativeArray.getClass()).isEqualTo(Object[].class);
 
     Object objectArray = new Object[10];
     assertThat(objectArray instanceof Object[]).isTrue();
     assertThat(objectArray instanceof Object[][]).isFalse();
     assertThat(objectArray instanceof int[]).isFalse();
     assertThat(objectArray instanceof List[]).isFalse();
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) objectArray.getClass()).isEqualTo(Object[].class);
+    assertThat(objectArray.getClass()).isEqualTo(Object[].class);
   }
 
   @Test
@@ -78,9 +72,7 @@ public class ArraysTest {
     assertThat(array instanceof Object[][]).isTrue();
     assertThat(array instanceof int[]).isFalse();
     assertThat(array instanceof List[]).isFalse();
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) array.getClass()).isEqualTo(Object[][].class);
+    assertThat(array.getClass()).isEqualTo(Object[][].class);
 
     Object[] objectArray = (Object[]) array;
     objectArray[0] = new Object[0];

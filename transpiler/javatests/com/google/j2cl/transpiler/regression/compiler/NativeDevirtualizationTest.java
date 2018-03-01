@@ -47,9 +47,7 @@ public class NativeDevirtualizationTest {
             ("blah" + String.valueOf(new char[] {'a', 'b', 'c'}) + true + false + null + 'c' + 27))
         .isEqualTo("blahabctruefalsenullc27");
     Object s = HELLO_WORLD;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) s.getClass()).isEqualTo(String.class);
+    assertThat(s.getClass()).isEqualTo(String.class);
     assertThat(s.toString()).isEqualTo(HELLO_WORLD);
 
     assertThat(s.equals(HELLO_WORLD)).isTrue();
@@ -60,9 +58,7 @@ public class NativeDevirtualizationTest {
     assertThat(s instanceof String).isTrue();
 
     Comparable b = HELLO_WORLD;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) b.getClass()).isEqualTo(String.class);
+    assertThat(b.getClass()).isEqualTo(String.class);
     assertThat(b.toString()).isEqualTo(HELLO_WORLD);
     assertThat(b.hashCode()).isEqualTo(HELLO_WORLD.hashCode());
 
@@ -75,9 +71,7 @@ public class NativeDevirtualizationTest {
     assertThat(b instanceof String).isTrue();
 
     CharSequence c = HELLO_WORLD;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) c.getClass()).isEqualTo(String.class);
+    assertThat(c.getClass()).isEqualTo(String.class);
     assertThat(c.toString()).isEqualTo(HELLO_WORLD);
     assertThat(c.hashCode()).isEqualTo(HELLO_WORLD.hashCode());
 
@@ -92,9 +86,7 @@ public class NativeDevirtualizationTest {
   public void testBooleanDevirtualization() {
     final Boolean FALSE = false;
     Object o = FALSE;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) o.getClass()).isEqualTo(Boolean.class);
+    assertThat(o.getClass()).isEqualTo(Boolean.class);
     assertThat(o.toString()).isEqualTo("false");
 
     assertThat((Boolean) o).isFalse();
@@ -103,9 +95,7 @@ public class NativeDevirtualizationTest {
     assertThat(o instanceof Comparable).isTrue();
 
     Comparable b = FALSE;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) b.getClass()).isEqualTo(Boolean.class);
+    assertThat(b.getClass()).isEqualTo(Boolean.class);
     assertThat(b.toString()).isEqualTo("false");
     assertThat(b.hashCode()).isEqualTo(FALSE.hashCode());
   }
@@ -123,17 +113,13 @@ public class NativeDevirtualizationTest {
     assertThat(o instanceof Comparable).isTrue();
 
     Comparable b = ONE_POINT_ONE;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) b.getClass()).isEqualTo(Double.class);
+    assertThat(b.getClass()).isEqualTo(Double.class);
     assertThat(b.toString()).isEqualTo("1.1");
     assertThat(b.hashCode()).isEqualTo(ONE_POINT_ONE.hashCode());
     assertThat(b.compareTo((Double) 1.2d) < 0).isTrue();
 
     Number c = ONE_POINT_ONE;
-    // TODO(b/30126552): remove cast from getClass() to Object once GwtIncompatible is handled
-    // correctly.
-    assertThat((Object) c.getClass()).isEqualTo(Double.class);
+    assertThat(c.getClass()).isEqualTo(Double.class);
     assertThat(c.toString()).isEqualTo("1.1");
     assertThat(c.hashCode()).isEqualTo(ONE_POINT_ONE.hashCode());
     assertThat(c.intValue()).isEqualTo(1);
