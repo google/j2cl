@@ -14,10 +14,6 @@ public class JsIgnoreExample {
 public class JsIgnoreExample {
 ...  public static final Object CONSTNAME = new Object();
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<init>"
-[@JsType
-public class JsIgnoreExample {
-...  public static final Object CONSTNAME = new Object();
-}] => [this.$init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<init>"
 [public static void exportedFunction() {}] => [JsIgnoreExample.$clinit();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.exportedFunction"
 [@JsIgnore
   public static void notExportedFunction() {}] => [JsIgnoreExample.$clinit();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.notExportedFunction"

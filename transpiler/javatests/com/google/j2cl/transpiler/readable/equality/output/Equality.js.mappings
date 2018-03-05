@@ -22,10 +22,6 @@
   public void test() {
 ...  }
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.equality.Equality.<init>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_equality_Equality();] "com.google.j2cl.transpiler.readable.equality.Equality.<init>"
 [assert false == false;] => [$Asserts.$assert(false == false);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert 0 != 1;] => [$Asserts.$assert(0 != 1);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != new Object();] => [$Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), java_lang_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"

@@ -22,10 +22,6 @@
   public void testObjectArray() {
 ...  public void consumesSerializable(Serializable serializable) {}
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.array.Arrays.<init>"
-[public class Arrays {
-  public void testObjectArray() {
-...  public void consumesSerializable(Serializable serializable) {}
-}] => [this.$init__com_google_j2cl_transpiler_readable_array_Arrays();] "com.google.j2cl.transpiler.readable.array.Arrays.<init>"
 [Object[] objects = new Object[100];] => [let objects = new Array(100);] "com.google.j2cl.transpiler.readable.array.Arrays.testObjectArray"
 [objects] => [objects] "objects"
 [objects = new Object[0];] => [objects = new Array(0);] "com.google.j2cl.transpiler.readable.array.Arrays.testObjectArray"

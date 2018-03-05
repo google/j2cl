@@ -584,7 +584,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderInitMethod() {
-    if (type.isJsOverlayImplementation() || type.isInterface()) {
+    if (type.isJsOverlayImplementation()
+        || type.isInterface()
+        || type.getInstanceInitializerBlocks().isEmpty()) {
       return;
     }
     renderInitializerMethodHeader(

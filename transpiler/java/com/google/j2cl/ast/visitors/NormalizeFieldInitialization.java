@@ -47,7 +47,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
             @Override
             public Member rewriteField(Field field) {
               fieldDeclarations.add(
-                  Field.Builder.from(field.getDescriptor())
+                  Field.Builder.from(field)
                       .setInitializer(getDeclarationValue(field))
                       .setSourcePosition(field.getSourcePosition())
                       .build());

@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class InsertInstanceInitCalls extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractVisitor() {
+          @Override
+          public boolean enterType(Type node) {
+            return !node.getInstanceInitializerBlocks().isEmpty();
+          }
+
           @Override
           public void exitMethod(Method method) {
             if (!method.isConstructor() || AstUtils.hasThisCall(method)) {

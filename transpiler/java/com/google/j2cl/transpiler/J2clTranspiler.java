@@ -218,8 +218,6 @@ public class J2clTranspiler {
             new InsertCastOnNewInstances(),
             new NormalizeEnumClasses(),
             new FixSuperCallQualifiers(),
-            new InsertInstanceInitCalls(),
-            new NormalizeNestedClassConstructors(),
             // Runs at the very end of 'Class structure normalizations' section since we do not need
             // to apply other normalizations on the synthesized native JS types.
             new NormalizeJsOverlayMembers(),
@@ -256,6 +254,8 @@ public class J2clTranspiler {
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),
             new NormalizeFieldInitialization(),
+            new InsertInstanceInitCalls(),
+            new NormalizeNestedClassConstructors(),
             new NormalizeConstructors(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),

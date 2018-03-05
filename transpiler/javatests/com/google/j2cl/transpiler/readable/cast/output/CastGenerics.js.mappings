@@ -27,10 +27,6 @@
 
 ...  public static class Foo<V> { }
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<init>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [this.$init__com_google_j2cl_transpiler_readable_cast_CastGenerics();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<init>"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.method"
 [public static void testErasureCast() {
     String str = new CastGenerics<String, Number>().field;

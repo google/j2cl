@@ -22,10 +22,6 @@
   public static class Foo<T> {}
 ...  }
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<init>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<init>"
 [args] => [args] "args"
 [public static <E> void fun(Foo<E>... args) {}] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
 [public static <E> void test() {

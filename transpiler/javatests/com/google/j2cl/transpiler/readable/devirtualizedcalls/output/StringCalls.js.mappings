@@ -22,10 +22,6 @@
  * Test String devirtualization.
 ...  }
 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<init>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<init>"
 [String literal = "String";] => [let literal = "String";] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [literal] => [literal] "literal"
 [String sub = literal.substring(1);] => [let sub = java_lang_String.m_substring__java_lang_String__int(literal, 1);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
