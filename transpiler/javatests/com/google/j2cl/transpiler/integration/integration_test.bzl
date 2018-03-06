@@ -54,7 +54,7 @@ def integration_test(name,
   java_library() rules.
   """
   # figure out the current location
-  java_package = get_java_package(PACKAGE_NAME)
+  java_package = get_java_package(native.package_name())
 
   if not main_class:
     main_class = java_package + ".Main"

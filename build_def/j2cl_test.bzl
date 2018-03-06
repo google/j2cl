@@ -197,7 +197,7 @@ def j2cl_test(name,
       **j2cl_parameters
   )
 
-  test_class = _get_test_class(name, PACKAGE_NAME, test_class)
+  test_class = _get_test_class(name, native.package_name(), test_class)
   # Trigger our code generation
   j2cl_generate_jsunit_suite(
       name = name + "_generated_suite",

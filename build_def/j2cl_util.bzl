@@ -61,7 +61,7 @@ def generate_zip(name, srcs, pkg, testonly = None):
     strip_prefix = None
   elif pkg == "CONVENTION":
     flatten = 1
-    package_dir = get_java_path(PACKAGE_NAME)
+    package_dir = get_java_path(native.package_name())
     strip_prefix = None
   else:
     fail("Incorrect package type: " + pkg)

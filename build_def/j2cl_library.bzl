@@ -156,7 +156,7 @@ def j2cl_library(name,
       tags=internal_tags,
   )
 
-  target_name = PACKAGE_NAME + ":" + base_name
+  target_name = native.package_name() + ":" + base_name
   # If this is JRE itself, don't synthesize the JRE dep.
   if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
     deps += ["//internal_do_not_use:jre"]
