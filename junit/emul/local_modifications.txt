@@ -1,0 +1,55 @@
+This file contains a list of modifications done to j2cl's junit emulation.
+
+packages that were completely deleted:
+  - junit.extensions
+  - junit.runner
+  - junit.textui
+  - org.junit.experimental
+  - org.junit.internal.builders
+  - org.junit.internal.matchers
+  - org.junit.internal.requests
+  - org.junit.internal.runners
+  - org.junit.rules
+  - org.junit.validator.*
+
+package junit.framework
+  JUnit4TestAdapter.java: Deleted
+  JUnit4TestAdapterCache.java: Deleted
+  JUnit4TestCaseFacade.java: Deleted
+  package-info.java: Deleted
+  Test.java: Deleted
+  TestCase.java: Modifications documented in file
+  TestFailure.java: Deleted
+  TestListener.java: Deleted
+  TestResult.java: Deleted
+  TestSuite.java: Deleted
+
+package: org.junit
+  Assert.java: Modifications documented in file
+  Assume.java: Deleted
+  AssumptionViolatedException.java: Deleted
+  ClassRule.java: Deleted
+  Ignore.java: No modifications
+  package-info.java: Deleted
+  Rule.java: Deleted
+
+package: org.junit.function:
+  Added ThrowingRunnable.java
+
+package: org.junit.internal
+  All files deleted except:
+    ArrayComparisonFailure.java: No modifications
+    ComparisonCriteria.java: No modifications
+    ExactComparisonCriteria.java: No modifications
+    InexactComparisonCriteria.java: No modifications
+
+package: org.junit.runner.*
+  All files deleted except:
+    MethodSorters.java:  Modifications documented in file
+    Runner.java: Modifications documented in file
+    RunWith.java: No modifications
+
+package: org.junit.runners.*
+  All files deleted except:
+    JUnit4.java: Modifications documented in file
+    Suite.java: Modifications documented in file

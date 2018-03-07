@@ -61,6 +61,27 @@ maven_jar(
   artifact = "org.apache.velocity:velocity:1.7",
 )
 
+maven_jar(
+  name = "org_junit",
+  artifact = "junit:junit:4.12",
+)
+
+maven_jar(
+  name = "com_google_testing_compile",
+  artifact = "com.google.testing.compile:compile-testing:0.15",
+)
+
+maven_jar(
+  name = "org_mockito",
+  artifact = "org.mockito:mockito-all:1.9.5"
+)
+
+maven_jar(
+  name = "com_google_truth",
+  artifact = "com.google.truth:truth:0.39"
+)
+
+
 # Eclipse JARs listed at
 # http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/
 

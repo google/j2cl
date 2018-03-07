@@ -56,3 +56,11 @@ closure_js_library(
     srcs = ["closure/goog/string/string.js"],
     deps = [":base"],
 )
+
+closure_js_library(
+    name = "testcase",
+    srcs = ["closure/goog/testing/testing.js"],
+    # TODO: add dependencies. The list of transitive deps for testcase is big
+    # and we are not sure yet to use closure_js_library rules in the final
+    # open-source version of J2CL
+)

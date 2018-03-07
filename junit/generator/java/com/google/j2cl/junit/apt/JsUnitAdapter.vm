@@ -1,0 +1,82 @@
+/**
+ * Generated test suite from j2cl_test target
+ */
+package ${testClass.packageName()};
+
+import jsinterop.annotations.JsType;
+
+@JsType
+public class ${testClass.jsUnitAdapterClassName()} {
+
+  @JsType(isNative = true, name = "TestCase", namespace = "goog.testing")
+  private static class GoogTestCase {
+    public static native GoogTestCase getActiveTestCase();
+    public double promiseTimeout;
+  }
+
+  private ${testClass.qualifiedName()} actualTest;
+
+  public void setUpPage() throws Throwable {
+#foreach($beforeClassMethod in ${testClass.beforeClassMethods()})
+    ${testClass.qualifiedName()}.${beforeClassMethod.javaMethodName()}();
+#end
+  }
+
+  public void tearDownPage() throws Throwable {
+#foreach($afterClassMethod in ${testClass.afterClassMethods()})
+    ${testClass.qualifiedName()}.${afterClassMethod.javaMethodName()}();
+#end
+  }
+
+  public void setUp() throws Throwable {
+    actualTest = new ${testClass.qualifiedName()}();
+#foreach($beforeMethod in ${testClass.beforeMethods()})
+    actualTest.${beforeMethod.javaMethodName()}();
+#end
+  }
+
+  public void tearDown() throws Throwable {
+    if (actualTest == null) {
+      // Test failed to be constructed, thus we can not run its teardown
+      return;
+    }
+
+    try {
+#foreach($afterMethod in ${testClass.afterMethods()})
+      actualTest.${afterMethod.javaMethodName()}();
+#end
+    } finally {
+      // Ensures that the test instance is always reset to null so that if the
+      // next test fails to construct the instance in the setUp, the instance
+      // will be null and that will prevent the tearDown from running.
+      actualTest = null;
+    }
+  }
+
+#foreach($testMethod in ${testClass.testMethods()})
+  public Object ${testMethod.jsTestMethodName()}() throws Throwable {
+#if ($testMethod.expectedExceptionQualifiedName())
+    try {
+      actualTest.${testMethod.javaMethodName()}();
+    } catch (${testMethod.expectedExceptionQualifiedName()} e) {
+      return null;
+    }
+    throw new Exception("expected exception was not thrown");
+
+#else
+#if($testMethod.isAsync())
+   GoogTestCase.getActiveTestCase().promiseTimeout = ${testMethod.timeout()};
+   Object promise = actualTest.${testMethod.javaMethodName()}();
+   if (promise == null) {
+     throw new IllegalStateException("Test returned null as its promise");
+   }
+   return promise;
+#else
+    actualTest.${testMethod.javaMethodName()}();
+    return null;
+#end
+#end
+  }
+
+#end
+}

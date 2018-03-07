@@ -102,6 +102,35 @@ java_library(
     ],
 )
 
+java_library(
+    name = "junit",
+    testonly = 1,
+    exports = ["@org_junit//jar"],
+)
+
+java_library(
+    name = "mockito",
+    testonly = 1,
+    exports = ["@org_mockito//jar"],
+)
+
+java_library(
+    name = "truth",
+    testonly = 1,
+    exports = ["@com_google_truth//jar"],
+)
+
+java_library(
+    name = "compile_testing",
+    testonly = 1,
+    exports = ["@com_google_testing_compile//jar"],
+)
+
+alias(
+    name = "closure_testcase",
+    actual = "@closure_library//:testcase",
+)
+
 alias(
     name = "closure_reflect",
     actual = "@closure_library//:reflect",
