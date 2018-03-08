@@ -38,20 +38,8 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
         if (AstUtils.hasConstructorInvocation(constructor)) {
           continue;
         }
-        /*
-         * Only inserts explicit super() call to a constructor that does not have
-         * a super() or this() call, and the corresponding type does have a super class.
-         */
-
-        if (type.getSuperTypeDescriptor().isNative()) {
-          /*
-           * Do not insert super() call to a native JS type. Otherwise it will lead to error
-           * because a native JS type is not expected to have a $ctor method.
-           * TODO(rluble): super() call to native type should be inserted somewhere otherwise it
-           * will lead to an error if the native type has a non-empty constructor.
-           */
-          continue;
-        }
+        // Only inserts explicit super() call to a constructor that does not have
+        // super() or this() call (provided that the type has a superclass).
         synthesizeSuperCall(constructor);
       }
     }

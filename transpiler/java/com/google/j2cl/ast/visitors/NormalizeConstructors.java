@@ -213,9 +213,7 @@ public class NormalizeConstructors extends NormalizationPass {
   private static Method synthesizeJsConstructor(Type type) {
     Method jsConstructor = checkNotNull(getJsConstructor(type));
     MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(jsConstructor);
-    checkArgument(
-        superConstructorInvocation == null
-            || superConstructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor()));
+    checkArgument(superConstructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor()));
 
     List<Variable> jsConstructorParameters = AstUtils.clone(jsConstructor.getParameters());
     List<Expression> arguments = AstUtils.getReferences(jsConstructorParameters);
@@ -233,7 +231,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a
     // regular Java class.  Otherwise we get the arguments from the primary constructor.  Also
     // note that the super call may be null if the super constructor was native.
-    if (superConstructorInvocation == null || !type.getSuperTypeDescriptor().hasJsConstructor()) {
+    if (!type.getSuperTypeDescriptor().hasJsConstructor()) {
       superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
     body.add(
