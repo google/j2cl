@@ -59,9 +59,7 @@ public class CastExpression extends Expression {
     return Visitor_CastExpression.visit(processor, this);
   }
 
-  /**
-   * A Builder for easily and correctly creating modified versions of CastExpressions.
-   */
+  /** A Builder for CastExpressions. */
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;

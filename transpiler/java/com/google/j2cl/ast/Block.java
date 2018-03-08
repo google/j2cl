@@ -21,20 +21,13 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /** Block Statement. */
 @Visitable
 public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
-
-  public Block(Block fromBlock) {
-    this(fromBlock.getSourcePosition(), fromBlock.getStatements());
-  }
-
-  public Block(SourcePosition sourcePosition, Statement... statements) {
-    this(sourcePosition, Arrays.asList(statements));
-  }
 
   public Block(SourcePosition sourcePosition, List<Statement> statements) {
     super(sourcePosition);
@@ -49,9 +42,17 @@ public class Block extends Statement {
     return statements;
   }
 
+  public boolean isEmpty() {
+    return getStatements().isEmpty();
+  }
+
   @Override
   public Block clone() {
-    Block block = new Block(getSourcePosition(), AstUtils.clone(statements));
+    Block block =
+        Block.newBuilder()
+            .setSourcePosition(getSourcePosition())
+            .setStatements(AstUtils.clone(statements))
+            .build();
     block.setSourcePosition(this.getSourcePosition());
     return block;
   }
@@ -59,5 +60,45 @@ public class Block extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_Block.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for Block. */
+  public static class Builder {
+    private final List<Statement> statements = new ArrayList<>();
+    private SourcePosition sourcePosition;
+
+    public Builder from(Block block) {
+      return newBuilder()
+          .setSourcePosition(block.getSourcePosition())
+          .setStatements(block.getStatements());
+    }
+
+    public Builder setStatements(Statement... statements) {
+      return setStatements(Arrays.asList(statements));
+    }
+
+    public Builder setStatements(Collection<Statement> statements) {
+      this.statements.clear();
+      this.statements.addAll(statements);
+      return this;
+    }
+
+    public Builder addStatement(Statement statement) {
+      this.statements.add(statement);
+      return this;
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Block build() {
+      return new Block(sourcePosition, statements);
+    }
   }
 }

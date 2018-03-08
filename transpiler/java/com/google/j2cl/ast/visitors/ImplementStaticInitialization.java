@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
@@ -42,8 +41,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Implements static initialization by synthesizing getter and setters for static fields and
@@ -54,8 +51,16 @@ public class ImplementStaticInitialization extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // Add clinit calls to static methods and (real js) constructors.
-    compilationUnit.accept(
+    for (Type type : compilationUnit.getTypes()) {
+      insertClinitCalls(type);
+      synthesizeSuperClinitCalls(type);
+      synthesizeSettersAndGetters(type);
+    }
+  }
+
+  /** Add clinit calls to static methods and (real js) constructors. */
+  private void insertClinitCalls(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Method rewriteMethod(Method method) {
@@ -63,7 +68,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
-                      createClinitClassStatement(
+                      createClinitCallStatement(
                           method.getBody().getSourcePosition(),
                           method.getDescriptor().getEnclosingTypeDescriptor()))
                   .build();
@@ -71,74 +76,73 @@ public class ImplementStaticInitialization extends NormalizationPass {
             return method;
           }
         });
+  }
 
-    // Synthesize a static initializer block that calls the necessary super type clinits.
-    compilationUnit.accept(
-        new AbstractVisitor() {
+  /** Synthesize a static initializer block that calls the necessary super type clinits. */
+  private void synthesizeSuperClinitCalls(Type type) {
+    Block.Builder staticInitializerBuilder =
+        Block.newBuilder().setSourcePosition(type.getSourcePosition());
+
+    if (hasClinitMethod(type.getSuperTypeDescriptor())) {
+      staticInitializerBuilder.addStatement(
+          createClinitCallStatement(type.getSourcePosition(), type.getSuperTypeDescriptor()));
+    }
+    addRequiredSuperInterfacesClinitCalls(
+        type.getSourcePosition(), type.getTypeDescriptor(), staticInitializerBuilder);
+
+    Block staticInitiliazerBlock = staticInitializerBuilder.build();
+    if (!staticInitiliazerBlock.isEmpty()) {
+      type.addStaticInitializerBlock(0, staticInitiliazerBlock);
+    }
+  }
+
+  /**
+   * Synthesize static getters/setter to ensure class initialization is run on static field
+   * accesses.
+   */
+  private void synthesizeSettersAndGetters(Type type) {
+    for (Field staticField : type.getStaticFields()) {
+      if (!triggersClinit(staticField.getDescriptor())) {
+        continue;
+      }
+      synthesizePropertyGetter(type, staticField);
+      synthesizePropertySetter(type, staticField);
+    }
+
+    // Replace the actual static fields with their backing fields.
+    type.accept(
+        new AbstractRewriter() {
           @Override
-          public void exitType(Type type) {
-            List<Statement> superClinitCallStatements = new ArrayList<>();
-
-            if (hasClinitMethod(type.getSuperTypeDescriptor())) {
-              superClinitCallStatements.add(
-                  createClinitClassStatement(
-                      type.getSourcePosition(), type.getSuperTypeDescriptor()));
+          public Member rewriteField(Field field) {
+            if (!triggersClinit(field.getDescriptor())) {
+              return field;
             }
-            addRequiredSuperInterfacesClinitCalls(
-                type.getSourcePosition(), type.getTypeDescriptor(), superClinitCallStatements);
-
-            if (!superClinitCallStatements.isEmpty()) {
-              type.addStaticInitializerBlock(
-                  0, new Block(type.getSourcePosition(), superClinitCallStatements));
-            }
+            return Field.Builder.from(getBackingFieldDescriptor(field.getDescriptor()))
+                .setInitializer(field.getInitializer())
+                .setSourcePosition(field.getSourcePosition())
+                .build();
           }
         });
 
-    for (Type type : compilationUnit.getTypes()) {
-      // Synthesize static getters/setter to ensure class initialization is run on static field
-      // accesses
-      for (Field staticField : type.getStaticFields()) {
-        if (!triggersClinit(staticField.getDescriptor())) {
-          continue;
-        }
-        synthesizePropertyGetter(type, staticField);
-        synthesizePropertySetter(type, staticField);
-      }
-
-      // Replace the actual static fields with their backing fields.
-      type.accept(
-          new AbstractRewriter() {
-            @Override
-            public Member rewriteField(Field field) {
-              if (!triggersClinit(field.getDescriptor())) {
-                return field;
-              }
-              return Field.Builder.from(getBackingFieldDescriptor(field.getDescriptor()))
-                  .setInitializer(field.getInitializer())
-                  .setSourcePosition(field.getSourcePosition())
-                  .build();
+    // Replace field access within the class for accesses to the backing field.
+    type.accept(
+        new AbstractRewriter() {
+          @Override
+          public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
+            FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
+            if (!triggersClinit(fieldDescriptor)) {
+              return fieldAccess;
             }
-          });
 
-      // Replace field access within the class for accesses to the backing field.
-      type.accept(
-          new AbstractRewriter() {
-            @Override
-            public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
-              FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-              if (!triggersClinit(fieldDescriptor)) {
-                return fieldAccess;
-              }
-
-              if (!fieldDescriptor.isMemberOf(type.getDeclaration())) {
-                return fieldAccess;
-              }
-
-              return FieldAccess.Builder.from(getBackingFieldDescriptor(fieldDescriptor)).build();
+            if (!fieldDescriptor.isMemberOf(type.getDeclaration())) {
+              return fieldAccess;
             }
-          });
-    }
+
+            return FieldAccess.Builder.from(getBackingFieldDescriptor(fieldDescriptor)).build();
+          }
+        });
   }
+
 
   private static boolean triggersClinit(FieldDescriptor fieldDescriptor) {
     return fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant();
@@ -190,7 +194,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
             .build());
   }
 
-  private static Statement createClinitClassStatement(
+  private static Statement createClinitCallStatement(
       SourcePosition sourcePosition, DeclaredTypeDescriptor typeDescriptor) {
     return createClinitCallExpression(typeDescriptor).makeStatement(sourcePosition);
   }
@@ -203,7 +207,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
   private void addRequiredSuperInterfacesClinitCalls(
       SourcePosition sourcePosition,
       DeclaredTypeDescriptor typeDescriptor,
-      List<Statement> superClinitCallStatements) {
+      Block.Builder staticInitializerBuilder) {
     for (DeclaredTypeDescriptor interfaceTypeDescriptor :
         typeDescriptor.getInterfaceTypeDescriptors()) {
       if (!hasClinitMethod(interfaceTypeDescriptor)) {
@@ -213,8 +217,8 @@ public class ImplementStaticInitialization extends NormalizationPass {
       if (interfaceTypeDescriptor.getTypeDeclaration().declaresDefaultMethods()) {
         // The interface declares a default method; invoke its clinit which will initialize
         // the interface and all it superinterfaces that declare default methods.
-        superClinitCallStatements.add(
-            createClinitClassStatement(sourcePosition, interfaceTypeDescriptor));
+        staticInitializerBuilder.addStatement(
+            createClinitCallStatement(sourcePosition, interfaceTypeDescriptor));
         continue;
       }
 
@@ -222,7 +226,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
       // into its super interface hierarchy to invoke clinits of super interfaces that declare
       // default methods.
       addRequiredSuperInterfacesClinitCalls(
-          sourcePosition, interfaceTypeDescriptor, superClinitCallStatements);
+          sourcePosition, interfaceTypeDescriptor, staticInitializerBuilder);
     }
   }
 

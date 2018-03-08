@@ -363,7 +363,7 @@ public class CompilationUnitBuilder {
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           methodDeclaration.getBody() == null
-              ? new Block(getSourcePosition(methodDeclaration))
+              ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
               : convert(methodDeclaration.getBody());
 
       return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
@@ -1015,7 +1015,11 @@ public class CompilationUnitBuilder {
             AstUtils.createReturnOrExpressionStatement(
                 getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
         statement.setSourcePosition(getSourcePosition(lambdaBody));
-        body = new Block(getSourcePosition(lambdaBody), statement);
+        body =
+            Block.newBuilder()
+                .setSourcePosition(getSourcePosition(lambdaBody))
+                .setStatements(statement)
+                .build();
       }
       return body;
     }
@@ -1298,13 +1302,15 @@ public class CompilationUnitBuilder {
       List<org.eclipse.jdt.core.dom.Statement> statements =
           JdtUtils.asTypedList(block.statements());
 
-      return new Block(
-          getSourcePosition(block),
-          statements
-              .stream()
-              .map(this::convert)
-              .filter(Predicates.notNull())
-              .collect(toImmutableList()));
+      return Block.newBuilder()
+          .setSourcePosition(getSourcePosition(block))
+          .setStatements(
+              statements
+                  .stream()
+                  .map(this::convert)
+                  .filter(Predicates.notNull())
+                  .collect(toImmutableList()))
+          .build();
     }
 
     private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause catchClause) {

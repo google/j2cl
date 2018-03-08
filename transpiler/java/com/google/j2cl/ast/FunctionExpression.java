@@ -155,7 +155,10 @@ public class FunctionExpression extends Expression implements HasParameters, Has
 
     public FunctionExpression build() {
       return new FunctionExpression(
-          sourcePosition, typeDescriptor, parameters, new Block(sourcePosition, statements));
+          sourcePosition,
+          typeDescriptor,
+          parameters,
+          Block.newBuilder().setSourcePosition(sourcePosition).setStatements(statements).build());
     }
   }
 }

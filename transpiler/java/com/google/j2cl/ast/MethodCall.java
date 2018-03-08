@@ -90,7 +90,7 @@ public class MethodCall extends Invocation {
   }
 
   /**
-   * A Builder for easily and correctly creating modified versions of method calls.
+   * A Builder for MethodCall.
    *
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.

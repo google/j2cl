@@ -103,7 +103,9 @@ public class NormalizeCatchClauses extends NormalizationPass {
             .build();
 
     Statement body = bodyBuilder(sourcePosition, clauses, exceptionVariable);
-    return new CatchClause(exceptionVariable, new Block(body.getSourcePosition(), body));
+    return new CatchClause(
+        exceptionVariable,
+        Block.newBuilder().setSourcePosition(body.getSourcePosition()).setStatements(body).build());
   }
 
   private static Statement bodyBuilder(
@@ -114,7 +116,10 @@ public class NormalizeCatchClauses extends NormalizationPass {
     if (clauses.isEmpty()) {
       Statement noMatchThrowException =
           new ThrowStatement(firstClauseSourcePosition, exceptionVariable.getReference());
-      return new Block(firstClauseSourcePosition, noMatchThrowException);
+      return Block.newBuilder()
+          .setSourcePosition(firstClauseSourcePosition)
+          .setStatements(noMatchThrowException)
+          .build();
     }
 
     CatchClause clause = clauses.get(0);
@@ -143,7 +148,10 @@ public class NormalizeCatchClauses extends NormalizationPass {
     return new IfStatement(
         currentClauseSourcePosition,
         condition,
-        new Block(currentClauseSourcePosition, catchClauseBody),
+        Block.newBuilder()
+            .setSourcePosition(currentClauseSourcePosition)
+            .setStatements(catchClauseBody)
+            .build(),
         bodyBuilder(
             firstClauseSourcePosition, clauses.subList(1, clauses.size()), exceptionVariable));
   }

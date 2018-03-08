@@ -67,7 +67,10 @@ public class NormalizeTryWithResources extends NormalizationPass {
                       Collections.emptyList(),
                       null);
               Block refactoredTryBlock =
-                  new Block(tryBlock.getSourcePosition(), removeResourceDeclarations(tryBlock));
+                  Block.newBuilder()
+                      .setSourcePosition(tryBlock.getSourcePosition())
+                      .setStatements(removeResourceDeclarations(tryBlock))
+                      .build();
               return new TryStatement(
                   sourcePosition,
                   Collections.emptyList(),
@@ -75,7 +78,10 @@ public class NormalizeTryWithResources extends NormalizationPass {
                   tryStatement.getCatchClauses(),
                   tryStatement.getFinallyBlock());
             }
-            return new Block(sourcePosition, removeResourceDeclarations(tryStatement));
+            return Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(removeResourceDeclarations(tryStatement))
+                .build();
           }
         });
   }
@@ -191,15 +197,26 @@ public class NormalizeTryWithResources extends NormalizationPass {
     finallyBlockStatements.add(primaryExceptionNullStatement);
 
     CatchClause catchTryException =
-        new CatchClause(exceptionFromTry, new Block(sourcePosition, catchBlockStatements));
+        new CatchClause(
+            exceptionFromTry,
+            Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(catchBlockStatements)
+                .build());
 
     transformedStatements.add(
         new TryStatement(
             sourcePosition,
             Collections.emptyList(),
-            new Block(sourcePosition, tryBlockBodyStatements),
+            Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(tryBlockBodyStatements)
+                .build(),
             Collections.singletonList(catchTryException),
-            new Block(sourcePosition, finallyBlockStatements)));
+            Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(finallyBlockStatements)
+                .build()));
     return transformedStatements;
   }
 }

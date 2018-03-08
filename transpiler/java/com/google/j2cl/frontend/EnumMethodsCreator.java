@@ -184,7 +184,10 @@ public class EnumMethodsCreator {
         new IfStatement(
             sourcePosition,
             namesToValuesMapIsNullComparison,
-            new Block(sourcePosition, assignMapCallToFieldStatement),
+            Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(assignMapCallToFieldStatement)
+                .build(),
             null);
 
     // Return statement

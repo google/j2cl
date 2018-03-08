@@ -128,7 +128,12 @@ public class ForStatement extends Statement {
 
     public Builder setBody(Statement body) {
       this.body =
-          (body instanceof Block) ? (Block) body : new Block(body.getSourcePosition(), body);
+          (body instanceof Block)
+              ? (Block) body
+              : Block.newBuilder()
+                  .setSourcePosition(body.getSourcePosition())
+                  .setStatements(body)
+                  .build();
       return this;
     }
 

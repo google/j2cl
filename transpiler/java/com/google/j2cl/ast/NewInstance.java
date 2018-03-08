@@ -83,7 +83,7 @@ public class NewInstance extends Invocation {
   }
 
   /**
-   * A Builder for easily and correctly creating modified versions of new instance calls.
+   * A Builder for NewInstance.
    *
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.

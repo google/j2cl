@@ -35,16 +35,18 @@ public class ImplementSynchronizedStatements extends NormalizationPass {
           public Statement rewriteSynchronizedStatement(
               SynchronizedStatement synchronizedStatement) {
             SourcePosition sourcePosition = synchronizedStatement.getSourcePosition();
-            return new Block(
-                sourcePosition,
-                ImmutableList.<Statement>builder()
-                    .add(
-                        RuntimeMethods.createUtilMethodCall(
-                                "$synchronized",
-                                ImmutableList.of(synchronizedStatement.getExpression()))
-                            .makeStatement(sourcePosition))
-                    .addAll(synchronizedStatement.getBody().getStatements())
-                    .build());
+            return Block.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setStatements(
+                    ImmutableList.<Statement>builder()
+                        .add(
+                            RuntimeMethods.createUtilMethodCall(
+                                    "$synchronized",
+                                    ImmutableList.of(synchronizedStatement.getExpression()))
+                                .makeStatement(sourcePosition))
+                        .addAll(synchronizedStatement.getBody().getStatements())
+                        .build())
+                .build();
           }
         });
   }

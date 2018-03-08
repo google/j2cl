@@ -87,14 +87,16 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           // If there are multiple expressions then turn it into a block so that any var creation
           // appears immediately before its use rather than being hoisted to the top of the
           // enclosing block.
-          return new Block(
-              statement.getSourcePosition(),
-              expressions
-                  .stream()
-                  .map(
-                      innerExpression ->
-                          innerExpression.makeStatement(statement.getSourcePosition()))
-                  .collect(Collectors.toList()));
+          return Block.newBuilder()
+              .setSourcePosition(statement.getSourcePosition())
+              .setStatements(
+                  expressions
+                      .stream()
+                      .map(
+                          innerExpression ->
+                              innerExpression.makeStatement(statement.getSourcePosition()))
+                      .collect(Collectors.toList()))
+              .build();
         }
       }
       return statement;

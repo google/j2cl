@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Type;
-import java.util.Collections;
 
 /**
  * Makes the implicit super call in a constructor explicit.
@@ -32,49 +30,45 @@ import java.util.Collections;
 public class InsertExplicitSuperCalls extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractVisitor() {
-          @Override
-          public boolean enterType(Type type) {
-            return !type.isInterface();
-          }
+    for (Type type : compilationUnit.getTypes()) {
+      if (type.isInterface() || type.getSuperTypeDescriptor() == null) {
+        continue;
+      }
+      for (Method constructor : type.getConstructors()) {
+        if (AstUtils.hasConstructorInvocation(constructor)) {
+          continue;
+        }
+        /*
+         * Only inserts explicit super() call to a constructor that does not have
+         * a super() or this() call, and the corresponding type does have a super class.
+         */
 
-          @Override
-          public void exitMethod(Method method) {
-            /*
-             * Only inserts explicit super() call to a constructor that does not have
-             * a super() or this() call, and the corresponding type does have a super class.
-             */
-            if (!method.isConstructor()
-                || AstUtils.hasConstructorInvocation(method)
-                || getCurrentType().getSuperTypeDescriptor() == null) {
-              return;
-            }
-            /*
-             * Do not insert super() call to a native JS type. Otherwise it will lead to error
-             * because a native JS type is not expected to have a $ctor method.
-             * TODO(rluble): super() call to native type should be inserted somewhere otherwise it
-             * will lead to an error if the native type has a non-empty constructor.
-             */
-            if (getCurrentType().getSuperTypeDescriptor().isNative()) {
-              return;
-            }
-            synthesizeSuperCall(method, getCurrentType().getSuperTypeDescriptor());
-          }
+        if (type.getSuperTypeDescriptor().isNative()) {
+          /*
+           * Do not insert super() call to a native JS type. Otherwise it will lead to error
+           * because a native JS type is not expected to have a $ctor method.
+           * TODO(rluble): super() call to native type should be inserted somewhere otherwise it
+           * will lead to an error if the native type has a non-empty constructor.
+           */
+          continue;
+        }
+        synthesizeSuperCall(constructor);
+      }
+    }
+  }
 
-          private void synthesizeSuperCall(
-              Method method, DeclaredTypeDescriptor superTypeDescriptor) {
-            method
-                .getBody()
-                .getStatements()
-                .add(
-                    0,
-                    MethodCall.Builder.from(
-                            AstUtils.createImplicitConstructorDescriptor(superTypeDescriptor))
-                        .setArguments(Collections.emptyList())
-                        .build()
-                        .makeStatement(method.getBody().getSourcePosition()));
-          }
-        });
+  private static void synthesizeSuperCall(Method constructor) {
+    DeclaredTypeDescriptor superTypeDescriptor =
+        constructor.getDescriptor().getEnclosingTypeDescriptor().getSuperTypeDescriptor();
+
+    constructor
+        .getBody()
+        .getStatements()
+        .add(
+            0,
+            MethodCall.Builder.from(
+                    AstUtils.createImplicitConstructorDescriptor(superTypeDescriptor))
+                .build()
+                .makeStatement(constructor.getBody().getSourcePosition()));
   }
 }

@@ -44,13 +44,19 @@ public class ControlStatementFormatter extends NormalizationPass {
             thenStatement =
                 thenStatement instanceof Block
                     ? thenStatement
-                    : new Block(thenStatement.getSourcePosition(), thenStatement);
+                    : Block.newBuilder()
+                        .setSourcePosition(thenStatement.getSourcePosition())
+                        .setStatements(thenStatement)
+                        .build();
             elseStatement =
                 elseStatement == null
                         || elseStatement instanceof Block
                         || elseStatement instanceof IfStatement
                     ? elseStatement
-                    : new Block(elseStatement.getSourcePosition(), elseStatement);
+                    : Block.newBuilder()
+                        .setSourcePosition(elseStatement.getSourcePosition())
+                        .setStatements(elseStatement)
+                        .build();
             return new IfStatement(
                 ifStatement.getSourcePosition(),
                 ifStatement.getConditionExpression(),
@@ -83,7 +89,10 @@ public class ControlStatementFormatter extends NormalizationPass {
             return new DoWhileStatement(
                 doWhileStatement.getSourcePosition(),
                 doWhileStatement.getConditionExpression(),
-                new Block(body.getSourcePosition(), body));
+                Block.newBuilder()
+                    .setSourcePosition(body.getSourcePosition())
+                    .setStatements(body)
+                    .build());
           }
 
           @Override
@@ -96,7 +105,10 @@ public class ControlStatementFormatter extends NormalizationPass {
             return new WhileStatement(
                 whileStatement.getSourcePosition(),
                 whileStatement.getConditionExpression(),
-                new Block(body.getSourcePosition(), body));
+                Block.newBuilder()
+                    .setSourcePosition(body.getSourcePosition())
+                    .setStatements(body)
+                    .build());
           }
         });
   }

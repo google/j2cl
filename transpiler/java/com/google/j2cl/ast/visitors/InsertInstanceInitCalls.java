@@ -15,53 +15,47 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.j2cl.common.SourcePosition;
 
 /** Insert instance $init call to each constructor. */
 public class InsertInstanceInitCalls extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractVisitor() {
-          @Override
-          public boolean enterType(Type node) {
-            return !node.getInstanceInitializerBlocks().isEmpty();
-          }
+    for (Type type : compilationUnit.getTypes()) {
+      if (type.getInstanceInitializerBlocks().isEmpty()) {
+        continue;
+      }
+      for (Method constructor : type.getConstructors()) {
+        if (AstUtils.hasThisCall(constructor)) {
+          // A constructor with this() call does not need $init call.
+          continue;
+        }
+        synthesizeInstanceInitCall(constructor);
+      }
+    }
+  }
 
-          @Override
-          public void exitMethod(Method method) {
-            if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
-              // A constructor with this() call does not need $init call.
-              return;
-            }
-            synthesizeInstanceInitCall(method);
-          }
+  private static void synthesizeInstanceInitCall(Method constructor) {
+    MethodDescriptor initMethodDescriptor =
+        AstUtils.getInitMethodDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor());
 
-          private void synthesizeInstanceInitCall(Method method) {
-            MethodDescriptor initMethodDescriptor =
-                AstUtils.getInitMethodDescriptor(
-                    method.getDescriptor().getEnclosingTypeDescriptor());
+    SourcePosition sourcePosition = constructor.getBody().getSourcePosition();
 
-            List<Expression> arguments = new ArrayList<>();
-            MethodCall initCall =
-                MethodCall.Builder.from(initMethodDescriptor).setArguments(arguments).build();
-            // If the constructor has a super() call, insert $init call after it. Otherwise, insert
-            // to the top of the method body.
-            int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
-            method
-                .getBody()
-                .getStatements()
-                .add(insertIndex, initCall.makeStatement(method.getBody().getSourcePosition()));
-          }
-        });
+    // If the constructor has a super() call, insert $init call after it. Otherwise, insert
+    // to the top of the method body.
+    int insertIndex = AstUtils.hasSuperCall(constructor) ? 1 : 0;
+    constructor
+        .getBody()
+        .getStatements()
+        .add(
+            insertIndex,
+            MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
   }
 }
+

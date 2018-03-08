@@ -196,7 +196,7 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
   }
 
   /**
-   * A Builder for easily and correctly creating modified versions of methods.
+   * A Builder for Method.
    *
    * <p>Takes care of the busy work of keeping parameter list and method descriptor parameter type
    * list in sync.
@@ -300,7 +300,11 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
       if (bodySourcePosition == null) {
         bodySourcePosition = sourcePosition;
       }
-      Block body = new Block(bodySourcePosition, statements);
+      Block body =
+          Block.newBuilder()
+              .setSourcePosition(bodySourcePosition)
+              .setStatements(statements)
+              .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
 
       Set<TypeVariable> typeParametersTypeDescriptors =
