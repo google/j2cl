@@ -1,23 +1,23 @@
 """j2cl_library build macro
 
 Takes Java source, translates it into Closure style JS and surfaces it to the
-rest of the build tree as a js_library(). Generally library rules dep on other
-library rules for reference resolution and this build macro is no exception.
-In particular the deps this rule needs for reference resolution are
+rest of the build tree with a js_common.provider. Generally library rules dep on
+other library rules for reference resolution and this build macro is no
+exception. In particular the deps this rule needs for reference resolution are
 java_library() targets which will have been created by other invocations of
 this same j2cl_library build macro.
 
 
 Example use:
 
-# creates js_library(name="Foo") containing translated JS.
+# Effectively creates js_library(name="Foo") containing translated JS.
 j2cl_library(
     name = "Foo",
     srcs = glob(["Foo.java"]),
     deps = [":Bar"]  # Directly depends on j2cl_library(name="Bar")
 )
 
-# creates js_library(name="Bar") containing the results.
+# Effectively creates js_library(name="Bar") containing the results.
 j2cl_library(
     name = "Bar",
     srcs = glob(["Bar.java"]),
@@ -98,7 +98,7 @@ def j2cl_library(name,
                  _declare_legacy_namespace=False,
                  _test_externs_list=[],
                  **kwargs):
-  """Translates Java source into JS source in a js_library() target.
+  """Translates Java source into JS source in a js_common.provider target.
 
   Implicit output targets:
     lib<name>-src.jar: A java archive containing the sources (source jar).
@@ -112,12 +112,12 @@ def j2cl_library(name,
   """
   # Private Args:
   #   _js_srcs: JavaScript source files (.js) to include in the bundle.
-  #   _js_deps: Direct js_library dependencies needed by native code (either
+  #   _js_deps: Direct JavaScript dependencies needed by native code (either
   #       via srcs in _js_srcs or via JsInterop/native.js).
   #       For the JsInterop scenario, we encourage developers to create
   #       proper JsInterop stubs next to the js_library rule and create a
   #       j2cl_import rule there.
-  #   _js_exports: Exported js_library dependencies.
+  #   _js_exports: Exported JavaScript dependencies.
   #   _declare_legacy_namespace: A temporary measure while onboarding Docs, do
   #       not use.
 
@@ -274,36 +274,23 @@ def j2cl_library(name,
       testonly=testonly,
   )
 
-  # Bring zip srcs into the js_library tree
+  # This forces execution of j2cl_transpile() targets (both immediate and in the
+  # dependency chain) when build has been invoked on the js_import target.
+  # Additionally, this is used as a workaround to make sure the zip ends up in
+  # the runfiles directory as described in b/35847804.
+  js_data = collections.uniq([merged_zip] + js_deps + js_exports)
+
+  # Bring zip srcs into the js build tree
   js_import(
-      name=base_name + "_js_import",
+      name=base_name,
       deps=js_deps,
       deps_mgmt=js_deps_mgmt,
       exports=js_exports,
       srczip=merged_zip if src_zips else None,
-      # Direct automated dep picking tools away from this target.
-      tags=internal_tags,
-      testonly=testonly,
-  )
-
-  # This forces execution of j2cl_transpile() targets (both immediate and in the
-  # dependency chain) when build has been invoked on the js_library() target.
-  # Additionally, this is used as a workaround to make sure the zip ends up in the runfiles
-  # directory as described in b/35847804.
-  js_library_data = collections.uniq([merged_zip] + js_deps + js_exports)
-
-  # Theoretically we should be able to just create the js_import() target, but
-  # some Blaze rules (like jsunit_test()) require that all their direct deps be
-  # exactly a js_library rule. They should allow anyone target that supplies a
-  # JS provider, but they don't.
-  native.js_library(
-      name=base_name,
-      exports=[base_name + "_js_import"],
-      deps_mgmt = js_deps_mgmt,
-      data=js_library_data,
-      testonly=testonly,
-      visibility=visibility,
       tags=tags,
+      testonly=testonly,
+      data=js_data,
+      visibility=visibility,
   )
 
   if generate_build_test == None:
@@ -339,8 +326,8 @@ def j2cl_library(name,
     build_test(
         name=base_name + "_build_test",
         targets=[
+            base_name,
             base_name + "_js_binary",
-            base_name + "_js_import",
         ],
         tags=internal_tags,
     )
