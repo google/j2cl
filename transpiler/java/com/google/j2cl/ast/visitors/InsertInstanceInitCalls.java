@@ -20,8 +20,10 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.SourcePosition;
+import java.util.List;
 
 /** Insert instance $init call to each constructor. */
 public class InsertInstanceInitCalls extends NormalizationPass {
@@ -47,15 +49,15 @@ public class InsertInstanceInitCalls extends NormalizationPass {
 
     SourcePosition sourcePosition = constructor.getBody().getSourcePosition();
 
+    List<Statement> constructorStatements = constructor.getBody().getStatements();
     // If the constructor has a super() call, insert $init call after it. Otherwise, insert
     // to the top of the method body.
-    int insertIndex = AstUtils.hasSuperCall(constructor) ? 1 : 0;
-    constructor
-        .getBody()
-        .getStatements()
-        .add(
-            insertIndex,
-            MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
+    int insertIndex =
+        constructorStatements.indexOf(AstUtils.getConstructorInvocationStatement(constructor)) + 1;
+
+    constructorStatements.add(
+        insertIndex,
+        MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
   }
 }
 
