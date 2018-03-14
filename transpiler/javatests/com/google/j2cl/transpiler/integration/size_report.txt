@@ -1,31 +1,32 @@
 Integration tests size report:
 **************************************
-There are 3 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1637940 to 1637901 bytes (100%->100.0%) and from
-  502256 to 502241 bytes (100%->100.0%) gzipped.
+  1637952 to 1638195 bytes (100%->100.0%) and from
+  502303 to 502351 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1161     1144 genericmethod (-1.5%)
-      25566    25565 jsinteroptests (-0.0%)
+       2051     2047 arrayliteral (-0.2%)
+       2684     2681 staticinitsuper (-0.1%)
+       3000     2999 classliteral (-0.0%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       2681     2684 staticinitsuper (0.1%)
+       1522     1578 enums (3.7%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-   11600440 11413743 box2d_default (-1.6%)
-    6714351  6663408 box2d_default.minified (-0.8%)
-    3511077  3453081 emptyclass (-1.7%)
-    2096543  2079282 emptyclass.minified (-0.8%)
+   11413849 11413849 box2d_default (unchanged)
+    6663477  6663477 box2d_default.minified (unchanged)
+    3453187  3453187 emptyclass (unchanged)
+    2079351  2079351 emptyclass.minified (unchanged)
 
 
 All reports:
@@ -42,7 +43,7 @@ All reports:
        1709     1709 arraybranchinsertion (unchanged)
        1035     1035 arraycastsinglesideeffect (unchanged)
        1522     1522 arrayleafinsertion (unchanged)
-       2047     2047 arrayliteral (unchanged)
+       2051     2047 arrayliteral (-0.2%)
        1736     1736 arrayobjectcalls (unchanged)
        3563     3563 arrayofboxedtype (unchanged)
        3847     3847 arrayreadwrite (unchanged)
@@ -78,7 +79,7 @@ All reports:
        1021     1021 castwithsideeffect (unchanged)
        1001     1001 circularcompiletimeconstant (unchanged)
        1242     1242 classcastexception (unchanged)
-       2999     2999 classliteral (unchanged)
+       3000     2999 classliteral (-0.0%)
         995      995 classliteralobfuscated (unchanged)
        2118     2118 classliteralstripped (unchanged)
        1035     1035 compiletimeconstant (unchanged)
@@ -95,7 +96,7 @@ All reports:
           9        9 emptyclasswithparent (unchanged)
        1175     1175 enummethods (unchanged)
        1856     1856 enumobfuscation (unchanged)
-       1522     1522 enums (unchanged)
+       1522     1578 enums (3.7%)
        1950     1950 enumspecialfunctions (unchanged)
        1234     1234 exceptionnotcaught (unchanged)
        1030     1030 exports (unchanged)
@@ -106,7 +107,7 @@ All reports:
        1627     1627 foreachstatement (unchanged)
        1044     1044 forstatement (unchanged)
        1095     1095 genericinterfaceabstractimpl (unchanged)
-       1161     1144 genericmethod (-1.5%)
+       1144     1144 genericmethod (unchanged)
           9        9 genericnativetype (unchanged)
        1115     1115 generictype (unchanged)
           9        9 gwtincompatible (unchanged)
@@ -137,7 +138,7 @@ All reports:
        1360     1360 interfaces (unchanged)
        1641     1641 intersectiontype (unchanged)
        1349     1349 iteratormethodresolution (unchanged)
-      59366    59366 jsasync (unchanged)
+      59423    59423 jsasync (unchanged)
           9        9 jsbridgebackward (unchanged)
        1323     1323 jsbridgemethodaccidentaloverride (unchanged)
           9        9 jsbridgemultipleaccidental (unchanged)
@@ -148,7 +149,7 @@ All reports:
        1446     1446 jsfunctionbridge (unchanged)
        1890     1890 jsfunctiontypeannotation (unchanged)
        1054     1054 jsinnerclass (unchanged)
-      25566    25565 jsinteroptests (-0.0%)
+      25565    25565 jsinteroptests (unchanged)
        1062     1062 jsmethodoverride (unchanged)
         987      987 jsoverlay (unchanged)
         989      989 jsoverlaystaticrefs (unchanged)
@@ -216,7 +217,7 @@ All reports:
           9        9 staticfieldinitializer (unchanged)
           9        9 staticfields (unchanged)
        1008     1008 staticinitorder (unchanged)
-       2681     2684 staticinitsuper (0.1%)
+       2684     2681 staticinitsuper (-0.1%)
         963      963 staticjsmethods (unchanged)
        1075     1075 staticnestedclass (unchanged)
        1735     1735 strictequality (unchanged)

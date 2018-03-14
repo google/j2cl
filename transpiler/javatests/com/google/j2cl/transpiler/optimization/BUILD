@@ -34,3 +34,8 @@ j2cl_optimization_test(
     name = "CastDisableOptimizationTest",
     defs = ["--define=jre.checks.checkLevel=MINIMAL"],
 )
+
+j2cl_optimization_test(
+    name = "EnumOptimizationTest",
+    defs = ["--define=jre.checks.checkLevel=MINIMAL"],
+)

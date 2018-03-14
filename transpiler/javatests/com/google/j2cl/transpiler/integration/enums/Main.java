@@ -21,7 +21,7 @@ public class Main {
     FOO,
     FOZ,
     UNREFERENCED_VALUE,
-    UNREFERENCED_SUBCLASS_VALUE {}
+    UNREFERENCED_SUBCLASS_VALUE {},
   }
 
   enum Bar {
@@ -61,6 +61,11 @@ public class Main {
     static Baz field = f(new Object());
   }
 
+  enum Blah {
+    BLAH,
+    UNREFERENCED_VALUE,
+  }
+
   public static void main(String[] args) {
     assert Foo.FOO.ordinal() == 0;
     assert Foo.FOO.name().equals("FOO");
@@ -86,5 +91,8 @@ public class Main {
     }
 
     assert Baz.field == null;
+
+    assert Blah.BLAH.ordinal() == 0;
+    assert Blah.BLAH.name().equals("BLAH");
   }
 }
