@@ -2580,6 +2580,62 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testJsAsyncSucceeeds() {
+    assertTranspileSucceeds(
+            "Buggy",
+            "import jsinterop.annotations.JsAsync;",
+            "import jsinterop.annotations.JsPackage;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(namespace = JsPackage.GLOBAL)",
+            "class Promise {",
+            "}",
+            "@JsType(namespace = JsPackage.GLOBAL)",
+            "interface IThenable {",
+            "}",
+            "class Buggy {",
+            "  @JsAsync",
+            "  public Promise a() { return null; }",
+            "  @JsAsync",
+            "  public IThenable b() { return null; }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testJsAsyncFails() {
+    assertTranspileFails(
+            "Buggy",
+            "import jsinterop.annotations.JsAsync;",
+            "import jsinterop.annotations.JsPackage;",
+            "import jsinterop.annotations.JsType;",
+            "import java.util.List;",
+            "@JsType(namespace = JsPackage.GLOBAL)",
+            "class Promise {",
+            "}",
+            "class A {",
+            "  @JsAsync",
+            "  public <T> List<T> a() { return null; }",
+            "  @JsAsync",
+            "  public <P extends Promise> P b() { return null; }",
+            "  @JsAsync",
+            "  public String c() { return null; }",
+            "  @JsAsync",
+            "  public Promise[] d() { return null; }",
+            "  @JsAsync",
+            "  public double e() { return 0; }",
+            "}")
+        .assertErrors(
+            "JsAsync method 'List A.a()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'List'.",
+            "JsAsync method 'M_P A.b()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'M_P'.",
+            "JsAsync method 'String A.c()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'String'.",
+            "JsAsync method 'Promise[] A.d()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'Promise[]'.",
+            "JsAsync method 'double A.e()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'double'.");
+  }
+
   public void testUnusableByJsSuppressionSucceeds() {
     assertTranspileSucceeds(
             "Buggy",

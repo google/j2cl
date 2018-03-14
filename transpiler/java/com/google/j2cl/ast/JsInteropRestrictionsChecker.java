@@ -186,6 +186,9 @@ public class JsInteropRestrictionsChecker {
       Method method = (Method) member;
       checkIllegalOverrides(method);
       checkMethodParameters(method);
+      if (memberDescriptor.isJsAsync()) {
+        checkJsAsyncMethod(method);
+      }
       if (!checkJsPropertyAccessor(method)) {
         return;
       }
@@ -204,6 +207,22 @@ public class JsInteropRestrictionsChecker {
     if (isStaticJsMember(memberDescriptor)) {
       checkNameCollisions(staticJsMembersByName, member);
     }
+  }
+
+  private void checkJsAsyncMethod(Method method) {
+    TypeDescriptor returnType = method.getDescriptor().getReturnTypeDescriptor();
+    if (returnType instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor returnTypeDescriptor = (DeclaredTypeDescriptor) returnType;
+      String qualifiedJsName = returnTypeDescriptor.getQualifiedJsName();
+      if (qualifiedJsName.equals("IThenable") || qualifiedJsName.equals("Promise")) {
+        return;
+      }
+    }
+    problems.error(
+        method.getSourcePosition(),
+        "JsAsync method '%s' should return either 'IThenable' or 'Promise' but returns '%s'.",
+        method.getReadableDescription(),
+        returnType.getReadableDescription());
   }
 
   private void checkOverrideConsistency(Member member) {
