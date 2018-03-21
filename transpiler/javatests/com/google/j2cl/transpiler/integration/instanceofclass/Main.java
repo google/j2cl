@@ -25,6 +25,7 @@ public class Main {
     assert object instanceof Object;
     assert !(object instanceof String);
     assert "A String Literal" instanceof String;
+    assert !(null instanceof Object);
 
     try {
       assert hasSideEffect() instanceof Object;

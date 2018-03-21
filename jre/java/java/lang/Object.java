@@ -48,7 +48,7 @@ public class Object {
 
   @JsMethod
   private static boolean $isInstance(Object instance) {
-    return true;
+    return instance != null;
   }
 
   @JsMethod

@@ -418,6 +418,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       renderIsInstanceOfJsFunctionImplementationStatement(type.getTypeDescriptor());
     } else if (type.isJsOverlayImplementation()) {
       if (type.isInterface()) {
+        // Since instanceof is forbidden this is only used for casting so null check is not needed.
         sourceBuilder.append("return true;");
       } else {
         renderIsInstanceOfClassStatement(type.getNativeTypeDescriptor());
