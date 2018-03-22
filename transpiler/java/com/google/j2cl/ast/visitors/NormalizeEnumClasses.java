@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.ast.visitors;
 
-
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -34,6 +34,8 @@ import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,11 +102,41 @@ public class NormalizeEnumClasses extends NormalizationPass {
                       }
                     });
 
+            if (type.isEnum()) {
+              // Initialize name and ordinal fields.
+              // TODO(b/74986525): revert to initialization of these fields in superclass
+              // once removal of unused values is guaranteed or more stable.
+              initJavaLangEnumField(method, "ordinal", ordinalParameter.getReference());
+              initJavaLangEnumField(method, "name", nameParameter.getReference());
+            }
+
             return Method.Builder.from(method)
                 .addParameters(0, nameParameter, ordinalParameter)
                 .build();
           }
         });
+  }
+
+  private static void initJavaLangEnumField(
+      Method method, String fieldName, VariableReference variableReference) {
+
+    FieldDescriptor fieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangEnum)
+            .setName(fieldName)
+            .setVisibility(Visibility.PRIVATE)
+            .setTypeDescriptor(variableReference.getTypeDescriptor())
+            .build();
+
+    method
+        .getBody()
+        .getStatements()
+        .add(
+            0,
+            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
+                .setRightOperand(variableReference)
+                .build()
+                .makeStatement(method.getSourcePosition()));
   }
 
   /** Creates constant static fields to hold the enum ordinal constants. */

@@ -24,13 +24,14 @@ import jsinterop.annotations.JsType;
 @JsType
 public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {
 
-  private final String name;
-
-  private final int ordinal;
+  // TODO(b/74986525): make final when fixed.
+  private String name;
+  private int ordinal;
 
   protected Enum(String name, int ordinal) {
-    this.name = name;
-    this.ordinal = ordinal;
+    // TODO(b/74986525): uncomment initialization when fixed.
+    // this.name = name;
+    // this.ordinal = ordinal;
   }
 
   public Class<E> getDeclaringClass() {

@@ -77,7 +77,7 @@ public class Variable extends Node implements Cloneable<Variable>, HasUnusableBy
     return Visitor_Variable.visit(processor, this);
   }
 
-  public Expression getReference() {
+  public VariableReference getReference() {
     return new VariableReference(this);
   }
 
