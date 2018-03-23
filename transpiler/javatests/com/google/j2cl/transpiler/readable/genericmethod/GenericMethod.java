@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.readable.genericmethod;
 
+import java.util.List;
 import javaemul.internal.annotations.UncheckedCast;
 
 public class GenericMethod<T> {
@@ -68,5 +69,40 @@ public class GenericMethod<T> {
 
     String s = checked();
     s = unchecked();
+  }
+
+  static class SuperContainer<C extends Container<?>> {
+    C get() {
+      return null;
+    }
+  }
+
+  static class Container<CT extends Content> {
+    CT get() {
+      return null;
+    }
+  }
+
+  static class Content {}
+
+  public static Content testErasureCastOnWildCard() {
+    List<Container<?>> list = null;
+    return list.get(0).get();
+  }
+
+  public static <T extends Content> Content testErasureCastOnBoundedTypeVariable() {
+    List<Container<T>> list = null;
+    return list.get(0).get();
+  }
+
+  public static Content testErasureCastOnWildCardTwoLevels() {
+    List<SuperContainer<? extends Container<? extends Content>>> list = null;
+    return list.get(0).get().get();
+  }
+
+  public static <CT extends Container<C>, C extends Content>
+      Content testErasureCastOnBoundedTypeVariableTwoLevels() {
+    List<SuperContainer<CT>> list = null;
+    return list.get(0).get().get();
   }
 }

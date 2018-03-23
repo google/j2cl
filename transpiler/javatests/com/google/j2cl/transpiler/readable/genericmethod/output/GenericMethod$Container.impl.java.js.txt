@@ -1,0 +1,100 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$Container.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Container$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Content = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Content$impl');
+
+
+/**
+ * @template C_Container_CT
+ */
+class Container extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Container()'.
+   * @template C_Container_CT
+   * @return {!Container<C_Container_CT>}
+   * @public
+   */
+  static $create__() {
+    Container.$clinit();
+    let $instance = new Container();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Container__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Container()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Container__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {C_Container_CT}
+   * @public
+   */
+  m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod() {
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Container;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Container);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Container.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    Container,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$Container'));
+
+
+
+/**
+ * Export class.
+ */
+exports = Container;
+//# sourceMappingURL=GenericMethod$Container.js.map

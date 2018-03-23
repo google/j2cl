@@ -48,6 +48,34 @@
 [String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[public static Content testErasureCastOnWildCard() {
+    List<Container<?>> list = null;
+    return list.get(0).get();
+  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCard"
+[List<Container<?>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCard"
+[list] => [list] "list"
+[return list.get(0).get();] => [return /**@type {Container<*>} */ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCard"
+[public static <T extends Content> Content testErasureCastOnBoundedTypeVariable() {
+    List<Container<T>> list = null;
+    return list.get(0).get();
+  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariable"
+[List<Container<T>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariable"
+[list] => [list] "list"
+[return list.get(0).get();] => [return /**@type {Container<Content>} */ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariable"
+[public static Content testErasureCastOnWildCardTwoLevels() {
+    List<SuperContainer<? extends Container<? extends Content>>> list = null;
+    return list.get(0).get().get();
+  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCardTwoLevels"
+[List<SuperContainer<? extends Container<? extends Content>>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCardTwoLevels"
+[list] => [list] "list"
+[return list.get(0).get().get();] => [return /**@type {Container} */ (/**@type {SuperContainer<*>} */ ($Casts.$to(list.getAtIndex(0), SuperContainer)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnWildCardTwoLevels"
+[public static <CT extends Container<C>, C extends Content>
+      Content testErasureCastOnBoundedTypeVariableTwoLevels() {
+...    return list.get(0).get().get();
+  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariableTwoLevels"
+[List<SuperContainer<CT>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariableTwoLevels"
+[list] => [list] "list"
+[return list.get(0).get().get();] => [return /**@type {Container} */ (/**@type {SuperContainer<Container>} */ ($Casts.$to(list.getAtIndex(0), SuperContainer)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCastOnBoundedTypeVariableTwoLevels"
 [public class GenericMethod<T> {
   public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
 ...  }

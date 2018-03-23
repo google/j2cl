@@ -1,0 +1,101 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$SuperContainer.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.SuperContainer$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Container = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Container$impl');
+let Content = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Content$impl');
+
+
+/**
+ * @template C_SuperContainer_C
+ */
+class SuperContainer extends java_lang_Object {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'SuperContainer()'.
+   * @template C_SuperContainer_C
+   * @return {!SuperContainer<C_SuperContainer_C>}
+   * @public
+   */
+  static $create__() {
+    SuperContainer.$clinit();
+    let $instance = new SuperContainer();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'SuperContainer()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {C_SuperContainer_C}
+   * @public
+   */
+  m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod() {
+    return null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SuperContainer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SuperContainer);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SuperContainer.$clinit = function() {};
+    java_lang_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    SuperContainer,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$SuperContainer'));
+
+
+
+/**
+ * Export class.
+ */
+exports = SuperContainer;
+//# sourceMappingURL=GenericMethod$SuperContainer.js.map
