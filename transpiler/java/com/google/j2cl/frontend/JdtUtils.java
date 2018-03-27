@@ -127,6 +127,7 @@ class JdtUtils {
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationFieldDescriptor(declarationFieldDescriptor)
+        .setEnumConstant(variableBinding.isEnumConstant())
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
         .build();

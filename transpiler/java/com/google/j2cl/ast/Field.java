@@ -26,19 +26,16 @@ import javax.annotation.Nullable;
 public class Field extends Member implements HasJsNameInfo {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
-  private boolean isEnumField;
   private Variable capturedVariable;
 
   private Field(
       SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
-      boolean isEnumField,
       Variable capturedVariable) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
-    this.isEnumField = isEnumField;
     this.capturedVariable = capturedVariable;
   }
 
@@ -69,7 +66,7 @@ public class Field extends Member implements HasJsNameInfo {
   }
 
   public boolean isEnumField() {
-    return isEnumField;
+    return getDescriptor().isEnumConstant();
   }
 
   @Override
@@ -101,7 +98,6 @@ public class Field extends Member implements HasJsNameInfo {
   public static class Builder {
     private FieldDescriptor fieldDescriptor;
     private Expression initializer;
-    private boolean isEnumField;
     private Variable capturedVariable;
     private SourcePosition sourcePosition;
 
@@ -109,7 +105,6 @@ public class Field extends Member implements HasJsNameInfo {
       Builder builder = new Builder();
       builder.fieldDescriptor = field.getDescriptor();
       builder.initializer = field.getInitializer();
-      builder.isEnumField = field.isEnumField();
       builder.capturedVariable = field.getCapturedVariable();
       builder.sourcePosition = field.getSourcePosition();
       return builder;
@@ -123,11 +118,6 @@ public class Field extends Member implements HasJsNameInfo {
 
     public Builder setInitializer(Expression initializer) {
       this.initializer = initializer;
-      return this;
-    }
-
-    public Builder setEnumField(boolean isEnumField) {
-      this.isEnumField = isEnumField;
       return this;
     }
 
@@ -150,7 +140,7 @@ public class Field extends Member implements HasJsNameInfo {
     }
 
     public Field build() {
-      return new Field(sourcePosition, fieldDescriptor, initializer, isEnumField, capturedVariable);
+      return new Field(sourcePosition, fieldDescriptor, initializer, capturedVariable);
     }
   }
 }

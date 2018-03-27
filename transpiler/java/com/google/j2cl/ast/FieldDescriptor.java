@@ -34,6 +34,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isCompileTimeConstant();
 
+  public abstract boolean isEnumConstant();
+
   public abstract boolean isVariableCapture();
 
   public abstract boolean isEnclosingInstanceCapture();
@@ -176,6 +178,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setEnclosingInstanceCapture(false)
         .setSynthetic(false)
         .setUnusableByJsSuppressed(false)
+        .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
   }
 
@@ -203,6 +206,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         DeclaredTypeDescriptor enclosingTypeDescriptor);
 
     public abstract Builder setName(String name);
+
+    public abstract Builder setEnumConstant(boolean isEnumConstant);
 
     public abstract Builder setSynthetic(boolean isSynthetic);
 

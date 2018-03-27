@@ -302,9 +302,10 @@ public class CompilationUnitBuilder {
 
       FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
+
+      checkArgument(fieldDescriptor.isEnumConstant());
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
-          .setEnumField(true)
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
           .build();
     }
