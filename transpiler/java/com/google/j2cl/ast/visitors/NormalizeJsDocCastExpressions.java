@@ -15,21 +15,18 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeVariable;
 
 /**
- * Rewrites /## @type {Foo<?>} #/ casts (but not declarations) to /## @type {Foo<*>} #/.
- *
- * <p>They are functionally equivalent except that the first trips up JSCompiler's unknown
- * properties checker.
+ * Rewrites casts to {@code @type {Foo<?>}} where {@code ? extends Bar} as casts to {@code @type
+ * {Foo<Bar>}} to avoid "unknown type" errors.
  */
 public class NormalizeJsDocCastExpressions extends NormalizationPass {
   @Override
@@ -38,33 +35,37 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
-            TypeDescriptor typeDescriptor = jsDocCastExpression.getTypeDescriptor();
-            if (!(typeDescriptor instanceof DeclaredTypeDescriptor)) {
+            if (!(jsDocCastExpression.getTypeDescriptor() instanceof DeclaredTypeDescriptor)) {
               return jsDocCastExpression;
             }
 
-            DeclaredTypeDescriptor annotationTypeDescriptor =
-                (DeclaredTypeDescriptor) typeDescriptor;
+            DeclaredTypeDescriptor castTypeDescriptor =
+                (DeclaredTypeDescriptor) jsDocCastExpression.getTypeDescriptor();
 
-            if (!annotationTypeDescriptor.hasTypeArguments()) {
+            if (!castTypeDescriptor.hasTypeArguments()) {
               return jsDocCastExpression;
             }
 
-            Iterable<TypeDescriptor> typeArgumentTypeDescriptors =
-                Lists.transform(
-                    annotationTypeDescriptor.getTypeArgumentDescriptors(),
-                    typeArgument ->
-                        typeArgument instanceof TypeVariable
-                                && ((TypeVariable) typeArgument).isWildcardOrCapture()
-                            ? TypeDescriptors.get().javaLangObject
-                            : typeArgument);
             return JsDocCastExpression.Builder.from(jsDocCastExpression)
                 .setCastType(
-                    DeclaredTypeDescriptor.Builder.from(annotationTypeDescriptor)
-                        .setTypeArgumentDescriptors(typeArgumentTypeDescriptors)
+                    DeclaredTypeDescriptor.Builder.from(castTypeDescriptor)
+                        .setTypeArgumentDescriptors(
+                            castTypeDescriptor
+                                .getTypeArgumentDescriptors()
+                                .stream()
+                                .map(NormalizeJsDocCastExpressions::replaceWildcardWithBound)
+                                .collect(ImmutableList.toImmutableList()))
                         .build())
                 .build();
           }
         });
+  }
+
+  private static TypeDescriptor replaceWildcardWithBound(TypeDescriptor typeDescriptor) {
+    if (!(typeDescriptor instanceof TypeVariable)) {
+      return typeDescriptor;
+    }
+    TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+    return typeVariable.isWildcardOrCapture() ? typeDescriptor.toRawTypeDescriptor() : typeVariable;
   }
 }
