@@ -83,26 +83,47 @@ public class GenericMethod<T> {
     }
   }
 
-  static class Content {}
+  static class Content {
+    String getProp() {
+      return null;
+    }
+  }
 
-  public static Content testErasureCastOnWildCard() {
+  public static void acceptsContent(Content content) {}
+
+  public static void acceptsString(String string) {}
+
+  public static void testErasureCast_wildcard() {
     List<Container<?>> list = null;
-    return list.get(0).get();
+    Content content = list.get(0).get();
+    acceptsString(content.getProp());
+    acceptsContent(content);
+
+    List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
+    Content nestedContent = nestedWildcardList.get(0).get().get();
+    acceptsString(nestedContent.getProp());
+    acceptsContent(nestedContent);
+
+    List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
+    Content deepContent = deepWildcardList.get(0).get().get();
+    acceptsString(deepContent.getProp());
+    acceptsContent(deepContent);
   }
 
-  public static <T extends Content> Content testErasureCastOnBoundedTypeVariable() {
-    List<Container<T>> list = null;
-    return list.get(0).get();
-  }
+  public static <CT extends Container<C>, C extends Content> void testErasureCast_typeVariable() {
+    List<Container<C>> list = null;
+    Content content = list.get(0).get();
+    acceptsString(content.getProp());
+    acceptsContent(content);
 
-  public static Content testErasureCastOnWildCardTwoLevels() {
-    List<SuperContainer<? extends Container<? extends Content>>> list = null;
-    return list.get(0).get().get();
-  }
+    List<SuperContainer<CT>> nestedTypeVariableList = null;
+    Content nestedContent = nestedTypeVariableList.get(0).get().get();
+    acceptsString(nestedContent.getProp());
+    acceptsContent(nestedContent);
 
-  public static <CT extends Container<C>, C extends Content>
-      Content testErasureCastOnBoundedTypeVariableTwoLevels() {
-    List<SuperContainer<CT>> list = null;
-    return list.get(0).get().get();
+    List<SuperContainer<Container<C>>> deepTypeVariableList = null;
+    Content deepContent = deepTypeVariableList.get(0).get().get();
+    acceptsString(deepContent.getProp());
+    acceptsContent(deepContent);
   }
 }

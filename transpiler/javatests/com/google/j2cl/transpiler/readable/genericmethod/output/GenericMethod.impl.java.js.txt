@@ -156,57 +156,110 @@ class GenericMethod extends java_lang_Object {
   }
 
   /**
-   * @return {Content}
+   * @param {Content} content
+   * @return {void}
    * @public
    */
-  static m_testErasureCastOnWildCard__() {
+  static m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+      content) {
     GenericMethod.$clinit();
-    let list = null;
-    return /**@type {Container<*>} */ (
-               $Casts.$to(list.getAtIndex(0), Container))
-        .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
   }
 
   /**
-   * @template M_T
-   * @return {Content}
+   * @param {?string} string$1$
+   * @return {void}
    * @public
    */
-  static m_testErasureCastOnBoundedTypeVariable__() {
+  static m_acceptsString__java_lang_String(string$1$) {
     GenericMethod.$clinit();
-    let list = null;
-    return /**@type {Container<Content>} */ (
-               $Casts.$to(list.getAtIndex(0), Container))
-        .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
   }
 
   /**
-   * @return {Content}
+   * @return {void}
    * @public
    */
-  static m_testErasureCastOnWildCardTwoLevels__() {
+  static m_testErasureCast_wildcard__() {
     GenericMethod.$clinit();
     let list = null;
-    return /**@type {Container} */ (
-               /**@type {SuperContainer<*>} */ (
-                   $Casts.$to(list.getAtIndex(0), SuperContainer))
-                   .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
-        .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    let content =
+        /**@type {Container<*>} */ ($Casts.$to(list.getAtIndex(0), Container))
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        content
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            content);
+    let nestedWildcardList = null;
+    let nestedContent =
+        /**@type {Container} */
+        (/**@type {SuperContainer<*>} */ (
+             $Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer))
+             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        nestedContent
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            nestedContent);
+    let deepWildcardList = null;
+    let deepContent =
+        /**@type {SuperContainer<Container<?>>} */ (
+            $Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer))
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        deepContent
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            deepContent);
   }
 
   /**
    * @template M_CT, M_C
-   * @return {Content}
+   * @return {void}
    * @public
    */
-  static m_testErasureCastOnBoundedTypeVariableTwoLevels__() {
+  static m_testErasureCast_typeVariable__() {
     GenericMethod.$clinit();
     let list = null;
-    return /**@type {Container} */ (
-               /**@type {SuperContainer<Container>} */ (
-                   $Casts.$to(list.getAtIndex(0), SuperContainer))
-                   .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
-        .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    let content =
+        /**@type {Container<Content>} */ (
+            $Casts.$to(list.getAtIndex(0), Container))
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        content
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            content);
+    let nestedTypeVariableList = null;
+    let nestedContent =
+        /**@type {Container} */
+        (/**@type {SuperContainer<Container>} */ (
+             $Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer))
+             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        nestedContent
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            nestedContent);
+    let deepTypeVariableList = null;
+    let deepContent =
+        /**@type {SuperContainer<Container<Content>>} */ (
+            $Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer))
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()
+            .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
+    GenericMethod.m_acceptsString__java_lang_String(
+        deepContent
+            .m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());
+    GenericMethod
+        .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
+            deepContent);
   }
 
   /**
