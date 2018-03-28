@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Ternary conditional expression.
- */
+/** Ternary conditional expression. */
 @Visitable
 public class ConditionalExpression extends Expression {
   private TypeDescriptor typeDescriptor;
@@ -29,7 +27,7 @@ public class ConditionalExpression extends Expression {
   @Visitable Expression trueExpression;
   @Visitable Expression falseExpression;
 
-  public ConditionalExpression(
+  private ConditionalExpression(
       TypeDescriptor typeDescriptor,
       Expression conditionExpression,
       Expression trueExpression,
@@ -69,5 +67,50 @@ public class ConditionalExpression extends Expression {
   @Override
   public Node accept(Processor processor) {
     return Visitor_ConditionalExpression.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for ConditionalExpression. */
+  public static class Builder {
+    private TypeDescriptor typeDescriptor;
+    private Expression conditionExpression;
+    private Expression trueExpression;
+    private Expression falseExpression;
+
+    public static Builder from(ConditionalExpression conditionalExpression) {
+      return new Builder()
+          .setTypeDescriptor(conditionalExpression.getTypeDescriptor())
+          .setConditionExpression(conditionalExpression.getConditionExpression())
+          .setTrueExpression(conditionalExpression.getTrueExpression())
+          .setFalseExpression(conditionalExpression.getFalseExpression());
+    }
+
+    public Builder setConditionExpression(Expression conditionExpression) {
+      this.conditionExpression = conditionExpression;
+      return this;
+    }
+
+    public Builder setTrueExpression(Expression trueExpression) {
+      this.trueExpression = trueExpression;
+      return this;
+    }
+
+    public Builder setFalseExpression(Expression falseExpression) {
+      this.falseExpression = falseExpression;
+      return this;
+    }
+
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public ConditionalExpression build() {
+      return new ConditionalExpression(
+          typeDescriptor, conditionExpression, trueExpression, falseExpression);
+    }
   }
 }

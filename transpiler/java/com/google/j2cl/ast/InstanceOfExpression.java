@@ -28,7 +28,7 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   @Visitable TypeDescriptor testTypeDescriptor;
   SourcePosition sourcePosition;
 
-  public InstanceOfExpression(
+  private InstanceOfExpression(
       SourcePosition sourcePosition, Expression expression, TypeDescriptor testTypeDescriptor) {
     this.expression = checkNotNull(expression);
     this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
@@ -74,5 +74,41 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   @Override
   public void setSourcePosition(SourcePosition sourcePosition) {
     this.sourcePosition = sourcePosition;
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for InstanceOfExpression. */
+  public static class Builder {
+    private Expression expression;
+    private TypeDescriptor testTypeDescriptor;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(InstanceOfExpression instanceOfExpression) {
+      return new Builder()
+          .setExpression(instanceOfExpression.getExpression())
+          .setTestTypeDescriptor(instanceOfExpression.getTestTypeDescriptor());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setExpression(Expression expression) {
+      this.expression = expression;
+      return this;
+    }
+
+    public Builder setTestTypeDescriptor(TypeDescriptor castTypeDescriptor) {
+      this.testTypeDescriptor = castTypeDescriptor;
+      return this;
+    }
+
+    public InstanceOfExpression build() {
+      return new InstanceOfExpression(sourcePosition, expression, testTypeDescriptor);
+    }
   }
 }

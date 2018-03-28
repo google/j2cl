@@ -57,11 +57,12 @@ public class ControlStatementFormatter extends NormalizationPass {
                         .setSourcePosition(elseStatement.getSourcePosition())
                         .setStatements(elseStatement)
                         .build();
-            return new IfStatement(
-                ifStatement.getSourcePosition(),
-                ifStatement.getConditionExpression(),
-                thenStatement,
-                elseStatement);
+            return IfStatement.newBuilder()
+                .setSourcePosition(ifStatement.getSourcePosition())
+                .setConditionExpression(ifStatement.getConditionExpression())
+                .setThenStatement(thenStatement)
+                .setElseStatement(elseStatement)
+                .build();
           }
 
           @Override
@@ -86,13 +87,15 @@ public class ControlStatementFormatter extends NormalizationPass {
               return doWhileStatement;
             }
 
-            return new DoWhileStatement(
-                doWhileStatement.getSourcePosition(),
-                doWhileStatement.getConditionExpression(),
-                Block.newBuilder()
-                    .setSourcePosition(body.getSourcePosition())
-                    .setStatements(body)
-                    .build());
+            return DoWhileStatement.newBuilder()
+                .setSourcePosition(doWhileStatement.getSourcePosition())
+                .setConditionExpression(doWhileStatement.getConditionExpression())
+                .setBody(
+                    Block.newBuilder()
+                        .setSourcePosition(body.getSourcePosition())
+                        .setStatements(body)
+                        .build())
+                .build();
           }
 
           @Override
@@ -102,13 +105,15 @@ public class ControlStatementFormatter extends NormalizationPass {
               return whileStatement;
             }
 
-            return new WhileStatement(
-                whileStatement.getSourcePosition(),
-                whileStatement.getConditionExpression(),
-                Block.newBuilder()
-                    .setSourcePosition(body.getSourcePosition())
-                    .setStatements(body)
-                    .build());
+            return WhileStatement.newBuilder()
+                .setSourcePosition(whileStatement.getSourcePosition())
+                .setConditionExpression(whileStatement.getConditionExpression())
+                .setBody(
+                    Block.newBuilder()
+                        .setSourcePosition(body.getSourcePosition())
+                        .setStatements(body)
+                        .build())
+                .build();
           }
         });
   }

@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nullable;
 
-/** Switch case statement. */
+/** Switch case. */
 @Visitable
 public class SwitchCase extends Node implements Cloneable<SwitchCase> {
   @Nullable @Visitable Expression caseExpression;

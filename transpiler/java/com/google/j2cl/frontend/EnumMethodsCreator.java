@@ -181,14 +181,15 @@ public class EnumMethodsCreator {
             .build()
             .makeStatement(sourcePosition);
     Statement ifStatement =
-        new IfStatement(
-            sourcePosition,
-            namesToValuesMapIsNullComparison,
-            Block.newBuilder()
-                .setSourcePosition(sourcePosition)
-                .setStatements(assignMapCallToFieldStatement)
-                .build(),
-            null);
+        IfStatement.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setConditionExpression(namesToValuesMapIsNullComparison)
+            .setThenStatement(
+                Block.newBuilder()
+                    .setSourcePosition(sourcePosition)
+                    .setStatements(assignMapCallToFieldStatement)
+                    .build())
+            .build();
 
     // Return statement
     Expression getMethodCall =

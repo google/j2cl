@@ -76,7 +76,11 @@ public class VariableDeclarationExpression extends Expression {
     }
 
     public Builder addVariableDeclaration(Variable variable, Expression initializer) {
-      fragments.add(new VariableDeclarationFragment(variable, checkNotNull(initializer)));
+      fragments.add(
+          VariableDeclarationFragment.newBuilder()
+              .setVariable(variable)
+              .setInitializer(checkNotNull(initializer))
+              .build());
       return this;
     }
 
@@ -86,7 +90,7 @@ public class VariableDeclarationExpression extends Expression {
 
     public Builder addVariableDeclarations(Collection<Variable> variables) {
       for (Variable variable : variables) {
-        fragments.add(new VariableDeclarationFragment(variable, null));
+        fragments.add(VariableDeclarationFragment.newBuilder().setVariable(variable).build());
       }
       return this;
     }

@@ -19,30 +19,58 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
-/**
- * Break Statement.
- */
+/** Break Statement. */
 @Visitable
 public class BreakStatement extends Statement {
 
-  @Nullable private final String labelName;
+  @Nullable private final String label;
 
-  public BreakStatement(SourcePosition sourcePosition, String labelName) {
+  private BreakStatement(SourcePosition sourcePosition, String label) {
     super(sourcePosition);
-    this.labelName = labelName;
+    this.label = label;
   }
 
-  public String getLabelName() {
-    return labelName;
+  public String getLabel() {
+    return label;
   }
 
   @Override
   public BreakStatement clone() {
-    return new BreakStatement(getSourcePosition(), labelName);
+    return new BreakStatement(getSourcePosition(), label);
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_BreakStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for BreakStatement. */
+  public static class Builder {
+    private String label;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(BreakStatement breakStatement) {
+      return newBuilder()
+          .setSourcePosition(breakStatement.getSourcePosition())
+          .setLabel(breakStatement.getLabel());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    public BreakStatement build() {
+      return new BreakStatement(sourcePosition, label);
+    }
   }
 }

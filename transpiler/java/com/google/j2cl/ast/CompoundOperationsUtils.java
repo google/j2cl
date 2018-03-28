@@ -118,7 +118,10 @@ public class CompoundOperationsUtils {
               .setTypeDescriptor(arrayExpression.getTypeDescriptor())
               .build();
       variableDeclarationFragments.add(
-          new VariableDeclarationFragment(arrayExpressionVariable, arrayExpression));
+          VariableDeclarationFragment.newBuilder()
+              .setVariable(arrayExpressionVariable)
+              .setInitializer(arrayExpression)
+              .build());
       arrayExpression = arrayExpressionVariable.getReference();
     }
 
@@ -130,7 +133,10 @@ public class CompoundOperationsUtils {
               .setTypeDescriptor(PrimitiveTypes.INT)
               .build();
       variableDeclarationFragments.add(
-          new VariableDeclarationFragment(indexExpressionVariable, indexExpression));
+          VariableDeclarationFragment.newBuilder()
+              .setVariable(indexExpressionVariable)
+              .setInitializer(indexExpression)
+              .build());
       indexExpression = indexExpressionVariable.getReference();
     }
 
@@ -141,7 +147,10 @@ public class CompoundOperationsUtils {
             .build();
     if (valueVariable != null) {
       variableDeclarationFragments.add(
-          new VariableDeclarationFragment(valueVariable, arrayAccess.clone()));
+          VariableDeclarationFragment.newBuilder()
+              .setVariable(valueVariable)
+              .setInitializer(arrayAccess.clone())
+              .build());
     }
 
     if (!variableDeclarationFragments.isEmpty()) {

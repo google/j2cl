@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Class for Cast expression.
- */
+/** Class for Cast expression. */
 @Visitable
 public class CastExpression extends Expression {
   @Visitable Expression expression;
@@ -50,13 +48,13 @@ public class CastExpression extends Expression {
     return new CastExpression(expression.clone(), castTypeDescriptor);
   }
 
-  public static Builder newBuilder() {
-    return new Builder();
-  }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_CastExpression.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   /** A Builder for CastExpressions. */

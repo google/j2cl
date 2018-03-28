@@ -21,21 +21,14 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
-/**
- * If Statement.
- */
+/** If Statement. */
 @Visitable
 public class IfStatement extends Statement {
   @Visitable Expression conditionExpression;
   @Visitable Statement thenStatement;
   @Visitable @Nullable Statement elseStatement;
 
-  public IfStatement(
-      SourcePosition sourcePosition, Expression conditionExpression, Statement thenStatement) {
-    this(sourcePosition, conditionExpression, thenStatement, null);
-  }
-
-  public IfStatement(
+  private IfStatement(
       SourcePosition sourcePosition,
       Expression conditionExpression,
       Statement thenStatement,
@@ -70,5 +63,49 @@ public class IfStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_IfStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for IfStatement. */
+  public static class Builder {
+    private Expression conditionExpression;
+    private Statement thenStatement;
+    private Statement elseStatement;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(IfStatement ifStatement) {
+      return new Builder()
+          .setSourcePosition(ifStatement.getSourcePosition())
+          .setConditionExpression(ifStatement.getConditionExpression())
+          .setThenStatement(ifStatement.getThenStatement())
+          .setElseStatement(ifStatement.getElseStatement());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setConditionExpression(Expression conditionExpression) {
+      this.conditionExpression = conditionExpression;
+      return this;
+    }
+
+    public Builder setThenStatement(Statement thenStatement) {
+      this.thenStatement = thenStatement;
+      return this;
+    }
+
+    public Builder setElseStatement(Statement elseStatement) {
+      this.elseStatement = elseStatement;
+      return this;
+    }
+
+    public IfStatement build() {
+      return new IfStatement(sourcePosition, conditionExpression, thenStatement, elseStatement);
+    }
   }
 }

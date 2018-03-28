@@ -21,15 +21,14 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
-/**
- * Assert Statement.
- */
+/** Assert Statement. */
 @Visitable
 public class AssertStatement extends Statement {
   @Visitable Expression expression;
   @Visitable @Nullable Expression message;
 
-  public AssertStatement(SourcePosition sourcePosition, Expression expression, Expression message) {
+  private AssertStatement(
+      SourcePosition sourcePosition, Expression expression, Expression message) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
     this.message = message;
@@ -51,5 +50,42 @@ public class AssertStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_AssertStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for AssertStatement. */
+  public static class Builder {
+    private Expression expression;
+    private Expression message;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(AssertStatement assertStatement) {
+      return newBuilder()
+          .setSourcePosition(assertStatement.getSourcePosition())
+          .setExpression(assertStatement.getExpression())
+          .setMessage(assertStatement.getMessage());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setExpression(Expression expression) {
+      this.expression = expression;
+      return this;
+    }
+
+    public Builder setMessage(Expression message) {
+      this.message = message;
+      return this;
+    }
+
+    public AssertStatement build() {
+      return new AssertStatement(sourcePosition, expression, message);
+    }
   }
 }

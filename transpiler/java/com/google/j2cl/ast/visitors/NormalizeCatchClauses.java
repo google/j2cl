@@ -81,12 +81,13 @@ public class NormalizeCatchClauses extends NormalizationPass {
             if (statement.getCatchClauses().isEmpty()) {
               return statement;
             }
-            return new TryStatement(
-                statement.getSourcePosition(),
-                statement.getResourceDeclarations(),
-                statement.getBody(),
-                Collections.singletonList(mergeClauses(statement.getCatchClauses())),
-                statement.getFinallyBlock());
+            return TryStatement.newBuilder()
+                .setSourcePosition(statement.getSourcePosition())
+                .setResourceDeclarations(statement.getResourceDeclarations())
+                .setBody(statement.getBody())
+                .setCatchClauses(mergeClauses(statement.getCatchClauses()))
+                .setFinallyBlock(statement.getFinallyBlock())
+                .build();
           }
         });
   }
@@ -103,9 +104,14 @@ public class NormalizeCatchClauses extends NormalizationPass {
             .build();
 
     Statement body = bodyBuilder(sourcePosition, clauses, exceptionVariable);
-    return new CatchClause(
-        exceptionVariable,
-        Block.newBuilder().setSourcePosition(body.getSourcePosition()).setStatements(body).build());
+    return CatchClause.newBuilder()
+        .setExceptionVariable(exceptionVariable)
+        .setBody(
+            Block.newBuilder()
+                .setSourcePosition(body.getSourcePosition())
+                .setStatements(body)
+                .build())
+        .build();
   }
 
   private static Statement bodyBuilder(
@@ -123,7 +129,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
     }
 
     CatchClause clause = clauses.get(0);
-    Variable catchVariable = clause.getExceptionVar();
+    Variable catchVariable = clause.getExceptionVariable();
 
     TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();
     List<TypeDescriptor> typesToCheck =
@@ -145,15 +151,18 @@ public class NormalizeCatchClauses extends NormalizationPass {
             .makeStatement(currentClauseSourcePosition);
     catchClauseBody.add(0, assignment);
 
-    return new IfStatement(
-        currentClauseSourcePosition,
-        condition,
-        Block.newBuilder()
-            .setSourcePosition(currentClauseSourcePosition)
-            .setStatements(catchClauseBody)
-            .build(),
-        bodyBuilder(
-            firstClauseSourcePosition, clauses.subList(1, clauses.size()), exceptionVariable));
+    return IfStatement.newBuilder()
+        .setSourcePosition(currentClauseSourcePosition)
+        .setConditionExpression(condition)
+        .setThenStatement(
+            Block.newBuilder()
+                .setSourcePosition(currentClauseSourcePosition)
+                .setStatements(catchClauseBody)
+                .build())
+        .setElseStatement(
+            bodyBuilder(
+                firstClauseSourcePosition, clauses.subList(1, clauses.size()), exceptionVariable))
+        .build();
   }
 
   /**
@@ -167,7 +176,12 @@ public class NormalizeCatchClauses extends NormalizationPass {
     List<InstanceOfExpression> instanceofs =
         typeDescriptors
             .stream()
-            .map(t -> new InstanceOfExpression(null, exceptionVariable.getReference(), t))
+            .map(
+                t ->
+                    InstanceOfExpression.newBuilder()
+                        .setExpression(exceptionVariable.getReference())
+                        .setTestTypeDescriptor(t)
+                        .build())
             .collect(toImmutableList());
     return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, instanceofs);
   }

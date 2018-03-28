@@ -31,7 +31,7 @@ public class VariableDeclarationFragment extends Node
   @Visitable Variable variable;
   @Visitable @Nullable Expression initializer;
 
-  public VariableDeclarationFragment(Variable variable, Expression initializer) {
+  private VariableDeclarationFragment(Variable variable, Expression initializer) {
     this.variable = checkNotNull(variable);
     this.initializer = initializer;
   }
@@ -64,5 +64,35 @@ public class VariableDeclarationFragment extends Node
         // pointing to a different variable instance. Variables are replaced explicitly by using
         // AstUtils.replaceVariables.
         variable, AstUtils.clone(initializer));
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for VariableDeclarationFragment. */
+  public static class Builder {
+    private Variable variable;
+    private Expression initializer;
+
+    public static Builder from(VariableDeclarationFragment variableDeclarationFragment) {
+      return newBuilder()
+          .setVariable(variableDeclarationFragment.getVariable())
+          .setInitializer(variableDeclarationFragment.getInitializer());
+    }
+
+    public Builder setVariable(Variable variable) {
+      this.variable = variable;
+      return this;
+    }
+
+    public Builder setInitializer(Expression initializer) {
+      this.initializer = initializer;
+      return this;
+    }
+
+    public VariableDeclarationFragment build() {
+      return new VariableDeclarationFragment(variable, initializer);
+    }
   }
 }

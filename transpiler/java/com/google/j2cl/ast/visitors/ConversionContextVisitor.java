@@ -148,10 +148,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public AssertStatement rewriteAssertStatement(AssertStatement assertStatement) {
     // unary numeric promotion context
-    return new AssertStatement(
-        assertStatement.getSourcePosition(),
-        contextRewriter.rewriteBooleanConversionContext(assertStatement.getExpression()),
-        assertStatement.getMessage());
+    return AssertStatement.newBuilder()
+        .setSourcePosition(assertStatement.getSourcePosition())
+        .setExpression(
+            contextRewriter.rewriteBooleanConversionContext(assertStatement.getExpression()))
+        .setMessage(assertStatement.getMessage())
+        .build();
   }
 
   @Override
@@ -228,14 +230,18 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       ConditionalExpression conditionalExpression) {
     // assignment context
     TypeDescriptor typeDescriptor = conditionalExpression.getTypeDescriptor();
-    return new ConditionalExpression(
-        typeDescriptor,
-        contextRewriter.rewriteBooleanConversionContext(
-            conditionalExpression.getConditionExpression()),
-        contextRewriter.rewriteAssignmentContext(
-            typeDescriptor, conditionalExpression.getTrueExpression()),
-        contextRewriter.rewriteAssignmentContext(
-            typeDescriptor, conditionalExpression.getFalseExpression()));
+    return ConditionalExpression.newBuilder()
+        .setTypeDescriptor(typeDescriptor)
+        .setConditionExpression(
+            contextRewriter.rewriteBooleanConversionContext(
+                conditionalExpression.getConditionExpression()))
+        .setTrueExpression(
+            contextRewriter.rewriteAssignmentContext(
+                typeDescriptor, conditionalExpression.getTrueExpression()))
+        .setFalseExpression(
+            contextRewriter.rewriteAssignmentContext(
+                typeDescriptor, conditionalExpression.getFalseExpression()))
+        .build();
   }
 
   @Override
@@ -255,10 +261,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public DoWhileStatement rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
-    return new DoWhileStatement(
-        doWhileStatement.getSourcePosition(),
-        contextRewriter.rewriteBooleanConversionContext(doWhileStatement.getConditionExpression()),
-        doWhileStatement.getBody());
+    return DoWhileStatement.newBuilder()
+        .setSourcePosition(doWhileStatement.getSourcePosition())
+        .setConditionExpression(
+            contextRewriter.rewriteBooleanConversionContext(
+                doWhileStatement.getConditionExpression()))
+        .setBody(doWhileStatement.getBody())
+        .build();
   }
 
   @Override
@@ -274,11 +283,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public IfStatement rewriteIfStatement(IfStatement ifStatement) {
-    return new IfStatement(
-        ifStatement.getSourcePosition(),
-        contextRewriter.rewriteBooleanConversionContext(ifStatement.getConditionExpression()),
-        ifStatement.getThenStatement(),
-        ifStatement.getElseStatement());
+    return IfStatement.newBuilder()
+        .setSourcePosition(ifStatement.getSourcePosition())
+        .setConditionExpression(
+            contextRewriter.rewriteBooleanConversionContext(ifStatement.getConditionExpression()))
+        .setThenStatement(ifStatement.getThenStatement())
+        .setElseStatement(ifStatement.getElseStatement())
+        .build();
   }
 
   @Override
@@ -368,10 +379,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public SwitchStatement rewriteSwitchStatement(SwitchStatement switchStatement) {
     // unary numeric promotion
-    return new SwitchStatement(
-        switchStatement.getSourcePosition(),
-        contextRewriter.rewriteUnaryNumericPromotionContext(switchStatement.getSwitchExpression()),
-        switchStatement.getCases());
+    return SwitchStatement.newBuilder()
+        .setSourcePosition(switchStatement.getSourcePosition())
+        .setSwitchExpression(
+            contextRewriter.rewriteUnaryNumericPromotionContext(
+                switchStatement.getSwitchExpression()))
+        .setCases(switchStatement.getCases())
+        .build();
   }
 
   @Override
@@ -383,19 +397,24 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     // assignment context
-    return new VariableDeclarationFragment(
-        variableDeclaration.getVariable(),
-        contextRewriter.rewriteAssignmentContext(
-            variableDeclaration.getVariable().getTypeDescriptor(),
-            variableDeclaration.getInitializer()));
+    return VariableDeclarationFragment.newBuilder()
+        .setVariable(variableDeclaration.getVariable())
+        .setInitializer(
+            contextRewriter.rewriteAssignmentContext(
+                variableDeclaration.getVariable().getTypeDescriptor(),
+                variableDeclaration.getInitializer()))
+        .build();
   }
 
   @Override
   public WhileStatement rewriteWhileStatement(WhileStatement whileStatement) {
-    return new WhileStatement(
-        whileStatement.getSourcePosition(),
-        contextRewriter.rewriteBooleanConversionContext(whileStatement.getConditionExpression()),
-        whileStatement.getBody());
+    return WhileStatement.newBuilder()
+        .setSourcePosition(whileStatement.getSourcePosition())
+        .setConditionExpression(
+            contextRewriter.rewriteBooleanConversionContext(
+                whileStatement.getConditionExpression()))
+        .setBody(whileStatement.getBody())
+        .build();
   }
 
   private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {

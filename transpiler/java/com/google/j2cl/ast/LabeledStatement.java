@@ -20,36 +20,71 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 
-/**
- * Labeled Statement.
- */
+/** Labeled Statement. */
 @Visitable
 public class LabeledStatement extends Statement {
 
-  private final String labelName;
-  @Visitable Statement body;
+  private final String label;
+  @Visitable Statement statement;
 
-  public LabeledStatement(SourcePosition sourcePosition, String labelName, Statement body) {
+  private LabeledStatement(SourcePosition sourcePosition, String label, Statement statement) {
     super(sourcePosition);
-    this.labelName = checkNotNull(labelName);
-    this.body = checkNotNull(body);
+    this.label = checkNotNull(label);
+    this.statement = checkNotNull(statement);
   }
 
-  public String getLabelName() {
-    return labelName;
+  public String getLabel() {
+    return label;
   }
 
-  public Statement getBody() {
-    return body;
+  public Statement getStatement() {
+    return statement;
   }
 
   @Override
   public LabeledStatement clone() {
-    return new LabeledStatement(getSourcePosition(), labelName, body.clone());
+    return new LabeledStatement(getSourcePosition(), label, statement.clone());
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_LabeledStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for LabeledStatement. */
+  public static class Builder {
+    private Statement statement;
+    private String label;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(LabeledStatement labeledStatement) {
+      return newBuilder()
+          .setSourcePosition(labeledStatement.getSourcePosition())
+          .setStatement(labeledStatement.getStatement())
+          .setLabel(labeledStatement.getLabel());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    public Builder setStatement(Statement statement) {
+      this.statement = statement;
+      return this;
+    }
+
+    public LabeledStatement build() {
+      return new LabeledStatement(sourcePosition, label, statement);
+    }
   }
 }

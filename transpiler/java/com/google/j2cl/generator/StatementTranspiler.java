@@ -78,8 +78,8 @@ public class StatementTranspiler {
             breakStatement.getSourcePosition(),
             () -> {
               builder.append("break");
-              if (breakStatement.getLabelName() != null) {
-                builder.append(" " + breakStatement.getLabelName());
+              if (breakStatement.getLabel() != null) {
+                builder.append(" " + breakStatement.getLabel());
               }
               builder.append(";");
             });
@@ -98,8 +98,8 @@ public class StatementTranspiler {
             continueStatement.getSourcePosition(),
             () -> {
               builder.append("continue");
-              if (continueStatement.getLabelName() != null) {
-                builder.append(" " + continueStatement.getLabelName());
+              if (continueStatement.getLabel() != null) {
+                builder.append(" " + continueStatement.getLabel());
               }
               builder.append(";");
             });
@@ -170,8 +170,8 @@ public class StatementTranspiler {
         builder.emitWithMapping(
             labelStatement.getSourcePosition(),
             () -> {
-              builder.append(labelStatement.getLabelName() + ": ");
-              render(labelStatement.getBody());
+              builder.append(labelStatement.getLabel() + ": ");
+              render(labelStatement.getStatement());
             });
         return false;
       }
@@ -255,7 +255,7 @@ public class StatementTranspiler {
               for (CatchClause catchClause : tryStatement.getCatchClauses()) {
                 builder.append(
                     " catch ("
-                        + environment.aliasForVariable(catchClause.getExceptionVar())
+                        + environment.aliasForVariable(catchClause.getExceptionVariable())
                         + ") ");
                 render(catchClause.getBody());
               }

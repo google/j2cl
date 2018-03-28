@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -67,19 +68,77 @@ public class TryStatement extends Statement {
 
   @Override
   public TryStatement clone() {
-    TryStatement tryStatement =
-        new TryStatement(
-            getSourcePosition(),
-            AstUtils.clone(resourceDeclarations),
-            body.clone(),
-            AstUtils.clone(catchClauses),
-            AstUtils.clone(finallyBlock));
-    tryStatement.setSourcePosition(this.getSourcePosition());
-    return tryStatement;
+    return TryStatement.newBuilder()
+        .setSourcePosition(getSourcePosition())
+        .setResourceDeclarations(AstUtils.clone(resourceDeclarations))
+        .setBody(body.clone())
+        .setCatchClauses(AstUtils.clone(catchClauses))
+        .setFinallyBlock(AstUtils.clone(finallyBlock))
+        .build();
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_TryStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for TryStatement. */
+  public static class Builder {
+    private List<VariableDeclarationExpression> resourceDeclarations = new ArrayList<>();
+    private List<CatchClause> catchClauses = new ArrayList<>();
+    private Block body;
+    private Block finallyBlock;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(TryStatement tryStatement) {
+      return newBuilder()
+          .setResourceDeclarations(tryStatement.getResourceDeclarations())
+          .setCatchClauses(tryStatement.getCatchClauses())
+          .setBody(tryStatement.getBody())
+          .setSourcePosition(tryStatement.getSourcePosition());
+    }
+
+    public Builder setResourceDeclarations(
+        List<VariableDeclarationExpression> resourceDeclarations) {
+      this.resourceDeclarations = new ArrayList<>(resourceDeclarations);
+      return this;
+    }
+
+    public Builder setResourceDeclarations(VariableDeclarationExpression... resourceDeclarations) {
+      return setResourceDeclarations(Arrays.asList(resourceDeclarations));
+    }
+
+    public Builder setCatchClauses(List<CatchClause> catchClauses) {
+      this.catchClauses = new ArrayList<>(catchClauses);
+      return this;
+    }
+
+    public Builder setCatchClauses(CatchClause... catchClauses) {
+      return setCatchClauses(Arrays.asList(catchClauses));
+    }
+
+    public Builder setBody(Block body) {
+      this.body = body;
+      return this;
+    }
+
+    public Builder setFinallyBlock(Block finallyBlock) {
+      this.finallyBlock = finallyBlock;
+      return this;
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public TryStatement build() {
+      return new TryStatement(
+          sourcePosition, resourceDeclarations, body, catchClauses, finallyBlock);
+    }
   }
 }

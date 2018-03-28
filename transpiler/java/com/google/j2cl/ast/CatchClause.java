@@ -25,20 +25,20 @@ import java.util.Collections;
 public class CatchClause extends Node implements Cloneable<CatchClause> {
   // The visitors traverse the @Visitable members of the class in the order they appear.
   // The variable definition needs to be traversed before the body of the the catch clause.
-  @Visitable Variable exceptionVar;
+  @Visitable Variable exceptionVariable;
   @Visitable Block body;
 
-  public CatchClause(Variable exceptionVar, Block body) {
+  private CatchClause(Variable exceptionVariable, Block body) {
     this.body = checkNotNull(body);
-    this.exceptionVar = checkNotNull(exceptionVar);
+    this.exceptionVariable = checkNotNull(exceptionVariable);
   }
 
   public Block getBody() {
     return body;
   }
 
-  public Variable getExceptionVar() {
-    return exceptionVar;
+  public Variable getExceptionVariable() {
+    return exceptionVariable;
   }
 
   @Override
@@ -48,13 +48,43 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
 
   @Override
   public CatchClause clone() {
-    Variable clonedExceptionVariable = exceptionVar.clone();
+    Variable clonedExceptionVariable = exceptionVariable.clone();
     Block clonedBody =
         AstUtils.replaceVariables(
-            Collections.singletonList(exceptionVar),
+            Collections.singletonList(exceptionVariable),
             Collections.singletonList(clonedExceptionVariable),
             body.clone());
 
     return new CatchClause(clonedExceptionVariable, clonedBody);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for CatchClause. */
+  public static class Builder {
+    private Variable exceptionVariable;
+    private Block body;
+
+    public static Builder from(CatchClause catchClause) {
+      return newBuilder()
+          .setExceptionVariable(catchClause.getExceptionVariable())
+          .setBody(catchClause.getBody());
+    }
+
+    public Builder setExceptionVariable(Variable exceptionVariable) {
+      this.exceptionVariable = exceptionVariable;
+      return this;
+    }
+
+    public Builder setBody(Block body) {
+      this.body = body;
+      return this;
+    }
+
+    public CatchClause build() {
+      return new CatchClause(exceptionVariable, body);
+    }
   }
 }

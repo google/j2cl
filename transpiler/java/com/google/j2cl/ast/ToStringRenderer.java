@@ -93,9 +93,9 @@ class ToStringRenderer {
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
         print("break");
-        if (breakStatement.getLabelName() != null) {
+        if (breakStatement.getLabel() != null) {
           print(" ");
-          print(breakStatement.getLabelName());
+          print(breakStatement.getLabel());
         }
         print(";");
         return false;
@@ -104,9 +104,9 @@ class ToStringRenderer {
       @Override
       public boolean enterCatchClause(CatchClause catchClause) {
         print(" catch (");
-        print(catchClause.getExceptionVar().getTypeDescriptor());
+        print(catchClause.getExceptionVariable().getTypeDescriptor());
         print(" ");
-        print(catchClause.getExceptionVar().getName());
+        print(catchClause.getExceptionVariable().getName());
         print(") ");
         accept(catchClause.getBody());
         return false;
@@ -169,9 +169,9 @@ class ToStringRenderer {
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
         print("continue");
-        if (continueStatement.getLabelName() != null) {
+        if (continueStatement.getLabel() != null) {
           print(" ");
-          print(continueStatement.getLabelName());
+          print(continueStatement.getLabel());
         }
         print(";");
         return false;
@@ -286,9 +286,9 @@ class ToStringRenderer {
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
-        print(labeledStatement.getLabelName());
+        print(labeledStatement.getLabel());
         print(": ");
-        accept(labeledStatement.getBody());
+        accept(labeledStatement.getStatement());
         return false;
       }
 

@@ -20,9 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 
-/**
- * DoWhile Statement.
- */
+/** DoWhile Statement. */
 @Visitable
 public class DoWhileStatement extends Statement {
   @Visitable Expression conditionExpression;
@@ -52,5 +50,42 @@ public class DoWhileStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_DoWhileStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for DoWhileStatement. */
+  public static class Builder {
+    private Expression conditionExpression;
+    private Statement body;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(DoWhileStatement doWhileStatement) {
+      return new Builder()
+          .setSourcePosition(doWhileStatement.getSourcePosition())
+          .setConditionExpression(doWhileStatement.getConditionExpression())
+          .setBody(doWhileStatement.getBody());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setConditionExpression(Expression conditionExpression) {
+      this.conditionExpression = conditionExpression;
+      return this;
+    }
+
+    public Builder setBody(Statement body) {
+      this.body = body;
+      return this;
+    }
+
+    public DoWhileStatement build() {
+      return new DoWhileStatement(sourcePosition, conditionExpression, body);
+    }
   }
 }

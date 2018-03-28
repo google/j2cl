@@ -20,15 +20,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 
-/**
- * While Statement.
- */
+/** While Statement. */
 @Visitable
 public class WhileStatement extends Statement {
   @Visitable Expression conditionExpression;
   @Visitable Statement body;
 
-  public WhileStatement(
+  private WhileStatement(
       SourcePosition sourcePosition, Expression conditionExpression, Statement body) {
     super(sourcePosition);
     this.conditionExpression = checkNotNull(conditionExpression);
@@ -52,5 +50,42 @@ public class WhileStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_WhileStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for WhileStatement. */
+  public static class Builder {
+    private Expression conditionExpression;
+    private Statement body;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(WhileStatement whileStatement) {
+      return new Builder()
+          .setSourcePosition(whileStatement.getSourcePosition())
+          .setConditionExpression(whileStatement.getConditionExpression())
+          .setBody(whileStatement.getBody());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setConditionExpression(Expression conditionExpression) {
+      this.conditionExpression = conditionExpression;
+      return this;
+    }
+
+    public Builder setBody(Statement body) {
+      this.body = body;
+      return this;
+    }
+
+    public WhileStatement build() {
+      return new WhileStatement(sourcePosition, conditionExpression, body);
+    }
   }
 }

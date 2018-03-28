@@ -37,7 +37,6 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /** Normalize Java try with resource blocks such that they can be represented in JavaScript. */
@@ -60,23 +59,22 @@ public class NormalizeTryWithResources extends NormalizationPass {
                 || !tryStatement.getCatchClauses().isEmpty()) {
               // See JLS 14.20.3.2
               TryStatement tryBlock =
-                  new TryStatement(
-                      sourcePosition,
-                      tryStatement.getResourceDeclarations(),
-                      tryStatement.getBody(),
-                      Collections.emptyList(),
-                      null);
+                  TryStatement.newBuilder()
+                      .setSourcePosition(sourcePosition)
+                      .setResourceDeclarations(tryStatement.getResourceDeclarations())
+                      .setBody(tryStatement.getBody())
+                      .build();
               Block refactoredTryBlock =
                   Block.newBuilder()
                       .setSourcePosition(tryBlock.getSourcePosition())
                       .setStatements(removeResourceDeclarations(tryBlock))
                       .build();
-              return new TryStatement(
-                  sourcePosition,
-                  Collections.emptyList(),
-                  refactoredTryBlock,
-                  tryStatement.getCatchClauses(),
-                  tryStatement.getFinallyBlock());
+              return TryStatement.newBuilder()
+                  .setSourcePosition(sourcePosition)
+                  .setBody(refactoredTryBlock)
+                  .setCatchClauses(tryStatement.getCatchClauses())
+                  .setFinallyBlock(tryStatement.getFinallyBlock())
+                  .build();
             }
             return Block.newBuilder()
                 .setSourcePosition(sourcePosition)
@@ -193,30 +191,38 @@ public class NormalizeTryWithResources extends NormalizationPass {
             .setRightOperand(NullLiteral.get())
             .build();
     IfStatement primaryExceptionNullStatement =
-        new IfStatement(sourcePosition, primaryExceptionNotEqualsNull, throwPrimaryException);
+        IfStatement.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setConditionExpression(primaryExceptionNotEqualsNull)
+            .setThenStatement(throwPrimaryException)
+            .build();
     finallyBlockStatements.add(primaryExceptionNullStatement);
 
     CatchClause catchTryException =
-        new CatchClause(
-            exceptionFromTry,
-            Block.newBuilder()
-                .setSourcePosition(sourcePosition)
-                .setStatements(catchBlockStatements)
-                .build());
+        CatchClause.newBuilder()
+            .setExceptionVariable(exceptionFromTry)
+            .setBody(
+                Block.newBuilder()
+                    .setSourcePosition(sourcePosition)
+                    .setStatements(catchBlockStatements)
+                    .build())
+            .build();
 
     transformedStatements.add(
-        new TryStatement(
-            sourcePosition,
-            Collections.emptyList(),
-            Block.newBuilder()
-                .setSourcePosition(sourcePosition)
-                .setStatements(tryBlockBodyStatements)
-                .build(),
-            Collections.singletonList(catchTryException),
-            Block.newBuilder()
-                .setSourcePosition(sourcePosition)
-                .setStatements(finallyBlockStatements)
-                .build()));
+        TryStatement.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setBody(
+                Block.newBuilder()
+                    .setSourcePosition(sourcePosition)
+                    .setStatements(tryBlockBodyStatements)
+                    .build())
+            .setCatchClauses(catchTryException)
+            .setFinallyBlock(
+                Block.newBuilder()
+                    .setSourcePosition(sourcePosition)
+                    .setStatements(finallyBlockStatements)
+                    .build())
+            .build());
     return transformedStatements;
   }
 }

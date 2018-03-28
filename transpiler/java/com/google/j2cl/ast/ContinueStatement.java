@@ -19,30 +19,58 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import javax.annotation.Nullable;
 
-/**
- * Continue Statement.
- */
+/** Continue Statement. */
 @Visitable
 public class ContinueStatement extends Statement {
 
-  @Nullable private final String labelName;
+  @Nullable private final String label;
 
-  public ContinueStatement(SourcePosition sourcePosition, String labelName) {
+  private ContinueStatement(SourcePosition sourcePosition, String label) {
     super(sourcePosition);
-    this.labelName = labelName;
+    this.label = label;
   }
 
-  public String getLabelName() {
-    return labelName;
+  public String getLabel() {
+    return label;
   }
 
   @Override
   public ContinueStatement clone() {
-    return new ContinueStatement(getSourcePosition(), labelName);
+    return new ContinueStatement(getSourcePosition(), label);
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_ContinueStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** Builder for ContinueStatement. */
+  public static class Builder {
+    private String label;
+    private SourcePosition sourcePosition;
+
+    public static Builder from(ContinueStatement continueStatement) {
+      return newBuilder()
+          .setSourcePosition(continueStatement.getSourcePosition())
+          .setLabel(continueStatement.getLabel());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setLabel(String label) {
+      this.label = label;
+      return this;
+    }
+
+    public ContinueStatement build() {
+      return new ContinueStatement(sourcePosition, label);
+    }
   }
 }

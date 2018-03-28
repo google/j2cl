@@ -95,5 +95,4 @@ public class ArrayAccess extends Expression {
       return new ArrayAccess(arrayExpression, indexExpression);
     }
   }
-
 }

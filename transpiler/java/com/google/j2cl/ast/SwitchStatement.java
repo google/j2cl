@@ -24,15 +24,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Switch Statement.
- */
+/** Switch Statement. */
 @Visitable
 public class SwitchStatement extends Statement {
   @Visitable Expression switchExpression;
   @Visitable List<SwitchCase> cases = new ArrayList<>();
 
-  public SwitchStatement(
+  private SwitchStatement(
       SourcePosition sourcePosition, Expression switchExpression, List<SwitchCase> cases) {
     super(sourcePosition);
     this.switchExpression = checkNotNull(switchExpression);

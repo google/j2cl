@@ -681,11 +681,13 @@ public class CompilationUnitBuilder {
 
     private ConditionalExpression convert(
         org.eclipse.jdt.core.dom.ConditionalExpression conditionalExpression) {
-      return new ConditionalExpression(
-          JdtUtils.createTypeDescriptor(conditionalExpression.resolveTypeBinding()),
-          convert(conditionalExpression.getExpression()),
-          convert(conditionalExpression.getThenExpression()),
-          convert(conditionalExpression.getElseExpression()));
+      return ConditionalExpression.newBuilder()
+          .setTypeDescriptor(
+              JdtUtils.createTypeDescriptor(conditionalExpression.resolveTypeBinding()))
+          .setConditionExpression(convert(conditionalExpression.getExpression()))
+          .setTrueExpression(convert(conditionalExpression.getThenExpression()))
+          .setFalseExpression(convert(conditionalExpression.getElseExpression()))
+          .build();
     }
 
     private Statement convertStatement(org.eclipse.jdt.core.dom.Statement statement) {
@@ -773,20 +775,25 @@ public class CompilationUnitBuilder {
     }
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
-      return new LabeledStatement(
-          getSourcePosition(statement),
-          statement.getLabel().getIdentifier(),
-          convert(statement.getBody()));
+      return LabeledStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setLabel(statement.getLabel().getIdentifier())
+          .setStatement(convert(statement.getBody()))
+          .build();
     }
 
     private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
-      return new BreakStatement(
-          getSourcePosition(statement), getIdentifierOrNull(statement.getLabel()));
+      return BreakStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setLabel(getIdentifierOrNull(statement.getLabel()))
+          .build();
     }
 
     private ContinueStatement convert(org.eclipse.jdt.core.dom.ContinueStatement statement) {
-      return new ContinueStatement(
-          getSourcePosition(statement), getIdentifierOrNull(statement.getLabel()));
+      return ContinueStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setLabel(getIdentifierOrNull(statement.getLabel()))
+          .build();
     }
 
     private String getIdentifierOrNull(SimpleName label) {
@@ -951,10 +958,11 @@ public class CompilationUnitBuilder {
     }
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
-      return new DoWhileStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convert(statement.getBody()));
+      return DoWhileStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setConditionExpression(convert(statement.getExpression()))
+          .setBody(convert(statement.getBody()))
+          .build();
     }
 
     private Statement convert(
@@ -964,25 +972,29 @@ public class CompilationUnitBuilder {
     }
 
     private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement statement) {
-      return new WhileStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convert(statement.getBody()));
+      return WhileStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setConditionExpression(convert(statement.getExpression()))
+          .setBody(convert(statement.getBody()))
+          .build();
     }
 
     private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement statement) {
-      return new IfStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convert(statement.getThenStatement()),
-          convertOrNull(statement.getElseStatement()));
+      return IfStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setConditionExpression(convert(statement.getExpression()))
+          .setThenStatement(convert(statement.getThenStatement()))
+          .setElseStatement(convertOrNull(statement.getElseStatement()))
+          .build();
     }
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
-      return new InstanceOfExpression(
-          getSourcePosition(expression),
-          convert(expression.getLeftOperand()),
-          JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding()));
+      return InstanceOfExpression.newBuilder()
+          .setSourcePosition(getSourcePosition(expression))
+          .setExpression(convert(expression.getLeftOperand()))
+          .setTestTypeDescriptor(
+              JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding()))
+          .build();
     }
 
     private Expression convert(LambdaExpression expression) {
@@ -1285,10 +1297,11 @@ public class CompilationUnitBuilder {
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
-      return new AssertStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convertOrNull(statement.getMessage()));
+      return AssertStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setExpression(convert(statement.getExpression()))
+          .setMessage(convertOrNull(statement.getMessage()))
+          .build();
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment expression) {
@@ -1316,7 +1329,10 @@ public class CompilationUnitBuilder {
 
     private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause catchClause) {
       // Order is important here, exception declaration must be converted before body.
-      return new CatchClause(convert(catchClause.getException()), convert(catchClause.getBody()));
+      return CatchClause.newBuilder()
+          .setExceptionVariable(convert(catchClause.getException()))
+          .setBody(convert(catchClause.getBody()))
+          .build();
     }
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation statement) {
@@ -1830,12 +1846,18 @@ public class CompilationUnitBuilder {
       List<org.eclipse.jdt.core.dom.CatchClause> catchClauses =
           JdtUtils.asTypedList(statement.catchClauses());
 
-      return new TryStatement(
-          getSourcePosition(statement),
-          resources.stream().map(this::convert).map(this::toResource).collect(toImmutableList()),
-          convert(statement.getBody()),
-          catchClauses.stream().map(this::convert).collect(toImmutableList()),
-          convertOrNull(statement.getFinally()));
+      return TryStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setResourceDeclarations(
+              resources
+                  .stream()
+                  .map(this::convert)
+                  .map(this::toResource)
+                  .collect(toImmutableList()))
+          .setBody(convert(statement.getBody()))
+          .setCatchClauses(catchClauses.stream().map(this::convert).collect(toImmutableList()))
+          .setFinallyBlock(convertOrNull(statement.getFinally()))
+          .build();
     }
 
     private VariableDeclarationExpression toResource(Expression expression) {
@@ -1869,8 +1891,10 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       Variable variable = createVariable(variableDeclarationFragment);
-      return new VariableDeclarationFragment(
-          variable, convertOrNull(variableDeclarationFragment.getInitializer()));
+      return VariableDeclarationFragment.newBuilder()
+          .setVariable(variable)
+          .setInitializer(convertOrNull(variableDeclarationFragment.getInitializer()))
+          .build();
     }
 
     private Variable convert(org.eclipse.jdt.core.dom.VariableDeclaration variableDeclaration) {
