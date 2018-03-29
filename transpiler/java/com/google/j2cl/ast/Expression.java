@@ -47,6 +47,35 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return new ExpressionWithComment(this, comment);
   }
 
+  /** Prefix expression with a spread unary operator. */
+  public UnaryExpression prefixSpread() {
+    return prefix(PrefixOperator.SPREAD);
+  }
+
+  /** Prefix expression with a plus unary operator. */
+  public UnaryExpression prefixPlus() {
+    return prefix(PrefixOperator.PLUS);
+  }
+
+  /** Prefix expression with a not unary operator. */
+  public UnaryExpression prefixNot() {
+    return prefix(PrefixOperator.NOT);
+  }
+
+  /** Returns expression prefixed with unary operator {@code prefixOperator}. */
+  public UnaryExpression prefix(PrefixOperator prefixOperator) {
+    // TODO(67753876): stop parenthesizing when precedence in correctly handled by
+    // ExpressionTranspiler.
+    // Parenthesize the operand to enforce the correct precedence unless it is a prefix expression.
+    Expression operand = this instanceof PrefixExpression ? this : this.parenthesize();
+    return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(operand).build();
+  }
+
+  /** Return the expression enclosed in parennthesis. */
+  public MultiExpression parenthesize() {
+    return MultiExpression.newBuilder().setExpressions(this).build();
+  }
+
   @Override
   public abstract Expression clone();
 

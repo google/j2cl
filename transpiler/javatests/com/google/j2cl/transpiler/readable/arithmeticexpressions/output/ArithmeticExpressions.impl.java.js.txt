@@ -72,7 +72,7 @@ class ArithmeticExpressions extends java_lang_Object {
     let d = ++a;
     let e = --a;
     let f = -a;
-    let g = a;
+    let g = +a;
     let h = ~a;
     let i = 1 + 1 + 2 - 5;
     let j = (1 + 2) * (3 + 4);
@@ -89,7 +89,7 @@ class ArithmeticExpressions extends java_lang_Object {
         $LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
     a = $Primitives.$narrowDoubleToInt(
         a + Double.f_MAX_VALUE__java_lang_Double);
-    k = !!(k | true);
+    k = !!(+k | +true);
   }
 
   /**
@@ -132,7 +132,7 @@ class ArithmeticExpressions extends java_lang_Object {
           $array$1$, 0, $LongUtils.$plus($array$1$[0], $Long.fromInt(1)));
     }
     let booleans = null;
-    $Arrays.$set(booleans, 0, !!(booleans[0] | true));
+    $Arrays.$set(booleans, 0, !!(+booleans[0] | +true));
     let strings = null;
     $Arrays.$set(
         strings, 0,

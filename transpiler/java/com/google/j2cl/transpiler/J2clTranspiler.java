@@ -31,7 +31,7 @@ import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
 import com.google.j2cl.ast.visitors.ImplementStaticInitialization;
 import com.google.j2cl.ast.visitors.ImplementSynchronizedStatements;
-import com.google.j2cl.ast.visitors.InsertBooleanCoercions;
+import com.google.j2cl.ast.visitors.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertCastsToTypeBounds;
@@ -247,7 +247,7 @@ public class J2clTranspiler {
             new InsertWideningPrimitiveConversions(),
             new NormalizeLongs(),
             new InsertDivisionCoercions(),
-            new InsertBooleanCoercions(),
+            new InsertBitwiseOperatorBooleanCoercions(),
             new InsertUnsignedRightShiftCoercions(),
             new NormalizeJsFunctionPropertyInvocations(),
             new ArrayAccessNormalizer(),

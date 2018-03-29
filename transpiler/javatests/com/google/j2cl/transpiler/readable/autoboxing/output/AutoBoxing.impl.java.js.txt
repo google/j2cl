@@ -333,7 +333,7 @@ class AutoBoxing extends java_lang_Object {
     boxL = Long.m_valueOf__long(
         $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
-    boxI = Integer.m_valueOf__int(boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(+boxI.m_intValue__());
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
     o = /**@type {Integer} */ (
         $Casts.$to(Integer.m_valueOf__int(15), Comparable));
@@ -392,7 +392,7 @@ class AutoBoxing extends java_lang_Object {
     i = boxI.m_intValue__() * boxI.m_intValue__();
     l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());
     bool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
-    i = boxI.m_intValue__();
+    i = +boxI.m_intValue__();
     i = -boxI.m_intValue__();
     i = ~boxI.m_intValue__();
     boxD = -Double.m_doubleValue__java_lang_Double(boxD);
@@ -423,27 +423,27 @@ class AutoBoxing extends java_lang_Object {
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     br =
-        !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2));
+        !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
+           +Boolean.m_booleanValue__java_lang_Boolean(boxB2));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) &&
@@ -464,32 +464,32 @@ class AutoBoxing extends java_lang_Object {
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) &
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) |
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     br = Boolean.m_booleanValue__java_lang_Boolean(
         (boxB1 =
-             !!(Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
-                Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
+             !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB1) ^
+                +Boolean.m_booleanValue__java_lang_Boolean(boxB2))));
     $Asserts.$assert(boxr);
     $Asserts.$assert(br);
     let boxB = null;
@@ -500,13 +500,14 @@ class AutoBoxing extends java_lang_Object {
     if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
     }
     let b = false;
-    b = !!(
-        b |
-        Boolean.m_booleanValue__java_lang_Boolean(
-            (boxB = !!(
-                 Boolean.m_booleanValue__java_lang_Boolean(boxB) |
-                 (b = !!(
-                      b | Boolean.m_booleanValue__java_lang_Boolean(boxB)))))));
+    b =
+        !!(+b |
+           +Boolean.m_booleanValue__java_lang_Boolean((
+               boxB = !!(
+                   +Boolean.m_booleanValue__java_lang_Boolean(boxB) |
+                   +(b = !!(
+                         +b |
+                         +Boolean.m_booleanValue__java_lang_Boolean(boxB)))))));
   }
 
   /**

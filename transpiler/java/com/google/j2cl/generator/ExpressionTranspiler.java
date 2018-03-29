@@ -52,7 +52,6 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
@@ -395,11 +394,6 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformPrefixExpression(PrefixExpression expression) {
-        // The + prefix operator is a NOP.
-        if (expression.getOperator() == PrefixOperator.PLUS) {
-          process(expression.getOperand());
-          return null;
-        }
         sourceBuilder.append(expression.getOperator().toString());
         process(expression.getOperand());
         return null;

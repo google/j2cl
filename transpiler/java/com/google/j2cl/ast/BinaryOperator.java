@@ -90,6 +90,21 @@ public enum BinaryOperator implements Operator {
     return this != ASSIGN && hasSideEffect();
   }
 
+  public boolean isBitwiseOperator() {
+    if (isCompoundAssignment()) {
+      return getUnderlyingBinaryOperator().isShiftOperator();
+    }
+
+    switch (this) {
+      case BIT_XOR:
+      case BIT_OR:
+      case BIT_AND:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   public boolean isShiftOperator() {
     if (isCompoundAssignment()) {
       return getUnderlyingBinaryOperator().isShiftOperator();

@@ -35,20 +35,20 @@
 [r] => [r] "r"
 [r = ls == rs;] => [r = ls == rs;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = ls != rs;] => [r = ls != rs;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r = ls ^ rs;] => [r = !!(ls ^ rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r = ls & rs;] => [r = !!(ls & rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r = ls | rs;] => [r = !!(ls | rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r = ls ^ rs;] => [r = !!(+ls ^ +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r = ls & rs;] => [r = !!(+ls & +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r = ls | rs;] => [r = !!(+ls | +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = ls && rs;] => [r = ls && rs;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = ls || rs;] => [r = ls || rs;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = ls = rs;] => [r = ls = rs;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r ^= rs;] => [r = !!(r ^ rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r &= rs;] => [r = !!(r & rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[r |= rs;] => [r = !!(r | rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r ^= rs;] => [r = !!(+r ^ +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r &= rs;] => [r = !!(+r & +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[r |= rs;] => [r = !!(+r | +rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [acceptBoolean(ls == rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls == rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [acceptBoolean(ls != rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls != rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[acceptBoolean(ls ^ rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(ls ^ rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[acceptBoolean(ls & rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(ls & rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[acceptBoolean(ls | rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(ls | rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[acceptBoolean(ls ^ rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(+ls ^ +rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[acceptBoolean(ls & rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(+ls & +rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[acceptBoolean(ls | rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(!!(+ls | +rs));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [acceptBoolean(ls && rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls && rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [acceptBoolean(ls || rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls || rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [acceptBoolean(ls = rs);] => [BooleanOperations.m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(ls = rs);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
@@ -56,9 +56,9 @@
 [br] => [br] "br"
 [br = (Boolean) (ls == rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls == rs), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [br = (Boolean) (ls != rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls != rs), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[br = (Boolean) (ls ^ rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls ^ rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[br = (Boolean) (ls & rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls & rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
-[br = (Boolean) (ls | rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(ls | rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[br = (Boolean) (ls ^ rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(+ls ^ +rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[br = (Boolean) (ls & rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(+ls & +rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[br = (Boolean) (ls | rs);] => [br = /**@type {?boolean} */ ($Casts.$to((!!(+ls | +rs)), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [br = (Boolean) (ls && rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls && rs), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [br = (Boolean) (ls || rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls || rs), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [br = (Boolean) (ls = rs);] => [br = /**@type {?boolean} */ ($Casts.$to((ls = rs), Boolean));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
@@ -76,19 +76,19 @@
 [r = true;] => [r = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [if (ls ^ rs) {
       r = true;
-    }] => [if (!!(ls ^ rs)) {
+    }] => [if (!!(+ls ^ +rs)) {
       r = true;
     }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = true;] => [r = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [if (ls & rs) {
       r = true;
-    }] => [if (!!(ls & rs)) {
+    }] => [if (!!(+ls & +rs)) {
       r = true;
     }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = true;] => [r = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [if (ls | rs) {
       r = true;
-    }] => [if (!!(ls | rs)) {
+    }] => [if (!!(+ls | +rs)) {
       r = true;
     }] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [r = true;] => [r = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
@@ -106,10 +106,10 @@
 [r = true;] => [r = true;] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [final Outer finalOuter = new Outer();] => [let finalOuter = $1Outer.$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(this);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [finalOuter] => [finalOuter] "finalOuter"
-[finalOuter.b |= true;] => [finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | true);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[finalOuter.b |= true;] => [finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(+finalOuter.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | +true);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [Outer outer = new Outer();] => [let outer = $1Outer.$create__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(this);] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [outer] => [outer] "outer"
-[outer.b |= (outer = null) == null;] => [outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | $Equality.$same((outer = null), null));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
+[outer.b |= (outer = null) == null;] => [outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer = !!(+outer.f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer | +$Equality.$same((outer = null), null));] "com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.test"
 [public class BooleanOperations {
   @SuppressWarnings("unused")
 ...  }

@@ -31,8 +31,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Variable;
@@ -147,13 +145,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // an array with a single null object.  In Javascript however we pass the values of the
       // varargs as arguments not as an array so there is no way to express this.
       // checkNotNull errors out early if null is passed as a jsvararg parameter.
-      // TODO(tdeegan): For non-nullable types we can avoid this.
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
-              PrefixExpression.newBuilder()
-                  .setOperand(RuntimeMethods.createCheckNotNullCall(lastArgument))
-                  .setOperator(PrefixOperator.SPREAD)
-                  .build())
+              RuntimeMethods.createCheckNotNullCall(lastArgument).prefixSpread())
           .build();
     }
   }

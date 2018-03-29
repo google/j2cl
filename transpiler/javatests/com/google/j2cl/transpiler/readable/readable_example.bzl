@@ -65,6 +65,7 @@ def readable_example(
       defs=J2CL_OPTIMIZED_DEFS + [
           "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/conformance_proto.txt",
           "--jscomp_warning=conformanceViolations",
+          "--jscomp_warning=strictPrimitiveOperators",
           "--summary_detail_level=3",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
