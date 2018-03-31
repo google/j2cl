@@ -22,6 +22,7 @@ public class Main {
   public static void main(String... args) {
     testGeneralEscapes();
     testUnicodeEscapes();
+    testOctalEscapes();
   }
 
   private static void testUnicodeEscapes() {
@@ -39,5 +40,11 @@ public class Main {
     assert "\\".length() == 1;
     assert "\"".length() == 1;
     assert "\'".length() == 1;
+  }
+
+  private static void testOctalEscapes() {
+    // TODO(b/34685920): uncomment when octal escape codes are transformed to avoid jscompiler
+    // strict check.
+    // assert "\u001b[31m".equals("\033[31m");
   }
 }
