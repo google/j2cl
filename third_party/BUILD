@@ -17,6 +17,11 @@ java_library(
 )
 
 java_library(
+    name = "apache_commons_text",
+    exports = ["@org_apache_commons_text//jar"],
+)
+
+java_library(
     name = "jsr305_annotations",
     exports = ["@com_google_jsr305//jar"],
 )

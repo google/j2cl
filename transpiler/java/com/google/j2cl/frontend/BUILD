@@ -10,7 +10,6 @@ java_library(
     name = "frontend",
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party:apache_commons_lang3",
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",

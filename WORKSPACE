@@ -53,7 +53,12 @@ maven_jar(
 
 maven_jar(
     name = "org_apache_commons_lang3",
-    artifact = "org.apache.commons:commons-lang3:3.5",
+    artifact = "org.apache.commons:commons-lang3:3.6",
+)
+
+maven_jar(
+    name = "org_apache_commons_text",
+    artifact = "org.apache.commons:commons-text:1.2",
 )
 
 maven_jar(
