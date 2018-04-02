@@ -134,7 +134,7 @@
 [Byte b = 0;] => [let b = Byte.m_valueOf__byte(0);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [b] => [b] "b"
 [b++;] => [b = Byte.m_valueOf__byte($Primitives.$narrowIntToByte(b.m_byteValue__() + 1));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[Character ch = 'c';] => [let ch = Character.m_valueOf__char(99 /* "c" */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[Character ch = 'c';] => [let ch = Character.m_valueOf__char(99 /* 'c' */);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [ch] => [ch] "ch"
 [ch++;] => [ch = Character.m_valueOf__char($Primitives.$narrowIntToChar(ch.m_charValue__() + 1));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [(++f).intValue();] => [(f = Integer.m_valueOf__int(f.m_intValue__() + 1)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"

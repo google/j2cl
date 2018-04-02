@@ -51,30 +51,27 @@ public class Main {
   }
 
   private static void testOctalEscapes() {
-    // TODO(b/34685920): uncomment when octal escape codes are transformed to avoid jscompiler
-    // strict check.
+    assert "\0".equals(String.valueOf((char) 0));
+    assert "\1".equals(String.valueOf((char) 1));
+    assert "\2".equals(String.valueOf((char) 2));
+    assert "\3".equals(String.valueOf((char) 3));
+    assert "\4".equals(String.valueOf((char) 4));
+    assert "\5".equals(String.valueOf((char) 5));
+    assert "\6".equals(String.valueOf((char) 6));
+    assert "\7".equals(String.valueOf((char) 7));
+    assert "\00".equals(String.valueOf((char) 0));
+    assert "\01".equals(String.valueOf((char) 1));
+    assert "\02".equals(String.valueOf((char) 2));
+    assert "\03".equals(String.valueOf((char) 3));
+    assert "\04".equals(String.valueOf((char) 4));
+    assert "\05".equals(String.valueOf((char) 5));
+    assert "\06".equals(String.valueOf((char) 6));
+    assert "\07".equals(String.valueOf((char) 7));
+    assert "\55".equals(String.valueOf((char) (5 * 8 + 5)));
+    assert "\055".equals(String.valueOf((char) (5 * 8 + 5)));
+    assert "\155".equals(String.valueOf((char) (1 * 64 + 5 * 8 + 5)));
+    assert "\0155".equals(String.valueOf((char) (1 * 8 + 5) + "5"));
 
-    // assert "\0".equals(String.valueOf((char) 0));
-    // assert "\1".equals(String.valueOf((char) 1));
-    // assert "\2".equals(String.valueOf((char) 2));
-    // assert "\3".equals(String.valueOf((char) 3));
-    // assert "\4".equals(String.valueOf((char) 4));
-    // assert "\5".equals(String.valueOf((char) 5));
-    // assert "\6".equals(String.valueOf((char) 6));
-    // assert "\7".equals(String.valueOf((char) 7));
-    // assert "\00".equals(String.valueOf((char) 0));
-    // assert "\01".equals(String.valueOf((char) 1));
-    // assert "\02".equals(String.valueOf((char) 2));
-    // assert "\03".equals(String.valueOf((char) 3));
-    // assert "\04".equals(String.valueOf((char) 4));
-    // assert "\05".equals(String.valueOf((char) 5));
-    // assert "\06".equals(String.valueOf((char) 6));
-    // assert "\07".equals(String.valueOf((char) 7));
-    // assert "\55".equals(String.valueOf((char) (5 * 8 + 5)));
-    // assert "\055".equals(String.valueOf((char) (5 * 8 + 5)));
-    // assert "\155".equals(String.valueOf((char) (1 * 64 + 5 * 8 + 5)));
-    // assert "\0155".equals(String.valueOf((char) (1 * 8+ 5) + "5"));
-
-    // assert "\u001b[31m".equals("\033[31m");
+    assert "\u001b[31m".equals("\033[31m");
   }
 }

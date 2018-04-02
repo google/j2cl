@@ -340,7 +340,7 @@ public class CompilationUnitBuilder {
             (Number) constantValue);
       }
       if (constantValue instanceof String) {
-        return StringLiteral.fromPlainText((String) constantValue);
+        return new StringLiteral((String) constantValue);
       }
       if (constantValue instanceof Character) {
         return new CharacterLiteral((char) constantValue);
@@ -450,7 +450,7 @@ public class CompilationUnitBuilder {
     }
 
     private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {
-      return new CharacterLiteral(literal.charValue(), literal.getEscapedValue());
+      return new CharacterLiteral(literal.charValue());
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
@@ -1713,7 +1713,7 @@ public class CompilationUnitBuilder {
     }
 
     private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral literal) {
-      return new StringLiteral(literal.getEscapedValue());
+      return new StringLiteral(literal.getLiteralValue());
     }
 
     private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement switchStatement) {

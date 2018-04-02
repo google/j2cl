@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
@@ -24,15 +23,9 @@ import com.google.j2cl.common.J2clUtils;
 @Visitable
 public class CharacterLiteral extends Literal {
   private final char value;
-  private final String escapedValue;
 
   public CharacterLiteral(char value) {
-    this(value, "\"" + J2clUtils.escapeJavaString(String.valueOf(value)) + "\"");
-  }
-
-  public CharacterLiteral(char value, String escapedValue) {
     this.value = value;
-    this.escapedValue = checkNotNull(escapedValue);
   }
 
   public char getValue() {
@@ -40,7 +33,8 @@ public class CharacterLiteral extends Literal {
   }
 
   public String getEscapedValue() {
-    return escapedValue;
+    String escapedValue = value == '\'' ? "\\'" : J2clUtils.escapeJavaString(String.valueOf(value));
+    return "\'" + escapedValue + "\'";
   }
 
   @Override

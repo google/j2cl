@@ -186,7 +186,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
                 .addArgumentsAndUpdateDescriptor(
                     0,
                     enumReplaceStringMethodCall(
-                        StringLiteral.fromPlainText(enumField.getDescriptor().getName())),
+                        new StringLiteral(enumField.getDescriptor().getName())),
                     FieldAccess.Builder.from(ordinalConstantFieldDescriptor).build())
                 .build();
           }

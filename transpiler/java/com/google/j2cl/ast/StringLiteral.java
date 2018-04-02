@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -24,19 +23,14 @@ import com.google.j2cl.common.J2clUtils;
 /** String literal node. */
 @Visitable
 public class StringLiteral extends Literal {
-  private final String escapedValue;
+  private final String value;
 
-  public StringLiteral(String escapedValue) {
-    this.escapedValue = checkNotNull(escapedValue);
-    checkArgument(
-        escapedValue.startsWith("\"") && escapedValue.endsWith("\""),
-        "The 'escapedValue' argument must be escaped (and conform to JDT's definition "
-            + "of escaped) which that means that it also includes it's own starting "
-            + "and ending \"s.");
+  public StringLiteral(String value) {
+    this.value = checkNotNull(value);
   }
 
   public String getEscapedValue() {
-    return escapedValue;
+    return "\"" + J2clUtils.escapeJavaString(value) + "\"";
   }
 
   @Override
@@ -53,12 +47,5 @@ public class StringLiteral extends Literal {
   public StringLiteral clone() {
     // String literals are value types do not need to actually clone.
     return this;
-  }
-
-  /**
-   * Creates a StringLiteral from plain text.
-   */
-  public static StringLiteral fromPlainText(String string) {
-    return new StringLiteral("\"" + J2clUtils.escapeJavaString(string) + "\"");
   }
 }
