@@ -70,12 +70,19 @@ public class Main {
     }
 
     try {
+      assert 2 == 3 : null;
+      throw new RuntimeException("Failed to throw assert!");
+    } catch (AssertionError expected) {
+      // Success
+      assert expected.getMessage().equals("null");
+    }
+
+    try {
       assert 2 == 3 : 'g';
       throw new RuntimeException("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      // TODO(b/37799560): fix char handling.
-      // assert expected.getMessage().equals("g");
+      assert expected.getMessage().equals("g");
     }
   }
 

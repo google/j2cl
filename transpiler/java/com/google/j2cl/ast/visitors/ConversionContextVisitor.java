@@ -147,12 +147,16 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public AssertStatement rewriteAssertStatement(AssertStatement assertStatement) {
-    // unary numeric promotion context
+    Expression message = assertStatement.getMessage();
+    // Treat the second parameter as a string context for primitives to enforce the right conversion
+    // rules, but let objects flow so that exceptions are allowed and handled correctly.
+    boolean isMessageStringContext = message != null && message.getTypeDescriptor().isPrimitive();
     return AssertStatement.newBuilder()
         .setSourcePosition(assertStatement.getSourcePosition())
         .setExpression(
             contextRewriter.rewriteBooleanConversionContext(assertStatement.getExpression()))
-        .setMessage(assertStatement.getMessage())
+        .setMessage(
+            isMessageStringContext ? contextRewriter.rewriteStringContext(message) : message)
         .build();
   }
 
