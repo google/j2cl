@@ -139,6 +139,7 @@ class Objects {
    * @public
    */
   static $clinit() {
+    Objects.$clinit = function() {};
     Object = goog.module.get('java.lang.Object$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Class = goog.module.get('java.lang.Class$impl');

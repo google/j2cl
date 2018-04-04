@@ -92,6 +92,7 @@ class CharSequences {
    * @public
    */
   static $clinit() {
+    CharSequences.$clinit = function() {};
     CharSequence = goog.module.get('java.lang.CharSequence$impl');
     String = goog.module.get('java.lang.String$impl');
   }

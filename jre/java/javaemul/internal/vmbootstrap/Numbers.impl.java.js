@@ -115,6 +115,7 @@ class Numbers {
    * @public
    */
   static $clinit() {
+    Numbers.$clinit = function() {};
     Character = goog.module.get('java.lang.Character$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');

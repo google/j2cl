@@ -58,6 +58,7 @@ class Comparables {
    * @public
    */
   static $clinit() {
+    Comparables.$clinit = function() {};
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
