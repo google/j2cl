@@ -276,12 +276,12 @@ class AutoBoxing extends java_lang_Object {
    */
   m_testBoxing__() {
     let bool = true;
-    let d = 1111.0;
-    let b = 100;
-    let f = 1111.0;
-    let i = 1111;
-    let l = $Long.fromInt(1111);
-    let s = 100;
+    let d = 2.2;
+    let b = 1;
+    let f = 1.100000023841858;
+    let i = 1;
+    let l = $Long.fromInt(2);
+    let s = 1;
     let c = 97 /* 'a' */;
     let boxBool = bool;
     let boxD = d;
@@ -292,13 +292,13 @@ class AutoBoxing extends java_lang_Object {
     let boxS = Short.m_valueOf__short(s);
     let boxC = Character.m_valueOf__char(c);
     boxBool = true;
-    boxD = 100.0;
-    boxB = Byte.m_valueOf__byte(0);
-    boxF = Float.m_valueOf__float(100.0);
-    boxI = Integer.m_valueOf__int(1000);
-    boxL = Long.m_valueOf__long($Long.fromInt(1000));
-    boxS = Short.m_valueOf__short(0);
-    boxC = Character.m_valueOf__char(0 /* '\u0000' */);
+    boxD = 2.2;
+    boxB = Byte.m_valueOf__byte(1);
+    boxF = Float.m_valueOf__float(1.100000023841858);
+    boxI = Integer.m_valueOf__int(1);
+    boxL = Long.m_valueOf__long($Long.fromInt(2));
+    boxS = Short.m_valueOf__short(1);
+    boxC = Character.m_valueOf__char(1 /* '\u0001' */);
     boxC = Character.m_valueOf__char(97 /* 'a' */);
     bool = this.m_unbox__java_lang_Boolean(bool);
     d = this.m_unbox__java_lang_Double(d);
@@ -311,18 +311,19 @@ class AutoBoxing extends java_lang_Object {
     let unusedDouble =
         this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
     unusedDouble =
-        this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 1.5, 1, 1, 1]);
-    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 1.5, 1, 1, 1);
+        this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 2.2, 1, 1, 2.2]);
+    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1, 1, 2.2);
     this.m_takesFloatVarArgs__arrayOf_java_lang_Float(
         /**@type {!Array<Float>} */ ($Arrays.$init(
             [
-              Float.m_valueOf__float(1.0), Float.m_valueOf__float(97 /* 'a' */),
-              Float.m_valueOf__float(4)
+              Float.m_valueOf__float(1.100000023841858),
+              Float.m_valueOf__float(97 /* 'a' */), Float.m_valueOf__float(2.2)
             ],
             Float)));
     let /** * */ o;
-    o = 100.0;
-    o = Integer.m_valueOf__int(0);
+    o = 2.2;
+    o = Float.m_valueOf__float(1.100000023841858);
+    o = Integer.m_valueOf__int(1);
     o = Character.m_valueOf__char(97 /* 'a' */);
     boxBool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
@@ -345,12 +346,12 @@ class AutoBoxing extends java_lang_Object {
    */
   m_testUnboxing__() {
     let boxBool = Boolean.$create__boolean(true);
-    let boxD = Double.$create__double(1111.0);
-    let boxB = Byte.$create__byte(100);
-    let boxF = Float.$create__float(1111.0);
-    let boxI = Integer.$create__int(1111);
-    let boxL = Long.$create__long($Long.fromInt(1111));
-    let boxS = Short.$create__short(100);
+    let boxD = Double.$create__double(2.2);
+    let boxB = Byte.$create__byte(1);
+    let boxF = Float.$create__float(1.100000023841858);
+    let boxI = Integer.$create__int(1);
+    let boxL = Long.$create__long($Long.fromInt(1));
+    let boxS = Short.$create__short(1);
     let boxC = Character.$create__char(97 /* 'a' */);
     let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     let d = Double.m_doubleValue__java_lang_Double(boxD);
@@ -521,8 +522,8 @@ class AutoBoxing extends java_lang_Object {
     $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);
     $Asserts.$assert(b != b);
     $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));
-    let boxI = Integer.$create__int(100);
-    let i = 101;
+    let boxI = Integer.$create__int(1);
+    let i = 1;
     $Asserts.$assert($Equality.$same(boxI, boxI));
     $Asserts.$assert(boxI.m_intValue__() == i);
     $Asserts.$assert(i != i);
@@ -635,6 +636,12 @@ $Util.$setClassMetadata(
     AutoBoxing,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing'));
+
+
+/** @public {number} @const */
+AutoBoxing
+    .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing =
+    1.1;
 
 
 

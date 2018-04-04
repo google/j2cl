@@ -120,15 +120,17 @@ public class AutoBoxing {
     return sum;
   }
 
+  public static final float COMPILE_TIME_CONSTANT = 1.1f;
+
   @SuppressWarnings("unused")
   public void testBoxing() {
     boolean bool = true;
-    double d = 1111.0;
-    byte b = (byte) 100;
-    float f = 1111.0f;
-    int i = 1111;
-    long l = 1111L;
-    short s = (short) 100;
+    double d = 2.2;
+    byte b = (byte) 1;
+    float f = 1.1f;
+    int i = 1;
+    long l = 2L;
+    short s = (short) 1;
     char c = 'a';
 
     // auto-boxing by assignment
@@ -143,13 +145,13 @@ public class AutoBoxing {
 
     // auto-boxing by assignment with literals
     boxBool = true;
-    boxD = 100.0;
-    boxB = 0;
-    boxF = 100.0f;
-    boxI = 1000;
-    boxL = 1000L;
-    boxS = 0;
-    boxC = 0;
+    boxD = 2.2;
+    boxB = 1;
+    boxF = 1.1f;
+    boxI = 1;
+    boxL = 2L;
+    boxS = 1;
+    boxC = 1;
     boxC = 'a';
 
     // auto-boxing by parameter
@@ -162,14 +164,15 @@ public class AutoBoxing {
     s = unbox(s);
     c = unbox(c);
     double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
-    unusedDouble = sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1);
-    unusedDouble = sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1);
-    takesFloatVarArgs(1.0f, (float) 'a', (float) 4);
+    unusedDouble = sumWithoutBoxing(1, 2.2, (byte) 1, (short) 1, (float) 2.2);
+    unusedDouble = sumWithoutBoxingJsVarargs(1, 2.2, (byte) 1, (short) 1, (float) 2.2);
+    takesFloatVarArgs(1.1f, (float) 'a', (float) 2.2);
 
     // auto-boxing by assignment to Object
     Object o;
-    o = 100d;
-    o = 0;
+    o = 2.2d;
+    o = 1.1f;
+    o = 1;
     o = 'a';
 
     // auto-boxing by assignment
@@ -188,12 +191,12 @@ public class AutoBoxing {
   @SuppressWarnings("unused")
   public void testUnboxing() {
     Boolean boxBool = new Boolean(true);
-    Double boxD = new Double(1111.0);
-    Byte boxB = new Byte((byte) 100);
-    Float boxF = new Float(1111.0f);
-    Integer boxI = new Integer(1111);
-    Long boxL = new Long(1111L);
-    Short boxS = new Short((short) 100);
+    Double boxD = new Double(2.2);
+    Byte boxB = new Byte((byte) 1);
+    Float boxF = new Float(1.1f);
+    Integer boxI = new Integer(1);
+    Long boxL = new Long(1L);
+    Short boxS = new Short((short) 1);
     Character boxC = new Character('a');
 
     // auto-unboxing by assignment
@@ -336,8 +339,8 @@ public class AutoBoxing {
     assert b != b;
     assert b != boxB;
 
-    Integer boxI = new Integer(100);
-    int i = 101;
+    Integer boxI = new Integer(1);
+    int i = 1;
 
     assert boxI == boxI;
     assert boxI == i;
