@@ -236,5 +236,6 @@ def j2cl_test(name,
       browser="//testing/web/browsers:chrome-linux",
       config="//testing/web/configs:default_noproxy",
       tags=tags,
-      test=":%s" % wrapped_test_name
+      test=":%s" % wrapped_test_name,
+      flaky=jsunit_parameters.get("flaky"),
   )
