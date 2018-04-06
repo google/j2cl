@@ -277,7 +277,7 @@ public class CompoundOperationsUtils {
   }
 
   /** Returns number literal with value 1. */
-  public static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
+  private static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
     return new NumberLiteral(typeDescriptor.toUnboxedType(), 1);
   }
 

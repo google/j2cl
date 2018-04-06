@@ -62,7 +62,7 @@
 [o] => [o] "o"
 [return (double) o;] => [return Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(o, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.takesObjectAndReturnsPrimitiveDouble"
 [numbers] => [numbers] "numbers"
-[double sum = 0;] => [let sum = 0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
+[double sum = 0;] => [let sum = 0.0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [sum] => [sum] "sum"
 [for (Object number : numbers) {
       sum += (Double) number;
@@ -77,7 +77,7 @@
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [numbers] => [numbers] "numbers"
-[double sum = 0;] => [let sum = 0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
+[double sum = 0;] => [let sum = 0.0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [sum] => [sum] "sum"
 [for (Object number : numbers) {
       sum += (Double) number;
@@ -346,4 +346,4 @@
 ...  }
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [public static final float COMPILE_TIME_CONSTANT = 1.1f;] => [/** @public {number} @const */
-AutoBoxing.f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing = 1.1;]
+AutoBoxing.f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing = 1.100000023841858;]

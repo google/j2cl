@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
@@ -42,7 +41,9 @@ public class InsertBoxingConversions extends NormalizationPass {
           TypeDescriptor toTypeDescriptor, Expression expression) {
         // A narrowing primitive conversion may precede boxing a number or character literal.
         // (See JLS 5.2).
-        expression = maybeNarrowPrimitive(toTypeDescriptor, expression);
+        if (expression instanceof NumberLiteral) {
+          expression = maybeNarrowNumberLiteral(toTypeDescriptor, (NumberLiteral) expression);
+        }
         // There should be a following 'widening reference conversion' if the targeting type
         // is not the boxed type, but as widening reference conversion is always NOOP, and it
         // is mostly impossible to be optimized by JSCompiler, just avoid the insertion of the
@@ -93,27 +94,12 @@ public class InsertBoxingConversions extends NormalizationPass {
     return expression;
   }
 
-  @SuppressWarnings("ReferenceEquality")
-  private static Expression maybeNarrowPrimitive(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
-    // Get the literal's value.
-    int value;
-    if (expression instanceof NumberLiteral) {
-      value = ((NumberLiteral) expression).getValue().intValue();
-    } else if (expression instanceof CharacterLiteral) {
-      value = ((CharacterLiteral) expression).getValue();
-    } else {
-      return expression;
-    }
+  private static Expression maybeNarrowNumberLiteral(
+      TypeDescriptor toTypeDescriptor, NumberLiteral numberLiteral) {
 
-    // Create the narrowed literal.
-    if (toTypeDescriptor == TypeDescriptors.get().javaLangByte
-        || toTypeDescriptor == TypeDescriptors.get().javaLangShort) {
-      return new NumberLiteral(toTypeDescriptor.toUnboxedType(), value);
-    } else if (toTypeDescriptor == TypeDescriptors.get().javaLangCharacter) {
-      return new CharacterLiteral((char) value);
-    } else {
-      return expression;
+    if (!TypeDescriptors.isBoxedOrPrimitiveType(toTypeDescriptor)) {
+      return numberLiteral;
     }
+    return new NumberLiteral(toTypeDescriptor.toUnboxedType(), numberLiteral.getValue());
   }
 }

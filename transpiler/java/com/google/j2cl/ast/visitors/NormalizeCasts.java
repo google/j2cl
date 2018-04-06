@@ -116,6 +116,6 @@ public class NormalizeCasts extends NormalizationPass {
         "$castTo",
         castExpression.getExpression(),
         AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
-        NumberLiteral.of(arrayCastTypeDescriptor.getDimensions()));
+        NumberLiteral.fromInt(arrayCastTypeDescriptor.getDimensions()));
   }
 }

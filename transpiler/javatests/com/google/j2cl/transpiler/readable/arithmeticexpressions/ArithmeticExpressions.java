@@ -16,6 +16,10 @@
 package com.google.j2cl.transpiler.readable.arithmeticexpressions;
 
 public class ArithmeticExpressions {
+  private static final float FLOAT_CONSTANT = 1.1f;
+  private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
+  private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;
+
   public void testPrimitives() {
     int a = 10;
     int b = a++;

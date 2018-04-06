@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Node;
@@ -90,12 +89,6 @@ public class VerifySingleAstReference {
           // StringLiterals is a value type and does not need to be unique in the ast.
           @Override
           public boolean enterStringLiteral(StringLiteral stringLiteral) {
-            return false;
-          }
-
-          // StringLiterals is a value type and does not need to be unique in the ast.
-          @Override
-          public boolean enterCharacterLiteral(CharacterLiteral characterLiteral) {
             return false;
           }
 
