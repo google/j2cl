@@ -12,6 +12,7 @@ const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 
 class SimpleLongs extends java_lang_Object {
@@ -57,7 +58,7 @@ class SimpleLongs extends java_lang_Object {
    * @public
    */
   m_getBar__() {
-    return $Long.fromInt(0);
+    return $Primitives.$widenIntToLong(0);
   }
 
   /**
@@ -152,6 +153,7 @@ class SimpleLongs extends java_lang_Object {
   static $clinit() {
     SimpleLongs.$clinit = function() {};
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     java_lang_Object.$clinit();
   }
 
@@ -161,7 +163,7 @@ class SimpleLongs extends java_lang_Object {
    */
   $init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-        $Long.fromInt(0);
+        $Primitives.$widenIntToLong(0);
   }
 };
 

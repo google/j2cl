@@ -166,7 +166,7 @@ class ArithmeticExpressions extends java_lang_Object {
     let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
     e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
     let e2 = 100.0;
-    e2 = Double.m_doubleValue__java_lang_Double(e2) + 1.0;
+    e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;
     let f =
         ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value);
     f =
@@ -177,7 +177,7 @@ class ArithmeticExpressions extends java_lang_Object {
         $Primitives.$narrowIntToByte(b.m_byteValue__() + 1));
     let ch = Character.m_valueOf__char(99 /* 'c' */);
     ch = Character.m_valueOf__char(
-        $Primitives.$narrowIntToChar(ch.m_charValue__() + 1 /* '\u0001' */));
+        $Primitives.$narrowIntToChar(ch.m_charValue__() + 1));
     (f = Integer.m_valueOf__int(f.m_intValue__() + 1)).m_intValue__();
     ($value$2$ = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value$2$)
         .m_intValue__();
@@ -363,7 +363,7 @@ class ArithmeticExpressions extends java_lang_Object {
     java_lang_Object.$clinit();
     ArithmeticExpressions
         .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-        $Long.fromInt(1);
+        $Primitives.$widenIntToLong(1);
     let /** !$Long */ $value;
     ArithmeticExpressions
         .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
@@ -403,24 +403,6 @@ $Util.$setClassMetadata(
     ArithmeticExpressions,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
-
-
-/** @public {number} @const */
-ArithmeticExpressions
-    .f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
-    1.100000023841858;
-
-
-/** @public {number} @const */
-ArithmeticExpressions
-    .f_DOUBLE_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
-    1.100000023841858;
-
-
-/** @public {number} @const */
-ArithmeticExpressions
-    .f_DOUBLE_CONSTANT_WITH_ARITHMETIC__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
-    2.200000047683716;
 
 
 /** @private {!$Long} */

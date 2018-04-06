@@ -16,19 +16,22 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
 /** Number literal node. */
 @Visitable
 public class NumberLiteral extends Literal {
-  public static NumberLiteral fromInt(int value) {
+  public static NumberLiteral of(int value) {
     return new NumberLiteral(PrimitiveTypes.INT, value);
   }
 
-  public static NumberLiteral fromChar(char value) {
-    return new NumberLiteral(PrimitiveTypes.CHAR, (int) value);
+  public static NumberLiteral of(long value) {
+    return new NumberLiteral(PrimitiveTypes.LONG, value);
+  }
+
+  public static NumberLiteral of(double value) {
+    return new NumberLiteral(PrimitiveTypes.DOUBLE, value);
   }
 
   private final PrimitiveTypeDescriptor typeDescriptor;
@@ -36,32 +39,7 @@ public class NumberLiteral extends Literal {
 
   public NumberLiteral(PrimitiveTypeDescriptor typeDescriptor, Number value) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
-    this.value = coerceValue(typeDescriptor, value);
-    // Make sure numberLiterals never store a Float value. Value is emitted directly by
-    // ExpressionTranspiler float literals would have a shorter but less precise representation.
-    checkState(!(this.value instanceof Float));
-  }
-
-  private Number coerceValue(PrimitiveTypeDescriptor typeDescriptor, Number value) {
-    checkState(TypeDescriptors.isNumericPrimitive(typeDescriptor));
-    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)) {
-      return value.byteValue();
-    } else if (TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
-      return value.shortValue();
-    } else if (TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
-      // Force narrowing then box to Integer.
-      return Integer.valueOf((char) value.intValue());
-    } else if (TypeDescriptors.isPrimitiveInt(typeDescriptor)) {
-      return value.intValue();
-    } else if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
-      return value.longValue();
-    } else if (TypeDescriptors.isPrimitiveFloat(typeDescriptor)) {
-      // Do not use floatValue() here, since J2cl does not honor 32-bit float semantics.
-      return value.doubleValue();
-    } else if (TypeDescriptors.isPrimitiveDouble(typeDescriptor)) {
-      return value.doubleValue();
-    }
-    throw new AssertionError("Not a numeric type: " + typeDescriptor);
+    this.value = value;
   }
 
   public Number getValue() {

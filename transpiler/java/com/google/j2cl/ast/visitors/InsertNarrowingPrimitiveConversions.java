@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.NumberLiteral;
@@ -24,6 +25,7 @@ import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import java.util.Set;
 
 /**
@@ -96,14 +98,43 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         return true;
       }
 
+      @SuppressWarnings("ReferenceEquality")
+      private Expression convertLiteral(Object literalValue, TypeDescriptor toTypeDescriptor) {
+        if (literalValue instanceof Number) {
+          Number numberLiteral = (Number) literalValue;
+          // Narrow at compile time.
+          PrimitiveTypeDescriptor literalTypeDescriptor =
+              (PrimitiveTypeDescriptor) toTypeDescriptor;
+          if (TypeDescriptors.isPrimitiveByte(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.byteValue());
+          } else if (TypeDescriptors.isPrimitiveChar(toTypeDescriptor)) {
+            return new CharacterLiteral((char) numberLiteral.intValue());
+          } else if (TypeDescriptors.isPrimitiveShort(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.shortValue());
+          } else if (TypeDescriptors.isPrimitiveInt(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.intValue());
+          } else if (TypeDescriptors.isPrimitiveLong(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.longValue());
+          } else if (TypeDescriptors.isPrimitiveFloat(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.floatValue());
+          } else if (TypeDescriptors.isPrimitiveDouble(toTypeDescriptor)) {
+            return new NumberLiteral(literalTypeDescriptor, numberLiteral.doubleValue());
+          }
+        } else if (literalValue instanceof Character) {
+          Character characterLiteral = (Character) literalValue;
+          return convertLiteral((int) characterLiteral.charValue(), toTypeDescriptor);
+        }
+        throw new IllegalArgumentException();
+      }
+
       private Expression insertNarrowingCall(
           Expression expression, TypeDescriptor toTypeDescriptor) {
 
         // Narrow literals at compile time.
         if (expression instanceof NumberLiteral) {
-          PrimitiveTypeDescriptor literalTypeDescriptor =
-              (PrimitiveTypeDescriptor) toTypeDescriptor;
-          return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
+          return convertLiteral(((NumberLiteral) expression).getValue(), toTypeDescriptor);
+        } else if (expression instanceof CharacterLiteral) {
+          return convertLiteral(((CharacterLiteral) expression).getValue(), toTypeDescriptor);
         }
 
         return RuntimeMethods.createPrimitivesNarrowingMethodCall(expression, toTypeDescriptor);

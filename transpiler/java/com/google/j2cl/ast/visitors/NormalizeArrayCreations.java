@@ -112,7 +112,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     if (dimensionCount > 1) {
-      arguments.add(NumberLiteral.fromInt(dimensionCount));
+      arguments.add(NumberLiteral.of(dimensionCount));
     }
 
     return createNonNullableAnnotation(

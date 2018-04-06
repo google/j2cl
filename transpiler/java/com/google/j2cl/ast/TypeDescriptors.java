@@ -164,30 +164,6 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangString);
   }
 
-  public static boolean isJavaLangByte(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangByte);
-  }
-
-  public static boolean isJavaLangShort(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangShort);
-  }
-
-  public static boolean isJavaLangInteger(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangInteger);
-  }
-
-  public static boolean isJavaLangCharacter(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangCharacter);
-  }
-
-  public static boolean isJavaLangLong(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangLong);
-  }
-
-  public static boolean isJavaLangFloat(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangFloat);
-  }
-
   public static boolean isJavaLangDouble(TypeDescriptor typeDescriptor) {
     return typeDescriptor.hasSameRawType(get().javaLangDouble);
   }

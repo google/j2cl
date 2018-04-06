@@ -18,6 +18,7 @@ let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
@@ -128,14 +129,16 @@ class Arrays extends java_lang_Object {
   m_testLongArrays___$pp_com_google_j2cl_transpiler_readable_array() {
     let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));
     longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([0], $long));
-    longs = /**@type {!Array<!$Long>} */ (
-        $Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $long));
+    longs = /**@type {!Array<!$Long>} */ ($Arrays.$init(
+        [$Primitives.$widenIntToLong(0), $Primitives.$widenIntToLong(1)],
+        $long));
     let longs2d =
         /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));
     longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$init(
         [
-          /**@type {!Array<!$Long>} */ (
-              $Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $long)),
+          /**@type {!Array<!$Long>} */ ($Arrays.$init(
+              [$Primitives.$widenIntToLong(1), $Primitives.$widenIntToLong(2)],
+              $long)),
           null
         ],
         $long, 2));
@@ -143,8 +146,8 @@ class Arrays extends java_lang_Object {
         $Arrays.$create([20, null], $long));
     let n = longs[0];
     n = longs2d[0][1];
-    $Arrays.$set(longs, 0, $Long.fromInt(1));
-    $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
+    $Arrays.$set(longs, 0, $Primitives.$widenIntToLong(1));
+    $Arrays.$set(longs2d[0], 1, $Primitives.$widenIntToLong(1));
   }
 
   /**
@@ -274,8 +277,8 @@ class Arrays extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.array.Arrays.SomeObject$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
-    $Long = goog.module.get('nativebootstrap.Long$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     java_lang_Object.$clinit();

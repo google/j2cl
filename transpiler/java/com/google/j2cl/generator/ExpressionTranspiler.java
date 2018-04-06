@@ -30,6 +30,7 @@ import com.google.j2cl.ast.AwaitExpression;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionWithComment;
@@ -149,6 +150,11 @@ public class ExpressionTranspiler {
                 + "*/");
         process(declaration.getExpression());
         return null;
+      }
+
+      @Override
+      public Void transformCharacterLiteral(CharacterLiteral characterLiteral) {
+        throw new AssertionError("CharacterLiteral should have been normalized away.");
       }
 
       @Override

@@ -16,12 +16,12 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.common.J2clUtils;
 
 /** Replaces literals that are required to be emulated. */
 public class NormalizeLiterals extends NormalizationPass {
@@ -31,28 +31,31 @@ public class NormalizeLiterals extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Expression rewriteNumberLiteral(NumberLiteral numberLiteral) {
-            if (TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
-              long longValue = numberLiteral.getValue().longValue();
-              int intValue = numberLiteral.getValue().intValue();
+          public Expression rewriteCharacterLiteral(CharacterLiteral characterLiteral) {
+            return NumberLiteral.of(characterLiteral.getValue())
+                .withComment(characterLiteral.getEscapedValue());
+          }
 
-              if (longValue == intValue) {
-                return RuntimeMethods.createNativeLongMethodCall(
-                    "fromInt", NumberLiteral.fromInt(intValue));
-              } else {
-                long lowOrderBits = longValue << 32 >> 32;
-                long highOrderBits = longValue >> 32;
-                return RuntimeMethods.createNativeLongMethodCall(
-                        "fromBits",
-                        NumberLiteral.fromInt((int) lowOrderBits),
-                        NumberLiteral.fromInt((int) highOrderBits))
-                    .withComment(String.valueOf(longValue));
-              }
-            } else if (TypeDescriptors.isPrimitiveChar(numberLiteral.getTypeDescriptor())) {
-              return numberLiteral.withComment(
-                  "'" + J2clUtils.escapeJavaChar((char) numberLiteral.getValue().intValue()) + "'");
-            } else {
+          @Override
+          public Expression rewriteNumberLiteral(NumberLiteral numberLiteral) {
+            if (!TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor())) {
               return numberLiteral;
+            }
+
+            long longValue = numberLiteral.getValue().longValue();
+            int intValue = numberLiteral.getValue().intValue();
+
+            if (longValue == intValue) {
+              return RuntimeMethods.createNativeLongMethodCall(
+                  "fromInt", NumberLiteral.of(intValue));
+            } else {
+              long lowOrderBits = longValue << 32 >> 32;
+              long highOrderBits = longValue >> 32;
+              return RuntimeMethods.createNativeLongMethodCall(
+                      "fromBits",
+                      NumberLiteral.of((int) lowOrderBits),
+                      NumberLiteral.of((int) highOrderBits))
+                  .withComment(String.valueOf(longValue));
             }
           }
         });

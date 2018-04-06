@@ -99,7 +99,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
               varargsParameter.getReference(),
               AstUtils.getMetadataConstructorReference(
                   varargsParameterTypeDescriptor.getLeafTypeDescriptor()),
-              NumberLiteral.fromInt(varargsParameterTypeDescriptor.getDimensions()));
+              NumberLiteral.of(varargsParameterTypeDescriptor.getDimensions()));
 
       List<Statement> statements = body.getStatements();
       statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));

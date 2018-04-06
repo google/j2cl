@@ -139,6 +139,12 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterCharacterLiteral(CharacterLiteral characterLiteral) {
+        print(characterLiteral.getEscapedValue());
+        return false;
+      }
+
+      @Override
       public boolean enterCompilationUnit(CompilationUnit compilationUnit) {
         print("package  " + compilationUnit.getPackageName() + ";");
         newLine();

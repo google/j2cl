@@ -60,15 +60,6 @@ public class J2clUtils {
     return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
   }
 
-  /** Escapes a character into a representation suitable for literals. */
-  public static String escapeJavaChar(char ch) {
-    if (ch == '\'') {
-      // Extra escaping needed since the single quotes is the delimiter.
-      return "\\'";
-    }
-    return escapeJavaString(String.valueOf(ch));
-  }
-
   /** Convert a string to normal Java variable name capitalization. */
   public static String decapitalize(String substring) {
     return Introspector.decapitalize(substring);

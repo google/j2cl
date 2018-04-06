@@ -109,6 +109,6 @@ public class NormalizeInstanceOfs extends NormalizationPass {
         "$instanceIsOfType",
         expression,
         AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
-        NumberLiteral.fromInt(checkTypeDescriptor.getDimensions()));
+        NumberLiteral.of(checkTypeDescriptor.getDimensions()));
   }
 }

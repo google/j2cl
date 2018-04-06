@@ -29,6 +29,7 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 
 class JsDocTypeMappings extends java_lang_Object {
@@ -187,7 +188,7 @@ class JsDocTypeMappings extends java_lang_Object {
    * @public
    */
   m_returnLong___$pp_com_google_j2cl_transpiler_readable_jsdoctypemappings() {
-    return $Long.fromInt(0);
+    return $Primitives.$widenIntToLong(0);
   }
 
   /**
@@ -195,7 +196,7 @@ class JsDocTypeMappings extends java_lang_Object {
    * @public
    */
   m_returnFloat___$pp_com_google_j2cl_transpiler_readable_jsdoctypemappings() {
-    return 0.0;
+    return 0;
   }
 
   /**
@@ -203,7 +204,7 @@ class JsDocTypeMappings extends java_lang_Object {
    * @public
    */
   m_returnDouble___$pp_com_google_j2cl_transpiler_readable_jsdoctypemappings() {
-    return 0.0;
+    return 0;
   }
 
   /**
@@ -351,7 +352,7 @@ class JsDocTypeMappings extends java_lang_Object {
    */
   static $clinit() {
     JsDocTypeMappings.$clinit = function() {};
-    $Long = goog.module.get('nativebootstrap.Long$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     java_lang_Object.$clinit();
   }
 };

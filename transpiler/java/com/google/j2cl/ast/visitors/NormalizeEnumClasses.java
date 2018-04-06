@@ -152,7 +152,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
       ordinalConstantFields.add(
           Field.Builder.from(ordinalConstantFieldDescriptor)
               .setSourcePosition(enumField.getSourcePosition())
-              .setInitializer(NumberLiteral.fromInt(currentOrdinal))
+              .setInitializer(NumberLiteral.of(currentOrdinal))
               .build());
     }
     type.addFields(ordinalConstantFields);

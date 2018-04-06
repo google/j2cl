@@ -259,10 +259,10 @@ class CastPrimitives extends java_lang_Object {
     let fchar = 12 /* '\f' */;
     let fshort = 13;
     let fint = 14;
-    let flong = $Long.fromInt(15);
-    let ffloat = 16.0;
-    let fdouble = 17.0;
-    let tlong = $Long.fromInt(0);
+    let flong = $Primitives.$widenIntToLong(15);
+    let ffloat = 16;
+    let fdouble = 17;
+    let tlong = $Primitives.$widenIntToLong(0);
     {
       tlong = $Primitives.$widenByteToLong(fbyte);
       tlong = flong;
