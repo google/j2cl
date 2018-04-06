@@ -42,7 +42,6 @@ import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
-import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.ContinueStatement;
@@ -334,19 +333,19 @@ public class CompilationUnitBuilder {
 
     private Expression convertConstantToLiteral(IVariableBinding variableBinding) {
       Object constantValue = variableBinding.getConstantValue();
+      if (constantValue instanceof Boolean) {
+        return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
+      }
       if (constantValue instanceof Number) {
         return new NumberLiteral(
             JdtUtils.createTypeDescriptor(variableBinding.getType()).toUnboxedType(),
             (Number) constantValue);
       }
+      if (constantValue instanceof Character) {
+        return NumberLiteral.fromChar((Character) constantValue);
+      }
       if (constantValue instanceof String) {
         return new StringLiteral((String) constantValue);
-      }
-      if (constantValue instanceof Character) {
-        return new CharacterLiteral((char) constantValue);
-      }
-      if (constantValue instanceof Boolean) {
-        return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
       }
       throw new RuntimeException(
           "Need to implement translation for compile time constants of type: "
@@ -449,8 +448,8 @@ public class CompilationUnitBuilder {
           .build();
     }
 
-    private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {
-      return new CharacterLiteral(literal.charValue());
+    private NumberLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {
+      return NumberLiteral.fromChar(literal.charValue());
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
@@ -879,7 +878,7 @@ public class CompilationUnitBuilder {
           .setInitializers(
               VariableDeclarationExpression.newBuilder()
                   .addVariableDeclaration(arrayVariable, convert(statement.getExpression()))
-                  .addVariableDeclaration(indexVariable, NumberLiteral.of(0))
+                  .addVariableDeclaration(indexVariable, NumberLiteral.fromInt(0))
                   .build())
           .setUpdates(
               PostfixExpression.newBuilder()
@@ -1489,12 +1488,9 @@ public class CompilationUnitBuilder {
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
       Number constantValue = (Number) literal.resolveConstantExpressionValue();
-      if (constantValue instanceof Float) {
-        constantValue = constantValue.doubleValue();
-      }
-      return new NumberLiteral(
-          (PrimitiveTypeDescriptor) JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()),
-          constantValue);
+      PrimitiveTypeDescriptor typeDescriptor =
+          (PrimitiveTypeDescriptor) JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
+      return new NumberLiteral(typeDescriptor, constantValue);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
@@ -1833,7 +1829,7 @@ public class CompilationUnitBuilder {
       return RuntimeMethods.createClassGetMethodCall(
           parameterizedJavaLangClassTypeDescriptor,
           AstUtils.getMetadataConstructorReference(literalTypeDescriptor.getLeafTypeDescriptor()),
-          NumberLiteral.of(literalTypeDescriptor.getDimensions()));
+          NumberLiteral.fromInt(literalTypeDescriptor.getDimensions()));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

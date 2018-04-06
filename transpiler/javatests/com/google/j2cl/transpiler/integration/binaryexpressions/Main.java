@@ -24,6 +24,7 @@ public class Main {
     testBooleanOperations();
     testStringConcatentation();
     testExtendedOperands();
+    testFloatConsistency();
   }
 
   public static void testArithmetic() {
@@ -165,5 +166,16 @@ public class Main {
     double n = 1;
     long l = 2L;
     assert 20 + l + n == n + l + 20;
+  }
+
+  private static final float FLOAT_CONSTANT = 1.1f;
+  private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
+  private static final double SUM = FLOAT_CONSTANT + FLOAT_CONSTANT;
+
+  public static void testFloatConsistency() {
+    float floatSum = FLOAT_CONSTANT + FLOAT_CONSTANT;
+    assert floatSum == FLOAT_CONSTANT + FLOAT_CONSTANT;
+    assert floatSum == SUM;
+    assert DOUBLE_CONSTANT == FLOAT_CONSTANT;
   }
 }

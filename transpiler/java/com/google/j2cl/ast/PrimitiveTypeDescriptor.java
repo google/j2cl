@@ -50,15 +50,10 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
 
   @Override
   public Expression getDefaultValue() {
-    checkState(!PrimitiveTypes.VOID.equals(this));
-    if (PrimitiveTypes.BOOLEAN.equals(this)) {
+    checkState(!TypeDescriptors.isPrimitiveVoid(this));
+    if (TypeDescriptors.isPrimitiveBoolean(this)) {
       return BooleanLiteral.get(false);
     }
-
-    if (PrimitiveTypes.LONG.equals(this)) {
-      return new NumberLiteral(this, 0L);
-    }
-
     return new NumberLiteral(this, 0);
   }
 
