@@ -30,10 +30,10 @@ import java.util.List;
 public class Stripper {
 
   public static void main(String... args) {
-    new Stripper().run(args, System.err);
+    System.exit(new Stripper().run(args, System.err));
   }
 
-  public void run(String[] args, PrintStream outputStream) {
+  public int run(String[] args, PrintStream outputStream) {
     Problems problems = new Problems();
 
     try {
@@ -55,10 +55,11 @@ public class Stripper {
         problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
       }
       problems.abortIfRequested();
+      return 0;
 
     } catch (Problems.Exit e) {
       problems.report(outputStream);
-      System.exit(e.getExitCode());
+      return e.getExitCode();
     }
   }
 }
