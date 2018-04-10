@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import java.io.File;
@@ -37,7 +38,10 @@ public abstract class FrontendOptions {
     return new AutoValue_FrontendOptions(
         getPathEntries(flags.classPath),
         getPathEntries(flags.nativeSourcePath),
-        FrontendUtils.getAllSources(flags.files, problems),
+        FrontendUtils.getAllSources(flags.files, problems)
+            .stream()
+            .map(p -> p.sourcePath())
+            .collect(ImmutableList.toImmutableList()),
         flags.output.endsWith(".zip")
             ? getZipOutput(flags.output, problems)
             : getDirOutput(flags.output, problems),

@@ -24,6 +24,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.function.Consumer;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -85,7 +87,7 @@ public class J2clUtils {
     try {
       // Write using the provided fileSystem (which might be the regular file system or might be a
       // zip file.)
-      Files.createDirectories(outputPath.getParent());
+      createDirectories(outputPath.getParent());
       Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
@@ -94,6 +96,26 @@ public class J2clUtils {
     } catch (IOException e) {
       problems.error("Could not write to file: %s", e.toString());
       problems.abortIfRequested();
+    }
+  }
+
+  private static void createDirectories(Path outputPath) throws IOException {
+    Deque<Path> directories = new ArrayDeque<Path>();
+
+    while (outputPath != null) {
+      if (Files.exists(outputPath)) {
+        // break if directories already exists
+        break;
+      }
+      directories.addLast(outputPath);
+      outputPath = outputPath.getParent();
+    }
+
+    // We are creating directories one by one so that we can reset the timestamp for each one
+    while (!directories.isEmpty()) {
+      Path directory = directories.removeLast();
+      Files.createDirectory(directory);
+      Files.setLastModifiedTime(directory, FileTime.fromMillis(0));
     }
   }
 }

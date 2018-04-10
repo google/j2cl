@@ -23,6 +23,7 @@ import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import com.google.j2cl.frontend.GwtIncompatibleNodeCollector;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -49,11 +50,12 @@ public class JavaPreprocessor {
    * preprocessing, the key of the map will be the original location of the file.
    */
   public static void preprocessFiles(
-      List<String> filePaths, FileSystem outputFileSystem, Problems problems) {
-    for (String file : filePaths) {
+      List<FileInfo> fileInfos, FileSystem outputFileSystem, Problems problems) {
+    for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
-        String fileContent = MoreFiles.asCharSource(Paths.get(file), StandardCharsets.UTF_8).read();
+        String fileContent =
+            MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), StandardCharsets.UTF_8).read();
         processedFileContent = processFile(fileContent);
       } catch (IOException e) {
         problems.error(Message.ERR_CANNOT_OPEN_FILE, e.toString());
@@ -61,7 +63,8 @@ public class JavaPreprocessor {
       }
 
       // Write the processed file to output
-      J2clUtils.writeToFile(outputFileSystem.getPath(file), processedFileContent, problems);
+      J2clUtils.writeToFile(
+          outputFileSystem.getPath(fileInfo.targetPath()), processedFileContent, problems);
     }
   }
 

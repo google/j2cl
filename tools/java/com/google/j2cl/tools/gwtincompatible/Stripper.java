@@ -16,6 +16,7 @@ package com.google.j2cl.tools.gwtincompatible;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.FrontendUtils;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.FileSystem;
@@ -42,7 +43,7 @@ public class Stripper {
       FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(flags.outputPath, problems);
       problems.abortIfRequested();
 
-      List<String> allPaths = FrontendUtils.getAllSources(flags.files, problems);
+      List<FileInfo> allPaths = FrontendUtils.getAllSources(flags.files, problems);
       problems.abortIfRequested();
 
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);

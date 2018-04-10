@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -40,8 +41,26 @@ import java.util.stream.Stream;
  */
 public class FrontendUtils {
 
+  /** Stores path of files to be processed. */
+  @AutoValue
+  public abstract static class FileInfo implements Comparable<FileInfo> {
+
+    public static FileInfo create(String sourcePath, String targetPath) {
+      return new AutoValue_FrontendUtils_FileInfo(sourcePath, targetPath);
+    }
+
+    public abstract String sourcePath();
+
+    public abstract String targetPath();
+
+    @Override
+    public int compareTo(FileInfo o) {
+      return targetPath().compareTo(o.targetPath());
+    }
+  }
+
   /** Returns all individual sources where source jars extracted and flattened. */
-  public static ImmutableList<String> getAllSources(List<String> sources, Problems problems) {
+  public static ImmutableList<FileInfo> getAllSources(List<String> sources, Problems problems) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
@@ -63,20 +82,20 @@ public class FrontendUtils {
             f ->
                 f.endsWith("jar")
                     ? extractSourceJar(f, srcjarContentDir, problems).stream()
-                    : Stream.of(f))
+                    : Stream.of(FileInfo.create(f, f)))
         .sorted()
         .distinct()
         .collect(ImmutableList.toImmutableList());
   }
 
-  private static ImmutableList<String> extractSourceJar(
+  private static ImmutableList<FileInfo> extractSourceJar(
       String sourceJarPath, Path srcjarContentDir, Problems problems) {
     try {
       ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
       try (Stream<Path> stream = Files.walk(srcjarContentDir)) {
         return stream
-            .map(Path::toString)
-            .filter(f -> f.endsWith(".java"))
+            .filter(p -> p.toString().endsWith(".java"))
+            .map((p) -> FileInfo.create(p.toString(), srcjarContentDir.relativize(p).toString()))
             .collect(ImmutableList.toImmutableList());
       }
     } catch (IOException e) {
