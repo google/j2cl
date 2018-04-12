@@ -270,6 +270,24 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @param {?function(*):void} fn
+   * @return {void}
+   * @public
+   */
+  static set parametricJsFunction(fn) {
+    Main.$clinit();
+  }
+
+  /**
+   * @return {?function(*):void}
+   * @public
+   */
+  static get parametricJsFunction() {
+    Main.$clinit();
+    return null;
+  }
+
+  /**
    * @return {void}
    * @public
    */

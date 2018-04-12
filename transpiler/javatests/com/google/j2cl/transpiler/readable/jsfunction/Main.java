@@ -228,6 +228,14 @@ public class Main {
     }
   }
 
+  @JsProperty
+  private static void setParametricJsFunction(ParametricJsFunction<Object> fn) {}
+
+  @JsProperty
+  private static ParametricJsFunction<Object> getParametricJsFunction() {
+    return null;
+  }
+
   void testFunctionExpressionTypeReplacement() {
     ParametricJsFunction<String> f =
         unused -> {
