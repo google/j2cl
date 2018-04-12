@@ -79,6 +79,13 @@ public class FrontendFlags {
   )
   protected boolean generateTimeReport = false;
 
+  @Option(
+    name = "-inlinesourcemaps",
+    usage = "Inlines the source map into the generated file.",
+    hidden = true
+  )
+  protected boolean inlineSourceMaps = false;
+
   /** Parses the given args list and updates values. */
   public static FrontendFlags parse(String[] args, Problems problems) {
     FrontendFlags flags = new FrontendFlags();

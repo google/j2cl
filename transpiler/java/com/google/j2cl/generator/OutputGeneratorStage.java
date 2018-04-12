@@ -42,6 +42,7 @@ public class OutputGeneratorStage {
   private final Path outputPath;
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
+  private final boolean inlineSourceMaps;
   private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
@@ -49,11 +50,13 @@ public class OutputGeneratorStage {
       Path outputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
+      boolean inlineSourceMaps,
       Problems problems) {
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputPath = outputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
+    this.inlineSourceMaps = inlineSourceMaps;
     this.problems = problems;
   }
 
@@ -107,14 +110,9 @@ public class OutputGeneratorStage {
         }
 
         timingReport.startSample("Render impl");
-        jsImplGenerator.setRelativeSourceMapLocation(
-            type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
-
         Path absolutePathForImpl =
             outputPath.resolve(getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
-        timingReport.startSample("Write impl");
-        J2clUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
 
         timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
@@ -126,12 +124,40 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
 
         timingReport.startSample("Render source maps");
-        generateSourceMaps(
-            j2clCompilationUnit,
-            type,
-            javaScriptImplementationSource,
-            jsImplGenerator.getSourceMappings(),
-            matchingNativeFile);
+        String sourceMap =
+            renderSourceMap(j2clCompilationUnit, type, jsImplGenerator.getSourceMappings());
+
+        if (sourceMap != null) {
+          if (inlineSourceMaps) {
+            // Inline source map so Kythe can create edges between this file and the Java source
+            // file.
+            javaScriptImplementationSource +=
+                // TODO(b/77961191): remove leading newline once the bug is fixed.
+                String.format(
+                    "%n// Source map:%n// %s", sourceMap.replace("\n", "").replace("\r", ""));
+          } else {
+            javaScriptImplementationSource +=
+                String.format(
+                    "%n//# sourceMappingURL=%s",
+                    type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
+            Path absolutePathForSourceMap =
+                outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
+            timingReport.startSample("Write source maps");
+            J2clUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
+          }
+        }
+
+        if (shouldGenerateReadableSourceMaps) {
+          outputReadableSourceMap(
+              j2clCompilationUnit,
+              type,
+              javaScriptImplementationSource,
+              jsImplGenerator.getSourceMappings(),
+              matchingNativeFile);
+        }
+
+        timingReport.startSample("Write impl");
+        J2clUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
 
         if (matchingNativeFile != null) {
           copyNativeJsFileToOutput(matchingNativeFile);
@@ -154,42 +180,39 @@ public class OutputGeneratorStage {
 
   private static final String READABLE_MAPPINGS_SUFFIX = ".js.mappings";
 
-  private void generateSourceMaps(
+  private String renderSourceMap(
+      CompilationUnit compilationUnit,
+      Type type,
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+    try {
+      return SourceMapGeneratorStage.generateSourceMaps(
+          type, javaSourcePositionByOutputSourcePosition);
+    } catch (IOException e) {
+      problems.error(
+          "Could not generate source map file for %s: %s",
+          compilationUnit.getName(), e.getMessage());
+      return null;
+    }
+  }
+
+  private void outputReadableSourceMap(
       CompilationUnit j2clUnit,
       Type type,
       String javaScriptImplementationFileContents,
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       NativeJavaScriptFile nativeJavaScriptFile) {
-    try {
-      // Generate sourcemap files.
-      String output =
-          SourceMapGeneratorStage.generateSourceMaps(
-              type, javaSourcePositionByOutputSourcePosition);
-
-      Path absolutePathForSourceMap = outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
-      J2clUtils.writeToFile(absolutePathForSourceMap, output, problems);
-
-      if (shouldGenerateReadableSourceMaps) {
-        String readableOutput =
-            ReadableSourceMapGenerator.generate(
-                javaSourcePositionByOutputSourcePosition,
-                javaScriptImplementationFileContents,
-                nativeJavaScriptFile,
-                j2clUnit.getFilePath());
-        if (readableOutput.isEmpty()) {
-          return;
-        }
-
-        Path absolutePathForReadableSourceMap =
-            outputPath.resolve(getRelativePath(type) + READABLE_MAPPINGS_SUFFIX);
-        J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
-      }
-    } catch (IOException e) {
-      problems.error(
-          "Could not generate source map file for %s: %s", j2clUnit.getName(), e.getMessage());
+    String readableOutput =
+        ReadableSourceMapGenerator.generate(
+            javaSourcePositionByOutputSourcePosition,
+            javaScriptImplementationFileContents,
+            nativeJavaScriptFile,
+            j2clUnit.getFilePath());
+    if (!readableOutput.isEmpty()) {
+      Path absolutePathForReadableSourceMap =
+          outputPath.resolve(getRelativePath(type) + READABLE_MAPPINGS_SUFFIX);
+      J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
     }
   }
-
 
   /**
    * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,

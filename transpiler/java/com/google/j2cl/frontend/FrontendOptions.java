@@ -47,7 +47,8 @@ public abstract class FrontendOptions {
             : getDirOutput(flags.output, problems),
         flags.readableSourceMaps,
         flags.declareLegacyNamespaces,
-        flags.generateTimeReport);
+        flags.generateTimeReport,
+        flags.inlineSourceMaps);
   }
 
   public abstract List<String> getClasspathEntries();
@@ -63,6 +64,8 @@ public abstract class FrontendOptions {
   public abstract boolean getDeclareLegacyNamespace();
 
   public abstract boolean getGenerateTimeReport();
+
+  public abstract boolean getInlineSourceMaps();
 
   private static boolean checkSourceFiles(List<String> sourceFiles, Problems problems) {
     for (String sourceFile : sourceFiles) {

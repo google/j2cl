@@ -158,6 +158,12 @@ public class TranspilerTester {
       return outputPath;
     }
 
+    public List<String> getOutputSource(String outputFile) throws IOException {
+      Path outputFilePath = outputPath.resolve(outputFile);
+      assertThat(outputFilePath.toFile().exists()).isTrue();
+      return Files.readAllLines(outputFilePath);
+    }
+
     public TranspileResult assertNoWarnings() {
       return assertWarnings();
     }

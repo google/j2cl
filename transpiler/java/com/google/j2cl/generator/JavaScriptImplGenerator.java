@@ -49,7 +49,6 @@ import java.util.stream.Collectors;
 /** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private NativeJavaScriptFile nativeSource;
-  private String relativeSourceMapLocation;
   private final ClosureTypesGenerator closureTypesGenerator;
 
 
@@ -102,10 +101,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return FILE_SUFFIX;
   }
 
-  void setRelativeSourceMapLocation(String relativeSourceMapLocation) {
-    this.relativeSourceMapLocation = checkNotNull(relativeSourceMapLocation);
-  }
-
   public void setNativeSource(NativeJavaScriptFile nativeSource) {
     this.nativeSource = checkNotNull(nativeSource);
   }
@@ -130,7 +125,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       renderMarkImplementorCalls();
       renderNativeSource();
       renderExports();
-      renderSourceMapLocation();
       return sourceBuilder.build();
     } catch (RuntimeException e) {
       // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
@@ -707,13 +701,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " * Export class.",
         " */",
         "exports = " + environment.aliasForType(type.getDeclaration()) + ";");
-    sourceBuilder.newLine();
-  }
-
-  private void renderSourceMapLocation() {
-    if (relativeSourceMapLocation != null) {
-      sourceBuilder.append("//# sourceMappingURL=" + relativeSourceMapLocation);
-    }
+    // TODO(b/77961191): add a new line once the bug is resolved.
   }
 
   private void renderExpression(Expression expression) {
