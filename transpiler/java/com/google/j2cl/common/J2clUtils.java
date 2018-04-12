@@ -23,6 +23,8 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -91,11 +93,25 @@ public class J2clUtils {
       Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
-      // TODO(b/67415734): Introduce a builder and move responsibility of sanitizing files to there.
-      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
+      maybeResetAllTimeStamps(outputPath);
     } catch (IOException e) {
       problems.error("Could not write to file: %s", e.toString());
       problems.abortIfRequested();
+    }
+  }
+
+  public static void copyFile(Path from, Path to) {
+    try {
+      Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      maybeResetAllTimeStamps(to);
+    } catch (IOException e) {
+      // TODO(tdeegan): This blows up during the JRE compile. Did this ever work? The sources are
+      // available for compilation so no errors should be seen here unless there is an exceptional
+      // condition.
+      // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
+      // + absoluteOutputPath + ":" + e.getMessage());
     }
   }
 
@@ -115,7 +131,18 @@ public class J2clUtils {
     while (!directories.isEmpty()) {
       Path directory = directories.removeLast();
       Files.createDirectory(directory);
-      Files.setLastModifiedTime(directory, FileTime.fromMillis(0));
+      maybeResetAllTimeStamps(directory);
     }
+  }
+
+  private static final boolean DETERMINISTIC_TIMESTAMPS =
+      Boolean.getBoolean("j2cl.deterministicTimestamps");
+
+  private static void maybeResetAllTimeStamps(Path path) throws IOException {
+    if (!DETERMINISTIC_TIMESTAMPS) {
+      return;
+    }
+    Files.getFileAttributeView(path, BasicFileAttributeView.class)
+        .setTimes(FileTime.fromMillis(0), FileTime.fromMillis(0), FileTime.fromMillis(0));
   }
 }

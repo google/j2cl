@@ -20,6 +20,9 @@ java_library(
 
 java_binary(
     name = "RerunningJ2clTranspiler",
+    jvm_flags = [
+        "-Dj2cl.deterministicTimestamps=true",
+    ],
     main_class = "com.google.j2cl.transpiler.RerunningJ2clTranspiler",
     runtime_deps = [":rerunning_transpiler"],
 )

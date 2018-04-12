@@ -16,19 +16,18 @@
 package com.google.j2cl.tools.gwtincompatible;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
 
-import java.io.ByteArrayOutputStream;
+import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.attribute.FileTime;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -40,27 +39,52 @@ public class StripperTest {
 
   @Rule public TemporaryFolder tmpFolder = new TemporaryFolder();
 
-  private File outputSourceJar;
-  private PrintStream printStream;
-  private ByteArrayOutputStream byteArrayOutputStream;
-
-  @Before
-  public void before() throws UnsupportedEncodingException {
-    outputSourceJar = new File(tmpFolder.getRoot(), "output.srcjar");
-
-    byteArrayOutputStream = new ByteArrayOutputStream();
-    printStream = new PrintStream(byteArrayOutputStream, true, "UTF-8");
-  }
-
   @Test
-  public void testEmptySources() throws UnsupportedEncodingException {
-    new Stripper().run(new String[] {"-d", outputSourceJar.getAbsolutePath()}, printStream);
-    assertThat(new String(byteArrayOutputStream.toByteArray(), "UTF-8")).isEmpty();
+  public void testEmptySources() throws IOException {
+    File sourceJar = new File(tmpFolder.newFolder(), "input.srcjar");
+    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(sourceJar));
+    out.close();
+
+    File outputSourceJar = runStripper(sourceJar);
+    ZipInputStream zip = new ZipInputStream(new FileInputStream(outputSourceJar));
+    assertThat(zip.getNextEntry()).isNull();
   }
 
   @Test
   public void testSourceJar() throws IOException {
-    File sourceJar = tmpFolder.newFile("input.srcjar");
+    File sourceJar = createSourceJar();
+
+    File outputSourceJar = runStripper(sourceJar);
+    ZipInputStream zip = new ZipInputStream(new FileInputStream(outputSourceJar));
+
+    ZipEntry entry = zip.getNextEntry();
+    assertThat(entry.getName()).isEqualTo("foo/");
+    asserTimeStampWasReset(entry);
+
+    entry = zip.getNextEntry();
+    assertThat(entry.getName()).isEqualTo("foo/bar/");
+    asserTimeStampWasReset(entry);
+
+    entry = zip.getNextEntry();
+    assertThat(entry.getName()).isEqualTo("foo/bar/Baz.java");
+    asserTimeStampWasReset(entry);
+
+    assertThat(zip.getNextEntry()).isNull();
+  }
+
+  @Test
+  public void runTwiceWithSameInput() throws IOException {
+    File sourceJar1 = createSourceJar();
+    File sourceJar2 = createSourceJar();
+
+    File outputSourceJar = runStripper(sourceJar1);
+    File outputSourceJar2 = runStripper(sourceJar2);
+
+    assertThat(Files.toByteArray(outputSourceJar)).isEqualTo(Files.toByteArray(outputSourceJar2));
+  }
+
+  private File createSourceJar() throws IOException {
+    File sourceJar = new File(tmpFolder.newFolder(), "input.srcjar");
     ZipOutputStream out = new ZipOutputStream(new FileOutputStream(sourceJar));
 
     ZipEntry e = new ZipEntry("foo/bar/Baz.java");
@@ -69,31 +93,23 @@ public class StripperTest {
     out.write(data, 0, data.length);
     out.closeEntry();
     out.close();
+    return sourceJar;
+  }
 
-    new Stripper()
-        .run(
-            new String[] {"-d", outputSourceJar.getAbsolutePath(), sourceJar.getAbsolutePath()},
-            printStream);
-    assertThat(new String(byteArrayOutputStream.toByteArray(), "UTF-8")).isEmpty();
+  private File runStripper(File inputJar) throws IOException {
+    File outputJar = new File(tmpFolder.newFolder(), "output.srcjar");
+    int returnCode =
+        new Stripper()
+            .run(
+                new String[] {"-d", outputJar.getAbsolutePath(), inputJar.getAbsolutePath()},
+                mock(PrintStream.class));
+    assertThat(returnCode).isEqualTo(0);
+    return outputJar;
+  }
 
-    FileInputStream input = new FileInputStream(outputSourceJar);
-    ZipInputStream zip = new ZipInputStream(input);
-
-    ZipEntry entry = zip.getNextEntry();
-    assertThat(entry).isNotNull();
-    assertThat(entry.getName()).isEqualTo("foo/");
+  private static void asserTimeStampWasReset(ZipEntry entry) {
     assertThat(entry.getLastModifiedTime()).isEqualTo(FileTime.fromMillis(0));
-
-    entry = zip.getNextEntry();
-    assertThat(entry).isNotNull();
-    assertThat(entry.getName()).isEqualTo("foo/bar/");
-    assertThat(entry.getLastModifiedTime()).isEqualTo(FileTime.fromMillis(0));
-
-    entry = zip.getNextEntry();
-    assertThat(entry).isNotNull();
-    assertThat(entry.getName()).isEqualTo("foo/bar/Baz.java");
-    assertThat(entry.getLastModifiedTime()).isEqualTo(FileTime.fromMillis(0));
-
-    assertThat(zip.getNextEntry()).isNull();
+    assertThat(entry.getCreationTime()).isEqualTo(FileTime.fromMillis(0));
+    assertThat(entry.getLastAccessTime()).isEqualTo(FileTime.fromMillis(0));
   }
 }

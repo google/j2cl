@@ -25,12 +25,8 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.FileTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -205,32 +201,12 @@ public class OutputGeneratorStage {
             + File.separator
             + j2clUnit.getName();
     Path absolutePath = outputPath.resolve(relativePath + ".java");
-    try {
-      Files.copy(
-          Paths.get(j2clUnit.getFilePath()),
-          absolutePath,
-          StandardCopyOption.REPLACE_EXISTING,
-          StandardCopyOption.COPY_ATTRIBUTES);
-      // Wipe entries modification time so that input->output mapping is stable
-      // regardless of the time of day.
-      Files.setLastModifiedTime(absolutePath, FileTime.fromMillis(0));
-    } catch (IOException e) {
-      // TODO(tdeegan): This blows up during the JRE compile. Did this ever work? The sources are
-      // available for compilation so no errors should be seen here unless there is an exceptional
-      // condition.
-      // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
-      // + absoluteOutputPath + ":" + e.getMessage());
-    }
+    J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath);
   }
 
   private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
     Path absolutePath = outputPath.resolve(nativeJavaScriptFile.getRelativeFilePath());
-    try {
-      Files.write(absolutePath, nativeJavaScriptFile.getContent().getBytes(StandardCharsets.UTF_8));
-      Files.setLastModifiedTime(absolutePath, FileTime.fromMillis(0));
-    } catch (IOException e) {
-      problems.warning("Could not copy native js file to " + absolutePath + ":" + e.getMessage());
-    }
+    J2clUtils.writeToFile(absolutePath, nativeJavaScriptFile.getContent(), problems);
   }
 
   /** Returns the relative output path for a given type. */

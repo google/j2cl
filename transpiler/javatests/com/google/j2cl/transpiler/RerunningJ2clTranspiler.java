@@ -19,6 +19,7 @@ import com.google.common.collect.Sets.SetView;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendUtils;
@@ -26,6 +27,7 @@ import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
@@ -84,8 +86,10 @@ public class RerunningJ2clTranspiler {
     boolean firstCompileSuccess = compile(new CompilerRunner(args));
     Set<OutFile> firstCompileOut = null;
 
+    byte[] firstOutputData = null;
     if (firstCompileSuccess) {
       firstCompileOut = getOutFilesFromZip(outputZip);
+      firstOutputData = Files.toByteArray(outputZip);
     }
 
     boolean secondCompileSuccess = compile(new CompilerRunner(args));
@@ -111,6 +115,11 @@ public class RerunningJ2clTranspiler {
     if (!firstCompileSuccess) {
       System.err.println("Compile failed");
       System.exit(-3);
+    }
+
+    if (!Arrays.equals(firstOutputData, Files.toByteArray(outputZip))) {
+      System.err.println("Output is not identical");
+      System.exit(-4);
     }
   }
 

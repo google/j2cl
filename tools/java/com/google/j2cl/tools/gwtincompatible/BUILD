@@ -27,6 +27,9 @@ java_library(
 
 java_binary(
     name = "GwtIncompatibleStripper",
+    jvm_flags = [
+        "-Dj2cl.deterministicTimestamps=true",
+    ],
     main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
     runtime_deps = [":gwtincompatible_lib"],
 )

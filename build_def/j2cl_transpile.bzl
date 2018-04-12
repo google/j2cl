@@ -52,13 +52,7 @@ def _impl(ctx):
   for java_file in java_files:
     java_files_paths += [java_file.path]
 
-  # Intermediate target with a zip file that contains timestamps and is
-  # therefore not deterministic.  This file is then sanitized to the final
-  # js_zip_artifact.
-  nondeterministic_js_zip_artifact = ctx.actions.declare_file(
-      "__nondeterministic_%s.js.zip" % ctx.label.name)
-
-  compiler_args = ["-d", nondeterministic_js_zip_artifact.path]
+  compiler_args = ["-d", ctx.outputs.zip_file.path]
 
   if deps_paths:
     compiler_args += ["-cp", separator.join(deps_paths)]
@@ -94,13 +88,10 @@ def _impl(ctx):
   inputs += js_native_zip_files
   inputs += [compiler_args_file]
 
-  # Note: the output of this rule is not detrerministic, which is why we fix it
-  # with _sanitize_zip below.  Ideally, the transpiler would output a
-  # deterministic file directly.
   ctx.action(
       progress_message = _get_message(ctx),
       inputs=inputs,
-      outputs=[nondeterministic_js_zip_artifact],
+      outputs=[ctx.outputs.zip_file],
       executable=ctx.executable.transpiler,
       arguments=["@" + compiler_args_file.path],
       env=dict(LANG="en_US.UTF-8"),
@@ -108,39 +99,8 @@ def _impl(ctx):
       mnemonic = "J2clTranspile",
   )
 
-  _sanitize_zip(ctx, nondeterministic_js_zip_artifact, ctx.outputs.zip_file)
-
   return struct(
       files=depset([ctx.outputs.zip_file])
-  )
-
-def _sanitize_zip(
-    ctx,
-    nondeterministic_zip_file,
-    output):
-  """Removes timestamps from files and directories in the given ZIP archive.
-
-  Args:
-    ctx: Rule context
-    nondeterministic_zip_file: The File to sanitize
-    output: Target File
-  """
-  ctx.actions.run_shell(
-      inputs = [
-          nondeterministic_zip_file,
-          ctx.executable._zip,
-      ],
-      outputs = [output],
-      command = "\n".join([
-          "TMPDIR=$(mktemp -d)",
-          "unzip -q %s -d $TMPDIR" % nondeterministic_zip_file.path,
-          "cwd=$PWD",
-          "cd $TMPDIR",
-          # Ensure the directory is nonempty, or zip errors out.
-          "mkdir -p __dummy__",
-          "$cwd/%s -jt -X -qr $cwd/%s ." % (
-              ctx.executable._zip.path, output.path)
-      ])
   )
 
 
