@@ -10,7 +10,7 @@ java_library(
     name = "bazel",
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party/bazel/src/main/protobuf:worker_protocol_proto",
+        "//third_party/bazel/src/main/protobuf:worker_protocol_java_proto",
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/frontend",
     ],
