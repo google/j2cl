@@ -83,6 +83,7 @@ load(
 )
 
 J2CL_UNOPTIMIZED_DEFS = [
+    "--jscomp_error=strictMissingRequire",
     "--language_out=ECMASCRIPT5_STRICT",
 ]
 
