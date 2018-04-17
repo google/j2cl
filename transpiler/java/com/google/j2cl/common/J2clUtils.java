@@ -26,8 +26,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.function.Consumer;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -116,23 +114,13 @@ public class J2clUtils {
   }
 
   private static void createDirectories(Path outputPath) throws IOException {
-    Deque<Path> directories = new ArrayDeque<Path>();
-
-    while (outputPath != null) {
-      if (Files.exists(outputPath)) {
-        // break if directories already exists
-        break;
-      }
-      directories.addLast(outputPath);
-      outputPath = outputPath.getParent();
+    // We are creating directories one by one so that we can reset the timestamp for each one.
+    if (outputPath == null || Files.exists(outputPath)) {
+      return;
     }
-
-    // We are creating directories one by one so that we can reset the timestamp for each one
-    while (!directories.isEmpty()) {
-      Path directory = directories.removeLast();
-      Files.createDirectory(directory);
-      maybeResetAllTimeStamps(directory);
-    }
+    createDirectories(outputPath.getParent());
+    Files.createDirectory(outputPath);
+    maybeResetAllTimeStamps(outputPath);
   }
 
   private static final boolean DETERMINISTIC_TIMESTAMPS =
