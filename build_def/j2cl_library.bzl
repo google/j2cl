@@ -281,8 +281,7 @@ def j2cl_library(name,
       deps_mgmt=js_deps_mgmt,
       exports=js_exports,
       srczip=merged_zip if src_zips else None,
-      # Direct automated dep picking tools away from this target.
-      tags=internal_tags,
+      tags=tags + ["avoid_dep"],
       testonly=testonly,
   )
 
