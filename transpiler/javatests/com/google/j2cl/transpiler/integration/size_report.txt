@@ -1,30 +1,35 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 11 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1620332 to 1412329 bytes (100%->87.2%) and from
-  498515 to 446896 bytes (100%->89.6%) gzipped.
+  1618568 to 1620034 bytes (100%->100.1%) and from
+  498038 to 498350 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-      55262     3642 jsasync (-93.4%)
+       2932     2873 wideningprimitiveconversion (-2.0%)
+       2699     2697 staticinitsuper (-0.1%)
+       1748     1747 arrayobjectcalls (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       2131     2132 classliteralstripped (0.0%)
+       2379     2400 argumentimplicitcasts (0.9%)
+      37173    37266 box2d_noclassmetadata (0.3%)
+      33816    33894 box2d_noclassmetadata_checksmin (0.2%)
+      39415    39499 box2d_default (0.2%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-   11443481 11443481 box2d_default (unchanged)
-    6562393  6562393 box2d_default.minified (unchanged)
-    3480730  3480730 emptyclass (unchanged)
-    2072357  2072357 emptyclass.minified (unchanged)
+   11440856 11440415 box2d_default (-0.0%)
+    6560381  6559926 box2d_default.minified (-0.0%)
+    3477838  3477664 emptyclass (-0.0%)
+    2070078  2069890 emptyclass.minified (-0.0%)
 
 
 All reports:
@@ -34,7 +39,7 @@ All reports:
        2832     2832 alllongoperations (unchanged)
        4942     4942 allsimplebridges (unchanged)
        1157     1157 anonymousclasswithcaptures (unchanged)
-       2400     2400 argumentimplicitcasts (unchanged)
+       2379     2400 argumentimplicitcasts (0.9%)
        2544     2544 arithmeticexception (unchanged)
           9        9 arithmeticexceptiondisabled (unchanged)
         967      967 arithmeticexceptiondisabledresultused (unchanged)
@@ -42,17 +47,17 @@ All reports:
        1028     1028 arraycastsinglesideeffect (unchanged)
        1520     1520 arrayleafinsertion (unchanged)
        2059     2059 arrayliteral (unchanged)
-       1748     1748 arrayobjectcalls (unchanged)
+       1748     1747 arrayobjectcalls (-0.1%)
        3565     3565 arrayofboxedtype (unchanged)
-       3837     3837 arrayreadwrite (unchanged)
+       3836     3837 arrayreadwrite (0.0%)
        2647     2647 assertsimple (unchanged)
        1042     1042 backwardbridgemethod (unchanged)
-       2680     2680 binaryexpressions (unchanged)
+       2679     2680 binaryexpressions (0.0%)
         969      969 blockscoping (unchanged)
-      39499    39499 box2d_default (unchanged)
-      37266    37266 box2d_noclassmetadata (unchanged)
-      33894    33894 box2d_noclassmetadata_checksmin (unchanged)
-      35343    35343 box2d_noclassmetadata_checksopt (unchanged)
+      39415    39499 box2d_default (0.2%)
+      37173    37266 box2d_noclassmetadata (0.3%)
+      33816    33894 box2d_noclassmetadata_checksmin (0.2%)
+      35275    35343 box2d_noclassmetadata_checksopt (0.2%)
        3558     3558 boxingsideeffect (unchanged)
        1014     1014 breakstatement (unchanged)
        2209     2209 bridgejsmethod (unchanged)
@@ -79,7 +84,7 @@ All reports:
        1236     1236 classcastexception (unchanged)
        3016     3016 classliteral (unchanged)
         977      977 classliteralobfuscated (unchanged)
-       2131     2132 classliteralstripped (0.0%)
+       2131     2131 classliteralstripped (unchanged)
        1017     1017 compiletimeconstant (unchanged)
        1054     1054 complexcascadingconstructor (unchanged)
        1016     1016 continuestatement (unchanged)
@@ -136,7 +141,7 @@ All reports:
        1355     1355 interfaces (unchanged)
        1639     1639 intersectiontype (unchanged)
        1339     1339 iteratormethodresolution (unchanged)
-      55262     3642 jsasync (-93.4%)
+      55073    55101 jsasync (0.1%)
           9        9 jsbridgebackward (unchanged)
        1318     1318 jsbridgemethodaccidentaloverride (unchanged)
           9        9 jsbridgemultipleaccidental (unchanged)
@@ -147,7 +152,7 @@ All reports:
        1450     1450 jsfunctionbridge (unchanged)
        1918     1918 jsfunctiontypeannotation (unchanged)
        1035     1035 jsinnerclass (unchanged)
-      25573    25573 jsinteroptests (unchanged)
+      25570    25570 jsinteroptests (unchanged)
        1044     1044 jsmethodoverride (unchanged)
         969      969 jsoverlay (unchanged)
         972      972 jsoverlaystaticrefs (unchanged)
@@ -215,7 +220,7 @@ All reports:
           9        9 staticfieldinitializer (unchanged)
           9        9 staticfields (unchanged)
         989      989 staticinitorder (unchanged)
-       2697     2697 staticinitsuper (unchanged)
+       2699     2697 staticinitsuper (-0.1%)
         946      946 staticjsmethods (unchanged)
        1057     1057 staticnestedclass (unchanged)
        1724     1724 strictequality (unchanged)
@@ -239,4 +244,4 @@ All reports:
        1068     1068 variablecollisions (unchanged)
         964      964 whilestatement (unchanged)
        1180     1180 wideningandboxing (unchanged)
-       2873     2873 wideningprimitiveconversion (unchanged)
+       2932     2873 wideningprimitiveconversion (-2.0%)
