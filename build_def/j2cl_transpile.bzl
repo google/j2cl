@@ -7,8 +7,7 @@ Example use:
 
 j2cl_transpile(
     name = "my_transpile",
-    srcs = ["MyJavaFile.java"],
-    deps = [":some_dep"],
+    javalib = ":some_lib",
 )
 
 Note: in general you want to be using j2cl_library instead of using
@@ -28,29 +27,21 @@ def _get_message(ctx):
       "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
       "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
   ]
-  index = len(ctx.attr.deps) + len(ctx.configuration.bin_dir.path)
+  index = len(ctx.configuration.bin_dir.path)
   return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx.label
 
 def _impl(ctx):
   separator = ctx.configuration.host_path_separator
-  java_files = ctx.files.srcs  # java files that need to be compiled
+  java_provider = ctx.attr.javalib[java_common.provider]
   js_native_zip_files = ctx.files.native_srcs_zips
-  deps = ctx.attr.deps
-  dep_files = depset()
-  deps_paths = []
-  java_files_paths = []
 
-  # gather transitive files and exported files in deps
-  for dep in deps:
-    dep_files += dep.files
-    dep_files += dep.default_runfiles.files  # for exported libraries
+  # Using source_jars of the java_library since that includes APT generated src.
+  java_src_jars = java_provider.source_jars
+  java_deps = java_provider.compilation_info.compilation_classpath
 
   # convert files to paths
-  for dep_file in dep_files:
-    deps_paths += [dep_file.path]
-
-  for java_file in java_files:
-    java_files_paths += [java_file.path]
+  deps_paths = [j.path for j in java_deps]
+  java_src_paths = [j.path for j in java_src_jars]
 
   compiler_args = ["-d", ctx.outputs.zip_file.path]
 
@@ -77,7 +68,7 @@ def _impl(ctx):
     compiler_args += ["-inlinesourcemaps"]
 
   # The transpiler expects each java file path as a separate argument.
-  compiler_args += java_files_paths
+  compiler_args += java_src_paths
 
   # Create an action to write the flag file
   compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
@@ -86,8 +77,8 @@ def _impl(ctx):
       content = "\n".join(compiler_args)
   )
 
-  inputs = java_files[:]
-  inputs += list(dep_files)
+  inputs = java_src_jars[:]
+  inputs += list(java_deps)
   inputs += js_native_zip_files
   inputs += [compiler_args_file]
 
@@ -119,11 +110,7 @@ Args:
 #   transpiler: J2CL compiler jar to use.
 j2cl_transpile = rule(
     attrs={
-        "deps": attr.label_list(allow_files=[".jar"]),
-        "srcs": attr.label_list(
-            mandatory=True,
-            allow_files=[".java", ".srcjar", "-src.jar"],
-        ),
+        "javalib": attr.label(providers=[java_common.provider]),
         "native_srcs_zips": attr.label_list(
             allow_files=[".zip"],
         ),

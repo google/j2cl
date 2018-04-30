@@ -221,9 +221,7 @@ def j2cl_library(name,
     js_sources_from_transpile = ":" + base_name + "_j2cl_transpile.js.zip"
     j2cl_transpile(
         name=base_name + "_j2cl_transpile",
-        # Using -src.jar of the java_library since that includes APT generated src.
-        srcs=["lib" + base_name + "_java_library-src.jar"],
-        deps=java_deps,
+        javalib=":" + base_name + "_java_library",
         native_srcs_zips=native_srcs_zips,
         testonly=testonly,
         readable_source_maps=_readable_source_maps,

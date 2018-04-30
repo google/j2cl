@@ -34,23 +34,20 @@ load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 # This is intended to detect problems with static state in the transpiler.
 j2cl_transpile(
     name = "jre_transpiled_twice",
-    srcs = ["//jre/java:jre_java_files"],
+    javalib = "//jre/java:jre_java_library",
     native_srcs_zips = ["//jre/java:jre_native.zip"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
     # Turn off workers for this test since we are explicitly testing the compile and don't want the
     # transpile to run in a worker. See: b/62060418.
     supports_workers_internal = 0,
     transpiler = ":RerunningJ2clTranspiler",
-    deps = [
-        "//third_party/java/gwt:gwt-javaemul-internal-annotations",
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/jsr305_annotations",
-    ],
 )
 
 load("//tools/build_rules:build_test.bzl", "build_test")
 
 build_test(
     name = "jre_transpiling_twice_test",
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
     targets = [
         ":jre_transpiled_twice",
     ],
