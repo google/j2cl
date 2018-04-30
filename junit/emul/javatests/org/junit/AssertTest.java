@@ -245,7 +245,7 @@ public class AssertTest {
     Assert.assertThrows(Throwable.class, () -> {});
   }
 
-
+  @Test
   public void testAssertThrowsFailsWithUnexpectedException() {
     NullPointerException npe = new NullPointerException();
     try {
@@ -255,7 +255,7 @@ public class AssertTest {
     }
   }
 
-  private static void throwIt(Throwable t) throws Throwable{
+  private static void throwIt(Throwable t) throws Throwable {
     throw t;
   }
 }
