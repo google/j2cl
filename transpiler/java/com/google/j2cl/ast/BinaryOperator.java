@@ -83,11 +83,11 @@ public enum BinaryOperator implements Operator {
 
   /** Returns true for plain assignment and compound assignment operators. */
   public boolean isAssignmentOperator() {
-    return this == ASSIGN || underlyingBinaryOperator != null;
+    return this == ASSIGN || isCompoundAssignment();
   }
 
   public boolean isCompoundAssignment() {
-    return this != ASSIGN && hasSideEffect();
+    return underlyingBinaryOperator != null;
   }
 
   public boolean isBitwiseOperator() {
