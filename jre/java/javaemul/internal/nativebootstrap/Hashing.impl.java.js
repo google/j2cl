@@ -31,7 +31,7 @@ class Hashing {
    */
   static $getHashCode(obj) {
     let o = /** @type {Object} */ (obj);
-    return o.$systemHashCode || (window.Object.defineProperties(o, {
+    return o.$systemHashCode || (Object.defineProperties(o, {
              $systemHashCode:
                  {value: Hashing.$getNextHashId(), enumerable: false}
            }),
