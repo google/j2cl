@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.classliteral;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -168,17 +169,40 @@ public class Main {
     assertSame(Foo[].class, f[0].getClass());
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  private interface NativeType {}
-
   @JsFunction
   private interface NativeFunction {
     void f();
   }
 
-  private static void testNative() {
-    assertEquals("<native object>", NativeType.class.getName());
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface NativeInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class NativeClass {}
+
+  public static void testNative() {
     assertEquals("<native function>", NativeFunction.class.getName());
+    assertEquals(null, NativeFunction.class.getSuperclass());
+
+    // TODO(79116203): return JavaScriptInterface or fail restriction checking
+    assertEquals("<native object>", NativeInterface.class.getName());
+    assertEquals(null, NativeInterface.class.getSuperclass());
+
+    assertEquals("<native object>", NativeClass.class.getName());
+    // TODO(79123093): return Object.class
+    assertEquals(null, NativeClass.class.getSuperclass());
+  }
+
+  private static class TypeExtendsNativeClass extends NativeClass {
+    @JsConstructor
+    TypeExtendsNativeClass() {}
+  }
+
+  public static void testExtendsNative() {
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$TypeExtendsNativeClass",
+        TypeExtendsNativeClass.class.getName());
+    assertEquals(NativeClass.class, TypeExtendsNativeClass.class.getSuperclass());
   }
 
   private interface SomeFunctionalInterface {
@@ -292,6 +316,8 @@ public class Main {
     testEnumSubclass();
     testArray();
     testNative();
+    // TODO(63081128): Enable the test.
+    // testExtendsNative();
     testGeneric();
     testClinit();
     testMisc();
