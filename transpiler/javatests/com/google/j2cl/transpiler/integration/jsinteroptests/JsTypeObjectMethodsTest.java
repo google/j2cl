@@ -27,16 +27,22 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     test.testEquals();
     test.testHashCode();
     test.testJavaLangObjectMethodsOrNativeSubtypes();
+    test.testObjectMethodDispatch();
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  interface NativeObject {}
+  interface NativeObjectInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeObjectClass {
+    public NativeObjectClass() {}
+  }
 
   @JsMethod
-  private static native NativeObject createWithEqualsAndHashCode(int a, int b);
+  private static native NativeObjectInterface createWithEqualsAndHashCode(int a, int b);
 
   @JsMethod
-  private static native NativeObject createWithoutEqualsAndHashCode(int a, int b);
+  private static native NativeObjectInterface createWithoutEqualsAndHashCode(int a, int b);
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   static class NativeClassWithHashCode {
@@ -59,10 +65,10 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     }
   }
 
-  static class ImplementsNativeObject implements NativeObject {
+  static class ImplementsNativeObjectInterface implements NativeObjectInterface {
     private int n;
 
-    public ImplementsNativeObject(int n) {
+    public ImplementsNativeObjectInterface(int n) {
       this.n = n;
     }
 
@@ -75,20 +81,20 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
 
   public void testHashCode() {
     assertEquals(3, createWithEqualsAndHashCode(1, 3).hashCode());
-    NativeObject o1 = createWithoutEqualsAndHashCode(1, 3);
-    NativeObject o2 = createWithoutEqualsAndHashCode(1, 3);
+    NativeObjectInterface o1 = createWithoutEqualsAndHashCode(1, 3);
+    NativeObjectInterface o2 = createWithoutEqualsAndHashCode(1, 3);
     assertTrue(o1.hashCode() != o2.hashCode());
     assertTrue(((Object) o1).hashCode() != ((Object) o2).hashCode());
     assertEquals(8, new SubclassNativeClassWithHashCode(8).hashCode());
     assertEquals(8, ((Object) new SubclassNativeClassWithHashCode(8)).hashCode());
-    assertEquals(9, ((Object) new ImplementsNativeObject(9)).hashCode());
+    assertEquals(9, ((Object) new ImplementsNativeObjectInterface(9)).hashCode());
     assertEquals(10, callHashCode(new SubclassNativeClassWithHashCode(10)));
   }
 
   public void testEquals() {
     assertEquals(createWithEqualsAndHashCode(1, 3), createWithEqualsAndHashCode(1, 4));
-    NativeObject o1 = createWithoutEqualsAndHashCode(1, 3);
-    NativeObject o2 = createWithoutEqualsAndHashCode(1, 3);
+    NativeObjectInterface o1 = createWithoutEqualsAndHashCode(1, 3);
+    NativeObjectInterface o2 = createWithoutEqualsAndHashCode(1, 3);
     assertTrue(createWithEqualsAndHashCode(1, 3).equals(createWithoutEqualsAndHashCode(1, 4)));
     assertTrue(
         ((Object) createWithEqualsAndHashCode(1, 3)).equals(createWithoutEqualsAndHashCode(1, 4)));
@@ -134,6 +140,15 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     return error;
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface GenericObjectInterfaceWithObjectMethods {
+    boolean equals(Object other);
+
+    int hashCode();
+
+    String toString();
+  }
+
   public void testJavaLangObjectMethodsOrNativeSubtypes() {
     patchErrorWithJavaLangObjectMethods();
     assertEquals(createMyNativeError(3), createMyNativeError(3));
@@ -145,10 +160,76 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
 
     // Tests that hashcode is actually working through the object trampoline and
     // assumes that consecutive hashchodes are different.
-    // TODO(b/31272546): uncomment
+    // TODO(b/31272546): uncomment when bug is fixed
     // assertFalse(createMyNativeError(3).hashCode() == new MyNativeError().hashCode());
+
+    GenericObjectInterfaceWithObjectMethods o =
+        (GenericObjectInterfaceWithObjectMethods) new NativeObjectClass();
+    assertNotNull(o.toString());
+    // TODO(b/31272546): uncomment when bug is fixed
+    // assertNotNull(((Double) (double) o.hashCode()));
+    // Do not change to assertEquals because we are testing the dispatch to equals().
+    // assertTrue(o.equals(o));
   }
 
   @JsMethod
   private static native void patchErrorWithJavaLangObjectMethods();
+
+  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  static class NativeClassWithDeclarations {
+
+    NativeClassWithDeclarations(Double number) {}
+
+    public native boolean equals(Object other);
+
+    public native int hashCode();
+
+    public native String toString();
+  }
+
+  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  static class NativeClassWithoutDeclarations {
+    NativeClassWithoutDeclarations(Double number) {}
+  }
+
+  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  interface NativeInterfaceWithDeclarations {
+    boolean equals(Object other);
+
+    int hashCode();
+
+    String toString();
+  }
+
+  @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
+  interface NativeInterfaceWithoutDeclarations {}
+
+  public void testObjectMethodDispatch() {
+    NativeClassWithDeclarations nativeClassWithDeclarations = new NativeClassWithDeclarations(5.0);
+    NativeClassWithoutDeclarations nativeClassWithoutDeclarations =
+        new NativeClassWithoutDeclarations(5.0);
+
+    // Do not change to assertEquals because we are testing the dispatch to equals().
+    assertTrue(nativeClassWithDeclarations.equals(nativeClassWithoutDeclarations));
+    assertTrue(nativeClassWithoutDeclarations.equals(nativeClassWithDeclarations));
+
+    assertEquals(nativeClassWithDeclarations.toString(), nativeClassWithoutDeclarations.toString());
+    assertTrue(nativeClassWithDeclarations.toString().contains("Native Object with value"));
+    assertEquals(nativeClassWithDeclarations.hashCode(), nativeClassWithoutDeclarations.hashCode());
+
+    NativeInterfaceWithDeclarations nativeInterfaceWithDeclarations =
+        (NativeInterfaceWithDeclarations) nativeClassWithDeclarations;
+    NativeInterfaceWithoutDeclarations nativeInterfaceWithoutDeclarations =
+        (NativeInterfaceWithoutDeclarations) nativeClassWithoutDeclarations;
+
+    // Do not change to assertEquals because we are testing the dispatch to equals().
+    assertTrue(nativeInterfaceWithDeclarations.equals(nativeInterfaceWithoutDeclarations));
+    assertTrue(nativeInterfaceWithoutDeclarations.equals(nativeInterfaceWithDeclarations));
+
+    assertEquals(
+        nativeInterfaceWithDeclarations.toString(), nativeInterfaceWithoutDeclarations.toString());
+    assertTrue(nativeInterfaceWithDeclarations.toString().contains("Native Object with value"));
+    assertEquals(
+        nativeInterfaceWithDeclarations.hashCode(), nativeInterfaceWithoutDeclarations.hashCode());
+  }
 }

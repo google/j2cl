@@ -11,10 +11,31 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.NativeJsTypeTest.NativeJsTypeImplementsObjectMethods');
+goog.module('woo.JsTypeObjectMethodsTest.NativeJsTypeImplementsObjectMethods');
 
 class NativeJsTypeImplementsObjectMethods {
-  constructor() {}
+  /** @param {number} value */
+  constructor(value) {
+    /** public {number} */ this.value = value;
+  }
+
+  /**
+   * @param {?} other
+   * @return {boolean}
+   */
+  equals(other) {
+    return this.value === other.value;
+  }
+
+  /** @return {number} */
+  hashCode() {
+    return this.value;
+  }
+
+  /** @return {string} */
+  toString() {
+    return 'Native Object with value: ' + this.value;
+  }
 }
 
 exports = NativeJsTypeImplementsObjectMethods;

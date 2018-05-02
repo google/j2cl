@@ -36,6 +36,7 @@ public class NativeJsTypeTest extends MyTestCase {
     test.testNativeJsTypeWithStaticIntializer();
     test.testSpecialNativeInstanceOf();
     test.testForwaringMethodsOnNativeClasses();
+    test.testUninitializedStaticOverlayField();
   }
 
   @JsType(isNative = true)
