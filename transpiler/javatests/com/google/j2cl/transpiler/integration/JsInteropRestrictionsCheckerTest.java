@@ -2285,14 +2285,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import jsinterop.annotations.JsIgnore;",
             "import jsinterop.annotations.JsType;",
             "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsOverlay;",
             "import jsinterop.annotations.JsConstructor;",
             "@JsType(isNative=true) class NativeType {",
             "  @JsMethod(name =\"string\")",
             "  public native String toString();",
+            "  @JsOverlay",
+            "  public final String callToString() { return super.toString(); }",
             "}",
             "class Buggy extends NativeType {",
             "  @JsConstructor Buggy() {}",
-            "  public String toString() { return super.toString(); }",
+            "  public String toString() { return null; }",
             "  @JsMethod(name = \"blah\")",
             "  public int hashCode() { return super.hashCode(); }",
             "}",
@@ -2314,17 +2317,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "('String Object.toString()' with JavaScript name 'toString').",
             "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
                 + "that is different from the JavaScript name of a method it overrides "
-                + "('int Object.hashCode()' with JavaScript name 'hashCode')"
-            // TODO(b/37579977): Finalize checker implementation and enable this test.
-            // "Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
-            //    + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
-            // "Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'.
-            // 'java.lang.Object'"
-            //    + " methods in native JsTypes cannot be called using super."
-            // "Line 20: Cannot use super to call 'EntryPoint.NativeType.equals'.
-            // 'java.lang.Object'"
-            //    + " methods in native JsTypes cannot be called using super."
-            );
+                + "('int Object.hashCode()' with JavaScript name 'hashCode')",
+            "Cannot use 'super' to call 'String Object.toString()'. Native classes and their "
+                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
+            "Cannot use 'super' to call 'int Object.hashCode()'. Native classes and their "
+                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
+            "Cannot use 'super' to call 'boolean Object.equals(Object)'. Native classes and their "
+                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
+            "Cannot use 'super' to call 'String Buggy.toString()'. Native classes and their "
+                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.");
   }
 
   public void testNativeMethodOnJsTypeSucceeds() {
@@ -2378,7 +2379,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "class SubNativeSubclass extends NativeSubclass {",
             "  @JsConstructor public SubNativeSubclass() {}",
-            "  public boolean equals(Object obj) { return super.equals(obj); }",
+            "  public boolean equals(Object obj) { return false; }",
             "}")
         .assertNoWarnings();
   }

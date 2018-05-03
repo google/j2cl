@@ -253,6 +253,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         && isSubtypeOf(thatRawTypeDescriptor);
   }
 
+  @Memoized
+  public boolean isOrExtendsNativeClass() {
+    return getTypeDeclaration().isOrExtendsNativeClass();
+  }
+
   private boolean isSubtypeOf(TypeDescriptor that) {
     // TODO(70951075): Add other relations due to jsinterop so they are optimized as well.
     return TypeDescriptors.isJavaLangObject(that)
@@ -495,6 +500,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return true;
     }
 
+    // TODO(b/79210574): reconsider whether types with only static JsMembers are actually
+    // referenceable externally.
     return getDeclaredMemberDescriptors()
         .stream()
         .filter(Predicates.not(MemberDescriptor::isOrOverridesJavaLangObjectMethod))

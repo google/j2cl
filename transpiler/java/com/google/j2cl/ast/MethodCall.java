@@ -18,8 +18,10 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class for method call expression.
@@ -29,12 +31,15 @@ public class MethodCall extends Invocation {
   @Visitable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
+  private final Optional<SourcePosition> sourcePosition;
+
   /**
    * If an instance call should be dispatched statically, e.g. A.super.method() invocation.
    */
   private boolean isStaticDispatch;
 
   private MethodCall(
+      Optional<SourcePosition> sourcePosition,
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
@@ -43,6 +48,7 @@ public class MethodCall extends Invocation {
     this.qualifier = checkNotNull(AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor));
     this.arguments.addAll(checkNotNull(arguments));
     this.isStaticDispatch = isStaticDispatch;
+    this.sourcePosition = sourcePosition;
   }
 
   @Override
@@ -73,10 +79,18 @@ public class MethodCall extends Invocation {
     return targetMethodDescriptor.getReturnTypeDescriptor();
   }
 
+  public SourcePosition getSourcePosition() {
+    return sourcePosition.get();
+  }
+
   @Override
   public MethodCall clone() {
     return new MethodCall(
-        qualifier.clone(), targetMethodDescriptor, AstUtils.clone(arguments), isStaticDispatch);
+        sourcePosition,
+        qualifier.clone(),
+        targetMethodDescriptor,
+        AstUtils.clone(arguments),
+        isStaticDispatch);
   }
 
   @Override
@@ -97,6 +111,7 @@ public class MethodCall extends Invocation {
    */
   public static class Builder extends Invocation.Builder<Builder, MethodCall> {
     private boolean isStaticDispatch;
+    private Optional<SourcePosition> sourcePosition;
 
     public static Builder from(MethodCall methodCall) {
       return new Builder(methodCall);
@@ -113,12 +128,18 @@ public class MethodCall extends Invocation {
       return this;
     }
 
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = Optional.of(sourcePosition);
+      return this;
+    }
+
     @Override
     protected MethodCall doCreateInvocation(
         Expression qualifierExpression,
         MethodDescriptor methodDescriptor,
         List<Expression> arguments) {
-      return new MethodCall(qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
+      return new MethodCall(
+          sourcePosition, qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
     }
 
     private Builder(MethodCall methodCall) {

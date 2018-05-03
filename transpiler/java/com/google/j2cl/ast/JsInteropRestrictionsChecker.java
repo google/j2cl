@@ -178,6 +178,10 @@ public class JsInteropRestrictionsChecker {
       checkMemberOfNativeJsType(member);
     }
 
+    if (memberDescriptor.getEnclosingTypeDescriptor().isOrExtendsNativeClass()) {
+      checkMemberOfNativeClassOrSubclass(member);
+    }
+
     if (memberDescriptor.isJsOverlay()) {
       checkJsOverlay(member);
     }
@@ -207,6 +211,30 @@ public class JsInteropRestrictionsChecker {
     if (isStaticJsMember(memberDescriptor)) {
       checkNameCollisions(staticJsMembersByName, member);
     }
+  }
+
+  private void checkMemberOfNativeClassOrSubclass(Member member) {
+    if (member.isStatic() || member.isConstructor()) {
+      return;
+    }
+
+    member.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethodCall(MethodCall methodCall) {
+            if (!(methodCall.getQualifier() instanceof SuperReference)) {
+              return;
+            }
+            MethodDescriptor target = methodCall.getTarget();
+            if (target.isOrOverridesJavaLangObjectMethod()) {
+              problems.error(
+                  methodCall.getSourcePosition(),
+                  "Cannot use 'super' to call '%s'. Native classes and their subclasses "
+                      + "cannot use 'super' to call 'java.lang.Object' methods.",
+                  target.getReadableDescription());
+            }
+          }
+        });
   }
 
   private void checkJsAsyncMethod(Method method) {

@@ -1340,6 +1340,7 @@ public class CompilationUnitBuilder {
       return MethodCall.Builder.from(methodDescriptor)
           .setArguments(
               convertArguments(constructorBinding, JdtUtils.asTypedList(statement.arguments())))
+          .setSourcePosition(getSourcePosition(statement))
           .build()
           .makeStatement(getSourcePosition(statement));
     }
@@ -1431,6 +1432,7 @@ public class CompilationUnitBuilder {
           MethodCall.Builder.from(methodDescriptor)
               .setQualifier(qualifier)
               .setArguments(arguments)
+              .setSourcePosition(getSourcePosition(methodInvocation))
               .build();
       if (JdtUtils.hasUncheckedCastAnnotation(methodBinding)) {
         // Annotate the invocation with the expected type. When InsertErasureSureTypeSafetyCasts
@@ -1453,6 +1455,7 @@ public class CompilationUnitBuilder {
         return MethodCall.Builder.from(methodDescriptor)
             .setQualifier(new SuperReference(currentType.getSuperTypeDescriptor()))
             .setArguments(arguments)
+            .setSourcePosition(getSourcePosition(expression))
             .build();
       } else if (expression.getQualifier().resolveTypeBinding().isInterface()) {
         // This is a default method call.
@@ -1460,6 +1463,7 @@ public class CompilationUnitBuilder {
             .setQualifier(new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()))
             .setArguments(arguments)
             .setStaticDispatch(true)
+            .setSourcePosition(getSourcePosition(expression))
             .build();
       } else {
         // OuterClass.super.fun() is transpiled to
@@ -1472,6 +1476,7 @@ public class CompilationUnitBuilder {
                     true))
             .setArguments(arguments)
             .setStaticDispatch(true)
+            .setSourcePosition(getSourcePosition(expression))
             .build();
       }
     }
@@ -1765,6 +1770,7 @@ public class CompilationUnitBuilder {
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(qualifier)
           .setArguments(arguments)
+          .setSourcePosition(getSourcePosition(expression))
           .build()
           .makeStatement(getSourcePosition(expression));
     }
