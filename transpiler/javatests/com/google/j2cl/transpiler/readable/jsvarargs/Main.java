@@ -41,6 +41,11 @@ public class Main {
     Object f1(int i, Object... args);
   }
 
+  @JsType
+  public abstract static class AbstractVarargs {
+    public abstract void test(int... args);
+  }
+
   static final class AFunction implements Function {
 
     @Override
