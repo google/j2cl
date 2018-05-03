@@ -156,7 +156,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
         Method.newBuilder()
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(getGetterMethodDescriptor(fieldDescriptor))
-            .setJsDocDescription("A static field getter.")
             .addStatements(
                 AstUtils.createReturnOrExpressionStatement(
                     field.getSourcePosition(),
@@ -183,7 +182,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(getSetterMethodDescriptor(fieldDescriptor))
             .setParameters(parameter)
-            .setJsDocDescription("A static field setter.")
             .addStatements(
                 MultiExpression.newBuilder()
                     .addExpressions(

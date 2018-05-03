@@ -39,7 +39,6 @@ class I {
   }
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -53,8 +52,6 @@ class I {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -66,7 +63,6 @@ class I {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -78,7 +74,6 @@ class I {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -97,8 +92,5 @@ $Util.$setClassMetadataForInterface(
 I.$markImplementor(/** @type {Function} */ (I));
 
 
-/**
- * Export class.
- */
 exports = I;
 //# sourceMappingURL=Main$I.js.map

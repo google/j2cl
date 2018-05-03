@@ -40,7 +40,6 @@ class JsSupplier {
   }
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -55,8 +54,6 @@ class JsSupplier {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -68,7 +65,6 @@ class JsSupplier {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -80,7 +76,6 @@ class JsSupplier {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -100,8 +95,5 @@ $Util.$setClassMetadataForInterface(
 JsSupplier.$markImplementor(/** @type {Function} */ (JsSupplier));
 
 
-/**
- * Export class.
- */
 exports = JsSupplier;
 //# sourceMappingURL=Lambdas$JsSupplier.js.map

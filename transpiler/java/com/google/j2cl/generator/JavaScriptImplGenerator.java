@@ -355,7 +355,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "/**",
-        " * Marks the provided class as implementing this interface.",
         " * @param {"
             + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
             + "} classConstructor",
@@ -397,10 +396,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "/**",
-        type.isInterface()
-            ? " * Returns whether the provided instance is of "
-                + "a class that implements this interface."
-            : " * Returns whether the provided instance is an instance of this class.",
         " * @param {*} instance",
         " * @return {boolean}",
         " * @public",
@@ -454,7 +449,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "/**",
-        " * Returns whether the provided class is or extends this class.",
         " * @param {"
             + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
             + "} classConstructor",
@@ -492,7 +486,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "/**",
-        " * Copies the fields from {@code from} to {@code to}.",
         " * @param {" + environment.aliasForType(type.getDeclaration()) + "} from",
         " * @param {*} to",
         " * @public",
@@ -552,9 +545,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(tdeegan): Move this to the ast in a normalization pass.
   private void renderClinit() {
-    renderInitializerMethodHeader(
-        AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()),
-        "Runs inline static field initializers.");
+    renderInitializerMethodHeader(AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()));
     sourceBuilder.openBrace();
 
     // Set this method to reference an empty function so that it will not be executed again.
@@ -584,20 +575,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         || type.getInstanceInitializerBlocks().isEmpty()) {
       return;
     }
-    renderInitializerMethodHeader(
-        AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()),
-        "Runs instance field and block initializers.");
+    renderInitializerMethodHeader(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()));
     sourceBuilder.openBrace();
     renderInitializerElements(type.getInstanceInitializerBlocks());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
-  private void renderInitializerMethodHeader(
-      MethodDescriptor methodDescriptor, String description) {
+  private void renderInitializerMethodHeader(MethodDescriptor methodDescriptor) {
     sourceBuilder.appendLines(
         "/**",
-        " * " + description,
         " * " + (methodDescriptor.getVisibility().isPrivate() ? "@private" : "@public"),
         " */",
         (methodDescriptor.isStatic() ? "static " : "")
@@ -697,9 +684,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderExports() {
     sourceBuilder.appendLines(
-        "/**",
-        " * Export class.",
-        " */",
         "exports = " + environment.aliasForType(type.getDeclaration()) + ";");
     // TODO(b/77961191): add a new line once the bug is resolved.
   }

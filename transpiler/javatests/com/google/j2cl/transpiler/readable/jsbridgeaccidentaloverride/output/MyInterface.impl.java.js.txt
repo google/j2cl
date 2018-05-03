@@ -31,7 +31,6 @@ class MyInterface {
   m_bar__int(a) {}
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -45,8 +44,6 @@ class MyInterface {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -58,7 +55,6 @@ class MyInterface {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -70,7 +66,6 @@ class MyInterface {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -87,8 +82,5 @@ $Util.$setClassMetadataForInterface(
 MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
 
 
-/**
- * Export class.
- */
 exports = MyInterface;
 //# sourceMappingURL=MyInterface.js.map

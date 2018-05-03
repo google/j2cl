@@ -35,7 +35,6 @@ class MyJsInterface {
   }
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -49,8 +48,6 @@ class MyJsInterface {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -62,7 +59,6 @@ class MyJsInterface {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -74,7 +70,6 @@ class MyJsInterface {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -93,8 +88,5 @@ $Util.$setClassMetadataForInterface(
 MyJsInterface.$markImplementor(/** @type {Function} */ (MyJsInterface));
 
 
-/**
- * Export class.
- */
 exports = MyJsInterface;
 //# sourceMappingURL=MyJsInterface.js.map

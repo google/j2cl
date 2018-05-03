@@ -36,7 +36,6 @@ class Producer {
   }
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -50,8 +49,6 @@ class Producer {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -63,7 +60,6 @@ class Producer {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -75,7 +71,6 @@ class Producer {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -94,8 +89,5 @@ $Util.$setClassMetadataForInterface(
 Producer.$markImplementor(/** @type {Function} */ (Producer));
 
 
-/**
- * Export class.
- */
 exports = Producer;
 //# sourceMappingURL=MethodReferences$Producer.js.map

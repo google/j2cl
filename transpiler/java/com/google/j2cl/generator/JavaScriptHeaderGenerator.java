@@ -75,7 +75,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
+        sourceBuilder.appendln("const _" + alias + " = goog.require('" + path + "');");
       }
     }
     // externs imports are always available in the browser and don't need a header reference.

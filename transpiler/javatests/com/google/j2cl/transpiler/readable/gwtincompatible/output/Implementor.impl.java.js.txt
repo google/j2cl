@@ -57,7 +57,6 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -67,7 +66,6 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -77,7 +75,6 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -96,8 +93,5 @@ Interface.$markImplementor(Implementor);
 NestedInterface.$markImplementor(Implementor);
 
 
-/**
- * Export class.
- */
 exports = Implementor;
 //# sourceMappingURL=Implementor.js.map

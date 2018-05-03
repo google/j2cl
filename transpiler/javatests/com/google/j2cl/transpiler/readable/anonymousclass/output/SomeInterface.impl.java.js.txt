@@ -18,7 +18,6 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass
  */
 class SomeInterface {
   /**
-   * A static field getter.
    * @return {SomeClass}
    * @public
    */
@@ -30,7 +29,6 @@ class SomeInterface {
   }
 
   /**
-   * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
@@ -44,8 +42,6 @@ class SomeInterface {
   }
 
   /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -57,7 +53,6 @@ class SomeInterface {
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
@@ -69,7 +64,6 @@ class SomeInterface {
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
@@ -96,8 +90,5 @@ SomeInterface
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
 
 
-/**
- * Export class.
- */
 exports = SomeInterface;
 //# sourceMappingURL=SomeInterface.js.map
