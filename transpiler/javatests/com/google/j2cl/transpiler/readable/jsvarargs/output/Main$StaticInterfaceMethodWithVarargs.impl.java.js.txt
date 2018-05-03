@@ -1,0 +1,80 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsvarargs.Main$StaticInterfaceMethodWithVarargs.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.StaticInterfaceMethodWithVarargs$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @interface
+ */
+class StaticInterfaceMethodWithVarargs {
+  /**
+   * @param {...number} args
+   * @return {void}
+   * @public
+   */
+  static staticMethod(...args) {
+    StaticInterfaceMethodWithVarargs.$clinit();
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsvarargs_Main_StaticInterfaceMethodWithVarargs =
+        true;
+  }
+
+  /**
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_jsvarargs_Main_StaticInterfaceMethodWithVarargs;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_jsvarargs_Main_StaticInterfaceMethodWithVarargs;
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    StaticInterfaceMethodWithVarargs.$clinit = function() {};
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    StaticInterfaceMethodWithVarargs,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsvarargs.Main$StaticInterfaceMethodWithVarargs'));
+
+
+StaticInterfaceMethodWithVarargs.$markImplementor(
+    /** @type {Function} */ (StaticInterfaceMethodWithVarargs));
+
+
+exports = StaticInterfaceMethodWithVarargs;
+//# sourceMappingURL=Main$StaticInterfaceMethodWithVarargs.js.map

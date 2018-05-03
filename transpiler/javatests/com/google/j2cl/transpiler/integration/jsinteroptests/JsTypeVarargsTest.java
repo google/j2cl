@@ -33,6 +33,8 @@ public class JsTypeVarargsTest extends MyTestCase {
     test.testVarargsCall_superCalls();
     test.testVarargsCall_sideEffectingInstance();
     test.testVarargsCall_correctArrayType();
+    // TODO(b/79208684): uncomment when fixed.
+    // test.testVarargsCall_interfaceMethods();
   }
 
   @JsMethod
@@ -286,5 +288,25 @@ public class JsTypeVarargsTest extends MyTestCase {
   public void testVarargsCall_correctArrayType() {
     JsStringConsumer consumer = (strings) -> assertTrue(strings instanceof String[]);
     consumer.consume("A", "B");
+  }
+
+  @JsType
+  interface InterfaceWithJsVarargsMethods {
+    default boolean isDoubleArray(double... varargs) {
+      // Use an Object typed variable to avoid the removal of the cast at compile time.
+      Object varargsAlias = varargs;
+      return varargsAlias instanceof double[];
+    }
+
+    static boolean isIntArray(int... varargs) {
+      // Use an Object typed variable to avoid the removal of the cast at compile time.
+      Object varargsAlias = varargs;
+      return varargsAlias instanceof int[];
+    }
+  }
+
+  public void testVarargsCall_interfaceMethods() {
+    assertTrue(new InterfaceWithJsVarargsMethods() {}.isDoubleArray());
+    assertTrue(InterfaceWithJsVarargsMethods.isIntArray());
   }
 }

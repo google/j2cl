@@ -1,10 +1,10 @@
 /**
  * @fileoverview transpiled from
- * com.google.j2cl.transpiler.readable.jsvarargs.Main$AbstractVarargs.
+ * com.google.j2cl.transpiler.readable.jsvarargs.Main$AbstractMethodWithVarargs.
  *
  * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.AbstractVarargs$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.AbstractMethodWithVarargs$impl');
 
 
 const java_lang_Object = goog.require('java.lang.Object$impl');
@@ -17,23 +17,23 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 /**
  * @abstract
  */
-class AbstractVarargs extends java_lang_Object {
+class AbstractMethodWithVarargs extends java_lang_Object {
   /**
-   * JsConstructor 'AbstractVarargs()'.
+   * JsConstructor 'AbstractMethodWithVarargs()'.
    * @public
    */
   constructor() {
-    AbstractVarargs.$clinit();
+    AbstractMethodWithVarargs.$clinit();
     super();
-    this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractVarargs__();
+    this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractMethodWithVarargs__();
   }
 
   /**
-   * Initialization from constructor 'AbstractVarargs()'.
+   * Initialization from constructor 'AbstractMethodWithVarargs()'.
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractVarargs__() {
+  $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractMethodWithVarargs__() {
     this.$ctor__java_lang_Object__();
   }
 
@@ -43,36 +43,33 @@ class AbstractVarargs extends java_lang_Object {
    * @return {void}
    * @public
    */
-  test(...args) {
+  abstractMethod(...args) {
     $Arrays.$stampType(args, $int, 1);
   }
 
   /**
-   * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof AbstractVarargs;
+    return instance instanceof AbstractMethodWithVarargs;
   }
 
   /**
-   * Returns whether the provided class is or extends this class.
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AbstractVarargs);
+    return $Util.$canCastClass(classConstructor, AbstractMethodWithVarargs);
   }
 
   /**
-   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
-    AbstractVarargs.$clinit = function() {};
+    AbstractMethodWithVarargs.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
@@ -80,14 +77,11 @@ class AbstractVarargs extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    AbstractVarargs,
+    AbstractMethodWithVarargs,
     $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.jsvarargs.Main$AbstractVarargs'));
+        'com.google.j2cl.transpiler.readable.jsvarargs.Main$AbstractMethodWithVarargs'));
 
 
 
-/**
- * Export class.
- */
-exports = AbstractVarargs;
-//# sourceMappingURL=Main$AbstractVarargs.js.map
+exports = AbstractMethodWithVarargs;
+//# sourceMappingURL=Main$AbstractMethodWithVarargs.js.map

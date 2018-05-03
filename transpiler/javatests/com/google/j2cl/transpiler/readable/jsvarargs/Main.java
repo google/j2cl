@@ -42,8 +42,13 @@ public class Main {
   }
 
   @JsType
-  public abstract static class AbstractVarargs {
-    public abstract void test(int... args);
+  public abstract static class AbstractMethodWithVarargs {
+    public abstract void abstractMethod(int... args);
+  }
+
+  @JsType
+  public interface StaticInterfaceMethodWithVarargs {
+    static void staticMethod(int... args) {}
   }
 
   static final class AFunction implements Function {
