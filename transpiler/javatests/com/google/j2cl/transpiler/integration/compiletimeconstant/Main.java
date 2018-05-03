@@ -15,11 +15,24 @@
  */
 package com.google.j2cl.transpiler.integration.compiletimeconstant;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /**
  * This test verifies that compile time constants can be accessed and that they don't call the
  * clinit.
  */
 public class Main {
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  private static class Int32Array {
+    // set to 4
+    private static int BYTES_PER_ELEMENT;
+  }
+
+  private static class ExternConstant {
+    private static final double CONSTANT = Int32Array.BYTES_PER_ELEMENT;
+  }
+
   public static class CompileTimeConstants {
     static {
       ranClinit = true;
@@ -66,5 +79,9 @@ public class Main {
     assert total == 78;
 
     assert CompileTimeConstants.OBJ == null;
+
+    total += ExternConstant.CONSTANT;
+    assert Int32Array.BYTES_PER_ELEMENT == 4;
+    assert total == 82;
   }
 }
