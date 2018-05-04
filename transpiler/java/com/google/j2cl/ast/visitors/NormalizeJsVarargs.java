@@ -72,7 +72,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
 
     @Override
     public Node rewriteMethod(Method method) {
-      if (!method.getDescriptor().isJsMethodVarargs() || getCurrentType().isInterface()) {
+      if (!method.getDescriptor().isJsMethodVarargs() || method.isAbstract()) {
         return method;
       }
 

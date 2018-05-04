@@ -33,8 +33,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     test.testVarargsCall_superCalls();
     test.testVarargsCall_sideEffectingInstance();
     test.testVarargsCall_correctArrayType();
-    // TODO(b/79208684): uncomment when fixed.
-    // test.testVarargsCall_interfaceMethods();
+    test.testVarargsCall_interfaceMethods();
   }
 
   @JsMethod

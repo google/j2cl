@@ -9,6 +9,9 @@ goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.StaticInterfaceM
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 /**
  * @interface
@@ -21,6 +24,7 @@ class StaticInterfaceMethodWithVarargs {
    */
   static staticMethod(...args) {
     StaticInterfaceMethodWithVarargs.$clinit();
+    $Arrays.$stampType(args, $int, 1);
   }
 
   /**
@@ -63,6 +67,8 @@ class StaticInterfaceMethodWithVarargs {
    */
   static $clinit() {
     StaticInterfaceMethodWithVarargs.$clinit = function() {};
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

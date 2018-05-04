@@ -10,9 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.AbstractMethodWi
 const java_lang_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 /**
  * @abstract
@@ -43,9 +40,7 @@ class AbstractMethodWithVarargs extends java_lang_Object {
    * @return {void}
    * @public
    */
-  abstractMethod(...args) {
-    $Arrays.$stampType(args, $int, 1);
-  }
+  abstractMethod(...args) {}
 
   /**
    * @param {*} instance
@@ -70,8 +65,6 @@ class AbstractMethodWithVarargs extends java_lang_Object {
    */
   static $clinit() {
     AbstractMethodWithVarargs.$clinit = function() {};
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     java_lang_Object.$clinit();
   }
 };
