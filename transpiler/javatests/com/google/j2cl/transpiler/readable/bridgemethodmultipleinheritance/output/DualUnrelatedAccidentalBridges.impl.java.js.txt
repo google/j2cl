@@ -1,0 +1,146 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedAccidentalBridges.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedAccidentalBridges$impl');
+
+
+const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface$impl');
+const SomeOtherFooInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface$impl');
+const SuperDualUnrelatedAccidentalBridges = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperDualUnrelatedAccidentalBridges$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {SomeInterface<?string, ?number>}
+ * @implements {SomeOtherFooInterface<?string>}
+ */
+class DualUnrelatedAccidentalBridges extends
+    SuperDualUnrelatedAccidentalBridges {
+  /**
+   * Private implementation constructor.
+   * @public
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor
+   * 'DualUnrelatedAccidentalBridges()'.
+   * @return {!DualUnrelatedAccidentalBridges}
+   * @public
+   */
+  static $create__() {
+    DualUnrelatedAccidentalBridges.$clinit();
+    let $instance = new DualUnrelatedAccidentalBridges();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_DualUnrelatedAccidentalBridges__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'DualUnrelatedAccidentalBridges()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_DualUnrelatedAccidentalBridges__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperDualUnrelatedAccidentalBridges__();
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+    super.m_foo__java_lang_String__java_lang_Double(
+        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)),
+        /**@type {?number} */ ($Casts.$to(arg1, Double)));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {(Number|number)} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
+    super.m_foo__java_lang_String__java_lang_Number(
+        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {?number} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Double(arg0, arg1) {
+    super.m_foo__java_lang_String__java_lang_Double(
+        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DualUnrelatedAccidentalBridges;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, DualUnrelatedAccidentalBridges);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    DualUnrelatedAccidentalBridges.$clinit = function() {};
+    Double = goog.module.get('java.lang.Double$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    SuperDualUnrelatedAccidentalBridges.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    DualUnrelatedAccidentalBridges,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedAccidentalBridges'));
+
+
+SomeInterface.$markImplementor(DualUnrelatedAccidentalBridges);
+SomeOtherFooInterface.$markImplementor(DualUnrelatedAccidentalBridges);
+
+
+/**
+ * Export class.
+ */
+exports = DualUnrelatedAccidentalBridges;
+//# sourceMappingURL=DualUnrelatedAccidentalBridges.js.map

@@ -51,3 +51,31 @@ public class BridgeMethod extends Parent<AssertionError>
 
   public void fun(Number t) {} // not override, no bridge method.
 }
+
+interface SomeOtherFooInterface<T> {
+  void foo(T t, Double s);
+}
+
+class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
+  // foo__Object__Object should be a bridge method
+  // foo__Object__Double should be a bridge method
+  @Override
+  public void foo(String s, Double n) {}
+
+  // foo__Object__Number should be a bridge method
+  @Override
+  public void foo(String s, Number n) {}
+}
+
+class SuperDualUnrelatedAccidentalBridges {
+  public void foo(String s, Double n) {}
+
+  public void foo(String s, Number n) {}
+}
+
+class DualUnrelatedAccidentalBridges extends SuperDualUnrelatedAccidentalBridges
+    implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
+  // foo__Object__Object should be a bridge method
+  // foo__Object__Double should be a bridge method
+  // foo__Object__Number should be a bridge method
+}

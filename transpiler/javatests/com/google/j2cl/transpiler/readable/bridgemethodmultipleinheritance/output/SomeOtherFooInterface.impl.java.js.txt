@@ -1,0 +1,104 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.$LambdaAdaptor$impl');
+
+
+/**
+ * @interface
+ * @template C_T
+ */
+class SomeOtherFooInterface {
+  /**
+   * @abstract
+   * @param {C_T} t
+   * @param {?number} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Double(t, s) {}
+
+  /**
+   * @template C_T
+   * @param {?function(C_T, ?number):void} fn
+   * @return {SomeOtherFooInterface<C_T>}
+   * @public
+   */
+  static $adapt(fn) {
+    SomeOtherFooInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeOtherFooInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeOtherFooInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeOtherFooInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SomeOtherFooInterface.$clinit = function() {};
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    SomeOtherFooInterface,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface'));
+
+
+SomeOtherFooInterface.$markImplementor(
+    /** @type {Function} */ (SomeOtherFooInterface));
+
+
+/**
+ * Export class.
+ */
+exports = SomeOtherFooInterface;
+//# sourceMappingURL=SomeOtherFooInterface.js.map
