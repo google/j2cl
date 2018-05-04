@@ -106,9 +106,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
         continue;
       }
       synthesizePropertyGetter(type, staticField);
-      if (!staticField.getDescriptor().isFinal()) {
-        synthesizePropertySetter(type, staticField);
-      }
+      synthesizePropertySetter(type, staticField);
     }
 
     // Replace the actual static fields with their backing fields.
