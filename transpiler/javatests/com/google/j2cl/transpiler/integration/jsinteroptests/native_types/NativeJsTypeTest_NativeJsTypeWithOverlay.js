@@ -11,4 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('woo.NativeJsTypeTest.MyNativeJsTypeInterface');
+goog.module('woo.NativeJsTypeTest.NativeJsTypeWithOverlay');
+
+class NativeJsTypeWithOverlay extends Object {
+  constructor() {
+    super();
+    /** @public {number} */
+    this.k = 0;
+  }
+}
+
+exports = NativeJsTypeWithOverlay;

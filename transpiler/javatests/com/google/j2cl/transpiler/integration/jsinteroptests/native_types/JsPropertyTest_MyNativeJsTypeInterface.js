@@ -11,17 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('test.foo.JsPropertyTest_MyNativeJsTypeInterface');
+goog.module('woo.JsPropertyTest.MyNativeJsTypeInterface');
 
-class JsPropertyTest_MyNativeJsTypeInterface {};
+/** @interface */
+class MyNativeJsTypeInterface {
+  constructor() {
+    /** @public {number} */
+    this.x;
+  }
+  /**
+   * @param {number} bias
+   * @return {number}
+   * @public
+   */
+  sum(bias) {}
+}
 
-/**
- * @param {number} bias
- * @return {number}
- * @public
- */
-JsPropertyTest_MyNativeJsTypeInterface.prototype.sum = function sum(bias) {
-  return this.x + bias;
-};
-
-exports = JsPropertyTest_MyNativeJsTypeInterface;
+exports = MyNativeJsTypeInterface;

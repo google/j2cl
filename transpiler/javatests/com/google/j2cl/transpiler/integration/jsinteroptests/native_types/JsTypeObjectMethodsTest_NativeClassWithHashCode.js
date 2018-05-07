@@ -11,34 +11,39 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('woo.JsPropertyTest.MyNativeJsType');
 
-class MyNativeJsType {
-  /** @param {number=} x */
-  constructor(x) {
-    this.x = x;
-    this.y = 0;
-    this.ctorExecuted = true;
+/**
+ * @fileoverview Native type with hashCode.
+ */
+
+goog.module('woo.JsTypeObjectMethodsTest.NativeClassWithHashCode');
+
+class NativeClassWithHashCode {
+  /** @param {number=} value */
+  constructor(value) {
+    /** @public {number} */
+    this.myValue = value || 0;
+  }
+  /** @return {number} */
+  hashCode() {
+    return this.myValue;
   }
 
   /**
-   * @return {number}
-   * @public
-   * @nocollapse
+   * @return {string}
+   * @override
    */
-  static answerToLife() { return 42; }
+  toString() {
+    return 'myValue: ' + this.myValue;
+  }
 
   /**
-   * @param {number} bias
-   * @return {number}
-   * @public
+   *  @param {?} other
+   *  @return {boolean}
    */
-  sum(bias) { return this.x + bias; }
-};
+  equals(other) {
+    return this.myValue === other.myValue;
+  }
+}
 
-/**
- * @public {number}
- */
-MyNativeJsType.staticX = 33;
-
-exports = MyNativeJsType;
+exports = NativeClassWithHashCode;

@@ -11,4 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('woo.JsPropertyTest.MyJsTypeInterfaceWithProtectedNames');
+goog.module('woo.NativeJsTypeTest.MyNativeJsTypeInterface');
+
+/** @interface */
+class MyNativeJsTypeInterface {}
+
+exports = MyNativeJsTypeInterface;

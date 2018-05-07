@@ -191,10 +191,10 @@ public class JsFunctionTest extends MyTestCase {
   private static final class MyJsFunctionIdentityInConstructor
       implements MyJsFunctionIdentityInterface {
 
-    public MyJsFunctionIdentityInConstructor storedThis;
+    public MyJsFunctionIdentityInterface storedThis;
 
     public MyJsFunctionIdentityInConstructor() {
-      storedThis = this;
+      storedThis = (MyJsFunctionIdentityInterface) this;
     }
 
     @Override

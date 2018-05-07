@@ -12,11 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+let _NativeJsTypeWithOverlay = goog.require('woo.NativeJsTypeTest.NativeJsTypeWithOverlay');
+
 /**
- * @return {*}
+ * @return {_NativeJsTypeWithOverlay}
  */
-NativeJsTypeTest.createNativeJsTypeWithOverlay = function() {
-  return { m: function() { return 6; } };
+NativeJsTypeTest.createNativeJsTypeWithOverlayWithM = function() {
+  let subtypeWithM = class extends _NativeJsTypeWithOverlay {
+    constructor() {
+      super();
+      /** @type {?} */ (this)['m'] = function() {
+        return 6;
+      };
+    }
+  };
+  return new subtypeWithM();
 };
 
 /**
@@ -72,12 +82,24 @@ NativeJsTypeTest.createBoxedString = function() {
  * @return {*}
  */
 NativeJsTypeTest.createNativeSubclass = function() {
-  return {
-    add: function(e) { this[0] = e; },
-    remove: function(e) {
-      var ret = this[0] == e;
-      this[0] = undefined;
+  const implementingClass = class {
+    constructor() {
+      /** @private {?string} */
+      this.element_ = undefined;
+    }
+    /** @param {string} e */
+    add(e) {
+      this.element_ = e;
+    }
+    /**
+     * @param {string} e
+     * @return {boolean}
+     */
+    remove(e) {
+      let ret = this.element_ == e;
+      this.element_ = undefined;
       return ret;
     }
   };
+  return new implementingClass();
 };

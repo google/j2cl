@@ -136,8 +136,11 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(12 + SET_X, obj.x);
   }
 
-  @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsType")
+  @JsType(isNative = true, name = "MyNativeJsType")
   static class MyNativeJsType {
+    public MyNativeJsType() {}
+
+    public MyNativeJsType(int n) {}
 
     public static int staticX;
 
@@ -177,7 +180,7 @@ public class JsPropertyTest extends MyTestCase {
 
     @JsConstructor
     MyNativeJsTypeSubclass() {
-      this.x = 42;
+      super(42);
       setY(52);
     }
 
@@ -209,7 +212,7 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(42, myNativeJsType.sum(30));
   }
 
-  @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsType")
+  @JsType(isNative = true, name = "MyNativeJsType")
   static class MyNativeJsTypeWithConstructor {
     public MyNativeJsTypeWithConstructor(int x) {}
 
@@ -236,19 +239,21 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(12, obj.x);
   }
 
-  @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsTypeInterface")
+  @JsType(isNative = true, name = "MyNativeJsTypeInterface")
   interface MyNativeJsTypeInterface {
     @JsProperty
     int getX();
 
     @JsProperty
     void setX(int x);
+
+    int sum(int bias);
   }
 
-  static class MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge extends AccidentaImplementer
+  static class MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge extends AccidentaImplementor
       implements MyNativeJsTypeInterface {}
 
-  abstract static class AccidentaImplementer {
+  abstract static class AccidentaImplementor {
     private int x;
 
     public int getX() {
@@ -269,21 +274,21 @@ public class JsPropertyTest extends MyTestCase {
 
     object.setX(3);
     assertEquals(3 + 150, object.getX());
-    assertEquals(3 + SET_X, ((AccidentaImplementer) object).x);
+    assertEquals(3 + SET_X, ((AccidentaImplementor) object).x);
 
-    AccidentaImplementer accidentaImplementer = (AccidentaImplementer) object;
+    AccidentaImplementor accidentaImplementor = (AccidentaImplementor) object;
 
-    accidentaImplementer.setX(3);
-    assertEquals(3 + 150, accidentaImplementer.getX());
+    accidentaImplementor.setX(3);
+    assertEquals(3 + 150, accidentaImplementor.getX());
     assertEquals(3 + 150, getProperty(object, "x"));
-    assertEquals(3 + SET_X, accidentaImplementer.x);
+    assertEquals(3 + SET_X, accidentaImplementor.x);
 
     setProperty(object, "x", 4);
-    assertEquals(4 + 150, accidentaImplementer.getX());
+    assertEquals(4 + 150, accidentaImplementor.getX());
     assertEquals(4 + 150, getProperty(object, "x"));
-    assertEquals(4 + SET_X, accidentaImplementer.x);
+    assertEquals(4 + SET_X, accidentaImplementor.x);
 
-    assertEquals(3 + 4 + SET_X, accidentaImplementer.sum(3));
+    assertEquals(3 + 4 + SET_X, accidentaImplementor.sum(3));
   }
 
   static class MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed extends OtherAccidentalImplementer

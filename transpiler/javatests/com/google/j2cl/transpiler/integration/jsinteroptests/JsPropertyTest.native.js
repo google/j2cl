@@ -40,16 +40,13 @@ JsPropertyTest.createJsTypeIsProperty = function() {
   return a;
 };
 
+let _MyNativeInterfaceWithProtectedNames = goog.require('woo.JsPropertyTest.MyJsTypeInterfaceWithProtectedNames');
 /**
- * @return {*}
+ * @return {_MyNativeInterfaceWithProtectedNames}
  * @public
  */
 JsPropertyTest.createMyJsInterfaceWithProtectedNames = function() {
-  var a = {};
-  a['nullField'] = 'nullField';
-  a['import'] = 'import';
-  a['var'] = function() { return 'var'; };
-  return a;
+  return new _MyNativeInterfaceWithProtectedNames();
 };
 
 /**

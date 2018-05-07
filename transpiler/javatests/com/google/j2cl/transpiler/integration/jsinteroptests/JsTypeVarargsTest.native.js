@@ -13,9 +13,10 @@
 // limitations under the License.
 
 /**
+ * @param {...*} args
  * @return {number}
  */
-JsTypeVarargsTest.varargsLengthThruArguments = function() {
+JsTypeVarargsTest.varargsLengthThruArguments = function(...args) {
   return arguments.length;
 };
 

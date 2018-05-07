@@ -32,7 +32,10 @@ class NativeJsTypeImplementsObjectMethods {
     return this.value;
   }
 
-  /** @return {string} */
+  /**
+   * @return {string}
+   * @override
+   */
   toString() {
     return 'Native Object with value: ' + this.value;
   }

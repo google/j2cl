@@ -21,11 +21,13 @@ goog.module('test.foo.JsTypeVarargsTest_MyNativeJsTypeVarargsConstructor');
 class JsTypeVarargsTest_MyNativeJsTypeVarargsConstructor {
   /**
    * @param {number} i
-   * @param {Array<*>} args
+   * @param {...*} args
    */
-  constructor(i, args) {
-    this.a = arguments[1];
-    this.b = arguments.length;
+  constructor(i, ...args) {
+    /** @public {*} */
+    this.a = args[0];
+    /** @public {number} */
+    this.b = args.length + 1;
   }
 }
 

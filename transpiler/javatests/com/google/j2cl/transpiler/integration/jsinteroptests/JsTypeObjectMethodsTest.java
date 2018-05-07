@@ -31,12 +31,13 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  interface NativeObjectInterface {}
+  static class NativeObjectClass {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeObjectClass {
-    public NativeObjectClass() {}
-  }
+  interface NativeObjectInterface {}
+
+  @JsType(isNative = true)
+  interface NativeInterface {}
 
   @JsMethod
   private static native NativeObjectInterface createWithEqualsAndHashCode(int a, int b);
@@ -44,10 +45,16 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
   @JsMethod
   private static native NativeObjectInterface createWithoutEqualsAndHashCode(int a, int b);
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  @JsType(isNative = true)
   static class NativeClassWithHashCode {
+    NativeClassWithHashCode() {}
+
+    NativeClassWithHashCode(int n) {}
+
     @Override
     public native int hashCode();
+
+    public int myValue;
   }
 
   static class SubclassNativeClassWithHashCode extends NativeClassWithHashCode {
@@ -65,10 +72,10 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     }
   }
 
-  static class ImplementsNativeObjectInterface implements NativeObjectInterface {
+  static class ImplementsNativeInterface implements NativeInterface {
     private int n;
 
-    public ImplementsNativeObjectInterface(int n) {
+    public ImplementsNativeInterface(int n) {
       this.n = n;
     }
 
@@ -87,7 +94,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     assertTrue(((Object) o1).hashCode() != ((Object) o2).hashCode());
     assertEquals(8, new SubclassNativeClassWithHashCode(8).hashCode());
     assertEquals(8, ((Object) new SubclassNativeClassWithHashCode(8)).hashCode());
-    assertEquals(9, ((Object) new ImplementsNativeObjectInterface(9)).hashCode());
+    assertEquals(9, ((Object) new ImplementsNativeInterface(9)).hashCode());
     assertEquals(10, callHashCode(new SubclassNativeClassWithHashCode(10)));
   }
 
@@ -108,23 +115,9 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
   @JsMethod
   private static native int callHashCode(Object obj);
 
-  // Use an existing class for native subclassing tests to work around the need of injecting a
-  // JS class before the subclass definitions
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Error")
-  private static class MyNativeError {
-    MyNativeError() {}
-
-    MyNativeError(String error) {}
-
-    @Override
-    public native int hashCode();
-
-    public int myValue;
-  }
-
-  private static class MyNativeErrorSubtype extends MyNativeError {
+  private static class SubtypeOfNativeClass extends NativeClassWithHashCode {
     @JsConstructor
-    MyNativeErrorSubtype(int n) {
+    SubtypeOfNativeClass(int n) {
       myValue = n;
     }
 
@@ -132,12 +125,6 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     public String toString() {
       return "(Sub)myValue: " + myValue;
     }
-  }
-
-  private static MyNativeError createMyNativeError(int n) {
-    MyNativeError error = new MyNativeError("(Error)myValue: " + n);
-    error.myValue = n;
-    return error;
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
@@ -150,13 +137,12 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
   }
 
   public void testJavaLangObjectMethodsOrNativeSubtypes() {
-    patchErrorWithJavaLangObjectMethods();
-    assertEquals(createMyNativeError(3), createMyNativeError(3));
-    assertFalse(createMyNativeError(3).equals(createMyNativeError(4)));
+    assertTrue(new NativeClassWithHashCode(3).equals(new NativeClassWithHashCode(3)));
+    assertFalse(new NativeClassWithHashCode(3).equals(new NativeClassWithHashCode(4)));
 
-    assertEquals(createMyNativeError(6), new MyNativeErrorSubtype(6));
-    assertTrue(createMyNativeError(6).toString().contains("(Error)myValue: 6"));
-    assertEquals("(Sub)myValue: 6", new MyNativeErrorSubtype(6).toString());
+    assertTrue(new NativeClassWithHashCode(6).equals(new SubtypeOfNativeClass(6)));
+    assertTrue(new NativeClassWithHashCode(6).toString().contains("myValue: 6"));
+    assertEquals("(Sub)myValue: 6", new SubtypeOfNativeClass(6).toString());
 
     // Tests that hashcode is actually working through the object trampoline and
     // assumes that consecutive hashchodes are different.
@@ -171,9 +157,6 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     // Do not change to assertEquals because we are testing the dispatch to equals().
     // assertTrue(o.equals(o));
   }
-
-  @JsMethod
-  private static native void patchErrorWithJavaLangObjectMethods();
 
   @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
   static class NativeClassWithDeclarations {

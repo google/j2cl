@@ -440,16 +440,16 @@ public class JsTypeTest extends MyTestCase {
     ConcreteJsTypeSubclass concreteJsTypeSubclass = new ConcreteJsTypeSubclass();
 
     // A subclass of a JsType is not itself a JsType.
-    assertFalse(ConcreteJsTypeSubclass.hasPublicSubclassMethod(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPublicSubclassField(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPublicStaticSubclassMethod(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPrivateSubclassMethod(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasProtectedSubclassMethod(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPackageSubclassMethod(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPublicStaticSubclassField(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPrivateSubclassField(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasProtectedSubclassField(concreteJsTypeSubclass));
-    assertFalse(ConcreteJsTypeSubclass.hasPackageSubclassField(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPublicSubclassMethod(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPublicSubclassField(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPublicStaticSubclassMethod(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPrivateSubclassMethod(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasProtectedSubclassMethod(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPackageSubclassMethod(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPublicStaticSubclassField(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPrivateSubclassField(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasProtectedSubclassField(concreteJsTypeSubclass));
+    assertFalse(PropertyUtils.hasPackageSubclassField(concreteJsTypeSubclass));
 
     // But if it overrides an exported method then the overriding method will be exported.
     assertTrue(ConcreteJsType.hasPublicMethod(concreteJsTypeSubclass));

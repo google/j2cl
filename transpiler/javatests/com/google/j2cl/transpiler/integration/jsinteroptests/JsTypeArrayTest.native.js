@@ -70,7 +70,7 @@ JsTypeArrayTest.returnSomeFunction = function() {
 };
 
 /**
- * @param {*} object
+ * @param {?} object
  * @return {!Array<?string>}
  */
 JsTypeArrayTest.nonNumericKeys = function(object) {

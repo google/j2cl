@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsMethod;
 
 /**
  * This concrete test class is not annotated as a @JsType but its parent is.
@@ -59,37 +58,4 @@ class ConcreteJsTypeSubclass extends ConcreteJsType {
   protected int protectedSubclassField = 20;
 
   int packageSubclassField = 20;
-
-  @JsMethod
-  public static native boolean hasPublicMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasPublicSubclassMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasPublicStaticSubclassMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasPrivateSubclassMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasProtectedSubclassMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasPackageSubclassMethod(Object obj);
-
-  @JsMethod
-  public static native boolean hasPublicSubclassField(Object obj);
-
-  @JsMethod
-  public static native boolean hasPublicStaticSubclassField(Object obj);
-
-  @JsMethod
-  public static native boolean hasPrivateSubclassField(Object obj);
-
-  @JsMethod
-  public static native boolean hasProtectedSubclassField(Object obj);
-
-  @JsMethod
-  public static native boolean hasPackageSubclassField(Object obj);
 }

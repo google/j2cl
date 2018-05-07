@@ -44,12 +44,12 @@ public class MyClassExportsMethod {
   // }
 
   @JsMethod(name = "exported")
-  public static void callMe4(boolean f) {
+  public static void callMe4() {
     calledFromCallMe4 = true;
   }
 
   @JsMethod
-  public static void callMe5(byte f) {
+  public static void callMe5() {
     calledFromCallMe5 = true;
   }
 

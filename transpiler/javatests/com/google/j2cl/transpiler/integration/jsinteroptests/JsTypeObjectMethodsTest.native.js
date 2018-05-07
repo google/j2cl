@@ -18,12 +18,27 @@
  * @return {*}
  */
 JsTypeObjectMethodsTest.createWithEqualsAndHashCode = function(a, b) {
-  return {
-    a: a,
-    b: b,
-    hashCode: function() { return this.b; },
-    equals: function(other) { return this.a == other.a; }
+  let newClass = class {
+    constructor() {
+      /** @public {number} */
+      this.a = a;
+      /** @public {number} */
+      this.b = b;
+    }
+
+    /** @return {number} */
+    hashCode() {
+      return this.b;
+    }
+    /**
+     * @param {?} other
+     * @return {boolean}
+     */
+    equals(other) {
+      return this.a == other.a;
+    }
   };
+  return new newClass();
 };
 
 /**
@@ -37,15 +52,8 @@ JsTypeObjectMethodsTest.createWithoutEqualsAndHashCode = function(a, b) {
 
 /**
  * @param {*} a
- * @return {*}
+ * @return {number}
  */
 JsTypeObjectMethodsTest.callHashCode = function(a) {
   return a.hashCode();
-};
-
-/**
- * @return {void}
- */
-JsTypeObjectMethodsTest.patchErrorWithJavaLangObjectMethods = function() {
-  Error.prototype.equals = function(o) { return this.myValue == o.myValue; };
 };

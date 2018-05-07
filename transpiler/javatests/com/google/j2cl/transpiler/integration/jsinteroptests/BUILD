@@ -5,6 +5,10 @@ load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
 )
+load(
+    "//javascript/tools/jscompiler/builddefs:flags.bzl",
+    "VERBOSE_WARNING_FLAGS_STRICT",
+)
 
 # Creates targets
 # blaze build :optimized_js
@@ -13,7 +17,8 @@ load(
 integration_test(
     name = "jsinteroptests",
     srcs = glob(["**/*.java"]),
-    defs = [
+    defs = VERBOSE_WARNING_FLAGS_STRICT + [
+        "--emit_use_strict=true",
         # Make sure property renaming & variable renaming is turned off,
         # otherwise JsTypeTest fails since it asserts properties.
         # We need to turn both off here otherwise blaze fails with outputs not created.

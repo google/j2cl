@@ -11,34 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('woo.JsPropertyTest.MyNativeJsType');
+goog.module('woo.NativeJsTypeTest.MyNativeJsType');
 
 class MyNativeJsType {
-  /** @param {number=} x */
-  constructor(x) {
-    this.x = x;
-    this.y = 0;
-    this.ctorExecuted = true;
-  }
-
-  /**
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static answerToLife() { return 42; }
-
-  /**
-   * @param {number} bias
-   * @return {number}
-   * @public
-   */
-  sum(bias) { return this.x + bias; }
-};
-
-/**
- * @public {number}
- */
-MyNativeJsType.staticX = 33;
+  constructor() {}
+}
 
 exports = MyNativeJsType;

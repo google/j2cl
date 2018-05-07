@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static jsinterop.annotations.JsPackage.GLOBAL;
-
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -130,16 +128,22 @@ public class NativeJsTypeTest extends MyTestCase {
   @JsMethod
   private static native Object createNativeArray();
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
+  @JsType(isNative = true, name = "NativeJsTypeWithOverlay")
   static class NativeJsTypeWithOverlay {
 
     @JsOverlay public static final int x = 2;
 
-    public static native String[] keys(Object o);
+    @JsMethod(namespace = JsPackage.GLOBAL, name = "Object.keys")
+    public static native String[] keys(NativeObject o);
 
     @JsOverlay
     public static final boolean hasM(Object obj) {
-      return keys(obj)[0].equals("m");
+      for (String k : keys((NativeObject) obj)) {
+        if ("m".equals(k)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     public native boolean hasOwnProperty(String name);
@@ -159,10 +163,10 @@ public class NativeJsTypeTest extends MyTestCase {
   }
 
   @JsMethod
-  private static native NativeJsTypeWithOverlay createNativeJsTypeWithOverlay();
+  private static native NativeJsTypeWithOverlay createNativeJsTypeWithOverlayWithM();
 
   public void testNativeJsTypeWithOverlay() {
-    NativeJsTypeWithOverlay object = createNativeJsTypeWithOverlay();
+    NativeJsTypeWithOverlay object = createNativeJsTypeWithOverlayWithM();
     assertTrue(object.hasM());
     assertTrue(NativeJsTypeWithOverlay.hasM(object));
     assertEquals(2, NativeJsTypeWithOverlay.x);
@@ -353,15 +357,16 @@ public class NativeJsTypeTest extends MyTestCase {
     assertFalse(nullObject instanceof NativeString);
     assertFalse(nullObject instanceof NativeNumber);
 
-    Object undefined = getUndefined();
-    assertFalse(undefined instanceof NativeObject);
-    assertFalse(undefined instanceof NativeArray);
-    assertFalse(undefined instanceof NativeFunction);
-    assertFalse(undefined instanceof NativeString);
-    assertFalse(undefined instanceof NativeNumber);
+    // TODO(b/79211498): restore the name undefined for the variable once the bug is fixed.
+    Object undefinedValue = getUndefined();
+    assertFalse(undefinedValue instanceof NativeObject);
+    assertFalse(undefinedValue instanceof NativeArray);
+    assertFalse(undefinedValue instanceof NativeFunction);
+    assertFalse(undefinedValue instanceof NativeString);
+    assertFalse(undefinedValue instanceof NativeNumber);
   }
 
-  @JsProperty
+  @JsProperty(namespace = JsPackage.GLOBAL)
   private static native Object getUndefined();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
