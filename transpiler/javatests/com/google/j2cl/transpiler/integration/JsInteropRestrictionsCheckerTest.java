@@ -1791,7 +1791,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  void someOtherMethod();",
             "}")
         .assertErrors(
-            "Native JsType method 'void Buggy.someMethod()' should be native or abstract.",
+            "Native JsType method 'void Buggy.someMethod()' should be native, abstract or overlay.",
             "Method 'void OtherClass.someOtherMethod()' cannot override a JsOverlay method "
                 + "'void Interface.someOtherMethod()'.",
             "Method 'void Buggy.someOtherMethod()' cannot override a JsOverlay method "
@@ -2254,7 +2254,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType field 'Buggy.s' cannot be final.",
             "Native JsType member 'Buggy.x' cannot have @JsIgnore.",
             "Native JsType member 'void Buggy.n()' cannot have @JsIgnore.",
-            "Native JsType method 'void Buggy.o()' should be native or abstract.",
+            "Native JsType method 'void Buggy.o()' should be native, abstract or overlay.",
             "Native JsType field 'Buggy.t' cannot have initializer.",
             "Native JsType field 'Buggy.g' cannot have initializer.",
             "Native JsType 'NativeClassWithInitializer' cannot have initializer",
@@ -2262,7 +2262,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
             "Native JsType method 'String NativeTypeWithBridge.foo()' should be native"
-                + " or abstract.");
+                + ", abstract or overlay");
   }
 
   public void testNativeJsTypeImplementingJavaLangObjectMethodsSucceeds() {

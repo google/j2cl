@@ -451,7 +451,7 @@ public class JsInteropRestrictionsChecker {
         if (!member.isAbstract() && !member.isNative()) {
           problems.error(
               member.getSourcePosition(),
-              "Native JsType method '%s' should be native or abstract.",
+              "Native JsType method '%s' should be native, abstract or overlay.",
               readableDescription);
         }
         break;
