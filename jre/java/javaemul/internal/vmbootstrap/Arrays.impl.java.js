@@ -39,13 +39,13 @@ class Arrays {
    * dimensions, lengths and of the given type.
    *
    * @param {Array<number>} dimensionLengths
-   * @param {Object} leafType
+   * @param {*} leafType
    * @return {Array<*>}
    * @public
    */
   static $create(dimensionLengths, leafType) {
     return Arrays.$createInternal_(
-        dimensionLengths, /** @type {Function} */ (leafType), leafType.$isInstance,
+        dimensionLengths, leafType, leafType.$isInstance,
         leafType.$isAssignableFrom, leafType.$initialArrayValue);
   }
 
@@ -65,7 +65,7 @@ class Arrays {
 
   /**
    * @param {Array<number>} dimensionLengths
-   * @param {Function} leafType
+   * @param {*} leafType
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
    * @param {*} leafTypeInitialValue
@@ -135,20 +135,20 @@ class Arrays {
    * be specified because the passed array already contains values.
    *
    * @param {Array<*>} array
-   * @param {Object} leafType
+   * @param {*} leafType
    * @param {number=} opt_dimensionCount
    * @return {Array<*>}
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
     return Arrays.$initInternal_(
-        array, /** @type {Function} */ (leafType), leafType.$isInstance,
-        leafType.$isAssignableFrom, opt_dimensionCount || 1);
+        array, leafType, leafType.$isInstance, leafType.$isAssignableFrom,
+        opt_dimensionCount || 1);
   }
 
   /**
    * @param {Array<*>} array
-   * @param {Function} leafType
+   * @param {*} leafType
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
@@ -191,7 +191,7 @@ class Arrays {
 
   /**
    * @param {Array<*>} array
-   * @param {Object} leafType
+   * @param {*} leafType
    * @param {number} dimensionCount
    * @return {Array<*>}
    * @public
@@ -200,8 +200,8 @@ class Arrays {
     return Arrays.$stampTypeInternal_(
         array,
         Arrays.$createMetadata_(
-            /** @type {Function} */ (leafType), leafType.$isInstance,
-            leafType.$isAssignableFrom, dimensionCount));
+            leafType, leafType.$isInstance, leafType.$isAssignableFrom,
+            dimensionCount));
   }
 
   /**
@@ -285,20 +285,20 @@ class Arrays {
    * leaf type.
    *
    * @param {*} instance
-   * @param {Object} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @public
    */
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$instanceIsOfTypeInternal_(
-        instance, /** @type {Function} */ (requiredLeafType),
-        requiredLeafType.$isAssignableFrom, requiredDimensionCount);
+        instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
+        requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
-   * @param {Function} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {Function} requiredLeafTypeIsAssignableFrom
    * @param {number} requiredDimensionCount
    * @return {boolean}
@@ -346,20 +346,20 @@ class Arrays {
    * provided instance is returned.
    *
    * @param {*} instance
-   * @param {Object} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {*}
    * @public
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$castToInternal_(
-        instance, /** @type {Function} */ (requiredLeafType),
-        requiredLeafType.$isAssignableFrom, requiredDimensionCount);
+        instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
+        requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
-   * @param {Function} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {Function} requiredLeafTypeIsAssignableFrom
    * @param {number} requiredDimensionCount
    * @return {*}
@@ -449,7 +449,7 @@ class Arrays {
   }
 
   /**
-   * @param {Function} leafType
+   * @param {*} leafType
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
@@ -497,7 +497,7 @@ class Arrays {
  * this class. These properties allow for  emulation of Java array semantics.
  *
  * @typedef {{
- *   leafType: Function,
+ *   leafType: *,
  *   leafTypeIsInstance: Function,
  *   leafTypeIsAssignableFrom: Function,
  *   dimensionCount: number,

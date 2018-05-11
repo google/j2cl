@@ -23,7 +23,8 @@ import jsinterop.annotations.JsType;
 class Casts {
 
   // Note: implemented as native to avoid $clinit since Closure chokes while inlining the method.
-  public static native Object $to(Object instance, Constructor castType);
+  public static native Object $to(Object instance, Object castType);
+
 
   @JsFunction
   private interface IsInstanceFn {
@@ -31,7 +32,7 @@ class Casts {
   }
 
   public static Object $toInternal(
-      Object instance, IsInstanceFn castTypeIsInstance, Constructor castType) {
+      Object instance, IsInstanceFn castTypeIsInstance, Object castType) {
     // TODO(goktug) remove isTypeCheck after JsCompiler can remove calls to castTypeIsInstance when
     // the return is unused.
     if (InternalPreconditions.isTypeChecked()) {

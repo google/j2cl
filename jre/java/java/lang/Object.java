@@ -13,9 +13,9 @@
  */
 package java.lang;
 
-import javaemul.internal.Constructor;
 import javaemul.internal.HashCodes;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 
 /**
  * See <a
@@ -40,18 +40,22 @@ public class Object {
   }
 
   public final Class<?> getClass() {
-    return Class.$get(Constructor.of(this));
+    return Class.$get(getConstructor());
   }
+
+  @JsProperty
+  private native Object getConstructor();
+
   @JsMethod
   private static boolean $isInstance(Object instance) {
     return instance != null;
   }
 
   @JsMethod
-  private static boolean $isAssignableFrom(Constructor classConstructor) {
+  private static boolean $isAssignableFrom(Object classConstructor) {
     return !$isPrimitiveType(classConstructor);
   }
 
   @JsMethod(namespace = "nativebootstrap.Util")
-  public static native boolean $isPrimitiveType(Constructor classConstructor);
+  public static native boolean $isPrimitiveType(Object classConstructor);
 }

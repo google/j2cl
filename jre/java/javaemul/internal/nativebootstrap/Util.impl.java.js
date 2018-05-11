@@ -45,7 +45,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @param {string} name
    * @public
    */
@@ -54,8 +54,7 @@ class Util {
   }
 
   /**
-   * // TODO(b/79389970): change ctor to Function
-   * @param {Object} ctor
+   * @param {*} ctor
    * @param {string} name
    * @public
    */
@@ -64,7 +63,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @param {string} name
    * @public
    */
@@ -73,7 +72,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @param {string} name
    * @param {string} shortName
    * @public
@@ -87,7 +86,7 @@ class Util {
 
   /**
    * Returns whether the provided ctor represents primitive type.
-   * @param {Function} ctor
+   * @param {*} ctor
    * @return {boolean}
    * @public
    */
@@ -96,7 +95,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @return {string}
    * @public
    */
@@ -111,7 +110,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @return {string}
    * @public
    */
@@ -126,7 +125,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @return {string}
    * @private
    */
@@ -142,7 +141,7 @@ class Util {
   }
 
   /**
-   * @param {Function} ctor
+   * @param {*} ctor
    * @return {number}
    * @public
    */

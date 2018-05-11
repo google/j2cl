@@ -15,7 +15,6 @@ package java.lang;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
-import javaemul.internal.Constructor;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -32,15 +31,15 @@ public final class Class<T> implements Type, Serializable {
    * literals.
    */
   @JsMethod
-  public static native Class<?> $get(Constructor ctor, int dimensionCount);
+  public static native Class<?> $get(Object ctor, int dimensionCount);
 
   @JsMethod
-  public static native Class<?> $get(Constructor ctor);
+  public static native Class<?> $get(Object ctor);
 
   /**
    * The JavaScript constructor for the underlying Java type that this Class instance belongs to.
    */
-  private final Constructor ctor;
+  private final Object ctor;
 
   /**
    * Dimension count for the underlying array type; or {@code 0} if this is not for an array.
@@ -48,7 +47,7 @@ public final class Class<T> implements Type, Serializable {
   private final int dimensionCount;
 
   @JsConstructor
-  private Class(Constructor ctor, int dimensionCount) {
+  private Class(Object ctor, int dimensionCount) {
     this.ctor = ctor;
     this.dimensionCount = dimensionCount;
   }
@@ -109,9 +108,12 @@ public final class Class<T> implements Type, Serializable {
 
   @SuppressWarnings("unchecked")
   public Class<? super T> getSuperclass() {
-    Constructor superCtor = ctor.getSuperConstructor();
+    Object superCtor = getSuperCtor(ctor);
     return superCtor == null ? null : (Class<? super T>) Class.$get(superCtor, 0);
   }
+
+  @JsMethod
+  private static native Object getSuperCtor(Object ctor);
 
   public boolean desiredAssertionStatus() {
     return false;
@@ -136,10 +138,10 @@ public final class Class<T> implements Type, Serializable {
     public static int TYPE_INTERFACE;
     public static int TYPE_PRIMITIVE;
 
-    public static native String $extractClassName(Constructor ctor);
+    public static native String $extractClassName(Object ctor);
 
-    public static native String $extractPrimitiveShortName(Constructor ctor);
+    public static native String $extractPrimitiveShortName(Object ctor);
 
-    public static native int $extractClassType(Constructor ctor);
+    public static native int $extractClassType(Object ctor);
   }
 }
