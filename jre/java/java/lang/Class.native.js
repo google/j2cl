@@ -15,7 +15,8 @@
 const Reflect = goog.require('goog.reflect');
 
 /**
- * @param {*} classConstructor
+ * // TODO(b/79389970): change classConstructor to Function.
+ * @param {Object} classConstructor
  * @param {number=} opt_dimensionCount
  * @return {Class}
  * @public
@@ -23,17 +24,8 @@ const Reflect = goog.require('goog.reflect');
 Class.$get = function(classConstructor, opt_dimensionCount) {
   let dimensionCount = opt_dimensionCount || 0;
   return Reflect.cache(
-      classConstructor.prototype, '$$class/' + dimensionCount,
-      function() { return new Class(classConstructor, dimensionCount); });
-};
-
-/**
- * @param {*} classConstructor
- * @return {*}
- * @private
- */
-Class.getSuperCtor = function(classConstructor) {
-  var parentCtor =
-      Object.getPrototypeOf(classConstructor.prototype).constructor;
-  return parentCtor == Object ? null : parentCtor;
+      classConstructor.prototype, '$$class/' + dimensionCount, function() {
+        return new Class(
+            /** @type {Function} */ (classConstructor), dimensionCount);
+      });
 };
