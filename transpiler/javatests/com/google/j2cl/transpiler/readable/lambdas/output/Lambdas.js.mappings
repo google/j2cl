@@ -211,6 +211,7 @@ public class Lambdas {
 [equals] => [equals] "equals"
 [equals.equals(null);] => [equals.equals(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
 [equals.get();] => [equals.m_get__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
 [private static IdentityFunction identityFunction = null;] => [return (Lambdas.$clinit(), Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: getter>"
 [private static IdentityFunction identityFunction = null;] => [(Lambdas.$clinit(), Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = value);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<synthetic: setter>"
 [@SuppressWarnings("unused")
@@ -218,7 +219,6 @@ public class Lambdas {
 ...  }
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
 [private static IdentityFunction identityFunction = null;] => [Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
-[public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
 [@SuppressWarnings("unused")
 public class Lambdas {
   public int field = 100;

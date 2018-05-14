@@ -41,7 +41,6 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -273,7 +272,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderIsAssignableFromMethod();
     renderCopyMethod();
     renderClinit();
-    renderInitMethod();
     sourceBuilder.closeBrace();
     sourceBuilder.append(";");
     sourceBuilder.newLines(2);
@@ -320,17 +318,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (method.isOverride() && !method.isConstructor()) {
       sourceBuilder.appendln(" * @override");
     }
-    if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(
-              method.getDescriptor().getTypeParameterTypeDescriptors());
+              methodDescriptor.getTypeParameterTypeDescriptors());
       sourceBuilder.appendln(" * @template " + templateParamNames);
     }
 
     if (type.getDeclaration().isJsFunctionImplementation()
-        && method.getDescriptor().isPolymorphic()
+        && methodDescriptor.isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
-        && !method.getDescriptor().getName().startsWith("$ctor")) {
+        && !methodDescriptor.getName().startsWith("$ctor")) {
       sourceBuilder.appendln(
           " * @this {"
               + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
@@ -340,12 +339,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(" * " + closureTypesGenerator.getJsDocForParameter(method, i));
     }
     String returnTypeName =
-        closureTypesGenerator.getClosureTypeString(
-            method.getDescriptor().getReturnTypeDescriptor());
-    if (!method.getDescriptor().isConstructor()) {
+        closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
+    if (!methodDescriptor.isConstructor()) {
       sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
     }
-    sourceBuilder.appendln(" * @" + method.getDescriptor().getVisibility().jsText);
+    sourceBuilder.appendln(
+        " * @"
+            + (methodDescriptor.getOrigin().emitAsPrivate()
+                ? "private"
+                : methodDescriptor.getVisibility().jsText));
     sourceBuilder.appendln(" */");
   }
 
@@ -543,9 +545,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO(tdeegan): Move this to the ast in a normalization pass.
+  // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderClinit() {
-    renderInitializerMethodHeader(AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()));
+    MethodDescriptor methodDescriptor =
+        AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor());
+    sourceBuilder.appendLines(
+        "/**",
+        " * @public",
+        " */",
+        "static " + ManglingNameUtils.getMangledName(methodDescriptor) + "() ");
     sourceBuilder.openBrace();
 
     // Set this method to reference an empty function so that it will not be executed again.
@@ -562,43 +570,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     // Static field and static initializer blocks.
-    renderInitializerElements(type.getStaticInitializerBlocks());
-
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLines(2);
-  }
-
-  // TODO(b/34928687): Move this to the ast in a normalization pass.
-  private void renderInitMethod() {
-    if (type.isJsOverlayImplementation()
-        || type.isInterface()
-        || type.getInstanceInitializerBlocks().isEmpty()) {
-      return;
-    }
-    renderInitializerMethodHeader(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()));
-    sourceBuilder.openBrace();
-    renderInitializerElements(type.getInstanceInitializerBlocks());
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLines(2);
-  }
-
-  private void renderInitializerMethodHeader(MethodDescriptor methodDescriptor) {
-    sourceBuilder.appendLines(
-        "/**",
-        " * " + (methodDescriptor.getVisibility().isPrivate() ? "@private" : "@public"),
-        " */",
-        (methodDescriptor.isStatic() ? "static " : "")
-            + ManglingNameUtils.getMangledName(methodDescriptor)
-            + "() ");
-  }
-
-  private void renderInitializerElements(Collection<InitializerBlock> initializerBlocks) {
-    for (InitializerBlock initializerBlock : initializerBlocks) {
+    for (InitializerBlock initializerBlock : type.getStaticInitializerBlocks()) {
       for (Statement initializer : initializerBlock.getBlock().getStatements()) {
         sourceBuilder.newLine();
         statementTranspiler.renderStatement(initializer);
       }
     }
+
+    sourceBuilder.closeBrace();
+    sourceBuilder.newLines(2);
   }
 
   private void renderStaticFieldDeclarations() {

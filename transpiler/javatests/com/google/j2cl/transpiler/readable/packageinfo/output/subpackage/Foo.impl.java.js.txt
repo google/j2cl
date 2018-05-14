@@ -49,6 +49,15 @@ class Foo extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo() {
+    this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo =
+        new Outer();
+  }
+
+  /**
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -73,14 +82,6 @@ class Foo extends java_lang_Object {
     Foo.$clinit = function() {};
     Outer = goog.module.get('readable.packageinfo.Outer$impl');
     java_lang_Object.$clinit();
-  }
-
-  /**
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo() {
-    this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo =
-        new Outer();
   }
 };
 

@@ -98,23 +98,33 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>"),
     SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
     SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
-    SYNTHETIC_INSTANCE_INITIALIZER("<init>"),
+    SYNTHETIC_INSTANCE_INITIALIZER("<init>", true),
     SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>");
 
-    private final String methodName;
+    private final String stackTraceFrameName;
+    private final boolean emitAsPrivate;
 
     MethodOrigin() {
-      this(null);
+      this(null, false);
     }
 
-    MethodOrigin(String methodName) {
-      this.methodName = methodName;
+    MethodOrigin(String stackTraceFrameName) {
+      this(stackTraceFrameName, false);
+    }
+
+    MethodOrigin(String stackTraceFrameName, boolean isPrivate) {
+      this.stackTraceFrameName = stackTraceFrameName;
+      this.emitAsPrivate = isPrivate;
     }
 
     public String getName() {
-      return methodName;
+      return stackTraceFrameName;
+    }
+
+    public boolean emitAsPrivate() {
+      return emitAsPrivate;
     }
 
     @Override

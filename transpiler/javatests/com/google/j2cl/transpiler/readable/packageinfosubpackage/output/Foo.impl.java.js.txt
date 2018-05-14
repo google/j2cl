@@ -50,6 +50,15 @@ class Foo extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo() {
+    this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ =
+        new NativeBar();
+  }
+
+  /**
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -75,14 +84,6 @@ class Foo extends java_lang_Object {
     NativeBar = goog.module.get(
         'com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
     java_lang_Object.$clinit();
-  }
-
-  /**
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo() {
-    this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ =
-        new NativeBar();
   }
 };
 

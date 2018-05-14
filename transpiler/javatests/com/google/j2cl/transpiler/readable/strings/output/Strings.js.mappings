@@ -71,13 +71,13 @@
 [(new StringHolder()).s += c1;] => [$qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = java_lang_String.m_valueOf__java_lang_Object($qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) + java_lang_String.m_valueOf__char(c1);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [(new StringHolder()).s += "o";] => [let $qualifier$2$ = StringHolder.$create__();] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [(new StringHolder()).s += "o";] => [$qualifier$2$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = java_lang_String.m_valueOf__java_lang_Object($qualifier$2$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) + java_lang_String.m_valueOf__java_lang_Object("o");] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[private String someString = "This is a string literal";] => [this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ = "This is a string literal";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
+[private String nonBmpChar = "𐍆";] => [this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uD800\uDF46";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
+[private String wideColon = "：";] => [this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uFF1A";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
 [public class Strings {
   private String someString = "This is a string literal";
 ...  }
 }] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings.<clinit>"
-[private String someString = "This is a string literal";] => [this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ = "This is a string literal";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
-[private String nonBmpChar = "𐍆";] => [this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uD800\uDF46";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
-[private String wideColon = "：";] => [this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uFF1A";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
 [private static final String ESCAPE_CODES = "\b\f\n\r\t\"\'\\\u0000\u007F𐍆：";] => [/** @public {?string} @const */
 Strings.f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_strings_Strings_ = "\b\f\n\r\t\"'\\\u0000\u007F\uD800\uDF46\uFF1A";]
 [private static final String ESCAPE_CODES_COPY = ESCAPE_CODES;] => [/** @public {?string} @const */

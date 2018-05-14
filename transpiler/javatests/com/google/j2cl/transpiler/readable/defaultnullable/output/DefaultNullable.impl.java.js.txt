@@ -114,35 +114,7 @@ class DefaultNullable extends java_lang_Object {
   }
 
   /**
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof DefaultNullable;
-  }
-
-  /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, DefaultNullable);
-  }
-
-  /**
-   * @public
-   */
-  static $clinit() {
-    DefaultNullable.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    ArrayList = goog.module.get('java.util.ArrayList$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
-  }
-
-  /**
+   * @return {void}
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable() {
@@ -170,6 +142,35 @@ class DefaultNullable extends java_lang_Object {
         null;
     this.f_f12__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
         java_lang_Object.$create__();
+  }
+
+  /**
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DefaultNullable;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, DefaultNullable);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    DefaultNullable.$clinit = function() {};
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    java_lang_Object.$clinit();
   }
 };
 

@@ -102,6 +102,7 @@
   VALUE1(2),
 ...  static Enum2 C = f(new Object());
 }] => [return super.compareTo(/**@type {Enum2} */ ($Casts.$to(arg0, Enum2)));] "com.google.j2cl.transpiler.readable.enums.Enum2.compareTo"
+[int foo = Enum1.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1.ordinal();] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
 [VALUE1(2)] => [return (Enum2.$clinit(), Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
 [VALUE1(2)] => [(Enum2.$clinit(), Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2 = value);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: setter>"
 [VALUE2(Enum1.V1)] => [return (Enum2.$clinit(), Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2);] "com.google.j2cl.transpiler.readable.enums.Enum2.<synthetic: getter>"
@@ -133,7 +134,6 @@
   VALUE1(2),
 ...  static Enum2 C = f(new Object());
 }] => [Enum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ = null;] "com.google.j2cl.transpiler.readable.enums.Enum2.<clinit>"
-[int foo = Enum1.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1.ordinal();] "com.google.j2cl.transpiler.readable.enums.Enum2.<init>"
 [enum Enum2 {
   VALUE1(2),
   VALUE2(Enum1.V1),

@@ -119,6 +119,19 @@ class Strings extends java_lang_Object {
   }
 
   /**
+   * @return {void}
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_strings_Strings() {
+    this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        'This is a string literal';
+    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        '\uD800\uDF46';
+    this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
+        '\uFF1A';
+  }
+
+  /**
    * @param {*} instance
    * @return {boolean}
    * @public
@@ -146,18 +159,6 @@ class Strings extends java_lang_Object {
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     java_lang_Object.$clinit();
-  }
-
-  /**
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_strings_Strings() {
-    this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ =
-        'This is a string literal';
-    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ =
-        '\uD800\uDF46';
-    this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
-        '\uFF1A';
   }
 };
 

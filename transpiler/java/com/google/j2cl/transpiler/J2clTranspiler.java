@@ -28,6 +28,7 @@ import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.ImplementAssertStatements;
+import com.google.j2cl.ast.visitors.ImplementInstanceInitialization;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
 import com.google.j2cl.ast.visitors.ImplementStaticInitialization;
 import com.google.j2cl.ast.visitors.ImplementSynchronizedStatements;
@@ -39,7 +40,6 @@ import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
-import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
@@ -254,7 +254,7 @@ public class J2clTranspiler {
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),
             new NormalizeFieldInitialization(),
-            new InsertInstanceInitCalls(),
+            new ImplementInstanceInitialization(),
             new NormalizeNestedClassConstructors(),
             new NormalizeConstructors(),
             new NormalizeCasts(),

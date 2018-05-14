@@ -15,8 +15,11 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -24,22 +27,49 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.SourcePosition;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/** Insert instance $init call to each constructor. */
-public class InsertInstanceInitCalls extends NormalizationPass {
+/** Synthesizes instance initialization method $init and adds calls to them in each constructor. */
+public class ImplementInstanceInitialization extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
       if (type.getInstanceInitializerBlocks().isEmpty()) {
         continue;
       }
-      for (Method constructor : type.getConstructors()) {
-        if (AstUtils.hasThisCall(constructor)) {
-          // A constructor with this() call does not need $init call.
-          continue;
-        }
-        synthesizeInstanceInitCall(constructor);
+      implementInitMethod(type);
+      insertInitCalls(type);
+    }
+  }
+
+  /** Implements the instance initialization method. */
+  private void implementInitMethod(Type type) {
+    if (!type.isJsOverlayImplementation()) {
+      checkArgument(!type.isInterface());
+      List<Statement> statements =
+          type.getInstanceInitializerBlocks()
+              .stream()
+              .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
+              .collect(Collectors.toList());
+
+      type.addMethod(
+          Method.newBuilder()
+              .setMethodDescriptor(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()))
+              .addStatements(statements)
+              .setSourcePosition(type.getSourcePosition())
+              .build());
+    }
+    type.getMembers().removeIf(member -> member instanceof InitializerBlock && !member.isStatic());
+  }
+
+  /** Inserts init calls in each constructor */
+  private void insertInitCalls(Type type) {
+    for (Method constructor : type.getConstructors()) {
+      if (AstUtils.hasThisCall(constructor)) {
+        // A constructor with this() call does not need $init call.
+        continue;
       }
+      synthesizeInstanceInitCall(constructor);
     }
   }
 
