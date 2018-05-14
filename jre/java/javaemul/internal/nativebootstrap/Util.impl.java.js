@@ -190,17 +190,6 @@ class Util {
   }
 
   /**
-   * Helper to access a field on the prototype since we don't current have a
-   * way of representing this in our AST.
-   * @param {Function} constructor
-   * @return {*}
-   * @public
-   */
-  static $getPrototype(constructor) {
-    return constructor.prototype;
-  }
-
-  /**
    * Helper to accept a reference to something that should be synchronized on.
    * No synchronization is actually necessary since JS is singlethreaded but
    * it's important that the parameter be passed since the accessing of it

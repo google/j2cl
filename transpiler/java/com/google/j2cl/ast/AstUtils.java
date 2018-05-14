@@ -652,7 +652,7 @@ public class AstUtils {
   /**
    * Generates the following code:
    *
-   * <p>$Util.$makeLambdaFunction( $Util.$getPrototype(Type).m_equal, $instance, Type.$copy);
+   * <p>$Util.$makeLambdaFunction(Type.prototype.m_equal, $instance, Type.$copy);
    */
   public static MethodCall createLambdaInstance(
       DeclaredTypeDescriptor lambdaType, Expression instance) {
@@ -668,9 +668,16 @@ public class AstUtils {
     String functionalMethodMangledName =
         ManglingNameUtils.getMangledName(jsFunctionMethodDescriptor);
 
-    MethodCall getPrototypeCall =
-        RuntimeMethods.createUtilMethodCall(
-            "$getPrototype", new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()));
+    FieldAccess prototypeFieldAccess =
+        FieldAccess.Builder.from(
+                FieldDescriptor.newBuilder()
+                    .setEnclosingTypeDescriptor(lambdaType)
+                    .setName("prototype")
+                    .setTypeDescriptor(lambdaType)
+                    .setJsInfo(JsInfo.RAW_FIELD)
+                    .build())
+            .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
+            .build();
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
@@ -680,7 +687,7 @@ public class AstUtils {
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
-            .setQualifier(getPrototypeCall)
+            .setQualifier(prototypeFieldAccess)
             .build();
 
     FieldAccess copyFunctionFieldAccess =
