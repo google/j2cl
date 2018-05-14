@@ -42,9 +42,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
           @Override
           public Expression rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-            if (!targetMethodDescriptor.isPolymorphic() || targetMethodDescriptor.isInit()) {
-              // TODO(rluble): remove the special casing for checking isInit() after init() function
-              // is synthesized at AST.
+            if (!targetMethodDescriptor.isPolymorphic()) {
               return methodCall;
             }
             return devirtualize(methodCall);
