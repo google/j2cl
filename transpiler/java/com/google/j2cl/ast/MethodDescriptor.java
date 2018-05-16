@@ -95,7 +95,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public enum MethodOrigin implements MemberDescriptor.Origin {
     SOURCE,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
-    SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>"),
+    SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>", true),
     SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
     SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
     SYNTHETIC_INSTANCE_INITIALIZER("<init>", true),
@@ -114,9 +114,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       this(stackTraceFrameName, false);
     }
 
-    MethodOrigin(String stackTraceFrameName, boolean isPrivate) {
+    MethodOrigin(String stackTraceFrameName, boolean emitAsPrivate) {
       this.stackTraceFrameName = stackTraceFrameName;
-      this.emitAsPrivate = isPrivate;
+      this.emitAsPrivate = emitAsPrivate;
     }
 
     public String getName() {

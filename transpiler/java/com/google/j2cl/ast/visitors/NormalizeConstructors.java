@@ -273,7 +273,6 @@ public class NormalizeConstructors extends NormalizationPass {
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
         .addStatements(body)
-        .setJsDocDescription("Private implementation constructor.")
         .setSourcePosition(sourcePosition)
         .build();
   }
