@@ -42,13 +42,13 @@
 [Bar.f = 10;] => [Bar.f = 10;] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [return bar.product();] => [return bar.product();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [public static void testInnerNativeJsType() {
-    Bar.Inner unusedFoo = new Bar.Inner() {};
-    Another.Inner unusedZoo = new Another.Inner() {};
+    Bar.Inner unusedBarInner = new Bar.Inner() {};
+    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName() {};
   }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
-[Bar.Inner unusedFoo = new Bar.Inner() {};] => [let unusedFoo = $1.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
-[unusedFoo] => [unusedFoo] "unusedFoo"
-[Another.Inner unusedZoo = new Another.Inner() {};] => [let unusedZoo = $2.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
-[unusedZoo] => [unusedZoo] "unusedZoo"
+[Bar.Inner unusedBarInner = new Bar.Inner() {};] => [let unusedBarInner = $1.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
+[unusedBarInner] => [unusedBarInner] "unusedBarInner"
+[BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName() {};] => [let unusedBarInnerWithDotInName = $2.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
+[unusedBarInnerWithDotInName] => [unusedBarInnerWithDotInName] "unusedBarInnerWithDotInName"
 [public static void testGlobalNativeJsType() {
     Headers header = new Headers();
     header.append("Content-Type", "text/xml");

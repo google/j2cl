@@ -14,8 +14,14 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
 
 class Bar {
+  /**
+   * @param {number} a
+   * @param {number} b
+   */
   constructor(a, b) {
+    /** @public {number} */
     this.x = a;
+    /** @public {number} */
     this.y = b;
   }
 
@@ -26,5 +32,8 @@ class Bar {
  * @public {number}
  */
 Bar.f = 1;
+
+/** @interface */
+Bar.Inner = class {};
 
 exports = Bar;
