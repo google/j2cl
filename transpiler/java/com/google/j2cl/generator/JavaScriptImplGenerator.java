@@ -398,7 +398,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "/**",
-        " * @param {*} instance",
+        " * @param {?} instance",
         " * @return {boolean}",
         " * @public",
         " */",
@@ -489,7 +489,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * @param {" + environment.aliasForType(type.getDeclaration()) + "} from",
-        " * @param {*} to",
+        " * @param {?} to",
         " * @public",
         " */",
         "static $copy(from, to) ");

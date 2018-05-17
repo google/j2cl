@@ -175,10 +175,11 @@ class Util {
    * Create a function that applies the specified jsFunctionMethod on itself,
    * and copies `instance`' properties to itself.
    *
-   * @param {Function} jsFunctionMethod
-   * @param {*} instance
-   * @param {Function} copyMethod
-   * @return {!Function}
+   * @param {T} jsFunctionMethod
+   * @param {U} instance
+   * @param {function(U,T):void} copyMethod
+   * @return {!T}
+   * @template T,U
    * @public
    */
   static $makeLambdaFunction(jsFunctionMethod, instance, copyMethod) {
