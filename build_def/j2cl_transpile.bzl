@@ -16,20 +16,6 @@ j2cl_transpile directly.
 """
 
 
-def _get_message(ctx):
-  _MESSAGES = [
-      "Re" + "ti" + "cu" + "la" + "ti" + "ng" + "Sp" + "li" + "ne" + "s",
-      3 * ("\\" + "0" + "/ "),
-      "Co" + "mp" + "ut" + "in" + "g " + "PI",
-      "So" + " m" + "uch" + " Ja" + "va",
-      "Sp" + "aw" + "ni" + "ng" + " m" + "or" + "e " + "ov" + "er" + "lo" + "rd" + "s",
-      "So" + "lv" + "in" + "g " + "ha" + "lt" + "ing" + " p" + "ro" + "bl" + "em",
-      "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
-      "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
-  ]
-  index = len(ctx.configuration.bin_dir.path)
-  return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx.label
-
 def _impl(ctx):
   separator = ctx.configuration.host_path_separator
   java_provider = ctx.attr.javalib[java_common.provider]
@@ -83,7 +69,7 @@ def _impl(ctx):
   inputs += [compiler_args_file]
 
   ctx.action(
-      progress_message = _get_message(ctx),
+      progress_message = "Transpiling to JavaScript %s" % ctx.label,
       inputs=inputs,
       outputs=[ctx.outputs.zip_file],
       executable=ctx.executable.transpiler,
