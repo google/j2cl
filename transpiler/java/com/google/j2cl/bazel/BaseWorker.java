@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 /**
  * A base class for running processes as blaze workers. Used for both the transpiler
- * and @GwtIncompaitble stripper tool.
+ * and @GwtIncompatible stripper tool.
  */
 public abstract class BaseWorker {
   /**
