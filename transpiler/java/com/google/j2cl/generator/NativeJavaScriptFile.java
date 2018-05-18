@@ -106,7 +106,7 @@ public class NativeJavaScriptFile {
           loadedFilesByPath.put(file.getPathWithoutExtension(), file);
         }
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_OPEN_ZIP, zipPath);
+        problems.error(Message.ERR_CANNOT_OPEN_ZIP, zipPath, e.getMessage());
       }
     }
     return loadedFilesByPath;
