@@ -13,7 +13,6 @@ java_binary(
 java_library(
     name = "minifier",
     srcs = ["J2clMinifier.java"],
-    compatible_with = ["//buildenv/target:appengine"],
     visibility = [
         "//:__pkg__",
         "//tools/javatests/com/google/j2cl/tools/minifier:__pkg__",
