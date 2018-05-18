@@ -25,6 +25,7 @@ j2cl_library(
 
 """
 
+load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
 load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 load("//build_def:j2cl_util.bzl", "generate_zip", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_defs/label:def.bzl", "absolute_label")
@@ -166,13 +167,23 @@ def j2cl_library(name,
     js_deps += [dep]
 
   java_library_kwargs = dict(kwargs)
-  java_library_kwargs["deps"] = java_deps or None
+  java_library_kwargs["deps"] = java_deps or []
   java_library_kwargs["exports"] = java_exports
   java_library_kwargs["restricted_to"] = ["//buildenv/j2cl:j2cl_compilation"]
 
-  native.java_library(
+  # TODO(goktug): remove workaround after b/71772385 is fixed
+  dummy_class_name = base_name.replace('-', '_');
+  dummy_src = dummy_class_name + "_gen";
+  native.genrule(
+    name=dummy_src,
+    outs=["dummy_/%s/package-info.java" % dummy_class_name],
+    cmd="echo \"package dummy_;\" > $@",
+  )
+
+  j2cl_java_library(
       name = base_name + "_java_library",
       srcs = [gwt_incompatible_stripped],
+      srcs_hack = [":" + dummy_src],
       tags = internal_tags,
       visibility = visibility,
       **java_library_kwargs

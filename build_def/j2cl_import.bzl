@@ -25,6 +25,7 @@ j2cl_library(
 
 """
 
+load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
 
 
 def j2cl_import(name,
@@ -43,7 +44,7 @@ def j2cl_import(name,
   if not hasattr(native, "js_library"):
     return
 
-  native.java_library(
+  j2cl_java_library(
       name=name + "_java_library",
       restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
       exports=[jar],
