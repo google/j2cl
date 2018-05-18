@@ -41,5 +41,9 @@ class bar {
     new Blah();
     new goog();
     new foo();
+
+    // Variable colliding with reserved JavaScript names.
+    int delete = 1;
+    int undefined = 3;
   }
 }

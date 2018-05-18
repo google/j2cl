@@ -37,6 +37,10 @@
 [new Blah();] => [new String();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
 [new goog();] => [com_google_j2cl_transpiler_readable_collisions_goog.$create__();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
 [new foo();] => [foo.$create__();] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[int delete = 1;] => [let delete$1$ = 1;] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[delete] => [delete$1$] "delete"
+[int undefined = 3;] => [let undefined$1$ = 3;] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
+[undefined] => [undefined$1$] "undefined"
 [class bar {
   {
 ...  }
