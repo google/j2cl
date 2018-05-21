@@ -1,13 +1,10 @@
 """Macro for generating j2cl_test targets for multiple test files.
 
-Similar to third_party/bazel_common/testing/test_defs.bzl -> gen_java_tests
-
-This macro generates a j2cl_test rule for each test in test_files using
+Similar to gen_java_tests in third_party/bazel_common/testing/test_defs.bzl,
+this macro generates a j2cl_test rule for each test in test_files using
 the specified deps.
 
 Example usage:
-
-load("//third_party/java/j2cl:gen_j2cl_tests.bzl", "gen_j2cl_tests")
 
 gen_j2cl_tests(
     name = "AllTests",
