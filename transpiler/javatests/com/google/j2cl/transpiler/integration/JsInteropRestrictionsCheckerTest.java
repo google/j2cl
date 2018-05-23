@@ -2805,6 +2805,38 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     //      + "usable by but exposed to JavaScript.");
   }
 
+  public void testCorrectLineNumbers() {
+    assertTranspileFails(
+            "Buggy",
+            // line 1: package test; // implicit
+            // line 2
+            "import jsinterop.annotations.JsMethod;",
+            // line 3
+            "import jsinterop.annotations.JsType;",
+            // line 4
+            "import jsinterop.annotations.JsProperty;",
+            // line 5
+            "@JsType(name = \"invalid.Promise\")",
+            // line 6
+            "class Promise {",
+            // line 7
+            "  @JsMethod(name =\"invalid.method\")",
+            // line 8
+            "  void method() {",
+            // line 9
+            "  }",
+            // line 10
+            "  @JsProperty(name =\"invalid.field\")",
+            // line 11
+            "  int field;",
+            // line 12
+            "}")
+        .assertErrors(
+            "Buggy.java:5: 'Promise' has invalid name 'invalid.Promise'.",
+            "Buggy.java:7: 'void Promise.method()' has invalid name 'invalid.method'.",
+            "Buggy.java:10: 'Promise.field' has invalid name 'invalid.field'.");
+  }
+
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String... code) {
     return newTesterWithDefaults()
         .addCompilationUnit(compilationUnitName, code)

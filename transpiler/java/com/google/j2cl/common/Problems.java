@@ -99,12 +99,7 @@ public class Problems {
   }
 
   public void error(SourcePosition sourcePosition, String detailMessage, Object... args) {
-    problem(
-        Severity.ERROR,
-        sourcePosition.getStartFilePosition().getLine(),
-        sourcePosition.getFilePath(),
-        detailMessage,
-        args);
+    problem(Severity.ERROR, sourcePosition, detailMessage, args);
   }
 
   public void error(int lineNumber, String filePath, String detailMessage, Object... args) {
@@ -112,9 +107,15 @@ public class Problems {
   }
 
   public void warning(SourcePosition sourcePosition, String detailMessage, Object... args) {
+    problem(Severity.WARNING, sourcePosition, detailMessage, args);
+  }
+
+  private void problem(
+      Severity severity, SourcePosition sourcePosition, String detailMessage, Object... args) {
     problem(
-        Severity.WARNING,
-        sourcePosition.getStartFilePosition().getLine(),
+        severity,
+        // SourcePosition lines are 0 based.
+        sourcePosition.getStartFilePosition().getLine() + 1,
         sourcePosition.getFilePath(),
         detailMessage,
         args);
