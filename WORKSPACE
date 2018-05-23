@@ -92,11 +92,9 @@ maven_jar(
 
 http_jar(
     name = "org_eclipse_jdt_content_type",
-    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.commands_3.9.0.v20170530-1048.jar",
-    sha256 = "d8017bcc6001e26abaae318ccd8b9c7f9f052a464f21e5dbb5378df08d66c82d"
-
+    url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.contenttype_3.6.0.v20170207-1037.jar",
+    sha256 = "8b05bbdead21565af75ac2886105e0c6a5a3b3b82084b10f82f4c21313292749"
 )
-
 http_jar(
     name = "org_eclipse_jdt_jobs",
     url = "http://download.eclipse.org/eclipse/updates/4.7/R-4.7.2-201711300510/plugins/org.eclipse.core.jobs_3.9.2.v20171030-1027.jar",
