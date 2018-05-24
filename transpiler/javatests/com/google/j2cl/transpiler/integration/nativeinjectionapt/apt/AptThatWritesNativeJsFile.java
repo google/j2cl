@@ -83,7 +83,7 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
     private Writer createResource(String packageName, String resourceName) throws IOException {
       return processingEnv
           .getFiler()
-          .createResource(StandardLocation.CLASS_OUTPUT, packageName, resourceName, new Element[0])
+          .createResource(StandardLocation.SOURCE_OUTPUT, packageName, resourceName)
           .openWriter();
     }
 

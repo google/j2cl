@@ -200,12 +200,12 @@ def j2cl_library(name,
     zip_tool = "$$cwd/$(location //third_party/zip:zip)"
     native.genrule(
         name=base_name + "_extract_native_js_apt",
-        srcs=["lib" + base_name + "_java_library.jar"],
+        srcs=["lib" + base_name + "_java_library-src.jar"],
         outs=[js_sources_from_apt, native_js_sources_from_apt],
         restricted_to=["//buildenv/j2cl:j2cl_compilation"],
         cmd="\n".join([
             "TMPDIR=$$(mktemp -d)",
-            "unzip -q $(SRCS) -x \"*.class\" -d $$TMPDIR",
+            "unzip -q $(SRCS) -x \"*.java\" -d $$TMPDIR",
             "cwd=$$PWD",
             "cd $$TMPDIR",
             "%s -jt -X -q -i \"*.js\" -x \"*.native.js\" -r $$cwd/$(location %s) *" % (
