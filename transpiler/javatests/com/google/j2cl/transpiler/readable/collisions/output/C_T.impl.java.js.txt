@@ -1,0 +1,104 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.collisions.C_T.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.collisions.C_T$impl');
+
+
+const java_lang_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+
+
+/**
+ * @template C_T
+ */
+class C_T extends java_lang_Object {
+  /**
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'C_T()'.
+   * @template C_T
+   * @return {!C_T<C_T>}
+   * @public
+   */
+  static $create__() {
+    C_T.$clinit();
+    let $instance = new C_T();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_collisions_C_T__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'C_T()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_collisions_C_T__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {C_T}
+   * @public
+   */
+  m_m___$pp_com_google_j2cl_transpiler_readable_collisions() {
+    return null;
+  }
+
+  /**
+   * @return {C_T}
+   * @public
+   */
+  m_n___$pp_com_google_j2cl_transpiler_readable_collisions() {
+    let t = /**@type {!C_T<C_T>} */ (C_T.$create__())
+                .m_m___$pp_com_google_j2cl_transpiler_readable_collisions();
+    $Numbers.m_byteValue__java_lang_Number(t);
+    return t;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof C_T;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, C_T);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    C_T.$clinit = function() {};
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+    java_lang_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    C_T,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.collisions.C_T'));
+
+
+
+exports = C_T;
+//# sourceMappingURL=C_T.js.map

@@ -1,0 +1,33 @@
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [super();] "com.google.j2cl.transpiler.readable.collisions.C_T.<synthetic: ctor_js>"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [C_T.$clinit();] "com.google.j2cl.transpiler.readable.collisions.C_T.<synthetic: ctor_create>"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [let $instance = new C_T();] "com.google.j2cl.transpiler.readable.collisions.C_T.<synthetic: ctor_create>"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_collisions_C_T__();] "com.google.j2cl.transpiler.readable.collisions.C_T.<synthetic: ctor_create>"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [return $instance;] "com.google.j2cl.transpiler.readable.collisions.C_T.<synthetic: ctor_create>"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.collisions.C_T.<init>"
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.collisions.C_T.m"
+[T t = new C_T<T>().m();] => [let t = /**@type {!C_T<C_T>} */ (C_T.$create__()).m_m___$pp_com_google_j2cl_transpiler_readable_collisions();] "com.google.j2cl.transpiler.readable.collisions.C_T.n"
+[t] => [t] "t"
+[t.byteValue();] => [$Numbers.m_byteValue__java_lang_Number(t);] "com.google.j2cl.transpiler.readable.collisions.C_T.n"
+[return t;] => [return t;] "com.google.j2cl.transpiler.readable.collisions.C_T.n"
+[class C_T<T extends Number> {
+  T m() {
+...  }
+}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.collisions.C_T.<clinit>"

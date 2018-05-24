@@ -47,3 +47,28 @@ class bar {
     int undefined = 3;
   }
 }
+
+class Other<T> {
+  {
+    int C_T = 3;
+    Other<T> o = (Other<T>) null;
+  }
+
+  <T> T m() {
+    int M_T = 5;
+    Other<T> o = (Other<T>) null;
+    return null;
+  }
+}
+
+class C_T<T extends Number> {
+  T m() {
+    return null;
+  }
+
+  T n() {
+    T t = new C_T<T>().m();
+    t.byteValue();
+    return t;
+  }
+}
