@@ -30,3 +30,22 @@ java_binary(
     main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
     runtime_deps = [":gwtincompatible_lib"],
 )
+
+java_library(
+    name = "gwtincompatible_worker_lib",
+    srcs = ["StripperWorker.java"],
+    deps = [
+        ":gwtincompatible_lib",
+        "//transpiler/java/com/google/j2cl/bazel",
+    ],
+)
+
+java_binary(
+    name = "GwtIncompatibleStripper_worker",
+    jvm_flags = [
+        "-Dj2cl.deterministicTimestamps=true",
+    ],
+    main_class = "com.google.j2cl.tools.gwtincompatible.StripperWorker",
+    visibility = ["//internal_do_not_use:__pkg__"],
+    runtime_deps = [":gwtincompatible_worker_lib"],
+)
