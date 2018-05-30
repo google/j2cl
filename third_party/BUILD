@@ -37,21 +37,6 @@ java_library(
 )
 
 java_library(
-    name = "gwt-jsinterop-annotations",
-    exports = ["@com_google_jsinterop_annotations//jar"],
-)
-
-java_library(
-    name = "gwt-jsinterop-annotations-j2cl",
-    exports = [":gwt-jsinterop-annotations"],
-)
-
-java_library(
-    name = "gwt-javaemul-internal-annotations-j2cl",
-    exports = ["@org_gwtproject_gwt//:gwt-javaemul-internal-annotations"],
-)
-
-java_library(
     name = "jdt-core",
     exports = [
         "@org_eclipse_jdt_compiler_apt//jar",
@@ -159,4 +144,19 @@ alias(
 alias(
     name = "gwt_java_emul_internal",
     actual = "@org_gwtproject_gwt//user:java_emul_internal",
+)
+
+alias(
+    name = "gwt-javaemul-internal-annotations-j2cl",
+    actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
+)
+
+alias(
+    name = "gwt-jsinterop-annotations",
+    actual = "@com_google_jsinterop_annotations//jar",
+)
+
+alias(
+    name = "gwt-jsinterop-annotations-j2cl",
+    actual = "@com_google_jsinterop_annotations//jar",
 )
