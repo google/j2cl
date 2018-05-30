@@ -29,6 +29,7 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -142,7 +143,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
           }
         });
   }
-
 
   private static boolean triggersClinit(FieldDescriptor fieldDescriptor) {
     return fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant();
@@ -273,7 +273,13 @@ public class ImplementStaticInitialization extends NormalizationPass {
         .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setVisibility(fieldDescriptor.getVisibility())
-        .setJsInfo(fieldDescriptor.isJsProperty() ? JsInfo.RAW : JsInfo.NONE)
+        .setJsInfo(
+            fieldDescriptor.isJsProperty()
+                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
+                    .setJsMemberType(JsMemberType.SETTER)
+                    .setJsName(fieldDescriptor.getName())
+                    .build()
+                : JsInfo.NONE)
         .setStatic(true)
         .build();
   }
@@ -285,7 +291,13 @@ public class ImplementStaticInitialization extends NormalizationPass {
         .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_GETTER)
         .setReturnTypeDescriptor(fieldDescriptor.getTypeDescriptor())
         .setVisibility(fieldDescriptor.getVisibility())
-        .setJsInfo(fieldDescriptor.isJsProperty() ? JsInfo.RAW : JsInfo.NONE)
+        .setJsInfo(
+            fieldDescriptor.isJsProperty()
+                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
+                    .setJsMemberType(JsMemberType.GETTER)
+                    .setJsName(fieldDescriptor.getName())
+                    .build()
+                : JsInfo.NONE)
         .setStatic(true)
         .build();
   }
