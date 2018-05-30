@@ -88,9 +88,9 @@ public class JavaPreprocessor {
     CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
 
     // Find all the declarations with @GwtIncompatible.
-    GwtIncompatibleNodeCollector gwtIncomaptibleVisitor = new GwtIncompatibleNodeCollector();
-    compilationUnit.accept(gwtIncomaptibleVisitor);
-    List<ASTNode> gwtIncompatibleNodes = gwtIncomaptibleVisitor.getNodes();
+    GwtIncompatibleNodeCollector gwtIncompatibleVisitor = new GwtIncompatibleNodeCollector();
+    compilationUnit.accept(gwtIncompatibleVisitor);
+    List<ASTNode> gwtIncompatibleNodes = gwtIncompatibleVisitor.getNodes();
 
     // Delete the gwtIncompatible nodes.
     for (ASTNode gwtIncompatibleNode : gwtIncompatibleNodes) {
@@ -124,10 +124,12 @@ public class JavaPreprocessor {
           currentPosition);
 
       newFileContent.append(fileContent.substring(currentPosition, startPosition));
-      newFileContent.append("/*");
-      // Replace */ to ** since Java doesn't support nested comments.
-      newFileContent.append(fileContent.substring(startPosition, endPosition).replace("*/", "**"));
-      newFileContent.append("*/");
+
+      StringBuilder strippedCodeBuilder = new StringBuilder();
+      for (char c : fileContent.substring(startPosition, endPosition).toCharArray()) {
+        strippedCodeBuilder.append(Character.isWhitespace(c) ? c : ' ');
+      }
+      newFileContent.append(strippedCodeBuilder);
       currentPosition = endPosition;
     }
     newFileContent.append(fileContent.substring(currentPosition));
