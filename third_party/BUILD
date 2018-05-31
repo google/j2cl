@@ -151,12 +151,12 @@ alias(
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
 
-alias(
+java_library(
     name = "gwt-jsinterop-annotations",
-    actual = "@com_google_jsinterop_annotations//jar",
+    exports = ["@com_google_jsinterop_annotations//jar"],
 )
 
-alias(
+java_library(
     name = "gwt-jsinterop-annotations-j2cl",
-    actual = "@com_google_jsinterop_annotations//jar",
+    exports = ["@com_google_jsinterop_annotations//jar"],
 )
