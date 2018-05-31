@@ -23,7 +23,7 @@ class JsProtectedNames {
       ImmutableSet.of(
           // Main closure namespace, used at generation time.
           "goog",
-          // TODO(b/79211498): move all uses to ast so that the names are collected uniformly.
+          // TODO(b/80241817): Cleanup when all non keywords that are used appear in the AST.
           // Names of externs that might used at generation time without a presence in the ast.
           // These should be explicitly avoided.
           "Function",

@@ -19,7 +19,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
@@ -29,6 +31,7 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
@@ -193,9 +196,21 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   @Override
+  public void exitFieldAccess(FieldAccess fieldAccess) {
+    MemberDescriptor memberDescriptor = fieldAccess.getTarget();
+    if (memberDescriptor.isExtern()) {
+      addExternTypeDeclaration(memberDescriptor.getQualifiedJsName());
+    }
+  }
+
+  @Override
   public void exitMethodCall(MethodCall methodCall) {
+    MethodDescriptor methodDescriptor = methodCall.getTarget();
     if (methodCall.isStaticDispatch()) {
-      addTypeDeclaration(methodCall.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration());
+      addTypeDeclaration(methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
+    }
+    if (methodDescriptor.isExtern()) {
+      addExternTypeDeclaration(methodDescriptor.getQualifiedJsName());
     }
   }
 
@@ -328,9 +343,20 @@ class ImportGatherer extends AbstractVisitor {
     checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
 
     if (typeDeclaration.isExtern()) {
-      importCategory = ImportCategory.EXTERN;
+      addExternTypeDeclaration(typeDeclaration.getQualifiedJsName());
+    } else {
+      typeDeclarationByCategory.put(importCategory, typeDeclaration);
     }
-    typeDeclarationByCategory.put(importCategory, typeDeclaration);
+  }
+
+  private void addExternTypeDeclaration(String qualifiedJsName) {
+    // Externs are references on the JsPackage.GLOBAL namespace and only the top scope qualifier is
+    // relevant for avoiding collisions.
+    String topScopeQualifier = Iterables.get(Splitter.on('.').split(qualifiedJsName), 0);
+    // TODO(b/80488007): Refactor the way extern namespaces are handled.
+    typeDeclarationByCategory.put(
+        ImportCategory.EXTERN,
+        TypeDescriptors.createGlobalNativeTypeDescriptor(topScopeQualifier).getTypeDeclaration());
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
@@ -394,18 +420,11 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private void recordLocalNameUses(Set<TypeDeclaration> typeDeclarations) {
-    // TODO(goktug): We should also include TypeVariables on name recording.
-    for (TypeDeclaration typeDeclaration : typeDeclarations) {
-      if (typeDeclaration.isExtern()) {
-        // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such
-        // as window.String, for that scenario only the top level qualifier "window" needs to be
-        // avoided.
-        String topLevelExtern = typeDeclaration.getQualifiedJsName().split("\\.")[0];
-        localNameUses.add(topLevelExtern);
-      } else {
-        localNameUses.add(typeDeclaration.getShortAliasName());
-      }
-    }
+    // TODO(b/80201427): We should also include TypeVariables on name recording.
+    typeDeclarations
+        .stream()
+        .map(TypeDeclaration::getShortAliasName)
+        .forEach(localNameUses::add);
   }
 
   private Set<Import> toImports(Set<TypeDeclaration> typeDeclarations) {

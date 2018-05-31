@@ -18,7 +18,8 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.ast.HasQualifiedBinaryName;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.Variable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -50,12 +51,17 @@ public class GenerationEnvironment {
     return variable.getName();
   }
 
-  public String aliasForType(HasQualifiedBinaryName hasQualifiedBinaryName) {
-    String alias = aliasByTypeBinaryName.get(hasQualifiedBinaryName.getQualifiedBinaryName());
+  public String aliasForType(DeclaredTypeDescriptor typeDescriptor) {
+    return aliasForType(typeDescriptor.getTypeDeclaration());
+  }
+
+  public String aliasForType(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isExtern()) {
+      return typeDeclaration.getQualifiedJsName();
+    }
+    String alias = aliasByTypeBinaryName.get(typeDeclaration.getQualifiedBinaryName());
     checkState(
-        alias != null,
-        "An alias was needed for %s but no alias was found.",
-        hasQualifiedBinaryName);
+        alias != null, "An alias was needed for %s but no alias was found.", typeDeclaration);
     return alias;
   }
 }

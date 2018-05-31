@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 /** A usage-site reference to a type. */
 @Visitable
 public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasReadableDescription, HasQualifiedBinaryName {
+    implements Comparable<TypeDescriptor>, HasReadableDescription {
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
   public String getSimpleBinaryName() {
@@ -40,7 +40,6 @@ public abstract class TypeDescriptor extends Node
    * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
    * and other similar scenarios.
    */
-  @Override
   public String getQualifiedBinaryName() {
     return getSimpleBinaryName();
   }

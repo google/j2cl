@@ -59,10 +59,7 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDeclaration extends Node
-    implements HasJsNameInfo,
-        HasReadableDescription,
-        HasUnusableByJsSuppression,
-        HasQualifiedBinaryName {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -102,7 +99,6 @@ public abstract class TypeDeclaration extends Node
    * and other similar scenarios.
    */
   @Memoized
-  @Override
   public String getQualifiedBinaryName() {
     return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
   }

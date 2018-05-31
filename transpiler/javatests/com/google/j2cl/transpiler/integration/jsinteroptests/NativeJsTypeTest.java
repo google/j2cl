@@ -35,6 +35,8 @@ public class NativeJsTypeTest extends MyTestCase {
     test.testSpecialNativeInstanceOf();
     test.testForwaringMethodsOnNativeClasses();
     test.testUninitializedStaticOverlayField();
+    test.testVariableExternCollision();
+    test.testAliasExternCollision();
   }
 
   @JsType(isNative = true)
@@ -357,17 +359,35 @@ public class NativeJsTypeTest extends MyTestCase {
     assertFalse(nullObject instanceof NativeString);
     assertFalse(nullObject instanceof NativeNumber);
 
-    // TODO(b/79211498): restore the name undefined for the variable once the bug is fixed.
-    Object undefinedValue = getUndefined();
-    assertFalse(undefinedValue instanceof NativeObject);
-    assertFalse(undefinedValue instanceof NativeArray);
-    assertFalse(undefinedValue instanceof NativeFunction);
-    assertFalse(undefinedValue instanceof NativeString);
-    assertFalse(undefinedValue instanceof NativeNumber);
+    Object undefined = getUndefined();
+    assertFalse(undefined instanceof NativeObject);
+    assertFalse(undefined instanceof NativeArray);
+    assertFalse(undefined instanceof NativeFunction);
+    assertFalse(undefined instanceof NativeString);
+    assertFalse(undefined instanceof NativeNumber);
   }
 
   @JsProperty(namespace = JsPackage.GLOBAL)
   private static native Object getUndefined();
+
+  @SuppressWarnings("unused")
+  public void testVariableExternCollision() {
+    Object Int8Array = null; // A variable name that would collide with an extern.
+    assertNotNull(getInt8ArrayBytesPerElement());
+  }
+
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "Int8Array.BYTES_PER_ELEMENT")
+  private static native double getInt8ArrayBytesPerElement();
+
+  public void testAliasExternCollision() {
+    Float32Array unused = new Float32Array(); // make sure it is referenced hence aliased.
+    assertNotNull(getFloat32ArrayBytesPerElement());
+  }
+
+  static class Float32Array {}
+
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "Float32Array.BYTES_PER_ELEMENT")
+  private static native Object getFloat32ArrayBytesPerElement();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface NativeInterface {

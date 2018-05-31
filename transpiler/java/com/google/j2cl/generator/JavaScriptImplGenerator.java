@@ -365,7 +365,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $markImplementor(classConstructor) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
+    for (DeclaredTypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
       if (superInterface.isNative()) {
         continue;
       }

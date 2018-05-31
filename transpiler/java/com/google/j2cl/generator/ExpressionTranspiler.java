@@ -31,6 +31,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.ConditionalExpression;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionWithComment;
 import com.google.j2cl.ast.FieldAccess;
@@ -54,7 +55,6 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -357,7 +357,7 @@ public class ExpressionTranspiler {
       @Override
       public Void transformNewInstance(NewInstance expression) {
         checkArgument(expression.getQualifier() == null);
-        TypeDescriptor targetTypeDescriptor =
+        DeclaredTypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
 
         sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
