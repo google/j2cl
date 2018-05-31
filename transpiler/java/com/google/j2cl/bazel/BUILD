@@ -17,13 +17,10 @@ java_library(
 
 java_proto_library(
     name = "worker_protocol_java_proto",
-    has_services = 0,
     deps = [":worker_protocol_proto"],
 )
 
 proto_library(
     name = "worker_protocol_proto",
     srcs = ["worker_protocol.proto"],
-    has_services = 0,
-    java_api_version = 2,
 )
