@@ -15,24 +15,42 @@
  */
 package com.google.j2cl.common;
 
-/** J2cl's implementation of sourcemap file position. */
-public final class FilePosition {
-  private final int line;
-  private final int column;
+import static com.google.common.base.Preconditions.checkState;
 
-  public FilePosition(int line, int column) {
-    this.line = line;
-    this.column = column;
-  }
+import com.google.auto.value.AutoValue;
+
+/** J2cl's implementation of sourcemap file position. */
+@AutoValue
+public abstract class FilePosition {
 
   /** @return the line number of this position. */
-  public int getLine() {
-    return line;
-  }
+  public abstract int getLine();
 
   /** @return the character index on the line of this position, with the first column being 0. */
-  public int getColumn() {
-    return column;
+  public abstract int getColumn();
+
+  /** @return the byte offset of this position. */
+  public abstract int getByteOffset();
+
+  public static Builder newBuilder() {
+    return new AutoValue_FilePosition.Builder();
+  }
+
+  /** A Builder for FilePosition. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+
+    public abstract Builder setLine(int line);
+
+    public abstract Builder setColumn(int column);
+
+    public abstract Builder setByteOffset(int byteOffset);
+
+    abstract FilePosition autoBuild();
+
+    public FilePosition build() {
+      return autoBuild();
+    }
   }
 
   @Override
@@ -41,12 +59,17 @@ public final class FilePosition {
       return false;
     }
     FilePosition thatFilePosition = (FilePosition) that;
-    return line == thatFilePosition.line && column == thatFilePosition.column;
+    boolean result =
+        getLine() == thatFilePosition.getLine() && getColumn() == thatFilePosition.getColumn();
+    checkState(
+        result == (getByteOffset() == thatFilePosition.getByteOffset()),
+        "Line/column position does not match byte offset.");
+    return result;
   }
 
   @Override
   public int hashCode() {
-    return line * 37 + column;
+    return getLine() * 37 + getColumn();
   }
 
   @Override

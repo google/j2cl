@@ -37,6 +37,7 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
@@ -639,6 +640,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     int nativeSourceLine = 0;
+    int currentByteOffset = 0;
     String content = nativeSource.getContent();
     for (String line : Splitter.on('\n').split(content)) {
       String trimmedLine = CharMatcher.whitespace().trimTrailingFrom(line);
@@ -649,8 +651,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         // Only map the trimmed section of the line.
         sourceBuilder.emitWithMapping(
             SourcePosition.newBuilder()
-                .setStartPosition(nativeSourceLine, firstNonWhitespaceColumn)
-                .setEndPosition(nativeSourceLine, trimmedLine.length())
+                .setStartFilePosition(
+                    FilePosition.newBuilder()
+                        .setLine(nativeSourceLine)
+                        .setColumn(firstNonWhitespaceColumn)
+                        .setByteOffset(currentByteOffset + firstNonWhitespaceColumn)
+                        .build())
+                .setEndFilePosition(
+                    FilePosition.newBuilder()
+                        .setLine(nativeSourceLine)
+                        .setColumn(trimmedLine.length())
+                        .setByteOffset(currentByteOffset + trimmedLine.length())
+                        .build())
                 .setFilePath(nativeSource.getRelativeFilePath())
                 .setName(type.getDeclaration().getQualifiedBinaryName() + ".<native>")
                 .build(),
@@ -658,6 +670,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       sourceBuilder.newLine();
       nativeSourceLine++;
+      currentByteOffset += line.length() + 1;
     }
     sourceBuilder.newLine();
   }

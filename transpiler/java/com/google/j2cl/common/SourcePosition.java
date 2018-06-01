@@ -73,14 +73,6 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
     public abstract Builder setName(String name);
 
-    public Builder setStartPosition(int line, int column) {
-      return setStartFilePosition(new FilePosition(line, column));
-    }
-
-    public Builder setEndPosition(int line, int column) {
-      return setEndFilePosition(new FilePosition(line, column));
-    }
-
     public static Builder from(SourcePosition sourcePosition) {
       return sourcePosition.toBuilder();
     }

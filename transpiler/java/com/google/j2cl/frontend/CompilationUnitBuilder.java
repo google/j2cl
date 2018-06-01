@@ -95,6 +95,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -747,16 +748,28 @@ public class CompilationUnitBuilder {
     }
 
     public SourcePosition getSourcePosition(String name, ASTNode node) {
-      int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
-      int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
-      int lastCharacterPosition = node.getStartPosition() + node.getLength() - 1;
-      int endLineNumber = jdtCompilationUnit.getLineNumber(lastCharacterPosition) - 1;
-      int endColumnNumber = jdtCompilationUnit.getColumnNumber(lastCharacterPosition) + 1;
+      int startCharacterPosition = node.getStartPosition();
+      int startLine = jdtCompilationUnit.getLineNumber(startCharacterPosition) - 1;
+      int startColumn = jdtCompilationUnit.getColumnNumber(startCharacterPosition);
+      int endCharacterPosition = startCharacterPosition + node.getLength() - 1;
+      int endLine = jdtCompilationUnit.getLineNumber(endCharacterPosition) - 1;
+      int endColumn = jdtCompilationUnit.getColumnNumber(endCharacterPosition) + 1;
       return SourcePosition.newBuilder()
           .setFilePath(j2clCompilationUnit.getFilePath())
           .setName(name)
-          .setStartPosition(startLineNumber, startColumnNumber)
-          .setEndPosition(endLineNumber, endColumnNumber)
+          .setStartFilePosition(
+              FilePosition.newBuilder()
+                  .setLine(startLine)
+                  .setColumn(startColumn)
+                  .setByteOffset(startCharacterPosition)
+                  .build())
+          .setEndFilePosition(
+              FilePosition.newBuilder()
+                  .setLine(endLine)
+                  // TODO(b/92372836): Document which character this should point to
+                  .setColumn(endColumn)
+                  .setByteOffset(endCharacterPosition + 1)
+                  .build())
           .build();
     }
 
