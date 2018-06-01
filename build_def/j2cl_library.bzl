@@ -32,7 +32,6 @@ load("//tools/build_defs/label:def.bzl", "absolute_label")
 load("//tools/build_defs/j2cl:def.bzl", "js_import")
 load("//tools/build_defs/lib:lib.bzl", "collections")
 load("//tools/build_rules:build_test.bzl", "build_test")
-load("//build_def:gwt_incompatible_stripper.bzl", "gwt_incompatible_stripper")
 
 def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
   """Copies an artifact from to remove build environment restrictions."""
@@ -148,15 +147,6 @@ def j2cl_library(name,
     java_exports += [export + "_java_library"]
     js_exports += [export]
 
-  gwt_incompatible_stripped = base_name + "_gwtincompatible_stripped"
-  gwt_incompatible_stripper(
-      name=gwt_incompatible_stripped,
-      srcs=srcs,
-      visibility=["//visibility:private"],
-      testonly=testonly,
-      tags=internal_tags,
-  )
-
   target_name = native.package_name() + ":" + base_name
   # If this is JRE itself, don't synthesize the JRE dep.
   if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
@@ -182,7 +172,7 @@ def j2cl_library(name,
 
   j2cl_java_library(
       name = base_name + "_java_library",
-      srcs = [gwt_incompatible_stripped],
+      srcs = srcs,
       srcs_hack = [":" + dummy_src],
       tags = internal_tags,
       visibility = visibility,
