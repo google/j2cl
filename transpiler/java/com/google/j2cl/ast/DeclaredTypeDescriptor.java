@@ -81,22 +81,22 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   public boolean isFunctionalInterface() {
-    return hasTypeDeclaration() && getTypeDeclaration().isFunctionalInterface();
+    return getTypeDeclaration().isFunctionalInterface();
   }
 
   @Override
   public boolean isJsFunctionImplementation() {
-    return hasTypeDeclaration() && getTypeDeclaration().isJsFunctionImplementation();
+    return getTypeDeclaration().isJsFunctionImplementation();
   }
 
   @Override
   public boolean isJsFunctionInterface() {
-    return hasTypeDeclaration() && getTypeDeclaration().isJsFunctionInterface();
+    return getTypeDeclaration().isJsFunctionInterface();
   }
 
   @Override
   public boolean isNative() {
-    return hasTypeDeclaration() && getTypeDeclaration().isNative();
+    return getTypeDeclaration().isNative();
   }
 
   @Override
@@ -319,19 +319,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Override
   public String getQualifiedSourceName() {
-    if (hasTypeDeclaration()) {
-      return getTypeDeclaration().getQualifiedSourceName();
-    }
-    return super.getQualifiedSourceName();
+    return getTypeDeclaration().getQualifiedSourceName();
   }
 
   @Override
   @Memoized
   public String getQualifiedBinaryName() {
-    if (hasTypeDeclaration()) {
-      return getTypeDeclaration().getQualifiedBinaryName();
-    }
-    return getSimpleBinaryName();
+    return getTypeDeclaration().getQualifiedBinaryName();
   }
 
   @Memoized
@@ -340,12 +334,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getSuperTypeDescriptorFactory().get(this);
   }
 
-  @Nullable
   public abstract TypeDeclaration getTypeDeclaration();
-
-  private boolean hasTypeDeclaration() {
-    return getTypeDeclaration() != null;
-  }
 
   @Memoized
   @Override
@@ -596,10 +585,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    if (hasTypeDeclaration()) {
-      return getTypeDeclaration().getReadableDescription();
-    }
-    return getSimpleSourceName();
+    return getTypeDeclaration().getReadableDescription();
   }
 
   @Override
@@ -618,8 +604,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
-        .setSuperTypeDescriptorFactory(() -> null)
-        .setTypeDeclaration(null);
+        .setSuperTypeDescriptorFactory(() -> null);
   }
 
   /** Builder for a TypeDescriptor. */
@@ -711,10 +696,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
       checkState(
-          typeDescriptor.hasTypeDeclaration()
-              == (typeDescriptor.isClass()
-                  || typeDescriptor.isInterface()
-                  || typeDescriptor.isEnum()));
+          typeDescriptor.isClass() || typeDescriptor.isInterface() || typeDescriptor.isEnum());
 
       DeclaredTypeDescriptor internedTypeDescriptor = interner.intern(typeDescriptor);
 
@@ -722,8 +704,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       if (TypeDescriptors.isInitialized()) {
         // Make sure there is only one global namespace TypeDescriptor (see b/32903150).
         checkArgument(
-            internedTypeDescriptor.getTypeDeclaration() == null
-                || internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName() == null
+            internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName() == null
                 || !internedTypeDescriptor.getTypeDeclaration().getQualifiedJsName().isEmpty()
                 || TypeDescriptors.get().globalNamespace == null
                 || internedTypeDescriptor == TypeDescriptors.get().globalNamespace,
