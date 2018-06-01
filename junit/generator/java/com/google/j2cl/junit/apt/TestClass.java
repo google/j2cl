@@ -38,12 +38,20 @@ public abstract class TestClass {
   public abstract ImmutableList<TestMethod> beforeClassMethods();
   public abstract ImmutableList<TestMethod> afterClassMethods();
 
+  public String jsUnitPackageName() {
+    return "javatests." + packageName();
+  }
+
   public String jsUnitAdapterClassName() {
-    return simpleName() + "__j2cl_JsUnitAdapter";
+    return simpleName() + "_Adapter";
   }
 
   public String jsUnitAdapterQualifiedClassName() {
-    return qualifiedName() + "__j2cl_JsUnitAdapter";
+    return jsUnitPackageName() + "." + jsUnitAdapterClassName();
+  }
+
+  public String jsUnitQualifiedName() {
+    return jsUnitAdapterQualifiedClassName() + "Suite";
   }
 
   /**

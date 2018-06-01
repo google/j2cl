@@ -47,8 +47,8 @@ public class %s {}
 """
 
 def _generate_test_input(name, test_class):
-  java_package = get_java_package(native.package_name()) or "_default_"
-  java_class = name.replace('-', '_').title() + "__generated_j2cl_test_input"
+  java_package = "javatests." + (get_java_package(native.package_name()) or "_default_")
+  java_class = name.replace('-', '_').title() + "J2clTestInput"
   java_code = _TEMPLATE % (native.package_name(), name, java_package, test_class, java_class)
 
   native.genrule(
