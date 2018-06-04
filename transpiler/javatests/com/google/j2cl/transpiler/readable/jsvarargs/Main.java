@@ -231,4 +231,13 @@ public class Main {
     int[] ints = null;
     Main.f2(ints);
   }
+
+  @JsFunction
+  interface GenericFunction<T> {
+    Object m(T i, T... args);
+  }
+
+  public <U> void testGenericJsFunctionWithVarags() {
+    GenericFunction<U> function = (n, param) -> param;
+  }
 }

@@ -158,6 +158,13 @@
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testNullJsVarargs"
 [ints] => [ints] "ints"
 [Main.f2(ints);] => [Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testNullJsVarargs"
+[GenericFunction<U> function = (n, param) -> param;] => [let function$1$ = (/** @param {M_U} n @param {...?} param */ (n, ...param) =>{
+      return param;
+    });] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testGenericJsFunctionWithVarags"
+[function] => [function$1$] "function"
+[n] => [n] "n"
+[param] => [param] "param"
+[param] => [return param;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<lambda in testGenericJsFunctionWithVarags>"
 [public class Main {
 
 ...  }

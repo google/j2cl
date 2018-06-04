@@ -249,6 +249,18 @@ class Main extends java_lang_Object {
   }
 
   /**
+   * @template M_U
+   * @return {void}
+   * @public
+   */
+  m_testGenericJsFunctionWithVarags__() {
+    let function$1$ =
+        (/** @param {M_U} n @param {...?} param */ (n, ...param) => {
+          return param;
+        });
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
