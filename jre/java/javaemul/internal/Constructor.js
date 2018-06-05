@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const Reflect = goog.require('goog.reflect');
+goog.module("javaemul.internal.Constructor");
 
 /**
- * // TODO(b/79389970): change classConstructor to Function.
- * @param {Object} classConstructor
- * @param {number=} opt_dimensionCount
- * @return {Class}
- * @public
+ * @typedef {function(new:?,...):undefined}
  */
-Class.$get = function(classConstructor, opt_dimensionCount) {
-  let dimensionCount = opt_dimensionCount || 0;
-  return Reflect.cache(
-      classConstructor.prototype, '$$class/' + dimensionCount, function() {
-        return new Class(
-            /** @type {Constructor} */ (classConstructor), dimensionCount);
-      });
-};
+var ctor;
+
+exports=ctor;

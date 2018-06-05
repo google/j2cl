@@ -20,6 +20,7 @@ goog.module('nativebootstrap.Util$impl');
 
 const Reflect = goog.require('goog.reflect');
 const jre = goog.require('jre');
+const Constructor = goog.require('javaemul.internal.Constructor');
 
 
 /**
@@ -45,7 +46,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @param {string} name
    * @public
    */
@@ -54,7 +55,8 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * // TODO(b/79389970): change ctor to Function
+   * @param {Object} ctor
    * @param {string} name
    * @public
    */
@@ -63,7 +65,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @param {string} name
    * @public
    */
@@ -72,7 +74,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @param {string} name
    * @param {string} shortName
    * @public
@@ -86,7 +88,7 @@ class Util {
 
   /**
    * Returns whether the provided ctor represents primitive type.
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @return {boolean}
    * @public
    */
@@ -95,7 +97,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @return {string}
    * @public
    */
@@ -110,7 +112,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @return {string}
    * @public
    */
@@ -125,7 +127,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @return {string}
    * @private
    */
@@ -141,7 +143,7 @@ class Util {
   }
 
   /**
-   * @param {*} ctor
+   * @param {Constructor} ctor
    * @return {number}
    * @public
    */
