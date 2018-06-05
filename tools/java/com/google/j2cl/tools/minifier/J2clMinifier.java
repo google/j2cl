@@ -68,7 +68,8 @@ public class J2clMinifier {
   private static final int S_BLOCK_COMMENT_END;
   private static final int S_DOUBLE_QUOTED_STRING;
   private static final int S_DOUBLE_QUOTED_STRING_ESCAPE;
-  private static final int S_IDENTIFIER;
+  private static final int S_NON_MINIMIZABLE_IDENTIFIER;
+  private static final int S_MINIMIZABLE_IDENTIFIER;
   private static final int S_LINE_COMMENT;
   private static final int S_LINE_COMMENT_END;
   private static final int S_MAYBE_BLOCK_COMMENT_END;
@@ -87,7 +88,8 @@ public class J2clMinifier {
       S_BLOCK_COMMENT_END = stateIndex++;
       S_DOUBLE_QUOTED_STRING = stateIndex++;
       S_DOUBLE_QUOTED_STRING_ESCAPE = stateIndex++;
-      S_IDENTIFIER = stateIndex++;
+      S_NON_MINIMIZABLE_IDENTIFIER = stateIndex++;
+      S_MINIMIZABLE_IDENTIFIER = stateIndex++;
       S_LINE_COMMENT = stateIndex++;
       S_LINE_COMMENT_END = stateIndex++;
       S_MAYBE_BLOCK_COMMENT_END = stateIndex++;
@@ -102,78 +104,58 @@ public class J2clMinifier {
     {
       nextState = new int[stateIndex][256];
 
-      setDefault(S_NON_IDENTIFIER, S_NON_IDENTIFIER);
-      nextState[S_NON_IDENTIFIER]['f'] = S_IDENTIFIER;
-      nextState[S_NON_IDENTIFIER]['m'] = S_IDENTIFIER;
-      nextState[S_NON_IDENTIFIER]['$'] = S_IDENTIFIER;
-      nextState[S_NON_IDENTIFIER]['/'] = S_MAYBE_COMMENT_START;
-      nextState[S_NON_IDENTIFIER]['\''] = S_SINGLE_QUOTED_STRING;
-      nextState[S_NON_IDENTIFIER]['"'] = S_DOUBLE_QUOTED_STRING;
+      setDefaultTransitions(S_NON_IDENTIFIER, S_NON_IDENTIFIER);
+      setIdentifierStartTransitions(S_NON_IDENTIFIER);
+      setCommentOrStringStartTransitions(S_NON_IDENTIFIER);
 
-      setDefault(S_IDENTIFIER, S_NON_IDENTIFIER);
-      for (char c = 0; c < 256; c++) {
-        if (isIdentifierChar(c)) {
-          nextState[S_IDENTIFIER][c] = S_IDENTIFIER;
-        }
-      }
-      nextState[S_IDENTIFIER]['/'] = S_MAYBE_COMMENT_START;
-      nextState[S_IDENTIFIER]['\''] = S_SINGLE_QUOTED_STRING;
-      nextState[S_IDENTIFIER]['"'] = S_DOUBLE_QUOTED_STRING;
+      setDefaultTransitions(S_MINIMIZABLE_IDENTIFIER, S_NON_IDENTIFIER);
+      setIdentifierCharTransitions(S_MINIMIZABLE_IDENTIFIER, S_MINIMIZABLE_IDENTIFIER);
+      setCommentOrStringStartTransitions(S_MINIMIZABLE_IDENTIFIER);
 
-      setDefault(S_MAYBE_COMMENT_START, S_NON_IDENTIFIER);
-      nextState[S_MAYBE_COMMENT_START]['f'] = S_IDENTIFIER;
-      nextState[S_MAYBE_COMMENT_START]['m'] = S_IDENTIFIER;
-      nextState[S_MAYBE_COMMENT_START]['$'] = S_IDENTIFIER;
+      setDefaultTransitions(S_NON_MINIMIZABLE_IDENTIFIER, S_NON_IDENTIFIER);
+      setIdentifierCharTransitions(S_NON_MINIMIZABLE_IDENTIFIER, S_NON_MINIMIZABLE_IDENTIFIER);
+      setCommentOrStringStartTransitions(S_NON_MINIMIZABLE_IDENTIFIER);
+
+      setDefaultTransitions(S_MAYBE_COMMENT_START, S_NON_IDENTIFIER);
+      setIdentifierStartTransitions(S_MAYBE_COMMENT_START);
       nextState[S_MAYBE_COMMENT_START]['/'] = S_LINE_COMMENT;
       nextState[S_MAYBE_COMMENT_START]['*'] = S_BLOCK_COMMENT;
       nextState[S_MAYBE_COMMENT_START]['\''] = S_SINGLE_QUOTED_STRING;
       nextState[S_MAYBE_COMMENT_START]['"'] = S_DOUBLE_QUOTED_STRING;
 
-      setDefault(S_LINE_COMMENT, S_LINE_COMMENT);
+      setDefaultTransitions(S_LINE_COMMENT, S_LINE_COMMENT);
       nextState[S_LINE_COMMENT]['\n'] = S_LINE_COMMENT_END;
 
-      setDefault(S_LINE_COMMENT_END, S_NON_IDENTIFIER);
-      nextState[S_LINE_COMMENT_END]['f'] = S_IDENTIFIER;
-      nextState[S_LINE_COMMENT_END]['m'] = S_IDENTIFIER;
-      nextState[S_LINE_COMMENT_END]['$'] = S_IDENTIFIER;
-      nextState[S_LINE_COMMENT_END]['/'] = S_MAYBE_COMMENT_START;
-      nextState[S_LINE_COMMENT_END]['\''] = S_SINGLE_QUOTED_STRING;
-      nextState[S_LINE_COMMENT_END]['"'] = S_DOUBLE_QUOTED_STRING;
+      setDefaultTransitions(S_LINE_COMMENT_END, S_NON_IDENTIFIER);
+      setIdentifierStartTransitions(S_LINE_COMMENT_END);
+      setCommentOrStringStartTransitions(S_LINE_COMMENT_END);
 
-      setDefault(S_BLOCK_COMMENT, S_BLOCK_COMMENT);
+      setDefaultTransitions(S_BLOCK_COMMENT, S_BLOCK_COMMENT);
       nextState[S_BLOCK_COMMENT]['*'] = S_MAYBE_BLOCK_COMMENT_END;
 
-      setDefault(S_MAYBE_BLOCK_COMMENT_END, S_BLOCK_COMMENT);
+      setDefaultTransitions(S_MAYBE_BLOCK_COMMENT_END, S_BLOCK_COMMENT);
       nextState[S_MAYBE_BLOCK_COMMENT_END]['/'] = S_BLOCK_COMMENT_END;
       nextState[S_MAYBE_BLOCK_COMMENT_END]['*'] = S_MAYBE_BLOCK_COMMENT_END;
 
-      setDefault(S_BLOCK_COMMENT_END, S_NON_IDENTIFIER);
-      nextState[S_BLOCK_COMMENT_END]['f'] = S_IDENTIFIER;
-      nextState[S_BLOCK_COMMENT_END]['m'] = S_IDENTIFIER;
-      nextState[S_BLOCK_COMMENT_END]['$'] = S_IDENTIFIER;
-      nextState[S_BLOCK_COMMENT_END]['/'] = S_MAYBE_COMMENT_START;
-      nextState[S_BLOCK_COMMENT_END]['\''] = S_SINGLE_QUOTED_STRING;
-      nextState[S_BLOCK_COMMENT_END]['"'] = S_DOUBLE_QUOTED_STRING;
+      setDefaultTransitions(S_BLOCK_COMMENT_END, S_NON_IDENTIFIER);
+      setIdentifierStartTransitions(S_BLOCK_COMMENT_END);
+      setCommentOrStringStartTransitions(S_BLOCK_COMMENT_END);
 
-      setDefault(S_SINGLE_QUOTED_STRING, S_SINGLE_QUOTED_STRING);
+      setDefaultTransitions(S_SINGLE_QUOTED_STRING, S_SINGLE_QUOTED_STRING);
       nextState[S_SINGLE_QUOTED_STRING]['\\'] = S_SINGLE_QUOTED_STRING_ESCAPE;
       nextState[S_SINGLE_QUOTED_STRING]['\''] = S_STRING_END;
 
-      setDefault(S_DOUBLE_QUOTED_STRING, S_DOUBLE_QUOTED_STRING);
+      setDefaultTransitions(S_DOUBLE_QUOTED_STRING, S_DOUBLE_QUOTED_STRING);
       nextState[S_DOUBLE_QUOTED_STRING]['\\'] = S_DOUBLE_QUOTED_STRING_ESCAPE;
       nextState[S_DOUBLE_QUOTED_STRING]['"'] = S_STRING_END;
 
-      setDefault(S_SINGLE_QUOTED_STRING_ESCAPE, S_SINGLE_QUOTED_STRING);
+      setDefaultTransitions(S_SINGLE_QUOTED_STRING_ESCAPE, S_SINGLE_QUOTED_STRING);
 
-      setDefault(S_DOUBLE_QUOTED_STRING_ESCAPE, S_DOUBLE_QUOTED_STRING);
+      setDefaultTransitions(S_DOUBLE_QUOTED_STRING_ESCAPE, S_DOUBLE_QUOTED_STRING);
 
-      setDefault(S_STRING_END, S_NON_IDENTIFIER);
-      nextState[S_STRING_END]['f'] = S_IDENTIFIER;
-      nextState[S_STRING_END]['m'] = S_IDENTIFIER;
-      nextState[S_STRING_END]['$'] = S_IDENTIFIER;
-      nextState[S_STRING_END]['/'] = S_MAYBE_COMMENT_START;
-      nextState[S_STRING_END]['\''] = S_SINGLE_QUOTED_STRING;
-      nextState[S_STRING_END]['"'] = S_DOUBLE_QUOTED_STRING;
+      setDefaultTransitions(S_STRING_END, S_NON_IDENTIFIER);
+      setIdentifierStartTransitions(S_STRING_END);
+      setCommentOrStringStartTransitions(S_STRING_END);
     }
   }
 
@@ -232,10 +214,31 @@ public class J2clMinifier {
         && identifier.contains("__");
   }
 
-  private static void setDefault(int currentState, int defaultNextState) {
+  private static void setDefaultTransitions(int currentState, int nextState) {
     for (char c = 0; c < 256; c++) {
-      nextState[currentState][c] = defaultNextState;
+      J2clMinifier.nextState[currentState][c] = nextState;
     }
+  }
+
+  private static void setIdentifierStartTransitions(int currentState) {
+    setIdentifierCharTransitions(currentState, S_NON_MINIMIZABLE_IDENTIFIER);
+    nextState[currentState]['f'] = S_MINIMIZABLE_IDENTIFIER;
+    nextState[currentState]['m'] = S_MINIMIZABLE_IDENTIFIER;
+    nextState[currentState]['$'] = S_MINIMIZABLE_IDENTIFIER;
+  }
+
+  private static void setIdentifierCharTransitions(int currentState, int nextState) {
+    for (char c = 0; c < 256; c++) {
+      if (isIdentifierChar(c)) {
+        J2clMinifier.nextState[currentState][c] = nextState;
+      }
+    }
+  }
+
+  private static void setCommentOrStringStartTransitions(int currentState) {
+    nextState[currentState]['/'] = S_MAYBE_COMMENT_START;
+    nextState[currentState]['\''] = S_SINGLE_QUOTED_STRING;
+    nextState[currentState]['"'] = S_DOUBLE_QUOTED_STRING;
   }
 
   @SuppressWarnings("unused")
@@ -377,38 +380,49 @@ public class J2clMinifier {
     // to logically combine the four states since there's no single name that accurately captures
     // all four ideas.
     {
-      transFn[S_NON_IDENTIFIER][S_IDENTIFIER] = startNewIdentifier;
+      transFn[S_NON_IDENTIFIER][S_MINIMIZABLE_IDENTIFIER] = startNewIdentifier;
+      transFn[S_NON_IDENTIFIER][S_NON_MINIMIZABLE_IDENTIFIER] = writeChar;
       transFn[S_NON_IDENTIFIER][S_NON_IDENTIFIER] = writeChar;
       transFn[S_NON_IDENTIFIER][S_MAYBE_COMMENT_START] = skipChar;
       transFn[S_NON_IDENTIFIER][S_SINGLE_QUOTED_STRING] = writeChar;
       transFn[S_NON_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = writeChar;
 
-      transFn[S_LINE_COMMENT_END][S_IDENTIFIER] = startNewIdentifier;
+      transFn[S_LINE_COMMENT_END][S_MINIMIZABLE_IDENTIFIER] = startNewIdentifier;
+      transFn[S_LINE_COMMENT_END][S_NON_MINIMIZABLE_IDENTIFIER] = writeChar;
       transFn[S_LINE_COMMENT_END][S_NON_IDENTIFIER] = writeChar;
       transFn[S_LINE_COMMENT_END][S_MAYBE_COMMENT_START] = skipChar;
       transFn[S_LINE_COMMENT_END][S_SINGLE_QUOTED_STRING] = writeChar;
       transFn[S_LINE_COMMENT_END][S_DOUBLE_QUOTED_STRING] = writeChar;
 
-      transFn[S_BLOCK_COMMENT_END][S_IDENTIFIER] = startNewIdentifier;
+      transFn[S_BLOCK_COMMENT_END][S_MINIMIZABLE_IDENTIFIER] = startNewIdentifier;
+      transFn[S_BLOCK_COMMENT_END][S_NON_MINIMIZABLE_IDENTIFIER] = writeChar;
       transFn[S_BLOCK_COMMENT_END][S_NON_IDENTIFIER] = writeChar;
       transFn[S_BLOCK_COMMENT_END][S_MAYBE_COMMENT_START] = skipChar;
       transFn[S_BLOCK_COMMENT_END][S_SINGLE_QUOTED_STRING] = writeChar;
       transFn[S_BLOCK_COMMENT_END][S_DOUBLE_QUOTED_STRING] = writeChar;
 
-      transFn[S_STRING_END][S_IDENTIFIER] = startNewIdentifier;
+      transFn[S_STRING_END][S_MINIMIZABLE_IDENTIFIER] = startNewIdentifier;
+      transFn[S_STRING_END][S_NON_MINIMIZABLE_IDENTIFIER] = writeChar;
       transFn[S_STRING_END][S_NON_IDENTIFIER] = writeChar;
       transFn[S_STRING_END][S_MAYBE_COMMENT_START] = skipChar;
       transFn[S_STRING_END][S_SINGLE_QUOTED_STRING] = writeChar;
       transFn[S_STRING_END][S_DOUBLE_QUOTED_STRING] = writeChar;
     }
 
-    transFn[S_IDENTIFIER][S_IDENTIFIER] = bufferIdentifierChar;
-    transFn[S_IDENTIFIER][S_NON_IDENTIFIER] = writeIdentifierAndChar;
-    transFn[S_IDENTIFIER][S_MAYBE_COMMENT_START] = writeIdentifier;
-    transFn[S_IDENTIFIER][S_SINGLE_QUOTED_STRING] = writeIdentifierAndChar;
-    transFn[S_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = writeIdentifierAndChar;
+    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_NON_MINIMIZABLE_IDENTIFIER] = writeChar;
+    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_NON_IDENTIFIER] = writeChar;
+    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_MAYBE_COMMENT_START] = skipChar;
+    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_SINGLE_QUOTED_STRING] = writeChar;
+    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = writeChar;
 
-    transFn[S_MAYBE_COMMENT_START][S_IDENTIFIER] = writeSlashAndStartNewIdentifier;
+    transFn[S_MINIMIZABLE_IDENTIFIER][S_MINIMIZABLE_IDENTIFIER] = bufferIdentifierChar;
+    transFn[S_MINIMIZABLE_IDENTIFIER][S_NON_IDENTIFIER] = writeIdentifierAndChar;
+    transFn[S_MINIMIZABLE_IDENTIFIER][S_MAYBE_COMMENT_START] = writeIdentifier;
+    transFn[S_MINIMIZABLE_IDENTIFIER][S_SINGLE_QUOTED_STRING] = writeIdentifierAndChar;
+    transFn[S_MINIMIZABLE_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = writeIdentifierAndChar;
+
+    transFn[S_MAYBE_COMMENT_START][S_MINIMIZABLE_IDENTIFIER] = writeSlashAndStartNewIdentifier;
+    transFn[S_MAYBE_COMMENT_START][S_NON_MINIMIZABLE_IDENTIFIER] = writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_MAYBE_COMMENT_START] = writeChar;
     transFn[S_MAYBE_COMMENT_START][S_LINE_COMMENT] = writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_BLOCK_COMMENT] = skipChar;
@@ -467,7 +481,7 @@ public class J2clMinifier {
       lastParseState = parseState;
     }
 
-    if (lastParseState == S_IDENTIFIER) {
+    if (lastParseState == S_MINIMIZABLE_IDENTIFIER) {
       // If the content ended in an identifier then end the identifier.
       writeIdentifier(minifiedContentBuffer, identifierBuffer, ' ');
     } else if (lastParseState == S_MAYBE_COMMENT_START) {

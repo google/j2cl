@@ -38,6 +38,10 @@ public class J2clMinifierTest extends TestCase {
     // result in an unreadable and illegal identifier of just "＿1". Make sure we leave them alone.
     assertNoChange("m___parseAndValidateInt__java_lang_String__int__int__int");
     assertNoChange("m___");
+    assertNoChange("thism_baz__java_lang_Number();");
+    assertNoChange("ClassEndingInLowercasem__InnerClass");
+    // TODO(b/109721646): Uncomment once the regex literals are handled correctly.
+    // assertNoChange("/m_baz__java_lang_Number/");
   }
 
   public void testBlockComments() {
@@ -128,6 +132,9 @@ public class J2clMinifierTest extends TestCase {
     // preserves trailing newlines
     assertNoChange("// foo \n");
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map\n");
+
+    // Division
+    assertChange("1/f_bar__java_lang_Number;", "1/bar＿1;");
   }
 
   public void testMeta() {
