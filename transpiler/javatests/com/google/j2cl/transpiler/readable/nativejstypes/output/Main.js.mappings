@@ -62,7 +62,7 @@
   }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [Object o1 = Bar.class;] => [let o1 = Class.$get($JavaScriptObject);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
-[o1 = Bar[][].class;] => [o1 = Class.$get(java_lang_Object, 1);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
+[o1 = Bar[][].class;] => [o1 = Class.$get(j_l_Object, 1);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeClassLiteral"
 [public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
 ...    bar.equals(new Object());
@@ -71,8 +71,8 @@
 [bar] => [bar] "bar"
 [bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
-[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, j_l_Object.$create__());] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeTypeObjectMethods"
 [public class Main {
   public static int testNativeJsTypeWithNamespace() {
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.<clinit>"

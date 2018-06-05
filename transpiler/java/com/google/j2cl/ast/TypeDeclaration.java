@@ -29,7 +29,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -59,7 +58,10 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDeclaration extends Node
-    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
+    implements HasJsNameInfo,
+        HasReadableDescription,
+        HasUnusableByJsSuppression,
+        HasSimpleSourceName {
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -112,29 +114,9 @@ public abstract class TypeDeclaration extends Node
     return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
   }
 
-  @Memoized
-  public String getShortAliasName() {
-    if (BootstrapType.typeDescriptors.contains(toUnparamterizedTypeDescriptor())) {
-      return "$" + getSimpleSourceName();
-    }
-    return getSimpleSourceName();
-  }
-
-  @Memoized
-  public String getLongAliasName() {
-    return getQualifiedSourceName().replace("_", "__").replace('.', '_');
-  }
-
   /** Returns the fully package qualified name like "com.google.common". */
   @Nullable
   public abstract String getPackageName();
-
-  /**
-   * Returns a list of Strings representing the current type's simple name and enclosing type simple
-   * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
-   * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
-   */
-  public abstract ImmutableList<String> getClassComponents();
 
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();
@@ -316,15 +298,6 @@ public abstract class TypeDeclaration extends Node
   @Memoized
   public @Nullable DeclaredTypeDescriptor toRawTypeDescriptor() {
     return getRawTypeDescriptorFactory().get(this);
-  }
-
-  /**
-   * Returns the unqualified simple source name like "Inner". Used when a readable name is required
-   * to refer to the type like a short alias, Debug/Error output, etc.
-   */
-  @Memoized
-  public String getSimpleSourceName() {
-    return AstUtils.getSimpleSourceName(getClassComponents());
   }
 
   /**

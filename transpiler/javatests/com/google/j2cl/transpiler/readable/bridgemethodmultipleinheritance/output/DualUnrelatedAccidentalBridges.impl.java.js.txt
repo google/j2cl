@@ -14,7 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -64,7 +64,7 @@ class DualUnrelatedAccidentalBridges extends
    */
   m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
     super.m_foo__java_lang_String__java_lang_Double(
-        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)),
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)),
         /**@type {?number} */ ($Casts.$to(arg1, Double)));
   }
 
@@ -78,7 +78,7 @@ class DualUnrelatedAccidentalBridges extends
    */
   m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
     super.m_foo__java_lang_String__java_lang_Number(
-        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
 
   /**
@@ -91,7 +91,7 @@ class DualUnrelatedAccidentalBridges extends
    */
   m_foo__java_lang_Object__java_lang_Double(arg0, arg1) {
     super.m_foo__java_lang_String__java_lang_Double(
-        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
 
   /**
@@ -119,7 +119,7 @@ class DualUnrelatedAccidentalBridges extends
   static $clinit() {
     DualUnrelatedAccidentalBridges.$clinit = function() {};
     Double = goog.module.get('java.lang.Double$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     SuperDualUnrelatedAccidentalBridges.$clinit();
   }

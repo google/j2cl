@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
 let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
-let com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
 let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
 let FunctionalInterfaceWithMethodReturningVoid = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
@@ -32,7 +32,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
-class Lambdas extends java_lang_Object {
+class Lambdas extends j_l_Object {
   /**
    * @private
    */
@@ -264,10 +264,9 @@ class Lambdas extends java_lang_Object {
                        return i$2$;
                      }))),
              /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));
-    let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(
-        ((/** Enum */ item) => {
-          return Long.m_valueOf__long($Long.fromInt(1));
-        }));
+    let f = Lambdas_Function.$adapt(((/** Enum */ item) => {
+      return Long.m_valueOf__long($Long.fromInt(1));
+    }));
   }
 
   /**
@@ -285,10 +284,9 @@ class Lambdas extends java_lang_Object {
    */
   static m_testLambdaCallingStaticMethod__() {
     Lambdas.$clinit();
-    let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(
-        ((/** * */ l) => {
-          return Lambdas.m_m__();
-        }));
+    let f = Lambdas_Function.$adapt(((/** * */ l) => {
+      return Lambdas.m_m__();
+    }));
   }
 
   /**
@@ -297,7 +295,7 @@ class Lambdas extends java_lang_Object {
    */
   m_testLambdaReturningVoidAsExpression__() {
     let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
-      java_lang_Object.$create__();
+      j_l_Object.$create__();
     }));
   }
 
@@ -415,9 +413,8 @@ class Lambdas extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
     $LambdaAdaptor$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
-    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+    Lambdas_Function = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
     Functional = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
     FunctionalInterface = goog.module.get(
@@ -439,7 +436,7 @@ class Lambdas extends java_lang_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
     Lambdas
         .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
         null;

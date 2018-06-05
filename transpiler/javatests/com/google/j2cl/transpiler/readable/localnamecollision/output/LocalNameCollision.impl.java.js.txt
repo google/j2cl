@@ -7,18 +7,18 @@
 goog.module('com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Asserts = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.Asserts$impl');
 let Class = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
-let com_google_j2cl_transpiler_readable_localnamecollision_package1_A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
-let com_google_j2cl_transpiler_readable_localnamecollision_package2_A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
+let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
+let c_g_j2cl_transpiler_readable_localnamecollision_package2_A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
-class LocalNameCollision extends java_lang_Object {
+class LocalNameCollision extends j_l_Object {
   /**
    * @private
    */
@@ -37,18 +37,15 @@ class LocalNameCollision extends java_lang_Object {
     let $Asserts$1$ = 1;
     let l_Asserts = 1;
     let com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;
-    let com_google_j2cl_transpiler_readable_localnamecollision_package1_A$1$ =
-        1;
-    let com_google_j2cl_transpiler_readable_localnamecollision_package2_A$1$ =
-        1;
-    let A = 1;
+    let com_google_j2cl_transpiler_readable_localnamecollision_package1_A = 1;
+    let com_google_j2cl_transpiler_readable_localnamecollision_package2_A = 1;
+    let A$1$ = 1;
     LocalNameCollision$1$ =
         LocalNameCollision.$isInstance(RuntimeException$1$) ||
         RuntimeException.$isInstance(RuntimeException$1$) ||
-        com_google_j2cl_transpiler_readable_localnamecollision_package1_A
-            .$isInstance(RuntimeException$1$) ||
-        com_google_j2cl_transpiler_readable_localnamecollision_package2_A
-            .$isInstance(RuntimeException$1$) ||
+        A.$isInstance(RuntimeException$1$) ||
+        c_g_j2cl_transpiler_readable_localnamecollision_package2_A.$isInstance(
+            RuntimeException$1$) ||
         Class.$isInstance(RuntimeException$1$);
     $Asserts.$assert(
         Asserts.$create__()
@@ -61,15 +58,15 @@ class LocalNameCollision extends java_lang_Object {
    * @param {*} Asserts$1$
    * @param {*} $Asserts$1$
    * @param {number} l_Asserts
-   * @param {number} A
+   * @param {number} A$1$
    * @return {boolean}
    * @public
    */
   m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int(
-      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A) {
+      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A$1$) {
     return LocalNameCollision$1$ &&
         LocalNameCollision.$isInstance(Asserts$1$) &&
-        Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);
+        Asserts.$isInstance($Asserts$1$) && (l_Asserts == A$1$);
   }
 
   /**
@@ -79,17 +76,17 @@ class LocalNameCollision extends java_lang_Object {
    * @param {*} Asserts$1$
    * @param {*} $Asserts$1$
    * @param {number} l_Asserts
-   * @param {number} A
+   * @param {number} A$1$
    * @return {!LocalNameCollision}
    * @public
    */
   static $create__boolean__java_lang_Object__java_lang_Object__int__int(
-      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A) {
+      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A$1$) {
     LocalNameCollision.$clinit();
     let $instance = new LocalNameCollision();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(
-            LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A);
+            LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A$1$);
     return $instance;
   }
 
@@ -100,16 +97,16 @@ class LocalNameCollision extends java_lang_Object {
    * @param {*} Asserts$1$
    * @param {*} $Asserts$1$
    * @param {number} l_Asserts
-   * @param {number} A
+   * @param {number} A$1$
    * @return {void}
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(
-      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A) {
+      LocalNameCollision$1$, Asserts$1$, $Asserts$1$, l_Asserts, A$1$) {
     this.$ctor__java_lang_Object__();
     let result = LocalNameCollision$1$ &&
         LocalNameCollision.$isInstance(Asserts$1$) &&
-        Asserts.$isInstance($Asserts$1$) && (l_Asserts == A);
+        Asserts.$isInstance($Asserts$1$) && (l_Asserts == A$1$);
   }
 
   /**
@@ -139,15 +136,13 @@ class LocalNameCollision extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.localnamecollision.Asserts$impl');
     Class = goog.module.get(
         'com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
-    com_google_j2cl_transpiler_readable_localnamecollision_package1_A =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
-    com_google_j2cl_transpiler_readable_localnamecollision_package2_A =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
+    A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
+    c_g_j2cl_transpiler_readable_localnamecollision_package2_A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

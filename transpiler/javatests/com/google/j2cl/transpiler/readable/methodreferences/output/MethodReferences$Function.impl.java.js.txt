@@ -16,8 +16,7 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
  * @interface
  * @template C_Function_T, C_Function_U
  */
-class
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function {
+class MethodReferences_Function {
   /**
    * @abstract
    * @param {C_Function_T} t
@@ -29,12 +28,11 @@ class
   /**
    * @template C_Function_T, C_Function_U
    * @param {?function(C_Function_T):C_Function_U} fn
-   * @return {com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function<C_Function_T, C_Function_U>}
+   * @return {MethodReferences_Function<C_Function_T, C_Function_U>}
    * @public
    */
   static $adapt(fn) {
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-        .$clinit();
+    MethodReferences_Function.$clinit();
     return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
   }
 
@@ -77,24 +75,21 @@ class
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-        .$clinit = function() {};
+    MethodReferences_Function.$clinit = function() {};
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function,
+    MethodReferences_Function,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Function'));
 
 
-com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-    .$markImplementor(/** @type {Function} */ (
-        com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function));
+MethodReferences_Function.$markImplementor(
+    /** @type {Function} */ (MethodReferences_Function));
 
 
-exports =
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
+exports = MethodReferences_Function;
 //# sourceMappingURL=MethodReferences$Function.js.map

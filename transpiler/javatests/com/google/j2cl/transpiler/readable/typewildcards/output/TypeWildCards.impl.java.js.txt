@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let GenericType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
@@ -18,11 +18,11 @@ let IntegerSupplier = goog.forwardDeclare('com.google.j2cl.transpiler.readable.t
 let Y = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
-let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class TypeWildCards extends java_lang_Object {
+class TypeWildCards extends j_l_Object {
   /**
    * @private
    */
@@ -123,7 +123,7 @@ class TypeWildCards extends java_lang_Object {
   /**
    * @template M_F, M_V
    * @param {List<M_F>} from
-   * @param {java_util_function_Function<?, ?>} function$1$
+   * @param {j_u_function_Function<?, ?>} function$1$
    * @return {List<M_V>}
    * @public
    */
@@ -160,7 +160,7 @@ class TypeWildCards extends java_lang_Object {
                 (TypeWildCards
                      .m_concat__java_util_List__java_util_List_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
                          elements, otherElements)),
-                java_util_function_Function.$adapt(((/** HasKey */ a) => {
+                j_u_function_Function.$adapt(((/** HasKey */ a) => {
                   /**@type {HasKey} */ (a).m_getKey__();
                   return /**@type {IntegerSupplier} */ (
                              $Casts.$to(a, IntegerSupplier))
@@ -220,10 +220,9 @@ class TypeWildCards extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier$impl');
     Y = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y$impl');
-    java_util_function_Function =
-        goog.module.get('java.util.function.Function$impl');
+    j_u_function_Function = goog.module.get('java.util.function.Function$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

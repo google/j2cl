@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.array.Arrays$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.Arrays.NativeType.$Overlay$impl');
@@ -15,14 +15,14 @@ let SomeObject = goog.forwardDeclare('com.google.j2cl.transpiler.readable.array.
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
-class Arrays extends java_lang_Object {
+class Arrays extends j_l_Object {
   /**
    * @private
    */
@@ -59,12 +59,12 @@ class Arrays extends java_lang_Object {
     let objects = new Array(100);
     objects = new Array(0);
     objects = [null, null];
-    let objects2d = /**@type {!Array<Array<*>>} */ (
-        $Arrays.$create([5, 10], java_lang_Object));
+    let objects2d =
+        /**@type {!Array<Array<*>>} */ ($Arrays.$create([5, 10], j_l_Object));
     objects2d = /**@type {!Array<Array<*>>} */ (
-        $Arrays.$init([[null, null], null], java_lang_Object, 2));
+        $Arrays.$init([[null, null], null], j_l_Object, 2));
     objects2d = /**@type {!Array<Array<*>>} */ (
-        $Arrays.$create([20, null], java_lang_Object));
+        $Arrays.$create([20, null], j_l_Object));
     let object = objects[0];
     object = objects2d[0][1];
     $Arrays.$set(objects, 0, null);
@@ -178,23 +178,22 @@ class Arrays extends java_lang_Object {
    * @public
    */
   m_testStringArrays___$pp_com_google_j2cl_transpiler_readable_array() {
-    let strings = /**@type {!Array<?string>} */ (
-        $Arrays.$create([100], java_lang_String));
+    let strings =
+        /**@type {!Array<?string>} */ ($Arrays.$create([100], j_l_String));
+    strings = /**@type {!Array<?string>} */ ($Arrays.$create([0], j_l_String));
     strings =
-        /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));
-    strings = /**@type {!Array<?string>} */ (
-        $Arrays.$init([null, null], java_lang_String));
+        /**@type {!Array<?string>} */ ($Arrays.$init([null, null], j_l_String));
     let strings2d = /**@type {!Array<Array<?string>>} */ (
-        $Arrays.$create([5, 10], java_lang_String));
+        $Arrays.$create([5, 10], j_l_String));
     strings2d = /**@type {!Array<Array<?string>>} */ ($Arrays.$init(
         [
           /**@type {!Array<?string>} */ (
-              $Arrays.$init([null, null], java_lang_String)),
+              $Arrays.$init([null, null], j_l_String)),
           null
         ],
-        java_lang_String, 2));
+        j_l_String, 2));
     strings2d = /**@type {!Array<Array<?string>>} */ (
-        $Arrays.$create([20, null], java_lang_String));
+        $Arrays.$create([20, null], j_l_String));
     let b = strings[0];
     b = strings2d[0][1];
     $Arrays.$set(strings, 0, null);
@@ -269,12 +268,12 @@ class Arrays extends java_lang_Object {
     SomeObject = goog.module.get(
         'com.google.j2cl.transpiler.readable.array.Arrays.SomeObject$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

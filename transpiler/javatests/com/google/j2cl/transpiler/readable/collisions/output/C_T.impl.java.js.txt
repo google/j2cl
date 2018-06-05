@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.collisions.C_T$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
@@ -17,7 +17,7 @@ let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 /**
  * @template C_T
  */
-class C_T extends java_lang_Object {
+class C__T extends j_l_Object {
   /**
    * @private
    */
@@ -28,12 +28,12 @@ class C_T extends java_lang_Object {
   /**
    * Factory method corresponding to constructor 'C_T()'.
    * @template C_T
-   * @return {!C_T<C_T>}
+   * @return {!C__T<C_T>}
    * @public
    */
   static $create__() {
-    C_T.$clinit();
-    let $instance = new C_T();
+    C__T.$clinit();
+    let $instance = new C__T();
     $instance.$ctor__com_google_j2cl_transpiler_readable_collisions_C_T__();
     return $instance;
   }
@@ -60,7 +60,7 @@ class C_T extends java_lang_Object {
    * @public
    */
   m_n___$pp_com_google_j2cl_transpiler_readable_collisions() {
-    let t = /**@type {!C_T<C_T>} */ (C_T.$create__())
+    let t = /**@type {!C__T<C_T>} */ (C__T.$create__())
                 .m_m___$pp_com_google_j2cl_transpiler_readable_collisions();
     $Numbers.m_byteValue__java_lang_Number(t);
     return t;
@@ -72,7 +72,7 @@ class C_T extends java_lang_Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof C_T;
+    return instance instanceof C__T;
   }
 
   /**
@@ -81,24 +81,24 @@ class C_T extends java_lang_Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, C_T);
+    return $Util.$canCastClass(classConstructor, C__T);
   }
 
   /**
    * @public
    */
   static $clinit() {
-    C_T.$clinit = function() {};
+    C__T.$clinit = function() {};
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 
 $Util.$setClassMetadata(
-    C_T,
+    C__T,
     $Util.$makeClassName('com.google.j2cl.transpiler.readable.collisions.C_T'));
 
 
 
-exports = C_T;
+exports = C__T;
 //# sourceMappingURL=C_T.js.map

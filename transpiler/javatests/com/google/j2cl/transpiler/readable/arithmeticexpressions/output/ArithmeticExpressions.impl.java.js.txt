@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -16,14 +16,14 @@ let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 
-class ArithmeticExpressions extends java_lang_Object {
+class ArithmeticExpressions extends j_l_Object {
   /**
    * @private
    */
@@ -135,8 +135,8 @@ class ArithmeticExpressions extends java_lang_Object {
     let strings = null;
     $Arrays.$set(
         strings, 0,
-        java_lang_String.m_valueOf__java_lang_Object(strings[0]) +
-            java_lang_String.m_valueOf__java_lang_Object(null));
+        j_l_String.m_valueOf__java_lang_Object(strings[0]) +
+            j_l_String.m_valueOf__java_lang_Object(null));
   }
 
   /**
@@ -366,12 +366,12 @@ class ArithmeticExpressions extends java_lang_Object {
     Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Long = goog.module.get('java.lang.Long$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
     ArithmeticExpressions
         .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
         $Long.fromInt(1);

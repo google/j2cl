@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction.$LambdaAdaptor$impl');
-let com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 
 
 /**
@@ -30,7 +30,7 @@ class BiFunction {
   /**
    * @abstract
    * @template M_BiFunction_andThen_V
-   * @param {com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function<?, ?>} after
+   * @param {Lambdas_Function<?, ?>} after
    * @return {BiFunction<C_BiFunction_T, C_BiFunction_U, M_BiFunction_andThen_V>}
    * @public
    */
@@ -52,7 +52,7 @@ class BiFunction {
    * @template M_BiFunction_andThen_V, C_BiFunction_T, C_BiFunction_U,
    * C_BiFunction_R
    * @param {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_R>} $thisArg
-   * @param {com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function<?, ?>} after
+   * @param {Lambdas_Function<?, ?>} after
    * @return {BiFunction<C_BiFunction_T, C_BiFunction_U, M_BiFunction_andThen_V>}
    * @public
    */

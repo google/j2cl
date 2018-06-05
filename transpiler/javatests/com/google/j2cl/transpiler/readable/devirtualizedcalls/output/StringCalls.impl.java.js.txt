@@ -7,13 +7,13 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class StringCalls extends java_lang_Object {
+class StringCalls extends j_l_Object {
   /**
    * @private
    */
@@ -49,11 +49,11 @@ class StringCalls extends java_lang_Object {
    */
   m_main__() {
     let literal = 'String';
-    let sub = java_lang_String.m_substring__java_lang_String__int(literal, 1);
+    let sub = j_l_String.m_substring__java_lang_String__int(literal, 1);
     let sub2 =
-        java_lang_String.m_substring__java_lang_String__int__int(literal, 2, 3);
-    let trimmed = java_lang_String.m_trim__java_lang_String(literal);
-    let newString = java_lang_String.m_toString__java_lang_String(literal);
+        j_l_String.m_substring__java_lang_String__int__int(literal, 2, 3);
+    let trimmed = j_l_String.m_trim__java_lang_String(literal);
+    let newString = j_l_String.m_toString__java_lang_String(literal);
   }
 
   /**
@@ -79,8 +79,8 @@ class StringCalls extends java_lang_Object {
    */
   static $clinit() {
     StringCalls.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    java_lang_Object.$clinit();
+    j_l_String = goog.module.get('java.lang.String$impl');
+    j_l_Object.$clinit();
   }
 };
 

@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.L$impl');
 const K = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.K$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -67,7 +67,7 @@ class L extends K {
    */
   m_fun__java_lang_Object__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_bridgejsmethod(
       arg0, arg1) {
-    this.fun(/**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+    this.fun(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
 
   /**
@@ -93,7 +93,7 @@ class L extends K {
    */
   static $clinit() {
     L.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     K.$clinit();
   }

@@ -7,18 +7,18 @@
 goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.$3$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main$impl');
-let elemental2_promise_IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
-let elemental2_promise_Promise_$Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
+let IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class $3 extends java_lang_Object {
+class $3 extends j_l_Object {
   /**
    * @private
    */
@@ -67,12 +67,11 @@ class $3 extends java_lang_Object {
   async m_doSomething__() {
     let tmp = this;
     return /**@type {Promise<Integer>} */ (
-        elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(
-            /**@type {Integer} */ ($Casts.$to(
-                (await this
-                     .f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3
-                     .f_x__com_google_j2cl_transpiler_readable_jsasync_Main_),
-                Integer))));
+        $Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to(
+            (await this
+                 .f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3
+                 .f_x__com_google_j2cl_transpiler_readable_jsasync_Main_),
+            Integer))));
   }
 
   /**
@@ -111,11 +110,10 @@ class $3 extends java_lang_Object {
    */
   static $clinit() {
     $3.$clinit = function() {};
-    elemental2_promise_Promise_$Overlay =
-        goog.module.get('elemental2.promise.Promise.$Overlay$impl');
+    $Overlay = goog.module.get('elemental2.promise.Promise.$Overlay$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

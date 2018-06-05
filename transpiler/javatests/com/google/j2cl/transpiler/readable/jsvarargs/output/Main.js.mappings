@@ -141,9 +141,9 @@
 [m.f4(ints);] => [m.f4(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [AFunction a = new AFunction();] => [let a = AFunction.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [a] => [a] "a"
-[Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[Object o1 = new Object();] => [let o1 = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [o1] => [o1] "o1"
-[Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[Object o2 = new Object();] => [let o2 = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [o2] => [o2] "o2"
 [a.f1(0, o1, o2);] => [a(0, o1, o2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [a.f1(0);] => [a(0);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
@@ -168,4 +168,4 @@
 [public class Main {
 
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"

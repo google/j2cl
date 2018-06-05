@@ -7,16 +7,16 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
 
 
-const com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function = goog.require('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const MethodReferences_Function = goog.require('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @template C_Function_T, C_Function_U
- * @implements {com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function<C_Function_T, C_Function_U>}
+ * @implements {MethodReferences_Function<C_Function_T, C_Function_U>}
  */
-class $LambdaAdaptor extends java_lang_Object {
+class $LambdaAdaptor extends j_l_Object {
   /**
    * JsConstructor '$LambdaAdaptor($JsFunction)'.
    * @param {?function(C_Function_T):C_Function_U} fn
@@ -80,7 +80,7 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 
@@ -90,8 +90,7 @@ $Util.$setClassMetadata(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Function$$LambdaAdaptor'));
 
 
-com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-    .$markImplementor($LambdaAdaptor);
+MethodReferences_Function.$markImplementor($LambdaAdaptor);
 
 
 exports = $LambdaAdaptor;

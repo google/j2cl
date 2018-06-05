@@ -85,7 +85,7 @@
 [l = (long) d;] => [l = $Primitives.$narrowDoubleToLong(d);] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
 [f = (float) d;] => [f = d;] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
 [d = (double) d;] => [d = d;] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testPrimitiveCasts"
-[Object o = new Object();] => [let o = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testReferenceToPrimitive"
+[Object o = new Object();] => [let o = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testReferenceToPrimitive"
 [o] => [o] "o"
 [boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.$to(o, Boolean)));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testReferenceToPrimitive"
 [bool] => [bool] "bool"
@@ -202,4 +202,4 @@
 [public class CastPrimitives {
   public void testPrimitiveCasts() {
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"

@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
@@ -19,7 +19,7 @@ let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl')
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -100,7 +100,7 @@ class Main extends java_lang_Object {
   static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
     let o1 = Class.$get($JavaScriptObject);
-    o1 = Class.$get(java_lang_Object, 1);
+    o1 = Class.$get(j_l_Object, 1);
   }
 
   /**
@@ -113,7 +113,7 @@ class Main extends java_lang_Object {
     $Objects.m_toString__java_lang_Object(bar);
     $Objects.m_hashCode__java_lang_Object(bar);
     $Objects.m_equals__java_lang_Object__java_lang_Object(
-        bar, java_lang_Object.$create__());
+        bar, j_l_Object.$create__());
   }
 
   /**
@@ -149,7 +149,7 @@ class Main extends java_lang_Object {
     Class = goog.module.get('java.lang.Class$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

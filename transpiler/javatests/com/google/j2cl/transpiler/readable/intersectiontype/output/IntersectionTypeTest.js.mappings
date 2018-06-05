@@ -87,7 +87,7 @@ public class IntersectionTypeTest<U> {
 [private static <T extends A & EmptyA> T m() {
     return (T) get(new Object());
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
-[return (T) get(new Object());] => [return /**@type {A} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(java_lang_Object.$create__()), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
+[return (T) get(new Object());] => [return /**@type {A} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(j_l_Object.$create__()), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
 [private static <T extends A & EmptyA> Getable<T> n() {
     return null;
   }] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"
@@ -103,4 +103,4 @@ public class IntersectionTypeTest<U> {
 [@SuppressWarnings({"TypeParameterUnusedInFormals", "unused"})
 public class IntersectionTypeTest<U> {
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.<clinit>"

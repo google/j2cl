@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.varargs.Varargs$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
@@ -16,7 +16,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Varargs extends java_lang_Object {
+class Varargs extends j_l_Object {
   /**
    * @private
    */
@@ -123,18 +123,15 @@ class Varargs extends java_lang_Object {
   m_main__() {
     let v = Varargs.$create__();
     v.m_test__int__arrayOf_java_lang_Object(1, []);
-    v.m_test__int__arrayOf_java_lang_Object(1, [java_lang_Object.$create__()]);
-    v.m_test__int__arrayOf_java_lang_Object(1, [java_lang_Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
     v.m_test__int__arrayOf_java_lang_Object(1, []);
     v.m_test__int__arrayOf_java_lang_Object(
-        1, /**@type {!Array<Array<*>>} */
-        ($Arrays.$init([], java_lang_Object, 2)));
+        1, /**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));
     v.m_testCloneable__arrayOf_java_lang_Cloneable(
-        /**@type {!Array<Array<*>>} */ (
-            $Arrays.$init([], java_lang_Object, 2)));
+        /**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));
     v.m_testSerializable__arrayOf_java_io_Serializable(
-        /**@type {!Array<Array<*>>} */ (
-            $Arrays.$init([], java_lang_Object, 2)));
+        /**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));
   }
 
   /**
@@ -162,7 +159,7 @@ class Varargs extends java_lang_Object {
     Varargs.$clinit = function() {};
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

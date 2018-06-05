@@ -7,12 +7,12 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayProducer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer$impl');
 let BiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction$impl');
-let com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
+let MethodReferences_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
 let ObjectCapturingOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ObjectCapturingOuter$impl');
 let Predicate = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Predicate$impl');
 let Producer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
@@ -27,7 +27,7 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 /**
  * @template C_T
  */
-class MethodReferences extends java_lang_Object {
+class MethodReferences extends j_l_Object {
   /**
    * @private
    */
@@ -64,7 +64,7 @@ class MethodReferences extends java_lang_Object {
    */
   static m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences() {
     MethodReferences.$clinit();
-    return java_lang_Object.$create__();
+    return j_l_Object.$create__();
   }
 
   /**
@@ -102,7 +102,7 @@ class MethodReferences extends java_lang_Object {
         /** MethodReferences<*> */ $$qualifier2,
         /** MethodReferences<*> */ $$qualifier3;
     let objectFactory = Producer.$adapt((() => {
-      return java_lang_Object.$create__();
+      return j_l_Object.$create__();
     }));
     objectFactory = Producer.$adapt((() => {
       return MethodReferences
@@ -123,12 +123,11 @@ class MethodReferences extends java_lang_Object {
                       arg1);
             })));
     let functionWithParameters =
-        com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-            .$adapt(((/** (Number|number) */ arg0$1$) => {
-              return this
-                  .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
-                      arg0$1$);
-            }));
+        MethodReferences_Function.$adapt(((/** (Number|number) */ arg0$1$) => {
+          return this
+              .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
+                  arg0$1$);
+        }));
     let objectPredicate = /**@type {Predicate<MethodReferences<C_T>>} */ (
         Predicate.$adapt(((/** MethodReferences<*> */ arg0$2$) => {
           return Boolean.m_booleanValue__java_lang_Boolean(arg0$2$.m_isA__());
@@ -152,22 +151,20 @@ class MethodReferences extends java_lang_Object {
                .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
          })));
     let function$1$ =
-        /**@type {com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function<MethodReferences<C_T>, *>} */
-        (com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-             .$adapt(((/** MethodReferences<*> */ arg0$4$) => {
-               return arg0$4$
-                   .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
-             })));
+        /**@type {MethodReferences_Function<MethodReferences<C_T>, *>} */
+        (MethodReferences_Function.$adapt(((/** MethodReferences<*> */ arg0$4$) => {
+          return arg0$4$
+              .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
+        })));
     let arrayFactory =
-        com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function
-            .$adapt(((/** Integer */ arg0$5$) => {
-              return new Array(arg0$5$.m_intValue__());
-            }));
+        MethodReferences_Function.$adapt(((/** Integer */ arg0$5$) => {
+          return new Array(arg0$5$.m_intValue__());
+        }));
     let superToStringProducer = Producer.$adapt((() => {
-      return java_lang_Object.prototype.toString.call(this);
+      return j_l_Object.prototype.toString.call(this);
     }));
     let jsobjectFactory = (() => {
-      return java_lang_Object.$create__();
+      return j_l_Object.$create__();
     });
     jsobjectFactory = (() => {
       return MethodReferences
@@ -188,7 +185,7 @@ class MethodReferences extends java_lang_Object {
       return new Array(arg0$7$.m_intValue__());
     });
     let jsSuperToStringProducer = (() => {
-      return java_lang_Object.prototype.toString.call(this);
+      return j_l_Object.prototype.toString.call(this);
     });
     let jsbiFunction =
         ((/** MethodReferences<*> */ arg0$8$,
@@ -255,9 +252,8 @@ class MethodReferences extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer$impl');
     BiFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction$impl');
-    com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
+    MethodReferences_Function = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
     ObjectCapturingOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ObjectCapturingOuter$impl');
     Predicate = goog.module.get(
@@ -268,7 +264,7 @@ class MethodReferences extends java_lang_Object {
     Double = goog.module.get('java.lang.Double$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
     let /** * */ $$qualifier0;
     MethodReferences
         .$f_staticStringProducer__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences =

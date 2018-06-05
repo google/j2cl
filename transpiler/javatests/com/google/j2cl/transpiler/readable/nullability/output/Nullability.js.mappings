@@ -55,7 +55,7 @@
 [@JsMethod
   public String m3(@Nonnull String a, @NonNull String... args) {
     return null;
-  }] => [$Arrays.$stampType(args, java_lang_String, 1);] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
+  }] => [$Arrays.$stampType(args, j_l_String, 1);] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nullability.Nullability.m3"
 [f] => [f] "f"
 [@Nonnull private String f1 = "Hello";] => [this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ = "Hello";] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
@@ -65,11 +65,11 @@
 [private List<@NonNull String> f5 = new ArrayList<>();] => [this.f_f5__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!ArrayList<string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [private @Nonnull List<String> f6 = new ArrayList<>();] => [this.f_f6__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!ArrayList<?string>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [private List<String> f7 = null;] => [this.f_f7__com_google_j2cl_transpiler_readable_nullability_Nullability_ = null;] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
-[private @NonNull String @NonNull [] f8 = {};] => [this.f_f8__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<string>} */ ($Arrays.$init([], java_lang_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
-[private String @NonNull [] f9 = {};] => [this.f_f9__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<?string>} */ ($Arrays.$init([], java_lang_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
-[private @NonNull String[] f10 = {};] => [this.f_f10__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<string>} */ ($Arrays.$init([], java_lang_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
+[private @NonNull String @NonNull [] f8 = {};] => [this.f_f8__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<string>} */ ($Arrays.$init([], j_l_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
+[private String @NonNull [] f9 = {};] => [this.f_f9__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<?string>} */ ($Arrays.$init([], j_l_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
+[private @NonNull String[] f10 = {};] => [this.f_f10__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {!Array<string>} */ ($Arrays.$init([], j_l_String));] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [private List<String> f12 = Lists.newArrayList();] => [this.f_f12__com_google_j2cl_transpiler_readable_nullability_Nullability_ = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__());] "com.google.j2cl.transpiler.readable.nullability.Nullability.<init>"
 [public class Nullability {
   @Nonnull private String f1 = "Hello";
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability.<clinit>"

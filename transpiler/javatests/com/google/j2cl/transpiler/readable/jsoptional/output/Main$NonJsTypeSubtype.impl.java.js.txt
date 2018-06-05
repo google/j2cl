@@ -8,17 +8,17 @@ goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.NonJsTypeSubtyp
 
 
 const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.I$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
  * @implements {I<?string>}
  */
-class NonJsTypeSubtype extends java_lang_Object {
+class NonJsTypeSubtype extends j_l_Object {
   /**
    * @private
    */
@@ -66,7 +66,7 @@ class NonJsTypeSubtype extends java_lang_Object {
    */
   m(arg0, arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)), arg1);
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
 
   /**
@@ -92,9 +92,9 @@ class NonJsTypeSubtype extends java_lang_Object {
    */
   static $clinit() {
     NonJsTypeSubtype.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

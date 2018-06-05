@@ -7,19 +7,19 @@
 goog.module('com.google.j2cl.transpiler.readable.jsoverlay.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+let NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
 let NativeJsTypeInterfaceWithOverlayImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
-let com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let NativeJsTypeWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -54,41 +54,39 @@ class Main extends java_lang_Object {
    */
   m_test__() {
     let n = new NativeJsTypeWithOverlay();
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+    $Overlay
         .m_callM__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
             n);
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
-        .m_fun__();
+    $Overlay.m_fun__();
     NativeJsTypeWithOverlay.n();
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+    $Overlay
         .m_bar___$p_com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay();
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+    $Overlay
         .m_foo__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$p_com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay(
             n);
     let a =
-        com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+        $Overlay
             .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay +
         NativeJsTypeWithOverlay.nonJsOverlayField;
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+    $Overlay
         .f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
         null;
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
-        .m_varargs__arrayOf_int(
-            /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay
+    $Overlay.m_varargs__arrayOf_int(
+        /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
+    $Overlay
         .m_baz__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$p_com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay(
             n);
     let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();
     foo.m();
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay
+    NativeJsTypeInterfaceWithOverlay_$Overlay
         .m_callM__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(
             foo);
     let b =
-        java_lang_String.m_valueOf__java_lang_Object(
-            com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay
+        j_l_String.m_valueOf__java_lang_Object(
+            NativeJsTypeInterfaceWithOverlay_$Overlay
                 .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) +
-        java_lang_String.m_valueOf__java_lang_Object(
-            com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay
+        j_l_String.m_valueOf__java_lang_Object(
+            NativeJsTypeInterfaceWithOverlay_$Overlay
                 .f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
   }
 
@@ -115,20 +113,18 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+    NativeJsTypeInterfaceWithOverlay_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
     NativeJsTypeInterfaceWithOverlayImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
-    com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     NativeJsTypeWithOverlay =
         goog.module.get('test.foo.NativeJsTypeWithOverlay');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

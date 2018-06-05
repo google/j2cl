@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInte
 const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInterfaceWithOverlay');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 class $Overlay {
@@ -63,10 +63,10 @@ class $Overlay {
    */
   static $clinit() {
     $Overlay.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    j_l_Object = goog.module.get('java.lang.Object$impl');
     $Overlay
         .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
-        java_lang_Object.$create__();
+        j_l_Object.$create__();
   }
 };
 

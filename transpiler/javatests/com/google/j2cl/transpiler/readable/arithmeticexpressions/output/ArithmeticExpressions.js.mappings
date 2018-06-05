@@ -103,7 +103,7 @@
 [booleans[0] |= true;] => [$Arrays.$set(booleans, 0, !!(+booleans[0] | +true));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [String[] strings = null;] => [let strings = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [strings] => [strings] "strings"
-[strings[0] += null;] => [$Arrays.$set(strings, 0, java_lang_String.m_valueOf__java_lang_Object(strings[0]) + java_lang_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
+[strings[0] += null;] => [$Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object(strings[0]) + j_l_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [private static long[] getLongArray() {
     return null;
   }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
@@ -185,7 +185,7 @@
 [public class ArithmeticExpressions {
   private static final float FLOAT_CONSTANT = 1.1f;
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long one = 1;] => [ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"

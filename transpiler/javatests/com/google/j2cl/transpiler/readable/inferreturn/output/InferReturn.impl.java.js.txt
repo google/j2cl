@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.inferreturn.InferReturn$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
@@ -18,7 +18,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 /**
  * @template C_T
  */
-class InferReturn extends java_lang_Object {
+class InferReturn extends j_l_Object {
   /**
    * @private
    */
@@ -108,7 +108,7 @@ class InferReturn extends java_lang_Object {
   static m_newArray__java_lang_Object(foo) {
     InferReturn.$clinit();
     return /**@type {Array<*>} */ (
-        $Arrays.$castTo(new Array(0), java_lang_Object, 1));
+        $Arrays.$castTo(new Array(0), j_l_Object, 1));
   }
 
   /**
@@ -155,7 +155,7 @@ class InferReturn extends java_lang_Object {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

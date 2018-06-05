@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClas
 const Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -49,7 +49,7 @@ class SubVarargs extends Varargs {
    */
   static $create__int(j) {
     SubVarargs.$clinit();
-    let $instance = new SubVarargs(java_lang_Object.$create__(), j);
+    let $instance = new SubVarargs(j_l_Object.$create__(), j);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_SubVarargs__int(
             j);
@@ -72,7 +72,7 @@ class SubVarargs extends Varargs {
   static m_subNativeInvocation___$pp_com_google_j2cl_transpiler_readable_jsconstructor() {
     SubVarargs.$clinit();
     let unusedS1 = SubVarargs.$create__int(2);
-    let unusedS2 = new SubVarargs(java_lang_Object.$create__(), 1, 2, 3);
+    let unusedS2 = new SubVarargs(j_l_Object.$create__(), 1, 2, 3);
   }
 
   /**
@@ -98,7 +98,7 @@ class SubVarargs extends Varargs {
    */
   static $clinit() {
     SubVarargs.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    j_l_Object = goog.module.get('java.lang.Object$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

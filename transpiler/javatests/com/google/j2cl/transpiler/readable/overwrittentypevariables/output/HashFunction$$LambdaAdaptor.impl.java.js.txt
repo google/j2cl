@@ -8,10 +8,10 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFu
 
 
 const HashFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -19,7 +19,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template C_T
  * @implements {HashFunction<C_T>}
  */
-class $LambdaAdaptor extends java_lang_Object {
+class $LambdaAdaptor extends j_l_Object {
   /**
    * JsConstructor '$LambdaAdaptor($JsFunction)'.
    * @param {?function(C_T):?string} fn
@@ -58,7 +58,7 @@ class $LambdaAdaptor extends java_lang_Object {
         ($function =
              this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor,
          $function(arg0)),
-        java_lang_String));
+        j_l_String));
   }
 
   /**
@@ -84,9 +84,9 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

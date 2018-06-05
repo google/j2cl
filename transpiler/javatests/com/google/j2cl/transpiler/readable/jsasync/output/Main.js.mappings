@@ -32,46 +32,46 @@
 ...  private static native <T> T await(IThenable<T> thenable);
 }] => [this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.jsasync.Main.emptyAsyncMethod"
-[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [result] => [result] "result"
 [return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>} */ (this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(Integer.m_valueOf__int(result)));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [value] => [value] "value"
-[return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<*>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object((await /**@type {Promise<*>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(value)))));] "com.google.j2cl.transpiler.readable.jsasync.Main.parametricAsyncMethod"
+[return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<*>} */ ($Overlay.m_resolve__java_lang_Object((await /**@type {Promise<*>} */ ($Overlay.m_resolve__java_lang_Object(value)))));] "com.google.j2cl.transpiler.readable.jsasync.Main.parametricAsyncMethod"
 [@JsAsync
   static IThenable<Void> staticAsyncMethod() {
     return Promise.resolve(await(Promise.resolve((Void) null)));
   }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
-[return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to((await /**@type {Promise<?void>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))))), Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to((await /**@type {Promise<?void>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))))), Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
 [AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));] => [let i = AsyncInterface.$adapt((async () =>{
-      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
+      return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
     }));] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [i] => [i] "i"
-[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
 [BaseInterface o =
         new BaseInterface() {
 ...          }
         };] => [let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [o] => [o] "o"
 [AsyncJsFunctionInterface j = () -> Promise.resolve(await(Promise.resolve(5)));] => [let j = (async () =>{
-      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
+      return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
     });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [j] => [j] "j"
-[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
 [JsFunctionInterface optimizableJsFunction =
         new JsFunctionInterface() {
 ...          }
         };] => [let optimizableJsFunction = (() =>{
-      return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
+      return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));
     });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [optimizableJsFunction] => [optimizableJsFunction] "optimizableJsFunction"
-[return Promise.resolve(5);] => [return /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main$2.doSomething"
+[return Promise.resolve(5);] => [return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main$2.doSomething"
 [JsFunctionInterface unoptimizableJsFunction =
         new JsFunctionInterface() {
 ...          }
         };] => [let unoptimizableJsFunction = $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [unoptimizableJsFunction] => [unoptimizableJsFunction] "unoptimizableJsFunction"
-[private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = /**@type {Promise<Integer>} */ (elemental2_promise_Promise_$Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(10)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(10)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
 [public class Main {
 
 ...  private static native <T> T await(IThenable<T> thenable);
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"

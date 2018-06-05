@@ -633,7 +633,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendln("/* NATIVE.JS EPILOG */");
     sourceBuilder.newLine();
 
-    String longAliasName = type.getDeclaration().getLongAliasName();
+    // A predictable unique alias to current type so native.js could reference it safely.
+    String longAliasName =
+        type.getDeclaration().getQualifiedSourceName().replace("_", "__").replace('.', '_');
     if (!className.equals(longAliasName)) {
       sourceBuilder.appendln("const " + longAliasName + " = " + className + ";");
       sourceBuilder.newLine();

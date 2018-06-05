@@ -7,18 +7,18 @@
 goog.module('com.google.j2cl.transpiler.readable.jstype.SomeJsType$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_jstype_SomeJsType_Star_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_jstype_SomeJsType_Wildcard_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
+let Wildcard_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
  * @template C_T
  */
-class SomeJsType extends java_lang_Object {
+class SomeJsType extends j_l_Object {
   /**
    * JsConstructor 'SomeJsType()'.
    * @public
@@ -96,13 +96,10 @@ class SomeJsType extends java_lang_Object {
    * @public
    */
   testStarAndWildCard(s, w) {
-    let object = java_lang_Object.$create__();
-    let star = /**@type {*} */ ($Casts.$to(
-        $Casts.$to(3.0, java_lang_Object),
-        com_google_j2cl_transpiler_readable_jstype_SomeJsType_Star_$Overlay));
-    return /**@type {?} */ ($Casts.$to(
-        star,
-        com_google_j2cl_transpiler_readable_jstype_SomeJsType_Wildcard_$Overlay));
+    let object = j_l_Object.$create__();
+    let star =
+        /**@type {*} */ ($Casts.$to($Casts.$to(3.0, j_l_Object), $Overlay));
+    return /**@type {?} */ ($Casts.$to(star, Wildcard_$Overlay));
   }
 
   /**
@@ -128,14 +125,12 @@ class SomeJsType extends java_lang_Object {
    */
   static $clinit() {
     SomeJsType.$clinit = function() {};
-    com_google_j2cl_transpiler_readable_jstype_SomeJsType_Star_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
-    com_google_j2cl_transpiler_readable_jstype_SomeJsType_Wildcard_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
+    Wildcard_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

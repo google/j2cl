@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
+let Immediate_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -53,28 +53,28 @@ class Main extends java_lang_Object {
     Main.$clinit();
     {
       let transitive = null;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay
+      $Overlay
           .m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               transitive, 'arg1');
       transitive.jsProperty;
     }
     {
       let immediate = null;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay
+      $Overlay
           .m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               immediate, 'arg1');
       immediate.jsProperty;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$Overlay
+      Immediate_$Overlay
           .m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               immediate);
     }
     {
       let nonNativeUpper = null;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay
+      $Overlay
           .m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               nonNativeUpper, 'arg1');
       nonNativeUpper.jsProperty;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$Overlay
+      Immediate_$Overlay
           .m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               nonNativeUpper);
       nonNativeUpper
@@ -82,11 +82,11 @@ class Main extends java_lang_Object {
     }
     {
       let nonNativeLower = null;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay
+      $Overlay
           .m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               nonNativeLower, 'arg1');
       nonNativeLower.jsProperty;
-      com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$Overlay
+      Immediate_$Overlay
           .m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
               nonNativeLower);
       nonNativeLower
@@ -119,13 +119,11 @@ class Main extends java_lang_Object {
    */
   static $clinit() {
     Main.$clinit = function() {};
-    com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-    com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
-    java_lang_Object.$clinit();
+    Immediate_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
+    j_l_Object.$clinit();
   }
 };
 

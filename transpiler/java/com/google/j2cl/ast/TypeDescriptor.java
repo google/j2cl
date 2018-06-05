@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 /** A usage-site reference to a type. */
 @Visitable
 public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasReadableDescription {
+    implements Comparable<TypeDescriptor>, HasReadableDescription, HasSimpleSourceName {
 
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
   public String getSimpleBinaryName() {
@@ -45,14 +45,6 @@ public abstract class TypeDescriptor extends Node
   }
 
   /**
-   * Returns the unqualified simple source name like "Inner". Used when a readable name is required
-   * to refer to the type like a short alias, Debug/Error output, etc.
-   */
-  public String getSimpleSourceName() {
-    return AstUtils.getSimpleSourceName(getClassComponents());
-  }
-
-  /**
    * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
    * places where original name is useful (like aliasing, identifying the corressponding java type,
    * Debug/Error output, etc.
@@ -66,6 +58,7 @@ public abstract class TypeDescriptor extends Node
    * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
    * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
    */
+  @Override
   public ImmutableList<String> getClassComponents() {
     return ImmutableList.of();
   }

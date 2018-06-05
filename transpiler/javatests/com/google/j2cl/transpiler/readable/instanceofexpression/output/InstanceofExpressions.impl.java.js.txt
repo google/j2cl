@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.$1$impl');
@@ -21,12 +21,12 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class InstanceofExpressions extends java_lang_Object {
+class InstanceofExpressions extends j_l_Object {
   /**
    * @private
    */
@@ -65,7 +65,7 @@ class InstanceofExpressions extends java_lang_Object {
     let /** boolean */ b;
     b = !$Equality.$same(object, null);
     b = InstanceofExpressions.$isInstance(object);
-    b = java_lang_String.$isInstance(object);
+    b = j_l_String.$isInstance(object);
   }
 
   /**
@@ -73,7 +73,7 @@ class InstanceofExpressions extends java_lang_Object {
    * @public
    */
   m_testInstanceofInterface__() {
-    let o = java_lang_Object.$create__();
+    let o = j_l_Object.$create__();
     let /** boolean */ b;
     b = Serializable.$isInstance(o);
     b = !$Equality.$same(
@@ -108,24 +108,24 @@ class InstanceofExpressions extends java_lang_Object {
    * @public
    */
   m_testInstanceOfArray__() {
-    let object = java_lang_Object.$create__();
+    let object = j_l_Object.$create__();
     let objectArray = new Array(0);
-    let objectDoubleArray = /**@type {!Array<Array<*>>} */ (
-        $Arrays.$create([0, null], java_lang_Object));
+    let objectDoubleArray =
+        /**@type {!Array<Array<*>>} */ ($Arrays.$create([0, null], j_l_Object));
     let stringArray =
-        /**@type {!Array<?string>} */ ($Arrays.$create([0], java_lang_String));
+        /**@type {!Array<?string>} */ ($Arrays.$create([0], j_l_String));
     let /** boolean */ a;
-    a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
-    a = $Arrays.$instanceIsOfType(object, java_lang_String, 2);
-    a = $Arrays.$instanceIsOfType(object, java_lang_Object, 1);
-    a = $Arrays.$instanceIsOfType(object, java_lang_String, 2);
+    a = $Arrays.$instanceIsOfType(object, j_l_Object, 1);
+    a = $Arrays.$instanceIsOfType(object, j_l_String, 2);
+    a = $Arrays.$instanceIsOfType(object, j_l_Object, 1);
+    a = $Arrays.$instanceIsOfType(object, j_l_String, 2);
     a = !$Equality.$same(objectArray, null);
-    a = $Arrays.$instanceIsOfType(objectArray, java_lang_String, 1);
-    a = $Arrays.$instanceIsOfType(objectArray, java_lang_Object, 2);
-    a = $Arrays.$instanceIsOfType(objectArray, java_lang_String, 2);
+    a = $Arrays.$instanceIsOfType(objectArray, j_l_String, 1);
+    a = $Arrays.$instanceIsOfType(objectArray, j_l_Object, 2);
+    a = $Arrays.$instanceIsOfType(objectArray, j_l_String, 2);
     a = !$Equality.$same(objectDoubleArray, null);
     a = !$Equality.$same(objectDoubleArray, null);
-    a = $Arrays.$instanceIsOfType(objectDoubleArray, java_lang_String, 2);
+    a = $Arrays.$instanceIsOfType(objectDoubleArray, j_l_String, 2);
     a = !$Equality.$same(stringArray, null);
     a = !$Equality.$same(stringArray, null);
   }
@@ -165,10 +165,10 @@ class InstanceofExpressions extends java_lang_Object {
     Long = goog.module.get('java.lang.Long$impl');
     Number = goog.module.get('java.lang.Number$impl');
     Short = goog.module.get('java.lang.Short$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

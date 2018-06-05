@@ -7,19 +7,19 @@
 goog.module('com.google.j2cl.transpiler.readable.externs.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Inner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl');
 let FooImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
-let com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_externs_Main_TopLevelExtern_Inner_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.Inner.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_externs_Main_TopLevelExtern_InnerExtern_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.InnerExtern.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
+let Inner_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.Inner.$Overlay$impl');
+let InnerExtern_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.TopLevelExtern.InnerExtern.$Overlay$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -62,7 +62,7 @@ class Main extends java_lang_Object {
   static m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
       fooOverlay) {
     Main.$clinit();
-    return java_lang_String.m_equals__java_lang_String__java_lang_Object(
+    return j_l_String.m_equals__java_lang_String__java_lang_Object(
         fooOverlay.foo, 'Hello');
   }
 
@@ -82,9 +82,8 @@ class Main extends java_lang_Object {
   static m_main__arrayOf_java_lang_String(args) {
     Main.$clinit();
     Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
-        /**@type {Foo} */ ($Casts.$to(
-            $Casts.$to(FooImpl.$create__(), java_lang_Object),
-            com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$Overlay)));
+        /**@type {Foo} */ (
+            $Casts.$to($Casts.$to(FooImpl.$create__(), j_l_Object), $Overlay)));
     Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(
         FooImpl.$create__());
   }
@@ -114,12 +113,11 @@ class Main extends java_lang_Object {
     Main.$clinit = function() {};
     FooImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
-    com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

@@ -149,7 +149,7 @@ public class Lambdas {
     }))), /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
 [i] => [i$2$] "i"
 [i] => [return i$2$;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
-[Function<? super T, ?> f = item -> 1L;] => [let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(((/** Enum */ item) =>{
+[Function<? super T, ?> f = item -> 1L;] => [let f = Lambdas_Function.$adapt(((/** Enum */ item) =>{
       return Long.m_valueOf__long($Long.fromInt(1));
     }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
 [f] => [f] "f"
@@ -162,17 +162,17 @@ public class Lambdas {
 [public static void testLambdaCallingStaticMethod() {
     Function<Object, ?> f = l -> m();
   }] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallingStaticMethod"
-[Function<Object, ?> f = l -> m();] => [let f = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(((/** * */ l) =>{
+[Function<Object, ?> f = l -> m();] => [let f = Lambdas_Function.$adapt(((/** * */ l) =>{
       return Lambdas.m_m__();
     }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallingStaticMethod"
 [f] => [f] "f"
 [l] => [l] "l"
 [m()] => [return Lambdas.m_m__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallingStaticMethod>"
 [FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object();] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() =>{
-      java_lang_Object.$create__();
+      j_l_Object.$create__();
     }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaReturningVoidAsExpression"
 [runner] => [runner] "runner"
-[new Object()] => [java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaReturningVoidAsExpression>"
+[new Object()] => [j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaReturningVoidAsExpression>"
 [FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object() {};] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() =>{
       $3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
     }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testAnonymousInsideLambda"
@@ -217,7 +217,7 @@ public class Lambdas {
 [@SuppressWarnings("unused")
 public class Lambdas {
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
 [private static IdentityFunction identityFunction = null;] => [Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<clinit>"
 [@SuppressWarnings("unused")
 public class Lambdas {

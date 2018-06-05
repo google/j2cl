@@ -41,11 +41,11 @@
 [g] => [g] "g"
 [g.foo(g, g);] => [g.m_foo__java_lang_Object__java_lang_Object(g, g);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [g.<Error, Exception>foo(new Error(), new Exception());] => [g.m_foo__java_lang_Object__java_lang_Object(Error.$create__(), Exception.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
-[g.fun(new Object());] => [g.m_fun__java_lang_Object(java_lang_Object.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new Object());] => [g.m_fun__java_lang_Object(j_l_Object.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [g.fun(new Exception());] => [g.m_fun__java_lang_Exception(Exception.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [g.fun(new Error());] => [g.m_fun__java_lang_Error(Error.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
-[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["asdf"], java_lang_String)));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
-[String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), java_lang_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["asdf"], j_l_String)));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), j_l_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [content] => [content] "content"
@@ -99,4 +99,4 @@
 [public class GenericMethod<T> {
   public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<clinit>"

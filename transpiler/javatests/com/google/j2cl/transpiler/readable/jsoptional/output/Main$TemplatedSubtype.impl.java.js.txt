@@ -8,10 +8,10 @@ goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.TemplatedSubtyp
 
 
 const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.I$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -19,7 +19,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template C_TemplatedSubtype_T
  * @implements {I<C_TemplatedSubtype_T>}
  */
-class TemplatedSubtype extends java_lang_Object {
+class TemplatedSubtype extends j_l_Object {
   /**
    * @private
    */
@@ -68,7 +68,7 @@ class TemplatedSubtype extends java_lang_Object {
    */
   m(arg0, arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {C_TemplatedSubtype_T} */ ($Casts.$to(arg0, java_lang_String)),
+        /**@type {C_TemplatedSubtype_T} */ ($Casts.$to(arg0, j_l_String)),
         arg1);
   }
 
@@ -95,9 +95,9 @@ class TemplatedSubtype extends java_lang_Object {
    */
   static $clinit() {
     TemplatedSubtype.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

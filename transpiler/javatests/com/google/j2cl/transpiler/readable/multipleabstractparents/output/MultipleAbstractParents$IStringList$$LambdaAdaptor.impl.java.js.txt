@@ -8,17 +8,17 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 
 
 const IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
  * @implements {IStringList}
  */
-class $LambdaAdaptor extends java_lang_Object {
+class $LambdaAdaptor extends j_l_Object {
   /**
    * JsConstructor '$LambdaAdaptor($JsFunction)'.
    * @param {?function(?string):?string} fn
@@ -68,7 +68,7 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   m_getFoo__java_lang_Object(arg0) {
     return this.m_getFoo__java_lang_String(
-        /**@type {?string} */ ($Casts.$to(arg0, java_lang_String)));
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)));
   }
 
   /**
@@ -94,9 +94,9 @@ class $LambdaAdaptor extends java_lang_Object {
    */
   static $clinit() {
     $LambdaAdaptor.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

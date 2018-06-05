@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -16,7 +16,7 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
 /**
  * @template C_T, C_S
  */
-class SimpleGenericType extends java_lang_Object {
+class SimpleGenericType extends j_l_Object {
   /**
    * @private
    */
@@ -69,7 +69,7 @@ class SimpleGenericType extends java_lang_Object {
   m_test__() {
     let g = /**@type {!SimpleGenericType<*, Error>} */ (
         SimpleGenericType.$create__java_lang_Object__java_lang_Object(
-            java_lang_Object.$create__(), Error.$create__()));
+            j_l_Object.$create__(), Error.$create__()));
   }
 
   /**
@@ -96,7 +96,7 @@ class SimpleGenericType extends java_lang_Object {
   static $clinit() {
     SimpleGenericType.$clinit = function() {};
     Error = goog.module.get('java.lang.Error$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

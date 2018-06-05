@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 
-class SimpleLongs extends java_lang_Object {
+class SimpleLongs extends j_l_Object {
   /**
    * @private
    */
@@ -157,7 +157,7 @@ class SimpleLongs extends java_lang_Object {
   static $clinit() {
     SimpleLongs.$clinit = function() {};
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

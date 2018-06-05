@@ -7,13 +7,13 @@
 goog.module('com.google.j2cl.transpiler.readable.valueofnullable.ValueOfNullable$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class ValueOfNullable extends java_lang_Object {
+class ValueOfNullable extends j_l_Object {
   /**
    * @private
    */
@@ -61,9 +61,9 @@ class ValueOfNullable extends java_lang_Object {
     this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable =
         97 /* 'a' */;
     this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable =
-        java_lang_String.m_valueOf__char(
+        j_l_String.m_valueOf__char(
             this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable) +
-        java_lang_String.m_valueOf__java_lang_Object(
+        j_l_String.m_valueOf__java_lang_Object(
             this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable);
   }
 
@@ -90,8 +90,8 @@ class ValueOfNullable extends java_lang_Object {
    */
   static $clinit() {
     ValueOfNullable.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    java_lang_Object.$clinit();
+    j_l_String = goog.module.get('java.lang.String$impl');
+    j_l_Object.$clinit();
   }
 };
 

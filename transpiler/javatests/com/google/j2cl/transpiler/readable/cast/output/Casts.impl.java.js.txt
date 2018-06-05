@@ -6,7 +6,7 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.Casts$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
@@ -23,7 +23,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class Casts extends java_lang_Object {
+class Casts extends j_l_Object {
   /**
    * @private
    */
@@ -57,7 +57,7 @@ class Casts extends java_lang_Object {
    * @public
    */
   m_testCastToClass__() {
-    let o = java_lang_Object.$create__();
+    let o = j_l_Object.$create__();
     let c = /**@type {Casts} */ ($Casts.$to(o, Casts));
   }
 
@@ -66,7 +66,7 @@ class Casts extends java_lang_Object {
    * @public
    */
   m_testCasToInterface__() {
-    let o = java_lang_Object.$create__();
+    let o = j_l_Object.$create__();
     let s = /**@type {(Serializable|Array)} */ ($Casts.$to(o, Serializable));
   }
 
@@ -92,10 +92,9 @@ class Casts extends java_lang_Object {
    * @public
    */
   m_testCastToArray__() {
-    let foo =
-        /**@type {Array<*>} */ ($Arrays.$castTo(null, java_lang_Object, 1));
-    let bar = /**@type {Array<Array<*>>} */ (
-        $Arrays.$castTo(null, java_lang_Object, 2));
+    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, j_l_Object, 1));
+    let bar =
+        /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, j_l_Object, 2));
   }
 
   /**
@@ -133,7 +132,7 @@ class Casts extends java_lang_Object {
     Short = goog.module.get('java.lang.Short$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

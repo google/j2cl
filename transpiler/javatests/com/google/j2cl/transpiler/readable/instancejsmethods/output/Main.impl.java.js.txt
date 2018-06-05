@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.instancejsmethods.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Child = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
@@ -15,7 +15,7 @@ let Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejs
 let SuperParent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -116,7 +116,7 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
     SuperParent = goog.module.get(
         'com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

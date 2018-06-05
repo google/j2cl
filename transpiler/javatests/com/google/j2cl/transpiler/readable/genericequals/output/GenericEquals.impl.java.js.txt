@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.genericequals.GenericEquals$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -18,7 +18,7 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 /**
  * @template C_T
  */
-class GenericEquals extends java_lang_Object {
+class GenericEquals extends j_l_Object {
   /**
    * @private
    */
@@ -119,7 +119,7 @@ class GenericEquals extends java_lang_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

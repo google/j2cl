@@ -7,17 +7,17 @@
 goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeJsType_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeObject_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
+let NativeObject_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
 let NativeJsType = goog.forwardDeclare('test.foo.NativeJsType');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class CastToNativeType extends java_lang_Object {
+class CastToNativeType extends j_l_Object {
   /**
    * @private
    */
@@ -53,22 +53,14 @@ class CastToNativeType extends java_lang_Object {
    */
   m_test__() {
     let a = new NativeJsType();
-    let b = /**@type {NativeJsType} */ ($Casts.$to(
-        a,
-        com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeJsType_$Overlay));
-    let c =
-        com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeJsType_$Overlay
-            .$isInstance(a);
+    let b = /**@type {NativeJsType} */ ($Casts.$to(a, $Overlay));
+    let c = $Overlay.$isInstance(a);
     let d = /**@type {Array<NativeJsType>} */ ($Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
-    let e = /**@type {Object} */ ($Casts.$to(
-        a,
-        com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeObject_$Overlay));
-    let f = /**@type {Object<?string, *>} */ ($Casts.$to(
-        a,
-        com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeObject_$Overlay));
-    c = com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeObject_$Overlay
-            .$isInstance(a);
+    let e = /**@type {Object} */ ($Casts.$to(a, NativeObject_$Overlay));
+    let f =
+        /**@type {Object<?string, *>} */ ($Casts.$to(a, NativeObject_$Overlay));
+    c = NativeObject_$Overlay.$isInstance(a);
     let g = /**@type {Array<Object>} */ ($Arrays.$castToNative(a));
     let h = /**@type {Array<Object<?string, *>>} */ ($Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
@@ -97,16 +89,14 @@ class CastToNativeType extends java_lang_Object {
    */
   static $clinit() {
     CastToNativeType.$clinit = function() {};
-    com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeJsType_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
-    com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType_NativeObject_$Overlay =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
+    NativeObject_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
     NativeJsType = goog.module.get('test.foo.NativeJsType');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

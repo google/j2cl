@@ -8,7 +8,7 @@ goog.module('com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.Ab
 
 
 const MyInterface = goog.require('com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.MyInterface$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -18,7 +18,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @abstract
  * @implements {MyInterface<Integer>}
  */
-class AbstractImpl extends java_lang_Object {
+class AbstractImpl extends j_l_Object {
   /**
    * @private
    */
@@ -67,7 +67,7 @@ class AbstractImpl extends java_lang_Object {
    */
   static $clinit() {
     AbstractImpl.$clinit = function() {};
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

@@ -16,19 +16,18 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.la
  * @interface
  * @template C_Function_T, C_Function_R
  */
-class com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function {
+class Lambdas_Function {
   /**
    * @template M_Function_identity_T
-   * @return {com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function<M_Function_identity_T, M_Function_identity_T>}
+   * @return {Lambdas_Function<M_Function_identity_T, M_Function_identity_T>}
    * @public
    */
   static m_identity__() {
-    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$clinit();
-    return /**@type {com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function<*, *>} */ (
-        com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$adapt(
-            ((/** * */ t) => {
-              return t;
-            })));
+    Lambdas_Function.$clinit();
+    return /**@type {Lambdas_Function<*, *>} */ (
+        Lambdas_Function.$adapt(((/** * */ t) => {
+          return t;
+        })));
   }
 
   /**
@@ -42,11 +41,11 @@ class com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function {
   /**
    * @template C_Function_T, C_Function_R
    * @param {?function(C_Function_T):C_Function_R} fn
-   * @return {com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function<C_Function_T, C_Function_R>}
+   * @return {Lambdas_Function<C_Function_T, C_Function_R>}
    * @public
    */
   static $adapt(fn) {
-    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$clinit();
+    Lambdas_Function.$clinit();
     return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
   }
 
@@ -89,23 +88,20 @@ class com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function {
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$clinit =
-        function() {};
+    Lambdas_Function.$clinit = function() {};
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function.$LambdaAdaptor$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function,
+    Lambdas_Function,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas$Function'));
 
 
-com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function.$markImplementor(
-    /** @type {Function} */ (
-        com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function));
+Lambdas_Function.$markImplementor(/** @type {Function} */ (Lambdas_Function));
 
 
-exports = com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function;
+exports = Lambdas_Function;
 //# sourceMappingURL=Lambdas$Function.js.map

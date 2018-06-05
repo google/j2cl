@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.equality.Equality$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
-class Equality extends java_lang_Object {
+class Equality extends j_l_Object {
   /**
    * @private
    */
@@ -53,12 +53,12 @@ class Equality extends java_lang_Object {
       $Asserts.$assert(0 != 1);
     }
     {
-      $Asserts.$assert(!$Equality.$same(
-          java_lang_Object.$create__(), java_lang_Object.$create__()));
+      $Asserts.$assert(
+          !$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));
     }
     {
-      $Asserts.$assert(!$Equality.$same(null, java_lang_Object.$create__()));
-      $Asserts.$assert(!$Equality.$same(java_lang_Object.$create__(), null));
+      $Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));
+      $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
     }
   }
 
@@ -87,7 +87,7 @@ class Equality extends java_lang_Object {
     Equality.$clinit = function() {};
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

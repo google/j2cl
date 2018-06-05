@@ -7,14 +7,13 @@
 goog.module('com.google.j2cl.transpiler.readable.importglobaljstypes.Date$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importglobaljstypes.Date.NativeDate.$Overlay$impl');
 
 
-class com_google_j2cl_transpiler_readable_importglobaljstypes_Date extends
-    java_lang_Object {
+class c_g_j2cl_transpiler_readable_importglobaljstypes_Date extends j_l_Object {
   /**
    * @private
    */
@@ -24,13 +23,12 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Date extends
 
   /**
    * Factory method corresponding to constructor 'Date()'.
-   * @return {!com_google_j2cl_transpiler_readable_importglobaljstypes_Date}
+   * @return {!c_g_j2cl_transpiler_readable_importglobaljstypes_Date}
    * @public
    */
   static $create__() {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit();
-    let $instance =
-        new com_google_j2cl_transpiler_readable_importglobaljstypes_Date();
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit();
+    let $instance = new c_g_j2cl_transpiler_readable_importglobaljstypes_Date();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Date__();
     return $instance;
@@ -51,7 +49,7 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Date extends
    * @public
    */
   static m_now__double(x) {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit();
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit();
     return Date.now();
   }
 
@@ -72,7 +70,7 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Date extends
    */
   static $isInstance(instance) {
     return instance instanceof
-        com_google_j2cl_transpiler_readable_importglobaljstypes_Date;
+        c_g_j2cl_transpiler_readable_importglobaljstypes_Date;
   }
 
   /**
@@ -83,25 +81,25 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Date extends
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(
         classConstructor,
-        com_google_j2cl_transpiler_readable_importglobaljstypes_Date);
+        c_g_j2cl_transpiler_readable_importglobaljstypes_Date);
   }
 
   /**
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit =
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Date.$clinit =
         function() {};
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 
 $Util.$setClassMetadata(
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Date,
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Date,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.importglobaljstypes.Date'));
 
 
 
-exports = com_google_j2cl_transpiler_readable_importglobaljstypes_Date;
+exports = c_g_j2cl_transpiler_readable_importglobaljstypes_Date;
 //# sourceMappingURL=Date.js.map

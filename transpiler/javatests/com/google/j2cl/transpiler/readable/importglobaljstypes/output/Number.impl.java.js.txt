@@ -7,17 +7,17 @@
 goog.module('com.google.j2cl.transpiler.readable.importglobaljstypes.Number$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_importglobaljstypes_Number_MyLiteralType_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importglobaljstypes.Number.MyLiteralType.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_importglobaljstypes_Number_NativeFunction_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importglobaljstypes.Number.NativeFunction.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let MyLiteralType_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importglobaljstypes.Number.MyLiteralType.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importglobaljstypes.Number.NativeFunction.$Overlay$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
-    java_lang_Object {
+class c_g_j2cl_transpiler_readable_importglobaljstypes_Number extends
+    j_l_Object {
   /**
    * @private
    */
@@ -27,13 +27,13 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
 
   /**
    * Factory method corresponding to constructor 'Number()'.
-   * @return {!com_google_j2cl_transpiler_readable_importglobaljstypes_Number}
+   * @return {!c_g_j2cl_transpiler_readable_importglobaljstypes_Number}
    * @public
    */
   static $create__() {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
     let $instance =
-        new com_google_j2cl_transpiler_readable_importglobaljstypes_Number();
+        new c_g_j2cl_transpiler_readable_importglobaljstypes_Number();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number__();
     return $instance;
@@ -54,7 +54,7 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
    * @public
    */
   static m_test__double(x) {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
     return Number.isInteger(x);
   }
 
@@ -64,9 +64,9 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
    * @public
    */
   static m_fromCharCode__arrayOf_int(array) {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
     return /**@type {?string} */ (
-        $Casts.$to(String.fromCharCode.apply(null, array), java_lang_String));
+        $Casts.$to(String.fromCharCode.apply(null, array), j_l_String));
   }
 
   /**
@@ -86,7 +86,7 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
    */
   static $isInstance(instance) {
     return instance instanceof
-        com_google_j2cl_transpiler_readable_importglobaljstypes_Number;
+        c_g_j2cl_transpiler_readable_importglobaljstypes_Number;
   }
 
   /**
@@ -97,27 +97,27 @@ class com_google_j2cl_transpiler_readable_importglobaljstypes_Number extends
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(
         classConstructor,
-        com_google_j2cl_transpiler_readable_importglobaljstypes_Number);
+        c_g_j2cl_transpiler_readable_importglobaljstypes_Number);
   }
 
   /**
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit =
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit =
         function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 
 $Util.$setClassMetadata(
-    com_google_j2cl_transpiler_readable_importglobaljstypes_Number,
+    c_g_j2cl_transpiler_readable_importglobaljstypes_Number,
     $Util.$makeClassName(
         'com.google.j2cl.transpiler.readable.importglobaljstypes.Number'));
 
 
 
-exports = com_google_j2cl_transpiler_readable_importglobaljstypes_Number;
+exports = c_g_j2cl_transpiler_readable_importglobaljstypes_Number;
 //# sourceMappingURL=Number.js.map

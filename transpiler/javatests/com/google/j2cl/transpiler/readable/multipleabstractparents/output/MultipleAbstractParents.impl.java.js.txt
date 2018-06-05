@@ -7,18 +7,18 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
 let IStringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class MultipleAbstractParents extends java_lang_Object {
+class MultipleAbstractParents extends j_l_Object {
   /**
    * @private
    */
@@ -55,21 +55,18 @@ class MultipleAbstractParents extends java_lang_Object {
    */
   static m_main__arrayOf_java_lang_String(args) {
     MultipleAbstractParents.$clinit();
-    $Asserts.$assert(
-        java_lang_String.m_equals__java_lang_String__java_lang_Object(
-            /**@type {!ArrayList<?string>} */ (ArrayList.$create__())
-                .m_getFoo__java_lang_Object(null),
-            'AbstractCollection'));
-    $Asserts.$assert(
-        java_lang_String.m_equals__java_lang_String__java_lang_Object(
-            StringList.$create__().m_getFoo__java_lang_Object(null),
-            'AbstractCollection'));
-    $Asserts.$assert(
-        java_lang_String.m_equals__java_lang_String__java_lang_Object(
-            (/**@type {IStringList} */ (
-                 $Casts.$to(StringList.$create__(), IStringList)))
-                .m_getFoo__java_lang_String(null),
-            'AbstractCollection'));
+    $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
+        /**@type {!ArrayList<?string>} */ (ArrayList.$create__())
+            .m_getFoo__java_lang_Object(null),
+        'AbstractCollection'));
+    $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
+        StringList.$create__().m_getFoo__java_lang_Object(null),
+        'AbstractCollection'));
+    $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
+        (/**@type {IStringList} */ (
+             $Casts.$to(StringList.$create__(), IStringList)))
+            .m_getFoo__java_lang_String(null),
+        'AbstractCollection'));
   }
 
   /**
@@ -101,10 +98,10 @@ class MultipleAbstractParents extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
     StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

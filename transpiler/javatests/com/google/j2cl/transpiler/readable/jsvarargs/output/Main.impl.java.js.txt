@@ -7,7 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
@@ -19,7 +19,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends j_l_Object {
   /**
    * @private
    */
@@ -219,8 +219,8 @@ class Main extends java_lang_Object {
    */
   m_testJsFunction__() {
     let a = AFunction.$create__();
-    let o1 = java_lang_Object.$create__();
-    let o2 = java_lang_Object.$create__();
+    let o1 = j_l_Object.$create__();
+    let o2 = j_l_Object.$create__();
     a(0, o1, o2);
     a(0);
     a(0, o1, o2);
@@ -292,7 +292,7 @@ class Main extends java_lang_Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

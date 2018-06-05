@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.collisions.bar$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.collisions.foo$impl');
-let com_google_j2cl_transpiler_readable_collisions_goog = goog.forwardDeclare('com.google.j2cl.transpiler.readable.collisions.goog$impl');
+let c_g_j2cl_transpiler_readable_collisions_goog = goog.forwardDeclare('com.google.j2cl.transpiler.readable.collisions.goog$impl');
 
 
-class bar extends java_lang_Object {
+class bar extends j_l_Object {
   /**
    * @private
    */
@@ -54,7 +54,7 @@ class bar extends java_lang_Object {
     Math.random();
     String.prototype.length;
     new String();
-    com_google_j2cl_transpiler_readable_collisions_goog.$create__();
+    c_g_j2cl_transpiler_readable_collisions_goog.$create__();
     foo.$create__();
     let delete$1$ = 1;
     let undefined$1$ = 3;
@@ -85,9 +85,9 @@ class bar extends java_lang_Object {
     bar.$clinit = function() {};
     foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.collisions.foo$impl');
-    com_google_j2cl_transpiler_readable_collisions_goog = goog.module.get(
+    c_g_j2cl_transpiler_readable_collisions_goog = goog.module.get(
         'com.google.j2cl.transpiler.readable.collisions.goog$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

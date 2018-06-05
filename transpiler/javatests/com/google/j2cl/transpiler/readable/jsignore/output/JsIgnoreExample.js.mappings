@@ -28,11 +28,11 @@ public class JsIgnoreExample {
 [@JsType
 public class JsIgnoreExample {
 ...  public static final Object CONSTNAME = new Object();
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
 [public static int exportedField = 10;] => [JsIgnoreExample.$f_exportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 10;] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
 [@JsIgnore
   public static int notExportedField = 20;] => [JsIgnoreExample.$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = 20;] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
-[public static final Object CONSTNAME = new Object();] => [JsIgnoreExample.$f_CONSTNAME__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = java_lang_Object.$create__();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
+[public static final Object CONSTNAME = new Object();] => [JsIgnoreExample.$f_CONSTNAME__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.<clinit>"
 [@JsType
 public class JsIgnoreExample {
 

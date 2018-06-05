@@ -59,7 +59,7 @@ public class InferReturn<T> {
 [public static <V> V[] newArray(V foo) {
     return (V[]) new Object[0];
   }] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
-[return (V[]) new Object[0];] => [return /**@type {Array<*>} */ ($Arrays.$castTo(new Array(0), java_lang_Object, 1));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
+[return (V[]) new Object[0];] => [return /**@type {Array<*>} */ ($Arrays.$castTo(new Array(0), j_l_Object, 1));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
 [foo] => [foo] "foo"
 [public static void acceptsArrayListOfObject(ArrayList<Object> foo) {
     // empty
@@ -71,4 +71,4 @@ public class InferReturn<T> {
 [/** Tests that Closure type inference based on return doesn't result in warnings. */
 public class InferReturn<T> {
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"

@@ -11,7 +11,7 @@ const C = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod
 const I = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -71,7 +71,7 @@ class BackwardBridgeMethod extends C {
    */
   m_get__java_lang_String(arg0) {
     return /**@type {?string} */ (
-        $Casts.$to(super.m_get__java_lang_Object(arg0), java_lang_String));
+        $Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));
   }
 
   /**
@@ -97,7 +97,7 @@ class BackwardBridgeMethod extends C {
    */
   static $clinit() {
     BackwardBridgeMethod.$clinit = function() {};
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     C.$clinit();
   }

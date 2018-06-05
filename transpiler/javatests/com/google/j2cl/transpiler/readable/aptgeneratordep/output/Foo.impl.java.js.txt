@@ -7,14 +7,14 @@
 goog.module('com.google.j2cl.transpiler.readable.aptgeneratordep.Foo$impl');
 
 
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Dummy = goog.forwardDeclare('com.google.j2cl.transpiler.readable.aptgeneratordep.Dummy$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
-class Foo extends java_lang_Object {
+class Foo extends j_l_Object {
   /**
    * @private
    */
@@ -79,7 +79,7 @@ class Foo extends java_lang_Object {
     Dummy = goog.module.get(
         'com.google.j2cl.transpiler.readable.aptgeneratordep.Dummy$impl');
     Class = goog.module.get('java.lang.Class$impl');
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

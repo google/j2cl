@@ -39,9 +39,9 @@
 [this.first = t;] => [this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = t;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
 [this.second = s;] => [this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = s;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
 [@SuppressWarnings("unused")
-    SimpleGenericType<Object, Error> g = new SimpleGenericType<>(new Object(), new Error());] => [let g = /**@type {!SimpleGenericType<*, Error>} */ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(java_lang_Object.$create__(), Error.$create__()));] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.test"
+    SimpleGenericType<Object, Error> g = new SimpleGenericType<>(new Object(), new Error());] => [let g = /**@type {!SimpleGenericType<*, Error>} */ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(j_l_Object.$create__(), Error.$create__()));] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.test"
 [g] => [g] "g"
 [public class SimpleGenericType<T, S> {
   public T first;
 ...  }
-}] => [java_lang_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<clinit>"
+}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<clinit>"

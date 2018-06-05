@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToTyp
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -26,7 +26,7 @@ class $Overlay {
   static m_setField__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToTypeVariable__int__boolean(
       $thisArg, index, value) {
     $Overlay.$clinit();
-    let o = java_lang_Object.$create__();
+    let o = j_l_Object.$create__();
     let a = /**@type {Array<Object>} */ ($Arrays.$castToNative(o));
     return /**@type {Object} */ ($Casts.$to($thisArg, $Overlay));
   }
@@ -45,7 +45,7 @@ class $Overlay {
    */
   static $clinit() {
     $Overlay.$clinit = function() {};
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    j_l_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }

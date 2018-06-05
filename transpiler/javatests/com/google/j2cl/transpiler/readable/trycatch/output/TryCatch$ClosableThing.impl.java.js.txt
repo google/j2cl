@@ -8,14 +8,14 @@ goog.module('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing
 
 
 const AutoCloseable = goog.require('java.lang.AutoCloseable$impl');
-const java_lang_Object = goog.require('java.lang.Object$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @implements {AutoCloseable}
  */
-class ClosableThing extends java_lang_Object {
+class ClosableThing extends j_l_Object {
   /**
    * @private
    */
@@ -75,7 +75,7 @@ class ClosableThing extends java_lang_Object {
    */
   static $clinit() {
     ClosableThing.$clinit = function() {};
-    java_lang_Object.$clinit();
+    j_l_Object.$clinit();
   }
 };
 

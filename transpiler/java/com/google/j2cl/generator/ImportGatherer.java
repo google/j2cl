@@ -19,12 +19,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -54,6 +55,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.common.TimingCollector;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -86,7 +88,8 @@ class ImportGatherer extends AbstractVisitor {
     return importsByCategory;
   }
 
-  private final Multiset<String> localNameUses = HashMultiset.create();
+  // TODO(b/80201427): We should also include TypeVariables on name recording.
+  private final Set<String> localNameUses = new HashSet<>();
 
   private final Set<TypeDescriptor> collectedForJsDoc = new HashSet<>();
 
@@ -357,6 +360,8 @@ class ImportGatherer extends AbstractVisitor {
     typeDeclarationByCategory.put(
         ImportCategory.EXTERN,
         TypeDescriptors.createGlobalNativeTypeDescriptor(topScopeQualifier).getTypeDeclaration());
+    // Reserve the name earlier on so that these are never aliased.
+    localNameUses.add(topScopeQualifier);
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
@@ -394,13 +399,6 @@ class ImportGatherer extends AbstractVisitor {
         .get(ImportCategory.JSDOC)
         .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
 
-    timingCollector.startSample("Record Local Name Uses");
-    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.SELF));
-    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.RUNTIME));
-    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
-    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.JSDOC));
-    recordLocalNameUses(typeDeclarationByCategory.get(ImportCategory.EXTERN));
-
     timingCollector.startSample("Convert to imports");
     Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
     importsByCategory.putAll(
@@ -419,14 +417,6 @@ class ImportGatherer extends AbstractVisitor {
     return importsByCategory;
   }
 
-  private void recordLocalNameUses(Set<TypeDeclaration> typeDeclarations) {
-    // TODO(b/80201427): We should also include TypeVariables on name recording.
-    typeDeclarations
-        .stream()
-        .map(TypeDeclaration::getShortAliasName)
-        .forEach(localNameUses::add);
-  }
-
   private Set<Import> toImports(Set<TypeDeclaration> typeDeclarations) {
     return typeDeclarations.stream().map(this::createImport).collect(toImmutableSet());
   }
@@ -440,10 +430,80 @@ class ImportGatherer extends AbstractVisitor {
       return typeDeclaration.getQualifiedJsName();
     }
 
-    String shortAliasName = typeDeclaration.getShortAliasName();
-    boolean unique = localNameUses.count(shortAliasName) == 1;
-    return unique && JsProtectedNames.isLegalName(shortAliasName)
-        ? shortAliasName
-        : typeDeclaration.getLongAliasName();
+    List<String> nameComponents =
+        ImmutableList.<String>builder()
+            .add(getAbbreviatedPackageName(typeDeclaration))
+            .addAll(getClassComponents(typeDeclaration))
+            .build();
+
+    // Construct an alias by starting from the inner most name (the name of the class and
+    // prepending enclosing class names and the package name one at a time until there is
+    // no conflict with an existing alias or a reserved keyword. For example when choosing an alias
+    // for
+    //
+    //   class com.pack.MyClass.MyInnerClass
+    //
+    // the following sequence of aliases will be tried and the first one that does not collide will
+    // be chosen.
+    //
+    //   MyInnerClass
+    //   MyClass_MyInnerClass
+    //   com_pack_MyClass_MyInnerClass
+    //
+    // There is an implicit assumption that if all the name parts are included the alias will
+    // be unique in the same way that a Java fully qualified name corresponds exactly to one type.
+    //
+    String proposedAlias = null;
+    do {
+      checkState(!nameComponents.isEmpty());
+      String lastComponent = Iterables.getLast(nameComponents);
+      proposedAlias = Joiner.on('_').skipNulls().join(lastComponent, proposedAlias);
+
+      nameComponents = nameComponents.subList(0, nameComponents.size() - 1);
+    } while (localNameUses.contains(proposedAlias) || !JsProtectedNames.isLegalName(proposedAlias));
+
+    localNameUses.add(proposedAlias);
+    return proposedAlias;
+  }
+
+  /** Returns the class components normalizing the names of the internal runtime classes */
+  private ImmutableList<String> getClassComponents(TypeDeclaration typeDeclaration) {
+    if (BootstrapType.typeDescriptors.contains(typeDeclaration.toUnparamterizedTypeDescriptor())) {
+      // Aliases for internal runtime classes are prepended '$' to their name to make them more
+      // recognizable in the JavaScript source.
+      return ImmutableList.of("$" + Iterables.getOnlyElement(typeDeclaration.getClassComponents()));
+    }
+
+    return typeDeclaration
+        .getClassComponents()
+        .stream()
+        .map(component -> component.replace("_", "__"))
+        .map(
+            component ->
+                !Character.isJavaIdentifierStart(component.charAt(0)) ? "$" + component : component)
+        .collect(ImmutableList.toImmutableList());
+  }
+
+  private static final ImmutableMap<String, String> ABBREVIATED_WELL_KNOWN_PACKAGES =
+      ImmutableMap.of(
+          "java.lang",
+          "j.l",
+          "java.util",
+          "j.u",
+          "com.google.common",
+          "c.g.c",
+          "com.google",
+          "c.g");
+
+  private static String getAbbreviatedPackageName(TypeDeclaration typeDeclaration) {
+    String packageName = typeDeclaration.getPackageName();
+    for (String prefix : ABBREVIATED_WELL_KNOWN_PACKAGES.keySet()) {
+      if (packageName.startsWith(prefix)) {
+        packageName =
+            ABBREVIATED_WELL_KNOWN_PACKAGES.get(prefix) + packageName.substring(prefix.length());
+        break;
+      }
+    }
+    return packageName.replace(".", "_");
   }
 }
