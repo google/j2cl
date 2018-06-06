@@ -1,46 +1,21 @@
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_js>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/** @public {?string} */
+[Strings] => [Strings]
+[Strings] => [constructor]
+[Strings] => [super();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_js>"
+[Strings] => [/** @public {?string} */
     this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_;] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_js>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/** @public {?string} */
+[Strings] => [/** @public {?string} */
     this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_;] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_js>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [/** @public {?string} */
+[Strings] => [/** @public {?string} */
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_;] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_js>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [Strings.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [let $instance = new Strings();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_strings_Strings();] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
+[Strings] => [$create__]
+[Strings] => [Strings.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
+[Strings] => [let $instance = new Strings();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
+[Strings] => [$instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
+[Strings] => [return $instance;] "com.google.j2cl.transpiler.readable.strings.Strings.<synthetic: ctor_create>"
+[Strings] => [$ctor__com_google_j2cl_transpiler_readable_strings_Strings__]
+[Strings] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
+[Strings] => [this.$init__com_google_j2cl_transpiler_readable_strings_Strings();] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
+[test] => [m_test__]
 [String s1 = null;] => [let s1 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s1] => [s1] "s1"
 [String s2 = null;] => [let s2 = null;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
@@ -71,13 +46,11 @@
 [(new StringHolder()).s += c1;] => [$qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = j_l_String.m_valueOf__java_lang_Object($qualifier$1$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) + j_l_String.m_valueOf__char(c1);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [(new StringHolder()).s += "o";] => [let $qualifier$2$ = StringHolder.$create__();] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [(new StringHolder()).s += "o";] => [$qualifier$2$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder = j_l_String.m_valueOf__java_lang_Object($qualifier$2$.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder) + j_l_String.m_valueOf__java_lang_Object("o");] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[Strings] => [$init__com_google_j2cl_transpiler_readable_strings_Strings]
 [private String someString = "This is a string literal";] => [this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ = "This is a string literal";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
 [private String nonBmpChar = "𐍆";] => [this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uD800\uDF46";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
 [private String wideColon = "：";] => [this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ = "\uFF1A";] "com.google.j2cl.transpiler.readable.strings.Strings.<init>"
-[public class Strings {
-  private String someString = "This is a string literal";
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings.<clinit>"
+[Strings] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.strings.Strings.<clinit>"
 [private static final String ESCAPE_CODES = "\b\f\n\r\t\"\'\\\u0000\u007F𐍆：";] => [/** @public {?string} @const */
 Strings.f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_strings_Strings_ = "\b\f\n\r\t\"'\\\u0000\u007F\uD800\uDF46\uFF1A";]
 [private static final String ESCAPE_CODES_COPY = ESCAPE_CODES;] => [/** @public {?string} @const */

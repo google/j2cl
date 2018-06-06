@@ -80,11 +80,11 @@ public class FrontendFlags {
   protected boolean generateTimeReport = false;
 
   @Option(
-    name = "-inlinesourcemaps",
-    usage = "Inlines the source map into the generated file.",
-    hidden = true
-  )
-  protected boolean inlineSourceMaps = false;
+      name = "-generatekytheindexingmetadata",
+      usage =
+          "Generates Kythe indexing metadata and appends it onto the generated JavaScript files.",
+      hidden = true)
+  protected boolean generateKytheIndexingMetadata = false;
 
   /** Parses the given args list and updates values. */
   public static FrontendFlags parse(String[] args, Problems problems) {

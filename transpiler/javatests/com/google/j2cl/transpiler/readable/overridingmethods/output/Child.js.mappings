@@ -1,28 +1,13 @@
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [super();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_js>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<init>"
-[public class Child extends Parent implements SomeInterface {
-  @Override
-...  public void bar() {}
-}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<clinit>"
+[Child] => [Child]
+[Child] => [constructor]
+[Child] => [super();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_js>"
+[Child] => [$create__]
+[Child] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
+[Child] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
+[Child] => [$instance.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
+[Child] => [return $instance;] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<synthetic: ctor_create>"
+[Child] => [$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__]
+[Child] => [this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<init>"
+[fun] => [m_fun__]
+[bar] => [m_bar__]
+[Child] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.overridingmethods.Child.<clinit>"

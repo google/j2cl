@@ -1,30 +1,13 @@
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [super();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_js>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [StaticConstant.$clinit();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [let $instance = new StaticConstant();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<init>"
-[public class StaticConstant {
-  // This constant should not trigger a clinit rewrite.
-  public static final int FOO = 1;
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<clinit>"
+[StaticConstant] => [StaticConstant]
+[StaticConstant] => [constructor]
+[StaticConstant] => [super();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_js>"
+[StaticConstant] => [$create__]
+[StaticConstant] => [StaticConstant.$clinit();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
+[StaticConstant] => [let $instance = new StaticConstant();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
+[StaticConstant] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
+[StaticConstant] => [return $instance;] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<synthetic: ctor_create>"
+[StaticConstant] => [$ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__]
+[StaticConstant] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<init>"
+[StaticConstant] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticconstant.StaticConstant.<clinit>"
 [public static final int FOO = 1;] => [/** @public {number} @const */
 StaticConstant.f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant = 1;]

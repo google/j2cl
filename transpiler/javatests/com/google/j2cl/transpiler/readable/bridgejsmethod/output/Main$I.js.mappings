@@ -1,9 +1,6 @@
+[I] => [I]
+[fun] => [fun]
 [t] => [t] "t"
-[/** Interface with JsMethod. */
-  public interface I<T extends Number> {
-...    T fun(T t);
-  }] => [I.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I.<synthetic: adapt_lambda>"
-[/** Interface with JsMethod. */
-  public interface I<T extends Number> {
-...    T fun(T t);
-  }] => [return /**@type {!$LambdaAdaptor<(Number|number)>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I.<synthetic: adapt_lambda>"
+[I] => [$adapt]
+[I] => [I.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I.<synthetic: adapt_lambda>"
+[I] => [return /**@type {!$LambdaAdaptor<(Number|number)>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I.<synthetic: adapt_lambda>"

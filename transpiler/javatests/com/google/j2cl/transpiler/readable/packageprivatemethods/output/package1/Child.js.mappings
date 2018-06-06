@@ -1,45 +1,27 @@
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_js>"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<init>"
+[Child] => [Child]
+[Child] => [constructor]
+[Child] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_js>"
+[Child] => [$create__]
+[Child] => [Child.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
+[Child] => [let $instance = new Child();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
+[Child] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
+[Child] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<synthetic: ctor_create>"
+[Child] => [$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__]
+[Child] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<init>"
+[foo] => [m_foo__int]
 [a] => [a] "a"
 [return a + 1;] => [return a + 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.foo"
+[fun] => [m_fun__int__int]
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b + 1;] => [return a + b + 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.fun"
+[bar] => [m_bar__int__int__int]
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
 [return a + b + c + 2;] => [return a + b + c + 2;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.bar"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [return this.m_foo__int(arg0);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.foo"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [return this.m_fun__int__int(arg0, arg1);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.fun"
-[public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
-...  }
-}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<clinit>"
+[Child] => [m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1]
+[Child] => [return this.m_foo__int(arg0);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.foo"
+[Child] => [m_fun__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1]
+[Child] => [return this.m_fun__int__int(arg0, arg1);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.fun"
+[Child] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child.<clinit>"

@@ -1,68 +1,34 @@
+[B] => [B]
+[B] => [constructor]
 [x] => [x] "x"
-[@JsConstructor
-    public B(int x) {
-...      this.fB = 3;
-    }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[@JsConstructor
-    public B(int x) {
-...      this.fB = 3;
-    }] => [super();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[@JsConstructor
-    public B(int x) {
-...      this.fB = 3;
-    }] => [/** @public {number} */
+[B] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [super();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [/** @public {number} */
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B = 0;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[@JsConstructor
-    public B(int x) {
-...      this.fB = 3;
-    }] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int(x);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int(x);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int]
 [x] => [x] "x"
 [super(x + 1);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(x + 1);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[@JsConstructor
-    public B(int x) {
-...      this.fB = 3;
-    }] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
 [this.fB = 3;] => [this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B = 3;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[public B() {
-      this(10); // must call this(int).
-      this.fB = 4;
-    }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B() {
-      this(10); // must call this(int).
-      this.fB = 4;
-    }] => [let $instance = new B(10);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B() {
-      this(10); // must call this(int).
-      this.fB = 4;
-    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B() {
-      this(10); // must call this(int).
-      this.fB = 4;
-    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [$create__]
+[B] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [let $instance = new B(10);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__]
 [this.fB = 4;] => [this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B = 4;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [$create__int__int]
 [x] => [x] "x"
 [y] => [y] "y"
-[public B(int x, int y) {
-      this(x + y);
-      this.fB = x * y;
-    }] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B(int x, int y) {
-      this(x + y);
-      this.fB = x * y;
-    }] => [let $instance = new B(x + y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B(int x, int y) {
-      this(x + y);
-      this.fB = x * y;
-    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int(x, y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
-[public B(int x, int y) {
-      this(x + y);
-      this.fB = x * y;
-    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [B.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [let $instance = new B(x + y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int(x, y);] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [return $instance;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<synthetic: ctor_create>"
+[B] => [$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int]
 [x] => [x] "x"
 [y] => [y] "y"
 [this.fB = x * y;] => [this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B = x * y;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
+[B] => [$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B]
 [public int fB = 2;] => [this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B = 2;] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<init>"
-[/**
-   * A class with JsConstructor, which extends a regular class.
-...    }
-  }] => [A.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<clinit>"
+[B] => [A.$clinit();] "com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.<clinit>"

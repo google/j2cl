@@ -1,47 +1,25 @@
-[public class SimpleGenericType<T, S> {
-  public T first;
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_js>"
-[public class SimpleGenericType<T, S> {
-  public T first;
-...  }
-}] => [/** @public {C_T} */
+[SimpleGenericType] => [SimpleGenericType]
+[SimpleGenericType] => [constructor]
+[SimpleGenericType] => [super();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_js>"
+[SimpleGenericType] => [/** @public {C_T} */
     this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_js>"
-[public class SimpleGenericType<T, S> {
-  public T first;
-...  }
-}] => [/** @public {C_S} */
+[SimpleGenericType] => [/** @public {C_S} */
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_js>"
+[SimpleGenericType] => [$create__java_lang_Object__java_lang_Object]
 [t] => [t] "t"
 [s] => [s] "s"
-[public SimpleGenericType(T t, S s) {
-    this.first = t;
-    this.second = s;
-  }] => [SimpleGenericType.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
-[public SimpleGenericType(T t, S s) {
-    this.first = t;
-    this.second = s;
-  }] => [let $instance = new SimpleGenericType();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
-[public SimpleGenericType(T t, S s) {
-    this.first = t;
-    this.second = s;
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(t, s);] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
-[public SimpleGenericType(T t, S s) {
-    this.first = t;
-    this.second = s;
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
+[SimpleGenericType] => [SimpleGenericType.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
+[SimpleGenericType] => [let $instance = new SimpleGenericType();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
+[SimpleGenericType] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(t, s);] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
+[SimpleGenericType] => [return $instance;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<synthetic: ctor_create>"
+[SimpleGenericType] => [$ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object]
 [t] => [t] "t"
 [s] => [s] "s"
-[public SimpleGenericType(T t, S s) {
-    this.first = t;
-    this.second = s;
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
+[SimpleGenericType] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
 [this.first = t;] => [this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = t;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
 [this.second = s;] => [this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = s;] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<init>"
+[test] => [m_test__]
 [@SuppressWarnings("unused")
     SimpleGenericType<Object, Error> g = new SimpleGenericType<>(new Object(), new Error());] => [let g = /**@type {!SimpleGenericType<*, Error>} */ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(j_l_Object.$create__(), Error.$create__()));] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.test"
 [g] => [g] "g"
-[public class SimpleGenericType<T, S> {
-  public T first;
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<clinit>"
+[SimpleGenericType] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType.<clinit>"

@@ -1,36 +1,17 @@
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_js>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [/** @public {QualifiedSuperMethodCall} */
+[InnerClass] => [InnerClass]
+[InnerClass] => [constructor]
+[InnerClass] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_js>"
+[InnerClass] => [/** @public {QualifiedSuperMethodCall} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass;] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_js>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall($outer_this);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass = $outer_this;] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<init>"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<init>"
+[InnerClass] => [$create__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall]
+[InnerClass] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall($outer_this);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [$ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall]
+[InnerClass] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass = $outer_this;] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<init>"
+[InnerClass] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<init>"
+[test] => [m_test__]
 [QualifiedSuperMethodCall.super.f3(1, 1, 2);] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [QualifiedSuperMethodCall.super.f3(1);] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [QualifiedSuperMethodCall.super.f3(1, new int[] {1, 2});] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
@@ -38,7 +19,4 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
 [ints] => [ints] "ints"
 [QualifiedSuperMethodCall.super.f3(1, ints);] => [Main.prototype.f3.call(this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.test"
-[public class InnerClass {
-    public void test() {
-...    }
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<clinit>"
+[InnerClass] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall$InnerClass.<clinit>"

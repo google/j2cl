@@ -1,27 +1,14 @@
-[public class Main {
-  public void test() {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_js>"
-[public class Main {
-  public void test() {
-...  }
-}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<init>"
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_js>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<init>"
+[test] => [m_test__]
 [MyJsType a = new MyJsType();] => [let a = MyJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [a] => [a] "a"
 [SubJsType b = new SubJsType();] => [let b = SubJsType.$create__();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
@@ -39,7 +26,4 @@
 [a.fun(1);] => [a.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [b.fun(1);] => [b.fun(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
 [d.fun(1);] => [d.m_fun__int(1);] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.test"
-[public class Main {
-  public void test() {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.<clinit>"

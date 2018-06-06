@@ -1,44 +1,23 @@
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_js>"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [DualUnrelatedBridges.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [let $instance = new DualUnrelatedBridges();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_DualUnrelatedBridges__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<init>"
+[DualUnrelatedBridges] => [DualUnrelatedBridges]
+[DualUnrelatedBridges] => [constructor]
+[DualUnrelatedBridges] => [super();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_js>"
+[DualUnrelatedBridges] => [$create__]
+[DualUnrelatedBridges] => [DualUnrelatedBridges.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
+[DualUnrelatedBridges] => [let $instance = new DualUnrelatedBridges();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
+[DualUnrelatedBridges] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_DualUnrelatedBridges__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
+[DualUnrelatedBridges] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<synthetic: ctor_create>"
+[DualUnrelatedBridges] => [$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_DualUnrelatedBridges__]
+[DualUnrelatedBridges] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<init>"
+[foo] => [m_foo__java_lang_String__java_lang_Double]
 [s] => [s] "s"
 [n] => [n] "n"
+[foo] => [m_foo__java_lang_String__java_lang_Number]
 [s] => [s] "s"
 [n] => [n] "n"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [this.m_foo__java_lang_String__java_lang_Double(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), /**@type {?number} */ ($Casts.$to(arg1, Double)));] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [this.m_foo__java_lang_String__java_lang_Number(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [this.m_foo__java_lang_String__java_lang_Double(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
-[class DualUnrelatedBridges implements SomeInterface<String, Double>, SomeOtherFooInterface<String> {
-  // foo__Object__Object should be a bridge method
-...  public void foo(String s, Number n) {}
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<clinit>"
+[DualUnrelatedBridges] => [m_foo__java_lang_Object__java_lang_Object]
+[DualUnrelatedBridges] => [this.m_foo__java_lang_String__java_lang_Double(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), /**@type {?number} */ ($Casts.$to(arg1, Double)));] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
+[DualUnrelatedBridges] => [m_foo__java_lang_Object__java_lang_Number]
+[DualUnrelatedBridges] => [this.m_foo__java_lang_String__java_lang_Number(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
+[DualUnrelatedBridges] => [m_foo__java_lang_Object__java_lang_Double]
+[DualUnrelatedBridges] => [this.m_foo__java_lang_String__java_lang_Double(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.foo"
+[DualUnrelatedBridges] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.DualUnrelatedBridges.<clinit>"

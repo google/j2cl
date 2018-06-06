@@ -1,31 +1,15 @@
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_js>"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<init>"
-[public static void test() {
-    A a = new A<Integer>();
-...    l.fun("foo", 1);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_js>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<init>"
+[test] => [m_test__]
+[test] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [A a = new A<Integer>();] => [let a = /**@type {!A<Integer>} */ (A.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [a] => [a] "a"
 [a.fun(1);] => [a.fun(Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
@@ -52,7 +36,4 @@
 [L<Integer> l = new L<>();] => [let l = /**@type {!L<Integer>} */ (L.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [l] => [l] "l"
 [l.fun("foo", 1);] => [l.fun("foo", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
-[public class Main {
-  public static class A<T> {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<clinit>"

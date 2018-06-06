@@ -1,62 +1,41 @@
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_js>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [/** @public {number} */
+[InnerClassInitOrder] => [InnerClassInitOrder]
+[InnerClassInitOrder] => [constructor]
+[InnerClassInitOrder] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_js>"
+[InnerClassInitOrder] => [/** @public {number} */
     this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder = 0;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_js>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [/** @public {Outer} */
+[InnerClassInitOrder] => [/** @public {Outer} */
     this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_js>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [/** @public {OuterIsSuper} */
+[InnerClassInitOrder] => [/** @public {OuterIsSuper} */
     this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_js>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [let $instance = new InnerClassInitOrder();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
+[InnerClassInitOrder] => [$create__]
+[InnerClassInitOrder] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
+[InnerClassInitOrder] => [let $instance = new InnerClassInitOrder();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
+[InnerClassInitOrder] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
+[InnerClassInitOrder] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<synthetic: ctor_create>"
+[InnerClassInitOrder] => [$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__]
+[InnerClassInitOrder] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
+[InnerClassInitOrder] => [this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
+[testOuterThisFromSuperCall] => [m_testOuterThisFromSuperCall__]
 [new OuterRefFromSuperCtorCall();] => [OuterRefFromSuperCtorCall.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterThisFromSuperCall"
 [assert (number == 100);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 100));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterThisFromSuperCall"
+[testOuterThisFromThisCall] => [m_testOuterThisFromThisCall__]
 [new OuterRefFromThisCtorCall();] => [OuterRefFromThisCtorCall.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterThisFromThisCall"
 [assert (number == 1100);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1100));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterThisFromThisCall"
+[testExtendsNested] => [m_testExtendsNested__]
 [ESOuter o = new ESOuter();] => [let o = ESOuter.$create__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNested"
 [o] => [o] "o"
 [assert (1 == o.new ESInner().value);] => [$Asserts.$assert((1 == ESInner.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNested"
 [assert (2 == o.new ESInner(2).value);] => [$Asserts.$assert((2 == ESInner.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__int(o, 2).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNested"
 [assert (1 == new ESInnerSubclass(o).value);] => [$Asserts.$assert((1 == ESInnerSubclass.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNested"
 [assert (2 == new ESInnerSubclass(2, o).value);] => [$Asserts.$assert((2 == ESInnerSubclass.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(2, o).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNested"
+[testExtendsNestedWithGenerics] => [m_testExtendsNestedWithGenerics__]
 [ESWGOuter<String> o = new ESWGOuter<String>();] => [let o = /**@type {!ESWGOuter<?string>} */ (ESWGOuter.$create__());] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNestedWithGenerics"
 [o] => [o] "o"
 [assert (1 == o.new ESWGInner().value);] => [$Asserts.$assert((1 == /**@type {!ESWGInner<?string>} */ (ESWGInner.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(o)).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNestedWithGenerics"
 [assert (2 == o.new ESWGInner(2).value);] => [$Asserts.$assert((2 == /**@type {!ESWGInner<?string>} */ (ESWGInner.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2)).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNestedWithGenerics"
 [assert (1 == new ESWGInnerSubclass(o).value);] => [$Asserts.$assert((1 == ESWGInnerSubclass.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(o).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNestedWithGenerics"
 [assert (2 == new ESWGInnerSubclass(2, o).value);] => [$Asserts.$assert((2 == ESWGInnerSubclass.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testExtendsNestedWithGenerics"
+[testInnerClassCtors] => [m_testInnerClassCtors__]
 [P1<?> p1 = new P1<Object>();] => [let p1 = /**@type {!P1<*>} */ (P1.$create__());] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassCtors"
 [p1] => [p1] "p1"
 [assert (1 == p1.value);] => [$Asserts.$assert((1 == p1.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassCtors"
@@ -67,8 +46,10 @@
 [assert (2 == p1.new P2<Object>(2).value);] => [$Asserts.$assert((2 == /**@type {!P2<*, *>} */ (P2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1__int(p1, 2)).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassCtors"
 [assert (1 == p2.new P3<Object>().value);] => [$Asserts.$assert((1 == /**@type {!P3<*, *, *>} */ (P3.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1_P2(p2)).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassCtors"
 [assert (2 == p2.new P3<Object>(2).value);] => [$Asserts.$assert((2 == /**@type {!P3<*, *, *>} */ (P3.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2)).f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_P1));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassCtors"
+[testInnerClassInitialization] => [m_testInnerClassInitialization__]
 [new InnerClass();] => [InnerClass.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassInitialization"
 [assert (number == 1111);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1111));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassInitialization"
+[testInnerClassLoop] => [m_testInnerClassLoop__]
 [AddNumber[] results = new AddNumber[10];] => [let results = /**@type {!Array<$1AddNumber>} */ ($Arrays.$create([10], $1AddNumber));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [results] => [results] "results"
 [for (int i = 0; i < 10; i++) {
@@ -97,36 +78,42 @@
 [theAp] => [theAp] "theAp"
 [theAp.act();] => [theAp.m_act__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
 [assert (number == 1156);] => [$Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1156));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testInnerClassLoop"
+[testOuterIsNotSuper] => [m_testOuterIsNotSuper__]
 [Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper();] => [let x = OuterIsNotSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuper"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuper"
+[testOuterIsNotSuperAnon] => [m_testOuterIsNotSuperAnon__]
 [Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
     };] => [let x = $2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuperAnon"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuperAnon"
+[testQualifiedSuperCall] => [m_testQualifiedSuperCall__]
 [Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();] => [let x = TestQualifiedSuperCall.$create__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testQualifiedSuperCall"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testQualifiedSuperCall"
+[testQualifiedSuperCallAnon] => [m_testQualifiedSuperCallAnon__]
 [Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall() {};] => [let x = $3.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testQualifiedSuperCallAnon"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testQualifiedSuperCallAnon"
+[testSuperDispatch] => [m_testSuperDispatch__]
 [assert (1 == outerIsSuper.checkDispatchFromSub1());] => [$Asserts.$assert((1 == this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testSuperDispatch"
 [assert (1 == outerIsSuper.checkDispatchFromSub2());] => [$Asserts.$assert((1 == this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testSuperDispatch"
+[testUnqualifiedAlloc] => [m_testUnqualifiedAlloc__]
 [Outer.OuterIsNotSuper x = outerIsSuper.unqualifiedAlloc();] => [let x = this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_.m_unqualifiedAlloc__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedAlloc"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedAlloc"
+[testUnqualifiedSuperCall] => [m_testUnqualifiedSuperCall__]
 [Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall();] => [let x = TestUnqualifiedSuperCall.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCall"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCall"
+[testUnqualifiedSuperCallAnon] => [m_testUnqualifiedSuperCallAnon__]
 [Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
     };] => [let x = $4.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert((2 == x.m_getValue__()));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
+[main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[public static void main(String... args) {
-    InnerClassInitOrder m = new InnerClassInitOrder();
-...    m.testUnqualifiedSuperCallAnon();
-  }] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
+[main] => [InnerClassInitOrder.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [InnerClassInitOrder m = new InnerClassInitOrder();] => [let m = InnerClassInitOrder.$create__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m] => [m] "m"
 [m.testOuterThisFromSuperCall();] => [m.m_testOuterThisFromSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
@@ -144,10 +131,8 @@
 [m.testUnqualifiedAlloc();] => [m.m_testUnqualifiedAlloc__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m.testUnqualifiedSuperCall();] => [m.m_testUnqualifiedSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
 [m.testUnqualifiedSuperCallAnon();] => [m.m_testUnqualifiedSuperCallAnon__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.main"
+[InnerClassInitOrder] => [$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder]
 [public int number = 0;] => [this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder = 0;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
 [private final Outer outer = new Outer(1);] => [this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = Outer.$create__int(1);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
 [private final Outer.OuterIsSuper outerIsSuper = outer.new OuterIsSuper(2);] => [this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = OuterIsSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, 2);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<init>"
-[/**
- * Smoke test for inner classes, copied from GWT.
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<clinit>"
+[InnerClassInitOrder] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.<clinit>"

@@ -1,32 +1,18 @@
-[public static class Outer {
-    public class OuterIsNotSuper {
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_js>"
-[public static class Outer {
-    public class OuterIsNotSuper {
-...    }
-  }] => [/** @public {number} */
+[Outer] => [Outer]
+[Outer] => [constructor]
+[Outer] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_js>"
+[Outer] => [/** @public {number} */
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer = 0;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_js>"
+[Outer] => [$create__int]
 [i] => [i] "i"
-[public Outer(int i) {
-      value = i;
-    }] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
-[public Outer(int i) {
-      value = i;
-    }] => [let $instance = new Outer();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
-[public Outer(int i) {
-      value = i;
-    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(i);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
-[public Outer(int i) {
-      value = i;
-    }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
+[Outer] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
+[Outer] => [let $instance = new Outer();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
+[Outer] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(i);] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
+[Outer] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<synthetic: ctor_create>"
+[Outer] => [$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int]
 [i] => [i] "i"
-[public Outer(int i) {
-      value = i;
-    }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<init>"
+[Outer] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<init>"
 [value = i;] => [this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer = i;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<init>"
+[checkDispatch] => [m_checkDispatch__]
 [return 1;] => [return 1;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.checkDispatch"
-[public static class Outer {
-    public class OuterIsNotSuper {
-...    }
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<clinit>"
+[Outer] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.<clinit>"

@@ -1,8 +1,7 @@
+[SomeOtherFooInterface] => [SomeOtherFooInterface]
+[foo] => [m_foo__java_lang_Object__java_lang_Double]
 [t] => [t] "t"
 [s] => [s] "s"
-[interface SomeOtherFooInterface<T> {
-  void foo(T t, Double s);
-}] => [SomeOtherFooInterface.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.<synthetic: adapt_lambda>"
-[interface SomeOtherFooInterface<T> {
-  void foo(T t, Double s);
-}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.<synthetic: adapt_lambda>"
+[SomeOtherFooInterface] => [$adapt]
+[SomeOtherFooInterface] => [SomeOtherFooInterface.$clinit();] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.<synthetic: adapt_lambda>"
+[SomeOtherFooInterface] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.<synthetic: adapt_lambda>"

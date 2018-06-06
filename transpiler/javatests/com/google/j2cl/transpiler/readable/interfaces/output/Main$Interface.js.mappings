@@ -1,22 +1,19 @@
+[Interface] => [Interface]
+[interfaceMethod] => [m_interfaceMethod__]
+[defaultMethod] => [m_defaultMethod__java_lang_Object]
 [t] => [t] "t"
-[static void staticInterfaceMethod() {
-    }] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.staticInterfaceMethod"
-[interface Interface<T> {
-    public int a = 1;
-...    }
-  }] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.<synthetic: adapt_lambda>"
-[interface Interface<T> {
-    public int a = 1;
-...    }
-  }] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.<synthetic: adapt_lambda>"
+[staticInterfaceMethod] => [m_staticInterfaceMethod__]
+[staticInterfaceMethod] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.staticInterfaceMethod"
+[Interface] => [$adapt]
+[Interface] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.<synthetic: adapt_lambda>"
+[Interface] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.<synthetic: adapt_lambda>"
+[defaultMethod] => [m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object]
 [t] => [t] "t"
-[default void defaultMethod(T t) {
-      this.privateMethod(t);
-    }] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.defaultMethod__$default"
+[defaultMethod] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.defaultMethod__$default"
 [this.privateMethod(t);] => [Interface.m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object_$p_com_google_j2cl_transpiler_readable_interfaces_Main_Interface($thisArg, t);] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.defaultMethod__$default"
+[privateMethod] => [m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object_$p_com_google_j2cl_transpiler_readable_interfaces_Main_Interface]
 [t] => [t] "t"
-[private void privateMethod(T t) {
-    }] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.privateMethod__$private"
+[privateMethod] => [Interface.$clinit();] "com.google.j2cl.transpiler.readable.interfaces.Main$Interface.privateMethod__$private"
 [public int a = 1;] => [/** @public {number} @const */
 Interface.f_a__com_google_j2cl_transpiler_readable_interfaces_Main_Interface = 1;]
 [public static int b = 2;] => [/** @public {number} @const */

@@ -1,33 +1,18 @@
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_js>"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [let $instance = new ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<init>"
+[ImplicitParenthesis] => [ImplicitParenthesis]
+[ImplicitParenthesis] => [constructor]
+[ImplicitParenthesis] => [super();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_js>"
+[ImplicitParenthesis] => [$create__]
+[ImplicitParenthesis] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
+[ImplicitParenthesis] => [let $instance = new ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
+[ImplicitParenthesis] => [$instance.$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
+[ImplicitParenthesis] => [return $instance;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<synthetic: ctor_create>"
+[ImplicitParenthesis] => [$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__]
+[ImplicitParenthesis] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<init>"
+[test] => [m_test__]
 [examples();] => [ImplicitParenthesis.m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.test"
 [nonExamples();] => [ImplicitParenthesis.m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.test"
-[private static void examples() {
-    int primitiveInt;
-...    }
-  }] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
+[examples] => [m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis]
+[examples] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [int primitiveInt;] => [let /** number */ primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt] => [primitiveInt] "primitiveInt"
 [Integer boxedInt;] => [let /** Integer */ boxedInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
@@ -56,10 +41,8 @@
 [boxedInt = new Integer(10);] => [boxedInt = Integer.$create__int(10);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [primitiveInt = ++boxedInt;] => [primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1)).m_intValue__();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
 [assert primitiveInt == 11;] => [$Asserts.$assert(primitiveInt == 11);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.examples"
-[private static void nonExamples() {
-    int primitiveInt;
-...    }
-  }] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
+[nonExamples] => [m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis]
+[nonExamples] => [ImplicitParenthesis.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [int primitiveInt;] => [let /** number */ primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [primitiveInt] => [primitiveInt] "primitiveInt"
 [Integer boxedInt;] => [let /** Integer */ boxedInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
@@ -75,7 +58,4 @@
 [boxedBoolean = true;] => [boxedBoolean = true;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [boxedBoolean = boxedInt == primitiveInt;] => [boxedBoolean = boxedInt.m_intValue__() == primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [assert boxedBoolean == false;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
-[/**
- * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"
+[ImplicitParenthesis] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"

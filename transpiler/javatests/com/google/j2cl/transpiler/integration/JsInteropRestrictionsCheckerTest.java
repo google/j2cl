@@ -2832,8 +2832,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // line 12
             "}")
         .assertErrors(
-            "Buggy.java:5: 'Promise' has invalid name 'invalid.Promise'.",
-            "Buggy.java:7: 'void Promise.method()' has invalid name 'invalid.method'.",
+            "Buggy.java:6: 'Promise' has invalid name 'invalid.Promise'.",
+            "Buggy.java:8: 'void Promise.method()' has invalid name 'invalid.method'.",
             "Buggy.java:10: 'Promise.field' has invalid name 'invalid.field'.");
   }
 

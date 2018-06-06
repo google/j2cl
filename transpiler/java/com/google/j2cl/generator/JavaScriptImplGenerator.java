@@ -78,7 +78,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void emitMethodHeader(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     sourceBuilder.append(getMethodQualifiers(methodDescriptor));
-    sourceBuilder.append(ManglingNameUtils.getMangledName(methodDescriptor));
+    sourceBuilder.emitWithMapping(
+        method.getSourcePosition(),
+        () -> sourceBuilder.append(ManglingNameUtils.getMangledName(methodDescriptor)));
     sourceBuilder.append("(");
     String separator = "";
     Variable varargsParameter = method.getJsVarargsParameter();
@@ -260,11 +262,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeBody() {
-    sourceBuilder.append(
-        "class "
-            + environment.aliasForType(type.getDeclaration())
-            + " "
-            + getExtendsClause(type, environment));
+    sourceBuilder.append("class ");
+    sourceBuilder.emitWithMapping(
+        type.getSourcePosition(),
+        () -> sourceBuilder.append(environment.aliasForType(type.getDeclaration())));
+    sourceBuilder.append(" " + getExtendsClause(type, environment));
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     renderTypeMethods();

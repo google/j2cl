@@ -84,6 +84,11 @@ java_library(
 )
 
 java_library(
+    name = "gson",
+    exports = ["@com_google_gson//jar"],
+)
+
+java_library(
     name = "jakarta_velocity",
     exports = [
         "@org_apache_commons_collections//jar",

@@ -42,7 +42,7 @@ public class OutputGeneratorStage {
   private final Path outputPath;
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
-  private final boolean inlineSourceMaps;
+  private final boolean generateKytheIndexingMetadata;
   private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
@@ -50,13 +50,13 @@ public class OutputGeneratorStage {
       Path outputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
-      boolean inlineSourceMaps,
+      boolean generateKytheIndexingMetadata,
       Problems problems) {
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputPath = outputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
-    this.inlineSourceMaps = inlineSourceMaps;
+    this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
     this.problems = problems;
   }
 
@@ -124,18 +124,18 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
 
         timingReport.startSample("Render source maps");
-        String sourceMap =
-            renderSourceMap(j2clCompilationUnit, type, jsImplGenerator.getSourceMappings());
 
-        if (sourceMap != null) {
-          if (inlineSourceMaps) {
-            // Inline source map so Kythe can create edges between this file and the Java source
-            // file.
-            javaScriptImplementationSource +=
-                // TODO(b/77961191): remove leading newline once the bug is fixed.
-                String.format(
-                    "%n// Source map:%n// %s", sourceMap.replace("\n", "").replace("\r", ""));
-          } else {
+        if (generateKytheIndexingMetadata) {
+          // Inline metadata so Kythe can create edges between this file and the Java source file.
+          String metadata = renderKytheIndexingMetadata(jsImplGenerator.getSourceMappings());
+          javaScriptImplementationSource +=
+              // TODO(b/77961191): remove leading newline once the bug is fixed.
+              String.format("%n// Kythe Indexing Metadata:%n// %s", metadata);
+        } else {
+          String sourceMap =
+              renderSourceMap(j2clCompilationUnit, type, jsImplGenerator.getSourceMappings());
+
+          if (sourceMap != null) {
             javaScriptImplementationSource +=
                 String.format(
                     "%n//# sourceMappingURL=%s",
@@ -165,7 +165,9 @@ public class OutputGeneratorStage {
       }
 
       timingReport.startSample("Copy *.java sources");
-      copyJavaSourcesToOutput(j2clCompilationUnit);
+      if (!generateKytheIndexingMetadata) {
+        copyJavaSourcesToOutput(j2clCompilationUnit);
+      }
     }
     timingReport.startSample("Check unused native impl files.");
     // Error if any of the native implementation files were not used.
@@ -179,6 +181,30 @@ public class OutputGeneratorStage {
   private static final String SOURCE_MAP_SUFFIX = ".js.map";
 
   private static final String READABLE_MAPPINGS_SUFFIX = ".js.mappings";
+
+  private String renderKytheIndexingMetadata(
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+    KytheIndexingMetadata metadata = new KytheIndexingMetadata();
+
+    for (Entry<SourcePosition, SourcePosition> entry :
+        javaSourcePositionByOutputSourcePosition.entrySet()) {
+
+      SourcePosition javaSourcePosition = entry.getValue();
+      SourcePosition javaScriptSourcePosition = entry.getKey();
+
+      metadata.addAnchorAnchor(
+          javaSourcePosition.getStartFilePosition().getByteOffset(),
+          javaSourcePosition.getEndFilePosition().getByteOffset(),
+          javaScriptSourcePosition.getStartFilePosition().getByteOffset(),
+          javaScriptSourcePosition.getEndFilePosition().getByteOffset(),
+          null, // sourceCorpus
+          javaSourcePosition.getFilePath(),
+          null // sourceRoot
+          );
+    }
+
+    return metadata.toJson();
+  }
 
   private String renderSourceMap(
       CompilationUnit compilationUnit,

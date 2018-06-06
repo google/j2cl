@@ -1,9 +1,8 @@
-[interface I {
-    void foo();
-...    default void bar() {}
-  }] => [I.$clinit();] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"
-[interface I {
-    void foo();
-...    default void bar() {}
-  }] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"
-[default void bar() {}] => [I.$clinit();] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.bar__$default"
+[I] => [I]
+[foo] => [m_foo__]
+[bar] => [m_bar__]
+[I] => [$adapt]
+[I] => [I.$clinit();] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"
+[I] => [return new $LambdaAdaptor(fn);] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.<synthetic: adapt_lambda>"
+[bar] => [m_bar__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I]
+[bar] => [I.$clinit();] "com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$I.bar__$default"

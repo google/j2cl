@@ -1,48 +1,25 @@
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_js>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [/** @public {!$Long} */
+[SimpleLongs] => [SimpleLongs]
+[SimpleLongs] => [constructor]
+[SimpleLongs] => [super();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_js>"
+[SimpleLongs] => [/** @public {!$Long} */
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_js>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [/** @public {number} */
+[SimpleLongs] => [/** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ = 0;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_js>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [SimpleLongs.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [let $instance = new SimpleLongs();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<init>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<init>"
+[SimpleLongs] => [$create__]
+[SimpleLongs] => [SimpleLongs.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
+[SimpleLongs] => [let $instance = new SimpleLongs();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
+[SimpleLongs] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
+[SimpleLongs] => [return $instance;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<synthetic: ctor_create>"
+[SimpleLongs] => [$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__]
+[SimpleLongs] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<init>"
+[SimpleLongs] => [this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<init>"
+[getBar] => [m_getBar__]
 [return 0;] => [return $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getBar"
+[getWithSideEffect] => [m_getWithSideEffect__]
 [sideEffect++;] => [this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getWithSideEffect"
 [return this;] => [return this;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.getWithSideEffect"
-[@SuppressWarnings("unused")
-  public void main() {
-...    g = getBar();
-  }] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value$1$, /** SimpleLongs */ $qualifier$1$, /** !$Long */ $value$2$;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
+[main] => [m_main__]
+[main] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value$1$, /** SimpleLongs */ $qualifier$1$, /** !$Long */ $value$2$;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [long a = 0L;] => [let a = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [a] => [a] "a"
 [a = -100000L;] => [a = $LongUtils.$negate($Long.fromInt(100000));] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
@@ -66,8 +43,6 @@
 [long g = foo;] => [let g = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
 [g] => [g] "g"
 [g = getBar();] => [g = this.m_getBar__();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.main"
+[SimpleLongs] => [$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs]
 [public long foo = 0;] => [this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<init>"
-[public class SimpleLongs {
-  public long foo = 0;
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<clinit>"
+[SimpleLongs] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs.<clinit>"

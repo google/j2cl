@@ -1,27 +1,14 @@
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_js>"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [ForStatement.$clinit();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [let $instance = new ForStatement();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<init>"
+[ForStatement] => [ForStatement]
+[ForStatement] => [constructor]
+[ForStatement] => [super();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_js>"
+[ForStatement] => [$create__]
+[ForStatement] => [ForStatement.$clinit();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
+[ForStatement] => [let $instance = new ForStatement();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
+[ForStatement] => [$instance.$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
+[ForStatement] => [return $instance;] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<synthetic: ctor_create>"
+[ForStatement] => [$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__]
+[ForStatement] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<init>"
+[test] => [m_test__]
 [for (int i = 0, count = 0; i < 100; i++) {
       count++;
     }] => [for (let i = 0, count = 0; i < 100; i++) {
@@ -30,7 +17,4 @@
 [i] => [i] "i"
 [count] => [count] "count"
 [count++;] => [count++;] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.test"
-[public class ForStatement {
-  public void test() {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<clinit>"
+[ForStatement] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.<clinit>"

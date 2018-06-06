@@ -1,27 +1,14 @@
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_js>"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [AnonymousInnerClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [let $instance = new AnonymousInnerClass();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<init>"
+[AnonymousInnerClass] => [AnonymousInnerClass]
+[AnonymousInnerClass] => [constructor]
+[AnonymousInnerClass] => [super();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_js>"
+[AnonymousInnerClass] => [$create__]
+[AnonymousInnerClass] => [AnonymousInnerClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
+[AnonymousInnerClass] => [let $instance = new AnonymousInnerClass();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
+[AnonymousInnerClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
+[AnonymousInnerClass] => [return $instance;] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<synthetic: ctor_create>"
+[AnonymousInnerClass] => [$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__]
+[AnonymousInnerClass] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<init>"
+[test] => [m_test__int]
 [arg] => [arg] "arg"
 [InnerClass ic = new InnerClass() {};] => [let ic = $1.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(this);] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.test"
 [ic] => [ic] "ic"
@@ -31,7 +18,4 @@
 [b] => [b] "b"
 [C c = new C() {};] => [let c = $3.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int(this, arg);] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.test"
 [c] => [c] "c"
-[public class AnonymousInnerClass {
-  public class InnerClass {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<clinit>"
+[AnonymousInnerClass] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.<clinit>"

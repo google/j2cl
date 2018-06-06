@@ -1,18 +1,15 @@
+[BiFunction] => [BiFunction]
+[apply] => [m_apply__java_lang_Object__java_lang_Object]
 [t] => [t] "t"
 [u] => [u] "u"
+[andThen] => [m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function]
 [after] => [after] "after"
-[interface BiFunction<T, U, R> {
-    R apply(T t, U u);
-...    }
-  }] => [BiFunction.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<synthetic: adapt_lambda>"
-[interface BiFunction<T, U, R> {
-    R apply(T t, U u);
-...    }
-  }] => [return /**@type {!$LambdaAdaptor<*, *, *>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<synthetic: adapt_lambda>"
+[BiFunction] => [$adapt]
+[BiFunction] => [BiFunction.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<synthetic: adapt_lambda>"
+[BiFunction] => [return /**@type {!$LambdaAdaptor<*, *, *>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.<synthetic: adapt_lambda>"
+[andThen] => [m_andThen__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function]
 [after] => [after] "after"
-[default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
-      return (t, u) -> after.apply(this.apply(t, u));
-    }] => [BiFunction.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.andThen__$default"
+[andThen] => [BiFunction.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.andThen__$default"
 [return (t, u) -> after.apply(this.apply(t, u));] => [return /**@type {BiFunction<*, *, *>} */ (BiFunction.$adapt(((/** * */ t, /** * */ u) =>{
       return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
     })));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction.andThen__$default"

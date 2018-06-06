@@ -1,33 +1,14 @@
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [super();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_js>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [/** @public {number} */
+[Parent] => [Parent]
+[Parent] => [constructor]
+[Parent] => [super();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_js>"
+[Parent] => [/** @public {number} */
     this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent = 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_js>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<init>"
-[private static class Parent {
-    public int fieldInParent;
-...    public void funInParent() {}
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<clinit>"
+[Parent] => [$create__]
+[Parent] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
+[Parent] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
+[Parent] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
+[Parent] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<synthetic: ctor_create>"
+[Parent] => [$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__]
+[Parent] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<init>"
+[funInParent] => [m_funInParent__]
+[Parent] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$Parent.<clinit>"

@@ -1,47 +1,29 @@
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [super();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [/** @public {IThenable<Integer>} */
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
+[Main] => [/** @public {IThenable<Integer>} */
     this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_;] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsasync_Main__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsasync_Main__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_jsasync_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[Main] => [this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[emptyAsyncMethod] => [m_emptyAsyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.jsasync.Main.emptyAsyncMethod"
+[asyncMethod] => [m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync]
 [int result = await(Promise.resolve(7));] => [let result = /**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [result] => [result] "result"
 [return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>} */ (this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(Integer.m_valueOf__int(result)));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[parametricAsyncMethod] => [m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync]
 [value] => [value] "value"
 [return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<*>} */ ($Overlay.m_resolve__java_lang_Object((await /**@type {Promise<*>} */ ($Overlay.m_resolve__java_lang_Object(value)))));] "com.google.j2cl.transpiler.readable.jsasync.Main.parametricAsyncMethod"
-[@JsAsync
-  static IThenable<Void> staticAsyncMethod() {
-    return Promise.resolve(await(Promise.resolve((Void) null)));
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[staticAsyncMethod] => [m_staticAsyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync]
+[staticAsyncMethod] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
 [return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to((await /**@type {Promise<?void>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {?void} */ ($Casts.$to(null, Void))))), Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[testAsyncLambdas] => [m_testAsyncLambdas___$pp_com_google_j2cl_transpiler_readable_jsasync]
 [AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));] => [let i = AsyncInterface.$adapt((async () =>{
       return /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(5)))), Integer))));
     }));] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
@@ -70,8 +52,6 @@
 ...          }
         };] => [let unoptimizableJsFunction = $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [unoptimizableJsFunction] => [unoptimizableJsFunction] "unoptimizableJsFunction"
+[Main] => [$init__com_google_j2cl_transpiler_readable_jsasync_Main]
 [private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = /**@type {Promise<Integer>} */ ($Overlay.m_resolve__java_lang_Object(Integer.m_valueOf__int(10)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
-[public class Main {
-
-...  private static native <T> T await(IThenable<T> thenable);
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"

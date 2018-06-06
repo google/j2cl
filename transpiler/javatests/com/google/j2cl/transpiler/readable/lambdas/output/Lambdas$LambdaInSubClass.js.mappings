@@ -1,27 +1,14 @@
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_js>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [LambdaInSubClass.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [let $instance = new LambdaInSubClass();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<init>"
+[LambdaInSubClass] => [LambdaInSubClass]
+[LambdaInSubClass] => [constructor]
+[LambdaInSubClass] => [super();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_js>"
+[LambdaInSubClass] => [$create__]
+[LambdaInSubClass] => [LambdaInSubClass.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
+[LambdaInSubClass] => [let $instance = new LambdaInSubClass();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
+[LambdaInSubClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
+[LambdaInSubClass] => [return $instance;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<synthetic: ctor_create>"
+[LambdaInSubClass] => [$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__]
+[LambdaInSubClass] => [this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<init>"
+[testLambdaInSubclass] => [m_testLambdaInSubclass__]
 [FunctionalInterface l =
           (i -> {
 ...            return a;
@@ -39,7 +26,4 @@
 [a = this.fieldInParent;] => [a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
 [a = LambdaInSubClass.this.fieldInParent;] => [a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
-[private static class LambdaInSubClass extends Parent {
-    public void testLambdaInSubclass() {
-...    }
-  }] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"
+[LambdaInSubClass] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"

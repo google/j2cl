@@ -1,44 +1,26 @@
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_js>"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<init>"
+[Parent] => [Parent]
+[Parent] => [constructor]
+[Parent] => [super();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_js>"
+[Parent] => [$create__]
+[Parent] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
+[Parent] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
+[Parent] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
+[Parent] => [return $instance;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<synthetic: ctor_create>"
+[Parent] => [$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__]
+[Parent] => [this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<init>"
+[fun] => [sum]
 [a] => [a] "a"
 [b] => [b] "b"
 [return a + b;] => [return a + b;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
+[bar] => [bar]
 [a] => [a] "a"
 [b] => [b] "b"
 [return a * b;] => [return a * b;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
+[foo] => [myFoo]
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.foo"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [return this.bar(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [return this.sum(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
-[public class Parent extends SuperParent {
-  /**
-...  }
-}] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<clinit>"
+[Parent] => [m_bar__int__int]
+[Parent] => [return this.bar(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.bar"
+[Parent] => [m_fun__int__int]
+[Parent] => [return this.sum(arg0, arg1);] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.fun"
+[Parent] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.instancejsmethods.Parent.<clinit>"

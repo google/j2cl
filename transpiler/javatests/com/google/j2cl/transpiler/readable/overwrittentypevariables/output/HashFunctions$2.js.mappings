@@ -1,7 +1,25 @@
 [{
       @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    }] => [$2]
+[{
+      @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    }] => [constructor]
+[{
+      @Override
 ...      }
     }] => [super();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2.<synthetic: ctor_js>"
+[{
+      @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    }] => [$create__]
 [{
       @Override
 ...      }
@@ -20,10 +38,23 @@
     }] => [return $instance;] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2.<synthetic: ctor_create>"
 [{
       @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    }] => [$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__]
+[{
+      @Override
 ...      }
     }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2.<init>"
+[apply] => [m_apply__java_lang_Enum]
 [input] => [input] "input"
 [return "" + input.ordinal();] => [return "" + /**@type {Enum} */ (input).ordinal();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2.apply"
+[{
+      @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    }] => [m_apply__java_lang_Object]
 [{
       @Override
 ...      }

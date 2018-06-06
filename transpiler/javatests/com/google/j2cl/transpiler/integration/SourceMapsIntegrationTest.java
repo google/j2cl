@@ -17,8 +17,6 @@ package com.google.j2cl.transpiler.integration;
 
 import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterWithDefaults;
 
-import com.google.j2cl.transpiler.integration.TranspilerTester.TranspileResult;
-import java.util.List;
 import junit.framework.TestCase;
 
 /** Tests related to sourcemap processing. */
@@ -29,18 +27,5 @@ public class SourceMapsIntegrationTest extends TestCase {
         .addArgs("-readablesourcemaps")
         .assertTranspileSucceeds()
         .assertNoWarnings();
-  }
-
-  public void testInlineSourceMaps() throws Exception {
-    TranspileResult result =
-        newTesterWithDefaults()
-            .addFile("test/SourceMapTest.java", "package test; public class SourceMapTest {}")
-            .addArgs("-inlinesourcemaps")
-            .assertTranspileSucceeds()
-            .assertNoWarnings();
-
-    List<String> lines = result.getOutputSource("test/SourceMapTest.impl.java.js");
-    assertTrue(lines.size() > 1);
-    assertTrue(lines.get(lines.size() - 2).equals("// Source map:"));
   }
 }

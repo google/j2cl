@@ -1,42 +1,37 @@
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_js>"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [let $instance = new GenericMethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<init>"
+[GenericMethod] => [GenericMethod]
+[GenericMethod] => [constructor]
+[GenericMethod] => [super();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_js>"
+[GenericMethod] => [$create__]
+[GenericMethod] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [let $instance = new GenericMethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [$instance.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [return $instance;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__]
+[GenericMethod] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<init>"
+[foo] => [m_foo__java_lang_Object__java_lang_Object]
 [f] => [f] "f"
 [s] => [s] "s"
+[fun] => [m_fun__java_lang_Object]
 [o] => [o] "o"
+[fun] => [m_fun__java_lang_Exception]
 [t] => [t] "t"
+[fun] => [m_fun__java_lang_Error]
 [t] => [t] "t"
 [new GenericMethod<T>() { // inherit method T
       public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
     };] => [/**@type {!$1<Error, C_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [new LocalClass<T>();] => [/**@type {!$1LocalClass<Error, Error, C_T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
+[bar] => [m_bar__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.bar"
+[fun] => [m_fun__arrayOf_java_lang_Object]
 [array] => [array] "array"
 [return array;] => [return array;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
+[checked] => [m_checked__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.checked"
+[unchecked] => [m_unchecked__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.unchecked"
+[test] => [m_test__]
 [GenericMethod<Number> g = new GenericMethod<>();] => [let g = /**@type {!GenericMethod<(Number|number)>} */ (GenericMethod.$create__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [g] => [g] "g"
 [g.foo(g, g);] => [g.m_foo__java_lang_Object__java_lang_Object(g, g);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
@@ -48,14 +43,14 @@
 [String s = checked();] => [let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), j_l_String));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string} */ (this.m_unchecked__());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.test"
+[acceptsContent] => [m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content]
 [content] => [content] "content"
-[public static void acceptsContent(Content content) {}] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.acceptsContent"
+[acceptsContent] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.acceptsContent"
+[acceptsString] => [m_acceptsString__java_lang_String]
 [string] => [string$1$] "string"
-[public static void acceptsString(String string) {}] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.acceptsString"
-[public static void testErasureCast_wildcard() {
-    List<Container<?>> list = null;
-...    acceptsContent(deepContent);
-  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
+[acceptsString] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.acceptsString"
+[testErasureCast_wildcard] => [m_testErasureCast_wildcard__]
+[testErasureCast_wildcard] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
 [List<Container<?>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Container<Content>} */ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
@@ -74,10 +69,8 @@
 [deepContent] => [deepContent] "deepContent"
 [acceptsString(deepContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
 [acceptsContent(deepContent);] => [GenericMethod.m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(deepContent);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_wildcard"
-[public static <CT extends Container<C>, C extends Content> void testErasureCast_typeVariable() {
-    List<Container<C>> list = null;
-...    acceptsContent(deepContent);
-  }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
+[testErasureCast_typeVariable] => [m_testErasureCast_typeVariable__]
+[testErasureCast_typeVariable] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
 [List<Container<C>> list = null;] => [let list = null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Container<Content>} */ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
@@ -96,7 +89,4 @@
 [deepContent] => [deepContent] "deepContent"
 [acceptsString(deepContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_com_google_j2cl_transpiler_readable_genericmethod());] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
 [acceptsContent(deepContent);] => [GenericMethod.m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(deepContent);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.testErasureCast_typeVariable"
-[public class GenericMethod<T> {
-  public <T, S> void foo(T f, S s) {} // two type parameters, no bounds.
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<clinit>"
+[GenericMethod] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.<clinit>"

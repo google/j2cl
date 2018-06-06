@@ -1,39 +1,38 @@
-[public class Varargs {
-  public Varargs(int... args) {}
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_js>"
+[Varargs] => [Varargs]
+[Varargs] => [constructor]
+[Varargs] => [super();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_js>"
+[Varargs] => [$create__arrayOf_int]
 [args] => [args] "args"
-[public Varargs(int... args) {}] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs(int... args) {}] => [let $instance = new Varargs();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs(int... args) {}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(args);] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs(int... args) {}] => [return $instance;] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [let $instance = new Varargs();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(args);] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [return $instance;] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int]
 [args] => [args] "args"
-[public Varargs(int... args) {}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<init>"
-[public Varargs() {
-    this(1);
-  }] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs() {
-    this(1);
-  }] => [let $instance = new Varargs();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs() {
-    this(1);
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
-[public Varargs() {
-    this(1);
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<init>"
+[Varargs] => [$create__]
+[Varargs] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [let $instance = new Varargs();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [$instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [return $instance;] "com.google.j2cl.transpiler.readable.varargs.Varargs.<synthetic: ctor_create>"
+[Varargs] => [$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__]
 [this(1);] => [this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(/**@type {!Array<number>} */ ($Arrays.$init([1], $int)));] "com.google.j2cl.transpiler.readable.varargs.Varargs.<init>"
+[test] => [m_test__int__arrayOf_java_lang_Object]
 [a] => [a] "a"
 [args] => [args] "args"
+[testCloneable] => [m_testCloneable__arrayOf_java_lang_Cloneable]
 [args] => [args] "args"
+[testSerializable] => [m_testSerializable__arrayOf_java_io_Serializable]
 [args] => [args] "args"
+[fun] => [m_fun__arrayOf_java_lang_Object]
 [elements] => [elements] "elements"
-[public static <T> void fun(T... elements) {}] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.fun"
+[fun] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.fun"
+[bar] => [m_bar__java_lang_Object__java_lang_Object]
 [a] => [a] "a"
 [b] => [b] "b"
-[public static <E> void bar(E a, E b) {
-    fun(a, b);
-  }] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.bar"
+[bar] => [Varargs.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.bar"
 [fun(a, b);] => [Varargs.m_fun__arrayOf_java_lang_Object([a, b]);] "com.google.j2cl.transpiler.readable.varargs.Varargs.bar"
+[main] => [m_main__]
 [Varargs v = new Varargs();] => [let v = Varargs.$create__();] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
 [v] => [v] "v"
 [v.test(1);] => [v.m_test__int__arrayOf_java_lang_Object(1, []);] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
@@ -43,7 +42,4 @@
 [v.test(1, new Object[][] {});] => [v.m_test__int__arrayOf_java_lang_Object(1, /**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
 [v.testCloneable(new Object[][] {});] => [v.m_testCloneable__arrayOf_java_lang_Cloneable(/**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
 [v.testSerializable(new Object[][] {});] => [v.m_testSerializable__arrayOf_java_io_Serializable(/**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));] "com.google.j2cl.transpiler.readable.varargs.Varargs.main"
-[public class Varargs {
-  public Varargs(int... args) {}
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<clinit>"
+[Varargs] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.varargs.Varargs.<clinit>"

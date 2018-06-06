@@ -1,90 +1,53 @@
-[public class Main {
-
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_js>"
-[public class Main {
-
-...  }
-}] => [/** @public {number} */
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_js>"
+[Main] => [/** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_js>"
+[Main] => [$create__int]
 [f] => [f] "f"
-[public Main(int f) {
-    this.field = f;
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
-[public Main(int f) {
-    this.field = f;
-  }] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
-[public Main(int f) {
-    this.field = f;
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
-[public Main(int f) {
-    this.field = f;
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int]
 [f] => [f] "f"
-[public Main(int f) {
-    this.field = f;
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<init>"
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<init>"
 [this.field = f;] => [this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<init>"
+[f1] => [f1]
 [multiplier] => [multiplier] "multiplier"
 [numbers] => [numbers] "numbers"
-[@JsMethod
-  public static int f1(int multiplier, int... numbers) {
-    return numbers.length + numbers[0] + multiplier;
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
-[@JsMethod
-  public static int f1(int multiplier, int... numbers) {
-    return numbers.length + numbers[0] + multiplier;
-  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
+[f1] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
+[f1] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
 [return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f1"
+[f2] => [f2]
 [numbers] => [numbers] "numbers"
-[@JsMethod
-  public static int f2(int... numbers) {
-    return numbers.length + numbers[0];
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
-[@JsMethod
-  public static int f2(int... numbers) {
-    return numbers.length + numbers[0];
-  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
+[f2] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
+[f2] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
 [return numbers.length + numbers[0];] => [return numbers.length + numbers[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f2"
+[f3] => [f3]
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
-[@JsMethod
-  public int f3(int m, int... numbers) {
-    return this.field + m + numbers[1];
-  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
+[f3] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
 [return this.field + m + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + m + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f3"
+[f4] => [f4]
 [numbers] => [numbers] "numbers"
-[@JsMethod
-  public int f4(int... numbers) {
-    return this.field + numbers[1];
-  }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
+[f4] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
 [return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + numbers[1];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.f4"
+[generics] => [generics]
 [elements] => [elements] "elements"
-[@JsMethod
-  public static <T> T generics(T... elements) {
-    return elements[0];
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
+[generics] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
 [return elements[0];] => [return elements[0];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.generics"
+[parameterizedType] => [parameterizedType]
 [elements] => [elements] "elements"
-[@JsMethod
-  public static Main parameterizedType(List<Main>... elements) {
-    return elements[0].get(0);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
-[@JsMethod
-  public static Main parameterizedType(List<Main>... elements) {
-    return elements[0].get(0);
-  }] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
+[parameterizedType] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
+[parameterizedType] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
 [return elements[0].get(0);] => [return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedType"
+[parameterizedByT] => [parameterizedByT]
 [elements] => [elements] "elements"
-[@JsMethod
-  public static <T> T parameterizedByT(List<T>... elements) {
-    return elements[0].get(0);
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
-[@JsMethod
-  public static <T> T parameterizedByT(List<T>... elements) {
-    return elements[0].get(0);
-  }] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
+[parameterizedByT] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
+[parameterizedByT] => [$Arrays.$stampType(elements, List, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
 [return elements[0].get(0);] => [return elements[0].getAtIndex(0);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.parameterizedByT"
+[testStaticMethodNotFirst] => [m_testStaticMethodNotFirst__]
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [f1(1);] => [Main.f1(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
@@ -98,6 +61,7 @@
 [f1(1, ints);] => [Main.f1(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, ints);] => [Main.f1(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, null);] => [Main.f1(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodNotFirst"
+[testStaticMethodFirst] => [m_testStaticMethodFirst__]
 [f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [Main.f2(1, 2);] => [Main.f2(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
@@ -121,6 +85,7 @@
 [f2(ints);] => [Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [Main.f2(ints);] => [Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
 [Main.<Integer>generics(integers);] => [Main.generics(...$InternalPreconditions.m_checkNotNull__java_lang_Object(integers));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testStaticMethodFirst"
+[testInstanceMethodNotFirst] => [m_testInstanceMethodNotFirst__]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [m] => [m] "m"
 [m.f3(1, 1, 2);] => [m.f3(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
@@ -130,6 +95,7 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
 [ints] => [ints] "ints"
 [m.f3(1, ints);] => [m.f3(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodNotFirst"
+[testInstanceMethodFirst] => [m_testInstanceMethodFirst__]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [m] => [m] "m"
 [m.f4(1, 2);] => [m.f4(1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
@@ -139,6 +105,7 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
 [ints] => [ints] "ints"
 [m.f4(ints);] => [m.f4(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testInstanceMethodFirst"
+[testJsFunction] => [m_testJsFunction__]
 [AFunction a = new AFunction();] => [let a = AFunction.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [a] => [a] "a"
 [Object o1 = new Object();] => [let o1 = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
@@ -152,12 +119,15 @@
 [Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
 [os] => [os] "os"
 [a.f1(0, os);] => [a(0, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(os));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testJsFunction"
+[testSideEffect] => [m_testSideEffect__]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
 [ints] => [ints] "ints"
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testSideEffect"
+[testNullJsVarargs] => [m_testNullJsVarargs__]
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testNullJsVarargs"
 [ints] => [ints] "ints"
 [Main.f2(ints);] => [Main.f2(...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testNullJsVarargs"
+[testGenericJsFunctionWithVarags] => [m_testGenericJsFunctionWithVarags__]
 [GenericFunction<U> function = (n, param) -> param;] => [let function$1$ = (/** @param {M_U} n @param {...?} param */ (n, ...param) =>{
       return param;
     });] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testGenericJsFunctionWithVarags"
@@ -165,7 +135,4 @@
 [n] => [n] "n"
 [param] => [param] "param"
 [param] => [return param;] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<lambda in testGenericJsFunctionWithVarags>"
-[public class Main {
-
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"

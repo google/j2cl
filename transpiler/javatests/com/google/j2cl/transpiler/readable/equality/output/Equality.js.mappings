@@ -1,33 +1,17 @@
-[public class Equality {
-  public void test() {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_js>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [Equality.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [let $instance = new Equality();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality__();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
-[public class Equality {
-  public void test() {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.equality.Equality.<init>"
+[Equality] => [Equality]
+[Equality] => [constructor]
+[Equality] => [super();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_js>"
+[Equality] => [$create__]
+[Equality] => [Equality.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
+[Equality] => [let $instance = new Equality();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
+[Equality] => [$instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality__();] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
+[Equality] => [return $instance;] "com.google.j2cl.transpiler.readable.equality.Equality.<synthetic: ctor_create>"
+[Equality] => [$ctor__com_google_j2cl_transpiler_readable_equality_Equality__]
+[Equality] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.equality.Equality.<init>"
+[test] => [m_test__]
 [assert false == false;] => [$Asserts.$assert(false == false);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert 0 != 1;] => [$Asserts.$assert(0 != 1);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != new Object();] => [$Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert null != new Object();] => [$Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != null;] => [$Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
-[public class Equality {
-  public void test() {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<clinit>"
+[Equality] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.equality.Equality.<clinit>"

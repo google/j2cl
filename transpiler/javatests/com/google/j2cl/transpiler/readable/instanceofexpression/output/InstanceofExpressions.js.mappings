@@ -1,27 +1,14 @@
-[public class InstanceofExpressions {
-
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_js>"
-[public class InstanceofExpressions {
-
-...  }
-}] => [InstanceofExpressions.$clinit();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[public class InstanceofExpressions {
-
-...  }
-}] => [let $instance = new InstanceofExpressions();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[public class InstanceofExpressions {
-
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[public class InstanceofExpressions {
-
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[public class InstanceofExpressions {
-
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<init>"
+[InstanceofExpressions] => [InstanceofExpressions]
+[InstanceofExpressions] => [constructor]
+[InstanceofExpressions] => [super();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_js>"
+[InstanceofExpressions] => [$create__]
+[InstanceofExpressions] => [InstanceofExpressions.$clinit();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
+[InstanceofExpressions] => [let $instance = new InstanceofExpressions();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
+[InstanceofExpressions] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
+[InstanceofExpressions] => [return $instance;] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
+[InstanceofExpressions] => [$ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__]
+[InstanceofExpressions] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<init>"
+[testInstanceofClass] => [m_testInstanceofClass__]
 [Object object = new InstanceofExpressions();] => [let object = InstanceofExpressions.$create__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [object] => [object] "object"
 [boolean b;] => [let /** boolean */ b;] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofClass"
@@ -29,12 +16,14 @@
 [b = object instanceof Object;] => [b = !$Equality.$same(object, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [b = object instanceof InstanceofExpressions;] => [b = InstanceofExpressions.$isInstance(object);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [b = object instanceof String;] => [b = j_l_String.$isInstance(object);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofClass"
+[testInstanceofInterface] => [m_testInstanceofInterface__]
 [Object o = new Object();] => [let o = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [o] => [o] "o"
 [boolean b;] => [let /** boolean */ b;] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [b] => [b] "b"
 [b = o instanceof Serializable;] => [b = Serializable.$isInstance(o);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [b = new Serializable() {} instanceof Serializable;] => [b = !$Equality.$same($1.$create__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions(this), null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofInterface"
+[testInstanceofBoxedType] => [m_testInstanceofBoxedType__]
 [Object b = new Integer(1);] => [let b = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [b] => [b] "b"
 [boolean a = b instanceof Byte;] => [let a = Byte.$isInstance(b);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
@@ -52,6 +41,7 @@
 [a = d instanceof Object;] => [a = !$Equality.$same(d, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [a = d instanceof Number;] => [a = !$Equality.$same(d, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [a = d instanceof Double;] => [a = !$Equality.$same(d, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
+[testInstanceOfArray] => [m_testInstanceOfArray__]
 [Object object = new Object();] => [let object = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [object] => [object] "object"
 [Object[] objectArray = new Object[0];] => [let objectArray = new Array(0);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceOfArray"
@@ -75,7 +65,4 @@
 [a = objectDoubleArray instanceof String[][];] => [a = $Arrays.$instanceIsOfType(objectDoubleArray, j_l_String, 2);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [a = stringArray instanceof Object[];] => [a = !$Equality.$same(stringArray, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [a = stringArray instanceof String[];] => [a = !$Equality.$same(stringArray, null);] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.testInstanceOfArray"
-[public class InstanceofExpressions {
-
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<clinit>"
+[InstanceofExpressions] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.<clinit>"

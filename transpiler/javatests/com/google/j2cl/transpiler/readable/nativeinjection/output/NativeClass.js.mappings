@@ -1,31 +1,16 @@
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [super();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_js>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [NativeClass.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [let $instance = new NativeClass();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<init>"
-[public class NativeClass {
-  public native String nativeInstanceMethod();
-...  public static native NativeClass nativeStaticMethod();
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<clinit>"
+[NativeClass] => [NativeClass]
+[NativeClass] => [constructor]
+[NativeClass] => [super();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_js>"
+[NativeClass] => [$create__]
+[NativeClass] => [NativeClass.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
+[NativeClass] => [let $instance = new NativeClass();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
+[NativeClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
+[NativeClass] => [return $instance;] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<synthetic: ctor_create>"
+[NativeClass] => [$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__]
+[NativeClass] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<init>"
+[nativeInstanceMethod] => [m_nativeInstanceMethod__]
+[nativeStaticMethod] => [m_nativeStaticMethod__]
+[NativeClass] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<clinit>"
 [// Copyright 2017 Google Inc.] => [// Copyright 2017 Google Inc.] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<native>"
 [//] => [//] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<native>"
 [// Licensed under the Apache License, Version 2.0 (the "License");] => [// Licensed under the Apache License, Version 2.0 (the "License");] "com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.<native>"

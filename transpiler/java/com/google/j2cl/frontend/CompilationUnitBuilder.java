@@ -213,7 +213,7 @@ public class CompilationUnitBuilder {
 
     private Type convertAndAddType(AbstractTypeDeclaration typeDeclaration) {
       ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      Type type = createType(typeBinding, typeDeclaration);
+      Type type = createType(typeBinding, typeDeclaration.getName());
       pushType(type);
       j2clCompilationUnit.addType(type);
       convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
@@ -367,7 +367,7 @@ public class CompilationUnitBuilder {
               ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
               : convert(methodDeclaration.getBody());
 
-      return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration)
+      return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration.getName())
           .setParameters(parameters)
           .addStatements(body.getStatements())
           .build();
@@ -1942,14 +1942,14 @@ public class CompilationUnitBuilder {
           .makeStatement(getSourcePosition(statement));
     }
 
-    private Type createType(ITypeBinding typeBinding, ASTNode typeDeclarationNode) {
+    private Type createType(ITypeBinding typeBinding, ASTNode sourcePositionNode) {
       if (typeBinding == null) {
         return null;
       }
       Visibility visibility = JdtUtils.getVisibility(typeBinding);
       TypeDeclaration typeDeclaration = JdtUtils.createDeclarationForType(typeBinding);
 
-      Type type = new Type(getSourcePosition(typeDeclarationNode), visibility, typeDeclaration);
+      Type type = new Type(getSourcePosition(sourcePositionNode), visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
       return type;
     }

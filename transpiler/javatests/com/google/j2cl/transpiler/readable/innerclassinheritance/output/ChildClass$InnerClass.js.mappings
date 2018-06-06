@@ -1,41 +1,20 @@
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_js>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [/** @public {ChildClass} */
+[InnerClass] => [InnerClass]
+[InnerClass] => [constructor]
+[InnerClass] => [super();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_js>"
+[InnerClass] => [/** @public {ChildClass} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_js>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [/** @public {number} */
+[InnerClass] => [/** @public {number} */
     this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = 0;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_js>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass($outer_this);] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = $outer_this;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<init>"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<init>"
+[InnerClass] => [$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass]
+[InnerClass] => [InnerClass.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [let $instance = new InnerClass();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass($outer_this);] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<synthetic: ctor_create>"
+[InnerClass] => [$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass]
+[InnerClass] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass = $outer_this;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<init>"
+[InnerClass] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<init>"
+[funInInner] => [m_funInInner__]
+[testInnerClass] => [m_testInnerClass__]
 [funInParentOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
 [ChildClass.this.funInParentOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
 [funInOuter();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass.m_funInOuter__();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
@@ -54,7 +33,4 @@
 [a = this.fieldInInner;] => [a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
 [a = fieldInInner;] => [a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.testInnerClass"
-[class InnerClass extends ParentInner {
-    public int fieldInInner;
-...    }
-  }] => [ParentInner.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<clinit>"
+[InnerClass] => [ParentInner.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass.<clinit>"

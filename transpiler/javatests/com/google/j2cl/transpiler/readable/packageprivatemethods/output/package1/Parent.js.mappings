@@ -1,38 +1,21 @@
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_js>"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<init>"
+[Parent] => [Parent]
+[Parent] => [constructor]
+[Parent] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_js>"
+[Parent] => [$create__]
+[Parent] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
+[Parent] => [let $instance = new Parent();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
+[Parent] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
+[Parent] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<synthetic: ctor_create>"
+[Parent] => [$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__]
+[Parent] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<init>"
+[foo] => [m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1]
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.foo"
+[bar] => [m_bar__int__int__int]
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
 [return a + b + c + 1;] => [return a + b + c + 1;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [return this.m_bar__int__int__int(arg0, arg1, arg2);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
-[public class Parent extends SuperParent {
-  // This is directly exposed by Child
-...  }
-}] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<clinit>"
+[Parent] => [m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1]
+[Parent] => [return this.m_bar__int__int__int(arg0, arg1, arg2);] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.bar"
+[Parent] => [SuperParent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent.<clinit>"

@@ -1,5 +1,43 @@
 [{
 
+                  @Override
+                  public String m(String s) {
+                    final int r1 = r;
+                    final int var1 = var;
+                    final String x1 = x;
+                    return String.valueOf(r)
+                        + s
+                        + x
+                        + var
+                        + new F() {
+                          @Override
+                          public String m(String s) {
+                            return s + r1 + x1 + var1;
+                          }
+                        }.m("hello");
+                  }
+                }] => [$1_$1]
+[{
+
+                  @Override
+                  public String m(String s) {
+                    final int r1 = r;
+                    final int var1 = var;
+                    final String x1 = x;
+                    return String.valueOf(r)
+                        + s
+                        + x
+                        + var
+                        + new F() {
+                          @Override
+                          public String m(String s) {
+                            return s + r1 + x1 + var1;
+                          }
+                        }.m("hello");
+                  }
+                }] => [constructor]
+[{
+
 ...                  }
                 }] => [super();] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.<synthetic: ctor_js>"
 [{
@@ -24,6 +62,25 @@
     this.$c_x;] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.<synthetic: ctor_js>"
 [{
 
+                  @Override
+                  public String m(String s) {
+                    final int r1 = r;
+                    final int var1 = var;
+                    final String x1 = x;
+                    return String.valueOf(r)
+                        + s
+                        + x
+                        + var
+                        + new F() {
+                          @Override
+                          public String m(String s) {
+                            return s + r1 + x1 + var1;
+                          }
+                        }.m("hello");
+                  }
+                }] => [$create__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String]
+[{
+
 ...                  }
                 }] => [$1_$1.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.<synthetic: ctor_create>"
 [{
@@ -38,6 +95,25 @@
 
 ...                  }
                 }] => [return $Util.$makeLambdaFunction($1_$1.prototype.m_m__java_lang_String, $instance, $1_$1.$copy);] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.<synthetic: ctor_create>"
+[{
+
+                  @Override
+                  public String m(String s) {
+                    final int r1 = r;
+                    final int var1 = var;
+                    final String x1 = x;
+                    return String.valueOf(r)
+                        + s
+                        + x
+                        + var
+                        + new F() {
+                          @Override
+                          public String m(String s) {
+                            return s + r1 + x1 + var1;
+                          }
+                        }.m("hello");
+                  }
+                }] => [$ctor__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_1__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String]
 [{
 
 ...                  }
@@ -58,6 +134,7 @@
 
 ...                  }
                 }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.<init>"
+[m] => [m_m__java_lang_String]
 [s] => [s] "s"
 [final int r1 = r;] => [let r1 = this.$c_r;] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$1.m"
 [r1] => [r1] "r1"

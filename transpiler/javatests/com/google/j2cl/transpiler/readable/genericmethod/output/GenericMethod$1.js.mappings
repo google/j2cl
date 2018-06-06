@@ -1,5 +1,15 @@
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    }] => [$1]
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    }] => [constructor]
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
     }] => [super();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<synthetic: ctor_js>"
 [{ // inherit method T
@@ -7,6 +17,11 @@
 ...      public <T> void fun2(T t) {} // redefine T
     }] => [/** @public {GenericMethod<C_T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<synthetic: ctor_js>"
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    }] => [$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod]
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
@@ -25,13 +40,20 @@
     }] => [return $instance;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<synthetic: ctor_create>"
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    }] => [$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod]
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
     }] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1 = $outer_this;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<init>"
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
     }] => [this.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<init>"
+[fun2] => [m_fun2__java_lang_Error]
 [t] => [t] "t"
+[fun2] => [m_fun2__java_lang_Object]
 [t] => [t] "t"
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T

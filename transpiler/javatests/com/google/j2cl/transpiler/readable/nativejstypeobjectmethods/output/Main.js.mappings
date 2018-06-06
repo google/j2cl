@@ -1,31 +1,15 @@
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_js>"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main__();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<init>"
-[public static void test() {
-    NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();
-...    n4.toString();
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_js>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main__();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<init>"
+[test] => [m_test__]
+[test] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();] => [let n1 = new NativeJsTypeWithToString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [n1] => [n1] "n1"
 [n1.toString();] => [n1.toString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
@@ -38,7 +22,4 @@
 [Object n4 = new NativeJsTypeWithoutToString();] => [let n4 = new NativeJsTypeWithoutToString();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
 [n4] => [n4] "n4"
 [n4.toString();] => [$Objects.m_toString__java_lang_Object(n4);] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.test"
-[public class Main {
-  @JsType(isNative = true, namespace = "test.foo")
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.<clinit>"

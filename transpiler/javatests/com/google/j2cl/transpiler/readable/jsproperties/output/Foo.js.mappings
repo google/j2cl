@@ -1,79 +1,31 @@
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_js>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [let $instance = new Foo();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo__();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<init>"
-[@JsProperty
-  public static int getA() {
-    return f + 1;
-  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
+[Foo] => [Foo]
+[Foo] => [constructor]
+[Foo] => [super();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_js>"
+[Foo] => [$create__]
+[Foo] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
+[Foo] => [let $instance = new Foo();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
+[Foo] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo__();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
+[Foo] => [return $instance;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: ctor_create>"
+[Foo] => [$ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo__]
+[Foo] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<init>"
+[getA] => [get a]
+[getA] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
 [return f + 1;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getA"
+[setA] => [set a]
 [x] => [x] "x"
-[@JsProperty
-  public static void setA(int x) {
-    f = x + 2;
-  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
+[setA] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
 [f = x + 2;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setA"
-[@JsProperty(name = "abc")
-  public static int getB() {
-    return f + 3;
-  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
+[getB] => [get abc]
+[getB] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
 [return f + 3;] => [return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.getB"
+[setB] => [set abc]
 [x] => [x] "x"
-[@JsProperty(name = "abc")
-  public static void setB(int x) {
-    f = x + 4;
-  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
+[setB] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
 [f = x + 4;] => [Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;] "com.google.j2cl.transpiler.readable.jsproperties.Foo.setB"
+[private static int f;] => [get f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_]
 [private static int f;] => [return (Foo.$clinit(), Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_);] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: getter>"
+[private static int f;] => [set f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_]
 [private static int f;] => [(Foo.$clinit(), Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = value);] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<synthetic: setter>"
-[/**
- * Tests for non native static JsProperty.
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<clinit>"
-[/**
- * Tests for non native static JsProperty.
- */
-public class Foo {
-  private static int f;
-
-  @JsProperty
-  public static int getA() {
-    return f + 1;
-  }
-
-  @JsProperty
-  public static void setA(int x) {
-    f = x + 2;
-  }
-
-  @JsProperty(name = "abc")
-  public static int getB() {
-    return f + 3;
-  }
-
-  @JsProperty(name = "abc")
-  public static void setB(int x) {
-    f = x + 4;
-  }
-}] => [/** @private {number} */
+[Foo] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsproperties.Foo.<clinit>"
+[Foo] => [/** @private {number} */
 Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;]

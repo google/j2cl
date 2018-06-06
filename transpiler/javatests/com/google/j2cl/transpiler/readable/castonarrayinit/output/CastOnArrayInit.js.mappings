@@ -1,39 +1,21 @@
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_js>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [let $instance = new CastOnArrayInit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<init>"
+[CastOnArrayInit] => [CastOnArrayInit]
+[CastOnArrayInit] => [constructor]
+[CastOnArrayInit] => [super();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_js>"
+[CastOnArrayInit] => [$create__]
+[CastOnArrayInit] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
+[CastOnArrayInit] => [let $instance = new CastOnArrayInit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
+[CastOnArrayInit] => [$instance.$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
+[CastOnArrayInit] => [return $instance;] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<synthetic: ctor_create>"
+[CastOnArrayInit] => [$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__]
+[CastOnArrayInit] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<init>"
+[fun] => [m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo]
 [args] => [args] "args"
-[public static <E> void fun(Foo<E>... args) {}] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
-[public static <E> void test() {
-    Foo<E> f1 = new Foo<>();
-...    fun(f1, f2);
-  }] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
+[fun] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
+[test] => [m_test__]
+[test] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<*>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f1] => [f1] "f1"
 [Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!Foo<*>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f2] => [f2] "f2"
 [fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(/**@type {!Array<Foo<*>>} */ ($Arrays.$init([f1, f2], Foo)));] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
-[public class CastOnArrayInit {
-  public static class Foo<T> {}
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<clinit>"
+[CastOnArrayInit] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<clinit>"

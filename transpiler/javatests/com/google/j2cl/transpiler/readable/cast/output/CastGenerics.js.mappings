@@ -1,49 +1,30 @@
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [super();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_js>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [/** @public {C_T} */
+[CastGenerics] => [CastGenerics]
+[CastGenerics] => [constructor]
+[CastGenerics] => [super();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_js>"
+[CastGenerics] => [/** @public {C_T} */
     this.f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_js>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [let $instance = new CastGenerics();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<init>"
+[CastGenerics] => [$create__]
+[CastGenerics] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
+[CastGenerics] => [let $instance = new CastGenerics();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
+[CastGenerics] => [$instance.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
+[CastGenerics] => [return $instance;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<synthetic: ctor_create>"
+[CastGenerics] => [$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__]
+[CastGenerics] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<init>"
+[method] => [m_method___$pp_com_google_j2cl_transpiler_readable_cast]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.method"
-[public static void testErasureCast() {
-    String str = new CastGenerics<String, Number>().field;
-    str = new CastGenerics<String, Number>().method();
-  }] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testErasureCast"
+[testErasureCast] => [m_testErasureCast__]
+[testErasureCast] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testErasureCast"
 [String str = new CastGenerics<String, Number>().field;] => [let str = /**@type {?string} */ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>} */ (CastGenerics.$create__()).f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics, j_l_String));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testErasureCast"
 [str] => [str] "str"
 [str = new CastGenerics<String, Number>().method();] => [str = /**@type {?string} */ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>} */ (CastGenerics.$create__()).m_method___$pp_com_google_j2cl_transpiler_readable_cast(), j_l_String));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testErasureCast"
-[public static void testCastToParamterizedType() {
-    Object o = new Integer(1);
-...    cc = (CastGenerics) o;
-  }] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToParamterizedType"
+[testCastToParamterizedType] => [m_testCastToParamterizedType__]
+[testCastToParamterizedType] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToParamterizedType"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToParamterizedType"
 [o] => [o] "o"
 [CastGenerics<Error, Number> cc = (CastGenerics<Error, Number>) o;] => [let cc = /**@type {CastGenerics<Error, (Number|number)>} */ ($Casts.$to(o, CastGenerics));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToParamterizedType"
 [cc] => [cc] "cc"
 [cc = (CastGenerics) o;] => [cc = /**@type {CastGenerics} */ ($Casts.$to(o, CastGenerics));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToParamterizedType"
+[testCastToTypeVariable] => [m_testCastToTypeVariable__]
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToTypeVariable"
 [o] => [o] "o"
 [E e = (E) o;] => [let e = /**@type {C_E} */ ($Casts.$to(o, Number));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToTypeVariable"
@@ -54,6 +35,7 @@
 [es] => [es] "es"
 [T[] ts = (T[]) o;] => [let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, j_l_Object, 1));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToTypeVariable"
 [ts] => [ts] "ts"
+[testCastToMethodTypeVariable] => [m_testCastToMethodTypeVariable__]
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToMethodTypeVariable"
 [o] => [o] "o"
 [S s = (S) o;] => [let s = /**@type {*} */ ($Casts.$to(o, j_l_Object));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToMethodTypeVariable"
@@ -62,6 +44,8 @@
 [c] => [c] "c"
 [c = (S[]) o;] => [c = /**@type {Array<*>} */ ($Arrays.$castTo(o, j_l_Object, 1));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToMethodTypeVariable"
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.$to(o, Enum));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.testCastToMethodTypeVariable"
+[outerGenericMethod] => [m_outerGenericMethod__]
+[method] => [m_method__java_lang_Object]
 [o] => [o] "o"
 [if (o instanceof Empty1) {
       return (EE) o;
@@ -70,11 +54,7 @@
     }] "com.google.j2cl.transpiler.readable.cast.CastGenerics.method"
 [return (EE) o;] => [return /**@type {Empty1} */ ($Casts.$to(o, Empty1));] "com.google.j2cl.transpiler.readable.cast.CastGenerics.method"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.cast.CastGenerics.method"
-[public static <T> Foo<T> doSomething() {
-    return new Foo<T>() { };
-  }] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.doSomething"
+[doSomething] => [m_doSomething__]
+[doSomething] => [CastGenerics.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.doSomething"
 [return new Foo<T>() { };] => [return /**@type {!$1<*>} */ ($1.$create__());] "com.google.j2cl.transpiler.readable.cast.CastGenerics.doSomething"
-[public class CastGenerics<T, E extends Number> {
-
-...  public static class Foo<V> { }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<clinit>"
+[CastGenerics] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastGenerics.<clinit>"

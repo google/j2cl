@@ -338,7 +338,7 @@ public class J2clTranspiler {
             options.getOutputPath(),
             options.getDeclareLegacyNamespace(),
             options.getShouldPrintReadableSourceMap(),
-            options.getInlineSourceMaps(),
+            options.getGenerateKytheIndexingMetadata(),
             problems)
         .generateOutputs(j2clCompilationUnits);
     timingCollector.endSubSample();

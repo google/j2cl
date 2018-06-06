@@ -1,39 +1,18 @@
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_js>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [/** @public {number} */
+[Outer] => [Outer]
+[Outer] => [constructor]
+[Outer] => [super();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_js>"
+[Outer] => [/** @public {number} */
     this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 0;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_js>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [let $instance = new Outer();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer__();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
+[Outer] => [$create__]
+[Outer] => [Outer.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
+[Outer] => [let $instance = new Outer();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
+[Outer] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer__();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
+[Outer] => [return $instance;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<synthetic: ctor_create>"
+[Outer] => [$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer__]
+[Outer] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
+[Outer] => [this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
+[method] => [m_method__]
 [return new Inner().getB() + a;] => [return new Inner(this).getB() + this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.method"
+[Outer] => [$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer]
 [int a = 2;] => [this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 2;] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<init>"
-[static class Outer {
-    int a = 2;
-...    }
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<clinit>"
+[Outer] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer.<clinit>"

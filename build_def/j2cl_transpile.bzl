@@ -51,7 +51,7 @@ def _impl(ctx):
     compiler_args += ["-declarelegacynamespaces"]
 
   if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
-    compiler_args += ["-inlinesourcemaps"]
+    compiler_args += ["-generatekytheindexingmetadata"]
 
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_src_paths

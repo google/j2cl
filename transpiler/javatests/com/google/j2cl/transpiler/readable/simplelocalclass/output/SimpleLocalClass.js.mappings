@@ -1,35 +1,21 @@
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_js>"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [SimpleLocalClass.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [let $instance = new SimpleLocalClass();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<init>"
+[SimpleLocalClass] => [SimpleLocalClass]
+[SimpleLocalClass] => [constructor]
+[SimpleLocalClass] => [super();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_js>"
+[SimpleLocalClass] => [$create__]
+[SimpleLocalClass] => [SimpleLocalClass.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
+[SimpleLocalClass] => [let $instance = new SimpleLocalClass();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
+[SimpleLocalClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
+[SimpleLocalClass] => [return $instance;] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<synthetic: ctor_create>"
+[SimpleLocalClass] => [$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__]
+[SimpleLocalClass] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<init>"
+[test] => [m_test__int]
 [p] => [p] "p"
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.test"
 [localVar] => [localVar] "localVar"
 [new InnerClass().fun();] => [$1InnerClass.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int(this, localVar, p).m_fun__();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.test"
 [new InnerClassWithoutCaptures();] => [$1InnerClassWithoutCaptures.$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(this);] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.test"
+[fun] => [m_fun__]
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.fun"
 [localVar] => [localVar] "localVar"
-[public class SimpleLocalClass {
-  public void test(final int p) {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<clinit>"
+[foo] => [m_foo__]
+[SimpleLocalClass] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.<clinit>"

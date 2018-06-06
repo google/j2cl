@@ -35,6 +35,12 @@ public abstract class FrontendOptions {
   public static FrontendOptions create(FrontendFlags flags, Problems problems) {
     checkSourceFiles(flags.files, problems);
 
+    if (flags.readableSourceMaps && flags.generateKytheIndexingMetadata) {
+      problems.warning(
+          "Readable source maps are not available when generating Kythe indexing metadata.");
+      flags.readableSourceMaps = false;
+    }
+
     return new AutoValue_FrontendOptions(
         getPathEntries(flags.classPath),
         getPathEntries(flags.nativeSourcePath),
@@ -48,7 +54,7 @@ public abstract class FrontendOptions {
         flags.readableSourceMaps,
         flags.declareLegacyNamespaces,
         flags.generateTimeReport,
-        flags.inlineSourceMaps);
+        flags.generateKytheIndexingMetadata);
   }
 
   public abstract List<String> getClasspathEntries();
@@ -65,7 +71,7 @@ public abstract class FrontendOptions {
 
   public abstract boolean getGenerateTimeReport();
 
-  public abstract boolean getInlineSourceMaps();
+  public abstract boolean getGenerateKytheIndexingMetadata();
 
   private static boolean checkSourceFiles(List<String> sourceFiles, Problems problems) {
     for (String sourceFile : sourceFiles) {

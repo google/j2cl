@@ -1,5 +1,57 @@
 [{
 
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$1B_$1]
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [constructor]
+[{
+
 ...                }
               }] => [super();] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_js>"
 [{
@@ -7,6 +59,32 @@
 ...                }
               }] => [/** @public {$1B} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1;] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_js>"
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B]
 [{
 
 ...                }
@@ -25,12 +103,39 @@
               }] => [return $instance;] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_create>"
 [{
 
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B]
+[{
+
 ...                }
               }] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A_1B_1 = $outer_this;] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1.<init>"
 [{
 
 ...                }
               }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1.<init>"
+[fun] => [m_fun__int]
 [a] => [a] "a"
 [MyInterface ii =
                       n -> {

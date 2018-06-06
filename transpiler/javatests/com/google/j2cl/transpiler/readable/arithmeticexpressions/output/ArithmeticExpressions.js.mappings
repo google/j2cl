@@ -1,41 +1,19 @@
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [/** @public {!$Long} */
+[ArithmeticExpressions] => [ArithmeticExpressions]
+[ArithmeticExpressions] => [constructor]
+[ArithmeticExpressions] => [super();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
+[ArithmeticExpressions] => [/** @public {!$Long} */
     this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [/** @public {!$Long} */
+[ArithmeticExpressions] => [/** @public {!$Long} */
     this.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [let $instance = new ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[ArithmeticExpressions] => [$create__]
+[ArithmeticExpressions] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
+[ArithmeticExpressions] => [let $instance = new ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
+[ArithmeticExpressions] => [$instance.$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
+[ArithmeticExpressions] => [return $instance;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
+[ArithmeticExpressions] => [$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__]
+[ArithmeticExpressions] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[ArithmeticExpressions] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[testPrimitives] => [m_testPrimitives__]
 [int a = 10;] => [let a = 10;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a] => [a] "a"
 [int b = a++;] => [let b = a++;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
@@ -70,6 +48,7 @@
 [a /= 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += Double.MAX_VALUE;] => [a = $Primitives.$narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [((k)) |= true;] => [k = !!(+k | +true);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[testCompoundArray] => [m_testCompoundArray__]
 [int[] ints = null;] => [let ints = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"
 [ints[0] += 1;] => [ints[0] += 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
@@ -104,14 +83,11 @@
 [String[] strings = null;] => [let strings = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [strings] => [strings] "strings"
 [strings[0] += null;] => [$Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object(strings[0]) + j_l_String.m_valueOf__java_lang_Object(null));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
-[private static long[] getLongArray() {
-    return null;
-  }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
+[getLongArray] => [m_getLongArray___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[getLongArray] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
-[public void testCompoundBoxedTypes() {
-    Integer c = 1000;
-...    int n = 1 + ref.field;
-  }] => [let /** Integer */ $value, /** Integer */ $value$1$, /** Integer */ $value$2$;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[testCompoundBoxedTypes] => [m_testCompoundBoxedTypes__]
+[testCompoundBoxedTypes] => [let /** Integer */ $value, /** Integer */ $value$1$, /** Integer */ $value$2$;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Integer c = 1000;] => [let c = Integer.m_valueOf__int(1000);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [c] => [c] "c"
 [Integer d = 10000;] => [let d = Integer.m_valueOf__int(10000);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
@@ -144,19 +120,17 @@
 [ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(/**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [int n = 1 + ref.field;] => [let n = 1 + /**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [n] => [n] "n"
-[private static Integer getInteger() {
-    return null;
-  }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
+[getInteger] => [m_getInteger___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[getInteger] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
-[private static void testSideEffect() {
-    getWithSideEffect().intField += 5;
-  }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
+[testSideEffect] => [m_testSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[testSideEffect] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect().intField += 5;] => [let $qualifier = ArithmeticExpressions.m_getWithSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect().intField += 5;] => [$qualifier.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus($qualifier.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Primitives.$widenIntToLong(5));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
-[private static ArithmeticExpressions getWithSideEffect() {
-    return null;
-  }] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
+[getWithSideEffect] => [m_getWithSideEffect___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[getWithSideEffect] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
+[testExtendedOperands] => [m_testExtendedOperands__]
 [Integer boxedInteger = 3;] => [let boxedInteger = Integer.m_valueOf__int(3);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [boxedInteger] => [boxedInteger] "boxedInteger"
 [int i;] => [let /** number */ i;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
@@ -173,19 +147,18 @@
 [l = boxedInteger = i = 20;] => [l = $Primitives.$widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = i + boxedInteger + l + 20;] => [l = $LongUtils.$plus($LongUtils.$plus($Primitives.$widenIntToLong(i + boxedInteger.m_intValue__()), l), $Primitives.$widenIntToLong(20));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = 20 + l + d;] => [d = $Primitives.$widenLongToDouble($LongUtils.$plus($Primitives.$widenIntToLong(20), l)) + d;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[ArithmeticExpressions] => [$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[ArithmeticExpressions] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
 [public long bar = foo++;] => [this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[public static long one = 1;] => [get f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [public static long one = 1;] => [return (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: getter>"
+[public static long one = 1;] => [set f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [public static long one = 1;] => [(ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: setter>"
+[public static long foo = one++;] => [get f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [public static long foo = one++;] => [return (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: getter>"
+[public static long foo = one++;] => [set f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [public static long foo = one++;] => [(ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: setter>"
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
+[ArithmeticExpressions] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long one = 1;] => [ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
@@ -195,291 +168,7 @@ ArithmeticExpressions.f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arit
 ArithmeticExpressions.f_DOUBLE_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;]
 [private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;] => [/** @public {number} @const */
 ArithmeticExpressions.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 2.200000047683716;]
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-  private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
-  private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;
-
-  public void testPrimitives() {
-    int a = 10;
-    int b = a++;
-    int c = a--;
-    int d = ++a;
-    int e = --a;
-    int f = -a;
-    int g = +a;
-    int h = ~a;
-    int i = 1 + 1 + 2 - 5;
-    int j = (1 + 2) * (3 + 4);
-    boolean k = !(1 + 2 + 3 == 4);
-    boolean l = (1 + 2 != 4);
-    boolean m = Long.MAX_VALUE != 9223372036854776833d;
-    double o = (5 / 2) - 0.0;
-
-    a = a << 31L;
-    a <<= 1L;
-    a += 1L;
-    a /= 1L;
-    a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
-
-    ((k)) |= true;
-  }
-
-  // Compount assignments in static fields
-  public static long one = 1;
-  public static long foo = one++;
-  public long bar = foo++;
-
-  public void testCompoundArray() {
-    int[] ints = null;
-    ints[0] += 1;
-    ints[0] -= 1;
-    ints[0] *= 1;
-    ints[0] /= 1;
-    ints[0] &= 1;
-    ints[0] ^= 1;
-    ints[0] |= 1;
-    ints[0] %= 1;
-    ints[0] <<= 1;
-    ints[0] >>= 1;
-    ints[0] >>>= 1;
-    ints[0]++;
-    ++ints[0];
-    int i = 0;
-    ints[i++]++;
-    ++ints[++i];
-    ints[i++] /= 1;
-
-    long[] longs = null;
-    longs[0] += 1;
-    longs[0]--;
-    --longs[0];
-    getLongArray()[0]++;
-
-    boolean[] booleans = null;
-    booleans[0] |= true;
-
-    String[] strings = null;
-    strings[0] += null;
-  }
-
-  private static long[] getLongArray() {
-    return null;
-  }
-
-  public void testCompoundBoxedTypes() {
-    Integer c = 1000;
-
-    // Compound expressions.
-    Integer d = 10000;
-    d += c;
-
-    int i = 43;
-    d += i;
-    d <<= i;
-    i += c;
-
-    // Prefix expressions;
-    Integer e = ++c;
-    e = ++c;
-    Double e2 = 100d;
-    ++e2;
-
-    // Postfix expressions.
-    Integer f = c++;
-    f = c++;
-    Byte b = 0;
-    b++;
-    Character ch = 'c';
-    ch++;
-
-    // Method call on result of arithmetic expressions.
-    (++f).intValue();
-    (f--).intValue();
-
-    class Ref<T> {
-      T field;
-    }
-
-    Ref<Integer> ref = null;
-    ref.field++;
-    int n = 1 + ref.field;
-  }
-
-  private static Integer getInteger() {
-    return null;
-  }
-
-  long intField;
-
-  private static void testSideEffect() {
-    getWithSideEffect().intField += 5;
-  }
-
-  private static ArithmeticExpressions getWithSideEffect() {
-    return null;
-  }
-
-  // This is a readable example that exposes the nuances of JDT representation of InfixExpression,
-  // where certain expressions are represented as operator, list of operands rather than a
-  // nested binary tree structure.
-  public void testExtendedOperands() {
-    Integer boxedInteger = 3;
-    int i;
-    long l;
-    double d;
-    l = 2 - boxedInteger - 2L;
-    l = 2 | boxedInteger | 2L;
-    l = 1000000L * l * 60 * 60 * 24;
-    l = 24 * 60 * 60 * l * 1000000L;
-    d = l = i = 20;
-    l = boxedInteger = i = 20;
-    l = i + boxedInteger + l + 20;
-    d = 20 + l + d;
-  }
-}] => [/** @private {!$Long} */
+[ArithmeticExpressions] => [/** @private {!$Long} */
 ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]
-[public class ArithmeticExpressions {
-  private static final float FLOAT_CONSTANT = 1.1f;
-  private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
-  private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;
-
-  public void testPrimitives() {
-    int a = 10;
-    int b = a++;
-    int c = a--;
-    int d = ++a;
-    int e = --a;
-    int f = -a;
-    int g = +a;
-    int h = ~a;
-    int i = 1 + 1 + 2 - 5;
-    int j = (1 + 2) * (3 + 4);
-    boolean k = !(1 + 2 + 3 == 4);
-    boolean l = (1 + 2 != 4);
-    boolean m = Long.MAX_VALUE != 9223372036854776833d;
-    double o = (5 / 2) - 0.0;
-
-    a = a << 31L;
-    a <<= 1L;
-    a += 1L;
-    a /= 1L;
-    a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
-
-    ((k)) |= true;
-  }
-
-  // Compount assignments in static fields
-  public static long one = 1;
-  public static long foo = one++;
-  public long bar = foo++;
-
-  public void testCompoundArray() {
-    int[] ints = null;
-    ints[0] += 1;
-    ints[0] -= 1;
-    ints[0] *= 1;
-    ints[0] /= 1;
-    ints[0] &= 1;
-    ints[0] ^= 1;
-    ints[0] |= 1;
-    ints[0] %= 1;
-    ints[0] <<= 1;
-    ints[0] >>= 1;
-    ints[0] >>>= 1;
-    ints[0]++;
-    ++ints[0];
-    int i = 0;
-    ints[i++]++;
-    ++ints[++i];
-    ints[i++] /= 1;
-
-    long[] longs = null;
-    longs[0] += 1;
-    longs[0]--;
-    --longs[0];
-    getLongArray()[0]++;
-
-    boolean[] booleans = null;
-    booleans[0] |= true;
-
-    String[] strings = null;
-    strings[0] += null;
-  }
-
-  private static long[] getLongArray() {
-    return null;
-  }
-
-  public void testCompoundBoxedTypes() {
-    Integer c = 1000;
-
-    // Compound expressions.
-    Integer d = 10000;
-    d += c;
-
-    int i = 43;
-    d += i;
-    d <<= i;
-    i += c;
-
-    // Prefix expressions;
-    Integer e = ++c;
-    e = ++c;
-    Double e2 = 100d;
-    ++e2;
-
-    // Postfix expressions.
-    Integer f = c++;
-    f = c++;
-    Byte b = 0;
-    b++;
-    Character ch = 'c';
-    ch++;
-
-    // Method call on result of arithmetic expressions.
-    (++f).intValue();
-    (f--).intValue();
-
-    class Ref<T> {
-      T field;
-    }
-
-    Ref<Integer> ref = null;
-    ref.field++;
-    int n = 1 + ref.field;
-  }
-
-  private static Integer getInteger() {
-    return null;
-  }
-
-  long intField;
-
-  private static void testSideEffect() {
-    getWithSideEffect().intField += 5;
-  }
-
-  private static ArithmeticExpressions getWithSideEffect() {
-    return null;
-  }
-
-  // This is a readable example that exposes the nuances of JDT representation of InfixExpression,
-  // where certain expressions are represented as operator, list of operands rather than a
-  // nested binary tree structure.
-  public void testExtendedOperands() {
-    Integer boxedInteger = 3;
-    int i;
-    long l;
-    double d;
-    l = 2 - boxedInteger - 2L;
-    l = 2 | boxedInteger | 2L;
-    l = 1000000L * l * 60 * 60 * 24;
-    l = 24 * 60 * 60 * l * 1000000L;
-    d = l = i = 20;
-    l = boxedInteger = i = 20;
-    l = i + boxedInteger + l + 20;
-    d = 20 + l + d;
-  }
-}] => [/** @private {!$Long} */
+[ArithmeticExpressions] => [/** @private {!$Long} */
 ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]

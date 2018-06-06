@@ -1,33 +1,20 @@
-[public class StaticJsMembers {
-
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_js>"
-[public class StaticJsMembers {
-
-...  }
-}] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
-[public class StaticJsMembers {
-
-...  }
-}] => [let $instance = new StaticJsMembers();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
-[public class StaticJsMembers {
-
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
-[public class StaticJsMembers {
-
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
-[public class StaticJsMembers {
-
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<init>"
+[StaticJsMembers] => [StaticJsMembers]
+[StaticJsMembers] => [constructor]
+[StaticJsMembers] => [super();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_js>"
+[StaticJsMembers] => [$create__]
+[StaticJsMembers] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
+[StaticJsMembers] => [let $instance = new StaticJsMembers();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
+[StaticJsMembers] => [$instance.$ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
+[StaticJsMembers] => [return $instance;] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: ctor_create>"
+[StaticJsMembers] => [$ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__]
+[StaticJsMembers] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<init>"
+[f1] => [fun]
 [a] => [a] "a"
-[@JsMethod(name = "fun")
-  public static void f1(int a) {}] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f1"
+[f1] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f1"
+[f2] => [f2]
 [a] => [a] "a"
-[@JsMethod
-  public static void f2(int a) {}] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f2"
+[f2] => [StaticJsMembers.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.f2"
+[test] => [m_test__]
 [StaticJsMembers.f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [f1(1);] => [StaticJsMembers.fun(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [StaticJsMembers.f2(1);] => [StaticJsMembers.f2(1);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
@@ -48,146 +35,19 @@
 [new Native();] => [new Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [new Extern();] => [new window.Object();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.test"
 [@JsProperty(name = "field")
+  public static int field1;] => [get field1]
+[@JsProperty(name = "field")
   public static int field1;] => [return (StaticJsMembers.$clinit(), StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: getter>"
 [@JsProperty(name = "field")
+  public static int field1;] => [set field1]
+[@JsProperty(name = "field")
   public static int field1;] => [(StaticJsMembers.$clinit(), StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = value);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: setter>"
+[@JsProperty public static int field2;] => [get field2]
 [@JsProperty public static int field2;] => [return (StaticJsMembers.$clinit(), StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: getter>"
+[@JsProperty public static int field2;] => [set field2]
 [@JsProperty public static int field2;] => [(StaticJsMembers.$clinit(), StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = value);] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<synthetic: setter>"
-[public class StaticJsMembers {
-
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<clinit>"
-[public class StaticJsMembers {
-
-  @JsProperty(name = "field")
-  public static int field1;
-
-  @JsProperty public static int field2;
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  public static class Native {
-    @JsProperty(namespace = "Math", name = "PI")
-    public static int field3;
-
-    @JsProperty(namespace = GLOBAL, name = "top")
-    public static int field4;
-
-    @JsProperty(namespace = "foo.Bar", name = "field")
-    public static int field5;
-
-    @JsProperty(namespace = GLOBAL, name = "window.top")
-    public static int field6;
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window.Object")
-  public static class Extern {}
-
-  @JsMethod(name = "fun")
-  public static void f1(int a) {}
-
-  @JsMethod
-  public static void f2(int a) {}
-
-  @JsMethod(namespace = "Math", name = "floor")
-  public static native void f3(double a);
-
-  @JsMethod(namespace = GLOBAL, name = "isFinite")
-  public static native boolean f4(double a);
-
-  @JsMethod(namespace = "foo.Bar", name = "baz")
-  public static native boolean f5();
-
-  @JsMethod(namespace = "foo.Baz", name = "baz")
-  public static native boolean f6();
-
-  public void test() {
-    StaticJsMembers.f1(1);
-    f1(1);
-    StaticJsMembers.f2(1);
-    f2(1);
-    StaticJsMembers.f3(1.1);
-    f3(1.1);
-    StaticJsMembers.f4(1.1);
-    f4(1.1);
-    StaticJsMembers.f5();
-    f5();
-
-    int n = field1;
-    n = field2;
-    n = Native.field3;
-    n = Native.field4;
-    n = Native.field5;
-    n = Native.field6;
-
-    new Native();
-    new Extern();
-  }
-}] => [/** @private {number} */
+[StaticJsMembers] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.<clinit>"
+[StaticJsMembers] => [/** @private {number} */
 StaticJsMembers.$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = 0;]
-[public class StaticJsMembers {
-
-  @JsProperty(name = "field")
-  public static int field1;
-
-  @JsProperty public static int field2;
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  public static class Native {
-    @JsProperty(namespace = "Math", name = "PI")
-    public static int field3;
-
-    @JsProperty(namespace = GLOBAL, name = "top")
-    public static int field4;
-
-    @JsProperty(namespace = "foo.Bar", name = "field")
-    public static int field5;
-
-    @JsProperty(namespace = GLOBAL, name = "window.top")
-    public static int field6;
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window.Object")
-  public static class Extern {}
-
-  @JsMethod(name = "fun")
-  public static void f1(int a) {}
-
-  @JsMethod
-  public static void f2(int a) {}
-
-  @JsMethod(namespace = "Math", name = "floor")
-  public static native void f3(double a);
-
-  @JsMethod(namespace = GLOBAL, name = "isFinite")
-  public static native boolean f4(double a);
-
-  @JsMethod(namespace = "foo.Bar", name = "baz")
-  public static native boolean f5();
-
-  @JsMethod(namespace = "foo.Baz", name = "baz")
-  public static native boolean f6();
-
-  public void test() {
-    StaticJsMembers.f1(1);
-    f1(1);
-    StaticJsMembers.f2(1);
-    f2(1);
-    StaticJsMembers.f3(1.1);
-    f3(1.1);
-    StaticJsMembers.f4(1.1);
-    f4(1.1);
-    StaticJsMembers.f5();
-    f5();
-
-    int n = field1;
-    n = field2;
-    n = Native.field3;
-    n = Native.field4;
-    n = Native.field5;
-    n = Native.field6;
-
-    new Native();
-    new Extern();
-  }
-}] => [/** @private {number} */
+[StaticJsMembers] => [/** @private {number} */
 StaticJsMembers.$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers = 0;]

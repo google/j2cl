@@ -1,27 +1,14 @@
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_js>"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [BackwardBridgeMethod.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [let $instance = new BackwardBridgeMethod();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_BackwardBridgeMethod__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_C__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<init>"
+[BackwardBridgeMethod] => [BackwardBridgeMethod]
+[BackwardBridgeMethod] => [constructor]
+[BackwardBridgeMethod] => [super();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_js>"
+[BackwardBridgeMethod] => [$create__]
+[BackwardBridgeMethod] => [BackwardBridgeMethod.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
+[BackwardBridgeMethod] => [let $instance = new BackwardBridgeMethod();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
+[BackwardBridgeMethod] => [$instance.$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_BackwardBridgeMethod__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
+[BackwardBridgeMethod] => [return $instance;] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<synthetic: ctor_create>"
+[BackwardBridgeMethod] => [$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_BackwardBridgeMethod__]
+[BackwardBridgeMethod] => [this.$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_C__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<init>"
+[test] => [m_test__]
 [I i = new BackwardBridgeMethod();] => [let i = BackwardBridgeMethod.$create__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.test"
 [i] => [i] "i"
 [C c = new BackwardBridgeMethod();] => [let c = BackwardBridgeMethod.$create__();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.test"
@@ -31,11 +18,6 @@
 [i.get("");] => [i.m_get__java_lang_String("");] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.test"
 [c.get("");] => [c.m_get__java_lang_Object("");] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.test"
 [a.get("");] => [a.m_get__java_lang_Object("");] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.test"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [return /**@type {?string} */ ($Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.get"
-[public class BackwardBridgeMethod extends C<String> implements I {
-  public void test() {
-...  }
-}] => [C.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<clinit>"
+[BackwardBridgeMethod] => [m_get__java_lang_String]
+[BackwardBridgeMethod] => [return /**@type {?string} */ ($Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.get"
+[BackwardBridgeMethod] => [C.$clinit();] "com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod.<clinit>"

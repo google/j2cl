@@ -1,27 +1,14 @@
-[public class Main {
-  public void test() {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_js>"
-[public class Main {
-  public void test() {
-...  }
-}] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_Main__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
-[public class Main {
-  public void test() {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<init>"
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_js>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_Main__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<init>"
+[test] => [m_test__]
 [MyJsInterface a = new InterfaceImpl();] => [let a = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [a] => [a] "a"
 [MyInterface b = new InterfaceImpl();] => [let b = InterfaceImpl.$create__();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
@@ -34,7 +21,4 @@
 [b.foo(1);] => [b.m_foo__int(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [c.foo(1);] => [c.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
 [d.foo(1);] => [d.foo(1);] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.test"
-[public class Main {
-  public void test() {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.interfacejsbridge.Main.<clinit>"

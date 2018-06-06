@@ -1,29 +1,13 @@
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_js>"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [OuterClass.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [let $instance = new OuterClass();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<init>"
+[OuterClass] => [OuterClass]
+[OuterClass] => [constructor]
+[OuterClass] => [super();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_js>"
+[OuterClass] => [$create__]
+[OuterClass] => [OuterClass.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
+[OuterClass] => [let $instance = new OuterClass();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
+[OuterClass] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
+[OuterClass] => [return $instance;] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<synthetic: ctor_create>"
+[OuterClass] => [$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__]
+[OuterClass] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<init>"
+[test] => [m_test__]
 [new OuterClass().new InnerClass().new InnerInnerClass();] => [InnerInnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(InnerClass.$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(OuterClass.$create__()));] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.test"
-[public class OuterClass {
-  public class InnerClass {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<clinit>"
+[OuterClass] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.<clinit>"

@@ -1,27 +1,14 @@
-[/**
- * Test String devirtualization.
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_js>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [StringCalls.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [let $instance = new StringCalls();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
-[/**
- * Test String devirtualization.
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<init>"
+[StringCalls] => [StringCalls]
+[StringCalls] => [constructor]
+[StringCalls] => [super();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_js>"
+[StringCalls] => [$create__]
+[StringCalls] => [StringCalls.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
+[StringCalls] => [let $instance = new StringCalls();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
+[StringCalls] => [$instance.$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
+[StringCalls] => [return $instance;] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<synthetic: ctor_create>"
+[StringCalls] => [$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__]
+[StringCalls] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<init>"
+[main] => [m_main__]
 [String literal = "String";] => [let literal = "String";] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [literal] => [literal] "literal"
 [String sub = literal.substring(1);] => [let sub = j_l_String.m_substring__java_lang_String__int(literal, 1);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
@@ -32,7 +19,4 @@
 [trimmed] => [trimmed] "trimmed"
 [String newString = literal.toString();] => [let newString = j_l_String.m_toString__java_lang_String(literal);] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.main"
 [newString] => [newString] "newString"
-[/**
- * Test String devirtualization.
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<clinit>"
+[StringCalls] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.<clinit>"

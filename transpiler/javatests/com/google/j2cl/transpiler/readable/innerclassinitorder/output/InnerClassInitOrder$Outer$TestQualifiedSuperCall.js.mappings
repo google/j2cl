@@ -1,21 +1,11 @@
-[public static class TestQualifiedSuperCall extends OuterIsNotSuper {
-      public TestQualifiedSuperCall() {
-...      }
-    }] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_js>"
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [TestQualifiedSuperCall.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [let $instance = new TestQualifiedSuperCall();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
-[public TestQualifiedSuperCall() {
-        new Outer(1).new OuterIsSuper(2).super();
-      }] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
+[TestQualifiedSuperCall] => [TestQualifiedSuperCall]
+[TestQualifiedSuperCall] => [constructor]
+[TestQualifiedSuperCall] => [super();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_js>"
+[TestQualifiedSuperCall] => [$create__]
+[TestQualifiedSuperCall] => [TestQualifiedSuperCall.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
+[TestQualifiedSuperCall] => [let $instance = new TestQualifiedSuperCall();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
+[TestQualifiedSuperCall] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
+[TestQualifiedSuperCall] => [return $instance;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<synthetic: ctor_create>"
+[TestQualifiedSuperCall] => [$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__]
 [new Outer(1).new OuterIsSuper(2).super();] => [this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(OuterIsSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(Outer.$create__int(1), 2));] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<init>"
-[public static class TestQualifiedSuperCall extends OuterIsNotSuper {
-      public TestQualifiedSuperCall() {
-...      }
-    }] => [OuterIsNotSuper.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<clinit>"
+[TestQualifiedSuperCall] => [OuterIsNotSuper.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall.<clinit>"

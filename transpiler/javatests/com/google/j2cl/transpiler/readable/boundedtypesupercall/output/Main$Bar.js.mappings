@@ -1,33 +1,18 @@
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_js>"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [Bar.$clinit();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [let $instance = new Bar();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<init>"
+[Bar] => [Bar]
+[Bar] => [constructor]
+[Bar] => [super();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_js>"
+[Bar] => [$create__]
+[Bar] => [Bar.$clinit();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
+[Bar] => [let $instance = new Bar();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
+[Bar] => [$instance.$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
+[Bar] => [return $instance;] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<synthetic: ctor_create>"
+[Bar] => [$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__]
+[Bar] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<init>"
+[getSomething] => [m_getSomething__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.getSomething"
+[doSomething] => [m_doSomething__]
 [return new Foo<T>(getSomething()) {
         @Override
         public void foo() {}
       };] => [return /**@type {!$1<C_Bar_T>} */ ($1.$create__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__java_lang_Comparable(this, this.m_getSomething__()));] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.doSomething"
-[public static class Bar<T extends Comparable> {
-
-...    }
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<clinit>"
+[Bar] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.<clinit>"

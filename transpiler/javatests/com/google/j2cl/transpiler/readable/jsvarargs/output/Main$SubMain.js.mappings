@@ -1,26 +1,17 @@
-[static class SubMain extends Main {
-    public SubMain() {
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_js>"
-[public SubMain() {
-      super(10);
-    }] => [SubMain.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
-[public SubMain() {
-      super(10);
-    }] => [let $instance = new SubMain();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
-[public SubMain() {
-      super(10);
-    }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
-[public SubMain() {
-      super(10);
-    }] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
+[SubMain] => [SubMain]
+[SubMain] => [constructor]
+[SubMain] => [super();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_js>"
+[SubMain] => [$create__]
+[SubMain] => [SubMain.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
+[SubMain] => [let $instance = new SubMain();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
+[SubMain] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
+[SubMain] => [return $instance;] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<synthetic: ctor_create>"
+[SubMain] => [$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__]
 [super(10);] => [this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<init>"
+[f3] => [f3]
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
-[@Override
-    public int f3(int m, int... numbers) {
-...      return a;
-    }] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
+[f3] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [int a = super.f3(1, 1, 2);] => [let a = super.f3(1, 1, 2);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [a] => [a] "a"
 [a += super.f3(1);] => [a += super.f3(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
@@ -30,7 +21,4 @@
 [ints] => [ints] "ints"
 [a += super.f3(1, ints);] => [a += super.f3(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
-[static class SubMain extends Main {
-    public SubMain() {
-...    }
-  }] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<clinit>"
+[SubMain] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.<clinit>"

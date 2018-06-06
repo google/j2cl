@@ -1,7 +1,6 @@
+[SuperInterface] => [SuperInterface]
+[foo] => [m_foo__java_lang_Object]
 [t] => [t] "t"
-[interface SuperInterface<T> {
-  void foo(T t);
-}] => [SuperInterface.$clinit();] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.<synthetic: adapt_lambda>"
-[interface SuperInterface<T> {
-  void foo(T t);
-}] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.<synthetic: adapt_lambda>"
+[SuperInterface] => [$adapt]
+[SuperInterface] => [SuperInterface.$clinit();] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.<synthetic: adapt_lambda>"
+[SuperInterface] => [return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));] "com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.<synthetic: adapt_lambda>"

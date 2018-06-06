@@ -1,31 +1,17 @@
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [super();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_js>"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [let $instance = new Foo();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_Foo__();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [return $instance;] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<init>"
+[Foo] => [Foo]
+[Foo] => [constructor]
+[Foo] => [super();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_js>"
+[Foo] => [$create__]
+[Foo] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
+[Foo] => [let $instance = new Foo();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
+[Foo] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_Foo__();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
+[Foo] => [return $instance;] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<synthetic: ctor_create>"
+[Foo] => [$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_Foo__]
+[Foo] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<init>"
+[bar] => [m_bar__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_nullability]
 [t] => [t] "t"
+[baz] => [m_baz___$pp_com_google_j2cl_transpiler_readable_nullability]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.baz"
+[toString] => [toString]
 [return "Foo";] => [return "Foo";] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.toString"
-[static class Foo<T> {
-    void bar(T t) {}
-...    }
-  }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<clinit>"
+[Foo] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.nullability.Nullability$Foo.<clinit>"

@@ -1,30 +1,14 @@
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_js>"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [SubParent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [let $instance = new SubParent();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<init>"
+[SubParent] => [SubParent]
+[SubParent] => [constructor]
+[SubParent] => [super();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_js>"
+[SubParent] => [$create__]
+[SubParent] => [SubParent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
+[SubParent] => [let $instance = new SubParent();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
+[SubParent] => [$instance.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
+[SubParent] => [return $instance;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<synthetic: ctor_create>"
+[SubParent] => [$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent__]
+[SubParent] => [this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<init>"
+[foo] => [m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package2]
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.foo"
-[public class SubParent extends Parent {
-  int foo(int a) {
-...  }
-}] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<clinit>"
+[SubParent] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.<clinit>"

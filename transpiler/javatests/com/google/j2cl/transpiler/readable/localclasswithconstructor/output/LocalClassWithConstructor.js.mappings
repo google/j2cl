@@ -1,32 +1,16 @@
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [super();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_js>"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [LocalClassWithConstructor.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [let $instance = new LocalClassWithConstructor();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [return $instance;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<init>"
+[LocalClassWithConstructor] => [LocalClassWithConstructor]
+[LocalClassWithConstructor] => [constructor]
+[LocalClassWithConstructor] => [super();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_js>"
+[LocalClassWithConstructor] => [$create__]
+[LocalClassWithConstructor] => [LocalClassWithConstructor.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
+[LocalClassWithConstructor] => [let $instance = new LocalClassWithConstructor();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
+[LocalClassWithConstructor] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
+[LocalClassWithConstructor] => [return $instance;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<synthetic: ctor_create>"
+[LocalClassWithConstructor] => [$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__]
+[LocalClassWithConstructor] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<init>"
+[test] => [m_test__int]
 [p] => [p] "p"
 [final int localVar = 1;] => [let localVar = 1;] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.test"
 [localVar] => [localVar] "localVar"
 [new LocalClass(1);] => [$1LocalClass.$create__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int(this, localVar, p, 1);] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.test"
-[public class LocalClassWithConstructor {
-  public void test(final int p) {
-...  }
-}] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<clinit>"
+[LocalClassWithConstructor] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.<clinit>"
