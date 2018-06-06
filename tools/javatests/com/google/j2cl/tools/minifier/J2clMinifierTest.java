@@ -38,6 +38,7 @@ public class J2clMinifierTest extends TestCase {
     // result in an unreadable and illegal identifier of just "＿1". Make sure we leave them alone.
     assertNoChange("m___parseAndValidateInt__java_lang_String__int__int__int");
     assertNoChange("m___");
+    assertNoChange("m__parseAndValidate");
     assertNoChange("thism_baz__java_lang_Number();");
     assertNoChange("ClassEndingInLowercasem__InnerClass");
     // TODO(b/109721646): Uncomment once the regex literals are handled correctly.

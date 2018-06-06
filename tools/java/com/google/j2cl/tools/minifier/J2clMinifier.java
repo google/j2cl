@@ -175,10 +175,8 @@ public class J2clMinifier {
     // Because we have a different mangling pattern for meta functions you can't extract the pretty
     // name with a single simple regex match group.
 
-    if (identifier.startsWith("f_")
-        || identifier.startsWith("m_")
-        || identifier.startsWith("$f_")) {
-      // It's a regular field or method.
+    if (startsLikeJavaMethodOrField(identifier)) {
+      // It's a regular field or method, extract its name.
       int beginIndex = identifier.indexOf('_') + 1;
       int endIndex = identifier.indexOf("__", beginIndex);
       return identifier.substring(beginIndex, endIndex);
@@ -204,14 +202,22 @@ public class J2clMinifier {
 
   private static boolean isMinifiableIdentifier(String identifier) {
     // This is faster than a regex and more readable as well.
-    return (identifier.startsWith("f_")
-            || identifier.startsWith("m_")
-            || identifier.startsWith("$f_")
-            || identifier.startsWith("$create_")
-            || identifier.startsWith("$ctor_")
-            || identifier.startsWith("$implements_")
-            || identifier.startsWith("$init_"))
-        && identifier.contains("__");
+    if (startsLikeJavaMethodOrField(identifier)) {
+      int underScoreIndex = identifier.indexOf('_');
+      // Match mangled Java member names of the form:  m_<name>__<par1>_ ....
+      return identifier.indexOf("__", underScoreIndex + 1) != -1;
+    }
+
+    return identifier.startsWith("$create__")
+        || identifier.startsWith("$ctor__")
+        || identifier.startsWith("$implements__")
+        || identifier.startsWith("$init__");
+  }
+
+  private static boolean startsLikeJavaMethodOrField(String identifier) {
+    return identifier.startsWith("f_")
+        || identifier.startsWith("m_")
+        || identifier.startsWith("$f_");
   }
 
   private static void setDefaultTransitions(int currentState, int nextState) {
