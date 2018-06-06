@@ -16,10 +16,6 @@ package com.google.j2cl.transpiler;
 import com.google.j2cl.bazel.BaseWorker;
 import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.PrintStream;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * Runs J2clTranspiler as a blaze worker.
@@ -35,21 +31,11 @@ public class J2clTranspilerWorker extends BaseWorker {
 
   @Override
   public int runAsWorker(String[] args, PrintStream outputStream) {
-    // Compiler has no static state, but rather uses thread local variables.
-    // Because of this, we invoke the compiler on a different thread each time.
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-    Future<Result> futureResult =
-        executorService.submit(
-            () -> {
-              J2clTranspiler transpiler = new J2clTranspiler();
-              return transpiler.transpile(args);
-            });
-
     try {
-      Result result = futureResult.get();
+      Result result = J2clTranspiler.transpile(args);
       result.getProblems().report(outputStream);
       return result.getExitCode();
-    } catch (InterruptedException | ExecutionException e) {
+    } catch (Exception e) {
       throw new RuntimeException("Internal compiler error: ", e);
     }
   }

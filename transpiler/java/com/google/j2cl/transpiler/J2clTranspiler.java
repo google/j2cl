@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.Futures;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
@@ -95,12 +96,11 @@ import com.google.j2cl.generator.OutputGeneratorStage;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
 public class J2clTranspiler {
-  private final Problems problems = new Problems();
-  private FrontendOptions options;
-  private final TimingCollector timingCollector = TimingCollector.get();
 
   /** Represents the result of a transpilation. */
   public static class Result {
@@ -138,7 +138,19 @@ public class J2clTranspiler {
   }
 
   /** Runs the entire J2CL pipeline. */
-  Result transpile(String... args) {
+  static Result transpile(String[] args) {
+    // Compiler has no static state, but rather uses thread local variables.
+    // Because of this, we invoke the compiler on a different thread each time.
+    Future<Result> futureResult =
+        Executors.newSingleThreadExecutor().submit(() -> new J2clTranspiler().transpileImpl(args));
+    return Futures.getUnchecked(futureResult);
+  }
+
+  private final TimingCollector timingCollector = TimingCollector.get();
+  private final Problems problems = new Problems();
+  private FrontendOptions options;
+
+  private Result transpileImpl(String[] args) {
     try {
       loadOptions(args);
       CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
@@ -164,7 +176,6 @@ public class J2clTranspiler {
     options = FrontendOptions.create(flags, problems);
     problems.abortIfRequested();
   }
-
   private List<CompilationUnit> convertUnits(
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
     timingCollector.startSample("AST Conversion");
@@ -357,8 +368,7 @@ public class J2clTranspiler {
 
   /** Entry point for the tool, which runs the entire J2CL pipeline. */
   public static void main(String[] args) {
-    J2clTranspiler transpiler = new J2clTranspiler();
-    Result result = transpiler.transpile(args);
+    Result result = J2clTranspiler.transpile(args);
     result.getProblems().report(System.err);
     System.exit(result.getExitCode());
   }
