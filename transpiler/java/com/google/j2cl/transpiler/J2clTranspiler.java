@@ -195,7 +195,7 @@ public class J2clTranspiler {
 
     JdtParser parser = new JdtParser(options, problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-        parser.parseFiles(options.getSourceFiles());
+        parser.parseFiles(options.getSourceFileInfos(), options.getGenerateKytheIndexingMetadata());
     problems.abortIfRequested();
     return compilationUnitsAndTypeBindings;
   }

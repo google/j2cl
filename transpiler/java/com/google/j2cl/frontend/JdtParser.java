@@ -19,12 +19,14 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
@@ -73,7 +75,8 @@ public class JdtParser {
           "java.lang.Throwable");
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
-  public CompilationUnitsAndTypeBindings parseFiles(List<String> filePaths) {
+  public CompilationUnitsAndTypeBindings parseFiles(
+      List<FileInfo> filePaths, boolean useTargetPath) {
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(true);
@@ -82,6 +85,8 @@ public class JdtParser {
     // our output would be unstable
     final Map<String, CompilationUnit> compilationUnitsByFilePath = new LinkedHashMap<>();
     final List<ITypeBinding> wellKnownTypeBindings = new ArrayList<>();
+    final Map<String, String> targetPathBySourcePath =
+        filePaths.stream().collect(Collectors.toMap(FileInfo::sourcePath, FileInfo::targetPath));
 
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
@@ -90,7 +95,11 @@ public class JdtParser {
             if (compilationHasErrors(filePath, compilationUnit)) {
               return;
             }
-            compilationUnitsByFilePath.put(filePath, compilationUnit);
+            String filePathKey = filePath;
+            if (useTargetPath) {
+              filePathKey = targetPathBySourcePath.get(filePath);
+            }
+            compilationUnitsByFilePath.put(filePathKey, compilationUnit);
           }
 
           @Override
@@ -99,7 +108,7 @@ public class JdtParser {
           }
         };
     parser.createASTs(
-        filePaths.stream().toArray(String[]::new),
+        filePaths.stream().map(f -> f.sourcePath()).toArray(String[]::new),
         getEncodings(filePaths.size()),
         wellKnownClassNames.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
         astRequestor,

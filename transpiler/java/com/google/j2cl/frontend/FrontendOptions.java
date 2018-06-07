@@ -20,6 +20,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
@@ -46,7 +47,6 @@ public abstract class FrontendOptions {
         getPathEntries(flags.nativeSourcePath),
         FrontendUtils.getAllSources(flags.files, problems)
             .stream()
-            .map(p -> p.sourcePath())
             .collect(ImmutableList.toImmutableList()),
         flags.output.endsWith(".zip")
             ? getZipOutput(flags.output, problems)
@@ -61,7 +61,7 @@ public abstract class FrontendOptions {
 
   public abstract List<String> getNativeSourceZipEntries();
 
-  public abstract List<String> getSourceFiles();
+  public abstract List<FileInfo> getSourceFileInfos();
 
   public abstract Path getOutputPath();
 
