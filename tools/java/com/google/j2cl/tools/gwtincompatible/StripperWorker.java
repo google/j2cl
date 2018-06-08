@@ -15,22 +15,12 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import com.google.j2cl.bazel.BaseWorker;
-import java.io.PrintStream;
+import com.google.j2cl.bazel.BazelWorker;
 
 /** Runs The @GwtIncompatible stripper as a worker. */
-public class StripperWorker extends BaseWorker {
-  public static void main(String[] args) {
-    new StripperWorker().start(args);
-  }
-
-  @Override
-  public int runAsWorker(String[] args, PrintStream outputStream) {
-    return Stripper.strip(args).reportAndGetExitCode(outputStream);
-  }
-
-  @Override
-  public void runStandard(String[] args) {
-    Stripper.main(args);
+public class StripperWorker {
+  public static void main(String[] workerArgs) {
+    BazelWorker.start(
+        workerArgs, (args, output) -> Stripper.strip(args).reportAndGetExitCode(output));
   }
 }

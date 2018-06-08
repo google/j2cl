@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.common;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 
 /**
  * Utility methods to replace calls to Java methods that J2cl does not support, so they can be
@@ -38,9 +38,8 @@ public class J2clUtils {
    * J2cl's implementation of PrintStream.printf(format, args). (Note that the method signature
    * differs from PrintStream.printf). Prints only the format string to the given PrintStream.
    */
-  public static PrintStream printf(PrintStream stream, String format, Object... args) {
+  public static PrintWriter printf(PrintWriter stream, String format, Object... args) {
     // TODO(epmjohnston): This is only a temporary placeholder; should be properly implemented.
-    stream.print(format);
     return stream;
   }
 

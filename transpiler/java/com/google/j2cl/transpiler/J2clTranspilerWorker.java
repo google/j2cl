@@ -13,8 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.j2cl.bazel.BaseWorker;
-import java.io.PrintStream;
+import com.google.j2cl.bazel.BazelWorker;
 
 /**
  * Runs J2clTranspiler as a blaze worker.
@@ -23,22 +22,9 @@ import java.io.PrintStream;
  * and thus gain significant speedups. This class implements the blaze worker protocol and drives
  * J2clTranspiler as a worker.
  */
-public class J2clTranspilerWorker extends BaseWorker {
-  public static void main(String[] args) {
-    new J2clTranspilerWorker().start(args);
-  }
-
-  @Override
-  public int runAsWorker(String[] args, PrintStream outputStream) {
-    try {
-      return J2clTranspiler.transpile(args).reportAndGetExitCode(outputStream);
-    } catch (Exception e) {
-      throw new RuntimeException("Internal compiler error: ", e);
-    }
-  }
-
-  @Override
-  public void runStandard(String[] args) {
-    J2clTranspiler.main(args);
+public class J2clTranspilerWorker {
+  public static void main(String[] workerArgs) {
+    BazelWorker.start(
+        workerArgs, (args, output) -> J2clTranspiler.transpile(args).reportAndGetExitCode(output));
   }
 }

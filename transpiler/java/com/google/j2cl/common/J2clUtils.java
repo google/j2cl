@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,12 +48,11 @@ public class J2clUtils {
   }
 
   /**
-   * J2cl's implementation of PrintStream.printf(format, args).
-   *   (Note that the method signature differs from PrintStream.printf).
-   * A convenience method to write a formatted string to this output stream using the specified
-   *   format string and arguments.
+   * J2cl's implementation of PrintWriter.printf(format, args). (Note that the method signature
+   * differs from PrintWriter.printf). A convenience method to write a formatted string to this
+   * output stream using the specified format string and arguments.
    */
-  public static PrintStream printf(PrintStream stream, String format, Object... args) {
+  public static PrintWriter printf(PrintWriter stream, String format, Object... args) {
     return stream.printf(format, args);
   }
 

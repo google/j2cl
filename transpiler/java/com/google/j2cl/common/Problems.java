@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -159,14 +160,19 @@ public class Problems {
     abortRequested = true;
   }
 
-  /** Prints all error messages and a summary and returns the exit code. */
-  public int reportAndGetExitCode(PrintStream errorStream) {
+  /** Prints all problems to provided output and returns the exit code. */
+  public int reportAndGetExitCode(PrintStream output) {
+    return reportAndGetExitCode(new PrintWriter(output, true));
+  }
+
+  /** Prints all problems to provided output and returns the exit code. */
+  public int reportAndGetExitCode(PrintWriter output) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
-      errorStream.println(severityMessagePair.getValue());
+      output.println(severityMessagePair.getValue());
     }
     if (hasErrors() || hasWarnings()) {
       J2clUtils.printf(
-          errorStream,
+          output,
           "%d error(s), %d warning(s).\n",
           problemsBySeverity.get(Severity.ERROR).size(),
           problemsBySeverity.get(Severity.WARNING).size());
