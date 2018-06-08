@@ -33,8 +33,8 @@ java_test(
         "//java/com/google/common/base",
         "//java/com/google/common/io",
         "//third_party/java/junit",
-        "//third_party/java/mockito",
         "//third_party/java/truth",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
+        "//transpiler/java/com/google/j2cl/common",
     ],
 )

@@ -14,7 +14,6 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.bazel.BaseWorker;
-import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.PrintStream;
 
 /**
@@ -32,9 +31,7 @@ public class J2clTranspilerWorker extends BaseWorker {
   @Override
   public int runAsWorker(String[] args, PrintStream outputStream) {
     try {
-      Result result = J2clTranspiler.transpile(args);
-      result.getProblems().report(outputStream);
-      return result.getExitCode();
+      return J2clTranspiler.transpile(args).reportAndGetExitCode(outputStream);
     } catch (Exception e) {
       throw new RuntimeException("Internal compiler error: ", e);
     }

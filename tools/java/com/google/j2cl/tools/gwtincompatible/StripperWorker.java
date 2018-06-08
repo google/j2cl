@@ -26,7 +26,7 @@ public class StripperWorker extends BaseWorker {
 
   @Override
   public int runAsWorker(String[] args, PrintStream outputStream) {
-    return new Stripper().run(args, outputStream);
+    return Stripper.strip(args).reportAndGetExitCode(outputStream);
   }
 
   @Override

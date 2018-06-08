@@ -23,7 +23,6 @@ import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendUtils;
-import com.google.j2cl.transpiler.J2clTranspiler.Result;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,9 +63,8 @@ public class RerunningJ2clTranspiler {
       J2clTranspiler transpiler = new J2clTranspiler();
 
       try {
-        Result result = transpiler.transpile(args);
-        success = result.getExitCode() == 0;
-        result.getProblems().report(System.err);
+        Problems problems = transpiler.transpile(args);
+        success = problems.reportAndGetExitCode(System.err) == 0;
       } catch (RuntimeException r) {
         // Compiler correctness preconditions were violated. Log a stacktrace and quit the test
         r.printStackTrace();

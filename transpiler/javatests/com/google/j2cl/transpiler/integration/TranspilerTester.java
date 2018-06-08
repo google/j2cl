@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import junit.framework.Assert;
@@ -123,31 +122,21 @@ public class TranspilerTester {
   }
 
   public TranspileResult assertTranspileSucceeds() {
-    return transpile().assertNoErrors().assertExitCode(0);
+    return transpile().assertNoErrors();
   }
 
   public TranspileResult assertTranspileFails() {
-    return transpile().assertNonZeroExitCode();
-  }
-
-  public TranspileResult assertTranspileExitCode(int exitCode) {
-    return transpile().assertExitCode(exitCode);
+    return transpile().assertHasErrors();
   }
 
   /** A bundle of data recording the results of a transpile operation. */
   public static class TranspileResult {
-    private final int exitCode;
     private final Problems problems;
     private final Path outputPath;
 
-    public TranspileResult(int exitCode, Problems problems, Path outputPath) {
-      this.exitCode = exitCode;
+    public TranspileResult(Problems problems, Path outputPath) {
       this.problems = problems;
       this.outputPath = outputPath;
-    }
-
-    public int getExitCode() {
-      return exitCode;
     }
 
     public Problems getProblems() {
@@ -176,7 +165,13 @@ public class TranspilerTester {
     }
 
     public TranspileResult assertNoErrors() {
-      return assertErrors();
+      assertThat(getProblems().getErrors()).isEmpty();
+      return this;
+    }
+
+    public TranspileResult assertHasErrors() {
+      assertThat(getProblems().getErrors()).isNotEmpty();
+      return this;
     }
 
     public TranspileResult assertErrors(String... expectedErrors) {
@@ -201,7 +196,8 @@ public class TranspilerTester {
     }
 
     public TranspileResult assertOutputStreamContainsSnippets(String... snippets) {
-      String output = J2clUtils.streamToString(stream -> getProblems().report(stream));
+      String output =
+          J2clUtils.streamToString(stream -> getProblems().reportAndGetExitCode(stream));
       Arrays.stream(snippets)
           .forEach(snippet -> assertThat(output).named("Output").contains(snippet));
       return this;
@@ -216,16 +212,6 @@ public class TranspilerTester {
     public TranspileResult assertOutputFilesDoNotExist(String... fileNames) {
       Arrays.stream(fileNames)
           .forEach(fileName -> Assert.assertFalse(Files.exists(outputPath.resolve(fileName))));
-      return this;
-    }
-
-    public TranspileResult assertNonZeroExitCode() {
-      assertThat(getExitCode()).isNotEqualTo(0);
-      return this;
-    }
-
-    public TranspileResult assertExitCode(int exitCode) {
-      assertThat(getExitCode()).isEqualTo(exitCode);
       return this;
     }
 
@@ -245,26 +231,21 @@ public class TranspilerTester {
 
   private static TranspileResult invokeTranspiler(Iterable<String> args, Path outputPath) {
     try {
-      // Run the transpiler in its own thread
-      J2clTranspiler.Result result =
-          Executors.newSingleThreadExecutor()
-              .submit(() -> invokeTranspileMethod(Iterables.toArray(args, String.class)))
-              .get();
-      return new TranspileResult(result.getExitCode(), result.getProblems(), outputPath);
+      return new TranspileResult(invokeTranspileMethod(args), outputPath);
     } catch (Exception e) {
       e.printStackTrace();
       Problems problems = new Problems();
       problems.error(e.toString());
-      return new TranspileResult(-3, problems, outputPath);
+      return new TranspileResult(problems, outputPath);
     }
   }
 
-  private static J2clTranspiler.Result invokeTranspileMethod(Object args) throws Exception {
+  private static Problems invokeTranspileMethod(Iterable<String> args) throws Exception {
     // J2clTranspiler.transpile is hidden since we don't want it to be used as an entry point. As a
     // result we use reflection here to invoke it.
     Method transpileMethod = J2clTranspiler.class.getDeclaredMethod("transpile", String[].class);
     transpileMethod.setAccessible(true);
-    return (J2clTranspiler.Result) transpileMethod.invoke(new J2clTranspiler(), args);
+    return (Problems) transpileMethod.invoke(null, (Object) Iterables.toArray(args, String.class));
   }
 
   private static class File {

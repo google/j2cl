@@ -16,14 +16,13 @@
 package com.google.j2cl.tools.gwtincompatible;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
 
 import com.google.common.io.Files;
+import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.attribute.FileTime;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -98,12 +97,10 @@ public class StripperTest {
 
   private File runStripper(File inputJar) throws IOException {
     File outputJar = new File(tmpFolder.newFolder(), "output.srcjar");
-    int returnCode =
-        new Stripper()
-            .run(
-                new String[] {"-d", outputJar.getAbsolutePath(), inputJar.getAbsolutePath()},
-                mock(PrintStream.class));
-    assertThat(returnCode).isEqualTo(0);
+    Problems problems =
+        Stripper.strip(
+            new String[] {"-d", outputJar.getAbsolutePath(), inputJar.getAbsolutePath()});
+    assertThat(problems.hasErrors()).isFalse();
     return outputJar;
   }
 

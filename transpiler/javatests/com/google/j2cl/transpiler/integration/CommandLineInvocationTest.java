@@ -29,7 +29,7 @@ public class CommandLineInvocationTest extends TestCase {
   public void testHelpFlag() {
     newTesterWithDefaults()
         .setArgs("-help")
-        .assertTranspileExitCode(0)
+        .assertTranspileSucceeds()
         // Just a smoke test to verify that we printing some flags with description
         .assertOutputStreamContainsSnippets("-classpath", "Specifies where to find");
   }
@@ -121,7 +121,6 @@ public class CommandLineInvocationTest extends TestCase {
         .addCompilationUnit("Foo", "public class Foo {", "  public class InnerFoo {}", "}")
         .addCompilationUnit("Bar", "public class Bar {", "  public class InnerBar {}", "}")
         .assertTranspileSucceeds()
-        .assertExitCode(0)
         .assertOutputFilesExist(
             "test/Foo.java.js",
             "test/Foo.impl.java.js",
@@ -137,8 +136,7 @@ public class CommandLineInvocationTest extends TestCase {
         .setJavaPackage("test")
         .addCompilationUnit("Foo", "public class Foo {", "  public class InnerFoo {}", "}")
         .addCompilationUnit("Bar", "public class Bar {", "  public class InnerBar {}", "}")
-        .assertTranspileSucceeds()
-        .assertExitCode(0);
+        .assertTranspileSucceeds();
 
     try (ZipFile zipFile = new ZipFile(outputLocation.toFile())) {
       assertNotNull(zipFile.getEntry("test/Foo.java.js"));

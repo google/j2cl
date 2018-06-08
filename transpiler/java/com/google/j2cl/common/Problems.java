@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
 /** An error logger class that records the number of errors and provides error print methods. */
 public class Problems {
+
   /** Represents compiler problem categories. */
   public enum Message {
     ERR_FLAG_FILE("Cannot load flag file: %s.", 1),
@@ -64,7 +65,7 @@ public class Problems {
       return message;
     }
 
-    public int getNumberOfArguments() {
+    private int getNumberOfArguments() {
       return numberOfArguments;
     }
   }
@@ -88,10 +89,6 @@ public class Problems {
 
   private boolean abortRequested = false;
   private final Multimap<Severity, String> problemsBySeverity = LinkedHashMultimap.create();
-
-  public int problemCount() {
-    return problemsBySeverity.size();
-  }
 
   public void error(Message message) {
     abortWhenPossible();
@@ -162,8 +159,8 @@ public class Problems {
     abortRequested = true;
   }
 
-  /** Prints all error messages and a summary. */
-  public void report(PrintStream errorStream) {
+  /** Prints all error messages and a summary and returns the exit code. */
+  public int reportAndGetExitCode(PrintStream errorStream) {
     for (Map.Entry<Severity, String> severityMessagePair : problemsBySeverity.entries()) {
       errorStream.println(severityMessagePair.getValue());
     }
@@ -174,6 +171,8 @@ public class Problems {
           problemsBySeverity.get(Severity.ERROR).size(),
           problemsBySeverity.get(Severity.WARNING).size());
     }
+
+    return hasErrors() ? 1 : 0;
   }
 
   public boolean hasWarnings() {
@@ -191,7 +190,7 @@ public class Problems {
   /** If there were errors abort. */
   public void abortIfRequested() {
     if (abortRequested) {
-      throw new Exit(problemsBySeverity.get(Severity.ERROR).size());
+      throw new Exit();
     }
   }
 
@@ -225,19 +224,9 @@ public class Problems {
   }
 
   /**
-   * J2clExit is thrown to signal that a System.exit should be performed at a higher level.
+   * Exit is thrown to signal that a System.exit should be performed at a higher level.
    *
    * <p>Note: It should never be caught except on the top level.
    */
-  public static class Exit extends java.lang.Error {
-    private final int exitCode;
-
-    public Exit(int exitCode) {
-      this.exitCode = exitCode;
-    }
-
-    public int getExitCode() {
-      return exitCode;
-    }
-  }
+  public static class Exit extends java.lang.Error {}
 }

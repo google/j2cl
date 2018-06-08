@@ -102,55 +102,20 @@ import java.util.concurrent.Future;
 /** Translation tool for generating JavaScript source files from Java sources. */
 public class J2clTranspiler {
 
-  /** Represents the result of a transpilation. */
-  public static class Result {
-    private final int exitCode;
-    private final Problems problems;
-
-    private Result(int exitCode, Problems problems) {
-      this.exitCode = exitCode;
-      this.problems = problems;
-    }
-
-    public int getExitCode() {
-      return exitCode;
-    }
-
-    public Problems getProblems() {
-      return problems;
-    }
-
-    static Result fromException(int exitCode, Throwable throwable) {
-      return fromErrorMessage(exitCode, throwable.toString());
-    }
-
-    static Result fromErrorMessage(int exitCode, String errorMessage) {
-      Problems problems = new Problems();
-      problems.error(errorMessage);
-      return new Result(exitCode, problems);
-    }
-
-    static Result fromOutputMessage(int exitCode, String outputMessage) {
-      Problems problems = new Problems();
-      problems.info(outputMessage);
-      return new Result(exitCode, problems);
-    }
-  }
-
   /** Runs the entire J2CL pipeline. */
-  static Result transpile(String[] args) {
+  static Problems transpile(String[] args) {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this, we invoke the compiler on a different thread each time.
-    Future<Result> futureResult =
+    Future<Problems> result =
         Executors.newSingleThreadExecutor().submit(() -> new J2clTranspiler().transpileImpl(args));
-    return Futures.getUnchecked(futureResult);
+    return Futures.getUnchecked(result);
   }
 
   private final TimingCollector timingCollector = TimingCollector.get();
   private final Problems problems = new Problems();
   private FrontendOptions options;
 
-  private Result transpileImpl(String[] args) {
+  private Problems transpileImpl(String[] args) {
     try {
       loadOptions(args);
       CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
@@ -162,9 +127,9 @@ public class J2clTranspiler {
       maybeCloseFileSystem();
       maybeOutputTimeReport();
     } catch (Problems.Exit e) {
-      return new Result(e.getExitCode(), problems);
+      // problems has the report.
     }
-    return new Result(0, problems);
+    return problems;
   }
 
   private void loadOptions(String[] args) {
@@ -368,8 +333,6 @@ public class J2clTranspiler {
 
   /** Entry point for the tool, which runs the entire J2CL pipeline. */
   public static void main(String[] args) {
-    Result result = J2clTranspiler.transpile(args);
-    result.getProblems().report(System.err);
-    System.exit(result.getExitCode());
+    System.exit(J2clTranspiler.transpile(args).reportAndGetExitCode(System.err));
   }
 }
