@@ -33,8 +33,8 @@ public class Main {
   }
 
   public static void testInnerNativeJsType() {
-    Bar.Inner unusedBarInner = new Bar.Inner() {};
-    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName() {};
+    Bar.Inner unusedBarInner = new Bar.Inner(1);
+    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);
   }
 
   public static void testGlobalNativeJsType() {

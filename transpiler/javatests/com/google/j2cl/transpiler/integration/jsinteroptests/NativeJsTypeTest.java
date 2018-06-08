@@ -32,6 +32,7 @@ public class NativeJsTypeTest extends MyTestCase {
     test.testClassLiterals();
     test.testNativeJsTypeWithOverlay();
     test.testNativeJsTypeWithStaticIntializer();
+    test.testNativeInnerClass();
     test.testSpecialNativeInstanceOf();
     test.testForwaringMethodsOnNativeClasses();
     test.testUninitializedStaticOverlayField();
@@ -426,5 +427,32 @@ public class NativeJsTypeTest extends MyTestCase {
     assertEquals(0, NativeClassWithStaticOverlayFields.uninitializedInt);
     assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt);
     assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
+  }
+
+  @JsType(isNative = true, name = "MyNativeJsType")
+  static class MyNativeJsTypeWithInner {
+    @JsType(isNative = true)
+    static class Inner {
+      public int n;
+
+      public Inner(int n) {}
+    }
+  }
+
+  @JsType(isNative = true, name = "MyNativeJsType.Inner")
+  static class MyNativeJsTypeInner {
+    public MyNativeJsTypeInner(int n) {}
+
+    @JsProperty
+    public native int getN();
+  }
+
+  public void testNativeInnerClass() {
+    MyNativeJsTypeWithInner.Inner object = new MyNativeJsTypeWithInner.Inner(3);
+    assertTrue(object instanceof MyNativeJsTypeWithInner.Inner);
+    assertTrue((Object) object instanceof MyNativeJsTypeInner);
+    assertEquals(3, object.n);
+    object = (MyNativeJsTypeWithInner.Inner) (Object) new MyNativeJsTypeInner(4);
+    assertEquals(4, object.n);
   }
 }

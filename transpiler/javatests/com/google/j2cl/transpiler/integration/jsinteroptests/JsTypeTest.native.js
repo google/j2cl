@@ -123,3 +123,10 @@ JsTypeTest.callPublicMethodFromEnumeration = function(enumeration) {
 JsTypeTest.callPublicMethodFromEnumerationSubclass = function(enumeration) {
   return enumeration.foo();
 };
+
+
+/** @interface */
+JsTypeTest.InterfaceWithSingleJavaConcrete = class {
+  /** @return {number} */
+  m() {}
+};

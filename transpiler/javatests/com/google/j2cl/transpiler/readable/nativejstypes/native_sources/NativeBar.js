@@ -33,7 +33,12 @@ class Bar {
  */
 Bar.f = 1;
 
-/** @interface */
-Bar.Inner = class {};
+Bar.Inner = class {
+  /** @param {number} n */
+  constructor(n) {
+    /** @public {number} */
+    this.n = n;
+  }
+};
 
 exports = Bar;

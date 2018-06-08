@@ -24,7 +24,7 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class NativeStacktraceTest {
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = "nativeStacktraceTest")
   private static class ThrowingJsClass {
     public native void throwEventually();
   }

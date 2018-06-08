@@ -12,13 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-let _NativeJsTypeWithOverlay = goog.require('woo.NativeJsTypeTest.NativeJsTypeWithOverlay');
-
 /**
- * @return {_NativeJsTypeWithOverlay}
+ * @return {NativeJsTypeTest.NativeJsTypeWithOverlay}
  */
 NativeJsTypeTest.createNativeJsTypeWithOverlayWithM = function() {
-  let subtypeWithM = class extends _NativeJsTypeWithOverlay {
+  let subtypeWithM = class extends NativeJsTypeTest.NativeJsTypeWithOverlay {
     constructor() {
       super();
       /** @type {?} */ (this)['m'] = function() {
@@ -103,3 +101,26 @@ NativeJsTypeTest.createNativeSubclass = function() {
   };
   return new implementingClass();
 };
+
+NativeJsTypeTest.MyNativeJsType = class {
+  constructor() {}
+};
+
+NativeJsTypeTest.MyNativeJsType.Inner = class {
+  /** @param {number} n */
+  constructor(n) {
+    /** @public {number} */
+    this.n = n;
+  }
+};
+
+NativeJsTypeTest.NativeJsTypeWithOverlay = class extends Object {
+  constructor() {
+    super();
+    /** @public {number} */
+    this.k = 0;
+  }
+};
+
+/** @interface */
+NativeJsTypeTest.MyNativeJsTypeInterface = class {};

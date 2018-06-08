@@ -17,7 +17,7 @@
  * @public
  */
 JsPropertyTest.createMyNativeJsType = function() {
-  return new MyNativeJsType(0);
+  return new JsPropertyTest.MyNativeJsType(0);
 };
 
 /**
@@ -86,4 +86,53 @@ JsPropertyTest.getProperty = function(object, name) {
  */
 JsPropertyTest.setProperty = function(object, name, value) {
   object[name] = value;
+};
+
+JsPropertyTest.MyNativeJsType = class {
+  /** @param {number=} x */
+  constructor(x) {
+    this.x = x;
+    this.y = 0;
+    this.ctorExecuted = true;
+  }
+
+  /**
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static answerToLife() {
+    return 42;
+  }
+
+  /**
+   * @param {number} bias
+   * @return {number}
+   * @public
+   */
+  sum(bias) {
+    return this.x + bias;
+  }
+};
+
+/**
+ * @public {number}
+ */
+JsPropertyTest.MyNativeJsType.staticX = 33;
+
+/** @interface */
+JsPropertyTest.AccidentalOverridePropertyJsTypeInterface = class {};
+
+/** @interface */
+JsPropertyTest.MyNativeJsTypeInterface = class {
+  constructor() {
+    /** @public {number} */
+    this.x;
+  }
+  /**
+   * @param {number} bias
+   * @return {number}
+   * @public
+   */
+  sum(bias) {}
 };

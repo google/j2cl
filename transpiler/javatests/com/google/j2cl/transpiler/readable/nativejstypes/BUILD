@@ -10,6 +10,7 @@ load(
 readable_example(
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
+    native_srcs = glob(["*.native.js"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
 

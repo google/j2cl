@@ -78,3 +78,12 @@ JsTypeArrayTest.nonNumericKeys = function(object) {
   array.sort();
   return array;
 };
+
+// This should be an interface but can not be since there is no way
+// to define an interface contract with fields.
+JsTypeArrayTest.SimpleJsTypeReturnForMultiDimArray = class {
+  constructor() {
+    /** @public {number} */
+    this.id = 0;
+  }
+};

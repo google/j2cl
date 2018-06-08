@@ -1257,7 +1257,7 @@ class JdtUtils {
         .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
-        .setJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+        .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSuperTypeDescriptorFactory(

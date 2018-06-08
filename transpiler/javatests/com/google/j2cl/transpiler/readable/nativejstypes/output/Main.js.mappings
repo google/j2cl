@@ -25,9 +25,9 @@
 [return bar.product();] => [return bar.product();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [testInnerNativeJsType] => [m_testInnerNativeJsType__]
 [testInnerNativeJsType] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
-[Bar.Inner unusedBarInner = new Bar.Inner() {};] => [let unusedBarInner = $1.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
+[Bar.Inner unusedBarInner = new Bar.Inner(1);] => [let unusedBarInner = new Bar.Inner(1);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedBarInner] => [unusedBarInner] "unusedBarInner"
-[BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName() {};] => [let unusedBarInnerWithDotInName = $2.$create__();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
+[BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);] => [let unusedBarInnerWithDotInName = new Bar.Inner(2);] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testInnerNativeJsType"
 [unusedBarInnerWithDotInName] => [unusedBarInnerWithDotInName] "unusedBarInnerWithDotInName"
 [testGlobalNativeJsType] => [m_testGlobalNativeJsType__]
 [testGlobalNativeJsType] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.nativejstypes.Main.testGlobalNativeJsType"

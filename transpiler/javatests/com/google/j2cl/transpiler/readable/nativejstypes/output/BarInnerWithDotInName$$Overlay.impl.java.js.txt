@@ -7,6 +7,7 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypes.BarInnerWithDotInName.$Overlay$impl');
 
 
+const Bar = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
@@ -17,7 +18,7 @@ class $Overlay {
    * @public
    */
   static $isInstance(instance) {
-    return true;
+    return instance instanceof Bar.Inner;
   }
 
   /**
@@ -28,8 +29,10 @@ class $Overlay {
   }
 };
 
-$Util.$setClassMetadataForInterface(
-    $Overlay, $Util.$makeClassName('Bar.Inner'));
+$Util.$setClassMetadata(
+    $Overlay,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Bar.Inner'));
 
 
 exports = $Overlay;

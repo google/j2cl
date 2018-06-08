@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.nativejstypes;
 
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
@@ -31,12 +30,22 @@ public class Bar {
 
   public native int product();
 
-  // TODO(b/63717717): remove namespace once this is implemented.
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  interface Inner {}
+  @JsType(isNative = true)
+  static class Inner {
+    public Inner(int n) {}
+  }
 }
 
 /** Native inner JsType. */
-// TODO(b/63717717): remove namespace once this is implemented.
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Bar.Inner")
-interface BarInnerWithDotInName {}
+@JsType(isNative = true, name = "Bar.Inner")
+class BarInnerWithDotInName {
+  public BarInnerWithDotInName(int n) {}
+}
+
+@JsType(
+    isNative = true,
+    namespace = "com.google.j2cl.transpiler.readable.nativejstypes.Bar",
+    name = "Bar.Inner")
+class BarInnerWithDotInNameAndHasNamespace {
+  public BarInnerWithDotInNameAndHasNamespace(int n) {}
+}

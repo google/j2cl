@@ -57,3 +57,62 @@ JsTypeObjectMethodsTest.createWithoutEqualsAndHashCode = function(a, b) {
 JsTypeObjectMethodsTest.callHashCode = function(a) {
   return a.hashCode();
 };
+
+JsTypeObjectMethodsTest.NativeClassWithHashCode = class {
+  /** @param {number=} value */
+  constructor(value) {
+    /** @public {number} */
+    this.myValue = value || 0;
+  }
+  /** @return {number} */
+  hashCode() {
+    return this.myValue;
+  }
+
+  /**
+   * @return {string}
+   * @override
+   */
+  toString() {
+    return 'myValue: ' + this.myValue;
+  }
+
+  /**
+   *  @param {?} other
+   *  @return {boolean}
+   */
+  equals(other) {
+    return this.myValue === other.myValue;
+  }
+};
+
+/** @interface */
+JsTypeObjectMethodsTest.NativeInterface = class {};
+
+JsTypeObjectMethodsTest.NativeJsTypeImplementsObjectMethods = class {
+  /** @param {number} value */
+  constructor(value) {
+    /** public {number} */ this.value = value;
+  }
+
+  /**
+   * @param {?} other
+   * @return {boolean}
+   */
+  equals(other) {
+    return this.value === other.value;
+  }
+
+  /** @return {number} */
+  hashCode() {
+    return this.value;
+  }
+
+  /**
+   * @return {string}
+   * @override
+   */
+  toString() {
+    return 'Native Object with value: ' + this.value;
+  }
+};

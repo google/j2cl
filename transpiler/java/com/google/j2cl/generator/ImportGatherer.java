@@ -345,10 +345,12 @@ class ImportGatherer extends AbstractVisitor {
     checkArgument(!typeDeclaration.isJsFunctionInterface());
     checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
 
+    typeDeclarationByCategory.put(
+        typeDeclaration.isExtern() ? ImportCategory.EXTERN : importCategory,
+        typeDeclaration.getEnclosingModule());
+    // Reserve the name earlier on so that these are never aliased.
     if (typeDeclaration.isExtern()) {
-      addExternTypeDeclaration(typeDeclaration.getQualifiedJsName());
-    } else {
-      typeDeclarationByCategory.put(importCategory, typeDeclaration);
+      localNameUses.add(typeDeclaration.getEnclosingModule().getQualifiedJsName());
     }
   }
 
@@ -357,11 +359,8 @@ class ImportGatherer extends AbstractVisitor {
     // relevant for avoiding collisions.
     String topScopeQualifier = Iterables.get(Splitter.on('.').split(qualifiedJsName), 0);
     // TODO(b/80488007): Refactor the way extern namespaces are handled.
-    typeDeclarationByCategory.put(
-        ImportCategory.EXTERN,
+    addTypeDeclaration(
         TypeDescriptors.createGlobalNativeTypeDescriptor(topScopeQualifier).getTypeDeclaration());
-    // Reserve the name earlier on so that these are never aliased.
-    localNameUses.add(topScopeQualifier);
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {

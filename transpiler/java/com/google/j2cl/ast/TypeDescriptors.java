@@ -415,7 +415,7 @@ public class TypeDescriptors {
         TypeDeclaration.newBuilder()
             .setClassComponents(ImmutableList.of(className))
             .setNative(isNative)
-            .setJsNamespace(jsNamespace)
+            .setCustomizedJsNamespace(jsNamespace)
             .setPackageName(packageName)
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setUnparameterizedTypeDescriptorFactory(

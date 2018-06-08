@@ -59,9 +59,13 @@ public class GenerationEnvironment {
     if (typeDeclaration.isExtern()) {
       return typeDeclaration.getQualifiedJsName();
     }
-    String alias = aliasByTypeBinaryName.get(typeDeclaration.getQualifiedBinaryName());
+    String moduleAlias =
+        aliasByTypeBinaryName.get(typeDeclaration.getEnclosingModule().getQualifiedBinaryName());
     checkState(
-        alias != null, "An alias was needed for %s but no alias was found.", typeDeclaration);
-    return alias;
+        moduleAlias != null, "An alias was needed for %s but no alias was found.", typeDeclaration);
+
+    String innerTypeQualifier = typeDeclaration.getInnerTypeQualifier();
+
+    return innerTypeQualifier.isEmpty() ? moduleAlias : moduleAlias + "." + innerTypeQualifier;
   }
 }

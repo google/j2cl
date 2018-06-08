@@ -23,9 +23,11 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
+import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -108,6 +110,41 @@ public abstract class TypeDeclaration extends Node
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
     return getQualifiedJsName();
+  }
+
+  /** Returns the type descriptor for the module that needs to be required for this type */
+  @Memoized
+  public TypeDeclaration getEnclosingModule() {
+    String moduleRelativeJsName = getModuleRelativeJsName();
+    if (!isNative() || !moduleRelativeJsName.contains(".")) {
+      return this;
+    }
+
+    // Synthesize a module root.
+    String enclosingJsName = Iterables.get(Splitter.on('.').split(moduleRelativeJsName), 0);
+    String enclosingJsNamespace = getJsNamespace();
+    return TypeDescriptors.createNativeTypeDescriptor(
+            getPackageName(), enclosingJsName, enclosingJsNamespace)
+        .getTypeDeclaration();
+  }
+
+  /**
+   * Returns the qualifier for the type from the root of the module, @{code ""} if the type is the
+   * module root.
+   */
+  @Memoized
+  public String getInnerTypeQualifier() {
+    String moduleRelativeJsName = getModuleRelativeJsName();
+    int dotIndex = moduleRelativeJsName.indexOf('.');
+    if (dotIndex == -1) {
+      return "";
+    }
+
+    return moduleRelativeJsName.substring(dotIndex + 1);
+  }
+
+  private boolean hasCustomizedJsNamespace() {
+    return getCustomizedJsNamespace() != null;
   }
 
   public String getImplModuleName() {
@@ -194,9 +231,79 @@ public abstract class TypeDeclaration extends Node
   @Nullable
   public abstract String getSimpleJsName();
 
+  /**
+   * Returns the qualifier for the type from the root of the module including the module root.
+   *
+   * <p>For example in the following code:
+   *
+   * <pre>
+   * <code>
+   *   class Top {
+   *     @JsType(isNative = true, namespace = "foo", name = "Top.Inner")
+   *     class TopInner {
+   *       @JsType(isNative = true)
+   *       class InnerInner {}
+   *     }
+   *   }
+   *
+   * </code>
+   * </pre>
+   *
+   * <p>The module relative JS names are in order is Top, Top.Inner, Top.Inner.InnerInner.
+   */
+  @Memoized
+  String getModuleRelativeJsName() {
+    if (!isNative() || hasCustomizedJsNamespace() || getEnclosingTypeDeclaration() == null) {
+      return getSimpleJsName();
+    }
+
+    String enclosingModuleRelativeName = getEnclosingTypeDeclaration().getModuleRelativeJsName();
+    // enclosingModuleRelativeName can only be empty if the type has TypeDescriptors.globalNamespace
+    // as an enclosing type. This could only potentially happen in synthetic type descriptors.
+    return enclosingModuleRelativeName.isEmpty()
+        ? getSimpleJsName()
+        : enclosingModuleRelativeName + "." + getSimpleJsName();
+  }
+
   @Override
   @Nullable
-  public abstract String getJsNamespace();
+  @Memoized
+  public String getJsNamespace() {
+    if (hasCustomizedJsNamespace()) {
+      return getCustomizedJsNamespace();
+    }
+
+    if (getEnclosingTypeDeclaration() == null) {
+      return getPackageName();
+    }
+
+    if (isNative()) {
+      return getEnclosingTypeDeclaration().getJsNamespace();
+    }
+
+    if (getEnclosingTypeDeclaration().isNative()) {
+      // When there is a type nested within a native type, it's important not to generate a name
+      // like "Array.1" (like would happen if the outer native type was claiming to be native
+      // Array and the nested type was anonymous) since this is almost guaranteed to collide
+      // with other people also creating nested classes within a native type that claims to be
+      // native Array.
+      return getEnclosingTypeDeclaration().getQualifiedSourceName();
+    }
+    // Use the parent qualified name.
+    return getEnclosingTypeDeclaration().getQualifiedJsName();
+  }
+
+  @Override
+  @Memoized
+  public String getQualifiedJsName() {
+    if (JsUtils.isGlobal(getJsNamespace())) {
+      return getModuleRelativeJsName();
+    }
+    return getJsNamespace() + "." + getModuleRelativeJsName();
+  }
+
+  @Nullable
+  abstract String getCustomizedJsNamespace();
 
   /** Returns true if the class captures its enclosing instance */
   public abstract boolean isCapturingEnclosingInstance();
@@ -229,9 +336,9 @@ public abstract class TypeDeclaration extends Node
     // A native type descriptor is an extern if its namespace is the global namespace or if
     // it inherited the namespace from its (enclosing) extern type.
     return JsUtils.isGlobal(getJsNamespace())
-        || (getEnclosingTypeDeclaration() != null
-            && getEnclosingTypeDeclaration().isExtern()
-            && getJsNamespace().equals(getEnclosingTypeDeclaration().getQualifiedJsName()));
+        || (!hasCustomizedJsNamespace()
+            && getEnclosingTypeDeclaration() != null
+            && getEnclosingTypeDeclaration().isExtern());
   }
 
   public boolean isStarOrUnknown() {
@@ -657,7 +764,7 @@ public abstract class TypeDeclaration extends Node
 
     public abstract Builder setSimpleJsName(String simpleJsName);
 
-    public abstract Builder setJsNamespace(String jsNamespace);
+    public abstract Builder setCustomizedJsNamespace(String jsNamespace);
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);
@@ -718,29 +825,9 @@ public abstract class TypeDeclaration extends Node
 
     abstract Optional<String> getSimpleJsName();
 
-    abstract Optional<String> getJsNamespace();
-
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
     abstract boolean isNative();
-
-    private String calculateJsNamespace() {
-      if (getEnclosingTypeDeclaration().isPresent()) {
-        TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration().get();
-        if (!isNative() && enclosingTypeDeclaration.isNative()) {
-          // When there is a type nested within a native type, it's important not to generate a name
-          // like "Array.1" (like would happen if the outer native type was claiming to be native
-          // Array and the nested type was anonymous) since this is almost guaranteed to collide
-          // with other people also creating nested classes within a native type that claims to be
-          // native Array.
-          return enclosingTypeDeclaration.getQualifiedSourceName();
-        }
-        // Use the parent namespace.
-        return enclosingTypeDeclaration.getQualifiedJsName();
-      }
-      // Use the java package namespace.
-      return getPackageName().get();
-    }
 
     private static final ThreadLocalInterner<TypeDeclaration> interner =
         new ThreadLocalInterner<>();
@@ -754,10 +841,6 @@ public abstract class TypeDeclaration extends Node
 
       if (!getSimpleJsName().isPresent()) {
         setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents()));
-      }
-
-      if (!getJsNamespace().isPresent()) {
-        setJsNamespace(calculateJsNamespace());
       }
 
       TypeDeclaration typeDeclaration = autoBuild();

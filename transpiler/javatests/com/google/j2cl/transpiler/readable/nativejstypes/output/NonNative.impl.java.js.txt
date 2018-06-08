@@ -1,0 +1,94 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.nativejstypes.NonNative.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nativejstypes.NonNative$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class NonNative extends j_l_Object {
+  /**
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'NonNative()'.
+   * @return {!NonNative}
+   * @public
+   */
+  static $create__() {
+    NonNative.$clinit();
+    let $instance = new NonNative();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativejstypes_NonNative__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'NonNative()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nativejstypes_NonNative__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NonNative;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, NonNative);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    NonNative.$clinit = function() {};
+    j_l_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    NonNative,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.nativejstypes.NonNative'));
+
+
+
+/* NATIVE.JS EPILOG */
+
+const com_google_j2cl_transpiler_readable_nativejstypes_NonNative = NonNative;
+
+
+NonNative.Inner1 = class {};
+
+NonNative.Inner1.Inner2 = class {};
+
+NonNative.Inner1.Inner2.Inner3 = class {};
+
+NonNative.Inner1.Inner2.Inner3.Inner4 = class {};
+
+NonNative.Inner1.Inner2.Inner3.Inner4.Inner5 = class {};
+
+exports = NonNative;
+//# sourceMappingURL=NonNative.js.map
