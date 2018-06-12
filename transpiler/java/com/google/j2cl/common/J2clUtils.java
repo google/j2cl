@@ -98,18 +98,16 @@ public class J2clUtils {
     }
   }
 
-  public static void copyFile(Path from, Path to) {
+  public static void copyFile(Path from, Path to, Problems problems) {
     try {
+      createDirectories(to.getParent());
       Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
       maybeResetAllTimeStamps(to);
     } catch (IOException e) {
-      // TODO(tdeegan): This blows up during the JRE compile. Did this ever work? The sources are
-      // available for compilation so no errors should be seen here unless there is an exceptional
-      // condition.
-      // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
-      // + absoluteOutputPath + ":" + e.getMessage());
+      problems.error("Could not copy file: %s", e.toString());
+      problems.abortIfRequested();
     }
   }
 

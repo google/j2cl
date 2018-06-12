@@ -250,7 +250,7 @@ public class OutputGeneratorStage {
             + File.separator
             + j2clUnit.getName();
     Path absolutePath = outputPath.resolve(relativePath + ".java");
-    J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath);
+    J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
   }
 
   private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
