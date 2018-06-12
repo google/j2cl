@@ -1,9 +1,7 @@
+> # PLEASE BE ADVISED: This repository is an early access of not finalized product. Build support for open-source is incomplete and access is mostly provided for GWT-SDK migrators.
 
 J2CL
 ====
-> *THIS REPOSITORY IS AN EARLY_ACCESS OF J2CL AND SHOULD NOT BE DISCUSSED
-PUBLICLY.*
-
 J2CL is a transpiler from Java to Closure style JavaScript.
 The project enables easy reuse of Java libraries in JS applications by
 generating JS that tightly optimizes and correctly type-checks in
