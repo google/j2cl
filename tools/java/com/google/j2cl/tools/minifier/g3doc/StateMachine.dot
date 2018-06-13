@@ -1,0 +1,75 @@
+digraph J2clMinimizer {
+  node  [style="rounded,filled,bold", shape=box, fixedsize=true, width=2.3, fontname="Arial", fontsize=10];
+
+  "start "-> "NON_IDENTIFIER"
+
+  "NON_IDENTIFIER" [fillcolor = "#30e0ff"]
+  "NON_IDENTIFIER" -> "NON_IDENTIFIER"  [label="[^a-zA-Z0-9$_/] \nwriteChar", color = "#30e0ff"]
+  "NON_IDENTIFIER" -> "MINIMIZABLE_IDENTIFIER" [label="[mf$]\nstartNewIdentifier", color = "#ff82ec"]
+  "NON_IDENTIFIER" -> "NON_MINIMIZABLE_IDENTIFIER" [label="[a-zA-Z0-9$_]-[mf$]\nwriteChar", color = "#9d8cff"]
+  "NON_IDENTIFIER" -> "MAYBE_COMMENT_START"   [label="[/] \nskipChar"]
+  "NON_IDENTIFIER" -> "SINGLE_QUOTED_STRING"   [label="['] \nwriteChar", color=green]
+  "NON_IDENTIFIER" -> "DOUBLE_QUOTED_STRING"   [label="[''] \nwriteChar", color=teal]
+  "NON_IDENTIFIER" -> "end"   [label="EOF \nskipChar"]
+
+  "NON_MINIMIZABLE_IDENTIFIER" [fillcolor = "#9d8cff"]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "NON_MINIMIZABLE_IDENTIFIER" [label="[a-zA-Z0-9$_]\nwriteChar", color = "#9d8cff"]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "NON_IDENTIFIER"  [label="[^a-zA-Z0-9$_] \nwriteIdentifierAndChar", color = "#30e0ff"]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "MAYBE_COMMENT_START"   [label="[/] \nskipChar"]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "SINGLE_QUOTED_STRING"   [label="['] \nwriteChar", color=green]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "DOUBLE_QUOTED_STRING"   [label="[''] \nwriteChar", color=teal]
+  "NON_MINIMIZABLE_IDENTIFIER" -> "end"   [label="EOF \nskipChar"]
+
+  "MINIMIZABLE_IDENTIFIER" [fillcolor = "#ff82ec"]
+  "MINIMIZABLE_IDENTIFIER" -> "MINIMIZABLE_IDENTIFIER" [label="[a-zA-Z0-9$_]\nbufferIdentifierChar", color = "#ff82ec"]
+  "MINIMIZABLE_IDENTIFIER" -> "NON_IDENTIFIER"  [label="[^a-zA-Z0-9$_] \nwriteIdentifierAndChar", color = "#30e0ff"]
+  "MINIMIZABLE_IDENTIFIER" -> "MAYBE_COMMENT_START"   [label="[/] \nwriteIdentifier"]
+  "MINIMIZABLE_IDENTIFIER" -> "SINGLE_QUOTED_STRING"   [label="['] \nwriteIdentifierAndChar", color=green]
+  "MINIMIZABLE_IDENTIFIER" -> "DOUBLE_QUOTED_STRING"   [label="[''] \nwriteIdentifierAndChar", color=teal]
+  "MINIMIZABLE_IDENTIFIER" -> "end"   [label="EOF \nwriteIdentifier"]
+
+  "MAYBE_COMMENT_START" -> "NON_IDENTIFIER"  [label="[^a-zA-Z0-9$_] \nwriteSlashAndChar", color = "#30e0ff"]
+  "MAYBE_COMMENT_START" -> "LINE_COMMENT"   [label="[/] \nskipChar", color = "#ffa55b"]
+  "MAYBE_COMMENT_START" -> "BLOCK_COMMENT"   [label="[*] \nskipChar", color = "#ff8a66"]
+  "MAYBE_COMMENT_START" -> "MINIMIZABLE_IDENTIFIER" [label="[mf$]\nwriteSlashAndStartNewIdentifier", color = "#ff82ec"]
+  "MAYBE_COMMENT_START" -> "NON_MINIMIZABLE_IDENTIFIER" [label="[a-zA-Z0-9$_/]-[mf$]\nwriteSlashAndChar", color = "#9d8cff"]
+  "MAYBE_COMMENT_START" -> "SINGLE_QUOTED_STRING"   [label="['] \nwriteSlashAndChar", color=green]
+  "MAYBE_COMMENT_START" -> "DOUBLE_QUOTED_STRING"   [label="[''] \nwriteSlashAndChar", color=teal]
+  "MAYBE_COMMENT_START" -> "end"   [label="EOF \nwriteSlash"]
+
+  "LINE_COMMENT" [fillcolor = "#ffa55b"]
+  "LINE_COMMENT" -> "LINE_COMMENT"   [label="[^\\n] \nskipChar", color = "#ffa55b"]
+  "LINE_COMMENT" -> "NON_IDENTIFIER"   [label="[\\n] \nwriteChar", color = "#30e0ff"]
+  "LINE_COMMENT" -> "end"   [label="EOF \nskipChar"]
+
+  "BLOCK_COMMENT" [fillcolor = "#ff8a66"]
+  "BLOCK_COMMENT" -> "BLOCK_COMMENT"   [label="[^*] \nskipCharUnlessNewLine", color = "#ff8a66"]
+  "BLOCK_COMMENT" -> "MAYBE_BLOCK_COMMENT_END"   [label="[*] \nskipCharUnlessNewLine", color = "#ffa55b"]
+  "BLOCK_COMMENT" -> "end"   [label="EOF \nskipChar"]
+
+  "MAYBE_BLOCK_COMMENT_END" [fillcolor = "#ff8a66"]
+  "MAYBE_BLOCK_COMMENT_END" -> "NON_IDENTIFIER"   [label="[/] \nskipChar", color = "#30e0ff"]
+  "MAYBE_BLOCK_COMMENT_END" -> "MAYBE_BLOCK_COMMENT_END"   [label="[*] \nskipChar", color = "#ff8a66"]
+  "MAYBE_BLOCK_COMMENT_END" -> "BLOCK_COMMENT"   [label="[^*/] \nskipChar", color = "#ffa55b"]
+  "MAYBE_BLOCK_COMMENT_END" -> "end"   [label="EOF \nskipChar"]
+
+  "SINGLE_QUOTED_STRING" [fillcolor=green]
+  "SINGLE_QUOTED_STRING" -> "SINGLE_QUOTED_STRING"   [color=green, label="[^'\] \nwriteChar", color=green]
+  "SINGLE_QUOTED_STRING" -> "SINGLE_QUOTED_STRING_ESCAPE"   [label="[\\] \nwriteChar", color=green]
+  "SINGLE_QUOTED_STRING" -> "NON_IDENTIFIER"   [label="['] \nwriteChar", color = "#30e0ff"]
+  "SINGLE_QUOTED_STRING" -> "end"   [label="EOF \nskipChar"]
+
+  "SINGLE_QUOTED_STRING_ESCAPE" [fillcolor=green]
+  "SINGLE_QUOTED_STRING_ESCAPE" -> "SINGLE_QUOTED_STRING"   [label=". \nwriteChar", color=green]
+  "SINGLE_QUOTED_STRING_ESCAPE" -> "end"   [label="EOF \nskipChar", color=green]
+
+  "DOUBLE_QUOTED_STRING" [fillcolor=teal]
+  "DOUBLE_QUOTED_STRING" -> "DOUBLE_QUOTED_STRING"   [label="[^''\] \nwriteChar", color=teal]
+  "DOUBLE_QUOTED_STRING" -> "DOUBLE_QUOTED_STRING_ESCAPE"   [label="[\\] \nwriteChar", color=teal]
+  "DOUBLE_QUOTED_STRING" -> "NON_IDENTIFIER"   [label="[''] \nwriteChar", color = "#30e0ff"]
+  "DOUBLE_QUOTED_STRING" -> "end"   [label="EOF \nskipChar"]
+
+  "DOUBLE_QUOTED_STRING_ESCAPE" [fillcolor=teal]
+  "DOUBLE_QUOTED_STRING_ESCAPE" -> "DOUBLE_QUOTED_STRING"   [label=". \nwriteChar", color=teal]
+  "DOUBLE_QUOTED_STRING_ESCAPE" -> "end"   [label="EOF \nskipChar", color=teal]
+}
