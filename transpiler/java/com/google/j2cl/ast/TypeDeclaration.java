@@ -120,11 +120,18 @@ public abstract class TypeDeclaration extends Node
       return this;
     }
 
+    if (getEnclosingTypeDeclaration() != null && !hasCustomizedJsNamespace()) {
+      // Make sure that if the enclosing module is a non native type, getEnclosing module returns
+      // the normal Java TypeDeclaration instead of synthesizing a native one. This is important
+      // because it guarantees that the type will be goog.required using the "$impl" module not the
+      // header module which might cause dependency cycles.
+      return getEnclosingTypeDeclaration().getEnclosingModule();
+    }
+
     // Synthesize a module root.
     String enclosingJsName = Iterables.get(Splitter.on('.').split(moduleRelativeJsName), 0);
     String enclosingJsNamespace = getJsNamespace();
-    return TypeDescriptors.createNativeTypeDescriptor(
-            getPackageName(), enclosingJsName, enclosingJsNamespace)
+    return TypeDescriptors.createNativeTypeDescriptor(enclosingJsNamespace, enclosingJsName)
         .getTypeDeclaration();
   }
 

@@ -12,6 +12,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+let $synthetic_com_google_j2cl_transpiler_readable_nativejstypes_Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -78,7 +79,9 @@ class Main extends j_l_Object {
   static m_testInnerNativeJsType__() {
     Main.$clinit();
     let unusedBarInner = new Bar.Inner(1);
-    let unusedBarInnerWithDotInName = new Bar.Inner(2);
+    let unusedBarInnerWithDotInName =
+        new $synthetic_com_google_j2cl_transpiler_readable_nativejstypes_Bar
+            .Inner(2);
   }
 
   /**
@@ -140,6 +143,9 @@ class Main extends j_l_Object {
     Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+    $synthetic_com_google_j2cl_transpiler_readable_nativejstypes_Bar =
+        goog.module.get(
+            'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
     Class = goog.module.get('java.lang.Class$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');

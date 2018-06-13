@@ -914,19 +914,7 @@ public class AstUtils {
     }
 
     String jsNamespace = Joiner.on(".").join(namespaceComponents);
-    TypeDescriptor enclosingClassTypeDescriptor =
-        getOutermostEnclosingType(memberDescriptor.getEnclosingTypeDescriptor());
-    String packageName =
-        Joiner.on(".").join(enclosingClassTypeDescriptor.getQualifiedSourceName(), jsNamespace);
-
-    return TypeDescriptors.createNativeTypeDescriptor(packageName, jsName, jsNamespace);
-  }
-
-  private static TypeDescriptor getOutermostEnclosingType(DeclaredTypeDescriptor typeDescriptor) {
-    if (typeDescriptor.getEnclosingTypeDescriptor() == null) {
-      return typeDescriptor;
-    }
-    return getOutermostEnclosingType(typeDescriptor.getEnclosingTypeDescriptor());
+    return TypeDescriptors.createNativeTypeDescriptor(jsNamespace, jsName);
   }
 
   /**

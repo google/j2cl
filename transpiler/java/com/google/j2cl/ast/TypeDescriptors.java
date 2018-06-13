@@ -18,10 +18,12 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -328,8 +330,8 @@ public class TypeDescriptors {
 
     private final DeclaredTypeDescriptor typeDescriptor;
 
-    BootstrapType(String packageName, String name) {
-      this.typeDescriptor = createBoostrapTypeDescriptor(Kind.CLASS, packageName, name);
+    BootstrapType(String namespace, String name) {
+      this.typeDescriptor = createBootstrapTypeDescriptor(Kind.CLASS, namespace, name);
     }
 
     public DeclaredTypeDescriptor getDescriptor() {
@@ -361,37 +363,25 @@ public class TypeDescriptors {
         "vmbootstrap.primitives",
         "$" + primitiveTypeDescriptor.getSimpleSourceName(),
         ImmutableList.of(),
-        null,
-        Kind.CLASS,
-        false);
+        Kind.CLASS);
   }
 
   /** Returns a TypeDescriptor to a Bootstrap type; used to synthesize calls to the runtime. */
-  private static DeclaredTypeDescriptor createBoostrapTypeDescriptor(
-      Kind kind, String packageName, String bootstrapClassName) {
+  private static DeclaredTypeDescriptor createBootstrapTypeDescriptor(
+      Kind kind, String namespace, String bootstrapClassName) {
     checkArgument(!bootstrapClassName.contains("<"));
-    return createSyntheticTypeDescriptor(
-        packageName, bootstrapClassName, ImmutableList.of(), null, kind, false);
+    return createSyntheticTypeDescriptor(namespace, bootstrapClassName, ImmutableList.of(), kind);
   }
 
   public static DeclaredTypeDescriptor createGlobalNativeTypeDescriptor(
       String jsName, TypeDescriptor... typeArgumentDescriptors) {
-    return createNativeTypeDescriptor(
-        null, jsName, JsUtils.JS_PACKAGE_GLOBAL, typeArgumentDescriptors);
+    return createNativeTypeDescriptor(JsUtils.JS_PACKAGE_GLOBAL, jsName, typeArgumentDescriptors);
   }
 
   static DeclaredTypeDescriptor createNativeTypeDescriptor(
-      String packageName,
-      String className,
-      String jsNamespace,
-      TypeDescriptor... typeArgumentDescriptors) {
+      String jsNamespace, String className, TypeDescriptor... typeArgumentDescriptors) {
     return createSyntheticTypeDescriptor(
-        packageName,
-        className,
-        Arrays.asList(typeArgumentDescriptors),
-        jsNamespace,
-        Kind.INTERFACE,
-        true);
+        jsNamespace, className, Arrays.asList(typeArgumentDescriptors), Kind.INTERFACE);
   }
 
   /**
@@ -400,28 +390,25 @@ public class TypeDescriptors {
    * <p>Used to synthesize type descriptors to Bootstrap types and native JS types.
    */
   private static DeclaredTypeDescriptor createSyntheticTypeDescriptor(
-      final String packageName,
+      final String jsNamespace,
       final String className,
       final List<TypeDescriptor> typeArgumentDescriptors,
-      final String jsNamespace,
-      final Kind kind,
-      final boolean isNative) {
+      final Kind kind) {
     Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
-        () ->
-            createSyntheticTypeDescriptor(
-                packageName, className, ImmutableList.of(), jsNamespace, kind, isNative);
+        () -> createSyntheticTypeDescriptor(jsNamespace, className, ImmutableList.of(), kind);
 
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
             .setClassComponents(ImmutableList.of(className))
-            .setNative(isNative)
+            // Mark bootstrap classes as non native so that the goog.require references the
+            // "$impl" module not the header to avoid cycles.
+            .setNative(!isBootstrapNamespace(jsNamespace))
             .setCustomizedJsNamespace(jsNamespace)
-            .setPackageName(packageName)
+            .setPackageName(getSyntheticPackageName(jsNamespace))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setUnparameterizedTypeDescriptorFactory(
                 () ->
-                    createSyntheticTypeDescriptor(
-                        packageName, className, ImmutableList.of(), jsNamespace, kind, isNative))
+                    createSyntheticTypeDescriptor(jsNamespace, className, ImmutableList.of(), kind))
             // Synthetic type declarations do not need to have type variables.
             // TODO(b/63118697): Make sure declaratations are consistent with descriptor w.r.t
             // type parameters.
@@ -437,6 +424,28 @@ public class TypeDescriptors {
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setKind(kind)
         .build();
+  }
+
+  private static boolean isBootstrapNamespace(String jsNamespace) {
+    String topNamespace = Iterables.get(Splitter.on('.').split(jsNamespace), 0);
+    return topNamespace.equals("vmbootstrap")
+        || topNamespace.equals("nativebootstrap")
+        || topNamespace.equals("javaemul");
+  }
+
+  /**
+   * Synthesize a package name with an explicit prefix to avoid colliding with existing types. The
+   * package name is part of the key for TypeDeclaration, and if two keys collide they will resolve
+   * to the same TypeDeclaration creating potential for inconsistencies. The prefix "$synthetic" was
+   * chosen to avoid collision with packages in the actual source code.
+   */
+  private static String getSyntheticPackageName(String jsNamespace) {
+    if (isBootstrapNamespace(jsNamespace)) {
+      // Avoid prepending synthetic to our runtime types. Those are not really synthetic. Bootstrap
+      // types are handwritten non native types.
+      return jsNamespace;
+    }
+    return "$synthetic." + jsNamespace;
   }
 
   /** Returns the unparameterized version of {@code typeDescriptors}. */

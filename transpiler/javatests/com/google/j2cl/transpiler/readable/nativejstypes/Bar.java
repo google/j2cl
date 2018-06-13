@@ -44,7 +44,7 @@ class BarInnerWithDotInName {
 
 @JsType(
     isNative = true,
-    namespace = "com.google.j2cl.transpiler.readable.nativejstypes.Bar",
+    namespace = "com.google.j2cl.transpiler.readable.nativejstypes",
     name = "Bar.Inner")
 class BarInnerWithDotInNameAndHasNamespace {
   public BarInnerWithDotInNameAndHasNamespace(int n) {}

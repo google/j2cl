@@ -439,6 +439,9 @@ public class NativeJsTypeTest extends MyTestCase {
     }
   }
 
+  // This is implemented in NativeJsTypeTest.native.js on purpose to make sure that the reference to
+  // the enclosing module is considered a Java type and all the scheme to avoid dependency
+  // cycles is correct.
   @JsType(isNative = true, name = "MyNativeJsType.Inner")
   static class MyNativeJsTypeInner {
     public MyNativeJsTypeInner(int n) {}
