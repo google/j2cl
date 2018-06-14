@@ -10,6 +10,9 @@ load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
     testonly = 1,
+    # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here.
+    # TODO(b/62039178): Remove this.
+    extra_js_srcs = [":test_defines"],
     generate_build_test = False,
     javacopts = [
         "-Xep:CheckReturnValue:OFF",
@@ -92,9 +95,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here.
-    # TODO(b/62039178): Remove this.
-    _js_srcs = [":test_defines"],
     bootstrap_files = [":test_defines"],
     shard_count = 16,
     test_class = "com.google.gwt.emultest.EmulSuite",
