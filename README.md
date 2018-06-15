@@ -1,4 +1,4 @@
-> # PLEASE BE ADVISED: This repository does not contain a finished product and is only here to give early access to a few early GWT-SDK migrators. Build support for open-source is incomplete.
+> # PLEASE BE ADVISED: This repository does not contain a finished product and has limited access. Early access is provided to individual contributors for the purpose of migration of the GWT-SDK and checking compatibility of a few common open source GWT libraries.
 
 J2CL
 ====
