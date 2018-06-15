@@ -26,7 +26,6 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 /** Frontend options, which is initialized by a Flag instance that is already parsed. */
@@ -110,12 +109,6 @@ public abstract class FrontendOptions {
   }
 
   private static List<String> getPathEntries(String path) {
-    List<String> entries = new ArrayList<>();
-    for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
-      if (new File(entry).exists()) {
-        entries.add(entry);
-      }
-    }
-    return entries;
+    return Splitter.on(File.pathSeparatorChar).omitEmptyStrings().splitToList(path);
   }
 }
