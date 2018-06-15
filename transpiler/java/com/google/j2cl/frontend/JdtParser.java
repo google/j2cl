@@ -46,11 +46,6 @@ public class JdtParser {
   private final Map<String, String> compilerOptions = new HashMap<>();
   private final List<String> classpathEntries;
 
-  /** Create and initialize a JdtParser based on an options object. */
-  public JdtParser(FrontendOptions options, Problems problems) {
-    this(options.getClasspathEntries(), problems);
-  }
-
   /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(List<String> classpathEntries, Problems problems) {
     compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_9);
