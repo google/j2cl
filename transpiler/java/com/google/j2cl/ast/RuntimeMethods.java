@@ -94,6 +94,42 @@ public class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to Enums.createMap. */
+  public static Expression createEnumsCreateMapMethodCall(
+      TypeDescriptor returnTypeDescriptor, Expression values) {
+
+    MethodDescriptor createMapMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setName("createMapFromValues")
+            .setReturnTypeDescriptor(returnTypeDescriptor)
+            .setParameterTypeDescriptors(values.getTypeDescriptor())
+            .build();
+    return MethodCall.Builder.from(createMapMethodDescriptor).setArguments(values).build();
+  }
+
+  /** Create a call to Enums.getValueFromNameAndMap. */
+  public static Expression createEnumsGetValueMethodCall(
+      TypeDescriptor returnTypeDescriptor,
+      Expression nameParameter,
+      Expression namesToValuesMapParameter) {
+    MethodDescriptor getValueMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setName("getValueFromNameAndMap")
+            .setReturnTypeDescriptor(returnTypeDescriptor)
+            .setParameterTypeDescriptors(
+                nameParameter.getTypeDescriptor(), namesToValuesMapParameter.getTypeDescriptor())
+            .build();
+    return MethodCall.Builder.from(getValueMethodDescriptor)
+        .setArguments(nameParameter, namesToValuesMapParameter)
+        .build();
+  }
+
   /** Create a call to an Equality method. */
   public static MethodCall createEqualityMethodCall(String methodName, Expression... arguments) {
     return createEqualityMethodCall(methodName, Arrays.asList(arguments));
