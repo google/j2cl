@@ -299,7 +299,7 @@ public class J2clTranspiler {
     timingCollector.startSubSample("OutputGeneratorStage Constructor");
 
     new OutputGeneratorStage(
-            options.getNativeSourceZipEntries(),
+            options.getNativeSourceFileInfo(),
             options.getOutputPath(),
             options.getDeclareLegacyNamespace(),
             options.getShouldPrintReadableSourceMap(),

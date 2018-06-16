@@ -110,7 +110,7 @@ public class CommandLineInvocationTest extends TestCase {
             "NativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .addNativeFile("ExtraClass", "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
-        .assertErrors("/nativefiles.zip!/nativeclasstest/ExtraClass.native.js' not used.");
+        .assertErrors("nativeclasstest/ExtraClass.native.js' not used.");
   }
 
   public void testOutputsToDirectory() throws IOException {

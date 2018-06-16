@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.frontend.FrontendUtils;
@@ -42,7 +43,10 @@ public class Stripper {
       FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(flags.outputPath, problems);
       problems.abortIfRequested();
 
-      List<FileInfo> allPaths = FrontendUtils.getAllSources(flags.files, problems);
+      List<FileInfo> allPaths =
+          FrontendUtils.getAllSources(flags.files, problems)
+              .filter(f -> f.targetPath().endsWith(".java"))
+              .collect(ImmutableList.toImmutableList());
       problems.abortIfRequested();
 
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);

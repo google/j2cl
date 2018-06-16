@@ -43,9 +43,11 @@ public abstract class FrontendOptions {
 
     return new AutoValue_FrontendOptions(
         getPathEntries(flags.classPath),
-        getPathEntries(flags.nativeSourcePath),
+        FrontendUtils.getAllSources(getPathEntries(flags.nativeSourcePath), problems)
+            .filter(f -> f.targetPath().endsWith(".native.js"))
+            .collect(ImmutableList.toImmutableList()),
         FrontendUtils.getAllSources(flags.files, problems)
-            .stream()
+            .filter(f -> f.targetPath().endsWith(".java"))
             .collect(ImmutableList.toImmutableList()),
         flags.output.endsWith(".zip")
             ? getZipOutput(flags.output, problems)
@@ -58,7 +60,7 @@ public abstract class FrontendOptions {
 
   public abstract List<String> getClasspathEntries();
 
-  public abstract List<String> getNativeSourceZipEntries();
+  public abstract List<FileInfo> getNativeSourceFileInfo();
 
   public abstract List<FileInfo> getSourceFileInfos();
 

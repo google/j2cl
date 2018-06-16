@@ -60,13 +60,13 @@ public class FrontendUtils {
   }
 
   /** Returns all individual sources where source jars extracted and flattened. */
-  public static ImmutableList<FileInfo> getAllSources(List<String> sources, Problems problems) {
+  public static Stream<FileInfo> getAllSources(List<String> sources, Problems problems) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
     // temp dir prefixes.
-    Path srcjarContentDir;
+    Path sourcesDir;
     try {
-      srcjarContentDir = Files.createTempDirectory("source_jar");
+      sourcesDir = Files.createTempDirectory("j2cl_sources");
     } catch (IOException e) {
       problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return null;
@@ -80,28 +80,27 @@ public class FrontendUtils {
         .stream()
         .flatMap(
             f ->
-                f.endsWith("jar")
-                    ? extractSourceJar(f, srcjarContentDir, problems).stream()
+                f.endsWith("jar") || f.endsWith("zip")
+                    ? extractZip(f, sourcesDir, problems).stream()
                     : Stream.of(FileInfo.create(f, f)))
         .sorted()
-        .distinct()
-        .collect(ImmutableList.toImmutableList());
+        .distinct();
   }
 
-  private static ImmutableList<FileInfo> extractSourceJar(
-      String sourceJarPath, Path srcjarContentDir, Problems problems) {
+  private static ImmutableList<FileInfo> extractZip(
+      String zipPath, Path sourcesDir, Problems problems) {
     try {
-      ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
-      try (Stream<Path> stream = Files.walk(srcjarContentDir)) {
+      ZipFiles.unzipFile(new File(zipPath), sourcesDir.toFile());
+      try (Stream<Path> stream = Files.walk(sourcesDir)) {
         return stream
-            .filter(p -> p.toString().endsWith(".java"))
-            .map((p) -> FileInfo.create(p.toString(), srcjarContentDir.relativize(p).toString()))
+            .filter(Files::isRegularFile)
+            .map(p -> FileInfo.create(p.toString(), sourcesDir.relativize(p).toString()))
             .collect(ImmutableList.toImmutableList());
       }
     } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, zipPath);
+      return ImmutableList.of();
     }
-    return ImmutableList.of();
   }
 
   public static FileSystem initZipOutput(String output, Problems problems) {

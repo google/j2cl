@@ -23,6 +23,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -37,7 +38,7 @@ import java.util.Map.Entry;
  * generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
-  private final List<String> nativeJavaScriptFileZipPaths;
+  private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
   private final Path outputPath;
   private final boolean declareLegacyNamespace;
@@ -46,13 +47,13 @@ public class OutputGeneratorStage {
   private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
-      List<String> nativeJavaScriptFileZipPaths,
+      List<FileInfo> nativeJavaScriptFiles,
       Path outputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
       Problems problems) {
-    this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
+    this.nativeJavaScriptFiles = nativeJavaScriptFiles;
     this.outputPath = outputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
@@ -68,7 +69,7 @@ public class OutputGeneratorStage {
     timingReport.startSample("Native files gather");
 
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
-        NativeJavaScriptFile.getFilesByPathFromZip(nativeJavaScriptFileZipPaths, problems);
+        NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {

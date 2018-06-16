@@ -15,20 +15,15 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.io.CharStreams;
-import com.google.common.io.Closeables;
+import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * NativeJavaScriptFile contains information about native javascript files that is used to output
@@ -38,14 +33,12 @@ public class NativeJavaScriptFile {
   private String relativePath;
   private String content;
   private boolean used = false;
-  private String zipPath;
 
   public static final String NATIVE_EXTENSION = ".native.js";
 
-  public NativeJavaScriptFile(String relativePath, String content, String zipPath) {
+  public NativeJavaScriptFile(String relativePath, String content) {
     this.relativePath = relativePath;
     this.content = content;
-    this.zipPath = zipPath;
   }
 
   /** Returns the path for the native file relative to the root. */
@@ -65,7 +58,7 @@ public class NativeJavaScriptFile {
 
   @Override
   public String toString() {
-    return zipPath + "!/" + relativePath;
+    return relativePath;
   }
 
   /**
@@ -80,33 +73,23 @@ public class NativeJavaScriptFile {
   }
 
   /**
-   * Given a list of zip file paths, this method will extract files with the
-   * extension @NATIVE_EXTENSION and return the a map of file paths to NativeJavaScriptFile objects
-   * of the form:
+   * Given a list of native files, return a map of file paths to NativeJavaScriptFile objects of the
+   * form:
    *
    * <p>/com/google/example/nativejsfile1 => NativeJavaScriptFile
    *
    * <p>/com/google/example/nativejsfile2 => NativeJavaScriptFile
    */
-  public static Map<String, NativeJavaScriptFile> getFilesByPathFromZip(
-      List<String> zipPaths, Problems problems) {
+  public static Map<String, NativeJavaScriptFile> getMap(List<FileInfo> files, Problems problems) {
     Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
-    for (String zipPath : zipPaths) {
-      try (ZipFile zipFile = new ZipFile(zipPath)) {
-        List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
-        for (ZipEntry entry : entries) {
-          if (!entry.getName().endsWith(NATIVE_EXTENSION)) {
-            continue; // If the path isn't of type NATIVE_EXTENSION, don't add it.
-          }
-          InputStream stream = zipFile.getInputStream(entry);
-          String content =
-              CharStreams.toString(new InputStreamReader(stream, StandardCharsets.UTF_8));
-          Closeables.closeQuietly(stream);
-          NativeJavaScriptFile file = new NativeJavaScriptFile(entry.getName(), content, zipPath);
-          loadedFilesByPath.put(file.getPathWithoutExtension(), file);
-        }
+    for (FileInfo file : files) {
+      try {
+        String content =
+            MoreFiles.asCharSource(Paths.get(file.sourcePath()), StandardCharsets.UTF_8).read();
+        NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
+        loadedFilesByPath.put(nativeFile.getPathWithoutExtension(), nativeFile);
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_OPEN_ZIP, zipPath, e.getMessage());
+        problems.error("Could not read file %s: %s", file.targetPath(), e.getMessage());
       }
     }
     return loadedFilesByPath;
