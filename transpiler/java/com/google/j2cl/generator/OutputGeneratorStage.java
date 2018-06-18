@@ -22,7 +22,6 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +43,6 @@ public class OutputGeneratorStage {
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean generateKytheIndexingMetadata;
-  private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
       List<FileInfo> nativeJavaScriptFiles,
@@ -66,8 +64,6 @@ public class OutputGeneratorStage {
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
     // over in the future.
-    timingReport.startSample("Native files gather");
-
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
 
@@ -78,13 +74,10 @@ public class OutputGeneratorStage {
           continue;
         }
 
-        timingReport.startSample("Create impl generator (gather variable aliases)");
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(problems, declareLegacyNamespace, type);
 
         // If the java type contains any native methods, search for matching native file.
-        timingReport.startSample("Native files read");
-
         String typeRelativePath = getRelativePath(type);
         String typeAbsolutePath = getAbsolutePath(j2clCompilationUnit, type);
 
@@ -110,21 +103,16 @@ public class OutputGeneratorStage {
           return;
         }
 
-        timingReport.startSample("Render impl");
         Path absolutePathForImpl =
             outputPath.resolve(getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
 
-        timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
         Path absolutePathForHeader =
             outputPath.resolve(getRelativePath(type) + jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
-        timingReport.startSample("Write header");
         J2clUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
-
-        timingReport.startSample("Render source maps");
 
         if (generateKytheIndexingMetadata) {
           // Inline metadata so Kythe can create edges between this file and the Java source file.
@@ -143,7 +131,6 @@ public class OutputGeneratorStage {
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
             Path absolutePathForSourceMap =
                 outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
-            timingReport.startSample("Write source maps");
             J2clUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
           }
         }
@@ -157,7 +144,6 @@ public class OutputGeneratorStage {
               matchingNativeFile);
         }
 
-        timingReport.startSample("Write impl");
         J2clUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
 
         if (matchingNativeFile != null) {
@@ -165,12 +151,11 @@ public class OutputGeneratorStage {
         }
       }
 
-      timingReport.startSample("Copy *.java sources");
       if (!generateKytheIndexingMetadata) {
         copyJavaSourcesToOutput(j2clCompilationUnit);
       }
     }
-    timingReport.startSample("Check unused native impl files.");
+
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {

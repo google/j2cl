@@ -53,7 +53,6 @@ import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.common.TimingCollector;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -80,12 +79,7 @@ class ImportGatherer extends AbstractVisitor {
 
   public static Multimap<ImportCategory, Import> gatherImports(
       Type type, boolean declareLegacyNamespace) {
-    TimingCollector.get().startSubSample("Import Gathering Visitor");
-
-    Multimap<ImportCategory, Import> importsByCategory =
-        new ImportGatherer(declareLegacyNamespace).doGatherImports(type);
-    TimingCollector.get().endSubSample();
-    return importsByCategory;
+    return new ImportGatherer(declareLegacyNamespace).doGatherImports(type);
   }
 
   // TODO(b/80201427): We should also include TypeVariables on name recording.
@@ -364,20 +358,15 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
-    TimingCollector timingCollector = TimingCollector.get();
-    timingCollector.startSubSample("Add default Classes");
-
     // Util class implements some utility functions and does not depend on any other class, always
     // import it eagerly.
     addTypeDeclaration(BootstrapType.NATIVE_UTIL.getDeclaration(), ImportCategory.LOADTIME);
 
     // Collect type references.
-    timingCollector.startSample("Collect type references");
     type.accept(this);
 
     checkState(typeDeclarationByCategory.get(ImportCategory.SELF).size() == 1);
 
-    timingCollector.startSample("Remove duplicate references");
     typeDeclarationByCategory
         .get(ImportCategory.RUNTIME)
         .removeAll(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
@@ -398,7 +387,6 @@ class ImportGatherer extends AbstractVisitor {
         .get(ImportCategory.JSDOC)
         .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
 
-    timingCollector.startSample("Convert to imports");
     Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
     importsByCategory.putAll(
         ImportCategory.RUNTIME, toImports(typeDeclarationByCategory.get(ImportCategory.RUNTIME)));
@@ -412,7 +400,6 @@ class ImportGatherer extends AbstractVisitor {
     // when necessary.
     importsByCategory.putAll(
         ImportCategory.SELF, toImports(typeDeclarationByCategory.get(ImportCategory.SELF)));
-    timingCollector.endSubSample();
     return importsByCategory;
   }
 

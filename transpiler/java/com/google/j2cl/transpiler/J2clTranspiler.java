@@ -85,7 +85,6 @@ import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
-import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -111,7 +110,6 @@ public class J2clTranspiler {
     return Futures.getUnchecked(result);
   }
 
-  private final TimingCollector timingCollector = TimingCollector.get();
   private final Problems problems = new Problems();
   private FrontendOptions options;
 
@@ -125,7 +123,6 @@ public class J2clTranspiler {
       normalizeUnits(j2clUnits);
       generateOutputs(j2clUnits);
       maybeCloseFileSystem();
-      maybeOutputTimeReport();
     } catch (Problems.Exit e) {
       // problems has the report.
     }
@@ -133,8 +130,6 @@ public class J2clTranspiler {
   }
 
   private void loadOptions(String[] args) {
-    timingCollector.startSubSample("Parse flags");
-
     FrontendFlags flags = FrontendFlags.parse(args, problems);
     problems.abortIfRequested();
 
@@ -143,8 +138,6 @@ public class J2clTranspiler {
   }
   private List<CompilationUnit> convertUnits(
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
-    timingCollector.startSample("AST Conversion");
-
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), problems);
     problems.abortIfRequested();
@@ -156,8 +149,6 @@ public class J2clTranspiler {
   }
 
   private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings() {
-    timingCollector.startSample("JDT Parse");
-
     JdtParser parser = new JdtParser(options.getClasspathEntries(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         parser.parseFiles(options.getSourceFileInfos(), options.getGenerateKytheIndexingMetadata());
@@ -166,15 +157,11 @@ public class J2clTranspiler {
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
-    timingCollector.startSample("Check Units");
     JsInteropRestrictionsChecker.check(j2clUnits, problems);
     problems.abortIfRequested();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
-    timingCollector.startSample("Normalize Units");
-    timingCollector.startSubSample("Create Pass List");
-
     List<NormalizationPass> passes =
         ImmutableList.of(
             // Class structure normalizations.
@@ -277,27 +264,19 @@ public class J2clTranspiler {
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
       for (NormalizationPass pass : passes) {
-        timingCollector.startSample("Pass " + pass.getClass().getName());
         pass.applyTo(j2clUnit);
       }
       verifyUnit(j2clUnit);
     }
-
-    timingCollector.endSubSample(); // End the sub sample
   }
 
   private void verifyUnit(CompilationUnit j2clUnit) {
-    timingCollector.startSample("Verify Unit");
-
     VerifySingleAstReference.applyTo(j2clUnit);
     VerifyParamAndArgCounts.applyTo(j2clUnit);
     VerifyVariableScoping.applyTo(j2clUnit);
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
-    timingCollector.startSample("Generate output");
-    timingCollector.startSubSample("OutputGeneratorStage Constructor");
-
     new OutputGeneratorStage(
             options.getNativeSourceFileInfo(),
             options.getOutputPath(),
@@ -306,13 +285,10 @@ public class J2clTranspiler {
             options.getGenerateKytheIndexingMetadata(),
             problems)
         .generateOutputs(j2clCompilationUnits);
-    timingCollector.endSubSample();
     problems.abortIfRequested();
   }
 
   private void maybeCloseFileSystem() {
-    timingCollector.startSample("Close File System");
-
     FileSystem outputFileSystem = options.getOutputPath().getFileSystem();
     if (outputFileSystem.getClass().getCanonicalName().equals("com.sun.nio.zipfs.ZipFileSystem")
         || outputFileSystem.getClass().getCanonicalName().equals("jdk.nio.zipfs.ZipFileSystem")) {
@@ -321,13 +297,6 @@ public class J2clTranspiler {
       } catch (IOException e) {
         problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
       }
-    }
-  }
-
-  private void maybeOutputTimeReport() {
-    timingCollector.endSubSample();
-    if (options.getGenerateTimeReport()) {
-      timingCollector.printReport();
     }
   }
 
