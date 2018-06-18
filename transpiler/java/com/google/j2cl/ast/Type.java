@@ -314,11 +314,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
-  }
-
-  @Override
   public String getReadableDescription() {
     return getDeclaration().getReadableDescription();
   }

@@ -21,6 +21,4 @@ import com.google.j2cl.common.SourcePosition;
 public interface HasSourcePosition {
   // The location in the original Java source file.
   SourcePosition getSourcePosition();
-
-  void setSourcePosition(SourcePosition sourcePosition);
 }

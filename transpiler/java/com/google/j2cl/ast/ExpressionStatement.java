@@ -38,10 +38,7 @@ public class ExpressionStatement extends Statement {
 
   @Override
   public ExpressionStatement clone() {
-    ExpressionStatement expressionStatement =
-        new ExpressionStatement(getSourcePosition(), expression.clone());
-    expressionStatement.setSourcePosition(this.getSourcePosition());
-    return expressionStatement;
+    return new ExpressionStatement(getSourcePosition(), expression.clone());
   }
 
   @Override

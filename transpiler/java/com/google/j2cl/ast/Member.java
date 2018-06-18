@@ -72,11 +72,6 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
   }
 
   @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
-  }
-
-  @Override
   public Node accept(Processor processor) {
     return Visitor_Member.visit(processor, this);
   }

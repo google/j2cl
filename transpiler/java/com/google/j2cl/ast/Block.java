@@ -48,13 +48,10 @@ public class Block extends Statement {
 
   @Override
   public Block clone() {
-    Block block =
-        Block.newBuilder()
-            .setSourcePosition(getSourcePosition())
-            .setStatements(AstUtils.clone(statements))
-            .build();
-    block.setSourcePosition(this.getSourcePosition());
-    return block;
+    return Block.newBuilder()
+        .setSourcePosition(getSourcePosition())
+        .setStatements(AstUtils.clone(statements))
+        .build();
   }
 
   @Override

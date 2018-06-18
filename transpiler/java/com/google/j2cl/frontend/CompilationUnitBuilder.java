@@ -367,17 +367,20 @@ public class CompilationUnitBuilder {
               ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
               : convert(methodDeclaration.getBody());
 
-      return newMethodBuilder(methodDeclaration.resolveBinding(), methodDeclaration.getName())
+      return newMethodBuilder(methodDeclaration.resolveBinding())
+          .setSourcePosition(getSourcePosition(methodDeclaration.getName()))
           .setParameters(parameters)
           .addStatements(body.getStatements())
           .build();
     }
 
     private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {
-      return newMethodBuilder(memberDeclaration.resolveBinding(), memberDeclaration).build();
+      return newMethodBuilder(memberDeclaration.resolveBinding())
+          .setSourcePosition(getSourcePosition(memberDeclaration))
+          .build();
     }
 
-    private Method.Builder newMethodBuilder(IMethodBinding methodBinding, ASTNode node) {
+    private Method.Builder newMethodBuilder(IMethodBinding methodBinding) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
       boolean isOverride =
@@ -385,10 +388,7 @@ public class CompilationUnitBuilder {
               .getOverriddenMethodDescriptors()
               .stream()
               .anyMatch(m -> requiresOverrideAnnotation(methodDescriptor, m));
-      return Method.newBuilder()
-          .setMethodDescriptor(methodDescriptor)
-          .setOverride(isOverride)
-          .setSourcePosition(getSourcePosition(node));
+      return Method.newBuilder().setMethodDescriptor(methodDescriptor).setOverride(isOverride);
     }
 
     private boolean requiresOverrideAnnotation(
@@ -779,11 +779,7 @@ public class CompilationUnitBuilder {
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
-      Statement j2clStatement = convertStatement(statement);
-      if (j2clStatement != null) {
-        j2clStatement.setSourcePosition(getSourcePosition(statement));
-      }
-      return j2clStatement;
+      return convertStatement(statement);
     }
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
@@ -1039,7 +1035,6 @@ public class CompilationUnitBuilder {
         Statement statement =
             AstUtils.createReturnOrExpressionStatement(
                 getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
-        statement.setSourcePosition(getSourcePosition(lambdaBody));
         body =
             Block.newBuilder()
                 .setSourcePosition(getSourcePosition(lambdaBody))
@@ -1299,7 +1294,6 @@ public class CompilationUnitBuilder {
               isStaticDispatch,
               forwardingParameters,
               functionalMethodDescriptor.getReturnTypeDescriptor());
-      forwardingStatement.setSourcePosition(sourcePosition);
       return FunctionExpression.newBuilder()
           .setTypeDescriptor(expressionTypeDescriptor)
           .setParameters(parameters)

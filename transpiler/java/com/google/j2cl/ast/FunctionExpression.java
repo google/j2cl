@@ -67,11 +67,6 @@ public class FunctionExpression extends Expression implements HasParameters, Has
   }
 
   @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
-  }
-
-  @Override
   public Variable getJsVarargsParameter() {
     if (isJsVarargs()) {
       return Iterables.getLast(getParameters());

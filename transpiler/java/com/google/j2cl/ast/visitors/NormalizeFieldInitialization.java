@@ -17,7 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression.Builder;
+import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
@@ -93,16 +93,13 @@ public class NormalizeFieldInitialization extends NormalizationPass {
   private static Block createInitializerBlockFromFieldInitializer(Field field) {
     FieldDescriptor fieldDescriptor = field.getDescriptor();
     SourcePosition sourcePosition = field.getSourcePosition();
-    Block block =
-        Block.newBuilder()
-            .setSourcePosition(sourcePosition)
-            .setStatements(
-                Builder.asAssignmentTo(fieldDescriptor)
-                    .setRightOperand(field.getInitializer())
-                    .build()
-                    .makeStatement(sourcePosition))
-            .build();
-    block.setSourcePosition(sourcePosition);
-    return block;
+    return Block.newBuilder()
+        .setSourcePosition(sourcePosition)
+        .setStatements(
+            BinaryExpression.Builder.asAssignmentTo(fieldDescriptor)
+                .setRightOperand(field.getInitializer())
+                .build()
+                .makeStatement(sourcePosition))
+        .build();
   }
 }

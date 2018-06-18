@@ -125,7 +125,6 @@ public class DefaultMethodsResolver extends NormalizationPass {
               targetMethodDescriptor,
               type.getTypeDescriptor(),
               "Default method forwarding stub.");
-      defaultForwardingMethod.setSourcePosition(type.getSourcePosition());
       type.addMethod(defaultForwardingMethod);
 
       if (targetMethodDescriptor.isOrOverridesJsMember()) {

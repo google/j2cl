@@ -71,11 +71,6 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
     return sourcePosition;
   }
 
-  @Override
-  public void setSourcePosition(SourcePosition sourcePosition) {
-    this.sourcePosition = sourcePosition;
-  }
-
   public static Builder newBuilder() {
     return new Builder();
   }
