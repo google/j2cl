@@ -233,7 +233,8 @@ public class OutputGeneratorStage {
             javaSourcePositionByOutputSourcePosition,
             javaScriptImplementationFileContents,
             nativeJavaScriptFile,
-            j2clUnit.getFilePath());
+            j2clUnit.getFilePath(),
+            problems);
     if (!readableOutput.isEmpty()) {
       Path absolutePathForReadableSourceMap =
           outputPath.resolve(getRelativePath(type) + READABLE_MAPPINGS_SUFFIX);

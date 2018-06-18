@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -39,10 +40,11 @@ public class ReadableSourceMapGenerator {
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       String javaScriptImplementationFileContents,
       NativeJavaScriptFile nativeJavaScriptFile,
-      String j2clUnitFilePath) {
+      String j2clUnitFilePath,
+      Problems problems) {
 
     Map<String, List<String>> sourceLinesByFileName =
-        buildSourceLinesByFileName(nativeJavaScriptFile, j2clUnitFilePath);
+        buildSourceLinesByFileName(nativeJavaScriptFile, j2clUnitFilePath, problems);
 
     StringBuilder sb = new StringBuilder();
 
@@ -77,7 +79,7 @@ public class ReadableSourceMapGenerator {
   }
 
   private static Map<String, List<String>> buildSourceLinesByFileName(
-      NativeJavaScriptFile nativeJavaScriptFile, String j2clUnitFilePath) {
+      NativeJavaScriptFile nativeJavaScriptFile, String j2clUnitFilePath, Problems problems) {
     ImmutableMap.Builder<String, List<String>> contentsByFileNameBuilder = ImmutableMap.builder();
 
     if (nativeJavaScriptFile != null) {
@@ -90,7 +92,8 @@ public class ReadableSourceMapGenerator {
       contentsByFileNameBuilder.put(
           SourcePosition.getFileName(j2clUnitFilePath),
           java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
-    } catch (IOException expected) {
+    } catch (IOException e) {
+      problems.error("Could not read from file: %s", e.toString());
     }
     return contentsByFileNameBuilder.build();
   }
