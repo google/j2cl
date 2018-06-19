@@ -140,8 +140,15 @@ def j2cl_library(name,
   exports = _get_absolute_labels(kwargs, "exports")
   deps = _get_absolute_labels(kwargs, "deps")
 
-  if not srcs and deps:
-    fail("deps not allowed without srcs")
+  if not srcs:
+    if deps:
+      fail("deps not allowed without srcs")
+    if native_srcs:
+      fail("native_srcs not allowed without srcs")
+    if _js_srcs:
+      fail("_js_srcs not allowed without srcs")
+    if _js_deps:
+      fail("_js_deps not allowed without srcs")
 
   for export in exports:
     java_exports += [export + "_java_library"]
