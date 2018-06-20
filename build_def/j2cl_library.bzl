@@ -105,8 +105,11 @@ def j2cl_library(name,
 
   Args:
     srcs: Source files (.java or .srcjar) to compile.
-    native_srcs: Foo.native.js source files.
-    native_srcs_zips: Zip files providing Foo.native.js files.
+    native_srcs: Native js source files (.native.js). Native sources should be
+        put next to main java file to match.
+    native_srcs_zips: Zip files providing native js source files. Native
+        sources in the zip file should follow the main Java files' directory
+        structure from the java root to match (e.g. com/google/foo/Foo.native.js).
     deps: Labels of other j2cl_library() rules.
           NOT labels of java_library() rules.
   """

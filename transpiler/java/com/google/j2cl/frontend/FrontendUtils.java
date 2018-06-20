@@ -103,6 +103,31 @@ public class FrontendUtils {
     }
   }
 
+  /**
+   * Returns the relative path from java source root.
+   *
+   * <p>Java source root decision is similar to the algorithm in {@code
+   * com.google.devtools.build.lib.rules.java.JavaUtil#getJavaPath} except the full path is returned
+   * if there is no known java source root in the path.
+   */
+  public static String getJavaPath(String path) {
+    // Choose the one that matches earlier.
+    int index = Math.min(indexAfterRoot(path, "java"), indexAfterRoot(path, "javatests"));
+    String javaRelativePath = path.substring(index);
+    return javaRelativePath.isEmpty() ? path : javaRelativePath;
+  }
+
+  /** Returns the index after root or the end index if not found. */
+  private static int indexAfterRoot(String path, String root) {
+    String rootPath = root + "/";
+    if (path.startsWith(rootPath)) {
+      return rootPath.length();
+    }
+    rootPath = "/" + rootPath;
+    int index = path.indexOf(rootPath);
+    return index == -1 ? path.length() : index + rootPath.length();
+  }
+
   public static FileSystem initZipOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
     if (Files.isDirectory(outputPath)) {

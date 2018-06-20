@@ -22,6 +22,7 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Message;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.io.IOException;
@@ -79,10 +80,12 @@ public class OutputGeneratorStage {
 
         // If the java type contains any native methods, search for matching native file.
         String typeRelativePath = getRelativePath(type);
-        String typeAbsolutePath = getAbsolutePath(j2clCompilationUnit, type);
+        String typeAbsolutePath =
+            FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, type));
 
         // Locate matching native files that either have the same relative package as their Java
         // class (useful when Java and native.js files started in different directories on disk).
+        // TODO(goktug): reconsider matching with relative name.
         NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
         // or that are in the same absolute path folder on disk as their Java class.
         if (matchingNativeFile == null) {

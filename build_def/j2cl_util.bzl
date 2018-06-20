@@ -56,21 +56,17 @@ def generate_zip(name, srcs, pkg, testonly = None):
   native.genzip(name=name, deps=[name + "_pkg_library"], testonly = testonly)
 
   if pkg == "RELATIVE":
-    flatten = 0
-    package_dir = None
     strip_prefix = None
   elif pkg == "CONVENTION":
-    flatten = 1
-    package_dir = get_java_path(native.package_name())
-    strip_prefix = None
+    strip_prefix = get_java_root(native.package_name())
   else:
     fail("Incorrect package type: " + pkg)
 
   native.pkg_library(
       name=name + "_pkg_library",
       srcs=srcs,
-      flatten=flatten,
-      package_dir=package_dir,
+      flatten=0,
+      package_dir=None,
       strip_prefix=strip_prefix,
       testonly = testonly,
   )
