@@ -11,7 +11,6 @@ java_library(
     deps = [
         ":worker_protocol_java_proto",
         "//third_party:guava",
-        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )
 

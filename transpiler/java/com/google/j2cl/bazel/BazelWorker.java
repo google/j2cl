@@ -15,12 +15,19 @@
  */
 package com.google.j2cl.bazel;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
+import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
-import com.google.j2cl.frontend.FrontendUtils;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A base class for running processes as blaze workers. Used for both the transpiler
@@ -37,7 +44,7 @@ public final class BazelWorker {
      * to the provided outputStream to avoid interrupting the worker protocol which occurs over
      * stdout.
      */
-    int processRequest(final String[] args, PrintWriter outputStream);
+    int processRequest(String[] args, PrintWriter outputStream);
   }
 
   public static final void start(String[] args, WorkHandler handler) {
@@ -57,7 +64,7 @@ public final class BazelWorker {
     } else {
       // This is a single invocation of builder that exits after it processed the request.
       PrintWriter err = new PrintWriter(System.err);
-      int exitCode = handler.processRequest(FrontendUtils.expandFlagFile(args), err);
+      int exitCode = handler.processRequest(expandFlagFile(args), err);
       err.flush();
       return exitCode;
     }
@@ -88,5 +95,31 @@ public final class BazelWorker {
         System.gc();
       }
     }
+  }
+
+  /**
+   * Loads a potential flag file and returns the flags. Flag files are only allowed as the last
+   * parameter and need to start with an '@'.
+   */
+  private static String[] expandFlagFile(String[] args) throws IOException {
+    if (args.length == 0) {
+      return args;
+    }
+
+    String lastArg = args[args.length - 1];
+    if (lastArg == null || !lastArg.startsWith("@") || lastArg.length() == 1) {
+      return args;
+    }
+
+    List<String> combinedArgs = new ArrayList<>();
+    Collections.addAll(combinedArgs, args);
+    combinedArgs.remove(combinedArgs.size() - 1); // Remove flag file
+    Iterables.addAll(combinedArgs, getArgsFromFlagFile(lastArg.substring(1)));
+    return combinedArgs.toArray(new String[0]);
+  }
+
+  private static Iterable<String> getArgsFromFlagFile(String flagFileName) throws IOException {
+    String flagFileContent = Files.toString(new File(flagFileName), StandardCharsets.UTF_8);
+    return Splitter.on('\n').omitEmptyStrings().split(flagFileContent);
   }
 }
