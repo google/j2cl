@@ -73,13 +73,6 @@ public class FrontendFlags {
   protected boolean declareLegacyNamespaces = false;
 
   @Option(
-    name = "-time",
-    usage = "Generates a report of time spent in all stages of the compiler.",
-    hidden = true
-  )
-  protected boolean generateTimeReport = false;
-
-  @Option(
       name = "-generatekytheindexingmetadata",
       usage =
           "Generates Kythe indexing metadata and appends it onto the generated JavaScript files.",

@@ -54,7 +54,6 @@ public abstract class FrontendOptions {
             : getDirOutput(flags.output, problems),
         flags.readableSourceMaps,
         flags.declareLegacyNamespaces,
-        flags.generateTimeReport,
         flags.generateKytheIndexingMetadata);
   }
 
@@ -69,8 +68,6 @@ public abstract class FrontendOptions {
   public abstract boolean getShouldPrintReadableSourceMap();
 
   public abstract boolean getDeclareLegacyNamespace();
-
-  public abstract boolean getGenerateTimeReport();
 
   public abstract boolean getGenerateKytheIndexingMetadata();
 
