@@ -12,8 +12,8 @@ java_library(
         "//java/com/google/common/collect",
         "//java/com/google/common/hash",
         "//java/com/google/common/io",
-        "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend",
+        "//third_party/java/auto:auto_value",
+        "//transpiler/java/com/google/j2cl/bazel",
         "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
     ],
 )
@@ -37,9 +37,6 @@ j2cl_transpile(
     javalib = "//jre/java:jre_java_library",
     native_srcs_zips = ["//jre/java:jre_native.zip"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-    # Turn off workers for this test since we are explicitly testing the compile and don't want the
-    # transpile to run in a worker. See: b/62060418.
-    supports_workers_internal = 0,
     transpiler = ":RerunningJ2clTranspiler",
 )
 
@@ -48,7 +45,5 @@ load("//tools/build_rules:build_test.bzl", "build_test")
 build_test(
     name = "jre_transpiling_twice_test",
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-    targets = [
-        ":jre_transpiled_twice",
-    ],
+    targets = [":jre_transpiled_twice"],
 )

@@ -13,25 +13,25 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.common.base.Objects;
+import com.google.auto.value.AutoValue;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
-import com.google.j2cl.common.Problems;
-import com.google.j2cl.frontend.FrontendFlags;
-import com.google.j2cl.frontend.FrontendUtils;
+import com.google.j2cl.bazel.BazelWorker;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 /**
@@ -42,118 +42,73 @@ import java.util.zip.ZipFile;
  */
 public class RerunningJ2clTranspiler {
 
-  private static class CompilerRunner implements Runnable {
+  public static void main(final String[] workerArgs) throws Exception {
+    BazelWorker.start(workerArgs, RerunningJ2clTranspiler::process);
+  }
 
-    private boolean success;
-    private final String[] args;
-
-    public CompilerRunner(String[] args) {
-      this.args = args;
-    }
-
-    public boolean compile() throws InterruptedException {
-      Thread thread = new Thread(this);
-      thread.start();
-      thread.join();
-      return success;
-    }
-
-    @Override
-    public void run() {
-      J2clTranspiler transpiler = new J2clTranspiler();
-
-      try {
-        Problems problems = transpiler.transpile(args);
-        success = problems.reportAndGetExitCode(System.err) == 0;
-      } catch (RuntimeException r) {
-        // Compiler correctness preconditions were violated. Log a stacktrace and quit the test
-        r.printStackTrace();
-        System.exit(-1);
-      }
+  private static int process(String[] args, PrintWriter output) {
+    try {
+      return processImpl(args, output);
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.exit(-10);
+      return -1;
     }
   }
 
-  public static void main(final String[] rawArgs) throws Exception {
-    Problems problems = new Problems();
-    String[] args = FrontendUtils.expandFlagFile(rawArgs);
-    FrontendFlags frontendFlags = FrontendFlags.parse(args, problems);
+  private static int processImpl(String[] args, PrintWriter output) throws IOException {
+    File outputZip =
+        Iterators.getOnlyElement(
+            Stream.of(args)
+                .filter(arg -> arg.endsWith("jre_transpiled_twice.js.zip"))
+                .map(File::new)
+                .iterator());
 
-    File outputZip = new File(frontendFlags.output);
-
-    boolean firstCompileSuccess = compile(new CompilerRunner(args));
-    Set<OutFile> firstCompileOut = null;
-
-    byte[] firstOutputData = null;
-    if (firstCompileSuccess) {
-      firstCompileOut = getOutFilesFromZip(outputZip);
-      firstOutputData = Files.toByteArray(outputZip);
-    }
-
-    boolean secondCompileSuccess = compile(new CompilerRunner(args));
-
-    if (firstCompileSuccess != secondCompileSuccess) {
-      System.err.println("Compiles do not agree on success");
+    int rv = J2clTranspiler.transpile(args).reportAndGetExitCode(output);
+    if (rv != 0) {
+      System.err.println("First compile failed");
       System.exit(-1);
     }
+    Set<OutFile> firstCompileOut = getOutFilesFromZip(outputZip);
+    byte[] firstOutputData = Files.toByteArray(outputZip);
 
-    if (secondCompileSuccess) {
-      Set<OutFile> secondCompileOut = getOutFilesFromZip(outputZip);
-      SetView<OutFile> difference = Sets.difference(secondCompileOut, firstCompileOut);
+    rv = J2clTranspiler.transpile(args).reportAndGetExitCode(output);
+    if (rv != 0) {
+      System.err.println("Second compile failed");
+      System.exit(-1);
+    }
+    Set<OutFile> secondCompileOut = getOutFilesFromZip(outputZip);
+    byte[] secondOutputData = Files.toByteArray(outputZip);
 
-      if (!difference.isEmpty()) {
-        System.err.println("Output of first and second compile do not match");
-        for (OutFile outFile : difference) {
-          System.err.println("File: " + outFile.name);
-        }
-        System.exit(-2);
+    SetView<OutFile> difference = Sets.difference(secondCompileOut, firstCompileOut);
+    if (!difference.isEmpty()) {
+      System.err.println("Output of first and second compile do not match");
+      for (OutFile outFile : difference) {
+        System.err.println("File: " + outFile.getName());
       }
+      System.exit(-2);
     }
 
-    if (!firstCompileSuccess) {
-      System.err.println("Compile failed");
+    if (!Arrays.equals(firstOutputData, secondOutputData)) {
+      System.err.println("Output is not identical");
       System.exit(-3);
     }
 
-    if (!Arrays.equals(firstOutputData, Files.toByteArray(outputZip))) {
-      System.err.println("Output is not identical");
-      System.exit(-4);
+    return 0;
+  }
+
+  @AutoValue
+  abstract static class OutFile {
+    public abstract String getName();
+
+    public abstract long getHash();
+
+    static OutFile create(String name, long hash) {
+      return new AutoValue_RerunningJ2clTranspiler_OutFile(name, hash);
     }
   }
 
-  private static boolean compile(CompilerRunner compilerRunner) {
-    try {
-      return compilerRunner.compile();
-    } catch (InterruptedException e) {
-      System.exit(-1);
-      return false;
-    }
-  }
-
-  private static class OutFile {
-    public final String name;
-    public final long hash;
-
-    public OutFile(String name, long hash) {
-      this.name = name;
-      this.hash = hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (!(obj instanceof OutFile)) {
-        return false;
-      }
-      OutFile other = (OutFile) obj;
-      return Objects.equal(name, other.name) && hash == other.hash;
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hashCode(name, hash);
-    }
-  }
-
-  private static Set<OutFile> getOutFilesFromZip(File f) throws ZipException, IOException {
+  private static Set<OutFile> getOutFilesFromZip(File f) throws IOException {
     Set<OutFile> outFiles = new HashSet<>();
 
     try (ZipFile zipFile = new ZipFile(f)) {
@@ -165,7 +120,7 @@ public class RerunningJ2clTranspiler {
         InputStream inputStream = zipFile.getInputStream(zipEntry);
         HashCode hashCode = Hashing.sha256().hashBytes(ByteStreams.toByteArray(inputStream));
         long hash = hashCode.padToLong();
-        outFiles.add(new OutFile(name, hash));
+        outFiles.add(OutFile.create(name, hash));
       }
     }
     return outFiles;
