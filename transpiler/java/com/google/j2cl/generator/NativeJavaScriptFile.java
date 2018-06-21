@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -89,7 +90,7 @@ public class NativeJavaScriptFile {
         NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
         loadedFilesByPath.put(nativeFile.getPathWithoutExtension(), nativeFile);
       } catch (IOException e) {
-        problems.error("Could not read file %s: %s", file.targetPath(), e.getMessage());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       }
     }
     return loadedFilesByPath;

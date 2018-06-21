@@ -22,6 +22,7 @@ import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -93,7 +94,7 @@ public class ReadableSourceMapGenerator {
           SourcePosition.getFileName(j2clUnitFilePath),
           java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
     } catch (IOException e) {
-      problems.error("Could not read from file: %s", e.toString());
+      problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
     }
     return contentsByFileNameBuilder.build();
   }

@@ -31,22 +31,21 @@ import java.util.stream.Collectors;
 /** An error logger class that records the number of errors and provides error print methods. */
 public class Problems {
 
-  /** Represents compiler problem categories. */
-  public enum Message {
-    ERR_FLAG_FILE("Cannot load flag file: %s.", 1),
-    ERR_FILE_NOT_FOUND("File '%s' not found.", 1),
-    ERR_UNKNOWN_INPUT_TYPE("Cannot recognize input type for file '%s'.", 1),
-    ERR_OUTPUT_LOCATION("Output location '%s' must be a directory or .zip file.", 1),
-    ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
-    ERR_CANNOT_OPEN_ZIP("Cannot open zip '%s': %s.", 2),
-    ERR_CANNOT_CLOSE_ZIP("Cannot close zip: %s.", 1),
-    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("Cannot find matching native file '%s'.", 1),
-    ERR_NATIVE_UNUSED_NATIVE_SOURCE("Native JavaScript file '%s' not used.", 1),
-    ERR_CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory: %s.", 1),
-    ERR_CANNOT_OPEN_FILE("Cannot open file: %s.", 1),
-    ERR_PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
-    ERR_CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
-    ERR_GWT_INCOMPATIBLE_FOUND_IN_COMPILE(
+  /** Represents compiler fatal errors. */
+  public enum FatalError {
+    FILE_NOT_FOUND("File '%s' not found.", 1),
+    UNKNOWN_INPUT_TYPE("Cannot recognize input type for file '%s'.", 1),
+    OUTPUT_LOCATION("Output location '%s' must be a directory or .zip file.", 1),
+    CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
+    CANNOT_CREATE_ZIP("Cannot create zip '%s': %s.", 2),
+    CANNOT_CLOSE_ZIP("Cannot close zip: %s.", 1),
+    CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory: %s.", 1),
+    CANNOT_OPEN_FILE("Cannot open file: %s.", 1),
+    CANNOT_WRITE_FILE("Cannot write file: %s.", 1),
+    CANNOT_COPY_FILE("Cannot copy file: %s.", 1),
+    PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
+    CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
+    GWT_INCOMPATIBLE_FOUND_IN_COMPILE(
         "@GwtIncompatible annotations found in %s "
             + "Please run this library through the @GwtIncompatible stripper tool.",
         1),
@@ -57,7 +56,7 @@ public class Problems {
     // number of arguments the message takes.
     private final int numberOfArguments;
 
-    Message(String message, int numberOfArguments) {
+    FatalError(String message, int numberOfArguments) {
       this.message = message;
       this.numberOfArguments = numberOfArguments;
     }
@@ -88,12 +87,13 @@ public class Problems {
     }
   }
 
-  private boolean abortRequested = false;
   private final Multimap<Severity, String> problemsBySeverity = LinkedHashMultimap.create();
 
-  public void error(Message message) {
-    abortWhenPossible();
-    problemsBySeverity.put(Severity.ERROR, message.getMessage());
+  public void fatal(FatalError fatalError, Object... args) {
+    checkArgument(fatalError.getNumberOfArguments() == args.length);
+    problemsBySeverity.put(
+        Severity.ERROR, "Error: " + J2clUtils.format(fatalError.getMessage(), args));
+    abort();
   }
 
   public void error(SourcePosition sourcePosition, String detailMessage, Object... args) {
@@ -121,9 +121,6 @@ public class Problems {
 
   private void problem(
       Severity severity, int lineNumber, String filePath, String detailMessage, Object... args) {
-    if (severity == Severity.ERROR) {
-      abortWhenPossible();
-    }
     String message = args.length == 0 ? detailMessage : J2clUtils.format(detailMessage, args);
     problemsBySeverity.put(
         severity,
@@ -137,15 +134,7 @@ public class Problems {
   }
 
   public void error(String detailMessage, Object... args) {
-    abortWhenPossible();
     problemsBySeverity.put(Severity.ERROR, "Error: " + J2clUtils.format(detailMessage, args));
-  }
-
-  public void error(Message message, Object... args) {
-    checkArgument(message.getNumberOfArguments() == args.length);
-    abortWhenPossible();
-    problemsBySeverity.put(
-        Severity.ERROR, "Error: " + J2clUtils.format(message.getMessage(), args));
   }
 
   public void warning(String detailMessage, Object... args) {
@@ -154,10 +143,6 @@ public class Problems {
 
   public void info(String detailMessage, Object... args) {
     problemsBySeverity.put(Severity.INFO, J2clUtils.format(detailMessage, args));
-  }
-
-  public void abortWhenPossible() {
-    abortRequested = true;
   }
 
   /** Prints all problems to provided output and returns the exit code. */
@@ -193,11 +178,14 @@ public class Problems {
     return !problemsBySeverity.isEmpty();
   }
 
-  /** If there were errors abort. */
-  public void abortIfRequested() {
-    if (abortRequested) {
-      throw new Exit();
+  public void abortIfHasErrors() {
+    if (hasErrors()) {
+      abort();
     }
+  }
+
+  public void abort() {
+    throw new Exit(this);
   }
 
   public List<String> getErrors() {
@@ -234,5 +222,15 @@ public class Problems {
    *
    * <p>Note: It should never be caught except on the top level.
    */
-  public static class Exit extends java.lang.Error {}
+  public static class Exit extends java.lang.Error {
+    private final Problems problems;
+
+    private Exit(Problems problems) {
+      this.problems = problems;
+    }
+
+    public Problems getProblems() {
+      return problems;
+    }
+  }
 }

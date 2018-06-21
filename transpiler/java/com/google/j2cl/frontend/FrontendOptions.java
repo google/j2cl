@@ -19,7 +19,7 @@ import com.google.auto.value.AutoValue;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.nio.file.FileSystem;
@@ -71,21 +71,18 @@ public abstract class FrontendOptions {
 
   public abstract boolean getGenerateKytheIndexingMetadata();
 
-  private static boolean checkSourceFiles(List<String> sourceFiles, Problems problems) {
+  private static void checkSourceFiles(List<String> sourceFiles, Problems problems) {
     for (String sourceFile : sourceFiles) {
       if (isValidExtension(sourceFile)) {
         File file = new File(sourceFile);
         if (!file.isFile()) {
-          problems.error(Message.ERR_FILE_NOT_FOUND, sourceFile);
-          return false;
+          problems.fatal(FatalError.FILE_NOT_FOUND, sourceFile);
         }
       } else {
         // does not support non-java files.
-        problems.error(Message.ERR_UNKNOWN_INPUT_TYPE, sourceFile);
-        return false;
+        problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
       }
     }
-    return true;
   }
 
   private static boolean isValidExtension(String sourceFile) {
@@ -97,7 +94,7 @@ public abstract class FrontendOptions {
   private static Path getDirOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
     if (Files.isRegularFile(outputPath)) {
-      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
+      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
     }
     return outputPath;
   }

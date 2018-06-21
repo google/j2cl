@@ -20,7 +20,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -68,7 +68,7 @@ public class FrontendUtils {
     try {
       sourcesDir = Files.createTempDirectory("j2cl_sources");
     } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_CREATE_TEMP_DIR, e.getMessage());
+      problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return null;
     }
 
@@ -98,8 +98,8 @@ public class FrontendUtils {
             .collect(ImmutableList.toImmutableList());
       }
     } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_EXTRACT_ZIP, zipPath);
-      return ImmutableList.of();
+      problems.fatal(FatalError.CANNOT_EXTRACT_ZIP, zipPath);
+      return null;
     }
   }
 
@@ -131,7 +131,7 @@ public class FrontendUtils {
   public static FileSystem initZipOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
     if (Files.isDirectory(outputPath)) {
-      problems.error(Message.ERR_OUTPUT_LOCATION, outputPath);
+      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
     }
 
     // Ensures that we will not fail if the zip already exists.
@@ -141,7 +141,7 @@ public class FrontendUtils {
       return FileSystems.newFileSystem(
           URI.create("jar:file:" + outputPath.toAbsolutePath()), ImmutableMap.of("create", "true"));
     } catch (IOException e) {
-      problems.error(Message.ERR_CANNOT_OPEN_ZIP, outputPath.toString(), e.getMessage());
+      problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
       return null;
     }
   }

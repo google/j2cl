@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import com.google.j2cl.frontend.GwtIncompatibleNodeCollector;
 import java.io.IOException;
@@ -58,7 +58,7 @@ public class JavaPreprocessor {
             MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), StandardCharsets.UTF_8).read();
         processedFileContent = processFile(fileContent);
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_OPEN_FILE, e.toString());
+        problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
         return;
       }
 

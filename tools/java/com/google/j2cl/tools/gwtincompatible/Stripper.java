@@ -15,7 +15,7 @@ package com.google.j2cl.tools.gwtincompatible;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.IOException;
@@ -34,33 +34,24 @@ public class Stripper {
   }
 
   static Problems strip(String[] args) {
-    Problems problems = new Problems();
-
     try {
+      Problems problems = new Problems();
       StripperFlags flags = StripperFlags.parse(args, problems);
-      problems.abortIfRequested();
-
       FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(flags.outputPath, problems);
-      problems.abortIfRequested();
-
       List<FileInfo> allPaths =
           FrontendUtils.getAllSources(flags.files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(ImmutableList.toImmutableList());
-      problems.abortIfRequested();
-
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);
-      problems.abortIfRequested();
 
       try {
         outputZipFileSystem.close();
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
+        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
       }
+      return problems;
     } catch (Problems.Exit e) {
-      // problems has the report.
+      return e.getProblems();
     }
-
-    return problems;
   }
 }

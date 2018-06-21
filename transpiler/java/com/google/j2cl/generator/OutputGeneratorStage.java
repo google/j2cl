@@ -20,7 +20,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
@@ -101,7 +101,7 @@ public class OutputGeneratorStage {
         // method, reports an error.
         if (matchingNativeFile == null && type.containsNonJsNativeMethods()) {
           problems.error(
-              Message.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
+              "Cannot find matching native file '%s'.",
               typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
           return;
         }
@@ -124,8 +124,7 @@ public class OutputGeneratorStage {
               // TODO(b/77961191): remove leading newline once the bug is fixed.
               String.format("%n// Kythe Indexing Metadata:%n// %s", metadata);
         } else {
-          String sourceMap =
-              renderSourceMap(j2clCompilationUnit, type, jsImplGenerator.getSourceMappings());
+          String sourceMap = renderSourceMap(type, jsImplGenerator.getSourceMappings());
 
           if (sourceMap != null) {
             javaScriptImplementationSource +=
@@ -162,7 +161,7 @@ public class OutputGeneratorStage {
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
-        problems.error(Message.ERR_NATIVE_UNUSED_NATIVE_SOURCE, fileEntry.getValue().toString());
+        problems.error("Unused native file '%s'.", fileEntry.getValue());
       }
     }
   }
@@ -196,16 +195,13 @@ public class OutputGeneratorStage {
   }
 
   private String renderSourceMap(
-      CompilationUnit compilationUnit,
       Type type,
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {
       return SourceMapGeneratorStage.generateSourceMaps(
           type, javaSourcePositionByOutputSourcePosition);
     } catch (IOException e) {
-      problems.error(
-          "Could not generate source map file for %s: %s",
-          compilationUnit.getName(), e.getMessage());
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
       return null;
     }
   }

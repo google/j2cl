@@ -94,6 +94,7 @@ public class FrontendFlags {
         message += usage + "\n";
         message += "use -help for a list of possible options";
         problems.error(message);
+        problems.abort();
       }
     }
 
@@ -102,7 +103,7 @@ public class FrontendFlags {
       message += "where possible options include:\n";
       message += J2clUtils.streamToString(parser::printUsage);
       problems.info(message);
-      problems.abortWhenPossible();
+      problems.abort();
     }
 
     return flags;

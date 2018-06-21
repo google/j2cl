@@ -18,7 +18,7 @@ package com.google.j2cl.frontend;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,8 +134,7 @@ public class JdtParser {
     GwtIncompatibleNodeCollector collector = new GwtIncompatibleNodeCollector();
     unit.accept(collector);
     if (!collector.getNodes().isEmpty()) {
-      problems.error(Message.ERR_GWT_INCOMPATIBLE_FOUND_IN_COMPILE, filename);
-      return true; // Ignore possible type errors discovered below.
+      problems.fatal(FatalError.GWT_INCOMPATIBLE_FOUND_IN_COMPILE, filename);
     }
     for (IProblem problem : unit.getProblems()) {
       if (problem.isError()) {

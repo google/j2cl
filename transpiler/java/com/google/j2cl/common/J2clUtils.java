@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.common;
 
+import com.google.j2cl.common.Problems.FatalError;
 import java.beans.Introspector;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -93,8 +94,7 @@ public class J2clUtils {
       // regardless of the time of day.
       maybeResetAllTimeStamps(outputPath);
     } catch (IOException e) {
-      problems.error("Could not write to file: %s", e.toString());
-      problems.abortIfRequested();
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
     }
   }
 
@@ -106,8 +106,7 @@ public class J2clUtils {
       // regardless of the time of day.
       maybeResetAllTimeStamps(to);
     } catch (IOException e) {
-      problems.error("Could not copy file: %s", e.toString());
-      problems.abortIfRequested();
+      problems.fatal(FatalError.CANNOT_COPY_FILE, e.toString());
     }
   }
 

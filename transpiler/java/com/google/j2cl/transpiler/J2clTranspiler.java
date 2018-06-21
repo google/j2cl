@@ -84,7 +84,7 @@ import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.Message;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -123,42 +123,34 @@ public class J2clTranspiler {
       normalizeUnits(j2clUnits);
       generateOutputs(j2clUnits);
       maybeCloseFileSystem();
+      return problems;
     } catch (Problems.Exit e) {
-      // problems has the report.
+      return e.getProblems();
     }
-    return problems;
   }
 
   private void loadOptions(String[] args) {
     FrontendFlags flags = FrontendFlags.parse(args, problems);
-    problems.abortIfRequested();
-
     options = FrontendOptions.create(flags, problems);
-    problems.abortIfRequested();
   }
   private List<CompilationUnit> convertUnits(
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), problems);
-    problems.abortIfRequested();
-
-    List<CompilationUnit> compilationUnits =
-        CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
-    problems.abortIfRequested();
-    return compilationUnits;
+    return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
   }
 
   private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings() {
     JdtParser parser = new JdtParser(options.getClasspathEntries(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         parser.parseFiles(options.getSourceFileInfos(), options.getGenerateKytheIndexingMetadata());
-    problems.abortIfRequested();
+    problems.abortIfHasErrors();
     return compilationUnitsAndTypeBindings;
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
     JsInteropRestrictionsChecker.check(j2clUnits, problems);
-    problems.abortIfRequested();
+    problems.abortIfHasErrors();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
@@ -285,7 +277,6 @@ public class J2clTranspiler {
             options.getGenerateKytheIndexingMetadata(),
             problems)
         .generateOutputs(j2clCompilationUnits);
-    problems.abortIfRequested();
   }
 
   private void maybeCloseFileSystem() {
@@ -295,7 +286,7 @@ public class J2clTranspiler {
       try {
         outputFileSystem.close();
       } catch (IOException e) {
-        problems.error(Message.ERR_CANNOT_CLOSE_ZIP, e.getMessage());
+        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
       }
     }
   }

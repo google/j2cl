@@ -77,7 +77,6 @@ public class RerunningJ2clTranspiler {
     Problems problems = new Problems();
     String[] args = FrontendUtils.expandFlagFile(rawArgs);
     FrontendFlags frontendFlags = FrontendFlags.parse(args, problems);
-    problems.abortIfRequested();
 
     File outputZip = new File(frontendFlags.output);
 
