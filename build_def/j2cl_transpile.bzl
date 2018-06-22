@@ -107,11 +107,6 @@ j2cl_transpile = rule(
             allow_files=True,
             default=Label("//internal_do_not_use:J2clTranspiler"),
         ),
-        "_zip": attr.label(
-            executable=True,
-            default=Label("//third_party/zip"),
-            cfg="host"
-        ),
     },
     implementation=_impl,
     # Declare each output artifact by name, otherwise they can not be
