@@ -23,41 +23,52 @@ import java.util.List;
 /** Representation of Kythe indexing metadata */
 @SuppressWarnings("unused") // Fields are accessed through reflection by GSON.
 public class KytheIndexingMetadata {
-  static class VName {
+
+  /** Object that describes a file. */
+  private static class VName {
     private final String corpus;
 
     private final String path;
 
     private final String root;
 
-    public VName(String corpus, String path, String root) {
+    private VName(String corpus, String path, String root) {
       this.corpus = corpus;
       this.path = path;
       this.root = root;
     }
   }
 
-  static class AnchorAnchorMetadata {
+  /**
+   * Mapping of an entity from the original .java file to the generated .js file. Entities are
+   * things like class, method, field and similar.
+   */
+  private static class AnchorAnchorMetadata {
     private final String type = "anchor_anchor";
 
+    /** Byte offset of the start position of the identifier in .java file. */
     @SerializedName("source_begin")
     private final int sourceBegin;
 
+    /** Byte offset of the end position of the identifier in .java file. */
     @SerializedName("source_end")
     private final int sourceEnd;
 
+    /** Byte offset of the start position of the identifier in .js file. */
     @SerializedName("target_begin")
     private final int targetBegin;
 
+    /** Byte offset of the end position of the identifier in .js file. */
     @SerializedName("target_end")
     private final int targetEnd;
 
     private final String edge = "/kythe/edge/imputes";
 
+    /** Info about source .java file that contains current entity. */
     @SerializedName("source_vname")
     private final VName sourceVName;
 
-    public AnchorAnchorMetadata(
+    private AnchorAnchorMetadata(
         int sourceBegin,
         int sourceEnd,
         int targetBegin,
