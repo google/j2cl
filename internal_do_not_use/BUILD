@@ -29,8 +29,8 @@ package(default_visibility = ["//visibility:public"])
 
 # Main J2CL transpiler binary.
 alias(
-    name = "J2clTranspiler",
-    actual = "//transpiler/java/com/google/j2cl/transpiler:J2clTranspiler_worker",
+    name = "BazelJ2clBuilder",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
 )
 
 # ***************************************************

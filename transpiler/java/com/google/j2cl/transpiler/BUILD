@@ -27,7 +27,6 @@ java_library(
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",
-        "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/frontend",
     ],
@@ -44,21 +43,27 @@ java_binary(
 )
 
 java_library(
-    name = "transpiler_worker_lib",
-    srcs = ["J2clTranspilerWorker.java"],
+    name = "bazelbuilder_lib",
+    srcs = ["BazelJ2clBuilder.java"],
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__"],
     deps = [
-        ":commandlinerunner_lib",
+        ":transpiler_lib",
+        "//third_party:args4j",
+        "//third_party:auto_value",
+        "//third_party:guava",
         "//transpiler/java/com/google/j2cl/bazel",
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )
 
 java_binary(
-    name = "J2clTranspiler_worker",
+    name = "BazelJ2clBuilder",
     jvm_flags = [
         "-XX:+TieredCompilation",
         "-Dj2cl.deterministicTimestamps=true",
     ],
-    main_class = "com.google.j2cl.transpiler.J2clTranspilerWorker",
+    main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
     visibility = ["//internal_do_not_use:__pkg__"],
-    runtime_deps = [":transpiler_worker_lib"],
+    runtime_deps = [":bazelbuilder_lib"],
 )

@@ -27,19 +27,10 @@ def _impl(ctx):
 
   # convert files to paths
   deps_paths = [j.path for j in java_deps]
-  java_src_paths = [j.path for j in java_src_jars]
+  src_paths = [j.path for j in java_src_jars + js_native_zip_files]
 
-  compiler_args = ["-d", ctx.outputs.zip_file.path]
-
-  if deps_paths:
-    compiler_args += ["-cp", separator.join(deps_paths)]
-
-  # Add the native zip file paths
-  js_native_zip_files_paths = [js_native_zip_file.path for js_native_zip_file
-                               in js_native_zip_files]
-  if js_native_zip_files_paths:
-    joined_paths = separator.join(js_native_zip_files_paths)
-    compiler_args += ["-nativesourcepath", joined_paths]
+  compiler_args = ["-output", ctx.outputs.zip_file.path]
+  compiler_args += ["-classpath", separator.join(deps_paths)]
 
   # Generate readable_maps
   if ctx.attr.readable_source_maps:
@@ -53,8 +44,8 @@ def _impl(ctx):
   if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
     compiler_args += ["-generatekytheindexingmetadata"]
 
-  # The transpiler expects each java file path as a separate argument.
-  compiler_args += java_src_paths
+  # The transpiler expects each file path as a separate argument.
+  compiler_args += src_paths
 
   # Create an action to write the flag file
   compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
@@ -105,7 +96,7 @@ j2cl_transpile = rule(
             cfg="host",
             executable=True,
             allow_files=True,
-            default=Label("//internal_do_not_use:J2clTranspiler"),
+            default=Label("//internal_do_not_use:BazelJ2clBuilder"),
         ),
     },
     implementation=_impl,

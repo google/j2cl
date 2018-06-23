@@ -64,16 +64,18 @@ public class RerunningJ2clTranspiler {
                 .map(File::new)
                 .iterator());
 
-    int rv = J2clCommandLineRunner.run(args).reportAndGetExitCode(output);
+    int rv = BazelJ2clBuilder.run(args).reportAndGetExitCode(output);
     if (rv != 0) {
+      output.flush();
       System.err.println("First compile failed");
       System.exit(-1);
     }
     Set<OutFile> firstCompileOut = getOutFilesFromZip(outputZip);
     byte[] firstOutputData = Files.toByteArray(outputZip);
 
-    rv = J2clCommandLineRunner.run(args).reportAndGetExitCode(output);
+    rv = BazelJ2clBuilder.run(args).reportAndGetExitCode(output);
     if (rv != 0) {
+      output.flush();
       System.err.println("Second compile failed");
       System.exit(-1);
     }
