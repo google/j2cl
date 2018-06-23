@@ -64,7 +64,7 @@ public class RerunningJ2clTranspiler {
                 .map(File::new)
                 .iterator());
 
-    int rv = J2clTranspiler.transpile(args).reportAndGetExitCode(output);
+    int rv = J2clCommandLineRunner.run(args).reportAndGetExitCode(output);
     if (rv != 0) {
       System.err.println("First compile failed");
       System.exit(-1);
@@ -72,7 +72,7 @@ public class RerunningJ2clTranspiler {
     Set<OutFile> firstCompileOut = getOutFilesFromZip(outputZip);
     byte[] firstOutputData = Files.toByteArray(outputZip);
 
-    rv = J2clTranspiler.transpile(args).reportAndGetExitCode(output);
+    rv = J2clCommandLineRunner.run(args).reportAndGetExitCode(output);
     if (rv != 0) {
       System.err.println("Second compile failed");
       System.exit(-1);

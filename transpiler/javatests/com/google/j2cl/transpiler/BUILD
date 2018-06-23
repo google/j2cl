@@ -14,7 +14,7 @@ java_library(
         "//java/com/google/common/io",
         "//third_party/java/auto:auto_value",
         "//transpiler/java/com/google/j2cl/bazel",
-        "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
+        "//transpiler/java/com/google/j2cl/transpiler:commandlinerunner_lib",
     ],
 )
 

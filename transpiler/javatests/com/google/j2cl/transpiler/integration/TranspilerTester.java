@@ -24,7 +24,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.truth.Correspondence;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.transpiler.J2clTranspiler;
+import com.google.j2cl.transpiler.J2clCommandLineRunner;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -231,7 +231,7 @@ public class TranspilerTester {
 
   private static TranspileResult invokeTranspiler(Iterable<String> args, Path outputPath) {
     try {
-      return new TranspileResult(invokeTranspileMethod(args), outputPath);
+      return new TranspileResult(transpile(args), outputPath);
     } catch (Exception e) {
       e.printStackTrace();
       Problems problems = new Problems();
@@ -240,10 +240,10 @@ public class TranspilerTester {
     }
   }
 
-  private static Problems invokeTranspileMethod(Iterable<String> args) throws Exception {
-    // J2clTranspiler.transpile is hidden since we don't want it to be used as an entry point. As a
+  private static Problems transpile(Iterable<String> args) throws Exception {
+    // J2clCommandLineRunner.run is hidden since we don't want it to be used as an entry point. As a
     // result we use reflection here to invoke it.
-    Method transpileMethod = J2clTranspiler.class.getDeclaredMethod("transpile", String[].class);
+    Method transpileMethod = J2clCommandLineRunner.class.getDeclaredMethod("run", String[].class);
     transpileMethod.setAccessible(true);
     return (Problems) transpileMethod.invoke(null, (Object) Iterables.toArray(args, String.class));
   }

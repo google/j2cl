@@ -25,6 +25,6 @@ import com.google.j2cl.bazel.BazelWorker;
 public class J2clTranspilerWorker {
   public static void main(String[] workerArgs) {
     BazelWorker.start(
-        workerArgs, (args, output) -> J2clTranspiler.transpile(args).reportAndGetExitCode(output));
+        workerArgs, (args, output) -> J2clCommandLineRunner.run(args).reportAndGetExitCode(output));
   }
 }

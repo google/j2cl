@@ -87,8 +87,6 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
-import com.google.j2cl.frontend.FrontendFlags;
-import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.generator.OutputGeneratorStage;
@@ -99,23 +97,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
-public class J2clTranspiler {
+class J2clTranspiler {
 
   /** Runs the entire J2CL pipeline. */
-  static Problems transpile(String[] args) {
+  static Problems transpile(J2clTranspilerOptions options) {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this, we invoke the compiler on a different thread each time.
     Future<Problems> result =
-        Executors.newSingleThreadExecutor().submit(() -> new J2clTranspiler().transpileImpl(args));
+        Executors.newSingleThreadExecutor()
+            .submit(() -> new J2clTranspiler(options).transpileImpl());
     return Futures.getUnchecked(result);
   }
 
   private final Problems problems = new Problems();
-  private FrontendOptions options;
+  private final J2clTranspilerOptions options;
 
-  private Problems transpileImpl(String[] args) {
+  private J2clTranspiler(J2clTranspilerOptions options) {
+    this.options = options;
+  }
+
+  private Problems transpileImpl() {
     try {
-      loadOptions(args);
       CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
           createJdtUnitsAndResolveBindings();
       List<CompilationUnit> j2clUnits = convertUnits(jdtUnitsAndResolvedBindings);
@@ -129,21 +131,17 @@ public class J2clTranspiler {
     }
   }
 
-  private void loadOptions(String[] args) {
-    FrontendFlags flags = FrontendFlags.parse(args, problems);
-    options = FrontendOptions.create(flags, problems);
-  }
   private List<CompilationUnit> convertUnits(
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
     // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(options.getClasspathEntries(), problems);
+    PackageInfoCache.init(options.getClasspaths(), problems);
     return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
   }
 
   private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings() {
-    JdtParser parser = new JdtParser(options.getClasspathEntries(), problems);
+    JdtParser parser = new JdtParser(options.getClasspaths(), problems);
     CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-        parser.parseFiles(options.getSourceFileInfos(), options.getGenerateKytheIndexingMetadata());
+        parser.parseFiles(options.getSources(), options.getGenerateKytheIndexingMetadata());
     problems.abortIfHasErrors();
     return compilationUnitsAndTypeBindings;
   }
@@ -270,17 +268,17 @@ public class J2clTranspiler {
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     new OutputGeneratorStage(
-            options.getNativeSourceFileInfo(),
-            options.getOutputPath(),
+            options.getNativeSources(),
+            options.getOutput(),
             options.getDeclareLegacyNamespace(),
-            options.getShouldPrintReadableSourceMap(),
+            options.getEmitReadableSourceMap(),
             options.getGenerateKytheIndexingMetadata(),
             problems)
         .generateOutputs(j2clCompilationUnits);
   }
 
   private void maybeCloseFileSystem() {
-    FileSystem outputFileSystem = options.getOutputPath().getFileSystem();
+    FileSystem outputFileSystem = options.getOutput().getFileSystem();
     if (outputFileSystem.getClass().getCanonicalName().equals("com.sun.nio.zipfs.ZipFileSystem")
         || outputFileSystem.getClass().getCanonicalName().equals("jdk.nio.zipfs.ZipFileSystem")) {
       try {
@@ -289,10 +287,5 @@ public class J2clTranspiler {
         problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
       }
     }
-  }
-
-  /** Entry point for the tool, which runs the entire J2CL pipeline. */
-  public static void main(String[] args) {
-    System.exit(J2clTranspiler.transpile(args).reportAndGetExitCode(System.err));
   }
 }
