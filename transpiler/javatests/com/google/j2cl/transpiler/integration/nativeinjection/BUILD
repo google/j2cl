@@ -14,5 +14,8 @@ integration_test(
     name = "nativeinjection",
     srcs = glob(["*.java"]),
     native_srcs = ["NativeClass.native.js"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = [
+        ":superinject",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+    ],
 )

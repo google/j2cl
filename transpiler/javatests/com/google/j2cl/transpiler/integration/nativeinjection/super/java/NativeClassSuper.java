@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjection;
 
-@SuppressWarnings("unusable-by-js")
-public class NativeClass {
-  public native String nativeInstanceMethod();
-
+/**
+ * The class has several special properties; directory doesn't follow package name and also
+ * directory has java in directy name. It should still match with file put next to it (i.e. via
+ * physical location).
+ */
+public class NativeClassSuper {
+  @SuppressWarnings("unusable-by-js")
   public static native String nativeStaticMethod();
 }

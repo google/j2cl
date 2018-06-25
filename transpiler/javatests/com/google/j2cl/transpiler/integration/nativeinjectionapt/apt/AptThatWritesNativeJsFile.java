@@ -51,8 +51,8 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
         TypeElement typeElement = MoreElements.asType(value);
         String packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
         writeNativeJsFile(packageName, typeElement.getSimpleName().toString());
-        writeJsFile(packageName, "NativeClass");
       }
+      writeJsFile("com.google.j2cl.transpiler.integration.nativeinjectionapt", "NativeClass");
       return ImmutableSet.of();
     }
 
@@ -62,7 +62,9 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
         writeln(writer, "  return '%s';", className);
         writeln(writer, "};");
       } catch (IOException e) {
-        processingEnv.getMessager().printMessage(Kind.ERROR, "Unable to write file.");
+        processingEnv
+            .getMessager()
+            .printMessage(Kind.ERROR, "Unable to write file: " + e.getMessage());
         return;
       }
     }
@@ -75,7 +77,9 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
         writeln(writer, "};");
         writeln(writer, "exports=%s;", className);
       } catch (IOException e) {
-        processingEnv.getMessager().printMessage(Kind.ERROR, "Unable to write file.");
+        processingEnv
+            .getMessager()
+            .printMessage(Kind.ERROR, "Unable to write file: " + e.getMessage());
         return;
       }
     }

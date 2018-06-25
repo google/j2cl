@@ -20,5 +20,6 @@ public class Main {
   public static void main(String... args) {
     assert MyClass.nativeStaticMethod().equals("MyClass");
     assert NativeClass.nativeStaticMethod().equals("NativeClass");
+    assert SuperMyClass.nativeStaticMethod().equals("SuperMyClass");
   }
 }

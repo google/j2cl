@@ -25,6 +25,8 @@ public class Main {
     assert NativeClass.nativeStaticMethod().equals("nativeStaticMethod");
     NativeClass instance = new NativeClass();
     assert instance.nativeInstanceMethod().equals("nativeInstanceMethod");
+
+    assert NativeClassSuper.nativeStaticMethod().equals("nativeStaticMethodInSuper");
   }
 
   /**
