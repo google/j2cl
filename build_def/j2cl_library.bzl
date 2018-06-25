@@ -27,7 +27,7 @@ j2cl_library(
 
 load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
 load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
-load("//build_def:j2cl_util.bzl", "generate_zip", "J2CL_OPTIMIZED_DEFS")
+load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_defs/label:def.bzl", "absolute_label")
 load("//tools/build_defs/j2cl:def.bzl", "js_import")
 load("//tools/build_defs/lib:lib.bzl", "collections")
@@ -52,36 +52,6 @@ def _get_absolute_labels(args, key):
     fail("Expected depset or list for the attribute '%s' in j2cl_library rule" % key)
 
   return [absolute_label(target) for target in labels]
-
-def _merge_zips(srczips, outzip, tags, testonly):
-  """Merges provided zip files."""
-  zip_tool = "$$cwd/$(location //third_party/zip:zip)"
-  native.genrule(
-      name=outzip + "_genrule",
-      srcs=srczips,
-      outs=[":" + outzip],
-      cmd="\n".join([
-          # Unzip the srczips into a temp dir.
-          "TMPDIR=$$(mktemp -d)",
-          "for src in $(SRCS); do",
-          # unzip errors out for empty zip so we ignore that with || true
-          "  unzip -q $$src -d $$TMPDIR 2> /dev/null || true",
-          "done",
-
-          # Rezip the temp dir using relative paths.
-          "cwd=$$PWD",
-          "cd $$TMPDIR",
-          # Ensure the directory is nonempty, or zip errors out.
-          "mkdir -p __dummy__",
-          "%s -jt -X -qr $$cwd/$@ ." % zip_tool,
-          # Remove temporary directory.
-          "rm -r $$TMPDIR",
-      ]),
-      tools=["//third_party/zip:zip"],
-      tags=tags,
-      testonly=testonly,
-      local=True,
-  )
 
 def j2cl_library(name,
                  srcs=[],
@@ -130,6 +100,7 @@ def j2cl_library(name,
 
   base_name = name
   srcs = srcs or []
+  native_srcs = native_srcs or []
   tags = tags or []
   testonly = kwargs.get("testonly")
 
@@ -189,51 +160,15 @@ def j2cl_library(name,
       **java_library_kwargs
   )
 
-  src_zips = []
+  jszip_name = None
 
-  # TODO(dankurka): Make sure we only rely on the srcjar if we actually
-  # have an APT running
   if srcs:
-    # extract js files from apts
-    js_sources_from_apt = base_name + "js_src_apt.zip"
-    native_js_sources_from_apt = base_name + "_native_js_src_apt.zip"
-    zip_tool = "$$cwd/$(location //third_party/zip:zip)"
-    native.genrule(
-        name=base_name + "_extract_native_js_apt",
-        srcs=["lib" + base_name + "_java_library-src.jar"],
-        outs=[js_sources_from_apt, native_js_sources_from_apt],
-        restricted_to=["//buildenv/j2cl:j2cl_compilation"],
-        cmd="\n".join([
-            "TMPDIR=$$(mktemp -d)",
-            "unzip -q $(SRCS) -x \"*.java\" -d $$TMPDIR",
-            "cwd=$$PWD",
-            "cd $$TMPDIR",
-            "%s -jt -X -q -i \"*.js\" -x \"*.native.js\" -r $$cwd/$(location %s) *" % (
-                zip_tool, js_sources_from_apt),
-            "%s -jt -X -q -i \"*.native.js\" -r $$cwd/$(location %s) *" % (
-                zip_tool, native_js_sources_from_apt),
-            "rm -r $$TMPDIR",
-        ]),
-        tags=internal_tags,
-        tools=["//third_party/zip:zip"],
-        visibility=["//visibility:private"],
-        local=True,
-    )
-
-    native_srcs_zips = native_srcs_zips + [native_js_sources_from_apt]
-
-    # TODO: *Further* lock down 'visibility' of internal targets.
-    if native_srcs:
-      native_zip_name = base_name + "_native_bundle.zip"
-      generate_zip(native_zip_name, native_srcs, "CONVENTION", testonly)
-      native_srcs_zips += [":" + native_zip_name]
-
-    # Do the transpilation
     js_sources_from_transpile = ":" + base_name + "_j2cl_transpile.js.zip"
     j2cl_transpile(
         name=base_name + "_j2cl_transpile",
         javalib=":" + base_name + "_java_library",
-        native_srcs_zips=native_srcs_zips,
+        native_srcs=native_srcs + native_srcs_zips,
+        js_srcs=_js_srcs,
         testonly=testonly,
         readable_source_maps=_readable_source_maps,
         declare_legacy_namespace=_declare_legacy_namespace,
@@ -255,39 +190,19 @@ def j2cl_library(name,
     # TODO(cpovirk): Find a less evil solution, maybe based on http://b/27044764
 
     # Copy the js to an unrestricted environment.
-
-    transpiled_jszip_name = base_name + "_transpiled.js.zip"
-    _do_env_copy(js_sources_from_transpile, transpiled_jszip_name, testonly)
-    src_zips += [":" + transpiled_jszip_name]
-
-    apt_jszip_name = base_name + "_apt.js.zip"
-    _do_env_copy(js_sources_from_apt, apt_jszip_name, testonly)
-    src_zips += [":" + apt_jszip_name]
+    jszip_name = base_name + ".js.zip"
+    _do_env_copy(js_sources_from_transpile, jszip_name, testonly)
 
     # Expose java sources similar to java_library
     java_src_jar = "lib" + base_name + "-src.jar"
     _do_env_copy("lib" + base_name + "_java_library-src.jar", java_src_jar, testonly)
 
-  if _js_srcs:
-    handrolled_js = base_name + "_handrolled.js.zip";
-    generate_zip(handrolled_js, _js_srcs, "RELATIVE")
-    src_zips += [":" + handrolled_js]
-
-  merged_zip = base_name + ".js.zip"
-
-  # Merge the zip as single source zip
-  _merge_zips(
-      srczips=src_zips,
-      outzip=merged_zip,
-      tags=internal_tags,
-      testonly=testonly,
-  )
 
   # This forces execution of j2cl_transpile() targets (both immediate and in the
   # dependency chain) when build has been invoked on the js_import target.
   # Additionally, this is used as a workaround to make sure the zip ends up in
   # the runfiles directory as described in b/35847804.
-  js_data = collections.uniq([merged_zip] + js_deps + js_exports)
+  js_data = ([jszip_name] if jszip_name else []) + collections.uniq(js_deps + js_exports)
 
   # Bring zip srcs into the js build tree
   js_import(
@@ -295,7 +210,7 @@ def j2cl_library(name,
       deps=js_deps,
       deps_mgmt=js_deps_mgmt,
       exports=js_exports,
-      srczip=merged_zip if src_zips else None,
+      srczip=jszip_name,
       tags=tags,
       testonly=testonly,
       data=js_data,
@@ -305,7 +220,7 @@ def j2cl_library(name,
   if generate_build_test == None:
     generate_build_test = True
 
-  if generate_build_test and src_zips:
+  if generate_build_test and srcs:
     # Add an empty .js file to the js_binary build test compilation so that  jscompiler does not
     # error out when there are no .js source (e.g. all sources are @JsFunction).
     native.genrule(

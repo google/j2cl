@@ -41,11 +41,17 @@ public class FrontendUtils {
   @AutoValue
   public abstract static class FileInfo implements Comparable<FileInfo> {
 
-    public static FileInfo create(String sourcePath, String targetPath) {
-      return new AutoValue_FrontendUtils_FileInfo(sourcePath, targetPath);
+    private static FileInfo create(String sourcePath, String originalPath) {
+      return create(sourcePath, originalPath, originalPath);
+    }
+
+    private static FileInfo create(String sourcePath, String originalPath, String targetPath) {
+      return new AutoValue_FrontendUtils_FileInfo(sourcePath, originalPath, targetPath);
     }
 
     public abstract String sourcePath();
+
+    public abstract String originalPath();
 
     public abstract String targetPath();
 
@@ -78,7 +84,7 @@ public class FrontendUtils {
             f ->
                 f.endsWith("jar") || f.endsWith("zip")
                     ? extractZip(f, sourcesDir, problems).stream()
-                    : Stream.of(FileInfo.create(f, f)))
+                    : Stream.of(FileInfo.create(f, f, getJavaPath(f))))
         .sorted()
         .distinct();
   }

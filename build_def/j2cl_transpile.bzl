@@ -18,16 +18,17 @@ j2cl_transpile directly.
 
 def _impl(ctx):
   separator = ctx.configuration.host_path_separator
-  java_provider = ctx.attr.javalib[java_common.provider]
-  js_native_zip_files = ctx.files.native_srcs_zips
 
+  native_files = ctx.files.native_srcs
+  js_files = ctx.files.js_srcs
+  java_provider = ctx.attr.javalib[java_common.provider]
   # Using source_jars of the java_library since that includes APT generated src.
-  java_src_jars = java_provider.source_jars
+  src_jars = java_provider.source_jars
   java_deps = java_provider.compilation_info.compilation_classpath
 
   # convert files to paths
   deps_paths = [j.path for j in java_deps]
-  src_paths = [j.path for j in java_src_jars + js_native_zip_files]
+  src_paths = [j.path for j in src_jars + native_files + js_files]
 
   compiler_args = ["-output", ctx.outputs.zip_file.path]
   compiler_args += ["-classpath", separator.join(deps_paths)]
@@ -54,9 +55,11 @@ def _impl(ctx):
       content = "\n".join(compiler_args)
   )
 
-  inputs = java_src_jars[:]
+  inputs = []
+  inputs += src_jars
+  inputs += js_files
+  inputs += native_files
   inputs += list(java_deps)
-  inputs += js_native_zip_files
   inputs += [compiler_args_file]
 
   ctx.action(
@@ -87,9 +90,8 @@ Args:
 j2cl_transpile = rule(
     attrs={
         "javalib": attr.label(providers=[java_common.provider]),
-        "native_srcs_zips": attr.label_list(
-            allow_files=[".zip"],
-        ),
+        "native_srcs": attr.label_list(allow_files=[".native.js", ".zip"]),
+        "js_srcs": attr.label_list(allow_files=[".js", ".zip"]),
         "readable_source_maps": attr.bool(default=False),
         "declare_legacy_namespace": attr.bool(default=False),
         "transpiler": attr.label(

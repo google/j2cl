@@ -17,12 +17,14 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.bazel.BazelWorker;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
@@ -97,23 +99,38 @@ public final class BazelJ2clBuilder {
         flags.readableSourceMaps = false;
       }
 
+      Path outputPath = getZipOutput(flags.output, problems);
+
       List<FileInfo> allSources =
           FrontendUtils.getAllSources(flags.sources, problems)
               .collect(ImmutableList.toImmutableList());
 
+      List<FileInfo> allJavaSources =
+          allSources
+              .stream()
+              .filter(p -> p.sourcePath().endsWith(".java"))
+              .collect(ImmutableList.toImmutableList());
+
+      List<FileInfo> allNativeSources =
+          allSources
+              .stream()
+              .filter(p -> p.sourcePath().endsWith(".native.js"))
+              .collect(ImmutableList.toImmutableList());
+
+      // Directly put all supplied js sources into the zip file.
+      allSources
+          .stream()
+          .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
+          .forEach(
+              f ->
+                  J2clUtils.copyFile(
+                      Paths.get(f.sourcePath()), outputPath.resolve(f.targetPath()), problems));
+
       return J2clTranspilerOptions.newBuilder()
-          .setSources(
-              allSources
-                  .stream()
-                  .filter(p -> p.sourcePath().endsWith(".java"))
-                  .collect(ImmutableList.toImmutableList()))
-          .setNativeSources(
-              allSources
-                  .stream()
-                  .filter(p -> p.sourcePath().endsWith(".native.js"))
-                  .collect(ImmutableList.toImmutableList()))
+          .setSources(allJavaSources)
+          .setNativeSources(allNativeSources)
           .setClasspaths(getPathEntries(flags.classPath))
-          .setOutput(getZipOutput(flags.output, problems))
+          .setOutput(outputPath)
           .setEmitReadableSourceMap(flags.readableSourceMaps)
           .setDeclareLegacyNamespace(flags.declareLegacyNamespaces)
           .setGenerateKytheIndexingMetadata(flags.generateKytheIndexingMetadata)
@@ -136,7 +153,7 @@ public final class BazelJ2clBuilder {
 
     private static boolean isValidExtension(String sourceFile) {
       return sourceFile.endsWith(".java")
-          || sourceFile.endsWith(".native.js")
+          || sourceFile.endsWith(".js")
           || sourceFile.endsWith(".zip")
           || sourceFile.endsWith(".jar");
     }

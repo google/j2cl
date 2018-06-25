@@ -64,7 +64,7 @@ public class JavaPreprocessor {
 
       // Write the processed file to output
       J2clUtils.writeToFile(
-          outputFileSystem.getPath(fileInfo.targetPath()), processedFileContent, problems);
+          outputFileSystem.getPath(fileInfo.originalPath()), processedFileContent, problems);
     }
   }
 
