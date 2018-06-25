@@ -35,7 +35,7 @@ load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 j2cl_transpile(
     name = "jre_transpiled_twice",
     javalib = "//jre/java:jre_java_library",
-    native_srcs = ["//jre/java:jre_native.zip"],
+    native_srcs = ["//jre/java:jre_native_files"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
     transpiler = ":RerunningJ2clTranspiler",
 )

@@ -7,7 +7,6 @@ overlaying files from current directory.
 
 load(":j2cl_source_copy.bzl", "j2cl_source_copy")
 load(":j2cl_library.bzl", "j2cl_library")
-load(":j2cl_util.bzl", "generate_zip")
 
 def j2cl_mirror_from_gwt(name,
                          mirrored_files,
@@ -32,17 +31,15 @@ def j2cl_mirror_from_gwt(name,
       srcs = [":" + name + "_copy"] + super_srcs,
   )
 
-  # TODO(b/67481861): Do we really need custom zipping w/ RELATIVE?
-  generate_zip(
-      name = name + "_native.zip",
+  native.filegroup(
+      name = name + "_native_files",
       srcs = native_srcs,
-      pkg = "RELATIVE",
   )
 
   j2cl_library(
       name = name,
       srcs = [":" + name + "_java_files"],
-      native_srcs_zips = [name + "_native.zip"],
+      native_srcs = [":" + name + "_native_files"],
       deps = deps,
       _js_srcs = js_srcs,
       _js_deps = js_deps,
