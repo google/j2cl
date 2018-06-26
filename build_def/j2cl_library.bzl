@@ -30,7 +30,6 @@ load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_defs/label:def.bzl", "absolute_label")
 load("//tools/build_defs/j2cl:def.bzl", "js_import")
-load("//tools/build_defs/lib:lib.bzl", "collections")
 load("//tools/build_rules:build_test.bzl", "build_test")
 
 def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
@@ -202,7 +201,7 @@ def j2cl_library(name,
   # dependency chain) when build has been invoked on the js_import target.
   # Additionally, this is used as a workaround to make sure the zip ends up in
   # the runfiles directory as described in b/35847804.
-  js_data = ([jszip_name] if jszip_name else []) + collections.uniq(js_deps + js_exports)
+  js_data = ([jszip_name] if jszip_name else []) + depset(js_deps + js_exports).to_list()
 
   # Bring zip srcs into the js build tree
   js_import(
