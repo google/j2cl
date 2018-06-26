@@ -42,6 +42,7 @@ public class Object {
   public final Class<?> getClass() {
     return Class.$get(Constructor.of(this));
   }
+
   @JsMethod
   private static boolean $isInstance(Object instance) {
     return instance != null;
@@ -49,9 +50,6 @@ public class Object {
 
   @JsMethod
   private static boolean $isAssignableFrom(Constructor classConstructor) {
-    return !$isPrimitiveType(classConstructor);
+    return !classConstructor.isPrimitiveType();
   }
-
-  @JsMethod(namespace = "nativebootstrap.Util")
-  public static native boolean $isPrimitiveType(Constructor classConstructor);
 }

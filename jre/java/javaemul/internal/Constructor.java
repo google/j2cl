@@ -43,4 +43,49 @@ public class Constructor {
 
   @JsMethod(name = "Object.getPrototypeOf", namespace = JsPackage.GLOBAL)
   private static native Object getPrototypeOf(Object obj);
+
+  @JsOverlay
+  public final boolean isInterface() {
+    return Util.$extractClassType(this) == Util.TYPE_INTERFACE;
+  }
+
+  @JsOverlay
+  public final boolean isEnum() {
+    return Util.$extractClassType(this) == Util.TYPE_ENUM;
+  }
+
+  @JsOverlay
+  public final boolean isPrimitive() {
+    return Util.$extractClassType(this) == Util.TYPE_PRIMITIVE;
+  }
+
+  @JsOverlay
+  public final String getPrimitiveShortName() {
+    return Util.$extractPrimitiveShortName(this);
+  }
+
+  @JsOverlay
+  public final String getClassName() {
+    return Util.$extractClassName(this);
+  }
+
+  @JsOverlay
+  public final boolean isPrimitiveType() {
+    return Util.$isPrimitiveType(this);
+  }
+
+  @JsType(isNative = true, namespace = "nativebootstrap")
+  private static class Util {
+    public static int TYPE_ENUM;
+    public static int TYPE_INTERFACE;
+    public static int TYPE_PRIMITIVE;
+
+    public static native String $extractClassName(Constructor ctor);
+
+    public static native String $extractPrimitiveShortName(Constructor ctor);
+
+    public static native int $extractClassType(Constructor ctor);
+
+    public static native boolean $isPrimitiveType(Constructor ctor);
+  }
 }

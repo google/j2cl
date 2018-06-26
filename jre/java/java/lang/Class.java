@@ -18,7 +18,6 @@ import java.lang.reflect.Type;
 import javaemul.internal.Constructor;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -54,12 +53,12 @@ public final class Class<T> implements Type, Serializable {
   }
 
   public String getName() {
-    String className = Util.$extractClassName(ctor);
+    String className = ctor.getClassName();
     if (isArray()) {
-      if (Util.$extractClassType(ctor) != Util.TYPE_PRIMITIVE) {
-        className = "L" + className + ";";
+      if (ctor.isPrimitive()) {
+        className = ctor.getPrimitiveShortName();
       } else {
-        className = Util.$extractPrimitiveShortName(ctor);
+        className = "L" + className + ";";
       }
     }
     return repeatString("[", dimensionCount) + className;
@@ -68,7 +67,7 @@ public final class Class<T> implements Type, Serializable {
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
   // debugging and testing uses.
   public String getCanonicalName() {
-    return Util.$extractClassName(ctor) + repeatString("[]", dimensionCount);
+    return ctor.getClassName() + repeatString("[]", dimensionCount);
   }
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
@@ -87,19 +86,15 @@ public final class Class<T> implements Type, Serializable {
   }
 
   public boolean isEnum() {
-    return isOfType(Util.TYPE_ENUM);
+    return !isArray() && ctor.isEnum();
   }
 
   public boolean isInterface() {
-    return isOfType(Util.TYPE_INTERFACE);
+    return !isArray() && ctor.isInterface();
   }
 
   public boolean isPrimitive() {
-    return isOfType(Util.TYPE_PRIMITIVE);
-  }
-
-  private boolean isOfType(int type) {
-    return !isArray() && Util.$extractClassType(ctor) == type;
+    return !isArray() && ctor.isPrimitive();
   }
 
   // TODO(b/30745420): implement
@@ -128,18 +123,5 @@ public final class Class<T> implements Type, Serializable {
       rv += str;
     }
     return rv;
-  }
-
-  @JsType(isNative = true, namespace = "nativebootstrap")
-  private static class Util {
-    public static int TYPE_ENUM;
-    public static int TYPE_INTERFACE;
-    public static int TYPE_PRIMITIVE;
-
-    public static native String $extractClassName(Constructor ctor);
-
-    public static native String $extractPrimitiveShortName(Constructor ctor);
-
-    public static native int $extractClassType(Constructor ctor);
   }
 }
