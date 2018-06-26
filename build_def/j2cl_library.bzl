@@ -56,7 +56,6 @@ def j2cl_library(name,
                  srcs=[],
                  tags=[],
                  native_srcs=[],
-                 native_srcs_zips=[],
                  generate_build_test=None,
                  js_deps_mgmt="closure",
                  visibility=None,
@@ -76,9 +75,6 @@ def j2cl_library(name,
     srcs: Source files (.java or .srcjar) to compile.
     native_srcs: Native js source files (.native.js). Native sources should be
         put next to main java file to match.
-    native_srcs_zips: Zip files providing native js source files. Native
-        sources in the zip file should follow the main Java files' directory
-        structure from the java root to match (e.g. com/google/foo/Foo.native.js).
     deps: Labels of other j2cl_library() rules.
           NOT labels of java_library() rules.
   """
@@ -166,7 +162,7 @@ def j2cl_library(name,
     j2cl_transpile(
         name=base_name + "_j2cl_transpile",
         javalib=":" + base_name + "_java_library",
-        native_srcs=native_srcs + native_srcs_zips,
+        native_srcs=native_srcs,
         js_srcs=_js_srcs,
         testonly=testonly,
         readable_source_maps=_readable_source_maps,
