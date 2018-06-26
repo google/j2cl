@@ -5,18 +5,15 @@ load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
 )
-load("//build_def:j2cl_util.bzl", "generate_zip")
 
-generate_zip(
-    name = "gwtincompatibleMain.srcjar",
+java_library(
+    name = "gwtincompatibleMain",
     srcs = ["Main.java"],
-    pkg = "RELATIVE",
 )
 
-generate_zip(
-    name = "gwtincompatibleOther.srcjar",
+java_library(
+    name = "gwtincompatibleOther",
     srcs = ["Other.java"],
-    pkg = "RELATIVE",
 )
 
 # Creates targets
@@ -27,8 +24,8 @@ integration_test(
     name = "gwtincompatible-with-srcjar",
     srcs = [
         "External.java",
-        ":gwtincompatibleMain.srcjar",
-        ":gwtincompatibleOther.srcjar",
+        ":libgwtincompatibleMain-src.jar",
+        ":libgwtincompatibleOther-src.jar",
     ],
     deps = [
         "//java/com/google/common/annotations:annotations-j2cl",

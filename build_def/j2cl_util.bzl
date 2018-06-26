@@ -44,33 +44,6 @@ def get_java_package(pkg_name):
   """Extract the java package from the build package"""
   return get_java_path(pkg_name).replace("/", ".")
 
-def generate_zip(name, srcs, pkg, testonly = None):
-  """Generates a zip target with given srcs.
-
-  See j2cl_library for details of pkg handling
-  """
-  # Exit early to avoid parse errors when running under bazel
-  if not hasattr(native, "genzip"):
-    return
-
-  native.genzip(name=name, deps=[name + "_pkg_library"], testonly = testonly)
-
-  if pkg == "RELATIVE":
-    strip_prefix = None
-  elif pkg == "CONVENTION":
-    strip_prefix = get_java_root(native.package_name())
-  else:
-    fail("Incorrect package type: " + pkg)
-
-  native.pkg_library(
-      name=name + "_pkg_library",
-      srcs=srcs,
-      flatten=0,
-      package_dir=None,
-      strip_prefix=strip_prefix,
-      testonly = testonly,
-  )
-
 load(
     "//javascript/tools/jscompiler/builddefs:flags.bzl",
     "ADVANCED_OPTIMIZATIONS_FLAGS",
