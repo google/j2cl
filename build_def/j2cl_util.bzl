@@ -4,7 +4,13 @@ def get_java_package(path):
   """Extract the java package from path"""
 
   segments = path.split("/")
-  start_index = min([_find(segments, root) for root in ["java", "javatests"]])
+
+  # Find different root start indecies based on potential java roots
+  java_root_start_indecies = [_find(segments, root) for root in ["java", "javatests"]]
+
+  # Choose the root that starts earliest
+  start_index = min(java_root_start_indecies)
+
   if start_index == len(segments):
     fail("Cannot find java root: " + path)
 
