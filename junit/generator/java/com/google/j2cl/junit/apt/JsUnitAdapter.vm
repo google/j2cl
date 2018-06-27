@@ -3,10 +3,14 @@
  */
 package ${testClass.jsUnitPackageName()};
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType
 public class ${testClass.jsUnitAdapterClassName()} {
+
+  @JsType(isNative = true, name = "IThenable", namespace = JsPackage.GLOBAL)
+  private interface IThenable<T> {}
 
   @JsType(isNative = true, name = "TestCase", namespace = "goog.testing")
   private static class GoogTestCase {
@@ -54,26 +58,34 @@ public class ${testClass.jsUnitAdapterClassName()} {
   }
 
 #foreach($testMethod in ${testClass.testMethods()})
-  public Object ${testMethod.jsTestMethodName()}() throws Throwable {
+#if($testMethod.isAsync())
+#set ($returnType = 'IThenable<?>')
+#else
+#set ($returnType = 'void')
+#end
+  public $returnType ${testMethod.jsTestMethodName()}() throws Throwable {
 #if ($testMethod.expectedExceptionQualifiedName())
     try {
       actualTest.${testMethod.javaMethodName()}();
     } catch (${testMethod.expectedExceptionQualifiedName()} e) {
+#if($testMethod.isAsync())
       return null;
+#else
+      return;
+#end
     }
     throw new Exception("expected exception was not thrown");
 
 #else
 #if($testMethod.isAsync())
    GoogTestCase.getActiveTestCase().promiseTimeout = ${testMethod.timeout()};
-   Object promise = actualTest.${testMethod.javaMethodName()}();
+   IThenable<?> promise = (IThenable<?>)(Object)(actualTest.${testMethod.javaMethodName()}());
    if (promise == null) {
      throw new IllegalStateException("Test returned null as its promise");
    }
    return promise;
 #else
-    actualTest.${testMethod.javaMethodName()}();
-    return null;
+   actualTest.${testMethod.javaMethodName()}();
 #end
 #end
   }
