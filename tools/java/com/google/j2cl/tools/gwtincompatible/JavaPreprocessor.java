@@ -27,7 +27,7 @@ import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import com.google.j2cl.frontend.GwtIncompatibleNodeCollector;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystem;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +44,8 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
  * with {@code GwtIncompatible}.
  */
 public class JavaPreprocessor {
-  /**
-   * Preprocess every file and returns a map between the preprocessed file paths and the old file
-   * paths. All the preprocessed files will be put in a temporary directory. If a file doesn't need
-   * preprocessing, the key of the map will be the original location of the file.
-   */
-  public static void preprocessFiles(
-      List<FileInfo> fileInfos, FileSystem outputFileSystem, Problems problems) {
+  /** Preprocess all provided files and put them to provided output path. */
+  public static void preprocessFiles(List<FileInfo> fileInfos, Path output, Problems problems) {
     for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
@@ -64,7 +59,7 @@ public class JavaPreprocessor {
 
       // Write the processed file to output
       J2clUtils.writeToFile(
-          outputFileSystem.getPath(fileInfo.originalPath()), processedFileContent, problems);
+          output.resolve(fileInfo.originalPath()), processedFileContent, problems);
     }
   }
 

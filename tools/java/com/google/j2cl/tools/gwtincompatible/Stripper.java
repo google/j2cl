@@ -42,7 +42,7 @@ public class Stripper {
           FrontendUtils.getAllSources(flags.files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(ImmutableList.toImmutableList());
-      JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem, problems);
+      JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
 
       try {
         outputZipFileSystem.close();
