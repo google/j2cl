@@ -225,7 +225,8 @@ def j2cl_library(name,
     )
     native.js_library(
         name=base_name + "_empty_js_file_lib",
-        srcs=[base_name + "_empty_js_file"]
+        srcs=[base_name + "_empty_js_file"],
+        tags = ["no_grok"],
     )
     native.js_binary(
         name=base_name + "_js_binary",
@@ -236,7 +237,7 @@ def j2cl_library(name,
         defs=J2CL_OPTIMIZED_DEFS,
         externs_list=_test_externs_list,
         include_default_externs="off" if _test_externs_list else "web",
-        tags=internal_tags,
+        tags=internal_tags + ["no_grok"],
         compiler="//javascript/tools/jscompiler:head",
         testonly=1,
         visibility=["//visibility:private"],
