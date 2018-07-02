@@ -53,7 +53,7 @@ public class Main {
   }
 
   @GwtIncompatible
-  public static void incompatibleMissingInDep() {
-    Files.toByteArray(null);
+  public static Object incompatibleMissingInDep() throws Exception {
+    return Files.toByteArray(null);
   }
 }

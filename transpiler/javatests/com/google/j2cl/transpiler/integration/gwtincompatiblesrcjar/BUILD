@@ -8,7 +8,15 @@ load(
 
 java_library(
     name = "gwtincompatibleMain",
-    srcs = ["Main.java"],
+    srcs = [
+        "External.java",
+        "Main.java",
+    ],
+    deps = [
+        ":gwtincompatibleOther",
+        "//java/com/google/common/annotations",
+        "//java/com/google/common/io",
+    ],
 )
 
 java_library(
@@ -23,7 +31,6 @@ java_library(
 integration_test(
     name = "gwtincompatible-with-srcjar",
     srcs = [
-        "External.java",
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",
     ],
