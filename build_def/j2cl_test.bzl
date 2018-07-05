@@ -56,11 +56,15 @@ To make this example work one needs to add ":MyTestLib" to the runtime_deps of
 load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 load("//build_def:j2cl_library.bzl", "j2cl_library")
-load("//build_def:j2cl_generate_jsunit_suite.bzl",
-     "j2cl_generate_jsunit_suite")
-load("//build_def:j2cl_util.bzl", "get_java_package",
-     "J2CL_TEST_DEFS")
-
+load(
+    "//build_def:j2cl_generate_jsunit_suite.bzl",
+    "j2cl_generate_jsunit_suite",
+)
+load(
+    "//build_def:j2cl_util.bzl",
+    "J2CL_TEST_DEFS",
+    "get_java_package",
+)
 
 _JS_UNIT_TEST_PARAMETERS = [
     "args",
@@ -120,122 +124,125 @@ _JS_UNIT_DEFAULT_TEST_PARAMETERS = {
     "externs_list": ["//javascript/externs:common"],
     "jvm_flags": [
         "-DstacktraceDeobfuscation=true",
-     ],
+    ],
 }
 
-
 def _extract_jsunit_parameters(args):
-  parameters = {}
-  parameters["defs"] = J2CL_TEST_DEFS + args.get("extra_defs", [])
+    parameters = {}
+    parameters["defs"] = J2CL_TEST_DEFS + args.get("extra_defs", [])
 
-  if "defs" in args:
-    fail("Usage of defs on j2cl_test is prohibited, use extra_defs instead.")
+    if "defs" in args:
+        fail("Usage of defs on j2cl_test is prohibited, use extra_defs instead.")
 
-  for parameter in _JS_UNIT_TEST_PARAMETERS:
-    if parameter in args:
-      parameters[parameter] = args[parameter]
-    else:
-      if parameter in _JS_UNIT_DEFAULT_TEST_PARAMETERS:
-        parameters[parameter] = _JS_UNIT_DEFAULT_TEST_PARAMETERS[parameter]
-  return parameters
-
+    for parameter in _JS_UNIT_TEST_PARAMETERS:
+        if parameter in args:
+            parameters[parameter] = args[parameter]
+        elif parameter in _JS_UNIT_DEFAULT_TEST_PARAMETERS:
+            parameters[parameter] = _JS_UNIT_DEFAULT_TEST_PARAMETERS[parameter]
+    return parameters
 
 def _strip_jsunit_parameters(args):
-  parameters = {}
-  for parameter in args:
-    if not parameter in _STRIP_JSUNIT_PARAMETERS:
-      parameters[parameter] = args[parameter]
-  return parameters
+    parameters = {}
+    for parameter in args:
+        if not parameter in _STRIP_JSUNIT_PARAMETERS:
+            parameters[parameter] = args[parameter]
+    return parameters
 
 def _get_test_class(name, build_package, test_class):
-  """Infers the name of the test class to be compiled."""
-  return test_class or get_java_package(build_package) + "." + name
+    """Infers the name of the test class to be compiled."""
+    return test_class or get_java_package(build_package) + "." + name
 
 def _verify_attributes(runtime_deps, **kwargs):
-  if not kwargs.get("srcs"):
-    # Disallow deps without srcs
-    if kwargs.get("deps"):
-      fail("deps not allowed without srcs; move to runtime_deps?")
-    # Disallow _js_deps without srcs
-    if kwargs.get("_js_deps"):
-      fail("_js_deps not allowed without srcs")
-    # Need to have runtime deps if there are no sources
-    if not runtime_deps:
-      fail("without srcs, runtime_deps required")
-  # Disallow exports since we use them internally to forward deps to
-  # j2cl_generate_jsunit_suite.
-  if "exports" in kwargs:
-    fail("using exports on j2cl_test is not supported")
+    if not kwargs.get("srcs"):
+        # Disallow deps without srcs
+        if kwargs.get("deps"):
+            fail("deps not allowed without srcs; move to runtime_deps?")
 
-def j2cl_test(name,
-              runtime_deps = [],
-              test_class=None,
-              tags = [],
-              **kwargs):
-  """Macro for running a JUnit test cross compiled as a web test
+        # Disallow _js_deps without srcs
+        if kwargs.get("_js_deps"):
+            fail("_js_deps not allowed without srcs")
 
-     This macro uses the j2cl_test_tranpile macro to transpile tests and feed
-     them into a jsunit_test.
-  """
+        # Need to have runtime deps if there are no sources
+        if not runtime_deps:
+            fail("without srcs, runtime_deps required")
 
-  _verify_attributes(runtime_deps, **kwargs)
+    # Disallow exports since we use them internally to forward deps to
+    # j2cl_generate_jsunit_suite.
+    if "exports" in kwargs:
+        fail("using exports on j2cl_test is not supported")
 
-  j2cl_parameters= _strip_jsunit_parameters(kwargs)
-  # This library serves two purposes:
-  #   - Compile srcs files
-  #   - Reexport all deps so that they are available to our code generation
-  #     within j2cl_generate_jsunit_suite.
-  #
-  # Reexporting is necessary since generated code refers to test classes
-  # which can be either in this library, its deps or its runtime deps.
-  exports = (kwargs.get("deps") or []) + runtime_deps
-  j2cl_library(
-      name = "%s_lib" % name,
-      exports = exports,
-      testonly = 1,
-      tags = tags,
-      **j2cl_parameters
-  )
+def j2cl_test(
+        name,
+        runtime_deps = [],
+        test_class = None,
+        tags = [],
+        **kwargs):
+    """Macro for running a JUnit test cross compiled as a web test
 
-  test_class = _get_test_class(name, native.package_name(), test_class)
-  # Trigger our code generation
-  j2cl_generate_jsunit_suite(
-      name = name + "_generated_suite",
-      test_class = test_class,
-      deps = [":%s_lib" % name],
-      tags = tags,
-  )
+       This macro uses the j2cl_test_tranpile macro to transpile tests and feed
+       them into a jsunit_test.
+    """
 
-  jsunit_parameters = _extract_jsunit_parameters(kwargs)
+    _verify_attributes(runtime_deps, **kwargs)
 
-  # enforce bundled mode since the debug loader is disabled
-  jsunit_parameters["jvm_flags"] = jsunit_parameters["jvm_flags"] + ["-Djsrunner.net.useJsBundles=true"]
+    j2cl_parameters = _strip_jsunit_parameters(kwargs)
 
-  # Define a jsunit_test:
-  #   - sources is the zip coming from code gen
-  #   - deps contains the j2cl_library from our code gen
-  wrapped_test_name = "%s_debug" % name
-  jsunit_test(
-      name=wrapped_test_name,
-      srcs=[":%s_generated_suite.js.zip" % name],
-      deps=[
-          # We add this direct dependency to prevent AJD from pruning _js_srcs.
-          # This is for bootsrap sources which need to be passed as _js_srcs in
-          # j2cl_test for the compiled mode to pick it up (otherwise dropped
-          # in jsunit_test if user provided only in bootstrap_files).
-          ":%s_lib" % name,
-          ":%s_generated_suite_lib" % name,
-          "//javascript/closure/testing:testsuite",
-      ],
-      tags = depset(tags + ["manual", "notap"]),
-      **jsunit_parameters
-  )
+    # This library serves two purposes:
+    #   - Compile srcs files
+    #   - Reexport all deps so that they are available to our code generation
+    #     within j2cl_generate_jsunit_suite.
+    #
+    # Reexporting is necessary since generated code refers to test classes
+    # which can be either in this library, its deps or its runtime deps.
+    exports = (kwargs.get("deps") or []) + runtime_deps
+    j2cl_library(
+        name = "%s_lib" % name,
+        exports = exports,
+        testonly = 1,
+        tags = tags,
+        **j2cl_parameters
+    )
 
-  web_test(
-      name=name,
-      browser="//testing/web/browsers:chrome-linux",
-      config="//testing/web/configs:default_noproxy",
-      tags=tags,
-      test=":%s" % wrapped_test_name,
-      flaky=jsunit_parameters.get("flaky"),
-  )
+    test_class = _get_test_class(name, native.package_name(), test_class)
+
+    # Trigger our code generation
+    j2cl_generate_jsunit_suite(
+        name = name + "_generated_suite",
+        test_class = test_class,
+        deps = [":%s_lib" % name],
+        tags = tags,
+    )
+
+    jsunit_parameters = _extract_jsunit_parameters(kwargs)
+
+    # enforce bundled mode since the debug loader is disabled
+    jsunit_parameters["jvm_flags"] = jsunit_parameters["jvm_flags"] + ["-Djsrunner.net.useJsBundles=true"]
+
+    # Define a jsunit_test:
+    #   - sources is the zip coming from code gen
+    #   - deps contains the j2cl_library from our code gen
+    wrapped_test_name = "%s_debug" % name
+    jsunit_test(
+        name = wrapped_test_name,
+        srcs = [":%s_generated_suite.js.zip" % name],
+        deps = [
+            # We add this direct dependency to prevent AJD from pruning _js_srcs.
+            # This is for bootsrap sources which need to be passed as _js_srcs in
+            # j2cl_test for the compiled mode to pick it up (otherwise dropped
+            # in jsunit_test if user provided only in bootstrap_files).
+            ":%s_lib" % name,
+            ":%s_generated_suite_lib" % name,
+            "//javascript/closure/testing:testsuite",
+        ],
+        tags = depset(tags + ["manual", "notap"]),
+        **jsunit_parameters
+    )
+
+    web_test(
+        name = name,
+        browser = "//testing/web/browsers:chrome-linux",
+        config = "//testing/web/configs:default_noproxy",
+        tags = tags,
+        test = ":%s" % wrapped_test_name,
+        flaky = jsunit_parameters.get("flaky"),
+    )

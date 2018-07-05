@@ -8,41 +8,40 @@ overlaying files from current directory.
 load(":j2cl_source_copy.bzl", "j2cl_source_copy")
 load(":j2cl_library.bzl", "j2cl_library")
 
-def j2cl_mirror_from_gwt(name,
-                         mirrored_files,
-                         extra_srcs=[],
-                         extra_js_srcs=[],
-                         deps=[],
-                         js_deps=[],
-                         **kwargs):
+def j2cl_mirror_from_gwt(
+        name,
+        mirrored_files,
+        extra_srcs = [],
+        extra_js_srcs = [],
+        deps = [],
+        js_deps = [],
+        **kwargs):
+    super_srcs = native.glob(["**/*.java"]) + extra_srcs
+    native_srcs = native.glob(["**/*.native.js"])
+    js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
 
-  super_srcs = native.glob(["**/*.java"]) + extra_srcs
-  native_srcs = native.glob(["**/*.native.js"])
-  js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
+    j2cl_source_copy(
+        name = name + "_copy",
+        srcs = mirrored_files,
+        excludes = super_srcs,
+    )
 
-  j2cl_source_copy(
-      name = name + "_copy",
-      srcs = mirrored_files,
-      excludes = super_srcs,
-  )
+    native.filegroup(
+        name = name + "_java_files",
+        srcs = [":" + name + "_copy"] + super_srcs,
+    )
 
-  native.filegroup(
-      name = name + "_java_files",
-      srcs = [":" + name + "_copy"] + super_srcs,
-  )
+    native.filegroup(
+        name = name + "_native_files",
+        srcs = native_srcs,
+    )
 
-  native.filegroup(
-      name = name + "_native_files",
-      srcs = native_srcs,
-  )
-
-  j2cl_library(
-      name = name,
-      srcs = [":" + name + "_java_files"],
-      native_srcs = [":" + name + "_native_files"],
-      deps = deps,
-      _js_srcs = js_srcs,
-      _js_deps = js_deps,
-      **kwargs
-  )
-
+    j2cl_library(
+        name = name,
+        srcs = [":" + name + "_java_files"],
+        native_srcs = [":" + name + "_native_files"],
+        deps = deps,
+        _js_srcs = js_srcs,
+        _js_deps = js_deps,
+        **kwargs
+    )

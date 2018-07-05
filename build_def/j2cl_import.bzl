@@ -27,48 +27,48 @@ j2cl_library(
 
 load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
 
+def j2cl_import(
+        name,
+        jar,
+        js = None,
+        licenses = None,
+        visibility = None):
+    """Translates nonstandard inputs into a dep'able j2cl_library.
 
-def j2cl_import(name,
-                jar,
-                js=None,
-                licenses=None,
-                visibility=None):
-  """Translates nonstandard inputs into a dep'able j2cl_library.
+    Args:
+      jar: Jar file to appropriately rename.
+      js: JS file to appropriately rename.
+    """
 
-  Args:
-    jar: Jar file to appropriately rename.
-    js: JS file to appropriately rename.
-  """
+    # exit early to avoid parse errors when running under bazel
+    if not hasattr(native, "js_library"):
+        return
 
-  # exit early to avoid parse errors when running under bazel
-  if not hasattr(native, "js_library"):
-    return
-
-  j2cl_java_library(
-      name=name + "_java_library",
-      restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-      exports=[jar],
-      licenses=licenses,
-      visibility=visibility,
-      # Direct automated dep picking tools away from this target.
-      tags=["avoid_dep"],
-  )
-
-  if js:
-    native.js_library(
-        name=name,
-        exports=[js],
-        licenses=licenses,
-        visibility=visibility,
+    j2cl_java_library(
+        name = name + "_java_library",
+        restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
+        exports = [jar],
+        licenses = licenses,
+        visibility = visibility,
         # Direct automated dep picking tools away from this target.
-        tags=["avoid_dep"],
+        tags = ["avoid_dep"],
     )
-  else:
-    # Empty target to satisfy references from j2cl_library()s
-    native.js_library(
-        name=name,
-        licenses=licenses,
-        visibility=visibility,
-        # Direct automated dep picking tools away from this target.
-        tags=["avoid_dep"],
-    )
+
+    if js:
+        native.js_library(
+            name = name,
+            exports = [js],
+            licenses = licenses,
+            visibility = visibility,
+            # Direct automated dep picking tools away from this target.
+            tags = ["avoid_dep"],
+        )
+    else:
+        # Empty target to satisfy references from j2cl_library()s
+        native.js_library(
+            name = name,
+            licenses = licenses,
+            visibility = visibility,
+            # Direct automated dep picking tools away from this target.
+            tags = ["avoid_dep"],
+        )
