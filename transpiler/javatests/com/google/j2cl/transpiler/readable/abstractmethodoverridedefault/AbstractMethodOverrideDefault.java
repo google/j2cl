@@ -42,4 +42,13 @@ public class AbstractMethodOverrideDefault {
       }
     }
   }
+
+  static class C extends A {
+    public void foo() {}
+
+    public void bar() {
+      // TODO(b/111058967): generates call to abstract method instead of default method
+      super.bar();
+    }
+  }
 }

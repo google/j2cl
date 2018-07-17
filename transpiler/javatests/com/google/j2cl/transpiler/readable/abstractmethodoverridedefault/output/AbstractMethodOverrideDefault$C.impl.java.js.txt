@@ -1,0 +1,95 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$C.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.C$impl');
+
+
+const A = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class C extends A {
+  /**
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'C()'.
+   * @return {!C}
+   * @public
+   */
+  static $create__() {
+    C.$clinit();
+    let $instance = new C();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'C()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_foo__() {}
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_bar__() {
+    super.m_bar__();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof C;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, C);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    C.$clinit = function() {};
+    A.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    C,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$C'));
+
+
+
+exports = C;
+//# sourceMappingURL=AbstractMethodOverrideDefault$C.js.map
