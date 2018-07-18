@@ -82,7 +82,7 @@ def get_readable_dirs(name_filter):
 def blaze_build(target_dirs, build_integration_tests):
   """Blaze build everything in 1-go, for speed."""
 
-  build_targets = [d + ":readable_j2cl_transpile" for d in target_dirs]
+  build_targets = [d + "/readable.js.zip" for d in target_dirs]
   if FLAGS.logs:
     build_targets += [d + ":readable_binary" for d in target_dirs]
 
@@ -97,7 +97,7 @@ def replace_transpiled_js(readable_dirs):
   """Copy and reformat and replace with Blaze built JS."""
 
   for readable_dir in readable_dirs:
-    zip_file_path = "blaze-bin/%s/readable_j2cl_transpile.js.zip" % readable_dir
+    zip_file_path = "blaze-genfiles/%s/readable.js.zip" % readable_dir
     output = readable_dir + "/output"
 
     # Clean the output directory from the result of last run.
