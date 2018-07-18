@@ -155,6 +155,20 @@ public class Main {
   }
 
   @JsFunction
+  interface ForEachCallBack<T> {
+    Object onInvoke(T p0, int p1, T[] p2);
+  }
+
+  @JsFunction
+  interface ElementalJsFunction {
+    Object call(Object... args);
+  }
+
+  public void testVarArgsMethodReferenceToJsFuncion() {
+    ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;
+  }
+
+  @JsFunction
   interface JsFunctionVarargsGenerics<T> {
     int m(int i, T... numbers);
   }

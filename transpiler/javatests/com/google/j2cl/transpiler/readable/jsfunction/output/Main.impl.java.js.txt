@@ -198,6 +198,18 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testVarArgsMethodReferenceToJsFuncion__() {
+    let c =
+        ((/** ?function(...*):* */ arg0, /** number */ arg1,
+          /** Array<?function(...*):*> */ arg2) => {
+          return arg0(Integer.m_valueOf__int(arg1), arg2);
+        });
+  }
+
+  /**
    * @template M_T
    * @param {?function(number, ...M_T):number} x
    * @return {void}

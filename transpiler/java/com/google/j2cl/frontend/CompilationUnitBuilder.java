@@ -1281,7 +1281,9 @@ public class CompilationUnitBuilder {
         // instance methods without an explicit qualifier use the first parameter in the functional
         // interface as the qualifier for the method call.
         checkArgument(
-            parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1);
+            parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
+                || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
+                    && targetMethodDescriptor.isVarargs()));
         qualifier = parameters.get(0).getReference();
         forwardingParameters = parameters.subList(1, parameters.size());
       }
