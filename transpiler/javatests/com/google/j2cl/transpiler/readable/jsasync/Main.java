@@ -15,12 +15,11 @@
  */
 package com.google.j2cl.transpiler.readable.jsasync;
 
-import elemental2.promise.IThenable;
-import elemental2.promise.Promise;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
 
@@ -111,6 +110,14 @@ public class Main {
   interface AsyncJsFunctionInterface {
     @JsAsync
     IThenable<Integer> doSomething();
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  public interface IThenable<T> {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  private static class Promise<T> implements IThenable<T> {
+    public static native <T> Promise<T> resolve(T value);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL)

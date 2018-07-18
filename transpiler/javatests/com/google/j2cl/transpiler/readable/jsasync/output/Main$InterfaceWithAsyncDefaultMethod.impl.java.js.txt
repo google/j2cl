@@ -9,8 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsync
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let IThenable_$Overlay = goog.forwardDeclare('elemental2.promise.IThenable.$Overlay$impl');
-let $Overlay = goog.forwardDeclare('elemental2.promise.Promise.$Overlay$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.IThenable.$Overlay$impl');
+let Promise_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.Promise.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -35,10 +35,9 @@ class InterfaceWithAsyncDefaultMethod {
       $thisArg) {
     InterfaceWithAsyncDefaultMethod.$clinit();
     return /**@type {Promise<Integer>} */ (
-        $Overlay.m_resolve__java_lang_Object(/**@type {Integer} */ ($Casts.$to(
+        Promise.resolve(/**@type {Integer} */ ($Casts.$to(
             (await /**@type {Promise<Integer>} */ (
-                $Overlay.m_resolve__java_lang_Object(
-                    Integer.m_valueOf__int(5)))),
+                Promise.resolve(Integer.m_valueOf__int(5)))),
             Integer))));
   }
 
@@ -82,7 +81,6 @@ class InterfaceWithAsyncDefaultMethod {
    */
   static $clinit() {
     InterfaceWithAsyncDefaultMethod.$clinit = function() {};
-    $Overlay = goog.module.get('elemental2.promise.Promise.$Overlay$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
