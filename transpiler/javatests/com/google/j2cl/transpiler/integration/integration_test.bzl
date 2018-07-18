@@ -48,7 +48,6 @@ def integration_test(
         enable_gwt = False,
         gwt_deps = [],
         closure_defines = dict(),
-        test_externs_list = None,
         disable_uncompiled_test = False,
         disable_compiled_test = False,
         plugins = []):
@@ -63,9 +62,6 @@ def integration_test(
 
     if not main_class:
         main_class = java_package + ".Main"
-
-    if not test_externs_list:
-        test_externs_list = ["//javascript/externs:common"]
 
     deps = [absolute_label(dep) for dep in deps]
 
@@ -99,7 +95,6 @@ def integration_test(
         javacopts = JAVAC_FLAGS,
         _js_deps = js_deps,
         native_srcs = native_srcs,
-        _test_externs_list = test_externs_list,
         plugins = plugins,
     )
 
@@ -116,7 +111,6 @@ def integration_test(
         srcs = ["OptHarness.js"],
         defs = J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs,
         compiler = "//javascript/tools/jscompiler:head",
-        externs_list = test_externs_list,
         deps = [":" + name],
     )
 
@@ -127,7 +121,6 @@ def integration_test(
         srcs = ["OptHarness.js"],
         defs = J2CL_OPTIMIZED_DEFS + readable_out_defs + optimized_extra_defs + defs,
         compiler = "//javascript/tools/jscompiler:head",
-        externs_list = test_externs_list,
         deps = [":" + name],
     )
 
@@ -137,7 +130,6 @@ def integration_test(
         srcs = ["OptHarness.js"],
         defs = J2CL_UNOPTIMIZED_DEFS + readable_out_defs + defs,
         compiler = "//javascript/tools/jscompiler:head",
-        externs_list = test_externs_list,
         deps = [":" + name],
     )
 
@@ -186,7 +178,6 @@ def integration_test(
         defs = J2CL_TEST_DEFS + [
             "--closure_entry_point=gen.test.Harness",
         ] + defs,
-        externs_list = test_externs_list,
         jvm_flags = [
             "-Djsrunner.net.useJsBundles=true",
             "-DstacktraceDeobfuscation=true",

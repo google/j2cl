@@ -29,7 +29,6 @@ def readable_example(
         js_deps = [],
         plugins = [],
         defs = [],
-        test_externs_list = None,
         _declare_legacy_namespace = False):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -43,7 +42,6 @@ def readable_example(
       js_deps: JS libraries referenced by the srcs.
       plugins: APT processors to execute when generating readable output.
       defs: Custom flags to pass to the JavaScript compiler.
-      test_externs_list: Custom externs to support build test verification.
       _declare_legacy_namespace: Whether to use legacy namespaces in output.
     """
 
@@ -62,8 +60,6 @@ def readable_example(
     )
 
     # Verify compilability of generated JS.
-    if not test_externs_list:
-        test_externs_list = ["//javascript/externs:common"]
     native.js_binary(
         name = "readable_binary",
         defs = J2CL_OPTIMIZED_DEFS + [
@@ -73,7 +69,6 @@ def readable_example(
             "--summary_detail_level=3",
         ] + defs,
         compiler = "//javascript/tools/jscompiler:head",
-        externs_list = test_externs_list,
         extra_inputs = ["//transpiler/javatests/com/google/j2cl/transpiler/readable:conformance_proto"],
         deps = [":readable"],
     )

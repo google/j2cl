@@ -6,25 +6,16 @@ load(
     "readable_example",
 )
 
-filegroup(
-    name = "foo_externs",
-    srcs = ["foo_externs.js"],
-)
-
 js_library(
-    name = "_externs",
-    srcs = [
-        "//javascript/externs:common",
-        ":foo_externs",
-    ],
-    deps_mgmt = "legacy",
+    name = "externs",
+    srcs = ["foo_externs.js"],
 )
 
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    js_deps = [":externs"],
     native_srcs = glob(["*.native.js"]),
-    test_externs_list = [":_externs"],
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
     ],
