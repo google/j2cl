@@ -59,10 +59,7 @@ public class RerunningJ2clTranspiler {
   private static int processImpl(String[] args, PrintWriter output) throws IOException {
     File outputZip =
         Iterators.getOnlyElement(
-            Stream.of(args)
-                .filter(arg -> arg.endsWith("jre_transpiled_twice.js.zip"))
-                .map(File::new)
-                .iterator());
+            Stream.of(args).filter(arg -> arg.endsWith(".js.zip")).map(File::new).iterator());
 
     int rv = BazelJ2clBuilder.run(args).reportAndGetExitCode(output);
     if (rv != 0) {

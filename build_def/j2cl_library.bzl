@@ -66,6 +66,7 @@ def j2cl_library(
         _readable_source_maps = False,
         _declare_legacy_namespace = False,
         _test_externs_list = [],
+        _transpiler = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
 
@@ -89,6 +90,7 @@ def j2cl_library(
     #   _js_exports: Exported JavaScript dependencies.
     #   _declare_legacy_namespace: A temporary measure while onboarding Docs, do
     #       not use.
+    #   _transpiler: J2CL compiler instance to use.
 
     # exit early to avoid parse errors when running under bazel
     if not hasattr(native, "js_library"):
@@ -160,6 +162,9 @@ def j2cl_library(
     jszip_name = None
 
     if srcs:
+        extra_transpiler_args = {}
+        if _transpiler:
+            extra_transpiler_args["transpiler"] = _transpiler
         js_sources_from_transpile = ":" + base_name + "_j2cl_transpile.js.zip"
         j2cl_transpile(
             name = base_name + "_j2cl_transpile",
@@ -171,6 +176,7 @@ def j2cl_library(
             declare_legacy_namespace = _declare_legacy_namespace,
             restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
             tags = internal_tags,
+            **extra_transpiler_args
         )
 
         # Uh-oh: _js_import needs to depend on restricted_to=j2cl_compilation targets,
