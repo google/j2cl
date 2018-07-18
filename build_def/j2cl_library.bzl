@@ -26,7 +26,6 @@ j2cl_library(
 """
 
 load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
-load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_defs/label:def.bzl", "absolute_label")
 load("//tools/build_defs/j2cl:def.bzl", "js_import")
@@ -140,6 +139,8 @@ def j2cl_library(
     java_library_kwargs["deps"] = java_deps or []
     java_library_kwargs["exports"] = java_exports
     java_library_kwargs["restricted_to"] = ["//buildenv/j2cl:j2cl_compilation"]
+    if _transpiler:
+       java_library_kwargs["transpiler"] = _transpiler
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
     dummy_class_name = base_name.replace("-", "_")
@@ -154,6 +155,10 @@ def j2cl_library(
         name = base_name + "_java_library",
         srcs = srcs,
         srcs_hack = [":" + dummy_src],
+        native_srcs = native_srcs,
+        js_srcs = _js_srcs,
+        readable_source_maps = _readable_source_maps,
+        declare_legacy_namespace = _declare_legacy_namespace,
         tags = internal_tags,
         visibility = visibility,
         **java_library_kwargs
@@ -162,23 +167,6 @@ def j2cl_library(
     jszip_name = None
 
     if srcs:
-        extra_transpiler_args = {}
-        if _transpiler:
-            extra_transpiler_args["transpiler"] = _transpiler
-        js_sources_from_transpile = ":" + base_name + "_j2cl_transpile.js.zip"
-        j2cl_transpile(
-            name = base_name + "_j2cl_transpile",
-            javalib = ":" + base_name + "_java_library",
-            native_srcs = native_srcs,
-            js_srcs = _js_srcs,
-            testonly = testonly,
-            readable_source_maps = _readable_source_maps,
-            declare_legacy_namespace = _declare_legacy_namespace,
-            restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-            tags = internal_tags,
-            **extra_transpiler_args
-        )
-
         # Uh-oh: _js_import needs to depend on restricted_to=j2cl_compilation targets,
         # which it uses as classpath elements. But the _js_import can't itself be
         # restricted-to=j2cl_compilation, as it needs to be usable from "normal" build
@@ -194,7 +182,7 @@ def j2cl_library(
 
         # Copy the js to an unrestricted environment.
         jszip_name = base_name + ".js.zip"
-        _do_env_copy(js_sources_from_transpile, jszip_name, testonly)
+        _do_env_copy(base_name + "_java_library.js.zip", jszip_name, testonly)
 
         # Expose java sources similar to java_library
         java_src_jar = "lib" + base_name + "-src.jar"

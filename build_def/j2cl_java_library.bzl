@@ -5,6 +5,8 @@ drive the compilation from skylark.
 
 """
 
+load("//build_def:j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
+
 def _impl(ctx):
     srcs = [_strip_gwt_incompatible(ctx)] if ctx.files.srcs else []
     deps = [dep[JavaInfo] for dep in ctx.attr.deps]
@@ -28,6 +30,8 @@ def _impl(ctx):
         java_toolchain = ctx.attr._java_toolchain,
         host_javabase = ctx.attr._host_javabase,
     )
+
+    j2cl_transpile(ctx, java_provider)
 
     return [
         DefaultInfo(files = depset([ctx.outputs.jar])),
@@ -59,7 +63,7 @@ def _strip_gwt_incompatible(ctx):
 
 j2cl_java_library = rule(
     implementation = _impl,
-    attrs = {
+    attrs = dict(J2CL_TRANSPILE_ATTRS, **{
         "srcs": attr.label_list(allow_files = True),
         "srcs_hack": attr.label_list(allow_files = True),
         "deps": attr.label_list(providers = [JavaInfo]),
@@ -81,10 +85,11 @@ j2cl_java_library = rule(
             cfg = "host",
             executable = True,
         ),
-    },
+    }),
     fragments = ["java"],
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
+        "zip_file": "%{name}.js.zip",
     },
 )

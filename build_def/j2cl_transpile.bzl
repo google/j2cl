@@ -1,26 +1,10 @@
-"""j2cl_transpile build rule.
+"""This module contains j2cl_transpile helper function."""
 
-Takes Java source and translates it into Closure style JS in a zip bundle. Java
-library deps might be needed for reference resolution.
-
-Example use:
-
-j2cl_transpile(
-    name = "my_transpile",
-    javalib = ":some_lib",
-)
-
-Note: in general you want to be using j2cl_library instead of using
-j2cl_transpile directly.
-
-"""
-
-def _impl(ctx):
-    separator = ctx.configuration.host_path_separator
+def j2cl_transpile(ctx, java_provider):
+    """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
     native_files = ctx.files.native_srcs
     js_files = ctx.files.js_srcs
-    java_provider = ctx.attr.javalib[java_common.provider]
 
     # Using source_jars of the java_library since that includes APT generated src.
     src_jars = java_provider.source_jars
@@ -31,7 +15,7 @@ def _impl(ctx):
     src_paths = [j.path for j in src_jars + native_files + js_files]
 
     compiler_args = ["-output", ctx.outputs.zip_file.path]
-    compiler_args += ["-classpath", separator.join(deps_paths)]
+    compiler_args += ["-classpath", ctx.configuration.host_path_separator.join(deps_paths)]
 
     # Generate readable_maps
     if ctx.attr.readable_source_maps:
@@ -73,38 +57,17 @@ def _impl(ctx):
         mnemonic = "J2clTranspile",
     )
 
-    return struct(
-        files = depset([ctx.outputs.zip_file]),
-    )
-
-"""j2cl_transpile: A J2CL transpile rule.
-
-Args:
-  srcs: Source files (.java or .srcjar) to compile.
-  deps: Java jar files for reference resolution.
-  native_srcs_zips: JS zip files providing Foo.native.js implementations.
-"""
-
 # Private Args:
 #   transpiler: J2CL compiler jar to use.
-j2cl_transpile = rule(
-    attrs = {
-        "javalib": attr.label(providers = [java_common.provider]),
-        "native_srcs": attr.label_list(allow_files = [".native.js", ".zip"]),
-        "js_srcs": attr.label_list(allow_files = [".js", ".zip"]),
-        "readable_source_maps": attr.bool(default = False),
-        "declare_legacy_namespace": attr.bool(default = False),
-        "transpiler": attr.label(
-            cfg = "host",
-            executable = True,
-            allow_files = True,
-            default = Label("//internal_do_not_use:BazelJ2clBuilder"),
-        ),
-    },
-    implementation = _impl,
-    # Declare each output artifact by name, otherwise they can not be
-    # referenced by name when being used as inputs for other rules.
-    outputs = {
-        "zip_file": "%{name}.js.zip",
-    },
-)
+J2CL_TRANSPILE_ATTRS = {
+    "native_srcs": attr.label_list(allow_files = [".native.js", ".zip"]),
+    "js_srcs": attr.label_list(allow_files = [".js", ".zip"]),
+    "readable_source_maps": attr.bool(default = False),
+    "declare_legacy_namespace": attr.bool(default = False),
+    "transpiler": attr.label(
+        cfg = "host",
+        executable = True,
+        allow_files = True,
+        default = Label("//internal_do_not_use:BazelJ2clBuilder"),
+    ),
+}
