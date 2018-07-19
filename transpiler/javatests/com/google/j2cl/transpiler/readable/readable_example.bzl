@@ -29,6 +29,7 @@ def readable_example(
         js_deps = [],
         plugins = [],
         defs = [],
+        generate_library_info = False,
         _declare_legacy_namespace = False):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -42,6 +43,7 @@ def readable_example(
       js_deps: JS libraries referenced by the srcs.
       plugins: APT processors to execute when generating readable output.
       defs: Custom flags to pass to the JavaScript compiler.
+      generate_library_info: Wheter to copy the call graph for the library in the output dir.
       _declare_legacy_namespace: Whether to use legacy namespaces in output.
     """
 
@@ -58,6 +60,16 @@ def readable_example(
         _readable_source_maps = True,
         _declare_legacy_namespace = _declare_legacy_namespace,
     )
+
+    if generate_library_info:
+        # Used by replace_all.py script to know wheter the generated output libraryinfo.json has to
+        # be copied or deleted
+        native.genrule(
+            name = "copy_library_info",
+            srcs = [],
+            outs = ["copy_library_info.flag"],
+            cmd = "echo 'true' > \"$@\"",
+        )
 
     # Verify compilability of generated JS.
     native.js_binary(

@@ -1,0 +1,96 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.libraryinfo.Main.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class Main extends j_l_Object {
+  /**
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'Main()'.
+   * @return {!Main}
+   * @public
+   */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'Main()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static entryPoint() {
+    Main.$clinit();
+    Main.$create__()
+        .m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main() {
+    console.log('Foo');
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = function() {};
+    j_l_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    Main,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.libraryinfo.Main'));
+
+
+
+exports = Main;
+//# sourceMappingURL=Main.js.map

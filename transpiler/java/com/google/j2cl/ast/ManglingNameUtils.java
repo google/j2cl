@@ -100,7 +100,8 @@ public class ManglingNameUtils {
     return getPropertyMangledName(fieldDescriptor);
   }
 
-  private static String getPropertyMangledName(MemberDescriptor memberDescriptor) {
+  /** Returns the mangled name of a property. */
+  public static String getPropertyMangledName(MemberDescriptor memberDescriptor) {
     if (memberDescriptor.isJsMember()) {
       return memberDescriptor.getSimpleJsName();
     }

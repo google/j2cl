@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package j2cl;
+
+message LibraryInfo {
+  repeated TypeInfo type = 1;
+}
+
+message TypeInfo {
+  string type_id = 1;
+  string extends_type = 2;
+  bool js_instantiable = 3;
+  repeated string implements_type = 4;
+  repeated MemberInfo member = 5;
+  string header_source_file_path = 6;
+  string impl_source_file_path = 7;
+}
+
+message MemberInfo {
+  string name = 1;
+  bool public = 2;
+  bool static = 3;
+  bool js_accessible = 4;
+  repeated MethodInvocation methods_invoked = 5;
+  repeated string types_instantiated = 6;
+  SourcePosition start_position = 7;
+  SourcePosition end_position = 8;
+}
+
+message MethodInvocation {
+  string method = 1;
+  string enclosing_type = 2;
+}
+
+message SourcePosition {
+  int32 line = 1;
+  int32 column = 2;
+}

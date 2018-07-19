@@ -24,6 +24,8 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.frontend.FrontendUtils;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
+import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
+import com.google.protos.j2cl.LibraryInfoOuterClass.LibraryInfo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -60,6 +62,8 @@ public class OutputGeneratorStage {
     this.problems = problems;
   }
 
+  private static final String LIBRARY_INFO_FILE_NAME = "libraryinfo.json";
+
   public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable. Actually this one can't actually destabilize output but since
@@ -67,6 +71,7 @@ public class OutputGeneratorStage {
     // over in the future.
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
+    LibraryInfo.Builder libraryInfo = LibraryInfo.newBuilder();
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
@@ -106,16 +111,13 @@ public class OutputGeneratorStage {
           return;
         }
 
-        Path absolutePathForImpl =
-            outputPath.resolve(getRelativePath(type) + jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
-        Path absolutePathForHeader =
-            outputPath.resolve(getRelativePath(type) + jsHeaderGenerator.getSuffix());
-        String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
-        J2clUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, problems);
+        String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
+        J2clUtils.writeToFile(
+            outputPath.resolve(headerRelativePath), jsHeaderGenerator.renderOutput(), problems);
 
         if (generateKytheIndexingMetadata) {
           // Inline metadata so Kythe can create edges between this file and the Java source file.
@@ -146,7 +148,11 @@ public class OutputGeneratorStage {
               matchingNativeFile);
         }
 
-        J2clUtils.writeToFile(absolutePathForImpl, javaScriptImplementationSource, problems);
+        String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();
+        J2clUtils.writeToFile(
+            outputPath.resolve(implRelativePath), javaScriptImplementationSource, problems);
+
+        libraryInfo.addType(LibraryInfoBuilder.build(type, headerRelativePath, implRelativePath));
 
         if (matchingNativeFile != null) {
           copyNativeJsFileToOutput(matchingNativeFile);
@@ -157,6 +163,10 @@ public class OutputGeneratorStage {
         copyJavaSourcesToOutput(j2clCompilationUnit);
       }
     }
+
+    Path callgraphAbsolutePath = outputPath.resolve(LIBRARY_INFO_FILE_NAME);
+    J2clUtils.writeToFile(
+        callgraphAbsolutePath, LibraryInfoBuilder.serialize(libraryInfo), problems);
 
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {

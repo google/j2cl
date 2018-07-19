@@ -68,15 +68,21 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
 
 def get_readable_dirs(name_filter):
   """Finds and returns the dirs of readable examples."""
+  return _get_dirs_from_blaze_query("%s:readable$" % name_filter)
 
-  readable_dirs = run_cmd_get_output(
-      [
-          "blaze", "query",
-          "filter('%s:readable$', %s)" % (name_filter, READABLE_TARGET_PATTERN),
-          "--output=package"
-      ]
-  ).split("\n")
-  return filter(bool, readable_dirs)
+
+def get_library_info_dirs(name_filter):
+  """Finds and returns the dirs where we need to copy the libraryinfo.json."""
+  return _get_dirs_from_blaze_query("%s:copy_library_info$" % name_filter)
+
+
+def _get_dirs_from_blaze_query(rules_filter):
+  dirs = run_cmd_get_output([
+      "blaze", "query",
+      "filter('%s', %s)" % (rules_filter, READABLE_TARGET_PATTERN),
+      "--output=package"
+  ]).split("\n")
+  return filter(bool, dirs)
 
 
 def blaze_build(target_dirs, build_integration_tests):
@@ -95,6 +101,9 @@ def blaze_build(target_dirs, build_integration_tests):
 
 def replace_transpiled_js(readable_dirs):
   """Copy and reformat and replace with Blaze built JS."""
+
+  # directories where libraryinfo.json has to be copied
+  copy_library_info_dirs = get_library_info_dirs(FLAGS.name_filter)
 
   for readable_dir in readable_dirs:
     zip_file_path = "blaze-genfiles/%s/readable.js.zip" % readable_dir
@@ -122,6 +131,19 @@ def replace_transpiled_js(readable_dirs):
     # Move the newly unzipped .js => .js.txt
     run_cmd_get_output(find_command_js_sources +
                        ["-exec", "mv", "{}", "{}.txt", ";"])
+
+    if readable_dir in copy_library_info_dirs:
+      # Format .json files
+      run_cmd_get_output([
+          "find", output, "-name", "libraryinfo.json", "-exec",
+          "/usr/bin/clang-format", "-style", "{BreakStringLiterals: false}",
+          "-i", "{}", "+"
+      ])
+    else:
+      # delete the file libraryinfo.json from the output directory
+      run_cmd_get_output([
+          "find", output, "-name", "libraryinfo.json", "-exec", "rm", "{}", "+"
+      ])
 
 
 def gather_closure_warnings(build_log):
@@ -163,6 +185,7 @@ def main(unused_argv):
 
   print "Generating readable JS and build logs:"
   readable_dirs = get_readable_dirs(FLAGS.name_filter)
+
   if build_all:
     print "  Blaze building everything"
   else:
