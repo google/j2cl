@@ -102,7 +102,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
     # TODO(goktug): use j2cl_library directly from jsunit_test instead of
     # extracting files from jar (output js zip can include all the required
     # files.)
-    out_jar = ":lib" + name + "_lib_java_library.jar"
+    out_jar = ":lib" + name + "_lib.jar"
     native.genrule(
         name = name + "_transpile_gen",
         outs = [name + ".js.zip"],

@@ -70,6 +70,7 @@ def j2cl_library(
     """Translates Java source into JS source in a js_common.provider target.
 
     Implicit output targets:
+      lib<name>.jar: A java archive containing the byte code.
       lib<name>-src.jar: A java archive containing the sources (source jar).
 
     Args:
@@ -140,7 +141,7 @@ def j2cl_library(
     java_library_kwargs["exports"] = java_exports
     java_library_kwargs["restricted_to"] = ["//buildenv/j2cl:j2cl_compilation"]
     if _transpiler:
-       java_library_kwargs["transpiler"] = _transpiler
+        java_library_kwargs["transpiler"] = _transpiler
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
     dummy_class_name = base_name.replace("-", "_")
@@ -184,7 +185,9 @@ def j2cl_library(
         jszip_name = base_name + ".js.zip"
         _do_env_copy(base_name + "_java_library.js.zip", jszip_name, testonly)
 
-        # Expose java sources similar to java_library
+        # Expose java bye code and sources similar to java_library
+        java_jar = "lib" + base_name + ".jar"
+        _do_env_copy("lib" + base_name + "_java_library.jar", java_jar, testonly)
         java_src_jar = "lib" + base_name + "-src.jar"
         _do_env_copy("lib" + base_name + "_java_library-src.jar", java_src_jar, testonly)
 
