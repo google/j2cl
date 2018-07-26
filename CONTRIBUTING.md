@@ -19,4 +19,5 @@ Follow either of the two links above to access the appropriate CLA and instructi
     bazel test //javatests/...
 
 1. Submit a pull request.
+test
 
