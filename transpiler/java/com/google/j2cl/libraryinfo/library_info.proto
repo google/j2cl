@@ -21,8 +21,7 @@ message MemberInfo {
   bool public = 2;
   bool static = 3;
   bool js_accessible = 4;
-  repeated MethodInvocation methods_invoked = 5;
-  repeated string types_instantiated = 6;
+  repeated MethodInvocation invoked_methods = 5;
   SourcePosition start_position = 7;
   SourcePosition end_position = 8;
 }

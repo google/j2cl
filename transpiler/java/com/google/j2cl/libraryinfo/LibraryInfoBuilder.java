@@ -18,13 +18,12 @@ package com.google.j2cl.libraryinfo;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -87,19 +86,9 @@ public final class LibraryInfoBuilder {
 
   private static MemberInfo collectMemberInfo(Member member) {
     Set<MethodInvocation> methodInvocationSet = new LinkedHashSet<>();
-    Set<String> typesInstantiated = new LinkedHashSet<>();
 
     member.accept(
         new AbstractVisitor() {
-          @Override
-          public void exitMethodCall(MethodCall node) {
-            methodInvocationSet.add(
-                MethodInvocation.newBuilder()
-                    .setMethod(getMemberId(node.getTarget()))
-                    .setEnclosingType(getTypeId(node.getTarget().getEnclosingTypeDescriptor()))
-                    .build());
-          }
-
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
             // Register the JavaScriptConstructorReference as a fake static method invocation on the
@@ -127,8 +116,12 @@ public final class LibraryInfoBuilder {
           }
 
           @Override
-          public void exitNewInstance(NewInstance node) {
-            typesInstantiated.add(getTypeId(node.getTarget().getEnclosingTypeDescriptor()));
+          public void exitInvocation(Invocation node) {
+            methodInvocationSet.add(
+                MethodInvocation.newBuilder()
+                    .setMethod(getMemberId(node.getTarget()))
+                    .setEnclosingType(getTypeId(node.getTarget().getEnclosingTypeDescriptor()))
+                    .build());
           }
         });
 
@@ -137,8 +130,7 @@ public final class LibraryInfoBuilder {
         .setPublic(member.getDescriptor().getVisibility().isPublic())
         .setStatic(member.isStatic())
         .setJsAccessible(member.getDescriptor().isJsMember())
-        .addAllMethodsInvoked(methodInvocationSet)
-        .addAllTypesInstantiated(typesInstantiated)
+        .addAllInvokedMethods(methodInvocationSet)
         .build();
   }
 
