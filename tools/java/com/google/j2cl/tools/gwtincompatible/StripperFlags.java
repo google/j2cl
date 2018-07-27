@@ -29,10 +29,10 @@ public class StripperFlags {
   protected List<String> files = new ArrayList<>();
 
   @Option(
-    name = "-d",
-    metaVar = "<file>",
-    usage = "The location into which to place output srcjar."
-  )
+      name = "-d",
+      required = true,
+      metaVar = "<file>",
+      usage = "The location into which to place output srcjar.")
   protected String outputPath;
 
   protected static StripperFlags parse(String[] args, Problems problems) {
@@ -46,6 +46,7 @@ public class StripperFlags {
       message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
       message += "\nuse -help for a list of possible options in more details";
       problems.error(message);
+      problems.abort();
     }
     return flags;
   }
