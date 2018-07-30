@@ -40,6 +40,17 @@ java_test(
 )
 
 java_test(
+    name = "KytheIndexingMetadataTest",
+    srcs = ["KytheIndexingMetadataTest.java"],
+    data = [":jre_bundle_deploy.jar"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
+    deps = [
+        ":TranspilerTester",
+        "//third_party/java/junit",
+    ],
+)
+
+java_test(
     name = "JsInteropRestrictionsCheckerTest",
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],

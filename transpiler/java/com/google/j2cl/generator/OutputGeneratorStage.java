@@ -115,16 +115,15 @@ public class OutputGeneratorStage {
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
-        String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
-        J2clUtils.writeToFile(
-            outputPath.resolve(headerRelativePath), jsHeaderGenerator.renderOutput(), problems);
+        String javaScriptHeaderSource = jsHeaderGenerator.renderOutput();
 
         if (generateKytheIndexingMetadata) {
-          // Inline metadata so Kythe can create edges between this file and the Java source file.
-          String metadata = renderKytheIndexingMetadata(jsImplGenerator.getSourceMappings());
+          // Inline metadata so that Kythe can create edges between these files and the Java source
+          // file.
+          javaScriptHeaderSource +=
+              renderKytheIndexingMetadata(jsHeaderGenerator.getSourceMappings());
           javaScriptImplementationSource +=
-              // TODO(b/77961191): remove leading newline once the bug is fixed.
-              String.format("%n// Kythe Indexing Metadata:%n// %s", metadata);
+              renderKytheIndexingMetadata(jsImplGenerator.getSourceMappings());
         } else {
           String sourceMap = renderSourceMap(type, jsImplGenerator.getSourceMappings());
 
@@ -151,6 +150,10 @@ public class OutputGeneratorStage {
         String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();
         J2clUtils.writeToFile(
             outputPath.resolve(implRelativePath), javaScriptImplementationSource, problems);
+
+        String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
+        J2clUtils.writeToFile(
+            outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
         libraryInfo.addType(LibraryInfoBuilder.build(type, headerRelativePath, implRelativePath));
 
@@ -201,7 +204,9 @@ public class OutputGeneratorStage {
           );
     }
 
-    return metadata.toJson();
+    return String.format(
+        // TODO(b/77961191): remove leading newline once the bug is fixed.
+        "%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
   }
 
   private String renderSourceMap(

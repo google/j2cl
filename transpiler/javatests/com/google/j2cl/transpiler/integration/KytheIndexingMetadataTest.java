@@ -32,7 +32,12 @@ public class KytheIndexingMetadataTest extends TestCase {
             .assertTranspileSucceeds()
             .assertNoWarnings();
 
-    List<String> lines = result.getOutputSource("test/KytheIndexingMetadata.impl.java.js");
+    assertLinesContainsKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.java.js"));
+    assertLinesContainsKytheMetadata(
+        result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
+  }
+
+  private void assertLinesContainsKytheMetadata(List<String> lines) {
     assertTrue(lines.size() > 1);
     assertTrue(lines.get(lines.size() - 2).equals("// Kythe Indexing Metadata:"));
     String kytheMetadataLine = lines.get(lines.size() - 1);

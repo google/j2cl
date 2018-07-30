@@ -86,8 +86,13 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     String implementationPath = typeDeclaration.getImplModuleName();
     sourceBuilder.appendLines(
         "// Re-exports the implementation.",
-        "var " + className + " = goog.require('" + implementationPath + "');",
-        "exports = " + className + ";");
+        "var " + className + " = goog.require('" + implementationPath + "');");
+    sourceBuilder.newLine();
+    // TODO(b/110761106): This maps JavaScript type references to the Java type via the 'exports' in
+    // the header file. This may become obsolete once the linked bug is fixed. Fixing the bug will
+    // inline type aliases found in header files.
+    sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
+    sourceBuilder.append(" = " + className + ";");
     sourceBuilder.newLine();
     return sourceBuilder.build();
   }
