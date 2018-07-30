@@ -386,7 +386,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO(tdeegan): Move this to the ast in a normalization pass.
+  // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
     if (type.getNativeTypeDescriptor() != null
         && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
@@ -483,8 +483,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO(tdeegan): Move this to the ast in a normalization pass.
-  // TODO(tdeegan): may copy Objects methods (equals, hashCode, etc. ) as well.
+  // TODO(b/34928687): Move this to the ast in a normalization pass.
+  // TODO(b/80269359): may copy Objects methods (equals, hashCode, etc. ) as well.
   private void renderCopyMethod() {
     if (!type.getDeclaration().isJsFunctionImplementation()) {
       return; // Only render the $copy method for jsfunctions
@@ -510,11 +510,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO(tdeegan): Move this to the ast in a normalization pass.
+  // TODO(b/67965153): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
     if (type.getNativeTypeDescriptor() != null
-        && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
-      // JsFunction interface overlays do not need class metadata.
+        && (type.getNativeTypeDescriptor().isJsFunctionInterface()
+            || type.getNativeTypeDescriptor().isInterface())) {
+      // JsFunction and Native interface overlays do not need class metadata.
       sourceBuilder.newLines(2);
       return;
     }
