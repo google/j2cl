@@ -7,51 +7,27 @@ def j2cl_transpile(ctx, java_provider):
     js_files = ctx.files.js_srcs
 
     # Using source_jars of the java_library since that includes APT generated src.
-    src_jars = java_provider.source_jars
-    java_deps = java_provider.compilation_info.compilation_classpath
+    srcs = java_provider.source_jars + native_files + js_files
+    classpath = java_provider.compilation_info.compilation_classpath
 
-    # convert files to paths
-    deps_paths = [j.path for j in java_deps]
-    src_paths = [j.path for j in src_jars + native_files + js_files]
-
-    compiler_args = ["-output", ctx.outputs.zip_file.path]
-    compiler_args += ["-classpath", ctx.configuration.host_path_separator.join(deps_paths)]
-
-    # Generate readable_maps
-    if ctx.attr.readable_source_maps:
-        compiler_args += ["-readablesourcemaps"]
-
-    # Emit goog.module.declareLegacyNamespace(). This is a temporary measure
-    # while onboarding Docs, do not use.
+    args = ctx.actions.args()
+    args.use_param_file("@%s")
+    args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+    args.add("-output", ctx.outputs.zip_file)
     if ctx.attr.declare_legacy_namespace:
-        compiler_args += ["-declarelegacynamespaces"]
-
+        args.add("-declarelegacynamespaces")
+    if ctx.attr.readable_source_maps:
+        args.add("-readablesourcemaps")
     if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
-        compiler_args += ["-generatekytheindexingmetadata"]
+        args.add("-generatekytheindexingmetadata")
+    args.add_all(srcs)
 
-    # The transpiler expects each file path as a separate argument.
-    compiler_args += src_paths
-
-    # Create an action to write the flag file
-    compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
-    ctx.actions.write(
-        output = compiler_args_file,
-        content = "\n".join(compiler_args),
-    )
-
-    inputs = []
-    inputs += src_jars
-    inputs += js_files
-    inputs += native_files
-    inputs += list(java_deps)
-    inputs += [compiler_args_file]
-
-    ctx.action(
+    ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
-        inputs = inputs,
+        inputs = depset(srcs, transitive = [classpath]),
         outputs = [ctx.outputs.zip_file],
         executable = ctx.executable.transpiler,
-        arguments = ["@" + compiler_args_file.path],
+        arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
         mnemonic = "J2clTranspile",

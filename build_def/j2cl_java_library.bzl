@@ -41,19 +41,17 @@ def _impl(ctx):
 def _strip_gwt_incompatible(ctx):
     output_file = ctx.actions.declare_file(ctx.label.name + "_stripped-src.jar")
 
-    stripper_args = ["-d=" + output_file.path] + [f.path for f in ctx.files.srcs]
-    stripper_args_file = ctx.actions.declare_file(ctx.label.name + "_stripper.args")
-    ctx.actions.write(
-        output = stripper_args_file,
-        content = "\n".join(stripper_args),
-    )
+    args = ctx.actions.args()
+    args.use_param_file("@%s")
+    args.add("-d", output_file)
+    args.add_all(ctx.files.srcs)
 
     ctx.actions.run(
         progress_message = "Stripping @GwtIncompatible",
-        inputs = ctx.files.srcs + [stripper_args_file],
+        inputs = ctx.files.srcs,
         outputs = [output_file],
         executable = ctx.executable._stripper,
-        arguments = ["@" + stripper_args_file.path],
+        arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
         mnemonic = "GwtIncompatibleStripper",
