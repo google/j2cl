@@ -86,21 +86,14 @@ public final class LibraryInfoBuilder {
 
   private static MemberInfo collectMemberInfo(Member member) {
     Set<MethodInvocation> methodInvocationSet = new LinkedHashSet<>();
+    Set<String> referencedTypes = new LinkedHashSet<>();
 
     member.accept(
         new AbstractVisitor() {
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
-            // Register the JavaScriptConstructorReference as a fake static method invocation on the
-            // type referenced by the Javascript constructor. That ensure that the type is not
-            // pruned in case of the type is only accessed by references to its constructor
-            // function.
-            // TODO(b/111563903): find a better way to express class references.
-            methodInvocationSet.add(
-                MethodInvocation.newBuilder()
-                    .setMethod("%%JavaScriptConstructorReference%%")
-                    .setEnclosingType(getTypeId(node.getReferencedTypeDeclaration()))
-                    .build());
+            // In Javascript a Class is statically referenced by using it's constructor function.
+            referencedTypes.add(getTypeId(node.getReferencedTypeDeclaration()));
           }
 
           @Override
@@ -117,11 +110,16 @@ public final class LibraryInfoBuilder {
 
           @Override
           public void exitInvocation(Invocation node) {
+            String enclosingType = getTypeId(node.getTarget().getEnclosingTypeDescriptor());
             methodInvocationSet.add(
                 MethodInvocation.newBuilder()
                     .setMethod(getMemberId(node.getTarget()))
-                    .setEnclosingType(getTypeId(node.getTarget().getEnclosingTypeDescriptor()))
+                    .setEnclosingType(enclosingType)
                     .build());
+
+            if (node.getTarget().isConstructor()) {
+              referencedTypes.add(enclosingType);
+            }
           }
         });
 
@@ -131,6 +129,7 @@ public final class LibraryInfoBuilder {
         .setStatic(member.isStatic())
         .setJsAccessible(member.getDescriptor().isJsMember())
         .addAllInvokedMethods(methodInvocationSet)
+        .addAllReferencedTypes(referencedTypes)
         .build();
   }
 

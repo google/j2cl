@@ -8,30 +8,23 @@
         "public" : true,
         "static" : true,
         "jsAccessible" : true,
-        "invokedMethods" : [
-          {
-            "method" : "%%JavaScriptConstructorReference%%",
-            "enclosingType" : "java.lang.Object"
-          },
-          {"method" : "$clinit", "enclosingType" : "java.lang.Object"}
-        ]
+        "invokedMethods" :
+            [ {"method" : "$clinit", "enclosingType" : "java.lang.Object"} ],
+        "referencedTypes" : ["java.lang.Object"]
       },
       {
         "name" : "constructor",
         "public" : true,
-        "invokedMethods" :
-            [ {"method" : "constructor", "enclosingType" : "java.lang.Object"} ]
+        "invokedMethods" : [
+          {"method" : "constructor", "enclosingType" : "java.lang.Object"}
+        ],
+        "referencedTypes" : ["java.lang.Object"]
       },
       {
         "name" : "$create__",
         "public" : true,
         "static" : true,
         "invokedMethods" : [
-          {
-            "method" : "%%JavaScriptConstructorReference%%",
-            "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
-          },
           {
             "method" : "$clinit",
             "enclosingType" :
@@ -48,7 +41,9 @@
             "enclosingType" :
                 "com.google.j2cl.transpiler.readable.libraryinfo.Main"
           }
-        ]
+        ],
+        "referencedTypes" :
+            ["com.google.j2cl.transpiler.readable.libraryinfo.Main"]
       },
       {
         "name" :
@@ -66,11 +61,6 @@
         "jsAccessible" : true,
         "invokedMethods" : [
           {
-            "method" : "%%JavaScriptConstructorReference%%",
-            "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
-          },
-          {
             "method" : "$clinit",
             "enclosingType" :
                 "com.google.j2cl.transpiler.readable.libraryinfo.Main"
@@ -86,18 +76,15 @@
             "enclosingType" :
                 "com.google.j2cl.transpiler.readable.libraryinfo.Main"
           }
-        ]
+        ],
+        "referencedTypes" :
+            ["com.google.j2cl.transpiler.readable.libraryinfo.Main"]
       },
       {
         "name" :
             "m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main",
-        "invokedMethods" : [
-          {
-            "method" : "%%JavaScriptConstructorReference%%",
-            "enclosingType" : "console"
-          },
-          {"method" : "log", "enclosingType" : "console"}
-        ]
+        "invokedMethods" : [ {"method" : "log", "enclosingType" : "console"} ],
+        "referencedTypes" : ["console"]
       }
     ],
     "headerSourceFilePath" :
