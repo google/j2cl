@@ -227,7 +227,7 @@ public abstract class TypeDescriptor extends Node
       return true;
     }
 
-    if (getClass().equals(o.getClass())) {
+    if (o instanceof TypeDescriptor) {
       return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
     }
     return false;
