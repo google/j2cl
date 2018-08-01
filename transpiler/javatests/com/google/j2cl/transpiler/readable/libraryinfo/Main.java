@@ -27,6 +27,11 @@ public class Main {
     log("Foo");
   }
 
+  @Override
+  public String toString() {
+    return super.toString();
+  }
+
   @JsMethod(namespace = "console")
   public static native void log(Object o);
 }

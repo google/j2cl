@@ -8,16 +8,21 @@
         "public" : true,
         "static" : true,
         "jsAccessible" : true,
-        "invokedMethods" :
-            [ {"method" : "$clinit", "enclosingType" : "java.lang.Object"} ],
+        "invokedMethods" : [ {
+          "method" : "$clinit",
+          "enclosingType" : "java.lang.Object",
+          "kind" : "STATIC"
+        } ],
         "referencedTypes" : ["java.lang.Object"]
       },
       {
         "name" : "constructor",
         "public" : true,
-        "invokedMethods" : [
-          {"method" : "constructor", "enclosingType" : "java.lang.Object"}
-        ],
+        "invokedMethods" : [ {
+          "method" : "constructor",
+          "enclosingType" : "java.lang.Object",
+          "kind" : "STATIC"
+        } ],
         "referencedTypes" : ["java.lang.Object"]
       },
       {
@@ -28,12 +33,14 @@
           {
             "method" : "$clinit",
             "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main",
+            "kind" : "STATIC"
           },
           {
             "method" : "constructor",
             "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main",
+            "kind" : "INSTANTIATION"
           },
           {
             "method" :
@@ -63,12 +70,14 @@
           {
             "method" : "$clinit",
             "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main",
+            "kind" : "STATIC"
           },
           {
             "method" : "$create__",
             "enclosingType" :
-                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main",
+            "kind" : "STATIC"
           },
           {
             "method" :
@@ -83,8 +92,20 @@
       {
         "name" :
             "m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main",
-        "invokedMethods" : [ {"method" : "log", "enclosingType" : "console"} ],
+        "invokedMethods" : [
+          {"method" : "log", "enclosingType" : "console", "kind" : "STATIC"}
+        ],
         "referencedTypes" : ["console"]
+      },
+      {
+        "name" : "toString",
+        "public" : true,
+        "jsAccessible" : true,
+        "invokedMethods" : [ {
+          "method" : "toString",
+          "enclosingType" : "java.lang.Object",
+          "kind" : "STATIC"
+        } ]
       }
     ],
     "headerSourceFilePath" :

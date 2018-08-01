@@ -30,9 +30,16 @@ message MemberInfo {
   SourcePosition end_position = 8;
 }
 
+enum InvocationKind {
+  DYNAMIC = 0;
+  STATIC = 1;
+  INSTANTIATION = 2;
+}
+
 message MethodInvocation {
   string method = 1;
   string enclosing_type = 2;
+  InvocationKind kind = 3;
 }
 
 message SourcePosition {

@@ -24,6 +24,8 @@ import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -111,6 +113,7 @@ public final class LibraryInfoBuilder {
                 MethodInvocation.newBuilder()
                     .setMethod(getMemberId(node.getTarget()))
                     .setEnclosingType(enclosingType)
+                    .setKind(getInvocationKind(node))
                     .build());
 
             if (node.getTarget().isConstructor()) {
@@ -127,6 +130,23 @@ public final class LibraryInfoBuilder {
         .addAllInvokedMethods(methodInvocationSet)
         .addAllReferencedTypes(referencedTypes)
         .build();
+  }
+
+  private static InvocationKind getInvocationKind(Invocation node) {
+    if (node instanceof NewInstance) {
+      return InvocationKind.INSTANTIATION;
+    }
+
+    if (node.getTarget().isStatic()
+        // super call is always a direct call
+        || node.getQualifier() instanceof SuperReference
+        // A method call to a constructor is automatically a call to the super constructor,
+        // otherwise it would have been a NewInstance.
+        || node.getTarget().isConstructor()) {
+      return InvocationKind.STATIC;
+    }
+
+    return InvocationKind.DYNAMIC;
   }
 
   private static String getTypeId(Type type) {
