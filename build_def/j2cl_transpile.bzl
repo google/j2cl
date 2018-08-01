@@ -11,7 +11,7 @@ def j2cl_transpile(ctx, java_provider):
     classpath = java_provider.compilation_info.compilation_classpath
 
     args = ctx.actions.args()
-    args.use_param_file("@%s", use_always = True)
+    args.use_param_file("@%s")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", ctx.outputs.zip_file)
     if ctx.attr.declare_legacy_namespace:
