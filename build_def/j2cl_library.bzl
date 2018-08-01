@@ -144,7 +144,7 @@ def j2cl_library(
         java_library_kwargs["transpiler"] = _transpiler
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
-    dummy_class_name = base_name.replace("-", "_")
+    dummy_class_name = base_name.replace("-", "__")
     dummy_src = dummy_class_name + "_gen"
     native.genrule(
         name = dummy_src,
