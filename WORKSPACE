@@ -172,9 +172,30 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_closure/archive/master.zip",
 )
 
+# proto_library and java_proto_library rules implicitly depend on
+# @com_google_protobuf for protoc and proto runtimes.
+http_archive(
+    name = "com_google_protobuf",
+    strip_prefix = "protobuf-3.6.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.6.1.zip"],
+)
+
+# needed for protobuf
+bind(
+    name = "guava",
+    actual = "@com_google_guava//jar",
+)
+
+# needed for protobuf
+bind(
+    name = "gson",
+    actual = "@com_google_gson//jar",
+)
+
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
 
 closure_repositories(
     omit_args4j=True,
     omit_com_google_javascript_closure_library=True
 )
+

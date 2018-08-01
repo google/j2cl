@@ -21,11 +21,9 @@ java_library(
     exports = [":library_info_java_proto"],
     deps = [
         ":library_info_java_proto",
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/protobuf:protobuf_lite",
-        "//java/com/google/protobuf/util:json",
+        "//third_party:guava",
         "//third_party:jsr305_annotations",
+        "//third_party:protobuf_json",
         "//transpiler/java/com/google/j2cl/ast",
     ],
 )
