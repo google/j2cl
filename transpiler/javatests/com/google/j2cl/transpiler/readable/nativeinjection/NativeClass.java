@@ -19,4 +19,8 @@ public class NativeClass {
   public native String nativeInstanceMethod();
 
   public static native NativeClass nativeStaticMethod();
+
+  public static class InnerClass {
+    public native String nativeInstanceMethod();
+  }
 }

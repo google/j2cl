@@ -1,0 +1,99 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.nativeinjection.NativeClass$InnerClass.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nativeinjection.NativeClass.InnerClass$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class InnerClass extends j_l_Object {
+  /**
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'InnerClass()'.
+   * @return {!InnerClass}
+   * @public
+   */
+  static $create__() {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass_InnerClass__();
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'InnerClass()'.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass_InnerClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {?string}
+   * @public
+   */
+  // native m_nativeInstanceMethod__()
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InnerClass;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InnerClass);
+  }
+
+  /**
+   * @public
+   */
+  static $clinit() {
+    InnerClass.$clinit = function() {};
+    j_l_Object.$clinit();
+  }
+};
+
+$Util.$setClassMetadata(
+    InnerClass,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.nativeinjection.NativeClass$InnerClass'));
+
+
+
+/* NATIVE.JS EPILOG */
+
+const com_google_j2cl_transpiler_readable_nativeinjection_NativeClass_InnerClass =
+    InnerClass;
+
+/**
+ * @return {string}
+ * @public
+ */
+InnerClass.prototype.m_nativeInstanceMethod__ = function() {
+  return 'nativeInstanceMethod';
+};
+
+
+exports = InnerClass;
+//# sourceMappingURL=NativeClass$InnerClass.js.map
