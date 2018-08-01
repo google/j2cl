@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package j2cl;
 
+option java_multiple_files = true;
+option java_package = "com.google.j2cl.libraryinfo";
+
 message LibraryInfo {
   repeated TypeInfo type = 1;
 }

@@ -28,10 +28,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
-import com.google.protos.j2cl.LibraryInfoOuterClass.LibraryInfo;
-import com.google.protos.j2cl.LibraryInfoOuterClass.MemberInfo;
-import com.google.protos.j2cl.LibraryInfoOuterClass.MethodInvocation;
-import com.google.protos.j2cl.LibraryInfoOuterClass.TypeInfo;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
