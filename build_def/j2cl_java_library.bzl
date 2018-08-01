@@ -42,7 +42,8 @@ def _strip_gwt_incompatible(ctx):
     output_file = ctx.actions.declare_file(ctx.label.name + "_stripped-src.jar")
 
     args = ctx.actions.args()
-    args.use_param_file("@%s")
+    args.use_param_file("@%s", use_always = True)
+    args.set_param_file_format("multiline")
     args.add("-d", output_file)
     args.add_all(ctx.files.srcs)
 
