@@ -2,7 +2,9 @@
  * @fileoverview transpiled from
  * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.
  *
- * @suppress {const, extraRequire, missingOverride, missingRequire, suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables, uselessCode}
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
  */
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 
@@ -114,8 +116,8 @@ class MethodReferences extends j_l_Object {
          Producer.$adapt((() => {
            return $$qualifier1.m_isA__();
          })));
-    let biFunction =
-        /**@type {BiFunction<MethodReferences<C_T>, (Number|number), ?boolean>} */
+    let biFunction = /**@type {BiFunction<MethodReferences<C_T>,
+                            (Number|number), ?boolean>} */
         (BiFunction.$adapt(
             ((/** MethodReferences<*> */ arg0, /** (Number|number) */ arg1) => {
               return arg0
@@ -133,13 +135,10 @@ class MethodReferences extends j_l_Object {
           return Boolean.m_booleanValue__java_lang_Boolean(arg0$2$.m_isA__());
         })));
     let objectCapturingOuterProducer =
-        /**@type {Producer<ObjectCapturingOuter<C_T>>} */
-        (Producer.$adapt((() => {
-          return /**@type {!ObjectCapturingOuter<*>} */ (
-              ObjectCapturingOuter
-                  .$create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
-                      this));
-        })));
+        /**@type {Producer<ObjectCapturingOuter<C_T>>} */ (Producer
+                                                               .$adapt((() => {
+                                                                 return /**@type {!ObjectCapturingOuter<*>} */ (ObjectCapturingOuter.$create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(this));
+                                                               })));
     let arrayProducer = ArrayProducer.$adapt(((/** number */ arg0$3$) => {
       return /**@type {!Array<?number>} */ ($Arrays.$create([arg0$3$], Double));
     }));
