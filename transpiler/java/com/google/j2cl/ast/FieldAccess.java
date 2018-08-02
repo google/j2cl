@@ -18,18 +18,23 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.SourcePosition;
+import java.util.Optional;
 
-/**
- * Class for field access.
- */
+/** Class for field access. */
 @Visitable
 public class FieldAccess extends Expression implements MemberReference {
   @Visitable Expression qualifier;
   @Visitable FieldDescriptor targetFieldDescriptor;
+  final Optional<SourcePosition> sourcePosition;
 
-  private FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
+  private FieldAccess(
+      Expression qualifier,
+      FieldDescriptor targetFieldDescriptor,
+      Optional<SourcePosition> sourcePosition) {
     this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
     this.qualifier = checkNotNull(qualifier);
+    this.sourcePosition = checkNotNull(sourcePosition);
   }
 
   @Override
@@ -51,6 +56,10 @@ public class FieldAccess extends Expression implements MemberReference {
     return targetFieldDescriptor.getTypeDescriptor();
   }
 
+  public Optional<SourcePosition> getSourcePosition() {
+    return sourcePosition;
+  }
+
   @Override
   public boolean isIdempotent() {
     return getQualifier() == null || getQualifier().isIdempotent();
@@ -58,7 +67,7 @@ public class FieldAccess extends Expression implements MemberReference {
 
   @Override
   public FieldAccess clone() {
-    return new FieldAccess(qualifier.clone(), targetFieldDescriptor);
+    return new FieldAccess(qualifier.clone(), targetFieldDescriptor, sourcePosition);
   }
 
   @Override
@@ -75,6 +84,7 @@ public class FieldAccess extends Expression implements MemberReference {
 
     private FieldDescriptor targetFieldDescriptor;
     private Expression qualifier;
+    private Optional<SourcePosition> sourcePosition = Optional.empty();
 
     public static Builder from(FieldDescriptor targetFieldDescriptor) {
       return newBuilder().setTargetFieldDescriptor(targetFieldDescriptor);
@@ -87,7 +97,8 @@ public class FieldAccess extends Expression implements MemberReference {
     public static Builder from(FieldAccess fieldAccess) {
       return newBuilder()
           .setTargetFieldDescriptor(fieldAccess.getTarget())
-          .setQualifier(fieldAccess.getQualifier());
+          .setQualifier(fieldAccess.getQualifier())
+          .setSourcePosition(fieldAccess.getSourcePosition());
     }
 
     public Builder setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {
@@ -100,9 +111,16 @@ public class FieldAccess extends Expression implements MemberReference {
       return this;
     }
 
+    public Builder setSourcePosition(Optional<SourcePosition> sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
     public FieldAccess build() {
       return new FieldAccess(
-          AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor), targetFieldDescriptor);
+          AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor),
+          targetFieldDescriptor,
+          sourcePosition);
     }
   }
 }

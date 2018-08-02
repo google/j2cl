@@ -60,8 +60,10 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.common.SourcePosition;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -160,9 +162,9 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformFieldAccess(FieldAccess fieldAccess) {
-
         String fieldMangledName = ManglingNameUtils.getMangledName(fieldAccess.getTarget());
-        renderQualifiedName(fieldAccess.getQualifier(), fieldMangledName);
+        renderQualifiedName(
+            fieldAccess.getQualifier(), fieldMangledName, fieldAccess.getSourcePosition());
         return null;
       }
 
@@ -278,11 +280,16 @@ public class ExpressionTranspiler {
       }
 
       private void renderQualifiedName(Expression qualifier, String jsPropertyName) {
+        renderQualifiedName(qualifier, jsPropertyName, /* sourcePosition */ Optional.empty());
+      }
+
+      private void renderQualifiedName(
+          Expression qualifier, String jsPropertyName, Optional<SourcePosition> sourcePosition) {
         if (shouldRenderQualifier(qualifier)) {
           process(qualifier);
           sourceBuilder.append(".");
         }
-        sourceBuilder.append(jsPropertyName);
+        sourceBuilder.emitWithMapping(sourcePosition, () -> sourceBuilder.append(jsPropertyName));
       }
 
       @SuppressWarnings("ReferenceEquality")

@@ -104,6 +104,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
@@ -270,6 +271,7 @@ public class CompilationUnitBuilder {
             Field.Builder.from(fieldDescriptor)
                 .setCapturedVariable(capturedVariable)
                 .setSourcePosition(type.getSourcePosition())
+                .setNameSourcePosition(capturedVariable.getSourcePosition())
                 .build());
       }
       if (JdtUtils.capturesEnclosingInstance(typeBinding)) {
@@ -307,6 +309,7 @@ public class CompilationUnitBuilder {
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
+          .setNameSourcePosition(Optional.of(getSourcePosition(enumConstantDeclaration.getName())))
           .build();
     }
 
@@ -326,6 +329,7 @@ public class CompilationUnitBuilder {
             Field.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
                 .setSourcePosition(getSourcePosition(fieldDeclaration))
+                .setNameSourcePosition(Optional.of(getSourcePosition(fragment.getName())))
                 .build();
         fields.add(field);
       }

@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /** Field declaration node. */
@@ -26,17 +27,21 @@ import javax.annotation.Nullable;
 public class Field extends Member implements HasJsNameInfo {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
-  private Variable capturedVariable;
+  private final Variable capturedVariable;
+  // TODO(b/112150736): generalize concept of the source position for names to members.
+  private final Optional<SourcePosition> nameSourcePosition;
 
   private Field(
       SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
-      Variable capturedVariable) {
+      Variable capturedVariable,
+      Optional<SourcePosition> nameSourcePosition) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
     this.capturedVariable = capturedVariable;
+    this.nameSourcePosition = checkNotNull(nameSourcePosition);
   }
 
   @Override
@@ -55,6 +60,10 @@ public class Field extends Member implements HasJsNameInfo {
   @Override
   public String getQualifiedBinaryName() {
     return null;
+  }
+
+  public Optional<SourcePosition> getNameSourcePosition() {
+    return nameSourcePosition;
   }
 
   public boolean hasInitializer() {
@@ -100,6 +109,7 @@ public class Field extends Member implements HasJsNameInfo {
     private Expression initializer;
     private Variable capturedVariable;
     private SourcePosition sourcePosition;
+    private Optional<SourcePosition> nameSourcePosition = Optional.empty();
 
     public static Builder from(Field field) {
       Builder builder = new Builder();
@@ -107,6 +117,7 @@ public class Field extends Member implements HasJsNameInfo {
       builder.initializer = field.getInitializer();
       builder.capturedVariable = field.getCapturedVariable();
       builder.sourcePosition = field.getSourcePosition();
+      builder.nameSourcePosition = field.getNameSourcePosition();
       return builder;
     }
 
@@ -139,8 +150,14 @@ public class Field extends Member implements HasJsNameInfo {
       return this;
     }
 
+    public Builder setNameSourcePosition(Optional<SourcePosition> nameSourcePosition) {
+      this.nameSourcePosition = nameSourcePosition;
+      return this;
+    }
+
     public Field build() {
-      return new Field(sourcePosition, fieldDescriptor, initializer, capturedVariable);
+      return new Field(
+          sourcePosition, fieldDescriptor, initializer, capturedVariable, nameSourcePosition);
     }
   }
 }

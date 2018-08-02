@@ -710,11 +710,17 @@ public class AstUtils {
     boolean isPublic = field.getDescriptor().getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD;
 
     Expression declarationExpression =
-        field.getInitializer() == null
-            ? FieldAccess.newBuilder().setTargetFieldDescriptor(field.getDescriptor()).build()
-            : BinaryExpression.Builder.asAssignmentTo(field)
-                .setRightOperand(field.getInitializer())
-                .build();
+        FieldAccess.newBuilder()
+            .setTargetFieldDescriptor(field.getDescriptor())
+            .setSourcePosition(field.getNameSourcePosition())
+            .build();
+
+    if (field.getInitializer() != null) {
+      declarationExpression =
+          BinaryExpression.Builder.asAssignmentTo(declarationExpression)
+              .setRightOperand(field.getInitializer())
+              .build();
+    }
 
     return JsDocFieldDeclaration.newBuilder()
         .setExpression(declarationExpression)
