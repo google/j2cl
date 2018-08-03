@@ -91,7 +91,7 @@ public class ForStatement extends Statement {
     private List<Expression> initializers = new ArrayList<>();
     private Expression conditionExpression;
     private List<Expression> updates = new ArrayList<>();
-    private Block body;
+    private Block.Builder bodyBuilder;
     private SourcePosition sourcePosition;
 
     public static Builder from(ForStatement forStatement) {
@@ -127,18 +127,15 @@ public class ForStatement extends Statement {
     }
 
     public Builder setBody(Statement body) {
-      this.body =
+      this.bodyBuilder =
           (body instanceof Block)
-              ? (Block) body
-              : Block.newBuilder()
-                  .setSourcePosition(body.getSourcePosition())
-                  .setStatements(body)
-                  .build();
+              ? Block.Builder.from((Block) body)
+              : Block.newBuilder().setSourcePosition(body.getSourcePosition()).setStatements(body);
       return this;
     }
 
     public Builder addStatement(int index, Statement statement) {
-      this.body.getStatements().add(index, statement);
+      this.bodyBuilder.addStatement(index, statement);
       return this;
     }
 
@@ -148,7 +145,8 @@ public class ForStatement extends Statement {
     }
 
     public ForStatement build() {
-      return new ForStatement(sourcePosition, conditionExpression, body, initializers, updates);
+      return new ForStatement(
+          sourcePosition, conditionExpression, bodyBuilder.build(), initializers, updates);
     }
   }
 }

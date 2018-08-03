@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
@@ -27,15 +25,11 @@ import java.util.List;
 /** Block Statement. */
 @Visitable
 public class Block extends Statement {
-  @Visitable List<Statement> statements = new ArrayList<>();
+  @Visitable List<Statement> statements;
 
-  public Block(SourcePosition sourcePosition, List<Statement> statements) {
+  private Block(SourcePosition sourcePosition, List<Statement> statements) {
     super(sourcePosition);
-    this.statements.addAll(checkNotNull(statements));
-  }
-
-  public Block(SourcePosition sourcePosition) {
-    super(sourcePosition);
+    this.statements = statements;
   }
 
   public List<Statement> getStatements() {
@@ -43,7 +37,7 @@ public class Block extends Statement {
   }
 
   public boolean isEmpty() {
-    return getStatements().isEmpty();
+    return statements.stream().allMatch(s -> s instanceof EmptyStatement);
   }
 
   @Override
@@ -68,7 +62,7 @@ public class Block extends Statement {
     private final List<Statement> statements = new ArrayList<>();
     private SourcePosition sourcePosition;
 
-    public Builder from(Block block) {
+    public static Builder from(Block block) {
       return newBuilder()
           .setSourcePosition(block.getSourcePosition())
           .setStatements(block.getStatements());
@@ -89,13 +83,18 @@ public class Block extends Statement {
       return this;
     }
 
+    public Builder addStatement(int index, Statement statement) {
+      this.statements.add(index, statement);
+      return this;
+    }
+
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
     public Block build() {
-      return new Block(sourcePosition, statements);
+      return new Block(sourcePosition, new ArrayList<>(statements));
     }
   }
 }
