@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.libraryinfo;
 
+import static com.google.j2cl.ast.MethodDescriptor.CLINIT_METHOD_NAME;
+
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
@@ -71,11 +73,6 @@ public final class LibraryInfoBuilder {
     typeInfoBuilder.setJsInstantiable(isJsInstantiable);
 
     for (Member member : type.getMembers()) {
-      if (member.isNative()) {
-        // native members are not emitted so we don't need to visit them.
-        continue;
-      }
-
       typeInfoBuilder.addMember(collectMemberInfo(member));
     }
 
@@ -109,6 +106,7 @@ public final class LibraryInfoBuilder {
           @Override
           public void exitInvocation(Invocation node) {
             String enclosingType = getTypeId(node.getTarget().getEnclosingTypeDescriptor());
+
             methodInvocationSet.add(
                 MethodInvocation.newBuilder()
                     .setMethod(getMemberId(node.getTarget()))
@@ -122,11 +120,28 @@ public final class LibraryInfoBuilder {
           }
         });
 
+    if (member.isStatic() && member.isNative()) {
+      // hand-written native static method could potentially make a call to $clinit
+      methodInvocationSet.add(
+          MethodInvocation.newBuilder()
+              .setMethod(CLINIT_METHOD_NAME)
+              .setEnclosingType(getTypeId(member.getDescriptor().getEnclosingTypeDescriptor()))
+              .build());
+    }
+
+    String memberName = getMemberId(member.getDescriptor());
+    // $clinit is marked as a JsMethod so that the name is preserved (for example to have a
+    // consistent name for calling from handwritten methods in native.js files within the same
+    // class). Because $clinit is not really considered to be accessible from arbitrary JavaScript,
+    // we don't consider it jsAccessible.
+    boolean isJsAccessible =
+        member.getDescriptor().isJsMember() && !CLINIT_METHOD_NAME.equals(memberName);
+
     return MemberInfo.newBuilder()
-        .setName(getMemberId(member.getDescriptor()))
+        .setName(memberName)
         .setPublic(member.getDescriptor().getVisibility().isPublic())
         .setStatic(member.isStatic())
-        .setJsAccessible(member.getDescriptor().isJsMember())
+        .setJsAccessible(isJsAccessible)
         .addAllInvokedMethods(methodInvocationSet)
         .addAllReferencedTypes(referencedTypes)
         .build();
