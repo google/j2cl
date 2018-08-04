@@ -79,6 +79,41 @@ class TryCatch extends j_l_Object {
    * @return {void}
    * @public
    */
+  m_testEmptyThrowableCatch__() {
+    try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+    } catch (__$exc) {
+    }
+    try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+    } catch (__$exc$1$) {
+      __$exc$1$ = $Exceptions.toJava(__$exc$1$);
+      if (Exception.$isInstance(__$exc$1$)) {
+      } else {
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testEmptyThrowableRethrow__() {
+    try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+    } catch (__$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      {
+        let e = /**@type {Throwable} */ (__$exc);
+        throw $Exceptions.toJs(e);
+      }
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
   m_testFinally__() {
     try {
       $Asserts.$assert(true);
@@ -101,12 +136,10 @@ class TryCatch extends j_l_Object {
         throw $Exceptions.toJs(Exception.$create__());
       } catch (__$exc) {
         __$exc = $Exceptions.toJava(__$exc);
-        if (Throwable.$isInstance(__$exc)) {
+        {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
           $primaryExc = $exceptionFromTry;
           throw $Exceptions.toJs($exceptionFromTry);
-        } else {
-          throw $Exceptions.toJs(__$exc);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
@@ -118,7 +151,6 @@ class TryCatch extends j_l_Object {
     } catch (__$exc$1$) {
       __$exc$1$ = $Exceptions.toJava(__$exc$1$);
       if (Exception.$isInstance(__$exc$1$)) {
-        let e = /**@type {Exception} */ (__$exc$1$);
       } else {
         throw $Exceptions.toJs(__$exc$1$);
       }
@@ -142,12 +174,10 @@ class TryCatch extends j_l_Object {
         throw $Exceptions.toJs(Exception.$create__());
       } catch (__$exc) {
         __$exc = $Exceptions.toJava(__$exc);
-        if (Throwable.$isInstance(__$exc)) {
+        {
           let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
           $primaryExc = $exceptionFromTry;
           throw $Exceptions.toJs($exceptionFromTry);
-        } else {
-          throw $Exceptions.toJs(__$exc);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose($resource$1$, $primaryExc);
@@ -159,7 +189,6 @@ class TryCatch extends j_l_Object {
     } catch (__$exc$1$) {
       __$exc$1$ = $Exceptions.toJava(__$exc$1$);
       if (Exception.$isInstance(__$exc$1$)) {
-        let e = /**@type {Exception} */ (__$exc$1$);
       } else {
         throw $Exceptions.toJs(__$exc$1$);
       }
@@ -182,7 +211,6 @@ class TryCatch extends j_l_Object {
         } catch (__$exc$1$) {
           __$exc$1$ = $Exceptions.toJava(__$exc$1$);
           if (Exception.$isInstance(__$exc$1$)) {
-            let ie = /**@type {Exception} */ (__$exc$1$);
           } else {
             throw $Exceptions.toJs(__$exc$1$);
           }
@@ -262,7 +290,6 @@ class TryCatch extends j_l_Object {
     NullPointerException =
         goog.module.get('java.lang.NullPointerException$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
-    Throwable = goog.module.get('java.lang.Throwable$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');

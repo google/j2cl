@@ -27,6 +27,30 @@ public class TryCatch {
     }
   }
 
+  public void testEmptyThrowableCatch() throws Throwable {
+    try {
+      throw new ClassCastException();
+    } catch (Throwable e) {
+      // expected empty body.
+    }
+
+    try {
+      throw new ClassCastException();
+    } catch (Exception e) {
+      // expected empty body.
+    } catch (Throwable e) {
+      // expected empty body.
+    }
+  }
+
+  public void testEmptyThrowableRethrow() throws Throwable {
+    try {
+      throw new ClassCastException();
+    } catch (Throwable e) {
+      throw e;
+    }
+  }
+
   public void testFinally() {
     try {
       assert true;

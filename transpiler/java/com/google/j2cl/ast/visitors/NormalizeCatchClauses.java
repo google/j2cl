@@ -24,6 +24,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
@@ -38,7 +39,6 @@ import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.common.SourcePosition;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -137,28 +137,17 @@ public class NormalizeCatchClauses extends NormalizationPass {
             ? ((UnionTypeDescriptor) exceptionTypeDescriptor).getUnionTypeDescriptors()
             : Collections.singletonList(exceptionTypeDescriptor);
     Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
-    SourcePosition currentClauseSourcePosition = clause.getBody().getSourcePosition();
-    List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
-    ExpressionStatement assignment =
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(
-                catchVariable,
-                JsDocCastExpression.newBuilder()
-                    .setExpression(exceptionVariable.getReference())
-                    .setCastType(catchVariable.getTypeDescriptor())
-                    .build())
-            .build()
-            .makeStatement(currentClauseSourcePosition);
-    catchClauseBody.add(0, assignment);
+    Statement transformedCatchBody =
+        transformCatchBody(clause.getBody(), catchVariable, exceptionVariable);
+
+    if (TypeDescriptors.isJavaLangThrowable(exceptionTypeDescriptor)) {
+      return transformedCatchBody;
+    }
 
     return IfStatement.newBuilder()
-        .setSourcePosition(currentClauseSourcePosition)
+        .setSourcePosition(clause.getBody().getSourcePosition())
         .setConditionExpression(condition)
-        .setThenStatement(
-            Block.newBuilder()
-                .setSourcePosition(currentClauseSourcePosition)
-                .setStatements(catchClauseBody)
-                .build())
+        .setThenStatement(transformedCatchBody)
         .setElseStatement(
             bodyBuilder(
                 firstClauseSourcePosition, clauses.subList(1, clauses.size()), exceptionVariable))
@@ -184,5 +173,29 @@ public class NormalizeCatchClauses extends NormalizationPass {
                         .build())
             .collect(toImmutableList());
     return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, instanceofs);
+  }
+
+  private static Statement transformCatchBody(
+      Block catchBody, Variable catchVariable, Variable exceptionVariable) {
+    if (catchBody.isEmpty()) {
+      return new EmptyStatement(catchBody.getSourcePosition());
+    }
+
+    ExpressionStatement assignment =
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclaration(
+                catchVariable,
+                JsDocCastExpression.newBuilder()
+                    .setExpression(exceptionVariable.getReference())
+                    .setCastType(catchVariable.getTypeDescriptor())
+                    .build())
+            .build()
+            .makeStatement(catchBody.getSourcePosition());
+
+    return Block.newBuilder()
+        .setSourcePosition(catchBody.getSourcePosition())
+        .addStatement(assignment)
+        .addStatements(catchBody.getStatements())
+        .build();
   }
 }

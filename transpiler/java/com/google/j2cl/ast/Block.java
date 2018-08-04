@@ -74,8 +74,7 @@ public class Block extends Statement {
 
     public Builder setStatements(Collection<Statement> statements) {
       this.statements.clear();
-      this.statements.addAll(statements);
-      return this;
+      return addStatements(statements);
     }
 
     public Builder addStatement(Statement statement) {
@@ -85,6 +84,11 @@ public class Block extends Statement {
 
     public Builder addStatement(int index, Statement statement) {
       this.statements.add(index, statement);
+      return this;
+    }
+
+    public Builder addStatements(Collection<Statement> statements) {
+      this.statements.addAll(statements);
       return this;
     }
 

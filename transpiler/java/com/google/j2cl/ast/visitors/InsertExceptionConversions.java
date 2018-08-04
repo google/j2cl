@@ -58,6 +58,9 @@ public class InsertExceptionConversions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
+            if (catchClause.getBody().isEmpty()) {
+              return catchClause;
+            }
 
             MethodCall toJavaCall =
                 RuntimeMethods.createExceptionsMethodCall(

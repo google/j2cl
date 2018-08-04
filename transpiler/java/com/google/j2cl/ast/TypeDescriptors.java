@@ -230,6 +230,10 @@ public class TypeDescriptors {
     return typeDescriptor.hasSameRawType(get().javaLangEnum);
   }
 
+  public static boolean isJavaLangThrowable(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.hasSameRawType(get().javaLangThrowable);
+  }
+
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         && !isPrimitiveBoolean(typeDescriptor)

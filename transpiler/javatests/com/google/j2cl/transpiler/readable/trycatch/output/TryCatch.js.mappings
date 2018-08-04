@@ -45,6 +45,49 @@
 [{
       throw e;
     }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
+[testEmptyThrowableCatch] => [m_testEmptyThrowableCatch__]
+[try {
+      throw new ClassCastException();
+...      // expected empty body.
+    }] => [try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+...
+    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[try {
+      throw new ClassCastException();
+...      // expected empty body.
+    }] => [try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+...      }
+    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[{
+      // expected empty body.
+    }] => [__$exc$1$ = $Exceptions.toJava(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[{
+      // expected empty body.
+    }] => [if (Exception.$isInstance(__$exc$1$)) {
+
+...
+      }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
+[testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__]
+[try {
+      throw new ClassCastException();
+...      throw e;
+    }] => [try {
+      throw $Exceptions.toJs(ClassCastException.$create__());
+...      }
+    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
+[{
+      throw e;
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
+[{
+      throw e;
+    }] => [let e = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
+[e] => [e] "e"
+[throw e;] => [throw $Exceptions.toJs(e);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
 [testFinally] => [m_testFinally__]
 [try {
       assert true;
@@ -99,13 +142,6 @@
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [if (Throwable.$isInstance(__$exc)) {
-          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
-...          throw $Exceptions.toJs(__$exc);
-        }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
-[try (ClosableThing thing = new ClosableThing();
-        ClosableThing thing2 = new ClosableThing()) {
-...      // expected empty body.
     }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
@@ -115,10 +151,6 @@
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
     }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
-[try (ClosableThing thing = new ClosableThing();
-        ClosableThing thing2 = new ClosableThing()) {
-...      // expected empty body.
-    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
@@ -143,13 +175,9 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc$1$)) {
-        let e = /**@type {Exception} */ (__$exc$1$);
+
 ...        throw $Exceptions.toJs(__$exc$1$);
       }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
-[{
-      // expected empty body.
-    }] => [let e = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
-[e] => [e] "e"
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
@@ -200,13 +228,6 @@
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [if (Throwable.$isInstance(__$exc)) {
-          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
-...          throw $Exceptions.toJs(__$exc);
-        }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
-[try (thing; thing2) {
-      throw new Exception();
-...      // expected empty body.
     }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
@@ -216,10 +237,6 @@
       throw new Exception();
 ...      // expected empty body.
     }] => [throw $Exceptions.toJs($exceptionFromTry);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
-[try (thing; thing2) {
-      throw new Exception();
-...      // expected empty body.
-    }] => [throw $Exceptions.toJs(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
@@ -244,13 +261,9 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc$1$)) {
-        let e = /**@type {Exception} */ (__$exc$1$);
+
 ...        throw $Exceptions.toJs(__$exc$1$);
       }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
-[{
-      // expected empty body.
-    }] => [let e = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
-[e] => [e] "e"
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
@@ -293,13 +306,9 @@
 [{
         // expected empty body.
       }] => [if (Exception.$isInstance(__$exc$1$)) {
-            let ie = /**@type {Exception} */ (__$exc$1$);
+
 ...            throw $Exceptions.toJs(__$exc$1$);
           }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
-[{
-        // expected empty body.
-      }] => [let ie = /**@type {Exception} */ (__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
-[ie] => [ie] "ie"
 [{
         // expected empty body.
       }] => [throw $Exceptions.toJs(__$exc$1$);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
