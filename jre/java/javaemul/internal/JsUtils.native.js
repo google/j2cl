@@ -59,20 +59,3 @@ javaemul_internal_JsUtils
   javaemul_internal_JsUtils.$clinit();
   map[key] = value;
 };
-
-/**
- * @param {*} map
- * @param {string} key
- * @param {*} value
- * @return {*}
- */
-javaemul_internal_JsUtils
-    .m_setPropertySafe__java_lang_Object__java_lang_String__java_lang_Object =
-    function(map, key, value) {
-  javaemul_internal_JsUtils.$clinit();
-  try {
-    // This may throw exception in strict mode.
-    map[key] = value;
-  } catch (ignored) {
-  }
-};
