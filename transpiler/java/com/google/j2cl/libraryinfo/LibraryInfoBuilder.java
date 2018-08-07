@@ -32,8 +32,11 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
@@ -72,16 +75,51 @@ public final class LibraryInfoBuilder {
 
     typeInfoBuilder.setJsInstantiable(isJsInstantiable);
 
+    // At this stage a type can have multiple initialization blocks related to $clinit in the ast.
+    // Also, getter and setter are defined for static field and both will be collected under
+    // the name of the field.
+    // So we have potentially several members that will create MemberInfo with the same name.
+    // We will reuse builders when those cases happen.
+    Map<String, MemberInfo.Builder> memberInfoBuilderByName =
+        new LinkedHashMap<>(type.getMembers().size());
+
     for (Member member : type.getMembers()) {
-      typeInfoBuilder.addMember(collectMemberInfo(member));
+      String memberName = getMemberId(member.getDescriptor());
+      // $clinit is marked as a JsMethod so that the name is preserved (for example to have a
+      // consistent name for calling from handwritten methods in native.js files within the same
+      // class). Because $clinit is not really considered to be accessible from arbitrary
+      // JavaScript, we don't consider it jsAccessible.
+      boolean isJsAccessible =
+          member.getDescriptor().isJsMember() && !CLINIT_METHOD_NAME.equals(memberName);
+
+      MemberInfo.Builder builder =
+          memberInfoBuilderByName.computeIfAbsent(
+              memberName,
+              m ->
+                  MemberInfo.newBuilder()
+                      .setName(memberName)
+                      .setPublic(member.getDescriptor().getVisibility().isPublic())
+                      .setStatic(member.isStatic())
+                      .setJsAccessible(isJsAccessible));
+
+      collectReferencedTypesAndMethodInvocations(member, builder);
     }
 
-    return typeInfoBuilder.build();
+    return typeInfoBuilder
+        .addAllMember(
+            memberInfoBuilderByName
+                .values()
+                .stream()
+                .map(MemberInfo.Builder::build)
+                .collect(Collectors.toList()))
+        .build();
   }
 
-  private static MemberInfo collectMemberInfo(Member member) {
-    Set<MethodInvocation> methodInvocationSet = new LinkedHashSet<>();
-    Set<String> referencedTypes = new LinkedHashSet<>();
+  private static void collectReferencedTypesAndMethodInvocations(
+      Member member, MemberInfo.Builder memberInfoBuilder) {
+    Set<MethodInvocation> methodInvocationSet =
+        new LinkedHashSet<>(memberInfoBuilder.getInvokedMethodsList());
+    Set<String> referencedTypes = new LinkedHashSet<>(memberInfoBuilder.getReferencedTypesList());
 
     member.accept(
         new AbstractVisitor() {
@@ -129,22 +167,11 @@ public final class LibraryInfoBuilder {
               .build());
     }
 
-    String memberName = getMemberId(member.getDescriptor());
-    // $clinit is marked as a JsMethod so that the name is preserved (for example to have a
-    // consistent name for calling from handwritten methods in native.js files within the same
-    // class). Because $clinit is not really considered to be accessible from arbitrary JavaScript,
-    // we don't consider it jsAccessible.
-    boolean isJsAccessible =
-        member.getDescriptor().isJsMember() && !CLINIT_METHOD_NAME.equals(memberName);
-
-    return MemberInfo.newBuilder()
-        .setName(memberName)
-        .setPublic(member.getDescriptor().getVisibility().isPublic())
-        .setStatic(member.isStatic())
-        .setJsAccessible(isJsAccessible)
+    memberInfoBuilder
+        .clearReferencedTypes()
+        .clearInvokedMethods()
         .addAllInvokedMethods(methodInvocationSet)
-        .addAllReferencedTypes(referencedTypes)
-        .build();
+        .addAllReferencedTypes(referencedTypes);
   }
 
   private static InvocationKind getInvocationKind(Invocation node) {

@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.readable.libraryinfo;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
+  public static String STATIC_FIELD = "STATIC_FIELD";
+
   @JsMethod
   public static void entryPoint() {
     new Main().execute();

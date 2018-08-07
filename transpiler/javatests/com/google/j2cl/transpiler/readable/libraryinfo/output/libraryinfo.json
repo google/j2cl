@@ -7,12 +7,23 @@
         "name" : "$clinit",
         "public" : true,
         "static" : true,
-        "invokedMethods" : [ {
-          "method" : "$clinit",
-          "enclosingType" : "java.lang.Object",
-          "kind" : "STATIC"
-        } ],
-        "referencedTypes" : ["java.lang.Object"]
+        "invokedMethods" : [
+          {
+            "method" : "$clinit",
+            "enclosingType" : "java.lang.Object",
+            "kind" : "STATIC"
+          },
+          {
+            "method" :
+                "$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main",
+            "enclosingType" :
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+          }
+        ],
+        "referencedTypes" : [
+          "java.lang.Object",
+          "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+        ]
       },
       {
         "name" : "constructor",
@@ -116,6 +127,34 @@
           "enclosingType" :
               "com.google.j2cl.transpiler.readable.libraryinfo.Main"
         } ]
+      },
+      {
+        "name" :
+            "$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main",
+        "public" : true,
+        "static" : true
+      },
+      {
+        "name" :
+            "f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main",
+        "public" : true,
+        "static" : true,
+        "invokedMethods" : [
+          {
+            "method" : "$clinit",
+            "enclosingType" :
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main",
+            "kind" : "STATIC"
+          },
+          {
+            "method" :
+                "$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main",
+            "enclosingType" :
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main"
+          }
+        ],
+        "referencedTypes" :
+            ["com.google.j2cl.transpiler.readable.libraryinfo.Main"]
       }
     ],
     "headerSourceFilePath" :
