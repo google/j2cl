@@ -37,6 +37,15 @@ class IntegerSupplier {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    IntegerSupplier.$clinit = (() => {});
+    IntegerSupplier.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,10 +81,9 @@ class IntegerSupplier {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    IntegerSupplier.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier.$LambdaAdaptor$impl');
   }

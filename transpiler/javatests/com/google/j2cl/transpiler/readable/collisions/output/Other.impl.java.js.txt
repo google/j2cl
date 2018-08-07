@@ -70,6 +70,16 @@ class Other extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Other.$clinit = (() => {});
+    Other.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -88,12 +98,10 @@ class Other extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Other.$clinit = function() {};
+  static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

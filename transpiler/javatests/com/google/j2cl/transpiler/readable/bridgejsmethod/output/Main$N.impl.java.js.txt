@@ -60,6 +60,16 @@ class N extends j_l_Object {
   m_getB__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    N.$clinit = (() => {});
+    N.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -78,12 +88,9 @@ class N extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    N.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

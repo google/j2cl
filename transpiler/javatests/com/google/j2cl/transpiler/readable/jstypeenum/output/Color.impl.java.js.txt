@@ -193,32 +193,12 @@ class Color extends Enum {
   }
 
   /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof Color;
-  }
-
-  /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Color);
-  }
-
-  /**
+   * @return {void}
    * @public
    */
   static $clinit() {
-    Color.$clinit = function() {};
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    Color.$clinit = (() => {});
+    Color.$loadModules();
     Enum.$clinit();
     Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color =
         Color.$create__java_lang_String__int(
@@ -238,6 +218,34 @@ class Color extends Enum {
     Color
         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
         null;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Color;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Color);
+  }
+
+  /**
+   * @private
+   */
+  static $loadModules() {
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 };
 

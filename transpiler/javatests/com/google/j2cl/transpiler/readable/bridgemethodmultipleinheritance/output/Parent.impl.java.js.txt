@@ -91,6 +91,16 @@ class Parent extends SuperParent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Parent.$clinit = (() => {});
+    Parent.$loadModules();
+    SuperParent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -109,14 +119,12 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Parent.$clinit = function() {};
+  static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
     Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    SuperParent.$clinit();
   }
 };
 

@@ -51,5 +51,20 @@
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$2.wrap"
 [{
               @Override
+              public Functional<T> wrap(Functional<T> f) {
+                return null;
+              }
+            }] => [$clinit]
+[{
+              @Override
+...              }
+            }] => [$2.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$2.<clinit>"
+[{
+              @Override
+...              }
+            }] => [$2.$loadModules();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$2.<clinit>"
+[{
+              @Override
 ...              }
             }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$2.<clinit>"

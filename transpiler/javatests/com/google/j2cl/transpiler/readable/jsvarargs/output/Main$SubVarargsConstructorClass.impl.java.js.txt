@@ -41,6 +41,15 @@ class SubVarargsConstructorClass extends Object {
       i, args) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubVarargsConstructorClass.$clinit = (() => {});
+    SubVarargsConstructorClass.$loadModules();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -59,10 +68,9 @@ class SubVarargsConstructorClass extends Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubVarargsConstructorClass.$clinit = function() {};
+  static $loadModules() {
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }

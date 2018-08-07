@@ -66,6 +66,7 @@ public class JdtParser {
           "java.lang.Enum",
           "java.lang.Number",
           "java.lang.Object",
+          "java.lang.Runnable",
           "java.lang.String",
           "java.lang.Throwable");
 

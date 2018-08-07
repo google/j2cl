@@ -39,6 +39,15 @@ class MyFunction {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MyFunction.$clinit = (() => {});
+    MyFunction.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class MyFunction {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MyFunction.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
   }

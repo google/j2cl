@@ -60,6 +60,16 @@ class C extends j_l_Object {
   m_foo__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    C.$clinit = (() => {});
+    C.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -78,12 +88,9 @@ class C extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    C.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

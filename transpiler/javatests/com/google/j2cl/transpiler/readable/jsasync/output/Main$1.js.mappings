@@ -63,5 +63,21 @@
 [return Promise.resolve(await(x));] => [return /**@type {Promise<Integer>} */ (Promise.resolve(/**@type {Integer} */ ($Casts.$to((await this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_1.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main$1.asyncCall"
 [{
           @JsAsync
+          @Override
+          public IThenable<Integer> asyncCall() {
+            return Promise.resolve(await(x));
+          }
+        }] => [$clinit]
+[{
+          @JsAsync
+...          }
+        }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.jsasync.Main$1.<clinit>"
+[{
+          @JsAsync
+...          }
+        }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.jsasync.Main$1.<clinit>"
+[{
+          @JsAsync
 ...          }
         }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main$1.<clinit>"

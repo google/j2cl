@@ -18,6 +18,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class Entry {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Entry.$clinit = (() => {});
+    Entry.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -53,11 +62,9 @@ class Entry {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Entry.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

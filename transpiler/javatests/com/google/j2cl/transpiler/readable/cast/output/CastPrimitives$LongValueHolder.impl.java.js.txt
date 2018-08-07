@@ -50,6 +50,16 @@ class LongValueHolder extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    LongValueHolder.$clinit = (() => {});
+    LongValueHolder.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -68,12 +78,9 @@ class LongValueHolder extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    LongValueHolder.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

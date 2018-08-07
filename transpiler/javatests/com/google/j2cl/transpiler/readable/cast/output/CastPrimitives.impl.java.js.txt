@@ -298,6 +298,16 @@ class CastPrimitives extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    CastPrimitives.$clinit = (() => {});
+    CastPrimitives.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -316,10 +326,9 @@ class CastPrimitives extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    CastPrimitives.$clinit = function() {};
+  static $loadModules() {
     IntValueHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastPrimitives.IntValueHolder$impl');
     LongValueHolder = goog.module.get(
@@ -336,7 +345,6 @@ class CastPrimitives extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -25,4 +25,8 @@
 [delete] => [delete$1$] "delete"
 [int undefined = 3;] => [let undefined$1$ = 3;] "com.google.j2cl.transpiler.readable.collisions.bar.<init>"
 [undefined] => [undefined$1$] "undefined"
+[bar] => [$clinit]
+[bar] => [bar.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.collisions.bar.<clinit>"
+[bar] => [bar.$loadModules();] "com.google.j2cl.transpiler.readable.collisions.bar.<clinit>"
 [bar] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.collisions.bar.<clinit>"

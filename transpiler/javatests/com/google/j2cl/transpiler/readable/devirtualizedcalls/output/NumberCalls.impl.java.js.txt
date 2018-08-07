@@ -150,6 +150,16 @@ class NumberCalls extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NumberCalls.$clinit = (() => {});
+    NumberCalls.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -168,10 +178,9 @@ class NumberCalls extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NumberCalls.$clinit = function() {};
+  static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
@@ -182,7 +191,6 @@ class NumberCalls extends j_l_Object {
     Short = goog.module.get('java.lang.Short$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    j_l_Object.$clinit();
   }
 };
 

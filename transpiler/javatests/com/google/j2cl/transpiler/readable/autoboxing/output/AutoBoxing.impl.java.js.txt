@@ -584,6 +584,16 @@ class AutoBoxing extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AutoBoxing.$clinit = (() => {});
+    AutoBoxing.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -602,10 +612,9 @@ class AutoBoxing extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AutoBoxing.$clinit = function() {};
+  static $loadModules() {
     $1Local = goog.module.get(
         'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$impl');
     $2Local = goog.module.get(
@@ -626,7 +635,6 @@ class AutoBoxing extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    j_l_Object.$clinit();
   }
 };
 

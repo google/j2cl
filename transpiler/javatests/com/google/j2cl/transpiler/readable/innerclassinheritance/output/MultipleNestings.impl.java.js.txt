@@ -50,6 +50,16 @@ class MultipleNestings extends j_l_Object {
   m_funInM__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MultipleNestings.$clinit = (() => {});
+    MultipleNestings.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -68,12 +78,9 @@ class MultipleNestings extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MultipleNestings.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

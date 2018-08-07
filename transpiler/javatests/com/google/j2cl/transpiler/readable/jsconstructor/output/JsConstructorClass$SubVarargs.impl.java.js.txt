@@ -78,6 +78,16 @@ class SubVarargs extends Varargs {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubVarargs.$clinit = (() => {});
+    SubVarargs.$loadModules();
+    Varargs.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -96,16 +106,14 @@ class SubVarargs extends Varargs {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubVarargs.$clinit = function() {};
+  static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Varargs.$clinit();
   }
 };
 

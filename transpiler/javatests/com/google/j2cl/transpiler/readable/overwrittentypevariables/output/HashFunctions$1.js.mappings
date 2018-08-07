@@ -51,5 +51,20 @@
 [return "";] => [return "";] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1.apply"
 [{
       @Override
+      public String apply(T input) {
+        return "";
+      }
+    }] => [$clinit]
+[{
+      @Override
+...      }
+    }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1.<clinit>"
+[{
+      @Override
+...      }
+    }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1.<clinit>"
+[{
+      @Override
 ...      }
     }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1.<clinit>"

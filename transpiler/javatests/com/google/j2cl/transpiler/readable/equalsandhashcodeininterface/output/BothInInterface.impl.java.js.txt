@@ -32,6 +32,15 @@ class BothInInterface {
   hashCode() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BothInInterface.$clinit = (() => {});
+    BothInInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -67,11 +76,9 @@ class BothInInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BothInInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

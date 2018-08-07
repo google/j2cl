@@ -72,6 +72,16 @@ class $1G extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1G.$clinit = (() => {});
+    $1G.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -90,13 +100,11 @@ class $1G extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1G.$clinit = function() {};
+  static $loadModules() {
     $1H = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1G.$1H$impl');
-    j_l_Object.$clinit();
   }
 };
 

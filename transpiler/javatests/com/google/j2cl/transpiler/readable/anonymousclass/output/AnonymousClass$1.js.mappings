@@ -93,5 +93,22 @@
 [Object outer = AnonymousClass.this;] => [this.f_outer__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1 = this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass_1;] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1.<init>"
 [{
           Object object = this;
+          Object outer = AnonymousClass.this;
+
+          public String foo() {
+            return "a";
+          }
+        }] => [$clinit]
+[{
+          Object object = this;
+...          }
+        }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1.<clinit>"
+[{
+          Object object = this;
+...          }
+        }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1.<clinit>"
+[{
+          Object object = this;
 ...          }
         }] => [SomeClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1.<clinit>"

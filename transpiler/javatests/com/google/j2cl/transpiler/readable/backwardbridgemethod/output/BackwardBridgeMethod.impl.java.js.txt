@@ -77,6 +77,16 @@ class BackwardBridgeMethod extends C {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BackwardBridgeMethod.$clinit = (() => {});
+    BackwardBridgeMethod.$loadModules();
+    C.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -95,13 +105,11 @@ class BackwardBridgeMethod extends C {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BackwardBridgeMethod.$clinit = function() {};
+  static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    C.$clinit();
   }
 };
 

@@ -45,6 +45,16 @@ class AbstractMethodWithVarargs extends j_l_Object {
   abstractMethod(...args) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractMethodWithVarargs.$clinit = (() => {});
+    AbstractMethodWithVarargs.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -63,12 +73,9 @@ class AbstractMethodWithVarargs extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractMethodWithVarargs.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

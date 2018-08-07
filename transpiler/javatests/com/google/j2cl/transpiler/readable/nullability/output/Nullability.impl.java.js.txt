@@ -136,6 +136,16 @@ class Nullability extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Nullability.$clinit = (() => {});
+    Nullability.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -154,15 +164,13 @@ class Nullability extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Nullability.$clinit = function() {};
+  static $loadModules() {
     Lists = goog.module.get('com.google.common.collect.Lists$impl');
     j_l_String = goog.module.get('java.lang.String$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    j_l_Object.$clinit();
   }
 };
 

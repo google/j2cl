@@ -37,6 +37,15 @@ class FunctionalInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    FunctionalInterface.$clinit = (() => {});
+    FunctionalInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,10 +81,9 @@ class FunctionalInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    FunctionalInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor$impl');
   }

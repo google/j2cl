@@ -71,6 +71,16 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -89,17 +99,15 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Main.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.unreachableclass.Main.$1$impl');
     $1A = goog.module.get(
         'com.google.j2cl.transpiler.readable.unreachableclass.Main.$1A$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -63,6 +63,16 @@ class LambdaInSubClass extends Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    LambdaInSubClass.$clinit = (() => {});
+    LambdaInSubClass.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,13 +91,11 @@ class LambdaInSubClass extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    LambdaInSubClass.$clinit = function() {};
+  static $loadModules() {
     FunctionalInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
-    Parent.$clinit();
   }
 };
 

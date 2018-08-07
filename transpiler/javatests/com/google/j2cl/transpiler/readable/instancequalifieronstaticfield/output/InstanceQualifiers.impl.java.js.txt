@@ -171,6 +171,22 @@ class InstanceQualifiers extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InstanceQualifiers.$clinit = (() => {});
+    InstanceQualifiers.$loadModules();
+    j_l_Object.$clinit();
+    InstanceQualifiers
+        .$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers =
+        100;
+    InstanceQualifiers
+        .$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers =
+        0;
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -189,18 +205,9 @@ class InstanceQualifiers extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InstanceQualifiers.$clinit = function() {};
-    j_l_Object.$clinit();
-    InstanceQualifiers
-        .$f_staticField__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers =
-        100;
-    InstanceQualifiers
-        .$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers =
-        0;
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

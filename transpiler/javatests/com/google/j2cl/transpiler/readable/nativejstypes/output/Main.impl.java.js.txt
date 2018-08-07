@@ -120,6 +120,16 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -138,10 +148,9 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Main.$clinit = function() {};
+  static $loadModules() {
     Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
@@ -151,7 +160,6 @@ class Main extends j_l_Object {
     Class = goog.module.get('java.lang.Class$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    j_l_Object.$clinit();
   }
 };
 

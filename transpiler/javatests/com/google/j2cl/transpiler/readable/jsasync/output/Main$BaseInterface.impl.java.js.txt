@@ -38,6 +38,15 @@ class BaseInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BaseInterface.$clinit = (() => {});
+    BaseInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -73,10 +82,9 @@ class BaseInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BaseInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface.$LambdaAdaptor$impl');
   }

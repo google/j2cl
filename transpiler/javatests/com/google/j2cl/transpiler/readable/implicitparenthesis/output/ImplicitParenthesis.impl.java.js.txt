@@ -136,6 +136,16 @@ class ImplicitParenthesis extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ImplicitParenthesis.$clinit = (() => {});
+    ImplicitParenthesis.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -154,14 +164,12 @@ class ImplicitParenthesis extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ImplicitParenthesis.$clinit = function() {};
+  static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

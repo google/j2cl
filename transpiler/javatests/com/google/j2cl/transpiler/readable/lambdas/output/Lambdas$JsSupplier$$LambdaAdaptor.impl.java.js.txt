@@ -72,6 +72,17 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = (() => {});
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+    Equals.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -90,14 +101,11 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $LambdaAdaptor.$clinit = function() {};
+  static $loadModules() {
     Equals = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
-    j_l_Object.$clinit();
-    Equals.$clinit();
   }
 };
 

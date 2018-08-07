@@ -48,6 +48,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangThrowable;
   public DeclaredTypeDescriptor javaLangEnum;
+  public DeclaredTypeDescriptor javaLangRunnable;
 
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangComparable;
@@ -546,6 +547,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Enum":
           typeDescriptors.javaLangEnum = referenceType;
+          break;
+        case "java.lang.Runnable":
+          typeDescriptors.javaLangRunnable = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

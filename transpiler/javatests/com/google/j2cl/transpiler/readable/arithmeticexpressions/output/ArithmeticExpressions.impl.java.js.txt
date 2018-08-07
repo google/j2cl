@@ -341,6 +341,32 @@ class ArithmeticExpressions extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    let /** !$Long */ $value;
+    ArithmeticExpressions.$clinit = (() => {});
+    ArithmeticExpressions.$loadModules();
+    j_l_Object.$clinit();
+    ArithmeticExpressions
+        .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        $Long.fromInt(1);
+    ArithmeticExpressions
+        .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+        ($value =
+             ArithmeticExpressions
+                 .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+         ArithmeticExpressions
+             .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
+             $LongUtils.$plus(
+                 ArithmeticExpressions
+                     .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
+                 $Long.fromInt(1)),
+         $value);
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -359,10 +385,9 @@ class ArithmeticExpressions extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ArithmeticExpressions.$clinit = function() {};
+  static $loadModules() {
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
     Double = goog.module.get('java.lang.Double$impl');
@@ -373,23 +398,6 @@ class ArithmeticExpressions extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    j_l_Object.$clinit();
-    ArithmeticExpressions
-        .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-        $Long.fromInt(1);
-    let /** !$Long */ $value;
-    ArithmeticExpressions
-        .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-        ($value =
-             ArithmeticExpressions
-                 .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
-         ArithmeticExpressions
-             .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
-             $LongUtils.$plus(
-                 ArithmeticExpressions
-                     .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
-                 $Long.fromInt(1)),
-         $value);
   }
 };
 

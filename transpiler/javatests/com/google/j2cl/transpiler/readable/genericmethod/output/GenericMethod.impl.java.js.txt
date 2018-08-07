@@ -264,6 +264,16 @@ class GenericMethod extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    GenericMethod.$clinit = (() => {});
+    GenericMethod.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -282,10 +292,9 @@ class GenericMethod extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    GenericMethod.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.$1$impl');
     $1LocalClass = goog.module.get(
@@ -299,7 +308,6 @@ class GenericMethod extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -66,6 +66,16 @@ class $1 extends Enum2 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1.$clinit = (() => {});
+    $1.$loadModules();
+    Enum2.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -84,12 +94,10 @@ class $1 extends Enum2 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1.$clinit = function() {};
+  static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Enum2.$clinit();
   }
 };
 

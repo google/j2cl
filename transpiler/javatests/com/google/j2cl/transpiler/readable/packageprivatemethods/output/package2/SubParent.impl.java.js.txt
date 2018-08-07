@@ -54,6 +54,16 @@ class SubParent extends Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubParent.$clinit = (() => {});
+    SubParent.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -72,12 +82,9 @@ class SubParent extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubParent.$clinit = function() {};
-    Parent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

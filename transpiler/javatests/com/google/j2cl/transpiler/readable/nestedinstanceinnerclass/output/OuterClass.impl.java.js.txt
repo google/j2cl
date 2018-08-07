@@ -59,6 +59,16 @@ class OuterClass extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    OuterClass.$clinit = (() => {});
+    OuterClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -77,15 +87,13 @@ class OuterClass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    OuterClass.$clinit = function() {};
+  static $loadModules() {
     InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
     InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
-    j_l_Object.$clinit();
   }
 };
 

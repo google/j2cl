@@ -65,6 +65,16 @@ class Parent extends GrandParent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Parent.$clinit = (() => {});
+    Parent.$loadModules();
+    GrandParent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -83,12 +93,9 @@ class Parent extends GrandParent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Parent.$clinit = function() {};
-    GrandParent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

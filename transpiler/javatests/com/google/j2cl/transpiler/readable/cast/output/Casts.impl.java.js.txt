@@ -100,6 +100,16 @@ class Casts extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Casts.$clinit = (() => {});
+    Casts.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -118,10 +128,9 @@ class Casts extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Casts.$clinit = function() {};
+  static $loadModules() {
     Serializable = goog.module.get('java.io.Serializable$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
@@ -134,7 +143,6 @@ class Casts extends j_l_Object {
     Short = goog.module.get('java.lang.Short$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

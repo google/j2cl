@@ -36,6 +36,15 @@ class FunctionalInterfaceWithMethodReturningVoid {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    FunctionalInterfaceWithMethodReturningVoid.$clinit = (() => {});
+    FunctionalInterfaceWithMethodReturningVoid.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class FunctionalInterfaceWithMethodReturningVoid {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    FunctionalInterfaceWithMethodReturningVoid.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
   }

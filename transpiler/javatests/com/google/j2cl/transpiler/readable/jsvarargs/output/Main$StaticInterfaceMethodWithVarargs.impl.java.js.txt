@@ -30,6 +30,15 @@ class StaticInterfaceMethodWithVarargs {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StaticInterfaceMethodWithVarargs.$clinit = (() => {});
+    StaticInterfaceMethodWithVarargs.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -65,10 +74,9 @@ class StaticInterfaceMethodWithVarargs {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StaticInterfaceMethodWithVarargs.$clinit = function() {};
+  static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }

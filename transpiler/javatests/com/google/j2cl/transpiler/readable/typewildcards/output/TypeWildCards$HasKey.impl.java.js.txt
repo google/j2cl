@@ -36,6 +36,15 @@ class HasKey {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    HasKey.$clinit = (() => {});
+    HasKey.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class HasKey {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    HasKey.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey.$LambdaAdaptor$impl');
   }

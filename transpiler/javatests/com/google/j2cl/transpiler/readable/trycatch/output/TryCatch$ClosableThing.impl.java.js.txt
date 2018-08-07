@@ -55,6 +55,16 @@ class ClosableThing extends j_l_Object {
   m_close__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ClosableThing.$clinit = (() => {});
+    ClosableThing.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -73,12 +83,9 @@ class ClosableThing extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ClosableThing.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

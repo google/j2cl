@@ -61,6 +61,16 @@ class ESWGOuter extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ESWGOuter.$clinit = (() => {});
+    ESWGOuter.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -79,13 +89,11 @@ class ESWGOuter extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ESWGOuter.$clinit = function() {};
+  static $loadModules() {
     ESWGInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
-    j_l_Object.$clinit();
   }
 };
 

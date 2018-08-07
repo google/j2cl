@@ -39,6 +39,15 @@ class Collection {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Collection.$clinit = (() => {});
+    Collection.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class Collection {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Collection.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
   }

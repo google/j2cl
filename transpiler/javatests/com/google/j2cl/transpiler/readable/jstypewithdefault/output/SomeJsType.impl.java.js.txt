@@ -69,6 +69,17 @@ class SomeJsType extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeJsType.$clinit = (() => {});
+    SomeJsType.$loadModules();
+    j_l_Object.$clinit();
+    Interface.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,13 +98,9 @@ class SomeJsType extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SomeJsType.$clinit = function() {};
-    j_l_Object.$clinit();
-    Interface.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

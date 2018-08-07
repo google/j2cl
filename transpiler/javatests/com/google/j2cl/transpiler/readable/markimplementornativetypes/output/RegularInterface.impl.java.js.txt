@@ -17,6 +17,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class RegularInterface {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    RegularInterface.$clinit = (() => {});
+    RegularInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -52,11 +61,9 @@ class RegularInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    RegularInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

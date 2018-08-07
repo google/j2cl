@@ -37,6 +37,15 @@ class BI2 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BI2.$clinit = (() => {});
+    BI2.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,10 +81,9 @@ class BI2 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BI2.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2.$LambdaAdaptor$impl');
   }

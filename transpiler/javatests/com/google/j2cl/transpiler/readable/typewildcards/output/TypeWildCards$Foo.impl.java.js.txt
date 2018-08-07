@@ -58,6 +58,16 @@ class Foo extends GenericType {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Foo.$clinit = (() => {});
+    Foo.$loadModules();
+    GenericType.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -76,12 +86,9 @@ class Foo extends GenericType {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Foo.$clinit = function() {};
-    GenericType.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

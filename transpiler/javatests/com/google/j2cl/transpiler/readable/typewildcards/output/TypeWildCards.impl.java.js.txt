@@ -192,6 +192,16 @@ class TypeWildCards extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TypeWildCards.$clinit = (() => {});
+    TypeWildCards.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -210,10 +220,9 @@ class TypeWildCards extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TypeWildCards.$clinit = function() {};
+  static $loadModules() {
     GenericType = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
     Foo = goog.module.get(
@@ -224,7 +233,6 @@ class TypeWildCards extends j_l_Object {
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y$impl');
     j_u_function_Function = goog.module.get('java.util.function.Function$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

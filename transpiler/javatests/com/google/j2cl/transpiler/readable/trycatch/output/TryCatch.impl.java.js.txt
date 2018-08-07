@@ -261,6 +261,16 @@ class TryCatch extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TryCatch.$clinit = (() => {});
+    TryCatch.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -279,10 +289,9 @@ class TryCatch extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TryCatch.$clinit = function() {};
+  static $loadModules() {
     ClosableThing = goog.module.get(
         'com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing$impl');
     ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
@@ -293,7 +302,6 @@ class TryCatch extends j_l_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    j_l_Object.$clinit();
   }
 };
 

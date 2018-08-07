@@ -385,6 +385,19 @@ class Lambdas extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Lambdas.$clinit = (() => {});
+    Lambdas.$loadModules();
+    j_l_Object.$clinit();
+    Lambdas
+        .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
+        null;
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -403,10 +416,9 @@ class Lambdas extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Lambdas.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
     $2 = goog.module.get(
@@ -438,10 +450,6 @@ class Lambdas extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    j_l_Object.$clinit();
-    Lambdas
-        .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
-        null;
   }
 };
 

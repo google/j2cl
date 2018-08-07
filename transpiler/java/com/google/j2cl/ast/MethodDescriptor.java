@@ -141,6 +141,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String CREATE_METHOD_NAME = "$create";
+  public static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
 
   public static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
     return getSignature(name, Arrays.asList(parameterTypeDescriptors));

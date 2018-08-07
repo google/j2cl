@@ -327,6 +327,16 @@ class JsDocTypeMappings extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    JsDocTypeMappings.$clinit = (() => {});
+    JsDocTypeMappings.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -345,12 +355,10 @@ class JsDocTypeMappings extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    JsDocTypeMappings.$clinit = function() {};
+  static $loadModules() {
     $Long = goog.module.get('nativebootstrap.Long$impl');
-    j_l_Object.$clinit();
   }
 };
 

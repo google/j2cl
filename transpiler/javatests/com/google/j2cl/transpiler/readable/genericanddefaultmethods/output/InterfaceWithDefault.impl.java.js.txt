@@ -40,6 +40,15 @@ class InterfaceWithDefault {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InterfaceWithDefault.$clinit = (() => {});
+    InterfaceWithDefault.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -75,10 +84,9 @@ class InterfaceWithDefault {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InterfaceWithDefault.$clinit = function() {};
+  static $loadModules() {
     System = goog.module.get('java.lang.System$impl');
   }
 };

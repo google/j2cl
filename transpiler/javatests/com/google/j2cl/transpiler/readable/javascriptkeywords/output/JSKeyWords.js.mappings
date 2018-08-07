@@ -13,4 +13,8 @@
 [int let = 0;] => [let let$1$ = 0;] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
 [let] => [let$1$] "let"
 [return let + in;] => [return let$1$ + in$1$;] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.test"
+[JSKeyWords] => [$clinit]
+[JSKeyWords] => [JSKeyWords.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<clinit>"
+[JSKeyWords] => [JSKeyWords.$loadModules();] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<clinit>"
 [JSKeyWords] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords.<clinit>"

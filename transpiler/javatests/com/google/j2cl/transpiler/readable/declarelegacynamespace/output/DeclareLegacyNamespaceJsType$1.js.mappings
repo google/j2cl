@@ -32,5 +32,20 @@
 [return true;] => [return true;] "com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType$1.foo"
 [{
     @Override
+    public boolean foo() {
+      return true;
+    }
+  }] => [$clinit]
+[{
+    @Override
+...    }
+  }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType$1.<clinit>"
+[{
+    @Override
+...    }
+  }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType$1.<clinit>"
+[{
+    @Override
 ...    }
   }] => [DeclareLegacyNamespaceJsType.$clinit();] "com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType$1.<clinit>"

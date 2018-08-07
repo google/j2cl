@@ -63,6 +63,16 @@ class InnerClass1 extends Parent {
   m_funInI1__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InnerClass1.$clinit = (() => {});
+    InnerClass1.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,12 +91,9 @@ class InnerClass1 extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InnerClass1.$clinit = function() {};
-    Parent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -136,6 +136,16 @@ class SimpleLongs extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SimpleLongs.$clinit = (() => {});
+    SimpleLongs.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -154,12 +164,10 @@ class SimpleLongs extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SimpleLongs.$clinit = function() {};
+  static $loadModules() {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    j_l_Object.$clinit();
   }
 };
 

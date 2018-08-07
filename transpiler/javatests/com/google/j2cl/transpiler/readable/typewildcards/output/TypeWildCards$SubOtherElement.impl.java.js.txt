@@ -45,6 +45,16 @@ class SubOtherElement extends OtherElement {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubOtherElement.$clinit = (() => {});
+    SubOtherElement.$loadModules();
+    OtherElement.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -63,12 +73,9 @@ class SubOtherElement extends OtherElement {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubOtherElement.$clinit = function() {};
-    OtherElement.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

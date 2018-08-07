@@ -44,6 +44,16 @@ class QualifiedSuperCall extends Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    QualifiedSuperCall.$clinit = (() => {});
+    QualifiedSuperCall.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -62,12 +72,9 @@ class QualifiedSuperCall extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    QualifiedSuperCall.$clinit = function() {};
-    Parent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

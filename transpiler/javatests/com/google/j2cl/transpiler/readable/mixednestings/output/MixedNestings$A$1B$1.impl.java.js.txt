@@ -97,6 +97,16 @@ class $1B_$1 extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1B_$1.$clinit = (() => {});
+    $1B_$1.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -115,13 +125,11 @@ class $1B_$1 extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1B_$1.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.$1B.$1.$1$impl');
-    j_l_Object.$clinit();
   }
 };
 

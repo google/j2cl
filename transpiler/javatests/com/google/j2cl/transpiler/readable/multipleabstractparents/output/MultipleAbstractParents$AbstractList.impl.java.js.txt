@@ -38,6 +38,16 @@ class AbstractList extends AbstractCollection {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractList.$clinit = (() => {});
+    AbstractList.$loadModules();
+    AbstractCollection.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -56,12 +66,9 @@ class AbstractList extends AbstractCollection {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractList.$clinit = function() {};
-    AbstractCollection.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

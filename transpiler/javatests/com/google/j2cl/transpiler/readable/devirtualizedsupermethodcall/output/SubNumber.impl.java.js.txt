@@ -83,6 +83,16 @@ class SubNumber extends Number {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubNumber.$clinit = (() => {});
+    SubNumber.$loadModules();
+    Number.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -101,12 +111,10 @@ class SubNumber extends Number {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubNumber.$clinit = function() {};
+  static $loadModules() {
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    Number.$clinit();
   }
 };
 

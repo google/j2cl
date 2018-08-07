@@ -69,6 +69,16 @@ class A extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    A.$clinit = (() => {});
+    A.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,15 +97,13 @@ class A extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    A.$clinit = function() {};
+  static $loadModules() {
     B = goog.module.get(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
     C = goog.module.get(
         'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.C$impl');
-    j_l_Object.$clinit();
   }
 };
 

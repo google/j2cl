@@ -97,6 +97,16 @@ class InnerClass extends ParentInner {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InnerClass.$clinit = (() => {});
+    InnerClass.$loadModules();
+    ParentInner.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -115,12 +125,9 @@ class InnerClass extends ParentInner {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InnerClass.$clinit = function() {};
-    ParentInner.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

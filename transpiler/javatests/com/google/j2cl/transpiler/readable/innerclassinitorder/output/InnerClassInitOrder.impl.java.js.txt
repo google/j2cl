@@ -377,6 +377,16 @@ class InnerClassInitOrder extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InnerClassInitOrder.$clinit = (() => {});
+    InnerClassInitOrder.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -395,10 +405,9 @@ class InnerClassInitOrder extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InnerClassInitOrder.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$1$impl');
     $1AddNumber = goog.module.get(
@@ -445,7 +454,6 @@ class InnerClassInitOrder extends j_l_Object {
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

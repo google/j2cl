@@ -56,6 +56,16 @@ class AssertSimple extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AssertSimple.$clinit = (() => {});
+    AssertSimple.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -74,12 +84,10 @@ class AssertSimple extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AssertSimple.$clinit = function() {};
+  static $loadModules() {
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

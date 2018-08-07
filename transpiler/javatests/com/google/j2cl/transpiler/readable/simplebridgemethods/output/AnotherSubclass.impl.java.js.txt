@@ -49,6 +49,16 @@ class AnotherSubclass extends Superclass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AnotherSubclass.$clinit = (() => {});
+    AnotherSubclass.$loadModules();
+    Superclass.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -67,12 +77,9 @@ class AnotherSubclass extends Superclass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AnotherSubclass.$clinit = function() {};
-    Superclass.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

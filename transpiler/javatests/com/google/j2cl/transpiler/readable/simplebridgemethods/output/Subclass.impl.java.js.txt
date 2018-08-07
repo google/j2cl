@@ -70,6 +70,16 @@ class Subclass extends Superclass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Subclass.$clinit = (() => {});
+    Subclass.$loadModules();
+    Superclass.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -88,13 +98,11 @@ class Subclass extends Superclass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Subclass.$clinit = function() {};
+  static $loadModules() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Superclass.$clinit();
   }
 };
 

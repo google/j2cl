@@ -51,4 +51,17 @@
 [{
         @Override
         public void foo() {}
+      }] => [$clinit]
+[{
+        @Override
+        public void foo() {}
+      }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1.<clinit>"
+[{
+        @Override
+        public void foo() {}
+      }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1.<clinit>"
+[{
+        @Override
+        public void foo() {}
       }] => [Foo.$clinit();] "com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1.<clinit>"

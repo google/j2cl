@@ -52,6 +52,16 @@ class F extends C {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    F.$clinit = (() => {});
+    F.$loadModules();
+    C.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -70,12 +80,9 @@ class F extends C {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    F.$clinit = function() {};
-    C.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

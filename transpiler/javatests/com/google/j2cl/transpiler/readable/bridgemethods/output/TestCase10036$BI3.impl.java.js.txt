@@ -37,6 +37,15 @@ class BI3 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BI3.$clinit = (() => {});
+    BI3.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,11 +81,9 @@ class BI3 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BI3.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

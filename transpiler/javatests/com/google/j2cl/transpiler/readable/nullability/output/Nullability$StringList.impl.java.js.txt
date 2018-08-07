@@ -85,6 +85,16 @@ class StringList extends ArrayList {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StringList.$clinit = (() => {});
+    StringList.$loadModules();
+    ArrayList.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -103,13 +113,11 @@ class StringList extends ArrayList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StringList.$clinit = function() {};
+  static $loadModules() {
     Collection = goog.module.get('java.util.Collection$impl');
     List = goog.module.get('java.util.List$impl');
-    ArrayList.$clinit();
   }
 };
 

@@ -48,6 +48,16 @@ class ImportsFullyQualified extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ImportsFullyQualified.$clinit = (() => {});
+    ImportsFullyQualified.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -66,12 +76,9 @@ class ImportsFullyQualified extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ImportsFullyQualified.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

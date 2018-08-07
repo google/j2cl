@@ -13,4 +13,8 @@
 [main] => [NewInstanceExpr.$clinit();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"
 [NewInstanceExpr a = new NewInstanceExpr();] => [let a = NewInstanceExpr.$create__();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.main"
 [a] => [a] "a"
+[NewInstanceExpr] => [$clinit]
+[NewInstanceExpr] => [NewInstanceExpr.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<clinit>"
+[NewInstanceExpr] => [NewInstanceExpr.$loadModules();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<clinit>"
 [NewInstanceExpr] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.<clinit>"

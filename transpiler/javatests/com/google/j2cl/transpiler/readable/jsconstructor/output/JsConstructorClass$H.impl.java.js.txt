@@ -33,6 +33,16 @@ class H extends G {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    H.$clinit = (() => {});
+    H.$loadModules();
+    G.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -51,12 +61,9 @@ class H extends G {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    H.$clinit = function() {};
-    G.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -69,6 +69,16 @@ class CastToNativeType extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    CastToNativeType.$clinit = (() => {});
+    CastToNativeType.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,10 +97,9 @@ class CastToNativeType extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    CastToNativeType.$clinit = function() {};
+  static $loadModules() {
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
     NativeObject_$Overlay = goog.module.get(
@@ -98,7 +107,6 @@ class CastToNativeType extends j_l_Object {
     NativeJsType = goog.module.get('test.foo.NativeJsType');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

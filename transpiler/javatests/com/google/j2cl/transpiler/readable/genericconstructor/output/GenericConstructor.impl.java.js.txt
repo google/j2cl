@@ -99,6 +99,16 @@ class GenericConstructor extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    GenericConstructor.$clinit = (() => {});
+    GenericConstructor.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -117,13 +127,11 @@ class GenericConstructor extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    GenericConstructor.$clinit = function() {};
+  static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -62,6 +62,16 @@ class TestCaptureOuterParametricClass extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TestCaptureOuterParametricClass.$clinit = (() => {});
+    TestCaptureOuterParametricClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,12 +91,10 @@ class TestCaptureOuterParametricClass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TestCaptureOuterParametricClass.$clinit = function() {};
+  static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
-    j_l_Object.$clinit();
   }
 };
 

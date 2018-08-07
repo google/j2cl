@@ -38,6 +38,15 @@ class JJ {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    JJ.$clinit = (() => {});
+    JJ.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,11 +83,9 @@ class JJ {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    JJ.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

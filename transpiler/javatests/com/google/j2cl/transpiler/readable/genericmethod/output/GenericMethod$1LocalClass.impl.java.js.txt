@@ -76,6 +76,16 @@ class $1LocalClass extends GenericMethod {
   m_fun2__java_lang_Number(t) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1LocalClass.$clinit = (() => {});
+    $1LocalClass.$loadModules();
+    GenericMethod.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -94,12 +104,9 @@ class $1LocalClass extends GenericMethod {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1LocalClass.$clinit = function() {};
-    GenericMethod.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

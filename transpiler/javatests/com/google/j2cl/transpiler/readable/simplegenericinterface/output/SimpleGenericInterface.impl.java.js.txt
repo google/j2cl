@@ -39,6 +39,15 @@ class SimpleGenericInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SimpleGenericInterface.$clinit = (() => {});
+    SimpleGenericInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class SimpleGenericInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SimpleGenericInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
   }

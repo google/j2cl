@@ -63,6 +63,16 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    LocalClassWithOuterGenerics.$clinit = (() => {});
+    LocalClassWithOuterGenerics.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,15 +91,13 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    LocalClassWithOuterGenerics.$clinit = function() {};
+  static $loadModules() {
     $1Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Bar$impl');
     $1Baz = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Baz$impl');
-    j_l_Object.$clinit();
   }
 };
 

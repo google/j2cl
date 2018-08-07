@@ -179,6 +179,31 @@ class Numbers extends Enum {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Numbers.$clinit = (() => {});
+    Numbers.$loadModules();
+    Enum.$clinit();
+    Numbers
+        .$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        Numbers.$create__java_lang_String__int(
+            $Util.$makeEnumName('ONE'),
+            Numbers
+                .$ordinal$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers);
+    Numbers
+        .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        Numbers.$create__java_lang_String__int(
+            $Util.$makeEnumName('TWO'),
+            Numbers
+                .$ordinal$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers);
+    Numbers
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
+        null;
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -197,30 +222,13 @@ class Numbers extends Enum {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Numbers.$clinit = function() {};
+  static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
-    Enum.$clinit();
-    Numbers
-        .$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
-        Numbers.$create__java_lang_String__int(
-            $Util.$makeEnumName('ONE'),
-            Numbers
-                .$ordinal$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers);
-    Numbers
-        .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
-        Numbers.$create__java_lang_String__int(
-            $Util.$makeEnumName('TWO'),
-            Numbers
-                .$ordinal$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers);
-    Numbers
-        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
-        null;
   }
 };
 

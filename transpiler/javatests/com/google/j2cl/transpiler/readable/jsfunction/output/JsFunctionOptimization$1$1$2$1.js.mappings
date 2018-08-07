@@ -59,5 +59,20 @@
 [return "Hey";] => [return "Hey";] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$2$1.toString"
 [{
                           @Override
+                          public String toString() {
+                            return "Hey";
+                          }
+                        }] => [$clinit]
+[{
+                          @Override
+...                          }
+                        }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$2$1.<clinit>"
+[{
+                          @Override
+...                          }
+                        }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$2$1.<clinit>"
+[{
+                          @Override
 ...                          }
                         }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization$1$1$2$1.<clinit>"

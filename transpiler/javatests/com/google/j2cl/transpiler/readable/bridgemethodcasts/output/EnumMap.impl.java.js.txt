@@ -75,6 +75,16 @@ class EnumMap extends AbstractMap {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    EnumMap.$clinit = (() => {});
+    EnumMap.$loadModules();
+    AbstractMap.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -93,13 +103,11 @@ class EnumMap extends AbstractMap {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    EnumMap.$clinit = function() {};
+  static $loadModules() {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    AbstractMap.$clinit();
   }
 };
 

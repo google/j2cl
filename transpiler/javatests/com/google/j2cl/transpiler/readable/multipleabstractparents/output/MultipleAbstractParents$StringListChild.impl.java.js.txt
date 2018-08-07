@@ -55,6 +55,16 @@ class StringListChild extends StringList {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StringListChild.$clinit = (() => {});
+    StringListChild.$loadModules();
+    StringList.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -73,12 +83,9 @@ class StringListChild extends StringList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StringListChild.$clinit = function() {};
-    StringList.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

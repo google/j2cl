@@ -44,6 +44,16 @@ class QualifiedSuperMethodCall extends Main {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    QualifiedSuperMethodCall.$clinit = (() => {});
+    QualifiedSuperMethodCall.$loadModules();
+    Main.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -62,12 +72,9 @@ class QualifiedSuperMethodCall extends Main {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    QualifiedSuperMethodCall.$clinit = function() {};
-    Main.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

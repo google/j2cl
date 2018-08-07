@@ -87,6 +87,16 @@ class TIntegerJsBiFunction extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TIntegerJsBiFunction.$clinit = (() => {});
+    TIntegerJsBiFunction.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -118,13 +128,11 @@ class TIntegerJsBiFunction extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TIntegerJsBiFunction.$clinit = function() {};
+  static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

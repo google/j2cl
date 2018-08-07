@@ -75,6 +75,17 @@ public class AstUtils {
     return classComponents;
   }
 
+  /** Returns the loadModules method descriptor for a particular type */
+  public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
+    return MethodDescriptor.newBuilder()
+        .setStatic(true)
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setName(MethodDescriptor.LOAD_MODULES_METHOD_NAME)
+        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
+        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .build();
+  }
+
   /** Returns the class initializer method descriptor for a particular type */
   public static MethodDescriptor getClinitMethodDescriptor(DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()

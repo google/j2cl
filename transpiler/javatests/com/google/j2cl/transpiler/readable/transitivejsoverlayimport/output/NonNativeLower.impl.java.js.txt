@@ -40,6 +40,16 @@ class NonNativeLower extends NonNativeUpper {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NonNativeLower.$clinit = (() => {});
+    NonNativeLower.$loadModules();
+    NonNativeUpper.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -58,12 +68,9 @@ class NonNativeLower extends NonNativeUpper {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NonNativeLower.$clinit = function() {};
-    NonNativeUpper.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

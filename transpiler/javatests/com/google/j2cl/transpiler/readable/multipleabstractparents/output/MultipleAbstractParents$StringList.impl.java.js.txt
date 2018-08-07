@@ -55,6 +55,16 @@ class StringList extends AbstractStringList {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StringList.$clinit = (() => {});
+    StringList.$loadModules();
+    AbstractStringList.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -73,12 +83,9 @@ class StringList extends AbstractStringList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StringList.$clinit = function() {};
-    AbstractStringList.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -115,6 +115,16 @@ class SwitchStatement extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SwitchStatement.$clinit = (() => {});
+    SwitchStatement.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -133,16 +143,14 @@ class SwitchStatement extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SwitchStatement.$clinit = function() {};
+  static $loadModules() {
     Numbers = goog.module.get(
         'com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

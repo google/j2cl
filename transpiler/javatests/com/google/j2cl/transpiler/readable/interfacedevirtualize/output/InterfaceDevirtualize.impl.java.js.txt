@@ -136,6 +136,16 @@ class InterfaceDevirtualize extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InterfaceDevirtualize.$clinit = (() => {});
+    InterfaceDevirtualize.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -154,14 +164,12 @@ class InterfaceDevirtualize extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InterfaceDevirtualize.$clinit = function() {};
+  static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Double = goog.module.get('java.lang.Double$impl');
     $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
-    j_l_Object.$clinit();
   }
 };
 

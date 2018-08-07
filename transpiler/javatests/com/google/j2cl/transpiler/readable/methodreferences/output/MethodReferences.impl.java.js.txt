@@ -225,6 +225,25 @@ class MethodReferences extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    let /** * */ $$qualifier0;
+    MethodReferences.$clinit = (() => {});
+    MethodReferences.$loadModules();
+    j_l_Object.$clinit();
+    MethodReferences
+        .$f_staticStringProducer__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences =
+        ($$qualifier0 =
+             MethodReferences
+                 .m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences(),
+         Producer.$adapt((() => {
+           return $Objects.m_toString__java_lang_Object($$qualifier0);
+         })));
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -243,10 +262,9 @@ class MethodReferences extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MethodReferences.$clinit = function() {};
+  static $loadModules() {
     ArrayProducer = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer$impl');
     BiFunction = goog.module.get(
@@ -263,16 +281,6 @@ class MethodReferences extends j_l_Object {
     Double = goog.module.get('java.lang.Double$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    j_l_Object.$clinit();
-    let /** * */ $$qualifier0;
-    MethodReferences
-        .$f_staticStringProducer__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences =
-        ($$qualifier0 =
-             MethodReferences
-                 .m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences(),
-         Producer.$adapt((() => {
-           return $Objects.m_toString__java_lang_Object($$qualifier0);
-         })));
   }
 };
 

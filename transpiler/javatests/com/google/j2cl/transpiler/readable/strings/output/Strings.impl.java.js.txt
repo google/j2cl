@@ -130,6 +130,16 @@ class Strings extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Strings.$clinit = (() => {});
+    Strings.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -148,15 +158,13 @@ class Strings extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Strings.$clinit = function() {};
+  static $loadModules() {
     StringHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
     j_l_String = goog.module.get('java.lang.String$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
-    j_l_Object.$clinit();
   }
 };
 

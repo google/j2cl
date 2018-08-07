@@ -350,6 +350,10 @@
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [int i = (Integer & Comparable<Integer>) 10;] => [let i = /**@type {Integer} */ ($Casts.$to(Integer.m_valueOf__int(10), Comparable)).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [i] => [i] "i"
+[AutoBoxing] => [$clinit]
+[AutoBoxing] => [AutoBoxing.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
+[AutoBoxing] => [AutoBoxing.$loadModules();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [AutoBoxing] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [public static final float COMPILE_TIME_CONSTANT = 1.1f;] => [/** @public {number} @const */
 AutoBoxing.f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing = 1.100000023841858;]

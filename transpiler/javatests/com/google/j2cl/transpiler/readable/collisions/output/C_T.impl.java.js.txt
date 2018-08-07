@@ -69,6 +69,16 @@ class C__T extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    C__T.$clinit = (() => {});
+    C__T.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,12 +97,10 @@ class C__T extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    C__T.$clinit = function() {};
+  static $loadModules() {
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    j_l_Object.$clinit();
   }
 };
 

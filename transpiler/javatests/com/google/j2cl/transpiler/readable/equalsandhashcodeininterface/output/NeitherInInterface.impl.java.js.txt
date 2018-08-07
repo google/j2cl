@@ -17,6 +17,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class NeitherInInterface {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NeitherInInterface.$clinit = (() => {});
+    NeitherInInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -52,11 +61,9 @@ class NeitherInInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NeitherInInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

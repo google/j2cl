@@ -43,6 +43,16 @@ class Varargs extends A {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Varargs.$clinit = (() => {});
+    Varargs.$loadModules();
+    A.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -61,13 +71,11 @@ class Varargs extends A {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Varargs.$clinit = function() {};
+  static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    A.$clinit();
   }
 };
 

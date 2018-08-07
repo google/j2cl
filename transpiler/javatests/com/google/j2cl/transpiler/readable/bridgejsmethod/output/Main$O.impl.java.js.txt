@@ -78,6 +78,16 @@ class O extends N {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    O.$clinit = (() => {});
+    O.$loadModules();
+    N.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -96,12 +106,9 @@ class O extends N {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    O.$clinit = function() {};
-    N.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

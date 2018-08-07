@@ -81,6 +81,15 @@ class Interface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Interface.$clinit = (() => {});
+    Interface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -116,10 +125,9 @@ class Interface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Interface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfaces.Main.Interface.$LambdaAdaptor$impl');
   }

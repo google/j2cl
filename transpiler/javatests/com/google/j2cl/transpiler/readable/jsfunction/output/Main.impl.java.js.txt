@@ -492,6 +492,16 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -510,10 +520,9 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Main.$clinit = function() {};
+  static $loadModules() {
     ClassWithJsFunctionProperty = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ClassWithJsFunctionProperty$impl');
     DoubleDoubleJsBiFunction = goog.module.get(
@@ -534,7 +543,6 @@ class Main extends j_l_Object {
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    j_l_Object.$clinit();
   }
 };
 

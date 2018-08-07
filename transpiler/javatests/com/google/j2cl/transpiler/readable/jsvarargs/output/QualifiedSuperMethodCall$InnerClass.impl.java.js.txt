@@ -83,6 +83,16 @@ class InnerClass extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InnerClass.$clinit = (() => {});
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -101,17 +111,15 @@ class InnerClass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InnerClass.$clinit = function() {};
+  static $loadModules() {
     Main = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    j_l_Object.$clinit();
   }
 };
 

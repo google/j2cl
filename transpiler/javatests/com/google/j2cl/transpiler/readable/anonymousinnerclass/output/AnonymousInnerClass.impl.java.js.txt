@@ -67,6 +67,16 @@ class AnonymousInnerClass extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AnonymousInnerClass.$clinit = (() => {});
+    AnonymousInnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -85,10 +95,9 @@ class AnonymousInnerClass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AnonymousInnerClass.$clinit = function() {};
+  static $loadModules() {
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
     $1 = goog.module.get(
@@ -97,7 +106,6 @@ class AnonymousInnerClass extends j_l_Object {
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$2$impl');
     $3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$3$impl');
-    j_l_Object.$clinit();
   }
 };
 

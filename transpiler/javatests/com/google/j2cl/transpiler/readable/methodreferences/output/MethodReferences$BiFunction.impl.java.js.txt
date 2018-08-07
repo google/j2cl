@@ -40,6 +40,15 @@ class BiFunction {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BiFunction.$clinit = (() => {});
+    BiFunction.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -75,10 +84,9 @@ class BiFunction {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BiFunction.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
   }

@@ -68,6 +68,17 @@ class B extends j_l_Object {
   get(arg0) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    B.$clinit = (() => {});
+    B.$loadModules();
+    j_l_Object.$clinit();
+    BI3.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -86,14 +97,11 @@ class B extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    B.$clinit = function() {};
+  static $loadModules() {
     BI3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI3$impl');
-    j_l_Object.$clinit();
-    BI3.$clinit();
   }
 };
 

@@ -45,6 +45,15 @@ class Equals {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Equals.$clinit = (() => {});
+    Equals.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -80,11 +89,9 @@ class Equals {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Equals.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

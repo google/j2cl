@@ -152,6 +152,16 @@ class BooleanOperations extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BooleanOperations.$clinit = (() => {});
+    BooleanOperations.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -170,16 +180,14 @@ class BooleanOperations extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BooleanOperations.$clinit = function() {};
+  static $loadModules() {
     $1Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

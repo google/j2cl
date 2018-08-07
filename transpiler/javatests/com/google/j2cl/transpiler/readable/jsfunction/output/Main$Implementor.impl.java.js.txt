@@ -73,6 +73,16 @@ class Implementor extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Implementor.$clinit = (() => {});
+    Implementor.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -91,14 +101,12 @@ class Implementor extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Implementor.$clinit = function() {};
+  static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    j_l_Object.$clinit();
   }
 };
 

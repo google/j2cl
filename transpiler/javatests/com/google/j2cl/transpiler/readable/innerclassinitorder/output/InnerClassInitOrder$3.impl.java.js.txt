@@ -57,6 +57,16 @@ class $3 extends TestQualifiedSuperCall {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $3.$clinit = (() => {});
+    $3.$loadModules();
+    TestQualifiedSuperCall.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -75,12 +85,9 @@ class $3 extends TestQualifiedSuperCall {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $3.$clinit = function() {};
-    TestQualifiedSuperCall.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

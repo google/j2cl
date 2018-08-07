@@ -74,6 +74,16 @@ class MapEntry extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MapEntry.$clinit = (() => {});
+    MapEntry.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -92,16 +102,14 @@ class MapEntry extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MapEntry.$clinit = function() {};
+  static $loadModules() {
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
     Setable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

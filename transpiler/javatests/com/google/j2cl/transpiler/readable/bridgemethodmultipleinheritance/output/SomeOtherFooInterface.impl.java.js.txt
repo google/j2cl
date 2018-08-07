@@ -40,6 +40,15 @@ class SomeOtherFooInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeOtherFooInterface.$clinit = (() => {});
+    SomeOtherFooInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -75,10 +84,9 @@ class SomeOtherFooInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SomeOtherFooInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeOtherFooInterface.$LambdaAdaptor$impl');
   }

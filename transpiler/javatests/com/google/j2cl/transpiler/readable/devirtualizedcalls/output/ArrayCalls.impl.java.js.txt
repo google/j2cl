@@ -57,6 +57,16 @@ class ArrayCalls extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ArrayCalls.$clinit = (() => {});
+    ArrayCalls.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -75,12 +85,10 @@ class ArrayCalls extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ArrayCalls.$clinit = function() {};
+  static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    j_l_Object.$clinit();
   }
 };
 

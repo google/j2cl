@@ -38,6 +38,15 @@ class II {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    II.$clinit = (() => {});
+    II.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,11 +83,9 @@ class II {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    II.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

@@ -63,6 +63,16 @@ class InstanceFieldInitializer extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InstanceFieldInitializer.$clinit = (() => {});
+    InstanceFieldInitializer.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,12 +91,9 @@ class InstanceFieldInitializer extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InstanceFieldInitializer.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

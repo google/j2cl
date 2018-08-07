@@ -57,6 +57,16 @@ class K extends j_l_Object {
       k1, k2) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    K.$clinit = (() => {});
+    K.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -75,12 +85,9 @@ class K extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    K.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

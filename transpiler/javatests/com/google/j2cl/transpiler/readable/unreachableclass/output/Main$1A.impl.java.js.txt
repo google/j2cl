@@ -61,6 +61,16 @@ class $1A extends j_l_Object {
   m_m___$pp_com_google_j2cl_transpiler_readable_unreachableclass() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1A.$clinit = (() => {});
+    $1A.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -79,12 +89,9 @@ class $1A extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1A.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

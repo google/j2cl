@@ -32,6 +32,15 @@ class NonNullableTemplate {
   m_getArray__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NonNullableTemplate.$clinit = (() => {});
+    NonNullableTemplate.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -67,11 +76,9 @@ class NonNullableTemplate {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NonNullableTemplate.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

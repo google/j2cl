@@ -80,6 +80,16 @@ class Parent extends SuperParent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Parent.$clinit = (() => {});
+    Parent.$loadModules();
+    SuperParent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -98,12 +108,9 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Parent.$clinit = function() {};
-    SuperParent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

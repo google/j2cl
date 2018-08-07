@@ -91,6 +91,16 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -109,17 +119,15 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Main.$clinit = function() {};
+  static $loadModules() {
     FooImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

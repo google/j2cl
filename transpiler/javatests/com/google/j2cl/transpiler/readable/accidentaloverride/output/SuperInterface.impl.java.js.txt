@@ -39,6 +39,15 @@ class SuperInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SuperInterface.$clinit = (() => {});
+    SuperInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class SuperInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SuperInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
   }

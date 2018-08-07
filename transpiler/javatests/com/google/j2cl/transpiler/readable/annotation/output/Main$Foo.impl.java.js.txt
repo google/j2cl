@@ -26,6 +26,15 @@ class Foo {
   m_bar__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Foo.$clinit = (() => {});
+    Foo.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -62,11 +71,9 @@ class Foo {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Foo.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

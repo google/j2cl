@@ -48,6 +48,16 @@ class AbstractListCollection extends j_l_Object {
   m_getFoo__java_lang_Object(arg0) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractListCollection.$clinit = (() => {});
+    AbstractListCollection.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -66,12 +76,9 @@ class AbstractListCollection extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractListCollection.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

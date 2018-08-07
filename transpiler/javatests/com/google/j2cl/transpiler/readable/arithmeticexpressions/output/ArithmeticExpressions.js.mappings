@@ -160,9 +160,13 @@
 [public static long foo = one++;] => [return (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: getter>"
 [public static long foo = one++;] => [set f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [public static long foo = one++;] => [(ArithmeticExpressions.$clinit(), ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: setter>"
+[ArithmeticExpressions] => [$clinit]
+[ArithmeticExpressions] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
+[ArithmeticExpressions] => [ArithmeticExpressions.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
+[ArithmeticExpressions] => [ArithmeticExpressions.$loadModules();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [ArithmeticExpressions] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long one = 1;] => [ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
-[public static long foo = one++;] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [private static final float FLOAT_CONSTANT = 1.1f;] => [/** @public {number} @const */
 ArithmeticExpressions.f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;]

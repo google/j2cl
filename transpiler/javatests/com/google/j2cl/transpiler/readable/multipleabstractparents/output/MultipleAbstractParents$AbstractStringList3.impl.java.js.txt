@@ -35,6 +35,16 @@ class AbstractStringList3 extends AbstractList2 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractStringList3.$clinit = (() => {});
+    AbstractStringList3.$loadModules();
+    AbstractList2.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -53,12 +63,9 @@ class AbstractStringList3 extends AbstractList2 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractStringList3.$clinit = function() {};
-    AbstractList2.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -83,6 +83,16 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ESInnerSubclass.$clinit = (() => {});
+    ESInnerSubclass.$loadModules();
+    ESInner.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -101,12 +111,9 @@ class ESInnerSubclass extends ESInner {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ESInnerSubclass.$clinit = function() {};
-    ESInner.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

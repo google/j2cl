@@ -28,8 +28,10 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.ast.LambdaTypeDescriptors;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -40,8 +42,11 @@ import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implements static initialization by synthesizing getter and setters for static fields and
@@ -56,6 +61,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
       insertClinitCalls(type);
       synthesizeSuperClinitCalls(type);
       synthesizeSettersAndGetters(type);
+      synthesizeClinitMethod(type);
     }
   }
 
@@ -299,6 +305,66 @@ public class ImplementStaticInitialization extends NormalizationPass {
                     .build()
                 : JsInfo.NONE)
         .setStatic(true)
+        .build();
+  }
+
+  /** Implements the static initialization method ($clinit). */
+  private void synthesizeClinitMethod(Type type) {
+    SourcePosition sourcePosition = type.getSourcePosition();
+
+    FieldDescriptor clinitMethodFieldDescriptor =
+        getClinitFieldDescriptor(type.getTypeDescriptor());
+
+    // Use the underlying JsFunction for the runnable Lambda to get a functional type with
+    // no parameters and void return.
+    // TODO(b/112308901): remove this hacky code when function types are modeled better.
+    DeclaredTypeDescriptor runnableJsFunctionDescriptor =
+        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+            TypeDescriptors.get().javaLangRunnable);
+
+    // Class.$clinit = () => {};
+    Statement noopClinitFunction =
+        BinaryExpression.Builder.asAssignmentTo(clinitMethodFieldDescriptor)
+            .setRightOperand(
+                FunctionExpression.newBuilder()
+                    .setTypeDescriptor(runnableJsFunctionDescriptor)
+                    .setSourcePosition(sourcePosition)
+                    .build())
+            .build()
+            .makeStatement(sourcePosition);
+
+    // Class.$loadModules();
+    Statement callLoadModules =
+        MethodCall.Builder.from(AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor()))
+            .build()
+            .makeStatement(sourcePosition);
+
+    // Code from static initializer blocks.
+    List<Statement> clinitStatements =
+        type.getStaticInitializerBlocks()
+            .stream()
+            .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
+            .collect(Collectors.toList());
+
+    type.addMethod(
+        Method.newBuilder()
+            .setMethodDescriptor(AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()))
+            .addStatements(noopClinitFunction, callLoadModules)
+            .addStatements(clinitStatements)
+            .setSourcePosition(sourcePosition)
+            .build());
+
+    type.getMembers().removeIf(member -> member.isInitializerBlock() && member.isStatic());
+  }
+
+  /** Returns the class initializer property as a field for a particular type */
+  private static FieldDescriptor getClinitFieldDescriptor(DeclaredTypeDescriptor typeDescriptor) {
+    return FieldDescriptor.newBuilder()
+        .setStatic(true)
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
+        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
+        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .build();
   }
 }

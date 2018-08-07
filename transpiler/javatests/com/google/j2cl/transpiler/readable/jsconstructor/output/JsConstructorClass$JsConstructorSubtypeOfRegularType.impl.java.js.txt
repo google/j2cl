@@ -65,6 +65,16 @@ class JsConstructorSubtypeOfRegularType extends RegularType {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    JsConstructorSubtypeOfRegularType.$clinit = (() => {});
+    JsConstructorSubtypeOfRegularType.$loadModules();
+    RegularType.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -84,12 +94,10 @@ class JsConstructorSubtypeOfRegularType extends RegularType {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    JsConstructorSubtypeOfRegularType.$clinit = function() {};
+  static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
-    RegularType.$clinit();
   }
 };
 

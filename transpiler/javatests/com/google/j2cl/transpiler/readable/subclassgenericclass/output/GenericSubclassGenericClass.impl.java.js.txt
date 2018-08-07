@@ -50,6 +50,16 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    GenericSubclassGenericClass.$clinit = (() => {});
+    GenericSubclassGenericClass.$loadModules();
+    GenericClass.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -68,12 +78,9 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    GenericSubclassGenericClass.$clinit = function() {};
-    GenericClass.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

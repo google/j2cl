@@ -36,6 +36,15 @@ class Cmp {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Cmp.$clinit = (() => {});
+    Cmp.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class Cmp {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Cmp.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Cmp.$LambdaAdaptor$impl');
   }

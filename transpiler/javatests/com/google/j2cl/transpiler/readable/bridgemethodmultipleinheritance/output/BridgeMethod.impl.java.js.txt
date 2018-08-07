@@ -117,6 +117,16 @@ class BridgeMethod extends Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BridgeMethod.$clinit = (() => {});
+    BridgeMethod.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -135,14 +145,12 @@ class BridgeMethod extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    BridgeMethod.$clinit = function() {};
+  static $loadModules() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
     Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Parent.$clinit();
   }
 };
 

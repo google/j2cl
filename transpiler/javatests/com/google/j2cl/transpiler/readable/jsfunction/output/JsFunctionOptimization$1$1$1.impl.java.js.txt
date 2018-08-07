@@ -94,6 +94,16 @@ class $1_$1 extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1_$1.$clinit = (() => {});
+    $1_$1.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -130,12 +140,10 @@ class $1_$1 extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1_$1.$clinit = function() {};
+  static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
-    j_l_Object.$clinit();
   }
 };
 

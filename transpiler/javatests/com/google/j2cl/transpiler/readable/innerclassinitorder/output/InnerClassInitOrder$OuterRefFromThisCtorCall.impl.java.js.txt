@@ -93,6 +93,16 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    OuterRefFromThisCtorCall.$clinit = (() => {});
+    OuterRefFromThisCtorCall.$loadModules();
+    OuterRefFromSuperCtorBase.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -111,13 +121,11 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    OuterRefFromThisCtorCall.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$1$impl');
-    OuterRefFromSuperCtorBase.$clinit();
   }
 };
 

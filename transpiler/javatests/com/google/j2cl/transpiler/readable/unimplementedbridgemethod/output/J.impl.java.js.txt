@@ -31,6 +31,15 @@ class J {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    J.$clinit = (() => {});
+    J.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -67,10 +76,9 @@ class J {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    J.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
   }

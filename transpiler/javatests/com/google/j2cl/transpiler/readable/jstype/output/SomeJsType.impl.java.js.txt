@@ -105,6 +105,16 @@ class SomeJsType extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeJsType.$clinit = (() => {});
+    SomeJsType.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -123,16 +133,14 @@ class SomeJsType extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SomeJsType.$clinit = function() {};
+  static $loadModules() {
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
     Wildcard_$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

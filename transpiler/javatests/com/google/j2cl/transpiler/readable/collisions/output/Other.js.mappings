@@ -20,4 +20,8 @@
 [C_T] => [C_T] "C_T"
 [Other<T> o = (Other<T>) null;] => [let o = /**@type {Other<C_T>} */ ($Casts.$to(null, Other));] "com.google.j2cl.transpiler.readable.collisions.Other.<init>"
 [o] => [o] "o"
+[Other] => [$clinit]
+[Other] => [Other.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.collisions.Other.<clinit>"
+[Other] => [Other.$loadModules();] "com.google.j2cl.transpiler.readable.collisions.Other.<clinit>"
 [Other] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.collisions.Other.<clinit>"

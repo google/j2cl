@@ -65,6 +65,16 @@ class InstanceInnerClass extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InstanceInnerClass.$clinit = (() => {});
+    InstanceInnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -83,13 +93,11 @@ class InstanceInnerClass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InstanceInnerClass.$clinit = function() {};
+  static $loadModules() {
     InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass$impl');
-    j_l_Object.$clinit();
   }
 };
 

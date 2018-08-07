@@ -25,11 +25,18 @@ class $Overlay {
   }
 
   /**
+   * @return {void}
    * @public
    */
   static $clinit() {
-    $Overlay.$clinit = function() {};
+    $Overlay.$clinit = (() => {});
+    $Overlay.$loadModules();
   }
+
+  /**
+   * @private
+   */
+  static $loadModules() {}
 };
 
 

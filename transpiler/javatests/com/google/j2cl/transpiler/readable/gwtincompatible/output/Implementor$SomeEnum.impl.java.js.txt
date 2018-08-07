@@ -135,6 +135,25 @@ class SomeEnum extends Enum {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeEnum.$clinit = (() => {});
+    SomeEnum.$loadModules();
+    Enum.$clinit();
+    SomeEnum
+        .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
+        $1.$create__java_lang_String__int(
+            $Util.$makeEnumName('COMPATIBLE'),
+            SomeEnum
+                .$ordinal$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum);
+    SomeEnum
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
+        null;
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -153,25 +172,14 @@ class SomeEnum extends Enum {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SomeEnum.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
-    Enum.$clinit();
-    SomeEnum
-        .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
-        $1.$create__java_lang_String__int(
-            $Util.$makeEnumName('COMPATIBLE'),
-            SomeEnum
-                .$ordinal$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum);
-    SomeEnum
-        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
-        null;
   }
 };
 

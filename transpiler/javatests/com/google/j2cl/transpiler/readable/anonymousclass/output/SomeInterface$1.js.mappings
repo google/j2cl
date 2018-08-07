@@ -46,5 +46,19 @@
 [return "a";] => [return "a";] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.foo"
 [{
         public String foo() {
+          return "a";
+        }
+      }] => [$clinit]
+[{
+        public String foo() {
+...        }
+      }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<clinit>"
+[{
+        public String foo() {
+...        }
+      }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<clinit>"
+[{
+        public String foo() {
 ...        }
       }] => [SomeClass.$clinit();] "com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$1.<clinit>"

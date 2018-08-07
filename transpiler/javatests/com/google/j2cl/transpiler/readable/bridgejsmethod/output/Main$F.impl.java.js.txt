@@ -65,6 +65,16 @@ class F extends A {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    F.$clinit = (() => {});
+    F.$loadModules();
+    A.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -83,13 +93,11 @@ class F extends A {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    F.$clinit = function() {};
+  static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    A.$clinit();
   }
 };
 

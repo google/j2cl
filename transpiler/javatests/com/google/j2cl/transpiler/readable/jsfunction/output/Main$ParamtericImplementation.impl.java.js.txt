@@ -63,6 +63,16 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ParamtericImplementation.$clinit = (() => {});
+    ParamtericImplementation.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -94,12 +104,10 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ParamtericImplementation.$clinit = function() {};
+  static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

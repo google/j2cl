@@ -86,6 +86,16 @@ class ESWGInnerSubclass extends ESWGInner {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ESWGInnerSubclass.$clinit = (() => {});
+    ESWGInnerSubclass.$loadModules();
+    ESWGInner.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -104,12 +114,9 @@ class ESWGInnerSubclass extends ESWGInner {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ESWGInnerSubclass.$clinit = function() {};
-    ESWGInner.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

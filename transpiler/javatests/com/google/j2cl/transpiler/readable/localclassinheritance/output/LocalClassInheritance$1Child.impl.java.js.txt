@@ -71,6 +71,16 @@ class $1Child extends $1Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1Child.$clinit = (() => {});
+    $1Child.$loadModules();
+    $1Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -89,12 +99,9 @@ class $1Child extends $1Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1Child.$clinit = function() {};
-    $1Parent.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

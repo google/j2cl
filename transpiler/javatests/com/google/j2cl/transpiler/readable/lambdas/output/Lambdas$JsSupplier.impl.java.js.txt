@@ -42,6 +42,16 @@ class JsSupplier {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    JsSupplier.$clinit = (() => {});
+    JsSupplier.$loadModules();
+    Equals.$clinit();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -78,13 +88,11 @@ class JsSupplier {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    JsSupplier.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
-    Equals.$clinit();
   }
 };
 

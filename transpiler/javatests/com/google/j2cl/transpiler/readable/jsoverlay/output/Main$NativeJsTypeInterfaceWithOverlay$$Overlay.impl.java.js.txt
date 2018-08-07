@@ -52,6 +52,18 @@ class $Overlay {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $Overlay.$clinit = (() => {});
+    $Overlay.$loadModules();
+    $Overlay
+        .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
+        j_l_Object.$create__();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -61,14 +73,10 @@ class $Overlay {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $Overlay.$clinit = function() {};
+  static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
-    $Overlay
-        .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
-        j_l_Object.$create__();
   }
 };
 

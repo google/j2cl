@@ -37,6 +37,15 @@ class OtherInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    OtherInterface.$clinit = (() => {});
+    OtherInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,10 +81,9 @@ class OtherInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    OtherInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface.$LambdaAdaptor$impl');
   }

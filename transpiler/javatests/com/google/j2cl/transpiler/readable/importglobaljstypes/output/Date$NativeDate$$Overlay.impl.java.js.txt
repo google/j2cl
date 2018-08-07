@@ -14,6 +14,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $Overlay.$clinit = (() => {});
+    $Overlay.$loadModules();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -23,11 +32,9 @@ class $Overlay {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $Overlay.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata($Overlay, $Util.$makeClassName('Date'));

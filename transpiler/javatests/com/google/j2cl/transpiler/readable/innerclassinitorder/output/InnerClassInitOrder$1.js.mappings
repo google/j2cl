@@ -59,5 +59,20 @@
 [number += num;] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_1.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder += this.f_num__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_1AddNumber;] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1.act"
 [{
         @Override
+        public void act() {
+          number += num;
+        }
+      }] => [$clinit]
+[{
+        @Override
+...        }
+      }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1.<clinit>"
+[{
+        @Override
+...        }
+      }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1.<clinit>"
+[{
+        @Override
 ...        }
       }] => [$1AddNumber.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1.<clinit>"

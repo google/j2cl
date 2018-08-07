@@ -139,6 +139,16 @@ class StaticJsMembers extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StaticJsMembers.$clinit = (() => {});
+    StaticJsMembers.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -157,13 +167,11 @@ class StaticJsMembers extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StaticJsMembers.$clinit = function() {};
+  static $loadModules() {
     Bar = goog.module.get('foo.Bar');
     Baz = goog.module.get('foo.Baz');
-    j_l_Object.$clinit();
   }
 };
 

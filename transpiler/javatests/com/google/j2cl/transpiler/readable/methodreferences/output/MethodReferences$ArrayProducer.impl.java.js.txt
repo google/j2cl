@@ -39,6 +39,15 @@ class ArrayProducer {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ArrayProducer.$clinit = (() => {});
+    ArrayProducer.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class ArrayProducer {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ArrayProducer.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
   }

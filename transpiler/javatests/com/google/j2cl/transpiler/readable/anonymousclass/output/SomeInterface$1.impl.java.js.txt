@@ -58,6 +58,16 @@ class $1 extends SomeClass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1.$clinit = (() => {});
+    $1.$loadModules();
+    SomeClass.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -76,12 +86,9 @@ class $1 extends SomeClass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1.$clinit = function() {};
-    SomeClass.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

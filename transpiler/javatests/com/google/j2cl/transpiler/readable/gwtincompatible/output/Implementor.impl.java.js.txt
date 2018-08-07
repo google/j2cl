@@ -58,6 +58,16 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Implementor.$clinit = (() => {});
+    Implementor.$loadModules();
+    ClassWithAbstractMethod.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -76,12 +86,9 @@ class Implementor extends ClassWithAbstractMethod {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Implementor.$clinit = function() {};
-    ClassWithAbstractMethod.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

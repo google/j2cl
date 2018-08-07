@@ -63,6 +63,16 @@ class AccidentalOverride extends Parent {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AccidentalOverride.$clinit = (() => {});
+    AccidentalOverride.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,13 +91,11 @@ class AccidentalOverride extends Parent {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AccidentalOverride.$clinit = function() {};
+  static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Parent.$clinit();
   }
 };
 

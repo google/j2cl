@@ -57,6 +57,16 @@ class Superclass extends j_l_Object {
   m_m1__java_lang_Error(t) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Superclass.$clinit = (() => {});
+    Superclass.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -75,12 +85,9 @@ class Superclass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Superclass.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

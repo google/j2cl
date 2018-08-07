@@ -33,6 +33,15 @@ class HashFunction {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    HashFunction.$clinit = (() => {});
+    HashFunction.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -69,10 +78,9 @@ class HashFunction {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    HashFunction.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
   }

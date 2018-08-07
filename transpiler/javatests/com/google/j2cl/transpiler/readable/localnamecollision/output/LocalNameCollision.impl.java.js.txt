@@ -112,6 +112,16 @@ class LocalNameCollision extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    LocalNameCollision.$clinit = (() => {});
+    LocalNameCollision.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -130,10 +140,9 @@ class LocalNameCollision extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    LocalNameCollision.$clinit = function() {};
+  static $loadModules() {
     Asserts = goog.module.get(
         'com.google.j2cl.transpiler.readable.localnamecollision.Asserts$impl');
     Class = goog.module.get(
@@ -144,7 +153,6 @@ class LocalNameCollision extends j_l_Object {
         'com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

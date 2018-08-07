@@ -31,6 +31,15 @@ class ViaJsMethodInInterface {
   hashCode() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ViaJsMethodInInterface.$clinit = (() => {});
+    ViaJsMethodInInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -66,11 +75,9 @@ class ViaJsMethodInInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ViaJsMethodInInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

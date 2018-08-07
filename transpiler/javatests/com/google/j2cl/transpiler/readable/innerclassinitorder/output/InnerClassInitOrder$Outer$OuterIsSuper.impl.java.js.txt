@@ -97,6 +97,16 @@ class OuterIsSuper extends Outer {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    OuterIsSuper.$clinit = (() => {});
+    OuterIsSuper.$loadModules();
+    Outer.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -115,15 +125,13 @@ class OuterIsSuper extends Outer {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    OuterIsSuper.$clinit = function() {};
+  static $loadModules() {
     OuterIsNotSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
-    Outer.$clinit();
   }
 };
 

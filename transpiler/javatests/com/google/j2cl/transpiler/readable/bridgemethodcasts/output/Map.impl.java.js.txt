@@ -40,6 +40,15 @@ class Map {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Map.$clinit = (() => {});
+    Map.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -75,10 +84,9 @@ class Map {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Map.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.$LambdaAdaptor$impl');
   }

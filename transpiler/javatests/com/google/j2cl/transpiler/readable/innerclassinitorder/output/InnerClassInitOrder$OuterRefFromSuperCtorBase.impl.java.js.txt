@@ -52,6 +52,16 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    OuterRefFromSuperCtorBase.$clinit = (() => {});
+    OuterRefFromSuperCtorBase.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -70,12 +80,10 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    OuterRefFromSuperCtorBase.$clinit = function() {};
+  static $loadModules() {
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    j_l_Object.$clinit();
   }
 };
 

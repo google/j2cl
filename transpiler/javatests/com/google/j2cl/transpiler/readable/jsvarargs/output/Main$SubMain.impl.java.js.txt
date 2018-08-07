@@ -67,6 +67,16 @@ class SubMain extends Main {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubMain.$clinit = (() => {});
+    SubMain.$loadModules();
+    Main.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -85,15 +95,13 @@ class SubMain extends Main {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubMain.$clinit = function() {};
+  static $loadModules() {
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Main.$clinit();
   }
 };
 

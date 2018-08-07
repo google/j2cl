@@ -33,6 +33,15 @@ class MyInterface {
   m_bar__int(a) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MyInterface.$clinit = (() => {});
+    MyInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -68,11 +77,9 @@ class MyInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MyInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

@@ -44,6 +44,16 @@ class MultipleTopClasses extends AnotherClass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MultipleTopClasses.$clinit = (() => {});
+    MultipleTopClasses.$loadModules();
+    AnotherClass.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -62,12 +72,9 @@ class MultipleTopClasses extends AnotherClass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MultipleTopClasses.$clinit = function() {};
-    AnotherClass.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

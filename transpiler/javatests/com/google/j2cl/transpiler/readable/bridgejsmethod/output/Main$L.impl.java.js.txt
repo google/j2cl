@@ -73,6 +73,16 @@ class L extends K {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    L.$clinit = (() => {});
+    L.$loadModules();
+    K.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -91,13 +101,11 @@ class L extends K {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    L.$clinit = function() {};
+  static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    K.$clinit();
   }
 };
 

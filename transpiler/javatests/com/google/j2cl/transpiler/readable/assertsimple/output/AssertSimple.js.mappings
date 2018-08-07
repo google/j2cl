@@ -12,4 +12,8 @@
 [args] => [args] "args"
 [main] => [AssertSimple.$clinit();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3;] => [$Asserts.$assert(1 + 2 == 3);] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.main"
+[AssertSimple] => [$clinit]
+[AssertSimple] => [AssertSimple.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<clinit>"
+[AssertSimple] => [AssertSimple.$loadModules();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<clinit>"
 [AssertSimple] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.assertsimple.AssertSimple.<clinit>"

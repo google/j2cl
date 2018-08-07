@@ -64,6 +64,16 @@ class A extends j_l_Object {
   m_bar__java_lang_Object(t) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    A.$clinit = (() => {});
+    A.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -82,12 +92,9 @@ class A extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    A.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

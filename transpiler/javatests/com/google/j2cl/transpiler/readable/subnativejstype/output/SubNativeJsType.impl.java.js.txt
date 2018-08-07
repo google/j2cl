@@ -59,6 +59,15 @@ class SubNativeJsType extends MyNativeJsType {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubNativeJsType.$clinit = (() => {});
+    SubNativeJsType.$loadModules();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -77,11 +86,9 @@ class SubNativeJsType extends MyNativeJsType {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubNativeJsType.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

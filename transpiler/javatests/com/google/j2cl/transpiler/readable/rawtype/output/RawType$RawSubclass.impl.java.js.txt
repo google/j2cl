@@ -58,6 +58,17 @@ class RawSubclass extends j_l_Object {
   m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    RawSubclass.$clinit = (() => {});
+    RawSubclass.$loadModules();
+    j_l_Object.$clinit();
+    I.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -76,13 +87,9 @@ class RawSubclass extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    RawSubclass.$clinit = function() {};
-    j_l_Object.$clinit();
-    I.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

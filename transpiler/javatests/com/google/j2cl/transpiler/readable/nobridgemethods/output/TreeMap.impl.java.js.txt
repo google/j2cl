@@ -61,6 +61,16 @@ class TreeMap extends Map {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TreeMap.$clinit = (() => {});
+    TreeMap.$loadModules();
+    Map.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -79,13 +89,11 @@ class TreeMap extends Map {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TreeMap.$clinit = function() {};
+  static $loadModules() {
     InnerEntry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
-    Map.$clinit();
   }
 };
 

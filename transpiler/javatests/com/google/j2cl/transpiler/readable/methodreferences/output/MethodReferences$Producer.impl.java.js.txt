@@ -38,6 +38,15 @@ class Producer {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Producer.$clinit = (() => {});
+    Producer.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -73,10 +82,9 @@ class Producer {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Producer.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
   }

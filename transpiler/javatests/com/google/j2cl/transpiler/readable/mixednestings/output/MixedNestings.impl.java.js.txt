@@ -62,6 +62,16 @@ class MixedNestings extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MixedNestings.$clinit = (() => {});
+    MixedNestings.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -80,13 +90,11 @@ class MixedNestings extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MixedNestings.$clinit = function() {};
+  static $loadModules() {
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
-    j_l_Object.$clinit();
   }
 };
 

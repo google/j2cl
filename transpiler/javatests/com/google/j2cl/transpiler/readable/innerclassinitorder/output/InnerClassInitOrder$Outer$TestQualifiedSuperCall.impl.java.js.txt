@@ -50,6 +50,16 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TestQualifiedSuperCall.$clinit = (() => {});
+    TestQualifiedSuperCall.$loadModules();
+    OuterIsNotSuper.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -68,15 +78,13 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TestQualifiedSuperCall.$clinit = function() {};
+  static $loadModules() {
     Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
     OuterIsSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
-    OuterIsNotSuper.$clinit();
   }
 };
 

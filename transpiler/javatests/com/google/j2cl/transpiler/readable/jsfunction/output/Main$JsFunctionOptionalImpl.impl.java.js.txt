@@ -62,6 +62,16 @@ class JsFunctionOptionalImpl extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    JsFunctionOptionalImpl.$clinit = (() => {});
+    JsFunctionOptionalImpl.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -93,13 +103,11 @@ class JsFunctionOptionalImpl extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    JsFunctionOptionalImpl.$clinit = function() {};
+  static $loadModules() {
     Double = goog.module.get('java.lang.Double$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    j_l_Object.$clinit();
   }
 };
 

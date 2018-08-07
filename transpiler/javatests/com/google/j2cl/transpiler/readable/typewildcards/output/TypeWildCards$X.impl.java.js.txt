@@ -36,6 +36,15 @@ class X {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    X.$clinit = (() => {});
+    X.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class X {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    X.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X.$LambdaAdaptor$impl');
   }

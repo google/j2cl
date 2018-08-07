@@ -36,6 +36,15 @@ class A {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    A.$clinit = (() => {});
+    A.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class A {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    A.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A.$LambdaAdaptor$impl');
   }

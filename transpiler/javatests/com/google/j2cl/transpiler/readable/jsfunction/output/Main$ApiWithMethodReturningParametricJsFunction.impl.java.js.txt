@@ -41,6 +41,15 @@ class ApiWithMethodReturningParametricJsFunction {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ApiWithMethodReturningParametricJsFunction.$clinit = (() => {});
+    ApiWithMethodReturningParametricJsFunction.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -76,10 +85,9 @@ class ApiWithMethodReturningParametricJsFunction {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ApiWithMethodReturningParametricJsFunction.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
   }

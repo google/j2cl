@@ -15,4 +15,8 @@
 [List<String> barStrings = Lists.newArrayList("bar");] => [let barStrings = /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ ($Arrays.$init(["bar"], j_l_String))));] "com.google.j2cl.transpiler.readable.timing.Timing.run"
 [barStrings] => [barStrings] "barStrings"
 [return Objects.equal(fooStrings, barStrings);] => [return Objects.m_equal__java_lang_Object__java_lang_Object(fooStrings, barStrings);] "com.google.j2cl.transpiler.readable.timing.Timing.run"
+[Timing] => [$clinit]
+[Timing] => [Timing.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.timing.Timing.<clinit>"
+[Timing] => [Timing.$loadModules();] "com.google.j2cl.transpiler.readable.timing.Timing.<clinit>"
 [Timing] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.timing.Timing.<clinit>"

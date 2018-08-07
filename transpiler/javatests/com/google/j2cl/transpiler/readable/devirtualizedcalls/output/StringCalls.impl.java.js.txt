@@ -59,6 +59,16 @@ class StringCalls extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StringCalls.$clinit = (() => {});
+    StringCalls.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -77,12 +87,10 @@ class StringCalls extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StringCalls.$clinit = function() {};
+  static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
-    j_l_Object.$clinit();
   }
 };
 

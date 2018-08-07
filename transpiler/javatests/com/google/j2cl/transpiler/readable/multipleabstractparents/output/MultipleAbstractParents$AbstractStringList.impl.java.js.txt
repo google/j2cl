@@ -46,6 +46,16 @@ class AbstractStringList extends AbstractList {
   m_getFoo__java_lang_String(arg0) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractStringList.$clinit = (() => {});
+    AbstractStringList.$loadModules();
+    AbstractList.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -64,12 +74,9 @@ class AbstractStringList extends AbstractList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractStringList.$clinit = function() {};
-    AbstractList.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

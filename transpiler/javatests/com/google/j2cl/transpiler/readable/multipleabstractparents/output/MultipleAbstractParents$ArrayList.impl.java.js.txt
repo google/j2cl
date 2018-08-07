@@ -49,6 +49,16 @@ class ArrayList extends AbstractList {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ArrayList.$clinit = (() => {});
+    ArrayList.$loadModules();
+    AbstractList.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -67,12 +77,9 @@ class ArrayList extends AbstractList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ArrayList.$clinit = function() {};
-    AbstractList.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

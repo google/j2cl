@@ -236,6 +236,16 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    IntersectionTypeTest.$clinit = (() => {});
+    IntersectionTypeTest.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -254,10 +264,9 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    IntersectionTypeTest.$clinit = function() {};
+  static $loadModules() {
     Cmp = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
     Cmp2 = goog.module.get(
@@ -280,7 +289,6 @@ class IntersectionTypeTest extends j_l_Object {
         'com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -17,6 +17,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class Serial {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Serial.$clinit = (() => {});
+    Serial.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -52,11 +61,9 @@ class Serial {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Serial.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

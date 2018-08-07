@@ -57,6 +57,16 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TestUnqualifiedSuperCall.$clinit = (() => {});
+    TestUnqualifiedSuperCall.$loadModules();
+    OuterIsNotSuper.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -75,12 +85,9 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    TestUnqualifiedSuperCall.$clinit = function() {};
-    OuterIsNotSuper.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

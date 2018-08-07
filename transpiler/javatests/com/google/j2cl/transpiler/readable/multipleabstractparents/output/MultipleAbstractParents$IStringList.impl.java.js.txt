@@ -39,6 +39,15 @@ class IStringList {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    IStringList.$clinit = (() => {});
+    IStringList.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -75,10 +84,9 @@ class IStringList {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    IStringList.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
   }

@@ -37,6 +37,15 @@ class Setable {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Setable.$clinit = (() => {});
+    Setable.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -72,10 +81,9 @@ class Setable {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Setable.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Setable.$LambdaAdaptor$impl');
   }

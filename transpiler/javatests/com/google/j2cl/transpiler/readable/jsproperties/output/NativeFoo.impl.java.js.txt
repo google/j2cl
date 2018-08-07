@@ -50,6 +50,16 @@ class NativeFoo extends j_l_Object {
   // native get hasOwnProperty()
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NativeFoo.$clinit = (() => {});
+    NativeFoo.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -68,12 +78,9 @@ class NativeFoo extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NativeFoo.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

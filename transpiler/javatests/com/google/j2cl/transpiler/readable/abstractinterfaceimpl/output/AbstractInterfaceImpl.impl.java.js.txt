@@ -44,6 +44,16 @@ class AbstractInterfaceImpl extends j_l_Object {
   m_foo__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractInterfaceImpl.$clinit = (() => {});
+    AbstractInterfaceImpl.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -62,12 +72,9 @@ class AbstractInterfaceImpl extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractInterfaceImpl.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

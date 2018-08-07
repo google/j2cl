@@ -137,6 +137,16 @@ class Varargs extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Varargs.$clinit = (() => {});
+    Varargs.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -155,13 +165,11 @@ class Varargs extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Varargs.$clinit = function() {};
+  static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    j_l_Object.$clinit();
   }
 };
 

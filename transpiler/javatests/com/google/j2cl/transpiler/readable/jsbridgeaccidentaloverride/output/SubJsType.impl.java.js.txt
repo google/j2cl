@@ -80,6 +80,16 @@ class SubJsType extends MyJsType {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubJsType.$clinit = (() => {});
+    SubJsType.$loadModules();
+    MyJsType.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -98,12 +108,9 @@ class SubJsType extends MyJsType {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubJsType.$clinit = function() {};
-    MyJsType.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

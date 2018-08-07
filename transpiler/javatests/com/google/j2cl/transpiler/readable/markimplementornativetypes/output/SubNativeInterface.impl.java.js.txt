@@ -23,6 +23,15 @@ let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimpl
  */
 class SubNativeInterface {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubNativeInterface.$clinit = (() => {});
+    SubNativeInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -59,11 +68,9 @@ class SubNativeInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubNativeInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

@@ -18,6 +18,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class GenericInterface {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    GenericInterface.$clinit = (() => {});
+    GenericInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -53,11 +62,9 @@ class GenericInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    GenericInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

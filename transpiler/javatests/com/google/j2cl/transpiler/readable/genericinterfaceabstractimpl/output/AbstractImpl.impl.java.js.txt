@@ -47,6 +47,16 @@ class AbstractImpl extends j_l_Object {
   m_fun__java_lang_Object(arg0) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AbstractImpl.$clinit = (() => {});
+    AbstractImpl.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -65,12 +75,9 @@ class AbstractImpl extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    AbstractImpl.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

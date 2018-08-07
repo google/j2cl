@@ -81,6 +81,16 @@ class ObjectCalls extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ObjectCalls.$clinit = (() => {});
+    ObjectCalls.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -99,13 +109,11 @@ class ObjectCalls extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ObjectCalls.$clinit = function() {};
+  static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    j_l_Object.$clinit();
   }
 };
 

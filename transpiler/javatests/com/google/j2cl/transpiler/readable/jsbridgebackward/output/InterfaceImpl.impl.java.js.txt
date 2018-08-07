@@ -59,6 +59,16 @@ class InterfaceImpl extends A {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InterfaceImpl.$clinit = (() => {});
+    InterfaceImpl.$loadModules();
+    A.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -77,12 +87,9 @@ class InterfaceImpl extends A {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InterfaceImpl.$clinit = function() {};
-    A.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

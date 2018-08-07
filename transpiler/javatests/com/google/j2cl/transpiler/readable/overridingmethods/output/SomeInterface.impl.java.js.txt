@@ -36,6 +36,15 @@ class SomeInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeInterface.$clinit = (() => {});
+    SomeInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class SomeInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SomeInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface.$LambdaAdaptor$impl');
   }

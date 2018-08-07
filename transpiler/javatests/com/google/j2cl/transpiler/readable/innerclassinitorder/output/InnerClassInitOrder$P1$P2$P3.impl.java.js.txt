@@ -90,6 +90,16 @@ class P3 extends P2 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    P3.$clinit = (() => {});
+    P3.$loadModules();
+    P2.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -108,12 +118,9 @@ class P3 extends P2 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    P3.$clinit = function() {};
-    P2.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

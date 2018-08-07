@@ -63,6 +63,16 @@ class Element extends j_l_Object {
   m_getKey__() {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Element.$clinit = (() => {});
+    Element.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -81,12 +91,9 @@ class Element extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Element.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

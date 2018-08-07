@@ -65,6 +65,16 @@ class $2Local extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $2Local.$clinit = (() => {});
+    $2Local.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -83,14 +93,12 @@ class $2Local extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $2Local.$clinit = function() {};
+  static $loadModules() {
     Long = goog.module.get('java.lang.Long$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    j_l_Object.$clinit();
   }
 };
 

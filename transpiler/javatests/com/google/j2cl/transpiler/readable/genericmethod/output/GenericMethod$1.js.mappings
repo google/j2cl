@@ -57,5 +57,19 @@
 [t] => [t] "t"
 [{ // inherit method T
       public void fun2(T t) {} // inherit method T
+
+      public <T> void fun2(T t) {} // redefine T
+    }] => [$clinit]
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
+...      public <T> void fun2(T t) {} // redefine T
+    }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<clinit>"
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
+...      public <T> void fun2(T t) {} // redefine T
+    }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<clinit>"
+[{ // inherit method T
+      public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
     }] => [GenericMethod.$clinit();] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$1.<clinit>"

@@ -69,6 +69,17 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = (() => {});
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+    I.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,13 +98,9 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $LambdaAdaptor.$clinit = function() {};
-    j_l_Object.$clinit();
-    I.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

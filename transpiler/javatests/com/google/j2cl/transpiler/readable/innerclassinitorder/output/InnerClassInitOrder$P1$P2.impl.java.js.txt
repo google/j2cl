@@ -90,6 +90,16 @@ class P2 extends P1 {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    P2.$clinit = (() => {});
+    P2.$loadModules();
+    P1.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -108,12 +118,9 @@ class P2 extends P1 {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    P2.$clinit = function() {};
-    P1.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -60,5 +60,20 @@
 [return b;] => [return b;] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1.fun"
 [{
                                 @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }] => [$clinit]
+[{
+                                @Override
+...                                }
+                              }] => [$1_$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1.<clinit>"
+[{
+                                @Override
+...                                }
+                              }] => [$1_$1.$loadModules();] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1.<clinit>"
+[{
+                                @Override
 ...                                }
                               }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1.<clinit>"

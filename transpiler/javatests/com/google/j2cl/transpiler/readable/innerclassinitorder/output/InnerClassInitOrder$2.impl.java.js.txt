@@ -61,6 +61,16 @@ class $2 extends OuterIsNotSuper {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $2.$clinit = (() => {});
+    $2.$loadModules();
+    OuterIsNotSuper.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -79,12 +89,9 @@ class $2 extends OuterIsNotSuper {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $2.$clinit = function() {};
-    OuterIsNotSuper.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

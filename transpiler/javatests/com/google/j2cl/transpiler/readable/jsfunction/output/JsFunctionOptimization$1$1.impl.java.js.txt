@@ -82,6 +82,16 @@ class $1_$1 extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1_$1.$clinit = (() => {});
+    $1_$1.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -100,15 +110,13 @@ class $1_$1 extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1_$1.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization.$1.$1.$1$impl');
     $2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization.$1.$1.$2$impl');
-    j_l_Object.$clinit();
   }
 };
 

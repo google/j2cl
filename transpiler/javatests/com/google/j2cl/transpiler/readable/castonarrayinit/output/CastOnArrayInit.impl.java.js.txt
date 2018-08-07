@@ -72,6 +72,16 @@ class CastOnArrayInit extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    CastOnArrayInit.$clinit = (() => {});
+    CastOnArrayInit.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -90,14 +100,12 @@ class CastOnArrayInit extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    CastOnArrayInit.$clinit = function() {};
+  static $loadModules() {
     Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    j_l_Object.$clinit();
   }
 };
 

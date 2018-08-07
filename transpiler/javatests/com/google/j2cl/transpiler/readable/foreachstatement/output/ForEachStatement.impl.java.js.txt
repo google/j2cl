@@ -69,6 +69,16 @@ class ForEachStatement extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ForEachStatement.$clinit = (() => {});
+    ForEachStatement.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -87,14 +97,12 @@ class ForEachStatement extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ForEachStatement.$clinit = function() {};
+  static $loadModules() {
     Throwable = goog.module.get('java.lang.Throwable$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

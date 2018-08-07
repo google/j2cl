@@ -25,12 +25,10 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -274,7 +272,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderIsInstanceMethod();
     renderIsAssignableFromMethod();
     renderCopyMethod();
-    renderClinit();
+    renderLoadModules();
     sourceBuilder.closeBrace();
     sourceBuilder.append(";");
     sourceBuilder.newLines(2);
@@ -549,21 +547,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  // TODO(b/34928687): Move this to the ast in a normalization pass.
-  private void renderClinit() {
-    MethodDescriptor methodDescriptor =
-        AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor());
+  private void renderLoadModules() {
+    MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
     sourceBuilder.appendLines(
         "/**",
-        " * @public",
+        " * @private",
         " */",
         "static " + ManglingNameUtils.getMangledName(methodDescriptor) + "() ");
     sourceBuilder.openBrace();
-
-    // Set this method to reference an empty function so that it will not be executed again.
-    sourceBuilder.newLine();
-    sourceBuilder.append(
-        environment.aliasForType(type.getDeclaration()) + ".$clinit = function() {};");
 
     // goog.module.get(...) for lazy imports.
     for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.RUNTIME))) {
@@ -571,14 +562,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String path = lazyImport.getImplModulePath();
       sourceBuilder.newLine();
       sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
-    }
-
-    // Static field and static initializer blocks.
-    for (InitializerBlock initializerBlock : type.getStaticInitializerBlocks()) {
-      for (Statement initializer : initializerBlock.getBlock().getStatements()) {
-        sourceBuilder.newLine();
-        statementTranspiler.renderStatement(initializer);
-      }
     }
 
     sourceBuilder.closeBrace();

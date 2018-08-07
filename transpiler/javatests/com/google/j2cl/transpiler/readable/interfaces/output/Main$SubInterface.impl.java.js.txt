@@ -53,6 +53,16 @@ class SubInterface {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SubInterface.$clinit = (() => {});
+    SubInterface.$loadModules();
+    Interface.$clinit();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -89,13 +99,11 @@ class SubInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    SubInterface.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
-    Interface.$clinit();
   }
 };
 

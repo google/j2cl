@@ -52,6 +52,15 @@ class Lambdas_Function {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Lambdas_Function.$clinit = (() => {});
+    Lambdas_Function.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -87,10 +96,9 @@ class Lambdas_Function {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Lambdas_Function.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function.$LambdaAdaptor$impl');
   }

@@ -38,6 +38,15 @@ class NullableTemplatedReturn {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NullableTemplatedReturn.$clinit = (() => {});
+    NullableTemplatedReturn.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -73,10 +82,9 @@ class NullableTemplatedReturn {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NullableTemplatedReturn.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor$impl');
   }

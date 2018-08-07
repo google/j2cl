@@ -61,6 +61,16 @@ class Main extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -79,13 +89,11 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Main.$clinit = function() {};
+  static $loadModules() {
     InterfaceImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl$impl');
-    j_l_Object.$clinit();
   }
 };
 

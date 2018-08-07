@@ -72,6 +72,16 @@ class $1Nested extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $1Nested.$clinit = (() => {});
+    $1Nested.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -90,13 +100,11 @@ class $1Nested extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    $1Nested.$clinit = function() {};
+  static $loadModules() {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

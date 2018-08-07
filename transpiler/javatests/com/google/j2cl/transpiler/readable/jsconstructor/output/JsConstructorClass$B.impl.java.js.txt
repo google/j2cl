@@ -106,6 +106,16 @@ class B extends A {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    B.$clinit = (() => {});
+    B.$loadModules();
+    A.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -124,12 +134,9 @@ class B extends A {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    B.$clinit = function() {};
-    A.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

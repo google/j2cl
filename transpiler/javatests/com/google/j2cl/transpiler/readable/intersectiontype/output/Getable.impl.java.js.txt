@@ -38,6 +38,15 @@ class Getable {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Getable.$clinit = (() => {});
+    Getable.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -73,10 +82,9 @@ class Getable {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Getable.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable.$LambdaAdaptor$impl');
   }

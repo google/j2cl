@@ -41,6 +41,15 @@ class NonNativeUpper extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NonNativeUpper.$clinit = (() => {});
+    NonNativeUpper.$loadModules();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -59,11 +68,9 @@ class NonNativeUpper extends Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    NonNativeUpper.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -56,6 +56,16 @@ class S extends R {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    S.$clinit = (() => {});
+    S.$loadModules();
+    R.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -74,12 +84,9 @@ class S extends R {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    S.$clinit = function() {};
-    R.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

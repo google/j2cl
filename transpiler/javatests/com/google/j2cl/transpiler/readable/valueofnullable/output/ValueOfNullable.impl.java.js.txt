@@ -70,6 +70,16 @@ class ValueOfNullable extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ValueOfNullable.$clinit = (() => {});
+    ValueOfNullable.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -88,12 +98,10 @@ class ValueOfNullable extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ValueOfNullable.$clinit = function() {};
+  static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
-    j_l_Object.$clinit();
   }
 };
 

@@ -17,6 +17,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class EmptyInterface {
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    EmptyInterface.$clinit = (() => {});
+    EmptyInterface.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -52,11 +61,9 @@ class EmptyInterface {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    EmptyInterface.$clinit = function() {};
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadataForInterface(

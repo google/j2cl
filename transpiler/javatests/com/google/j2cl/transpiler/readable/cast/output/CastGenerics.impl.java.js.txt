@@ -155,6 +155,16 @@ class CastGenerics extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    CastGenerics.$clinit = (() => {});
+    CastGenerics.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -173,10 +183,9 @@ class CastGenerics extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    CastGenerics.$clinit = function() {};
+  static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
     Empty1 = goog.module.get(
@@ -187,7 +196,6 @@ class CastGenerics extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    j_l_Object.$clinit();
   }
 };
 

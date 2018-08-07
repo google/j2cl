@@ -66,6 +66,16 @@ class ChildClass extends ParentOuter {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ChildClass.$clinit = (() => {});
+    ChildClass.$loadModules();
+    ParentOuter.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -84,13 +94,11 @@ class ChildClass extends ParentOuter {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ChildClass.$clinit = function() {};
+  static $loadModules() {
     $1LocalClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass$impl');
-    ParentOuter.$clinit();
   }
 };
 

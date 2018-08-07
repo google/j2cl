@@ -36,6 +36,15 @@ class P {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    P.$clinit = (() => {});
+    P.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -71,10 +80,9 @@ class P {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    P.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.P.$LambdaAdaptor$impl');
   }

@@ -45,6 +45,16 @@ class Map extends j_l_Object {
   m_getCeilingEntry__java_lang_Object(key) {}
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Map.$clinit = (() => {});
+    Map.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -63,12 +73,9 @@ class Map extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    Map.$clinit = function() {};
-    j_l_Object.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

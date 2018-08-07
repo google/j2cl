@@ -92,6 +92,29 @@ class StaticInitializers extends j_l_Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    StaticInitializers.$clinit = (() => {});
+    StaticInitializers.$loadModules();
+    j_l_Object.$clinit();
+    StaticInitializers
+        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        5;
+    StaticInitializers
+        .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        StaticInitializers
+            .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers *
+        2;
+    StaticInitializers
+        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        10;
+    let duplicated = 0;
+    let duplicated$1$ = 1;
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -110,25 +133,9 @@ class StaticInitializers extends j_l_Object {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    StaticInitializers.$clinit = function() {};
-    j_l_Object.$clinit();
-    StaticInitializers
-        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
-        5;
-    StaticInitializers
-        .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
-        StaticInitializers
-            .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers *
-        2;
-    StaticInitializers
-        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
-        10;
-    let duplicated = 0;
-    let duplicated$1$ = 1;
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

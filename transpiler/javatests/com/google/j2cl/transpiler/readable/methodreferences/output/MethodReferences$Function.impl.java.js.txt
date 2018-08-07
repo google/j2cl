@@ -39,6 +39,15 @@ class MethodReferences_Function {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    MethodReferences_Function.$clinit = (() => {});
+    MethodReferences_Function.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -74,10 +83,9 @@ class MethodReferences_Function {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    MethodReferences_Function.$clinit = function() {};
+  static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
   }

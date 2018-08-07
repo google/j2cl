@@ -60,6 +60,17 @@ class ConcreteClass extends GenericClass {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    ConcreteClass.$clinit = (() => {});
+    ConcreteClass.$loadModules();
+    GenericClass.$clinit();
+    InterfaceWithDefault.$clinit();
+  }
+
+  /**
    * @param {?} instance
    * @return {boolean}
    * @public
@@ -78,13 +89,9 @@ class ConcreteClass extends GenericClass {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    ConcreteClass.$clinit = function() {};
-    GenericClass.$clinit();
-    InterfaceWithDefault.$clinit();
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

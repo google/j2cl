@@ -64,5 +64,21 @@
 [return "";] => [return "";] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$1.toString"
 [{
         @Override
+        public String toString() {
+          number += 1000;
+          return "";
+        }
+      }] => [$clinit]
+[{
+        @Override
+...        }
+      }] => [$1.$clinit = (() =>{
+    });] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$1.<clinit>"
+[{
+        @Override
+...        }
+      }] => [$1.$loadModules();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$1.<clinit>"
+[{
+        @Override
 ...        }
       }] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$1.<clinit>"

@@ -44,6 +44,15 @@ class InterfaceWithAsyncDefaultMethod {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InterfaceWithAsyncDefaultMethod.$clinit = (() => {});
+    InterfaceWithAsyncDefaultMethod.$loadModules();
+  }
+
+  /**
    * @param {Function} classConstructor
    * @public
    */
@@ -79,10 +88,9 @@ class InterfaceWithAsyncDefaultMethod {
   }
 
   /**
-   * @public
+   * @private
    */
-  static $clinit() {
-    InterfaceWithAsyncDefaultMethod.$clinit = function() {};
+  static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
