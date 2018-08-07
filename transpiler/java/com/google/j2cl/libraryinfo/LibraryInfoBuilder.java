@@ -75,11 +75,9 @@ public final class LibraryInfoBuilder {
 
     typeInfoBuilder.setJsInstantiable(isJsInstantiable);
 
-    // At this stage a type can have multiple initialization blocks related to $clinit in the ast.
-    // Also, getter and setter are defined for static field and both will be collected under
-    // the name of the field.
-    // So we have potentially several members that will create MemberInfo with the same name.
-    // We will reuse builders when those cases happen.
+    // Collect references to getter and setter for the same field under the name of the field,
+    // creating only one MemberInfo instance that combines all the references appearing in their
+    // bodies.
     Map<String, MemberInfo.Builder> memberInfoBuilderByName =
         new LinkedHashMap<>(type.getMembers().size());
 
