@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -59,7 +58,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
               .setSourcePosition(type.getSourcePosition())
               .build());
     }
-    type.getMembers().removeIf(member -> member instanceof InitializerBlock && !member.isStatic());
+    type.getMembers().removeIf(member -> member.isInitializerBlock() && !member.isStatic());
   }
 
   /** Inserts init calls in each constructor */

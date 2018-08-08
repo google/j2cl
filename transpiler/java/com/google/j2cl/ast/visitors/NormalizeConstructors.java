@@ -312,7 +312,7 @@ public class NormalizeConstructors extends NormalizationPass {
     }
     List<Member> members = type.getMembers();
     for (int i = 0; i < members.size(); i++) {
-      if (!(members.get(i) instanceof Method)) {
+      if (!members.get(i).isMethod()) {
         continue;
       }
       Method method = (Method) members.get(i);

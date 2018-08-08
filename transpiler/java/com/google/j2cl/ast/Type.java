@@ -180,7 +180,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return members
         .stream()
         .filter(Predicates.not(Member::isStatic))
-        .anyMatch(member -> member instanceof InitializerBlock);
+        .anyMatch(Member::isInitializerBlock);
   }
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
@@ -193,13 +193,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean hasStaticInitializerBlocks() {
-    return members
-        .stream()
-        .filter(Member::isStatic)
-        // This could be expressed as InitializerBlock.class::isInstance but J2CL's version of
-        // java.lang.Class does not implement cast() nor isInstance().
-        // TODO(b/33676747): implement Class.isInstance and() Class.cast()
-        .anyMatch(member -> member instanceof InitializerBlock);
+    return members.stream().filter(Member::isStatic).anyMatch(Member::isInitializerBlock);
   }
 
   public void addStaticInitializerBlock(Block staticInitializer) {

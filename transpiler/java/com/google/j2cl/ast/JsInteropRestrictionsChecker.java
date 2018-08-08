@@ -579,7 +579,7 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (member instanceof Method) {
+    if (member.isMethod()) {
       Method method = (Method) member;
       Optional<MethodDescriptor> nonJsFunctionOverride =
           method

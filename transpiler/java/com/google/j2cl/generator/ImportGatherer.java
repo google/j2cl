@@ -330,7 +330,7 @@ class ImportGatherer extends AbstractVisitor {
 
   /** Adds a type declaration and figuring out whether is a LOADTIME or RUNTIME dependency. */
   private void addTypeDeclaration(TypeDeclaration typeDeclaration) {
-    boolean isLoadTimeStatement = getCurrentMember() instanceof Field;
+    boolean isLoadTimeStatement = getCurrentMember().isField();
     addTypeDeclaration(
         typeDeclaration, isLoadTimeStatement ? ImportCategory.LOADTIME : ImportCategory.RUNTIME);
   }

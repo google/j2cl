@@ -72,10 +72,10 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
       if (!member.getDescriptor().isJsOverlay()) {
         continue;
       }
-      if (member instanceof Method) {
+      if (member.isMethod()) {
         Method method = (Method) member;
         overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
-      } else if (member instanceof Field) {
+      } else if (member.isField()) {
         Field field = (Field) member;
         checkState(field.getDescriptor().isStatic());
         overlayClass.addField(

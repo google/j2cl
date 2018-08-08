@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
@@ -56,7 +55,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
 
           @Override
           public boolean enterMember(Member member) {
-            if (member instanceof Field) {
+            if (member.isField()) {
               return true;
             }
 
