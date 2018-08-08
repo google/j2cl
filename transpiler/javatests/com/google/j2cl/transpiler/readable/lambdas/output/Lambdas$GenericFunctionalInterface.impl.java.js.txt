@@ -29,8 +29,7 @@ class GenericFunctionalInterface {
 
   /**
    * @template C_GenericFunctionalInterface_T
-   * @param
-   *     {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T}
+   * @param {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T}
    *     fn
    * @return {GenericFunctionalInterface<C_GenericFunctionalInterface_T>}
    * @public
@@ -85,7 +84,7 @@ class GenericFunctionalInterface {
   }
 
   /**
-   * @private
+   * @public
    */
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(

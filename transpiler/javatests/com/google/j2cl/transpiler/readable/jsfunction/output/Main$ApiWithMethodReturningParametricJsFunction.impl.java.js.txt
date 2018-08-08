@@ -21,16 +21,14 @@ class ApiWithMethodReturningParametricJsFunction {
   /**
    * @abstract
    * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
-   * @return
-   *     {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
+   * @return {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
    * @public
    */
   m_anApi__() {}
 
   /**
    * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
-   * @param
-   *     {?function():?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
+   * @param {?function():?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
    *     fn
    * @return {ApiWithMethodReturningParametricJsFunction}
    * @public
@@ -85,7 +83,7 @@ class ApiWithMethodReturningParametricJsFunction {
   }
 
   /**
-   * @private
+   * @public
    */
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(

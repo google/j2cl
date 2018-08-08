@@ -551,7 +551,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
     sourceBuilder.appendLines(
         "/**",
-        " * @private",
+        " * @public",
         " */",
         "static " + ManglingNameUtils.getMangledName(methodDescriptor) + "() ");
     sourceBuilder.openBrace();
