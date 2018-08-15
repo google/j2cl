@@ -25,39 +25,18 @@ j2cl_library(
 
 """
 
-load("//build_def:j2cl_java_library.bzl", "j2cl_java_library")
+load("//build_def:j2cl_java_library.bzl", "j2cl_legacy_java_library_bridge", j2cl_library_rule = "j2cl_library")
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
-load("//tools/build_defs/label:def.bzl", "absolute_label")
-load("//tools/build_defs/j2cl:def.bzl", "js_import")
 load("//tools/build_rules:build_test.bzl", "build_test")
-
-def _do_env_copy(env_restricted_artifact, unrestricted_artifact, testonly):
-    """Copies an artifact from to remove build environment restrictions."""
-    native.genrule(
-        name = unrestricted_artifact + "_genrule",
-        tools = [env_restricted_artifact],
-        outs = [unrestricted_artifact],
-        testonly = testonly,
-        tags = ["notap", "manual"],
-        cmd = "cp $(location %s) $@" % env_restricted_artifact,
-        local = True,
-    )
-
-def _get_absolute_labels(args, key):
-    """Returns the absolute label for the provided key if exists, otherwise empty."""
-    labels = args.get(key) or []
-    if not type(labels) in ["list", "depset"]:
-        fail("Expected depset or list for the attribute '%s' in j2cl_library rule" % key)
-
-    return [absolute_label(target) for target in labels]
 
 def j2cl_library(
         name,
         srcs = [],
+        deps = [],
+        exports = [],
         tags = [],
         native_srcs = [],
         generate_build_test = None,
-        js_deps_mgmt = "closure",
         visibility = None,
         _js_srcs = [],
         _js_deps = [],
@@ -100,17 +79,14 @@ def j2cl_library(
     srcs = srcs or []
     native_srcs = native_srcs or []
     tags = tags or []
+
+    # TODO(goktug): cleanup the repository out of duplicates
+    deps = depset(deps or [])
+    exports = depset(exports or [])
     testonly = kwargs.get("testonly")
 
     # Direct automated dep picking tools and grok away from internal targets.
     internal_tags = tags + ["avoid_dep", "no_grok"]
-    java_exports = []
-    java_deps = []
-    js_deps = _js_deps[:]
-    js_exports = _js_exports[:]
-
-    exports = _get_absolute_labels(kwargs, "exports")
-    deps = _get_absolute_labels(kwargs, "deps")
 
     if not srcs:
         if deps:
@@ -122,24 +98,13 @@ def j2cl_library(
         if _js_deps:
             fail("_js_deps not allowed without srcs")
 
-    for export in exports:
-        java_exports += [export + "_java_library"]
-        js_exports += [export]
-
     target_name = native.package_name() + ":" + base_name
 
     # If this is JRE itself, don't synthesize the JRE dep.
     if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
         deps += ["//internal_do_not_use:jre"]
 
-    for dep in deps:
-        java_deps += [dep + "_java_library"]
-        js_deps += [dep]
-
     java_library_kwargs = dict(kwargs)
-    java_library_kwargs["deps"] = java_deps or []
-    java_library_kwargs["exports"] = java_exports
-    java_library_kwargs["restricted_to"] = ["//buildenv/j2cl:j2cl_compilation"]
     if _transpiler:
         java_library_kwargs["transpiler"] = _transpiler
 
@@ -152,63 +117,22 @@ def j2cl_library(
         cmd = "echo \"package dummy_;\" > $@",
     )
 
-    j2cl_java_library(
-        name = base_name + "_java_library",
+    j2cl_library_rule(
+        name = base_name,
         srcs = srcs,
         srcs_hack = [":" + dummy_src],
+        deps = deps + _js_deps,
+        exports = exports + _js_exports,
         native_srcs = native_srcs,
         js_srcs = _js_srcs,
         readable_source_maps = _readable_source_maps,
         declare_legacy_namespace = _declare_legacy_namespace,
-        tags = internal_tags,
+        tags = tags,
         visibility = visibility,
         **java_library_kwargs
     )
 
-    jszip_name = None
-
-    if srcs:
-        # Uh-oh: _js_import needs to depend on restricted_to=j2cl_compilation targets,
-        # which it uses as classpath elements. But the _js_import can't itself be
-        # restricted-to=j2cl_compilation, as it needs to be usable from "normal" build
-        # rules. Our solution is to defeat the constraints system by building the
-        # java_library as a host dep (by putting it in genrule.tools).
-        #
-        # Context:
-        # https://groups.google.com/a/google.com/d/topic/target-constraints/ss38OI0UC9k/discussion
-        # https://groups.google.com/a/google.com/d/topic/j2cl-team/IdWC-X-ky3s/discussion
-        # https://docs.google.com/document/d/1bCVADLTenSVvVBkJ_Ip3EahdPdmEu1eyQ2wPGbE8sgM/edit?disco=AAAAAfa3IZU
-        #
-        # TODO(cpovirk): Find a less evil solution, maybe based on http://b/27044764
-
-        # Copy the js to an unrestricted environment.
-        jszip_name = base_name + ".js.zip"
-        _do_env_copy(base_name + "_java_library.js.zip", jszip_name, testonly)
-
-        # Expose java bye code and sources similar to java_library
-        java_jar = "lib" + base_name + ".jar"
-        _do_env_copy("lib" + base_name + "_java_library.jar", java_jar, testonly)
-        java_src_jar = "lib" + base_name + "-src.jar"
-        _do_env_copy("lib" + base_name + "_java_library-src.jar", java_src_jar, testonly)
-
-    # This forces execution of j2cl_transpile() targets (both immediate and in the
-    # dependency chain) when build has been invoked on the js_import target.
-    # Additionally, this is used as a workaround to make sure the zip ends up in
-    # the runfiles directory as described in b/35847804.
-    js_data = ([jszip_name] if jszip_name else []) + depset(js_deps + js_exports).to_list()
-
-    # Bring zip srcs into the js build tree
-    js_import(
-        name = base_name,
-        deps = js_deps,
-        deps_mgmt = js_deps_mgmt,
-        exports = js_exports,
-        srczip = jszip_name,
-        tags = tags,
-        testonly = testonly,
-        data = js_data,
-        visibility = visibility,
-    )
+    j2cl_legacy_java_library_bridge(base_name, visibility, testonly)
 
     if generate_build_test == None:
         generate_build_test = True

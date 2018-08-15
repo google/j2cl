@@ -1,16 +1,15 @@
-"""j2cl_java_lib build rule.
+"""Common utilities for creating J2CL targets and providers."""
 
-This is similar to java_library but based on java_common.provider so we could
-drive the compilation from skylark.
-
-"""
-
+load("//tools/build_defs/js_toolchain:def.bzl", "JS_TOOLCHAIN_ATTRIBUTE")
 load("//build_def:j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
 
-def _impl(ctx):
+# Constructor for the Bazel provider for J2CL.
+_J2clInfo = provider(fields = ["_J2clJavaInfo"])
+
+def _impl_j2cl_library(ctx):
     srcs = [_strip_gwt_incompatible(ctx)] if ctx.files.srcs else []
-    deps = [dep[JavaInfo] for dep in ctx.attr.deps]
-    exports = [export[JavaInfo] for export in ctx.attr.exports]
+    java_deps = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.deps if _J2clInfo in d]
+    java_exports = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.exports if _J2clInfo in d]
     plugins = [p[JavaInfo] for p in ctx.attr.plugins]
     exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins]
 
@@ -23,8 +22,8 @@ def _impl(ctx):
             ctx,
             java_toolchain_attr = "_java_toolchain",
         ),
-        deps = deps,
-        exports = exports,
+        deps = java_deps,
+        exports = java_exports,
         plugins = plugins,
         exported_plugins = exported_plugins,
         java_toolchain = ctx.attr._java_toolchain,
@@ -33,10 +32,42 @@ def _impl(ctx):
 
     j2cl_transpile(ctx, java_provider)
 
-    return [
-        DefaultInfo(files = depset([ctx.outputs.jar])),
-        java_provider,
-    ]
+    js_deps = [d.js for d in ctx.attr.deps]
+    js_exports = [e.js for e in ctx.attr.exports]
+    js_output_zip = [ctx.outputs.zip_file] if ctx.files.srcs else []
+
+    # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
+    js_runfiles = _collect_runfiles(ctx, js_output_zip, ctx.attr.deps + ctx.attr.exports)
+
+    js_provider = js_common.provider(
+        ctx,
+        srcs = js_output_zip,
+        deps = js_deps,
+        exports = js_exports,
+        deps_mgmt = ctx.attr.js_deps_mgmt,
+        strict_deps_already_checked = True,
+    )
+
+    # Write an empty .jslib output (work around b/38349075 and maybe others).
+    ctx.actions.write(ctx.outputs.dummy_jslib, "")
+
+    return struct(
+        js = js_provider,
+        providers = [
+            DefaultInfo(
+                files = depset(js_output_zip + [ctx.outputs.jar, ctx.outputs.dummy_jslib]),
+                runfiles = js_runfiles,
+            ),
+            _J2clInfo(_J2clJavaInfo = java_provider),
+        ],
+    )
+
+def _collect_runfiles(ctx, files, deps):
+    transitive_runfiles = [d[DefaultInfo].default_runfiles.files for d in deps]
+    return ctx.runfiles(
+        files = files,
+        transitive_files = depset(transitive = transitive_runfiles),
+    )
 
 def _strip_gwt_incompatible(ctx):
     output_file = ctx.actions.declare_file(ctx.label.name + "_stripped-src.jar")
@@ -60,35 +91,76 @@ def _strip_gwt_incompatible(ctx):
 
     return output_file
 
-j2cl_java_library = rule(
-    implementation = _impl,
-    attrs = dict(J2CL_TRANSPILE_ATTRS, **{
-        "srcs": attr.label_list(allow_files = True),
-        "srcs_hack": attr.label_list(allow_files = True),
-        "deps": attr.label_list(providers = [JavaInfo]),
-        "exports": attr.label_list(providers = [JavaInfo]),
-        "plugins": attr.label_list(providers = [JavaInfo]),
-        "exported_plugins": attr.label_list(providers = [JavaInfo]),
-        "javacopts": attr.string_list(),
-        "resources": attr.label_list(allow_files = True),  # TODO(goktug): remove
-        "licenses": attr.license(),  # TODO(goktug): remove
-        "_java_toolchain": attr.label(
-            default = Label("//tools/jdk:toolchain"),
-        ),
-        "_host_javabase": attr.label(
-            default = Label("//tools/jdk:current_host_java_runtime"),
-            cfg = "host",
-        ),
-        "_stripper": attr.label(
-            default = Label("//internal_do_not_use:GwtIncompatibleStripper"),
-            cfg = "host",
-            executable = True,
-        ),
-    }),
-    fragments = ["java"],
+_J2CL_LIB_ATTRS = {
+    "srcs": attr.label_list(allow_files = True),
+    "srcs_hack": attr.label_list(allow_files = True),
+    "deps": attr.label_list(providers = ["js"]),
+    "exports": attr.label_list(providers = ["js"]),
+    "js_deps_mgmt": attr.string(default = "closure"),
+    "plugins": attr.label_list(providers = [JavaInfo]),
+    "exported_plugins": attr.label_list(providers = [JavaInfo]),
+    "javacopts": attr.string_list(),
+    "resources": attr.label_list(allow_files = True),  # TODO(goktug): remove
+    "licenses": attr.license(),  # TODO(goktug): remove
+    "_java_toolchain": attr.label(
+        default = Label("//tools/jdk:toolchain"),
+    ),
+    "_host_javabase": attr.label(
+        default = Label("//tools/jdk:current_host_java_runtime"),
+        cfg = "host",
+    ),
+    "_stripper": attr.label(
+        default = Label("//internal_do_not_use:GwtIncompatibleStripper"),
+        cfg = "host",
+        executable = True,
+    ),
+}
+_J2CL_LIB_ATTRS.update(J2CL_TRANSPILE_ATTRS)
+_J2CL_LIB_ATTRS.update(JS_TOOLCHAIN_ATTRIBUTE)
+
+j2cl_library = rule(
+    implementation = _impl_j2cl_library,
+    attrs = _J2CL_LIB_ATTRS,
+    fragments = ["java", "js"],
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
         "zip_file": "%{name}.js.zip",
+        "dummy_jslib": "%{name}.jslib",
     },
 )
+
+def _impl_java_alias(ctx):
+    return [ctx.attr.target[_J2clInfo]._J2clJavaInfo]
+
+# Helper rule to convert a J2CL target to a Java target. Only intended for internal use.
+_j2cl_java_alias = rule(
+    implementation = _impl_java_alias,
+    attrs = {"target": attr.label(providers = [_J2clInfo])},
+)
+
+def _impl_java_import(ctx):
+    return struct(
+        js = js_common.provider(ctx, deps_mgmt = "closure"),
+        providers = [_J2clInfo(_J2clJavaInfo = ctx.attr.jar[JavaInfo])],
+    )
+
+# helper rule to convert a Java target to a J2CL target.
+j2cl_java_import = rule(
+    implementation = _impl_java_import,
+    attrs = dict(JS_TOOLCHAIN_ATTRIBUTE, **{
+        "jar": attr.label(providers = [JavaInfo]),
+        "licenses": attr.license(),
+    }),
+    fragments = ["java", "js"],
+)
+
+def j2cl_legacy_java_library_bridge(j2cl_target, visibility, testonly = None):
+    _j2cl_java_alias(
+        name = j2cl_target + "_java_library",
+        target = j2cl_target,
+        tags = ["avoid_dep", "no_grok"],
+        restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
+        visibility = visibility,
+        testonly = testonly,
+    )
