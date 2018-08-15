@@ -95,36 +95,32 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public enum MethodOrigin implements MemberDescriptor.Origin {
     SOURCE,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
-    SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>", true),
+    SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>", Visibility.PROTECTED),
     SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
     SYNTHETIC_CLASS_INITIALIZER("<clinit>"),
-    SYNTHETIC_INSTANCE_INITIALIZER("<init>", true),
+    SYNTHETIC_INSTANCE_INITIALIZER("<init>", Visibility.PRIVATE),
     SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>");
 
     private final String stackTraceFrameName;
-    private final boolean emitAsPrivate;
+    private final Visibility overriddenJsVisibility;
 
     MethodOrigin() {
-      this(null, false);
+      this(null);
     }
 
     MethodOrigin(String stackTraceFrameName) {
-      this(stackTraceFrameName, false);
+      this(stackTraceFrameName, Visibility.PUBLIC);
     }
 
-    MethodOrigin(String stackTraceFrameName, boolean emitAsPrivate) {
+    MethodOrigin(String stackTraceFrameName, Visibility overriddenJsVisibility) {
       this.stackTraceFrameName = stackTraceFrameName;
-      this.emitAsPrivate = emitAsPrivate;
+      this.overriddenJsVisibility = overriddenJsVisibility;
     }
 
     public String getName() {
       return stackTraceFrameName;
-    }
-
-    public boolean emitAsPrivate() {
-      return emitAsPrivate;
     }
 
     @Override
@@ -375,6 +371,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     return (thisVisibility.isPublicOrProtected() && thatVisibility.isPublicOrProtected())
         || thisVisibility == thatVisibility;
+  }
+
+  public Visibility getJsVisibility() {
+    // TODO(29632512): stop overriding visibility and reflect the java visibilities.
+    return getOrigin().overriddenJsVisibility;
   }
 
   public String getMethodSignature() {

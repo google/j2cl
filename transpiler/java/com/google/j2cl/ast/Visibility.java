@@ -20,11 +20,9 @@ package com.google.j2cl.ast;
  */
 public enum Visibility {
   PUBLIC("public", 3),
-  // Per-class output needs to put each class in a separate file even if the classes originally came
-  // from a single Java file. So even private things need to be marked as public.
-  PROTECTED("public", 2),
-  PACKAGE_PRIVATE("public", 1),
-  PRIVATE("public", 0);
+  PROTECTED("protected", 2),
+  PACKAGE_PRIVATE("package", 1),
+  PRIVATE("private", 0);
 
   public final String jsText;
   public final int level;
