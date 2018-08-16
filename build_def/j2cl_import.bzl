@@ -22,7 +22,7 @@ j2cl_library(
 
 """
 
-load("//build_def:j2cl_java_library.bzl", "j2cl_java_import", "j2cl_legacy_java_library_bridge")
+load("//build_def:j2cl_java_library.bzl", "j2cl_java_import")
 
 def j2cl_import(
         name,
@@ -41,5 +41,3 @@ def j2cl_import(
         visibility = visibility,
         **kwargs
     )
-
-    j2cl_legacy_java_library_bridge(name, visibility)

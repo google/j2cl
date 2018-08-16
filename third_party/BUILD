@@ -160,6 +160,11 @@ alias(
 )
 
 alias(
+    name = "gwt-javaemul-internal-annotations",
+    actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
+)
+
+alias(
     name = "gwt-javaemul-internal-annotations-j2cl",
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )

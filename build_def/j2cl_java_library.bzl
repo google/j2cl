@@ -130,15 +130,6 @@ j2cl_library = rule(
     },
 )
 
-def _impl_java_alias(ctx):
-    return [ctx.attr.target[_J2clInfo]._J2clJavaInfo]
-
-# Helper rule to convert a J2CL target to a Java target. Only intended for internal use.
-_j2cl_java_alias = rule(
-    implementation = _impl_java_alias,
-    attrs = {"target": attr.label(providers = [_J2clInfo])},
-)
-
 def _impl_java_import(ctx):
     return struct(
         js = js_common.provider(ctx, deps_mgmt = "closure"),
@@ -154,13 +145,3 @@ j2cl_java_import = rule(
     }),
     fragments = ["java", "js"],
 )
-
-def j2cl_legacy_java_library_bridge(j2cl_target, visibility, testonly = None):
-    _j2cl_java_alias(
-        name = j2cl_target + "_java_library",
-        target = j2cl_target,
-        tags = ["avoid_dep", "no_grok"],
-        restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-        visibility = visibility,
-        testonly = testonly,
-    )

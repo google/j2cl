@@ -25,7 +25,7 @@ j2cl_library(
 
 """
 
-load("//build_def:j2cl_java_library.bzl", "j2cl_legacy_java_library_bridge", j2cl_library_rule = "j2cl_library")
+load("//build_def:j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
 load("//build_def:j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
@@ -121,8 +121,6 @@ def j2cl_library(
         visibility = visibility,
         **java_library_kwargs
     )
-
-    j2cl_legacy_java_library_bridge(base_name, visibility, testonly)
 
     if srcs and (generate_build_test == None or generate_build_test):
         build_test(base_name, _test_externs_list, tags)

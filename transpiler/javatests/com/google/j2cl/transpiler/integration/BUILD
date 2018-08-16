@@ -9,19 +9,26 @@
 # Apache2
 licenses(["notice"])
 
+java_library(
+    name = "jre",
+    srcs = ["//jre/java:jre_java_files"],
+    deps = [
+        "//third_party:gwt-javaemul-internal-annotations",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
 # A java_binary to create a merged jar of all deps of the standard runtime.
 java_binary(
     name = "jre_bundle",
     create_executable = 0,
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-    runtime_deps = ["//jre/java:jre_java_library"],
+    runtime_deps = [":jre"],
 )
 
 java_test(
     name = "CommandLineInvocationTest",
     srcs = ["CommandLineInvocationTest.java"],
     data = [":jre_bundle_deploy.jar"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":TranspilerTester",
         "//third_party/java/junit",
@@ -32,7 +39,6 @@ java_test(
     name = "SourceMapsIntegrationTest",
     srcs = ["SourceMapsIntegrationTest.java"],
     data = [":jre_bundle_deploy.jar"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":TranspilerTester",
         "//third_party/java/junit",
@@ -43,7 +49,6 @@ java_test(
     name = "KytheIndexingMetadataTest",
     srcs = ["KytheIndexingMetadataTest.java"],
     data = [":jre_bundle_deploy.jar"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":TranspilerTester",
         "//third_party/java/junit",
@@ -54,7 +59,6 @@ java_test(
     name = "JsInteropRestrictionsCheckerTest",
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":TranspilerTester",
         "//java/com/google/common/base",
