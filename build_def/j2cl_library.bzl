@@ -79,10 +79,8 @@ def j2cl_library(
     srcs = srcs or []
     native_srcs = native_srcs or []
     tags = tags or []
-
-    # TODO(goktug): cleanup the repository out of duplicates
-    deps = depset(deps or [])
-    exports = depset(exports or [])
+    deps = deps or []
+    exports = exports or []
     testonly = kwargs.get("testonly")
 
     # Direct automated dep picking tools and grok away from internal targets.
@@ -102,7 +100,7 @@ def j2cl_library(
 
     # If this is JRE itself, don't synthesize the JRE dep.
     if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
-        deps += ["//internal_do_not_use:jre"]
+        deps = deps + ["//internal_do_not_use:jre"]
 
     java_library_kwargs = dict(kwargs)
     if _transpiler:
