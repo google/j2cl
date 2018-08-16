@@ -55,6 +55,8 @@ class Other<T> {
   }
 
   <T> T m() {
+    // TODO(b/112669572) : JsCompiler complains about the type of the local variable because
+    // it confuses it with the method template (which is named M_T in the js code).
     int M_T = 5;
     Other<T> o = (Other<T>) null;
     return null;

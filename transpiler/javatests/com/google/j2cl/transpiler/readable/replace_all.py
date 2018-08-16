@@ -85,6 +85,11 @@ def _get_dirs_from_blaze_query(rules_filter):
   return filter(bool, dirs)
 
 
+def blaze_clean():
+  """Clean output to force full compilation of all targets."""
+  run_cmd_get_output(["blaze", "clean", "--expunge"])
+
+
 def blaze_build(target_dirs, build_integration_tests):
   """Blaze build everything in 1-go, for speed."""
 
@@ -106,7 +111,7 @@ def replace_transpiled_js(readable_dirs):
   copy_library_info_dirs = get_library_info_dirs(FLAGS.name_filter)
 
   for readable_dir in readable_dirs:
-    zip_file_path = "blaze-genfiles/%s/readable.js.zip" % readable_dir
+    zip_file_path = "blaze-bin/%s/readable.js.zip" % readable_dir
     output = readable_dir + "/output"
 
     # Clean the output directory from the result of last run.
@@ -149,8 +154,12 @@ def replace_transpiled_js(readable_dirs):
 def gather_closure_warnings(build_log):
   """Gather Closure compiler warnings."""
 
-  build_logs = build_log.split("____From Compiling JavaScript ")[1:]
+  build_logs = build_log.split("INFO: From Compiling JavaScript for ")[1:]
   build_logs = filter(None, build_logs)
+
+  if not build_logs:
+    raise Exception("Did not find JSCompiler output.")
+
   for build_log in build_logs:
     # Remove unstable build timing lines.
     build_log = "\n".join([
@@ -160,7 +169,7 @@ def gather_closure_warnings(build_log):
     ])
 
     # Remove folder path spam.
-    build_log = build_log.replace("blaze-out/k8-fastbuild/genfiles/", "")
+    build_log = build_log.replace("blaze-out/k8-fastbuild/bin/", "")
     # Remove stable (but occasionally changing) line number details.
     build_log = replace_pattern(r"\:([0-9]*)\:", "", build_log)
     # Filter out the unstable ", ##% typed" message
@@ -186,6 +195,9 @@ def main(unused_argv):
   print "Generating readable JS and build logs:"
   readable_dirs = get_readable_dirs(FLAGS.name_filter)
 
+  print "  Cleaning stale blaze outputs"
+  blaze_clean()
+
   if build_all:
     print "  Blaze building everything"
   else:
@@ -196,14 +208,14 @@ def main(unused_argv):
                              and FLAGS.logs and not FLAGS.skip_integration)
   build_log = blaze_build(readable_dirs, build_integration_tests)
 
-  print "  Copying and reformatting transpiled JS"
-  replace_transpiled_js(readable_dirs)
-
   if not FLAGS.logs:
     print "  Skipping logs!!!"
   else:
     print "  Processing build logs"
     gather_closure_warnings(build_log)
+
+  print "  Copying and reformatting transpiled JS"
+  replace_transpiled_js(readable_dirs)
 
   print "run diff on repo to see changes"
 
