@@ -17,15 +17,15 @@
  */
 goog.module('vmbootstrap.Objects$impl');
 
+let $Hashing = goog.forwardDeclare('nativebootstrap.Hashing$impl');
+let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
-let Object = goog.forwardDeclare('java.lang.Object$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
-let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let JavaLangObject = goog.forwardDeclare('java.lang.Object$impl');
 let JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
-let $Hashing = goog.forwardDeclare('nativebootstrap.Hashing$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 
 /**
  * Provides devirtualized Object methods
@@ -121,8 +121,10 @@ class Objects {
       return Class.$get(String);
     } else if (obj instanceof Array) {
       return Arrays.m_getClass__java_lang_Object(obj);
-    } else if (obj instanceof Object) {
-      return Class.$get(obj.constructor);
+    } else if (obj instanceof JavaLangObject) {
+      // TODO(b/112664631): use of .constructor on JavaLangObject instances
+      // should be allowed.
+      return Class.$get(/** @type {!Object} */ (obj).constructor);
     } else if (obj) {
       // Do not need to check existence of 'getClass' since j.l.Object#getClass
       // is final and all native types map to a single special class and so do
@@ -140,7 +142,7 @@ class Objects {
    */
   static $clinit() {
     Objects.$clinit = function() {};
-    Object = goog.module.get('java.lang.Object$impl');
+    JavaLangObject = goog.module.get('java.lang.Object$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
@@ -150,7 +152,7 @@ class Objects {
     JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Hashing = goog.module.get('nativebootstrap.Hashing$impl');
   }
-};
+}
 
 
 /**
