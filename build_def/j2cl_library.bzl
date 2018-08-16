@@ -26,8 +26,7 @@ j2cl_library(
 """
 
 load("//build_def:j2cl_java_library.bzl", "j2cl_legacy_java_library_bridge", j2cl_library_rule = "j2cl_library")
-load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
-load("//tools/build_rules:build_test.bzl", "build_test")
+load("//build_def:j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
         name,
@@ -71,10 +70,6 @@ def j2cl_library(
     #       not use.
     #   _transpiler: J2CL compiler instance to use.
 
-    # exit early to avoid parse errors when running under bazel
-    if not hasattr(native, "js_library"):
-        return
-
     base_name = name
     srcs = srcs or []
     native_srcs = native_srcs or []
@@ -82,9 +77,6 @@ def j2cl_library(
     deps = deps or []
     exports = exports or []
     testonly = kwargs.get("testonly")
-
-    # Direct automated dep picking tools and grok away from internal targets.
-    internal_tags = tags + ["avoid_dep", "no_grok"]
 
     if not srcs:
         if deps:
@@ -132,42 +124,5 @@ def j2cl_library(
 
     j2cl_legacy_java_library_bridge(base_name, visibility, testonly)
 
-    if generate_build_test == None:
-        generate_build_test = True
-
-    if generate_build_test and srcs:
-        # Add an empty .js file to the js_binary build test compilation so that  jscompiler does not
-        # error out when there are no .js source (e.g. all sources are @JsFunction).
-        native.genrule(
-            name = base_name + "_empty_js_file",
-            cmd = "echo \"// empty file\" > $(OUTS)",
-            outs = [base_name + "_empty_js_file.js"],
-        )
-        native.js_library(
-            name = base_name + "_empty_js_file_lib",
-            srcs = [base_name + "_empty_js_file"],
-            tags = ["no_grok"],
-        )
-        native.js_binary(
-            name = base_name + "_js_binary",
-            deps = [
-                base_name,
-                base_name + "_empty_js_file_lib",
-            ],
-            defs = J2CL_OPTIMIZED_DEFS,
-            externs_list = _test_externs_list,
-            include_default_externs = "off" if _test_externs_list else "web",
-            tags = internal_tags + ["no_grok"],
-            compiler = "//javascript/tools/jscompiler:head",
-            testonly = 1,
-            visibility = ["//visibility:private"],
-        )
-
-        build_test(
-            name = base_name + "_build_test",
-            targets = [
-                base_name,
-                base_name + "_js_binary",
-            ],
-            tags = internal_tags,
-        )
+    if srcs and (generate_build_test == None or generate_build_test):
+        build_test(base_name, _test_externs_list, tags)
