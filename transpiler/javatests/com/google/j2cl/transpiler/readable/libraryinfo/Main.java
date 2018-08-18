@@ -15,14 +15,28 @@
  */
 package com.google.j2cl.transpiler.readable.libraryinfo;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
   public static String STATIC_FIELD = "STATIC_FIELD";
 
+  @JsFunction
+  interface Function {
+    void apply(String s);
+  }
+
+  private static final class FunctionImpl implements Function {
+    public void apply(String s) {}
+  }
+
   @JsMethod
   public static void entryPoint() {
     new Main().execute();
+
+    Function jsFunction = new FunctionImpl();
+    jsFunction = s -> log(s);
+    jsFunction.apply("foo");
   }
 
   private void execute() {

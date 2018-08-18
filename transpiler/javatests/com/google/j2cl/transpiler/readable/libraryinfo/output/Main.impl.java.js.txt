@@ -12,6 +12,8 @@ goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let FunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
+
 
 class Main extends j_l_Object {
   /**
@@ -50,6 +52,11 @@ class Main extends j_l_Object {
     Main.$clinit();
     Main.$create__()
         .m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main();
+    let jsFunction = FunctionImpl.$create__();
+    jsFunction = ((/** ?string */ s) => {
+      console.log(s);
+    });
+    jsFunction('foo');
   }
 
   /**
@@ -124,7 +131,10 @@ class Main extends j_l_Object {
   /**
    * @public
    */
-  static $loadModules() {}
+  static $loadModules() {
+    FunctionImpl = goog.module.get(
+        'com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
+  }
 };
 
 $Util.$setClassMetadata(

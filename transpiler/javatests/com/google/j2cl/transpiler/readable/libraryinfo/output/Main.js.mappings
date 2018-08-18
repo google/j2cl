@@ -11,6 +11,14 @@
 [entryPoint] => [entryPoint]
 [entryPoint] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
 [new Main().execute();] => [Main.$create__().m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
+[Function jsFunction = new FunctionImpl();] => [let jsFunction = FunctionImpl.$create__();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
+[jsFunction] => [jsFunction] "jsFunction"
+[jsFunction = s -> log(s);] => [jsFunction = ((/** ?string */ s) =>{
+      console.log(s);
+    });] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
+[s] => [s] "s"
+[log(s)] => [console.log(s);] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<lambda in entryPoint>"
+[jsFunction.apply("foo");] => [jsFunction("foo");] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
 [execute] => [m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main]
 [log("Foo");] => [console.log("Foo");] "com.google.j2cl.transpiler.readable.libraryinfo.Main.execute"
 [toString] => [toString]
