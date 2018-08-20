@@ -83,12 +83,14 @@ public final class LibraryInfoBuilder {
 
     for (Member member : type.getMembers()) {
       String memberName = getMemberId(member.getDescriptor());
+      // JsMembers and JsFunctions are marked as accessible by js.
       // $clinit is marked as a JsMethod so that the name is preserved (for example to have a
       // consistent name for calling from handwritten methods in native.js files within the same
-      // class). Because $clinit is not really considered to be accessible from arbitrary
-      // JavaScript, we don't consider it jsAccessible.
+      // class). Because $clinit is not really considered to be accessible by arbitrary
+      // JavaScript, we don't consider it  accessible by js.
       boolean isJsAccessible =
-          member.getDescriptor().isJsMember() && !CLINIT_METHOD_NAME.equals(memberName);
+          (member.getDescriptor().isJsFunction() || member.getDescriptor().isJsMember())
+              && !CLINIT_METHOD_NAME.equals(memberName);
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -141,6 +143,12 @@ public final class LibraryInfoBuilder {
 
           @Override
           public void exitInvocation(Invocation node) {
+            if (node.getTarget().isJsFunction()) {
+              // We don't record call to JsFunction interface methods because a it doesn't
+              // generate any js type. The implementation of JsFunction interface will be marked as
+              // accessible by js and will be live if the implementation type is instantiated.
+              return;
+            }
             String enclosingType = getTypeId(node.getTarget().getEnclosingTypeDescriptor());
 
             methodInvocationSet.add(

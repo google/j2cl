@@ -80,12 +80,7 @@
                   "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl",
               "kind" : "STATIC"
             },
-            {"method" : "log", "enclosingType" : "console", "kind" : "STATIC"},
-            {
-              "method" : "m_apply__java_lang_String",
-              "enclosingType" :
-                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.Function"
-            }
+            {"method" : "log", "enclosingType" : "console", "kind" : "STATIC"}
           ],
           "referencedTypes" : [
             "com.google.j2cl.transpiler.readable.libraryinfo.Main",
@@ -264,7 +259,12 @@
             "enclosingType" : "java.lang.Object"
           } ]
         },
-        {"name" : "m_apply__java_lang_String", "public" : true}, {
+        {
+          "name" : "m_apply__java_lang_String",
+          "public" : true,
+          "jsAccessible" : true
+        },
+        {
           "name" : "$clinit",
           "public" : true,
           "static" : true,
