@@ -19,9 +19,9 @@
 [if (o == null) {
       return (Setable & Getable<T>) o;
     }] => [if ($Equality.$same(o, null)) {
-      return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Setable), Getable));
+      return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));
     }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
-[return (Setable & Getable<T>) o;] => [return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Setable), Getable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
+[return (Setable & Getable<T>) o;] => [return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [return (Getable<T> & Setable) o;] => [return /**@type {Getable<*>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [cast1] => [m_cast1__java_lang_Object]
 [s] => [s] "s"
