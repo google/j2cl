@@ -485,7 +485,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public boolean canBeReferencedExternally() {
     if (getTypeDeclaration().isJsType()
         || isJsFunctionInterface()
-        || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)) {
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)
+        || TypeDescriptors.isJavaLangObject(this)) {
       return true;
     }
 
