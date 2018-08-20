@@ -100,8 +100,7 @@ _J2CL_LIB_ATTRS = {
     "plugins": attr.label_list(providers = [JavaInfo]),
     "exported_plugins": attr.label_list(providers = [JavaInfo]),
     "javacopts": attr.string_list(),
-    "resources": attr.label_list(allow_files = True),  # TODO(goktug): remove
-    "licenses": attr.license(),  # TODO(goktug): remove
+    "licenses": attr.license(),
     "_java_toolchain": attr.label(
         default = Label("//tools/jdk:toolchain"),
     ),
