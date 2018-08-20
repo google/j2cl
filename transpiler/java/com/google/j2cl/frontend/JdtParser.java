@@ -48,9 +48,9 @@ public class JdtParser {
 
   /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(List<String> classpathEntries, Problems problems) {
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_9);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_9);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_9);
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_10);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_10);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_10);
 
     this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
