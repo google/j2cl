@@ -151,22 +151,29 @@ def replace_transpiled_js(readable_dirs):
       ])
 
 
+def is_spam(line):
+  """Whether the line is build output spam or not."""
+  return re.match(r"\[[0-9]+\s?/\s?[0-9]+\]", line)
+
+
 def gather_closure_warnings(build_log):
   """Gather Closure compiler warnings."""
 
-  build_logs = build_log.split("INFO: From Compiling JavaScript for ")[1:]
-  build_logs = filter(None, build_logs)
+  compiling_javascript_prefix = "From Compiling JavaScript for "
+  build_logs = build_log.split("INFO: ")
+  build_logs = [
+      build_log[len(compiling_javascript_prefix):]
+      for build_log in build_logs
+      if build_log and build_log.startswith(compiling_javascript_prefix)
+  ]
 
   if not build_logs:
     raise Exception("Did not find JSCompiler output.")
 
   for build_log in build_logs:
     # Remove unstable build timing lines.
-    build_log = "\n".join([
-        line for line in build_log.splitlines()
-        if not line.startswith("_") and "  Compiling" not in line and "Running"
-        not in line and "Building" not in line
-    ])
+    build_log = "\n".join(
+        [line for line in build_log.splitlines() if not is_spam(line)])
 
     # Remove folder path spam.
     build_log = build_log.replace("blaze-out/k8-fastbuild/bin/", "")
