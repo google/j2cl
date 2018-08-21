@@ -38,7 +38,12 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     renderFileOverview("extraRequire", "lateProvide", "unusedLocalVariables");
 
     TypeDeclaration typeDeclaration = type.getDeclaration();
-    sourceBuilder.appendln("goog.module('" + typeDeclaration.getModuleName() + "');");
+    sourceBuilder.append("goog.module(");
+    sourceBuilder.emitWithMapping(
+        type.getSourcePosition(),
+        () -> sourceBuilder.append("'" + typeDeclaration.getModuleName() + "'"));
+    sourceBuilder.append(");");
+    sourceBuilder.newLine();
 
     if (declareLegacyNamespace && typeDeclaration.isJsType() && !typeDeclaration.isAnonymous()) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
@@ -88,9 +93,8 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         "// Re-exports the implementation.",
         "var " + className + " = goog.require('" + implementationPath + "');");
     sourceBuilder.newLine();
-    // TODO(b/110761106): This maps JavaScript type references to the Java type via the 'exports' in
-    // the header file. This may become obsolete once the linked bug is fixed. Fixing the bug will
-    // inline type aliases found in header files.
+    // Since declareLegacyNamespace makes this class globally accessible via exports, also add a
+    // mapping from the exports to the original Java class.
     sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
     sourceBuilder.append(" = " + className + ";");
     sourceBuilder.newLine();
