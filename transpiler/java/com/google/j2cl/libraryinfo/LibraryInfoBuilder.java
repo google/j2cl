@@ -138,6 +138,10 @@ public final class LibraryInfoBuilder {
                 MethodInvocation.newBuilder()
                     .setMethod(ManglingNameUtils.getMangledName(node.getTarget()))
                     .setEnclosingType(getTypeId(node.getTarget().getEnclosingTypeDescriptor()))
+                    .setKind(
+                        node.getTarget().isStatic()
+                            ? InvocationKind.STATIC
+                            : InvocationKind.DYNAMIC)
                     .build());
           }
 
