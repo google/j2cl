@@ -78,7 +78,7 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Override
-  public boolean equals(Object o) {
+  public final boolean equals(Object o) {
     if (o instanceof TypeDeclaration) {
       return getUniqueId().equals(((TypeDeclaration) o).getUniqueId());
     }
@@ -667,7 +667,7 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return getUniqueId();
   }
 
