@@ -3,7 +3,7 @@
 load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_rules:build_test.bzl", build_test_rule = "build_test")
 
-def build_test(target, externs_list, tags):
+def build_test(target, tags):
     """Create a <target>_build_test that verifies the provied J2CL target"""
 
     # exit early to avoid parse errors when running under bazel
@@ -29,8 +29,6 @@ def build_test(target, externs_list, tags):
             target + "_empty_js_file_lib",
         ],
         defs = J2CL_OPTIMIZED_DEFS,
-        externs_list = externs_list,
-        include_default_externs = "off" if externs_list else "web",
         tags = tags + ["avoid_dep", "no_grok"],
         compiler = "//javascript/tools/jscompiler:head",
         testonly = 1,

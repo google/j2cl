@@ -42,7 +42,6 @@ def j2cl_library(
         _js_exports = [],
         _readable_source_maps = False,
         _declare_legacy_namespace = False,
-        _test_externs_list = [],
         _transpiler = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
@@ -123,4 +122,4 @@ def j2cl_library(
     )
 
     if srcs and (generate_build_test == None or generate_build_test):
-        build_test(base_name, _test_externs_list, tags)
+        build_test(base_name, tags)
