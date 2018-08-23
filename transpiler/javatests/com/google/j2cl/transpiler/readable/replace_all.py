@@ -153,7 +153,7 @@ def replace_transpiled_js(readable_dirs):
 
 def is_spam(line):
   """Whether the line is build output spam or not."""
-  return re.match(r"\[[0-9]+\s?/\s?[0-9]+\]", line)
+  return re.match(r"\[[0-9,]+\s?/\s?[0-9,]+\]", line)
 
 
 def gather_closure_warnings(build_log):
