@@ -16,6 +16,11 @@ goog.module('test.foo.ElementLikeNativeInterface');
 /**
  * @interface
  */
-class ElementLikeNativeInterface {}
+class ElementLikeNativeInterface {
+  /**
+   * @returns {?string}
+   */
+  get tagName() {}
+}
 
 exports = ElementLikeNativeInterface;

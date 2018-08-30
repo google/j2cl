@@ -121,14 +121,26 @@ JsPropertyTest.MyNativeJsType = class {
 JsPropertyTest.MyNativeJsType.staticX = 33;
 
 /** @interface */
-JsPropertyTest.AccidentalOverridePropertyJsTypeInterface = class {};
+JsPropertyTest.AccidentalOverridePropertyJsTypeInterface = class {
+  /** @return {number} */
+  get x() {
+    return 0;
+  }
+};
 
 /** @interface */
 JsPropertyTest.MyNativeJsTypeInterface = class {
-  constructor() {
-    /** @public {number} */
-    this.x;
-  }
+  /**
+   * @param {number} value
+   * @returns {void}
+   */
+  set x(value) {}
+
+  /**
+   * @returns {number}
+   */
+  get x() {}
+
   /**
    * @param {number} bias
    * @return {number}

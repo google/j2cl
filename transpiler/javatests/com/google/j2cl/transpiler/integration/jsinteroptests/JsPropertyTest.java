@@ -239,7 +239,7 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(12, obj.x);
   }
 
-  @JsType(isNative = true, name = "MyNativeJsTypeInterface")
+  @JsType(isNative = true)
   interface MyNativeJsTypeInterface {
     @JsProperty
     int getX();
