@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.j2cl.common.J2clUtils;
+import java.beans.Introspector;
 
 /**
  * Indicates type of a JS member. A method is some flavor of JsMember if it is a JsProperty, or a
@@ -40,10 +40,10 @@ public enum JsMemberType {
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
       if (startsWithCamelCase(methodName, "get")) {
-        return J2clUtils.decapitalize(methodName.substring(3));
+        return Introspector.decapitalize(methodName.substring(3));
       }
       if (startsWithCamelCase(methodName, "is")) {
-        return J2clUtils.decapitalize(methodName.substring(2));
+        return Introspector.decapitalize(methodName.substring(2));
       }
       return null;
     }
@@ -55,7 +55,7 @@ public enum JsMemberType {
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
       if (startsWithCamelCase(methodName, "set")) {
-        return J2clUtils.decapitalize(methodName.substring(3));
+        return Introspector.decapitalize(methodName.substring(3));
       }
       return null;
     }

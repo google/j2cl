@@ -24,7 +24,6 @@ import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 
 /**
@@ -44,7 +43,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
             String qualifiedBinaryName =
                 sourcePosition.getName() != null
                     ? sourcePosition.getName()
-                    : J2clUtils.format(
+                    : String.format(
                         "%s.<lambda in %s>",
                         memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
                         memberDescriptor.getBinaryName());

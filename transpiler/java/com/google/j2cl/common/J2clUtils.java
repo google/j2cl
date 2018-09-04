@@ -16,12 +16,9 @@
 package com.google.j2cl.common;
 
 import com.google.j2cl.common.Problems.FatalError;
-import java.beans.Introspector;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,26 +34,6 @@ import org.apache.commons.text.StringEscapeUtils;
  */
 public class J2clUtils {
 
-  public static final String FILEPATH_SEPARATOR = File.separator;
-  public static final char FILEPATH_SEPARATOR_CHAR = File.separatorChar;
-
-  /**
-   * J2cl's implementation of String.format(format, args).
-   * Returns a formatted string using the specified format string and arguments.
-   */
-  public static String format(String format, Object... args) {
-    return String.format(format, args);
-  }
-
-  /**
-   * J2cl's implementation of PrintWriter.printf(format, args). (Note that the method signature
-   * differs from PrintWriter.printf). A convenience method to write a formatted string to this
-   * output stream using the specified format string and arguments.
-   */
-  public static PrintWriter printf(PrintWriter stream, String format, Object... args) {
-    return stream.printf(format, args);
-  }
-
   /** Escapes a string into a representation suitable for literals. */
   public static String escapeJavaString(String string) {
     // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
@@ -70,11 +47,6 @@ public class J2clUtils {
       return "\\'";
     }
     return escapeJavaString(String.valueOf(ch));
-  }
-
-  /** Convert a string to normal Java variable name capitalization. */
-  public static String decapitalize(String substring) {
-    return Introspector.decapitalize(substring);
   }
 
   /** Adapts a method that outputs to a stream to directly return the output as a String. */

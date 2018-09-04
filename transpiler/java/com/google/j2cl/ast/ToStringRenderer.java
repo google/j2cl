@@ -16,7 +16,6 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Strings;
-import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
 /**
@@ -114,14 +113,14 @@ class ToStringRenderer {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        print(J2clUtils.format("(%s) ", castExpression.getCastTypeDescriptor()));
+        print(String.format("(%s) ", castExpression.getCastTypeDescriptor()));
         accept(castExpression.getExpression());
         return false;
       }
 
       @Override
       public boolean enterJsDocCastExpression(JsDocCastExpression castExpression) {
-        print(J2clUtils.format("/** @type {%s} */ ", castExpression.getTypeDescriptor()));
+        print(String.format("/** @type {%s} */ ", castExpression.getTypeDescriptor()));
         accept(castExpression.getExpression());
         return false;
       }
@@ -129,7 +128,7 @@ class ToStringRenderer {
       @Override
       public boolean enterJsDocFieldDeclaration(JsDocFieldDeclaration fieldDeclaration) {
         print(
-            J2clUtils.format(
+            String.format(
                 "/** %s {%s} %s */ ",
                 fieldDeclaration.isPublic() ? "@public" : "@private",
                 fieldDeclaration.getTypeDescriptor(),

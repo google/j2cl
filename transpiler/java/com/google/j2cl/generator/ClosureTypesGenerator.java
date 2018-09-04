@@ -35,7 +35,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -87,7 +86,7 @@ class ClosureTypesGenerator {
 
     Variable parameter = hasParameters.getParameters().get(index);
     String parameterName = environment.aliasForVariable(parameter);
-    return J2clUtils.format(
+    return String.format(
         "@param {%s} %s",
         toClosureTypeParameter(methodDescriptor, parameterDescriptor).render(), parameterName);
   }
@@ -554,8 +553,9 @@ class ClosureTypesGenerator {
       }
 
       String render() {
-        return J2clUtils.format(
-            "%s%s%s", isVarargs ? "..." : "", closureType.render(), isOptional ? "=" : "");
+        Object[] args =
+            new Object[] {isVarargs ? "..." : "", closureType.render(), isOptional ? "=" : ""};
+        return String.format("%s%s%s", args);
       }
     }
 
@@ -574,7 +574,7 @@ class ClosureTypesGenerator {
 
     @Override
     public String render() {
-      return J2clUtils.format(
+      return String.format(
           "function(%s):%s",
           parameters.stream().map(Parameter::render).collect(Collectors.joining(", ")),
           returnClosureType.render());

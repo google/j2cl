@@ -92,7 +92,7 @@ public class Problems {
   public void fatal(FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);
     problemsBySeverity.put(
-        Severity.ERROR, "Error: " + J2clUtils.format(fatalError.getMessage(), args));
+        Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
     abort();
   }
 
@@ -121,28 +121,27 @@ public class Problems {
 
   private void problem(
       Severity severity, int lineNumber, String filePath, String detailMessage, Object... args) {
-    String message = args.length == 0 ? detailMessage : J2clUtils.format(detailMessage, args);
+    String message = args.length == 0 ? detailMessage : String.format(detailMessage, args);
     problemsBySeverity.put(
         severity,
-        J2clUtils.format(
+        String.format(
             "%s:%s:%s: %s",
             severity.getMessagePrefix(),
-            // Only report the file name portion to be consistent with JDT reported problems.
             filePath.substring(filePath.lastIndexOf('/') + 1),
             lineNumber,
             message));
   }
 
   public void error(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.ERROR, "Error: " + J2clUtils.format(detailMessage, args));
+    problemsBySeverity.put(Severity.ERROR, "Error: " + String.format(detailMessage, args));
   }
 
   public void warning(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.WARNING, J2clUtils.format(detailMessage, args));
+    problemsBySeverity.put(Severity.WARNING, String.format(detailMessage, args));
   }
 
   public void info(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.INFO, J2clUtils.format(detailMessage, args));
+    problemsBySeverity.put(Severity.INFO, String.format(detailMessage, args));
   }
 
   /** Prints all problems to provided output and returns the exit code. */
@@ -156,8 +155,7 @@ public class Problems {
       output.println(severityMessagePair.getValue());
     }
     if (hasErrors() || hasWarnings()) {
-      J2clUtils.printf(
-          output,
+      output.printf(
           "%d error(s), %d warning(s).\n",
           problemsBySeverity.get(Severity.ERROR).size(),
           problemsBySeverity.get(Severity.WARNING).size());

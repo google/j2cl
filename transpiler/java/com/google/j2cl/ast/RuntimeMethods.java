@@ -21,7 +21,6 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.common.J2clUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -220,7 +219,7 @@ public class RuntimeMethods {
       Expression expression, TypeDescriptor toTypeDescriptor) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
     String methodName =
-        J2clUtils.format(
+        String.format(
             "$narrow%sTo%s",
             AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
@@ -242,7 +241,7 @@ public class RuntimeMethods {
       Expression expression, TypeDescriptor toTypeDescriptor) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
     String widenMethodName =
-        J2clUtils.format(
+        String.format(
             "$widen%sTo%s",
             AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));

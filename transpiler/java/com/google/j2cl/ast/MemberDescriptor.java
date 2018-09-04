@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.J2clUtils;
 import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
@@ -179,7 +178,7 @@ public abstract class MemberDescriptor extends Node
 
   /** Returns a qualified binary name for the member. */
   public String getQualifiedBinaryName() {
-    return J2clUtils.format(
+    return String.format(
         "%s.%s", getEnclosingTypeDescriptor().getQualifiedBinaryName(), getBinaryName());
   }
 

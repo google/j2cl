@@ -36,7 +36,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.FilePosition;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
@@ -249,7 +248,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               : "";
 
       sourceBuilder.appendln(
-          J2clUtils.format(
+          String.format(
               formatString,
               environment.aliasForType(typeDescriptor.getTypeDeclaration()) + typeArgumentsString));
     }

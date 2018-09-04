@@ -44,7 +44,6 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.Collections;
 import java.util.List;
@@ -189,7 +188,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 .addStatements(method.getBody().getStatements())
                 .setSourcePosition(method.getSourcePosition())
                 .setJsDocDescription(
-                    J2clUtils.format(
+                    String.format(
                         "Initialization from constructor '%s'.",
                         method.getDescriptor().getReadableDescription()))
                 .build();
@@ -246,7 +245,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setParameters(jsConstructorParameters)
         .addStatements(body)
         .setJsDocDescription(
-            J2clUtils.format(
+            String.format(
                 "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
         .setSourcePosition(jsConstructorSourcePosition)
         .build();
@@ -429,7 +428,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setParameters(factoryMethodParameters)
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
         .setJsDocDescription(
-            J2clUtils.format(
+            String.format(
                 "Factory method corresponding to constructor '%s'.",
                 constructor.getDescriptor().getReadableDescription()))
         .setSourcePosition(constructorSourcePosition)

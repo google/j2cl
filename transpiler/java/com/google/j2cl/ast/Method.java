@@ -23,7 +23,6 @@ import static java.util.stream.Collectors.joining;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,11 +155,11 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
         getParameters().stream().map(this::getParameterReadableDescription).collect(joining(", "));
 
     if (isConstructor()) {
-      return J2clUtils.format(
+      return String.format(
           "%s(%s)",
           getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
     }
-    return J2clUtils.format(
+    return String.format(
         "%s %s.%s(%s)",
         getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
         getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(),
@@ -172,12 +171,12 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
     if (parameter == getVarargsParameter()) {
       ArrayTypeDescriptor parameterTypeDescriptor =
           (ArrayTypeDescriptor) parameter.getTypeDescriptor();
-      return J2clUtils.format(
+      return String.format(
           "%s... %s",
           parameterTypeDescriptor.getComponentTypeDescriptor().getReadableDescription(),
           parameter.getName());
     }
-    return J2clUtils.format(
+    return String.format(
         "%s %s", parameter.getTypeDescriptor().getReadableDescription(), parameter.getName());
   }
 

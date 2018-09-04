@@ -17,6 +17,7 @@ package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import java.io.File;
 import javax.annotation.Nullable;
 
 /**
@@ -86,7 +87,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   /** Returns the file name portion of a path. */
   public static String getFileName(String filePath) {
-    String[] pathComponents = filePath.split(J2clUtils.FILEPATH_SEPARATOR);
+    String[] pathComponents = filePath.split(File.separator);
     return pathComponents[pathComponents.length - 1];
   }
 }

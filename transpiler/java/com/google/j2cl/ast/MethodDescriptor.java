@@ -26,7 +26,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -422,10 +421,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .collect(joining(", "));
 
     if (isConstructor()) {
-      return J2clUtils.format(
+      return String.format(
           "%s(%s)", getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
     }
-    return J2clUtils.format(
+    return String.format(
         "%s %s.%s(%s)",
         getReturnTypeDescriptor().getReadableDescription(),
         getEnclosingTypeDescriptor().getReadableDescription(),
@@ -439,13 +438,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (parameterDescriptor.isVarargs()) {
       ArrayTypeDescriptor parameterArrayTypeDescriptor =
           (ArrayTypeDescriptor) parameterTypeDescriptor;
-      return J2clUtils.format(
+      return String.format(
           "%s...",
           parameterArrayTypeDescriptor.getComponentTypeDescriptor().getReadableDescription());
     } else if (parameterDescriptor.isJsOptional()) {
-      return J2clUtils.format("@JsOptional %s", parameterTypeDescriptor.getReadableDescription());
+      return String.format("@JsOptional %s", parameterTypeDescriptor.getReadableDescription());
     }
-    return J2clUtils.format("%s", parameterTypeDescriptor.getReadableDescription());
+    return parameterTypeDescriptor.getReadableDescription();
   }
 
   /** Returns a signature suitable for override checking from the Java source perspective. */

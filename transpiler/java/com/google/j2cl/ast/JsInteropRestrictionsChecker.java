@@ -25,7 +25,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.util.LinkedHashSet;
@@ -1026,7 +1025,7 @@ public class JsInteropRestrictionsChecker {
       TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
       warnIfUnusableByJs(
           fieldTypeDescriptor,
-          J2clUtils.format("Type '%s' of field", fieldTypeDescriptor.getReadableDescription()),
+          String.format("Type '%s' of field", fieldTypeDescriptor.getReadableDescription()),
           member);
     }
 
@@ -1046,7 +1045,7 @@ public class JsInteropRestrictionsChecker {
                   ? ((ArrayTypeDescriptor) parameter.getTypeDescriptor())
                       .getComponentTypeDescriptor()
                   : parameter.getTypeDescriptor();
-          String prefix = J2clUtils.format("Type of parameter '%s' in", parameter.getName());
+          String prefix = String.format("Type of parameter '%s' in", parameter.getName());
           warnIfUnusableByJs(parameterTypeDescriptor, prefix, member);
         }
       }

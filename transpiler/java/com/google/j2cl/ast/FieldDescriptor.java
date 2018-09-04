@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -185,8 +184,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    return J2clUtils.format(
-        "%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
+    return String.format("%s.%s", getEnclosingTypeDescriptor().getReadableDescription(), getName());
   }
 
   /** A Builder for FieldDescriptors. */

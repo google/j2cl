@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
 /**
@@ -89,7 +88,7 @@ public class ManglingNameUtils {
       prefix = "";
     }
 
-    return J2clUtils.format(
+    return String.format(
         "%s%s%s%s", prefix, methodDescriptor.getName(), parameterSignature, suffix);
   }
 
@@ -113,7 +112,7 @@ public class ManglingNameUtils {
     String name = memberDescriptor.getName();
     String typeMangledName = getMangledName(enclosingTypeDescriptor);
     String privateSuffix = memberDescriptor.getVisibility().isPrivate() ? "_" : "";
-    return J2clUtils.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
+    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
   private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {

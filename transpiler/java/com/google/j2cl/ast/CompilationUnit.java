@@ -20,7 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.common.J2clUtils;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +48,10 @@ public class CompilationUnit extends Node {
   }
 
   public String getDirectoryPath() {
-    if (!filePath.contains(J2clUtils.FILEPATH_SEPARATOR)) {
+    if (!filePath.contains(File.separator)) {
       return "";
     }
-    return filePath.substring(0, filePath.lastIndexOf(J2clUtils.FILEPATH_SEPARATOR));
+    return filePath.substring(0, filePath.lastIndexOf(File.separator));
   }
 
   public String getPackageName() {
@@ -74,7 +74,7 @@ public class CompilationUnit extends Node {
 
   public String getName() {
     return filePath.substring(
-        filePath.lastIndexOf(J2clUtils.FILEPATH_SEPARATOR_CHAR) + 1,
+        filePath.lastIndexOf(File.separatorChar) + 1,
         filePath.length() - COMPILATION_UNIT_FILENAME_SUFFIX.length());
   }
 
