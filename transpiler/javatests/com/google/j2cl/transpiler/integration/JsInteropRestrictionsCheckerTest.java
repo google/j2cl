@@ -2625,10 +2625,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public double e() { return 0; }",
             "}")
         .assertErrors(
-            "JsAsync method 'List A.a()' should return either 'IThenable' or 'Promise' but"
-                + " returns 'List'.",
-            "JsAsync method 'M_P A.b()' should return either 'IThenable' or 'Promise' but"
-                + " returns 'M_P'.",
+            "JsAsync method 'List<T> A.a()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'List<T>'.",
+            "JsAsync method 'P A.b()' should return either 'IThenable' or 'Promise' but"
+                + " returns 'P'.",
             "JsAsync method 'String A.c()' should return either 'IThenable' or 'Promise' but"
                 + " returns 'String'.",
             "JsAsync method 'Promise[] A.d()' should return either 'IThenable' or 'Promise' but"

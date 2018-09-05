@@ -132,6 +132,14 @@ public abstract class TypeVariable extends TypeDescriptor {
   }
 
   @Override
+  public String getReadableDescription() {
+    // TODO(b/114074816): Remove this hack when modeling of type variables is improved and the name
+    // is actually the source name of the variable and does not encode extra information.
+    int lastUnderscore = getSimpleSourceName().lastIndexOf("_");
+    return getSimpleSourceName().substring(lastUnderscore + 1);
+  }
+
+  @Override
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
     return prefix + getUniqueKey();

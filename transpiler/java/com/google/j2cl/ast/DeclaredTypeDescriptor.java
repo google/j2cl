@@ -42,6 +42,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 /**
@@ -583,10 +584,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .build();
   }
 
-  /** Returns a description that is useful for error messages. */
   @Override
   public String getReadableDescription() {
-    return getTypeDeclaration().getReadableDescription();
+    return getTypeDeclaration().getReadableDescription()
+        + (hasTypeArguments()
+            ? getTypeArgumentDescriptors().stream()
+                .map(TypeDescriptor::getReadableDescription)
+                .collect(Collectors.joining(", ", "<", ">"))
+            : "");
   }
 
   @Override
