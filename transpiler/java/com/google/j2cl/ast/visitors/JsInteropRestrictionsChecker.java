@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -24,7 +24,31 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.HasJsNameInfo;
+import com.google.j2cl.ast.HasReadableDescription;
+import com.google.j2cl.ast.HasSourcePosition;
+import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.ast.JsUtils;
+import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
+import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.util.LinkedHashSet;
