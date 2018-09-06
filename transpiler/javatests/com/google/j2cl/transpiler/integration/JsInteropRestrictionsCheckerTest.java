@@ -1155,7 +1155,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertTranspileFails()
         .assertErrors(
-            "JsConstructor 'new BuggyJsType(int)' can only delegate to super "
+            "JsConstructor '<anonymous> extends BuggyJsType(int)' can only delegate to super "
                 + "JsConstructor 'BuggyJsType()'.",
             "JsConstructor 'LocalBuggy()' can only delegate to super JsConstructor "
                 + "'BuggyJsType()'.",

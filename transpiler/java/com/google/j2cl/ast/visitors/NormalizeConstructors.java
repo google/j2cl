@@ -188,9 +188,8 @@ public class NormalizeConstructors extends NormalizationPass {
                 .addStatements(method.getBody().getStatements())
                 .setSourcePosition(method.getSourcePosition())
                 .setJsDocDescription(
-                    String.format(
-                        "Initialization from constructor '%s'.",
-                        method.getDescriptor().getReadableDescription()))
+                    getConstructorRelatedJsDocDescription(
+                        "Initialization from constructor", method, type))
                 .build();
           }
 
@@ -207,6 +206,19 @@ public class NormalizeConstructors extends NormalizationPass {
                 .build();
           }
         });
+  }
+
+  /**
+   * Returns a JsDoc description for the constructor related method.
+   *
+   * <p>The description makes it easier to understand which of the Java constructors corresponds to
+   * the JavaScript method.
+   */
+  private static String getConstructorRelatedJsDocDescription(
+      String message, Method constructor, Type type) {
+    return type.getConstructors().size() > 1
+        ? String.format(message + " '%s'.", constructor.getDescriptor().getReadableDescription())
+        : null;
   }
 
   private static Method synthesizeJsConstructor(Type type) {
@@ -245,8 +257,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setParameters(jsConstructorParameters)
         .addStatements(body)
         .setJsDocDescription(
-            String.format(
-                "JsConstructor '%s'.", jsConstructor.getDescriptor().getReadableDescription()))
+            getConstructorRelatedJsDocDescription("JsConstructor", jsConstructor, type))
         .setSourcePosition(jsConstructorSourcePosition)
         .build();
   }
@@ -334,6 +345,10 @@ public class NormalizeConstructors extends NormalizationPass {
   private static Method factoryMethodForConstructor(Method constructor, Type type) {
     DeclaredTypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingTypeDescriptor();
 
+    String jsDocDescription =
+        getConstructorRelatedJsDocDescription(
+            "Factory method corresponding to constructor", constructor, type);
+
     if (enclosingType.hasJsConstructor()) {
       // Verify that we are not emitting factory methods for JsConstructors.
       checkState(constructor != getJsConstructor(type));
@@ -354,6 +369,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
       return synthesizeFactoryMethod(
           constructor,
+          jsDocDescription,
           enclosingType,
           primaryConstructorDescriptor(primaryConstructorInvocation.getTarget()),
           AstUtils.clone(primaryConstructorInvocation.getArguments()));
@@ -361,6 +377,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     return synthesizeFactoryMethod(
         constructor,
+        jsDocDescription,
         enclosingType,
         getImplicitJavascriptConstructorDescriptor(enclosingType),
         Collections.emptyList());
@@ -378,6 +395,7 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static Method synthesizeFactoryMethod(
       Method constructor,
+      String jsDocDescription,
       DeclaredTypeDescriptor enclosingType,
       MethodDescriptor javascriptConstructor,
       List<Expression> javascriptConstructorArguments) {
@@ -427,10 +445,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
-        .setJsDocDescription(
-            String.format(
-                "Factory method corresponding to constructor '%s'.",
-                constructor.getDescriptor().getReadableDescription()))
+        .setJsDocDescription(jsDocDescription)
         .setSourcePosition(constructorSourcePosition)
         .build();
   }

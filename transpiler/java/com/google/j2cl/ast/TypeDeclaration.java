@@ -677,9 +677,10 @@ public abstract class TypeDeclaration extends Node
     // TODO(rluble): Actually provide a real readable description.
     if (isAnonymous()) {
       if (getInterfaceTypeDescriptors().isEmpty()) {
-        return "new " + getSuperTypeDescriptor().getReadableDescription();
+        return "<anonymous> extends " + getSuperTypeDescriptor().getReadableDescription();
       } else {
-        return "new " + getInterfaceTypeDescriptors().get(0).getReadableDescription();
+        return "<anonymous> implements "
+            + getInterfaceTypeDescriptors().get(0).getReadableDescription();
       }
     } else if (isLocal()) {
       return getSimpleSourceName().replaceFirst("\\$\\d+", "");

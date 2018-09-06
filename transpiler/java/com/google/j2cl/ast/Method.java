@@ -154,15 +154,16 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
     String parameterString =
         getParameters().stream().map(this::getParameterReadableDescription).collect(joining(", "));
 
+    TypeDeclaration enclosingTypeDeclaration =
+        getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration();
     if (isConstructor()) {
       return String.format(
-          "%s(%s)",
-          getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
+          "%s(%s)", enclosingTypeDeclaration.getReadableDescription(), parameterString);
     }
     return String.format(
         "%s %s.%s(%s)",
         getDescriptor().getReturnTypeDescriptor().getReadableDescription(),
-        getDescriptor().getEnclosingTypeDescriptor().getReadableDescription(),
+        enclosingTypeDeclaration.getReadableDescription(),
         getDescriptor().getName(),
         parameterString);
   }

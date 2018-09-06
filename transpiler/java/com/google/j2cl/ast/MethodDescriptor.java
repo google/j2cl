@@ -420,14 +420,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .map(MethodDescriptor::getParameterReadableDescription)
             .collect(joining(", "));
 
+    TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDescriptor().getTypeDeclaration();
     if (isConstructor()) {
       return String.format(
-          "%s(%s)", getEnclosingTypeDescriptor().getReadableDescription(), parameterString);
+          "%s(%s)", enclosingTypeDeclaration.getReadableDescription(), parameterString);
     }
     return String.format(
         "%s %s.%s(%s)",
         getReturnTypeDescriptor().getReadableDescription(),
-        getEnclosingTypeDescriptor().getReadableDescription(),
+        enclosingTypeDeclaration.getReadableDescription(),
         getName(),
         parameterString);
   }
