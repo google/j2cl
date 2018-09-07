@@ -38,7 +38,9 @@ import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.Variable;
@@ -263,6 +265,8 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method synthesizePrivateConstructor(Type type) {
+    checkState(!type.isInterface());
+
     SourcePosition sourcePosition = type.getSourcePosition();
 
     List<Statement> body = generateInstanceFieldDeclarationStatements(type, sourcePosition);
@@ -270,6 +274,8 @@ public class NormalizeConstructors extends NormalizationPass {
     if (type.getDeclaration().getSuperTypeDescriptor() != null) {
       body.add(
           0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement(sourcePosition));
+    } else {
+      body.add(0, synthesizeAssertClinit(type).makeStatement(sourcePosition));
     }
 
     MethodDescriptor constructorDescriptor =
@@ -287,7 +293,7 @@ public class NormalizeConstructors extends NormalizationPass {
         .build();
   }
 
-  /** Synthesizes a method descriptor for a "super" call to the constructor. */
+  /** Synthesizes a "super" call to the constructor. */
   private static MethodCall synthesizeEmptySuperCall(DeclaredTypeDescriptor superType) {
     MethodDescriptor superDescriptor =
         MethodDescriptor.newBuilder()
@@ -295,6 +301,11 @@ public class NormalizeConstructors extends NormalizationPass {
             .setConstructor(true)
             .build();
     return MethodCall.Builder.from(superDescriptor).build();
+  }
+
+  private static MethodCall synthesizeAssertClinit(Type type) {
+    return RuntimeMethods.createUtilMethodCall(
+        "$assertClinit", new ThisReference(type.getTypeDescriptor()));
   }
 
   /** Rewrite NewInstance nodes to MethodCall nodes to the $create factory method. */

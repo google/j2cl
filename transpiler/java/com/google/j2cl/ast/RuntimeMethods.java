@@ -372,6 +372,12 @@ public class RuntimeMethods {
                           // Util methods
                           ImmutableMap.<String, MethodInfo>builder()
                               .put(
+                                  "$assertClinit",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .put(
                                   "$getPrototype",
                                   MethodInfo.newBuilder()
                                       .setReturnType(TypeDescriptors.get().javaLangObject)

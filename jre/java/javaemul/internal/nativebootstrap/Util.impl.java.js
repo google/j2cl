@@ -193,6 +193,38 @@ class Util {
   }
 
   /**
+   * Asserts if class for the provided instance has initialized.
+   *
+   * @param {*} instance
+   */
+  static $assertClinit(instance) {
+    if (COMPILED) {
+      return;
+    }
+
+    const clinit = instance.constructor.$clinit;
+    if (clinit && clinit.name == '$clinit' /* i.e. not re-written yet */) {
+      throw new Error(Util.getInitializationError_(instance.constructor));
+    }
+  }
+
+  static getInitializationError_(ctor) {
+    let javaCtor = ctor, childCtor = ctor;
+    while (!javaCtor.hasOwnProperty('$clinit')) {
+      childCtor = javaCtor;
+      // Get the super constructor.
+      javaCtor = Object.getPrototypeOf(javaCtor.prototype).constructor;
+    }
+
+    return javaCtor != childCtor ?
+        `Java class ${javaCtor.name} is extended by ${childCtor.name} but not initialized.` +
+            `This usually happens if you are extending a class without JsConstructor.` :
+        `Java class ${javaCtor.name} is instantiated but not initialized.` +
+            `This usually happens if you are instantiating a class without JsConstructor ` +
+            `or missing $clinit call in native.js file.`;
+  }
+
+  /**
    * Helper to accept a reference to something that should be synchronized on.
    * No synchronization is actually necessary since JS is singlethreaded but
    * it's important that the parameter be passed since the accessing of it
