@@ -218,7 +218,14 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static String getConstructorRelatedJsDocDescription(
       String message, Method constructor, Type type) {
-    return type.getConstructors().size() > 1
+    // The constructors in Type might have rewritten before this method is invoked so we are getting
+    // the original number of constructors from the declaration.
+    boolean hasMultipleConstructors =
+        type.getDeclaration().getDeclaredMethodDescriptors().stream()
+                .filter(MethodDescriptor::isConstructor)
+                .count()
+            > 1;
+    return hasMultipleConstructors
         ? String.format(message + " '%s'.", constructor.getDescriptor().getReadableDescription())
         : null;
   }
