@@ -1,4 +1,5 @@
 package(default_visibility = [
+    "//tools:__subpackages__",
     "//transpiler:__subpackages__",
 ])
 
