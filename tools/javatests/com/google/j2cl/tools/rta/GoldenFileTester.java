@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.tools.rta;
 
+import static com.google.common.base.Predicates.not;
 import static org.junit.Assert.fail;
 
 import com.google.common.base.Joiner;
@@ -93,6 +94,8 @@ public class GoldenFileTester {
   private static Set<String> readGoldenFile(String filePath) throws IOException {
     return readFileLines(filePath).stream()
         .filter(GoldenFileTester::skipCommentLine)
+        // Allow blank lines in golden file in order to group some lines
+        .filter(not(Strings::isNullOrEmpty))
         .collect(Collectors.toSet());
   }
 
