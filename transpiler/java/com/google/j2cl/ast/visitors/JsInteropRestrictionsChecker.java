@@ -444,7 +444,7 @@ public class JsInteropRestrictionsChecker {
     if (type.hasInstanceInitializerBlocks()) {
       problems.error(
           type.getSourcePosition(),
-          "Native JsType '%s' cannot have initializer.",
+          "Native JsType '%s' cannot have instance initializer.",
           readableDescription);
     }
 

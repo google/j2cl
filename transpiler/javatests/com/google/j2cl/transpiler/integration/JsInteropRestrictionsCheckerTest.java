@@ -1487,16 +1487,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  {",
             "    Object.class.getName();",
             "  }",
-            "}",
-            "@JsType(isNative = true)",
-            "class Buggy2 {",
-            "  {",
-            "    int x = 1;",
-            "  }",
             "}")
-        .assertErrors(
-            "Native JsType 'Buggy' cannot have initializer.",
-            "Native JsType 'Buggy2' cannot have initializer.");
+        .assertErrors("Native JsType 'Buggy' cannot have instance initializer.");
   }
 
   public void testNativeJsTypeNonEmptyConstructorFails() {
@@ -1956,10 +1948,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsOverlay public final int f2 = 2;",
             "  @JsOverlay",
             "  public void m() {}",
-            "  { int v = f2; }",
             "}")
         .assertErrors(
-            "Native JsType 'Buggy' cannot have initializer.",
             "JsOverlay field 'Buggy.f2' can only be static.",
             "JsOverlay method 'void Buggy.m()' cannot be non-final nor native.");
   }
@@ -2151,9 +2141,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void o() {}",
             "  public native void p() /*-{}-*/;",
             "}",
-            "@JsType(isNative=true) class NativeClassWithInitializer {",
-            "  {}",
-            "}",
             "@JsType(isNative=true) class NativeType {}",
             "interface A { @JsMethod(name=\"something\") int hashCode(); }",
             "class SomeClass extends NativeType implements A {",
@@ -2182,7 +2169,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType method 'void Buggy.o()' should be native, abstract or overlay.",
             "Native JsType field 'Buggy.t' cannot have initializer.",
             "Native JsType field 'Buggy.g' cannot have initializer.",
-            "Native JsType 'NativeClassWithInitializer' cannot have initializer",
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
