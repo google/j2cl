@@ -626,10 +626,17 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    if (memberDescriptor.isJsMember()) {
+    if (!member.isInitializerBlock() && memberDescriptor.isJsMember()) {
       problems.error(
           member.getSourcePosition(),
           "JsFunction implementation member '%s' cannot be JsMethod nor JsProperty.",
+          member.getReadableDescription());
+    }
+
+    if (member.isNative()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsFunction implementation member '%s' cannot be native.",
           member.getReadableDescription());
     }
   }

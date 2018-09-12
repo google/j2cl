@@ -1321,6 +1321,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "       public int getFoo() { return 0; }",
             "    }.getFoo();",
             "  }",
+            "  {}",
+            "  static {}",
             "  String x = new String();",
             "  static int y;",
             "}",
@@ -1360,6 +1362,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public int getFoo() { return 0; }",
             "  @JsMethod",
             "  private void bleh() {}",
+            "  private native void nativeMethod();",
             "  @JsProperty",
             "  public int prop = 0;",
             "  public String toString() { return \"\"; }",
@@ -1439,6 +1442,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "JsMethod nor JsProperty.",
             "JsFunction implementation member 'void Buggy.bleh()' cannot be"
                 + " JsMethod nor JsProperty.",
+            "JsFunction implementation member 'void Buggy.nativeMethod()' cannot be native.",
             "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty.",
             "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
                 + "JsMethod nor JsProperty.",
