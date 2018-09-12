@@ -1,13 +1,10 @@
 """This module contains j2cl_transpile helper function."""
 
-def j2cl_transpile(ctx, java_provider):
+def j2cl_transpile(ctx, java_provider, js_srcs):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
-    native_files = ctx.files.native_srcs
-    js_files = ctx.files.js_srcs
-
     # Using source_jars of the java_library since that includes APT generated src.
-    srcs = java_provider.source_jars + native_files + js_files
+    srcs = java_provider.source_jars + js_srcs
     classpath = java_provider.compilation_info.compilation_classpath
 
     args = ctx.actions.args()
@@ -34,11 +31,11 @@ def j2cl_transpile(ctx, java_provider):
         mnemonic = "J2clTranspile",
     )
 
+    return ctx.outputs.zip_file
+
 # Private Args:
 #   transpiler: J2CL compiler jar to use.
 J2CL_TRANSPILE_ATTRS = {
-    "native_srcs": attr.label_list(allow_files = [".native.js", ".zip"]),
-    "js_srcs": attr.label_list(allow_files = [".js", ".zip"]),
     "readable_source_maps": attr.bool(default = False),
     "declare_legacy_namespace": attr.bool(default = False),
     "transpiler": attr.label(

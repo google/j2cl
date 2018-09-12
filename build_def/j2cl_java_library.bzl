@@ -7,43 +7,27 @@ load("//build_def:j2cl_js_common.bzl", "J2CL_JS_ATTRS", "j2cl_js_provider")
 _J2clInfo = provider(fields = ["_J2clJavaInfo"])
 
 def _impl_j2cl_library(ctx):
-    srcs = [_strip_gwt_incompatible(ctx)] if ctx.files.srcs else []
-    java_deps = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.deps if _J2clInfo in d]
-    java_exports = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.exports if _J2clInfo in d]
-    plugins = [p[JavaInfo] for p in ctx.attr.plugins]
-    exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins]
+    java_srcs = ctx.files.srcs
+    js_srcs = ctx.files.native_srcs + ctx.files.js_srcs
 
-    java_provider = java_common.compile(
-        ctx,
-        source_files = ctx.files.srcs_hack,
-        source_jars = srcs,
-        output = ctx.outputs.jar,
-        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain"),
-        deps = java_deps,
-        exports = java_exports,
-        plugins = plugins,
-        exported_plugins = exported_plugins,
-        java_toolchain = ctx.attr._java_toolchain,
-        host_javabase = ctx.attr._host_javabase,
-    )
+    java_provider = _java_compile(ctx, java_srcs)
 
-    j2cl_transpile(ctx, java_provider)
-
+    js_zip = j2cl_transpile(ctx, java_provider, js_srcs)
     js_deps = [d.js for d in ctx.attr.deps]
     js_exports = [e.js for e in ctx.attr.exports]
-    js_output_zip = [ctx.outputs.zip_file] if ctx.files.srcs else []
+    js_outputs = [js_zip] if java_srcs else []
 
     # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
-    js_runfiles = _collect_runfiles(ctx, js_output_zip, ctx.attr.deps + ctx.attr.exports)
+    js_runfiles = _collect_runfiles(ctx, js_outputs, ctx.attr.deps + ctx.attr.exports)
 
     # Write an empty .jslib output (work around b/38349075 and maybe others).
     ctx.actions.write(ctx.outputs.dummy_jslib, "")
 
     return struct(
-        js = j2cl_js_provider(ctx, srcs = js_output_zip, deps = js_deps, exports = js_exports),
+        js = j2cl_js_provider(ctx, srcs = js_outputs, deps = js_deps, exports = js_exports),
         providers = [
             DefaultInfo(
-                files = depset(js_output_zip + [ctx.outputs.jar, ctx.outputs.dummy_jslib]),
+                files = depset(js_outputs + [ctx.outputs.jar, ctx.outputs.dummy_jslib]),
                 runfiles = js_runfiles,
             ),
             _J2clInfo(_J2clJavaInfo = java_provider),
@@ -57,7 +41,28 @@ def _collect_runfiles(ctx, files, deps):
         transitive_files = depset(transitive = transitive_runfiles),
     )
 
-def _strip_gwt_incompatible(ctx):
+def _java_compile(ctx, java_srcs):
+    stripped_java_srcs = [_strip_gwt_incompatible(ctx, java_srcs)] if java_srcs else []
+    java_deps = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.deps if _J2clInfo in d]
+    java_exports = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.exports if _J2clInfo in d]
+    plugins = [p[JavaInfo] for p in ctx.attr.plugins]
+    exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins]
+
+    return java_common.compile(
+        ctx,
+        source_files = ctx.files.srcs_hack,
+        source_jars = stripped_java_srcs,
+        deps = java_deps,
+        exports = java_exports,
+        plugins = plugins,
+        exported_plugins = exported_plugins,
+        output = ctx.outputs.jar,
+        java_toolchain = ctx.attr._java_toolchain,
+        host_javabase = ctx.attr._host_javabase,
+        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain"),
+    )
+
+def _strip_gwt_incompatible(ctx, java_srcs):
     output_file = ctx.actions.declare_file(ctx.label.name + "_stripped-src.jar")
 
     args = ctx.actions.args()
@@ -68,7 +73,7 @@ def _strip_gwt_incompatible(ctx):
 
     ctx.actions.run(
         progress_message = "Stripping @GwtIncompatible",
-        inputs = ctx.files.srcs,
+        inputs = java_srcs,
         outputs = [output_file],
         executable = ctx.executable._stripper,
         arguments = [args],
@@ -81,6 +86,8 @@ def _strip_gwt_incompatible(ctx):
 
 _J2CL_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = True),
+    "native_srcs": attr.label_list(allow_files = [".native.js", ".zip"]),
+    "js_srcs": attr.label_list(allow_files = [".js", ".zip"]),
     "srcs_hack": attr.label_list(allow_files = True),
     "deps": attr.label_list(providers = ["js"]),
     "exports": attr.label_list(providers = ["js"]),
