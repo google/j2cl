@@ -18,7 +18,6 @@ package com.google.j2cl.tools.rta;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
@@ -50,8 +49,13 @@ final class RapidTypeAnalyser {
           if (member.isConstructor()) {
             onInstantiation(member);
           } else {
-            onReference(member);
+            onStaticReference(member);
           }
+        } else if (isJsAccessible(member)) {
+          // We will consider each instance member that is accessible from javascript as potentially
+          // referenced. When a type defining/inheriting the members is instantiated, they become
+          // live.
+          onPolymorphicReference(member);
         }
       }
     }
@@ -63,11 +67,18 @@ final class RapidTypeAnalyser {
     checkState(ctor.isConstructor());
 
     instantiate(ctor.getDeclaringType());
-
-    onReference(ctor);
+    markMemberLive(ctor);
   }
 
-  private void onReference(Member member) {
+  private void onStaticReference(Member member) {
+    markMemberLive(member);
+  }
+
+  private void onPolymorphicReference(Member member) {
+    unfoldPolymorphicReference(member);
+  }
+
+  private void markMemberLive(Member member) {
     if (!unusedMembers.remove(member)) {
       // already live
       return;
@@ -75,27 +86,29 @@ final class RapidTypeAnalyser {
 
     markTypesAsLive(member.getReferencedTypes());
 
-    // static references
     member.getReferencedMembers().get(InvocationKind.INSTANTIATION).forEach(this::onInstantiation);
-
-    member.getReferencedMembers().get(InvocationKind.STATIC).forEach(this::onReference);
-
-    // dynamic references
-    getAllTargetsOfPolymorphicReferences(member).forEach(this::markPolymorphicMemberLive);
+    member.getReferencedMembers().get(InvocationKind.STATIC).forEach(this::onStaticReference);
+    member.getReferencedMembers().get(InvocationKind.DYNAMIC).forEach(this::onPolymorphicReference);
   }
 
-  private void markPolymorphicMemberLive(Member member) {
+  private void unfoldPolymorphicReference(Member member) {
     // Set of types inheriting this member
     Set<Type> inheritingTypes = typeHierarchyGraph.getTypesInheriting(member);
     // TODO(b/112859205): Some static references ($clinit or static fields or unknown members) are
     // flagged as dynamic references. Remove inheritingTypes.isEmpty() when it solved.
     if (inheritingTypes.isEmpty() || containsLiveTypes(inheritingTypes)) {
-      onReference(member);
+      markMemberLive(member);
     } else {
       // none of the possible types for this member is live. Register this member,
       // so once one of the type become live, the member will be added to the live member
       // graph.
       inheritingTypes.forEach(c -> virtuallyLiveMemberPerType.put(c, member));
+    }
+
+    // Recursively unfold the overriding chain.
+    for (Type overridingType : typeHierarchyGraph.getTypesOverriding(member)) {
+      Member newTargetMember = overridingType.getMemberByName(member.getName());
+      unfoldPolymorphicReference(newTargetMember);
     }
   }
 
@@ -114,37 +127,12 @@ final class RapidTypeAnalyser {
     markTypesAsLive(type.getSuperTypes());
   }
 
-  private Collection<Member> getAllTargetsOfPolymorphicReferences(Member member) {
-
-    Collection<Member> dynamicsReferencedMembers =
-        member.getReferencedMembers().get(InvocationKind.DYNAMIC);
-
-    ImmutableList.Builder<Member> allPossibleReferencedMembers = ImmutableList.builder();
-
-    dynamicsReferencedMembers.forEach(m -> getAllPossibleMembers(m, allPossibleReferencedMembers));
-
-    return allPossibleReferencedMembers.build();
-  }
-
-  private void getAllPossibleMembers(
-      Member targetMember, ImmutableList.Builder<Member> listBuilder) {
-    listBuilder.add(targetMember);
-
-    for (Type overridingType : typeHierarchyGraph.getTypesOverriding(targetMember)) {
-      Member newTargetMember = overridingType.getMemberByName(targetMember.getName());
-      getAllPossibleMembers(newTargetMember, listBuilder);
-    }
-  }
-
   private void instantiate(Type type) {
     if (!instantiatedTypes.add(type)) {
       // Type is already live
       return;
     }
-    virtuallyLiveMemberPerType.get(type).forEach(this::onReference);
-
-    // Also consider each instance member that is accessible from javascript as referenced.
-    type.getMembers().stream().filter(RapidTypeAnalyser::isJsAccessible).forEach(this::onReference);
+    virtuallyLiveMemberPerType.get(type).forEach(this::markMemberLive);
   }
 
   private static boolean isJsAccessible(Member member) {
