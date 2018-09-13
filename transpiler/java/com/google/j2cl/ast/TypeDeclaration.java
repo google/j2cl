@@ -35,7 +35,6 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -626,7 +625,7 @@ public abstract class TypeDeclaration extends Node
         (Set<MethodDescriptor>)
             getMethodDescriptorsByOverrideSignature().get(methodDescriptor.getOverrideSignature());
 
-    Set<MethodDescriptor> overriddenMethodDescriptorsExceptSelf = new HashSet<>();
+    Set<MethodDescriptor> overriddenMethodDescriptorsExceptSelf = new LinkedHashSet<>();
     overriddenMethodDescriptorsExceptSelf.addAll(overriddenMethodDescriptors);
     overriddenMethodDescriptorsExceptSelf.remove(methodDescriptor);
     return overriddenMethodDescriptorsExceptSelf;
