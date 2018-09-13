@@ -21,6 +21,10 @@ import jsinterop.annotations.JsMethod;
 public class Main {
   public static String STATIC_FIELD = "STATIC_FIELD";
 
+  interface FunctionnalInterface {
+    void foo();
+  }
+
   @JsFunction
   interface Function {
     void apply(String s);

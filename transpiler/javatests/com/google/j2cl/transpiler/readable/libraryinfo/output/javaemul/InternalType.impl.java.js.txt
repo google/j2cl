@@ -1,0 +1,88 @@
+/**
+ * @fileoverview transpiled from javaemul.InternalType.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('javaemul.InternalType$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class InternalType extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!InternalType}
+   * @public
+   */
+  static $create__() {
+    InternalType.$clinit();
+    let $instance = new InternalType();
+    $instance.$ctor__javaemul_InternalType__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__javaemul_InternalType__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  foo() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    InternalType.$clinit = (() => {});
+    InternalType.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InternalType;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InternalType);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    InternalType, $Util.$makeClassName('javaemul.InternalType'));
+
+
+
+exports = InternalType;
+//# sourceMappingURL=InternalType.js.map
