@@ -7,8 +7,18 @@ load("//build_def:j2cl_js_common.bzl", "J2CL_JS_ATTRS", "j2cl_js_provider")
 _J2clInfo = provider(fields = ["_J2clJavaInfo"])
 
 def _impl_j2cl_library(ctx):
-    java_srcs = ctx.files.srcs
-    js_srcs = ctx.files.native_srcs + ctx.files.js_srcs
+    # Categorize the sources.
+    js_srcs = []
+    java_srcs = []
+    for src in ctx.files.srcs:
+        (js_srcs if src.extension in ["js", "zip"] else java_srcs).append(src)
+
+    # Validate the attributes.
+    if not java_srcs:
+        if ctx.files.deps:
+            fail("deps not allowed without java srcs")
+        if js_srcs:
+            fail("js sources not allowed without java srcs")
 
     java_provider = _java_compile(ctx, java_srcs)
 
@@ -85,9 +95,8 @@ def _strip_gwt_incompatible(ctx, java_srcs):
     return output_file
 
 _J2CL_LIB_ATTRS = {
-    "srcs": attr.label_list(allow_files = True),
-    "native_srcs": attr.label_list(allow_files = [".native.js", ".zip"]),
-    "js_srcs": attr.label_list(allow_files = [".js", ".zip"]),
+    # TODO(goktug): Try to limit this further.
+    "srcs": attr.label_list(allow_files = [".java", ".js", ".srcjar", ".jar", ".zip"]),
     "srcs_hack": attr.label_list(allow_files = True),
     "deps": attr.label_list(providers = ["js"]),
     "exports": attr.label_list(providers = ["js"]),

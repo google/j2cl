@@ -77,16 +77,6 @@ def j2cl_library(
     exports = exports or []
     testonly = kwargs.get("testonly")
 
-    if not srcs:
-        if deps:
-            fail("deps not allowed without srcs")
-        if native_srcs:
-            fail("native_srcs not allowed without srcs")
-        if _js_srcs:
-            fail("_js_srcs not allowed without srcs")
-        if _js_deps:
-            fail("_js_deps not allowed without srcs")
-
     target_name = native.package_name() + ":" + base_name
 
     # If this is JRE itself, don't synthesize the JRE dep.
@@ -108,12 +98,10 @@ def j2cl_library(
 
     j2cl_library_rule(
         name = base_name,
-        srcs = srcs,
+        srcs = srcs + native_srcs + _js_srcs,
         srcs_hack = [":" + dummy_src],
         deps = deps + _js_deps,
         exports = exports + _js_exports,
-        native_srcs = native_srcs,
-        js_srcs = _js_srcs,
         readable_source_maps = _readable_source_maps,
         declare_legacy_namespace = _declare_legacy_namespace,
         tags = tags,
