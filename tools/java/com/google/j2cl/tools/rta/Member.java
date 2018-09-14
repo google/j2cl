@@ -53,6 +53,16 @@ final class Member {
     return name;
   }
 
+  InvocationKind getDefaultInvocationKind() {
+    if (isStatic) {
+      return InvocationKind.STATIC;
+    } else if ("constructor".equals(name)) {
+      return InvocationKind.INSTANTIATION;
+    } else {
+      return InvocationKind.DYNAMIC;
+    }
+  }
+
   Multimap<InvocationKind, Member> getReferencedMembers() {
     return referencedMembers;
   }
@@ -67,23 +77,5 @@ final class Member {
 
   void setReferencedTypes(List<Type> referencedTypes) {
     this.referencedTypes = referencedTypes;
-  }
-
-  boolean isConstructor() {
-    return "constructor".equals(getName());
-  }
-
-  /**
-   * Return {@code true} if this member is an entry point.
-   *
-   * <p>An entry point is a member that can be statically called outside. JsAccessible constructors
-   * and static members are considered as entry points of the call graph.
-   */
-  boolean isEntryPoint() {
-    return isJsAccessible() && !isInstanceMember();
-  }
-
-  boolean isInstanceMember() {
-    return !isConstructor() && !isStatic;
   }
 }

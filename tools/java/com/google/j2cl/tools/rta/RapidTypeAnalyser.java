@@ -15,13 +15,11 @@
  */
 package com.google.j2cl.tools.rta;
 
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,39 +41,30 @@ final class RapidTypeAnalyser {
   }
 
   RtaResult analyse() {
-    for (Type type : typeHierarchyGraph.getTypes()) {
-      for (Member member : type.getMembers()) {
-        if (member.isEntryPoint()) {
-          if (member.isConstructor()) {
-            onInstantiation(member);
-          } else {
-            onStaticReference(member);
-          }
-        } else if (member.isJsAccessible() && member.isInstanceMember()) {
-          // We will consider each instance member that is accessible from javascript as potentially
-          // referenced. When a type defining/inheriting the members is instantiated, they become
-          // live.
-          onPolymorphicReference(member);
-        }
-      }
-    }
+    // Go over the entry points to start the traversal.
+    typeHierarchyGraph.getTypes().stream()
+        .flatMap(t -> t.getMembers().stream())
+        .filter(Member::isJsAccessible)
+        .forEach(m -> onMemberReference(m.getDefaultInvocationKind(), m));
 
     return RtaResult.build(unusedTypes, unusedMembers);
   }
 
-  private void onInstantiation(Member ctor) {
-    checkState(ctor.isConstructor());
-
-    instantiate(ctor.getDeclaringType());
-    markMemberLive(ctor);
-  }
-
-  private void onStaticReference(Member member) {
-    markMemberLive(member);
-  }
-
-  private void onPolymorphicReference(Member member) {
-    unfoldPolymorphicReference(member);
+  private void onMemberReference(InvocationKind invocationKind, Member member) {
+    switch (invocationKind) {
+      case DYNAMIC:
+        unfoldPolymorphicReference(member);
+        break;
+      case STATIC:
+        markMemberLive(member);
+        break;
+      case INSTANTIATION:
+        instantiate(member.getDeclaringType());
+        markMemberLive(member);
+        break;
+      default:
+        throw new AssertionError(invocationKind);
+    }
   }
 
   private void markMemberLive(Member member) {
@@ -84,11 +73,8 @@ final class RapidTypeAnalyser {
       return;
     }
 
-    markTypesAsLive(member.getReferencedTypes());
-
-    member.getReferencedMembers().get(InvocationKind.INSTANTIATION).forEach(this::onInstantiation);
-    member.getReferencedMembers().get(InvocationKind.STATIC).forEach(this::onStaticReference);
-    member.getReferencedMembers().get(InvocationKind.DYNAMIC).forEach(this::onPolymorphicReference);
+    member.getReferencedTypes().forEach(this::onTypeReference);
+    member.getReferencedMembers().forEach(this::onMemberReference);
   }
 
   private void unfoldPolymorphicReference(Member member) {
@@ -112,11 +98,7 @@ final class RapidTypeAnalyser {
     }
   }
 
-  private void markTypesAsLive(Collection<Type> typesList) {
-    typesList.forEach(this::markTypeAsLive);
-  }
-
-  private void markTypeAsLive(Type type) {
+  private void onTypeReference(Type type) {
     if (!unusedTypes.remove(type)) {
       // already live
       return;
@@ -124,7 +106,7 @@ final class RapidTypeAnalyser {
 
     // When a type is marked as live, we need to mark the super types as live too because their are
     // referred to in the class declaration (as supertypes or encoded as implementing interfaces).
-    markTypesAsLive(type.getSuperTypes());
+    type.getSuperTypes().forEach(this::onTypeReference);
   }
 
   private void instantiate(Type type) {
