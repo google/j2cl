@@ -30,21 +30,15 @@ load("//build_def:j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
         name,
-        srcs = [],
-        deps = [],
-        exports = [],
-        tags = [],
         native_srcs = [],
         generate_build_test = None,
-        visibility = None,
         _js_srcs = [],
         _js_deps = [],
         _js_exports = [],
-        _readable_source_maps = False,
-        _declare_legacy_namespace = False,
-        _transpiler = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
+
+    See j2cl_java_library.bzl#j2cl_library for the arguments.
 
     Implicit output targets:
       lib<name>.jar: A java archive containing the byte code.
@@ -65,30 +59,24 @@ def j2cl_library(
     #       proper JsInterop stubs next to the js_library rule and create a
     #       j2cl_import rule there.
     #   _js_exports: Exported JavaScript dependencies.
-    #   _declare_legacy_namespace: A temporary measure while onboarding Docs, do
-    #       not use.
-    #   _transpiler: J2CL compiler instance to use.
 
-    base_name = name
-    srcs = srcs or []
-    native_srcs = native_srcs or []
-    tags = tags or []
-    deps = deps or []
-    exports = exports or []
-    testonly = kwargs.get("testonly")
+    args = dict(kwargs)
+    _append(args, "srcs", native_srcs)
+    _append(args, "srcs", _js_srcs)
+    _append(args, "deps", _js_deps)
+    _append(args, "exports", _js_exports)
 
-    target_name = native.package_name() + ":" + base_name
+    hidden_arg_names = [i for i in args if i.startswith("_")]
+    for arg_name in hidden_arg_names:
+        args[arg_name[1:]] = args.pop(arg_name)
 
     # If this is JRE itself, don't synthesize the JRE dep.
-    if srcs and target_name != "third_party/java_src/j2cl/jre/java:jre":
-        deps = deps + ["//internal_do_not_use:jre"]
-
-    java_library_kwargs = dict(kwargs)
-    if _transpiler:
-        java_library_kwargs["transpiler"] = _transpiler
+    target_name = native.package_name() + ":" + name
+    if args["srcs"] and target_name != "third_party/java_src/j2cl/jre/java:jre":
+        args["deps"].append("//internal_do_not_use:jre")
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
-    dummy_class_name = base_name.replace("-", "__")
+    dummy_class_name = name.replace("-", "__")
     dummy_src = dummy_class_name + "_gen"
     native.genrule(
         name = dummy_src,
@@ -97,17 +85,13 @@ def j2cl_library(
     )
 
     j2cl_library_rule(
-        name = base_name,
-        srcs = srcs + native_srcs + _js_srcs,
+        name = name,
         srcs_hack = [":" + dummy_src],
-        deps = deps + _js_deps,
-        exports = exports + _js_exports,
-        readable_source_maps = _readable_source_maps,
-        declare_legacy_namespace = _declare_legacy_namespace,
-        tags = tags,
-        visibility = visibility,
-        **java_library_kwargs
+        **args
     )
 
-    if srcs and (generate_build_test == None or generate_build_test):
-        build_test(base_name, tags)
+    if args["srcs"] and (generate_build_test == None or generate_build_test):
+        build_test(name, kwargs.get("tags", []))
+
+def _append(args, name, value):
+    args[name] = (args.get(name) or []) + (value or [])
