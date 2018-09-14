@@ -51,7 +51,7 @@ final class RapidTypeAnalyser {
           } else {
             onStaticReference(member);
           }
-        } else if (isJsAccessible(member)) {
+        } else if (member.isJsAccessible() && member.isInstanceMember()) {
           // We will consider each instance member that is accessible from javascript as potentially
           // referenced. When a type defining/inheriting the members is instantiated, they become
           // live.
@@ -133,13 +133,6 @@ final class RapidTypeAnalyser {
       return;
     }
     virtuallyLiveMemberPerType.get(type).forEach(this::markMemberLive);
-  }
-
-  private static boolean isJsAccessible(Member member) {
-    return member.isJsAccessible()
-        && member.isInstanceMember()
-        // TODO(b/114126660): don't flag LambdaAdaptorType members as JsAccessible in libraryinfo
-        && !member.getDeclaringType().isLambdaAdaptorType();
   }
 
   private boolean containsLiveTypes(Set<Type> types) {

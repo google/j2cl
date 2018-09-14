@@ -92,12 +92,4 @@ final class Type {
   List<Type> getSuperTypes() {
     return superTypes;
   }
-
-  boolean isLambdaAdaptorType() {
-    return name.contains(".$LambdaAdaptor");
-  }
-
-  boolean isInternalJreType() {
-    return name.startsWith("javaemul.") || name.startsWith("vmbootstrap.");
-  }
 }

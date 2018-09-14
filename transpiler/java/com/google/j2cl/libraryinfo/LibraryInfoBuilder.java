@@ -51,9 +51,11 @@ public final class LibraryInfoBuilder {
 
   /** Gather information from a Type and create a TypeInfo object used to build the call graph. */
   public static TypeInfo build(Type type, String headerFilePath, String implFilePath) {
+    String typeId = getTypeId(type);
+
     TypeInfo.Builder typeInfoBuilder =
         TypeInfo.newBuilder()
-            .setTypeId(getTypeId(type))
+            .setTypeId(typeId)
             .setHeaderSourceFilePath(headerFilePath)
             .setImplSourceFilePath(implFilePath);
 
@@ -84,13 +86,10 @@ public final class LibraryInfoBuilder {
     for (Member member : type.getMembers()) {
       String memberName = getMemberId(member.getDescriptor());
       // JsMembers and JsFunctions are marked as accessible by js.
-      // $clinit is marked as a JsMethod so that the name is preserved (for example to have a
-      // consistent name for calling from handwritten methods in native.js files within the same
-      // class). Because $clinit is not really considered to be accessible by arbitrary
-      // JavaScript, we don't consider it  accessible by js.
       boolean isJsAccessible =
           (member.getDescriptor().isJsFunction() || member.getDescriptor().isJsMember())
-              && !CLINIT_METHOD_NAME.equals(memberName);
+              && !isInternalMember(memberName)
+              && !isInternalType(typeId);
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -225,5 +224,15 @@ public final class LibraryInfoBuilder {
 
   private static boolean isPropertyAccessor(MethodDescriptor methodDescriptor) {
     return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
+  }
+
+  private static boolean isInternalType(String typeName) {
+    return typeName.contains(".$LambdaAdaptor")
+        || typeName.startsWith("javaemul.")
+        || typeName.startsWith("vmbootstrap.");
+  }
+
+  private static boolean isInternalMember(String memberName) {
+    return memberName.startsWith("$");
   }
 }

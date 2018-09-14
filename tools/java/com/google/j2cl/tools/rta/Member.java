@@ -78,23 +78,12 @@ final class Member {
    *
    * <p>An entry point is a member that can be statically called outside. JsAccessible constructors
    * and static members are considered as entry points of the call graph.
-   *
-   * <p>Note that this method filters out all static internal members of the JRE that should never
-   * be called externally and helper members generated for lambda support.
    */
   boolean isEntryPoint() {
-    return isJsAccessible()
-        && !isInstanceMember()
-        && !isInternalMember()
-        && !getDeclaringType().isInternalJreType()
-        && !getDeclaringType().isLambdaAdaptorType();
+    return isJsAccessible() && !isInstanceMember();
   }
 
   boolean isInstanceMember() {
     return !isConstructor() && !isStatic;
-  }
-
-  private boolean isInternalMember() {
-    return getName().startsWith("$");
   }
 }
