@@ -52,11 +52,11 @@ final class Type {
 
   private Type() {}
 
-  public String getHeaderSourceFile() {
+  String getHeaderSourceFile() {
     return headerSourceFile;
   }
 
-  public String getImplSourceFile() {
+  String getImplSourceFile() {
     return implSourceFile;
   }
 
