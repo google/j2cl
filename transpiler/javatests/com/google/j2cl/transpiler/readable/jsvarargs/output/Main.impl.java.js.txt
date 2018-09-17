@@ -101,7 +101,7 @@ class Main extends j_l_Object {
 
   /**
    * @template M_T
-   * @param {...?} elements
+   * @param {...M_T} elements
    * @return {M_T}
    * @public
    */
@@ -123,7 +123,7 @@ class Main extends j_l_Object {
 
   /**
    * @template M_T
-   * @param {...List<?>} elements
+   * @param {...List<M_T>} elements
    * @return {M_T}
    * @public
    */
@@ -255,7 +255,7 @@ class Main extends j_l_Object {
    */
   m_testGenericJsFunctionWithVarags__() {
     let function$1$ =
-        (/** @param {M_U} n @param {...?} param */ (n, ...param) => {
+        (/** @param {M_U} n @param {...M_U} param */ (n, ...param) => {
           return param;
         });
   }

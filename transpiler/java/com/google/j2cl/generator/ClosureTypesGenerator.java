@@ -78,33 +78,12 @@ class ClosureTypesGenerator {
   public String getJsDocForParameter(HasParameters hasParameters, int index) {
     MethodDescriptor methodDescriptor = hasParameters.getDescriptor();
     ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
-    if (methodDescriptor.isJsMethodVarargs() && parameterDescriptor.isVarargs()) {
-      // TODO(b/36141178): remove varargs that are typed with a type variable until type checking in
-      // jscompiler is fixed. This OTI fix should be moved to FixTypeVariablesInMethods.
-      parameterDescriptor = replaceTypeVariables(parameterDescriptor);
-    }
 
     Variable parameter = hasParameters.getParameters().get(index);
     String parameterName = environment.aliasForVariable(parameter);
     return String.format(
         "@param {%s} %s",
         toClosureTypeParameter(methodDescriptor, parameterDescriptor).render(), parameterName);
-  }
-
-  private ParameterDescriptor replaceTypeVariables(ParameterDescriptor parameterDescriptor) {
-    TypeDescriptor parameterTypeDescriptor =
-        parameterDescriptor
-            .getTypeDescriptor()
-            .specializeTypeVariables(
-                typeVariable ->
-                    !typeVariable.isWildcardOrCapture()
-                        ? TypeVariable.Builder.from(typeVariable)
-                            .setWildcardOrCapture(true)
-                            .setUniqueKey(typeVariable.getUniqueId() + "??")
-                            .build()
-                        : typeVariable);
-
-    return parameterDescriptor.toBuilder().setTypeDescriptor(parameterTypeDescriptor).build();
   }
 
   /** Returns the Closure type for a type descriptor. */
