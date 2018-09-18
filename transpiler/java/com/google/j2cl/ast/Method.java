@@ -103,10 +103,6 @@ public class Method extends Member implements HasJsNameInfo, HasParameters {
     return methodDescriptor.isBridge();
   }
 
-  public boolean isSynthetic() {
-    return methodDescriptor.isSynthetic();
-  }
-
   @Override
   public boolean isAbstract() {
     return methodDescriptor.isAbstract();
