@@ -34,7 +34,7 @@ import java.util.Set;
 
 /** Method declaration. */
 @Visitable
-public class Method extends Member implements HasJsNameInfo, HasParameters {
+public class Method extends Member implements HasJsNameInfo, MethodLike {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;

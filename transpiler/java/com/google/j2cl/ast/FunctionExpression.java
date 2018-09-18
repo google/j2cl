@@ -26,7 +26,7 @@ import java.util.List;
 
 /** Class for an inline (lambda) function expression. */
 @Visitable
-public class FunctionExpression extends Expression implements HasParameters, HasSourcePosition {
+public class FunctionExpression extends Expression implements MethodLike {
   // The visitors traverse the @Visitable members of the class in the order they appear.
   // The parameter declarations need to be traversed before the body.
   @Visitable final List<Variable> parameters;
@@ -80,6 +80,11 @@ public class FunctionExpression extends Expression implements HasParameters, Has
 
   public boolean isJsVarargs() {
     return getDescriptor().isJsMethodVarargs();
+  }
+
+  @Override
+  public String getReadableDescription() {
+    return "<lambda>";
   }
 
   @Override

@@ -23,10 +23,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.HasParameters;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.MethodLike;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -75,11 +75,11 @@ class ClosureTypesGenerator {
    * Returns the @param JsDoc annotation for parameter at {@code index} in {@code
    * methodOrFunctionExpression}.
    */
-  public String getJsDocForParameter(HasParameters hasParameters, int index) {
-    MethodDescriptor methodDescriptor = hasParameters.getDescriptor();
+  public String getJsDocForParameter(MethodLike methodLike, int index) {
+    MethodDescriptor methodDescriptor = methodLike.getDescriptor();
     ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
 
-    Variable parameter = hasParameters.getParameters().get(index);
+    Variable parameter = methodLike.getParameters().get(index);
     String parameterName = environment.aliasForVariable(parameter);
     return String.format(
         "@param {%s} %s",
