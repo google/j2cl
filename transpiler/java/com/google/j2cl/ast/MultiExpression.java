@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +45,11 @@ public class MultiExpression extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return expressions.get(expressions.size() - 1).getTypeDescriptor();
+  }
+
+  @Override
+  public boolean isLValue() {
+    return Iterables.getLast(expressions).isLValue();
   }
 
   @Override

@@ -26,7 +26,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public abstract TypeDescriptor getTypeDescriptor();
 
   /**
-   * Returns true is the expression can be evaluated multiple times and always results in the same
+   * Returns true if the expression can be evaluated multiple times and always results in the same
    * value.
    *
    * <p>Note: that the expression might have side effects (e.g. cause some class initializers to
@@ -34,6 +34,14 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
    * same resulting state and value.
    */
   public boolean isIdempotent() {
+    return false;
+  }
+
+  /**
+   * Returns true if the expression can be used in the left hand side of an assignment. {@see JLS
+   * 15.26}
+   */
+  public boolean isLValue() {
     return false;
   }
 

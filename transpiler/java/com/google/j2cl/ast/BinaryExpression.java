@@ -40,6 +40,7 @@ public class BinaryExpression extends Expression {
     this.typeDescriptor =
         binaryOperationResultType(
             operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor());
+    checkArgument(!operator.isAssignmentOperator() || leftOperand.isLValue());
   }
 
   public Expression getLeftOperand() {

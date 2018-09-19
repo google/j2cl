@@ -54,6 +54,11 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
+  public boolean isLValue() {
+    return true;
+  }
+
+  @Override
   public ArrayAccess clone() {
     return ArrayAccess.newBuilder()
         .setArrayExpression(arrayExpression.clone())

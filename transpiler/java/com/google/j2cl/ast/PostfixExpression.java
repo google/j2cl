@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -29,6 +30,7 @@ public class PostfixExpression extends UnaryExpression {
   private PostfixExpression(Expression operand, PostfixOperator operator) {
     super(operand);
     this.operator = checkNotNull(operator);
+    checkArgument(!operator.hasSideEffect() || operand.isLValue());
   }
 
   @Override

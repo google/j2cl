@@ -51,6 +51,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public boolean isLValue() {
+    return true;
+  }
+
+  @Override
   public VariableReference clone() {
     return new VariableReference(target);
   }
