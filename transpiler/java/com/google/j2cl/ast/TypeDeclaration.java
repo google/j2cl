@@ -357,8 +357,14 @@ public abstract class TypeDeclaration extends Node
         toUnparamterizedTypeDescriptor());
   }
 
+  @Memoized
   public boolean hasOverlayImplementationType() {
-    return (isJsType() && isNative()) || (isJsFunctionInterface() && declaresDefaultMethods());
+    return (isJsType() && isNative()) || (isJsFunctionInterface() && declaresJsOverlayMembers());
+  }
+
+  private boolean declaresJsOverlayMembers() {
+    return getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsOverlay)
+        || getDeclaredFieldDescriptors().stream().anyMatch(FieldDescriptor::isJsOverlay);
   }
 
   /**

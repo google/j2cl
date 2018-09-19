@@ -31,6 +31,23 @@ public class Main {
     }
   }
 
+  @JsFunction
+  interface FunctionWithStaticOverlay {
+    boolean invoke();
+
+    @JsOverlay
+    static int fun() {
+      return 4;
+    }
+  }
+
+  @JsFunction
+  interface FunctionWithStaticField {
+    boolean invoke();
+
+    @JsOverlay int f = 1;
+  }
+
   public static void main(String... args) {
     test();
   }
@@ -38,5 +55,7 @@ public class Main {
   public static void test() {
     assert ((Function) (() -> true)).fun() == 2;
     assert ((Function) (() -> false)).fun() == 3;
+    assert FunctionWithStaticOverlay.fun() == 4;
+    assert FunctionWithStaticField.f == 1;
   }
 }
