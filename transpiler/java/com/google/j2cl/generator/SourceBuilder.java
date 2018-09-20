@@ -19,16 +19,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Builds source and tracks line numbers using a StringBuilder.
- */
+/** Builds source and tracks line numbers using a StringBuilder. */
 class SourceBuilder {
   private static final String INDENT = "  ";
   private StringBuilder sb = new StringBuilder();
@@ -37,6 +39,7 @@ class SourceBuilder {
   private int currentIndentation = 0;
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
+  private final Map<Member, SourcePosition> outputSourceInfoByMember = new HashMap<>();
   private boolean finished = false;
 
   public void emitWithMapping(Optional<SourcePosition> javaSourcePosition, Runnable codeEmitter) {
@@ -49,18 +52,43 @@ class SourceBuilder {
 
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
     checkNotNull(javaSourcePosition);
-    FilePosition startPosition = getCurrentPosition();
-    codeEmitter.run();
-    if (getCurrentPosition().equals(startPosition)) {
+
+    Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
+
+    if (!jsSourcePosition.isPresent()) {
       // Do not record empty mappings.
       return;
     }
-    javaSourceInfoByOutputSourceInfo.put(
+    javaSourceInfoByOutputSourceInfo.put(jsSourcePosition.get(), javaSourcePosition);
+  }
+
+  public void emitWithMemberMapping(Member member, Runnable codeEmitter) {
+    checkState(
+        !outputSourceInfoByMember.containsKey(member),
+        "Output source info already exists for this member %s",
+        member);
+
+    Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
+
+    if (!jsSourcePosition.isPresent()) {
+      // Do not record empty mappings.
+      return;
+    }
+
+    outputSourceInfoByMember.put(member, jsSourcePosition.get());
+  }
+
+  private Optional<SourcePosition> emit(Runnable codeEmitter) {
+    FilePosition startPosition = getCurrentPosition();
+    codeEmitter.run();
+    if (getCurrentPosition().equals(startPosition)) {
+      return Optional.empty();
+    }
+    return Optional.of(
         SourcePosition.newBuilder()
             .setStartFilePosition(startPosition)
             .setEndFilePosition(getCurrentPosition())
-            .build(),
-        javaSourcePosition);
+            .build());
   }
 
   /**
@@ -85,6 +113,10 @@ class SourceBuilder {
 
   public SortedMap<SourcePosition, SourcePosition> getMappings() {
     return javaSourceInfoByOutputSourceInfo;
+  }
+
+  public ImmutableMap<Member, SourcePosition> getOutputSourceInfoByMember() {
+    return ImmutableMap.copyOf(outputSourceInfoByMember);
   }
 
   public void append(String source) {

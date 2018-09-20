@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
@@ -54,6 +55,10 @@ public abstract class JavaScriptGenerator {
 
   public Map<SourcePosition, SourcePosition> getSourceMappings() {
     return sourceBuilder.getMappings();
+  }
+
+  public Map<Member, SourcePosition> getOutputSourceInfoByMember() {
+    return sourceBuilder.getOutputSourceInfoByMember();
   }
 
   abstract String renderOutput();

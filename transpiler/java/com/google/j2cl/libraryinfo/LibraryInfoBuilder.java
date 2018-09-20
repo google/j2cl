@@ -30,6 +30,7 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.common.SourcePosition;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import java.util.LinkedHashMap;
@@ -50,7 +51,11 @@ public final class LibraryInfoBuilder {
   }
 
   /** Gather information from a Type and create a TypeInfo object used to build the call graph. */
-  public static TypeInfo build(Type type, String headerFilePath, String implFilePath) {
+  public static TypeInfo build(
+      Type type,
+      String headerFilePath,
+      String implFilePath,
+      Map<Member, SourcePosition> outputSourceInfoByMember) {
     String typeId = getTypeId(type);
 
     TypeInfo.Builder typeInfoBuilder =
@@ -101,6 +106,12 @@ public final class LibraryInfoBuilder {
                       .setStatic(member.isStatic())
                       .setJsAccessible(isJsAccessible));
 
+      SourcePosition jsSourcePosition = outputSourceInfoByMember.get(member);
+      if (jsSourcePosition != null) {
+        builder.setStartPosition(createFilePosition(jsSourcePosition.getStartFilePosition()));
+        builder.setEndPosition(createFilePosition(jsSourcePosition.getEndFilePosition()));
+      }
+
       collectReferencedTypesAndMethodInvocations(member, builder);
     }
 
@@ -111,6 +122,13 @@ public final class LibraryInfoBuilder {
                 .stream()
                 .map(MemberInfo.Builder::build)
                 .collect(Collectors.toList()))
+        .build();
+  }
+
+  private static FilePosition createFilePosition(com.google.j2cl.common.FilePosition filePosition) {
+    return FilePosition.newBuilder()
+        .setLine(filePosition.getLine())
+        .setColumn(filePosition.getColumn())
         .build();
   }
 

@@ -155,7 +155,12 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
-        libraryInfo.addType(LibraryInfoBuilder.build(type, headerRelativePath, implRelativePath));
+        libraryInfo.addType(
+            LibraryInfoBuilder.build(
+                type,
+                headerRelativePath,
+                implRelativePath,
+                jsImplGenerator.getOutputSourceInfoByMember()));
 
         if (matchingNativeFile != null) {
           copyNativeJsFileToOutput(matchingNativeFile);

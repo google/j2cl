@@ -299,9 +299,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append("// native ");
         emitMethodHeader(method);
       } else {
-        renderMethodJsDoc(method);
-        emitMethodHeader(method);
-        statementTranspiler.renderStatement(method.getBody());
+        sourceBuilder.emitWithMemberMapping(
+            method,
+            () -> {
+              renderMethodJsDoc(method);
+              emitMethodHeader(method);
+              statementTranspiler.renderStatement(method.getBody());
+            });
       }
       sourceBuilder.newLines(2);
     }
@@ -565,10 +569,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderStaticFieldDeclarations() {
     for (Field staticField : type.getStaticFields()) {
-      statementTranspiler.renderStatement(
-          AstUtils.declarationStatement(staticField, type.getSourcePosition()));
-      // emit 2 empty lines
-      sourceBuilder.newLines(3);
+      sourceBuilder.emitWithMemberMapping(
+          staticField,
+          () -> {
+            statementTranspiler.renderStatement(
+                AstUtils.declarationStatement(staticField, type.getSourcePosition()));
+            // emit 2 empty lines
+            sourceBuilder.newLines(3);
+          });
     }
   }
 
