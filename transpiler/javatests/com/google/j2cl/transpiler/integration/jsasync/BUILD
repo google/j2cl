@@ -13,9 +13,6 @@ load(
 integration_test(
     name = "jsasync",
     srcs = glob(["*.java"]),
-    defs = [
-        "--allow_method_call_decomposing",
-        "--nocollapse_properties",  # TODO(skill): remove once b/69456597 is fixed
-    ],
+    defs = ["--allow_method_call_decomposing"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
