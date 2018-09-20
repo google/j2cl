@@ -1358,6 +1358,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  int getFoo();",
             "}",
             "public final class Buggy implements Function {",
+            "  @JsConstructor",
+            "  Buggy() { }",
             "  @JsProperty",
             "  public int getFoo() { return 0; }",
             "  @JsMethod",
@@ -1439,24 +1441,27 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction interface 'InvalidFunction' cannot declare non-JsOverlay"
                 + " member 'void InvalidFunction.n()'.",
             "JsFunction implementation member 'int Buggy.getFoo()' cannot be "
-                + "JsMethod nor JsProperty.",
+                + "JsMethod nor JsProperty nor JsConstructor.",
             "JsFunction implementation member 'void Buggy.bleh()' cannot be"
-                + " JsMethod nor JsProperty.",
+                + " JsMethod nor JsProperty nor JsConstructor.",
             "JsFunction implementation member 'void Buggy.nativeMethod()' cannot be native.",
-            "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty.",
+            "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty "
+                + "nor JsConstructor.",
             "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
-                + "JsMethod nor JsProperty.",
+                + "JsMethod nor JsProperty nor JsConstructor.",
             "JsFunction implementation 'Buggy' cannot override method 'String Object.toString()'.",
             "JsFunction implementation 'Buggy' cannot override method "
                 + "'boolean Object.equals(Object)'.",
             "JsFunction implementation 'Buggy' cannot override method 'int Object.hashCode()'.",
             "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
-                + "nor JsProperty.",
+                + "nor JsProperty nor JsConstructor.",
             "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
-                + "nor JsProperty.",
+                + "nor JsProperty nor JsConstructor.",
             "JsFunction implementation 'JsFunctionImplementingDefaultMethod' cannot implement more "
                 + "than one interface",
-            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface");
+            "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface",
+            "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
+                + "nor JsConstructor.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {

@@ -535,15 +535,13 @@ public class JsInteropRestrictionsChecker {
 
   private void checkMemberOfJsFunction(Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
+    String messagePrefix = "JsFunction interface";
+
     if (memberDescriptor.isSynthetic()) {
       return;
     }
 
-    if (memberDescriptor.isJsMember()) {
-      problems.error(
-          member.getSourcePosition(),
-          "JsFunction interface member '%s' cannot be JsMethod nor JsProperty.",
-          member.getReadableDescription());
+    if (checkNotJsMember(member, messagePrefix)) {
       return;
     }
 
@@ -553,7 +551,7 @@ public class JsInteropRestrictionsChecker {
 
     problems.error(
         member.getSourcePosition(),
-        "JsFunction interface '%s' cannot declare non-JsOverlay member '%s'.",
+        messagePrefix + " '%s' cannot declare non-JsOverlay member '%s'.",
         memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
         memberDescriptor.getReadableDescription());
   }
@@ -598,6 +596,8 @@ public class JsInteropRestrictionsChecker {
 
   private void checkMemberOfJsFunctionImplementation(Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
+    String messagePrefix = "JsFunction implementation";
+
     if (memberDescriptor.isSynthetic()) {
       return;
     }
@@ -619,26 +619,32 @@ public class JsInteropRestrictionsChecker {
 
         problems.error(
             member.getSourcePosition(),
-            "JsFunction implementation '%s' cannot override method '%s'.",
+            messagePrefix + " '%s' cannot override method '%s'.",
             memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
             nonJsFunctionOverride.get().getReadableDescription());
         return;
       }
     }
 
-    if (!member.isInitializerBlock() && memberDescriptor.isJsMember()) {
-      problems.error(
-          member.getSourcePosition(),
-          "JsFunction implementation member '%s' cannot be JsMethod nor JsProperty.",
-          member.getReadableDescription());
-    }
+    checkNotJsMember(member, messagePrefix);
 
     if (member.isNative()) {
       problems.error(
           member.getSourcePosition(),
-          "JsFunction implementation member '%s' cannot be native.",
+          messagePrefix + " member '%s' cannot be native.",
           member.getReadableDescription());
     }
+  }
+
+  private boolean checkNotJsMember(Member member, String messagePrefix) {
+    if (!member.isInitializerBlock() && member.getDescriptor().isJsMember()) {
+      problems.error(
+          member.getSourcePosition(),
+          messagePrefix + " member '%s' cannot be JsMethod nor JsProperty nor JsConstructor.",
+          member.getReadableDescription());
+      return true;
+    }
+    return false;
   }
 
   private void checkJsFunctionSubtype(Type type) {
