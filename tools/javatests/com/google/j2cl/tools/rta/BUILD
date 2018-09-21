@@ -10,5 +10,6 @@ java_library(
     deps = [
         "//third_party/java/junit",
         "//third_party:guava",
+        "//third_party:truth",
     ],
 )

@@ -16,11 +16,9 @@
 package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Predicates.not;
-import static org.junit.Assert.fail;
+import static com.google.common.truth.Truth.assertWithMessage;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
@@ -63,32 +61,9 @@ public class GoldenFileTester {
   }
 
   private void checkDifferences(Set<String> fromRta, Set<String> fromGoldenFile, String fileType) {
-    StringBuilder errorMessageBuilder = new StringBuilder();
-    Set<String> differenceFromRta = Sets.difference(fromRta, fromGoldenFile);
-
-    if (!differenceFromRta.isEmpty()) {
-      errorMessageBuilder
-          .append("\nThese ")
-          .append(fileType)
-          .append(" are NOT present in the golden file but are returned by RTA:\n")
-          .append(Joiner.on("\n").skipNulls().join(differenceFromRta))
-          .append("\n");
-    }
-
-    Set<String> differenceFromGoldenFiles = Sets.difference(fromGoldenFile, fromRta);
-    if (!differenceFromGoldenFiles.isEmpty()) {
-      errorMessageBuilder
-          .append("\nThese ")
-          .append(fileType)
-          .append(" are present in the golden file but are NOT returned by RTA:\n")
-          .append(Joiner.on("\n").skipNulls().join(differenceFromGoldenFiles))
-          .append("\n");
-    }
-
-    String errorMsg = errorMessageBuilder.toString();
-    if (!Strings.isNullOrEmpty(errorMsg)) {
-      fail(errorMsg);
-    }
+    assertWithMessage("Comparing rta result with golden file with for " + fileType)
+        .that(fromRta)
+        .containsExactlyElementsIn(fromGoldenFile);
   }
 
   private static Set<String> readGoldenFile(String filePath) throws IOException {
