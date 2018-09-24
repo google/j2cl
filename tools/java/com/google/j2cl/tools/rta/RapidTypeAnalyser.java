@@ -56,6 +56,7 @@ final class RapidTypeAnalyser {
         unfoldPolymorphicReference(member);
         break;
       case STATIC:
+        markTypeLive(member.getDeclaringType());
         markMemberLive(member);
         break;
       case INSTANTIATION:
@@ -65,6 +66,10 @@ final class RapidTypeAnalyser {
       default:
         throw new AssertionError(invocationKind);
     }
+  }
+
+  private void onTypeReference(Type type) {
+    markTypeLive(type);
   }
 
   private void markMemberLive(Member member) {
@@ -98,7 +103,7 @@ final class RapidTypeAnalyser {
     }
   }
 
-  private void onTypeReference(Type type) {
+  private void markTypeLive(Type type) {
     if (!unusedTypes.remove(type)) {
       // already live
       return;
@@ -106,7 +111,7 @@ final class RapidTypeAnalyser {
 
     // When a type is marked as live, we need to mark the super types as live too because their are
     // referred to in the class declaration (as supertypes or encoded as implementing interfaces).
-    type.getSuperTypes().forEach(this::onTypeReference);
+    type.getSuperTypes().forEach(this::markTypeLive);
   }
 
   private void instantiate(Type type) {
