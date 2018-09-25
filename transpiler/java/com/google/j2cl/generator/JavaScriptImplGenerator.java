@@ -48,7 +48,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private NativeJavaScriptFile nativeSource;
   private final ClosureTypesGenerator closureTypesGenerator;
 
-
   protected final StatementTranspiler statementTranspiler;
 
   public static final String FILE_SUFFIX = ".impl.java.js";
@@ -240,9 +239,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (doesClassExistInJavaScript(typeDescriptor)) {
       String typeArgumentsString =
           typeDescriptor.hasTypeArguments()
-              ? typeDescriptor
-                  .getTypeArgumentDescriptors()
-                  .stream()
+              ? typeDescriptor.getTypeArgumentDescriptors().stream()
                   .map(td -> closureTypesGenerator.getClosureTypeString(td))
                   .collect(Collectors.joining(", ", "<", ">"))
               : "";
@@ -571,12 +568,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Field staticField : type.getStaticFields()) {
       sourceBuilder.emitWithMemberMapping(
           staticField,
-          () -> {
-            statementTranspiler.renderStatement(
-                AstUtils.declarationStatement(staticField, type.getSourcePosition()));
-            // emit 2 empty lines
-            sourceBuilder.newLines(3);
-          });
+          () ->
+              statementTranspiler.renderStatement(
+                  AstUtils.declarationStatement(staticField, type.getSourcePosition())));
+      // emit 2 empty lines
+      sourceBuilder.newLines(3);
     }
   }
 
@@ -667,8 +663,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderExports() {
-    sourceBuilder.appendLines(
-        "exports = " + environment.aliasForType(type.getDeclaration()) + ";");
+    sourceBuilder.appendLines("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
     // TODO(b/77961191): add a new line once the bug is resolved.
   }
 
