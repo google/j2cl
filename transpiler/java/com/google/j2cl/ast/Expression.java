@@ -72,16 +72,27 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns expression prefixed with unary operator {@code prefixOperator}. */
   public UnaryExpression prefix(PrefixOperator prefixOperator) {
-    // TODO(67753876): stop parenthesizing when precedence is correctly handled by
-    // ExpressionTranspiler.
+    // TODO(b/67753876): Remove explicit parenthesis once J2cl handles precedence.
     // Parenthesize the operand to enforce the correct precedence unless it is a prefix expression.
     Expression operand = this instanceof PrefixExpression ? this : this.parenthesize();
     return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(operand).build();
   }
 
   /** Return the expression enclosed in parenthesis. */
-  public MultiExpression parenthesize() {
+  public Expression parenthesize() {
+    // TODO(b/67753876): Remove explicit parenthesis insertion once J2cl handles precedence.
+    if (this.areEnclosingParenthesisUnnecessary()) {
+      return this;
+    }
     return MultiExpression.newBuilder().setExpressions(this).build();
+  }
+
+  /**
+   * Returns true if it is guaranteed that removing parenthesis around this expression won't change
+   * the meaning of expressions enclosing it.
+   */
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return false;
   }
 
   @Override

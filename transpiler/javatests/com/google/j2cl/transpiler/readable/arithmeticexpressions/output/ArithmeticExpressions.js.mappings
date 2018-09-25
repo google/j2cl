@@ -45,7 +45,7 @@
 [double o = (5 / 2) - 0.0;] => [let o = $Primitives.$coerceDivision(5 / 2) - 0.0;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [o] => [o] "o"
 [a = a << 31L;] => [a = a << 31;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
-[a <<= 1L;] => [a = a << $Primitives.$narrowLongToInt($Long.fromInt(1));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[a <<= 1L;] => [a = a << 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a /= 1L;] => [a = $Primitives.$narrowLongToInt($LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a += Double.MAX_VALUE;] => [a = $Primitives.$narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testPrimitives"

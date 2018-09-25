@@ -25,6 +25,7 @@ public class Main {
     testStringConcatentation();
     testExtendedOperands();
     testFloatConsistency();
+    testParenthesizedLvalues();
   }
 
   public static void testArithmetic() {
@@ -177,5 +178,14 @@ public class Main {
     assert floatSum == FLOAT_CONSTANT + FLOAT_CONSTANT;
     assert floatSum == SUM;
     assert DOUBLE_CONSTANT == FLOAT_CONSTANT;
+  }
+
+  public static void testParenthesizedLvalues() {
+    long l = 1;
+    ((l))++;
+    assert l == 2;
+
+    ((((l)))) += 2;
+    assert l == 4;
   }
 }

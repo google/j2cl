@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 
@@ -39,14 +38,12 @@ public class InsertUnsignedRightShiftCoercions extends NormalizationPass {
             // Maybe perform this transformation:
             // "x >>> y" -> "(x >>> y | 0)"
             if (binaryExpression.getOperator() == BinaryOperator.RIGHT_SHIFT_UNSIGNED) {
-              return MultiExpression.newBuilder()
-                  .addExpressions(
-                      BinaryExpression.newBuilder()
-                          .setLeftOperand(binaryExpression)
-                          .setOperator(BinaryOperator.BIT_OR)
-                          .setRightOperand(NumberLiteral.fromInt(0))
-                          .build())
-                  .build();
+              return BinaryExpression.newBuilder()
+                  .setLeftOperand(binaryExpression)
+                  .setOperator(BinaryOperator.BIT_OR)
+                  .setRightOperand(NumberLiteral.fromInt(0))
+                  .build()
+                  .parenthesize();
             }
             return binaryExpression;
           }

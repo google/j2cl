@@ -17,23 +17,17 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.ExpressionWithComment;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.SuperReference;
-import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayList;
@@ -117,48 +111,12 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         Expression expression = Iterables.getOnlyElement(flattenedExpressions);
         // TODO(b/67753876): All of this would be unnecessary if we parenthesize according to
         // precedence.
-        if (areParenthesisUnnecessary(expression)) {
+        if (expression.areEnclosingParenthesisUnnecessary()) {
           return expression;
         }
       }
       return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
     }
-  }
-
-  private static boolean areParenthesisUnnecessary(Expression expression) {
-    if (expression instanceof Invocation) {
-      // @JsProperty Setters are not safe to unparenthesize, e.g. unparenthesizing
-      //     a | (b.f = 1)
-      // into
-      //     a | b.f = 1
-      // results in syntactically incorrect code.
-      //
-      // That being said, @JsProperty setters are not allowed to return a type other than void;
-      // so currently there is no syntactic way to get into this situation.
-      return true;
-    } else if (expression instanceof FieldAccess) {
-      // Field accesses are always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof Literal) {
-      // Literals are always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof VariableReference) {
-      // Variable references are always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof ArrayAccess) {
-      // Array access are always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof SuperReference) {
-      // "super" is always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof ThisReference) {
-      // "this" is always safe to unparenthesize.
-      return true;
-    } else if (expression instanceof ExpressionWithComment) {
-      // expressions with comment are safe to unparenthesize if the underlying expression is.
-      return areParenthesisUnnecessary(((ExpressionWithComment) expression).getExpression());
-    }
-    return false;
   }
 
   private static class SwitchMultiExpressionsAndSideEffectingExpressions extends AbstractRewriter {

@@ -41,6 +41,11 @@ public class SuperReference extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public SuperReference clone() {
     return new SuperReference(typeDescriptor);
   }

@@ -1514,9 +1514,7 @@ public class CompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
       // Preserve the parenthesis. J2CL does not yet handle properly parenthesizing the output
       // according to operator precedence.
-      return MultiExpression.newBuilder()
-          .setExpressions(convert(expression.getExpression()))
-          .build();
+      return convert(expression.getExpression()).parenthesize();
     }
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {

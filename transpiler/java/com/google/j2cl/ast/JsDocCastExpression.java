@@ -42,6 +42,13 @@ public class JsDocCastExpression extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    // JsDoc casts are rendered with an explicit parenthesis so additional parenthesis around them
+    // are unnecessary.
+    return true;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_JsDocCastExpression.visit(processor, this);
   }

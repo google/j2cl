@@ -44,6 +44,13 @@ public class CastExpression extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    // Cast expressions are emitted as a method call and parenthesis around method calls are
+    // always unnecessary.
+    return true;
+  }
+
+  @Override
   public CastExpression clone() {
     return new CastExpression(expression.clone(), castTypeDescriptor);
   }

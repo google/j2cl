@@ -41,6 +41,11 @@ public class ThisReference extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public ThisReference clone() {
     return new ThisReference(typeDescriptor);
   }

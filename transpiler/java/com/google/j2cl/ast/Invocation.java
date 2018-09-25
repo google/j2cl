@@ -36,6 +36,11 @@ public abstract class Invocation extends Expression implements MemberReference {
 
   public abstract List<Expression> getArguments();
 
+  @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
   abstract Builder<?, ?> createBuilder();
 
   @Override

@@ -71,6 +71,11 @@ public class FieldAccess extends Expression implements MemberReference {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public FieldAccess clone() {
     return new FieldAccess(qualifier.clone(), targetFieldDescriptor, sourcePosition);
   }

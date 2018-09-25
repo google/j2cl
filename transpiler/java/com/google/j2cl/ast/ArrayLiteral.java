@@ -52,6 +52,11 @@ public class ArrayLiteral extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public ArrayLiteral clone() {
     return new ArrayLiteral(typeDescriptor, AstUtils.clone(valueExpressions));
   }

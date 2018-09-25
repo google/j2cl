@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,7 +167,7 @@ public class CompoundOperationsUtils {
     }
 
     if (expressions.size() == 1) {
-      return expressions.get(0);
+      return Iterables.getOnlyElement(expressions);
     }
     return MultiExpression.newBuilder().addExpressions(expressions).build();
   }
@@ -292,12 +293,10 @@ public class CompoundOperationsUtils {
                 BinaryExpression.newBuilder()
                     .setLeftOperand(leftOperand.clone())
                     .setOperator(operator)
-                    // TODO(b/67753876): Remove multiexpression once J2cl handles precedence
-                    // correctly.
+                    // TODO(b/67753876): Remove explicit parenthesis once J2cl handles precedence.
                     // Add parenthesis to the right expression to handle cases like a += b += c, and
                     // emit code that is syntactically correct.
-                    .setRightOperand(
-                        MultiExpression.newBuilder().addExpressions(rightOperand).build())
+                    .setRightOperand(rightOperand.parenthesize())
                     .build()))
         .build();
   }

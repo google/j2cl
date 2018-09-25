@@ -26,6 +26,11 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_Literal.visit(processor, this);
   }

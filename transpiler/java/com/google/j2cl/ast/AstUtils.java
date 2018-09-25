@@ -428,25 +428,14 @@ public class AstUtils {
             primitiveType.getSimpleSourceName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
-    expression =
-        isValidMethodCallQualifier(expression)
-            ? expression
-            : MultiExpression.newBuilder().setExpressions(expression).build();
-
     MethodCall methodCall =
-        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
+        MethodCall.Builder.from(valueMethodDescriptor)
+            .setQualifier(expression.parenthesize())
+            .build();
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = devirtualizeMethodCall(methodCall, boxType);
     }
     return methodCall;
-  }
-
-  /** Returns whether the given expression is a syntactically valid qualifier for a MethodCall. */
-  private static boolean isValidMethodCallQualifier(Expression expression) {
-    return !(expression instanceof ConditionalExpression
-        || expression instanceof BinaryExpression
-        || expression instanceof PrefixExpression
-        || expression instanceof PostfixExpression);
   }
 
   public static boolean isDelegatedConstructorCall(

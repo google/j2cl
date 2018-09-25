@@ -81,7 +81,7 @@ class ArithmeticExpressions extends j_l_Object {
         9.223372036854778E18;
     let o = $Primitives.$coerceDivision(5 / 2) - 0.0;
     a = a << 31;
-    a = a << $Primitives.$narrowLongToInt($Long.fromInt(1));
+    a = a << 1;
     a = $Primitives.$narrowLongToInt(
         $LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
     a = $Primitives.$narrowLongToInt(

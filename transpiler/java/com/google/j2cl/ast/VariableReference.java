@@ -56,6 +56,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public boolean areEnclosingParenthesisUnnecessary() {
+    return true;
+  }
+
+  @Override
   public VariableReference clone() {
     return new VariableReference(target);
   }
