@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import junit.framework.Assert;
@@ -154,12 +156,12 @@ public class TranspilerTester {
     }
 
     public TranspileResult assertNoWarnings() {
-      return assertWarnings();
+      return assertWarningsWithoutSourcePosition();
     }
 
-    public TranspileResult assertWarnings(String... expectedWarnings) {
+    public TranspileResult assertWarningsWithoutSourcePosition(String... expectedWarnings) {
       assertThat(getProblems().getWarnings())
-          .comparingElementsUsing(CONTAINS_STRING)
+          .comparingElementsUsing(ERROR_WITHOUT_SOURCE_POSITION_COMPARATOR)
           .containsExactlyElementsIn(Arrays.asList(expectedWarnings));
       return this;
     }
@@ -174,9 +176,15 @@ public class TranspilerTester {
       return this;
     }
 
-    public TranspileResult assertErrors(String... expectedErrors) {
+    public TranspileResult assertErrorsWithoutSourcePosition(String... expectedErrors) {
       assertThat(getProblems().getErrors())
-          .comparingElementsUsing(CONTAINS_STRING)
+          .comparingElementsUsing(ERROR_WITHOUT_SOURCE_POSITION_COMPARATOR)
+          .containsExactlyElementsIn(Arrays.asList(expectedErrors));
+      return this;
+    }
+
+    public TranspileResult assertErrorsWithSourcePosition(String... expectedErrors) {
+      assertThat(getProblems().getErrors())
           .containsExactlyElementsIn(Arrays.asList(expectedErrors));
       return this;
     }
@@ -220,6 +228,26 @@ public class TranspilerTester {
           @Override
           public boolean compare(String actual, String expected) {
             return actual.contains(expected);
+          }
+
+          @Override
+          public String toString() {
+            return "contained within";
+          }
+        };
+
+    private static final Pattern messagePattern =
+        Pattern.compile("(?:(?:Error)|(?:Warning))(?::[\\w.]+:\\d+)?: (?<message>.*)");
+
+    private static final Correspondence<String, String> ERROR_WITHOUT_SOURCE_POSITION_COMPARATOR =
+        new Correspondence<String, String>() {
+          @Override
+          public boolean compare(String actual, String expected) {
+
+            Matcher matcher = messagePattern.matcher(actual);
+            checkState(matcher.matches());
+
+            return matcher.group("message").equals(expected);
           }
 
           @Override

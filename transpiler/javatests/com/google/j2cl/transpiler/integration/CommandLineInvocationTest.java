@@ -38,7 +38,7 @@ public class CommandLineInvocationTest extends TestCase {
     newTesterWithDefaults()
         .setArgs("-unknown", "abc")
         .assertTranspileFails()
-        .assertErrors(
+        .assertErrorsContainsSnippets(
             "\"-unknown\" is not a valid option\n"
                 + "Usage: j2cl <options> <source files>\n"
                 + "use -help for a list of possible options");
@@ -58,7 +58,8 @@ public class CommandLineInvocationTest extends TestCase {
         .addCompilationUnit("Foo", "public class Foo {}")
         .setOutputPath(outputLocation)
         .assertTranspileFails()
-        .assertErrors("Output location '" + outputLocation + "' must be a directory or .zip file");
+        .assertErrorsWithoutSourcePosition(
+            "Output location '" + outputLocation + "' must be a directory or .zip file.");
   }
 
   public void testMissingJreDependency() {
@@ -95,7 +96,8 @@ public class CommandLineInvocationTest extends TestCase {
         .addNativeFile(
             "BadNameNativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
-        .assertErrors("Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.");
+        .assertErrorsWithoutSourcePosition(
+            "Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.");
   }
 
   public void testUnusedSource() {
@@ -110,7 +112,8 @@ public class CommandLineInvocationTest extends TestCase {
             "NativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .addNativeFile("ExtraClass", "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
-        .assertErrors("Unused native file 'nativeclasstest/ExtraClass.native.js'.");
+        .assertErrorsWithoutSourcePosition(
+            "Unused native file 'nativeclasstest/ExtraClass.native.js'.");
   }
 
   public void testOutputsToDirectory() throws IOException {
