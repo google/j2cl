@@ -285,26 +285,27 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderTypeMethods() {
     for (Method method : type.getMethods()) {
-      if (method.isNative()) {
-        // If the method is native, output JsDoc comments so it can serve as a template for
-        // native.js. However if the method is pointing to a different namespace then there
-        // is no point on doing that since it cannot be provided via a native.js file.
-        if (method.getDescriptor().hasJsNamespace()) {
-          continue;
-        }
-        renderMethodJsDoc(method);
-        sourceBuilder.append("// native ");
-        emitMethodHeader(method);
-      } else {
-        sourceBuilder.emitWithMemberMapping(
-            method,
-            () -> {
+      sourceBuilder.emitWithMemberMapping(
+          method,
+          () -> {
+            if (method.isNative()) {
+              // If the method is native, output JsDoc comments so it can serve as a template for
+              // native.js. However if the method is pointing to a different namespace then there
+              // is no point on doing that since it cannot be provided via a native.js file.
+              if (method.getDescriptor().hasJsNamespace()) {
+                return;
+              }
+              renderMethodJsDoc(method);
+              sourceBuilder.append("// native ");
+              emitMethodHeader(method);
+            } else {
+
               renderMethodJsDoc(method);
               emitMethodHeader(method);
               statementTranspiler.renderStatement(method.getBody());
-            });
-      }
-      sourceBuilder.newLines(2);
+            }
+            sourceBuilder.newLines(2);
+          });
     }
   }
 
@@ -568,11 +569,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Field staticField : type.getStaticFields()) {
       sourceBuilder.emitWithMemberMapping(
           staticField,
-          () ->
-              statementTranspiler.renderStatement(
-                  AstUtils.declarationStatement(staticField, type.getSourcePosition())));
-      // emit 2 empty lines
-      sourceBuilder.newLines(3);
+          () -> {
+            statementTranspiler.renderStatement(
+                AstUtils.declarationStatement(staticField, type.getSourcePosition()));
+            // emit 2 empty lines
+            sourceBuilder.newLines(3);
+          });
     }
   }
 
