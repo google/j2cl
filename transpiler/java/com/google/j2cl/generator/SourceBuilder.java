@@ -81,13 +81,14 @@ class SourceBuilder {
   private Optional<SourcePosition> emit(Runnable codeEmitter) {
     FilePosition startPosition = getCurrentPosition();
     codeEmitter.run();
-    if (getCurrentPosition().equals(startPosition)) {
+    FilePosition endPosition = getCurrentPosition();
+    if (endPosition.equals(startPosition)) {
       return Optional.empty();
     }
     return Optional.of(
         SourcePosition.newBuilder()
             .setStartFilePosition(startPosition)
-            .setEndFilePosition(getCurrentPosition())
+            .setEndFilePosition(endPosition)
             .build());
   }
 

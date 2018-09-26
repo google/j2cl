@@ -52,6 +52,7 @@
         },
         {
           "name" : "foo",
+          "jsAccessible" : true,
           "startPosition" : {"line" : 39, "column" : 2},
           "endPosition" : {"line" : 46, "column" : 2}
         },
@@ -136,6 +137,7 @@
         },
         {
           "name" : "foo",
+          "jsAccessible" : true,
           "startPosition" : {"line" : 39, "column" : 2},
           "endPosition" : {"line" : 46, "column" : 2}
         },
@@ -304,7 +306,7 @@
           "public" : true,
           "static" : true,
           "startPosition" : {"line" : 132},
-          "endPosition" : {"line" : 133, "column" : 75}
+          "endPosition" : {"line" : 136}
         },
         {
           "name" :
@@ -440,6 +442,71 @@
     },
     {
       "typeId" :
+          "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface",
+      "member" : [
+        {
+          "name" : "accessibleFunctionalInterfaceMethod",
+          "public" : true,
+          "jsAccessible" : true,
+          "startPosition" : {"line" : 17, "column" : 2},
+          "endPosition" : {"line" : 25, "column" : 2}
+        },
+        {
+          "name" : "$adapt",
+          "public" : true,
+          "static" : true,
+          "invokedMethods" : [
+            {
+              "method" : "$clinit",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface",
+              "kind" : "STATIC"
+            },
+            {
+              "method" : "constructor",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+              "kind" : "INSTANTIATION"
+            }
+          ],
+          "referencedTypes" : [
+            "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface",
+            "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"
+          ],
+          "startPosition" : {"line" : 25, "column" : 2},
+          "endPosition" : {"line" : 35, "column" : 2}
+        },
+        {
+          "name" : "$clinit",
+          "public" : true,
+          "static" : true,
+          "invokedMethods" : [
+            {
+              "method" : "$clinit",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface",
+              "kind" : "STATIC"
+            },
+            {
+              "method" : "$loadModules",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface",
+              "kind" : "STATIC"
+            }
+          ],
+          "referencedTypes" :
+              ["com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface"],
+          "startPosition" : {"line" : 35, "column" : 2},
+          "endPosition" : {"line" : 45, "column" : 2}
+        }
+      ],
+      "headerSourceFilePath" :
+          "com/google/j2cl/transpiler/readable/libraryinfo/Main$JsAccessibleFunctionnalInterface.java.js",
+      "implSourceFilePath" :
+          "com/google/j2cl/transpiler/readable/libraryinfo/Main$JsAccessibleFunctionnalInterface.impl.java.js"
+    },
+    {
+      "typeId" :
           "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl",
       "extendsType" : "java.lang.Object",
       "implementsType" :
@@ -566,7 +633,6 @@
       "typeId" :
           "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor",
       "extendsType" : "java.lang.Object",
-      "jsInstantiable" : true,
       "implementsType" :
           ["com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface"],
       "member" : [
@@ -676,6 +742,121 @@
           "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface$$LambdaAdaptor.java.js",
       "implSourceFilePath" :
           "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface$$LambdaAdaptor.impl.java.js"
+    },
+    {
+      "typeId" :
+          "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+      "extendsType" : "java.lang.Object",
+      "implementsType" :
+          ["com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface"],
+      "member" : [
+        {
+          "name" : "constructor",
+          "public" : true,
+          "invokedMethods" : [
+            {
+              "method" : "$clinit",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+              "kind" : "STATIC"
+            },
+            {
+              "method" : "constructor",
+              "enclosingType" : "java.lang.Object",
+              "kind" : "STATIC"
+            },
+            {
+              "method" :
+                  "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"
+            },
+            {
+              "method" :
+                  "$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"
+            }
+          ],
+          "referencedTypes" : [
+            "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+            "java.lang.Object"
+          ],
+          "startPosition" : {"line" : 17, "column" : 2},
+          "endPosition" : {"line" : 29, "column" : 2}
+        },
+        {
+          "name" :
+              "$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction",
+          "public" : true,
+          "invokedMethods" : [
+            {
+              "method" : "$ctor__java_lang_Object__",
+              "enclosingType" : "java.lang.Object"
+            },
+            {
+              "method" :
+                  "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"
+            }
+          ],
+          "startPosition" : {"line" : 29, "column" : 2},
+          "endPosition" : {"line" : 39, "column" : 2}
+        },
+        {
+          "name" : "accessibleFunctionalInterfaceMethod",
+          "public" : true,
+          "jsAccessible" : true,
+          "invokedMethods" : [ {
+            "method" :
+                "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
+            "enclosingType" :
+                "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"
+          } ],
+          "startPosition" : {"line" : 39, "column" : 2},
+          "endPosition" : {"line" : 50, "column" : 2}
+        },
+        {
+          "name" :
+              "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
+          "public" : true
+        },
+        {
+          "name" : "$clinit",
+          "public" : true,
+          "static" : true,
+          "invokedMethods" : [
+            {
+              "method" : "$clinit",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+              "kind" : "STATIC"
+            },
+            {
+              "method" : "$loadModules",
+              "enclosingType" :
+                  "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+              "kind" : "STATIC"
+            },
+            {
+              "method" : "$clinit",
+              "enclosingType" : "java.lang.Object",
+              "kind" : "STATIC"
+            }
+          ],
+          "referencedTypes" : [
+            "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor",
+            "java.lang.Object"
+          ],
+          "startPosition" : {"line" : 50, "column" : 2},
+          "endPosition" : {"line" : 61, "column" : 2}
+        }
+      ],
+      "headerSourceFilePath" :
+          "com/google/j2cl/transpiler/readable/libraryinfo/Main$JsAccessibleFunctionnalInterface$$LambdaAdaptor.java.js",
+      "implSourceFilePath" :
+          "com/google/j2cl/transpiler/readable/libraryinfo/Main$JsAccessibleFunctionnalInterface$$LambdaAdaptor.impl.java.js"
     }
   ]
 }

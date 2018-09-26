@@ -12,11 +12,10 @@ message LibraryInfo {
 message TypeInfo {
   string type_id = 1;
   string extends_type = 2;
-  bool js_instantiable = 3;
-  repeated string implements_type = 4;
-  repeated MemberInfo member = 5;
-  string header_source_file_path = 6;
-  string impl_source_file_path = 7;
+  repeated string implements_type = 3;
+  repeated MemberInfo member = 4;
+  string header_source_file_path = 5;
+  string impl_source_file_path = 6;
 }
 
 message MemberInfo {

@@ -25,6 +25,11 @@ public class Main {
     void foo();
   }
 
+  interface JsAccessibleFunctionnalInterface {
+    @JsMethod
+    void accessibleFunctionalInterfaceMethod();
+  }
+
   @JsFunction
   interface Function {
     void apply(String s);

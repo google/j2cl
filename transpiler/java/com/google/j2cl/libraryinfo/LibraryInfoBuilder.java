@@ -74,14 +74,6 @@ public final class LibraryInfoBuilder {
       typeInfoBuilder.addImplementsType(getTypeId(superInterfaceType));
     }
 
-    // JsType interface can be implemented and so instantiated on Javascript side.
-    boolean isJsTypeInterface = type.isInterface() && type.getDeclaration().isJsType();
-    boolean isJsInstantiable =
-        isJsTypeInterface
-            || type.getMethods().stream().anyMatch(m -> m.getDescriptor().isJsConstructor());
-
-    typeInfoBuilder.setJsInstantiable(isJsInstantiable);
-
     // Collect references to getter and setter for the same field under the name of the field,
     // creating only one MemberInfo instance that combines all the references appearing in their
     // bodies.
@@ -89,12 +81,12 @@ public final class LibraryInfoBuilder {
         new LinkedHashMap<>(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
-      String memberName = getMemberId(member.getDescriptor());
+      MemberDescriptor memberDescriptor = member.getDescriptor();
+      String memberName = getMemberId(memberDescriptor);
       // JsMembers and JsFunctions are marked as accessible by js.
       boolean isJsAccessible =
-          (member.getDescriptor().isJsFunction() || member.getDescriptor().isJsMember())
-              && !isInternalMember(memberName)
-              && !isInternalType(typeId);
+          (memberDescriptor.isJsFunction() || memberDescriptor.isJsMember())
+              && !shouldNotBeJsAccessible(memberDescriptor);
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -102,7 +94,7 @@ public final class LibraryInfoBuilder {
               m ->
                   MemberInfo.newBuilder()
                       .setName(memberName)
-                      .setPublic(member.getDescriptor().getVisibility().isPublic())
+                      .setPublic(memberDescriptor.getVisibility().isPublic())
                       .setStatic(member.isStatic())
                       .setJsAccessible(isJsAccessible));
 
@@ -244,13 +236,23 @@ public final class LibraryInfoBuilder {
     return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
   }
 
-  private static boolean isInternalType(String typeName) {
-    return typeName.contains(".$LambdaAdaptor")
-        || typeName.startsWith("javaemul.")
-        || typeName.startsWith("vmbootstrap.");
-  }
-
-  private static boolean isInternalMember(String memberName) {
-    return memberName.startsWith("$");
+  /**
+   * Returns {@code true} if the member is marked JsMethod for convenience but not supposed to be
+   * accessible from JavaScript code.
+   */
+  private static boolean shouldNotBeJsAccessible(MemberDescriptor memberDescriptor) {
+    // TODO(b/116712070): make sure these members are not internally marked as
+    // JsMethod/JsConstructor.
+    // Lambda adaptor classes have a JsConstructor only to reduce the boilerplate. They are not
+    // meant to be instantiated or subclassed by JavaScript code.
+    boolean isLambdaAdaptorConstructor =
+        memberDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName().equals("$LambdaAdaptor")
+            && memberDescriptor.isConstructor();
+    // $clinit and $adapt are JsMethod for naming purposes but are not meant to be called by
+    // JavaScript code.
+    return memberDescriptor.getName().equals("$clinit")
+        || (memberDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface()
+            && memberDescriptor.getName().equals("$adapt"))
+        || isLambdaAdaptorConstructor;
   }
 }
