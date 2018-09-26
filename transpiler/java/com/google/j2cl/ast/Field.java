@@ -74,6 +74,7 @@ public class Field extends Member implements HasJsNameInfo {
     return fieldDescriptor.isCompileTimeConstant();
   }
 
+  @Override
   public boolean isEnumField() {
     return getDescriptor().isEnumConstant();
   }

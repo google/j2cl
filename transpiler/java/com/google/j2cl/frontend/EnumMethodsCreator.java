@@ -55,6 +55,10 @@ public class EnumMethodsCreator {
   private static final String NAMES_TO_VALUES_MAP_FIELD_NAME = "namesToValuesMap";
 
   public static void applyTo(Type enumType) {
+    if (enumType.getDeclaration().isJsEnum()) {
+      // JsEnums do not support values() nor valueOf().
+      return;
+    }
     checkArgument(enumType.isEnum());
     createValueOfMethod(enumType);
     createValuesMethod(enumType);

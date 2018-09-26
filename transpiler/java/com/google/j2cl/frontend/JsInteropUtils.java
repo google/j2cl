@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.PrimitiveTypes;
@@ -65,9 +66,13 @@ public class JsInteropUtils {
     if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) == null) {
       boolean publicMemberOfJsType =
           isJsType(declaringType) && Modifier.isPublic(member.getModifiers());
-      boolean memberOfNativeType = isNativeType(declaringType);
+      boolean isJsEnumConstant =
+          isJsEnum(declaringType)
+              && member instanceof IVariableBinding
+              && ((IVariableBinding) member).isEnumConstant();
+      boolean memberOfNativeType = isJsNativeType(declaringType) && !isJsEnum(declaringType);
       if (memberAnnotation != null
-          || ((publicMemberOfJsType || memberOfNativeType) && !jsOverlay)) {
+          || ((publicMemberOfJsType || isJsEnumConstant || memberOfNativeType) && !jsOverlay)) {
         return JsInfo.newBuilder()
             .setJsMemberType(getJsMemberType(member, isAccessor))
             .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
@@ -82,6 +87,17 @@ public class JsInteropUtils {
         .setJsMemberType(JsMemberType.NONE)
         .setJsOverlay(jsOverlay)
         .setJsAsync(jsAsync)
+        .build();
+  }
+
+  public static JsEnumInfo getJsEnumInfo(ITypeBinding typeBinding) {
+    if (!isJsEnum(typeBinding)) {
+      return null;
+    }
+    boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(typeBinding);
+    return JsEnumInfo.newBuilder()
+        .setHasCustomValue(hasCustomValue)
+        .setSupportsComparable(!(hasCustomValue || isJsNativeType(typeBinding)))
         .build();
   }
 
@@ -167,9 +183,12 @@ public class JsInteropUtils {
     return JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding) != null;
   }
 
-  public static boolean isNativeType(ITypeBinding declaringType) {
-    return JsInteropAnnotationUtils.isNative(
-        JsInteropAnnotationUtils.getJsTypeAnnotation(declaringType));
+  public static boolean isJsEnum(ITypeBinding typeBinding) {
+    return JsInteropAnnotationUtils.getJsEnumAnnotation(typeBinding) != null;
+  }
+
+  public static boolean isJsNativeType(ITypeBinding declaringType) {
+    return JsInteropAnnotationUtils.isJsNative(declaringType);
   }
 
   public static boolean isJsFunction(ITypeBinding typeBinding) {

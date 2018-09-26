@@ -63,12 +63,28 @@ public abstract class TypeDescriptor extends Node
     return ImmutableList.of();
   }
 
+  public boolean isJsType() {
+    return false;
+  }
+
   public boolean isJsFunctionImplementation() {
     return false;
   }
 
   public boolean isJsFunctionInterface() {
     return false;
+  }
+
+  public boolean isJsEnum() {
+    return false;
+  }
+
+  /**
+   * Returns the correspoinding {@link JsEnumInfo} if the type is a {@link
+   * jsinterop.annotations.JsEnum} otherwise {@code null}
+   */
+  public JsEnumInfo getJsEnumInfo() {
+    return null;
   }
 
   public boolean isNative() {

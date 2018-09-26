@@ -27,28 +27,44 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.HasJsNameInfo;
 import com.google.j2cl.ast.HasReadableDescription;
 import com.google.j2cl.ast.HasSourcePosition;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.JsUtils;
+import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.MethodLike;
+import com.google.j2cl.ast.NewArray;
+import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextVisitor;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.util.LinkedHashSet;
@@ -102,23 +118,26 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkType(Type type) {
-    if (type.getDeclaration().isJsType()) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+
+    if (typeDeclaration.isJsType()) {
       if (!checkJsType(type)) {
         return;
       }
+    }
+
+    if (typeDeclaration.isJsEnum()) {
+      checkJsEnum(type);
+    }
+
+    if (typeDeclaration.isJsEnum() || typeDeclaration.isJsType()) {
       checkJsName(type);
       checkJsNamespace(type);
     }
 
-    if (type.getDeclaration().isNative()) {
-      if (!checkNativeJsType(type)) {
-        return;
-      }
-    }
-
-    if (type.getDeclaration().isJsFunctionInterface()) {
+    if (typeDeclaration.isJsFunctionInterface()) {
       checkJsFunction(type);
-    } else if (type.getDeclaration().isJsFunctionImplementation()) {
+    } else if (typeDeclaration.isJsFunctionImplementation()) {
       checkJsFunctionImplementation(type);
     } else {
       checkJsFunctionSubtype(type);
@@ -134,38 +153,553 @@ public class JsInteropRestrictionsChecker {
     for (Member member : type.getMembers()) {
       checkMember(member, instanceJsMembersByName, staticJsMembersByName);
     }
-    checkInstanceOfNativeJsTypesOrJsFunctionImplementations(type);
+    checkCastsAndInstanceOf(type);
+    checkJsEnumUsages(type);
   }
 
-  private void checkInstanceOfNativeJsTypesOrJsFunctionImplementations(Type type) {
+  /**
+   * Checks that the JsEnum complies with all restrictions.
+   *
+   * <p>There are three flavors of JsEnum:
+   *
+   * <ul>
+   *   <li>(1) JsEnum that does not customize the value type.
+   *   <li>(2) JsEnum that customizes the value type.
+   *   <li>(3) native JsEnum.
+   * </ul>
+   *
+   * <pre>
+   *       | has value field | has constructor | implements Comparable | can call ordinal() |
+   *  (1)  |                 |                 |          x            |        x           |
+   *  (2)  |       x         |        x        |                       |                    |
+   *  (3)  |       x         |                 |                       |                    |
+   *
+   * </pre>
+   */
+  private void checkJsEnum(Type type) {
+    JsEnumInfo jsEnumInfo = type.getTypeDescriptor().getJsEnumInfo();
+
+    if (!type.isEnum()) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsEnum '%s' has to be an enum type.",
+          type.getReadableDescription());
+      return;
+    }
+
+    if (type.getDeclaration().isJsType()) {
+      problems.error(
+          type.getSourcePosition(),
+          "'%s' cannot be both a JsEnum and a JsType at the same time.",
+          type.getReadableDescription());
+    }
+
+    Field valueField = getJsEnumValueField(type);
+    if (valueField == null && jsEnumInfo.hasCustomValue()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Custom-valued JsEnum '%s' does not have a field named 'value'.",
+          type.getReadableDescription());
+    } else if (valueField != null && !jsEnumInfo.hasCustomValue()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Non-custom-valued JsEnum '%s' cannot have a field named 'value'.",
+          type.getReadableDescription());
+    }
+
+    if (type.getConstructors().isEmpty() && requiresConstructor(type.getDeclaration())) {
+      problems.error(
+          type.getSourcePosition(),
+          "Custom-valued JsEnum '%s' should have a constructor.",
+          type.getReadableDescription());
+    }
+
+    if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
+      problems.error(
+          type.getSourcePosition(),
+          "JsEnum '%s' cannot implement any interface.",
+          type.getReadableDescription());
+    }
+
+    for (Member member : type.getMembers()) {
+      checkMemberOfJsEnum(type, member);
+    }
+  }
+
+  private static Field getJsEnumValueField(Type type) {
+    checkState(type.getDeclaration().isJsEnum());
+    return type.getFields().stream()
+        .filter(member -> AstUtils.isJsEnumCustomValueField(member.getDescriptor()))
+        .findFirst()
+        .orElse(null);
+  }
+
+  private boolean requiresConstructor(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.getJsEnumInfo().hasCustomValue() && !typeDeclaration.isNative();
+  }
+
+  private void checkMemberOfJsEnum(Type type, Member member) {
+    if (member.isEnumField()) {
+      checkJsEnumConstant(type, (Field) member);
+    } else if (AstUtils.isJsEnumCustomValueField(member.getDescriptor())) {
+      checkJsEnumValueField((Field) member);
+    } else if (member.isField() && !member.isStatic()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsEnum '%s' cannot have instance field '%s'.",
+          type.getReadableDescription(),
+          member.getReadableDescription());
+    } else if (member.isInitializerBlock() && !member.isStatic()) {
+      problems.error(
+          member.getSourcePosition(),
+          "JsEnum '%s' cannot have an instance initializer.",
+          type.getReadableDescription());
+    } else {
+      if (member.isConstructor()) {
+        checkJsEnumConstructor(
+            (Method) member, AstUtils.getJsEnumValueFieldType(type.getDeclaration()));
+      } else if (type.isNative()) {
+        checkMustBeJsOverlay(member, "Native JsEnum");
+      }
+      checkImplementableStatically(member, "JsEnum");
+    }
+  }
+
+  private static boolean canDefineValueField(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.getJsEnumInfo().hasCustomValue();
+  }
+
+  private void checkJsEnumConstant(Type type, Field field) {
+    if (!field.getInitializer().getTypeDescriptor().hasSameRawType(type.getTypeDescriptor())) {
+      problems.error(
+          field.getSourcePosition(),
+          "JsEnum constant '%s' cannot have a class body.",
+          field.getReadableDescription());
+      return;
+    }
+
+    if (!canDefineValueField(type.getTypeDescriptor())) {
+      // Non-custom-valued enum is already invalid if it has a value field,
+      // further constant related checking is unnecessary.
+      return;
+    }
+
+    Expression enumFieldValue = getEnumConstantValue(field);
+    if (enumFieldValue == null || enumFieldValue instanceof Literal) {
+      return;
+    }
+    problems.error(
+        field.getSourcePosition(),
+        "Custom-valued JsEnum constant '%s' cannot have a non-literal value.",
+        field.getReadableDescription());
+  }
+
+  private Expression getEnumConstantValue(Field field) {
+    NewInstance initializer = (NewInstance) field.getInitializer();
+    List<Expression> arguments = initializer.getArguments();
+    if (arguments.size() != 1) {
+      // Not a valid initialization. The code will be rejected.
+      return null;
+    }
+    return arguments.get(0);
+  }
+
+  private void checkJsEnumValueField(Field field) {
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+
+    if (!canDefineValueField(fieldDescriptor.getEnclosingTypeDescriptor())) {
+      // Non-custom-valued enum is already invalid if it has a value field,
+      // further value related checking is unnecessary.
+      return;
+    }
+
+    TypeDescriptor valueTypeDescriptor = fieldDescriptor.getTypeDescriptor();
+    String messagePrefix =
+        String.format("Custom-valued JsEnum value field '%s'", field.getReadableDescription());
+
+    if (fieldDescriptor.isStatic()
+        || fieldDescriptor.isJsOverlay()
+        || fieldDescriptor.isJsMember()) {
+      problems.error(
+          field.getSourcePosition(),
+          messagePrefix + " cannot be static nor JsOverlay nor JsMethod nor JsProperty.");
+    }
+
+    if (!isValidJsEnumType(valueTypeDescriptor)) {
+      problems.error(
+          field.getSourcePosition(),
+          messagePrefix + " cannot have the type '%s'.",
+          valueTypeDescriptor.getReadableDescription());
+    }
+
+    if (field.getInitializer() != null) {
+      problems.error(field.getSourcePosition(), messagePrefix + " cannot have initializer.");
+    }
+  }
+
+  private boolean isValidJsEnumType(TypeDescriptor valueTypeDescriptor) {
+    return (valueTypeDescriptor.isPrimitive()
+            && !TypeDescriptors.isPrimitiveLong(valueTypeDescriptor))
+        || TypeDescriptors.isJavaLangString(valueTypeDescriptor);
+  }
+
+  private void checkJsEnumConstructor(Method constructor, TypeDescriptor customValueType) {
+    TypeDeclaration enclosingTypeDeclaration =
+        constructor.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration();
+    if (!requiresConstructor(enclosingTypeDeclaration)) {
+      problems.error(
+          constructor.getSourcePosition(),
+          getJsEnumTypeText(enclosingTypeDeclaration) + " '%s' cannot have constructor '%s'.",
+          enclosingTypeDeclaration.getReadableDescription(),
+          constructor.getReadableDescription());
+      return;
+    }
+
+    MethodDescriptor constructorDescriptor = constructor.getDescriptor();
+    if (constructorDescriptor.getParameterDescriptors().size() == 1
+        && constructorDescriptor
+            .getParameterDescriptors()
+            .get(0)
+            .getTypeDescriptor()
+            .hasSameRawType(customValueType)
+        && constructor.getBody().getStatements().size() == 1
+        && isValidJsEnumConstructorStatement(
+            constructorDescriptor.getEnclosingTypeDescriptor(),
+            constructor.getBody().getStatements().get(0),
+            constructor.getParameters().get(0))) {
+      return;
+    }
+    problems.error(
+        constructor.getSourcePosition(),
+        "Custom-valued JsEnum constructor '%s' should have one parameter of the value type and its "
+            + "body should only be the assignment to the value field.",
+        constructor.getReadableDescription());
+  }
+
+  private boolean isValidJsEnumConstructorStatement(
+      TypeDescriptor typeDescriptor, Statement statement, Variable valueParameter) {
+    if (!(statement instanceof ExpressionStatement)) {
+      return false;
+    }
+    Expression expression = ((ExpressionStatement) statement).getExpression();
+    if (!(expression instanceof BinaryExpression)) {
+      return false;
+    }
+
+    BinaryExpression binaryExpression = (BinaryExpression) expression;
+    if (binaryExpression.getOperator() != BinaryOperator.ASSIGN
+        || !(binaryExpression.getRightOperand() instanceof VariableReference)
+        || !(binaryExpression.getLeftOperand() instanceof FieldAccess)) {
+      return false;
+    }
+    FieldAccess lhs = (FieldAccess) binaryExpression.getLeftOperand();
+    Variable variable = ((VariableReference) binaryExpression.getRightOperand()).getTarget();
+
+    return (lhs.getQualifier() == null || lhs.getQualifier() instanceof ThisReference)
+        && lhs.getTarget().isMemberOf(typeDescriptor)
+        && AstUtils.isJsEnumCustomValueField(lhs.getTarget())
+        && variable == valueParameter;
+  }
+
+  private void checkJsEnumUsages(Type type) {
+    checkJsEnumMethodCalls(type);
+    checkJsEnumAssignments(type);
+    checkJsEnumArrays(type);
+    checkJsEnumValueFieldAssignment(type);
+  }
+
+  private void checkJsEnumMethodCalls(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethodCall(MethodCall methodCall) {
+            MethodDescriptor target = methodCall.getTarget();
+
+            TypeDescriptor qualifierTypeDescriptor =
+                target.isStatic()
+                    ? target.getEnclosingTypeDescriptor()
+                    : methodCall.getQualifier().getTypeDescriptor();
+            if (!qualifierTypeDescriptor.isJsEnum()) {
+              // If the actual target of the method is not a JsEnum, nothing to check.
+              return;
+            }
+
+            if (target.getEnclosingTypeDescriptor().isJsEnum() && !target.isEnumSyntheticMethod()) {
+              // Methods declared by the user in JsEnum are callable.
+              return;
+            }
+
+            if (target.isOrOverridesJavaLangObjectMethod()) {
+              return;
+            }
+
+            String messagePrefix = "JsEnum";
+
+            String targetMethodSignature = target.getDeclarationDescriptor().getMethodSignature();
+            if (targetMethodSignature.equals("ordinal()")
+                || targetMethodSignature.equals("compareTo(java.lang.Enum)")) {
+              if (qualifierTypeDescriptor.getJsEnumInfo().supportsComparable()) {
+                return;
+              }
+              // Customize the message to give a better idea why these cases are forbidden.
+              messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
+            }
+
+            problems.error(
+                methodCall.getSourcePosition(),
+                messagePrefix + " '%s' does not support '%s'.",
+                qualifierTypeDescriptor.getReadableDescription(),
+                target.getReadableDescription());
+          }
+        });
+  }
+
+  private String getJsEnumTypeText(TypeDeclaration typeDeclaration) {
+    return getJsEnumTypeText(typeDeclaration.toUnparamterizedTypeDescriptor());
+  }
+
+  private String getJsEnumTypeText(TypeDescriptor typeDescriptor) {
+    checkArgument(typeDescriptor.isJsEnum());
+    if (typeDescriptor.isNative()) {
+      return "Native JsEnum";
+    }
+
+    if (typeDescriptor.getJsEnumInfo().hasCustomValue()) {
+      return "Custom-valued JsEnum";
+    }
+
+    return "Non-custom-valued JsEnum";
+  }
+
+  private void checkJsEnumAssignments(Type type) {
+    type.accept(
+        new ConversionContextVisitor(
+            new ContextVisitor() {
+              @Override
+              public void visitAssignmentContext(
+                  TypeDescriptor toTypeDescriptor, Expression expression) {
+                checkJsEnumAssignment(toTypeDescriptor, expression);
+              }
+
+              @Override
+              public void visitMethodInvocationContext(
+                  ParameterDescriptor parameterDescriptor, Expression expression) {
+                checkJsEnumAssignment(parameterDescriptor.getTypeDescriptor(), expression);
+              }
+
+              private void checkJsEnumAssignment(
+                  TypeDescriptor toTypeDescriptor, Expression expression) {
+                TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
+                if (!expressionTypeDescriptor.isJsEnum() || toTypeDescriptor.isJsEnum()) {
+                  return;
+                }
+
+                if (TypeDescriptors.isJavaLangObject(toTypeDescriptor)) {
+                  return;
+                }
+
+                String messagePrefix = "JsEnum";
+                if (TypeDescriptors.isJavaLangComparable(toTypeDescriptor)) {
+                  if (expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
+                    return;
+                  }
+                  messagePrefix = getJsEnumTypeText(expressionTypeDescriptor);
+                } else if (TypeDescriptors.isJavaIoSerializable(toTypeDescriptor)) {
+                  if (!expressionTypeDescriptor.isNative()) {
+                    return;
+                  }
+                  messagePrefix = getJsEnumTypeText(expressionTypeDescriptor);
+                }
+
+                // TODO(b/65465035): When source position is tracked at the expression level,
+                // the error reporting here should include source position.
+                problems.error(
+                    messagePrefix + " '%s' cannot be assigned to '%s'.",
+                    expressionTypeDescriptor.getReadableDescription(),
+                    toTypeDescriptor.getReadableDescription());
+              }
+            }));
+  }
+
+  private void checkJsEnumArrays(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitVariable(Variable variable) {
+            if (variable.isParameter()) {
+              // Parameters are checked at the declaration site to give a better error message.
+              return;
+            }
+            TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
+            String messagePrefix = String.format("Variable '%s'", variable.getName());
+            errorIfJsEnumArray(
+                variableTypeDescriptor,
+                variable.getSourcePosition().orElse(getCurrentMember().getSourcePosition()),
+                messagePrefix);
+          }
+
+          @Override
+          public void exitMethod(Method method) {
+            checkParametersAndReturnType(method);
+          }
+
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            checkParametersAndReturnType(functionExpression);
+          }
+
+          @Override
+          public void exitField(Field field) {
+            FieldDescriptor fieldDescriptor = field.getDescriptor();
+            TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
+            String messagePrefix = String.format("Field '%s'", field.getReadableDescription());
+            errorIfJsEnumArray(fieldTypeDescriptor, field.getSourcePosition(), messagePrefix);
+          }
+
+          @Override
+          public void exitNewArray(NewArray newArray) {
+            ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
+            // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
+            // toString() in an AST nodes.
+            String messagePrefix = String.format("Array creation '%s'", newArray);
+            errorIfJsEnumArray(
+                newArrayTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
+          }
+        });
+  }
+
+  private void checkParametersAndReturnType(MethodLike methodLike) {
+    for (Variable parameter : methodLike.getParameters()) {
+      TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
+      String messagePrefix =
+          String.format(
+              "Parameter '%s' in '%s'", parameter.getName(), methodLike.getReadableDescription());
+      errorIfJsEnumArray(
+          parameterTypeDescriptor,
+          parameter.getSourcePosition().orElse(methodLike.getSourcePosition()),
+          messagePrefix);
+    }
+
+    if (methodLike.getDescriptor() == null) {
+      // TODO(b/115566064): Emit the correct error for lambdas that are not JsFunctions and
+      // return JsEnum arrays.
+      return;
+    }
+    TypeDescriptor returnTypeDescriptor = methodLike.getDescriptor().getReturnTypeDescriptor();
+    String messagePrefix =
+        String.format("Return type of '%s'", methodLike.getReadableDescription());
+    errorIfJsEnumArray(returnTypeDescriptor, methodLike.getSourcePosition(), messagePrefix);
+  }
+
+  private void checkJsEnumValueFieldAssignment(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitBinaryExpression(BinaryExpression binaryExpression) {
+            if (!binaryExpression.getOperator().isAssignmentOperator()) {
+              return;
+            }
+            Expression lhs = binaryExpression.getLeftOperand();
+            if (!(lhs instanceof FieldAccess)) {
+              return;
+            }
+
+            FieldAccess fieldAccess = (FieldAccess) lhs;
+            FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
+            if (!AstUtils.isJsEnumCustomValueField(fieldDescriptor)) {
+              return;
+            }
+
+            if (getCurrentMember().isConstructor()
+                && getCurrentMember().getDescriptor().getEnclosingTypeDescriptor().isJsEnum()) {
+              // JsEnum constructors have more stringent checks elsewhere.
+              return;
+            }
+            problems.error(
+                fieldAccess.getSourcePosition().orElse(type.getSourcePosition()),
+                "Custom-valued JsEnum value field '%s' cannot be assigned.",
+                fieldDescriptor.getReadableDescription());
+          }
+        });
+  }
+
+  private void checkCastsAndInstanceOf(Type type) {
     type.accept(
         new AbstractVisitor() {
           @Override
           public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-            TypeDescriptor type = instanceOfExpression.getTestTypeDescriptor();
-            if (type.isNative() && type.isInterface()) {
+            TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
+            if (testTypeDescriptor.isNative() && testTypeDescriptor.isInterface()) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against native JsType interface '%s'.",
-                  type.getReadableDescription());
-            } else if (type.isJsFunctionImplementation()) {
+                  testTypeDescriptor.getReadableDescription());
+            } else if (testTypeDescriptor.isJsFunctionImplementation()) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against JsFunction implementation '%s'.",
-                  type.getReadableDescription());
+                  testTypeDescriptor.getReadableDescription());
+            } else if (hasJsEnumArray(testTypeDescriptor)) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against JsEnum array '%s'.",
+                  testTypeDescriptor.getReadableDescription());
+            }
+          }
+
+          @Override
+          public void exitCastExpression(CastExpression castExpression) {
+            TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+            if (hasJsEnumArray(castTypeDescriptor)) {
+              // TODO(b/65465035): Emit the expression source position when it is tracked.
+              problems.error(
+                  getCurrentMember().getSourcePosition(),
+                  "Cannot cast to JsEnum array '%s'.",
+                  castTypeDescriptor.getReadableDescription());
             }
           }
         });
   }
 
+  private void errorIfJsEnumArray(
+      TypeDescriptor typeDescriptor, SourcePosition sourcePosition, String messagePrefix) {
+    if (hasJsEnumArray(typeDescriptor)) {
+      problems.error(
+          sourcePosition,
+          messagePrefix + " cannot be of type '%s'.",
+          typeDescriptor.getReadableDescription());
+    }
+  }
+
+  private static boolean hasJsEnumArray(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isArray()
+        && ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor().isJsEnum()) {
+      return true;
+    }
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+          .anyMatch(JsInteropRestrictionsChecker::hasJsEnumArray);
+    }
+    return false;
+  }
+
   private boolean checkJsType(Type type) {
-    if (type.getDeclaration().isLocal()) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    if (typeDeclaration.isLocal()) {
       problems.error(
           type.getSourcePosition(),
           "Local class '%s' cannot be a JsType.",
           type.getDeclaration().getReadableDescription());
       return false;
     }
+
+    if (typeDeclaration.isNative()) {
+      if (!checkNativeJsType(type)) {
+        return false;
+      }
+    }
+
     return true;
   }
 
@@ -197,11 +731,12 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (memberDescriptor.getEnclosingTypeDescriptor().isNative()) {
+    DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
+    if (enclosingTypeDescriptor.isNative() && enclosingTypeDescriptor.isJsType()) {
       checkMemberOfNativeJsType(member);
     }
 
-    if (memberDescriptor.getEnclosingTypeDescriptor().isOrExtendsNativeClass()) {
+    if (enclosingTypeDescriptor.isOrExtendsNativeClass()) {
       checkMemberOfNativeClassOrSubclass(member);
     }
 
@@ -411,7 +946,9 @@ public class JsInteropRestrictionsChecker {
 
     if (type.isEnumOrSubclass()) {
       problems.error(
-          type.getSourcePosition(), "Enum '%s' cannot be a native JsType.", readableDescription);
+          type.getSourcePosition(),
+          "Enum '%s' cannot be a native JsType. Use '@JsEnum(isNative = true)' instead.",
+          readableDescription);
       return false;
     }
     if (typeDeclaration.isCapturingEnclosingInstance()) {
@@ -444,10 +981,9 @@ public class JsInteropRestrictionsChecker {
     if (type.hasInstanceInitializerBlocks()) {
       problems.error(
           type.getSourcePosition(),
-          "Native JsType '%s' cannot have instance initializer.",
-          readableDescription);
+          "Native JsType '%s' cannot have an instance initializer.",
+          type.getDeclaration().getReadableDescription());
     }
-
     return true;
   }
 
@@ -541,19 +1077,28 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (checkNotJsMember(member, messagePrefix)) {
+    if (!checkNotJsMember(member, messagePrefix)) {
       return;
     }
 
-    if (memberDescriptor.isJsFunction() || memberDescriptor.isJsOverlay()) {
+    if (memberDescriptor.isJsFunction()) {
+      return;
+    }
+
+    checkMustBeJsOverlay(member, messagePrefix);
+  }
+
+  private void checkMustBeJsOverlay(Member member, String messagePrefix) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isJsOverlay()) {
       return;
     }
 
     problems.error(
         member.getSourcePosition(),
         messagePrefix + " '%s' cannot declare non-JsOverlay member '%s'.",
-        memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
-        memberDescriptor.getReadableDescription());
+        memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().getReadableDescription(),
+        member.getReadableDescription());
   }
 
   private void checkJsFunctionImplementation(Type type) {
@@ -595,12 +1140,15 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkMemberOfJsFunctionImplementation(Member member) {
-    MemberDescriptor memberDescriptor = member.getDescriptor();
-    String messagePrefix = "JsFunction implementation";
-
-    if (memberDescriptor.isSynthetic()) {
+    if (member.getDescriptor().isSynthetic()) {
       return;
     }
+
+    checkImplementableStatically(member, "JsFunction implementation");
+  }
+
+  private void checkImplementableStatically(Member member, String messagePrefix) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
 
     if (member.isMethod()) {
       Method method = (Method) member;
@@ -624,27 +1172,29 @@ public class JsInteropRestrictionsChecker {
             nonJsFunctionOverride.get().getReadableDescription());
         return;
       }
+
+      if (member.isNative()) {
+        // Only perform this check for methods to avoid giving error on fields that are not
+        // explicitly marked native.
+        problems.error(
+            member.getSourcePosition(),
+            messagePrefix + " member '%s' cannot be native.",
+            member.getReadableDescription());
+      }
     }
 
     checkNotJsMember(member, messagePrefix);
-
-    if (member.isNative()) {
-      problems.error(
-          member.getSourcePosition(),
-          messagePrefix + " member '%s' cannot be native.",
-          member.getReadableDescription());
-    }
   }
-
+  
   private boolean checkNotJsMember(Member member, String messagePrefix) {
     if (!member.isInitializerBlock() && member.getDescriptor().isJsMember()) {
       problems.error(
           member.getSourcePosition(),
           messagePrefix + " member '%s' cannot be JsMethod nor JsProperty nor JsConstructor.",
           member.getReadableDescription());
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   private void checkJsFunctionSubtype(Type type) {

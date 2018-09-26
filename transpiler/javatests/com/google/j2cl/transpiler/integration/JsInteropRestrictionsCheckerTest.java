@@ -1198,15 +1198,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "   @JsProperty(name = \"a.c\") static int q;",
             "}",
             "@JsType(namespace = JsPackage.GLOBAL, name = \"a.b.d\")",
-            "class OtherBuggy {",
-            "}",
+            "class OtherBuggy { }",
             "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"*\")",
-            "class BadGlobalStar {",
-            "}",
-            "@JsType(namespace = JsPackage.GLOBAL, name = \"?\") interface BadGlobalWildcard {",
-            "}",
-            "@JsType(isNative = true, namespace = \"a.b\", name = \"*\") interface BadStar {",
-            "}")
+            "class BadGlobalStar { }",
+            "@JsType(namespace = JsPackage.GLOBAL, name = \"?\") interface BadGlobalWildcard { }",
+            "@JsType(isNative = true, namespace = \"a.b\", name = \"*\") interface BadStar { }",
+            "@JsEnum(isNative = true, namespace = \"a.b\", name = \"=\") enum NativeEnum { }",
+            "@JsEnum(namespace = \"a.b\", name = \"c.d\") enum MyJsEnum { }")
         .assertErrorsWithoutSourcePosition(
             "'Buggy' has invalid name 'a.b.c'.",
             "'void Buggy.m()' has invalid name '34s'.",
@@ -1215,6 +1213,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "'void Buggy.o()' has invalid name 'a.b'.",
             "'Buggy.q' has invalid name 'a.c'.",
             "'OtherBuggy' has invalid name 'a.b.d'.",
+            "'NativeEnum' has invalid name '='.",
+            "'MyJsEnum' has invalid name 'c.d'.",
             "Only native interfaces in the global namespace can be named '*'.",
             "Only native interfaces in the global namespace can be named '?'.",
             "Only native interfaces in the global namespace can be named '*'.");
@@ -1240,9 +1240,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsType(namespace = JsPackage.GLOBAL) class InvalidGlobal {",
             "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
             "   @JsProperty(namespace = JsPackage.GLOBAL) public static int n;",
-            "}")
+            "}",
+            "@JsEnum(isNative = true, namespace = \"=\") enum NativeEnum { }",
+            "@JsEnum(namespace = \"^\") enum MyJsEnum { }")
         .assertErrorsWithoutSourcePosition(
             "'Buggy' has invalid namespace 'a.b.'.",
+            "'NativeEnum' has invalid namespace '='.",
+            "'MyJsEnum' has invalid namespace '^'.",
             "'void Buggy.m()' has invalid namespace '34s'.",
             "'void Buggy.o()' cannot have an empty namespace.",
             "Instance member 'Buggy.p' cannot declare a namespace.",
@@ -1494,7 +1498,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "Native JsType 'Buggy' cannot have instance initializer.");
+            "Native JsType 'Buggy' cannot have an instance initializer.");
   }
 
   public void testNativeJsTypeNonEmptyConstructorFails() {
@@ -1596,7 +1600,409 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  A,",
             "  B",
             "}")
-        .assertErrorsWithoutSourcePosition("Enum 'Buggy' cannot be a native JsType.");
+        .assertErrorsWithoutSourcePosition(
+            "Enum 'Buggy' cannot be a native JsType. Use '@JsEnum(isNative = true)' instead.");
+  }
+
+  public void testJsEnumFails() {
+    assertTranspileFails(
+            "MyJsEnum",
+            "import jsinterop.annotations.*;",
+            "@JsEnum",
+            "public enum MyJsEnum {",
+            "  A,",
+            "  B {},",
+            "  C(1);",
+            "  {}",
+            "  MyJsEnum( ) { }",
+            "  MyJsEnum(int x) { }",
+            "  static void main() {",
+            "    A.name();",
+            "    MyJsEnum.values();",
+            "    MyJsEnum.valueOf(null);",
+            "  }",
+            "  int value = 5;",
+            "  int instanceField;",
+            "  @JsOverlay",
+            "  public final void anOverlayMethod() { }",
+            "}",
+            "@JsEnum @JsType",
+            "enum MyJsTypeJsEnum { }",
+            "@JsEnum",
+            "interface InterfaceWithJsEnum { }",
+            "interface MyInterface { }",
+            "@JsEnum",
+            "enum JsEnumImplementingInterface implements MyInterface { }",
+            "@JsEnum",
+            "enum JsEnumWithInvalidMembers {",
+            "  A;",
+            "  @JsMethod static void m() {}",
+            "  @JsProperty static int getP() { return 1;}",
+            "  static native void n();",
+            "  native void o();",
+            "  public String toString() { return null; }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
+            "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum(int x)'.",
+            "Non-custom-valued JsEnum 'MyJsEnum' cannot have a field named 'value'.",
+            "JsOverlay 'void MyJsEnum.anOverlayMethod()' can only be declared in a native type"
+                + " or @JsFunction interface.",
+            "JsEnum constant 'MyJsEnum.B' cannot have a class body.",
+            "JsEnum 'MyJsEnum' does not support 'String Enum.name()'.",
+            "JsEnum 'MyJsEnum' does not support 'MyJsEnum[] MyJsEnum.values()'.",
+            "JsEnum 'MyJsEnum' does not support 'MyJsEnum MyJsEnum.valueOf(String)'.",
+            "'MyJsTypeJsEnum' cannot be both a JsEnum and a JsType at the same time.",
+            "JsEnum 'InterfaceWithJsEnum' has to be an enum type.",
+            "JsEnum 'JsEnumImplementingInterface' cannot implement any interface.",
+            "JsEnum member 'void JsEnumWithInvalidMembers.m()' cannot be "
+                + "JsMethod nor JsProperty nor JsConstructor.",
+            "JsEnum member 'int JsEnumWithInvalidMembers.getP()' cannot be "
+                + "JsMethod nor JsProperty nor JsConstructor.",
+            "JsEnum member 'void JsEnumWithInvalidMembers.n()' cannot be native.",
+            "JsEnum member 'void JsEnumWithInvalidMembers.o()' cannot be native.",
+            "JsEnum 'JsEnumWithInvalidMembers' cannot override method "
+                + "'String Enum.toString()'.",
+            "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
+            "JsEnum 'MyJsEnum' cannot have an instance initializer.");
+  }
+
+  public void testJsEnumSucceeds() {
+    assertTranspileSucceeds(
+            "MyJsEnum",
+            "import jsinterop.annotations.*;",
+            "@JsEnum",
+            "public enum MyJsEnum {",
+            "  A,",
+            "  B;",
+            "  static void main() {",
+            "    A.ordinal();",
+            "    A.compareTo(B);",
+            "    if (((MyJsEnum) A) instanceof MyJsEnum) {}",
+            "  }",
+            "  static int field = 5;",
+            "  static { }",
+            "  public static int aStaticField;",
+            "  public void anInstanceMethod() { }",
+            "  public static void aStaticMethod() { }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testCustomValuedJsEnumFails() {
+    assertTranspileFails(
+            "CustomValued",
+            "import jsinterop.annotations.*;",
+            "@JsEnum(hasCustomValue = true)",
+            "public enum CustomValued {",
+            "  A(1),",
+            "  B(false);",
+            "  @JsProperty int value;",
+            "  CustomValued(int value) { this.value = value; }",
+            "  CustomValued(boolean value) { }",
+            "  static void main() {",
+            "    A.name();",
+            "    B.ordinal();",
+            "    A.compareTo(B);",
+            "    CustomValued.values();",
+            "    CustomValued.valueOf(null);",
+            "  }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
+            "enum InvalidCustomValueType {",
+            "  A(1L);",
+            "  long value;",
+            "  InvalidCustomValueType(long value) { this.value = value; }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
+            "enum InvalidCustomValueInitializer {",
+            "  A(\"  \".length());",
+            "  int value = 5;",
+            "  InvalidCustomValueInitializer(int value) { this.value = value; }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
+            "enum InvalidCustomValueConstructor {",
+            "  A(1);",
+            "  int value;",
+            "  InvalidCustomValueConstructor(int value) { this.value = value + 2; }",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
+            "enum CustomValueMissingConstructor {",
+            "  A;",
+            "  static int value;",
+            "}",
+            "@JsEnum(hasCustomValue = true)",
+            "enum CustomValueWithJsConstructor {",
+            "  A(0);",
+            "  int value;",
+            "  @JsConstructor CustomValueWithJsConstructor(int value) { this.value = value; }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Custom-valued JsEnum constructor 'CustomValued(boolean value)' should have one "
+                + "parameter of the value type and its body should only be the assignment to the "
+                + "value field.",
+            "Custom-valued JsEnum constructor 'InvalidCustomValueConstructor(int value)' should "
+                + "have one parameter of the value type and its body should only be the assignment "
+                + "to the value field.",
+            "Custom-valued JsEnum value field 'CustomValued.value' cannot be static nor "
+                + "JsOverlay nor JsMethod nor JsProperty.",
+            "Custom-valued JsEnum value field 'InvalidCustomValueType.value' cannot have the "
+                + "type 'long'.",
+            "Custom-valued JsEnum value field 'InvalidCustomValueInitializer.value' cannot "
+                + "have initializer.",
+            "Custom-valued JsEnum 'CustomValueMissingConstructor' should have a constructor.",
+            "Custom-valued JsEnum value field 'CustomValueMissingConstructor.value' cannot be "
+                + "static nor JsOverlay nor JsMethod nor JsProperty.",
+            "Custom-valued JsEnum constant 'InvalidCustomValueInitializer.A' cannot have a "
+                + "non-literal value.",
+            "JsEnum 'CustomValued' does not support 'String Enum.name()'.",
+            "Custom-valued JsEnum 'CustomValued' does not support 'int Enum.ordinal()'.",
+            "Custom-valued JsEnum 'CustomValued' does not support "
+                + "'int Enum.compareTo(CustomValued)'.",
+            "JsEnum 'CustomValued' does not support " + "'CustomValued[] CustomValued.values()'.",
+            "JsEnum 'CustomValued' does not support "
+                + "'CustomValued CustomValued.valueOf(String)'.",
+            "JsEnum member 'CustomValueWithJsConstructor(int value)' cannot be "
+                + "JsMethod nor JsProperty nor JsConstructor.");
+  }
+
+  public void testCustomValuedJsEnumSucceeds() {
+    assertTranspileSucceeds(
+            "CustomValued",
+            "import jsinterop.annotations.*;",
+            "@JsEnum(hasCustomValue = true)",
+            "public enum CustomValued {",
+            "  A(true),",
+            "  B(false);",
+            "  final boolean value;",
+            "  CustomValued(boolean value) { this.value = value;}",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testNativeJsEnumFails() {
+    assertTranspileFails(
+            "Native",
+            "import jsinterop.annotations.*;",
+            "@JsEnum(isNative = true)",
+            "public enum Native {",
+            "  A,",
+            "  B;",
+            "  static void main() {",
+            "    A.name();",
+            "    B.ordinal();",
+            "    A.compareTo(B);",
+            "    Native.values();",
+            "    Native.valueOf(null);",
+            "  }",
+            "  static int staticField = 1;",
+            "}",
+            "@JsType(isNative = true)",
+            "interface NativeInterface { }",
+            "@JsEnum(isNative = true)",
+            "enum NativeJsEnumImplementingNativeInterface implements NativeInterface { }",
+            "@JsEnum(isNative = true, hasCustomValue = true)",
+            "enum NativeJsEnumDeclaringCustomValueButNoField { }",
+            "@JsEnum(isNative = true)",
+            "enum NativeJsEnumNotDeclaringCustomValueButWithValueField {",
+            "  A,",
+            "  B;",
+            "  boolean value = true;",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum 'Native' does not support 'String Enum.name()'.",
+            "Native JsEnum 'Native' does not support 'int Enum.ordinal()'.",
+            "Native JsEnum 'Native' does not support 'int Enum.compareTo(Native)'.",
+            "JsEnum 'Native' does not support 'Native[] Native.values()'.",
+            "JsEnum 'Native' does not support 'Native Native.valueOf(String)'.",
+            "JsEnum 'NativeJsEnumImplementingNativeInterface' cannot implement any interface.",
+            "Native JsEnum 'Native' cannot declare non-JsOverlay member 'void Native.main()'.",
+            "Native JsEnum 'Native' cannot declare non-JsOverlay member 'Native.staticField'.",
+            "Custom-valued JsEnum 'NativeJsEnumDeclaringCustomValueButNoField' does not have a"
+                + " field named 'value'.",
+            "Non-custom-valued JsEnum 'NativeJsEnumNotDeclaringCustomValueButWithValueField' "
+                + "cannot have a field named 'value'.");
+  }
+
+  public void testNativeJsEnumSucceeds() {
+    assertTranspileSucceeds(
+            "Native",
+            "import jsinterop.annotations.*;",
+            "@JsEnum(isNative = true)",
+            "public enum Native {",
+            "  A,",
+            "  B;",
+            "  @JsOverlay",
+            "  public void anOverlayMethod() { ",
+            "    if (A instanceof Native) {}",
+            "  }",
+            "}",
+            "@JsEnum(isNative = true, hasCustomValue = true)",
+            "enum NativeJsEnumWithCustomValue {",
+            "  A,",
+            "  B;",
+            "  int value;",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumAssignmentExpressionFails() {
+    assertTranspileFails(
+            "Main",
+            "import java.io.Serializable;",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum(isNative = true, hasCustomValue = true)",
+            "  enum Native {",
+            "    A,",
+            "    B;",
+            "    int value;",
+            "  }",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  private static void main() {",
+            "    Enum e = Native.A;",
+            "    Comparable c = Native.A;",
+            "    Serializable s = Native.A;",
+            "    e = MyJsEnum.A;",
+            "    Native.A.value = 3;",
+            "  }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum 'Native' cannot be assigned to 'Enum'.",
+            "Native JsEnum 'Native' cannot be assigned to 'Comparable'.",
+            "Native JsEnum 'Native' cannot be assigned to 'Serializable'.",
+            "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
+            "Custom-valued JsEnum value field 'Native.value' cannot be assigned.");
+  }
+
+  public void testJsEnumParameterAssignmentFails() {
+    assertTranspileFails(
+            "Main",
+            "import java.io.Serializable;",
+            "import java.util.ArrayList;",
+            "import java.util.List;",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum(isNative = true)",
+            "  enum Native {",
+            "    A,",
+            "    B;",
+            "  }",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  private static void acceptsEnum(Enum e) {}",
+            "  private static void acceptsComparable(Comparable c) {}",
+            "  private static void acceptsSerializable(Serializable s) {}",
+            "  private static void main() {",
+            "    acceptsEnum(Native.A);",
+            "    acceptsComparable(Native.A);",
+            "    acceptsSerializable(Native.A);",
+            "    acceptsEnum(MyJsEnum.A);",
+            // TODO(b/114468916): The following should have failed. But for now they will be caught
+            // by runtime checks when the erasure cast to Enum occurs.
+            "    List<Enum> l1 = null; l1.add(MyJsEnum.A);",
+            "    List<? extends Enum> l2 = new ArrayList<MyJsEnum>();",
+            "  }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum 'Native' cannot be assigned to 'Enum'.",
+            "Native JsEnum 'Native' cannot be assigned to 'Comparable'.",
+            "Native JsEnum 'Native' cannot be assigned to 'Serializable'.",
+            "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.");
+  }
+
+  public void testJsEnumAssignmentSucceeds() {
+    assertTranspileSucceeds(
+            "Main",
+            "import java.io.Serializable;",
+            "import java.util.ArrayList;",
+            "import java.util.List;",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum(isNative = true)",
+            "  public enum Native {",
+            "    A,",
+            "    B;",
+            "  }",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  private static void acceptsObject(Object o) {}",
+            "  private static void acceptsSerializable(Serializable s) {}",
+            "  private static void acceptsComparable(Comparable c) {}",
+            "  private static void acceptsMyJsEnum(MyJsEnum c) {}",
+            "  private static void main() {",
+            "    Object o = Native.A;",
+            "    acceptsObject(Native.A);",
+            "    o = MyJsEnum.A;",
+            "    acceptsObject(MyJsEnum.A);",
+            "    Serializable s = MyJsEnum.A;",
+            "    acceptsSerializable(MyJsEnum.A);",
+            "    Comparable c = MyJsEnum.A;",
+            "    acceptsComparable(MyJsEnum.A);",
+            "    MyJsEnum myJsEnum = MyJsEnum.A;",
+            "    acceptsMyJsEnum(MyJsEnum.A);",
+            "    List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);",
+            "    List<Object> l2 = null; l2.add(MyJsEnum.A);",
+            "    List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();",
+            "  }",
+            "}")
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumArraysFails() {
+    assertTranspileFails(
+            "Main",
+            "import java.util.List;",
+            "import java.util.function.Function;",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  MyJsEnum[] MyJsEnum;",
+            "  private static void acceptsJsEnumArray(MyJsEnum[] p) {}",
+            "  private static void acceptsJsEnumVarargs(MyJsEnum... p) {}",
+            "  private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}",
+            "  private static MyJsEnum[] returnsJsEnumArray() { return null;}",
+            "  private static void arrays() {",
+            "    Object o = new MyJsEnum[1];",
+            "    MyJsEnum[] arr = null;",
+            "    List<MyJsEnum[]> list = null;",
+            "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum[] p1) -> p1;",
+            "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;",
+            "    o = (MyJsEnum[]) o;",
+            "    if (o instanceof MyJsEnum[]) { }",
+            "  }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Cannot cast to JsEnum array 'MyJsEnum[]'.",
+            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
+            "Field 'Main.MyJsEnum' cannot be of type 'MyJsEnum[]'.",
+            "Parameter 'p' in 'void Main.acceptsJsEnumArray(MyJsEnum[] p)' cannot be of "
+                + "type 'MyJsEnum[]'.",
+            "Parameter 'p' in 'void Main.acceptsJsEnumVarargs(MyJsEnum... p)' cannot be of type "
+                + "'MyJsEnum[]'.",
+            "Parameter 'p' in 'void Main.acceptsJsEnumVarargsArray(MyJsEnum[]... p)' cannot be of "
+                + "type 'MyJsEnum[][]'.",
+            "Return type of 'MyJsEnum[] Main.returnsJsEnumArray()' cannot be of type 'MyJsEnum[]'.",
+            "Array creation 'new test.Main.MyJsEnum[1]' cannot be of type 'MyJsEnum[]'.",
+            "Variable 'arr' cannot be of type 'MyJsEnum[]'.",
+            "Variable 'list' cannot be of type 'List<MyJsEnum[]>'.",
+            "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'.",
+            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'.");
+  }
+
+  public void testJsEnumArraysSucceeds() {
+    assertTranspileSucceeds(
+            "Main",
+            "import java.util.List;",
+            "import jsinterop.annotations.*;",
+            "public class Main {",
+            "  @JsEnum enum MyJsEnum {A, B}",
+            "  private static void arrays() {",
+            "    Object[] array = null;",
+            "    array[0] = MyJsEnum.A;",
+            "    List<MyJsEnum> l = null;",
+            "    Object[] o = l.toArray();",
+            "  }",
+            "}")
+        .assertNoWarnings();
   }
 
   public void testInnerNativeJsTypeFails() {

@@ -207,6 +207,13 @@ public abstract class TypeDeclaration extends Node
   @Override
   public abstract boolean isNative();
 
+  @Nullable
+  public abstract JsEnumInfo getJsEnumInfo();
+
+  public boolean isJsEnum() {
+    return getJsEnumInfo() != null;
+  }
+
   @Memoized
   public boolean isOrExtendsNativeClass() {
     if (isNative()) {
@@ -352,14 +359,16 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Memoized
-  public TypeDescriptor getOverlayImplementationTypeDescriptor() {
+  public DeclaredTypeDescriptor getOverlayImplementationTypeDescriptor() {
     return TypeDescriptors.createOverlayImplementationTypeDescriptor(
         toUnparamterizedTypeDescriptor());
   }
 
   @Memoized
   public boolean hasOverlayImplementationType() {
-    return (isJsType() && isNative()) || (isJsFunctionInterface() && declaresJsOverlayMembers());
+    return (isJsType() && isNative())
+        || (isJsFunctionInterface() && declaresJsOverlayMembers())
+        || isJsEnum();
   }
 
   private boolean declaresJsOverlayMembers() {
@@ -761,6 +770,8 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
     public abstract Builder setJsType(boolean isJsType);
+
+    public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 

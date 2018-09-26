@@ -657,6 +657,24 @@ class JdtUtils {
     return Modifier.isStatic(bodyDeclaration.getModifiers());
   }
 
+  private static boolean isEnumSyntheticMethod(IMethodBinding methodBinding) {
+    // Enum synthetic methods are not marked as such because per JLS 13.1 these methods are
+    // implicitly declared but are not marked as synthetic.
+    return methodBinding.getDeclaringClass().isEnum()
+        && (isEnumValuesMethod(methodBinding) || isEnumValueOfMethod(methodBinding));
+  }
+
+  private static boolean isEnumValuesMethod(IMethodBinding methodBinding) {
+    return methodBinding.getName().equals("values")
+        && methodBinding.getParameterTypes().length == 0;
+  }
+
+  private static boolean isEnumValueOfMethod(IMethodBinding methodBinding) {
+    return methodBinding.getName().equals("valueOf")
+        && methodBinding.getParameterTypes().length == 1
+        && methodBinding.getParameterTypes()[0].getQualifiedName().equals("java.lang.String");
+  }
+
   /**
    * Returns true if instances of this type capture its outer instances; i.e. if it is an non static
    * member class, or an anonymous or local class defined in an instance context.
@@ -771,6 +789,7 @@ class JdtUtils {
         .setDefaultMethod(isDefault)
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
+        .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
         .setBridge(isBridge)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
         .build();
@@ -1127,16 +1146,13 @@ class JdtUtils {
 
   private static String getJsName(final ITypeBinding typeBinding) {
     checkArgument(!typeBinding.isPrimitive());
-    return JsInteropAnnotationUtils.getJsName(
-        JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
+    return JsInteropAnnotationUtils.getJsName(typeBinding);
   }
 
   private static String getJsNamespace(
       ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
     checkArgument(!typeBinding.isPrimitive());
-    String jsNamespace =
-        JsInteropAnnotationUtils.getJsNamespace(
-            JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding));
+    String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(typeBinding);
     if (jsNamespace != null) {
       return jsNamespace;
     }
@@ -1253,7 +1269,8 @@ class JdtUtils {
         .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
-        .setNative(JsInteropUtils.isNativeType(typeBinding))
+        .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
+        .setNative(JsInteropUtils.isJsNativeType(typeBinding))
         .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))

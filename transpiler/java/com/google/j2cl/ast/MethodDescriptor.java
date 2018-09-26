@@ -271,6 +271,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isJsMember() || !getOverriddenJsMembers().isEmpty();
   }
 
+  public abstract boolean isEnumSyntheticMethod();
+
   @Override
   @Memoized
   public boolean isOrOverridesJavaLangObjectMethod() {
@@ -397,6 +399,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setSynthetic(false)
+        .setEnumSyntheticMethod(false)
         .setBridge(false)
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
@@ -528,6 +531,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setSynthetic(boolean isSynthetic);
 
     public abstract Builder setBridge(boolean isBridge);
+
+    public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
     public abstract Builder setJsFunction(boolean isJsFunction);
 

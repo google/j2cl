@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import java.util.Arrays;
+import java.util.Optional;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -28,6 +29,7 @@ public class JsInteropAnnotationUtils {
   private static final String JS_CONSTRUCTOR_ANNOTATION_NAME =
       "jsinterop.annotations.JsConstructor";
   private static final String JS_ASYNC_ANNOTATION_NAME = "jsinterop.annotations.JsAsync";
+  private static final String JS_ENUM_ANNOTATION_NAME = "jsinterop.annotations.JsEnum";
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
@@ -51,6 +53,11 @@ public class JsInteropAnnotationUtils {
   public static IAnnotationBinding getJsConstructorAnnotation(IMethodBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_CONSTRUCTOR_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getJsEnumAnnotation(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        typeBinding.getAnnotations(), JS_ENUM_ANNOTATION_NAME);
   }
 
   public static IAnnotationBinding getJsFunctionAnnotation(ITypeBinding typeBinding) {
@@ -84,7 +91,6 @@ public class JsInteropAnnotationUtils {
         methodBinding.getParameterAnnotations(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
   }
 
-
   public static IAnnotationBinding getDoNotAutoboxAnnotation(
       IMethodBinding methodBinding, int parameterIndex) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
@@ -106,7 +112,11 @@ public class JsInteropAnnotationUtils {
     return annotation.getAnnotationType().getQualifiedName().equals(JS_PACKAGE_ANNOTATION_NAME);
   }
 
-  public static boolean isNative(IAnnotationBinding annotationBinding) {
+  public static boolean isJsNative(ITypeBinding typeBinding) {
+    return isJsNative(getJsTypeOrJsEnumAnnotation(typeBinding));
+  }
+
+  private static boolean isJsNative(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getAnnotationParameterBoolean(annotationBinding, "isNative", false);
   }
 
@@ -122,14 +132,34 @@ public class JsInteropAnnotationUtils {
     return Arrays.stream(suppressions).anyMatch("unusable-by-js"::equals);
   }
 
-  /**
-   * The namespace specified on a package, type, method or field.
-   */
+  /** The namespace specified on a package, type, method or field. */
+  public static String getJsNamespace(ITypeBinding typeBinding) {
+    return getJsNamespace(getJsTypeOrJsEnumAnnotation(typeBinding));
+  }
+
   public static String getJsNamespace(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "namespace");
   }
 
+  public static String getJsName(ITypeBinding typeBinding) {
+    return getJsName(getJsTypeOrJsEnumAnnotation(typeBinding));
+  }
+
   public static String getJsName(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "name");
+  }
+
+  private static IAnnotationBinding getJsTypeOrJsEnumAnnotation(ITypeBinding typeBinding) {
+    return Optional.ofNullable(getJsTypeAnnotation(typeBinding))
+        .orElse(getJsEnumAnnotation(typeBinding));
+  }
+
+  public static boolean hasCustomValue(ITypeBinding typeBinding) {
+    return hasCustomValue(getJsEnumAnnotation(typeBinding));
+  }
+
+  private static boolean hasCustomValue(IAnnotationBinding annotationBinding) {
+    return JdtAnnotationUtils.getAnnotationParameterBoolean(
+        annotationBinding, "hasCustomValue", false);
   }
 }

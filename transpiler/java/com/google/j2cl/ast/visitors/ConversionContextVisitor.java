@@ -95,7 +95,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /** Expression is always going to String. */
-    @SuppressWarnings("unused")
     public Expression rewriteStringContext(Expression operandExpression) {
       return operandExpression;
     }
@@ -111,6 +110,60 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     public Expression rewriteBooleanConversionContext(Expression operandExpression) {
       return operandExpression;
     }
+  }
+
+  /** An abstract base class to extend for visiting the AST according to context rules */
+  protected abstract static class ContextVisitor extends ContextRewriter {
+    @Override
+    public final Expression rewriteAssignmentContext(
+        TypeDescriptor toTypeDescriptor, Expression expression) {
+      visitAssignmentContext(toTypeDescriptor, expression);
+      return expression;
+    }
+
+    public void visitAssignmentContext(TypeDescriptor toTypeDescriptor, Expression expression) {}
+
+    @Override
+    public final Expression rewriteCastContext(CastExpression castExpression) {
+      visitCastContext(castExpression);
+      return castExpression;
+    }
+
+    public void visitCastContext(CastExpression castExpression) {}
+
+    @Override
+    public final Expression rewriteMethodInvocationContext(
+        ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
+      visitMethodInvocationContext(parameterDescriptor, argumentExpression);
+      return argumentExpression;
+    }
+
+    public void visitMethodInvocationContext(
+        ParameterDescriptor parameterDescriptor, Expression argumentExpression) {}
+
+    @Override
+    public final Expression rewriteStringContext(Expression operandExpression) {
+      visitStringContext(operandExpression);
+      return operandExpression;
+    }
+
+    public void visitStringContext(Expression operandExpression) {}
+
+    @Override
+    public final Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
+      visitUnaryNumericPromotionContext(operandExpression);
+      return operandExpression;
+    }
+
+    public void visitUnaryNumericPromotionContext(Expression operandExpression) {}
+
+    @Override
+    public final Expression rewriteBooleanConversionContext(Expression operandExpression) {
+      visitBooleanConversionContext(operandExpression);
+      return operandExpression;
+    }
+
+    public void visitBooleanConversionContext(Expression operandExpression) {}
   }
 
   private final ContextRewriter contextRewriter;

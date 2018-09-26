@@ -86,6 +86,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  public boolean isJsType() {
+    return getTypeDeclaration().isJsType();
+  }
+
+  @Override
   public boolean isJsFunctionImplementation() {
     return getTypeDeclaration().isJsFunctionImplementation();
   }
@@ -96,8 +101,18 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  public boolean isJsEnum() {
+    return getTypeDeclaration().isJsEnum();
+  }
+
+  @Override
   public boolean isNative() {
     return getTypeDeclaration().isNative();
+  }
+
+  @Override
+  public JsEnumInfo getJsEnumInfo() {
+    return getTypeDeclaration().getJsEnumInfo();
   }
 
   @Override
@@ -230,7 +245,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public TypeDeclaration getMetadataTypeDeclaration() {
     DeclaredTypeDescriptor rawTypeDescriptor = toRawTypeDescriptor();
 
-    if (rawTypeDescriptor.isNative()) {
+    if (rawTypeDescriptor.isNative() || rawTypeDescriptor.isJsEnum()) {
       return TypeDescriptors.createOverlayImplementationTypeDeclaration(rawTypeDescriptor);
     }
 

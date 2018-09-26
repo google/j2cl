@@ -25,7 +25,7 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 @Context
 public abstract class Member extends Node implements HasSourcePosition, HasReadableDescription {
-  private SourcePosition sourcePosition;
+  private final SourcePosition sourcePosition;
 
   public Member(SourcePosition sourcePosition) {
     this.sourcePosition = checkNotNull(sourcePosition);
@@ -42,6 +42,10 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
   }
 
   public boolean isField() {
+    return false;
+  }
+
+  public boolean isEnumField() {
     return false;
   }
 

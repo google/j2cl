@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
@@ -1204,5 +1205,40 @@ public class AstUtils {
         .setJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_ORDINAL_FIELD)
         .build();
+  }
+
+  /** Returns the value field descriptor for a JsEnum */
+  public static FieldDescriptor getJsEnumValueFieldDescriptor(TypeDeclaration typeDeclaration) {
+    checkState(typeDeclaration.isJsEnum());
+    return typeDeclaration.getDeclaredFieldDescriptors().stream()
+        .filter(AstUtils::isJsEnumCustomValueField)
+        .findFirst()
+        .orElse(null);
+  }
+
+  public static boolean isJsEnumCustomValueField(MemberDescriptor memberDescriptor) {
+    return memberDescriptor.isField()
+        && memberDescriptor.getName().equals("value")
+        && memberDescriptor.getEnclosingTypeDescriptor().isJsEnum();
+  }
+
+  /** Returns the value field for a JsEnum */
+  public static TypeDescriptor getJsEnumValueFieldType(TypeDeclaration typeDeclaration) {
+    FieldDescriptor valueFieldDescriptor = getJsEnumValueFieldDescriptor(typeDeclaration);
+    return valueFieldDescriptor == null
+        ? PrimitiveTypes.INT
+        : valueFieldDescriptor.getTypeDescriptor();
+  }
+
+  /** Returns the initialization value for a JsEnum constant. */
+  public static Expression getJsEnumConstantValue(Field field) {
+    checkState(field.isEnumField());
+    NewInstance initializer = (NewInstance) field.getInitializer();
+    List<Expression> arguments = initializer.getArguments();
+    if (arguments.size() != 1) {
+      // Not a valid initialization. The code will be rejected.
+      return null;
+    }
+    return arguments.get(0);
   }
 }
