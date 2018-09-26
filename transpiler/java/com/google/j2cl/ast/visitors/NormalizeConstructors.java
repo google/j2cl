@@ -123,7 +123,7 @@ public class NormalizeConstructors extends NormalizationPass {
     rewriteNewInstances(compilationUnit);
 
     for (Type type : compilationUnit.getTypes()) {
-      if (type.isInterface() || type.isNative() || type.isJsOverlayImplementation()) {
+      if (type.isInterface() || type.isJsOverlayImplementation()) {
         continue;
       }
 
