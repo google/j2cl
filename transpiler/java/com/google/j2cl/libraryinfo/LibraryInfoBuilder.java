@@ -17,6 +17,7 @@ package com.google.j2cl.libraryinfo;
 
 import static com.google.j2cl.ast.MethodDescriptor.CLINIT_METHOD_NAME;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
@@ -30,6 +31,7 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.common.SourcePosition;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
@@ -80,13 +82,16 @@ public final class LibraryInfoBuilder {
     Map<String, MemberInfo.Builder> memberInfoBuilderByName =
         new LinkedHashMap<>(type.getMembers().size());
 
+    boolean forceJsAccessible = isAccesssedFromJ2clBootstrapJsFiles(type.getTypeDescriptor());
+
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
       String memberName = getMemberId(memberDescriptor);
       // JsMembers and JsFunctions are marked as accessible by js.
       boolean isJsAccessible =
-          (memberDescriptor.isJsFunction() || memberDescriptor.isJsMember())
-              && !shouldNotBeJsAccessible(memberDescriptor);
+          ((memberDescriptor.isJsFunction() || memberDescriptor.isJsMember())
+                  && !shouldNotBeJsAccessible(memberDescriptor))
+              || forceJsAccessible;
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -109,9 +114,7 @@ public final class LibraryInfoBuilder {
 
     return typeInfoBuilder
         .addAllMember(
-            memberInfoBuilderByName
-                .values()
-                .stream()
+            memberInfoBuilderByName.values().stream()
                 .map(MemberInfo.Builder::build)
                 .collect(Collectors.toList()))
         .build();
@@ -254,5 +257,25 @@ public final class LibraryInfoBuilder {
         || (memberDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface()
             && memberDescriptor.getName().equals("$adapt"))
         || isLambdaAdaptorConstructor;
+  }
+
+  // There are references to non JsMember members of these types from JavaScript in the J2CL
+  // runtime. For now we will consider and all their members accessible by JavaScript code.
+  // TODO(b/29509857):  remove once the refactoring of the code in nativebootstrap and vmbootstrap
+  // is completed and the references removed.
+  private static final ImmutableSet<String> TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS =
+      ImmutableSet.of(
+          "javaemul.internal.InternalPreconditions",
+          "java.lang.Double",
+          "java.lang.Boolean",
+          "java.lang.Number",
+          "java.lang.CharSequence",
+          "java.lang.String",
+          "java.lang.Class",
+          "java.lang.Comparable",
+          "java.lang.Integer");
+
+  private static boolean isAccesssedFromJ2clBootstrapJsFiles(TypeDescriptor typeDescriptor) {
+    return TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS.contains(typeDescriptor.getQualifiedSourceName());
   }
 }
