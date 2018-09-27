@@ -123,10 +123,10 @@ public class NormalizeConstructors extends NormalizationPass {
     rewriteNewInstances(compilationUnit);
 
     for (Type type : compilationUnit.getTypes()) {
-      if (type.isInterface() || type.isJsOverlayImplementation()) {
+      if (type.getConstructors().isEmpty()) {
+        // No constructors => no normalization.
         continue;
       }
-
       // Synthesize the es6 constructor BEFORE altering any of the constructor's code, but do not
       // add it to the type yet, the code for the es6 constructor should not be transformed.
       Method es6Constructor =

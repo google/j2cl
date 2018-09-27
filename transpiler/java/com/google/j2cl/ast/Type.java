@@ -160,6 +160,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public void addMethod(Method method) {
+    checkArgument(!method.isConstructor() || (!isInterface() && !isJsOverlayImplementation()));
     members.add(method);
   }
 
