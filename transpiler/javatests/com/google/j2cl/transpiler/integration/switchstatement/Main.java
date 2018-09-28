@@ -22,6 +22,7 @@ public class Main {
     testSwitchValues();
     testSwitchVariableDeclarations();
     testSwitchNull();
+    testSwitchWithErasureCast();
   }
 
   private static void testSwitchValues() {
@@ -99,6 +100,13 @@ public class Main {
     }
   }
 
+  public enum Numbers {
+    ZERO,
+    ONE,
+    TWO,
+    THREE
+  }
+
   private static int getEnumValue(Numbers numberValue) {
     switch (numberValue) {
       case ZERO:
@@ -130,7 +138,7 @@ public class Main {
         int i = 1;
         break;
     }
-    assert false;
+    fail();
   }
 
   private static void testSwitchNull() {
@@ -139,11 +147,38 @@ public class Main {
     assertThrowsNullPointerException(() -> getStringValue(null));
   }
 
+  private static void testSwitchWithErasureCast() {
+    Supplier<Numbers> supplier = () -> Numbers.ONE;
+    switch (supplier.get()) {
+      case ONE:
+        break;
+      default:
+        fail();
+    }
+
+    supplier = (Supplier) () -> new Integer(1);
+
+    try {
+      switch (supplier.get()) {
+      }
+      fail("Should have thrown ClassCastException");
+    } catch (ClassCastException expected) {
+    }
+  }
+
   private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
     try {
       supplier.get();
-      assert false : "Should have thrown NPE";
+      fail("Should have thrown NPE");
     } catch (NullPointerException expected) {
     }
+  }
+
+  private static void fail() {
+    assert false;
+  }
+
+  private static void fail(String message) {
+    assert false : message;
   }
 }

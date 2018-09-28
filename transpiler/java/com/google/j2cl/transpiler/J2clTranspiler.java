@@ -57,7 +57,6 @@ import com.google.j2cl.ast.visitors.NormalizeCasts;
 import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEnumClasses;
-import com.google.j2cl.ast.visitors.NormalizeEnumSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
@@ -74,7 +73,7 @@ import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
-import com.google.j2cl.ast.visitors.NormalizeStringSwitchStatements;
+import com.google.j2cl.ast.visitors.NormalizeSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
@@ -189,8 +188,6 @@ class J2clTranspiler {
             // Needs to run after InsertErasureTypeSafetyCasts, as they might introduce
             // intersection casts.
             new NormalizeIntersectionTypes(),
-            new NormalizeStringSwitchStatements(),
-            new NormalizeEnumSwitchStatements(),
             // Runs before unboxing conversion.
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),
@@ -203,6 +200,7 @@ class J2clTranspiler {
             new InsertBitwiseOperatorBooleanCoercions(),
             new InsertUnsignedRightShiftCoercions(),
             new NormalizeJsFunctionPropertyInvocations(),
+            new NormalizeSwitchStatements(),
             new ArrayAccessNormalizer(),
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),
