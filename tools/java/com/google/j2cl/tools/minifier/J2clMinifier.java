@@ -363,6 +363,11 @@ public class J2clMinifier {
     transFn[S_DOUBLE_QUOTED_STRING_ESCAPE][S_END_STATE] = J2clMinifier::skipChar;
   }
 
+  public String minify(String filePath, String content) {
+    // TODO(dramaix): use the file path during minification (e.g. RTA pruning),
+    return minify(content);
+  }
+
   public String minify(String content) {
     // Return a previously cached version of minified output, if possible.
     String minifiedContent = minifiedContentByContent.get(content);
