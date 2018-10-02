@@ -169,6 +169,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
+  public abstract boolean isDeprecated();
+
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
@@ -403,6 +405,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setBridge(false)
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
+        .setDeprecated(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
@@ -537,6 +540,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setJsFunction(boolean isJsFunction);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
+
+    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

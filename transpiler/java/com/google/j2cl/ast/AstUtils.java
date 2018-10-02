@@ -698,6 +698,7 @@ public class AstUtils {
                     .setName("$copy")
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
+                    .setDeprecated(lambdaType.isDeprecated())
                     .build())
             .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
             .build();
@@ -728,6 +729,7 @@ public class AstUtils {
         .setFieldType(field.getDescriptor().getTypeDescriptor())
         .setPublic(isPublic)
         .setConst(field.isCompileTimeConstant())
+        .setDeprecated(field.getDescriptor().isDeprecated())
         .build()
         .makeStatement(field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition);
   }

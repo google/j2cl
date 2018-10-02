@@ -1,0 +1,228 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedEnum.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample.DeprecatedEnum$impl');
+
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+
+/**
+ * @deprecated
+ * @extends {Enum<DeprecatedEnum>}
+ */
+class DeprecatedEnum extends Enum {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!DeprecatedEnum}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    let $instance = new DeprecatedEnum();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int(
+            $name, $ordinal);
+    return $instance;
+  }
+
+  /**
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int(
+      $name, $ordinal) {
+    this.f_name__java_lang_Enum_ = $name;
+    this.f_ordinal__java_lang_Enum_ = $ordinal;
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+  }
+
+  /**
+   * @param {string} name
+   * @return {!DeprecatedEnum}
+   * @public
+   */
+  static valueOf(name) {
+    DeprecatedEnum.$clinit();
+    if ($Equality.$same(
+            DeprecatedEnum
+                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_,
+            null)) {
+      DeprecatedEnum
+          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
+          $Enums.createMapFromValues(DeprecatedEnum.values());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        DeprecatedEnum
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_);
+  }
+
+  /**
+   * @return {!Array<!DeprecatedEnum>}
+   * @public
+   */
+  static values() {
+    DeprecatedEnum.$clinit();
+    return /**@type {!Array<DeprecatedEnum>} */ ($Arrays.$init(
+        [
+          DeprecatedEnum
+              .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum
+        ],
+        DeprecatedEnum));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(
+        /**@type {DeprecatedEnum} */ ($Casts.$to(arg0, DeprecatedEnum)));
+  }
+
+  /**
+   * @return {!DeprecatedEnum}
+   * @public
+   * @deprecated
+   */
+  static get A_VALUE() {
+    return (
+        DeprecatedEnum.$clinit(),
+        DeprecatedEnum
+            .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum);
+  }
+
+  /**
+   * @param {!DeprecatedEnum} value
+   * @return {void}
+   * @public
+   * @deprecated
+   */
+  static set A_VALUE(value) {
+    (DeprecatedEnum.$clinit(),
+     DeprecatedEnum
+         .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum =
+         value);
+  }
+
+  /**
+   * @return {Map<?string, !DeprecatedEnum>}
+   * @public
+   */
+  static get f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_() {
+    return (
+        DeprecatedEnum.$clinit(),
+        DeprecatedEnum
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_);
+  }
+
+  /**
+   * @param {Map<?string, !DeprecatedEnum>} value
+   * @return {void}
+   * @public
+   */
+  static set f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_(
+      value) {
+    (DeprecatedEnum.$clinit(),
+     DeprecatedEnum
+         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
+         value);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    DeprecatedEnum.$clinit = (() => {});
+    DeprecatedEnum.$loadModules();
+    Enum.$clinit();
+    DeprecatedEnum
+        .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum =
+        DeprecatedEnum.$create__java_lang_String__int(
+            $Util.$makeEnumName('A_VALUE'),
+            DeprecatedEnum
+                .$ordinal$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum);
+    DeprecatedEnum
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
+        null;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DeprecatedEnum;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, DeprecatedEnum);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  }
+};
+
+$Util.$setClassMetadataForEnum(
+    DeprecatedEnum,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedEnum'));
+
+
+/** @private {!DeprecatedEnum} @deprecated */
+DeprecatedEnum
+    .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum;
+
+
+/** @private {Map<?string, !DeprecatedEnum>} */
+DeprecatedEnum
+    .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_;
+
+
+/** @public {number} @const @deprecated */
+DeprecatedEnum
+    .$ordinal$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum =
+    0;
+
+
+
+exports = DeprecatedEnum;
+//# sourceMappingURL=DeprecatedExample$DeprecatedEnum.js.map

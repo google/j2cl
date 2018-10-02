@@ -148,6 +148,7 @@ public class ExpressionTranspiler {
                 + jsdoc
                 + "} "
                 + (declaration.isConst() ? "@const " : "")
+                + (declaration.isDeprecated() ? "@deprecated " : "")
                 + "*/");
         process(declaration.getExpression());
         return null;
@@ -206,8 +207,7 @@ public class ExpressionTranspiler {
 
         ImmutableList<ParameterDescriptor> parameterDescriptors =
             expression.getDescriptor().getParameterDescriptors();
-        if (parameterDescriptors
-            .stream()
+        if (parameterDescriptors.stream()
             .anyMatch(
                 Predicates.or(ParameterDescriptor::isJsOptional, ParameterDescriptor::isVarargs))) {
           // TODO(b/36818468, b/36855486): Emit a full method header since optional or varargs
@@ -336,8 +336,7 @@ public class ExpressionTranspiler {
       @Override
       public Void transformMultiExpression(MultiExpression multiExpression) {
         List<Expression> expressions = multiExpression.getExpressions();
-        if (expressions
-            .stream()
+        if (expressions.stream()
             .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
           // If the multiexpression declares variables enclosing in an anonymous function context.
           sourceBuilder.append("( () => {");

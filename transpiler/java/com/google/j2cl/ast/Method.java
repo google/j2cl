@@ -120,6 +120,10 @@ public class Method extends Member implements HasJsNameInfo, MethodLike {
     return getDescriptor().isFinal();
   }
 
+  public boolean isDeprecated() {
+    return methodDescriptor.isDeprecated();
+  }
+
   @Override
   public boolean isStatic() {
     return methodDescriptor.isStatic();

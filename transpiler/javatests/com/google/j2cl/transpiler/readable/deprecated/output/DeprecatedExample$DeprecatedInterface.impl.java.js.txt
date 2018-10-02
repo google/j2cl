@@ -1,0 +1,105 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedInterface.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample.DeprecatedInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor$impl');
+
+
+/**
+ * @interface
+ * @deprecated
+ */
+class DeprecatedInterface {
+  /**
+   * @abstract
+   * @param {number} anInt
+   * @return {void}
+   * @public
+   * @deprecated
+   */
+  doAThing(anInt) {}
+
+  /**
+   * @param {?function(number):void} fn
+   * @return {DeprecatedInterface}
+   * @public
+   */
+  static $adapt(fn) {
+    DeprecatedInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    DeprecatedInterface.$clinit = (() => {});
+    DeprecatedInterface.$loadModules();
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedInterface =
+        true;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedInterface;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedInterface;
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    DeprecatedInterface,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedInterface'));
+
+
+DeprecatedInterface.$markImplementor(
+    /** @type {Function} */ (DeprecatedInterface));
+
+
+exports = DeprecatedInterface;
+//# sourceMappingURL=DeprecatedExample$DeprecatedInterface.js.map

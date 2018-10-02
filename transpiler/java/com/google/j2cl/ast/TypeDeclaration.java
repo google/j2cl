@@ -210,6 +210,8 @@ public abstract class TypeDeclaration extends Node
   @Nullable
   public abstract JsEnumInfo getJsEnumInfo();
 
+  public abstract boolean isDeprecated();
+
   public boolean isJsEnum() {
     return getJsEnumInfo() != null;
   }
@@ -741,6 +743,7 @@ public abstract class TypeDeclaration extends Node
         .setJsType(false)
         .setLocal(false)
         .setUnusableByJsSuppressed(false)
+        .setDeprecated(false)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -774,6 +777,8 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
+
+    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setLocal(boolean local);
 

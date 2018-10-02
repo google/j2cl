@@ -197,6 +197,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
         renderIfClassExists(" * @extends {%s}", superInterfaceType, sourceBuilder);
       }
+      if (type.getDeclaration().isDeprecated()) {
+        sourceBuilder.appendln(" * @deprecated");
+      }
       sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
       SourceBuilder buffer = new SourceBuilder();
@@ -208,6 +211,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             closureTypesGenerator.getCommaSeparatedClosureTypesString(
                 type.getDeclaration().getTypeParameterDescriptors());
         buffer.appendln(" * @template " + templates);
+      }
+      if (type.getDeclaration().isDeprecated()) {
+        buffer.appendln(" * @deprecated");
       }
       if (type.getSuperTypeDescriptor() != null
           && type.getSuperTypeDescriptor().hasTypeArguments()) {
@@ -346,6 +352,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
     }
     sourceBuilder.appendln(" * @" + methodDescriptor.getJsVisibility().jsText);
+    if (methodDescriptor.isDeprecated()) {
+      sourceBuilder.appendln(" * @deprecated");
+    }
     sourceBuilder.appendln(" */");
   }
 

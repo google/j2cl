@@ -287,6 +287,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
                     .build()
                 : JsInfo.NONE)
         .setStatic(true)
+        .setDeprecated(fieldDescriptor.isDeprecated())
         .build();
   }
 
@@ -305,6 +306,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
                     .build()
                 : JsInfo.NONE)
         .setStatic(true)
+        .setDeprecated(fieldDescriptor.isDeprecated())
         .build();
   }
 

@@ -39,6 +39,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isEnclosingInstanceCapture();
 
+  public abstract boolean isDeprecated();
+
   @Override
   public abstract FieldOrigin getOrigin();
 
@@ -177,6 +179,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setEnclosingInstanceCapture(false)
         .setSynthetic(false)
         .setUnusableByJsSuppressed(false)
+        .setDeprecated(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
   }
@@ -216,6 +219,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setJsInfo(JsInfo jsInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
+
+    public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setOrigin(FieldOrigin fieldOrigin);
 

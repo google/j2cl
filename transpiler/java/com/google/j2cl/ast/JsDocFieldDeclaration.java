@@ -27,14 +27,20 @@ public class JsDocFieldDeclaration extends Expression {
   @Visitable TypeDescriptor fieldType;
   private final boolean isPublic;
   private final boolean isConst;
+  private final boolean isDeprecated;
 
   private JsDocFieldDeclaration(
-      Expression expression, TypeDescriptor fieldType, boolean isPublic, boolean isConst) {
+      Expression expression,
+      TypeDescriptor fieldType,
+      boolean isPublic,
+      boolean isConst,
+      boolean isDeprecated) {
     checkArgument(!(expression instanceof JsDocFieldDeclaration));
     this.expression = checkNotNull(expression);
     this.fieldType = checkNotNull(fieldType);
     this.isPublic = isPublic;
     this.isConst = isConst;
+    this.isDeprecated = isDeprecated;
     checkArgument(
         expression instanceof FieldAccess
             || (expression instanceof BinaryExpression
@@ -59,6 +65,10 @@ public class JsDocFieldDeclaration extends Expression {
     return isConst;
   }
 
+  public boolean isDeprecated() {
+    return isDeprecated;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_JsDocFieldDeclaration.visit(processor, this);
@@ -66,7 +76,8 @@ public class JsDocFieldDeclaration extends Expression {
 
   @Override
   public JsDocFieldDeclaration clone() {
-    return new JsDocFieldDeclaration(expression.clone(), fieldType, isPublic, isConst);
+    return new JsDocFieldDeclaration(
+        expression.clone(), fieldType, isPublic, isConst, isDeprecated);
   }
 
   public static Builder newBuilder() {
@@ -79,6 +90,7 @@ public class JsDocFieldDeclaration extends Expression {
     private TypeDescriptor fieldType;
     private boolean isPublic;
     private boolean isConst;
+    private Boolean isDeprecated;
 
     public static Builder from(JsDocFieldDeclaration annotation) {
       Builder builder = new Builder();
@@ -86,6 +98,7 @@ public class JsDocFieldDeclaration extends Expression {
       builder.fieldType = annotation.getTypeDescriptor();
       builder.isPublic = annotation.isPublic();
       builder.isConst = annotation.isConst();
+      builder.isDeprecated = annotation.isDeprecated();
       return builder;
     }
 
@@ -109,8 +122,13 @@ public class JsDocFieldDeclaration extends Expression {
       return this;
     }
 
+    public Builder setDeprecated(boolean isDeprecated) {
+      this.isDeprecated = isDeprecated;
+      return this;
+    }
+
     public JsDocFieldDeclaration build() {
-      return new JsDocFieldDeclaration(expression, fieldType, isPublic, isConst);
+      return new JsDocFieldDeclaration(expression, fieldType, isPublic, isConst, isDeprecated);
     }
   }
 }

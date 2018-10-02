@@ -130,6 +130,7 @@ class JdtUtils {
         .setEnumConstant(variableBinding.isEnumConstant())
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
+        .setDeprecated(isDeprecated(variableBinding))
         .build();
   }
 
@@ -630,6 +631,10 @@ class JdtUtils {
     }
   }
 
+  private static boolean isDeprecated(IBinding binding) {
+    return JdtAnnotationUtils.hasAnnotation(binding, Deprecated.class.getName());
+  }
+
   private static boolean isDefaultMethod(IMethodBinding binding) {
     return Modifier.isDefault(binding.getModifiers());
   }
@@ -792,6 +797,7 @@ class JdtUtils {
         .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
         .setBridge(isBridge)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
+        .setDeprecated(isDeprecated(methodBinding))
         .build();
   }
 
@@ -1082,9 +1088,7 @@ class JdtUtils {
           .setTypeArgumentDescriptors(ImmutableList.of())
           .setDeclaredFieldDescriptorsFactory(
               () ->
-                  rawTypeDescriptor
-                      .getDeclaredFieldDescriptors()
-                      .stream()
+                  rawTypeDescriptor.getDeclaredFieldDescriptors().stream()
                       .map(FieldDescriptor::toRawMemberDescriptor)
                       .collect(toImmutableList()))
           .setDeclaredMethodDescriptorsFactory(
@@ -1105,9 +1109,7 @@ class JdtUtils {
               () -> getRawDescriptorOrNull(rawTypeDescriptor.getSuperTypeDescriptor()))
           .setInterfaceTypeDescriptorsFactory(
               () ->
-                  rawTypeDescriptor
-                      .getInterfaceTypeDescriptors()
-                      .stream()
+                  rawTypeDescriptor.getInterfaceTypeDescriptors().stream()
                       .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
                       .collect(toImmutableList()))
           .setSingleAbstractMethodDescriptorFactory(
@@ -1284,6 +1286,7 @@ class JdtUtils {
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
+        .setDeprecated(isDeprecated(typeBinding))
         .build();
   }
 
