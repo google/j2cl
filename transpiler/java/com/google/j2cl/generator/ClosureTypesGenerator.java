@@ -22,6 +22,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -281,6 +282,16 @@ class ClosureTypesGenerator {
           ImmutableList.<ClosureType>builder().add(STRING).addAll(typeParameters).build());
     }
 
+    if (typeDeclaration.isJsEnum()) {
+      // TODO(b/116748526):  add a way to represent unknown nullability.
+      // In Closure, the default nullability for enums is the default nullability of its value type,
+      // whereas in Java enums are implicitly nullable.
+      return new ClosureNamedType(
+              environment.aliasForType(typeDeclaration),
+              AstUtils.getJsEnumValueFieldType(typeDeclaration).isNullable())
+          .toNullable();
+    }
+
     return new ClosureNamedType(environment.aliasForType(typeDeclaration), typeParameters);
   }
 
@@ -319,9 +330,13 @@ class ClosureTypesGenerator {
 
     abstract String render();
 
-    abstract ClosureType toNullable();
+    ClosureType toNullable() {
+      return isNullable() ? this : new ClosureWildcardDecoratedType(this);
+    }
 
-    abstract ClosureType toNonNullable();
+    ClosureType toNonNullable() {
+      return isNullable() ? new ClosureBangDecoratedType(this) : this;
+    }
   }
 
   /** Represents primitive types (which includes special constants). */
@@ -342,16 +357,6 @@ class ClosureTypesGenerator {
     @Override
     String render() {
       return type;
-    }
-
-    @Override
-    ClosureType toNullable() {
-      return isNullable ? this : new ClosureWildcardDecoratedType(this);
-    }
-
-    @Override
-    ClosureType toNonNullable() {
-      return isNullable ? new ClosureBangDecoratedType(this) : this;
     }
   }
 
@@ -380,8 +385,9 @@ class ClosureTypesGenerator {
     }
   }
 
-  /** Represents named types which are nullable unless decorated. */
+  /** Represents named types which are by default nullable. */
   private static class ClosureNamedType extends ClosureType {
+    private final boolean isNullable;
     private final String name;
     private final ImmutableList<ClosureType> typeParameters;
 
@@ -389,14 +395,23 @@ class ClosureTypesGenerator {
       this(name, Arrays.asList(typeParameters));
     }
 
+    ClosureNamedType(String name, boolean isNullable, ClosureType... typeParameters) {
+      this(name, isNullable, Arrays.asList(typeParameters));
+    }
+
     ClosureNamedType(String name, Iterable<ClosureType> typeParameters) {
+      this(name, true, typeParameters);
+    }
+
+    ClosureNamedType(String name, boolean isNullable, Iterable<ClosureType> typeParameters) {
       this.name = name;
+      this.isNullable = isNullable;
       this.typeParameters = ImmutableList.copyOf(typeParameters);
     }
 
     @Override
     boolean isNullable() {
-      return true;
+      return isNullable;
     }
 
     @Override
@@ -408,16 +423,6 @@ class ClosureTypesGenerator {
                   .stream()
                   .map(ClosureType::render)
                   .collect(Collectors.joining(", ", "<", ">")));
-    }
-
-    @Override
-    ClosureType toNullable() {
-      return this;
-    }
-
-    @Override
-    ClosureType toNonNullable() {
-      return new ClosureBangDecoratedType(this);
     }
   }
 
@@ -441,16 +446,6 @@ class ClosureTypesGenerator {
     @Override
     String render() {
       return types.stream().map(ClosureType::render).collect(Collectors.joining("|", "(", ")"));
-    }
-
-    @Override
-    ClosureType toNullable() {
-      return isNullable() ? this : new ClosureWildcardDecoratedType(this);
-    }
-
-    @Override
-    ClosureType toNonNullable() {
-      return isNullable() ? new ClosureBangDecoratedType(this) : this;
     }
   }
 
@@ -557,16 +552,6 @@ class ClosureTypesGenerator {
           "function(%s):%s",
           parameters.stream().map(Parameter::render).collect(Collectors.joining(", ")),
           returnClosureType.render());
-    }
-
-    @Override
-    ClosureType toNullable() {
-      return new ClosureWildcardDecoratedType(this);
-    }
-
-    @Override
-    ClosureType toNonNullable() {
-      return this;
     }
   }
 

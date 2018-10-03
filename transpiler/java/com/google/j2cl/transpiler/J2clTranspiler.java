@@ -64,6 +64,8 @@ import com.google.j2cl.ast.visitors.NormalizeInterfaceMethods;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
+import com.google.j2cl.ast.visitors.NormalizeJsEnumClasses;
+import com.google.j2cl.ast.visitors.NormalizeJsEnumSpecialMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsOverlayMembers;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
@@ -151,11 +153,13 @@ class J2clTranspiler {
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+    // TODO(b/117155139): Review the ordering of passes.
     List<NormalizationPass> passes =
         ImmutableList.of(
             // Class structure normalizations.
             new ImplementLambdaExpressions(),
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
+            new NormalizeJsEnumClasses(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
@@ -168,12 +172,13 @@ class J2clTranspiler {
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
             new InsertCastOnNewInstances(),
-            new NormalizeEnumClasses(),
             new FixSuperCallQualifiers(),
-            // Runs at the very end of 'Class structure normalizations' section since we do not need
-            // to apply other normalizations on the synthesized native JS types.
+
+            // Runs after all passes that synthesize overlays.
             new NormalizeJsOverlayMembers(),
+            new NormalizeEnumClasses(),
             new NormalizeInterfaceMethods(),
+            // End of class structure normalization.
 
             // Statement/Expression normalizations
             new NormalizeArrayLiterals(),
@@ -201,6 +206,7 @@ class J2clTranspiler {
             new InsertUnsignedRightShiftCoercions(),
             new NormalizeJsFunctionPropertyInvocations(),
             new NormalizeSwitchStatements(),
+            new NormalizeJsEnumSpecialMemberReferences(),
             new ArrayAccessNormalizer(),
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),

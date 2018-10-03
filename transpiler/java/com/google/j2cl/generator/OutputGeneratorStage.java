@@ -75,13 +75,6 @@ public class OutputGeneratorStage {
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
-        if (type.getDeclaration().isJsEnum()
-            || (type.isJsOverlayImplementation() && type.getNativeTypeDescriptor().isJsEnum())) {
-          // TODO(b/77546746): Do not emit JsEnums nor their overlays until the code generation
-          // aspect of JsEnums is implemented.
-          continue;
-        }
-
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(problems, declareLegacyNamespace, type);
 

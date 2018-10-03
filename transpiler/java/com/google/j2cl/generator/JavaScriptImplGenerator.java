@@ -116,12 +116,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           "unusedLocalVariables",
           "uselessCode");
       renderImports();
-      renderTypeAnnotation();
-      renderTypeBody();
-      renderClassMetadata();
-      renderStaticFieldDeclarations();
-      renderMarkImplementorCalls();
-      renderNativeSource();
+      if (type.getDeclaration().isJsEnum()) {
+        // TODO(b/117150539): Decide if native.js files are allowed on JsEnum or not, and implement
+        // accordingly.
+        renderClosureEnum();
+      } else {
+        renderClass();
+      }
       renderExports();
       return sourceBuilder.build();
     } catch (RuntimeException e) {
@@ -130,6 +131,58 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       throw new RuntimeException(
           "Error generating source for type " + type.getDeclaration().getQualifiedBinaryName(), e);
     }
+  }
+
+  private void renderClosureEnum() {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    sourceBuilder.appendLines(
+        "/**",
+        " * @enum {"
+            + closureTypesGenerator.getClosureTypeString(
+                AstUtils.getJsEnumValueFieldType(typeDeclaration))
+            + "}");
+    sourceBuilder.newLine();
+    if (type.getDeclaration().isDeprecated()) {
+      sourceBuilder.appendln(" * @deprecated");
+    }
+    sourceBuilder.appendln(" */");
+    sourceBuilder.append("const ");
+    sourceBuilder.emitWithMapping(
+        type.getSourcePosition(),
+        () -> sourceBuilder.append(environment.aliasForType(typeDeclaration)));
+    sourceBuilder.append(" = ");
+    sourceBuilder.openBrace();
+    sourceBuilder.newLine();
+    for (Field field : type.getStaticFields()) {
+      sourceBuilder.emitWithMemberMapping(
+          field,
+          () -> {
+            if (field.getDescriptor().isDeprecated()) {
+              sourceBuilder.appendln(" /** @deprecated */");
+            }
+            sourceBuilder.emitWithMapping(
+                field.getSourcePosition(),
+                () -> {
+                  sourceBuilder.append(ManglingNameUtils.getMangledName(field.getDescriptor()));
+                });
+            sourceBuilder.append(" : ");
+            renderExpression(field.getInitializer());
+            sourceBuilder.append(",");
+            sourceBuilder.newLine();
+          });
+    }
+    sourceBuilder.closeBrace();
+    sourceBuilder.append(";");
+    sourceBuilder.newLines(2);
+  }
+
+  public void renderClass() {
+    renderTypeAnnotation();
+    renderClassBody();
+    renderClassMetadata();
+    renderStaticFieldDeclarations();
+    renderMarkImplementorCalls();
+    renderNativeSource();
   }
 
   private void renderImports() {
@@ -261,7 +314,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return !type.getTypeDeclaration().isStarOrUnknown() && !type.isJsFunctionInterface();
   }
 
-  private void renderTypeBody() {
+  private void renderClassBody() {
     sourceBuilder.append("class ");
     sourceBuilder.emitWithMapping(
         type.getSourcePosition(),
@@ -415,7 +468,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.getDeclaration().isJsFunctionImplementation()) {
       renderIsInstanceOfJsFunctionImplementationStatement(type.getTypeDescriptor());
     } else if (type.isJsOverlayImplementation()) {
-      if (type.isInterface()) {
+      DeclaredTypeDescriptor nativeTypeDescriptor = type.getNativeTypeDescriptor();
+      if (nativeTypeDescriptor.isJsEnum()) {
+        // TODO(b/116459408): Implement JsEnum isInstance when boxing/unboxing is done.
+        sourceBuilder.append("return true;");
+      } else if (nativeTypeDescriptor.isInterface()) {
         // Since instanceof is forbidden this is only used for casting so null check is not needed.
         sourceBuilder.append("return true;");
       } else {

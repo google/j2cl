@@ -123,9 +123,12 @@ public class Field extends Member implements HasJsNameInfo {
     }
 
     public static Builder from(FieldDescriptor fieldDescriptor) {
-      Builder builder = new Builder();
-      builder.fieldDescriptor = fieldDescriptor;
-      return builder;
+      return new Builder().setDescriptor(fieldDescriptor);
+    }
+
+    public Builder setDescriptor(FieldDescriptor fieldDescriptor) {
+      this.fieldDescriptor = fieldDescriptor;
+      return this;
     }
 
     public Builder setInitializer(Expression initializer) {

@@ -368,9 +368,13 @@ public abstract class TypeDeclaration extends Node
 
   @Memoized
   public boolean hasOverlayImplementationType() {
-    return (isJsType() && isNative())
-        || (isJsFunctionInterface() && declaresJsOverlayMembers())
-        || isJsEnum();
+    // TODO(b/116825224): this should just be
+    //           isNative() || isJsFunctionInteface() && declaresJsOverlayMembers.
+    // but there are some synthetic type descriptors created by
+    // TypeDescriptors.createNativeGlobalTypeDescriptor that do are marked native and confuse the
+    // rewriting of overlay references.
+    return ((isJsType() || isJsEnum()) && isNative())
+        || (isJsFunctionInterface() && declaresJsOverlayMembers());
   }
 
   private boolean declaresJsOverlayMembers() {

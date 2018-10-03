@@ -23,6 +23,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -358,6 +359,13 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
+    if (type.getDeclaration().isJsEnum()) {
+      // TODO(b/116751296): Once the type model is refactored running this pass on a closure enum
+      // should produce the right result without special handling.
+      // Do not gather anything for Closure enums.
+      return ImmutableMultimap.of(ImportCategory.SELF, createImport(type.getDeclaration()));
+    }
+
     // Util class implements some utility functions and does not depend on any other class, always
     // import it eagerly.
     addTypeDeclaration(BootstrapType.NATIVE_UTIL.getDeclaration(), ImportCategory.LOADTIME);

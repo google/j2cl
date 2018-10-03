@@ -1,0 +1,161 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsenum.Main.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsenum.Main$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ComparableJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.ComparableJsEnum$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.ComparableJsEnum.$Overlay$impl');
+let IntJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum$impl');
+let IntJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$impl');
+let StringJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
+let StringJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class Main extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!Main}
+   * @public
+   */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_jsenum_Main__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsenum_Main__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testJsEnumSwitch__() {
+    Main.$clinit();
+    let comparableJsEnum =
+        $Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_ComparableJsEnum(
+            ComparableJsEnum.ONE) == 1 ?
+        ComparableJsEnum.TWO :
+        null;
+    switch ($InternalPreconditions.m_checkNotNull__java_lang_Object(
+        comparableJsEnum)) {
+      case ComparableJsEnum.TWO:
+        break;
+      default:
+    }
+    let comparable = comparableJsEnum;
+    comparableJsEnum =
+        /**@type {?ComparableJsEnum} */ ($Casts.$to(comparable, $Overlay));
+    let intJsEnum =
+        IntJsEnum_$Overlay
+                .m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_IntJsEnum(
+                    IntJsEnum.ELEVEN) == 10 ?
+        IntJsEnum.ELEVEN :
+        null;
+    switch (
+        $InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
+      case IntJsEnum.TWENTY:
+        break;
+      default:
+    }
+    let o = intJsEnum;
+    intJsEnum = /**@type {?IntJsEnum} */ ($Casts.$to(o, IntJsEnum_$Overlay));
+    let stringJsEnum =
+        $Equality.$same(
+            StringJsEnum_$Overlay
+                .m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_StringJsEnum(
+                    StringJsEnum.ONE),
+            '10') ?
+        StringJsEnum.THREE :
+        null;
+    switch (
+        $InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
+      case StringJsEnum.ONE:
+        break;
+      default:
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Main.$clinit = (() => {});
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    ComparableJsEnum = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.ComparableJsEnum$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.ComparableJsEnum.$Overlay$impl');
+    IntJsEnum = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum$impl');
+    IntJsEnum_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$impl');
+    StringJsEnum = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
+    StringJsEnum_$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+    $InternalPreconditions =
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+};
+
+$Util.$setClassMetadata(
+    Main,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.jsenum.Main'));
+
+
+
+exports = Main;
+//# sourceMappingURL=Main.js.map

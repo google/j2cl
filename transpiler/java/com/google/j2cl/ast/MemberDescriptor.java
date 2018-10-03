@@ -100,6 +100,10 @@ public abstract class MemberDescriptor extends Node
     return false;
   }
 
+  public boolean isEnumConstant() {
+    return false;
+  }
+
   public boolean isJsAsync() {
     return getJsInfo().isJsAsync();
   }

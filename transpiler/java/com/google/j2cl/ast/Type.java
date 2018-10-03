@@ -111,12 +111,20 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     this.nativeTypeDescriptor = nativeTypeDescriptor;
   }
 
+  public void setTypeDeclaration(TypeDeclaration typeDeclaration) {
+    this.typeDeclaration = typeDeclaration;
+  }
+
   public boolean isJsOverlayImplementation() {
     return getNativeTypeDescriptor() != null;
   }
 
   public List<Member> getMembers() {
     return members;
+  }
+
+  public void setMembers(List<Member> members) {
+    this.members = members;
   }
 
   public ImmutableList<Field> getFields() {
