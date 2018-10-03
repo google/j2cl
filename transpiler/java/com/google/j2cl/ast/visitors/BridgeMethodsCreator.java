@@ -142,12 +142,12 @@ public class BridgeMethodsCreator extends NormalizationPass {
         new LinkedHashMap<>();
 
     for (MethodDescriptor potentialBridgeMethodDescriptor :
-        getPotentialBridgeMethodDescriptors(typeDeclaration.toUnparamterizedTypeDescriptor())) {
+        getPotentialBridgeMethodDescriptors(typeDeclaration.toUnparameterizedTypeDescriptor())) {
       // Attempt to target a concrete method on the prototype chain.
       MethodDescriptor targetMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.toUnparamterizedTypeDescriptor(),
+              typeDeclaration.toUnparameterizedTypeDescriptor(),
               false /* findDefaultMethods */);
       if (targetMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -171,7 +171,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       MethodDescriptor targetDefaultMethodDescriptor =
           findForwardingMethodDescriptor(
               potentialBridgeMethodDescriptor,
-              typeDeclaration.toUnparamterizedTypeDescriptor(),
+              typeDeclaration.toUnparameterizedTypeDescriptor(),
               true /* findDefaultMethods */);
       if (targetDefaultMethodDescriptor != null) {
         targetMethodDescriptorByBridgeMethodDescriptor.put(
@@ -359,7 +359,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     checkArgument(!typeDeclaration.isInterface());
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .setEnclosingTypeDescriptor(typeDeclaration.toUnparamterizedTypeDescriptor())
+        .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setDefaultMethod(false)
         .build();

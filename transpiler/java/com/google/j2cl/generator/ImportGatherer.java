@@ -285,9 +285,8 @@ class ImportGatherer extends AbstractVisitor {
     // Overlay classes may be referred directly from other compilation units that are compiled
     // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
     // original class should have a dependency on the overlay class.
-    TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
-    if (typeDeclaration.hasOverlayImplementationType()) {
-      collectForJsDoc(typeDeclaration.getOverlayImplementationTypeDescriptor());
+    if (declaredTypeDescriptor.hasOverlayImplementationType()) {
+      collectForJsDoc(declaredTypeDescriptor.getOverlayImplementationTypeDescriptor());
     }
 
     if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
@@ -462,7 +461,7 @@ class ImportGatherer extends AbstractVisitor {
 
   /** Returns the class components normalizing the names of the internal runtime classes */
   private ImmutableList<String> getClassComponents(TypeDeclaration typeDeclaration) {
-    if (BootstrapType.typeDescriptors.contains(typeDeclaration.toUnparamterizedTypeDescriptor())) {
+    if (BootstrapType.typeDescriptors.contains(typeDeclaration.toUnparameterizedTypeDescriptor())) {
       // Aliases for internal runtime classes are prepended '$' to their name to make them more
       // recognizable in the JavaScript source.
       return ImmutableList.of("$" + Iterables.getOnlyElement(typeDeclaration.getClassComponents()));

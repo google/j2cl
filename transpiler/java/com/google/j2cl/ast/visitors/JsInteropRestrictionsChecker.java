@@ -455,7 +455,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private String getJsEnumTypeText(TypeDeclaration typeDeclaration) {
-    return getJsEnumTypeText(typeDeclaration.toUnparamterizedTypeDescriptor());
+    return getJsEnumTypeText(typeDeclaration.toUnparameterizedTypeDescriptor());
   }
 
   private String getJsEnumTypeText(TypeDescriptor typeDescriptor) {

@@ -28,7 +28,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -74,7 +73,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  public abstract ImmutableList<String> getClassComponents();
+  public ImmutableList<String> getClassComponents() {
+    return getTypeDeclaration().getClassComponents();
+  }
 
   @Nullable
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
@@ -128,8 +129,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
 
-  abstract Kind getKind();
-
   @Nullable
   abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
       getDeclaredMethodDescriptorsFactory();
@@ -148,9 +147,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       getInterfaceTypeDescriptorsFactory();
 
   @Nullable
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
   public boolean hasTypeArguments() {
@@ -159,17 +155,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean isClass() {
-    return getKind() == Kind.CLASS;
+    return getTypeDeclaration().isClass();
   }
 
   @Override
   public boolean isInterface() {
-    return getKind() == Kind.INTERFACE;
+    return getTypeDeclaration().isInterface();
   }
 
   @Override
   public boolean isEnum() {
-    return getKind() == Kind.ENUM;
+    return getTypeDeclaration().isEnum();
   }
 
   /**
@@ -202,13 +198,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
 
     return typeDescriptors;
-  }
-
-  @Override
-  @Memoized
-  @Nullable
-  public DeclaredTypeDescriptor toRawTypeDescriptor() {
-    return getRawTypeDescriptorFactory().get(this);
   }
 
   @Nullable
@@ -245,25 +234,28 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
-    DeclaredTypeDescriptor rawTypeDescriptor = toRawTypeDescriptor();
-
-    if (rawTypeDescriptor.isNative() || rawTypeDescriptor.isJsEnum()) {
-      return TypeDescriptors.createOverlayImplementationTypeDeclaration(rawTypeDescriptor);
-    }
-
-    if (rawTypeDescriptor.isJsFunctionInterface()) {
-      return BootstrapType.JAVA_SCRIPT_FUNCTION.getDeclaration();
-    }
-
-    return rawTypeDescriptor.getTypeDeclaration();
+    return getTypeDeclaration().getMetadataTypeDeclaration();
   }
 
-  @Memoized
+  public DeclaredTypeDescriptor getOverlayImplementationTypeDescriptor() {
+    return getTypeDeclaration()
+        .getOverlayImplementationTypeDeclaration()
+        .toUnparameterizedTypeDescriptor();
+  }
+
+  public boolean hasOverlayImplementationType() {
+    return getTypeDeclaration().hasOverlayImplementationType();
+  }
+
+  @Override
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    return getTypeDeclaration().toRawTypeDescriptor();
+  }
+
   @Override
   public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
-    return getTypeDeclaration().toUnparamterizedTypeDescriptor();
+    return getTypeDeclaration().toUnparameterizedTypeDescriptor();
   }
 
   @Override
@@ -273,7 +265,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         && isSubtypeOf(thatRawTypeDescriptor);
   }
 
-  @Memoized
   public boolean isOrExtendsNativeClass() {
     return getTypeDeclaration().isOrExtendsNativeClass();
   }
@@ -557,7 +548,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
       Map<TypeVariable, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
           superTypeOrInterfaceDeclaration
-              .toUnparamterizedTypeDescriptor()
+              .toUnparameterizedTypeDescriptor()
               .getSpecializedTypeArgumentByTypeParameters();
 
       for (Entry<TypeVariable, TypeDescriptor> entry :
@@ -636,17 +627,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setClassComponents(List<String> classComponents);
-
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);
-
-    public abstract Builder setKind(Kind kind);
 
     public abstract Builder setNullable(boolean isNullable);
 
     public abstract Builder setTypeArgumentDescriptors(
-        Iterable<TypeDescriptor> typeArgumentDescriptors);
+        Iterable<? extends TypeDescriptor> typeArgumentDescriptors);
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);
@@ -664,14 +651,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
       return setJsFunctionMethodDescriptorFactory(
           typeDescriptor -> jsFunctionMethodDescriptorFactory.get());
-    }
-
-    public abstract Builder setRawTypeDescriptorFactory(
-        DescriptorFactory<DeclaredTypeDescriptor> rawTypeDescriptorFactory);
-
-    public Builder setRawTypeDescriptorFactory(
-        Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory) {
-      return setRawTypeDescriptorFactory(typeDescriptor -> rawTypeDescriptorFactory.get());
     }
 
     public abstract Builder setSingleAbstractMethodDescriptorFactory(

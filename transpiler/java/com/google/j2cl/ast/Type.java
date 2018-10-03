@@ -54,7 +54,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * declaration.
    */
   public DeclaredTypeDescriptor getTypeDescriptor() {
-    return getDeclaration().toUnparamterizedTypeDescriptor();
+    return getDeclaration().toUnparameterizedTypeDescriptor();
   }
 
   public Kind getKind() {

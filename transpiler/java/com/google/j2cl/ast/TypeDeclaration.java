@@ -31,6 +31,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
@@ -361,9 +363,26 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Memoized
-  public DeclaredTypeDescriptor getOverlayImplementationTypeDescriptor() {
-    return TypeDescriptors.createOverlayImplementationTypeDescriptor(
-        toUnparamterizedTypeDescriptor());
+  public TypeDeclaration getMetadataTypeDeclaration() {
+    DeclaredTypeDescriptor rawTypeDescriptor = toRawTypeDescriptor();
+
+    if (rawTypeDescriptor.isNative() || rawTypeDescriptor.isJsEnum()) {
+      return getOverlayImplementationTypeDeclaration()
+          .toUnparameterizedTypeDescriptor()
+          .getTypeDeclaration();
+    }
+
+    if (rawTypeDescriptor.isJsFunctionInterface()) {
+      return BootstrapType.JAVA_SCRIPT_FUNCTION.getDeclaration();
+    }
+
+    return rawTypeDescriptor.getTypeDeclaration();
+  }
+
+  @Memoized
+  public TypeDeclaration getOverlayImplementationTypeDeclaration() {
+    return TypeDescriptors.createOverlayImplementationTypeDeclaration(
+        toUnparameterizedTypeDescriptor());
   }
 
   @Memoized
@@ -430,8 +449,46 @@ public abstract class TypeDeclaration extends Node
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Memoized
-  public @Nullable DeclaredTypeDescriptor toRawTypeDescriptor() {
-    return getRawTypeDescriptorFactory().get(this);
+  public DeclaredTypeDescriptor toRawTypeDescriptor() {
+    return DeclaredTypeDescriptor.newBuilder()
+        .setTypeDeclaration(this)
+        .setEnclosingTypeDescriptor(
+            applyOrNull(getEnclosingTypeDeclaration(), t -> t.toRawTypeDescriptor()))
+        .setSuperTypeDescriptorFactory(
+            () -> applyOrNull(getSuperTypeDescriptor(), t -> t.toRawTypeDescriptor()))
+        .setInterfaceTypeDescriptorsFactory(
+            () ->
+                getInterfaceTypeDescriptors().stream()
+                    .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
+                    .collect(ImmutableList.toImmutableList()))
+        .setTypeArgumentDescriptors(ImmutableList.of())
+        .setDeclaredFieldDescriptorsFactory(
+            () ->
+                getDeclaredFieldDescriptors().stream()
+                    .map(FieldDescriptor::toRawMemberDescriptor)
+                    .collect(toImmutableList()))
+        .setDeclaredMethodDescriptorsFactory(
+            () -> {
+              ImmutableMap.Builder<String, MethodDescriptor>
+                  declaredMethodDescriptorsBySignatureBuilder = ImmutableMap.builder();
+              for (MethodDescriptor methodDescriptor : getDeclaredMethodDescriptors()) {
+                declaredMethodDescriptorsBySignatureBuilder.put(
+                    methodDescriptor.getDeclarationDescriptor().getMethodSignature(),
+                    methodDescriptor.toRawMemberDescriptor());
+              }
+              return declaredMethodDescriptorsBySignatureBuilder.build();
+            })
+        .setJsFunctionMethodDescriptorFactory(
+            () ->
+                applyOrNull(
+                    toUnparameterizedTypeDescriptor().getJsFunctionMethodDescriptor(),
+                    t -> t.toRawMemberDescriptor()))
+        .setSingleAbstractMethodDescriptorFactory(
+            () ->
+                applyOrNull(
+                    toUnparameterizedTypeDescriptor().getSingleAbstractMethodDescriptor(),
+                    t -> t.toRawMemberDescriptor()))
+        .build();
   }
 
   /**
@@ -461,7 +518,7 @@ public abstract class TypeDeclaration extends Node
    * the matching TypeDescriptor.
    */
   @Memoized
-  public DeclaredTypeDescriptor toUnparamterizedTypeDescriptor() {
+  public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
     return getUnparameterizedTypeDescriptorFactory().get(this);
   }
 
@@ -716,9 +773,6 @@ public abstract class TypeDeclaration extends Node
   abstract DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>>
       getInterfaceTypeDescriptorsFactory();
 
-  @Nullable
-  abstract DescriptorFactory<DeclaredTypeDescriptor> getRawTypeDescriptorFactory();
-
   abstract DescriptorFactory<DeclaredTypeDescriptor> getUnparameterizedTypeDescriptorFactory();
 
   @Nullable
@@ -734,6 +788,22 @@ public abstract class TypeDeclaration extends Node
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
+    DescriptorFactory<DeclaredTypeDescriptor> unparameterizedFactory =
+        // TODO(b/117105240): Remove once the type declaration is properly decoupled from the
+        // type descriptor. For now we need to set all the fields that might be parameterized to
+        // provide a reasonable default for the unparameterized type descriptor factory.
+        self ->
+            DeclaredTypeDescriptor.newBuilder()
+                .setTypeDeclaration(self)
+                .setEnclosingTypeDescriptor(
+                    applyOrNull(
+                        self.getEnclosingTypeDeclaration(),
+                        t -> t.toUnparameterizedTypeDescriptor()))
+                .setSuperTypeDescriptorFactory(() -> self.getSuperTypeDescriptor())
+                .setInterfaceTypeDescriptorsFactory(() -> self.getInterfaceTypeDescriptors())
+                .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
+                .build();
+
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
@@ -752,7 +822,12 @@ public abstract class TypeDeclaration extends Node
         .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
+        .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
         .setSuperTypeDescriptorFactory(() -> null);
+  }
+
+  private static <T, U> U applyOrNull(T descriptor, Function<T, U> function) {
+    return descriptor == null ? null : function.apply(descriptor);
   }
 
   /** Builder for a TypeDeclaration. */
@@ -806,14 +881,6 @@ public abstract class TypeDeclaration extends Node
         Supplier<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory) {
       return setInterfaceTypeDescriptorsFactory(
           typeDescriptor -> interfaceTypeDescriptorsFactory.get());
-    }
-
-    public abstract Builder setRawTypeDescriptorFactory(
-        DescriptorFactory<DeclaredTypeDescriptor> rawTypeDescriptorFactory);
-
-    public Builder setRawTypeDescriptorFactory(
-        Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory) {
-      return setRawTypeDescriptorFactory(typeDescriptor -> rawTypeDescriptorFactory.get());
     }
 
     public abstract Builder setSuperTypeDescriptorFactory(

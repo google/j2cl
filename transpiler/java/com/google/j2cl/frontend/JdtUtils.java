@@ -1009,9 +1009,6 @@ class JdtUtils {
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isPrimitive());
 
-    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
-        getRawTypeDescriptorSupplier(typeBinding);
-
     Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
         () -> {
           ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
@@ -1040,30 +1037,19 @@ class JdtUtils {
                 .map(JdtUtils::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    TypeDeclaration typeDeclaration = null;
-    ITypeBinding declarationTypeBinding = typeBinding.getTypeDeclaration();
-    if (declarationTypeBinding != null) {
-      checkArgument(
-          !declarationTypeBinding.isArray() && !declarationTypeBinding.isParameterizedType());
-      typeDeclaration = JdtUtils.createDeclarationForType(declarationTypeBinding);
-    }
-
     // Compute these even later
     DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
-            .setClassComponents(getClassComponents(typeBinding))
-            .setTypeDeclaration(typeDeclaration)
+            .setTypeDeclaration(JdtUtils.createDeclarationForType(typeBinding.getTypeDeclaration()))
             .setEnclosingTypeDescriptor(
                 createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
                         typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
-            .setKind(getKindFromTypeBinding(typeBinding))
             .setSingleAbstractMethodDescriptorFactory(
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
-            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSuperTypeDescriptorFactory(
                 () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
@@ -1072,59 +1058,6 @@ class JdtUtils {
             .build();
     cachedDeclaredTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
     return typeDescriptor;
-  }
-
-  private static Supplier<DeclaredTypeDescriptor> getRawTypeDescriptorSupplier(
-      ITypeBinding typeBinding) {
-    // Synthesizing a raw type descriptor requires making sure that all types this class refers to,
-    // e.g as supertypes, as parameters and results types in methods and as field types are also raw
-    // types, and that no method declares type variables.
-    return () -> {
-      DeclaredTypeDescriptor rawTypeDescriptor =
-          createDeclaredTypeDescriptor(typeBinding.getErasure());
-      return DeclaredTypeDescriptor.Builder.from(rawTypeDescriptor)
-          .setEnclosingTypeDescriptor(
-              getRawDescriptorOrNull(rawTypeDescriptor.getEnclosingTypeDescriptor()))
-          .setTypeArgumentDescriptors(ImmutableList.of())
-          .setDeclaredFieldDescriptorsFactory(
-              () ->
-                  rawTypeDescriptor.getDeclaredFieldDescriptors().stream()
-                      .map(FieldDescriptor::toRawMemberDescriptor)
-                      .collect(toImmutableList()))
-          .setDeclaredMethodDescriptorsFactory(
-              () -> {
-                ImmutableMap.Builder<String, MethodDescriptor>
-                    declaredMethodDescriptorsBySignatureBuilder = ImmutableMap.builder();
-                for (MethodDescriptor methodDescriptor :
-                    rawTypeDescriptor.getDeclaredMethodDescriptors()) {
-                  declaredMethodDescriptorsBySignatureBuilder.put(
-                      methodDescriptor.getDeclarationDescriptor().getMethodSignature(),
-                      methodDescriptor.toRawMemberDescriptor());
-                }
-                return declaredMethodDescriptorsBySignatureBuilder.build();
-              })
-          .setJsFunctionMethodDescriptorFactory(
-              () -> getRawDescriptorOrNull(rawTypeDescriptor.getJsFunctionMethodDescriptor()))
-          .setSuperTypeDescriptorFactory(
-              () -> getRawDescriptorOrNull(rawTypeDescriptor.getSuperTypeDescriptor()))
-          .setInterfaceTypeDescriptorsFactory(
-              () ->
-                  rawTypeDescriptor.getInterfaceTypeDescriptors().stream()
-                      .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
-                      .collect(toImmutableList()))
-          .setSingleAbstractMethodDescriptorFactory(
-              () -> getRawDescriptorOrNull(rawTypeDescriptor.getSingleAbstractMethodDescriptor()))
-          .build();
-    };
-  }
-
-  private static MethodDescriptor getRawDescriptorOrNull(MethodDescriptor methodDescriptor) {
-    return methodDescriptor == null ? null : methodDescriptor.toRawMemberDescriptor();
-  }
-
-  private static DeclaredTypeDescriptor getRawDescriptorOrNull(
-      DeclaredTypeDescriptor typeDescriptor) {
-    return typeDescriptor == null ? null : typeDescriptor.toRawTypeDescriptor();
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
@@ -1202,7 +1135,7 @@ class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
-
+    
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isParameterizedType());
     checkArgument(!typeBinding.isTypeVariable());
@@ -1219,9 +1152,6 @@ class JdtUtils {
       // dependency of this one.
       PackageInfoCache.get().markAsSource(getBinaryNameFromTypeBinding(topLevelTypeBinding));
     }
-
-    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
-        getRawTypeDescriptorSupplier(typeBinding);
 
     // Compute these first since they're reused in other calculations.
     String packageName =
@@ -1278,7 +1208,6 @@ class JdtUtils {
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSuperTypeDescriptorFactory(
             () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeParameterDescriptors((Iterable) getTypeArgumentTypeDescriptors(typeBinding))

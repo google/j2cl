@@ -32,7 +32,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptors;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,14 +63,13 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
 
   private static Type createOverlayImplementationType(Type type) {
     DeclaredTypeDescriptor overlayImplTypeDescriptor =
-        TypeDescriptors.createOverlayImplementationTypeDescriptor(
-            type.getDeclaration().toUnparamterizedTypeDescriptor());
+        type.getTypeDescriptor().getOverlayImplementationTypeDescriptor();
     Type overlayClass =
         new Type(
             type.getSourcePosition(),
             type.getVisibility(),
             overlayImplTypeDescriptor.getTypeDeclaration());
-    overlayClass.setNativeTypeDescriptor(type.getDeclaration().toUnparamterizedTypeDescriptor());
+    overlayClass.setNativeTypeDescriptor(type.getDeclaration().toUnparameterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
       if (!member.getDescriptor().isJsOverlay()) {
@@ -120,8 +118,9 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
             if (methodDescriptor.isJsOverlay()) {
               return redirectCall(
                   methodCall,
-                  TypeDescriptors.createOverlayImplementationTypeDescriptor(
-                      methodDescriptor.getEnclosingTypeDescriptor()));
+                  methodDescriptor
+                      .getEnclosingTypeDescriptor()
+                      .getOverlayImplementationTypeDescriptor());
             }
             return methodCall;
           }
@@ -132,8 +131,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
             if (target.isJsOverlay()) {
               checkArgument(target.isStatic());
               DeclaredTypeDescriptor overlayTypeDescriptor =
-                  TypeDescriptors.createOverlayImplementationTypeDescriptor(
-                      target.getEnclosingTypeDescriptor());
+                  target.getEnclosingTypeDescriptor().getOverlayImplementationTypeDescriptor();
               return FieldAccess.Builder.from(
                       FieldDescriptor.Builder.from(target)
                           .setEnclosingTypeDescriptor(overlayTypeDescriptor)

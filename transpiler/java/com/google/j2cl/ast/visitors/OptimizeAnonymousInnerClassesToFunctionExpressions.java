@@ -186,7 +186,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                 return capturedVariable.getReference();
               } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
                 return new ThisReference(
-                    type.getEnclosingTypeDeclaration().toUnparamterizedTypeDescriptor());
+                    type.getEnclosingTypeDeclaration().toUnparameterizedTypeDescriptor());
               }
             }
             return fieldAccess;

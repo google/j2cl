@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
@@ -263,7 +262,7 @@ public class TypeDescriptors {
   }
 
   /** Returns the TypeDeclaration for the Overlay implementation type. */
-  public static TypeDeclaration createOverlayImplementationTypeDeclaration(
+  static TypeDeclaration createOverlayImplementationTypeDeclaration(
       DeclaredTypeDescriptor typeDescriptor) {
 
     DeclaredTypeDescriptor unparameterizedTypeDescriptor =
@@ -276,38 +275,12 @@ public class TypeDescriptors {
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())
         .setClassComponents(classComponents)
-        .setRawTypeDescriptorFactory(
-            () ->
-                createOverlayImplementationTypeDescriptor(
-                    unparameterizedTypeDescriptor.toRawTypeDescriptor()))
-        .setUnparameterizedTypeDescriptorFactory(
-            () -> createOverlayImplementationTypeDescriptor(unparameterizedTypeDescriptor))
         .setVisibility(Visibility.PUBLIC)
         .setKind(unparameterizedTypeDescriptor.getTypeDeclaration().getKind())
         .build();
   }
 
-  /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */
-  public static DeclaredTypeDescriptor createOverlayImplementationTypeDescriptor(
-      DeclaredTypeDescriptor typeDescriptor) {
-    checkArgument(
-        typeDescriptor.isNative()
-            || typeDescriptor.isJsEnum()
-            || typeDescriptor.isJsFunctionInterface());
-
-    TypeDeclaration overlayImplementationTypeDeclaration =
-        createOverlayImplementationTypeDeclaration(typeDescriptor);
-
-    return DeclaredTypeDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setTypeDeclaration(overlayImplementationTypeDeclaration)
-        .setClassComponents(overlayImplementationTypeDeclaration.getClassComponents())
-        .setRawTypeDescriptorFactory(td -> td.getTypeDeclaration().toRawTypeDescriptor())
-        .setKind(overlayImplementationTypeDeclaration.getKind())
-        .build();
-  }
-
-  public static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(
+  static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(
       Map<TypeVariable, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
     return replacingTypeDescriptorByTypeVariable.isEmpty()
         ? Function.identity()
@@ -402,8 +375,6 @@ public class TypeDescriptors {
       final String className,
       final List<TypeDescriptor> typeArgumentDescriptors,
       final Kind kind) {
-    Supplier<DeclaredTypeDescriptor> rawTypeDescriptorFactory =
-        () -> createSyntheticTypeDescriptor(jsNamespace, className, ImmutableList.of(), kind);
 
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
@@ -413,7 +384,6 @@ public class TypeDescriptors {
             .setNative(!isBootstrapNamespace(jsNamespace))
             .setCustomizedJsNamespace(jsNamespace)
             .setPackageName(getSyntheticPackageName(jsNamespace))
-            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setUnparameterizedTypeDescriptorFactory(
                 () ->
                     createSyntheticTypeDescriptor(jsNamespace, className, ImmutableList.of(), kind))
@@ -426,11 +396,8 @@ public class TypeDescriptors {
             .build();
 
     return DeclaredTypeDescriptor.newBuilder()
-        .setClassComponents(ImmutableList.of(className))
-        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setTypeDeclaration(typeDeclaration)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
-        .setKind(kind)
         .build();
   }
 

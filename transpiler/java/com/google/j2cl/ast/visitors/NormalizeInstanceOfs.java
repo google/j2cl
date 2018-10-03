@@ -79,7 +79,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             .setEnclosingTypeDescriptor(
                 javaScriptConstructorReference
                     .getReferencedTypeDeclaration()
-                    .toUnparamterizedTypeDescriptor())
+                    .toUnparameterizedTypeDescriptor())
             .setName("$isInstance")
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
