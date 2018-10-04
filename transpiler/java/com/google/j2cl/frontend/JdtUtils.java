@@ -30,6 +30,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
+import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Kind;
@@ -1037,10 +1038,13 @@ class JdtUtils {
                 .map(JdtUtils::createFieldDescriptor)
                 .collect(toImmutableList());
 
+    TypeDeclaration typeDeclaration =
+        JdtUtils.createDeclarationForType(typeBinding.getTypeDeclaration());
+
     // Compute these even later
     DeclaredTypeDescriptor typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
-            .setTypeDeclaration(JdtUtils.createDeclarationForType(typeBinding.getTypeDeclaration()))
+            .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
             .setInterfaceTypeDescriptorsFactory(
@@ -1051,7 +1055,10 @@ class JdtUtils {
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setSuperTypeDescriptorFactory(
-                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
+                () ->
+                    (typeDeclaration.isJsEnum()
+                        ? TypeDescriptors.get().javaLangObject
+                        : createDeclaredTypeDescriptor(typeBinding.getSuperclass())))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
@@ -1187,7 +1194,8 @@ class JdtUtils {
                 .map(JdtUtils::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    // Compute these even later
+    JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(typeBinding);
+
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
@@ -1201,7 +1209,7 @@ class JdtUtils {
         .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
-        .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
+        .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeBinding))
         .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))
@@ -1209,7 +1217,10 @@ class JdtUtils {
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
+            () ->
+                (jsEnumInfo != null
+                    ? TypeDescriptors.get().javaLangObject
+                    : createDeclaredTypeDescriptor(typeBinding.getSuperclass())))
         .setTypeParameterDescriptors((Iterable) getTypeArgumentTypeDescriptors(typeBinding))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)

@@ -1662,7 +1662,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum member 'void JsEnumWithInvalidMembers.n()' cannot be native.",
             "JsEnum member 'void JsEnumWithInvalidMembers.o()' cannot be native.",
             "JsEnum 'JsEnumWithInvalidMembers' cannot override method "
-                + "'String Enum.toString()'.",
+                + "'String Object.toString()'.",
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
             "JsEnum 'MyJsEnum' cannot have an instance initializer.");
   }
