@@ -18,33 +18,37 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class ArraysTest {
-
-  private static class TestObject {}
-
-  private Object[] arrayField = new TestObject[3];
+public class BooleanOptimizationTest {
 
   @JsMethod
-  public void modifyArray() {
-    arrayField[0] = "ABC";
+  public boolean simpleComp() {
+    return true == true;
   }
+
+  @JsProperty
+  private native Object getSimpleComp();
 
   @Test
-  public void arrayStoreChecksAreRemoved() {
-    assertFunctionMatches(((MethodsAsProperties) this).getModifyArray(), "this.<obf>[0]='ABC';");
+  public void simpleCompOptimizes() {
+    assertFunctionMatches(getSimpleComp(), "return !0;");
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface MethodsAsProperties {
-    @JsProperty
-    Object getModifyArray();
+  @JsMethod
+  public boolean boxedComp() {
+    return Boolean.TRUE == Boolean.TRUE;
+  }
+
+  @JsProperty
+  private native Object getBoxedComp();
+
+  @Test
+  public void boxedCompOptimizes() {
+    assertFunctionMatches(getBoxedComp(), "return !0;");
   }
 }

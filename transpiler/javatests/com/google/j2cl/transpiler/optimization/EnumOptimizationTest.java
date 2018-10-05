@@ -18,9 +18,7 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -44,14 +42,11 @@ public class EnumOptimizationTest {
     Foo v4 = Foo.UNREFERENCED_SUBCLASS_VALUE_2;
   }
 
-  @Test
-  public void unreferncedEnumValuesAreRemoved() throws Exception {
-    assertFunctionMatches(((MethodsAsProperties) this).getUnusedEnumValues(), "");
-  }
+  @JsProperty
+  private native Object getUnusedEnumValues();
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface MethodsAsProperties {
-    @JsProperty
-    Object getUnusedEnumValues();
+  @Test
+  public void unreferencedEnumValuesAreRemoved() {
+    assertFunctionMatches(getUnusedEnumValues(), "");
   }
 }

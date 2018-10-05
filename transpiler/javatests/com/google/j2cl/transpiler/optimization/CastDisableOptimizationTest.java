@@ -26,9 +26,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-/**
- * Tests cast checks are optimized out when cast checking is disabled.
- */
+/** Tests cast checks are optimized out when cast checking is disabled. */
 @RunWith(JUnit4.class)
 public class CastDisableOptimizationTest {
 
@@ -37,19 +35,19 @@ public class CastDisableOptimizationTest {
   private interface TestInterface {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeObject {}
+  private static class NativeObject {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
-  static class NativeFunction {}
+  private static class NativeFunction {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-  static class NativeArray {}
+  private static class NativeArray {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Number")
-  static class NativeNumber {}
+  private static class NativeNumber {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
-  static class NativeString {}
+  private static class NativeString {}
 
   private static Object field = createField();
 
@@ -112,14 +110,11 @@ public class CastDisableOptimizationTest {
     castNativeObject();
   }
 
+  @JsProperty
+  private native Object getFailingCasts();
+
   @Test
   public void castsAreRemoved() throws Exception {
-    assertFunctionMatches(((MethodsAsProperties) this).getFailingCasts(), "");
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface MethodsAsProperties {
-    @JsProperty
-    Object getFailingCasts();
+    assertFunctionMatches(getFailingCasts(), "");
   }
 }

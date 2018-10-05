@@ -18,30 +18,34 @@ package com.google.j2cl.transpiler.optimization;
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class StringsTest {
+public class StringOptimizationTest {
 
   @JsMethod
   public boolean stringEqualsString() {
     return "".equals("");
   }
 
+  @JsProperty
+  private native Object getStringEqualsString();
+
   @JsMethod
   public boolean stringNotEqualsString() {
     return "".equals("asd");
   }
 
+  @JsProperty
+  private native Object getStringNotEqualsString();
+
   @Test
   public void simpleEqualsOptimizes() {
-    assertFunctionMatches(((MethodsAsProperties) this).getStringEqualsString(), "return !0;");
-    assertFunctionMatches(((MethodsAsProperties) this).getStringNotEqualsString(), "return !1;");
+    assertFunctionMatches(getStringEqualsString(), "return !0;");
+    assertFunctionMatches(getStringNotEqualsString(), "return !1;");
   }
 
   @JsMethod
@@ -49,9 +53,12 @@ public class StringsTest {
     return "" == "";
   }
 
+  @JsProperty
+  private native Object getStringSameString();
+
   @Test
   public void simpleSameOptimizes() {
-    assertFunctionMatches(((MethodsAsProperties) this).getStringSameString(), "return !0;");
+    assertFunctionMatches(getStringSameString(), "return !0;");
   }
 
   private static boolean staticField = "asd".equals("asd");
@@ -61,24 +68,11 @@ public class StringsTest {
     return staticField;
   }
 
+  @JsProperty
+  private native Object getStringEqualsStringOnStatic();
+
   @Test
   public void staticFieldEqualsOptimizes() {
-    assertFunctionMatches(
-        ((MethodsAsProperties) this).getStringEqualsStringOnStatic(), "return !0;");
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface MethodsAsProperties {
-    @JsProperty
-    Object getStringEqualsString();
-
-    @JsProperty
-    Object getStringNotEqualsString();
-
-    @JsProperty
-    Object getStringSameString();
-
-    @JsProperty
-    Object getStringEqualsStringOnStatic();
+    assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0;");
   }
 }

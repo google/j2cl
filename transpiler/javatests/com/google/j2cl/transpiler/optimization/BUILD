@@ -7,26 +7,26 @@ licenses(["notice"])
 load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
 
 j2cl_optimization_test(
-    name = "BooleansTest",
+    name = "BooleanOptimizationTest",
     javacopts = [
         "-XepDisableAllChecks",
     ],
 )
 
 j2cl_optimization_test(
-    name = "StringsTest",
+    name = "StringOptimizationTest",
     javacopts = [
         "-XepDisableAllChecks",
     ],
 )
 
 j2cl_optimization_test(
-    name = "ArraysTest",
+    name = "ArrayOptimizationTest",
     defs = ["--define=jre.checks.checkLevel=MINIMAL"],
 )
 
 j2cl_optimization_test(
-    name = "ArrayListsTest",
+    name = "ArrayListOptimizationTest",
     defs = ["--define=jre.checks.checkLevel=MINIMAL"],
 )
 
@@ -37,5 +37,4 @@ j2cl_optimization_test(
 
 j2cl_optimization_test(
     name = "EnumOptimizationTest",
-    defs = ["--define=jre.checks.checkLevel=MINIMAL"],
 )
