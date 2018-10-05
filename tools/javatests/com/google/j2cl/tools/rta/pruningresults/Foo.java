@@ -24,10 +24,20 @@ import jsinterop.annotations.JsMethod;
 public class Foo {
   public static String unusedStaticField;
 
+  {
+    System.err.println("This is unused");
+  }
+
+  public Foo() {
+    System.err.println("This is unused");
+  }
+
   @JsMethod
   public static void entryPoint() {
     new Bar().bar();
   }
 
-  public void unusedMethod() {}
+  public void unusedMethod() {
+    System.err.println("This is unused");
+  }
 }
