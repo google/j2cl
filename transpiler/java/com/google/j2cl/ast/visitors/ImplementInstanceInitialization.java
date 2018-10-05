@@ -43,21 +43,19 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
   /** Implements the instance initialization method. */
   private void implementInitMethod(Type type) {
-    if (!type.isJsOverlayImplementation()) {
-      checkArgument(!type.isInterface());
-      List<Statement> statements =
-          type.getInstanceInitializerBlocks()
-              .stream()
-              .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
-              .collect(Collectors.toList());
+    checkArgument(!type.isInterface());
+    List<Statement> statements =
+        type.getInstanceInitializerBlocks().stream()
+            .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
+            .collect(Collectors.toList());
 
-      type.addMethod(
-          Method.newBuilder()
-              .setMethodDescriptor(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()))
-              .addStatements(statements)
-              .setSourcePosition(type.getSourcePosition())
-              .build());
-    }
+    type.addMethod(
+        Method.newBuilder()
+            .setMethodDescriptor(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()))
+            .addStatements(statements)
+            .setSourcePosition(type.getSourcePosition())
+            .build());
+
     type.getMembers().removeIf(member -> member.isInitializerBlock() && !member.isStatic());
   }
 
