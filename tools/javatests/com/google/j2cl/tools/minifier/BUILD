@@ -6,9 +6,21 @@ licenses(["notice"])
 
 java_test(
     name = "J2clMinifierTest",
-    srcs = glob(["*.java"]),
+    srcs = ["J2clMinifierTest.java"],
     deps = [
         "//third_party/java/junit",
         "//tools/java/com/google/j2cl/tools/minifier",
+    ],
+)
+
+java_test(
+    name = "CodePruningTest",
+    srcs = ["CodePruningTest.java"],
+    deps = [
+        "//third_party/java/junit",
+        "//third_party:guava",
+        "//third_party:truth",
+        "//tools/java/com/google/j2cl/tools/minifier",
+        "//tools/java/com/google/j2cl/tools/rta:code_removal_info_java_proto",
     ],
 )

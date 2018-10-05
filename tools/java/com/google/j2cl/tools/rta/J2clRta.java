@@ -23,6 +23,7 @@ import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import com.google.protobuf.util.JsonFormat;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -50,10 +51,10 @@ public class J2clRta {
   String unusedTypesOutputFilePath = null;
 
   @Option(
-      name = "--unusedFilesOutput",
-      usage = "Path of output file containing the list of unused files",
+      name = "--removalCodeInfoOutput",
+      usage = "Path of output file containing the list files and lines that can be removed.",
       required = true)
-  String unusedFilesOutputFilePath = null;
+  String removalCodeInfoOutputFilePath = null;
 
   @Option(
       name = "--unusedMembersOutput",
@@ -72,9 +73,9 @@ public class J2clRta {
 
     RtaResult rtaResult = new RapidTypeAnalyser(libraryInfo).analyse();
 
-    writeFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
-    writeFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
-    writeFile(unusedFilesOutputFilePath, rtaResult.getUnusedFiles());
+    writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
+    writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
+    writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
   }
 
   private LibraryInfo mergeCallGraphFiles() {
@@ -119,10 +120,18 @@ public class J2clRta {
     }
   }
 
-  private void writeFile(String filePath, List<String> lines) {
+  private void writeToFile(String filePath, List<String> lines) {
     CharSink outputSink = Files.asCharSink(new File(filePath), StandardCharsets.UTF_8);
     try {
       outputSink.writeLines(lines);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private void writeToFile(String filePath, CodeRemovalInfo results) {
+    try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+      results.writeTo(outputStream);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

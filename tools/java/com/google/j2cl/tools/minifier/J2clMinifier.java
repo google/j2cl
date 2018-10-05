@@ -13,14 +13,24 @@
  */
 package com.google.j2cl.tools.minifier;
 
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.Iterables.getLast;
+
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multiset;
+import com.google.j2cl.tools.rta.CodeRemovalInfo;
+import com.google.j2cl.tools.rta.LineRange;
+import com.google.j2cl.tools.rta.UnusedLines;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -62,6 +72,9 @@ public class J2clMinifier {
    * identifier.
    */
   private static final String MINIFICATION_SEPARATOR = "\uFF3F";
+
+  private static final String ZIP_FILE_SEPARATOR = "!/";
+  private static final int ZIP_FILE_SEPARATOR_OFFSET = ZIP_FILE_SEPARATOR.length();
 
   private static final int[][] nextState;
   private static final int S_BLOCK_COMMENT;
@@ -280,11 +293,40 @@ public class J2clMinifier {
     return identifierBuffer;
   }
 
+  private static String extractFileKey(String fullPath) {
+    if (fullPath == null) {
+      return null;
+    }
+
+    // Because the mapping is done during transpilation and j2cl doesn't know the final path of
+    // the zip file, the key used is the path of the file inside the zip file.
+    String key = fullPath;
+    int keyStartIndex = fullPath.indexOf(ZIP_FILE_SEPARATOR);
+    if (keyStartIndex > 0) {
+      key = key.substring(keyStartIndex + ZIP_FILE_SEPARATOR_OFFSET);
+    }
+
+    return key;
+  }
+
   /**
    * These fields contain the persistent state that allows for name collision dodging and consistent
    * renaming within and across multiple files.
    */
-  private final Multiset<String> countsByIdentifier = HashMultiset.<String>create();
+  private final Multiset<String> countsByIdentifier = HashMultiset.create();
+
+  /** Set of file paths that are not used by the application. */
+  private ImmutableSet<String> unusedFiles;
+
+  /**
+   * Gives per file key the array of line indexes that can be stripped. If the index of the line
+   * being scanned is out of bounds of the array, it means the line is used. Otherwise the boolean
+   * stored at the index in the array indicates if the line is used or not.
+   */
+  // We choose to use a boolean[] instead of the usual recommended Map<> or Set<> data structure for
+  // performance purpose. Please do not change that instead you measure your change doesn't impact
+  // the performance.
+  private Map<String, boolean[]> unusedLinesPerFile;
 
   /**
    * This is a cache of previously minified content (presumably whole files). This makes reloads in
@@ -297,6 +339,12 @@ public class J2clMinifier {
   @VisibleForTesting Map<String, String> minifiedIdentifiersByIdentifier = new HashMap<>();
 
   public J2clMinifier() {
+    // Code removal process is an experimental features for now. In order to avoid disrupting
+    // client code using J2clMinifier, we decided to use a System property for now. Eventually,
+    // clients will pass the file to the J2clMinifier.
+    String codeRemovalFilePath = System.getProperty("j2cl_rta_removal_code_info_file");
+    setupRtaCodeRemoval(readCodeRemovalInfoFile(codeRemovalFilePath));
+
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
 
     transFn[S_NON_IDENTIFIER][S_MINIMIZABLE_IDENTIFIER] = J2clMinifier::startNewIdentifier;
@@ -363,22 +411,42 @@ public class J2clMinifier {
     transFn[S_DOUBLE_QUOTED_STRING_ESCAPE][S_END_STATE] = J2clMinifier::skipChar;
   }
 
-  public String minify(String filePath, String content) {
-    // TODO(dramaix): use the file path during minification (e.g. RTA pruning),
-    return minify(content);
+  /**
+   * Process the content of a file for converting mangled J2CL names to minified (but still pretty
+   * and unique) versions and strips block comments.
+   */
+  public String minify(String content) {
+    return minify(/* filePath= */ null, content);
   }
 
-  public String minify(String content) {
+  /**
+   * Process the content of a file for converting mangled J2CL names to minified (but still pretty
+   * and unique) versions and strips block comments.
+   */
+  public String minify(String filePath, String content) {
+    String fileKey = extractFileKey(filePath);
+
+    // early exit if the file need to be removed entirely
+    if (unusedFiles.contains(fileKey)) {
+      // TODO(dramaix): please document that minifier can completely remove the content of a file
+      // when RTA is not experimental anymore.
+      return "";
+    }
+
     // Return a previously cached version of minified output, if possible.
     String minifiedContent = minifiedContentByContent.get(content);
     if (minifiedContent != null) {
       return minifiedContent;
     }
 
+    boolean[] unusedLines = unusedLinesPerFile.get(fileKey);
+
     char[] chars = getChars(content);
     StringBuilder minifiedContentBuffer = new StringBuilder();
     StringBuilder identifierBuffer = new StringBuilder();
     int lastParseState = S_NON_IDENTIFIER;
+    int lineNumber = 0;
+    boolean skippingLine = unusedLines != null && unusedLines[lineNumber];
 
     /**
      * Loop over the chars in the content, keeping track of in/not-in identifier state, copying
@@ -388,6 +456,16 @@ public class J2clMinifier {
     for (int i = 0; i < chars.length; i++) {
       char c = chars[i];
 
+      // Skip unused lines if necessary. Any unused line should not effect the state machine.
+      if (unusedLines != null) {
+        if (c == '\n') {
+          lineNumber++;
+          skippingLine = unusedLines.length > lineNumber && unusedLines[lineNumber];
+        } else if (skippingLine) {
+          continue;
+        }
+      }
+
       int parseState = nextState[lastParseState][c < 256 ? c : 0];
 
       TransitionFunction transitionFunction = transFn[lastParseState][parseState];
@@ -395,6 +473,9 @@ public class J2clMinifier {
 
       lastParseState = parseState;
     }
+
+    // if we used RTA to remove lines, ensure that we removed everything expected by RTA.
+    checkState(unusedLines == null || lineNumber >= unusedLines.length - 1);
 
     // Transition to the end state
     TransitionFunction transitionFunction = transFn[lastParseState][S_END_STATE];
@@ -456,17 +537,62 @@ public class J2clMinifier {
     return identifierBuffer;
   }
 
+  private static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {
+    if (codeRemovalInfoFilePath == null) {
+      return null;
+    }
+
+    try (InputStream inputStream = new FileInputStream(codeRemovalInfoFilePath)) {
+      return CodeRemovalInfo.parseFrom(inputStream);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @VisibleForTesting
+  void setupRtaCodeRemoval(CodeRemovalInfo codeRemovalInfo) {
+    if (codeRemovalInfo != null) {
+      unusedFiles = ImmutableSet.copyOf(codeRemovalInfo.getUnusedFilesList());
+      unusedLinesPerFile = createUnusedLinesPerFileMap(codeRemovalInfo);
+    } else {
+      unusedFiles = ImmutableSet.of();
+      unusedLinesPerFile = ImmutableMap.of();
+    }
+  }
+
+  private static Map<String, boolean[]> createUnusedLinesPerFileMap(
+      CodeRemovalInfo codeRemovalInfo) {
+    Map<String, boolean[]> unusedLinesPerFile = new HashMap<>();
+
+    for (UnusedLines unusedLines : codeRemovalInfo.getUnusedLinesList()) {
+      checkState(!unusedLines.getUnusedRangesList().isEmpty());
+
+      // UnusedRangesList is sorted and the last item is the highest line index to remove.
+      // Note that getLineEnd returns an exclusive index and can be used as length of the array.
+      int lastUnusedLine = getLast(unusedLines.getUnusedRangesList()).getLineEnd();
+
+      boolean[] unusedLinesArray = new boolean[lastUnusedLine];
+
+      for (LineRange lineRange : unusedLines.getUnusedRangesList()) {
+        Arrays.fill(unusedLinesArray, lineRange.getLineStart(), lineRange.getLineEnd(), true);
+      }
+      unusedLinesPerFile.put(unusedLines.getFileKey(), unusedLinesArray);
+    }
+
+    return unusedLinesPerFile;
+  }
+
   /**
-   * Entry point to the minfier standalone binary.
+   * Entry point to the minifier standalone binary.
    *
    * <p>Usage: minifier file-to-minifiy.js
    *
    * <p>Outputs results to stdout.
    */
   public static void main(String... args) throws IOException {
-    Preconditions.checkState(args.length == 1, "Provide a input file to minify");
+    checkState(args.length == 1, "Provide a input file to minify");
     String file = args[0];
     String contents = new String(Files.readAllBytes(Paths.get(file)), StandardCharsets.UTF_8);
-    System.out.println(new J2clMinifier().minify(contents));
+    System.out.println(new J2clMinifier().minify(file, contents));
   }
 }

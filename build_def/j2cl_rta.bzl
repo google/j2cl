@@ -39,59 +39,58 @@ _j2cl_zip_files_aspect = aspect(
     implementation = _j2cl_zip_files_aspect_impl,
 )
 
-def _extract_rta_files(zip_files, ctx):
-    rta_files_directory = ctx.actions.declare_directory("%s_rta" % ctx.label.name)
+def _extract_libraryinfo_from_zip_files(zip_files, ctx):
+    output_directory = ctx.actions.declare_directory("%s_libraryinfos" % ctx.label.name)
     zip_file_paths = [f.path for f in zip_files]
 
     # We will unzip the library.json in sub directory created from the short_path of the zip file
     library_info_sub_directories = [f.short_path for f in zip_files]
 
     ctx.actions.run_shell(
-        outputs = [rta_files_directory],
+        outputs = [output_directory],
         inputs = zip_files,
-        progress_message = "Extract rta files from zip files",
-        command = "rta_directory=%s;" % rta_files_directory.path +
-                  "rm -rf ${rta_directory}/*;" +
+        progress_message = "Extract libraryinfo files from zip files",
+        command = "libraryinfo_directory=%s;" % output_directory.path +
+                  "rm -rf ${libraryinfo_directory}/*;" +
                   "zip_array=(%s);" % " ".join(zip_file_paths) +
                   "sub_dir_array=(%s);" % " ".join(library_info_sub_directories) +
                   "for i in ${!zip_array[@]}; do " +
-                  "  target_dir=${rta_directory}/${sub_dir_array[$i]};" +
+                  "  target_dir=${libraryinfo_directory}/${sub_dir_array[$i]};" +
                   "  mkdir -p ${target_dir};" +
                   "  unzip -q ${zip_array[$i]} libraryinfo.json -d ${target_dir};" +
                   "done;",
     )
 
-    return rta_files_directory
+    return output_directory
 
 def _j2cl_rta_impl(ctx):
     # our rule can assume that "_ZipFileInfo" provider is present in all of its dependencies because
     # the aspect have been applied on them.
     transitive_zip_files = _get_transitive_zip_files(None, ctx.attr.targets).to_list()
-    rta_files_directory = _extract_rta_files(transitive_zip_files, ctx)
+    libraryinfo_files_directory = _extract_libraryinfo_from_zip_files(transitive_zip_files, ctx)
 
     unused_types_list = ctx.outputs.unused_types_list
     unused_members_list = ctx.outputs.unused_members_list
-    unused_files_list = ctx.outputs.unused_files_list
+    removal_code_info_file = ctx.outputs.removal_code_info_file
 
     rta_args = ["--unusedTypesOutput", unused_types_list.path]
     rta_args += ["--unusedMembersOutput", unused_members_list.path]
-    rta_args += ["--unusedFilesOutput", unused_files_list.path]
-    rta_args += [rta_files_directory.path]
+    rta_args += ["--removalCodeInfoOutput", removal_code_info_file.path]
+    rta_args += [libraryinfo_files_directory.path]
 
     # Run rta algorithm
     ctx.actions.run(
-        inputs = [rta_files_directory],
-        outputs = [unused_types_list, unused_members_list, unused_files_list],
+        inputs = [libraryinfo_files_directory],
+        outputs = [unused_types_list, unused_members_list, removal_code_info_file],
         arguments = rta_args,
         progress_message = "Running rapid type analysis",
         executable = ctx.executable._rta_runner,
     )
 
     return [
-        _ZipFileInfo(transitive_zip_files = transitive_zip_files),
         _J2clRtaInfo(
             unused_types_list = unused_types_list,
-            unused_files_list = unused_files_list,
+            removal_code_info_file = removal_code_info_file,
             unused_members_list = unused_members_list,
         ),
     ]
@@ -114,7 +113,7 @@ j2cl_rta = rule(
     outputs = {
         "unused_types_list": "%{name}_unused_types.list",
         "unused_members_list": "%{name}_unused_members.list",
-        "unused_files_list": "%{name}_unused_files.list",
+        "removal_code_info_file": "%{name}_removal_code_info",
     },
     implementation = _j2cl_rta_impl,
 )

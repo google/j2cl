@@ -28,6 +28,10 @@ final class Member {
     member.isStatic = memberInfo.getStatic();
     member.jsAccessible = memberInfo.getJsAccessible();
     member.declaringType = declaringType;
+    if (memberInfo.hasStartPosition() && memberInfo.hasEndPosition()) {
+      member.startLine = memberInfo.getStartPosition().getLine();
+      member.endLine = memberInfo.getEndPosition().getLine();
+    }
 
     return member;
   }
@@ -38,6 +42,8 @@ final class Member {
   private List<Type> referencedTypes;
   private boolean jsAccessible;
   private boolean isStatic;
+  private int startLine = -1;
+  private int endLine = -1;
 
   private Member() {}
 
@@ -51,6 +57,14 @@ final class Member {
 
   String getName() {
     return name;
+  }
+
+  int getStartLine() {
+    return startLine;
+  }
+
+  int getEndLine() {
+    return endLine;
   }
 
   InvocationKind getDefaultInvocationKind() {

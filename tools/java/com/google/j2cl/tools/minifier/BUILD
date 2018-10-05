@@ -15,7 +15,10 @@ java_library(
     srcs = ["J2clMinifier.java"],
     visibility = [
         "//:__pkg__",
-        "//tools/javatests/com/google/j2cl/tools/minifier:__pkg__",
+        "//tools/javatests/com/google/j2cl/tools:__subpackages__",
     ],
-    deps = ["//third_party:guava"],
+    deps = [
+        "//third_party:guava",
+        "//tools/java/com/google/j2cl/tools/rta:code_removal_info_java_proto",
+    ],
 )
