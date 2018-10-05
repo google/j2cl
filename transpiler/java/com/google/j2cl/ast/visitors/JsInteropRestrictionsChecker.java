@@ -146,6 +146,9 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
+    checkTypeVariables(type);
+    checkSuperTypes(type);
+
     Multimap<String, MemberDescriptor> instanceJsMembersByName =
         collectInstanceNames(type.getTypeDescriptor());
     Multimap<String, MemberDescriptor> staticJsMembersByName =
@@ -155,6 +158,41 @@ public class JsInteropRestrictionsChecker {
     }
     checkCastsAndInstanceOf(type);
     checkJsEnumUsages(type);
+  }
+
+  private void checkTypeVariables(Type type) {
+    if (type.getDeclaration().getTypeParameterDescriptors().stream()
+        .map(TypeDescriptor::toRawTypeDescriptor)
+        .anyMatch(TypeDescriptor::isJsEnum)) {
+      problems.error(
+          type.getSourcePosition(),
+          "Type '%s' cannot define a type variable with a JsEnum as a bound.",
+          type.getReadableDescription());
+    }
+  }
+
+  private void checkSuperTypes(Type type) {
+    if (hasJsEnumTypeArgument(type.getSuperTypeDescriptor())) {
+      problems.error(
+          type.getSourcePosition(),
+          "Type '%s' cannot subclass a class parameterized by JsEnum.",
+          type.getReadableDescription());
+    }
+
+    if (type.getSuperInterfaceTypeDescriptors().stream()
+        .anyMatch(JsInteropRestrictionsChecker::hasJsEnumTypeArgument)) {
+      problems.error(
+          type.getSourcePosition(),
+          "Type '%s' cannot implement an interface parameterized by JsEnum.",
+          type.getReadableDescription());
+    }
+  }
+
+  private static boolean hasJsEnumTypeArgument(DeclaredTypeDescriptor typeDescriptor) {
+    return typeDescriptor != null
+        && typeDescriptor.getTypeArgumentDescriptors().stream()
+            .map(TypeDescriptor::toRawTypeDescriptor)
+            .anyMatch(TypeDescriptor::isJsEnum);
   }
 
   /**
@@ -719,6 +757,22 @@ public class JsInteropRestrictionsChecker {
           "Method '%s' cannot override a JsOverlay method '%s'.",
           method.getReadableDescription(),
           jsOverlayOverride.get().getReadableDescription());
+    }
+
+    if (method.getDescriptor().getReturnTypeDescriptor().isJsEnum()) {
+      Optional<MethodDescriptor> nonJsEnumReturnOverride =
+          method.getDescriptor().getOverriddenMethodDescriptors().stream()
+              .filter(m -> !m.getReturnTypeDescriptor().toRawTypeDescriptor().isJsEnum())
+              .findFirst();
+
+      if (nonJsEnumReturnOverride.isPresent()) {
+        checkState(!nonJsEnumReturnOverride.get().isSynthetic());
+        problems.error(
+            method.getSourcePosition(),
+            "Method '%s' returning JsEnum cannot override method '%s'.",
+            method.getReadableDescription(),
+            nonJsEnumReturnOverride.get().getReadableDescription());
+      }
     }
   }
 

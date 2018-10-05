@@ -1641,6 +1641,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  static native void n();",
             "  native void o();",
             "  public String toString() { return null; }",
+            "}",
+            "interface List<T> { Object getObject(); }",
+            "class AList<T> { }",
+            "class AListSubclass<T extends MyJsEnum>",
+            "    extends AList<MyJsEnum> implements List<MyJsEnum>  {",
+            "    public MyJsEnum getObject() { return null; }",
             "}")
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
@@ -1664,7 +1670,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum 'JsEnumWithInvalidMembers' cannot override method "
                 + "'String Object.toString()'.",
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
-            "JsEnum 'MyJsEnum' cannot have an instance initializer.");
+            "JsEnum 'MyJsEnum' cannot have an instance initializer.",
+            "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
+            "Type 'AListSubclass' cannot subclass a class parameterized by JsEnum.",
+            "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum.",
+            "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
+                + "'Object List.getObject()'.");
   }
 
   public void testJsEnumSucceeds() {
