@@ -15,7 +15,7 @@
 /**
  * @fileoverview Header hand rolled.
  *
- * @suppress {lateProvide}
+ * @suppress {extraRequire, lateProvide, unusedLocalVariables}
  */
 goog.module('vmbootstrap.Objects');
 
