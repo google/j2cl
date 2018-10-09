@@ -69,7 +69,8 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
             type.getSourcePosition(),
             type.getVisibility(),
             overlayImplTypeDescriptor.getTypeDeclaration());
-    overlayClass.setNativeTypeDescriptor(type.getDeclaration().toUnparameterizedTypeDescriptor());
+    overlayClass.setUnderlyingTypeDescriptor(
+        type.getDeclaration().toUnparameterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
       if (!member.getDescriptor().isJsOverlay()) {

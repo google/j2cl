@@ -37,8 +37,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Visitable List<Member> members = new ArrayList<>();
   private SourcePosition sourcePosition;
 
-  // Used to store the original native type for a synthesized @JsOverlay implementation type.
-  private DeclaredTypeDescriptor nativeTypeDescriptor;
+  /** The underlying type descriptor for synthetic @JsOverlay implementation types. */
+  private DeclaredTypeDescriptor underlyingTypeDescriptor;
 
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
@@ -103,12 +103,12 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isClass();
   }
 
-  public DeclaredTypeDescriptor getNativeTypeDescriptor() {
-    return this.nativeTypeDescriptor;
+  public DeclaredTypeDescriptor getUnderlyingTypeDescriptor() {
+    return this.underlyingTypeDescriptor;
   }
 
-  public void setNativeTypeDescriptor(DeclaredTypeDescriptor nativeTypeDescriptor) {
-    this.nativeTypeDescriptor = nativeTypeDescriptor;
+  public void setUnderlyingTypeDescriptor(DeclaredTypeDescriptor underlyingTypeDescriptor) {
+    this.underlyingTypeDescriptor = underlyingTypeDescriptor;
   }
 
   public void setTypeDeclaration(TypeDeclaration typeDeclaration) {
@@ -116,7 +116,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isJsOverlayImplementation() {
-    return getNativeTypeDescriptor() != null;
+    return getUnderlyingTypeDescriptor() != null;
   }
 
   public List<Member> getMembers() {

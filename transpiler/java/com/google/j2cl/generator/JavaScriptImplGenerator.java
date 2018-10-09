@@ -445,8 +445,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (type.getNativeTypeDescriptor() != null
-        && type.getNativeTypeDescriptor().isJsFunctionInterface()) {
+    if (type.getUnderlyingTypeDescriptor() != null
+        && type.getUnderlyingTypeDescriptor().isJsFunctionInterface()) {
       // JsFunction interface overlays do not need $isInstance.
       return;
     }
@@ -468,15 +468,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (type.getDeclaration().isJsFunctionImplementation()) {
       renderIsInstanceOfJsFunctionImplementationStatement(type.getTypeDescriptor());
     } else if (type.isJsOverlayImplementation()) {
-      DeclaredTypeDescriptor nativeTypeDescriptor = type.getNativeTypeDescriptor();
-      if (nativeTypeDescriptor.isJsEnum()) {
+      DeclaredTypeDescriptor underlyingTypeDescriptor = type.getUnderlyingTypeDescriptor();
+      if (underlyingTypeDescriptor.isJsEnum()) {
         // TODO(b/116459408): Implement JsEnum isInstance when boxing/unboxing is done.
         sourceBuilder.append("return true;");
-      } else if (nativeTypeDescriptor.isInterface()) {
+      } else if (underlyingTypeDescriptor.isInterface()) {
         // Since instanceof is forbidden this is only used for casting so null check is not needed.
         sourceBuilder.append("return true;");
       } else {
-        renderIsInstanceOfClassStatement(type.getNativeTypeDescriptor());
+        renderIsInstanceOfClassStatement(type.getUnderlyingTypeDescriptor());
       }
     } else if (type.isInterface()) {
       renderIsInstanceOfInterfaceStatement(type.getTypeDescriptor());
@@ -573,9 +573,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/67965153): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (type.getNativeTypeDescriptor() != null
-        && (type.getNativeTypeDescriptor().isJsFunctionInterface()
-            || type.getNativeTypeDescriptor().isInterface())) {
+    if (type.getUnderlyingTypeDescriptor() != null
+        && (type.getUnderlyingTypeDescriptor().isJsFunctionInterface()
+            || type.getUnderlyingTypeDescriptor().isInterface())) {
       // JsFunction and Native interface overlays do not need class metadata.
       sourceBuilder.newLines(2);
       return;
@@ -585,7 +585,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     String name = null;
     if (type.isJsOverlayImplementation()) {
-      name = type.getNativeTypeDescriptor().getQualifiedJsName();
+      name = type.getUnderlyingTypeDescriptor().getQualifiedJsName();
     } else {
       name = type.getDeclaration().getQualifiedBinaryName();
     }

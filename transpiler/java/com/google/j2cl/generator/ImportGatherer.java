@@ -114,11 +114,11 @@ class ImportGatherer extends AbstractVisitor {
   public void exitType(Type type) {
     addTypeDeclaration(type.getDeclaration(), ImportCategory.SELF);
 
-    if (type.isJsOverlayImplementation() && type.getNativeTypeDescriptor().isNative()) {
+    if (type.isJsOverlayImplementation() && type.getUnderlyingTypeDescriptor().isNative()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
       // Also requiring native type makes sure the native type is not pruned by AJD.
       addTypeDeclaration(
-          type.getNativeTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
+          type.getUnderlyingTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
     // Super type and super interface imports are needed eagerly because they are used during the
