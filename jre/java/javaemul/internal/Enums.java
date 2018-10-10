@@ -15,6 +15,10 @@
  */
 package javaemul.internal;
 
+import java.io.Serializable;
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -51,4 +55,69 @@ class Enums {
     }
     return enumValue;
   }
+
+  /** Boxes a JsEnum value that does not support comparable. */
+  public static <T> BoxedLightEnum<T> box(T value, Constructor ctor) {
+    if (value == null) {
+      return null;
+    }
+    return cache(ctor, "$$enumValues/" + value, () -> new BoxedLightEnum<T>(value, ctor));
+  }
+
+  private static class BoxedLightEnum<T> {
+    @JsConstructor
+    private BoxedLightEnum(T value, Constructor ctor) {
+      this.value = value;
+      this.ctor = ctor;
+    }
+
+    final T value;
+    final Constructor ctor;
+  }
+
+  /** Boxes a JsEnum value that supports {@link Enum#compareTo} and {@link Enum#ordinal}. */
+  public static <T> BoxedComparableLightEnum<T> boxComparable(T value, Constructor ctor) {
+    if (value == null) {
+      return null;
+    }
+    return cache(ctor, "$$enumValues/" + value, () -> new BoxedComparableLightEnum<T>(value, ctor));
+  }
+
+  private static class BoxedComparableLightEnum<T> extends BoxedLightEnum<T>
+      implements Comparable<BoxedComparableLightEnum<T>>, Serializable {
+    @JsConstructor
+    private BoxedComparableLightEnum(T value, Constructor ctor) {
+      super(value, ctor);
+    }
+
+    @Override
+    public int compareTo(BoxedComparableLightEnum<T> o) {
+      if (ctor != o.ctor) {
+        throw new ClassCastException();
+      }
+      // Comparable enums are always @enum{number} in closure, and because the values at runtime
+      // are numbers it is safe to compare them as Doubles.
+      return ((Double) value).compareTo((Double) o.value);
+    }
+  }
+
+  public static Object unbox(Object object) {
+    if (object == null) {
+      return null;
+    }
+    BoxedLightEnum<?> boxedEnum = (BoxedLightEnum<?>) object;
+    return boxedEnum.value;
+  }
+
+  public static boolean isInstanceOf(Object instance, Constructor ctor) {
+    return instance instanceof BoxedLightEnum && ((BoxedLightEnum) instance).ctor == ctor;
+  }
+
+  @JsFunction
+  private interface Supplier<T> {
+    T get();
+  }
+
+  @JsMethod(namespace = "goog.reflect")
+  private static native <T> T cache(Constructor constructor, String key, Supplier<T> supplier);
 }

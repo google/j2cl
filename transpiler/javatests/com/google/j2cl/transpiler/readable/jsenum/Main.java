@@ -101,6 +101,12 @@ public class Main {
     Object o = intJsEnum;
     intJsEnum = (IntJsEnum) o;
 
+    // No boxing here.
+    boolean equal = intJsEnum == IntJsEnum.TWENTY;
+    boolean isInstance = intJsEnum instanceof IntJsEnum;
+
+    isInstance = intJsEnum instanceof Comparable;
+
     StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;
     switch (stringJsEnum) {
       case ONE:

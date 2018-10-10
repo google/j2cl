@@ -17,8 +17,10 @@ package com.google.j2cl.transpiler.optimization;
 
 import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
 
+import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -48,5 +50,54 @@ public class EnumOptimizationTest {
   @Test
   public void unreferencedEnumValuesAreRemoved() {
     assertFunctionMatches(getUnusedEnumValues(), "");
+  }
+
+  @JsEnum
+  enum MyJsEnum {
+    ONE,
+    TWO
+  }
+
+  @JsMethod
+  private void unusedJsEnumBoxes() {
+    Object o = MyJsEnum.ONE;
+    boolean b = o == MyJsEnum.TWO;
+  }
+
+  @JsProperty
+  private native Object getUnusedJsEnumBoxes();
+
+  @Test
+  public void unreferencedBoxedJsEnumsAreRemoved() {
+    assertFunctionMatches(getUnusedJsEnumBoxes(), "");
+  }
+
+  @JsMethod
+  private boolean jsEnumReferenceEquality() {
+    MyJsEnum e = MyJsEnum.TWO;
+    return e == MyJsEnum.TWO;
+  }
+
+  @JsProperty
+  private native Object getJsEnumReferenceEquality();
+
+  @Test
+  public void comparisonByReferenceDoesNotBox() {
+    assertFunctionMatches(getJsEnumReferenceEquality(), "return !0;");
+  }
+
+  @JsMethod
+  private boolean jsEnumEquals() {
+    MyJsEnum e = MyJsEnum.TWO;
+    return e.equals(MyJsEnum.TWO);
+  }
+
+  @JsProperty
+  private native Object getJsEnumEquals();
+
+  // TODO(b/117514489): Enable and complete the test when unnecessary boxing is not longer emitted.
+  @Ignore
+  public void equalsDoesNotBox() {
+    assertFunctionMatches(getJsEnumEquals(), "");
   }
 }

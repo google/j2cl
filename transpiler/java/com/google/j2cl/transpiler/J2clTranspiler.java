@@ -40,6 +40,7 @@ import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
+import com.google.j2cl.ast.visitors.InsertJsEnumBoxingAndUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
@@ -172,6 +173,7 @@ class J2clTranspiler {
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
             new InsertCastOnNewInstances(),
+            // Must run before Enum normalization
             new FixSuperCallQualifiers(),
 
             // Runs after all passes that synthesize overlays.
@@ -205,6 +207,9 @@ class J2clTranspiler {
             new InsertBitwiseOperatorBooleanCoercions(),
             new InsertUnsignedRightShiftCoercions(),
             new NormalizeJsFunctionPropertyInvocations(),
+            // Run before other passes that normalize JsEnum expressions, but after all the normal
+            // Java semantic conversions.
+            new InsertJsEnumBoxingAndUnboxingConversions(),
             new NormalizeSwitchStatements(),
             new NormalizeJsEnumSpecialMemberReferences(),
             new ArrayAccessNormalizer(),

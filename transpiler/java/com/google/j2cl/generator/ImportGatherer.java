@@ -121,6 +121,12 @@ class ImportGatherer extends AbstractVisitor {
           type.getUnderlyingTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
+    if (type.isJsOverlayImplementation() && type.getUnderlyingTypeDescriptor().isJsEnum()) {
+      // Add Enums bootstrap type as it is referred to at code generation from $isInstance.
+      // $isInstance does not call $clinit, for that reason it needs to be imported eagerly.
+      addTypeDeclaration(BootstrapType.ENUMS.getDeclaration(), ImportCategory.LOADTIME);
+    }
+
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
     if (type.getSuperTypeDescriptor() != null) {

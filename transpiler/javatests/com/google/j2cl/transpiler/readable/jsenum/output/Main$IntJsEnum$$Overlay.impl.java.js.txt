@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $Enums = goog.require('vmbootstrap.Enums$impl');
 
 let IntJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum$impl');
 
@@ -41,7 +42,7 @@ class $Overlay {
    * @public
    */
   static $isInstance(instance) {
-    return true;
+    return $Enums.isInstanceOf(instance, $Overlay);
   }
 
   /**

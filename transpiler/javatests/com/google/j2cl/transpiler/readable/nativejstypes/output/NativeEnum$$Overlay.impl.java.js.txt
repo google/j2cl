@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.NativeEnum.$Overl
 
 const NativeEnum = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.NativeEnum');
 const $Util = goog.require('nativebootstrap.Util$impl');
+const $Enums = goog.require('vmbootstrap.Enums$impl');
 
 
 class $Overlay {
@@ -29,7 +30,7 @@ class $Overlay {
    * @public
    */
   static $isInstance(instance) {
-    return true;
+    return $Enums.isInstanceOf(instance, $Overlay);
   }
 
   /**

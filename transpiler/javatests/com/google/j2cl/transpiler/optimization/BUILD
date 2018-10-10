@@ -37,4 +37,5 @@ j2cl_optimization_test(
 
 j2cl_optimization_test(
     name = "EnumOptimizationTest",
+    defs = ["--define=jre.checks.checkLevel=MINIMAL"],
 )

@@ -15,7 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.jsenum;
 
+import java.io.Serializable;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 
 public class Main {
@@ -31,6 +36,9 @@ public class Main {
     testJsEnum();
     testBooleanJsEnum();
     testStringJsEnum();
+    // TODO():
+    // Test equals on enum values.
+    // Test Js.uncheckedCast, to go back and forth from Jsenum to native class or interfaces.
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -62,8 +70,14 @@ public class Main {
 
     assertTrue(v == NativeEnum.OK);
     assertTrue(v != NativeEnum.CANCEL);
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assert v != OK_STRING;
+    assertTrue(v != OK_STRING);
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // assertTrue(v == StringNativeEnum.OK);
+
+    // Boxing preserves equality.
+    Object o = NativeEnum.OK;
+    assertTrue(o == NativeEnum.OK);
 
     assertTrue(v.hashCode() == NativeEnum.OK.hashCode());
     assertTrue(v.hashCode() != NativeEnum.CANCEL.hashCode());
@@ -72,27 +86,38 @@ public class Main {
     // assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
     assertTrue(v.equals(NativeEnum.OK));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v.equals(OK_STRING));
+    assertFalse(v.equals(OK_STRING));
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     // assertTrue(v.equals(StringNativeEnum.OK));
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v instanceof Enum);
-    // assertTrue(v instanceof NativeEnum);
-    // assertFalse((Object) v instanceof String);
-    // assertFalse(v instanceof Comparable);
-    // assertFalse(v instanceof Serializable);
-    // assertFalse(Object) v instanceof PlainJsEnum);
+    assertFalse(v instanceof Enum);
+    assertTrue(v instanceof NativeEnum);
+    assertFalse((Object) v instanceof String);
+    assertFalse(v instanceof Comparable);
+    assertFalse(v instanceof Serializable);
+    assertFalse((Object) v instanceof PlainJsEnum);
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     // assertTrue((Object) v instanceof StringNativeEnum);
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(new Object() instanceof NativeEnum);
-    // assertFalse(OK_STRING instanceof NativeEnum);
+    assertFalse(new Object() instanceof NativeEnum);
+    assertFalse(OK_STRING instanceof NativeEnum);
+
+    NativeEnum ne = (NativeEnum) o;
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // StringNativeEnum sne = (StringNativeEnum) o;
+    assertThrowsClassCastException(() -> (Enum) o);
+    assertThrowsClassCastException(() -> (Comparable) o);
+    assertThrowsClassCastException(() -> (Serializable) o);
+    assertThrowsClassCastException(() -> (Boolean) o);
+
+    assertTrue(asSeenFromJs(NativeEnum.OK) == OK_STRING);
   }
+
+  @JsMethod(name = "passThrough")
+  private static native Object asSeenFromJs(NativeEnum s);
 
   @JsEnum(isNative = true, namespace = "test", name = "NativeEnum", hasCustomValue = true)
   enum StringNativeEnum {
@@ -130,8 +155,13 @@ public class Main {
 
     assertTrue(v == StringNativeEnum.OK);
     assertTrue(v != StringNativeEnum.CANCEL);
+    assertTrue((Object) v != OK_STRING);
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // assertTrue((Object) v != OK_STRING);
+    // enum share instances.
+    // assertTrue(v == NativeEnum.OK);
+    // Boxing preserves equality.
+    Object o = StringNativeEnum.OK;
+    assertTrue(o == StringNativeEnum.OK);
 
     assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(v.hashCode() != StringNativeEnum.CANCEL.hashCode());
@@ -139,29 +169,39 @@ public class Main {
     assertTrue(v.equals(StringNativeEnum.OK));
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
-    //
     // assertTrue(v.equals(NativeEnum.OK));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v.equals(OK_STRING));
+    assertFalse(v.equals(OK_STRING));
 
     assertTrue(v.getValue().equals(v.toString()));
     assertTrue(v.getValue().equals(OK_STRING));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v instanceof Enum);
-    // assertTrue(v instanceof StringNativeEnum);
-    // assertFalse((Object) v instanceof String);
-    // assertFalse(v instanceof Comparable);
-    // assertFalse(v instanceof Serializable);
-    // assertFalse(Object) v instanceof PlainJsEnum);
+    assertFalse(v instanceof Enum);
+    assertTrue(v instanceof StringNativeEnum);
+    assertFalse((Object) v instanceof String);
+    assertFalse(v instanceof Comparable);
+    assertFalse(v instanceof Serializable);
+    assertFalse((Object) v instanceof PlainJsEnum);
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     //
     // assertTrue((Object) v instanceof NativeEnum);
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(new Object() instanceof StringNativeEnum);
-    // assertFalse((Object) OK_STRING instanceof StringNativeEnum);
+    assertFalse(new Object() instanceof StringNativeEnum);
+    assertFalse((Object) OK_STRING instanceof StringNativeEnum);
+
+    StringNativeEnum sne = (StringNativeEnum) o;
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // NativeEnum ne = (NativeEnum) o;
+    assertThrowsClassCastException(() -> (Enum) o);
+    assertThrowsClassCastException(() -> (Comparable) o);
+    assertThrowsClassCastException(() -> (Serializable) o);
+    assertThrowsClassCastException(() -> (Boolean) o);
+
+    assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
   }
+
+  @JsMethod(name = "passThrough")
+  private static native Object asSeenFromJs(StringNativeEnum s);
 
   @JsEnum
   enum PlainJsEnum {
@@ -202,49 +242,73 @@ public class Main {
 
     assertTrue(v == PlainJsEnum.ONE);
     assertTrue(v != PlainJsEnum.ZERO);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // assertTrue((Object) v != ONE_DOUBLE);
+    assertTrue((Object) v != ONE_DOUBLE);
+    // Boxing preserves equality.
+    Object o = PlainJsEnum.ONE;
+    assertTrue(o == PlainJsEnum.ONE);
 
     assertTrue(v.hashCode() == PlainJsEnum.ONE.hashCode());
     assertTrue(v.hashCode() != PlainJsEnum.ZERO.hashCode());
     assertTrue(v.toString().equals(String.valueOf(ONE_DOUBLE)));
     assertTrue(v.equals(PlainJsEnum.ONE));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v.equals(ONE_DOUBLE));
+    assertFalse(v.equals(ONE_DOUBLE));
+    assertFalse(PlainJsEnum.ZERO.equals(OtherPlainJsEnum.NONE));
 
     assertTrue(v.getValue() == 1);
     assertTrue(v.ordinal() == 1);
     assertTrue(PlainJsEnum.ONE.compareTo(v) == 0);
     assertTrue(PlainJsEnum.ZERO.compareTo(v) < 0);
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertThrows(ClassCastException.class, () -> {
-    //   Comparable comparable = PlainJsEnum.ONE;
-    //   comparable.compareTo(OtherPlainJsEnum.UNIT);
-    // });
-    // assertThrows(ClassCastException.class, () -> {
-    //   Comparable comparable = PlainJsEnum.ONE;
-    //   comparable.compareTo(ONE_DOUBLE);
-    // });
-    // assertThrows(ClassCastException.class, () -> {
-    //   Comparable comparable = (Comparable) ONE_DOUBLE;
-    //   comparable.compareTo(PlainJsEnum.ONE);
-    // });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          Comparable comparable = PlainJsEnum.ONE;
+          comparable.compareTo(OtherPlainJsEnum.UNIT);
+        });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          Comparable comparable = PlainJsEnum.ONE;
+          comparable.compareTo(ONE_DOUBLE);
+        });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          Comparable comparable = (Comparable) ONE_DOUBLE;
+          comparable.compareTo(PlainJsEnum.ONE);
+        });
 
     // Test that boxing of special method 'ordinal()' call is not broken by normalization.
     Integer i = v.ordinal();
     assertTrue(i.intValue() == 1);
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v instanceof Enum);
-    // assertTrue(v instanceof PlainJsEnum);
-    // assertFalse((Object) v instanceof Double);
-    // assertTrue(v instanceof Comparable);
-    // assertTrue(v instanceof Serializable);
-    // assertFalse(Object) v instanceof BooleanJsEnum);
+    assertFalse(v instanceof Enum);
+    assertTrue(v instanceof PlainJsEnum);
+    assertFalse((Object) v instanceof Double);
+    assertTrue(v instanceof Comparable);
+    assertTrue(v instanceof Serializable);
+    assertFalse((Object) v instanceof BooleanJsEnum);
 
-    // assertFalse(new Object() instanceof PlainJsEnum);
-    // assertFalse((Object) ONE_DOUBLE instanceof PlainJsEnum);
+    assertFalse(new Object() instanceof PlainJsEnum);
+    assertFalse((Object) ONE_DOUBLE instanceof PlainJsEnum);
+
+    PlainJsEnum pe = (PlainJsEnum) o;
+    Comparable c = (Comparable) o;
+    Serializable s = (Serializable) o;
+    assertThrowsClassCastException(() -> (Enum) o);
+    assertThrowsClassCastException(() -> (Double) o);
+
+    assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
+
+    // Comparable test.
+    SortedSet<Comparable> sortedSet = new TreeSet<>(Comparable::compareTo);
+    sortedSet.add(PlainJsEnum.ONE);
+    sortedSet.add(PlainJsEnum.ZERO);
+    assertTrue(sortedSet.iterator().next() == PlainJsEnum.ZERO);
+    assertTrue(sortedSet.iterator().next() instanceof PlainJsEnum);
   }
+
+  @JsMethod(name = "passThrough")
+  private static native Object asSeenFromJs(PlainJsEnum d);
 
   @JsEnum(hasCustomValue = true)
   enum BooleanJsEnum {
@@ -281,32 +345,45 @@ public class Main {
 
     assertTrue(v == BooleanJsEnum.FALSE);
     assertTrue(v != BooleanJsEnum.TRUE);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // assert (Object) v != FALSE_BOOLEAN;
+    assertTrue((Object) v != FALSE_BOOLEAN);
+    // Boxing preserves equality.
+    Object o = BooleanJsEnum.TRUE;
+    assertTrue(o == BooleanJsEnum.TRUE);
 
     assertTrue(v.hashCode() == BooleanJsEnum.FALSE.hashCode());
     assertTrue(v.hashCode() != BooleanJsEnum.TRUE.hashCode());
     assertTrue(v.toString().equals(String.valueOf(FALSE_BOOLEAN)));
     assertTrue(v.equals(BooleanJsEnum.FALSE));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v.equals(FALSE_BOOLEAN));
+    assertFalse(v.equals(FALSE_BOOLEAN));
 
     assertTrue((Object) v.value == FALSE_BOOLEAN);
     // Test that boxing of special field 'value' call is not broken by normalization.
     Boolean b = v.value;
     assertTrue(b == FALSE_BOOLEAN);
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v instanceof Enum);
-    // assertTrue(v instanceof BooleanJsEnum);
-    // assertFalse((Object) v instanceof Boolean);
-    // assertTrue(v instanceof Comparable);
+    assertFalse(v instanceof Enum);
+    assertTrue(v instanceof BooleanJsEnum);
+    assertFalse((Object) v instanceof Boolean);
+    assertFalse(v instanceof Comparable);
+    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
     // assertTrue(v instanceof Serializable);
-    // assertFalse(Object) v instanceof PlainJsEnum);
+    assertFalse((Object) v instanceof PlainJsEnum);
 
-    // assertFalse(new Object() instanceof BooleanJsEnum);
-    // assertFalse((Object) FALSE_BOOLEAN instanceof BooleanJsEnum);
+    assertFalse(new Object() instanceof BooleanJsEnum);
+    assertFalse((Object) FALSE_BOOLEAN instanceof BooleanJsEnum);
+
+    BooleanJsEnum be = (BooleanJsEnum) o;
+    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
+    // Serializable s = (Serializable) o;
+    assertThrowsClassCastException(() -> (Enum) o);
+    assertThrowsClassCastException(() -> (Comparable) o);
+    assertThrowsClassCastException(() -> (Boolean) o);
+
+    assertTrue(asSeenFromJs(BooleanJsEnum.FALSE) == FALSE_BOOLEAN);
   }
+
+  @JsMethod(name = "passThrough")
+  private static native Object asSeenFromJs(BooleanJsEnum b);
 
   @JsEnum(hasCustomValue = true)
   enum StringJsEnum {
@@ -343,28 +420,58 @@ public class Main {
 
     assertTrue(v == StringJsEnum.HELLO);
     assertTrue(v != StringJsEnum.GOODBYE);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // assert (Object) v != HELLO_STRING;
+    assertTrue((Object) v != HELLO_STRING);
+    // Boxing preserves equality.
+    Object o = StringJsEnum.HELLO;
+    assertTrue(o == StringJsEnum.HELLO);
 
     assertTrue(v.hashCode() == StringJsEnum.HELLO.hashCode());
     assertTrue(v.hashCode() != StringJsEnum.GOODBYE.hashCode());
     assertTrue(v.toString().equals(HELLO_STRING));
     assertTrue(v.equals(StringJsEnum.HELLO));
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v.equals(HELLO_STRING));
+    assertFalse(v.equals(HELLO_STRING));
 
     assertTrue(v.value.equals(HELLO_STRING));
 
-    // TODO(b/116459408) : uncomment this when jsenum boxing is implemented.
-    // assertFalse(v instanceof Enum);
-    // assertTrue(v instanceof StringJsEnum);
-    // assertFalse((Object) v instanceof String);
-    // assertTrue(v instanceof Comparable);
+    assertFalse(v instanceof Enum);
+    assertTrue(v instanceof StringJsEnum);
+    assertFalse((Object) v instanceof String);
+    assertFalse(v instanceof Comparable);
+    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
     // assertTrue(v instanceof Serializable);
-    // assertFalse(Object) v instanceof PlainJsEnum);
+    assertFalse((Object) v instanceof PlainJsEnum);
 
-    // assertFalse(new Object() instanceof StringJsEnum);
-    // assertFalse((Object) HELLO_STRING instanceof StringJsEnum);
+    assertFalse(new Object() instanceof StringJsEnum);
+    assertFalse((Object) HELLO_STRING instanceof StringJsEnum);
+
+    StringJsEnum se = (StringJsEnum) o;
+    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
+    // Serializable s = (Serializable) o;
+    assertThrowsClassCastException(() -> (Enum) o);
+    assertThrowsClassCastException(() -> (Comparable) o);
+    assertThrowsClassCastException(() -> (String) o);
+
+    assertTrue(asSeenFromJs(StringJsEnum.HELLO) == HELLO_STRING);
+  }
+
+  @JsMethod(name = "passThrough")
+  private static native Object asSeenFromJs(StringJsEnum b);
+
+  @JsMethod
+  // Pass through an enum value as if it were coming from and going to JavaScript.
+  private static Object passThrough(Object o) {
+    // Supported closure enums can only have number, boolean or string as their underlying type.
+    // Make sure that boxed enums are not passing though here.
+    assertTrue(o instanceof String || o instanceof Double || o instanceof Boolean);
+    return o;
+  }
+
+  private static void assertThrowsClassCastException(Supplier<?> supplier) {
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          supplier.get();
+        });
   }
 
   private static <T> void assertThrows(Class<?> exceptionClass, Runnable runnable) {

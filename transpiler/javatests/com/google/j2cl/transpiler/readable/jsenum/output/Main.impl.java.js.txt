@@ -18,9 +18,11 @@ let IntJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.
 let IntJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$impl');
 let StringJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 
 class Main extends j_l_Object {
@@ -60,30 +62,35 @@ class Main extends j_l_Object {
         $Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_ComparableJsEnum(
             ComparableJsEnum.ONE) == 1 ?
         ComparableJsEnum.TWO :
-        null;
+        /**@type {?ComparableJsEnum} */ ($Enums.unbox(null));
     switch ($InternalPreconditions.m_checkNotNull__java_lang_Object(
         comparableJsEnum)) {
       case ComparableJsEnum.TWO:
         break;
       default:
     }
-    let comparable = comparableJsEnum;
-    comparableJsEnum =
-        /**@type {?ComparableJsEnum} */ ($Casts.$to(comparable, $Overlay));
+    let comparable = $Enums.boxComparable(comparableJsEnum, $Overlay);
+    comparableJsEnum = /**@type {?ComparableJsEnum} */ (
+        $Enums.unbox($Casts.$to(comparable, $Overlay)));
     let intJsEnum =
         IntJsEnum_$Overlay
                 .m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_IntJsEnum(
                     IntJsEnum.ELEVEN) == 10 ?
         IntJsEnum.ELEVEN :
-        null;
+        /**@type {?IntJsEnum} */ ($Enums.unbox(null));
     switch (
         $InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
       case IntJsEnum.TWENTY:
         break;
       default:
     }
-    let o = intJsEnum;
-    intJsEnum = /**@type {?IntJsEnum} */ ($Casts.$to(o, IntJsEnum_$Overlay));
+    let o = $Enums.box(intJsEnum, IntJsEnum_$Overlay);
+    intJsEnum = /**@type {?IntJsEnum} */ (
+        $Enums.unbox($Casts.$to(o, IntJsEnum_$Overlay)));
+    let equal = $Equality.$same(intJsEnum, IntJsEnum.TWENTY);
+    let isInstance = !$Equality.$same(intJsEnum, null);
+    isInstance =
+        Comparable.$isInstance($Enums.box(intJsEnum, IntJsEnum_$Overlay));
     let stringJsEnum =
         $Equality.$same(
             StringJsEnum_$Overlay
@@ -91,7 +98,7 @@ class Main extends j_l_Object {
                     StringJsEnum.ONE),
             '10') ?
         StringJsEnum.THREE :
-        null;
+        /**@type {StringJsEnum} */ ($Enums.unbox(null));
     switch (
         $InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
       case StringJsEnum.ONE:
@@ -144,10 +151,12 @@ class Main extends j_l_Object {
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
     StringJsEnum_$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+    Comparable = goog.module.get('java.lang.Comparable$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 };
 

@@ -11,7 +11,7 @@
 [testJsEnumSwitch] => [m_testJsEnumSwitch__]
 [testJsEnumSwitch] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum comparableJsEnum =
-        ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_ComparableJsEnum(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : null;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+        ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_ComparableJsEnum(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum} */ ($Enums.unbox(null));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [comparableJsEnum] => [comparableJsEnum] "comparableJsEnum"
 [switch (comparableJsEnum) {
       case TWO:
@@ -21,10 +21,10 @@
 ...      default:
     }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
-[Comparable comparable = comparableJsEnum;] => [let comparable = comparableJsEnum;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[Comparable comparable = comparableJsEnum;] => [let comparable = $Enums.boxComparable(comparableJsEnum, $Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [comparable] => [comparable] "comparable"
-[comparableJsEnum = (ComparableJsEnum) comparable;] => [comparableJsEnum = /**@type {?ComparableJsEnum} */ ($Casts.$to(comparable, $Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
-[IntJsEnum intJsEnum = IntJsEnum.ELEVEN.getValue() == 10 ? IntJsEnum.ELEVEN : null;] => [let intJsEnum = IntJsEnum_$Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_IntJsEnum(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : null;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[comparableJsEnum = (ComparableJsEnum) comparable;] => [comparableJsEnum = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(comparable, $Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[IntJsEnum intJsEnum = IntJsEnum.ELEVEN.getValue() == 10 ? IntJsEnum.ELEVEN : null;] => [let intJsEnum = IntJsEnum_$Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_IntJsEnum(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum} */ ($Enums.unbox(null));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [intJsEnum] => [intJsEnum] "intJsEnum"
 [switch (intJsEnum) {
       case TWENTY:
@@ -34,10 +34,15 @@
 ...      default:
     }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
-[Object o = intJsEnum;] => [let o = intJsEnum;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[Object o = intJsEnum;] => [let o = $Enums.box(intJsEnum, IntJsEnum_$Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [o] => [o] "o"
-[intJsEnum = (IntJsEnum) o;] => [intJsEnum = /**@type {?IntJsEnum} */ ($Casts.$to(o, IntJsEnum_$Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
-[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_StringJsEnum(StringJsEnum.ONE), "10") ? StringJsEnum.THREE : null;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[intJsEnum = (IntJsEnum) o;] => [intJsEnum = /**@type {?IntJsEnum} */ ($Enums.unbox($Casts.$to(o, IntJsEnum_$Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[boolean equal = intJsEnum == IntJsEnum.TWENTY;] => [let equal = $Equality.$same(intJsEnum, IntJsEnum.TWENTY);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[equal] => [equal] "equal"
+[boolean isInstance = intJsEnum instanceof IntJsEnum;] => [let isInstance = !$Equality.$same(intJsEnum, null);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[isInstance] => [isInstance] "isInstance"
+[isInstance = intJsEnum instanceof Comparable;] => [isInstance = Comparable.$isInstance($Enums.box(intJsEnum, IntJsEnum_$Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__com_google_j2cl_transpiler_readable_jsenum_Main_StringJsEnum(StringJsEnum.ONE), "10") ? StringJsEnum.THREE : /**@type {StringJsEnum} */ ($Enums.unbox(null));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [stringJsEnum] => [stringJsEnum] "stringJsEnum"
 [switch (stringJsEnum) {
       case ONE:

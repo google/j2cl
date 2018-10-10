@@ -470,8 +470,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else if (type.isJsOverlayImplementation()) {
       DeclaredTypeDescriptor underlyingTypeDescriptor = type.getUnderlyingTypeDescriptor();
       if (underlyingTypeDescriptor.isJsEnum()) {
-        // TODO(b/116459408): Implement JsEnum isInstance when boxing/unboxing is done.
-        sourceBuilder.append("return true;");
+        renderIsInstanceOfJsEnumStatement(underlyingTypeDescriptor);
       } else if (underlyingTypeDescriptor.isInterface()) {
         // Since instanceof is forbidden this is only used for casting so null check is not needed.
         sourceBuilder.append("return true;");
@@ -485,6 +484,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
+  }
+
+  private void renderIsInstanceOfJsEnumStatement(DeclaredTypeDescriptor typeDescriptor) {
+    sourceBuilder.append(
+        "return "
+            + environment.aliasForType(BootstrapType.ENUMS.getDeclaration())
+            + ".isInstanceOf(instance, "
+            + environment.aliasForType(typeDescriptor.getMetadataTypeDeclaration())
+            + ");");
   }
 
   private void renderIsInstanceOfClassStatement(DeclaredTypeDescriptor typeDescriptor) {

@@ -531,6 +531,26 @@ public class AstUtils {
     return operator == PrefixOperator.NOT;
   }
 
+  /** JsEnum comparison context. */
+  public static boolean matchesJsEnumBoxingConversionContext(BinaryExpression binaryExpression) {
+    BinaryOperator operator = binaryExpression.getOperator();
+    TypeDescriptor lhsTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
+    TypeDescriptor rhsTypeDescriptor = binaryExpression.getRightOperand().getTypeDescriptor();
+
+    return operator.isRelationalOperator()
+        && (lhsTypeDescriptor.isJsEnum() || rhsTypeDescriptor.isJsEnum())
+        && !lhsTypeDescriptor.hasSameRawType(rhsTypeDescriptor);
+  }
+
+  /** JsEnum comparison context. */
+  public static boolean matchesJsEnumBoxingConversionContext(
+      InstanceOfExpression instanceOfExpression) {
+    TypeDescriptor expressionTypeDescriptor =
+        instanceOfExpression.getExpression().getTypeDescriptor();
+    return expressionTypeDescriptor.isJsEnum()
+        && !expressionTypeDescriptor.hasSameRawType(instanceOfExpression.getTestTypeDescriptor());
+  }
+
   /**
    * Returns the type of the numeric binary expression, which is the wider type of its operands, or
    * int if it is wider.

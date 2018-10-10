@@ -32,6 +32,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
+import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
@@ -78,6 +79,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     public Expression rewriteBinaryNumericPromotionContext(
         Expression subjectOperandExpression, Expression otherOperandExpression) {
       return subjectOperandExpression;
+    }
+
+    /** Subject expression is interacting with other expression. */
+    @SuppressWarnings("unused")
+    public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
+      return expression;
     }
 
     /**
@@ -164,6 +171,14 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     public void visitBooleanConversionContext(Expression operandExpression) {}
+
+    @Override
+    public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
+      visitJsEnumConversionContext(expression);
+      return expression;
+    }
+
+    public void visitJsEnumConversionContext(Expression expression) {}
   }
 
   private final ContextRewriter contextRewriter;
@@ -264,6 +279,16 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       rightOperand = contextRewriter.rewriteBooleanConversionContext(rightOperand);
     }
 
+    // JsEnum boxing conversion context.
+    if (AstUtils.matchesJsEnumBoxingConversionContext(binaryExpression)) {
+      if (leftOperand.getTypeDescriptor().isJsEnum()) {
+        leftOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(leftOperand);
+      }
+      if (rightOperand.getTypeDescriptor().isJsEnum()) {
+        rightOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(rightOperand);
+      }
+    }
+
     if (leftOperand != binaryExpression.getLeftOperand()
         || rightOperand != binaryExpression.getRightOperand()) {
       binaryExpression =
@@ -347,6 +372,25 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .setThenStatement(ifStatement.getThenStatement())
         .setElseStatement(ifStatement.getElseStatement())
         .build();
+  }
+
+  @Override
+  public InstanceOfExpression rewriteInstanceOfExpression(
+      InstanceOfExpression instanceOfExpression) {
+
+    if (AstUtils.matchesJsEnumBoxingConversionContext(instanceOfExpression)) {
+      Expression expression =
+          contextRewriter.rewriteJsEnumBoxingConversionContext(
+              instanceOfExpression.getExpression());
+
+      if (expression != instanceOfExpression.getExpression()) {
+        return InstanceOfExpression.Builder.from(instanceOfExpression)
+            .setExpression(expression)
+            .build();
+      }
+    }
+
+    return instanceOfExpression;
   }
 
   @Override

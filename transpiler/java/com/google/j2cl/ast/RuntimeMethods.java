@@ -129,6 +129,31 @@ public class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to Enums.[boxingMethod] */
+  public static Expression createEnumsBoxMethodCall(Expression value) {
+    TypeDescriptor valueTypeDescriptor = value.getTypeDescriptor();
+
+    String boxingMethodName =
+        valueTypeDescriptor.getJsEnumInfo().supportsComparable() ? "boxComparable" : "box";
+    return createEnumsMethodCall(
+        boxingMethodName, value, AstUtils.getMetadataConstructorReference(valueTypeDescriptor));
+  }
+
+  /** Create a call to Enums.unbox. */
+  public static Expression createEnumsUnboxMethodCall(Expression expression) {
+    return createEnumsMethodCall("unbox", expression);
+  }
+
+  /** Create a call to an Enums method. */
+  private static MethodCall createEnumsMethodCall(String methodName, Expression... arguments) {
+    return createEnumsMethodCall(methodName, Arrays.asList(arguments));
+  }
+
+  /** Create a call to an Enums method. */
+  private static MethodCall createEnumsMethodCall(String methodName, List<Expression> arguments) {
+    return createRuntimeMethodCall(BootstrapType.ENUMS.getDescriptor(), methodName, arguments);
+  }
+
   /** Create a call to an Equality method. */
   public static MethodCall createEqualityMethodCall(String methodName, Expression... arguments) {
     return createEqualityMethodCall(methodName, Arrays.asList(arguments));
@@ -491,6 +516,41 @@ public class RuntimeMethods {
                                   MethodInfo.newBuilder()
                                       .setReturnType(
                                           TypeDescriptors.get().javaLangObject.toNonNullable())
+                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .build())
+                      .put(
+                          BootstrapType.ENUMS.getDescriptor(),
+                          // Enums methods
+                          ImmutableMap.<String, MethodInfo>builder()
+                              .put(
+                                  "isInstanceOf",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.BOOLEAN)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaLangObject,
+                                          TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .put(
+                                  "box",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObject)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaLangObject,
+                                          TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .put(
+                                  "boxComparable",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObject)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaLangObject,
+                                          TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .put(
+                                  "unbox",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObject)
                                       .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .build())

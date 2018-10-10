@@ -56,16 +56,19 @@ public class NormalizeCasts extends NormalizationPass {
   }
 
   private static Expression createCastExpression(CastExpression castExpression) {
-    checkArgument(!castExpression.getCastTypeDescriptor().isArray());
-    checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
-    checkArgument(!castExpression.getCastTypeDescriptor().isIntersection());
+    TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+    checkArgument(!toTypeDescriptor.isArray());
+    checkArgument(!toTypeDescriptor.isUnion());
+    checkArgument(!toTypeDescriptor.isIntersection());
 
     Expression resultingExpression = createCheckCastCall(castExpression);
     // /**@type {}*/ ()
-    return JsDocCastExpression.newBuilder()
-        .setExpression(resultingExpression)
-        .setCastType(castExpression.getCastTypeDescriptor())
-        .build();
+    return toTypeDescriptor.isJsEnum()
+        ? resultingExpression
+        : JsDocCastExpression.newBuilder()
+            .setExpression(resultingExpression)
+            .setCastType(castExpression.getCastTypeDescriptor())
+            .build();
   }
 
   private static Expression createCheckCastCall(CastExpression castExpression) {
