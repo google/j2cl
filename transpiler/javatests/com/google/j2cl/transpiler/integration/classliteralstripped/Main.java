@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.classliteralstripped;
 
+import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -83,6 +84,23 @@ public class Main {
     assert !Foo[].class.isInterface() : "Foo[].class.isInterface() returned true";
   }
 
+  @JsEnum
+  private enum MyJsEnum {
+    VALUE
+  }
+
+  private static void testJsEnum() {
+    Object o = MyJsEnum.VALUE;
+    assertSame(MyJsEnum.class, o.getClass());
+    assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
+    assertSame(null, o.getClass().getSuperclass());
+
+    assert !o.getClass().isArray() : "MyJsEnum.VALUE.class.isArray() returned true";
+    assert !o.getClass().isEnum() : "MyJsEnum.VALUE.class.isEnum() returned true";
+    assert !o.getClass().isPrimitive() : "MyJsEnum.VALUE.class.isPrimitive() returned true";
+    assert !o.getClass().isInterface() : "MyJsEnum.VALUE.class.isInterface() returned true";
+  }
+
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface NativeType {}
 
@@ -102,6 +120,7 @@ public class Main {
     testPrimitive();
     testEnum();
     testEnumSubclass();
+    testJsEnum();
     testArray();
     testNative();
   }

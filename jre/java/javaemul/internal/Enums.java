@@ -20,6 +20,7 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(namespace = "vmbootstrap")
@@ -68,11 +69,13 @@ class Enums {
     @JsConstructor
     private BoxedLightEnum(T value, Constructor ctor) {
       this.value = value;
-      this.ctor = ctor;
+      // Set the constructor property so that code that relies on it (e.g. class metadata) gets
+      // the correct underlying constructor.
+      this.constructor = ctor;
     }
 
     final T value;
-    final Constructor ctor;
+    @JsProperty final Constructor constructor;
   }
 
   /** Boxes a JsEnum value that supports {@link Enum#compareTo} and {@link Enum#ordinal}. */
@@ -92,7 +95,7 @@ class Enums {
 
     @Override
     public int compareTo(BoxedComparableLightEnum<T> o) {
-      if (ctor != o.ctor) {
+      if (constructor != o.constructor) {
         throw new ClassCastException();
       }
       // Comparable enums are always @enum{number} in closure, and because the values at runtime
@@ -110,7 +113,7 @@ class Enums {
   }
 
   public static boolean isInstanceOf(Object instance, Constructor ctor) {
-    return instance instanceof BoxedLightEnum && ((BoxedLightEnum) instance).ctor == ctor;
+    return instance instanceof BoxedLightEnum && ((BoxedLightEnum) instance).constructor == ctor;
   }
 
   @JsFunction

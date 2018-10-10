@@ -591,16 +591,21 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
 
-    String name = null;
-    if (type.isJsOverlayImplementation()) {
-      name = type.getOverlaidTypeDescriptor().getQualifiedJsName();
-    } else {
-      name = type.getDeclaration().getQualifiedBinaryName();
-    }
+    TypeDeclaration targetTypeDescriptor =
+        type.isJsOverlayImplementation()
+            ? type.getOverlaidTypeDescriptor().getTypeDeclaration()
+            : type.getDeclaration();
+
+    String name =
+        targetTypeDescriptor.isNative()
+            // For native types the qualified JavaScript name is more useful to identify the
+            // type, in particular for debugging.
+            ? targetTypeDescriptor.getQualifiedJsName()
+            : targetTypeDescriptor.getQualifiedBinaryName();
 
     String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
     String className = environment.aliasForType(type.getDeclaration());
-    if (type.isInterface()) {
+    if (targetTypeDescriptor.isInterface()) {
       sourceBuilder.appendln(
           utilAlias
               + ".$setClassMetadataForInterface("
@@ -608,7 +613,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               + ", "
               + obfuscatableName
               + ");");
-    } else if (type.isEnum()) {
+    } else if (targetTypeDescriptor.isEnum() && !targetTypeDescriptor.isJsEnum()) {
+      // TODO(b/117525773): targetTypeDescriptor.isEnum should already be false for JsEnums,
+      // making the second part of the condition unnecessary.
       sourceBuilder.appendln(
           utilAlias + ".$setClassMetadataForEnum(" + className + ", " + obfuscatableName + ");");
     } else {

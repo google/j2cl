@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.classliteral;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -144,6 +145,36 @@ public class Main {
     assert !o.getClass().isEnum() : "Bar.BAZ.class.isEnum() returned true";
     assert !o.getClass().isPrimitive() : "Bar.BAZ.class.isPrimitive() returned true";
     assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
+  }
+
+  @JsEnum
+  private enum MyJsEnum {
+    VALUE
+  }
+
+  private static void testJsEnum() {
+    Object o = MyJsEnum.VALUE;
+    assertSame(MyJsEnum.class, o.getClass());
+    assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
+    assertSame(null, o.getClass().getSuperclass());
+
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
+        o.getClass().getName());
+    // J2CL doesn't follow JLS here:
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
+        o.getClass().getCanonicalName());
+    // J2CL doesn't follow JLS here:
+    assertEquals("Main$MyJsEnum", o.getClass().getSimpleName());
+    assertEquals(
+        "class com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
+        o.getClass().toString());
+
+    assert !o.getClass().isArray() : "MyJsEnum.VALUE.class.isArray() returned true";
+    assert !o.getClass().isEnum() : "MyJsEnum.VALUE.class.isEnum() returned true";
+    assert !o.getClass().isPrimitive() : "MyJsEnum.VALUE.class.isPrimitive() returned true";
+    assert !o.getClass().isInterface() : "MyJsEnum.VALUE.class.isInterface() returned true";
   }
 
   private static void testArray() {
@@ -314,6 +345,7 @@ public class Main {
     testPrimitivesUnboxed();
     testEnum();
     testEnumSubclass();
+    testJsEnum();
     testArray();
     testNative();
     // TODO(63081128): Enable the test.
