@@ -445,7 +445,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (type.getUnderlyingTypeDescriptor() != null
+    if (type.isJsOverlayImplementation()
         && type.getUnderlyingTypeDescriptor().isJsFunctionInterface()) {
       // JsFunction interface overlays do not need $isInstance.
       return;
@@ -581,7 +581,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/67965153): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (type.getUnderlyingTypeDescriptor() != null
+    if (type.isJsOverlayImplementation()
         && (type.getUnderlyingTypeDescriptor().isJsFunctionInterface()
             || type.getUnderlyingTypeDescriptor().isInterface())) {
       // JsFunction and Native interface overlays do not need class metadata.
