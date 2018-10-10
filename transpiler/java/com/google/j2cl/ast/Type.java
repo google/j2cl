@@ -38,7 +38,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private SourcePosition sourcePosition;
 
   /** The underlying type descriptor for synthetic @JsOverlay implementation types. */
-  private DeclaredTypeDescriptor underlyingTypeDescriptor;
+  private DeclaredTypeDescriptor overlaidTypeDescriptor;
 
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
@@ -103,12 +103,12 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isClass();
   }
 
-  public DeclaredTypeDescriptor getUnderlyingTypeDescriptor() {
-    return this.underlyingTypeDescriptor;
+  public DeclaredTypeDescriptor getOverlaidTypeDescriptor() {
+    return this.overlaidTypeDescriptor;
   }
 
-  public void setUnderlyingTypeDescriptor(DeclaredTypeDescriptor underlyingTypeDescriptor) {
-    this.underlyingTypeDescriptor = underlyingTypeDescriptor;
+  public void setOverlaidTypeDescriptor(DeclaredTypeDescriptor overlaidTypeDescriptor) {
+    this.overlaidTypeDescriptor = overlaidTypeDescriptor;
   }
 
   public void setTypeDeclaration(TypeDeclaration typeDeclaration) {
@@ -116,7 +116,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean isJsOverlayImplementation() {
-    return getUnderlyingTypeDescriptor() != null;
+    return getOverlaidTypeDescriptor() != null;
   }
 
   public List<Member> getMembers() {

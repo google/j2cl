@@ -114,14 +114,14 @@ class ImportGatherer extends AbstractVisitor {
   public void exitType(Type type) {
     addTypeDeclaration(type.getDeclaration(), ImportCategory.SELF);
 
-    if (type.isJsOverlayImplementation() && type.getUnderlyingTypeDescriptor().isNative()) {
+    if (type.isJsOverlayImplementation() && type.getOverlaidTypeDescriptor().isNative()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
       // Also requiring native type makes sure the native type is not pruned by AJD.
       addTypeDeclaration(
-          type.getUnderlyingTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
+          type.getOverlaidTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
-    if (type.isJsOverlayImplementation() && type.getUnderlyingTypeDescriptor().isJsEnum()) {
+    if (type.isJsOverlayImplementation() && type.getOverlaidTypeDescriptor().isJsEnum()) {
       // Add Enums bootstrap type as it is referred to at code generation from $isInstance.
       // $isInstance does not call $clinit, for that reason it needs to be imported eagerly.
       addTypeDeclaration(BootstrapType.ENUMS.getDeclaration(), ImportCategory.LOADTIME);
