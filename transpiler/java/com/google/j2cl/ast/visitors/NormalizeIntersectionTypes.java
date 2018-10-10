@@ -27,7 +27,6 @@ import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeVariable;
@@ -115,13 +114,6 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
               public Expression rewriteAssignmentContext(
                   TypeDescriptor toTypeDescriptor, Expression expression) {
                 return maybeInsertCastToMemberType(toTypeDescriptor, expression);
-              }
-
-              @Override
-              public Expression rewriteMethodInvocationContext(
-                  ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-                return maybeInsertCastToMemberType(
-                    parameterDescriptor.getTypeDescriptor(), argumentExpression);
               }
             }));
 

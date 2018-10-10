@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -78,16 +77,6 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
           return castExpression;
         }
         return widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression());
-      }
-
-      @Override
-      public Expression rewriteMethodInvocationContext(
-          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-        TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
-        if (!shouldWiden(parameterTypeDescriptor, argumentExpression)) {
-          return argumentExpression;
-        }
-        return widenTo(parameterTypeDescriptor, argumentExpression);
       }
     };
   }

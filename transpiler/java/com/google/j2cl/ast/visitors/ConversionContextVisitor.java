@@ -98,7 +98,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     @SuppressWarnings("unused")
     public Expression rewriteMethodInvocationContext(
         ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-      return argumentExpression;
+      // By default handle method invocation parameter passing like assignments.
+      return rewriteAssignmentContext(parameterDescriptor.getTypeDescriptor(), argumentExpression);
     }
 
     /** Expression is always going to String. */
@@ -236,6 +237,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
+
     // assignment context
     if (AstUtils.matchesAssignmentContext(binaryExpression.getOperator())) {
       rightOperand =

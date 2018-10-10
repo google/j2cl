@@ -24,7 +24,6 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeVariable;
@@ -92,6 +91,9 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       @Override
       public Expression rewriteAssignmentContext(
           TypeDescriptor toTypeDescriptor, Expression expression) {
+        // Per JLS 5.2, only insert the cast check if it is required to maintain consistency with
+        // the LHS. If the LHS is a primitive type then the proper cast to the boxed type is
+        // required.
         return maybeInsertErasureTypeSafetyCast(
             toTypeDescriptor.isPrimitive() ? expression.getTypeDescriptor() : toTypeDescriptor,
             expression);
@@ -121,18 +123,13 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       public Expression rewriteBooleanConversionContext(Expression expression) {
         return maybeInsertErasureTypeSafetyCast(expression);
       }
-
-      @Override
-      public Expression rewriteMethodInvocationContext(
-          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-        return maybeInsertErasureTypeSafetyCast(
-            parameterDescriptor.getTypeDescriptor(), argumentExpression);
-      }
     };
   }
 
+
   private static Expression maybeInsertErasureTypeSafetyCast(Expression expression) {
     return maybeInsertErasureTypeSafetyCast(expression.getTypeDescriptor(), expression);
+
   }
 
   private static Expression maybeInsertErasureTypeSafetyCast(

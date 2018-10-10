@@ -343,16 +343,19 @@ public class Main {
 
     assertThrowsClassCastException(
         () -> {
-          int x = shortInIntegerRef.field;
-          return x;
+          int unused = shortInIntegerRef.field;
         },
         Integer.class);
+
+    assertThrowsClassCastException(() -> acceptsInt(shortInIntegerRef.field), Integer.class);
 
     // Should not throw since it should be converted into a string using String.valueOf(Object) and
     // thus does not require an erasure casts (the JLS requires just enough erasure casts to
     // make the program type safe).
     String unusedS = "" + booleanInIntegerRef.field;
   }
+
+  private void acceptsInt(int x) {}
 
   public static class Ref<T> {
     T field;
@@ -613,8 +616,16 @@ public class Main {
   }
 
   private static <T> void assertThrowsClassCastException(Supplier<T> supplier, Class<?> toClass) {
+    assertThrowsClassCastException(
+        () -> {
+          supplier.get();
+        },
+        toClass);
+  }
+
+  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
     try {
-      supplier.get();
+      runnable.run();
       assert false : "Should have thrown ClassCastException";
     } catch (ClassCastException expected) {
       assert expected.getMessage().endsWith("cannot be cast to " + toClass.getCanonicalName())

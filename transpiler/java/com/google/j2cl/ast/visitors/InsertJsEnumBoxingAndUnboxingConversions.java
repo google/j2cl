@@ -21,7 +21,6 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextRewriter;
@@ -53,14 +52,6 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   return unbox(toTypeDescriptor, expression);
                 }
                 return expression;
-              }
-
-              @Override
-              public Expression rewriteMethodInvocationContext(
-                  ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-                // Parameter passing is treated like an assignment.
-                return rewriteAssignmentContext(
-                    parameterDescriptor.getTypeDescriptor(), argumentExpression);
               }
 
               @Override
