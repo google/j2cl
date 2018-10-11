@@ -79,7 +79,7 @@ def _strip_gwt_incompatible(ctx, java_srcs):
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add("-d", output_file)
-    args.add_all(ctx.files.srcs)
+    args.add_all(java_srcs)
 
     ctx.actions.run(
         progress_message = "Stripping @GwtIncompatible",
