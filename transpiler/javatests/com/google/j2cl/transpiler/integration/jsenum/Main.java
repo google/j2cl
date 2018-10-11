@@ -79,6 +79,7 @@ public class Main {
     Object o = NativeEnum.OK;
     assertTrue(o == NativeEnum.OK);
 
+    // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == NativeEnum.OK.hashCode());
     assertTrue(v.hashCode() != NativeEnum.CANCEL.hashCode());
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
@@ -87,6 +88,19 @@ public class Main {
     assertTrue(v.toString().equals(OK_STRING));
     assertTrue(v.equals(NativeEnum.OK));
     assertFalse(v.equals(OK_STRING));
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // assertTrue(v.equals(StringNativeEnum.OK));
+
+    // Object methods calls on a variable of Object type.
+    assertTrue(o.hashCode() == NativeEnum.OK.hashCode());
+    assertTrue(o.hashCode() != NativeEnum.CANCEL.hashCode());
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
+    assertTrue(o.toString().equals(OK_STRING));
+    assertTrue(o.equals(NativeEnum.OK));
+    assertFalse(o.equals(OK_STRING));
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     // assertTrue(v.equals(StringNativeEnum.OK));
@@ -163,6 +177,7 @@ public class Main {
     Object o = StringNativeEnum.OK;
     assertTrue(o == StringNativeEnum.OK);
 
+    // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(v.hashCode() != StringNativeEnum.CANCEL.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
@@ -171,6 +186,16 @@ public class Main {
     // enum share instances.
     // assertTrue(v.equals(NativeEnum.OK));
     assertFalse(v.equals(OK_STRING));
+
+    // Object methods calls on a variable of Object type.
+    assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
+    assertTrue(o.hashCode() != StringNativeEnum.CANCEL.hashCode());
+    assertTrue(o.toString().equals(OK_STRING));
+    assertTrue(o.equals(StringNativeEnum.OK));
+    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
+    // enum share instances.
+    // assertTrue(v.equals(NativeEnum.OK));
+    assertFalse(o.equals(OK_STRING));
 
     assertTrue(v.getValue().equals(v.toString()));
     assertTrue(v.getValue().equals(OK_STRING));
@@ -247,12 +272,20 @@ public class Main {
     Object o = PlainJsEnum.ONE;
     assertTrue(o == PlainJsEnum.ONE);
 
+    // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == PlainJsEnum.ONE.hashCode());
     assertTrue(v.hashCode() != PlainJsEnum.ZERO.hashCode());
     assertTrue(v.toString().equals(String.valueOf(ONE_DOUBLE)));
     assertTrue(v.equals(PlainJsEnum.ONE));
     assertFalse(v.equals(ONE_DOUBLE));
     assertFalse(PlainJsEnum.ZERO.equals(OtherPlainJsEnum.NONE));
+
+    // Object methods calls on a variable of Object type.
+    assertTrue(o.hashCode() == PlainJsEnum.ONE.hashCode());
+    assertTrue(o.hashCode() != PlainJsEnum.ZERO.hashCode());
+    assertTrue(o.toString().equals(String.valueOf(ONE_DOUBLE)));
+    assertTrue(o.equals(PlainJsEnum.ONE));
+    assertFalse(o.equals(ONE_DOUBLE));
 
     assertTrue(v.getValue() == 1);
     assertTrue(v.ordinal() == 1);
@@ -347,14 +380,22 @@ public class Main {
     assertTrue(v != BooleanJsEnum.TRUE);
     assertTrue((Object) v != FALSE_BOOLEAN);
     // Boxing preserves equality.
-    Object o = BooleanJsEnum.TRUE;
-    assertTrue(o == BooleanJsEnum.TRUE);
+    Object o = BooleanJsEnum.FALSE;
+    assertTrue(o == BooleanJsEnum.FALSE);
 
+    // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == BooleanJsEnum.FALSE.hashCode());
     assertTrue(v.hashCode() != BooleanJsEnum.TRUE.hashCode());
     assertTrue(v.toString().equals(String.valueOf(FALSE_BOOLEAN)));
     assertTrue(v.equals(BooleanJsEnum.FALSE));
     assertFalse(v.equals(FALSE_BOOLEAN));
+
+    // Object methods calls on a variable of Object type.
+    assertTrue(o.hashCode() == BooleanJsEnum.FALSE.hashCode());
+    assertTrue(o.hashCode() != BooleanJsEnum.TRUE.hashCode());
+    assertTrue(o.toString().equals(String.valueOf(FALSE_BOOLEAN)));
+    assertTrue(o.equals(BooleanJsEnum.FALSE));
+    assertFalse(o.equals(FALSE_BOOLEAN));
 
     assertTrue((Object) v.value == FALSE_BOOLEAN);
     // Test that boxing of special field 'value' call is not broken by normalization.
@@ -425,11 +466,19 @@ public class Main {
     Object o = StringJsEnum.HELLO;
     assertTrue(o == StringJsEnum.HELLO);
 
+    // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == StringJsEnum.HELLO.hashCode());
     assertTrue(v.hashCode() != StringJsEnum.GOODBYE.hashCode());
     assertTrue(v.toString().equals(HELLO_STRING));
     assertTrue(v.equals(StringJsEnum.HELLO));
     assertFalse(v.equals(HELLO_STRING));
+
+    // Object methods calls on a variable of Object type.
+    assertTrue(o.hashCode() == StringJsEnum.HELLO.hashCode());
+    assertTrue(o.hashCode() != StringJsEnum.GOODBYE.hashCode());
+    assertTrue(o.toString().equals(HELLO_STRING));
+    assertTrue(o.equals(StringJsEnum.HELLO));
+    assertFalse(o.equals(HELLO_STRING));
 
     assertTrue(v.value.equals(HELLO_STRING));
 

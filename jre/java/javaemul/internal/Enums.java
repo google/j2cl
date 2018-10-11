@@ -76,6 +76,10 @@ class Enums {
 
     final T value;
     @JsProperty final Constructor constructor;
+
+    public String toString() {
+      return value.toString();
+    }
   }
 
   /** Boxes a JsEnum value that supports {@link Enum#compareTo} and {@link Enum#ordinal}. */
