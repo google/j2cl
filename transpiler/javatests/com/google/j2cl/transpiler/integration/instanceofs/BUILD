@@ -11,6 +11,6 @@ load(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "instanceofinterface",
+    name = "instanceofs",
     srcs = glob(["*.java"]),
 )
