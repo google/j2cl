@@ -7,7 +7,6 @@ java_library(
     name = "generator",
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party:apache_commons_lang3",
         "//third_party:gson",
         "//third_party:guava",
         "//third_party:jscomp",

@@ -12,11 +12,6 @@ java_library(
 )
 
 java_library(
-    name = "apache_commons_lang3",
-    exports = ["@org_apache_commons_lang3//jar"],
-)
-
-java_library(
     name = "apache_commons_text",
     exports = ["@org_apache_commons_text//jar"],
 )

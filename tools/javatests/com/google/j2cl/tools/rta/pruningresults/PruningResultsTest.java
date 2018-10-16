@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.base.Splitter;
+import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.CharStreams;
 import com.google.j2cl.tools.minifier.J2clMinifier;
@@ -177,6 +177,6 @@ public class PruningResultsTest {
   }
 
   private static int numberOfLinesOf(String content) {
-    return Splitter.on(System.lineSeparator()).splitToList(content).size();
+    return CharMatcher.is('\n').countIn(content);
   }
 }

@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.Member;
@@ -28,11 +29,18 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import org.apache.commons.lang3.StringUtils;
 
 /** Builds source and tracks line numbers using a StringBuilder. */
 class SourceBuilder {
+
+  // Simple platform dependent new line helps us to not think about potential implications in
+  // J2clMinifier/RTA and other potential mistakes in the tooling. Since this is generated code we
+  // can choose to have a platform specific new line and most (if not all) development tools will
+  // handle that if somebody cares to take a look our generated code.
+  private static final char LINE_SEPARATOR_CHAR = '\n';
+  private static final String LINE_SEPARATOR = String.valueOf(LINE_SEPARATOR_CHAR);
   private static final String INDENT = "  ";
+
   private StringBuilder sb = new StringBuilder();
   private int currentLine = 0;
   private int currentColumn = 0;
@@ -123,13 +131,11 @@ class SourceBuilder {
   public void append(String source) {
     checkState(!finished);
     String indentedSource =
-        source.replace(
-            System.lineSeparator(),
-            System.lineSeparator() + Strings.repeat(INDENT, currentIndentation));
+        source.replace(LINE_SEPARATOR, LINE_SEPARATOR + Strings.repeat(INDENT, currentIndentation));
 
     sb.append(indentedSource);
-    currentLine += StringUtils.countMatches(indentedSource, System.lineSeparator());
-    currentColumn = sb.length() - sb.lastIndexOf(System.lineSeparator()) - 1;
+    currentLine += CharMatcher.is(LINE_SEPARATOR_CHAR).countIn(indentedSource);
+    currentColumn = sb.length() - sb.lastIndexOf(LINE_SEPARATOR) - 1;
   }
 
   public void appendLines(String... lines) {
@@ -149,7 +155,7 @@ class SourceBuilder {
   }
 
   public void newLine() {
-    append(System.lineSeparator());
+    append(LINE_SEPARATOR);
   }
 
   public void newLines(int numberOfLines) {
