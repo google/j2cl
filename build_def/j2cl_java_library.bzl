@@ -1,7 +1,7 @@
 """Common utilities for creating J2CL targets and providers."""
 
 load("//build_def:j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
-load("//build_def:j2cl_js_common.bzl", "J2CL_JS_ATTRS", "j2cl_js_provider")
+load("//build_def:j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 # Constructor for the Bazel provider for J2CL.
 _J2clInfo = provider(fields = ["_J2clJavaInfo"])
@@ -23,8 +23,6 @@ def _impl_j2cl_library(ctx):
     java_provider = _java_compile(ctx, java_srcs)
 
     js_zip = j2cl_transpile(ctx, java_provider, js_srcs)
-    js_deps = [d.js for d in ctx.attr.deps]
-    js_exports = [e.js for e in ctx.attr.exports]
     js_outputs = [js_zip] if java_srcs else []
 
     # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
@@ -34,7 +32,6 @@ def _impl_j2cl_library(ctx):
     ctx.actions.write(ctx.outputs.dummy_jslib, "")
 
     return struct(
-        js = j2cl_js_provider(ctx, srcs = js_outputs, deps = js_deps, exports = js_exports),
         providers = [
             DefaultInfo(
                 files = depset(js_outputs + [ctx.outputs.jar, ctx.outputs.dummy_jslib]),
@@ -42,6 +39,7 @@ def _impl_j2cl_library(ctx):
             ),
             _J2clInfo(_J2clJavaInfo = java_provider),
         ],
+        **j2cl_js_provider(ctx, srcs = js_outputs, deps = ctx.attr.deps, exports = ctx.attr.exports)
     )
 
 def _collect_runfiles(ctx, files, deps):
@@ -98,8 +96,8 @@ _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
     "srcs": attr.label_list(allow_files = [".java", ".js", ".srcjar", ".jar", ".zip"]),
     "srcs_hack": attr.label_list(allow_files = True),
-    "deps": attr.label_list(providers = ["js"]),
-    "exports": attr.label_list(providers = ["js"]),
+    "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
+    "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "plugins": attr.label_list(providers = [JavaInfo]),
     "exported_plugins": attr.label_list(providers = [JavaInfo]),
     "javacopts": attr.string_list(),
@@ -134,8 +132,8 @@ j2cl_library = rule(
 
 def _impl_java_import(ctx):
     return struct(
-        js = j2cl_js_provider(ctx),
         providers = [_J2clInfo(_J2clJavaInfo = ctx.attr.jar[JavaInfo])],
+        **j2cl_js_provider(ctx)
     )
 
 # helper rule to convert a Java target to a J2CL target.
