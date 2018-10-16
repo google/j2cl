@@ -92,8 +92,7 @@ public class Main {
     assert !(objects1d instanceof String[][]);
     assert !(objects1d instanceof int[]);
     assert !(objects1d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    // assert objects1d instanceof Serializable;
+    assert objects1d instanceof Serializable;
 
     Object strings1d = new String[1];
     assert strings1d instanceof Object;
@@ -103,8 +102,7 @@ public class Main {
     assert !(strings1d instanceof String[][]);
     assert !(strings1d instanceof int[]);
     assert !(strings1d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    // assert strings1d instanceof Serializable;
+    assert strings1d instanceof Serializable;
 
     Object objects2d = new Object[1][1];
     assert objects2d instanceof Object;
@@ -114,8 +112,7 @@ public class Main {
     assert !(objects2d instanceof String[][]);
     assert !(objects2d instanceof int[]);
     assert !(objects2d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    // assert objects2d instanceof Serializable;
+    assert objects2d instanceof Serializable;
 
     Object strings2d = new String[1][1];
     assert strings2d instanceof Object;
@@ -125,8 +122,7 @@ public class Main {
     assert strings2d instanceof String[][];
     assert !(strings2d instanceof int[]);
     assert !(strings2d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    // assert strings2d instanceof Serializable;
+    assert strings2d instanceof Serializable;
 
     Object ints1d = new int[1];
     assert ints1d instanceof Object;
@@ -136,8 +132,7 @@ public class Main {
     assert !(ints1d instanceof String[][]);
     assert ints1d instanceof int[];
     assert !(ints1d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    // assert ints1d instanceof Serializable;
+    assert ints1d instanceof Serializable;
 
     Object ints2d = new int[1][];
     assert ints2d instanceof Object;
@@ -148,8 +143,7 @@ public class Main {
     assert !(ints2d instanceof int[]);
     assert ints2d instanceof int[][];
     assert !(ints2d instanceof Comparable);
-    // TODO(b/117578563): Arrays should implement Serializable
-    //  assert ints2d instanceof Serializable;
+    assert ints2d instanceof Serializable;
   }
 
   @SuppressWarnings("BoxedPrimitiveConstructor")
@@ -178,8 +172,7 @@ public class Main {
     assert !(o instanceof Character);
     assert !(o instanceof Boolean);
     assert o instanceof Comparable;
-    // TODO(b/117578563): Double should implement Serializable
-    // assert o instanceof Serializable;
+    assert o instanceof Serializable;
 
     o = new Float(1.0f);
     assert !(o instanceof Byte);
@@ -257,8 +250,7 @@ public class Main {
     assert !(o instanceof Character);
     assert o instanceof Boolean;
     assert o instanceof Comparable;
-    // TODO(b/117578563): Boolean should implement Serializable
-    // assert o instanceof Serializable;
+    assert o instanceof Serializable;
 
     o = new NumberSubclass();
     assert (o instanceof NumberSubclass);
@@ -304,7 +296,6 @@ public class Main {
     assert !(s instanceof Boolean);
     assert s instanceof String;
     assert s instanceof Comparable;
-    // TODO(b/117578563): String should implement Serializable
-    // assert s instanceof Serializable;
+    assert s instanceof Serializable;
   }
 }

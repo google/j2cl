@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import java.io.Serializable;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -182,6 +183,7 @@ public class JsTypeArrayTest extends MyTestCase {
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[]);
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][]);
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][][]);
+    assertTrue(array instanceof Serializable);
   }
 
   public void testJsTypeArray_instanceOf() {
@@ -193,6 +195,7 @@ public class JsTypeArrayTest extends MyTestCase {
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[]);
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][]);
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][][]);
+    assertTrue(array instanceof Serializable);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
@@ -254,6 +257,9 @@ public class JsTypeArrayTest extends MyTestCase {
     assertTrue(someFunctionArray instanceof SomeFunction[]);
     assertTrue(someFunctionArray instanceof SomeOtherFunction[]);
     assertFalse(new Object[0] instanceof SomeOtherFunction[]);
+
+    // @JsFunction arrays are subclasses of Object[] which are Serializable.
+    assertTrue(someFunctionArray instanceof Serializable);
 
     // @JsFunction arrays are interchangeable
     SomeOtherFunction[] someOtherFunctionArray = (SomeOtherFunction[]) someFunctionArray;
