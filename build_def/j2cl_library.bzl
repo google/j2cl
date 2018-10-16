@@ -71,8 +71,8 @@ def j2cl_library(
         args[arg_name[1:]] = args.pop(arg_name)
 
     # If this is JRE itself, don't synthesize the JRE dep.
-    target_name = native.package_name() + ":" + name
-    if args["srcs"] and target_name != "third_party/java_src/j2cl/jre/java:jre":
+    target_name = "//" + native.package_name() + ":" + name
+    if args["srcs"] and target_name != "//jre/java:jre":
         args["deps"].append("//internal_do_not_use:jre")
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
